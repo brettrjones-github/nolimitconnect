@@ -978,6 +978,16 @@ enum ESearchType
     eMaxSearchType
 };
 
+enum ESha1GenResult
+{
+    eSha1GenResultNoError = 0,
+    eSha1GenResultDuplicateRequest,
+    eSha1GenResultInvalidParam,
+    eSha1GenResultGenerateSha1Failed,
+
+    eMaxSha1GenResult
+};
+
 enum ESktType
 {
     eSktTypeNone				= 0,
@@ -1149,6 +1159,8 @@ const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
 const char * DescribeScanType( EScanType scanType );
 //! Describe search type
 const char * DescribeSearchType( ESearchType searchType );
+//! Describe sha1 generate result
+const char* DescribeSha1GenResult( ESha1GenResult sha1GenerateResult );
 //! Describe socket close reason
 const char * DescribeSktCloseReason( ESktCloseReason closeReason );
 //! Describe skt type

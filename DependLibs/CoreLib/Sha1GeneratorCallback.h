@@ -14,15 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-enum ESha1GenResult
-{
-	eSha1GenResultNoError = 0,
-	eSha1GenResultDuplicateRequest,
-	eSha1GenResultInvalidParam,
-	eSha1GenResultGenerateSha1Failed,
-
-	MaxESha1GenResult
-};
+#include <GuiInterface/IDefs.h>
 
 class Sha1Info;
 class VxGUID;

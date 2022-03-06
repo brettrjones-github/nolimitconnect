@@ -190,7 +190,8 @@ bool PluginBaseFiles::fromGuiAddFileToLibrary( const char * fileNameIn, bool add
 {
 	std::string fileName = fileNameIn;
 	VxGUID assetId;
-	return m_FileInfoMgr.addFileToLibrary( fileName, assetId, fileHashId );
+	assetId.initializeWithNewVxGUID();
+	return m_FileInfoMgr.addFileToLibrary( m_Engine.getMyOnlineId(), fileName, assetId );
 }
 
 //============================================================================

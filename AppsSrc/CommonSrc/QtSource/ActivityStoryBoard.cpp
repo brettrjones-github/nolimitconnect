@@ -40,7 +40,7 @@ ActivityStoryBoard::ActivityStoryBoard(	AppCommon&	app,
 	// get current working directory
 	VxFileUtil::getCurrentWorkingDirectory( m_strSavedCwd );
 
-    m_strStoryBoardDir = VxGetUserStoryBoardPageDirectory();
+    m_strStoryBoardDir = VxGetStoryBoardPageServerDirectory();
 	VxFileUtil::setCurrentWorkingDirectory( m_strStoryBoardDir.c_str() );
 	m_strStoryBoardFile = m_strStoryBoardDir + "story_board.htm";
 	ui.StoryEditWidget->loadStoryBoardFile( m_strStoryBoardFile.c_str() );

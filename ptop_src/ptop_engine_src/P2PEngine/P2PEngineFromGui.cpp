@@ -99,65 +99,6 @@ const char * P2PEngine::fromGuiGetAppNameNoSpaces( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiAppStartup( const char * assetsDir, const char * rootDataDir  )
-{
-	VxSetAppIsShuttingDown( false );
-	enableTimerThread( true );
-
-	LogMsg( LOG_INFO, "P2PEngine::fromGuiAppStartup %s %s\n", assetsDir, rootDataDir  );
-}
-
-//============================================================================
-void P2PEngine::fromGuiSetUserXferDir( const char * userXferDir  )
-{
-	LogMsg( LOG_INFO, "P2PEngine::fromGuiSetUserXferDir %s\n", userXferDir  );
-	VxSetUserXferDirectory( userXferDir );
-	std::string incompleteDir =	VxGetIncompleteDirectory();
-	// delete all incomplete files from previous usage
-	std::vector<std::string>	fileList;
-	VxFileUtil::listFilesInDirectory( incompleteDir.c_str(), fileList );
-	std::vector<std::string>::iterator iter;
-	for( iter = fileList.begin(); iter != fileList.end(); ++iter )
-	{
-		GetVxFileShredder().shredFile( *iter );
-	}
-}
-
-//============================================================================
-void P2PEngine::fromGuiSetUserSpecificDir( const char * userSpecificDir  )
-{
-	LogMsg( LOG_INFO, "P2PEngine::fromGuiSetUserSpecificDir %s\n", userSpecificDir  );
-	VxSetUserSpecificDataDirectory( userSpecificDir );
-
-	std::string strDbFileName = VxGetSettingsDirectory();
-	strDbFileName += "biglist.db3";
-	RCODE rc = m_BigListMgr.bigListMgrStartup( strDbFileName.c_str() );
-	if( rc )
-	{
-		LogMsg( LOG_ERROR, "P2PEngine::startupEngine error %d bigListMgrStartup", rc );
-	}
-
-	strDbFileName = VxGetSettingsDirectory();
-	strDbFileName += "HostUrlList.db3";
-	getHostUrlListMgr().hostUrlListMgrStartup( strDbFileName );
-
-	strDbFileName = VxGetSettingsDirectory();
-	strDbFileName += "EngineSettings.db3";
-	getEngineSettings().engineSettingsStartup( strDbFileName );
-
-	strDbFileName = VxGetSettingsDirectory();
-	strDbFileName += "EngineParams.db3";
-	getEngineParams().engineParamsStartup( strDbFileName );
-
-	strDbFileName = VxGetSettingsDirectory();
-	strDbFileName += "HostedList.db3";
-	getHostedListMgr().hostedListMgrStartup( strDbFileName );
-
-	m_IsUserSpecificDirSet = true;
-	m_AppStartupCalled = true;
-}
-
-//============================================================================
 uint64_t P2PEngine::fromGuiGetDiskFreeSpace( void  ) 
 {
 	std::string incompleteDir =	VxGetIncompleteDirectory();
@@ -206,33 +147,8 @@ void P2PEngine::fromGuiSendLog(	uint32_t u32LogFlags )
 	}
 
 	char buf[ 256 ];
-	sprintf( buf, "End of log messages count %zd\n", logMsgs.size() );
+	sprintf( buf, "End of log messages count %zd", logMsgs.size() );
 	IToGui::getToGui().toGuiLog( 0, buf );
-}
-
-//============================================================================
-void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
-{
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiUserLoggedOn" );
-	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn" );
-    memcpy( (VxNetIdent *)&m_PktAnn, netIdent, sizeof( VxNetIdent ));
-    m_PktAnn.setSrcOnlineId( netIdent->getMyOnlineId() );
-    m_MyOnlineId = netIdent->getMyOnlineId();
-
-	m_AssetMgr.fromGuiUserLoggedOn();
-    // m_BlobMgr.fromGuiUserLoggedOn();
-    m_ThumbMgr.fromGuiUserLoggedOn();
-    m_HostJoinMgr.fromGuiUserLoggedOn();
-    m_UserJoinMgr.fromGuiUserLoggedOn();
-    m_UserOnlineMgr.fromGuiUserLoggedOn();
-
-    // set network settings from saved settings
-	startupEngine();
-    updateFromEngineSettings( getEngineSettings() );
-	m_PluginMgr.fromGuiUserLoggedOn();
-	m_NetworkStateMachine.fromGuiUserLoggedOn();
-	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn done" );
-	m_IsEngineReady = true;
 }
 
 //============================================================================

@@ -32,21 +32,23 @@ FileInfo::FileInfo()
 }
 
 //============================================================================
-FileInfo::FileInfo( const std::string& fileName )
-	: m_FullFileName( fileName )
+FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName )
+	: m_OnlineId( onlineId )
+	, m_FullFileName( fileName )
 { 
 	determineSharedDir();
 	generateAssetId();
 }
 
 //============================================================================
-FileInfo::FileInfo( const std::string& fileName, uint64_t fileLen, uint8_t fileType )
-: m_FullFileName( fileName )
-, m_s64FileLen(fileLen) 
-, m_u32Attributes(0) 
-, m_u8FileType(fileType)
-, m_ContainedInDir("")
-, m_IsDirty( true )
+FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName, uint64_t fileLen, uint8_t fileType )
+	: m_OnlineId( onlineId )
+	, m_FullFileName( fileName )
+	, m_s64FileLen(fileLen) 
+	, m_u32Attributes(0) 
+	, m_u8FileType(fileType)
+	, m_ContainedInDir("")
+	, m_IsDirty( true )
 { 
 	determineSharedDir();
 	generateAssetId();
@@ -54,8 +56,9 @@ FileInfo::FileInfo( const std::string& fileName, uint64_t fileLen, uint8_t fileT
 
 
 //============================================================================
-FileInfo::FileInfo( const std::string& fileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId )
-	: m_FullFileName( fileName )
+FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId )
+	: m_OnlineId( onlineId ) 
+	, m_FullFileName( fileName )
 	, m_s64FileLen( fileLen )
 	, m_u8FileType( fileType )
 	, m_IsDirty( true )
@@ -65,8 +68,9 @@ FileInfo::FileInfo( const std::string& fileName, uint64_t fileLen, uint8_t fileT
 }
 
 //============================================================================
-FileInfo::FileInfo( const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& sha1Hash )
-	: m_FullFileName( fullFileName )
+FileInfo::FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& sha1Hash )
+	: m_OnlineId( onlineId )
+	, m_FullFileName( fullFileName )
 	, m_s64FileLen( fileLen )
 	, m_u8FileType( fileType )
 	, m_IsDirty( true )
@@ -78,6 +82,7 @@ FileInfo::FileInfo( const std::string& fullFileName, uint64_t fileLen, uint8_t f
 //============================================================================
 FileInfo& FileInfo::operator=( const FileInfo& rhs ) 
 {	
+	m_OnlineId				= rhs.m_OnlineId;
 	m_FullFileName			= rhs.m_FullFileName;
 	m_s64FileLen			= rhs.m_s64FileLen;
 	m_u32Attributes			= rhs.m_u32Attributes;

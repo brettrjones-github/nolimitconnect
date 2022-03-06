@@ -325,54 +325,68 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
 void AppCommon::copyAssetsToFoldersIfRequired( void )
 {
     // setup about me page if requrired
-    std::string userAboutMePicture = VxGetUserAboutMePageDirectory();
+    std::string userAboutMePicture = VxGetAboutMePageServerDirectory();
     userAboutMePicture += "me.png";
     if( false == VxFileUtil::fileExists( userAboutMePicture.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/me.png", userAboutMePicture.c_str() );
     }
 
-    std::string aboutMePageIndex = VxGetUserAboutMePageDirectory();
+    std::string aboutMePageIndex = VxGetAboutMePageServerDirectory();
     aboutMePageIndex += "index.htm";
     if( false == VxFileUtil::fileExists( aboutMePageIndex.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/index.htm", aboutMePageIndex.c_str() );
     }
 
-    std::string aboutMeFavIcon = VxGetUserAboutMePageDirectory();
+    std::string aboutMeFavIcon = VxGetAboutMePageServerDirectory();
     aboutMeFavIcon += "favicon.ico";
     if( false == VxFileUtil::fileExists( aboutMeFavIcon.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/favicon.ico", aboutMeFavIcon.c_str() );
     }
 
+    std::string aboutMeThumb = VxGetAboutMePageServerDirectory();
+    aboutMeThumb += "aboutme_thumb.png";
+    if( false == VxFileUtil::fileExists( aboutMeThumb.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/nolimit_thumb.png", aboutMeThumb.c_str() );
+    }
+
     // setup storyboard page if requrired
-    std::string storyBoardIndexName = VxGetUserStoryBoardPageDirectory();
+    std::string storyBoardIndexName = VxGetStoryBoardPageServerDirectory();
     storyBoardIndexName += "story_board.htm";
     if( false == VxFileUtil::fileExists( storyBoardIndexName.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/story_board.htm", storyBoardIndexName.c_str() );
     }
 
-    std::string storyBoardBackground = VxGetUserStoryBoardPageDirectory();
+    std::string storyBoardBackground = VxGetStoryBoardPageServerDirectory();
     storyBoardBackground += "storyboard_background.png";
     if( false == VxFileUtil::fileExists( storyBoardBackground.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/storyboard_background.png", storyBoardBackground.c_str() );
     }
 
-    std::string storyBoardMePicture = VxGetUserStoryBoardPageDirectory();
+    std::string storyBoardMePicture = VxGetStoryBoardPageServerDirectory();
     storyBoardMePicture += "me.png";
     if( false == VxFileUtil::fileExists( storyBoardMePicture.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/me.png", storyBoardMePicture.c_str() );
     }
 
-    std::string storyBoardFavIcon = VxGetUserStoryBoardPageDirectory();
+    std::string storyBoardFavIcon = VxGetStoryBoardPageServerDirectory();
     storyBoardFavIcon += "favicon.ico";
     if( false == VxFileUtil::fileExists( storyBoardFavIcon.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/favicon.ico", storyBoardFavIcon.c_str() );
+    }
+
+    std::string storyBoardThumb = VxGetAboutMePageServerDirectory();
+    storyBoardThumb += "storyboard_thumb.png";
+    if( false == VxFileUtil::fileExists( storyBoardThumb.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/nolimit_thumb.png", storyBoardThumb.c_str() );
     }
 }
 

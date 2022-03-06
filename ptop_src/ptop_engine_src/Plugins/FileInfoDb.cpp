@@ -19,8 +19,16 @@
 
 namespace
 {
-	std::string 		TABLE_LIBRARY_FILES	 				= "library_files";
-	std::string 		CREATE_COLUMNS_LIBRARY_FILES		= " (file_name TEXT PRIMARY KEY, file_length BIGINT, file_type INTEGER, asset_id TEXT, file_hash BLOB, file_time BIGINT ) ";
+	std::string 		TABLE_FILE_INFO	 				= "file_info";
+	std::string 		CREATE_COLUMNS_FILE_INFO		= " (asset_id TEXT PRIMARY KEY, online_id TEXT, file_name TEXT, file_length BIGINT, file_type INTEGER, file_time BIGINT, file_hash BLOB ) ";
+
+	const int			COLUMN_FILE_INFO_ASSET_ID		= 0;
+	const int			COLUMN_FILE_INFO_ONLINE_ID		= 1;
+	const int			COLUMN_FILE_INFO_FILE_NAME		= 2;
+	const int			COLUMN_FILE_INFO_FILE_LEN		= 3;
+	const int			COLUMN_FILE_INFO_FILE_TYPE		= 4;
+	const int			COLUMN_FILE_INFO_FILE_TIME		= 5;
+	const int			COLUMN_FILE_INFO_FILE_HASH		= 6;
 }
 
 //============================================================================
@@ -35,7 +43,7 @@ FileInfoDb::FileInfoDb( std::string fileLibraryDbName )
 RCODE FileInfoDb::onCreateTables( int iDbVersion )
 {
 	lockFileInfoDb();
-    std::string strCmd = "CREATE TABLE " + TABLE_LIBRARY_FILES + CREATE_COLUMNS_LIBRARY_FILES;
+    std::string strCmd = "CREATE TABLE " + TABLE_FILE_INFO + CREATE_COLUMNS_FILE_INFO;
     RCODE rc = sqlExec(strCmd);
 	unlockFileInfoDb();
 	return rc;
@@ -46,7 +54,7 @@ RCODE FileInfoDb::onCreateTables( int iDbVersion )
 RCODE FileInfoDb::onDeleteTables( int iOldVersion ) 
 {
 	lockFileInfoDb();
-    std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_LIBRARY_FILES;
+    std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_FILE_INFO;
     RCODE rc = sqlExec(strCmd);
 	unlockFileInfoDb();
 	return rc;
@@ -56,7 +64,7 @@ RCODE FileInfoDb::onDeleteTables( int iOldVersion )
 void FileInfoDb::purgeAllFileLibrary( void ) 
 {
 	lockFileInfoDb();
-    std::string strCmd = "DELETE FROM " + TABLE_LIBRARY_FILES;
+    std::string strCmd = "DELETE FROM " + TABLE_FILE_INFO;
     RCODE rc = sqlExec( strCmd );
 	unlockFileInfoDb();
 	if( rc )
@@ -74,24 +82,34 @@ void FileInfoDb::removeFile( std::string& fileName )
 {
 	lockFileInfoDb();
 	DbBindList bindList( fileName.c_str() );
-	sqlExec( "DELETE FROM library_files WHERE file_name=?", bindList );
+	sqlExec( "DELETE FROM file_info WHERE file_name=?", bindList );
 	unlockFileInfoDb();
 }
 
 //============================================================================
-void FileInfoDb::addFile( std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime )
+void FileInfoDb::removeFile( VxGUID& onlineId, VxGUID& assetId )
+{
+	lockFileInfoDb();
+	DbBindList bindList( assetId.toHexString().c_str() );
+	sqlExec( "DELETE FROM file_info WHERE asset_id=?", bindList );
+	unlockFileInfoDb();
+}
+
+//============================================================================
+void FileInfoDb::addFile( VxGUID& onlineId, std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime )
 {
 	removeFile( fileName );
 
 	lockFileInfoDb();
-	DbBindList bindList( fileName.c_str() );
+	DbBindList bindList( assetId.toHexString().c_str() );
+	bindList.add( onlineId.toHexString().c_str() );
+	bindList.add( fileName.c_str() );
 	bindList.add( fileLen );
 	bindList.add( (int)fileType );
-	bindList.add( assetId.toHexString().c_str() );
-	bindList.add( (void *)fileHashId.getHashData(), 20 );
 	bindList.add( fileTime );
-
-	RCODE rc  = sqlExec( "INSERT INTO library_files (file_name,file_length,file_type,asset_id,file_hash) values(?,?,?,?,?,?)",
+	bindList.add( (void *)fileHashId.getHashData(), 20 );
+	
+	RCODE rc  = sqlExec( "INSERT INTO file_info (asset_id,online_id,file_name,file_length,file_type,file_time,file_hash) values(?,?,?,?,?,?,?)",
 		bindList );
 	if( rc )
 	{
@@ -104,7 +122,8 @@ void FileInfoDb::addFile( std::string& fileName, int64_t fileLen, uint8_t fileTy
 //============================================================================
 void FileInfoDb::addFile( FileInfo* libFileInfo )
 {
-	addFile(	libFileInfo->getFileName(),
+	addFile(	libFileInfo->getOnlineId(),
+				libFileInfo->getFileName(),
 				libFileInfo->getFileLength(),
 				libFileInfo->getFileType(),
 				libFileInfo->getAssetId(),
@@ -114,36 +133,41 @@ void FileInfoDb::addFile( FileInfo* libFileInfo )
 }
 
 //============================================================================
-void FileInfoDb::getAllFiles( std::vector<FileInfo*>& sharedFileList )
+void FileInfoDb::getAllFiles( std::map<VxGUID, FileInfo*>& sharedFileList )
 {
 	std::string fileName;
 	uint8_t fileType;
 	int64_t fileLen;
 	std::string destfile;
+	std::string onlineIdStr;
+	VxGUID onlineId;
 	std::string assetIdStr;
 	VxGUID assetId;
 	lockFileInfoDb();
 	std::vector<std::string> deletedFiles; 
-	DbCursor * cursor = startQuery( "SELECT * FROM library_files" );
+	DbCursor * cursor = startQuery( "SELECT * FROM file_info" );
 	if( NULL != cursor )
 	{
 		while( cursor->getNextRow() )
 		{
-			fileName = cursor->getString( 0 );
-			fileLen =  cursor->getS64( 1 );
-			fileType = (uint8_t)cursor->getS32( 2 );
-			assetIdStr = cursor->getString( 0 );
+			onlineIdStr = cursor->getString( COLUMN_FILE_INFO_ONLINE_ID );
+			onlineId.fromVxGUIDHexString( onlineIdStr.c_str() );
+
+			assetIdStr = cursor->getString( COLUMN_FILE_INFO_ASSET_ID );
 			assetId.fromVxGUIDHexString( assetIdStr.c_str() );
 
-			uint64_t realFileLen = VxFileUtil::fileExists( fileName.c_str() );
-			if( 0 != realFileLen )
+			fileName = cursor->getString( COLUMN_FILE_INFO_FILE_NAME );
+			fileLen =  cursor->getS64( COLUMN_FILE_INFO_FILE_LEN );
+			fileType = (uint8_t)cursor->getS32( COLUMN_FILE_INFO_FILE_TYPE );
+
+			if( fileLen && onlineId.isVxGUIDValid() && assetId.isVxGUIDValid() )
 			{
-				FileInfo * libFileInfo = new FileInfo( fileName, realFileLen, fileType, assetId );
-				libFileInfo->setFileHashId( (uint8_t *)cursor->getBlob( 3 ) );
-				uint64_t fileTime = cursor->getS64( 4 );
+				FileInfo* libFileInfo = new FileInfo( onlineId, fileName, fileLen, fileType, assetId );
+				libFileInfo->setFileHashId( ( uint8_t* )cursor->getBlob( COLUMN_FILE_INFO_FILE_HASH ) );
+				uint64_t fileTime = cursor->getS64( COLUMN_FILE_INFO_FILE_TIME );
 				libFileInfo->setFileTime( fileTime );
 
-				sharedFileList.push_back( libFileInfo );
+				sharedFileList[assetId] = libFileInfo;
 			}
 			else
 			{

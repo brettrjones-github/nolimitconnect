@@ -26,10 +26,10 @@ class FileInfo
 {
 public:
 	FileInfo();
-	FileInfo( const std::string& fullFileName );
-	FileInfo( const std::string& fullFileName, uint64_t fileLen, uint8_t fileType );
-	FileInfo( const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId );
-	FileInfo( const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& sha1Hash );
+	FileInfo( VxGUID& onlineId, const std::string& fullFileName );
+	FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType );
+	FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId );
+	FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& sha1Hash );
 
 	FileInfo&					operator=( const FileInfo& rhs );
 
@@ -40,6 +40,12 @@ public:
 	bool						getIsDirty( void )						{ return m_IsDirty; }
 	std::string&				getLocalFileName( void )				{ return m_FullFileName; }
 	std::string					getRemoteFileName( void );
+
+	void						setOnlineId( VxGUID& assetId )			{ m_OnlineId = assetId; }
+	VxGUID&						getOnlineId( void )						{ return m_OnlineId; }
+
+	void						setAssetId( VxGUID& assetId )			{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )						{ return m_AssetId; }
 
 	void						setFileName( const char * fileName )	{ m_FullFileName = fileName; }
 	void						setFileName( std::string& fileName )	{ m_FullFileName = fileName; }
@@ -53,13 +59,9 @@ public:
 	void						setFileTime( int64_t fileTime )			{ m_FileTime = fileTime; }
 	int64_t						getFileTime( void )						{ return m_FileTime; }
 
-
 	void						setFileHashId( VxSha1Hash& id )			{ m_FileHash = id; }
 	void						setFileHashId( uint8_t * id )			{ m_FileHash.setHashData( id ); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHash; }
-
-	void						setAssetId( VxGUID& assetId )			{ m_AssetId = assetId; }
-	VxGUID&						getAssetId( void )						{ return m_AssetId; }
 
 private:
 	void						determineSharedDir( void );
@@ -67,6 +69,7 @@ private:
 
 public:
 	//=== vars ===//
+	VxGUID						m_OnlineId;
 	std::string					m_FullFileName{ ""};
 	int64_t						m_s64FileLen{ 0 };
 	uint32_t					m_u32Attributes{ 0 };

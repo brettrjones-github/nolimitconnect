@@ -41,18 +41,25 @@ public:
 
 	void						lockFileList( void )				{ m_FilesListMutex.lock(); }
 	void						unlockFileList( void )				{ m_FilesListMutex.unlock(); }
-	std::vector<FileInfo*>&		getFileLibraryList( void )			{ return m_FileInfoList; }
+	std::map<VxGUID, FileInfo*>& getFileLibraryList( void )			{ return m_FileInfoList; }
 
 	void						lockFileListPackets( void )			{ m_PacketsMutex.lock(); }
 	void						unlockFileListPackets( void )		{ m_PacketsMutex.unlock(); }
 	std::vector<PktFileListReply*>& getFileListPackets( void )		{ return m_FileListPackets; }
 
+	void						setRootFolder( std::string& rootFileFolder ) { m_RootFileFolder = rootFileFolder; }
+	std::string					getRootFolder( void )				{ return m_RootFileFolder; }
+
+
 	bool						isFileInLibrary( std::string& fileName );
 	bool						isFileInLibrary( VxSha1Hash& fileHashId );
+	bool						isFileInLibrary( VxGUID& onlineId, VxGUID& assetId );
 	bool						isFileInLibrary( VxGUID& assetId );
 
-	bool						addFileToLibrary( std::string& fileName, VxGUID assetId, uint8_t* fileHashIdIn );
-	void						addFileToLibrary(	std::string		fileName,
+	bool						addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxGUID& assetId );
+	bool						addFileToLibrary(	VxGUID&			onlineId,
+													VxGUID&			assetId,
+													std::string		fileName,
 													uint64_t		fileLen,
 													uint8_t			fileType,
 													VxSha1Hash&		fileHashId );
@@ -70,18 +77,16 @@ public:
 	virtual bool				fromGuiGetIsFileInLibrary( const char* fileName )			{ return false; }
 	virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t* fileHashId );
 
-	// virtual void				fromGuiUserLoggedOn( void );
-	virtual void				onAfterUserLogOnThreaded( void );
+	void						updateFileTypes( void );
+
+	void						onFileLibraryUpdated( void );
 
 	void						removeFromLibrary( std::string& fileName );
 
-	void						updateFileTypes( void );
-	void						onFileLibraryUpdated( void );
 
 	bool						isAllowedFileOrDir( std::string strFileName );
-	void						updateFilesListFromDb( VxThread * thread = 0 );
 
-	void						addFileToGenHashQue( VxGUID& fileId, std::string fileName );
+	void						addFileToGenHashQue( VxGUID& assetId, std::string fileName );
 	virtual void				callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGUID& assetId, Sha1Info& sha1Info ) override;
 
 	void						clearLibraryFileList( void );
@@ -94,17 +99,27 @@ public:
 	virtual bool				isFileShared( VxSha1Hash& fileHashId );
 	virtual bool				isFileShared( std::string& fileName );
 
+	void						getAboutMePageStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList );
+
+	void						getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList );
+
+	// virtual void				fromGuiUserLoggedOn( void ) override;
+	virtual void				onAfterUserLogOnThreaded( void );
+
 protected:
+	void						checkForInitializeCompleted( void );
+
 	//=== vars ===//
     P2PEngine&					m_Engine;
 	PluginBase&					m_Plugin;
 	VxFileShredder&				m_FileShredder;
 
+	int64_t						m_LastUpdateTime{ 0 };
 	int64_t						m_s64TotalByteCnt{ 0 };
 	uint16_t					m_u16FileTypes{ 0 };
 
 	VxMutex						m_FilesListMutex;
-	std::vector<FileInfo*>		m_FileInfoList;
+	std::map<VxGUID,FileInfo*>	m_FileInfoList;
 	std::vector<FileInfo*>		m_FileInfoNeedHashAndSaveList;
 
 	std::vector<PktFileListReply*>m_FileListPackets;
@@ -112,5 +127,8 @@ protected:
 
 	FileInfoDb					m_FileInfoDb;
 	FileInfoXferMgr				m_FileInfoXferMgr;
+
+	std::string					m_RootFileFolder{ "" };
+	bool						m_FilesInitialized{ false };
 };
 

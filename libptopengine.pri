@@ -567,6 +567,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngineRelay.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngineScan.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngineSearch.cpp \
+    $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngineStartup.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngineSktCallback.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngineTimerThread.cpp \
 	$$PWD/ptop_src/ptop_engine_src/P2PEngine/VxSktLoopback.cpp \

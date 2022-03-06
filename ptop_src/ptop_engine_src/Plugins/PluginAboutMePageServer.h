@@ -23,6 +23,18 @@ public:
 
 protected:
 	virtual void				onAfterUserLogOnThreaded( void ) override;
+	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
+	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
+
+	void						setIsAboutMePageReady( bool isReady );
+	bool						getIsAboutMePageReady( void ) { return m_AboutMePageReady; }
+
+	void						checkIsAboutMePageReady( void );
+	void						onAboutMePageReady( bool isReady );
+
+	std::string					m_RootFileFolder{""};
+	std::vector<std::pair<VxGUID, std::string>> m_AssetList;
+	bool						m_AboutMePageReady{ false };
 };
 
 

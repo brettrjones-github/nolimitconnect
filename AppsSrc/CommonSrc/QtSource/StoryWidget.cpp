@@ -632,7 +632,7 @@ void StoryWidget::insertPicture()
 										strJustFileName );		// return file name
 		if( strJustFileName.length() )
 		{
-            std::string storyboardImage = VxGetUserStoryBoardPageDirectory();
+            std::string storyboardImage = VxGetStoryBoardPageServerDirectory();
 			storyboardImage += strJustFileName;
 			RCODE copyResult = 0;
 			if( false == VxFileUtil::fileExists(strJustFileName.c_str()))

@@ -247,6 +247,9 @@ public:
 
 	virtual bool				ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }
 
+	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) {};
+	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) {};
+
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
     virtual bool                generateSettingPkt( PluginSetting& pluginSetting, int64_t modifiedTimeMs );
@@ -259,8 +262,7 @@ protected:
 	PluginMgr&					m_PluginMgr;
     AssetMgr&                   m_AssetMgr;
     ThumbMgr&                   m_ThumbMgr;
-    ThumbXferMgr                m_ThumbXferMgr;
-    
+    ThumbXferMgr                m_ThumbXferMgr; 
 	
 	VxNetIdent *				m_MyIdent = nullptr;
 

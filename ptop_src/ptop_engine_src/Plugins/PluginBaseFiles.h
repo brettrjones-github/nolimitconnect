@@ -42,6 +42,8 @@ public:
 	PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType, std::string fileInfoDbName );
 	virtual ~PluginBaseFiles() = default;
 
+	FileInfoMgr&				getFileInfoMgr( void )			{ return m_FileInfoMgr; }
+
 	PluginSessionBase *			createPluginSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	bool						isFileInLibrary( std::string& fileName );
 

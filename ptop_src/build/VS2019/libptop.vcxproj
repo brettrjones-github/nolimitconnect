@@ -662,7 +662,6 @@
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\FileShareSettings.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PConnectList.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngine.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineAfterLogOnThread.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineAssetMgrCallbacks.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineConnect.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineConnections.cpp" />
@@ -678,6 +677,8 @@
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineSearch.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineSktCallback.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineTimerThread.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineStartup.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineUserLoggedOn\Source.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\VxSktLoopback.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\PluginSettings\PluginSetting.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\PluginSettings\PluginSettingDb.cpp" />

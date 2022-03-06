@@ -487,6 +487,16 @@ namespace
         "MaxSearchNone"
     };
 
+    const char* Sha1GenResultEnumStrings[] =
+    {
+        "Sha1 Generate No Error ",
+        "Sha1 Generate Duplicate Request ",	    
+        "Sha1 Generate Invalid Param ",
+        "Sha1 Generate Failed ",
+
+        "MaxSha1GenResult"
+    };
+
     const char * SktCloseReasonEnumStrings[] =
     {
         "Skt Close Reason Unknown ",
@@ -1005,6 +1015,17 @@ const char * DescribeSearchType( ESearchType searchType )
     }
 
     return SearchTypeEnumStrings[ searchType ]; 
+}
+
+//============================================================================
+const char* DescribeSha1GenResult( ESha1GenResult sha1GenerateResult )
+{
+    if( sha1GenerateResult < 0 || eMaxSha1GenResult <= sha1GenerateResult )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return Sha1GenResultEnumStrings[sha1GenerateResult];
 }
 
 //============================================================================

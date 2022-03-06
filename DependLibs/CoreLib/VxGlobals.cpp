@@ -44,7 +44,7 @@ namespace
 	VxMutex				g_GlobalAccessMutex;
 
 	uint16_t			g_u16AppVersion					= 0x101;
-#ifdef DEBUG
+
     std::string			g_strApplicationTitle			= "No Limit Connect";
     std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
     std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
@@ -52,15 +52,7 @@ namespace
     std::string			g_strCompanyDomain				= "nolimitconnect.com";
     std::string			g_strOrginizationName           = "nolimitconnect";
 	bool				g_IsAppCommercial				= false;
-#else
-    std::string			g_strApplicationTitle			= "No Limit Connect";
-    std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
-    std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
-	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.com";
-    std::string			g_strCompanyDomain				= "nolimitconnect.com";
-    std::string			g_strOrginizationName           = "nolimitconnect";
-	bool				g_IsAppCommercial				= false;
-#endif // APP_MYP2PWEB
+
     std::string			g_strNetworkHostName            = "nolimitconnect.net";
     uint16_t            g_NetworkHostPort               = 45124;
     std::string			g_strNetworkHostUrl             = "ptop://nolimitconnect.net:45124";
@@ -89,8 +81,10 @@ namespace
 	std::string			g_strUserXferDir                = "";
 
 	std::string			g_strRootXferDir				= "";
-    std::string			g_strAboutMePageDir             = "";
-	std::string			g_strStoryBoardPageDir			= "";
+    std::string			g_strAboutMePageServerDir       = "";
+	std::string			g_strAboutMePageClientDir		= "";
+	std::string			g_strStoryBoardPageServerDir	= "";
+	std::string			g_strStoryBoardPageClientDir	= "";
     std::string			g_strSettingsDir				= "";
 
 	std::string			g_strUploadsDir					= "";
@@ -201,11 +195,17 @@ void VxSetAppDirectory( EAppDir appDir, const char * setDir )
         case eAppDirSettings:
             g_strSettingsDir = setDir;
             break;
-        case eAppDirAboutMePage:
-            g_strAboutMePageDir = setDir;
+        case eAppDirAboutMePageServer:
+            g_strAboutMePageServerDir = setDir;
             break;
-		case eAppDirStoryBoardPage:
-			g_strStoryBoardPageDir = setDir;
+		case eAppDirAboutMePageClient:
+			g_strAboutMePageClientDir = setDir;
+			break;
+		case eAppDirStoryBoardPageServer:
+			g_strStoryBoardPageServerDir = setDir;
+			break;
+		case eAppDirStoryBoardPageClient:
+			g_strStoryBoardPageClientDir = setDir;
 			break;
         case eAppDirRootXfer:
             g_strRootXferDir = setDir;
@@ -280,10 +280,14 @@ std::string& VxGetAppDirectory( EAppDir appDir )
 		return g_strUserSpecificDataDir;
 	case eAppDirSettings:
 		return g_strSettingsDir;
-	case eAppDirAboutMePage:
-		return g_strAboutMePageDir;
-	case eAppDirStoryBoardPage:
-		return g_strStoryBoardPageDir;
+	case eAppDirAboutMePageServer:
+		return g_strAboutMePageServerDir;
+	case eAppDirAboutMePageClient:
+		return g_strAboutMePageClientDir;
+	case eAppDirStoryBoardPageServer:
+		return g_strStoryBoardPageServerDir;
+	case eAppDirStoryBoardPageClient:
+		return g_strStoryBoardPageClientDir;
 	case eAppDirRootXfer:
 		return g_strRootXferDir;
 	case eAppDirUserXfer:
@@ -553,29 +557,51 @@ void VxSetUserSpecificDataDirectory( const char * userDataDir  )
 	g_strSettingsDir = g_strUserSpecificDataDir + "settings/";
 	VxFileUtil::makeDirectory( g_strSettingsDir.c_str() );
 
-    g_strAboutMePageDir = g_strUserSpecificDataDir + "aboutmepage/";
-    VxFileUtil::makeDirectory( g_strAboutMePageDir.c_str() );
+    g_strAboutMePageServerDir = g_strUserSpecificDataDir + "aboutmepage/";
+    VxFileUtil::makeDirectory( g_strAboutMePageServerDir.c_str() );
 
-	g_strStoryBoardPageDir = g_strUserSpecificDataDir + "storyboardpage/";
-	VxFileUtil::makeDirectory( g_strStoryBoardPageDir.c_str() );
+	g_strStoryBoardPageServerDir = g_strUserSpecificDataDir + "storyboardpage/";
+	VxFileUtil::makeDirectory( g_strStoryBoardPageServerDir.c_str() );
 }
 
 //============================================================================
-std::string& VxGetUserSpecificDataDirectory( void )		{ return g_strUserSpecificDataDir; }
-std::string& VxGetSettingsDirectory( void )				{ return g_strSettingsDir; }
-std::string& VxGetUserAboutMePageDirectory( void )		{ return g_strAboutMePageDir; }
-std::string& VxGetUserStoryBoardPageDirectory( void )	{ return g_strStoryBoardPageDir; }
+std::string& VxGetUserSpecificDataDirectory( void )			{ return g_strUserSpecificDataDir; }
+std::string& VxGetSettingsDirectory( void )					{ return g_strSettingsDir; }
+std::string& VxGetAboutMePageServerDirectory( void )		{ return g_strAboutMePageServerDir; }
+std::string& VxGetStoryBoardPageServerDirectory( void )		{ return g_strStoryBoardPageServerDir; }
+
+//============================================================================
+std::string& VxGetAboutMePageClientDirectory( VxGUID& onlineId )
+{ 
+	std::string clientDir = g_strAboutMePageClientDir + onlineId.toHexString();
+	VxFileUtil::makeDirectory( clientDir.c_str() );
+
+	return g_strAboutMePageClientDir + onlineId.toHexString();
+}
+
+//============================================================================
+std::string& VxGetStoryBoardPageClientDirectory( VxGUID& onlineId )
+{
+	std::string clientDir = g_strStoryBoardPageClientDir + onlineId.toHexString();
+	VxFileUtil::makeDirectory( clientDir.c_str() );
+
+	return g_strStoryBoardPageClientDir + onlineId.toHexString();
+}
 
 //============================================================================
 void VxSetRootXferDirectory( const char * rootXferDir  )
 { 
 	g_strRootXferDir = rootXferDir; 
-	VxFileUtil::assureTrailingDirectorySlash( g_strRootUserDataDir );
+	VxFileUtil::assureTrailingDirectorySlash( g_strRootXferDir );
 	VxFileUtil::makeDirectory(g_strRootXferDir.c_str());
-	g_strAppThumbsDir = g_strRootXferDir + "nolimit/";
+	std::string noLimitDir = g_strRootXferDir + "nolimit/";
+	VxFileUtil::makeDirectory( noLimitDir.c_str() );
+	g_strAppThumbsDir = noLimitDir + "thumbs/";
 	VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
-	g_strAppThumbsDir = g_strAppThumbsDir + "thumbs/";
-	VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
+	g_strAboutMePageClientDir = noLimitDir + "aboutme_cache/";
+	VxFileUtil::makeDirectory( g_strAboutMePageClientDir.c_str() );
+	g_strStoryBoardPageClientDir = noLimitDir + "storyboard_cache/";
+	VxFileUtil::makeDirectory( g_strStoryBoardPageClientDir.c_str() );
 }
 
 //============================================================================

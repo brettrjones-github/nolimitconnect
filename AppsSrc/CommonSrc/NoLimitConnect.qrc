@@ -323,5 +323,6 @@
         <file>Resources/push-to-talk-off.svg</file>
         <file>Resources/push-to-talk-on.svg</file>
         <file>Resources/cloud-upload-settings.svg</file>
+        <file>Resources/nolimit_thumb.png</file>
     </qresource>
 </RCC>

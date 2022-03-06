@@ -16,6 +16,8 @@
 #include <CoreLib/DbBase.h>
 #include <CoreLib/VxGUID.h>
 
+#include <map>
+
 class FileInfo;
 class VxSha1Hash;
 
@@ -26,19 +28,19 @@ public:
 	FileInfoDb( std::string fileLibraryDbName );
 	virtual ~FileInfoDb() = default;
 
-	void						lockFileInfoDb( void )			{ m_FileInfoDbMutex.lock(); }
+	void						lockFileInfoDb( void )				{ m_FileInfoDbMutex.lock(); }
 	void						unlockFileInfoDb( void )			{ m_FileInfoDbMutex.unlock(); }
 
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
 
-	void 						addFile( std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime = 0 );
+	void 						addFile( VxGUID& onlineId, std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime = 0 );
 	void 						addFile( FileInfo* libFileInfo );
 	void						removeFile( std::string& fileName );
+	void						removeFile( VxGUID& onlineId, VxGUID& assetId );
 
-	void						getAllFiles( std::vector<FileInfo*>& sharedFileList );
+	void						getAllFiles( std::map<VxGUID, FileInfo*>& sharedFileList );
 	void						purgeAllFileLibrary( void ); 
-	void						updateFileTypes( void );
 
 	std::string&				getFileInfoDbName( void ) { return m_FileInfoDbName; }
 

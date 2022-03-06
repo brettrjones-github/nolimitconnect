@@ -65,12 +65,59 @@ void FileInfoMgr::onAfterUserLogOnThreaded( void )
 	// user specific directory should be set
 	std::string dbName = VxGetUserSpecificDataDirectory() + "settings/";
 	dbName += m_FileInfoDb.getFileInfoDbName();
+	std::vector<std::string> toDeleteFiles;
+	std::map<VxGUID, FileInfo*>	dbFileList;
+
 	lockFileList();
 	m_FileInfoDb.dbShutdown();
 	m_FileInfoDb.dbStartup( 1, dbName );
-	unlockFileList();
 
-	updateFilesListFromDb();
+	m_FileInfoDb.getAllFiles( dbFileList );
+
+	for( auto iter = dbFileList.begin(); iter != dbFileList.end(); ++iter )
+	{
+		FileInfo* fileInfo = iter->second;
+		uint64_t curFileLen = VxFileUtil::fileExists( fileInfo->getFileName().c_str() );
+		if( curFileLen && fileInfo->isValid( false ) )
+		{
+			if( curFileLen == fileInfo->getFileLength() && fileInfo->isValid( true ) )
+			{
+				// because file length is same and sha1 is valid assume is ready for use
+				m_FileInfoList[fileInfo->getAssetId()] = fileInfo;
+			}
+			else
+			{
+				fileInfo->setFileLength( curFileLen );
+				m_FileInfoNeedHashAndSaveList.push_back( fileInfo );
+				addFileToGenHashQue( fileInfo->getAssetId(), fileInfo->getFileName() );
+			}
+		}
+		else
+		{
+			// file no longer exists
+			toDeleteFiles.push_back( fileInfo->getFileName() );
+			delete fileInfo;
+		}
+
+		if( VxIsAppShuttingDown() )
+		{
+			unlockFileList();
+			return;
+		}
+	}
+
+	unlockFileList();
+	updateFileTypes();
+
+	// delete from db files that no longer exist
+	for( auto assetId : toDeleteFiles )
+	{
+		lockFileList();
+		m_FileInfoDb.removeFile( assetId );
+		unlockFileList();
+	}
+
+	checkForInitializeCompleted();
 }
 
 //============================================================================
@@ -94,13 +141,19 @@ void FileInfoMgr::clearLibraryFileList( void )
 	m_u16FileTypes = 0;
 	m_s64TotalByteCnt = 0;
 
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		delete (*iter);
+		delete iter->second;
 	}
 
 	m_FileInfoList.clear();
+
+	for( auto iter = m_FileInfoNeedHashAndSaveList.begin(); iter != m_FileInfoNeedHashAndSaveList.end(); ++iter )
+	{
+		delete *iter;
+	}
+
+	m_FileInfoNeedHashAndSaveList.clear();
 }
 
 //============================================================================
@@ -116,43 +169,14 @@ bool FileInfoMgr::isAllowedFileOrDir( std::string strFileName )
 }
 
 //============================================================================
-void FileInfoMgr::updateFilesListFromDb( VxThread * thread )
-{
-	lockFileList();
-
-	clearLibraryFileList();
-	m_FileInfoDb.getAllFiles( m_FileInfoList );
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
-	{
-		if( thread && thread->isAborted() )
-		{
-			return;
-		}
-
-		FileInfo* shareInfo = (*iter);
-		addFileToGenHashQue( shareInfo->getAssetId(), shareInfo->getFileName() );
-	}
-
-	unlockFileList();
-	updateFileTypes();
-}
-
-//============================================================================
-void FileInfoMgr::updateFileTypes( void )
-{
-}
-
-//============================================================================
 // returns -1 if unknown else percent downloaded
 int FileInfoMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 {
 	int result = -1;
 	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		FileInfo* fileInfo = (*iter);
+		FileInfo* fileInfo = iter->second;
 		if( fileInfo->getFileHashId().isEqualTo( fileHashId ) )
 		{
 			result = 100;
@@ -165,7 +189,7 @@ int FileInfoMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool FileInfoMgr::addFileToLibrary( std::string& fileName, VxGUID assetId, uint8_t* fileHashIdIn )
+bool FileInfoMgr::addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxGUID& assetId )
 {
 	if( fileName.empty() )
 	{
@@ -173,12 +197,6 @@ bool FileInfoMgr::addFileToLibrary( std::string& fileName, VxGUID assetId, uint8
 		return false;
 	}
 
-	VxSha1Hash fileHashId( fileHashIdIn );
-	bool isHashValid = fileHashId.isHashValid();
-	if( !assetId.isVxGUIDValid() )
-	{
-		assetId.initializeWithNewVxGUID();
-	}
 
 	// file is not currently in library and should be
 	uint64_t fileLen = VxFileUtil::fileExists( fileName.c_str() );
@@ -189,7 +207,7 @@ bool FileInfoMgr::addFileToLibrary( std::string& fileName, VxGUID assetId, uint8
 		return false;
 	}
 
-	FileInfo* fileInfo = new FileInfo( fileName, fileLen, fileType, assetId, fileHashId );
+	FileInfo* fileInfo = new FileInfo( onlineId, fileName, fileLen, fileType, assetId );
 	if( !addFileToLibrary( fileInfo ) )
 	{
 		delete fileInfo;
@@ -205,11 +223,11 @@ bool FileInfoMgr::addFileToLibrary( FileInfo * fileInfoIn )
 	lockFileList();
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileInfoIn->getFileName() == (*iter)->getFileName() )
+		if( fileInfoIn->getFileName() == iter->second->getFileName() )
 		{
 			m_FileInfoDb.removeFile( fileInfoIn->getFileName() );
 
-			delete *iter;
+			delete iter->second;
 			m_FileInfoList.erase( iter );
 			unlockFileList();
 			updateFileTypes();
@@ -223,7 +241,7 @@ bool FileInfoMgr::addFileToLibrary( FileInfo * fileInfoIn )
 	if( fileInfoIn->isValid( true ) )
 	{
 		lockFileList();
-		m_FileInfoList.push_back( fileInfoIn );
+		m_FileInfoList[fileInfoIn->getAssetId()] = fileInfoIn;
 		m_FileInfoDb.addFile( fileInfoIn );
 		unlockFileList();
 		result = true;
@@ -244,18 +262,21 @@ bool FileInfoMgr::addFileToLibrary( FileInfo * fileInfoIn )
 }
 
 //============================================================================
-void FileInfoMgr::addFileToLibrary(	std::string		fileName,
+bool FileInfoMgr::addFileToLibrary( VxGUID&			onlineId,
+									VxGUID&			assetId, 
+									std::string		fileName,
 									uint64_t		fileLen, 
 									uint8_t			fileType,
 									VxSha1Hash&		fileHashId )
 {
-	removeFromLibrary( fileName );
-	FileInfo * sharedInfo = new FileInfo( fileName, fileLen, fileType );
-	sharedInfo->setFileHashId( fileHashId );
-	lockFileList();
-	m_FileInfoList.push_back( sharedInfo );
-	m_FileInfoDb.addFile(  sharedInfo );
-	unlockFileList();
+	FileInfo* fileInfo = new FileInfo( onlineId, fileName, fileLen, fileType, assetId, fileHashId );
+	if( !addFileToLibrary( fileInfo ) )
+	{
+		delete fileInfo;
+		return false;
+	}
+
+	return true;
 }
 
 //============================================================================
@@ -263,10 +284,9 @@ bool FileInfoMgr::isFileInLibrary( std::string& fileName )
 {
 	bool isInLib = false;
 	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileName == (*iter)->getFileName() )
+		if( fileName == iter->second->getFileName() )
 		{
 			isInLib = true;
 			break;
@@ -292,13 +312,12 @@ bool FileInfoMgr::isFileInLibrary( VxSha1Hash& fileHashId )
 	bool isInLib = false;
 	std::string fileName("");
 	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileHashId == (*iter)->getFileHashId() )
+		if( fileHashId == iter->second->getFileHashId() )
 		{
 			isInLib = true;
-			fileName = (*iter)->getFileName();
+			fileName = iter->second->getFileName();
 			break;
 		}
 	}
@@ -322,13 +341,12 @@ bool FileInfoMgr::isFileInLibrary( VxGUID& assetId )
 	bool isInLib = false;
 	std::string fileName( "" );
 	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( assetId == (*iter)->getAssetId() )
+		if( assetId == iter->second->getAssetId() )
 		{
 			isInLib = true;
-			fileName = (*iter)->getFileName();
+			fileName = iter->second->getFileName();
 			break;
 		}
 	}
@@ -350,10 +368,9 @@ bool FileInfoMgr::isFileInLibrary( VxGUID& assetId )
 void FileInfoMgr::removeFromLibrary( std::string& fileName )
 {
 	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileName == (*iter)->getFileName() )
+		if( fileName == iter->second->getFileName() )
 		{
 			m_FileInfoDb.removeFile( fileName );
 			m_FileInfoList.erase( iter );
@@ -369,13 +386,12 @@ bool FileInfoMgr::getFileFullName( VxSha1Hash& fileHashId, std::string& retFileF
 {
 	bool isShared = false;
 	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileHashId == ( *iter )->getFileHashId() )
+		if( fileHashId == iter->second->getFileHashId() )
 		{
 			isShared = true;
-			retFileFullName = ( *iter )->getLocalFileName();
+			retFileFullName = iter->second->getLocalFileName();
 			break;
 		}
 	}
@@ -391,9 +407,9 @@ bool FileInfoMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileH
 	lockFileList();
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileFullName == ( *iter )->getLocalFileName() )
+		if( fileFullName == iter->second->getLocalFileName() )
 		{
-			retFileHashId = ( *iter )->getFileHashId();
+			retFileHashId = iter->second->getFileHashId();
 			foundHash = retFileHashId.isHashValid();
 			break;
 		}
@@ -419,17 +435,26 @@ void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGU
 	{
 		if( assetId == ( *iter )->getAssetId() )
 		{
-			( *iter )->setFileHashId( sha1Info.getSha1Hash() );
-			m_FileInfoList.push_back( *iter );
-			m_FileInfoDb.addFile( *iter );
-			m_FileInfoNeedHashAndSaveList.erase( iter );
+			if( eSha1GenResultNoError == sha1GenResult )
+			{
+				( *iter )->setFileHashId( sha1Info.getSha1Hash() );
+				m_FileInfoDb.addFile( *iter );
+				m_FileInfoList[( *iter )->getAssetId()] = *iter;
+
+				m_FileInfoNeedHashAndSaveList.erase( iter );
+			}
+			else
+			{
+				LogMsg( LOG_VERBOSE, "FileInfoMgr::callbackSha1GenerateResult failed %s", DescribeSha1GenResult( sha1GenResult ) );
+			}
+
 			break;
 		}
 	}
 
 	unlockFileList();
-
 	updateFileTypes();
+	checkForInitializeCompleted();
 }
 
 //============================================================================
@@ -437,5 +462,106 @@ bool FileInfoMgr::fromGuiAddFileToLibrary( const char* fileNameIn, bool addFile,
 {
 	std::string fileName = fileNameIn;
 	VxGUID assetId;
-	return addFileToLibrary( fileName, assetId, fileHashId );
+	assetId.initializeWithNewVxGUID();
+	return addFileToLibrary( m_Engine.getMyOnlineId(), fileName, assetId );
+}
+
+//============================================================================
+void FileInfoMgr::getAboutMePageStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList )
+{
+	static std::vector<VxGUID>	g_AboutMeIdList{
+		{ 7440246806584140214U, 18100947260721918349U },	// !6741110CEBAEA1B6FB337BA17568F18D! no limit icon
+		{ 5928192941618969970U, 9804703070566852284U },		// !52452C124D2D3D7288114D7EC151A6BC! about me thumb
+		{ 17745883519647430189U, 3508611113527476619U },	// !F6460B0A160B362D30B11737E4CB018B! about me index
+		{ 1319370582698595072U, 4306035094495659427U },		// !124F588DFCD993003BC21C1AA5C785A3! about me me.png
+	};
+
+	static std::vector<std::string>	g_AboutMeNameList{
+		{ "favicon.ico" },			// !6741110CEBAEA1B6FB337BA17568F18D! no limit icon
+		{ "aboutme_thumb.png" },		// !52452C124D2D3D7288114D7EC151A6BC! about me thumb
+		{ "index.htm" },			// !F6460B0A160B362D30B11737E4CB018B! about me index
+		{ "me.png" },				// !124F588DFCD993003BC21C1AA5C785A3! about me me.png
+	};
+
+	for( int i = 0; i < sizeof( g_AboutMeIdList.size() ); i++ )
+	{
+		assetList.push_back( std::make_pair( g_AboutMeIdList[i], g_AboutMeNameList[i] ) );
+	}
+}
+
+//============================================================================
+void FileInfoMgr::getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList )
+{
+	static std::vector<VxGUID>	g_StoryboardIdList{
+		{ 883460556043267518U, 1348434257746011027U },		// !0C42AEB1E8072DBE12B699D027EB2393! no limit icon
+		{ 17888782341603930641U, 12762868320513151386U },	// !F841B8C2C7953211B11ED11DEF45D19A! story_board thumb
+		{ 17745883519647430189U, 3508611113527476619U },	// !F6460B0A160B362D30B11737E4CB018B! story_board index
+		{ 1319370582698595072U, 4306035094495659427U },		// !124F588DFCD993003BC21C1AA5C785A3! story_board background
+		{ 5928192941618969970U, 9804703070566852284U },		// !52452C124D2D3D7288114D7EC151A6BC! story_board me.png
+	};
+
+	static std::vector<std::string>	g_StoryboardNameList{
+		{ "favicon.ico" },				// !0C42AEB1E8072DBE12B699D027EB2393! no limit icon
+		{ "storyboard_thumb.png" },		// !F841B8C2C7953211B11ED11DEF45D19A! story_board thumb
+		{ "story_board.htm" },			// !F6460B0A160B362D30B11737E4CB018B! story_board index
+		{ "storyboard_background.png" }, // !124F588DFCD993003BC21C1AA5C785A3! story_board background
+		{ "me.png" },					// !52452C124D2D3D7288114D7EC151A6BC! story_board me.png
+	};
+
+	for( int i = 0; i < sizeof( g_StoryboardIdList.size() ); i++ )
+	{
+		assetList.push_back( std::make_pair( g_StoryboardIdList[i], g_StoryboardNameList[i] ) );
+	}
+}
+
+//============================================================================
+void FileInfoMgr::updateFileTypes( void )
+{
+	int64_t	newUpdateTime{ 0 };
+	int64_t	newTotalBytes{ 0 };
+	uint16_t newFileTypes{ 0 };
+
+	lockFileList();
+	int64_t	oldUpdateTime = m_LastUpdateTime;
+	int64_t	oldTotalBytes =	m_s64TotalByteCnt;
+	uint16_t oldFileTypes = m_u16FileTypes;
+
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	{
+		newTotalBytes += iter->second->getFileLength();
+		newFileTypes |= iter->second->getFileType();
+		if( iter->second->getFileTime() > newUpdateTime )
+		{
+			newUpdateTime = iter->second->getFileTime();
+		}
+	}
+
+	unlockFileList();
+	if( oldTotalBytes != newTotalBytes || oldFileTypes != newFileTypes || oldUpdateTime != newUpdateTime )
+	{
+		lockFileList();
+		m_s64TotalByteCnt = newTotalBytes;
+		m_u16FileTypes = newFileTypes;
+		unlockFileList();
+
+		if( m_FilesInitialized )
+		{
+			m_Plugin.onFilesChanged( newUpdateTime, newTotalBytes, newFileTypes );
+		}
+	}
+}
+
+void FileInfoMgr::checkForInitializeCompleted( void )
+{
+	if( !m_FilesInitialized && m_FileInfoNeedHashAndSaveList.empty() )
+	{	
+		lockFileList();
+		m_FilesInitialized = true;
+		int64_t	LastUpdateTime = m_LastUpdateTime;
+		int64_t	totalByteCnt = m_s64TotalByteCnt;
+		uint16_t FileTypes = m_u16FileTypes;
+		unlockFileList();
+
+		m_Plugin.onLoadedFilesReady( LastUpdateTime, totalByteCnt, FileTypes );
+	}
 }

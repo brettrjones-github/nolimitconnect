@@ -43,8 +43,10 @@ enum EAppDir
 
 	eAppDirUserSpecific,
 	eAppDirSettings,
-	eAppDirAboutMePage,
-	eAppDirStoryBoardPage,
+	eAppDirAboutMePageServer,
+	eAppDirAboutMePageClient,
+	eAppDirStoryBoardPageServer,
+	eAppDirStoryBoardPageClient,
 	eAppDirRootXfer,
 	eAppDirUserXfer,
 	eAppDirDownloads,
@@ -122,8 +124,11 @@ std::string&					VxGetRootUserDataDirectory( void );
 void							VxSetUserSpecificDataDirectory( const char * userDataDir  );
 std::string&					VxGetUserSpecificDataDirectory( void  );
 std::string&					VxGetSettingsDirectory( void );
-std::string&					VxGetUserAboutMePageDirectory( void ); 
-std::string&					VxGetUserStoryBoardPageDirectory( void );
+
+std::string&					VxGetAboutMePageServerDirectory( void ); 
+std::string&					VxGetAboutMePageClientDirectory( VxGUID& onlineId );
+std::string&					VxGetStoryBoardPageServerDirectory( void );
+std::string&					VxGetStoryBoardPageClientDirectory( VxGUID& onlineId );
 
 void							VxSetRootXferDirectory( const char * rootXferDir  );
 std::string&					VxGetRootXferDirectory( void ) ;
