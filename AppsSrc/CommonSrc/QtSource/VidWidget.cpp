@@ -515,11 +515,11 @@ void VidWidget::slotVidFilesButtonClicked( void )
 	if( !m_MotionRecordOn
 		&& !m_InNormalRecord )
 	{
-		m_MyApp.getAppletMgr().launchApplet( eAppletLibrary, m_MyApp.getCentralWidget(), VXFILE_TYPE_VIDEO );
+		m_MyApp.getAppletMgr().launchApplet( eAppletLibrary, m_MyApp.getCentralWidget(), GuiParams::describeFileFilter( eFileFilterVideo ) );
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "VidWidget::slotVidFilesButtonClicked dont launch Library Activity while recording\n" );
+		LogMsg( LOG_ERROR, "VidWidget::slotVidFilesButtonClicked dont launch Library Activity while recording" );
 	}
 }
 

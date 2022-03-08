@@ -300,6 +300,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/RenderGlShaders.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/RenderLogoShaders.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/RenderShaderQt.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/RichTextWidget.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/SearchParamsWidget.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ServiceSettingsWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/SessionWidget.h \
@@ -674,6 +675,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/RenderShaderQt.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/RenderLogoShaders.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/RenderGlWidgetShaderInterface.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/RichTextWidget.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/SearchParamsWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/SessionWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ServiceSettingsWidget.cpp \

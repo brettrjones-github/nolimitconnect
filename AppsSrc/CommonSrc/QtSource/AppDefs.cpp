@@ -189,7 +189,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletEditAvatarImage:		    return QObject::tr( "Edit My Avatar Image" );
     case eAppletEditStoryboard:		        return QObject::tr( "Edit My Story Board (Blog)" );
     case eAppletStoryboardClient:		    return QObject::tr( "View Story Board (Blog)" );
-    case eAppletAboutMeClient:              return QObject::tr( "View About Me Paget" );
+    case eAppletAboutMeClient:              return QObject::tr( "View About Me Page" );
     case eAppletHomePage:				    return QObject::tr( "Home" );
     case eAppletAboutNoLimitConnect:        return QObject::tr( "About No Limit Connect" );
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );

@@ -255,6 +255,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="m_TempTestButton">
+          <property name="text">
+           <string>Temp Test Button</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>

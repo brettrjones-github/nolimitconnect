@@ -281,7 +281,7 @@ bool GuiHelpers::isAppletAService( EApplet applet )
 //============================================================================
 bool GuiHelpers::isAppletAClient( EApplet applet )
 {
-    return ( ( eAppletClientAboutMe == applet )
+    return ( ( eAppletAboutMeClient == applet )
              || ( eAppletClientAvatarImage == applet )
              || ( eAppletClientConnectionTest == applet )
              || ( eAppletClientHostGroup == applet )
@@ -301,7 +301,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     EPluginType pluginType = ePluginTypeInvalid;
     switch( applet )
     {
-    case eAppletClientAboutMe:              return ePluginTypeAboutMePageClient;
+    case eAppletAboutMeClient:              return ePluginTypeAboutMePageClient;
     case eAppletClientAvatarImage:          return ePluginTypeClientPeerUser;
     case eAppletClientConnectionTest:       return ePluginTypeClientConnectTest;
     case eAppletClientHostGroup:            return ePluginTypeHostGroup;

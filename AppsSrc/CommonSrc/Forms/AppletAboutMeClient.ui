@@ -2,48 +2,65 @@
 <ui version="4.0">
  <class>AppletAboutMeClientUi</class>
  <widget class="QWidget" name="AppletAboutMeClientUi">
+  <property name="modal" stdset="0">
+   <bool>false</bool>
+  </property>
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
-    <height>703</height>
+    <width>548</width>
+    <height>740</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="windowTitle">
-   <string>Edit About Me</string>
+   <string>Edit Storyboard</string>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="sizeGripEnabled" stdset="0">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="ServiceSettingsWidget" name="m_ServiceSettingsWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="QGroupBox" name="ItemsGroupBox">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="m_AboutMeGroupBox">
      <property name="title">
-      <string>About Me Page</string>
+      <string/>
      </property>
-     <layout class="QVBoxLayout" name="DialogItemsGroupBox_3">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="leftMargin">
        <number>5</number>
       </property>
       <property name="topMargin">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
        <number>5</number>
@@ -52,9 +69,22 @@
        <number>5</number>
       </property>
       <item>
+       <widget class="IdentWidget" name="m_IdentWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="m_StatusLabel">
-        <property name="enabled">
-         <bool>true</bool>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <property name="text">
          <string notr="true"/>
@@ -62,151 +92,29 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="m_ApplyAboutMeButton">
-        <property name="text">
-         <string>Apply About Me Changes</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_GreetingLabel">
-        <property name="text">
-         <string>Greeting:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="m_GreetingEdit">
-        <property name="text">
-         <string>Hi There!</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="aboutMeLabel">
-        <property name="text">
-         <string>About Me:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPlainTextEdit" name="m_AboutMeEdit">
+       <widget class="RichTextWidget" name="m_RichEditWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="plainText">
-         <string>I'm Wonderfull!</string>
-        </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="m_PictureOfMeLabel">
-        <property name="text">
-         <string>My Picture</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <property name="spacing">
-         <number>10</number>
-        </property>
-        <property name="leftMargin">
-         <number>5</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>5</number>
-        </property>
-        <property name="bottomMargin">
-         <number>5</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="m_BrowsePictureButton">
-          <property name="text">
-           <string>Browse</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_TakeSnapshotButton">
-          <property name="text">
-           <string>Take Snapshot</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_PictureOfMeFrame">
+       <widget class="QLabel" name="ScanStatusLabel">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="favoriteWebsitesLabel">
         <property name="text">
-         <string>My Favorite Websites</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="m_FavoriteWebsite1Edit"/>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="m_FavoriteWebsite2Edit">
-        <property name="text">
-         <string>https://donate.doctorswithoutborders.org</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="m_FavoriteWebsite3Edit">
-        <property name="text">
-         <string>http://www.nolimitconnect.com</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Donation Information</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPlainTextEdit" name="m_DonationEdit">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="plainText">
          <string/>
         </property>
        </widget>
@@ -218,9 +126,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ServiceSettingsWidget</class>
+   <class>RichTextWidget</class>
    <extends>QWidget</extends>
-   <header>ServiceSettingsWidget.h</header>
+   <header>RichTextWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>IdentWidget</class>
+   <extends>QWidget</extends>
+   <header>IdentWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

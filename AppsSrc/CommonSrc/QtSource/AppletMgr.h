@@ -34,7 +34,7 @@ public:
 	virtual ~AppletMgr(){}
 
     QFrame *					getAppletFrame( EApplet applet );
-    ActivityBase *				launchApplet( EApplet applet, QWidget * parent = nullptr, int launchParam = 0, VxGUID assetId = VxGUID::nullVxGUID() );
+    ActivityBase *				launchApplet( EApplet applet, QWidget * parent = nullptr, QString launchParam = "", VxGUID assetId = VxGUID::nullVxGUID());
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 
 	ActivityBase*				findAppletDialog( EApplet applet );

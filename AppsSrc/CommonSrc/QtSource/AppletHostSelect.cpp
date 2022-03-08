@@ -30,7 +30,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostSelect::AppletHostSelect( AppCommon& app,  QWidget* parent, int launchParam )
+AppletHostSelect::AppletHostSelect( AppCommon& app,  QWidget* parent )
 : AppletBase( OBJNAME_APPLET_HOST_SELECT, app, parent )
 , m_HostJoinMgr( app.getHostJoinMgr() )
 {
@@ -41,9 +41,6 @@ AppletHostSelect::AppletHostSelect( AppCommon& app,  QWidget* parent, int launch
 	ui.m_CreateInviteButton->setFixedSize( eButtonSizeSmall );
 	ui.m_CreateInviteButton->setIcon( eMyIconInviteCreate );
 
-	//connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
-	//connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );
-	//connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRemoved( VxGUID&, EHostType ) ), this, SLOT( slotHostJoinRemoved( VxGUID&, EHostType ) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinOfferStateChange( GroupieId&, EJoinState ) ), this, SLOT( slotHostJoinOfferStateChange( GroupieId&, EJoinState ) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinOnlineStatus( GuiHostJoin *, bool ) ), this, SLOT( slotHostJoinOnlineStatus( GuiHostJoin*, bool ) ) );
 

@@ -131,7 +131,7 @@ void AppletInviteCreate::slotNetworkSettingsInfoButtonClicked( void )
 //============================================================================
 void AppletInviteCreate::slotSelectGroupHostButtonClicked( void )
 {
-    AppletHostSelect* hostSelect = dynamic_cast<AppletHostSelect*>(m_MyApp.getAppletMgr().launchApplet( eAppletHostSelect, this, (int)eHostTypeGroup ));
+    AppletHostSelect* hostSelect = dynamic_cast<AppletHostSelect*>(m_MyApp.getAppletMgr().launchApplet( eAppletHostSelect, this, GuiParams::describeHostType( eHostTypeGroup ) ) );
     if( hostSelect )
     {
         connect( hostSelect, SIGNAL( signalHostSelected( QString ) ), this, SLOT( slotGroupHostSelected( QString ) ) );

@@ -190,7 +190,7 @@ QFrame * AppletMgr::getAppletFrame( EApplet applet )
 }
 
 //============================================================================
-ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int launchParam, VxGUID assetId )
+ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QString launchParam, VxGUID assetId )
 {
     // these are permanent applets
     if( eAppletMultiMessenger == applet )
@@ -308,7 +308,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
     case eAppletHostJoinRequestList:        appletDialog = new AppletHostJoinRequestList( m_MyApp, parent ); break;
-    case eAppletHostSelect:                 appletDialog = new AppletHostSelect( m_MyApp, parent, launchParam ); break;
+    case eAppletHostSelect:                 appletDialog = new AppletHostSelect( m_MyApp, parent ); break;
     case eAppletPersonOfferList:            appletDialog = new AppletPersonOfferList( m_MyApp, parent ); break;
     case eAppletPopupMenu:                  appletDialog = new AppletPopupMenu( m_MyApp, parent ); break;
     case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;

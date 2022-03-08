@@ -22,11 +22,10 @@
 
 //============================================================================
 PluginAboutMePageClient::PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
-	: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMePageClientFiles.db3" )
+	: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMePageFilesClient.db3" )
 {
 	setPluginType( ePluginTypeAboutMePageClient );
 }
-
 
 //============================================================================
 void PluginAboutMePageClient::onAfterUserLogOnThreaded( void )
@@ -40,23 +39,7 @@ void PluginAboutMePageClient::onAfterUserLogOnThreaded( void )
 //============================================================================
 void PluginAboutMePageClient::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	getFileInfoMgr().getAboutMePageStaticAssets( m_AssetList );
 
-	bool isReady{ true };
-	for( auto assetPair : m_AssetList )
-	{
-		if( !getFileInfoMgr().isFileInLibrary( assetPair.first ) )
-		{
-			isReady = false;
-			std::string fullFileName = m_RootFileFolder + assetPair.second;
-			getFileInfoMgr().addFileToLibrary( m_Engine.getMyOnlineId(), fullFileName, assetPair.first );
-		}
-	}
-
-	if( isReady )
-	{
-		setIsAboutMePageReady( true );
-	}
 }
 
 //============================================================================

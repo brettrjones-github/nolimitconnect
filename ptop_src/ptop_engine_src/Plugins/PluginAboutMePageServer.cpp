@@ -21,7 +21,7 @@
 
 //============================================================================
 PluginAboutMePageServer::PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
-: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMePageServerFiles.db3")
+: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMePageFilesServer.db3")
 {
 	setPluginType( ePluginTypeAboutMePageServer );
 }
@@ -92,5 +92,6 @@ void PluginAboutMePageServer::setIsAboutMePageReady( bool isReady )
 //============================================================================
 void PluginAboutMePageServer::onAboutMePageReady( bool isReady )
 {
-
+	m_AboutMePageReady = isReady;
+	// do stuff
 }

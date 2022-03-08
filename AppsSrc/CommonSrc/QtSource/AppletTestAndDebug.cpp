@@ -49,21 +49,6 @@ AppletTestAndDebug::AppletTestAndDebug( AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    setupApplet();
-    // Log is seperate now VxAddLogHandler( this );
-    m_MyApp.activityStateChange( this, true );
-}
-
-//============================================================================
-AppletTestAndDebug::~AppletTestAndDebug()
-{
-    // Log is seperate now VxRemoveLogHandler( this );
-    m_MyApp.activityStateChange( this, false );
-}
-
-//============================================================================
-void AppletTestAndDebug::setupApplet( void )
-{
     getInfoEdit()->setMaximumBlockCount( MAX_LOG_EDIT_BLOCK_CNT );
     getInfoEdit()->setReadOnly( true );
 
@@ -117,7 +102,7 @@ void AppletTestAndDebug::setupApplet( void )
         if( ui.m_TestUrlEdit->text().isEmpty() )
         {
             ui.m_TestUrlEdit->setText( ui.m_TestUrlsComboBox->currentText() );
-        }     
+        }
     }
 
     ui.m_AnnouncedCheckBox->setChecked( true );
@@ -141,15 +126,32 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_ListActionButton, SIGNAL( clicked() ), this, SLOT( slotListActionButtonClicked() ) );
     connect( ui.m_HostClientTestButton, SIGNAL( clicked() ), this, SLOT( slotHostClientTestButtonClicked() ) );
     connect( ui.m_PingRemoteUrlButton, SIGNAL( clicked() ), this, SLOT( slotPingRemoteUrlButtonClicked() ) );
+    connect( ui.m_TempTestButton, SIGNAL( clicked() ), this, SLOT( slotTempTestButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
-    connect( ui.m_TestUrlsComboBox, SIGNAL( currentIndexChanged( int ) ),	this,	SLOT(slotNewUrlSelected( int )) );
-    connect( &m_MyApp, SIGNAL(signalRunTestStatus( QString,ERunTestStatus,QString )),
-            this, SLOT(slotRunTestStatus( QString,ERunTestStatus,QString )) );
+    connect( ui.m_TestUrlsComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotNewUrlSelected( int ) ) );
+    connect( &m_MyApp, SIGNAL( signalRunTestStatus( QString, ERunTestStatus, QString ) ),
+        this, SLOT( slotRunTestStatus( QString, ERunTestStatus, QString ) ) );
 
     updateDlgFromSettings();
+
+    // Log is seperate now VxAddLogHandler( this );
+    m_MyApp.activityStateChange( this, true );
+}
+
+//============================================================================
+AppletTestAndDebug::~AppletTestAndDebug()
+{
+    // Log is seperate now VxRemoveLogHandler( this );
+    m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletTestAndDebug::setupApplet( void )
+{
+
 }
 
 //============================================================================
@@ -528,4 +530,11 @@ void AppletTestAndDebug::slotHostClientTestButtonClicked( void )
 void AppletTestAndDebug::slotPingRemoteUrlButtonClicked( void )
 {
     startUrlTest( eNetCmdHostPingReq );
+}
+
+//============================================================================
+void AppletTestAndDebug::slotTempTestButtonClicked( void )
+{
+    VxGUID assetId;
+    m_MyApp.launchApplet( eAppletAboutMeClient, getContentFrameOfOppositePageFrame(), QString("F:/AboutMeTestPage/story_board.htm"), assetId );
 }

@@ -14,6 +14,7 @@
 #pragma once
 
 #include <GuiInterface/IDefs.h>
+#include <CoreLib/VxFileTypeMasks.h>
 
 #include <QColor>
 #include <QRect>
@@ -76,6 +77,8 @@ public:
     static QString				describeFriendState( EFriendState eFriendState );
     static QString				describeGender( EGenderType gender );
     static QString				describeHostType( EHostType hostType );
+    static EHostType			hostTypeToEnum( QString hostType );
+
     static QString				describeHostSearchStatus( EHostSearchStatus searchStatus );
     static QString				describeLanguage( ELanguageType language );
     //! Describe permission level ( and/or friend state )
@@ -104,6 +107,9 @@ public:
     static QString				describeFriendship( EFriendState friendState );
 
     static QString				describeJoinState( EJoinState joinState );
+
+    static QString				describeFileFilter( EFileFilterType fileFilterType );
+    static EFileFilterType		fileFilterToEnum( QString fileFilterName );
 
     #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     static QString              describeCamStatus(QCamera::Status camStatus);

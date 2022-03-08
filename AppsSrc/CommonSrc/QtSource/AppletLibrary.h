@@ -32,7 +32,7 @@ class AppletLibrary : public AppletBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
-	AppletLibrary( AppCommon& app, QWidget * parent, int launchParam = 0 );
+	AppletLibrary( AppCommon& app, QWidget * parent, QString launchParam = "" );
 	virtual ~AppletLibrary();
 
     void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );

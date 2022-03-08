@@ -420,6 +420,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\RenderShaderDefsGl.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\RenderShaderDefsGles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\RenderShaderQt.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\RichTextWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SearchParamsWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ServiceSettingsWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SessionWidget.cpp" />
@@ -603,6 +604,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\RenderShaderQt.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ShareOfferListItem.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ShareOfferListWidget.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\RichTextWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\SoundDefs.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioDefs.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioInIo.h" />

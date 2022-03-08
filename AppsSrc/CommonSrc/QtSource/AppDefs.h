@@ -146,7 +146,6 @@ enum EApplet
 
     eAppletPlayerVideo,
 
-    eAppletClientAboutMe,	        // users about me page
     eAppletClientAvatarImage,	    // get users avatar imaage from other user
     eAppletClientChatRoom,	        // use chat room
     eAppletClientConnectionTest,    // network test service for users to test if they have a open port

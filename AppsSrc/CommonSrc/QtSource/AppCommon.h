@@ -197,7 +197,7 @@ public:
     void                        copyAssetsToFoldersIfRequired( void );
 
     ActivityBase*               launchApplet( EApplet applet, QWidget * parent );
-    ActivityBase*               launchApplet( EApplet applet, QWidget* parent, VxGUID& assetId );
+    ActivityBase*               launchApplet( EApplet applet, QWidget* parent, QString launchParam, VxGUID& assetId);
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget * parent = 0 );

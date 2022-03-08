@@ -614,9 +614,9 @@ ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget * parent )
 }
 
 //============================================================================
-ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget* parent, VxGUID& assetId )
+ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget* parent, QString launchParam, VxGUID& assetId )
 {
-	return m_AppletMgr.launchApplet( applet, parent, 0, assetId );
+	return m_AppletMgr.launchApplet( applet, parent, launchParam, assetId );
 }
 
 //============================================================================

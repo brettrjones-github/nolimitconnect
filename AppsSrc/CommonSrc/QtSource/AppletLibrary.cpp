@@ -39,10 +39,10 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, int launchParam )
+AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, QString launchParam )
     : AppletBase( OBJNAME_APPLET_LIBRARY, app, parent )
     , m_ePluginType( ePluginTypeInvalid )
-    , m_IsSelectAFileMode( launchParam ? true : false )
+    , m_IsSelectAFileMode( !launchParam.isEmpty() ? true : false )
     , m_FileWasSelected( false )
     , m_SelectedFileType( 0 )
     , m_SelectedFileName( "" )
@@ -52,30 +52,7 @@ AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, int launchParam 
     , m_eFileFilterType( eFileFilterAll )
     , m_FileFilterMask( VXFILE_TYPE_ALLNOTEXE )
 {
-    if( launchParam )
-    {
-        switch( launchParam )
-        {
-        case VXFILE_TYPE_PHOTO:
-            m_eFileFilterType = eFileFilterPhoto;
-            break;
-        case VXFILE_TYPE_AUDIO:
-            m_eFileFilterType = eFileFilterAudio;
-            break;
-        case VXFILE_TYPE_VIDEO:
-            m_eFileFilterType = eFileFilterVideo;
-            break;
-        case VXFILE_TYPE_DOC:
-            m_eFileFilterType = eFileFilterDocuments;
-            break;
-        case VXFILE_TYPE_ARCHIVE_OR_CDIMAGE:
-            m_eFileFilterType = eFileFilterArchive;
-            break;
-        case VXFILE_TYPE_OTHER:
-            m_eFileFilterType = eFileFilterOther;
-            break;
-        }
-    }
+    m_eFileFilterType = GuiParams::fileFilterToEnum( launchParam );
 
     setAppletType( eAppletLibrary );
     ui.setupUi( getContentItemsFrame() );
@@ -287,7 +264,7 @@ void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
             if( appletType != eAppletUnknown && assetId.isVxGUIDValid() )
             {
                 // launch the applet that plays this file
-                m_MyApp.launchApplet( appletType, m_MyApp.getCentralWidget(), assetId );
+                m_MyApp.launchApplet( appletType, m_MyApp.getCentralWidget(), "", assetId);
             }
 
             this->playFile( poInfo->getFullFileName(), assetId );

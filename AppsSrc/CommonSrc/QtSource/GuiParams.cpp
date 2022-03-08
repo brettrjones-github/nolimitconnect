@@ -358,6 +358,42 @@ QString GuiParams::describeHostType( EHostType hostType )
 }
 
 //============================================================================
+EHostType GuiParams::hostTypeToEnum( QString hostTypeDesc )
+{
+    EHostType hostType{ eHostTypeUnknown };
+    if( hostTypeDesc.contains( "Group Host" ) )
+    {
+        hostType = eHostTypeGroup;
+    }
+    else if( hostTypeDesc.contains( "Chat Room Host" ) )
+    {
+        hostType = eHostTypeChatRoom;
+    }
+    else if( hostTypeDesc.contains( "Random Connect Host" ) )
+    {
+        hostType = eHostTypeRandomConnect;
+    }
+    else if( hostTypeDesc.contains( "Peer User Relayed" ) )
+    {
+        hostType = eHostTypePeerUserRelayed;
+    }
+    else if( hostTypeDesc.contains( "Peer User Direct" ) )
+    {
+        hostType = eHostTypePeerUserDirect;
+    }
+    else if( hostTypeDesc.contains( "Network Host" ) )
+    {
+        hostType = eHostTypeNetwork;
+    }
+    else if( hostTypeDesc.contains( "Connect Test Host" ) )
+    {
+        hostType = eHostTypeConnectTest;
+    }
+
+    return hostType;
+}
+
+//============================================================================
 QString GuiParams::describeHostSearchStatus( EHostSearchStatus searchStatus )
 {
     switch( searchStatus )
@@ -1723,4 +1759,66 @@ QString GuiParams::describeJoinState( EJoinState joinState )
     default:
         return  QObject::tr( "Unknown Join State " );
     }
+}
+
+//============================================================================
+QString	GuiParams::describeFileFilter( EFileFilterType fileFilterType )
+{
+    switch( fileFilterType )
+    {
+    case eFileFilterAll:
+        return QObject::tr( "All Files " );
+    case eFileFilterPhoto:
+        return QObject::tr( "Photo Files " );
+    case eFileFilterAudio:
+        return  QObject::tr( "Audio Files "  );
+    case eFileFilterVideo:
+        return  QObject::tr( "Video Files " );
+    case eFileFilterDocuments:
+        return  QObject::tr( "Document Files " );
+    case eFileFilterArchive:
+        return  QObject::tr( "Archive Files " );
+    case eFileFilterOther:
+        return  QObject::tr( "Other Files "  );
+
+    default:
+        return  QObject::tr( "Unknown File Filter " );
+    }
+
+}
+
+//============================================================================
+EFileFilterType GuiParams::fileFilterToEnum( QString fileFilterName )
+{
+    EFileFilterType fileFilterType{ eFileFilterAll };
+    if( fileFilterName.contains( "All Files" ) )
+    {
+        fileFilterType = eFileFilterAll;
+    }
+    else if( fileFilterName.contains( "Photo Files" ) )
+    {
+        fileFilterType = eFileFilterPhoto;
+    }
+    else if( fileFilterName.contains( "Audio Files" ) )
+    {
+        fileFilterType = eFileFilterAudio;
+    }
+    else if( fileFilterName.contains( "Video Files" ) )
+    {
+        fileFilterType = eFileFilterVideo;
+    }
+    else if( fileFilterName.contains( "Document Files" ) )
+    {
+        fileFilterType = eFileFilterDocuments;
+    }
+    else if( fileFilterName.contains( "Archive Files" ) )
+    {
+        fileFilterType = eFileFilterArchive;
+    }
+    else if( fileFilterName.contains( "Other Files" ) )
+    {
+        fileFilterType = eFileFilterOther;
+    }
+
+    return fileFilterType;
 }

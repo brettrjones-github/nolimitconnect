@@ -23,27 +23,15 @@ class AppletAboutMeClient : public AppletBase
 	Q_OBJECT
 public:
 	AppletAboutMeClient( AppCommon& app, QWidget * parent );
-	virtual ~AppletAboutMeClient() = default;
+	virtual ~AppletAboutMeClient();
 
 public slots:
      //! browse for picture of me
     void						onBrowseButClick( void );
-    //! Implement the OnClickListener callback    
-    void						onSnapshotButClick( void );
-    //! Implement the OnClickListener callback    
-    void						onApplyAboutMeButClick( void );
-    //! slot called when user takes snapshot
-    void                        slotImageSnapshot( QImage snapshotImage );
+
 
 protected:
-    //! load user about me data from database
-    void						loadContentFromDb( void );
-    //! save user profile data to database
-    void						saveContentToDb( void );
-
-    void						updateSnapShot( QPixmap& pixmap );
-    //! validate user input
-    QString						validateString( QString charSeq );
+    void                        loadRichTextFile( QString fileName );
 
     //=== constants ===//
     static const int SELECT_IMAGE = 0; // selector for image gallery call

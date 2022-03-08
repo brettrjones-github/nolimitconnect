@@ -483,7 +483,7 @@ void FileInfoMgr::getAboutMePageStaticAssets( std::vector<std::pair<VxGUID, std:
 		{ "me.png" },				// !124F588DFCD993003BC21C1AA5C785A3! about me me.png
 	};
 
-	for( int i = 0; i < sizeof( g_AboutMeIdList.size() ); i++ )
+	for( int i = 0; i < g_AboutMeIdList.size(); i++ )
 	{
 		assetList.push_back( std::make_pair( g_AboutMeIdList[i], g_AboutMeNameList[i] ) );
 	}
@@ -508,7 +508,7 @@ void FileInfoMgr::getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::
 		{ "me.png" },					// !52452C124D2D3D7288114D7EC151A6BC! story_board me.png
 	};
 
-	for( int i = 0; i < sizeof( g_StoryboardIdList.size() ); i++ )
+	for( int i = 0; i < g_StoryboardIdList.size(); i++ )
 	{
 		assetList.push_back( std::make_pair( g_StoryboardIdList[i], g_StoryboardNameList[i] ) );
 	}

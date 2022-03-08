@@ -66,6 +66,8 @@ protected slots:
     void                        slotHostClientTestButtonClicked( void );
     void                        slotPingRemoteUrlButtonClicked( void );
 
+    void                        slotTempTestButtonClicked( void );
+
     void                        slotNewUrlSelected( int comboBoxIdx );
 
 protected:
