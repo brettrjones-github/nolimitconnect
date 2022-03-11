@@ -135,6 +135,6 @@ void ShareOfferListItem::updateWidgetFromInfo( void )
     ui.m_FriendshipButton->update();
     */
     ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
+    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim( false ) );
     ui.DescPart2->setText( strDesc );
 }

@@ -221,7 +221,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/client-webcam.svg";
 
 	case eMyIconProfile:
-		return ":/AppRes/Resources/magnifier-on-a-user.svg";
+		return ":/AppRes/Resources/user-ident.svg";
 	case eMyIconProfileLocked:
 	case eMyIconProfileIgnored:
 	case eMyIconProfileDisabled:

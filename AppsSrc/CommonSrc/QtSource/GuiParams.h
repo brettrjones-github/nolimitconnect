@@ -104,7 +104,7 @@ public:
     static QString              describeStatus( EHostJoinStatus hostStatus );
     static QString              describeStatus( EHostSearchStatus hostStatus );
     static QString				describeResponse( EOfferResponse eOfferResponse );
-    static QString				describeFriendship( EFriendState friendState );
+    static QString				describeFriendship( EFriendState friendState, bool inGroup );
 
     static QString				describeJoinState( EJoinState joinState );
 

@@ -748,7 +748,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = QObject::tr("Offer Chat Session");
+            strAction = QObject::tr("Offer Text Chat Session");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Text Chat Requires ");
@@ -1718,8 +1718,13 @@ QString GuiParams::describeUserViewType( EUserViewType showFriendType )
 }
 
 //============================================================================
-QString GuiParams::describeFriendship( EFriendState friendState )
+QString GuiParams::describeFriendship( EFriendState friendState, bool inGroup )
 {
+    if( inGroup && eFriendStateAnonymous == friendState )
+    {
+        friendState = eFriendStateGuest;
+    }
+
     switch( friendState )
     {
     case eFriendStateAnonymous:	// anonymous user

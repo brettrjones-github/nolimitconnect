@@ -59,7 +59,7 @@ public:
 
 	void						showAppSystemMenu( void );
 	void						showFriendMenu( GuiUser* poSelectedFriend, bool inGroup = false );
-	void						showGroupieListSessionMenu( GuiGroupieListSession* hostSession );
+	void						showGroupieListSessionMenu( GuiGroupieListSession* hostSession, bool inGroup = false );
 	void						showHostedListSessionMenu( GuiHostedListSession* hostSession );
 	void						showHostSessionMenu( GuiHostSession* hostSession );
 	void						showPersonOfferMenu( GuiUser* poSelectedFriend );

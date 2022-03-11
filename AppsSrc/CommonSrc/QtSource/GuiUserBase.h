@@ -41,6 +41,7 @@ public:
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
+    bool                        updateIsOnline( void );
     virtual bool                setOnlineStatus( bool isOnline ); // return true if online state changed.. derived classes should override
 
     bool                        isOnline( void )                        { return m_IsOnline; }
@@ -54,12 +55,12 @@ public:
     void                        setMyFriendshipToHim( EFriendState friendState ) { m_NetIdent.setMyFriendshipToHim( friendState ); }
     EFriendState                getMyFriendshipToHim( void )            { return  m_NetIdent.getMyFriendshipToHim(); }
     EFriendState                getHisFriendshipToMe( void )            { return m_NetIdent.getHisFriendshipToMe(); }
-    EPluginAccess               getMyAccessPermissionFromHim( EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.getMyAccessPermissionFromHim( pluginType, inGroup ); }
+    EPluginAccess               getMyAccessPermissionFromHim( EPluginType pluginType, bool inGroup = false );
     EFriendState                getPluginPermission( EPluginType pluginType ) { return m_NetIdent.getPluginPermission( pluginType ); }
     int64_t					    getLastSessionTimeMs( void )            { return m_NetIdent.getLastSessionTimeMs(); }
 
-    QString				        describeMyFriendshipToHim( void );
-    QString				        describeHisFriendshipToMe( void );
+    QString				        describeMyFriendshipToHim( bool inGroup  );
+    QString				        describeHisFriendshipToMe( bool inGroup );
 
     bool                        isAdmin( void )                         { return m_NetIdent.isAdministrator(); }
     bool                        isFriend( void )                        { return m_NetIdent.isFriend(); }

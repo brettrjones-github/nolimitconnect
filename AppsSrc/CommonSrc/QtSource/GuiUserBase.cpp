@@ -55,15 +55,42 @@ bool GuiUserBase::isMyself( void )
 }
 
 //============================================================================
-QString GuiUserBase::describeMyFriendshipToHim( void )
+bool GuiUserBase::updateIsOnline( void )
 {
-    return GuiParams::describeFriendship( m_NetIdent.getMyFriendshipToHim() );
+    bool isOnline = false;
+    if( isMyself() )
+    {
+        isOnline = true;
+    }
+    else
+    {
+        isOnline = m_MyApp.getConnectIdListMgr().isOnline( getMyOnlineId() );
+    }
+
+    // some functions use the net ident as isOnline
+    m_NetIdent.setIsOnline( isOnline );
+    return isOnline;
 }
 
 //============================================================================
-QString GuiUserBase::describeHisFriendshipToMe( void )
+EPluginAccess GuiUserBase::getMyAccessPermissionFromHim( EPluginType pluginType, bool inGroup )
+{ 
+    updateIsOnline();
+    return m_NetIdent.getMyAccessPermissionFromHim( pluginType, inGroup ); 
+}
+
+//============================================================================
+QString GuiUserBase::describeMyFriendshipToHim( bool inGroup )
 {
-    return GuiParams::describeFriendship( m_NetIdent.getHisFriendshipToMe() );
+    updateIsOnline();
+    return GuiParams::describeFriendship( m_NetIdent.getMyFriendshipToHim(),  inGroup );
+}
+
+//============================================================================
+QString GuiUserBase::describeHisFriendshipToMe( bool inGroup )
+{
+    updateIsOnline();
+    return GuiParams::describeFriendship( m_NetIdent.getHisFriendshipToMe(),  inGroup );
 }
 
 //============================================================================
@@ -73,6 +100,7 @@ void GuiUserBase::setNetIdent( VxNetIdent* netIdent )
     {
         m_NetIdent = *netIdent; 
         m_OnlineId = m_NetIdent.getMyOnlineId();
+        updateIsOnline();
     }
     else
     {

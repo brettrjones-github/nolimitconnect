@@ -365,7 +365,7 @@ void GuiGroupieListWidget::onMenuButtonClicked( GuiGroupieListItem* hostItem )
             AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
             if( popupMenu )
             {
-                popupMenu->showGroupieListSessionMenu( groupieSession );
+                popupMenu->showGroupieListSessionMenu( groupieSession, true );
             }
         }
     }

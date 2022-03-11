@@ -355,7 +355,7 @@ EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType,
 }
 
 //============================================================================
-EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType, bool inGroup )
+EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType, bool inGroup )
 {
 	EFriendState friendState = getHisFriendshipToMe();
 	if( inGroup && friendState == eFriendStateAnonymous )
@@ -462,30 +462,7 @@ EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 		return ePluginAccessInactive;
 	}
 
-	EPluginAccess accessState = ePluginAccessOk;
-	if( ( ePluginTypeAboutMePageServer		== ePluginType )
-		|| ( ePluginTypeStoryboardServer	== ePluginType )
-		|| ( ePluginTypeRelay		== ePluginType ) )
-	{
-		if( false == isOnline() )
-		{
-			accessState = ePluginAccessRequiresOnline;
-		}
-
-		if( requiresRelay() )
-		{
-			accessState = ePluginAccessRequiresDirectConnect;
-		}
-	}
-	else if( ePluginTypeMessenger != ePluginType )
-	{
-		if( false == isOnline() )
-		{
-			accessState = ePluginAccessRequiresOnline;
-		}
-	}		
-
-	return accessState;
+	return ePluginAccessOk;
 }
 
 //============================================================================
