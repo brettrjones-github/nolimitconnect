@@ -343,15 +343,27 @@ uint16_t VxNetIdent::getPingTimeMs( void )
 }
 
 //============================================================================
-EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType )
+EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType, bool inGroup )
 {
-	return getPluginAccessState( ePluginType, getMyFriendshipToHim() );
+	EFriendState friendState = getMyFriendshipToHim();
+	if( inGroup && friendState == eFriendStateAnonymous )
+	{
+		friendState = eFriendStateGuest;
+	}
+
+	return getPluginAccessState( ePluginType, friendState );
 }
 
 //============================================================================
-EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType )
+EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType, bool inGroup )
 {
-	EPluginAccess accessState = getPluginAccessState( ePluginType, getHisFriendshipToMe() );
+	EFriendState friendState = getHisFriendshipToMe();
+	if( inGroup && friendState == eFriendStateAnonymous )
+	{
+		friendState = eFriendStateGuest;
+	}
+
+	EPluginAccess accessState = getPluginAccessState( ePluginType, friendState );
 	if( ePluginAccessOk == accessState )
 	{
 		if( ( ePluginTypeFileServer == ePluginType ) 
@@ -395,15 +407,27 @@ EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType 
 }
 
 //============================================================================
-bool VxNetIdent::isHisAccessAllowedFromMe( EPluginType ePluginType )
+bool VxNetIdent::isHisAccessAllowedFromMe( EPluginType ePluginType, bool inGroup )
 {
-	return ( ePluginAccessOk == getPluginAccessState( ePluginType, getMyFriendshipToHim() ) );
+	EFriendState friendState = this->getMyFriendshipToHim();
+	if( eFriendStateAnonymous == friendState && inGroup )
+	{
+		friendState = eFriendStateGuest;
+	}
+
+	return ( ePluginAccessOk == getPluginAccessState( ePluginType, friendState ) );
 }
 
 //============================================================================
-bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType )
+bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType, bool inGroup )
 {
-	return ( ePluginAccessOk == getPluginAccessState( ePluginType, getHisFriendshipToMe() ) );
+	EFriendState friendState = this->getHisFriendshipToMe();
+	if( eFriendStateAnonymous == friendState && inGroup )
+	{
+		friendState = eFriendStateGuest;
+	}
+
+	return ( ePluginAccessOk == getPluginAccessState( ePluginType, friendState ) );
 }
 
 //============================================================================
@@ -414,7 +438,7 @@ EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 		return ePluginAccessIgnored;
 	}
 
-	EFriendState ePermissionLevel = this->getPluginPermission(ePluginType);
+	EFriendState ePermissionLevel = this->getPluginPermission( ePluginType );
 	if( eFriendStateIgnore == ePermissionLevel )
 	{
 		return ePluginAccessDisabled;

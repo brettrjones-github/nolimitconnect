@@ -15,7 +15,7 @@
 
 #include <QMap>
 #include <QPointer>
-#include "ui_RichTextWidget.h"
+#include <QTextEdit>
 
 QT_FORWARD_DECLARE_CLASS(QAction)
 QT_FORWARD_DECLARE_CLASS(QComboBox)
@@ -34,7 +34,6 @@ public:
 
 	void						loadRichTextFile( const char * pFileName );
 	bool						maybeSave();
-
 
 private:
     bool						load( const QString &fileName );

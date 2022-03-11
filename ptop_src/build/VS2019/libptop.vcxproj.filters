@@ -487,9 +487,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMessenger.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -954,6 +951,12 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineStartup.cpp">
       <Filter>Source Files\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardServer.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp">
+      <Filter>Source Files\WebPageMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1552,9 +1555,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -2062,6 +2062,15 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardServer.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageCallbackInterface.h">
+      <Filter>Source Files\WebPageMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.h">
+      <Filter>Source Files\WebPageMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2204,6 +2213,9 @@
     </Filter>
     <Filter Include="Source Files\GuiInterface\OsWin32">
       <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WebPageMgr">
+      <UniqueIdentifier>{d53721db-42a9-4e22-8170-89e7e0a2acba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

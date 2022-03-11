@@ -22,6 +22,8 @@ public:
     PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginAboutMePageClient() = default;
 
+	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
+
 protected:
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;

@@ -107,11 +107,11 @@ public:
     bool                        extractFromBlob( PktBlobEntry& blob );
     VxNetIdent&                 operator =( const VxNetIdent &rhs );
 
-	EPluginAccess			    getHisAccessPermissionFromMe( EPluginType ePluginType );
-	bool						isHisAccessAllowedFromMe( EPluginType ePluginType );
+	EPluginAccess			    getHisAccessPermissionFromMe( EPluginType ePluginType, bool inGroup = false );
+	bool						isHisAccessAllowedFromMe( EPluginType ePluginType, bool inGroup = false );
 
-	EPluginAccess			    getMyAccessPermissionFromHim( EPluginType ePluginType );
-	bool						isMyAccessAllowedFromHim( EPluginType ePluginType );
+	EPluginAccess			    getMyAccessPermissionFromHim( EPluginType ePluginType, bool inGroup = false );
+	bool						isMyAccessAllowedFromHim( EPluginType ePluginType, bool inGroup = false );
 
 	void						setPingTimeMs( uint16_t pingTime );
 	uint16_t					getPingTimeMs( void );

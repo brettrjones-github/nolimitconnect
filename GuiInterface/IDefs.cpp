@@ -1053,6 +1053,22 @@ const char * DescribeSktType( ESktType sktType )
 }
 
 //============================================================================
+const char* DescribeWebPageType( EWebPageType webPageType )
+{
+    switch( webPageType )
+    {
+    case eWebPageTypeNone:
+        return "No Web Page Type ";
+    case eWebPageTypeAboutMe:
+        return "About Me Web Page ";
+    case eWebPageTypeStoryboard:
+        return "Storyboard Web Page ";
+    default:
+        return ENUM_BAD_PARM;
+    }
+}
+
+//============================================================================
 // for use in database mainly
 const char * getPluginName( EPluginType pluginType )
 {

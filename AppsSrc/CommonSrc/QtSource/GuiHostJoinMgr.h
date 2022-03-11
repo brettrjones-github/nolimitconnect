@@ -18,8 +18,6 @@
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h>
 
-#include <CoreLib/VxMutex.h>
-
 #include <QObject>
 
 // hosted side callbacks with client user states

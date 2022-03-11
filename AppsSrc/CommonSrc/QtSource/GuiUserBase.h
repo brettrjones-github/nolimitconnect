@@ -54,7 +54,7 @@ public:
     void                        setMyFriendshipToHim( EFriendState friendState ) { m_NetIdent.setMyFriendshipToHim( friendState ); }
     EFriendState                getMyFriendshipToHim( void )            { return  m_NetIdent.getMyFriendshipToHim(); }
     EFriendState                getHisFriendshipToMe( void )            { return m_NetIdent.getHisFriendshipToMe(); }
-    EPluginAccess               getMyAccessPermissionFromHim( EPluginType pluginType ) { return m_NetIdent.getMyAccessPermissionFromHim( pluginType ); }
+    EPluginAccess               getMyAccessPermissionFromHim( EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.getMyAccessPermissionFromHim( pluginType, inGroup ); }
     EFriendState                getPluginPermission( EPluginType pluginType ) { return m_NetIdent.getPluginPermission( pluginType ); }
     int64_t					    getLastSessionTimeMs( void )            { return m_NetIdent.getLastSessionTimeMs(); }
 
@@ -83,7 +83,7 @@ public:
     uint32_t                    getDareCount( void )                    { return m_NetIdent.getDareCount(); }
     void		                setHasTextOffers( bool hasOffers )	    { m_NetIdent.setHasTextOffers( hasOffers ); }
     bool		                getHasTextOffers( void )				{ return m_NetIdent.getHasTextOffers(); }
-    bool                        isMyAccessAllowedFromHim( EPluginType pluginType ) { return m_NetIdent.isMyAccessAllowedFromHim( pluginType ); }
+    bool                        isMyAccessAllowedFromHim( EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.isMyAccessAllowedFromHim( pluginType, inGroup ); }
     
     void                        setLastUpdateTime( uint64_t updateTimeMs ) { m_LastUpdateTime = updateTimeMs; }
     uint64_t                    getLastUpdateTime( void )               { return m_LastUpdateTime; }

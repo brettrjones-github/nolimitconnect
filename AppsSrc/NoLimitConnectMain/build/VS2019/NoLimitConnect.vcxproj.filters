@@ -57,6 +57,9 @@
     <Filter Include="Source Files\GuiHostJoin">
       <UniqueIdentifier>{bdfb2781-00f0-47c6-9d84-dc81eac8228a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GuiWebPage">
+      <UniqueIdentifier>{5664b446-ed43-4439-b703-8055e1f48810}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -916,6 +919,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\RichTextWidget.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.h">
+      <Filter>Source Files\GuiWebPage</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2011,6 +2017,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\RichTextWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.cpp">
+      <Filter>Source Files\GuiWebPage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2264,6 +2273,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h">
       <Filter>Source Files\GuiUser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiWebPageCallback.h">
+      <Filter>Source Files\GuiWebPage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

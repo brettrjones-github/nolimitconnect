@@ -25,6 +25,8 @@ public:
     AppletStoryboardClient( AppCommon& app, QWidget * parent );
 	virtual ~AppletStoryboardClient() = default;
 
+    void                        setIdentity( GuiUser* guiUser ) {};
+
 private slots:
     void						slotStoryBoardSavedModified();
 

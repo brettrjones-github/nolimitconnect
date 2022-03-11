@@ -630,6 +630,7 @@ public:
     virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList );
     virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
     virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll );
+    virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId );
   
     //============================================================================
     //=== utilities ===//

@@ -315,7 +315,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceStoryboard.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.h \
@@ -366,6 +366,8 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineCallbackInterface.h \
 	$$PWD/ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.h \
     $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageBuilder.h \
     $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageSettings.h \
     $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebServer.h \
@@ -637,7 +639,7 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceStoryboard.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.cpp \
@@ -683,6 +685,7 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageBuilder.cpp \
     $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageSettings.cpp \
     $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebServer.cpp \

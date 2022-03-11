@@ -40,7 +40,7 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceStoryboard.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h>
@@ -171,7 +171,7 @@ void PluginMgr::pluginMgrStartup( void )
     m_aoPlugins.push_back( &m_Engine.getPluginServiceRelay() );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create storyboard server plugin" );
-    poPlugin = new PluginServiceStoryboard( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboardServer );
+    poPlugin = new PluginStoryboardServer( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboardServer );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create cam server plugin" );

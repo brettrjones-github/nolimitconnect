@@ -42,6 +42,7 @@
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
+#include <ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.h>
 
 #include <GuiInterface/IDefs.h>
 #include <GuiInterface/IFromGui.h>
@@ -143,6 +144,7 @@ public:
     HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
     UserJoinMgr&                getUserJoinMgr( void )                          { return m_UserJoinMgr; }
     UserOnlineMgr&              getUserOnlineMgr( void )                        { return m_UserOnlineMgr; }
+    WebPageMgr&                 getWebPageMgr( void )                           { return m_WebPageMgr; }
 
     VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
@@ -395,9 +397,9 @@ public:
     virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList ) override;
     virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) override;
     virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll ) override;
+    virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
-
 
 	//========================================================================
 	// to gui
@@ -795,6 +797,7 @@ protected:
     HostJoinMgr&				m_HostJoinMgr;
     UserJoinMgr&				m_UserJoinMgr;
     UserOnlineMgr&				m_UserOnlineMgr;
+    WebPageMgr&                 m_WebPageMgr;
     VxSktLoopback               m_SktLoopback;
 
 	RcScan						m_RcScan;

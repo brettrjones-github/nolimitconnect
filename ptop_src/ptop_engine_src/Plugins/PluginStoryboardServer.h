@@ -15,11 +15,11 @@
 
 #include "PluginBase.h"
 
-class PluginServiceStoryboard : public PluginBase
+class PluginStoryboardServer : public PluginBase
 {
 public:
-	PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginServiceStoryboard() = default;
+	PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	virtual ~PluginStoryboardServer() = default;
 
 	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 

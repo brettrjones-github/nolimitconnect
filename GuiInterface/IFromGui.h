@@ -433,5 +433,7 @@ public:
 	virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList ) = 0;
 	virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) = 0;
 	virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll ) = 0;
+
+	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) = 0;
 };
 

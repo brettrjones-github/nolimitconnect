@@ -431,8 +431,9 @@ void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGU
 {
 	lockFileList();
 	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoNeedHashAndSaveList.begin(); iter != m_FileInfoNeedHashAndSaveList.end(); ++iter )
+	for( iter = m_FileInfoNeedHashAndSaveList.begin(); iter != m_FileInfoNeedHashAndSaveList.end(); )
 	{
+		bool wasErased{ false };
 		if( assetId == ( *iter )->getAssetId() )
 		{
 			if( eSha1GenResultNoError == sha1GenResult )
@@ -441,7 +442,8 @@ void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGU
 				m_FileInfoDb.addFile( *iter );
 				m_FileInfoList[( *iter )->getAssetId()] = *iter;
 
-				m_FileInfoNeedHashAndSaveList.erase( iter );
+				iter = m_FileInfoNeedHashAndSaveList.erase( iter );
+				wasErased = true;
 			}
 			else
 			{
@@ -449,6 +451,11 @@ void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGU
 			}
 
 			break;
+		}
+
+		if( !wasErased )
+		{
+			iter++;
 		}
 	}
 

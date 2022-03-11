@@ -177,6 +177,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_HostedListMgr( *this )
 , m_HostJoinMgr( *this )
 , m_UserJoinMgr( *this )
+, m_WebPageMgr( *this )
 , m_MyIcons( *this )
 , m_AppTheme( *this )
 , m_AppStyle( *this, m_AppTheme )
@@ -299,6 +300,7 @@ void AppCommon::loadWithoutThread( void )
 	m_HostedListMgr.onAppCommonCreated();
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
+	m_WebPageMgr.onAppCommonCreated();
 	m_ConnectIdListMgr.onAppCommonCreated();
 	m_GroupieListMgr.onAppCommonCreated();
 
@@ -361,6 +363,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 	m_HostedListMgr.onAppCommonCreated();
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
+	m_WebPageMgr.onAppCommonCreated();
 	m_ConnectIdListMgr.onAppCommonCreated();
 	m_GroupieListMgr.onAppCommonCreated();
 
@@ -2185,6 +2188,7 @@ void AppCommon::onMessengerReady( bool isReady )
 		m_OfferHostMgr.onMessengerReady( isReady );
 		m_HostJoinMgr.onMessengerReady( isReady );
 		m_UserJoinMgr.onMessengerReady( isReady );
+		m_WebPageMgr.onMessengerReady( isReady );
 		m_ConnectIdListMgr.onMessengerReady( isReady );
 		checkSystemReady();
 	}
@@ -2214,6 +2218,7 @@ bool AppCommon::checkSystemReady( void )
 		m_OfferHostMgr.onSystemReady( m_IsSystemReady );
 		m_HostJoinMgr.onSystemReady( m_IsSystemReady );
 		m_UserJoinMgr.onSystemReady( m_IsSystemReady );
+		m_WebPageMgr.onSystemReady( m_IsSystemReady );
 		m_ConnectIdListMgr.onSystemReady( m_IsSystemReady );
 
 		emit signalSystemReady( m_IsSystemReady );
@@ -2274,5 +2279,6 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<EOnlineState>( "EOnlineState" );
 	qRegisterMetaType<GroupieId>( "GroupieId" );
 	qRegisterMetaType<ConnectId>( "ConnectId" );
+	qRegisterMetaType<EWebPageType>( "EWebPageType" );
 }
 

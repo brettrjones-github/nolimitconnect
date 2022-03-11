@@ -79,3 +79,12 @@ void PluginAboutMePageClient::onAboutMePageReady( bool isReady )
 {
 
 }
+
+//============================================================================
+bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
+{
+	bool result{ false };
+
+
+	return result;
+}

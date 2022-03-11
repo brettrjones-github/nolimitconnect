@@ -350,6 +350,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HelpBrowser.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp" />
@@ -585,6 +586,8 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiWebPageCallback.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\HelpBrowser.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListItem.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListWidget.h" />

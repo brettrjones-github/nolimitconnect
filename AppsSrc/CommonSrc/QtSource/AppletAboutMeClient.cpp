@@ -41,12 +41,26 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );
+    m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, true );
 }
 
 //============================================================================
 AppletAboutMeClient::~AppletAboutMeClient()
 {
+    m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletAboutMeClient::setIdentity( GuiUser* guiUser )
+{
+    if( guiUser )
+    {
+        ui.m_IdentWidget->setupIdentLogic();
+        ui.m_IdentWidget->updateIdentity( guiUser );
+        m_HisOnlineId = guiUser->getMyOnlineId();
+        m_MyApp.getEngine().fromGuiDownloadWebPage( eWebPageTypeAboutMe, m_HisOnlineId );
+    }
 }
 
 //============================================================================

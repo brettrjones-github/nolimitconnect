@@ -172,6 +172,8 @@ public:
 	virtual bool				fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }
 	virtual void				fromGuiListAction( EListAction listAction ) {};
 
+	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
+
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) = 0;

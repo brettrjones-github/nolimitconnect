@@ -1097,6 +1097,17 @@ enum ESubCatagory
     eMaxSubCatagory
 };
 
+enum EWebPageType
+{
+    eWebPageTypeNone = 0,
+    eWebPageTypeAboutMe,
+    eWebPageTypeStoryboard,
+
+    eMaxWebPageType
+};
+
+
+
 //============================================================================
 // There is a qt translated version of these functions in GuiParams for the user interface
 //============================================================================
@@ -1165,6 +1176,7 @@ const char* DescribeSha1GenResult( ESha1GenResult sha1GenerateResult );
 const char * DescribeSktCloseReason( ESktCloseReason closeReason );
 //! Describe skt type
 const char * DescribeSktType( ESktType sktType );
+const char* DescribeWebPageType( EWebPageType webPageType );
 
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName

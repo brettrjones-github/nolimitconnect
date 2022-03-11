@@ -12,13 +12,13 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceStoryboard.h"
+#include "PluginStoryboardServer.h"
 #include "PluginMgr.h"
 
 #include <PktLib/PktsStoryBoard.h>
 
 //============================================================================
-PluginServiceStoryboard::PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginStoryboardServer::PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
 	setPluginType( ePluginTypeStoryboardServer );
@@ -26,25 +26,25 @@ PluginServiceStoryboard::PluginServiceStoryboard( P2PEngine& engine, PluginMgr& 
 
 //============================================================================
 //! return true if is plugin session
-bool PluginServiceStoryboard::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginStoryboardServer::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return true;
 }
 
 //============================================================================
-void PluginServiceStoryboard::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginStoryboardServer::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	//m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginServiceStoryboard::onConnectionLost( VxSktBase * sktBase )
+void PluginStoryboardServer::onConnectionLost( VxSktBase * sktBase )
 {
 	//m_PluginSessionMgr.onConnectionLost( sktBase );
 }
 
 //============================================================================
-void PluginServiceStoryboard::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginStoryboardServer::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
 	//m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }

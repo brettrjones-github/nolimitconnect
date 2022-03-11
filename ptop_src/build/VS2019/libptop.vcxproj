@@ -746,11 +746,11 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginTruthOrDare.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.cpp" />
@@ -792,6 +792,7 @@
     <ClCompile Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\User\User.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\User\UserList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServer.cpp" />
@@ -1109,11 +1110,11 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginTruthOrDare.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.h" />
@@ -1161,6 +1162,8 @@
     <ClInclude Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\User\User.h" />
     <ClInclude Include="..\..\ptop_engine_src\User\UserList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.h" />
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.h" />
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServer.h" />

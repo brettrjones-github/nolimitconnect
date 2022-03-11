@@ -14,21 +14,23 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include "UserProfile.h"
+
+#include "GuiWebPageCallback.h"
 
 #include "ui_AppletAboutMeClient.h"
 
-class AppletAboutMeClient : public AppletBase
+class AppletAboutMeClient : public AppletBase, public GuiWebPageCallback
 {
 	Q_OBJECT
 public:
 	AppletAboutMeClient( AppCommon& app, QWidget * parent );
 	virtual ~AppletAboutMeClient();
 
+    void                        setIdentity( GuiUser* guiUser );
+
 public slots:
      //! browse for picture of me
     void						onBrowseButClick( void );
-
 
 protected:
     void                        loadRichTextFile( QString fileName );
@@ -39,7 +41,6 @@ protected:
 
     //=== vars ===//
     Ui::AppletAboutMeClientUi	ui;
-    UserProfile 				m_UserProfile;
     VxNetIdent *				m_MyIdent = nullptr;
     QString                     m_strOrigOnlineName;
     QString                     m_strOrigMoodMessage;
@@ -49,6 +50,7 @@ protected:
     bool						m_bUserPickedImage = false;
     bool						m_bUsingDefaultImage = true;
     bool 					    m_CameraSourceAvail{ false };
+    VxGUID                      m_HisOnlineId;
 };
 
 

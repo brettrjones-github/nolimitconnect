@@ -842,3 +842,9 @@ bool IGoTv::fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType host
 {
     return getPtoP().fromGuiQueryGroupiesFromHosted( hostedUrl, hostType, onlineIdIfNullThenAll );
 }
+
+//============================================================================
+bool IGoTv::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
+{
+    return getPtoP().fromGuiDownloadWebPage( webPageType, onlineId );
+}

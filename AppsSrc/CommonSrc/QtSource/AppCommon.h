@@ -29,6 +29,7 @@
 #include "GuiUserJoinMgr.h"
 #include "GuiUserMgr.h"
 #include "GuiThumbMgr.h"
+#include "GuiWebPageMgr.h"
 #include "MyIcons.h"
 #include "VxAppTheme.h"
 #include "VxAppStyle.h"
@@ -145,6 +146,7 @@ public:
     GuiHostedListMgr&           getHostedListMgr( void )                    { return m_HostedListMgr; }
     GuiHostJoinMgr&             getHostJoinMgr( void )                      { return m_HostJoinMgr; }
     GuiUserJoinMgr&             getUserJoinMgr( void )						{ return m_UserJoinMgr; }
+    GuiWebPageMgr&              getWebPageMgr( void )                       { return m_WebPageMgr; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
     GuiMembershipAvailableMgr&  getMembershipAvailableMgr( void )           { return m_MembershipAvailableMgr; }
@@ -767,6 +769,7 @@ private:
     GuiHostedListMgr			m_HostedListMgr;
     GuiHostJoinMgr				m_HostJoinMgr;
     GuiUserJoinMgr				m_UserJoinMgr;
+    GuiWebPageMgr               m_WebPageMgr;
 
 	MyIcons					    m_MyIcons;
 	VxAppTheme					m_AppTheme;

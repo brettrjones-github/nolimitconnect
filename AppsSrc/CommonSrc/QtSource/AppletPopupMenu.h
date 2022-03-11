@@ -58,7 +58,7 @@ public:
 	void						showRefreshMenu();
 
 	void						showAppSystemMenu( void );
-	void						showFriendMenu( GuiUser* poSelectedFriend );
+	void						showFriendMenu( GuiUser* poSelectedFriend, bool inGroup = false );
 	void						showGroupieListSessionMenu( GuiGroupieListSession* hostSession );
 	void						showHostedListSessionMenu( GuiHostedListSession* hostSession );
 	void						showHostSessionMenu( GuiHostSession* hostSession );
@@ -101,4 +101,5 @@ protected:
 	QFrame*						m_ContentItemsFrame{ nullptr };
 	EPopupMenuType				m_MenuType{ EPopupMenuType::ePopupMenuUnknown };
 	EApplet						m_AppletType{ eAppletUnknown };
+	bool						m_InGroup{ false };
 };
