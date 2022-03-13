@@ -37,10 +37,12 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_ABOUT_ME_CLIENT, app, parent )
 {
     setAppletType( eAppletAboutMeClient );
+    setPluginType( ePluginTypeAboutMePageClient );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, nullptr, true );
     m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, true );
 }
 
@@ -48,6 +50,7 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
 AppletAboutMeClient::~AppletAboutMeClient()
 {
     m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, nullptr, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -60,6 +63,15 @@ void AppletAboutMeClient::setIdentity( GuiUser* guiUser )
         ui.m_IdentWidget->updateIdentity( guiUser );
         m_HisOnlineId = guiUser->getMyOnlineId();
         m_MyApp.getEngine().fromGuiDownloadWebPage( eWebPageTypeAboutMe, m_HisOnlineId );
+    }
+}
+
+//============================================================================
+void AppletAboutMeClient::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue )
+{
+    if( pluginType == getPluginType() )
+    {
+        ui.m_StatusLabel->setText( GuiParams::describePluginMsg( msgType ) );
     }
 }
 

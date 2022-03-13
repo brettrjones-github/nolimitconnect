@@ -35,6 +35,9 @@ class ToGuiActivityInterface
 public:
 	virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ){}; 
 	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ){}; 
+
+    virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue ){};
+
 	virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ){}; 
 
     virtual void				toGuiIndentListUpdate( void* callbackData, EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};

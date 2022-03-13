@@ -38,6 +38,7 @@ protected:
 	std::string					m_RootFileFolder{ "" };
 	std::vector<std::pair<VxGUID, std::string>> m_AssetList;
 	bool						m_AboutMePageReady{ false };
+	VxGUID						m_HisOnlineId;
 };
 
 

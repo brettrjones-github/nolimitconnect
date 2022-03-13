@@ -572,7 +572,6 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     case ePluginTypeRelay:
     case ePluginTypeNetworkSearchList:
     case ePluginTypeClientConnectTest:
-    case ePluginTypeWebServer:
     default:
         break;
     }

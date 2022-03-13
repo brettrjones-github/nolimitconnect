@@ -84,7 +84,16 @@ void PluginAboutMePageClient::onAboutMePageReady( bool isReady )
 bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
 	bool result{ false };
+	if( eWebPageTypeAboutMe == webPageType )
+	{
+		m_HisOnlineId = onlineId;
 
+		m_Engine.getToGui().toGuiPluginMessage( getPluginType(), m_HisOnlineId, ePluginMsgConnecting, "" );
+	}
+	else
+	{
+		LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::fromGuiDownloadWebPage invalid EWebPageType" );
+	}
 
 	return result;
 }

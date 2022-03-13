@@ -257,6 +257,8 @@ public:
     void				        toGuiLog( int logFlags, const char * pMsg ) override;
     void				        toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) override;
     void				        toGuiStatusMessage( const char* statusMsg ) override;
+    virtual void				toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... ) override;
+    virtual void				toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg ) override;
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 

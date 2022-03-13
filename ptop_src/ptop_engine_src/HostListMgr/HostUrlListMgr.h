@@ -30,7 +30,7 @@ class HostUrlListMgr : public IConnectRequestCallback
 public:
     HostUrlListMgr() = delete;
     HostUrlListMgr( P2PEngine& engine );
-    virtual ~HostUrlListMgr() = default;
+    ~HostUrlListMgr() = default;
 
     RCODE                       hostUrlListMgrStartup( std::string& dbFileName );
     RCODE                       hostUrlListMgrShutdown( void );

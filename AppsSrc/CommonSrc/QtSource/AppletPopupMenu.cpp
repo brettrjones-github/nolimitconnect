@@ -243,7 +243,7 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend, bool inGroup )
 	{
 		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeAboutMePageServer, m_InGroup );
 		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeAboutMePageServer, ePluginAccess );
-		addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeAboutMePageServer, ePluginAccess ) ), strAction );
+		addMenuItem( (int)ePluginTypeAboutMePageServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeAboutMePageServer, ePluginAccess ) ), strAction );
 	}
 
 	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboardServer, m_InGroup ) )
@@ -316,10 +316,10 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 {
 	switch( iMenuId )
 	{
-	case ePluginTypeAboutMePageServer: // view profile
+	case ePluginTypeAboutMePageServer: 
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeAboutMePageServer, m_InGroup ) )
 		{
-			AppletAboutMeClient* applet = dynamic_cast< AppletAboutMeClient* >( m_MyApp.launchApplet( eAppletPeerChangeFriendship, getParentPageFrame() ) );
+			AppletAboutMeClient* applet = dynamic_cast< AppletAboutMeClient* >( m_MyApp.launchApplet( eAppletAboutMeClient, getParentPageFrame() ) );
 			if( applet )
 			{
 				applet->setIdentity( m_SelectedFriend );
@@ -331,7 +331,7 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 	case ePluginTypeStoryboardServer:
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboardServer, m_InGroup ) )
 		{
-			AppletStoryboardClient* applet = dynamic_cast< AppletStoryboardClient* >( m_MyApp.launchApplet( eAppletPeerChangeFriendship, getParentPageFrame() ) );
+			AppletStoryboardClient* applet = dynamic_cast< AppletStoryboardClient* >( m_MyApp.launchApplet( eAppletStoryboardClient, getParentPageFrame() ) );
 			if( applet )
 			{
 				applet->setIdentity( m_SelectedFriend );

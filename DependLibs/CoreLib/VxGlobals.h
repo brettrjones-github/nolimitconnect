@@ -126,9 +126,9 @@ std::string&					VxGetUserSpecificDataDirectory( void  );
 std::string&					VxGetSettingsDirectory( void );
 
 std::string&					VxGetAboutMePageServerDirectory( void ); 
-std::string&					VxGetAboutMePageClientDirectory( VxGUID& onlineId );
+std::string                     VxGetAboutMePageClientDirectory( VxGUID& onlineId );
 std::string&					VxGetStoryBoardPageServerDirectory( void );
-std::string&					VxGetStoryBoardPageClientDirectory( VxGUID& onlineId );
+std::string                     VxGetStoryBoardPageClientDirectory( VxGUID& onlineId );
 
 void							VxSetRootXferDirectory( const char * rootXferDir  );
 std::string&					VxGetRootXferDirectory( void ) ;

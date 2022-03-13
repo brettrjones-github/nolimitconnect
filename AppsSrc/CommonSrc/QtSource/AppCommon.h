@@ -432,6 +432,7 @@ public:
     virtual void				toGuiStatusMessage( const char * errMsg ) override;
 	// NOTE: toGuiUserMessage should be called from in gui on gui thread only
     virtual void				toGuiUserMessage( const char * userMsg, ... );
+    virtual void				toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg ) override;
 
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
@@ -679,6 +680,7 @@ signals:
     void                        signalSystemReady( bool isReady );
 
     void                        signalInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
+    void                        signalInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
 
 protected slots:
 
@@ -722,6 +724,7 @@ private slots:
 	void						slotFinishedLoadingEngine( void );
 
     void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
+    void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
 
 private:
 	void						showUserNameInTitle();

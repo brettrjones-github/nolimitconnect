@@ -684,6 +684,20 @@ enum EPluginAccess
     eMaxPluginAccessState
 };
 
+// Enumeration of plugin message
+enum EPluginMsgType
+{
+    ePluginMsgNone = 0,		
+    ePluginMsgConnecting,
+    ePluginMsgConnectFailed,
+    ePluginMsgRetrieveInfo,
+    ePluginMsgRetrieveInfoFailed,
+    ePluginMsgDownloading,
+    ePluginMsgDownloadFailed,
+
+    eMaxPPluginMsgType
+};
+
 //! \public Enumerated plugins
 enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePluginType if you change this
 {

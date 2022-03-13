@@ -34,6 +34,7 @@ public slots:
 
 protected:
     void                        loadRichTextFile( QString fileName );
+    virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue ) override;
 
     //=== constants ===//
     static const int SELECT_IMAGE = 0; // selector for image gallery call

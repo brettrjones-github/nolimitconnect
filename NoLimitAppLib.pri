@@ -243,10 +243,12 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinMgr.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserUpdateCallback.h \  
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserUpdateCallback.h \   
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiWebPageCallback.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiWebPageMgr.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/HelpBrowser.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HistoryEntryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HistoryListWidget.h \
@@ -609,6 +611,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiWebPageMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostedPluginWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListWidget.cpp \
@@ -843,6 +846,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSharedContent.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletShareOfferList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSnapshot.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletStoryBoardClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletTestAndDebug.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostService.ui \

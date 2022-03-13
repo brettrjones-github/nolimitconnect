@@ -922,6 +922,47 @@ QString GuiParams::describePluginPermission( EFriendState ePluginPermission )
 }
 
 //============================================================================
+QString GuiParams::describePluginMsg( EPluginMsgType pluginMsgType )
+{
+    QString strPluginMsg;
+    switch( pluginMsgType )
+    {
+    case ePluginMsgNone:
+        strPluginMsg = QObject::tr( "Msg None" );
+        break;
+
+    case ePluginMsgConnecting:
+        strPluginMsg = QObject::tr( "Connecting" );
+        break;
+
+    case ePluginMsgConnectFailed:
+        strPluginMsg = QObject::tr( "Connect Failed" );
+        break;
+
+    case ePluginMsgRetrieveInfo:
+        strPluginMsg = QObject::tr( "Retrieving Info" );
+        break;
+
+    case ePluginMsgRetrieveInfoFailed:
+        strPluginMsg = QObject::tr( "Retrieve Info Failed" );
+        break;
+
+    case ePluginMsgDownloading:
+        strPluginMsg = QObject::tr( "Downloading" );
+        break;
+
+    case ePluginMsgDownloadFailed:
+        strPluginMsg = QObject::tr( "Downloading Failed" );
+        break;
+    default:
+        strPluginMsg = QObject::tr( "Unknown Plugin Message" );
+        LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin message type %d", pluginMsgType );
+    }
+
+    return strPluginMsg;
+}
+
+//============================================================================
 //! Describe plugin
 QString GuiParams::describePluginType( EPluginType ePluginType )
 {
@@ -1029,7 +1070,7 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         break;
     default:
         strPluginType = QObject::tr("Unknown Plugin");
-        LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin %d\n", ePluginType );
+        LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin %d", ePluginType );
     }
 
     return strPluginType;
@@ -1198,7 +1239,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         break;
 
     case ePluginTypeWebServer:
-        strPluginDesc = QObject::tr( "Server for About Me And Story Pages" ).toUtf8().constData();
+        strPluginDesc = QObject::tr( "Unused Server for About Me And Story Pages" ).toUtf8().constData();
         break;
 
     default:

@@ -571,21 +571,21 @@ std::string& VxGetAboutMePageServerDirectory( void )		{ return g_strAboutMePageS
 std::string& VxGetStoryBoardPageServerDirectory( void )		{ return g_strStoryBoardPageServerDir; }
 
 //============================================================================
-std::string& VxGetAboutMePageClientDirectory( VxGUID& onlineId )
+std::string VxGetAboutMePageClientDirectory( VxGUID& onlineId )
 { 
 	std::string clientDir = g_strAboutMePageClientDir + onlineId.toHexString();
 	VxFileUtil::makeDirectory( clientDir.c_str() );
 
-	return g_strAboutMePageClientDir + onlineId.toHexString();
+    return clientDir;
 }
 
 //============================================================================
-std::string& VxGetStoryBoardPageClientDirectory( VxGUID& onlineId )
+std::string VxGetStoryBoardPageClientDirectory( VxGUID& onlineId )
 {
 	std::string clientDir = g_strStoryBoardPageClientDir + onlineId.toHexString();
 	VxFileUtil::makeDirectory( clientDir.c_str() );
 
-	return g_strStoryBoardPageClientDir + onlineId.toHexString();
+    return clientDir;
 }
 
 //============================================================================

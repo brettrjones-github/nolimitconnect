@@ -22,6 +22,38 @@ void IGoTv::toGuiStatusMessage( const char * statusMsg )
 }
 
 //============================================================================
+void IGoTv::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... )
+{
+    std::string paramValue{ "" };
+    if( paramMsg )
+    {
+        char szBuffer[2048];
+        szBuffer[0] = 0;
+        va_list arg_ptr;
+        va_start( arg_ptr, paramMsg );
+#ifdef TARGET_OS_WINDOWS
+        vsnprintf( szBuffer, 2048, paramMsg, ( char* )arg_ptr );
+#else
+        vsnprintf( szBuffer, 2048, paramMsg, arg_ptr );
+#endif //  TARGET_OS_WINDOWS
+        szBuffer[2047] = 0;
+        va_end( arg_ptr );
+        if( 0 != szBuffer[0] )
+        {
+            paramValue = szBuffer;
+        }
+    }
+
+    getAppCommon().toGuiPluginMessage( pluginType, onlineId, msgType, paramValue );
+}
+
+//============================================================================
+void IGoTv::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
+{
+    getAppCommon().toGuiPluginMessage( pluginType, onlineId, msgType, paramMsg );
+}
+
+//============================================================================
 void IGoTv::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
 {
     getAppCommon().toGuiMicrophonePeak( appModule, peekVal0to32768 );

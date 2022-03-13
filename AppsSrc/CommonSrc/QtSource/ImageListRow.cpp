@@ -57,9 +57,9 @@ void ImageListRow::setRowNum( int rowNum )
 //============================================================================
 bool ImageListRow::hasRoomForThumbnail( int idx )
 {
-    int curWidth = width();
-    int curHeight = height();
     int requiredWidth = ( ( m_ThumbnailCnt + 1 ) * ( GuiParams::getThumbnailSize().width() + 20 ) + 20 );
+    // int curWidth = width();
+    // int curHeight = height();
     // LogMsg( LOG_DEBUG, "ImageListRow hasRoomForThumbnail idx %d ? %d cnt %d w %d h %d\n", idx, requiredWidth < curWidth, m_ThumbnailCnt, curWidth, curHeight );
     return requiredWidth < sizeHint().width();
 }

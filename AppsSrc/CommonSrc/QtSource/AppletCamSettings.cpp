@@ -280,7 +280,7 @@ void AppletCamSettings::slotToGuiRxedOfferReply( GuiOfferSession * offerReply )
 //============================================================================
 void AppletCamSettings::slotToGuiSessionEnded( GuiOfferSession * offer )
 {
-    if( ( ePluginTypeWebServer == offer->getPluginType() )
+    if( ( ePluginTypeCamServer == offer->getPluginType() )
         && ( m_HisIdent->getMyOnlineId() == offer->getHisIdent()->getMyOnlineId() ) )
     {
         webCamSourceOffline();

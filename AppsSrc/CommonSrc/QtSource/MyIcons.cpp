@@ -260,13 +260,13 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/lock.svg";
 
 	case eMyIconVideoPhoneCancel:
-		return ":/AppRes/Resources/videocam-enabled.svg";
+		return ":/AppRes/Resources/lock.svg";
 	case eMyIconVideoPhoneNormal:
-		return ":/AppRes/Resources/videocam-enabled.svg";
+		return ":/AppRes/Resources/video-chat.svg";
 	case eMyIconVideoPhoneLocked:
 	case eMyIconVideoPhoneIgnored:
 	case eMyIconVideoPhoneDisabled:
-		return ":/AppRes/Resources/videocam-enabled.svg";
+		return ":/AppRes/Resources/lock.svg";
 
 	case eMyIconVoicePhoneCancel:
 		return ":/AppRes/Resources/lock.svg";
@@ -301,7 +301,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconTruthOrDareCancel:
 		return ":/AppRes/Resources/lock.svg";
 	case eMyIconTruthOrDareNormal:
-		return ":/AppRes/Resources/dice.svg";
+		return ":/AppRes/Resources/truth-or-dare.svg";
 	case eMyIconTruthOrDareLocked:
 	case eMyIconTruthOrDareIgnored:
 	case eMyIconTruthOrDareDisabled:
@@ -1388,6 +1388,7 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
         return eMyIconUnknown; // not implemented
 
     case ePluginTypeAboutMePageServer:
+	case ePluginTypeAboutMePageClient:
         return eMyIconSettingsAboutMe;
 
     case ePluginTypeClientPeerUser:
@@ -1412,20 +1413,15 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeRelay:
         return eMyIconSettingsRelay;
 
+	case ePluginTypeStoryboardClient:
     case ePluginTypeStoryboardServer:
         return eMyIconSettingsShareStoryboard;
-
-    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-        return eMyIconSettingsShareWebCam;
 
     case ePluginTypeFileXfer:	// file offer plugin
         return eMyIconSettingsFileXfer;
 
     case ePluginTypeFileServer:	// file share plugin
         return eMyIconSettingsShareFiles;
-
-    case ePluginTypeCamServer:	// web cam broadcast plugin
-        return eMyIconSettingsShareWebCam;
 
     case ePluginTypeVoicePhone:	// VOIP p2p plugin
         return eMyIconSettingsVoicePhone;
@@ -1465,7 +1461,10 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
-	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
+	case	ePluginTypeAboutMePageServer:
+	case	ePluginTypeAboutMePageClient:
+	case	ePluginTypeStoryboardServer:
+	case	ePluginTypeStoryboardClient:
 		return eMyIconProfileDisabled;
 	case 	ePluginTypeFileXfer:	// file share plugin
 		return eMyIconSendFileDisabled;
@@ -1494,7 +1493,10 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
-	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
+	case	ePluginTypeAboutMePageServer:
+	case	ePluginTypeAboutMePageClient:
+	case	ePluginTypeStoryboardServer:
+	case	ePluginTypeStoryboardClient:
 		return eMyIconProfileLocked;
 	case 	ePluginTypeFileXfer:	// file offer plugin
 		return eMyIconSendFileNormal;
@@ -1521,7 +1523,10 @@ EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
-	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
+	case	ePluginTypeAboutMePageServer:
+	case	ePluginTypeAboutMePageClient:
+	case	ePluginTypeStoryboardServer:
+	case	ePluginTypeStoryboardClient:
 		return eMyIconProfileIgnored;
 	case 	ePluginTypeFileXfer:	// file share plugin
 		return eMyIconSendFileIgnored;

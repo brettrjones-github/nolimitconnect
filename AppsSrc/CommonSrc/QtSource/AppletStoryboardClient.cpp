@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletStoryboardClient.h"
+#include "AppletStoryBoardClient.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"

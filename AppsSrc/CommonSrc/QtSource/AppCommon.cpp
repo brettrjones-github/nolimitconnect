@@ -308,11 +308,8 @@ void AppCommon::loadWithoutThread( void )
     connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT( slotMainWindowResized() ) );
     m_HomePage.show();
 
-
     uint64_t homePageMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Initialize Home Page %" PRId64 " ms alive ms %" PRId64 "", homePageMs - styleMs, homePageMs );
-
-
 }
 
 //============================================================================
@@ -466,37 +463,13 @@ void AppCommon::connectSignals( void )
 	connect(this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),			this, SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
 	connect(this, SIGNAL(signalToGuiInstMsg(GuiUser*,EPluginType,QString)),		this, SLOT(slotToGuiInstMsg(GuiUser*,EPluginType,QString)) );
 
-    /*
-	connect(this, SIGNAL(signalRemoveContact(VxNetIdent*)),							this, SLOT(slotRemoveContact(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactOffline(VxNetIdent*)),						this, SLOT(slotContactOffline(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactOnline(VxNetIdent*,bool)),					this, SLOT(slotContactOnline(VxNetIdent*,bool)));
-	connect(this, SIGNAL(signalContactNearby(VxNetIdent*)),							this, SLOT(slotContactNearby(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactNotNearby(VxNetIdent*)),						this, SLOT(onContactNotNearby(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactNameChange(VxNetIdent*)),						this, SLOT(onContactNameChange(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactDescChange(VxNetIdent*)),						this, SLOT(onContactDescChange(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactMyFriendshipChange(VxNetIdent*)),				this, SLOT(onContactMyFriendshipChange(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactHisFriendshipChange(VxNetIdent*)),			this, SLOT(onContactHisFriendshipChange(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactPluginPermissionChange(VxNetIdent*)),			this, SLOT(onContactPluginPermissionChange(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactSearchFlagsChange(VxNetIdent*)),				this, SLOT(onContactSearchFlagsChange(VxNetIdent*)));
-	connect(this, SIGNAL(signalContactLastSessionTimeChange(VxNetIdent*)),			this, SLOT(onContactLastSessionTimeChange(VxNetIdent*)));
-
-	connect(this, SIGNAL(signalUpdateMyIdent(VxNetIdent*)),							this, SLOT(onUpdateMyIdent(VxNetIdent*)));
-    */
-
-	//   connect(this, SIGNAL(signalStartDownload(GuiFileXferSession*)),					m_Downloads,	SLOT(slotUpdateDownload(GuiFileXferSession*)));
-	//   connect(this, SIGNAL(signalStartUpload(GuiFileXferSession*)),					m_Uploads,		SLOT(onStartUpload(GuiFileXferSession*)));
-	//	connect(this, SIGNAL(signalUpdateFileDownload(unsigned long, float, unsigned long)), m_Downloads,	SLOT(onUpdateFileDownload(unsigned long, float, unsigned long)));
-	//	connect(this, SIGNAL(signalUpdateFileUpload(unsigned long, float, unsigned long)),	m_Uploads,		SLOT(onUpdateFileUpload(unsigned long, float, unsigned long)));
-
-	//	connect( this, SIGNAL(signalFileDownloadComplete(unsigned long, unsigned long)),m_Downloads,	SLOT(onFileDownloadComplete(unsigned long, unsigned long)));
-	//	connect( this, SIGNAL(signalFileUploadComplete(unsigned long, unsigned long)),	m_Uploads,		SLOT(onFileUploadComplete(unsigned long, unsigned long)));
-
 	connect( this, SIGNAL(signalEnableVideoCapture(bool)),							this, SLOT(slotEnableVideoCapture(bool)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalEnableMicrophoneRecording(bool)),					this, SLOT(slotEnableMicrophoneRecording(bool)), Qt::QueuedConnection);
 	connect( this, SIGNAL(signalEnableSpeakerOutput(bool)),							this, SLOT(slotEnableSpeakerOutput(bool)), Qt::QueuedConnection);
 
 	//connect( //ui.m_RelayHelpButton, SIGNAL(clicked()),								this, SLOT(slotRelayHelpButtonClicked()));
 	connect( this, SIGNAL(signalSetRelayHelpButtonVisibility(bool)),				this, SLOT(slotSetRelayHelpButtonVisibility(bool)));
+	connect( this, SIGNAL( signalInternalPluginMessage( EPluginType, VxGUID, EPluginMsgType, QString ) ), this, SLOT( slotInternalPluginMessage( EPluginType, VxGUID, EPluginMsgType, QString ) ), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -732,7 +705,7 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWid
 		break;
 
 	default:
-		ActivityMessageBox errMsgBox( *this, this, LOG_ERROR, "AppCommon::startActivity UNKNOWN plugin type %d\n", ePluginType );
+		ActivityMessageBox errMsgBox( *this, this, LOG_ERROR, "AppCommon::startActivity UNKNOWN plugin type %d", ePluginType );
 		errMsgBox.exec();
 	}
 
@@ -875,7 +848,7 @@ void AppCommon::insertKeystroke( int keyCode )
 {
 	if( 0 == keyCode )
 	{
-		LogMsg( LOG_ERROR, "AppCommon::insertKeystroke 0 keyCode\n" );
+		LogMsg( LOG_ERROR, "AppCommon::insertKeystroke 0 keyCode" );
 		return;
 	}
 
@@ -887,7 +860,7 @@ void AppCommon::insertKeystroke( int keyCode )
 
 	if( 0 == receiver )
 	{
-		LogMsg( LOG_DEBUG,  "AppCommon::insertKeystroke no reciever\n" );
+		LogMsg( LOG_DEBUG,  "AppCommon::insertKeystroke no reciever" );
 		return;
 	}
 
@@ -942,7 +915,7 @@ void AppCommon::toGuiAppErr( EAppErr eAppErr, const char* errMsg )
 	}
 	else
 	{
-		StdStringFormat( formatedErr, "#App Error %d\n", eAppErr );
+		StdStringFormat( formatedErr, "#App Error %d", eAppErr );
 	}
 
 	//emit signalAppErr( eAppErr, formatedErr.c_str() );
@@ -993,6 +966,34 @@ void AppCommon::toGuiUserMessage( const char * userMsg, ... )
 }
 
 //============================================================================
+// NOTE: toGuiUserMessage should be called from in gui on gui thread only
+void AppCommon::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	QString paramValue = paramMsg.empty() ? "" : paramMsg.c_str();
+	emit signalInternalPluginMessage( pluginType, onlineId, msgType, paramValue );
+}
+
+//============================================================================
+void AppCommon::slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue )
+{
+	toGuiFileXferClientsLock();
+	for( auto & client : m_ToGuiActivityClientList )
+	{
+		if( client.m_Callback )
+		{
+			client.m_Callback->toGuiPluginMsg( pluginType, onlineId, msgType, paramValue );
+		}
+	}
+
+	toGuiFileXferClientsUnlock();
+}
+
+//============================================================================
 /// Send Network available status to GUI for display
 void AppCommon::toGuiNetAvailableStatus( ENetAvailStatus netAvailStatus )
 {
@@ -1029,23 +1030,6 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 	}
 
 	emit signalNetworkStateChanged( eNetworkState );
-	/*
-    if( IsLogEnabled( eLogNetworkState ) )
-    {
-        const char * networkState = DescribeNetworkState( eNetworkState );
-        std::string formatedMsg;
-        if( stateMsg )
-        {
-            StdStringFormat( formatedMsg, "#Network %s %s", networkState, stateMsg );
-        }
-        else
-        {
-            StdStringFormat( formatedMsg, "#Network %s\n", networkState );
-        }
-
-        emit signalStatusMsg( formatedMsg.c_str() );
-    }
-	*/
 }
 
 //============================================================================
@@ -1498,7 +1482,7 @@ bool AppCommon::toGuiSetGameValueVar(			EPluginType	ePluginType,
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSetGameValueVar: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiSetGameValueVar: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
@@ -1524,7 +1508,7 @@ bool AppCommon::toGuiSetGameActionVar(	EPluginType	ePluginType,
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSetGameActionVar: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiSetGameActionVar: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
@@ -1560,7 +1544,7 @@ void AppCommon::toGuiAssetAdded( AssetBaseInfo * assetInfo )
 	}
 
 	if( IsLogEnabled( eLogAssets ) )
-		LogMsg( LOG_INFO, "toGuiAssetAdded: toGuiActivityClientsLock\n" );
+		LogMsg( LOG_INFO, "toGuiAssetAdded: toGuiActivityClientsLock" );
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
 	toGuiActivityClientsLock();
@@ -1572,7 +1556,7 @@ void AppCommon::toGuiAssetAdded( AssetBaseInfo * assetInfo )
 	}
 
 	if( IsLogEnabled( eLogAssets ) )
-		LogMsg( LOG_INFO, "toGuiAssetAdded toGuiActivityClientsUnlock\n");
+		LogMsg( LOG_INFO, "toGuiAssetAdded toGuiActivityClientsUnlock");
 
 	toGuiActivityClientsUnlock();
 
@@ -1589,7 +1573,7 @@ void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo * assetInfo )
 
 	//emit signalSessionHistory( assetInfo );
 	//#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetSessionHistory: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiAssetSessionHistory: toGuiActivityClientsLock" );
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
 	toGuiActivityClientsLock();
@@ -1601,7 +1585,7 @@ void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo * assetInfo )
 	}
 
 	//#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetSessionHistory toGuiActivityClientsUnlock\n");
+	LogMsg( LOG_INFO, "toGuiAssetSessionHistory toGuiActivityClientsUnlock");
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
 	toGuiActivityClientsUnlock();
@@ -1624,7 +1608,7 @@ void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int
     }
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock\n" );
+    LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
     toGuiActivityClientsLock();
     std::vector<ToGuiActivityClient>::iterator iter;
@@ -1635,7 +1619,7 @@ void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int
     }
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock\n" );
+    LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
     toGuiActivityClientsUnlock();
 }
@@ -1651,7 +1635,7 @@ void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID&
     VxGUID idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
     emit signalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiMultiSessionAction: toGuiActivityClientsLock\n" );
+    LogMsg( LOG_INFO, "toGuiMultiSessionAction: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
     toGuiActivityClientsLock();
     std::vector<ToGuiActivityClient>::iterator iter;
@@ -1681,7 +1665,7 @@ void AppCommon::toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int 
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
@@ -1692,7 +1676,7 @@ void AppCommon::toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int 
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock\n");
+	LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiActivityClientsUnlock();
 }
@@ -1706,7 +1690,7 @@ void AppCommon::toGuiBlobAdded( BlobInfo * assetInfo )
     }
 
     if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiBlobAdded: toGuiActivityClientsLock\n" );
+        LogMsg( LOG_INFO, "toGuiBlobAdded: toGuiActivityClientsLock" );
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsLock();
@@ -1718,7 +1702,7 @@ void AppCommon::toGuiBlobAdded( BlobInfo * assetInfo )
     }
 
     if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiBlobAdded toGuiActivityClientsUnlock\n" );
+        LogMsg( LOG_INFO, "toGuiBlobAdded toGuiActivityClientsUnlock" );
 
     toGuiActivityClientsUnlock();
 
@@ -1735,7 +1719,7 @@ void AppCommon::toGuiBlobSessionHistory( BlobInfo * assetInfo )
 
     //emit signalSessionHistory( assetInfo );
     //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiBlobSessionHistory: toGuiActivityClientsLock\n" );
+    LogMsg( LOG_INFO, "toGuiBlobSessionHistory: toGuiActivityClientsLock" );
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsLock();
@@ -1747,7 +1731,7 @@ void AppCommon::toGuiBlobSessionHistory( BlobInfo * assetInfo )
     }
 
     //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiBlobSessionHistory toGuiActivityClientsUnlock\n" );
+    LogMsg( LOG_INFO, "toGuiBlobSessionHistory toGuiActivityClientsUnlock" );
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsUnlock();
@@ -1821,11 +1805,11 @@ void AppCommon::toGuiActivityClientsLock( void )
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() start\n");
+	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() start");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	m_ToGuiActivityClientMutex.lock();
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() done\n");
+	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() done");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 }
 
@@ -1833,7 +1817,7 @@ void AppCommon::toGuiActivityClientsLock( void )
 void AppCommon::toGuiActivityClientsUnlock( void )
 {
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.unlock()\n");
+	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.unlock()");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	m_ToGuiActivityClientMutex.unlock();
 }
@@ -1857,7 +1841,7 @@ static bool actCallbackShutdownComplete = false;
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "wantToGuiActivityCallbacks: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "wantToGuiActivityCallbacks: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiActivityClientsLock();
 
@@ -1870,7 +1854,7 @@ static bool actCallbackShutdownComplete = false;
 			if( ( client.m_Callback == callback )
 				&& ( client.m_UserData == userData ) )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New ToGuiActivityClient because already in list\n" );
+				LogMsg( LOG_INFO, "WARNING. Ignoring New ToGuiActivityClient because already in list" );
 				toGuiActivityClientsUnlock();
 				return;
 			}
@@ -1895,7 +1879,7 @@ static bool actCallbackShutdownComplete = false;
 		}
 	}
 
-	LogMsg( LOG_INFO, "WARNING. ToGuiActivityClient remove not found in list\n" );
+	LogMsg( LOG_INFO, "WARNING. ToGuiActivityClient remove not found in list" );
 	toGuiActivityClientsUnlock();
 	return;
 }
@@ -1931,11 +1915,11 @@ void AppCommon::toGuiFileXferClientsLock( void )
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.lock() start\n");
+	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.lock() start");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	m_ToGuiFileXferClientMutex.lock();
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.lock() done\n");
+	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.lock() done");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 }
 
@@ -1943,7 +1927,7 @@ void AppCommon::toGuiFileXferClientsLock( void )
 void AppCommon::toGuiFileXferClientsUnlock( void )
 {
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.unlock()\n");
+	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.unlock()");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	m_ToGuiFileXferClientMutex.unlock();
 }
@@ -1958,7 +1942,7 @@ void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface *	callback,
 		return;
 	}
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "wantToGuiFileXferCallbacks: toGuiFileXferClientsLock\n" );
+	LogMsg( LOG_INFO, "wantToGuiFileXferCallbacks: toGuiFileXferClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiFileXferClientsLock();
 
@@ -1971,7 +1955,7 @@ void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface *	callback,
 			if( ( client.m_Callback == callback )
 				&& ( client.m_UserData == userData ) )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New m_ToGuiActivityClient because already in list\n" );
+				LogMsg( LOG_INFO, "WARNING. Ignoring New m_ToGuiActivityClient because already in list" );
 				toGuiFileXferClientsUnlock();
 				return;
 			}
@@ -1996,7 +1980,7 @@ void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface *	callback,
 		}
 	}
 
-	LogMsg( LOG_INFO, "WARNING. ToGuiFileXferClient remove not found in list\n" );
+	LogMsg( LOG_INFO, "WARNING. ToGuiFileXferClient remove not found in list" );
 	toGuiFileXferClientsUnlock();
 	return;
 }
@@ -2044,7 +2028,7 @@ static bool actCallbackShutdownComplete = false;
 			ToGuiHardwareCtrlClient& client = *iter;
 			if( client.m_Callback == callback )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiHardwareCtrlCallbacks because already in list\n" );
+				LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiHardwareCtrlCallbacks because already in list" );
 				toGuiHardwareCtrlUnlock();
 				return;
 			}
@@ -2067,7 +2051,7 @@ static bool actCallbackShutdownComplete = false;
 		}
 	}
 
-	LogMsg( LOG_INFO, "WARNING. ToGuiHardwareCtrlClient remove not found in list\n" );
+	LogMsg( LOG_INFO, "WARNING. ToGuiHardwareCtrlClient remove not found in list" );
 	toGuiHardwareCtrlUnlock();
 	return;
 }
@@ -2280,5 +2264,7 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<GroupieId>( "GroupieId" );
 	qRegisterMetaType<ConnectId>( "ConnectId" );
 	qRegisterMetaType<EWebPageType>( "EWebPageType" );
+	qRegisterMetaType<EPluginMsgType>( "EPluginMsgType" );
+	
 }
 
