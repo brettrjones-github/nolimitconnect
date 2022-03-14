@@ -958,6 +958,12 @@
     <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp">
       <Filter>Source Files\WebPageMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesServer.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -2070,6 +2076,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.h">
       <Filter>Source Files\WebPageMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesServer.h">
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

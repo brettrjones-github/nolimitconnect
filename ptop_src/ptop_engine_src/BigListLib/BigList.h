@@ -24,21 +24,16 @@
 #include <vector>
 
 // how many to keep in database
-#ifdef TARGET_OS_ANDROID
-	#define MAX_FRIENDS_IN_DB		500
-	#define MAX_GUESTS_IN_DB		500
-	#define MAX_ANONYMOUS_IN_DB		500
-	#define MAX_IGNORES_IN_DB		500
-#else
-	#define MAX_FRIENDS_IN_DB		5000
-	#define MAX_GUESTS_IN_DB		5000
-	#define MAX_ANONYMOUS_IN_DB		5000
-	#define MAX_IGNORES_IN_DB		5000
-#endif // TARGET_OS_ANDROID
+#define MAX_FRIENDS_IN_DB		5000
+#define MAX_GUESTS_IN_DB		5000
+#define MAX_ANONYMOUS_IN_DB		5000
+#define MAX_IGNORES_IN_DB		5000
+
 #define MAX_BIGLIST_ITEMS		(MAX_FRIENDS_IN_DB + MAX_GUESTS_IN_DB + MAX_ANONYMOUS_IN_DB + MAX_IGNORES_IN_DB )
 
 class BigListInfo;
 class P2PEngine;
+class VxNetIdent;
 
 class BigList
 {
@@ -59,13 +54,12 @@ public:
 		BigList&		m_BigList;
 	};
 
-
-	//Note assume caller has already done a mutex lock
-
 	//! find contact
-    BigListInfo *				findBigListInfo( const VxGUID& oOnlineId, bool isAlreadyLocked = false );					// id of contact to look for
+	VxNetIdent*					findNetIdent( const VxGUID& oOnlineId, bool isAlreadyLocked = false );			// id of contact to look for
 	//! find contact
-	BigListInfo *				findBigListInfo( const char * pUserName, bool isAlreadyLocked = false );				// contact to look for
+    BigListInfo *				findBigListInfo( const VxGUID& oOnlineId, bool isAlreadyLocked = false );		// id of contact to look for
+	//! find contact
+	BigListInfo *				findBigListInfo( const char * pUserName, bool isAlreadyLocked = false );		// contact to look for
 	//! update which list person is in
 	void						updateVectorList( EFriendState oldFriendship, BigListInfo * poInfo );
 

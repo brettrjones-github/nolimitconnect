@@ -46,6 +46,11 @@ bool ConnectIdListMgr::getConnections( HostedId& hostId, std::set<ConnectId>& re
 //============================================================================
 bool ConnectIdListMgr::isOnline( VxGUID& onlineId )
 {
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        return true;
+    }
+
     bool isOnlined = false;
     lockList();
     for( auto& connectId : m_ConnectIdList )
@@ -59,6 +64,30 @@ bool ConnectIdListMgr::isOnline( VxGUID& onlineId )
 
     unlockList();
     return isOnlined;
+}
+
+//============================================================================
+bool ConnectIdListMgr::isHosted( VxGUID& onlineId )
+{
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        return true;
+    }
+
+    bool isHosted = false;
+    lockList();
+    for( auto& connectId : m_ConnectIdList )
+    {
+        ConnectId& connectId = const_cast< ConnectId& >( connectId );
+        if( connectId.getGroupieOnlineId() == onlineId && IsHostARelayForUser( connectId.getHostType() ) )
+        {
+            isHosted = true;
+            break;
+        }
+    }
+
+    unlockList();
+    return isHosted;
 }
 
 //============================================================================
@@ -386,6 +415,11 @@ VxSktBase* ConnectIdListMgr::findSktBase( VxGUID& connectId )
 //============================================================================
 VxSktBase* ConnectIdListMgr::findAnyOnlineConnection( VxGUID& onlineId )
 {
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        return m_Engine.getSktLoopback();
+    }
+
     std::set<VxGUID> sktConnectIdList;
     lockList();
     for( auto& connectId : m_ConnectIdList )
@@ -409,6 +443,47 @@ VxSktBase* ConnectIdListMgr::findAnyOnlineConnection( VxGUID& onlineId )
     }
 
     return sktBase;
+}
+
+
+//============================================================================
+VxSktBase* ConnectIdListMgr::findBestOnlineConnection( VxGUID& onlineId )
+{
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        return m_Engine.getSktLoopback();
+    }
+
+    std::vector<ConnectId> connectIdList;
+    lockList();
+    for( auto& connectId : m_ConnectIdList )
+    {
+        if( const_cast< ConnectId& >( connectId ).getGroupieId().getHostedOnlineId() == onlineId )
+        {
+            connectIdList.push_back( connectId );
+        }
+    }
+
+    unlockList();
+
+    VxGUID sktConnectId;
+    // first check for direct connection
+    GroupieId directGroupieId( onlineId, onlineId, eHostTypePeerUserDirect );
+    for( auto& connectId : connectIdList )
+    {
+        if( connectId.getGroupieId() == directGroupieId )
+        {
+            sktConnectId = connectId.getSocketId();
+            break;
+        }
+    }
+
+    if( sktConnectId.isVxGUIDValid() )
+    {
+        return findSktBase( sktConnectId );
+    }
+
+    return findAnyOnlineConnection( onlineId );
 }
 
 //============================================================================

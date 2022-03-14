@@ -710,7 +710,9 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXferPktHandlers.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.cpp" />
@@ -1081,7 +1083,9 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.h" />

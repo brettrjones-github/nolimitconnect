@@ -967,7 +967,7 @@ void AppCommon::toGuiUserMessage( const char * userMsg, ... )
 
 //============================================================================
 // NOTE: toGuiUserMessage should be called from in gui on gui thread only
-void AppCommon::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
+void AppCommon::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
 {
 	if( VxIsAppShuttingDown() )
 	{

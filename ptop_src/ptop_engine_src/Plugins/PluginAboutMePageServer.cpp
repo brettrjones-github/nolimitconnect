@@ -16,12 +16,12 @@
 #include "PluginMgr.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
-#include <PktLib/PktsStoryBoard.h>
+#include <PktLib/PktsFileInfo.h>
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
 PluginAboutMePageServer::PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
-: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMePageFilesServer.db3")
+: PluginBaseFilesServer( engine, pluginMgr, myIdent, pluginType, "AboutMePageFilesServer.db3")
 {
 	setPluginType( ePluginTypeAboutMePageServer );
 }

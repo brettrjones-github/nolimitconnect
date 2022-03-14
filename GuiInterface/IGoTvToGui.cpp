@@ -22,7 +22,7 @@ void IGoTv::toGuiStatusMessage( const char * statusMsg )
 }
 
 //============================================================================
-void IGoTv::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... )
+void IGoTv::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... )
 {
     std::string paramValue{ "" };
     if( paramMsg )
@@ -44,13 +44,13 @@ void IGoTv::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPlugi
         }
     }
 
-    getAppCommon().toGuiPluginMessage( pluginType, onlineId, msgType, paramValue );
+    getAppCommon().toGuiPluginMsg( pluginType, onlineId, msgType, paramValue );
 }
 
 //============================================================================
-void IGoTv::toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
+void IGoTv::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
 {
-    getAppCommon().toGuiPluginMessage( pluginType, onlineId, msgType, paramMsg );
+    getAppCommon().toGuiPluginMsg( pluginType, onlineId, msgType, paramMsg );
 }
 
 //============================================================================

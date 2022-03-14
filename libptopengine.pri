@@ -285,7 +285,9 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFiles.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h \
@@ -603,7 +605,9 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFiles.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXferPktHandlers.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.cpp \

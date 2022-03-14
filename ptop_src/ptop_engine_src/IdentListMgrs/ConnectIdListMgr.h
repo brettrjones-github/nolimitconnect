@@ -33,6 +33,7 @@ public:
     virtual ~ConnectIdListMgr() = default;
 
     bool                        isOnline( VxGUID& onlineId );
+    bool                        isHosted( VxGUID& onlineId );
     bool                        isOnline( GroupieId& groupieId );
 
     void                        userJoinedHost( VxGUID& sktConnectId, GroupieId& groupieId );
@@ -45,6 +46,7 @@ public:
     virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
     VxSktBase*                  findSktBase( VxGUID& connectId );
     VxSktBase*                  findAnyOnlineConnection( VxGUID& onlineId );
+    VxSktBase*                  findBestOnlineConnection( VxGUID& onlineId );
 
     void                        addConnection( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        removeConnection( VxGUID& sktConnectId, GroupieId& groupieId );

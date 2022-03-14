@@ -86,6 +86,43 @@ BigListInfo * BigList::findBigListInfo( const VxGUID& oOnlineId, bool isAlreadyL
 }
 
 //============================================================================
+//! find contact
+VxNetIdent* BigList::findNetIdent( const VxGUID& onlineId, bool isAlreadyLocked )			// id of contact to look for
+{
+	if( onlineId.isVxGUIDValid() )
+	{
+		if( onlineId == GetPtoPEngine().getMyOnlineId() )
+		{
+			return GetPtoPEngine().getMyNetIdent();
+		}
+
+		if( false == isAlreadyLocked )
+		{
+			bigListLock();
+		}
+
+		BigListIter oMapIter = m_BigList.find( onlineId );
+		if( oMapIter != m_BigList.end() )
+		{
+			BigListInfo* bigListInfo = oMapIter->second;
+			if( false == isAlreadyLocked )
+			{
+				bigListUnlock();
+			}
+
+			return bigListInfo->getVxNetIdent();
+		}
+
+		if( false == isAlreadyLocked )
+		{
+			bigListUnlock();
+		}
+	}
+
+	return NULL;
+}
+
+//============================================================================
 //! find contact by name
 BigListInfo * BigList::findBigListInfo( const char * pUserName, bool isAlreadyLocked )				// contact to look for
 {

@@ -27,6 +27,8 @@ class IToGui;
 class PluginBase;
 class P2PEngine;
 class PktFileListReply;
+class PktFileInfoSearchReply;
+class SearchParams;
 class SharedFilesMgr;
 class VxSha1Hash;
 class VxFileShredder;
@@ -36,6 +38,8 @@ class FileInfoMgr : public Sha1GeneratorCallback
 public:
 	FileInfoMgr( P2PEngine& engine, PluginBase& plugin, std::string fileInfoDbName );
 	virtual ~FileInfoMgr();
+
+	bool						getIsInitialized( void )			{ return m_FilesInitialized; }
 
 	void						fileLibraryShutdown( void );
 
@@ -105,6 +109,8 @@ public:
 
 	// virtual void				fromGuiUserLoggedOn( void ) override;
 	virtual void				onAfterUserLogOnThreaded( void );
+
+	ECommErr					searchRequest( SearchParams& searchParams, PktFileInfoSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 protected:
 	void						checkForInitializeCompleted( void );

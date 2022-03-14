@@ -46,8 +46,8 @@ public:
 	virtual void				toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) = 0;
 	/// Send status bar message to GUI
 	virtual void				toGuiStatusMessage( const char* errMsg ) = 0;
-	virtual void				toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... ) {};
-	virtual void				toGuiPluginMessage( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg ) = 0;
+	virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... ) {};
+	virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg ) = 0;
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState ) = 0;
 

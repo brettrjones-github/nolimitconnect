@@ -67,6 +67,9 @@ public:
     void						setHostOnlineId( VxGUID& guid ) { m_HostOnlineId = guid; }
     VxGUID&                     getHostOnlineId( void )         { return m_HostOnlineId; }
 
+    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    EPluginAccess               getAccessState( void )          { return ( EPluginAccess )m_AccessState; }
+
     void                        setCommError( ECommErr commError ) { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const { return ( ECommErr )m_CommError; }
 
@@ -81,7 +84,8 @@ private:
     VxGUID                      m_SessionId;            // 16 bytes
     uint8_t					    m_HostType{ 0 };        // 1 byte
     uint8_t					    m_CommError{ 0 };       // 1 byte
-    uint16_t					m_Res1{ 0 };	        // 2 bytes
+    uint8_t					    m_AccessState{ 0 };     // 1 byte
+    uint8_t					    m_Res1{ 0 };	        // 1 bytes
     VxGUID                      m_HostOnlineId;  // 16 bytes
     // 60 bytes to here
     PktBlobEntry                m_BlobEntry;	//size 14352
@@ -135,13 +139,17 @@ public:
     void						setSessionId( VxGUID& guid )        { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )                { return m_SessionId; }
 
+    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    EPluginAccess               getAccessState( void ) { return     ( EPluginAccess )m_AccessState; }
+
     void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
 protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_CommError{ 0 };
-    uint16_t                    m_Res1{ 0 };
+    uint8_t					    m_AccessState{ 0 };     // 1 byte
+    uint8_t					    m_Res1{ 0 };	        // 1 bytes
     uint32_t                    m_Res2{ 0 };
     VxGUID                      m_SessionId;
     VxGUID                      m_HostOnlineId;  // 16 bytes
@@ -167,7 +175,7 @@ public:
     bool						setSearchText( std::string& searchText );
     bool						getSearchText( std::string& searchText );
 
-    PktBlobEntry&               getBlobEntry( void ) { return m_BlobEntry; }
+    PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
     void                        calcPktLen( void );
 
@@ -196,17 +204,20 @@ public:
     void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
 
+    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    EPluginAccess               getAccessState( void )                  { return     ( EPluginAccess )m_AccessState; }
+
     void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
 
     bool                        addFileInfoInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
     void						setFileInfoCountThisPkt( uint16_t inviteCnt ) { m_FileInfoThisPktCount = inviteCnt; }
-    uint16_t&                   getFileInfoCountThisPkt( void )           { return m_FileInfoThisPktCount; }
-    void                        incrementFileInfoCount( void )            { m_FileInfoThisPktCount++; }
+    uint16_t&                   getFileInfoCountThisPkt( void )         { return m_FileInfoThisPktCount; }
+    void                        incrementFileInfoCount( void )          { m_FileInfoThisPktCount++; }
 
-    void						setMoreFileInfosExist( bool moreExist)    { m_MoreFileInfosExist = moreExist; }
-    bool                        getMoreFileInfosExist( void )             { return m_MoreFileInfosExist; }
+    void						setMoreFileInfosExist( bool moreExist)  { m_MoreFileInfosExist = moreExist; }
+    bool                        getMoreFileInfosExist( void )           { return m_MoreFileInfosExist; }
 
     void						setNextSearchOnlineId( VxGUID& guid )   { m_NextSearchOnlineId = guid; }
     VxGUID&                     getNextSearchOnlineId( void )           { return m_NextSearchOnlineId; }
@@ -219,7 +230,7 @@ protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_MoreFileInfosExist{ 0 };
     uint8_t                     m_CommError{ 0 };
-    uint8_t                     m_Res1{ 0 };
+    uint8_t                     m_AccessState{ 0 };
     uint16_t                    m_FileInfoThisPktCount{ 0 };
     uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
@@ -267,6 +278,9 @@ public:
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
 
+    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    EPluginAccess               getAccessState( void )              { return     ( EPluginAccess )m_AccessState; }
+
     void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
@@ -288,7 +302,7 @@ protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_MoreFileInfosExist{ 0 };
     uint8_t                     m_CommError{ 0 };
-    uint8_t                     m_Res1{ 0 };
+    uint8_t                     m_AccessState{ 0 };
     uint16_t                    m_FileInfoThisPktCount{ 0 };
     uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;

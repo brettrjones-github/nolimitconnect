@@ -14,17 +14,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseFiles.h"
+#include "PluginBaseFilesClient.h"
 
-class PluginAboutMePageClient : public PluginBaseFiles
+class PluginAboutMePageClient : public PluginBaseFilesClient
 {
 public:
     PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginAboutMePageClient() = default;
 
+	bool						getIsInitialized( void )			{ return m_AboutMePageReady; }
+
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
 protected:
+
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
 	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;

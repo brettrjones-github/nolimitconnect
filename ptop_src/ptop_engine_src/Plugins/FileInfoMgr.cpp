@@ -23,6 +23,7 @@
 
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>
+#include <PktLib/PktsFileInfo.h>
 
 #include <CoreLib/Sha1GeneratorMgr.h>
 #include <CoreLib/VxFileUtil.h>
@@ -558,6 +559,7 @@ void FileInfoMgr::updateFileTypes( void )
 	}
 }
 
+//============================================================================
 void FileInfoMgr::checkForInitializeCompleted( void )
 {
 	if( !m_FilesInitialized && m_FileInfoNeedHashAndSaveList.empty() )
@@ -571,4 +573,43 @@ void FileInfoMgr::checkForInitializeCompleted( void )
 
 		m_Plugin.onLoadedFilesReady( LastUpdateTime, totalByteCnt, FileTypes );
 	}
+}
+
+//============================================================================
+ECommErr FileInfoMgr::searchRequest( SearchParams& searchParams, PktFileInfoSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	ECommErr searchErr{ eCommErrNone };
+	if( eCommErrNone == searchErr )
+	{
+		/*
+		unsigned int matchCnt = 0;
+		PluginIdList toRemoveList;
+		PluginIdList matchList;
+		uint64_t timeNow = GetGmtTimeMs();
+		searchReply.setIsGuidPluginTypePairs( true );
+
+		m_SearchMutex.lock();
+		std::map<PluginId, HostSearchEntry>& searchMap = getHostAnnList( hostType );
+		for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+		{
+			if( iter->second.announceTimeExpired( timeNow ) )
+			{
+				toRemoveList.addPluginId( iter->first );
+			}
+			else if( iter->second.searchHostedMatch( searchParams, searchStr ) )
+			{
+				const PluginId& pluginId = iter->first;
+				searchReply.addPluginId( pluginId );
+				matchCnt++;
+				LogModule( eLogHostConnect, LOG_DEBUG, "HostServerSearchMgr match %d plugin %s ", matchCnt, pluginId.describePluginId().c_str() );
+			}
+		}
+
+		removeEntries( searchMap, toRemoveList );
+		m_SearchMutex.unlock();
+		*/
+		searchReply.calcPktLen();
+	}
+
+	return searchErr;
 }

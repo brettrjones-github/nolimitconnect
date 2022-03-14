@@ -102,6 +102,8 @@ public:
 	virtual	EAppState			getPluginState( void );
 	virtual	void				setPluginState( EAppState ePluginState )				{ m_ePluginState = ePluginState;};
 
+	EPluginAccess				getPluginAccessState( VxNetIdent* netIdent );
+
     virtual ThumbMgr&			getThumbMgr( void )									    { return m_ThumbMgr; }
     virtual ThumbXferMgr&       getThumbXferMgr( void )							        { return m_ThumbXferMgr; }
 

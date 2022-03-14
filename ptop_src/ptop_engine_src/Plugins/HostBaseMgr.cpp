@@ -79,7 +79,7 @@ EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent * netIdent )
         {
             EFriendState friendState = netIdent->getMyFriendshipToHim();
             // everybody gets at least guest permission
-            if( friendState < eFriendStateGuest )
+            if( m_Engine.getConnectIdListMgr().isHosted( netIdent->getMyOnlineId() ) && friendState == eFriendStateAnonymous )
             {
                 friendState = eFriendStateGuest;
             }

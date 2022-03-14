@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2022 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -25,6 +24,8 @@
 #include <PktLib/PktsFileShare.h>
 #include <PktLib/PktsPluginOffer.h>
 #include <PktLib/VxSearchDefs.h>
+#include <PktLib/PktsFileInfo.h>
+#include <PktLib/SearchParams.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxFileShredder.h>
@@ -427,7 +428,56 @@ void PluginBaseFiles::onPktFileInfoAnnReply( VxSktBase* sktBase, VxPktHdr* pktHd
 //============================================================================
 void PluginBaseFiles::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	//m_Engine.getFileInfoListMgr().onPktFileInfoSearchReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+	LogMsg( LOG_DEBUG, "PluginBaseHostService onPktFileInfoSearchReq" );
+
+	PktFileInfoSearchReq* pktReq = ( PktFileInfoSearchReq* )pktHdr;
+	PktFileInfoSearchReply pktReply;
+	pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
+	pktReply.setHostOnlineId( pktReq->getHostOnlineId() );
+
+	if( pktReq->isValidPkt() )
+	{
+		EPluginAccess pluginAccess = getPluginAccessState( netIdent );
+		pktReply.setAccessState( pluginAccess );
+		if( ePluginAccessOk == pluginAccess )
+		{
+			PktBlobEntry& blobEntry = pktReq->getBlobEntry();
+			blobEntry.resetRead();
+
+			SearchParams searchParams;
+			searchParams.extractFromBlob( blobEntry );
+			pktReply.setHostType( searchParams.getHostType() );
+			pktReply.setSearchSessionId( searchParams.getSearchSessionId() );
+
+			std::string searchText = searchParams.getSearchText();
+			if( !searchParams.getSearchListAll() && searchText.size() < MIN_SEARCH_TEXT_LEN )
+			{
+				LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService search text too short" );
+				pktReply.setCommError( eCommErrSearchTextToShort );
+			}
+			else
+			{
+				ECommErr searchErr = m_FileInfoMgr.searchRequest( searchParams, pktReply, searchText, sktBase, netIdent );
+				pktReply.setCommError( searchErr );
+			}
+		}
+		else
+		{
+			LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService host service not enabled" );
+			pktReply.setCommError( eCommErrPluginNotEnabled );
+		}
+	}
+	else
+	{
+		LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService invalid search packet" );
+		pktReply.setCommError( eCommErrInvalidPkt );
+	}
+
+	if( !txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply, false ) )
+	{
+		LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
+	}
+
 }
 
 //============================================================================

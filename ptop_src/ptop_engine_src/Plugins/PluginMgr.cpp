@@ -570,7 +570,7 @@ void PluginMgr::handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	if( isValidPluginNum( u8PluginNum ) )
 	{
 		PluginBase * plugin = getPlugin( (EPluginType)u8PluginNum );
-		VxNetIdent * netIdent = pktHdr->getSrcOnlineId() == m_Engine.getMyOnlineId() ? m_Engine.getMyNetIdent() : m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+		VxNetIdent * netIdent = m_BigListMgr.findNetIdent( pktHdr->getSrcOnlineId() );
 		if( netIdent && plugin )
 		{
 			plugin->handlePkt( sktBase, pktHdr, netIdent );
