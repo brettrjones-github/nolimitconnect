@@ -39,7 +39,6 @@ bool PluginBaseFilesClient::connectForWebPageDownload( VxGUID& onlineId )
         VxSktBase* sktBase = m_Engine.getConnectIdListMgr().findBestOnlineConnection( onlineId );
         if( sktBase )
         {
-            m_HisIdent = nullptr;
             result = onConnectForWebPageDownload( sktBase, netIdent );
         }
     }

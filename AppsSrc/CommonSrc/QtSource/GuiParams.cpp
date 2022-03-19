@@ -575,7 +575,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         }
         break;
 
-    case ePluginTypeFileXfer:	// file offer plugin
+    case ePluginTypePersonFileXfer:	// file offer plugin
         switch( ePluginAccess )
         {
 
@@ -585,7 +585,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
 
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Send A File Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeFileXfer ) );
+            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypePersonFileXfer ) );
             strAction += QObject::tr(" permission");
             break;
 
@@ -612,7 +612,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         }
         break;
 
-    case ePluginTypeFileServer:	// file share plugin
+    case ePluginTypeFileShareServer:	// file share plugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
@@ -620,7 +620,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Shared Files Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeFileServer ) );
+            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeFileShareServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessInactive:		// no shared files
@@ -963,6 +963,14 @@ QString GuiParams::describePluginMsg( EPluginMsgType pluginMsgType )
         strPluginMsg = QObject::tr( "Canceled" );
         break;
 
+    case ePluginMsgPermissionError:
+        strPluginMsg = QObject::tr( "Permission Error" );
+        break;
+
+    case ePluginMsgLowDiskSpace:
+        strPluginMsg = QObject::tr( "Low Disk Space" );
+        break;
+
     default:
         strPluginMsg = QObject::tr( "Unknown Plugin Message" );
         LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin message type %d", pluginMsgType );
@@ -998,11 +1006,11 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Host Peer user");
         break;
 
-    case ePluginTypeFileXfer:	// file offer plugin
+    case ePluginTypePersonFileXfer:	// file offer plugin
         strPluginType = QObject::tr("Send A File");
         break;
 
-    case ePluginTypeFileServer:	// file share plugin
+    case ePluginTypeFileShareServer:	// file share plugin
         strPluginType = QObject::tr("Shared Files");
         break;
 
@@ -1120,7 +1128,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         }
         break;
 
-    case ePluginTypeFileServer:
+    case ePluginTypeFileShareServer:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Shared Files" ).toUtf8().constData();
@@ -1131,7 +1139,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         }
         break;
 
-    case ePluginTypeFileXfer:
+    case ePluginTypePersonFileXfer:
         strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
         break;
 
@@ -1276,11 +1284,11 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         strPluginOffer = QObject::tr( " View About Me Page " );
         break;
 
-    case ePluginTypeFileXfer:	// file offer plugin
+    case ePluginTypePersonFileXfer:	// file offer plugin
         strPluginOffer = QObject::tr(" Receive A File " );
         break;
 
-    case ePluginTypeFileServer:	// file share plugin
+    case ePluginTypeFileShareServer:	// file share plugin
         strPluginOffer = QObject::tr(" View Shared Files " );
         break;
 

@@ -288,18 +288,18 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend, bool inGroup )
 		addMenuItem( (int)ePluginTypeCamServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeCamServer, ePluginAccess ) ), strAction );
 	}
 
-	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer, m_InGroup ) )
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypePersonFileXfer, m_InGroup ) )
 	{
-		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileXfer, m_InGroup );
-		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileXfer, ePluginAccess );
-		addMenuItem( (int)ePluginTypeFileXfer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileXfer, ePluginAccess ) ), strAction );
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypePersonFileXfer, m_InGroup );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypePersonFileXfer, ePluginAccess );
+		addMenuItem( (int)ePluginTypePersonFileXfer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypePersonFileXfer, ePluginAccess ) ), strAction );
 	}
 
-	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileServer, m_InGroup ) )
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileShareServer, m_InGroup ) )
 	{
-		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileServer, m_InGroup );
-		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileServer, ePluginAccess );
-		addMenuItem( (int)ePluginTypeFileServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileServer, ePluginAccess ) ), strAction );
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileShareServer, m_InGroup );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileShareServer, ePluginAccess );
+		addMenuItem( (int)ePluginTypeFileShareServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileShareServer, ePluginAccess ) ), strAction );
 	}
 
 	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeRelay, m_InGroup ) )
@@ -358,16 +358,16 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 
 		break;
 
-	case ePluginTypeFileServer:
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileServer, m_InGroup ) )
+	case ePluginTypeFileShareServer:
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileShareServer, m_InGroup ) )
 		{
 			m_MyApp.offerToFriendViewSharedFiles( m_SelectedFriend );
 		}
 
 		break;
 
-	case ePluginTypeFileXfer:
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer, m_InGroup ) )
+	case ePluginTypePersonFileXfer:
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypePersonFileXfer, m_InGroup ) )
 		{
 			m_MyApp.offerToFriendSendFile( m_SelectedFriend );
 		}

@@ -23,7 +23,7 @@
 AppletServiceShareFiles::AppletServiceShareFiles( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_FILES, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceShareFiles, ePluginTypeFileServer );
+    setupServiceBaseApplet( eAppletServiceShareFiles, ePluginTypeFileShareServer );
 
     m_MyApp.activityStateChange( this, true );
 }

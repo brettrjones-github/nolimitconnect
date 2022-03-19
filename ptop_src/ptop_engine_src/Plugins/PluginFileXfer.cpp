@@ -27,5 +27,5 @@
 PluginFileXfer::PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PluginBaseFileXfer( engine, pluginMgr, myIdent, pluginType )
 {
-    setPluginType( ePluginTypeFileXfer );
+    setPluginType( ePluginTypePersonFileXfer );
 }

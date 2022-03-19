@@ -15,6 +15,8 @@
 
 #include "PluginAboutMePageClient.h"
 #include "PluginMgr.h"
+
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <PktLib/PktsStoryBoard.h>
@@ -85,12 +87,29 @@ void PluginAboutMePageClient::onAboutMePageReady( bool isReady )
 bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
 	bool result{ false };
-	if( eWebPageTypeAboutMe == webPageType )
+	if( eWebPageTypeAboutMe == webPageType && onlineId.isVxGUIDValid() )
 	{
 		m_HisOnlineId = onlineId;
-		connectForWebPageDownload( onlineId );
-		m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgConnecting, "" );
+		m_DownloadFileFolder = m_RootFileFolder + m_HisOnlineId.toHexString().c_str() + "/";
+		VxFileUtil::makeDirectory( m_DownloadFileFolder.c_str() );
+		if( VxFileUtil::directoryExists( m_DownloadFileFolder.c_str() ) )
+		{
+			int64_t diskFreeSpace = VxFileUtil::getDiskFreeSpace( m_DownloadFileFolder.c_str() );
 
+			if( diskFreeSpace && diskFreeSpace < VxFileUtil::SIZE_1GB )
+			{
+				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgLowDiskSpace, "" );
+			}
+			else
+			{
+				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgConnecting, "" );
+				connectForWebPageDownload( onlineId );
+			}
+		}
+		else
+		{
+			m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgPermissionError, m_DownloadFileFolder.c_str() );
+		}
 	}
 	else
 	{
@@ -106,8 +125,13 @@ bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, Vx
 	bool result{ false };
 	if( eWebPageTypeAboutMe == webPageType )
 	{
-		m_HisOnlineId = onlineId;
-		connectForWebPageDownload( onlineId );
+		lockSearchFileList();
+		for( auto &fileInfo : m_SearchFileInfoList )
+		{
+			m_FileInfoMgr.cancelAndDelete( fileInfo.getAssetId() );
+		}
+
+		unlockSearchFileList();
 		m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgCanceled, "" );
 
 	}

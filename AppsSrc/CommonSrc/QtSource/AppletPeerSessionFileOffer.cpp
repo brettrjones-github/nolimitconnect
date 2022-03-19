@@ -20,9 +20,9 @@
 //============================================================================
 AppletPeerSessionFileOffer::AppletPeerSessionFileOffer(	AppCommon& app, QWidget * parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_SESSION_FILE_OFFER, app, parent )
-, m_ePluginType(ePluginTypeFileXfer)
+, m_ePluginType(ePluginTypePersonFileXfer)
 {
-    setPluginType( ePluginTypeFileXfer );
+    setPluginType( ePluginTypePersonFileXfer );
     setAppletType( eAppletPeerSessionFileOffer );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );

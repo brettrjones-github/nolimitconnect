@@ -25,7 +25,7 @@ AppletSettingsFileXfer::AppletSettingsFileXfer( AppCommon& app, QWidget * parent
 {
 	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsFileXfer );
-	setPluginType( ePluginTypeFileXfer );
+	setPluginType( ePluginTypePersonFileXfer );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

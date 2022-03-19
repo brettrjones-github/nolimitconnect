@@ -697,6 +697,8 @@ enum EPluginMsgType
     ePluginMsgDownloading,
     ePluginMsgDownloadFailed,
     ePluginMsgCanceled,
+    ePluginMsgPermissionError,
+    ePluginMsgLowDiskSpace,
 
     eMaxPPluginMsgType
 };
@@ -710,8 +712,8 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeAdmin			    = 1,	//!< Administration ( intended for updates but not currently used )
     ePluginTypeAboutMePageServer    = 2,	//!< about me web page plugin
     ePluginTypeCamServer            = 3,	//!< Web cam broadcast plugin
-    ePluginTypeFileServer           = 4,	//!< Shared files server
-    ePluginTypeFileXfer             = 5,	//!< Offer/accept send a file person to person
+    ePluginTypeFileShareServer      = 4,	//!< Shared files server
+    ePluginTypePersonFileXfer       = 5,	//!< Offer/accept send a file person to person
     ePluginTypeMessenger            = 6,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
     ePluginTypeStoryboardServer     = 7,	//!< User editable story board web page server
     ePluginTypeTruthOrDare          = 8,	//!< Video Chat Truth Or Dare game  

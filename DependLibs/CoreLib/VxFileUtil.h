@@ -89,6 +89,8 @@ class VxKey;
 class VxFileUtil
 {
 public:
+	static const int64_t		SIZE_1GB = 1000000000;
+
 	static RCODE				getCurrentWorkingDirectory( std::string strRetDir );
 	static RCODE				setCurrentWorkingDirectory( const char * pDir );
 

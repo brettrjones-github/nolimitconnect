@@ -141,6 +141,7 @@ PktFileInfoSearchReq::PktFileInfoSearchReq()
     : VxPktHdr()
 {
     setPktType( PKT_TYPE_FILE_INFO_SEARCH_REQ );
+    getBlobEntry().setValue( "", 1 );
     calcPktLen();
 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
@@ -181,7 +182,8 @@ PktFileInfoSearchReply::PktFileInfoSearchReply()
 {
     setPktType( PKT_TYPE_FILE_INFO_SEARCH_REPLY );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktFileInfoSearchReply ) ) );
-    // LogMsg( LOG_DEBUG, "PktFileInfoReq size %d %d", sizeof( PktFileInfoReq ), (getPktLength() & 0x0f) ); 
+    getBlobEntry().setValue( "", 1 );
+    calcPktLen();
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
@@ -244,6 +246,8 @@ PktFileInfoMoreReq::PktFileInfoMoreReq()
 {
     setPktType( PKT_TYPE_FILE_INFO_MORE_REQ );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktFileInfoMoreReq ) ) );
+    getBlobEntry().setValue( "", 1 );
+    calcPktLen();
 
     vx_assert( 0 == (getPktLength() & 0x0f) );
 }
@@ -287,6 +291,8 @@ PktFileInfoMoreReply::PktFileInfoMoreReply()
 {
     setPktType( PKT_TYPE_FILE_INFO_MORE_REPLY );
     setPktLength( sizeof( PktFileInfoMoreReply ) );
+    getBlobEntry().setValue( "", 1 );
+    calcPktLen();
 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }

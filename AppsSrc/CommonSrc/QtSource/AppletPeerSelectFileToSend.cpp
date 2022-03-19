@@ -36,13 +36,13 @@ AppletPeerSelectFileToSend::AppletPeerSelectFileToSend(	AppCommon&	app, QWidget 
 : AppletPeerBase( OBJNAME_ACTIVITY_SELECT_FILE_TO_SEND, app, parent )
 {
     /*
-    , m_ePluginType( ePluginTypeFileXfer )
+    , m_ePluginType( ePluginTypePersonFileXfer )
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Offer File" ) );
 	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
     */
 
-    setPluginType( ePluginTypeFileXfer );
+    setPluginType( ePluginTypePersonFileXfer );
     setAppletType( eAppletPeerSelectFileToSend );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );

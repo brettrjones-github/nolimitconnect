@@ -127,7 +127,6 @@ protected:
 	virtual void                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) {};
 	virtual void                fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr ) {};
 
-private:
     bool						isFileShared( std::string& fileName );
     virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
     virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;

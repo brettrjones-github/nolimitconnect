@@ -1082,8 +1082,8 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeAboutMePageClient: return "ePluginTypeAboutMePageClient";
     case ePluginTypeAboutMePageServer: return "ePluginTypeAboutMePageServer";
     case ePluginTypeCamServer: return "ePluginTypeCamServer";
-    case ePluginTypeFileServer: return "ePluginTypeFileServer";
-    case ePluginTypeFileXfer: return "ePluginTypeFileXfer";
+    case ePluginTypeFileShareServer: return "ePluginTypeFileShareServer";
+    case ePluginTypePersonFileXfer: return "ePluginTypePersonFileXfer";
     case ePluginTypeMessenger: return "ePluginTypeMessenger";
 
     case ePluginTypeClientChatRoom: return "ePluginTypeClientChatRoom";
@@ -1333,9 +1333,9 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
 
     case ePluginTypeRelay:
     case ePluginTypeNetServices:
-    case ePluginTypeFileServer:
+    case ePluginTypeFileShareServer:
     case ePluginTypeNetworkSearchList:
-    case ePluginTypeFileXfer:
+    case ePluginTypePersonFileXfer:
         return eHostTypeUnknown;
 
     case ePluginTypeInvalid:

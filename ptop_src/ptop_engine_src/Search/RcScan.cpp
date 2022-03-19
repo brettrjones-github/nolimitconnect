@@ -401,7 +401,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent * netIdent )
 	case eScanTypeFileSearch:
 		{
 			if( ( netIdent->getSharedFileTypes() & m_SearchPkt.getSharedFileTypes() ) &&
-				( ePluginAccessOk == netIdent->getMyAccessPermissionFromHim( ePluginTypeFileServer ) ) )
+				( ePluginAccessOk == netIdent->getMyAccessPermissionFromHim( ePluginTypeFileShareServer ) ) )
 			{
 				bIsMatch = true;
 			}

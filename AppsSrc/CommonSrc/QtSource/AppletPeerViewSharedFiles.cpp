@@ -67,7 +67,7 @@ AppletPeerViewSharedFiles::AppletPeerViewSharedFiles( AppCommon& app, QWidget *	
     statusMsg( "Requesting File List " );
 
     QString strTitle( netIdent->getOnlineName() );
-	m_FromGui.fromGuiMakePluginOffer( ePluginTypeFileServer, netIdent->getMyOnlineId(), 0, "View Files", 0, 0, m_LclSessionId );
+	m_FromGui.fromGuiMakePluginOffer( ePluginTypeFileShareServer, netIdent->getMyOnlineId(), 0, "View Files", 0, 0, m_LclSessionId );
     */
 
 	// plugin control
@@ -221,7 +221,7 @@ FileXferWidget * AppletPeerViewSharedFiles::fileToWidget( GuiUser * netIdent, Vx
         ( int )( 62 * GuiParams::getGuiScale() ) ) );
     VxGUID lclSessionId;
     lclSessionId.initializeWithNewVxGUID();
-	GuiFileXferSession * xferSession = new GuiFileXferSession(	ePluginTypeFileServer, 
+	GuiFileXferSession * xferSession = new GuiFileXferSession(	ePluginTypeFileShareServer, 
 																netIdent, 
                                                                 lclSessionId,
                                                                 fileInfo );
@@ -396,7 +396,7 @@ void AppletPeerViewSharedFiles::beginDownload( GuiFileXferSession * xferSession,
 			xferSession->getLclSessionId().initializeWithNewVxGUID();
 		}
 
-		EXferError xferError = (EXferError)m_FromGui.fromGuiPluginControl(	ePluginTypeFileServer, 
+		EXferError xferError = (EXferError)m_FromGui.fromGuiPluginControl(	ePluginTypeFileShareServer, 
 																			m_Friend->getMyOnlineId(), 
 																			"DownloadFile", 
 																			xferSession->getFullFileName().toUtf8().constData(),
@@ -564,7 +564,7 @@ void AppletPeerViewSharedFiles::slotDownloadFileSelected( int iMenuId, QWidget *
 				m_SelectedFileInfo->getLclSessionId().initializeWithNewVxGUID();
 			}
 
-			EXferError xferError = (EXferError)m_FromGui.fromGuiPluginControl(	ePluginTypeFileServer, 
+			EXferError xferError = (EXferError)m_FromGui.fromGuiPluginControl(	ePluginTypeFileShareServer, 
 																				m_Friend->getMyOnlineId(), 
 																				"DownloadFile", 
 																				m_SelectedFileInfo->getFullFileName().toUtf8().constData(),

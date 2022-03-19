@@ -104,7 +104,7 @@ void PluginMgr::pluginMgrStartup( void )
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create file xfer plugin" );
-    poPlugin = new PluginFileXfer( m_Engine, *this, &this->m_PktAnn, ePluginTypeFileXfer );
+    poPlugin = new PluginFileXfer( m_Engine, *this, &this->m_PktAnn, ePluginTypePersonFileXfer );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create messenger plugin" );

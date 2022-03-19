@@ -281,6 +281,27 @@ bool FileInfoMgr::addFileToLibrary( VxGUID&			onlineId,
 }
 
 //============================================================================
+bool FileInfoMgr::cancelAndDelete( VxGUID& assetId )
+{
+	bool result{ false };
+
+	lockFileList();
+	auto iter = m_FileInfoList.find( assetId );
+	if( iter != m_FileInfoList.end() )
+	{
+		m_FileInfoXferMgr.fileAboutToBeDeleted( iter->second->getFileName() );
+		m_FileInfoDb.removeFile( iter->second->getFileName() );
+		VxFileUtil::deleteFile( iter->second->getFileName().c_str() );
+		delete iter->second;
+		m_FileInfoList.erase( iter );
+	}
+
+	unlockFileList();
+	updateFileTypes();
+	return result;
+}
+
+//============================================================================
 bool FileInfoMgr::isFileInLibrary( std::string& fileName )
 {
 	bool isInLib = false;

@@ -22,7 +22,7 @@ AppletPeerReplyFileOffer::AppletPeerReplyFileOffer(	AppCommon& app,
 												    QWidget * parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_REPLY_FILE_OFFER, app, parent )
 {
-    setPluginType( ePluginTypeFileXfer );
+    setPluginType( ePluginTypePersonFileXfer );
     setAppletType( eAppletPeerReplyOfferFile );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );

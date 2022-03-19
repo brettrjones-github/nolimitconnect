@@ -22,7 +22,7 @@
 
 //============================================================================
 GuiFileActionSession::GuiFileActionSession()
-: m_ePluginType(ePluginTypeFileServer)
+: m_ePluginType(ePluginTypeFileShareServer)
 , m_Ident(NULL)
 , m_Widget(0)
 , m_IsShared( false )
@@ -85,7 +85,7 @@ GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(	VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
-: m_ePluginType( ePluginTypeFileServer )
+: m_ePluginType( ePluginTypeFileShareServer )
 , m_Ident( 0 )
 , m_LclSessionId()
 , m_FileInfo( fileInfo )

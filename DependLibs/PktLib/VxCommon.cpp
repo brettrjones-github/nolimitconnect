@@ -173,8 +173,8 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 	setPluginPermission( ePluginTypePushToTalk, eFriendStateFriend );
 
     setPluginPermission( ePluginTypeCamServer, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeFileServer, eFriendStateFriend );
-    setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeFileShareServer, eFriendStateFriend );
+    setPluginPermission( ePluginTypePersonFileXfer, eFriendStateFriend );
 
     setPluginPermission( ePluginTypeClientChatRoom, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
     setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
@@ -366,7 +366,7 @@ EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType,
 	EPluginAccess accessState = getPluginAccessState( ePluginType, friendState );
 	if( ePluginAccessOk == accessState )
 	{
-		if( ( ePluginTypeFileServer == ePluginType ) 
+		if( ( ePluginTypeFileShareServer == ePluginType ) 
 			&& ( false == hasSharedFiles() ) )
 		{
 			// no files shared
@@ -448,7 +448,7 @@ EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 	{
 		return ePluginAccessLocked;
 	}
-	if( (ePluginTypeFileServer == ePluginType) && 
+	if( (ePluginTypeFileShareServer == ePluginType) && 
 		(false == hasSharedFiles()) )
 	{
 		// no files shared
@@ -533,9 +533,9 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Host User Avatar Image";
     case ePluginTypeCamServer:	// web cam broadcast plugin
         return "Shared Video Broadcast";
-    case ePluginTypeFileServer:
+    case ePluginTypeFileShareServer:
         return "Shared Files";
-    case ePluginTypeFileXfer:	// file transfer plugin
+    case ePluginTypePersonFileXfer:	// file transfer plugin
         return "Offer A File";
     case ePluginTypeMessenger:
         return "Chat Session";

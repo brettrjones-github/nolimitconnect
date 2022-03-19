@@ -27,6 +27,10 @@ public:
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
+	void						lockSearchFileList( void )		{ m_SearchFilesListMutex.lock(); }
+	void						unlockSearchFileList( void )	{ m_SearchFilesListMutex.unlock(); }
+	std::vector<FileInfo>&		getSearchFileList( void )		{ return m_SearchFileInfoList; }
+
 protected:
 	virtual void                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) override;
 	virtual void                fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr ) override;
@@ -42,9 +46,13 @@ protected:
 	void						onAboutMePageReady( bool isReady );
 
 	std::string					m_RootFileFolder{ "" };
+	std::string					m_DownloadFileFolder{ "" };
 	std::vector<std::pair<VxGUID, std::string>> m_AssetList;
 	bool						m_AboutMePageReady{ false };
 	VxGUID						m_HisOnlineId;
+
+	VxMutex						m_SearchFilesListMutex;
+	std::vector<FileInfo>		m_SearchFileInfoList; // map of assetId, FileInfo
 };
 
 

@@ -112,7 +112,7 @@ public:
 
 protected:
 	//=== vars ===//
-    EPluginType					m_ePluginType{ ePluginTypeFileServer };
+    EPluginType					m_ePluginType{ ePluginTypeFileShareServer };
     GuiUser *				    m_Ident{ nullptr };
 	VxGUID					    m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;

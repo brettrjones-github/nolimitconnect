@@ -24,7 +24,7 @@ ActivityDownloadItemMenu::ActivityDownloadItemMenu(	AppCommon& app,
 													GuiFileXferSession * poSession, 
 													QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_DOWNLOAD_ITEM_MENU, app, parent, eAppletMessengerFrame, false, true )
-, m_ePluginType( ePluginTypeFileServer )
+, m_ePluginType( ePluginTypeFileShareServer )
 , m_Session( poSession )
 {
 	ui.setupUi(this);

@@ -85,7 +85,7 @@ void FileActionMenu::setupMenuItems( void )
 	menuIndex++;
 	if( m_SelectedFriend )
 	{
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer ) )
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypePersonFileXfer ) )
 		{
 			QString menuText = "Send File To ";
 			menuText += m_SelectedFriend->getOnlineName();
@@ -101,7 +101,7 @@ void FileActionMenu::setupMenuItems( void )
 		menuIndex++;
 	}
 
-	if( m_MyApp.getEngine().getMyPktAnnounce().getPluginPermission( ePluginTypeFileServer ) )
+	if( m_MyApp.getEngine().getMyPktAnnounce().getPluginPermission( ePluginTypeFileShareServer ) )
 	{
 		addMenuItem( menuIndex, getMyIcons().getIcon( eMyIconShareFilesCancel ), QObject::tr("File Sharing Is Disabled") );
 		m_MenuList.push_back( FileMenuItemAction(menuIndex, eFileMenuActionNone ) );
@@ -175,9 +175,9 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 			break;
 
 		case eFileMenuActionSendToFriend:
-			if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer ) )
+			if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypePersonFileXfer ) )
 			{
-				if( false == m_FromGui.fromGuiMakePluginOffer(	ePluginTypeFileXfer, 
+				if( false == m_FromGui.fromGuiMakePluginOffer(	ePluginTypePersonFileXfer, 
 																m_SelectedFriend->getMyOnlineId(), 
                                                                 0,
 																"", 

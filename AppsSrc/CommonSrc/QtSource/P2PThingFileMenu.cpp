@@ -85,16 +85,16 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 
 
 		//case 3: //Start/Stop File Share Server
-		//	switch( m_Engine.fromGuiGetPluginServerState( ePluginTypeFileServer ) )
+		//	switch( m_Engine.fromGuiGetPluginServerState( ePluginTypeFileShareServer ) )
 		//	{
 		//	case ePluginServerStateStarted:	
 		//		m_Engine.enableFileShare(false);
-		//		m_Engine.fromGuiStopPluginSession( ePluginTypeFileServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
+		//		m_Engine.fromGuiStopPluginSession( ePluginTypeFileShareServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
 		//		okMessageBox( tr("File Share Server"), tr("File sharing has been stopped") );
 		//		break;
 
 		//	case ePluginServerStateStopped:
-		//		m_Engine.fromGuiStartPluginSession( ePluginTypeFileServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
+		//		m_Engine.fromGuiStartPluginSession( ePluginTypeFileShareServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
 		//		m_Engine.enableFileShare(true);
 		//		okMessageBox( tr("File Share Server"), tr("File sharing has been started") );
 		//		break;
@@ -103,7 +103,7 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 		//		{
 		//			okMessageBox( tr("File Share Server"), tr("File sharing is disabled by permissions") );
 		//			ActivityPermissions * poDlg = new ActivityPermissions( *this, getCentralWidget() );
-		//			poDlg->setPluginType(ePluginTypeFileServer);
+		//			poDlg->setPluginType(ePluginTypeFileShareServer);
 		//			poDlg->exec();
 		//		}
 

@@ -720,7 +720,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 {
 	switch( offer->getPluginType() )
 	{
-	case ePluginTypeFileXfer:
+	case ePluginTypePersonFileXfer:
 		{
 			//ActivitySessionFileOffer * poDlg = new ActivitySessionFileOffer( *this, offer, parent );
 			//poDlg->exec();

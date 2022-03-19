@@ -25,7 +25,7 @@ AppletSettingsShareFiles::AppletSettingsShareFiles( AppCommon& app, QWidget * pa
 {
 	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsShareFiles );
-	setPluginType( ePluginTypeFileServer );
+	setPluginType( ePluginTypeFileShareServer );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

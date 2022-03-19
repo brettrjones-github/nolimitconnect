@@ -58,7 +58,6 @@ public:
 
 	bool						isFileInLibrary( std::string& fileName );
 	bool						isFileInLibrary( VxSha1Hash& fileHashId );
-	bool						isFileInLibrary( VxGUID& onlineId, VxGUID& assetId );
 	bool						isFileInLibrary( VxGUID& assetId );
 
 	bool						addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxGUID& assetId );
@@ -69,6 +68,7 @@ public:
 													uint8_t			fileType,
 													VxSha1Hash&		fileHashId );
 	bool						addFileToLibrary( FileInfo* fileInfo );
+	bool						cancelAndDelete( VxGUID& assetId );
 
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState(	uint8_t *		fileHashId );

@@ -29,10 +29,20 @@ public:
     virtual RCODE				txPacketWithDestId(	VxPktHdr * pktHdr, bool	bDisconnect = false ) override;	
 
     //! return true if transmit encryption key is set
-    virtual bool				isTxEncryptionKeySet( void ) override        { return true; }
+    virtual bool				isTxEncryptionKeySet( void ) override       { return true; }
     //! return true if receive encryption key is set
-    virtual bool				isRxEncryptionKeySet( void ) override        { return true; }
+    virtual bool				isRxEncryptionKeySet( void ) override       { return true; }
+
+    void						lockPktList( void )                         { m_PktListMutex.lock(); }
+    void						unlockPktList( void )                       { m_PktListMutex.unlock(); }
+
+    void                        enableSktLoopbackThread( bool enable );
+    void				        executeSktLoopbackRxThreadFunc( void );
+    void				        checkForMorePacketsAfterThreadExit( void );
 
 protected:
     P2PEngine&                  m_Engine;
+    std::vector<VxPktHdr*>      m_PktList;
+    VxMutex                     m_PktListMutex;
+    VxThread                    m_SktLoopbackThread;
 };

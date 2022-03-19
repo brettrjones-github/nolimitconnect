@@ -890,10 +890,10 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeClientConnectTest:
         return eMyIconSettingsConnectionTest;
 
-    case ePluginTypeFileXfer:
+    case ePluginTypePersonFileXfer:
         return eMyIconSettingsSendFile;
 
-    case ePluginTypeFileServer:
+    case ePluginTypeFileShareServer:
         return eMyIconSettingsShareFiles;
 
     case ePluginTypeHostChatRoom:
@@ -1179,7 +1179,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		}
 		break;
 
-	case ePluginTypeFileXfer:	// file offer plugin
+	case ePluginTypePersonFileXfer:	// file offer plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1199,7 +1199,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		}
 		break;
 
-	case ePluginTypeFileServer:	// file share plugin
+	case ePluginTypeFileShareServer:	// file share plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1417,10 +1417,10 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeStoryboardServer:
         return eMyIconSettingsShareStoryboard;
 
-    case ePluginTypeFileXfer:	// file offer plugin
+    case ePluginTypePersonFileXfer:	// file offer plugin
         return eMyIconSettingsFileXfer;
 
-    case ePluginTypeFileServer:	// file share plugin
+    case ePluginTypeFileShareServer:	// file share plugin
         return eMyIconSettingsShareFiles;
 
     case ePluginTypeVoicePhone:	// VOIP p2p plugin
@@ -1466,9 +1466,9 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 	case	ePluginTypeStoryboardServer:
 	case	ePluginTypeStoryboardClient:
 		return eMyIconProfileDisabled;
-	case 	ePluginTypeFileXfer:	// file share plugin
+	case 	ePluginTypePersonFileXfer:	// file share plugin
 		return eMyIconSendFileDisabled;
-	case 	ePluginTypeFileServer:	// file share plugin
+	case 	ePluginTypeFileShareServer:	// file share plugin
 		return eMyIconShareFilesDisabled;
 	case 	ePluginTypeCamServer:	// web cam broadcast plugin
 		return eMyIconWebCamServerDisabled;
@@ -1498,9 +1498,9 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 	case	ePluginTypeStoryboardServer:
 	case	ePluginTypeStoryboardClient:
 		return eMyIconProfileLocked;
-	case 	ePluginTypeFileXfer:	// file offer plugin
+	case 	ePluginTypePersonFileXfer:	// file offer plugin
 		return eMyIconSendFileNormal;
-	case 	ePluginTypeFileServer:	// file share plugin
+	case 	ePluginTypeFileShareServer:	// file share plugin
 		return eMyIconShareFilesCancel;
 	case 	ePluginTypeCamServer:	// web cam broadcast plugin
 		return eMyIconWebCamServerLocked;
@@ -1528,9 +1528,9 @@ EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
 	case	ePluginTypeStoryboardServer:
 	case	ePluginTypeStoryboardClient:
 		return eMyIconProfileIgnored;
-	case 	ePluginTypeFileXfer:	// file share plugin
+	case 	ePluginTypePersonFileXfer:	// file share plugin
 		return eMyIconSendFileIgnored;
-	case 	ePluginTypeFileServer:	// file share plugin
+	case 	ePluginTypeFileShareServer:	// file share plugin
 		return eMyIconShareFilesCancel;
 	case 	ePluginTypeCamServer:	// web cam broadcast plugin
 		return eMyIconWebCamServerIgnored;

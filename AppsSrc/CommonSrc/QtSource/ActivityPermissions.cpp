@@ -58,36 +58,35 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 	case ePluginTypeRelay:	// proxy plugin
 		ui.PermissionLabel->setText( "Who can use my device as a relay" );
 		break;
-	case ePluginTypeFileXfer:	
+	case ePluginTypePersonFileXfer:	
 		ui.PermissionLabel->setText( "Who can offer to send a file" );
 		break;
-	case ePluginTypeFileServer:	
+	case ePluginTypeFileShareServer:	
 		ui.PermissionLabel->setText( "Who can access shared files" );
 		break;
-	case 	ePluginTypeCamServer:	
+	case ePluginTypeCamServer:	
 		ui.PermissionLabel->setText( "Who can access web cam broadcast" );
 		break;
-	case 	ePluginTypeMessenger:	
+	case ePluginTypeMessenger:	
 		ui.PermissionLabel->setText( "Who can offer chat session" );
 		break;
-	case 	ePluginTypeVoicePhone:	
+	case ePluginTypeVoicePhone:	
 		ui.PermissionLabel->setText( "Who can offer voice phone (VOIP)" );
 		break;
-	case 	ePluginTypePushToTalk:
+	case ePluginTypePushToTalk:
 		ui.PermissionLabel->setText( "Who can push to talk to me (Walkie Talkie)" );
 		break;
-	case 	ePluginTypeVideoPhone:	
+	case ePluginTypeVideoPhone:	
 		ui.PermissionLabel->setText( "Who can offer video chat" );
 		break;
-	case 	ePluginTypeTruthOrDare:	
+	case ePluginTypeTruthOrDare:	
 		ui.PermissionLabel->setText( "Who can offer to play truth or dare" );
 		break;
-
-	case 	ePluginTypeStoryboardServer:	
+	case ePluginTypeStoryboardServer:	
 		ui.PermissionLabel->setText( "Who can view my story board" );
 		break;
 
-	case 	ePluginTypeInvalid:
+	case ePluginTypeInvalid:
     default:
         ui.PermissionLabel->setText( "Unknown" );
         break;

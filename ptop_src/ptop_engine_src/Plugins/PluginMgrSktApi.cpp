@@ -126,24 +126,13 @@ bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
 
     pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );
 
-    if( onlineId == m_Engine.getMyOnlineId() )
+    if( onlineId == m_Engine.getMyOnlineId() && sktBase->isLoopbackSocket() )
     {
         // destination is ourself
         pktHdr->setDestOnlineId( onlineId );
-        handleNonSystemPackets( sktBase, pktHdr );
+        sktBase->txPacketWithDestId( pktHdr );
         return true;
     }
-
-#ifdef DEBUG
-    // loopback flag is only for development convenience and should never be used for production
-    if( pktHdr->getIsLoopback() )
-    {
-        pktHdr->setDestOnlineId( m_Engine.getMyOnlineId() );
-        pktHdr->setSrcOnlineId( onlineId );
-        handleNonSystemPackets( sktBase, pktHdr );
-        return true;
-    }
-#endif // DEBUG
 
     return m_Engine.getPeerMgr().txPacket( sktBase, onlineId, pktHdr, bDisconnectAfterSend );
 }

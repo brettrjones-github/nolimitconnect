@@ -1071,16 +1071,16 @@ void P2PEngine::fromGuiUserModifiedStoryboard( void )
 void P2PEngine::fromGuiCancelDownload( VxGUID& fileInstance )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiCancelDownload" );
-	m_PluginMgr.getPlugin(ePluginTypeFileXfer)->fromGuiCancelDownload( fileInstance );
-	m_PluginMgr.getPlugin(ePluginTypeFileServer)->fromGuiCancelDownload( fileInstance );
+	m_PluginMgr.getPlugin(ePluginTypePersonFileXfer)->fromGuiCancelDownload( fileInstance );
+	m_PluginMgr.getPlugin(ePluginTypeFileShareServer)->fromGuiCancelDownload( fileInstance );
 }
 
 //============================================================================
 void P2PEngine::fromGuiCancelUpload( VxGUID& fileInstance )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiCancelUpload" );
-	m_PluginMgr.getPlugin(ePluginTypeFileXfer)->fromGuiCancelUpload( fileInstance );
-	m_PluginMgr.getPlugin(ePluginTypeFileServer)->fromGuiCancelUpload( fileInstance );
+	m_PluginMgr.getPlugin(ePluginTypePersonFileXfer)->fromGuiCancelUpload( fileInstance );
+	m_PluginMgr.getPlugin(ePluginTypeFileShareServer)->fromGuiCancelUpload( fileInstance );
 }
 
 //============================================================================
@@ -1182,14 +1182,14 @@ void P2PEngine::fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMax
 void P2PEngine::fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetFileShareSettings" );
-	m_PluginMgr.getPlugin(ePluginTypeFileServer)->fromGuiGetFileShareSettings( fileShareSettings );
+	m_PluginMgr.getPlugin(ePluginTypeFileShareServer)->fromGuiGetFileShareSettings( fileShareSettings );
 }
 
 //============================================================================
 void P2PEngine::fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetFileShareSettings" );
-	m_PluginMgr.getPlugin(ePluginTypeFileServer)->fromGuiSetFileShareSettings( fileShareSettings );
+	m_PluginMgr.getPlugin(ePluginTypeFileShareServer)->fromGuiSetFileShareSettings( fileShareSettings );
 }
 
 //============================================================================
