@@ -392,7 +392,7 @@ bool FileInfoMgr::getFileFullName( VxSha1Hash& fileHashId, std::string& retFileF
 		if( fileHashId == iter->second->getFileHashId() )
 		{
 			isShared = true;
-			retFileFullName = iter->second->getLocalFileName();
+			retFileFullName = iter->second->getFullFileName();
 			break;
 		}
 	}
@@ -408,7 +408,7 @@ bool FileInfoMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileH
 	lockFileList();
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileFullName == iter->second->getLocalFileName() )
+		if( fileFullName == iter->second->getFullFileName() )
 		{
 			retFileHashId = iter->second->getFileHashId();
 			foundHash = retFileHashId.isHashValid();
@@ -566,50 +566,194 @@ void FileInfoMgr::checkForInitializeCompleted( void )
 	{	
 		lockFileList();
 		m_FilesInitialized = true;
-		int64_t	LastUpdateTime = m_LastUpdateTime;
+		int64_t	lastUpdateTime = m_LastUpdateTime;
 		int64_t	totalByteCnt = m_s64TotalByteCnt;
 		uint16_t FileTypes = m_u16FileTypes;
 		unlockFileList();
 
-		m_Plugin.onLoadedFilesReady( LastUpdateTime, totalByteCnt, FileTypes );
+		m_Plugin.onLoadedFilesReady( lastUpdateTime, totalByteCnt, FileTypes );
 	}
 }
 
 //============================================================================
-ECommErr FileInfoMgr::searchRequest( SearchParams& searchParams, PktFileInfoSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+FileInfo* FileInfoMgr::findFileAsset( VxGUID& fileAssetId )
 {
-	ECommErr searchErr{ eCommErrNone };
+	auto iter = m_FileInfoList.find( fileAssetId );
+	if( iter != m_FileInfoList.end() )
+	{
+		return iter->second;
+	}
+
+	return nullptr;
+}
+
+//============================================================================
+ECommErr FileInfoMgr::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	ECommErr searchErr = m_FilesInitialized ? eCommErrNone : eCommErrPluginNotEnabled;
 	if( eCommErrNone == searchErr )
 	{
-		/*
-		unsigned int matchCnt = 0;
-		PluginIdList toRemoveList;
-		PluginIdList matchList;
 		uint64_t timeNow = GetGmtTimeMs();
-		searchReply.setIsGuidPluginTypePairs( true );
+		pktReply.setCommError( eCommErrNotFound );
+		lockFileList();
 
-		m_SearchMutex.lock();
-		std::map<PluginId, HostSearchEntry>& searchMap = getHostAnnList( hostType );
-		for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+		if( specificAssetId.isVxGUIDValid() )
 		{
-			if( iter->second.announceTimeExpired( timeNow ) )
+			FileInfo* fileInfo = findFileAsset( specificAssetId );
+			if( fileInfo && fileInfo->isValid() )
 			{
-				toRemoveList.addPluginId( iter->first );
+				if( fileInfo->addToBlob( pktReply.getBlobEntry() ) )
+				{
+					pktReply.setCommError( eCommErrNone );
+				}
 			}
-			else if( iter->second.searchHostedMatch( searchParams, searchStr ) )
+		}
+		else if( searchStr.length() >= FileInfo::FILE_INFO_SHORTEST_SEARCH_TEXT_LEN && searchStr.length() <= FileInfo::FILE_INFO_LONGEST_SEARCH_TEXT_LEN )
+		{
+			pktReply.setCommError( eCommErrSearchNoMatch );
+			bool foundMatch = false;
+			for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter  )
 			{
-				const PluginId& pluginId = iter->first;
-				searchReply.addPluginId( pluginId );
-				matchCnt++;
-				LogModule( eLogHostConnect, LOG_DEBUG, "HostServerSearchMgr match %d plugin %s ", matchCnt, pluginId.describePluginId().c_str() );
+				FileInfo* fileInfo = iter->second;
+				if( fileInfo && fileInfo->isValid() && fileInfo->matchText( searchStr ) )
+				{
+					if( pktReply.getBlobEntry().haveRoom( fileInfo->calcBlobLen() ) )
+					{
+						if( fileInfo->addToBlob( pktReply.getBlobEntry() ) )
+						{
+							pktReply.incrementFileInfoCount();
+							foundMatch = true;
+						}
+					}
+					else
+					{
+						// there are more to match
+						pktReply.setMoreFileInfosExist( true );
+						pktReply.setNextSearchAssetId( fileInfo->getAssetId() );
+						break;
+					}
+				}
+			}
+
+			if( foundMatch )
+			{
+				pktReply.setCommError( eCommErrNone );
+			}
+		}
+		else
+		{
+			if( !searchStr.empty() )
+			{
+				LogMsg( LOG_VERBOSE, "FileInfoMgr::searchRequest Warning search text was to short.. sending all files" );
+			}
+
+			// all files list
+			bool foundMatch = false;
+			for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+			{
+				FileInfo* fileInfo = iter->second;
+				if( fileInfo && fileInfo->isValid() )
+				{
+					if( pktReply.getBlobEntry().haveRoom( fileInfo->calcBlobLen() ) )
+					{
+						if( fileInfo->addToBlob( pktReply.getBlobEntry() ) )
+						{
+							pktReply.incrementFileInfoCount();
+							foundMatch = true;
+						}
+					}
+					else
+					{
+						// there are more to match
+						pktReply.setMoreFileInfosExist( true );
+						pktReply.setNextSearchAssetId( fileInfo->getAssetId() );
+						break;
+					}
+				}
+			}
+
+			if( foundMatch )
+			{
+				pktReply.setCommError( eCommErrNone );
 			}
 		}
 
-		removeEntries( searchMap, toRemoveList );
-		m_SearchMutex.unlock();
-		*/
-		searchReply.calcPktLen();
+		unlockFileList();
 	}
 
-	return searchErr;
+	pktReply.calcPktLen();
+	return pktReply.getCommError();
+}
+
+//============================================================================
+ECommErr FileInfoMgr::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	ECommErr searchErr = m_FilesInitialized ? eCommErrNone : eCommErrPluginNotEnabled;
+	if( eCommErrNone == searchErr && !nextFileAssetId.isVxGUIDValid() )
+	{
+		searchErr = eCommErrInvalidParam;
+	}
+
+	if( eCommErrNone == searchErr )
+	{
+		uint64_t timeNow = GetGmtTimeMs();
+		pktReply.setCommError( eCommErrNotFound );
+		bool foundMatch = false;		
+		lockFileList();
+		for( auto iter = m_FileInfoList.find( nextFileAssetId ); iter != m_FileInfoList.end(); ++iter )
+		{
+			FileInfo* fileInfo = iter->second;
+			if( fileInfo && fileInfo->isValid() )
+			{
+				if( searchStr.length() >= FileInfo::FILE_INFO_SHORTEST_SEARCH_TEXT_LEN && searchStr.length() <= FileInfo::FILE_INFO_LONGEST_SEARCH_TEXT_LEN )
+				{
+					if( fileInfo->matchText( searchStr ) )
+					{
+						if( pktReply.getBlobEntry().haveRoom( fileInfo->calcBlobLen() ) )
+						{
+							if( fileInfo->addToBlob( pktReply.getBlobEntry() ) )
+							{
+								pktReply.incrementFileInfoCount();
+								foundMatch = true;
+							}
+						}
+						else
+						{
+							// there are more to match
+							pktReply.setMoreFileInfosExist( true );
+							pktReply.setNextSearchAssetId( fileInfo->getAssetId() );
+							break;
+						}
+					}
+				}
+				else
+				{
+					if( pktReply.getBlobEntry().haveRoom( fileInfo->calcBlobLen() ) )
+					{
+						if( fileInfo->addToBlob( pktReply.getBlobEntry() ) )
+						{
+							pktReply.incrementFileInfoCount();
+							foundMatch = true;
+						}
+					}
+					else
+					{
+						// there are more to match
+						pktReply.setMoreFileInfosExist( true );
+						pktReply.setNextSearchAssetId( fileInfo->getAssetId() );
+						break;
+					}
+				}
+			}
+		}
+
+		unlockFileList();
+		if( foundMatch )
+		{
+			pktReply.setCommError( eCommErrNone );
+		}
+	}
+
+	pktReply.calcPktLen();
+	return pktReply.getCommError();
 }

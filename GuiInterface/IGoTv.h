@@ -633,6 +633,7 @@ public:
     virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
     virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll );
     virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId );
+    virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId );
   
     //============================================================================
     //=== utilities ===//

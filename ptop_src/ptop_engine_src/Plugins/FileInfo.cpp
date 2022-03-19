@@ -16,6 +16,7 @@
 #include "FileInfo.h"
 
 #include <PktLib/VxSearchDefs.h>
+#include <PktLib/PktBlobEntry.h>
 
 #include <CoreLib/VxFileLists.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
@@ -36,7 +37,7 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName )
 	: m_OnlineId( onlineId )
 	, m_FullFileName( fileName )
 { 
-	determineSharedDir();
+	determineShortName();
 	generateAssetId();
 }
 
@@ -50,7 +51,7 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName, uint64_t file
 	, m_ContainedInDir("")
 	, m_IsDirty( true )
 { 
-	determineSharedDir();
+	determineShortName();
 	generateAssetId();
 }
 
@@ -64,7 +65,7 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName, uint64_t file
 	, m_IsDirty( true )
 	, m_AssetId( assetId )
 {
-	determineSharedDir();
+	determineShortName();
 }
 
 //============================================================================
@@ -77,6 +78,7 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t 
 	, m_AssetId( assetId )
 	, m_FileHash( sha1Hash )
 {
+	determineShortName();
 }
 
 //============================================================================
@@ -84,6 +86,7 @@ FileInfo& FileInfo::operator=( const FileInfo& rhs )
 {	
 	m_OnlineId				= rhs.m_OnlineId;
 	m_FullFileName			= rhs.m_FullFileName;
+	m_ShortFileName			= rhs.m_ShortFileName;
 	m_s64FileLen			= rhs.m_s64FileLen;
 	m_u32Attributes			= rhs.m_u32Attributes;
 	m_u8FileType			= rhs.m_u8FileType;
@@ -98,7 +101,7 @@ FileInfo& FileInfo::operator=( const FileInfo& rhs )
 //============================================================================
 bool FileInfo::isValid( bool includeHashValid )
 {
-	bool valid = !m_FullFileName.empty() && m_s64FileLen && m_u8FileType && m_AssetId.isVxGUIDValid();
+	bool valid = !m_FullFileName.empty() && !m_ShortFileName.empty() && m_s64FileLen && m_u8FileType && m_AssetId.isVxGUIDValid();
 	if( includeHashValid )
 	{
 		valid &= m_FileHash.isHashValid();
@@ -108,19 +111,58 @@ bool FileInfo::isValid( bool includeHashValid )
 }
 
 //============================================================================
-void FileInfo::determineSharedDir( void )
+bool FileInfo::determineShortName( std::string containingDir )
 {
-	if( 0 == m_ContainedInDir.length() )
+	bool result{ false };
+	m_ContainedInDir = containingDir;
+	std::string shortFileName{ "" };
+	if( !m_ContainedInDir.empty()
+		&& ( getFullFileName().length() > m_ContainedInDir.length() ) )
 	{
-		std::string 	strJustFileName;
-		RCODE rc = VxFileUtil::seperatePathAndFile(	getLocalFileName(),					
-			m_ContainedInDir,		
-			strJustFileName );	
-		if( 0 != rc )
+		const char* lclFileName = getFullFileName().c_str();
+		shortFileName = &lclFileName[m_ContainedInDir.length()];
+		result = true;
+	}
+	else
+	{
+		std::string 	filePath;
+		RCODE rc = VxFileUtil::seperatePathAndFile( getFullFileName(),
+			filePath,
+			shortFileName );
+		if( 0 == rc )
 		{
-			LogMsg( LOG_ERROR, "FileInfo::determineSharedDir failed error %d file %s\n", rc, getLocalFileName().c_str() );
+			m_ShortFileName = shortFileName;
+			result = true;
+		}
+		else
+		{
+			shortFileName = "";
+			if( !getFullFileName().empty() )
+			{
+				LogMsg( LOG_ERROR, "FileInfo::determineShortName failed error %d file %s", rc, getFullFileName().c_str() );
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "FileInfo::determineShortName failed error %d empty file name", rc );
+			}			
 		}
 	}
+
+	return result;
+}
+
+//============================================================================
+bool FileInfo::determineFullFileName( std::string containingDir )
+{
+	bool result{ false };
+	m_ContainedInDir = containingDir;
+	if( !m_ContainedInDir.empty() && !getShortFileName().empty() )
+	{
+		m_FullFileName = m_ContainedInDir + getShortFileName();
+		result = true;
+	}
+
+	return result && isValid();
 }
 
 //============================================================================
@@ -130,35 +172,57 @@ bool FileInfo::isDirectory( void )
 }
 
 //============================================================================
-std::string FileInfo::getRemoteFileName( void )
-{
-	std::string rmtFileName("");
-	if( m_ContainedInDir.length() 
-		&& ( getLocalFileName().length() > m_ContainedInDir.length() ) )
-	{
-		const char * lclFileName = getLocalFileName().c_str();
-		rmtFileName = &lclFileName[ m_ContainedInDir.length() ];
-	}
-	else
-	{
-		std::string 	filePath;
-		RCODE rc = VxFileUtil::seperatePathAndFile(	getLocalFileName(),					
-													filePath,		
-													rmtFileName );	
-		if( 0 != rc )
-		{
-			LogMsg( LOG_ERROR, "FileInfo::getRemoteFileName failed error %d file %s", rc, getLocalFileName().c_str() );
-		}
-	}
-
-	return rmtFileName;
-}
-
-//============================================================================
 void FileInfo::generateAssetId( void )
 {
 	if( !m_AssetId.isVxGUIDValid() )
 	{
 		m_AssetId.initializeWithNewVxGUID();
 	}
+}
+
+//============================================================================
+bool FileInfo::matchText( std::string& searchStr )
+{
+	bool result{ false };
+
+
+
+	return result;
+}
+
+//============================================================================
+int FileInfo::calcBlobLen( void )
+{
+	int blobLen{ 0 };
+	blobLen += sizeof( int64_t); // m_s64FileLen
+	blobLen += m_ShortFileName.length() + sizeof(uint32_t); // m_ShortFileName
+	blobLen += sizeof( uint8_t ); // m_u8FileType
+	blobLen += sizeof( int64_t ); // m_FileTime
+	blobLen += sizeof( uint64_t ) * 2; // m_AssetId
+	blobLen += sizeof( uint32_t ) + sizeof( VxSha1Hash ); // m_FileHash
+	return blobLen;
+}
+
+//============================================================================
+bool FileInfo::addToBlob( PktBlobEntry& blob )
+{
+	bool result = blob.setValue( m_s64FileLen ); 
+	result &= blob.setValue( m_ShortFileName );
+	result &= blob.setValue( m_u8FileType );
+	result &= blob.setValue( m_FileTime );
+	result &= blob.setValue( m_AssetId );
+	result &= blob.setValue( m_FileHash );
+	return result;
+}
+
+//============================================================================
+bool FileInfo::extractFromBlob( PktBlobEntry& blob )
+{
+	bool result = blob.getValue( m_s64FileLen );
+	result &= blob.getValue( m_ShortFileName );
+	result &= blob.getValue( m_u8FileType );
+	result &= blob.getValue( m_FileTime );
+	result &= blob.getValue( m_AssetId );
+	result &= blob.getValue( m_FileHash );
+	return result;
 }

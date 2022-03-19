@@ -237,6 +237,8 @@ QString GuiParams::describeCommError( ECommErr commErr )
         return QObject::tr( "Comm Error User Offline ");
     case eCommErrSearchTextToShort:		
         return QObject::tr("Comm Error Search Text To Short ");
+    case eCommErrSearchTextToLong:
+        return QObject::tr( "Comm Error Search Text To Long " );
     case eCommErrSearchNoMatch:		
         return QObject::tr("Comm Error Search No Match ");
     case eCommErrInvalidHostType:		
@@ -245,6 +247,8 @@ QString GuiParams::describeCommError( ECommErr commErr )
         return QObject::tr("Comm Error Plugin Not Enabled ");
     case eCommErrPluginPermission:		
         return QObject::tr("Comm Error Plugin Permission Level ");
+    case eCommErrInvalidParam:
+        return QObject::tr( "Comm Error Invalid Param " );
     default:
         return QObject::tr("Comm Error Invalid ");
     }
@@ -954,6 +958,11 @@ QString GuiParams::describePluginMsg( EPluginMsgType pluginMsgType )
     case ePluginMsgDownloadFailed:
         strPluginMsg = QObject::tr( "Downloading Failed" );
         break;
+
+    case ePluginMsgCanceled:
+        strPluginMsg = QObject::tr( "Canceled" );
+        break;
+
     default:
         strPluginMsg = QObject::tr( "Unknown Plugin Message" );
         LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin message type %d", pluginMsgType );

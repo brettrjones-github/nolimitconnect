@@ -30,6 +30,7 @@
 
 class VxGUID;
 class PluginId;
+class VxSha1Hash;
 
 #pragma pack(push)
 #pragma pack(1)
@@ -86,6 +87,7 @@ public:
     bool                        setValue( ESearchType& eValue );
     bool                        setValue( const PluginId& pluginId );
     bool                        setValue( VxGUID& guid );
+    bool                        setValue( VxSha1Hash& sha1Hash );
     bool                        setValue( bool& bValue );
     bool                        setValue( int8_t& s8Value );
     bool                        setValue( uint8_t& u8Value );
@@ -112,6 +114,7 @@ public:
     bool                        getValue( ESearchType& eValue );
     bool                        getValue( PluginId& pluginId );
     bool                        getValue( VxGUID& guid );
+    bool                        getValue( VxSha1Hash& sha1Hash );
     bool                        getValue( bool& bValue );
     bool                        getValue( int8_t& s8Value );
     bool                        getValue( uint8_t& u8Value );

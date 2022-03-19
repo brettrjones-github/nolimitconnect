@@ -25,6 +25,9 @@ class VxThread;
 class FileInfo 
 {
 public:
+	static const int FILE_INFO_SHORTEST_SEARCH_TEXT_LEN = 3;
+	static const int FILE_INFO_LONGEST_SEARCH_TEXT_LEN = 512;
+
 	FileInfo();
 	FileInfo( VxGUID& onlineId, const std::string& fullFileName );
 	FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType );
@@ -38,8 +41,8 @@ public:
 	bool						isDirectory( void );
 	void						setIsDirty( bool isDirty )				{ m_IsDirty = isDirty; }
 	bool						getIsDirty( void )						{ return m_IsDirty; }
-	std::string&				getLocalFileName( void )				{ return m_FullFileName; }
-	std::string					getRemoteFileName( void );
+	std::string&				getFullFileName( void )					{ return m_FullFileName; }
+	std::string&				getShortFileName( void )				{ return m_ShortFileName; }
 
 	void						setOnlineId( VxGUID& assetId )			{ m_OnlineId = assetId; }
 	VxGUID&						getOnlineId( void )						{ return m_OnlineId; }
@@ -63,14 +66,23 @@ public:
 	void						setFileHashId( uint8_t * id )			{ m_FileHash.setHashData( id ); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHash; }
 
+	bool						determineShortName( std::string containingDir = "" );
+	bool						determineFullFileName( std::string containingDir = "" );
+
+	bool						matchText( std::string&	searchStr );
+
+	int							calcBlobLen( void );
+	bool						addToBlob( PktBlobEntry& blob );
+	bool						extractFromBlob( PktBlobEntry& blob );
+
 private:
-	void						determineSharedDir( void );
 	void						generateAssetId( void );
 
 public:
 	//=== vars ===//
 	VxGUID						m_OnlineId;
 	std::string					m_FullFileName{ ""};
+	std::string					m_ShortFileName{ "" };
 	int64_t						m_s64FileLen{ 0 };
 	uint32_t					m_u32Attributes{ 0 };
 	uint8_t						m_u8FileType{ 0 };

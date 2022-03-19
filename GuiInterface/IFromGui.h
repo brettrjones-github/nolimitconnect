@@ -435,5 +435,6 @@ public:
 	virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll ) = 0;
 
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) = 0;
+	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) = 0;
 };
 

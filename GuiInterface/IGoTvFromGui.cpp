@@ -848,3 +848,9 @@ bool IGoTv::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
     return getPtoP().fromGuiDownloadWebPage( webPageType, onlineId );
 }
+
+//============================================================================
+bool IGoTv::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
+{
+    return getPtoP().fromGuiCancelWebPage( webPageType, onlineId );
+}

@@ -11,11 +11,13 @@ namespace
         "Comm Error Invalid Packet ",
         "Comm Error User Offline ",
         "Comm Error Search Text To Short ",
+        "Comm Error Search Text To Long ",
         "Comm Error Search No Match ",
         "Comm Error Invalid Host Type ",
         "Comm Error Plugin Not Enabled ",
         "Comm Error Plugin Permission Level ",
         "Comm Error Not Found ",
+        "Comm Error Invalid Param ",
         "Max Comm Error ",
     };
 
@@ -120,6 +122,7 @@ namespace
         "Reason Pkt Online Id Me From Another Ip ",
         "Reason PktAnn Not First Packet ",
         "Reason PktHdr Invalid ",
+        "Reason Pkt Invalid ",
 
         "Max Hacker Reason ",
     };

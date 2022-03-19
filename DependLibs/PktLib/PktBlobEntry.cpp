@@ -17,6 +17,7 @@
 
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGUID.h>
+#include <CoreLib/VxSha1Hash.h>
 #include <CoreLib/VxDebug.h>
 #include <memory.h>
 
@@ -273,6 +274,18 @@ bool PktBlobEntry::setValue( VxGUID& guid )
 }
 
 //============================================================================
+bool PktBlobEntry::setValue( VxSha1Hash& sha1Hash )
+{
+    uint32_t sizeOfHash = sizeof( VxSha1Hash );
+    if( haveRoom( sizeOfHash + sizeof( uint32_t ) ) )
+    {
+        return  setValue( (void *)&sha1Hash, sizeOfHash );
+    }
+
+    return false;
+}
+
+//============================================================================
 bool PktBlobEntry::setValue( bool& bValue )
 {
     bool result = false;
@@ -452,7 +465,6 @@ bool PktBlobEntry::setValue( uint64_t& u64Value )
 
     return result;
 }
-
 
 //============================================================================
 bool PktBlobEntry::setValue( float& f32Value )
@@ -667,6 +679,34 @@ bool PktBlobEntry::getValue( PluginId& pluginId )
     }
 
     return result;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( VxGUID& guid )
+{
+    uint64_t loPart;
+    uint64_t hiPart;
+    bool result = getValue( loPart );
+    result &= getValue( hiPart );
+    if( result )
+    {
+        guid.setVxGUID( hiPart, loPart );
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( VxSha1Hash& sha1Hash )
+{
+    uint32_t sizeOfHash = sizeof( VxSha1Hash );
+    if( haveData( sizeOfHash + sizeof( uint32_t ) ) )
+    {
+        int iBufLen;
+        return getValue( ( void* )&sha1Hash, iBufLen );
+    }
+
+    return false;
 }
 
 //============================================================================
@@ -993,18 +1033,4 @@ bool PktBlobEntry::getValue( void* pvRetBuf, int& iBufLen )
     }
 
     return false;
-}
-//============================================================================
-bool PktBlobEntry::getValue( VxGUID& guid )
-{
-    uint64_t loPart;
-    uint64_t hiPart;
-    bool result = getValue( loPart );
-    result &= getValue( hiPart );
-    if( result )
-    {
-        guid.setVxGUID( hiPart, loPart );
-    }
-
-    return result;
 }

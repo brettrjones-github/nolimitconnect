@@ -78,8 +78,8 @@ bool ConnectIdListMgr::isHosted( VxGUID& onlineId )
     lockList();
     for( auto& connectId : m_ConnectIdList )
     {
-        ConnectId& connectId = const_cast< ConnectId& >( connectId );
-        if( connectId.getGroupieOnlineId() == onlineId && IsHostARelayForUser( connectId.getHostType() ) )
+        ConnectId& noConstConnectId = const_cast< ConnectId& >( connectId );
+        if( noConstConnectId.getGroupieOnlineId() == onlineId && IsHostARelayForUser( noConstConnectId.getHostType() ) )
         {
             isHosted = true;
             break;

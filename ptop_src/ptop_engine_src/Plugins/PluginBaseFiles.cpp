@@ -18,7 +18,9 @@
 
 #include "FileLibraryMgr.h"
 
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+
 #include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktsFileShare.h>
@@ -26,6 +28,7 @@
 #include <PktLib/VxSearchDefs.h>
 #include <PktLib/PktsFileInfo.h>
 #include <PktLib/SearchParams.h>
+#include <PktLib/VxCommon.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxFileShredder.h>
@@ -428,72 +431,261 @@ void PluginBaseFiles::onPktFileInfoAnnReply( VxSktBase* sktBase, VxPktHdr* pktHd
 //============================================================================
 void PluginBaseFiles::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	LogMsg( LOG_DEBUG, "PluginBaseHostService onPktFileInfoSearchReq" );
+	LogMsg( LOG_VERBOSE, "PluginBaseFiles::onPktFileInfoSearchReq rxed" );
 
 	PktFileInfoSearchReq* pktReq = ( PktFileInfoSearchReq* )pktHdr;
-	PktFileInfoSearchReply pktReply;
-	pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
-	pktReply.setHostOnlineId( pktReq->getHostOnlineId() );
-
-	if( pktReq->isValidPkt() )
+	if( pktReq && pktReq->isValidPkt() )
 	{
-		EPluginAccess pluginAccess = getPluginAccessState( netIdent );
-		pktReply.setAccessState( pluginAccess );
-		if( ePluginAccessOk == pluginAccess )
+		PktBlobEntry& blobEntry = pktReq->getBlobEntry();
+		blobEntry.resetRead();
+		std::string searchText;
+		if( pktReq->getSearchText( searchText ) )
 		{
-			PktBlobEntry& blobEntry = pktReq->getBlobEntry();
-			blobEntry.resetRead();
+			PktFileInfoSearchReply pktReply;
+			pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
+			pktReply.setHostOnlineId( pktReq->getHostOnlineId() );
 
-			SearchParams searchParams;
-			searchParams.extractFromBlob( blobEntry );
-			pktReply.setHostType( searchParams.getHostType() );
-			pktReply.setSearchSessionId( searchParams.getSearchSessionId() );
-
-			std::string searchText = searchParams.getSearchText();
-			if( !searchParams.getSearchListAll() && searchText.size() < MIN_SEARCH_TEXT_LEN )
+			pktReply.setSearchText( searchText );
+			EPluginAccess pluginAccess = getPluginAccessState( netIdent );
+			pktReply.setAccessState( pluginAccess );
+			if( ePluginAccessOk == pluginAccess )
 			{
-				LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService search text too short" );
-				pktReply.setCommError( eCommErrSearchTextToShort );
+				if( !searchText.empty() && searchText.size() < FileInfo::FILE_INFO_SHORTEST_SEARCH_TEXT_LEN )
+				{
+					LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseFiles::onPktFileInfoSearchReq search text too short" );
+					pktReply.setCommError( eCommErrSearchTextToShort );
+					VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReq to short search text" );
+				}
+				else if( searchText.size() > FileInfo::FILE_INFO_LONGEST_SEARCH_TEXT_LEN )
+				{
+					LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseFiles::onPktFileInfoSearchReq search text too long" );
+					pktReply.setCommError( eCommErrSearchTextToLong );
+					VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReq to long search text" );
+				}
+				else
+				{
+					ECommErr searchErr = m_FileInfoMgr.searchRequest( pktReply, pktReq->getSpecificAssetId(), searchText, sktBase, netIdent );
+					pktReply.setCommError( searchErr );
+				}
 			}
 			else
 			{
-				ECommErr searchErr = m_FileInfoMgr.searchRequest( searchParams, pktReply, searchText, sktBase, netIdent );
-				pktReply.setCommError( searchErr );
+				LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseFiles::onPktFileInfoSearchReq service not enabled" );
+				pktReply.setCommError( eCommErrPluginNotEnabled );
+			}
+
+			pktReply.calcPktLen();
+			if( !txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply, false ) )
+			{
+				LogModule( eLogHostSearch, LOG_VERBOSE, "PluginBaseFiles::onPktFileInfoSearchReq failed send search reply" );
 			}
 		}
 		else
 		{
-			LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService host service not enabled" );
-			pktReply.setCommError( eCommErrPluginNotEnabled );
-		}
+			LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseHostService invalid search packet" );
+			VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReply invalid search text" );
+		}	
 	}
 	else
 	{
-		LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService invalid search packet" );
-		pktReply.setCommError( eCommErrInvalidPkt );
+		VxReportHack( eHackerLevelSevere, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReq invalid ptk" );
 	}
-
-	if( !txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply, false ) )
-	{
-		LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
-	}
-
 }
 
 //============================================================================
 void PluginBaseFiles::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	//m_Engine.getFileInfoListMgr().onPktFileInfoSearchReply( sktBase, pktHdr, netIdent, this );
+	PktFileInfoSearchReply* pktReply = ( PktFileInfoSearchReply* )pktHdr;
+
+	if( pktReply && pktReply->isValidPkt() )
+	{
+		PktBlobEntry& blobEntry = pktReply->getBlobEntry();
+		blobEntry.resetRead();
+		std::string searchText;
+		if( pktReply->getCommError() == eCommErrNone )
+		{
+			if( pktReply->getSearchText( searchText ) )
+			{
+				updateFromFileInfoSearchBlob( pktReply->getSearchSessionId(), pktReply->getHostOnlineId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getFileInfoCountThisPkt() );
+				if( pktReply->getMoreFileInfosExist() )
+				{
+					if( !requestMoreFileInfoFromServer( pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchAssetId(), searchText ) )
+					{
+						fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrUserOffline );
+					}
+				}
+				else
+				{
+					fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+				}
+			}
+			else
+			{
+				logCommError( eCommErrInvalidPkt, "PktFileInfoSearchReply", sktBase, netIdent );
+				fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrInvalidPkt );
+				VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReply invalid search text" );
+			}
+		}
+		else
+		{
+			logCommError( pktReply->getCommError(), "PktFileInfoSearchReply", sktBase, netIdent );
+			fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getCommError() );
+		}
+	}
+	else
+	{
+		VxGUID nullGuid;
+		fileInfoSearchCompleted( nullGuid, sktBase, netIdent, eCommErrInvalidPkt );
+		VxReportHack( eHackerLevelSevere, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReply invalid ptk" );
+	}
 }
 
 //============================================================================
 void PluginBaseFiles::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	//m_Engine.getFileInfoListMgr().onPktFileInfoMoreReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+	PktFileInfoMoreReq* pktReq = ( PktFileInfoMoreReq* )pktHdr;
+	if( pktReq && pktReq->isValidPkt() )
+	{
+		PktBlobEntry& blobEntry = pktReq->getBlobEntry();
+		blobEntry.resetRead();
+		std::string searchText;
+		ECommErr commErr = getCommAccessState( netIdent );
+		PktFileInfoMoreReply pktReply;
+		pktReply.setCommError( commErr );
+		if( pktReq->getSearchText( searchText ) )
+		{
+			pktReply.setSearchText( searchText );
+			EHostType hostType = pktReq->getHostType();
+			pktReply.setHostType( hostType );
+			VxGUID nextSearchOnlineId = pktReq->getNextSearchAssetId();
+			pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
+
+			if( eCommErrNone == commErr )
+			{				
+				if( !searchText.empty() && searchText.size() < FileInfo::FILE_INFO_SHORTEST_SEARCH_TEXT_LEN )
+				{
+					LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseFiles::onPktFileInfoMoreReq search text too short" );
+					pktReply.setCommError( eCommErrSearchTextToShort );
+					VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoMoreReq to short search text" );
+				}
+				else if( searchText.size() > FileInfo::FILE_INFO_LONGEST_SEARCH_TEXT_LEN )
+				{
+					LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseFiles::onPktFileInfoMoreReq search text too long" );
+					pktReply.setCommError( eCommErrSearchTextToLong );
+					VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoMoreReq to long search text" );
+				}
+				else
+				{
+					if( nextSearchOnlineId.isVxGUIDValid() )
+					{
+						ECommErr searchErr = m_FileInfoMgr.searchMoreRequest( pktReply, nextSearchOnlineId, searchText, sktBase, netIdent );
+						pktReply.setCommError( searchErr );
+					}
+					else
+					{
+						LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseFiles::onPktFileInfoMoreReq search text too long" );
+						pktReply.setCommError( eCommErrSearchTextToLong );
+						VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoMoreReq to long search text" );
+					}
+				}
+
+				commErr = m_FileInfoMgr.searchMoreRequest( pktReply, nextSearchOnlineId, searchText, sktBase, netIdent );	
+			}
+
+			pktReply.calcPktLen();
+			txPacket( netIdent, sktBase, &pktReply );
+		}
+		else
+		{
+			VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoMoreReq invalid search text" );
+		}
+	}
+	else
+	{
+		VxReportHack( eHackerLevelSevere, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoMoreReq invalid ptk" );
+	}
 }
 
 //============================================================================
 void PluginBaseFiles::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	//m_Engine.getFileInfoListMgr().onPktFileInfoMoreReply( sktBase, pktHdr, netIdent, this );
+	PktFileInfoMoreReply* pktReply = ( PktFileInfoMoreReply* )pktHdr;
+	if( pktReply && pktReply->isValidPkt() )
+	{
+		std::string searchStr;
+		if( pktReply->getCommError() )
+		{
+			logCommError( pktReply->getCommError(), "PluginBaseFiles::onPktFileInfoMoreReply", sktBase, netIdent );
+			fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getCommError() );
+		}
+		else if( pktReply->getSearchText( searchStr ) )
+		{
+			VxGUID hostOnlineId = pktReply->getDestOnlineId();
+			updateFromFileInfoSearchBlob( pktReply->getSearchSessionId(), hostOnlineId, sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getFileInfoCountThisPkt() );
+			if( pktReply->getMoreFileInfosExist() )
+			{
+				if( !requestMoreFileInfoFromServer( pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchAssetId(), searchStr ) )
+				{
+					fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrUserOffline );
+				}
+			}
+			else
+			{
+				fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+			}
+		}
+		else
+		{
+			fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrInvalidPkt );
+			VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReply invalid search text" );
+		}
+	}
+	else
+	{
+		VxGUID nullGuid;
+		fileInfoSearchCompleted( nullGuid, sktBase, netIdent, eCommErrInvalidPkt );
+		VxReportHack( eHackerLevelSevere, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoSearchReply invalid ptk" );
+	}
+}
+
+//============================================================================
+void PluginBaseFiles::updateFromFileInfoSearchBlob( VxGUID& searchSessionId, VxGUID& hostOnlineId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int fileInfoCount )
+{
+	// assumes blobEntry.resetRead(); has been called and any procceeding values like search text has been extracted
+	for( int i = 0; i < fileInfoCount; i++ )
+	{
+		FileInfo fileIInfo;
+		if( fileIInfo.extractFromBlob( blobEntry ) )
+		{
+			fileInfoSearchResult( searchSessionId, sktBase, netIdent, fileIInfo );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "Could not extract FileInfoListMgr::updateFromFileInfoSearchBlob" );
+			break;
+		}
+	}
+}
+
+//============================================================================
+bool PluginBaseFiles::requestMoreFileInfoFromServer(  VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextFileInfoAssetId, std::string& searchText )
+{
+	PktFileInfoMoreReq pktReq;
+	pktReq.setSearchSessionId( searchSessionId );
+	pktReq.setNextSearchAssetId( nextFileInfoAssetId );
+	pktReq.setSearchText( searchText );
+	pktReq.calcPktLen();
+	return txPacket( netIdent, sktBase, &pktReq );
+}
+
+//============================================================================
+ECommErr PluginBaseFiles::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	return m_FileInfoMgr.searchRequest( pktReply, specificAssetId, searchStr, sktBase, netIdent );
+}
+
+//============================================================================
+ECommErr PluginBaseFiles::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	return m_FileInfoMgr.searchMoreRequest( pktReply, nextFileAssetId, searchStr, sktBase, netIdent );
 }

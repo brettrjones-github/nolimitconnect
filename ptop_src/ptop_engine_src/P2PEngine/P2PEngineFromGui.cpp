@@ -1692,3 +1692,40 @@ bool P2PEngine::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& online
 
 	return result;
 }
+
+
+//============================================================================
+bool P2PEngine::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
+{
+	bool result{ false };
+	if( eWebPageTypeAboutMe == webPageType )
+	{
+		PluginBase* plugin = m_PluginMgr.findPlugin( ePluginTypeAboutMePageClient );
+		if( plugin )
+		{
+			result = plugin->fromGuiCancelWebPage( eWebPageTypeAboutMe, onlineId );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "Plugin not found for web page %s", DescribeWebPageType( webPageType ) );
+		}
+	}
+	else if( eWebPageTypeStoryboard == webPageType )
+	{
+		PluginBase* plugin = m_PluginMgr.findPlugin( ePluginTypeStoryboardClient );
+		if( plugin )
+		{
+			result = plugin->fromGuiCancelWebPage( eWebPageTypeStoryboard, onlineId );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "Plugin not found for web page %s", DescribeWebPageType( webPageType ) );
+		}
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "Plugin unknown web page type %d", webPageType );
+	}
+
+	return result;
+}

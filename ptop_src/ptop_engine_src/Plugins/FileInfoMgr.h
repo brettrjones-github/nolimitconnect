@@ -28,6 +28,7 @@ class PluginBase;
 class P2PEngine;
 class PktFileListReply;
 class PktFileInfoSearchReply;
+class PktFileInfoMoreReply;
 class SearchParams;
 class SharedFilesMgr;
 class VxSha1Hash;
@@ -83,10 +84,7 @@ public:
 
 	void						updateFileTypes( void );
 
-	void						onFileLibraryUpdated( void );
-
 	void						removeFromLibrary( std::string& fileName );
-
 
 	bool						isAllowedFileOrDir( std::string strFileName );
 
@@ -110,10 +108,12 @@ public:
 	// virtual void				fromGuiUserLoggedOn( void ) override;
 	virtual void				onAfterUserLogOnThreaded( void );
 
-	ECommErr					searchRequest( SearchParams& searchParams, PktFileInfoSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ECommErr					searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ECommErr					searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 protected:
 	void						checkForInitializeCompleted( void );
+	FileInfo*					findFileAsset( VxGUID& fileAssetId ); // assumes file list is already locked
 
 	//=== vars ===//
     P2PEngine&					m_Engine;
@@ -125,7 +125,7 @@ protected:
 	uint16_t					m_u16FileTypes{ 0 };
 
 	VxMutex						m_FilesListMutex;
-	std::map<VxGUID,FileInfo*>	m_FileInfoList;
+	std::map<VxGUID,FileInfo*>	m_FileInfoList; // map of assetId, FileInfo
 	std::vector<FileInfo*>		m_FileInfoNeedHashAndSaveList;
 
 	std::vector<PktFileListReply*>m_FileListPackets;

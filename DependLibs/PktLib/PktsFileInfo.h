@@ -169,8 +169,8 @@ public:
     void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
 
-    void						setSpecificOnlineId( VxGUID& guid )     { m_SpecificOnlineId = guid; }
-    VxGUID&                     getSpecificOnlineId( void )             { return m_SpecificOnlineId; }
+    void						setSpecificAssetId( VxGUID& guid )     { m_SpecificAssetId = guid; }
+    VxGUID&                     getSpecificAssetId( void )             { return m_SpecificAssetId; }
 
     bool						setSearchText( std::string& searchText );
     bool						getSearchText( std::string& searchText );
@@ -186,7 +186,7 @@ protected:
     uint32_t                    m_Res3{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_HostOnlineId;  // 16 bytes
-    VxGUID                      m_SpecificOnlineId;
+    VxGUID                      m_SpecificAssetId;
     PktBlobEntry                m_BlobEntry;	
 };
 
@@ -219,8 +219,11 @@ public:
     void						setMoreFileInfosExist( bool moreExist)  { m_MoreFileInfosExist = moreExist; }
     bool                        getMoreFileInfosExist( void )           { return m_MoreFileInfosExist; }
 
-    void						setNextSearchOnlineId( VxGUID& guid )   { m_NextSearchOnlineId = guid; }
-    VxGUID&                     getNextSearchOnlineId( void )           { return m_NextSearchOnlineId; }
+    void						setNextSearchAssetId( VxGUID& guid )   { m_NextSearchAssetId = guid; }
+    VxGUID&                     getNextSearchAssetId( void )           { return m_NextSearchAssetId; }
+
+    bool						setSearchText( std::string& searchText );
+    bool						getSearchText( std::string& searchText );
 
     PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
@@ -235,7 +238,7 @@ protected:
     uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_HostOnlineId;
-    VxGUID                      m_NextSearchOnlineId;
+    VxGUID                      m_NextSearchAssetId;
     PktBlobEntry                m_BlobEntry;
 };
 
@@ -254,8 +257,15 @@ public:
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
 
-    void						setNextSearchOnlineId( VxGUID& guid ) { m_NextSearchOnlineId = guid; }
-    VxGUID&                     getNextSearchOnlineId( void )        { return m_NextSearchOnlineId; }
+    void						setNextSearchAssetId( VxGUID& guid ) { m_NextSearchAssetId = guid; }
+    VxGUID&                     getNextSearchAssetId( void )        { return m_NextSearchAssetId; }
+
+    bool						setSearchText( std::string& searchText );
+    bool						getSearchText( std::string& searchText );
+
+    PktBlobEntry&               getBlobEntry( void )                { return m_BlobEntry; }
+
+    void                        calcPktLen( void );
 
 protected:
     uint8_t					    m_HostType{ 0 };
@@ -264,7 +274,8 @@ protected:
     uint32_t                    m_Res3{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_HostOnlineId;
-    VxGUID                      m_NextSearchOnlineId;
+    VxGUID                      m_NextSearchAssetId;
+    PktBlobEntry                m_BlobEntry;
 };
 
 class PktFileInfoMoreReply : public VxPktHdr
@@ -272,29 +283,32 @@ class PktFileInfoMoreReply : public VxPktHdr
 public:
     PktFileInfoMoreReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
-    EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
+    void                        setHostType( EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
+    EHostType                   getHostType( void ) const               { return ( EHostType )m_HostType; }
 
-    void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
-    VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
+    void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
+    VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
 
     void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
-    EPluginAccess               getAccessState( void )              { return     ( EPluginAccess )m_AccessState; }
+    EPluginAccess               getAccessState( void )                  { return     ( EPluginAccess )m_AccessState; }
 
-    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
-    ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
+    void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
 
     void						setFileInfoCountThisPkt( uint16_t inviteCnt ) { m_FileInfoThisPktCount = inviteCnt; }
-    uint16_t&                   getFileInfoCountThisPkt( void )       { return m_FileInfoThisPktCount; }
-    void                        incrementFileInfoCount( void )        { m_FileInfoThisPktCount++; }
+    uint16_t&                   getFileInfoCountThisPkt( void )         { return m_FileInfoThisPktCount; }
+    void                        incrementFileInfoCount( void )          { m_FileInfoThisPktCount++; }
 
     void						setMoreFileInfosExist( bool moreExist ) { m_MoreFileInfosExist = moreExist; }
-    bool                        getMoreFileInfosExist( void )         { return m_MoreFileInfosExist; }
+    bool                        getMoreFileInfosExist( void )           { return m_MoreFileInfosExist; }
 
-    void						setNextSearchOnlineId( VxGUID& guid ) { m_NextSearchOnlineId = guid; }
-    VxGUID&                     getNextSearchOnlineId( void )       { return m_NextSearchOnlineId; }
+    void						setNextSearchAssetId( VxGUID& guid )    { m_NextSearchAssetId = guid; }
+    VxGUID&                     getNextSearchAssetId( void )            { return m_NextSearchAssetId; }
 
-    PktBlobEntry&               getBlobEntry( void )                { return m_BlobEntry; }
+    bool						setSearchText( std::string& searchText );
+    bool						getSearchText( std::string& searchText );
+
+    PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
     void                        calcPktLen( void );
 
@@ -306,7 +320,7 @@ protected:
     uint16_t                    m_FileInfoThisPktCount{ 0 };
     uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
-    VxGUID                      m_NextSearchOnlineId;
+    VxGUID                      m_NextSearchAssetId;
     PktBlobEntry                m_BlobEntry;
 };
 

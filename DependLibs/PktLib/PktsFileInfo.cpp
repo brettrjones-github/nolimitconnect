@@ -208,6 +208,27 @@ bool PktFileInfoSearchReply::addFileInfoInfo( std::string& groupieUrl, std::stri
 }
 
 //============================================================================
+bool PktFileInfoSearchReply::setSearchText( std::string& searchText )
+{
+    getBlobEntry().resetWrite();
+    if( !searchText.empty() )
+    {
+        bool result = getBlobEntry().setValue( searchText );
+        calcPktLen();
+        return result;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktFileInfoSearchReply::getSearchText( std::string& searchText )
+{
+    getBlobEntry().resetRead();
+    return getBlobEntry().getValue( searchText );
+}
+
+//============================================================================
 void PktFileInfoSearchReply::calcPktLen()
 {
     uint16_t pktLen = ( uint16_t )sizeof( PktFileInfoSearchReply ) - sizeof( PktBlobEntry );
@@ -228,6 +249,38 @@ PktFileInfoMoreReq::PktFileInfoMoreReq()
 }
 
 //============================================================================
+bool PktFileInfoMoreReq::setSearchText( std::string& searchText )
+{
+    getBlobEntry().resetWrite();
+    if( !searchText.empty() )
+    {
+        bool result = getBlobEntry().setValue( searchText );
+        calcPktLen();
+        return result;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktFileInfoMoreReq::getSearchText( std::string& searchText )
+{
+    getBlobEntry().resetRead();
+    return getBlobEntry().getValue( searchText );
+}
+
+//============================================================================
+void PktFileInfoMoreReq::calcPktLen()
+{
+    uint16_t pktLen = ( uint16_t )sizeof( PktFileInfoMoreReq ) - sizeof( PktBlobEntry );
+    uint16_t blobLen = getBlobEntry().getTotalBlobLen();
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) );
+
+    // LogMsg( LOG_DEBUG, "PktFileInfoMoreReply calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
 PktFileInfoMoreReply::PktFileInfoMoreReply()
     : VxPktHdr()
     , m_BlobEntry()
@@ -236,6 +289,27 @@ PktFileInfoMoreReply::PktFileInfoMoreReply()
     setPktLength( sizeof( PktFileInfoMoreReply ) );
 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+bool PktFileInfoMoreReply::setSearchText( std::string& searchText )
+{
+    getBlobEntry().resetWrite();
+    if( !searchText.empty() )
+    {
+        bool result = getBlobEntry().setValue( searchText );
+        calcPktLen();
+        return result;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktFileInfoMoreReply::getSearchText( std::string& searchText )
+{
+    getBlobEntry().resetRead();
+    return getBlobEntry().getValue( searchText );
 }
 
 //============================================================================

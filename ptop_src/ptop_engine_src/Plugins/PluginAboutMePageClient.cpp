@@ -99,3 +99,42 @@ bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, 
 
 	return result;
 }
+
+//============================================================================
+bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
+{
+	bool result{ false };
+	if( eWebPageTypeAboutMe == webPageType )
+	{
+		m_HisOnlineId = onlineId;
+		connectForWebPageDownload( onlineId );
+		m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgCanceled, "" );
+
+	}
+	else
+	{
+		LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::fromGuiCancelWebPage invalid EWebPageType" );
+	}
+
+	return result;
+}
+
+
+//============================================================================
+void PluginAboutMePageClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo )
+{
+
+}
+
+//============================================================================
+void PluginAboutMePageClient::fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
+{
+	if( commErr )
+	{
+		LogMsg( LOG_ERROR, "FileInfoListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+	}
+	else
+	{
+		LogMsg( LOG_VERBOSE, "FileInfoListMgr::hostSearchCompleted with no errors" );
+	}
+}

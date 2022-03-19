@@ -175,6 +175,7 @@ public:
 	virtual void				fromGuiListAction( EListAction listAction ) {};
 
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
+	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
 
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
@@ -260,6 +261,8 @@ protected:
 
     static std::string          getThumbXferDbName( EPluginType pluginType );
     static std::string          getThumbXferThreadName( EPluginType pluginType );
+	void						logCommError( ECommErr commErr, const char* desc, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ECommErr					getCommAccessState( VxNetIdent* netIdent );
 
 	//=== vars ===//
 	P2PEngine&					m_Engine;

@@ -481,3 +481,29 @@ EPluginAccess PluginBase::getPluginAccessState( VxNetIdent* netIdent )
 
     return pluginAccess;
 }
+
+//============================================================================
+void PluginBase::logCommError( ECommErr commErr, const char* desc, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    LogMsg( LOG_ERROR, "%s %s from %s %s", desc, DescribeCommError( commErr ), netIdent->getOnlineName(), sktBase->describeSktConnection().c_str() );
+}
+
+//============================================================================
+ECommErr PluginBase::getCommAccessState( VxNetIdent* netIdent )
+{
+    ECommErr commErr{ eCommErrNone };
+    if( !isPluginEnabled() )
+    {
+        commErr = eCommErrPluginNotEnabled;
+    }
+    else
+    {
+        EPluginAccess pluginAccess = getPluginAccessState( netIdent );
+        if( ePluginAccessOk != pluginAccess )
+        {
+            commErr = eCommErrPluginPermission;
+        }
+    }
+
+    return commErr;
+}

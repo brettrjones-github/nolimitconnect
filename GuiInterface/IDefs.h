@@ -70,11 +70,13 @@ enum ECommErr
     eCommErrInvalidPkt,
     eCommErrUserOffline,
     eCommErrSearchTextToShort, 
+    eCommErrSearchTextToLong,
     eCommErrSearchNoMatch, 
     eCommErrInvalidHostType, 
     eCommErrPluginNotEnabled,
     eCommErrPluginPermission,
     eCommErrNotFound,
+    eCommErrInvalidParam,
 
     eMaxCommErr
 };
@@ -280,7 +282,7 @@ enum EHackerReason
     eHackerReasonPktOnlineIdMeFromAnotherIp,
     eHackerReasonPktAnnNotFirstPacket,
     eHackerReasonPktHdrInvalid,
-
+    eHackerReasonInvalidPkt,
 
     eMaxHackerReason
 };
@@ -694,6 +696,7 @@ enum EPluginMsgType
     ePluginMsgRetrieveInfoFailed,
     ePluginMsgDownloading,
     ePluginMsgDownloadFailed,
+    ePluginMsgCanceled,
 
     eMaxPPluginMsgType
 };

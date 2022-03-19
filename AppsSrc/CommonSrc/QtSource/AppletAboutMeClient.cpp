@@ -50,6 +50,8 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
 AppletAboutMeClient::~AppletAboutMeClient()
 {
     m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, false );
+    m_MyApp.getEngine().fromGuiCancelWebPage( eWebPageTypeAboutMe, m_HisOnlineId );
+
     m_MyApp.wantToGuiActivityCallbacks( this, nullptr, false );
     m_MyApp.activityStateChange( this, false );
 }
