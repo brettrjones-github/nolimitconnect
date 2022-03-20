@@ -291,7 +291,7 @@ int FileInfoXferMgr::fromGuiPluginControl(	VxNetIdent *		netIdent,
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "FileInfoXferMgr::fromGuiPluginControl could not find session\n" );
+			LogMsg( LOG_ERROR, "FileInfoXferMgr::fromGuiPluginControl could not find session" );
 			return (int)eXferErrorBadParam;
 		}
 	}
@@ -480,13 +480,13 @@ void FileInfoXferMgr::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, V
 //============================================================================
 void FileInfoXferMgr::onPktFileGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileGetReply\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileGetReply");
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendReq\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendReq");
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	PktFileSendReq * poPkt = (PktFileSendReq *)pktHdr;
 	PktFileSendReply pktReply;
@@ -511,7 +511,7 @@ void FileInfoXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginBaseFileXfer::onPktFileSendReq: Could not find session\n" );
+		LogMsg( LOG_ERROR, "PluginBaseFileXfer::onPktFileSendReq: Could not find session" );
 		pktReply.setError( eXferErrorBadParam );
 		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
 	}
@@ -521,7 +521,7 @@ void FileInfoXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 void FileInfoXferMgr::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendReply\n" );
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendReply" );
 	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
 	FileTxSession * xferSession = findTxSession( poPkt->getRmtSessionId() );
 	if( xferSession )
@@ -576,7 +576,7 @@ void FileInfoXferMgr::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "FileInfoXferMgr::onPktFileChunkReq failed to find session\n");
+		LogMsg( LOG_ERROR, "FileInfoXferMgr::onPktFileChunkReq failed to find session");
 		PktFileChunkReply pktReply;
 		pktReply.setDataLen(0);
 		pktReply.setError( eXferErrorBadParam );
@@ -610,7 +610,7 @@ static int cnt = 0;
 void FileInfoXferMgr::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileGetCompleteReq\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileGetCompleteReq");
 	PktFileGetCompleteReq * poPkt = (PktFileGetCompleteReq *)pktHdr;
 	FileRxSession * xferSession = findRxSession( poPkt->getRmtSessionId() );
 	if( xferSession )
@@ -622,14 +622,14 @@ void FileInfoXferMgr::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * p
 //============================================================================
 void FileInfoXferMgr::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileGetCompleteReply\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileGetCompleteReply");
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendCompleteReq\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendCompleteReq");
 	PktFileSendCompleteReq * poPkt = (PktFileSendCompleteReq *)pktHdr;
 	FileRxSession * xferSession = findRxSession( poPkt->getRmtSessionId() );
 	//TODO check checksum
@@ -642,19 +642,19 @@ void FileInfoXferMgr::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * 
 //============================================================================
 void FileInfoXferMgr::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendCompleteReply\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileSendCompleteReply");
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFindFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFindFileReq\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFindFileReq");
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFindFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFindFileReply\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFindFileReply");
 }
 
 //============================================================================
@@ -739,19 +739,19 @@ void FileInfoXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 //============================================================================
 void FileInfoXferMgr::onPktFileInfoReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileInfoReq\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileInfoReq");
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFileInfoReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileInfoReply\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileInfoReply");
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFileInfoErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileInfoErr\n");
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileInfoErr");
 }
 
 //============================================================================
@@ -1144,7 +1144,7 @@ EXferError FileInfoXferMgr::beginFileReceive( FileRxSession * rxSession, PktFile
 
 	if( eXferErrorNone == xferErr )
 	{
-		LogMsg( LOG_INFO, "FileInfoXferMgr::(File Send) start recieving file %s\n", 
+		LogMsg( LOG_INFO, "FileInfoXferMgr::(File Send) start recieving file %s", 
 			(const char *)xferInfo.getLclFileName().c_str() );
 
 		uint8_t u8FileType = VxFileUtil::fileExtensionToFileTypeFlag( xferInfo.getRmtFileName().c_str() );
