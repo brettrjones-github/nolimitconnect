@@ -54,6 +54,12 @@ void IGoTv::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsg
 }
 
 //============================================================================
+void IGoTv::toGuiPluginCommError( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, ECommErr commErr )
+{
+    getAppCommon().toGuiPluginCommError( pluginType, onlineId, msgType, commErr );
+}
+
+//============================================================================
 void IGoTv::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
 {
     getAppCommon().toGuiMicrophonePeak( appModule, peekVal0to32768 );

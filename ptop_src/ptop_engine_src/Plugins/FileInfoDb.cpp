@@ -120,20 +120,20 @@ void FileInfoDb::addFile( VxGUID& onlineId, std::string& fileName, int64_t fileL
 }
 
 //============================================================================
-void FileInfoDb::addFile( FileInfo* libFileInfo )
+void FileInfoDb::addFile( FileInfo& libFileInfo )
 {
-	addFile(	libFileInfo->getOnlineId(),
-				libFileInfo->getFileName(),
-				libFileInfo->getFileLength(),
-				libFileInfo->getFileType(),
-				libFileInfo->getAssetId(),
-				libFileInfo->getFileHashId(),
-				libFileInfo->getFileTime()
+	addFile(	libFileInfo.getOnlineId(),
+				libFileInfo.getFileName(),
+				libFileInfo.getFileLength(),
+				libFileInfo.getFileType(),
+				libFileInfo.getAssetId(),
+				libFileInfo.getFileHashId(),
+				libFileInfo.getFileTime()
 				 );
 }
 
 //============================================================================
-void FileInfoDb::getAllFiles( std::map<VxGUID, FileInfo*>& sharedFileList )
+void FileInfoDb::getAllFiles( std::map<VxGUID, FileInfo>& sharedFileList )
 {
 	std::string fileName;
 	uint8_t fileType;
@@ -162,10 +162,10 @@ void FileInfoDb::getAllFiles( std::map<VxGUID, FileInfo*>& sharedFileList )
 
 			if( fileLen && onlineId.isVxGUIDValid() && assetId.isVxGUIDValid() )
 			{
-				FileInfo* libFileInfo = new FileInfo( onlineId, fileName, fileLen, fileType, assetId );
-				libFileInfo->setFileHashId( ( uint8_t* )cursor->getBlob( COLUMN_FILE_INFO_FILE_HASH ) );
+				FileInfo libFileInfo( onlineId, fileName, fileLen, fileType, assetId );
+				libFileInfo.setFileHashId( ( uint8_t* )cursor->getBlob( COLUMN_FILE_INFO_FILE_HASH ) );
 				uint64_t fileTime = cursor->getS64( COLUMN_FILE_INFO_FILE_TIME );
-				libFileInfo->setFileTime( fileTime );
+				libFileInfo.setFileTime( fileTime );
 
 				sharedFileList[assetId] = libFileInfo;
 			}

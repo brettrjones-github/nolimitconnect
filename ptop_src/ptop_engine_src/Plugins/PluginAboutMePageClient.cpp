@@ -54,17 +54,7 @@ void PluginAboutMePageClient::onFilesChanged( int64_t lastFileUpdateTime, int64_
 //============================================================================
 void PluginAboutMePageClient::checkIsAboutMePageReady( void )
 {
-	bool isReady{ true };
-	for( auto assetPair : m_AssetList )
-	{
-		if( !getFileInfoMgr().isFileInLibrary( assetPair.first ) )
-		{
-			isReady = false;
-			false;
-		}
-	}
-
-	setIsAboutMePageReady( isReady && getFileInfoMgr().getIsInitialized() );
+	setIsAboutMePageReady( getFileInfoMgr().getIsInitialized() );
 }
 
 //============================================================================
@@ -94,6 +84,7 @@ bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, 
 		VxFileUtil::makeDirectory( m_DownloadFileFolder.c_str() );
 		if( VxFileUtil::directoryExists( m_DownloadFileFolder.c_str() ) )
 		{
+			m_WebPageIndexFile = m_DownloadFileFolder + "index.htm";
 			int64_t diskFreeSpace = VxFileUtil::getDiskFreeSpace( m_DownloadFileFolder.c_str() );
 
 			if( diskFreeSpace && diskFreeSpace < VxFileUtil::SIZE_1GB )
@@ -125,13 +116,7 @@ bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, Vx
 	bool result{ false };
 	if( eWebPageTypeAboutMe == webPageType )
 	{
-		lockSearchFileList();
-		for( auto &fileInfo : m_SearchFileInfoList )
-		{
-			m_FileInfoMgr.cancelAndDelete( fileInfo.getAssetId() );
-		}
-
-		unlockSearchFileList();
+		cancelDownload();
 		m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgCanceled, "" );
 
 	}
@@ -145,20 +130,118 @@ bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, Vx
 
 
 //============================================================================
-void PluginAboutMePageClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo )
+bool PluginAboutMePageClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo )
 {
+	bool result{ false };
+	if( fileInfo.determineFullFileName( m_DownloadFileFolder ) )
+	{
+		result = fileInfo.isValid( true );
+		if( result )
+		{
+			lockSearchFileList();
+			m_SearchFileInfoList.push_back( fileInfo );
+			unlockSearchFileList();
+		}
+	}
 
+	return result;
 }
 
 //============================================================================
 void PluginAboutMePageClient::fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
 {
-	if( commErr )
+	if( commErr == eCommErrNone )
 	{
-		LogMsg( LOG_ERROR, "FileInfoListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+		LogMsg( LOG_VERBOSE, "FileInfoListMgr::hostSearchCompleted with no errors" );	
+		bool webIndexFileFound{ false };
+		for( auto& fileInfo : m_SearchFileInfoList )
+		{
+			if( fileInfo.getFileName() == m_WebPageIndexFile )
+			{
+				webIndexFileFound = true;
+				break;
+			}
+		}
+
+		if( webIndexFileFound )
+		{
+			m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloading, "" );
+			if( !startDownload( searchSessionId, sktBase, netIdent ) )
+			{
+				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadFailed, "" );
+				cancelDownload();
+			}
+		}
+		else
+		{
+			cancelDownload();
+			m_Engine.getToGui().toGuiPluginCommError( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoFailed, eCommErrInvalidParam );
+		}
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "FileInfoListMgr::hostSearchCompleted with no errors" );
+		cancelDownload();
+		LogMsg( LOG_ERROR, "FileInfoListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+		m_Engine.getToGui().toGuiPluginCommError( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoFailed, commErr );
 	}
+}
+
+//============================================================================
+void PluginAboutMePageClient::cancelDownload( void )
+{
+	lockSearchFileList();
+	for( auto& fileInfo : m_SearchFileInfoList )
+	{
+		m_FileInfoMgr.cancelAndDelete( fileInfo.getAssetId() );
+	}
+
+	m_SearchFileInfoList.clear();
+	unlockSearchFileList();
+
+	lockInProgressFileList();
+	for( auto& fileInfo : m_InProgressFileInfoList )
+	{
+		m_FileInfoMgr.cancelAndDelete( fileInfo.getAssetId() );
+	}
+
+	m_InProgressFileInfoList.clear();
+	unlockInProgressFileList();
+
+	lockCompletedFileList();
+	for( auto& fileInfo : m_InProgressFileInfoList )
+	{
+		m_FileInfoMgr.cancelAndDelete( fileInfo.getAssetId() );
+	}
+
+	m_InProgressFileInfoList.clear();
+	unlockCompletedFileList();
+}
+
+//============================================================================
+bool PluginAboutMePageClient::startDownload( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	bool result{ false };
+	lockSearchFileList();
+	for( auto iter = m_SearchFileInfoList.begin(); iter != m_SearchFileInfoList.end(); ++iter )
+	{
+		FileInfo& fileInfo = *iter;
+		lockInProgressFileList();
+		fileInfo.setIsDirty( true );
+		m_InProgressFileInfoList.push_back( fileInfo );
+		if( m_FileInfoMgr.startDownload( *iter, searchSessionId, sktBase, netIdent ) )
+		{
+			result = true;
+			m_SearchFileInfoList.erase( iter );
+		}
+		else
+		{
+			m_InProgressFileInfoList.pop_back();
+		}
+
+		unlockInProgressFileList();
+		break;
+	}
+
+	unlockSearchFileList();
+	return result;
 }

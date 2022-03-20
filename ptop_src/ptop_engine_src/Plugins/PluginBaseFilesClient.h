@@ -18,6 +18,18 @@
 class PluginBaseFilesClient : public PluginBaseFiles
 {
 public:
+	enum EFileClientState
+	{
+		eFileClientStateInitializing,
+		eFileClientStateIdle,
+		eFileClientStateRetrieveInfo,
+		eFileClientStateDownloading,
+		eFileClientStateDownloadComplete,
+		eFileClientStateCommError,
+
+		eMaxFileClientState
+	};
+
 	PluginBaseFilesClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName );
 	virtual ~PluginBaseFilesClient() = default;
 
@@ -29,6 +41,7 @@ protected:
 	VxNetIdent*					m_HisIdent{ nullptr };
 	VxGUID						m_HisOnlineId;
 	VxGUID						m_SearchSessionId;
+	EFileClientState			m_FileClientState{ eFileClientStateInitializing };
 };
 
 

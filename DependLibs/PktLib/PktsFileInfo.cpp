@@ -151,7 +151,7 @@ PktFileInfoSearchReq::PktFileInfoSearchReq()
 bool PktFileInfoSearchReq::setSearchText( std::string& searchText )
 {
     getBlobEntry().resetWrite();
-    if( !searchText.empty() )
+    if( searchText.c_str() )
     {
         bool result = getBlobEntry().setValue( searchText );
         calcPktLen();
@@ -213,7 +213,7 @@ bool PktFileInfoSearchReply::addFileInfoInfo( std::string& groupieUrl, std::stri
 bool PktFileInfoSearchReply::setSearchText( std::string& searchText )
 {
     getBlobEntry().resetWrite();
-    if( !searchText.empty() )
+    if( searchText.c_str() )
     {
         bool result = getBlobEntry().setValue( searchText );
         calcPktLen();
@@ -248,7 +248,6 @@ PktFileInfoMoreReq::PktFileInfoMoreReq()
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktFileInfoMoreReq ) ) );
     getBlobEntry().setValue( "", 1 );
     calcPktLen();
-
     vx_assert( 0 == (getPktLength() & 0x0f) );
 }
 
@@ -256,7 +255,7 @@ PktFileInfoMoreReq::PktFileInfoMoreReq()
 bool PktFileInfoMoreReq::setSearchText( std::string& searchText )
 {
     getBlobEntry().resetWrite();
-    if( !searchText.empty() )
+    if( searchText.c_str() )
     {
         bool result = getBlobEntry().setValue( searchText );
         calcPktLen();
@@ -301,7 +300,7 @@ PktFileInfoMoreReply::PktFileInfoMoreReply()
 bool PktFileInfoMoreReply::setSearchText( std::string& searchText )
 {
     getBlobEntry().resetWrite();
-    if( !searchText.empty() )
+    if( searchText.c_str() )
     {
         bool result = getBlobEntry().setValue( searchText );
         calcPktLen();

@@ -38,20 +38,11 @@ void PluginAboutMePageServer::onAfterUserLogOnThreaded( void )
 //============================================================================
 void PluginAboutMePageServer::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	getFileInfoMgr().getAboutMePageStaticAssets( m_AssetList );
-
-	bool isReady{ true };
-	for( auto assetPair : m_AssetList )
+	if( !getFileInfoMgr().loadAboutMePageStaticAssets() )
 	{
-		if( !getFileInfoMgr().isFileInLibrary( assetPair.first ) )
-		{
-			isReady = false;
-			std::string fullFileName = m_RootFileFolder + assetPair.second;
-			getFileInfoMgr().addFileToLibrary( m_Engine.getMyOnlineId(), fullFileName, assetPair.first );
-		}
+		LogMsg( LOG_ERROR, "PluginAboutMePageServer::onLoadedFilesReady failed or missing web files" );
 	}
-
-	if( isReady )
+	else
 	{
 		setIsAboutMePageReady( true );
 	}
@@ -66,17 +57,6 @@ void PluginAboutMePageServer::onFilesChanged( int64_t lastFileUpdateTime, int64_
 //============================================================================
 void PluginAboutMePageServer::checkIsAboutMePageReady( void )
 {
-	bool isReady{ true };
-	for( auto assetPair : m_AssetList )
-	{
-		if( !getFileInfoMgr().isFileInLibrary( assetPair.first ) )
-		{
-			isReady = false;
-			false;
-		}
-	}
-
-	setIsAboutMePageReady( isReady );
 }
 
 //============================================================================

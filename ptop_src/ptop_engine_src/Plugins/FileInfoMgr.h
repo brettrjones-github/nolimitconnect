@@ -46,11 +46,11 @@ public:
 
 	void						lockFileList( void )				{ m_FilesListMutex.lock(); }
 	void						unlockFileList( void )				{ m_FilesListMutex.unlock(); }
-	std::map<VxGUID, FileInfo*>& getFileLibraryList( void )			{ return m_FileInfoList; }
+	std::map<VxGUID, FileInfo>& getFileLibraryList( void )			{ return m_FileInfoList; }
 
-	void						lockFileListPackets( void )			{ m_PacketsMutex.lock(); }
-	void						unlockFileListPackets( void )		{ m_PacketsMutex.unlock(); }
-	std::vector<PktFileListReply*>& getFileListPackets( void )		{ return m_FileListPackets; }
+	//void						lockFileListPackets( void )			{ m_PacketsMutex.lock(); }
+	//void						unlockFileListPackets( void )		{ m_PacketsMutex.unlock(); }
+	//std::vector<PktFileListReply*>& getFileListPackets( void )		{ return m_FileListPackets; }
 
 	void						setRootFolder( std::string& rootFileFolder ) { m_RootFileFolder = rootFileFolder; }
 	std::string					getRootFolder( void )				{ return m_RootFileFolder; }
@@ -67,7 +67,7 @@ public:
 													uint64_t		fileLen,
 													uint8_t			fileType,
 													VxSha1Hash&		fileHashId );
-	bool						addFileToLibrary( FileInfo* fileInfo );
+	bool						addFileToLibrary( FileInfo& fileInfo );
 	bool						cancelAndDelete( VxGUID& assetId );
 
 	// returns -1 if unknown else percent downloaded
@@ -101,7 +101,7 @@ public:
 	virtual bool				isFileShared( VxSha1Hash& fileHashId );
 	virtual bool				isFileShared( std::string& fileName );
 
-	void						getAboutMePageStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList );
+	bool						loadAboutMePageStaticAssets( void );
 
 	void						getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList );
 
@@ -111,9 +111,11 @@ public:
 	ECommErr					searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 	ECommErr					searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 
+	bool						startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
+
 protected:
 	void						checkForInitializeCompleted( void );
-	FileInfo*					findFileAsset( VxGUID& fileAssetId ); // assumes file list is already locked
+	bool						findFileAsset( VxGUID& fileAssetId, FileInfo& fileInfo ); // assumes file list is already locked
 
 	//=== vars ===//
     P2PEngine&					m_Engine;
@@ -125,11 +127,14 @@ protected:
 	uint16_t					m_u16FileTypes{ 0 };
 
 	VxMutex						m_FilesListMutex;
-	std::map<VxGUID,FileInfo*>	m_FileInfoList; // map of assetId, FileInfo
-	std::vector<FileInfo*>		m_FileInfoNeedHashAndSaveList;
+	std::map<VxGUID,FileInfo>	m_FileInfoList; // map of assetId, FileInfo
+	std::vector<FileInfo>		m_FileInfoNeedHashAndSaveList;
 
-	std::vector<PktFileListReply*>m_FileListPackets;
-	VxMutex						m_PacketsMutex;
+	//std::vector<PktFileListReply*>m_FileListPackets;
+	//VxMutex						m_PacketsMutex;
+
+
+
 
 	FileInfoDb					m_FileInfoDb;
 	FileInfoXferMgr				m_FileInfoXferMgr;

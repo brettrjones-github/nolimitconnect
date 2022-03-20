@@ -29,10 +29,15 @@ public:
 
 	void						lockSearchFileList( void )		{ m_SearchFilesListMutex.lock(); }
 	void						unlockSearchFileList( void )	{ m_SearchFilesListMutex.unlock(); }
-	std::vector<FileInfo>&		getSearchFileList( void )		{ return m_SearchFileInfoList; }
+
+	void						lockInProgressFileList( void )	{ m_InProgressFilesListMutex.lock(); }
+	void						unlockInProgressFileList( void ) { m_InProgressFilesListMutex.unlock(); }
+
+	void						lockCompletedFileList( void ) { m_InProgressFilesListMutex.lock(); }
+	void						unlockCompletedFileList( void ) { m_InProgressFilesListMutex.unlock(); }
 
 protected:
-	virtual void                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) override;
+	virtual bool                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) override;
 	virtual void                fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr ) override;
 
 	virtual void				onAfterUserLogOnThreaded( void ) override;
@@ -44,15 +49,24 @@ protected:
 
 	void						checkIsAboutMePageReady( void );
 	void						onAboutMePageReady( bool isReady );
+	void						cancelDownload( void );
+	bool						startDownload( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	std::string					m_RootFileFolder{ "" };
 	std::string					m_DownloadFileFolder{ "" };
-	std::vector<std::pair<VxGUID, std::string>> m_AssetList;
+	std::string					m_WebPageIndexFile{ "" };
+
 	bool						m_AboutMePageReady{ false };
 	VxGUID						m_HisOnlineId;
 
 	VxMutex						m_SearchFilesListMutex;
-	std::vector<FileInfo>		m_SearchFileInfoList; // map of assetId, FileInfo
+	std::vector<FileInfo>		m_SearchFileInfoList; 
+
+	VxMutex						m_InProgressFilesListMutex;
+	std::vector<FileInfo>		m_InProgressFileInfoList; // map of assetId, FileInfo
+
+	VxMutex						m_CompletedFilesListMutex;
+	std::vector<FileInfo>		m_CompletedFileInfoList;
 };
 
 

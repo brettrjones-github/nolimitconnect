@@ -506,17 +506,23 @@ void PluginBaseFiles::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pk
 		{
 			if( pktReply->getSearchText( searchText ) )
 			{
-				updateFromFileInfoSearchBlob( pktReply->getSearchSessionId(), pktReply->getHostOnlineId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getFileInfoCountThisPkt() );
-				if( pktReply->getMoreFileInfosExist() )
+				if( updateFromFileInfoSearchBlob( pktReply->getSearchSessionId(), pktReply->getHostOnlineId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getFileInfoCountThisPkt() ) )
 				{
-					if( !requestMoreFileInfoFromServer( pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchAssetId(), searchText ) )
+					if( pktReply->getMoreFileInfosExist() )
 					{
-						fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrUserOffline );
+						if( !requestMoreFileInfoFromServer( pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchAssetId(), searchText ) )
+						{
+							fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrUserOffline );
+						}
+					}
+					else
+					{
+						fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
 					}
 				}
 				else
 				{
-					fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+					fileInfoSearchCompleted( pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrInvalidParam );
 				}
 			}
 			else
@@ -649,22 +655,30 @@ void PluginBaseFiles::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktH
 }
 
 //============================================================================
-void PluginBaseFiles::updateFromFileInfoSearchBlob( VxGUID& searchSessionId, VxGUID& hostOnlineId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int fileInfoCount )
+bool PluginBaseFiles::updateFromFileInfoSearchBlob( VxGUID& searchSessionId, VxGUID& hostOnlineId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int fileInfoCount )
 {
 	// assumes blobEntry.resetRead(); has been called and any procceeding values like search text has been extracted
+	bool result{ true };
 	for( int i = 0; i < fileInfoCount; i++ )
 	{
 		FileInfo fileIInfo;
 		if( fileIInfo.extractFromBlob( blobEntry ) )
 		{
-			fileInfoSearchResult( searchSessionId, sktBase, netIdent, fileIInfo );
+			result &= fileInfoSearchResult( searchSessionId, sktBase, netIdent, fileIInfo );
+			if( !result )
+			{
+				break;
+			}
 		}
 		else
 		{
 			LogMsg( LOG_ERROR, "Could not extract FileInfoListMgr::updateFromFileInfoSearchBlob" );
+			result = false;
 			break;
 		}
 	}
+
+	return result;
 }
 
 //============================================================================

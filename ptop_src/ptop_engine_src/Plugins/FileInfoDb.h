@@ -35,11 +35,11 @@ public:
 	virtual RCODE				onDeleteTables( int iOldVersion );
 
 	void 						addFile( VxGUID& onlineId, std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime = 0 );
-	void 						addFile( FileInfo* libFileInfo );
+	void 						addFile( FileInfo& libFileInfo );
 	void						removeFile( std::string& fileName );
 	void						removeFile( VxGUID& onlineId, VxGUID& assetId );
 
-	void						getAllFiles( std::map<VxGUID, FileInfo*>& sharedFileList );
+	void						getAllFiles( std::map<VxGUID, FileInfo>& sharedFileList );
 	void						purgeAllFileLibrary( void ); 
 
 	std::string&				getFileInfoDbName( void ) { return m_FileInfoDbName; }

@@ -24,6 +24,7 @@
 #include <map>
 
 class VxPktHdr;
+class FileInfo;
 class FileRxSession;
 class FileTxSession;
 class FileXferMgr;
@@ -73,17 +74,19 @@ public:
 														int				pvUserData,
 														const char *	pOfferMsg,				// offer message
 														const char *	pFileName		= NULL,
-														uint8_t *			fileHashId		= 0,
+														uint8_t *		fileHashId		= 0,
 														VxGUID			lclSessionId	= VxGUID::nullVxGUID() );		
 
 	int							fromGuiPluginControl(	VxNetIdent *	netIdent,
 														const char *	pControl, 
 														const char *	pAction,
-														uint32_t				u32ActionData,
+														uint32_t		u32ActionData,
 														VxGUID&			fileId,
-														uint8_t *			fileHashId );
+														uint8_t *		fileHashId );
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
+
+	virtual bool				startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	virtual void				onConnectionLost( VxSktBase * sktBase );
 

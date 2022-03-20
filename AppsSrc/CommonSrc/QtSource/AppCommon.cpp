@@ -470,6 +470,7 @@ void AppCommon::connectSignals( void )
 	//connect( //ui.m_RelayHelpButton, SIGNAL(clicked()),								this, SLOT(slotRelayHelpButtonClicked()));
 	connect( this, SIGNAL(signalSetRelayHelpButtonVisibility(bool)),				this, SLOT(slotSetRelayHelpButtonVisibility(bool)));
 	connect( this, SIGNAL( signalInternalPluginMessage( EPluginType, VxGUID, EPluginMsgType, QString ) ), this, SLOT( slotInternalPluginMessage( EPluginType, VxGUID, EPluginMsgType, QString ) ), Qt::QueuedConnection );
+	connect( this, SIGNAL( signalInternalPluginErrorMsg( EPluginType, VxGUID, EPluginMsgType, ECommErr ) ), this, SLOT( slotInternalPluginErrorMsg( EPluginType, VxGUID, EPluginMsgType, ECommErr ) ), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -966,7 +967,6 @@ void AppCommon::toGuiUserMessage( const char * userMsg, ... )
 }
 
 //============================================================================
-// NOTE: toGuiUserMessage should be called from in gui on gui thread only
 void AppCommon::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg )
 {
 	if( VxIsAppShuttingDown() )
@@ -979,6 +979,17 @@ void AppCommon::toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPlugi
 }
 
 //============================================================================
+void AppCommon::toGuiPluginCommError( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, ECommErr commErr )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalInternalPluginErrorMsg( pluginType, onlineId, msgType, commErr );
+}
+
+//============================================================================
 void AppCommon::slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue )
 {
 	toGuiFileXferClientsLock();
@@ -987,6 +998,22 @@ void AppCommon::slotInternalPluginMessage( EPluginType pluginType, VxGUID online
 		if( client.m_Callback )
 		{
 			client.m_Callback->toGuiPluginMsg( pluginType, onlineId, msgType, paramValue );
+		}
+	}
+
+	toGuiFileXferClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError )
+{
+	QString commErrDescription = GuiParams::describeCommError( commError );
+	toGuiFileXferClientsLock();
+	for( auto& client : m_ToGuiActivityClientList )
+	{
+		if( client.m_Callback )
+		{
+			client.m_Callback->toGuiPluginMsg( pluginType, onlineId, msgType, commErrDescription );
 		}
 	}
 
@@ -2265,6 +2292,6 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<ConnectId>( "ConnectId" );
 	qRegisterMetaType<EWebPageType>( "EWebPageType" );
 	qRegisterMetaType<EPluginMsgType>( "EPluginMsgType" );
-	
+	qRegisterMetaType<ECommErr>( "ECommErr" );
 }
 

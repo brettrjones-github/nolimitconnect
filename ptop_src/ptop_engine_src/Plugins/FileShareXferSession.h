@@ -62,10 +62,10 @@ public:
 
 protected:
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
-	int							m_iPercentComplete;
-	VxSktBase *					m_Skt;
-	VxNetIdent *				m_Ident;
-	uint32_t					m_Error;
+	int							m_iPercentComplete{ 0 };
+	VxSktBase *					m_Skt{ nullptr };
+	VxNetIdent *				m_Ident{ nullptr };
+	uint32_t					m_Error{ 0 };
 
 private:
 	void						initLclSessionId( void );

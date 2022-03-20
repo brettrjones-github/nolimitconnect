@@ -23,6 +23,7 @@
 #include "FileRxSession.h"
 
 #include "FileInfoMgr.h"
+#include "FileInfo.h"
 #include "SharedFileInfo.h"
 
 #include <GuiInterface/IToGui.h>
@@ -659,6 +660,7 @@ void FileInfoXferMgr::onPktFindFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 //============================================================================
 void FileInfoXferMgr::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+	/*
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	PktFileListReq * poPkt = (PktFileListReq *)pktHdr;
 	uint32_t reqListIdx = poPkt->getListIndex();
@@ -684,11 +686,13 @@ void FileInfoXferMgr::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 	}
 
 	m_FileInfoMgr.unlockFileListPackets();
+	*/
 }
 
 //============================================================================
 void FileInfoXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+	/*
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	FileRxSession * xferSession = findOrCreateRxSession( netIdent, sktBase );
 	PktFileListReply * poPkt = (PktFileListReply *)pktHdr;
@@ -729,6 +733,7 @@ void FileInfoXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 		IToGui::getToGui().toGuiFileListReply( netIdent, m_Plugin.getPluginType(), 0, 0, "", VxGUID::nullVxGUID(), 0 );
 		endFileXferSession( xferSession );
 	}
+	*/
 }
 
 //============================================================================
@@ -1563,3 +1568,19 @@ bool FileInfoXferMgr::makeIncompleteFileName( std::string& strRemoteFileName, st
 	return strRetIncompleteFileName.size() ? true : false;
 }*/
 
+
+//============================================================================
+bool FileInfoXferMgr::startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	bool result{ false };
+	FileRxSession* fileRxSession = findOrCreateRxSession( searchSessionId, netIdent, sktBase );
+	if( fileRxSession )
+	{
+		FileToXfer fileToXfer( fileInfo.getShortFileName(), 0, searchSessionId, searchSessionId, fileInfo.getFileHashId(), 0 );
+
+		fileRxSession->m_astrFilesToXfer.push_back( fileToXfer );
+		result = beginFileGet( fileRxSession );
+	}
+
+	return result;
+}
