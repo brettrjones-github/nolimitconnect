@@ -16,17 +16,19 @@
 #include "FileToXfer.h"
 
 //============================================================================
-FileToXfer::FileToXfer(std::string	strFileName, 
-					   uint64_t			u64FileOffset,  
-					   VxGUID&		lclSessionId, 
-					   VxGUID&		rmtSessionId,
-					   VxSha1Hash	fileHashId,
-					   int			userData )
+FileToXfer::FileToXfer(std::string		strFileName, 
+						uint64_t		u64FileOffset,  
+						VxGUID&			lclSessionId, 
+						VxGUID&			rmtSessionId,
+						VxGUID&			fileAssetId,
+						VxSha1Hash		fileHashId,
+						int				userData )
 : m_strFileName(strFileName)
 , m_u64FileOffset( u64FileOffset )
 , m_UserData( userData )
 , m_LclSessionId( lclSessionId )
 , m_RmtSessionId( rmtSessionId )
+, m_FileAssetId( fileAssetId )
 , m_FileHashId( fileHashId )
 {
 }
@@ -39,6 +41,7 @@ FileToXfer& FileToXfer::operator=(const FileToXfer& rhs)
 	m_UserData					= rhs.m_UserData;
 	m_LclSessionId				= rhs.m_LclSessionId;
 	m_RmtSessionId				= rhs.m_RmtSessionId;
+	m_FileAssetId				= rhs.m_FileAssetId;
 	m_FileHashId				= rhs.m_FileHashId;
 	return *this;
 }

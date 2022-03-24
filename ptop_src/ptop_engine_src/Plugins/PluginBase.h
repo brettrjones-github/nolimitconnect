@@ -177,6 +177,45 @@ public:
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
 
+
+	virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
+														EPluginType		ePluginType,			// plugin type
+														const char*		pOfferMsg,				// offer message
+														int				pvUserData,				// plugin defined data
+														const char*		pFileName = NULL,		// filename if any
+														uint8_t*		fileHashData = 0,
+														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
+														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) {};
+	virtual void				toGuiRxedOfferReply( VxNetIdent*		netIdent,
+														EPluginType		ePluginType,
+														int				pvUserData,
+														EOfferResponse	eOfferResponse,
+														const char*		pFileName = 0,
+														uint8_t*		fileHashData = 0,
+														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
+														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) {};
+	virtual void				toGuiStartUpload( VxNetIdent*		netIdent,
+													EPluginType		ePluginType,
+													VxGUID&			lclSessionId,
+													uint8_t			u8FileType,
+													uint64_t		u64FileLen,
+													const char*		pFileName,
+													VxGUID			assetId,
+													uint8_t*		fileHashData ) {};
+
+	virtual void				toGuiStartDownload( VxNetIdent*		netIdent,
+													EPluginType		ePluginType,
+													VxGUID&			lclSessionId,
+													uint8_t			u8FileType,
+													uint64_t		u64FileLen,
+													const char*		pFileName,
+													VxGUID			assetId,
+													uint8_t*		fileHashData ) {};
+
+	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) {};
+	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) {};
+	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) {};
+
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) = 0;
@@ -255,6 +294,9 @@ public:
 	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) {};
 	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) {};
 
+	virtual std::string			getIncompleteFileXferDirectory( VxGUID& onlineId ) { return ""; }
+	virtual bool				onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash ) { return true;  }
+
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
     virtual bool                generateSettingPkt( PluginSetting& pluginSetting, int64_t modifiedTimeMs );
@@ -265,6 +307,7 @@ protected:
 	ECommErr					getCommAccessState( VxNetIdent* netIdent );
 
 	//=== vars ===//
+	EPluginType					m_ePluginType = ePluginTypeInvalid;
 	P2PEngine&					m_Engine;
 	PluginMgr&					m_PluginMgr;
     AssetMgr&                   m_AssetMgr;
@@ -273,7 +316,6 @@ protected:
 	
 	VxNetIdent *				m_MyIdent = nullptr;
 
-	EPluginType					m_ePluginType = ePluginTypeInvalid;
 	EAppState					m_ePluginState = eAppStateInvalid;
 	VxMutex						m_PluginMutex;
     PluginSetting               m_PluginSetting;

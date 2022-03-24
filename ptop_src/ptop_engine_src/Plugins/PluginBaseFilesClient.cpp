@@ -72,3 +72,29 @@ bool PluginBaseFilesClient::onConnectForWebPageDownload( VxSktBase* sktBase, VxN
 
     return txPacket( netIdent, sktBase, &pktReq );
 }
+
+
+//============================================================================
+void PluginBaseFilesClient::toGuiStartDownload( VxNetIdent* netIdent,
+    EPluginType		ePluginType,
+    VxGUID& lclSessionId,
+    uint8_t			u8FileType,
+    uint64_t		u64FileLen,
+    const char* pFileName,
+    VxGUID			assetId,
+    uint8_t* fileHashData )
+{
+
+}
+
+//============================================================================
+void PluginBaseFilesClient::toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param )
+{
+
+}
+
+//============================================================================
+void PluginBaseFilesClient::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError )
+{
+
+}

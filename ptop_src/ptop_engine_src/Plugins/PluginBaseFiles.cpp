@@ -44,9 +44,10 @@ PluginBaseFiles::PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNet
 , m_FileShredder( GetVxFileShredder() )
 , m_PluginSessionMgr( engine, *this, pluginMgr)
 , m_FileInfoMgr( engine, *this, fileInfoDbName )
-, m_FileInfoXferMgr( engine, *this, m_FileInfoMgr )
+, m_FileInfoXferMgr( m_FileInfoMgr.getFileInfoXferMgr() )
 {
 	setPluginType( pluginType );
+	LogMsg( LOG_VERBOSE, "PluginBaseFiles::PluginBaseFiles %s %p", DescribePluginType( pluginType ), this );
 }
 
 //============================================================================
@@ -702,4 +703,11 @@ ECommErr PluginBaseFiles::searchRequest( PktFileInfoSearchReply& pktReply, VxGUI
 ECommErr PluginBaseFiles::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	return m_FileInfoMgr.searchMoreRequest( pktReply, nextFileAssetId, searchStr, sktBase, netIdent );
+}
+
+
+//============================================================================
+void PluginBaseFiles::toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr )
+{
+
 }

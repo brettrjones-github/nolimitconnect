@@ -36,6 +36,19 @@ public:
 	bool						connectForWebPageDownload( VxGUID& onlineId );
 	bool						onConnectForWebPageDownload( VxSktBase* sktBase, VxNetIdent* netIdent );
 
+
+	virtual void				toGuiStartDownload( VxNetIdent*		netIdent,
+													EPluginType		ePluginType,
+													VxGUID&			lclSessionId,
+													uint8_t			u8FileType,
+													uint64_t		u64FileLen,
+													const char*		pFileName,
+													VxGUID			assetId,
+													uint8_t*		fileHashData ) override;
+
+	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) override;
+	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) override;
+
 protected:
 
 	VxNetIdent*					m_HisIdent{ nullptr };

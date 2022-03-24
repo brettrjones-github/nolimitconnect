@@ -386,12 +386,12 @@ namespace
     {
         "Unknown Plugin ",
         "Admin ",
-        "About Me Page ",
+        "About Me Page Server ",
         "Shared Web Cam ",
         "Shared Files ",
-        "Send A File ",    
+        "Send A Person File ",    
         "Messenger ",
-        "Story Board ", 
+        "Story Board Server", 
         "Play Truth Or Dare ",
         "Video Chat ",
         "Voice Call ",
@@ -409,8 +409,42 @@ namespace
         "Host No Limit Network ",
         "Host Connect Test ",
         "Network Search ",
-        "Relay ",
+        "Relay ", // 25
         "Max Public Plugin ",
+        "Plugin Reserved 27 ",
+        "Plugin Reserved 28 ",
+        "Plugin Reserved 29 ",
+        "Plugin Reserved 30 ",
+        "Plugin Reserved 31 ",
+        "Plugin Reserved 32 ",
+        "Plugin Reserved 33 ",
+        "Plugin Reserved 34 ",
+        "Plugin Reserved 35 ",
+        "Plugin Reserved 36 ",
+        "Plugin Reserved 37 ",
+        "Plugin Reserved 38 ",
+        "Plugin Reserved 39 ",
+        "Plugin Reserved 40 ",
+        "Plugin Reserved 41 ",
+        "Plugin Reserved 42 ",
+        "Plugin Reserved 43 ",
+        "Plugin Reserved 44 ",
+        "Plugin Reserved 45 ",
+        "Plugin Reserved 46 ",
+        "Plugin Reserved 47 ",
+        "Max User Plugin Type ",
+
+        "Plugin Camera Service ",
+        "Plugin MJPEG Reader ",
+        "Plugin MJPEG Writer ",
+        "Plugin Personal Recorder ",
+        "Plugin Net Services ",
+        "Plugin Search ",
+        "Plugin Sound Reader ",
+        "Plugin Sound Writer ",
+        "Plugin Web Server ",        //!< Web server plugin ( for About Me and Story Board web pages )
+        "About Me Page Client ",//!< about me web page plugin client
+        "Storyboard Client ",	//!< storyboard web page plugin client
     };
 
     const char * PortOpenStatusEnumStrings[] =
@@ -985,13 +1019,8 @@ const char * DescribePluginAccess( EPluginAccess pluginAccess )
 //============================================================================
 const char * DescribePluginType( EPluginType pluginType )
 {
-    if( pluginType < 0 || eMaxImplementedPluginType <= pluginType )
+    if( pluginType < 0 || eMaxPluginType <= pluginType )
     {
-        if( ePluginTypeNetServices == pluginType )
-        {
-            return "Net Services ";
-        }
-
         return ENUM_BAD_PARM;
     }
 
@@ -1225,17 +1254,23 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
 {
     switch( hostType )
     {
+    case ePluginTypeHostGroup:
     case eHostTypeGroup:
         return ePluginTypeHostGroup;
+    case ePluginTypeHostChatRoom:
     case eHostTypeChatRoom:
         return ePluginTypeHostChatRoom;
+    case ePluginTypeHostRandomConnect:
     case eHostTypeRandomConnect:
         return ePluginTypeHostRandomConnect;
+    case ePluginTypeHostPeerUser:
     case eHostTypePeerUserRelayed:
     case eHostTypePeerUserDirect:
         return ePluginTypeHostPeerUser;
+    case ePluginTypeHostNetwork:
     case eHostTypeNetwork:
         return ePluginTypeHostNetwork;
+    case ePluginTypeHostConnectTest:
     case eHostTypeConnectTest:
         return ePluginTypeHostConnectTest;
     case eHostTypeUnknown:
@@ -1252,17 +1287,23 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
 {
     switch( hostType )
     {
+    case ePluginTypeClientGroup:
     case eHostTypeGroup:
         return ePluginTypeClientGroup;
+    case ePluginTypeClientChatRoom:
     case eHostTypeChatRoom:
         return ePluginTypeClientChatRoom;
+    case ePluginTypeClientRandomConnect:
     case eHostTypeRandomConnect:
         return ePluginTypeClientRandomConnect;
+    case ePluginTypeClientPeerUser:
     case eHostTypePeerUserRelayed:
     case eHostTypePeerUserDirect:
         return ePluginTypeClientPeerUser;
+    case ePluginTypeClientNetwork:
     case eHostTypeNetwork:
         return ePluginTypeClientNetwork;
+    case ePluginTypeClientConnectTest:
     case eHostTypeConnectTest:
         return ePluginTypeClientConnectTest;
     case eHostTypeUnknown:

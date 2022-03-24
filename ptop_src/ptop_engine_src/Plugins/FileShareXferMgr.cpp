@@ -225,7 +225,7 @@ bool FileShareXferMgr::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identi
 												int				pvUserData,
 												const char *	pOfferMsg,		// offer message
 												const char *	pFileName,
-												uint8_t *			fileHashId,
+												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	
 {
 	VxSktBase * sktBase = NULL;
@@ -246,7 +246,7 @@ bool FileShareXferMgr::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identi
 
 				FileRxSession *	xferSession = findOrCreateRxSession( lclSessionId, netIdent, sktBase );
 				std::string strFileName = pFileName;
-				xferSession->m_astrFilesToXfer.push_back( FileToXfer(strFileName, 0, lclSessionId, lclSessionId, fileHashId, pvUserData ) );
+				xferSession->m_astrFilesToXfer.push_back( FileToXfer(strFileName, 0, lclSessionId, lclSessionId, lclSessionId, fileHashId, pvUserData ) );
 			}
 			else
 			{
@@ -320,7 +320,7 @@ int FileShareXferMgr::fromGuiPluginControl(	VxNetIdent *		netIdent,
 			FileRxSession *	xferSession = findOrCreateRxSession( sessionId, netIdent, sktBase );
 			xferSession->setFileHashId( fileHashId );
 			std::string strFileName = pAction;
-			xferSession->m_astrFilesToXfer.push_back( FileToXfer(strFileName, 0, sessionId, sessionId, xferSession->getFileHashId(), (int)u32ActionData ) );
+			xferSession->m_astrFilesToXfer.push_back( FileToXfer(strFileName, 0, sessionId, sessionId, sessionId, xferSession->getFileHashId(), (int)u32ActionData ) );
 			return (int)beginFileGet( xferSession );
 		}
 		else
@@ -407,6 +407,7 @@ void FileShareXferMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pk
 													0, 
 													xferSession->getLclSessionId(), 
 													xferSession->getRmtSessionId(),
+													xferSession->getLclSessionId(),
 													xferSession->getFileHashId(),
 													0 ) );
 			EXferError xferErr = beginFileSend( xferSession );
@@ -434,7 +435,7 @@ void FileShareXferMgr::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 	poPkt->getFileName( rmtFileName );
 	if( false == m_SharedFilesMgr.getFileFullName( poPkt->getFileHashId(), strLclFileName ) )
 	{
-		LogMsg( LOG_INFO, "FileXferMgr::onPktFileGetReq file no longer shared %s\n", rmtFileName.c_str() );
+		LogMsg( LOG_INFO, "FileXferMgr::onPktFileGetReq file no longer shared %s", rmtFileName.c_str() );
 		oPkt.setError( eXferErrorFileNotFound );
 	}
 	else
@@ -447,6 +448,7 @@ void FileShareXferMgr::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 		FileTxSession * xferSession = createTxSession( netIdent, sktBase );
 		VxFileXferInfo& xferInfo = xferSession->getXferInfo();
 		xferInfo.setRmtSessionId( poPkt->getLclSessionId() );
+		xferInfo.setAssetId( poPkt->getAssetId() );
 		xferInfo.setFileHashId( poPkt->getFileHashId() );
 		xferInfo.setFileOffset( poPkt->getStartOffset() );
 		xferInfo.setLclFileName( strLclFileName.c_str() );
@@ -1287,12 +1289,13 @@ void FileShareXferMgr::finishFileReceive( FileRxSession * xferSession, PktFileSe
 	std::string strFileName = xferInfo.getLclFileName();
 	xferSession->m_astrFilesXfered.push_back( 
 			FileToXfer(strFileName, 0, xferInfo.getLclSessionId(), 
-			xferInfo.getRmtSessionId(), xferInfo.getFileHashId(), 0 ) );
+			xferInfo.getRmtSessionId(), xferInfo.getAssetId(), xferInfo.getFileHashId(), 0 ) );
 
 	//=== acknowlege ===//
 	PktFileSendCompleteReply oPkt;
 	oPkt.setLclSessionId( xferInfo.getLclSessionId() );
 	oPkt.setRmtSessionId( xferInfo.getRmtSessionId() );
+	oPkt.setAssetId( xferInfo.getAssetId() );
 	oPkt.setFileHashId( xferSession->getFileHashId() );
 	m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt );
 	LogMsg( LOG_INFO,  "VxPktHandler: Done Receiving file %s", strFileName.c_str() );
@@ -1369,7 +1372,7 @@ void FileShareXferMgr::finishFileReceive( FileRxSession * xferSession, PktFileGe
 	std::string strFileName = xferInfo.getLclFileName();
 	if( 0 == xferSession->getErrorCode() )
 	{
-		xferSession->m_astrFilesXfered.push_back( FileToXfer( strFileName, 0, xferInfo.getLclSessionId(), xferInfo.getRmtSessionId(), xferInfo.getFileHashId(), 0 ) );
+		xferSession->m_astrFilesXfered.push_back( FileToXfer( strFileName, 0, xferInfo.getLclSessionId(), xferInfo.getRmtSessionId(), xferInfo.getAssetId(), xferInfo.getFileHashId(), 0 ) );
 	}
 
 	//=== acknowlege ===//

@@ -207,6 +207,7 @@ EXferError FileXferBaseMgr::sendNextFileChunk( VxFileXferInfo& xferInfo, VxNetId
 		oPkt.setChunkLen( (uint16_t)u32ChunkLen );
 		oPkt.setLclSessionId( xferInfo.getLclSessionId() );
 		oPkt.setRmtSessionId( xferInfo.getRmtSessionId() );
+		oPkt.setAssetId( xferInfo.getAssetId() );
 	}
 
 	if( eXferErrorNone == xferErr )

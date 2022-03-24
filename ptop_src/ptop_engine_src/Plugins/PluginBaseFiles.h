@@ -16,8 +16,6 @@
 
 #include "PluginBase.h"
 #include "PluginSessionMgr.h"
-#include "FileXferMgr.h"
-#include "FileInfoXferMgr.h"
 #include "FileInfoMgr.h"
 
 #include "SharedFilesMgr.h"
@@ -33,6 +31,7 @@ class IToGui;
 class VxNetIdent;
 class FileTxSession;
 class FileRxSession;
+class FileInfoXferMgr;
 class VxFileShredder;
 
 class PluginBaseFiles : public PluginBase
@@ -82,6 +81,8 @@ public:
 	virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 );
 	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
 	virtual bool				fromGuiGetIsFileInLibrary( const char * fileName );
+
+	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr );
 
     virtual void				onSharedFilesUpdated( uint16_t u16FileTypes ) override;
 
@@ -137,7 +138,7 @@ protected:
 	VxFileShredder&				m_FileShredder;
 	PluginSessionMgr			m_PluginSessionMgr;
     FileInfoMgr				    m_FileInfoMgr;
-	FileInfoXferMgr				m_FileInfoXferMgr;
+	FileInfoXferMgr&			m_FileInfoXferMgr;
 };
 
 

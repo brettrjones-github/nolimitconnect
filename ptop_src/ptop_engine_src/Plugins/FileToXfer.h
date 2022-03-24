@@ -26,6 +26,7 @@ public:
 				uint64_t		u64FileOffset, 
 				VxGUID&			lclSessionId,
 				VxGUID&			rmtSessionId, 
+				VxGUID&			fileAssetId,
 				VxSha1Hash		fileHashId,
 				int				userData );
 
@@ -35,6 +36,9 @@ public:
 	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
+
+	void						setAssetId( VxGUID& rmtId )					{ m_FileAssetId = rmtId; }
+	VxGUID&						getAssetId( void )							{ return m_FileAssetId; }
 
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
@@ -47,5 +51,6 @@ public:
 protected:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_FileAssetId;
 	VxSha1Hash					m_FileHashId;
 };

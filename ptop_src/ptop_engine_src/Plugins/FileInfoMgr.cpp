@@ -19,6 +19,7 @@
 #include "PluginBase.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
 #include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
@@ -40,6 +41,7 @@ FileInfoMgr::FileInfoMgr( P2PEngine& engine, PluginBase& plugin, std::string fil
 , m_FileInfoDb( fileLibraryDbName )
 , m_FileInfoXferMgr( engine, plugin, *this )
 {
+	LogMsg( LOG_VERBOSE, "FileInfoMgr::FileInfoMgr %s %p", DescribePluginType( plugin.getPluginType() ), this );
 }
 
 //============================================================================
@@ -49,7 +51,19 @@ FileInfoMgr::~FileInfoMgr()
 }
 
 //============================================================================
-bool FileInfoMgr::isFileShared( VxSha1Hash& fileHashId )
+std::string FileInfoMgr::getIncompleteFileXferDirectory( VxGUID& onlineId )
+{
+	std::string incompleteDir = m_Plugin.getIncompleteFileXferDirectory( onlineId );
+	if( incompleteDir.empty() )
+	{
+		incompleteDir = VxGetIncompleteDirectory();
+	}
+
+	return incompleteDir;
+}
+
+//============================================================================
+bool FileInfoMgr::isFileShared( VxGUID& assetId, VxSha1Hash& fileHashId )
 {
 	return true;
 }
@@ -385,13 +399,13 @@ void FileInfoMgr::removeFromLibrary( std::string& fileName )
 }
 
 //============================================================================
-bool FileInfoMgr::getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName )
+bool FileInfoMgr::getFileFullName( VxGUID& assetId, VxSha1Hash& fileHashId, std::string& retFileFullName )
 {
 	bool isShared = false;
 	lockFileList();
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
-		if( fileHashId == iter->second.getFileHashId() )
+		if( assetId == iter->second.getAssetId() && fileHashId == iter->second.getFileHashId() )
 		{
 			isShared = true;
 			retFileFullName = iter->second.getFullFileName();
@@ -420,13 +434,6 @@ bool FileInfoMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileH
 
 	lockFileList();
 	return foundHash;
-}
-
-//============================================================================
-bool FileInfoMgr::onFileDownloadComplete( std::string& fileName, bool addFile, uint8_t* fileHashId )
-{
-	LogMsg( LOG_VERBOSE, "FileInfoMgr::onFileDownloadComplete %s", fileName.c_str() );
-	return true;
 }
 
 //============================================================================
@@ -813,4 +820,82 @@ ECommErr FileInfoMgr::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID&
 bool FileInfoMgr::startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	return m_FileInfoXferMgr.startDownload( fileInfo, searchSessionId, sktBase, netIdent );
+}
+
+//============================================================================
+bool FileInfoMgr::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
+{
+	LogMsg( LOG_VERBOSE, "FileInfoMgr::onFileDownloadComplete %s", fileName.c_str() );
+	return m_Plugin.onFileDownloadComplete( netIdent, sktBase, lclSessionId, fileName, assetId, sha11Hash );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
+										EPluginType		ePluginType,			// plugin type
+										const char*		pOfferMsg,				// offer message
+										int				pvUserData,				// plugin defined data
+										const char*		pFileName,		// filename if any
+										uint8_t*		fileHashData,
+										VxGUID&			lclSessionId,
+										VxGUID&			rmtSessionId ) 
+{
+	m_Plugin.toGuiRxedPluginOffer( netIdent, ePluginType, pOfferMsg, pvUserData, pFileName, fileHashData, lclSessionId, rmtSessionId );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiRxedOfferReply( VxNetIdent* netIdent,
+	EPluginType		ePluginType,
+	int				pvUserData,
+	EOfferResponse	eOfferResponse,
+	const char* pFileName,
+	uint8_t* fileHashData,
+	VxGUID& lclSessionId,
+	VxGUID& rmtSessionId ) 
+{
+	m_Plugin.toGuiRxedOfferReply( netIdent, ePluginType, pvUserData, eOfferResponse, pFileName, fileHashData, lclSessionId, rmtSessionId );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiStartUpload( VxNetIdent* netIdent,
+	EPluginType		ePluginType,
+	VxGUID& lclSessionId,
+	uint8_t			u8FileType,
+	uint64_t		u64FileLen,
+	const char* pFileName,
+	VxGUID			assetId,
+	uint8_t* fileHashData ) 
+{
+	m_Plugin.toGuiStartUpload( netIdent, ePluginType, lclSessionId, u8FileType, u64FileLen, pFileName, assetId, fileHashData );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiStartDownload( VxNetIdent*		netIdent,
+										EPluginType		ePluginType,
+										VxGUID&			lclSessionId,
+										uint8_t			u8FileType,
+										uint64_t		u64FileLen,
+										const char*		pFileName,
+										VxGUID			assetId,
+										uint8_t*		fileHashData ) 
+{
+	m_Plugin.toGuiStartUpload( netIdent, ePluginType, lclSessionId, u8FileType, u64FileLen, pFileName, assetId, fileHashData );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
+{
+	LogMsg( LOG_VERBOSE, "FileInfoMgr::toGuiFileXferState xferState %s xferErr %s param %d", DescribeXferState( xferState ), DescribeXferError( xferErr ), param );
+	m_Plugin.toGuiFileXferState( lclSessionId, xferState, xferErr, param );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) 
+{
+	m_Plugin.toGuiFileDownloadComplete( lclSessionId, newFileName, xferError );
+}
+
+//============================================================================
+void FileInfoMgr::toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) 
+{
+	m_Plugin.toGuiFileUploadComplete( lclSessionId, xferError );
 }

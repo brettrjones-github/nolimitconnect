@@ -51,6 +51,80 @@ void PluginAboutMePageClient::onFilesChanged( int64_t lastFileUpdateTime, int64_
 	checkIsAboutMePageReady();
 }
 
+bool PluginAboutMePageClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
+{
+	bool result = netIdent && sktBase && lclSessionId.isVxGUIDValid() && !fileName.empty() && assetId.isVxGUIDValid() && sha11Hash.isHashValid();
+	if( result )
+	{
+		result = false;
+		// move from in progress to completed
+		lockInProgressFileList();
+		for( auto iter = m_InProgressFileInfoList.begin(); iter != m_InProgressFileInfoList.end(); ++iter )
+		{
+			FileInfo& fileInfo = *iter;
+			if( fileInfo.getAssetId() == assetId && fileInfo.getFileHashId() == sha11Hash )
+			{
+				lockCompletedFileList();
+				fileInfo.setFileName( fileName );
+				fileInfo.setIsDirty( false );
+				m_CompletedFileInfoList.push_back( fileInfo );
+				m_InProgressFileInfoList.erase( iter );
+				result = true;
+				unlockCompletedFileList();
+				break;
+			}
+		}
+
+		unlockInProgressFileList();
+		if( result )
+		{
+			result = false;
+			if( m_SearchFileInfoList.empty() && m_InProgressFileInfoList.empty() )
+			{
+				// find the index file and send to gui
+				FileInfo indexFileInfo;
+				lockCompletedFileList();
+				for( auto iter = m_CompletedFileInfoList.begin(); iter != m_CompletedFileInfoList.end(); ++iter )
+				{
+					FileInfo& fileInfo = *iter;
+					if( fileInfo.getShortFileName() == getWebIndexFileName() )
+					{
+						indexFileInfo = fileInfo;
+						result = true;
+						break;
+					}
+				}
+
+				unlockCompletedFileList();
+				if( result )
+				{
+					// all done
+					m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadComplete, indexFileInfo.getFullFileName() );
+				}
+				else
+				{
+					// failed to find the web index file in downloaded files
+					m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadFailed, "", 0 );
+				}
+			}
+			else
+			{
+				result = startDownload( lclSessionId, sktBase, netIdent );
+			}
+		}
+		else
+		{
+			m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadFailed, "", 0 );
+		}
+	}
+	else
+	{
+		m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgInvalidParam, "", 0 );
+	}
+
+	return result;
+}
+
 //============================================================================
 void PluginAboutMePageClient::checkIsAboutMePageReady( void )
 {
@@ -74,14 +148,39 @@ void PluginAboutMePageClient::onAboutMePageReady( bool isReady )
 }
 
 //============================================================================
+std::string	 PluginAboutMePageClient::getIncompleteFileXferDirectory( VxGUID& onlineId )
+{
+	std::string incompleteDir{ "" };
+	if( onlineId.isVxGUIDValid() )
+	{
+		incompleteDir = m_RootFileFolder + onlineId.toHexString().c_str() + "/";
+		VxFileUtil::makeDirectory( incompleteDir.c_str() );
+		if( VxFileUtil::directoryExists( incompleteDir.c_str() ) )
+		{
+			int64_t diskFreeSpace = VxFileUtil::getDiskFreeSpace( incompleteDir.c_str() );
+
+			if( diskFreeSpace && diskFreeSpace < VxFileUtil::SIZE_1GB )
+			{
+				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), onlineId, ePluginMsgLowDiskSpace, "" );
+			}
+		}
+		else
+		{
+			m_Engine.getToGui().toGuiPluginMsg( getPluginType(), onlineId, ePluginMsgPermissionError, incompleteDir.c_str() );
+		}
+	}
+
+	return incompleteDir;
+}
+
+//============================================================================
 bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
 	bool result{ false };
 	if( eWebPageTypeAboutMe == webPageType && onlineId.isVxGUIDValid() )
 	{
 		m_HisOnlineId = onlineId;
-		m_DownloadFileFolder = m_RootFileFolder + m_HisOnlineId.toHexString().c_str() + "/";
-		VxFileUtil::makeDirectory( m_DownloadFileFolder.c_str() );
+		m_DownloadFileFolder = getIncompleteFileXferDirectory( onlineId );
 		if( VxFileUtil::directoryExists( m_DownloadFileFolder.c_str() ) )
 		{
 			m_WebPageIndexFile = m_DownloadFileFolder + "index.htm";

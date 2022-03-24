@@ -646,7 +646,7 @@ void FileXferMgr::finishFileReceive( FileXferPluginSession * xferSession, PktFil
 	std::string strFileName = xferInfo.getLclFileName();
 	xferSession->m_astrFilesReceived.push_back( 
 		FileToXfer(strFileName, 0, xferInfo.getLclSessionId(), 
-		xferInfo.getRmtSessionId(), xferInfo.getFileHashId(), 0 ) );
+		xferInfo.getRmtSessionId(), xferInfo.getAssetId(), xferInfo.getFileHashId(), 0 ) );
 
 	//=== acknowlege ===//
 	PktFileSendCompleteReply oPkt;

@@ -42,6 +42,7 @@ std::string PluginBase::getThumbXferThreadName( EPluginType pluginType )
 //============================================================================
 PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PktPluginHandlerBase()
+, m_ePluginType( pluginType )
 , m_Engine( engine )
 , m_PluginMgr( pluginMgr )
 , m_AssetMgr( engine.getAssetMgr() )

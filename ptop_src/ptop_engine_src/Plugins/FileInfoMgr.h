@@ -37,10 +37,16 @@ class VxFileShredder;
 class FileInfoMgr : public Sha1GeneratorCallback
 {
 public:
+	FileInfoMgr() = delete;
+	FileInfoMgr( const FileInfoMgr& rhs ) = delete;
 	FileInfoMgr( P2PEngine& engine, PluginBase& plugin, std::string fileInfoDbName );
 	virtual ~FileInfoMgr();
 
+	FileInfoMgr& operator=( const FileInfoMgr& rhs ) = delete;
+
 	bool						getIsInitialized( void )			{ return m_FilesInitialized; }
+
+	FileInfoXferMgr&			getFileInfoXferMgr( void )			{ return m_FileInfoXferMgr; }
 
 	void						fileLibraryShutdown( void );
 
@@ -55,6 +61,7 @@ public:
 	void						setRootFolder( std::string& rootFileFolder ) { m_RootFileFolder = rootFileFolder; }
 	std::string					getRootFolder( void )				{ return m_RootFileFolder; }
 
+	virtual std::string			getIncompleteFileXferDirectory( VxGUID& onlineId );
 
 	bool						isFileInLibrary( std::string& fileName );
 	bool						isFileInLibrary( VxSha1Hash& fileHashId );
@@ -93,12 +100,12 @@ public:
 
 	void						clearLibraryFileList( void );
 
-	bool						getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName );
+	bool						getFileFullName( VxGUID& assetId, VxSha1Hash& fileHashId, std::string& retFileFullName );
 	bool						getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId );
 
-	virtual bool				onFileDownloadComplete( std::string& fileName, bool addFile, uint8_t* fileHashId );
+	virtual bool				onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash);
 
-	virtual bool				isFileShared( VxSha1Hash& fileHashId );
+	virtual bool				isFileShared( VxGUID& assetId, VxSha1Hash& fileHashId );
 	virtual bool				isFileShared( std::string& fileName );
 
 	bool						loadAboutMePageStaticAssets( void );
@@ -112,6 +119,44 @@ public:
 	ECommErr					searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	bool						startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
+
+	virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
+														EPluginType		ePluginType,			// plugin type
+														const char*		pOfferMsg,				// offer message
+														int				pvUserData,				// plugin defined data
+														const char*		pFileName = NULL,		// filename if any
+														uint8_t*		fileHashData = 0,
+														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
+														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
+	virtual void				toGuiRxedOfferReply( VxNetIdent*	netIdent,
+													EPluginType		ePluginType,
+													int				pvUserData,
+													EOfferResponse	eOfferResponse,
+													const char*		pFileName = 0,
+													uint8_t*		fileHashData = 0,
+													VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
+													VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
+	virtual void				toGuiStartUpload( VxNetIdent*		netIdent,
+													EPluginType		ePluginType,
+													VxGUID&			lclSessionId,
+													uint8_t			u8FileType,
+													uint64_t		u64FileLen,
+													const char*		pFileName,
+													VxGUID			assetId,
+													uint8_t*		fileHashData );
+
+	virtual void				toGuiStartDownload( VxNetIdent*		netIdent,
+													EPluginType		ePluginType,
+													VxGUID&			lclSessionId,
+													uint8_t			u8FileType,
+													uint64_t		u64FileLen,
+													const char*		pFileName,
+													VxGUID			assetId,
+													uint8_t*		fileHashData );
+
+	void						toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
+	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError );
+	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError );
 
 protected:
 	void						checkForInitializeCompleted( void );
@@ -129,12 +174,6 @@ protected:
 	VxMutex						m_FilesListMutex;
 	std::map<VxGUID,FileInfo>	m_FileInfoList; // map of assetId, FileInfo
 	std::vector<FileInfo>		m_FileInfoNeedHashAndSaveList;
-
-	//std::vector<PktFileListReply*>m_FileListPackets;
-	//VxMutex						m_PacketsMutex;
-
-
-
 
 	FileInfoDb					m_FileInfoDb;
 	FileInfoXferMgr				m_FileInfoXferMgr;

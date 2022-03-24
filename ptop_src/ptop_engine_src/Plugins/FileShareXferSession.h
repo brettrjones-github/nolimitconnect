@@ -41,6 +41,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_FileXferInfo.setRmtSessionId( rmtId ); }
 	VxGUID&						getRmtSessionId( void )						{ return m_FileXferInfo.getRmtSessionId(); }
 
+	void						setAssetId( VxGUID& assetId )				{ m_FileXferInfo.setAssetId( assetId ); }
+	VxGUID&						getAssetId( void )							{ return m_FileXferInfo.getAssetId(); }
+
 	void						setFileHashId( uint8_t * fileHashId )		{ m_FileXferInfo.setFileHashId( fileHashId ); }
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileXferInfo.setFileHashId( fileHashId ); }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileXferInfo.getFileHashId(); }

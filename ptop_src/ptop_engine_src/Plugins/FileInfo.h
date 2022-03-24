@@ -50,6 +50,9 @@ public:
 	void						setAssetId( VxGUID& assetId )			{ m_AssetId = assetId; }
 	VxGUID&						getAssetId( void )						{ return m_AssetId; }
 
+	void						setThumbId( VxGUID& assetId )			{ m_ThumbId = assetId; }
+	VxGUID&						getThumbId( void )						{ return m_ThumbId; }
+
 	void						setFileName( const char * fileName )	{ m_FullFileName = fileName; }
 	void						setFileName( std::string& fileName )	{ m_FullFileName = fileName; }
 	std::string&				getFileName( void )						{ return m_FullFileName; }
@@ -90,5 +93,6 @@ public:
 	std::string					m_ContainedInDir{ "" };
 	bool						m_IsDirty{ true };
 	VxGUID						m_AssetId;
+	VxGUID						m_ThumbId;
 	int64_t						m_FileTime{ 0 };
 };

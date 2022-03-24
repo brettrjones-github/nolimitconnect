@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "FileXferBaseMgr.h"
 #include <PktLib/VxCommon.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h>
 #include <GuiInterface/IDefs.h>
@@ -23,14 +22,18 @@
 
 #include <map>
 
-class VxPktHdr;
 class FileInfo;
 class FileRxSession;
 class FileTxSession;
 class FileXferMgr;
-class SharedFileInfo;
 class FileInfoMgr;
 class FileLibraryMgr;
+class P2PEngine;
+class PluginBase;
+class PluginMgr;
+class SharedFileInfo;
+class VxFileXferInfo;
+class VxPktHdr;
 class VxSha1Hash;
 
 class PktFileGetCompleteReq;
@@ -39,8 +42,7 @@ class PktFileChunkReq;
 class PktFileSendCompleteReq;
 class PktFileListReply;
 
-
-class FileInfoXferMgr : public FileXferBaseMgr
+class FileInfoXferMgr
 {
 public:
 	enum EFileXOptions
@@ -53,8 +55,17 @@ public:
 	typedef std::map<VxGUID, FileRxSession *>::iterator FileRxIter;
 	typedef std::vector<FileTxSession *>::iterator FileTxIter;
 
+	FileInfoXferMgr() = delete;
+	FileInfoXferMgr(const FileInfoXferMgr& rhs ) = delete;
 	FileInfoXferMgr( P2PEngine& engine, PluginBase& plugin, FileInfoMgr& fileInfoMgr );
 	virtual ~FileInfoXferMgr();
+
+	FileInfoXferMgr& operator=( const FileInfoXferMgr& rhs ) = delete;
+
+	EPluginType					getPluginType( void );
+
+	void						setMoveCompletedFilesToDownloadFolder( bool moveOnCompleted )	{ m_MoveOnCompletedToDownloadsFolder = moveOnCompleted; }
+	bool						getMoveCompletedFilesToDownloadFolder( void )					{ return m_MoveOnCompletedToDownloadsFolder; }
 
 	void						fileAboutToBeDeleted( std::string& fileName );
 
@@ -149,25 +160,32 @@ protected:
 														const char *	pMsg, ...);	// error message
 
 	EXferError					beginFileGet( FileRxSession * xferSession );
-	EXferError					canTxFile( VxNetIdent * netIdent, VxSha1Hash& fileHashId );
+	EXferError					canTxFile( VxNetIdent * netIdent, VxGUID& assetId, VxSha1Hash& fileHashId );
 	bool						isViewFileListMatch( FileTxSession * xferSession, SharedFileInfo& fileInfo );
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );
 	void						checkQueForMoreFilesToSend( void );
 
 protected:
+	EXferError					setupFileDownload( VxFileXferInfo& xferInfo, VxNetIdent* netIdent );
+	bool						makeIncompleteFileName( std::string& strRemoteFileName, std::string& strRetIncompleteFileName, VxNetIdent* netIdent );
+	EXferError					sendNextFileChunk( VxFileXferInfo& xxferInfo, VxNetIdent* netIdent, VxSktBase* skt );
 
-	//=== vars ===//
+	//=== vars ====//
+	P2PEngine& m_Engine;
+	PluginBase& m_Plugin;
+	PluginMgr& m_PluginMgr;
+	FileInfoMgr& m_FileInfoMgr;
+
 	std::map<VxGUID, FileRxSession *>	m_RxSessions;
 	std::vector<FileTxSession *>		m_TxSessions;
-
-	FileInfoMgr&				m_FileInfoMgr;
 
 	bool						m_bIsInSession{ true };
 	bool						m_bIsInitialized{ false };
 
 	EFileXOptions				m_eFileRxOption;
 	FileShareSettings			m_FileShareSettings;
+	bool						m_MoveOnCompletedToDownloadsFolder{ false };
 };
 
 

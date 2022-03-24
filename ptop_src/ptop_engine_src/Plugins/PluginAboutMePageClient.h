@@ -27,14 +27,16 @@ public:
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
+	virtual std::string			getIncompleteFileXferDirectory( VxGUID& onlineId ) override;
+
 	void						lockSearchFileList( void )		{ m_SearchFilesListMutex.lock(); }
 	void						unlockSearchFileList( void )	{ m_SearchFilesListMutex.unlock(); }
 
 	void						lockInProgressFileList( void )	{ m_InProgressFilesListMutex.lock(); }
 	void						unlockInProgressFileList( void ) { m_InProgressFilesListMutex.unlock(); }
 
-	void						lockCompletedFileList( void ) { m_InProgressFilesListMutex.lock(); }
-	void						unlockCompletedFileList( void ) { m_InProgressFilesListMutex.unlock(); }
+	void						lockCompletedFileList( void ) { m_CompletedFilesListMutex.lock(); }
+	void						unlockCompletedFileList( void ) { m_CompletedFilesListMutex.unlock(); }
 
 protected:
 	virtual bool                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) override;
@@ -44,6 +46,8 @@ protected:
 	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
 	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
 
+	virtual bool				onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash ) override;
+
 	void						setIsAboutMePageReady( bool isReady );
 	bool						getIsAboutMePageReady( void ) { return m_AboutMePageReady; }
 
@@ -51,6 +55,8 @@ protected:
 	void						onAboutMePageReady( bool isReady );
 	void						cancelDownload( void );
 	bool						startDownload( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
+
+	std::string					getWebIndexFileName( void ) { return "index.htm"; }
 
 	std::string					m_RootFileFolder{ "" };
 	std::string					m_DownloadFileFolder{ "" };

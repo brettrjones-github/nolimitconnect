@@ -971,6 +971,10 @@ QString GuiParams::describePluginMsg( EPluginMsgType pluginMsgType )
         strPluginMsg = QObject::tr( "Low Disk Space" );
         break;
 
+    case ePluginMsgInvalidParam:
+        strPluginMsg = QObject::tr( "Invalid Parameter" );
+        break;
+
     default:
         strPluginMsg = QObject::tr( "Unknown Plugin Message" );
         LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin message type %d", pluginMsgType );

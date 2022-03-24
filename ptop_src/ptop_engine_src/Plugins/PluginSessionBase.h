@@ -78,6 +78,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& rmtId )					{ m_AssetId = rmtId; }
+	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+
 	void						setFileHashId( VxSha1Hash& id )				{ m_FileHashId = id; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
@@ -107,6 +110,7 @@ protected:
 	bool						m_bTest;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	EOfferResponse				m_eOfferResponse;
 	OpusAudioDecoder *			m_AudioDecoder;

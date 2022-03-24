@@ -94,6 +94,7 @@ FileInfo& FileInfo::operator=( const FileInfo& rhs )
 	m_ContainedInDir		= rhs.m_ContainedInDir;
 	m_IsDirty				= rhs.m_IsDirty;
 	m_AssetId				= rhs.m_AssetId;
+	m_ThumbId				= rhs.m_ThumbId;
 	m_FileTime				= rhs.m_FileTime;
 	return *this;
 }

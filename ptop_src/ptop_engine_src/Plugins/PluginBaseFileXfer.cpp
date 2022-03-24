@@ -189,6 +189,7 @@ void PluginBaseFileXfer::onSessionStart( PluginSessionBase * session, bool plugi
 													0, 
 													xferSession->getLclSessionId(), 
 													xferSession->getRmtSessionId(),
+													xferSession->getAssetId(),
 													xferSession->getFileHashId(),
 													0 ) );
 		m_FileXferMgr.fromGuiStartPluginSession( true, session );

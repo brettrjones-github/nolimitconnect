@@ -34,7 +34,7 @@ public:
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
 
-	void 						addFile( VxGUID& onlineId, std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime = 0 );
+	void 						addFile( VxGUID& onlineId, std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxGUID& thumbId, VxSha1Hash& fileHashId, int64_t fileTime = 0 );
 	void 						addFile( FileInfo& libFileInfo );
 	void						removeFile( std::string& fileName );
 	void						removeFile( VxGUID& onlineId, VxGUID& assetId );

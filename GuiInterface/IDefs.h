@@ -696,9 +696,11 @@ enum EPluginMsgType
     ePluginMsgRetrieveInfoFailed,
     ePluginMsgDownloading,
     ePluginMsgDownloadFailed,
+    ePluginMsgDownloadComplete,
     ePluginMsgCanceled,
     ePluginMsgPermissionError,
     ePluginMsgLowDiskSpace,
+    ePluginMsgInvalidParam,
 
     eMaxPPluginMsgType
 };

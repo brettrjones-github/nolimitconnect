@@ -67,6 +67,11 @@ public:
     void						setHostOnlineId( VxGUID& guid ) { m_HostOnlineId = guid; }
     VxGUID&                     getHostOnlineId( void )         { return m_HostOnlineId; }
 
+    void						setAssetId( VxGUID& guid )      { m_AssetId = guid; }
+    VxGUID&                     getAssetId( void )              { return m_AssetId; }
+    void						setThumbId( VxGUID& guid )      { m_ThumbId = guid; }
+    VxGUID&                     getThumbId( void )              { return m_ThumbId; }
+
     void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void )          { return ( EPluginAccess )m_AccessState; }
 
@@ -87,6 +92,8 @@ private:
     uint8_t					    m_AccessState{ 0 };     // 1 byte
     uint8_t					    m_Res1{ 0 };	        // 1 bytes
     VxGUID                      m_HostOnlineId;  // 16 bytes
+    VxGUID                      m_AssetId;  // 16 bytes
+    VxGUID                      m_ThumbId;  // 16 bytes
     // 60 bytes to here
     PktBlobEntry                m_BlobEntry;	//size 14352
 };
@@ -106,6 +113,11 @@ public:
     void						setSessionId( VxGUID& guid )        { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )                { return m_SessionId; }
 
+    void						setAssetId( VxGUID& guid )          { m_AssetId = guid; }
+    VxGUID&                     getAssetId( void )                  { return m_AssetId; }
+    void						setThumbId( VxGUID& guid )          { m_ThumbId = guid; }
+    VxGUID&                     getThumbId( void )                  { return m_ThumbId; }
+
     bool                        setFileInfoInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
     bool                        getFileInfoInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
@@ -121,6 +133,8 @@ protected:
     uint16_t                    m_Res2{ 0 };
     uint32_t                    m_Res3{ 0 };
     VxGUID                      m_SessionId;
+    VxGUID                      m_AssetId;
+    VxGUID                      m_ThumbId;
     VxGUID                      m_HostOnlineId;  // 16 bytes
     PktBlobEntry                m_BlobEntry;
 };
@@ -139,6 +153,11 @@ public:
     void						setSessionId( VxGUID& guid )        { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )                { return m_SessionId; }
 
+    void						setAssetId( VxGUID& guid )          { m_AssetId = guid; }
+    VxGUID&                     getAssetId( void )                  { return m_AssetId; }
+    void						setThumbId( VxGUID& guid )          { m_ThumbId = guid; }
+    VxGUID&                     getThumbId( void )                  { return m_ThumbId; }
+
     void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void ) { return     ( EPluginAccess )m_AccessState; }
 
@@ -152,6 +171,8 @@ protected:
     uint8_t					    m_Res1{ 0 };	        // 1 bytes
     uint32_t                    m_Res2{ 0 };
     VxGUID                      m_SessionId;
+    VxGUID                      m_AssetId;
+    VxGUID                      m_ThumbId;
     VxGUID                      m_HostOnlineId;  // 16 bytes
 };
 
