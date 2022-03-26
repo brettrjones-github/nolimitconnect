@@ -98,13 +98,13 @@ void AppletGroupJoinSearch::setInfoLabel( QString strMsg )
 void AppletGroupJoinSearch::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void AppletGroupJoinSearch::hideEvent( QHideEvent * ev )
 {
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );
 }
 

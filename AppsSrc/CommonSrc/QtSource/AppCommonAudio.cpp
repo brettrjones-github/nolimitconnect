@@ -52,25 +52,21 @@ void AppCommon::slotEnableMicrophoneRecording( bool enableMicInput )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d start\n", enableMicInput );
-	toGuiHardwareCtrlLock();
 	m_MicrophoneHardwareEnabled = enableMicInput;
-	std::vector<ToGuiHardwareCtrlClient>::iterator hardwareIter;
-	for( hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
-		ToGuiHardwareCtrlClient& toGuiClient = *hardwareIter;
-		toGuiClient.m_Callback->doGuiWantMicrophoneRecording( m_MicrophoneHardwareEnabled );
+		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+		toGuiClient->toGuiWantMicrophoneRecording( m_MicrophoneHardwareEnabled );
 	}
 
-	toGuiHardwareCtrlUnlock();
-	LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d done\n", enableMicInput );
+	LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d done", enableMicInput );
 }
 
 //============================================================================
 //! called when microphone recoding not needed
 void AppCommon::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput )
 {
-	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantSpeakerOutput %d\n", wantSpeakerOutput );
+	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantSpeakerOutput %d", wantSpeakerOutput );
 	if( VxIsAppShuttingDown() )
 	{
 		return;
@@ -88,16 +84,12 @@ void AppCommon::slotEnableSpeakerOutput( bool enableSpeakerOutput )
 		return;
 	}
 
-	toGuiHardwareCtrlLock();
 	m_SpeakerHardwareEnabled = 	enableSpeakerOutput;
-	std::vector<ToGuiHardwareCtrlClient>::iterator hardwareIter;
-	for( hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
-		ToGuiHardwareCtrlClient& toGuiClient = *hardwareIter;
-		toGuiClient.m_Callback->doGuiWantSpeakerOutput(	m_SpeakerHardwareEnabled );
+		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+		toGuiClient->toGuiWantSpeakerOutput( m_SpeakerHardwareEnabled );
 	}
-
-	toGuiHardwareCtrlUnlock();
 }
 
 //============================================================================

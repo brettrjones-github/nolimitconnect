@@ -64,7 +64,7 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
 	setTitle( "Scan Web Cam Servers" );
 	m_CountdownTimer->setInterval( COUNTDOWN_INTERVAL_MS );
 	m_CountdownTimer->start();
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
 
 	slotStartScanClicked();
 }
@@ -72,7 +72,7 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
 //============================================================================
 ActivityScanWebCams::~ActivityScanWebCams()
 {
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
 }
 
 //============================================================================
@@ -102,20 +102,13 @@ void ActivityScanWebCams::hideEvent( QHideEvent * ev )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiClientScanSearchComplete( void * userData, EScanType eScanType )
+void ActivityScanWebCams::toGuiClientScanSearchComplete( EScanType eScanType )
 {
-	Q_UNUSED( userData );
 	if( eScanTypeCamServer == eScanType )
 	{
-		emit signalSearchComplete();
+		setScanStatusText( QObject::tr( "Search Complete" ) );
+		m_bSearchComplete = true;
 	}
-}
-
-//============================================================================
-void ActivityScanWebCams::slotSearchComplete()
-{
-	setScanStatusText( QObject::tr( "Search Complete" ) );
-	m_bSearchComplete = true;
 }
 
 //============================================================================
@@ -137,9 +130,8 @@ void ActivityScanWebCams::setupIdentWidget( GuiUser * netIdent )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiScanResultSuccess( void * userData, EScanType eScanType, GuiUser * netIdent )
+void ActivityScanWebCams::toGuiScanResultSuccess(EScanType eScanType, GuiUser * netIdent )
 {
-	Q_UNUSED( userData );
 	if( eScanTypeCamServer == eScanType )
 	{
 		emit signalNewWebCamSession( netIdent );
@@ -241,7 +233,7 @@ void ActivityScanWebCams::setCamViewToOfflineImage( void )
 void ActivityScanWebCams::slotHomeButtonClicked( void )
 {
 	m_FromGui.fromGuiStopScan( m_eScanType );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
 	if( 0 != m_HisIdent )
 	{
 		startWebCamSession( m_HisIdent->getMyOnlineId(), false );
@@ -249,9 +241,8 @@ void ActivityScanWebCams::slotHomeButtonClicked( void )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 )
+void ActivityScanWebCams::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 )
 {
-	Q_UNUSED( userData );
 	ui.m_CamVidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
 }
 

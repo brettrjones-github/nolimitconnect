@@ -101,13 +101,13 @@ void AppletGroupListClient::setInfoLabel( QString strMsg )
 void AppletGroupListClient::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks(this, true );
 }
 
 //============================================================================
 void AppletGroupListClient::hideEvent( QHideEvent * ev )
 {
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );
 }
 

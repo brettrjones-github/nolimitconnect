@@ -44,16 +44,12 @@ public:
     bool						getSelectedFileIsShared( void )					{ return m_SelectedFileIsShared; }
     bool						getSelectedFileIsInLibrary( void )				{ return m_SelectedFileIsInLibrary; }
 
-signals:
-    void						signalToGuiFileList( VxMyFileInfo& fileInfo );
-
 private slots:
     void						slotHomeButtonClicked( void ) override;
     void						statusMsg( QString strMsg );
     void						slotRequestFileList( void );
     void						slotApplyFileFilter( unsigned char fileTypeMask );
     void						slotAddFilesButtonClicked( void );
-    void						slotToGuiFileList( VxMyFileInfo& fileInfo );
 
     void						slotListItemClicked( QListWidgetItem * item );
     void						slotListItemDoubleClicked( QListWidgetItem * item );
@@ -67,7 +63,7 @@ private slots:
 protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
-    virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ) override;
+    virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
     FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
     FileItemInfo *				widgetToFileItemInfo( FileShareItemWidget * item );

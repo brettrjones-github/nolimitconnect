@@ -49,12 +49,7 @@ public:
 	bool						getSelectedFileIsShared( void )					{ return m_SelectedFileIsShared; }
 	bool						getSelectedFileIsInLibrary( void )				{ return m_SelectedFileIsInLibrary; }
 
-signals:
-	void						signalToGuiFileList( VxMyFileInfo& fileInfo );
-
 protected slots:
-	void						slotToGuiFileList( VxMyFileInfo& fileInfo );
-
     void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
 	void						slotBrowseButtonClicked( void );
@@ -73,7 +68,7 @@ protected slots:
 protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
-    virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ) override;
+    virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
 	void						fromListWidgetRequestFileList( void );
 	void						setActionEnable( bool enable );

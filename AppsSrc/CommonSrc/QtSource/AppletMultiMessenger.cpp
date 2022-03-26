@@ -210,15 +210,15 @@ void AppletMultiMessenger::onActivityFinish( void )
 }
 
 //============================================================================
-void AppletMultiMessenger::doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer )
+void AppletMultiMessenger::toToGuiRxedPluginOffer( GuiOfferSession * offer )
 {
-	m_OfferSessionLogic.doToGuiRxedPluginOffer( offer );
+	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletMultiMessenger::doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerSession )
+void AppletMultiMessenger::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
 {
-	m_OfferSessionLogic.doToGuiRxedOfferReply( offerSession );
+	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 }
 
 //============================================================================
@@ -318,7 +318,7 @@ bool AppletMultiMessenger::checkForSendAccess( bool sendOfferIfPossible )
 void AppletMultiMessenger::showEvent( QShowEvent * ev )
 {
 	AppletPeerBase::showEvent( ev );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
     if( m_HisIdent )
     {
         m_MyApp.toGuiAssetAction( eAssetActionRxViewingMsg, m_HisIdent->getMyOnlineId(), 1 );
@@ -333,7 +333,7 @@ void AppletMultiMessenger::hideEvent( QHideEvent * ev )
         m_MyApp.toGuiAssetAction( eAssetActionRxViewingMsg, m_HisIdent->getMyOnlineId(), 0 );
     }
 
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
     if( ePluginTypeInvalid != m_ePluginType )
     {
         m_MyApp.setPluginVisible( m_ePluginType, false );
@@ -372,18 +372,34 @@ void AppletMultiMessenger::onInSession( bool isInSession )
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 )
+void AppletMultiMessenger::toGuiMultiSessionAction(  EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 )
 {
-	Q_UNUSED( callbackData );
 	if( m_HisIdent && m_HisIdent->getMyOnlineId() == onlineId )
 	{
-		VxGUID guidId( onlineId );
-		emit signalToGuiMultiSessionAction( onlineId, mSessionAction, pos0to100000 );
+
+		if( ( onlineId.getVxGUIDHiPart() == m_HisIdent->getMyOnlineId().getVxGUIDHiPart() ) &&
+			( onlineId.getVxGUIDLoPart() == m_HisIdent->getMyOnlineId().getVxGUIDLoPart() ) )
+		{
+			if( eMSessionActionChatSessionAccept == mSessionAction )
+			{
+				onInSession( true );
+			}
+			else if( eMSessionActionChatSessionReject == mSessionAction )
+			{
+				onInSession( false );
+			}
+
+			MultiSessionState* sessionState = getMSessionState( ( EMSessionType )pos0to100000 );
+			if( sessionState )
+			{
+				sessionState->handleMultiSessionAction( mSessionAction );
+			}
+		}
 	}
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiClientPlayVideoFrame(	void *			userData, 
+void AppletMultiMessenger::toGuiClientPlayVideoFrame(	
 														VxGUID&			onlineId, 
 														uint8_t *		pu8Jpg, 
 														uint32_t		u32JpgDataLen,
@@ -401,34 +417,6 @@ void AppletMultiMessenger::toGuiClientPlayVideoFrame(	void *			userData,
 }
 
 //============================================================================
-void AppletMultiMessenger::slotToGuiMultiSessionAction( VxGUID idPro, EMSessionAction mSessionAction, int pos0to100000 )
-{
-	if( !m_IsInitialized || ( !m_HisIdent ) )
-	{
-		return;
-	}
-
-	if(	( idPro.getVxGUIDHiPart() == m_HisIdent->getMyOnlineId().getVxGUIDHiPart() ) &&	
-		( idPro.getVxGUIDLoPart() == m_HisIdent->getMyOnlineId().getVxGUIDLoPart() ) )
-	{
-		if( eMSessionActionChatSessionAccept == mSessionAction )
-		{
-			onInSession( true );
-		}
-		else if( eMSessionActionChatSessionReject == mSessionAction )
-		{
-			onInSession( false );
-		}
-
-		MultiSessionState * sessionState = getMSessionState( (EMSessionType)pos0to100000 );
-		if( sessionState )
-		{
-			sessionState->handleMultiSessionAction( mSessionAction );
-		}
-	}
-}
-
-//============================================================================
 void AppletMultiMessenger::slotToGuiPluginSessionEnded( GuiOfferSession * offer )
 {
 	//handleSessionEnded( offerResponse, this );
@@ -441,7 +429,7 @@ void AppletMultiMessenger::setStatusMsg( QString strStatus )
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiSetGameValueVar(	void *		userData, 
+void AppletMultiMessenger::toGuiSetGameValueVar(	
 													EPluginType ePluginType, 
 													VxGUID&		onlineId, 
 													int32_t		s32VarId, 
@@ -450,12 +438,12 @@ void AppletMultiMessenger::toGuiSetGameValueVar(	void *		userData,
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
 	{
-		emit signalToGuiSetGameValueVar( s32VarId, s32VarValue );
+		// emit signalToGuiSetGameValueVar( s32VarId, s32VarValue );
 	}
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiSetGameActionVar(	void *		    userData, 
+void AppletMultiMessenger::toGuiSetGameActionVar(	
 													EPluginType     ePluginType, 
 													VxGUID&		    onlineId, 
 													int32_t			s32VarId, 
@@ -464,7 +452,7 @@ void AppletMultiMessenger::toGuiSetGameActionVar(	void *		    userData,
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
 	{
-		emit signalToGuiSetGameActionVar( s32VarId, s32VarValue );
+		// emit signalToGuiSetGameActionVar( s32VarId, s32VarValue );
 	}
 }
 

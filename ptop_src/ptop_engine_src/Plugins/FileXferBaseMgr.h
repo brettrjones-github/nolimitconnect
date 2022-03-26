@@ -16,6 +16,7 @@
 
 #include <CoreLib/VxFileUtil.h>
 #include <NetLib/VxXferDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class PluginBase;
 class PluginMgr;
@@ -31,6 +32,8 @@ class FileXferBaseMgr
 public:
 	FileXferBaseMgr( P2PEngine& engine, PluginBase& plugin );
 	virtual ~FileXferBaseMgr() = default;
+
+	EPluginType					getPluginType( void );
 
 protected:
 	EXferError					setupFileDownload( VxFileXferInfo& xferInfo );

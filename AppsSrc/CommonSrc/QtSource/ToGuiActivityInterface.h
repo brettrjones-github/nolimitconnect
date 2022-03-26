@@ -33,61 +33,60 @@ class ThumbInfo;
 class ToGuiActivityInterface
 {
 public:
-	virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ){}; 
-	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ){}; 
+	virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ){}; 
+	virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ){}; 
 
     virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue ){};
 
-	virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ){}; 
+	virtual void				toGuiPluginSessionEnded( GuiOfferSession * offer ){}; 
 
-    virtual void				toGuiIndentListUpdate( void* callbackData, EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
-    virtual void				toGuiIndentListRemove( void* callbackData, EUserViewType listType, VxGUID& onlineId ) {};
+    virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
+    virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) {};
 
-    virtual void				toGuiContactAdded( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactRemoved( void * callbackData, VxGUID& onlineId ) {}; 
+    virtual void				toGuiContactAdded( VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactRemoved( VxGUID& onlineId ) {}; 
 
-	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent ){}; 
-	virtual void				toGuiContactOffline( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactNameChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactDescChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactMyFriendshipChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactHisFriendshipChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiPluginPermissionChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactSearchFlagsChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactLastSessionTimeChange( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiUpdateMyIdent( void * callbackData, GuiUser * netIdent ){}; 
+	virtual void				toGuiContactOnline( VxNetIdent * netIdent ){}; 
+	virtual void				toGuiContactOffline( GuiUser * netIdent ){}; 
+    virtual void				toGuiContactNameChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiContactDescChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiContactMyFriendshipChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiContactHisFriendshipChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiPluginPermissionChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiContactSearchFlagsChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiContactLastSessionTimeChange( GuiUser * netIdent ){}; 
+    virtual void				toGuiUpdateMyIdent(GuiUser * netIdent ){}; 
 
 
-    virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) {};
-    virtual int				    toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) { return 0;};
-	virtual void				toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
+    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) {};
+    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) { return 0;};
+	virtual void				toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
 
-	virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, GuiUser * netIdent ){};
-	virtual void				toGuiSearchResultError( void * callbackData, EScanType eScanType, GuiUser * netIdent, int errCode ){};
-	virtual void				toGuiSearchResultProfilePic( void * callbackData, GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
-	virtual void				toGuiSearchResultFileSearch(	void *			callbackData, 
-																GuiUser *	    netIdent, 		
+	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ){};
+	virtual void				toGuiSearchResultError( EScanType eScanType, GuiUser * netIdent, int errCode ){};
+	virtual void				toGuiSearchResultProfilePic( GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
+	virtual void				toGuiSearchResultFileSearch(	GuiUser *	    netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
 																const char *	pFileName,
                                                                 VxGUID          assetId ){};
-	virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ){};
+	virtual void				toGuiClientScanSearchComplete( EScanType eScanType ){};
 
-	virtual void				toGuiClientAssetAction( void * callbackData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
-    virtual void				toGuiAssetSessionHistory( void * userData, AssetBaseInfo * assetInfo ){};
-    virtual void				toGuiAssetAdded( void * userData, AssetBaseInfo * assetInfo ){};
+	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo& assetInfo ){};
+    virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ){};
 
-	virtual void				toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ){};
-	virtual void				toGuiSetGameValueVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};
-	virtual void				toGuiSetGameActionVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t actionId, int32_t varValue ){};
+	virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ){};
+	virtual void				toGuiSetGameValueVar( EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};
+	virtual void				toGuiSetGameActionVar( EPluginType ePluginType, VxGUID& onlineId, int32_t actionId, int32_t varValue ){};
 
-    virtual void				toGuiClientBlobAction( void * callbackData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
-    virtual void				toGuiBlobAdded( void * userData, BlobInfo * assetInfo ){};
-    virtual void				toGuiBlobSessionHistory( void * userData, BlobInfo * assetInfo ){};
+    virtual void				toGuiClientBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
+    virtual void				toGuiBlobAdded( BlobInfo& blobInfo ){};
+    virtual void				toGuiBlobSessionHistory( BlobInfo& blobInfo ){};
 
-    virtual void				toGuiThumbAdded( void * userData, ThumbInfo * assetInfo ){};
-    virtual void				toGuiThumbUpdated( void * userData, ThumbInfo * assetInfo ){};
-    virtual void				toGuiThumbRemoved( void * userData, VxGUID& thumbId ){};
+    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ){};
+    virtual void				toGuiThumbUpdated( ThumbInfo * assetInfo ){};
+    virtual void				toGuiThumbRemoved( VxGUID& thumbId ){};
 };
 

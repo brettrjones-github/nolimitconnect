@@ -45,8 +45,3 @@ bool AppletBase::isAssetInfoSet( void )
 {
     return m_AssetInfo.getAssetUniqueId().isVxGUIDValid();
 }
-
-//============================================================================
-void AppletBase::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
-{
-}

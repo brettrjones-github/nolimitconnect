@@ -327,16 +327,11 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/TodGameDefs.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/TodGameLogic.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/TodGameWidget.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiActivityClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiActivityInterface.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiFileXferClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiFileXferInterface.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiHardwareControlInterface.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiHardwareCtrlClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiOfferInterface.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiUserUpdateClient.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiUserUpdateInterface.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiThumbUpdateClient.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiThumbUpdateInterface.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/TitleBarWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VideoSinkGrabber.h \
@@ -421,8 +416,18 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommon.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonAudio.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonEvents.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonFileMenu.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonFileShare.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonFriend.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonLogin.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonMedia.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonNotify.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonOfferToFriend.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonRender.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonScan.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonSearch.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonServers.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonSignalsAndSlots.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppDefs.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppGlobals.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppProfile.cpp \
@@ -651,15 +656,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/OfferBarWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/OfferSessionLogic.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/OfferSessionState.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingFileMenu.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingFileShare.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingFriend.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingNotify.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingOfferToFriend.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingScan.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingSearch.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingServers.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/P2PThingMedia.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/PermissionWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/PermissionListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/PersonOfferListItem.cpp \
@@ -702,11 +698,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ThumbnailEditWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ThumbnailChooseWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ThumbnailViewWidget.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiActivityClient.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiFileXferClient.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiHardwareCtrlClient.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiUserUpdateClient.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiThumbUpdateClient.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VideoSinkGrabber.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAspectFrame.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxComboBox.cpp \

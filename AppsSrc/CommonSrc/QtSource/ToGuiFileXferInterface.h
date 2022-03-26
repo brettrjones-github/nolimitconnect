@@ -31,14 +31,14 @@ class VxMyFileInfo;
 class ToGuiFileXferInterface 
 {
 public:
-	virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ){};
-	virtual void				toGuiFileListReply(	void * userData, FileListReplySession * xferSession ){};
+	virtual void				toGuiFileList( VxMyFileInfo& fileInfo ){};
+	virtual void				toGuiFileListReply(	FileListReplySession * xferSession ){};
 
-	virtual void				toGuiStartUpload( void * userData, GuiFileXferSession * xferSession ){};
-	virtual void				toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError ){};
+	virtual void				toGuiStartUpload( GuiFileXferSession * xferSession ){};
+	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSession, EXferError xferError ){};
 
-	virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ){};
-	virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ){};
+	virtual void				toGuiStartDownload( GuiFileXferSession * xferSession ){};
+	virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSession, QString newFileName, EXferError xferError ){};
 
-	virtual void				toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ){};
+	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ){};
 };

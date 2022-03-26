@@ -115,7 +115,7 @@ void OfferSessionLogic::onInSession( bool isInSession )
 }
 
 //======================================================================== 
-void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession ) 
+void OfferSessionLogic::toToGuiRxedPluginOffer( GuiOfferSession * offerSession ) 
 {
 	if( isOurSessionType( offerSession ) )
 	{			
@@ -218,7 +218,7 @@ void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 }
 
 //======================================================================== 
-void OfferSessionLogic::doToGuiRxedOfferReply( GuiOfferSession * offerSession ) 
+void OfferSessionLogic::toToGuiRxedOfferReply( GuiOfferSession * offerSession ) 
 {
 	if( isOurSessionType( offerSession ) )
 	{			

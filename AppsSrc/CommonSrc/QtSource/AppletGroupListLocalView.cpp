@@ -91,13 +91,13 @@ void AppletGroupListLocalView::setInfoLabel( QString strMsg )
 void AppletGroupListLocalView::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void AppletGroupListLocalView::hideEvent( QHideEvent * ev )
 {
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );
 }
 

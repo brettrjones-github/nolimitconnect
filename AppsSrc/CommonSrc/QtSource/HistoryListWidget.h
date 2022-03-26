@@ -35,26 +35,17 @@ public:
 	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						onActivityStop( void );
 
-signals:
-	void						signalToGuiClientAssetAction(EAssetAction, VxGUID, int);
-    void						signalToGuiAssetAdded( AssetBaseInfo * assetInfo );
-    void						signalToGuiSessionHistory( AssetBaseInfo * assetInfo );
-
 public slots:
-	void						slotToGuiClientAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
-    void						slotToGuiAssetAdded( AssetBaseInfo * assetInfo );
-    void						slotToGuiSessionHistory( AssetBaseInfo * assetInfo );
-
 	void						slotShreddingAsset( AssetBaseWidget * assetWidget );
-
 
 protected:
 	void						showEvent( QShowEvent * ev );
 	void						hideEvent( QHideEvent * ev );
 
-	virtual void				toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
-    virtual void				toGuiAssetSessionHistory( void * userData, AssetBaseInfo * assetInfo );
-    virtual void				toGuiAssetAdded( void * userData, AssetBaseInfo * assetInfo );
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo& assetInfo ) override;
+    virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ) override;
+	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+
 
     AssetBaseWidget *			createAssetWidget( AssetBaseInfo * assetInfo );
     int							determinInsertIndex( AssetBaseInfo * assetInfo );

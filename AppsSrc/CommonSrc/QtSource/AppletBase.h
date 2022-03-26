@@ -32,9 +32,6 @@ signals:
 	void						signalPlayProgress( int pos );
 	void						signalPlayEnd( void );
 
-protected slots:
-    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos );
-
 protected:
 
 	//=== vars ===//

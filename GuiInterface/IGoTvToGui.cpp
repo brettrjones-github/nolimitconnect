@@ -441,9 +441,9 @@ void IGoTv::toGuiStartUpload(   VxNetIdent *	netIdent,
                                 VxGUID&			fileInstanceId,
                                 uint8_t			u8FileType,
                                 uint64_t		u64FileLen,
-                                const char *	pFileName,
-                                VxGUID          assetId,
-                                uint8_t *		fileHashData )
+                                std::string&	pFileName,
+                                VxGUID&         assetId,
+                                VxSha1Hash&		fileHashData )
 {
     getAppCommon().toGuiStartUpload( netIdent,
                                       ePluginType,
@@ -461,9 +461,9 @@ void IGoTv::toGuiStartDownload(     VxNetIdent *	netIdent,
                                     VxGUID&			fileInstanceId,
                                     uint8_t			u8FileType,
                                     uint64_t		u64FileLen,
-                                    const char *	pFileName,
-                                    VxGUID          assetId,
-                                    uint8_t *		fileHashData )
+                                    std::string&    pFileName,
+                                    VxGUID&          assetId,
+                                    VxSha1Hash&     fileHashData )
 {
     getAppCommon().toGuiStartDownload( netIdent,
                                         ePluginType,
@@ -476,21 +476,21 @@ void IGoTv::toGuiStartDownload(     VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void IGoTv::toGuiFileXferState( VxGUID&	lclSessionId, EXferState eXferState, int param1, int param2 )
+void IGoTv::toGuiFileXferState( EPluginType pluginType, VxGUID&	lclSessionId, EXferState eXferState, int param1, int param2 )
 {
-    getAppCommon().toGuiFileXferState( lclSessionId, eXferState, param1, param2 );
+    getAppCommon().toGuiFileXferState( pluginType, lclSessionId, eXferState, param1, param2 );
 }
 
 //============================================================================
-void IGoTv::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError )
+void IGoTv::toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError )
 {
-    getAppCommon().toGuiFileDownloadComplete( lclSessionId, newFileName, xferError );
+    getAppCommon().toGuiFileDownloadComplete( pluginType, lclSessionId, fileName, xferError );
 }
 
 //============================================================================
-void IGoTv::toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError )
+void IGoTv::toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError )
 {
-    getAppCommon().toGuiFileUploadComplete( lclSessionId, xferError );
+    getAppCommon().toGuiFileUploadComplete( pluginType, lclSessionId, fileName, xferError );
 }
 
 //============================================================================
@@ -542,24 +542,24 @@ void IGoTv::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )
 }
 
 //============================================================================
-bool IGoTv::toGuiSetGameValueVar( EPluginType	ePluginType,
+void IGoTv::toGuiSetGameValueVar( EPluginType	ePluginType,
                                       VxGUID&	oOnlineId,
                                       int32_t	s32VarId,
                                       int32_t	s32VarValue )
 {
-    return getAppCommon().toGuiSetGameValueVar(  ePluginType,
+    getAppCommon().toGuiSetGameValueVar(  ePluginType,
                                                  oOnlineId,
                                                  s32VarId,
                                                  s32VarValue );
 }
 
 //============================================================================
-bool IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
+void IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
                                        VxGUID&	oOnlineId,
                                        int32_t	s32VarId,
                                        int32_t	s32VarValue )
 {
-    return getAppCommon().toGuiSetGameActionVar(  ePluginType,
+    getAppCommon().toGuiSetGameActionVar(  ePluginType,
                                                   oOnlineId,
                                                   s32VarId,
                                                   s32VarValue );
@@ -568,7 +568,7 @@ bool IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
 //============================================================================
 void IGoTv::toGuiAssetAdded( AssetBaseInfo * assetInfo )
 {
-    LogModule( eLogAssets, LOG_DEBUG, "IGoTv::toGuiAssetAdded\n" );
+    LogModule( eLogAssets, LOG_DEBUG, "IGoTv::toGuiAssetAdded" );
     getAppCommon().toGuiAssetAdded( assetInfo );
 }
 

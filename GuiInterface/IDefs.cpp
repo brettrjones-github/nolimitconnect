@@ -1147,6 +1147,7 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeSndReader: return "ePluginTypeSndReader";
     case ePluginTypeSndWriter: return "ePluginTypeSndWriter";
     case ePluginTypeWebServer: return "ePluginTypeWebServer";
+    case ePluginTypeFileShareClient: return "ePluginTypeFileShareClient";
 
     default:
         return "UnknownPlugin";

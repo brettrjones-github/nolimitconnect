@@ -70,7 +70,7 @@ ActivityBrowseFiles::ActivityBrowseFiles( AppCommon& app,  EFileFilterType fileF
 
 	setDefaultCurrentDir( m_eFileFilterType );
 	
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	setActionEnable( false );
 	setFileFilter( m_eFileFilterType );
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)), this,  SLOT(slotApplyFileFilter(unsigned char)) );
@@ -205,12 +205,12 @@ void ActivityBrowseFiles::showEvent( QShowEvent * ev )
 //============================================================================
 void ActivityBrowseFiles::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void ActivityBrowseFiles::toGuiFileList( void * userData, VxMyFileInfo& fileInfo )
+void ActivityBrowseFiles::toGuiFileList( VxMyFileInfo& fileInfo )
 {
 	emit signalToGuiFileList( fileInfo );
 }

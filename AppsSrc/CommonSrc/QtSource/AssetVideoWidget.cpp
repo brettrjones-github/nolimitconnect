@@ -53,7 +53,6 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 	connect( ui.m_PlayPauseButton,	SIGNAL(clicked()),						this, SLOT(slotPlayButtonClicked()) );
 	connect( ui.m_LeftAvatarBar,	SIGNAL(signalShredAsset()),				this, SLOT(slotShredAsset()) );
 	connect( ui.m_RightAvatarBar,	SIGNAL(signalShredAsset()),				this, SLOT(slotShredAsset()) );
-	//connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGUID, int)) );
 	connect( ui.m_PlayPosSlider,	SIGNAL(sliderPressed()),				this, SLOT(slotSliderPressed()) );
 	connect( ui.m_PlayPosSlider,	SIGNAL(sliderReleased()),				this, SLOT(slotSliderReleased()) );
 
@@ -135,9 +134,9 @@ void AssetVideoWidget::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AssetVideoWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
+void AssetVideoWidget::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
-	AssetBaseWidget::slotToGuiAssetAction( assetAction, pos0to100000 );
+	AssetBaseWidget::toGuiClientAssetAction( assetAction, assetId, pos0to100000 );
 	switch( assetAction )
 	{
 	case eAssetActionPlayProgress:
@@ -246,7 +245,7 @@ void AssetVideoWidget::setReadyForCallbacks( bool isReady )
 	if( m_ActivityCallbacksEnabled != isReady )
 	{
 		m_ActivityCallbacksEnabled = isReady;
-		m_MyApp.wantToGuiActivityCallbacks( this, this, isReady );
+		m_MyApp.wantToGuiActivityCallbacks( this, isReady );
 	}
 }
 
@@ -258,16 +257,14 @@ void AssetVideoWidget::slotShredAsset( void )
 }
 
 //============================================================================
-void AssetVideoWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
+void AssetVideoWidget::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
 {
-	Q_UNUSED( userData );
 	ui.m_VidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
 }
 
 //============================================================================
-int AssetVideoWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
+int AssetVideoWidget::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
 {
-    Q_UNUSED( userData );
     return ui.m_VidWidget->playVideoFrame( onlineId, picBuf, picBufLen, picWidth, picHeight );
 }
 

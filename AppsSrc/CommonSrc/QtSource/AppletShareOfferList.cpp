@@ -57,7 +57,7 @@ AppletShareOfferList::AppletShareOfferList( AppCommon& app,  QWidget* parent )
 //============================================================================
 AppletShareOfferList::~AppletShareOfferList()
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -268,7 +268,7 @@ void AppletShareOfferList::toGuiFileXferState( void * userData, VxGUID& lclSessi
 }
 
 //============================================================================
-void AppletShareOfferList::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
+void AppletShareOfferList::toGuiFileDownloadComplete( VxGUID& lclSession, QString newFileName, EXferError xferError )
 {
 	Q_UNUSED( userData );
 	VxGUID myLclSession( lclSession );

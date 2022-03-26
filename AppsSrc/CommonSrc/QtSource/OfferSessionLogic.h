@@ -87,8 +87,8 @@ public:
 
 	void						onInSession( bool isInSession ); 
 
-	void						doToGuiRxedPluginOffer( GuiOfferSession * offerSession ); 
-	void						doToGuiRxedOfferReply( GuiOfferSession * offerSession );
+	void						toToGuiRxedPluginOffer( GuiOfferSession * offerSession ); 
+	void						toToGuiRxedOfferReply( GuiOfferSession * offerSession );
 
 	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession ); 
 	void						toGuiContactOffline( GuiUser * friendIdent ); 

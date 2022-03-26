@@ -91,15 +91,11 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 //============================================================================
 void AppCommon::onToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 {
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
 	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->doToGuiRxedPluginOffer( client.m_UserData, offerSession );
+		ToGuiActivityInterface* client = *iter;
+		client->toToGuiRxedPluginOffer( offerSession );
 	}
-
-	toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -136,15 +132,11 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent,
 //============================================================================
 void AppCommon::onToGuiRxedOfferReply( GuiOfferSession * offerSession )
 {
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
 	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->doToGuiRxedOfferReply( client.m_UserData, offerSession );
+		ToGuiActivityInterface* client = *iter;
+		client->toToGuiRxedOfferReply( offerSession );
 	}
-
-	toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -195,14 +187,9 @@ void AppCommon::toGuiInstMsg(	VxNetIdent *	netIdent,
 //============================================================================
 void AppCommon::slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg )
 {
-	LogMsg( LOG_INFO, "slotToGuiInstMsg: toGuiActivityClientsLock\n" );
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
 	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiInstMsg( client.m_UserData, netIdent, ePluginType, pMsg );
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiInstMsg( netIdent, ePluginType, pMsg );
 	}
-
-	toGuiActivityClientsUnlock();
 }

@@ -1465,6 +1465,7 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 	case	ePluginTypeAboutMePageClient:
 	case	ePluginTypeStoryboardServer:
 	case	ePluginTypeStoryboardClient:
+	case	ePluginTypeFileShareClient:
 		return eMyIconProfileDisabled;
 	case 	ePluginTypePersonFileXfer:	// file share plugin
 		return eMyIconSendFileDisabled;
@@ -1497,6 +1498,7 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 	case	ePluginTypeAboutMePageClient:
 	case	ePluginTypeStoryboardServer:
 	case	ePluginTypeStoryboardClient:
+	case	ePluginTypeFileShareClient:
 		return eMyIconProfileLocked;
 	case 	ePluginTypePersonFileXfer:	// file offer plugin
 		return eMyIconSendFileNormal;
@@ -1527,6 +1529,7 @@ EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
 	case	ePluginTypeAboutMePageClient:
 	case	ePluginTypeStoryboardServer:
 	case	ePluginTypeStoryboardClient:
+	case	ePluginTypeFileShareClient:
 		return eMyIconProfileIgnored;
 	case 	ePluginTypePersonFileXfer:	// file share plugin
 		return eMyIconSendFileIgnored;

@@ -171,14 +171,14 @@ void AppletCamSettings::showEvent( QShowEvent * ev )
 {
     // don't call AppletPeerBase::showEvent ... we don't want plugin offer/response for web cam server or client
     AppletBase::showEvent( ev );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void AppletCamSettings::hideEvent( QHideEvent * ev )
 {
     // don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     AppletBase::hideEvent( ev );
     //m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, false );
 }
@@ -324,7 +324,7 @@ void AppletCamSettings::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedI
 }
 
 //============================================================================
-void AppletCamSettings::toGuiClientPlayVideoFrame( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
+void AppletCamSettings::toGuiClientPlayVideoFrame( VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
 {
-    callbackVideoJpgSmall( userData, vidFeedId, jpgData, jpgDataLen, motion0to100000 );
+    callbackVideoJpgSmall( nullptr, vidFeedId, jpgData, jpgDataLen, motion0to100000 );
 }

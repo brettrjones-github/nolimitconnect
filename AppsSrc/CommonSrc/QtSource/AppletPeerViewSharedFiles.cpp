@@ -43,7 +43,7 @@ AppletPeerViewSharedFiles::AppletPeerViewSharedFiles( AppCommon& app, QWidget *	
 , m_u8FileFilter( VXFILE_TYPE_ALLNOTEXE )
 {
 	m_LclSessionId.initializeWithNewVxGUID();
-    setPluginType( ePluginTypeVideoPhone );
+    setPluginType( ePluginTypeFileShareClient );
     setAppletType( eAppletPeerViewSharedFiles );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
@@ -54,13 +54,8 @@ AppletPeerViewSharedFiles::AppletPeerViewSharedFiles( AppCommon& app, QWidget *	
     connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)),			this,  SLOT(slotApplyFileFilter(unsigned char)) );
 
-	connect( this, SIGNAL(signalToGuiFileListReply(FileListReplySession*)),					this, SLOT(slotToGuiFileListReply(FileListReplySession*)) );
-	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID, EXferState, int, int)),		this, SLOT(slotToGuiFileXferState(VxGUID, EXferState, int, int)) );
 
-	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
-	connect( this, SIGNAL(signalToGuiFileDownloadComplete(VxGUID,QString,EXferError)),	this, SLOT(slotToGuiFileDownloadComplete(VxGUID,QString,EXferError)) );
-
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 
     /*
     ui.m_TitleBarWidget->setTitleBarText( strTitle + "'s Files" );
@@ -85,35 +80,21 @@ void AppletPeerViewSharedFiles::showEvent( QShowEvent * ev )
 //============================================================================
 void AppletPeerViewSharedFiles::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::toGuiFileListReply( void * userData, FileListReplySession * replySession )
+void AppletPeerViewSharedFiles::toGuiFileListReply( FileListReplySession * replySession )
 {
-	Q_UNUSED( userData );
-	emit signalToGuiFileListReply( replySession );
+	addFile( replySession->getIdent(), replySession->getFileInfo() );
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::slotToGuiFileListReply( FileListReplySession* session ) 
+void AppletPeerViewSharedFiles::toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
-	addFile( session->getIdent(), session->getFileInfo() );
-}
-
-//============================================================================
-void AppletPeerViewSharedFiles::toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 )
-{
-	Q_UNUSED( userData );
-	emit signalToGuiFileXferState( lclSession, eXferState, param1, param2 );
-}
-
-//============================================================================
-void AppletPeerViewSharedFiles::slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 )
-{
-	LogMsg( LOG_INFO, "Got Update File Download\n");
-	FileXferWidget * item = findListEntryWidget( lclSessionId );
+	LogMsg( LOG_INFO, "Got Update File Download" );
+	FileXferWidget* item = findListEntryWidget( lclSessionId );
 	if( item )
 	{
 		item->setXferState( eXferState, param1, param2 );
@@ -121,10 +102,18 @@ void AppletPeerViewSharedFiles::slotToGuiFileXferState( VxGUID lclSessionId, EXf
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
+void AppletPeerViewSharedFiles::toGuiStartDownload( GuiFileXferSession * xferSessionIn )
 {
-	Q_UNUSED( userData );
-	emit signalToGuiStartDownload( xferSession );
+	GuiFileXferSession* xferSession = findSession( xferSessionIn->getLclSessionId() );
+	if( xferSession )
+	{
+		xferSession->setXferState( eXferStateInDownloadXfer, 0, 0 );
+		FileXferWidget* item = findListEntryWidget( xferSession->getLclSessionId() );
+		if( item )
+		{
+			item->updateWidgetFromInfo();
+		}
+	}
 }
 
 //============================================================================
@@ -145,32 +134,9 @@ GuiFileXferSession * AppletPeerViewSharedFiles::findSession( VxGUID lclSessionId
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::slotToGuiStartDownload( GuiFileXferSession * xferSessionIn )
+void AppletPeerViewSharedFiles::toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, QString newFileName, EXferError xferError )
 {
-	GuiFileXferSession * xferSession = findSession( xferSessionIn->getLclSessionId() );
-	if( xferSession )
-	{
-		xferSession->setXferState( eXferStateInDownloadXfer, 0, 0 );
-		FileXferWidget * item = findListEntryWidget( xferSessionIn->getLclSessionId() );
-		if( item )
-		{
-			item->updateWidgetFromInfo();
-		}
-	}
-}
-
-//============================================================================
-void AppletPeerViewSharedFiles::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
-{
-	Q_UNUSED( userData );
-	VxGUID myLclSessionId( lclSession );
-	emit signalToGuiFileDownloadComplete( myLclSessionId, newFileName, xferError );
-}
-
-//============================================================================
-void AppletPeerViewSharedFiles::slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError )
-{
-	GuiFileXferSession * xferSession = findSession( lclSessionId );
+	GuiFileXferSession* xferSession = findSession( lclSessionId );
 	if( xferSession )
 	{
 		if( !newFileName.isEmpty() )
@@ -179,7 +145,7 @@ void AppletPeerViewSharedFiles::slotToGuiFileDownloadComplete( VxGUID lclSession
 		}
 
 		xferSession->setXferState( eXferStateCompletedDownload, xferError, 0 );
-		FileXferWidget * item = findListEntryWidget( lclSessionId );
+		FileXferWidget* item = findListEntryWidget( lclSessionId );
 		if( item )
 		{
 			item->updateWidgetFromInfo();

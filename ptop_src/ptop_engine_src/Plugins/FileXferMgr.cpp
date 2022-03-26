@@ -51,7 +51,7 @@ void FileXferMgr::fromGuiStartPluginSession( bool pluginIsLocked, PluginSessionB
 		EXferError xferErr = beginFileSend( pluginIsLocked, ((FileXferPluginSession *)xferSession)->getSkt(), (FileXferPluginSession *)xferSession );
 		if( eXferErrorNone != xferErr )
 		{
-			IToGui::getToGui().toGuiFileXferState( xferSession->getLclSessionId(), eXferStateUploadError, xferErr, xferErr );
+			IToGui::getToGui().toGuiFileXferState( getPluginType(), xferSession->getLclSessionId(), eXferStateUploadError, xferErr, xferErr );
 		}
 	}
 }
@@ -183,9 +183,9 @@ EXferError FileXferMgr::beginFileSend( bool pluginIsLocked, VxSktBase * sktBase,
 												xferInfo.getLclSessionId(), 
 												u8FileType, 
 												xferInfo.m_u64FileLen, 
-												xferInfo.getLclFileName().c_str(),
+												xferInfo.getLclFileName(),
 												xferInfo.getAssetId(),
-												xferInfo.getFileHashId().getHashData() );
+												xferInfo.getFileHashId() );
 
 		// file is open and setup so send first chunk of data
 		return txNextFileChunk( xferSession, eXferErrorNone, pluginIsLocked );
@@ -318,7 +318,7 @@ void FileXferMgr::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxN
 				pktReply.setError( xferErr );
 				m_Plugin.txPacket( netIdent, sktBase, &pktReply );
 
-				IToGui::getToGui().toGuiFileXferState( xferSession->getLclSessionId(), eXferStateDownloadError, xferErr, xferErr );
+				IToGui::getToGui().toGuiFileXferState( getPluginType(), xferSession->getLclSessionId(), eXferStateDownloadError, xferErr, xferErr );
 				endFileXferRxSession( xferSession, true );
 			}
 		}
@@ -435,17 +435,17 @@ void FileXferMgr::onPktFileInfoErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 }
 
 //============================================================================
-void FileXferMgr::onFileSent( FileXferPluginSession * xferSession, const char * pFileName, EXferError xferError, bool pluginIsLocked )
+void FileXferMgr::onFileSent( FileXferPluginSession * xferSession, std::string pFileName, EXferError xferError, bool pluginIsLocked )
 {
-	LogMsg( LOG_INFO, "Sent file %s error %d\n", pFileName, xferError );
-	IToGui::getToGui().toGuiFileUploadComplete( xferSession->getLclSessionId(), xferError );
+	LogMsg( LOG_INFO, "Sent file %s error %d", pFileName.c_str(), xferError );
+	IToGui::getToGui().toGuiFileUploadComplete( getPluginType(), xferSession->getLclSessionId(), pFileName, xferError );
 	endFileXferTxSession( xferSession, pluginIsLocked );
 }
 
 //============================================================================
-void FileXferMgr::onFileReceived( FileXferPluginSession * xferSession, const char * pFileName, EXferError xferError, bool pluginIsLocked )
+void FileXferMgr::onFileReceived( FileXferPluginSession * xferSession, std::string pFileName, EXferError xferError, bool pluginIsLocked )
 {
-	LogMsg( LOG_INFO, "File received %s error %d\n", pFileName, xferError );
+	LogMsg( LOG_INFO, "File received %s error %d", pFileName.c_str(), xferError );
 	VxFileXferInfo& xferInfo = xferSession->getRxXferInfo();
 	if( eXferErrorNone == xferError )
 	{
@@ -459,17 +459,18 @@ void FileXferMgr::onFileReceived( FileXferPluginSession * xferSession, const cha
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteFile.c_str(), completedFile.c_str() ) ) )
 		{
 			m_PluginMgr.getEngine().fromGuiAddFileToLibrary( completedFile.c_str(), true, xferInfo.getFileHashId().getHashData() );
-			IToGui::getToGui().toGuiFileDownloadComplete( xferSession->getLclSessionId(), completedFile.c_str(), eXferErrorNone );
+			IToGui::getToGui().toGuiFileDownloadComplete( getPluginType(), xferSession->getLclSessionId(), completedFile, eXferErrorNone );
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "FileShareXferMgr::onFileReceived ERROR %d moving %s to %s\n", rc, incompleteFile.c_str(), completedFile.c_str() );
-			IToGui::getToGui().toGuiFileDownloadComplete( xferSession->getLclSessionId(), "", eXferErrorFileMoveError );
+            LogMsg( LOG_ERROR, "FileShareXferMgr::onFileReceived ERROR %d moving %s to %s", rc, incompleteFile.c_str(), completedFile.c_str() );
+			IToGui::getToGui().toGuiFileDownloadComplete( getPluginType(), xferSession->getLclSessionId(), incompleteFile, eXferErrorFileMoveError );
 		}
 	}
 	else
 	{
-		IToGui::getToGui().toGuiFileDownloadComplete( xferSession->getLclSessionId(), "", xferError );
+		std::string emptyStr{ "" };
+		IToGui::getToGui().toGuiFileDownloadComplete( getPluginType(), xferSession->getLclSessionId(), emptyStr, xferError );
 	}
 
 	endFileXferRxSession( xferSession, pluginIsLocked );
@@ -505,9 +506,9 @@ EXferError FileXferMgr::beginFileReceive( bool pluginIsLocked, VxSktBase * sktBa
 									xferInfo.getLclSessionId(), 
 									poPkt->getFileType(), 
 									xferInfo.m_u64FileLen, 
-									xferInfo.getRmtFileName().c_str(),
+									xferInfo.getRmtFileName(),
 									xferInfo.getAssetId(),
-									xferInfo.getFileHashId().getHashData() );
+									xferInfo.getFileHashId() );
 	}
 
 	// don't send reply.. will get file chunk next anyway
@@ -551,7 +552,7 @@ EXferError FileXferMgr::txNextFileChunk( FileXferPluginSession * xferSession, ui
 		m_Plugin.txPacket(  xferSession->getIdent(), xferSession->getSkt(), &oPkt );
 
 		LogMsg( LOG_INFO, "FileShareXferMgr:: Done Sending file %s", xferInfo.getLclFileName().c_str() );
-		IToGui::getToGui().toGuiFileUploadComplete( xferInfo.getLclSessionId(), eXferErrorNone );
+		IToGui::getToGui().toGuiFileUploadComplete( getPluginType(), xferInfo.getLclSessionId(), xferInfo.getLclFileName(), eXferErrorNone );
 		onFileSent( xferSession, xferInfo.getLclFileName().c_str(), eXferErrorNone, pluginIsLocked );
 		return eXferErrorNone;
 	}
@@ -573,7 +574,7 @@ EXferError FileXferMgr::rxFileChunk( FileXferPluginSession * xferSession, PktFil
 	if( eXferErrorNone != xferErr )
 	{
 		// canceled by sender
-		IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateDownloadError, xferErr, xferErr );
+		IToGui::getToGui().toGuiFileXferState( getPluginType(), xferInfo.getLclSessionId(), eXferStateDownloadError, xferErr, xferErr );
 		return xferErr;
 	}
 
@@ -616,12 +617,12 @@ EXferError FileXferMgr::rxFileChunk( FileXferPluginSession * xferSession, PktFil
 	{
 		if( xferInfo.calcProgress() )
 		{
-			IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInDownloadXfer, xferInfo.getProgress(), 0 );
+			IToGui::getToGui().toGuiFileXferState( getPluginType(), xferInfo.getLclSessionId(), eXferStateInDownloadXfer, xferInfo.getProgress(), 0 );
 		}
 	}
 	else
 	{
-		IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateDownloadError, xferErr, xferErr );
+		IToGui::getToGui().toGuiFileXferState( getPluginType(), xferInfo.getLclSessionId(), eXferStateDownloadError, xferErr, xferErr );
 	}
 
 	return xferErr;

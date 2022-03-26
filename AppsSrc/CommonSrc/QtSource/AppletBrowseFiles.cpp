@@ -76,7 +76,7 @@ AppletBrowseFiles::AppletBrowseFiles( AppCommon& app, QWidget * parent )
 
     m_MyApp.activityStateChange(this, true);
 	
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	setActionEnable( false );
 	setFileFilter( m_eFileFilterType );
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)), this,  SLOT(slotApplyFileFilter(unsigned char)) );
@@ -211,18 +211,12 @@ void AppletBrowseFiles::showEvent( QShowEvent * ev )
 //============================================================================
 void AppletBrowseFiles::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void AppletBrowseFiles::toGuiFileList( void * userData, VxMyFileInfo& fileInfo )
-{
-	emit signalToGuiFileList( fileInfo );
-}
-
-//============================================================================
-void AppletBrowseFiles::slotToGuiFileList( VxMyFileInfo& fileInfo )
+void AppletBrowseFiles::toGuiFileList( VxMyFileInfo& fileInfo )
 {
 	if( fileInfo.getFullFileName().isEmpty() )
 	{

@@ -34,11 +34,11 @@ public:
 
 protected:
 	// override of ToGuiActivityInterface
-    virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ) override;
-    virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ) override;
+    virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ) override;
+    virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ) override;
 
 	void						setupActivityVideoPhone();
-    void						toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ) override;
+    void						toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
 	Ui::AppletPeerVideoPhoneUi	ui;

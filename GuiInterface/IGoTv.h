@@ -375,23 +375,23 @@ public:
                                                   VxGUID&			fileInstanceId,
                                                   uint8_t			u8FileType,
                                                   uint64_t			u64FileLen,
-                                                  const char *	    pFileName,
-                                                  VxGUID            assetId,
-                                                  uint8_t *			fileHashData ) override;
+                                                  std::string&	    fileName,
+                                                  VxGUID&           assetId,
+                                                  VxSha1Hash&		fileHashId ) override;
 
     virtual void				toGuiStartDownload( VxNetIdent *	netIdent,
                                                     EPluginType		ePluginType,
                                                     VxGUID&			fileInstanceId,
                                                     uint8_t			u8FileType,
                                                     uint64_t		u64FileLen,
-                                                    const char *	pFileName,
-                                                    VxGUID            assetId,
-                                                    uint8_t *		fileHashData ) override;
+                                                    std::string&    fileName,
+                                                    VxGUID&         assetId,
+                                                    VxSha1Hash&     fileHashId ) override;
 
-    virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError ) override;
-    virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) override;
+    virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
+    virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
 
-    virtual void				toGuiFileXferState( VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) override;
+    virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) override;
 
     //=== scan ===//
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
@@ -409,12 +409,12 @@ public:
                                                              const char *	pFileName,
                                                              VxGUID         assetId ) override;
 
-    virtual bool				toGuiSetGameValueVar( EPluginType	    ePluginType,
+    virtual void				toGuiSetGameValueVar( EPluginType	    ePluginType,
                                                       VxGUID&	        oOnlineId,
                                                       int32_t			s32VarId,
                                                       int32_t			s32VarValue ) override;
 
-    virtual bool				toGuiSetGameActionVar( EPluginType	ePluginType,
+    virtual void				toGuiSetGameActionVar( EPluginType	ePluginType,
                                                        VxGUID&	    oOnlineId,
                                                        int32_t		s32VarId,
                                                        int32_t		s32VarValue ) override;

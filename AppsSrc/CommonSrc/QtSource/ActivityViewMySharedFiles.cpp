@@ -54,7 +54,7 @@ ActivityViewMySharedFiles::ActivityViewMySharedFiles(	AppCommon& app, QWidget * 
 	connect( ui.m_FileFilterComboBox,	SIGNAL(signalApplyFileFilter(unsigned char)),	this, SLOT(slotApplyFileFilter(unsigned char)));
 
 	setActionEnable( false );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	slotRequestSharedFileList( ui.m_FileFilterComboBox->getCurrentFileFilterMask() );
 }
 
@@ -69,25 +69,19 @@ void ActivityViewMySharedFiles::showEvent( QShowEvent * ev )
 {
 	Q_UNUSED( ev );
 	ActivityBase::showEvent( ev );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 }
 
 //============================================================================
 void ActivityViewMySharedFiles::hideEvent( QHideEvent * ev )
 {
 	Q_UNUSED( ev );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void ActivityViewMySharedFiles::toGuiFileList( void * userData, VxMyFileInfo& fileInfo )
-{
-	emit signalToGuiFileList( fileInfo );
-}
-
-//============================================================================
-void ActivityViewMySharedFiles::slotToGuiFileList( VxMyFileInfo& fileInfo )
+void ActivityViewMySharedFiles::toGuiFileList( VxMyFileInfo& fileInfo )
 {
 	if( fileInfo.getFullFileName().isEmpty() )
 	{

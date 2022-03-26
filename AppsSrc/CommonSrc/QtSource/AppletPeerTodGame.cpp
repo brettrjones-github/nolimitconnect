@@ -39,8 +39,6 @@ AppletPeerTodGame::AppletPeerTodGame( AppCommon& app, QWidget* parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    //setHisIdent( netIdent );
-
 	setupAppletPeerTodGame();
 	//m_OfferSessionLogic.sendOfferOrResponse();
 	//bool bSentMsg = m_FromGui.fromGuiMakePluginOffer(	m_ePluginType, 
@@ -74,20 +72,18 @@ void AppletPeerTodGame::setupAppletPeerTodGame( void )
 	ui.m_TodGameWidget->getVidWidget()->setRecordFriendName( m_HisIdent->getOnlineName().c_str() );
 
 	setVidCamWidget( ui.m_TodGameWidget->getVidWidget() );
-	connect( this, SIGNAL(signalToGuiSetGameValueVar(long,long)),	&m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );
-	connect( this, SIGNAL(signalToGuiSetGameActionVar(long,long)),	&m_TodGameLogic,	SLOT(slotToGuiSetGameActionVar(long,long)) );
 }
 
 //============================================================================
-void AppletPeerTodGame::doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer )
+void AppletPeerTodGame::toToGuiRxedPluginOffer( GuiOfferSession * offer )
 {
-	m_OfferSessionLogic.doToGuiRxedPluginOffer( offer );
+	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletPeerTodGame::doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerSession )
+void AppletPeerTodGame::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
 {
-	m_OfferSessionLogic.doToGuiRxedOfferReply( offerSession );
+	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 
 }
 
@@ -115,9 +111,8 @@ void AppletPeerTodGame::onEndSession( void )
 }
 
 //============================================================================
-void AppletPeerTodGame::toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerTodGame::toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
 {
-	Q_UNUSED( callbackData );
 	if( ( ePluginType == m_ePluginType )
 		&& m_HisIdent 
 		&& ( m_HisIdent->getMyOnlineId() == friendIdent->getMyOnlineId() ) )

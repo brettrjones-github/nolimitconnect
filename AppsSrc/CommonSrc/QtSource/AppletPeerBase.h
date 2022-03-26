@@ -44,44 +44,30 @@ public:
 
     virtual void				onActivityFinish( void ) override;
 
-signals:
-	void						signalToGuiSetGameValueVar( long varId, long varValue );
-	void						signalToGuiSetGameActionVar( long actionId, long actionValue );
-	void						signalToGuiRxedPluginOffer( GuiOfferSession * offerSession );
-	void						signalToGuiRxedOfferReply( GuiOfferSession * offerSession );
-	void						signalToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-
 protected slots:
     void				        slotUserAdded( GuiUser* user ); 
     void				        slotUserRemoved( VxGUID onlineId ); 
     void                        slotUserUpdated( GuiUser* user );
     void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
 
-	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
-	void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
-	void						slotToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-
 private:
 	void						setupAppletPeerBase( void );
 
 protected:
-    virtual void				toGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer );
-    virtual void				toGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerReply );
-    virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ) override;
-	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
-															VxGUID&			onlineId, 
+    virtual void				toGuiRxedPluginOffer( GuiOfferSession * offer );
+    virtual void				toGuiRxedOfferReply( GuiOfferSession * offerReply );
+    virtual void				toGuiPluginSessionEnded( GuiOfferSession * offer ) override;
+	virtual void				toGuiClientPlayVideoFrame(	VxGUID&			onlineId, 
                                                             uint8_t *		pu8Jpg,
                                                             uint32_t		u32JpgDataLen,
                                                             int				motion0To100000 ) override;
 
-    virtual void				toGuiSetGameValueVar(	void *          userData,
-                                                        EPluginType     ePluginType,
+    virtual void				toGuiSetGameValueVar(	EPluginType     ePluginType,
                                                         VxGUID&         onlineId,
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
 
-    virtual void				toGuiSetGameActionVar(	void *          userData,
-                                                        EPluginType     ePluginType,
+    virtual void				toGuiSetGameActionVar(	EPluginType     ePluginType,
                                                         VxGUID&         onlineId,
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;

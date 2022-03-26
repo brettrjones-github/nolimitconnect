@@ -561,7 +561,7 @@ void GuiUserMgr::wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bo
         }
     }
 
-    LogMsg( LOG_INFO, "WARNING. ToGuiUserUpdateClient remove not found in list" );
+    LogMsg( LOG_INFO, "WARNING. ToGuiUserUpdateInterface remove not found in list" );
     guiUserUpdateClientsUnlock();
     return;
 }

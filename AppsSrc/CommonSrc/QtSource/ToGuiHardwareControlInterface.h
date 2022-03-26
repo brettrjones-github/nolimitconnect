@@ -18,8 +18,8 @@ class ToGuiHardwareControlInterface
 {
 public:
 	virtual void 				toGuiShutdownHardware( void ){}; 
-	virtual void 				doGuiWantMicrophoneRecording( bool wantMicInput ){}; 
-	virtual void 				doGuiWantSpeakerOutput( bool wantSpeakerOutput ){}; 
-	virtual void				doGuiWantVideoCapture( bool wantVideoCapture ){}; 
+	virtual void 				toGuiWantMicrophoneRecording( bool wantMicInput ){}; 
+	virtual void 				toGuiWantSpeakerOutput( bool wantSpeakerOutput ){}; 
+	virtual void				toGuiWantVideoCapture( bool wantVideoCapture ){}; 
 };
 

@@ -35,11 +35,11 @@
 #include "VxAppStyle.h"
 #include "VxAppDisplay.h" 
 
-#include "ToGuiActivityClient.h"
-#include "ToGuiFileXferClient.h"
-#include "ToGuiHardwareCtrlClient.h"
-#include "ToGuiUserUpdateClient.h"
-#include "ToGuiThumbUpdateClient.h"
+#include "ToGuiActivityInterface.h"
+#include "ToGuiFileXferInterface.h"
+#include "ToGuiHardwareControlInterface.h"
+#include "ToGuiUserUpdateInterface.h"
+#include "ToGuiThumbUpdateInterface.h"
 
 #include "GuiInterface/IToGui.h"
 #include "GuiInterface/IGoTvRender.h"
@@ -52,6 +52,7 @@
 #include <QElapsedTimer>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BlobXferMgr/BlobInfo.h>
 
 class AccountMgr;
 class AppSettings;
@@ -209,15 +210,10 @@ public:
 	void						setIsLibraryActivityActive( bool isActive )						{ m_LibraryActivityActive = isActive; }
 	bool						getIsLibraryActivityActive( void )								{ return m_LibraryActivityActive; }
 
-	void						wantToGuiActivityCallbacks(	ToGuiActivityInterface *	callback, 
-															void *						userData,
-															bool						wantCallback );
-	void						wantToGuiFileXferCallbacks( ToGuiFileXferInterface *	callback, 
-															void *						userData,
-															bool						wantCallback );
-	void						wantToGuiHardwareCtrlCallbacks( ToGuiHardwareControlInterface *	callback, 
-																bool							wantCallback );
-    void						wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callback, bool	wantCallback );
+	void						wantToGuiActivityCallbacks(	ToGuiActivityInterface* callback, bool wantCallback );
+	void						wantToGuiFileXferCallbacks( ToGuiFileXferInterface* callback, bool wantCallback );
+	void						wantToGuiHardwareCtrlCallbacks( ToGuiHardwareControlInterface* callback, bool wantCallback );
+    void						wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface* callback, bool	wantCallback );
 
 	bool						getIsPluginVisible( EPluginType ePluginType );
 	void						setPluginVisible( EPluginType ePluginType, bool isVisible );
@@ -527,12 +523,12 @@ public:
                                                 const char *	pMsg ) override;
 
 
-	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 
+	virtual void				toGuiSetGameValueVar(	EPluginType	    ePluginType, 
 														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
 
-	virtual bool				toGuiSetGameActionVar(	EPluginType	    ePluginType, 
+	virtual void				toGuiSetGameActionVar(	EPluginType	    ePluginType,
 														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
@@ -551,23 +547,22 @@ public:
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
-													const char *	pFileName,
-                                                    VxGUID			assetId,
-                                                    uint8_t *		fileHashData ) override;
+                                                    std::string&   fileName,
+                                                    VxGUID&			assetId,
+                                                    VxSha1Hash&     fileHasId ) override;
 
 	virtual void				toGuiStartDownload(	VxNetIdent *	netIdent, 
 													EPluginType		ePluginType, 
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
-													const char *	pFileName,
-                                                    VxGUID			assetId,
-                                                    uint8_t *		fileHashData ) override;
+                                                    std::string&    fileName,
+                                                    VxGUID&			assetId,
+                                                    VxSha1Hash&     fileHasId ) override;
 
-    virtual void				toGuiFileXferState( VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
-
-    virtual void				toGuiFileDownloadComplete( VxGUID&	lclSessionId, const char * newFileName, EXferError xferError ) override;
-    virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) override;
+    virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
+    virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID&	lclSessionId, std::string& fileName, EXferError xferError ) override;
+    virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
 
 	virtual void				toGuiFileList(	const char *	fileName, 
 												uint64_t		fileLen, 
@@ -684,7 +679,104 @@ signals:
     void                        signalInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
     void                        signalInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError );
 
+    void                        signalInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        signalInternalToGuiFileDownloadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
+    void                        signalInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        signalInternalToGuiFileUploadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
+    void                        signalInternalToGuiFileXferState( EPluginType pluginType, VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
+
+    void                        signalInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
+    void                        signalInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
+
+    void				        signalInternalToGuiAssetAdded( AssetBaseInfo assetInfo );
+    void				        signalInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo );
+    void				        signalInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
+
+    void                        signalInternalMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos0to100000 );
+
+    void                        signalInternalBlobAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
+    void                        signalInternalBlobAdded( BlobInfo blobInfo );
+    void                        signalInternalBlobSessionHistory( BlobInfo blobInfo );
+
+    void                        signalInternalToGuiIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
+    void                        signalInternalToGuiIndentListRemove( EUserViewType listType, VxGUID onlineId );
+
+    void                        signalInternalToGuiContactAdded( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactRemoved( VxGUID onlineId );
+
+    void                        signalInternalToGuiContactOnline( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactOffline( VxGUID onlineId );
+
+    void                        signalInternalToGuiContactNameChange( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactDescChange( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactMyFriendshipChange( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactHisFriendshipChange( VxNetIdent netIdent );
+    void                        signalInternalToGuiPluginPermissionChange( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactSearchFlagsChange( VxNetIdent netIdent );
+    void                        signalInternalToGuiContactLastSessionTimeChange( VxNetIdent netIdent );
+
+    void                        signalInternalToGuiUpdateMyIdent( VxNetIdent netIdent );
+    void                        signalInternalToGuiSaveMyIdent( VxNetIdent netIdent );
+
+    void                        signalInternalToGuiScanSearchComplete( EScanType eScanType );
+    void                        signalInternalToGuiScanResultSuccess( EScanType eScanType, VxNetIdent netIdent );
+    void                        signalInternalToGuiSearchResultError( EScanType eScanType, VxNetIdent netIdent, int errCode );
+
+private slots:
+    void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
+    void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
+    void                        slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError );
+
+    void                        slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        slotInternalToGuiFileDownloadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
+    void                        slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        slotInternalToGuiFileUploadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
+    void                        slotInternalToGuiFileXferState( EPluginType pluginType, VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
+
+    void                        slotInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
+    void                        slotInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
+
+    void				        slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo );
+    void				        slotInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo );
+    void				        slotInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
+
+    void                        slotInternalMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos0to100000 );
+
+    void                        slotInternalBlobAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
+    void                        slotInternalBlobAdded( BlobInfo blobInfo );
+    void                        slotInternalBlobSessionHistory( BlobInfo blobInfo );
+
+    void                        slotInternalToGuiIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
+    void                        slotInternalToGuiIndentListRemove( EUserViewType listType, VxGUID onlineId );
+
+    void                        slotInternalToGuiContactAdded( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactRemoved( VxGUID onlineId );
+
+    void                        slotInternalToGuiContactOnline( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactOffline( VxGUID onlineId );
+
+    void                        slotInternalToGuiContactNameChange( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactDescChange( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactMyFriendshipChange( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactHisFriendshipChange( VxNetIdent netIdent );
+    void                        slotInternalToGuiPluginPermissionChange( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactSearchFlagsChange( VxNetIdent netIdent );
+    void                        slotInternalToGuiContactLastSessionTimeChange( VxNetIdent netIdent );
+
+    void                        slotInternalToGuiUpdateMyIdent( VxNetIdent netIdent );
+    void                        slotInternalToGuiSaveMyIdent( VxNetIdent netIdent );
+
+    void                        slotInternalToGuiScanSearchComplete( EScanType eScanType );
+    void                        slotInternalToGuiScanResultSuccess( EScanType eScanType, VxNetIdent netIdent );
+    void                        slotInternalToGuiSearchResultError( EScanType eScanType, VxNetIdent netIdent, int errCode );
+
 protected slots:
+    void						slotMainWindowResized( void );
+    void						slotMainWindowMoved( void );
+
+    void						slotStartLoadingFromThread( void );
+    void						slotFinishedLoadingGui( void );
+    void						slotFinishedLoadingEngine( void );
 
 	void						slotPlaySound( ESndDef sndDef );
 	void						slotStatusMsg( QString strMsg );
@@ -717,18 +809,6 @@ protected slots:
 
     void						slotCheckSetupTimer();
 
-private slots:
-	void						slotMainWindowResized( void );
-    void						slotMainWindowMoved( void );
-
-	void						slotStartLoadingFromThread( void );
-	void						slotFinishedLoadingGui( void );
-	void						slotFinishedLoadingEngine( void );
-
-    void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
-    void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
-    void                        slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError );
-
 private:
 	void						showUserNameInTitle();
 	void						sendAppSettingsToEngine( void );
@@ -739,20 +819,10 @@ private:
 	void						connectSignals( void );
 	void						updateFriendList( GuiUser * netIdent, bool sessionTimeChange = false );
 
-	void						toGuiActivityClientsLock( void );
-	void						toGuiActivityClientsUnlock( void );
-	void						clearToGuiActivityClientList( void );
 
-	void						toGuiFileXferClientsLock( void );
-	void						toGuiFileXferClientsUnlock( void );
+	void						clearToGuiActivityInterfaceList( void );
 	void						clearFileXferClientList( void );
-
-	void						toGuiHardwareCtrlLock( void );
-	void						toGuiHardwareCtrlUnlock( void );
 	void						clearHardwareCtrlList( void );
-
-    void						toGuiUserUpdateClientsLock( void );
-    void						toGuiUserUpdateClientsUnlock( void );
     void						clearUserUpdateClientList( void );
 
 	//=== vars ===//
@@ -820,17 +890,11 @@ private:
 
 	uint32_t					m_CamSourceId;
 	uint32_t					m_CamCaptureRotation;
-	VxMutex						m_ToGuiActivityClientMutex;
-	std::vector<ToGuiActivityClient>	m_ToGuiActivityClientList;
 
-	VxMutex						m_ToGuiFileXferClientMutex;
-	std::vector<ToGuiFileXferClient>	m_ToGuiFileXferClientList;
-	
-	VxMutex						m_ToGuiHardwareCtrlMutex;
-	std::vector<ToGuiHardwareCtrlClient> m_ToGuiHardwareCtrlList;
-
-    VxMutex						m_ToGuiUserUpdateClientMutex;
-    std::vector<ToGuiUserUpdateClient> m_ToGuiUserUpdateClientList;
+	std::vector<ToGuiActivityInterface*>	    m_ToGuiActivityInterfaceList;
+	std::vector<ToGuiFileXferInterface*>	    m_ToGuiFileXferInterfaceList;
+	std::vector<ToGuiHardwareControlInterface*> m_ToGuiHardwareCtrlList;
+    std::vector<ToGuiUserUpdateInterface*>      m_ToGuiUserUpdateClientList;
 
 	bool						m_LibraryActivityActive = false;
 	bool						m_VidCaptureEnabled = false;

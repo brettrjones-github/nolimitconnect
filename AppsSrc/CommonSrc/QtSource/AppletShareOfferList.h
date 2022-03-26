@@ -38,7 +38,7 @@ public:
 
 signals:
 	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
-	void						signalToGuiFileXferState( VxGUID lclSession, EXferState eXferState, int param1, int param2 );
+	void						signalToGuiFileXferState( EPluginType pluginType, VxGUID lclSession, EXferState eXferState, int param1, int param2 );
 	void						signalToGuiFileDownloadComplete( VxGUID lclSession, QString newFileName, EXferError xferError );
 
 private slots:

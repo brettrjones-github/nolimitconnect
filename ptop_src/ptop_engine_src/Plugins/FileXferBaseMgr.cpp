@@ -39,6 +39,12 @@ FileXferBaseMgr::FileXferBaseMgr( P2PEngine& engine, PluginBase& plugin )
 }
 
 //============================================================================
+EPluginType FileXferBaseMgr::getPluginType( void )
+{
+	return m_Plugin.getPluginType();
+}
+
+//============================================================================
 EXferError FileXferBaseMgr::setupFileDownload( VxFileXferInfo& xferInfo )
 {
 	EXferError xferErr = eXferErrorNone;
@@ -220,13 +226,13 @@ EXferError FileXferBaseMgr::sendNextFileChunk( VxFileXferInfo& xferInfo, VxNetId
 
 	if( eXferErrorNone != xferErr )
 	{
-		IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateUploadError, xferErr, xferErr );
+		IToGui::getToGui().toGuiFileXferState( getPluginType(), xferInfo.getLclSessionId(), eXferStateUploadError, xferErr, xferErr );
 	}
 	else
 	{
 		if( xferInfo.calcProgress() )
 		{
-			IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInUploadXfer, xferInfo.getProgress(), 0 );
+			IToGui::getToGui().toGuiFileXferState( getPluginType(), xferInfo.getLclSessionId(), eXferStateInUploadXfer, xferInfo.getProgress(), 0 );
 		}
 	}
 

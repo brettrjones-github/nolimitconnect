@@ -29,8 +29,8 @@ public:
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo );
 	virtual void				onActivityStop( void );
 
-	virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-    virtual int				    toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+	virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
+    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
 
 	virtual void				showSendFail( bool show, bool permissionErr = false );
 	virtual void				showResendButton( bool show );
@@ -43,7 +43,6 @@ signals:
 	void						signalPlayEnd( void );
 
 protected slots:
-	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos );
 	void						slotPlayButtonClicked( void );
 	void						slotShredAsset( void );
 	void						slotSliderPressed( void );
@@ -54,6 +53,7 @@ protected slots:
 
 
 protected:
+	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos ) override;
 	void						initAssetVideoWidget( void );
 
 	void						showEvent( QShowEvent * ev );

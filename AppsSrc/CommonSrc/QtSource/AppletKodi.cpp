@@ -95,7 +95,6 @@ void AppletKodi::initAppletKodi( void )
 
 	//ui.m_PlayPosSlider->setRange( 0, 100000 );
 
-	////connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGUID, int)) );
 	//connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
 	//connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
 
@@ -213,7 +212,7 @@ void AppletKodi::showEvent( QShowEvent * showEvent )
     if( ( false == VxIsAppShuttingDown() )
         && !m_IsPlaying )
     {
-        m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+        m_MyApp.wantToGuiActivityCallbacks( this, true );
         setReadyForCallbacks( true );
         if( m_AssetInfo.isValid() )
         {
@@ -238,7 +237,7 @@ void AppletKodi::hideEvent( QHideEvent * hideEvent )
 {
     AppletBase::hideEvent( hideEvent );
     setReadyForCallbacks( false );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
 }
 
 //============================================================================
@@ -261,7 +260,6 @@ void AppletKodi::setReadyForCallbacks( bool isReady )
 	if( m_ActivityCallbacksEnabled != isReady )
 	{
 		m_ActivityCallbacksEnabled = isReady;
-		//m_MyApp.wantToGuiActivityCallbacks( this, this, isReady );
 	}
 }
 
@@ -316,9 +314,9 @@ void AppletKodi::setAssetInfo( AssetInfo& assetInfo )
 }
 
 ////============================================================================
-//void AppletKodi::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
+//void AppletKodi::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 //{
-//	AppletPlayerBase::slotToGuiAssetAction( assetAction, pos0to100000 );
+//	AppletPlayerBase::toGuiClientAssetAction( assetAction, assetId, pos0to100000 );
 //	switch( assetAction )
 //	{
 //	case eAssetActionPlayProgress:
@@ -422,16 +420,14 @@ void AppletKodi::setAssetInfo( AssetInfo& assetInfo )
 //}
 //
 ////============================================================================
-//void AppletKodi::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
+//void AppletKodi::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
 //{
-//	Q_UNUSED( userData );
 //	ui.m_VidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
 //}
 //
 ////============================================================================
-//int AppletKodi::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
+//int AppletKodi::toGuiClientPlayVideoFrame(  VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
 //{
-//    Q_UNUSED( userData );
 //    return ui.m_VidWidget->playVideoFrame( onlineId, picBuf, picBufLen, picWidth, picHeight );
 //}
 //

@@ -34,8 +34,8 @@ public:
 	virtual void				updateAssetInfo( void );
     virtual void				onActivityStop( void ) override;
 
-    virtual void				toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
-    virtual int				    toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
+    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
+    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
     virtual void				showSendFail( bool show, bool permissionErr = false ) override;
     virtual void				showResendButton( bool show ) override;
@@ -48,7 +48,6 @@ signals:
 	void						signalPlayEnd( void );
 
 protected slots:
-    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos ) override;
 	void						slotPlayButtonClicked( void );
     void						slotShredAsset( void ) override;
 	void						slotSliderPressed( void );
@@ -57,8 +56,8 @@ protected slots:
 	void						slotPlayProgress( int pos0to100000 );
 	void						slotPlayEnd( void );
 
-
 protected:
+	void						toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
 	void						initAppletCamClipPlayer( void );
 
     void						showEvent( QShowEvent* ev ) override;

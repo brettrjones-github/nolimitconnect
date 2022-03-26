@@ -162,9 +162,8 @@ void TitleBarWidget::slotSignalHelpClick( void )
 }
 
 //============================================================================
-void TitleBarWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
+void TitleBarWidget::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
 {
-    Q_UNUSED( userData );
     if( !m_MyOnlineId.isVxGUIDValid() )
     {
         m_MyOnlineId = m_MyApp.getMyOnlineId();
@@ -192,7 +191,7 @@ void TitleBarWidget::showEvent( QShowEvent * showEvent )
         && ( false == m_CallbacksRequested ) )
     {
         m_CallbacksRequested = true;
-        m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+        m_MyApp.wantToGuiActivityCallbacks( this, true );
     }
 }
 
@@ -201,7 +200,7 @@ void TitleBarWidget::hideEvent( QHideEvent * ev )
 {
     if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
     {
-        m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+        m_MyApp.wantToGuiActivityCallbacks( this, false );
         m_CallbacksRequested = false;
     }
 

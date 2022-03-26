@@ -1086,6 +1086,10 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Network Search");
         break;
 
+    case  ePluginTypeFileShareClient:
+        strPluginType = QObject::tr( "Shared Files Client" );
+        break;
+
     case ePluginTypeRelay:	// proxy plugin
         strPluginType = QObject::tr("Relay");
         break;
@@ -1117,6 +1121,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
     case ePluginTypeClientPeerUser:
         strPluginDesc = QObject::tr( "Peer User Client" ).toUtf8().constData();
         break;
+
     case ePluginTypeHostPeerUser:
         strPluginDesc = QObject::tr( "Peer User Host (me)" ).toUtf8().constData();
         break;
@@ -1263,6 +1268,10 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Unused Server for About Me And Story Pages" ).toUtf8().constData();
         break;
 
+    case ePluginTypeFileShareClient:
+        strPluginDesc = QObject::tr( "Download Shared Files" ).toUtf8().constData();
+        break;
+
     default:
         strPluginDesc = QObject::tr( "UNKNOWN PLUGIN" ).toUtf8().constData();
     }
@@ -1322,6 +1331,10 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
 
     case ePluginTypeStoryboardClient:	// story board plugin
         strPluginOffer = QObject::tr(" View Story Board ");
+        break;
+
+    case ePluginTypeFileShareClient:
+        strPluginOffer = QObject::tr( " Shared Files Client " );
         break;
 
     default:

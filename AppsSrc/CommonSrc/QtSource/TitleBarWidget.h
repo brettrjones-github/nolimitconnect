@@ -153,8 +153,7 @@ protected:
     void						hideEvent( QHideEvent * ev ) override;
 	void						resizeEvent( QResizeEvent* ev ) override;
 
-    virtual void				toGuiClientPlayVideoFrame( void *			userData,
-                                                           VxGUID&          onlineId,
+    virtual void				toGuiClientPlayVideoFrame( VxGUID&          onlineId,
                                                            uint8_t *		pu8Jpg,
                                                            uint32_t		    u32JpgDataLen,
                                                            int				motion0To100000 ) override;

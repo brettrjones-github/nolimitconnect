@@ -40,16 +40,7 @@ public:
 	FileXferWidget *			findListEntryWidget( VxGUID fileInstance );
 	FileXferWidget *			addUpload( GuiFileXferSession * poSession );
 
-signals:
-	void						signalToGuiStartUpload( GuiFileXferSession * xferSession );
-	void						signalToGuiFileXferState( VxGUID lclSession, EXferState eXferState, int param1, int param2 );
-	void						signalToGuiFileUploadComplete( VxGUID lclSession, int xferError );
-
 private slots:
-	void						slotToGuiStartUpload(	GuiFileXferSession * poSession );
-	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
-	void						slotToGuiFileUploadComplete( VxGUID lclSessionId, int xferError );
-
     void						slotHomeButtonClicked( void ) override;
 	void						slotFileXferItemClicked( QListWidgetItem * item );
 
@@ -67,9 +58,9 @@ protected:
     // override default behavior of closing dialog when back button is clicked
     void                        onBackButtonClicked( void ) override;
 
-    virtual void				toGuiStartUpload( void * userData, GuiFileXferSession * xferSession ) override;
-    virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
-    virtual void				toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError ) override;
+    virtual void				toGuiStartUpload( GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiFileXferState( EPluginType plguinType, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
+    virtual void				toGuiFileUploadComplete( EPluginType plguinType, VxGUID& lclSession, EXferError xferError ) override;
 
 	FileXferWidget *			sessionToWidget( GuiFileXferSession * poSession );
 	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession );

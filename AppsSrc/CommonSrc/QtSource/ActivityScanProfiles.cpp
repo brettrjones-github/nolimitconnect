@@ -67,7 +67,7 @@ ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app,
 
 	setTitle( "Scan Profiles" );
 	m_CountdownTimer->setInterval( COUNTDOWN_INTERVAL_MS );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks(  this, true );
 	slotStartScanClicked();
 }
 
@@ -87,13 +87,13 @@ void ActivityScanProfiles::setScanStatusText( QString strMsg )
 void ActivityScanProfiles::showEvent( QShowEvent * ev )
 {
 	ActivityBase::showEvent( ev );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void ActivityScanProfiles::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+	m_MyApp.wantToGuiActivityCallbacks(  this, false );
 	ActivityBase::hideEvent( ev );
 }
 
@@ -135,19 +135,18 @@ void ActivityScanProfiles::slotHomeButtonClicked( void )
 }
 
 //============================================================================
-void ActivityScanProfiles::toGuiClientScanSearchComplete( void * userData, EScanType eScanType )
+void ActivityScanProfiles::toGuiClientScanSearchComplete( EScanType eScanType )
 {
-	Q_UNUSED( userData );
-	emit signalSearchComplete();
+	setScanStatusText( QObject::tr( "Search Profile Pictures Complete" ) );
+	m_bSearchComplete = true;
 }
 
 //============================================================================
-void ActivityScanProfiles::toGuiSearchResultProfilePic(	void *			userData, 
+void ActivityScanProfiles::toGuiSearchResultProfilePic(
                                                         GuiUser *	    netIdent, 
 														uint8_t *		pu8JpgData, 
 														uint32_t		u32JpgDataLen )
 {
-	Q_UNUSED( userData );
 	QImage	oPicBitmap;
 	if( oPicBitmap.loadFromData( pu8JpgData, u32JpgDataLen, "JPG" ) )
 	{

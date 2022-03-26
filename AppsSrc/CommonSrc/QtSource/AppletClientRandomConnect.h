@@ -29,8 +29,8 @@ public:
     EScanType					getScanType() { return m_eScanType; }
     void						searchResult( GuiUser * netIdent );
 
-    virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, GuiUser * netIdent ) override;
-    virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ) override;
+    virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
 
 signals:
     void						signalSearchResult( GuiUser * netIdent );

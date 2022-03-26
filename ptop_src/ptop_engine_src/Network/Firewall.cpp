@@ -1444,7 +1444,7 @@ EAppErr Firewall::addGlobalPort( uint16_t u16Port )
 		//}
 
 
-		// Add P2PThing to the authorized application collection.
+		// Add to the authorized application collection.
 
 		if( 0 != iExeNameStrLen )
 		{

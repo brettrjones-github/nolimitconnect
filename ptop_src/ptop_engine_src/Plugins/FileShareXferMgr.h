@@ -55,6 +55,8 @@ public:
 	FileShareXferMgr( P2PEngine& engine, PluginBase& plugin, SharedFilesMgr& sharedFilesMgr, FileLibraryMgr& fileLibraryMgr );
 	virtual ~FileShareXferMgr();
 
+	EPluginType					gePluginType( void );
+
 	void						fileAboutToBeDeleted( std::string& fileName );
 
 	virtual void				fromGuiUserLoggedOn( void );
@@ -109,8 +111,8 @@ public:
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
 protected:
-	virtual void				onFileReceived( FileRxSession * xferSession, const char * pFileName, EXferError error );
-	virtual void				onFileSent( FileTxSession * xferSession, const char * pFileName, EXferError error );
+	virtual void				onFileReceived( FileRxSession * xferSession, std::string pFileName, EXferError error );
+	virtual void				onFileSent( FileTxSession * xferSession, std::string pFileName, EXferError error );
 
 	bool						isFileDownloading( VxSha1Hash& fileHashId );
 	bool						isFileInDownloadFolder( const char * pPartialFileName );

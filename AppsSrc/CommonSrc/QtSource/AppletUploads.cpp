@@ -41,10 +41,7 @@ AppletUploads::AppletUploads( AppCommon& app, QWidget *	parent )
     connect(ui.m_FileItemList,	SIGNAL(itemClicked(QListWidgetItem *)),         this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
     connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
-	connect( this, SIGNAL(signalToGuiStartUpload(GuiFileXferSession *)),			this, SLOT(slotToGuiStartUpload(GuiFileXferSession *)) );
-	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID,EXferState,int,int)),	this, SLOT(slotToGuiFileXferState(VxGUID,EXferState,int,int)) );
-	connect( this, SIGNAL(signalToGuiFileUploadComplete(VxGUID,int)),				this, SLOT(slotToGuiFileUploadComplete(VxGUID,int)) );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	checkDiskSpace();
     m_MyApp.activityStateChange( this, true );
 }
@@ -52,7 +49,7 @@ AppletUploads::AppletUploads( AppCommon& app, QWidget *	parent )
 //============================================================================
 AppletUploads::~AppletUploads()
 {
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -166,22 +163,20 @@ bool AppletUploads::isUploadInProgress( VxGUID fileInstance )
 }
 
 //============================================================================
-void AppletUploads::slotToGuiStartUpload( GuiFileXferSession * poSession )
+void AppletUploads::toGuiStartUpload( GuiFileXferSession * xferSession )
 {
-	GuiFileXferSession * newSession = new GuiFileXferSession( *poSession );
+	GuiFileXferSession* newSession = new GuiFileXferSession( *xferSession );
 	newSession->setXferDirection( eXferDirectionTx );
 
-	FileXferWidget * item = addUpload( newSession );
+	FileXferWidget* item = addUpload( newSession );
 	item->setXferState( eXferStateInUploadXfer, 0, 0 );
 }
 
+
 //============================================================================
-void AppletUploads::slotToGuiFileXferState(	VxGUID		lclSessionId, 
-												EXferState		eXferState, 
-												int				param1, 
-												int				param2  )
+void AppletUploads::toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
-	FileXferWidget * item = findListEntryWidget( lclSessionId );
+	FileXferWidget* item = findListEntryWidget( lclSessionId );
 	if( item )
 	{
 		item->setXferState( eXferState, param1, param2 );
@@ -189,38 +184,13 @@ void AppletUploads::slotToGuiFileXferState(	VxGUID		lclSessionId,
 }
 
 //============================================================================
-void AppletUploads::slotToGuiFileUploadComplete(	VxGUID		lclSessionId, 
-													int				xferError )
+void AppletUploads::toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, EXferError xferError )
 {
-	FileXferWidget * item = findListEntryWidget( lclSessionId );
+	FileXferWidget* item = findListEntryWidget( lclSessionId );
 	if( item )
 	{
 		item->setXferState( eXferStateCompletedUpload, xferError, xferError );
 	}
-}
-
-//============================================================================
-void AppletUploads::toGuiStartUpload( void * userData, GuiFileXferSession * xferSession )
-{
-	Q_UNUSED( userData );
-	emit signalToGuiStartUpload( xferSession );
-}
-
-
-//============================================================================
-void AppletUploads::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
-{
-	Q_UNUSED( userData );
-	VxGUID myLclSession( lclSessionId );
-	emit signalToGuiFileXferState( myLclSession, eXferState, param1, param2 );
-}
-
-//============================================================================
-void AppletUploads::toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError )
-{
-	Q_UNUSED( userData );
-	VxGUID myLclSession( lclSession );
-	emit signalToGuiFileUploadComplete( myLclSession, (int)xferError );
 }
 
 //============================================================================

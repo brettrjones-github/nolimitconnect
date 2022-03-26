@@ -68,9 +68,8 @@ void ActivityScanPeopleSearch::setStatusLabel( QString strMsg )
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::toGuiScanResultSuccess( void * callbackData, EScanType eScanType, GuiUser * netIdent )
+void ActivityScanPeopleSearch::toGuiScanResultSuccess(  EScanType eScanType, GuiUser * netIdent )
 {
-	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )
 	{
 		return;
@@ -83,9 +82,8 @@ void ActivityScanPeopleSearch::toGuiScanResultSuccess( void * callbackData, ESca
 };
 
 //============================================================================
-void ActivityScanPeopleSearch::toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType )
+void ActivityScanPeopleSearch::toGuiClientScanSearchComplete( EScanType eScanType )
 {
-	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )
 	{
 		return;
@@ -101,13 +99,13 @@ void ActivityScanPeopleSearch::toGuiClientScanSearchComplete( void * callbackDat
 void ActivityScanPeopleSearch::showEvent( QShowEvent * ev )
 {
 	ActivityBase::showEvent( ev );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void ActivityScanPeopleSearch::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
 }
 

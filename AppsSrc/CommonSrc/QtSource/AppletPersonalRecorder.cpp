@@ -29,14 +29,14 @@ AppletPersonalRecorder::AppletPersonalRecorder( AppCommon& app, QWidget * parent
 
     setupMultiSessionActivity();
 	m_MyApp.activityStateChange( this, true );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 AppletPersonalRecorder::~AppletPersonalRecorder()
 {
     ui.m_SessionWidget->onActivityStop();
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -49,7 +49,7 @@ void AppletPersonalRecorder::setupMultiSessionActivity( void )
 }
 
 //============================================================================
-void AppletPersonalRecorder::toGuiClientPlayVideoFrame( void *			userData,
+void AppletPersonalRecorder::toGuiClientPlayVideoFrame( 
                                                         VxGUID&			onlineId,
                                                         uint8_t *		pu8Jpg,
                                                         uint32_t		u32JpgDataLen,

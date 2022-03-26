@@ -36,11 +36,11 @@ public:
 
 protected slots:
 	void						slotPlayButtonClicked( void );
-    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 ) override;
 	void						slotSliderPressed( void );
 	void						slotSliderReleased( void );
 
 protected:
+	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos ) override;
 	void						initAssetVoiceWidget( void );
 
 	void						setReadyForCallbacks( bool isReady );

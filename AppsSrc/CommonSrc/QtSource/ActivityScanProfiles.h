@@ -71,8 +71,8 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
-    virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
-    virtual void				toGuiSearchResultProfilePic( void * userData, GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
+    virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
+    virtual void				toGuiSearchResultProfilePic( GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
 
 signals:
 	 void						signalSearchResultProfilePic( GuiUser * netIdent, QImage oPicBitmap );

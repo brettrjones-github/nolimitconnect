@@ -29,8 +29,8 @@ public:
 
 //	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
 //
-//	virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-//    virtual int	    			toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+//	virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
+//    virtual int	    			toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
 //
 //	virtual void				showShredder( bool show );
 //	virtual void				showXferProgress( bool show );
@@ -38,7 +38,6 @@ public:
 //
 protected slots:
     void                        slotMenuItemSelected( int menuId, EMenuItemType menuItemType );
-//	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 );
 //	void						slotPlayButtonClicked( void );
 //	void						slotShredAsset( void );
 //	void						slotSliderPressed( void );

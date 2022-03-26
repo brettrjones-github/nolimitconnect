@@ -43,9 +43,9 @@ public:
 public:
 	void						setTitle( QString strTitle );
 
-    virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
-    virtual void				toGuiScanResultSuccess( void * userData, EScanType eScanType, GuiUser * netIdent ) override;
-    virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 ) override;
+    virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ) override;
+    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );
 
@@ -53,10 +53,8 @@ signals:
 	void						signalNewWebCamSession( GuiUser * netIdent );
 	void						signalPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
-	void						signalSearchComplete();
 
 public slots:
-	void						slotSearchComplete();
 	void						slotNewWebCamSession( GuiUser * netIdent );
 	void						slotPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						slotPlayAudio(  unsigned short * pu16PcmData, unsigned short u16PcmDataLen );

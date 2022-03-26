@@ -46,7 +46,7 @@ AppletPersonOfferList::AppletPersonOfferList( AppCommon& app,  QWidget* parent )
     connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		                this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
     connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	            this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
-	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
+	connect( this, SIGNAL(signalToGuiStartDownload(EPluginType pluginType, GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(EPluginType pluginType, GuiFileXferSession *)) );
 	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID,EXferState,int,int)),			    this, SLOT(slotToGuiFileXferState(VxGUID,EXferState,int,int)) );
 	connect( this, SIGNAL(signalToGuiFileDownloadComplete(VxGUID,QString,EXferError)),	    this, SLOT(slotToGuiFileDownloadComplete(VxGUID,QString,EXferError)) );
 
@@ -59,7 +59,7 @@ AppletPersonOfferList::AppletPersonOfferList( AppCommon& app,  QWidget* parent )
 //============================================================================
 AppletPersonOfferList::~AppletPersonOfferList()
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -261,14 +261,14 @@ void AppletPersonOfferList::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, 
 }
 
 //============================================================================
-void AppletPersonOfferList::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
+void AppletPersonOfferList::toGuiStartDownload( GuiFileXferSession * xferSession )
 {
 	Q_UNUSED( userData );
 	emit signalToGuiStartDownload( xferSession );
 }
 
 //============================================================================
-void AppletPersonOfferList::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
+void AppletPersonOfferList::toGuiFileXferState( EPluginType pluginType,  VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
 	Q_UNUSED( userData );
 	VxGUID myLclSession( lclSessionId );
@@ -276,7 +276,7 @@ void AppletPersonOfferList::toGuiFileXferState( void * userData, VxGUID& lclSess
 }
 
 //============================================================================
-void AppletPersonOfferList::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
+void AppletPersonOfferList::toGuiFileDownloadComplete( EPluginType pluginType,  VxGUID& lclSession, QString newFileName, EXferError xferError )
 {
 	Q_UNUSED( userData );
 	VxGUID myLclSession( lclSession );

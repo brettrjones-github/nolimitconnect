@@ -33,19 +33,15 @@ public:
 
 	virtual ~AppletMultiMessenger();
 
-	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
-															VxGUID&			onlineId, 
+	virtual void				toGuiClientPlayVideoFrame(	VxGUID&			onlineId, 
                                                             uint8_t *		pu8Jpg,
                                                             uint32_t		u32JpgDataLen,
                                                             int				motion0To100000 ) override;
-    virtual void				toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
+    virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
     virtual void 				onSessionActivityShouldExit( QString shouldExitReason ) override {};
 
     virtual void				onActivityFinish( void ) override;
-
-signals:
-	void						signalToGuiMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos );
 
 protected slots:
     void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
@@ -60,7 +56,6 @@ protected slots:
 
     void						slotOfferFileButtonClicked( void );
 
-	void						slotToGuiMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos );
 	void						slotToGuiPluginSessionEnded(GuiOfferSession * offerSession );
 
 	void						slotUserInputButtonClicked( void );
@@ -70,8 +65,8 @@ protected:
     virtual void				hideEvent( QHideEvent * ev ) override;
 
 	// override of ToGuiActivityInterface
-    virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ) override;
-    virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ) override;
+    virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ) override;
+    virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ) override;
 
 	virtual bool 				checkForSendAccess( bool sendOfferIfPossible );
 	virtual void				showReasonAccessNotAllowed( void );
@@ -83,14 +78,12 @@ protected:
 	void						setupMultiSessionActivity( GuiUser * hisIdent );
 	void						setStatusMsg( QString strStatus );
 
-	void						toGuiSetGameValueVar(	void *		    userData, 
-														EPluginType     ePluginType, 
+	void						toGuiSetGameValueVar(	EPluginType     ePluginType, 
 														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
 
-	void						toGuiSetGameActionVar(	void *		    userData, 
-														EPluginType     ePluginType, 
+	void						toGuiSetGameActionVar(	EPluginType     ePluginType, 
 														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;

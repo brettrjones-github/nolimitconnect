@@ -27,7 +27,6 @@ AssetBaseWidget::AssetBaseWidget( AppCommon& appCommon, QWidget *parent)
 , m_Engine( appCommon.getEngine() )
 , m_AssetInfo()
 {
-	connect( this, SIGNAL(signalToGuiAssetAction(EAssetAction, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, int)) );
 }
 
 //============================================================================
@@ -35,7 +34,7 @@ AssetBaseWidget::~AssetBaseWidget()
 {
 	if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
 	{
-		m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+		m_MyApp.wantToGuiActivityCallbacks( this, false );
 		m_CallbacksRequested = false;
 	}
 }
@@ -66,7 +65,7 @@ void AssetBaseWidget::showEvent(QShowEvent * showEvent)
 		&& ( false == m_CallbacksRequested ) )
 	{
 		m_CallbacksRequested = true;
-		m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+		m_MyApp.wantToGuiActivityCallbacks( this, true );
 	}
 
 	updateProgressBarVisibility();
@@ -77,7 +76,7 @@ void AssetBaseWidget::hideEvent( QHideEvent * ev )
 {
 	if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
 	{
-		m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+		m_MyApp.wantToGuiActivityCallbacks( this, false );
 		m_CallbacksRequested = false;
 	}
 
@@ -85,7 +84,7 @@ void AssetBaseWidget::hideEvent( QHideEvent * ev )
 }
 
 //============================================================================
-void AssetBaseWidget::toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
+void AssetBaseWidget::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
 	if( assetId == m_AssetInfo.getAssetUniqueId() )
 	{
@@ -94,118 +93,112 @@ void AssetBaseWidget::toGuiClientAssetAction( void * userData, EAssetAction asse
 			LogMsg( LOG_ERROR, "toGuiClientAssetAction txError %s ", m_AssetInfo.getAssetUniqueId().toHexString().c_str() );
 		}
 
-		emit signalToGuiAssetAction( assetAction, pos0to100000 );
-	}
-}
-
-//============================================================================
-void AssetBaseWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
-{
-	bool needUpdate = false;
-	switch( assetAction )
-	{
-	case eAssetActionTxProgress:
-		if( eAssetSendStateTxProgress != m_AssetInfo.getAssetSendState() )
+		bool needUpdate = false;
+		switch( assetAction )
 		{
-			m_AssetInfo.setAssetSendState( eAssetSendStateTxProgress );
-			needUpdate = true;
+		case eAssetActionTxProgress:
+			if( eAssetSendStateTxProgress != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateTxProgress );
+				needUpdate = true;
+			}
+
+			m_ProgressBarShouldBeVisible = true;
+			if( m_AssetSendProgress != pos0to100000 )
+			{
+				m_AssetSendProgress = pos0to100000;
+				needUpdate = true;
+			}
+
+			break;
+
+		case eAssetActionRxProgress:
+			if( eAssetSendStateRxProgress != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateRxProgress );
+				needUpdate = true;
+			}
+
+			m_ProgressBarShouldBeVisible = true;
+			if( m_AssetSendProgress != pos0to100000 )
+			{
+				m_AssetSendProgress = pos0to100000;
+				needUpdate = true;
+			}
+
+			break;
+
+		case eAssetActionTxBegin:
+			m_ProgressBarShouldBeVisible = true;
+			//if( eAssetSendStateTxProgress != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetSendProgress = 0;
+				m_AssetInfo.setAssetSendState( eAssetSendStateTxProgress );
+				needUpdate = true;
+			}
+
+			break;
+
+		case eAssetActionRxBegin:
+			m_ProgressBarShouldBeVisible = true;
+			if( eAssetSendStateRxProgress != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateRxProgress );
+				needUpdate = true;
+			}
+			break;
+
+		case eAssetActionTxSuccess:
+			m_ProgressBarShouldBeVisible = false;
+			m_AssetSendProgress = 100;
+			if( eAssetSendStateTxSuccess != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateTxSuccess );
+				needUpdate = true;
+			}
+
+			break;
+
+		case eAssetActionRxSuccess:
+			m_ProgressBarShouldBeVisible = false;
+			if( eAssetSendStateRxSuccess != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateRxSuccess );
+				needUpdate = true;
+			}
+
+			break;
+
+		case eAssetActionTxError:
+		case eAssetActionTxCancel:
+			m_ProgressBarShouldBeVisible = true;
+			if( eAssetSendStateTxFail != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateTxFail );
+				needUpdate = true;
+			}
+			break;
+
+		case eAssetActionRxError:
+		case eAssetActionRxCancel:
+			m_ProgressBarShouldBeVisible = true;
+			if( eAssetSendStateRxFail != m_AssetInfo.getAssetSendState() )
+			{
+				m_AssetInfo.setAssetSendState( eAssetSendStateRxFail );
+				needUpdate = true;
+			}
+			break;
+
+		default:
+			m_ProgressBarShouldBeVisible = false;
+			//LogMsg( LOG_ERROR, "Unknown Asset action %d\n", assetAction );
+			break;
 		}
 
-		m_ProgressBarShouldBeVisible = true;
-		if( m_AssetSendProgress != pos0to100000 )
+		if( needUpdate )
 		{
-			m_AssetSendProgress = pos0to100000;
-			needUpdate = true;
+			updateFromAssetInfo();
 		}
-
-		break;
-
-	case eAssetActionRxProgress:
-		if( eAssetSendStateRxProgress != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetInfo.setAssetSendState( eAssetSendStateRxProgress );
-			needUpdate = true;
-		}
-
-		m_ProgressBarShouldBeVisible = true;
-		if( m_AssetSendProgress != pos0to100000 )
-		{
-			m_AssetSendProgress = pos0to100000;
-			needUpdate = true;
-		}
-
-		break;
-
-	case eAssetActionTxBegin:
-		m_ProgressBarShouldBeVisible = true;
-		//if( eAssetSendStateTxProgress != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetSendProgress = 0;
-			m_AssetInfo.setAssetSendState( eAssetSendStateTxProgress );
-			needUpdate = true;
-		}
-
-		break;
-
-	case eAssetActionRxBegin:
-		m_ProgressBarShouldBeVisible = true;
-		if( eAssetSendStateRxProgress != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetInfo.setAssetSendState(  eAssetSendStateRxProgress );
-			needUpdate = true;
-		}
-		break;
-
-	case eAssetActionTxSuccess:
-		m_ProgressBarShouldBeVisible = false;
-		m_AssetSendProgress = 100;
-		if( eAssetSendStateTxSuccess != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetInfo.setAssetSendState(  eAssetSendStateTxSuccess );
-			needUpdate = true;
-		}
-
-		break;
-
-	case eAssetActionRxSuccess:
-		m_ProgressBarShouldBeVisible = false;
-		if( eAssetSendStateRxSuccess != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetInfo.setAssetSendState(  eAssetSendStateRxSuccess );
-			needUpdate = true;
-		}
-
-		break;
-
-	case eAssetActionTxError:
-	case eAssetActionTxCancel:
-		m_ProgressBarShouldBeVisible = true;
-		if( eAssetSendStateTxFail != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetInfo.setAssetSendState( eAssetSendStateTxFail );
-			needUpdate = true;
-		}
-		break;
-
-	case eAssetActionRxError:
-	case eAssetActionRxCancel:
-		m_ProgressBarShouldBeVisible = true;
-		if( eAssetSendStateRxFail != m_AssetInfo.getAssetSendState() )
-		{
-			m_AssetInfo.setAssetSendState( eAssetSendStateRxFail );
-			needUpdate = true;
-		}
-		break;		
-
-	default:
-		m_ProgressBarShouldBeVisible = false;
-		//LogMsg( LOG_ERROR, "Unknown Asset action %d\n", assetAction );
-		break;
-	}				
-
-	if( needUpdate )
-	{
-		updateFromAssetInfo();
 	}
 
 	updateProgressBarVisibility();

@@ -50,15 +50,15 @@ void AppletPeerVoicePhone::setupActivityVoicePhone( void )
 }
 
 //============================================================================
-void AppletPeerVoicePhone::doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer )
+void AppletPeerVoicePhone::toToGuiRxedPluginOffer( GuiOfferSession * offer )
 {
-	m_OfferSessionLogic.doToGuiRxedPluginOffer( offer );
+	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletPeerVoicePhone::doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerSession )
+void AppletPeerVoicePhone::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
 {
-	m_OfferSessionLogic.doToGuiRxedOfferReply( offerSession );
+	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 }
 
 //============================================================================
@@ -76,9 +76,8 @@ void AppletPeerVoicePhone::onInSession( bool isInSession )
 }
 
 //============================================================================
-void AppletPeerVoicePhone::toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerVoicePhone::toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
 {
-	Q_UNUSED( callbackData );
 	if( ( ePluginType == m_ePluginType )
 		&& m_HisIdent 
 		&& ( m_HisIdent->getMyOnlineId() == friendIdent->getMyOnlineId() ) )

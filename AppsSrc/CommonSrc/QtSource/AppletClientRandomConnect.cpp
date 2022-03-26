@@ -51,20 +51,19 @@ AppletClientRandomConnect::~AppletClientRandomConnect()
 void AppletClientRandomConnect::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void AppletClientRandomConnect::hideEvent( QHideEvent * ev )
 {
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void AppletClientRandomConnect::toGuiScanResultSuccess( void * callbackData, EScanType eScanType, GuiUser * netIdent )
+void AppletClientRandomConnect::toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent )
 {
-    Q_UNUSED( callbackData );
     if( VxIsAppShuttingDown() )
     {
         return;
@@ -77,9 +76,8 @@ void AppletClientRandomConnect::toGuiScanResultSuccess( void * callbackData, ESc
 };
 
 //============================================================================
-void AppletClientRandomConnect::toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType )
+void AppletClientRandomConnect::toGuiClientScanSearchComplete( EScanType eScanType )
 {
-    Q_UNUSED( callbackData );
     if( VxIsAppShuttingDown() )
     {
         return;

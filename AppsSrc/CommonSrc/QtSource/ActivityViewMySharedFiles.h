@@ -47,13 +47,9 @@ public:
 	FileShareItemWidget *		fileToWidget( VxMyFileInfo&	fileInfo, bool isShared );
 	void						updateListEntryWidget( FileShareItemWidget * item );
 
-signals:
-	void						signalToGuiFileList( VxMyFileInfo& fileInfo );
-
 protected slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotAddFilesButtonClicked( void );
-	void						slotToGuiFileList( VxMyFileInfo& fileInfo );
 
 	void						slotListItemClicked( QListWidgetItem * item );
 
@@ -69,7 +65,7 @@ protected slots:
 protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
-    virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ) override;
+    virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
 	void						setActionEnable( bool enable );
 	void						addFile(	VxMyFileInfo&	fileInfo,

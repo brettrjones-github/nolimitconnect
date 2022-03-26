@@ -63,7 +63,7 @@ ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget * pa
 	setFileFilter( m_eFileFilterType );
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)), this,  SLOT(slotApplyFileFilter(unsigned char)) );
 	statusMsg( "Requesting Library File List " );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	slotApplyFileFilter( ui.m_FileFilterComboBox->getCurrentFileFilterMask() );
     connectBarWidgets();
 }
@@ -80,26 +80,20 @@ void ActivityViewLibraryFiles::showEvent( QShowEvent * ev )
 {
 	ActivityBase::showEvent( ev );
 	m_MyApp.setIsLibraryActivityActive( true );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	slotRequestFileList();
 }
 
 //============================================================================
 void ActivityViewLibraryFiles::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
 	m_MyApp.setIsLibraryActivityActive( false );
 }
 
 //============================================================================
-void ActivityViewLibraryFiles::toGuiFileList( void * userData, VxMyFileInfo& fileInfo )
-{
-	emit signalToGuiFileList( fileInfo );
-}
-
-//============================================================================
-void ActivityViewLibraryFiles::slotToGuiFileList( VxMyFileInfo& fileInfo )
+void ActivityViewLibraryFiles::toGuiFileList( VxMyFileInfo& fileInfo )
 {
 	if( fileInfo.getFullFileName().isEmpty() )
 	{

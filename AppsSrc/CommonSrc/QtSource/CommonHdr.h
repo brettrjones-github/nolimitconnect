@@ -9,9 +9,9 @@
 #include "VxAppTheme.h"
 #include "VxAppStyle.h"
 
-#include "ToGuiActivityClient.h"
-#include "ToGuiFileXferClient.h"
-#include "ToGuiHardwareCtrlClient.h"
+#include "ToGuiActivityInterface.h"
+#include "ToGuiFileXferInterface.h"
+#include "ToGuiHardwareControlInterface.h"
 
 #include "GuiInterface/IToGui.h"
 #include "GuiInterface/IGoTvRender.h"

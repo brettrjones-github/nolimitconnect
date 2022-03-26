@@ -702,7 +702,7 @@ enum EPluginMsgType
     ePluginMsgLowDiskSpace,
     ePluginMsgInvalidParam,
 
-    eMaxPPluginMsgType
+    eMaxPluginMsgType
 };
 
 //! \public Enumerated plugins
@@ -754,9 +754,10 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeSearch,
     ePluginTypeSndReader,
     ePluginTypeSndWriter,
-    ePluginTypeWebServer,	        //!< Web server plugin ( for About Me and Story Board web pages )
-    ePluginTypeAboutMePageClient,	//!< about me web page plugin client
-    ePluginTypeStoryboardClient,	//!< storyboard web page plugin client
+    ePluginTypeWebServer,	        // Web server plugin ( for About Me and Story Board web pages )
+    ePluginTypeAboutMePageClient,	// about me web page plugin client
+    ePluginTypeStoryboardClient,	// storyboard web page plugin client
+    ePluginTypeFileShareClient,     // shared files client
 
     eMaxPluginType	
 };

@@ -104,13 +104,13 @@ void AppletNearbyListClient::setStatusLabel( QString strMsg )
 void AppletNearbyListClient::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
 void AppletNearbyListClient::hideEvent( QHideEvent * ev )
 {
-    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );
 }
 

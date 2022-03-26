@@ -60,7 +60,7 @@ void AppletPeerBase::setupAppletPeerBase( void )
 
 	m_Engine.fromGuiMuteMicrophone( false );
 	m_Engine.fromGuiMuteSpeaker( false );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
@@ -119,7 +119,7 @@ void AppletPeerBase::showEvent( QShowEvent * ev )
     if( ePluginTypeInvalid == m_ePluginType )
     {
         m_MyApp.setPluginVisible( m_ePluginType, true );
-        m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+        m_MyApp.wantToGuiActivityCallbacks( this, true );
     }
 }
 
@@ -129,7 +129,7 @@ void AppletPeerBase::hideEvent( QHideEvent * ev )
     if( ePluginTypeInvalid == m_ePluginType )
     {
         m_MyApp.setPluginVisible( m_ePluginType, false );
-        m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+        m_MyApp.wantToGuiActivityCallbacks( this, false );
     }
 
     AppletBase::hideEvent( ev );
@@ -175,47 +175,25 @@ bool AppletPeerBase::fromGuiSetGameActionVar(	int32_t			s32VarId,
 }
 
 //============================================================================
-void AppletPeerBase::toGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer )
-{
-	Q_UNUSED( callbackData );
-	emit signalToGuiRxedPluginOffer( offer );
-}
-
-//============================================================================
-void AppletPeerBase::slotToGuiRxedPluginOffer( GuiOfferSession * offer )
+void AppletPeerBase::toGuiRxedPluginOffer(GuiOfferSession * offer )
 {
 	//m_OfferSessionLogic.toGuiRxedPluginOffer( offer );
 }; 
 
 //============================================================================
-void AppletPeerBase::toGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerReply )
-{
-	Q_UNUSED( callbackData );
-	emit signalToGuiRxedOfferReply( offerReply );
-} 
-
-//============================================================================
-void AppletPeerBase::slotToGuiRxedOfferReply( GuiOfferSession * offerReply )
+void AppletPeerBase::toGuiRxedOfferReply( GuiOfferSession * offerReply )
 {
 	//m_OfferSessionLogic.toGuiRxedOfferReply( offerReply );
 }; 
 
 //============================================================================
-void AppletPeerBase::toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer )
-{
-	Q_UNUSED( callbackData );
-	emit signalToGuiPluginSessionEnded( offer );
-}; 
-
-//============================================================================
-void AppletPeerBase::slotToGuiPluginSessionEnded( GuiOfferSession * offer )
+void AppletPeerBase::toGuiPluginSessionEnded( GuiOfferSession * offer )
 {
 	//handleSessionEnded( offerResponse, this );
 }; 
 
 //============================================================================
-void AppletPeerBase::toGuiClientPlayVideoFrame(	void *			userData, 
-												VxGUID&			onlineId, 
+void AppletPeerBase::toGuiClientPlayVideoFrame(	VxGUID&			onlineId, 
 												uint8_t *		pu8Jpg, 
 												uint32_t		u32JpgDataLen,
 												int				motion0To100000 )
@@ -227,8 +205,7 @@ void AppletPeerBase::toGuiClientPlayVideoFrame(	void *			userData,
 }
 
 //============================================================================
-void AppletPeerBase::toGuiSetGameValueVar(	void *		    userData, 
-											EPluginType     ePluginType, 
+void AppletPeerBase::toGuiSetGameValueVar(	EPluginType     ePluginType, 
 											VxGUID&		    onlineId, 
 											int32_t			s32VarId, 
 											int32_t			s32VarValue )
@@ -236,13 +213,12 @@ void AppletPeerBase::toGuiSetGameValueVar(	void *		    userData,
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
 	{
-		emit signalToGuiSetGameValueVar( s32VarId, s32VarValue );
+		//emit signalToGuiSetGameValueVar( s32VarId, s32VarValue );
 	}
 }
 
 //============================================================================
-void AppletPeerBase::toGuiSetGameActionVar(	void *		    userData, 
-											EPluginType     ePluginType, 
+void AppletPeerBase::toGuiSetGameActionVar(	EPluginType     ePluginType, 
 											VxGUID&		    onlineId, 
 											int32_t			s32VarId, 
 											int32_t			s32VarValue )
@@ -250,6 +226,6 @@ void AppletPeerBase::toGuiSetGameActionVar(	void *		    userData,
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
 	{
-		emit signalToGuiSetGameActionVar( s32VarId, s32VarValue );
+		//emit signalToGuiSetGameActionVar( s32VarId, s32VarValue );
 	}
 }

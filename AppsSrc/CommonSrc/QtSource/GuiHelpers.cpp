@@ -312,6 +312,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientShareFiles:           return ePluginTypeFileShareServer;
     case eAppletClientShareWebCam:          return ePluginTypeCamServer;
     case eAppletClientStoryboard:           return ePluginTypeStoryboardClient;
+    case eAppletPeerViewSharedFiles:        return ePluginTypeFileShareClient;
     case eAppletClientRelay:                return ePluginTypeRelay;
 
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePageServer;
@@ -528,6 +529,7 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 	case ePluginTypeAdmin:
     case ePluginTypeAboutMePageClient:
     case ePluginTypeStoryboardClient:
+    case ePluginTypeFileShareClient:
 		isSingleSessionPlugin = true;
 		break;
 	case ePluginTypeAboutMePageServer:

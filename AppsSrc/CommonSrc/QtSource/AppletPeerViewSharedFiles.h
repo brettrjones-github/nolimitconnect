@@ -40,18 +40,7 @@ public:
 public:
     void						addFile( GuiUser * netIdent, VxMyFileInfo& fileInfo  );
 
-signals:
-	void						signalToGuiFileListReply( FileListReplySession* replySession );
-	void						signalToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
-	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
-	void						signalToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
-
 private slots:
-	void						slotToGuiFileListReply( FileListReplySession* replySession );
-	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
-	void						slotToGuiStartDownload( GuiFileXferSession * xferSession );
-	void						slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
-
     void						slotHomeButtonClicked( void ) override;
 	void						statusMsg( QString strMsg );
 	void						slotApplyFileFilter( unsigned char fileTypeMask );
@@ -68,10 +57,10 @@ protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
 
-    virtual void				toGuiFileListReply(	void * userData, FileListReplySession * replySession ) override;
-    virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
-    virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
-    virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
+    virtual void				toGuiFileListReply(	FileListReplySession * replySession ) override;
+    virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
+    virtual void				toGuiStartDownload( GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
 	FileXferWidget *			fileToWidget( GuiUser * netIdent, VxMyFileInfo& fileInfo );
 	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * xferSession );

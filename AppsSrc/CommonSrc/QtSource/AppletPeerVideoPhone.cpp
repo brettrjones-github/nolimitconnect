@@ -54,15 +54,15 @@ void AppletPeerVideoPhone::setupActivityVideoPhone()
 }
 
 //============================================================================
-void AppletPeerVideoPhone::doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer )
+void AppletPeerVideoPhone::toToGuiRxedPluginOffer( GuiOfferSession * offer )
 {
-	m_OfferSessionLogic.doToGuiRxedPluginOffer( offer );
+	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletPeerVideoPhone::doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerSession )
+void AppletPeerVideoPhone::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
 {
-	m_OfferSessionLogic.doToGuiRxedOfferReply( offerSession );
+	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 }
 
 //============================================================================
@@ -80,9 +80,8 @@ void AppletPeerVideoPhone::onInSession( bool isInSession )
 }
 
 //============================================================================
-void AppletPeerVideoPhone::toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerVideoPhone::toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
 {
-	Q_UNUSED( callbackData );
 	if( ( ePluginType == m_ePluginType )
 		&& m_HisIdent 
 		&& ( m_HisIdent->getMyOnlineId() == friendIdent->getMyOnlineId() ) )

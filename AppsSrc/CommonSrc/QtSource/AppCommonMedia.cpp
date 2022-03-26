@@ -71,11 +71,10 @@ void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
         }
     }
 	
-	std::vector<ToGuiHardwareCtrlClient>::iterator hardwareIter;
-	for( hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
-		ToGuiHardwareCtrlClient& toGuiClient = *hardwareIter;
-		toGuiClient.m_Callback->doGuiWantVideoCapture( enableVidCapture );
+		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+		toGuiClient->toGuiWantVideoCapture( enableVidCapture );
 	}
 }
 
@@ -118,20 +117,13 @@ void AppCommon::toGuiPlayVideoFrame(  VxGUID& onlineId, uint8_t * pu8Jpg, uint32
 	{
 		//LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d", ePluginType, u32JpgDataLen );
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-		LogMsg( LOG_INFO, "toGuiPlayVideoFrame: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-		toGuiActivityClientsLock();
-		for( ToGuiActivityClient& toGuiClient : m_ToGuiActivityClientList )
+		for( ToGuiActivityInterface* toGuiClient : m_ToGuiActivityInterfaceList )
 		{
-			toGuiClient.m_Callback->toGuiClientPlayVideoFrame(	toGuiClient.m_UserData, 
-																onlineId,
-																pu8Jpg,
-																u32JpgDataLen,
-	     														motion0To100000 );
+			toGuiClient->toGuiClientPlayVideoFrame(	onlineId,
+													pu8Jpg,
+													u32JpgDataLen,
+	     											motion0To100000 );
 		}
-
-		toGuiActivityClientsUnlock();
 	}
 }
 
@@ -144,23 +136,15 @@ int AppCommon::toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t
     {
         //LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d\n", ePluginType, u32JpgDataLen );
 
-        std::vector<ToGuiActivityClient>::iterator iter;
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-        LogMsg( LOG_INFO, "toGuiPlayVideoFrame: toGuiActivityClientsLock\n" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-        toGuiActivityClientsLock();
-        for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+        for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
         {
-            ToGuiActivityClient& toGuiClient = *iter;
-            behindFrameCnt += toGuiClient.m_Callback->toGuiClientPlayVideoFrame( toGuiClient.m_UserData,
-                                                                                onlineId,
-                                                                                picBuf,
-                                                                                picBufLen,
-                                                                                picWidth,
-                                                                                picHeight );
+            ToGuiActivityInterface* toGuiClient = *iter;
+            behindFrameCnt += toGuiClient->toGuiClientPlayVideoFrame( onlineId,
+																		picBuf,
+																		picBufLen,
+																		picWidth,
+																		picHeight );
         }
-
-        toGuiActivityClientsUnlock();
     }
 
     return behindFrameCnt;

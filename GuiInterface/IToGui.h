@@ -19,6 +19,7 @@
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/AssetDefs.h>
+#include <CoreLib/VxSha1Hash.h>
 #include <PktLib/VxCommon.h>
 
 class VxNetIdent;
@@ -180,24 +181,24 @@ public:
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
-													const char *	pFileName,
-													VxGUID          assetId,
-													uint8_t *		fileHashData ) = 0;
+													std::string&	fileName,
+													VxGUID&         assetId,
+													VxSha1Hash&		fileHasId ) = 0;
 	/// Upload a file completed
-	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) = 0;
+	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// Download a file started
 	virtual void				toGuiStartDownload(	VxNetIdent *	netIdent, 
 													EPluginType		ePluginType, 
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
-													const char *	pFileName,
-													VxGUID          assetId,
-													uint8_t *		fileHashData ) = 0;
+													std::string&	fileName,
+													VxGUID&         assetId,
+													VxSha1Hash&		fileHasId ) = 0;
 	/// Download a file completed
-	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError ) = 0;
+	virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// File transfer progress and/or state
-	virtual void				toGuiFileXferState( VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) = 0;
+	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) = 0;
 
 	/// Video file or audio file or emote icon or text message asset info in result of request to get Text Chat session assets
     virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) = 0;
@@ -218,12 +219,12 @@ public:
     //virtual void				toGuiThumbRemoved( VxGUID& thumbId ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
-	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 
+	virtual void				toGuiSetGameValueVar(	EPluginType	    ePluginType,
 														VxGUID&		    oOnlineId, 
 														int32_t			s32VarId, 
 														int32_t			s32VarValue ) = 0;
 	/// Game action has occurred ( Used by Truth Or Dare video chat game )
-	virtual bool				toGuiSetGameActionVar(	EPluginType	    ePluginType, 
+	virtual void				toGuiSetGameActionVar(	EPluginType	    ePluginType,
 														VxGUID&		    oOnlineId, 
 														int32_t			s32VarId, 
 														int32_t			s32VarValue ) = 0;

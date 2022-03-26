@@ -42,7 +42,7 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );
-    m_MyApp.wantToGuiActivityCallbacks( this, nullptr, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
     m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, true );
 }
 
@@ -52,7 +52,7 @@ AppletAboutMeClient::~AppletAboutMeClient()
     m_MyApp.getWebPageMgr().wantWebPageCallbacks( this, false );
     m_MyApp.getEngine().fromGuiCancelWebPage( eWebPageTypeAboutMe, m_HisOnlineId );
 
-    m_MyApp.wantToGuiActivityCallbacks( this, nullptr, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 

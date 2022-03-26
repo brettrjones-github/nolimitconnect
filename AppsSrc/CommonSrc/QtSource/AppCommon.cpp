@@ -451,29 +451,6 @@ void AppCommon::startLogin()
 }
 
 //============================================================================
-void AppCommon::connectSignals( void )
-{
-	connect(this, SIGNAL(signalPlaySound(ESndDef)),			this, SLOT(slotPlaySound(ESndDef)) );
-	connect(this, SIGNAL(signalStatusMsg(QString)),			this, SLOT(slotStatusMsg(QString)) );
-	connect(this, SIGNAL(signalUserMsg(QString)),			this, SLOT(slotStatusMsg(QString)) );
-	connect(this, SIGNAL(signalAppErr(EAppErr,QString)),	this, SLOT(slotAppErr(EAppErr,QString)) );
-	connect(this, SIGNAL(signalNetworkStateChanged(ENetworkStateType)),	this, SLOT(slotNetworkStateChanged(ENetworkStateType)) );
-
-	connect(this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this, SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)) );
-	connect(this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),			this, SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
-	connect(this, SIGNAL(signalToGuiInstMsg(GuiUser*,EPluginType,QString)),		this, SLOT(slotToGuiInstMsg(GuiUser*,EPluginType,QString)) );
-
-	connect( this, SIGNAL(signalEnableVideoCapture(bool)),							this, SLOT(slotEnableVideoCapture(bool)), Qt::QueuedConnection );
-	connect( this, SIGNAL(signalEnableMicrophoneRecording(bool)),					this, SLOT(slotEnableMicrophoneRecording(bool)), Qt::QueuedConnection);
-	connect( this, SIGNAL(signalEnableSpeakerOutput(bool)),							this, SLOT(slotEnableSpeakerOutput(bool)), Qt::QueuedConnection);
-
-	//connect( //ui.m_RelayHelpButton, SIGNAL(clicked()),								this, SLOT(slotRelayHelpButtonClicked()));
-	connect( this, SIGNAL(signalSetRelayHelpButtonVisibility(bool)),				this, SLOT(slotSetRelayHelpButtonVisibility(bool)));
-	connect( this, SIGNAL( signalInternalPluginMessage( EPluginType, VxGUID, EPluginMsgType, QString ) ), this, SLOT( slotInternalPluginMessage( EPluginType, VxGUID, EPluginMsgType, QString ) ), Qt::QueuedConnection );
-	connect( this, SIGNAL( signalInternalPluginErrorMsg( EPluginType, VxGUID, EPluginMsgType, ECommErr ) ), this, SLOT( slotInternalPluginErrorMsg( EPluginType, VxGUID, EPluginMsgType, ECommErr ) ), Qt::QueuedConnection );
-}
-
-//============================================================================
 void AppCommon::setIsMaxScreenSize( bool isMessagerFrame, bool isFullSizeWindow )
 {
     m_HomePage.setIsMaxScreenSize( isMessagerFrame, isFullSizeWindow );
@@ -992,32 +969,20 @@ void AppCommon::toGuiPluginCommError( EPluginType pluginType, VxGUID& onlineId, 
 //============================================================================
 void AppCommon::slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue )
 {
-	toGuiFileXferClientsLock();
-	for( auto & client : m_ToGuiActivityClientList )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		if( client.m_Callback )
-		{
-			client.m_Callback->toGuiPluginMsg( pluginType, onlineId, msgType, paramValue );
-		}
+		client->toGuiPluginMsg( pluginType, onlineId, msgType, paramValue );
 	}
-
-	toGuiFileXferClientsUnlock();
 }
 
 //============================================================================
 void AppCommon::slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError )
 {
 	QString commErrDescription = GuiParams::describeCommError( commError );
-	toGuiFileXferClientsLock();
-	for( auto& client : m_ToGuiActivityClientList )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		if( client.m_Callback )
-		{
-			client.m_Callback->toGuiPluginMsg( pluginType, onlineId, msgType, commErrDescription );
-		}
+		client->toGuiPluginMsg( pluginType, onlineId, msgType, commErrDescription );
 	}
-
-	toGuiFileXferClientsUnlock();
 }
 
 //============================================================================
@@ -1498,55 +1463,58 @@ void AppCommon::slotAppErr( EAppErr eAppErr, QString errMsg )
 }
 
 //============================================================================
-bool AppCommon::toGuiSetGameValueVar(			EPluginType	ePluginType, 
-												VxGUID&		onlineId, 
-												int32_t			s32VarId, 
-												int32_t			s32VarValue )
+void AppCommon::toGuiSetGameValueVar( EPluginType ePluginType, VxGUID& onlineId, int32_t s32VarId, int32_t s32VarValue )
 {
 	if( VxIsAppShuttingDown() )
 	{
-		return false;
+		return;
 	}
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSetGameValueVar: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiSetGameValueVar( client.m_UserData, ePluginType, onlineId, s32VarId, s32VarValue );
-	}
-
-	toGuiActivityClientsUnlock();
-	return true;
+	emit signalInternalToGuiSetGameValueVar( ePluginType, onlineId, s32VarId, s32VarValue );
 }
 
 //============================================================================
-bool AppCommon::toGuiSetGameActionVar(	EPluginType	ePluginType, 
-											VxGUID&		onlineId, 
-											int32_t			s32VarId, 
-											int32_t			s32VarValue )
+void AppCommon::slotInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue )
 {
 	if( VxIsAppShuttingDown() )
 	{
-		return false;
+		return;
 	}
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSetGameActionVar: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
 	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiSetGameActionVar( client.m_UserData, ePluginType, onlineId, s32VarId, s32VarValue );
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiSetGameValueVar( ePluginType, onlineId, s32VarId, s32VarValue );
+	}
+}
+
+//============================================================================
+void AppCommon::toGuiSetGameActionVar(	EPluginType	ePluginType, 
+										VxGUID&		onlineId, 
+										int32_t		s32VarId, 
+										int32_t		s32VarValue )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
 	}
 
-	toGuiActivityClientsUnlock();
-	return true;
+	emit signalInternalToGuiSetGameActionVar( ePluginType, onlineId, s32VarId, s32VarValue );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiSetGameActionVar( ePluginType, onlineId, s32VarId, s32VarValue );
+	}
 }
 
 //============================================================================
@@ -1563,116 +1531,107 @@ void AppCommon::slotSetRelayHelpButtonVisibility( bool isVisible )
 }
 
 //============================================================================
-void AppCommon::toGuiAssetAdded( AssetBaseInfo * assetInfo )
+void AppCommon::toGuiAssetAdded( AssetBaseInfo* assetInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	if( IsLogEnabled( eLogAssets ) )
-		LogMsg( LOG_INFO, "toGuiAssetAdded: toGuiActivityClientsLock" );
-	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
-
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiAssetAdded( client.m_UserData, assetInfo );
-	}
-
-	if( IsLogEnabled( eLogAssets ) )
-		LogMsg( LOG_INFO, "toGuiAssetAdded toGuiActivityClientsUnlock");
-
-	toGuiActivityClientsUnlock();
-
-	//emit signalAssetAdded( assetInfo );
+	emit slotInternalToGuiAssetAdded( *assetInfo );
 }
 
 //============================================================================
-void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo * assetInfo )
+void AppCommon::slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo )
+{
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiAssetAdded( assetInfo );
+	}
+}
+
+//============================================================================
+void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	//emit signalSessionHistory( assetInfo );
-	//#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetSessionHistory: toGuiActivityClientsLock" );
-	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
+	emit slotInternalToGuiAssetSessionHistory( *assetInfo );
+}
 
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+//============================================================================
+void AppCommon::slotInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo )
+{
+	if( VxIsAppShuttingDown() )
 	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiAssetSessionHistory( client.m_UserData, assetInfo );
+		return;
 	}
 
-	//#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetSessionHistory toGuiActivityClientsUnlock");
-	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
-
-	toGuiActivityClientsUnlock();
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiAssetSessionHistory( assetInfo );
+	}
 }
 
 //============================================================================
 void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
 
+	emit signalInternalToGuiAssetAction( assetAction, assetId, pos0to100000 );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 )
+{
     if( ( eAssetActionRxNotifyNewMsg == assetAction )
         || ( eAssetActionRxViewingMsg == assetAction ) )
     {
-        VxGUID qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
-        emit signalAssetViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
+        emit signalAssetViewMsgAction( assetAction, assetId, pos0to100000 );
         return;
     }
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiClientAssetAction( client.m_UserData, assetAction, assetId, pos0to100000 );
+        ToGuiActivityInterface* client = *iter;
+        client->toGuiClientAssetAction( assetAction, assetId, pos0to100000 );
     }
-
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
 void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 )
 {
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
 
-    VxGUID idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
-    emit signalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiMultiSessionAction: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-    {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiMultiSessionAction( client.m_UserData, mSessionAction, onlineId, pos0to100000 );
-    }
+	VxGUID idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
+	emit signalInternalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
+}
 
-    toGuiActivityClientsUnlock();
+//============================================================================
+void AppCommon::slotInternalMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos0to100000 )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalMultiSessionAction( onlineId, mSessionAction, pos0to100000 );
+
+    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    {
+        ToGuiActivityInterface* client = *iter;
+        client->toGuiMultiSessionAction(  mSessionAction, onlineId, pos0to100000 );
+    }
 }
 
 //============================================================================
@@ -1683,85 +1642,82 @@ void AppCommon::toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int 
 		return;
 	}
 
-	if( ( eAssetActionRxNotifyNewMsg == assetAction )
-		|| ( eAssetActionRxViewingMsg == assetAction ) )
+	emit signalInternalBlobAction( assetAction, assetId, pos0to100000 );
+}
+
+//============================================================================
+void AppCommon::slotInternalBlobAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 )
+{
+	if( VxIsAppShuttingDown() )
 	{
-		VxGUID qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
-		emit signalBlobViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
 		return;
 	}
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	if( ( eAssetActionRxNotifyNewMsg == assetAction )
+		|| ( eAssetActionRxViewingMsg == assetAction ) )
 	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiClientBlobAction( client.m_UserData, assetAction, assetId, pos0to100000 );
+		emit signalBlobViewMsgAction( assetAction, assetId, pos0to100000 );
+		return;
 	}
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsUnlock();
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiClientBlobAction( assetAction, assetId, pos0to100000 );
+	}
 }
 
 //============================================================================
-void AppCommon::toGuiBlobAdded( BlobInfo * assetInfo )
+void AppCommon::toGuiBlobAdded( BlobInfo* blobInfo )
 {
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
 
-    if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiBlobAdded: toGuiActivityClientsLock" );
-    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
-
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-    {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiBlobAdded( client.m_UserData, assetInfo );
-    }
-
-    if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiBlobAdded toGuiActivityClientsUnlock" );
-
-    toGuiActivityClientsUnlock();
-
-    //emit signalAssetAdded( assetInfo );
+	emit signalInternalBlobAdded( *blobInfo );
 }
 
 //============================================================================
-void AppCommon::toGuiBlobSessionHistory( BlobInfo * assetInfo )
+void AppCommon::slotInternalBlobAdded( BlobInfo blobInfo )
 {
-    if( VxIsAppShuttingDown() )
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
     {
-        return;
+        ToGuiActivityInterface* client = *iter;
+        client->toGuiBlobAdded( blobInfo );
     }
+}
 
-    //emit signalSessionHistory( assetInfo );
-    //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiBlobSessionHistory: toGuiActivityClientsLock" );
-    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
+//============================================================================
+void AppCommon::toGuiBlobSessionHistory( BlobInfo* blobInfo )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
 
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	emit signalInternalBlobSessionHistory( *blobInfo );
+}
+
+
+//============================================================================
+void AppCommon::slotInternalBlobSessionHistory( BlobInfo blobInfo )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiBlobSessionHistory( client.m_UserData, assetInfo );
+        ToGuiActivityInterface* client = *iter;
+        client->toGuiBlobSessionHistory( blobInfo );
     }
-
-    //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiBlobSessionHistory toGuiActivityClientsUnlock" );
-    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
-
-    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -1824,34 +1780,7 @@ void AppCommon::errMessageBox2( QString title, const char * msg, ... )
 }
 
 //============================================================================
-void AppCommon::toGuiActivityClientsLock( void )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() start");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	m_ToGuiActivityClientMutex.lock();
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() done");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-}
-
-//============================================================================
-void AppCommon::toGuiActivityClientsUnlock( void )
-{
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.unlock()");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	m_ToGuiActivityClientMutex.unlock();
-}
-
-//============================================================================
 void AppCommon::wantToGuiActivityCallbacks(	ToGuiActivityInterface *	callback, 
-											void *						userData,
 											bool						wantCallback )
 {
 static bool actCallbackShutdownComplete = false;
@@ -1863,170 +1792,93 @@ static bool actCallbackShutdownComplete = false;
 		}
 
 		actCallbackShutdownComplete = true;
-		clearToGuiActivityClientList();
+		clearToGuiActivityInterfaceList();
 		return;
 	}
 
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "wantToGuiActivityCallbacks: toGuiActivityClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsLock();
-
 	if( wantCallback )
 	{
-		std::vector<ToGuiActivityClient>::iterator iter;
-		for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+		for( ToGuiActivityInterface* client : m_ToGuiActivityInterfaceList )
 		{
-			ToGuiActivityClient& client = *iter;
-			if( ( client.m_Callback == callback )
-				&& ( client.m_UserData == userData ) )
+			if( client == callback )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New ToGuiActivityClient because already in list" );
-				toGuiActivityClientsUnlock();
+				LogMsg( LOG_INFO, "WARNING. Ignoring New ToGuiActivityInterface.h because already in list" );
 				return;
 			}
 		}
 
-		ToGuiActivityClient newClient( callback, userData );
-		m_ToGuiActivityClientList.push_back( newClient );
-		toGuiActivityClientsUnlock();
+		m_ToGuiActivityInterfaceList.push_back( callback );
 		return;
 	}
 
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
 	{
-		ToGuiActivityClient& client = *iter;
-		if( ( client.m_Callback == callback )
-			&& ( client.m_UserData == userData ) )
+		ToGuiActivityInterface* client = *iter;
+		if( client == callback )
 		{
-			m_ToGuiActivityClientList.erase( iter );
-			toGuiActivityClientsUnlock();
+			m_ToGuiActivityInterfaceList.erase( iter );
 			return;
 		}
 	}
 
-	LogMsg( LOG_INFO, "WARNING. ToGuiActivityClient remove not found in list" );
-	toGuiActivityClientsUnlock();
+	LogMsg( LOG_INFO, "WARNING. ToGuiActivityInterface.h remove not found in list" );
 	return;
 }
 
 //============================================================================
-void AppCommon::clearToGuiActivityClientList( void )
+void AppCommon::clearToGuiActivityInterfaceList( void )
 {
-	if( m_ToGuiActivityClientList.size() )
+	if( m_ToGuiActivityInterfaceList.size() )
 	{
-		toGuiActivityClientsLock();
-		m_ToGuiActivityClientList.clear();
-		toGuiActivityClientsUnlock();
+		m_ToGuiActivityInterfaceList.clear();
 	}
 }
 
 //============================================================================
 void AppCommon::clearFileXferClientList( void )
 {
-	if( m_ToGuiFileXferClientList.size() )
+	if( m_ToGuiFileXferInterfaceList.size() )
 	{
-        m_ToGuiFileXferClientMutex.lock();
-		m_ToGuiFileXferClientList.clear();
-		m_ToGuiFileXferClientMutex.unlock();
+		m_ToGuiFileXferInterfaceList.clear();
 	}
 }
 
 //============================================================================
-void AppCommon::toGuiFileXferClientsLock( void )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.lock() start");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	m_ToGuiFileXferClientMutex.lock();
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.lock() done");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-}
-
-//============================================================================
-void AppCommon::toGuiFileXferClientsUnlock( void )
-{
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "m_ToGuiFileXferClientMutex.unlock()");
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	m_ToGuiFileXferClientMutex.unlock();
-}
-
-//============================================================================
-void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface *	callback, 
-											void *						userData,
+void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface*	    callback, 
 											bool						wantCallback )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "wantToGuiFileXferCallbacks: toGuiFileXferClientsLock" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiFileXferClientsLock();
 
 	if( wantCallback )
 	{
-		std::vector<ToGuiFileXferClient>::iterator iter;
-		for( iter = m_ToGuiFileXferClientList.begin(); iter != m_ToGuiFileXferClientList.end(); ++iter )
+		for( ToGuiFileXferInterface* client : m_ToGuiFileXferInterfaceList )
 		{
-			ToGuiFileXferClient& client = *iter;
-			if( ( client.m_Callback == callback )
-				&& ( client.m_UserData == userData ) )
+			if( client == callback )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New m_ToGuiActivityClient because already in list" );
-				toGuiFileXferClientsUnlock();
+				LogMsg( LOG_INFO, "WARNING. Ignoring New m_ToGuiActivityInterface.h because already in list" );
 				return;
 			}
 		}
 
-		ToGuiFileXferClient newClient( callback, userData );
-		m_ToGuiFileXferClientList.push_back( newClient );
-		toGuiFileXferClientsUnlock();
+		m_ToGuiFileXferInterfaceList.push_back( callback );
 		return;
 	}
 
-	std::vector<ToGuiFileXferClient>::iterator iter;
-	for( iter = m_ToGuiFileXferClientList.begin(); iter != m_ToGuiFileXferClientList.end(); ++iter )
+	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
-		ToGuiFileXferClient& client = *iter;
-		if( ( client.m_Callback == callback )
-			&& ( client.m_UserData == userData ) )
+		ToGuiFileXferInterface* client = *iter;
+		if( client == callback )
 		{
-			m_ToGuiFileXferClientList.erase( iter );
-			toGuiFileXferClientsUnlock();
+			m_ToGuiFileXferInterfaceList.erase( iter );
 			return;
 		}
 	}
 
-	LogMsg( LOG_INFO, "WARNING. ToGuiFileXferClient remove not found in list" );
-	toGuiFileXferClientsUnlock();
+	LogMsg( LOG_INFO, "WARNING. ToGuiFileXferInterface remove not found in list" );
 	return;
-}
-
-//============================================================================
-void AppCommon::toGuiHardwareCtrlLock( void )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-	m_ToGuiHardwareCtrlMutex.lock();
-}
-
-//============================================================================
-void AppCommon::toGuiHardwareCtrlUnlock( void )
-{
-	m_ToGuiHardwareCtrlMutex.unlock();
 }
 
 //============================================================================
@@ -2046,40 +1898,33 @@ static bool actCallbackShutdownComplete = false;
 		return;
 	}
 
-	toGuiHardwareCtrlLock();
-
 	if( wantCallback )
 	{
 		for( auto iter = m_ToGuiHardwareCtrlList.begin(); iter != m_ToGuiHardwareCtrlList.end(); ++iter )
 		{
-			ToGuiHardwareCtrlClient& client = *iter;
-			if( client.m_Callback == callback )
+			ToGuiHardwareControlInterface* client = *iter;
+			if( client == callback )
 			{
 				LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiHardwareCtrlCallbacks because already in list" );
-				toGuiHardwareCtrlUnlock();
 				return;
 			}
 		}
 
-		ToGuiHardwareCtrlClient newClient( callback, 0 );
-		m_ToGuiHardwareCtrlList.push_back( newClient );
-		toGuiHardwareCtrlUnlock();
+		m_ToGuiHardwareCtrlList.push_back( callback );
 		return;
 	}
 
 	for( auto iter = m_ToGuiHardwareCtrlList.begin(); iter != m_ToGuiHardwareCtrlList.end(); ++iter )
 	{
-		ToGuiHardwareCtrlClient& client = *iter;
-		if( client.m_Callback == callback )
+		ToGuiHardwareControlInterface* client = *iter;
+		if( client == callback )
 		{
 			m_ToGuiHardwareCtrlList.erase( iter );
-			toGuiHardwareCtrlUnlock();
 			return;
 		}
 	}
 
-	LogMsg( LOG_INFO, "WARNING. ToGuiHardwareCtrlClient remove not found in list" );
-	toGuiHardwareCtrlUnlock();
+	LogMsg( LOG_INFO, "WARNING. ToGuiHardwareControlInterface remove not found in list" );
 	return;
 }
 
@@ -2088,27 +1933,8 @@ void AppCommon::clearHardwareCtrlList( void )
 {
 	if( m_ToGuiHardwareCtrlList.size() )
 	{
-		toGuiHardwareCtrlLock();
 		m_ToGuiHardwareCtrlList.clear();
-		toGuiHardwareCtrlUnlock();
 	}
-}
-
-//============================================================================
-void AppCommon::toGuiUserUpdateClientsLock( void )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
-
-    m_ToGuiUserUpdateClientMutex.lock();
-}
-
-//============================================================================
-void AppCommon::toGuiUserUpdateClientsUnlock( void )
-{
-    m_ToGuiUserUpdateClientMutex.unlock();
 }
 
 //============================================================================
@@ -2127,40 +1953,33 @@ void AppCommon::wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callbac
         return;
     }
 
-    toGuiUserUpdateClientsLock();
-
     if( wantCallback )
     {
         for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
         {
-            ToGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback == callback )
+            ToGuiUserUpdateInterface* client = *iter;
+            if( client == callback )
             {
                 LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiUserUpdateCallbacks because already in list" );
-                toGuiUserUpdateClientsUnlock();
                 return;
             }
         }
 
-        ToGuiUserUpdateClient newClient( callback );
-        m_ToGuiUserUpdateClientList.push_back( newClient );
-        toGuiUserUpdateClientsUnlock();
+        m_ToGuiUserUpdateClientList.push_back( callback );
         return;
     }
 
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiUserUpdateClient& client = *iter;
-        if( client.m_Callback == callback )
+        ToGuiUserUpdateInterface* client = *iter;
+        if( client == callback )
         {
             m_ToGuiUserUpdateClientList.erase( iter );
-            toGuiUserUpdateClientsUnlock();
             return;
         }
     }
 
-    LogMsg( LOG_INFO, "WARNING. ToGuiUserUpdateClient remove not found in list" );
-    toGuiUserUpdateClientsUnlock();
+    LogMsg( LOG_INFO, "WARNING. ToGuiUserUpdateInterface remove not found in list" );
     return;
 }
 
@@ -2169,9 +1988,7 @@ void AppCommon::clearUserUpdateClientList( void )
 {
     if( m_ToGuiUserUpdateClientList.size() )
     {
-        toGuiUserUpdateClientsLock();
         m_ToGuiUserUpdateClientList.clear();
-        toGuiUserUpdateClientsUnlock();
     }
 }
 
@@ -2237,61 +2054,3 @@ bool AppCommon::checkSystemReady( void )
 
 	return m_IsSystemReady;
 }
-
-//============================================================================
-void  AppCommon::registerMetaData(void)
-{
-	qRegisterMetaType<EAppErr>("EAppErr");
-	qRegisterMetaType<EApplet>("EApplet");
-	qRegisterMetaType<EAssetAction>("EAssetAction");
-	qRegisterMetaType<EAssetType>("EAssetType");
-	qRegisterMetaType<EConnectReason>("EConnectReason");
-	qRegisterMetaType<EConnectStatus>("EConnectStatus");
-	qRegisterMetaType<EContentCatagory>("EContentCatagory");
-	qRegisterMetaType<EContentRating>("EContentRating");
-	qRegisterMetaType<EFileFilterType>("EFileFilterType");
-	qRegisterMetaType<EFriendState>("EFriendState");
-	qRegisterMetaType<EFriendViewType>("EFriendViewType");
-	qRegisterMetaType<EGenderType>("EGenderType");
-	qRegisterMetaType<EHostAnnounceStatus>("EHostAnnounceStatus");
-	qRegisterMetaType<EHostJoinStatus>("EHostJoinStatus");
-	qRegisterMetaType<EHostSearchStatus>("EHostSearchStatus");
-	qRegisterMetaType<EHostServiceType>("EHostServiceType");
-	qRegisterMetaType<EHostTestStatus>("EHostTestStatus");
-	qRegisterMetaType<EHostType>("EHostType");
-	qRegisterMetaType<EInternetStatus>("EInternetStatus");
-	qRegisterMetaType<EIsPortOpenStatus>("EIsPortOpenStatus");
-	qRegisterMetaType<ERunTestStatus>("ERunTestStatus");
-	qRegisterMetaType<EMyRelayStatus>("EMyRelayStatus");
-	qRegisterMetaType<ENetAvailStatus>("ENetAvailStatus");
-	qRegisterMetaType<ENetworkStateType>("ENetworkStateType");
-	qRegisterMetaType<EOfferResponse>("EOfferResponse");
-	qRegisterMetaType<EOfferState>("EOfferState");
-	qRegisterMetaType<EOfferType>("EOfferType");
-	qRegisterMetaType<EPluginAccess>("EPluginAccess");
-	qRegisterMetaType<EPluginType>("EPluginType");
-	qRegisterMetaType<ERandomConnectStatus>("ERandomConnectStatus");
-	qRegisterMetaType<EMSessionAction>("EMSessionAction");
-	qRegisterMetaType<ESndDef>("ESndDef");
-	qRegisterMetaType<EXferError>("EXferError");
-	qRegisterMetaType<EXferState>("EXferState");
-	qRegisterMetaType<PluginSetting>("PluginSetting");
-	qRegisterMetaType<VxGUID>("VxGUID");
-	qRegisterMetaType<VxNetIdent>("VxNetIdent");
-	qRegisterMetaType<uint32_t>("uint32_t");
-	qRegisterMetaType<uint64_t>( "uint64_t" );
-	qRegisterMetaType<EUserViewType>( "EUserViewType" );
-	qRegisterMetaType<ThumbInfo>( "ThumbInfo" );
-	qRegisterMetaType<MembershipAvailable>( "MembershipAvailable" );
-	qRegisterMetaType<MembershipHosted>( "MembershipHosted" );
-	qRegisterMetaType<HostedInfo>( "HostedInfo" );
-	qRegisterMetaType<HostJoinInfo>( "HostJoinInfo" );
-	qRegisterMetaType<EJoinState>( "EJoinState" );
-	qRegisterMetaType<EOnlineState>( "EOnlineState" );
-	qRegisterMetaType<GroupieId>( "GroupieId" );
-	qRegisterMetaType<ConnectId>( "ConnectId" );
-	qRegisterMetaType<EWebPageType>( "EWebPageType" );
-	qRegisterMetaType<EPluginMsgType>( "EPluginMsgType" );
-	qRegisterMetaType<ECommErr>( "ECommErr" );
-}
-

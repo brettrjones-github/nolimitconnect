@@ -46,7 +46,7 @@ HistoryListWidget::~HistoryListWidget()
 {
 	if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
 	{
-		m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+		m_MyApp.wantToGuiActivityCallbacks( this, false );
 		m_CallbacksRequested = false;
 	}
 }
@@ -59,7 +59,7 @@ void HistoryListWidget::showEvent(QShowEvent * showEvent)
 		&& ( false == VxIsAppShuttingDown() ) )
 	{
 		m_CallbacksRequested = true;
-		m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+		m_MyApp.wantToGuiActivityCallbacks( this, true );
 	}
 }
 
@@ -69,7 +69,7 @@ void HistoryListWidget::hideEvent( QHideEvent * ev )
 	if( m_CallbacksRequested )
 	{
 		m_CallbacksRequested = false;
-		m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+		m_MyApp.wantToGuiActivityCallbacks( this, false );
 	}
 
 	QListWidget::hideEvent( ev );
@@ -90,35 +90,47 @@ void HistoryListWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 { 
 	m_MyIdent = myIdent; 
 	m_HisIdent = hisIdent; 
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
 	m_Engine.fromGuiQuerySessionHistory( hisIdent->getMyOnlineId() );
 }
 
 //============================================================================
-void HistoryListWidget::toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
+void HistoryListWidget::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
-	Q_UNUSED( userData );
-	VxGUID assetIdPro( assetId );
-	emit signalToGuiClientAssetAction( assetAction, assetIdPro, pos0to100000 );
+
 }
 
 //============================================================================
-void HistoryListWidget::toGuiAssetSessionHistory( void * userData, AssetBaseInfo * assetInfo )
+void HistoryListWidget::toGuiAssetSessionHistory( AssetBaseInfo& assetInfo )
 {
-	Q_UNUSED( userData );
-	emit signalToGuiSessionHistory( assetInfo );
+	if( m_HisIdent
+		&& ( m_HisIdent->getMyOnlineId() == assetInfo.getHistoryId() ) )
+	{
+		// this asset belongs in our history
+		// create appropriate widget type for asset type
+		AssetBaseWidget* assetWidget = createAssetWidget( &assetInfo );
+		if( assetWidget )
+		{
+			connect( assetWidget, SIGNAL( signalShreddingAsset( AssetBaseWidget* ) ), this, SLOT( slotShreddingAsset( AssetBaseWidget* ) ) );
+			int insertAtIndex = determinInsertIndex( &assetInfo );
+			if( 0 <= insertAtIndex )
+			{
+				this->insertItem( insertAtIndex, ( QListWidgetItem* )assetWidget );
+			}
+			else
+			{
+				this->addItem( ( QListWidgetItem* )assetWidget );
+			}
+
+			this->setItemWidget( ( QListWidgetItem* )assetWidget, ( QWidget* )assetWidget );
+		}
+	}
 }
 
 //============================================================================
-void HistoryListWidget::toGuiAssetAdded( void * userData, AssetBaseInfo * assetInfo )
+void HistoryListWidget::toGuiAssetAdded( AssetBaseInfo& assetInfo )
 {
-	Q_UNUSED( userData );
-	emit signalToGuiAssetAdded( assetInfo );
-}
-
-//============================================================================
-void HistoryListWidget::slotToGuiClientAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 )
-{
+	toGuiAssetSessionHistory( assetInfo );
 }
 
 //============================================================================
@@ -159,39 +171,6 @@ void HistoryListWidget::slotShreddingAsset( AssetBaseWidget * assetWidget )
 	
 	update();
 	repaint();
-}
-
-//============================================================================
-void HistoryListWidget::slotToGuiSessionHistory( AssetBaseInfo * assetInfo )
-{
-	slotToGuiAssetAdded( assetInfo );
-}
-
-//============================================================================
-void HistoryListWidget::slotToGuiAssetAdded( AssetBaseInfo * assetInfo )
-{
-	if( m_HisIdent 
-		&& ( m_HisIdent->getMyOnlineId() == assetInfo->getHistoryId() ) )
-	{
-		// this asset belongs in our history
-		// create appropriate widget type for asset type
-		AssetBaseWidget * assetWidget = createAssetWidget( assetInfo );
-		if( assetWidget )
-		{
-			connect( assetWidget, SIGNAL(signalShreddingAsset(AssetBaseWidget *)), this, SLOT(slotShreddingAsset(AssetBaseWidget *)) );
-			int insertAtIndex = determinInsertIndex( assetInfo );
-			if( 0 <= insertAtIndex )
-			{
-				this->insertItem( insertAtIndex, (QListWidgetItem *)assetWidget );
-			}
-			else
-			{
-				this->addItem( (QListWidgetItem *)assetWidget );
-			}
-
-			this->setItemWidget( (QListWidgetItem *)assetWidget, (QWidget *)assetWidget );
-		}
-	}
 }
 
 //============================================================================

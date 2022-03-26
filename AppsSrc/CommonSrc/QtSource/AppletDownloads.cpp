@@ -45,10 +45,7 @@ AppletDownloads::AppletDownloads( AppCommon& app,  QWidget* parent )
     connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		                this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
     connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	            this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
-	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
-	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID,EXferState,int,int)),			this, SLOT(slotToGuiFileXferState(VxGUID,EXferState,int,int)) );
-	connect( this, SIGNAL(signalToGuiFileDownloadComplete(VxGUID,QString,EXferError)),	this, SLOT(slotToGuiFileDownloadComplete(VxGUID,QString,EXferError)) );
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
+	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 	checkDiskSpace();
     m_MyApp.activityStateChange( this, true );
 }
@@ -56,7 +53,7 @@ AppletDownloads::AppletDownloads( AppCommon& app,  QWidget* parent )
 //============================================================================
 AppletDownloads::~AppletDownloads()
 {
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -208,22 +205,20 @@ bool AppletDownloads::isXferInProgress( VxGUID lclSessionId )
 }
 
 //============================================================================
-void AppletDownloads::slotToGuiStartDownload( GuiFileXferSession * poSession )
+void AppletDownloads::toGuiStartDownload( GuiFileXferSession * xferSession )
 {
-	GuiFileXferSession * newSession = new GuiFileXferSession( *poSession );
+	GuiFileXferSession* newSession = new GuiFileXferSession( *xferSession );
 	newSession->setXferDirection( eXferDirectionRx );
 
-	FileXferWidget * item = addDownload( newSession );
+	FileXferWidget* item = addDownload( newSession );
 	item->setXferState( eXferStateInDownloadXfer, 0, 0 );
 }
 
 //============================================================================
-void AppletDownloads::slotToGuiFileXferState(	VxGUID		lclSessionId, 
-												EXferState		eXferState, 
-												int				param1, 
-												int				param2  )
+void AppletDownloads::toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
-	FileXferWidget * item = findListEntryWidget( lclSessionId );
+	VxGUID myLclSession( lclSessionId );
+	FileXferWidget* item = findListEntryWidget( lclSessionId );
 	if( item )
 	{
 		item->setXferState( eXferState, param1, param2 );
@@ -231,9 +226,9 @@ void AppletDownloads::slotToGuiFileXferState(	VxGUID		lclSessionId,
 }
 
 //============================================================================
-void AppletDownloads::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, QString newFileName, EXferError xferError )
+void AppletDownloads::toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, QString newFileName, EXferError xferError )
 {
-	GuiFileXferSession * xferSession = findSession( lclSessionId );
+	GuiFileXferSession* xferSession = findSession( lclSessionId );
 	if( xferSession )
 	{
 		if( !newFileName.isEmpty() )
@@ -242,35 +237,12 @@ void AppletDownloads::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, QStrin
 		}
 
 		xferSession->setXferState( eXferStateCompletedDownload, xferError, 0 );
-		FileXferWidget * item = findListEntryWidget( lclSessionId );
+		FileXferWidget* item = findListEntryWidget( lclSessionId );
 		if( item )
 		{
 			item->updateWidgetFromInfo();
 		}
 	}
-}
-
-//============================================================================
-void AppletDownloads::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
-{
-	Q_UNUSED( userData );
-	emit signalToGuiStartDownload( xferSession );
-}
-
-//============================================================================
-void AppletDownloads::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
-{
-	Q_UNUSED( userData );
-	VxGUID myLclSession( lclSessionId );
-	emit signalToGuiFileXferState( myLclSession, eXferState, param1, param2 );
-}
-
-//============================================================================
-void AppletDownloads::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
-{
-	Q_UNUSED( userData );
-	VxGUID myLclSession( lclSession );
-	emit signalToGuiFileDownloadComplete( myLclSession, newFileName, xferError );
 }
 
 //============================================================================

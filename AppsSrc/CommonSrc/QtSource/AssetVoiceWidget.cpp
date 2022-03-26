@@ -58,7 +58,6 @@ void AssetVoiceWidget::initAssetVoiceWidget( void )
 	connect( ui.m_PlayPauseButton, SIGNAL( clicked() ), this, SLOT( slotPlayButtonClicked() ) );
 	connect( ui.m_LeftAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
 	connect( ui.m_RightAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	//connect( &m_MyApp, SIGNAL(signalAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGUID, int)) );
 	connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
 	connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
 	connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
@@ -113,9 +112,8 @@ void AssetVoiceWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-void AssetVoiceWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
+void AssetVoiceWidget::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
-	AssetBaseWidget::slotToGuiAssetAction( assetAction, pos0to100000 );
 	switch( assetAction )
 	{
 	case eAssetActionPlayProgress:
@@ -228,7 +226,7 @@ void AssetVoiceWidget::setReadyForCallbacks( bool isReady )
 	if( m_ActivityCallbacksEnabled != isReady )
 	{
 		m_ActivityCallbacksEnabled = isReady;
-		m_MyApp.wantToGuiActivityCallbacks( this, this, m_ActivityCallbacksEnabled );
+		m_MyApp.wantToGuiActivityCallbacks( this, m_ActivityCallbacksEnabled );
 	}
 }
 

@@ -55,8 +55,8 @@ public:
 	virtual void				onPktFileInfoErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 protected:
-	virtual void				onFileSent( FileXferPluginSession * poSession, const char * pFileName, EXferError xferError, bool pluginIsLocked );
-	virtual void				onFileReceived( FileXferPluginSession * poSession, const char * pFileName, EXferError xferError, bool pluginIsLocked );
+	virtual void				onFileSent( FileXferPluginSession * poSession, std::string pFileName, EXferError xferError, bool pluginIsLocked );
+	virtual void				onFileReceived( FileXferPluginSession * poSession, std::string pFileName, EXferError xferError, bool pluginIsLocked );
 	virtual bool				endFileXferRxSession( FileXferPluginSession * xferSession, bool isPluginLocked );
 	virtual bool				endFileXferTxSession( FileXferPluginSession * xferSession, bool isPluginLocked );
 
