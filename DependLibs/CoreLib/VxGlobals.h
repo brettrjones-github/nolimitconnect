@@ -45,7 +45,7 @@ enum EAppDir
 	eAppDirSettings,
 	eAppDirAboutMePageServer,
 	eAppDirAboutMePageClient,
-	eAppDirStoryBoardPageServer,
+	eAppDirStoryboardPageServer,
 	eAppDirStoryBoardPageClient,
 	eAppDirRootXfer,
 	eAppDirUserXfer,

@@ -17,34 +17,61 @@
 
 #include <PktLib/PktsStoryBoard.h>
 
+#include <CoreLib/VxGlobals.h>
+
 //============================================================================
 PluginStoryboardServer::PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
-: PluginBase( engine, pluginMgr, myIdent, pluginType )
+	: PluginBaseFilesServer( engine, pluginMgr, myIdent, pluginType, "StoryboardFilesServer.db3" )
 {
 	setPluginType( ePluginTypeStoryboardServer );
 }
 
 //============================================================================
-//! return true if is plugin session
-bool PluginStoryboardServer::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginStoryboardServer::onAfterUserLogOnThreaded( void )
 {
-	return true;
+	m_RootFileFolder = VxGetAppDirectory( eAppDirStoryboardPageServer );
+	getFileInfoMgr().setRootFolder( m_RootFileFolder );
+
+	getFileInfoMgr().onAfterUserLogOnThreaded();
 }
 
 //============================================================================
-void PluginStoryboardServer::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginStoryboardServer::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	//m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
+	if( !getFileInfoMgr().loadStoryboardPageFileAssets() )
+	{
+		LogMsg( LOG_ERROR, "PluginAboutMePageServer::onLoadedFilesReady failed or missing web files" );
+	}
+	else
+	{
+		setIsWebPageServerReady( true );
+	}
 }
 
 //============================================================================
-void PluginStoryboardServer::onConnectionLost( VxSktBase * sktBase )
+void PluginStoryboardServer::onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	//m_PluginSessionMgr.onConnectionLost( sktBase );
+	checkIsWebPageServerReady();
 }
 
 //============================================================================
-void PluginStoryboardServer::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginStoryboardServer::checkIsWebPageServerReady( void )
 {
-	//m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
+}
+
+//============================================================================
+void PluginStoryboardServer::setIsWebPageServerReady( bool isReady )
+{
+	if( m_WebPageServerReady != isReady )
+	{
+		m_WebPageServerReady = isReady;
+		onWebPageServerReady( isReady );
+	}
+}
+
+//============================================================================
+void PluginStoryboardServer::onWebPageServerReady( bool isReady )
+{
+	m_WebPageServerReady = isReady;
+	// do stuff
 }

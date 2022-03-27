@@ -86,28 +86,3 @@ void AppletAboutMeClient::loadRichTextFile( QString fileName )
 {
     ui.m_RichEditWidget->loadRichTextFile( fileName.toUtf8().constData() );
 }
-
-//============================================================================
-void AppletAboutMeClient::onBrowseButClick( void )
-{
-    QString startPath = QDir::current().path();
-
-    // Get a filename from the file dialog.
-    QString filename = QFileDialog::getOpenFileName( this,
-                                                     QObject::tr( "Open Image" ),
-                                                     startPath,
-                                                     SUPPORTED_IMAGE_FILES );
-    if( filename.length() > 0 )
-    {
-        QPixmap oBitmap;
-        if( false == oBitmap.load( filename ) )
-        {
-            QString msgText = QObject::tr( "Failed To Read Image File " ) + filename;
-            QMessageBox::critical( this, QObject::tr( "Error Reading Image" ), msgText );
-        }
-        else
-        {
-
-        }
-    }
-}

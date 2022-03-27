@@ -53,30 +53,31 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
       <item>
        <widget class="QLabel" name="m_StatusLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string notr="true"/>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="StoryWidget" name="StoryEditWidget" native="true">
+       <widget class="IdentWidget" name="m_IdentWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="RichTextWidget" name="m_RichEditWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -92,9 +93,16 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>StoryWidget</class>
+   <class>RichTextWidget</class>
    <extends>QWidget</extends>
-   <header>StoryWidget.h</header>
+   <header>RichTextWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>IdentWidget</class>
+   <extends>QWidget</extends>
+   <header>IdentWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

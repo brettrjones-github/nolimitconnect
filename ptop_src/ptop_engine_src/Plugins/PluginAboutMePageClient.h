@@ -22,7 +22,7 @@ public:
     PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginAboutMePageClient() = default;
 
-	bool						getIsInitialized( void )			{ return m_AboutMePageReady; }
+	bool						getIsInitialized( void )			{ return m_WebPageClientReady; }
 
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
@@ -48,11 +48,11 @@ protected:
 
 	virtual bool				onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash ) override;
 
-	void						setIsAboutMePageReady( bool isReady );
-	bool						getIsAboutMePageReady( void ) { return m_AboutMePageReady; }
+	void						setIsWebPageClientReady( bool isReady );
+	bool						getIsWebPageClientReady( void ) { return m_WebPageClientReady; }
 
-	void						checkIsAboutMePageReady( void );
-	void						onAboutMePageReady( bool isReady );
+	void						checkIsWebPageClientReady( void );
+	void						onWebPageClientReady( bool isReady );
 	void						cancelDownload( void );
 	bool						startDownload( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
@@ -62,7 +62,7 @@ protected:
 	std::string					m_DownloadFileFolder{ "" };
 	std::string					m_WebPageIndexFile{ "" };
 
-	bool						m_AboutMePageReady{ false };
+	bool						m_WebPageClientReady{ false };
 	VxGUID						m_HisOnlineId;
 
 	VxMutex						m_SearchFilesListMutex;

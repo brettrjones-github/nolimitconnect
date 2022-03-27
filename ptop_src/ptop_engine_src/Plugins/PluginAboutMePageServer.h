@@ -22,19 +22,18 @@ public:
 	virtual ~PluginAboutMePageServer() = default;
 
 protected:
-
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
 	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
 
-	void						setIsAboutMePageReady( bool isReady );
-	bool						getIsAboutMePageReady( void ) { return m_AboutMePageReady; }
+	void						setIsWebPageServerReady( bool isReady );
+	bool						getIsWebPageServerReady( void ) { return m_WebPageServerReady; }
 
-	void						checkIsAboutMePageReady( void );
-	void						onAboutMePageReady( bool isReady );
+	void						checkIsWebPageServerReady( void );
+	void						onWebPageServerReady( bool isReady );
 
 	std::string					m_RootFileFolder{""};
-	bool						m_AboutMePageReady{ false };
+	bool						m_WebPageServerReady{ false };
 };
 
 

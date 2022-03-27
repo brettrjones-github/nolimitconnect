@@ -485,15 +485,6 @@ bool FileInfoMgr::fromGuiAddFileToLibrary( const char* fileNameIn, bool addFile,
 //============================================================================
 bool FileInfoMgr::loadAboutMePageStaticAssets( void )
 {
-	/*
-	static std::vector<VxGUID>	g_AboutMeIdList{
-		{ 7440246806584140214U, 18100947260721918349U },	// !6741110CEBAEA1B6FB337BA17568F18D! no limit icon
-		{ 5928192941618969970U, 9804703070566852284U },		// !52452C124D2D3D7288114D7EC151A6BC! about me thumb
-		{ 17745883519647430189U, 3508611113527476619U },	// !F6460B0A160B362D30B11737E4CB018B! about me index
-		{ 1319370582698595072U, 4306035094495659427U },		// !124F588DFCD993003BC21C1AA5C785A3! about me me.png
-	};
-	*/
-
 	static std::vector<std::string>	g_AboutMeNameList{
 		{ "favicon.ico" },			
 		{ "aboutme_thumb.png" },	
@@ -555,16 +546,8 @@ bool FileInfoMgr::loadAboutMePageStaticAssets( void )
 }
 
 //============================================================================
-void FileInfoMgr::getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList )
+bool FileInfoMgr::loadStoryboardPageFileAssets( void )
 {
-	static std::vector<VxGUID>	g_StoryboardIdList{
-		{ 883460556043267518U, 1348434257746011027U },		// !0C42AEB1E8072DBE12B699D027EB2393! no limit icon
-		{ 17888782341603930641U, 12762868320513151386U },	// !F841B8C2C7953211B11ED11DEF45D19A! story_board thumb
-		{ 17745883519647430189U, 3508611113527476619U },	// !F6460B0A160B362D30B11737E4CB018B! story_board index
-		{ 1319370582698595072U, 4306035094495659427U },		// !124F588DFCD993003BC21C1AA5C785A3! story_board background
-		{ 5928192941618969970U, 9804703070566852284U },		// !52452C124D2D3D7288114D7EC151A6BC! story_board me.png
-	};
-
 	static std::vector<std::string>	g_StoryboardNameList{
 		{ "favicon.ico" },				// !0C42AEB1E8072DBE12B699D027EB2393! no limit icon
 		{ "storyboard_thumb.png" },		// !F841B8C2C7953211B11ED11DEF45D19A! story_board thumb
@@ -573,10 +556,65 @@ void FileInfoMgr::getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::
 		{ "me.png" },					// !52452C124D2D3D7288114D7EC151A6BC! story_board me.png
 	};
 
-	for( int i = 0; i < g_StoryboardIdList.size(); i++ )
+
+	if( m_RootFileFolder.empty() )
 	{
-		assetList.push_back( std::make_pair( g_StoryboardIdList[i], g_StoryboardNameList[i] ) );
+		LogMsg( LOG_ERROR, "loadStoryboardPageFileAssets No Root File Folder" );
+		return false;
 	}
+
+	std::vector<std::string> fileList;
+	VxFileUtil::listFilesInDirectory( m_RootFileFolder.c_str(), fileList );
+	if( fileList.size() < g_StoryboardNameList.size() )
+	{
+		LogMsg( LOG_ERROR, "loadStoryboardPageFileAssets Missing Files only %d found", fileList.size() );
+		return false;
+	}
+
+	// TODO loading and generate has should probably be put in a unique thread for people how create a very long storyboard web page
+	int fileCount{ 0 };
+	bool result{ true };
+	for( auto& fullFileName : fileList )
+	{
+		int64_t fileLen = VxFileUtil::fileExists( fullFileName.c_str() );
+		VxGUID assetId;
+		if( fileLen )
+		{
+			assetId.initializeWithNewVxGUID();
+			VxSha1Hash sha1Hash;
+			if( sha1Hash.generateHashFromFile( fullFileName.c_str() ) )
+			{
+				FileInfo fileInfo( m_Engine.getMyOnlineId(), fullFileName, fileLen, VxFileExtensionToFileTypeFlag( fullFileName.c_str() ), assetId, sha1Hash );
+				if( fileInfo.isValid( true ) )
+				{
+					lockFileList();
+					m_FileInfoList[assetId] = fileInfo;
+					unlockFileList();
+					fileCount++;
+				}
+				else
+				{
+					LogMsg( LOG_ERROR, "loadStoryboardPageFileAssets Invalid File %s", fullFileName.c_str() );
+					result = false;
+					break;
+				}
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "loadStoryboardPageFileAssets Generate Sha1Hash Failed File %s", fullFileName.c_str() );
+				result = false;
+				break;
+			}
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "loadStoryboardPageFileAssets 0 file Len File %s", fullFileName.c_str() );
+			result = false;
+			break;
+		}
+	}
+
+	return result && fileCount == fileList.size();
 }
 
 //============================================================================

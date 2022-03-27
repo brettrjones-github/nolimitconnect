@@ -959,6 +959,10 @@ QString GuiParams::describePluginMsg( EPluginMsgType pluginMsgType )
         strPluginMsg = QObject::tr( "Downloading Failed" );
         break;
 
+    case ePluginMsgDownloadComplete:
+        strPluginMsg = QObject::tr( "Downloading Complete" );
+        break;
+
     case ePluginMsgCanceled:
         strPluginMsg = QObject::tr( "Canceled" );
         break;

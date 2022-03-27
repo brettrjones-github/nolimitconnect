@@ -14,28 +14,35 @@
 //============================================================================
 
 #include "AppletBase.h"
+#include "GuiWebPageCallback.h"
 
 #include "ui_AppletStoryboardClient.h"
-#include "ui_StoryWidget.h"
 
-class AppletStoryboardClient : public AppletBase
+class AppletStoryboardClient : public AppletBase, public GuiWebPageCallback
 {
 	Q_OBJECT
 public:
     AppletStoryboardClient( AppCommon& app, QWidget * parent );
-	virtual ~AppletStoryboardClient() = default;
+	virtual ~AppletStoryboardClient();
 
-    void                        setIdentity( GuiUser* guiUser ) {};
-
-private slots:
-    void						slotStoryBoardSavedModified();
+    void                        setIdentity( GuiUser* guiUser );
 
 protected:
+    void                        loadRichTextFile( QString fileName );
+    virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue ) override;
+
     //=== vars ===//
     Ui::AppletStoryboardClientUi	ui;
-    std::string					m_strSavedCwd;
-    std::string					m_strStoryBoardDir;
-    std::string					m_strStoryBoardFile;
+    VxNetIdent*                 m_MyIdent = nullptr;
+    QString                     m_strOrigOnlineName;
+    QString                     m_strOrigMoodMessage;
+
+    std::string					m_strDefaultPicPath;
+    std::string					m_strUserSepecificDataDir;
+    bool						m_bUserPickedImage = false;
+    bool						m_bUsingDefaultImage = true;
+    bool 					    m_CameraSourceAvail{ false };
+    VxGUID                      m_HisOnlineId;
 };
 
 

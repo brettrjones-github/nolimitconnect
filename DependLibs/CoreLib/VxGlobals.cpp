@@ -201,7 +201,7 @@ void VxSetAppDirectory( EAppDir appDir, const char * setDir )
 		case eAppDirAboutMePageClient:
 			g_strAboutMePageClientDir = setDir;
 			break;
-		case eAppDirStoryBoardPageServer:
+		case eAppDirStoryboardPageServer:
 			g_strStoryBoardPageServerDir = setDir;
 			break;
 		case eAppDirStoryBoardPageClient:
@@ -284,7 +284,7 @@ std::string& VxGetAppDirectory( EAppDir appDir )
 		return g_strAboutMePageServerDir;
 	case eAppDirAboutMePageClient:
 		return g_strAboutMePageClientDir;
-	case eAppDirStoryBoardPageServer:
+	case eAppDirStoryboardPageServer:
 		return g_strStoryBoardPageServerDir;
 	case eAppDirStoryBoardPageClient:
 		return g_strStoryBoardPageClientDir;

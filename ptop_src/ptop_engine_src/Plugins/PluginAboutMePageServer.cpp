@@ -44,34 +44,34 @@ void PluginAboutMePageServer::onLoadedFilesReady( int64_t lastFileUpdateTime, in
 	}
 	else
 	{
-		setIsAboutMePageReady( true );
+		setIsWebPageServerReady( true );
 	}
 }
 
 //============================================================================
 void PluginAboutMePageServer::onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	checkIsAboutMePageReady();
+	checkIsWebPageServerReady();
 }
 
 //============================================================================
-void PluginAboutMePageServer::checkIsAboutMePageReady( void )
+void PluginAboutMePageServer::checkIsWebPageServerReady( void )
 {
 }
 
 //============================================================================
-void PluginAboutMePageServer::setIsAboutMePageReady( bool isReady )
+void PluginAboutMePageServer::setIsWebPageServerReady( bool isReady )
 {
-	if( m_AboutMePageReady != isReady )
+	if( m_WebPageServerReady != isReady )
 	{
-		m_AboutMePageReady = isReady;
-		onAboutMePageReady( isReady );
+		m_WebPageServerReady = isReady;
+		onWebPageServerReady( isReady );
 	}
 }
 
 //============================================================================
-void PluginAboutMePageServer::onAboutMePageReady( bool isReady )
+void PluginAboutMePageServer::onWebPageServerReady( bool isReady )
 {
-	m_AboutMePageReady = isReady;
+	m_WebPageServerReady = isReady;
 	// do stuff
 }

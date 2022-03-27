@@ -14,7 +14,6 @@
 //============================================================================
 
 #include "AppletBase.h"
-
 #include "GuiWebPageCallback.h"
 
 #include "ui_AppletAboutMeClient.h"
@@ -28,17 +27,9 @@ public:
 
     void                        setIdentity( GuiUser* guiUser );
 
-public slots:
-     //! browse for picture of me
-    void						onBrowseButClick( void );
-
 protected:
     void                        loadRichTextFile( QString fileName );
     virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue ) override;
-
-    //=== constants ===//
-    static const int SELECT_IMAGE = 0; // selector for image gallery call
-    static const int CAMERA_SNAPSHOT = 1; // selector for image gallery call
 
     //=== vars ===//
     Ui::AppletAboutMeClientUi	ui;

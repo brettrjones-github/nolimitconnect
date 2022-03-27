@@ -382,7 +382,7 @@ void AppCommon::copyAssetsToFoldersIfRequired( void )
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/favicon.ico", storyBoardFavIcon.c_str() );
     }
 
-    std::string storyBoardThumb = VxGetAboutMePageServerDirectory();
+    std::string storyBoardThumb = VxGetStoryBoardPageServerDirectory();
     storyBoardThumb += "storyboard_thumb.png";
     if( false == VxFileUtil::fileExists( storyBoardThumb.c_str() ) )
     {

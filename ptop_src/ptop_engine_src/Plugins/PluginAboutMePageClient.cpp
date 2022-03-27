@@ -42,15 +42,16 @@ void PluginAboutMePageClient::onAfterUserLogOnThreaded( void )
 void PluginAboutMePageClient::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
 	LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::onLoadedFilesReady" );
-	checkIsAboutMePageReady();
+	checkIsWebPageClientReady();
 }
 
 //============================================================================
 void PluginAboutMePageClient::onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	checkIsAboutMePageReady();
+	checkIsWebPageClientReady();
 }
 
+//============================================================================
 bool PluginAboutMePageClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
 {
 	bool result = netIdent && sktBase && lclSessionId.isVxGUIDValid() && !fileName.empty() && assetId.isVxGUIDValid() && sha11Hash.isHashValid();
@@ -126,23 +127,23 @@ bool PluginAboutMePageClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSk
 }
 
 //============================================================================
-void PluginAboutMePageClient::checkIsAboutMePageReady( void )
+void PluginAboutMePageClient::checkIsWebPageClientReady( void )
 {
-	setIsAboutMePageReady( getFileInfoMgr().getIsInitialized() );
+	setIsWebPageClientReady( getFileInfoMgr().getIsInitialized() );
 }
 
 //============================================================================
-void PluginAboutMePageClient::setIsAboutMePageReady( bool isReady )
+void PluginAboutMePageClient::setIsWebPageClientReady( bool isReady )
 {
-	if( m_AboutMePageReady != isReady )
+	if( m_WebPageClientReady != isReady )
 	{
-		m_AboutMePageReady = isReady;
-		onAboutMePageReady( isReady );
+		m_WebPageClientReady = isReady;
+		onWebPageClientReady( isReady );
 	}
 }
 
 //============================================================================
-void PluginAboutMePageClient::onAboutMePageReady( bool isReady )
+void PluginAboutMePageClient::onWebPageClientReady( bool isReady )
 {
 
 }
@@ -185,7 +186,7 @@ bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, 
 		{
 			// must clear any previous files or download will make duplicates filename_1 filename_2 etc
 			VxFileUtil::deleteFilesInFolder( m_DownloadFileFolder, true );
-			m_WebPageIndexFile = m_DownloadFileFolder + "index.htm";
+			m_WebPageIndexFile = m_DownloadFileFolder + getWebIndexFileName();
 			int64_t diskFreeSpace = VxFileUtil::getDiskFreeSpace( m_DownloadFileFolder.c_str() );
 
 			if( diskFreeSpace && diskFreeSpace < VxFileUtil::SIZE_1GB )

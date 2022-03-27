@@ -109,8 +109,7 @@ public:
 	virtual bool				isFileShared( std::string& fileName );
 
 	bool						loadAboutMePageStaticAssets( void );
-
-	void						getStoryboardStaticAssets( std::vector<std::pair<VxGUID, std::string>>& assetList );
+	bool						loadStoryboardPageFileAssets( void );
 
 	// virtual void				fromGuiUserLoggedOn( void ) override;
 	virtual void				onAfterUserLogOnThreaded( void );

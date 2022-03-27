@@ -13,21 +13,27 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBase.h"
+#include "PluginBaseFilesServer.h"
 
-class PluginStoryboardServer : public PluginBase
+class PluginStoryboardServer : public PluginBaseFilesServer
 {
 public:
 	PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginStoryboardServer() = default;
 
-	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onConnectionLost( VxSktBase * sktBase );
-
 protected:
+	virtual void				onAfterUserLogOnThreaded( void ) override;
+	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
+	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
+
+	void						setIsWebPageServerReady( bool isReady );
+	bool						getIsWebPageServerReady( void ) { return m_WebPageServerReady; }
+
+	void						checkIsWebPageServerReady( void );
+	void						onWebPageServerReady( bool isReady );
+
+	std::string					m_RootFileFolder{ "" };
+	bool						m_WebPageServerReady{ false };
 };
 
 
