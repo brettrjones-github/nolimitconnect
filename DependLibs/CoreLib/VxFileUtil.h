@@ -225,6 +225,8 @@ public:
 														std::vector<VxFileInfo>&	fileList,
 														uint8_t						fileFilterMask = VXFILE_TYPE_ANY | VXFILE_TYPE_DIRECTORY );
 
+	static bool					deleteFilesInFolder( std::string fileFolder, bool folderNameEndsWithOnlineId );
+
 	static uint8_t				fileExtensionToFileTypeFlag( const char * fileName );
 	static bool					incrementFileName( std::string& strFileName );
 

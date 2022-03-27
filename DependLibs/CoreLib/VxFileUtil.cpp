@@ -564,7 +564,7 @@ RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
                 //make directory
                 if( ! (0 == VxMkDir( tempDir, S_IRWXU | S_IRWXG | S_IRWXO )))
                 {
-                    LogMsg( LOG_INFO, "CoreLib:FailedToMakeDir %s\n", tempDir );
+                    LogMsg( LOG_INFO, "CoreLib:FailedToMakeDir %s", tempDir );
                     return -3;
                 }
                 else
@@ -617,7 +617,7 @@ RCODE VxFileUtil::readLine( FILE *pgFile, char *pBuf, int iBufLen )
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "Read Line Buffer Overflow\n" );
+			LogMsg( LOG_INFO, "Read Line Buffer Overflow" );
 			return EOF; // not enough room in buffer
 		}
 
@@ -636,7 +636,7 @@ FILE * VxFileUtil::fileOpen( const char * pFileName, const char* pFileMode )
     retval = fopen( pFileName, pFileMode );
 	if( NULL == retval )
 	{
-		LogMsg( LOG_INFO, "fileOpen:Could not open file %s\n", pFileName );
+		LogMsg( LOG_INFO, "fileOpen:Could not open file %s", pFileName );
 	}
 
     return retval;
@@ -685,7 +685,7 @@ RCODE VxFileUtil::recursiveCopyDirectory( const char * pSrcDir, const char * pDe
     totalCopied = 0;
     if( pDestDir && pSrcDir )
     {
-        LogMsg( LOG_INFO, "recursive copy files from %s to %s\n", pSrcDir, pDestDir );
+        LogMsg( LOG_INFO, "recursive copy files from %s to %s", pSrcDir, pDestDir );
 
         std::string curPath = pSrcDir;
         std::string srcDir = pSrcDir;
@@ -715,19 +715,19 @@ RCODE VxFileUtil::recursiveCopyDirectory( const char * pSrcDir, const char * pDe
             else
             {
                 rc = EBADF;
-                LogMsg( LOG_ERROR, "recursiveCopyDirectory invalid directory\n" );
+                LogMsg( LOG_ERROR, "recursiveCopyDirectory invalid directory" );
             }
         }
         else
         {
             rc = EBADF;
-            LogMsg( LOG_ERROR, "recursiveCopyDirectory empty directory path\n" );
+            LogMsg( LOG_ERROR, "recursiveCopyDirectory empty directory path" );
         }
     }
     else
     {
         rc = EBADF;
-        LogMsg( LOG_ERROR, "recursiveCopyDirectory null param\n" );
+        LogMsg( LOG_ERROR, "recursiveCopyDirectory null param" );
     }
 
     return rc;
@@ -1636,7 +1636,7 @@ RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
 		struct _stat m;
 		if( 0 != _wstat( srcFile, &m) )
 		{
-			LogMsg( LOG_ERROR, "VxFileUtil::listFilesAndFolders ERROR %d\n", VxGetLastError() );
+			LogMsg( LOG_ERROR, "VxFileUtil::listFilesAndFolders ERROR %d", VxGetLastError() );
 		}
 		else
 		{
@@ -1700,14 +1700,14 @@ RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
 				if( 0 != stat( as8SrcFile, &m) )
 				{
 					///ERROR how do we handle
-					LogMsg( LOG_INFO, "listFilesInDirectory: Unable to stat file %s\n", as8SrcFile );
+					LogMsg( LOG_INFO, "listFilesInDirectory: Unable to stat file %s", as8SrcFile );
 					continue;
 				}
 				
 				if( pFileEnt->d_type == DT_DIR )
 				{
 					// its a directory
-					LogMsg( LOG_INFO, "listFilesInDirectory: file %s is directory\n", as8SrcFile );
+					LogMsg( LOG_INFO, "listFilesInDirectory: file %s is directory", as8SrcFile );
 					continue;
 				}
 
@@ -1721,12 +1721,12 @@ RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "listFilesInDirectory:  could not open directory %s \n", as8SrcDir );
+			LogMsg( LOG_INFO, "listFilesInDirectory:  could not open directory %s ", as8SrcDir );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "listFilesInDirectory:  directory %s does not exist \n", as8SrcDir );
+		LogMsg( LOG_INFO, "listFilesInDirectory:  directory %s does not exist ", as8SrcDir );
 	}
 	return 0;
 #endif //LINUX
@@ -1851,7 +1851,7 @@ RCODE VxFileUtil::listFilesAndFolders(	const char *				pSrcDir,
 				if ( 0 != stat64( as8SrcFile, &oStat ) )
 				{
 					///ERROR how do we handle
-					LogMsg( LOG_ERROR, "listFilesAndFolders: ERROR %d when stat file %s\n", VxGetLastError(), as8SrcFile );
+					LogMsg( LOG_ERROR, "listFilesAndFolders: ERROR %d when stat file %s", VxGetLastError(), as8SrcFile );
 					continue;
 				}
 
@@ -1863,12 +1863,12 @@ RCODE VxFileUtil::listFilesAndFolders(	const char *				pSrcDir,
 					// its a directory
                     fileInfo.setFileType( VXFILE_TYPE_DIRECTORY );
 					fileInfo.assureTrailingDirectorySlash();
-					LogMsg( LOG_INFO, "listFilesAndFolders: Is Directory %s\n", fileInfo.getFileName().c_str() );
+					LogMsg( LOG_INFO, "listFilesAndFolders: Is Directory %s", fileInfo.getFileName().c_str() );
 				}
 				else
 				{
 					// its a file
-					LogMsg( LOG_INFO, "listFilesAndFolders: Is File %s\n", fileInfo.getFileName().c_str() );
+					LogMsg( LOG_INFO, "listFilesAndFolders: Is File %s", fileInfo.getFileName().c_str() );
                     fileInfo.setFileType( fileExtensionToFileTypeFlag( fileInfo.getFileName().c_str() ) );
 				}
 
@@ -1878,7 +1878,7 @@ RCODE VxFileUtil::listFilesAndFolders(	const char *				pSrcDir,
 				}
 				else
 				{
-					LogMsg( LOG_INFO, "listFilesAndFolders: Skip file type 0x%x not in filter mask 0x%x File %s\n", fileInfo.getFileType(), fileFilterMask, fileInfo.getFileName().c_str() );			
+					LogMsg( LOG_INFO, "listFilesAndFolders: Skip file type 0x%x not in filter mask 0x%x File %s", fileInfo.getFileType(), fileFilterMask, fileInfo.getFileName().c_str() );			
 				}
 			}
 
@@ -1889,17 +1889,56 @@ RCODE VxFileUtil::listFilesAndFolders(	const char *				pSrcDir,
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "listFilesInDirectory:  could not open directory %s \n", as8SrcDir );
+			LogMsg( LOG_INFO, "listFilesInDirectory:  could not open directory %s", as8SrcDir );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "listFilesInDirectory:  directory %s does not exist \n", as8SrcDir );
+		LogMsg( LOG_INFO, "listFilesInDirectory:  directory %s does not exist", as8SrcDir );
 	}
 
 	return 0;
 #endif //LINUX
+}
 
+//============================================================================
+bool VxFileUtil::deleteFilesInFolder( std::string fileFolder, bool folderNameEndsWithOnlineId )
+{
+	bool result = !fileFolder.empty() && directoryExists( fileFolder.c_str() );
+	if( !result )
+	{
+		LogMsg( LOG_ERROR, "deleteFilesInFolder directory does not exist" );
+		return result;
+	}
+
+	if( folderNameEndsWithOnlineId )
+	{
+		std::string noTrailingSlash = fileFolder;
+		removeTrailingDirectorySlash( noTrailingSlash );
+		std::size_t foundPos = noTrailingSlash.find_last_of( "/" );
+		if( std::string::npos == foundPos )
+		{
+			LogMsg( LOG_ERROR, "deleteFilesInFolder directory %s does not contain backslash", fileFolder.c_str() );
+			return false;
+		}
+
+		VxGUID onlineId;
+		onlineId.fromVxGUIDHexString( &( noTrailingSlash.c_str()[foundPos + 1]) );
+		if( !onlineId.isVxGUIDValid() )
+		{
+			LogMsg( LOG_ERROR, "deleteFilesInFolder directory %s does not end with online id", fileFolder.c_str() );
+			return false;
+		}
+	}
+
+	std::vector<std::string> fileList;
+	listFilesInDirectory( fileFolder.c_str(), fileList );
+	for( auto& fileName : fileList )
+	{
+		result &= 0 == deleteFile( fileName.c_str() );
+	}
+
+	return result;
 }
 
 //============================================================================
@@ -1998,7 +2037,7 @@ bool VxFileUtil::getDiskSpace( const char * filePath, uint64_t& totalDiskSpace, 
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "getDiskSpace %s error %d\n", filePath, GetLastError() );
+			LogMsg( LOG_ERROR, "getDiskSpace %s error %d", filePath, GetLastError() );
 		}
 	}
 	return false;

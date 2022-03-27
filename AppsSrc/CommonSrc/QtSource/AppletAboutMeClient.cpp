@@ -74,6 +74,10 @@ void AppletAboutMeClient::toGuiPluginMsg( EPluginType pluginType, VxGUID& online
     if( pluginType == getPluginType() )
     {
         ui.m_StatusLabel->setText( GuiParams::describePluginMsg( msgType ) );
+        if( ePluginMsgDownloadComplete == msgType && !paramValue.isEmpty() )
+        {
+            loadRichTextFile( paramValue.toUtf8().constData() );
+        }
     }
 }
 

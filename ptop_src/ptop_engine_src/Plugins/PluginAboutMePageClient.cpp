@@ -183,6 +183,8 @@ bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, 
 		m_DownloadFileFolder = getIncompleteFileXferDirectory( onlineId );
 		if( VxFileUtil::directoryExists( m_DownloadFileFolder.c_str() ) )
 		{
+			// must clear any previous files or download will make duplicates filename_1 filename_2 etc
+			VxFileUtil::deleteFilesInFolder( m_DownloadFileFolder, true );
 			m_WebPageIndexFile = m_DownloadFileFolder + "index.htm";
 			int64_t diskFreeSpace = VxFileUtil::getDiskFreeSpace( m_DownloadFileFolder.c_str() );
 
@@ -314,6 +316,9 @@ void PluginAboutMePageClient::cancelDownload( void )
 
 	m_InProgressFileInfoList.clear();
 	unlockCompletedFileList();
+
+	// clear out files on cancel
+	VxFileUtil::deleteFilesInFolder( m_DownloadFileFolder, true );
 }
 
 //============================================================================
@@ -325,9 +330,10 @@ bool PluginAboutMePageClient::startDownload( VxGUID& searchSessionId, VxSktBase*
 	{
 		FileInfo& fileInfo = *iter;
 		lockInProgressFileList();
+		VxGUID xferSessionId = fileInfo.initializeNewXferSessionId();
 		fileInfo.setIsDirty( true );
 		m_InProgressFileInfoList.push_back( fileInfo );
-		if( m_FileInfoMgr.startDownload( *iter, searchSessionId, sktBase, netIdent ) )
+		if( m_FileInfoMgr.startDownload( *iter, xferSessionId, sktBase, netIdent ) )
 		{
 			result = true;
 			m_SearchFileInfoList.erase( iter );

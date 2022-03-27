@@ -753,10 +753,14 @@ void FileInfoXferMgr::endFileXferSession( FileRxSession * poSessionIn )
 		xferInfo.m_hFile = NULL;
 	}
 
-	std::string fileName = xferInfo.getDownloadIncompleteFileName();
-	if( fileName.length() )
+	if( getMoveCompletedFilesToDownloadFolder() )
 	{
-		VxFileUtil::deleteFile( fileName.c_str() );
+		// file was moved to completed folder.. remove the temporary download file 
+		std::string fileName = xferInfo.getDownloadIncompleteFileName();
+		if( fileName.length() )
+		{
+			VxFileUtil::deleteFile( fileName.c_str() );
+		}
 	}
 
 	FileRxIter oRxIter = m_RxSessions.begin();
@@ -766,8 +770,8 @@ void FileInfoXferMgr::endFileXferSession( FileRxSession * poSessionIn )
 		FileRxSession * xferSession = oRxIter->second;
 		if( poSessionIn == xferSession )
 		{
-			delete xferSession;
 			oRxIter = m_RxSessions.erase( oRxIter );
+			delete xferSession;
 		}
 		else
 		{
@@ -876,12 +880,12 @@ FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxGUID& lclSessionId, Vx
 		m_RxSessions.insert( std::make_pair( xferSession->getLclSessionId(), xferSession ) );
 	}
 
-	if( NULL == xferSession )
+	if( !xferSession && !lclSessionId.isVxGUIDValid() )
 	{
 		xferSession = findRxSession( netIdent );
 	}
 
-	if( NULL == xferSession )
+	if( !xferSession )
 	{
 		xferSession = new FileRxSession( lclSessionId, sktBase, netIdent );
 		m_RxSessions.insert( std::make_pair( xferSession->getLclSessionId(), xferSession ) );
@@ -1473,8 +1477,16 @@ EXferError FileInfoXferMgr::beginFileGet( FileRxSession * xferSession )
 												xferSession->getSkt(), 
 												&oPkt ) ) ? eXferErrorNone : eXferErrorDisconnected;
 	}
+	else if( xferSession->isXferingFile() )
+	{
+		return eXferErrorBusy;
+	}
+	else if( xferSession->m_astrFilesToXfer.empty() )
+	{
+		return eXferErrorBadParam;
+	}
 
-	return eXferErrorNone;
+	return eXferErrorDisconnected;
 }
 
 //============================================================================
@@ -1594,7 +1606,7 @@ bool FileInfoXferMgr::startDownload( FileInfo& fileInfo, VxGUID& lclSessionId, V
 		FileToXfer fileToXfer( fileInfo.getShortFileName(), 0, lclSessionId, lclSessionId, fileInfo.getAssetId(), fileInfo.getFileHashId(), 0 );
 
 		fileRxSession->m_astrFilesToXfer.push_back( fileToXfer );
-		result = beginFileGet( fileRxSession );
+		result = beginFileGet( fileRxSession ) == eXferErrorNone;
 	}
 
 	return result;

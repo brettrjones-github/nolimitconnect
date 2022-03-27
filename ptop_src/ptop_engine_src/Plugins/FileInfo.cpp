@@ -96,7 +96,15 @@ FileInfo& FileInfo::operator=( const FileInfo& rhs )
 	m_AssetId				= rhs.m_AssetId;
 	m_ThumbId				= rhs.m_ThumbId;
 	m_FileTime				= rhs.m_FileTime;
+	m_XferSessionId			= rhs.m_XferSessionId;
 	return *this;
+}
+
+//============================================================================
+VxGUID& FileInfo::initializeNewXferSessionId( void )
+{
+	m_XferSessionId.initializeWithNewVxGUID();
+	return m_XferSessionId;
 }
 
 //============================================================================

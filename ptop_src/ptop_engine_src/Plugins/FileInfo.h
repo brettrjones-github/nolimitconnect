@@ -44,6 +44,10 @@ public:
 	std::string&				getFullFileName( void )					{ return m_FullFileName; }
 	std::string&				getShortFileName( void )				{ return m_ShortFileName; }
 
+	void						setXferSessionId( VxGUID& sessionId )	{ m_XferSessionId = sessionId; }
+	VxGUID&						getXferSessionId( void )				{ return m_XferSessionId; }
+	VxGUID&						initializeNewXferSessionId( void ); // init and return unique m_XferSessionId
+
 	void						setOnlineId( VxGUID& assetId )			{ m_OnlineId = assetId; }
 	VxGUID&						getOnlineId( void )						{ return m_OnlineId; }
 
@@ -95,4 +99,5 @@ public:
 	VxGUID						m_AssetId;
 	VxGUID						m_ThumbId;
 	int64_t						m_FileTime{ 0 };
+	VxGUID						m_XferSessionId; // temporary.. does not get added or extracted from blob
 };
