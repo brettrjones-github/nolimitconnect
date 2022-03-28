@@ -946,9 +946,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineUserLoggedOn\Source.cpp">
-      <Filter>Source Files\P2PEngine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineStartup.cpp">
       <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
