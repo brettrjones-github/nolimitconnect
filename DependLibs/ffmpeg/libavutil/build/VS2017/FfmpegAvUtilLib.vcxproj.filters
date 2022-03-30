@@ -206,7 +206,7 @@
     <ClInclude Include="..\..\wchar_filename.h" />
     <ClInclude Include="..\..\xga_font_data.h" />
     <ClInclude Include="..\..\xtea.h" />
-    <ClInclude Include="..\..\..\..\..\GoTvCompilerConfig.h">
+    <ClInclude Include="..\..\..\..\..\AppCompilerConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\GoTvCompilerIntTypes.h">
@@ -224,16 +224,16 @@
     <ClInclude Include="..\..\..\..\..\GoTvConfigWindows.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\GoTvCpuArchDefines.h">
+    <ClInclude Include="..\..\..\..\..\AppCpuArchDefines.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\GoTvDependLibrariesConfig.h">
+    <ClInclude Include="..\..\..\..\..\AppDependLibrariesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\GoTvFeaturesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\GoTvTargetOsConfig.h">
+    <ClInclude Include="..\..\..\..\..\AppTargetOsConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ffmpeg_config.h">

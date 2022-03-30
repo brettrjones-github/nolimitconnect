@@ -6,12 +6,12 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libopencore-amr STATIC
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvConfig.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../amrnb/common/abs_s.h
   ../../amrnb/common/add.cpp
   ../../amrnb/common/add.h

@@ -7,11 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libflac", "libflac.vcxproj"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoTvConfig", "GoTvConfig", "{095C9C54-C727-44C9-B87D-3DBFA96F8129}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\GoTvCompilerConfig.h = ..\..\..\..\GoTvCompilerConfig.h
+		..\..\..\..\AppCompilerConfig.h = ..\..\..\..\AppCompilerConfig.h
 		..\..\..\..\GoTvCompilerIntTypes.h = ..\..\..\..\GoTvCompilerIntTypes.h
 		..\..\..\..\GoTvConfig.h = ..\..\..\..\GoTvConfig.h
-		..\..\..\..\GoTvCpuArchDefines.h = ..\..\..\..\GoTvCpuArchDefines.h
-		..\..\..\..\GoTvDependLibrariesConfig.h = ..\..\..\..\GoTvDependLibrariesConfig.h
+		..\..\..\..\AppCpuArchDefines.h = ..\..\..\..\AppCpuArchDefines.h
+		..\..\..\..\AppDependLibrariesConfig.h = ..\..\..\..\AppDependLibrariesConfig.h
 		..\..\..\..\GoTvFeaturesConfig.h = ..\..\..\..\GoTvFeaturesConfig.h
 	EndProjectSection
 EndProject

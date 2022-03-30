@@ -92,7 +92,7 @@
  *****************************************************************************/
 
 #ifdef TARGET_OS_WINDOWS
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 //#include <winnt.h>
 #include <stdio.h>
 //#include <stdarg.h>

@@ -1,9 +1,9 @@
 $$PWD/DependLibs/libasprintf/
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libasprintf/alloca.in.h \
     $$PWD/DependLibs/libasprintf/autosprintf.h \
     $$PWD/DependLibs/libasprintf/config_libasprintf.h \

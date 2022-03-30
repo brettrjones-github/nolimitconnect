@@ -9,8 +9,8 @@ INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/src
 INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/include
 INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/
 
-HEADERS += 	$$PWD/DependLibs/libopencore-amr/../../GoTvCompilerConfig.h \
-    $$PWD/DependLibs/libopencore-amr/../../GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/DependLibs/libopencore-amr/../../AppCompilerConfig.h \
+    $$PWD/DependLibs/libopencore-amr/../../AppCpuArchDefines.h \
     $$PWD/DependLibs/libopencore-amr/../../AppDependLibrariesConfig.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/abs_s.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/add.h \

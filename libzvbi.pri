@@ -3,10 +3,10 @@
 INCLUDEPATH += $$PWD/DependLibs/libzvbi/src
 INCLUDEPATH += $$PWD/DependLibs/libzvbi
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libzvbi/config_libzvbi.h \
     $$PWD/DependLibs/libzvbi/contrib/dvbsubs.h \
     $$PWD/DependLibs/libzvbi/site_def.h \

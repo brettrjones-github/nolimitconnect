@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include "../../../GoTvDependLibrariesConfig.h"
+#include "../../../AppDependLibrariesConfig.h"
 #include "../config_ffmpeg.h"
 #include <WinSock2.h>
 #include <windows.h>

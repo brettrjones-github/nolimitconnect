@@ -6,12 +6,12 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libasprintf STATIC
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvConfig.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../alloca.c
   ../../alloca.in.h
   ../../asnprintf.c

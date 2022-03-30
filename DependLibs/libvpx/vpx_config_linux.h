@@ -33,7 +33,7 @@
 #define HAVE_AVX2 1
 #define HAVE_VPX_PORTS 1
 #define HAVE_PTHREAD_H 0
-//#define HAVE_UNISTD_H 0 // defined in GoTvCompilerConfig.h
+//#define HAVE_UNISTD_H 0 // defined in AppCompilerConfig.h
 #define CONFIG_DEPENDENCY_TRACKING 1
 #define CONFIG_EXTERNAL_BUILD 1
 #define CONFIG_INSTALL_DOCS 0

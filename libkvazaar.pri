@@ -1,10 +1,10 @@
-HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
+HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
 	$$PWD/../../../../GoTvCompilerIntTypes.h \
 	$$PWD/../../../../GoTvConfig.h \
-	$$PWD/../../../../GoTvCpuArchDefines.h \
+	$$PWD/../../../../AppCpuArchDefines.h \
 	$$PWD/../../../../AppDependLibrariesConfig.h \
 	$$PWD/../../../../GoTvFeaturesConfig.h \
-	$$PWD/../../../../GoTvTargetOsConfig.h \
+	$$PWD/../../../../AppTargetOsConfig.h \
 	$$PWD/../../src/bitstream.h \
 	$$PWD/../../src/cabac.h \
 	$$PWD/../../src/cfg.h \

@@ -9,7 +9,7 @@
 #include <sysheaders/sys/time.h>
 
 #include <cstdlib>
-
+#include <algorithm>
 
 #if !defined(TARGET_OS_WINDOWS)
 #include <time.h>
@@ -217,6 +217,12 @@ public:
 };
 
 static InitTime g_InitTime;
+
+int32_t              TimeElapsedSec( int64_t startTimeMs, int64_t endTimeMs ) { return (int32_t)( std::abs( endTimeMs - startTimeMs ) / 1000 ); };
+int64_t              TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs ) { return ( std::abs( endTimeMs - startTimeMs ) ); };
+
+int32_t              TimeElapsedGmtSec( int64_t startTimeGmtMs )   { return (int32_t)( std::abs( GetGmtTimeMs() - startTimeGmtMs ) / 1000 ); };
+int64_t              TimeElapsedGmtMs( int64_t startTimeGmtMs )    { return std::abs( GetGmtTimeMs() - startTimeGmtMs ); };
 
 //============================================================================
 TimeWithZone::TimeWithZone()

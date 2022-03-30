@@ -872,11 +872,11 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\config_gotvcore.h" />
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
     <ClInclude Include="..\..\..\..\GoTvDebugConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\crypto\aes\aes.h" />
     <ClInclude Include="..\..\crypto\aes\aes_locl.h" />
     <ClInclude Include="..\..\crypto\asn1\asn1.h" />

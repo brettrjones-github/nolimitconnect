@@ -199,13 +199,13 @@
     <ClCompile Include="..\..\src\strategies\generic\sao-generic.c" />
     <ClCompile Include="..\..\src\strategies\strategies-intra.c" />
     <ClCompile Include="..\..\src\strategies\strategies-quant.c" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvCompilerIntTypes.h" />
     <ClInclude Include="..\..\..\..\GoTvConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\src\checkpoint.h" />
     <ClInclude Include="..\..\src\config_kvazaar.h" />
     <ClInclude Include="..\..\src\cu.h" />

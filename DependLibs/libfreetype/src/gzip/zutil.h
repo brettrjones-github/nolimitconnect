@@ -129,7 +129,7 @@ typedef unsigned long  ulg;
 #endif
 
 //#if (defined(_MSC_VER) && (_MSC_VER > 600))
-//#  define fdopen(fd,type)  _fdopen(fd,type) // defined in GoTvCompilerConfig.h
+//#  define fdopen(fd,type)  _fdopen(fd,type) // defined in AppCompilerConfig.h
 //#endif
 
 

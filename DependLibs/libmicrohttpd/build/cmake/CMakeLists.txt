@@ -6,7 +6,7 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libmicrohttpd STATIC
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../base64_microhttpd.c
   ../../base64_microhttpd.h
   ../../basicauth.c

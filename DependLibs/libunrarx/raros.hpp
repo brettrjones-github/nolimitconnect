@@ -1,7 +1,7 @@
 #ifndef _RAR_RAROS_
 #define _RAR_RAROS_
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #if defined(_XBMC)
 #ifndef TARGET_OS_WINDOWS

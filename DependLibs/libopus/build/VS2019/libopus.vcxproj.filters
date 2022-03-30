@@ -388,7 +388,7 @@
     <ClInclude Include="..\..\silk\x86\SigProc_FIX_sse.h">
       <Filter>silk\x86</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvCompilerEnviromentDefines.h">
@@ -409,13 +409,13 @@
     <ClInclude Include="..\..\..\..\GoTvConfigWindows.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvCpuFeatureDefines.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">

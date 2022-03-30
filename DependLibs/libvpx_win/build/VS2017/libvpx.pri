@@ -1,8 +1,8 @@
 HEADERS += 	$$PWD/../../../../GoTvAppConfig.h \
-	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvCpuArchDefines.h \
+	$$PWD/../../../../AppCompilerConfig.h \
+	$$PWD/../../../../AppCpuArchDefines.h \
 	$$PWD/../../../../AppDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvTargetOsConfig.h \
+	$$PWD/../../../../AppTargetOsConfig.h \
 	$$PWD/../../config_libvpx.h \
 	$$PWD/../../config_libvpx_linux.h \
 	$$PWD/../../config_libvpx_win32.h \

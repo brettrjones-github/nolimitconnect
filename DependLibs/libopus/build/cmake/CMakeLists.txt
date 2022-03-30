@@ -6,16 +6,16 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libopus STATIC
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvCompilerEnviromentDefines.h
   ../../../../GoTvCompilerIntTypes.h
   ../../../../GoTvConfig.h
   ../../../../GoTvConfigAndroid.h
   ../../../../GoTvConfigLinux.h
   ../../../../GoTvConfigWindows.h
-  ../../../../GoTvCpuArchDefines.h
+  ../../../../AppCpuArchDefines.h
   ../../../../GoTvCpuFeatureDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
   ../../celt/_kiss_fft_guts.h
   ../../celt/arch.h

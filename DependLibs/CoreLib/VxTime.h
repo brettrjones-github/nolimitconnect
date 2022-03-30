@@ -11,7 +11,6 @@
 #include "VxDefs.h"
 
 #include <inttypes.h>
-#include <cmath>
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,11 +38,11 @@ int64_t				        LocalTimeZoneDifferenceMs( void );		      // time difference 
 inline int64_t				LocalTimeZoneDifferenceSec( void )            { return LocalTimeZoneDifferenceMs() / 1000; }
 inline int64_t				LocalTimeZoneDifferenceMinutes( void )        { return LocalTimeZoneDifferenceMs() / 60000; }
 
-inline int32_t              TimeElapsedSec( int64_t startTimeMs, int64_t endTimeMs ) { return (int32_t)( std::abs( endTimeMs - startTimeMs ) / 1000 ); };
-inline int64_t              TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs ) { return ( std::abs( endTimeMs - startTimeMs ) ); };
+int32_t                     TimeElapsedSec( int64_t startTimeMs, int64_t endTimeMs );
+int64_t                     TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs );
 
-inline int32_t              TimeElapsedGmtSec( int64_t startTimeGmtMs )   { return (int32_t)( std::abs( GetGmtTimeMs() - startTimeGmtMs ) / 1000 ); };
-inline int64_t              TimeElapsedGmtMs( int64_t startTimeGmtMs )    { return std::abs( GetGmtTimeMs() - startTimeGmtMs ); };
+int32_t                     TimeElapsedGmtSec( int64_t startTimeGmtMs );
+int64_t                     TimeElapsedGmtMs( int64_t startTimeGmtMs );
 
 #ifdef __cplusplus
 }

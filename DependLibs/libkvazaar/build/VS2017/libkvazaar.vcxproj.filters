@@ -321,7 +321,7 @@
     </ClInclude>
     <ClInclude Include="..\..\src\extras\libmd5.h" />
     <ClInclude Include="..\..\src\extras\crypto.h" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvCompilerIntTypes.h">
@@ -330,16 +330,16 @@
     <ClInclude Include="..\..\..\..\GoTvConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\config_kvazaar.h">

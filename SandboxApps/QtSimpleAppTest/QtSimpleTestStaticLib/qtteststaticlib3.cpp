@@ -2,7 +2,7 @@
 //#include <CoreLib/VxGUID.h>
 //#include <CoreLib/config_corelib.h>
 //#include <AppDependLibrariesConfig.h>
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 
 #include "qtteststaticlib3.h"
 #include "qdebug.h"

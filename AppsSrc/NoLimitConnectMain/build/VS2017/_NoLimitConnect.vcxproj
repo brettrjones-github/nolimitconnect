@@ -1714,13 +1714,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\app_precompiled_hdr.h" />
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
     <ClInclude Include="..\..\..\..\GoTvDebugConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h" />

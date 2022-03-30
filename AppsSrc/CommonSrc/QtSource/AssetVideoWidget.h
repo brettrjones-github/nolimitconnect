@@ -26,17 +26,17 @@ public:
 	AssetVideoWidget( AppCommon& appCommon, QWidget * parent = 0 );
 	virtual ~AssetVideoWidget() = default;
 
-    virtual void				setAssetInfo( AssetBaseInfo& assetInfo );
-	virtual void				onActivityStop( void );
+    virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
+    virtual void				onActivityStop( void ) override;
 
-	virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
+    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
-	virtual void				showSendFail( bool show, bool permissionErr = false );
-	virtual void				showResendButton( bool show );
-	virtual void				showShredder( bool show );
-	virtual void				showXferProgress( bool show );
-	virtual void				setXferProgress( int sendProgress );
+    virtual void				showSendFail( bool show, bool permissionErr = false ) override;
+    virtual void				showResendButton( bool show ) override;
+    virtual void				showShredder( bool show ) override;
+    virtual void				showXferProgress( bool show ) override;
+    virtual void				setXferProgress( int sendProgress ) override;
 
 signals:
 	void						signalPlayProgress( int pos );
@@ -44,7 +44,7 @@ signals:
 
 protected slots:
 	void						slotPlayButtonClicked( void );
-	void						slotShredAsset( void );
+    void						slotShredAsset( void ) override;
 	void						slotSliderPressed( void );
 	void						slotSliderReleased( void );
 
@@ -56,8 +56,8 @@ protected:
 	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos ) override;
 	void						initAssetVideoWidget( void );
 
-	void						showEvent( QShowEvent * ev );
-	void						resizeEvent( QResizeEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						resizeEvent( QResizeEvent * ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );

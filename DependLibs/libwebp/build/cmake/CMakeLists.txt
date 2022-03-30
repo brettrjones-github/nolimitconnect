@@ -11,12 +11,12 @@ add_library(libwebp STATIC
   ../../../../byteswap.h
   ../../../../dirent.h
   ../../../../dlfcn.h
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvConfig.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../../../langinfo.h
   ../../../../linux/ioctl.h
   ../../../../linux/param.h

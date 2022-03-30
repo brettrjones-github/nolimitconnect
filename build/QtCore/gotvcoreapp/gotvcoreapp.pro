@@ -38,13 +38,13 @@ DISTFILES += \
     .qmake.stash
 
 HEADERS += \
-    ../../../GoTvCompilerConfig.h \
-    ../../../GoTvCompilerConfig.h \
+    ../../../AppCompilerConfig.h \
+    ../../../AppCompilerConfig.h \
     ../../../GoTvConfig.h \
-    ../../../GoTvCpuArchDefines.h \
+    ../../../AppCpuArchDefines.h \
     ../../../AppDependLibrariesConfig.h \
     ../../../GoTvFeaturesConfig.h \
-    ../../../GoTvTargetOsConfig.h
+    ../../../AppTargetOsConfig.h
 
 SUBDIRS += \
     ../dependlibs/gotvdependlibs.pro \

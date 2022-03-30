@@ -11,10 +11,10 @@ add_library(CoreLib STATIC
   ../../../../byteswap.h
   ../../../../dirent.h
   ../../../../dlfcn.h
-  ../../../../GoTvCompilerConfig.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppCompilerConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../../../langinfo.h
   ../../../../linux/ioctl.h
   ../../../../linux/param.h

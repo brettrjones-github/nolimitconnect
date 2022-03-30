@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include "GoTvCompilerConfig.h"
+#include "AppCompilerConfig.h"
 
 #include "VxTime.h"
 

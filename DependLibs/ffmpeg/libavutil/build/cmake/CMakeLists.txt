@@ -6,16 +6,16 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(FfmpegAvUtilLib STATIC
-  ../../../../../GoTvCompilerConfig.h
+  ../../../../../AppCompilerConfig.h
   ../../../../../GoTvCompilerIntTypes.h
   ../../../../../GoTvConfig.h
   ../../../../../GoTvConfigAndroid.h
   ../../../../../GoTvConfigLinux.h
   ../../../../../GoTvConfigWindows.h
-  ../../../../../GoTvCpuArchDefines.h
-  ../../../../../GoTvDependLibrariesConfig.h
+  ../../../../../AppCpuArchDefines.h
+  ../../../../../AppDependLibrariesConfig.h
   ../../../../../GoTvFeaturesConfig.h
-  ../../../../../GoTvTargetOsConfig.h
+  ../../../../../AppTargetOsConfig.h
   ../../../atomics/dummy/stdatomic.h
   ../../../atomics/gcc/stdatomic.h
   ../../../atomics/pthread/stdatomic.h

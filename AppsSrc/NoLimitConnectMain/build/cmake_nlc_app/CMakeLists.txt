@@ -15,13 +15,13 @@ add_executable(_NoLimitConnectApp
   ../../../../app_precompiled_hdr.cpp
   ../../../../app_precompiled_hdr.h
   ../../../../GoTvAppConfig.h
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvConfig.h
-  ../../../../GoTvCpuArchDefines.h
+  ../../../../AppCpuArchDefines.h
   ../../../../GoTvDebugConfig.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../../../GuiInterface/config_libgotvptop.h
   ../../../../GuiInterface/GoTvRenderFrame.cpp
   ../../../../GuiInterface/GoTvRenderFrame.h

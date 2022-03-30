@@ -24,6 +24,6 @@ PRE_TARGETDEPS += $$PWD/libssl.pro
 
 HEADERS += \
     GoTvAppConfig.h \
-    GoTvCompilerConfig.h \
-    GoTvCpuArchDefines.h \
+    AppCompilerConfig.h \
+    AppCpuArchDefines.h \
     AppDependLibrariesConfig.h

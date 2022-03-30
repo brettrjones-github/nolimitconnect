@@ -1,4 +1,4 @@
-HEADERS += 	$$PWD/DependLibs/libmicrohttpd/../../GoTvCompilerConfig.h \
+HEADERS += 	$$PWD/DependLibs/libmicrohttpd/../../AppCompilerConfig.h \
     $$PWD/DependLibs/libmicrohttpd/base64_microhttpd.h \
     $$PWD/DependLibs/libmicrohttpd/config_microhttpd.h \
     $$PWD/DependLibs/libmicrohttpd/connection.h \

@@ -11,10 +11,10 @@ win32{
 INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32
 }
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptArray.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptAutomaticCleaner.h \

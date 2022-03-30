@@ -8,11 +8,11 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
 add_library(libssl STATIC
   ../../../../config_gotvcore.h
   ../../../../GoTvAppConfig.h
-  ../../../../GoTvCompilerConfig.h
-  ../../../../GoTvCpuArchDefines.h
+  ../../../../AppCompilerConfig.h
+  ../../../../AppCpuArchDefines.h
   ../../../../GoTvDebugConfig.h
-  ../../../../GoTvDependLibrariesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppDependLibrariesConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../crypto/aes/aes.h
   ../../crypto/aes/aes_cbc.c
   ../../crypto/aes/aes_cfb.c

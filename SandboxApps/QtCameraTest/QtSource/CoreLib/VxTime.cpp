@@ -1,7 +1,7 @@
 //============================================================================
 // Created by Brett R. Jones in 2018 and issued to public domain
 //============================================================================
-#include "GoTvCompilerConfig.h"
+#include "AppCompilerConfig.h"
 
 #include "VxTime.h"
 #include "VxTimeUtil.h"

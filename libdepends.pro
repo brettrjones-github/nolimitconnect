@@ -143,8 +143,8 @@ include(libupnp2lib.pri)
 
 HEADERS += \
     GoTvAppConfig.h \
-    GoTvCompilerConfig.h \
-    GoTvCpuArchDefines.h \
+    AppCompilerConfig.h \
+    AppCpuArchDefines.h \
     AppDependLibrariesConfig.h
 
 

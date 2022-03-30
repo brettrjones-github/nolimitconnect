@@ -4,10 +4,10 @@ INCLUDEPATH += $NDK_MODULE_PATH
 INCLUDEPATH += $NDK_MODULE_PATH
 }
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libwebp/config_libwebp.h \
     $$PWD/DependLibs/libwebp/src/dec/alphai_dec.h \
     $$PWD/DependLibs/libwebp/src/dec/common_dec.h \

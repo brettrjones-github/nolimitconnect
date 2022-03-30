@@ -22,8 +22,8 @@ INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
 
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc/platform/qt
 
-HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvCompilerConfig.h \
+HEADERS += 	$$PWD/AppCpuArchDefines.h \
+    $$PWD/AppCompilerConfig.h \
     $$PWD/GoTvDebugConfig.h \
     $$PWD/AppDependLibrariesConfig.h \
     $$PWD/kodi_src/xbmc/xbmc/config_kodi.h \

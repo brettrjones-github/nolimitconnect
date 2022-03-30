@@ -3,7 +3,7 @@
 // Created by Brett R. Jones in 2017 and issued to public domain
 //============================================================================
 
-#include "GoTvCpuArchDefines.h"
+#include "AppCpuArchDefines.h"
 
 #include <inttypes.h> // all compilers must support this header to avoid massive typedef clashes
 #include <sys/types.h> // for size_t in linux

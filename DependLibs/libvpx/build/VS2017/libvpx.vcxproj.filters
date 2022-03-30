@@ -515,16 +515,16 @@
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
       <Filter>Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="..\..\vpx_scale\vpx_scale.h">

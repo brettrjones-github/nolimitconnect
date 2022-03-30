@@ -6,12 +6,12 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libopenjpeg STATIC
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvConfig.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../config_libopenjpeg.h
   ../../src/lib/openjp2/bench_dwt.c
   ../../src/lib/openjp2/bio.c

@@ -20,10 +20,10 @@ INCLUDEPATH += $$PWD/DependLibs/libvpx/vpx
 INCLUDEPATH += $$PWD/DependLibs/libvpx/vpx_dsp
 
 HEADERS += 	$$PWD/GoTvAppConfig.h \
-    $$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+    $$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libvpx/vp8/common/alloccommon.h \
     $$PWD/DependLibs/libvpx/vp8/common/blockd.h \
     $$PWD/DependLibs/libvpx/vp8/common/coefupdateprobs.h \

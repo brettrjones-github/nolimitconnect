@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 
 #include <CoreLib/VxGUID.h>
 

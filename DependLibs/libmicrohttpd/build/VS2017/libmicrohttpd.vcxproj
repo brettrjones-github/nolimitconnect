@@ -38,7 +38,7 @@
     <ClCompile Include="..\..\w32functions.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
     <ClInclude Include="..\..\base64_microhttpd.h" />
     <ClInclude Include="..\..\connection.h" />
     <ClInclude Include="..\..\connection_https.h" />

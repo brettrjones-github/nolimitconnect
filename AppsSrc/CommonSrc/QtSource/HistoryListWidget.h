@@ -39,8 +39,8 @@ public slots:
 	void						slotShreddingAsset( AssetBaseWidget * assetWidget );
 
 protected:
-	void						showEvent( QShowEvent * ev );
-	void						hideEvent( QHideEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
 
     virtual void				toGuiAssetSessionHistory( AssetBaseInfo& assetInfo ) override;
     virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ) override;

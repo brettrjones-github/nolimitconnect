@@ -1,10 +1,10 @@
 
 INCLUDEPATH += $$PWD/DependLibs/libzip/
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libzip/config_libzip.h \
     $$PWD/DependLibs/libzip/zip.h \
     $$PWD/DependLibs/libzip/zipint.h \

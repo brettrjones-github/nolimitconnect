@@ -230,10 +230,10 @@
     <ClInclude Include="..\..\..\..\byteswap.h" />
     <ClInclude Include="..\..\..\..\dirent.h" />
     <ClInclude Include="..\..\..\..\dlfcn.h" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\..\..\langinfo.h" />
     <ClInclude Include="..\..\..\..\linux\ioctl.h" />
     <ClInclude Include="..\..\..\..\linux\param.h" />

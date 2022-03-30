@@ -6,14 +6,14 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libilbc STATIC
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvCompilerIntTypes.h
   ../../../../GoTvConfig.h
   ../../../../GoTvConfigAndroid.h
   ../../../../GoTvConfigLinux.h
   ../../../../GoTvConfigWindows.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
   ../../ilbc/abs_quant.h
   ../../ilbc/abs_quant_ilbc.c

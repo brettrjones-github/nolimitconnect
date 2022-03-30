@@ -1,7 +1,7 @@
 INCLUDEPATH += $$PWD/DependLibs/libspeex
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \
     $$PWD/DependLibs/libspeex/_kiss_fft_guts.h \
     $$PWD/DependLibs/libspeex/arch.h \

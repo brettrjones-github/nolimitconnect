@@ -7,12 +7,12 @@ set(CMAKE_CONFIGURATION_TYPES "Debug"
 
 add_library(libzvbi STATIC
   ../../../../dlfcn.h
-  ../../../../GoTvCompilerConfig.h
+  ../../../../AppCompilerConfig.h
   ../../../../GoTvConfig.h
-  ../../../../GoTvCpuArchDefines.h
-  ../../../../GoTvDependLibrariesConfig.h
+  ../../../../AppCpuArchDefines.h
+  ../../../../AppDependLibrariesConfig.h
   ../../../../GoTvFeaturesConfig.h
-  ../../../../GoTvTargetOsConfig.h
+  ../../../../AppTargetOsConfig.h
   ../../../../langinfo.h
   ../../../../netdb.h
   ../../../../strings.h

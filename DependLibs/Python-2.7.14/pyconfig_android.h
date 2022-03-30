@@ -66,7 +66,7 @@
 #define HAVE_ASINH 1
 
 /* Define to 1 if you have the <asm/types.h> header file. */
-//#define HAVE_ASM_TYPES_H 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_ASM_TYPES_H 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the `atanh' function. */
 #define HAVE_ATANH 1

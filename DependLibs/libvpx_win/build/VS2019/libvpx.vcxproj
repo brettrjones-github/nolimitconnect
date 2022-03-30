@@ -1269,10 +1269,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\config_libvpx.h" />
     <ClInclude Include="..\..\config_libvpx_linux.h" />
     <ClInclude Include="..\..\config_libvpx_win32.h" />

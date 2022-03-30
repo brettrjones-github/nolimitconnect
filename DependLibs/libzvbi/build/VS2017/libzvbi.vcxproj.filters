@@ -341,22 +341,22 @@
     <ClInclude Include="..\..\contrib\dvbsubs.h">
       <Filter>contrib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\strings.h">

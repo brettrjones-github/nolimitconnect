@@ -1,9 +1,9 @@
-HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
+HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
 	$$PWD/../../../../GoTvConfig.h \
-	$$PWD/../../../../GoTvCpuArchDefines.h \
+	$$PWD/../../../../AppCpuArchDefines.h \
 	$$PWD/../../../../AppDependLibrariesConfig.h \
 	$$PWD/../../../../GoTvFeaturesConfig.h \
-	$$PWD/../../../../GoTvTargetOsConfig.h \
+	$$PWD/../../../../AppTargetOsConfig.h \
 	$$PWD/../../../../base64.h \
 	$$PWD/../../../../byteswap.h \
 	$$PWD/../../../../dirent.h \

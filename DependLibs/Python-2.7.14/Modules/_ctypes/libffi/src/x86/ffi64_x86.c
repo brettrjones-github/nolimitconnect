@@ -27,7 +27,7 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#include "GoTvCpuArchDefines.h"
+#include "AppCpuArchDefines.h"
 #if !defined(_MSC_VER) && ARCH_X86 && ARCH_64_BITS
 
 #include <ffi.h>
