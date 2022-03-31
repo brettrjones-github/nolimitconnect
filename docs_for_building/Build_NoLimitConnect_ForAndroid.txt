@@ -3,6 +3,13 @@ Witten 10/24/2021
 
 1.) Setup Qt for android (at time of this writting Qt 6.2.0 Beta 3 )
 2.) Build and Run {SRC}/SandboxApps/QtSimpleAppTest/QtSimpleAppTest.pro to make sure everthing is configured correcty
+
+=== no limit connect without kodi (build in order below) ===
+3.) BuildNlc1_NlcDependLibs,pro 
+4.) BuildNlc2_NlcCore,pro 
+5.) BuildNlc3_NlcAppOnly,pro 
+
+=== with kodi only ===
 3.) There are 7 build project in root folder Build1_XXX.pro to Build7_XXX.pro
 4.) The Python builds Build1_XXX.pro to Build4_XXX.pro should always be built as release to avoid renaming (debug adds _d to target name)
 	NOTE: Builds 1-4 do not need built unless you want to build with Kodi enabled
