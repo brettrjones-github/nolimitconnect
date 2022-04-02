@@ -17,7 +17,7 @@
 #include "VxDefs.h"
 #include <string>
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktBlobEntry;
@@ -98,6 +98,7 @@ protected:
     uint64_t					m_u64HiPart{ 0 };
 	uint64_t					m_u64LoPart{ 0 };
 };
+#pragma pack()
 #pragma pack(pop)
 
 //! comparison of VxGUID ids for std::map

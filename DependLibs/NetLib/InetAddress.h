@@ -25,6 +25,7 @@
 	#include <unistd.h> 
 #endif // TARGET_OS_WINDOWS
 
+#pragma pack(push)
 #pragma pack(1)
 
 class InetAddress;
@@ -239,3 +240,4 @@ public:
 };
 
 #pragma pack()
+#pragma pack(pop)

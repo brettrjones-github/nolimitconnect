@@ -1,5 +1,3 @@
-
-#define VXFILE_TYPE_UNKNOWN					0x00
 #pragma once
 //============================================================================
 // Copyright (C) 2015 Brett R. Jones
@@ -15,6 +13,8 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+
+#define VXFILE_TYPE_UNKNOWN					0x00
 
 #define VXFILE_TYPE_MASK					0xff		
 #define VXFILE_TYPE_PHOTO					0x01		

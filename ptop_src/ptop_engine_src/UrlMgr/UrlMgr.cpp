@@ -15,6 +15,7 @@
 #include "UrlMgr.h"
 
 #include <NetLib/VxSktUtil.h>
+#include <string.h>
 
 //============================================================================
 UrlMgr& GetUrlMgrInstance()

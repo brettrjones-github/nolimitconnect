@@ -73,4 +73,5 @@ protected:
 	uint16_t					m_u16RejectedDaresCnt{ 0 };	
 };
 
+#pragma pack()
 #pragma pack(pop)

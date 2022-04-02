@@ -296,4 +296,5 @@ private:
     int64_t					    m_s64TimeTcpLastContactMs{0};	// time of last contact via tcp
 };
 
+#pragma pack()
 #pragma pack(pop)

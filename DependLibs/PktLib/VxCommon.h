@@ -56,6 +56,7 @@ const char * DescribePluginLclName( EPluginType ePluginType );
 // 0011		friends
 // 0100		admin
 
+#pragma pack(push)
 #pragma pack(1)
 //! 24 bytes in size
 //! 48 max possible plugins
@@ -144,6 +145,7 @@ private:
 };
 
 #pragma pack()
+#pragma pack(pop)
 
 //! report a attempt to hack or add spyware etc
 ///RCODE VxReportHack(	VxNetIdentBase *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )

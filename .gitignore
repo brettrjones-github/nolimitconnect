@@ -21,6 +21,9 @@ build/build-libopencore-amr-Desktop-Debug/
 
 build/objs/
 
+objs/
+
+*.o
 *.autosave
 *.obj
 *.tlog

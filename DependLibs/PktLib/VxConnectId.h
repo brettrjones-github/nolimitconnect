@@ -73,5 +73,6 @@ protected:
 	uint16_t					m_u16ResConnectId1{ 0 };			// reserved for possible ipv6 port or local port
 };
 
+#pragma pack()
 #pragma pack(pop)
 

@@ -18,7 +18,7 @@
 
 #ifdef __cplusplus
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 class VxThread;
 //! 20 bytes in size
@@ -43,6 +43,7 @@ public:
 protected:
 	uint8_t						m_HashId[20];
 };
+#pragma pack()
 #pragma pack(pop)
 
 #endif // __cplusplus

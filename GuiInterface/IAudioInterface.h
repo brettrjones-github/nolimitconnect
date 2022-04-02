@@ -14,7 +14,9 @@
 //============================================================================
 
 #include <GuiInterface/IDefs.h>
+
 #include <typeinfo>
+#include <inttypes.h>
 
 class IAudioCallbacks
 {

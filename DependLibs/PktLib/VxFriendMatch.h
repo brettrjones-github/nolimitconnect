@@ -82,4 +82,5 @@ public:
     uint8_t						m_u8FriendMatch{ 0x11 };
 };
 
+#pragma pack()
 #pragma pack(pop)

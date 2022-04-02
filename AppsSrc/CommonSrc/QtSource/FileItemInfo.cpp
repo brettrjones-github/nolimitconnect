@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "FileItemInfo.h"
 #include "GuiHelpers.h"
 

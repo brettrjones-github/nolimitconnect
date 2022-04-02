@@ -31,6 +31,7 @@
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
 
+#include <algorithm>
 #include <time.h>
 
 //============================================================================

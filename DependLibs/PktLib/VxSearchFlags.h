@@ -71,4 +71,5 @@ protected:
 	uint8_t						m_u8FileTypeFlags{ 0 };
 };
 
+#pragma pack()
 #pragma pack(pop)
