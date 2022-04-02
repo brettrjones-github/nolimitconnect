@@ -74,4 +74,5 @@ protected:
     GroupieId					m_GroupieId;
 };
 
+#pragma pack()
 #pragma pack(pop)

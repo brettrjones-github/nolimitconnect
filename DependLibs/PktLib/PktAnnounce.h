@@ -115,5 +115,6 @@ public:
 	void						DebugDump( void );
 };
 
+#pragma pack() 
 #pragma pack(pop)
 

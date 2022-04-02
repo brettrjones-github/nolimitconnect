@@ -39,4 +39,5 @@ private:
 	uint8_t						m_au8List[ MAX_PKT_ANN_LIST_LEN ];
 };
 
+#pragma pack() 
 #pragma pack(pop)

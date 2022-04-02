@@ -31,4 +31,5 @@ public:
     VxGroupInfo& operator = ( VxGroupInfo&& rhs ); // move assignment
 };
 
+#pragma pack()
 #pragma pack(pop)

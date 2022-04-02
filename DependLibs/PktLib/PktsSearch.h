@@ -72,6 +72,7 @@ private:
 	uint8_t						m_aoSearchMatch[ PKT_ANN_MAX_IDENT_MATCH * sizeof(VxConnectInfo) + 64 ];
 };
 
+#pragma pack()
 #pragma pack(pop)
 
 

@@ -31,4 +31,5 @@ private:
 	uint32_t					m_u32TotalDataLen;
 };
 
+#pragma pack()
 #pragma pack(pop)

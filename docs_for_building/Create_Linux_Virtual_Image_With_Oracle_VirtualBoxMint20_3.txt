@@ -1,20 +1,16 @@
-Instructions to create a virtual box Linux Mint 19.2 Image for NoLimitConnect developement
+Instructions to create a virtual box Linux Mint 20.3 Image for NoLimitConnect developement
+<Virtual Box Version> = oracal virtual box version.. for this document 6.1
+<Mint Version> = linux mint version.. for this document 20.3
+<Qt Version> = qt version.. for this document 6.2.4
+<Java Version> = qt version.. for this document 6.2.4
+
 
 === KNOWN ISSUES ===
-1.) Turning on 3D acceleration in VBox causes Qt Creator to crash but works fine for just running nolimitconnect
-2.) Cannot run Android x86 emulator inside a Virtual image. Visit https://developer.android.com/studio/run/emulator-acceleration
-    however, connecting to a physical android device works fine
-3.) Found a workaround for the Qt Creator crash bug. 
-	a.) With 3d acceleration turned off launch Qt Creator
-	b.) In Help->About Plugins uncheck welcome screen
-	c.) exit qt, restart virtual box with 3d acceleration turned on.
-4.) This issue seems to have been fixed in in the Mint 19.2 version and latest Qt tools
+1.) The issue of turning on 3D acceleration in VBox causes Qt Creator to crash seems to have been fixed in in the Mint <Mint Version> and latest Qt tools
 
 === after install you might need to give user write access to files if they were installed as root ===
+
 cd ~/nolimitdev
-sudo chown -hR nolimit *
-sudo chgrp -hR nolimit *
-cd ~/Qt
 sudo chown -hR nolimit *
 sudo chgrp -hR nolimit *
 can verify change with ll -a
@@ -22,19 +18,19 @@ can verify change with ll -a
 
 === setup linux mint ===
 
-1.) Download linux mint 20.2 - 64 Bit ( cannot use 32 Bit because of android build requirements )
+1.) Download linux mint <Mint Version> - 64 Bit ( cannot use 32 Bit because of android build requirements )
 2.) Create New Image In Virtual Box using the linux mint iso and OS Linux/Ubuntu 64Bit
 3.) The virtual drive should be at least 120GB and dynamic
-4.) Open Install Linux Mint 
-5.) user name nolimit password nolimitpass 
-6.) Choose NOT to have to enter password on boot (login automatically)
-7.) Install with name nolimit and password nolimitpass and automatic login
+4.) Open Install Linux Mint by right click->open of optic disk on mint desktop
+5.) check install multimedia codecs
+6.) user name nolimit, password nolimitpass 
+7.) Choose NOT to have to enter password on boot (Select radio button log in automatically)
 8.) Change the optical drive iso to Devices->Insert Guest Additions CD Image and reboot
 9.) Open termninal and sudo passwd ( first time use only.. this will set the root password )
 10.) type nolimitpass 3 times.. once for sudo and the next 2 times for root password
 12.) Install guest utils - You might be able gnore below steps a-c.. virtual box now has install guest additions from virtual box.. see virtual box website
 	Devices->Insert Guest Additions CD Image and if does not autorun then open terminal and 
-	a.) cd /media/nolimit/VBox_Gas_5.2.22
+	a.) cd /media/nolimit/VBox_Gas_6.1.32
 	b.) sudo ./VBoxLinuxAdditions.run
 	c.) Enter the root password if required and let it install
 13.) From Mint menu shutdown linux
@@ -50,30 +46,40 @@ can verify change with ll -a
 	a.) Delay before starting the screensaver ->Never
 	b.) Turn off locks
 19.) if get permission errors when accessing shared folder sf_YourSharedFolder then fix it with
+	sudo adduser $USER vboxsf
+	or 
     sudo usermod -aG vboxsf $(whoami)
+	restart linux
     
 	
-==== install Open Java before anything else ======
+==== Check Java before anything else if want to also build Android in linux enviroment ======
+NOTE: these steps can be skipped if only building for linux and not android
 NOTE: with latest Qt you can instead download using Qt->Options->Devices->Android Tab and click the button to right of JDK location
 or visit https://doc.qt.io/qt-6/android-getting-started.html
-for qt 6.2.0 install JDK 11 (later versions are not supported)
-=== recommend skip this java install section and install install from Qt->Options->Devices->Android Tab
-1.)	sudo apt install openjdk-11-jdk-headless
-2.) check the version with javac -version
+for qt <Qt Version> install JDK 11 (later versions of java are not supported)
+
+1.) check the version with javac -version
 	should output something like javac 11.0.11
-3.) find jdk path you will need for qt/android compiler setup
+/usr/lib/jvm/java-11-openjdk-amd64
+2.) If java is not installed then
+	sudo apt install openjdk-11-jdk-headless
+3.) check the version with javac -version
+	should output something like javac 11.0.14.1
+4.) find jdk path you will need for qt/android compiler setup
 	A useful command to find out where the path of your jdk is on Linux is readlink -f $(which java)
 	if you have multiple jdk's installed then try /usr/lib/jvm/java-11-openjdk-amd64 as the path
-4.) if you have a newer version of java like java-13 it must be unistalled  
-		
-	A useful command to find out where the path of your jdk is on Linux is readlink -f $(which java)
-	Then you can copy that path end at the jdk or java-x-oracle as the path to your jdk. in android studio->File->Project Structure->SDK location
+6.) if you have a newer version of java like java-13 it must be unistalled
+7.) Give user write permissions to java directory
+	sudo chown nolimit -R /usr/lib/jvm/java-11-openjdk-amd64
+8.) The java path will be needed for
+	Android studio->File->Project Structure->SDK location
+	and
+	QtCreator->Tools->Options->Devices Android Tab JDK Location
 	
 	
 ==== some usefull tools for developers ======
 1.) Meld - File Difference comparison tool
 	sudo apt-get install meld
-2.) GitKraken - git version manager works with github
 
 ==== Prerequisite tools required to build nolimitptop ======
 1.) sudo apt-get install g++
@@ -81,9 +87,68 @@ for qt 6.2.0 install JDK 11 (later versions are not supported)
 3.) sudo apt-get install masm
 4.) uuid required but missing in mint
 	sudo apt-get install uuid-dev
-5.) uuid required but missing in mint
-	sudo apt-get install uuid-dev	
+5.) sudo apt install apt-file // optional for installed header dependency search
+6.) Open Gl
+	sudo apt-get install libglu1-mesa-dev
 
+//======= install Qt <Qt Version> ======//
+1.) Download the qt installer from https://doc.qt.io/qt-6/gettingstarted.html or https://www.qt.io/
+// some notes in case the web page is discontinued
+	a. sudo apt-get install build-essential libgl1-mesa-dev
+2.) chmod 777 ~/Downloads/qt-unified-linux-x64-4.3.0.1-online.run
+3.) sudo ~/Downloads/qt-unified-linux-x64-4.3.0.1-online.run
+4.) In Qt Installer enter email and password for Qt account
+5.) Install to /home/nolimitdev/Qt (create the directory if needed)
+6.) Use the custom installation to change the install path to /home/nolimitdev/Qt
+7.) After install you may need to setup the correct paths by editing qtchooser default
+	cd /usr/lib/x86_64-linux-gnu/qt-default/qtchooser
+	sudo gedit default.conf
+	change the lines 
+	/usr/lib/x86_64-linux-gnu/qt4/bin
+	/usr/lib/x86_64-linux-gnu
+	to
+	/home/nolimitdev/Qt/<Qt Version>/gcc_64/bin
+	/home/nolimitdev/Qt/<Qt Version>/gcc_64/lib
+	
+4.) change qt include directory
+	In Qt Creator->Projects->Build Enviroment change QTDIR from /usr/lib/x86_64-linux-gnu/qt6 to /home/nolimit/Qt/6.2.0/gcc_64
+	
+5.)	after reboot run $qmake --version
+	should show
+	QMake version 3.1
+	Using Qt version 6.2.2 in /home/nolimit/Qt/6.2.0/gcc_64/lib
+6.)	In Options->Device 
+	The Android SDK location should be /home/nolimit/Android/Sdk
+	The Android NDK location should be /home/nolimit/Android/android-ndk-r22b/
+	
+===== compile nolimitconnect =====
+
+1.) install git with sudo apt install git
+2.) check out source code
+	cd ~/nolimitdev
+	checkout nolimitconnect
+	a.)	git clone https://brettrjones-github:<ghp_GitHubSecurityKey>@github.com/brettrjones-github/nolimitconnect.git
+	useful git commands
+	git status
+	git commit -m "descriptive commit message"
+	git push https://brettrjones-github:<ghp_GitHubSecurityKey>@github.com/brettrjones-github/nolimitconnect.git
+	
+3.) Open the three parts of No Limit Connect and compile in the folowing order
+	a.) /home/nolimitdev/nolimitconnect/BuildNlc1_NlcDependLibs.pro
+	b.) /home/nolimitdev/nolimitconnect/BuildNlc2_NlcCore.pro
+	c.) /home/nolimitdev/nolimitconnect/BuildNlc2_NlcAppOnly.pro
+	
+=== compile enviroment issues ===
+1.) /home/nolimit/nolimitdev/nolimitconnect/DependLibs/ffmpeg/libavdevice/x11grab.c:58: error: X11/extensions/shape.h: No such file or directory
+	a.) apt-file search X11/extensions/shape.h
+	b.) sudo apt install libxext-dev
+2.) /home/nolimit/nolimitdev/nolimitconnect/DependLibs/ffmpeg/libavdevice/x11grab.c:59: error: X11/extensions/Xfixes.h: No such file or directory
+	a.) apt-file search X11/extensions/Xfixes.h
+	b.) sudo apt install libxfixes-dev
+
+
+
+==== optional setup Qt in linux to compile Android No Limit Connect ====
 ==== install android studio ====
 NOTE: use uppercase /home/nolimit/Android because that is the default install directory for android studio
 After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit
@@ -98,50 +163,8 @@ After many tries the only way I could get android studio installed correctly was
 4.) Start Android Studio and install sdks (install kvm when says can support accelerated emulator)
     Sdks install Lollipop 5.1 (Sdk Api 22), cmake
 5.) Set ndk path in Project Structure to point to home/nolimit/android/android-ndk-r22b
-
-//======= install Qt 6.2.0 ======//
-1.) Download the qt installer from https://doc.qt.io/qt-5/gettingstarted.html or https://www.qt.io/
-2.) chmod 777 ~/Downloads/qt-unified-linux-x64-4.1.1-online.run
-3.) sudo ~/Downloads/qt-unified-linux-x64-4.1.1-online.run
-4.) In Qt Installer enter email and password for Qt account
-5.) Install to /home/nolimit/Qt
-6.) check all install boxes except custom installation and click next
-7.) After install you may need to setup the correct paths by editing qtchooser default
-	cd /usr/lib/x86_64-linux-gnu/qt-default/qtchooser
-	sudo gedit default.conf
-	change the lines 
-	/usr/lib/x86_64-linux-gnu/qt4/bin
-	/usr/lib/x86_64-linux-gnu
-	to
-	/home/nolimit/Qt/6.2.0/gcc_64/bin
-	/home/nolimit/Qt/6.2.0/gcc_64/lib
+*/
 	
-4.) change qt include directory
-	In Qt Creator->Projects->Build Enviroment change QTDIR from /usr/lib/x86_64-linux-gnu/qt6 to /home/nolimit/Qt/6.2.0/gcc_64
-	
-5.)	after reboot run $qmake --version
-	should show
-	QMake version 3.1
-	Using Qt version 6.2.2 in /home/nolimit/Qt/6.2.0/gcc_64/lib
-6.)	In Options->Device 
-	The Android SDK location should be /home/nolimit/Android/Sdk
-	The Android NDK location should be /home/nolimit/Android/android-ndk-r22b/
-	
-
-==== install python 2.7 ======
-	sudo apt install python-dev
-
-===== compile nolimitconnect =====
-
-2.) If did not install kracken then will need to install git with sudo apt install git
-2.) check out source code
-	mkdir ~/project_sources
-	cd ~/project_sources
-	checkout nolimitconnect
-	Windows
-		git clone https://github.com/brettrjones/nolimitconnect.git
-	Linux
-		git clone git://github.com/brettrjones/nolimitconnect.git
 	
 	
 

@@ -111,4 +111,5 @@ private:
 
 };
 
+#pragma pack()
 #pragma pack(pop)

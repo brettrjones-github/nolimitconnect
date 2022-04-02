@@ -1,5 +1,4 @@
-#ifndef PKT_CHAT_REQ_H
-#define PKT_CHAT_REQ_H
+#pragma once
 
 //============================================================================
 // Copyright (C) 2014 Brett R. Jones 
@@ -45,7 +44,8 @@ private:
 	char						m_au8Additional[ PKT_CHAT_MAX_IMAGES * sizeof(uint16_t) * 2  + PKT_CHAT_MAX_MSG_LEN + 27 ];
 };
 
+#pragma pack()
 #pragma pack(pop)
 
-#endif // PKT_CHAT_REQ_H
+
 

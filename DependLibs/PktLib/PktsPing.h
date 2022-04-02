@@ -16,6 +16,7 @@
 
 #include "PktTypes.h"
 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktPingReq : public VxPktHdr
@@ -43,3 +44,4 @@ private:
 };
 
 #pragma pack()
+#pragma pack(pop)

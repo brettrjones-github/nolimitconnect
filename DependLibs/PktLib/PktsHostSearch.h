@@ -18,6 +18,7 @@
 
 #include <GuiInterface/IDefs.h>
 
+#pragma pack(push)
 #pragma pack(1)
 
 #define MAX_HOST_SEARCH_MSG_LEN 512
@@ -94,4 +95,5 @@ private:
 };
 
 #pragma pack()
+#pragma pack(pop)
 

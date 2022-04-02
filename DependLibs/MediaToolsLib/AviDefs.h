@@ -19,7 +19,7 @@
 #define RIFF_2GB_FILESIZE_LIMIT			2147483648ULL 
 #define AVI_FILEPOS_RIFF				0 
 
-
+#pragma pack(push)
 #pragma pack(1)
 class AviFourCC
 {
@@ -343,4 +343,5 @@ public:
 };
 
 #pragma pack()
+#pragma pack(pop)
 

@@ -20,6 +20,7 @@
 
 #include <vector>
 
+#pragma pack(push)
 #pragma pack(1)
 
 #define MAX_SHARED_FILE_LIST_LEN			12288
@@ -77,4 +78,5 @@ private:
 };
 
 #pragma pack()
+#pragma pack(pop)
 

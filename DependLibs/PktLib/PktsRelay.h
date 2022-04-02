@@ -267,4 +267,5 @@ private:
 	uint32_t					m_CurRelayUsers;
 };
 
+#pragma pack()
 #pragma pack(pop)

@@ -18,6 +18,7 @@
 
 #include <GuiInterface/IDefs.h>
 
+#pragma pack(push)
 #pragma pack(1)
 class PktGroupieInfoReq : public VxPktHdr
 {
@@ -297,4 +298,5 @@ protected:
 };
 
 #pragma pack()
+#pragma pack(pop)
 

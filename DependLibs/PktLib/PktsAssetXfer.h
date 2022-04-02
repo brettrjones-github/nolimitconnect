@@ -121,5 +121,6 @@ public:
     PktAssetListReply();
 };
 
+#pragma pack() 
 #pragma pack(pop)
 

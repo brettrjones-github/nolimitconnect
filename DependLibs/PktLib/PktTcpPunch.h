@@ -19,6 +19,7 @@
 #include "PktTypes.h"
 #include "VxConnectInfo.h"
 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktTcpPunch : public VxPktHdr
@@ -38,5 +39,6 @@ private:
 };
 
 #pragma pack()
+#pragma pack(pop)
 
 #endif // PKT_TCP_PUNCH_H

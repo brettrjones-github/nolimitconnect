@@ -289,5 +289,6 @@ private:
 	uint32_t					m_u32Res2;
 };
 
+#pragma pack()
 #pragma pack(pop)
 

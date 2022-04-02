@@ -300,5 +300,6 @@ private:
 	uint32_t					m_u32Res2{ 0 };
 };
 
+#pragma pack() 
 #pragma pack(pop)
 

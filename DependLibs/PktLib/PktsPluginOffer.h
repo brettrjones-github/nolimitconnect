@@ -95,6 +95,7 @@ private:
 	char						m_as8Arg1[ (PKT_PLUGIN_OFFER_MAX_MSG_LEN + 1) ]; //message or argument
 };
 
+#pragma pack()
 #pragma pack(pop)
 
 

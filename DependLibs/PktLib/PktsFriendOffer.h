@@ -16,6 +16,7 @@
 #include "PktTypes.h"
 #include <GuiInterface/IDefs.h>
 
+#pragma pack(push)
 #pragma pack(1)
 
 #define MAX_FRIEND_OFFER_MSG_LEN 2048
@@ -63,3 +64,4 @@ private:
 };
 
 #pragma pack()
+#pragma pack(pop)

@@ -59,5 +59,6 @@ public:
     uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };
 
+#pragma pack() 
 #pragma pack(pop)
 

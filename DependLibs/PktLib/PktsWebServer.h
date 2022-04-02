@@ -188,4 +188,5 @@ private:
 	uint32_t							m_u32Res1;
 };
 
+#pragma pack()
 #pragma pack(pop)

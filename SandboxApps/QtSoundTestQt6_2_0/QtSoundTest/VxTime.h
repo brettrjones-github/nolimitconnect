@@ -96,6 +96,7 @@ public:
     int32_t                     m_ZoneOffsMs;       // Time zone offset in milliseconds
 };
 
+#pragma pack()
 #pragma pack(pop)
 
 #endif // c++ only

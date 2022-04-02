@@ -91,6 +91,7 @@
 #define READ_TOC 0x43
 #define READ_TOC_FORMAT_TOC 0x0
 
+#pragma pack(push)
 #pragma pack(1)
 
 struct SRB_GetDiskInfo
@@ -238,3 +239,5 @@ int run_mmc_cmd_aspi( void *p_user_data,
 		      cdio_mmc_direction_t e_direction, 
 		      unsigned int i_buf, /*in/out*/ void *p_buf );
 
+#pragma pack()
+#pragma pack(pop)

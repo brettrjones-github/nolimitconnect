@@ -95,4 +95,5 @@ private:
 	VxGUID						m_RmtSessionId;
 };
 
+#pragma pack()
 #pragma pack(pop)

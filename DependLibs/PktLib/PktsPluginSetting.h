@@ -87,6 +87,7 @@ private:
     PktBlobEntry                m_BlobEntry;	//size 14352
 };
 
+#pragma pack()
 #pragma pack(pop)
 
 
