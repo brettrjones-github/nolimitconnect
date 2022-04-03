@@ -77,6 +77,6 @@ private:
 	char						m_as8FileList[ MAX_SHARED_FILE_LIST_LEN ];
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 

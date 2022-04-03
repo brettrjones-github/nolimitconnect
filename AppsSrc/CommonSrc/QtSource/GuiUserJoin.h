@@ -13,9 +13,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <PktLib/GroupieId.h>
-
 #include <QWidget>
+
+#include <PktLib/GroupieId.h>
 
 #include <vector>
 

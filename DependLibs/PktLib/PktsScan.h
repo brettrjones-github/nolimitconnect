@@ -22,7 +22,7 @@
 #define PKT_ANN_MAX_SEARCH_STR_LEN (255 + 16)
 #define PKT_ANN_MAX_IDENT_MATCH (40)
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 class PktScanReq : public VxPktHdr, public VxSearchFlags
 {
@@ -72,8 +72,8 @@ private:
 	uint8_t						m_aoSearchMatch[ PKT_ANN_MAX_IDENT_MATCH * sizeof(VxConnectInfo) + 64 ];
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 
 
 

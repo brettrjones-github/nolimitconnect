@@ -16,7 +16,7 @@
 #include "AppletBase.h"
 #include "GuiWebPageCallback.h"
 
-#include "ui_AppletStoryboardClient.h"
+#include "ui_AppletStoryBoardClient.h"
 
 class AppletStoryboardClient : public AppletBase, public GuiWebPageCallback
 {

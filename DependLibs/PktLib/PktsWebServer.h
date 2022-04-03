@@ -21,7 +21,7 @@
 # pragma warning(disable: 4200) //nonstandard extension used : zero-sized array in struct/union
 #endif
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 class PktMyPicSendReq : public VxPktHdr
 {
@@ -188,5 +188,5 @@ private:
 	uint32_t							m_u32Res1;
 };
 
-#pragma pack()
 #pragma pack(pop)
+

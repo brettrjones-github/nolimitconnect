@@ -38,7 +38,8 @@ GuiThumb::GuiThumb( AppCommon& app, ThumbInfo& thumbInfo, VxGUID& sessionId )
 
 //============================================================================
 GuiThumb::GuiThumb( const GuiThumb& rhs )
-    : m_MyApp( rhs.m_MyApp )
+    : QWidget()
+    , m_MyApp( rhs.m_MyApp )
     , m_GuiThumbMgr( m_MyApp.getThumbMgr() )
     , m_ThumbInfo( rhs.m_ThumbInfo )
     , m_SessionId( rhs.m_SessionId )

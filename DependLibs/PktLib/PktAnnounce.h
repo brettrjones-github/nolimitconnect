@@ -22,7 +22,7 @@
 #define PKT_ANN_ANNOUNCE_VERSION 1
 #define P2P_ENGINE_VERSION 1
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 //=== request FLAGS ===//
@@ -115,6 +115,6 @@ public:
 	void						DebugDump( void );
 };
 
-#pragma pack() 
 #pragma pack(pop)
+
 

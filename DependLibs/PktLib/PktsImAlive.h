@@ -43,5 +43,4 @@ private:
 	uint64_t							m_Res;								
 };
 
-#pragma pack()
 #pragma pack(pop)

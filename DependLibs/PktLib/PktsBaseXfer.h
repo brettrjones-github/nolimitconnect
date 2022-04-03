@@ -32,7 +32,7 @@
 #define PKT_BASE_ERR_FILE_LIST_IDX_OUT_OF_RANGE		0x0002
 #define PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN        128
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 //============================================================================

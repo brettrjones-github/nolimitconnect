@@ -43,7 +43,6 @@ public:
 protected:
 	uint8_t						m_HashId[20];
 };
-#pragma pack()
 #pragma pack(pop)
 
 #endif // __cplusplus

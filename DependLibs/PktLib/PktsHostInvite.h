@@ -192,6 +192,6 @@ protected:
     PktBlobEntry                m_BlobEntry;
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 

@@ -10,10 +10,7 @@ INCLUDEPATH += $$PWD/DependLibs/MediaToolsLib/opus/celt
 INCLUDEPATH += $$PWD/DependLibs/MediaToolsLib/opus/silk
 INCLUDEPATH += $$PWD/DependLibs/MediaToolsLib/opus/silk/float
 INCLUDEPATH += $$PWD/GuiInterface
-INCLUDEPATH += $$PWD/GoTvCore/NoLimitConnect
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
-
-
 
 win32{
 INCLUDEPATH += $$PWD/DependLibs/MediaToolsLib/opus/win32

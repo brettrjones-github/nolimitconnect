@@ -16,7 +16,7 @@
 
 class VxNetIdent;
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 #define MAX_PKT_ANN_LIST_LEN 4080
 
@@ -39,5 +39,4 @@ private:
 	uint8_t						m_au8List[ MAX_PKT_ANN_LIST_LEN ];
 };
 
-#pragma pack() 
 #pragma pack(pop)

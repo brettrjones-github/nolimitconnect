@@ -23,7 +23,7 @@
 #define PKT_TYPE_BLOB_MAX_DATA_LEN		    14320	            // maximum length of chunk of Blob data
 #define PKT_TYPE_BLOB_MAX_NAME_AND_TAG_LEN	( 4096 * 2 + 48 )	// maximum length of name and tag
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 //============================================================================
@@ -300,6 +300,6 @@ private:
 	uint32_t					m_u32Res2{ 0 };
 };
 
-#pragma pack() 
-#pragma pack(pop)
+#pragma pack(pop) 
+
 

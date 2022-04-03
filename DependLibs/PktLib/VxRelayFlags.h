@@ -16,7 +16,7 @@
 
 #include <inttypes.h>
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktBlobEntry;
@@ -45,5 +45,4 @@ public:
     uint8_t						m_u8RelayFlags{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)

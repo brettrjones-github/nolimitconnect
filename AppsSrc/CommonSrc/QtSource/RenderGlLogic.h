@@ -1,5 +1,4 @@
-#ifndef RENDERGLLOGIC_H
-#define RENDERGLLOGIC_H
+#pragma once
 //============================================================================
 // Copyright (C) 2018 Brett R. Jones
 //
@@ -14,11 +13,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
+
 #ifdef TARGET_OS_WINDOWS
 #include "WinSock2.h"
 #endif // TARGET_OS_WINDOWS
 
-#include <QWidget>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QOpenGLWidget>
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
@@ -139,4 +139,3 @@ protected:
     unsigned int                m_RenderThreadId = 0;
 };
 
-#endif // RENDERGLLOGIC_H

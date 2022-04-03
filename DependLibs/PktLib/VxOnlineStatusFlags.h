@@ -16,7 +16,7 @@
 
 #include <inttypes.h>
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktBlobEntry;

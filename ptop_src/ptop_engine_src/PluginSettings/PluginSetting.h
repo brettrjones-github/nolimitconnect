@@ -20,9 +20,7 @@
 #include <string>
 #include <vector>
 
-#pragma pack(push)
 #pragma pack(1)
-
 
 // do not add any virtual functions so can be used in network packets directly
 class PluginSettingHdr
@@ -108,7 +106,7 @@ protected:
     uint32_t                    m_Reserve2Setting{ 0 };
 };
 
-#pragma pack(pop)
+#pragma pack()
 
 class BinaryBlob;
 class P2PEngine;

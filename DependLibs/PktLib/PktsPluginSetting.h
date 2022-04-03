@@ -18,7 +18,7 @@
 #include "PktBlobEntry.h"
 #include "PluginId.h"
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 class PktPluginSettingReq : public VxPktHdr
 {
@@ -87,7 +87,6 @@ private:
     PktBlobEntry                m_BlobEntry;	//size 14352
 };
 
-#pragma pack()
 #pragma pack(pop)
 
 

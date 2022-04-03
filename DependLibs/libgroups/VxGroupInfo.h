@@ -15,7 +15,6 @@
 //============================================================================
 #include "VxGroupDefs.h"
 
-#pragma pack(push)
 #pragma pack(1)
 
 // do not add any virtual s so can be used in network packets directly
@@ -32,4 +31,4 @@ public:
 };
 
 #pragma pack()
-#pragma pack(pop)
+

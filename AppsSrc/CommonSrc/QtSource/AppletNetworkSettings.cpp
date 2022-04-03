@@ -138,7 +138,6 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     ui.AssumeNoProxyRadioButton->setChecked( false );
     ui.AssumeProxyRadioButton->setChecked( false );
 
-    bool hasPrevSetttings = false;
     bool validDbSettings = false;
     AccountMgr& dataHelper = m_MyApp.getAccountMgr();
     std::vector<NetHostSetting> netSettingList;
@@ -160,10 +159,6 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
                 selectedIdx = currentSettingIdx;
                 validDbSettings = true;
                 populateDlgFromNetHostSetting( netHostSetting );
-                if( origSettings )
-                {
-                    hasPrevSetttings = true;
-                }
             }
 
             currentSettingIdx++;
@@ -549,7 +544,6 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSe
     VxGetLocalIps( lclIpAddresses );
     std::vector<InetAddress>::iterator iter;
     std::string ipAddr;
-    int preferredAddrIndex = 0;
     int currIdx = 0;
     for( iter = lclIpAddresses.begin(); iter != lclIpAddresses.end(); ++iter )
     {
@@ -559,11 +553,6 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSe
         {
             currIdx++;
             ipAddr = inetAddr.toStdString();
-            if( ipAddr == strPreferredIp )
-            {
-                preferredAddrIndex = currIdx;
-            }
-
             ui.m_LclIpListComboBox->addItem( ipAddr.c_str() );
         }
     }

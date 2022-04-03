@@ -16,7 +16,7 @@
 
 #include "PktsBaseXfer.h"
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktAssetGetReq : public PktBaseGetReq
@@ -121,6 +121,5 @@ public:
     PktAssetListReply();
 };
 
-#pragma pack() 
-#pragma pack(pop)
+#pragma pack(pop) 
 

@@ -19,7 +19,7 @@
 
 #include <string>
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 class PktBlobEntry;
 
@@ -82,5 +82,5 @@ public:
     uint8_t						m_u8FriendMatch{ 0x11 };
 };
 
-#pragma pack()
 #pragma pack(pop)
+

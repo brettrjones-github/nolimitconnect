@@ -66,7 +66,7 @@ private:
 	uint32_t					m_u32Res3{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 
 

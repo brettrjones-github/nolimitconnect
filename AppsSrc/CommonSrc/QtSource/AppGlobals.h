@@ -36,7 +36,7 @@ public:
 	VxNetIdent	*				getUserIdent( void );
 	bool						saveUserIdentToDatabase( void );
     //! update identity and save to database then send permission change to engine
-    void						updatePluginPermission( EPluginType ePluginType, EFriendState ePluginPermission );
+    void						updatePluginPermission( enum EPluginType ePluginType, enum EFriendState ePluginPermission );
 
 	void						launchWebBrowser( const char * pUri );
 protected:

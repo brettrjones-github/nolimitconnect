@@ -99,7 +99,6 @@ protected:
 	uint64_t					m_u64LoPart{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)
 
 //! comparison of VxGUID ids for std::map

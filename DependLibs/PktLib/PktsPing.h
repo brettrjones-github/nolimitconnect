@@ -43,5 +43,5 @@ private:
 	uint64_t					m_Timestamp{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)
+

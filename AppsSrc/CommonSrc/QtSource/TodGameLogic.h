@@ -14,10 +14,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
+
 #include "TodGameDefs.h"
 #include <PktLib/VxCommon.h>
-
-#include <QWidget>
 
 class AppCommon;
 class QFrame;

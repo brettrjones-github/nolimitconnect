@@ -13,10 +13,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "PktsBaseXfer.h"
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktThumbGetReq : public PktBaseGetReq

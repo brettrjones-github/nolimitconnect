@@ -17,7 +17,6 @@
 #include "VxConnectInfo.h"
 #include "VxOnlineStatusFlags.h"
 
-#pragma pack(push) 
 #pragma pack(1)
 
 //! implements minimum to uniquely identify user as individual on the network
@@ -71,4 +70,4 @@ protected:
 	uint16_t					m_u16RejectedDaresCnt = 0;		
 };
 
-#pragma pack(pop)
+#pragma pack()

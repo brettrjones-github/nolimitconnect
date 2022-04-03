@@ -342,6 +342,5 @@ public:
 	uint32_t							m_DataLen;
 };
 
-#pragma pack()
 #pragma pack(pop)
 

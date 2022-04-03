@@ -44,8 +44,8 @@ private:
 	char						m_au8Additional[ PKT_CHAT_MAX_IMAGES * sizeof(uint16_t) * 2  + PKT_CHAT_MAX_MSG_LEN + 27 ];
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 
 
 

@@ -17,7 +17,7 @@
 #include "PktTypes.h"
 #include "VxCommon.h"
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktSessionStartReq : public VxPktHdr
@@ -95,5 +95,5 @@ private:
 	VxGUID						m_RmtSessionId;
 };
 
-#pragma pack()
 #pragma pack(pop)
+

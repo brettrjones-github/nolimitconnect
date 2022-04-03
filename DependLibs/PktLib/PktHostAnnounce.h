@@ -18,7 +18,7 @@
 
 #include <CoreLib/BinaryBlob.h>
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 //      1 bytes m_HostType
@@ -59,6 +59,5 @@ public:
     uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };
 
-#pragma pack() 
-#pragma pack(pop)
+#pragma pack(pop) 
 

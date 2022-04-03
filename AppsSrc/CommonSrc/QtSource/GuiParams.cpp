@@ -12,6 +12,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
+
 #include "AppTranslate.h"
 #include "GuiParams.h"
 #include "GuiUser.h"
@@ -1118,9 +1120,11 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
 
     case ePluginTypeAboutMePageClient:
             strPluginDesc = QObject::tr( "View About Me Page" ).toUtf8().constData();
+        break;
 
     case ePluginTypeAboutMePageServer:
             strPluginDesc = QObject::tr( "About Me Page Service" ).toUtf8().constData();
+        break;
 
     case ePluginTypeClientPeerUser:
         strPluginDesc = QObject::tr( "Peer User Client" ).toUtf8().constData();

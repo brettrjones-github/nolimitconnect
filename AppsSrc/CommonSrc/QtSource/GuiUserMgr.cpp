@@ -153,6 +153,7 @@ void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID on
                 user->getNetIdent().setIsDirectConnect( true );
                 LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is direct connect %s", user->getNetIdent().getOnlineName() );
             }
+            break;
         case eUserViewTypeNearby:
             if( !user->getNetIdent().isNearby() )
             {

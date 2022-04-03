@@ -144,7 +144,6 @@ private:
     int64_t					    m_LastSessionTimeGmtMs{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)
 
 //! report a attempt to hack or add spyware etc

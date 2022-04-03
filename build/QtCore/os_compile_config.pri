@@ -41,11 +41,11 @@ android: {
 INCLUDEPATH +=  $$PWD/../../../../../android/android-ndk-r10e/platforms/android-18/arch-arm/usr/include
 }
 
-INCLUDEPATH += $$PWD/../../GoTvCore/xbmc
+INCLUDEPATH += $$PWD/../../kodi_src/xbmc
 INCLUDEPATH += $$PWD/../../DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/../../DependLibs/openssl-1.0.1f/inc32
 INCLUDEPATH += $$PWD/../../DependLibs/
-INCLUDEPATH += $$PWD/../../GoTvCore
+INCLUDEPATH += $$PWD/../../kodi_src
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/../../
 

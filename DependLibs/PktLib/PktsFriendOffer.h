@@ -63,5 +63,4 @@ private:
     uint8_t						m_au8Data[ MAX_FRIEND_OFFER_MSG_LEN + 16 ];	
 };
 
-#pragma pack()
 #pragma pack(pop)

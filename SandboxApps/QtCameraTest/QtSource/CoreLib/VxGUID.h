@@ -17,7 +17,6 @@
 
 #include <string>
 
-#pragma pack(push) 
 #pragma pack(1)
 //! implements unique identifier
 //! 16 bytes in size
@@ -85,7 +84,7 @@ protected:
 	uint64_t					m_u64HiPart;
 	uint64_t					m_u64LoPart;
 };
-#pragma pack(pop)
+#pragma pack()
 
 //! comparison of VxGUID ids for std::map
 struct cmp_vxguid 

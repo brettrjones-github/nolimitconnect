@@ -13,11 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
+
 #include "AppDefs.h"
 #include <CoreLib/VxGUID.h>
-
-#include <QWidget>
-
 
 class ActivityBase;
 class AppCommon;

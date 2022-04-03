@@ -39,7 +39,8 @@ GuiUserBase::GuiUserBase( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionI
 
 //============================================================================
 GuiUserBase::GuiUserBase( const GuiUserBase& rhs )
-    : m_MyApp( rhs.m_MyApp )
+    : QWidget()
+    , m_MyApp( rhs.m_MyApp )
     , m_NetIdent( rhs.m_NetIdent )
     , m_OnlineId( rhs.m_OnlineId )
     , m_SessionId( rhs.m_SessionId )

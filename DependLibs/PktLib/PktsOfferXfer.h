@@ -25,8 +25,7 @@
 
 #define MAX_OFFER_LIST_LEN				4096	// maximum length of list of Offers
 
-
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 //============================================================================
@@ -289,6 +288,6 @@ private:
 	uint32_t					m_u32Res2;
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 

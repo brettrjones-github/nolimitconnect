@@ -77,6 +77,6 @@ private:
 	char						m_as8GroupList[ MAX_SHARED_GROUP_LIST_LEN ];
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 

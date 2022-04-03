@@ -63,7 +63,7 @@ private:
 	uint16_t					m_u16Res1{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 
 

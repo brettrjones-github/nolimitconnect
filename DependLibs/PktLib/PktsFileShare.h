@@ -24,8 +24,7 @@
 #define PKT_TYPE_FILE_MAX_DATA_LEN		14320	// maximum length of chunk of file data
 #define MAX_FILE_LIST_LEN				4096	// maximum length of list of files
 
-
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktFileGetReq : public VxPktHdr
@@ -475,6 +474,6 @@ private:
 	uint32_t					m_u32Res2;
 };
 
-#pragma pack() 
-#pragma pack(pop)
+#pragma pack(pop) 
+
 

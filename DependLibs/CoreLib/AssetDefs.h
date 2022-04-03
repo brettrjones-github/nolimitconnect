@@ -110,8 +110,8 @@ enum EAssetSendState
 	eMaxAssetSendState	
 };
 
-bool VxIsValidAssetType( EAssetType assetType );
+bool VxIsValidAssetType( enum EAssetType assetType );
 EAssetType VxFileNameToAssetType( std::string fileName );
 EAssetType VxFileTypeToAssetType( uint8_t fileType );
 
-const char * DescribeAssetType( EAssetType assetType );
+const char * DescribeAssetType( enum EAssetType assetType );

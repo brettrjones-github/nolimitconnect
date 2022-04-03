@@ -245,6 +245,6 @@ private:
     VxGUID                      m_SessionId;
 };
 
-#pragma pack()
 #pragma pack(pop)
+
 

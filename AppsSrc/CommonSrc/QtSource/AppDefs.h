@@ -253,10 +253,10 @@ enum EThemeType
 };
 
 // returns feature name ( never translated )
-const char *					DescribeAppFeature( EAppFeatures appFeature );
+const char *					DescribeAppFeature( enum EAppFeatures appFeature );
 
 // returns applet icon
-EMyIcons						GetAppletIcon( EApplet applet );
+EMyIcons						GetAppletIcon( enum EApplet applet );
 
 // returns text to go under applet icon ( is translated )
-QString							DescribeApplet( EApplet applet );
+QString							DescribeApplet( enum EApplet applet );

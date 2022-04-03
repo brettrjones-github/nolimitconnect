@@ -43,7 +43,7 @@ enum ETodGameAction
 	eMaxTodGameAction // must be last
 };
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktTodGameStats : public VxPktHdr
@@ -111,5 +111,4 @@ private:
 
 };
 
-#pragma pack()
 #pragma pack(pop)

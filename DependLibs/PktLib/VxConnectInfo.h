@@ -28,7 +28,7 @@
 #define MAX_ONLINE_DESC_LEN		    32	//maximum length of online description including 0 terminator
 #define MAX_NET_HOST_URL_LEN		64	//maximum length of a ptop url including 0 terminator
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktBlobEntry;
@@ -296,5 +296,4 @@ private:
     int64_t					    m_s64TimeTcpLastContactMs{0};	// time of last contact via tcp
 };
 
-#pragma pack()
 #pragma pack(pop)

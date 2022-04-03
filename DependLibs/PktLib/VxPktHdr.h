@@ -30,7 +30,7 @@
 #define ROUTE_FLAG_CHAT_RELAY           0x04
 #define ROUTE_FLAG_RAND_CONNECT_RELAY   0x08
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktBlobEntry;

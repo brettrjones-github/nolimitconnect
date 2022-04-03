@@ -13,10 +13,10 @@
 //============================================================================
 #pragma once
 
-#include <CoreLib/VxGUID.h>
-
 #include "ui_ThumbnailChooseWidget.h"
 #include <QLabel>
+
+#include <CoreLib/VxGUID.h>
 
 class AppCommon;
 class AppletBase;

@@ -38,7 +38,6 @@ private:
 	uint32_t							m_u32Res6;
 };
 
-#pragma pack()
 #pragma pack(pop)
 
 #endif // PKT_TCP_PUNCH_H

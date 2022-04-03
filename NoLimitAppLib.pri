@@ -1,12 +1,25 @@
 message("Building AppCommonLib")
 
-# C++11 support
-versionAtMost(QT_VERSION, 5.15.2){
-    CONFIG += c++11
+win32{
+    # C++11 support
+    versionAtMost(QT_VERSION, 5.15.2){
+        CONFIG += c++11
+    }
+
+    versionAtLeast(QT_VERSION, 6.0.0)){
+        CONFIG += c++17
+    }
 }
 
-versionAtLeast(QT_VERSION, 6.0.0)){
-    CONFIG += c++17
+android{
+    # C++11 support
+    versionAtMost(QT_VERSION, 5.15.2){
+        CONFIG += c++11
+    }
+
+    versionAtLeast(QT_VERSION, 6.0.0)){
+        CONFIG += c++17
+    }
 }
 
 unix:!android{
@@ -19,7 +32,6 @@ INCLUDEPATH += $$PWD/AppsSrc/CommonSrc/QtSource
 INCLUDEPATH += $$PWD/AppsSrc
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
-INCLUDEPATH += $$PWD/GoTvCore
 
 HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AccountMgr.h \

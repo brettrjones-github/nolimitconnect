@@ -36,25 +36,25 @@ public:
 	void						myIconsStartup( void );
 
 	//! get preloaded icon
-	QIcon&						getIcon( EMyIcons eMyIcon );
+    QIcon&						getIcon( enum EMyIcons eMyIcon );
 	//! get pixmap of given icon, size and color
-	QPixmap						getIconPixmap( EMyIcons myIcon, QSize iconSize, QColor& iconColor );
+    QPixmap						getIconPixmap( enum EMyIcons myIcon, QSize iconSize, QColor& iconColor );
 	//! get pixmap of given icon and size but do not colorize
-	QPixmap						getIconPixmap( EMyIcons myIcon, QSize iconSize );
+    QPixmap						getIconPixmap( enum EMyIcons myIcon, QSize iconSize );
 	//! get icon for give friendship
-	EMyIcons					getFriendshipIcon( EFriendState eFriendship );
+    EMyIcons					getFriendshipIcon( enum EFriendState eFriendship );
     //! get setting icon for given plugin
-    EMyIcons					getPluginSettingsIcon( EPluginType ePluginType );
+    EMyIcons					getPluginSettingsIcon( enum EPluginType ePluginType );
 	//! get icon for given plugin
-	EMyIcons					getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginAccess = ePluginAccessOk );
+    EMyIcons					getPluginIcon( enum EPluginType ePluginType, EPluginAccess ePluginAccess = ePluginAccessOk );
     //! get setup icon for given plugin
-    EMyIcons                    getPluginSetupIcon( EPluginType ePluginType );
+    EMyIcons                    getPluginSetupIcon( enum EPluginType ePluginType );
 	//! get locked plugin icon
-	EMyIcons					getLockedPluginIcon( EPluginType ePluginType );
+    EMyIcons					getLockedPluginIcon( enum EPluginType ePluginType );
 	//! get disabled plugin icon
-	EMyIcons					getDisabledPluginIcon( EPluginType ePluginType );
+    EMyIcons					getDisabledPluginIcon( enum EPluginType ePluginType );
 	//! get disabled plugin icon
-	EMyIcons					getIgnoredPluginIcon( EPluginType ePluginType );
+    EMyIcons					getIgnoredPluginIcon( enum EPluginType ePluginType );
 	//! get icon of given file type
 	EMyIcons					getFileIcon( uint8_t u8FileType );
 

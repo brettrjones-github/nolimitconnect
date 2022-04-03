@@ -51,6 +51,7 @@ int64_t                     TimeElapsedGmtMs( int64_t startTimeGmtMs );
 #ifdef __cplusplus
 
 #include <string>
+
 #pragma pack(push)
 #pragma pack(1)
 
@@ -91,7 +92,6 @@ public:
     int32_t                     m_ZoneOffsMs;       // Time zone offset in milliseconds
 };
 
-#pragma pack()
 #pragma pack(pop)
 
 #endif // c++ only

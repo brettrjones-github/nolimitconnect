@@ -239,5 +239,4 @@ public:
 	uint16_t                    m_u16Port{ 0 };
 };
 
-#pragma pack()
 #pragma pack(pop)

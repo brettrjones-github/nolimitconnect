@@ -45,7 +45,7 @@ inline unsigned long VxAverageRgb(const unsigned long& a, const unsigned long& b
 
 //============================================================================
 // Smooth Bresenham rescale adapted from DRDobbs article
-#pragma pack(push) 
+
 #pragma pack(1)
 class PIXEL
 {
@@ -63,7 +63,7 @@ public:
 
 	uint32_t toU32( void ){ return (unsigned long)r << 24 | g << 16 | b << 8 | 0xff; }
 };
-#pragma pack(pop)
+#pragma pack()
 
 //============================================================================
 void VxAverageRgb( PIXEL& aIn, PIXEL& bIn, PIXEL cAvg )

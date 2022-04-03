@@ -20,7 +20,7 @@
 
 #include <string>
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktBlobEntry;
@@ -73,6 +73,5 @@ protected:
 	uint16_t					m_u16ResConnectId1{ 0 };			// reserved for possible ipv6 port or local port
 };
 
-#pragma pack()
 #pragma pack(pop)
 

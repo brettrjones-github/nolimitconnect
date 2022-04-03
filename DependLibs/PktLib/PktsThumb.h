@@ -230,5 +230,4 @@ public:
     //=== vars ===//
 };
 
-#pragma pack()
 #pragma pack(pop)

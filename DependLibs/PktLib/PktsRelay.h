@@ -17,7 +17,7 @@
 #include "PktTypes.h"
 #include "VxCommon.h"
 
-#pragma pack(push) 
+#pragma pack(push)
 #pragma pack(1)
 
 class PktRelayServiceReq : public VxPktHdr
@@ -267,5 +267,5 @@ private:
 	uint32_t					m_CurRelayUsers;
 };
 
-#pragma pack()
 #pragma pack(pop)
+

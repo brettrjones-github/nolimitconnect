@@ -628,24 +628,19 @@ void GuiUserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, GuiU
 {
     if( userSession && userItem && userSession->getUserIdent() )
     {
-        EHostType hostType = eHostTypeUnknown;
         EPluginType pluginType = ePluginTypeInvalid;
         switch( getUserViewType() )
         {
         case eUserViewTypeGroup:
-            hostType = eHostTypeGroup;
             pluginType = ePluginTypeClientGroup;
             break;
         case eUserViewTypeChatRoom:
-            hostType = eHostTypeChatRoom;
             pluginType = ePluginTypeClientChatRoom;
             break;
         case eUserViewTypeRandomConnect:
-            hostType = eHostTypeRandomConnect;
             pluginType = ePluginTypeClientRandomConnect;
             break;
         default:
-            hostType = eHostTypePeerUserRelayed;
             pluginType = ePluginTypeHostPeerUser;
         }
 
