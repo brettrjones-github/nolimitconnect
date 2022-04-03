@@ -1,5 +1,5 @@
 
-# a subset of GoTvAll.pro to avoid rebuilding rarely changed libs
+# a subset of No Limit Connect o to avoid rebuilding rarely changed libs
 
 TEMPLATE     = subdirs
 CONFIG += no_docs_target

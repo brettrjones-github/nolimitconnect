@@ -98,7 +98,6 @@ HEADERS += 	$$PWD/DependLibs/ffmpeg/libavformat/aiff.h \
     $$PWD/DependLibs/ffmpeg/libavformat/rtmp_avformat.h \
     $$PWD/DependLibs/ffmpeg/libavformat/rtmp_log_avformat.h \
     $$PWD/DependLibs/ffmpeg/config_ffmpeg.h \
-    $$PWD/GoTvAppConfig.h \
     $$PWD/AppCompilerConfig.h \
     $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h \

@@ -29,7 +29,7 @@ public:
 	VxConnectInfo&				getConnectInfo( void )				{ return m_ConnectInfo; }
 	VxGUID&						getMyOnlineId()						{ return m_ConnectInfo.getMyOnlineId(); }
 
-	void						setConnectReason( EConnectReason eConnectReason );
+    void						setConnectReason( enum EConnectReason eConnectReason );
 	EConnectReason				getConnectReason( void );
 
 	void						setTimeLastConnectAttemptMs( uint64_t u32TimeSec );

@@ -24,7 +24,7 @@ public:
     virtual void				callbackConnectAdded( ConnectInfo * userHostInfo ){};
     virtual void				callbackConnectUpdated( ConnectInfo * userHostInfo ){};
     virtual void				callbackConnectRemoved( VxGUID& userHostId ){};
-    virtual void				callbackConnectOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState ) {};
-    virtual void				callbackConnectOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId ) {};
+    virtual void				callbackConnectOfferState( VxGUID& hostOnlineId, enum EOfferState userHostOfferState ) {};
+    virtual void				callbackConnectOnlineState( VxGUID& hostOnlineId, enum EOnlineState onlineState, VxGUID& connectionId ) {};
 };
 

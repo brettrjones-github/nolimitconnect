@@ -1,5 +1,4 @@
-HEADERS += 	$$PWD/../../../../GoTvAppConfig.h \
-	$$PWD/../../../../AppCompilerConfig.h \
+HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
 	$$PWD/../../../../AppCpuArchDefines.h \
 	$$PWD/../../../../AppDependLibrariesConfig.h \
 	$$PWD/../../../../AppTargetOsConfig.h \

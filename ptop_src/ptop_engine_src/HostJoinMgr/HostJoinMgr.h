@@ -36,10 +36,10 @@ public:
 	virtual ~HostJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
-    virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
-    virtual EJoinState	        fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
-    EMembershipState            fromGuiQueryMembership( EHostType hostType, VxNetIdent& netIdent );
-    void                        fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList );
+    virtual int					fromGuiGetJoinedListCount( enum EPluginType pluginType );
+    virtual EJoinState	        fromGuiQueryJoinState( enum EHostType hostType, VxNetIdent& netIdent );
+    EMembershipState            fromGuiQueryMembership( enum EHostType hostType, VxNetIdent& netIdent );
+    void                        fromGuiGetJoinedStateList(enum  EPluginType pluginType, enum EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList );
     void                        fromGuiListAction( EListAction listAction );
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
@@ -62,7 +62,7 @@ public:
 
     HostJoinInfo*               findUserJoinInfo( GroupieId& groupieId );
 
-    void                        changeJoinState( GroupieId& groupieId, EJoinState joinState );
+    void                        changeJoinState( GroupieId& groupieId, enum EJoinState joinState );
     EJoinState                  getHostJoinState( GroupieId& groupieId );
 
 protected:

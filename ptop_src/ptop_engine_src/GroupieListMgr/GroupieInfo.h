@@ -25,7 +25,7 @@ class GroupieInfo
 public:
 	GroupieInfo() = default;
 	GroupieInfo( const GroupieInfo& rhs );
-    GroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& groupieUrl );
+    GroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, std::string& groupieUrl );
     GroupieInfo( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t timeModified );
     virtual ~GroupieInfo() = default;
 
@@ -47,7 +47,7 @@ public:
     void				        setHostedOnlineId( VxGUID& onlineId )               { m_GroupieId.setHostedOnlineId( onlineId ); }
     VxGUID&                     getHostedOnlineId( void )                           { return m_GroupieId.getHostedOnlineId(); }
 
-    void			            setHostType( EHostType hostType )                   { m_GroupieId.setHostType( hostType ); }
+    void			            setHostType( enum EHostType hostType )              { m_GroupieId.setHostType( hostType ); }
     EHostType	                getHostType( void )                                 { return m_GroupieId.getHostType(); }
 
     virtual void                setIsFavorite( bool isFavorite )                    { m_IsFavorite = isFavorite; }

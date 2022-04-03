@@ -31,11 +31,11 @@ public:
 
     bool                        isHostInviteValid( void );
 
-    virtual void				setHostedId( HostedId& hostedId )                   { m_HostedId = hostedId; }
+    virtual void				setHostedId( HostedId& hostedId )               { m_HostedId = hostedId; }
     HostedId&                   getHostedId( void )                                 { return m_HostedId; }
     virtual void				setOnlineId( VxGUID& onlineId )                     { m_HostedId.setOnlineId( onlineId ); }
     virtual VxGUID&             getOnlineId( void )                                 { return m_HostedId.getOnlineId(); }
-    virtual void			    setHostType( EHostType hostType )                   { m_HostedId.setHostType( hostType ); }
+    virtual void			    setHostType( enum EHostType hostType )              { m_HostedId.setHostType( hostType ); }
     virtual EHostType	        getHostType( void )                                 { return m_HostedId.getHostType(); }
 
     virtual void                setIsFavorite( bool isFavorite )                    { m_IsFavorite = isFavorite; }

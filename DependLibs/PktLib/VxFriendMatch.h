@@ -57,7 +57,7 @@ public:
 
 
 	//! set permission level I have given to friend
-	void						setMyFriendshipToHim( EFriendState eFriendState );
+    void						setMyFriendshipToHim( enum EFriendState eFriendState );
 	//! get permission level I have given to friend
 	EFriendState				getMyFriendshipToHim( void );
 

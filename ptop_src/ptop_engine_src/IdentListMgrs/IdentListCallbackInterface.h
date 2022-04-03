@@ -20,7 +20,7 @@ class VxGUID;
 class IdentListCallbackInterface
 {
 public:
-    virtual void				callbackUserListUpdated( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
-    virtual void				callbackUserListRemoved( EUserViewType listType, VxGUID& onlineId ) {};
+    virtual void				callbackUserListUpdated( enum EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
+    virtual void				callbackUserListRemoved( enum EUserViewType listType, VxGUID& onlineId ) {};
 };
 

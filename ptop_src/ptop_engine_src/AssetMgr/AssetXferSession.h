@@ -53,7 +53,7 @@ public:
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileXferInfo.getFileHashId(); }
 
 	VxFileXferInfo&				getXferInfo( void )							{ return m_FileXferInfo; }
-	void						setXferDirection( EXferDirection dir )		{ m_FileXferInfo.setXferDirection( dir ); }
+    void						setXferDirection( enum EXferDirection dir )		{ m_FileXferInfo.setXferDirection( dir ); }
 	EXferDirection				getXferDirection( void )					{ return m_FileXferInfo.getXferDirection(); }
 
 	void						reset( void );
@@ -76,7 +76,7 @@ protected:
 	int							m_iPercentComplete;
 	VxSktBase *					m_Skt;
 	VxNetIdent *				m_Ident;
-	uint32_t							m_Error;
+    uint32_t					m_Error;
 	AssetInfo					m_AssetInfo;
 
 private:

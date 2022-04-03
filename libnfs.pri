@@ -12,7 +12,6 @@ HEADERS += 	$$PWD/DependLibs/libnfs/config_libnfs.h \
     $$PWD/DependLibs/libnfs/slist.h \
     $$PWD/DependLibs/libnfs/win32_compat.h \
     $$PWD/DependLibs/libnfs/win32_errnowrapper.h \
-    $$PWD/GoTvAppConfig.h \
     $$PWD/AppCompilerConfig.h \
     $$PWD/AppCpuArchDefines.h \
     $$PWD/AppDependLibrariesConfig.h

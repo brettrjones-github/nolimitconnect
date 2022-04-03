@@ -39,14 +39,14 @@ class AssetBaseInfo : public BaseInfo
 public:
     AssetBaseInfo();
     AssetBaseInfo( const AssetBaseInfo& rhs );
-    AssetBaseInfo( EAssetType assetType );
-    AssetBaseInfo( EAssetType assetType, VxGUID& onlineId, int64_t modifiedTime = 0 );
-    AssetBaseInfo( EAssetType assetType, VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
-    AssetBaseInfo( EAssetType assetType, const std::string& fileName );
-    AssetBaseInfo( EAssetType assetType, const std::string& fileName, VxGUID& assetId );
-    AssetBaseInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
-    AssetBaseInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
-    AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& assetId );
+    AssetBaseInfo( enum EAssetType assetType );
+    AssetBaseInfo( enum EAssetType assetType, VxGUID& onlineId, int64_t modifiedTime = 0 );
+    AssetBaseInfo( enum EAssetType assetType, VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
+    AssetBaseInfo( enum EAssetType assetType, const std::string& fileName );
+    AssetBaseInfo( enum EAssetType assetType, const std::string& fileName, VxGUID& assetId );
+    AssetBaseInfo( enum EAssetType assetType, const char * fileName, uint64_t fileLen );
+    AssetBaseInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
+    AssetBaseInfo( enum EAssetType assetType, VxGUID& creatorId, VxGUID& assetId );
     virtual ~AssetBaseInfo() = default;
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
@@ -94,7 +94,7 @@ public:
     virtual void				setAssetTag( const char * assetTag );
     virtual std::string&		getAssetTag( void ) { return m_AssetTag; }
 
-    virtual void				setAssetType( EAssetType assetType )            { m_u16AssetType = (uint16_t)assetType; }
+    virtual void				setAssetType( enum EAssetType assetType )       { m_u16AssetType = (uint16_t)assetType; }
     virtual EAssetType			getAssetType( void )                            { return (EAssetType)m_u16AssetType; }
 
     virtual void				setAssetLength( int64_t assetLength )           { m_s64AssetLen = assetLength; }
@@ -123,7 +123,7 @@ public:
     virtual void				setAttributeFlags( uint16_t locFlags )          { m_AttributeFlags = locFlags; }
     virtual uint16_t			getAttributeFlags( void )                       { return m_AttributeFlags; }
 
-    virtual void				setAssetSendState( EAssetSendState sendState )  { m_AssetSendState = sendState; }
+    virtual void				setAssetSendState( enum EAssetSendState sendState )  { m_AssetSendState = sendState; }
     virtual EAssetSendState		getAssetSendState( void )                       { return m_AssetSendState; }
 
     virtual void				setCreationTime( uint64_t timestamp )           { m_CreationTime = timestamp; m_InfoModifiedTime = timestamp; m_AccessedTime = timestamp; }
@@ -144,8 +144,8 @@ public:
     virtual void				updateAssetInfo( VxThread * callingThread );
     virtual bool				needsHashGenerated( void );
 
-    static const char *			getDefaultFileExtension( EAssetType assetType );
-    static const char *			getSubDirectoryName( EAssetType assetType );
+    static const char *			getDefaultFileExtension( enum EAssetType assetType );
+    static const char *			getSubDirectoryName( enum EAssetType assetType );
 
 public:
     //=== vars ===//

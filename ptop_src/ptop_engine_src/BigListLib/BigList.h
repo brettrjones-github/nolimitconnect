@@ -61,7 +61,7 @@ public:
 	//! find contact
 	BigListInfo *				findBigListInfo( const char * pUserName, bool isAlreadyLocked = false );		// contact to look for
 	//! update which list person is in
-	void						updateVectorList( EFriendState oldFriendship, BigListInfo * poInfo );
+    void						updateVectorList( enum EFriendState oldFriendship, BigListInfo * poInfo );
 
 	//=== vars ===//
 #ifdef TARGET_OS_ANDROID
@@ -94,7 +94,7 @@ protected:
 	//! remove everybody in list
 	void						removeAllInfos( void );
 	//! remove from whichever vector list person is in
-	void						removeFromVectorList(  EFriendState friendship, BigListInfo *poInfo );
+    void						removeFromVectorList( enum EFriendState friendship, BigListInfo *poInfo );
 	//! add to whichever vector list person belongs in
-	void						addToVectorList( EFriendState friendship, BigListInfo *poInfo );
+    void						addToVectorList( enum EFriendState friendship, BigListInfo *poInfo );
 };

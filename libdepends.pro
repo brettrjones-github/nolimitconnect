@@ -142,7 +142,6 @@ include(libupnp2lib.pri)
 ### build seperately include(../../DependLibs/libcdio/build/Qt/libcdio.pri)
 
 HEADERS += \
-    GoTvAppConfig.h \
     AppCompilerConfig.h \
     AppCpuArchDefines.h \
     AppDependLibrariesConfig.h

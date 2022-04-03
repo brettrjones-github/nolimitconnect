@@ -26,12 +26,12 @@ class PktHostOfferReq : public VxPktHdr
 public:
     PktHostOfferReq();
 
-    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
     void						setOfferMsg( const char * msg );
@@ -54,12 +54,12 @@ class PktHostOfferReply : public VxPktHdr
 public:
     PktHostOfferReply();
 
-    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
     void						setOfferMsg( const char * msg );
@@ -82,12 +82,12 @@ class PktHostJoinReq : public VxPktHdr
 public:
     PktHostJoinReq();
 
-    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
     void                        setSessionId( VxGUID& sessionId )               { m_SessionId = sessionId; }
     VxGUID                      getSessionId( void )                            { return m_SessionId; }
@@ -108,12 +108,12 @@ class PktHostJoinReply : public VxPktHdr
 public:
     PktHostJoinReply();
 
-    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
     void                        setSessionId( VxGUID sessionId )                { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                            { return m_SessionId; }
@@ -139,12 +139,12 @@ class PktHostLeaveReq : public VxPktHdr
 public:
     PktHostLeaveReq();
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
-    void                        setPluginType( EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
+    void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
     EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
     void                        setSessionId( VxGUID& sessionId ) { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }
@@ -165,12 +165,12 @@ class PktHostLeaveReply : public VxPktHdr
 public:
     PktHostLeaveReply();
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
-    void                        setPluginType( EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
+    void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
     EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
     void                        setSessionId( VxGUID sessionId ) { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }
@@ -196,12 +196,12 @@ class PktHostUnJoinReq : public VxPktHdr
 public:
     PktHostUnJoinReq();
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
-    void                        setPluginType( EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
+    void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
     EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
     void                        setSessionId( VxGUID& sessionId ) { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }
@@ -222,12 +222,12 @@ class PktHostUnJoinReply : public VxPktHdr
 public:
     PktHostUnJoinReply();
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
-    void                        setPluginType( EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
+    void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
     EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
 
-    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
     void                        setSessionId( VxGUID sessionId ) { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }

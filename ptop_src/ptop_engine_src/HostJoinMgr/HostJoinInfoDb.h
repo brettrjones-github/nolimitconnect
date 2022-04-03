@@ -44,10 +44,10 @@ protected:
     bool						addHostJoin( GroupieId& groupieId,
                                                 VxGUID&			thumbId,
                                                 uint64_t		infoModTime,                             
-                                                EJoinState      joinState,
+                                                enum EJoinState      joinState,
                                                 uint64_t		lastConnectMs,
                                                 uint64_t		lastJoinMs,
-                                                EFriendState    friendState,
+                                                enum EFriendState    friendState,
                                                 uint32_t        hostFlags,
                                                 std::string     hostUrl
                                             );

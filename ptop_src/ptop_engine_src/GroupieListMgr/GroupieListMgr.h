@@ -49,25 +49,25 @@ public:
     bool                        setGroupieUrlAndTitleAndDescription( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
     bool                        getGroupieUrlAndTitleAndDescription( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
-    bool                        fromGuiQueryMyGroupieInfo( EHostType hostType, std::vector<GroupieInfo>& groupieInfoList );
-    bool                        fromGuiQueryGroupieInfoList( EHostType hostType, std::vector<GroupieInfo>& groupieInfoList, VxGUID& hostIdIfNullThenAll );
+    bool                        fromGuiQueryMyGroupieInfo( enum EHostType hostType, std::vector<GroupieInfo>& groupieInfoList );
+    bool                        fromGuiQueryGroupieInfoList( enum EHostType hostType, std::vector<GroupieInfo>& groupieInfoList, VxGUID& hostIdIfNullThenAll );
 
     // returns true if retGroupieInfo was filled
-    bool                        updateGroupieInfo( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase, GroupieInfo* retGroupieInfo = nullptr );
-    void                        updateGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& hosted, int64_t timestampMs = 0 );
+    bool                        updateGroupieInfo( enum EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase, GroupieInfo* retGroupieInfo = nullptr );
+    void                        updateGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, std::string& hosted, int64_t timestampMs = 0 );
 
     void                        updateGroupieList( VxNetIdent* netIdent, VxSktBase* sktBase );
-    void                        groupieSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, GroupieInfo& groupieInfo );
-    void                        groupieSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr );
+    void                        groupieSearchResult( enum EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, GroupieInfo& groupieInfo );
+    void                        groupieSearchCompleted( enum EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, enum ECommErr commErr );
 
-    virtual void				onPktGroupieInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, enum ECommErr commErr, PluginBaseHostService* plugin );
     virtual void				onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin );
 
-    virtual void				onPktGroupieAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, enum ECommErr commErr, PluginBaseHostService* plugin );
     virtual void				onPktGroupieAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin );
-    virtual void				onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, enum ECommErr commErr, PluginBaseHostService* plugin );
     virtual void				onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin );
-    virtual void				onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, enum ECommErr commErr, PluginBaseHostService* plugin );
     virtual void				onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin );
 
     void                        onGroupieAnnounceAdded( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
@@ -77,35 +77,35 @@ public:
     void                        onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
 protected:
-    virtual bool                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
-    virtual void                onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus,
+    virtual bool                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
+    virtual void                onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, enum ERunTestStatus testStatus,
                                         EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
 
-    virtual bool                onContactHandshaking( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
-    virtual void                onHandshakeTimeout( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
-    virtual void                onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual bool                onContactHandshaking( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
+    virtual void                onHandshakeTimeout( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
     /// returns false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
-    virtual bool                onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual bool                onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override;
     virtual void                onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus,
-                                        EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
-    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+                                        enum EConnectReason connectReason = eConnectReasonUnknown, enum ECommErr commErr = eCommErrNone ) override {};
+    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBased, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
-    void						removeGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType );
+    void						removeGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType );
     void						clearGroupieInfoList( void );
 
     void                        updateAndRequestInfoIfNeeded( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase );
 
-    bool                        updateIsFavorite( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, bool isFavorite );
-    bool                        updateLastConnected( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, int64_t lastConnectedTime );
-    bool                        updateLastJoined( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, int64_t lastJoinedTime );
-    bool                        updateGroupieUrlAndTitleAndDescription( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxNetIdent* netIdent = nullptr );
+    bool                        updateIsFavorite( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, bool isFavorite );
+    bool                        updateLastConnected( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, int64_t lastConnectedTime );
+    bool                        updateLastJoined( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, int64_t lastJoinedTime );
+    bool                        updateGroupieUrlAndTitleAndDescription( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxNetIdent* netIdent = nullptr );
 
-    bool                        requestGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase );
+    bool                        requestGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase );
 
     void                        announceGroupieInfoUpdated( GroupieInfo* groupieInfo );
     void                        announceGroupieInfoSearchResult( GroupieInfo* groupieInfo, VxGUID& sessionId );
-    void                        announceGroupieInfoRemoved( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType );
+    void                        announceGroupieInfoRemoved( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType );
 
     void						addToListInJoinedTimestampOrder( std::vector<GroupieInfo>& groupieInfoList, GroupieInfo& groupieInfo );
 
@@ -113,8 +113,8 @@ protected:
     void						unlockClientList( void )        { m_GroupieInfoListClientMutex.unlock(); }
 
     void                        logCommError( ECommErr commErr, const char* desc, VxSktBase* sktBase, VxNetIdent* netIdent );
-    void                        updateFromGroupieSearchBlob( EHostType hostType, VxGUID& hostOnlineId, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount );
-    bool                        requestMoreGroupiesFromHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextGroupieOnlineId, PluginBase* plugin );
+    void                        updateFromGroupieSearchBlob( enum EHostType hostType, VxGUID& hostOnlineId, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount );
+    bool                        requestMoreGroupiesFromHost( enum EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextGroupieOnlineId, PluginBase* plugin );
 
     void                        connectToGroupieIfPossible( GroupieInfo& groupieInfo, EConnectReason connectReason );
 

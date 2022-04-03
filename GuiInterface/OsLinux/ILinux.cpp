@@ -25,7 +25,7 @@
 #ifdef TARGET_OS_LINUX
 #include "GuiInterface/IGoTv.h" 
 
-
+#if ENABLE_KODI
 #include "CompileInfo.h"
 #include "threads/Thread.h"
 #include "platform/xbmc.h"
@@ -39,9 +39,12 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "GoTvCoreUtil.h"
-#include <CoreLib/VxDebug.h>
 
 using namespace XFILE;
+
+#endif // ENABLE_KODI
+
+#include <CoreLib/VxDebug.h>
 
 //============================================================================
 ILinux::ILinux( IGoTv& gotv )
@@ -56,7 +59,9 @@ bool ILinux::doPreStartup()
     LogModule(eLogStartup, LOG_VERBOSE, "ILinux::doPreStartup");
     // this fixes crash if OPENSSL_CONF is set to existed openssl.cfg
     // need to set it as soon as possible  
+#if ENABLE_KODI
     CEnvironment::unsetenv( "OPENSSL_CONF" );
+#endif// ENABLE_KODI
     //g_advancedSettings.Initialize();
     return true;
 }
@@ -69,8 +74,6 @@ bool ILinux::doStartup()
 
 //=== stages of run ===//
 //============================================================================
-
-//bool  IWin32::doRun()
 
 //=== stages of destroy ===//
 //============================================================================

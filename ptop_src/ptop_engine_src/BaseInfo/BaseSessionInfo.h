@@ -30,7 +30,7 @@ public:
 	BaseSessionInfo&			operator=( const BaseSessionInfo& rhs ); 
     bool			            operator==( const BaseSessionInfo& rhs ); 
 
-    virtual void				setPluginType( EPluginType hostType )           { m_PluginType = hostType; }
+    virtual void				setPluginType( enum EPluginType hostType )      { m_PluginType = hostType; }
     virtual EPluginType			getPluginType( void )                           { return m_PluginType; }
     virtual EHostType			getHostType( void )                             { return PluginTypeToHostType( m_PluginType ); }
 

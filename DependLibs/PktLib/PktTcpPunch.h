@@ -30,12 +30,12 @@ public:
 	VxConnectInfo				m_ConnectInfo;
 
 private:
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
-	uint32_t							m_u32Res3;
-	uint32_t							m_u32Res4;
-	uint32_t							m_u32Res5;
-	uint32_t							m_u32Res6;
+    uint32_t					m_u32Res1;
+    uint32_t					m_u32Res2;
+    uint32_t					m_u32Res3;
+    uint32_t					m_u32Res4;
+    uint32_t					m_u32Res5;
+    uint32_t					m_u32Res6;
 };
 
 #pragma pack(pop)

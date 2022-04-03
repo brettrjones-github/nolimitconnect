@@ -32,14 +32,14 @@ public:
     void						lockConnectInfoDb( void ) { m_ConnectInfoDbMutex.lock(); }
     void						unlockConnectInfoDb( void ) { m_ConnectInfoDbMutex.unlock(); }
 
-    void						addConnect(     EHostType       hostType,
+    void						addConnect(     enum EHostType  hostType,
                                                 VxGUID&			hostOnlineId,  
                                                 uint64_t		hostModTime,
                                                 uint32_t        hostFlags,
                                                 VxGUID&			thumbId,
                                                 uint64_t		thumbModTime,
                                                 VxGUID&			offerId,
-                                                EOfferState		offerState,
+                                                enum EOfferState offerState,
                                                 uint64_t		offerModTime,
                                                 std::string     hostUrl
                                                 );

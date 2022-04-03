@@ -27,11 +27,11 @@ public:
 
 private:
 	//=== vars ===//
-	uint16_t							m_u16Res1;
-	uint32_t							m_u32TimeMs;
-	uint32_t							m_u32Res2;
-	uint32_t							m_u32Res3;
-	uint32_t							m_u32Res4;
+    uint16_t					m_u16Res1;
+    uint32_t					m_u32TimeMs;
+    uint32_t					m_u32Res2;
+    uint32_t					m_u32Res3;
+    uint32_t					m_u32Res4;
 };
 
 #pragma pack(pop)

@@ -44,8 +44,8 @@ public:
 	void						setCanPushToTalk( bool canPtt ) { m_CanPushToTalk = (bool)( canPtt ); }
 	bool 						getCanPushToTalk( void )		{ return  ( bool )( m_CanPushToTalk ); }
 
-	void						setHostMembership( EHostType hostType, EMembershipState membership );
-	EMembershipState			getHostMembership( EHostType hostType );
+    void						setHostMembership( enum EHostType hostType, enum EMembershipState membership );
+    EMembershipState			getHostMembership( enum EHostType hostType );
 
 private:
 	//=== vars ===//

@@ -26,7 +26,7 @@ class PktFriendOfferReq : public VxPktHdr
 public:
     PktFriendOfferReq();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
 
 	void						setOfferMsg( const char * msg );
@@ -47,7 +47,7 @@ class PktFriendOfferReply : public VxPktHdr
 public:
     PktFriendOfferReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
 
     void						setOfferMsg( const char * msg );

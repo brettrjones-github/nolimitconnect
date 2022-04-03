@@ -53,7 +53,7 @@ public:
 	VxSha1Hash&					getFileHashId( void )						    { return m_FileXferInfo.getFileHashId(); }
 
 	VxFileXferInfo&				getXferInfo( void )							    { return m_FileXferInfo; }
-	void						setXferDirection( EXferDirection dir )		    { m_FileXferInfo.setXferDirection( dir ); }
+    void						setXferDirection( enum EXferDirection dir )		{ m_FileXferInfo.setXferDirection( dir ); }
 	EXferDirection				getXferDirection( void )					    { return m_FileXferInfo.getXferDirection(); }
 
 	void						reset( void );

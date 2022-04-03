@@ -23,7 +23,7 @@ class BlobCallbackInterface : public AssetBaseCallbackInterface
 public:
 	virtual void				callbackBlobAdded( BlobInfo * assetInfo ){};
 	virtual void				callbackBlobRemoved( BlobInfo * assetInfo ){};
-	virtual void				callbackBlobSendState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ){};
+    virtual void				callbackBlobSendState( VxGUID& assetUniqueId, enum EAssetSendState assetSendState, int param ){};
 
 	virtual void				callbackBlobHistory( void * userData, BlobInfo * assetInfo ){};
 };

@@ -23,7 +23,6 @@ include(libgnu.pri)
 PRE_TARGETDEPS += $$PWD/libssl.pro
 
 HEADERS += \
-    GoTvAppConfig.h \
     AppCompilerConfig.h \
     AppCpuArchDefines.h \
     AppDependLibrariesConfig.h

@@ -71,11 +71,11 @@ public:
     bool                        extractFromBlob( PktBlobEntry& blob );
     PluginPermission&           operator =( const PluginPermission &rhs );
 
-	bool						isPluginEnabled( EPluginType ePlugin );
+    bool						isPluginEnabled( enum EPluginType ePlugin );
 	//! get type of permission user has set for given plugin
-	EFriendState				getPluginPermission( EPluginType ePluginType ); 
+    EFriendState				getPluginPermission( enum EPluginType ePluginType );
 	//! set type of permission user has set for given plugin
-	void						setPluginPermission( EPluginType ePluginType, EFriendState eFriendState ); 
+    void						setPluginPermission( enum EPluginType ePluginType, enum EFriendState eFriendState );
 	//! reset permissions to default values
 	void						setPluginPermissionsToDefaultValues( void );
 	uint8_t *					getPluginPermissions( void )				{ return m_au8Permissions; }
@@ -108,11 +108,11 @@ public:
     bool                        extractFromBlob( PktBlobEntry& blob );
     VxNetIdent&                 operator =( const VxNetIdent &rhs );
 
-	EPluginAccess			    getHisAccessPermissionFromMe( EPluginType ePluginType, bool inGroup = false );
-	bool						isHisAccessAllowedFromMe( EPluginType ePluginType, bool inGroup = false );
+    EPluginAccess			    getHisAccessPermissionFromMe( enum EPluginType ePluginType, bool inGroup = false );
+    bool						isHisAccessAllowedFromMe( enum EPluginType ePluginType, bool inGroup = false );
 
-	EPluginAccess			    getMyAccessPermissionFromHim( EPluginType ePluginType, bool inGroup = false );
-	bool						isMyAccessAllowedFromHim( EPluginType ePluginType, bool inGroup = false );
+    EPluginAccess			    getMyAccessPermissionFromHim( enum EPluginType ePluginType, bool inGroup = false );
+    bool						isMyAccessAllowedFromHim( enum EPluginType ePluginType, bool inGroup = false );
 
 	void						setPingTimeMs( uint16_t pingTime );
 	uint16_t					getPingTimeMs( void );
@@ -128,11 +128,11 @@ public:
 	bool                        isValidNetIdent( void );
 	bool						isOnlineNameValid( void );
 
-	bool						canRequestJoin( EHostType hostType );
-	bool						canJoinImmediate( EHostType hostType ); // request to join will be granted immediate because have sufficient permission
+    bool						canRequestJoin( enum EHostType hostType );
+    bool						canJoinImmediate( enum EHostType hostType ); // request to join will be granted immediate because have sufficient permission
 
 private:
-	EPluginAccess			    getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );
+    EPluginAccess			    getPluginAccessState( enum EPluginType ePluginType, enum EFriendState eFriendState );
 
 	//=== vars ===//
     uint16_t					m_u16AppVersion{ 0 };
@@ -151,5 +151,5 @@ private:
 ///						uint32_t					u32HackLevel,			// 1=severe 2=medium 3=suspicious
 ///						uint32_t					u32IpAddr,				// ip address if identity not known
 ///						const char *		pDescription, ... );	// description of hack attempt
-RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktBase * sktBase, const char * pDescription, ... );
-RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, SOCKET skt, const char * ipAddr, const char * pDescription, ... );
+RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, VxSktBase * sktBase, const char * pDescription, ... );
+RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, SOCKET skt, const char * ipAddr, const char * pDescription, ... );

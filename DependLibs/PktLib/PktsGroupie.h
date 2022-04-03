@@ -37,7 +37,7 @@ public:
     void						setHostOnlineId( VxGUID& guid )     { m_HostOnlineId = guid; }
     VxGUID&                     getHostOnlineId( void )             { return m_HostOnlineId; }
 
-    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError )  { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
 private:
@@ -68,7 +68,7 @@ public:
     void						setHostOnlineId( VxGUID& guid ) { m_HostOnlineId = guid; }
     VxGUID&                     getHostOnlineId( void )         { return m_HostOnlineId; }
 
-    void                        setCommError( ECommErr commError ) { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError ) { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const { return ( ECommErr )m_CommError; }
 
     bool                        setGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
@@ -94,7 +94,7 @@ class PktGroupieAnnounceReq : public VxPktHdr
 public:
     PktGroupieAnnounceReq();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
 
     void						setHostOnlineId( VxGUID& guid )     { m_HostOnlineId = guid; }
@@ -127,7 +127,7 @@ class PktGroupieAnnounceReply : public VxPktHdr
 public:
     PktGroupieAnnounceReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
 
     void						setHostOnlineId( VxGUID& guid )     { m_HostOnlineId = guid; }
@@ -153,7 +153,7 @@ class PktGroupieSearchReq : public VxPktHdr
 public:
     PktGroupieSearchReq();
 
-    void                        setHostType( EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const               { return ( EHostType )m_HostType; }
 
     void						setHostOnlineId( VxGUID& guid )         { m_HostOnlineId = guid; }
@@ -188,7 +188,7 @@ class PktGroupieSearchReply : public VxPktHdr
 public:
     PktGroupieSearchReply();
 
-    void                        setHostType( EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const               { return ( EHostType )m_HostType; }
 
     void						setHostOnlineId( VxGUID& guid )         { m_HostOnlineId = guid; }
@@ -197,7 +197,7 @@ public:
     void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
 
-    void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError )      { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
 
     bool                        addGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
@@ -235,7 +235,7 @@ class PktGroupieMoreReq : public VxPktHdr
 public:
     PktGroupieMoreReq();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
 
     void						setHostOnlineId( VxGUID& guid )     { m_HostOnlineId = guid; }
@@ -262,13 +262,13 @@ class PktGroupieMoreReply : public VxPktHdr
 public:
     PktGroupieMoreReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
 
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
 
-    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError )  { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
     void						setGroupieCountThisPkt( uint16_t inviteCnt ) { m_GroupieThisPktCount = inviteCnt; }

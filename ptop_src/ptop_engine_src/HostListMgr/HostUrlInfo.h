@@ -31,7 +31,7 @@ public:
     virtual void				setOnlineId( VxGUID& onlineId )                     { m_OnlineId = onlineId; }
     virtual VxGUID&             getOnlineId( void )                                 { return m_OnlineId; }
 
-    virtual void			    setHostType( EHostType friendshipToHim )            { m_HostType = friendshipToHim; }
+    virtual void			    setHostType( enum EHostType friendshipToHim )       { m_HostType = friendshipToHim; }
     virtual EHostType	        getHostType( void )                                 { return m_HostType; }
 
     virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }

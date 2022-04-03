@@ -47,7 +47,7 @@ public:
 
     virtual void			    setUserUrl( std::string userUrl )                   { m_UserUrl = userUrl; }
     virtual std::string&	    getUserUrl( void )                                  { return m_UserUrl; }
-    virtual void			    setFriendState( EFriendState friendshipToHim )      { m_FriendState = friendshipToHim; }
+    virtual void			    setFriendState( enum EFriendState friendshipToHim ) { m_FriendState = friendshipToHim; }
     virtual EFriendState	    getFriendState( void )                              { return m_FriendState; }
 
     // temporaries

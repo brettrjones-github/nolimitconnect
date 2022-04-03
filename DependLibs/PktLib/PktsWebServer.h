@@ -30,8 +30,8 @@ public:
 
 private:
 	//=== vars ===//
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
+    uint32_t					m_u32Res1;
+    uint32_t					m_u32Res2;
 };
 
 class PktMyPicSendReply : public VxPktHdr
@@ -40,15 +40,15 @@ public:
 	PktMyPicSendReply();
 
 	void						setTotalDataLen( uint32_t len )			{ m_u32TotalDataLen = htonl(len); }
-	uint32_t							getTotalDataLen( void )				{ return htonl( m_u32TotalDataLen ); }
-	void						setError( uint16_t errCode )				{ m_u16Error = htons(errCode); }
-	uint16_t							getError( void )					{ return ntohs( m_u16Error ); }
+    uint32_t					getTotalDataLen( void )                 { return htonl( m_u32TotalDataLen ); }
+    void						setError( uint16_t errCode )			{ m_u16Error = htons(errCode); }
+    uint16_t					getError( void )                        { return ntohs( m_u16Error ); }
 
 private:
 	//=== vars ===//
-	uint32_t							m_u32TotalDataLen;
-	uint16_t							m_u16Error;
-	uint16_t							m_u16Res1;
+    uint32_t					m_u32TotalDataLen;
+    uint16_t					m_u16Error;
+    uint16_t					m_u16Res1;
 };
 
 #define MAX_WEB_SERVER_CHUNK_LEN 8192 + 4096
@@ -73,10 +73,10 @@ public:
 	unsigned char *				getPayloadBuffer( void )			{ return m_au8Data; }
 private:
 	//=== vars ===//
-	uint64_t							m_u64TotalDataLen;
-	uint64_t							m_u64FileOffset;
-	uint32_t							m_u32ThisDataLen;
-	uint32_t							m_u32Res;
+    uint64_t					m_u64TotalDataLen;
+    uint64_t					m_u64FileOffset;
+    uint32_t					m_u32ThisDataLen;
+    uint32_t					m_u32Res;
 	unsigned char				m_au8Data[0];
 };
 
@@ -86,11 +86,11 @@ public:
 	PktWebServerPicChunkAck();
 
 	void						setTotalDataLen( uint64_t len )			{ m_u64TotalDataLen = htonU64(len); }
-	uint64_t							getTotalDataLen( void )				{ return ntohU64( m_u64TotalDataLen ); }
+    uint64_t					getTotalDataLen( void )				{ return ntohU64( m_u64TotalDataLen ); }
 	void						setFileOffset( uint64_t offs )			{ m_u64FileOffset = htonU64(offs); }
-	uint64_t							getFileOffset( void )				{ return ntohU64( m_u64FileOffset ); }
+    uint64_t					getFileOffset( void )				{ return ntohU64( m_u64FileOffset ); }
 	void						setThisDataLen( uint32_t len )			{ m_u32ThisDataLen = htonl(len); }
-	uint32_t							getThisDataLen( void )				{ return ntohl( m_u32ThisDataLen ); }
+    uint32_t					getThisDataLen( void )				{ return ntohl( m_u32ThisDataLen ); }
 
 private:
 	//=== vars ===//

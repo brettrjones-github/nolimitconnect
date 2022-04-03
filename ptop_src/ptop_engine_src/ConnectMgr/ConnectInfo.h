@@ -36,7 +36,7 @@ public:
     virtual void				setOfferId( VxGUID& offerId )                       { m_OfferId = offerId; }
     virtual void				setOfferId( const char * guid )                     { m_OfferId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getOfferId( void )                                  { return m_OfferId; }
-    virtual void			    setOfferState( EOfferState offerState )             { m_OfferState = offerState; }
+    virtual void			    setOfferState( enum EOfferState offerState )        { m_OfferState = offerState; }
     virtual EOfferState	        getOfferState( void )                               { return m_OfferState; }
     virtual void			    setOfferModifiedTime( uint64_t timeMs )             { m_OfferModMs = timeMs; }
     virtual uint64_t			getOfferModifiedTime( void )                        { return m_OfferModMs; }
@@ -54,7 +54,7 @@ public:
     virtual void				setConnectionId( VxGUID& connectionId )             { m_ConnectionId = connectionId; }
     virtual VxGUID&				getConnectionId( void )                             { return m_ConnectionId; }
 
-    virtual void			    setOnlineState( EOnlineState onlineState )          { m_OnlineState = onlineState; }
+    virtual void			    setOnlineState( enum EOnlineState onlineState )     { m_OnlineState = onlineState; }
     virtual EOnlineState	    getOnlineState( void )                              { return m_OnlineState; }
 
 protected:

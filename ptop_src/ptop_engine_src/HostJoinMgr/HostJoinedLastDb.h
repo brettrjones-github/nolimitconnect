@@ -30,10 +30,10 @@ public:
     void						lockHostJoinedLastDb( void ) { m_HostJoinedLastDbMutex.lock(); }
     void						unlockHostJoinedLastDb( void ) { m_HostJoinedLastDbMutex.unlock(); }
 
-    bool						setJoinedLast( EPluginType pluginType, VxGUID& onlineId, int64_t lastJoinMs, std::string hostUrl );
-    bool						getJoinedLast( EPluginType pluginType, VxGUID& onlineId, int64_t& lastJoinMs, std::string& hostUrl );
+    bool						setJoinedLast( enum EPluginType pluginType, VxGUID& onlineId, int64_t lastJoinMs, std::string hostUrl );
+    bool						getJoinedLast( enum EPluginType pluginType, VxGUID& onlineId, int64_t& lastJoinMs, std::string& hostUrl );
 
-    void						removeJoinedLast( EPluginType pluginType );
+    void						removeJoinedLast( enum EPluginType pluginType );
     void						purgeAllHJoinedLast( void );
 
 protected:

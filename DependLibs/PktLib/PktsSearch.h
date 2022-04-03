@@ -31,7 +31,7 @@ public:
 
 	void						calcPktLen( void );
 
-	void						setSearchType( EScanType eScanType );
+    void						setSearchType( enum EScanType eScanType );
 	EScanType					getSearchType( void );
 	bool						setSearchExpression( const char * pExp );
 	const char *				getSearchExpression( void );

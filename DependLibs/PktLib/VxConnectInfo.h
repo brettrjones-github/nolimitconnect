@@ -162,7 +162,7 @@ public:
     void						setPreferredContent( uint8_t contentType )          { m_ContentType = contentType; }
     uint8_t					    getPreferredContent( void )                         { return m_ContentType; }
 
-    void						setAgeType( EAgeType age )                          { m_u8Age = (uint8_t)age; }
+    void						setAgeType( enum EAgeType age )                     { m_u8Age = (uint8_t)age; }
     EAgeType					getAgeType( void )                                  { return (EAgeType)m_u8Age; }
 
     void						setGender( uint8_t gender )                         { m_u8Gender = gender; }
@@ -177,16 +177,16 @@ public:
     bool                        getThumbnailIdList( std::vector<VxGUID>& thumbIdList );
     bool                        getThumbnailPairList( std::vector<std::pair<VxGUID, int64_t>>& thumbPairList );
 
-    bool                        hasThumbId( EHostType hostType );
-    VxGUID&                     getThumbId( EHostType hostType );
-    VxGUID                      getHostThumbId( EHostType hostType, bool defaultToAvatarThumbId );
-    void                        setHostOrThumbModifiedTime( EHostType hostType, int64_t& timeModified );
-    int64_t                     getHostOrThumbModifiedTime( EHostType hostType );
+    bool                        hasThumbId( enum EHostType hostType );
+    VxGUID&                     getThumbId( enum EHostType hostType );
+    VxGUID                      getHostThumbId( enum EHostType hostType, bool defaultToAvatarThumbId );
+    void                        setHostOrThumbModifiedTime( enum EHostType hostType, int64_t& timeModified );
+    int64_t                     getHostOrThumbModifiedTime( enum EHostType hostType );
 
-    bool                        hasThumbId( EPluginType pluginType );
-    VxGUID&                     getThumbId( EPluginType pluginType );
-    void                        setHostOrThumbModifiedTime( EPluginType pluginType, int64_t& timeModified );
-    int64_t                     getHostOrThumbModifiedTime( EPluginType pluginType );
+    bool                        hasThumbId( enum EPluginType pluginType );
+    VxGUID&                     getThumbId(enum  EPluginType pluginType );
+    void                        setHostOrThumbModifiedTime( enum EPluginType pluginType, int64_t& timeModified );
+    int64_t                     getHostOrThumbModifiedTime( enum EPluginType pluginType );
 
     void                        setAvatarGuid( VxGUID& guid, int64_t timeModified )     { m_AvatarGuid = guid; setModifiedTime( m_AvatarModifiedTime, timeModified ); }
     VxGUID&                     getAvatarThumbGuid( void )                              { return m_AvatarGuid; }

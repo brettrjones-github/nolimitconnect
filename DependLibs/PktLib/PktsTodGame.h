@@ -51,8 +51,8 @@ class PktTodGameStats : public VxPktHdr
 public:
 	PktTodGameStats();
 
-	void						setVar( ETodGameVarId eVarId, int32_t s32Value );
-	int32_t							getVar( ETodGameVarId eVarId );
+    void                            setVar( enum ETodGameVarId eVarId, int32_t s32Value );
+    int32_t							getVar( enum ETodGameVarId eVarId );
 
 private:
 	//=== vars ===//
@@ -74,18 +74,18 @@ class PktTodGameAction : public VxPktHdr
 public:
 	PktTodGameAction();
 
-	void						setAction( ETodGameAction eAction, int32_t s32Val );
+    void						setAction( enum ETodGameAction eAction, int32_t s32Val );
 	ETodGameAction				getActionVarId( void );
-	int32_t							getActionVarValue( void );
+    int32_t						getActionVarValue( void );
 
 private:
 	//=== vars ===//
-	int32_t							m_s32ActionId;
-	int32_t							m_s32ActionVal;
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
-	uint32_t							m_u32Res3;
-	uint32_t							m_u32Res4;
+    int32_t						m_s32ActionId;
+    int32_t						m_s32ActionVal;
+    uint32_t					m_u32Res1;
+    uint32_t					m_u32Res2;
+    uint32_t					m_u32Res3;
+    uint32_t					m_u32Res4;
 
 };
 
@@ -94,20 +94,20 @@ class PktTodGameValue : public VxPktHdr
 public:
 	PktTodGameValue();
 
-	void						setValue( ETodGameVarId eValueId, int32_t s32Val );
+    void						setValue( enum ETodGameVarId eValueId, int32_t s32Val );
 
 	ETodGameVarId				getValueVarId( void );
 
-	int32_t							getValueVar( void );
+    int32_t						getValueVar( void );
 
 private:
 	//=== vars ===//
-	int32_t							m_s32GameValueId;
-	int32_t							m_s32GameValueVar;
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
-	uint32_t							m_u32Res3;
-	uint32_t							m_u32Res4;
+    int32_t						m_s32GameValueId;
+    int32_t						m_s32GameValueVar;
+    uint32_t					m_u32Res1;
+    uint32_t					m_u32Res2;
+    uint32_t					m_u32Res3;
+    uint32_t					m_u32Res4;
 
 };
 

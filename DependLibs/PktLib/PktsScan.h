@@ -31,7 +31,7 @@ public:
 
 	void						calcPktLen( void );
 
-	void						setSearchType( EScanType eScanType );
+    void						setSearchType( enum EScanType eScanType );
 	EScanType					getSearchType( void );
 	bool						setSearchExpression( const char * pExp );
 	const char *				getSearchExpression( void );
@@ -51,7 +51,7 @@ public:
 
 	void calcPktLen( void );
 
-	void						setSearchType( EScanType eScanType );
+    void						setSearchType( enum EScanType eScanType );
 	EScanType					getSearchType( void );
 	void						setSizeOfConnectInfo( uint16_t connectInfoSize )	{ m_u16SizeOfConnectInfo = htons( connectInfoSize ); }
 	uint16_t					getSizeOfConnectInfo( void )					    { return ntohs( m_u16SizeOfConnectInfo ); }

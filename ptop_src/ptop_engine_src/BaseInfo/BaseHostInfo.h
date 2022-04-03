@@ -26,12 +26,12 @@ public:
 
     BaseHostInfo&				operator=( const BaseHostInfo& rhs ); 
 
-    virtual void				setHostType( EHostType hostType )               { m_HostType = hostType; }
+    virtual void				setHostType( enum EHostType hostType )          { m_HostType = hostType; }
     virtual EHostType			getHostType( void )                             { return m_HostType; }
     virtual void				setConnectUrl( VxUrl& connectUrl )              { m_ConnectUrl = connectUrl; }
     virtual VxUrl&			    getConnectUrl( void )                           { return m_ConnectUrl; }
 
-    bool                        isHostMatch( EHostType hostType, VxGUID& onlineId );
+    bool                        isHostMatch( enum EHostType hostType, VxGUID& onlineId );
 
 public:
 	//=== vars ===//

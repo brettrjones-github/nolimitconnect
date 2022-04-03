@@ -26,7 +26,7 @@ class PktHostInviteAnnounceReq : public VxPktHdr
 public:
     PktHostInviteAnnounceReq();
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const { return ( EHostType )m_HostType; }
     void						setSessionId( VxGUID& guid ) { m_SessionId = guid; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }
@@ -54,7 +54,7 @@ class PktHostInviteAnnounceReply : public VxPktHdr
 public:
     PktHostInviteAnnounceReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
     void						setSessionId( VxGUID& guid )        { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )                { return m_SessionId; }
@@ -72,7 +72,7 @@ class PktHostInviteSearchReq : public VxPktHdr
 public:
     PktHostInviteSearchReq();
 
-    void                        setHostType( EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const               { return ( EHostType )m_HostType; }
     void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
@@ -94,13 +94,13 @@ class PktHostInviteSearchReply : public VxPktHdr
 public:
     PktHostInviteSearchReply();
 
-    void                        setHostType( EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )       { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const               { return ( EHostType )m_HostType; }
 
     void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
 
-    void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError )      { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
 
     void						setInviteCountThisPkt( uint16_t inviteCnt ) { m_InviteThisPktCount = inviteCnt; }
@@ -135,7 +135,7 @@ class PktHostInviteMoreReq : public VxPktHdr
 public:
     PktHostInviteMoreReq();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
@@ -157,13 +157,13 @@ class PktHostInviteMoreReply : public VxPktHdr
 public:
     PktHostInviteMoreReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
 
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
 
-    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError )  { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
     void						setInviteCountThisPkt( uint16_t inviteCnt ) { m_InviteThisPktCount = inviteCnt; }

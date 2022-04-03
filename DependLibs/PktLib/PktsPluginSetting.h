@@ -25,11 +25,11 @@ class PktPluginSettingReq : public VxPktHdr
 public:
     PktPluginSettingReq();
 
-    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )                      { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setPluginId( PluginId& pluginId )						    { m_PluginId = pluginId; }
     PluginId&					getPluginId( void )								            { return m_PluginId; }
-    void						setPluginType( EPluginType pluginType )						{ m_PluginType = (uint8_t)pluginType; }
+    void						setPluginType( enum EPluginType pluginType )                { m_PluginType = (uint8_t)pluginType; }
     EPluginType					getPluginType( void )								        { return (EPluginType)m_PluginType; }
     void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
     VxGUID&					    getSessionId( void )								        { return m_SessionId; }
@@ -55,15 +55,15 @@ public:
 
 	void                        calcPktLen( void );
 
-    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )                      { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setPluginId( PluginId& pluginId )						    { m_PluginId = pluginId; }
     PluginId&					getPluginId( void )								            { return m_PluginId; }
-    void						setPluginType( EPluginType pluginType )						{ m_PluginType = (uint8_t)pluginType; }
+    void						setPluginType( enum EPluginType pluginType )				{ m_PluginType = (uint8_t)pluginType; }
     EPluginType					getPluginType( void )								        { return (EPluginType)m_PluginType; }
     void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
     VxGUID&					    getSessionId( void )								        { return m_SessionId; }
-    void                        setCommError( ECommErr commError )                          { m_CommError = (uint8_t)commError; }
+    void                        setCommError( enum ECommErr commError )                     { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                                  { return (ECommErr)m_CommError; }
 
     void                        setTotalMatches( uint16_t matchCnt );

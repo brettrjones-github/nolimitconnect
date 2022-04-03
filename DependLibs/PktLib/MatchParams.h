@@ -28,16 +28,16 @@ public:
     virtual bool                addToBlob( PktBlobEntry& blob );
     virtual bool                extractFromBlob( PktBlobEntry& blob );
 
-    void						setAgeType( EAgeType age )                  { m_AgeType = age; }
+    void						setAgeType( enum EAgeType age )                  { m_AgeType = age; }
     EAgeType					getAgeType( void )                          { return m_AgeType; }
 
-    void						setGender( EGenderType gender )             { m_GenderType = gender; }
+    void						setGender( enum EGenderType gender )             { m_GenderType = gender; }
     EGenderType					getGender( void )                           { return m_GenderType; }
 
-    void						setLanguage( ELanguageType language )       { m_LanguageType = language; }
+    void						setLanguage( enum ELanguageType language )       { m_LanguageType = language; }
     ELanguageType				getLanguage( void )                         { return m_LanguageType; }
 
-    void						setContentRating( EContentRating content )  { m_ContentRating = content; }
+    void						setContentRating( enum EContentRating content )  { m_ContentRating = content; }
     EContentRating			    getContentRating( void )                    { return m_ContentRating; }
 
 protected:

@@ -22,7 +22,7 @@ class GroupieListCallbackInterface
 {
 public:
     virtual void				callbackGroupieInfoListUpdated( GroupieInfo* hostedInfo ){};
-    virtual void				callbackGroupieInfoListRemoved( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType ){};
+    virtual void				callbackGroupieInfoListRemoved( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, enum EHostType hostType ){};
     virtual void				callbackGroupieInfoListSearchResult( GroupieInfo* hostedInfo, VxGUID& sessionId ) {};
 };
 

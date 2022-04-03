@@ -31,7 +31,7 @@ public:
     virtual void                removeIdent( VxGUID& onlineId ) {};
     virtual void                removeAll( void ) {};
 
-    virtual void                setIdentListType( EUserViewType listType ) { m_ListType = listType; }
+    virtual void                setIdentListType( enum EUserViewType listType ) { m_ListType = listType; }
 
 protected:
     virtual void                onUpdateIdent( VxGUID& onlineId, int64_t timestamp );

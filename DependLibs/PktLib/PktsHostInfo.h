@@ -28,10 +28,10 @@ public:
     void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
     VxGUID&					    getSessionId( void )								        { return m_SessionId; }
 
-    void                        setHostType( EHostType hostType )                           { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType )                      { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const                                   { return ( EHostType )m_HostType; }
 
-    void                        setCommError( ECommErr commError )                          { m_CommError = ( uint8_t )commError; }
+    void                        setCommError(enum  ECommErr commError )                     { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const                                  { return ( ECommErr )m_CommError; }
 
 private:
@@ -54,10 +54,10 @@ public:
     void						setSessionId( VxGUID& guid )                                { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )                                        { return m_SessionId; }
 
-    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )                      { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
 
-    void                        setCommError( ECommErr commError )                          { m_CommError = (uint8_t)commError; }
+    void                        setCommError( enum ECommErr commError )                     { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                                  { return (ECommErr)m_CommError; }
 
     bool                        setHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );

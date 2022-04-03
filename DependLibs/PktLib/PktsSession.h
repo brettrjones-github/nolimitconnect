@@ -43,7 +43,7 @@ class PktSessionStartReply : public VxPktHdr
 public:
     PktSessionStartReply();
 
-	void						setOfferResponse( EOfferResponse eResponse ){ m_u16Response = (uint16_t)eResponse; }
+    void						setOfferResponse( enum EOfferResponse eResponse ){ m_u16Response = (uint16_t)eResponse; }
 	EOfferResponse				getOfferResponse( void )					{ return (EOfferResponse)m_u16Response; }
 
 private:
@@ -83,7 +83,7 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
-	void						setOfferResponse( EOfferResponse eResponse ){ m_u16Response = (uint16_t)eResponse; }
+    void						setOfferResponse( enum EOfferResponse eResponse ){ m_u16Response = (uint16_t)eResponse; }
 	EOfferResponse				getOfferResponse( void )					{ return (EOfferResponse)m_u16Response; }
 
 private:

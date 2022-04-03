@@ -38,7 +38,7 @@ public:
 
 	bool						isValidPktHostAnn( void );
 
-    void						setHostType( EHostType hostType ) { m_HostType = (uint8_t)hostType; }
+    void						setHostType( enum EHostType hostType ) { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) { return (EHostType)m_HostType; }
 
     void                        calcPktLen( void );

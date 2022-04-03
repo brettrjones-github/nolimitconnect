@@ -37,7 +37,7 @@ public:
     void						setHostOnlineId( VxGUID& guid )     { m_HostOnlineId = guid; }
     VxGUID&                     getHostOnlineId( void )             { return m_HostOnlineId; }
 
-    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError )  { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
 private:
@@ -62,7 +62,7 @@ public:
     void						setSessionId( VxGUID& guid )    { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )            { return m_SessionId; }
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
+    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const       { return ( EHostType )m_HostType; }
 
     void						setHostOnlineId( VxGUID& guid ) { m_HostOnlineId = guid; }
@@ -73,10 +73,10 @@ public:
     void						setThumbId( VxGUID& guid )      { m_ThumbId = guid; }
     VxGUID&                     getThumbId( void )              { return m_ThumbId; }
 
-    void                        setAccessState( EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
     EPluginAccess               getAccessState( void )          { return ( EPluginAccess )m_AccessState; }
 
-    void                        setCommError( ECommErr commError ) { m_CommError = ( uint8_t )commError; }
+    void                        setCommError( enum ECommErr commError ) { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const { return ( ECommErr )m_CommError; }
 
     bool                        setFileInfoUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );

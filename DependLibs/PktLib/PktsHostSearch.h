@@ -28,11 +28,11 @@ class PktHostSearchReq : public VxPktHdr
 public:
     PktHostSearchReq();
 
-    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )                      { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setSearchSessionId( VxGUID& guid )						    { m_SearchSessionId = guid; }
     VxGUID&					    getSearchSessionId( void )								    { return m_SearchSessionId; }
-    void                        setPluginType( EPluginType hostType )                       { m_PluginType = (uint8_t)hostType; }
+    void                        setPluginType( enum EPluginType hostType )                  { m_PluginType = (uint8_t)hostType; }
     EPluginType                 getPluginType( void ) const                                 { return (EPluginType)m_PluginType; }
 
     PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
@@ -57,14 +57,14 @@ public:
 
     void                        calcPktLen( void );
 
-    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )                      { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setSearchSessionId( VxGUID& guid )						    { m_SearchSessionId = guid; }
     VxGUID&					    getSearchSessionId( void )								    { return m_SearchSessionId; }
 
-    void                        setAccessState( EPluginAccess accessState )                 { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState )            { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void ) const                                { return (EPluginAccess)m_AccessState; }
-    void                        setCommError( ECommErr commError )                          { m_CommError = (uint8_t)commError; }
+    void                        setCommError( enum ECommErr commError )                     { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                                  { return (ECommErr)m_CommError; }
 
     void                        setIsGuidPluginTypePairs( bool isPair )                     { m_IsGuidPluginTypePairs = (uint8_t)isPair; }

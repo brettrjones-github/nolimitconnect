@@ -17,6 +17,7 @@
 
 class HostJoinInfo;
 class VxGUID;
+class GroupieId;
 
 class HostJoinCallbackInterface
 {
@@ -26,7 +27,7 @@ public:
     virtual void				callbackHostUnJoin( GroupieId& groupieId ) {};
     virtual void				callbackHostJoinRemoved( GroupieId& groupieId ){};
 
-    virtual void				callbackHostJoinOfferState( GroupieId& groupieId, EJoinState userHostOfferState ) {};
-    virtual void				callbackHostJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) {};
+    virtual void				callbackHostJoinOfferState( GroupieId& groupieId, enum EJoinState userHostOfferState ) {};
+    virtual void				callbackHostJoinOnlineState( GroupieId& groupieId, enum EOnlineState onlineState, VxGUID& connectionId ) {};
 };
 

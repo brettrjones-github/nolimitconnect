@@ -78,13 +78,13 @@ public:
     bool                        isPastEnd()                     { return m_PastEnd; }
 
     //! set value 
-    bool                        setValue( EAgeType& eValue );
-    bool                        setValue( EContentRating& eValue );
-    bool                        setValue( EGenderType& eValue );
-    bool                        setValue( EHostType& eValue );
-    bool                        setValue( ELanguageType& eValue );
-    bool                        setValue( EPluginType& eValue );
-    bool                        setValue( ESearchType& eValue );
+    bool                        setValue( enum EAgeType& eValue );
+    bool                        setValue( enum EContentRating& eValue );
+    bool                        setValue( enum EGenderType& eValue );
+    bool                        setValue( enum EHostType& eValue );
+    bool                        setValue( enum ELanguageType& eValue );
+    bool                        setValue( enum EPluginType& eValue );
+    bool                        setValue( enum ESearchType& eValue );
     bool                        setValue( const PluginId& pluginId );
     bool                        setValue( VxGUID& guid );
     bool                        setValue( VxSha1Hash& sha1Hash );

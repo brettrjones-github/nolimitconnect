@@ -105,10 +105,10 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )				{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-    AssetBaseInfo * 			addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen );
-	AssetBaseInfo *				addAssetFile( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
+    AssetBaseInfo * 			addAssetFile( enum EAssetType assetType, const char * fileName, uint64_t fileLen );
+    AssetBaseInfo *				addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
-	bool						addAssetFile(   EAssetType      assetType, 	
+    bool						addAssetFile(   enum EAssetType      assetType,
                                                 const char *	fileName, 
 												VxGUID&			assetId,  
 												uint8_t *		hashId = 0, 
@@ -116,7 +116,7 @@ public:
 												const char *	assetTag = "", 
 												int64_t		    timestamp = 0 );
 
-	bool						addAssetFile(	EAssetType      assetType, 
+    bool						addAssetFile(	enum EAssetType      assetType,
                                                 const char *	fileName, 
 												VxGUID&			assetId,  
 												VxGUID&		    creatorId, 
@@ -137,8 +137,8 @@ public:
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType asset, const char * fileName, uint64_t fileLen ) = 0;
-	virtual AssetBaseInfo *		createAssetInfo( EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
+    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType asset, const char * fileName, uint64_t fileLen ) = 0;
+    virtual AssetBaseInfo *		createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
@@ -151,16 +151,16 @@ protected:
 	void						generateHashIds( VxThread * thread );
 	void						clearAssetFileListPackets( void );
 	void						clearAssetInfoList( void );
-	AssetBaseInfo *				createAssetInfo(	EAssetType      asset, 
+    AssetBaseInfo *				createAssetInfo(	enum EAssetType      asset,
                                                     const char *	fileName, 
 													VxGUID&			assetId,  
 													uint8_t *		hashId, 
-													EAssetLocation	locationFlags = eAssetLocUnknown, 
+                                                    enum EAssetLocation	locationFlags = eAssetLocUnknown,
 													const char *	assetTag = "", 
 													int64_t			timestamp = 0 );
 	bool						insertNewInfo( AssetBaseInfo * assetInfo );
 	void						updateDatabase( AssetBaseInfo * assetInfo );
-	void						updateAssetDatabaseSendState( VxGUID& assetUniqueId, EAssetSendState sendState );
+    void						updateAssetDatabaseSendState( VxGUID& assetUniqueId, enum EAssetSendState sendState );
 
     //=== vars ===//
     P2PEngine&					m_Engine;

@@ -39,14 +39,14 @@ public:
 								const char *	pSection,			// which section to read from
 								const char *	pKey,				// the key in the specified section
 								long			lDef,				// default value to return if error or entry doesn't exist
-								EnumRadix		eRadix = BASE10 );	// BASE10=read as decimal, BASE16=read as hexadecimal
+                                enum EnumRadix	eRadix = BASE10 );	// BASE10=read as decimal, BASE16=read as hexadecimal
 
 	/// write a binary value to an entry in a ini file
 	RCODE setProfileLong(	const char *	pFileName,			// name of file to access
 							const char *	pSection,			// which section to write to
 							const char *	pKey,				// which key to write
 							const long		lValue,				// value to write
-							EnumRadix		eRadix = BASE10 );	// BASE10=write as decimal, BASE16=write as hexadecimal
+                            enum EnumRadix	eRadix = BASE10 );	// BASE10=write as decimal, BASE16=write as hexadecimal
 
 	/// read a floating decimal point value from an entry in a ini file
 	double getProfileDouble(	const char *	pFileName,	// name of file to access

@@ -25,10 +25,10 @@ public:
 
 	SearchParams&				operator =( const SearchParams& rhs );
 
-    void						setHostType( EHostType hostType )						    { m_HostType = hostType; }
+    void						setHostType( enum EHostType hostType )                      { m_HostType = hostType; }
     EHostType					getHostType( void )								            { return m_HostType; }
 
-    void						setSearchType( ESearchType searchType )						{ m_SearchType = searchType; }
+    void						setSearchType( enum ESearchType searchType )				{ m_SearchType = searchType; }
     ESearchType					getSearchType( void )								        { return m_SearchType; }
 
     // search session (unique per search instance)

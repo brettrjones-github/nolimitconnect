@@ -44,56 +44,56 @@ public:
 
     void                        wantHostedListCallback( HostedListCallbackInterface* client, bool enable );
 
-    bool                        fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList );
-    bool                        fromGuiQueryHostedInfoList( EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll );
+    bool                        fromGuiQueryMyHostedInfo( enum EHostType hostType, std::vector<HostedInfo>& hostedInfoList );
+    bool                        fromGuiQueryHostedInfoList(enum  EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll );
     bool                        fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
     virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll );
 
     // returns true if retHostedInfo was filled
-    bool                        updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase, HostedInfo* retHostedInfo = nullptr );
-    void                        updateHosted( EHostType hostType, VxGUID& hostGuid, std::string& hosted, int64_t timestampMs = 0 );
+    bool                        updateHostInfo( enum EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase, HostedInfo* retHostedInfo = nullptr );
+    void                        updateHosted( enum EHostType hostType, VxGUID& hostGuid, std::string& hosted, int64_t timestampMs = 0 );
 
     void                        updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase );
-    void                        hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo );
-    void                        hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr );
+    void                        hostSearchResult( enum EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo );
+    void                        hostSearchCompleted( enum EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr );
 
     void                        onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin );
 
-    void                        onHostInviteAnnounceAdded( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
-    void                        onHostInviteAnnounceUpdated( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        onHostInviteAnnounceAdded( enum EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        onHostInviteAnnounceUpdated( enum EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
 
 protected:
-    virtual bool                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
-    virtual void                onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus,
-                                        EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
+    virtual bool                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
+    virtual void                onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, enum ERunTestStatus testStatus,
+                                        enum EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
 
-    virtual bool                onContactHandshaking( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
-    virtual void                onHandshakeTimeout( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
-    virtual void                onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual bool                onContactHandshaking( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };
+    virtual void                onHandshakeTimeout( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
     /// returns false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
-    virtual bool                onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
-    virtual void                onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus,
-                                        EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
-    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual bool                onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, enum EConnectStatus connectStatus,
+                                        enum EConnectReason connectReason = eConnectReasonUnknown, enum ECommErr commErr = eCommErrNone ) override {};
+    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBased, VxGUID& onlineId, enum EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
     void						removeClosedPortIdent( VxGUID& onlineId );
     void						removeHostedInfo( EHostType hostType, VxGUID& onlineId );
     void						clearHostedInfoList( void );
 
-    void                        updateAndRequestInfoIfNeeded( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        updateAndRequestInfoIfNeeded( enum EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase );
 
-    bool                        updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite );
-    bool                        updateLastConnected( EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
-    bool                        updateLastJoined( EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
-    bool                        updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxNetIdent* netIdent = nullptr );
+    bool                        updateIsFavorite( enum EHostType hostType, VxGUID& onlineId, bool isFavorite );
+    bool                        updateLastConnected( enum EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
+    bool                        updateLastJoined( enum EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
+    bool                        updateHostTitleAndDescription( enum EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxNetIdent* netIdent = nullptr );
 
-    bool                        requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxNetIdent* netIdent, VxSktBase* sktBase );
+    bool                        requestHostedInfo( enum EHostType hostType, VxGUID& onlineId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
     void                        announceHostInfoUpdated( HostedInfo* hostedInfo );
     void                        announceHostInfoSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId );
     void                        announceHostInfoSearchComplete( EHostType hostType, VxGUID& sessionId );
-    void                        announceHostInfoRemoved( EHostType hostType, VxGUID& onlineId );
+    void                        announceHostInfoRemoved( enum EHostType hostType, VxGUID& onlineId );
 
     void						addToListInJoinedTimestampOrder( std::vector<HostedInfo>& hostedInfoList, HostedInfo& hostedInfo );
 

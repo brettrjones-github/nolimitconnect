@@ -16,6 +16,8 @@
 
 class VxNetIdent;
 
+#include "VxPktHdr.h"
+
 #pragma pack(push)
 #pragma pack(1)
 #define MAX_PKT_ANN_LIST_LEN 4080

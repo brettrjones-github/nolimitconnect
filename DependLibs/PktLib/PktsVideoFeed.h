@@ -33,7 +33,7 @@ public:
 private:
 	//=== vars ===//
 	float						m_f32MotionDetectLevel;
-	uint32_t							m_u32Res2;
+    uint32_t					m_u32Res2;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -57,16 +57,16 @@ public:
 	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
-	void						setFeedStatus( EFeedStatus feedStatus )		{ m_u8Status = (uint8_t)feedStatus; }
+    void						setFeedStatus( enum EFeedStatus feedStatus )		{ m_u8Status = (uint8_t)feedStatus; }
 	EFeedStatus					getFeedStatus( void )						{ return (EFeedStatus)m_u8Status; }
 
 	//=== vars ===//
 	float						m_f32MotionDetectLevel;
-	uint8_t							m_u8Status;
+    uint8_t						m_u8Status;
 
 private:
-	uint8_t							m_u8Res1;
-	uint16_t							m_u16Res1;
+    uint8_t						m_u8Res1;
+    uint16_t					m_u16Res1;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -143,21 +143,21 @@ public:
 	void						calcPktLen( void );
 
 	void						setThisDataLen( uint32_t len )			{ m_u32ThisDataLen = htonl( len ); }
-	uint32_t							getThisDataLen( void )				{ return ntohl( m_u32ThisDataLen ); }
+    uint32_t					getThisDataLen( void )                  { return ntohl( m_u32ThisDataLen ); }
 	void						setPktSeqNum( uint32_t seqNum )			{ m_u32PktSeqNum = htonl( seqNum ); }
-	uint32_t							getPktSeqNum( void )				{ return ntohl( m_u32PktSeqNum ); }
-	void						setTotalPktsInSeq( uint32_t seqCnt )		{ m_u32TotalPktsInSeq = htonl( seqCnt ); }
-	uint32_t							getTotalPktsInSeq( void )			{ return ntohl( m_u32TotalPktsInSeq ); }
+    uint32_t					getPktSeqNum( void )                    { return ntohl( m_u32PktSeqNum ); }
+    void						setTotalPktsInSeq( uint32_t seqCnt )	{ m_u32TotalPktsInSeq = htonl( seqCnt ); }
+    uint32_t					getTotalPktsInSeq( void )               { return ntohl( m_u32TotalPktsInSeq ); }
 
-	uint8_t *						getDataPayload( void )				{ return m_au8Data; }
+    uint8_t *					getDataPayload( void )                  { return m_au8Data; }
 
 private:
 	//=== vars ===//
-	uint32_t							m_u32ThisDataLen;
-	uint32_t							m_u32PktSeqNum;
-	uint32_t							m_u32TotalPktsInSeq;
-	uint32_t							m_u32Res;
-	uint8_t							m_au8Data[ MAX_PIC_CHUNK_LEN + 16 ];
+    uint32_t					m_u32ThisDataLen;
+    uint32_t					m_u32PktSeqNum;
+    uint32_t					m_u32TotalPktsInSeq;
+    uint32_t					m_u32Res;
+    uint8_t						m_au8Data[ MAX_PIC_CHUNK_LEN + 16 ];
 };
 
 class PktVideoFeedPicAck : public VxPktHdr
@@ -167,8 +167,8 @@ public:
 
 private:
 	//=== vars ===//
-	uint32_t							m_u32Res2;
-	uint32_t							m_u32Res3;
+    uint32_t					m_u32Res2;
+    uint32_t					m_u32Res3;
 };
 
 #pragma pack(pop)
