@@ -67,7 +67,7 @@ void ThreadStartCallbackFunction( unsigned int uiThreadId, const char * threadNa
         if (res == JNI_EDETACHED)
         {
             res = GetJavaEnvCache().getJavaVM()->AttachCurrentThread(&env, nullptr);
-            assert(res == JNI_OK);
+            vx_assert(res == JNI_OK);
             LogModule( eLogThread, LOG_ERROR, "Android ThreadStartCallbackFunction SUCESS AttachCurrentThread %s", threadName);
             // pthread_setspecific(threadKey, env);
         }
