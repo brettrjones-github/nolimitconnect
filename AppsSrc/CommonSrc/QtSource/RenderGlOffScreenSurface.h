@@ -13,12 +13,13 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+
 #ifdef TARGET_OS_WINDOWS
 #include "WinSock2.h"
 #endif // TARGET_OS_WINDOWS
 
-#include <QtCore/QObject>
-#include <QtGui/QScreen>
+#include <QWidget>
+#include <QScreen>
 #include <QtGui/QOffscreenSurface>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QResizeEvent>

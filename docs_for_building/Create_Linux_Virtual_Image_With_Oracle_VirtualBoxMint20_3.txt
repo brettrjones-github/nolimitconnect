@@ -9,14 +9,13 @@ Instructions to create a virtual box Linux Mint 20.3 Image for NoLimitConnect de
 1.) The issue of turning on 3D acceleration in VBox causes Qt Creator to crash seems to have been fixed in in the Mint <Mint Version> and latest Qt tools
 
 === after install you might need to give user write access to files if they were installed as root ===
-
 cd ~/nolimitdev
 sudo chown -hR nolimit *
 sudo chgrp -hR nolimit *
 can verify change with ll -a
 
 
-=== setup linux mint ===
+=== setup linux mint <Mint Version> ===
 
 1.) Download linux mint <Mint Version> - 64 Bit ( cannot use 32 Bit because of android build requirements )
 2.) Create New Image In Virtual Box using the linux mint iso and OS Linux/Ubuntu 64Bit
@@ -80,6 +79,11 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 ==== some usefull tools for developers ======
 1.) Meld - File Difference comparison tool
 	sudo apt-get install meld
+2.) gitk - git revision history viewer supported by Qt
+	sudo apt-get install gik
+3.) git-gui - git gui interface for git commits supported by Qt
+	sudo apt-get install git-gui
+	
 
 ==== Prerequisite tools required to build nolimitptop ======
 1.) sudo apt-get install g++
@@ -101,6 +105,7 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 5.) Install to /home/nolimitdev/Qt (create the directory if needed)
 6.) Use the custom installation to change the install path to /home/nolimitdev/Qt
 7.) After install you may need to setup the correct paths by editing qtchooser default
+	NOTE: do not do this step unless has issues durring compile
 	cd /usr/lib/x86_64-linux-gnu/qt-default/qtchooser
 	sudo gedit default.conf
 	change the lines 
@@ -111,15 +116,18 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 	/home/nolimitdev/Qt/<Qt Version>/gcc_64/lib
 	
 4.) change qt include directory
-	In Qt Creator->Projects->Build Enviroment change QTDIR from /usr/lib/x86_64-linux-gnu/qt6 to /home/nolimit/Qt/6.2.0/gcc_64
+	NOTE: this step no longer seems to be required
+	In Qt Creator->Projects->Build Enviroment change QTDIR from /usr/lib/x86_64-linux-gnu/qt6 to /home/nolimit/nolimitdev/Qt/<Qt Version>/gcc_64
 	
 5.)	after reboot run $qmake --version
 	should show
 	QMake version 3.1
-	Using Qt version 6.2.2 in /home/nolimit/Qt/6.2.0/gcc_64/lib
-6.)	In Options->Device 
-	The Android SDK location should be /home/nolimit/Android/Sdk
-	The Android NDK location should be /home/nolimit/Android/android-ndk-r22b/
+	Using Qt version<Qt Version> in /home/nolimit/nolimitdev/Qt/<Qt Version>/gcc_64/lib
+	
+===== Qt Creator Editor settings to match no limit connect code style =====
+1.) Set Tab Size to 4
+	a.0 QCreator->tools->options->Text Editor change Tab Size to 4
+		
 	
 ===== compile nolimitconnect =====
 
@@ -129,8 +137,10 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 	checkout nolimitconnect
 	a.)	git clone https://brettrjones-github:<ghp_GitHubSecurityKey>@github.com/brettrjones-github/nolimitconnect.git
 	useful git commands
+	use editor to edit .gitignore and add directories and file extentions like objs/ and .o
 	git status
 	git commit -m "descriptive commit message"
+	git commit -m
 	git push https://brettrjones-github:<ghp_GitHubSecurityKey>@github.com/brettrjones-github/nolimitconnect.git
 	
 3.) Open the three parts of No Limit Connect and compile in the folowing order
@@ -139,6 +149,7 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 	c.) /home/nolimitdev/nolimitconnect/BuildNlc2_NlcAppOnly.pro
 	
 === compile enviroment issues ===
+
 1.) /home/nolimit/nolimitdev/nolimitconnect/DependLibs/ffmpeg/libavdevice/x11grab.c:58: error: X11/extensions/shape.h: No such file or directory
 	a.) apt-file search X11/extensions/shape.h
 	b.) sudo apt install libxext-dev
@@ -147,26 +158,24 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 	b.) sudo apt install libxfixes-dev
 
 
+====================================================================
+==== Optional - setup Qt in linux to compile Android No Limit Connect ====
+====================================================================
 
-==== optional setup Qt in linux to compile Android No Limit Connect ====
 ==== install android studio ====
-NOTE: use uppercase /home/nolimit/Android because that is the default install directory for android studio
-After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit
-1.) Download NDK r19c from https://developer.android.com/ndk/downloads/
-2.) extract ndk to ~/Android/android-ndk-r22b
-2b.) install adb
-        sudo apt install adb
-3.) from Mint Software Manager 
-	Install yasm, nasm, Android Studio
-3a.) If cannot install Android studio then try the download from https://developer.android.com/studio/
-	extract to /home/nolimit/Android/android-studio follow th install-Linux-tar.txt from the archive
-4.) Start Android Studio and install sdks (install kvm when says can support accelerated emulator)
-    Sdks install Lollipop 5.1 (Sdk Api 22), cmake
-5.) Set ndk path in Project Structure to point to home/nolimit/android/android-ndk-r22b
-*/
-	
-	
-	
+NOTE: use uppercase Android in /home/nolimit/Android because that is the default install directory for android studio
+After many tries the only way I could get android studio installed correctly was by using Mint software manager
+1.) install Android Studio using Linux Software Manager
+2.) When Launch Android Studio Install choose All the defaults.. now the sdk dirctory should be /home/nolimit/Android/Sdk
+3.) Do not actually open Android Studio.. instead Open QCreator->tool/options/Devices Android Tab
+4.) The Android SDK location should be /home/nolimit/Android/Sdk
+5.) Click Button Set Up SDK and choose defaults
+6.) Android SDK Platform 31 should be the only one required for build.. might change as revisions progress
+7.) Qt should choose the correct NDK.. press Apply and ok
+	NOTE: ndk was 22.1.7171670 at the time of writing this document
+
+8.) In Manage kits and when configuring us the Clang arm64 for android
+	NOTE: other cps like x86_64 for android should also compile but are not tested
 
 ====================================================================
 ======= Optional Additional Media Applications for comparison ======

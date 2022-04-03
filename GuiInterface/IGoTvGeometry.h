@@ -466,7 +466,7 @@ public:
 
   T x1{}, y1{}, x2{}, y2{};
 private:
-  static constexpr T clamp_range(T x, T l, T h) XBMC_FORCE_INLINE
+  static constexpr T clamp_range(T x, T l, T h)
   {
     return (x > h) ? h : ((x < l) ? l : x);
   }

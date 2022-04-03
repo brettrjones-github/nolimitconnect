@@ -12,7 +12,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "RenderGlWidget.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"

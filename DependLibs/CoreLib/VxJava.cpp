@@ -35,7 +35,7 @@ JNIEnv * VxJava::getJavaEnv( void )
         if (res == JNI_EDETACHED)
         {
             res = GetJavaEnvCache().getJavaVM()->AttachCurrentThread(&env, nullptr);
-            assert(res == JNI_OK);
+            vx_assert(res == JNI_OK);
             LogModule( eLogThread, LOG_ERROR, "Android ThreadStartCallbackFunction FAILED AttachCurrentThread" );
         }
 

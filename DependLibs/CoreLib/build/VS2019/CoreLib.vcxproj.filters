@@ -28,18 +28,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\arpa\inet.h">
       <Filter>GoTvConfig\arpa</Filter>
     </ClInclude>

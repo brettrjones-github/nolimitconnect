@@ -13,11 +13,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
-
 #ifdef TARGET_OS_WINDOWS
 #include "WinSock2.h"
 #endif // TARGET_OS_WINDOWS
+
+#include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
+#include <GuiInterface/GoTvRenderFrame.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QOpenGLWidget>

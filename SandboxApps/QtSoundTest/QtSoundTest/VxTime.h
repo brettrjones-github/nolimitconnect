@@ -56,8 +56,7 @@ inline int64_t				LocalTimeZoneDifferenceMinutes( void )        { return LocalTi
 #ifdef __cplusplus
 
 #include <string>
-#pragma pack(push)
-#pragma pack(1)
+#pragma pack(push, 1)
 
 class TimeWithZone
 {
@@ -96,7 +95,6 @@ public:
     int32_t                     m_ZoneOffsMs;       // Time zone offset in milliseconds
 };
 
-#pragma pack()
 #pragma pack(pop)
 
 #endif // c++ only
