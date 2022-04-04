@@ -176,6 +176,10 @@ After many tries the only way I could get android studio installed correctly was
 
 8.) In Manage kits and when configuring us the Clang arm64 for android
 	NOTE: other cps like x86_64 for android should also compile but are not tested
+9.) For Projects BuildNlc1_NlcDependLibs.pro and BuildNlc2_NlcCore.pro
+    In Projects->Build And Run click the cancel icon in step 
+    Build Android APK or will get error: No rule to make target 'install'.      
+    After the libraries are built
 
 ====================================================================
 ======= Optional Additional Media Applications for comparison ======
