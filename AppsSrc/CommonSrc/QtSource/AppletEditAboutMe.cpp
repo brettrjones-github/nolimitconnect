@@ -155,11 +155,11 @@ void AppletEditAboutMe::slotImageSnapshot( QImage snapshotImage )
 {
     if( !snapshotImage.isNull() )
     {
-        QPixmap bitmap = QPixmap::fromImage( snapshotImage );
-        LogMsg( LOG_VERBOSE, "AppletEditAboutMe::slotImageSnapshot w %d h %d" );
-        if( !bitmap.isNull() )
+        QPixmap pixmap = QPixmap::fromImage( snapshotImage );
+        LogMsg( LOG_VERBOSE, "AppletEditAboutMe::slotImageSnapshot w %d h %d", pixmap.width(), pixmap.height() );
+        if( !pixmap.isNull() )
         {
-            updateSnapShot( bitmap );
+            updateSnapShot( pixmap );
         }
         else
         {
@@ -231,7 +231,7 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
 //============================================================================
 void AppletEditAboutMe::updateSnapShot( QPixmap& pixmap )
 {
-    QPixmap scaledPixmap = pixmap.scaled( QSize( 320, 200 ) );
+    QPixmap scaledPixmap = pixmap.scaled( GuiParams::getSnapshotDesiredSize() );
     ui.m_PictureOfMeFrame->setPixmap( scaledPixmap );
     m_bUserPickedImage = true;
 }

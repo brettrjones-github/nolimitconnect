@@ -249,6 +249,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletChatRoomJoin:               appletDialog = new AppletChatRoomJoin( m_MyApp, parent ); break;
     case eAppletChatRoomJoinSearch:         appletDialog = new AppletChatRoomJoinSearch( m_MyApp, parent ); break;
     case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
+    case eAppletEditAboutMe:                appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
     case eAppletGalleryEmoticon:            appletDialog = new AppletGalleryEmoticon( m_MyApp, parent ); break;
