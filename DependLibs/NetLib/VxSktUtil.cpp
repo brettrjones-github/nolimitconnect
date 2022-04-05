@@ -1390,15 +1390,9 @@ bool VxResolveUrl( const char* pUrl, uint16_t u16Port, std::string& resolvedIp )
 
 	memset( &Hints, 0, sizeof( Hints ) );
 
-#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
 	Hints.ai_family = PF_UNSPEC;
 	Hints.ai_socktype = SOCK_STREAM;
 	Hints.ai_protocol = IPPROTO_TCP;
-#else
-	Hints.ai_family = AI_PASSIVE | AI_ADDRCONFIG;
-	Hints.ai_socktype = SOCK_STREAM;
-	Hints.ai_protocol = IPPROTO_TCP;
-#endif
 
 	char as8Buf[32];
 	sprintf( as8Buf, "%d", u16Port );
