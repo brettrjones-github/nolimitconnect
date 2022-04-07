@@ -92,8 +92,6 @@ QMAKE_CFLAGS_WARN_ON += -Wno-unused-parameter
 
 QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
-QMAKE_CXXFLAGS_WARN_OFF -= -Wclass-memaccess
-QMAKE_CXXFLAGS_WARN_ON += -Wno-class-memaccess
 QMAKE_CXXFLAGS_WARN_OFF -= -Winconsistent-missing-override
 #QMAKE_CXXFLAGS_WARN_ON += -Wno-inconsistent-missing-override
 QMAKE_CFLAGS_WARN_OFF -= -Wmissing-braces
@@ -103,4 +101,8 @@ QMAKE_CXXFLAGS_WARN_OFF -= -Wmissing-field-initializers
 QMAKE_CXXFLAGS_WARN_ON += -Wno-missing-field-initializers
 }
 
+unix:!android{
+QMAKE_CXXFLAGS_WARN_OFF -= -Wclass-memaccess
+QMAKE_CXXFLAGS_WARN_ON += -Wno-class-memaccess
+}
 
