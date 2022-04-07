@@ -50,7 +50,6 @@ int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int p
     {
         m_MixerMutex.lock();
         int queSpace = audioQueFreeSpace( appModule );
-        char * bufData = m_AudioBuffer.data();
         toWriteByteCnt = std::min( queSpace, pcmDataLenInBytes );
         if( pcmDataLenInBytes > toWriteByteCnt )
         {
@@ -68,7 +67,6 @@ int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int p
         if( toWriteByteCnt )
         {
             // BRJ what to do with silence
-            bufData = m_AudioBuffer.data();
             int appWriteIdx = m_BufIndex[ appModule ];
             int curBufSize = m_AudioBuffer.size();
             if( appWriteIdx > curBufSize )
@@ -81,9 +79,7 @@ int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int p
             {
                 // no mixing required
                 m_AudioBuffer.append( (char *)pcmData, toWriteByteCnt );
-                bufData = m_AudioBuffer.data();
                 updateWriteBufferIndex( appModule, toWriteByteCnt );
-                bufData = m_AudioBuffer.data();
                 //LogMsg( LOG_DEBUG, "enqueueAudioData no mix mod %d len %d written %d buf len %d", appModule, m_BufIndex[ appModule ], toWriteByteCnt, m_AudioBuffer.size() );
             }
             else
@@ -122,10 +118,8 @@ int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int p
         }
 
         m_AtomicBufferSize = m_AudioBuffer.size();
-        bufData = m_AudioBuffer.data();
         int bytesAvail = m_AtomicBufferSize;
         //verifySpeakerSamples();
-        bufData = m_AudioBuffer.data();
         m_MixerMutex.unlock();
         emit signalAvailableSpeakerBytesChanged( bytesAvail );
         emit signalCheckSpeakerOutState();
