@@ -27,7 +27,7 @@ VxLabel::VxLabel(QWidget *parent, Qt::WindowFlags f)
 {
     setObjectName( "VxLabel" );
     m_behindFrameCnt = 0;
-    connect( this, SIGNAL( signalPlayVideoFrame( QPixmap, int ) ), this, SLOT( slotPlayVideoFrame( QPixmap, int ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalPlayVideoFrame( QImage, int ) ), this, SLOT( slotPlayVideoFrame( QImage, int ) ), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -37,7 +37,7 @@ VxLabel::VxLabel(const QString &text, QWidget *parent, Qt::WindowFlags f)
 , m_VidImageRotation( 0 )
 {
     m_behindFrameCnt = 0;
-    connect( this, SIGNAL( signalPlayVideoFrame( QPixmap, int ) ), this, SLOT( slotPlayVideoFrame( QPixmap, int ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalPlayVideoFrame( QImage, int ) ), this, SLOT( slotPlayVideoFrame( QImage, int ) ), Qt::QueuedConnection );
 }
 
 //============================================================================

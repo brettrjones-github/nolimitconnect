@@ -247,12 +247,12 @@ int VxLabel::playVideoFrame( uint8_t * picBuf, uint32_t picBufLen, int picWidth,
         }
         else
         {
-            LogMsg( LOG_ERROR, " VxLabel::playVideoFrame invalid image data\n" );
+            LogMsg( LOG_ERROR, " VxLabel::playVideoFrame invalid image data" );
         }
     }
     else
     {
-        LogMsg( LOG_ERROR, " VxLabel::playVideoFrame invalid data params\n" );
+        LogMsg( LOG_ERROR, " VxLabel::playVideoFrame invalid data params" );
     }
 
     return m_behindFrameCnt;

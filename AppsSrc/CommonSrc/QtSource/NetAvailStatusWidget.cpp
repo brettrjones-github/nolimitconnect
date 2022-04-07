@@ -240,21 +240,29 @@ void NetAvailStatusWidget::setMinimumSize( int minw, int minh )
 //============================================================================
 void NetAvailStatusWidget::setMaximumSize( const QSize & maxSize )
 {
-    if( maxSize.width() == maxSize.height() )
+    if( maxSize.width() < 16777215 && maxSize.height() < 16777215 )
     {
         QWidget::setMaximumSize( ( int )( maxSize.width() * GuiParams::getGuiScale() ),
             ( int )( maxSize.height() * GuiParams::getGuiScale() ) );
     }
     else
     {
-        QWidget::setMaximumSize( ( int )( maxSize.width()  * GuiParams::getGuiScale() ),
-            ( int )( maxSize.height() * GuiParams::getGuiScale() ) );
+        // probably setup ui setting to maximum.. do not exceed maximum { width = 16777215, height = 16777215 } with scaling 
+        QWidget::setMaximumSize( 16777215, 16777215 );
     }
 }
 
 //============================================================================
 void NetAvailStatusWidget::setMaximumSize( int maxw, int maxh )
 {
-    QWidget::setMaximumSize( ( int )( maxw * GuiParams::getGuiScale() ),
-        ( int )( maxh * GuiParams::getGuiScale() ) );
+    if( maxw < 16777215 && maxh < 16777215 )
+    {
+        QWidget::setMaximumSize( ( int )( maxw * GuiParams::getGuiScale() ),
+            ( int )( maxh * GuiParams::getGuiScale() ) );
+    }
+    else
+    {
+        // probably setup ui setting to maximum.. do not exceed maximum { width = 16777215, height = 16777215 } with scaling 
+        QWidget::setMaximumSize( 16777215, 16777215 );
+    }
 }

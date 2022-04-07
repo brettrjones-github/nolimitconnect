@@ -38,6 +38,7 @@ public:
                                                             uint32_t		u32JpgDataLen,
                                                             int				motion0To100000 ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
+	virtual void				toGuiPluginSessionEnded( GuiOfferSession* offerSession ) override;
 
     virtual void 				onSessionActivityShouldExit( QString shouldExitReason ) override {};
 
@@ -55,8 +56,6 @@ protected slots:
     void						slotRandomConnectHostButtonClicked( void );
 
     void						slotOfferFileButtonClicked( void );
-
-	void						slotToGuiPluginSessionEnded(GuiOfferSession * offerSession );
 
 	void						slotUserInputButtonClicked( void );
 
@@ -87,7 +86,7 @@ protected:
 														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
-	void						setup( void );
+
 	//virtual bool				handleOfferResponse( EOfferResponse offerResponse, QWidget * parent );
     //void						onInSessionResponse( bool bResponseOk );
 

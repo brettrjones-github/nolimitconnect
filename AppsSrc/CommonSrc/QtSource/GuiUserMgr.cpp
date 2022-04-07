@@ -32,11 +32,11 @@ GuiUserMgr::GuiUserMgr( AppCommon& app )
 void GuiUserMgr::onAppCommonCreated( void )
 {
     connect( this, SIGNAL( signalInternalIndentListUpdate( EUserViewType, VxGUID, uint64_t ) ), this, SLOT( slotInternalIndentListUpdate( EUserViewType, VxGUID, uint64_t ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalIndentListRemove( EUserViewType, VxGUID ) ),         this, SLOT( slotInternalIndentListRemove( EUserViewType, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalIndentListRemove( EUserViewType, VxGUID ) ),           this, SLOT( slotInternalIndentListRemove( EUserViewType, VxGUID ) ), Qt::QueuedConnection );
 
-    connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*,EHostType) ),	                this, SLOT( slotInternalUpdateUser(VxNetIdent*,EHostType) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*) ),	                            this, SLOT( slotInternalUpdateUser(VxNetIdent*) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserRemoved(VxGUID) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalUserOnlineStatus( VxNetIdent*, EHostType, bool ) ),    this, SLOT( slotInternalUserOnlineStatus( VxNetIdent*, EHostType, bool ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserOnlineStatus( VxNetIdent*, bool ) ),               this, SLOT( slotInternalUserOnlineStatus( VxNetIdent*, bool ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalSaveMyIdent( VxNetIdent* ) ),                          this, SLOT( slotInternalSaveMyIdent( VxNetIdent* ) ), Qt::QueuedConnection );
 
     m_MyApp.wantToGuiUserUpdateCallbacks( this, true );

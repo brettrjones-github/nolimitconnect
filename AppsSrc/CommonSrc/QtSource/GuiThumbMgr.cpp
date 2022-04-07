@@ -38,14 +38,14 @@ void GuiThumbMgr::onAppCommonCreated( void )
 
     m_MyApp.getEngine().getThumbMgr().addThumbMgrClient( this, true );
     std::vector<VxGUID>& emoticonList = m_MyApp.getEngine().getThumbMgr().getEmoticonIdList();
-    LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon list size %d", emoticonList.size() );
+    // LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon list size %d", emoticonList.size() );
     int emoticonNum = 0;
     for( auto& guid : emoticonList )
     {
         
         if( guid.isVxGUIDValid() )
         {
-            LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon  %d is valid %s", emoticonNum, guid.toOnlineIdString().c_str() );
+            // LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon  %d is valid %s", emoticonNum, guid.toOnlineIdString().c_str() );
             m_EmoticonList.push_back( guid );
         }
         else

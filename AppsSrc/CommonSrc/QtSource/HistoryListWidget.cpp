@@ -36,9 +36,6 @@ HistoryListWidget::HistoryListWidget(QWidget *parent)
 , m_HisIdent( 0 )
 , m_CallbacksRequested( false )
 {
-	connect( this, SIGNAL(signalToGuiClientAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiClientAssetAction(EAssetAction, VxGUID, int)), Qt::QueuedConnection );
-	connect( this, SIGNAL( signalToGuiSessionHistory(AssetBaseInfo *)), this, SLOT(slotToGuiSessionHistory( AssetBaseInfo*)), Qt::QueuedConnection );
-	connect( this, SIGNAL(signalToGuiAssetAdded( AssetBaseInfo*)), this, SLOT(slotToGuiAssetAdded( AssetBaseInfo*)), Qt::QueuedConnection );
 }
 
 //============================================================================

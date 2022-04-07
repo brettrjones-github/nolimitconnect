@@ -33,8 +33,8 @@ void GuiHostJoinMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalHostJoinUpdated( HostJoinInfo* ) ),                                    this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostUnJoin( GroupieId ) ),                                             this, SLOT( slotInternalHostUnJoin( GroupieId ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinRemoved( GroupieId ) ),	                                    this, SLOT( slotInternalHostJoinRemoved( GroupieId ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinOfferState( VxGUID, EPluginType, EJoinState ) ),               this, SLOT( slotInternalHostJoinOfferState( VxGUID, EPluginType, EJoinState ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ),    this, SLOT( slotInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinOfferState( GroupieId, EJoinState ) ),                         this, SLOT( slotInternalHostJoinOfferState( GroupieId, EJoinState ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ),              this, SLOT( slotInternalHostJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getHostJoinMgr().addHostJoinMgrClient( this, true );
 }

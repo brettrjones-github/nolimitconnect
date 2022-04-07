@@ -54,10 +54,6 @@ void AppletPeerBase::setupAppletPeerBase( void )
     connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)) );
     connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)) );
 
-	connect( this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this,	SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)), Qt::QueuedConnection );
-	connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),		this,	SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)), Qt::QueuedConnection );
-	connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this,	SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)), Qt::QueuedConnection );
-
 	m_Engine.fromGuiMuteMicrophone( false );
 	m_Engine.fromGuiMuteSpeaker( false );
 	m_MyApp.wantToGuiActivityCallbacks( this, true );

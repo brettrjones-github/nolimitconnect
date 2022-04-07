@@ -91,7 +91,6 @@ signals:
     void						signalCheckForBufferUnderun();
 
 protected slots:
-    void                        slotAudioNotified();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
 

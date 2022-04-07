@@ -4,6 +4,7 @@
 void  AppCommon::registerMetaData( void )
 {
 	qRegisterMetaType<uint8_t>( "uint8_t" );
+	qRegisterMetaType<int32_t>( "int32_t" );
 	qRegisterMetaType<uint32_t>( "uint32_t" );
 	qRegisterMetaType<uint64_t>( "uint64_t" );
 
@@ -38,6 +39,7 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<EPluginType>( "EPluginType" );
 	qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
 	qRegisterMetaType<EMSessionAction>( "EMSessionAction" );
+	qRegisterMetaType<EScanType>( "EScanType" );
 	qRegisterMetaType<ESndDef>( "ESndDef" );
 	qRegisterMetaType<EXferError>( "EXferError" );
 	qRegisterMetaType<EXferState>( "EXferState" );

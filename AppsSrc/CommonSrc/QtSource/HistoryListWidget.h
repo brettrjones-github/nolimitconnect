@@ -53,7 +53,7 @@ protected:
 
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
-    GuiUser *				    m_MyIdent;
-    GuiUser *				    m_HisIdent;
-	bool						m_CallbacksRequested;
+	GuiUser*					m_MyIdent{ nullptr };
+    GuiUser*				    m_HisIdent{ nullptr };
+	bool						m_CallbacksRequested{ false };
 };

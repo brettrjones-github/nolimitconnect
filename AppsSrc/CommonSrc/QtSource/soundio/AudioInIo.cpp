@@ -76,7 +76,6 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
             if( m_initialized )
             {
                 // Set constant values to new audio input
-                connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
                 connect( m_AudioInputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
                 m_AudioInThread.setThreadShouldRun( true );
                 m_AudioInThread.startAudioInThread();
@@ -278,11 +277,6 @@ qint64 AudioInIo::bytesAvailable() const
 	//m_AudioBufMutex.unlock();
 
     return audioBytesAvailableToRead;
-}
-
-//============================================================================
-void AudioInIo::slotAudioNotified()
-{
 }
 
 //============================================================================

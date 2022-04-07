@@ -109,14 +109,6 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     connect( ui.m_SessionWidget,	    SIGNAL(signalUserInputButtonClicked()),	this,	SLOT(slotUserInputButtonClicked()) );
 
 
-    connect( &m_UserMgr,    SIGNAL(signalUserOnlineStatus(GuiUser*,bool)),				         this,			    SLOT(slotUserOnlineStatus(GuiUser*,bool)) );
-
-    connect( this,          SIGNAL(signalToGuiSetGameValueVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );
-    connect( this,          SIGNAL(signalToGuiSetGameActionVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameActionVar(long,long)) );
-    connect( this,          SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	        this,				SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
-    connect( this,          SIGNAL(signalToGuiMultiSessionAction(VxGUID,EMSessionAction,int)),	this,		        SLOT(slotToGuiMultiSessionAction(VxGUID,EMSessionAction,int)) );
-
-
     /*
     //setupMultiSessionActivity( netIdent );
     //m_OfferSessionLogic.sendOfferOrResponse();
@@ -417,7 +409,7 @@ void AppletMultiMessenger::toGuiClientPlayVideoFrame(
 }
 
 //============================================================================
-void AppletMultiMessenger::slotToGuiPluginSessionEnded( GuiOfferSession * offer )
+void AppletMultiMessenger::toGuiPluginSessionEnded( GuiOfferSession * offer )
 {
 	//handleSessionEnded( offerResponse, this );
 }; 
