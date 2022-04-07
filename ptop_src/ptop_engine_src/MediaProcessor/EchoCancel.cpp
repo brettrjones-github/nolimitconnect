@@ -347,9 +347,26 @@ void EchoCancel::processFromMicrophone( int16_t * pcmDataFromMic, uint32_t dataL
 	else
 	{
 		memcpy( pcmRetDataProcessed, pcmDataFromMic, dataLenBytes );
-        if( 0 != processResult )
+        // do not flood log with messages
+        static int errCnt = 0;
+        static int errCode = 0;
+        if( 0 == processResult )
         {
-            LogMsg( LOG_DEBUG, "Error:  EchoCancel::processFromMicrophone result %d", processResult );
+            errCnt = 0;
+        }
+        else
+        {
+            errCnt++;
+            if( processResult != errCode || errCnt == 1 )
+            {
+                LogMsg( LOG_DEBUG, "Error:  EchoCancel::processFromMicrophone delay %d result %d", totalDelayMs, processResult );
+            }
+
+            errCode = processResult;
+            if( errCnt >= 100 )
+            {
+                errCnt = 0;
+            }
         }
 	}
 }

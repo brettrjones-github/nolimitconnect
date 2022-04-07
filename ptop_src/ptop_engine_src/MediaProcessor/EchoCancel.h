@@ -62,8 +62,8 @@ typedef struct {
 } AecMetrics;
 
 
-const uint32_t					ECHO_MIXER_BUF_CNT					= 4;
-const uint32_t					ECHO_MIXER_IN_BUF_SAMPLE_CNT		= 640;
+const int32_t					ECHO_MIXER_BUF_CNT					= 4;
+const int32_t					ECHO_MIXER_IN_BUF_SAMPLE_CNT		= 640;
 
 class EchoCancel
 {
