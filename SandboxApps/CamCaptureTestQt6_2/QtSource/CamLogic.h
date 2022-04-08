@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
+#include "AppDependLibrariesConfig.h"
 
 #include "VideoSinkGrabber.h"
 

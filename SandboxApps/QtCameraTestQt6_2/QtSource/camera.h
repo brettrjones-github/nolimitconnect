@@ -130,10 +130,9 @@ protected:
     void keyReleaseEvent(QKeyEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
 
+    Ui::Camera *ui;
     VideoSinkGrabber m_VidGrabber;
     QVideoSink* m_RawVideoSink{nullptr};
-private:
-    Ui::Camera *ui;
 
     QActionGroup *videoDevicesGroup  = nullptr;
 

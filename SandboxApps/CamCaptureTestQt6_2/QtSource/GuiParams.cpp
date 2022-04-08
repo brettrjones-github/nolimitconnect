@@ -342,8 +342,10 @@ QString GuiParams::describeHostType( EHostType hostType )
         return QObject::tr( "Chat Room Host " );
     case eHostTypeRandomConnect:	
         return QObject::tr( "Random Connect Host " );
-    case eHostTypePeerUser:		
-        return QObject::tr( "Peer User Host " );
+    case eHostTypePeerUserRelayed:
+        return QObject::tr( "Peer User Relayed Host " );
+    case eHostTypePeerUserDirect:
+        return QObject::tr( "Peer User Direct Host " );
     case eHostTypeNetwork:
         return QObject::tr( "Network Host " );
     case eHostTypeConnectTest:
@@ -530,11 +532,11 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Host Peer user");
         break;
 
-    case ePluginTypeFileXfer:	// file offer plugin
+    case ePluginTypePersonFileXfer:	// file offer plugin
         strPluginType = QObject::tr("Send A File");
         break;
 
-    case ePluginTypeFileServer:	// file share plugin
+    case ePluginTypeFileShareServer:	// file share plugin
         strPluginType = QObject::tr("Shared Files");
         break;
 
@@ -558,7 +560,7 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Play Truth Or Dare");
         break;
 
-    case ePluginTypeStoryboard:	// story board plugin
+    case ePluginTypeStoryboardServer:	// story board plugin
         strPluginType = QObject::tr("Story Board");
         break;
 
@@ -621,7 +623,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Administration Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeAboutMePage:
+    case ePluginTypeAboutMePageServer:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Shared About Me Page" ).toUtf8().constData();
@@ -650,7 +652,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         }
         break;
 
-    case ePluginTypeFileServer:
+    case ePluginTypeFileShareServer:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Shared Files" ).toUtf8().constData();
@@ -661,7 +663,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         }
         break;
 
-    case ePluginTypeFileXfer:
+    case ePluginTypePersonFileXfer:
         strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
         break;
 
@@ -724,7 +726,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeStoryboard:
+    case ePluginTypeStoryboardServer:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Shared Story Page (Blog)" ).toUtf8().constData();
@@ -804,11 +806,11 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         strPluginOffer = QObject::tr(" View Profile Page " );
         break;
 
-    case ePluginTypeFileXfer:	// file offer plugin
+    case ePluginTypePersonFileXfer:	// file offer plugin
         strPluginOffer = QObject::tr(" Receive A File " );
         break;
 
-    case ePluginTypeFileServer:	// file share plugin
+    case ePluginTypeFileShareServer:	// file share plugin
         strPluginOffer = QObject::tr(" View Shared Files " );
         break;
 
@@ -832,7 +834,7 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         strPluginOffer = QObject::tr(" Play Truth Or Dare ");
         break;
 
-    case ePluginTypeStoryboard:	// story board plugin
+    case ePluginTypeStoryboardServer:	// story board plugin
         strPluginOffer = QObject::tr(" View Story Board ");
         break;
 
@@ -992,8 +994,8 @@ QString GuiParams::describeStatus( EHostAnnounceStatus hostStatus )
         return QObject::tr( "Host Announce Send Request Failed" );
     case eHostAnnounceSuccess:
         return QObject::tr( "Host Announce Success" );
-    case eHostAnnounceFail:
-        return QObject::tr( "Host Announce Failed" );
+    case eHostAnnounceFailRequiresOpenPort:
+        return QObject::tr( "Host Announce Failed No Open Port" );
     case eHostAnnounceFailPermission:
         return QObject::tr( "Host Announce Fail Permission" );
     case eHostAnnounceFailConnectDropped:
@@ -1301,10 +1303,14 @@ QString GuiParams::describeJoinState( EJoinState joinState )
         return  QObject::tr( "Send Join Acked " );
     case eJoinStateJoinRequested:
         return  QObject::tr( "Join Requested " );
-    case eJoinStateJoinAccepted:
-        return  QObject::tr( "Join Accepted " );
+    case eJoinStateJoinWasGranted:
+        return  QObject::tr( "Join Was Granted " );
+    case eJoinStateJoinIsGranted:
+        return  QObject::tr( "Join Is Granted " );
     case eJoinStateJoinDenied:
         return  QObject::tr( "Join Denied " );
+    case eJoinStateJoinLeaveHost:
+        return  QObject::tr( "Join Left Host " );
     default:
         return  QObject::tr( "Unknown Join State " );
     }

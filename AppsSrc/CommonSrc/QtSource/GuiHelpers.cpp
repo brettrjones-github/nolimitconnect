@@ -48,17 +48,17 @@
 #include <QPainter>
 #include <QUrl>
 
-/*
+
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 # if defined (Q_OS_ANDROID)
 #  include <QtAndroid>
 # endif
 #else
 # if defined (Q_OS_ANDROID)
-#  include <QtCore/6.2.2/QtCore/private/qandroidextras_p.h>
+#  include <QtCore/6.2.4/QtCore/private/qandroidextras_p.h>
 # endif
 #endif
-*/
+
 
 //============================================================================
 QString GuiHelpers::getJustFileName( QString& fileNameAndPath )
@@ -1591,7 +1591,7 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
 {
 
 #if defined (Q_OS_ANDROID)
-    /*
+
     if( QtAndroidPrivate::Authorized != QtAndroidPrivate::checkPermission(permissionName).result() )
     {
         if( QtAndroidPrivate::Authorized != QtAndroidPrivate::requestPermission(permissionName).result() )
@@ -1599,7 +1599,7 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
             return false;
         }
     }
-    */
+
 
     return true;
 #else

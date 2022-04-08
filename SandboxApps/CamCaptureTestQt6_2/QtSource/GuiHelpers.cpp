@@ -40,7 +40,7 @@
 # endif
 #else
 # if defined (Q_OS_ANDROID)
-#  include <QtCore/6.2.2/QtCore/private/qandroidextras_p.h>
+#  include <QtCore/6.2.4/QtCore/private/qandroidextras_p.h>
 # endif
 #endif
 
@@ -491,7 +491,7 @@ void GuiHelpers::fillJoinRequest( QComboBox* comboBox )
     {
         comboBox->clear();
         comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinRequested ) );
-        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinAccepted ) );
+        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinIsGranted ) );
         comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinDenied ) );
     }
 }
@@ -502,7 +502,7 @@ EJoinState GuiHelpers::comboIdxToJoinState( int comboIdx )
     switch( comboIdx )
     {
     case 0: return eJoinStateJoinRequested;
-    case 1: return eJoinStateJoinAccepted;
+    case 1: return eJoinStateJoinIsGranted;
     default: return  eJoinStateJoinDenied;
     }
 }
@@ -514,7 +514,7 @@ uint8_t GuiHelpers::joinRequestToIndex( EJoinState joinState )
     {
     case eJoinStateJoinRequested:
         return 0;
-    case eJoinStateJoinAccepted:
+    case eJoinStateJoinIsGranted:
         return 1;
     default:
         return 2;
@@ -631,6 +631,7 @@ uint64_t GuiHelpers::saveToPngFile( QPixmap& bitmap, QString& fileName ) // retu
 bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false if user denies permission to use android hardware
 {
 #if defined (Q_OS_ANDROID)
+
     if( QtAndroidPrivate::Authorized != QtAndroidPrivate::checkPermission(permissionName).result() )
     {
         if( QtAndroidPrivate::Authorized != QtAndroidPrivate::requestPermission(permissionName).result() )
@@ -638,6 +639,7 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
             return false;
         }
     }
+
 
     return true;
 #else

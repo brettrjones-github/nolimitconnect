@@ -65,6 +65,12 @@ bool CamLogic::isCamAvailable( void )
         return false;
     }
 
+    if( !GuiHelpers::checkUserPermission("android.permission.CAMERA"))
+    {
+        QMessageBox( QMessageBox::Information, QObject::tr("Camera Permission"), QObject::tr("Cannot use camera without user permission"), QMessageBox::Ok);
+        return false;
+    }
+
     assureCamInitiated();
     return !m_camera.isNull() && m_camera->isAvailable();
 }
