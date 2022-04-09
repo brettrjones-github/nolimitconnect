@@ -47,20 +47,19 @@ void VideoSinkGrabber::enableGrab( bool enable )
 //============================================================================
 void VideoSinkGrabber::slotVideoFrameChanged( const QVideoFrame& frame )
 {
-    int64_t elapsedMs = m_ElapsedTimer.elapsed();
-    qDebug() << "slotVideoFrameChanged elapsed " << elapsedMs;
+    // int64_t elapsedMs = m_ElapsedTimer.elapsed();
+    // qDebug() << "slotVideoFrameChanged elapsed " << elapsedMs;
     m_ElapsedTimer.start();
     static int frameNum = 0;
     frameNum++;
 
-    QImage frameImage = frame.toImage();
-    lockGrabberQueue();
     if( m_availFrames.empty() )
     {
+        QImage frameImage = frame.toImage();
+        lockGrabberQueue();
         m_availFrames.push_back( std::make_pair( m_DesiredFrameSize == frameImage.size() ? frameImage : frameImage.scaled( m_DesiredFrameSize ), frameNum ) );
+        unlockGrabberQueue();
     }
-
-    unlockGrabberQueue();
 
 
     /*

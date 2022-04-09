@@ -44,7 +44,7 @@ void VideoSinkGrabber::enableGrab( bool enable )
 void VideoSinkGrabber::slotVideoFrameChanged( const QVideoFrame& frame )
 {
     int64_t elapsedMs = m_ElapsedTimer.elapsed();
-    qDebug() << "slotVideoFrameChanged elapsed " << elapsedMs;
+    // qDebug() << "slotVideoFrameChanged elapsed " << elapsedMs;
     // do toImage every time because if is not done every frame on android then it will stop working
     QImage image = frame.toImage();
     if( elapsedMs >= m_MinFrameIntervalMs && !image.isNull() )

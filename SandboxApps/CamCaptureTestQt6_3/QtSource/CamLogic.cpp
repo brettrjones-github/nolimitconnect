@@ -687,27 +687,30 @@ void CamLogic::nextCamera( void )
 void CamLogic::slotTakeSnapshot( void )
 {
     // LogModule(eLogVideo, LOG_DEBUG, "Cam Error %d Status %s", m_camera->error(), GuiParams::describeCamStatus(m_CamStatus).toUtf8().constData());
-    bool newFrame{ false };
-    int frameNum{ 0 };
-    QImage frameImage;
-
-    m_VideoSinkGrabber.lockGrabberQueue();
-    auto iter = m_VideoSinkGrabber.m_availFrames.begin();
-    if( iter != m_VideoSinkGrabber.m_availFrames.end() )
+    if(!m_VideoSinkGrabber.m_availFrames.empty())
     {
-        frameNum = iter->second;
-        newFrame = frameNum != m_LastFrameNum;
-        if( newFrame )
+        bool newFrame{ false };
+        int frameNum{ 0 };
+        QImage frameImage;
+
+        m_VideoSinkGrabber.lockGrabberQueue();
+        auto iter = m_VideoSinkGrabber.m_availFrames.begin();
+        if( iter != m_VideoSinkGrabber.m_availFrames.end() )
         {
-            frameImage = m_DesiredFrameSize == iter->first.size() ? iter->first : iter->first.scaled( m_DesiredFrameSize );
+            frameNum = iter->second;
+            newFrame = frameNum != m_LastFrameNum;
+            if( newFrame )
+            {
+                frameImage = m_DesiredFrameSize == iter->first.size() ? iter->first : iter->first.scaled( m_DesiredFrameSize );
+            }
+
+            m_VideoSinkGrabber.m_availFrames.clear();
         }
 
-        m_VideoSinkGrabber.m_availFrames.clear();
-    }
-
-    m_VideoSinkGrabber.unlockGrabberQueue();
-    if( newFrame )
-    {
-        processCapturedImage( frameNum, frameImage );
+        m_VideoSinkGrabber.unlockGrabberQueue();
+        if( newFrame )
+        {
+            processCapturedImage( frameNum, frameImage );
+        }
     }
 }

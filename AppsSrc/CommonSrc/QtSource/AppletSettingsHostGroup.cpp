@@ -101,6 +101,7 @@ void AppletSettingsHostGroup::slotApplyServiceSettings()
 
     savePluginSetting();
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+    LogMsg( LOG_VERBOSE, "Host Group Settings Applied" );
 }
 
 //============================================================================
