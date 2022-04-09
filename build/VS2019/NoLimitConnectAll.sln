@@ -268,6 +268,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libssh", "..\..\DependLibs\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F-B370-40FE-9B2A-901555E8E928}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\AppCompilerConfig.h = ..\..\AppCompilerConfig.h
+		..\..\AppCpuArchDefines.h = ..\..\AppCpuArchDefines.h
+		..\..\AppDependLibrariesConfig.h = ..\..\AppDependLibrariesConfig.h
+		..\..\AppTargetOsConfig.h = ..\..\AppTargetOsConfig.h
 		..\..\Build1_PythonDepends.pro = ..\..\Build1_PythonDepends.pro
 		..\..\Build2_PythonLib.pro = ..\..\Build2_PythonLib.pro
 		..\..\Build3_DependLibs.pro = ..\..\Build3_DependLibs.pro
@@ -299,16 +303,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 		..\..\GoTvAppConfig.h.gotvptop = ..\..\GoTvAppConfig.h.gotvptop
 		..\..\GoTvAppConfig.h.kodiptop = ..\..\GoTvAppConfig.h.kodiptop
 		..\..\GoTvAppConfig.h.kodiqt = ..\..\GoTvAppConfig.h.kodiqt
-		..\..\AppCompilerConfig.h = ..\..\AppCompilerConfig.h
 		..\..\GoTvCoreLibs.pro = ..\..\GoTvCoreLibs.pro
-		..\..\AppCpuArchDefines.h = ..\..\AppCpuArchDefines.h
-		..\..\AppDependLibrariesConfig.h = ..\..\AppDependLibrariesConfig.h
 		..\..\GoTvDependLibs.pro = ..\..\GoTvDependLibs.pro
 		..\..\GoTvLibsAll.pro = ..\..\GoTvLibsAll.pro
 		..\..\GoTvOpenSslLib.pro = ..\..\GoTvOpenSslLib.pro
 		..\..\GoTvPtoPVersion.txt = ..\..\GoTvPtoPVersion.txt
 		..\..\GoTvPythonLib.pro = ..\..\GoTvPythonLib.pro
-		..\..\AppTargetOsConfig.h = ..\..\AppTargetOsConfig.h
 		..\..\NoLimit_App.pro = ..\..\NoLimit_App.pro
 		..\..\NoLimit_AppAndroid.pro = ..\..\NoLimit_AppAndroid.pro
 		..\..\NoLimit_AppLink.pro = ..\..\NoLimit_AppLink.pro
@@ -321,7 +321,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvpx", "..\..\DependLibs\libvpx-win64\build\VS2019\vpx.vcxproj", "{DCE19DAF-69AC-46DB-B14A-39F0FAA5DB74}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libptop", "..\..\ptop_src\build\VS2019\libptop.vcxproj", "{3A68081D-E8F9-4523-9436-530DE9E5530A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libptopengine", "..\..\ptop_src\build\VS2019\libptop.vcxproj", "{3A68081D-E8F9-4523-9436-530DE9E5530A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9F3B9100-AEC8-406E-BA2B-A8F8A71CACE9} = {9F3B9100-AEC8-406E-BA2B-A8F8A71CACE9}
 		{AB581101-18F0-46F6-B56A-83A6B1EA657E} = {AB581101-18F0-46F6-B56A-83A6B1EA657E}
@@ -1133,7 +1133,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = 6.3.0_msvc2019_64
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
-		Qt5Version = 64BitVs2017Qt5.15.2
 	EndGlobalSection
 EndGlobal

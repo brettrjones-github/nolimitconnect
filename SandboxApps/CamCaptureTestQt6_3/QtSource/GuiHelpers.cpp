@@ -40,7 +40,7 @@
 # endif
 #else
 # if defined (Q_OS_ANDROID)
-#  include <QtCore/6.2.4/QtCore/private/qandroidextras_p.h>
+#  include <QtCore/private/qandroidextras_p.h>
 # endif
 #endif
 

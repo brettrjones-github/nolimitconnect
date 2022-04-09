@@ -1,7 +1,6 @@
 TEMPLATE = app
 TARGET = camcapturetest
 CONFIG += no_docs_target
-CONFIG += c++11
 
 QT += gui core concurrent widgets network opengl xml svg
 QT += multimedia
@@ -22,8 +21,6 @@ android:{
 
 INCLUDEPATH += $$PWD/../../../
 INCLUDEPATH += $$PWD/../../../DependLibs
-# temporary crap while qt 6.2 is being developed
-INCLUDEPATH += $$PWD/../../../../Qt/6.2.2/android_arm64_v8a/include/QtCore/6.2.2
 
 include($$PWD/../../../config_os_detect.pri)
 
@@ -49,17 +46,14 @@ FORMS += \
 
 
 
-QT += widgets
+PRE_TARGETDEPS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}CoreLib$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
-
-    PRE_TARGETDEPS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}CoreLib$${STATIC_LIB_SUFFIX}
-    PRE_TARGETDEPS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
-
-    LIBS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}CoreLib$${STATIC_LIB_SUFFIX}
-    LIBS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+LIBS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}CoreLib$${STATIC_LIB_SUFFIX}
+LIBS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-OTHER_FILES +=  $$PWD/android/AndroidManifest.xml
+OTHER_FILES += android/AndroidManifest.xml
 
 DISTFILES += \
      $$PWD/android/build.gradle \
