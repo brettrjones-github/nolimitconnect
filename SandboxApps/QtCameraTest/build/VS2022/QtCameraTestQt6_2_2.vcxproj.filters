@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\QtSource\camera.cpp" />
+    <ClCompile Include="..\..\QtSource\imagesettings.cpp" />
+    <ClCompile Include="..\..\QtSource\main.cpp" />
+    <ClCompile Include="..\..\QtSource\metadatadialog.cpp" />
+    <ClCompile Include="..\..\QtSource\videosettings.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\..\QtSource\camera.h" />
+    <QtMoc Include="..\..\QtSource\imagesettings.h" />
+    <QtMoc Include="..\..\QtSource\metadatadialog.h" />
+    <QtMoc Include="..\..\QtSource\videosettings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\QtSource\camera.pro" />
+    <None Include="..\..\QtSource\Info.plist.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="..\..\QtSource\camera.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="..\..\QtSource\camera.ui" />
+    <QtUic Include="..\..\QtSource\imagesettings.ui" />
+    <QtUic Include="..\..\QtSource\videosettings.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\QtSource\CMakeLists.txt" />
+  </ItemGroup>
+</Project>

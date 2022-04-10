@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{059D6162-CD51-11D0-AE1F-00A0C90FFFC3}") = "libxvidcore", "libxvidcore.dsp", "{3B0A9655-B768-4FD9-BA5D-AF616BBC9C9E}"
+EndProject
+Project("{059D6162-CD51-11D0-AE1F-00A0C90FFFC3}") = "libxvidcore_static", "libxvidcore_static.dsp", "{3C105A6F-9EF6-4121-A852-9D93B479CD77}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xvid_bench", "xvid_bench.vcxproj", "{4152B37C-F7E4-4DC5-A125-58AE952307B3}"
+EndProject
+Project("{059D6162-CD51-11D0-AE1F-00A0C90FFFC3}") = "xvid_decraw", "xvid_decraw.dsp", "{9C62502C-F2F8-42A2-A696-185D0E6632FB}"
+	ProjectSection(DevStudioProjDeps) = postProject
+		0 = libxvidcore
+	EndProjectSection
+EndProject
+Project("{059D6162-CD51-11D0-AE1F-00A0C90FFFC3}") = "xvid_decraw_static", "xvid_decraw_static.dsp", "{61B05C75-34E1-4386-BA17-FAE0BB869AB4}"
+	ProjectSection(DevStudioProjDeps) = postProject
+		0 = libxvidcore_static
+	EndProjectSection
+EndProject
+Project("{059D6162-CD51-11D0-AE1F-00A0C90FFFC3}") = "xvid_encraw", "xvid_encraw.dsp", "{651DAE46-3337-4C19-9317-5356D49612C3}"
+	ProjectSection(DevStudioProjDeps) = postProject
+		0 = libxvidcore
+	EndProjectSection
+EndProject
+Project("{059D6162-CD51-11D0-AE1F-00A0C90FFFC3}") = "xvid_encraw_static", "xvid_encraw_static.dsp", "{C536F3C1-E6C7-4FF7-A450-9BE9CE2EDBC0}"
+	ProjectSection(DevStudioProjDeps) = postProject
+		0 = libxvidcore_static
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4152B37C-F7E4-4DC5-A125-58AE952307B3}.Debug|x86.ActiveCfg = Debug|Win32
+		{4152B37C-F7E4-4DC5-A125-58AE952307B3}.Debug|x86.Build.0 = Debug|Win32
+		{4152B37C-F7E4-4DC5-A125-58AE952307B3}.Release|x86.ActiveCfg = Release|Win32
+		{4152B37C-F7E4-4DC5-A125-58AE952307B3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

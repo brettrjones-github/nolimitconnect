@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{288ac997-5587-4a2a-ab5f-59b6678448f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{b9a106f8-de1d-47a0-b399-2b12091d01d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib">
+      <UniqueIdentifier>{36a85102-1516-4586-afbe-137f93d9cb38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\openjp2">
+      <UniqueIdentifier>{7dd84073-72c8-4720-b550-93f68659b460}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\bio.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\cidx_manager.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\cio.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\dwt.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\event.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\function_list.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\image.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\indexbox_manager.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\invert.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\j2k.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\jp2.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\mct.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\mqc.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\openjpeg.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_clock.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_codec.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_config.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_config_private.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_includes.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_intmath.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_inttypes.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_malloc.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\opj_stdint.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\pi.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\raw.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\t1.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\t1_luts.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\t2.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\tcd.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\openjp2\tgt.h">
+      <Filter>src\lib\openjp2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\lib\openjp2\bio.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\cidx_manager.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\cio.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\dwt.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\event.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\function_list.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\image.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\invert.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\j2k.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\jp2.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\mct.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\mqc.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\openjpeg.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\opj_clock.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\opj_malloc.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\phix_manager.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\pi.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\ppix_manager.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\raw.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\t1.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\t1_generate_luts.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\t2.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\tcd.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\tgt.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\thix_manager.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib\openjp2\tpix_manager.c">
+      <Filter>src\lib\openjp2</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\src\lib\openjp2\CMakeLists.txt">
+      <Filter>src\lib\openjp2</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\lib\openjp2\libopenjp2.pc.cmake.in">
+      <Filter>src\lib\openjp2</Filter>
+    </None>
+  </ItemGroup>
+</Project>

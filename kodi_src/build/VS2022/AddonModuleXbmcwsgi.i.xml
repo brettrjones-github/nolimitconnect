@@ -1,0 +1,2242 @@
+<?xml version="1.0" ?> 
+<top id="1" addr="02890DC8" >
+    <attributelist id="2" addr="02890DC8" >
+        <attribute name="outfile" value="AddonModuleXbmcwsgi.i.xml" id="3" addr="028A0188" />
+        <attribute name="name" value="xbmcwsgi" id="4" addr="028A0188" />
+        <attribute name="module" value="xbmcwsgi" id="5" addr="0289B918" />
+        <attribute name="inputfile" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\swig\\..\\swig\\AddonModuleXbmcwsgi.i" id="6" addr="028A0188" />
+        <attribute name="classes" value="0289A3C8" id="7" addr="0289A3C8" />
+        <attribute name="infile" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\swig\\..\\swig\\AddonModuleXbmcwsgi.i" id="8" addr="028A0188" />
+        <attribute name="outfile_h" value="AddonModuleXbmcwsgi.i.h" id="9" addr="028A0188" />
+    </attributelist >
+
+    <include id="10" addr="02898F98" >
+        <attributelist id="11" addr="02898F98" >
+            <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\project\\BuildDependencies\\win32\\bin\\swig\\Lib\\swig.swg" id="12" addr="028A0188" />
+        </attributelist >
+
+        <include id="13" addr="02898FC8" >
+            <attributelist id="14" addr="02898FC8" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\project\\BuildDependencies\\win32\\bin\\swig\\Lib\\swigwarnings.swg" id="15" addr="028A0188" />
+            </attributelist >
+
+            <include id="16" addr="028992D8" >
+                <attributelist id="17" addr="028992D8" >
+                    <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\project\\BuildDependencies\\win32\\bin\\swig\\Lib\\swigwarn.swg" id="18" addr="028A0188" />
+                </attributelist >
+             
+            </include >
+        </include >
+        <namespace id="19" addr="0289A178" >
+            <attributelist id="20" addr="0289A178" >
+                <attribute name="sym_name" value="std" id="21" addr="028A0188" />
+                <attribute name="name" value="std" id="22" addr="028A0188" />
+                <typescope id="23" addr="0289EA18" >
+                    <attributelist id="24" addr="0289EA18" >
+                        <attribute name="name" value="std" id="25" addr="028A0188" />
+                        <typetab id="26" addr="0289EA28" >
+                            <attributelist id="27" addr="0289EA28" >
+                                <attribute name="initializer_list" value="initializer_list" id="28" addr="028A0188" />
+                            </attributelist >
+                            <typetabsitem id="29" addr="0289EAC8" >
+                                <attributelist id="30" addr="0289EAC8" >
+                                </attributelist >
+                            </typetabsitem >
+                        </typetab >
+                        <attribute name="parent" value="02890548" id="31" addr="02890548" />
+                        <attribute name="qname" value="std" id="32" addr="028A0188" />
+                        <attribute name="symtab" value="0289A128" id="33" addr="0289A128" />
+                    </attributelist >
+                    <typescopesitem id="34" addr="0289A0D8" >
+                        <attributelist id="35" addr="0289A0D8" >
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="36" addr="0289EA28" >
+                        <attributelist id="37" addr="0289EA28" >
+                            <attribute name="initializer_list" value="initializer_list" id="38" addr="028A0188" />
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="39" addr="02890548" >
+                        <attributelist id="40" addr="02890548" >
+                            <attribute name="name" value="" id="41" addr="028A0188" />
+                            <typetab id="42" addr="02890578" >
+                                <attributelist id="43" addr="02890578" >
+                                    <attribute name="HTTPPythonRequest" value="HTTPPythonRequest" id="44" addr="028A0188" />
+                                </attributelist >
+                                <typetabsitem id="45" addr="0289EB18" >
+                                    <attributelist id="46" addr="0289EB18" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="47" addr="0289EA38" >
+                        <attributelist id="48" addr="0289EA38" >
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="49" addr="0289A128" >
+                        <attributelist id="50" addr="0289A128" >
+                            <attribute name="name" value="std" id="51" addr="028A0188" />
+                            <attribute name="csymtab" value="0289A148" id="52" addr="0289A148" />
+                            <attribute name="symtab" value="0289A118" id="53" addr="0289A118" />
+                        </attributelist >
+                    </typescopesitem >
+                </typescope >
+                <attribute name="symtab" value="0289A128" id="54" addr="0289A128" />
+                <attribute name="sym_symtab" value="028904D8" id="55" addr="028904D8" />
+                <attribute name="sym_overname" value="__SWIG_0" id="56" addr="028A0188" />
+            </attributelist >
+
+            <template id="57" addr="0289A238" >
+                <attributelist id="58" addr="0289A238" >
+                    <attribute name="templatetype" value="class" id="59" addr="028A0188" />
+                    <attribute name="sym_typename" value="1" id="60" addr="028A0188" />
+                    <attribute name="name" value="initializer_list" id="61" addr="028A0188" />
+                    <attribute name="sym_symtab" value="0289A128" id="62" addr="0289A128" />
+                    <attribute name="symtab" value="0289A328" id="63" addr="0289A328" />
+                    <attribute name="allows_typedef" value="1" id="64" addr="028A0188" />
+                    <attribute name="kind" value="class" id="65" addr="028A0188" />
+                    <attribute name="sym_name" value="initializer_list" id="66" addr="028A0188" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="67" addr="028A0188" />
+                    <attribute name="templateparms" value="0289A1C8" id="68" addr="0289A1C8" />
+                </attributelist >
+
+                <access id="69" addr="0289A408" >
+                    <attributelist id="70" addr="0289A408" >
+                        <attribute name="kind" value="public" id="71" addr="028A0188" />
+                    </attributelist >
+                 
+                </access >
+            </template >
+            <typemap id="72" addr="0289A708" >
+                <attributelist id="73" addr="0289A708" >
+                    <kwargs id="74" addr="0289A5A8" >
+                        <attributelist id="75" addr="0289A5A8" >
+                            <attribute name="name" value="warning" id="76" addr="028A0188" />
+                            <attribute name="value" value="476:Initialization using std::initializer_list." id="77" addr="028A0188" />
+                        </attributelist >
+                        <kwargssitem id="78" addr="0289A648" >
+                            <attributelist id="79" addr="0289A648" >
+                            </attributelist >
+                        </kwargssitem >
+                        <kwargssitem id="80" addr="0289A598" >
+                            <attributelist id="81" addr="0289A598" >
+                            </attributelist >
+                        </kwargssitem >
+                    </kwargs >
+                    <attribute name="code" value="" id="82" addr="028A0188" />
+                    <attribute name="method" value="in" id="83" addr="028A0188" />
+                </attributelist >
+
+                <typemapitem id="84" addr="0289A698" >
+                    <attributelist id="85" addr="0289A698" >
+                        <parmlist id="86" addr="0289A6B8" >
+                            <parm id="87">
+                                <attributelist id="88" addr="0289A6B8" >
+                                    <attribute name="type" value="std::initializer_list&lt;(T)>" id="89" addr="028A0188" />
+                                </attributelist >
+                            </parm >
+                        </parmlist >
+                    </attributelist >
+                 
+                </typemapitem >
+            </typemap >
+            <typemap id="90" addr="0289A8C8" >
+                <attributelist id="91" addr="0289A8C8" >
+                    <kwargs id="92" addr="0289A798" >
+                        <attributelist id="93" addr="0289A798" >
+                            <attribute name="name" value="precedence" id="94" addr="028A0188" />
+                            <attribute name="value" value="0" id="95" addr="028A0188" />
+                        </attributelist >
+                        <kwargssitem id="96" addr="0289A7A8" >
+                            <attributelist id="97" addr="0289A7A8" >
+                            </attributelist >
+                        </kwargssitem >
+                        <kwargssitem id="98" addr="0289A7B8" >
+                            <attributelist id="99" addr="0289A7B8" >
+                            </attributelist >
+                        </kwargssitem >
+                    </kwargs >
+                    <attribute name="code" value="" id="100" addr="028A0188" />
+                    <attribute name="method" value="typecheck" id="101" addr="028A0188" />
+                </attributelist >
+
+                <typemapitem id="102" addr="0289A868" >
+                    <attributelist id="103" addr="0289A868" >
+                        <parmlist id="104" addr="0289A888" >
+                            <parm id="105">
+                                <attributelist id="106" addr="0289A888" >
+                                    <attribute name="type" value="std::initializer_list&lt;(T)>" id="107" addr="028A0188" />
+                                </attributelist >
+                            </parm >
+                        </parmlist >
+                    </attributelist >
+                 
+                </typemapitem >
+            </typemap >
+        </namespace >
+        <typemap id="108" addr="0289A9D8" >
+            <attributelist id="109" addr="0289A9D8" >
+                <attribute name="code" value="delete [] $1;" id="110" addr="028A0188" />
+                <attribute name="method" value="newfree" id="111" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="112" addr="0289A968" >
+                <attributelist id="113" addr="0289A968" >
+                    <parmlist id="114" addr="0289A988" >
+                        <parm id="115">
+                            <attributelist id="116" addr="0289A988" >
+                                <attribute name="type" value="p.char" id="117" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="118" addr="0289AAC8" >
+            <attributelist id="119" addr="0289AAC8" >
+                <attribute name="code" value="{&#10;  delete [] $1;&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="120" addr="028A0188" />
+                <attribute name="method" value="memberin" id="121" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="122" addr="0289AA68" >
+                <attributelist id="123" addr="0289AA68" >
+                    <parmlist id="124" addr="0289AA88" >
+                        <parm id="125">
+                            <attributelist id="126" addr="0289AA88" >
+                                <attribute name="type" value="p.char" id="127" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="128" addr="0289ABF8" >
+            <attributelist id="129" addr="0289ABF8" >
+                <kwargs id="130" addr="0289AB18" >
+                    <attributelist id="131" addr="0289AB18" >
+                        <attribute name="name" value="warning" id="132" addr="028A0188" />
+                        <attribute name="value" value="451:Setting a const char * variable may leak memory." id="133" addr="028A0188" />
+                    </attributelist >
+                    <kwargssitem id="134" addr="0289AB28" >
+                        <attributelist id="135" addr="0289AB28" >
+                        </attributelist >
+                    </kwargssitem >
+                    <kwargssitem id="136" addr="0289AB08" >
+                        <attributelist id="137" addr="0289AB08" >
+                        </attributelist >
+                    </kwargssitem >
+                </kwargs >
+                <attribute name="code" value="{&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="138" addr="028A0188" />
+                <attribute name="method" value="memberin" id="139" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="140" addr="0289AB98" >
+                <attributelist id="141" addr="0289AB98" >
+                    <parmlist id="142" addr="0289ABB8" >
+                        <parm id="143">
+                            <attributelist id="144" addr="0289ABB8" >
+                                <attribute name="type" value="p.q(const).char" id="145" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="146" addr="0289ACE8" >
+            <attributelist id="147" addr="0289ACE8" >
+                <attribute name="code" value="{&#10;  delete [] $1;&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="148" addr="028A0188" />
+                <attribute name="method" value="globalin" id="149" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="150" addr="0289AC88" >
+                <attributelist id="151" addr="0289AC88" >
+                    <parmlist id="152" addr="0289ACA8" >
+                        <parm id="153">
+                            <attributelist id="154" addr="0289ACA8" >
+                                <attribute name="type" value="p.char" id="155" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="156" addr="0289AE18" >
+            <attributelist id="157" addr="0289AE18" >
+                <kwargs id="158" addr="0289AD38" >
+                    <attributelist id="159" addr="0289AD38" >
+                        <attribute name="name" value="warning" id="160" addr="028A0188" />
+                        <attribute name="value" value="451:Setting a const char * variable may leak memory." id="161" addr="028A0188" />
+                    </attributelist >
+                    <kwargssitem id="162" addr="0289AD48" >
+                        <attributelist id="163" addr="0289AD48" >
+                        </attributelist >
+                    </kwargssitem >
+                    <kwargssitem id="164" addr="0289AD28" >
+                        <attributelist id="165" addr="0289AD28" >
+                        </attributelist >
+                    </kwargssitem >
+                </kwargs >
+                <attribute name="code" value="{&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="166" addr="028A0188" />
+                <attribute name="method" value="globalin" id="167" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="168" addr="0289ADB8" >
+                <attributelist id="169" addr="0289ADB8" >
+                    <parmlist id="170" addr="0289ADD8" >
+                        <parm id="171">
+                            <attributelist id="172" addr="0289ADD8" >
+                                <attribute name="type" value="p.q(const).char" id="173" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="174" addr="0289AF28" >
+            <attributelist id="175" addr="0289AF28" >
+                <attribute name="code" value="{&#10;  if($input) {&#10;    strncpy((char*)$1, (const char *)$input, $1_dim0-1);&#10;    $1[$1_dim0-1] = 0;&#10;  } else {&#10;    $1[0] = 0;&#10;  }&#10;}" id="176" addr="028A0188" />
+                <attribute name="method" value="memberin" id="177" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="178" addr="0289AEC8" >
+                <attributelist id="179" addr="0289AEC8" >
+                    <parmlist id="180" addr="0289AEE8" >
+                        <parm id="181">
+                            <attributelist id="182" addr="0289AEE8" >
+                                <attribute name="type" value="a(ANY).char" id="183" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="184" addr="0289B038" >
+            <attributelist id="185" addr="0289B038" >
+                <attribute name="code" value="{&#10;  if($input) {&#10;    strncpy((char*)$1, (const char *)$input, $1_dim0-1);&#10;    $1[$1_dim0-1] = 0;&#10;  } else {&#10;    $1[0] = 0;&#10;  }&#10;}" id="186" addr="028A0188" />
+                <attribute name="method" value="globalin" id="187" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="188" addr="0289AFD8" >
+                <attributelist id="189" addr="0289AFD8" >
+                    <parmlist id="190" addr="0289AFF8" >
+                        <parm id="191">
+                            <attributelist id="192" addr="0289AFF8" >
+                                <attribute name="type" value="a(ANY).char" id="193" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="194" addr="0289B128" >
+            <attributelist id="195" addr="0289B128" >
+                <attribute name="code" value="{&#10;  if ($input) strcpy((char *)$1, (const char *)$input);&#10;  else $1[0] = 0;&#10;}" id="196" addr="028A0188" />
+                <attribute name="method" value="memberin" id="197" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="198" addr="0289B0C8" >
+                <attributelist id="199" addr="0289B0C8" >
+                    <parmlist id="200" addr="0289B0E8" >
+                        <parm id="201">
+                            <attributelist id="202" addr="0289B0E8" >
+                                <attribute name="type" value="a().char" id="203" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="204" addr="0289B218" >
+            <attributelist id="205" addr="0289B218" >
+                <attribute name="code" value="{&#10;  if ($input) strcpy((char *)$1, (const char *)$input);&#10;  else $1[0] = 0;&#10;}" id="206" addr="028A0188" />
+                <attribute name="method" value="globalin" id="207" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="208" addr="0289B1B8" >
+                <attributelist id="209" addr="0289B1B8" >
+                    <parmlist id="210" addr="0289B1D8" >
+                        <parm id="211">
+                            <attributelist id="212" addr="0289B1D8" >
+                                <attribute name="type" value="a().char" id="213" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="214" addr="0289B328" >
+            <attributelist id="215" addr="0289B328" >
+                <attribute name="code" value="{&#10;  size_t ii;&#10;  $1_basetype *b = ($1_basetype *) $1;&#10;  for (ii = 0; ii &lt; (size_t)$1_size; ii++) b[ii] = *(($1_basetype *) $input + ii);&#10;}" id="216" addr="028A0188" />
+                <attribute name="method" value="memberin" id="217" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="218" addr="0289B2C8" >
+                <attributelist id="219" addr="0289B2C8" >
+                    <parmlist id="220" addr="0289B2E8" >
+                        <parm id="221">
+                            <attributelist id="222" addr="0289B2E8" >
+                                <attribute name="type" value="a(ANY).SWIGTYPE" id="223" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="224" addr="0289B438" >
+            <attributelist id="225" addr="0289B438" >
+                <attribute name="code" value="{&#10;  size_t ii;&#10;  $1_basetype *b = ($1_basetype *) $1;&#10;  for (ii = 0; ii &lt; (size_t)$1_size; ii++) b[ii] = *(($1_basetype *) $input + ii);&#10;}" id="226" addr="028A0188" />
+                <attribute name="method" value="globalin" id="227" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="228" addr="0289B3D8" >
+                <attributelist id="229" addr="0289B3D8" >
+                    <parmlist id="230" addr="0289B3F8" >
+                        <parm id="231">
+                            <attributelist id="232" addr="0289B3F8" >
+                                <attribute name="type" value="a(ANY).SWIGTYPE" id="233" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="234" addr="0289B568" >
+            <attributelist id="235" addr="0289B568" >
+                <attribute name="code" value="{&#10;  $basetype (*inp)[$1_dim1] = ($basetype (*)[$1_dim1])($input);&#10;  $basetype (*dest)[$1_dim1] = ($basetype (*)[$1_dim1])($1);&#10;  size_t ii = 0;&#10;  for (; ii &lt; $1_dim0; ++ii) {&#10;    $basetype *ip = inp[ii];&#10;    $basetype *dp = dest[ii];&#10;    size_t jj = 0;&#10;    for (; jj &lt; $1_dim1; ++jj) dp[jj] = ip[jj];&#10;  }&#10;}" id="236" addr="028A0188" />
+                <attribute name="method" value="memberin" id="237" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="238" addr="0289B4D8" >
+                <attributelist id="239" addr="0289B4D8" >
+                    <parmlist id="240" addr="0289B528" >
+                        <parm id="241">
+                            <attributelist id="242" addr="0289B528" >
+                                <attribute name="type" value="a(ANY).a(ANY).SWIGTYPE" id="243" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="244" addr="0289B698" >
+            <attributelist id="245" addr="0289B698" >
+                <attribute name="code" value="{&#10;  $basetype (*inp)[$1_dim1] = ($basetype (*)[$1_dim1])($input);&#10;  $basetype (*dest)[$1_dim1] = ($basetype (*)[$1_dim1])($1);&#10;  size_t ii = 0;&#10;  for (; ii &lt; $1_dim0; ++ii) {&#10;    $basetype *ip = inp[ii];&#10;    $basetype *dp = dest[ii];&#10;    size_t jj = 0;&#10;    for (; jj &lt; $1_dim1; ++jj) dp[jj] = ip[jj];&#10;  }&#10;}" id="246" addr="028A0188" />
+                <attribute name="method" value="globalin" id="247" addr="028A0188" />
+            </attributelist >
+
+            <typemapitem id="248" addr="0289B608" >
+                <attributelist id="249" addr="0289B608" >
+                    <parmlist id="250" addr="0289B658" >
+                        <parm id="251">
+                            <attributelist id="252" addr="0289B658" >
+                                <attribute name="type" value="a(ANY).a(ANY).SWIGTYPE" id="253" addr="028A0188" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <insert id="254" addr="0289B6F8" >
+            <attributelist id="255" addr="0289B6F8" >
+                <attribute name="code" value="&#10;#ifdef __cplusplus&#10;/* SwigValueWrapper is described in swig.swg */&#10;template&lt;typename T> class SwigValueWrapper {&#10;  struct SwigMovePointer {&#10;    T *ptr;&#10;    SwigMovePointer(T *p) : ptr(p) { }&#10;    ~SwigMovePointer() { delete ptr; }&#10;    SwigMovePointer&amp; operator=(SwigMovePointer&amp; rhs) { T* oldptr = ptr; ptr = 0; delete oldptr; ptr = rhs.ptr; rhs.ptr = 0; return *this; }&#10;  } pointer;&#10;  SwigValueWrapper&amp; operator=(const SwigValueWrapper&lt;T>&amp; rhs);&#10;  SwigValueWrapper(const SwigValueWrapper&lt;T>&amp; rhs);&#10;public:&#10;  SwigValueWrapper() : pointer(0) { }&#10;  SwigValueWrapper&amp; operator=(const T&amp; t) { SwigMovePointer tmp(new T(t)); pointer = tmp; return *this; }&#10;  operator T&amp;() const { return *pointer.ptr; }&#10;  T *operator&amp;() { return pointer.ptr; }&#10;};" id="256" addr="028A0188" />
+                <attribute name="section" value="runtime" id="257" addr="028A0188" />
+            </attributelist >
+         
+        </insert >
+        <insert id="258" addr="0289B768" >
+            <attributelist id="259" addr="0289B768" >
+                <attribute name="code" value="&#10;template &lt;typename T> T SwigValueInit() {&#10;  return T();&#10;}&#10;#endif&#10;" id="260" addr="028A0188" />
+                <attribute name="section" value="runtime" id="261" addr="028A0188" />
+            </attributelist >
+         
+        </insert >
+        <insert id="262" addr="0289B7D8" >
+            <attributelist id="263" addr="0289B7D8" >
+                <attribute name="code" value="/* -----------------------------------------------------------------------------&#10; *  This section contains generic SWIG labels for method/variable&#10; *  declarations/attributes, and other compiler dependent labels.&#10; * ----------------------------------------------------------------------------- */&#10;&#10;/* template workaround for compilers that cannot correctly implement the C++ standard */&#10;#ifndef SWIGTEMPLATEDISAMBIGUATOR&#10;# if defined(__SUNPRO_CC) &amp;&amp; (__SUNPRO_CC &lt;= 0x560)&#10;#  define SWIGTEMPLATEDISAMBIGUATOR template&#10;# elif defined(__HP_aCC)&#10;/* Needed even with `aCC -AA' when `aCC -V' reports HP ANSI C++ B3910B A.03.55 */&#10;/* If we find a maximum version that requires this, the test would be __HP_aCC &lt;= 35500 for A.03.55 */&#10;#  define SWIGTEMPLATEDISAMBIGUATOR template&#10;# else&#10;#  define SWIGTEMPLATEDISAMBIGUATOR&#10;# endif&#10;#endif&#10;&#10;/* inline attribute */&#10;#ifndef SWIGINLINE&#10;# if defined(__cplusplus) || (defined(__GNUC__) &amp;&amp; !defined(__STRICT_ANSI__))&#10;#   define SWIGINLINE inline&#10;# else&#10;#   define SWIGINLINE&#10;# endif&#10;#endif&#10;&#10;/* attribute recognised by some compilers to avoid 'unused' warnings */&#10;#ifndef SWIGUNUSED&#10;# if defined(__GNUC__)&#10;#   if !(defined(__cplusplus)) || (__GNUC__ > 3 || (__GNUC__ == 3 &amp;&amp; __GNUC_MINOR__ >= 4))&#10;#     define SWIGUNUSED __attribute__ ((__unused__))&#10;#   else&#10;#     define SWIGUNUSED&#10;#   endif&#10;# elif defined(__ICC)&#10;#   define SWIGUNUSED __attribute__ ((__unused__))&#10;# else&#10;#   define SWIGUNUSED&#10;# endif&#10;#endif&#10;&#10;#ifndef SWIG_MSC_UNSUPPRESS_4505&#10;# if defined(_MSC_VER)&#10;#   pragma warning(disable : 4505) /* unreferenced local function has been removed */&#10;# endif&#10;#endif&#10;&#10;#ifndef SWIGUNUSEDPARM&#10;# ifdef __cplusplus&#10;#   define SWIGUNUSEDPARM(p)&#10;# else&#10;#   define SWIGUNUSEDPARM(p) p SWIGUNUSED&#10;# endif&#10;#endif&#10;&#10;/* internal SWIG method */&#10;#ifndef SWIGINTERN&#10;# define SWIGINTERN static SWIGUNUSED&#10;#endif&#10;&#10;/* internal inline SWIG method */&#10;#ifndef SWIGINTERNINLINE&#10;# define SWIGINTERNINLINE SWIGINTERN SWIGINLINE&#10;#endif&#10;&#10;/* exporting methods */&#10;#if defined(__GNUC__)&#10;#  if (__GNUC__ >= 4) || (__GNUC__ == 3 &amp;&amp; __GNUC_MINOR__ >= 4)&#10;#    ifndef GCC_HASCLASSVISIBILITY&#10;#      define GCC_HASCLASSVISIBILITY&#10;#    endif&#10;#  endif&#10;#endif&#10;&#10;#ifndef SWIGEXPORT&#10;# if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)&#10;#   if defined(STATIC_LINKED)&#10;#     define SWIGEXPORT&#10;#   else&#10;#     define SWIGEXPORT __declspec(dllexport)&#10;#   endif&#10;# else&#10;#   if defined(__GNUC__) &amp;&amp; defined(GCC_HASCLASSVISIBILITY)&#10;#     define SWIGEXPORT __attribute__ ((visibility(&quot;default&quot;)))&#10;#   else&#10;#     define SWIGEXPORT&#10;#   endif&#10;# endif&#10;#endif&#10;&#10;/* calling conventions for Windows */&#10;#ifndef SWIGSTDCALL&#10;# if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)&#10;#   define SWIGSTDCALL __stdcall&#10;# else&#10;#   define SWIGSTDCALL&#10;# endif&#10;#endif&#10;&#10;/* Deal with Microsoft's attempt at deprecating C standard runtime functions */&#10;#if !defined(SWIG_NO_CRT_SECURE_NO_DEPRECATE) &amp;&amp; defined(_MSC_VER) &amp;&amp; !defined(_CRT_SECURE_NO_DEPRECATE)&#10;# define _CRT_SECURE_NO_DEPRECATE&#10;#endif&#10;&#10;/* Deal with Microsoft's attempt at deprecating methods in the standard C++ library */&#10;#if !defined(SWIG_NO_SCL_SECURE_NO_DEPRECATE) &amp;&amp; defined(_MSC_VER) &amp;&amp; !defined(_SCL_SECURE_NO_DEPRECATE)&#10;# define _SCL_SECURE_NO_DEPRECATE&#10;#endif&#10;&#10;/* Deal with Apple's deprecated 'AssertMacros.h' from Carbon-framework */&#10;#if defined(__APPLE__) &amp;&amp; !defined(__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES)&#10;# define __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES 0&#10;#endif&#10;&#10;/* Intel's compiler complains if a variable which was never initialised is&#10; * cast to void, which is a common idiom which we use to indicate that we&#10; * are aware a variable isn't used.  So we just silence that warning.&#10; * See: https://github.com/swig/swig/issues/192 for more discussion.&#10; */&#10;#ifdef __INTEL_COMPILER&#10;# pragma warning disable 592&#10;#endif&#10;" id="264" addr="028A0188" />
+                <attribute name="section" value="runtime" id="265" addr="028A0188" />
+            </attributelist >
+         
+        </insert >
+    </include >
+    <include id="266" addr="0289B898" >
+        <attributelist id="267" addr="0289B898" >
+            <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\swig\\..\\swig\\AddonModuleXbmcwsgi.i" id="268" addr="028A0188" />
+            <attribute name="module" value="" id="269" addr="0289B948" />
+            <attribute name="options" value="0289B858" id="270" addr="0289B858" />
+        </attributelist >
+
+        <insert id="271" addr="0289B8E8" >
+            <attributelist id="272" addr="0289B8E8" >
+                <attribute name="code" value="&#10;#if defined(TARGET_WINDOWS)&#10;#  include &lt;windows.h>&#10;#endif&#10;&#10;#ifdef HAS_WEB_SERVER&#10;" id="273" addr="028A0188" />
+                <attribute name="section" value="begin" id="274" addr="028A0188" />
+            </attributelist >
+         
+        </insert >
+        <module id="275" addr="0289B918" >
+            <attributelist id="276" addr="0289B918" >
+                <attribute name="name" value="xbmcwsgi" id="277" addr="028A0188" />
+            </attributelist >
+         
+        </module >
+        <insert id="278" addr="0289B968" >
+            <attributelist id="279" addr="0289B968" >
+                <attribute name="code" value="&#10;#include &quot;interfaces/legacy/wsgi/WsgiErrorStream.h&quot;&#10;#include &quot;interfaces/legacy/wsgi/WsgiInputStream.h&quot;&#10;#include &quot;interfaces/legacy/wsgi/WsgiResponse.h&quot;&#10;#include &quot;interfaces/legacy/wsgi/WsgiResponseBody.h&quot;&#10;&#10;using namespace XBMCAddon;&#10;using namespace xbmcwsgi;&#10;&#10;#if defined(__GNUG__)&#10;#pragma GCC diagnostic ignored &quot;-Wstrict-aliasing&quot;&#10;#endif&#10;&#10;" id="280" addr="028A0188" />
+            </attributelist >
+         
+        </insert >
+        <include id="281" addr="0289BBF8" >
+            <attributelist id="282" addr="0289BBF8" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\swighelper.h" id="283" addr="028A0188" />
+            </attributelist >
+         
+        </include >
+        <include id="284" addr="0289BC38" >
+            <attributelist id="285" addr="0289BC38" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\AddonString.h" id="286" addr="028A0188" />
+            </attributelist >
+
+            <namespace id="287" addr="0289BCD8" >
+                <attributelist id="288" addr="0289BCD8" >
+                    <attribute name="sym_name" value="XBMCAddon" id="289" addr="028A0188" />
+                    <attribute name="name" value="XBMCAddon" id="290" addr="028A0188" />
+                    <attribute name="csym_nextSibling" value="0289C048" id="291" addr="0289C048" />
+                    <attribute name="sym_nextSibling" value="0289C048" id="292" addr="0289C048" />
+                    <typescope id="293" addr="0289EA68" >
+                        <attributelist id="294" addr="0289EA68" >
+                            <attribute name="name" value="XBMCAddon" id="295" addr="028A0188" />
+                            <typetab id="296" addr="0289EA88" >
+                                <attributelist id="297" addr="0289EA88" >
+                                    <attribute name="String" value="std::string" id="298" addr="028A0188" />
+                                </attributelist >
+                                <typetabsitem id="299" addr="0289EB78" >
+                                    <attributelist id="300" addr="0289EB78" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="301" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="302" addr="028A0188" />
+                            <attribute name="symtab" value="0289BC88" id="303" addr="0289BC88" />
+                        </attributelist >
+                        <typescopesitem id="304" addr="0289BC68" >
+                            <attributelist id="305" addr="0289BC68" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="306" addr="0289EA88" >
+                            <attributelist id="307" addr="0289EA88" >
+                                <attribute name="String" value="std::string" id="308" addr="028A0188" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="309" addr="02890548" >
+                            <attributelist id="310" addr="02890548" >
+                                <attribute name="name" value="" id="311" addr="028A0188" />
+                                <typetab id="312" addr="02890578" >
+                                    <attributelist id="313" addr="02890578" >
+                                        <attribute name="HTTPPythonRequest" value="HTTPPythonRequest" id="314" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="315" addr="0289EB18" >
+                                        <attributelist id="316" addr="0289EB18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="317" addr="0289EB08" >
+                            <attributelist id="318" addr="0289EB08" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="319" addr="0289BC88" >
+                            <attributelist id="320" addr="0289BC88" >
+                                <attribute name="name" value="XBMCAddon" id="321" addr="028A0188" />
+                                <attribute name="csymtab" value="0289BCA8" id="322" addr="0289BCA8" />
+                                <attribute name="symtab" value="0289BC78" id="323" addr="0289BC78" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289BC88" id="324" addr="0289BC88" />
+                    <attribute name="sym_symtab" value="028904D8" id="325" addr="028904D8" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="326" addr="028A0188" />
+                </attributelist >
+
+                <cdecl id="327" addr="0289BD68" >
+                    <attributelist id="328" addr="0289BD68" >
+                        <attribute name="sym_name" value="String" id="329" addr="028A0188" />
+                        <attribute name="name" value="XBMCAddon::String" id="330" addr="028A0188" />
+                        <attribute name="decl" value="" id="331" addr="028A0188" />
+                        <attribute name="storage" value="typedef" id="332" addr="028A0188" />
+                        <attribute name="kind" value="typedef" id="333" addr="028A0188" />
+                        <attribute name="type" value="std::string" id="334" addr="028A0188" />
+                        <attribute name="sym_symtab" value="0289BC88" id="335" addr="0289BC88" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="336" addr="028A0188" />
+                    </attributelist >
+                 
+                </cdecl >
+                <cdecl id="337" addr="0289BE68" >
+                    <attributelist id="338" addr="0289BE68" >
+                        <attribute name="sym_name" value="emptyString" id="339" addr="028A0188" />
+                        <attribute name="name" value="XBMCAddon::emptyString" id="340" addr="028A0188" />
+                        <attribute name="decl" value="" id="341" addr="028A0188" />
+                        <attribute name="storage" value="extern" id="342" addr="028A0188" />
+                        <attribute name="kind" value="variable" id="343" addr="028A0188" />
+                        <attribute name="type" value="XBMCAddon::String" id="344" addr="028A0188" />
+                        <attribute name="sym_symtab" value="0289BC88" id="345" addr="0289BC88" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="346" addr="028A0188" />
+                    </attributelist >
+                 
+                </cdecl >
+            </namespace >
+        </include >
+        <include id="347" addr="0289BF58" >
+            <attributelist id="348" addr="0289BF58" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\wsgi\\WsgiErrorStream.h" id="349" addr="028A0188" />
+            </attributelist >
+
+            <classforward id="350" addr="0289BFA8" >
+                <attributelist id="351" addr="0289BFA8" >
+                    <attribute name="sym_name" value="HTTPPythonRequest" id="352" addr="028A0188" />
+                    <attribute name="name" value="HTTPPythonRequest" id="353" addr="028A0188" />
+                    <attribute name="kind" value="struct" id="354" addr="028A0188" />
+                    <attribute name="sym_weak" value="1" id="355" addr="028A0188" />
+                    <attribute name="sym_symtab" value="028904D8" id="356" addr="028904D8" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="357" addr="028A0188" />
+                </attributelist >
+             
+            </classforward >
+            <namespace id="358" addr="0289C048" >
+                <attributelist id="359" addr="0289C048" >
+                    <attribute name="sym_name" value="XBMCAddon" id="360" addr="028A0188" />
+                    <attribute name="name" value="XBMCAddon" id="361" addr="028A0188" />
+                    <attribute name="sym_previousSibling" value="0289BCD8" id="362" addr="0289BCD8" />
+                    <attribute name="csym_nextSibling" value="0289CAA8" id="363" addr="0289CAA8" />
+                    <attribute name="sym_nextSibling" value="0289CAA8" id="364" addr="0289CAA8" />
+                    <typescope id="365" addr="0289EA68" >
+                        <attributelist id="366" addr="0289EA68" >
+                            <attribute name="name" value="XBMCAddon" id="367" addr="028A0188" />
+                            <typetab id="368" addr="0289EA88" >
+                                <attributelist id="369" addr="0289EA88" >
+                                    <attribute name="String" value="std::string" id="370" addr="028A0188" />
+                                </attributelist >
+                                <typetabsitem id="371" addr="0289EB78" >
+                                    <attributelist id="372" addr="0289EB78" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="373" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="374" addr="028A0188" />
+                            <attribute name="symtab" value="0289BC88" id="375" addr="0289BC88" />
+                        </attributelist >
+                        <typescopesitem id="376" addr="0289BC68" >
+                            <attributelist id="377" addr="0289BC68" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="378" addr="0289EA88" >
+                            <attributelist id="379" addr="0289EA88" >
+                                <attribute name="String" value="std::string" id="380" addr="028A0188" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="381" addr="02890548" >
+                            <attributelist id="382" addr="02890548" >
+                                <attribute name="name" value="" id="383" addr="028A0188" />
+                                <typetab id="384" addr="02890578" >
+                                    <attributelist id="385" addr="02890578" >
+                                        <attribute name="HTTPPythonRequest" value="HTTPPythonRequest" id="386" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="387" addr="0289EB18" >
+                                        <attributelist id="388" addr="0289EB18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="389" addr="0289EB08" >
+                            <attributelist id="390" addr="0289EB08" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="391" addr="0289BC88" >
+                            <attributelist id="392" addr="0289BC88" >
+                                <attribute name="name" value="XBMCAddon" id="393" addr="028A0188" />
+                                <attribute name="csymtab" value="0289BCA8" id="394" addr="0289BCA8" />
+                                <attribute name="symtab" value="0289BC78" id="395" addr="0289BC78" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289BC88" id="396" addr="0289BC88" />
+                    <attribute name="sym_symtab" value="028904D8" id="397" addr="028904D8" />
+                </attributelist >
+
+                <namespace id="398" addr="0289C0D8" >
+                    <attributelist id="399" addr="0289C0D8" >
+                        <attribute name="sym_name" value="xbmcwsgi" id="400" addr="028A0188" />
+                        <attribute name="name" value="xbmcwsgi" id="401" addr="028A0188" />
+                        <attribute name="csym_nextSibling" value="0289CAE8" id="402" addr="0289CAE8" />
+                        <attribute name="sym_nextSibling" value="0289CAE8" id="403" addr="0289CAE8" />
+                        <typescope id="404" addr="0289EC98" >
+                            <attributelist id="405" addr="0289EC98" >
+                                <attribute name="name" value="xbmcwsgi" id="406" addr="028A0188" />
+                                <typetab id="407" addr="0289ECA8" >
+                                    <attributelist id="408" addr="0289ECA8" >
+                                        <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="409" addr="028A0188" />
+                                        <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="410" addr="028A0188" />
+                                        <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="411" addr="028A0188" />
+                                        <attribute name="WsgiInputStream" value="WsgiInputStream" id="412" addr="028A0188" />
+                                        <attribute name="WsgiResponse" value="WsgiResponse" id="413" addr="028A0188" />
+                                        <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="414" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="415" addr="0289F148" >
+                                        <attributelist id="416" addr="0289F148" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="417" addr="0289F6F8" >
+                                        <attributelist id="418" addr="0289F6F8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="419" addr="0289ED18" >
+                                        <attributelist id="420" addr="0289ED18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="421" addr="0289F338" >
+                                        <attributelist id="422" addr="0289F338" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="423" addr="0289F828" >
+                                        <attributelist id="424" addr="0289F828" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="425" addr="0289FCB8" >
+                                        <attributelist id="426" addr="0289FCB8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                                <attribute name="parent" value="0289EA68" id="427" addr="0289EA68" />
+                                <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="428" addr="028A0188" />
+                                <attribute name="symtab" value="0289C098" id="429" addr="0289C098" />
+                            </attributelist >
+                            <typescopesitem id="430" addr="0289C078" >
+                                <attributelist id="431" addr="0289C078" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="432" addr="0289ECA8" >
+                                <attributelist id="433" addr="0289ECA8" >
+                                    <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="434" addr="028A0188" />
+                                    <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="435" addr="028A0188" />
+                                    <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="436" addr="028A0188" />
+                                    <attribute name="WsgiInputStream" value="WsgiInputStream" id="437" addr="028A0188" />
+                                    <attribute name="WsgiResponse" value="WsgiResponse" id="438" addr="028A0188" />
+                                    <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="439" addr="028A0188" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="440" addr="0289EA68" >
+                                <attributelist id="441" addr="0289EA68" >
+                                    <attribute name="name" value="XBMCAddon" id="442" addr="028A0188" />
+                                    <typetab id="443" addr="0289EA88" >
+                                        <attributelist id="444" addr="0289EA88" >
+                                            <attribute name="String" value="std::string" id="445" addr="028A0188" />
+                                        </attributelist >
+                                        <typetabsitem id="446" addr="0289EB78" >
+                                            <attributelist id="447" addr="0289EB78" >
+                                            </attributelist >
+                                        </typetabsitem >
+                                    </typetab >
+                                    <attribute name="parent" value="02890548" id="448" addr="02890548" />
+                                    <attribute name="qname" value="XBMCAddon" id="449" addr="028A0188" />
+                                    <attribute name="symtab" value="0289BC88" id="450" addr="0289BC88" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="451" addr="0289ECB8" >
+                                <attributelist id="452" addr="0289ECB8" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="453" addr="0289C098" >
+                                <attributelist id="454" addr="0289C098" >
+                                    <attribute name="name" value="xbmcwsgi" id="455" addr="028A0188" />
+                                    <attribute name="csymtab" value="0289C0B8" id="456" addr="0289C0B8" />
+                                    <attribute name="symtab" value="0289C088" id="457" addr="0289C088" />
+                                </attributelist >
+                            </typescopesitem >
+                        </typescope >
+                        <attribute name="symtab" value="0289C098" id="458" addr="0289C098" />
+                        <attribute name="sym_symtab" value="0289BC88" id="459" addr="0289BC88" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="460" addr="028A0188" />
+                    </attributelist >
+
+                    <class id="461" addr="0289C1D8" >
+                        <attributelist id="462" addr="0289C1D8" >
+                            <attribute name="name" value="XBMCAddon::xbmcwsgi::WsgiErrorStream" id="463" addr="028A0188" />
+                            <attribute name="sym_symtab" value="0289C098" id="464" addr="0289C098" />
+                            <attribute name="symtab" value="0289C298" id="465" addr="0289C298" />
+                            <attribute name="allows_typedef" value="1" id="466" addr="028A0188" />
+                            <attribute name="typepass_visit" value="1" id="467" addr="028A0188" />
+                            <attribute name="allocate_visit" value="1" id="468" addr="028A0188" />
+                            <attribute name="kind" value="class" id="469" addr="028A0188" />
+                            <attribute name="sym_name" value="WsgiErrorStream" id="470" addr="028A0188" />
+                            <attribute name="allocate_default_constructor" value="1" id="471" addr="028A0188" />
+                            <attribute name="allocate_has_constructor" value="1" id="472" addr="028A0188" />
+                            <attribute name="allocate_public_constructor" value="1" id="473" addr="028A0188" />
+                            <attribute name="allocate_has_destructor" value="1" id="474" addr="028A0188" />
+                            <attribute name="allocate_default_destructor" value="1" id="475" addr="028A0188" />
+                            <attribute name="allocate_copy_constructor" value="1" id="476" addr="028A0188" />
+                            <attribute name="privatebaselist" value="0289C198" id="477" addr="0289C198" />
+                            <attribute name="protectedbaselist" value="0289C188" id="478" addr="0289C188" />
+                            <baselist id="479" addr="0289C178" >
+                                <base name="AddonClass" id="480" addr="0289C128" />
+                            </baselist >
+                            <attribute name="module" value="xbmcwsgi" id="481" addr="0289B918" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="482" addr="028A0188" />
+                            <typescope id="483" addr="0289ED98" >
+                                <attributelist id="484" addr="0289ED98" >
+                                    <attribute name="name" value="WsgiErrorStream" id="485" addr="028A0188" />
+                                    <typetab id="486" addr="0289EDA8" >
+                                        <attributelist id="487" addr="0289EDA8" >
+                                        </attributelist >
+                                    </typetab >
+                                    <attribute name="parent" value="0289EC98" id="488" addr="0289EC98" />
+                                    <attribute name="qname" value="XBMCAddon::xbmcwsgi::WsgiErrorStream" id="489" addr="028A0188" />
+                                    <attribute name="symtab" value="0289C298" id="490" addr="0289C298" />
+                                </attributelist >
+                                <typescopesitem id="491" addr="0289ED48" >
+                                    <attributelist id="492" addr="0289ED48" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="493" addr="0289EDA8" >
+                                    <attributelist id="494" addr="0289EDA8" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="495" addr="0289EC98" >
+                                    <attributelist id="496" addr="0289EC98" >
+                                        <attribute name="name" value="xbmcwsgi" id="497" addr="028A0188" />
+                                        <typetab id="498" addr="0289ECA8" >
+                                            <attributelist id="499" addr="0289ECA8" >
+                                                <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="500" addr="028A0188" />
+                                                <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="501" addr="028A0188" />
+                                                <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="502" addr="028A0188" />
+                                                <attribute name="WsgiInputStream" value="WsgiInputStream" id="503" addr="028A0188" />
+                                                <attribute name="WsgiResponse" value="WsgiResponse" id="504" addr="028A0188" />
+                                                <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="505" addr="028A0188" />
+                                            </attributelist >
+                                            <typetabsitem id="506" addr="0289F148" >
+                                                <attributelist id="507" addr="0289F148" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="508" addr="0289F6F8" >
+                                                <attributelist id="509" addr="0289F6F8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="510" addr="0289ED18" >
+                                                <attributelist id="511" addr="0289ED18" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="512" addr="0289F338" >
+                                                <attributelist id="513" addr="0289F338" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="514" addr="0289F828" >
+                                                <attributelist id="515" addr="0289F828" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="516" addr="0289FCB8" >
+                                                <attributelist id="517" addr="0289FCB8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                        </typetab >
+                                        <attribute name="parent" value="0289EA68" id="518" addr="0289EA68" />
+                                        <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="519" addr="028A0188" />
+                                        <attribute name="symtab" value="0289C098" id="520" addr="0289C098" />
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="521" addr="0289EDB8" >
+                                    <attributelist id="522" addr="0289EDB8" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="523" addr="0289C298" >
+                                    <attributelist id="524" addr="0289C298" >
+                                        <attribute name="name" value="WsgiErrorStream" id="525" addr="028A0188" />
+                                        <attribute name="csymtab" value="0289C2C8" id="526" addr="0289C2C8" />
+                                        <attribute name="symtab" value="0289C288" id="527" addr="0289C288" />
+                                    </attributelist >
+                                </typescopesitem >
+                            </typescope >
+                        </attributelist >
+
+                        <access id="528" addr="0289C268" >
+                            <attributelist id="529" addr="0289C268" >
+                                <attribute name="kind" value="public" id="530" addr="028A0188" />
+                            </attributelist >
+                         
+                        </access >
+                        <constructor id="531" addr="0289C358" >
+                            <attributelist id="532" addr="0289C358" >
+                                <attribute name="ismember" value="1" id="533" addr="028A0188" />
+                                <attribute name="sym_name" value="WsgiErrorStream" id="534" addr="028A0188" />
+                                <attribute name="name" value="WsgiErrorStream" id="535" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="536" addr="028A0188" />
+                                <attribute name="access" value="public" id="537" addr="028A0188" />
+                                <attribute name="feature_new" value="1" id="538" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289C298" id="539" addr="0289C298" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="540" addr="028A0188" />
+                            </attributelist >
+                         
+                        </constructor >
+                        <destructor id="541" addr="0289C458" >
+                            <attributelist id="542" addr="0289C458" >
+                                <attribute name="ismember" value="1" id="543" addr="028A0188" />
+                                <attribute name="sym_name" value="~WsgiErrorStream" id="544" addr="028A0188" />
+                                <attribute name="name" value="~WsgiErrorStream" id="545" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="546" addr="028A0188" />
+                                <attribute name="access" value="public" id="547" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289C298" id="548" addr="0289C298" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="549" addr="028A0188" />
+                            </attributelist >
+                         
+                        </destructor >
+                        <cdecl id="550" addr="0289C518" >
+                            <attributelist id="551" addr="0289C518" >
+                                <attribute name="name" value="flush" id="552" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="553" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289C298" id="554" addr="0289C298" />
+                                <attribute name="kind" value="function" id="555" addr="028A0188" />
+                                <attribute name="sym_name" value="flush" id="556" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="557" addr="028A0188" />
+                                <attribute name="access" value="public" id="558" addr="028A0188" />
+                                <attribute name="type" value="void" id="559" addr="028A0188" />
+                                <attribute name="code" value="{ }" id="560" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="561" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="562" addr="0289C6A8" >
+                            <attributelist id="563" addr="0289C6A8" >
+                                <attribute name="name" value="write" id="564" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="565" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289C298" id="566" addr="0289C298" />
+                                <attribute name="kind" value="function" id="567" addr="028A0188" />
+                                <attribute name="sym_name" value="write" id="568" addr="028A0188" />
+                                <attribute name="decl" value="f(r.q(const).XBMCAddon::String)." id="569" addr="028A0188" />
+                                <attribute name="access" value="public" id="570" addr="028A0188" />
+                                <parmlist id="571" addr="0289C648" >
+                                    <parm id="572">
+                                        <attributelist id="573" addr="0289C648" >
+                                            <attribute name="name" value="str" id="574" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="575" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="void" id="576" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="577" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="578" addr="0289C898" >
+                            <attributelist id="579" addr="0289C898" >
+                                <attribute name="ismember" value="1" id="580" addr="028A0188" />
+                                <attribute name="sym_name" value="writelines" id="581" addr="028A0188" />
+                                <attribute name="name" value="writelines" id="582" addr="028A0188" />
+                                <attribute name="decl" value="f(r.q(const).std::vector&lt;(XBMCAddon::String)>)." id="583" addr="028A0188" />
+                                <parmlist id="584" addr="0289C838" >
+                                    <parm id="585">
+                                        <attributelist id="586" addr="0289C838" >
+                                            <attribute name="name" value="seq" id="587" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).std::vector&lt;(XBMCAddon::String)>" id="588" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="access" value="public" id="589" addr="028A0188" />
+                                <attribute name="kind" value="function" id="590" addr="028A0188" />
+                                <attribute name="type" value="void" id="591" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289C298" id="592" addr="0289C298" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="593" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                    </class >
+                </namespace >
+            </namespace >
+        </include >
+        <include id="594" addr="0289C9C8" >
+            <attributelist id="595" addr="0289C9C8" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\wsgi\\WsgiInputStream.h" id="596" addr="028A0188" />
+            </attributelist >
+
+            <classforward id="597" addr="0289CA18" >
+                <attributelist id="598" addr="0289CA18" >
+                    <attribute name="sym_name" value="HTTPPythonRequest" id="599" addr="028A0188" />
+                    <attribute name="name" value="HTTPPythonRequest" id="600" addr="028A0188" />
+                    <attribute name="kind" value="struct" id="601" addr="028A0188" />
+                    <attribute name="sym_weak" value="1" id="602" addr="028A0188" />
+                    <attribute name="sym_symtab" value="028904D8" id="603" addr="028904D8" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="604" addr="028A0188" />
+                </attributelist >
+             
+            </classforward >
+            <namespace id="605" addr="0289CAA8" >
+                <attributelist id="606" addr="0289CAA8" >
+                    <attribute name="sym_name" value="XBMCAddon" id="607" addr="028A0188" />
+                    <attribute name="name" value="XBMCAddon" id="608" addr="028A0188" />
+                    <attribute name="sym_previousSibling" value="0289C048" id="609" addr="0289C048" />
+                    <attribute name="csym_nextSibling" value="0289D9A8" id="610" addr="0289D9A8" />
+                    <attribute name="sym_nextSibling" value="0289D9A8" id="611" addr="0289D9A8" />
+                    <typescope id="612" addr="0289EA68" >
+                        <attributelist id="613" addr="0289EA68" >
+                            <attribute name="name" value="XBMCAddon" id="614" addr="028A0188" />
+                            <typetab id="615" addr="0289EA88" >
+                                <attributelist id="616" addr="0289EA88" >
+                                    <attribute name="String" value="std::string" id="617" addr="028A0188" />
+                                </attributelist >
+                                <typetabsitem id="618" addr="0289EB78" >
+                                    <attributelist id="619" addr="0289EB78" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="620" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="621" addr="028A0188" />
+                            <attribute name="symtab" value="0289BC88" id="622" addr="0289BC88" />
+                        </attributelist >
+                        <typescopesitem id="623" addr="0289BC68" >
+                            <attributelist id="624" addr="0289BC68" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="625" addr="0289EA88" >
+                            <attributelist id="626" addr="0289EA88" >
+                                <attribute name="String" value="std::string" id="627" addr="028A0188" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="628" addr="02890548" >
+                            <attributelist id="629" addr="02890548" >
+                                <attribute name="name" value="" id="630" addr="028A0188" />
+                                <typetab id="631" addr="02890578" >
+                                    <attributelist id="632" addr="02890578" >
+                                        <attribute name="HTTPPythonRequest" value="HTTPPythonRequest" id="633" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="634" addr="0289EB18" >
+                                        <attributelist id="635" addr="0289EB18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="636" addr="0289EB08" >
+                            <attributelist id="637" addr="0289EB08" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="638" addr="0289BC88" >
+                            <attributelist id="639" addr="0289BC88" >
+                                <attribute name="name" value="XBMCAddon" id="640" addr="028A0188" />
+                                <attribute name="csymtab" value="0289BCA8" id="641" addr="0289BCA8" />
+                                <attribute name="symtab" value="0289BC78" id="642" addr="0289BC78" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289BC88" id="643" addr="0289BC88" />
+                    <attribute name="sym_symtab" value="028904D8" id="644" addr="028904D8" />
+                </attributelist >
+
+                <namespace id="645" addr="0289CAE8" >
+                    <attributelist id="646" addr="0289CAE8" >
+                        <attribute name="sym_name" value="xbmcwsgi" id="647" addr="028A0188" />
+                        <attribute name="name" value="xbmcwsgi" id="648" addr="028A0188" />
+                        <attribute name="sym_previousSibling" value="0289C0D8" id="649" addr="0289C0D8" />
+                        <attribute name="csym_nextSibling" value="0289D9E8" id="650" addr="0289D9E8" />
+                        <attribute name="sym_nextSibling" value="0289D9E8" id="651" addr="0289D9E8" />
+                        <typescope id="652" addr="0289EC98" >
+                            <attributelist id="653" addr="0289EC98" >
+                                <attribute name="name" value="xbmcwsgi" id="654" addr="028A0188" />
+                                <typetab id="655" addr="0289ECA8" >
+                                    <attributelist id="656" addr="0289ECA8" >
+                                        <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="657" addr="028A0188" />
+                                        <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="658" addr="028A0188" />
+                                        <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="659" addr="028A0188" />
+                                        <attribute name="WsgiInputStream" value="WsgiInputStream" id="660" addr="028A0188" />
+                                        <attribute name="WsgiResponse" value="WsgiResponse" id="661" addr="028A0188" />
+                                        <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="662" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="663" addr="0289F148" >
+                                        <attributelist id="664" addr="0289F148" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="665" addr="0289F6F8" >
+                                        <attributelist id="666" addr="0289F6F8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="667" addr="0289ED18" >
+                                        <attributelist id="668" addr="0289ED18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="669" addr="0289F338" >
+                                        <attributelist id="670" addr="0289F338" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="671" addr="0289F828" >
+                                        <attributelist id="672" addr="0289F828" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="673" addr="0289FCB8" >
+                                        <attributelist id="674" addr="0289FCB8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                                <attribute name="parent" value="0289EA68" id="675" addr="0289EA68" />
+                                <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="676" addr="028A0188" />
+                                <attribute name="symtab" value="0289C098" id="677" addr="0289C098" />
+                            </attributelist >
+                            <typescopesitem id="678" addr="0289C078" >
+                                <attributelist id="679" addr="0289C078" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="680" addr="0289ECA8" >
+                                <attributelist id="681" addr="0289ECA8" >
+                                    <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="682" addr="028A0188" />
+                                    <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="683" addr="028A0188" />
+                                    <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="684" addr="028A0188" />
+                                    <attribute name="WsgiInputStream" value="WsgiInputStream" id="685" addr="028A0188" />
+                                    <attribute name="WsgiResponse" value="WsgiResponse" id="686" addr="028A0188" />
+                                    <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="687" addr="028A0188" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="688" addr="0289EA68" >
+                                <attributelist id="689" addr="0289EA68" >
+                                    <attribute name="name" value="XBMCAddon" id="690" addr="028A0188" />
+                                    <typetab id="691" addr="0289EA88" >
+                                        <attributelist id="692" addr="0289EA88" >
+                                            <attribute name="String" value="std::string" id="693" addr="028A0188" />
+                                        </attributelist >
+                                        <typetabsitem id="694" addr="0289EB78" >
+                                            <attributelist id="695" addr="0289EB78" >
+                                            </attributelist >
+                                        </typetabsitem >
+                                    </typetab >
+                                    <attribute name="parent" value="02890548" id="696" addr="02890548" />
+                                    <attribute name="qname" value="XBMCAddon" id="697" addr="028A0188" />
+                                    <attribute name="symtab" value="0289BC88" id="698" addr="0289BC88" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="699" addr="0289ECB8" >
+                                <attributelist id="700" addr="0289ECB8" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="701" addr="0289C098" >
+                                <attributelist id="702" addr="0289C098" >
+                                    <attribute name="name" value="xbmcwsgi" id="703" addr="028A0188" />
+                                    <attribute name="csymtab" value="0289C0B8" id="704" addr="0289C0B8" />
+                                    <attribute name="symtab" value="0289C088" id="705" addr="0289C088" />
+                                </attributelist >
+                            </typescopesitem >
+                        </typescope >
+                        <attribute name="symtab" value="0289C098" id="706" addr="0289C098" />
+                        <attribute name="sym_symtab" value="0289BC88" id="707" addr="0289BC88" />
+                    </attributelist >
+
+                    <class id="708" addr="0289CBA8" >
+                        <attributelist id="709" addr="0289CBA8" >
+                            <attribute name="name" value="XBMCAddon::xbmcwsgi::WsgiInputStreamIterator" id="710" addr="028A0188" />
+                            <attribute name="sym_symtab" value="0289C098" id="711" addr="0289C098" />
+                            <attribute name="symtab" value="0289CC58" id="712" addr="0289CC58" />
+                            <attribute name="allows_typedef" value="1" id="713" addr="028A0188" />
+                            <attribute name="typepass_visit" value="1" id="714" addr="028A0188" />
+                            <attribute name="allocate_visit" value="1" id="715" addr="028A0188" />
+                            <attribute name="kind" value="class" id="716" addr="028A0188" />
+                            <attribute name="sym_name" value="WsgiInputStreamIterator" id="717" addr="028A0188" />
+                            <attribute name="allocate_default_constructor" value="1" id="718" addr="028A0188" />
+                            <attribute name="allocate_has_constructor" value="1" id="719" addr="028A0188" />
+                            <attribute name="allocate_public_constructor" value="1" id="720" addr="028A0188" />
+                            <attribute name="allocate_has_destructor" value="1" id="721" addr="028A0188" />
+                            <attribute name="allocate_default_destructor" value="1" id="722" addr="028A0188" />
+                            <attribute name="allocate_copy_constructor" value="1" id="723" addr="028A0188" />
+                            <attribute name="privatebaselist" value="0289CB98" id="724" addr="0289CB98" />
+                            <attribute name="protectedbaselist" value="0289CB88" id="725" addr="0289CB88" />
+                            <baselist id="726" addr="0289CB78" >
+                                <base name="AddonClass" id="727" addr="0289CB38" />
+                            </baselist >
+                            <attribute name="module" value="xbmcwsgi" id="728" addr="0289B918" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="729" addr="028A0188" />
+                            <typescope id="730" addr="0289F198" >
+                                <attributelist id="731" addr="0289F198" >
+                                    <attribute name="name" value="WsgiInputStreamIterator" id="732" addr="028A0188" />
+                                    <typetab id="733" addr="0289F1A8" >
+                                        <attributelist id="734" addr="0289F1A8" >
+                                        </attributelist >
+                                    </typetab >
+                                    <attribute name="parent" value="0289EC98" id="735" addr="0289EC98" />
+                                    <attribute name="qname" value="XBMCAddon::xbmcwsgi::WsgiInputStreamIterator" id="736" addr="028A0188" />
+                                    <attribute name="symtab" value="0289CC58" id="737" addr="0289CC58" />
+                                </attributelist >
+                                <typescopesitem id="738" addr="0289F168" >
+                                    <attributelist id="739" addr="0289F168" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="740" addr="0289F1A8" >
+                                    <attributelist id="741" addr="0289F1A8" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="742" addr="0289EC98" >
+                                    <attributelist id="743" addr="0289EC98" >
+                                        <attribute name="name" value="xbmcwsgi" id="744" addr="028A0188" />
+                                        <typetab id="745" addr="0289ECA8" >
+                                            <attributelist id="746" addr="0289ECA8" >
+                                                <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="747" addr="028A0188" />
+                                                <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="748" addr="028A0188" />
+                                                <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="749" addr="028A0188" />
+                                                <attribute name="WsgiInputStream" value="WsgiInputStream" id="750" addr="028A0188" />
+                                                <attribute name="WsgiResponse" value="WsgiResponse" id="751" addr="028A0188" />
+                                                <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="752" addr="028A0188" />
+                                            </attributelist >
+                                            <typetabsitem id="753" addr="0289F148" >
+                                                <attributelist id="754" addr="0289F148" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="755" addr="0289F6F8" >
+                                                <attributelist id="756" addr="0289F6F8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="757" addr="0289ED18" >
+                                                <attributelist id="758" addr="0289ED18" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="759" addr="0289F338" >
+                                                <attributelist id="760" addr="0289F338" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="761" addr="0289F828" >
+                                                <attributelist id="762" addr="0289F828" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="763" addr="0289FCB8" >
+                                                <attributelist id="764" addr="0289FCB8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                        </typetab >
+                                        <attribute name="parent" value="0289EA68" id="765" addr="0289EA68" />
+                                        <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="766" addr="028A0188" />
+                                        <attribute name="symtab" value="0289C098" id="767" addr="0289C098" />
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="768" addr="0289F1B8" >
+                                    <attributelist id="769" addr="0289F1B8" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="770" addr="0289CC58" >
+                                    <attributelist id="771" addr="0289CC58" >
+                                        <attribute name="name" value="WsgiInputStreamIterator" id="772" addr="028A0188" />
+                                        <attribute name="csymtab" value="0289CC68" id="773" addr="0289CC68" />
+                                        <attribute name="symtab" value="0289CC38" id="774" addr="0289CC38" />
+                                    </attributelist >
+                                </typescopesitem >
+                            </typescope >
+                            <attribute name="feature_iterator" value="std::string" id="775" addr="028A0188" />
+                        </attributelist >
+
+                        <access id="776" addr="0289CC18" >
+                            <attributelist id="777" addr="0289CC18" >
+                                <attribute name="kind" value="public" id="778" addr="028A0188" />
+                            </attributelist >
+                         
+                        </access >
+                        <constructor id="779" addr="0289CCF8" >
+                            <attributelist id="780" addr="0289CCF8" >
+                                <attribute name="ismember" value="1" id="781" addr="028A0188" />
+                                <attribute name="sym_name" value="WsgiInputStreamIterator" id="782" addr="028A0188" />
+                                <attribute name="name" value="WsgiInputStreamIterator" id="783" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="784" addr="028A0188" />
+                                <attribute name="access" value="public" id="785" addr="028A0188" />
+                                <attribute name="feature_new" value="1" id="786" addr="028A0188" />
+                                <attribute name="feature_iterator" value="std::string" id="787" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="788" addr="0289CC58" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="789" addr="028A0188" />
+                            </attributelist >
+                         
+                        </constructor >
+                        <destructor id="790" addr="0289CDB8" >
+                            <attributelist id="791" addr="0289CDB8" >
+                                <attribute name="ismember" value="1" id="792" addr="028A0188" />
+                                <attribute name="sym_name" value="~WsgiInputStreamIterator" id="793" addr="028A0188" />
+                                <attribute name="name" value="~WsgiInputStreamIterator" id="794" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="795" addr="028A0188" />
+                                <attribute name="access" value="public" id="796" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="797" addr="0289CC58" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="798" addr="028A0188" />
+                            </attributelist >
+                         
+                        </destructor >
+                        <cdecl id="799" addr="0289CF58" >
+                            <attributelist id="800" addr="0289CF58" >
+                                <attribute name="name" value="read" id="801" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="802" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="803" addr="0289CC58" />
+                                <attribute name="sym_nextSibling" value="0289CFD8" id="804" addr="0289CFD8" />
+                                <attribute name="csym_nextSibling" value="0289CFD8" id="805" addr="0289CFD8" />
+                                <attribute name="kind" value="function" id="806" addr="028A0188" />
+                                <attribute name="sym_name" value="read" id="807" addr="028A0188" />
+                                <attribute name="decl" value="q(const).f(unsigned long)." id="808" addr="028A0188" />
+                                <attribute name="access" value="public" id="809" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289CF58" id="810" addr="0289CF58" />
+                                <parmlist id="811" addr="0289CEE8" >
+                                    <parm id="812">
+                                        <attributelist id="813" addr="0289CEE8" >
+                                            <attribute name="name" value="size" id="814" addr="028A0188" />
+                                            <attribute name="value" value="0" id="815" addr="028A0188" />
+                                            <attribute name="type" value="unsigned long" id="816" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XBMCAddon::String" id="817" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="818" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="819" addr="0289CFD8" >
+                            <attributelist id="820" addr="0289CFD8" >
+                                <attribute name="name" value="read" id="821" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="822" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="823" addr="0289CC58" />
+                                <attribute name="sym_previousSibling" value="0289CF58" id="824" addr="0289CF58" />
+                                <attribute name="kind" value="function" id="825" addr="028A0188" />
+                                <attribute name="sym_name" value="read" id="826" addr="028A0188" />
+                                <attribute name="defaultargs" value="0289CF58" id="827" addr="0289CF58" />
+                                <attribute name="decl" value="q(const).f()." id="828" addr="028A0188" />
+                                <attribute name="access" value="public" id="829" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289CF58" id="830" addr="0289CF58" />
+                                <attribute name="type" value="XBMCAddon::String" id="831" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_1" id="832" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="833" addr="0289D1B8" >
+                            <attributelist id="834" addr="0289D1B8" >
+                                <attribute name="name" value="readline" id="835" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="836" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="837" addr="0289CC58" />
+                                <attribute name="sym_nextSibling" value="0289D238" id="838" addr="0289D238" />
+                                <attribute name="csym_nextSibling" value="0289D238" id="839" addr="0289D238" />
+                                <attribute name="kind" value="function" id="840" addr="028A0188" />
+                                <attribute name="sym_name" value="readline" id="841" addr="028A0188" />
+                                <attribute name="decl" value="q(const).f(unsigned long)." id="842" addr="028A0188" />
+                                <attribute name="access" value="public" id="843" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289D1B8" id="844" addr="0289D1B8" />
+                                <parmlist id="845" addr="0289D148" >
+                                    <parm id="846">
+                                        <attributelist id="847" addr="0289D148" >
+                                            <attribute name="name" value="size" id="848" addr="028A0188" />
+                                            <attribute name="value" value="0" id="849" addr="028A0188" />
+                                            <attribute name="type" value="unsigned long" id="850" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XBMCAddon::String" id="851" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="852" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="853" addr="0289D238" >
+                            <attributelist id="854" addr="0289D238" >
+                                <attribute name="name" value="readline" id="855" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="856" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="857" addr="0289CC58" />
+                                <attribute name="sym_previousSibling" value="0289D1B8" id="858" addr="0289D1B8" />
+                                <attribute name="kind" value="function" id="859" addr="028A0188" />
+                                <attribute name="sym_name" value="readline" id="860" addr="028A0188" />
+                                <attribute name="defaultargs" value="0289D1B8" id="861" addr="0289D1B8" />
+                                <attribute name="decl" value="q(const).f()." id="862" addr="028A0188" />
+                                <attribute name="access" value="public" id="863" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289D1B8" id="864" addr="0289D1B8" />
+                                <attribute name="type" value="XBMCAddon::String" id="865" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_1" id="866" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="867" addr="0289D468" >
+                            <attributelist id="868" addr="0289D468" >
+                                <attribute name="name" value="readlines" id="869" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="870" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="871" addr="0289CC58" />
+                                <attribute name="sym_nextSibling" value="0289D4E8" id="872" addr="0289D4E8" />
+                                <attribute name="csym_nextSibling" value="0289D4E8" id="873" addr="0289D4E8" />
+                                <attribute name="kind" value="function" id="874" addr="028A0188" />
+                                <attribute name="sym_name" value="readlines" id="875" addr="028A0188" />
+                                <attribute name="decl" value="q(const).f(unsigned long)." id="876" addr="028A0188" />
+                                <attribute name="access" value="public" id="877" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289D468" id="878" addr="0289D468" />
+                                <parmlist id="879" addr="0289D3F8" >
+                                    <parm id="880">
+                                        <attributelist id="881" addr="0289D3F8" >
+                                            <attribute name="name" value="sizehint" id="882" addr="028A0188" />
+                                            <attribute name="value" value="0" id="883" addr="028A0188" />
+                                            <attribute name="type" value="unsigned long" id="884" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="std::vector&lt;(XBMCAddon::String)>" id="885" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="886" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="887" addr="0289D4E8" >
+                            <attributelist id="888" addr="0289D4E8" >
+                                <attribute name="name" value="readlines" id="889" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="890" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289CC58" id="891" addr="0289CC58" />
+                                <attribute name="sym_previousSibling" value="0289D468" id="892" addr="0289D468" />
+                                <attribute name="kind" value="function" id="893" addr="028A0188" />
+                                <attribute name="sym_name" value="readlines" id="894" addr="028A0188" />
+                                <attribute name="defaultargs" value="0289D468" id="895" addr="0289D468" />
+                                <attribute name="decl" value="q(const).f()." id="896" addr="028A0188" />
+                                <attribute name="access" value="public" id="897" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289D468" id="898" addr="0289D468" />
+                                <attribute name="type" value="std::vector&lt;(XBMCAddon::String)>" id="899" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_1" id="900" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                    </class >
+                    <class id="901" addr="0289D658" >
+                        <attributelist id="902" addr="0289D658" >
+                            <attribute name="name" value="XBMCAddon::xbmcwsgi::WsgiInputStream" id="903" addr="028A0188" />
+                            <attribute name="sym_symtab" value="0289C098" id="904" addr="0289C098" />
+                            <attribute name="symtab" value="0289D708" id="905" addr="0289D708" />
+                            <attribute name="allows_typedef" value="1" id="906" addr="028A0188" />
+                            <attribute name="typepass_visit" value="1" id="907" addr="028A0188" />
+                            <attribute name="allocate_visit" value="1" id="908" addr="028A0188" />
+                            <attribute name="feature_iterable" value="XBMCAddon::xbmcwsgi::WsgiInputStreamIterator" id="909" addr="028A0188" />
+                            <attribute name="kind" value="class" id="910" addr="028A0188" />
+                            <attribute name="sym_name" value="WsgiInputStream" id="911" addr="028A0188" />
+                            <attribute name="allocate_default_constructor" value="1" id="912" addr="028A0188" />
+                            <attribute name="allocate_has_constructor" value="1" id="913" addr="028A0188" />
+                            <attribute name="allocate_public_constructor" value="1" id="914" addr="028A0188" />
+                            <attribute name="allocate_has_destructor" value="1" id="915" addr="028A0188" />
+                            <attribute name="allocate_default_destructor" value="1" id="916" addr="028A0188" />
+                            <attribute name="allocate_copy_constructor" value="1" id="917" addr="028A0188" />
+                            <attribute name="privatebaselist" value="0289D648" id="918" addr="0289D648" />
+                            <attribute name="protectedbaselist" value="0289D638" id="919" addr="0289D638" />
+                            <baselist id="920" addr="0289D628" >
+                                <base name="WsgiInputStreamIterator" id="921" addr="0289D5E8" />
+                            </baselist >
+                            <attribute name="module" value="xbmcwsgi" id="922" addr="0289B918" />
+                            <attribute name="bases" value="0289F458" id="923" addr="0289F458" />
+                            <attribute name="allbases" value="0289F6A8" id="924" addr="0289F6A8" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="925" addr="028A0188" />
+                            <typescope id="926" addr="0289F368" >
+                                <attributelist id="927" addr="0289F368" >
+                                    <attribute name="inherit" value="0289F498" id="928" addr="0289F498" />
+                                    <attribute name="name" value="WsgiInputStream" id="929" addr="028A0188" />
+                                    <typetab id="930" addr="0289F388" >
+                                        <attributelist id="931" addr="0289F388" >
+                                        </attributelist >
+                                    </typetab >
+                                    <attribute name="parent" value="0289EC98" id="932" addr="0289EC98" />
+                                    <attribute name="qname" value="XBMCAddon::xbmcwsgi::WsgiInputStream" id="933" addr="028A0188" />
+                                    <attribute name="symtab" value="0289D708" id="934" addr="0289D708" />
+                                </attributelist >
+                                <typescopesitem id="935" addr="0289F498" >
+                                    <attributelist id="936" addr="0289F498" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="937" addr="0289F3D8" >
+                                    <attributelist id="938" addr="0289F3D8" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="939" addr="0289F388" >
+                                    <attributelist id="940" addr="0289F388" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="941" addr="0289EC98" >
+                                    <attributelist id="942" addr="0289EC98" >
+                                        <attribute name="name" value="xbmcwsgi" id="943" addr="028A0188" />
+                                        <typetab id="944" addr="0289ECA8" >
+                                            <attributelist id="945" addr="0289ECA8" >
+                                                <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="946" addr="028A0188" />
+                                                <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="947" addr="028A0188" />
+                                                <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="948" addr="028A0188" />
+                                                <attribute name="WsgiInputStream" value="WsgiInputStream" id="949" addr="028A0188" />
+                                                <attribute name="WsgiResponse" value="WsgiResponse" id="950" addr="028A0188" />
+                                                <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="951" addr="028A0188" />
+                                            </attributelist >
+                                            <typetabsitem id="952" addr="0289F148" >
+                                                <attributelist id="953" addr="0289F148" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="954" addr="0289F6F8" >
+                                                <attributelist id="955" addr="0289F6F8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="956" addr="0289ED18" >
+                                                <attributelist id="957" addr="0289ED18" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="958" addr="0289F338" >
+                                                <attributelist id="959" addr="0289F338" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="960" addr="0289F828" >
+                                                <attributelist id="961" addr="0289F828" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="962" addr="0289FCB8" >
+                                                <attributelist id="963" addr="0289FCB8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                        </typetab >
+                                        <attribute name="parent" value="0289EA68" id="964" addr="0289EA68" />
+                                        <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="965" addr="028A0188" />
+                                        <attribute name="symtab" value="0289C098" id="966" addr="0289C098" />
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="967" addr="0289F408" >
+                                    <attributelist id="968" addr="0289F408" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="969" addr="0289D708" >
+                                    <attributelist id="970" addr="0289D708" >
+                                        <attribute name="inherit" value="0289D738" id="971" addr="0289D738" />
+                                        <attribute name="name" value="WsgiInputStream" id="972" addr="028A0188" />
+                                        <attribute name="csymtab" value="0289D718" id="973" addr="0289D718" />
+                                        <attribute name="symtab" value="0289D6F8" id="974" addr="0289D6F8" />
+                                    </attributelist >
+                                </typescopesitem >
+                            </typescope >
+                        </attributelist >
+
+                        <access id="975" addr="0289D6C8" >
+                            <attributelist id="976" addr="0289D6C8" >
+                                <attribute name="kind" value="public" id="977" addr="028A0188" />
+                            </attributelist >
+                         
+                        </access >
+                        <constructor id="978" addr="0289D7B8" >
+                            <attributelist id="979" addr="0289D7B8" >
+                                <attribute name="ismember" value="1" id="980" addr="028A0188" />
+                                <attribute name="sym_name" value="WsgiInputStream" id="981" addr="028A0188" />
+                                <attribute name="name" value="WsgiInputStream" id="982" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="983" addr="028A0188" />
+                                <attribute name="access" value="public" id="984" addr="028A0188" />
+                                <attribute name="feature_new" value="1" id="985" addr="028A0188" />
+                                <attribute name="feature_iterable" value="XBMCAddon::xbmcwsgi::WsgiInputStreamIterator" id="986" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289D708" id="987" addr="0289D708" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="988" addr="028A0188" />
+                            </attributelist >
+                         
+                        </constructor >
+                        <destructor id="989" addr="0289D878" >
+                            <attributelist id="990" addr="0289D878" >
+                                <attribute name="ismember" value="1" id="991" addr="028A0188" />
+                                <attribute name="sym_name" value="~WsgiInputStream" id="992" addr="028A0188" />
+                                <attribute name="name" value="~WsgiInputStream" id="993" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="994" addr="028A0188" />
+                                <attribute name="access" value="public" id="995" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289D708" id="996" addr="0289D708" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="997" addr="028A0188" />
+                            </attributelist >
+                         
+                        </destructor >
+                    </class >
+                </namespace >
+            </namespace >
+        </include >
+        <include id="998" addr="0289D958" >
+            <attributelist id="999" addr="0289D958" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\wsgi\\WsgiResponse.h" id="1000" addr="028A0188" />
+            </attributelist >
+
+            <namespace id="1001" addr="0289D9A8" >
+                <attributelist id="1002" addr="0289D9A8" >
+                    <attribute name="sym_name" value="XBMCAddon" id="1003" addr="028A0188" />
+                    <attribute name="name" value="XBMCAddon" id="1004" addr="028A0188" />
+                    <attribute name="sym_previousSibling" value="0289CAA8" id="1005" addr="0289CAA8" />
+                    <attribute name="csym_nextSibling" value="0289E408" id="1006" addr="0289E408" />
+                    <attribute name="sym_nextSibling" value="0289E408" id="1007" addr="0289E408" />
+                    <typescope id="1008" addr="0289EA68" >
+                        <attributelist id="1009" addr="0289EA68" >
+                            <attribute name="name" value="XBMCAddon" id="1010" addr="028A0188" />
+                            <typetab id="1011" addr="0289EA88" >
+                                <attributelist id="1012" addr="0289EA88" >
+                                    <attribute name="String" value="std::string" id="1013" addr="028A0188" />
+                                </attributelist >
+                                <typetabsitem id="1014" addr="0289EB78" >
+                                    <attributelist id="1015" addr="0289EB78" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="1016" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="1017" addr="028A0188" />
+                            <attribute name="symtab" value="0289BC88" id="1018" addr="0289BC88" />
+                        </attributelist >
+                        <typescopesitem id="1019" addr="0289BC68" >
+                            <attributelist id="1020" addr="0289BC68" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1021" addr="0289EA88" >
+                            <attributelist id="1022" addr="0289EA88" >
+                                <attribute name="String" value="std::string" id="1023" addr="028A0188" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1024" addr="02890548" >
+                            <attributelist id="1025" addr="02890548" >
+                                <attribute name="name" value="" id="1026" addr="028A0188" />
+                                <typetab id="1027" addr="02890578" >
+                                    <attributelist id="1028" addr="02890578" >
+                                        <attribute name="HTTPPythonRequest" value="HTTPPythonRequest" id="1029" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="1030" addr="0289EB18" >
+                                        <attributelist id="1031" addr="0289EB18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1032" addr="0289EB08" >
+                            <attributelist id="1033" addr="0289EB08" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1034" addr="0289BC88" >
+                            <attributelist id="1035" addr="0289BC88" >
+                                <attribute name="name" value="XBMCAddon" id="1036" addr="028A0188" />
+                                <attribute name="csymtab" value="0289BCA8" id="1037" addr="0289BCA8" />
+                                <attribute name="symtab" value="0289BC78" id="1038" addr="0289BC78" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289BC88" id="1039" addr="0289BC88" />
+                    <attribute name="sym_symtab" value="028904D8" id="1040" addr="028904D8" />
+                </attributelist >
+
+                <namespace id="1041" addr="0289D9E8" >
+                    <attributelist id="1042" addr="0289D9E8" >
+                        <attribute name="sym_name" value="xbmcwsgi" id="1043" addr="028A0188" />
+                        <attribute name="name" value="xbmcwsgi" id="1044" addr="028A0188" />
+                        <attribute name="sym_previousSibling" value="0289CAE8" id="1045" addr="0289CAE8" />
+                        <attribute name="csym_nextSibling" value="0289E448" id="1046" addr="0289E448" />
+                        <attribute name="sym_nextSibling" value="0289E448" id="1047" addr="0289E448" />
+                        <typescope id="1048" addr="0289EC98" >
+                            <attributelist id="1049" addr="0289EC98" >
+                                <attribute name="name" value="xbmcwsgi" id="1050" addr="028A0188" />
+                                <typetab id="1051" addr="0289ECA8" >
+                                    <attributelist id="1052" addr="0289ECA8" >
+                                        <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="1053" addr="028A0188" />
+                                        <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1054" addr="028A0188" />
+                                        <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="1055" addr="028A0188" />
+                                        <attribute name="WsgiInputStream" value="WsgiInputStream" id="1056" addr="028A0188" />
+                                        <attribute name="WsgiResponse" value="WsgiResponse" id="1057" addr="028A0188" />
+                                        <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="1058" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="1059" addr="0289F148" >
+                                        <attributelist id="1060" addr="0289F148" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1061" addr="0289F6F8" >
+                                        <attributelist id="1062" addr="0289F6F8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1063" addr="0289ED18" >
+                                        <attributelist id="1064" addr="0289ED18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1065" addr="0289F338" >
+                                        <attributelist id="1066" addr="0289F338" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1067" addr="0289F828" >
+                                        <attributelist id="1068" addr="0289F828" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1069" addr="0289FCB8" >
+                                        <attributelist id="1070" addr="0289FCB8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                                <attribute name="parent" value="0289EA68" id="1071" addr="0289EA68" />
+                                <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="1072" addr="028A0188" />
+                                <attribute name="symtab" value="0289C098" id="1073" addr="0289C098" />
+                            </attributelist >
+                            <typescopesitem id="1074" addr="0289C078" >
+                                <attributelist id="1075" addr="0289C078" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1076" addr="0289ECA8" >
+                                <attributelist id="1077" addr="0289ECA8" >
+                                    <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="1078" addr="028A0188" />
+                                    <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1079" addr="028A0188" />
+                                    <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="1080" addr="028A0188" />
+                                    <attribute name="WsgiInputStream" value="WsgiInputStream" id="1081" addr="028A0188" />
+                                    <attribute name="WsgiResponse" value="WsgiResponse" id="1082" addr="028A0188" />
+                                    <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="1083" addr="028A0188" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1084" addr="0289EA68" >
+                                <attributelist id="1085" addr="0289EA68" >
+                                    <attribute name="name" value="XBMCAddon" id="1086" addr="028A0188" />
+                                    <typetab id="1087" addr="0289EA88" >
+                                        <attributelist id="1088" addr="0289EA88" >
+                                            <attribute name="String" value="std::string" id="1089" addr="028A0188" />
+                                        </attributelist >
+                                        <typetabsitem id="1090" addr="0289EB78" >
+                                            <attributelist id="1091" addr="0289EB78" >
+                                            </attributelist >
+                                        </typetabsitem >
+                                    </typetab >
+                                    <attribute name="parent" value="02890548" id="1092" addr="02890548" />
+                                    <attribute name="qname" value="XBMCAddon" id="1093" addr="028A0188" />
+                                    <attribute name="symtab" value="0289BC88" id="1094" addr="0289BC88" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1095" addr="0289ECB8" >
+                                <attributelist id="1096" addr="0289ECB8" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1097" addr="0289C098" >
+                                <attributelist id="1098" addr="0289C098" >
+                                    <attribute name="name" value="xbmcwsgi" id="1099" addr="028A0188" />
+                                    <attribute name="csymtab" value="0289C0B8" id="1100" addr="0289C0B8" />
+                                    <attribute name="symtab" value="0289C088" id="1101" addr="0289C088" />
+                                </attributelist >
+                            </typescopesitem >
+                        </typescope >
+                        <attribute name="symtab" value="0289C098" id="1102" addr="0289C098" />
+                        <attribute name="sym_symtab" value="0289BC88" id="1103" addr="0289BC88" />
+                    </attributelist >
+
+                    <cdecl id="1104" addr="0289DB18" >
+                        <attributelist id="1105" addr="0289DB18" >
+                            <attribute name="sym_name" value="WsgiHttpHeader" id="1106" addr="028A0188" />
+                            <attribute name="name" value="XBMCAddon::xbmcwsgi::WsgiHttpHeader" id="1107" addr="028A0188" />
+                            <attribute name="decl" value="" id="1108" addr="028A0188" />
+                            <attribute name="storage" value="typedef" id="1109" addr="028A0188" />
+                            <attribute name="kind" value="typedef" id="1110" addr="028A0188" />
+                            <attribute name="type" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1111" addr="028A0188" />
+                            <attribute name="sym_symtab" value="0289C098" id="1112" addr="0289C098" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="1113" addr="028A0188" />
+                        </attributelist >
+                     
+                    </cdecl >
+                    <class id="1114" addr="0289DCB8" >
+                        <attributelist id="1115" addr="0289DCB8" >
+                            <attribute name="name" value="XBMCAddon::xbmcwsgi::WsgiResponse" id="1116" addr="028A0188" />
+                            <attribute name="sym_symtab" value="0289C098" id="1117" addr="0289C098" />
+                            <attribute name="symtab" value="0289DD28" id="1118" addr="0289DD28" />
+                            <attribute name="allows_typedef" value="1" id="1119" addr="028A0188" />
+                            <attribute name="typepass_visit" value="1" id="1120" addr="028A0188" />
+                            <attribute name="allocate_visit" value="1" id="1121" addr="028A0188" />
+                            <attribute name="kind" value="class" id="1122" addr="028A0188" />
+                            <attribute name="sym_name" value="WsgiResponse" id="1123" addr="028A0188" />
+                            <attribute name="allocate_default_constructor" value="1" id="1124" addr="028A0188" />
+                            <attribute name="allocate_has_constructor" value="1" id="1125" addr="028A0188" />
+                            <attribute name="allocate_public_constructor" value="1" id="1126" addr="028A0188" />
+                            <attribute name="allocate_has_destructor" value="1" id="1127" addr="028A0188" />
+                            <attribute name="allocate_default_destructor" value="1" id="1128" addr="028A0188" />
+                            <attribute name="allocate_copy_constructor" value="1" id="1129" addr="028A0188" />
+                            <attribute name="privatebaselist" value="0289DC68" id="1130" addr="0289DC68" />
+                            <attribute name="protectedbaselist" value="0289DC38" id="1131" addr="0289DC38" />
+                            <baselist id="1132" addr="0289DBD8" >
+                                <base name="AddonClass" id="1133" addr="0289DC08" />
+                            </baselist >
+                            <attribute name="module" value="xbmcwsgi" id="1134" addr="0289B918" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="1135" addr="028A0188" />
+                            <typescope id="1136" addr="0289F868" >
+                                <attributelist id="1137" addr="0289F868" >
+                                    <attribute name="name" value="WsgiResponse" id="1138" addr="028A0188" />
+                                    <typetab id="1139" addr="0289F878" >
+                                        <attributelist id="1140" addr="0289F878" >
+                                        </attributelist >
+                                    </typetab >
+                                    <attribute name="parent" value="0289EC98" id="1141" addr="0289EC98" />
+                                    <attribute name="qname" value="XBMCAddon::xbmcwsgi::WsgiResponse" id="1142" addr="028A0188" />
+                                    <attribute name="symtab" value="0289DD28" id="1143" addr="0289DD28" />
+                                </attributelist >
+                                <typescopesitem id="1144" addr="0289F858" >
+                                    <attributelist id="1145" addr="0289F858" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1146" addr="0289F878" >
+                                    <attributelist id="1147" addr="0289F878" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1148" addr="0289EC98" >
+                                    <attributelist id="1149" addr="0289EC98" >
+                                        <attribute name="name" value="xbmcwsgi" id="1150" addr="028A0188" />
+                                        <typetab id="1151" addr="0289ECA8" >
+                                            <attributelist id="1152" addr="0289ECA8" >
+                                                <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="1153" addr="028A0188" />
+                                                <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1154" addr="028A0188" />
+                                                <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="1155" addr="028A0188" />
+                                                <attribute name="WsgiInputStream" value="WsgiInputStream" id="1156" addr="028A0188" />
+                                                <attribute name="WsgiResponse" value="WsgiResponse" id="1157" addr="028A0188" />
+                                                <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="1158" addr="028A0188" />
+                                            </attributelist >
+                                            <typetabsitem id="1159" addr="0289F148" >
+                                                <attributelist id="1160" addr="0289F148" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1161" addr="0289F6F8" >
+                                                <attributelist id="1162" addr="0289F6F8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1163" addr="0289ED18" >
+                                                <attributelist id="1164" addr="0289ED18" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1165" addr="0289F338" >
+                                                <attributelist id="1166" addr="0289F338" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1167" addr="0289F828" >
+                                                <attributelist id="1168" addr="0289F828" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1169" addr="0289FCB8" >
+                                                <attributelist id="1170" addr="0289FCB8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                        </typetab >
+                                        <attribute name="parent" value="0289EA68" id="1171" addr="0289EA68" />
+                                        <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="1172" addr="028A0188" />
+                                        <attribute name="symtab" value="0289C098" id="1173" addr="0289C098" />
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1174" addr="0289F888" >
+                                    <attributelist id="1175" addr="0289F888" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1176" addr="0289DD28" >
+                                    <attributelist id="1177" addr="0289DD28" >
+                                        <attribute name="name" value="WsgiResponse" id="1178" addr="028A0188" />
+                                        <attribute name="csymtab" value="0289DD38" id="1179" addr="0289DD38" />
+                                        <attribute name="symtab" value="0289DD08" id="1180" addr="0289DD08" />
+                                    </attributelist >
+                                </typescopesitem >
+                            </typescope >
+                        </attributelist >
+
+                        <access id="1181" addr="0289DCE8" >
+                            <attributelist id="1182" addr="0289DCE8" >
+                                <attribute name="kind" value="public" id="1183" addr="028A0188" />
+                            </attributelist >
+                         
+                        </access >
+                        <constructor id="1184" addr="0289DDC8" >
+                            <attributelist id="1185" addr="0289DDC8" >
+                                <attribute name="ismember" value="1" id="1186" addr="028A0188" />
+                                <attribute name="sym_name" value="WsgiResponse" id="1187" addr="028A0188" />
+                                <attribute name="name" value="WsgiResponse" id="1188" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="1189" addr="028A0188" />
+                                <attribute name="access" value="public" id="1190" addr="028A0188" />
+                                <attribute name="feature_new" value="1" id="1191" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289DD28" id="1192" addr="0289DD28" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="1193" addr="028A0188" />
+                            </attributelist >
+                         
+                        </constructor >
+                        <destructor id="1194" addr="0289DE78" >
+                            <attributelist id="1195" addr="0289DE78" >
+                                <attribute name="ismember" value="1" id="1196" addr="028A0188" />
+                                <attribute name="sym_name" value="~WsgiResponse" id="1197" addr="028A0188" />
+                                <attribute name="name" value="~WsgiResponse" id="1198" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="1199" addr="028A0188" />
+                                <attribute name="access" value="public" id="1200" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289DD28" id="1201" addr="0289DD28" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="1202" addr="028A0188" />
+                            </attributelist >
+                         
+                        </destructor >
+                        <cdecl id="1203" addr="0289E1A8" >
+                            <attributelist id="1204" addr="0289E1A8" >
+                                <attribute name="name" value="operator ()" id="1205" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="1206" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289DD28" id="1207" addr="0289DD28" />
+                                <attribute name="sym_nextSibling" value="0289E2C8" id="1208" addr="0289E2C8" />
+                                <attribute name="csym_nextSibling" value="0289E2C8" id="1209" addr="0289E2C8" />
+                                <attribute name="kind" value="function" id="1210" addr="028A0188" />
+                                <attribute name="sym_name" value="operator ()" id="1211" addr="028A0188" />
+                                <attribute name="decl" value="f(r.q(const).XBMCAddon::String,r.q(const).std::vector&lt;(XBMCAddon::xbmcwsgi::WsgiHttpHeader)>,p.void).p." id="1212" addr="028A0188" />
+                                <attribute name="access" value="public" id="1213" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289E1A8" id="1214" addr="0289E1A8" />
+                                <parmlist id="1215" addr="0289DFB8" >
+                                    <parm id="1216">
+                                        <attributelist id="1217" addr="0289DFB8" >
+                                            <attribute name="name" value="status" id="1218" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="1219" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="1220">
+                                        <attributelist id="1221" addr="0289E0C8" >
+                                            <attribute name="name" value="response_headers" id="1222" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).std::vector&lt;(XBMCAddon::xbmcwsgi::WsgiHttpHeader)>" id="1223" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="1224">
+                                        <attributelist id="1225" addr="0289E168" >
+                                            <attribute name="name" value="exc_info" id="1226" addr="028A0188" />
+                                            <attribute name="value" value="NULL" id="1227" addr="028A0188" />
+                                            <attribute name="type" value="p.void" id="1228" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="WsgiResponseBody" id="1229" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="1230" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="1231" addr="0289E2C8" >
+                            <attributelist id="1232" addr="0289E2C8" >
+                                <attribute name="name" value="operator ()" id="1233" addr="028A0188" />
+                                <attribute name="ismember" value="1" id="1234" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289DD28" id="1235" addr="0289DD28" />
+                                <attribute name="sym_previousSibling" value="0289E1A8" id="1236" addr="0289E1A8" />
+                                <attribute name="kind" value="function" id="1237" addr="028A0188" />
+                                <attribute name="sym_name" value="operator ()" id="1238" addr="028A0188" />
+                                <attribute name="defaultargs" value="0289E1A8" id="1239" addr="0289E1A8" />
+                                <attribute name="decl" value="f(r.q(const).XBMCAddon::String,r.q(const).std::vector&lt;(XBMCAddon::xbmcwsgi::WsgiHttpHeader)>).p." id="1240" addr="028A0188" />
+                                <attribute name="access" value="public" id="1241" addr="028A0188" />
+                                <attribute name="sym_overloaded" value="0289E1A8" id="1242" addr="0289E1A8" />
+                                <parmlist id="1243" addr="0289E208" >
+                                    <parm id="1244">
+                                        <attributelist id="1245" addr="0289E208" >
+                                            <attribute name="name" value="status" id="1246" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="1247" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="1248">
+                                        <attributelist id="1249" addr="0289E278" >
+                                            <attribute name="name" value="response_headers" id="1250" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).std::vector&lt;(XBMCAddon::xbmcwsgi::WsgiHttpHeader)>" id="1251" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="WsgiResponseBody" id="1252" addr="028A0188" />
+                                <attribute name="sym_overname" value="__SWIG_1" id="1253" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                    </class >
+                </namespace >
+            </namespace >
+        </include >
+        <include id="1254" addr="0289E3B8" >
+            <attributelist id="1255" addr="0289E3B8" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\wsgi\\WsgiResponseBody.h" id="1256" addr="028A0188" />
+            </attributelist >
+
+            <namespace id="1257" addr="0289E408" >
+                <attributelist id="1258" addr="0289E408" >
+                    <attribute name="sym_name" value="XBMCAddon" id="1259" addr="028A0188" />
+                    <attribute name="name" value="XBMCAddon" id="1260" addr="028A0188" />
+                    <attribute name="sym_previousSibling" value="0289D9A8" id="1261" addr="0289D9A8" />
+                    <typescope id="1262" addr="0289EA68" >
+                        <attributelist id="1263" addr="0289EA68" >
+                            <attribute name="name" value="XBMCAddon" id="1264" addr="028A0188" />
+                            <typetab id="1265" addr="0289EA88" >
+                                <attributelist id="1266" addr="0289EA88" >
+                                    <attribute name="String" value="std::string" id="1267" addr="028A0188" />
+                                </attributelist >
+                                <typetabsitem id="1268" addr="0289EB78" >
+                                    <attributelist id="1269" addr="0289EB78" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="1270" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="1271" addr="028A0188" />
+                            <attribute name="symtab" value="0289BC88" id="1272" addr="0289BC88" />
+                        </attributelist >
+                        <typescopesitem id="1273" addr="0289BC68" >
+                            <attributelist id="1274" addr="0289BC68" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1275" addr="0289EA88" >
+                            <attributelist id="1276" addr="0289EA88" >
+                                <attribute name="String" value="std::string" id="1277" addr="028A0188" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1278" addr="02890548" >
+                            <attributelist id="1279" addr="02890548" >
+                                <attribute name="name" value="" id="1280" addr="028A0188" />
+                                <typetab id="1281" addr="02890578" >
+                                    <attributelist id="1282" addr="02890578" >
+                                        <attribute name="HTTPPythonRequest" value="HTTPPythonRequest" id="1283" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="1284" addr="0289EB18" >
+                                        <attributelist id="1285" addr="0289EB18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1286" addr="0289EB08" >
+                            <attributelist id="1287" addr="0289EB08" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="1288" addr="0289BC88" >
+                            <attributelist id="1289" addr="0289BC88" >
+                                <attribute name="name" value="XBMCAddon" id="1290" addr="028A0188" />
+                                <attribute name="csymtab" value="0289BCA8" id="1291" addr="0289BCA8" />
+                                <attribute name="symtab" value="0289BC78" id="1292" addr="0289BC78" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289BC88" id="1293" addr="0289BC88" />
+                    <attribute name="sym_symtab" value="028904D8" id="1294" addr="028904D8" />
+                </attributelist >
+
+                <namespace id="1295" addr="0289E448" >
+                    <attributelist id="1296" addr="0289E448" >
+                        <attribute name="sym_name" value="xbmcwsgi" id="1297" addr="028A0188" />
+                        <attribute name="name" value="xbmcwsgi" id="1298" addr="028A0188" />
+                        <attribute name="sym_previousSibling" value="0289D9E8" id="1299" addr="0289D9E8" />
+                        <typescope id="1300" addr="0289EC98" >
+                            <attributelist id="1301" addr="0289EC98" >
+                                <attribute name="name" value="xbmcwsgi" id="1302" addr="028A0188" />
+                                <typetab id="1303" addr="0289ECA8" >
+                                    <attributelist id="1304" addr="0289ECA8" >
+                                        <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="1305" addr="028A0188" />
+                                        <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1306" addr="028A0188" />
+                                        <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="1307" addr="028A0188" />
+                                        <attribute name="WsgiInputStream" value="WsgiInputStream" id="1308" addr="028A0188" />
+                                        <attribute name="WsgiResponse" value="WsgiResponse" id="1309" addr="028A0188" />
+                                        <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="1310" addr="028A0188" />
+                                    </attributelist >
+                                    <typetabsitem id="1311" addr="0289F148" >
+                                        <attributelist id="1312" addr="0289F148" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1313" addr="0289F6F8" >
+                                        <attributelist id="1314" addr="0289F6F8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1315" addr="0289ED18" >
+                                        <attributelist id="1316" addr="0289ED18" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1317" addr="0289F338" >
+                                        <attributelist id="1318" addr="0289F338" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1319" addr="0289F828" >
+                                        <attributelist id="1320" addr="0289F828" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                    <typetabsitem id="1321" addr="0289FCB8" >
+                                        <attributelist id="1322" addr="0289FCB8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                                <attribute name="parent" value="0289EA68" id="1323" addr="0289EA68" />
+                                <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="1324" addr="028A0188" />
+                                <attribute name="symtab" value="0289C098" id="1325" addr="0289C098" />
+                            </attributelist >
+                            <typescopesitem id="1326" addr="0289C078" >
+                                <attributelist id="1327" addr="0289C078" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1328" addr="0289ECA8" >
+                                <attributelist id="1329" addr="0289ECA8" >
+                                    <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="1330" addr="028A0188" />
+                                    <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1331" addr="028A0188" />
+                                    <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="1332" addr="028A0188" />
+                                    <attribute name="WsgiInputStream" value="WsgiInputStream" id="1333" addr="028A0188" />
+                                    <attribute name="WsgiResponse" value="WsgiResponse" id="1334" addr="028A0188" />
+                                    <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="1335" addr="028A0188" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1336" addr="0289EA68" >
+                                <attributelist id="1337" addr="0289EA68" >
+                                    <attribute name="name" value="XBMCAddon" id="1338" addr="028A0188" />
+                                    <typetab id="1339" addr="0289EA88" >
+                                        <attributelist id="1340" addr="0289EA88" >
+                                            <attribute name="String" value="std::string" id="1341" addr="028A0188" />
+                                        </attributelist >
+                                        <typetabsitem id="1342" addr="0289EB78" >
+                                            <attributelist id="1343" addr="0289EB78" >
+                                            </attributelist >
+                                        </typetabsitem >
+                                    </typetab >
+                                    <attribute name="parent" value="02890548" id="1344" addr="02890548" />
+                                    <attribute name="qname" value="XBMCAddon" id="1345" addr="028A0188" />
+                                    <attribute name="symtab" value="0289BC88" id="1346" addr="0289BC88" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1347" addr="0289ECB8" >
+                                <attributelist id="1348" addr="0289ECB8" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="1349" addr="0289C098" >
+                                <attributelist id="1350" addr="0289C098" >
+                                    <attribute name="name" value="xbmcwsgi" id="1351" addr="028A0188" />
+                                    <attribute name="csymtab" value="0289C0B8" id="1352" addr="0289C0B8" />
+                                    <attribute name="symtab" value="0289C088" id="1353" addr="0289C088" />
+                                </attributelist >
+                            </typescopesitem >
+                        </typescope >
+                        <attribute name="symtab" value="0289C098" id="1354" addr="0289C098" />
+                        <attribute name="sym_symtab" value="0289BC88" id="1355" addr="0289BC88" />
+                    </attributelist >
+
+                    <class id="1356" addr="0289E508" >
+                        <attributelist id="1357" addr="0289E508" >
+                            <attribute name="name" value="XBMCAddon::xbmcwsgi::WsgiResponseBody" id="1358" addr="028A0188" />
+                            <attribute name="sym_symtab" value="0289C098" id="1359" addr="0289C098" />
+                            <attribute name="symtab" value="0289E5A8" id="1360" addr="0289E5A8" />
+                            <attribute name="allows_typedef" value="1" id="1361" addr="028A0188" />
+                            <attribute name="typepass_visit" value="1" id="1362" addr="028A0188" />
+                            <attribute name="allocate_visit" value="1" id="1363" addr="028A0188" />
+                            <attribute name="kind" value="class" id="1364" addr="028A0188" />
+                            <attribute name="sym_name" value="WsgiResponseBody" id="1365" addr="028A0188" />
+                            <attribute name="allocate_default_constructor" value="1" id="1366" addr="028A0188" />
+                            <attribute name="allocate_has_constructor" value="1" id="1367" addr="028A0188" />
+                            <attribute name="allocate_public_constructor" value="1" id="1368" addr="028A0188" />
+                            <attribute name="allocate_has_destructor" value="1" id="1369" addr="028A0188" />
+                            <attribute name="allocate_default_destructor" value="1" id="1370" addr="028A0188" />
+                            <attribute name="allocate_copy_constructor" value="1" id="1371" addr="028A0188" />
+                            <attribute name="privatebaselist" value="0289E4F8" id="1372" addr="0289E4F8" />
+                            <attribute name="protectedbaselist" value="0289E4E8" id="1373" addr="0289E4E8" />
+                            <baselist id="1374" addr="0289E4D8" >
+                                <base name="AddonClass" id="1375" addr="0289E498" />
+                            </baselist >
+                            <attribute name="module" value="xbmcwsgi" id="1376" addr="0289B918" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="1377" addr="028A0188" />
+                            <typescope id="1378" addr="0289FCF8" >
+                                <attributelist id="1379" addr="0289FCF8" >
+                                    <attribute name="name" value="WsgiResponseBody" id="1380" addr="028A0188" />
+                                    <typetab id="1381" addr="0289FD08" >
+                                        <attributelist id="1382" addr="0289FD08" >
+                                        </attributelist >
+                                    </typetab >
+                                    <attribute name="parent" value="0289EC98" id="1383" addr="0289EC98" />
+                                    <attribute name="qname" value="XBMCAddon::xbmcwsgi::WsgiResponseBody" id="1384" addr="028A0188" />
+                                    <attribute name="symtab" value="0289E5A8" id="1385" addr="0289E5A8" />
+                                </attributelist >
+                                <typescopesitem id="1386" addr="0289FCC8" >
+                                    <attributelist id="1387" addr="0289FCC8" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1388" addr="0289FD08" >
+                                    <attributelist id="1389" addr="0289FD08" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1390" addr="0289EC98" >
+                                    <attributelist id="1391" addr="0289EC98" >
+                                        <attribute name="name" value="xbmcwsgi" id="1392" addr="028A0188" />
+                                        <typetab id="1393" addr="0289ECA8" >
+                                            <attributelist id="1394" addr="0289ECA8" >
+                                                <attribute name="WsgiInputStreamIterator" value="WsgiInputStreamIterator" id="1395" addr="028A0188" />
+                                                <attribute name="WsgiHttpHeader" value="Tuple&lt;(XBMCAddon::String,XBMCAddon::String)>" id="1396" addr="028A0188" />
+                                                <attribute name="WsgiErrorStream" value="WsgiErrorStream" id="1397" addr="028A0188" />
+                                                <attribute name="WsgiInputStream" value="WsgiInputStream" id="1398" addr="028A0188" />
+                                                <attribute name="WsgiResponse" value="WsgiResponse" id="1399" addr="028A0188" />
+                                                <attribute name="WsgiResponseBody" value="WsgiResponseBody" id="1400" addr="028A0188" />
+                                            </attributelist >
+                                            <typetabsitem id="1401" addr="0289F148" >
+                                                <attributelist id="1402" addr="0289F148" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1403" addr="0289F6F8" >
+                                                <attributelist id="1404" addr="0289F6F8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1405" addr="0289ED18" >
+                                                <attributelist id="1406" addr="0289ED18" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1407" addr="0289F338" >
+                                                <attributelist id="1408" addr="0289F338" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1409" addr="0289F828" >
+                                                <attributelist id="1410" addr="0289F828" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                            <typetabsitem id="1411" addr="0289FCB8" >
+                                                <attributelist id="1412" addr="0289FCB8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                        </typetab >
+                                        <attribute name="parent" value="0289EA68" id="1413" addr="0289EA68" />
+                                        <attribute name="qname" value="XBMCAddon::xbmcwsgi" id="1414" addr="028A0188" />
+                                        <attribute name="symtab" value="0289C098" id="1415" addr="0289C098" />
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1416" addr="0289FD18" >
+                                    <attributelist id="1417" addr="0289FD18" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="1418" addr="0289E5A8" >
+                                    <attributelist id="1419" addr="0289E5A8" >
+                                        <attribute name="name" value="WsgiResponseBody" id="1420" addr="028A0188" />
+                                        <attribute name="csymtab" value="0289E5B8" id="1421" addr="0289E5B8" />
+                                        <attribute name="symtab" value="0289E588" id="1422" addr="0289E588" />
+                                    </attributelist >
+                                </typescopesitem >
+                            </typescope >
+                        </attributelist >
+
+                        <access id="1423" addr="0289E568" >
+                            <attributelist id="1424" addr="0289E568" >
+                                <attribute name="kind" value="public" id="1425" addr="028A0188" />
+                            </attributelist >
+                         
+                        </access >
+                        <constructor id="1426" addr="0289E648" >
+                            <attributelist id="1427" addr="0289E648" >
+                                <attribute name="ismember" value="1" id="1428" addr="028A0188" />
+                                <attribute name="sym_name" value="WsgiResponseBody" id="1429" addr="028A0188" />
+                                <attribute name="name" value="WsgiResponseBody" id="1430" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="1431" addr="028A0188" />
+                                <attribute name="access" value="public" id="1432" addr="028A0188" />
+                                <attribute name="feature_new" value="1" id="1433" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289E5A8" id="1434" addr="0289E5A8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="1435" addr="028A0188" />
+                            </attributelist >
+                         
+                        </constructor >
+                        <destructor id="1436" addr="0289E6F8" >
+                            <attributelist id="1437" addr="0289E6F8" >
+                                <attribute name="ismember" value="1" id="1438" addr="028A0188" />
+                                <attribute name="sym_name" value="~WsgiResponseBody" id="1439" addr="028A0188" />
+                                <attribute name="name" value="~WsgiResponseBody" id="1440" addr="028A0188" />
+                                <attribute name="decl" value="f()." id="1441" addr="028A0188" />
+                                <attribute name="access" value="public" id="1442" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289E5A8" id="1443" addr="0289E5A8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="1444" addr="028A0188" />
+                            </attributelist >
+                         
+                        </destructor >
+                        <cdecl id="1445" addr="0289E878" >
+                            <attributelist id="1446" addr="0289E878" >
+                                <attribute name="ismember" value="1" id="1447" addr="028A0188" />
+                                <attribute name="sym_name" value="operator ()" id="1448" addr="028A0188" />
+                                <attribute name="name" value="operator ()" id="1449" addr="028A0188" />
+                                <attribute name="decl" value="f(r.q(const).XBMCAddon::String)." id="1450" addr="028A0188" />
+                                <parmlist id="1451" addr="0289E818" >
+                                    <parm id="1452">
+                                        <attributelist id="1453" addr="0289E818" >
+                                            <attribute name="name" value="data" id="1454" addr="028A0188" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="1455" addr="028A0188" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="access" value="public" id="1456" addr="028A0188" />
+                                <attribute name="kind" value="function" id="1457" addr="028A0188" />
+                                <attribute name="type" value="void" id="1458" addr="028A0188" />
+                                <attribute name="sym_symtab" value="0289E5A8" id="1459" addr="0289E5A8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="1460" addr="028A0188" />
+                            </attributelist >
+                         
+                        </cdecl >
+                    </class >
+                </namespace >
+            </namespace >
+        </include >
+        <insert id="1461" addr="0289E978" >
+            <attributelist id="1462" addr="0289E978" >
+                <attribute name="code" value="&#10;#endif&#10;" id="1463" addr="028A0188" />
+                <attribute name="section" value="footer" id="1464" addr="028A0188" />
+            </attributelist >
+         
+        </insert >
+    </include >
+</top >

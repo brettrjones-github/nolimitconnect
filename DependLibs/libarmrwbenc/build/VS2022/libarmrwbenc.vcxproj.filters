@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{288ac997-5587-4a2a-ab5f-59b6678448f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\sys">
+      <UniqueIdentifier>{b52b5442-5e90-445f-9be4-60ea884c0a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\arpa">
+      <UniqueIdentifier>{03cb8346-a93d-4b18-9d47-fea9f7a3a93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\netinet">
+      <UniqueIdentifier>{d2a82878-4e0c-4116-bb7a-d8aa7e038010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\asm">
+      <UniqueIdentifier>{4f308cd2-fb74-4022-8762-873eec794453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\linux">
+      <UniqueIdentifier>{bee2905c-d0fb-4512-b494-54911986b5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{ad8d7fea-4405-4474-b371-8173ad6d8399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\include">
+      <UniqueIdentifier>{038599a1-fb81-4408-aff9-d8ce3363f672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\inc">
+      <UniqueIdentifier>{48af3f8d-046d-422a-ae2d-f36eeb819322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{23f02355-d277-4987-81b4-f6f05375ab53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\asm">
+      <UniqueIdentifier>{14ec94de-5789-4f30-b42d-d2f33cf2dbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\asm\ARMV7">
+      <UniqueIdentifier>{19ac2f79-3357-4f35-ae61-1eb59b02804f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{ec608b8d-17ba-4f1e-a8df-9e5aac95b8ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\arpa\inet.h">
+      <Filter>GoTvConfig\arpa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netinet\in.h">
+      <Filter>GoTvConfig\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netinet\tcp.h">
+      <Filter>GoTvConfig\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\ioctl.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\mman.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\param.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\signal.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\socket.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\un.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\utsname.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dirent.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dlfcn.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netdb.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\strings.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\syslog.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\unistd.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\syslog.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\time.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\select.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\asm\types.h">
+      <Filter>GoTvConfig\asm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\times.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\byteswap.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\langinfo.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\linux\ioctl.h">
+      <Filter>GoTvConfig\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\linux\param.h">
+      <Filter>GoTvConfig\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\cmnMemory.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\voAAC.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\voAMRWB.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\voAudio.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\voIndex.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\voMem.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\voType.h">
+      <Filter>Source Files\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\wb_vad_c.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\acelp.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\basic_op.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\bits.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\cnst.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\cod_main.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\dtx.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\log2.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\log2_tab.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\main.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\math_op.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\mem_align.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\oper_32b.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\p_med_o.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\q_pulse.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SoftAMRWBEncoder.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\stream.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\typedefs.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\wb_vad.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\wavreader.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\config_libarmrwbenc.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\enc_if.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\typedef_libarmrwbenc.h">
+      <Filter>Source Files\inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\common\cmnMemory.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\wrapper.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\autocorr.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\az_isp.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\bits.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\c2t64fx.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\c4t64fx.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\convolve.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cor_h_x.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\decim54.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\deemph.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dtx.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\g_pitch.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\gpclip.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\homing.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hp_wsp.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hp6k.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hp50.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hp400.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\int_lpc.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\isp_az.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\isp_isf.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lag_wind.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\levinson.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\log2.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lp_dec2.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math_op.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\mem_align.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\oper_32b.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\p_med_ol.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\pit_shrp.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\pitch_f4.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\pred_lt4.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\preemph.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\q_gain2.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\q_pulse.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\qisf_ns.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\qpisf_2s.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\random.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\residu.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\scale.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SoftAMRWBEncoder.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\stream.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\syn_filt.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\updt_tar.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\voAMRWBEnc.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\voicefac.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\wavreader.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\wb_vad.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\weight_a.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\inc\grid100.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\ham_wind.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\homing.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\isp_isf.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\lag_wind.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\mime_io.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\p_med_ol.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\q_gain2.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\qisf_ns.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\inc\qpisf_2s.tab">
+      <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\..\..\libarmrwbenc.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libarmrwbenc.pro">
+      <Filter>QtBuild</Filter>
+    </None>
+  </ItemGroup>
+</Project>

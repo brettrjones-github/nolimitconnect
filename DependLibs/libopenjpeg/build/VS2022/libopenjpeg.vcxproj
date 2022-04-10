@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EB265834-A52A-49E5-878D-A862EBAA2F5E}</ProjectGuid>
+    <RootNamespace>VxUtilLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+    <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\openjp2;$(ProjectDir)..\..\src\lib;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\openjp2;$(ProjectDir)..\..\src\lib;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN64;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;NHAVE_CONFIG_H;WIN32;_LIB;_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(TargetName).lib</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\openjp2;$(ProjectDir)..\..\src\lib;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN64;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\GoTvConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
+    <ClInclude Include="..\..\config_libopenjpeg.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\bio.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\cidx_manager.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\cio.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\dwt.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\event.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\function_list.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\image.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\indexbox_manager.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\invert.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\j2k.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\jp2.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\mct.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\mqc.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\mqc_inl.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\openjpeg.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_clock.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_codec.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_common.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_includes.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_intmath.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_inttypes.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_malloc.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\opj_stdint.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\pi.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\t1.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\t1_luts.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\t2.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\tcd.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\tgt.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\thread.h" />
+    <ClInclude Include="..\..\src\lib\openjp2\tls_keys.h" />
+    <ClInclude Include="..\..\thirdparty\include\zconf.h" />
+    <ClInclude Include="..\..\thirdparty\include\zlib.h" />
+    <ClInclude Include="..\..\thirdparty\liblcms2\include\lcms2.h" />
+    <ClInclude Include="..\..\thirdparty\liblcms2\include\lcms2_plugin.h" />
+    <ClInclude Include="..\..\thirdparty\liblcms2\src\lcms2_internal.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\lib\openjp2\bench_dwt.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\bio.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\cidx_manager.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\cio.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\dwt.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\event.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\function_list.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\image.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\invert.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\j2k.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\jp2.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\mct.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\mqc.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\openjpeg.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\opj_clock.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\opj_malloc.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\phix_manager.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\pi.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\ppix_manager.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\t1.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\t1_generate_luts.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\t2.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\tcd.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\tgt.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\thix_manager.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\thread.c" />
+    <ClCompile Include="..\..\src\lib\openjp2\tpix_manager.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsalpha.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmscam02.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmscgats.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmscnvrt.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmserr.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsgamma.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsgmt.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmshalf.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsintrp.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsio0.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsio1.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmslut.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsmd5.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsmtrx.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsnamed.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsopt.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmspack.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmspcs.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsplugin.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsps2.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmssamp.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmssm.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmstypes.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsvirt.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmswtpnt.c" />
+    <ClCompile Include="..\..\thirdparty\liblcms2\src\cmsxform.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\thirdparty\README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libopenjpeg.pri" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

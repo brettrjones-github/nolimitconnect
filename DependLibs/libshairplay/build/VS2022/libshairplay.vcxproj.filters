@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="crypto">
+      <UniqueIdentifier>{346e1010-26fe-42a6-b4f6-f8c84b4ffd5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="alac">
+      <UniqueIdentifier>{238dfa95-2fb1-45a3-82e2-95187fd192d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\alac\alac.c">
+      <Filter>alac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\aes.c">
+      <Filter>crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\bigint.c">
+      <Filter>crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\hmac.c">
+      <Filter>crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\md5.c">
+      <Filter>crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\rc4.c">
+      <Filter>crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\sha1.c">
+      <Filter>crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\base64.c" />
+    <ClCompile Include="..\..\digest.c" />
+    <ClCompile Include="..\..\dnssd.c" />
+    <ClCompile Include="..\..\http_parser.c" />
+    <ClCompile Include="..\..\http_request.c" />
+    <ClCompile Include="..\..\http_response.c" />
+    <ClCompile Include="..\..\httpd.c" />
+    <ClCompile Include="..\..\logger.c" />
+    <ClCompile Include="..\..\netutils.c" />
+    <ClCompile Include="..\..\raop_buffer.c" />
+    <ClCompile Include="..\..\raop_rtp.c" />
+    <ClCompile Include="..\..\rsakey.c" />
+    <ClCompile Include="..\..\rsapem.c" />
+    <ClCompile Include="..\..\sdp.c" />
+    <ClCompile Include="..\..\shairplay.c" />
+    <ClCompile Include="..\..\utils.c" />
+    <ClCompile Include="..\..\raop.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\alac\alac.h">
+      <Filter>alac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\alac\stdint_win.h">
+      <Filter>alac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\crypto\bigint.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\crypto\bigint_impl.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\crypto\crypto.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\crypto\os_port.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\base64.h" />
+    <ClInclude Include="..\..\compat.h" />
+    <ClInclude Include="..\..\config_libshairplay.h" />
+    <ClInclude Include="..\..\digest.h" />
+    <ClInclude Include="..\..\dnssd.h" />
+    <ClInclude Include="..\..\dnssdint.h" />
+    <ClInclude Include="..\..\global.h" />
+    <ClInclude Include="..\..\http_parser.h" />
+    <ClInclude Include="..\..\http_request.h" />
+    <ClInclude Include="..\..\http_response.h" />
+    <ClInclude Include="..\..\httpd.h" />
+    <ClInclude Include="..\..\logger.h" />
+    <ClInclude Include="..\..\memalign.h" />
+    <ClInclude Include="..\..\netutils.h" />
+    <ClInclude Include="..\..\raop.h" />
+    <ClInclude Include="..\..\raop_buffer.h" />
+    <ClInclude Include="..\..\raop_rtp.h" />
+    <ClInclude Include="..\..\rsakey.h" />
+    <ClInclude Include="..\..\rsapem.h" />
+    <ClInclude Include="..\..\sdp.h" />
+    <ClInclude Include="..\..\sockets.h" />
+    <ClInclude Include="..\..\threads.h" />
+    <ClInclude Include="..\..\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\dnssd.m" />
+  </ItemGroup>
+</Project>

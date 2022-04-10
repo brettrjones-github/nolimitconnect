@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{17DAE8A3-F3D4-382F-943D-89B5900F6B24}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>generate_json_header</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\xbmc;$(ProjectDir)..\..\xbmc\lib;$(ProjectDir)..\..\xbmc\lib\gtest\include;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\platform\win32;$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer;$(ProjectDir)..\..\build;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\mingwlibs\win32\include;$(ProjectDir)..\..\build\libdvd\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\lzo;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\python;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\xbmc;$(ProjectDir)..\..\xbmc\lib;$(ProjectDir)..\..\xbmc\lib\gtest\include;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\platform\win32;$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer;$(ProjectDir)..\..\build;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\mingwlibs\win32\include;$(ProjectDir)..\..\build\libdvd\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\lzo;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\python;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\xbmc;$(ProjectDir)..\..\xbmc\lib;$(ProjectDir)..\..\xbmc\lib\gtest\include;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\platform\win32;$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer;$(ProjectDir)..\..\build;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\mingwlibs\win32\include;$(ProjectDir)..\..\build\libdvd\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\lzo;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\python;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\xbmc;$(ProjectDir)..\..\xbmc\lib;$(ProjectDir)..\..\xbmc\lib\gtest\include;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\platform\win32;$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer;$(ProjectDir)..\..\build;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\mingwlibs\win32\include;$(ProjectDir)..\..\build\libdvd\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\lzo;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\python;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HI:/KodiBuildsVS/xbmc -BI:/KodiBuildsVS --check-stamp-file $(ProjectDir)../../build/interfaces/json-rpc/schema/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HI:/KodiBuildsVS/xbmc -BI:/KodiBuildsVS --check-stamp-file $(ProjectDir)../../build/interfaces/json-rpc/schema/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HI:/KodiBuildsVS/xbmc -BI:/KodiBuildsVS --check-stamp-file $(ProjectDir)../../build/interfaces/json-rpc/schema/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HI:/KodiBuildsVS/xbmc -BI:/KodiBuildsVS --check-stamp-file $(ProjectDir)../../build/interfaces/json-rpc/schema/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\f88c7b93160c9bd60140fea386ca5413\ServiceDescription.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating ServiceDescription.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+cd $(ProjectDir)..\..\build
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+$(ProjectDir)..\..\build\jsonschemabuilder\Debug\JsonSchemaBuilder.exe $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/version.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/license.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/methods.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/types.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/notifications.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)../../CMakeFiles/f88c7b93160c9bd60140fea386ca5413/ServiceDescription.h.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\..\build\ServiceDescription.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating ServiceDescription.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+cd $(ProjectDir)..\..\build
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+$(ProjectDir)..\..\build\jsonschemabuilder\Release\JsonSchemaBuilder.exe $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/version.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/license.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/methods.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/types.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/notifications.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)../../CMakeFiles/f88c7b93160c9bd60140fea386ca5413/ServiceDescription.h.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\..\build\ServiceDescription.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating ServiceDescription.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+cd $(ProjectDir)..\..\build
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+$(ProjectDir)..\..\build\jsonschemabuilder\MinSizeRel\JsonSchemaBuilder.exe $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/version.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/license.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/methods.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/types.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/notifications.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)../../CMakeFiles/f88c7b93160c9bd60140fea386ca5413/ServiceDescription.h.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)..\..\build\ServiceDescription.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating ServiceDescription.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+cd $(ProjectDir)..\..\build
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+$(ProjectDir)..\..\build\jsonschemabuilder\RelWithDebInfo\JsonSchemaBuilder.exe $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/version.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/license.txt $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/methods.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/types.json $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/notifications.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)../../CMakeFiles/f88c7b93160c9bd60140fea386ca5413/ServiceDescription.h.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)..\..\build\ServiceDescription.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\65cf90b844bfa13ba0242dedafca10f1\addon.xml.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating xbmc.json/addon.xml</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+cd $(ProjectDir)..\..\xbmc
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_SOURCE_DIR=$(ProjectDir)../../xbmc -DCORE_BINARY_DIR=F:/KodiBuildsVSRuns2018-04-01 -DCORE_SYSTEM_NAME=windows -P $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/GenerateAddonXml.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)../../CMakeFiles/65cf90b844bfa13ba0242dedafca10f1/addon.xml.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;$(ProjectDir)..\..\xbmc\addons\xbmc.json\addon.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\..\addons\xbmc.json\addon.xml</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating xbmc.json/addon.xml</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+cd $(ProjectDir)..\..\xbmc
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_SOURCE_DIR=$(ProjectDir)../../xbmc -DCORE_BINARY_DIR=F:/KodiBuildsVSRuns2018-04-01 -DCORE_SYSTEM_NAME=windows -P $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/GenerateAddonXml.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)../../CMakeFiles/65cf90b844bfa13ba0242dedafca10f1/addon.xml.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;$(ProjectDir)..\..\xbmc\addons\xbmc.json\addon.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\..\addons\xbmc.json\addon.xml</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating xbmc.json/addon.xml</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+cd $(ProjectDir)..\..\xbmc
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_SOURCE_DIR=$(ProjectDir)../../xbmc -DCORE_BINARY_DIR=F:/KodiBuildsVSRuns2018-04-01 -DCORE_SYSTEM_NAME=windows -P $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/GenerateAddonXml.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)../../CMakeFiles/65cf90b844bfa13ba0242dedafca10f1/addon.xml.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;$(ProjectDir)..\..\xbmc\addons\xbmc.json\addon.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)..\..\addons\xbmc.json\addon.xml</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating xbmc.json/addon.xml</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+cd $(ProjectDir)..\..\xbmc
+if %errorlevel% neq 0 goto :cmEnd
+F:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_SOURCE_DIR=$(ProjectDir)../../xbmc -DCORE_BINARY_DIR=F:/KodiBuildsVSRuns2018-04-01 -DCORE_SYSTEM_NAME=windows -P $(ProjectDir)../../xbmc/xbmc/interfaces/json-rpc/schema/GenerateAddonXml.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)../../CMakeFiles/65cf90b844bfa13ba0242dedafca10f1/addon.xml.rule;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\version.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\license.txt;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\methods.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\types.json;$(ProjectDir)..\..\xbmc\xbmc\interfaces\json-rpc\schema\notifications.json;$(ProjectDir)..\..\xbmc\addons\xbmc.json\addon.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)..\..\addons\xbmc.json\addon.xml</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\eb7f20d543f940a8e2e5e3728f4a891c\generate_json_header.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)../../CMakeFiles/eb7f20d543f940a8e2e5e3728f4a891c/generate_json_header.rule;$(ProjectDir)..\..\build\ServiceDescription.h;$(ProjectDir)..\..\addons\xbmc.json\addon.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate_json_header</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)../../CMakeFiles/eb7f20d543f940a8e2e5e3728f4a891c/generate_json_header.rule;$(ProjectDir)..\..\build\ServiceDescription.h;$(ProjectDir)..\..\addons\xbmc.json\addon.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate_json_header</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)../../CMakeFiles/eb7f20d543f940a8e2e5e3728f4a891c/generate_json_header.rule;$(ProjectDir)..\..\build\ServiceDescription.h;$(ProjectDir)..\..\addons\xbmc.json\addon.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate_json_header</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)../../CMakeFiles/eb7f20d543f940a8e2e5e3728f4a891c/generate_json_header.rule;$(ProjectDir)..\..\build\ServiceDescription.h;$(ProjectDir)..\..\addons\xbmc.json\addon.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate_json_header</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(ProjectDir)..\..\build\interfaces\json-rpc\schema\CMakeFiles\generate_json_header" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(ProjectDir)..\..\ZERO_CHECK.vcxproj">
+      <Project>{4CF0743F-8CDD-3E5B-9E2C-2884B225EEC5}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="$(ProjectDir)..\..\build\jsonschemabuilder\JsonSchemaBuilder.vcxproj">
+      <Project>{0385DEE9-8ABE-377F-8A69-37200884AB85}</Project>
+      <Name>JsonSchemaBuilder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\atomics\pthread\stdatomic_avutil.c" />
+    <ClCompile Include="..\..\adler32_avutil.c" />
+    <ClCompile Include="..\..\aes_avutil.c" />
+    <ClCompile Include="..\..\aes_ctr_avutil.c" />
+    <ClCompile Include="..\..\atomic_avutil.c" />
+    <ClCompile Include="..\..\audio_fifo_avutil.c" />
+    <ClCompile Include="..\..\avstring_avutil.c" />
+    <ClCompile Include="..\..\avutil_intmath.c" />
+    <ClCompile Include="..\..\avutil_time.c" />
+    <ClCompile Include="..\..\base64_avutil.c" />
+    <ClCompile Include="..\..\blowfish_avutil.c" />
+    <ClCompile Include="..\..\bprint_avutil.c" />
+    <ClCompile Include="..\..\buffer_avutil.c" />
+    <ClCompile Include="..\..\camellia_avutil.c" />
+    <ClCompile Include="..\..\cast5_avutil.c" />
+    <ClCompile Include="..\..\channel_layout_avutil.c" />
+    <ClCompile Include="..\..\color_utils_avutil.c" />
+    <ClCompile Include="..\..\cpu_avutil.c" />
+    <ClCompile Include="..\..\crc_avutil.c" />
+    <ClCompile Include="..\..\des_avutil.c" />
+    <ClCompile Include="..\..\dict_avutil.c" />
+    <ClCompile Include="..\..\display_avutil.c" />
+    <ClCompile Include="..\..\downmix_info_avutil.c" />
+    <ClCompile Include="..\..\error_avutil.c" />
+    <ClCompile Include="..\..\eval_avutil.c" />
+    <ClCompile Include="..\..\fifo_avutil.c" />
+    <ClCompile Include="..\..\file_avutil.c" />
+    <ClCompile Include="..\..\file_open_avutil.c" />
+    <ClCompile Include="..\..\fixed_dsp_avutil.c" />
+    <ClCompile Include="..\..\float_dsp_avutil.c" />
+    <ClCompile Include="..\..\frame_avutil.c" />
+    <ClCompile Include="..\..\hash_avutil.c" />
+    <ClCompile Include="..\..\hmac_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_cuda_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_d3d11va_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_drm_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_dxva2_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_qsv_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_vaapi_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_vdpau_avutil.c" />
+    <ClCompile Include="..\..\hwcontext_videotoolbox_avutil.c" />
+    <ClCompile Include="..\..\imgutils_avutil.c" />
+    <ClCompile Include="..\..\integer_avutil.c" />
+    <ClCompile Include="..\..\lfg_avutil.c" />
+    <ClCompile Include="..\..\lls_avutil.c" />
+    <ClCompile Include="..\..\log_avutil.c" />
+    <ClCompile Include="..\..\log2_tab_avutil.c" />
+    <ClCompile Include="..\..\lzo_avutil.c" />
+    <ClCompile Include="..\..\mastering_display_metadata_avutil.c" />
+    <ClCompile Include="..\..\mathematics_avutil.c" />
+    <ClCompile Include="..\..\md5_avutil.c" />
+    <ClCompile Include="..\..\mem_avutil.c" />
+    <ClCompile Include="..\..\murmur3_avutil.c" />
+    <ClCompile Include="..\..\opencl_avutil.c" />
+    <ClCompile Include="..\..\opencl_internal_avutil.c" />
+    <ClCompile Include="..\..\opt_avutil.c" />
+    <ClCompile Include="..\..\parseutils_avutil.c" />
+    <ClCompile Include="..\..\pca_avutil.c" />
+    <ClCompile Include="..\..\pixdesc_avutil.c" />
+    <ClCompile Include="..\..\pixelutils_avutil.c" />
+    <ClCompile Include="..\..\random_seed_avutil.c" />
+    <ClCompile Include="..\..\rational_avutil.c" />
+    <ClCompile Include="..\..\rc4_avutil.c" />
+    <ClCompile Include="..\..\reverse_avutil.c" />
+    <ClCompile Include="..\..\ripemd_avutil.c" />
+    <ClCompile Include="..\..\samplefmt_avutil.c" />
+    <ClCompile Include="..\..\sha_avutil.c" />
+    <ClCompile Include="..\..\sha512_avutil.c" />
+    <ClCompile Include="..\..\slicethread_avutil.c" />
+    <ClCompile Include="..\..\spherical_avutil.c" />
+    <ClCompile Include="..\..\stereo3d_avutil.c" />
+    <ClCompile Include="..\..\tea_avutil.c" />
+    <ClCompile Include="..\..\threadmessage_avutil.c" />
+    <ClCompile Include="..\..\timecode_avutil.c" />
+    <ClCompile Include="..\..\tree_avutil.c" />
+    <ClCompile Include="..\..\twofish_avutil.c" />
+    <ClCompile Include="..\..\utils_avutil.c" />
+    <ClCompile Include="..\..\x86\cpu_x86_avutil.c" />
+    <ClCompile Include="..\..\x86\fixed_dsp_init_avutil.c" />
+    <ClCompile Include="..\..\x86\float_dsp_init_avutil.c" />
+    <ClCompile Include="..\..\x86\imgutils_init_avutil.c" />
+    <ClCompile Include="..\..\x86\lls_init_avutil.c" />
+    <ClCompile Include="..\..\x86\pixelutils_init_avutil.c" />
+    <ClCompile Include="..\..\xga_font_data_avutil.c" />
+    <ClCompile Include="..\..\xtea_avutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\AppCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvCompilerIntTypes.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvConfig.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvConfigAndroid.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvConfigLinux.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvConfigWindows.h" />
+    <ClInclude Include="..\..\..\..\..\AppCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\..\AppDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvFeaturesConfig.h" />
+    <ClInclude Include="..\..\..\..\..\AppTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\atomics\dummy\stdatomic.h" />
+    <ClInclude Include="..\..\..\atomics\gcc\stdatomic.h" />
+    <ClInclude Include="..\..\..\atomics\pthread\stdatomic.h" />
+    <ClInclude Include="..\..\..\atomics\suncc\stdatomic.h" />
+    <ClInclude Include="..\..\..\atomics\win32\stdatomic.h" />
+    <ClInclude Include="..\..\..\ffmpeg_config.h" />
+    <ClInclude Include="..\..\..\ffmpeg_config_android.h" />
+    <ClInclude Include="..\..\..\ffmpeg_config_linux.h" />
+    <ClInclude Include="..\..\..\ffmpeg_config_windows.h" />
+    <ClInclude Include="..\..\..\stdatomic.h" />
+    <ClInclude Include="..\..\adler32.h" />
+    <ClInclude Include="..\..\aes.h" />
+    <ClInclude Include="..\..\aes_ctr.h" />
+    <ClInclude Include="..\..\aes_internal.h" />
+    <ClInclude Include="..\..\atomic.h" />
+    <ClInclude Include="..\..\atomic_gcc.h" />
+    <ClInclude Include="..\..\atomic_suncc.h" />
+    <ClInclude Include="..\..\atomic_win32.h" />
+    <ClInclude Include="..\..\attributes.h" />
+    <ClInclude Include="..\..\audio_fifo.h" />
+    <ClInclude Include="..\..\avassert.h" />
+    <ClInclude Include="..\..\avconfig.h" />
+    <ClInclude Include="..\..\avstring.h" />
+    <ClInclude Include="..\..\avutil.h" />
+    <ClInclude Include="..\..\avutil_attributes.h" />
+    <ClInclude Include="..\..\avutil_common.h" />
+    <ClInclude Include="..\..\avutil_internal.h" />
+    <ClInclude Include="..\..\avutil_intmath.h" />
+    <ClInclude Include="..\..\avutil_time.h" />
+    <ClInclude Include="..\..\base64.h" />
+    <ClInclude Include="..\..\blowfish.h" />
+    <ClInclude Include="..\..\bprint.h" />
+    <ClInclude Include="..\..\bswap.h" />
+    <ClInclude Include="..\..\buffer.h" />
+    <ClInclude Include="..\..\buffer_internal.h" />
+    <ClInclude Include="..\..\camellia.h" />
+    <ClInclude Include="..\..\cast5.h" />
+    <ClInclude Include="..\..\channel_layout.h" />
+    <ClInclude Include="..\..\colorspace.h" />
+    <ClInclude Include="..\..\color_utils.h" />
+    <ClInclude Include="..\..\common.h" />
+    <ClInclude Include="..\..\cpu.h" />
+    <ClInclude Include="..\..\cpu_internal.h" />
+    <ClInclude Include="..\..\crc.h" />
+    <ClInclude Include="..\..\des.h" />
+    <ClInclude Include="..\..\dict.h" />
+    <ClInclude Include="..\..\display.h" />
+    <ClInclude Include="..\..\downmix_info.h" />
+    <ClInclude Include="..\..\dynarray.h" />
+    <ClInclude Include="..\..\error.h" />
+    <ClInclude Include="..\..\eval.h" />
+    <ClInclude Include="..\..\ffmath.h" />
+    <ClInclude Include="..\..\ffversion.h" />
+    <ClInclude Include="..\..\fifo.h" />
+    <ClInclude Include="..\..\file.h" />
+    <ClInclude Include="..\..\fixed_dsp.h" />
+    <ClInclude Include="..\..\float_dsp.h" />
+    <ClInclude Include="..\..\frame.h" />
+    <ClInclude Include="..\..\hash.h" />
+    <ClInclude Include="..\..\hmac.h" />
+    <ClInclude Include="..\..\hwcontext.h" />
+    <ClInclude Include="..\..\hwcontext_cuda.h" />
+    <ClInclude Include="..\..\hwcontext_cuda_internal.h" />
+    <ClInclude Include="..\..\hwcontext_d3d11va.h" />
+    <ClInclude Include="..\..\hwcontext_drm.h" />
+    <ClInclude Include="..\..\hwcontext_dxva2.h" />
+    <ClInclude Include="..\..\hwcontext_internal.h" />
+    <ClInclude Include="..\..\hwcontext_qsv.h" />
+    <ClInclude Include="..\..\hwcontext_vaapi.h" />
+    <ClInclude Include="..\..\hwcontext_vdpau.h" />
+    <ClInclude Include="..\..\hwcontext_videotoolbox.h" />
+    <ClInclude Include="..\..\imgutils.h" />
+    <ClInclude Include="..\..\imgutils_internal.h" />
+    <ClInclude Include="..\..\integer.h" />
+    <ClInclude Include="..\..\intfloat.h" />
+    <ClInclude Include="..\..\intreadwrite.h" />
+    <ClInclude Include="..\..\lfg.h" />
+    <ClInclude Include="..\..\libm.h" />
+    <ClInclude Include="..\..\lls.h" />
+    <ClInclude Include="..\..\log.h" />
+    <ClInclude Include="..\..\lzo.h" />
+    <ClInclude Include="..\..\macros.h" />
+    <ClInclude Include="..\..\mastering_display_metadata.h" />
+    <ClInclude Include="..\..\mathematics.h" />
+    <ClInclude Include="..\..\md5.h" />
+    <ClInclude Include="..\..\mem.h" />
+    <ClInclude Include="..\..\mem_internal.h" />
+    <ClInclude Include="..\..\motion_vector.h" />
+    <ClInclude Include="..\..\murmur3.h" />
+    <ClInclude Include="..\..\opencl.h" />
+    <ClInclude Include="..\..\opencl_internal.h" />
+    <ClInclude Include="..\..\opt.h" />
+    <ClInclude Include="..\..\parseutils.h" />
+    <ClInclude Include="..\..\pca.h" />
+    <ClInclude Include="..\..\pixdesc.h" />
+    <ClInclude Include="..\..\pixelutils.h" />
+    <ClInclude Include="..\..\pixfmt.h" />
+    <ClInclude Include="..\..\qsort.h" />
+    <ClInclude Include="..\..\random_seed.h" />
+    <ClInclude Include="..\..\rational.h" />
+    <ClInclude Include="..\..\rc4.h" />
+    <ClInclude Include="..\..\replaygain.h" />
+    <ClInclude Include="..\..\reverse.h" />
+    <ClInclude Include="..\..\ripemd.h" />
+    <ClInclude Include="..\..\samplefmt.h" />
+    <ClInclude Include="..\..\sha.h" />
+    <ClInclude Include="..\..\sha512.h" />
+    <ClInclude Include="..\..\slicethread.h" />
+    <ClInclude Include="..\..\softfloat.h" />
+    <ClInclude Include="..\..\softfloat_ieee754.h" />
+    <ClInclude Include="..\..\softfloat_tables.h" />
+    <ClInclude Include="..\..\spherical.h" />
+    <ClInclude Include="..\..\stereo3d.h" />
+    <ClInclude Include="..\..\tablegen.h" />
+    <ClInclude Include="..\..\tea.h" />
+    <ClInclude Include="..\..\thread.h" />
+    <ClInclude Include="..\..\threadmessage.h" />
+    <ClInclude Include="..\..\timecode.h" />
+    <ClInclude Include="..\..\timer.h" />
+    <ClInclude Include="..\..\timestamp.h" />
+    <ClInclude Include="..\..\time_internal.h" />
+    <ClInclude Include="..\..\tree.h" />
+    <ClInclude Include="..\..\twofish.h" />
+    <ClInclude Include="..\..\version.h" />
+    <ClInclude Include="..\..\wchar_filename.h" />
+    <ClInclude Include="..\..\x86\asm.h" />
+    <ClInclude Include="..\..\x86\bswap.h" />
+    <ClInclude Include="..\..\x86\cpu_x86.h" />
+    <ClInclude Include="..\..\x86\emms.h" />
+    <ClInclude Include="..\..\x86\intmath.h" />
+    <ClInclude Include="..\..\x86\intreadwrite.h" />
+    <ClInclude Include="..\..\x86\pixelutils.h" />
+    <ClInclude Include="..\..\x86\timer.h" />
+    <ClInclude Include="..\..\x86\w64xmmtest.h" />
+    <ClInclude Include="..\..\xga_font_data.h" />
+    <ClInclude Include="..\..\xtea.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\x86\x86inc.asm">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">yasm -Xvc -g cv8 -f win32 -Pconfig_x86.asm -I"." -I"%(ProjectDir)../../" -I"%(ProjectDir)../../../" -I"%(ProjectDir)../../../../" "%(FullPath)" -o $(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">yasm -Xvc -g cv8 -f win64 -Pconfig_x86.asm -I"." -I"%(ProjectDir)../../" -I"%(ProjectDir)../../../" -I"%(ProjectDir)../../../../" "%(FullPath)" -o $(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Assembling %(Filename)%(Extension)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Assembling %(Filename)%(Extension)</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\x86\x86util.asm">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">yasm -Xvc -g cv8 -f win32 -Pconfig_x86.asm -I"." -I"%(ProjectDir)../../" -I"%(ProjectDir)../../../" -I"%(ProjectDir)../../../../" "%(FullPath)" -o $(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">yasm -Xvc -g cv8 -f win64 -Pconfig_x86.asm -I"." -I"%(ProjectDir)../../" -I"%(ProjectDir)../../../" -I"%(ProjectDir)../../../../" "%(FullPath)" -o $(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Assembling %(Filename)%(Extension)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Assembling %(Filename)%(Extension)</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\libavutil.pri" />
+    <None Include="..\..\..\..\..\libavutil.pro" />
+    <None Include="..\..\avutil.exp" />
+    <None Include="..\..\libavutil.pc" />
+    <None Include="..\..\libavutil.v" />
+    <None Include="..\..\libavutil.ver" />
+    <None Include="..\..\Makefile" />
+    <None Include="..\..\x86\cpuid.asm" />
+    <None Include="..\..\x86\emms.asm" />
+    <None Include="..\..\x86\fixed_dsp.asm" />
+    <None Include="..\..\x86\float_dsp.asm" />
+    <None Include="..\..\x86\imgutils.asm" />
+    <None Include="..\..\x86\lls.asm" />
+    <None Include="..\..\x86\Makefile" />
+    <None Include="..\..\x86\pixelutils.asm" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>FfmpegAvUtilLib</ProjectName>
+    <ProjectGuid>{813F5401-8023-4A7C-9031-6C213B6CE302}</ProjectGuid>
+    <RootNamespace>GoTv</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\..\lib\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)\..\..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\..\..\lib\Win32\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)\..\..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\openssl-1.0.2o\include\;$(ProjectDir)..\..\..\..\..\sysheaders;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\xbmc\;$(ProjectDir)..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;_USE_32BIT_TIME_T;LIB_STATIC;_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <OpenMPSupport>
+      </OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\sysheaders\;$(ProjectDir)..\..\..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\..\openssl-1.0.2p\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN64;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <OpenMPSupport>
+      </OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\P2PCoreLibs\PlatformLib\win32\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\xbmc\;$(ProjectDir)..\..\..\..\..\..\P2PCoreLibs\;$(ProjectDir)..\..\..\..\..\..\P2PCoreLibs\openssl-1.0.2o\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;HAVE_CONFIG_H;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\sysheaders\;$(ProjectDir)..\..\..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\..\openssl-1.0.2p\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN64;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

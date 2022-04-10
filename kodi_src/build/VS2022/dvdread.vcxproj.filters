@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B07FBB13-E166-3C14-9CFA-C6215B171AEA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\bitreader.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvd_input.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvd_reader.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvd_udf.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\ifo_print.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\ifo_read.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\md5.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\nav_print.c" />
+    <ClCompile Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\nav_read.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\bswap.h" />
+    <ClInclude Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvd_input.h" />
+    <ClInclude Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread_internal.h" />
+    <ClInclude Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\md5.h" />
+  </ItemGroup>
+</Project>

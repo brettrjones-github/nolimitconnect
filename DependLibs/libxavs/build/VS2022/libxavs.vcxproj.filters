@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Enc">
+      <UniqueIdentifier>{4eb78303-1842-4404-b344-b09d97cf91bb}</UniqueIdentifier>
+      <Extensions>.c</Extensions>
+    </Filter>
+    <Filter Include="Enc\enc_h">
+      <UniqueIdentifier>{0c39c95f-bdeb-40d1-b17d-5cac44913f99}</UniqueIdentifier>
+      <Extensions>.h</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{994b7717-d051-4c19-9df0-0f7200da243d}</UniqueIdentifier>
+      <Extensions>.c;.h;</Extensions>
+    </Filter>
+    <Filter Include="Core\core_h">
+      <UniqueIdentifier>{d1456149-e48b-47d0-be5e-933cd7886e25}</UniqueIdentifier>
+      <Extensions>.h</Extensions>
+    </Filter>
+    <Filter Include="extras">
+      <UniqueIdentifier>{b3cd203e-bb3a-4d3f-b3dd-359ffdcd4170}</UniqueIdentifier>
+      <Extensions>.c</Extensions>
+    </Filter>
+    <Filter Include="extras\extras_h">
+      <UniqueIdentifier>{7346cc88-689c-44fb-97b6-d45551f21382}</UniqueIdentifier>
+      <Extensions>.h</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{690e17bc-6242-414a-b2da-5fc29a5709f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\i386">
+      <UniqueIdentifier>{3ea41b0a-a95e-494a-a3a4-2095f8bdb41f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\encoder\analyse.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\cavlc.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\encoder.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\eval.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\lookahead.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\macroblock.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\me.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\ratecontrol.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\set.c">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\common.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\cpu.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\csp.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\dct.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\frame.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\macroblock.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\mc.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\mdate.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pixel.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\predict.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\quant.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\set.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extras\getopt.c">
+      <Filter>extras</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\encoder\analyse.h">
+      <Filter>Enc\enc_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\macroblock.h">
+      <Filter>Enc\enc_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\me.h">
+      <Filter>Enc\enc_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\ratecontrol.h">
+      <Filter>Enc\enc_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\set.h">
+      <Filter>Enc\enc_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\bs.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\common.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cpu.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\csp.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\dct.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\frame.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\macroblock.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\mc.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\osdep.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pixel.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\predict.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\quant.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\set.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\vlc.h">
+      <Filter>Core\core_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extras\getopt.h">
+      <Filter>extras\extras_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extras\stdint.h">
+      <Filter>extras\extras_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\config_libxavs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\common\i386\pixel-sse2.asm">
+      <Filter>common\i386</Filter>
+    </None>
+    <None Include="..\..\common\i386\quant_sse2.asm">
+      <Filter>common\i386</Filter>
+    </None>
+  </ItemGroup>
+</Project>

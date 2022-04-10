@@ -1,0 +1,1234 @@
+<?xml version="1.0" ?> 
+<top id="1" addr="02890DC8" >
+    <attributelist id="2" addr="02890DC8" >
+        <attribute name="outfile" value="AddonModuleXbmcdrm.i.xml" id="3" addr="0289EBF8" />
+        <attribute name="name" value="xbmcdrm" id="4" addr="0289EBF8" />
+        <attribute name="module" value="xbmcdrm" id="5" addr="0289B7C8" />
+        <attribute name="inputfile" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\swig\\..\\swig\\AddonModuleXbmcdrm.i" id="6" addr="0289EBF8" />
+        <attribute name="classes" value="0289A2D8" id="7" addr="0289A2D8" />
+        <attribute name="infile" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\swig\\..\\swig\\AddonModuleXbmcdrm.i" id="8" addr="0289EBF8" />
+        <attribute name="outfile_h" value="AddonModuleXbmcdrm.i.h" id="9" addr="0289EBF8" />
+    </attributelist >
+
+    <include id="10" addr="02898F98" >
+        <attributelist id="11" addr="02898F98" >
+            <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\project\\BuildDependencies\\win32\\bin\\swig\\Lib\\swig.swg" id="12" addr="0289EBF8" />
+        </attributelist >
+
+        <include id="13" addr="02898FC8" >
+            <attributelist id="14" addr="02898FC8" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\project\\BuildDependencies\\win32\\bin\\swig\\Lib\\swigwarnings.swg" id="15" addr="0289EBF8" />
+            </attributelist >
+
+            <include id="16" addr="02899058" >
+                <attributelist id="17" addr="02899058" >
+                    <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\project\\BuildDependencies\\win32\\bin\\swig\\Lib\\swigwarn.swg" id="18" addr="0289EBF8" />
+                </attributelist >
+             
+            </include >
+        </include >
+        <namespace id="19" addr="0289A088" >
+            <attributelist id="20" addr="0289A088" >
+                <attribute name="sym_name" value="std" id="21" addr="0289EBF8" />
+                <attribute name="name" value="std" id="22" addr="0289EBF8" />
+                <typescope id="23" addr="0289DF38" >
+                    <attributelist id="24" addr="0289DF38" >
+                        <attribute name="name" value="std" id="25" addr="0289EBF8" />
+                        <typetab id="26" addr="0289DF48" >
+                            <attributelist id="27" addr="0289DF48" >
+                                <attribute name="initializer_list" value="initializer_list" id="28" addr="0289EBF8" />
+                            </attributelist >
+                            <typetabsitem id="29" addr="0289DFD8" >
+                                <attributelist id="30" addr="0289DFD8" >
+                                </attributelist >
+                            </typetabsitem >
+                        </typetab >
+                        <attribute name="parent" value="02890548" id="31" addr="02890548" />
+                        <attribute name="qname" value="std" id="32" addr="0289EBF8" />
+                        <attribute name="symtab" value="0289A038" id="33" addr="0289A038" />
+                    </attributelist >
+                    <typescopesitem id="34" addr="02899FE8" >
+                        <attributelist id="35" addr="02899FE8" >
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="36" addr="0289DF48" >
+                        <attributelist id="37" addr="0289DF48" >
+                            <attribute name="initializer_list" value="initializer_list" id="38" addr="0289EBF8" />
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="39" addr="02890548" >
+                        <attributelist id="40" addr="02890548" >
+                            <attribute name="name" value="" id="41" addr="0289EBF8" />
+                            <typetab id="42" addr="02890578" >
+                                <attributelist id="43" addr="02890578" >
+                                </attributelist >
+                            </typetab >
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="44" addr="0289DF58" >
+                        <attributelist id="45" addr="0289DF58" >
+                        </attributelist >
+                    </typescopesitem >
+                    <typescopesitem id="46" addr="0289A038" >
+                        <attributelist id="47" addr="0289A038" >
+                            <attribute name="name" value="std" id="48" addr="0289EBF8" />
+                            <attribute name="csymtab" value="0289A058" id="49" addr="0289A058" />
+                            <attribute name="symtab" value="0289A028" id="50" addr="0289A028" />
+                        </attributelist >
+                    </typescopesitem >
+                </typescope >
+                <attribute name="symtab" value="0289A038" id="51" addr="0289A038" />
+                <attribute name="sym_symtab" value="028904D8" id="52" addr="028904D8" />
+                <attribute name="sym_overname" value="__SWIG_0" id="53" addr="0289EBF8" />
+            </attributelist >
+
+            <template id="54" addr="0289A148" >
+                <attributelist id="55" addr="0289A148" >
+                    <attribute name="templatetype" value="class" id="56" addr="0289EBF8" />
+                    <attribute name="sym_typename" value="1" id="57" addr="0289EBF8" />
+                    <attribute name="name" value="initializer_list" id="58" addr="0289EBF8" />
+                    <attribute name="sym_symtab" value="0289A038" id="59" addr="0289A038" />
+                    <attribute name="symtab" value="0289A238" id="60" addr="0289A238" />
+                    <attribute name="allows_typedef" value="1" id="61" addr="0289EBF8" />
+                    <attribute name="kind" value="class" id="62" addr="0289EBF8" />
+                    <attribute name="sym_name" value="initializer_list" id="63" addr="0289EBF8" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="64" addr="0289EBF8" />
+                    <attribute name="templateparms" value="0289A0D8" id="65" addr="0289A0D8" />
+                </attributelist >
+
+                <access id="66" addr="0289A318" >
+                    <attributelist id="67" addr="0289A318" >
+                        <attribute name="kind" value="public" id="68" addr="0289EBF8" />
+                    </attributelist >
+                 
+                </access >
+            </template >
+            <typemap id="69" addr="0289A618" >
+                <attributelist id="70" addr="0289A618" >
+                    <kwargs id="71" addr="0289A4B8" >
+                        <attributelist id="72" addr="0289A4B8" >
+                            <attribute name="name" value="warning" id="73" addr="0289EBF8" />
+                            <attribute name="value" value="476:Initialization using std::initializer_list." id="74" addr="0289EBF8" />
+                        </attributelist >
+                        <kwargssitem id="75" addr="0289A558" >
+                            <attributelist id="76" addr="0289A558" >
+                            </attributelist >
+                        </kwargssitem >
+                        <kwargssitem id="77" addr="0289A4A8" >
+                            <attributelist id="78" addr="0289A4A8" >
+                            </attributelist >
+                        </kwargssitem >
+                    </kwargs >
+                    <attribute name="code" value="" id="79" addr="0289EBF8" />
+                    <attribute name="method" value="in" id="80" addr="0289EBF8" />
+                </attributelist >
+
+                <typemapitem id="81" addr="0289A5A8" >
+                    <attributelist id="82" addr="0289A5A8" >
+                        <parmlist id="83" addr="0289A5C8" >
+                            <parm id="84">
+                                <attributelist id="85" addr="0289A5C8" >
+                                    <attribute name="type" value="std::initializer_list&lt;(T)>" id="86" addr="0289EBF8" />
+                                </attributelist >
+                            </parm >
+                        </parmlist >
+                    </attributelist >
+                 
+                </typemapitem >
+            </typemap >
+            <typemap id="87" addr="0289A7D8" >
+                <attributelist id="88" addr="0289A7D8" >
+                    <kwargs id="89" addr="0289A6A8" >
+                        <attributelist id="90" addr="0289A6A8" >
+                            <attribute name="name" value="precedence" id="91" addr="0289EBF8" />
+                            <attribute name="value" value="0" id="92" addr="0289EBF8" />
+                        </attributelist >
+                        <kwargssitem id="93" addr="0289A6B8" >
+                            <attributelist id="94" addr="0289A6B8" >
+                            </attributelist >
+                        </kwargssitem >
+                        <kwargssitem id="95" addr="0289A6C8" >
+                            <attributelist id="96" addr="0289A6C8" >
+                            </attributelist >
+                        </kwargssitem >
+                    </kwargs >
+                    <attribute name="code" value="" id="97" addr="0289EBF8" />
+                    <attribute name="method" value="typecheck" id="98" addr="0289EBF8" />
+                </attributelist >
+
+                <typemapitem id="99" addr="0289A778" >
+                    <attributelist id="100" addr="0289A778" >
+                        <parmlist id="101" addr="0289A798" >
+                            <parm id="102">
+                                <attributelist id="103" addr="0289A798" >
+                                    <attribute name="type" value="std::initializer_list&lt;(T)>" id="104" addr="0289EBF8" />
+                                </attributelist >
+                            </parm >
+                        </parmlist >
+                    </attributelist >
+                 
+                </typemapitem >
+            </typemap >
+        </namespace >
+        <typemap id="105" addr="0289A8E8" >
+            <attributelist id="106" addr="0289A8E8" >
+                <attribute name="code" value="delete [] $1;" id="107" addr="0289EBF8" />
+                <attribute name="method" value="newfree" id="108" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="109" addr="0289A878" >
+                <attributelist id="110" addr="0289A878" >
+                    <parmlist id="111" addr="0289A898" >
+                        <parm id="112">
+                            <attributelist id="113" addr="0289A898" >
+                                <attribute name="type" value="p.char" id="114" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="115" addr="0289A9D8" >
+            <attributelist id="116" addr="0289A9D8" >
+                <attribute name="code" value="{&#10;  delete [] $1;&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="117" addr="0289EBF8" />
+                <attribute name="method" value="memberin" id="118" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="119" addr="0289A978" >
+                <attributelist id="120" addr="0289A978" >
+                    <parmlist id="121" addr="0289A998" >
+                        <parm id="122">
+                            <attributelist id="123" addr="0289A998" >
+                                <attribute name="type" value="p.char" id="124" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="125" addr="0289AB08" >
+            <attributelist id="126" addr="0289AB08" >
+                <kwargs id="127" addr="0289AA28" >
+                    <attributelist id="128" addr="0289AA28" >
+                        <attribute name="name" value="warning" id="129" addr="0289EBF8" />
+                        <attribute name="value" value="451:Setting a const char * variable may leak memory." id="130" addr="0289EBF8" />
+                    </attributelist >
+                    <kwargssitem id="131" addr="0289AA38" >
+                        <attributelist id="132" addr="0289AA38" >
+                        </attributelist >
+                    </kwargssitem >
+                    <kwargssitem id="133" addr="0289AA18" >
+                        <attributelist id="134" addr="0289AA18" >
+                        </attributelist >
+                    </kwargssitem >
+                </kwargs >
+                <attribute name="code" value="{&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="135" addr="0289EBF8" />
+                <attribute name="method" value="memberin" id="136" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="137" addr="0289AAA8" >
+                <attributelist id="138" addr="0289AAA8" >
+                    <parmlist id="139" addr="0289AAC8" >
+                        <parm id="140">
+                            <attributelist id="141" addr="0289AAC8" >
+                                <attribute name="type" value="p.q(const).char" id="142" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="143" addr="0289ABF8" >
+            <attributelist id="144" addr="0289ABF8" >
+                <attribute name="code" value="{&#10;  delete [] $1;&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="145" addr="0289EBF8" />
+                <attribute name="method" value="globalin" id="146" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="147" addr="0289AB98" >
+                <attributelist id="148" addr="0289AB98" >
+                    <parmlist id="149" addr="0289ABB8" >
+                        <parm id="150">
+                            <attributelist id="151" addr="0289ABB8" >
+                                <attribute name="type" value="p.char" id="152" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="153" addr="0289AD28" >
+            <attributelist id="154" addr="0289AD28" >
+                <kwargs id="155" addr="0289AC48" >
+                    <attributelist id="156" addr="0289AC48" >
+                        <attribute name="name" value="warning" id="157" addr="0289EBF8" />
+                        <attribute name="value" value="451:Setting a const char * variable may leak memory." id="158" addr="0289EBF8" />
+                    </attributelist >
+                    <kwargssitem id="159" addr="0289AC58" >
+                        <attributelist id="160" addr="0289AC58" >
+                        </attributelist >
+                    </kwargssitem >
+                    <kwargssitem id="161" addr="0289AC38" >
+                        <attributelist id="162" addr="0289AC38" >
+                        </attributelist >
+                    </kwargssitem >
+                </kwargs >
+                <attribute name="code" value="{&#10;  if ($input) {&#10;     $1 = ($1_type) (new char[strlen((const char *)$input)+1]);&#10;     strcpy((char *)$1, (const char *)$input);&#10;  } else {&#10;     $1 = 0;&#10;  }&#10;}" id="163" addr="0289EBF8" />
+                <attribute name="method" value="globalin" id="164" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="165" addr="0289ACC8" >
+                <attributelist id="166" addr="0289ACC8" >
+                    <parmlist id="167" addr="0289ACE8" >
+                        <parm id="168">
+                            <attributelist id="169" addr="0289ACE8" >
+                                <attribute name="type" value="p.q(const).char" id="170" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="171" addr="0289AE38" >
+            <attributelist id="172" addr="0289AE38" >
+                <attribute name="code" value="{&#10;  if($input) {&#10;    strncpy((char*)$1, (const char *)$input, $1_dim0-1);&#10;    $1[$1_dim0-1] = 0;&#10;  } else {&#10;    $1[0] = 0;&#10;  }&#10;}" id="173" addr="0289EBF8" />
+                <attribute name="method" value="memberin" id="174" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="175" addr="0289ADD8" >
+                <attributelist id="176" addr="0289ADD8" >
+                    <parmlist id="177" addr="0289ADF8" >
+                        <parm id="178">
+                            <attributelist id="179" addr="0289ADF8" >
+                                <attribute name="type" value="a(ANY).char" id="180" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="181" addr="0289AF48" >
+            <attributelist id="182" addr="0289AF48" >
+                <attribute name="code" value="{&#10;  if($input) {&#10;    strncpy((char*)$1, (const char *)$input, $1_dim0-1);&#10;    $1[$1_dim0-1] = 0;&#10;  } else {&#10;    $1[0] = 0;&#10;  }&#10;}" id="183" addr="0289EBF8" />
+                <attribute name="method" value="globalin" id="184" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="185" addr="0289AEE8" >
+                <attributelist id="186" addr="0289AEE8" >
+                    <parmlist id="187" addr="0289AF08" >
+                        <parm id="188">
+                            <attributelist id="189" addr="0289AF08" >
+                                <attribute name="type" value="a(ANY).char" id="190" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="191" addr="0289B038" >
+            <attributelist id="192" addr="0289B038" >
+                <attribute name="code" value="{&#10;  if ($input) strcpy((char *)$1, (const char *)$input);&#10;  else $1[0] = 0;&#10;}" id="193" addr="0289EBF8" />
+                <attribute name="method" value="memberin" id="194" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="195" addr="0289AFD8" >
+                <attributelist id="196" addr="0289AFD8" >
+                    <parmlist id="197" addr="0289AFF8" >
+                        <parm id="198">
+                            <attributelist id="199" addr="0289AFF8" >
+                                <attribute name="type" value="a().char" id="200" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="201" addr="0289B128" >
+            <attributelist id="202" addr="0289B128" >
+                <attribute name="code" value="{&#10;  if ($input) strcpy((char *)$1, (const char *)$input);&#10;  else $1[0] = 0;&#10;}" id="203" addr="0289EBF8" />
+                <attribute name="method" value="globalin" id="204" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="205" addr="0289B0C8" >
+                <attributelist id="206" addr="0289B0C8" >
+                    <parmlist id="207" addr="0289B0E8" >
+                        <parm id="208">
+                            <attributelist id="209" addr="0289B0E8" >
+                                <attribute name="type" value="a().char" id="210" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="211" addr="0289B238" >
+            <attributelist id="212" addr="0289B238" >
+                <attribute name="code" value="{&#10;  size_t ii;&#10;  $1_basetype *b = ($1_basetype *) $1;&#10;  for (ii = 0; ii &lt; (size_t)$1_size; ii++) b[ii] = *(($1_basetype *) $input + ii);&#10;}" id="213" addr="0289EBF8" />
+                <attribute name="method" value="memberin" id="214" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="215" addr="0289B1D8" >
+                <attributelist id="216" addr="0289B1D8" >
+                    <parmlist id="217" addr="0289B1F8" >
+                        <parm id="218">
+                            <attributelist id="219" addr="0289B1F8" >
+                                <attribute name="type" value="a(ANY).SWIGTYPE" id="220" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="221" addr="0289B348" >
+            <attributelist id="222" addr="0289B348" >
+                <attribute name="code" value="{&#10;  size_t ii;&#10;  $1_basetype *b = ($1_basetype *) $1;&#10;  for (ii = 0; ii &lt; (size_t)$1_size; ii++) b[ii] = *(($1_basetype *) $input + ii);&#10;}" id="223" addr="0289EBF8" />
+                <attribute name="method" value="globalin" id="224" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="225" addr="0289B2E8" >
+                <attributelist id="226" addr="0289B2E8" >
+                    <parmlist id="227" addr="0289B308" >
+                        <parm id="228">
+                            <attributelist id="229" addr="0289B308" >
+                                <attribute name="type" value="a(ANY).SWIGTYPE" id="230" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="231" addr="0289B478" >
+            <attributelist id="232" addr="0289B478" >
+                <attribute name="code" value="{&#10;  $basetype (*inp)[$1_dim1] = ($basetype (*)[$1_dim1])($input);&#10;  $basetype (*dest)[$1_dim1] = ($basetype (*)[$1_dim1])($1);&#10;  size_t ii = 0;&#10;  for (; ii &lt; $1_dim0; ++ii) {&#10;    $basetype *ip = inp[ii];&#10;    $basetype *dp = dest[ii];&#10;    size_t jj = 0;&#10;    for (; jj &lt; $1_dim1; ++jj) dp[jj] = ip[jj];&#10;  }&#10;}" id="233" addr="0289EBF8" />
+                <attribute name="method" value="memberin" id="234" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="235" addr="0289B3E8" >
+                <attributelist id="236" addr="0289B3E8" >
+                    <parmlist id="237" addr="0289B438" >
+                        <parm id="238">
+                            <attributelist id="239" addr="0289B438" >
+                                <attribute name="type" value="a(ANY).a(ANY).SWIGTYPE" id="240" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <typemap id="241" addr="0289B5A8" >
+            <attributelist id="242" addr="0289B5A8" >
+                <attribute name="code" value="{&#10;  $basetype (*inp)[$1_dim1] = ($basetype (*)[$1_dim1])($input);&#10;  $basetype (*dest)[$1_dim1] = ($basetype (*)[$1_dim1])($1);&#10;  size_t ii = 0;&#10;  for (; ii &lt; $1_dim0; ++ii) {&#10;    $basetype *ip = inp[ii];&#10;    $basetype *dp = dest[ii];&#10;    size_t jj = 0;&#10;    for (; jj &lt; $1_dim1; ++jj) dp[jj] = ip[jj];&#10;  }&#10;}" id="243" addr="0289EBF8" />
+                <attribute name="method" value="globalin" id="244" addr="0289EBF8" />
+            </attributelist >
+
+            <typemapitem id="245" addr="0289B518" >
+                <attributelist id="246" addr="0289B518" >
+                    <parmlist id="247" addr="0289B568" >
+                        <parm id="248">
+                            <attributelist id="249" addr="0289B568" >
+                                <attribute name="type" value="a(ANY).a(ANY).SWIGTYPE" id="250" addr="0289EBF8" />
+                            </attributelist >
+                        </parm >
+                    </parmlist >
+                </attributelist >
+             
+            </typemapitem >
+        </typemap >
+        <insert id="251" addr="0289B608" >
+            <attributelist id="252" addr="0289B608" >
+                <attribute name="code" value="&#10;#ifdef __cplusplus&#10;/* SwigValueWrapper is described in swig.swg */&#10;template&lt;typename T> class SwigValueWrapper {&#10;  struct SwigMovePointer {&#10;    T *ptr;&#10;    SwigMovePointer(T *p) : ptr(p) { }&#10;    ~SwigMovePointer() { delete ptr; }&#10;    SwigMovePointer&amp; operator=(SwigMovePointer&amp; rhs) { T* oldptr = ptr; ptr = 0; delete oldptr; ptr = rhs.ptr; rhs.ptr = 0; return *this; }&#10;  } pointer;&#10;  SwigValueWrapper&amp; operator=(const SwigValueWrapper&lt;T>&amp; rhs);&#10;  SwigValueWrapper(const SwigValueWrapper&lt;T>&amp; rhs);&#10;public:&#10;  SwigValueWrapper() : pointer(0) { }&#10;  SwigValueWrapper&amp; operator=(const T&amp; t) { SwigMovePointer tmp(new T(t)); pointer = tmp; return *this; }&#10;  operator T&amp;() const { return *pointer.ptr; }&#10;  T *operator&amp;() { return pointer.ptr; }&#10;};" id="253" addr="0289EBF8" />
+                <attribute name="section" value="runtime" id="254" addr="0289EBF8" />
+            </attributelist >
+         
+        </insert >
+        <insert id="255" addr="0289B678" >
+            <attributelist id="256" addr="0289B678" >
+                <attribute name="code" value="&#10;template &lt;typename T> T SwigValueInit() {&#10;  return T();&#10;}&#10;#endif&#10;" id="257" addr="0289EBF8" />
+                <attribute name="section" value="runtime" id="258" addr="0289EBF8" />
+            </attributelist >
+         
+        </insert >
+        <insert id="259" addr="0289B6E8" >
+            <attributelist id="260" addr="0289B6E8" >
+                <attribute name="code" value="/* -----------------------------------------------------------------------------&#10; *  This section contains generic SWIG labels for method/variable&#10; *  declarations/attributes, and other compiler dependent labels.&#10; * ----------------------------------------------------------------------------- */&#10;&#10;/* template workaround for compilers that cannot correctly implement the C++ standard */&#10;#ifndef SWIGTEMPLATEDISAMBIGUATOR&#10;# if defined(__SUNPRO_CC) &amp;&amp; (__SUNPRO_CC &lt;= 0x560)&#10;#  define SWIGTEMPLATEDISAMBIGUATOR template&#10;# elif defined(__HP_aCC)&#10;/* Needed even with `aCC -AA' when `aCC -V' reports HP ANSI C++ B3910B A.03.55 */&#10;/* If we find a maximum version that requires this, the test would be __HP_aCC &lt;= 35500 for A.03.55 */&#10;#  define SWIGTEMPLATEDISAMBIGUATOR template&#10;# else&#10;#  define SWIGTEMPLATEDISAMBIGUATOR&#10;# endif&#10;#endif&#10;&#10;/* inline attribute */&#10;#ifndef SWIGINLINE&#10;# if defined(__cplusplus) || (defined(__GNUC__) &amp;&amp; !defined(__STRICT_ANSI__))&#10;#   define SWIGINLINE inline&#10;# else&#10;#   define SWIGINLINE&#10;# endif&#10;#endif&#10;&#10;/* attribute recognised by some compilers to avoid 'unused' warnings */&#10;#ifndef SWIGUNUSED&#10;# if defined(__GNUC__)&#10;#   if !(defined(__cplusplus)) || (__GNUC__ > 3 || (__GNUC__ == 3 &amp;&amp; __GNUC_MINOR__ >= 4))&#10;#     define SWIGUNUSED __attribute__ ((__unused__))&#10;#   else&#10;#     define SWIGUNUSED&#10;#   endif&#10;# elif defined(__ICC)&#10;#   define SWIGUNUSED __attribute__ ((__unused__))&#10;# else&#10;#   define SWIGUNUSED&#10;# endif&#10;#endif&#10;&#10;#ifndef SWIG_MSC_UNSUPPRESS_4505&#10;# if defined(_MSC_VER)&#10;#   pragma warning(disable : 4505) /* unreferenced local function has been removed */&#10;# endif&#10;#endif&#10;&#10;#ifndef SWIGUNUSEDPARM&#10;# ifdef __cplusplus&#10;#   define SWIGUNUSEDPARM(p)&#10;# else&#10;#   define SWIGUNUSEDPARM(p) p SWIGUNUSED&#10;# endif&#10;#endif&#10;&#10;/* internal SWIG method */&#10;#ifndef SWIGINTERN&#10;# define SWIGINTERN static SWIGUNUSED&#10;#endif&#10;&#10;/* internal inline SWIG method */&#10;#ifndef SWIGINTERNINLINE&#10;# define SWIGINTERNINLINE SWIGINTERN SWIGINLINE&#10;#endif&#10;&#10;/* exporting methods */&#10;#if defined(__GNUC__)&#10;#  if (__GNUC__ >= 4) || (__GNUC__ == 3 &amp;&amp; __GNUC_MINOR__ >= 4)&#10;#    ifndef GCC_HASCLASSVISIBILITY&#10;#      define GCC_HASCLASSVISIBILITY&#10;#    endif&#10;#  endif&#10;#endif&#10;&#10;#ifndef SWIGEXPORT&#10;# if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)&#10;#   if defined(STATIC_LINKED)&#10;#     define SWIGEXPORT&#10;#   else&#10;#     define SWIGEXPORT __declspec(dllexport)&#10;#   endif&#10;# else&#10;#   if defined(__GNUC__) &amp;&amp; defined(GCC_HASCLASSVISIBILITY)&#10;#     define SWIGEXPORT __attribute__ ((visibility(&quot;default&quot;)))&#10;#   else&#10;#     define SWIGEXPORT&#10;#   endif&#10;# endif&#10;#endif&#10;&#10;/* calling conventions for Windows */&#10;#ifndef SWIGSTDCALL&#10;# if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)&#10;#   define SWIGSTDCALL __stdcall&#10;# else&#10;#   define SWIGSTDCALL&#10;# endif&#10;#endif&#10;&#10;/* Deal with Microsoft's attempt at deprecating C standard runtime functions */&#10;#if !defined(SWIG_NO_CRT_SECURE_NO_DEPRECATE) &amp;&amp; defined(_MSC_VER) &amp;&amp; !defined(_CRT_SECURE_NO_DEPRECATE)&#10;# define _CRT_SECURE_NO_DEPRECATE&#10;#endif&#10;&#10;/* Deal with Microsoft's attempt at deprecating methods in the standard C++ library */&#10;#if !defined(SWIG_NO_SCL_SECURE_NO_DEPRECATE) &amp;&amp; defined(_MSC_VER) &amp;&amp; !defined(_SCL_SECURE_NO_DEPRECATE)&#10;# define _SCL_SECURE_NO_DEPRECATE&#10;#endif&#10;&#10;/* Deal with Apple's deprecated 'AssertMacros.h' from Carbon-framework */&#10;#if defined(__APPLE__) &amp;&amp; !defined(__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES)&#10;# define __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES 0&#10;#endif&#10;&#10;/* Intel's compiler complains if a variable which was never initialised is&#10; * cast to void, which is a common idiom which we use to indicate that we&#10; * are aware a variable isn't used.  So we just silence that warning.&#10; * See: https://github.com/swig/swig/issues/192 for more discussion.&#10; */&#10;#ifdef __INTEL_COMPILER&#10;# pragma warning disable 592&#10;#endif&#10;" id="261" addr="0289EBF8" />
+                <attribute name="section" value="runtime" id="262" addr="0289EBF8" />
+            </attributelist >
+         
+        </insert >
+    </include >
+    <include id="263" addr="0289B7A8" >
+        <attributelist id="264" addr="0289B7A8" >
+            <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\swig\\..\\swig\\AddonModuleXbmcdrm.i" id="265" addr="0289EBF8" />
+            <attribute name="module" value="" id="266" addr="0289B7F8" />
+            <attribute name="options" value="0289B768" id="267" addr="0289B768" />
+        </attributelist >
+
+        <module id="268" addr="0289B7C8" >
+            <attributelist id="269" addr="0289B7C8" >
+                <attribute name="name" value="xbmcdrm" id="270" addr="0289EBF8" />
+            </attributelist >
+         
+        </module >
+        <insert id="271" addr="0289B818" >
+            <attributelist id="272" addr="0289B818" >
+                <attribute name="code" value="&#10;#if defined(TARGET_WINDOWS)&#10;#  include &lt;windows.h>&#10;#endif&#10;&#10;#include &quot;interfaces/legacy/DrmCryptoSession.h&quot;&#10;#include &quot;utils/log.h&quot;&#10;&#10;using namespace XBMCAddon;&#10;using namespace xbmcdrm;&#10;&#10;#if defined(__GNUG__)&#10;#pragma GCC diagnostic ignored &quot;-Wstrict-aliasing&quot;&#10;#endif&#10;&#10;" id="273" addr="0289EBF8" />
+            </attributelist >
+         
+        </insert >
+        <include id="274" addr="0289B858" >
+            <attributelist id="275" addr="0289B858" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\swighelper.h" id="276" addr="0289EBF8" />
+            </attributelist >
+         
+        </include >
+        <include id="277" addr="0289B898" >
+            <attributelist id="278" addr="0289B898" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\AddonString.h" id="279" addr="0289EBF8" />
+            </attributelist >
+
+            <namespace id="280" addr="0289B938" >
+                <attributelist id="281" addr="0289B938" >
+                    <attribute name="sym_name" value="XBMCAddon" id="282" addr="0289EBF8" />
+                    <attribute name="name" value="XBMCAddon" id="283" addr="0289EBF8" />
+                    <attribute name="csym_nextSibling" value="0289BD58" id="284" addr="0289BD58" />
+                    <attribute name="sym_nextSibling" value="0289BD58" id="285" addr="0289BD58" />
+                    <typescope id="286" addr="0289DF78" >
+                        <attributelist id="287" addr="0289DF78" >
+                            <attribute name="name" value="XBMCAddon" id="288" addr="0289EBF8" />
+                            <typetab id="289" addr="0289DF98" >
+                                <attributelist id="290" addr="0289DF98" >
+                                    <attribute name="charVec" value="std::vector&lt;(char)>" id="291" addr="0289EBF8" />
+                                    <attribute name="String" value="std::string" id="292" addr="0289EBF8" />
+                                </attributelist >
+                                <typetabsitem id="293" addr="0289E1E8" >
+                                    <attributelist id="294" addr="0289E1E8" >
+                                    </attributelist >
+                                </typetabsitem >
+                                <typetabsitem id="295" addr="0289E088" >
+                                    <attributelist id="296" addr="0289E088" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="297" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="298" addr="0289EBF8" />
+                            <attribute name="symtab" value="0289B8E8" id="299" addr="0289B8E8" />
+                        </attributelist >
+                        <typescopesitem id="300" addr="0289B8C8" >
+                            <attributelist id="301" addr="0289B8C8" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="302" addr="0289DF98" >
+                            <attributelist id="303" addr="0289DF98" >
+                                <attribute name="charVec" value="std::vector&lt;(char)>" id="304" addr="0289EBF8" />
+                                <attribute name="String" value="std::string" id="305" addr="0289EBF8" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="306" addr="02890548" >
+                            <attributelist id="307" addr="02890548" >
+                                <attribute name="name" value="" id="308" addr="0289EBF8" />
+                                <typetab id="309" addr="02890578" >
+                                    <attributelist id="310" addr="02890578" >
+                                    </attributelist >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="311" addr="0289E018" >
+                            <attributelist id="312" addr="0289E018" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="313" addr="0289B8E8" >
+                            <attributelist id="314" addr="0289B8E8" >
+                                <attribute name="name" value="XBMCAddon" id="315" addr="0289EBF8" />
+                                <attribute name="csymtab" value="0289B908" id="316" addr="0289B908" />
+                                <attribute name="symtab" value="0289B8D8" id="317" addr="0289B8D8" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289B8E8" id="318" addr="0289B8E8" />
+                    <attribute name="sym_symtab" value="028904D8" id="319" addr="028904D8" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="320" addr="0289EBF8" />
+                </attributelist >
+
+                <cdecl id="321" addr="0289B9C8" >
+                    <attributelist id="322" addr="0289B9C8" >
+                        <attribute name="sym_name" value="String" id="323" addr="0289EBF8" />
+                        <attribute name="name" value="XBMCAddon::String" id="324" addr="0289EBF8" />
+                        <attribute name="decl" value="" id="325" addr="0289EBF8" />
+                        <attribute name="storage" value="typedef" id="326" addr="0289EBF8" />
+                        <attribute name="kind" value="typedef" id="327" addr="0289EBF8" />
+                        <attribute name="type" value="std::string" id="328" addr="0289EBF8" />
+                        <attribute name="sym_symtab" value="0289B8E8" id="329" addr="0289B8E8" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="330" addr="0289EBF8" />
+                    </attributelist >
+                 
+                </cdecl >
+                <cdecl id="331" addr="0289BAC8" >
+                    <attributelist id="332" addr="0289BAC8" >
+                        <attribute name="sym_name" value="emptyString" id="333" addr="0289EBF8" />
+                        <attribute name="name" value="XBMCAddon::emptyString" id="334" addr="0289EBF8" />
+                        <attribute name="decl" value="" id="335" addr="0289EBF8" />
+                        <attribute name="storage" value="extern" id="336" addr="0289EBF8" />
+                        <attribute name="kind" value="variable" id="337" addr="0289EBF8" />
+                        <attribute name="type" value="XBMCAddon::String" id="338" addr="0289EBF8" />
+                        <attribute name="sym_symtab" value="0289B8E8" id="339" addr="0289B8E8" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="340" addr="0289EBF8" />
+                    </attributelist >
+                 
+                </cdecl >
+            </namespace >
+        </include >
+        <include id="341" addr="0289BBB8" >
+            <attributelist id="342" addr="0289BBB8" >
+                <attribute name="name" value="F:\\KodiGitCheckout\\xbmc\\xbmc\\interfaces\\legacy\\DrmCryptoSession.h" id="343" addr="0289EBF8" />
+            </attributelist >
+
+            <namespace id="344" addr="0289BC58" >
+                <attributelist id="345" addr="0289BC58" >
+                    <attribute name="sym_name" value="DRM" id="346" addr="0289EBF8" />
+                    <attribute name="name" value="DRM" id="347" addr="0289EBF8" />
+                    <typescope id="348" addr="0289E038" >
+                        <attributelist id="349" addr="0289E038" >
+                            <attribute name="name" value="DRM" id="350" addr="0289EBF8" />
+                            <typetab id="351" addr="0289E158" >
+                                <attributelist id="352" addr="0289E158" >
+                                    <attribute name="CCryptoSession" value="CCryptoSession" id="353" addr="0289EBF8" />
+                                </attributelist >
+                                <typetabsitem id="354" addr="0289E198" >
+                                    <attributelist id="355" addr="0289E198" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="356" addr="02890548" />
+                            <attribute name="qname" value="DRM" id="357" addr="0289EBF8" />
+                            <attribute name="symtab" value="0289BC08" id="358" addr="0289BC08" />
+                        </attributelist >
+                        <typescopesitem id="359" addr="0289BBE8" >
+                            <attributelist id="360" addr="0289BBE8" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="361" addr="0289E158" >
+                            <attributelist id="362" addr="0289E158" >
+                                <attribute name="CCryptoSession" value="CCryptoSession" id="363" addr="0289EBF8" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="364" addr="02890548" >
+                            <attributelist id="365" addr="02890548" >
+                                <attribute name="name" value="" id="366" addr="0289EBF8" />
+                                <typetab id="367" addr="02890578" >
+                                    <attributelist id="368" addr="02890578" >
+                                    </attributelist >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="369" addr="0289E168" >
+                            <attributelist id="370" addr="0289E168" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="371" addr="0289BC08" >
+                            <attributelist id="372" addr="0289BC08" >
+                                <attribute name="name" value="DRM" id="373" addr="0289EBF8" />
+                                <attribute name="csymtab" value="0289BC28" id="374" addr="0289BC28" />
+                                <attribute name="symtab" value="0289BBF8" id="375" addr="0289BBF8" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289BC08" id="376" addr="0289BC08" />
+                    <attribute name="sym_symtab" value="028904D8" id="377" addr="028904D8" />
+                    <attribute name="sym_overname" value="__SWIG_0" id="378" addr="0289EBF8" />
+                </attributelist >
+
+                <classforward id="379" addr="0289BCA8" >
+                    <attributelist id="380" addr="0289BCA8" >
+                        <attribute name="sym_name" value="CCryptoSession" id="381" addr="0289EBF8" />
+                        <attribute name="name" value="CCryptoSession" id="382" addr="0289EBF8" />
+                        <attribute name="kind" value="class" id="383" addr="0289EBF8" />
+                        <attribute name="sym_weak" value="1" id="384" addr="0289EBF8" />
+                        <attribute name="sym_symtab" value="0289BC08" id="385" addr="0289BC08" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="386" addr="0289EBF8" />
+                    </attributelist >
+                 
+                </classforward >
+            </namespace >
+            <namespace id="387" addr="0289BD58" >
+                <attributelist id="388" addr="0289BD58" >
+                    <attribute name="sym_name" value="XBMCAddon" id="389" addr="0289EBF8" />
+                    <attribute name="name" value="XBMCAddon" id="390" addr="0289EBF8" />
+                    <attribute name="sym_previousSibling" value="0289B938" id="391" addr="0289B938" />
+                    <typescope id="392" addr="0289DF78" >
+                        <attributelist id="393" addr="0289DF78" >
+                            <attribute name="name" value="XBMCAddon" id="394" addr="0289EBF8" />
+                            <typetab id="395" addr="0289DF98" >
+                                <attributelist id="396" addr="0289DF98" >
+                                    <attribute name="charVec" value="std::vector&lt;(char)>" id="397" addr="0289EBF8" />
+                                    <attribute name="String" value="std::string" id="398" addr="0289EBF8" />
+                                </attributelist >
+                                <typetabsitem id="399" addr="0289E1E8" >
+                                    <attributelist id="400" addr="0289E1E8" >
+                                    </attributelist >
+                                </typetabsitem >
+                                <typetabsitem id="401" addr="0289E088" >
+                                    <attributelist id="402" addr="0289E088" >
+                                    </attributelist >
+                                </typetabsitem >
+                            </typetab >
+                            <attribute name="parent" value="02890548" id="403" addr="02890548" />
+                            <attribute name="qname" value="XBMCAddon" id="404" addr="0289EBF8" />
+                            <attribute name="symtab" value="0289B8E8" id="405" addr="0289B8E8" />
+                        </attributelist >
+                        <typescopesitem id="406" addr="0289B8C8" >
+                            <attributelist id="407" addr="0289B8C8" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="408" addr="0289DF98" >
+                            <attributelist id="409" addr="0289DF98" >
+                                <attribute name="charVec" value="std::vector&lt;(char)>" id="410" addr="0289EBF8" />
+                                <attribute name="String" value="std::string" id="411" addr="0289EBF8" />
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="412" addr="02890548" >
+                            <attributelist id="413" addr="02890548" >
+                                <attribute name="name" value="" id="414" addr="0289EBF8" />
+                                <typetab id="415" addr="02890578" >
+                                    <attributelist id="416" addr="02890578" >
+                                    </attributelist >
+                                </typetab >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="417" addr="0289E018" >
+                            <attributelist id="418" addr="0289E018" >
+                            </attributelist >
+                        </typescopesitem >
+                        <typescopesitem id="419" addr="0289B8E8" >
+                            <attributelist id="420" addr="0289B8E8" >
+                                <attribute name="name" value="XBMCAddon" id="421" addr="0289EBF8" />
+                                <attribute name="csymtab" value="0289B908" id="422" addr="0289B908" />
+                                <attribute name="symtab" value="0289B8D8" id="423" addr="0289B8D8" />
+                            </attributelist >
+                        </typescopesitem >
+                    </typescope >
+                    <attribute name="symtab" value="0289B8E8" id="424" addr="0289B8E8" />
+                    <attribute name="sym_symtab" value="028904D8" id="425" addr="028904D8" />
+                </attributelist >
+
+                <cdecl id="426" addr="0289BE48" >
+                    <attributelist id="427" addr="0289BE48" >
+                        <attribute name="sym_name" value="charVec" id="428" addr="0289EBF8" />
+                        <attribute name="name" value="XBMCAddon::charVec" id="429" addr="0289EBF8" />
+                        <attribute name="decl" value="" id="430" addr="0289EBF8" />
+                        <attribute name="storage" value="typedef" id="431" addr="0289EBF8" />
+                        <attribute name="kind" value="typedef" id="432" addr="0289EBF8" />
+                        <attribute name="type" value="std::vector&lt;(char)>" id="433" addr="0289EBF8" />
+                        <attribute name="sym_symtab" value="0289B8E8" id="434" addr="0289B8E8" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="435" addr="0289EBF8" />
+                    </attributelist >
+                 
+                </cdecl >
+                <namespace id="436" addr="0289BFB8" >
+                    <attributelist id="437" addr="0289BFB8" >
+                        <attribute name="sym_name" value="xbmcdrm" id="438" addr="0289EBF8" />
+                        <attribute name="name" value="xbmcdrm" id="439" addr="0289EBF8" />
+                        <typescope id="440" addr="0289E318" >
+                            <attributelist id="441" addr="0289E318" >
+                                <attribute name="name" value="xbmcdrm" id="442" addr="0289EBF8" />
+                                <typetab id="443" addr="0289E328" >
+                                    <attributelist id="444" addr="0289E328" >
+                                        <attribute name="CryptoSession" value="CryptoSession" id="445" addr="0289EBF8" />
+                                    </attributelist >
+                                    <typetabsitem id="446" addr="0289E3D8" >
+                                        <attributelist id="447" addr="0289E3D8" >
+                                        </attributelist >
+                                    </typetabsitem >
+                                </typetab >
+                                <attribute name="parent" value="0289DF78" id="448" addr="0289DF78" />
+                                <attribute name="qname" value="XBMCAddon::xbmcdrm" id="449" addr="0289EBF8" />
+                                <attribute name="symtab" value="0289BEF8" id="450" addr="0289BEF8" />
+                            </attributelist >
+                            <typescopesitem id="451" addr="0289BEC8" >
+                                <attributelist id="452" addr="0289BEC8" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="453" addr="0289E328" >
+                                <attributelist id="454" addr="0289E328" >
+                                    <attribute name="CryptoSession" value="CryptoSession" id="455" addr="0289EBF8" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="456" addr="0289DF78" >
+                                <attributelist id="457" addr="0289DF78" >
+                                    <attribute name="name" value="XBMCAddon" id="458" addr="0289EBF8" />
+                                    <typetab id="459" addr="0289DF98" >
+                                        <attributelist id="460" addr="0289DF98" >
+                                            <attribute name="charVec" value="std::vector&lt;(char)>" id="461" addr="0289EBF8" />
+                                            <attribute name="String" value="std::string" id="462" addr="0289EBF8" />
+                                        </attributelist >
+                                        <typetabsitem id="463" addr="0289E1E8" >
+                                            <attributelist id="464" addr="0289E1E8" >
+                                            </attributelist >
+                                        </typetabsitem >
+                                        <typetabsitem id="465" addr="0289E088" >
+                                            <attributelist id="466" addr="0289E088" >
+                                            </attributelist >
+                                        </typetabsitem >
+                                    </typetab >
+                                    <attribute name="parent" value="02890548" id="467" addr="02890548" />
+                                    <attribute name="qname" value="XBMCAddon" id="468" addr="0289EBF8" />
+                                    <attribute name="symtab" value="0289B8E8" id="469" addr="0289B8E8" />
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="470" addr="0289E338" >
+                                <attributelist id="471" addr="0289E338" >
+                                </attributelist >
+                            </typescopesitem >
+                            <typescopesitem id="472" addr="0289BEF8" >
+                                <attributelist id="473" addr="0289BEF8" >
+                                    <attribute name="name" value="xbmcdrm" id="474" addr="0289EBF8" />
+                                    <attribute name="csymtab" value="0289BF98" id="475" addr="0289BF98" />
+                                    <attribute name="symtab" value="0289BED8" id="476" addr="0289BED8" />
+                                </attributelist >
+                            </typescopesitem >
+                        </typescope >
+                        <attribute name="symtab" value="0289BEF8" id="477" addr="0289BEF8" />
+                        <attribute name="sym_symtab" value="0289B8E8" id="478" addr="0289B8E8" />
+                        <attribute name="sym_overname" value="__SWIG_0" id="479" addr="0289EBF8" />
+                    </attributelist >
+
+                    <cdecl id="480" addr="0289BFF8" >
+                        <attributelist id="481" addr="0289BFF8" >
+                            <attribute name="sym_name" value="DRMException" id="482" addr="0289EBF8" />
+                            <attribute name="name" value="XBMCAddon::xbmcdrm::DRMException" id="483" addr="0289EBF8" />
+                            <attribute name="kind" value="variable" id="484" addr="0289EBF8" />
+                            <attribute name="type" value="XBMCCOMMONS_STANDARD_EXCEPTION" id="485" addr="0289EBF8" />
+                            <attribute name="sym_symtab" value="0289BEF8" id="486" addr="0289BEF8" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="487" addr="0289EBF8" />
+                        </attributelist >
+                     
+                    </cdecl >
+                    <class id="488" addr="0289C148" >
+                        <attributelist id="489" addr="0289C148" >
+                            <attribute name="name" value="XBMCAddon::xbmcdrm::CryptoSession" id="490" addr="0289EBF8" />
+                            <attribute name="sym_symtab" value="0289BEF8" id="491" addr="0289BEF8" />
+                            <attribute name="symtab" value="0289C208" id="492" addr="0289C208" />
+                            <attribute name="allows_typedef" value="1" id="493" addr="0289EBF8" />
+                            <attribute name="typepass_visit" value="1" id="494" addr="0289EBF8" />
+                            <attribute name="allocate_visit" value="1" id="495" addr="0289EBF8" />
+                            <attribute name="kind" value="class" id="496" addr="0289EBF8" />
+                            <attribute name="sym_name" value="CryptoSession" id="497" addr="0289EBF8" />
+                            <attribute name="allocate_has_constructor" value="1" id="498" addr="0289EBF8" />
+                            <attribute name="allocate_public_constructor" value="1" id="499" addr="0289EBF8" />
+                            <attribute name="allocate_has_destructor" value="1" id="500" addr="0289EBF8" />
+                            <attribute name="allocate_default_destructor" value="1" id="501" addr="0289EBF8" />
+                            <attribute name="allocate_copy_constructor" value="1" id="502" addr="0289EBF8" />
+                            <attribute name="privatebaselist" value="0289C108" id="503" addr="0289C108" />
+                            <attribute name="protectedbaselist" value="0289C0F8" id="504" addr="0289C0F8" />
+                            <baselist id="505" addr="0289C0E8" >
+                                <base name="AddonClass" id="506" addr="0289C098" />
+                            </baselist >
+                            <attribute name="module" value="xbmcdrm" id="507" addr="0289B7C8" />
+                            <attribute name="sym_overname" value="__SWIG_0" id="508" addr="0289EBF8" />
+                            <typescope id="509" addr="0289E458" >
+                                <attributelist id="510" addr="0289E458" >
+                                    <attribute name="name" value="CryptoSession" id="511" addr="0289EBF8" />
+                                    <typetab id="512" addr="0289E468" >
+                                        <attributelist id="513" addr="0289E468" >
+                                        </attributelist >
+                                    </typetab >
+                                    <attribute name="parent" value="0289E318" id="514" addr="0289E318" />
+                                    <attribute name="qname" value="XBMCAddon::xbmcdrm::CryptoSession" id="515" addr="0289EBF8" />
+                                    <attribute name="symtab" value="0289C208" id="516" addr="0289C208" />
+                                </attributelist >
+                                <typescopesitem id="517" addr="0289E408" >
+                                    <attributelist id="518" addr="0289E408" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="519" addr="0289E468" >
+                                    <attributelist id="520" addr="0289E468" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="521" addr="0289E318" >
+                                    <attributelist id="522" addr="0289E318" >
+                                        <attribute name="name" value="xbmcdrm" id="523" addr="0289EBF8" />
+                                        <typetab id="524" addr="0289E328" >
+                                            <attributelist id="525" addr="0289E328" >
+                                                <attribute name="CryptoSession" value="CryptoSession" id="526" addr="0289EBF8" />
+                                            </attributelist >
+                                            <typetabsitem id="527" addr="0289E3D8" >
+                                                <attributelist id="528" addr="0289E3D8" >
+                                                </attributelist >
+                                            </typetabsitem >
+                                        </typetab >
+                                        <attribute name="parent" value="0289DF78" id="529" addr="0289DF78" />
+                                        <attribute name="qname" value="XBMCAddon::xbmcdrm" id="530" addr="0289EBF8" />
+                                        <attribute name="symtab" value="0289BEF8" id="531" addr="0289BEF8" />
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="532" addr="0289E478" >
+                                    <attributelist id="533" addr="0289E478" >
+                                    </attributelist >
+                                </typescopesitem >
+                                <typescopesitem id="534" addr="0289C208" >
+                                    <attributelist id="535" addr="0289C208" >
+                                        <attribute name="name" value="CryptoSession" id="536" addr="0289EBF8" />
+                                        <attribute name="csymtab" value="0289C238" id="537" addr="0289C238" />
+                                        <attribute name="symtab" value="0289C1F8" id="538" addr="0289C1F8" />
+                                    </attributelist >
+                                </typescopesitem >
+                            </typescope >
+                        </attributelist >
+
+                        <cdecl id="539" addr="0289C2B8" >
+                            <attributelist id="540" addr="0289C2B8" >
+                                <attribute name="ismember" value="1" id="541" addr="0289EBF8" />
+                                <attribute name="name" value="m_cryptoSession" id="542" addr="0289EBF8" />
+                                <attribute name="decl" value="p." id="543" addr="0289EBF8" />
+                                <attribute name="access" value="private" id="544" addr="0289EBF8" />
+                                <attribute name="kind" value="variable" id="545" addr="0289EBF8" />
+                                <attribute name="type" value="DRM::CCryptoSession" id="546" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="547" addr="0289C208" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <access id="548" addr="0289C398" >
+                            <attributelist id="549" addr="0289C398" >
+                                <attribute name="kind" value="public" id="550" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </access >
+                        <constructor id="551" addr="0289C5B8" >
+                            <attributelist id="552" addr="0289C5B8" >
+                                <attribute name="ismember" value="1" id="553" addr="0289EBF8" />
+                                <attribute name="sym_name" value="CryptoSession" id="554" addr="0289EBF8" />
+                                <attribute name="name" value="CryptoSession" id="555" addr="0289EBF8" />
+                                <parmlist id="556" addr="0289C438" >
+                                    <parm id="557">
+                                        <attributelist id="558" addr="0289C438" >
+                                            <attribute name="name" value="UUID" id="559" addr="0289EBF8" />
+                                            <attribute name="type" value="XBMCAddon::String" id="560" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="561">
+                                        <attributelist id="562" addr="0289C4C8" >
+                                            <attribute name="name" value="cipherAlgorithm" id="563" addr="0289EBF8" />
+                                            <attribute name="type" value="XBMCAddon::String" id="564" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="565">
+                                        <attributelist id="566" addr="0289C558" >
+                                            <attribute name="name" value="macAlgorithm" id="567" addr="0289EBF8" />
+                                            <attribute name="type" value="XBMCAddon::String" id="568" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="decl" value="f(String,String,String)." id="569" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="570" addr="0289EBF8" />
+                                <attribute name="feature_new" value="1" id="571" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="572" addr="0289C208" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="573" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </constructor >
+                        <destructor id="574" addr="0289C688" >
+                            <attributelist id="575" addr="0289C688" >
+                                <attribute name="ismember" value="1" id="576" addr="0289EBF8" />
+                                <attribute name="sym_name" value="~CryptoSession" id="577" addr="0289EBF8" />
+                                <attribute name="name" value="~CryptoSession" id="578" addr="0289EBF8" />
+                                <attribute name="decl" value="f()." id="579" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="580" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="581" addr="0289C208" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="582" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </destructor >
+                        <cdecl id="583" addr="0289CAA8" >
+                            <attributelist id="584" addr="0289CAA8" >
+                                <attribute name="name" value="GetKeyRequest" id="585" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="586" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="587" addr="0289C208" />
+                                <attribute name="kind" value="function" id="588" addr="0289EBF8" />
+                                <attribute name="sym_name" value="GetKeyRequest" id="589" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XbmcCommons::Buffer,r.q(const).XBMCAddon::String,bool,r.q(const).std::map&lt;(XBMCAddon::String,XBMCAddon::String)>)." id="590" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="591" addr="0289EBF8" />
+                                <parmlist id="592" addr="0289C7C8" >
+                                    <parm id="593">
+                                        <attributelist id="594" addr="0289C7C8" >
+                                            <attribute name="name" value="init" id="595" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="596" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="597">
+                                        <attributelist id="598" addr="0289C868" >
+                                            <attribute name="name" value="mimeType" id="599" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="600" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="601">
+                                        <attributelist id="602" addr="0289C8E8" >
+                                            <attribute name="name" value="offlineKey" id="603" addr="0289EBF8" />
+                                            <attribute name="type" value="bool" id="604" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="605">
+                                        <attributelist id="606" addr="0289CA48" >
+                                            <attribute name="name" value="optionalParameters" id="607" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).std::map&lt;(XBMCAddon::String,XBMCAddon::String)>" id="608" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XbmcCommons::Buffer" id="609" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="610" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="611" addr="0289CC38" >
+                            <attributelist id="612" addr="0289CC38" >
+                                <attribute name="name" value="GetPropertyString" id="613" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="614" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="615" addr="0289C208" />
+                                <attribute name="kind" value="function" id="616" addr="0289EBF8" />
+                                <attribute name="sym_name" value="GetPropertyString" id="617" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XBMCAddon::String)." id="618" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="619" addr="0289EBF8" />
+                                <parmlist id="620" addr="0289CBD8" >
+                                    <parm id="621">
+                                        <attributelist id="622" addr="0289CBD8" >
+                                            <attribute name="name" value="name" id="623" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="624" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XBMCAddon::String" id="625" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="626" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="627" addr="0289CDD8" >
+                            <attributelist id="628" addr="0289CDD8" >
+                                <attribute name="name" value="ProvideKeyResponse" id="629" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="630" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="631" addr="0289C208" />
+                                <attribute name="kind" value="function" id="632" addr="0289EBF8" />
+                                <attribute name="sym_name" value="ProvideKeyResponse" id="633" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XbmcCommons::Buffer)." id="634" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="635" addr="0289EBF8" />
+                                <parmlist id="636" addr="0289CD78" >
+                                    <parm id="637">
+                                        <attributelist id="638" addr="0289CD78" >
+                                            <attribute name="name" value="response" id="639" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="640" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XBMCAddon::String" id="641" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="642" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="643" addr="0289CEB8" >
+                            <attributelist id="644" addr="0289CEB8" >
+                                <attribute name="ismember" value="1" id="645" addr="0289EBF8" />
+                                <attribute name="sym_name" value="RemoveKeys" id="646" addr="0289EBF8" />
+                                <attribute name="name" value="RemoveKeys" id="647" addr="0289EBF8" />
+                                <attribute name="decl" value="f()." id="648" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="649" addr="0289EBF8" />
+                                <attribute name="kind" value="function" id="650" addr="0289EBF8" />
+                                <attribute name="type" value="void" id="651" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="652" addr="0289C208" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="653" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="654" addr="0289D028" >
+                            <attributelist id="655" addr="0289D028" >
+                                <attribute name="name" value="RestoreKeys" id="656" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="657" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="658" addr="0289C208" />
+                                <attribute name="kind" value="function" id="659" addr="0289EBF8" />
+                                <attribute name="sym_name" value="RestoreKeys" id="660" addr="0289EBF8" />
+                                <attribute name="decl" value="f(XBMCAddon::String)." id="661" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="662" addr="0289EBF8" />
+                                <parmlist id="663" addr="0289CFC8" >
+                                    <parm id="664">
+                                        <attributelist id="665" addr="0289CFC8" >
+                                            <attribute name="name" value="keySetId" id="666" addr="0289EBF8" />
+                                            <attribute name="type" value="XBMCAddon::String" id="667" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="void" id="668" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="669" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="670" addr="0289D248" >
+                            <attributelist id="671" addr="0289D248" >
+                                <attribute name="name" value="SetPropertyString" id="672" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="673" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="674" addr="0289C208" />
+                                <attribute name="kind" value="function" id="675" addr="0289EBF8" />
+                                <attribute name="sym_name" value="SetPropertyString" id="676" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XBMCAddon::String,r.q(const).XBMCAddon::String)." id="677" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="678" addr="0289EBF8" />
+                                <parmlist id="679" addr="0289D148" >
+                                    <parm id="680">
+                                        <attributelist id="681" addr="0289D148" >
+                                            <attribute name="name" value="name" id="682" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="683" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="684">
+                                        <attributelist id="685" addr="0289D1E8" >
+                                            <attribute name="name" value="value" id="686" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XBMCAddon::String" id="687" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="void" id="688" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="689" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="690" addr="0289D558" >
+                            <attributelist id="691" addr="0289D558" >
+                                <attribute name="name" value="Decrypt" id="692" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="693" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="694" addr="0289C208" />
+                                <attribute name="kind" value="function" id="695" addr="0289EBF8" />
+                                <attribute name="sym_name" value="Decrypt" id="696" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer)." id="697" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="698" addr="0289EBF8" />
+                                <parmlist id="699" addr="0289D398" >
+                                    <parm id="700">
+                                        <attributelist id="701" addr="0289D398" >
+                                            <attribute name="name" value="cipherKeyId" id="702" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="703" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="704">
+                                        <attributelist id="705" addr="0289D448" >
+                                            <attribute name="name" value="input" id="706" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="707" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="708">
+                                        <attributelist id="709" addr="0289D4F8" >
+                                            <attribute name="name" value="iv" id="710" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="711" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XbmcCommons::Buffer" id="712" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="713" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="714" addr="0289D868" >
+                            <attributelist id="715" addr="0289D868" >
+                                <attribute name="name" value="Encrypt" id="716" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="717" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="718" addr="0289C208" />
+                                <attribute name="kind" value="function" id="719" addr="0289EBF8" />
+                                <attribute name="sym_name" value="Encrypt" id="720" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer)." id="721" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="722" addr="0289EBF8" />
+                                <parmlist id="723" addr="0289D6A8" >
+                                    <parm id="724">
+                                        <attributelist id="725" addr="0289D6A8" >
+                                            <attribute name="name" value="cipherKeyId" id="726" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="727" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="728">
+                                        <attributelist id="729" addr="0289D758" >
+                                            <attribute name="name" value="input" id="730" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="731" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="732">
+                                        <attributelist id="733" addr="0289D808" >
+                                            <attribute name="name" value="iv" id="734" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="735" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XbmcCommons::Buffer" id="736" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="737" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="738" addr="0289DAC8" >
+                            <attributelist id="739" addr="0289DAC8" >
+                                <attribute name="name" value="Sign" id="740" addr="0289EBF8" />
+                                <attribute name="ismember" value="1" id="741" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="742" addr="0289C208" />
+                                <attribute name="kind" value="function" id="743" addr="0289EBF8" />
+                                <attribute name="sym_name" value="Sign" id="744" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer)." id="745" addr="0289EBF8" />
+                                <attribute name="access" value="public" id="746" addr="0289EBF8" />
+                                <parmlist id="747" addr="0289D9B8" >
+                                    <parm id="748">
+                                        <attributelist id="749" addr="0289D9B8" >
+                                            <attribute name="name" value="macKeyId" id="750" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="751" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="752">
+                                        <attributelist id="753" addr="0289DA68" >
+                                            <attribute name="name" value="message" id="754" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="755" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="type" value="XbmcCommons::Buffer" id="756" addr="0289EBF8" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="757" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                        <cdecl id="758" addr="0289DDB8" >
+                            <attributelist id="759" addr="0289DDB8" >
+                                <attribute name="ismember" value="1" id="760" addr="0289EBF8" />
+                                <attribute name="sym_name" value="Verify" id="761" addr="0289EBF8" />
+                                <attribute name="name" value="Verify" id="762" addr="0289EBF8" />
+                                <attribute name="decl" value="f(r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer,r.q(const).XbmcCommons::Buffer)." id="763" addr="0289EBF8" />
+                                <parmlist id="764" addr="0289DBF8" >
+                                    <parm id="765">
+                                        <attributelist id="766" addr="0289DBF8" >
+                                            <attribute name="name" value="macKeyId" id="767" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="768" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="769">
+                                        <attributelist id="770" addr="0289DCA8" >
+                                            <attribute name="name" value="message" id="771" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="772" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                    <parm id="773">
+                                        <attributelist id="774" addr="0289DD58" >
+                                            <attribute name="name" value="signature" id="775" addr="0289EBF8" />
+                                            <attribute name="type" value="r.q(const).XbmcCommons::Buffer" id="776" addr="0289EBF8" />
+                                        </attributelist >
+                                    </parm >
+                                </parmlist >
+                                <attribute name="access" value="public" id="777" addr="0289EBF8" />
+                                <attribute name="kind" value="function" id="778" addr="0289EBF8" />
+                                <attribute name="type" value="bool" id="779" addr="0289EBF8" />
+                                <attribute name="sym_symtab" value="0289C208" id="780" addr="0289C208" />
+                                <attribute name="sym_overname" value="__SWIG_0" id="781" addr="0289EBF8" />
+                            </attributelist >
+                         
+                        </cdecl >
+                    </class >
+                </namespace >
+            </namespace >
+        </include >
+    </include >
+</top >

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\audioconvert.c" />
+    <ClCompile Include="..\..\dither_template.c" />
+    <ClCompile Include="..\..\log2_tab.c" />
+    <ClCompile Include="..\..\noise_shaping_data.c" />
+    <ClCompile Include="..\..\rematrix.c" />
+    <ClCompile Include="..\..\rematrix_template.c" />
+    <ClCompile Include="..\..\resample_dsp.c" />
+    <ClCompile Include="..\..\resample_template.c" />
+    <ClCompile Include="..\..\soxr_resample.c" />
+    <ClCompile Include="..\..\swresample.c" />
+    <ClCompile Include="..\..\swresample_frame.c" />
+    <ClCompile Include="..\..\x86\audio_convert_init.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\x86\rematrix_init.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\x86\resample_init.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\x86\w64xmmtest.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dither_swresample.c" />
+    <ClCompile Include="..\..\options_swresample.c" />
+    <ClCompile Include="..\..\resample_swresample.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\audioconvert.h" />
+    <ClInclude Include="..\..\resample.h" />
+    <ClInclude Include="..\..\swresample.h" />
+    <ClInclude Include="..\..\swresample_internal.h" />
+    <ClInclude Include="..\..\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="x86">
+      <UniqueIdentifier>{cb903e76-bdb0-43d7-9f31-ab6e6349d72a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\x86\audio_convert.asm">
+      <Filter>x86</Filter>
+    </None>
+    <None Include="..\..\x86\Makefile">
+      <Filter>x86</Filter>
+    </None>
+    <None Include="..\..\x86\rematrix.asm">
+      <Filter>x86</Filter>
+    </None>
+    <None Include="..\..\x86\resample.asm">
+      <Filter>x86</Filter>
+    </None>
+  </ItemGroup>
+</Project>

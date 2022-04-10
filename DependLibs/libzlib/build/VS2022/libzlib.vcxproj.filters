@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="build">
+      <UniqueIdentifier>{492f5523-1450-4ffe-b804-e522f39f6a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\contrib">
+      <UniqueIdentifier>{7ced3f04-5a1e-4435-aa93-7eb2a15b20e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\contrib\minizip">
+      <UniqueIdentifier>{19511f4c-d142-4988-b1bb-2ace7c530ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{f77fece9-5a9c-4521-9c0e-38970c6e528b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\adler32_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\compress_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crc32_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deflate_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\example.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gzclose_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gzlib_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gzread_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gzwrite_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\infback_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inffast_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inflate_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inftrees_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minigzip_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\trees_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\uncompr_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\zutil_zlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\ioapi.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\iowin32.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\miniunz.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\minizip.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\mztools.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\unzip.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\contrib\minizip\zip.c">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\crc32.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deflate.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inffast.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inffixed.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inflate.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inftrees.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\trees.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\zconf_libzlib.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\zlib.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\zutil.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\contrib\minizip\crypt.h">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\contrib\minizip\ioapi.h">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\contrib\minizip\iowin32.h">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\contrib\minizip\mztools.h">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\contrib\minizip\unzip.h">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\contrib\minizip\zip.h">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\ChangeLog">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\configure">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\FAQ">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\INDEX">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\make_vms.com">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\Makefile">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\Makefile.in">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\README">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\zconf.h.cmakein">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\zconf.h.in">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\zlib.map">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\zlib2ansi">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\contrib\minizip\make_vms.com">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </None>
+    <None Include="..\..\contrib\minizip\Makefile">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </None>
+    <None Include="..\..\..\..\libzlib.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libzlib.pro">
+      <Filter>QtBuild</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\treebuild.xml">
+      <Filter>Source Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\contrib\minizip\MiniZip64_Changes.txt">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </Text>
+    <Text Include="..\..\contrib\minizip\MiniZip64_info.txt">
+      <Filter>Source Files\contrib\minizip</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

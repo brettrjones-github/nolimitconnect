@@ -1,0 +1,288 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "..\..\DependLibs\CoreLib\build\VS2022\CoreLib.vcxproj", "{56462B02-59B7-4672-8F89-30A674E802FE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MediaToolsLib", "..\..\DependLibs\MediaToolsLib\build\VS2022\MediaToolsLib.vcxproj", "{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetLib", "..\..\DependLibs\NetLib\build\VS2022\NetLib.vcxproj", "{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56462B02-59B7-4672-8F89-30A674E802FE} = {56462B02-59B7-4672-8F89-30A674E802FE}
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6} = {E952F7BB-75CE-4552-ADC3-88E81C95ECE6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PktLib", "..\..\DependLibs\PktLib\build\VS2022\PktLib.vcxproj", "{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56462B02-59B7-4672-8F89-30A674E802FE} = {56462B02-59B7-4672-8F89-30A674E802FE}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppConfigHeaders", "AppConfigHeaders", "{22F1DA5B-FD83-4D3B-9E81-802F73F85AB6}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\AppCommonConfig.h = ..\..\AppCommonConfig.h
+		..\..\AppCompilerConfig.h = ..\..\AppCompilerConfig.h
+		..\..\AppCpuArchDefines.h = ..\..\AppCpuArchDefines.h
+		..\..\AppDependLibrariesConfig.h = ..\..\AppDependLibrariesConfig.h
+		..\..\AppTargetOsConfig.h = ..\..\AppTargetOsConfig.h
+		..\..\config_appcorelibs.h = ..\..\config_appcorelibs.h
+		..\..\DependLibs\ffmpeg\config_ffmpeg.h = ..\..\DependLibs\ffmpeg\config_ffmpeg.h
+		..\..\kodi_src\xbmc\xbmc\config_kodi.h = ..\..\kodi_src\xbmc\xbmc\config_kodi.h
+		..\..\config_libkodi.h = ..\..\config_libkodi.h
+		..\..\config_libptop.h = ..\..\config_libptop.h
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VxVideoLib", "..\..\DependLibs\VxVideoLib\build\VS2022\VxVideoLib.vcxproj", "{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Upnp2Lib", "..\..\DependLibs\Upnp2Lib\build\VS2022\Upnp2Lib.vcxproj", "{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4CF7173-A9C7-4452-BC1E-C358B06F101B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs_for_building", "docs_for_building", "{88A7F52D-F2B1-4BBD-9A9D-0AD6BC7216E4}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInVBoxImage.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInVBoxImage.txt
+		..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInWindows.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInWindows.txt
+		..\..\docs_for_building\Build_NoLimitConnect_ForLinuxInVBoxImage.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForLinuxInVBoxImage.txt
+		..\..\docs_for_building\Build_NoLimitConnect_ForWindows.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForWindows.txt
+		..\..\docs_for_building\Build_NoLimitConnect_ForWindowsPrerequisitesInstructions.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForWindowsPrerequisitesInstructions.txt
+		..\..\docs_for_building\Build_NoLimitMinTestApp_Notes.txt = ..\..\docs_for_building\Build_NoLimitMinTestApp_Notes.txt
+		..\..\docs_for_building\BuildEmbeddedPythonForAndroid.txt = ..\..\docs_for_building\BuildEmbeddedPythonForAndroid.txt
+		..\..\docs_for_building\BuildForWindowsPrerequisitesInstructions.txt = ..\..\docs_for_building\BuildForWindowsPrerequisitesInstructions.txt
+		..\..\docs_for_building\BuildingKodiForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForAndroidInVBoxImage.txt
+		..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt
+		..\..\docs_for_building\BuildingKodiForWindows.txt = ..\..\docs_for_building\BuildingKodiForWindows.txt
+		..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt
+		..\..\docs_for_building\Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint20_2.txt = ..\..\docs_for_building\Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint20_2.txt
+		..\..\docs_for_building\CreatingTranslations.txt = ..\..\docs_for_building\CreatingTranslations.txt
+		..\..\docs_for_building\DeployLinuxGoTvPtoP.txt = ..\..\docs_for_building\DeployLinuxGoTvPtoP.txt
+		..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt = ..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt
+		..\..\docs_for_building\Nlc_Windows_Android_Qt6.2.2_Build.txt = ..\..\docs_for_building\Nlc_Windows_Android_Qt6.2.2_Build.txt
+		..\..\docs_for_building\Nlc_Windows_Android_Qt6.2.2_Setup.txt = ..\..\docs_for_building\Nlc_Windows_Android_Qt6.2.2_Setup.txt
+		..\..\docs_for_building\NoLimitConnect_Terminology.txt = ..\..\docs_for_building\NoLimitConnect_Terminology.txt
+		..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt = ..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt
+		..\..\docs_for_building\PureVPN_Setup_For_NoLimitConnect.txt = ..\..\docs_for_building\PureVPN_Setup_For_NoLimitConnect.txt
+		..\..\docs_for_building\READ_ME_FIRST.txt = ..\..\docs_for_building\READ_ME_FIRST.txt
+		..\..\docs_for_building\SetupCLionToDebugKodi.txt = ..\..\docs_for_building\SetupCLionToDebugKodi.txt
+		..\..\docs_for_building\SetupQtForAndroid.txt = ..\..\docs_for_building\SetupQtForAndroid.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F-B370-40FE-9B2A-901555E8E928}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Build1_PythonDepends.pro = ..\..\Build1_PythonDepends.pro
+		..\..\Build2_PythonCoreLib.pro = ..\..\Build2_PythonCoreLib.pro
+		..\..\Build3_PythonDllLibs.pro = ..\..\Build3_PythonDllLibs.pro
+		..\..\Build4_MovePythonDlls.pro = ..\..\Build4_MovePythonDlls.pro
+		..\..\Build5_NlcDependLibs.pro = ..\..\Build5_NlcDependLibs.pro
+		..\..\Build6_NlcCore.pro = ..\..\Build6_NlcCore.pro
+		..\..\Build7_NlcAppOnly.pro = ..\..\Build7_NlcAppOnly.pro
+		..\..\Build7_NlcAppOnly.pro.user = ..\..\Build7_NlcAppOnly.pro.user
+		..\..\BuildA_Python.pro = ..\..\BuildA_Python.pro
+		..\..\BuildB_NoLimitConnectCore.pro = ..\..\BuildB_NoLimitConnectCore.pro
+		..\..\BuildC_NoLimitConnectApp.pro = ..\..\BuildC_NoLimitConnectApp.pro
+		..\..\config_compiler.pri = ..\..\config_compiler.pri
+		..\..\config_copy_shared_lib.pri = ..\..\config_copy_shared_lib.pri
+		..\..\config_deploy.pri = ..\..\config_deploy.pri
+		..\..\config_gotvapps.h = ..\..\config_gotvapps.h
+		..\..\config_gotvcore.h = ..\..\config_gotvcore.h
+		..\..\config_gradle.pri = ..\..\config_gradle.pri
+		..\..\config_link.pri = ..\..\config_link.pri
+		..\..\config_openssl_lib.pri = ..\..\config_openssl_lib.pri
+		..\..\config_opensslp_include.pri = ..\..\config_opensslp_include.pri
+		..\..\config_os_detect.pri = ..\..\config_os_detect.pri
+		..\..\config_python_lib.pri = ..\..\config_python_lib.pri
+		..\..\config_sharedlib.pri = ..\..\config_sharedlib.pri
+		..\..\config_sharedlib_defines.pri = ..\..\config_sharedlib_defines.pri
+		..\..\config_sharedlib_openssl.pri = ..\..\config_sharedlib_openssl.pri
+		..\..\config_sharedlib_python.pri = ..\..\config_sharedlib_python.pri
+		..\..\config_sharedlib_pythoncore.pri = ..\..\config_sharedlib_pythoncore.pri
+		..\..\config_sharedlib_pythondefines.pri = ..\..\config_sharedlib_pythondefines.pri
+		..\..\config_static_dependlib.pri = ..\..\config_static_dependlib.pri
+		..\..\config_staticlib.pri = ..\..\config_staticlib.pri
+		..\..\config_version.pri = ..\..\config_version.pri
+		..\..\GoTvAll.pro = ..\..\GoTvAll.pro
+		..\..\GoTvAppConfig.h = ..\..\GoTvAppConfig.h
+		..\..\GoTvAppConfig.h.gotvptop = ..\..\GoTvAppConfig.h.gotvptop
+		..\..\GoTvAppConfig.h.kodiptop = ..\..\GoTvAppConfig.h.kodiptop
+		..\..\GoTvAppConfig.h.kodiqt = ..\..\GoTvAppConfig.h.kodiqt
+		..\..\GoTvCompilerConfig.h = ..\..\GoTvCompilerConfig.h
+		..\..\GoTvCoreLibs.pro = ..\..\GoTvCoreLibs.pro
+		..\..\GoTvCpuArchDefines.h = ..\..\GoTvCpuArchDefines.h
+		..\..\GoTvDependLibrariesConfig.h = ..\..\GoTvDependLibrariesConfig.h
+		..\..\GoTvDependLibs.pro = ..\..\GoTvDependLibs.pro
+		..\..\GoTvLibsAll.pro = ..\..\GoTvLibsAll.pro
+		..\..\GoTvOpenSslLib.pro = ..\..\GoTvOpenSslLib.pro
+		..\..\GoTvPtoP_App.pro = ..\..\GoTvPtoP_App.pro
+		..\..\GoTvPtoP_AppAndroid.pro = ..\..\GoTvPtoP_AppAndroid.pro
+		..\..\GoTvPtoP_AppLink.pro = ..\..\GoTvPtoP_AppLink.pro
+		..\..\GoTvPtoP_AppLinux.pro = ..\..\GoTvPtoP_AppLinux.pro
+		..\..\GoTvPtoP_AppWindows.pro = ..\..\GoTvPtoP_AppWindows.pro
+		..\..\GoTvPtoP_link.pri = ..\..\GoTvPtoP_link.pri
+		..\..\GoTvPtoPAppLib.pri = ..\..\GoTvPtoPAppLib.pri
+		..\..\GoTvPtoPAppLib.pro = ..\..\GoTvPtoPAppLib.pro
+		..\..\GoTvPtoPVersion.txt = ..\..\GoTvPtoPVersion.txt
+		..\..\GoTvPythonLib.pro = ..\..\GoTvPythonLib.pro
+		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libptop", "..\..\ptop_src\build\VS2022\libptop.vcxproj", "{3A68081D-E8F9-4523-9436-530DE9E5530A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56462B02-59B7-4672-8F89-30A674E802FE} = {56462B02-59B7-4672-8F89-30A674E802FE}
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78} = {EC55288D-B5DE-4065-A6E0-EEE790DF2E78}
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF} = {AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6} = {E952F7BB-75CE-4552-ADC3-88E81C95ECE6}
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5} = {B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15} = {7704F9E4-13F8-42B4-8E13-0AFA075ABC15}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NoLimitConnect", "..\..\AppsSrc\NoLimitConnectMain\build\VS2022\NoLimitConnect.vcxproj", "{14347A1B-2425-4619-9F37-4B5EBB4476BE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3A68081D-E8F9-4523-9436-530DE9E5530A} = {3A68081D-E8F9-4523-9436-530DE9E5530A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		MinSizeRel|x64 = MinSizeRel|x64
+		MinSizeRel|x86 = MinSizeRel|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		RelWithDebInfo|x64 = RelWithDebInfo|x64
+		RelWithDebInfo|x86 = RelWithDebInfo|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x64.ActiveCfg = Debug|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x64.Build.0 = Debug|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x86.ActiveCfg = Debug|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x86.Build.0 = Debug|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.MinSizeRel|x64.Build.0 = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x64.ActiveCfg = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x64.Build.0 = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x86.ActiveCfg = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x86.Build.0 = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Debug|x64.ActiveCfg = Debug|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Debug|x64.Build.0 = Debug|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Debug|x86.ActiveCfg = Debug|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Debug|x86.Build.0 = Debug|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.MinSizeRel|x64.Build.0 = Release|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Release|x64.ActiveCfg = Release|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Release|x64.Build.0 = Release|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Release|x86.ActiveCfg = Release|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.Release|x86.Build.0 = Release|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{AA3EB9B6-0309-43CC-8D5E-E0278E534DFF}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Debug|x64.ActiveCfg = Debug|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Debug|x64.Build.0 = Debug|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Debug|x86.ActiveCfg = Debug|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Debug|x86.Build.0 = Debug|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.MinSizeRel|x64.Build.0 = Release|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Release|x64.ActiveCfg = Release|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Release|x64.Build.0 = Release|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Release|x86.ActiveCfg = Release|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.Release|x86.Build.0 = Release|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Debug|x64.ActiveCfg = Debug|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Debug|x64.Build.0 = Debug|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Debug|x86.ActiveCfg = Debug|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Debug|x86.Build.0 = Debug|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.MinSizeRel|x64.Build.0 = Release|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Release|x64.ActiveCfg = Release|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Release|x64.Build.0 = Release|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Release|x86.ActiveCfg = Release|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.Release|x86.Build.0 = Release|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Debug|x64.ActiveCfg = Debug|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Debug|x64.Build.0 = Debug|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Debug|x86.ActiveCfg = Debug|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Debug|x86.Build.0 = Debug|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.MinSizeRel|x64.Build.0 = Release|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Release|x64.ActiveCfg = Release|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Release|x64.Build.0 = Release|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Release|x86.ActiveCfg = Release|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.Release|x86.Build.0 = Release|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Debug|x64.ActiveCfg = Debug|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Debug|x64.Build.0 = Debug|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Debug|x86.ActiveCfg = Debug|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Debug|x86.Build.0 = Debug|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.MinSizeRel|x64.Build.0 = Release|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Release|x64.ActiveCfg = Release|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Release|x64.Build.0 = Release|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Release|x86.ActiveCfg = Release|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.Release|x86.Build.0 = Release|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|x64.ActiveCfg = Debug|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|x64.Build.0 = Debug|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|x86.ActiveCfg = Debug|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|x86.Build.0 = Debug|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.MinSizeRel|x64.ActiveCfg = Debug|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.MinSizeRel|x64.Build.0 = Debug|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.MinSizeRel|x86.ActiveCfg = Debug|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.MinSizeRel|x86.Build.0 = Debug|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Release|x64.ActiveCfg = Release|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Release|x64.Build.0 = Release|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Release|x86.ActiveCfg = Release|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Release|x86.Build.0 = Release|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x64.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x64.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x86.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x64.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x64.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x86.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x86.Build.0 = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x64.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x64.Build.0 = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x86.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x86.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x86.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = 64BitVs2017Qt5.15.2
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+	EndGlobalSection
+EndGlobal

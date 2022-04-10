@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libspeex", "libspeex.vcxproj", "{03207781-0D1C-4DB3-A71D-45C608F28DBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release_Dynamic_SSE|x86 = Release_Dynamic_SSE|x86
+		Release_Static_SSE|x86 = Release_Static_SSE|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Debug|x86.ActiveCfg = Debug|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Debug|x86.Build.0 = Debug|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Release_Dynamic_SSE|x86.ActiveCfg = Release_Dynamic_SSE|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Release_Dynamic_SSE|x86.Build.0 = Release_Dynamic_SSE|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Release_Static_SSE|x86.ActiveCfg = Release_Static_SSE|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Release_Static_SSE|x86.Build.0 = Release_Static_SSE|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Release|x86.ActiveCfg = Release|Win32
+		{03207781-0D1C-4DB3-A71D-45C608F28DBD}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

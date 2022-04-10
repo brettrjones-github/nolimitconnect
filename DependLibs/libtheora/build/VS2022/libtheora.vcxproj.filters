@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{f5226a0a-95d8-4491-b276-93b26e93f56c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\theora">
+      <UniqueIdentifier>{175a6ecf-9957-449d-a1f2-d926107db3bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{54155f16-6737-4e58-80b6-2821c77c9833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\enc">
+      <UniqueIdentifier>{996b2a8a-ae0e-487b-83bd-5c0c4f231e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\enc\x86_vc">
+      <UniqueIdentifier>{5b60ee59-48f9-4eb5-819c-563355c81273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\dec">
+      <UniqueIdentifier>{796f7ce6-92c3-4a37-8ec5-02ee6386aecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\dec\x86_vc">
+      <UniqueIdentifier>{b5e53bc2-1670-4333-bd69-9c75772e34b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\theora\codec.h" />
+    <ClInclude Include="..\..\include\theora\theora.h" />
+    <ClInclude Include="..\..\include\theora\theoradec.h" />
+    <ClInclude Include="..\..\lib\apiwrapper.h" />
+    <ClInclude Include="..\..\lib\bitpack.h" />
+    <ClInclude Include="..\..\lib\cpu.h" />
+    <ClInclude Include="..\..\lib\dct.h" />
+    <ClInclude Include="..\..\lib\decint.h" />
+    <ClInclude Include="..\..\lib\dequant.h" />
+    <ClInclude Include="..\..\lib\encint.h" />
+    <ClInclude Include="..\..\lib\enquant.h" />
+    <ClInclude Include="..\..\lib\huffdec.h" />
+    <ClInclude Include="..\..\lib\huffenc.h" />
+    <ClInclude Include="..\..\lib\huffman.h" />
+    <ClInclude Include="..\..\lib\idct.h" />
+    <ClInclude Include="..\..\lib\internal.h" />
+    <ClInclude Include="..\..\lib\mathops.h" />
+    <ClInclude Include="..\..\lib\modedec.h" />
+    <ClInclude Include="..\..\lib\ocintrin.h" />
+    <ClInclude Include="..\..\lib\quant.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\lib\analyze_theora.c" />
+    <ClCompile Include="..\..\lib\apiwrapper_theora.c" />
+    <ClCompile Include="..\..\lib\bitpack_theora.c" />
+    <ClCompile Include="..\..\lib\cpu_theora.c" />
+    <ClCompile Include="..\..\lib\decapiwrapper_theora.c" />
+    <ClCompile Include="..\..\lib\decinfo_theora.c" />
+    <ClCompile Include="..\..\lib\decode_theora.c" />
+    <ClCompile Include="..\..\lib\dequant_theora.c" />
+    <ClCompile Include="..\..\lib\encapiwrapper_theora.c" />
+    <ClCompile Include="..\..\lib\encfrag_theora.c" />
+    <ClCompile Include="..\..\lib\encinfo_theora.c" />
+    <ClCompile Include="..\..\lib\encode_theora.c" />
+    <ClCompile Include="..\..\lib\encoder_disabled_theora.c" />
+    <ClCompile Include="..\..\lib\enquant_theora.c" />
+    <ClCompile Include="..\..\lib\fdct_theora.c" />
+    <ClCompile Include="..\..\lib\fragment_theora.c" />
+    <ClCompile Include="..\..\lib\huffdec_theora.c" />
+    <ClCompile Include="..\..\lib\huffenc_theora.c" />
+    <ClCompile Include="..\..\lib\idct_theora.c" />
+    <ClCompile Include="..\..\lib\info_theora.c" />
+    <ClCompile Include="..\..\lib\internal_theora.c" />
+    <ClCompile Include="..\..\lib\mathops_theora.c" />
+    <ClCompile Include="..\..\lib\mcenc_theora.c" />
+    <ClCompile Include="..\..\lib\quant_theora.c" />
+    <ClCompile Include="..\..\lib\rate_theora.c" />
+    <ClCompile Include="..\..\lib\state_theora.c" />
+    <ClCompile Include="..\..\lib\tokenize_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86enc_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86state_theora.c" />
+  </ItemGroup>
+</Project>

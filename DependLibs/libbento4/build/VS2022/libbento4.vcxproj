@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Ap4.cpp" />
+    <ClCompile Include="..\..\Ap48bdlAtom.cpp" />
+    <ClCompile Include="..\..\Ap4AinfAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Atom.cpp" />
+    <ClCompile Include="..\..\Ap4AtomFactory.cpp" />
+    <ClCompile Include="..\..\Ap4AtomSampleTable.cpp" />
+    <ClCompile Include="..\..\Ap4AvccAtom.cpp" />
+    <ClCompile Include="..\..\Ap4BlocAtom.cpp" />
+    <ClCompile Include="..\..\Ap4ByteStream.cpp" />
+    <ClCompile Include="..\..\Ap4Co64Atom.cpp" />
+    <ClCompile Include="..\..\Ap4Command.cpp" />
+    <ClCompile Include="..\..\Ap4CommandFactory.cpp" />
+    <ClCompile Include="..\..\Ap4CommonEncryption.cpp" />
+    <ClCompile Include="..\..\Ap4ContainerAtom.cpp" />
+    <ClCompile Include="..\..\Ap4CttsAtom.cpp" />
+    <ClCompile Include="..\..\Ap4DataBuffer.cpp" />
+    <ClCompile Include="..\..\Ap4Debug.cpp" />
+    <ClCompile Include="..\..\Ap4Dec3Atom.cpp" />
+    <ClCompile Include="..\..\Ap4DecoderConfigDescriptor.cpp" />
+    <ClCompile Include="..\..\Ap4DecoderSpecificInfoDescriptor.cpp" />
+    <ClCompile Include="..\..\Ap4Descriptor.cpp" />
+    <ClCompile Include="..\..\Ap4DescriptorFactory.cpp" />
+    <ClCompile Include="..\..\Ap4DrefAtom.cpp" />
+    <ClCompile Include="..\..\Ap4ElstAtom.cpp" />
+    <ClCompile Include="..\..\Ap4EsDescriptor.cpp" />
+    <ClCompile Include="..\..\Ap4EsdsAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Expandable.cpp" />
+    <ClCompile Include="..\..\Ap4File.cpp" />
+    <ClCompile Include="..\..\Ap4FileCopier.cpp" />
+    <ClCompile Include="..\..\Ap4FileWriter.cpp" />
+    <ClCompile Include="..\..\Ap4FragmentSampleTable.cpp" />
+    <ClCompile Include="..\..\Ap4FrmaAtom.cpp" />
+    <ClCompile Include="..\..\Ap4FtypAtom.cpp" />
+    <ClCompile Include="..\..\Ap4GrpiAtom.cpp" />
+    <ClCompile Include="..\..\Ap4HdlrAtom.cpp" />
+    <ClCompile Include="..\..\Ap4HintTrackReader.cpp" />
+    <ClCompile Include="..\..\Ap4HmhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4HvccAtom.cpp" />
+    <ClCompile Include="..\..\Ap4IkmsAtom.cpp" />
+    <ClCompile Include="..\..\Ap4IodsAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Ipmp.cpp" />
+    <ClCompile Include="..\..\Ap4IproAtom.cpp" />
+    <ClCompile Include="..\..\Ap4IsfmAtom.cpp" />
+    <ClCompile Include="..\..\Ap4IsltAtom.cpp" />
+    <ClCompile Include="..\..\Ap4IsmaCryp.cpp" />
+    <ClCompile Include="..\..\Ap4LinearReader.cpp" />
+    <ClCompile Include="..\..\Ap4Marlin.cpp" />
+    <ClCompile Include="..\..\Ap4MdhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4MehdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4MfhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4MfroAtom.cpp" />
+    <ClCompile Include="..\..\Ap4MoovAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Movie.cpp" />
+    <ClCompile Include="..\..\Ap4MovieFragment.cpp" />
+    <ClCompile Include="..\..\Ap4Mpeg2Ts.cpp" />
+    <ClCompile Include="..\..\Ap4MvhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4NmhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4ObjectDescriptor.cpp" />
+    <ClCompile Include="..\..\Ap4OdafAtom.cpp" />
+    <ClCompile Include="..\..\Ap4OddaAtom.cpp" />
+    <ClCompile Include="..\..\Ap4OdheAtom.cpp" />
+    <ClCompile Include="..\..\Ap4OhdrAtom.cpp" />
+    <ClCompile Include="..\..\Ap4OmaDcf.cpp" />
+    <ClCompile Include="..\..\Ap4PdinAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Piff.cpp" />
+    <ClCompile Include="..\..\Ap4Processor.cpp" />
+    <ClCompile Include="..\..\Ap4Protection.cpp" />
+    <ClCompile Include="..\..\Ap4PsshAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Results.cpp" />
+    <ClCompile Include="..\..\Ap4RtpAtom.cpp" />
+    <ClCompile Include="..\..\Ap4RtpHint.cpp" />
+    <ClCompile Include="..\..\Ap4SaioAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SaizAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Sample.cpp" />
+    <ClCompile Include="..\..\Ap4SampleDescription.cpp" />
+    <ClCompile Include="..\..\Ap4SampleEntry.cpp" />
+    <ClCompile Include="..\..\Ap4SampleSource.cpp" />
+    <ClCompile Include="..\..\Ap4SampleTable.cpp" />
+    <ClCompile Include="..\..\Ap4SbgpAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SchmAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SdpAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SegmentBuilder.cpp" />
+    <ClCompile Include="..\..\Ap4SencAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SgpdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SidxAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SLConfigDescriptor.cpp" />
+    <ClCompile Include="..\..\Ap4SmhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4StcoAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SthdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4String.cpp" />
+    <ClCompile Include="..\..\Ap4StscAtom.cpp" />
+    <ClCompile Include="..\..\Ap4StsdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4StssAtom.cpp" />
+    <ClCompile Include="..\..\Ap4StszAtom.cpp" />
+    <ClCompile Include="..\..\Ap4SttsAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Stz2Atom.cpp" />
+    <ClCompile Include="..\..\Ap4SyntheticSampleTable.cpp" />
+    <ClCompile Include="..\..\Ap4TencAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TfdtAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TfhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TfraAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TimsAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TkhdAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Track.cpp" />
+    <ClCompile Include="..\..\AP4TrafAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TrakAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TrefTypeAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TrexAtom.cpp" />
+    <ClCompile Include="..\..\Ap4TrunAtom.cpp" />
+    <ClCompile Include="..\..\Ap4UrlAtom.cpp" />
+    <ClCompile Include="..\..\Ap4Utils.cpp" />
+    <ClCompile Include="..\..\Ap4UuidAtom.cpp" />
+    <ClCompile Include="..\..\Ap4VmhdAtom.cpp" />
+    <ClCompile Include="..\..\Codecs\Ap4AdtsParser.cpp" />
+    <ClCompile Include="..\..\Codecs\Ap4AvcParser.cpp" />
+    <ClCompile Include="..\..\Codecs\Ap4BitStream.cpp" />
+    <ClCompile Include="..\..\Codecs\Ap4HevcParser.cpp" />
+    <ClCompile Include="..\..\Codecs\Ap4Mp4AudioInfo.cpp" />
+    <ClCompile Include="..\..\Codecs\Ap4NalParser.cpp" />
+    <ClCompile Include="..\..\Crypto\Ap4AesBlockCipher.cpp" />
+    <ClCompile Include="..\..\Crypto\Ap4Hmac.cpp" />
+    <ClCompile Include="..\..\Crypto\Ap4KeyWrap.cpp" />
+    <ClCompile Include="..\..\Crypto\Ap4StreamCipher.cpp" />
+    <ClCompile Include="..\..\MetaData\Ap4MetaData.cpp" />
+    <ClCompile Include="..\..\System\GoTv\Ap4GoTvFileByteStream.cpp" />
+    <ClCompile Include="..\..\System\Posix\Ap4PosixRandom.cpp" />
+    <ClCompile Include="..\..\System\StdC\Ap4StdCFileByteStream.cpp" />
+    <ClCompile Include="..\..\System\Win32\Ap4Win32Random.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Ap4.h" />
+    <ClInclude Include="..\..\Ap48bdlAtom.h" />
+    <ClInclude Include="..\..\Ap4AinfAtom.h" />
+    <ClInclude Include="..\..\Ap4Array.h" />
+    <ClInclude Include="..\..\Ap4Atom.h" />
+    <ClInclude Include="..\..\Ap4AtomFactory.h" />
+    <ClInclude Include="..\..\Ap4AtomSampleTable.h" />
+    <ClInclude Include="..\..\Ap4AvccAtom.h" />
+    <ClInclude Include="..\..\Ap4BlocAtom.h" />
+    <ClInclude Include="..\..\Ap4ByteStream.h" />
+    <ClInclude Include="..\..\Ap4Co64Atom.h" />
+    <ClInclude Include="..\..\Ap4Command.h" />
+    <ClInclude Include="..\..\Ap4CommandFactory.h" />
+    <ClInclude Include="..\..\Ap4CommonEncryption.h" />
+    <ClInclude Include="..\..\Ap4Config.h" />
+    <ClInclude Include="..\..\Ap4Constants.h" />
+    <ClInclude Include="..\..\Ap4ContainerAtom.h" />
+    <ClInclude Include="..\..\Ap4CttsAtom.h" />
+    <ClInclude Include="..\..\Ap4DataBuffer.h" />
+    <ClInclude Include="..\..\Ap4Debug.h" />
+    <ClInclude Include="..\..\Ap4Dec3Atom.h" />
+    <ClInclude Include="..\..\Ap4DecoderConfigDescriptor.h" />
+    <ClInclude Include="..\..\Ap4DecoderSpecificInfoDescriptor.h" />
+    <ClInclude Include="..\..\Ap4Descriptor.h" />
+    <ClInclude Include="..\..\Ap4DescriptorFactory.h" />
+    <ClInclude Include="..\..\Ap4DrefAtom.h" />
+    <ClInclude Include="..\..\Ap4DynamicCast.h" />
+    <ClInclude Include="..\..\Ap4ElstAtom.h" />
+    <ClInclude Include="..\..\Ap4EsDescriptor.h" />
+    <ClInclude Include="..\..\Ap4EsdsAtom.h" />
+    <ClInclude Include="..\..\Ap4Expandable.h" />
+    <ClInclude Include="..\..\Ap4File.h" />
+    <ClInclude Include="..\..\Ap4FileByteStream.h" />
+    <ClInclude Include="..\..\Ap4FileCopier.h" />
+    <ClInclude Include="..\..\Ap4FileWriter.h" />
+    <ClInclude Include="..\..\Ap4FragmentSampleTable.h" />
+    <ClInclude Include="..\..\Ap4FrmaAtom.h" />
+    <ClInclude Include="..\..\Ap4FtypAtom.h" />
+    <ClInclude Include="..\..\Ap4GrpiAtom.h" />
+    <ClInclude Include="..\..\Ap4HdlrAtom.h" />
+    <ClInclude Include="..\..\Ap4HintTrackReader.h" />
+    <ClInclude Include="..\..\Ap4HmhdAtom.h" />
+    <ClInclude Include="..\..\Ap4HvccAtom.h" />
+    <ClInclude Include="..\..\Ap4IkmsAtom.h" />
+    <ClInclude Include="..\..\Ap4Interfaces.h" />
+    <ClInclude Include="..\..\Ap4IodsAtom.h" />
+    <ClInclude Include="..\..\Ap4Ipmp.h" />
+    <ClInclude Include="..\..\Ap4IproAtom.h" />
+    <ClInclude Include="..\..\Ap4IsfmAtom.h" />
+    <ClInclude Include="..\..\Ap4IsltAtom.h" />
+    <ClInclude Include="..\..\Ap4IsmaCryp.h" />
+    <ClInclude Include="..\..\Ap4LinearReader.h" />
+    <ClInclude Include="..\..\Ap4List.h" />
+    <ClInclude Include="..\..\Ap4Marlin.h" />
+    <ClInclude Include="..\..\Ap4MdhdAtom.h" />
+    <ClInclude Include="..\..\Ap4MehdAtom.h" />
+    <ClInclude Include="..\..\Ap4MfhdAtom.h" />
+    <ClInclude Include="..\..\Ap4MfroAtom.h" />
+    <ClInclude Include="..\..\Ap4MoovAtom.h" />
+    <ClInclude Include="..\..\Ap4Movie.h" />
+    <ClInclude Include="..\..\Ap4MovieFragment.h" />
+    <ClInclude Include="..\..\Ap4Mpeg2Ts.h" />
+    <ClInclude Include="..\..\Ap4MvhdAtom.h" />
+    <ClInclude Include="..\..\Ap4NmhdAtom.h" />
+    <ClInclude Include="..\..\Ap4ObjectDescriptor.h" />
+    <ClInclude Include="..\..\Ap4OdafAtom.h" />
+    <ClInclude Include="..\..\Ap4OddaAtom.h" />
+    <ClInclude Include="..\..\Ap4OdheAtom.h" />
+    <ClInclude Include="..\..\Ap4OhdrAtom.h" />
+    <ClInclude Include="..\..\Ap4OmaDcf.h" />
+    <ClInclude Include="..\..\Ap4PdinAtom.h" />
+    <ClInclude Include="..\..\Ap4Piff.h" />
+    <ClInclude Include="..\..\Ap4Processor.h" />
+    <ClInclude Include="..\..\Ap4Protection.h" />
+    <ClInclude Include="..\..\Ap4PsshAtom.h" />
+    <ClInclude Include="..\..\Ap4Results.h" />
+    <ClInclude Include="..\..\Ap4RtpAtom.h" />
+    <ClInclude Include="..\..\Ap4RtpHint.h" />
+    <ClInclude Include="..\..\Ap4SaioAtom.h" />
+    <ClInclude Include="..\..\Ap4SaizAtom.h" />
+    <ClInclude Include="..\..\Ap4Sample.h" />
+    <ClInclude Include="..\..\Ap4SampleDescription.h" />
+    <ClInclude Include="..\..\Ap4SampleEntry.h" />
+    <ClInclude Include="..\..\Ap4SampleSource.h" />
+    <ClInclude Include="..\..\Ap4SampleTable.h" />
+    <ClInclude Include="..\..\Ap4SbgpAtom.h" />
+    <ClInclude Include="..\..\Ap4SchmAtom.h" />
+    <ClInclude Include="..\..\Ap4SdpAtom.h" />
+    <ClInclude Include="..\..\Ap4SegmentBuilder.h" />
+    <ClInclude Include="..\..\Ap4SencAtom.h" />
+    <ClInclude Include="..\..\Ap4SgpdAtom.h" />
+    <ClInclude Include="..\..\Ap4SidxAtom.h" />
+    <ClInclude Include="..\..\Ap4SLConfigDescriptor.h" />
+    <ClInclude Include="..\..\Ap4SmhdAtom.h" />
+    <ClInclude Include="..\..\Ap4StcoAtom.h" />
+    <ClInclude Include="..\..\Ap4SthdAtom.h" />
+    <ClInclude Include="..\..\Ap4String.h" />
+    <ClInclude Include="..\..\Ap4StscAtom.h" />
+    <ClInclude Include="..\..\Ap4StsdAtom.h" />
+    <ClInclude Include="..\..\Ap4StssAtom.h" />
+    <ClInclude Include="..\..\Ap4StszAtom.h" />
+    <ClInclude Include="..\..\Ap4SttsAtom.h" />
+    <ClInclude Include="..\..\Ap4Stz2Atom.h" />
+    <ClInclude Include="..\..\Ap4SyntheticSampleTable.h" />
+    <ClInclude Include="..\..\Ap4TencAtom.h" />
+    <ClInclude Include="..\..\Ap4TfdtAtom.h" />
+    <ClInclude Include="..\..\Ap4TfhdAtom.h" />
+    <ClInclude Include="..\..\Ap4TfraAtom.h" />
+    <ClInclude Include="..\..\Ap4TimsAtom.h" />
+    <ClInclude Include="..\..\Ap4TkhdAtom.h" />
+    <ClInclude Include="..\..\Ap4Track.h" />
+    <ClInclude Include="..\..\Ap4TrafAtom.h" />
+    <ClInclude Include="..\..\Ap4TrakAtom.h" />
+    <ClInclude Include="..\..\Ap4TrefTypeAtom.h" />
+    <ClInclude Include="..\..\Ap4TrexAtom.h" />
+    <ClInclude Include="..\..\Ap4TrunAtom.h" />
+    <ClInclude Include="..\..\Ap4Types.h" />
+    <ClInclude Include="..\..\Ap4UrlAtom.h" />
+    <ClInclude Include="..\..\Ap4Utils.h" />
+    <ClInclude Include="..\..\Ap4UuidAtom.h" />
+    <ClInclude Include="..\..\Ap4Version.h" />
+    <ClInclude Include="..\..\Ap4VmhdAtom.h" />
+    <ClInclude Include="..\..\Codecs\Ap4AdtsParser.h" />
+    <ClInclude Include="..\..\Codecs\Ap4AvcParser.h" />
+    <ClInclude Include="..\..\Codecs\Ap4BitStream.h" />
+    <ClInclude Include="..\..\Codecs\Ap4HevcParser.h" />
+    <ClInclude Include="..\..\Codecs\Ap4Mp4AudioInfo.h" />
+    <ClInclude Include="..\..\Codecs\Ap4NalParser.h" />
+    <ClInclude Include="..\..\config_libbento4.h" />
+    <ClInclude Include="..\..\Crypto\Ap4AesBlockCipher.h" />
+    <ClInclude Include="..\..\Crypto\Ap4Hmac.h" />
+    <ClInclude Include="..\..\Crypto\Ap4KeyWrap.h" />
+    <ClInclude Include="..\..\Crypto\Ap4StreamCipher.h" />
+    <ClInclude Include="..\..\MetaData\Ap4MetaData.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libbento4</ProjectName>
+    <ProjectGuid>{A2E8ECCE-D86D-4031-877E-FC43C95E5312}</ProjectGuid>
+    <RootNamespace>GoTv</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PrecompiledHeaderOutputFile>$(IntDir)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN64;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeaderOutputFile>$(IntDir)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_NDEBUG;WIN32;NHAVE_CONFIG_H;WIN32;_LIB;T_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN64;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
