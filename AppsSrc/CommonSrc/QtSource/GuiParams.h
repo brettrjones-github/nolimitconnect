@@ -47,6 +47,7 @@ public:
     static void                 initGuiParams(int defaultFontHeight);
 
     static int                  getDefaultFontHeight( void )        { return m_DefaultFontHeight; }
+    static int                  getMaxWidgetSize( void )            { return 16777215; }
 
     /// @brief get scaling required to make icons etc. usable on high dpi screens
     static float                getGuiScale( void )                 { return m_DisplayScale; }

@@ -254,23 +254,31 @@ void VxPushButton::setMinimumSize( int minw, int minh )
 //============================================================================
 void VxPushButton::setMaximumSize( const QSize & maxSize )
 {
-    if( maxSize.width() == maxSize.height() )
+    if( maxSize.width() < GuiParams::getMaxWidgetSize() && maxSize.height() < GuiParams::getMaxWidgetSize() )
     {
         QPushButton::setMaximumSize( ( int )( maxSize.width() * GuiParams::getGuiScale() ),
             ( int )( maxSize.height() * GuiParams::getGuiScale() ) );
     }
     else
     {
-        QPushButton::setMaximumSize( ( int )( maxSize.width()  * GuiParams::getGuiScale() ),
-            ( int )( maxSize.height() * GuiParams::getGuiScale() ) );
+        // probably setup ui setting to maximum.. do not exceed maximum { width = 16777215, height = 16777215 } with scaling 
+        QPushButton::setMaximumSize( GuiParams::getMaxWidgetSize(), GuiParams::getMaxWidgetSize() );
     }
 }
 
 //============================================================================
 void VxPushButton::setMaximumSize( int maxw, int maxh )
 {
-    QPushButton::setMaximumSize( ( int )( maxw * GuiParams::getGuiScale() ),
-                                    ( int )( maxh * GuiParams::getGuiScale() ) );
+    if( maxw < GuiParams::getMaxWidgetSize() && maxh < GuiParams::getMaxWidgetSize() )
+    {
+        QWidget::setMaximumSize( ( int )( maxw * GuiParams::getGuiScale() ),
+            ( int )( maxh * GuiParams::getGuiScale() ) );
+    }
+    else
+    {
+        // probably setup ui setting to maximum.. do not exceed maximum { width = 16777215, height = 16777215 } with scaling 
+        QWidget::setMaximumSize( GuiParams::getMaxWidgetSize(), GuiParams::getMaxWidgetSize() );
+    }
 }
 
 //============================================================================
