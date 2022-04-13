@@ -7,7 +7,7 @@ CONFIG(debug, debug|release){
 # message(Link in DEBUG mode.)
  android{
   STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
-  STATIC_LIB_SUFFIX=AndroidD.a
+  STATIC_LIB_SUFFIX=AndroidD_$${TARGET_ARCH_NAME}.a
 
   SHARED_LIB_BIN_DIR=$$PWD/bin-$${TARGET_OS_NAME}/libs/$${TARGET_ARCH_NAME}/
   SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/lib
@@ -34,7 +34,7 @@ CONFIG(release, debug|release){
 # message(Link in RELEASE mode.)
     android:{
         STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
-        STATIC_LIB_SUFFIX=Android.a
+        STATIC_LIB_SUFFIX=Android_$${TARGET_ARCH_NAME}.a
 
         SHARED_LIB_BIN_DIR=$$PWD/bin-$${TARGET_OS_NAME}/libs/$${TARGET_ARCH_NAME}/
         SHARED_LIB_BUILD_DIR=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
