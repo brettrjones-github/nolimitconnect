@@ -72,6 +72,7 @@ public:
     void                        updateUser( GuiUser* guiUser );
 
 signals:
+    void                        signalGuiHostedListItemClicked( QListWidgetItem* hostItem );
     void                        signalIconButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        signalMenuButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        signalJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
