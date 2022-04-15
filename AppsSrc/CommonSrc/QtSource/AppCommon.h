@@ -776,10 +776,6 @@ protected slots:
     void						slotMainWindowResized( void );
     void						slotMainWindowMoved( void );
 
-    void						slotStartLoadingFromThread( void );
-    void						slotFinishedLoadingGui( void );
-    void						slotFinishedLoadingEngine( void );
-
 	void						slotPlaySound( ESndDef sndDef );
 	void						slotStatusMsg( QString strMsg );
 	void						slotAppErr( EAppErr eAppErr, QString errMsg );

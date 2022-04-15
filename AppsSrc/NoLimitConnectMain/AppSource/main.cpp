@@ -162,16 +162,8 @@ int main(int argc, char **argv)
 
     AppCommon& appCommon = CreateAppInstance( gotv, myApp );
 
-	// create a thread to do application init and loading
-    // causes issues with QThreadDataStorage on linux so just load directly instead of using a thread
-#if 0 
-	//QThread * loaderThread = new QThread();
-	//appCommon.moveToThread( loaderThread );
-	//QObject::connect( loaderThread, SIGNAL( started() ), &appCommon, SLOT( slotStartLoadingFromThread() ) );
-	//loaderThread->start();
-#else
     appCommon.loadWithoutThread();
-#endif // 0
+
 
 #if ENABLE_KODI
     // send command line parameters to Kodi

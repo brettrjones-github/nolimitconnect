@@ -86,7 +86,7 @@ namespace
 		switch( appMode )
 		{
 		case eAppModeDefault:
-			return QObject::tr( "GoTv PtoP" );
+			return QObject::tr( "No Limit Connect" );
 		case eAppModeGoTvViewer:
 			return QObject::tr( "NoLimitConnect Player" );
 		case eAppModeGoTvProvider:
@@ -110,16 +110,16 @@ namespace
 		case eAppModeDefault:
 			return appShortName;
 		case eAppModeGoTvViewer:
-			return "GoTvPlayer";
+			return "NoLimitPlayer";
 		case eAppModeGoTvProvider:
-			return "GoTvProvider";
+			return "NoLimitProvider";
 		case eAppModeGoTvStation:
-			return "GoTvStation";
+			return "NoLimitStation";
 		case eAppModeGoTvNetworkHost:
-			return "GoTvNetHost";
+			return "NoLimitNetHost";
 		case eAppModeUnknown:
 		default:
-			return "GoTvUnknownApp";
+			return "NoLimitUnknownApp";
 		}
 	}
 }
@@ -310,83 +310,6 @@ void AppCommon::loadWithoutThread( void )
 
     uint64_t homePageMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Initialize Home Page %" PRId64 " ms alive ms %" PRId64 "", homePageMs - styleMs, homePageMs );
-}
-
-//============================================================================
-void AppCommon::slotStartLoadingFromThread( void )
-{
-	registerMetaData();
-
-	QObject::connect( this, SIGNAL( signalFinishedLoadingGui() ), this, SLOT( slotFinishedLoadingGui() ) );
-	QObject::connect( this, SIGNAL( signalFinishedLoadingEngine() ), this, SLOT( slotFinishedLoadingEngine() ) );
-	connect( this, SIGNAL( signalInternalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotInternalNetAvailStatus( ENetAvailStatus ) ), Qt::QueuedConnection );
-
-	// set application short name used for directory paths
-	VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
-	m_AppSettings.setAppShortName( m_AppShortName );
-
-	// this just loads the ini file.
-	// the AppSettings database is not initialized until loadAccountSpecificSettings
-	m_AppSettings.loadProfile();
-	// sets root of application data and transfer directories
-	VxSetRootUserDataDirectory(m_AppSettings.m_strRootUserDataDir.c_str());
-
-	// Documents Directory/appshortName/xfer/		app data transfer directory
-	VxSetRootXferDirectory( m_AppSettings.m_strRootXferDir.c_str() );
-
-	// create settings database appshortname_settings.db3 in /appshortName/data/
-	QString strSettingsDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_settings.db3";
-	m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
-
-	// database of multiple accounts
-	// create accounts database appshortname_accounts.db3 in /appshortName/data/
-	QString strAccountDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
-	m_AccountMgr.startupAccountMgr( strAccountDbFileName.toUtf8().constData() );
-
-	// asset database and user specific setting database will be created in sub directory of account login
-	// after user has logged into account
-
-    getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
-
-	// load icons from resources
-	m_MyIcons.myIconsStartup();
-	// load sounds to play and sound hardware
-	m_MySndMgr.sndMgrStartup(); 
-
-	m_ThumbMgr.onAppCommonCreated();
-	m_UserMgr.onAppCommonCreated();
-	m_OfferClientMgr.onAppCommonCreated();
-	m_OfferHostMgr.onAppCommonCreated();
-	m_HostedListMgr.onAppCommonCreated();
-	m_HostJoinMgr.onAppCommonCreated();
-	m_UserJoinMgr.onAppCommonCreated();
-	m_WebPageMgr.onAppCommonCreated();
-	m_ConnectIdListMgr.onAppCommonCreated();
-	m_GroupieListMgr.onAppCommonCreated();
-
-	// should have enough to show home page
-	emit signalFinishedLoadingGui();
-
-	// finish initializing engine and start GoTvCore loading with its threads
-	emit signalFinishedLoadingEngine();
-}
-
-//============================================================================
-void AppCommon::slotFinishedLoadingGui( void )
-{
-	// theme must be loaded from gui thread
-    //m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
-
-	m_HomePage.initializeHomePage();
-	connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT(slotMainWindowResized() ) );
-    connect( &m_HomePage, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotMainWindowMoved() ) );
-	m_HomePage.show();
-}
-
-//============================================================================
-void AppCommon::slotFinishedLoadingEngine( void )
-{
-
 }
 
 //============================================================================

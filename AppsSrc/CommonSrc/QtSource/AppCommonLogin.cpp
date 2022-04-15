@@ -399,6 +399,36 @@ void AppCommon::sendAppSettingsToEngine( void )
             m_AppSettings.m_u32LogFlags,
             m_AppSettings.m_strDebugFileName.c_str() );
     }
+
+    // TODO figure out how engine network settings can be out of sync with gui network settings
+    // for now assure engine has correct settings before log in
+    bool validDbSettings = false;
+    NetHostSetting selectedNetHostSetting;
+
+    AccountMgr& dataHelper = getAccountMgr();
+    std::vector<NetHostSetting> netSettingList;
+    std::string lastSettingsName = dataHelper.getLastNetHostSettingName();
+    if ((0 != lastSettingsName.length())
+        && dataHelper.getAllNetHostSettings(netSettingList)
+        && (0 != netSettingList.size()))
+    {
+        std::vector<NetHostSetting>::iterator iter;
+        for (iter = netSettingList.begin(); iter != netSettingList.end(); ++iter)
+        {
+            NetHostSetting& netHostSetting = *iter;
+            if (netHostSetting.getNetHostSettingName() == lastSettingsName)
+            {
+                // found last settings used
+                validDbSettings = true;
+                selectedNetHostSetting = netHostSetting;
+            }
+        }
+    }
+
+    if (validDbSettings)
+    {
+        m_Engine.fromGuiApplyNetHostSettings( selectedNetHostSetting );
+    } 
 }
 
 //============================================================================

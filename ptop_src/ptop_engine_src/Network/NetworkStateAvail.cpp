@@ -41,7 +41,7 @@ void NetworkStateAvail::enterNetworkState( void )
 {
     if( IsLogEnabled( eLogNetworkState ) )
     {
-        LogMsg( LOG_STATUS, "eNetworkStateTypeAvail start\n" );
+        LogMsg( LOG_STATUS, "eNetworkStateTypeAvail start" );
     }
 
 	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail );
