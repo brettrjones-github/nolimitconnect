@@ -89,6 +89,12 @@ void AppCommon::toGuiContactAdded( VxNetIdent* netIdent )
         return;
     }
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactAdded invalid netIdent" );
+        return;
+    }
+
     emit slotInternalToGuiContactAdded( *netIdent );
 }
 
@@ -135,6 +141,12 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 		return;
 	}
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactOffline invalid netIdent" );
+        return;
+    }
+
     emit slotInternalToGuiContactOffline( netIdent->getMyOnlineId() );
 }
 
@@ -165,6 +177,12 @@ void AppCommon::toGuiContactOnline( VxNetIdent* netIdent )
         return;
     }
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactOnline invalid netIdent" );
+        return;
+    }
+
     emit signalInternalToGuiContactOnline( *netIdent );
 }
 
@@ -184,6 +202,12 @@ void AppCommon::toGuiContactNameChange( VxNetIdent* netIdent )
 {
     if( VxIsAppShuttingDown() )
     {
+        return;
+    }
+
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactNameChange invalid netIdent" );
         return;
     }
 
@@ -212,6 +236,12 @@ void AppCommon::toGuiContactDescChange( VxNetIdent* netIdent )
         return;
     }
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactDescChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalToGuiContactDescChange( *netIdent );
 }
 
@@ -234,6 +264,12 @@ void AppCommon::toGuiContactMyFriendshipChange( VxNetIdent* netIdent )
 {
     if( VxIsAppShuttingDown() )
     {
+        return;
+    }
+
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactMyFriendshipChange invalid netIdent" );
         return;
     }
 
@@ -262,6 +298,12 @@ void AppCommon::toGuiContactHisFriendshipChange( VxNetIdent* netIdent )
         return;
     }
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactHisFriendshipChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalToGuiContactHisFriendshipChange( *netIdent );
 }
 
@@ -284,6 +326,12 @@ void AppCommon::toGuiPluginPermissionChange( VxNetIdent* netIdent )
 {
     if( VxIsAppShuttingDown() )
     {
+        return;
+    }
+
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiPluginPermissionChange invalid netIdent" );
         return;
     }
 
@@ -311,6 +359,12 @@ void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 	{
 		return;
 	}
+
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactSearchFlagsChange invalid netIdent" );
+        return;
+    }
 
     emit signalInternalToGuiContactSearchFlagsChange( *netIdent );
 }
@@ -361,6 +415,12 @@ void AppCommon::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 		return;
 	}
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactLastSessionTimeChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalToGuiContactLastSessionTimeChange( *netIdent );
 }
 
@@ -382,6 +442,12 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 	{
 		return;
 	}
+
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiUpdateMyIdent invalid netIdent" );
+        return;
+    }
 
     emit signalInternalToGuiUpdateMyIdent( *netIdent );
 }
@@ -407,6 +473,12 @@ void AppCommon::toGuiSaveMyIdent( VxNetIdent* netIdent )
         return;
     }
 
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiSaveMyIdent invalid netIdent" );
+        return;
+    }
+
     emit signalInternalToGuiSaveMyIdent( *netIdent );
 }
 
@@ -414,12 +486,6 @@ void AppCommon::toGuiSaveMyIdent( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiSaveMyIdent( VxNetIdent netIdent )
 {
     getUserMgr().toGuiSaveMyIdent( &netIdent );
-}
-
-//============================================================================
-void AppCommon::onEngineStatusMsg( QString msg )
-{
-	//ui.statusBar->showMessage(msg);
 }
 
 //============================================================================

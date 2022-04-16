@@ -31,15 +31,41 @@ GuiUserMgr::GuiUserMgr( AppCommon& app )
 //============================================================================
 void GuiUserMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalIndentListUpdate( EUserViewType, VxGUID, uint64_t ) ), this, SLOT( slotInternalIndentListUpdate( EUserViewType, VxGUID, uint64_t ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalIndentListRemove( EUserViewType, VxGUID ) ),           this, SLOT( slotInternalIndentListRemove( EUserViewType, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalIndentListUpdate(EUserViewType, VxGUID, uint64_t) ),   this, SLOT( slotInternalIndentListUpdate(EUserViewType, VxGUID, uint64_t) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalIndentListRemove(EUserViewType, VxGUID) ),             this, SLOT( slotInternalIndentListRemove(EUserViewType, VxGUID) ), Qt::QueuedConnection );
 
-    connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*) ),	                            this, SLOT( slotInternalUpdateUser(VxNetIdent*) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalUserRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserRemoved(VxGUID) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalUserOnlineStatus( VxNetIdent*, bool ) ),               this, SLOT( slotInternalUserOnlineStatus( VxNetIdent*, bool ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalSaveMyIdent( VxNetIdent* ) ),                          this, SLOT( slotInternalSaveMyIdent( VxNetIdent* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*) ),                             this, SLOT( slotInternalUpdateUser(VxNetIdent*) ), Qt::QueuedConnection);
+    connect( this, SIGNAL( signalInternalUserRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserRemoved(VxGUID) ), Qt::QueuedConnection);
+    connect( this, SIGNAL( signalInternalUserOnlineStatus(VxNetIdent*, bool) ),                 this, SLOT( slotInternalUserOnlineStatus(VxNetIdent*, bool) ), Qt::QueuedConnection);
+    connect( this, SIGNAL( signalInternalSaveMyIdent(VxNetIdent*) ),                            this, SLOT( slotInternalSaveMyIdent(VxNetIdent*) ), Qt::QueuedConnection);
 
     m_MyApp.wantToGuiUserUpdateCallbacks( this, true );
+}
+
+GuiUser* GuiUserMgr::getMyIdent( void )
+{
+    if( !m_MyIdent )
+    {
+        LogMsg( LOG_ERROR, "GuiUserMgr::getMyIdent null m_MyIdent");
+        return nullptr;
+    }
+
+    if( !m_MyIdent->getNetIdent().isValidNetIdent() )
+    {
+        if( !m_MyApp.isMessengerReady() )
+        {
+            LogMsg( LOG_ERROR, "GuiUserMgr::getMyIdent called before ready");
+        }
+
+        m_MyIdent->setNetIdent( m_MyApp.getMyIdentity() );
+        if( !m_MyIdent->getNetIdent().isValidNetIdent() )
+        {
+            LogMsg( LOG_ERROR, "GuiUserMgr::getMyIdent called but net ident is invalid");
+            return nullptr;
+        }
+    }
+
+    return m_MyIdent;
 }
 
 //============================================================================
@@ -51,18 +77,37 @@ bool GuiUserMgr::isMessengerReady( void )
 //============================================================================
 void GuiUserMgr::toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
 {
+    if( !onlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiSaveMyIdent invalid onlineId" );
+        return;
+    }
+
     emit signalInternalIndentListUpdate( listType, onlineId, timestamp );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 {
+    if( !onlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiIndentListRemove invalid onlineId" );
+        return;
+    }
+
+
     emit signalInternalIndentListRemove( listType, onlineId );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactAdded( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactAdded invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
@@ -75,54 +120,108 @@ void GuiUserMgr::toGuiContactRemoved( VxGUID& onlineId )
 //============================================================================
 void GuiUserMgr::toGuiContactOnline( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactOnline invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUserOnlineStatus( new VxNetIdent( *netIdent ), true );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactOffline( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactOffline invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUserOnlineStatus( new VxNetIdent( *netIdent ), false );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactNameChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactNameChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactDescChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactDescChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactMyFriendshipChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactHisFriendshipChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiPluginPermissionChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiPluginPermissionChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactSearchFlagsChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
 void GuiUserMgr::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactLastSessionTimeChange invalid netIdent" );
+        return;
+    }
+
     emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
 }
 
@@ -136,6 +235,12 @@ void GuiUserMgr::toGuiUpdateMyIdent( VxNetIdent* netIdent )
 //============================================================================
 void GuiUserMgr::toGuiSaveMyIdent( VxNetIdent * netIdent )
 {
+    if( !netIdent || !netIdent->isValidNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiSaveMyIdent invalid netIdent" );
+        return;
+    }
+
     emit signalInternalSaveMyIdent( new VxNetIdent( *netIdent ) );
 }
 

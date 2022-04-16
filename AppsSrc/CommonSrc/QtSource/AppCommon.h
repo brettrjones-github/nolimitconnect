@@ -801,8 +801,6 @@ protected slots:
 	void						onIdleTimer( void );
 	void						onOncePerSecond( void );
 
-	void						onEngineStatusMsg( QString );
-
 	void						onUpdateMyIdent( VxNetIdent * poMyIdent );
 
     void						slotCheckSetupTimer();

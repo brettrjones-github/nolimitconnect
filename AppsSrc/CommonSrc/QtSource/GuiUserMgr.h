@@ -37,7 +37,7 @@ public:
     virtual bool                isMessengerReady( void );
     virtual void                onSystemReady( bool ready ) { }
 
-    GuiUser *                   getMyIdent( void )                          { return m_MyIdent; }  
+    GuiUser *                   getMyIdent( void );
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
     virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) override;
