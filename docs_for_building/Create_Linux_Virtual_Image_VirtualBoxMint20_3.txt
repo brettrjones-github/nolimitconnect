@@ -1,8 +1,8 @@
 Instructions to create a virtual box Linux Mint 20.3 Image for NoLimitConnect developement
 <Virtual Box Version> = oracal virtual box version.. for this document 6.1
 <Mint Version> = linux mint version.. for this document 20.3
-<Qt Version> = qt version.. for this document 6.2.4
-<Java Version> = qt version.. for this document 6.2.4
+<Qt Version> = qt version.. for this document 6.3.0
+<Java Version> = qt version.. for this document 6.3.0
 
 
 === KNOWN ISSUES ===
@@ -75,7 +75,13 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 	and
 	QtCreator->Tools->Options->Devices Android Tab JDK Location
 	
-	
+==== optional vpn ====
+Without a vpn you will probably not be able to connect from the virtual box image to the host computer
+In general a vpn with P2P support is recommended for developers and users
+1.) ProtonVPN has a free version VPN with no limit on data
+		follow install instruction for installation at
+		https://protonvpn.com/support/official-linux-vpn-mint/
+		
 ==== some usefull tools for developers ======
 1.) Meld - File Difference comparison tool
 	sudo apt-get install meld
@@ -85,7 +91,7 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 	sudo apt-get install git-gui
 	
 
-==== Prerequisite tools required to build nolimitptop ======
+==== Prerequisite tools required to build nolimitconnect ======
 1.) sudo apt-get install g++
 2.) sudo apt-get install nasm
 3.) sudo apt-get install masm
@@ -185,7 +191,6 @@ After many tries the only way I could get android studio installed correctly was
 ======= Optional Additional Media Applications for comparison ======
 ====================================================================	
 	
-
 ======= Build VLC for android ======
 
 instructions for building vlc for android

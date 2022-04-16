@@ -799,9 +799,6 @@
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServerHttp.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebSkt.cpp" />
-    <ClInclude Include="..\..\..\GoTvCompilerConfig.h" />
-    <ClInclude Include="..\..\..\GoTvCpuArchDefines.h" />
-    <ClInclude Include="..\..\..\GoTvDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h" />
     <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h" />
     <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h" />
@@ -815,11 +812,9 @@
     <ClInclude Include="..\..\..\GuiInterface\ILog.h" />
     <ClInclude Include="..\..\..\GuiInterface\IScan.h" />
     <ClInclude Include="..\..\..\GuiInterface\IToGui.h" />
-    <ClInclude Include="..\..\..\GoTvTargetOsConfig.h" />
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh" />
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h" />
     <ClInclude Include="..\..\..\GuiInterface\OsWin32\IWin32.h" />
-    <ClInclude Include="..\..\config_gotvcore.h" />
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfoDb.h" />

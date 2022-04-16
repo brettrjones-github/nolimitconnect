@@ -145,7 +145,9 @@ bool HostUrlListDb::saveHostUrl( HostUrlInfo& hostUrlInfo )
 //============================================================================
 void HostUrlListDb::removeClosedPortIdent( VxGUID& onlineId )
 {
+	m_DbMutex.lock();
 	std::string onlineIdHex = onlineId.toHexString();
 	DbBindList bindList( onlineIdHex.c_str() );
 	sqlExec( "DELETE FROM tblHostUrl WHERE online_id=?", bindList );
+	m_DbMutex.unlock();
 }

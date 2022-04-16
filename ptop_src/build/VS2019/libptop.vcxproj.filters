@@ -963,19 +963,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\config_gotvcore.h" />
-    <ClInclude Include="..\..\..\AppCompilerConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\AppCpuArchDefines.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\AppDependLibrariesConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\AppTargetOsConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
       <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>

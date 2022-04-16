@@ -528,6 +528,11 @@ RCODE DbBase::sqlExec( const char *		SQL_Statement,
 	do
 	{
 		executing = false;
+		if( eSqlExecStepDbOpen != exStep && !m_Db )
+		{
+			LogMsg( LOG_ERROR, "DbBase::sqlExec ERROR null m_Db. Did you forget a mutex Lock?" );
+			return SQLITE_ERROR;
+		}
 
 		switch( exStep )
 		{
