@@ -429,7 +429,6 @@ void AppletMgr::activityStateChange( ActivityBase * activity, bool isCreated )
 {
 	if( !isCreated )
 	{
-		//removeApplet( activity->getAppletType() );
         removeApplet( activity );
 	}
 	else

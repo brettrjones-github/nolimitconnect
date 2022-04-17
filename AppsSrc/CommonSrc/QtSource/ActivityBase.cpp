@@ -139,11 +139,6 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 }
 
 //============================================================================
-ActivityBase::~ActivityBase()
-{
-}
-
-//============================================================================
 void ActivityBase::connectBarWidgets( )
 {
     connectTitleBarWidget( getTitleBarWidget() );
@@ -161,8 +156,8 @@ void ActivityBase::connectTitleBarWidget( TitleBarWidget * titleBar )
     //=== title bar connections ====//
     connect( titleBar, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
     connect( titleBar, SIGNAL( signalHomeButtonClicked() ), this, SLOT( slotHomeButtonClicked() ) );
-    connect( titleBar, SIGNAL( signalMuteMicButtonClicked( bool ) ), this, SLOT( slotMuteMicButtonClicked( bool ) ) );
-    connect( titleBar, SIGNAL( signalMuteSpeakerButtonClicked( bool ) ), this, SLOT( slotMuteSpeakerButtonClicked( bool ) ) );
+    connect( titleBar, SIGNAL( signalMuteMicButtonClicked(bool) ), this, SLOT( slotMuteMicButtonClicked(bool) ) );
+    connect( titleBar, SIGNAL( signalMuteSpeakerButtonClicked(bool) ), this, SLOT( slotMuteSpeakerButtonClicked(bool) ) );
     connect( titleBar, SIGNAL( signalCameraSnapshotButtonClicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
     connect( titleBar, SIGNAL( signalCamPreviewClicked() ), this, SLOT( slotCamPreviewClicked() ) );
     connect( titleBar, SIGNAL( signalTrashButtonClicked() ), this, SLOT( slotTrashButtonClicked() ) );
@@ -1139,8 +1134,8 @@ void ActivityBase::slotBackButtonClicked( void )
 //============================================================================
 void ActivityBase::onBackButtonClicked( void )
 {
-    emit signalBackButtonClicked();
     m_MyApp.activityStateChange( this, false );
+    emit signalBackButtonClicked();
     closeApplet();
 }
 

@@ -96,12 +96,9 @@ void GuiGroupieListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser* guiUser = groupieSession->getUserIdent();
-    if( guiUser )
-    {
-        updateIdentity( guiUser );
-    }
+    updateGroupie( groupieSession->getGroupie() );
 }
+
 //============================================================================
 void GuiGroupieListItem::updateUser( GuiUser* guiUser )
 {

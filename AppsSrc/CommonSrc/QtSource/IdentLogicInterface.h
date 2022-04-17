@@ -26,6 +26,7 @@ class GuiUser;
 class GuiHostJoin;
 class GuiHosted;
 class GuiUserJoin;
+class GuiGroupie;
 
 class IdentLogicInterface : public QWidget
 {
@@ -55,6 +56,7 @@ public:
 	virtual void				updateIdentity( GuiHostJoin* hostIdent, bool queryThumb = true );
 	virtual void				updateIdentity( VxNetIdent* netIdent, bool queryThumb = true );
 	virtual void				updateHosted( GuiHosted* guiHosted );
+    virtual void				updateGroupie( GuiGroupie* guiGroupie );
 
 	void						setDisableFriendshipChange( bool disable ) { m_DisableFriendshipChange = disable; }
 

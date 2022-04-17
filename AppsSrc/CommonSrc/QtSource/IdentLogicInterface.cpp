@@ -14,6 +14,7 @@
 
 #include "IdentLogicInterface.h"
 #include "AppletPeerChangeFriendship.h"
+#include "GuiGroupie.h"
 #include "GuiHelpers.h"
 #include "GuiUser.h"
 #include "GuiHostJoin.h"
@@ -374,4 +375,50 @@ void IdentLogicInterface::onIdentPushToTalkButtonReleased( void )
 			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
 		}
 	}
+}
+
+//============================================================================
+void IdentLogicInterface::updateGroupie( GuiGroupie* guiGroupie )
+{
+    if( !guiGroupie )
+    {
+        return;
+    }
+
+    if( guiGroupie->getUser() )
+    {
+        // if user is available update with user info
+        updateIdentity( guiGroupie->getUser() );
+    }
+    else
+    {
+        // there is just the info the host sent.. fill in what is available
+        bool isOnline = true;
+        getIdentLine1()->setText( guiGroupie->getGroupieTitle().c_str() );
+        getIdentLine2()->setText( guiGroupie->getGroupieDescription().c_str() );
+        getIdentFriendshipButton()->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( eFriendStateGuest ) );
+
+        if( getIdentPushToTalkButton() )
+        {
+            getIdentPushToTalkButton()->setVisible( false );
+        }
+
+        bool isMyself = guiGroupie->getGroupieOnlineId() == m_MyApp.getMyOnlineId();
+        if( isMyself )
+        {
+            // should not happen but just in case
+            getIdentFriendshipButton()->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
+            getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
+            getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+            getIdentFriendshipButton()->setNotifyDirectConnectEnabled( true );
+            getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+        }
+        else
+        {
+            getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
+            getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOnlineColor ) );
+
+            getIdentFriendshipButton()->setNotifyDirectConnectEnabled( false );
+        }
+    }
 }
