@@ -121,7 +121,13 @@ std::string VxPtopUrl::stripHost( const std::string& url ) const // remove suffi
 //============================================================================
 bool VxPtopUrl::isValid( void )
 {
-    return m_Port && m_OnlineId.isVxGUIDValid() && !m_Protocol.empty() && !m_Host.empty();
+    return m_Port && m_OnlineId.isVxGUIDValid() && !m_Protocol.empty() && isHostValid();
+}
+
+//============================================================================
+bool VxPtopUrl::isHostValid( void )
+{
+    return !m_Host.empty() && !(m_Host == "0.0.0.0");
 }
 
 //============================================================================

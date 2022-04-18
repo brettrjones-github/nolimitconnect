@@ -39,7 +39,7 @@ public:
     virtual void				announceConnectUpdated( ConnectInfo * userHostInfo );
     virtual void				announceConnectRemoved( VxGUID& hostOnlineId );
     virtual void				announceConnectOfferState( VxGUID& hostOnlineId, enum EOfferState userHostOfferState );
-    virtual void				announceConnectOnlineState( VxGUID& hostOnlineId,enum  EOnlineState onlineState, VxGUID& connectionId );
+    virtual void				announceConnectOnlineState( VxGUID& hostOnlineId, enum  EOnlineState onlineState, VxGUID& connectionId );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }

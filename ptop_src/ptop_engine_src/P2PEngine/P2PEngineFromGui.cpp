@@ -1614,6 +1614,40 @@ bool P2PEngine::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent,
 }
 
 //============================================================================
+bool P2PEngine::fromGuiQueryIdentity( GroupieInfo& groupieInfo, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown )
+{
+	VxGUID onlineId = groupieInfo.getGroupieOnlineId();
+	if( !onlineId.isVxGUIDValid() )
+	{
+		LogMsg( LOG_ERROR, "P2PEngine::fromGuiQueryIdentity invalid id" );
+		return false;
+	}
+
+	if( getMyOnlineId() == onlineId )
+	{
+		retNetIdent = *getMyPktAnnounce().getVxNetIdent();
+		return true;
+	}
+
+	BigListInfo* bigListInfo = m_BigListMgr.findBigListInfo( onlineId );
+	if( bigListInfo )
+	{
+		retNetIdent = *bigListInfo->getVxNetIdent();
+		return true;
+	}
+
+	bool result{ false };
+	VxSktBase* sktBase = getConnectIdListMgr().findHostConnection( groupieInfo.getGroupieId() );
+	if( sktBase )
+	{
+		// if the url is valid try a direct connection first
+		getRelayMgr().requestRelayConnection( sktBase, groupieInfo );
+	}
+
+	return result;
+}
+
+//============================================================================
 bool P2PEngine::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
 {
 	return getEngineSettings().fromGuiSetDefaultUrl( hostType, hostUrl );

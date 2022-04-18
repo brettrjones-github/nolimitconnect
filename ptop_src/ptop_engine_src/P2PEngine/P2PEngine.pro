@@ -148,7 +148,6 @@ SOURCES += ../Anchor/AnchorDb.cpp \
     ../Plugins/RelayServerSession.cpp \
     ../Plugins/RelayClientSession.cpp \
     ../Plugins/Relay.cpp \
-    ../Plugins/RcWebProxy.cpp \
     ../Search/RcScanMatchedConnection.cpp \
     ../Search/RcScanAction.cpp \
     ../Search/RcScan.cpp \
@@ -259,7 +258,6 @@ HEADERS += ../Anchor/AnchorDb.h \
     ../Plugins/RelayClientTestSession.h \
     ../Plugins/RelayClientSession.h \
     ../Plugins/Relay.h \
-    ../Plugins/RcWebProxy.h \
     ../Plugins/PluginWebServer.h \
     ../Plugins/PluginVoicePhone.h \
     ../Plugins/PluginVideoPhone.h \

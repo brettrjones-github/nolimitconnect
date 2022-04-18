@@ -756,7 +756,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RcWebProxy.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\Relay.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayClientSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayServerSession.cpp" />
@@ -771,6 +770,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\TxSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\VideoFeedMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\VoiceFeedMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Relay\RelayMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScan.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanAction.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.cpp" />
@@ -1117,13 +1117,11 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RcWebProxy.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\Relay.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientTestSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerTestSession.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelaySession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RxSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.h" />
@@ -1134,6 +1132,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\TxSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\VideoFeedMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\VoiceFeedMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Relay\RelayMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScan.h" />
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanAction.h" />
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.h" />

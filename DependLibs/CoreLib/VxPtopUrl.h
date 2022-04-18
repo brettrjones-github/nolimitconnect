@@ -28,6 +28,7 @@ public:
     bool                        operator == ( const VxPtopUrl& rhs ) const;
 
 	bool						isValid( void );
+	bool						isHostValid( void );
 
 	void						setUrl( std::string& url );
 	void						setUrl( const char* url );

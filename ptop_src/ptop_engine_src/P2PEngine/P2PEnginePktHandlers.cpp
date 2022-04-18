@@ -31,6 +31,17 @@
 #include <memory.h>
 
 //============================================================================
+void P2PEngine::handlePkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	if( getRelayMgr().handleRelayPkt( sktBase, pktHdr ) )
+	{
+		return;
+	}
+
+	PktHandlerBase::handlePkt( sktBase, pktHdr );
+}
+
+//============================================================================
 void P2PEngine::onPktUnhandled( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	LogMsg( LOG_ERROR, "onPktUnhandled pkt type %d", pktHdr->getPktType() );

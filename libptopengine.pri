@@ -325,7 +325,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RcWebProxy.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/Relay.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientTestSession.h \
@@ -342,6 +341,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/TxSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VideoFeedMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VoiceFeedMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/Relay/RelayMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScan.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanAction.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanMatchedConnection.h \
@@ -652,7 +652,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RcWebProxy.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/Relay.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RelayServerSession.cpp \
@@ -667,6 +666,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/TxSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VideoFeedMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VoiceFeedMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Relay/RelayMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScan.cpp \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanAction.cpp \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanMatchedConnection.cpp \

@@ -61,7 +61,7 @@ void ConnectMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-bool ConnectMgr::isConnectedToHost( EHostType hostType, VxPtopUrl& hostUrl, VxSktBase*& sktBase )
+bool ConnectMgr::isConnectedToHost( enum EHostType hostType, VxPtopUrl& hostUrl, VxSktBase*& sktBase )
 {
     bool isConnected = false;
     if( hostUrl.getOnlineId() == m_Engine.getMyOnlineId() )
@@ -175,7 +175,7 @@ void ConnectMgr::announceConnectRemoved( VxGUID& hostOnlineId )
 }
 
 //============================================================================
-void ConnectMgr::announceConnectOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState )
+void ConnectMgr::announceConnectOfferState( VxGUID& hostOnlineId, enum EOfferState userHostOfferState )
 {
 	LogMsg( LOG_INFO, "ConnectMgr::announceConnectXferState state %d start", userHostOfferState );
 	lockClientList();
@@ -191,7 +191,7 @@ void ConnectMgr::announceConnectOfferState( VxGUID& hostOnlineId, EOfferState us
 }
 
 //============================================================================
-void ConnectMgr::announceConnectOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId )
+void ConnectMgr::announceConnectOnlineState( VxGUID& hostOnlineId, enum EOnlineState onlineState, VxGUID& connectionId )
 {
     LogMsg( LOG_INFO, "ConnectMgr::announceConnectOnlineState state %d start", onlineState );
     lockClientList();

@@ -297,6 +297,20 @@ void GuiGroupieListMgr::updateHostSearchResult( GroupieInfo& groupieInfo, VxGUID
         GuiGroupie* guiGroupie = updateGroupieInfo( groupieInfo );
         if( guiGroupie )
         {
+            if( !guiGroupie->getUser() )
+            {
+                // we do not have indentity information. request a connection either directly or through host
+                VxNetIdent netIdent;
+                if( m_MyApp.getEngine().fromGuiQueryIdentity( groupieInfo, netIdent, true ) && netIdent.isValidNetIdent() )
+                {
+                    GuiUser* user = m_MyApp.getUserMgr().updateUser( &netIdent );
+                    if( user )
+                    {
+                        guiGroupie->setUser( user );
+                    }
+                }
+            }
+
             announceGroupieListSearchResult( groupieInfo.getGroupieId(), guiGroupie, sessionId );
         }
     }

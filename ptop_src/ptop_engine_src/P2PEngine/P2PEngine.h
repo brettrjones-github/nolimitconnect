@@ -48,6 +48,7 @@
 #include <GuiInterface/IFromGui.h>
 #include <GuiInterface/IAudioInterface.h>
 
+#include <ptop_src/ptop_engine_src/Relay/RelayMgr.h>
 #include <ptop_src/ptop_engine_src/Search/RcScan.h>
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListMgr.h>
@@ -134,6 +135,7 @@ public:
     P2PConnectList&				getConnectList( void )							{ return m_ConnectionList; }
     PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
     PluginSettingMgr&			getPluginSettingMgr( void )						{ return m_PluginSettingMgr; }
+    RelayMgr&                   getRelayMgr( void )                             { return m_RelayMgr; }
     RcScan&						getRcScan( void )								{ return m_RcScan; }
     RunUrlAction&               getRunUrlAction( void )                         { return m_RunUrlAction; }
 
@@ -393,6 +395,7 @@ public:
     virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType ) override;
     virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl ) override;
     virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) override;
+    virtual bool				fromGuiQueryIdentity( GroupieInfo& groupieInfo, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) override;
     virtual bool				fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll ) override;
     virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList ) override;
     virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) override;
@@ -527,6 +530,7 @@ public:
 	//========================================================================
 
     //=== packet handlers ===//
+    virtual void                handlePkt                   ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktUnhandled              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktInvalid				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
@@ -794,6 +798,7 @@ protected:
 	PluginServiceFileShare *	m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
+    RelayMgr                    m_RelayMgr;
     RunUrlAction&			    m_RunUrlAction;
     HostJoinMgr&				m_HostJoinMgr;
     UserJoinMgr&				m_UserJoinMgr;
