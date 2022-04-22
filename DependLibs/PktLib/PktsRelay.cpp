@@ -19,10 +19,6 @@
 
 //============================================================================
 PktRelayServiceReq::PktRelayServiceReq()
-: m_u8CancelService( 0 ) // 0 = request access 1 = cancel access
-, m_u8Res1( 0 )
-, m_u16Res( 0 )
-, m_u32Res2( 0 )
 {
 	setPktLength( sizeof(PktRelayServiceReq) );		
 	setPktType( PKT_TYPE_RELAY_SERVICE_REQ ); 
@@ -30,10 +26,6 @@ PktRelayServiceReq::PktRelayServiceReq()
 
 //============================================================================
 PktRelayServiceReply::PktRelayServiceReply()
-: m_u8RelayStatus(0)
-, m_u8AccessState(0)
-, m_u16Res(0)
-, m_u32Error(0)
 {
 	setPktLength( sizeof(PktRelayServiceReply) );		
 	setPktType( PKT_TYPE_RELAY_SERVICE_REPLY ); 
@@ -41,11 +33,6 @@ PktRelayServiceReply::PktRelayServiceReply()
 
 //============================================================================
 PktRelayConnectToUserReq::PktRelayConnectToUserReq()
-: m_u16Res(0)
-, m_u32Res1(0)
-, m_u32Res2(0)
-, m_u32Res3(0)
-, m_u32Res4(0)
 {
 	setPktLength( sizeof(PktRelayConnectToUserReq) );		
 	setPktType( PKT_TYPE_RELAY_CONNECT_TO_USER_REQ ); 
@@ -53,11 +40,6 @@ PktRelayConnectToUserReq::PktRelayConnectToUserReq()
 
 //============================================================================
 PktRelayConnectToUserReply::PktRelayConnectToUserReply()
-: m_u16ConnectFailed(0)
-, m_u32Res1(0)
-, m_u32Res2(0)
-, m_u32Res3(0)
-, m_u32Res4(0)
 {
 	setPktLength( sizeof(PktRelayConnectToUserReply) );		
 	setPktType( PKT_TYPE_RELAY_CONNECT_TO_USER_REPLY ); 
@@ -65,8 +47,6 @@ PktRelayConnectToUserReply::PktRelayConnectToUserReply()
 
 //============================================================================
 PktRelayUserDisconnect::PktRelayUserDisconnect()
-: m_u32Res1(0)
-, m_u32Res2(0)
 {
 	setPktLength( sizeof(PktRelayUserDisconnect) );		
 	setPktType( PKT_TYPE_RELAY_USER_DISCONNECT ); 
@@ -74,9 +54,6 @@ PktRelayUserDisconnect::PktRelayUserDisconnect()
 
 //============================================================================
 PktRelaySessionReq::PktRelaySessionReq()
-	: m_u8PluginAccess(0)
-	, m_u8TestOnly(0)
-	, m_u16Res2(0)
 {
 	setPktType( PKT_TYPE_RELAY_SESSION_REQ ); 
 	setPktLength( sizeof( PktRelaySessionReq ) );
@@ -84,10 +61,6 @@ PktRelaySessionReq::PktRelaySessionReq()
 
 //============================================================================
 PktRelaySessionReply::PktRelaySessionReply()
-: m_u8PluginAccess( 0 )
-, m_u8TestOnly( 0 )
-, m_u16Res2( 0 )
-, m_u32Res3( 0 )
 {
 	setPktType( PKT_TYPE_RELAY_SESSION_REPLY ); 
 	setPktLength( sizeof( PktRelaySessionReply ) );
@@ -95,9 +68,6 @@ PktRelaySessionReply::PktRelaySessionReply()
 
 //============================================================================
 PktRelayConnectReq::PktRelayConnectReq()
-: m_u16Port( 0 )
-, m_u16Res1( 0 )
-, m_u32Res2( 0 )
 {
 	setPktType( PKT_TYPE_RELAY_CONNECT_REQ ); 
 	setPktLength( sizeof( PktRelayConnectReq ) );
@@ -105,9 +75,6 @@ PktRelayConnectReq::PktRelayConnectReq()
 
 //============================================================================
 PktRelayConnectReply::PktRelayConnectReply()
-: m_u16Port( 0 )
-, m_u16Res1( 0 )
-, m_OnlineIp( 0 )
 {
 	setPktType( PKT_TYPE_RELAY_CONNECT_REPLY ); 
 	setPktLength( sizeof( PktRelayConnectReply ) );
@@ -115,13 +82,6 @@ PktRelayConnectReply::PktRelayConnectReply()
 
 //============================================================================
 PktRelayTestReq::PktRelayTestReq()
-: m_u8Version(1)
-, m_u8PluginAccess( 0 )
-, m_u8TestOnly( 0 )
-, m_u8Res1( 0 )
-, m_TimeStampMs( 0 )
-, m_Res4( 0 )
-, m_Res5( 0 )
 {
 	setPktType( PKT_TYPE_RELAY_TEST_REQ ); 
 	setPktLength( sizeof( PktRelayTestReq ) );
@@ -140,14 +100,6 @@ int64_t PktRelayTestReq::getTimeStampMs( void )
 
 //============================================================================
 PktRelayTestReply::PktRelayTestReply()
-: m_u8Version(1)
-, m_u8PluginAccess(0)
-, m_u8TestOnly(0)
-, m_u8Res1(0)
-, m_u32Res3(0)
-, m_TimeStampMs( 0 )
-, m_MaxRelayUsers( 0 )
-, m_CurRelayUsers( 0 )
 {
 	setPktType( PKT_TYPE_RELAY_TEST_REPLY ); 
 	setPktLength( sizeof( PktRelayTestReply ) );

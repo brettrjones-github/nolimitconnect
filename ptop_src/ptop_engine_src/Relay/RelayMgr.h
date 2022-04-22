@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
 
 class GroupieInfo;
 class P2PEngine;
@@ -20,6 +21,7 @@ class PluginBaseRelay;
 class VxSktBase;
 class VxPktHdr;
 class VxNetIdent;
+class VxGUID;
 
 class RelayMgr
 {
@@ -35,6 +37,11 @@ public:
 	virtual void				onPktRelaySessionReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
 	virtual void				onPktRelayConnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
 	virtual void				onPktRelayDisconnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
+
+	virtual void				onPktRelayConnectToUserReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+
+	bool						isJoinedToRelayHost( VxGUID& onlineId );
+	bool						sendRelayError( VxGUID& onlineId, VxSktBase* sktBase, ERelayErr relayErr );
 
 	//=== vars ====//
 	P2PEngine&					m_Engine;

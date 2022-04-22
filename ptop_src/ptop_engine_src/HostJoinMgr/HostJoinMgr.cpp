@@ -579,3 +579,25 @@ EJoinState HostJoinMgr::getHostJoinState( GroupieId& groupieId )
     unlockResources();
     return joinState;
 }
+
+//============================================================================
+bool HostJoinMgr::isUserJoinedToRelayHost( VxGUID& onlineId )
+{
+    bool isJoined{ false };
+    lockResources();
+    for( auto hostPair : m_HostJoinInfoList )
+    {
+        GroupieId& groupieId = const_cast<GroupieId&>(hostPair.first);
+        if( groupieId.getGroupieOnlineId() == onlineId && IsHostARelayForUser( groupieId.getHostType() ) )
+        {
+            if( hostPair.second->getJoinState() == eJoinStateJoinWasGranted || hostPair.second->getJoinState() == eJoinStateJoinIsGranted )
+            {
+                isJoined = true;
+                break;
+            }
+        }
+    }
+
+    unlockResources();
+    return isJoined;
+}

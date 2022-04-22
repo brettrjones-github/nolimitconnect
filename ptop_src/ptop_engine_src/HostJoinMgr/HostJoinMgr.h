@@ -64,6 +64,7 @@ public:
 
     void                        changeJoinState( GroupieId& groupieId, enum EJoinState joinState );
     EJoinState                  getHostJoinState( GroupieId& groupieId );
+    bool                        isUserJoinedToRelayHost( VxGUID& onlineId );
 
 protected:
     void						clearHostJoinInfoList( void );

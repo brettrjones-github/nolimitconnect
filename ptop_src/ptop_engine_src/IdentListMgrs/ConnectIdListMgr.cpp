@@ -348,6 +348,40 @@ VxSktBase* ConnectIdListMgr::findHostConnection( GroupieId& groupieId, bool tryP
 }
 
 //============================================================================
+VxSktBase* ConnectIdListMgr::findRelayMemberConnection( VxGUID& onlineId )
+{
+    if( !onlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "ConnectIdListMgr::findUserConnection invalid id" );
+        return nullptr;
+    }
+
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        return m_Engine.getSktLoopback();
+    }
+
+    VxSktBase* sktBase = nullptr;
+    lockList();
+    for( auto& connectIdConst : m_ConnectIdList )
+    {
+        ConnectId& connectId = const_cast<ConnectId&>(connectIdConst);
+        if( connectId.getGroupieOnlineId() == onlineId && IsHostARelayForUser( connectId.getHostType() ) )
+        {
+            sktBase = findSktBase( connectId.getSocketId() );
+            if( sktBase )
+            {
+                break;
+            }
+        }
+    }
+
+    unlockList();
+
+    return sktBase;
+}
+
+//============================================================================
 VxSktBase* ConnectIdListMgr::findPeerConnection( VxGUID& onlineId )
 {
     if( !onlineId.isVxGUIDValid() )

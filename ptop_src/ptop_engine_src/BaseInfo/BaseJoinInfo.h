@@ -27,17 +27,17 @@ public:
     BaseJoinInfo&				operator=( const BaseJoinInfo& rhs ); 
 
     virtual void			    setPluginType( enum EPluginType pluginType )        { m_PluginType = pluginType; }
-    virtual EPluginType			getPluginType( void )                               { return m_PluginType; }
-    virtual EHostType			getHostType( void )                                 { return PluginTypeToHostType( m_PluginType ); }
+    virtual EPluginType			getPluginType( void ) const                         { return m_PluginType; }
+    virtual EHostType			getHostType( void ) const                           { return PluginTypeToHostType( m_PluginType ); }
 
     virtual bool			    setJoinState( enum EJoinState joinState )           { if(m_JoinState == joinState) return false; m_JoinState = joinState; return true; }
-    virtual EJoinState			getJoinState( void )                                { return m_JoinState; }
+    virtual EJoinState			getJoinState( void ) const                          { return m_JoinState; }
 
     virtual void				setLastConnectTime( uint64_t timestamp )            { m_LastConnectMs = timestamp; }
-    virtual uint64_t			getLastConnectTime( void )                          { return m_LastConnectMs; }
+    virtual uint64_t			getLastConnectTime( void )  const                   { return m_LastConnectMs; }
 
     virtual void				setLastJoinTime( uint64_t timestamp )               { m_LastJoinMs = timestamp; }
-    virtual uint64_t			getLastJoinTime( void )                             { return m_LastJoinMs; }
+    virtual uint64_t			getLastJoinTime( void )  const                      { return m_LastJoinMs; }
 
 public:
 	//=== vars ===//

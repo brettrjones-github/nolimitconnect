@@ -315,6 +315,15 @@ namespace
         "Max Network State ",
     };
 
+    const char* RelayErrEnumStrings[] =
+    {
+        "Relay Error None ",                    // 0 eRelayErrNone
+        "Relay Error Source Not Joined ",       // 1 eRelayErrSrcNotJoined
+        "Relay Error Destination Not Joined ",  // 2 eRelayErrDestNotJoined
+        "Relay Error User Not Online ",         // 3 eRelayErrUserNotOnline
+        "Max Relay Error ",
+    };
+
     const char * RelayStatusEnumStrings[] =
     { 
         "Relay Status Disconnected ",   // 0 eMyRelayStatusDisconnected
@@ -919,6 +928,16 @@ const char * DescribeNetworkState( ENetworkStateType networkStateType )
     }
 
     return NetworkStateEnumStrings[ networkStateType ];
+}
+
+const char* DescribeRelayError( enum ERelayErr relayError )
+{
+    if( relayError < 0 || eMaxRelayErr <= relayError )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return RelayErrEnumStrings[ relayError ];
 }
 
 const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus )

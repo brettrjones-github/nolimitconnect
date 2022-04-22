@@ -223,6 +223,13 @@ void P2PEngine::onPktRelayConnectToUserReq( VxSktBase * sktBase, VxPktHdr * pktH
 void P2PEngine::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	PktRelayConnectToUserReply * poPkt = (PktRelayConnectToUserReply *)pktHdr;
+	BigListInfo* bigListInfo = m_BigListMgr.findBigListInfo( poPkt->m_ConnectId.getOnlineId() );
+	if( bigListInfo )
+	{
+		getRelayMgr().onPktRelayConnectToUserReply( sktBase, pktHdr, bigListInfo->getVxNetIdent() );
+	}
+
+	/*
 	if( 0 == poPkt->getConnectFailed() )
 	{
 //#ifdef DEBUG_RELAY
@@ -267,6 +274,7 @@ void P2PEngine::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pk
 	}
 	//LogMsg( LOG_INFO, "onPktRelayConnectToUserReply: signaling\n" );
 	//sktBase->m_EventSemaphore.signal();
+	*/
 }
 
 //============================================================================

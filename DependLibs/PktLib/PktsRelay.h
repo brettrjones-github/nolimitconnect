@@ -17,6 +17,8 @@
 #include "PktTypes.h"
 #include "VxCommon.h"
 
+#include <GuiInterface/IDefs.h>
+
 #pragma pack(push)
 #pragma pack(1)
 
@@ -28,12 +30,12 @@ public:
 	void						setLclSessionId( VxGUID& lclId )					{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )								{ return m_LclSessionId; }
 
-	uint8_t						m_u8CancelService; // 0 = request access 1 = cancel access
+	uint8_t						m_u8CancelService{ 0 }; // 0 = request access 1 = cancel access
 private:
 	//=== vars ===//
-	uint8_t						m_u8Res1;
-	uint16_t					m_u16Res;
-	uint32_t					m_u32Res2;
+	uint8_t						m_u8Res1{ 0 };
+	uint16_t					m_u16Res{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	VxGUID						m_LclSessionId;
 };
 
@@ -48,16 +50,16 @@ public:
 	VxGUID&						getRmtSessionId( void )								{ return m_RmtSessionId; }
 
     void						setAccessState( enum EPluginAccess ePluginAccess )  { m_u32Error = (uint32_t)ePluginAccess; }
-	EPluginAccess			getAccessState( void )								{ return (EPluginAccess)m_u32Error; }
+	EPluginAccess				getAccessState( void )								{ return (EPluginAccess)m_u32Error; }
     void						setRelayStatus( enum ERelayStatus eStatus )				{ m_u8RelayStatus = (uint8_t)eStatus; }
 	ERelayStatus				getRelayStatus( void )								{ return (ERelayStatus)m_u8RelayStatus; }
 
 private:
 	//=== vars ===//
-	uint8_t						m_u8RelayStatus;
-	uint8_t						m_u8AccessState;
-	uint16_t					m_u16Res;
-	uint32_t					m_u32Error;
+	uint8_t						m_u8RelayStatus{ 0 };
+	uint8_t						m_u8AccessState{ 0 };
+	uint16_t					m_u16Res{ 0 };
+	uint32_t					m_u32Error{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -71,11 +73,11 @@ public:
 	//=== vars ===//
 	VxConnectId					m_ConnectId;
 private:
-	uint16_t					m_u16Res;
-	uint32_t					m_u32Res1;
-	uint32_t					m_u32Res2;
-	uint32_t					m_u32Res3;
-	uint32_t					m_u32Res4;
+	uint16_t					m_u16Res{ 0 };
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
+	uint32_t					m_u32Res3{ 0 };
+	uint32_t					m_u32Res4{ 0 };
 };
 
 class PktRelayConnectToUserReply : public VxPktHdr
@@ -83,17 +85,21 @@ class PktRelayConnectToUserReply : public VxPktHdr
 public:
 	PktRelayConnectToUserReply();
 
-	void						setConnectFailed( uint16_t failCode )	{ m_u16ConnectFailed = htons( failCode ); }
-	uint16_t					getConnectFailed( void )			{ return ntohs( m_u16ConnectFailed ); }
+	void						setRelayError( ERelayErr relayErr )			{ m_RelayError = (uint8_t)relayErr; }
+	ERelayErr					getRelayError( void )						{ return (ERelayErr)m_RelayError; }
+
+	void						setConnectFailed( uint8_t failCode )		{ m_ConnectFailed = failCode; }
+	uint8_t						getConnectFailed( void )					{ return m_ConnectFailed; }
 
 	//=== vars ===//
 	VxConnectId					m_ConnectId;
 private:
-	uint16_t					m_u16ConnectFailed;
-	uint32_t					m_u32Res1;
-	uint32_t					m_u32Res2;
-	uint32_t					m_u32Res3;
-	uint32_t					m_u32Res4;
+	uint8_t						m_RelayError{ 0 };
+	uint8_t						m_ConnectFailed{ 0 };
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
+	uint32_t					m_u32Res3{ 0 };
+	uint32_t					m_u32Res4{ 0 };
 };
 
 class PktRelayUserDisconnect : public VxPktHdr
@@ -104,8 +110,8 @@ public:
 	//=== vars ===//
 	VxGUID						m_UserId;
 private:
-	uint32_t					m_u32Res1;
-	uint32_t					m_u32Res2;
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 class PktRelaySessionReq : public VxPktHdr
@@ -126,10 +132,10 @@ public:
 
 private:
 	//=== vars ===//
-	uint8_t						m_u8PluginAccess;
-	uint8_t						m_u8TestOnly;
-	uint16_t					m_u16Res2;
-	uint32_t					m_u32Res3;
+	uint8_t						m_u8PluginAccess{ 0 };
+	uint8_t						m_u8TestOnly{ 0 };
+	uint16_t					m_u16Res2{ 0 };
+	uint32_t					m_u32Res3{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -151,10 +157,10 @@ public:
 
 private:
 	//=== vars ===//
-	uint8_t						m_u8PluginAccess;
-	uint8_t						m_u8TestOnly;
-	uint16_t					m_u16Res2;
-	uint32_t					m_u32Res3;
+	uint8_t						m_u8PluginAccess{ 0 };
+	uint8_t						m_u8TestOnly{ 0 };
+	uint16_t					m_u16Res2{ 0 };
+	uint32_t					m_u32Res3{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -176,9 +182,9 @@ public:
 	VxGUID						m_DestOnlineId; // who connection is intended for
 	InetAddress					m_OnlineIp;
 private:
-	uint16_t					m_u16Port;
-	uint16_t					m_u16Res1;
-	uint32_t					m_u32Res2;
+	uint16_t					m_u16Port{ 0 };
+	uint16_t					m_u16Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -195,8 +201,8 @@ public:
 private:
 	//=== vars ===//
 	VxGUID						m_OnlineId;
-	uint16_t					m_u16Port;
-	uint16_t					m_u16Res1;
+	uint16_t					m_u16Port{ 0 };
+	uint16_t					m_u16Res1{ 0 };
 	uint32_t					m_OnlineIp;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
@@ -220,16 +226,16 @@ public:
 
 private:
 	//=== vars ===//
-	uint8_t						m_u8Version;
-	uint8_t						m_u8PluginAccess;
-	uint8_t						m_u8TestOnly;
-	uint8_t						m_u8Res1;
-	uint32_t					m_u32Res3;
+	uint8_t						m_u8Version{ 1 };
+	uint8_t						m_u8PluginAccess{ 0 };
+	uint8_t						m_u8TestOnly{ 0 };
+	uint8_t						m_u8Res1{ 0 };
+	uint32_t					m_u32Res3{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	int64_t						m_TimeStampMs;
-	uint32_t					m_Res4;
-	uint32_t					m_Res5;
+	int64_t						m_TimeStampMs{ 0 };
+	uint32_t					m_Res4{ 0 };
+	uint32_t					m_Res5{ 0 };
 };
 
 class PktRelayTestReply : public VxPktHdr
@@ -255,16 +261,16 @@ public:
 
 private:
 	//=== vars ===//
-	uint8_t						m_u8Version;
-	uint8_t						m_u8PluginAccess;
-	uint8_t						m_u8TestOnly;
-	uint8_t						m_u8Res1;
-	uint32_t					m_u32Res3;
+	uint8_t						m_u8Version{ 1 };
+	uint8_t						m_u8PluginAccess{ 0 };
+	uint8_t						m_u8TestOnly{ 0 };
+	uint8_t						m_u8Res1{ 0 };
+	uint32_t					m_u32Res3{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	int64_t					    m_TimeStampMs;
-	uint32_t					m_MaxRelayUsers;
-	uint32_t					m_CurRelayUsers;
+	int64_t					    m_TimeStampMs{ 0 };
+	uint32_t					m_MaxRelayUsers{ 0 };
+	uint32_t					m_CurRelayUsers{ 0 };
 };
 
 #pragma pack(pop)

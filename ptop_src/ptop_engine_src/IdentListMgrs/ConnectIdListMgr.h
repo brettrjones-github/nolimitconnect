@@ -42,11 +42,14 @@ public:
     bool                        getConnections( HostedId& hostId, std::set<ConnectId>& retConnectIdSet );
 
     VxSktBase*                  findHostConnection( GroupieId& groupieId, bool tryPeerFirst = false );
+    VxSktBase*                  findRelayMemberConnection( VxGUID& onlineId );
     VxSktBase*                  findPeerConnection( VxGUID& onlineId );
-    virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
-    VxSktBase*                  findSktBase( VxGUID& connectId );
+
     VxSktBase*                  findAnyOnlineConnection( VxGUID& onlineId );
     VxSktBase*                  findBestOnlineConnection( VxGUID& onlineId );
+
+    virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
+    VxSktBase*                  findSktBase( VxGUID& connectId );
 
     void                        addConnection( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        removeConnection( VxGUID& sktConnectId, GroupieId& groupieId );

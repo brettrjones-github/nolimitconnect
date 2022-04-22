@@ -924,6 +924,16 @@ enum EIsPortOpenStatus
     eMaxIsPortOpenStatusType
 };
 
+enum ERelayErr
+{
+    eRelayErrNone = 0,
+    eRelayErrSrcNotJoined,
+    eRelayErrDestNotJoined,
+    eRelayErrUserNotOnline,
+
+    eMaxRelayErr
+};
+
 //! \public Enumeration of relay status
 enum ERelayStatus
 {
@@ -934,7 +944,6 @@ enum ERelayStatus
 
     eMaxRelayStatus
 };
-
 
 //! \public Connect by shaking phone ( or press simulate phone shake ) status
 enum ERandomConnectStatus
@@ -1184,6 +1193,8 @@ const char * DescribePluginType( enum EPluginType ePluginType );
 const char * DescribePortOpenStatus( enum EIsPortOpenStatus ePortOpenStatus );
 //! Describe connect by shaking phone ( or press simulate phone shake ) status as text
 const char * DescribeRandomConnectStatus( enum ERandomConnectStatus ePortOpenStatus );
+//! Describe relay error as text
+const char* DescribeRelayError( enum ERelayErr relayError );
 //! Describe Relay Search Status as text
 const char * DescribeRelayStatus( enum EMyRelayStatus eRelayStatus );
 //! Describe run network test state as text
