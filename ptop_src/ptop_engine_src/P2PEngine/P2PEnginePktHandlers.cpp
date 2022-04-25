@@ -33,10 +33,11 @@
 //============================================================================
 void P2PEngine::handlePkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-	if( getRelayMgr().handleRelayPkt( sktBase, pktHdr ) )
-	{
-		return;
-	}
+	// relay packets will call handleIncommingRelayPkt so the check here should not be needed
+	//if( getRelayMgr().handleRelayPkt( sktBase, pktHdr ) )
+	//{
+	//	return;
+	//}
 
 	PktHandlerBase::handlePkt( sktBase, pktHdr );
 }
@@ -56,9 +57,9 @@ void P2PEngine::onPktInvalid( VxSktBase * sktBase, VxPktHdr * pktHdr )
 //============================================================================
 void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	PktAnnounce * pkt = (PktAnnounce *)pktHdr;
+	PktAnnounce* pkt = (PktAnnounce *)pktHdr;
 	VxGUID contactOnlineId = pkt->getMyOnlineId();
-	if( contactOnlineId == m_PktAnn.getMyOnlineId() )
+	if( contactOnlineId == getMyOnlineId() )
 	{
 		// it is ourself
         LogMsg( LOG_ERROR, "onPktAnnounce Cannot send a packet to ourself  " );
@@ -136,22 +137,26 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		}
 	}
 
-    if( sktBase->setPeerPktAnn( *pkt ) )
-    {
-		getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
-        getConnectionMgr().onSktConnectedWithPktAnn( sktBase, bigListInfo );
-    }
-	else
-	{
-		getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
-	}
-
 	if( pkt->getTTL() > 0 )
 	{
 		pkt->setTTL( pkt->getTTL() - 1 );
 		pkt->setIsPktAnnReplyRequested( false );
 		pkt->setIsPktAnnStunRequested( false );
 	}
+
+	if( !sktBase->getIsPeerPktAnnSet() )
+	{
+		if( sktBase->setPeerPktAnn( *pkt ) )
+		{
+			getConnectList().addConnection( sktBase, bigListInfo, (ePktAnnUpdateTypeNewContact == updateType) );
+			getConnectionMgr().onSktConnectedWithPktAnn( sktBase, bigListInfo );
+		}
+		else
+		{
+			getConnectList().addConnection( sktBase, bigListInfo, (ePktAnnUpdateTypeNewContact == updateType) );
+		}
+	}
+
 
 	if( pkt->getIsPktAnnRevConnectRequested() )
 	{
@@ -201,10 +206,18 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		updateOnFirstConnect( sktBase, bigListInfo, false );
         onFirstPktAnnounce( pkt, sktBase, bigListInfo );
     }
+	else if( pkt->getDestOnlineId() != getMyOnlineId() )
+	{
+		getRelayMgr().onRelayPktAnnounce( pkt, sktBase, bigListInfo->getVxNetIdent() );
+	}
+	else
+	{
+		getConnectIdListMgr().onGroupUserAnnounce( pkt, sktBase, bigListInfo->getVxNetIdent() );
+	}
 }
 
 //============================================================================
-void P2PEngine::onPktAnnList( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAnnList( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAnnList" );
 }

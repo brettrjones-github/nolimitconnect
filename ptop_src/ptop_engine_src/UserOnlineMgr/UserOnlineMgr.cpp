@@ -184,9 +184,15 @@ void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, Ba
 }
 
 //============================================================================
+void UserOnlineMgr::onUserOnline( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    callbackOnlineStatusChange( groupieId.getGroupieOnlineId(), true );
+}
+
+//============================================================================
 void UserOnlineMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
-    updateUserSession( sktBase, netIdent, sessionInfo );
+    updateUserSession( sktBase, netIdent, sessionInfo ); 
 }
 
 //============================================================================

@@ -17,6 +17,8 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
+#include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 #include <NetLib/VxPeerMgr.h>
 
 //============================================================================
@@ -653,4 +655,41 @@ void ConnectIdListMgr::announceConnectionLost( VxGUID& sktConnectId )
     }
 
     unlockClientList();
+}
+
+//============================================================================
+void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID onlineId = netIdent->getMyOnlineId();
+    VxGUID connectionId = sktBase->getConnectionId();
+    VxGUID hostOnlineId = netIdent->getMyOnlineId();
+    EHostType hostType{ eHostTypeUnknown };
+
+    lockList();
+    for( auto& connectIdConst : m_ConnectIdList )
+    {
+        ConnectId& connectId = const_cast<ConnectId&>(connectId);
+        if( IsHostARelayForUser( connectId.getHostType() ) )
+        {
+            if( connectId.getHostedId().getOnlineId() == connectId.getGroupieOnlineId() )
+            {
+                hostType = connectId.getHostType();
+                hostOnlineId = connectId.getHostedId().getOnlineId();
+                break;
+            }
+        }
+    }
+
+    unlockList();
+
+    if( hostOnlineId.isVxGUIDValid() )
+    {
+        GroupieId groupieId( onlineId, hostOnlineId, hostType );
+        addConnection( connectionId, groupieId );
+        m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
+    }
+    else
+    {
+        LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupUserAnnounce hostId not found" );
+    }
 }

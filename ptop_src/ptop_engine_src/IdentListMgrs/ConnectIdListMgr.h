@@ -21,9 +21,11 @@
 #include <map>
 
 // maintains a list of online users
-class P2PEngine;
-class VxSktBase;
 class ConnectIdListCallbackInterface;
+class P2PEngine;
+class PktAnnounce;
+class VxNetIdent;
+class VxSktBase;
 
 class ConnectIdListMgr : public IdentListMgrBase
 {
@@ -59,6 +61,7 @@ public:
     void                        disconnectIfIsOnlyUser( GroupieId& groupieId );
 
     virtual void                onConnectionLost( VxGUID& sktConnectId );
+    virtual void                onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent );
 
     void                        wantConnectIdListCallback( ConnectIdListCallbackInterface* client, bool enable );
 

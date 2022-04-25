@@ -85,3 +85,9 @@ void RelayMgr::onPktRelayConnectToUserReply( VxSktBase* sktBase, VxPktHdr* pktHd
 	PktRelayConnectToUserReply* pktReq = (PktRelayConnectToUserReply*)pktHdr;
 	LogMsg( LOG_VERBOSE, "onPktRelayConnectToUserReply err %s", DescribeRelayError( pktReq->getRelayError() ) );
 }
+
+//============================================================================
+void RelayMgr::onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	LogMsg( LOG_VERBOSE, "RelayMgr::onRelayPktAnnounce %s", netIdent->getOnlineName() );
+}

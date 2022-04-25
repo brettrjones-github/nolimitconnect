@@ -234,7 +234,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			sktBase->setLastSessionTimeMs( GetGmtTimeMs() );
 		}
 
-		if( pktHdr->getDestOnlineId() == m_PktAnn.getMyOnlineId() )
+		if( pktHdr->getDestOnlineId() == getMyOnlineId() )
 		{
 			PktHandlerBase::handlePkt( sktBase, pktHdr );
 		}
@@ -253,6 +253,9 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 //============================================================================
 void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
+	getRelayMgr().handleRelayPkt( sktBase, pktHdr );
+	/*
+	// Relay now handled by a Relay Manager. TODO remove relay plugin if no longer needed
 	bool dataWasRelayed = false;
 	bool relayAvailable = false;
 	uint16_t pktType = pktHdr->getPktType();
@@ -295,6 +298,7 @@ void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr
 		relayReply.setSrcOnlineId( m_PktAnn.getMyOnlineId() );
 		sktBase->txPacket( pktHdr->getSrcOnlineId(), &relayReply );	
 	}
+	*/
 }
 
 //============================================================================

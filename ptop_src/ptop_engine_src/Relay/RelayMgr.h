@@ -17,6 +17,7 @@
 
 class GroupieInfo;
 class P2PEngine;
+class PktAnnounce;
 class PluginBaseRelay;
 class VxSktBase;
 class VxPktHdr;
@@ -39,6 +40,7 @@ public:
 	virtual void				onPktRelayDisconnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
 
 	virtual void				onPktRelayConnectToUserReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	bool						isJoinedToRelayHost( VxGUID& onlineId );
 	bool						sendRelayError( VxGUID& onlineId, VxSktBase* sktBase, ERelayErr relayErr );
