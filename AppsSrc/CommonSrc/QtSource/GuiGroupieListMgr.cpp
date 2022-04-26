@@ -32,10 +32,10 @@ GuiGroupieListMgr::GuiGroupieListMgr( AppCommon& app )
 //============================================================================
 void GuiGroupieListMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalGroupieUpdated( GroupieInfo* ) ), this, SLOT( slotInternalGroupieUpdated( GroupieInfo* ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalGroupieRemoved( VxGUID, VxGUID, EHostType ) ), this, SLOT( slotInternalGroupieRemoved( VxGUID, VxGUID, EHostType ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalGroupieSearchResult( GroupieInfo*, VxGUID) ), this, SLOT( slotInternalGroupieSearchResult( GroupieInfo*, VxGUID ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalGroupieSearchComplete( EHostType, VxGUID ) ), this, SLOT( slotInternalGroupieSearchComplete( EHostType, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalGroupieUpdated(GroupieInfo*) ), this, SLOT( slotInternalGroupieUpdated(GroupieInfo*) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalGroupieRemoved(VxGUID,VxGUID,EHostType) ), this, SLOT( slotInternalGroupieRemoved(VxGUID,VxGUID,EHostType) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalGroupieSearchResult(GroupieInfo*,VxGUID) ), this, SLOT( slotInternalGroupieSearchResult(GroupieInfo*,VxGUID) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalGroupieSearchComplete(EHostType,VxGUID) ), this, SLOT( slotInternalGroupieSearchComplete(EHostType,VxGUID) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getGroupieListMgr().addGroupieListMgrClient( dynamic_cast< GroupieListCallbackInterface*>(this), true );
 }

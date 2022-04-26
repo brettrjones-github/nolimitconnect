@@ -491,7 +491,6 @@ void HostedListMgr::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, Vx
     bool result{ false };
     PktHostInfoReply* pktReply = (PktHostInfoReply *)pktHdr;
 
-    VxGUID sessionId = pktReply->getSessionId();
     EHostType hostType = pktReply->getHostType();
     std::string hostTitle;
     std::string hostDesc;

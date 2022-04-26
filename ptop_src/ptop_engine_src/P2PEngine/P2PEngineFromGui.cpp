@@ -1589,7 +1589,6 @@ bool P2PEngine::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent,
 	VxPtopUrl ptopUrl( url );
 	if( ptopUrl.isValid() )
 	{
-		VxGUID onlineId = ptopUrl.getOnlineId();
 		if( getMyOnlineId() == ptopUrl.getOnlineId() )
 		{
 			retNetIdent = *getMyPktAnnounce().getVxNetIdent();
@@ -1636,13 +1635,31 @@ bool P2PEngine::fromGuiQueryIdentity( GroupieInfo& groupieInfo, VxNetIdent& retN
 		return true;
 	}
 
-	bool result{ false };
-	VxSktBase* sktBase = getConnectIdListMgr().findHostConnection( groupieInfo.getGroupieId() );
+	bool result{ false };    
+    // see if we have connection to host.. if so request relay connection which is
+    // really just send our PktAnnounce to other user using the host as a relay
+    GroupieId myGroupieId(groupieInfo.getGroupieId());
+    if( IsHostARelayForUser(myGroupieId.getHostType()) && getMyOnlineId() != myGroupieId.getGroupieOnlineId())
+    {
+        myGroupieId.setGroupieOnlineId(getMyOnlineId());
+    }
+
+    VxSktBase* sktBase = getConnectIdListMgr().findHostConnection( myGroupieId );
 	if( sktBase )
 	{
 		// if the url is valid try a direct connection first
-		getRelayMgr().requestRelayConnection( sktBase, groupieInfo );
+        if( !getRelayMgr().requestRelayConnection( sktBase, groupieInfo ) )
+        {
+            getUserOnlineMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
+            getConnectIdListMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
+        }
 	}
+    else
+    {
+        LogMsg( LOG_VERBOSE, "fromGuiQueryIdentity Lost Connection to host");
+        getUserOnlineMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
+        getConnectIdListMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
+    }
 
 	return result;
 }

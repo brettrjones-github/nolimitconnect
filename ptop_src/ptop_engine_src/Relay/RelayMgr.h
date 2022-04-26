@@ -32,7 +32,7 @@ public:
 
 	bool						handleRelayPkt( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
-	bool						requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieInfo ) { return false; }
+    bool						requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieInfo );
 
 	virtual void				onPktRelaySessionReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
 	virtual void				onPktRelaySessionReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};

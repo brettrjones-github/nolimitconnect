@@ -656,12 +656,9 @@ void ConnectIdListMgr::announceConnectionLost( VxGUID& sktConnectId )
 
     unlockClientList();
 }
-void ConnectIdListMgr::onUserOffline( VxGUID& onlineId )
-{
-    announceOnlineStatus( onlineId, false );
-}
 
 //============================================================================
+<<<<<<< Updated upstream
 void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     VxGUID onlineId = netIdent->getMyOnlineId();
@@ -697,3 +694,9 @@ void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktB
         LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupUserAnnounce hostId not found" );
     }
 }
+=======
+void ConnectIdListMgr::onUserOffline( VxGUID& onlineId )
+{
+    announceOnlineStatus( onlineId, false );
+}
+>>>>>>> Stashed changes

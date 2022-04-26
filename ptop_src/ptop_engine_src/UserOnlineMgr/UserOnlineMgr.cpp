@@ -315,3 +315,38 @@ void UserOnlineMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, 
 {
     // TODO BRJ handle disconnect
 }
+
+//============================================================================
+void UserOnlineMgr::onUserOffline( VxGUID& onlineId )
+{
+    lockResources();
+    User* user = findUser( onlineId );
+    if( !user )
+    {
+        unlockResources();
+
+        lockClientList();
+        std::vector<UserOnlineCallbackInterface *>::iterator iter;
+        for( iter = m_UserOnlineClients.begin(); iter != m_UserOnlineClients.end(); ++iter )
+        {
+            UserOnlineCallbackInterface * client = *iter;
+            client->callbackUserOffline( onlineId );
+        }
+
+        unlockClientList();
+    }
+    else if( user->isInSession() )
+    {
+        lockClientList();
+        std::vector<UserOnlineCallbackInterface *>::iterator iter;
+        for( iter = m_UserOnlineClients.begin(); iter != m_UserOnlineClients.end(); ++iter )
+        {
+            UserOnlineCallbackInterface * client = *iter;
+            client->callbackUserOnlineState( user, false );
+        }
+
+        unlockClientList();
+        unlockResources();
+
+    }
+}

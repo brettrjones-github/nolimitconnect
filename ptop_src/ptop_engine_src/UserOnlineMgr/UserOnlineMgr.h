@@ -50,6 +50,7 @@ public:
     void                        onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
+    virtual void                onUserOffline( VxGUID& onlineId );
 
     User*                       findUser( VxGUID& onlineId );
 

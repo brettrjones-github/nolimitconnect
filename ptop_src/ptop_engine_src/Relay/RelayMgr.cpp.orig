@@ -87,6 +87,11 @@ void RelayMgr::onPktRelayConnectToUserReply( VxSktBase* sktBase, VxPktHdr* pktHd
 }
 
 //============================================================================
+<<<<<<< Updated upstream
+void RelayMgr::onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	LogMsg( LOG_VERBOSE, "RelayMgr::onRelayPktAnnounce %s", netIdent->getOnlineName() );
+=======
 bool RelayMgr::requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieInfo )
 {
     bool sentAnn{false};
@@ -99,10 +104,5 @@ bool RelayMgr::requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieI
     }
 
     return sentAnn;
-}
-
-//============================================================================
-void RelayMgr::onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
-{
-	LogMsg( LOG_VERBOSE, "RelayMgr::onRelayPktAnnounce %s", netIdent->getOnlineName() );
+>>>>>>> Stashed changes
 }

@@ -40,6 +40,7 @@ public:
 
     void                        userJoinedHost( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        userLeftHost( VxGUID& sktConnectId, GroupieId& groupieId );
+    void                        onUserOffline( VxGUID& onlineId );
 
     bool                        getConnections( HostedId& hostId, std::set<ConnectId>& retConnectIdSet );
 

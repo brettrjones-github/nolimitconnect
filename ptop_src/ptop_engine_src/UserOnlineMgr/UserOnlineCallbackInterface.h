@@ -23,6 +23,7 @@ class UserOnlineCallbackInterface
 {
 public:
     virtual void				callbackUserOnlineState( User* user, bool online ){};
+    virtual void				callbackUserOffline( VxGUID& onlineId ){};
 
     virtual void				callbackUserOnlineAdded( User* user ){};
     virtual void				callbackUserOnlineUpdated( User * user ){};

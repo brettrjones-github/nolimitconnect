@@ -59,13 +59,15 @@ AppletPopupMenu::AppletPopupMenu( AppCommon& app, QWidget * parent, VxGUID asset
     connect( ui.m_ExitPopupButton, SIGNAL( clicked() ), this, SLOT( closeApplet() ) );
     connect( ui.m_MenuItemList, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( itemClicked( QListWidgetItem* ) ) );
 
-    // NOT USED FOR POPUP  m_MyApp.activityStateChange( this, true );
+    // NOT USED FOR POPUP
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
 AppletPopupMenu::~AppletPopupMenu()
 {
-    // NOT USED FOR POPUP  m_MyApp.activityStateChange( this, false );
+    // NOT USED FOR POPUP
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================

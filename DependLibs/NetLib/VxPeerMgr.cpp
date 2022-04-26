@@ -19,6 +19,11 @@
 #include <CoreLib/VxGUID.h>
 #include <PktLib/VxPktHdr.h>
 
+#ifdef TARGET_OS_LINUX
+    // turn broke pipe exception on disconnected sockets into error instead
+    #include <signal.h>
+#endif
+
 namespace
 {
 	void VxPeerMgrRxCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
@@ -32,8 +37,20 @@ namespace
 }
 
 //============================================================================
+void sigpipe_handler(int unused)
+{
+    LogMsg( LOG_WARN, "SIGPIPE Error.. probably broke socket connection");
+}
+
+//============================================================================
 VxPeerMgr::VxPeerMgr()
 {
+#ifdef TARGET_OS_LINUX
+    // turn broke pipe exception on disconnected sockets into error instead
+    // signal( SIGPIPE, SIG_IGN );
+    sigaction(SIGPIPE, &((struct sigaction){sigpipe_handler}), NULL);
+#endif
+
 	setReceiveCallback( VxPeerMgrRxCallbackHandler, this );
 }
 
