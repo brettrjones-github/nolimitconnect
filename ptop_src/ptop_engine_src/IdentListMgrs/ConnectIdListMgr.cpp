@@ -672,7 +672,7 @@ void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktB
     lockList();
     for( auto& connectIdConst : m_ConnectIdList )
     {
-        ConnectId& connectId = const_cast<ConnectId&>(connectId);
+        ConnectId& connectId = const_cast<ConnectId&>(connectIdConst);
         if( IsHostARelayForUser( connectId.getHostType() ) )
         {
             if( connectId.getHostedId().getOnlineId() == connectId.getGroupieOnlineId() )

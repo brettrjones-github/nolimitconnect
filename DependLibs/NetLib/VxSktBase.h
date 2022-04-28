@@ -247,6 +247,7 @@ public:
     void                        setIsPeerPktAnnSet( bool isSet )                { m_IsPeerPktAnnSet = isSet; }  
     bool                        getIsPeerPktAnnSet( void )                      { return m_IsPeerPktAnnSet; }
     bool                        getPeerPktAnnCopy( PktAnnounce &peerAnn );
+	std::string					getPeerOnlineName();
 
     // returns peer online id. caller should check VxGUID::isVxGUIDValid() for validity
     VxGUID&                     getPeerOnlineId( void )							{ return m_PeerOnlineId; }

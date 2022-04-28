@@ -54,13 +54,24 @@ bool RelayMgr::handleRelayPkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 		sendRelayError( srcOnlineId, sktBase, eRelayErrUserNotOnline );
 		return true;
 	}
-
-	if( !sktBaseRelay->txPacket( destOnlineId, pktHdr ) )
+	else if( sktBaseRelay->getIsPeerPktAnnSet() && sktBaseRelay->getPeerOnlineId() != destOnlineId )
 	{
+		LogMsg( LOG_ERROR, "handleRelayPkt wrong socket found" );
 		sendRelayError( srcOnlineId, sktBase, eRelayErrUserNotOnline );
 		return true;
 	}
 
+	
+	if( 0 != sktBaseRelay->txPacket( destOnlineId, pktHdr ) )
+	{
+		LogMsg( LOG_VERBOSE, "handleRelayPkt FAILED sent relay pkt type %d len %d srcId %s %s destId %s %s", pktHdr->getPktType(), pktHdr->getPktLength(), 
+			srcOnlineId.toOnlineIdString().c_str(), sktBase->getPeerOnlineName().c_str(), destOnlineId.toOnlineIdString().c_str(), sktBaseRelay->getPeerOnlineName().c_str() );
+		sendRelayError( srcOnlineId, sktBase, eRelayErrUserNotOnline );
+		return true;
+	}
+
+	LogMsg( LOG_VERBOSE, "handleRelayPkt sent relay pkt type %d len %d srcId %s %s destId %s %s", pktHdr->getPktType(), pktHdr->getPktLength(),
+		srcOnlineId.toOnlineIdString().c_str(), sktBase->getPeerOnlineName().c_str(), destOnlineId.toOnlineIdString().c_str(), sktBaseRelay->getPeerOnlineName().c_str() );
 	return true;
 }
 

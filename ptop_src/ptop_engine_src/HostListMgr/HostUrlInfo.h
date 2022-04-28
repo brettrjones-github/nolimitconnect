@@ -25,6 +25,7 @@ public:
 	HostUrlInfo() = default;
 	HostUrlInfo( const HostUrlInfo& rhs );
     HostUrlInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl, int64_t timestamp = 0 );
+    virtual ~HostUrlInfo() = default;
 
 	HostUrlInfo&				operator=( const HostUrlInfo& rhs ); 
 

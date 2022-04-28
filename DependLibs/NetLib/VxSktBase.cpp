@@ -1517,6 +1517,19 @@ bool VxSktBase::getPeerPktAnnCopy( PktAnnounce& peerAnn )
 }
 
 //============================================================================
+std::string VxSktBase::getPeerOnlineName()
+{
+	if( getIsPeerPktAnnSet() )
+	{
+		return getPeerPktAnn().getOnlineName();
+	}
+	else
+	{
+		return "Peer Name Not Set";
+	}
+}
+
+//============================================================================
 void VxSktBase::dumpSocketStats( const char* reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
