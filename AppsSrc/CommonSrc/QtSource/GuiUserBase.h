@@ -41,10 +41,14 @@ public:
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
+    bool                        updateIsRelayed( void );
+    virtual bool                setRelayStatus( bool isRelayed ); // return true if relay state changed.. derived classes should override
+    bool                        isRelayed( void )                       { return m_IsRelayed; }
+
     bool                        updateIsOnline( void );
     virtual bool                setOnlineStatus( bool isOnline ); // return true if online state changed.. derived classes should override
-
     bool                        isOnline( void )                        { return m_IsOnline; }
+
     VxGUID&                     getMyOnlineId( void )                   { return m_OnlineId; }
     std::string                 getOnlineName( void )                   { return std::string( m_NetIdent.getOnlineName() ); }
     std::string                 getOnlineDescription( void )            { return std::string( m_NetIdent.getOnlineDescription() ); }
@@ -101,5 +105,6 @@ protected:
     VxGUID                      m_SessionId;
     uint64_t                    m_LastUpdateTime{ 0 };
     bool                        m_IsOnline{ false };
+    bool                        m_IsRelayed{ false };
     std::set<EHostType>         m_HostSet;
 };

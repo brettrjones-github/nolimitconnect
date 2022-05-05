@@ -42,7 +42,7 @@ public:
     void                        userLeftHost( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        onUserOffline( VxGUID& onlineId );
 
-    bool                        getConnections( HostedId& hostId, std::set<ConnectId>& retConnectIdSet );
+    bool                        getConnections( HostedId& hostId, std::set<ConnectId>& retConnectIdSet, std::set<ConnectId>& relayConnectIdSet );
 
     VxSktBase*                  findHostConnection( GroupieId& groupieId, bool tryPeerFirst = false );
     VxSktBase*                  findRelayMemberConnection( VxGUID& onlineId );
@@ -54,7 +54,7 @@ public:
     virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
     VxSktBase*                  findSktBase( VxGUID& connectId );
 
-    void                        addConnection( VxGUID& sktConnectId, GroupieId& groupieId );
+    void                        addConnection( VxGUID& sktConnectId, GroupieId& groupieId, bool relayed );
     void                        removeConnection( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        addConnectionReason( VxGUID& sktConnectId, EConnectReason connectReason );
     void                        removeConnectionReason( VxGUID& sktConnectId, EConnectReason connectReason );
@@ -62,19 +62,22 @@ public:
     void                        disconnectIfIsOnlyUser( GroupieId& groupieId );
 
     virtual void                onConnectionLost( VxGUID& sktConnectId );
-    virtual void                onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual void                onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent, bool relayed );
 
     void                        wantConnectIdListCallback( ConnectIdListCallbackInterface* client, bool enable );
 
 protected:
-    virtual void                onUserOnlineStatusChange( GroupieId& groupieId, bool isOnline );
     virtual void                onUserOnlineStatusChange( VxGUID& onlineId, bool isOnline );
+    virtual void                onUserOnlineStatusChange( ConnectId& connectId, bool isOnline );
+    virtual void                onUserRelayStatusChange( ConnectId& connectId, bool isRelayed );
 
     virtual void                onNewConnection( ConnectId& connectId );
     virtual void                onLostConnection( ConnectId& connectId );
 
     void                        announceOnlineStatus( VxGUID& onlineId, bool isOnline );
-    void                        announceConnectionStatus( ConnectId& connectId, bool isConnected );
+    void                        announceOnlineStatus( ConnectId& connectId, bool isConnected );
+    void                        announceRelayStatus( ConnectId& connectId, bool isRelayed );
+
     void                        announceConnectionReason( VxGUID& sktConnectId, EConnectReason connectReason, bool enableReason );
     void                        announceConnectionLost( VxGUID& sktConnectId );
 
@@ -82,6 +85,7 @@ protected:
     void						unlockClientList( void ) { m_ClientCallbackMutex.unlock(); }
 
     std::set<ConnectId>         m_ConnectIdList;
+    std::set<ConnectId>         m_RelayedIdList;
     std::map<VxGUID, std::set<EConnectReason>>      m_ConnectReasonList;
     std::vector<ConnectIdListCallbackInterface*>    m_CallbackClients;
     VxMutex						m_ClientCallbackMutex;

@@ -118,6 +118,7 @@ enum EThemeColorRole
 
 	eLayerOverlayColor,
 	eLayerNotifyOnlineColor, 
+	eLayerNotifyRelayedColor,
 	eLayerNotifyOfflineColor,
     eLayerNotifyOfferColor, 
     eLayerNotifyForbiddenColor, 

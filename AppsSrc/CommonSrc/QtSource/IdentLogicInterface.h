@@ -99,6 +99,6 @@ protected slots:
 
 protected:
 	AppCommon&					m_MyApp;
-	GuiUser*					m_NetIdent{ nullptr };
+	GuiUser*					m_GuiUser{ nullptr };
 	bool						m_DisableFriendshipChange{ false };
 };

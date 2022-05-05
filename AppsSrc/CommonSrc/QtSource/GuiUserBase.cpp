@@ -45,6 +45,7 @@ GuiUserBase::GuiUserBase( const GuiUserBase& rhs )
     , m_OnlineId( rhs.m_OnlineId )
     , m_SessionId( rhs.m_SessionId )
     , m_IsOnline( rhs.m_IsOnline )
+    , m_IsRelayed( rhs.m_IsRelayed )
     , m_HostSet( rhs.m_HostSet )
 {
 }
@@ -53,6 +54,25 @@ GuiUserBase::GuiUserBase( const GuiUserBase& rhs )
 bool GuiUserBase::isMyself( void )
 {
     return getMyOnlineId() == m_MyApp.getMyOnlineId();
+}
+
+//============================================================================
+bool GuiUserBase::updateIsRelayed( void )
+{
+    bool isRelayed = false;
+    if( isMyself() )
+    {
+        isRelayed = false;
+    }
+    else
+    {
+        isRelayed = m_MyApp.getConnectIdListMgr().isRelayed( getMyOnlineId() );
+    }
+
+    // some functions use the net ident as isOnline
+    m_NetIdent.setIsRelayed( isRelayed );
+    m_IsRelayed = isRelayed;
+    return isRelayed;
 }
 
 //============================================================================
@@ -70,6 +90,7 @@ bool GuiUserBase::updateIsOnline( void )
 
     // some functions use the net ident as isOnline
     m_NetIdent.setIsOnline( isOnline );
+    m_IsOnline = isOnline;
     return isOnline;
 }
 
@@ -107,6 +128,18 @@ void GuiUserBase::setNetIdent( VxNetIdent* netIdent )
     {
         LogMsg( LOG_ERROR, "GuiUserBase::setNetIdent null ident" );
     }
+}
+
+//============================================================================
+bool GuiUserBase::setRelayStatus( bool isRelayed )
+{
+    bool relayStateChanged = isRelayed != m_IsRelayed;
+    if( relayStateChanged )
+    {
+        m_IsRelayed = isRelayed;
+    }
+
+    return relayStateChanged;
 }
 
 //============================================================================

@@ -59,17 +59,21 @@ public:
 
     virtual void				toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline );
 
+    bool                        isUserRelayed( VxGUID& onlineId );
+    bool                        isUserOnline( VxGUID& onlineId );
     bool                        isUserInSession( VxGUID& onlineId );
     void                        setUserOffline( VxGUID& onlineId );
 
     void                        onUserAdded( GuiUser* user );
     void                        onUserRemoved( VxGUID& onlineId );
     void                        onUserUpdated( GuiUser* user );
+    void                        onUserRelayStatusChange( GuiUser* user );
     void                        onUserOnlineStatusChange( GuiUser* user );
     void                        onMyIdentUpdated( GuiUser* user );
 
     GuiUser*                    getUser( VxGUID& onlineId );
     GuiUser*                    getOrQueryUser( VxGUID& onlineId );
+    std::string                 getUserOnlineName( VxGUID& onlineId );
     
     std::map<VxGUID, GuiUser*>& getUserList( void )             { return m_UserList; }
 
@@ -78,7 +82,8 @@ public:
 
     void                        wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
-    void                        checkOnlineStatusChange( VxGUID& onlineId, bool isOnline );
+    void                        connnectIdRelayStatusChange( VxGUID& onlineId, bool isRelayed );
+    void                        connnectIdOnlineStatusChange( VxGUID& onlineId, bool isOnline );
 
 signals:
     void				        signalMyIdentUpdated( GuiUser* guiUser );
@@ -87,6 +92,7 @@ signals:
     void				        signalUserAdded( GuiUser* guiUser ); 
     void				        signalUserRemoved( VxGUID onlineId ); 
     void                        signalUserUpdated( GuiUser* guiUser );
+    void                        signalUserRelayStatus( GuiUser* guiUser, bool isRelayed );
     void                        signalUserOnlineStatus( GuiUser* guiUser, bool isOnline );
 
     void				        signalInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );

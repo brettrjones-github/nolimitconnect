@@ -168,6 +168,9 @@ public:
     void						setGender( uint8_t gender )                         { m_u8Gender = gender; }
     uint8_t					    getGender( void )                                   { return m_u8Gender; }
 
+    void						setIsRelayed( bool isRelayed )                      { m_IsRelayed = (uint8_t)isRelayed; }
+    bool						isRelayed( void )                                   { return (bool)m_IsRelayed; }
+
 	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
 	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
 
@@ -244,7 +247,7 @@ protected:
     uint8_t					    m_ContentType{ 0 };         // preferred content type
     uint8_t						m_u8Age{ 0 };
     uint8_t						m_u8Gender{ 0 };
-	uint8_t					    m_IdentRes1{ 0 };
+	uint8_t					    m_IsRelayed{ 0 };
     uint32_t					m_IdentRes2{ 0 };
     int64_t	    				m_IdentRes3{ 0 };
 

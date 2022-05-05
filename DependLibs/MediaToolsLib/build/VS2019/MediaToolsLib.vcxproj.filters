@@ -13,22 +13,10 @@
     <ClInclude Include="..\..\..\..\dlfcn.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\langinfo.h">

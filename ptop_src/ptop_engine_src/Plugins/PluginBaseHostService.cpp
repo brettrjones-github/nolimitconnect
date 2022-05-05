@@ -206,7 +206,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
 
         if( ePluginAccessOk == joinReply.getAccessState() )
         {
-            m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+            m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
 
             m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
         }
@@ -217,14 +217,14 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
                 if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
-                    m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+                    m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
                     joinReply.setAccessState( ePluginAccessOk );
                     m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
                 }
                 else
                 {
                     // add to join request list
-                    m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+                    m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
                     m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
                 }
             }

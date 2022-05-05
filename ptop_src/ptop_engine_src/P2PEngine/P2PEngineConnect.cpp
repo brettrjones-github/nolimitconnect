@@ -338,7 +338,7 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 
 		if( !sktBase->isTempConnection() )
 		{
-			getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+			getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
 		}
 	}
 }

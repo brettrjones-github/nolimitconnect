@@ -39,6 +39,18 @@ GuiUser::GuiUser( const GuiUser& rhs )
 }
 
 //============================================================================
+bool GuiUser::setRelayStatus( bool isRelayed )
+{
+    if( GuiUserBase::setRelayStatus( isRelayed ) )
+    {
+        m_UserMgr.onUserRelayStatusChange( this );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
 bool GuiUser::setOnlineStatus( bool isOnline )
 {
     if( GuiUserBase::setOnlineStatus( isOnline ) )
@@ -48,4 +60,22 @@ bool GuiUser::setOnlineStatus( bool isOnline )
     }
 
     return false;
+}
+
+//============================================================================
+bool GuiUser::canDirectConnectToUser( void )
+{
+    return m_NetIdent.isValidNetIdent() && (isOnline() || isNearby()) && !isRelayed();
+}
+
+//============================================================================
+VxGUID& GuiUser::getAvatarThumbGuid( void ) 
+{ 
+    if( !m_NetIdent.isValidNetIdent() )
+    {
+        VxGUID guid;
+        return guid;
+    }
+
+    return m_NetIdent.getAvatarThumbGuid();
 }

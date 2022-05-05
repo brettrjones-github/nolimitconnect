@@ -423,6 +423,34 @@ void GuiUserMgr::removeUser( VxGUID& onlineId )
 }
 
 //============================================================================
+bool GuiUserMgr::isUserRelayed( VxGUID& onlineId )
+{
+    GuiUser* guiUser = findUser( onlineId );
+    if( guiUser )
+    {
+        guiUser->updateIsRelayed();
+        return guiUser->isRelayed();
+
+    }
+
+    return false;
+}
+
+//============================================================================
+bool GuiUserMgr::isUserOnline( VxGUID& onlineId )
+{
+    GuiUser* guiUser = findUser( onlineId );
+    if( guiUser )
+    {
+        guiUser->updateIsOnline();
+        return guiUser->isOnline();
+
+    }
+
+    return false;
+}
+
+//============================================================================
 bool GuiUserMgr::isUserInSession( VxGUID& onlineId )
 {
     GuiUser* guiUser = findUser( onlineId );
@@ -444,6 +472,22 @@ GuiUser* GuiUserMgr::getUser( VxGUID& onlineId )
     }
 
     return guiUser;
+}
+
+//============================================================================
+std::string GuiUserMgr::getUserOnlineName( VxGUID& onlineId )
+{
+    GuiUser* guiUser = getUser( onlineId );
+    if( guiUser )
+    {
+        return guiUser->getOnlineName();
+    }
+    else
+    {
+        std::string onlineName( "Unknown User: " );
+        onlineName += onlineId.toOnlineIdString();
+        return onlineName;
+    }
 }
 
 //============================================================================
@@ -569,6 +613,18 @@ void GuiUserMgr::onUserRemoved( VxGUID& onlineId )
         }
 
         guiUserUpdateClientsUnlock();
+    }
+}
+
+//============================================================================
+void GuiUserMgr::onUserRelayStatusChange( GuiUser* user )
+{
+    if( isMessengerReady() )
+    {
+        bool isRelayed = m_MyApp.getConnectIdListMgr().isRelayed( user->getMyOnlineId() );
+        user->setOnlineStatus( isRelayed );
+        emit signalUserRelayStatus( user, isRelayed );
+        sendUserUpdatedToCallbacks( user );
     }
 }
 
@@ -722,10 +778,21 @@ void GuiUserMgr::toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline )
 }
 
 //============================================================================
-void GuiUserMgr::checkOnlineStatusChange( VxGUID& onlineId, bool isOnline )
+void GuiUserMgr::connnectIdRelayStatusChange( VxGUID& onlineId, bool isRelayed )
 {
     GuiUser* guiUser = findUser( onlineId );
-    if( guiUser && guiUser->isOnline() != isOnline )
+    if( guiUser )
+    {
+        guiUser->setRelayStatus( isRelayed );
+        sendUserUpdatedToCallbacks( guiUser );
+    }
+}
+
+//============================================================================
+void GuiUserMgr::connnectIdOnlineStatusChange( VxGUID& onlineId, bool isOnline )
+{
+    GuiUser* guiUser = findUser( onlineId );
+    if( guiUser )
     {
         guiUser->setOnlineStatus( isOnline );
         emit signalUserOnlineStatus( guiUser, isOnline );

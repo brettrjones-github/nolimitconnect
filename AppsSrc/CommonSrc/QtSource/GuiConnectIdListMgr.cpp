@@ -33,10 +33,11 @@ GuiConnectIdListMgr::GuiConnectIdListMgr( AppCommon& app )
 //============================================================================
 void GuiConnectIdListMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalOnlineStatusChange( VxGUID, bool ) ),              this, SLOT( slotInternalOnlineStatusChange( VxGUID, bool ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalConnectionStatusChange( ConnectId, bool ) ),       this, SLOT( slotInternalConnectionStatusChange( ConnectId, bool ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalConnectionReason( VxGUID, EConnectReason, bool ) ),      this, SLOT( slotInternalConnectionReason( VxGUID, EConnectReason, bool ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalConnectionLost( VxGUID ) ),                        this, SLOT( slotInternalConnectionLost( VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalRelayStatusChange(VxGUID,bool) ),                  this, SLOT( slotInternalRelayStatusChange(VxGUID,bool) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalOnlineStatusChange(VxGUID,bool) ),                 this, SLOT( slotInternalOnlineStatusChange(VxGUID,bool) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalConnectionStatusChange(ConnectId,bool) ),          this, SLOT( slotInternalConnectionStatusChange(ConnectId,bool) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalConnectionReason(VxGUID,EConnectReason,bool) ),    this, SLOT( slotInternalConnectionReason(VxGUID,EConnectReason,bool) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalConnectionLost(VxGUID) ),                          this, SLOT( slotInternalConnectionLost(VxGUID) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getConnectIdListMgr().wantConnectIdListCallback( this, true );
 }
@@ -45,6 +46,12 @@ void GuiConnectIdListMgr::onAppCommonCreated( void )
 bool GuiConnectIdListMgr::isMessengerReady( void )
 {
     return m_MyApp.isMessengerReady();
+}
+
+//============================================================================
+void GuiConnectIdListMgr::callbackRelayStatusChange( VxGUID& onlineId, bool isRelayed )
+{
+    emit signalInternalRelayStatusChange( onlineId, isRelayed );
 }
 
 //============================================================================
@@ -72,8 +79,29 @@ void GuiConnectIdListMgr::callbackConnectionLost( VxGUID& sktConnectId )
 }
 
 //============================================================================
+void GuiConnectIdListMgr::slotInternalRelayStatusChange( VxGUID onlineId, bool isRelayed )
+{
+    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange isRelayed %d %s", isRelayed, m_MyApp.getUserMgr().getUserOnlineName( onlineId ) );
+    auto iter = m_RelayedIdList.find( onlineId );
+    if( iter != m_RelayedIdList.end() )
+    {
+        if( iter->second != isRelayed )
+        {
+            iter->second = isRelayed;
+            onRelayStatusChange( onlineId, isRelayed );
+        }
+    }
+    else
+    {
+        m_RelayedIdList[ onlineId ] = isRelayed;
+        onRelayStatusChange( onlineId, isRelayed );
+    }
+}
+
+//============================================================================
 void GuiConnectIdListMgr::slotInternalOnlineStatusChange( VxGUID onlineId, bool isOnline )
 {
+    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange  %s isOnline %d", m_MyApp.getUserMgr().getUserOnlineName( onlineId ), isOnline );
     auto iter = m_OnlineList.find( onlineId );
     if( iter != m_OnlineList.end() )
     {
@@ -93,6 +121,8 @@ void GuiConnectIdListMgr::slotInternalOnlineStatusChange( VxGUID onlineId, bool 
 //============================================================================
 void GuiConnectIdListMgr::slotInternalConnectionStatusChange( ConnectId connectId, bool isConnected )
 {
+    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange %s isConnect %d to %s", 
+        m_MyApp.getUserMgr().getUserOnlineName( connectId.getGroupieOnlineId() ), isConnected, GuiParams::describeHostType( connectId.getHostType() ) );
     if( isConnected )
     {
         if( m_ConnectIdList.find( connectId ) != m_ConnectIdList.end() )
@@ -149,9 +179,14 @@ void GuiConnectIdListMgr::slotInternalConnectionLost( VxGUID socketId )
 }
 
 //============================================================================
+void GuiConnectIdListMgr::onRelayStatusChange( VxGUID& onlineId, bool isRelayed )
+{
+    announceRelayStatusChange( onlineId, isRelayed );
+}
+
+//============================================================================
 void GuiConnectIdListMgr::onOnlineStatusChange( VxGUID& onlineId, bool isOnline )
 {
-    m_MyApp.getUserMgr().checkOnlineStatusChange( onlineId, isOnline );
     announceOnlineStatusChange( onlineId, isOnline );
 }
 
@@ -160,6 +195,7 @@ void GuiConnectIdListMgr::announceOnlineStatusChange( VxGUID& onlineId, bool isO
 {
     if( onlineId.isVxGUIDValid() )
     {
+        m_MyApp.getUserMgr().connnectIdOnlineStatusChange( onlineId, isOnline );
         for( auto iter = m_GuiConnectIdClientList.begin(); iter != m_GuiConnectIdClientList.end(); ++iter )
         {
             GuiConnectIdListCallback* client = *iter;
@@ -176,6 +212,31 @@ void GuiConnectIdListMgr::announceOnlineStatusChange( VxGUID& onlineId, bool isO
     else
     {
         LogMsg( LOG_ERROR, "GuiConnectIdListMgr::announceOnlineStatusChange invalid onlineId" );
+    }
+}
+
+//============================================================================
+void GuiConnectIdListMgr::announceRelayStatusChange( VxGUID& onlineId, bool isRelayed )
+{
+    if( onlineId.isVxGUIDValid() )
+    {
+        m_MyApp.getUserMgr().connnectIdRelayStatusChange( onlineId, isRelayed );
+        for( auto iter = m_GuiConnectIdClientList.begin(); iter != m_GuiConnectIdClientList.end(); ++iter )
+        {
+            GuiConnectIdListCallback* client = *iter;
+            if( client )
+            {
+                client->callbackRelayStatusChange( onlineId, isRelayed );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "GuiConnectIdListMgr::announceRelayStatusChange invalid callback" );
+            }
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiConnectIdListMgr::announceRelayStatusChange invalid onlineId" );
     }
 }
 
@@ -262,7 +323,7 @@ bool GuiConnectIdListMgr::isOnline( VxGUID& onlineId )
     bool isOnline{ false };
     if( onlineId.isVxGUIDValid() )
     {
-        std::map<VxGUID, bool>::iterator iter = m_OnlineList.find( onlineId );
+        auto iter = m_OnlineList.find( onlineId );
         if( iter != m_OnlineList.end() )
         {
             if( iter->second == true )
@@ -277,4 +338,24 @@ bool GuiConnectIdListMgr::isOnline( VxGUID& onlineId )
     }
 
     return isOnline;
+}
+
+
+//============================================================================
+bool GuiConnectIdListMgr::isRelayed( VxGUID& onlineId )
+{
+    bool isRelayed{ false };
+    if( onlineId.isVxGUIDValid() )
+    {
+        auto iter = m_RelayedIdList.find( onlineId );
+        if( iter != m_RelayedIdList.end() )
+        {
+            if( iter->second == true )
+            {
+                isRelayed = true;
+            }
+        }
+    }
+
+    return isRelayed;
 }

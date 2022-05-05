@@ -38,7 +38,7 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
-        m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {

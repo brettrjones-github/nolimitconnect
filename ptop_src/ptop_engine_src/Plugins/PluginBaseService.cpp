@@ -37,7 +37,8 @@ void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr )
     if( pktHdr && pktHdr->isValidPkt() )
     {
         std::set<ConnectId> connectIdSet;
-        if( m_Engine.getConnectIdListMgr().getConnections( getHostedId(), connectIdSet ) )
+        std::set<ConnectId> relayedIdSet;
+        if( m_Engine.getConnectIdListMgr().getConnections( getHostedId(), connectIdSet, relayedIdSet ) )
         {
             for( auto& connectId : connectIdSet )
             {

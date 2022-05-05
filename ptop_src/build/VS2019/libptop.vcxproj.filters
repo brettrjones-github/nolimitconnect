@@ -2084,9 +2084,6 @@
     <Filter Include="tools\windows">
       <UniqueIdentifier>{16628d55-e49a-4f48-a48a-c8506c589ef8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvConfig">
-      <UniqueIdentifier>{d7ad3967-add1-4a19-9bb0-41db4ec79fb6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="QtBuild">
       <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>
     </Filter>

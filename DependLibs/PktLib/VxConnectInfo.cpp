@@ -201,7 +201,7 @@ VxConnectIdent::VxConnectIdent( const VxConnectIdent& rhs )
 , m_ContentType( rhs.m_ContentType )
 , m_u8Age( rhs.m_u8Age )
 , m_u8Gender( rhs.m_u8Gender )
-, m_IdentRes1( rhs.m_IdentRes1 )
+, m_IsRelayed( rhs.m_IsRelayed )
 , m_IdentRes2( rhs.m_IdentRes2 )
 , m_NetHostGuid( rhs.m_NetHostGuid )
 , m_ChatRoomHostGuid( rhs.m_ChatRoomHostGuid )
@@ -233,7 +233,7 @@ bool VxConnectIdent::addToBlob( PktBlobEntry& blob )
     result &= blob.setValue( m_ContentType );
     result &= blob.setValue( m_u8Age );
     result &= blob.setValue( m_u8Gender );
-    result &= blob.setValue( m_IdentRes1 );
+    result &= blob.setValue( m_IsRelayed );
     result &= blob.setValue( m_IdentRes2 );
 
     result &= blob.setValue( m_NetHostGuid );
@@ -272,7 +272,7 @@ bool VxConnectIdent::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_ContentType );
     result &= blob.getValue( m_u8Age );
     result &= blob.getValue( m_u8Gender );
-    result &= blob.getValue( m_IdentRes1 );
+    result &= blob.getValue( m_IsRelayed );
     result &= blob.getValue( m_IdentRes2 );
 
     result &= blob.getValue( m_NetHostGuid );
@@ -311,7 +311,7 @@ VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
         m_ContentType = rhs.m_ContentType;
         m_u8Age = rhs.m_u8Age;
         m_u8Gender = rhs.m_u8Gender;
-        m_IdentRes1 = rhs.m_IdentRes1;
+        m_IsRelayed = rhs.m_IsRelayed;
         m_IdentRes2 = rhs.m_IdentRes2;
 
         m_NetHostGuid = rhs.m_NetHostGuid;

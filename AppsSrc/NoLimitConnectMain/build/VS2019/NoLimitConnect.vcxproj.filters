@@ -63,6 +63,9 @@
     <Filter Include="Source Files\AppCommon">
       <UniqueIdentifier>{0eae3425-fb95-47be-b8a5-839f43e4d17a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GuiConnectId">
+      <UniqueIdentifier>{10d7bfbc-85f1-4fdd-b2c2-200c099d8913}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -911,9 +914,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.h">
       <Filter>Source Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.h">
-      <Filter>Source Files\GuiUser</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.h">
       <Filter>Source Files</Filter>
     </QtMoc>
@@ -925,6 +925,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.h">
       <Filter>Source Files\GuiWebPage</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.h">
+      <Filter>Source Files\GuiConnectId</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1948,9 +1951,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.cpp">
-      <Filter>Source Files\GuiUser</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -2007,6 +2007,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonSignalsAndSlots.cpp">
       <Filter>Source Files\AppCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.cpp">
+      <Filter>Source Files\GuiConnectId</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2244,11 +2247,11 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h">
       <Filter>Source Files\GuiUser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h">
-      <Filter>Source Files\GuiUser</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiWebPageCallback.h">
       <Filter>Source Files\GuiWebPage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h">
+      <Filter>Source Files\GuiConnectId</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

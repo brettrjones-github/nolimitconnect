@@ -30,7 +30,10 @@ public:
 
     GuiUserMgr&                 getUserMgr( void )                          { return m_UserMgr; }
 
+    virtual bool                setRelayStatus( bool isOnline ) override;
     virtual bool                setOnlineStatus( bool isOnline ) override;
+    virtual bool                canDirectConnectToUser( void );
+    virtual VxGUID&             getAvatarThumbGuid( void );
 
 protected:
     GuiUserMgr&                 m_UserMgr;

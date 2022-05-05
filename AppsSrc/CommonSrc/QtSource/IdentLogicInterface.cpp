@@ -95,14 +95,76 @@ void IdentLogicInterface::setIdentWidgetSize( EButtonSize buttonSize )
 }
 
 //============================================================================
-void IdentLogicInterface::updateIdentity( GuiUser* netIdent, bool queryThumb )
+void IdentLogicInterface::updateIdentity( GuiUser* guiUser, bool queryThumb )
 {
-	if( netIdent )
+	if( guiUser )
 	{
-		m_NetIdent = netIdent;
-		if( m_NetIdent )
+		guiUser->updateIsOnline();
+		guiUser->updateIsRelayed();
+
+		m_GuiUser = guiUser;
+
+		bool isOnline = m_GuiUser->isOnline();
+		bool isRelayed = m_GuiUser->isRelayed();
+		bool isNearby = m_GuiUser->isNearby();
+		getIdentLine1()->setText( m_GuiUser->getOnlineName().c_str() );
+		getIdentLine2()->setText( m_GuiUser->getOnlineDescription().c_str() );
+		getIdentFriendshipButton()->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( m_GuiUser->getMyFriendshipToHim() ) );
+
+		if( m_GuiUser->getMyFriendshipToHim() == eFriendStateFriend && m_GuiUser->getHisFriendshipToMe() == eFriendStateFriend )
 		{
-			updateIdentity( &netIdent->getNetIdent(), queryThumb );
+			getIdentFriendshipButton()->setIcon( eMyIconFriendJoined );
+		}
+
+		if( getIdentPushToTalkButton() )
+		{
+			if( isOnline && m_GuiUser->isMyAccessAllowedFromHim( ePluginTypePushToTalk ) )
+			{
+				getIdentPushToTalkButton()->setVisible( true );
+			}
+			else
+			{
+				getIdentPushToTalkButton()->setVisible( false );
+			}
+		}
+
+		if( getIdentLine3() )
+		{
+			QString truths = QObject::tr( "Truths: " );
+			QString dares = QObject::tr( " Dares: " );
+			getIdentLine3()->setText( QString( truths + "%1" + dares + "%2" ).arg( m_GuiUser->getTruthCount() ).arg( m_GuiUser->getDareCount() ) );
+		}
+
+		if( queryThumb )
+		{
+			setIdentAvatarThumbnail( m_GuiUser->getAvatarThumbGuid() );
+		}
+
+		bool isMyself = m_GuiUser->getMyOnlineId() == m_MyApp.getMyOnlineId();
+		if( isMyself )
+		{
+			getIdentFriendshipButton()->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
+			getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
+			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( true );
+			getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+		}
+		else
+		{
+			EThemeColorRole onlineIndicatorColor{ eLayerNotifyOfflineColor };
+			if( isOnline )
+			{
+				onlineIndicatorColor = isRelayed ? eLayerNotifyRelayedColor : eLayerNotifyOnlineColor;
+			}
+
+			getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
+			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( onlineIndicatorColor ) );
+
+			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( isNearby || isOnline );
+			if( isNearby || isOnline )
+			{
+				getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( onlineIndicatorColor ) );
+			}
 		}
 	}
 }
@@ -115,13 +177,13 @@ void IdentLogicInterface::updateHosted( GuiHosted* guiHosted )
 		GuiUser* guiUser = guiHosted->getUser();
 		if( guiUser )
 		{
-			m_NetIdent = guiUser;
-			if( m_NetIdent )
+			m_GuiUser = guiUser;
+			if( m_GuiUser )
 			{
-				updateIdentity( m_NetIdent, false );
+				updateIdentity( m_GuiUser, false );
 			}
 
-			VxGUID thumbId = m_NetIdent->getHostThumbId( guiHosted->getHostType(), true );
+			VxGUID thumbId = m_GuiUser->getHostThumbId( guiHosted->getHostType(), true );
 			if( thumbId.isVxGUIDValid() )
 			{
 				setIdentAvatarThumbnail( thumbId );
@@ -140,8 +202,8 @@ void IdentLogicInterface::updateHosted( GuiHosted* guiHosted )
 //============================================================================
 void IdentLogicInterface::updateIdentity( GuiHostJoin* hostIdent, bool queryThumb )
 {
-	m_NetIdent = hostIdent->getUser();
-	updateIdentity( &hostIdent->getUser()->getNetIdent(), queryThumb );
+	m_GuiUser = hostIdent->getUser();
+	updateIdentity( hostIdent->getUser(), queryThumb );
 }
 
 //============================================================================
@@ -149,61 +211,7 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent, bool queryThumb 
 {
 	if( netIdent )
 	{
-		bool isOnline = m_MyApp.getConnectIdListMgr().isOnline( netIdent->getMyOnlineId() );
-		getIdentLine1()->setText( netIdent->getOnlineName() );
-		getIdentLine2()->setText( netIdent->getOnlineDescription() );
-		getIdentFriendshipButton()->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-
-		if( netIdent->getMyFriendshipToHim() == eFriendStateFriend && netIdent->getHisFriendshipToMe() == eFriendStateFriend )
-		{
-			getIdentFriendshipButton()->setIcon( eMyIconFriendJoined );		
-		}
-
-		if( getIdentPushToTalkButton() )
-		{
-			if( isOnline && netIdent->isMyAccessAllowedFromHim( ePluginTypePushToTalk ) )
-			{
-				getIdentPushToTalkButton()->setVisible( true );
-			}
-			else
-			{
-				getIdentPushToTalkButton()->setVisible( false );
-			}
-		}
-
-		if( getIdentLine3() )
-		{
-			QString truths = QObject::tr( "Truths: " );
-			QString dares = QObject::tr( " Dares: " );
-			getIdentLine3()->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
-		}
-
-		if( queryThumb )
-		{
-			setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
-		}
-
-		bool isMyself = netIdent->getMyOnlineId() == m_MyApp.getMyOnlineId();
-		if( isMyself )
-		{
-			getIdentFriendshipButton()->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
-			getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
-			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( true );
-			getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-		}
-		else
-		{
-			getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
-			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOnlineColor ) );
-
-			bool canDirectConnect = netIdent->canDirectConnectToUser();
-			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( canDirectConnect );
-			if( canDirectConnect )
-			{		
-				getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOnlineColor ) );
-			}
-		}
+		updateIdentity( m_MyApp.getUserMgr().getUser( netIdent->getMyOnlineId() ) );
 	}
 }
 
@@ -319,7 +327,7 @@ void IdentLogicInterface::slotIdentMenuButtonClicked( void )
 //============================================================================
 void IdentLogicInterface::onIdentFriendshipButtonClicked( void )
 {
-	if( m_NetIdent && !m_DisableFriendshipChange )
+	if( m_GuiUser && !m_DisableFriendshipChange )
 	{
 		QWidget* parentPage = GuiHelpers::findParentPage( dynamic_cast<QWidget*>(parent()) );
 		if( parentPage )
@@ -327,7 +335,7 @@ void IdentLogicInterface::onIdentFriendshipButtonClicked( void )
 			AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, parentPage ));
 			if( applet )
 			{
-				applet->setFriend( m_NetIdent );
+				applet->setFriend( m_GuiUser );
 			}
 		}
 	}
@@ -353,9 +361,9 @@ void IdentLogicInterface::onIdentPushToTalkButtonPressed( void )
 {
 	getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOff );
 	emit signalIdentPushToTalkButtonPressed();
-	if( m_NetIdent )
+	if( m_GuiUser )
 	{
-		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_NetIdent->getMyOnlineId(), true );
+		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), true );
 		if( result && getIdentPushToTalkButton() )
 		{
 			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
@@ -367,9 +375,9 @@ void IdentLogicInterface::onIdentPushToTalkButtonPressed( void )
 void IdentLogicInterface::onIdentPushToTalkButtonReleased( void )
 {
 	emit signalIdentPushToTalkButtonReleased();
-	if( m_NetIdent )
+	if( m_GuiUser )
 	{
-		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_NetIdent->getMyOnlineId(), false );
+		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), false );
 		if( result && getIdentPushToTalkButton() )
 		{
 			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
