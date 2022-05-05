@@ -81,7 +81,7 @@ void GuiConnectIdListMgr::callbackConnectionLost( VxGUID& sktConnectId )
 //============================================================================
 void GuiConnectIdListMgr::slotInternalRelayStatusChange( VxGUID onlineId, bool isRelayed )
 {
-    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange isRelayed %d %s", isRelayed, m_MyApp.getUserMgr().getUserOnlineName( onlineId ) );
+    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange isRelayed %d %s", isRelayed, m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
     auto iter = m_RelayedIdList.find( onlineId );
     if( iter != m_RelayedIdList.end() )
     {
@@ -101,7 +101,8 @@ void GuiConnectIdListMgr::slotInternalRelayStatusChange( VxGUID onlineId, bool i
 //============================================================================
 void GuiConnectIdListMgr::slotInternalOnlineStatusChange( VxGUID onlineId, bool isOnline )
 {
-    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange  %s isOnline %d", m_MyApp.getUserMgr().getUserOnlineName( onlineId ), isOnline );
+    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange  %s isOnline %d",
+            m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str(), isOnline );
     auto iter = m_OnlineList.find( onlineId );
     if( iter != m_OnlineList.end() )
     {
@@ -122,7 +123,8 @@ void GuiConnectIdListMgr::slotInternalOnlineStatusChange( VxGUID onlineId, bool 
 void GuiConnectIdListMgr::slotInternalConnectionStatusChange( ConnectId connectId, bool isConnected )
 {
     LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange %s isConnect %d to %s", 
-        m_MyApp.getUserMgr().getUserOnlineName( connectId.getGroupieOnlineId() ), isConnected, GuiParams::describeHostType( connectId.getHostType() ) );
+        m_MyApp.getUserMgr().getUserOnlineName( connectId.getGroupieOnlineId() ).c_str(), isConnected,
+            GuiParams::describeHostType( connectId.getHostType() ).toUtf8().constData() );
     if( isConnected )
     {
         if( m_ConnectIdList.find( connectId ) != m_ConnectIdList.end() )
