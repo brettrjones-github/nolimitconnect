@@ -26,6 +26,7 @@
 #include <ptop_src/ptop_engine_src/Network/NetworkDefs.h> 
 #include <ptop_src/ptop_engine_src/Network/ConnectRequest.h> 
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
+#include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <NetLib/VxSktBase.h>
@@ -328,17 +329,16 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		getFriendListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
 	}
 
-	GroupieId groupieId( poInfo->getMyOnlineId(), poInfo->getMyOnlineId(), poInfo->requiresRelay() ? eHostTypePeerUserRelayed : eHostTypePeerUserDirect );
-	if( isNearby || !poInfo->requiresRelay() )
+	if( isNearby )
 	{
-		if( isNearby )
-		{
-			getNearbyListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
-		}
+		getNearbyListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
+	}
 
-		if( !sktBase->isTempConnection() )
-		{
-			getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
-		}
+	if( !sktBase->isTempConnection() )
+	{	
+		GroupieId groupieId( poInfo->getMyOnlineId(), poInfo->getMyOnlineId(), eHostTypePeerUserDirect );
+		// make sure user identity is updated first before updating connection info
+		getUserOnlineMgr().onUserOnline( groupieId, sktBase, poInfo->getVxNetIdent() );
+		getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
 	}
 }

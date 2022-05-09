@@ -202,7 +202,7 @@ void GuiHostJoinMgr::slotInternalHostJoinOnlineState( GroupieId groupieId, EOnli
     bool isOnline = onlineState == eOnlineStateOnline ? true : false;
     if( guiHostJoin && isOnline != guiHostJoin->isOnline() )
     {
-        guiHostJoin->setOnlineStatus( isOnline );
+        guiHostJoin->setHostOnlineStatus( isOnline );
         emit signalHostJoinOnlineStatus( guiHostJoin, isOnline );
     }
 
@@ -285,7 +285,7 @@ void GuiHostJoinMgr::setHostJoinOffline( GroupieId& groupieId )
     GuiHostJoin* guiHostJoin = findHostJoin( groupieId );
     if( guiHostJoin )
     {
-        guiHostJoin->setOnlineStatus( false );
+        guiHostJoin->setHostOnlineStatus( false );
     }
 }
 

@@ -69,7 +69,7 @@ public:
 	void						setIdentOfferButtonVisible( bool visible );
 	void						setIdentMenuButtonVisible( bool visible );
 
-	void						setIdentAvatarThumbnail( VxGUID& thumbId );
+	void						setIdentAvatarThumbnail( VxGUID thumbId );
 	void						setIdentAvatarIcon( EMyIcons myIcon );
 	void						setIdentFriendshipIcon( EMyIcons myIcon );
 	void						setIdentOfferIcon( EMyIcons myIcon );

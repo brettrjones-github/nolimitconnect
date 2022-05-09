@@ -15,6 +15,7 @@
 
 #include "ListWidgetBase.h"
 #include "AppDefs.h"
+#include "GuiUserUpdateCallback.h"
 
 class GuiUserMgr;
 class GuiUserSessionBase;
@@ -22,12 +23,13 @@ class GuiUserListItem;
 class PluginSetting;
 class VxNetIdent;
 
-class GuiUserListWidget : public ListWidgetBase
+class GuiUserListWidget : public ListWidgetBase, public GuiUserUpdateCallback
 {
 	Q_OBJECT
 
 public:
 	GuiUserListWidget( QWidget * parent );
+    virtual ~GuiUserListWidget();
 
     void						setAppletType( EApplet appletType )     { m_AppletType = appletType; };
     EApplet						getAppletType( void )                   { return m_AppletType; };
@@ -51,6 +53,8 @@ public:
     void                        removeUser( VxGUID& onlineId );
     virtual GuiUserSessionBase* makeSession( GuiUser* user );
 
+    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
+
 signals:
     void                        signalUserListItemClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
     void                        signalAvatarButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
@@ -65,7 +69,7 @@ protected slots:
     void				        slotUserAdded( GuiUser* user ); 
     void				        slotUserRemoved( VxGUID onlineId ); 
     void                        slotUserUpdated( GuiUser* user );
-    void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
+    void                        slotUserOnlineStatus( GuiUser* user );
     
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotUserListItemClicked( GuiUserListItem* userItem );

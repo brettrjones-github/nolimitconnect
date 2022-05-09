@@ -134,7 +134,6 @@ private:
     bool 						m_IsOffer{ false };
 	bool 						m_IsMyself{ false };
 	bool 						m_IsServerSession{ false };
-	bool 						m_IsPluginSingleSession{ false };
     std::string 				m_strOfferText{ "" };
 	std::string 				m_strOfferFileName{ "" };
 	int							m_UserData{ 0 };

@@ -14,6 +14,7 @@
 //============================================================================
 
 #include <GuiInterface/IDefs.h>
+#include <stdint.h>
 
 class VxGUID;
 class ConnectId;
@@ -21,6 +22,7 @@ class ConnectId;
 class ConnectIdListCallbackInterface
 {
 public:
+    virtual void				callbackNearbyStatusChange( VxGUID& onlineId, int64_t nearbyTimeOrZeroIfNot ) {};
     virtual void				callbackRelayStatusChange( VxGUID& connectId, bool isRelayed ) {};
     virtual void				callbackRelayStatusChange( ConnectId& connectId, bool isRelayed ) {};
     virtual void				callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) {};

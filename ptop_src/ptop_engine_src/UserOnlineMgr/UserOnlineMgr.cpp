@@ -46,11 +46,8 @@ void UserOnlineMgr::callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline 
     User* user = findUser( onlineId );
     if( user && user->getNetIdent() )
     {
-        if( user->getNetIdent()->isOnline() != isOnline )
-        {
-            user->getNetIdent()->setIsOnline( isOnline );
-            announceUserOnlineState( user, isOnline );
-        }
+        user->getNetIdent()->setIsOnline( isOnline );
+        announceUserOnlineState( user, isOnline );
     }
 
     unlockResources();
@@ -186,6 +183,22 @@ void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, Ba
 //============================================================================
 void UserOnlineMgr::onUserOnline( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
+    bool wasAdded = false;
+    lockResources();
+    User* user = findUser( netIdent->getMyOnlineId() );
+    if( !user )
+    {
+        wasAdded = true;
+        user = new User( m_Engine, netIdent );
+        m_UserOnlineList.push_back( user );
+    }
+
+    unlockResources();
+    if( wasAdded )
+    {
+        m_Engine.getToGui().toGuiContactAdded( netIdent );
+    }
+
     callbackOnlineStatusChange( groupieId.getGroupieOnlineId(), true );
 }
 

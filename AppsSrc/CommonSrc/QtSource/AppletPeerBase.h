@@ -48,7 +48,7 @@ protected slots:
     void				        slotUserAdded( GuiUser* user ); 
     void				        slotUserRemoved( VxGUID onlineId ); 
     void                        slotUserUpdated( GuiUser* user );
-    void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
+    void                        slotUserOnlineStatus( GuiUser* user );
 
 private:
 	void						setupAppletPeerBase( void );

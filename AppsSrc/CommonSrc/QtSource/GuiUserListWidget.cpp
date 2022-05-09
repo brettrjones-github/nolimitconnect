@@ -35,19 +35,24 @@ GuiUserListWidget::GuiUserListWidget( QWidget * parent )
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
 
-    connect( &m_UserMgr, SIGNAL(signalMyIdentUpdated(GuiUser *)),	            this, SLOT(slotMyIdentUpdated(GuiUser *)) );
+    connect( &m_UserMgr, SIGNAL(signalMyIdentUpdated(GuiUser*)),	            this, SLOT(slotMyIdentUpdated(GuiUser*)) );
 
-    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)) );
+    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser*)),	                    this, SLOT(slotUserAdded(GuiUser*)) );
     connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)) );
-    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)) );
-    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)) );
+    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser*)),	                this, SLOT(slotUserUpdated(GuiUser*)) );
+    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser*)),	            this, SLOT(slotUserOnlineStatus(GuiUser*)) );
 
-    connect( &m_ThumbMgr, SIGNAL( signalThumbAdded( GuiThumb* ) ), this, SLOT( slotThumbAdded( GuiThumb* ) ) );
-    connect( &m_ThumbMgr, SIGNAL( signalThumbUpdated( GuiThumb* ) ), this, SLOT( slotThumbUpdated( GuiThumb* ) ) );
-    connect( &m_ThumbMgr, SIGNAL( signalThumbRemoved( VxGUID ) ), this, SLOT( slotThumbRemoved( VxGUID ) ) );
+    connect( &m_ThumbMgr, SIGNAL( signalThumbAdded(GuiThumb*) ),                this, SLOT( slotThumbAdded(GuiThumb*) ) );
+    connect( &m_ThumbMgr, SIGNAL( signalThumbUpdated(GuiThumb*) ),              this, SLOT( slotThumbUpdated(GuiThumb*) ) );
+    connect( &m_ThumbMgr, SIGNAL( signalThumbRemoved(VxGUID) ),                 this, SLOT( slotThumbRemoved(VxGUID) ) );
 
-    //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),                      this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),                this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
+}
+
+//============================================================================
+GuiUserListWidget::~GuiUserListWidget()
+{
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, false );
 }
 
 //============================================================================
@@ -405,7 +410,7 @@ void GuiUserListWidget::slotUserUpdated( GuiUser* user )
 }
 
 //============================================================================
-void GuiUserListWidget::slotUserOnlineStatus( GuiUser* user, bool isOnline )
+void GuiUserListWidget::slotUserOnlineStatus( GuiUser* user )
 {
     updateUser( user );
 }
@@ -604,7 +609,7 @@ bool GuiUserListWidget::isListViewMatch( GuiUser* user )
             return user->isNearby();
         }
 
-        if( user->isPeerHosted() && user->isFriend() )
+        if( user->isDirectConnect() && user->isFriend() )
         {
             return true;
         }
@@ -668,4 +673,10 @@ void GuiUserListWidget::updateThumb( GuiThumb* thumb )
     {
         userItem->updateThumb( thumb );
     }
+}
+
+//============================================================================
+void GuiUserListWidget::callbackOnUserUpdated( GuiUser* guiUser )
+{
+    updateUser( guiUser );
 }

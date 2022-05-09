@@ -18,6 +18,8 @@
 #include "GuiUserMgr.h"
 #include "GuiParams.h"
 
+#include <CoreLib/VxTime.h>
+
 //============================================================================
 GuiUserBase::GuiUserBase( AppCommon& app )
     : QWidget( &app )
@@ -26,14 +28,13 @@ GuiUserBase::GuiUserBase( AppCommon& app )
 }
 
 //============================================================================
-GuiUserBase::GuiUserBase( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online )
+GuiUserBase::GuiUserBase( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId )
     : QWidget( &app )
     , m_MyApp( app )
     , m_NetIdent( *netIdent )
     , m_OnlineId( netIdent->getMyOnlineId() )
     , m_SessionId( sessionId )
 {
-    setOnlineStatus( online );
 }
 
 
@@ -44,7 +45,8 @@ GuiUserBase::GuiUserBase( const GuiUserBase& rhs )
     , m_NetIdent( rhs.m_NetIdent )
     , m_OnlineId( rhs.m_OnlineId )
     , m_SessionId( rhs.m_SessionId )
-    , m_IsOnline( rhs.m_IsOnline )
+    , m_NearbyTimeOrZero( rhs.m_NearbyTimeOrZero )
+    , m_IsDirectConnect( rhs.m_IsDirectConnect )
     , m_IsRelayed( rhs.m_IsRelayed )
     , m_HostSet( rhs.m_HostSet )
 {
@@ -54,6 +56,55 @@ GuiUserBase::GuiUserBase( const GuiUserBase& rhs )
 bool GuiUserBase::isMyself( void )
 {
     return getMyOnlineId() == m_MyApp.getMyOnlineId();
+}
+
+//============================================================================
+bool GuiUserBase::updateIsNearby( void )
+{
+    int64_t nearbyTimeOrZeroIfNotd = 0;
+    if( !isMyself() )
+    {
+        m_NearbyTimeOrZero = m_MyApp.getConnectIdListMgr().isNearbyTime( getMyOnlineId() );
+    }
+
+    return isNearby();
+}
+
+//============================================================================
+bool GuiUserBase::setNearbyStatus( int64_t nearbyTimeOrZeroIfNotd ) // return false if nearbyTime is zero
+{
+    m_NearbyTimeOrZero = nearbyTimeOrZeroIfNotd;
+    return isNearby();
+}
+
+//============================================================================
+bool GuiUserBase::isNearby( void )
+{
+    return m_NearbyTimeOrZero && GetGmtTimeMs() - m_NearbyTimeOrZero < NEARBY_TIMEOUT_MS;
+}
+
+//============================================================================
+bool GuiUserBase::updateIsDirectConnect( void )
+{
+    bool isDirectConnect = false;
+    if( isMyself() )
+    {
+        isDirectConnect = true;
+    }
+    else
+    {
+        isDirectConnect = m_MyApp.getConnectIdListMgr().isDirectConnect( getMyOnlineId() );
+    }
+
+    m_IsDirectConnect = isDirectConnect;
+    return m_IsDirectConnect;
+}
+
+//============================================================================
+bool GuiUserBase::setDirectConnectStatus( bool isDirectConnect ) // return false if nearbyTime is zero
+{
+    m_IsDirectConnect = isDirectConnect;
+    return m_IsDirectConnect;
 }
 
 //============================================================================
@@ -69,29 +120,8 @@ bool GuiUserBase::updateIsRelayed( void )
         isRelayed = m_MyApp.getConnectIdListMgr().isRelayed( getMyOnlineId() );
     }
 
-    // some functions use the net ident as isOnline
-    m_NetIdent.setIsRelayed( isRelayed );
     m_IsRelayed = isRelayed;
     return isRelayed;
-}
-
-//============================================================================
-bool GuiUserBase::updateIsOnline( void )
-{
-    bool isOnline = false;
-    if( isMyself() )
-    {
-        isOnline = true;
-    }
-    else
-    {
-        isOnline = m_MyApp.getConnectIdListMgr().isOnline( getMyOnlineId() );
-    }
-
-    // some functions use the net ident as isOnline
-    m_NetIdent.setIsOnline( isOnline );
-    m_IsOnline = isOnline;
-    return isOnline;
 }
 
 //============================================================================
@@ -143,25 +173,9 @@ bool GuiUserBase::setRelayStatus( bool isRelayed )
 }
 
 //============================================================================
-bool GuiUserBase::setOnlineStatus( bool isOnline )
-{
-    bool onlineStateChanged = isOnline != m_IsOnline;
-    if( onlineStateChanged )
-    {
-        m_IsOnline = isOnline;
-        if( !m_IsOnline )
-        {
-            m_SessionId.clearVxGUID();
-        }
-    }
-
-    return onlineStateChanged;
-}
-
-//============================================================================
 bool GuiUserBase::isInSession( void )
 {
-    return m_IsOnline && m_SessionId.isVxGUIDValid();
+    return isOnline() && m_SessionId.isVxGUIDValid();
 }
 
 //============================================================================

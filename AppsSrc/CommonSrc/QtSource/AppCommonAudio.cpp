@@ -56,7 +56,7 @@ void AppCommon::slotEnableMicrophoneRecording( bool enableMicInput )
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
 		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
-		toGuiClient->toGuiWantMicrophoneRecording( m_MicrophoneHardwareEnabled );
+		toGuiClient->callbackToGuiWantMicrophoneRecording( m_MicrophoneHardwareEnabled );
 	}
 
 	LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d done", enableMicInput );
@@ -88,7 +88,7 @@ void AppCommon::slotEnableSpeakerOutput( bool enableSpeakerOutput )
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
 		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
-		toGuiClient->toGuiWantSpeakerOutput( m_SpeakerHardwareEnabled );
+		toGuiClient->callbackToGuiWantSpeakerOutput( m_SpeakerHardwareEnabled );
 	}
 }
 

@@ -49,10 +49,10 @@ void AppletPeerBase::onActivityFinish( void )
 //============================================================================
 void AppletPeerBase::setupAppletPeerBase( void )
 {
-    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)) );
-    connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)) );
-    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)) );
-    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)) );
+    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser*)),	                this, SLOT(slotUserAdded(GuiUser*)) );
+    connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                this, SLOT(slotUserRemoved(VxGUID)) );
+    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser*)),	            this, SLOT(slotUserUpdated(GuiUser*)) );
+    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser*)),			this, SLOT(slotUserOnlineStatus(GuiUser*)) );
 
 	m_Engine.fromGuiMuteMicrophone( false );
 	m_Engine.fromGuiMuteSpeaker( false );
@@ -78,10 +78,10 @@ void AppletPeerBase::slotUserUpdated( GuiUser* user )
 }
 
 //============================================================================
-void AppletPeerBase::slotUserOnlineStatus( GuiUser* user, bool isOnline )
+void AppletPeerBase::slotUserOnlineStatus( GuiUser* user )
 {
     LogMsg( LOG_DEBUG, "AppletPeerBase::slotUserOnlineStatus" );
-    if( !isOnline )
+    if( !user->isOnline() )
     {
         m_OfferSessionLogic.toGuiContactOffline( user );
     }

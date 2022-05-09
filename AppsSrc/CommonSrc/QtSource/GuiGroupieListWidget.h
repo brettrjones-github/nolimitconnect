@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "ListWidgetBase.h"
+#include "GuiUserUpdateCallback.h"
 
 class GroupieId;
 class GuiGroupieListItem;
@@ -23,12 +24,13 @@ class GuiGroupie;
 class GuiHostJoin;
 class GuiUserJoin;
 
-class GuiGroupieListWidget : public ListWidgetBase
+class GuiGroupieListWidget : public ListWidgetBase, public GuiUserUpdateCallback
 {
 	Q_OBJECT
 
 public:
     GuiGroupieListWidget( QWidget * parent );
+    virtual ~GuiGroupieListWidget();
 
     void                        clearHostList( void );
 
@@ -58,6 +60,9 @@ public:
     virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId );
     virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId );
+
+    // user manager update callbacks
+    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
 
     void                        updateUser( GuiUser* guiUser );
 

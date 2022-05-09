@@ -67,6 +67,7 @@ public:
     void                        onUserAdded( GuiUser* user );
     void                        onUserRemoved( VxGUID& onlineId );
     void                        onUserUpdated( GuiUser* user );
+    void                        onUserNearbyStatusChange( GuiUser* user );
     void                        onUserRelayStatusChange( GuiUser* user );
     void                        onUserOnlineStatusChange( GuiUser* user );
     void                        onMyIdentUpdated( GuiUser* user );
@@ -82,8 +83,9 @@ public:
 
     void                        wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
-    void                        connnectIdRelayStatusChange( VxGUID& onlineId, bool isRelayed );
-    void                        connnectIdOnlineStatusChange( VxGUID& onlineId, bool isOnline );
+    void                        connnectIdNearbyStatusChange( VxGUID& onlineId, uint64_t nearbyTimeOrZeroIfNot );
+    void                        connnectIdRelayStatusChange( VxGUID& onlineId );
+    void                        connnectIdOnlineStatusChange( VxGUID& onlineId );
 
 signals:
     void				        signalMyIdentUpdated( GuiUser* guiUser );
@@ -92,8 +94,7 @@ signals:
     void				        signalUserAdded( GuiUser* guiUser ); 
     void				        signalUserRemoved( VxGUID onlineId ); 
     void                        signalUserUpdated( GuiUser* guiUser );
-    void                        signalUserRelayStatus( GuiUser* guiUser, bool isRelayed );
-    void                        signalUserOnlineStatus( GuiUser* guiUser, bool isOnline );
+    void                        signalUserOnlineStatus( GuiUser* guiUser );
 
     void				        signalInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
     void				        signalInternalIndentListRemove( EUserViewType listType, VxGUID onlineId );

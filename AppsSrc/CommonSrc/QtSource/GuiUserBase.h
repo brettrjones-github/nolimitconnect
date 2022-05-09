@@ -26,9 +26,11 @@ class VxSktBase;
 class GuiUserBase : public QWidget
 {
 public:
+    static const int NEARBY_TIMEOUT_MS = 10000;
+
     GuiUserBase() = delete;
     GuiUserBase( AppCommon& app );
-    GuiUserBase( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online = false );
+    GuiUserBase( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId );
     GuiUserBase( const GuiUserBase& rhs );
 	virtual ~GuiUserBase() override = default;
 
@@ -41,13 +43,20 @@ public:
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
-    bool                        updateIsRelayed( void );
-    virtual bool                setRelayStatus( bool isRelayed ); // return true if relay state changed.. derived classes should override
-    bool                        isRelayed( void )                       { return m_IsRelayed; }
+    bool                        updateIsOnline( void )                  { updateIsDirectConnect(); updateIsRelayed(); return isOnline(); }
+    bool                        isOnline( void )                        { return isDirectConnect() || isRelayed(); }
 
-    bool                        updateIsOnline( void );
-    virtual bool                setOnlineStatus( bool isOnline ); // return true if online state changed.. derived classes should override
-    bool                        isOnline( void )                        { return m_IsOnline; }
+    bool                        updateIsNearby( void );
+    virtual bool                setNearbyStatus( int64_t nearbyTimeOrZeroIfNotd ); // return false if nearbyTime is zero
+    bool                        isNearby( void );
+
+    bool                        updateIsDirectConnect( void );
+    virtual bool                setDirectConnectStatus( bool isDirectConnect ); // return true if direct connect state changed.. derived classes can override
+    bool                        isDirectConnect( void )                 { return m_IsDirectConnect; }
+
+    bool                        updateIsRelayed( void );
+    virtual bool                setRelayStatus( bool isRelayed ); // return true if relay state changed.. derived classes can override
+    bool                        isRelayed( void )                       { return m_IsRelayed; }
 
     VxGUID&                     getMyOnlineId( void )                   { return m_OnlineId; }
     std::string                 getOnlineName( void )                   { return std::string( m_NetIdent.getOnlineName() ); }
@@ -73,16 +82,12 @@ public:
     bool                        isIgnored( void )                       { return m_NetIdent.isIgnored(); }
     bool                        isMyself( void );
 
+    bool                        isHosted( void )                        { return m_HostSet.size(); }
     bool                        isGroupHosted( void )                   { return m_HostSet.find( eHostTypeGroup ) != m_HostSet.end(); }
     bool                        isChatRoomHosted( void )                { return m_HostSet.find( eHostTypeChatRoom ) != m_HostSet.end(); }
     bool                        isRandomConnectHosted( void )           { return m_HostSet.find( eHostTypeRandomConnect ) != m_HostSet.end(); }
-    bool                        isPeerHosted( void )                    { return m_HostSet.find( eHostTypePeerUserRelayed ) != m_HostSet.end() ||
-                                                                            m_HostSet.find( eHostTypePeerUserDirect ) != m_HostSet.end(); }
 
     bool                        isInSession( void );
-    bool                        isNearby( void )                        { return m_NetIdent.isNearby(); }
-    bool                        requiresRelay( void )                   { return m_NetIdent.requiresRelay(); }
-    bool                        isMyPreferedRelay( void )               { return m_NetIdent.isMyPreferedRelay(); }
 
     uint32_t                    getTruthCount( void )                   { return m_NetIdent.getTruthCount(); }
     uint32_t                    getDareCount( void )                    { return m_NetIdent.getDareCount(); }
@@ -104,7 +109,8 @@ protected:
     VxGUID                      m_OnlineId;
     VxGUID                      m_SessionId;
     uint64_t                    m_LastUpdateTime{ 0 };
-    bool                        m_IsOnline{ false };
+    int64_t                     m_NearbyTimeOrZero{ 0 };
+    bool                        m_IsDirectConnect{ false };
     bool                        m_IsRelayed{ false };
     std::set<EHostType>         m_HostSet;
 };

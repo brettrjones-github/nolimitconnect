@@ -24,16 +24,14 @@ class GuiUser : public GuiUserBase
 public:
     GuiUser() = delete;
     GuiUser( AppCommon& app );
-    GuiUser( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online = false );
+    GuiUser( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId );
     GuiUser( const GuiUser& rhs );
 	virtual ~GuiUser() override = default;
 
     GuiUserMgr&                 getUserMgr( void )                          { return m_UserMgr; }
 
-    virtual bool                setRelayStatus( bool isOnline ) override;
-    virtual bool                setOnlineStatus( bool isOnline ) override;
     virtual bool                canDirectConnectToUser( void );
-    virtual VxGUID&             getAvatarThumbGuid( void );
+    virtual VxGUID              getAvatarThumbGuid( void );
 
 protected:
     GuiUserMgr&                 m_UserMgr;

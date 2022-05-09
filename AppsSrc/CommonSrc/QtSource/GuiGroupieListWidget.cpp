@@ -31,8 +31,16 @@ GuiGroupieListWidget::GuiGroupieListWidget( QWidget * parent )
 	// QListWidget::setSortingEnabled( true );
 	// sortItems( Qt::DescendingOrder );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT(slotItemClicked(QListWidgetItem*))) ;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT(slotItemClicked(QListWidgetItem*)));
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT(slotItemClicked(QListWidgetItem*)));
+
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
+}
+
+//============================================================================
+GuiGroupieListWidget::~GuiGroupieListWidget()
+{
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, false );
 }
 
 //============================================================================
@@ -507,4 +515,10 @@ void GuiGroupieListWidget::updateUser( GuiUser* guiUser )
             }
         }
     }
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackOnUserUpdated( GuiUser* guiUser )
+{
+    updateUser( guiUser );
 }

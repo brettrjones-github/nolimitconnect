@@ -74,7 +74,7 @@ void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
 		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
-		toGuiClient->toGuiWantVideoCapture( enableVidCapture );
+		toGuiClient->callbackToGuiWantVideoCapture( enableVidCapture );
 	}
 }
 

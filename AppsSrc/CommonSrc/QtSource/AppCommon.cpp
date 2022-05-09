@@ -1017,7 +1017,7 @@ void AppCommon::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * ms
 	}
 	else
 	{
-		StdStringFormat( formatedMsg, "#Relay %s\n", relayStatus );
+		StdStringFormat( formatedMsg, "#Relay %s", relayStatus );
 	}
 
 	emit signalLog( 0, formatedMsg.c_str() );

@@ -53,6 +53,13 @@ GuiUserJoinListWidget::GuiUserJoinListWidget( QWidget * parent )
     //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
     setUserJoinViewType( eUserJoinViewTypeEverybody );
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
+}
+
+//============================================================================
+GuiUserJoinListWidget::~GuiUserJoinListWidget()
+{
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, false );
 }
 
 //============================================================================
@@ -385,7 +392,7 @@ bool GuiUserJoinListWidget::isListViewMatch( GuiUser* user )
             return user->isRandomConnectHosted() && !user->isAnonymous();
         }
 
-        if( user->isPeerHosted() && user->isFriend() )
+        if( user->isDirectConnect() && user->isFriend() )
         {
             return true;
         }

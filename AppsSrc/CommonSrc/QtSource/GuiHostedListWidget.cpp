@@ -34,6 +34,13 @@ GuiHostedListWidget::GuiHostedListWidget( QWidget * parent )
 
     connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
     connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
+}
+
+//============================================================================
+GuiHostedListWidget::~GuiHostedListWidget()
+{
+    GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, false );
 }
 
 //============================================================================
@@ -468,7 +475,10 @@ void GuiHostedListWidget::onFavoriteButtonClicked( GuiHostedListItem* hostItem )
 //============================================================================
 void GuiHostedListWidget::callbackOnUserUpdated( GuiUser* guiUser )
 {
-
+    if( getIsHostView() )
+    {
+        updateUser( guiUser );
+    }
 }
 
 //============================================================================

@@ -258,7 +258,7 @@ void IdentLogicInterface::setIdentDirectConnectState( bool canDirectConnect )
 }
 
 //============================================================================
-void IdentLogicInterface::setIdentAvatarThumbnail( VxGUID& thumbId )
+void IdentLogicInterface::setIdentAvatarThumbnail( VxGUID thumbId )
 {
 	if( thumbId.isVxGUIDValid() )
 	{

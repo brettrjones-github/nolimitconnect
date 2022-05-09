@@ -30,7 +30,7 @@ class GuiHostJoin : public QWidget
 public:
     GuiHostJoin() = delete;
     GuiHostJoin( AppCommon& app );
-    GuiHostJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, bool online = false );
+    GuiHostJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId );
     GuiHostJoin( const GuiHostJoin& rhs );
 	virtual ~GuiHostJoin() = default;
 
@@ -45,9 +45,11 @@ public:
     bool                        setJoinState( EJoinState joinState );
     EJoinState                  getJoinState( void )                    { return m_JoinState; }
 
-    virtual bool                setOnlineStatus( bool isOnline );
-    bool                        isOnline( void )                        { return m_IsOnline; }
-    bool                        isInSession( void )                     { return m_IsOnline && m_SessionId.isVxGUIDValid(); }
+    bool                        isOnline( void );
+    bool                        isInSession( void )                     { return isOnline() && m_SessionId.isVxGUIDValid(); }
+
+    void                        setHostOnlineStatus( bool hostOnline )  { m_HostOnlineStatus = hostOnline; }
+    bool                        getHostOnlineStatus( void )             { return m_HostOnlineStatus; }
 
     int                         getHostRequestCount( void );
     int                         getRequestStateCount( EJoinState joinState );
@@ -61,6 +63,5 @@ protected:
     GroupieId                   m_GroupieId;
     EJoinState                  m_JoinState{ eJoinStateNone };
     VxGUID                      m_SessionId;
-    bool                        m_IsOnline{ false };
-
+    bool                        m_HostOnlineStatus{ false };
 };

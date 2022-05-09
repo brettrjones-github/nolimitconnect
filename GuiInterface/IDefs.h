@@ -415,12 +415,13 @@ enum EHostType
     eHostTypeUnknown = 0,
     eHostTypeConnectTest = 1,
     eHostTypeNetwork = 2,
-    eHostTypePeerUserRelayed = 3,
-    eHostTypePeerUserDirect = 4,
     // these hosts provide relay services and are announced to network hosts
-    eHostTypeGroup = 5,
-    eHostTypeChatRoom = 6,
-    eHostTypeRandomConnect = 7,
+    eHostTypeGroup = 3,
+    eHostTypeChatRoom = 4,
+    eHostTypeRandomConnect = 5,
+    // connections user<->user and user<->host
+    eHostTypePeerUserDirect = 6,
+    eHostTypePeerUserRelayed = 7, // TODO see if can be removed
 
     eMaxHostType
 };

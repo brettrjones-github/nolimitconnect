@@ -16,6 +16,7 @@
 #include "AppCommon.h"
 #include "GuiHostJoinMgr.h"
 #include "GuiParams.h"
+#include "GuiUser.h"
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h>
 
 //============================================================================
@@ -27,13 +28,12 @@ GuiHostJoin::GuiHostJoin( AppCommon& app )
 }
 
 //============================================================================
-GuiHostJoin::GuiHostJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, bool online )
+GuiHostJoin::GuiHostJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId )
     : QWidget( &app )
     , m_MyApp( app )
     , m_HostJoinMgr( app.getHostJoinMgr() )
     , m_GuiUser( guiUser )
     , m_SessionId( sessionId )
-    , m_IsOnline( online )
 {
 }
 
@@ -46,24 +46,13 @@ GuiHostJoin::GuiHostJoin( const GuiHostJoin& rhs )
     , m_GroupieId( rhs.m_GroupieId )
     , m_JoinState( rhs.m_JoinState )
     , m_SessionId( rhs.m_SessionId )
-    , m_IsOnline( rhs.m_IsOnline )  
 {
 }
 
 //============================================================================
-bool GuiHostJoin::setOnlineStatus( bool isOnline )
-{
-    if( m_IsOnline != isOnline )
-    {
-        m_IsOnline = isOnline;
-        if( m_GuiUser && m_GuiUser->setOnlineStatus( isOnline ) )
-        {
-            m_HostJoinMgr.onUserOnlineStatusChange( this, m_IsOnline );
-            return true;
-        }
-    }
-
-    return false;
+bool GuiHostJoin::isOnline( void )
+{ 
+    return m_GuiUser && m_GuiUser->isOnline(); 
 }
 
 //============================================================================

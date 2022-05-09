@@ -13,6 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 class VxGUID;
 class GuiUser;
 

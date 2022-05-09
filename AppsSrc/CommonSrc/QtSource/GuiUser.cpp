@@ -25,8 +25,8 @@ GuiUser::GuiUser( AppCommon& app )
 }
 
 //============================================================================
-GuiUser::GuiUser( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online )
-    : GuiUserBase( app, netIdent, sessionId, online )
+GuiUser::GuiUser( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId )
+    : GuiUserBase( app, netIdent, sessionId )
     , m_UserMgr( m_MyApp.getUserMgr() )
 {
 }
@@ -39,37 +39,13 @@ GuiUser::GuiUser( const GuiUser& rhs )
 }
 
 //============================================================================
-bool GuiUser::setRelayStatus( bool isRelayed )
-{
-    if( GuiUserBase::setRelayStatus( isRelayed ) )
-    {
-        m_UserMgr.onUserRelayStatusChange( this );
-        return true;
-    }
-
-    return false;
-}
-
-//============================================================================
-bool GuiUser::setOnlineStatus( bool isOnline )
-{
-    if( GuiUserBase::setOnlineStatus( isOnline ) )
-    {
-        m_UserMgr.onUserOnlineStatusChange( this );
-        return true;
-    }
-
-    return false;
-}
-
-//============================================================================
 bool GuiUser::canDirectConnectToUser( void )
 {
     return m_NetIdent.isValidNetIdent() && (isOnline() || isNearby()) && !isRelayed();
 }
 
 //============================================================================
-VxGUID& GuiUser::getAvatarThumbGuid( void ) 
+VxGUID GuiUser::getAvatarThumbGuid( void ) 
 { 
     if( !m_NetIdent.isValidNetIdent() )
     {

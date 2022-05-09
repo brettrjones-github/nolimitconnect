@@ -31,6 +31,7 @@ class GuiHostedListWidget : public ListWidgetBase, public GuiUserUpdateCallback
 
 public:
     GuiHostedListWidget( QWidget * parent );
+    virtual ~GuiHostedListWidget();
 
     void                        clearHostList( void );
 

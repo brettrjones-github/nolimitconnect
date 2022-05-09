@@ -464,51 +464,6 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
     QString strAction;
     switch( ePluginType )
     {
-    case ePluginTypeRelay:	// proxy plugin
-        switch( ePluginAccess )
-        {
-        case ePluginAccessOk:			// plugin access allowed
-            if( netIdent->requiresRelay() )
-            {
-                strAction = QObject::tr("Cannot be a relay (firewalled)");
-            }
-            else if( netIdent->isMyPreferedRelay() )
-            {
-                strAction = QObject::tr("Is my preferred relay");
-            }
-            else
-            {
-                strAction = QObject::tr("Can be preferred relay");
-            }
-            break;
-        case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = QObject::tr("Relay Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeRelay ) );
-            strAction += QObject::tr(" permission");
-            break;
-        case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-        case ePluginAccessNotSet:
-        case eMaxPluginAccessState:
-            strAction = QObject::tr("Relay is disabled");
-            break;
-        case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = QObject::tr("Relay unavailable due to ignore status");
-            break;
-        case ePluginAccessInactive:		// access denied because busy
-            strAction = QObject::tr("Relay unavailable because is inactive");
-            break;
-        case ePluginAccessBusy:		// access denied because busy
-            strAction = QObject::tr("Relay unavailable because is busy");
-            break;
-        case ePluginAccessRequiresDirectConnect:		
-            strAction = QObject::tr("Contact must have direct connection to be a relay");
-            break;
-        case ePluginAccessRequiresOnline:		
-            strAction = QObject::tr("Contact must be online be a relay");
-            break;
-        }
-        break;
-
     case ePluginTypeAboutMePageServer:	// web server plugin ( for profile web page )
         switch( ePluginAccess )
         {

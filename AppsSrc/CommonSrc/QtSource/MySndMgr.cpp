@@ -116,7 +116,7 @@ bool MySndMgr::sndMgrShutdown( void )
 }
 
 //============================================================================
-void MySndMgr::toGuiWantMicrophoneRecording( bool wantMicInput )
+void MySndMgr::callbackToGuiWantMicrophoneRecording( bool wantMicInput )
 {
 	if( wantMicInput )
 	{
@@ -129,7 +129,7 @@ void MySndMgr::toGuiWantMicrophoneRecording( bool wantMicInput )
 }
 
 //============================================================================
-void MySndMgr::toGuiWantSpeakerOutput( bool wantSpeakerOutput )
+void MySndMgr::callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput )
 {
 	enableSpeakerOutput( wantSpeakerOutput );
 }
