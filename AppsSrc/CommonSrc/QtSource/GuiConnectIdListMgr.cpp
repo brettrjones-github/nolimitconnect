@@ -154,8 +154,9 @@ void GuiConnectIdListMgr::slotInternalConnectionStatusChange( ConnectId connectI
         if( m_ConnectIdList.find( connectId ) != m_ConnectIdList.end() )
         {
             m_ConnectIdList.insert( connectId );
-            onConnectionStatusChange( connectId, isConnected );
         }
+
+        onConnectionStatusChange( connectId, isConnected );
     }
     else
     {
@@ -163,8 +164,9 @@ void GuiConnectIdListMgr::slotInternalConnectionStatusChange( ConnectId connectI
         if( iter != m_ConnectIdList.end() )
         {
             m_ConnectIdList.erase( iter );
-            onConnectionStatusChange( connectId, isConnected );
         }
+
+        onConnectionStatusChange( connectId, isConnected );
     }
 }
 

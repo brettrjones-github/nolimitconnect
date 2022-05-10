@@ -95,19 +95,18 @@ void AppCommon::toGuiContactAdded( VxNetIdent* netIdent )
         return;
     }
 
-    emit slotInternalToGuiContactAdded( *netIdent );
+    emit signalInternalToGuiContactAdded( *netIdent );
 }
 
 //============================================================================
 void AppCommon::slotInternalToGuiContactAdded( VxNetIdent netIdent )
 {
+    getUserMgr().toGuiContactAdded( &netIdent );
     for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
     {
         ToGuiActivityInterface* client = *iter;
         client->toGuiContactAdded( &netIdent );
     }
-
-    getUserMgr().toGuiContactAdded( &netIdent );
 }
 
 //============================================================================
@@ -218,13 +217,12 @@ void AppCommon::toGuiContactNameChange( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiContactNameChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactNameChange %s", netIdent.getOnlineName());
+    getUserMgr().toGuiContactNameChange( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactNameChange( &netIdent );
     }
-
-    getUserMgr().toGuiContactNameChange( &netIdent );
 }
 
 //============================================================================
@@ -249,13 +247,13 @@ void AppCommon::toGuiContactDescChange( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiContactDescChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactDescChange %s", netIdent.getOnlineName());
+
+    getUserMgr().toGuiContactDescChange( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactDescChange( &netIdent );
     }
-
-    getUserMgr().toGuiContactDescChange( &netIdent );
 }
 
 //============================================================================
@@ -280,13 +278,12 @@ void AppCommon::toGuiContactMyFriendshipChange( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiContactMyFriendshipChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactMyFriendshipChange %s", netIdent.getOnlineName());
+    getUserMgr().toGuiContactMyFriendshipChange( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactMyFriendshipChange( &netIdent );
     }
-
-    getUserMgr().toGuiContactMyFriendshipChange( &netIdent );
 }
 
 //============================================================================
@@ -311,13 +308,12 @@ void AppCommon::toGuiContactHisFriendshipChange( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiContactHisFriendshipChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactHisFriendshipChange %s", netIdent.getOnlineName());
+    getUserMgr().toGuiContactHisFriendshipChange( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactHisFriendshipChange( &netIdent );
     }
-
-    getUserMgr().toGuiContactHisFriendshipChange( &netIdent );
 }
 
 //============================================================================
@@ -342,13 +338,12 @@ void AppCommon::toGuiPluginPermissionChange( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiPluginPermissionChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiPluginPermissionChange %s", netIdent.getOnlineName());
+    getUserMgr().toGuiPluginPermissionChange( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiPluginPermissionChange( &netIdent );
     }
-
-    getUserMgr().toGuiPluginPermissionChange( &netIdent );
 }
 
 //============================================================================
@@ -373,13 +368,12 @@ void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 void AppCommon::slotInternalToGuiContactSearchFlagsChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactSearchFlagsChange %s", netIdent.getOnlineName()); 
+    getUserMgr().toGuiContactSearchFlagsChange( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactSearchFlagsChange( &netIdent );
-    }
-
-    getUserMgr().toGuiContactSearchFlagsChange( &netIdent );
+    }    
 }
 
 //============================================================================
@@ -456,13 +450,12 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 void AppCommon::slotInternalToGuiUpdateMyIdent( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiUpdateMyIdent %s", netIdent.getOnlineName());
+    getUserMgr().toGuiUpdateMyIdent( &netIdent );
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiUpdateMyIdent( &netIdent );
     }
-
-    getUserMgr().toGuiUpdateMyIdent( &netIdent );
 }
 
 //============================================================================

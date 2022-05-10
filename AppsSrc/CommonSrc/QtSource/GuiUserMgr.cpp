@@ -17,7 +17,6 @@
 #include "AppCommon.h"
 #include "AccountMgr.h"
 #include "GuiUserUpdateCallback.h"
-#include "GuiUserUpdateCallback.h"
 
 #include <CoreLib/VxGlobals.h>
 
@@ -104,11 +103,11 @@ void GuiUserMgr::toGuiContactAdded( VxNetIdent * netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
-        LogMsg( LOG_ERROR, "AppCommon::toGuiContactAdded invalid netIdent" );
+        LogMsg( LOG_ERROR, "GuiUserMgr::toGuiContactAdded invalid netIdent" );
         return;
     }
 
-    emit signalInternalUpdateUser( new VxNetIdent( *netIdent ) );
+    updateUser( netIdent );
 }
 
 //============================================================================

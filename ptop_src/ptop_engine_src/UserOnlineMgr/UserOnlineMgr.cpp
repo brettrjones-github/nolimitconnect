@@ -46,7 +46,6 @@ void UserOnlineMgr::callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline 
     User* user = findUser( onlineId );
     if( user && user->getNetIdent() )
     {
-        user->getNetIdent()->setIsOnline( isOnline );
         announceUserOnlineState( user, isOnline );
     }
 
@@ -56,7 +55,17 @@ void UserOnlineMgr::callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline 
 //============================================================================
 void UserOnlineMgr::callbackConnectionStatusChange( ConnectId& connectId, bool isConnected )
 {
+    if( isConnected )
+    {
+        lockResources();
+        User* user = findUser( connectId.getGroupieOnlineId() );
+        if( user && user->getNetIdent() )
+        {
+            announceUserOnlineState( user, isConnected );
+        }
 
+        unlockResources();
+    }
 }
 
 //============================================================================
@@ -181,7 +190,7 @@ void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, Ba
 }
 
 //============================================================================
-void UserOnlineMgr::onUserOnline( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+bool UserOnlineMgr::onUserOnline( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     bool wasAdded = false;
     lockResources();
@@ -200,6 +209,7 @@ void UserOnlineMgr::onUserOnline( GroupieId& groupieId, VxSktBase* sktBase, VxNe
     }
 
     callbackOnlineStatusChange( groupieId.getGroupieOnlineId(), true );
+    return wasAdded;
 }
 
 //============================================================================

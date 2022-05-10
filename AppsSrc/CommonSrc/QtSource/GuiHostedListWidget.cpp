@@ -32,8 +32,8 @@ GuiHostedListWidget::GuiHostedListWidget( QWidget * parent )
 	// QListWidget::setSortingEnabled( true );
 	// sortItems( Qt::DescendingOrder );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT( slotGuiHostedListItemClicked(QListWidgetItem*))) ;
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT( slotGuiHostedListItemClicked(QListWidgetItem*))) ;
     GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
 }
 

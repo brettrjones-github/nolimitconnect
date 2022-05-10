@@ -338,7 +338,11 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 	{	
 		GroupieId groupieId( poInfo->getMyOnlineId(), poInfo->getMyOnlineId(), eHostTypePeerUserDirect );
 		// make sure user identity is updated first before updating connection info
-		getUserOnlineMgr().onUserOnline( groupieId, sktBase, poInfo->getVxNetIdent() );
+		if( getUserOnlineMgr().onUserOnline( groupieId, sktBase, poInfo->getVxNetIdent() ) )
+		{
+			getThumbMgr().queryThumbIfNeeded( sktBase, poInfo->getVxNetIdent(), eHostTypePeerUserDirect );
+		}
+
 		getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
 	}
 }
