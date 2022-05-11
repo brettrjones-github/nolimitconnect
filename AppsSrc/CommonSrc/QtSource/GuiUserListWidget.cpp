@@ -131,12 +131,12 @@ GuiUserListItem* GuiUserListWidget::sessionToWidget( GuiUserSessionBase* userSes
 
     userItem->setUserSession( userSession );
 
-    connect( userItem, SIGNAL(signalGuiUserListItemClicked(GuiUserListItem *)),	    this, SLOT(slotUserListItemClicked(GuiUserListItem *)) );
-    connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserListItem *)),	    this, SLOT(slotAvatarButtonClicked(GuiUserListItem *)) );
-    connect( userItem, SIGNAL( signalOfferButtonClicked( GuiUserListItem* ) ),      this, SLOT( slotOfferButtonClicked( GuiUserListItem* ) ) );
-    connect( userItem, SIGNAL( signalPushToTalkButtonPressed( GuiUserListItem* ) ), this, SLOT( slotPushToTalkButtonPressed( GuiUserListItem* ) ) );
-    connect( userItem, SIGNAL( signalPushToTalkButtonReleased( GuiUserListItem* ) ), this, SLOT( slotPushToTalkButtonReleased( GuiUserListItem* ) ) );
-    connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserListItem *)),	        this, SLOT(slotMenuButtonClicked(GuiUserListItem *)) );
+    connect( userItem, SIGNAL(signalGuiUserListItemClicked(GuiUserListItem*)),	    this, SLOT(slotUserListItemClicked(GuiUserListItem*)) );
+    connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserListItem*)),	        this, SLOT(slotAvatarButtonClicked(GuiUserListItem*)) );
+    connect( userItem, SIGNAL( signalOfferButtonClicked(GuiUserListItem*) ),        this, SLOT( slotOfferButtonClicked(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalPushToTalkButtonPressed(GuiUserListItem*) ),   this, SLOT( slotPushToTalkButtonPressed(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalPushToTalkButtonReleased(GuiUserListItem*) ),  this, SLOT( slotPushToTalkButtonReleased(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserListItem*)),	        this, SLOT(slotMenuButtonClicked(GuiUserListItem*)) );
 
     userItem->updateWidgetFromInfo();
 
@@ -662,6 +662,8 @@ void GuiUserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, GuiU
                 userItem->setIsThumbUpdated( true );
             }
         }
+
+        userItem->updateWidgetFromInfo();
     }
 }
 

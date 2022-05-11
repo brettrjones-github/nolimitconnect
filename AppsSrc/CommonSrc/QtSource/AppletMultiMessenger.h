@@ -45,7 +45,7 @@ public:
     virtual void				onActivityFinish( void ) override;
 
 protected slots:
-    void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
+    void                        slotUserOnlineStatus( GuiUser* guiUser );
 
     void						slotEyeHostButtonClicked( void );
     void						slotEyeSessionButtonClicked( void );

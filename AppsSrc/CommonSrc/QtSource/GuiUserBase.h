@@ -43,7 +43,7 @@ public:
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
-    bool                        updateIsOnline( void )                  { updateIsDirectConnect(); updateIsRelayed(); return isOnline(); }
+    bool                        updateIsOnline( void )                  { bool isDirect = updateIsDirectConnect(); bool isRelay = updateIsRelayed(); return isDirect || isRelay; }
     bool                        isOnline( void )                        { return isDirectConnect() || isRelayed(); }
 
     bool                        updateIsNearby( void );

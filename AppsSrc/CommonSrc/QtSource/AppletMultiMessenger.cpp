@@ -108,6 +108,8 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     connect( ui.m_TrueOrDareButton,     SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
     connect( ui.m_SessionWidget,	    SIGNAL(signalUserInputButtonClicked()),	this,	SLOT(slotUserInputButtonClicked()) );
 
+	connect( &m_MyApp.getUserMgr(), SIGNAL( signalUserOnlineStatus(GuiUser*) ), this, SLOT( slotUserOnlineStatus(GuiUser*) ) );
+
 
     /*
     //setupMultiSessionActivity( netIdent );
@@ -238,7 +240,7 @@ void AppletMultiMessenger::showReasonAccessNotAllowed( void )
 }
 
 //============================================================================
-void AppletMultiMessenger::slotUserOnlineStatus( GuiUser* user, bool isOnline )
+void AppletMultiMessenger::slotUserOnlineStatus( GuiUser* user )
 {
     if( !user || !user->isValid() )
     {
@@ -249,7 +251,7 @@ void AppletMultiMessenger::slotUserOnlineStatus( GuiUser* user, bool isOnline )
     if( m_UserMgr.isUserInSession( user->getMyOnlineId() ) || user->isFriend() )
 	{
 		QString statMsg = user->getOnlineName().c_str();
-		statMsg += isOnline ? QObject::tr( " is online" ) : QObject::tr( " went offline" );
+		statMsg += user->isOnline() ? QObject::tr( " is online" ) : QObject::tr( " went offline" );
 		setStatusMsg( statMsg );
 
 		checkForSendAccess( false );

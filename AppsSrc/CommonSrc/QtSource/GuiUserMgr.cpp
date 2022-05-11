@@ -800,12 +800,11 @@ void GuiUserMgr::connnectIdRelayStatusChange( VxGUID& onlineId )
     GuiUser* guiUser = findUser( onlineId );
     if( guiUser )
     {
-        bool isRelayed = guiUser->isRelayed();
+        
         guiUser->updateIsRelayed();
-        if( isRelayed != guiUser->isRelayed() )
-        {
-            sendUserUpdatedToCallbacks( guiUser );
-        } 
+        bool isRelayed = guiUser->isRelayed();
+        LogMsg( LOG_VERBOSE, "GuiUserMgr::connnectIdRelayStatusChange is relayed ? %d %s", isRelayed, getUserOnlineName( onlineId ).c_str() );
+        sendUserUpdatedToCallbacks( guiUser );
     }
 }
 
@@ -815,12 +814,10 @@ void GuiUserMgr::connnectIdOnlineStatusChange( VxGUID& onlineId )
     GuiUser* guiUser = findUser( onlineId );
     if( guiUser )
     {
-        bool isOnline = guiUser->isOnline();
         guiUser->updateIsOnline();
+        bool isOnline = guiUser->isOnline();
+        LogMsg( LOG_VERBOSE, "GuiUserMgr::connnectIdOnlineStatusChange is online ? %d %s", isOnline, getUserOnlineName( onlineId ).c_str() );
         emit signalUserOnlineStatus( guiUser );
-        if( isOnline != guiUser->isOnline() )
-        {
-            sendUserUpdatedToCallbacks( guiUser );
-        }
+        sendUserUpdatedToCallbacks( guiUser );
     }
 }

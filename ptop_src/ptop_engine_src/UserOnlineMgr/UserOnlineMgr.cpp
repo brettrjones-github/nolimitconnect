@@ -55,17 +55,14 @@ void UserOnlineMgr::callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline 
 //============================================================================
 void UserOnlineMgr::callbackConnectionStatusChange( ConnectId& connectId, bool isConnected )
 {
-    if( isConnected )
+    lockResources();
+    User* user = findUser( connectId.getGroupieOnlineId() );
+    if( user && user->getNetIdent() )
     {
-        lockResources();
-        User* user = findUser( connectId.getGroupieOnlineId() );
-        if( user && user->getNetIdent() )
-        {
-            announceUserOnlineState( user, isConnected );
-        }
-
-        unlockResources();
+        announceUserOnlineState( user, isConnected );
     }
+
+    unlockResources();
 }
 
 //============================================================================
