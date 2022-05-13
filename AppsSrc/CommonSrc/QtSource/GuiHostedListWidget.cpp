@@ -52,14 +52,14 @@ GuiHostedListItem* GuiHostedListWidget::sessionToWidget( GuiHostedListSession* h
 
     hostItem->setHostSession( hostSession );
 
-    connect( hostItem, SIGNAL( signalGuiHostedListItemClicked( QListWidgetItem  *) ),	    this, SLOT( slotGuiHostedListItemClicked( QListWidgetItem * ) ) );
-    connect( hostItem, SIGNAL( signalIconButtonClicked( GuiHostedListItem * ) ),	        this, SLOT( slotIconButtonClicked( GuiHostedListItem * ) ) );
-    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( GuiHostedListItem* ) ),       this, SLOT( slotFriendshipButtonClicked( GuiHostedListItem* ) ) );
-    connect( hostItem, SIGNAL( signalMenuButtonClicked( GuiHostedListItem * ) ),	        this, SLOT( slotMenuButtonClicked( GuiHostedListItem * ) ) );
-    connect( hostItem, SIGNAL( signalJoinButtonClicked( GuiHostedListItem * ) ),		    this, SLOT( slotJoinButtonClicked( GuiHostedListItem * ) ) );
-    connect( hostItem, SIGNAL( signalConnectButtonClicked( GuiHostedListItem* ) ),          this, SLOT( slotConnectButtonClicked( GuiHostedListItem* ) ) );
-    connect( hostItem, SIGNAL( signalKickButtonClicked( GuiHostedListItem* ) ),             this, SLOT( slotKickButtonClicked( GuiHostedListItem* ) ) );
-    connect( hostItem, SIGNAL( signalFavoriteButtonClicked( GuiHostedListItem* ) ),         this, SLOT( slotFavoriteButtonClicked( GuiHostedListItem* ) ) );
+    connect( hostItem, SIGNAL( signalGuiHostedListItemClicked(QListWidgetItem*) ),	        this, SLOT( slotGuiHostedListItemClicked(QListWidgetItem*) ) );
+    connect( hostItem, SIGNAL( signalIconButtonClicked(GuiHostedListItem*) ),	            this, SLOT( slotIconButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalFriendshipButtonClicked(GuiHostedListItem*) ),         this, SLOT( slotFriendshipButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalMenuButtonClicked(GuiHostedListItem*) ),	            this, SLOT( slotMenuButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalJoinButtonClicked(GuiHostedListItem*) ),		        this, SLOT( slotJoinButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalConnectButtonClicked(GuiHostedListItem*) ),            this, SLOT( slotConnectButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalKickButtonClicked(GuiHostedListItem*) ),               this, SLOT( slotKickButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalFavoriteButtonClicked(GuiHostedListItem*) ),           this, SLOT( slotFavoriteButtonClicked(GuiHostedListItem*) ) );
 
 
     hostItem->updateWidgetFromInfo();
