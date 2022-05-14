@@ -92,10 +92,8 @@ enum EApplet
     eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
     eAppletServiceHostNetwork,      // network host service for a nolimitconnect network.. requires fixed ip address, group list hosts announce to network host
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
-    eAppletServiceRelay,            // network relay service for users without a open port
 
     eAppletServiceRandomConnect,     // connect to random person service
-    eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
 
     eMaxHostApplets,                // marker.. past here is service applets for user share services
 
@@ -121,7 +119,6 @@ enum EApplet
     eAppletClientHostNetwork,       // network host service for a nolimitconnect network.. requires fixed ip address, group list hosts announce to network host
 
     eAppletClientRandomConnectRelay, // connect to random person relay service for users without a open port
-    eAppletClientRelay,             // network relay service for users without a open port
     eAppletClientShareFiles,
     eAppletClientShareWebCam,
     eAppletClientStoryboard,
@@ -141,12 +138,9 @@ enum EApplet
     eAppletSettingsShareFiles,
     eAppletSettingsFileXfer,
     eAppletSettingsHostGroup,
-    // eAppletSettingsHostGroupListing,
     eAppletSettingsHostNetwork,
     eAppletSettingsMessenger,
     eAppletSettingsRandomConnect,
-    eAppletSettingsRandomConnectRelay,
-    // eAppletSettingsRelay,
     eAppletSettingsStoryboard,
     eAppletSettingsTruthOrDare,
     eAppletSettingsVideoPhone,

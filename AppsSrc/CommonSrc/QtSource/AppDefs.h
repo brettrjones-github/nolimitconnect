@@ -122,8 +122,6 @@ enum EApplet
     eAppletHostNetworkStatus,
 
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
-    eAppletServiceRelay,            // network relay service for users without a open port
-    eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
 
     eMaxHostApplets,                // marker.. end of hosting applets.. start of other services
 
@@ -178,7 +176,6 @@ enum EApplet
     eAppletSettingsMessenger,
     eAppletSettingsPushToTalk,
     eAppletSettingsRandomConnect,
-    eAppletSettingsRandomConnectRelay,
     eAppletSettingsStoryboard,
     eAppletSettingsTruthOrDare,
     eAppletSettingsVideoPhone,

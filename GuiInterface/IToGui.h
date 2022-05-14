@@ -78,8 +78,6 @@ public:
 
     /// Send is port open test state/status to GUI
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
-    /// Send relay status to GUI for display
-    virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) = 0;
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) = 0;
 	/// Send Network state to GUI for display

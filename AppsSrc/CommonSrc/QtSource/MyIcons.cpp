@@ -678,8 +678,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/service-connect-random.svg";
     case eMyIconServiceRandomConnectRelay:
         return ":/AppRes/Resources/service-connect-random-relay.svg";
-    case eMyIconServiceRelay:
-        return ":/AppRes/Resources/service-relay.svg";
 
     case eMyIconSettingsAboutMe:
         return ":/AppRes/Resources/share-about-me-settings.svg";
@@ -911,9 +909,6 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeMessenger:
         return eMyIconSettingsMessenger; // eMyIconMultiSession
 
-    case ePluginTypeRelay:
-        return eMyIconSettingsRelay;
-
     case ePluginTypeClientRandomConnect:
         return eMyIconSettingsRandomConnect;
 
@@ -1130,10 +1125,6 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
             return eMyIconServiceRandomConnectRelay;
         }
         break;
-
-	case ePluginTypeRelay:
-		return eMyIconUnknown;
-		break;
 
 	case ePluginTypeStoryboardServer:
 		switch( ePluginAccess )
@@ -1409,9 +1400,6 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
 
     case ePluginTypeHostRandomConnect:
         return eMyIconSettingsRandomConnectRelay;
-
-    case ePluginTypeRelay:
-        return eMyIconSettingsRelay;
 
 	case ePluginTypeStoryboardClient:
     case ePluginTypeStoryboardServer:

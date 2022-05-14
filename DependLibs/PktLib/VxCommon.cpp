@@ -191,8 +191,6 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeHostPeerUser, eFriendStateGuest );
 
     setPluginPermission( ePluginTypeNetworkSearchList, eFriendStateIgnore );
-
-    setPluginPermission( ePluginTypeRelay, eFriendStateIgnore );
 } 
 
 //============================================================================
@@ -381,8 +379,7 @@ EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType,
 		}
 
 		if( ( ePluginTypeAboutMePageServer == ePluginType )
-			|| ( ePluginTypeStoryboardServer == ePluginType )
-			|| ( ePluginTypeRelay == ePluginType ) )
+			|| ( ePluginTypeStoryboardServer == ePluginType ) )
 		{
 			if( false == isOnline() )
 			{
@@ -571,8 +568,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Random Connect Service";
     case ePluginTypeClientRandomConnect:
         return "Random Connect Client";
-	case ePluginTypeRelay:
-		return "Connection Relay";
+
 
     case ePluginTypeCameraService:
         return "Camera Feed Service";

@@ -107,9 +107,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareFiles.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnectRelay.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnect.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -159,12 +156,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceShareFiles.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceRelay.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnectRelay.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceHostNetwork.h">
@@ -1186,9 +1177,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceHostNetwork.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnectRelay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceShareFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1235,9 +1223,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnectRelay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareFiles.cpp">
@@ -1722,9 +1707,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp">
       <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceRelay.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp">
       <Filter>Source Files\GuiInterface\OsInterface</Filter>

@@ -146,11 +146,8 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceAvatarImage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceBase.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceBaseSettings.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRelay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceConnectionTest.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceHostNetwork.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRandomConnectRelay.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRelay.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceShareFiles.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceShareWebCam.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceStoryboard.h \
@@ -168,7 +165,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPushToTalk.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnect.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnectRelay.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsShareFiles.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsShareWebCam.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsStoryboard.h \
@@ -527,8 +523,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceConnectionTest.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsHostBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceHostNetwork.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRandomConnectRelay.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRelay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceShareFiles.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceShareWebCam.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceStoryboard.cpp \
@@ -545,7 +539,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPushToTalk.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnect.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnectRelay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsShareFiles.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsShareWebCam.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsStoryboard.cpp \

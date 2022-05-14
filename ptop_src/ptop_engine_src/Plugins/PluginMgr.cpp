@@ -39,7 +39,6 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h>
@@ -165,10 +164,6 @@ void PluginMgr::pluginMgrStartup( void )
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create random connect host plugin" );
     poPlugin = new PluginRandomConnectHost( m_Engine, *this, &this->m_PktAnn, ePluginTypeHostRandomConnect );
     m_aoPlugins.push_back( poPlugin );
-
-	// relay pre created by engine
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create relay plugin" );
-    m_aoPlugins.push_back( &m_Engine.getPluginServiceRelay() );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create storyboard server plugin" );
     poPlugin = new PluginStoryboardServer( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboardServer );

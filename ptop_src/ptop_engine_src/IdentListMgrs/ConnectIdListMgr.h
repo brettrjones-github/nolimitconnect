@@ -52,6 +52,7 @@ public:
     VxSktBase*                  findBestOnlineConnection( VxGUID& onlineId );
 
     virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
+    virtual bool                findRelayConnectionId( VxGUID& onlineId, VxGUID& retSktConnectId );
     VxSktBase*                  findSktBase( VxGUID& connectId );
 
     void                        addConnection( VxGUID& sktConnectId, GroupieId& groupieId, bool relayed );

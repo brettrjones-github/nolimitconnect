@@ -118,8 +118,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletServiceHostNetwork:         return eMyIconServiceHostNetwork;
 
     case eAppletServiceConnectionTest:      return eMyIconServiceConnectionTest;
-    case eAppletServiceRandomConnectRelay:  return eMyIconServiceRandomConnectRelay;
-    case eAppletServiceRelay:               return eMyIconServiceRelay;
 
     case eAppletServiceSettings:            return eMyIconUnknown;
 
@@ -138,7 +136,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletSettingsMessenger:          return eMyIconSettingsMessenger;
     case eAppletSettingsPushToTalk:         return eMyIconSettingsPushToTalk;
     case eAppletSettingsRandomConnect:      return eMyIconSettingsRandomConnect;
-    case eAppletSettingsRandomConnectRelay: return eMyIconSettingsRandomConnectRelay;
     case eAppletSettingsStoryboard:         return eMyIconSettingsShareStoryboard;
     case eAppletSettingsTruthOrDare:        return eMyIconSettingsTruthOrDare;
     case eAppletSettingsVideoPhone:         return eMyIconSettingsVideoPhone;
@@ -273,8 +270,6 @@ QString DescribeApplet( EApplet applet )
     case eAppletServiceShareFiles:			return QObject::tr( "Share Media Files" );
     case eAppletServiceShareWebCam:         return QObject::tr( "Share your web cam" );
     case eAppletServiceStoryboard:          return QObject::tr( "Share Story Page (Blog)" );
-    case eAppletServiceRandomConnectRelay:  return QObject::tr( "Service Random Person Relay" );
-    case eAppletServiceRelay:               return QObject::tr( "Service Relay" );
 
     case eAppletServiceSettings:            return QObject::tr( "Service Settings" );
 
@@ -293,8 +288,6 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );
     case eAppletSettingsPushToTalk:         return QObject::tr( "Push To Talk Settings" );
     case eAppletSettingsRandomConnect:      return QObject::tr( "Random Connect Service Settings" );
-    case eAppletSettingsRandomConnectRelay: return QObject::tr( "Random Connect Relay Service Settings" );
-    // case eAppletSettingsRelay:              return QObject::tr( "Relay Service Settings" );
     case eAppletSettingsStoryboard:         return QObject::tr( "Shared Story (Blog) Settings" );
     case eAppletSettingsTruthOrDare:        return QObject::tr( "Truth Or Dare Video Chat Game Settings" );
     case eAppletSettingsVideoPhone:         return QObject::tr( "Video Chat Settings" );

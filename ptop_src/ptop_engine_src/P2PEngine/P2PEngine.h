@@ -76,7 +76,6 @@ class NetworkMonitor;
 class NetServicesMgr;
 class PluginNetServices;
 class PluginServiceFileShare;
-class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
 class RunUrlAction;
@@ -179,7 +178,6 @@ public:
     virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
     virtual EFriendState		getPluginPermission( int iPluginType );
 
-	PluginServiceRelay&			getPluginServiceRelay( void )					{ return * m_PluginServiceRelay; }
 	PluginServiceFileShare&		getPluginServiceFileShare( void )				{ return * m_PluginServiceFileShare; }
 	PluginNetServices&			getPluginNetServices( void )					{ return * m_PluginNetServices; }
 
@@ -424,8 +422,7 @@ public:
 	int 						toGuiSendGuestList( int iSentCnt, int iMaxSendCnt );
 	int							toGuiSendAnonymousList( int iSentCnt, int iMaxSendCnt );
 	int							toGuiSendIgnoreList( int iSentCnt, int iMaxSendCnt );
-	int							toGuiSendMyProxiesList( int iSentCnt, int iMaxSendCnt );
-	int							toGuiSendAllProxiesList( int iSentCnt, int iMaxSendCnt );
+
 	//========================================================================
 	// asset mgr callbacks
 	//========================================================================
@@ -520,10 +517,6 @@ public:
                                                 EHackerReason   hackerReason,
                                                 VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
                                                 const char *	pMsg, ... );			// message about the offense
-
-	virtual void				onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
-	virtual void				onRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
-	virtual void				onRelayServiceUnavailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
 
 	//========================================================================
 	// pkt handlers
@@ -794,7 +787,6 @@ protected:
 	PluginMgr&					m_PluginMgr;
     PluginSettingMgr			m_PluginSettingMgr;
 
-	PluginServiceRelay *		m_PluginServiceRelay;
 	PluginServiceFileShare *	m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;

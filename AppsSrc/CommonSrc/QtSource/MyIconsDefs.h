@@ -328,9 +328,8 @@ enum EMyIcons
     eMyIconServiceShareFiles,
     eMyIconServiceShareStoryboard,
     eMyIconServiceShareWebCam,
-    eMyIconServiceRandomConnect,
-    eMyIconServiceRandomConnectRelay,
-    eMyIconServiceRelay,
+    eMyIconServiceRandomConnect, 
+	eMyIconServiceRandomConnectRelay,
 
     eMyIconSettingsAboutMe,
     eMyIconSettingsAvatarImage,

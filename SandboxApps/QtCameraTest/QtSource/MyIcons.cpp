@@ -626,10 +626,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/share-webcam.svg";
     case eMyIconServiceRandomConnect:
         return ":/AppRes/Resources/service-connect-random.svg";
-    case eMyIconServiceRandomConnectRelay:
-        return ":/AppRes/Resources/service-connect-random-relay.svg";
-    case eMyIconServiceRelay:
-        return ":/AppRes/Resources/service-relay.svg";
 
     case eMyIconSettingsAboutMe:
         return ":/AppRes/Resources/share-about-me-settings.svg";

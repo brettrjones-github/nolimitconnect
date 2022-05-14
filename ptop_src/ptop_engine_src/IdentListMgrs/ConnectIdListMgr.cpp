@@ -524,13 +524,13 @@ VxSktBase* ConnectIdListMgr::findPeerConnection( VxGUID& onlineId )
 
     VxSktBase* sktBase = nullptr;
     GroupieId groupieIdDirect( onlineId, onlineId, eHostTypePeerUserDirect );
-    GroupieId groupieIdRelayed( onlineId, onlineId, eHostTypePeerUserRelayed );
+
     VxGUID connectId;
     if( findConnectionId( groupieIdDirect, connectId ) )
     {
         sktBase = findSktBase( connectId );
     }
-    else if( findConnectionId( groupieIdRelayed, connectId ) )
+    else if( findRelayConnectionId( onlineId, connectId ) )
     {
         sktBase = findSktBase( connectId );
     }
@@ -569,6 +569,31 @@ bool ConnectIdListMgr::findConnectionId( GroupieId& groupieId, VxGUID& retSktCon
                 foundConnection = retSktConnectId.isVxGUIDValid();
                 break;
             }
+        }
+    }
+
+    unlockList();
+    return foundConnection;
+}
+
+//============================================================================
+bool ConnectIdListMgr::findRelayConnectionId( VxGUID& onlineId, VxGUID& retSktConnectId )
+{
+    if( !onlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "ConnectIdListMgr::findRelayConnectionId invalid id" );
+        return false;
+    }
+
+    bool foundConnection = false;
+    lockList();
+    for( auto& connectId : m_RelayedIdList )
+    {
+        if( const_cast<ConnectId&>(connectId).getGroupieOnlineId() == onlineId )
+        {
+            retSktConnectId = const_cast<ConnectId&>(connectId).getSocketId();
+            foundConnection = retSktConnectId.isVxGUIDValid();
+            break;
         }
     }
 

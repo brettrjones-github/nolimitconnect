@@ -66,15 +66,18 @@ win32{
 unix:QMAKE_CXXFLAGS += -fpermissive
 unix:QMAKE_CXXFLAGS += -Wno-unused-variable
 unix:QMAKE_CXXFLAGS += -Wno-unused-function
+unix:QMAKE_CXXFLAGS += -Wno-unused-private-field
 unix:QMAKE_CXXFLAGS += -Wno-attributes
 unix:QMAKE_CXXFLAGS += -Wno-sign-compare
 unix:QMAKE_CXXFLAGS += -Wno-parentheses
 unix:QMAKE_CXXFLAGS += -Wno-missing-field-initializers
+
 unix:QMAKE_CXXFLAGS += -Wno-switch
 #unix:!android:QMAKE_CXXFLAGS += -Wno-#pragma-messages
 
 unix:QMAKE_CFLAGS += -Wno-unused-variable
 unix:QMAKE_CFLAGS += -Wno-unused-function
+unix:QMAKE_CFLAGS += -Wno-unused-private-field
 unix:QMAKE_CFLAGS += -Wno-attributes
 unix:QMAKE_CFLAGS += -Wno-sign-compare
 unix:QMAKE_CFLAGS += -Wno-parentheses

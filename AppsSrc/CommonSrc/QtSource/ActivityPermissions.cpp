@@ -55,9 +55,7 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 		ui.FriendsOnlyButton->setEnabled( false );
 		ui.GuestsAndFriendsButton->setEnabled( false );
 		break;
-	case ePluginTypeRelay:	// proxy plugin
-		ui.PermissionLabel->setText( "Who can use my device as a relay" );
-		break;
+
 	case ePluginTypePersonFileXfer:	
 		ui.PermissionLabel->setText( "Who can offer to send a file" );
 		break;

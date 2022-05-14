@@ -246,8 +246,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceBaseSettings.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceConnectionTest.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceHostNetwork.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnectRelay.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceRelay.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceShareFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceShareWebCam.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceStoryboard.cpp" />
@@ -265,7 +263,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnect.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnectRelay.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareWebCam.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsStoryboard.cpp" />
@@ -744,7 +741,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsStoryboard.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareWebCam.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareFiles.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnectRelay.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnect.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsPage.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsMessenger.h" />
@@ -762,8 +758,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceStoryboard.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceShareWebCam.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceShareFiles.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceRelay.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnectRelay.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceHostNetwork.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceConnectionTest.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceBaseSettings.h" />

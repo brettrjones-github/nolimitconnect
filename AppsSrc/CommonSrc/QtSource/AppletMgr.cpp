@@ -95,8 +95,6 @@
 #include "AppletServiceShareFiles.h"
 #include "AppletServiceShareWebCam.h"
 #include "AppletServiceStoryboard.h"
-#include "AppletServiceRandomConnectRelay.h"
-#include "AppletServiceRelay.h"
 
 #include "AppletSettingsAboutMe.h"
 #include "AppletSettingsAvatarImage.h"
@@ -111,7 +109,6 @@
 #include "AppletSettingsMessenger.h"
 #include "AppletSettingsPushToTalk.h"
 #include "AppletSettingsRandomConnect.h"
-#include "AppletSettingsRandomConnectRelay.h"
 #include "AppletSettingsShareFiles.h"
 #include "AppletSettingsShareWebCam.h"
 #include "AppletSettingsStoryboard.h"
@@ -321,8 +318,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletPermissionList:             appletDialog = new AppletPermissionList( m_MyApp, parent ); break;
     case eAppletServiceHostNetwork:         appletDialog = new AppletServiceHostNetwork( m_MyApp, parent ); break;
     
-    case eAppletServiceRandomConnectRelay:  appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent ); break;
-    case eAppletServiceRelay:               appletDialog = new AppletServiceRelay( m_MyApp, parent ); break;
     case eAppletServiceShareFiles:          appletDialog = new AppletServiceShareFiles( m_MyApp, parent ); break;
     case eAppletServiceShareWebCam:         appletDialog = new AppletServiceShareWebCam( m_MyApp, parent ); break;
     case eAppletServiceStoryboard:          appletDialog = new AppletServiceStoryboard( m_MyApp, parent ); break;
@@ -339,7 +334,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 
     case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
     case eAppletSettingsPushToTalk:         appletDialog = new AppletSettingsPushToTalk( m_MyApp, parent ); break;
-    case eAppletSettingsRandomConnectRelay: appletDialog = new AppletSettingsRandomConnectRelay( m_MyApp, parent ); break;
     case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
     case eAppletSettingsStoryboard:         appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;
     case eAppletSettingsTruthOrDare:        appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;

@@ -349,9 +349,7 @@ QString GuiParams::describeHostType( EHostType hostType )
     case eHostTypeChatRoom:		
         return QObject::tr( "Chat Room Host " );
     case eHostTypeRandomConnect:	
-        return QObject::tr( "Random Connect Host " );
-    case eHostTypePeerUserRelayed:		
-        return QObject::tr( "Peer User Relayed " );
+        return QObject::tr( "Random Connect Host " );;
     case eHostTypePeerUserDirect:
         return QObject::tr( "Peer User Direct " );
     case eHostTypeNetwork:
@@ -378,10 +376,6 @@ EHostType GuiParams::hostTypeToEnum( QString hostTypeDesc )
     else if( hostTypeDesc.contains( "Random Connect Host" ) )
     {
         hostType = eHostTypeRandomConnect;
-    }
-    else if( hostTypeDesc.contains( "Peer User Relayed" ) )
-    {
-        hostType = eHostTypePeerUserRelayed;
     }
     else if( hostTypeDesc.contains( "Peer User Direct" ) )
     {
@@ -1051,9 +1045,6 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr( "Shared Files Client" );
         break;
 
-    case ePluginTypeRelay:	// proxy plugin
-        strPluginType = QObject::tr("Relay");
-        break;
     default:
         strPluginType = QObject::tr("Unknown Plugin");
         LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin %d", ePluginType );
@@ -1170,11 +1161,6 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Messanger Service" ).toUtf8().constData();
         break;
 
-
-    case ePluginTypeRelay:
-        strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
-        break;
-
     case ePluginTypeStoryboardServer:
         strPluginDesc = QObject::tr( "Story Page (Blog) Service" ).toUtf8().constData();
         break;
@@ -1248,9 +1234,6 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
     QString strPluginOffer;
     switch( ePluginType )
     {
-    case ePluginTypeRelay:	// proxy plugin
-        strPluginOffer = QObject::tr(" Relay ");
-        break;
 
     case ePluginTypeAboutMePageServer:	// web server plugin ( for profile web page )
         strPluginOffer = QObject::tr(" About Me Page Service " );

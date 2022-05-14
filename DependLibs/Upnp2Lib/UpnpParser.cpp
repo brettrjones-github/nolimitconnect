@@ -65,10 +65,10 @@ namespace UpnpST
 {
 	const char UPNP_ROOT_DEVICE[] = "upnp:rootdevice";
 
-	const char UPNP_ALL_DEVICE[] = "ssdp:all";
-	const char UPNP_UUID_DEVICE[] = "uuid";
-	const char UPNP_URN_DEVICE[] = "urn:schemas-upnp-org:device:";
-	const char UPNP_URN_SERVICE[] = "urn:schemas-upnp-org:service:";
+    // const char UPNP_ALL_DEVICE[] = "ssdp:all";
+    // const char UPNP_UUID_DEVICE[] = "uuid";
+    // const char UPNP_URN_DEVICE[] = "urn:schemas-upnp-org:device:";
+    // const char UPNP_URN_SERVICE[] = "urn:schemas-upnp-org:service:";
 
 	bool isRootDevice( const char *value )
 	{

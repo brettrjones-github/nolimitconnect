@@ -937,30 +937,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Relay\RelayMgr.cpp">
       <Filter>Source Files\Relay</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayPktHandlers.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayTests.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\Relay.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayClientSession.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayServerSession.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RelaySession.cpp">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
@@ -2043,27 +2019,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Relay\RelayMgr.h">
       <Filter>Source Files\Relay</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\Relay.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientSession.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientTestSession.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerSession.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerTestSession.h">
-      <Filter>Source Files\Plugins\Relay</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2209,9 +2164,6 @@
     </Filter>
     <Filter Include="Source Files\Relay">
       <UniqueIdentifier>{55109772-14b2-4267-901c-e08847444ab4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Plugins\Relay">
-      <UniqueIdentifier>{2b770558-6777-4d33-85c8-1764fc61f6df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

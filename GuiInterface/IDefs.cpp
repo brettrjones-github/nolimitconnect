@@ -324,19 +324,6 @@ namespace
         "Max Relay Error ",
     };
 
-    const char * RelayStatusEnumStrings[] =
-    { 
-        "Relay Status Disconnected ",   // 0 eMyRelayStatusDisconnected
-        "Relay Status Connected ",      // 1 eMyRelayStatusConnected
-        "Searching For Relay ",         // 2 eMyRelayStatusSearching
-        "Requesting Relay Service ",    // 3 eMyRelayStatusRequestService
-        "No Relays Listed ",            // 4 eMyRelayStatusNoRelaysListed
-        "Relay List Exhausted ",        // 5 eMyRelayStatusRelayListExhasted
-        "Relay Assume Firewalled ",     // 6 eMyRelayStatusAssumeFirewalled
-        "Relay Assume Can Direct Connect ", // 7 eMyRelayStatusAssumeCanDirectConnect
-        "Max Relay Status ",
-    };
-
     const char * OfferStateEnumStrings[] =
     {
         "No Offer ",
@@ -940,16 +927,6 @@ const char* DescribeRelayError( enum ERelayErr relayError )
     return RelayErrEnumStrings[ relayError ];
 }
 
-const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus )
-{
-    if( eRelayStatus < 0 || eMaxMyRelayStatus <= eRelayStatus )
-    {
-        return ENUM_BAD_PARM;
-    }
-
-    return RelayStatusEnumStrings[ eRelayStatus ];
-}
-
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
 {
     if( ePortOpenStatus < 0 || eMaxIsPortOpenStatusType <= ePortOpenStatus )
@@ -1150,7 +1127,6 @@ const char * getPluginName( EPluginType pluginType )
 
     case ePluginTypeNetworkSearchList: return "ePluginTypeNetworkSearchList";
 
-    case ePluginTypeRelay: return "ePluginTypeRelay";
     case ePluginTypeStoryboardClient: return "ePluginTypeStoryboardClient";
     case ePluginTypeStoryboardServer: return "ePluginTypeStoryboardServer";
     case ePluginTypeTruthOrDare: return "ePluginTypeTruthOrDare";
@@ -1284,7 +1260,6 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
     case eHostTypeRandomConnect:
         return ePluginTypeHostRandomConnect;
     case ePluginTypeHostPeerUser:
-    case eHostTypePeerUserRelayed:
     case eHostTypePeerUserDirect:
         return ePluginTypeHostPeerUser;
     case ePluginTypeHostNetwork:
@@ -1317,7 +1292,6 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
     case eHostTypeRandomConnect:
         return ePluginTypeClientRandomConnect;
     case ePluginTypeClientPeerUser:
-    case eHostTypePeerUserRelayed:
     case eHostTypePeerUserDirect:
         return ePluginTypeClientPeerUser;
     case ePluginTypeClientNetwork:
@@ -1346,8 +1320,7 @@ EConnectReason HostTypeToGroupieConnectReason( EHostType hostType )
         return eConnectReasonChatRoomUserConnect;
     case eHostTypeRandomConnect:
         return eConnectReasonRandomConnectUserConnect;
-    case eHostTypePeerUserRelayed:
-        return eConnectReasonUserRelayedConnect;
+
     case eHostTypePeerUserDirect:
         return eConnectReasonUserDirectConnect;
     case eHostTypeNetwork:
@@ -1380,9 +1353,9 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
     case ePluginTypeClientRandomConnect:
         return eHostTypeRandomConnect;
 
-    case ePluginTypeHostPeerUser:
-    case ePluginTypeClientPeerUser:
-        return eHostTypePeerUserRelayed;
+    //case ePluginTypeHostPeerUser:
+    //case ePluginTypeClientPeerUser:
+    //    return eHostTypePeerUserRelayed;
 
     case ePluginTypeHostNetwork:
     case ePluginTypeClientNetwork:
@@ -1392,7 +1365,6 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
     case ePluginTypeClientConnectTest:
         return eHostTypeConnectTest;
 
-    case ePluginTypeRelay:
     case ePluginTypeNetServices:
     case ePluginTypeFileShareServer:
     case ePluginTypeNetworkSearchList:

@@ -55,7 +55,6 @@ bool SessionMgrBase::isPluginSingleSession( void )
 		isSingleSessionPlugin = true;
 		break;
 	case ePluginTypeAboutMePageServer:
-	case ePluginTypeRelay:
 	case ePluginTypeStoryboardServer: 
 	case ePluginTypeFileShareServer:
 	case ePluginTypePersonFileXfer:

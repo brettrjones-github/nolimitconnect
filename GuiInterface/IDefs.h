@@ -230,9 +230,7 @@ enum EFriendViewType
     eFriendViewFriendsAndGuests = 2,
     eFriendViewAnonymous		= 3,
     eFriendViewIgnored			= 4,
-    eFriendViewMyProxies		= 5,
-    eFriendViewAllProxies		= 6,
-    eFriendViewRefresh			= 7,
+    eFriendViewRefresh			= 5,
 
     eMaxFriendViewType // must be last
 };
@@ -421,7 +419,6 @@ enum EHostType
     eHostTypeRandomConnect = 5,
     // connections user<->user and user<->host
     eHostTypePeerUserDirect = 6,
-    eHostTypePeerUserRelayed = 7, // TODO see if can be removed
 
     eMaxHostType
 };
@@ -740,10 +737,8 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
 
     ePluginTypeNetworkSearchList    = 24,	//!< group and chat room list for network search
 
-    ePluginTypeRelay                = 25,	//!< Relay services plugin
-
     // NOTE: plugin types 25 - 47 not implemented .. reserved for future use
-    eMaxImplementedPluginType	    = 26, 
+    eMaxImplementedPluginType	    = 25, 
     // plugins 0-47 are part of PktAnnounce
     // plugins after 47 are system plugins and do not go out in announcement pkt
     eMaxUserPluginType              = 48, // this marks end of announced permission
@@ -761,21 +756,6 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeFileShareClient,     // shared files client
 
     eMaxPluginType	
-};
-
-//! \public Enumeration of Relay Search Status
-enum EMyRelayStatus
-{
-    eMyRelayStatusDisconnected				= 0,
-    eMyRelayStatusConnected					= 1,
-    eMyRelayStatusSearching					= 2,
-    eMyRelayStatusRequestService			= 3,
-    eMyRelayStatusNoRelaysListed			= 4,
-    eMyRelayStatusRelayListExhasted			= 5,
-    eMyRelayStatusAssumeFirewalled			= 6,
-    eMyRelayStatusAssumeCanDirectConnect	= 7,
-
-    eMaxMyRelayStatus
 };
 
 //! \public In Text Chat Session Actions
@@ -1196,8 +1176,6 @@ const char * DescribePortOpenStatus( enum EIsPortOpenStatus ePortOpenStatus );
 const char * DescribeRandomConnectStatus( enum ERandomConnectStatus ePortOpenStatus );
 //! Describe relay error as text
 const char* DescribeRelayError( enum ERelayErr relayError );
-//! Describe Relay Search Status as text
-const char * DescribeRelayStatus( enum EMyRelayStatus eRelayStatus );
 //! Describe run network test state as text
 const char * DescribeRunTestStatus( enum ERunTestStatus eTestStatus );
 //! Describe scan type

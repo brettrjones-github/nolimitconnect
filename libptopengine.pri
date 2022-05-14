@@ -292,7 +292,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelay.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h \
@@ -316,7 +315,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.h \
@@ -325,12 +323,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/Relay.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientSession.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientTestSession.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelayServerSession.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelayServerTestSession.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelaySession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RxSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/SessionMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFileInfo.h \
@@ -614,9 +606,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBasePktHandlers.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelay.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelayPktHandlers.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelayTests.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.cpp \
@@ -642,7 +631,6 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.cpp \
@@ -652,10 +640,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/Relay.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelayServerSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/RelaySession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RxSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/SessionMgrBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFileInfo.cpp \

@@ -997,44 +997,6 @@ void AppCommon::slotNetworkStateChanged( ENetworkStateType eNetworkState )
 }
 
 //============================================================================
-void AppCommon::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-	if( eMyRelayStatusSearching == eRelayStatus )
-	{
-		emit signalSetRelayHelpButtonVisibility( true );
-	}
-
-	const char * relayStatus = DescribeRelayStatus( eRelayStatus );
-	std::string formatedMsg;
-	if( msg )
-	{
-		StdStringFormat( formatedMsg, "#Relay %s %s", relayStatus, msg );
-	}
-	else
-	{
-		StdStringFormat( formatedMsg, "#Relay %s", relayStatus );
-	}
-
-	emit signalLog( 0, formatedMsg.c_str() );
-	emit signalStatusMsg( formatedMsg.c_str() );
-
-	if( eMyRelayStatusConnected == eRelayStatus )
-	{
-		emit signalStatusMsg( "Relay Connected " );
-		if( ( eFriendViewMyProxies == m_eLastSelectedWhichContactsToView ) ||
-			( eFriendViewAllProxies == m_eLastSelectedWhichContactsToView ) )
-		{
-			//ui.mainFriendList->refreshFriendList( eFriendViewEverybody );
-		}
-	}
-}
-
-//============================================================================
 void AppCommon::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char * msg )
 {
     if( VxIsAppShuttingDown() )

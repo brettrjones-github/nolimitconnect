@@ -19,6 +19,7 @@
 #include <CoreLib/Invite.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxDebug.h>
 #include <NetLib/VxSktUtil.h>
 
 #include <memory.h>
@@ -104,7 +105,7 @@ std::string VxConnectBaseInfo::getMyOnlineUrl( EHostType hostType )
     }
     else
     {
-        Invite::appendHostTypeSuffix( eHostTypePeerUserRelayed, myUrl );
+        LogMsg( LOG_VERBOSE, " Invite::appendHostTypeSuffix( eHostTypePeerUserRelayed, myUrl ); Unknown" );
     }
 
     return myUrl;
@@ -442,7 +443,7 @@ bool VxConnectIdent::hasThumbId( EHostType hostType )
         return m_NetHostThumbGuid.isVxGUIDValid();
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbGuid.isVxGUIDValid();
-    case eHostTypePeerUserRelayed:
+
     case eHostTypePeerUserDirect:
         return m_AvatarGuid.isVxGUIDValid();
     default:
@@ -464,7 +465,7 @@ VxGUID& VxConnectIdent::getThumbId( EHostType hostType )
         return m_NetHostThumbGuid;
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbGuid;
-    case eHostTypePeerUserRelayed:
+
     case eHostTypePeerUserDirect:
         return m_AvatarGuid;
     default:
@@ -523,7 +524,7 @@ void VxConnectIdent::setHostOrThumbModifiedTime( EHostType hostType, int64_t& ti
     case eHostTypeRandomConnect:
         setModifiedTime( m_RandomConnectThumbModifiedTime, timeModified );
         break;
-    case eHostTypePeerUserRelayed:
+
     case eHostTypePeerUserDirect:
         setModifiedTime( m_AvatarModifiedTime, timeModified );
         break;
@@ -545,7 +546,7 @@ int64_t VxConnectIdent::getHostOrThumbModifiedTime( EHostType hostType )
         return m_NetHostThumbModifiedTime;
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbModifiedTime;
-    case eHostTypePeerUserRelayed:
+
     case eHostTypePeerUserDirect:
         return m_AvatarModifiedTime;
     default:

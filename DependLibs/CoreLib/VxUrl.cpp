@@ -57,7 +57,7 @@ namespace
         std::string addrStr = addr;
         if ( true == VxIsIPv6Address( addr ) )
         {
-            unsigned int pos = (int)addrStr.find( "%" );
+            size_t pos = (int)addrStr.find( "%" );
             if ( pos != std::string::npos )
             {
                 addrStr = addrStr.substr( 0, pos );

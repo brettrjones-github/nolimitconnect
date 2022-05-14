@@ -303,13 +303,6 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend, bool inGroup )
 		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileShareServer, ePluginAccess );
 		addMenuItem( (int)ePluginTypeFileShareServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileShareServer, ePluginAccess ) ), strAction );
 	}
-
-	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeRelay, m_InGroup ) )
-	{
-		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeRelay, m_InGroup );
-		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeRelay, ePluginAccess );
-		addMenuItem( (int)ePluginTypeRelay, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeRelay, ePluginAccess ) ), strAction );
-	}
 }
 
 //============================================================================
@@ -372,15 +365,6 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypePersonFileXfer, m_InGroup ) )
 		{
 			m_MyApp.offerToFriendSendFile( m_SelectedFriend );
-		}
-
-		break;
-
-	case ePluginTypeRelay:
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeRelay, m_InGroup ) )
-		{
-			// see if user wants to change his preferred proxy
-			m_MyApp.offerToFriendUseAsRelay( m_SelectedFriend );
 		}
 
 		break;

@@ -146,12 +146,6 @@ void IGoTv::toGuiNetworkState( ENetworkStateType eNetworkState, const char* stat
 }
 
 //============================================================================
-void IGoTv::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
-{
-    getAppCommon().toGuiMyRelayStatus( eRelayStatus, msg );
-}
-
-//============================================================================
 void IGoTv::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char * msg )
 {
     getAppCommon().toGuiHostAnnounceStatus( hostType, sessionId, annStatus, msg );

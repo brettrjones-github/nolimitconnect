@@ -718,9 +718,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBasePktHandlers.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayPktHandlers.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayTests.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseService.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.cpp" />
@@ -746,7 +743,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.cpp" />
@@ -756,10 +752,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\Relay.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayClientSession.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayServerSession.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\RelaySession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RxSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.cpp" />
@@ -1084,7 +1076,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseService.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h" />
@@ -1107,7 +1098,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.h" />
@@ -1117,11 +1107,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\Relay.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientSession.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientTestSession.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerSession.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerTestSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RxSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.h" />

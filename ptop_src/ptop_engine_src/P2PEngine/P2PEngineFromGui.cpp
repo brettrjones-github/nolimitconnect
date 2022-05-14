@@ -33,7 +33,6 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h>
 
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
@@ -1160,22 +1159,12 @@ void P2PEngine::fromGuiSetNetSettings( NetSettings& netSettings )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetNetSettings" );
 	m_EngineSettings.setNetSettings( netSettings );
-	PluginBase * pluginBase = m_PluginMgr.findPlugin( ePluginTypeRelay );
-	if( pluginBase )
-	{
-		((PluginServiceRelay *)pluginBase)->fromGuiRelayPermissionCount( netSettings.getUserRelayPermissionCount(), netSettings.getSystemRelayPermissionCount() ); 
-	}
 }
 
 //============================================================================
 void P2PEngine::fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMaxCnt )
 {
 	m_EngineSettings.setMaxRelaysInUse( userRelayMaxCnt, systemRelayMaxCnt );
-	PluginBase * pluginBase = m_PluginMgr.findPlugin( ePluginTypeRelay );
-	if( pluginBase )
-	{
-		((PluginServiceRelay *)pluginBase)->fromGuiRelayPermissionCount( userRelayMaxCnt, systemRelayMaxCnt ); 
-	}
 }
 
 //============================================================================

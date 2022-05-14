@@ -21,7 +21,6 @@
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h>
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsRelay.h>

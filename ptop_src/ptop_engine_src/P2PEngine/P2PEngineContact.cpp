@@ -74,28 +74,6 @@ bool P2PEngine::shouldNotifyGui( VxNetIdent * netIdent )
 		}
 		break;
 
-	case eFriendViewMyProxies:
-		if( netIdent->isMyPreferedRelay() )
-		{
-			//LogMsg(LOG_INFO, "shouldNotifyGui: should show my relays %s\n", netIdent->getOnlineName() );
-			return true;
-		}
-		break;
-
-	case eFriendViewAllProxies:
-		if( ( false == netIdent->requiresRelay() ) &&
-			( ePluginAccessOk == netIdent->getMyAccessPermissionFromHim( ePluginTypeRelay ) ) )
-		{
-			//LogMsg(LOG_INFO, "shouldNotifyGui: should show all relays %s\n", netIdent->getOnlineName() );
-			return true;
-		}
-		else
-		{
-			//LogMsg(LOG_INFO, "shouldNotifyGui: all proxies NO SHOW because requiresRelay %d or cannot access proxy plugin %d\n",
-			//	netIdent->requiresRelay(),
-			//	netIdent->getMyAccessPermissionFromHim( ePluginTypeRelay ) );
-		}
-		break;
 
 	default:
 		LogMsg(LOG_ERROR, "shouldNotifyGui: UNRECOGNIZED view type\n");
@@ -246,61 +224,6 @@ int P2PEngine::toGuiSendIgnoreList( int iSentCnt, int iMaxSendCnt )
 }
 
 //============================================================================
-int P2PEngine::toGuiSendMyProxiesList( int iSentCnt, int iMaxSendCnt )
-{
-	BigListInfo * poInfo = NULL;
-	BigList::BigListIter iter;
-
-	m_BigListMgr.bigListLock(116);
-	for( iter = m_BigListMgr.m_BigList.begin(); iter != m_BigListMgr.m_BigList.end(); ++iter )
-	{
-		poInfo = iter->second;
-		if( poInfo->isMyRelay() || poInfo->isMyPreferedRelay() )
-		{
-			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
-		}
-
-		iSentCnt++;
-		if( iSentCnt >= iMaxSendCnt )
-		{
-			break;
-		}
-	}
-
-	m_BigListMgr.bigListUnlock(116);
-	return iSentCnt;
-}
-
-//============================================================================
-int P2PEngine::toGuiSendAllProxiesList( int iSentCnt, int iMaxSendCnt )
-{
-	BigListInfo * poInfo = NULL;
-	BigList::BigListIter iter;
-
-	m_BigListMgr.bigListLock(116);
-	for( iter = m_BigListMgr.m_BigList.begin(); iter != m_BigListMgr.m_BigList.end(); ++iter )
-	{
-		poInfo = iter->second;
-		if( ( false == poInfo->requiresRelay() ) &&
-			( ePluginAccessOk == poInfo->getMyAccessPermissionFromHim( ePluginTypeRelay ) ) )
-		{
-			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
-		}
-
-		iSentCnt++;
-		if( iSentCnt >= iMaxSendCnt )
-		{
-			break;
-		}
-	}
-
-	m_BigListMgr.bigListUnlock(116);
-	return iSentCnt;
-}
-
-//============================================================================
 //! send all friends for view
 void P2PEngine::fromGuiSendContactList( EFriendViewType eFriendView, int maxContactsToSend )
 {
@@ -397,16 +320,6 @@ void P2PEngine::sendToGuiTheContactList( int maxContactsToSend )
 	case eFriendViewIgnored:
 		//LogMsg( LOG_INFO, "fromGuiSendContactList: sending ignored\n" );
 		iSentContactsCnt = toGuiSendIgnoreList( iSentContactsCnt, maxContactsToSend );
-		break;
-
-	case eFriendViewMyProxies:
-		//LogMsg( LOG_INFO, "fromGuiSendContactList: sending my proxies\n" );
-		iSentContactsCnt = toGuiSendMyProxiesList( iSentContactsCnt, maxContactsToSend );
-		break;
-
-	case eFriendViewAllProxies:
-		//LogMsg( LOG_INFO, "fromGuiSendContactList: sending all proxies\n" );
-		iSentContactsCnt = toGuiSendAllProxiesList( iSentContactsCnt, maxContactsToSend );
 		break;
 
 	default:

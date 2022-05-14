@@ -90,12 +90,6 @@ void P2PEngine::onContactConnected( RcConnectInfo * poInfo, bool connectionListI
 		//		strName.c_str() );
 		//}
 
-		if(  m_PktAnn.requiresRelay()
-			&& ( false == m_ConnectionList.isMyRelayAvailable() )
-			&& ( false == poInfo->m_BigListInfo->requiresRelay() ) )
-		{
-			onPotentialRelayServiceAvailable( poInfo, connectionListIsLocked );
-		}
 
 		m_PluginMgr.onContactWentOnline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
 		m_RcScan.onContactWentOnline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );

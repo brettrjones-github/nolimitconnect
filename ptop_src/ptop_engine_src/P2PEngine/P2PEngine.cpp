@@ -25,7 +25,6 @@
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h>
 #include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
 
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
 
@@ -110,7 +109,6 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_NetworkStateMachine( *new NetworkStateMachine( *this, m_NetworkMgr ) )
 	, m_PluginMgr( *new PluginMgr( *this ) )
 	, m_PluginSettingMgr( *this )
-	, m_PluginServiceRelay( new PluginServiceRelay( *this, m_PluginMgr, &m_PktAnn, ePluginTypeRelay ) )
 	, m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn, ePluginTypeFileShareServer ) )
 	, m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn, ePluginTypeNetServices ) )
 	, m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
@@ -252,7 +250,6 @@ void P2PEngine::shutdownEngine( void )
 		VxSleep( 1000 );
 	}
 	
-	m_PluginServiceRelay			= 0;
 	m_PluginServiceFileShare		= 0;
 	m_PluginNetServices		= 0;
 	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: done" );

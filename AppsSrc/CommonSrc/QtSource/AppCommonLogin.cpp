@@ -461,14 +461,7 @@ void AppCommon::slotListViewTypeChanged( int viewSelectedIdx )
         //whichIcon = eMyIconIgnored;
         statMsg = QObject::tr( "List View People I Ignore" );
         break;
-    case eFriendViewMyProxies: // my proxies
-        //whichIcon = eMyIconRelay;
-        statMsg = QObject::tr( "List View My Preferred Relays" );
-        break;
-    case eFriendViewAllProxies: // all proxies
-        //whichIcon = eMyIconRelay;
-        statMsg = QObject::tr( "List View All Possible Relays" );
-        break;
+
         //case eFriendViewRefresh: // Refresh all
         //	break;
         //default:

@@ -51,9 +51,7 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
             }
 
             // do not include hidden or secondary service hosting plugins
-            if( ( eAppletServiceRelay != i ) &&
-                ( eAppletServiceRandomConnectRelay != i ) &&
-                ( eAppletServiceHostNetwork != i ) &&
+            if( ( eAppletServiceHostNetwork != i ) &&
                 ( eAppletServiceConnectionTest != i ) )
             {
                 AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );

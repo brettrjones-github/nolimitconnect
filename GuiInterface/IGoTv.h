@@ -291,7 +291,6 @@ public:
     virtual void				toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
-    virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
 
     virtual void				toGuiUserOnlineStatus(VxNetIdent* netIdent, bool isOnline ) override;
 

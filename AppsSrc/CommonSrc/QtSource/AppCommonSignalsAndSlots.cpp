@@ -29,7 +29,6 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<EInternetStatus>( "EInternetStatus" );
 	qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
 	qRegisterMetaType<ERunTestStatus>( "ERunTestStatus" );
-	qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );
 	qRegisterMetaType<ENetAvailStatus>( "ENetAvailStatus" );
 	qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
 	qRegisterMetaType<EOfferResponse>( "EOfferResponse" );
