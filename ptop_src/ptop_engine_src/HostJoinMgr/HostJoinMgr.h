@@ -42,16 +42,16 @@ public:
     void                        fromGuiGetJoinedStateList(enum  EPluginType pluginType, enum EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList );
     void                        fromGuiListAction( EListAction listAction );
 
-    void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
+    void                        wantHostJoinMgrCallbacks( HostJoinCallbackInterface * client, bool enable );
 
     virtual void				announceHostJoinRequested( HostJoinInfo* userHostInfo );
     virtual void				announceHostJoinUpdated( HostJoinInfo* userHostInfo );
     virtual void				announceHostUnJoin( GroupieId& groupieId );
     virtual void				announceHostJoinRemoved( GroupieId& groupieId );
 
-    VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
-    void						lockResources( void )						{ m_ResourceMutex.lock(); }
-    void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
+    VxMutex&					getHostJoinInfoListMutex( void )                    { return m_HostJoinInfoListMutex; }
+    void						lockHostJoinInfoList( void )						{ m_HostJoinInfoListMutex.lock(); }
+    void						unlockHostJoinInfoList( void )						{ m_HostJoinInfoListMutex.unlock(); }
 
     void                        onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onHostUnJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
@@ -78,11 +78,10 @@ protected:
     P2PEngine&					m_Engine;
     HostJoinInfoDb              m_HostJoinInfoDb;
     HostJoinedLastDb            m_HostJoinedLastDb;
-    VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  
     std::map<GroupieId, HostJoinInfo*>	m_HostJoinInfoList;
-    VxMutex						m_HostJoinInfoMutex;
+    VxMutex						m_HostJoinInfoListMutex;
     bool                        m_HostJoinListInitialized{ false };
 
     std::vector<HostJoinCallbackInterface *> m_HostJoinClients;

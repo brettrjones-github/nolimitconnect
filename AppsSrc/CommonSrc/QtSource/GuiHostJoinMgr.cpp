@@ -29,14 +29,14 @@ GuiHostJoinMgr::GuiHostJoinMgr( AppCommon& app )
 //============================================================================
 void GuiHostJoinMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalHostJoinRequested( HostJoinInfo* ) ),	                                this, SLOT( slotInternalHostJoinRequested( HostJoinInfo* ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinUpdated( HostJoinInfo* ) ),                                    this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo* ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostUnJoin( GroupieId ) ),                                             this, SLOT( slotInternalHostUnJoin( GroupieId ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinRemoved( GroupieId ) ),	                                    this, SLOT( slotInternalHostJoinRemoved( GroupieId ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinOfferState( GroupieId, EJoinState ) ),                         this, SLOT( slotInternalHostJoinOfferState( GroupieId, EJoinState ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ),              this, SLOT( slotInternalHostJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinRequested(HostJoinInfo*) ),	                            this, SLOT( slotInternalHostJoinRequested( HostJoinInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinUpdated(HostJoinInfo*) ),                                  this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostUnJoin(GroupieId) ),                                           this, SLOT( slotInternalHostUnJoin( GroupieId ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinRemoved(GroupieId) ),	                                    this, SLOT( slotInternalHostJoinRemoved( GroupieId ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinOfferState(GroupieId,EJoinState) ),                        this, SLOT( slotInternalHostJoinOfferState( GroupieId, EJoinState ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinOnlineState(GroupieId,EOnlineState,VxGUID) ),              this, SLOT( slotInternalHostJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
 
-    m_MyApp.getEngine().getHostJoinMgr().addHostJoinMgrClient( this, true );
+    GetPtoPEngine().getHostJoinMgr().wantHostJoinMgrCallbacks( this, true );
 }
 
 //============================================================================
@@ -56,14 +56,14 @@ void GuiHostJoinMgr::onSystemReady( bool ready )
     if( ready )
     {
         std::vector<HostJoinInfo*> hostJoinList;
-        m_MyApp.getEngine().getHostJoinMgr().lockResources();
+        m_MyApp.getEngine().getHostJoinMgr().lockHostJoinInfoList();
         m_MyApp.getEngine().getHostJoinMgr().fromGuiGetJoinedStateList( ePluginTypeHostGroup, eJoinStateJoinRequested, hostJoinList );
         for( auto hostJoinInfo : hostJoinList )
         {
             updateHostJoin( hostJoinInfo );
         }
 
-        m_MyApp.getEngine().getHostJoinMgr().unlockResources();
+        m_MyApp.getEngine().getHostJoinMgr().unlockHostJoinInfoList();
         updateHostRequestCount( true );
     }
 }
