@@ -870,36 +870,113 @@ void ConnectIdListMgr::onUserOffline( VxGUID& onlineId )
 //============================================================================
 void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent, bool relayed )
 {
-    VxGUID onlineId = netIdent->getMyOnlineId();
-    VxGUID connectionId = sktBase->getConnectionId();
-    VxGUID hostOnlineId = netIdent->getMyOnlineId();
-    EHostType hostType{ eHostTypeUnknown };
-
-    lockList();
-    for( auto& connectIdConst : m_ConnectIdList )
+    if( relayed )
     {
-        ConnectId& connectId = const_cast<ConnectId&>(connectIdConst);
-        if( IsHostARelayForUser( connectId.getHostType() ) )
-        {
-            if( connectId.getHostedId().getOnlineId() == connectId.getGroupieOnlineId() )
-            {
-                hostType = connectId.getHostType();
-                hostOnlineId = connectId.getHostedId().getOnlineId();
-                break;
-            }
-        }
+        onGroupRelayedUserAnnounce( pktAnn, sktBase, netIdent );
+        return;
     }
 
-    unlockList();
-
-    if( hostOnlineId.isVxGUIDValid() )
+    VxGUID onlineId = netIdent->getMyOnlineId();
+    VxGUID connectionId = sktBase->getConnectionId();
+    // if relayed then the peer id should be the host that relayed the packet
+    VxGUID hostOnlineId = sktBase->getPeerOnlineId();
+    if( onlineId.isVxGUIDValid() && hostOnlineId.isVxGUIDValid(), connectionId.isVxGUIDValid() )
     {
-        GroupieId groupieId( onlineId, hostOnlineId, hostType );
-        m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
-        addConnection( connectionId, groupieId, relayed );  
+        if( onlineId == hostOnlineId )
+        {
+            EHostType hostType{ eHostTypeUnknown };
+
+            lockList();
+            for( auto& connectIdConst : m_ConnectIdList )
+            {
+                ConnectId& connectId = const_cast<ConnectId&>(connectIdConst);
+                if( IsHostARelayForUser( connectId.getHostType() ) )
+                {
+                    if( connectId.getHostedId().getOnlineId() == hostOnlineId )
+                    {
+                        hostType = connectId.getHostType();
+                        hostOnlineId = connectId.getHostedId().getOnlineId();
+                        break;
+                    }
+                }
+            }
+
+            unlockList();
+
+            if( hostType != eHostTypeUnknown )
+            {
+                GroupieId groupieId( onlineId, hostOnlineId, hostType );
+                m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
+                LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupUserAnnounce %s from host %s",
+                        netIdent->getOnlineName(),  sktBase->getPeerOnlineName().c_str() );
+                addConnection( connectionId, groupieId, relayed );
+            }
+            else
+            {
+                LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupUserAnnounce hostId not found" );
+            }
+        }
+        else
+        {
+            LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupUserAnnounce onlineId != hostOnlineId" );
+        }
     }
     else
     {
-        LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupUserAnnounce hostId not found" );
+        LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupUserAnnounce invalid id" );
+    }
+}
+
+//============================================================================
+void ConnectIdListMgr::onGroupRelayedUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID onlineId = netIdent->getMyOnlineId();
+    VxGUID connectionId = sktBase->getConnectionId();
+    // if relayed then the peer id should be the host that relayed the packet
+    VxGUID hostOnlineId = sktBase->getPeerOnlineId();
+    if( onlineId.isVxGUIDValid() && hostOnlineId.isVxGUIDValid(), connectionId.isVxGUIDValid() )
+    {
+        if( onlineId != hostOnlineId )
+        {
+            EHostType hostType{ eHostTypeUnknown };
+
+            lockList();
+            for( auto& connectIdConst : m_ConnectIdList )
+            {
+                ConnectId& connectId = const_cast<ConnectId&>(connectIdConst);
+                if( IsHostARelayForUser( connectId.getHostType() ) )
+                {
+                    if( connectId.getHostedId().getOnlineId() == hostOnlineId )
+                    {
+                        hostType = connectId.getHostType();
+                        hostOnlineId = connectId.getHostedId().getOnlineId();
+                        break;
+                    }
+                }
+            }
+
+            unlockList();
+
+            if( hostType != eHostTypeUnknown )
+            {
+                GroupieId groupieId( onlineId, hostOnlineId, hostType );
+                m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
+                LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupRelayedUserAnnounce %s from host %s",
+                        netIdent->getOnlineName(),  sktBase->getPeerOnlineName().c_str() );
+                addConnection( connectionId, groupieId, true );
+            }
+            else
+            {
+                LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupRelayedUserAnnounce hostId not found" );
+            }
+        }
+        else
+        {
+            LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupRelayedUserAnnounce onlineId != hostOnlineId" );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_WARNING, "ConnectIdListMgr::onGroupRelayedUserAnnounce invalid id" );
     }
 }

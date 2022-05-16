@@ -64,13 +64,13 @@ bool RelayMgr::handleRelayPkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 	
 	if( 0 != sktBaseRelay->txPacket( destOnlineId, pktHdr ) )
 	{
-		LogMsg( LOG_VERBOSE, "handleRelayPkt FAILED sent relay pkt type %d len %d srcId %s %s destId %s %s", pktHdr->getPktType(), pktHdr->getPktLength(), 
+        LogMsg( LOG_VERBOSE, "handleRelayPkt FAILED sent relay pkt %s srcId %s %s destId %s %s", pktHdr->describePkt().c_str(),
 			srcOnlineId.toOnlineIdString().c_str(), sktBase->getPeerOnlineName().c_str(), destOnlineId.toOnlineIdString().c_str(), sktBaseRelay->getPeerOnlineName().c_str() );
 		sendRelayError( srcOnlineId, sktBase, eRelayErrUserNotOnline );
 		return true;
 	}
 
-	LogMsg( LOG_VERBOSE, "handleRelayPkt sent relay pkt type %d len %d srcId %s %s destId %s %s", pktHdr->getPktType(), pktHdr->getPktLength(),
+    LogMsg( LOG_VERBOSE, "handleRelayPkt sent relay pkt %s srcId %s %s destId %s %s", pktHdr->describePkt().c_str(),
 		srcOnlineId.toOnlineIdString().c_str(), sktBase->getPeerOnlineName().c_str(), destOnlineId.toOnlineIdString().c_str(), sktBaseRelay->getPeerOnlineName().c_str() );
 	return true;
 }
@@ -106,6 +106,9 @@ bool RelayMgr::requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieI
     {
         PktAnnounce myPktAnn;
         m_Engine.copyMyPktAnnounce( myPktAnn );
+        myPktAnn.setIsPktAnnReplyRequested(true);
+        myPktAnn.setIsPktAnnRevConnectRequested(false);
+        myPktAnn.setIsPktAnnStunRequested(false);
         sentAnn = 0 == sktBase->txPacket(destOnlineId, &myPktAnn);
     }
 

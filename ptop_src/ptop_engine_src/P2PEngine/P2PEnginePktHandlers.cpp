@@ -113,8 +113,9 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 			pkt->getOnlineName(),
             sktBase->getRemoteIp().c_str(),
 			contactOnlineId.toHexString().c_str() );
-		// TODO do not close connection if is our group relay connection
-		// if( !m_PktAnn.requiresRelay() )
+        // if is the first announce and ignored we can close the connection
+        // if not first announce then was relayed through host and do not close the connection
+        if( isFirstAnnounce )
 		{
 			m_NetConnector.closeConnection( eSktCloseUserIgnored, contactOnlineId, sktBase );
 		}

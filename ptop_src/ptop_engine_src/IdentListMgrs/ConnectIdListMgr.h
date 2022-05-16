@@ -64,6 +64,7 @@ public:
 
     virtual void                onConnectionLost( VxGUID& sktConnectId );
     virtual void                onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent, bool relayed );
+    void                        onGroupRelayedUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent );
 
     void                        wantConnectIdListCallback( ConnectIdListCallbackInterface* client, bool enable );
 

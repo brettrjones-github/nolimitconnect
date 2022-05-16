@@ -113,6 +113,9 @@ public:
     static void                 setGuidToNetOrder( VxGUID& srcGuid, VxGUID& destGuid );
     static VxGUID               getGuidInHostOrder( VxGUID& srcGuid );
 
+    std::string                 describePkt( void );
+    static const char*          describePktType( uint16_t pktType );
+
 private:
 	//=== vars ===//
 	VxGUID					    m_SrcOnlineId;
