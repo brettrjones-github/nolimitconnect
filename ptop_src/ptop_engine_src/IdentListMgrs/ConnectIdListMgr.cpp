@@ -180,12 +180,7 @@ void ConnectIdListMgr::addConnection( VxGUID& sktConnectId, GroupieId& groupieId
 
         unlockList();
 
-        onUserOnlineStatusChange( connectId, true );
-
-        if( !hasDirectConnection )
-        {
-            onUserRelayStatusChange( connectId, true );
-        }
+        announceRelayStatus(connectId, true);
     }
     else
     {
@@ -949,7 +944,6 @@ void ConnectIdListMgr::onGroupRelayedUserAnnounce( PktAnnounce* pktAnn, VxSktBas
                     if( connectId.getHostedId().getOnlineId() == hostOnlineId )
                     {
                         hostType = connectId.getHostType();
-                        hostOnlineId = connectId.getHostedId().getOnlineId();
                         break;
                     }
                 }

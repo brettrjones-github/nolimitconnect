@@ -118,12 +118,13 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
         if( isFirstAnnounce )
 		{
 			m_NetConnector.closeConnection( eSktCloseUserIgnored, contactOnlineId, sktBase );
+            getConnectList().onConnectionLost( sktBase );
 		}
 
 		return;
 	}
 
-	if( pkt->getIsPktAnnReplyRequested() )
+    if( isFirstAnnounce && pkt->getIsPktAnnReplyRequested() )
 	{
         LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s relay %d reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str(), pkt->requiresRelay() );
 		if( !m_NetConnector.sendMyPktAnnounce( pkt->getMyOnlineId(),
@@ -134,6 +135,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		{
 			LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::sendMyPktAnnounce failed to %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 			sktBase->closeSkt( eSktClosePktAnnSendFail );
+            getConnectList().onConnectionLost( sktBase );
 			return;
 		}
 	}
@@ -159,7 +161,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 
 
-	if( pkt->getIsPktAnnRevConnectRequested() )
+    if( isFirstAnnounce && pkt->getIsPktAnnRevConnectRequested() )
 	{
 		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		VxSktBase * poNewSkt = 0;
@@ -190,17 +192,6 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
             }
 		}
 	}
-	else
-	{
-		PktPingReq pktPingReq;
-		pktPingReq.setSrcOnlineId( m_PktAnn.getSrcOnlineId() );
-		if( 0 != sktBase->txPacket( bigListInfo->getMyOnlineId(), &pktPingReq ) )
-		{
-			getConnectList().onConnectionLost( sktBase );
-            sktBase->closeSkt(eSktClosePktPingReqSendFail);
-			return;
-		}
-	}
 
     if( isFirstAnnounce )
     {
@@ -213,7 +204,26 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 	else
 	{
-		getConnectIdListMgr().onGroupUserAnnounce( pkt, sktBase, bigListInfo->getVxNetIdent(), true );
+        if( getRelayMgr().sendRequestedReplyPktAnn(sktBase, bigListInfo->getVxNetIdent()) )
+        {
+            getConnectIdListMgr().onGroupUserAnnounce( pkt, sktBase, bigListInfo->getVxNetIdent(), true );
+        }
+		else
+		{
+			getConnectList().onConnectionLost( sktBase );
+		}
+	}
+
+	if( sktBase->isConnected() )
+	{
+		PktPingReq pktPingReq;
+		pktPingReq.setSrcOnlineId( m_PktAnn.getSrcOnlineId() );
+		if( 0 != sktBase->txPacket( bigListInfo->getMyOnlineId(), &pktPingReq ) )
+		{
+			sktBase->closeSkt( eSktClosePktPingReqSendFail );
+            getConnectList().onConnectionLost( sktBase );
+			return;
+		}
 	}
 }
 

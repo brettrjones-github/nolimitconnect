@@ -481,6 +481,15 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
 
     if( sktBase )
     {
+        if( IsConnectReasonAnnounce( connectReason ) )
+        {
+            if( eConnectReasonUnknown == sktBase->getConnectReason() )
+            {
+                // set the connect reason so is marked as temporary connection and not announced to gui
+                sktBase->setConnectReason( connectReason );
+            }
+        }
+
         m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getConnectionId(), connectReason );
     }
 

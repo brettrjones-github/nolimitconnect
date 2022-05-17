@@ -676,6 +676,12 @@ const char * DescribeConnectReason( EConnectReason eConnectReason )
 }
 
 //============================================================================
+bool IsConnectReasonAnnounce( EConnectReason connectReason )
+{
+    return eConnectReasonGroupAnnounce == connectReason || eConnectReasonChatRoomAnnounce == connectReason || eConnectReasonRandomConnectAnnounce == connectReason;
+}
+
+//============================================================================
 bool IsConnectReasonJoin( EConnectReason connectReason )
 {
     return eConnectReasonGroupJoin == connectReason || eConnectReasonChatRoomJoin == connectReason || eConnectReasonRandomConnectJoin == connectReason;

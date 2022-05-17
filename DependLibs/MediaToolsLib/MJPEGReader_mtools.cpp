@@ -1163,7 +1163,7 @@ void MJPEGReader::callbackAudioOutSpaceAvail( int freeSpaceLen )
 		if( aviChunk->isDataEmpty() )
 		{
 			m_VidSemaphore.signal();
-			static int readIdx = 0;	
+            static unsigned int readIdx = 0;
 			if ( readIdx != m_AudWriteIdx )
 			{
 				LogMsg( LOG_INFO, "Waiting for MJPG audio read at idx %d in mem %d\n", m_AudWriteIdx, m_AudioChunksInMemory );					

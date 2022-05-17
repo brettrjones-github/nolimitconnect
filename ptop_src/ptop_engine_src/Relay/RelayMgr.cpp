@@ -116,6 +116,26 @@ bool RelayMgr::requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieI
 }
 
 //============================================================================
+bool RelayMgr::sendRequestedReplyPktAnn(VxSktBase* sktBase, VxNetIdent* netIdent)
+{
+    PktAnnounce myPktAnn;
+    m_Engine.copyMyPktAnnounce( myPktAnn );
+    myPktAnn.setIsPktAnnReplyRequested(false);
+    myPktAnn.setIsPktAnnRevConnectRequested(false);
+    myPktAnn.setIsPktAnnStunRequested(false);
+    myPktAnn.setMyFriendshipToHim(netIdent->getMyFriendshipToHim());
+    int sentAnn =sktBase->txPacket(netIdent->getMyOnlineId(), &myPktAnn);
+	if( 0 != sentAnn )
+	{
+		LogMsg( LOG_VERBOSE, "ERROR %d RelayMgr::sendRequestedReplyPktAnn %s", sentAnn, netIdent->getOnlineName() );
+		sktBase->closeSkt( eSktClosePktAnnSendFail );
+		return false;
+	}
+
+	return true;
+}
+
+//============================================================================
 void RelayMgr::onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "RelayMgr::onRelayPktAnnounce %s", netIdent->getOnlineName() );

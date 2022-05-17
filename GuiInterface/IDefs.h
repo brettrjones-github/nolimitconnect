@@ -1128,6 +1128,7 @@ const char * DescribeAppModule( enum EAppModule appModule );
 const char * DescribeAge( enum EAgeType ageType );
 const char * DescribeCommError( enum ECommErr commErr );
 const char * DescribeConnectReason( enum EConnectReason connectReason );
+bool         IsConnectReasonAnnounce( enum EConnectReason connectReason );
 bool         IsConnectReasonJoin( enum EConnectReason connectReason );
 bool         IsConnectReasonLeave( enum EConnectReason connectReason );
 bool         IsConnectReasonUnJoin( enum EConnectReason connectReason );
