@@ -200,7 +200,7 @@ bool UserOnlineMgr::onUserOnline( GroupieId& groupieId, VxSktBase* sktBase, VxNe
     }
 
     unlockResources();
-    if( wasAdded )
+    if( wasAdded && !sktBase->isTempConnection() )
     {
         m_Engine.getToGui().toGuiContactAdded( netIdent );
     }

@@ -146,7 +146,7 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
         return;
     }
 
-    emit slotInternalToGuiContactOffline( netIdent->getMyOnlineId() );
+    emit signalInternalToGuiContactOffline( netIdent->getMyOnlineId() );
 }
 
 //============================================================================
@@ -166,6 +166,8 @@ void AppCommon::slotInternalToGuiContactOffline( VxGUID onlineId )
     {
         LogMsg( LOG_ERROR, "AppCommon::toGuiContactOffline null user" );
     }
+
+    getUserMgr().toGuiContactOffline( onlineId );
 }
 
 //============================================================================
@@ -188,7 +190,13 @@ void AppCommon::toGuiContactOnline( VxNetIdent* netIdent )
 //============================================================================
 void AppCommon::slotInternalToGuiContactOnline( VxNetIdent netIdent )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
     LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOnline user %s", netIdent.getOnlineName() );
+    getUserMgr().toGuiContactOnline( &netIdent );
     for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
     {
         ToGuiActivityInterface* client = *iter;

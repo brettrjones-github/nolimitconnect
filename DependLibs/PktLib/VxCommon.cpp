@@ -297,7 +297,7 @@ bool VxNetIdent::isValidNetIdent()
 //============================================================================
 bool VxNetIdent::isOnlineNameValid( void )
 {
-	bool result = !m_OnlineName[0] == 0;
+    bool result = !(m_OnlineName[0] == 0);
 	if( result )
 	{
 		int asciiCnt = 0;

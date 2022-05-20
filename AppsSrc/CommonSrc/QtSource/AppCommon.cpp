@@ -1141,14 +1141,21 @@ void AppCommon::toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionI
 }
 
 //============================================================================
-void AppCommon::toGuiUserOnlineStatus( VxNetIdent *hostIdent, bool isOnline )
+void AppCommon::toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    getUserMgr().toGuiUserOnlineStatus( hostIdent, isOnline );
+	if( isOnline )
+	{
+		emit signalInternalToGuiContactOnline( *netIdent );
+	}
+	else
+	{
+		emit signalInternalToGuiContactOffline( netIdent->getMyOnlineId() );
+	}
 }
 
 //============================================================================

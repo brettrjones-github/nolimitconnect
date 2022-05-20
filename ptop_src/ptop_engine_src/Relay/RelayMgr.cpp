@@ -106,30 +106,46 @@ bool RelayMgr::requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieI
     {
         PktAnnounce myPktAnn;
         m_Engine.copyMyPktAnnounce( myPktAnn );
-        myPktAnn.setIsPktAnnReplyRequested(true);
-        myPktAnn.setIsPktAnnRevConnectRequested(false);
-        myPktAnn.setIsPktAnnStunRequested(false);
-        sentAnn = 0 == sktBase->txPacket(destOnlineId, &myPktAnn);
+        myPktAnn.setIsPktAnnReplyRequested( true );
+        myPktAnn.setIsPktAnnRevConnectRequested( false );
+        myPktAnn.setIsPktAnnStunRequested( false );
+		VxNetIdent* netIdent = m_Engine.getBigListMgr().findNetIdent( groupieInfo.getGroupieOnlineId() );
+		if( netIdent )
+		{
+			myPktAnn.setMyFriendshipToHim( netIdent->getMyFriendshipToHim() );
+		}
+		else
+		{
+			myPktAnn.setMyFriendshipToHim( eFriendStateAnonymous );
+		}
+
+
+        sentAnn = 0 == sktBase->txPacket( destOnlineId, &myPktAnn );
     }
 
     return sentAnn;
 }
 
 //============================================================================
-bool RelayMgr::sendRequestedReplyPktAnn(VxSktBase* sktBase, VxNetIdent* netIdent)
+bool RelayMgr::sendRequestedReplyPktAnnIfNeeded( PktAnnounce* hisPktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    PktAnnounce myPktAnn;
-    m_Engine.copyMyPktAnnounce( myPktAnn );
-    myPktAnn.setIsPktAnnReplyRequested(false);
-    myPktAnn.setIsPktAnnRevConnectRequested(false);
-    myPktAnn.setIsPktAnnStunRequested(false);
-    myPktAnn.setMyFriendshipToHim(netIdent->getMyFriendshipToHim());
-    int sentAnn =sktBase->txPacket(netIdent->getMyOnlineId(), &myPktAnn);
-	if( 0 != sentAnn )
+	if( hisPktAnn && hisPktAnn->getIsPktAnnReplyRequested() )
 	{
-		LogMsg( LOG_VERBOSE, "ERROR %d RelayMgr::sendRequestedReplyPktAnn %s", sentAnn, netIdent->getOnlineName() );
-		sktBase->closeSkt( eSktClosePktAnnSendFail );
-		return false;
+		hisPktAnn->setIsPktAnnReplyRequested( false );
+
+		PktAnnounce myPktAnn;
+		m_Engine.copyMyPktAnnounce( myPktAnn );
+		myPktAnn.setIsPktAnnReplyRequested( false );
+		myPktAnn.setIsPktAnnRevConnectRequested( false );
+		myPktAnn.setIsPktAnnStunRequested( false );
+		myPktAnn.setMyFriendshipToHim( netIdent->getMyFriendshipToHim() );
+		int sentAnn =sktBase->txPacket( netIdent->getMyOnlineId(), &myPktAnn );
+		if( 0 != sentAnn )
+		{
+			LogMsg( LOG_VERBOSE, "ERROR %d RelayMgr::sendRequestedReplyPktAnn %s", sentAnn, netIdent->getOnlineName() );
+			sktBase->closeSkt( eSktClosePktAnnSendFail );
+			return false;
+		}
 	}
 
 	return true;

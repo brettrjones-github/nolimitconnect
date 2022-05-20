@@ -481,13 +481,10 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
 
     if( sktBase )
     {
-        if( IsConnectReasonAnnounce( connectReason ) )
+        if( eConnectReasonUnknown == sktBase->getConnectReason() )
         {
-            if( eConnectReasonUnknown == sktBase->getConnectReason() )
-            {
-                // set the connect reason so is marked as temporary connection and not announced to gui
-                sktBase->setConnectReason( connectReason );
-            }
+            // set the connect reason so is marked as temporary connection and not announced to gui
+            sktBase->setConnectReason( connectReason );
         }
 
         m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getConnectionId(), connectReason );
@@ -706,6 +703,11 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
                                                     iConnectTimeoutMs );	// milli seconds before connect attempt times out
     if( sktBase )
     {
+        if( sktBase->getConnectReason() == eConnectReasonUnknown )
+        {
+            sktBase->setConnectReason( connectReason );
+        }
+
         // LogModule( eLogConnect, LOG_VERBOSE, "NetConnector::directConnectTo: connect SUCCESS to %s:%d", ipAddr.c_str(), port );
         // generate encryption keys
 

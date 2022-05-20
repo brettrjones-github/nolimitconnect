@@ -47,6 +47,7 @@ public:
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override; 
     virtual void				toGuiContactOnline( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override; 
+    virtual void				toGuiContactOffline( VxGUID& onlineId );
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) override; 
@@ -80,6 +81,7 @@ public:
 
     GuiUser*                    updateMyIdent( VxNetIdent* myIdent );
     GuiUser*                    updateUser( VxNetIdent* hisIdent );
+    void                        updateOnlineStatus( VxNetIdent* netIdent, bool online );
 
     void                        wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
@@ -102,7 +104,6 @@ signals:
     void                        signalInternalUpdateUser( VxNetIdent* netIdent );
     void                        signalInternalSaveMyIdent( VxNetIdent* netIdent );
     void                        signalInternalUserRemoved( VxGUID onlineId );
-    void                        signalInternalUserOnlineStatus( VxNetIdent* netIdent, bool online );
 
 private slots:
     void				        slotInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
@@ -111,7 +112,6 @@ private slots:
     void                        slotInternalUpdateUser( VxNetIdent* netIdent );
     void                        slotInternalSaveMyIdent( VxNetIdent* netIdent );
     void                        slotInternalUserRemoved( VxGUID onlineId );
-    void                        slotInternalUserOnlineStatus( VxNetIdent* netIdent, bool online );
 
 protected:
     void                        removeUser( VxGUID& onlineId );

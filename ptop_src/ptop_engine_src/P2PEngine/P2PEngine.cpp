@@ -587,6 +587,9 @@ void P2PEngine::onFirstPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, Big
 
 		getThumbMgr().requestThumbs( sktBase, bigListInfo->getVxNetIdent() );
 
-		getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
+		if( !sktBase->isTempConnection() )
+		{
+			getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
+		}	
 	}
 }

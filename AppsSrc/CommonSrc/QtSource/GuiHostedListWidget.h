@@ -49,6 +49,7 @@ public:
     GuiHostedListItem*          findListItemWidgetByOnlineId( VxGUID& onlineId );
     GuiHosted*                  findGuiHostedByHostId( HostedId& hostedId );
 
+    virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
 
     virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );

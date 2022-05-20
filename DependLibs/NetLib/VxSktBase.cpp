@@ -1556,5 +1556,5 @@ const std::string& VxSktBase::describeSktDirection( void )
 bool VxSktBase::isTempConnection( void )
 {
 	bool isPerm = ( eConnectReasonUnknown == m_ConnectReason || IsConnectReasonJoin( m_ConnectReason )) && ( eSktTypeTcpConnect == m_eSktType || eSktTypeTcpAccept == m_eSktType );
-	return !isPerm;
+	return !isPerm || IsConnectReasonAnnounce( m_ConnectReason );
 }

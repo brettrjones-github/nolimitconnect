@@ -204,7 +204,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 	else
 	{
-        if( getRelayMgr().sendRequestedReplyPktAnn(sktBase, bigListInfo->getVxNetIdent()) )
+        if( getRelayMgr().sendRequestedReplyPktAnnIfNeeded( pkt, sktBase, bigListInfo->getVxNetIdent()) )
         {
             getConnectIdListMgr().onGroupUserAnnounce( pkt, sktBase, bigListInfo->getVxNetIdent(), true );
         }

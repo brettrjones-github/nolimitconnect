@@ -473,6 +473,15 @@ void GuiHostedListWidget::onFavoriteButtonClicked( GuiHostedListItem* hostItem )
 }
 
 //============================================================================
+void GuiHostedListWidget::callbackOnUserAdded( GuiUser* guiUser )
+{
+    if( getIsHostView() )
+    {
+        updateUser( guiUser );
+    }
+}
+
+//============================================================================
 void GuiHostedListWidget::callbackOnUserUpdated( GuiUser* guiUser )
 {
     if( getIsHostView() )

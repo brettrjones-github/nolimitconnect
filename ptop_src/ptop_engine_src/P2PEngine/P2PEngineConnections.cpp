@@ -76,7 +76,7 @@ void P2PEngine::onContactConnected( RcConnectInfo * poInfo, bool connectionListI
 		poInfo->m_BigListInfo->setIsOnline( true );
 		poInfo->m_BigListInfo->setIsConnected( true );
 		std::string strName = poInfo->m_BigListInfo->getOnlineName();
-		if( poInfo->getSkt()->isTempConnection() && shouldNotifyGui( poInfo->m_BigListInfo ) )
+		if( !poInfo->getSkt()->isTempConnection() && shouldNotifyGui( poInfo->m_BigListInfo ) )
 		{
 			//LogMsg( LOG_INFO, "toGuiContactOnline id %s name %s\n", 
 			//	poInfo->m_BigListInfo->getMyOnlineId().describeVxGUID().c_str(),

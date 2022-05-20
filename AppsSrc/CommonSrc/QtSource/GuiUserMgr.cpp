@@ -125,7 +125,7 @@ void GuiUserMgr::toGuiContactOnline( VxNetIdent * netIdent )
         return;
     }
 
-    emit signalInternalUserOnlineStatus( new VxNetIdent( *netIdent ), true );
+    updateOnlineStatus( netIdent, true );
 }
 
 //============================================================================
@@ -137,7 +137,13 @@ void GuiUserMgr::toGuiContactOffline( VxNetIdent * netIdent )
         return;
     }
 
-    emit signalInternalUserOnlineStatus( new VxNetIdent( *netIdent ), false );
+    updateOnlineStatus( netIdent, false );
+}
+
+//============================================================================
+void GuiUserMgr::toGuiContactOffline( VxGUID& onlineId )
+{
+
 }
 
 //============================================================================
@@ -386,15 +392,9 @@ void GuiUserMgr::slotInternalUserRemoved( VxGUID onlineId )
 }
 
 //============================================================================
-void GuiUserMgr::slotInternalUserOnlineStatus( VxNetIdent* netIdent, bool online )
+void GuiUserMgr::updateOnlineStatus( VxNetIdent* netIdent, bool online )
 {
-    GuiUser* guiUser = updateUser( netIdent );
-    if( guiUser )
-    {
-        guiUser->updateIsOnline();
-    }
-
-    delete netIdent;
+    updateUser( netIdent );
 }
 
 //============================================================================
@@ -523,6 +523,7 @@ GuiUser* GuiUserMgr::updateUser( VxNetIdent* hisIdent )
         GuiUser* guiUser = findUser( hisIdent->getMyOnlineId() );
         if( guiUser && guiUser->getMyOnlineId() == hisIdent->getMyOnlineId() )
         {
+            guiUser->updateIsOnline();
             onUserUpdated( guiUser );
         }
         else
@@ -530,6 +531,7 @@ GuiUser* GuiUserMgr::updateUser( VxNetIdent* hisIdent )
             guiUser = new GuiUser( m_MyApp );
             guiUser->setNetIdent( hisIdent );
             m_UserList[guiUser->getMyOnlineId()] = guiUser;
+            guiUser->updateIsOnline();
             onUserAdded( guiUser );
         }
 
@@ -773,14 +775,14 @@ void GuiUserMgr::sendUserUpdatedToCallbacks( GuiUser* guiUser )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline )
+void GuiUserMgr::toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    emit signalInternalUserOnlineStatus( new VxNetIdent( *hostIdent ), isOnline );
+    updateUser( netIdent );
 }
 
 //============================================================================
