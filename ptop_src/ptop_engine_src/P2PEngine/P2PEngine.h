@@ -29,7 +29,7 @@
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h>
 
-#include <ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.h>
+#include <ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h>

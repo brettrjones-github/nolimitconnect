@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "PktTypes.h"
-#include <GuiInterface/IDefs.h>
+#include "GroupieId.h"
 
 #pragma pack(push)
 #pragma pack(1)
@@ -26,12 +26,12 @@ class PktHostOfferReq : public VxPktHdr
 public:
     PktHostOfferReq();
 
-    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )          { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )    { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ){ m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
     void						setOfferMsg( const char * msg );
@@ -54,12 +54,12 @@ class PktHostOfferReply : public VxPktHdr
 public:
     PktHostOfferReply();
 
-    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )          { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )    { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ){ m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
     void						setOfferMsg( const char * msg );
@@ -82,15 +82,21 @@ class PktHostJoinReq : public VxPktHdr
 public:
     PktHostJoinReq();
 
-    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )          { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )    { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
     void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
     void                        setSessionId( VxGUID& sessionId )               { m_SessionId = sessionId; }
     VxGUID                      getSessionId( void )                            { return m_SessionId; }
+    void                        setUserOnlineId( VxGUID onlineId )              { m_UserOnlineId = onlineId; }
+    VxGUID&                     getUserOnlineId( void )                         { return m_UserOnlineId; }
+    void                        setHostOnlineId( VxGUID onlineId )              { m_HostOnlineId = onlineId; }
+    VxGUID&                     getHostOnlineId( void )                         { return m_HostOnlineId; }
+    void                        setGroupieId( GroupieId& groupieId )            { m_UserOnlineId = groupieId.getGroupieOnlineId(); m_HostOnlineId = groupieId.getHostedOnlineId(); m_HostType = (uint8_t)groupieId.getHostType(); }
+    GroupieId                   getGroupieId( void )                            { return GroupieId( m_UserOnlineId, m_HostOnlineId, (EHostType)m_HostType ); }
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -101,6 +107,8 @@ private:
     uint64_t					m_TimeRequestedMs{ 0 };		
     uint64_t					m_Res4{ 0 };
     VxGUID                      m_SessionId;
+    VxGUID                      m_UserOnlineId;
+    VxGUID                      m_HostOnlineId;
 };
 
 class PktHostJoinReply : public VxPktHdr
@@ -108,17 +116,21 @@ class PktHostJoinReply : public VxPktHdr
 public:
     PktHostJoinReply();
 
-    void                        setHostType( enum EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    void                        setHostType( enum EHostType hostType )          { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
-    void                        setPluginType( enum EPluginType pluginType )         { m_PluginType = (uint8_t)pluginType; }
+    void                        setPluginType( enum EPluginType pluginType )    { m_PluginType = (uint8_t)pluginType; }
     EPluginType                 getPluginType( void )                           { return (EPluginType)m_PluginType; }
 
-    void                        setAccessState( enum EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    void                        setAccessState( enum EPluginAccess accessState ){ m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
     void                        setSessionId( VxGUID sessionId )                { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                            { return m_SessionId; }
-    void                        setOnlineId( VxGUID onlineId )                  { m_OnlineId = onlineId; }
-    VxGUID&                     getOnlineId( void )                             { return m_OnlineId; }
+    void                        setUserOnlineId( VxGUID onlineId )              { m_UserOnlineId = onlineId; }
+    VxGUID&                     getUserOnlineId( void )                         { return m_UserOnlineId; }
+    void                        setHostOnlineId( VxGUID onlineId )              { m_HostOnlineId = onlineId; }
+    VxGUID&                     getHostOnlineId( void )                         { return m_HostOnlineId; }
+    void                        setGroupieId( GroupieId& groupieId )            { m_UserOnlineId = groupieId.getGroupieOnlineId(); m_HostOnlineId = groupieId.getHostedOnlineId(); m_HostType = (uint8_t)groupieId.getHostType(); }
+    GroupieId                   getGroupieId( void )                            { return GroupieId( m_UserOnlineId, m_HostOnlineId, (EHostType)m_HostType ); }
     void                        setCommError( ECommErr commError )              { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                      { return (ECommErr)m_CommError; }
 
@@ -131,7 +143,8 @@ private:
     uint64_t					m_TimeRequestedMs{ 0 };		
     uint64_t					m_Res4{ 0 };
     VxGUID                      m_SessionId;
-    VxGUID                      m_OnlineId;
+    VxGUID                      m_UserOnlineId;
+    VxGUID                      m_HostOnlineId;
 };
 
 class PktHostLeaveReq : public VxPktHdr
@@ -139,15 +152,21 @@ class PktHostLeaveReq : public VxPktHdr
 public:
     PktHostLeaveReq();
 
-    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
-    EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
+    void                        setHostType( enum EHostType hostType )  { m_HostType = ( uint8_t )hostType; }
+    EHostType                   getHostType( void )                     { return ( EHostType )m_HostType; }
     void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
-    EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
+    EPluginType                 getPluginType( void )                   { return ( EPluginType )m_PluginType; }
 
     void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
-    EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
-    void                        setSessionId( VxGUID& sessionId ) { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void ) { return m_SessionId; }
+    EPluginAccess               getAccessState( void )                  { return ( EPluginAccess )m_AccessState; }
+    void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
+    VxGUID&                     getSessionId( void )                    { return m_SessionId; }
+    void                        setUserOnlineId( VxGUID onlineId )      { m_UserOnlineId = onlineId; }
+    VxGUID&                     getUserOnlineId( void )                 { return m_UserOnlineId; }
+    void                        setHostOnlineId( VxGUID onlineId )      { m_HostOnlineId = onlineId; }
+    VxGUID&                     getHostOnlineId( void )                 { return m_HostOnlineId; }
+    void                        setGroupieId( GroupieId& groupieId )    { m_UserOnlineId = groupieId.getGroupieOnlineId(); m_HostOnlineId = groupieId.getHostedOnlineId(); m_HostType = (uint8_t)groupieId.getHostType(); }
+    GroupieId                   getGroupieId( void )                    { return GroupieId( m_UserOnlineId, m_HostOnlineId, (EHostType)m_HostType ); }
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -158,6 +177,8 @@ private:
     uint64_t					m_TimeRequestedMs{ 0 };
     uint64_t					m_Res4{ 0 };
     VxGUID                      m_SessionId;
+    VxGUID                      m_UserOnlineId;
+    VxGUID                      m_HostOnlineId;
 };
 
 class PktHostLeaveReply : public VxPktHdr
@@ -165,19 +186,23 @@ class PktHostLeaveReply : public VxPktHdr
 public:
     PktHostLeaveReply();
 
-    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
-    EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
-    void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
-    EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
+    void                        setHostType( enum EHostType hostType )          { m_HostType = ( uint8_t )hostType; }
+    EHostType                   getHostType( void )                             { return ( EHostType )m_HostType; }
+    void                        setPluginType( enum EPluginType pluginType )    { m_PluginType = ( uint8_t )pluginType; }
+    EPluginType                 getPluginType( void )                           { return ( EPluginType )m_PluginType; }
 
     void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
-    EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
-    void                        setSessionId( VxGUID sessionId ) { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void ) { return m_SessionId; }
-    void                        setOnlineId( VxGUID onlineId ) { m_OnlineId = onlineId; }
-    VxGUID&                     getOnlineId( void ) { return m_OnlineId; }
-    void                        setCommError( ECommErr commError ) { m_CommError = ( uint8_t )commError; }
-    ECommErr                    getCommError( void ) const { return ( ECommErr )m_CommError; }
+    EPluginAccess               getAccessState( void )                          { return ( EPluginAccess )m_AccessState; }
+    void                        setSessionId( VxGUID sessionId )                { m_SessionId = sessionId; }
+    VxGUID&                     getSessionId( void )                            { return m_SessionId; }
+    void                        setUserOnlineId( VxGUID onlineId )              { m_UserOnlineId = onlineId; }
+    VxGUID&                     getUserOnlineId( void )                         { return m_UserOnlineId; }
+    void                        setHostOnlineId( VxGUID onlineId )              { m_HostOnlineId = onlineId; }
+    VxGUID&                     getHostOnlineId( void )                         { return m_HostOnlineId; }
+    void                        setGroupieId( GroupieId& groupieId )            { m_UserOnlineId = groupieId.getGroupieOnlineId(); m_HostOnlineId = groupieId.getHostedOnlineId(); m_HostType = (uint8_t)groupieId.getHostType(); }
+    GroupieId                   getGroupieId( void )                            { return GroupieId( m_UserOnlineId, m_HostOnlineId, (EHostType)m_HostType ); }
+    void                        setCommError( ECommErr commError )              { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const                      { return ( ECommErr )m_CommError; }
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -188,7 +213,8 @@ private:
     uint64_t					m_TimeRequestedMs{ 0 };
     uint64_t					m_Res4{ 0 };
     VxGUID                      m_SessionId;
-    VxGUID                      m_OnlineId;
+    VxGUID                      m_UserOnlineId;
+    VxGUID                      m_HostOnlineId;
 };
 
 class PktHostUnJoinReq : public VxPktHdr
@@ -196,15 +222,22 @@ class PktHostUnJoinReq : public VxPktHdr
 public:
     PktHostUnJoinReq();
 
-    void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
-    EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
+    void                        setHostType( enum EHostType hostType )      { m_HostType = ( uint8_t )hostType; }
+    EHostType                   getHostType( void )                          { return ( EHostType )m_HostType; }
     void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
     EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
 
     void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
-    EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
-    void                        setSessionId( VxGUID& sessionId ) { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void ) { return m_SessionId; }
+    EPluginAccess               getAccessState( void )                      { return ( EPluginAccess )m_AccessState; }
+    void                        setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
+    VxGUID&                     getSessionId( void )                        { return m_SessionId; }
+    void                        setUserOnlineId( VxGUID onlineId )          { m_UserOnlineId = onlineId; }
+    VxGUID&                     getUserOnlineId( void )                     { return m_UserOnlineId; }
+    void                        setHostOnlineId( VxGUID onlineId )          { m_HostOnlineId = onlineId; }
+    VxGUID&                     getHostOnlineId( void )                     { return m_HostOnlineId; }
+    void                        setGroupieId( GroupieId& groupieId )        { m_UserOnlineId = groupieId.getGroupieOnlineId(); m_HostOnlineId = groupieId.getHostedOnlineId(); m_HostType = (uint8_t)groupieId.getHostType(); }
+    GroupieId                   getGroupieId( void )                        { return GroupieId( m_UserOnlineId, m_HostOnlineId, (EHostType)m_HostType ); }
+
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -215,6 +248,8 @@ private:
     uint64_t					m_TimeRequestedMs{ 0 };
     uint64_t					m_Res4{ 0 };
     VxGUID                      m_SessionId;
+    VxGUID                      m_UserOnlineId;
+    VxGUID                      m_HostOnlineId;
 };
 
 class PktHostUnJoinReply : public VxPktHdr
@@ -223,16 +258,22 @@ public:
     PktHostUnJoinReply();
 
     void                        setHostType( enum EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
-    EHostType                   getHostType( void ) { return ( EHostType )m_HostType; }
+    EHostType                   getHostType( void )                     { return ( EHostType )m_HostType; }
     void                        setPluginType( enum EPluginType pluginType ) { m_PluginType = ( uint8_t )pluginType; }
-    EPluginType                 getPluginType( void ) { return ( EPluginType )m_PluginType; }
+    EPluginType                 getPluginType( void )                   { return ( EPluginType )m_PluginType; }
 
     void                        setAccessState( enum EPluginAccess accessState ) { m_AccessState = ( uint8_t )accessState; }
-    EPluginAccess               getAccessState( void ) { return ( EPluginAccess )m_AccessState; }
-    void                        setSessionId( VxGUID sessionId ) { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void ) { return m_SessionId; }
-    void                        setCommError( ECommErr commError ) { m_CommError = ( uint8_t )commError; }
-    ECommErr                    getCommError( void ) const { return ( ECommErr )m_CommError; }
+    EPluginAccess               getAccessState( void )                  { return ( EPluginAccess )m_AccessState; }
+    void                        setSessionId( VxGUID sessionId )        { m_SessionId = sessionId; }
+    VxGUID&                     getSessionId( void )                    { return m_SessionId; }
+    void                        setUserOnlineId( VxGUID onlineId )      { m_UserOnlineId = onlineId; }
+    VxGUID&                     getUserOnlineId( void )                 { return m_UserOnlineId; }
+    void                        setHostOnlineId( VxGUID onlineId )      { m_HostOnlineId = onlineId; }
+    VxGUID&                     getHostOnlineId( void )                 { return m_HostOnlineId; }
+    void                        setGroupieId( GroupieId& groupieId )    { m_UserOnlineId = groupieId.getGroupieOnlineId(); m_HostOnlineId = groupieId.getHostedOnlineId(); m_HostType = (uint8_t)groupieId.getHostType(); }
+    GroupieId                   getGroupieId( void )                    { return GroupieId( m_UserOnlineId, m_HostOnlineId, (EHostType)m_HostType ); }
+    void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -243,6 +284,8 @@ private:
     uint64_t					m_TimeRequestedMs{ 0 };
     uint64_t					m_Res4{ 0 };
     VxGUID                      m_SessionId;
+    VxGUID                      m_UserOnlineId;
+    VxGUID                      m_HostOnlineId;
 };
 
 #pragma pack(pop)

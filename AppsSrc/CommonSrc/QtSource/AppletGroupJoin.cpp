@@ -365,6 +365,7 @@ void AppletGroupJoin::updateUser( GuiUser* guiUser )
 {
 	ui.m_GuiHostedListWidget->updateUser( guiUser );
 	ui.m_GuiGroupieListWidget->updateUser( guiUser );
+	ui.m_HostAdminIdentWidget->updateIdentity( guiUser, true );
 }
 
 //============================================================================

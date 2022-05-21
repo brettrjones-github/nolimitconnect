@@ -32,10 +32,17 @@ PluginBaseService::PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, V
 }
 
 //============================================================================
-void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr )
+void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr, VxGUID& requestorOnlineId, VxSktBase* sktBaseRequester )
 {
     if( pktHdr && pktHdr->isValidPkt() )
     {
+        bool sentToRequestor{ false };
+        VxGUID requestorSktConnectionId;
+        if( sktBaseRequester )
+        {
+            requestorSktConnectionId = sktBaseRequester->getConnectionId();
+        }
+
         std::set<ConnectId> connectIdSet;
         std::set<ConnectId> relayedIdSet;
         if( m_Engine.getConnectIdListMgr().getConnections( getHostedId(), connectIdSet, relayedIdSet ) )
@@ -46,11 +53,23 @@ void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr )
                 VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( const_cast<ConnectId&>(connectId).getSocketId(), true );
                 if( sktBase && sktBase->isConnected() )
                 {
-                    txPacket( const_cast< ConnectId& >( connectId ).getGroupieOnlineId(), sktBase, pktHdr );
+                    if( txPacket( const_cast<ConnectId&>(connectId).getGroupieOnlineId(), sktBase, pktHdr ) )
+                    {
+                        if( requestorSktConnectionId == sktBase->getConnectionId() )
+                        {
+                            sentToRequestor = true;
+                        }
+                    }
                 }
 
                 m_Engine.getPeerMgr().unlockSktList();
             }
+        }
+
+        if( !sentToRequestor && sktBaseRequester && requestorOnlineId.isVxGUIDValid() )
+        {
+            // allways send to requester even if not still joined
+            txPacket( requestorOnlineId, sktBaseRequester, pktHdr );
         }
     }
     else

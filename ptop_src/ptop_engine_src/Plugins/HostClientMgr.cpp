@@ -69,7 +69,7 @@ void HostClientMgr::onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr, V
     PktHostLeaveReply* hostReply = ( PktHostLeaveReply* )pktHdr;
     if( hostReply->isValidPkt() )
     {
-        GroupieId groupieId( hostReply->getOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
+        GroupieId groupieId =hostReply->getGroupieId();
         m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
 
         if( ePluginAccessOk == hostReply->getAccessState() )

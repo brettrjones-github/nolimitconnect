@@ -125,15 +125,16 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     }
 
     GuiUser* guiUser = hostSession->getGuiUser();
-    //if( !guiUser )
-    //{
-    //    // if posible get user identity
-    //    guiUser = m_MyApp.getUserMgr().getOrQueryUser( hostSession->getHostedId().getOnlineId() );
-    //    if( guiUser )
-    //    {
-    //        hostSession->setGuiUser( guiUser );
-    //    }
-    //}
+    if( !guiUser )
+    {
+        // if posible get user identity
+        guiUser = m_MyApp.getUserMgr().getOrQueryUser( hostSession->getHostedId().getOnlineId() );
+        if( guiUser )
+        {
+            guiHosted->setUser( guiUser );
+            hostSession->setGuiUser( guiUser );
+        }
+    }
 
     if( guiUser )
     {

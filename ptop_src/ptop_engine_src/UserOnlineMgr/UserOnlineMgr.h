@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListCallbackInterface.h>
 
 #include <PktLib/GroupieId.h>
 
@@ -57,6 +57,7 @@ public:
 protected:
     void				        callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) override;
     void				        callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) override;
+    void                        callbackRelayStatusChange( ConnectId& connectId, bool isRelayed );
 
     void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo, bool leftHost = false );
     void                        updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo, bool leftHost );

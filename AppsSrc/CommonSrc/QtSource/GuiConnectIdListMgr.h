@@ -15,7 +15,7 @@
 
 #include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
-#include <ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListCallbackInterface.h>
 
 #include <PktLib/ConnectId.h>
 
@@ -43,7 +43,7 @@ public:
     virtual void				callbackNearbyStatusChange( VxGUID& onlineId, int64_t nearbyTimeOrZeroIfNot ) override;
     // callbackConnectionStatusChange should happen before callbackOnlineStatusChange when user disconnects from host
     virtual void				callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) override;
-    virtual void				callbackRelayStatusChange( VxGUID& connectId, bool isRelayed ) override;
+    virtual void				callbackRelayStatusChange( ConnectId& connectId, bool isRelayed ) override;
     
     virtual void				callbackConnectionReason( VxGUID& sktConnectId, EConnectReason connectReason, bool enableReason ) override;
     virtual void				callbackConnectionLost( VxGUID& sktConnectId ) override;
@@ -56,7 +56,7 @@ public:
 
 signals:
     void				        signalInternalOnlineStatusChange( VxGUID onlineId, bool isOnline );
-    void				        signalInternalRelayStatusChange( VxGUID onlineId, bool isRelayed );
+    void				        signalInternalRelayStatusChange( ConnectId connectId, bool isRelayed );
     void				        signalInternalNearbyStatusChange( VxGUID onlineId, int64_t nearbyTimeOrZeroIfNot );
     void				        signalInternalConnectionStatusChange( ConnectId connectId, bool isConnected );
     void				        signalInternalConnectionReason( VxGUID sktConnectId, EConnectReason connectReason, bool enableReason );
@@ -65,7 +65,7 @@ signals:
 private slots:
     void				        slotInternalOnlineStatusChange( VxGUID onlineId, bool isOnline );
     void				        slotInternalNearbyStatusChange( VxGUID onlineId, int64_t nearbyTimeOrZeroIfNot );
-    void				        slotInternalRelayStatusChange( VxGUID onlineId, bool isOnline );
+    void				        slotInternalRelayStatusChange( ConnectId connectId, bool isRelayed );
     void				        slotInternalConnectionStatusChange( ConnectId connectId, bool isConnected );
     void				        slotInternalConnectionReason( VxGUID sktConnectId, EConnectReason connectReaso, bool enableReasonn );
     void				        slotInternalConnectionLost( VxGUID sktConnectId );
@@ -84,7 +84,7 @@ protected:
     AppCommon&                  m_MyApp;
     std::vector<GuiConnectIdListCallback*> m_GuiConnectIdClientList;
     std::set<ConnectId>         m_ConnectIdList;
-    std::map<VxGUID, bool>      m_RelayedIdList;
+    std::set<ConnectId>         m_RelayedIdList;
     std::map<VxGUID, int64_t>   m_NearbyIdList;
     std::map<VxGUID, std::set<EConnectReason>>      m_ConnectReasonList;
 };

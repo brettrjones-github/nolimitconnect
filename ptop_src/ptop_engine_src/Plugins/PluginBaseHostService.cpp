@@ -262,33 +262,29 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
     PktHostLeaveReply pktReply;
     if( pktReq->isValidPkt() )
     {
-        pktReply.setHostType( pktReq->getHostType() );
+        GroupieId groupieId = pktReq->getGroupieId();
+        pktReply.setGroupieId( groupieId );
+
         pktReply.setPluginType( getPluginType() );
         pktReply.setSessionId( pktReq->getSessionId() );
         pktReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-        pktReply.setOnlineId( netIdent->getMyOnlineId() );
-
-        GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), getHostType() );
+        
+        VxGUID sktConnectionId( sktBase->getConnectionId() );
+        ConnectId connectId( sktConnectionId, groupieId );
 
         if( ePluginAccessOk == pktReply.getAccessState() )
         {
-            m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
-
             m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
         }
         else if( ePluginAccessLocked == pktReply.getAccessState() )
         {
             if( !netIdent->isIgnored() )
             {
-                m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
                 if( m_HostServerMgr.getJoinState( netIdent, pktReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
                     pktReply.setAccessState( ePluginAccessOk );
                 }
-      
-                m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );                
-                m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
             }
             else
             {
@@ -306,9 +302,11 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
             LogMsg( LOG_ERROR, "PluginBaseHostService %s got leave request from ignored person %s", DescribeHostType( getHostType() ), netIdent->getMyOnlineUrl().c_str() );
         }
 
-        broadcastToClients( &pktReply );
+        broadcastToClients( &pktReply, netIdent->getMyOnlineId(), sktBase );
 
-        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
+
+        m_Engine.getConnectIdListMgr().removeConnection( sktConnectionId, groupieId );
     }
     else
     {

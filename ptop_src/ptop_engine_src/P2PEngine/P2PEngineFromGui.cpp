@@ -1639,15 +1639,16 @@ bool P2PEngine::fromGuiQueryIdentity( GroupieInfo& groupieInfo, VxNetIdent& retN
 		// if the url is valid try a direct connection first
         if( !getRelayMgr().requestRelayConnection( sktBase, groupieInfo ) )
         {
-            getUserOnlineMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
-            getConnectIdListMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
+            getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), myGroupieId );
         }
+		else
+		{
+			result = true;
+		}
 	}
     else
     {
         LogMsg( LOG_VERBOSE, "fromGuiQueryIdentity Lost Connection to host");
-        getUserOnlineMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
-        getConnectIdListMgr().onUserOffline( groupieInfo.getGroupieId().getGroupieOnlineId() );
     }
 
 	return result;

@@ -23,9 +23,9 @@ class ConnectIdListCallbackInterface
 {
 public:
     virtual void				callbackNearbyStatusChange( VxGUID& onlineId, int64_t nearbyTimeOrZeroIfNot ) {};
-    virtual void				callbackRelayStatusChange( VxGUID& connectId, bool isRelayed ) {};
-    virtual void				callbackRelayStatusChange( ConnectId& connectId, bool isRelayed ) {};
     virtual void				callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) {};
+
+    virtual void				callbackRelayStatusChange( ConnectId& connectId, bool isRelayed ) {};
     virtual void				callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) {};
 
     virtual void				callbackConnectionReason( VxGUID& socketId, enum EConnectReason connectReason, bool enableReason ) {};

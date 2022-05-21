@@ -19,7 +19,7 @@
 #include "AppCommon.h"
 #include "GuiUserBase.h"
 
-#include <ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.h>
+#include <ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListMgr.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxGlobals.h>
@@ -35,7 +35,7 @@ GuiConnectIdListMgr::GuiConnectIdListMgr( AppCommon& app )
 void GuiConnectIdListMgr::onAppCommonCreated( void )
 {
     connect( this, SIGNAL( signalInternalNearbyStatusChange(VxGUID,int64_t) ),              this, SLOT( slotInternalNearbyStatusChange(VxGUID,int64_t) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalRelayStatusChange(VxGUID,bool) ),                  this, SLOT( slotInternalRelayStatusChange(VxGUID,bool) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalRelayStatusChange( ConnectId,bool) ),              this, SLOT( slotInternalRelayStatusChange( ConnectId,bool) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalOnlineStatusChange(VxGUID,bool) ),                 this, SLOT( slotInternalOnlineStatusChange(VxGUID,bool) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalConnectionStatusChange(ConnectId,bool) ),          this, SLOT( slotInternalConnectionStatusChange(ConnectId,bool) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalConnectionReason(VxGUID,EConnectReason,bool) ),    this, SLOT( slotInternalConnectionReason(VxGUID,EConnectReason,bool) ), Qt::QueuedConnection );
@@ -57,9 +57,9 @@ void GuiConnectIdListMgr::callbackNearbyStatusChange( VxGUID& onlineId, int64_t 
 }
 
 //============================================================================
-void GuiConnectIdListMgr::callbackRelayStatusChange( VxGUID& onlineId, bool isRelayed )
+void GuiConnectIdListMgr::callbackRelayStatusChange( ConnectId& connectId, bool isRelayed )
 {
-    emit signalInternalRelayStatusChange( onlineId, isRelayed );
+    emit signalInternalRelayStatusChange( connectId, isRelayed );
 }
 
 //============================================================================
@@ -101,23 +101,27 @@ void GuiConnectIdListMgr::slotInternalNearbyStatusChange( VxGUID onlineId, int64
 }
 
 //============================================================================
-void GuiConnectIdListMgr::slotInternalRelayStatusChange( VxGUID onlineId, bool isRelayed )
+void GuiConnectIdListMgr::slotInternalRelayStatusChange( ConnectId connectId, bool isNowRelayed )
 {
-    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange isRelayed %d %s", isRelayed, m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
-    auto iter = m_RelayedIdList.find( onlineId );
+    LogMsg( LOG_VERBOSE, "GuiConnectIdListMgr::slotInternalOnlineStatusChange isRelayed %d %s", isNowRelayed, m_MyApp.getUserMgr().getUserOnlineName( connectId.getGroupieOnlineId() ).c_str() );
+    auto iter = m_RelayedIdList.find( connectId );
     if( iter != m_RelayedIdList.end() )
     {
-        if( iter->second != isRelayed )
+        if( !isNowRelayed )
         {
-            iter->second = isRelayed;
-            onRelayStatusChange( onlineId, isRelayed );
+            m_RelayedIdList.erase( iter );
         }
+
     }
     else
     {
-        m_RelayedIdList[ onlineId ] = isRelayed;
-        onRelayStatusChange( onlineId, isRelayed );
+        if( isNowRelayed )
+        {
+            m_RelayedIdList.insert( connectId );
+        }
     }
+
+    onRelayStatusChange( connectId.getGroupieOnlineId(), isRelayed( connectId.getGroupieOnlineId() ) );
 }
 
 //============================================================================
@@ -412,12 +416,13 @@ bool GuiConnectIdListMgr::isRelayed( VxGUID& onlineId )
     bool isRelayed{ false };
     if( onlineId.isVxGUIDValid() )
     {
-        auto iter = m_RelayedIdList.find( onlineId );
-        if( iter != m_RelayedIdList.end() )
+        for( auto &connectIdIn : m_RelayedIdList )
         {
-            if( iter->second == true )
+            ConnectId& connectId = const_cast<ConnectId&>(connectIdIn);
+            if( connectId.getGroupieOnlineId() == onlineId )
             {
                 isRelayed = true;
+                break;
             }
         }
 

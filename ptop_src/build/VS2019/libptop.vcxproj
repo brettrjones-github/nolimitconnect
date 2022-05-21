@@ -510,6 +510,7 @@
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\ConnectIdListMgr\ConnectIdListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectedInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectedListAll.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectedListBase.cpp" />
@@ -584,7 +585,6 @@
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\ConnectIdListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp" />
@@ -844,6 +844,8 @@
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\ConnectIdListMgr\ConnectIdListCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\ConnectIdListMgr\ConnectIdListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectedInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectedListAll.h" />
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectedListBase.h" />
@@ -949,8 +951,6 @@
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlListDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\ConnectIdListCallbackInterface.h" />
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\ConnectIdListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h" />

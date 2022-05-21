@@ -63,6 +63,8 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/BlobXferMgr/BlobXferDb.h \
     $$PWD/ptop_src/ptop_engine_src/BlobXferMgr/BlobXferMgr.h \
     $$PWD/ptop_src/ptop_engine_src/BlobXferMgr/BlobXferSession.h \
+    $$PWD/ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/Connections/ConnectedInfo.h \
 	$$PWD/ptop_src/ptop_engine_src/Connections/ConnectedListAll.h \
 	$$PWD/ptop_src/ptop_engine_src/Connections/ConnectedListBase.h \
@@ -166,13 +168,11 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaClient.h \
@@ -404,6 +404,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/BlobXferMgr/BlobXferDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/BlobXferMgr/BlobXferMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/BlobXferMgr/BlobXferSession.cpp \
+    $$PWD/ptop_src/ptop_engine_src/ConnectIdListMgr/ConnectIdListMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Connections/ConnectedInfo.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Connections/ConnectedListAll.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Connections/ConnectedListBase.cpp \
@@ -476,7 +477,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.cpp \

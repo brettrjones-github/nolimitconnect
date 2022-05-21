@@ -59,7 +59,20 @@ void UserOnlineMgr::callbackConnectionStatusChange( ConnectId& connectId, bool i
     User* user = findUser( connectId.getGroupieOnlineId() );
     if( user && user->getNetIdent() )
     {
-        announceUserOnlineState( user, isConnected );
+        announceUserOnlineState( user, m_Engine.getConnectIdListMgr().isOnline( connectId.getGroupieOnlineId() ) );
+    }
+
+    unlockResources();
+}
+
+//============================================================================
+void UserOnlineMgr::callbackRelayStatusChange( ConnectId& connectId, bool isRelayed )
+{
+    lockResources();
+    User* user = findUser( connectId.getGroupieOnlineId() );
+    if( user && user->getNetIdent() )
+    {
+        announceUserOnlineState( user, m_Engine.getConnectIdListMgr().isOnline( connectId.getGroupieOnlineId() ) );
     }
 
     unlockResources();
