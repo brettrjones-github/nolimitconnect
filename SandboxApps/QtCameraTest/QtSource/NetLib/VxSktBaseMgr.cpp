@@ -127,7 +127,7 @@ void VxSktBaseMgr::addSkt( VxSktBase * sktBase )
 RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 								bool		bDelete )	// if true delete the skt
 {
-	//LogMsg( LOG_INFO, "Removing Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktId(), sktBase->describeSktType().c_str() );
+	//LogMsg( LOG_INFO, "Removing Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktNumber(), sktBase->describeSktType().c_str() );
 	RCODE rc = -1;
 	std::vector<VxSktBase *>::iterator iter;
 	sktBaseMgrLock();
@@ -145,7 +145,7 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 	sktBaseMgrUnlock();
 	if( bDelete )
 	{
-		LogMsg( LOG_INFO, "Deleting Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktId(), sktBase->describeSktType().c_str() );
+		LogMsg( LOG_INFO, "Deleting Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktNumber(), sktBase->describeSktType().c_str() );
 		delete sktBase;
 	}
 
@@ -264,7 +264,7 @@ void VxSktBaseMgr::doReceiveCallback( VxSktBase * sktBase )
 //============================================================================
 void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 {
-	//LogMsg( LOG_INFO, "VxSktBaseMgr::handleSktCloseEvent: for skt %d 0x%x \n", sktBase->m_iSktId, sktBase );
+	//LogMsg( LOG_INFO, "VxSktBaseMgr::handleSktCloseEvent: for skt %d 0x%x \n", sktBase->m_SktNumber, sktBase );
     int64_t timeNowMs = GetGmtTimeMs();
 	bool deletedSkt = true;
 	while( deletedSkt )
@@ -280,7 +280,7 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 			if( !sktToDelete->getInUseByRxThread() && (timeNowMs > sktToDelete->getToDeleteTimeMs() ))
 			{
 				iter = m_aoSktsToDelete.erase( iter );
-				//LogMsg( LOG_INFO, "deleting skt %d\n", sktToDelete->m_iSktId );
+				//LogMsg( LOG_INFO, "deleting skt %d\n", sktToDelete->m_SktNumber );
 				deletedSkt = true;
 				break;
 			}

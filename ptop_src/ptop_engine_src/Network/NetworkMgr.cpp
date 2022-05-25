@@ -183,12 +183,12 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 	{
 	case eSktCallbackReasonConnectError:
         LogModule( eLogNetworkMgr, LOG_ERROR, "NetworkMgr:TCP skt %d skt id %d connect error %s thread 0x%x",
-                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+                    sktBase->getSktHandle(), sktBase->getSktNumber(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonConnected:
         LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP skt %d skt id %d %s port %d to local port %d thread 0x%x",
-                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktType().c_str(), sktBase->m_RmtIp.getPort(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
+                    sktBase->getSktHandle(), sktBase->getSktNumber(), sktBase->describeSktType().c_str(), sktBase->m_RmtIp.getPort(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonData:
@@ -198,26 +198,26 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 	case eSktCallbackReasonClosed:
 		m_Engine.onConnectionLost( sktBase );
         LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP skt %d skt id %d closed %s thread 0x%x",
-                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+                    sktBase->getSktHandle(), sktBase->getSktNumber(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonError:
  		LogModule( eLogNetworkMgr, LOG_ERROR, "NetworkMgr:TCP skt %d skt id %d error %s thread 0x%x",
-                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+                    sktBase->getSktHandle(), sktBase->getSktNumber(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonClosing:
 		m_Engine.onConnectionLost( sktBase );
-        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktId(), VxGetCurrentThreadId() );
+        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktNumber(), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonConnecting:
-        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonConnecting skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktId(), VxGetCurrentThreadId() );
+        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonConnecting skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktNumber(), VxGetCurrentThreadId() );
 		break;
 
 	default:
 		LogMsg( LOG_ERROR, "NetworkMgrTCP: UNKNOWN CallbackReason %d skt %d skt id %d error %s thread 0x%x", 
-                sktBase->getCallbackReason(), sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+                sktBase->getCallbackReason(), sktBase->getSktHandle(), sktBase->getSktNumber(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 	}
 }

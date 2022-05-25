@@ -65,7 +65,7 @@ VxSktBase* VxSktBaseMgr::findSktBase( const VxGUID& connectId, bool acceptSktsOn
     {
         for( auto sktBase : m_aoSkts )
         {
-            if( sktBase && sktBase->getConnectionId() == connectId )
+            if( sktBase && sktBase->getSocketId() == connectId )
             {
                 return sktBase;
             }
@@ -136,7 +136,7 @@ void VxSktBaseMgr::addSkt( VxSktBase * sktBase )
 RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 								bool		bDelete )	// if true delete the skt
 {
-	//LogMsg( LOG_INFO, "Removing Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktId(), sktBase->describeSktType().c_str() );
+	//LogMsg( LOG_INFO, "Removing Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktNumber(), sktBase->describeSktType().c_str() );
 	RCODE rc = -1;
 	sktBaseMgrLock();
 	for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
@@ -153,7 +153,7 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 	sktBaseMgrUnlock();
 	if( bDelete )
 	{
-        LogMsg( LOG_VERBOSE, "Deleting Skt ID %d type %s from VxSktBaseMgr skt list", sktBase->getSktId(), sktBase->describeSktType().c_str() );
+        LogMsg( LOG_VERBOSE, "Deleting Skt ID %d type %s from VxSktBaseMgr skt list", sktBase->getSktNumber(), sktBase->describeSktType().c_str() );
 		delete sktBase;
 	}
 
@@ -284,7 +284,7 @@ void VxSktBaseMgr::doReceiveCallback( VxSktBase * sktBase )
 //============================================================================
 void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 {
-	//LogMsg( LOG_INFO, "VxSktBaseMgr::handleSktCloseEvent: for skt %d 0x%x \n", sktBase->m_iSktId, sktBase );
+	//LogMsg( LOG_INFO, "VxSktBaseMgr::handleSktCloseEvent: for skt %d 0x%x \n", sktBase->m_SktNumber, sktBase );
     sktBaseMgrLock();
     uint64_t timeNow = GetTimeStampMs();
     for( VxSktBase* sktBase : m_aoSkts )
@@ -293,7 +293,7 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
         {
             if( timeNow - sktBase->getLastActiveTimeMs() > SKT_ALIVE_TIMEOUT )
             {
-                LogModule( eLogSkt, LOG_DEBUG, "Closing due to alive timeout %s skt %d handle %d", DescribeSktType( sktBase->getSktType() ), sktBase->getSktId(), sktBase->getSktHandle() );
+                LogModule( eLogSkt, LOG_DEBUG, "Closing due to alive timeout %s skt %d handle %d", DescribeSktType( sktBase->getSktType() ), sktBase->getSktNumber(), sktBase->getSktHandle() );
                 sktBase->dumpSocketStats();
 
                 sktBase->closeSkt( eSktCloseImAliveTimeout );
@@ -330,7 +330,7 @@ void VxSktBaseMgr::doSktDeleteCleanup()
             {
                 if( sktToDelete->getInUseByRxThread() )
                 {
-                    LogMsg( LOG_ERROR, "socket id %d handle %d type %s still in use by thread after delete timeout %s", sktToDelete->getSktId(), 
+                    LogMsg( LOG_ERROR, "socket id %d handle %d type %s still in use by thread after delete timeout %s", sktToDelete->getSktNumber(), 
                         sktToDelete->getSktHandle(),
                         DescribeSktType( sktToDelete->getSktType() ),
                         sktToDelete->describeSktConnection().c_str() );
@@ -423,7 +423,7 @@ bool VxSktBaseMgr::closeConnection( VxGUID& connectId, ESktCloseReason closeReas
 		sktBaseMgrLock();
 		for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
 		{
-			if( ( *iter )->getConnectionId() == connectId )
+			if( ( *iter )->getSocketId() == connectId )
 			{
 				sktBase = (*iter);
 				break;

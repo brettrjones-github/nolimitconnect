@@ -15,10 +15,14 @@
 #include "ConnectIdListMgr.h"
 #include "ConnectIdListCallbackInterface.h"
 
-#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BaseInfo/BaseSessionInfo.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
+
 #include <NetLib/VxPeerMgr.h>
 
 //============================================================================
@@ -831,7 +835,7 @@ void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktB
     }
 
     VxGUID onlineId = netIdent->getMyOnlineId();
-    VxGUID connectionId = sktBase->getConnectionId();
+    VxGUID connectionId = sktBase->getSocketId();
     // if relayed then the peer id should be the host that relayed the packet
     VxGUID hostOnlineId = sktBase->getPeerOnlineId();
     if( onlineId.isVxGUIDValid() && hostOnlineId.isVxGUIDValid(), connectionId.isVxGUIDValid() )
@@ -859,11 +863,12 @@ void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktB
 
             if( hostType != eHostTypeUnknown )
             {
-                GroupieId groupieId( onlineId, hostOnlineId, hostType );
-                m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
                 LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupUserAnnounce %s from host %s",
-                        netIdent->getOnlineName(),  sktBase->getPeerOnlineName().c_str() );
+                    netIdent->getOnlineName(), sktBase->getPeerOnlineName().c_str() );
+
+                GroupieId groupieId( onlineId, hostOnlineId, hostType );
                 addConnection( connectionId, groupieId, relayed );
+                m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
             }
             else
             {
@@ -885,38 +890,55 @@ void ConnectIdListMgr::onGroupUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktB
 void ConnectIdListMgr::onGroupRelayedUserAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     VxGUID onlineId = netIdent->getMyOnlineId();
-    VxGUID connectionId = sktBase->getConnectionId();
+    VxGUID socketId = sktBase->getSocketId();
     // if relayed then the peer id should be the host that relayed the packet
     VxGUID hostOnlineId = sktBase->getPeerOnlineId();
-    if( onlineId.isVxGUIDValid() && hostOnlineId.isVxGUIDValid(), connectionId.isVxGUIDValid() )
+    if( onlineId.isVxGUIDValid() && hostOnlineId.isVxGUIDValid(), socketId.isVxGUIDValid() )
     {
         if( onlineId != hostOnlineId )
         {
-            EHostType hostType{ eHostTypeUnknown };
+            std::set<EHostType> hostTypes;
 
             lockList();
             for( auto& connectIdConst : m_ConnectIdList )
             {
                 ConnectId& connectId = const_cast<ConnectId&>(connectIdConst);
-                if( IsHostARelayForUser( connectId.getHostType() ) )
+                if( connectId.getSocketId() == socketId && IsHostARelayForUser( connectId.getHostType() ) )
                 {
                     if( connectId.getHostedId().getOnlineId() == hostOnlineId )
                     {
-                        hostType = connectId.getHostType();
-                        break;
+                        hostTypes.insert( connectId.getHostType() );
                     }
                 }
             }
 
             unlockList();
 
-            if( hostType != eHostTypeUnknown )
+            if( !hostTypes.empty() )
             {
-                GroupieId groupieId( onlineId, hostOnlineId, hostType );
-                m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
-                LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupRelayedUserAnnounce %s from host %s",
-                        netIdent->getOnlineName(),  sktBase->getPeerOnlineName().c_str() );
-                addConnection( connectionId, groupieId, true );
+                for( auto hostType : hostTypes )
+                {
+                    LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupRelayedUserAnnounce %s from host %s %s",
+                        netIdent->getOnlineName(), DescribeHostType( hostType ), sktBase->getPeerOnlineName().c_str() );
+
+                    GroupieId groupieId( onlineId, hostOnlineId, hostType );
+
+                    // add the connection first so if user is added it's online status is valid
+                    addConnection( socketId, groupieId, true );
+                    // next make the user up todate
+                    m_Engine.getUserOnlineMgr().onUserOnline( groupieId, sktBase, netIdent );
+                    // finally add the user group join info
+                    PluginBase* plugin = m_Engine.getPluginMgr().findPlugin( HostTypeToClientPlugin( hostType ) );
+                    if( plugin )
+                    {
+                        plugin->onGroupRelayedUserAnnounce( groupieId, sktBase, netIdent );
+                    }
+                    else
+                    {
+                        LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupRelayedUserAnnounce %s from host %s %s Faield to get plugin",
+                            netIdent->getOnlineName(), DescribeHostType( hostType ), sktBase->getPeerOnlineName().c_str() );
+                    }
+                }
             }
             else
             {

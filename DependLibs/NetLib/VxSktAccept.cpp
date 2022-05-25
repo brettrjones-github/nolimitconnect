@@ -52,8 +52,8 @@ RCODE	VxSktAccept::doAccept( VxServerMgr * poMgr, struct sockaddr& oAcceptAddr )
 	m_pfnReceive( this, getRxCallbackUserData() );
 	// make a useful thread name
 	std::string strVxThreadName;
-	StdStringFormat( strVxThreadName, "VxSktBaseAccept%d", m_iSktId );
-    LogModule( eLogConnect, LOG_INFO, "VxSktAccept starting rx thread %s for skt %d skt id %d", strVxThreadName.c_str(), m_Socket, m_iSktId );
+	StdStringFormat( strVxThreadName, "VxSktBaseAccept%d", m_SktNumber );
+    LogModule( eLogConnect, LOG_INFO, "VxSktAccept starting rx thread %s for skt %d skt id %d", strVxThreadName.c_str(), m_Socket, m_SktNumber );
 	startReceiveThread( strVxThreadName.c_str() );
 	return 0;
 }

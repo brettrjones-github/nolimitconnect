@@ -204,7 +204,7 @@ void VxSktUdp::startReceive( void )
 
 		// make a useful thread name
 		std::string strThreadName;
-		StdStringFormat( strThreadName, "VxSktBaseUDP%d", m_iSktId );
+		StdStringFormat( strThreadName, "VxSktBaseUDP%d", m_SktNumber );
 		startReceiveThread( strThreadName.c_str() );
 	}
 }

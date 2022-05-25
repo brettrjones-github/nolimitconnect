@@ -74,7 +74,7 @@ public:
 	
 	virtual ~VxSktBase();
 
-	virtual int					getSktId( void )								{ return m_iSktId; }
+	virtual int					getSktId( void )								{ return m_SktNumber; }
 
 	virtual void				setSktType( ESktType sktType )					{ m_eSktType = sktType; }
 	virtual ESktType			getSktType( void )								{ return m_eSktType; }
@@ -166,7 +166,7 @@ public:
 	RCODE						doConnectTo( void );
 
 	//! get the unique id of this socket
-	virtual int					getSocketId( void ){ return m_iSktId;}			// return id
+	virtual int					getSocketId( void ){ return m_SktNumber;}			// return id
 	//! get the sockets peer connection ip address as host order int32_t
 	virtual RCODE				getRemoteIp(	InetAddress &u32RetIp,		// return ip
 												uint16_t &u16RetPort );	// return port
@@ -247,7 +247,7 @@ protected:
 
 public:
 	SOCKET						m_Socket;				// handle to socket
-	int							m_iSktId;				// socket unique id
+	int							m_SktNumber;				// socket unique id
 
 	InetAddrAndPort				m_LclIp;				// local ip address
 	std::string					m_strLclIp;				// local ip address in dotted form

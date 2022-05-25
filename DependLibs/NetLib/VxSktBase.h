@@ -79,14 +79,14 @@ public:
 	VxSktBase();
 	virtual ~VxSktBase() override;
 
-	virtual int					getSktId( void )								{ return m_iSktId; }
-    virtual VxGUID&             getConnectionId( void )                         { return m_ConnectionId; }
+    virtual int					getSktNumber( void )                            { return m_SktNumber; }		// socket number incremented each socket created
+    virtual VxGUID&             getSocketId( void )                             { return m_ConnectionId; }	// socket unique identifier GUID
+
+	virtual void				setSktHandle( SOCKET sktHandle )				{ m_Socket = sktHandle; }
+	virtual SOCKET				getSktHandle( void )							{ return m_Socket; }		// socket os system handle
 
 	virtual void				setSktType( ESktType sktType )					{ m_eSktType = sktType; }
 	virtual ESktType			getSktType( void )								{ return m_eSktType; }
-
-	virtual void				setSktHandle( SOCKET sktHandle )				{ m_Socket = sktHandle; }
-	virtual SOCKET				getSktHandle( void )							{ return m_Socket; }
 
 	virtual void				setLastSktError( RCODE rc );
 	virtual RCODE				getLastSktError( void )							{ return m_rcLastSktError; }
@@ -115,7 +115,7 @@ public:
 	virtual bool				isTcpSocket( void )								{ return ((eSktTypeTcpConnect == m_eSktType)||(eSktTypeTcpAccept == m_eSktType))?1:0; };
 	virtual bool				isAcceptSocket( void )							{ return ((eSktTypeTcpAccept == m_eSktType)?1:0);};
 	virtual bool				isConnectSocket( void )							{ return ((eSktTypeTcpConnect == m_eSktType)?1:0);};
-	virtual bool				isLoopbackSocket( void )						{ return m_LoopbackConnectId == getConnectionId(); };
+	virtual bool				isLoopbackSocket( void )						{ return m_LoopbackSocketId == getSocketId(); };
 
     uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
     const char *				getRemoteIpAddress( void )                      { return m_strRmtIp.c_str(); }
@@ -173,8 +173,6 @@ public:
 	//! Do connect to from thread
 	RCODE						doConnectTo( void );
 
-	//! get the unique id of this socket
-	virtual int					getSocketId( void ){ return m_iSktId;}			// return id
 	//! get the sockets peer connection ip address as host order int32_t
 	virtual RCODE				getRemoteIp(	InetAddress &u32RetIp,		// return ip
 												uint16_t &u16RetPort );	// return port
@@ -290,7 +288,7 @@ public:
 	struct sockaddr_in			m_MulticastRxAddr;
 
     SOCKET						m_Socket{ INVALID_SOCKET };	    // handle to socket
-    int							m_iSktId{ 0 };				    // socket unique id
+    int							m_SktNumber{ 0 };				    // socket unique id
     VxGUID                      m_ConnectionId;                 // unique connection id 
 
 	InetAddrAndPort				m_LclIp;				        // local ip address
@@ -358,6 +356,6 @@ protected:
     static std::string          m_SktDirBroadcast;
     static std::string          m_SktDirLoopback;
     static std::string          m_SktDirUnknown;
-	static VxGUID				m_LoopbackConnectId;
+	static VxGUID				m_LoopbackSocketId;
 };
 

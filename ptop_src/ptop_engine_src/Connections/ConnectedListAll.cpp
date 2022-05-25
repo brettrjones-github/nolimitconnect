@@ -111,7 +111,7 @@ void ConnectedListAll::onSktDisconnected( VxSktBase* sktBase )
             if( connectedInfo )
             {
                 VxSktBase* connectSktBase = connectedInfo->getSktBase();
-                if( connectSktBase && ( connectSktBase == sktBase || connectSktBase->getConnectionId() == sktBase->getConnectionId() ) )
+                if( connectSktBase && ( connectSktBase == sktBase || connectSktBase->getSocketId() == sktBase->getSocketId() ) )
                 {
                     connectInfo->onSktDisconnected( sktBase );
                     m_ConnectList.erase( iter );

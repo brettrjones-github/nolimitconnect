@@ -228,11 +228,11 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
     switch( sktBase->getCallbackReason() )
     {
     case eSktCallbackReasonConnectError:
-        LogModule( eLogMulticast, LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s thread 0x%x", sktBase->m_SktNumber, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonConnected:
-        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp().c_str(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_SktNumber, sktBase->getRemoteIp().c_str(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonData:
@@ -240,23 +240,23 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
         break;
 
     case eSktCallbackReasonClosed:
-        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast Skt %d closed %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast Skt %d closed %s thread 0x%x", sktBase->m_SktNumber, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonError:
-        LogModule( eLogMulticast, LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s thread 0x%x", sktBase->m_SktNumber, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonClosing:
-        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d thread 0x%x", sktBase->m_SktNumber, VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonConnecting:
-        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d thread 0x%x", sktBase->m_SktNumber, VxGetCurrentThreadId() );
         break;
 
     default:
-        LogMsg( LOG_ERROR, "NetworkMgr:Multicast: Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+        LogMsg( LOG_ERROR, "NetworkMgr:Multicast: Skt %d error %s thread 0x%x", sktBase->m_SktNumber, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
         break;
     }
 }

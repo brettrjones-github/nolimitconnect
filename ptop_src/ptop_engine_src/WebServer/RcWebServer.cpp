@@ -153,7 +153,7 @@ RCODE RcWebServer::acceptRawLocalHttpConnection( VxSktBase * poSktIn, VxNetIdent
 		addSkt( sktBase );
 
         if( IsLogEnabled( eLogSkt ) )
-		    LogMsg( LOG_DEBUG,  "skt %d to %s raw accept from skt %d\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str(), poSktIn->m_iSktId );
+		    LogMsg( LOG_DEBUG,  "skt %d to %s raw accept from skt %d\n", sktBase->m_SktNumber, sktBase->m_strRmtIp.c_str(), poSktIn->m_SktNumber );
 
 		* ppoRetWebSkt = sktBase;
 
@@ -190,11 +190,11 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
         }
 
         if( IsLogEnabled( eLogSkt ) )
-            LogMsg( LOG_DEBUG,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
+            LogMsg( LOG_DEBUG,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_SktNumber, sktBase->m_strRmtIp.c_str() );
 
         if( eSktTypeTcpAccept != sktBase->getSktType() )
         {
-            LogMsg( LOG_ERROR, "ERROR skt %d SktWebReceiveThreadFunc is not an accept socket \n", sktBase->m_iSktId );
+            LogMsg( LOG_ERROR, "ERROR skt %d SktWebReceiveThreadFunc is not an accept socket \n", sktBase->m_SktNumber );
             sktBase->m_bClosingFromRxThread = true;
             sktBase->closeSkt( eSktCloseHttpNotAcceptSkt );
             poThread->threadAboutToExit();
@@ -234,7 +234,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
             }
 
             if( IsLogEnabled( eLogSkt ) )
-                LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_iSktId );
+                LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_SktNumber );
 
             iDataLen = recv(		sktBase->m_Socket,	// socket
                                     as8Buf,				// buffer to read into
@@ -242,7 +242,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
                                     0 );				// flags
 
             if( IsLogEnabled( eLogSkt ) )
-                LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_iSktId, iDataLen );
+                LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_SktNumber, iDataLen );
 
             if( poThread->isAborted()
                 || ( eSktCallbackReasonData != sktBase->getCallbackReason() )
@@ -294,7 +294,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
         }
 
     #ifdef DEBUG_SKTS
-        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d closing func 0x%x\n", sktBase->m_iSktId, sktBase->m_pfnReceive );
+        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d closing func 0x%x\n", sktBase->m_SktNumber, sktBase->m_pfnReceive );
     #endif // DEBUG_SKTS
         sktBase->setCallbackReason( eSktCallbackReasonClosing );
         sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
@@ -302,7 +302,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
         sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
 
         #ifdef DEBUG_SKTS
-        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x exiting\n", sktBase->m_iSktId, sktBase );
+        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x exiting\n", sktBase->m_SktNumber, sktBase );
         #endif // DEBUG_SKTS
 
         if( INVALID_SOCKET != sktBase->m_Socket )

@@ -1639,7 +1639,7 @@ bool P2PEngine::fromGuiQueryIdentity( GroupieInfo& groupieInfo, VxNetIdent& retN
 		// if the url is valid try a direct connection first
         if( !getRelayMgr().requestRelayConnection( sktBase, groupieInfo ) )
         {
-            getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), myGroupieId );
+            getConnectIdListMgr().removeConnection( sktBase->getSocketId(), myGroupieId );
         }
 		else
 		{

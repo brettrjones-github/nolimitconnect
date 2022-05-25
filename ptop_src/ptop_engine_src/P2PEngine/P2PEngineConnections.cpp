@@ -37,8 +37,8 @@
 void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::replaceConnection: old skt %d new skt %d handle %d",
-				poOldSkt->m_iSktId,
-				poNewSkt->m_iSktId,
+				poOldSkt->m_SktNumber,
+				poNewSkt->m_SktNumber,
 				poNewSkt->m_Socket );
 
 	m_RcScan.replaceConnection( netIdent, poOldSkt, poNewSkt );
@@ -49,13 +49,13 @@ void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, 
 //! socket became disconnected
 void P2PEngine::onConnectionLost( VxSktBase * sktBase )								
 {
-	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectionLost: skt %d", sktBase->m_iSktId );
-	getConnectIdListMgr().onConnectionLost( sktBase->getConnectionId() );
+	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectionLost: skt %d", sktBase->m_SktNumber );
+	getConnectIdListMgr().onConnectionLost( sktBase->getSocketId() );
 
-	getHostJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
-	getUserOnlineMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
-	getUserJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
-	getNetworkMgr().getNearbyMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
+	getHostJoinMgr().onConnectionLost( sktBase, sktBase->getSocketId(), sktBase->getPeerOnlineId() );
+	getUserOnlineMgr().onConnectionLost( sktBase, sktBase->getSocketId(), sktBase->getPeerOnlineId() );
+	getUserJoinMgr().onConnectionLost( sktBase, sktBase->getSocketId(), sktBase->getPeerOnlineId() );
+	getNetworkMgr().getNearbyMgr().onConnectionLost( sktBase, sktBase->getSocketId(), sktBase->getPeerOnlineId() );
 	
 	m_RcScan.onConnectionLost( sktBase );
 	m_ConnectionList.onConnectionLost( sktBase );
@@ -101,7 +101,7 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 {
 	if( false == VxIsAppShuttingDown() )
 	{
-		getNetStatusAccum().onConnectionLost( poInfo->getSkt()->getConnectionId() );
+		getNetStatusAccum().onConnectionLost( poInfo->getSkt()->getSocketId() );
 		poInfo->m_BigListInfo->setIsOnline( false );
 		poInfo->m_BigListInfo->setIsConnected( false );
 

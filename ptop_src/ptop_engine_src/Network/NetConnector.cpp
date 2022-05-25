@@ -323,7 +323,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 									eConnectReasonSameExternalIp ) )
 		{		
 			LogModule( eLogConnect, LOG_VERBOSE, "connectUsingTcp: SUCCESS skt %d LAN connect to %s ip %s port %d",
-				sktBase->m_iSktId,
+				sktBase->m_SktNumber,
 				connectInfo.getOnlineName(),
 				strDirectConnectIp.c_str(),
 				connectInfo.m_DirectConnectId.getPort() );
@@ -384,7 +384,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 			// direct connection success
 #ifdef DEBUG_CONNECTIONS
 			LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS skt %d direct connect to %s ip %s port %d",
-				sktBase->m_iSktId,
+				sktBase->m_SktNumber,
 				m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
 				strDirectConnectIp.c_str(),
 				connectInfo.m_DirectConnectId.getPort() );
@@ -555,11 +555,11 @@ bool NetConnector::txPacket(	VxGUID&				destinationId,
 		{
 			if( false == sktBase->isConnected() )
 			{
-				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d not connected", sktBase->m_iSktId );
+				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d not connected", sktBase->m_SktNumber );
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d has no encryption key", sktBase->m_iSktId );
+				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d has no encryption key", sktBase->m_SktNumber );
 			}
 		}
 	}

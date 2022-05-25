@@ -119,7 +119,7 @@ VxSktConnect * VxPeerMgr::createConnectionUsingSocket( SOCKET skt, const char * 
 	sktBase->setTransmitCallback( m_pfnOurTransmit, this );
 	sktBase->createConnectionUsingSocket(	skt, rmtIp, port );
 	addSkt( sktBase );
-	LogMsg( LOG_INFO, "VxPeerMgr::createConnectionUsingSocket: done skt id %d rmt ip %s port %d\n", sktBase->getSktId(), rmtIp, port  );
+	LogMsg( LOG_INFO, "VxPeerMgr::createConnectionUsingSocket: done skt id %d rmt ip %s port %d\n", sktBase->getSktNumber(), rmtIp, port  );
 	return sktBase;
 }
 
@@ -160,7 +160,7 @@ bool VxPeerMgr::txPacketWithDestId(	VxSktBase *			sktBase,
 	RCODE rc = sktBase->txPacketWithDestId( pktHdr, bDisconnect );
 	if( 0 != rc )
 	{
-		LogMsg( LOG_INFO, "VxPeerMgr::txPacketWithDestId: skt %d returned error %d %s\n", sktBase->getSktId(), rc, sktBase->describeSktError( rc ) );
+		LogMsg( LOG_INFO, "VxPeerMgr::txPacketWithDestId: skt %d returned error %d %s\n", sktBase->getSktNumber(), rc, sktBase->describeSktError( rc ) );
 	}
 
 	return  ( 0 == rc );

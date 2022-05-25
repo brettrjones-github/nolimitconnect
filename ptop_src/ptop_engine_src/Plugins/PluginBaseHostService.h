@@ -58,6 +58,11 @@ public:
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
     virtual void				onThreadOncePer15Minutes( void ) override;
 
+    virtual void                onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) override;
+    virtual void                onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) override;
+    virtual void                onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) override;
+    virtual void                onGroupDirectUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) override;
+
 protected:
     virtual void				onContactWentOffline            ( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
     virtual void				onConnectionLost                ( VxSktBase* sktBase ) override;

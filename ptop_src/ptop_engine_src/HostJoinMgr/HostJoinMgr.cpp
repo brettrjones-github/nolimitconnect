@@ -203,7 +203,7 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
@@ -249,7 +249,7 @@ void HostJoinMgr::onHostUnJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* n
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
@@ -286,7 +286,7 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
@@ -332,7 +332,7 @@ void HostJoinMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
@@ -367,7 +367,7 @@ void HostJoinMgr::onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );

@@ -227,7 +227,7 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
     joinInfo->setJoinState( eJoinStateJoinIsGranted );
     joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
@@ -286,7 +286,7 @@ void UserJoinMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNe
     joinInfo->setJoinState( eJoinStateJoinLeaveHost );
     joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setConnectionId( sktBase->getSocketId() );
     joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
@@ -330,7 +330,7 @@ void UserJoinMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, 
         joinInfo->setJoinState( eJoinStateJoinLeaveHost );
         joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
-        joinInfo->setConnectionId( sktBase->getConnectionId() );
+        joinInfo->setConnectionId( sktBase->getSocketId() );
         joinInfo->setSessionId( sessionInfo.getSessionId() );
 
         joinInfo->setInfoModifiedTime( timeNowMs );

@@ -869,13 +869,13 @@ static int acceptErrCnt = 0;
 	sktBase->setTransmitCallback( m_pfnOurTransmit, this );
 	m_SktMgrMutex.unlock(__FILE__, __LINE__);
 
-    LogModule( eLogListen, LOG_INFO, "VxServerMgr: doing accept skt %d skt id %d thread 0x%x", sktBase->m_Socket, sktBase->getSktId(), VxGetCurrentThreadId() );
+    LogModule( eLogListen, LOG_INFO, "VxServerMgr: doing accept skt %d skt id %d thread 0x%x", sktBase->m_Socket, sktBase->getSktNumber(), VxGetCurrentThreadId() );
 
     RCODE rcAccept = sktBase->doAccept( this, *(( struct sockaddr * )&acceptAddr) );
 	if( rcAccept || poVxThread->isAborted() || INVALID_SOCKET == oListenSkt )
 	{
 		sktBase->closeSkt(67823);
-		LogMsg( LOG_ERROR, "VxServerMgr: error %d doing accept skt %d skt id %d thread 0x%x", rc, sktBase->m_Socket, sktBase->getSktId(), VxGetCurrentThreadId() );
+		LogMsg( LOG_ERROR, "VxServerMgr: error %d doing accept skt %d skt id %d thread 0x%x", rc, sktBase->m_Socket, sktBase->getSktNumber(), VxGetCurrentThreadId() );
         moveToEraseList( sktBase );
 
         rc = -5;
@@ -883,7 +883,7 @@ static int acceptErrCnt = 0;
     else
     {
         acceptErrCnt = 0; // reset counter
-        LogModule( eLogListen, LOG_INFO, "VxServerMgr: accept success skt %d skt id %d thread 0x%x", sktBase->m_Socket, sktBase->getSktId(), VxGetCurrentThreadId() );
+        LogModule( eLogListen, LOG_INFO, "VxServerMgr: accept success skt %d skt id %d thread 0x%x", sktBase->m_Socket, sktBase->getSktNumber(), VxGetCurrentThreadId() );
     }
 
 	return rc;

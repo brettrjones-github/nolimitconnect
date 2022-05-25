@@ -1447,7 +1447,7 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
         return false;
     }
 
-	if( sktBaseIn && isAssetRequested( assetInfo.getAssetUniqueId(), sktBaseIn->getConnectionId() ) )
+	if( sktBaseIn && isAssetRequested( assetInfo.getAssetUniqueId(), sktBaseIn->getSocketId() ) )
 	{
 		// already in transfer
 		return true;
@@ -1457,7 +1457,7 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 	VxGUID sktConnectId;
 	if( sktBaseIn && sktBaseIn->isConnected() )
 	{
-		sktConnectId = sktBaseIn->getConnectionId();
+		sktConnectId = sktBaseIn->getSocketId();
 		EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBaseIn );
 		if( xferError == eXferErrorNone )
 		{
@@ -1471,7 +1471,7 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 		m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
 		if( sktBase )
 		{
-			sktConnectId = sktBase->getConnectionId();
+			sktConnectId = sktBase->getSocketId();
 			EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
 			if( xferError == eXferErrorNone )
 			{

@@ -57,7 +57,7 @@ public:
 protected:
     void				        callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) override;
     void				        callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) override;
-    void                        callbackRelayStatusChange( ConnectId& connectId, bool isRelayed );
+    void                        callbackRelayStatusChange( ConnectId& connectId, bool isRelayed ) override;
 
     void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo, bool leftHost = false );
     void                        updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo, bool leftHost );

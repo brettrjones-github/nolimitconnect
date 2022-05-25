@@ -179,7 +179,7 @@ bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
     if( sktBase )
     {
         PktHostLeaveReq leaveReq;
-        leaveReq.setHostType( groupieId.getHostType() );
+        leaveReq.setGroupieId( groupieId );
         leaveReq.setPluginType( HostTypeToClientPlugin( groupieId.getHostType() ) );
         if( m_Engine.getMyOnlineId() == groupieId.getHostedOnlineId() )
         {
@@ -263,4 +263,29 @@ bool PluginBaseHostClient::queryUserListFromHost( GroupieId& groupieId )
     }
 
     return pktSent;
+}
+
+//============================================================================
+void PluginBaseHostClient::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+
+    m_HostClientMgr.onUserJoinedHost( groupieId, sktBase, netIdent );
+}
+
+//============================================================================
+void PluginBaseHostClient::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    m_HostClientMgr.onUserLeftHost( groupieId, sktBase, netIdent );
+}
+
+//============================================================================
+void PluginBaseHostClient::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    m_HostClientMgr.onUserUnJoinedHost( groupieId, sktBase, netIdent );
+}
+
+//============================================================================
+void PluginBaseHostClient::onGroupRelayedUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    m_HostClientMgr.onGroupRelayedUserAnnounce( groupieId, sktBase, netIdent );
 }

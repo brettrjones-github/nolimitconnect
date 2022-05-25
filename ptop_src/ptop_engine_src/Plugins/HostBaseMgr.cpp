@@ -301,34 +301,43 @@ bool HostBaseMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId,
 {
     bool result{ true };
     LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s success ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
-    if( isAnnounceConnectReason( connectReason ) )
+    GroupieId groupieId( m_Engine.getMyOnlineId(), onlineId,  hostType );
+    if( groupieId.isValid() )
     {
-        m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceConnectSuccess );
-        sendAnnounceRequest( hostType, sessionId, sktBase, onlineId, connectReason );
-    }
-    else if( isJoinConnectReason( connectReason ) )
-    {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
-        sendJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
-    }
-    else if( isLeaveConnectReason( connectReason ) )
-    {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
-        sendLeaveRequest( hostType, sessionId, sktBase, onlineId, connectReason );
-    }
-    else if( isUnJoinConnectReason( connectReason ) )
-    {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
-        sendUnJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
-    }
-    else if( isSearchConnectReason( connectReason ) )
-    {
-        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
-        LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s success Default function should be overridden", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
+        if( isAnnounceConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceConnectSuccess );
+            sendAnnounceRequest( groupieId, sessionId, sktBase, onlineId, connectReason );
+        }
+        else if( isJoinConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
+            sendJoinRequest( groupieId, sessionId, sktBase, onlineId, connectReason );
+        }
+        else if( isLeaveConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
+            sendLeaveRequest( groupieId, sessionId, sktBase, onlineId, connectReason );
+        }
+        else if( isUnJoinConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
+            sendUnJoinRequest( groupieId, sessionId, sktBase, onlineId, connectReason );
+        }
+        else if( isSearchConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
+            LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s success Default function should be overridden", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+            result = false;
+        }
     }
     else
     {
-        LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+        LogMsg( LOG_ERROR, "onConnectToHostSuccess invalid groupie id for connect reason %d", connectReason );
         result = false;
     }
 
@@ -689,69 +698,69 @@ void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, ECo
 }
 
 //============================================================================
-void HostBaseMgr::sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::sendAnnounceRequest( GroupieId& groupieId, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     vx_assert( nullptr != sktBase );
     LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr:: sendAnnounceRequest not done %s", DescribeConnectReason( connectReason ) );
     PktHostJoinReq pktJoin;
     pktJoin.setPluginType( m_Plugin.getPluginType() );
-    pktJoin.setHostType( hostType );
+    pktJoin.setGroupieId( groupieId );
     pktJoin.setSessionId( sessionId );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
-        m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceSendingJoinRequest );
+        m_Engine.getToGui().toGuiHostAnnounceStatus( groupieId.getHostType(), sessionId, eHostAnnounceSendingJoinRequest );
     }
     else
     {
-        m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceSendJoinRequestFailed );
+        m_Engine.getToGui().toGuiHostAnnounceStatus( groupieId.getHostType(), sessionId, eHostAnnounceSendJoinRequestFailed );
     }
 }
 
 //============================================================================
-void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::sendJoinRequest( GroupieId& groupieId, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     vx_assert( nullptr != sktBase );
     PktHostJoinReq pktJoin;
 
-    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingJoinRequest );
+    m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), sessionId, eHostJoinSendingJoinRequest );
     pktJoin.setPluginType( m_Plugin.getPluginType() );
-    pktJoin.setHostType( hostType );
+    pktJoin.setGroupieId( groupieId );
     pktJoin.setSessionId( sessionId );
     if( !m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendJoinRequestFailed );
+        m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), sessionId, eHostJoinSendJoinRequestFailed );
     }
 }
 
 //============================================================================
-void HostBaseMgr::sendLeaveRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::sendLeaveRequest( GroupieId& groupieId, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     vx_assert( nullptr != sktBase );
     PktHostLeaveReq pktReq;
 
-    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingLeaveRequest );
+    m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), sessionId, eHostJoinSendingLeaveRequest );
     pktReq.setPluginType( m_Plugin.getPluginType() );
-    pktReq.setHostType( hostType );
+    pktReq.setGroupieId( groupieId );
     pktReq.setSessionId( sessionId );
     if( !m_Plugin.txPacket( onlineId, sktBase, &pktReq ) )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendLeaveRequestFailed );
+        m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), sessionId, eHostJoinSendLeaveRequestFailed );
     }
 }
 
 //============================================================================
-void HostBaseMgr::sendUnJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::sendUnJoinRequest( GroupieId& groupieId, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     vx_assert( nullptr != sktBase );
     PktHostUnJoinReq pktJoin;
 
-    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingUnJoinRequest );
+    m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), sessionId, eHostJoinSendingUnJoinRequest );
     pktJoin.setPluginType( m_Plugin.getPluginType() );
-    pktJoin.setHostType( hostType );
+    pktJoin.setGroupieId( groupieId );
     pktJoin.setSessionId( sessionId );
     if( !m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendUnJoinRequestFailed );
+        m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), sessionId, eHostJoinSendUnJoinRequestFailed );
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason );
     }
 }
@@ -828,7 +837,7 @@ void HostBaseMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID
     {
         netIdent->upgradeToGuestFriendship();
         
-        BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
+        BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getSocketId() );
         m_Engine.getUserOnlineMgr().onUserOnline( sktBase, netIdent, sessionInfo );
 
         m_Engine.getToGui().toGuiUserOnlineStatus( netIdent, true );

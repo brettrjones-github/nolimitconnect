@@ -103,7 +103,7 @@ bool P2PEngine::txSystemPkt(	const VxGUID&		destOnlineId,
 #ifdef DEBUG_PKTS
 			else
 			{
-				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: skt %d error %d\n", sktBase->m_iSktId, sktBase->m_rcLastError );
+				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: skt %d error %d\n", sktBase->m_SktNumber, sktBase->m_rcLastError );
 			}
 #endif // DEBUG_PKTS
 		}
@@ -112,11 +112,11 @@ bool P2PEngine::txSystemPkt(	const VxGUID&		destOnlineId,
 		{
 			if( false == sktBase->isConnected() )
 			{
-				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d not connected\n", sktBase->m_iSktId );
+				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d not connected\n", sktBase->m_SktNumber );
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d has no encryption key\n", sktBase->m_iSktId );
+				LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d has no encryption key\n", sktBase->m_SktNumber );
 			}
 		}
 #endif // DEBUG_PKTS
@@ -168,7 +168,7 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 	bool bSendSuccess = false;
 	if( 0 == (poPkt->getPktLength() & 0xf ) )
 	{
-        LogModule( eLogPkt, LOG_VERBOSE, "skt %d txPluginPkt %d", sktBase->m_iSktId, poPkt->getPktType() );
+        LogModule( eLogPkt, LOG_VERBOSE, "skt %d txPluginPkt %d", sktBase->m_SktNumber, poPkt->getPktType() );
 		if( sktBase->isConnected() && sktBase->isTxEncryptionKeySet() )
 		{
 			poPkt->setSrcOnlineId( m_PktAnn.getMyOnlineId() );
@@ -187,7 +187,7 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 		}
 		else
 		{
-            LogMsg( LOG_ERROR, "skt %d P2PEngine::txPluginPkt: ERROR disconnected or no TxEncryption key", sktBase->m_iSktId );
+            LogMsg( LOG_ERROR, "skt %d P2PEngine::txPluginPkt: ERROR disconnected or no TxEncryption key", sktBase->m_SktNumber );
 		}
 	}
 	else
@@ -343,6 +343,6 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 			getThumbMgr().queryThumbIfNeeded( sktBase, poInfo->getVxNetIdent(), eHostTypePeerUserDirect );
 		}
 
-		getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
+		getConnectIdListMgr().addConnection( sktBase->getSocketId(), groupieId, false );
 	}
 }

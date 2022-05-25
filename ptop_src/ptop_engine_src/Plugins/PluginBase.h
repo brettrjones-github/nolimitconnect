@@ -30,6 +30,7 @@
 class AssetMgr;
 class AssetBaseInfo;
 class FileShareSettings;
+class GroupieId;
 class IToGui;
 class NetServiceHdr;
 class P2PEngine;
@@ -296,6 +297,12 @@ public:
 
 	virtual std::string			getIncompleteFileXferDirectory( VxGUID& onlineId ) { return ""; }
 	virtual bool				onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash ) { return true;  }
+
+	virtual void                onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
+	virtual void                onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
+	virtual void                onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
+	virtual void                onGroupDirectUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
+	virtual void                onGroupRelayedUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
 
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );

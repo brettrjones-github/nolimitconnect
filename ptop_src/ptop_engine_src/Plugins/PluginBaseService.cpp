@@ -40,7 +40,7 @@ void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr, VxGUID& requestorO
         VxGUID requestorSktConnectionId;
         if( sktBaseRequester )
         {
-            requestorSktConnectionId = sktBaseRequester->getConnectionId();
+            requestorSktConnectionId = sktBaseRequester->getSocketId();
         }
 
         std::set<ConnectId> connectIdSet;
@@ -55,7 +55,7 @@ void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr, VxGUID& requestorO
                 {
                     if( txPacket( const_cast<ConnectId&>(connectId).getGroupieOnlineId(), sktBase, pktHdr ) )
                     {
-                        if( requestorSktConnectionId == sktBase->getConnectionId() )
+                        if( requestorSktConnectionId == sktBase->getSocketId() )
                         {
                             sentToRequestor = true;
                         }

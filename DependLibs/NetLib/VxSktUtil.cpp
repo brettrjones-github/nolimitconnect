@@ -935,7 +935,7 @@ SOCKET VxConnectToAddr(SOCKET sktHandle, struct sockaddr* sktAddr, socklen_t skt
                 }
                 else
                 {
-                    //LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write value returned %d\n", m_iSktId, valopt );
+                    //LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write value returned %d\n", m_SktNumber, valopt );
                     // Check the value returned...
                     if( valopt )
                     {
@@ -1057,7 +1057,7 @@ SOCKET VxConnectToIPv6( const char * ipv6Str, uint16_t u16Port, int iConnectTime
 			// connect to the ip without timeout
 			// set to non blocking
 			::VxSetSktBlocking( sktHandle, false );
-			//LogMsg( LOG_INFO, "VxConnectTo: skt %d attempt no block connect\n", m_iSktId );
+			//LogMsg( LOG_INFO, "VxConnectTo: skt %d attempt no block connect\n", m_SktNumber );
 			iResult = connect( sktHandle, poResultAddr->ai_addr, poResultAddr->ai_addrlen );
 			if( 0 == iResult )
 			{
@@ -1094,7 +1094,7 @@ SOCKET VxConnectToIPv6( const char * ipv6Str, uint16_t u16Port, int iConnectTime
 				FD_ZERO(&oSktSet); 
 				FD_SET(sktHandle, &oSktSet); 
 				iResult = select(sktHandle+1, NULL, &oSktSet, NULL, &tv); 
-				//LogMsg( LOG_INFO, "VxConnectTo: skt %d Attempt connect with timeout result %d\n", m_iSktId, iResult );
+				//LogMsg( LOG_INFO, "VxConnectTo: skt %d Attempt connect with timeout result %d\n", m_SktNumber, iResult );
 				if (iResult < 0 && 
 					(errno != 4) &&
 					(errno != 10004)  )
@@ -1114,7 +1114,7 @@ SOCKET VxConnectToIPv6( const char * ipv6Str, uint16_t u16Port, int iConnectTime
 				} 
 				else if( iResult > 0 )
 				{ 
-					//LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write\n", m_iSktId );
+					//LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write\n", m_SktNumber );
 					// Socket selected for write 
 					iSktLen = sizeof(int); 
 					socklen_t valopt = 0;
@@ -1128,7 +1128,7 @@ SOCKET VxConnectToIPv6( const char * ipv6Str, uint16_t u16Port, int iConnectTime
 					} 
 					else
 					{
-						//LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write value returned %d\n", m_iSktId, valopt );
+						//LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write value returned %d\n", m_SktNumber, valopt );
 						// Check the value returned... 
 						if( valopt ) 
 						{ 
@@ -1882,7 +1882,7 @@ GOTV_BEGIN_CDECLARES
 //! set socket to blocking or not
 RCODE VxSetSktBlocking( SOCKET sktHandle, bool bBlock )
 {
-	//LogMsg( LOG_INFO, "VxSktBase::setSktBlocking %d skt %d\n", bBlock, this->m_iSktId );
+	//LogMsg( LOG_INFO, "VxSktBase::setSktBlocking %d skt %d\n", bBlock, this->m_SktNumber );
 	if ( bBlock )
 	{
 		// set to non blocking
@@ -1938,7 +1938,7 @@ RCODE VxSetSktBlocking( SOCKET sktHandle, bool bBlock )
 #endif
 	}
 
-	//LogMsg( LOG_INFO, "VxSktBase::setSktBlocking %d skt %d done\n", bBlock, this->m_iSktId );
+	//LogMsg( LOG_INFO, "VxSktBase::setSktBlocking %d skt %d done\n", bBlock, this->m_SktNumber );
 	return 0;
 }
 
@@ -1993,7 +1993,7 @@ void VxFlushThenCloseSkt( SOCKET oSocket )
 			*/
 			shutdown (oSocket, SD_SEND );
 		#else
-			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d setting linger\n", m_iSktId );
+			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d setting linger\n", m_SktNumber );
 			// set linger time to give socket time to send
 			linger oLinger;
 			oLinger.l_linger = 1;
@@ -2004,9 +2004,9 @@ void VxFlushThenCloseSkt( SOCKET oSocket )
 				(const char *)&oLinger,  
 				(int)sizeof( linger ) );
 			//The shutdown command has three options: 0 = done receiving, 1 = done sending, 2 = both
-			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d done setting linger\n", m_iSktId );
+			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d done setting linger\n", m_SktNumber );
 			shutdown(oSocket,0);
-			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d shutdown complete\n", m_iSktId );
+			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d shutdown complete\n", m_SktNumber );
 		#endif
 		oSocket = INVALID_SOCKET;
 	}
@@ -2017,7 +2017,7 @@ void VxCloseSktNow( SOCKET oSocket )
 {
 	if( INVALID_SOCKET != oSocket )
 	{
-		//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d force close start\n", m_iSktId );
+		//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d force close start\n", m_SktNumber );
 		// set linger time to zero to force a close right now
 		linger oLinger;
 		oLinger.l_linger = 0;
@@ -2036,7 +2036,7 @@ void VxCloseSktNow( SOCKET oSocket )
 		#endif //LINUX
 		oSocket = INVALID_SOCKET;
 	}
-	//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d force close done\n", m_iSktId );
+	//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d force close done\n", m_SktNumber );
 }
 
 //============================================================================

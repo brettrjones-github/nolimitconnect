@@ -41,7 +41,7 @@ RcWebSkt::RcWebSkt()
 RcWebSkt::~RcWebSkt()
 {
     if( IsLogEnabled( eLogSkt ) )
-	    LogMsg( LOG_DEBUG,  "RcWebSkt::~RcWebSkt %d 0x%x %s skt handle %d destructing\n", this->m_iSktId, this, this->m_strRmtIp.c_str(), m_Socket );
+	    LogMsg( LOG_DEBUG,  "RcWebSkt::~RcWebSkt %d 0x%x %s skt handle %d destructing\n", this->m_SktNumber, this, this->m_strRmtIp.c_str(), m_Socket );
 	m_bIsConnected = false;
 	m_bClosingFromDestructor = true;
 	m_SktRxThread.abortThreadRun( true );
@@ -197,7 +197,7 @@ void * RcSktWebTransmitThreadFunc(  void * pvContext )
     if( sktBase && false == poThread->isAborted() )
     {
         if( IsLogEnabled( eLogSkt ) )
-            LogMsg( LOG_DEBUG,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
+            LogMsg( LOG_DEBUG,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_SktNumber, sktBase->m_strRmtIp.c_str() );
 
         do
         {
@@ -309,7 +309,7 @@ void * RcSktWebTransmitThreadFunc(  void * pvContext )
                 sktBase->isConnected() );
 
         if( IsLogEnabled( eLogSkt ) )
-            LogMsg( LOG_DEBUG,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_iSktId, sktBase, sktBase->m_strRmtIp.c_str() );
+            LogMsg( LOG_DEBUG,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_SktNumber, sktBase, sktBase->m_strRmtIp.c_str() );
     }
 
 	//! Thread calls this just before exit

@@ -173,7 +173,7 @@ bool HostServerMgr::removeClient( VxGUID& onlineId )
 void HostServerMgr::onJoinRequested( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
     LogModule( eLogHosts, LOG_DEBUG, "onJoinRequested %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
-    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getSocketId() );
     m_Engine.getHostJoinMgr().onHostJoinRequestedByUser( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onHostJoinRequestedByUser( sktBase, netIdent, sessionInfo );
 }
@@ -182,30 +182,27 @@ void HostServerMgr::onJoinRequested( VxSktBase* sktBase, VxNetIdent* netIdent, V
 void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
     LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
-    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
-    m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getGroupieListMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), hostType );
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================
 void HostServerMgr::onUserLeftHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
     LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
-    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
-    m_Engine.getHostJoinMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getGroupieListMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getUserOnlineMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), hostType );
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserLeftHost( groupieId, sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================
 void HostServerMgr::onUserUnJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
     LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
-    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
-    m_Engine.getHostJoinMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getGroupieListMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getUserOnlineMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), hostType );
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserUnJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================
@@ -225,3 +222,64 @@ void HostServerMgr::fromGuiListAction( EListAction listAction )
 {
     HostServerSearchMgr::fromGuiListAction( listAction );
 }
+
+//============================================================================
+void HostServerMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostServerMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getGroupieListMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostServerMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserLeftHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostServerMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    m_Engine.getHostJoinMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getGroupieListMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostServerMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserUnJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostServerMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    m_Engine.getHostJoinMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getGroupieListMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostServerMgr::onGroupDirectUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+

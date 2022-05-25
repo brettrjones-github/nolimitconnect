@@ -38,12 +38,12 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
-        m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId, false );
+        m_Engine.getConnectIdListMgr().addConnection( sktBase->getSocketId(), groupieId, false );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinSuccess );
-            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );
+            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getSocketId() );
             onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
         }
         else if( ePluginAccessLocked == hostReply->getAccessState() )
@@ -70,12 +70,12 @@ void HostClientMgr::onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr, V
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId =hostReply->getGroupieId();
-        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getSocketId(), groupieId );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinUnJoinSuccess );
-            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );
+            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getSocketId() );
             onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
         }
         else if( ePluginAccessLocked == hostReply->getAccessState() )
@@ -102,12 +102,12 @@ void HostClientMgr::onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, 
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
-        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getSocketId(), groupieId );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinUnJoinSuccess );
-            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );     
+            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getSocketId() );     
             onUserUnJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
         }
         else if( ePluginAccessLocked == hostReply->getAccessState() )
@@ -435,3 +435,41 @@ void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSkt
     EConnectReason connectReason = getSearchConnectReason(hostType);
     m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
 }
+
+//============================================================================
+void HostClientMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostClientMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserLeftHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostClientMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserUnJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void HostClientMgr::onGroupRelayedUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), groupieId.getGroupieOnlineId(), eHostJoinSuccess );
+    VxGUID sessionId;
+    sessionId.initializeWithNewVxGUID();
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), groupieId.getGroupieOnlineId(), sessionId, sktBase->getSocketId() );
+    onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+}
+

@@ -131,7 +131,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			 ( pktHdr->getPktLength() > sizeof( PktAnnounce ) + 100 ) ) // leave room for expanding pkt announce in the future
 		{
 			// somebody tried to send crap .. this may be a hack attack or it may be that our ip and port is same as someone else or network key has changed
-			LogMsg( LOG_INFO, "First packet is not Announce pkt skt %d type %d length %d ip %s:%d id %s", sktBase->getSktId(), 
+			LogMsg( LOG_INFO, "First packet is not Announce pkt skt %d type %d length %d ip %s:%d id %s", sktBase->getSktNumber(), 
 																							pktHdr->getPktType(),  
 																							pktHdr->getPktLength(),
                                                                                             sktBase->getRemoteIp().c_str(),
@@ -168,7 +168,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 
 		// NOTE: TODO check if is in our Ident ignore list
 
-		//LogMsg( LOG_INFO, "Got Ann on Skt %d\n", sktBase->m_iSktId );
+		//LogMsg( LOG_INFO, "Got Ann on Skt %d\n", sktBase->m_SktNumber );
 
 		u32UsedLen = pktHdr->getPktLength();
 
@@ -182,7 +182,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 	{
 		//LogMsg( LOG_INFO, "AppRcpCallback.. 3 Skt %d num %d Total Len %d Used Len %d decrypted Len %d\n", 
 		//	sktBase->GetSocketId(),
-		//	sktBase->m_iSktId,
+		//	sktBase->m_SktNumber,
 		//	u32Len,
 		//	u32UsedLen,
 		//	sktBase->m_u32DecryptedLen );
@@ -223,7 +223,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			//not all of packet is here
 			//LogMsg( LOG_VERBOSE,  "AppRcpCallback.. Skt %d num %d Not all of packet arrived\n", 
 			//		sktBase->GetSocketId(),
-			//		sktBase->m_iSktId );
+			//		sktBase->m_SktNumber );
 			break;
 		}
 
@@ -312,7 +312,7 @@ void P2PEngine::handleMulticastData( VxSktBase * sktBase )
 	char * pSktBuf		= (char *)sktBase->getSktReadBuf();
 	if( false == VxIsEncryptable( iDataLen ) )
 	{
-		//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: Skt %d not encryptable len %d\n", sktBase->m_iSktId, iDataLen );
+		//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: Skt %d not encryptable len %d\n", sktBase->m_SktNumber, iDataLen );
 		sktBase->sktBufAmountRead( iDataLen );
 		return;
 	}
@@ -322,11 +322,11 @@ void P2PEngine::handleMulticastData( VxSktBase * sktBase )
 	VxSymDecrypt( &sktBase->m_RxKey, pSktBuf, iDataLen );
 	if( poPkt->isValidPkt() )
 	{
-		//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: Skt %d valid packet\n", sktBase->m_iSktId );
+		//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: Skt %d valid packet\n", sktBase->m_SktNumber );
 		// valid pkt
 		if( PKT_TYPE_ANNOUNCE == poPkt->getPktType() )
 		{
-			//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: Skt %d from %s port %d PktAnnounce\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str(), sktBase->m_u16RmtPort );
+			//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: Skt %d from %s port %d PktAnnounce\n", sktBase->m_SktNumber, sktBase->m_strRmtIp.c_str(), sktBase->m_u16RmtPort );
 			//LogMsg( LOG_INFO, "RcSysSktMgr::HandleUdpData: ProcessingSktEvent\n" );
 			onPktAnnounce( sktBase, poPkt );
 		}

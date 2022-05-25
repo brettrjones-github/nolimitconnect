@@ -303,7 +303,7 @@ void P2PConnectList::removeSocket( VxSktBase* sktBase, bool isLocked )
 		connectListLock();
 	}
 
-	m_Engine.getNetStatusAccum().onConnectionLost( sktBase->getConnectionId() );
+	m_Engine.getNetStatusAccum().onConnectionLost( sktBase->getSocketId() );
 	for( auto iter = m_ConnectList.begin(); iter != m_ConnectList.end(); )
 	{
 		RcConnectInfo* connectInfo = iter->second;

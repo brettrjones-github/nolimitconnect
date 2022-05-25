@@ -487,7 +487,7 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
             sktBase->setConnectReason( connectReason );
         }
 
-        m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getConnectionId(), connectReason );
+        m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getSocketId(), connectReason );
     }
 
     if( isDisconnected && sktBase )
@@ -555,7 +555,7 @@ void ConnectionMgr::doneWithConnection( VxGUID sessionId, VxGUID onlineId, IConn
     unlockConnectionList();
     if( sktBase )
     {
-        m_Engine.getConnectIdListMgr().removeConnectionReason( sktBase->getConnectionId(), connectReason );
+        m_Engine.getConnectIdListMgr().removeConnectionReason( sktBase->getSocketId(), connectReason );
     }
 
     if( sktDisconnected && sktBase )
@@ -729,7 +729,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
             return eConnectStatusSendPktAnnFailed;
         }
 
-        m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getConnectionId(), connectReason );
+        m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getSocketId(), connectReason );
         m_HandshakeMutex.lock();
         m_HandshakeList.addHandshake(sktBase, sessionId, onlineId, callback, connectReason);
         m_HandshakeMutex.unlock();
@@ -880,7 +880,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
 #ifdef DEBUG_CONNECTIONS
             connectInfo.getLanIPv4().toStdString( strDirectConnectIp );
             LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS skt %d LAN connect to %s ip %s port %d\n",
-                sktBase->m_iSktId,
+                sktBase->m_SktNumber,
                 connectInfo.getOnlineName(),
                 strDirectConnectIp.c_str(),
                 connectInfo.m_DirectConnectId.getPort() );
@@ -933,7 +933,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
             // direct connection success
 #ifdef DEBUG_CONNECTIONS
             LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS skt %d direct connect to %s ip %s port %d",
-                sktBase->m_iSktId,
+                sktBase->m_SktNumber,
                 m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
                 strDirectConnectIp.c_str(),
                 connectInfo.m_DirectConnectId.getPort() );
@@ -1046,11 +1046,11 @@ bool ConnectionMgr::txPacket(	VxGUID&				destinationId,
         {
             if( false == sktBase->isConnected() )
             {
-                LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d not connected\n", sktBase->m_iSktId );
+                LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d not connected\n", sktBase->m_SktNumber );
             }
             else
             {
-                LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d has no encryption key\n", sktBase->m_iSktId );
+                LogMsg( LOG_ERROR, "P2PEngine::txSystemPkt: error skt %d has no encryption key\n", sktBase->m_SktNumber );
             }
         }
     }
