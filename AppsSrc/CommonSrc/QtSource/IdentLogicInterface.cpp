@@ -151,6 +151,7 @@ void IdentLogicInterface::updateIdentity( GuiUser* guiUser, bool queryThumb )
 		}
 		else
 		{
+			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( !isRelayed );
 			EThemeColorRole onlineIndicatorColor{ eLayerNotifyOfflineColor };
 			if( isOnline )
 			{

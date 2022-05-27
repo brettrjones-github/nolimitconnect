@@ -242,7 +242,8 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
 
     unlockResources();
 
-    if( groupieId.getHostedOnlineId() != m_Engine.getMyOnlineId() )
+    if( groupieId.getHostedOnlineId() != m_Engine.getMyOnlineId()
+            && groupieId.getGroupieOnlineId() == m_Engine.getMyOnlineId())
     {
         if( m_LastJoinedGroupieId.isValid() && m_LastJoinedGroupieId != groupieId )
         {

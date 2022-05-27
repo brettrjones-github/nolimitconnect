@@ -174,6 +174,8 @@ void PluginBaseHostClient::sendLeaveHost( EHostType hostType, VxGUID& sessionId,
 //============================================================================
 bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
 {
+    LogModule( eLogHosts, LOG_VERBOSE, "PluginBaseHostClient::sendLeaveHost groupie %s my online id %s",
+               groupieId.describeGroupieId().c_str(), m_Engine.getMyOnlineId().describeVxGUID().c_str());
     bool pktSent{ false };
     VxSktBase* sktBase =  m_Engine.getConnectIdListMgr().findHostConnection( groupieId );
     if( sktBase )

@@ -222,11 +222,10 @@ namespace
         "Host Unknown ",
         "Host Connect Test ",
         "Host Network ",
-        "Host Peer User Relayed",
-        "Host Peer User Direct",
         "Host Group ",
         "Host Chat Room ",
         "Host Random Connect ",
+        "Host Peer User Direct",
 
         "Max Host Type ",
     };
