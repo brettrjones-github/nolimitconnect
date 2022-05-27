@@ -93,6 +93,8 @@ unix:{
 QMAKE_CFLAGS_WARN_OFF -= -Wunused-private-field
 QMAKE_CFLAGS_WARN_ON += -Wno-unused-private-field
 
+QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-private-field
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
 
 QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter

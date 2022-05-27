@@ -96,29 +96,5 @@ public:
     PktThumbXferErr();
 };
 
-//============================================================================
-// File Find packets
-//============================================================================
-class PktThumbFindReq : public PktBaseFindReq
-{
-public:
-    PktThumbFindReq();
-};
-
-//============================================================================
-//  PktThumbXferListRequest
-//============================================================================
-class  PktThumbListReq : public PktBaseListReq
-{
-public:
-    PktThumbListReq();
-};
-
-class  PktThumbListReply : public PktBaseListReply
-{
-public:
-    PktThumbListReply();
-};
-
 #pragma pack(pop)
 

@@ -284,10 +284,11 @@ void AppCommon::loadWithoutThread( void )
 	while( !GetPtoPEngine().isEngineCreated() )
 	{
 		retryCnt++;
-		if( retryCnt > 10 )
-		{
+		if( retryCnt > 100 )
+		{		
+			ErrMsgBox( this, 0, "P2P Engine failed to be created" );
 			LogMsg( LOG_FATAL, "Engine failed to be created" );
-			break;
+			return;
 		}
 
 		VxSleep( 200 );	

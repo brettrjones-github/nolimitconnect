@@ -214,7 +214,7 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
 
         if( !enable )
         {
-            stopHostSearch( hostType, searchParams );
+            LogMsg( LOG_VERBOSE, "HostBaseMgr fromGuiSearchHost not enabled" );
         }
         else
         {
@@ -787,12 +787,6 @@ bool HostBaseMgr::removeContact( VxGUID& onlineId )
     }
 
     return wasRemoved;
-}
-
-//============================================================================
-bool HostBaseMgr::stopHostSearch( EHostType hostType, SearchParams& searchParams )
-{
-    return true;
 }
 
 //============================================================================

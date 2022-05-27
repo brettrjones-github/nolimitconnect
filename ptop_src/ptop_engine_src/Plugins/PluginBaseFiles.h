@@ -82,7 +82,7 @@ public:
 	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
 	virtual bool				fromGuiGetIsFileInLibrary( const char * fileName );
 
-	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr );
+    virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) override;
 
     virtual void				onSharedFilesUpdated( uint16_t u16FileTypes ) override;
 

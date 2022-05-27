@@ -273,7 +273,7 @@ void PushToTalkFeedMgr::onPktPushToTalkReply( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PushToTalkFeedMgr::callbackOpusPkt( void * userData, PktPushToTalkReq * pktOpusAudio )
+void PushToTalkFeedMgr::callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
     LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::callbackOpusPkt PluginBase::AutoPluginLock autoLock start\n" );

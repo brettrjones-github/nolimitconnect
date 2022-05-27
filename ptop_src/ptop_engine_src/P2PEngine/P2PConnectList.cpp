@@ -72,62 +72,6 @@ void P2PConnectList::fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 }
 
 //============================================================================
-void P2PConnectList::onPotentialRelayServiceAvailable( RcConnectInfo * connectionInfo, bool connectionListIsLocked )
-{
-	BigListInfo * bigListInfo = connectionInfo->getBigListInfo();
-	if( m_PreferedRelayList.contactIsInList( bigListInfo->getMyOnlineId() ) )
-	{
-		m_PreferedRelayList.addContactInfo( bigListInfo->getConnectInfo() );
-	}
-	else
-	{
-		m_PossibleRelayList.addContactInfo( bigListInfo->getConnectInfo() );
-	}
-}
-
-//============================================================================
-void P2PConnectList::cancelRelayService( void )
-{
-	connectListLock();
-	if( 0 != m_RelayServiceConnection )
-	{
-		PktRelayServiceReq pkt;
-		pkt.m_u8CancelService = 1;
-		m_Engine.txSystemPkt( m_RelayServiceConnection->getBigListInfo()->getMyOnlineId(), m_RelayServiceConnection->getSkt(), &pkt );
-		m_RelayServiceConnection = 0;
-	}
-
-	connectListUnlock();
-}
-
-//============================================================================
-void P2PConnectList::addRelayServerConnection( RcConnectInfo * poInfo )
-{
-	//LogMsg( LOG_SKT, "addRelayServerConnection: connectListLock()\n" );
-	//connectListLock();
-	bool bFoundRelayServerConnection = false;
-	std::vector<RcConnectInfo *>::iterator iter;
-	for( iter = m_RelayServerConnectedList.begin(); iter != m_RelayServerConnectedList.end(); ++iter )
-	{
-		if(*iter == poInfo)
-		{
-			bFoundRelayServerConnection = true;
-			break;
-		}
-	}
-
-	if( false == bFoundRelayServerConnection )
-	{
-#ifdef DEBUG_CONNECT_LIST
-		LogMsg( LOG_INFO, "addRelayServerConnection adding user %s\n", poInfo->m_BigListInfo->getOnlineName() );
-#endif // DEBUG_CONNECT_LIST
-		m_RelayServerConnectedList.push_back( poInfo );
-	}
-	//LogMsg( LOG_SKT, "addRelayServerConnection: connectListUnlock()\n" );
-	//connectListUnlock();
-}
-
-//============================================================================
 RcConnectInfo * P2PConnectList::addConnection( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bNewContact )
 {
 	if( NULL != poBigListInfo )
@@ -424,9 +368,6 @@ bool P2PConnectList::isContactConnected( const VxGUID& onlineId )
 //============================================================================
 void P2PConnectList::removeContactInfo( VxConnectInfo& contactInfo )
 {
-	m_PreferedRelayList.removeContactInfo( contactInfo );
-	m_PossibleRelayList.removeContactInfo( contactInfo );
-
 	removeConnection( contactInfo.getMyOnlineId() );
 
 #ifdef DEBUG_MUTEXES

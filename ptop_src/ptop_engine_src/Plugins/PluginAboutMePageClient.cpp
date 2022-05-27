@@ -19,7 +19,6 @@
 #include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
-#include <PktLib/PktsStoryBoard.h>
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================

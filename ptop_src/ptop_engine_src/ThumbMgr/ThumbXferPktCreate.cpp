@@ -82,16 +82,3 @@ PktBaseXferErr* ThumbXferMgr::createPktBaseXferErr( void )
 {
     return new PktThumbXferErr();
 }
-
-//============================================================================
-
-PktBaseListReq* ThumbXferMgr::createPktBaseListReq( void )
-{
-    return new PktThumbListReq();
-}
-
-//============================================================================
-PktBaseListReply* ThumbXferMgr::createPktBaseListReply( void )
-{
-    return new PktThumbListReply();
-}

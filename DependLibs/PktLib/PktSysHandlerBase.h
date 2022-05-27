@@ -94,19 +94,6 @@ public:
 	virtual void				onPktSessionStopReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktSessionStopReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
-	virtual void				onPktRelayServiceReq		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayServiceReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectReq		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayDisconnect		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelaySessionReq		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelaySessionReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectToUserReq	( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayUserDisconnect	( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayTestReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayTestReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-
 	virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktWebServerPicChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr );
@@ -223,6 +210,8 @@ public:
 	virtual void				onPktFileInfoSearchReply	( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktFileInfoMoreReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktFileInfoMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
+	virtual void				onPktRelayUserDisconnect	( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  

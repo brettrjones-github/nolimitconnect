@@ -467,38 +467,38 @@ public:
 	virtual	void				onContactConnected		( RcConnectInfo * poInfo, bool connectionListLocked, bool newContact = false );
 	virtual	void				onContactDisconnected	( RcConnectInfo * poInfo, bool connectionListLocked );
 
-	void						onConnectionLost( VxSktBase * sktBase );
+	void						onConnectionLost( VxSktBase* sktBase );
 	void						onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent );
 	//========================================================================
 	//========================================================================
 
-	void						handleTcpData( VxSktBase * sktBase );
-	void						handleMulticastData( VxSktBase * sktBase );
+	void						handleTcpData( VxSktBase* sktBase );
+	void						handleMulticastData( VxSktBase* sktBase );
 
 	std::string					describeContact( BigListInfo * bigListInfo );
 	std::string					describeContact( VxConnectInfo& connectInfo );
 	std::string					describeContact( ConnectRequest& connectRequest );
 
-	void						broadcastSystemPkt( VxPktHdr * pkt, bool onlyIncludeMyContacts );
-	void						broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& retIdsSentPktTo );
+	void						broadcastSystemPkt( VxPktHdr* pkt, bool onlyIncludeMyContacts );
+	void						broadcastSystemPkt( VxPktHdr* pkt, VxGUIDList& retIdsSentPktTo );
 
 	virtual bool				txSystemPkt(	VxNetIdentBase *	netIdent,
-												VxSktBase *			sktBase, 
-												VxPktHdr *			poPkt, 
+												VxSktBase*			sktBase, 
+												VxPktHdr*			poPkt, 
 												bool				bDisconnectAfterSend = false );
 
     virtual bool				txSystemPkt(	const VxGUID&		destOnlineId,
-												VxSktBase *			sktBase, 
-												VxPktHdr *			poPkt, 
+												VxSktBase*			sktBase, 
+												VxPktHdr*			poPkt, 
 												bool				bDisconnectAfterSend = false );
 
 	virtual bool				txImAlivePkt(	VxGUID&				destOnlineId, 
-												VxSktBase *			sktBase );
+												VxSktBase*			sktBase );
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 	bool						connectToContact(	VxConnectInfo&		connectInfo, 
-													VxSktBase **		ppoRetSkt,
+													VxSktBase**		ppoRetSkt,
 													bool&				retIsNewConnection,
 													EConnectReason		connectReason = eConnectReasonStayConnected );
 
@@ -524,164 +524,151 @@ public:
 
     //=== packet handlers ===//
     virtual void                handlePkt                   ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktUnhandled              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktInvalid				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktUnhandled              ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktInvalid				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktAnnounce				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAnnList				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAnnounce				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAnnList				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktScanReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktScanReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktScanReply			    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktChatReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktChatReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktChatReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktChatReply				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVoiceReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktVoiceReply				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktVideoFeedReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktVideoFeedStatus		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktVideoFeedPic			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktVideoFeedPicChunk		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktVideoFeedPicAck		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVideoFeedReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktVideoFeedStatus		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktVideoFeedPic			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktVideoFeedPicChunk		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktVideoFeedPicAck		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktFileGetReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFindFileReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFindFileReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileListReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileListReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileGetReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileGetReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFindFileReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFindFileReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileListReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileListReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktFileInfoReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileInfoReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktFileChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileChunkReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileGetCompleteReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFileShareErr			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileChunkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileChunkReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileSendCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileSendCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileGetCompleteReq		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileGetCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileShareErr			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktAssetGetReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetChunkReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetGetCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktAssetXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetGetReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetGetReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetChunkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetChunkReply		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetGetCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetGetCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetSendCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetSendCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktAssetXferErr			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktMultiSessionReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktMultiSessionReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktMultiSessionReq		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktMultiSessionReply		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktSessionStartReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktSessionStartReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktSessionStopReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktSessionStopReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktSessionStartReq		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktSessionStartReply		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktSessionStopReply		( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktRelayServiceReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayServiceReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayConnectReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayConnectReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayDisconnect		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelaySessionReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelaySessionReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayConnectToUserReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayUserDisconnect	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayTestReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktRelayTestReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktMyPicSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktMyPicSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktWebServerPicChunkTx	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktWebServerPicChunkAck	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktWebServerGetChunkTx	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktWebServerGetChunkAck	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktWebServerPutChunkTx	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktWebServerPutChunkAck	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktWebServerPicChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktWebServerPicChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktWebServerGetChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktWebServerGetChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktTodGameStats			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktTodGameAction			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktTodGameValue			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktTodGameStats			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktTodGameAction			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktTodGameValue			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktTcpPunch				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktTcpPunch				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktPingReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktPingReply				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktPingReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktPingReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktImAliveReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktImAliveReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktImAliveReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktImAliveReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktPluginSettingReq       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktPluginSettingReply     ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktPluginSettingReq       ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktPluginSettingReply     ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbSettingReq        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSettingReply      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSettingChunkReq   ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSettingChunkReply ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktThumbSettingReq        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSettingReply      ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSettingChunkReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSettingChunkReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbAvatarReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbAvatarReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbAvatarChunkReq    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbAvatarChunkReply  ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktThumbAvatarReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbAvatarReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbAvatarChunkReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbAvatarChunkReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbFileReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbFileReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbFileChunkReq      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbFileChunkReply    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktThumbFileReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbFileReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbFileChunkReq      ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbFileChunkReply    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostAnnounce           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktHostAnnounce           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobSendReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktBlobSendReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktBlobChunkReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktBlobChunkReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktBlobSendCompleteReq    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktBlobSendCompleteReply  ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktBlobXferErr            ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktBlobSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktBlobSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktBlobChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktBlobChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktBlobSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktBlobSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktBlobXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-
-    virtual void				onPktHostJoinReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostJoinReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostJoinReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostJoinReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostLeaveReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostLeaveReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
     virtual void				onPktHostUnJoinReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostUnJoinReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktHostSearchReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostSearchReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostOfferReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostOfferReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFriendOfferReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktFriendOfferReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostSearchReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostSearchReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostOfferReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostOfferReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFriendOfferReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFriendOfferReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktThumbGetReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbGetCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbGetReq			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbGetReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSendReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSendReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbChunkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbChunkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbGetCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbGetCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSendCompleteReq   ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbSendCompleteReply ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktThumbXferErr           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktOfferSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktOfferSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktOfferChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktOfferChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktOfferSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktOfferSendReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktOfferSendReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktOfferChunkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktOfferChunkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktOfferSendCompleteReq   ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktOfferSendCompleteReply ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktOfferXferErr           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
     virtual void				onPktPushToTalkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktPushToTalkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
@@ -719,6 +706,8 @@ public:
     virtual void				onPktFileInfoMoreReq        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktFileInfoMoreReply      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
+    virtual void				onPktRelayUserDisconnect    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
 
     void                        executeAfterLogOnThreadFunctions( void );
@@ -730,8 +719,8 @@ protected:
 
 	virtual bool				txPluginPkt( 	EPluginType			ePluginType, 
 												VxNetIdentBase *	netIdent, 
-												VxSktBase *			sktBase, 
-												VxPktHdr *			poPkt, 
+												VxSktBase*			sktBase, 
+												VxPktHdr*			poPkt, 
 												bool				bDisconnectAfterSend );
 
 	virtual void				doAppStateChange( EAppState eAppState );
@@ -740,7 +729,7 @@ protected:
 	// pkt ann has changed and needs to be re announced
 	void						doPktAnnConnectionInfoChanged( bool connectionListIsLocked );
 	virtual	void				attemptConnectionToRelayService( BigListInfo * poInfo );
-	void						handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr );
+	void						handleIncommingRelayData( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	void						sendToGuiTheContactList( int maxContactsToSend );
     void                        updateIdentLists( BigListInfo* bigListInfo, int64_t timestampMs = 0 );
     void                        updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* bigListInfo, bool nearbyLanConnected );

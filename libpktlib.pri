@@ -45,7 +45,6 @@ HEADERS += 	$$PWD/DependLibs/PktLib/ConnectId.h \
 	$$PWD/DependLibs/PktLib/PktsScan.h \
 	$$PWD/DependLibs/PktLib/PktsSearch.h \
     $$PWD/DependLibs/PktLib/PktsSession.h \
-    $$PWD/DependLibs/PktLib/PktsStoryBoard.h \
 	$$PWD/DependLibs/PktLib/PktsThumbXfer.h \
     $$PWD/DependLibs/PktLib/PktsTodGame.h \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.h \
@@ -103,7 +102,6 @@ SOURCES += 	$$PWD/DependLibs/PktLib/ConnectId.cpp \
 	$$PWD/DependLibs/PktLib/PktsScan.cpp \
 	$$PWD/DependLibs/PktLib/PktsSearch.cpp \
     $$PWD/DependLibs/PktLib/PktsSession.cpp \
-    $$PWD/DependLibs/PktLib/PktsStoryBoard.cpp \
     $$PWD/DependLibs/PktLib/PktsThumbXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsTodGame.cpp \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.cpp \

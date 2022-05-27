@@ -920,7 +920,7 @@ void FileInfoMgr::toGuiStartDownload( VxNetIdent*		netIdent,
 }
 
 //============================================================================
-void FileInfoMgr::toGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
+void FileInfoMgr::updateToGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoMgr::toGuiFileXferState xferState %s xferErr %s param %d", DescribeXferState( xferState ), DescribeXferError( xferErr ), param );
 	m_Plugin.toGuiFileXferState( lclSessionId, xferState, xferErr, param );

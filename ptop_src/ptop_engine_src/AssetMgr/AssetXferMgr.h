@@ -53,8 +53,7 @@ public:
     virtual PktBaseSendCompleteReq*		createPktBaseSendCompleteReq( void ) override;
     virtual PktBaseSendCompleteReply*	createPktBaseSendCompleteReply( void ) override;
     virtual PktBaseXferErr*			    createPktBaseXferErr( void ) override;
-    virtual PktBaseListReq*			    createPktBaseListReq( void ) override;
-    virtual PktBaseListReply*			createPktBaseListReply( void ) override;
+
 
 };
 

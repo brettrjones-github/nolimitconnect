@@ -13,16 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-//ePluginTypeHostGroup = 13,	//!< group host
-//ePluginTypeHostNetwork = 14,	//!< master network host
-//ePluginTypeServiceConnectTest = 15,	//!< Connection Test Service
-
-//ePluginTypeClientConnectTest = 16,	//!< Connection Test Client
-//ePluginTypeHostGroupListing = 17,	//!< group list host
-//ePluginTypeRandomConnect = 18,	//!< Random connect to another person ( Using Phone Shake )
-//ePluginTypeRandomConnectRelay = 19,	//!< Random connect to another person relay service
-//ePluginTypeRelay = 20,	//!< Relay services plugin
-
 #include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/HostConnect/HostConnectInterface.h>
 

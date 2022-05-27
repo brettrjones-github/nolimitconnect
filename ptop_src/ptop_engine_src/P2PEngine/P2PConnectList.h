@@ -66,9 +66,6 @@ public:
 	P2PConnectList( P2PEngine& engine );
     virtual ~P2PConnectList() = default;
 
-	ContactList&				getPreferredRelayList( void )						{ return m_PreferedRelayList; }
-	ContactList&				getPossibleRelayList( void )						{ return m_PossibleRelayList; }
-
 	void						connectListLock( void );
 	void						connectListUnlock( void );
 
@@ -86,8 +83,6 @@ public:
 	void						setIsRelayRequired( bool bRequireRelayService )		{ m_bRequireRelayService = bRequireRelayService; }
 	bool						isMyRelayAvailable( void )							{ return m_RelayServiceConnection?1:0; }
 
-	virtual void				addRelayServerConnection( RcConnectInfo * poInfo );
-
 	RcConnectInfo *				addConnection( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bNewContact = false );
     RcConnectInfo *				addConnection( const VxGUID& oOnlineId, RcConnectInfo * poInfo, bool bNewContact = false );
     RcConnectInfo *				findConnection( const VxGUID& oOnlineId, bool listIsLocked );
@@ -95,9 +90,6 @@ public:
 	void						removeSocket( VxSktBase* sktBase, bool listIsLocked );
 
 	void						removeContactInfo( VxConnectInfo& contactInfo );
-	void						onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
-
-	void						cancelRelayService( void );
 	
 	//=== vars ===//
 #ifdef TARGET_OS_ANDROID
@@ -115,8 +107,6 @@ public:
 
 protected:
 	//=== vars ===//
-	ContactList					m_PreferedRelayList;
-	ContactList					m_PossibleRelayList;
 	P2PEngine&					m_Engine;
 	BigListMgr&					m_BigListMgr;
 

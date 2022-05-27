@@ -81,17 +81,3 @@ PktBaseXferErr* AssetXferMgr::createPktBaseXferErr( void )
 {
     return new PktAssetXferErr();
 }
-
-//============================================================================
-
-PktBaseListReq* AssetXferMgr::createPktBaseListReq( void )
-{
-    return new PktAssetListReq();
-}
-
-//============================================================================
-PktBaseListReply* AssetXferMgr::createPktBaseListReply( void )
-{
-    return new PktAssetListReply();
-}
-

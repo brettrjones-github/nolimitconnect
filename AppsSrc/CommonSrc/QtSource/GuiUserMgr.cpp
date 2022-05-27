@@ -41,6 +41,7 @@ void GuiUserMgr::onAppCommonCreated( void )
     m_MyApp.wantToGuiUserUpdateCallbacks( this, true );
 }
 
+//============================================================================
 GuiUser* GuiUserMgr::getMyIdent( void )
 {
     if( !m_MyIdent )

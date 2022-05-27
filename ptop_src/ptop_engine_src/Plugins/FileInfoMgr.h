@@ -153,7 +153,7 @@ public:
 													VxGUID			assetId,
 													uint8_t*		fileHashData );
 
-	void						toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
+	void						updateToGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
 	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError );
 	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError );
 

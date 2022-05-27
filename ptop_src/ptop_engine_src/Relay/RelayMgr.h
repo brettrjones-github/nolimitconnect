@@ -35,14 +35,7 @@ public:
     bool						requestRelayConnection( VxSktBase* sktBase, GroupieInfo& groupieInfo );
 	bool                        sendRequestedReplyPktAnnIfNeeded( PktAnnounce* hisPktAnn, VxSktBase* sktBase, VxNetIdent* netIdent );
 
-	virtual void				onPktRelaySessionReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
-	virtual void				onPktRelaySessionReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
-	virtual void				onPktRelayConnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
-	virtual void				onPktRelayDisconnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
-
-	virtual void				onPktRelayConnectToUserReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent );
-
 	bool						isJoinedToRelayHost( VxGUID& onlineId );
 	bool						sendRelayError( VxGUID& onlineId, VxSktBase* sktBase, ERelayErr relayErr );
 

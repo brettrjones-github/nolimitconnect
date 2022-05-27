@@ -88,18 +88,6 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_MSESSION_REQ ]						= &PktPluginHandlerBase::onPktMultiSessionReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_MSESSION_REPLY ]					= &PktPluginHandlerBase::onPktMultiSessionReply;
 
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_SERVICE_REQ ]				= &PktPluginHandlerBase::onPktRelayServiceReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_SERVICE_REPLY ]				= &PktPluginHandlerBase::onPktRelayServiceReply;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_CONNECT_REQ ]				= &PktPluginHandlerBase::onPktRelayConnectReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_CONNECT_REPLY ]				= &PktPluginHandlerBase::onPktRelayConnectReply;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_SESSION_REQ ]				= &PktPluginHandlerBase::onPktRelaySessionReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_SESSION_REPLY ]				= &PktPluginHandlerBase::onPktRelaySessionReply;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_CONNECT_TO_USER_REQ ]		= &PktPluginHandlerBase::onPktRelayConnectToUserReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_CONNECT_TO_USER_REPLY ]		= &PktPluginHandlerBase::onPktRelayConnectToUserReply;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_USER_DISCONNECT ]			= &PktPluginHandlerBase::onPktRelayUserDisconnect;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REQ ]					= &PktPluginHandlerBase::onPktRelayTestReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REPLY ]					= &PktPluginHandlerBase::onPktRelayTestReply;
-
 	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REQ ]						    = &PktPluginHandlerBase::onPktScanReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REPLY ]						= &PktPluginHandlerBase::onPktScanReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_WEB_SERVER_MY_PIC_SEND_REQ ]		= &PktPluginHandlerBase::onPktMyPicSendReq;
@@ -187,9 +175,6 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REQ]					= &PktPluginHandlerBase::onPktPushToTalkReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REPLY]					= &PktPluginHandlerBase::onPktPushToTalkReply;
 
-	m_aBaseSysPktFuncTable[PKT_TYPE_MEMBERSHIP_REQ]						= &PktPluginHandlerBase::onPktMembershipReq;
-	m_aBaseSysPktFuncTable[PKT_TYPE_MEMBERSHIP_REPLY]					= &PktPluginHandlerBase::onPktMembershipReply;
-
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REQ]						= &PktPluginHandlerBase::onPktHostInfoReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REPLY]					= &PktPluginHandlerBase::onPktHostInfoReply;
 
@@ -219,6 +204,12 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_SEARCH_REPLY]				= &PktPluginHandlerBase::onPktFileInfoSearchReply;
 	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REQ]					= &PktPluginHandlerBase::onPktFileInfoMoreReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REPLY]				= &PktPluginHandlerBase::onPktFileInfoMoreReply;
+
+	m_aBaseSysPktFuncTable[ PKT_TYPE_MEMBERSHIP_REQ ]					= &PktPluginHandlerBase::onPktMembershipReq;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_MEMBERSHIP_REPLY ]					= &PktPluginHandlerBase::onPktMembershipReply;
+
+	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_USER_DISCONNECT ]			= &PktPluginHandlerBase::onPktRelayUserDisconnect;
+
 }
 
 //============================================================================
@@ -521,72 +512,6 @@ void PktPluginHandlerBase::onPktHostUnJoinReq( VxSktBase * sktBase, VxPktHdr * p
 
 //============================================================================
 void PktPluginHandlerBase::onPktHostUnJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayServiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayServiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelaySessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelaySessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectToUserReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayUserDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayTestReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayTestReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }	
@@ -1164,6 +1089,12 @@ void PktPluginHandlerBase::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* p
 
 //============================================================================
 void PktPluginHandlerBase::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktRelayUserDisconnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }

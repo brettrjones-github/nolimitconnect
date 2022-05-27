@@ -40,7 +40,7 @@ public:
 	virtual void				onPktPushToTalkReq					( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktPushToTalkReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-	virtual void				callbackOpusPkt( void * userData, PktPushToTalkReq * pktOpusAudio );
+    virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
 
 protected:

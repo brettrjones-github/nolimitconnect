@@ -415,7 +415,7 @@ void FileInfoXferMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pkt
 			EXferError xferErr = beginFileSend( xferSession );
 			if( eXferErrorNone != xferErr )
 			{
-				m_FileInfoMgr.toGuiFileXferState( xferSession->getLclSessionId(), eXferStateUploadError, xferErr );
+				m_FileInfoMgr.updateToGuiFileXferState( xferSession->getLclSessionId(), eXferStateUploadError, xferErr );
 			}
 		}
 		else
@@ -473,13 +473,13 @@ void FileInfoXferMgr::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, V
 
 		if( eXferErrorNone != xferErr )
 		{
-			m_FileInfoMgr.toGuiFileXferState(  poPkt->getLclSessionId(), eXferStateUploadError, xferErr );
+			m_FileInfoMgr.updateToGuiFileXferState(  poPkt->getLclSessionId(), eXferStateUploadError, xferErr );
 			endFileXferSession( xferSession );
 		}
 		else
 		{
-			m_FileInfoMgr.toGuiFileXferState(  poPkt->getLclSessionId(), eXferStateBeginUpload, eXferErrorNone );
-			m_FileInfoMgr.toGuiFileXferState(  poPkt->getLclSessionId(), eXferStateInUploadXfer, eXferErrorNone );
+			m_FileInfoMgr.updateToGuiFileXferState(  poPkt->getLclSessionId(), eXferStateBeginUpload, eXferErrorNone );
+			m_FileInfoMgr.updateToGuiFileXferState(  poPkt->getLclSessionId(), eXferStateInUploadXfer, eXferErrorNone );
 		}
 	}
 	else
@@ -510,13 +510,13 @@ void FileInfoXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 		EXferError xferErr = beginFileReceive( xferSession, poPkt );
 		if( eXferErrorNone != xferErr )
 		{
-			m_FileInfoMgr.toGuiFileXferState( xferSession->getLclSessionId(), eXferStateDownloadError, xferErr );
+			m_FileInfoMgr.updateToGuiFileXferState( xferSession->getLclSessionId(), eXferStateDownloadError, xferErr );
 			endFileXferSession( xferSession );
 		}
 		else
 		{
-			m_FileInfoMgr.toGuiFileXferState(  xferSession->getLclSessionId(), eXferStateBeginDownload, eXferErrorNone );
-			m_FileInfoMgr.toGuiFileXferState(  xferSession->getLclSessionId(), eXferStateInDownloadXfer, eXferErrorNone );
+			m_FileInfoMgr.updateToGuiFileXferState(  xferSession->getLclSessionId(), eXferStateBeginDownload, eXferErrorNone );
+			m_FileInfoMgr.updateToGuiFileXferState(  xferSession->getLclSessionId(), eXferStateInDownloadXfer, eXferErrorNone );
 		}
 
 		pktReply.setError( xferErr );
@@ -559,7 +559,7 @@ void FileInfoXferMgr::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr,
 		EXferError xferErr = rxFileChunk( xferSession, poPkt );
 		if( eXferErrorNone != xferErr )
 		{
-			m_FileInfoMgr.toGuiFileXferState( xferSession->getLclSessionId(), eXferStateDownloadError, xferErr );
+			m_FileInfoMgr.updateToGuiFileXferState( xferSession->getLclSessionId(), eXferStateDownloadError, xferErr );
 			endFileXferSession( xferSession );
 		}
 	}
@@ -587,7 +587,7 @@ static int cnt = 0;
 		EXferError xferErr = txNextFileChunk( xferSession );
 		if( eXferErrorNone != xferErr )
 		{
-			m_FileInfoMgr.toGuiFileXferState( xferSession->getLclSessionId(), eXferStateUploadError, xferErr );
+			m_FileInfoMgr.updateToGuiFileXferState( xferSession->getLclSessionId(), eXferStateUploadError, xferErr );
 			endFileXferSession( xferSession );
 		}
 	}
@@ -1130,7 +1130,7 @@ EXferError FileInfoXferMgr::beginFileReceive( FileRxSession * rxSession, PktFile
 	if( poPkt->getError() )
 	{
 		xferErr = (EXferError)poPkt->getError();
-		m_FileInfoMgr.toGuiFileXferState(  poPkt->getRmtSessionId(), eXferStateDownloadError, xferErr, xferErr );
+		m_FileInfoMgr.updateToGuiFileXferState(  poPkt->getRmtSessionId(), eXferStateDownloadError, xferErr, xferErr );
 		endFileXferSession( rxSession );
 		return xferErr;
 	}
@@ -1253,12 +1253,12 @@ EXferError FileInfoXferMgr::rxFileChunk( FileRxSession * xferSession, PktFileChu
 	{
 		if( xferInfo.calcProgress() )
 		{
-			m_FileInfoMgr.toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInDownloadXfer, eXferErrorNone, xferInfo.getProgress() );
+			m_FileInfoMgr.updateToGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInDownloadXfer, eXferErrorNone, xferInfo.getProgress() );
 		}
 	}
 	else
 	{
-		m_FileInfoMgr.toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateDownloadError, xferErr );
+		m_FileInfoMgr.updateToGuiFileXferState( xferInfo.getLclSessionId(), eXferStateDownloadError, xferErr );
 	}
 
 	return xferErr;
@@ -1802,13 +1802,13 @@ EXferError FileInfoXferMgr::sendNextFileChunk( VxFileXferInfo& xferInfo, VxNetId
 
 	if( eXferErrorNone != xferErr )
 	{
-		m_FileInfoMgr.toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateUploadError, xferErr );
+		m_FileInfoMgr.updateToGuiFileXferState( xferInfo.getLclSessionId(), eXferStateUploadError, xferErr );
 	}
 	else
 	{
 		if( xferInfo.calcProgress() )
 		{
-			m_FileInfoMgr.toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInUploadXfer, eXferErrorNone, xferInfo.getProgress() );
+			m_FileInfoMgr.updateToGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInUploadXfer, eXferErrorNone, xferInfo.getProgress() );
 		}
 	}
 

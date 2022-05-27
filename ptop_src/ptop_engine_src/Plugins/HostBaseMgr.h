@@ -102,7 +102,6 @@ protected:
     virtual bool                isUnJoinConnectReason( EConnectReason connectReason );
     virtual bool                isSearchConnectReason( EConnectReason connectReason );
 
-    virtual bool                stopHostSearch( EHostType hostType, SearchParams& searchParams );
     virtual bool                addSearchSession( VxGUID& sessionId, SearchParams& searchParams );
     virtual void                removeSearchSession( VxGUID& sessionId );
 

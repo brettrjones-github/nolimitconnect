@@ -570,62 +570,6 @@ void P2PEngine::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktRelayDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayDisconnect" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelayConnectReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayConnectReq" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelayConnectReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayConnectReply" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelaySessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelaySessionReq" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelaySessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelaySessionReply" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelayTestReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayTestReq" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelayTestReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayTestReply" );
-
-	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
-}
-
-//============================================================================
 void P2PEngine::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMyPicSendReq" );

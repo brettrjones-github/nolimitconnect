@@ -91,7 +91,7 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_SESSION_REPLY ]				= &PktPluginHandlerBase::onPktRelaySessionReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_CONNECT_TO_USER_REQ ]		= &PktPluginHandlerBase::onPktRelayConnectToUserReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_CONNECT_TO_USER_REPLY ]		= &PktPluginHandlerBase::onPktRelayConnectToUserReply;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_USER_DISCONNECT ]			= &PktPluginHandlerBase::onPktRelayUserDisconnect;
+	
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REQ ]					= &PktPluginHandlerBase::onPktRelayTestReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REPLY ]					= &PktPluginHandlerBase::onPktRelayTestReply;
 
@@ -115,6 +115,8 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_PING_REPLY ]						= &PktPluginHandlerBase::onPktPingReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_IM_ALIVE_REQ ]						= &PktPluginHandlerBase::onPktImAliveReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_IM_ALIVE_REPLY ]					= &PktPluginHandlerBase::onPktImAliveReply;
+
+	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_USER_DISCONNECT ]			= &PktPluginHandlerBase::onPktRelayUserDisconnect;
 }
 
 //============================================================================
@@ -402,72 +404,6 @@ void PktPluginHandlerBase::onPktLogReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }	
 
 //============================================================================
-void PktPluginHandlerBase::onPktRelayServiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayServiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelaySessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelaySessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectToUserReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayUserDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayTestReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktRelayTestReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
 void PktPluginHandlerBase::onPktSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
@@ -574,3 +510,9 @@ void PktPluginHandlerBase::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pk
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }	
+
+//============================================================================
+void PktPluginHandlerBase::onPktRelayUserDisconnect( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}

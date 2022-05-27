@@ -823,8 +823,9 @@ void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& online
 			|| poRmtUserConnectInfo->isRelayClient() )
 		{
 			PktRelayUserDisconnect pktRelayDisconnect;
-			pktRelayDisconnect.setSrcOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
-			pktRelayDisconnect.m_UserId = onlineId;
+			pktRelayDisconnect.setSrcOnlineId( m_Engine.getMyOnlineId() );
+			pktRelayDisconnect.setHostOnlineId( m_Engine.getMyOnlineId() );
+			pktRelayDisconnect.setUserOnlineId( onlineId );
 			skt->txPacket( onlineId, &pktRelayDisconnect );
 		}
 		else 
@@ -834,7 +835,7 @@ void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& online
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s\n", onlineId.toOnlineIdString().c_str() );
+		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s", onlineId.toOnlineIdString().c_str() );
 		skt->closeSkt( eSktCloseFindConnectedInfoFail );
 	}
 

@@ -214,7 +214,6 @@
     <ClInclude Include="..\..\PktsScan.h" />
     <ClInclude Include="..\..\PktsSearch.h" />
     <ClInclude Include="..\..\PktsSession.h" />
-    <ClInclude Include="..\..\PktsStoryBoard.h" />
     <ClInclude Include="..\..\PktsThumb.h" />
     <ClInclude Include="..\..\PktsThumbXfer.h" />
     <ClInclude Include="..\..\PktsTodGame.h" />
@@ -275,7 +274,6 @@
     <ClCompile Include="..\..\PktsScan.cpp" />
     <ClCompile Include="..\..\PktsSearch.cpp" />
     <ClCompile Include="..\..\PktsSession.cpp" />
-    <ClCompile Include="..\..\PktsStoryBoard.cpp" />
     <ClCompile Include="..\..\PktsThumb.cpp" />
     <ClCompile Include="..\..\PktsThumbXfer.cpp" />
     <ClCompile Include="..\..\PktsTodGame.cpp" />

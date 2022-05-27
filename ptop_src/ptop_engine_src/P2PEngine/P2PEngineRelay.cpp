@@ -30,38 +30,6 @@
 #include <CoreLib/VxParse.h>
 
 //============================================================================
-void P2PEngine::onPktRelayServiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogMsg( LOG_VERBOSE, "P2PEngine::onPktRelayServiceReq not used");
-}
-
-//============================================================================
-void P2PEngine::onPktRelayServiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogMsg( LOG_VERBOSE, "P2PEngine::onPktRelayServiceReply not used" );
-	// m_NetworkStateMachine.onPktRelayServiceReply( sktBase, (PktRelayServiceReply *)pktHdr );
-}
-
-//============================================================================
-void P2PEngine::onPktRelayConnectToUserReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogMsg( LOG_VERBOSE, "P2PEngine::onPktRelayConnectToUserReq not used" );
-}
-
-//============================================================================
-void P2PEngine::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-	LogMsg( LOG_VERBOSE, "P2PEngine::onPktRelayConnectToUserReply not used" );
-
-	//PktRelayConnectToUserReply * poPkt = (PktRelayConnectToUserReply *)pktHdr;
-	//BigListInfo* bigListInfo = m_BigListMgr.findBigListInfo( poPkt->m_ConnectId.getOnlineId() );
-	//if( bigListInfo )
-	//{
-	//	getRelayMgr().onPktRelayConnectToUserReply( sktBase, pktHdr, bigListInfo->getVxNetIdent() );
-	//}
-}
-
-//============================================================================
 void P2PEngine::onPktRelayUserDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	LogMsg( LOG_VERBOSE, "P2PEngine::onPktRelayUserDisconnect not used" );

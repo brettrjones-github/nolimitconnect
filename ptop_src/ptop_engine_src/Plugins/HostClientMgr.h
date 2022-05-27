@@ -53,7 +53,7 @@ protected:
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     virtual void                startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent );
-    virtual void                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId );
+    virtual bool                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId );
 
     void                        addPluginRxSession( VxGUID& sessionId, PluginIdList& pluginIdList );
     void                        removePluginRxSession( VxGUID& sessionId );

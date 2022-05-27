@@ -314,16 +314,8 @@ bool P2PEngine::shouldInfoBeInDatabase( BigListInfo * poInfo )
 void P2PEngine::onBigListInfoRestored( BigListInfo * poInfo )
 {
 	updateIdentLists( poInfo, poInfo->getLastSessionTimeMs() );
-	if( poInfo->isMyRelay() )
-	{
-		m_ConnectionList.getPreferredRelayList().addContactInfo( poInfo->getConnectInfo() );
-	}
-	else if( false == poInfo->requiresRelay() )
-	{
-		m_ConnectionList.getPossibleRelayList().addContactInfo( poInfo->getConnectInfo() );
-	}
 
-	if( isP2POnline() )
+	if( isP2POnline() && poInfo->isFriend() || poInfo->isAdministrator() )
 	{
 		m_NetConnector.addConnectRequestToQue( poInfo->getConnectInfo() );
 	}

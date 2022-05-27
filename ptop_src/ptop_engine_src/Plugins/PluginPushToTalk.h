@@ -66,7 +66,7 @@ protected:
 	virtual void				onSessionEnded				( PluginSessionBase * poSession, bool pluginIsLocked, EOfferResponse eOfferResponse );
 
 protected:
-	virtual void				callbackOpusPkt				( void * userData, PktPushToTalkReq * pktOpusAudio );
+    virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio );
 	virtual void				callbackAudioOutSpaceAvail	( int freeSpaceLen );
 
 	PluginSessionMgr			m_PluginSessionMgr;

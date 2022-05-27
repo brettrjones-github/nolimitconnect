@@ -117,30 +117,3 @@ PktThumbGetReply::PktThumbGetReply()
     setPktLength( sizeof(  PktThumbXferErr ) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
-
- //============================================================================
- PktThumbFindReq:: PktThumbFindReq()
-     : PktBaseFindReq() 
- {
-     setPktType( PKT_TYPE_THUMB_FIND_REQ ); 
-     setPktLength( sizeof(  PktThumbFindReq ) );
-     vx_assert( 0 == ( getPktLength() & 0x0f ) );
- }
-
- //============================================================================
- PktThumbListReq:: PktThumbListReq()
-     : PktBaseListReq() 
- {
-     setPktType( PKT_TYPE_THUMB_LIST_REQ ); 
-     setPktLength( sizeof(  PktThumbFindReq ) );
-     vx_assert( 0 == ( getPktLength() & 0x0f ) );
- }
-
- //============================================================================
- PktThumbListReply::PktThumbListReply()
-     : PktBaseListReply( )
- {
-     setPktType( PKT_TYPE_THUMB_LIST_REPLY ); 
-     setPktLength( sizeof(  PktThumbListReply ) );
-     vx_assert( 0 == ( getPktLength() & 0x0f ) );
- }

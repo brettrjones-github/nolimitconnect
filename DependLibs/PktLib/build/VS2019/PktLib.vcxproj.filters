@@ -55,9 +55,6 @@
     <ClInclude Include="..\..\PktsSession.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\PktsStoryBoard.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\PktsTodGame.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -230,9 +227,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktsSession.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PktsStoryBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktsTodGame.cpp">

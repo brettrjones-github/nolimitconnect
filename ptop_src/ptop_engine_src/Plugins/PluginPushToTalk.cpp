@@ -134,7 +134,7 @@ bool PluginPushToTalk::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk 
 }
 
 //============================================================================
-void PluginPushToTalk::callbackOpusPkt( void * userData, PktPushToTalkReq * pktOpusAudio )
+void PluginPushToTalk::callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio )
 {
 	m_PushToTalkFeedMgr.callbackOpusPkt( userData, pktOpusAudio );
 }

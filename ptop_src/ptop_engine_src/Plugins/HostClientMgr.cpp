@@ -426,7 +426,7 @@ bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& se
 }
 
 //============================================================================
-void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId )
+bool HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId )
 {
     m_Engine.getToGui().toGuiHostSearchStatus( hostType, onlineId, eHostSearchCompleted );
     m_Engine.getToGui().toGuiHostSearchComplete( hostType, onlineId );
@@ -434,6 +434,7 @@ void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSkt
     removeSearchSession( sessionId );
     EConnectReason connectReason = getSearchConnectReason(hostType);
     m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
+    return true;
 }
 
 //============================================================================

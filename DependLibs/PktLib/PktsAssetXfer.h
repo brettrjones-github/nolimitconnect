@@ -97,29 +97,5 @@ public:
 	PktAssetXferErr();
 };
 
-//============================================================================
-// File Find packets
-//============================================================================
-class PktAssetFindReq : public PktBaseFindReq
-{
-public:
-    PktAssetFindReq();
-};
-
-//============================================================================
-//  PktThumbXferListRequest
-//============================================================================
-class  PktAssetListReq : public PktBaseListReq
-{
-public:
-    PktAssetListReq();
-};
-
-class  PktAssetListReply : public PktBaseListReply
-{
-public:
-    PktAssetListReply();
-};
-
 #pragma pack(pop) 
 

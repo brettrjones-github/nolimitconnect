@@ -707,7 +707,7 @@ ECommErr PluginBaseFiles::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxG
 
 
 //============================================================================
-void PluginBaseFiles::toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr )
+void PluginBaseFiles::toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param )
 {
 
 }

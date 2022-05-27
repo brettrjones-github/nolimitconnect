@@ -15,8 +15,6 @@
 #include "PluginStoryboardServer.h"
 #include "PluginMgr.h"
 
-#include <PktLib/PktsStoryBoard.h>
-
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================

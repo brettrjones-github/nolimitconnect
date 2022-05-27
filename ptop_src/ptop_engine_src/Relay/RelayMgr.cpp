@@ -40,7 +40,6 @@ bool RelayMgr::handleRelayPkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 		sendRelayError( srcOnlineId, sktBase, eRelayErrSrcNotJoined );
 		return true;
 	}
-
 	VxGUID destOnlineId = pktHdr->getDestOnlineId();
 	if( !isJoinedToRelayHost( destOnlineId ) )
 	{
@@ -79,22 +78,6 @@ bool RelayMgr::handleRelayPkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 bool RelayMgr::isJoinedToRelayHost( VxGUID& onlineId )
 {
 	return m_Engine.getHostJoinMgr().isUserJoinedToRelayHost( onlineId );
-}
-
-//============================================================================
-bool RelayMgr::sendRelayError( VxGUID& onlineId, VxSktBase* sktBase, ERelayErr relayErr )
-{
-	PktRelayConnectToUserReply pktReply;
-	pktReply.setRelayError( relayErr );
-
-	return 0 == sktBase->txPacket( onlineId, &pktReply );
-}
-
-//============================================================================
-void RelayMgr::onPktRelayConnectToUserReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
-{
-	PktRelayConnectToUserReply* pktReq = (PktRelayConnectToUserReply*)pktHdr;
-	LogMsg( LOG_VERBOSE, "onPktRelayConnectToUserReply err %s", DescribeRelayError( pktReq->getRelayError() ) );
 }
 
 //============================================================================
@@ -155,4 +138,16 @@ bool RelayMgr::sendRequestedReplyPktAnnIfNeeded( PktAnnounce* hisPktAnn, VxSktBa
 void RelayMgr::onRelayPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "RelayMgr::onRelayPktAnnounce %s", netIdent->getOnlineName() );
+}
+
+//============================================================================
+bool RelayMgr::sendRelayError( VxGUID& onlineId, VxSktBase* sktBase, ERelayErr relayErr )
+{
+	PktRelayUserDisconnect pktReply;
+	pktReply.setSrcOnlineId( m_Engine.getMyOnlineId() );
+	pktReply.setUserOnlineId( onlineId );
+	pktReply.setHostOnlineId( m_Engine.getMyOnlineId() );
+	//pktReply.setRelayError( relayErr );
+
+	return 0 == sktBase->txPacket( onlineId, &pktReply );
 }
