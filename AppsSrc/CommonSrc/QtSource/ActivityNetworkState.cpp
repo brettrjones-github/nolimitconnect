@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #include "ActivityNetworkState.h"
@@ -52,7 +52,7 @@ void ActivityNetworkState::setupActivityNetworkState( void )
 //============================================================================
 void  ActivityNetworkState::gotoWebsite( void )
 {
-	QDesktopServices::openUrl( QUrl("http://www.nolimitconnect.com/") );
+	QDesktopServices::openUrl( QUrl("http://www.nolimitconnect.org/") );
 }
 
 //============================================================================

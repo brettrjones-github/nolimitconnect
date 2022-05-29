@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #define RC_FLAG_HAS_PROFILE_PIC			0x01	

@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #include "PluginNetworkHost.h"

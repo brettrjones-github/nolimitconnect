@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #include "ActivityInformation.h"
@@ -70,7 +70,7 @@ void ActivityInformation::updateInformation( void )
     ui.m_ServiceInfoButton->setFixedSize( eButtonSizeLarge );
     ui.m_ClipboardIconButton->setFixedSize( eButtonSizeMedium );
     ui.m_ClipboardIconButton->setIcon( eMyIconEditCopy );
-    ui.m_WebsiteUrlLabel->setText( "http://www.nolimitconnect.com" );
+    ui.m_WebsiteUrlLabel->setText( "http://www.nolimitconnect.org" );
 
     if( m_PluginType != ePluginTypeInvalid )
     {

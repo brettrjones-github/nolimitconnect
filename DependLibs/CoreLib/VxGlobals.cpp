@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 #include "config_corelib.h"
 
@@ -48,8 +48,8 @@ namespace
     std::string			g_strApplicationTitle			= "No Limit Connect";
     std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
     std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
-	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.com";
-    std::string			g_strCompanyDomain				= "nolimitconnect.com";
+	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.org";
+    std::string			g_strCompanyDomain				= "nolimitconnect.org";
     std::string			g_strOrginizationName           = "nolimitconnect";
 	bool				g_IsAppCommercial				= false;
 

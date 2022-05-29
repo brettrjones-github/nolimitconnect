@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #include "AppletAboutApp.h"
@@ -76,7 +76,7 @@ void  AppletAboutApp::slotShowAppInfo( void )
 //============================================================================
 void  AppletAboutApp::gotoWebsite( void )
 {
-    QDesktopServices::openUrl( QUrl( "http://www.nolimitconnect.com/" ) );
+    QDesktopServices::openUrl( QUrl( "http://www.nolimitconnect.org/" ) );
 }
 
 //============================================================================

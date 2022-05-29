@@ -26,7 +26,7 @@
 
 # define PROGRAM_NAME			"NoLimitConnect"
 # define PACKAGE_STRING			"NoLimitConnect 1.0"	
-# define PACKAGE_URL		    "http://www.nolimitconnect.com"
+# define PACKAGE_URL		    "http://www.nolimitconnect.org"
 # define BUILD_KODI_MAIN        1
 
 #elif defined( BUILD_KODIQT_APP )

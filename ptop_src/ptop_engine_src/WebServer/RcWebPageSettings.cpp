@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #include "RcWebServer.h"
@@ -91,7 +91,7 @@ RCODE RcWebPageSettings::SetWbSettingsDefaults( void )
 
 	SetMyUrlsEnable( true );
 	SetMyUrlTitle( "My Favorite Web Sites." );
-	SetMyUrl( 0, "http://www.nolimitconnect.com" );
+	SetMyUrl( 0, "http://www.nolimitconnect.org" );
 
 	SetMyPictureEnable( true );
 	SetMyPictureTitle( "A Picture Of Me" );

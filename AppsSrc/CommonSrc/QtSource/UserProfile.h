@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.nolimitconnect.com
+// http://www.nolimitconnect.org
 //============================================================================
 
 #include <QString>
@@ -23,7 +23,7 @@ public:
 	{
 		m_strGreeting = "Lets Communicate!";
 		m_strAboutMe = "I'm Wonderful!";
-		m_strUrl3 = "http://www.nolimitconnect.com";
+		m_strUrl3 = "http://www.nolimitconnect.org";
 		m_strPicturePath = "";
 	}
 
