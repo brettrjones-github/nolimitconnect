@@ -1,6 +1,14 @@
-//=== PureVPN Setup For NoLimitConnect ===//
-Pure VPN is a commercial VPN available at
+//=== VPN Setup For NoLimitConnect ===//
+IVPN is a commercial VPN with simple setup and no spam or twitsted promotions. Worked on all my devices.
+https://www.ivpn.net
+Pure VPN is a commercial VPN and worked on all my devices except one. The self promotion spam is annoying.
 https://www.purevpn.com
+Proton VPN - had port forwarding but seems to have been broken in their latest update
+NordVPN - does NOT have port forwarding.
+ExpressVPN - does NOT have port forwarding except when run as firmware on a router. Not useable for cellular data networks.
+PrivateVPN - has a form of port forwarding but difficult to setup in linux
+
+
 
 //=== Port Forwarding ===//
 For Chat Room and/or Group hosting a open port must be available
@@ -15,13 +23,14 @@ Port Forwarding is not offered at all by phone data service.
 A simple way to Port Forward is to use a VPN that offers port forwarding.
 As of this writing most do not. This includes Nord VPN and Express VPN.
 
+IVPN is a vpn service that offers port forwarding with one button click to turn it on.
 Pure VPN is a vpn service that offers port forwarding. 
 Pure VPN also offers fixed IP addresses needed for NoLimitConnect network hosting.
-This is not a advertisement for VPN but my experience with it was good
+This is not a advertisement for VPN but my experience with it was ok
 and it offers a simple setup for Android and Windows. Linux is more complicated
 but can be done.
 
-Pure VPN can be used on Phone Data service where port forwarding cannot be
+Pure VPN can be used on Phone Cellular Data Service where port forwarding cannot be
 done by your phone service provider.
 
 //=== Fixed IP Address ===//
