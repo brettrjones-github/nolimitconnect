@@ -80,3 +80,9 @@ bool GuiUserJoin::isOnline( void )
 { 
     return getUser() && getUser()->isOnline(); 
 }
+
+//============================================================================
+std::string GuiUserJoin::getOnlineName( void )
+{
+    return m_GuiUser ? m_GuiUser->getOnlineName() : "Unknown User";
+}

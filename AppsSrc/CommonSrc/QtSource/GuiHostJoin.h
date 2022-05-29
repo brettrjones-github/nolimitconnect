@@ -55,6 +55,8 @@ public:
     int                         getRequestStateCount( EJoinState joinState );
     void                        getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests );
 
+    std::string                 getOnlineName( void );
+
 protected:
     AppCommon&                  m_MyApp;
     GuiHostJoinMgr&             m_HostJoinMgr;

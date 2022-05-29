@@ -893,6 +893,9 @@ void ConnectIdListMgr::onGroupRelayedUserAnnounce( PktAnnounce* pktAnn, VxSktBas
     VxGUID socketId = sktBase->getSocketId();
     // if relayed then the peer id should be the host that relayed the packet
     VxGUID hostOnlineId = sktBase->getPeerOnlineId();
+
+    LogMsg( LOG_VERBOSE, "ConnectIdListMgr::onGroupRelayedUserAnnounce from %s id %s hosted by %s id %s",
+            netIdent->getOnlineName(), onlineId.describeVxGUID().c_str(), sktBase->getPeerOnlineName().c_str(), hostOnlineId.describeVxGUID().c_str());
     if( onlineId.isVxGUIDValid() && hostOnlineId.isVxGUIDValid(), socketId.isVxGUIDValid() )
     {
         if( onlineId != hostOnlineId )

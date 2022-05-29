@@ -84,3 +84,9 @@ void GuiHostJoin::getRequestStateHosts( EJoinState joinState, std::vector<EHostT
 {
     hostRequests.clear();
 }
+
+//============================================================================
+std::string GuiHostJoin::getOnlineName( void )
+{
+    return m_GuiUser ? m_GuiUser->getOnlineName() : "Unknown User";
+}

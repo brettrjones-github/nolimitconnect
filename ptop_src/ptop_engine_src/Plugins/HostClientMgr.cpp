@@ -467,6 +467,10 @@ void HostClientMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase
 //============================================================================
 void HostClientMgr::onGroupRelayedUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
+    LogMsg( LOG_VERBOSE, "HostClientMgr::onGroupRelayedUserAnnounce from %s id %s hosted by %s id %s groupieId %s",
+            netIdent->getOnlineName(), netIdent->getMyOnlineId().describeVxGUID().c_str(), sktBase->getPeerOnlineName().c_str(),
+        sktBase->getPeerOnlineId().describeVxGUID().c_str(), groupieId.describeGroupieId().c_str());
+
     m_Engine.getToGui().toGuiHostJoinStatus( groupieId.getHostType(), groupieId.getGroupieOnlineId(), eHostJoinSuccess );
     VxGUID sessionId;
     sessionId.initializeWithNewVxGUID();

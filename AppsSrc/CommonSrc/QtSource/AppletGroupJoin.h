@@ -87,6 +87,7 @@ protected:
     Ui::AppletGroupJoinUi       ui;
     VxGUID                      m_JoinedHostSession;
     bool                        m_UserListMode{ false };
+    GroupieId                   m_AdminGroupieId;
 };
 
 
