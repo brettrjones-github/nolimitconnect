@@ -33,6 +33,7 @@ public:
     GuiGroupie() = delete;
     GuiGroupie( AppCommon& app );
     GuiGroupie( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId );
+    GuiGroupie( AppCommon& app, GuiUser* guiUser, GroupieId& groupieId, VxGUID& sessionId );
     GuiGroupie( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, GroupieInfo& groupieInfo );
     GuiGroupie( const GuiGroupie& rhs );
 	virtual ~GuiGroupie() = default;
@@ -42,7 +43,7 @@ public:
     void                        setUser( GuiUser* user )                    { m_GuiUser = user; }
     GuiUser*                    getUser( void )                             { return m_GuiUser; }
 
-    void				        setGroupieOnlineId( GroupieId& groupieId )  { m_GroupieId = groupieId; }
+    void				        setGroupieId( GroupieId& groupieId )        { m_GroupieId = groupieId; }
     GroupieId&                  getGroupieId( void )                        { return m_GroupieId; }
     void				        setGroupieOnlineId( VxGUID& onlineId )      { m_GroupieId.setGroupieOnlineId( onlineId ); }
     VxGUID&                     getGroupieOnlineId( void )                  { return m_GroupieId.getGroupieOnlineId(); }

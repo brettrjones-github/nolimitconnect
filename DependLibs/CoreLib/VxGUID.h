@@ -83,7 +83,7 @@ public:
 	// returns true if guids are same value
 	bool						isEqualTo( const VxGUID& guid );
 
-	std::string					describeVxGUID( void );
+	std::string					describeVxGUID( bool asOnlineId = true );
 
     // set bytes to network order
     void                        setToNetOrder( void );

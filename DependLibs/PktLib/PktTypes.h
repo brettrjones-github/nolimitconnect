@@ -204,7 +204,7 @@
 #define PKT_TYPE_RELAY_USER_DISCONNECT				( PKT_TYPE_MEMBERSHIP_REPLY + 1 )				// 146 ( 0x92 )
 
 
-#define MAX_PKT_TYPE_CNT							( PKT_TYPE_FILE_INFO_MORE_REPLY + 1 ) // 147	
+#define MAX_PKT_TYPE_CNT							( PKT_TYPE_RELAY_USER_DISCONNECT + 1 ) // 147	
 																									
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary		
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary		

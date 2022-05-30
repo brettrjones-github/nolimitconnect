@@ -153,9 +153,9 @@ bool GroupieId::isEqualTo( const GroupieId& groupieId )
 //============================================================================
 std::string GroupieId::describeGroupieId( void ) const
 {
-    std::string desc = "user id ";
+    std::string desc = m_HostedId.describeHostedId();
+    desc += " user ";
     desc += m_GroupieOnlineId.toOnlineIdString();
-    desc += " ";
-    desc += m_HostedId.describeHostedId();
+
     return desc;
 }

@@ -634,6 +634,8 @@ public:
     void                        onUserLoggedOn( void );
     bool                        checkSystemReady( void );
 
+    std::string                 describeGroupieId( GroupieId& groupieId, bool includeUserNames = true );
+
 signals:
     void						signalMessengerReady( bool isReady );    // emitted when messenger ready state changes
     void						signalMainWindowResized( void );    // emitted if main window is resized

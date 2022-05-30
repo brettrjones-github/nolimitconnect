@@ -397,14 +397,14 @@ bool GuiConnectIdListMgr::isDirectConnect( VxGUID& onlineId )
             }
         }
 
-        if( isDirectConnect )
-        {
-            LogMsg( LOG_VERBOSE, "IS direct connect %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
-        }
-        else
-        {
-            LogMsg( LOG_VERBOSE, "Is NOT direct connect %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
-        }
+        //if( isDirectConnect )
+        //{
+        //    LogMsg( LOG_VERBOSE, "IS direct connect %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
+        //}
+        //else
+        //{
+        //    LogMsg( LOG_VERBOSE, "Is NOT direct connect %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
+        //}
     }
 
     return isDirectConnect;
@@ -426,14 +426,14 @@ bool GuiConnectIdListMgr::isRelayed( VxGUID& onlineId )
             }
         }
 
-        if( isRelayed )
-        {
-            LogMsg( LOG_VERBOSE, "IS relayed %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
-        }
-        else
-        {
-            LogMsg( LOG_VERBOSE, "Is NOT relayed %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
-        }
+        //if( isRelayed )
+        //{
+        //    LogMsg( LOG_VERBOSE, "IS relayed %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
+        //}
+        //else
+        //{
+        //    LogMsg( LOG_VERBOSE, "Is NOT relayed %s", m_MyApp.getUserMgr().getUserOnlineName( onlineId ).c_str() );
+        //}
     }
 
     return isRelayed;

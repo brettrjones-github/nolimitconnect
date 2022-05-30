@@ -236,10 +236,13 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo, bool un
             guiUserJoin->setJoinState( userJoinInfo->getJoinState() );
             if( unJoin )
             {
+                LogMsg( LOG_VERBOSE, "GuiUserJoinMgr::updateUserJoin unjoin state %s %s", DescribeJoinState( guiUserJoin->getJoinState() ),
+                        m_MyApp.describeGroupieId( guiUserJoin->getGroupieId() ).c_str() );
                 onUserUnJoinUpdated( guiUserJoin );
             }
             else
             {
+                LogMsg( LOG_VERBOSE, "GuiUserJoinMgr::updateUserJoin update state %s %s", DescribeJoinState( guiUserJoin->getJoinState() ),         m_MyApp.describeGroupieId( guiUserJoin->getGroupieId() ).c_str() );
                 onUserJoinUpdated( guiUserJoin );
             }
         }
@@ -249,6 +252,8 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo, bool un
             guiUserJoin->setJoinState( userJoinInfo->getJoinState() );
             m_UserJoinList[guiUserJoin->getGroupieId()] = guiUserJoin;
             onUserJoinAdded( guiUserJoin );
+            LogMsg( LOG_VERBOSE, "GuiUserJoinMgr::updateUserJoin add state %s %s", DescribeJoinState( guiUserJoin->getJoinState() ),
+                    m_MyApp.describeGroupieId( guiUserJoin->getGroupieId() ).c_str() );
         }
     }
 

@@ -233,19 +233,52 @@ void GuiGroupieListWidget::slotConnectButtonClicked( GuiGroupieListItem* hostIte
 }
 
 //============================================================================
-void GuiGroupieListWidget::updateGroupieList( GroupieId& hostedId, GuiGroupie* guiGroupie, VxGUID& sessionId )
+void GuiGroupieListWidget::updateGroupieList( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId )
 {
-    GuiGroupieListSession* groupieSession = findSession( hostedId );
+    GuiGroupieListSession* groupieSession = findSession( groupieId );
     if( groupieSession )
     {
         groupieSession->setSessionId( sessionId );
     }
     else
     {
-        GuiGroupieListSession* groupieSession = new GuiGroupieListSession( hostedId, guiGroupie, this );
+        GuiGroupieListSession* groupieSession = new GuiGroupieListSession( groupieId, guiGroupie, this );
         groupieSession->setSessionId( sessionId );
 
         addOrUpdateHostSession( groupieSession );
+    }
+}
+
+//============================================================================
+void GuiGroupieListWidget::addOrUpdateUser( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    GuiUser* guiUser = guiUserJoin->getUser();
+    if( guiUser )
+    {
+        int iCnt = count();
+        for( int iRow = 0; iRow < iCnt; iRow++ )
+        {
+            GuiGroupieListItem* listItem = (GuiGroupieListItem*)item( iRow );
+            if( listItem )
+            {
+                GuiGroupieListSession* groupieSession = listItem->getHostSession();
+                if( groupieSession && groupieSession->getGroupieId().getGroupieOnlineId() == guiUserJoin->getUser()->getMyOnlineId() )
+                {
+                    groupieSession->updateUser( guiUserJoin->getUser() );
+                    listItem->updateUser( guiUserJoin->getUser() );
+                    addOrUpdateHostSession( groupieSession );
+                    return;
+                }
+            }
+        }
+
+        // i think maybe the session id is not such a great idea. originally it was for multiple session but is probably not applicable
+        VxGUID sessionId;
+        sessionId.initializeWithNewVxGUID();
+
+        GuiGroupie* guiGroupie = m_MyApp.getGroupieListMgr().updateGroupie( groupieId, guiUser, sessionId );
+
+        updateGroupieList( groupieId, guiGroupie, sessionId );
     }
 }
 

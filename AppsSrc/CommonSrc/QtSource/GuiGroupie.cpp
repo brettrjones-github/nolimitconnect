@@ -19,6 +19,8 @@
 #include "GuiParams.h"
 #include <ptop_src/ptop_engine_src/GroupieListMgr/GroupieInfo.h>
 
+#include <CoreLib/VxGlobals.h>
+
 //============================================================================
 GuiGroupie::GuiGroupie( AppCommon& app )
     : QWidget( &app )
@@ -35,6 +37,20 @@ GuiGroupie::GuiGroupie( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId )
     , m_GuiUser( guiUser )
     , m_SessionId( sessionId )
 {
+}
+//============================================================================
+GuiGroupie::GuiGroupie( AppCommon& app, GuiUser* guiUser, GroupieId& groupieId, VxGUID& sessionId )
+    : QWidget( &app )
+    , m_MyApp( app )
+    , m_GroupieListMgr( app.getGroupieListMgr() )
+    , m_GuiUser( guiUser )
+    , m_GroupieId( groupieId )
+    , m_SessionId( sessionId )
+{
+    setGroupieInfoTimestamp( GetGmtTimeMs() );
+    setGroupieUrl( guiUser->getNetIdent().getMyOnlineUrl() );
+    setGroupieTitle( guiUser->getOnlineName() );
+    setGroupieDescription( guiUser->getOnlineDescription() );
 }
 
 //============================================================================

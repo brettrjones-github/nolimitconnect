@@ -596,7 +596,6 @@ bool ConnectIdListMgr::findRelayConnectionId( VxGUID& onlineId, VxGUID& retSktCo
 //============================================================================
 VxSktBase* ConnectIdListMgr::findSktBase( VxGUID& connectId )
 {
-    bool isConnected{ false };
     m_Engine.getPeerMgr().lockSktList();
     VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectId );
     if( sktBase )

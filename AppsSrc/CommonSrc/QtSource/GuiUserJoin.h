@@ -49,6 +49,7 @@ public:
     bool                        isInSession( void )                     { return isOnline() && m_SessionId.isVxGUIDValid(); }
 
     std::string                 getOnlineName( void );
+    VxGUID                      getMyOnlineId( void );
 
 protected:
     AppCommon&                  m_MyApp;

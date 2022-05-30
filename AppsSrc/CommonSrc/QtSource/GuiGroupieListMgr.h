@@ -51,10 +51,11 @@ public:
     void                        onUserOnlineStatusChange( GuiGroupie* user, bool isOnline );
     void                        onMyIdentUpdated( GuiGroupie* guiGroupie );
 
-    GuiGroupie*                  getGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType )   { return findGroupie( groupieOnlineId, hostOnlineId, hostType ); }
-    GuiGroupie*                  getGroupie( GroupieId& groupieId )                    { return findGroupie( groupieId ); }
+    GuiGroupie*                 getGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType )   { return findGroupie( groupieOnlineId, hostOnlineId, hostType ); }
+    GuiGroupie*                 getGroupie( GroupieId& groupieId )                    { return findGroupie( groupieId ); }
     std::map<GroupieId, GuiGroupie*>& getGroupieList( void )                            { return m_GroupieList; }
-    GuiGroupie*                  updateGroupie( VxNetIdent* hisIdent, EHostType hostType );
+    GuiGroupie*                 updateGroupie( VxNetIdent* hisIdent, EHostType hostType );
+    GuiGroupie*                 updateGroupie( GroupieId& groupieId, GuiUser* guiUser, VxGUID& sessionId );
 
     void                        wantGroupieListCallbacks( GuiGroupieListCallback* client, bool enable );
 

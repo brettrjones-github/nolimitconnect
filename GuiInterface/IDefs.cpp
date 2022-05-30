@@ -249,7 +249,8 @@ namespace
         "Join: Send Failed ",
         "Join: Send Acknowleged ",
         "Join: Requested ",
-        "Join: Accepted ",
+        "Join: Was Granted ",
+        "Join: Is Granted ",
         "Join: Denied ",
         "Join: Leave Host ",
         "Join: Max JoinState ",
@@ -1287,24 +1288,24 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
 {
     switch( hostType )
     {
-    case ePluginTypeClientGroup:
     case eHostTypeGroup:
         return ePluginTypeClientGroup;
-    case ePluginTypeClientChatRoom:
+
     case eHostTypeChatRoom:
         return ePluginTypeClientChatRoom;
-    case ePluginTypeClientRandomConnect:
+
     case eHostTypeRandomConnect:
         return ePluginTypeClientRandomConnect;
-    case ePluginTypeClientPeerUser:
+
     case eHostTypePeerUserDirect:
         return ePluginTypeClientPeerUser;
-    case ePluginTypeClientNetwork:
+
     case eHostTypeNetwork:
         return ePluginTypeClientNetwork;
-    case ePluginTypeClientConnectTest:
+
     case eHostTypeConnectTest:
         return ePluginTypeClientConnectTest;
+
     case eHostTypeUnknown:
     default:
         LogMsg( LOG_ERROR, "HostTypeToClientPlugin unknown host type %d", hostType );

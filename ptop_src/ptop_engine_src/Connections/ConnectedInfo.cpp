@@ -127,18 +127,7 @@ bool ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallb
 //============================================================================
 void ConnectedInfo::onSktDisconnected( VxSktBase * sktBase )
 {
-    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end();  )
-    {
-        if( iter->getSktBase() == sktBase )
-        {
-            iter->onSktDisconnected();
-            iter = m_CallbackList.erase( iter );
-        }
-        else
-        {
-            ++iter;
-        }
-    }
+    // this connected info is about to be erased in ConnectedListAll::onSktDisconnected
 }
 
 //============================================================================

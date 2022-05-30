@@ -252,56 +252,56 @@ void AppletGroupJoin::slotFavoriteButtonClicked( GuiHostedListSession* hostSessi
 //============================================================================
 void AppletGroupJoin::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRequested %s %s", guiHostJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRequested %s %s", guiHostJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinRequested( groupieId, guiHostJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostJoinWasGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinGrante %s %s", guiHostJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinGrante %s %s", guiHostJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinWasGranted( groupieId, guiHostJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostJoinIsGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinIsGranted %s %s", guiHostJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinIsGranted %s %s", guiHostJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinIsGranted( groupieId, guiHostJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostUnJoinGranted %s %s", guiHostJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostUnJoinGranted %s %s", guiHostJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostUnJoinGranted( groupieId, guiHostJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinDenied %s %s", guiHostJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinDenied %s %s", guiHostJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinDenied( groupieId, guiHostJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinLeaveHost %s", groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinLeaveHost %s", m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinLeaveHost( groupieId );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostUnJoin( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostUnJoin %s", groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostUnJoin %s", m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostUnJoin( groupieId );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiHostJoinRemoved( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRemoved %s", groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRemoved %s", m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinRemoved( groupieId );
 }
 
@@ -311,23 +311,34 @@ void AppletGroupJoin::callbackGuiHostJoinRemoved( GroupieId& groupieId )
 //============================================================================
 void AppletGroupJoin::callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRequested %s %s", guiUserJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRequested %s %s", guiUserJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinRequested( groupieId, guiUserJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiUserJoinWasGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinWasGranted %s %s", guiUserJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinWasGranted %s %s", guiUserJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinWasGranted( groupieId, guiUserJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiUserJoinIsGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted %s %s", guiUserJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted %s %s", guiUserJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinIsGranted( groupieId, guiUserJoin );
-	ui.m_GuiGroupieListWidget->callbackGuiUserJoinIsGranted( groupieId, guiUserJoin );
+    if( m_AdminGroupieId.isValid() && guiUserJoin && guiUserJoin->getUser() )
+    {
+        if( guiUserJoin->getMyOnlineId() == m_AdminGroupieId.getHostedOnlineId() )
+        {
+            ui.m_HostAdminIdentWidget->updateIdentity( guiUserJoin->getUser(), true );
+        }
+        else
+        {
+            ui.m_GuiGroupieListWidget->addOrUpdateUser( groupieId, guiUserJoin );
+        }
+    }
+
 	GuiHosted* guiHosted = ui.m_GuiHostedListWidget->findGuiHostedByHostId( groupieId.getHostedId() );
 	onJoinedHost( groupieId, guiHosted );
 }
@@ -335,28 +346,28 @@ void AppletGroupJoin::callbackGuiUserJoinIsGranted( GroupieId& groupieId, GuiUse
 //============================================================================
 void AppletGroupJoin::callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserUnJoinGranted %s %s", guiUserJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserUnJoinGranted %s %s", guiUserJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserUnJoinGranted( groupieId, guiUserJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinDenied %s %s", guiUserJoin->getOnlineName().c_str(), groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinDenied %s %s", guiUserJoin->getOnlineName().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinDenied( groupieId, guiUserJoin );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiUserJoinLeaveHost( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinLeaveHost %s", groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinLeaveHost %s", m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinLeaveHost( groupieId );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackGuiUserJoinRemoved( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRemoved %s", groupieId.describeGroupieId().c_str() );
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRemoved %s", m_MyApp.describeGroupieId( groupieId ).c_str() );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinLeaveHost( groupieId );
 }
 
@@ -383,8 +394,8 @@ void AppletGroupJoin::onJoinedHost( GroupieId& groupieId, GuiHosted* guiHosted )
 		m_AdminGroupieId = groupieId;
 		changeGuiMode( true );
 		// find and fill in the host admin
-		LogMsg( LOG_VERBOSE, "AppletGroupJoin::onJoinedHost Admin title %s groupie id %s",
-            guiHosted->getHostTitle().c_str(), groupieId.describeGroupieId().c_str() );
+		LogMsg( LOG_VERBOSE, "AppletGroupJoin::onJoinedHost Admin title %s groupie i%s",
+            guiHosted->getHostTitle().c_str(), m_MyApp.describeGroupieId( groupieId ).c_str() );
 
 		ui.m_HostAdminIdentWidget->updateHosted( guiHosted );
 		m_MyApp.getEngine().getUserJoinMgr().queryUserListFromHost( groupieId );

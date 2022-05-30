@@ -113,7 +113,8 @@ void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* userJoinInfo )
 {
     if( userJoinInfo )
     {
-        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested start" );
+        LogMsg( LOG_VERBOSE, "UserJoinMgr::announceUserJoinRequested state %s %s", DescribeJoinState( userJoinInfo->getJoinState() ),
+                userJoinInfo->getGroupieId().describeGroupieId().c_str() );
 
         lockClientList();
         std::vector<UserJoinCallbackInterface*>::iterator iter;
@@ -124,7 +125,6 @@ void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* userJoinInfo )
         }
 
         unlockClientList();
-        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested done" );
     }
     else
     {
@@ -137,6 +137,8 @@ void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * userJoinInfo )
 {
     if( userJoinInfo )
     {
+        LogMsg( LOG_VERBOSE, "UserJoinMgr::announceUserJoinUpdated state %s %s", DescribeJoinState( userJoinInfo->getJoinState() ),
+                userJoinInfo->getGroupieId().describeGroupieId().c_str() );
         lockClientList();
         std::vector<UserJoinCallbackInterface *>::iterator iter;
         for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )
@@ -158,6 +160,8 @@ void UserJoinMgr::announceUserUnJoinUpdated( UserJoinInfo* userJoinInfo )
 {
     if( userJoinInfo )
     {
+        LogMsg( LOG_VERBOSE, "UserJoinMgr::announceUserUnJoinUpdated state %s %s", DescribeJoinState( userJoinInfo->getJoinState() ),
+                userJoinInfo->getGroupieId().describeGroupieId().c_str() );
         lockClientList();
         std::vector<UserJoinCallbackInterface*>::iterator iter;
         for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
@@ -178,7 +182,7 @@ void UserJoinMgr::announceUserUnJoinUpdated( UserJoinInfo* userJoinInfo )
 void UserJoinMgr::announceUserJoinRemoved( GroupieId& groupieId )
 {
     removeFromDatabase( groupieId, false );
-
+    LogMsg( LOG_VERBOSE, "UserJoinMgr::announceUserJoinRemoved %s", groupieId.describeGroupieId().c_str() );
 	lockClientList();
 	std::vector<UserJoinCallbackInterface *>::iterator iter;
 	for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )

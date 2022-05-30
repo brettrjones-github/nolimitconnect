@@ -276,7 +276,7 @@ ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime
     m_ThumbInfoMutex.lock();
     for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
     {
-        if( thumbInfo->getThumbId() == thumbId && ( 0 == thumbModifiedTime || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
+        if( thumbInfo->getThumbId() == thumbId && ( isEmoticonThumbnail( thumbId ) || 0 == thumbModifiedTime || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
         {
             m_ThumbInfoMutex.unlock();
             return dynamic_cast<ThumbInfo*>(thumbInfo);
@@ -399,8 +399,7 @@ void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPl
 {
     if( !lookupThumbInfo( thumbId, thumbModifiedTime ) )
     {
-        // TODO implement
-        vx_assert( false );
+        ptopEngineRequestPluginThumb( sktBase, netIdent, pluginType, thumbId );
     }
 }
 

@@ -86,3 +86,9 @@ std::string GuiUserJoin::getOnlineName( void )
 {
     return m_GuiUser ? m_GuiUser->getOnlineName() : "Unknown User";
 }
+
+//============================================================================
+VxGUID GuiUserJoin::getMyOnlineId( void )
+{
+    return m_GuiUser ? m_GuiUser->getMyOnlineId() : VxGUID();
+}

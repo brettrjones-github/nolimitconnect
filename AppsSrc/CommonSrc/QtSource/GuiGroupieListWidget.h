@@ -36,6 +36,7 @@ public:
 
     void						updateGroupieList( GroupieId& hostedId, GuiGroupie* guiGroupie, VxGUID& sessionId );
     GuiGroupieListItem*         addOrUpdateHostSession( GuiGroupieListSession* hostSession );
+    void                        addOrUpdateUser( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
 
     GuiGroupieListSession*      findSession( VxGUID& lclSessionId );
     GuiGroupieListSession*      findSession( GroupieId& hostedId );

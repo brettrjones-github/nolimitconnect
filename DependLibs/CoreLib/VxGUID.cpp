@@ -537,19 +537,26 @@ void VxGUID::clearVxGUID( void )
 }
 
 //============================================================================
-std::string	VxGUID::describeVxGUID( void )
+std::string	VxGUID::describeVxGUID( bool asOnlineId )
 {
 	std::string strId;
-    char bufHiPart[ 33 ];
-    char bufLoPart[ 33 ];
+    if( asOnlineId )
+    {
+        strId = toOnlineIdString();
+    }
+    else
+    {
+        char bufHiPart[ 33 ];
+        char bufLoPart[ 33 ];
 
-    uint64ToHexAscii( bufHiPart, m_u64HiPart );
-    uint64ToHexAscii( bufLoPart, m_u64LoPart );
-    strId = " 0x";
-    strId += bufHiPart;
-    strId += " 0x";
-    strId += bufLoPart;
-    strId += " ";
+        uint64ToHexAscii( bufHiPart, m_u64HiPart );
+        uint64ToHexAscii( bufLoPart, m_u64LoPart );
+        strId = " 0x";
+        strId += bufHiPart;
+        strId += " 0x";
+        strId += bufLoPart;
+        strId += " ";
+    }
 
 	return strId;
 }

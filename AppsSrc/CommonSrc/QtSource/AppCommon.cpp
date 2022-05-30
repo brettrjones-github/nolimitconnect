@@ -1947,3 +1947,24 @@ bool AppCommon::checkSystemReady( void )
 
 	return m_IsSystemReady;
 }
+
+//============================================================================
+std::string AppCommon::describeGroupieId( GroupieId& groupieId, bool includeUserNames )
+{
+	if( includeUserNames )
+	{
+		std::string desc = DescribeHostType( groupieId.getHostType() );
+		desc += m_UserMgr.getUserOnlineName( groupieId.getHostedOnlineId() );
+		desc += " id ";
+		desc += groupieId.getHostedOnlineId().toOnlineIdString();
+		desc += " user ";
+		desc += m_UserMgr.getUserOnlineName( groupieId.getGroupieOnlineId() );
+		desc += " id ";
+		desc += groupieId.getGroupieOnlineId().toOnlineIdString();
+		return desc;
+	}
+	else
+	{
+		return groupieId.describeGroupieId();
+	}
+}

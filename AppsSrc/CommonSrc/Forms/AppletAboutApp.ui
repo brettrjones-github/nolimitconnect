@@ -131,7 +131,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>go to http://www.nolimitconnect.org</string>
+         <string>visit http://www.nolimitconnect.org</string>
         </property>
        </widget>
       </item>

@@ -207,6 +207,21 @@ GuiGroupie* GuiGroupieListMgr::updateGroupie( VxNetIdent* hisIdent, EHostType ho
 }
 
 //============================================================================
+GuiGroupie* GuiGroupieListMgr::updateGroupie( GroupieId& groupieId, GuiUser* guiUser, VxGUID& sessionId )
+{
+    GuiGroupie* guiGroupie = findGroupie( groupieId );
+    if( !guiGroupie )
+    {
+        guiGroupie = new GuiGroupie( m_MyApp, guiUser, groupieId, sessionId );
+
+        m_GroupieList[ groupieId ] = guiGroupie;
+        onGroupieAdded( guiGroupie );
+    }
+
+    return guiGroupie;
+}
+
+//============================================================================
 GuiGroupie* GuiGroupieListMgr::updateGroupieInfo( GroupieInfo& groupieInfo )
 {
     GuiGroupie* guiGroupie = findGroupie( groupieInfo.getGroupieId() );
