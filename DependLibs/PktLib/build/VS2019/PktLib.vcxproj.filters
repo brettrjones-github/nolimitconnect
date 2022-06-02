@@ -109,15 +109,6 @@
     <ClInclude Include="..\..\VxSearchFlags.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\PktsThumb.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\PktsPluginSetting.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\PktHostAnnounce.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\PktsFriendOffer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -275,15 +266,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\VxSearchFlags.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PktsThumb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PktsPluginSetting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PktHostAnnounce.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktsHostJoin.cpp">

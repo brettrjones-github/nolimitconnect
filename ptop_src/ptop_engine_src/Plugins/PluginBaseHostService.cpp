@@ -471,40 +471,6 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void PluginBaseHostService::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogModule( eLogHosts, LOG_DEBUG, "PluginBaseHostService %s onPktPluginSettingReq from %s", DescribeHostType( getHostType() ), netIdent->getOnlineName() );
-    PktPluginSettingReply settingReply;
-    PktPluginSettingReq* settingReq = (PktPluginSettingReq*)pktHdr;
-    if( settingReq->isValidPkt() )
-    {
-        PluginId pluginId = settingReq->getPluginId();
-
-        settingReply.setHostType( settingReq->getHostType() );
-        settingReply.setSessionId( settingReq->getSessionId() );
-        settingReply.setPluginId( pluginId );
-        settingReply.setPluginType( settingReq->getPluginType() );
-
-        // for now we only handle a single entry.. we could add more for efficiency
-        
-        ECommErr searchErr = m_HostServerMgr.settingsRequest( pluginId, settingReply, sktBase, netIdent );
-        settingReply.setCommError( searchErr );
-    }
-    else
-    {
-        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService invalid search packet" );
-        settingReply.setCommError( eCommErrInvalidPkt );
-    }
-
-    EPluginType overridePlugin = settingReq->getPluginType();
-
-    if( !txPacket( netIdent->getMyOnlineId(), sktBase, &settingReply, false, overridePlugin ) )
-    {
-        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
-    }
-}
-
-//============================================================================
 void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
@@ -649,7 +615,8 @@ void PluginBaseHostService::updateHostInviteUrl( void )
             m_HostInviteUrl = inviteUrl;
             m_PktHostInviteAnnounceReq.setHostType( getHostType() );
             m_PktHostInviteAnnounceReq.setSessionId( sessionId );
-            bool result = m_PktHostInviteAnnounceReq.setHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDescription, m_HostInfoModifiedTime );
+            VxGUID thumbId = pktAnn.getHostThumbId( getHostType(), true );
+            bool result = m_PktHostInviteAnnounceReq.setHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDescription, m_HostInfoModifiedTime, thumbId );
             m_AnnMutex.unlock();
 
             if( result )

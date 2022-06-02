@@ -24,19 +24,22 @@ class HostedInfo
 public:
 	HostedInfo() = default;
 	HostedInfo( const HostedInfo& rhs );
-    HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
+    HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl, VxGUID& thumbId );
     virtual ~HostedInfo() = default;
 
 	HostedInfo&				    operator=( const HostedInfo& rhs ); 
 
     bool                        isHostInviteValid( void );
 
-    virtual void				setHostedId( HostedId& hostedId )               { m_HostedId = hostedId; }
+    virtual void				setHostedId( HostedId& hostedId )                   { m_HostedId = hostedId; }
     HostedId&                   getHostedId( void )                                 { return m_HostedId; }
     virtual void				setOnlineId( VxGUID& onlineId )                     { m_HostedId.setOnlineId( onlineId ); }
     virtual VxGUID&             getOnlineId( void )                                 { return m_HostedId.getOnlineId(); }
     virtual void			    setHostType( enum EHostType hostType )              { m_HostedId.setHostType( hostType ); }
     virtual EHostType	        getHostType( void )                                 { return m_HostedId.getHostType(); }
+
+    virtual void				setThumbId( VxGUID& thumbId )                       { m_ThumbId = thumbId; }
+    virtual VxGUID&             getThumbId( void )                                  { return m_ThumbId; }
 
     virtual void                setIsFavorite( bool isFavorite )                    { m_IsFavorite = isFavorite; }
     virtual bool                getIsFavorite( void )                               { return m_IsFavorite; }
@@ -75,4 +78,5 @@ protected:
     std::string                 m_HostInviteUrl{ "" };
     std::string                 m_HostTitle{ "" };
     std::string                 m_HostDesc{ "" };
+    VxGUID                      m_ThumbId;
 };

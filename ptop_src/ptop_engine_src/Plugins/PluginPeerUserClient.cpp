@@ -80,13 +80,6 @@ void PluginPeerUserClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr *
 }
 
 //============================================================================
-void PluginPeerUserClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginPeerUserClient got plugin setting reply" );
-    m_HostClientMgr.onPktPluginSettingReply( sktBase, pktHdr,  netIdent );
-}
-
-//============================================================================
 void PluginPeerUserClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginPeerUserClient got join offer request" );

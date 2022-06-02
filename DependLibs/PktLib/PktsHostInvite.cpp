@@ -29,7 +29,7 @@ PktHostInviteAnnounceReq::PktHostInviteAnnounceReq()
 }
 
 //============================================================================
-bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime, VxGUID& thumbId )
 {
     bool result = lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
     if( result )
@@ -39,6 +39,7 @@ bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::s
         result &= m_BlobEntry.setValue( inviteUrl );
         result &= m_BlobEntry.setValue( hostTitle );
         result &= m_BlobEntry.setValue( hostDesc );
+        result &= m_BlobEntry.setValue( thumbId );
         calcPktLen();
     }
 
@@ -46,13 +47,14 @@ bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::s
 }
 
 //============================================================================
-bool PktHostInviteAnnounceReq::getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+bool PktHostInviteAnnounceReq::getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime, VxGUID& thumbId )
 {
     m_BlobEntry.resetRead();
     bool result = m_BlobEntry.getValue( lastModifiedTime );
     result &= m_BlobEntry.getValue( inviteUrl );
     result &= m_BlobEntry.getValue( hostTitle );
     result &= m_BlobEntry.getValue( hostDesc );  
+    result &= m_BlobEntry.getValue( thumbId );
     
     return result && lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
 }

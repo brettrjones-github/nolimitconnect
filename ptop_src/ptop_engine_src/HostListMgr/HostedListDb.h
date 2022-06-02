@@ -22,7 +22,7 @@ class HostedListDb : public DbBase
 {
 public:
 	HostedListDb();
-	virtual ~HostedListDb();
+	virtual ~HostedListDb() = default;
 
 	RCODE						hostedListDbStartup( int dbVersion, const char* dbFileName );
 	RCODE						hostedListDbShutdown( void );
@@ -36,7 +36,7 @@ public:
     bool                        updateLastConnected( enum EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
     bool                        updateLastJoined( enum EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
     bool						updateHostUrl(enum  EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
-    bool                        updateHostTitleAndDescription( enum EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime );
+    bool                        updateHostTitleAndDescription( enum EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxGUID& thumbId );
 
 
 protected:

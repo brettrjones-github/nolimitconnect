@@ -19,9 +19,10 @@
 #include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
-HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl )
+HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl, VxGUID& thumbId )
     : m_HostedId( onlineId, hostType )
     , m_HostInviteUrl( hostUrl )
+    , m_ThumbId( thumbId )
 {
 }
 
@@ -35,6 +36,7 @@ HostedInfo::HostedInfo( const HostedInfo& rhs )
     , m_HostInviteUrl( rhs.m_HostInviteUrl )
     , m_HostTitle( rhs.m_HostTitle )
     , m_HostDesc( rhs.m_HostDesc )
+    , m_ThumbId( rhs.m_ThumbId )
 {
 }
 
@@ -51,6 +53,7 @@ HostedInfo& HostedInfo::operator=( const HostedInfo& rhs )
         m_HostInviteUrl = rhs.m_HostInviteUrl;
         m_HostTitle = rhs.m_HostTitle;
         m_HostDesc = rhs.m_HostDesc;
+        m_ThumbId = rhs.m_ThumbId;
     }
 
 	return *this;
@@ -85,6 +88,7 @@ bool HostedInfo::fillSearchBlob( PktBlobEntry& blobEntry )
         result &= blobEntry.setValue( m_HostInviteUrl );
         result &= blobEntry.setValue( m_HostTitle );
         result &= blobEntry.setValue( m_HostDesc );  
+        result &= blobEntry.setValue( m_ThumbId );
     }
     else
     {
@@ -101,6 +105,7 @@ bool HostedInfo::extractFromSearchBlob( PktBlobEntry& blobEntry )
     result &= blobEntry.getValue( m_HostInviteUrl );
     result &= blobEntry.getValue( m_HostTitle );
     result &= blobEntry.getValue( m_HostDesc );
+    result &= blobEntry.getValue( m_ThumbId );
     if( result )
     {
         VxPtopUrl hostUrl( m_HostInviteUrl );
@@ -125,8 +130,9 @@ bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
     std::string hostTitle;
     std::string hostDesc;
     int64_t hostTimestampMs{ 0 };
+    VxGUID thumbId;
 
-    if( hostAnn->getHostInviteInfo( hostInviteUrl, hostTitle, hostDesc, hostTimestampMs ) )
+    if( hostAnn->getHostInviteInfo( hostInviteUrl, hostTitle, hostDesc, hostTimestampMs, thumbId ) )
     {
         VxPtopUrl hostUrl( hostInviteUrl );
         if( hostUrl.isValid() && hostTimestampMs && !hostTitle.empty() && !hostDesc.empty() )
@@ -137,6 +143,7 @@ bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
             setHostTitle( hostTitle );
             setHostDescription( hostDesc );
             setHostInfoTimestamp( hostTimestampMs );
+            setThumbId( thumbId );
             return true;
         }
         else

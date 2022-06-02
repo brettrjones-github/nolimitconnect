@@ -76,12 +76,6 @@ void PluginRandomConnectClient::onPktHostSearchReply( VxSktBase * sktBase, VxPkt
 }
 
 //============================================================================
-void PluginRandomConnectClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got plugin setting reply" );
-}
-
-//============================================================================
 void PluginRandomConnectClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginRandomConnectClient got join offer request" );

@@ -336,7 +336,8 @@ void HostedListMgr::updateAndRequestInfoIfNeeded( EHostType hostType, VxGUID& on
     if( !wasFound )
     {
         requiresSendHostInfoRequest = true;
-        HostedInfo hostedInfo( hostType, onlineId, nodeUrl );
+        VxGUID thumbId = netIdent->getHostThumbId( hostType, true );
+        HostedInfo hostedInfo( hostType, onlineId, nodeUrl, thumbId );
         hostedInfo.setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
         m_HostedInfoList.push_back( hostedInfo );
     }
@@ -451,10 +452,12 @@ bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& o
             iter->setHostTitle( title );
             iter->setHostDescription( description );
             iter->setHostInfoTimestamp( lastDescUpdateTime );
+            VxGUID thumbId = netIdent->getHostThumbId( hostType, true );
+            iter->setThumbId( thumbId );
 
             if( iter->shouldSaveToDb() )
             {
-                m_HostedInfoListDb.updateHostTitleAndDescription( hostType, onlineId, title, description, lastDescUpdateTime );
+                m_HostedInfoListDb.updateHostTitleAndDescription( hostType, onlineId, title, description, lastDescUpdateTime, thumbId );
             }
 
             if( iter->isValidForGui() )
@@ -861,7 +864,7 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
                     hostedInfoUpdated = true;
                     if( iter->shouldSaveToDb() )
                     {
-                        m_HostedInfoListDb.updateHostTitleAndDescription( iter->getHostType(), iter->getOnlineId(), hostedInfo.getHostTitle(), hostedInfo.getHostDescription(), iter->getHostInfoTimestamp() );
+                        m_HostedInfoListDb.updateHostTitleAndDescription( iter->getHostType(), iter->getOnlineId(), hostedInfo.getHostTitle(), hostedInfo.getHostDescription(), iter->getHostInfoTimestamp(), iter->getThumbId() );
                     }
                 }
             }

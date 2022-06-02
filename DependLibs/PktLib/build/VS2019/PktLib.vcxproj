@@ -187,7 +187,6 @@
     <ClInclude Include="..\..\PktBlobEntry.h" />
     <ClInclude Include="..\..\PktChatReq.h" />
     <ClInclude Include="..\..\PktDebugHelpers.h" />
-    <ClInclude Include="..\..\PktHostAnnounce.h" />
     <ClInclude Include="..\..\PktPluginHandlerBase.h" />
     <ClInclude Include="..\..\PktRequestErrors.h" />
     <ClInclude Include="..\..\PktsAssetXfer.h" />
@@ -208,13 +207,11 @@
     <ClInclude Include="..\..\PktsOfferXfer.h" />
     <ClInclude Include="..\..\PktsPing.h" />
     <ClInclude Include="..\..\PktsPluginOffer.h" />
-    <ClInclude Include="..\..\PktsPluginSetting.h" />
     <ClInclude Include="..\..\PktsPushToTalk.h" />
     <ClInclude Include="..\..\PktsRelay.h" />
     <ClInclude Include="..\..\PktsScan.h" />
     <ClInclude Include="..\..\PktsSearch.h" />
     <ClInclude Include="..\..\PktsSession.h" />
-    <ClInclude Include="..\..\PktsThumb.h" />
     <ClInclude Include="..\..\PktsThumbXfer.h" />
     <ClInclude Include="..\..\PktsTodGame.h" />
     <ClInclude Include="..\..\PktsVideoFeed.h" />
@@ -248,7 +245,6 @@
     <ClCompile Include="..\..\PktBlobEntry.cpp" />
     <ClCompile Include="..\..\PktChatReq.cpp" />
     <ClCompile Include="..\..\PktDebugHelpers.cpp" />
-    <ClCompile Include="..\..\PktHostAnnounce.cpp" />
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp" />
     <ClCompile Include="..\..\PktsAssetXfer.cpp" />
     <ClCompile Include="..\..\PktsBaseXfer.cpp" />
@@ -268,13 +264,11 @@
     <ClCompile Include="..\..\PktsOfferXfer.cpp" />
     <ClCompile Include="..\..\PktsPing.cpp" />
     <ClCompile Include="..\..\PktsPluginOffer.cpp" />
-    <ClCompile Include="..\..\PktsPluginSetting.cpp" />
     <ClCompile Include="..\..\PktsPushToTalk.cpp" />
     <ClCompile Include="..\..\PktsRelay.cpp" />
     <ClCompile Include="..\..\PktsScan.cpp" />
     <ClCompile Include="..\..\PktsSearch.cpp" />
     <ClCompile Include="..\..\PktsSession.cpp" />
-    <ClCompile Include="..\..\PktsThumb.cpp" />
     <ClCompile Include="..\..\PktsThumbXfer.cpp" />
     <ClCompile Include="..\..\PktsTodGame.cpp" />
     <ClCompile Include="..\..\PktsVideoFeed.cpp" />

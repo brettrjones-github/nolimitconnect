@@ -57,7 +57,6 @@ protected:
 
     void                        addPluginRxSession( VxGUID& sessionId, PluginIdList& pluginIdList );
     void                        removePluginRxSession( VxGUID& sessionId );
-    bool                        sendNextPluginSettingRequest( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
 
     VxMutex                     m_ClientMutex;
     VxMutex                     m_ServerListMutex;

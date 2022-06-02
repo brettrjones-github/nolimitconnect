@@ -327,27 +327,7 @@ const char* VxPktHdr::describePktType( uint16_t pktType )
 
     case PKT_TYPE_TOD_GAME_STATS:					return "PktTodGameStats";               
     case PKT_TYPE_TOD_GAME_ACTION:					return "PktTodGameAction";			    
-    case PKT_TYPE_TOD_GAME_VALUE:					return "PktTodGameValue";			    
-
-    case PKT_TYPE_PLUGIN_SETTING_REQ:				return "PktPluginSettingReq";			
-    case PKT_TYPE_PLUGIN_SETTING_REPLY:			    return "PktPluginSettingReply";		    
-
-    case PKT_TYPE_THUMB_SETTING_REQ:				return "PktThumbSettingReq";		    
-    case PKT_TYPE_THUMB_SETTING_REPLY:			    return "PktThumbSettingReply";		    
-    case PKT_TYPE_THUMB_SETTING_CHUNK_REQ:			return "PktThumbSettingChunkReq";		
-    case PKT_TYPE_THUMB_SETTING_CHUNK_REPLY:		return "PktThumbSettingChunkReply";	    
-
-    case PKT_TYPE_THUMB_AVATAR_REQ:					return "PktThumbAvatarReq";             
-    case PKT_TYPE_THUMB_AVATAR_REPLY:			    return "Pkt_ThumbAvatarReply";			
-    case PKT_TYPE_THUMB_AVATAR_CHUNK_REQ:			return "PktThumbAvatarChunkReq";		
-    case PKT_TYPE_THUMB_AVATAR_CHUNK_REPLY:			return "PktThumbAvatarChunkReply";	    
-
-    case PKT_TYPE_THUMB_FILE_REQ:					return "PktThumbFileReq";               
-    case PKT_TYPE_THUMB_FILE_REPLY:			        return "PktThumbFileReply";			    
-    case PKT_TYPE_THUMB_FILE_CHUNK_REQ:				return "PktThumbFileChunkReq";		    
-    case PKT_TYPE_THUMB_FILE_CHUNK_REPLY:			return "PktThumbFileChunkReply";		
-
-    case PKT_TYPE_HOST_ANNOUNCE:					return "PktHostAnnounce";               
+    case PKT_TYPE_TOD_GAME_VALUE:					return "PktTodGameValue";			         
 
     case PKT_TYPE_BLOB_SEND_REQ:					return "PkBlobSendReq";                 
     case PKT_TYPE_BLOB_SEND_REPLY:				    return "PktBlobSendReply";			    

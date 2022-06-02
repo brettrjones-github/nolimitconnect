@@ -31,8 +31,8 @@ public:
     void						setSessionId( VxGUID& guid ) { m_SessionId = guid; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }
 
-    bool                        setHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
-    bool                        getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+    bool                        setHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime, VxGUID& thumbId );
+    bool                        getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime, VxGUID& thumbId );
 
     PktBlobEntry&               getBlobEntry( void ) { return m_BlobEntry; }
 

@@ -29,7 +29,7 @@ PktHandlerBase::PktHandlerBase()
 	}
 
 	int maxPktType = MAX_PKT_TYPE_CNT;
-    vx_assert( 147 == maxPktType );
+    vx_assert( 132 == maxPktType );
 
 	m_aBaseSysPktFuncTable[ 0 ] = &PktHandlerBase::onPktInvalid;
 
@@ -113,26 +113,6 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_TOD_GAME_STATS ]					= &PktHandlerBase::onPktTodGameStats;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_TOD_GAME_ACTION ]					= &PktHandlerBase::onPktTodGameAction;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_TOD_GAME_VALUE ]					= &PktHandlerBase::onPktTodGameValue;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_PLUGIN_SETTING_REQ ]               = &PktHandlerBase::onPktPluginSettingReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_PLUGIN_SETTING_REPLY ]             = &PktHandlerBase::onPktPluginSettingReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_REQ ]                = &PktHandlerBase::onPktThumbSettingReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_REPLY ]              = &PktHandlerBase::onPktThumbSettingReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_CHUNK_REQ ]          = &PktHandlerBase::onPktThumbSettingChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_CHUNK_REPLY ]        = &PktHandlerBase::onPktThumbSettingChunkReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_REQ ]                 = &PktHandlerBase::onPktThumbAvatarReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_REPLY ]               = &PktHandlerBase::onPktThumbAvatarReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_CHUNK_REQ ]           = &PktHandlerBase::onPktThumbAvatarChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_CHUNK_REPLY ]         = &PktHandlerBase::onPktThumbAvatarChunkReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_REQ ]                   = &PktHandlerBase::onPktThumbFileReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_REPLY ]                 = &PktHandlerBase::onPktThumbFileReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REQ ]             = &PktHandlerBase::onPktThumbFileChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REPLY ]           = &PktHandlerBase::onPktThumbFileChunkReply;
- 
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_ANNOUNCE ]                    = &PktHandlerBase::onPktHostAnnounce;
   
     m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REQ ]                    = &PktHandlerBase::onPktBlobSendReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REPLY ]                  = &PktHandlerBase::onPktBlobSendReply;
@@ -636,96 +616,6 @@ void PktHandlerBase::onPktImAliveReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 //============================================================================
 void PktHandlerBase::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbSettingChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbSettingChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbAvatarReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbAvatarReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbAvatarChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbAvatarChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktThumbFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
-{
-    onPktUnhandled( sktBase, pktHdr );
-}
-
-//============================================================================
-void PktHandlerBase::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }

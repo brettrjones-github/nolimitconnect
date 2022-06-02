@@ -87,12 +87,6 @@ void PluginGroupClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PluginGroupClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginGroupClient got plugin setting reply" );
-}
-
-//============================================================================
 void PluginGroupClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginGroupClient got join offer request" );

@@ -16,7 +16,6 @@
 
 #include <GuiInterface/IDefs.h>
 #include <PktLib/PktPluginHandlerBase.h>
-#include <PktLib/PktsPluginSetting.h>
 #include <PktLib/VxCommon.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
 #include <ptop_src/ptop_engine_src/AssetBase/BaseXferInterface.h>
@@ -306,7 +305,6 @@ public:
 
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
-    virtual bool                generateSettingPkt( PluginSetting& pluginSetting, int64_t modifiedTimeMs );
 
     static std::string          getThumbXferDbName( EPluginType pluginType );
     static std::string          getThumbXferThreadName( EPluginType pluginType );
@@ -326,7 +324,6 @@ protected:
 	EAppState					m_ePluginState = eAppStateInvalid;
 	VxMutex						m_PluginMutex;
     PluginSetting               m_PluginSetting;
-    PktPluginSettingReply       m_PktPluginSettingReply;
 
 	bool						m_bPluginIsInSession = false;
 	bool						m_ServerIsInSession = false;

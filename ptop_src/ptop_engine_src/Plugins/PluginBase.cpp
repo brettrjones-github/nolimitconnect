@@ -71,7 +71,6 @@ void PluginBase::pluginStartup( void )
     if( getPluginType() != ePluginTypeInvalid )
     {
         m_Engine.getPluginSetting( getPluginType(), m_PluginSetting );
-        generateSettingPkt( m_PluginSetting, 0 );
     }
 }
 
@@ -79,19 +78,8 @@ void PluginBase::pluginStartup( void )
 bool PluginBase::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     m_PluginSetting = pluginSetting;
-    generateSettingPkt( pluginSetting, modifiedTimeMs );
     onPluginSettingChange( m_PluginSetting, modifiedTimeMs );
 
-    return true;
-}
-
-//============================================================================
-bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
-{
-    PktBlobEntry& blobEntry = m_PktPluginSettingReply.getBlobEntry();
-    blobEntry.resetWrite();
-    pluginSetting.addToBlob( blobEntry );
-    m_PktPluginSettingReply.calcPktLen();
     return true;
 }
 

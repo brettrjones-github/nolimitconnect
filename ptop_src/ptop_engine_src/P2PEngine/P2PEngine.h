@@ -608,26 +608,6 @@ public:
     virtual void				onPktImAliveReq				( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktImAliveReply			( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
-    virtual void				onPktPluginSettingReq       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktPluginSettingReply     ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-
-    virtual void				onPktThumbSettingReq        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbSettingReply      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbSettingChunkReq   ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbSettingChunkReply ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-
-    virtual void				onPktThumbAvatarReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbAvatarReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbAvatarChunkReq    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbAvatarChunkReply  ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-
-    virtual void				onPktThumbFileReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbFileReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbFileChunkReq      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-    virtual void				onPktThumbFileChunkReply    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-
-    virtual void				onPktHostAnnounce           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
-
     virtual void				onPktBlobSendReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktBlobSendReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktBlobChunkReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;

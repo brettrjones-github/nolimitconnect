@@ -367,7 +367,6 @@ void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSkt
         if( result )
         {
             addPluginRxSession( sessionId, pluginIdList );
-            result = sendNextPluginSettingRequest( hostReply->getHostType(), sessionId, sktBase, netIdent );
         }
     }
 
@@ -376,53 +375,6 @@ void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSkt
         LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession failed");
         stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent->getMyOnlineId() );
     }
-}
-
-//============================================================================
-bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
-{
-    bool result = false;
-    m_PluginRxListMutex.lock();
-    auto iter = m_PluginRxList.find( sessionId );
-    if( iter != m_PluginRxList.end() )
-    {
-        PluginIdList& pluginAllList = iter->second;
-        std::vector<PluginId>& pluginList = pluginAllList.getPluginIdList();
-        if( pluginList.size() )
-        {
-            PluginId pluginId = pluginList.back();
-            pluginList.pop_back();
-            PktPluginSettingReq pluginIdReq;
-            pluginIdReq.setHostType( hostType );
-            pluginIdReq.setPluginId( pluginId );
-            pluginIdReq.setPluginType( m_Plugin.getPluginType() );
-            pluginIdReq.setSessionId( sessionId );
-
-            // TODO debug only REMOVE ME
-            // pluginIdReq.setIsLoopback( true );
-            if( m_Plugin.txPacket( netIdent->getMyOnlineId(), sktBase, &pluginIdReq, false, ePluginTypeHostNetwork ) )
-            {
-                result = true;
-            }
-            else
-            {
-                LogModule( eLogHostSearch, LOG_DEBUG, "sendNextPluginSettingRequest send failed" );
-            }
-        }
-        else
-        {
-            LogMsg( LOG_VERBOSE, "HostClientMgr rxed all plugin settings" );
-        }
-    }
-
-    m_PluginRxListMutex.unlock();
-    if( !result )
-    {
-        LogMsg( LOG_VERBOSE, "HostClientMgr rxed all plugin settings" );
-        stopHostSearch( hostType, sessionId, sktBase, netIdent->getMyOnlineId() );
-    }
-
-    return result;
 }
 
 //============================================================================

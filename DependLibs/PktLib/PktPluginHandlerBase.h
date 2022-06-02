@@ -111,26 +111,6 @@ public:
 	virtual void				onPktImAliveReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktImAliveReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-    virtual void				onPktPluginSettingReq       ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktPluginSettingReply     ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-
-    virtual void				onPktThumbSettingReq        ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbSettingReply      ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbSettingChunkReq   ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbSettingChunkReply ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-
-    virtual void				onPktThumbAvatarReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbAvatarReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbAvatarChunkReq    ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbAvatarChunkReply  ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-
-    virtual void				onPktThumbFileReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbFileReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbFileChunkReq      ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktThumbFileChunkReply    ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-
-    virtual void				onPktHostAnnounce           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-
     virtual void				onPktBlobSendReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
     virtual void				onPktBlobSendReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
     virtual void				onPktBlobChunkReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

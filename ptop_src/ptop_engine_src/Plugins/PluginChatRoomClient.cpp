@@ -85,12 +85,6 @@ void PluginChatRoomClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr *
 }
 
 //============================================================================
-void PluginChatRoomClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginChatRoomClient got plugin setting reply" );
-}
-
-//============================================================================
 void PluginChatRoomClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomClient got join offer request" );

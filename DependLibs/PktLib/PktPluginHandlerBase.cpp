@@ -109,26 +109,6 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_IM_ALIVE_REQ ]						= &PktPluginHandlerBase::onPktImAliveReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_IM_ALIVE_REPLY ]					= &PktPluginHandlerBase::onPktImAliveReply;
 
-    m_aBaseSysPktFuncTable[ PKT_TYPE_PLUGIN_SETTING_REQ ]               = &PktPluginHandlerBase::onPktPluginSettingReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_PLUGIN_SETTING_REPLY ]             = &PktPluginHandlerBase::onPktPluginSettingReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_REQ ]                = &PktPluginHandlerBase::onPktThumbSettingReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_REPLY ]              = &PktPluginHandlerBase::onPktThumbSettingReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_CHUNK_REQ ]          = &PktPluginHandlerBase::onPktThumbSettingChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_CHUNK_REPLY ]        = &PktPluginHandlerBase::onPktThumbSettingChunkReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_REQ ]                 = &PktPluginHandlerBase::onPktThumbAvatarReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_REPLY ]               = &PktPluginHandlerBase::onPktThumbAvatarReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_CHUNK_REQ ]           = &PktPluginHandlerBase::onPktThumbAvatarChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_CHUNK_REPLY ]         = &PktPluginHandlerBase::onPktThumbAvatarChunkReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_REQ ]                   = &PktPluginHandlerBase::onPktThumbFileReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_REPLY ]                 = &PktPluginHandlerBase::onPktThumbFileReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REQ ]             = &PktPluginHandlerBase::onPktThumbFileChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REPLY ]           = &PktPluginHandlerBase::onPktThumbFileChunkReply;
-
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_ANNOUNCE ]                    = &PktPluginHandlerBase::onPktHostAnnounce;
-
     m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REQ ]                    = &PktPluginHandlerBase::onPktBlobSendReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REPLY ]                  = &PktPluginHandlerBase::onPktBlobSendReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_CHUNK_REQ ]                   = &PktPluginHandlerBase::onPktBlobChunkReq;
@@ -623,96 +603,6 @@ void PktPluginHandlerBase::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pk
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }	
-
-//============================================================================
-void PktPluginHandlerBase::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbSettingChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbSettingChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbAvatarReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbAvatarReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbAvatarChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbAvatarChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}	
-
-//============================================================================
-void PktPluginHandlerBase::onPktThumbFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}
-
-//============================================================================
-void PktPluginHandlerBase::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    onPktUnhandled( sktBase, pktHdr, netIdent );
-}
 
 //============================================================================
 void PktPluginHandlerBase::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )

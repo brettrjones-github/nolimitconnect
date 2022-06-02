@@ -10,7 +10,6 @@ HEADERS += 	$$PWD/DependLibs/PktLib/ConnectId.h \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.h \
     $$PWD/DependLibs/PktLib/PktChatReq.h \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.h \
-    $$PWD/DependLibs/PktLib/PktHostAnnounce.h \
     $$PWD/DependLibs/PktLib/PktsHostInfo.h \
     $$PWD/DependLibs/PktLib/PktsHostInvite.h \
 	$$PWD/DependLibs/PktLib/PktsHostSearch.h \
@@ -18,7 +17,6 @@ HEADERS += 	$$PWD/DependLibs/PktLib/ConnectId.h \
 	$$PWD/DependLibs/PktLib/PktsOfferXfer.h \
 	$$PWD/DependLibs/PktLib/PktsPing.h \
 	$$PWD/DependLibs/PktLib/PktsPluginOffer.h \
-	$$PWD/DependLibs/PktLib/PktsPluginSetting.h \
     $$PWD/DependLibs/PktLib/PktRequestErrors.h \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktTcpPunch.h \
@@ -72,7 +70,6 @@ SOURCES += 	$$PWD/DependLibs/PktLib/ConnectId.cpp \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.cpp \
     $$PWD/DependLibs/PktLib/PktChatReq.cpp \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.cpp \
-    $$PWD/DependLibs/PktLib/PktHostAnnounce.cpp \
 	$$PWD/DependLibs/PktLib/PktsOfferXfer.cpp \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.cpp \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.cpp \
@@ -96,7 +93,6 @@ SOURCES += 	$$PWD/DependLibs/PktLib/ConnectId.cpp \
     $$PWD/DependLibs/PktLib/PktsMultiSession.cpp \
     $$PWD/DependLibs/PktLib/PktsPing.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.cpp \
-    $$PWD/DependLibs/PktLib/PktsPluginSetting.cpp \
     $$PWD/DependLibs/PktLib/PktsPushToTalk.cpp \
     $$PWD/DependLibs/PktLib/PktsRelay.cpp \
 	$$PWD/DependLibs/PktLib/PktsScan.cpp \
