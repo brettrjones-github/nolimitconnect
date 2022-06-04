@@ -13,11 +13,15 @@
 //============================================================================
 
 #include "IgnoreListMgr.h"
+#include "IgnoredHostInfo.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+
+#include <CoreLib/VxTime.h>
 
 //============================================================================
 IgnoreListMgr::IgnoreListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
+    , m_IgnoredHostsDb( engine, *this, "IngnoredHosts.db3" )
 {
     setIdentListType( eUserViewTypeIgnored );
 }
@@ -123,5 +127,51 @@ void IgnoreListMgr::removeIdent( VxGUID& onlineId )
     if( wasRemoved )
     {
         onRemoveIdent( onlineId );
+    }
+}
+
+//============================================================================
+bool IgnoreListMgr::isHostIgnored( VxGUID& onlineId )
+{
+    m_IgnoredHostsMutex.lock();
+    initializeIgnoredHostsIfNeeded();
+    bool isIgnrored = !onlineId.isVxGUIDValid() || m_IgnoredHostList.find( onlineId ) != m_IgnoredHostList.end();
+    m_IgnoredHostsMutex.unlock();
+    return isIgnrored;
+}
+
+//============================================================================
+void IgnoreListMgr::addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription )
+{
+    if( onlineId.isVxGUIDValid() )
+    {
+        IgnoredHostInfo hostInfo( onlineId, thumbId, hostUrl, hostTitle, hostDescription, GetGmtTimeMs() );
+
+        m_IgnoredHostsMutex.lock();
+        initializeIgnoredHostsIfNeeded();
+        m_IgnoredHostsDb.saveToDatabase( hostInfo );
+        m_IgnoredHostsMutex.unlock();
+    }
+}
+
+//============================================================================
+void IgnoreListMgr::removeHostIgnore( VxGUID& onlineId )
+{
+    if( onlineId.isVxGUIDValid() )
+    {
+        m_IgnoredHostsMutex.lock();
+        initializeIgnoredHostsIfNeeded();
+        m_IgnoredHostsDb.removeFromDatabase( onlineId );
+        m_IgnoredHostsMutex.unlock();
+    }
+}
+
+//============================================================================
+void IgnoreListMgr::initializeIgnoredHostsIfNeeded( void )
+{
+    if( !m_IgnoredHostsDbInitialized )
+    {
+        m_IgnoredHostsDbInitialized = true;
+        m_IgnoredHostsDb.restoreFromDatabase( m_IgnoredHostList );
     }
 }

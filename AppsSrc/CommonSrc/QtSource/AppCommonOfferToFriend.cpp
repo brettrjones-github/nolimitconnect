@@ -69,7 +69,7 @@ void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName 
         VxNetIdent& netIdent = user->getNetIdent();
         std::string uri;
         std::string myExternIp;
-        if( ( netIdent.getMyOnlineIPv4() == m_Engine.getMyPktAnnounce().getMyOnlineIPv4() )
+        if( ( netIdent.getMyOnlineIPv4() == getEngine().getMyPktAnnounce().getMyOnlineIPv4() )
             && netIdent.getLanIPv4().isValid() )
         {
             // is on same sub network as us.. use LAN ip
@@ -80,11 +80,11 @@ void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName 
             myExternIp = netIdent.getMyOnlineIPv4().toStdString();
         }
 
-        if( netIdent.getMyOnlineId() == m_Engine.getMyPktAnnounce().getMyOnlineId() )
+        if( netIdent.getMyOnlineId() == getEngine().getMyPktAnnounce().getMyOnlineId() )
         {
-            if( m_Engine.getMyPktAnnounce().getLanIPv4().isValid() )
+            if( getEngine().getMyPktAnnounce().getLanIPv4().isValid() )
             {
-                myExternIp = m_Engine.getMyPktAnnounce().getLanIPv4().toStdString();
+                myExternIp = getEngine().getMyPktAnnounce().getLanIPv4().toStdString();
             }
         }
 

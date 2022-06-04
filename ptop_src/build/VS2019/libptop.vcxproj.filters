@@ -937,6 +937,12 @@
     <ClCompile Include="..\..\ptop_engine_src\ConnectIdListMgr\ConnectIdListMgr.cpp">
       <Filter>Source Files\ConnectIdListMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostsDb.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
@@ -2018,6 +2024,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ConnectIdListMgr\ConnectIdListMgr.h">
       <Filter>Source Files\ConnectIdListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostsDb.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

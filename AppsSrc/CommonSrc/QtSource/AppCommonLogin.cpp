@@ -164,13 +164,13 @@ void AppCommon::doAccountStartup( void )
 void AppCommon::completeLogin( void )
 {
     VxNetIdent * netIdent = getAppGlobals().getUserIdent();
-    m_Engine.fromGuiUserLoggedOn( netIdent );
+    getEngine().fromGuiUserLoggedOn( netIdent );
     setLoginCompleted( true );
 
     m_UserMgr.updateMyIdent( netIdent );
 
     // get settings from engine
-    m_eLastSelectedWhichContactsToView = m_Engine.getEngineSettings().getWhichContactsToView();
+    m_eLastSelectedWhichContactsToView = getEngine().getEngineSettings().getWhichContactsToView();
     //ui.m_ListViewTypeComboBox->setCurrentIndex( m_eLastSelectedWhichContactsToView );
     //connect( ui.m_ListViewTypeComboBox, SIGNAL(currentIndexChanged(int)),	this,	SLOT(slotListViewTypeChanged(int)) );
     slotListViewTypeChanged( m_eLastSelectedWhichContactsToView );
@@ -180,11 +180,11 @@ void AppCommon::completeLogin( void )
     //{	
     //	netIdent->setHasRelay( false );
     //	emit signalStatusMsg( "User must select a relay" );
-    //	m_Engine.fromGuiSendContactList( eFriendViewAllProxies, 500 );
+    //	getEngine().fromGuiSendContactList( eFriendViewAllProxies, 500 );
     //}
     //else
     //{
-    //	m_Engine.fromGuiSendContactList( m_eLastSelectedWhichContactsToView, 500 );
+    //	getEngine().fromGuiSendContactList( m_eLastSelectedWhichContactsToView, 500 );
     //}
 
     EApplet lastLaunchedApplet = getAppSettings().getLastAppletLaunched();
@@ -249,12 +249,12 @@ void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& user
 void AppCommon::setupAccountResources( VxNetIdent& userAccountIdent )
 {
     std::string strUserName = userAccountIdent.getOnlineName();
-    m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
+    getEngine().fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
     // gotv (kodi) also needs the directory
     getGoTv().fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
 
     // get port to listen on 
-    uint16_t tcpPort = m_Engine.getEngineSettings().getTcpIpPort();
+    uint16_t tcpPort = getEngine().getEngineSettings().getTcpIpPort();
     userAccountIdent.m_DirectConnectId.setPort( tcpPort );
 
     // get current default ips
@@ -299,7 +299,7 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
 {
     uint64_t loadStartMs = GetApplicationAliveMs();
 
-    m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
+    getEngine().fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
     std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
     // gotv (kodi) also needs the directory
     getGoTv().fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
@@ -310,9 +310,9 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     m_CamCaptureRotation = m_AppSettings.getCamRotation( m_CamSourceId );
 
     // get port to listen on 
-    uint16_t tcpPort = m_Engine.getEngineSettings().getTcpIpPort();
+    uint16_t tcpPort = getEngine().getEngineSettings().getTcpIpPort();
     getEngine().getMyNetIdent()->setMyOnlinePort( tcpPort );
-    getEngine().getMyNetIdent()->m_DirectConnectId.m_IPv6OnlineIp = m_Engine.getFromGuiInterface().fromGuiGetMyIPv6Address();
+    getEngine().getMyNetIdent()->m_DirectConnectId.m_IPv6OnlineIp = getEngine().getFromGuiInterface().fromGuiGetMyIPv6Address();
     getEngine().setPktAnnLastModTime( GetTimeStampMs() );
 
     uint64_t aliveMs = GetApplicationAliveMs();
@@ -395,7 +395,7 @@ void AppCommon::sendAppSettingsToEngine( void )
 {
     if( m_AppSettings.m_u32EnableDebug )
     {
-        m_Engine.fromGuiDebugSettings(
+        getEngine().fromGuiDebugSettings(
             m_AppSettings.m_u32LogFlags,
             m_AppSettings.m_strDebugFileName.c_str() );
     }
@@ -427,7 +427,7 @@ void AppCommon::sendAppSettingsToEngine( void )
 
     if (validDbSettings)
     {
-        m_Engine.fromGuiApplyNetHostSettings( selectedNetHostSetting );
+        getEngine().fromGuiApplyNetHostSettings( selectedNetHostSetting );
     } 
 }
 

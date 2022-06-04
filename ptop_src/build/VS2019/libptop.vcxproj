@@ -587,6 +587,8 @@
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostsDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
@@ -954,6 +956,8 @@
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostsDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h" />

@@ -104,6 +104,10 @@ VxGUID GuiHostedListSession::getHostThumbId( void )
     {
         return m_GuiHosted->getUser()->getHostThumbId( m_HostedId.getHostType(), true );
     }
+    else if( m_GuiHosted )
+    {
+        return m_GuiHosted->getThumbId();
+    }
 
     VxGUID emptyThumbId;
     return emptyThumbId;

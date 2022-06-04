@@ -185,7 +185,6 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_TilePositioner( * new VxTilePositioner( *this ) )
 , m_CamLogic( *this )
 
-, m_Engine( gotv.getPtoP() )
 , m_MySndMgr( * new MySndMgr( *this ) )
 
 , m_HomePage( *this, m_AppTitle )
@@ -213,7 +212,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 //============================================================================
 IFromGui& AppCommon::getFromGuiInterface( void )
 {
-    return m_Engine.getFromGuiInterface();
+    return getEngine().getFromGuiInterface();
 }
 
 //============================================================================
@@ -314,6 +313,12 @@ void AppCommon::loadWithoutThread( void )
 }
 
 //============================================================================
+P2PEngine& AppCommon::getEngine( void ) 
+{ 
+	return GetPtoPEngine();
+}
+
+//============================================================================
 void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame )
 {
     if( m_AppCommonInitialized )
@@ -346,7 +351,7 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 	std::string strAssetDir = m_AppSettings.m_strRootUserDataDir + "assets/";
 	VxFileUtil::makeDirectory( strAssetDir );
 
-	m_Engine.fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
+	getEngine().fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
 
     m_MySndMgr.initAudioIoSystem();
 }
@@ -364,7 +369,7 @@ void AppCommon::shutdownAppCommon( void )
         VxSleep( 2000 );
         m_MySndMgr.sndMgrShutdown();
         QApplication::closeAllWindows();
-        m_Engine.fromGuiAppShutdown();
+        getEngine().fromGuiAppShutdown();
     }
 }
 
@@ -1237,8 +1242,8 @@ void AppCommon::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectSta
 //============================================================================
 void AppCommon::startNetworkMonitor( void )
 {
-	std::string overrideWirelessIp = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
-	m_Engine.getNetworkMonitor().networkMonitorStartup( overrideWirelessIp.c_str() );
+	std::string overrideWirelessIp = getEngine().getEngineSettings().getPreferredNetworkAdapterIp();
+	getEngine().getNetworkMonitor().networkMonitorStartup( overrideWirelessIp.c_str() );
 }
 
 //============================================================================
@@ -1290,7 +1295,7 @@ void AppCommon::onIdleTimer()
         return;
     }
 
-	m_Engine.fromGuiAppIdle();
+	getEngine().fromGuiAppIdle();
 }
 
 //============================================================================

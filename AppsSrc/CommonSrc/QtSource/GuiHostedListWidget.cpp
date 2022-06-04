@@ -332,21 +332,24 @@ GuiHostedListItem* GuiHostedListWidget::addOrUpdateHostSession( GuiHostedListSes
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            if( guiUser && hostItem )
+            if( hostItem )
             {
                 if( !hostItem->getIsThumbUpdated() )
                 {
-                    VxGUID thumbId = guiUser->getHostThumbId( hostSession->getHostType(), true );
-                    GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
-                    if( thumb )
+                    VxGUID thumbId = hostSession->getHostThumbId(); 
+                    if( thumbId.isVxGUIDValid() )
                     {
-                        QImage hostIconImage;
-                        thumb->createImage( hostIconImage );
-                        VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
-                        if( hostImageButton && !hostIconImage.isNull() )
+                        GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
+                        if( thumb )
                         {
-                            hostImageButton->setIconOverrideImage( hostIconImage );
-                            hostItem->setIsThumbUpdated( true );
+                            QImage hostIconImage;
+                            thumb->createImage( hostIconImage );
+                            VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
+                            if( hostImageButton && !hostIconImage.isNull() )
+                            {
+                                hostImageButton->setIconOverrideImage( hostIconImage );
+                                hostItem->setIsThumbUpdated( true );
+                            }
                         }
                     }
                 }

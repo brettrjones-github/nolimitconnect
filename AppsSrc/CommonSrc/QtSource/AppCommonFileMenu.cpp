@@ -128,7 +128,7 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 	case 7: // Open Download Folder
 		{
 			FileShareSettings fileShareSettings;
-			m_Engine.fromGuiGetFileShareSettings( fileShareSettings );
+			getEngine().fromGuiGetFileShareSettings( fileShareSettings );
 
 			std::string strExploreCmd = "explorer ";
 			strExploreCmd += VxGetDownloadsDirectory();

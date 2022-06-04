@@ -127,7 +127,7 @@ public:
     VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
     CamLogic&					getCamLogic( void )							{ return m_CamLogic; }
     QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
-    P2PEngine&					getEngine( void )							{ return m_Engine; }
+    P2PEngine&                  getEngine( void );
     IFromGui&					getFromGuiInterface( void );
     IGoTv&				        getGoTv( void )						        { return m_GoTv; }
     HomeWindow&					getHomePage( void )							{ return m_HomePage; }
@@ -851,7 +851,6 @@ private:
 	VxTilePositioner&			m_TilePositioner;
     CamLogic                    m_CamLogic;
 
-	P2PEngine&					m_Engine; // engine before sound so can initialize engine sound interface
 	MySndMgr&					m_MySndMgr;
 	//OfferMgr&					m_OfferMgr;
 

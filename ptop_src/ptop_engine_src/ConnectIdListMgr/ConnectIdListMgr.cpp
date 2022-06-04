@@ -170,11 +170,9 @@ void ConnectIdListMgr::addConnection( VxGUID& sktConnectId, GroupieId& groupieId
     }
 
     ConnectId connectId( sktConnectId,  groupieId );
-    bool alreadyOnline = isOnline( groupieId.getGroupieOnlineId() );
     if( relayed )
     {
         lockList();
-        bool hasDirectConnection = m_ConnectIdList.find( connectId ) != m_ConnectIdList.end();
         bool isInList = m_RelayedIdList.find( connectId ) != m_RelayedIdList.end();
         if( !isInList )
         {

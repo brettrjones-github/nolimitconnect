@@ -51,6 +51,9 @@ public:
     virtual void			    setHostType( EHostType hostType ) { m_HostedId.setHostType( hostType ); }
     virtual EHostType	        getHostType( void )             { return m_HostedId.getHostType(); }
 
+    virtual void				setThumbId( VxGUID& thumbId )   { m_ThumbId = thumbId; }
+    virtual VxGUID&             getThumbId( void )              { return m_ThumbId; }
+
     virtual void                setIsFavorite( bool isFavorite ) { m_IsFavorite = isFavorite; }
     virtual bool                getIsFavorite( void )           { return m_IsFavorite; }
 
@@ -84,4 +87,5 @@ protected:
     std::string                 m_HostInviteUrl{ "" };
     std::string                 m_HostTitle{ "" };
     std::string                 m_HostDesc{ "" };
+    VxGUID                      m_ThumbId;
 };

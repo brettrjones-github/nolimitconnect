@@ -98,7 +98,7 @@ void AppCommon::onVidCapTimer( void )
 		}
 
 		// send out video frame as bitmap
-		m_Engine.fromGuiVideoData(	u32Format, // format
+		getEngine().fromGuiVideoData(	u32Format, // format
 									(uint8_t *)&pu8VidBmp[poBitmap->bmiHeader.biSize], 
 									poBitmap->bmiHeader.biWidth,
 									poBitmap->bmiHeader.biHeight,

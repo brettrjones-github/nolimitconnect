@@ -14,8 +14,8 @@
 //============================================================================
 
 #include "IdentListMgrBase.h"
-
-#include <CoreLib/VxGUID.h>
+#include "IgnoredHostInfo.h"
+#include "IgnoredHostsDb.h"
 
 #include <vector>
 
@@ -32,9 +32,20 @@ public:
     virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp ) override;
     virtual void                removeIdent( VxGUID& onlineId ) override;
 
-    std::vector<std::pair<VxGUID, int64_t>>& getIdentList()         { return m_IgnoreIdentList; };
+    bool                        isHostIgnored( VxGUID& onlineId );
+    void                        addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription );
+    void                        removeHostIgnore( VxGUID& onlineId );
+
+    std::vector<std::pair<VxGUID, int64_t>>& getIdentList() { return m_IgnoreIdentList; };
 
 protected:
+    void                        initializeIgnoredHostsIfNeeded( void );
+
+    IgnoredHostsDb              m_IgnoredHostsDb;
+    VxMutex                     m_IgnoredHostsMutex;
+    bool                        m_IgnoredHostsDbInitialized{ false };
+
     std::vector<std::pair<VxGUID, int64_t>> m_IgnoreIdentList;
+    std::map<VxGUID, IgnoredHostInfo> m_IgnoredHostList;
 };
 

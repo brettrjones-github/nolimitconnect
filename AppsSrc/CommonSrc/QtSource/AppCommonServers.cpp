@@ -33,7 +33,7 @@ void AppCommon::slotServerButtonClick( void )
 	popupMenu.setTitle( "Servers");
 
 	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 2\n" );
-	switch( m_Engine.fromGuiGetPluginServerState( ePluginTypeCamServer ) )
+	switch( getEngine().fromGuiGetPluginServerState( ePluginTypeCamServer ) )
 	{
 	case ePluginServerStateDisabled:	
 		popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconWebCamServerDisabled), tr( "Web Cam Server Disabled" ) );
@@ -65,15 +65,15 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 	{
 
 	case 1: //Start/Stop Web Cam Server
-		switch( m_Engine.fromGuiGetPluginServerState(ePluginTypeCamServer))
+		switch( getEngine().fromGuiGetPluginServerState(ePluginTypeCamServer))
 		{
 		case ePluginServerStateStarted:	// app has started
-			m_Engine.setHasSharedWebCam(false);
-            m_Engine.fromGuiStopPluginSession( ePluginTypeCamServer, m_UserMgr.getMyOnlineId(), 0 );
+			getEngine().setHasSharedWebCam(false);
+            getEngine().fromGuiStopPluginSession( ePluginTypeCamServer, m_UserMgr.getMyOnlineId(), 0 );
 			break;
 		case ePluginServerStateStopped:
 			startActivity( ePluginTypeCamServer, m_UserMgr.getMyIdent() );
-			m_Engine.setHasSharedWebCam(true);
+			getEngine().setHasSharedWebCam(true);
 			break;
 		case ePluginServerStateDisabled:	// disabled by permissions
 			{

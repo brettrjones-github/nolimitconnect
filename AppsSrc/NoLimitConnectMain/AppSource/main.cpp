@@ -160,6 +160,7 @@ int main(int argc, char **argv)
     IGoTv& gotv = IGoTv::getIGoTv();
     gotv.doPreStartup();
 
+    GetPtoPEngine(); // engine first.. there is some interdependencies
     AppCommon& appCommon = CreateAppInstance( gotv, myApp );
 
     appCommon.loadWithoutThread();

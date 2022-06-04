@@ -53,6 +53,7 @@ GuiHosted::GuiHosted( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, Hoste
     , m_HostInviteUrl( hostedInfo.getHostInviteUrl() )
     , m_HostTitle( hostedInfo.getHostTitle() )
     , m_HostDesc( hostedInfo.getHostDescription() )
+    , m_ThumbId( hostedInfo.getThumbId() )
 {
 }
 
@@ -71,5 +72,6 @@ GuiHosted::GuiHosted( const GuiHosted& rhs )
     , m_HostInviteUrl( rhs.m_HostInviteUrl )
     , m_HostTitle( rhs.m_HostTitle )
     , m_HostDesc( rhs.m_HostDesc )
+    , m_ThumbId( rhs.m_ThumbId )
 {
 }

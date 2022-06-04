@@ -171,6 +171,8 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoredHostInfo.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoredHostsDb.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
@@ -479,6 +481,8 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoredHostInfo.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoredHostsDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
