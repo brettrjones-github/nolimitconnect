@@ -67,13 +67,14 @@ public:
 
 protected slots:
     void                        slotChooseHostModeButtonClick( void );
+    void                        slotShowIgnoredHostsListButtonClicked( void );
 
     void                        slotIconButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotMenuButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
-    void                        slotFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotIgnoreButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
     void                        changeGuiMode( bool userListMode );

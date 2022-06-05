@@ -130,7 +130,6 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	}
 
 	// only ipV4 supported
-	m_LclIp;
 	m_strLclIp = m_LclIp.toStdString();
 	setMulticastGroupIp( broadcastIp );
 	setMulticastPort( u16Port );

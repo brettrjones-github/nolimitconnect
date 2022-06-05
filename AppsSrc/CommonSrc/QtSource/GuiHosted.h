@@ -73,6 +73,9 @@ public:
     virtual void                setHostDescription( std::string hostDesc ) { m_HostDesc = hostDesc; }
     virtual std::string&        getHostDescription( void )      { return m_HostDesc; }
 
+    virtual void                setIsIgnored( bool isIgnored )  { m_IsIgnored = isIgnored; }
+    virtual bool                getIsIgnored( void )            { return m_IsIgnored; }
+
 protected:
     AppCommon&                  m_MyApp;
     GuiHostedListMgr&           m_HostedListMgr;
@@ -81,6 +84,7 @@ protected:
     HostedId                    m_HostedId;
     VxGUID                      m_SessionId;
     bool                        m_IsFavorite{ false };
+    bool                        m_IsIgnored{ false };
     int64_t                     m_ConnectedTimestampMs{ 0 };
     int64_t                     m_JoinedTimestampMs{ 0 };
     int64_t                     m_HostInfoTimestampMs{ 0 };

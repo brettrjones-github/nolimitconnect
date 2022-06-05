@@ -235,7 +235,6 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 			poInfo = new BigListInfo();
 			memcpy( poInfo, poPktAnnIn, sizeof( PktAnnounce ) );
 			//LogMsg( LOG_INFO, "BigListMgr::updatePktAnn: new contact %s Hi 0x%llX, Lo 0x%llX\n", poInfo->getOnlineName(), poInfo->getMyOnlineId().getVxGUIDHiPart(), poInfo->getMyOnlineId().getVxGUIDLoPart() );
-			poInfo->setIsOnline( true );
 			poInfo->setIsConnected( true );
 			bigInsertInfo( poInfo->getMyOnlineId(), poInfo, true );
 			updateBigListDatabase( poInfo, GetPtoPEngine().getNetworkMgr().getNetworkKey() );

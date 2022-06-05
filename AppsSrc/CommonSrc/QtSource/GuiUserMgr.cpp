@@ -259,9 +259,8 @@ void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID on
         switch( listType )
         {
         case eUserViewTypeDirectConnect:
-            if( !user->getNetIdent().isDirectConnect() )
+            if( !user->getNetIdent().isDirectConnected() )
             {
-                user->getNetIdent().setIsDirectConnect( true );
                 LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is direct connect %s", user->getNetIdent().getOnlineName() );
             }
             break;
@@ -275,8 +274,7 @@ void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID on
         case eUserViewTypeOnline:
             if( !user->getNetIdent().isOnline() )
             {
-                user->getNetIdent().setIsOnline( true );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is online %s", user->getNetIdent().getOnlineName() );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is NOT online %s", user->getNetIdent().getOnlineName() );
             }
             break;
 
@@ -316,9 +314,8 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
         switch( listType )
         {
         case eUserViewTypeDirectConnect:
-            if( user->getNetIdent().isDirectConnect() )
+            if( user->getNetIdent().isDirectConnected() )
             {
-                user->getNetIdent().setIsDirectConnect( false );
                 LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListRemove Was direct connect %s", user->getNetIdent().getOnlineName() );
             }
             break;
@@ -334,7 +331,6 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
         case eUserViewTypeOnline:
             if( user->getNetIdent().isOnline() )
             {
-                user->getNetIdent().setIsOnline( false );
                 LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListRemove Was online %s", user->getNetIdent().getOnlineName() );
             }
             break;

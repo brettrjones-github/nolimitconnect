@@ -34,8 +34,12 @@ public:
     ConnectIdListMgr( P2PEngine& engine );
     virtual ~ConnectIdListMgr() = default;
 
-    bool                        isOnline( VxGUID& onlineId );
+    
+    bool                        isDirectConnected( VxGUID& onlineId );
+    bool                        isRelayed( VxGUID& onlineId );
     bool                        isHosted( VxGUID& onlineId );
+
+    bool                        isOnline( VxGUID& onlineId ) { return isDirectConnected( onlineId ) || isRelayed( onlineId ); }
     bool                        isOnline( GroupieId& groupieId );
 
     void                        userJoinedHost( VxGUID& sktConnectId, GroupieId& groupieId );

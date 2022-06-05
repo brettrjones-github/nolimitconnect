@@ -66,6 +66,7 @@
 #include "AppletHostRandomConnectStatus.h"
 
 #include "AppletHostSelect.h"
+#include "AppletIgnoredHosts.h"
 #include "AppletInviteAccept.h"
 #include "AppletInviteCreate.h"
 #include "AppletHostGroupStatus.h"
@@ -361,6 +362,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 
     case eAppletPeerSelectFileToSend:       appletDialog = new AppletPeerSelectFileToSend( m_MyApp, parent ); break;
     case eAppletPeerSessionFileOffer:       appletDialog = new AppletPeerSessionFileOffer( m_MyApp, parent ); break;
+
+    case eAppletIgnoredHosts:              appletDialog = new AppletIgnoredHosts( m_MyApp, parent ); break;
 
 
 //	case eAppletPlayerVideo:

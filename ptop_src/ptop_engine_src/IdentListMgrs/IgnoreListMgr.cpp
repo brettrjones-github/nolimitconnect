@@ -175,3 +175,12 @@ void IgnoreListMgr::initializeIgnoredHostsIfNeeded( void )
         m_IgnoredHostsDb.restoreFromDatabase( m_IgnoredHostList );
     }
 }
+
+//============================================================================
+void IgnoreListMgr::getIgnoredHostsList( std::map<VxGUID, IgnoredHostInfo>& ignoredHostList )
+{
+    m_IgnoredHostsMutex.lock();
+    initializeIgnoredHostsIfNeeded();
+    ignoredHostList = m_IgnoredHostList;
+    m_IgnoredHostsMutex.unlock();
+}

@@ -224,6 +224,8 @@ enum EApplet
     eAppletAboutMeClient,
     eAppletStoryboardClient,
 
+    eAppletIgnoredHosts,
+
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,
     //	eAppletStreamViewerVideo,

@@ -109,6 +109,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostJoinRequestList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostNetworkStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostSelect.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletIgnoredHosts.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteAccept.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteCreate.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinBase.h \
@@ -483,6 +484,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostNetworkStatus.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostSelect.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRandomConnectStatus.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletIgnoredHosts.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteAccept.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteCreate.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinBase.cpp \
@@ -806,6 +808,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHostJoinRequestList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHostNetworkStatus.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHostSelect.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletIgnoredHosts.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletInviteAccept.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletInviteCreate.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletKodi.ui \

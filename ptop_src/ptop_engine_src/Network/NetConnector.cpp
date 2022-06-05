@@ -738,7 +738,6 @@ void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * 
 	{
 		int64_t timeNow = GetGmtTimeMs();
 		bigListInfo->setTimeLastConnectAttemptMs( timeNow );
-		bigListInfo->setIsOnline( true );
 		bigListInfo->setIsConnected( true );
 		if( eConnectReasonRandomConnectJoin == connectReason )
 		{

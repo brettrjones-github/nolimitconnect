@@ -59,7 +59,7 @@ GuiHostedListItem* GuiHostedListWidget::sessionToWidget( GuiHostedListSession* h
     connect( hostItem, SIGNAL( signalJoinButtonClicked(GuiHostedListItem*) ),		        this, SLOT( slotJoinButtonClicked(GuiHostedListItem*) ) );
     connect( hostItem, SIGNAL( signalConnectButtonClicked(GuiHostedListItem*) ),            this, SLOT( slotConnectButtonClicked(GuiHostedListItem*) ) );
     connect( hostItem, SIGNAL( signalKickButtonClicked(GuiHostedListItem*) ),               this, SLOT( slotKickButtonClicked(GuiHostedListItem*) ) );
-    connect( hostItem, SIGNAL( signalFavoriteButtonClicked(GuiHostedListItem*) ),           this, SLOT( slotFavoriteButtonClicked(GuiHostedListItem*) ) );
+    connect( hostItem, SIGNAL( signalIgnoreButtonClicked(GuiHostedListItem*) ),           this, SLOT( slotIgnoreButtonClicked(GuiHostedListItem*) ) );
 
 
     hostItem->updateWidgetFromInfo();
@@ -262,7 +262,7 @@ void GuiHostedListWidget::slotKickButtonClicked( GuiHostedListItem* hostItem )
 }
 
 //============================================================================
-void GuiHostedListWidget::slotFavoriteButtonClicked( GuiHostedListItem* hostItem )
+void GuiHostedListWidget::slotIgnoreButtonClicked( GuiHostedListItem* hostItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
     {
@@ -270,7 +270,7 @@ void GuiHostedListWidget::slotFavoriteButtonClicked( GuiHostedListItem* hostItem
     }
 
     m_ClickEventTimer.startTimer();
-    onFavoriteButtonClicked( hostItem );
+    onIgnoreButtonClicked( hostItem );
 }
 
 //============================================================================
@@ -465,13 +465,13 @@ void GuiHostedListWidget::onKickButtonClicked( GuiHostedListItem* hostItem )
 }
 
 //============================================================================
-void GuiHostedListWidget::onFavoriteButtonClicked( GuiHostedListItem* hostItem )
+void GuiHostedListWidget::onIgnoreButtonClicked( GuiHostedListItem* hostItem )
 {
-    LogMsg( LOG_VERBOSE, "onFavoriteButtonClicked" );
+    LogMsg( LOG_VERBOSE, "onIgnoreButtonClicked" );
     GuiHostedListSession* hostSession = hostItem->getHostSession();
     if( hostSession )
     {
-        emit signalFavoriteButtonClicked( hostSession, hostItem );
+        emit signalIgnoreButtonClicked( hostSession, hostItem );
     }
 }
 

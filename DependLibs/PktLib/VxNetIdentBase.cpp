@@ -29,7 +29,7 @@
 VxNetIdentBase::VxNetIdentBase( const VxNetIdentBase &rhs )
     : VxConnectInfo( rhs )
     , VxOnlineStatusFlags( rhs )
-    , m_IsOnline( rhs.m_IsOnline )
+    , m_u8NetIdentRes( rhs.m_u8NetIdentRes )
     , m_u8OfferCnt( rhs.m_u8OfferCnt )
     , m_u8ReplyCnt( rhs.m_u8ReplyCnt )
     , m_u32TruthCnt( rhs.m_u32TruthCnt )
@@ -46,7 +46,7 @@ VxNetIdentBase&  VxNetIdentBase::operator = ( const VxNetIdentBase& rhs )
     {
         *((VxConnectInfo*)this) = *((VxConnectInfo*)&rhs);
         *((VxOnlineStatusFlags*)this) = *((VxOnlineStatusFlags*)&rhs);
-        m_IsOnline = rhs.m_IsOnline;
+        m_u8NetIdentRes = rhs.m_u8NetIdentRes;
         m_u8OfferCnt = rhs.m_u8OfferCnt;
         m_u8ReplyCnt = rhs.m_u8ReplyCnt;
         m_u32TruthCnt = rhs.m_u32TruthCnt;
@@ -63,7 +63,7 @@ bool VxNetIdentBase::addToBlob( PktBlobEntry& blob )
 {
     bool result = VxConnectInfo::addToBlob( blob );
     result &= VxOnlineStatusFlags::addToBlob( blob );
-    result &= blob.setValue( m_IsOnline );
+    result &= blob.setValue( m_u8NetIdentRes );
     result &= blob.setValue( m_u8OfferCnt );
     result &= blob.setValue( m_u8ReplyCnt );
     result &= blob.setValue( m_u32TruthCnt );
@@ -78,7 +78,7 @@ bool VxNetIdentBase::extractFromBlob( PktBlobEntry& blob )
 {
     bool result = VxConnectInfo::extractFromBlob( blob );
     result &= VxOnlineStatusFlags::extractFromBlob( blob );
-    result &= blob.getValue( m_IsOnline );
+    result &= blob.getValue( m_u8NetIdentRes );
     result &= blob.getValue( m_u8OfferCnt );
     result &= blob.getValue( m_u8ReplyCnt );
     result &= blob.getValue( m_u32TruthCnt );
@@ -95,9 +95,21 @@ bool VxNetIdentBase::isMyself( void )
 }
 
 //============================================================================
+bool VxNetIdentBase::isDirectConnected( void )
+{
+    return GetPtoPEngine().getConnectIdListMgr().isDirectConnected( getMyOnlineId() );
+}
+
+//============================================================================
+bool VxNetIdentBase::isRelayed( void )
+{
+    return GetPtoPEngine().getConnectIdListMgr().isRelayed( getMyOnlineId() );
+}
+
+//============================================================================
 bool VxNetIdentBase::canDirectConnectToUser( void )
 {
-    return isNearby() || !requiresRelay();
+    return isNearby() || !requiresRelay() || isDirectConnected();
 }
 
 //============================================================================

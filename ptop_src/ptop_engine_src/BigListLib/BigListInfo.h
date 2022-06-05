@@ -136,13 +136,10 @@ public:
 	~BigListInfo();
 
 	bool						isSafeToDelete( void );		
-	bool						RemoveIfTemp( int iListIdx );
 	//! calc length when stored as blob
 	uint32_t					CalcStoredLen( void );
 
-
 	void						CopyTo( BigListInfo & gInfo );
-	void						DescribeAuth( std::string & csRetAuth );
 	BigListInfo *				makeCopy( void );
 
 	void						AddInQueItem(  VxPktHdr * poPkt );

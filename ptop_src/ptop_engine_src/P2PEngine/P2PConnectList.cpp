@@ -90,7 +90,6 @@ RcConnectInfo * P2PConnectList::addConnection( const VxGUID& oOnlineId, RcConnec
 #endif // DEBUG_MUTEXES
 
 	poInfoIn->m_BigListInfo->setIsConnected( true );
-	poInfoIn->m_BigListInfo->setIsOnline( true );
 
 	connectListLock();
 	RcConnectInfo * poInfo = findConnection( oOnlineId, true);

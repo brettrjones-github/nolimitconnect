@@ -80,7 +80,7 @@ signals:
     void                        signalJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        signalConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        signalKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
-    void                        signalFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        signalIgnoreButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected slots:
     void                        slotGuiHostedListItemClicked( QListWidgetItem* hostItem );
@@ -91,7 +91,7 @@ protected slots:
     void                        slotJoinButtonClicked( GuiHostedListItem* hostItem );
     void                        slotConnectButtonClicked( GuiHostedListItem* hostItem );
     void                        slotKickButtonClicked( GuiHostedListItem* hostItem );
-    void                        slotFavoriteButtonClicked( GuiHostedListItem* hostItem );
+    void                        slotIgnoreButtonClicked( GuiHostedListItem* hostItem );
 
 protected:
     GuiHostedListItem*          sessionToWidget( GuiHostedListSession* hostSession );
@@ -105,7 +105,7 @@ protected:
     virtual void                onJoinButtonClicked( GuiHostedListItem* hostItem );
     virtual void                onConnectButtonClicked( GuiHostedListItem* hostItem );
     virtual void                onKickButtonClicked( GuiHostedListItem* hostItem );
-    virtual void                onFavoriteButtonClicked( GuiHostedListItem* hostItem );
+    virtual void                onIgnoreButtonClicked( GuiHostedListItem* hostItem );
 
 	//=== vars ===//
 };

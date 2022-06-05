@@ -17,6 +17,7 @@
 #include "AppSettings.h"
 #include "GuiHelpers.h"
 #include "GuiHostedListSession.h"
+#include "GuiHostedListItem.h"
 
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 
@@ -38,13 +39,14 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	// so is actually destroyed
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 	connect( ui.m_ChooseHostButton, SIGNAL( clicked() ), this, SLOT( slotChooseHostModeButtonClick() ) );
+	connect( ui.m_IgnoredHostsButton, SIGNAL( clicked() ), this, SLOT( slotShowIgnoredHostsListButtonClicked() ) );
 
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalIconButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),		this, SLOT( slotIconButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalMenuButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),		this, SLOT( slotMenuButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalJoinButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),		this, SLOT( slotJoinButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalConnectButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),	this, SLOT( slotConnectButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalKickButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),		this, SLOT( slotKickButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
-	connect( ui.m_GuiHostedListWidget, SIGNAL( signalFavoriteButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ), this, SLOT( slotFavoriteButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalIgnoreButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),   this, SLOT( slotIgnoreButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 
 	m_MyApp.activityStateChange( this, true );
 	m_MyApp.getUserMgr().wantGuiUserUpdateCallbacks( this, true );
@@ -232,21 +234,29 @@ void AppletGroupJoin::slotKickButtonClicked( GuiHostedListSession* hostSession, 
 }
 
 //============================================================================
-void AppletGroupJoin::slotFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+void AppletGroupJoin::slotIgnoreButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
 {
-	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotFavoriteButtonClicked" );
-	std::string ptopUrl = hostSession->getHostUrl();
-	if( !ptopUrl.empty() )
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotIgnoreButtonClicked" );
+	GuiHosted* guiHosted = hostSession->getGuiHosted();
+	if( !guiHosted )
 	{
-		if( yesNoMessageBox( QObject::tr( "Join Host On Startup?" ), QObject::tr( "Join This Host When Application Starts?" ) ) )
-		{
-			m_MyApp.getHostedListMgr().setJoinOnStartup( ptopUrl, true );
-		}
-		else
-		{
-			m_MyApp.getHostedListMgr().setJoinOnStartup( ptopUrl, false );
-		}
+		return;
 	}
+
+	m_MyApp.getEngine().getIgnoreListMgr().addHostIgnore( guiHosted->getOnlineId(), guiHosted->getHostInviteUrl(), guiHosted->getHostTitle(), guiHosted->getThumbId(), guiHosted->getHostDescription() );
+	ui.m_GuiHostedListWidget->removeItemWidget( hostItem );
+}
+
+//============================================================================
+void AppletGroupJoin::slotShowIgnoredHostsListButtonClicked( void )
+{
+	if( !m_MyApp.getEngine().getIgnoreListMgr().hasIgnoredHosts() )
+	{
+		okMessageBox( QObject::tr( "No Ignored Hosts" ), QObject::tr( "The Ignored Hosts List Is Empty" ) );
+		return;
+	}
+
+	m_MyApp.launchApplet( eAppletIgnoredHosts, getParentPageFrame() );
 }
 
 //============================================================================

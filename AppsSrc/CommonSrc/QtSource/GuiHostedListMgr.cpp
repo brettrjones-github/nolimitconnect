@@ -125,6 +125,12 @@ void GuiHostedListMgr::slotInternalHostSearchComplete( EHostType hostType, VxGUI
 //============================================================================
 void GuiHostedListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
 {
+    if( m_MyApp.getEngine().getIgnoreListMgr().isHostIgnored( hostedInfo.getOnlineId() ) )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListMgr::toGuiHostSearchResult ignored host %s", hostedInfo.getHostTitle().c_str() );
+        return;
+    }
+
     if( hostedInfo.isHostInviteValid() )
     {
         HostedInfo* newHostedInfo = new HostedInfo( hostedInfo );

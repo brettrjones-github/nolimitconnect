@@ -151,9 +151,7 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 				{
 					// clear temporary flags
 					poInfo->m_u32BigListTempFlags = 0;
-					poInfo->setIsDirectConnect( false );
 					poInfo->setIsNearby(false);
-					poInfo->setIsOnline(false);
 					poInfo->setIsInDatabase( true );
 					poInfo->setLastSessionTimeMs( sessionTimeMs );
 

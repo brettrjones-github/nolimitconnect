@@ -207,6 +207,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostNetworkStatus.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostRandomConnectStatus.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostSelect.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletInviteAccept.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletInviteCreate.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletJoinBase.cpp" />
@@ -527,6 +528,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -910,6 +912,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletHostJoinRequestList.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletHostNetworkStatus.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletHostSelect.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletIgnoredHosts.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletInviteAccept.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletInviteCreate.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletKodi.ui" />

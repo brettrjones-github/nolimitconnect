@@ -73,7 +73,6 @@ void P2PEngine::onContactConnected( RcConnectInfo * poInfo, bool connectionListI
 	if( ( false == VxIsAppShuttingDown() ) 
 		&& poInfo->getSkt()->isConnected() ) 
 	{
-		poInfo->m_BigListInfo->setIsOnline( true );
 		poInfo->m_BigListInfo->setIsConnected( true );
 		std::string strName = poInfo->m_BigListInfo->getOnlineName();
 		if( !poInfo->getSkt()->isTempConnection() && shouldNotifyGui( poInfo->m_BigListInfo ) )
@@ -102,7 +101,6 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 	if( false == VxIsAppShuttingDown() )
 	{
 		getNetStatusAccum().onConnectionLost( poInfo->getSkt()->getSocketId() );
-		poInfo->m_BigListInfo->setIsOnline( false );
 		poInfo->m_BigListInfo->setIsConnected( false );
 
 		LogMsg( LOG_INFO, "onContactDisconnected %s telling plugin mgr", poInfo->m_BigListInfo->getOnlineName() );

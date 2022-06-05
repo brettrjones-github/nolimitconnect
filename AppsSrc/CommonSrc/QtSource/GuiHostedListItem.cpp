@@ -31,7 +31,7 @@ GuiHostedListItem::GuiHostedListItem( EHostType hostType, QWidget *parent  )
     connect( ui.m_JoinButton,		SIGNAL( clicked() ),	this, SLOT( slotJoinButtonClicked() ) );
     connect( ui.m_ConnectButton,    SIGNAL( clicked() ),    this, SLOT( slotConnectButtonClicked() ) );
     connect( ui.m_KickButton,       SIGNAL( clicked() ),    this, SLOT( slotKickButtonClicked() ) );
-    connect( ui.m_FavoriteButton,   SIGNAL( clicked() ),    this, SLOT( slotFavoriteButtonClicked() ) );
+    connect( ui.m_IgnoreButton,     SIGNAL( clicked() ),    this, SLOT( slotIgnoreButtonClicked() ) );
    
     ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
     ui.m_MenuButton->setIcon( eMyIconMenu );
@@ -41,11 +41,11 @@ GuiHostedListItem::GuiHostedListItem( EHostType hostType, QWidget *parent  )
     ui.m_ConnectButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     ui.m_KickButton->setIcon( eMyIconBoot );
     ui.m_KickButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
-    ui.m_FavoriteButton->setIcon( eMyIconStarEmpty );
-    ui.m_FavoriteButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_IgnoreButton->setIcon( eMyIconIgnored );
+    ui.m_IgnoreButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     showConnectButton( false );
     showKickButton( false );
-    showFavoriteButton( false );
+    showIgnoreButton( true );
 }
 
 //============================================================================
@@ -171,11 +171,11 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     {
         // make sure the saved favorite host url is up to data
         m_MyApp.getHostedListMgr().setJoinOnStartup( guiHosted->getHostInviteUrl(), true );
-        ui.m_FavoriteButton->setIcon( eMyIconStarFull );
+        ui.m_IgnoreButton->setIcon( eMyIconStarFull );
     }
     else
     {
-        ui.m_FavoriteButton->setIcon( eMyIconStarEmpty );
+        ui.m_IgnoreButton->setIcon( eMyIconStarEmpty );
     }
 
     EJoinState joinState{ eJoinStateNone };
@@ -207,7 +207,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( true );
         showKickButton( false );
-        showFavoriteButton( false );
+
         break;
     case eJoinStateJoinIsGranted:
         showConnectButton( true );
@@ -216,7 +216,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( true );
         showKickButton( true );
-        showFavoriteButton( true );
+
         break;
     case eJoinStateSending:
     case eJoinStateSendFail:
@@ -228,7 +228,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( false );
         showKickButton( false );
-        showFavoriteButton( false );
+
         break;
 
     case eJoinStateJoinDenied:
@@ -237,7 +237,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconIgnored );
         ui.m_ConnectButton->setEnabled( false );
         showKickButton( false );
-        showFavoriteButton( false );
+
         break;
     case eJoinStateNone:
     default:
@@ -246,7 +246,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( true );
         showKickButton( false );
-        showFavoriteButton( false );
+
         break;
     }
 }
@@ -268,12 +268,12 @@ void GuiHostedListItem::showKickButton( bool isVisible )
 }
 
 //============================================================================
-void GuiHostedListItem::showFavoriteButton( bool isVisible )
+void GuiHostedListItem::showIgnoreButton( bool isVisible )
 {
     if( !isVisible || eHostTypeGroup == m_HostType )
     {
-        ui.m_FavoriteButton->setVisible( isVisible );
-        ui.m_FavoriteLabel->setVisible( isVisible );
+        ui.m_IgnoreButton->setVisible( isVisible );
+        ui.m_IgnoreLabel->setVisible( isVisible );
     }
 }
 
@@ -296,9 +296,9 @@ void GuiHostedListItem::slotKickButtonClicked( void )
 }
 
 //============================================================================
-void GuiHostedListItem::slotFavoriteButtonClicked( void )
+void GuiHostedListItem::slotIgnoreButtonClicked( void )
 {
-    emit signalFavoriteButtonClicked( this );
+    emit signalIgnoreButtonClicked( this );
 }
 
 //============================================================================

@@ -59,7 +59,7 @@ bool ConnectIdListMgr::getConnections( HostedId& hostId, std::set<ConnectId>& di
 }
 
 //============================================================================
-bool ConnectIdListMgr::isOnline( VxGUID& onlineId )
+bool ConnectIdListMgr::isDirectConnected( VxGUID& onlineId )
 {
     if( onlineId == m_Engine.getMyOnlineId() )
     {
@@ -70,27 +70,33 @@ bool ConnectIdListMgr::isOnline( VxGUID& onlineId )
     lockList();
     for( auto& connectId : m_ConnectIdList )
     {
-        if( const_cast< ConnectId& >( connectId ).getGroupieOnlineId() == onlineId )
+        if( const_cast<ConnectId&>(connectId).getGroupieOnlineId() == onlineId )
         {
             isOnlined = true;
             break;
         }
     }
 
-    if( !isOnlined )
+    unlockList();
+    return isOnlined;
+}
+
+//============================================================================
+bool ConnectIdListMgr::isRelayed( VxGUID& onlineId )
+{
+    bool isRelayed = false;
+    lockList();
+    for( auto& connectId : m_RelayedIdList )
     {
-        for( auto& connectId : m_RelayedIdList )
+        if( const_cast<ConnectId&>(connectId).getGroupieOnlineId() == onlineId )
         {
-            if( const_cast<ConnectId&>(connectId).getGroupieOnlineId() == onlineId )
-            {
-                isOnlined = true;
-                break;
-            }
+            isRelayed = true;
+            break;
         }
     }
 
     unlockList();
-    return isOnlined;
+    return isRelayed;
 }
 
 //============================================================================

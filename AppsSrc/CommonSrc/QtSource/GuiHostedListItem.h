@@ -66,13 +66,13 @@ signals:
     void						signalJoinButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalConnectButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalKickButtonClicked( GuiHostedListItem* listEntryWidget );
-    void						signalFavoriteButtonClicked( GuiHostedListItem* listEntryWidget );
+    void						signalIgnoreButtonClicked( GuiHostedListItem* listEntryWidget );
 
 public slots:
     void						slotJoinButtonClicked( void );
     void						slotConnectButtonClicked( void );
     void						slotKickButtonClicked( void );
-    void						slotFavoriteButtonClicked( void );
+    void						slotIgnoreButtonClicked( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
@@ -80,7 +80,7 @@ protected:
 
     void                        showConnectButton( bool isAccepted );
     void                        showKickButton( bool isVisible );
-    void                        showFavoriteButton( bool isVisible );
+    void                        showIgnoreButton( bool isVisible );
 
 	//=== vars ===//
     Ui::GuiHostedListItemUi	    ui;

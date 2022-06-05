@@ -45,10 +45,12 @@ public:
 
 	VxConnectInfo&				getConnectInfo( void )					{ return *this; }
 
-    void						setIsOnline( bool isOnline )		    { m_IsOnline = (uint8_t)isOnline; }
-    bool						isOnline( void )					    { return (bool)m_IsOnline;  }
+	bool                        isMyself( void );
 
-    bool                        isMyself( void );
+	bool						isOnline( void )						{ return isDirectConnected() || isRelayed(); }
+	bool						isDirectConnected( void );
+	bool						isRelayed( void );
+
 	bool						canDirectConnectToUser( void );
 
 	void						setTruthCount( uint32_t truthCnt );
@@ -64,7 +66,7 @@ public:
 
 protected:
 	//=== vars ===//
-    uint8_t						m_IsOnline{ 0 };
+    uint8_t						m_u8NetIdentRes{ 0 }; // used to be is online
 	uint8_t						m_u8OfferCnt{ 0 };							// offer count ( used as part of rating )
 	uint8_t						m_u8ReplyCnt{ 0 };					        // reply count ( used as part of rating )
 	uint32_t					m_u32TruthCnt{ 0 };					

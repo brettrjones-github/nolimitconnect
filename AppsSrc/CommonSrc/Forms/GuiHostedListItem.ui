@@ -306,14 +306,14 @@
            </widget>
           </item>
           <item>
-           <widget class="VxPushButton" name="m_FavoriteButton">
+           <widget class="VxPushButton" name="m_IgnoreButton">
             <property name="text">
              <string notr="true"/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="m_FavoriteLabel">
+           <widget class="QLabel" name="m_IgnoreLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -321,7 +321,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Favorite</string>
+             <string>Ignore</string>
             </property>
            </widget>
           </item>

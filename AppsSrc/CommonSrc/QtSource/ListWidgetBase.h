@@ -51,6 +51,9 @@ public:
 
     void                        launchChangeFriendship( GuiUser* ident );
 
+    void                        setIsIgnoredHostsView( bool isIgnored ) { m_IsIgnoredHostsView = isIgnored; }
+    bool                        getIsIgnoredHostsView( void )       { return m_IsIgnoredHostsView; }
+
 protected:
     //=== vars ===//
     AppCommon&                  m_MyApp;
@@ -59,6 +62,7 @@ protected:
     P2PEngine&                  m_Engine;
     GuiThumbMgr&                m_ThumbMgr;
     bool                        m_IsHostView{ false };
+    bool                        m_IsIgnoredHostsView{ false };
     EHostType                   m_HostType{ eHostTypeUnknown };
 
     VxTimer						m_ClickEventTimer; // avoid duplicate clicks

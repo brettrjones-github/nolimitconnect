@@ -32,11 +32,13 @@ public:
     virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp ) override;
     virtual void                removeIdent( VxGUID& onlineId ) override;
 
+    bool                        hasIgnoredHosts( void )                 { return !m_IgnoredHostList.empty(); }
     bool                        isHostIgnored( VxGUID& onlineId );
     void                        addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription );
     void                        removeHostIgnore( VxGUID& onlineId );
 
-    std::vector<std::pair<VxGUID, int64_t>>& getIdentList() { return m_IgnoreIdentList; };
+    std::vector<std::pair<VxGUID, int64_t>>& getIdentList()             { return m_IgnoreIdentList; };
+    void                        getIgnoredHostsList( std::map<VxGUID, IgnoredHostInfo>& ignoredHostList );
 
 protected:
     void                        initializeIgnoredHostsIfNeeded( void );
