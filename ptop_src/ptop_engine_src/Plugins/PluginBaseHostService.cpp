@@ -51,6 +51,7 @@ bool PluginBaseHostService::getHostedInfo( HostedInfo& hostedInfo )
         hostedInfo.setHostTitle( m_HostTitle );
         hostedInfo.setHostDescription( m_HostDescription );
         hostedInfo.setHostedId( getHostedId() );
+        hostedInfo.setThumbId( m_Engine.getMyPktAnnounce().getHostThumbId( getHostType(), true ) );
 
         m_AnnMutex.unlock();
         result = hostedInfo.isValidForGui();

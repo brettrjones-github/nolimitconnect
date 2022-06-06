@@ -72,7 +72,7 @@ void GuiHostedListMgr::callbackHostedInfoListRemoved( VxGUID& hostOnlineId, EHos
 //============================================================================
 void GuiHostedListMgr::callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId )
 {
-    if( hostedInfo && hostedInfo->isHostInviteValid() )
+    if( hostedInfo && hostedInfo->getOnlineId().isVxGUIDValid() && hostedInfo->isHostInviteValid() )
     {
         emit signalInternalHostSearchResult( new HostedInfo( *hostedInfo ), sessionId );
     }

@@ -83,6 +83,10 @@ void P2PEngine::fromGuiSetUserSpecificDir( const char* userSpecificDir )
 	strDbFileName += "EngineParams.db3";
 	getEngineParams().engineParamsStartup( strDbFileName );
 
+    strDbFileName = VxGetSettingsDirectory();
+    strDbFileName += "IgnoredHostsList.db3";
+    getIgnoreListMgr().ignoredHostsListMgrStartup( strDbFileName );
+
 	strDbFileName = VxGetSettingsDirectory();
 	strDbFileName += "HostedList.db3";
 	getHostedListMgr().hostedListMgrStartup( strDbFileName );

@@ -31,7 +31,7 @@ public:
     virtual ~IgnoredHostsDb() = default;
 
     bool                        saveToDatabase( IgnoredHostInfo& hostInfo );
-    void                        removeFromDatabase( VxGUID& onlineId );
+    bool                        removeFromDatabase( VxGUID& onlineId );
 
     bool                        restoreFromDatabase( std::map<VxGUID, IgnoredHostInfo>& ignoredHostList );
 

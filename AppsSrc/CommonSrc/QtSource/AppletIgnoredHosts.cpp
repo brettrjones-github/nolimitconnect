@@ -17,6 +17,7 @@
 #include "AppSettings.h"
 #include "GuiHelpers.h"
 #include "GuiHostedListSession.h"
+#include "GuiHostedListItem.h"
 
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 
@@ -41,7 +42,7 @@ AppletIgnoredHosts::AppletIgnoredHosts( AppCommon& app, QWidget * parent )
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalJoinButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),		this, SLOT( slotJoinButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalConnectButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),	this, SLOT( slotConnectButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalKickButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ),		this, SLOT( slotKickButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
-	connect( ui.m_GuiHostedListWidget, SIGNAL( signalFavoriteButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ), this, SLOT( slotFavoriteButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalIgnoreButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ), this, SLOT( slotIgnoreButtonClicked(GuiHostedListSession*,GuiHostedListItem*) ) );
 
 
 	m_MyApp.activityStateChange( this, true );
@@ -129,7 +130,11 @@ void AppletIgnoredHosts::slotKickButtonClicked( GuiHostedListSession* hostSessio
 }
 
 //============================================================================
-void AppletIgnoredHosts::slotFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+void AppletIgnoredHosts::slotIgnoreButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
 {
-	LogMsg( LOG_VERBOSE, "AppletIgnoredHosts::slotFavoriteButtonClicked" );
+	LogMsg( LOG_VERBOSE, "AppletIgnoredHosts::slotIgnoreButtonClicked" );
+	if( m_MyApp.getEngine().getIgnoreListMgr().removeHostIgnore( hostSession->getOnlineId() ) )
+	{
+		ui.m_GuiHostedListWidget->removeItemWidget( hostItem );
+	}
 }

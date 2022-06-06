@@ -171,11 +171,6 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     {
         // make sure the saved favorite host url is up to data
         m_MyApp.getHostedListMgr().setJoinOnStartup( guiHosted->getHostInviteUrl(), true );
-        ui.m_IgnoreButton->setIcon( eMyIconStarFull );
-    }
-    else
-    {
-        ui.m_IgnoreButton->setIcon( eMyIconStarEmpty );
     }
 
     EJoinState joinState{ eJoinStateNone };
@@ -192,6 +187,16 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     if( eJoinStateNone != joinState )
     {
         setJoinedState( joinState );
+    }
+
+    if( guiHosted->getIsIgnored() )
+    {
+        ui.m_JoinButton->setVisible( false );
+        ui.m_JoinLabel->setVisible( false );
+        ui.m_IgnoreLabel->setText( QObject::tr( "Stop Ignoring Host" ) );
+        ui.m_IgnoreLabel->setVisible( true );
+        ui.m_IgnoreButton->setVisible( true );
+        ui.m_IgnoreButton->setEnabled( true );
     }
 }
 
@@ -270,11 +275,8 @@ void GuiHostedListItem::showKickButton( bool isVisible )
 //============================================================================
 void GuiHostedListItem::showIgnoreButton( bool isVisible )
 {
-    if( !isVisible || eHostTypeGroup == m_HostType )
-    {
-        ui.m_IgnoreButton->setVisible( isVisible );
-        ui.m_IgnoreLabel->setVisible( isVisible );
-    }
+    ui.m_IgnoreButton->setVisible( isVisible );
+    ui.m_IgnoreLabel->setVisible( isVisible );
 }
 
 //============================================================================

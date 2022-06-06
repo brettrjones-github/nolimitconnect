@@ -27,6 +27,13 @@ IgnoreListMgr::IgnoreListMgr( P2PEngine& engine )
 }
 
 //============================================================================
+void IgnoreListMgr::ignoredHostsListMgrStartup( std::string& dbFileName )
+{
+    m_IgnoredHostsDb.dbShutdown();
+    m_IgnoredHostsDb.dbStartup( IGNORED_HOSTS_LIST_DB_VERSION, dbFileName );
+}
+
+//============================================================================
 bool IgnoreListMgr::isIgnored( VxGUID& onlineId )
 {
     bool isIgnored = false;
@@ -141,29 +148,38 @@ bool IgnoreListMgr::isHostIgnored( VxGUID& onlineId )
 }
 
 //============================================================================
-void IgnoreListMgr::addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription )
+bool IgnoreListMgr::addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription )
 {
+    bool wasAdded{ false };
     if( onlineId.isVxGUIDValid() )
     {
         IgnoredHostInfo hostInfo( onlineId, thumbId, hostUrl, hostTitle, hostDescription, GetGmtTimeMs() );
 
         m_IgnoredHostsMutex.lock();
+        m_IgnoredHostList[ onlineId ] = hostInfo;
+
         initializeIgnoredHostsIfNeeded();
-        m_IgnoredHostsDb.saveToDatabase( hostInfo );
+        wasAdded = m_IgnoredHostsDb.saveToDatabase( hostInfo );
         m_IgnoredHostsMutex.unlock();
     }
+
+    return wasAdded;
 }
 
 //============================================================================
-void IgnoreListMgr::removeHostIgnore( VxGUID& onlineId )
+bool IgnoreListMgr::removeHostIgnore( VxGUID& onlineId )
 {
+    bool removedIgnore{ false };
     if( onlineId.isVxGUIDValid() )
     {
         m_IgnoredHostsMutex.lock();
+        m_IgnoredHostList.erase( onlineId );
         initializeIgnoredHostsIfNeeded();
-        m_IgnoredHostsDb.removeFromDatabase( onlineId );
+        removedIgnore = m_IgnoredHostsDb.removeFromDatabase( onlineId );
         m_IgnoredHostsMutex.unlock();
     }
+
+    return removedIgnore;
 }
 
 //============================================================================

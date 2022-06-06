@@ -37,7 +37,7 @@ protected slots:
     void                        slotJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
-    void                        slotFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotIgnoreButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
     void                        queryIgnoredHostsList( void );

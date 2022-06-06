@@ -243,8 +243,11 @@ void AppletGroupJoin::slotIgnoreButtonClicked( GuiHostedListSession* hostSession
 		return;
 	}
 
-	m_MyApp.getEngine().getIgnoreListMgr().addHostIgnore( guiHosted->getOnlineId(), guiHosted->getHostInviteUrl(), guiHosted->getHostTitle(), guiHosted->getThumbId(), guiHosted->getHostDescription() );
-	ui.m_GuiHostedListWidget->removeItemWidget( hostItem );
+	if( m_MyApp.getEngine().getIgnoreListMgr().addHostIgnore( guiHosted->getOnlineId(), guiHosted->getHostInviteUrl(),
+		guiHosted->getHostTitle(), guiHosted->getThumbId(), guiHosted->getHostDescription() ) )
+	{
+		ui.m_GuiHostedListWidget->removeItemWidget( hostItem );
+	}
 }
 
 //============================================================================

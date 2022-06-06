@@ -23,10 +23,14 @@
 
 class IgnoreListMgr : public IdentListMgrBase
 {
+    const int IGNORED_HOSTS_LIST_DB_VERSION = 1;
+
 public:
     IgnoreListMgr() = delete;
     IgnoreListMgr( P2PEngine& engine );
     virtual ~IgnoreListMgr() = default;
+
+    void                        ignoredHostsListMgrStartup( std::string& dbFileName );
 
     bool                        isIgnored( VxGUID& onlineId );
     virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp ) override;
@@ -34,8 +38,8 @@ public:
 
     bool                        hasIgnoredHosts( void )                 { return !m_IgnoredHostList.empty(); }
     bool                        isHostIgnored( VxGUID& onlineId );
-    void                        addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription );
-    void                        removeHostIgnore( VxGUID& onlineId );
+    bool                        addHostIgnore( VxGUID& onlineId, std::string hostUrl, std::string hostTitle, VxGUID& thumbId, std::string hostDescription );
+    bool                        removeHostIgnore( VxGUID& onlineId );
 
     std::vector<std::pair<VxGUID, int64_t>>& getIdentList()             { return m_IgnoreIdentList; };
     void                        getIgnoredHostsList( std::map<VxGUID, IgnoredHostInfo>& ignoredHostList );

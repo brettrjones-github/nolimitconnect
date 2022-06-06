@@ -89,7 +89,7 @@ RCODE VxSettings::vxSettingsStartup( const char * pDbFileName )
 	RCODE rc = dbStartup( VXSETTINGS_DB_VERSION, pDbFileName );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "VxSettings::vxSettingsStartup:ERROR %d\n", rc );
+		LogMsg( LOG_ERROR, "VxSettings::vxSettingsStartup:ERROR %d", rc );
 	}
 	return rc;
 }
@@ -101,7 +101,7 @@ void VxSettings::vxSettingsShutdown( void )
 	RCODE rc = dbShutdown();
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "VxSettings::vxSettingsShutdown:ERROR %d\n", rc );
+		LogMsg( LOG_ERROR, "VxSettings::vxSettingsShutdown:ERROR %d", rc );
 	}
 }
 //============================================================================

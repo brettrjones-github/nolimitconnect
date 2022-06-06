@@ -63,11 +63,12 @@ RCODE IgnoredHostsDb::onDeleteTables( int iOldVersion )
 }
 
 //============================================================================
-void IgnoredHostsDb::removeFromDatabase( VxGUID& onlineId )
+bool IgnoredHostsDb::removeFromDatabase( VxGUID& onlineId )
 {
     std::string onlineIdStr = onlineId.toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
-    sqlExec( "DELETE FROM tblUserJoin WHERE onlineId=?", bindList );
+    RCODE rc = sqlExec( "DELETE FROM tblIgnoreHost WHERE onlineId=?", bindList );
+    return 0 == rc;
 }
 
 //============================================================================
@@ -83,8 +84,7 @@ bool IgnoredHostsDb::saveToDatabase( IgnoredHostInfo& hostInfo )
     bindList.add( hostInfo.getHostUrl().c_str() );
     bindList.add( hostInfo.getHostTitle().c_str() );
     bindList.add( hostInfo.getHostDescription().c_str() );
-    bindList.add( hostInfo.getTimestampMs() );
-    
+    bindList.add( hostInfo.getTimestampMs() );  
    
     RCODE rc = sqlExec( "INSERT INTO tblIgnoreHost (onlineId, thumbId, hostUrl, hostTitle, hostDescription, timestampdMs) values(?,?,?,?,?,?)",
         bindList );
