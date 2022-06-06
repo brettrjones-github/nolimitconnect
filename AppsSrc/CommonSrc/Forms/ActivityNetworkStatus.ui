@@ -309,7 +309,7 @@
       <item>
        <widget class="QPushButton" name="gotoWebsiteButton">
         <property name="text">
-         <string>go to http://www.nolimitconnect.com</string>
+         <string>visit http://www.nolimitconnect.org</string>
         </property>
        </widget>
       </item>

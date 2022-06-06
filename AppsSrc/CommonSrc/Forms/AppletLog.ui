@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>302</width>
+    <width>305</width>
     <height>442</height>
    </rect>
   </property>
@@ -89,7 +89,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>visit http://www.nolimitconnect.com</string>
+         <string>visit http://www.nolimitconnect.org</string>
         </property>
        </widget>
       </item>

@@ -88,6 +88,7 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 
 		break;
 
+		/*
 	case 2: // view my profile
 		{
 			viewWebServerPage( m_UserMgr.getMyIdent(), "index.htm" );
@@ -99,10 +100,10 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 			viewWebServerPage( m_UserMgr.getMyIdent(), "story_board.htm" );
 			break;
 		}
-
+		*/
 
 	default: 
-		LogMsg( LOG_ERROR, "onMenuServerSelected: ERROR unknown menu id %d\n", iMenuId );
+		LogMsg( LOG_ERROR, "onMenuServerSelected: ERROR unknown menu id %d", iMenuId );
 		break;
 	}
 }

@@ -51,7 +51,8 @@ bool PluginBaseHostService::getHostedInfo( HostedInfo& hostedInfo )
         hostedInfo.setHostTitle( m_HostTitle );
         hostedInfo.setHostDescription( m_HostDescription );
         hostedInfo.setHostedId( getHostedId() );
-        hostedInfo.setThumbId( m_Engine.getMyPktAnnounce().getHostThumbId( getHostType(), true ) );
+        VxGUID thumbId = m_Engine.getMyPktAnnounce().getHostThumbId( getHostType(), true );
+        hostedInfo.setThumbId( thumbId );
 
         m_AnnMutex.unlock();
         result = hostedInfo.isValidForGui();
@@ -301,7 +302,7 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
         bool broadcastPkt = false;
         if( ePluginAccessOk == pktReply.getAccessState() )
         {
-            bool broadcastPkt = true;
+            broadcastPkt = true;
         }
         else if( ePluginAccessLocked == pktReply.getAccessState() )
         {
@@ -311,7 +312,7 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
                     pktReply.setAccessState( ePluginAccessOk );
-                    bool broadcastPkt = true;
+                    broadcastPkt = true;
                 }
             }
             else

@@ -342,7 +342,7 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 	case ePluginTypeMessenger:
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( (EPluginType)iMenuId, m_InGroup ) )
 		{
-			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, (EPluginType)iMenuId );
+			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, (EPluginType)iMenuId, m_InGroup, getParentPageFrame() );
 		}
 		else
 		{
@@ -356,7 +356,7 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 	case ePluginTypeFileShareServer:
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileShareServer, m_InGroup ) )
 		{
-			m_MyApp.offerToFriendViewSharedFiles( m_SelectedFriend );
+			m_MyApp.offerToFriendViewSharedFiles( m_SelectedFriend, m_InGroup, getParentPageFrame() );
 		}
 
 		break;
@@ -364,7 +364,7 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 	case ePluginTypePersonFileXfer:
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypePersonFileXfer, m_InGroup ) )
 		{
-			m_MyApp.offerToFriendSendFile( m_SelectedFriend );
+			m_MyApp.offerToFriendSendFile( m_SelectedFriend, m_InGroup, getParentPageFrame() );
 		}
 
 		break;

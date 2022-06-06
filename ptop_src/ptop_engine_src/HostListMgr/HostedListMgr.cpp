@@ -550,7 +550,6 @@ bool HostedListMgr::fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<Ho
 //============================================================================
 bool HostedListMgr::fromGuiQueryHostedInfoList( EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll )
 {
-    bool result{ false };
     hostedInfoList.clear();
     lockList();
     for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )

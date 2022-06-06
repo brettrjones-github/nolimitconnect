@@ -20,22 +20,76 @@
    <string>Edit About Me</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item>
-    <widget class="ServiceSettingsWidget" name="m_ServiceSettingsWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>2</number>
      </property>
-    </widget>
+     <item>
+      <widget class="VxPushButton" name="m_ViewAboutMePageButton">
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="m_ViewServiceLabel">
+       <property name="text">
+        <string>View My About Me Page</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="PermissionWidget" name="m_PermissionWidget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QGroupBox" name="m_AboutMeGroupBox">
      <property name="title">
-      <string>About Me Page</string>
+      <string/>
      </property>
-     <layout class="QVBoxLayout" name="DialogItemsGroupBox_3">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
        <number>2</number>
       </property>
@@ -51,16 +105,6 @@
       <property name="bottomMargin">
        <number>5</number>
       </property>
-      <item>
-       <widget class="QLabel" name="m_StatusLabel">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QPushButton" name="m_ApplyAboutMeButton">
         <property name="text">
@@ -100,7 +144,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>100</height>
+          <height>60</height>
          </size>
         </property>
         <property name="plainText">
@@ -181,7 +225,7 @@
       <item>
        <widget class="QLineEdit" name="m_FavoriteWebsite3Edit">
         <property name="text">
-         <string>http://www.nolimitconnect.com</string>
+         <string>http://www.nolimitconnect.org</string>
         </property>
        </widget>
       </item>
@@ -218,9 +262,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ServiceSettingsWidget</class>
+   <class>VxPushButton</class>
+   <extends>QPushButton</extends>
+   <header>VxPushButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PermissionWidget</class>
    <extends>QWidget</extends>
-   <header>ServiceSettingsWidget.h</header>
+   <header>PermissionWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

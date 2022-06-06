@@ -608,15 +608,10 @@ public:
 	bool						userCanceled( void );
 
 	// returns true if showed activity
-	bool 						offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, QWidget * parent = 0 );
-	void						offerToFriendViewProfile( GuiUser * poFriend );
-	void						offerToFriendViewStoryboard( GuiUser * poFriend );
-	void						offerToFriendViewSharedFiles( GuiUser * poFriend );
-	void						offerToFriendSendFile( GuiUser * poFriend );
+	bool 						offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup = false, QWidget * parent = 0 );
+	void						offerToFriendViewSharedFiles( GuiUser * poFriend, bool inGroup = false, QWidget* parent = 0 );
+	void						offerToFriendSendFile( GuiUser * poFriend, bool inGroup = false, QWidget* parent = 0 );
 	void						offerToFriendChangeFriendship( GuiUser * poFriend );
-	void						offerToFriendUseAsRelay( GuiUser * poFriend );
-
-	void						viewWebServerPage( GuiUser * netIdent, const char * webPageFileName );
 
 	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, 
                                                         EAgeType age, int primaryLanguage, int contentType );

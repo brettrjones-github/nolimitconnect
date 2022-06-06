@@ -114,7 +114,7 @@ font: bold 14px;
       <item>
        <widget class="QLabel" name="m_PleaseVisitLabel">
         <property name="text">
-         <string>Please vist http://www.nolimitconnect.com for more information.</string>
+         <string>Please vist http://www.nolimitconnect.org for more information.</string>
         </property>
        </widget>
       </item>

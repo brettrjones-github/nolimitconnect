@@ -35,6 +35,8 @@ public slots:
     //! slot called when user takes snapshot
     void                        slotImageSnapshot( QImage snapshotImage );
 
+    void                        slotViewAboutMeButClick( void );
+
 protected:
     //! load user about me data from database
     void						loadContentFromDb( void );

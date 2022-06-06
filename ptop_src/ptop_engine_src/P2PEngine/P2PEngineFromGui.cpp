@@ -601,9 +601,9 @@ void P2PEngine::fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// direct
 	std::string strPicLabel		= "<h3><p align=\"center\">My Picture</p></h3>";
 	std::string strPicture		= "<p align=\"center\"><IMG SRC = \"me.jpg\" width=\"320\" height=\"240\"><br></p>";
 	std::string strFavWebsites	= "</h2><p align=\"center\"><font color=\"#007F00\">My Favorite Web Sites</font><br></p></h2>";
-	std::string strUrl1			= "";
-	std::string strUrl2			= "";
-	std::string strUrl3			= "";
+	std::string strUrl1			= url1 ? url1 : "";
+	std::string strUrl2			= url2 ? url2 : "";
+	std::string strUrl3			= url3 ? url3 : "";
     std::string strDonationInfo = "</h2><p align=\"center\"><font color=\"#007F00\">Donation Information</font><br></p></h2>";
     std::string strDonation = "";
 

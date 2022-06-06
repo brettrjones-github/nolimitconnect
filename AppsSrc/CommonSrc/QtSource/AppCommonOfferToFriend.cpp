@@ -30,10 +30,10 @@
 #include <QUrl>
 
 //============================================================================
-bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, QWidget * parent )
+bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup, QWidget * parent )
 {
 	bool showedActivity = false;
-	if( poFriend->isMyAccessAllowedFromHim( ePluginType ) )
+	if( poFriend->isMyAccessAllowedFromHim( ePluginType, inGroup ) )
 	{
 		startActivity( ePluginType, poFriend, parent );
 		showedActivity = true;
@@ -50,53 +50,8 @@ bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePlu
 }
 
 //============================================================================
-void AppCommon::offerToFriendViewProfile( GuiUser * poFriend )
-{
-	viewWebServerPage( poFriend, "index.htm" );
-}
-
-//============================================================================
-void AppCommon::offerToFriendViewStoryboard( GuiUser * poFriend )
-{
-	viewWebServerPage( poFriend, "story_board.htm" );
-}
-
-//============================================================================
-void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName )
-{
-    if( user )
-    {
-        VxNetIdent& netIdent = user->getNetIdent();
-        std::string uri;
-        std::string myExternIp;
-        if( ( netIdent.getMyOnlineIPv4() == getEngine().getMyPktAnnounce().getMyOnlineIPv4() )
-            && netIdent.getLanIPv4().isValid() )
-        {
-            // is on same sub network as us.. use LAN ip
-            myExternIp = netIdent.getLanIPv4().toStdString();
-        }
-        else
-        {
-            myExternIp = netIdent.getMyOnlineIPv4().toStdString();
-        }
-
-        if( netIdent.getMyOnlineId() == getEngine().getMyPktAnnounce().getMyOnlineId() )
-        {
-            if( getEngine().getMyPktAnnounce().getLanIPv4().isValid() )
-            {
-                myExternIp = getEngine().getMyPktAnnounce().getLanIPv4().toStdString();
-            }
-        }
-
-        // TODO replace with query web page to rich text edit instead of using browser
-        // netIdent.getProfileUri( uri, myExternIp.c_str(), webPageFileName );
-        // getAppGlobals().launchWebBrowser( uri.c_str() );
-    }
-}
-
-//============================================================================
 // view shared files
-void AppCommon::offerToFriendViewSharedFiles( GuiUser * poFriend )
+void AppCommon::offerToFriendViewSharedFiles( GuiUser * poFriend, bool inGroup, QWidget* parent )
 {
 	//AppletPeerViewSharedFiles oDlg( *this, poFriend, this  );
 	//oDlg.exec();
@@ -104,7 +59,7 @@ void AppCommon::offerToFriendViewSharedFiles( GuiUser * poFriend )
 
 //============================================================================
 // offer to send a file
-void AppCommon::offerToFriendSendFile( GuiUser * poFriend )
+void AppCommon::offerToFriendSendFile( GuiUser * poFriend, bool inGroup, QWidget* parent )
 {
 	//ActivitySelectFileToSend * dlg = new ActivitySelectFileToSend( *this, poFriend, this);
 	//dlg->exec();
@@ -116,14 +71,6 @@ void AppCommon::offerToFriendChangeFriendship( GuiUser * poFriend )
 {
 	//AppletPeerChangeFriendship * poDlg = new AppletPeerChangeFriendship( *this, this);
 	//poDlg->setFriend( poFriend );
-	//poDlg->exec();
-}
-
-//============================================================================
-// see if user wants to change his preferred proxy
-void AppCommon::offerToFriendUseAsRelay( GuiUser * poFriend )
-{
-	//AppletPeerRequestRelay * poDlg = new AppletPeerRequestRelay( *this, poFriend, this);
 	//poDlg->exec();
 }
 

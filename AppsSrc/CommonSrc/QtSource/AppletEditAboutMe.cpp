@@ -13,6 +13,7 @@
 //============================================================================
 
 #include "AppletEditAboutMe.h"
+#include "AppletAboutMeClient.h"
 #include "AppletMgr.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -39,7 +40,10 @@ AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
     setAppletType( eAppletEditAboutMe );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-    ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeAboutMePageServer );
+    ui.m_ViewAboutMePageButton->setFixedSize( eButtonSizeMedium );
+    ui.m_ViewAboutMePageButton->setIcon( getMyIcons().getPluginIcon( ePluginTypeAboutMePageServer ) );
+    ui.m_PermissionWidget->setPluginType( ePluginTypeAboutMePageServer );
+    ui.m_PermissionWidget->getPluginSettingsButton()->setVisible( false );
  
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
@@ -84,6 +88,7 @@ AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
     connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( onBrowseButClick() ) );
     connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapshotButClick() ) );
     connect( ui.m_ApplyAboutMeButton, SIGNAL( clicked() ), this, SLOT( onApplyAboutMeButClick() ) );
+    connect( ui.m_ViewAboutMePageButton, SIGNAL( clicked() ), this, SLOT( slotViewAboutMeButClick() ) );
 
     m_CameraSourceAvail = m_MyApp.getCamLogic().isCamAvailable();
 
@@ -173,9 +178,7 @@ void AppletEditAboutMe::slotImageSnapshot( QImage snapshotImage )
 //! Implement the OnClickListener callback    
 void AppletEditAboutMe::onApplyAboutMeButClick( void )
 {
-    VxFileUtil::makeDirectory( m_strUserSepecificDataDir.c_str() );
-    std::string strUserProfileDir = m_strUserSepecificDataDir + "profile/";
-    VxFileUtil::makeDirectory( strUserProfileDir.c_str() );
+    std::string strUserProfileDir = VxGetAppDirectory( eAppDirAboutMePageServer );
 
     saveContentToDb();
 
@@ -268,4 +271,15 @@ void AppletEditAboutMe::saveContentToDb( void )
     m_UserProfile.m_strUrl3 = ui.m_FavoriteWebsite3Edit->text();
     m_UserProfile.m_strDonation = ui.m_DonationEdit->toPlainText();
     m_MyApp.getAccountMgr().updateUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
+}
+
+//============================================================================
+//! load user profile data from database
+void AppletEditAboutMe::slotViewAboutMeButClick( void )
+{
+    AppletAboutMeClient* applet = dynamic_cast<AppletAboutMeClient*>(m_MyApp.launchApplet( eAppletAboutMeClient, getParentPageFrame() ));
+    if( applet )
+    {
+        applet->setIdentity( m_MyApp.getUserMgr().getMyIdent() );
+    }
 }
