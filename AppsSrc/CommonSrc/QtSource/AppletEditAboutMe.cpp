@@ -190,16 +190,16 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
         if( !bitmap.isNull())
         {
             QString picPath = strUserProfileDir.c_str();
-            picPath += "me.jpg";
-            bool isOk = bitmap.save( picPath, "JPG" );
+            picPath += "me.png";
+            bool isOk = bitmap.save( picPath, "PNG" );
 #else
         // save image to web page
         const QPixmap* bitmap = ui.m_PictureOfMeFrame->pixmap();
         if (bitmap)
         {
             QString picPath = strUserProfileDir.c_str();
-            picPath += "me.jpg";
-            bool isOk = bitmap->save(picPath, "JPG");
+            picPath += "me.png";
+            bool isOk = bitmap->save(picPath, "PNG");
 #endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 
             if( !isOk )

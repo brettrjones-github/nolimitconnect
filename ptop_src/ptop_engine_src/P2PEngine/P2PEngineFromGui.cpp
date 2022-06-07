@@ -56,7 +56,7 @@ void P2PEngine::assureUserSpecificDirIsSet( const char * checkReason )
 {
 	if( false == m_IsUserSpecificDirSet )
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::assureUserSpecificDirIsSet %s\n", checkReason );
+		LogMsg( LOG_ERROR, "P2PEngine::assureUserSpecificDirIsSet %s", checkReason );
 		vx_assert( false );
 	}
 }
@@ -436,7 +436,7 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& ass
 		bool result = m_AssetMgr.addAsset( assetInfo, createdAssetInfo );
         if( false == result )
         {
-            LogMsg( LOG_ERROR, "PEngine::fromGuiAssetAction failed to add asset\n" );
+            LogMsg( LOG_ERROR, "PEngine::fromGuiAssetAction failed to add asset" );
         }
 
 		if( createdAssetInfo )
@@ -483,7 +483,7 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, i
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiAssetAction" );
 	if( eAssetActionAddToAssetMgr == assetAction )
 	{
-		LogMsg( LOG_ERROR, "fromGuiAssetAction Insufficient asset info to add asset\n" );
+		LogMsg( LOG_ERROR, "fromGuiAssetAction Insufficient asset info to add asset" );
 		return false;
 	}
 
@@ -567,7 +567,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
     }
     else
     {
-        LogMsg( LOG_ERROR, "P2PEngine::fromGuiPlayLocalMedia INVALID PARAM\n" );
+        LogMsg( LOG_ERROR, "P2PEngine::fromGuiPlayLocalMedia INVALID PARAM" );
         result = false;
     }
 
@@ -599,11 +599,11 @@ void P2PEngine::fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// direct
 
 	std::string strAbout		= "";
 	std::string strPicLabel		= "<h3><p align=\"center\">My Picture</p></h3>";
-	std::string strPicture		= "<p align=\"center\"><IMG SRC = \"me.jpg\" width=\"320\" height=\"240\"><br></p>";
+	std::string strPicture		= "<p align=\"center\"><IMG SRC = \"me.png\" width=\"320\" height=\"240\"><br></p>";
 	std::string strFavWebsites	= "</h2><p align=\"center\"><font color=\"#007F00\">My Favorite Web Sites</font><br></p></h2>";
-	std::string strUrl1			= url1 ? url1 : "";
-	std::string strUrl2			= url2 ? url2 : "";
-	std::string strUrl3			= url3 ? url3 : "";
+	std::string strUrl1			= "";
+	std::string strUrl2			= "";
+	std::string strUrl3			= "";
     std::string strDonationInfo = "</h2><p align=\"center\"><font color=\"#007F00\">Donation Information</font><br></p></h2>";
     std::string strDonation = "";
 
@@ -729,7 +729,7 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiMakePluginOffer invalid plugin\n" );
+			LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiMakePluginOffer invalid plugin" );
 			return false;
 		}
 	}
@@ -737,7 +737,7 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 	{
 		std::string onlineId;
 		oOnlineId.toHexString(onlineId);
-		LogMsg(LOG_ERROR, "P2PEngine::fromGuiMakePluginOffer: poInfo not found VxGUID %s\n", onlineId.c_str());
+		LogMsg(LOG_ERROR, "P2PEngine::fromGuiMakePluginOffer: poInfo not found VxGUID %s", onlineId.c_str());
 	}
 
 	return false;
@@ -766,7 +766,7 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiToPluginOfferReply invalid plugin or info\n" );
+		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiToPluginOfferReply invalid plugin or info" );
 		return false;
 	}
 }
@@ -776,9 +776,9 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 										VxGUID&			oOnlineId, 
 										const char *	pControl, 
 										const char *	pAction,
-										uint32_t				u32ActionData,
+										uint32_t		u32ActionData,
 										VxGUID&			lclSessionId,
-										uint8_t *			fileHashId )
+										uint8_t *		fileHashId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiPluginControl" );
 	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
@@ -789,7 +789,7 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiPluginControl invalid plugin\n" );
+		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiPluginControl invalid plugin" );
 		return 0;
 	}
 }
@@ -992,7 +992,7 @@ bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId,
 			poInfo->setMyFriendshipToHim( eMyFriendshipToHim );
 			m_BigListMgr.updateVectorList( eOldFriendship, poInfo );
 			m_BigListMgr.updateBigListDatabase( poInfo, getNetworkMgr().getNetworkKey() );
-			LogMsg(LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: SUCCESS changed %s friendship to %s\n", 
+			LogMsg(LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: SUCCESS changed %s friendship to %s", 
 				poInfo->getOnlineName(),
 				poInfo->describeMyFriendshipToHim());
 			m_ConnectionList.fromGuiChangeMyFriendshipToHim( onlineId,
@@ -1002,9 +1002,7 @@ bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId,
 		}
 		else
 		{
-			LogMsg(LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: FAILED find friend 0x%llX 0x%llX\n",
-				onlineId.getVxGUIDHiPart(),
-				onlineId.getVxGUIDLoPart() );
+			LogMsg( LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: FAILED find friend %s", onlineId.toOnlineIdString().c_str() );
 		}
 	}
 
@@ -1196,7 +1194,7 @@ bool P2PEngine::fromGuiSetGameValueVar(	EPluginType	ePluginType,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::fromGuiSetGameValueVar: could not locate idenitiy\n");
+		LogMsg( LOG_ERROR, "P2PEngine::fromGuiSetGameValueVar: could not locate idenitiy");
 	}
 
 	return false;
@@ -1217,7 +1215,7 @@ bool P2PEngine::fromGuiSetGameActionVar(	EPluginType	ePluginType,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::fromGuiSetGameActionVar: could not locate idenitiy\n");
+		LogMsg( LOG_ERROR, "P2PEngine::fromGuiSetGameActionVar: could not locate idenitiy");
 	}
 
 	return false;
@@ -1265,7 +1263,7 @@ bool P2PEngine::fromGuiTestCmd(	ETestParam1		eTestParam1,
 		break;
 
 	default:
-		LogMsg( LOG_INFO, "Unknown eTestParam1 %d\n", eTestParam1 );
+		LogMsg( LOG_INFO, "Unknown eTestParam1 %d", eTestParam1 );
 	}
 
 	return result;
