@@ -20,43 +20,8 @@
 #include "AppGlobals.h"
 
 #include "ActivityPermissions.h"
-#include "ActivityStoryBoard.h"
 
 #include <CoreLib/VxGlobals.h>
-
-/*
-//============================================================================
-void AppCommon::slotServerButtonClick( void )
-{
-	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 1\n" );
-	PopupMenu popupMenu( *this, this );
-	popupMenu.setTitle( "Servers");
-
-	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 2\n" );
-	switch( getEngine().fromGuiGetPluginServerState( ePluginTypeCamServer ) )
-	{
-	case ePluginServerStateDisabled:	
-		popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconWebCamServerDisabled), tr( "Web Cam Server Disabled" ) );
-		break;
-	case ePluginServerStateStarted:	
-		popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconWebCamServer), tr( "Stop Web Cam Server" ) );
-		break;
-	case ePluginServerStateStopped:	
-		popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconWebCamServer), tr( "Start Web Cam Server" ) );
-		break;
-    default:
-        break;
-	}
-
-	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconProfile ), "View My Profile" );
-	popupMenu.addMenuItem( 3, getMyIcons().getIcon( eMyIconStoryBoardNormal ), "View My Story Board" );
-
-	connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onMenuServerSelected(int, PopupMenu *, ActivityBase * )));
-	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 4\n" );
-	popupMenu.exec();
-	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 5\n" );
-}
-*/
 
 //============================================================================
 void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
@@ -87,20 +52,6 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 		}
 
 		break;
-
-		/*
-	case 2: // view my profile
-		{
-			viewWebServerPage( m_UserMgr.getMyIdent(), "index.htm" );
-			break;
-		}
-
-	case 3: // view my storyboard
-		{
-			viewWebServerPage( m_UserMgr.getMyIdent(), "story_board.htm" );
-			break;
-		}
-		*/
 
 	default: 
 		LogMsg( LOG_ERROR, "onMenuServerSelected: ERROR unknown menu id %d", iMenuId );

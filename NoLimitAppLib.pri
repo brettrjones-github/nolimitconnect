@@ -55,7 +55,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivitySessionOptions.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityShowHelp.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivitySoundOptions.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ActivityStoryBoard.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityTimedMessage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityViewLibraryFiles.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityViewMySharedFiles.h \
@@ -417,7 +416,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivitySessionOptions.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityShowHelp.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivitySoundOptions.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/ActivityStoryBoard.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityTimedMessage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityViewLibraryFiles.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ActivityViewMySharedFiles.cpp \
@@ -769,7 +767,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivitySessionOptions.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityShowHelp.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivitySoundOptions.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/ActivityStoryBoard.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityTimedMessage.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityVideoOptions.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityViewLibraryFiles.ui \

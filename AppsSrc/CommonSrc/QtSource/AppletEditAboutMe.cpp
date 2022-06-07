@@ -274,7 +274,6 @@ void AppletEditAboutMe::saveContentToDb( void )
 }
 
 //============================================================================
-//! load user profile data from database
 void AppletEditAboutMe::slotViewAboutMeButClick( void )
 {
     AppletAboutMeClient* applet = dynamic_cast<AppletAboutMeClient*>(m_MyApp.launchApplet( eAppletAboutMeClient, getParentPageFrame() ));

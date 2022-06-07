@@ -26,7 +26,8 @@ public:
 	virtual ~AppletEditStoryboard() = default;
 
 private slots:
-    void						slotStoryBoardSavedModified();
+    void						slotStoryBoardSavedModified( void );
+    void						slotViewStoryboardButClick( void );
 
 protected:
     //=== vars ===//

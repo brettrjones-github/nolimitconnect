@@ -143,7 +143,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivitySessionOptions.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityShowHelp.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivitySoundOptions.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityStoryBoard.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityTimedMessage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewMySharedFiles.cpp" />
@@ -822,7 +821,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewMySharedFiles.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityTimedMessage.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityStoryBoard.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivitySoundOptions.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityShowHelp.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivitySessionOptions.h" />
@@ -875,7 +873,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivitySessionOptions.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityShowHelp.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivitySoundOptions.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\ActivityStoryBoard.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityTimedMessage.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityVideoOptions.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewLibraryFiles.ui" />
