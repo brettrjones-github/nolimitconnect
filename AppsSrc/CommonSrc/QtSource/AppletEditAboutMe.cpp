@@ -50,9 +50,9 @@ AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
     m_strOrigMoodMessage = m_MyIdent->getOnlineDescription();
 
     m_strUserSepecificDataDir = VxGetUserSpecificDataDirectory();
-    m_strDefaultPicPath = m_strUserSepecificDataDir + "profile/";
+    m_strDefaultPicPath = VxGetAppDirectory( eAppDirAboutMePageServer );
     VxFileUtil::makeDirectory( m_strDefaultPicPath.c_str() );
-    m_strDefaultPicPath += "me.jpg";
+    m_strDefaultPicPath += "me.png";
     uint32_t u32FileLen = VxFileUtil::getFileLen( m_strDefaultPicPath.c_str() );
     if( u32FileLen > 0 )
     {

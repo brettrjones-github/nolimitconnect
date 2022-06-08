@@ -72,7 +72,7 @@ void AppletEditStoryboard::slotStoryBoardSavedModified( void )
 //============================================================================
 void AppletEditStoryboard::slotViewStoryboardButClick( void )
 {
-    AppletStoryboardClient* applet = dynamic_cast<AppletStoryboardClient*>(m_MyApp.launchApplet( eAppletAboutMeClient, getParentPageFrame() ));
+    AppletStoryboardClient* applet = dynamic_cast<AppletStoryboardClient*>(m_MyApp.launchApplet( eAppletStoryboardClient, getParentPageFrame() ));
     if( applet )
     {
         applet->setIdentity( m_MyApp.getUserMgr().getMyIdent() );
