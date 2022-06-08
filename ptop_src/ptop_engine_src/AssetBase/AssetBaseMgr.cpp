@@ -555,6 +555,7 @@ void AssetBaseMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 		client->callbackAssetAdded( assetInfo );
 	}
 
+	m_Engine.getToGui().toGuiAssetAdded( assetInfo );
 	unlockClientList();
 	// LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetAdded done" );
 }
@@ -571,6 +572,7 @@ void AssetBaseMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
         client->callbackAssetAdded( assetInfo );
     }
 
+	m_Engine.getToGui().toGuiAssetUpdated( assetInfo );
     unlockClientList();
     // LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetUpdated done" );
 }
@@ -592,13 +594,14 @@ void AssetBaseMgr::announceAssetRemoved( AssetBaseInfo * assetInfo )
 		client->callbackAssetRemoved( assetInfo );
 	}
 
+	m_Engine.getToGui().toGuiAssetRemoved( assetInfo );
 	unlockClientList();
 }
 
 //============================================================================
 void AssetBaseMgr::announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param )
 {
-	LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetXferState state %d start\n", assetSendState );
+	LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetXferState state %d start", assetSendState );
 	lockClientList();
 	std::vector<AssetBaseCallbackInterface *>::iterator iter;
 	for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
@@ -607,8 +610,9 @@ void AssetBaseMgr::announceAssetXferState( VxGUID& assetUniqueId, EAssetSendStat
 		client->callbackAssetSendState( assetUniqueId, assetSendState, param );
 	}
 
+	m_Engine.getToGui().toGuiAssetXferState( assetUniqueId, assetSendState, param );
 	unlockClientList();
-	LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetXferState state %d done\n", assetSendState );
+	LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetXferState state %d done", assetSendState );
 }
 
 //============================================================================
@@ -978,7 +982,6 @@ void AssetBaseMgr::queryHistoryAssets( VxGUID& historyId )
 		if( assetInfo->getHistoryId() == historyId )
 		{
             onQueryHistoryAsset( assetInfo );
-			// BRJ IToGui::getToGui().toGuiAssetSessionHistory( assetInfo );
 		}
 	}
 
@@ -1114,6 +1117,11 @@ void AssetBaseMgr::addAssetMgrClient( AssetBaseCallbackInterface * client, bool 
     }
 }
 
+//============================================================================
+void AssetBaseMgr::onQueryHistoryAsset( AssetBaseInfo* assetInfo )
+{
+	m_Engine.getToGui().toGuiAssetSessionHistory( assetInfo );
+}
 
 /*
 //============================================================================

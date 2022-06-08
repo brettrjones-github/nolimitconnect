@@ -66,6 +66,9 @@
     <Filter Include="Source Files\GuiConnectId">
       <UniqueIdentifier>{10d7bfbc-85f1-4fdd-b2c2-200c099d8913}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\InputWidgets">
+      <UniqueIdentifier>{3c437382-3e3c-4d3a-a82e-10b168684117}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -1378,12 +1381,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HelpBrowser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HomeWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1403,30 +1400,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InformationWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputAllWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputBaseWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputFaceWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputPhotoWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputTextWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVideoWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVoiceWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\InstMsgWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\LogMgr.cpp">
@@ -1992,6 +1965,36 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputAllWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputBaseWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputFaceWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputPhotoWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputTextWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVideoWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVoiceWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\InstMsgWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp">
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

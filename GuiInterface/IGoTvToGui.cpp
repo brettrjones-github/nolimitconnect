@@ -562,16 +562,34 @@ void IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
 //============================================================================
 void IGoTv::toGuiAssetAdded( AssetBaseInfo * assetInfo )
 {
-    LogModule( eLogAssets, LOG_DEBUG, "IGoTv::toGuiAssetAdded" );
+    LogModule( eLogAssets, LOG_VERBOSE, "IGoTv::toGuiAssetAdded" );
     getAppCommon().toGuiAssetAdded( assetInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiAssetUpdated( AssetBaseInfo* assetInfo )
+{
+    LogModule( eLogAssets, LOG_VERBOSE, "IGoTv::toGuiAssetUpdated" );
+    getAppCommon().toGuiAssetUpdated( assetInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiAssetRemoved( AssetBaseInfo* assetInfo )
+{
+    LogModule( eLogAssets, LOG_VERBOSE, "IGoTv::toGuiAssetRemoved" );
+    getAppCommon().toGuiAssetRemoved( assetInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param )
+{
+    getAppCommon().toGuiAssetXferState( assetUniqueId, assetSendState, param );
 }
 
 //============================================================================
 void IGoTv::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
-    getAppCommon().toGuiAssetAction( assetAction,
-                          assetId,
-                          pos0to100000 );
+    getAppCommon().toGuiAssetAction( assetAction, assetId, pos0to100000 );
 }
 
 //============================================================================

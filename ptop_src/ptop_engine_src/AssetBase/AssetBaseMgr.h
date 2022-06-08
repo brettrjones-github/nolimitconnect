@@ -74,7 +74,7 @@ public:
     virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo );
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param );
 
-    virtual void                onQueryHistoryAsset( AssetBaseInfo* assetInfo ) {}; // should be overriden
+    virtual void                onQueryHistoryAsset( AssetBaseInfo* assetInfo ); // should be overriden
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }

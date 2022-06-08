@@ -585,8 +585,13 @@ public:
                                                                 const char *	pFileName,
                                                                 VxGUID			assetId ) override;
 	//=== to gui asset ===//
-    virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;
-    virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) override;
+    virtual void				toGuiAssetAdded( AssetBaseInfo* assetInfo ) override;
+    virtual void				toGuiAssetUpdated( AssetBaseInfo* assetInfo ) override;
+    virtual void				toGuiAssetRemoved( AssetBaseInfo* assetInfo ) override;
+
+    virtual void				toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) override;
+
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo* assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
@@ -687,6 +692,11 @@ signals:
     void                        signalInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
 
     void				        signalInternalToGuiAssetAdded( AssetBaseInfo assetInfo );
+    void				        signalInternalToGuiAssetUpdated( AssetBaseInfo assetInfo );
+    void				        signalInternalToGuiAssetRemoved( AssetBaseInfo assetInfo );
+
+    void				        signalInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param );
+
     void				        signalInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo );
     void				        signalInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
 
@@ -735,6 +745,11 @@ private slots:
     void                        slotInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
 
     void				        slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo );
+    void				        slotInternalToGuiAssetUpdated( AssetBaseInfo assetInfo );
+    void				        slotInternalToGuiAssetRemoved( AssetBaseInfo assetInfo );
+
+    void				        slotInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param );
+
     void				        slotInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo );
     void				        slotInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
 

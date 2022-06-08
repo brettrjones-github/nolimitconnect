@@ -75,11 +75,16 @@ public:
                                                                 VxGUID          assetId ){};
 	virtual void				toGuiClientScanSearchComplete( EScanType eScanType ){};
 
-	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
-    virtual void				toGuiAssetSessionHistory( AssetBaseInfo& assetInfo ){};
-    virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ){};
+    virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ) {};
+    virtual void				toGuiAssetUpdated( AssetBaseInfo& assetInfo ) {};
+    virtual void				toGuiAssetRemoved( AssetBaseInfo& assetInfo ) {};
 
+    virtual void				toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) {};
+
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo& assetInfo ) {};
+	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
 	virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ){};
+
 	virtual void				toGuiSetGameValueVar( EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};
 	virtual void				toGuiSetGameActionVar( EPluginType ePluginType, VxGUID& onlineId, int32_t actionId, int32_t varValue ){};
 

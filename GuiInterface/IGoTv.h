@@ -427,8 +427,14 @@ public:
                                                uint8_t *	fileHashId = 0 ) override;
 
     virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;
+    virtual void				toGuiAssetUpdated( AssetBaseInfo* assetInfo ) override;
+    virtual void				toGuiAssetRemoved( AssetBaseInfo* assetInfo ) override;
+
+    virtual void				toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) override;
+
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) override;
+
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
     virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) override;

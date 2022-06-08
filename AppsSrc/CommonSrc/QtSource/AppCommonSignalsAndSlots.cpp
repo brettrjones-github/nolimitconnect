@@ -11,7 +11,9 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<EAppErr>( "EAppErr" );
 	qRegisterMetaType<EApplet>( "EApplet" );
 	qRegisterMetaType<EAssetAction>( "EAssetAction" );
+	qRegisterMetaType<EAssetSendState>( "EAssetSendState" );
 	qRegisterMetaType<EAssetType>( "EAssetType" );
+
 	qRegisterMetaType<EConnectReason>( "EConnectReason" );
 	qRegisterMetaType<EConnectStatus>( "EConnectStatus" );
 	qRegisterMetaType<EContentCatagory>( "EContentCatagory" );
@@ -96,6 +98,11 @@ void AppCommon::connectSignals( void )
     connect( this, SIGNAL( signalInternalToGuiSetGameActionVar(EPluginType,VxGUID,int32_t,int32_t) ), this, SLOT( slotInternalToGuiSetGameActionVar(EPluginType,VxGUID,int32_t,int32_t) ), Qt::QueuedConnection );
 
     connect( this, SIGNAL( signalInternalToGuiAssetAdded(AssetBaseInfo) ), this, SLOT( slotInternalToGuiAssetAdded(AssetBaseInfo) ), Qt::QueuedConnection );
+	connect( this, SIGNAL( signalInternalToGuiAssetUpdated(AssetBaseInfo) ), this, SLOT( slotInternalToGuiAssetUpdated(AssetBaseInfo) ), Qt::QueuedConnection );
+	connect( this, SIGNAL( signalInternalToGuiAssetRemoved(AssetBaseInfo) ), this, SLOT( slotInternalToGuiAssetRemoved(AssetBaseInfo) ), Qt::QueuedConnection );
+
+	connect( this, SIGNAL( signalInternalToGuiAssetXferState(VxGUID,EAssetSendState,int) ), this, SLOT( slotInternalToGuiAssetXferState(VxGUID,EAssetSendState,int) ), Qt::QueuedConnection );
+
     connect( this, SIGNAL( signalInternalToGuiAssetSessionHistory(AssetBaseInfo) ), this, SLOT( slotInternalToGuiAssetSessionHistory(AssetBaseInfo) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalToGuiAssetAction(EAssetAction,VxGUID,int) ), this, SLOT( slotInternalToGuiAssetAction(EAssetAction,VxGUID,int) ), Qt::QueuedConnection );
 

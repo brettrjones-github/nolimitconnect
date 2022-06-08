@@ -98,7 +98,7 @@ bool MySndMgr::sndMgrStartup( void )
     for( int i = 0; i < eMaxSndDef; i++ )
     {
         VxSndInstance * sndInstance = new VxSndInstance( (ESndDef)i, this );
-        connect( sndInstance, SIGNAL(sndFinished(VxSndInstance *)), this, SLOT(slotSndFinished(VxSndInstance *)) );
+        connect( sndInstance, SIGNAL(sndFinished(VxSndInstance*)), this, SLOT(slotSndFinished(VxSndInstance*)) );
         m_SndList.push_back( sndInstance );
     }
 

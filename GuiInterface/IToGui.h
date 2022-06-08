@@ -198,10 +198,15 @@ public:
 	/// File transfer progress and/or state
 	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) = 0;
 
-	/// Video file or audio file or emote icon or text message asset info in result of request to get Text Chat session assets
-    virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) = 0;
 	/// Video file or audio file or emote icon or text message has been added to Text Chat session
     virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) = 0;
+	virtual void				toGuiAssetUpdated( AssetBaseInfo* assetInfo ) = 0;
+	virtual void				toGuiAssetRemoved( AssetBaseInfo* assetInfo ) = 0;
+
+	virtual void				toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) = 0;
+
+	/// Video file or audio file or emote icon or text message asset info in result of request to get Text Chat session assets
+	virtual void				toGuiAssetSessionHistory( AssetBaseInfo* assetInfo ) = 0;
 	/// Asset state has changed ( like transfer has failed )
 	virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
 	/// Text Chat session action like video chat session requested

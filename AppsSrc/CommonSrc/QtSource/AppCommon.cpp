@@ -1436,7 +1436,7 @@ void AppCommon::toGuiAssetAdded( AssetBaseInfo* assetInfo )
 		return;
 	}
 
-	emit slotInternalToGuiAssetAdded( *assetInfo );
+	emit signalInternalToGuiAssetAdded( *assetInfo );
 }
 
 //============================================================================
@@ -1450,6 +1450,69 @@ void AppCommon::slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo )
 }
 
 //============================================================================
+void AppCommon::toGuiAssetUpdated( AssetBaseInfo* assetInfo )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalInternalToGuiAssetUpdated( *assetInfo );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiAssetUpdated( AssetBaseInfo assetInfo )
+{
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiAssetUpdated( assetInfo );
+	}
+}
+
+//============================================================================
+void AppCommon::toGuiAssetRemoved( AssetBaseInfo* assetInfo )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit slotInternalToGuiAssetRemoved( *assetInfo );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiAssetRemoved( AssetBaseInfo assetInfo )
+{
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiAssetRemoved( assetInfo );
+	}
+}
+
+//============================================================================
+void AppCommon::toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit slotInternalToGuiAssetXferState( assetUniqueId, assetSendState, param );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param )
+{
+	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	{
+		ToGuiActivityInterface* client = *iter;
+		client->toGuiAssetXferState( assetUniqueId, assetSendState, param );
+	}
+}
+
+//============================================================================
 void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 {
 	if( VxIsAppShuttingDown() )
@@ -1457,7 +1520,7 @@ void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 		return;
 	}
 
-	emit slotInternalToGuiAssetSessionHistory( *assetInfo );
+	emit signalInternalToGuiAssetSessionHistory( *assetInfo );
 }
 
 //============================================================================
