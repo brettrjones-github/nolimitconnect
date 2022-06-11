@@ -534,7 +534,7 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char* ip )
 	if( 0 == m_iActiveListenSktCnt ) 
 	{
 		LogMsg( LOG_ERROR, "### ERROR: VxServerMgr::startListening unable to serve on any address thread 0x%x", VxGetCurrentThreadId());
-		return -1;
+        return false;
 	}
 
 	return internalStartListen();
@@ -1063,7 +1063,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 #if defined(TARGET_OS_WINDOWS)
             if( rc == WSAEWOULDBLOCK )
             {
-                rc == EAGAIN;
+                rc = EAGAIN;
             }
 #endif // defined(TARGET_OS_WINDOWS)
 		}

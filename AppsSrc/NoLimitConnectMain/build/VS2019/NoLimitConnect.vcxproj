@@ -14,7 +14,7 @@
     <ProjectGuid>{14347A1B-2425-4619-9F37-4B5EBB4476BE}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -37,7 +37,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;opengl;svg;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -60,6 +60,8 @@
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutDir>$(ProjectDir)..\..\..\..\bin-Windows\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -77,10 +79,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>CONSOLE;WIN64;NDEBUG;TARGET_OS_WINDOWS;LIB_STATIC;QT_MULTIMEDIAWIDGETS_LIB;$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CONSOLE;WIN64;NDEBUG;TARGET_OS_WINDOWS;LIB_STATIC;$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\CommonSrc\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.codec;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libptopengine.lib;glu32.lib;opengl32.lib;libpthread.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libkodi.lib;libopenmpt-full.lib;libnfs.lib;Vfw32.lib;Upnp2Lib.lib;VxVideoLib.lib;libcurl.lib;libexpat.lib;libcdio.lib;libzip.lib;libopencore-amr.lib;libcelt.lib;libfaac.lib;libxavs.lib;Secur32.lib;librtmp.lib;libbento4.lib;CoreLib.lib;FfmpegAvCodecLib.lib;FfmpegAvDeviceLib.lib;FfmpegAvFilterLib.lib;FfmpegAvFormatLib.lib;FfmpegAvResampleLib.lib;FfmpegAvUtilLib.lib;FfmpegPostProcLib.lib;FfmpegSwResampleLib.lib;FfmpegSwScaleLib.lib;glew64s.lib;libarmrwbenc.lib;libasprintf.lib;libass.lib;libbzip2.lib;libcpluff.lib;libcroco.lib;libcrossguid.lib;libcrystalhd.lib;libdnssd.lib;libexif.lib;libflac.lib;libfreetype.lib;libfribidi.lib;libgnu.lib;libgsm.lib;libiconv.lib;libilbc.lib;libjpg.lib;liblame.lib;liblzma.lib;liblzo.lib;libmicrohttpd.lib;libogg.lib;libopenjpeg.lib;libopus.lib;libp8-platform.lib;libpcre.lib;libpng.lib;python27.lib;libshairplay.lib;libshine.lib;libsnappy.lib;libspeex.lib;libssh.lib;libssl.lib;libtag.lib;libtheora.lib;libtinyxml.lib;libtwolame.lib;libUPnP.lib;libvorbis.lib;libvpx.lib;libwavepack.lib;libwebp.lib;libwelsdec.lib;libx264.lib;libx265.lib;libxml2.lib;libxslt.lib;libxvid.lib;libyajl.lib;libzlib.lib;libzvbi.lib;MediaToolsLib.lib;NetLib.lib;PktLib.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libptopengine.lib;glu32.lib;opengl32.lib;libpthread.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libopenmpt-full.lib;libnfs.lib;Vfw32.lib;Upnp2Lib.lib;VxVideoLib.lib;libcurl.lib;libexpat.lib;libcdio.lib;libzip.lib;libopencore-amr.lib;libcelt.lib;libfaac.lib;libxavs.lib;Secur32.lib;librtmp.lib;libbento4.lib;CoreLib.lib;FfmpegAvCodecLib.lib;FfmpegAvDeviceLib.lib;FfmpegAvFilterLib.lib;FfmpegAvFormatLib.lib;FfmpegAvResampleLib.lib;FfmpegAvUtilLib.lib;FfmpegPostProcLib.lib;FfmpegSwResampleLib.lib;FfmpegSwScaleLib.lib;glew64s.lib;libarmrwbenc.lib;libasprintf.lib;libass.lib;libbzip2.lib;libcpluff.lib;libcroco.lib;libcrossguid.lib;libcrystalhd.lib;libdnssd.lib;libexif.lib;libflac.lib;libfreetype.lib;libfribidi.lib;libgnu.lib;libgsm.lib;libiconv.lib;libilbc.lib;libjpg.lib;liblame.lib;liblzma.lib;liblzo.lib;libmicrohttpd.lib;libogg.lib;libopenjpeg.lib;libopus.lib;libp8-platform.lib;libpcre.lib;libpng.lib;libshairplay.lib;libshine.lib;libsnappy.lib;libspeex.lib;libssh.lib;libssl.lib;libtag.lib;libtheora.lib;libtinyxml.lib;libtwolame.lib;libUPnP.lib;libvorbis.lib;libvpx.lib;libwavepack.lib;libwebp.lib;libwelsdec.lib;libx264.lib;libx265.lib;libxml2.lib;libxslt.lib;libxvid.lib;libyajl.lib;libzlib.lib;libzvbi.lib;MediaToolsLib.lib;NetLib.lib;PktLib.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\;$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">

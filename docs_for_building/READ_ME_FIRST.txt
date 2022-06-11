@@ -15,26 +15,24 @@ As a test of your build enviroment
 	2.) Build and run to confirm a working build enviroment
 
 
-NOTE: Only Visual Studio 2017 is supported and the compiler install is required if building a windows version of NoLimitConnect
+NOTE: Only Visual Studio 2019 is supported and the compiler install is required if building a windows version of NoLimitConnect
 If building with Visual Studio then
-	1.) Open $(SRC_ROOT)/build/VS2017/GoTvPython.sln
+	1.) Open $(SRC_ROOT)/build/VS2017/NoLimitConnectAll.sln
 	2.) Rebuild All
-	3.) Open $(SRC_ROOT)/build/VS2015/GoTvAll.sln
-	4.) Rebuild All
 	
-If building with Qt
-	2.) Open GoTvAll.pro with Qt creator
+If building with Qt for Andorid
+	1.) Repeat the following steps for BuildNlc1_NlcDependLibs.pro, BuildNlc2_NlcCore.pro and BuildNlc3_NlcAppOnly.pro
+	2.) Open BuildXXX.pro with Qt creator
 	3.) Click Projects and configure your kit(s)
 	4.) You can uncheck Build Steps->Enable QML debugging and profiling.. there is no qml files used in project
-	5.) In Build Enviroment make sure ANDROID_NDK_PLATFORM is set to android-21 .. NOT android-16 or you will get link errors
-    6.) Could not get Qt to exclude the windows only subdirs
-        so if building for windows you will have to uncomment them at the bottom of
-        GoTvPythonLib.pro
-    7.) build GoTvAll
-    NOTE: python tcl and bsddb does not currently build and so is commented out
+	5.) For BuildNlc1_NlcDependLibs.pro, BuildNlc2_NlcCore.pro which are static libraries you can disable Build Android APK step to avoid
+		the apk build failed error (The error does not cause it to not build but is annoying)
+	6.) Build
 
+If building with Qt for Linux
+	1.) Open and build BuildNlc1_NlcDependLibs.pro, BuildNlc2_NlcCore.pro and BuildNlc3_NlcAppOnly.pro
 		
-It will take a long time so be patient
+Builds may take a long time so be patient
 
 on windows if you get error "make (e=87): The parameter is incorrect"
 then the command line limit of 32k is exceeded

@@ -252,10 +252,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs_for_building", "docs_f
 		..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt = ..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt
 		..\..\docs_for_building\NoLimitConnect_Terminology.txt = ..\..\docs_for_building\NoLimitConnect_Terminology.txt
 		..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt = ..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt
-		..\..\docs_for_building\PureVPN_Setup_For_NoLimitConnect.txt = ..\..\docs_for_building\PureVPN_Setup_For_NoLimitConnect.txt
 		..\..\docs_for_building\READ_ME_FIRST.txt = ..\..\docs_for_building\READ_ME_FIRST.txt
 		..\..\docs_for_building\SetupCLionToDebugKodi.txt = ..\..\docs_for_building\SetupCLionToDebugKodi.txt
 		..\..\docs_for_building\SetupQtForAndroid.txt = ..\..\docs_for_building\SetupQtForAndroid.txt
+		..\..\docs_for_building\VPN_Setup_For_NoLimitConnect.txt = ..\..\docs_for_building\VPN_Setup_For_NoLimitConnect.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libglew", "..\..\DependLibs\libglew\build\VS2019\libglew.vcxproj", "{664E6F0D-6784-4760-9565-D54F8EB1EDF4}"
@@ -1129,7 +1129,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 		Qt5Version = 6.3.0_msvc2019_64
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,9 @@
 //=== VPN Setup For NoLimitConnect ===//
+// If possible use a VPN that supports port forwarding through the VPN for faster and better connectivity
+
 IVPN is a commercial VPN with simple setup and no spam or twitsted promotions. Worked on all my devices.
 https://www.ivpn.net
-Pure VPN is a commercial VPN and worked on all my devices except one. The self promotion spam is annoying.
+Pure VPN is a commercial VPN and worked on all my devices except one. 
 https://www.purevpn.com
 Proton VPN - had port forwarding but seems to have been broken in their latest update
 NordVPN - does NOT have port forwarding.
@@ -9,12 +11,11 @@ ExpressVPN - does NOT have port forwarding except when run as firmware on a rout
 PrivateVPN - has a form of port forwarding but difficult to setup in linux
 
 
-
 //=== Port Forwarding ===//
-For Chat Room and/or Group hosting a open port must be available
+For Chat Room and/or Group hosting and/or Random Connect hosting, a open port must be available.
 Also a open port speeds up communication for users by avoiding the
-need of Chat Room or Group relay services. Relay services also
-require a lot of bandwidth/CPU usage of the hosting group or chat room.
+need of Chat Room or Group or Random Connect relay services. Relay services also
+require bandwidth/CPU usage of the host providing the relay service which may impact its speed and response time.
 
 If you are familiar with routers you might be able to port forwarding
 to your host without a VPN but how to do that differs from router to router.
