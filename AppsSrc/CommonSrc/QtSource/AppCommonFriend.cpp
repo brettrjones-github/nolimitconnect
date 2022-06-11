@@ -60,7 +60,7 @@ void AppCommon::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId 
         return;
     }
 
-    emit slotInternalToGuiIndentListRemove( listType, onlineId );
+    emit signalInternalToGuiIndentListRemove( listType, onlineId );
 }
 
 //============================================================================
@@ -102,9 +102,8 @@ void AppCommon::toGuiContactAdded( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiContactAdded( VxNetIdent netIdent )
 {
     getUserMgr().toGuiContactAdded( &netIdent );
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiContactAdded( &netIdent );
     }
 }
@@ -117,15 +116,14 @@ void AppCommon::toGuiContactRemoved( VxGUID& onlineId )
         return;
     }
 
-    emit slotInternalToGuiContactRemoved( onlineId );
+    emit signalInternalToGuiContactRemoved( onlineId );
 }
 
 //============================================================================
 void AppCommon::slotInternalToGuiContactRemoved( VxGUID onlineId )
 {
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiContactRemoved( onlineId );
     }
 
@@ -156,9 +154,8 @@ void AppCommon::slotInternalToGuiContactOffline( VxGUID onlineId )
     if( user )
     {
         LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOffline user %s", user->getOnlineName().c_str() );
-	    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	    for( auto client : m_ToGuiActivityInterfaceList )
 	    {
-		    ToGuiActivityInterface* client = *iter;
 		    client->toGuiContactOffline( user );
 	    }
     }
@@ -197,9 +194,8 @@ void AppCommon::slotInternalToGuiContactOnline( VxNetIdent netIdent )
 
     LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOnline user %s", netIdent.getOnlineName() );
     getUserMgr().toGuiContactOnline( &netIdent );
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiContactOnline( &netIdent );
     }
 }

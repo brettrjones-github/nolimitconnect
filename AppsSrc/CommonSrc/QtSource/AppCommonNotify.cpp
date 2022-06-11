@@ -91,9 +91,8 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 //============================================================================
 void AppCommon::onToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toToGuiRxedPluginOffer( offerSession );
 	}
 }
@@ -132,9 +131,8 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent,
 //============================================================================
 void AppCommon::onToGuiRxedOfferReply( GuiOfferSession * offerSession )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toToGuiRxedOfferReply( offerSession );
 	}
 }
@@ -187,9 +185,8 @@ void AppCommon::toGuiInstMsg(	VxNetIdent *	netIdent,
 //============================================================================
 void AppCommon::slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiInstMsg( netIdent, ePluginType, pMsg );
 	}
 }

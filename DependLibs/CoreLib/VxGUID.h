@@ -51,21 +51,22 @@ public:
 
 	bool						isVxGUIDValid()	const;
 	std::string					toGUIDStandardFormatedString( void );
-	bool						toHexString( std::string& strRetId );
-    // buffer must be at least 33 characters in length
-    void                        toHexString( char * retBuf );
-	std::string					toHexString( void );
-    //! set VxGUID by converting hex string into VxGUID
-    bool						fromVxGUIDHexString( const char * pHexString );
-    static bool					isVxGUIDHexStringValid( const char * pId );
 
-    bool						toOnlineIdString( std::string& strRetId ) const;
-    // buffer must be at least 36 characters in length
-    void                        toOnlineIdString( char * retBuf ) const;
+	bool						toHexString( std::string& strRetId ) const;
+    void                        toHexString( char * retBuf ) const; // buffer must be at least 33 characters in length
+	std::string					toHexString( void ) const;
+
+    //! set VxGUID by converting hex string into VxGUID
+    bool						fromVxGUIDHexString( const char * hexString );
+    static bool					isVxGUIDHexStringValid( const char * hexString );
+
+    bool						toOnlineIdString( std::string& strRetId ) const;  
+    void                        toOnlineIdString( char * retBuf ) const;  // buffer must be at least 35 characters in length
     std::string					toOnlineIdString( void ) const;
+
     //! set VxGUID by converting online id string into VxGUID
-    bool						fromOnlineIdString( const char * pHexString );
-    static bool					isOnlineIdStringValid( const char * pId );
+    bool						fromOnlineIdString( const char * onlineIdString );
+    static bool					isOnlineIdStringValid( const char * onlineIdString );
 
 	//! get low part of online id
 	uint64_t					getVxGUIDLoPart() const;

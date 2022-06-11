@@ -1415,42 +1415,36 @@ void P2PEngine::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId 
 //============================================================================
 void P2PEngine::fromGuiRunIsPortOpenTest( uint16_t port )
 {
-    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
     m_IsPortOpenTest.fromGuiRunIsPortOpenTest( port );
 }
 
 //============================================================================
 void P2PEngine::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
-    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunUrlAction" );
     getRunUrlAction().runUrlAction( sessionId, testType, ptopUrl, myUrl );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiBrowseFiles" );
 	return getPluginServiceFileShare().fromGuiBrowseFiles(	dir, lookupShareStatus, fileFilterMask );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetSharedFiles" );
 	return getPluginServiceFileShare().fromGuiGetSharedFiles( fileTypeFilter );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetFileIsShared" );
 	return getPluginServiceFileShare().fromGuiSetFileIsShared(	fileName, isShared, fileHashId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetIsFileShared( const char * fileName )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetIsFileShared" );
 	return getPluginServiceFileShare().fromGuiGetIsFileShared(	fileName );
 }
 
@@ -1458,42 +1452,36 @@ bool P2PEngine::fromGuiGetIsFileShared( const char * fileName )
 // returns -1 if unknown else percent downloaded
 int P2PEngine::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetFileDownloadState" );
 	return getPluginServiceFileShare().fromGuiGetFileDownloadState( fileHashId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiAddFileToLibrary" );
 	return getPluginServiceFileShare().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
 }
 
 //============================================================================
 void P2PEngine::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetFileLibraryList" );
 	getPluginServiceFileShare().fromGuiGetFileLibraryList(	fileTypeFilter );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetIsFileInLibrary( const char * fileName )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetIsFileInLibrary" );
 	return getPluginServiceFileShare().fromGuiGetIsFileInLibrary( fileName );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiIsMyP2PWebVideoFile" );
 	return m_MediaProcessor.getMediaTools().fromGuiIsMyP2PWebVideoFile( fileName );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiIsMyP2PWebAudioFile( const char * fileName )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiIsMyP2PWebAudioFile" );
 	return m_MediaProcessor.getMediaTools().fromGuiIsMyP2PWebAudioFile( fileName );
 }
 
@@ -1525,14 +1513,12 @@ int P2PEngine::fromGuiDeleteFile( const char * fileName, bool shredFile )
 //============================================================================
 void P2PEngine::fromGuiQuerySessionHistory( VxGUID& historyId )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiQuerySessionHistory" );
-	m_AssetMgr.queryHistoryAssets( historyId );
+	m_AssetMgr.fromGuiQuerySessionHistory( historyId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSendAsset" );
 	m_PluginMgr.fromGuiSendAsset( assetInfo );
 	return true;
 }
@@ -1540,7 +1526,6 @@ bool P2PEngine::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 //============================================================================
 bool P2PEngine::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiMultiSessionAction" );
 	return m_PluginMgr.fromGuiMultiSessionAction( mSessionAction, onlineId, pos0to100000, lclSessionId );
 }
 

@@ -40,6 +40,7 @@ public:
     QLabel *                    getSessionStatusLabel( void ) { return ui.m_StatusLabel; }
     HistoryListWidget *         getSessionHistoryList( void ) { return ui.m_HistoryList; }
     ChatEntryWidget *           getSessionChatEntry( void ) { return ui.m_ChatEntry; }
+	void						initializeHistory( void ) { getSessionHistoryList()->initializeHistory(); }
 
 signals:
 	void						signalUserInputButtonClicked( void );

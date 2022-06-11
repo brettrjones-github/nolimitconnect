@@ -367,3 +367,24 @@ void AssetBaseInfo::updateAssetInfo( VxThread * callingThread )
 {
 	return;
 }
+
+//============================================================================
+void AssetBaseInfo::print( void ) const
+{
+	LogMsg( LOG_VERBOSE, "*Begin AssetBaseInfo" );
+	LogMsg( LOG_VERBOSE, "m_AssetName=(%s)", m_AssetName.c_str() );
+	LogMsg( LOG_VERBOSE, "m_UniqueId=(%s)", m_UniqueId.toOnlineIdString().c_str() );
+	LogMsg( LOG_VERBOSE, "m_HistoryId=(%s)", m_HistoryId.toOnlineIdString().c_str() );
+	LogMsg( LOG_VERBOSE, "m_AssetHash=(%s)", m_AssetHash.toString().c_str() );
+	LogMsg( LOG_VERBOSE, "m_s64AssetLen=(%lld)", m_s64AssetLen );
+	LogMsg( LOG_VERBOSE, "m_u16AssetType=(%d)", m_u16AssetType );
+	LogMsg( LOG_VERBOSE, "m_AttributeFlags=(0x%4.4X)", m_AttributeFlags );
+	LogMsg( LOG_VERBOSE, "m_AttributeFlags=(0x%8.8X)", m_LocationFlags );
+	LogMsg( LOG_VERBOSE, "m_CreationTime=(%lld)", m_CreationTime );
+	LogMsg( LOG_VERBOSE, "m_AccessedTime=(%lld)", m_AccessedTime );
+	LogMsg( LOG_VERBOSE, "m_ExpiresTime=(%lld)", m_ExpiresTime );
+	LogMsg( LOG_VERBOSE, "m_AssetTag=(%s)", m_AssetTag.c_str() );
+	LogMsg( LOG_VERBOSE, "m_AssetSendState=(%d)", m_AssetSendState );
+	LogMsg( LOG_VERBOSE, "m_PlayPosition0to100000=(%d)", m_PlayPosition0to100000 );
+	LogMsg( LOG_VERBOSE, "*End AssetBaseInfo" );
+}

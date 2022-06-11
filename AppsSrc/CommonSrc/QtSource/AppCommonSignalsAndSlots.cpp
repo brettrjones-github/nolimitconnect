@@ -103,7 +103,7 @@ void AppCommon::connectSignals( void )
 
 	connect( this, SIGNAL( signalInternalToGuiAssetXferState(VxGUID,EAssetSendState,int) ), this, SLOT( slotInternalToGuiAssetXferState(VxGUID,EAssetSendState,int) ), Qt::QueuedConnection );
 
-    connect( this, SIGNAL( signalInternalToGuiAssetSessionHistory(AssetBaseInfo) ), this, SLOT( slotInternalToGuiAssetSessionHistory(AssetBaseInfo) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalToGuiAssetSessionHistory(AssetBaseInfo*) ), this, SLOT( slotInternalToGuiAssetSessionHistory(AssetBaseInfo*) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalToGuiAssetAction(EAssetAction,VxGUID,int) ), this, SLOT( slotInternalToGuiAssetAction(EAssetAction,VxGUID,int) ), Qt::QueuedConnection );
 
     connect( this, SIGNAL( signalInternalMultiSessionAction(VxGUID,EMSessionAction,int) ), this, SLOT( slotInternalMultiSessionAction(VxGUID,EMSessionAction,int) ), Qt::QueuedConnection );

@@ -58,3 +58,14 @@ void AppletPersonalRecorder::toGuiClientPlayVideoFrame(
     ui.m_SessionWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
 }
 
+
+//============================================================================
+void AppletPersonalRecorder::showEvent( QShowEvent* showEvent )
+{
+    AppletBase::showEvent( showEvent );
+    if( !m_HistoryQueried )
+    {
+        m_HistoryQueried = true;
+        ui.m_SessionWidget->initializeHistory();
+    }
+}

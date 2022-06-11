@@ -136,10 +136,9 @@ int AppCommon::toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t
     {
         //LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d\n", ePluginType, u32JpgDataLen );
 
-        for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+        for( auto client : m_ToGuiActivityInterfaceList )
         {
-            ToGuiActivityInterface* toGuiClient = *iter;
-            behindFrameCnt += toGuiClient->toGuiClientPlayVideoFrame( onlineId,
+            behindFrameCnt += client->toGuiClientPlayVideoFrame( onlineId,
 																		picBuf,
 																		picBufLen,
 																		picWidth,

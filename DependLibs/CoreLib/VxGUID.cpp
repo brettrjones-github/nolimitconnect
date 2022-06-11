@@ -280,7 +280,7 @@ bool VxGUID::isVxGUIDValid() const
 }
 
 //============================================================================
-std::string VxGUID::toHexString( void )	
+std::string VxGUID::toHexString( void )	const
 { 
     char lclBuf[ 33 ];
     toHexString( lclBuf );
@@ -288,7 +288,7 @@ std::string VxGUID::toHexString( void )
 } 
 
 //============================================================================
-bool VxGUID::toHexString( std::string& strRetId )	
+bool VxGUID::toHexString( std::string& strRetId ) const	
 { 
 	char lclBuf[ 33 ];
     toHexString( lclBuf );
@@ -298,7 +298,7 @@ bool VxGUID::toHexString( std::string& strRetId )
 
 //============================================================================
 // buffer must be at least 33 characters in length
-void VxGUID::toHexString( char * retBuf )
+void VxGUID::toHexString( char * retBuf ) const
 {
     uint64ToHexAscii( &retBuf[ 0 ], m_u64HiPart );
     uint64ToHexAscii( &retBuf[ 16 ], m_u64LoPart );

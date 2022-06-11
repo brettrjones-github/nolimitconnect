@@ -147,6 +147,8 @@ public:
     static const char *			getDefaultFileExtension( enum EAssetType assetType );
     static const char *			getSubDirectoryName( enum EAssetType assetType );
 
+    virtual void                print( void ) const;
+
 public:
     //=== vars ===//
     std::string					m_AssetName{""}; // usually file name

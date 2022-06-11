@@ -54,6 +54,22 @@ namespace
 		poThread->threadAboutToExit();
         return nullptr;
 	}
+
+
+	//============================================================================
+	static void* AssetBaseMgrHistoryListThreadFunc( void* pvContext )
+	{
+		VxThread* poThread = (VxThread*)pvContext;
+		poThread->setIsThreadRunning( true );
+		AssetBaseMgr* poMgr = (AssetBaseMgr*)poThread->getThreadUserParam();
+		if( poMgr )
+		{
+			poMgr->sendHistoryAssetsToGuiByThread( poThread );
+		}
+
+		poThread->threadAboutToExit();
+		return nullptr;
+	}
 }
 
 std::vector<VxGUID>	AssetBaseMgr::m_EmoticonIdList{
@@ -453,7 +469,7 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType,
 	if( ( false == isAllowedFileOrDir( fileName ) )
 		|| ( 0 == fileLen ) )
 	{
-		LogMsg( LOG_ERROR, "ERROR %d AssetBaseMgr::createAssetInfo could not get file info %s\n", VxGetLastError(), fileName );
+		LogMsg( LOG_ERROR, "ERROR %d AssetBaseMgr::createAssetInfo could not get file info %s", VxGetLastError(), fileName );
 		return NULL;
 	}
 
@@ -971,27 +987,56 @@ void AssetBaseMgr::updateAssetDatabaseSendState( VxGUID& assetUniqueId, EAssetSe
 }
 
 //============================================================================
-void AssetBaseMgr::queryHistoryAssets( VxGUID& historyId )
+void AssetBaseMgr::fromGuiQuerySessionHistory( VxGUID& historyId )
 {
-	std::vector<AssetBaseInfo*>::iterator iter;
-	AssetBaseInfo * assetInfo;
+	// if we send all now while in the gui thread we may overflow the stack because qt cannot process while in this call
+	// instead spin up a thread to send the assets
 	lockResources();
-	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
-	{
-		assetInfo = (*iter);
-		if( assetInfo->getHistoryId() == historyId )
-		{
-            onQueryHistoryAsset( assetInfo );
-		}
-	}
-
+	m_HistorySendList.push_back( historyId );
 	unlockResources();
+
+	if( !m_HistoryListThread.isThreadRunning() )
+	{
+		m_HistoryListThread.startThread( (VX_THREAD_FUNCTION_T)AssetBaseMgrHistoryListThreadFunc, this, "AssetBaseMgrHistoryList" );
+	}	
+}
+
+//============================================================================
+void AssetBaseMgr::sendHistoryAssetsToGuiByThread( VxThread* poThread )
+{
+	while( !m_HistorySendList.empty() && !VxIsAppShuttingDown() )
+	{
+		lockResources();
+		if( m_HistorySendList.empty() )
+		{
+			unlockResources();
+			break;
+		}
+
+		VxGUID historyId = m_HistorySendList.front();
+		m_HistorySendList.erase( m_HistorySendList.begin() );
+		if( historyId.isVxGUIDValid() )
+		{
+			std::vector<AssetBaseInfo*>::iterator iter;
+			AssetBaseInfo* assetInfo;
+			for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
+			{
+				assetInfo = (*iter);
+				if( assetInfo->getHistoryId() == historyId )
+				{
+					onQueryHistoryAsset( assetInfo );
+				}
+			}
+		}
+
+		unlockResources();
+	}
 }
 
 //============================================================================
 void AssetBaseMgr::updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param )
 {
-	LogMsg( LOG_INFO, "AssetBaseMgr::updateAssetXferState state %d start\n", assetSendState );
+	LogMsg( LOG_INFO, "AssetBaseMgr::updateAssetXferState state %d start", assetSendState );
 	std::vector<AssetBaseInfo*>::iterator iter;
 	AssetBaseInfo* assetInfo;
 	bool assetSendStateChanged = false;
@@ -1079,7 +1124,7 @@ void AssetBaseMgr::updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState 
 		announceAssetXferState( assetUniqueId, assetSendState, param );
 	}
 
-	LogMsg( LOG_INFO, "AssetBaseMgr::updateAssetXferState state %d done\n", assetSendState );
+	LogMsg( LOG_INFO, "AssetBaseMgr::updateAssetXferState state %d done", assetSendState );
 }
 
 

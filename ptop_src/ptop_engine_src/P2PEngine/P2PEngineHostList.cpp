@@ -19,19 +19,19 @@
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobInfo.h>
 
 //============================================================================
-void P2PEngine::callbackBlobAdded( BlobInfo* assetInfo )
+void P2PEngine::callbackBlobAdded( BlobInfo* blobInfo )
 {
-    IToGui::getToGui().toGuiBlobAdded( assetInfo );
+    IToGui::getToGui().toGuiBlobAdded( blobInfo );
 }
 
 //============================================================================
-void P2PEngine::callbackBlobRemoved( BlobInfo* assetInfo )
+void P2PEngine::callbackBlobRemoved( BlobInfo* blobInfo )
 {
-    IToGui::getToGui().toGuiBlobAction( eAssetActionRemoveFromAssetMgr, assetInfo->getAssetUniqueId(), 0 );
+    IToGui::getToGui().toGuiBlobAction( eAssetActionRemoveFromAssetMgr, blobInfo->getAssetUniqueId(), 0 );
 }
 
 //============================================================================
-void P2PEngine::callbackBlobHistory( void* /*userData*/, BlobInfo* blobInfo )
+void P2PEngine::callbackBlobHistory( BlobInfo* blobInfo )
 {
 	IToGui::getToGui().toGuiBlobSessionHistory( blobInfo );
 }

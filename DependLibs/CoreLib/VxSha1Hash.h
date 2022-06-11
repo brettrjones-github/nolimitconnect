@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "VxDefs.h"
+#include <string>
 
 #ifdef __cplusplus
 
@@ -37,10 +38,15 @@ public:
 	bool						isEqualTo(  const uint8_t * hashData ) const;
 
 	void						setHashData( const uint8_t * hashData );
-	uint8_t *					getHashData( void )					{ return m_HashId; }
+	uint8_t *					getHashData( void )						{ return m_HashId; }
 
+	std::string					toString( void ) const;
 
 protected:
+	char						highNibbleChar( uint8_t val ) const		{ return nibbleToHex( val >> 4 ); }
+    char						lowNibbleChar( uint8_t val ) const		{ return nibbleToHex( val & 0x0F ); }
+	char						nibbleToHex( uint8_t val ) const		{ return val > 9 ? (val - 10) + 'A' : val + 0x30; }
+
 	uint8_t						m_HashId[20];
 };
 #pragma pack(pop)

@@ -1363,7 +1363,7 @@ bool VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr
 
 	bool result = VxSplitHostAndFile( urlIn.c_str(), strHost, strFile, tcpPort );
 	retPort = tcpPort;
-	return VxResolveUrl( strHost.c_str(), tcpPort, retIpAddr );
+    return result && VxResolveUrl( strHost.c_str(), tcpPort, retIpAddr );
 }
 
 //============================================================================

@@ -194,7 +194,6 @@ bool OpusFileEncoder::writeTotalSndFrames( FILE * fileHandle )
         {
             if( sizeof( readBuf ) == fread( readBuf, 1, sizeof( readBuf ), fileHandle ) )
             {
-                uint64_t totalFrames = 0;
                 for( int i = 0; i < 10; i++ )
                 {
                     if( 0 == strncmp( NO_LIMIT_OPUS_SIGNITURE, &readBuf[ i ], NO_LIMIT_OPUS_SIGNITURE_LEN ) )

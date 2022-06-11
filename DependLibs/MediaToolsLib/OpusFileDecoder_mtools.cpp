@@ -74,11 +74,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	((buf[base+2]<<16)&0xff0000)| \
 	((buf[base+1]<<8)&0xff00)| \
 	(buf[base]&0xff))
-static unsigned int rngseed = 22222;
-static GOTV_INLINE unsigned int fast_rand(void) {
-	rngseed = (rngseed * 96314165) + 907633515;
-	return rngseed;
-}
 
 #ifndef HAVE_FMINF
 # define fminf(_x,_y) ((_x)<(_y)?(_x):(_y))

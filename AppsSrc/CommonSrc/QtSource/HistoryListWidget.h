@@ -35,6 +35,8 @@ public:
 	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						onActivityStop( void );
 
+	void						initializeHistory( void );
+
 public slots:
 	void						slotShreddingAsset( AssetBaseWidget * assetWidget );
 

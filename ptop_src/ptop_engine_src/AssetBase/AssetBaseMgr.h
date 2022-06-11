@@ -131,7 +131,8 @@ public:
     bool						updateAsset( AssetBaseInfo& assetInfo );
 	bool						removeAsset( std::string fileName, bool deleteFile = false );
 	bool						removeAsset( VxGUID& assetUniqueId, bool deleteFile = false );
-	void						queryHistoryAssets( VxGUID& historyId );
+	void						fromGuiQuerySessionHistory( VxGUID& historyId );
+    void                        sendHistoryAssetsToGuiByThread( VxThread* poThread );
 
 	void						generateHashForFile( std::string fileName );
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
@@ -182,10 +183,13 @@ protected:
 	VxMutex						m_FileListPacketsMutex;
 	std::vector<PktFileListReply*> m_FileListPackets;
 
-private:
+protected:
     bool						m_AssetBaseListInitialized{ false };
     AssetBaseInfoDb&			m_AssetBaseInfoDb;
     std::vector<AssetBaseInfo*>	m_AssetBaseInfoList;
 	static std::vector<VxGUID>	m_EmoticonIdList;
+
+    VxThread					m_HistoryListThread;
+    std::vector<VxGUID>	        m_HistorySendList;
 };
 

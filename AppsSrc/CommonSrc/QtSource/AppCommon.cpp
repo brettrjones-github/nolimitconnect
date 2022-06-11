@@ -1379,9 +1379,8 @@ void AppCommon::slotInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUI
 		return;
 	}
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiSetGameValueVar( ePluginType, onlineId, s32VarId, s32VarValue );
 	}
 }
@@ -1408,9 +1407,8 @@ void AppCommon::slotInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGU
 		return;
 	}
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiSetGameActionVar( ePluginType, onlineId, s32VarId, s32VarValue );
 	}
 }
@@ -1442,10 +1440,16 @@ void AppCommon::toGuiAssetAdded( AssetBaseInfo* assetInfo )
 //============================================================================
 void AppCommon::slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
+	// check if client is in list each time to avoid out of range vector interation crash
+	std::vector<ToGuiActivityInterface*> clientList;
+	getToGuiActivityInterfaceList( clientList );
+	for( auto client : clientList )
 	{
-		ToGuiActivityInterface* client = *iter;
-		client->toGuiAssetAdded( assetInfo );
+		if( clientStillWantsToGuiActivityCallback( client ) )
+		{
+			client->toGuiAssetAdded( assetInfo );
+		}
 	}
 }
 
@@ -1463,10 +1467,16 @@ void AppCommon::toGuiAssetUpdated( AssetBaseInfo* assetInfo )
 //============================================================================
 void AppCommon::slotInternalToGuiAssetUpdated( AssetBaseInfo assetInfo )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
+// check if client is in list each time to avoid out of range vector interation crash
+	std::vector<ToGuiActivityInterface*> clientList;
+	getToGuiActivityInterfaceList( clientList );
+	for( auto client : clientList )
 	{
-		ToGuiActivityInterface* client = *iter;
-		client->toGuiAssetUpdated( assetInfo );
+		if( clientStillWantsToGuiActivityCallback( client ) )
+		{
+			client->toGuiAssetUpdated( assetInfo );
+		}
 	}
 }
 
@@ -1478,16 +1488,22 @@ void AppCommon::toGuiAssetRemoved( AssetBaseInfo* assetInfo )
 		return;
 	}
 
-	emit slotInternalToGuiAssetRemoved( *assetInfo );
+	emit signalInternalToGuiAssetRemoved( *assetInfo );
 }
 
 //============================================================================
 void AppCommon::slotInternalToGuiAssetRemoved( AssetBaseInfo assetInfo )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	// when assets are removed they might call wantToGuiActivityCallbacks and change the clientList
+// check if client is in list each time to avoid out of range vector interation crash
+	std::vector<ToGuiActivityInterface*> clientList;
+	getToGuiActivityInterfaceList( clientList );
+	for( auto client : clientList )
 	{
-		ToGuiActivityInterface* client = *iter;
-		client->toGuiAssetRemoved( assetInfo );
+		if( clientStillWantsToGuiActivityCallback( client ) )
+		{
+			client->toGuiAssetRemoved( assetInfo );
+		}
 	}
 }
 
@@ -1499,15 +1515,14 @@ void AppCommon::toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState asse
 		return;
 	}
 
-	emit slotInternalToGuiAssetXferState( assetUniqueId, assetSendState, param );
+	emit signalInternalToGuiAssetXferState( assetUniqueId, assetSendState, param );
 }
 
 //============================================================================
 void AppCommon::slotInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiAssetXferState( assetUniqueId, assetSendState, param );
 	}
 }
@@ -1520,22 +1535,33 @@ void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 		return;
 	}
 
-	emit signalInternalToGuiAssetSessionHistory( *assetInfo );
+	// use pointers because there may be a lot of history objects and would otherwise fill the queued signals/slots
+	AssetBaseInfo* newAssetInfo = new AssetBaseInfo( *assetInfo );
+	emit signalInternalToGuiAssetSessionHistory( newAssetInfo );
 }
 
 //============================================================================
-void AppCommon::slotInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo )
+void AppCommon::slotInternalToGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
+	// check if client is in list each time to avoid out of range vector interation crash
+	std::vector<ToGuiActivityInterface*> clientList;
+	getToGuiActivityInterfaceList( clientList );
+
+	for( auto client : clientList )
 	{
-		ToGuiActivityInterface* client = *iter;
-		client->toGuiAssetSessionHistory( assetInfo );
+		if( clientStillWantsToGuiActivityCallback( client ) )
+		{
+			client->toGuiAssetSessionHistory( *assetInfo );
+		}	
 	}
+
+	delete assetInfo;
 }
 
 //============================================================================
@@ -1559,9 +1585,8 @@ void AppCommon::slotInternalToGuiAssetAction( EAssetAction assetAction, VxGUID a
         return;
     }
 
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiClientAssetAction( assetAction, assetId, pos0to100000 );
     }
 }
@@ -1574,8 +1599,7 @@ void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID&
 		return;
 	}
 
-	VxGUID idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
-	emit signalInternalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
+	emit signalInternalMultiSessionAction( onlineId, mSessionAction, pos0to100000 );
 }
 
 //============================================================================
@@ -1588,9 +1612,8 @@ void AppCommon::slotInternalMultiSessionAction( VxGUID onlineId, EMSessionAction
 
 	emit signalMultiSessionAction( onlineId, mSessionAction, pos0to100000 );
 
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiMultiSessionAction(  mSessionAction, onlineId, pos0to100000 );
     }
 }
@@ -1621,9 +1644,8 @@ void AppCommon::slotInternalBlobAction( EAssetAction assetAction, VxGUID assetId
 		return;
 	}
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiClientBlobAction( assetAction, assetId, pos0to100000 );
 	}
 }
@@ -1647,9 +1669,8 @@ void AppCommon::slotInternalBlobAdded( BlobInfo blobInfo )
 		return;
 	}
 
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiBlobAdded( blobInfo );
     }
 }
@@ -1674,9 +1695,8 @@ void AppCommon::slotInternalBlobSessionHistory( BlobInfo blobInfo )
 		return;
 	}
 
-    for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+    for( auto client : m_ToGuiActivityInterfaceList )
     {
-        ToGuiActivityInterface* client = *iter;
         client->toGuiBlobSessionHistory( blobInfo );
     }
 }

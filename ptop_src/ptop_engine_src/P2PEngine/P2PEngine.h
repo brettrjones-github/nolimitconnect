@@ -437,9 +437,9 @@ public:
     //========================================================================
     // host list mgr callbacks
     //========================================================================
-    virtual void				callbackBlobAdded( BlobInfo * assetInfo ) override;
-    virtual void				callbackBlobRemoved( BlobInfo * assetInfo ) override;
-    virtual void				callbackBlobHistory( void * userData, BlobInfo * assetInfo ) override;
+    virtual void				callbackBlobAdded( BlobInfo* blobInfo ) override;
+    virtual void				callbackBlobRemoved( BlobInfo* blobInfo ) override;
+    virtual void				callbackBlobHistory( BlobInfo* blobInfo ) override;
 
 	//========================================================================
 	// media processor callbacks

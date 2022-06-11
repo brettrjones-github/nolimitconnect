@@ -108,3 +108,21 @@ bool VxSha1Hash::generateHashFromFile( const char * fileName, VxThread * workThr
 
 	return result;
 }
+
+//============================================================================
+std::string VxSha1Hash::toString( void ) const
+{
+	char buf[ 41 ];
+	int idx = 0;
+	for( int i = 0; i < 20; i++ )
+	{
+		uint8_t byte = m_HashId[ i ];
+		buf[ idx ] = highNibbleChar( byte );
+		idx++;
+		buf[ idx ] = lowNibbleChar( byte );
+		idx;
+	}
+
+	buf[ idx ] = 0;
+	return buf;
+}

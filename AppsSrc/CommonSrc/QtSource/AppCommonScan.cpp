@@ -35,10 +35,9 @@ void AppCommon::toGuiScanSearchComplete( EScanType eScanType )
 //============================================================================
 void AppCommon::slotInternalToGuiScanSearchComplete( EScanType eScanType )
 {
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* toGuiClient = *iter;
-		toGuiClient->toGuiClientScanSearchComplete( eScanType );
+		client->toGuiClientScanSearchComplete( eScanType );
 	}
 }
 
@@ -50,7 +49,7 @@ void AppCommon::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent* netIden
 		return;
 	}
 
-	emit  slotInternalToGuiScanResultSuccess( eScanType, *netIdent );
+	emit signalInternalToGuiScanResultSuccess( eScanType, *netIdent );
 }
 
 //============================================================================
@@ -58,9 +57,8 @@ void AppCommon::slotInternalToGuiScanResultSuccess( EScanType eScanType, VxNetId
 {
     GuiUser * guiUser = m_UserMgr.getUser( netIdent.getMyOnlineId() );
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiScanResultSuccess( eScanType, guiUser );
 	}
 }
@@ -73,7 +71,7 @@ void AppCommon::toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIden
 		return;
 	}
 
-	emit slotInternalToGuiSearchResultError( eScanType, *netIdentIn, errCode );
+	emit signalInternalToGuiSearchResultError( eScanType, *netIdentIn, errCode );
 }
 
 //============================================================================
@@ -81,9 +79,8 @@ void AppCommon::slotInternalToGuiSearchResultError( EScanType eScanType, VxNetId
 {
     GuiUser * netIdent = m_UserMgr.getUser( netIdentIn.getMyOnlineId() );
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiSearchResultError( eScanType, netIdent, errCode );
 	}
 }
@@ -100,9 +97,8 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdentIn,
 
     GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* client = *iter;
 		client->toGuiSearchResultProfilePic( netIdent, pu8JpgData, u32JpgDataLen );
 	}
 }
@@ -122,10 +118,9 @@ void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn,
 
     GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
-	for( auto iter = m_ToGuiActivityInterfaceList.begin(); iter != m_ToGuiActivityInterfaceList.end(); ++iter )
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		ToGuiActivityInterface* toGuiClient = *iter;
-		toGuiClient->toGuiSearchResultFileSearch( netIdent, lclSessionId, u8FileType, u64FileLen, pFileName, assetId );
+		client->toGuiSearchResultFileSearch( netIdent, lclSessionId, u8FileType, u64FileLen, pFileName, assetId );
 	}
 }
 

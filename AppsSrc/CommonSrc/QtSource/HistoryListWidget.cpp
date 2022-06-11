@@ -88,7 +88,16 @@ void HistoryListWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 	m_MyIdent = myIdent; 
 	m_HisIdent = hisIdent; 
 	m_MyApp.wantToGuiActivityCallbacks( this, true );
-	m_Engine.fromGuiQuerySessionHistory( hisIdent->getMyOnlineId() );
+	vx_assert( m_HisIdent );	
+}
+
+//============================================================================
+void HistoryListWidget::initializeHistory( void )
+{
+	if( m_HisIdent )
+	{
+		m_Engine.fromGuiQuerySessionHistory( m_HisIdent->getMyOnlineId() );
+	}
 }
 
 //============================================================================

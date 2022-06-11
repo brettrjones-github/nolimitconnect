@@ -32,8 +32,10 @@ public:
 
 protected:
     void						setupMultiSessionActivity( void );
+    void                        showEvent( QShowEvent* showEvent );
 
     Ui::PersonalRecorderUi	    ui;
+    bool                        m_HistoryQueried{ false };
 };
 
 

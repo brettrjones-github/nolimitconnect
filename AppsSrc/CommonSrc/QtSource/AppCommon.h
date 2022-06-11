@@ -100,6 +100,7 @@ public:
 				AppSettings&    appSettings,
 				AccountMgr&     myDataHelper,
 				IGoTv&		    gotv );
+    AppCommon( const AppCommon& rhs ) = delete;
 	virtual ~AppCommon() override = default;
 
     int64_t                     elapsedMilliseconds( void )                 { return static_cast<int64_t>(m_ElapsedTimer.elapsed()); }
@@ -697,7 +698,7 @@ signals:
 
     void				        signalInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param );
 
-    void				        signalInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo );
+    void				        signalInternalToGuiAssetSessionHistory( AssetBaseInfo* assetInfo );
     void				        signalInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
 
     void                        signalInternalMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos0to100000 );
@@ -750,7 +751,7 @@ private slots:
 
     void				        slotInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param );
 
-    void				        slotInternalToGuiAssetSessionHistory( AssetBaseInfo assetInfo );
+    void				        slotInternalToGuiAssetSessionHistory( AssetBaseInfo* assetInfo );
     void				        slotInternalToGuiAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
 
     void                        slotInternalMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos0to100000 );
@@ -816,7 +817,7 @@ protected slots:
 
     void						slotCheckSetupTimer();
 
-private:
+protected:
 	void						showUserNameInTitle();
 	void						sendAppSettingsToEngine( void );
 	void						startNetworkMonitor( void );
@@ -831,6 +832,13 @@ private:
 	void						clearFileXferClientList( void );
 	void						clearHardwareCtrlList( void );
     void						clearUserUpdateClientList( void );
+
+    void						registerMetaData();
+    void						doAccountStartup( void );
+
+    void                        getToGuiActivityInterfaceList( std::vector<ToGuiActivityInterface*>& clientList ) { clientList = m_ToGuiActivityInterfaceList; }
+    bool                        clientStillWantsToGuiActivityCallback( ToGuiActivityInterface* client ) 
+                                    { return std::find( m_ToGuiActivityInterfaceList.begin(), m_ToGuiActivityInterfaceList.end(), client ) != m_ToGuiActivityInterfaceList.end(); }
 
 	//=== vars ===//
 	QApplication&				m_QApp;
@@ -886,13 +894,6 @@ private:
 	std::vector<QString>		m_DebugLogQue;
 	std::vector<QString>		m_AppErrLogQue;
 	ENetworkStateType			m_LastNetworkState;
-
-private:
-	void						registerMetaData();
-	void						doAccountStartup( void );
-
-private:
-	AppCommon( const AppCommon& rhs ) = delete;
 
 	uint32_t					m_CamSourceId;
 	uint32_t					m_CamCaptureRotation;
