@@ -49,7 +49,7 @@ void AssetPhotoWidget::initAssetPhotoWidget( void )
 	connect( ui.m_ShredButton,		SIGNAL(clicked()),				this, SLOT(slotShredAsset()) );
 	connect( ui.m_LeftAvatarBar,	SIGNAL(signalShredAsset()),		this, SLOT(slotShredAsset()) );
 	connect( ui.m_RightAvatarBar,	SIGNAL(signalShredAsset()),		this, SLOT(slotShredAsset()) );
-	connect( ui.m_LeftAvatarBar,	SIGNAL( signalResendAsset() ),	this, SLOT( slotResendAsset() ) );
+	connect( ui.m_LeftAvatarBar,	SIGNAL(signalResendAsset()),	this, SLOT(slotResendAsset()) );
 }
 
 //============================================================================
@@ -58,6 +58,8 @@ void AssetPhotoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	this->setSizeHint( QSize( 100, 224 - 16 ) );
 	ui.m_VidWidget->setImageFromFile( assetInfo.getAssetName().c_str() );
+	ui.m_LeftAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
+	ui.m_RightAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
 	if( assetInfo.isMine() )
 	{
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );

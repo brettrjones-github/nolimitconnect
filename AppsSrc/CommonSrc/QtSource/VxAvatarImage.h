@@ -17,6 +17,7 @@
 #include <QLabel>
 
 class QTimer;
+class QImage;
 
 class VxAvatarImage : public QLabel 
 {
@@ -24,10 +25,11 @@ class VxAvatarImage : public QLabel
 public:
 	VxAvatarImage(QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
 	VxAvatarImage(const QString &text, QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
-	virtual ~VxAvatarImage();
+	virtual ~VxAvatarImage() = default;
 
 	QSize						sizeHint() const;
 	void						setImage( const char * resourceUrl );
+	void						setImage( QImage& avatarImage );
 
 signals:
 	void						clicked();
@@ -36,5 +38,6 @@ protected:
 	virtual void				mousePressEvent(QMouseEvent * event);
 
 	void						initQAvatarImage( void );
+	bool						m_HasThumbImage{ false };
 };
 

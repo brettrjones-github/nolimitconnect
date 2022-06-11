@@ -18,6 +18,7 @@
 #include "AppCommon.h"
 #include "MyIcons.h"
 #include "GuiParams.h"
+#include "GuiUser.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
@@ -46,7 +47,7 @@ AvatarBar::AvatarBar( QWidget * parent )
 }
 
 //============================================================================
-MyIcons&  AvatarBar::getMyIcons( void )
+MyIcons& AvatarBar::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();
 }
@@ -58,6 +59,26 @@ void AvatarBar::setTime( time_t creationTime )
 	ui.m_TimeLabel->setText( timeStr.c_str() );
 	ui.m_TimeLabel->setVisible( true );
 	showAvatar( false );
+}
+
+//============================================================================
+void AvatarBar::setOnlineId( VxGUID& onlineId )
+{
+	m_OnlineId = onlineId;
+	if( !m_ThumbnailQueried )
+	{
+		m_ThumbnailQueried = true;
+		GuiUser* guiUser = m_MyApp.getUserMgr().getOrQueryUser( onlineId );
+		if( guiUser )
+		{
+			QImage image;
+			VxGUID thumbId = guiUser->getAvatarThumbId();
+			if( thumbId.isVxGUIDValid() && m_MyApp.getThumbMgr().getAvatarImage( thumbId, image ) )
+			{
+				ui.m_Avatar->setImage( image );
+			}
+		}
+	}
 }
 
 //============================================================================

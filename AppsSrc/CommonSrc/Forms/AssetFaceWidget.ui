@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>175</width>
-    <height>97</height>
+    <height>100</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -75,6 +75,9 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="AvatarBar" name="m_LeftAvatarBar" native="true"/>
+      </item>
+      <item>
        <spacer name="m_LeftSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -86,9 +89,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="AvatarBar" name="m_LeftAvatarBar" native="true"/>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -280,9 +280,6 @@
        </layout>
       </item>
       <item>
-       <widget class="AvatarBar" name="m_RightAvatarBar" native="true"/>
-      </item>
-      <item>
        <spacer name="m_RightSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -294,6 +291,9 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="AvatarBar" name="m_RightAvatarBar" native="true"/>
       </item>
      </layout>
     </widget>

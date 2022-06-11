@@ -16,6 +16,8 @@
 
 #include "ui_AvatarBarWidget.h"
 
+#include <CoreLib/VxGUID.h>
+
 class AppCommon;
 class MyIcons;
 
@@ -30,6 +32,7 @@ public:
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
+	void						setOnlineId( VxGUID& onlineId );
 	void						setTime( time_t creationTime );
 	void						setShredFile( QString fileName );
 	void						setShredButtonIcon( EMyIcons iconTrash );
@@ -46,8 +49,9 @@ signals:
 	void						signalResendAsset( void );
 
 protected:
-
 	//=== vars ===//
-	Ui::AvatarBarWidgetUi	ui;
+	Ui::AvatarBarWidgetUi		ui;
 	AppCommon&					m_MyApp;
+	VxGUID						m_OnlineId;
+	bool						m_ThumbnailQueried{ false };
 };

@@ -299,6 +299,14 @@ bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
     if( thumbId.isVxGUIDValid() )
     {
         GuiThumb* thumb = m_ThumbList.findThumb( thumbId );
+        if( !thumb )
+        {
+            if( m_MyApp.getEngine().getThumbMgr().isEmoticonThumbnail( thumbId ) )
+            {
+                thumb = generateEmoticon( thumbId );
+            }
+        }
+        
         if( thumb )
         {
             result = thumb->createImage( image );

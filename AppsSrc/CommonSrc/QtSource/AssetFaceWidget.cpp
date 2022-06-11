@@ -38,7 +38,7 @@ AssetFaceWidget::AssetFaceWidget( AppCommon& appCommon, QWidget * parent )
 void AssetFaceWidget::initAssetFaceWidget( void )
 {
 	ui.setupUi( this );
-    QSize buttonSize(  GuiParams::getButtonSize( eButtonSizeSmall ) );
+    QSize buttonSize(  GuiParams::getButtonSize( eButtonSizeTiny ) );
     ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
     ui.m_SendButton->setFixedSizeAbsolute( buttonSize );
 
@@ -48,11 +48,11 @@ void AssetFaceWidget::initAssetFaceWidget( void )
 	ui.m_ButtonFrame->setVisible( false );
 	ui.m_TagFrame->setVisible( false );
 
-	connect( ui.m_FaceLabel, SIGNAL( clicked() ), this, SLOT( slotAssetWasClicked() ) );
-	connect( ui.m_ShredButton, SIGNAL( clicked() ), this, SLOT( slotShredAsset() ) );
-	connect( ui.m_LeftAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	connect( ui.m_RightAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
+	connect( ui.m_FaceLabel, SIGNAL(clicked()), this, SLOT(slotAssetWasClicked()) );
+	connect( ui.m_ShredButton, SIGNAL(clicked()), this, SLOT(slotShredAsset()) );
+	connect( ui.m_LeftAvatarBar, SIGNAL(signalShredAsset()), this, SLOT(slotShredAsset()) );
+	connect( ui.m_RightAvatarBar, SIGNAL(signalShredAsset()), this, SLOT(slotShredAsset()) );
+	connect( ui.m_LeftAvatarBar, SIGNAL(signalResendAsset()), this, SLOT(slotResendAsset()) );
 }
 
 //============================================================================
@@ -70,14 +70,17 @@ void AssetFaceWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 	QPixmap faceImage( faceRes );
 	if( faceImage.isNull() )
 	{
-		LogMsg( LOG_ERROR, "FAIL AssetFaceWidget::setAssetInfo null resource %s\n", faceRes.toUtf8().constData() );
+		LogMsg( LOG_ERROR, "FAIL AssetFaceWidget::setAssetInfo null resource %s", faceRes.toUtf8().constData() );
 		return;
 	}
 
-	ui.m_FaceLabel->setPixmap( faceImage );
-	ui.m_FaceLabel->setFixedSize( faceImage.width() + 4,  faceImage.height() + 4 );
+	ui.m_FaceLabel->setPixmap( faceImage.scaled( GuiParams::getButtonSize( eButtonSizeMedium ) ) );
+	ui.m_FaceLabel->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ).width() + 4, GuiParams::getButtonSize( eButtonSizeMedium ).height() + 4 );
+	ui.m_LeftAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
+	ui.m_RightAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
 	if( assetInfo.isMine() )
 	{
+		
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );
 		ui.m_RightSpacer->changeSize( 0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed );
 	}

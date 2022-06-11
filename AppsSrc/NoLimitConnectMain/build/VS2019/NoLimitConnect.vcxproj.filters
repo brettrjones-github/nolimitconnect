@@ -69,6 +69,9 @@
     <Filter Include="Source Files\InputWidgets">
       <UniqueIdentifier>{3c437382-3e3c-4d3a-a82e-10b168684117}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\AssetWidgets">
+      <UniqueIdentifier>{b6e32014-8fda-412b-8ad1-d7cb6c816cbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -1273,24 +1276,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppTranslate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetBaseWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetFaceWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetPhotoWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetTextWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetVideoWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetVoiceWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AvatarBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1995,6 +1980,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp">
       <Filter>Source Files\InputWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetBaseWidget.cpp">
+      <Filter>Source Files\AssetWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetFaceWidget.cpp">
+      <Filter>Source Files\AssetWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetPhotoWidget.cpp">
+      <Filter>Source Files\AssetWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetTextWidget.cpp">
+      <Filter>Source Files\AssetWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetVideoWidget.cpp">
+      <Filter>Source Files\AssetWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetVoiceWidget.cpp">
+      <Filter>Source Files\AssetWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

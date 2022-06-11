@@ -20,6 +20,7 @@
 
 #include <QTimer>
 #include <QPixmap>
+#include <QImage>
 
 //============================================================================
 VxAvatarImage::VxAvatarImage(QWidget *parent, Qt::WindowFlags f) 
@@ -37,11 +38,6 @@ VxAvatarImage::VxAvatarImage(const QString &text, QWidget *parent, Qt::WindowFla
 }
 
 //============================================================================
-VxAvatarImage::~VxAvatarImage()
-{
-}
-
-//============================================================================
 void VxAvatarImage::initQAvatarImage( void )
 {
 	setImage( ":/AppRes/Resources/avatar.svg" );
@@ -50,9 +46,26 @@ void VxAvatarImage::initQAvatarImage( void )
 //============================================================================
 void VxAvatarImage::setImage( const char * resourceUrl )
 {
-	setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
-	QPixmap picBitmap( resourceUrl ); 
-	setPixmap( picBitmap );
+	if( !m_HasThumbImage )
+	{
+		setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+		QPixmap picBitmap( resourceUrl );
+		setPixmap( picBitmap );
+	}
+}
+
+//============================================================================
+void VxAvatarImage::setImage( QImage& avatarImage )
+{
+	if( !avatarImage.isNull() )
+	{
+		QPixmap avatarPixmap = QPixmap::fromImage( avatarImage ).scaled(geometry().size());
+		if( !avatarPixmap.isNull() )
+		{
+			m_HasThumbImage = true;
+			setPixmap( avatarPixmap );
+		}
+	}
 }
 
 //============================================================================

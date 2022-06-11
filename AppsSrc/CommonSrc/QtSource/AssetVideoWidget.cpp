@@ -83,6 +83,8 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 		this->setSizeHint( QSize( 100 * GuiParams::getGuiScale(), 224 * GuiParams::getGuiScale() ) );
 	}
 
+	ui.m_LeftAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
+	ui.m_RightAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
 	if( assetInfo.isMine() )
 	{
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );

@@ -84,19 +84,6 @@
        <number>0</number>
       </property>
       <item>
-       <spacer name="m_LeftSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>166</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="AvatarBar" name="m_LeftAvatarBar" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
@@ -111,6 +98,19 @@
          </size>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="m_LeftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>166</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -350,6 +350,19 @@
        </layout>
       </item>
       <item>
+       <spacer name="m_RightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>166</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="AvatarBar" name="m_RightAvatarBar" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -370,19 +383,6 @@
          </size>
         </property>
        </widget>
-      </item>
-      <item>
-       <spacer name="m_RightSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>166</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

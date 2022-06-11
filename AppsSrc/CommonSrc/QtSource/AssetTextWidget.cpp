@@ -83,11 +83,14 @@ void AssetTextWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 	}
 
 	ui.m_ChatTextLabel->setText( assetInfo.getAssetName().c_str() );
+	ui.m_LeftAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
+	ui.m_RightAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
 	if( assetInfo.isMine() )
 	{
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );
 		ui.m_RightSpacer->changeSize( 0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed );
 		ui.m_RightAvatarBar->showAvatar( true );
+		m_MyApp.getAppTheme().setBackgroundColor( ui.m_TextFrame, m_MyApp.getAppTheme().getColor( eButtonBackgroundNormal ) );
 	}
 	else
 	{

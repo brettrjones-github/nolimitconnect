@@ -43,8 +43,8 @@ AssetVoiceWidget::AssetVoiceWidget( AppCommon& appCommon, QWidget * parent )
 void AssetVoiceWidget::initAssetVoiceWidget( void )
 {
 	ui.setupUi( this );
-    QSize buttonSize( 24, 24 );
-    ui.m_PlayPauseButton->setFixedSizeAbsolute( buttonSize );
+	QSize buttonSize( GuiParams::getButtonSize( eButtonSizeTiny ) );
+	ui.m_PlayPauseButton->setFixedSizeAbsolute( buttonSize );
 
 	setXferBar( ui.m_XferProgressBar );
 
@@ -88,6 +88,8 @@ void AssetVoiceWidget::setAssetInfo( AssetBaseInfo& assetInfo )
         this->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ), ( int )( 62 * GuiParams::getGuiScale() ) ) );
 	}
 
+	ui.m_LeftAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
+	ui.m_RightAvatarBar->setOnlineId( m_AssetInfo.getOnlineId() );
 	if( assetInfo.isMine() )
 	{
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );
