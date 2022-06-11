@@ -243,9 +243,9 @@ void  RenderGlLogic::VerifyGLStateQtDbg( const char* szfile, const char* szfunct
         return;
 #ifdef TARGET_OS_ANDROID
     // no equivelent of gluErrorString on android platform
-    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
+    LogMsg( LOG_ERROR, "GL ERROR: %d", err );
 #else
-    LogMsg( LOG_ERROR, "GL ERROR: %d %s\n", err, gluErrorString( err ) );
+    LogMsg( LOG_ERROR, "GL ERROR: %d %s", err, gluErrorString( err ) );
 #endif // TARGET_OS_ANDROID
     if( szfile && szfunction )
     {
@@ -258,7 +258,12 @@ void RenderGlLogic::VerifyGLStateQt()
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )
         return;
-    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
+#ifdef TARGET_OS_ANDROID
+    // no equivelent of gluErrorString on android platform
+    LogMsg( LOG_ERROR, "GL ERROR: %d", err );
+#else
+    LogMsg( LOG_ERROR, "GL ERROR: %d %s", err, gluErrorString( err ) );
+#endif // TARGET_OS_ANDROID
 }
 #endif
 
