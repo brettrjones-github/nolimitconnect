@@ -31,9 +31,9 @@
 //============================================================================
 NetworkStateIpChange::NetworkStateIpChange( NetworkStateMachine& stateMachine, std::string oldIp, std::string newIp )
 : NetworkStateBase( stateMachine )
+, m_DirectConnectTester( stateMachine.getDirectConnectTester() )
 , m_OldIp( oldIp )
 , m_NewIp( newIp )
-, m_DirectConnectTester( stateMachine.getDirectConnectTester() )
 {
 	setNetworkStateType( eNetworkStateTypeIpChange );
 }

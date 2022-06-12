@@ -1256,24 +1256,24 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
 {
     switch( hostType )
     {
-    case ePluginTypeHostGroup:
     case eHostTypeGroup:
         return ePluginTypeHostGroup;
-    case ePluginTypeHostChatRoom:
+
     case eHostTypeChatRoom:
         return ePluginTypeHostChatRoom;
-    case ePluginTypeHostRandomConnect:
+
     case eHostTypeRandomConnect:
         return ePluginTypeHostRandomConnect;
-    case ePluginTypeHostPeerUser:
+
     case eHostTypePeerUserDirect:
         return ePluginTypeHostPeerUser;
-    case ePluginTypeHostNetwork:
+
     case eHostTypeNetwork:
         return ePluginTypeHostNetwork;
-    case ePluginTypeHostConnectTest:
+
     case eHostTypeConnectTest:
         return ePluginTypeHostConnectTest;
+
     case eHostTypeUnknown:
     default:
         LogMsg( LOG_ERROR, "HostTypeToHostPlugin unknown host type %d", hostType );

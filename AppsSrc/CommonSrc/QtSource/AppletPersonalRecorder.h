@@ -32,7 +32,7 @@ public:
 
 protected:
     void						setupMultiSessionActivity( void );
-    void                        showEvent( QShowEvent* showEvent );
+    void                        showEvent( QShowEvent* showEvent ) override;
 
     Ui::PersonalRecorderUi	    ui;
     bool                        m_HistoryQueried{ false };
