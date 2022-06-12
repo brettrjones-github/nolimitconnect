@@ -34,6 +34,7 @@ public:
 protected slots:
 	void						slotAssetWasClicked( void );
     void						slotShredAsset( void ) override;
+	void						slotCopyTextToClipboardButClick( void );
 
 protected:
 	void						initAssetTextWidget( void );

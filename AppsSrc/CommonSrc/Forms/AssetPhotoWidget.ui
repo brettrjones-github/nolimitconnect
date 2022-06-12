@@ -62,10 +62,10 @@
       </sizepolicy>
      </property>
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
@@ -345,12 +345,6 @@
    <header>VxPushButton.h</header>
   </customwidget>
   <customwidget>
-   <class>VidWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">VidWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>AvatarBar</class>
    <extends>QWidget</extends>
    <header>AvatarBar.h</header>
@@ -360,6 +354,12 @@
    <class>VxTagLabel</class>
    <extends>QLabel</extends>
    <header>VxTagLabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VidWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">VidWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

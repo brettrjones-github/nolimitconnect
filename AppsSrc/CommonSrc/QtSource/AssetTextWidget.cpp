@@ -40,10 +40,10 @@ void AssetTextWidget::initAssetTextWidget( void )
 	ui.setupUi( this );
     QSize buttonSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     ui.m_SendButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_CopyTextButton->setFixedSizeAbsolute( buttonSize );
 
 	setXferBar( ui.m_XferProgressBar );
-	ui.m_ShredButton->setIcon( eMyIconTrash );
+	ui.m_CopyTextButton->setIcon( eMyIconEditPaste );
 
 	ui.m_SendButton->setVisible( false );
 	ui.m_ButtonFrame->setVisible( false );
@@ -51,7 +51,7 @@ void AssetTextWidget::initAssetTextWidget( void )
 
 	connect( ui.m_ChatTextLabel, SIGNAL( clicked() ), this, SLOT( slotAssetWasClicked() ) );
 	connect( ui.m_TagTextLabel, SIGNAL( clicked() ), this, SLOT( slotAssetWasClicked() ) );
-	connect( ui.m_ShredButton, SIGNAL( clicked() ), this, SLOT( slotShredAsset() ) );
+	connect( ui.m_CopyTextButton, SIGNAL( clicked() ), this, SLOT( slotCopyTextToClipboardButClick() ) );
 	connect( ui.m_LeftAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
 	connect( ui.m_RightAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
 	connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
@@ -90,7 +90,6 @@ void AssetTextWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );
 		ui.m_RightSpacer->changeSize( 0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed );
 		ui.m_RightAvatarBar->showAvatar( true );
-		m_MyApp.getAppTheme().setBackgroundColor( ui.m_TextFrame, m_MyApp.getAppTheme().getColor( eButtonBackgroundNormal ) );
 	}
 	else
 	{
@@ -202,4 +201,12 @@ void AssetTextWidget::setXferProgress( int xferProgress )
 	{
 		ui.m_RightAvatarBar->setXferProgress( xferProgress );
 	}
+}
+
+//============================================================================
+void AssetTextWidget::slotCopyTextToClipboardButClick( void )
+{
+	QClipboard* clipboard = QApplication::clipboard();
+	clipboard->setText( ui.m_ChatTextLabel->text() );
+	QMessageBox::information( this, QObject::tr( "Clipboard" ), QObject::tr( "Text was copied to clipboard" ), QMessageBox::Ok );
 }
