@@ -247,6 +247,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs_for_building", "docs_f
 		..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt
 		..\..\docs_for_building\BuildingKodiForWindows.txt = ..\..\docs_for_building\BuildingKodiForWindows.txt
 		..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt
+		..\..\docs_for_building\Create_Linux_Virtual_Image_VirtualBoxMint20_3.txt = ..\..\docs_for_building\Create_Linux_Virtual_Image_VirtualBoxMint20_3.txt
 		..\..\docs_for_building\CreatingTranslations.txt = ..\..\docs_for_building\CreatingTranslations.txt
 		..\..\docs_for_building\DeployLinuxGoTvPtoP.txt = ..\..\docs_for_building\DeployLinuxGoTvPtoP.txt
 		..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt = ..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt
@@ -1129,7 +1130,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = 6.3.0_msvc2019_64
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = 6.3.0_msvc2019_64
 	EndGlobalSection
 EndGlobal
