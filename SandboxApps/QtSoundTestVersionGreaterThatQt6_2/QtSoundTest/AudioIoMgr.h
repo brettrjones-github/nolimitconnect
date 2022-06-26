@@ -37,11 +37,22 @@ public:
     void                        initAudioIoSystem();
     void                        destroyAudioIoSystem();
 
-    bool                        isAudioInitialized()       { return m_AudioIoInitialized;  }
-    IAudioCallbacks&            getAudioCallbacks()        { return m_AudioCallbacks; }
-    QAudioFormat&               getAudioOutFormat()        { return m_AudioOutFormat; }
-    QAudioFormat&               getAudioInFormat()         { return m_AudioInFormat; }
-    AudioMixer&                 getAudioOutMixer()         { return m_AudioOutMixer; }
+    QMediaDevices*              getMediaDevices( void )     { return m_MediaDevices; }
+
+    virtual int				    fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence );
+    virtual void				fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace );
+    void                        fromAudioOutResumed( void );
+
+    void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
+
+    bool                        isAudioInitialized()        { return m_AudioIoInitialized;  }
+    IAudioCallbacks&            getAudioCallbacks()         { return m_AudioCallbacks; }
+    QAudioFormat&               getAudioOutFormat()         { return m_AudioOutFormat; }
+    QAudioFormat&               getAudioInFormat()          { return m_AudioInFormat; }
+
+    AudioMixer&                 getAudioOutMixer()          { return m_AudioOutMixer; }
+    AudioInIo&                  getAudioInIo()              { return m_AudioInIo; }
+    AudioOutIo&                 getAudioOutIo()             { return m_AudioOutIo; }
 
     const char *                describeAudioState( QAudio::State state );
     const char *                describeAudioError( QAudio::Error err );
@@ -71,9 +82,9 @@ public:
     // enable disable sound out
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
     // add audio data to play.. assumes float 2 channel 48000 Hz so convert float to s16 pcm data before calling writeData
-    virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
+    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
     // add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
+   // virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
     // delay of audio calculated from amount of data in queue
     virtual double				toGuiGetAudioDelayMs( EAppModule appModule );
     // delay of audio calculated from amount of data in queue
@@ -83,14 +94,16 @@ public:
     // amount of free queue space in bytes
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
 
-    // read speaker output from mixer
-    qint64                      readDataFromOutMixer( char * data, qint64 maxlen );
-
     // get length of data ready for write to speakers
     int                         getDataReadyForSpeakersLen();
+    // get length in milliseconds of data ready for write to speakers
+    int                         getDataReadyForSpeakersMs();
 
-    int                         getCachedMaxLength() { return AUDIO_OUT_CACHE_USABLE_SIZE; }
+    int                         getAudioOutCachedMaxLength() { return AUDIO_OUT_CACHE_USABLE_SIZE; }
     void                        resetLastSample( EAppModule appModule ) { m_MyLastAudioOutSample[ appModule ] = 0; }
+
+    int                         getAudioInPeakAmplitude( void );
+    int                         getAudioOutPeakAmplitude( void );
 
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
@@ -108,11 +121,13 @@ protected:
     void                        aboutToDestroy();
 
     // update speakers to current mode and output
-    void                        updateSpeakers();
+    void                        enableSpeakers( bool enable );
     // update microphone output
-    void                        updateMicrophone();
+    void                        enableMicrophone( bool enable );
 
 private:
+    QMediaDevices*              m_MediaDevices{ nullptr };
+
     IAudioCallbacks&            m_AudioCallbacks;
 
     bool                        m_AudioIoInitialized = false;
@@ -133,10 +148,6 @@ private:
 
     QAudioFormat                m_AudioInFormat;
     AudioInIo                   m_AudioInIo;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-    QAudioDeviceInfo            m_AudioOutDeviceInfo;
-    QAudioDeviceInfo            m_AudioInDeviceInfo;
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     bool                        m_IsOutPaused = false;
     bool                        m_IsTestMode = true;
@@ -150,4 +161,5 @@ private:
 
     bool                        m_WantMicrophone = false;
     bool                        m_WantSpeakerOutput = false;
+    float                       m_MicrophoneVolume{ 100.0f };
 };

@@ -357,27 +357,27 @@ void AudioOutIo::slotCheckForBufferUnderun()
             if( !bufferedAudioData && audioError == QAudio::UnderrunError )
 			{
                 LogMsg( LOG_DEBUG, "speaker idle due to underrun" );
-#if defined( TARGET_OS_ANDROID )
-                m_AudioOutputDevice->stop();
-#elif defined( TARGET_OS_WINDOWS )
+//#if defined( TARGET_OS_ANDROID )
+//                m_AudioOutputDevice->stop();
+//#elif defined( TARGET_OS_WINDOWS )
                 m_AudioOutputDevice->suspend();
-#endif // TARGET_OS_WINDOWS
+//#endif // TARGET_OS_WINDOWS
 			}
             else if( bufferedAudioData >= m_AudioOutputDevice->bufferSize() )
 			{
-#if defined( TARGET_OS_ANDROID )
-                m_AudioOutputDevice->stop();
-                m_AudioOutputDevice->start( this );
-#elif defined( TARGET_OS_WINDOWS )
+//#if defined( TARGET_OS_ANDROID )
+//                m_AudioOutputDevice->stop();
+//                m_AudioOutputDevice->start( this );
+//#elif defined( TARGET_OS_WINDOWS )
                 LogMsg( LOG_DEBUG, "speaker resuming due to idle and have data" );
-#ifdef Q_OS_WIN
+//#ifdef Q_OS_WIN
                 // The Windows backend seems to internally go back into ActiveState
                 // while still returning SuspendedState, so to ensure that it doesn't
                 // ignore the resume() call, we first re-suspend
                 m_AudioOutputDevice->suspend();
-#endif
+//#endif
                 m_AudioOutputDevice->resume();
-#endif // TARGET_OS_WINDOWS
+//#endif // TARGET_OS_WINDOWS
             }
 			else
 			{
@@ -389,17 +389,17 @@ void AudioOutIo::slotCheckForBufferUnderun()
             if( bufferedAudioData >= m_AudioOutBufferSize )
 			{ 
                 LogMsg( LOG_DEBUG, "speaker out resuming due to suspended and have data" );
-#if defined( TARGET_OS_ANDROID )
-                 m_AudioOutputDevice->resume();
-#elif defined( TARGET_OS_WINDOWS )
-#ifdef Q_OS_WIN
+//#if defined( TARGET_OS_ANDROID )
+//                 m_AudioOutputDevice->resume();
+//#elif defined( TARGET_OS_WINDOWS )
+//#ifdef Q_OS_WIN
                 // The Windows backend seems to internally go back into ActiveState
                 // while still returning SuspendedState, so to ensure that it doesn't
                 // ignore the resume() call, we first re-suspend
                 m_AudioOutputDevice->suspend();
-#endif
+//#endif
                 m_AudioOutputDevice->resume();
-#endif // TARGET_OS_WINDOWS
+//#endif // TARGET_OS_WINDOWS
             }
 			break;
 

@@ -13,6 +13,7 @@
 //============================================================================
 
 #include "AudioIoMgr.h"
+#include "AudioUtils.h"
 
 #include <QSurface>
 #include <qmath.h>
@@ -24,6 +25,7 @@
 //============================================================================
 AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 : QWidget( parent )
+, m_MediaDevices( new QMediaDevices( this ) )
 , m_AudioCallbacks( audioCallbacks )
 , m_AudioOutMixer( *this, audioCallbacks, this )
 , m_AudioOutIo( *this, m_AudioOutMutex, this )
@@ -38,68 +40,29 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
     memset( m_SpeakerEnable, 0, sizeof( m_SpeakerEnable ) );
 
     m_AudioOutFormat.setSampleRate( 48000 );
-    m_AudioOutFormat.setChannelCount( 2 );
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    m_AudioOutFormat.setChannelCount( 1 );
     m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
-    m_AudioOutFormat.setChannelConfig( QAudioFormat::ChannelConfigMono );
-#else
-    m_AudioOutFormat.setBytesPerSample(2);
-    m_AudioOutFormat.setSampleSize( 16 );
-    m_AudioOutFormat.setCodec( "audio/pcm" );
-    m_AudioOutFormat.setByteOrder( QAudioFormat::LittleEndian );
-    m_AudioOutFormat.setSampleType( QAudioFormat::SignedInt );
 
-    m_SpeakerAvailable = true;
-    QAudioDeviceInfo infoOut( m_AudioOutDeviceInfo );
-    if( !infoOut.isFormatSupported( m_AudioOutFormat ) )
+    const QAudioDevice& defaultOutDeviceInfo = m_MediaDevices->defaultAudioOutput();
+    if( !defaultOutDeviceInfo.isFormatSupported( m_AudioOutFormat ) )
     {
- //       LogMsg( LOG_DEBUG, "Default audio out format not supported - trying to use nearest" );
- //       m_AudioOutFormat = infoOut.nearestFormat( m_AudioOutFormat );
- //       if( !m_AudioInFormat.isValid() )
-        {
-            m_SpeakerAvailable = false;
-            LogMsg( LOG_DEBUG, "No Speakers available" );
-        }
+         LogMsg( LOG_DEBUG, "Default audio out format not supported " );
+         m_SpeakerAvailable = false;
+         LogMsg( LOG_DEBUG, "No Speakers available" );
     }
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
     m_MicrophoneAvailable = true;
-
-    m_AudioInFormat.setSampleRate( 8000 );
+    // Qt no longer supports 8000 hz. seems to support 48000 hz on all platforms
+    m_AudioInFormat.setSampleRate( 48000 );
     m_AudioInFormat.setChannelCount( 1 );
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     m_AudioInFormat.setSampleFormat( QAudioFormat::Int16 );
-    m_AudioInFormat.setChannelConfig( QAudioFormat::ChannelConfigMono );
-#else
-    m_AudioInFormat.setSampleSize( 16 );
-    m_AudioInFormat.setCodec( QStringLiteral("audio/pcm") );
-    m_AudioInFormat.setByteOrder( QAudioFormat::LittleEndian );
-    m_AudioInFormat.setSampleType( QAudioFormat::SignedInt );
 
-    QAudioDeviceInfo infoIn( m_AudioInDeviceInfo );
-    if( !infoIn.isFormatSupported( m_AudioInFormat ) )
+    const QAudioDevice& defaultInDeviceInfo = m_MediaDevices->defaultAudioInput();
+    if( !defaultInDeviceInfo.isFormatSupported( m_AudioInFormat ) )
     {
-        //LogMsg( LOG_DEBUG, "Default audio in format not supported - trying to use nearest" );
-        //m_AudioInFormat = infoIn.nearestFormat( m_AudioInFormat );
-        //if( !m_AudioInFormat.isValid() )
-        {
-            m_MicrophoneAvailable = false;
-            LogMsg( LOG_DEBUG, "No Microphone available" );
-        }
+        m_MicrophoneAvailable = false;
+        LogMsg( LOG_DEBUG, "No Microphone available" );
     }
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-}
-
-//============================================================================
- // update speakers to current mode and output
-void AudioIoMgr::updateSpeakers()
-{
-
-}
-
-//============================================================================
- // update microphone output
-void AudioIoMgr::updateMicrophone()
-{
 }
 
 //============================================================================
@@ -120,8 +83,14 @@ void AudioIoMgr::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMi
     if( enableMic != m_WantMicrophone )
     {
         m_WantMicrophone = enableMic;
-        updateMicrophone();
+        enableMicrophone( enableMic );
     }
+}
+
+//============================================================================
+ // update microphone output
+void AudioIoMgr::enableMicrophone( bool enable )
+{
 }
 
 //============================================================================
@@ -129,23 +98,50 @@ void AudioIoMgr::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMi
 void AudioIoMgr::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput )
 {
     m_SpeakerEnable[ appModule ] = wantSpeakerOutput;
-    bool enableSpeakers = false;
+    bool shouldEnable = false;
     for( int i = 0; i < eMaxAppModule; i++ )
     {
         if( m_SpeakerEnable[ appModule ] )
         {
-            enableSpeakers = true;
+            shouldEnable = true;
             break;
         }
     }
 
-    if( enableSpeakers != m_WantSpeakerOutput )
+    if( shouldEnable != m_WantSpeakerOutput )
     {
-        m_WantSpeakerOutput = enableSpeakers;
-        updateSpeakers();
+        m_WantSpeakerOutput = shouldEnable;
+        enableSpeakers( shouldEnable );
+
+        //if( enableSpeakers )
+        //{
+        //    m_AudioOutIo.fromGuiCheckSpeakerOutForUnderrun();
+        //}
     }
 }
 
+//============================================================================
+ // update speakers to current mode and output
+void AudioIoMgr::enableSpeakers( bool enable )
+{
+    m_AudioOutMixer.wantSpeakerOutput( enable );
+    m_AudioOutIo.wantSpeakerOutput( enable );
+}
+
+
+//============================================================================
+int AudioIoMgr::fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence )
+{
+    // this microphone data is already downsampled if needed to Mono channel 8000 Hz PCM audio
+    if( m_MicrophoneVolume != 100.0f )
+    {
+        AudioUtils::applyPcmVolume( m_MicrophoneVolume, (uchar*)pu16PcmData, pcmDataLenInBytes );
+    }
+
+    return m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
+}
+
+/*
 //============================================================================
 // add audio data to play.. assumes float 2 channel 48000 Hz so convert float to s16 pcm data before calling writeData
 int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes )
@@ -181,6 +177,7 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000,
     return wroteByteCnt;
 }
 
+
 //============================================================================
 // add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
 int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
@@ -205,7 +202,7 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
     {
         memset( outAudioData, 0, outBufSize );
         m_MyLastAudioOutSample[ appModule ] = 0;
-        wroteByteCnt = m_AudioOutMixer.enqueueAudioData( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
+        wroteByteCnt = m_AudioOutMixer.fromGuiMicrophoneData( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
         delete[] outAudioData;
     }
     else
@@ -255,13 +252,14 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
             m_MyLastAudioOutSample[ appModule ] = srcSamples[ mySampleCnt - 1 ];
         }
 
-        wroteByteCnt = m_AudioOutMixer.enqueueAudioData( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
+        wroteByteCnt = m_AudioOutMixer.fromGuiMicrophoneData( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
         delete[] outAudioData;
     }
 
     wroteByteCnt = (int)( wroteByteCnt / upResampleMultiplier );
     return wroteByteCnt;
 }
+*/
 
 //============================================================================
 void AudioIoMgr::pauseAudioOut()
@@ -321,17 +319,23 @@ void AudioIoMgr::resumeAudioOut()
 }
 
 //============================================================================
+void AudioIoMgr::fromAudioOutResumed()
+{
+    getAudioCallbacks().fromAudioOutResumed();
+}
+
+//============================================================================
 void AudioIoMgr::initAudioIoSystem()
 {
 
     if( !m_AudioIoInitialized )
     {
-        m_AudioOutIo.initAudioOut( m_AudioOutFormat );
+        m_AudioOutIo.initAudioOut( m_AudioOutFormat, m_MediaDevices->defaultAudioInput() );
 
         connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( speakerStateChanged( QAudio::State ) ) );
         //connect( m_AudioOutIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
         //connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
-        m_AudioOutIo.startAudio();
+        // m_AudioOutIo.startAudio();
 
         if( isMicrophoneAvailable() )
         {
@@ -340,7 +344,7 @@ void AudioIoMgr::initAudioIoSystem()
             connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
             //connect( m_AudioInIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
             //connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
-            m_AudioInIo.startAudio();
+            // m_AudioInIo.startAudio();
         }
 
         m_AudioIoInitialized = true;
@@ -358,7 +362,7 @@ void AudioIoMgr::destroyAudioIoSystem()
 //============================================================================
 void AudioIoMgr::stopAudioOut()
 {
-    m_AudioOutIo.stopAudio();
+    m_AudioOutIo.stopAudioOut();
 }
 
 //============================================================================
@@ -409,7 +413,7 @@ int AudioIoMgr::getCachedDataLength( EAppModule appModule )
 //============================================================================
 int AudioIoMgr::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 {
-    int freeSpace =  getCachedMaxLength() - getCachedDataLength( appModule );
+    int freeSpace = m_AudioOutMixer.audioQueFreeSpace( appModule ) - getCachedDataLength( appModule );
     if( freeSpace < 0 ) // can happen because getCachedDataLength is all awaiting read including what is in the device
     {
         freeSpace = 0;
@@ -454,17 +458,15 @@ void AudioIoMgr::aboutToDestroy()
 }
 
 //============================================================================
-// get length of data ready for write to speakers
 int AudioIoMgr::getDataReadyForSpeakersLen()
 {
     return m_AudioOutMixer.getDataReadyForSpeakersLen();
 }
 
 //============================================================================
-// read speaker output from mixer
-qint64 AudioIoMgr::readDataFromOutMixer( char * data, qint64 maxlen )
+int AudioIoMgr::getDataReadyForSpeakersMs()
 {
-    return m_AudioOutMixer.readDataFromMixer( data, maxlen );
+    return m_AudioOutMixer.getDataReadyForSpeakersMs();
 }
 
 //============================================================================
@@ -473,7 +475,6 @@ void AudioIoMgr::fromGuiMuteMicrophone( bool mute )
     if( m_MicrophoneMuted != mute )
     {
         m_MicrophoneMuted = mute;
-
     }
 }
 
@@ -527,4 +528,23 @@ const char * AudioIoMgr::describeAudioError( QAudio::Error err )
     default:
         return " Unknown Error ";
     }
+}
+
+//============================================================================
+void AudioIoMgr::fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace )
+{
+    IAudioCallbacks& audioCallbacks = getAudioCallbacks();
+    audioCallbacks.fromGuiAudioOutSpaceAvail( pcmMixerAvailableSpace );
+}
+    
+//============================================================================
+int AudioIoMgr::getAudioInPeakAmplitude( void )
+{
+    return m_AudioInIo.getAudioInPeakAmplitude();
+}
+
+//============================================================================
+int AudioIoMgr::getAudioOutPeakAmplitude( void )
+{
+    return m_AudioOutMixer.getAudioOutPeakAmplitude();
 }

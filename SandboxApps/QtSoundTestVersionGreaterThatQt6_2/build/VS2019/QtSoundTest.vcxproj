@@ -53,7 +53,7 @@
     <QtModules>core;network;gui;svg;multimedia;widgets</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>6.3.0_msvc2019_64</QtInstall>
+    <QtInstall>6.3.1_msvc2019_64</QtInstall>
     <QtModules>core;network;gui;svg;multimedia;widgets</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -128,10 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\QtSoundTest\AudioDefs.h" />
-    <QtMoc Include="..\..\QtSoundTest\AudioOutThread.h">
-    </QtMoc>
     <QtMoc Include="..\..\QtSoundTest\AudioInThread.h">
     </QtMoc>
+    <QtMoc Include="..\..\QtSoundTest\AudioMixerThread.h" />
     <ClInclude Include="..\..\QtSoundTest\IAudioInterface.h" />
     <QtMoc Include="..\..\QtSoundTest\LogWidget.h">
     </QtMoc>
@@ -139,6 +138,7 @@
     </QtMoc>
     <ClInclude Include="..\..\QtSoundTest\AudioUtils.h" />
     <ClInclude Include="..\..\QtSoundTest\IGoTvDefs.h" />
+    <ClInclude Include="..\..\QtSoundTest\AudioMixerFrame.h" />
     <ClInclude Include="..\..\QtSoundTest\VxDebug.h" />
     <ClInclude Include="..\..\QtSoundTest\VxDefs.h" />
     <ClInclude Include="..\..\QtSoundTest\VxFileUtil.h" />
@@ -160,13 +160,14 @@
     <ClCompile Include="..\..\QtSoundTest\AudioInThread.cpp" />
     <ClCompile Include="..\..\QtSoundTest\AudioIoMgr.cpp" />
     <ClCompile Include="..\..\QtSoundTest\AudioMixer.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioMixerThread.cpp" />
     <ClCompile Include="..\..\QtSoundTest\AudioOutIo.cpp" />
-    <ClCompile Include="..\..\QtSoundTest\AudioOutThread.cpp" />
     <ClCompile Include="..\..\QtSoundTest\AudioTestGenerator.cpp" />
     <ClCompile Include="..\..\QtSoundTest\AudioUtils.cpp" />
     <ClCompile Include="..\..\QtSoundTest\LogWidget.cpp" />
     <ClCompile Include="..\..\QtSoundTest\main.cpp" />
     <ClCompile Include="..\..\QtSoundTest\mainwindow.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioMixerFrame.cpp" />
     <ClCompile Include="..\..\QtSoundTest\SoundTestLogic.cpp" />
     <ClCompile Include="..\..\QtSoundTest\SoundTestThread.cpp" />
     <ClCompile Include="..\..\QtSoundTest\VxDebug.cpp" />

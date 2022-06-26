@@ -1,9 +1,12 @@
 
 #include <QAudioFormat>
+#include <QtEndian>
 #include "AudioUtils.h"
 #include "IsBigEndianCpu.h"
+#include "VxDebug.h"
 
-qint64 AudioUtils::audioDuration(const QAudioFormat &format, qint64 bytes)
+//=============================================================================
+qint64 AudioUtils::audioDurationUs(const QAudioFormat &format, qint64 bytes)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     return (bytes * 1000000) /
@@ -14,6 +17,7 @@ qint64 AudioUtils::audioDuration(const QAudioFormat &format, qint64 bytes)
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
+//=============================================================================
 qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -29,11 +33,13 @@ qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
+//=============================================================================
 qreal AudioUtils::nyquistFrequency(const QAudioFormat &format)
 {
     return format.sampleRate() / 2;
 }
 
+//=============================================================================
 QString AudioUtils::formatToString(const QAudioFormat &format)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -127,6 +133,7 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
+//=============================================================================
 bool AudioUtils::isPCM(const QAudioFormat &format)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -136,7 +143,7 @@ bool AudioUtils::isPCM(const QAudioFormat &format)
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
-
+//=============================================================================
 bool AudioUtils::isPCMS16LE(const QAudioFormat &format)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -152,27 +159,31 @@ bool AudioUtils::isPCMS16LE(const QAudioFormat &format)
 const qint16  PCMS16MaxValue     =  32767;
 const quint16 PCMS16MaxAmplitude =  32768; // because minimum is -32768
 
+//=============================================================================
 qreal AudioUtils::pcmToReal(qint16 pcm)
 {
     return qreal(pcm) / PCMS16MaxAmplitude;
 }
 
+//=============================================================================
 float AudioUtils::pcmToFloat( int16_t pcm )
 {
     return float(pcm) / PCMS16MaxAmplitude;
 }
 
-
+//=============================================================================
 qint16 AudioUtils::realToPcm(qreal real)
 {
     return real * PCMS16MaxValue;
 }
 
+//=============================================================================
 int16_t AudioUtils::floatToPcm( float val )
 {
     return val * PCMS16MaxValue;
 }
 
+//=============================================================================
 int16_t MixPcmSample( int a, int b ) // int16_t sample1, int16_t sample2 ) 
 {
     // from stack overflow
@@ -212,7 +223,8 @@ int16_t MixPcmSample( int a, int b ) // int16_t sample1, int16_t sample2 )
 #endif // 0
 }
 
-void AudioUtils::mixPcmAudio( int16_t * pcmData, int16_t * outData, int toMixBytes )
+//=============================================================================
+void AudioUtils::mixPcmAudio( int16_t* pcmData, int16_t* outData, int toMixBytes )
 {
     int sampleCnt = toMixBytes / 2;
     if( sampleCnt )
@@ -222,4 +234,118 @@ void AudioUtils::mixPcmAudio( int16_t * pcmData, int16_t * outData, int toMixByt
             outData[i] = MixPcmSample( pcmData[ i ], outData[ i ] );
         }
     }
+}
+
+//=============================================================================
+void AudioUtils::upsamplePcmAudio( int16_t* srcSamples, int16_t prevFrameSample, int origPcmDataLenInBytes, int upResampleMultiplier, int16_t* destSamples, int16_t& lastSampleOfFrame )
+{
+    int srcSampleCnt = origPcmDataLenInBytes >> 1;
+    int16_t firstSample = prevFrameSample;
+    int16_t secondSample = srcSampleCnt;
+    float sampleStep;
+    int iDestIdx = 0;
+    for( int i = 0; i < srcSampleCnt; i++ )
+    {
+        secondSample = srcSamples[ i ];
+        if( secondSample >= firstSample )
+        {
+            // ramp up
+            sampleStep = ((secondSample - firstSample) / upResampleMultiplier);
+        }
+        else
+        {
+            // ramp down
+            sampleStep = -((firstSample - secondSample) / upResampleMultiplier);
+        }
+
+        if( 0 == sampleStep )
+        {
+            for( int j = 0; j < upResampleMultiplier; ++j )
+            {
+                destSamples[ iDestIdx ] = firstSample;
+                iDestIdx++;
+            }
+        }
+        else
+        {
+            float sampleOffs = sampleStep;
+            int resampleCnt = (int)upResampleMultiplier;
+            for( int j = 0; j < resampleCnt; ++j )
+            {
+                destSamples[ iDestIdx ] = (int16_t)(firstSample + sampleOffs);
+                iDestIdx++;
+                sampleOffs += sampleStep;
+            }
+        }
+
+        firstSample = secondSample;
+    }
+
+    // save the last sample to be used as first sample reference in next frame
+    lastSampleOfFrame = srcSamples[ srcSampleCnt - 1 ];
+}
+
+//=============================================================================
+void AudioUtils::dnsamplePcmAudio( int16_t* srcSamples, int resampledCnt, int dnResampleDivider, int16_t* destSamples )
+{
+    int16_t* pcmData = (int16_t*)srcSamples;
+    for( int i = 0; i < resampledCnt; i++ )
+    {
+        destSamples[ i ] = pcmData[ i * dnResampleDivider ];
+    }
+}
+
+//============================================================================
+void AudioUtils::applyPcmVolume( float volume, uchar *data, int datalen )
+{
+    volume = volume / 100;
+    int samples = datalen / 2;
+    float mult = pow( 10.0, 0.05*volume );
+
+    for( int i = 0; i < samples; i++ ) 
+    {
+        qint16 val = qFromLittleEndian<qint16>( data + i * 2 )*mult;
+        qToLittleEndian<qint16>( val, data + i * 2 );
+    }
+}
+
+//============================================================================
+int AudioUtils::getPeakPcmAmplitude( int16_t* srcSamples, int datalen )
+{
+    int samples = datalen / 2;
+    int peakValue{ 0 };
+    for( int i = 0; i < samples; i++ )
+    {
+        if( srcSamples[ i ] > peakValue )
+        {
+            peakValue = srcSamples[ i ];
+        }
+    }
+
+    if( peakValue )
+    {
+        return (int)((32768.0f / (float)peakValue) * 100);
+    }
+    
+    return 0;
+}
+
+//============================================================================
+int AudioUtils::hasSomeSilence( int16_t* srcSamples, int datalen )
+{
+    int samples = datalen / 2;
+    int peakValue{ 0 };
+    int lastSample = 0;
+    int silenceSamples = 0;
+    for( int i = 0; i < samples; i++ )
+    {
+        if( srcSamples[ i ] == 0  && lastSample == 0 )
+        {
+            silenceSamples++;
+        }
+
+        lastSample = srcSamples[ i ];
+    }
+
+    return silenceSamples > 4 ? silenceSamples : 0;
 }

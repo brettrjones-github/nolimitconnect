@@ -6,10 +6,10 @@
 #include "AudioDefs.h"
 
 //============================================================================
-SoundTestThread::SoundTestThread( SoundTestLogic& renderLogic )
-: m_SoundTestLogic( renderLogic )
-, m_AudioIoMgr( renderLogic.getAudioIoMgr() )
-, m_AudioGenOut( renderLogic.getAudio400HzGenerator() )
+SoundTestThread::SoundTestThread( SoundTestLogic& soundLogic )
+: m_SoundTestLogic( soundLogic )
+, m_AudioIoMgr( soundLogic.getAudioIoMgr() )
+, m_AudioGenOut( soundLogic.getAudio400HzGenerator() )
 {
 }
 
@@ -33,10 +33,10 @@ void SoundTestThread::stopSoundTestThread()
 //============================================================================
 void SoundTestThread::run()
 {
-    LogMsg( LOG_DEBUG, "SoundTestThread thread %u", currentThreadId() );
+    LogMsg( LOG_DEBUG, "SoundTestThread kodi thread %u", currentThreadId() );
     const qreal audioBufLen = AUDIO_BUF_SIZE_48000_2_FLOAT;
     char audioBuf[ AUDIO_BUF_SIZE_48000_2_FLOAT ];
-    qreal amountRead = m_AudioGenOut->readDataNoPositionUpdate( audioBuf, audioBufLen );
+    qreal amountRead = m_AudioGenOut->readData( audioBuf, audioBufLen );
     if( audioBufLen != amountRead )
     {
         LogMsg( LOG_ERROR, "requested audio len %3.3f got %3.3f ", audioBufLen, amountRead );
@@ -54,7 +54,7 @@ void SoundTestThread::run()
             //int sampleCnt = (int)( AUDIO_BUF_SIZE_48000_2_FLOAT / 4 );
             //LogMsg( LOG_DEBUG, "kodi first %3.3f second %3.3f last %3.3f ", audioAsFloat[ 0 ], audioAsFloat[ 2 ], audioAsFloat[ sampleCnt - 1 ] );
 
-            m_AudioIoMgr.toGuiPlayAudio( eAppModuleKodi, audioAsFloat, audioBufLen );
+           // m_AudioIoMgr.toGuiPlayAudio( eAppModuleKodi, audioAsFloat, audioBufLen );
         }
         else
         {

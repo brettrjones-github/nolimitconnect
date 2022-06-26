@@ -37,6 +37,8 @@ SOURCES += \
         $$PWD/QtSoundTest/mainwindow.cpp \
         $$PWD/QtSoundTest/AudioIoMgr.cpp \
         $$PWD/QtSoundTest/AudioMixer.cpp \
+        $$PWD/QtSoundTest/AudioMixerFrame.cpp \
+        $$PWD/QtSoundTest/AudioMixerThread.cpp \
         $$PWD/QtSoundTest/AudioInIo.cpp \
         $$PWD/QtSoundTest/AudioInThread.cpp \
         $$PWD/QtSoundTest/AudioOutIo.cpp \
@@ -59,6 +61,8 @@ HEADERS += \
         $$PWD/QtSoundTest/AudioDefs.h \
         $$PWD/QtSoundTest/AudioIoMgr.h \
         $$PWD/QtSoundTest/AudioMixer.h \
+        $$PWD/QtSoundTest/AudioMixerFrame.h \
+        $$PWD/QtSoundTest/AudioMixerThread.h \
         $$PWD/QtSoundTest/AudioInIo.h \
         $$PWD/QtSoundTest/AudioInThread.h \
         $$PWD/QtSoundTest/AudioOutIo.h \

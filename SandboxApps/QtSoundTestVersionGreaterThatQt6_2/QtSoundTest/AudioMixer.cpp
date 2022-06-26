@@ -26,246 +26,236 @@ AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks,
 : QWidget( parent )
 , m_AudioIoMgr( audioIoMgr  )
 , m_AudioCallbacks( audioCallbacks )
+, m_MixerThread( audioIoMgr )
+, m_MixerFormat()
  {
-     memset( m_BufIndex, 0, sizeof( m_BufIndex ) );
-     m_AtomicBufferSize = 0;
+     m_MixerFormat.setSampleRate( 8000 );
+     m_MixerFormat.setChannelCount( 1 );
+     m_MixerFormat.setSampleFormat( QAudioFormat::Int16 );
+     memset( m_ModuleBufIndex, 0, sizeof( m_ModuleBufIndex ) );
+
+     m_MixerThread.setThreadShouldRun( true );
+     m_MixerThread.startAudioMixerThread();
+
      m_ElapsedTimer.restart();
  }
 
+
 //============================================================================
-// add audio data to mixer.. assumes pcm signed short 2 channel 48000 Hz.. return total written to buffer
-int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int pcmDataLenInBytes, bool isSilence )
+void AudioMixer::shutdownAudioMixer( void )
 {
-    if( isSilence )
+    m_MixerThread.stopAudioMixerThread();
+}
+
+//============================================================================
+void AudioMixer::wantSpeakerOutput( bool enableOutput )
+{
+    if( enableOutput )
     {
-        // do nothing
+        // reset everthing to initial start positions
+        m_MixerMutex.lock();   
+        for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+        {
+            m_MixerFrames[ i ].clearFrame();
+        }
+
+        memset( m_ModuleBufIndex, 0, sizeof( m_ModuleBufIndex ) );
+        m_MixerReadIdx = 0;
+        m_WasReset = true;
+        m_PartialFrameRead = 0;
+        m_MixerMutex.unlock();
+
+        m_ElapsedTimer.restart();
+    }
+}
+
+//============================================================================
+int AudioMixer::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pcmData, int pcmDataLenInBytes, bool isSilence )
+{
+    // add audio data to mixer.. assumes pcm signed short mono channel 8000 Hz. Mix into any existing audio if required return total written to buffer
+    if( pcmDataLenInBytes != getMixerFrameSize() )
+    {
+        LogMsg( LOG_ERROR, "AudioMixer::toMixerPcm8000HzMonoChannel audio pcm data length must be %d", getMixerFrameSize() );
         return pcmDataLenInBytes;
     }
 
-    int toWriteByteCnt = 0;
+    m_MixerMutex.lock();
+    AudioMixerFrame& mixerFrame = m_MixerFrames[ getModuleFrameIndex( appModule ) ];
+    int written = mixerFrame.toMixerPcm8000HzMonoChannel( appModule, pcmData, isSilence );
+    incrementModuleFrameIndex( appModule );
+    m_MixerMutex.unlock();
 
-    if( ( pcmDataLenInBytes > 0 ) && ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
-    {
-        m_MixerMutex.lock();
-        int queSpace = audioQueFreeSpace( appModule );
-        char * bufData = m_AudioBuffer.data();
-        toWriteByteCnt = std::min( queSpace, pcmDataLenInBytes );
-        if( pcmDataLenInBytes > toWriteByteCnt )
-        {
-            // if not enough space then do not write anything or kodi gets confused
-            //if( eAppModuleKodi == appModule )
-            {
-                m_AtomicBufferSize = m_AudioBuffer.size();
-                LogMsg( LOG_DEBUG, "enqueueAudioData need %d space but have %d ", pcmDataLenInBytes, queSpace );
-                emit signalCheckSpeakerOutState();
-                m_MixerMutex.unlock();
-                return 0;
-            }
-        }
+    LogMsg( LOG_VERBOSE, "AudioMixer::toMixerPcm8000HzMonoChannel module %d len %d audio pcm data peak %d silence %d", appModule, pcmDataLenInBytes,
+        AudioUtils::getPeakPcmAmplitude( pcmData, pcmDataLenInBytes ), AudioUtils::hasSomeSilence( pcmData, pcmDataLenInBytes ) );
 
-        if( toWriteByteCnt )
-        {
-            // BRJ what to do with silence
-            bufData = m_AudioBuffer.data();
-            int appWriteIdx = m_BufIndex[ appModule ];
-            int curBufSize = m_AudioBuffer.size();
-            if( appWriteIdx > curBufSize )
-            {
-                LogMsg( LOG_ERROR, "enqueueAudioData mismatch write idx %d existing data %d ", appWriteIdx, curBufSize );
-                appWriteIdx = curBufSize;
-            }
-
-            if( appWriteIdx == curBufSize )
-            {
-                // no mixing required
-                m_AudioBuffer.append( (char *)pcmData, toWriteByteCnt );
-                bufData = m_AudioBuffer.data();
-                updateWriteBufferIndex( appModule, toWriteByteCnt );
-                bufData = m_AudioBuffer.data();
-                //LogMsg( LOG_DEBUG, "enqueueAudioData no mix mod %d len %d written %d buf len %d", appModule, m_BufIndex[ appModule ], toWriteByteCnt, m_AudioBuffer.size() );
-            }
-            else
-            {
-                // some or all requires mixing
-                int toMixLen = std::min( curBufSize - appWriteIdx, toWriteByteCnt );
-                char * audioOutData = m_AudioBuffer.data();
-                char * audioWriteData = &audioOutData[ appWriteIdx ];
-
-                if( toMixLen > 0 )
-                {
-                    AudioUtils::mixPcmAudio( pcmData, (int16_t *)audioWriteData, toMixLen );
-                    if( toMixLen != toWriteByteCnt )
-                    {
-                        int toAppendLen = toWriteByteCnt - toMixLen;
-                        //LogMsg( LOG_DEBUG, "enqueueAudioData mix len %d append len %d total %d index now %d", toMixLen, toAppendLen, toMixLen + toAppendLen, m_BufIndex[ appModule ] + toWriteByteCnt  );
-                        // append remainder
-                        char * audioPcmData = (char *)pcmData;
-                        char * audioReadData = &audioPcmData[ toMixLen ];
-                        m_AudioBuffer.append( audioReadData, toAppendLen );
-                    }
-
-                    //m_BufIndex[ appModule ] += toWriteByteCnt;
-                    updateWriteBufferIndex( appModule, toWriteByteCnt );
-
-                }
-                else
-                {
-                    LogMsg( LOG_ERROR, "enqueueAudioData error in mix len " );
-                }
-
-                //int16_t * sampleBuf = (int16_t *)( &audioOutData[ appWriteIdx ] );
-                //int sampleCnt = toWriteByteCnt / 2;
-                //LogMsg( LOG_DEBUG, "enqueueAudioData first %d second %d last %d ", sampleBuf[ 0 ], sampleBuf[ 2 ], sampleBuf[ sampleCnt - 1 ] );               
-            }
-        }
-
-        m_AtomicBufferSize = m_AudioBuffer.size();
-        bufData = m_AudioBuffer.data();
-        int bytesAvail = m_AtomicBufferSize;
-        verifySpeakerSamples();
-        bufData = m_AudioBuffer.data();
-        m_MixerMutex.unlock();
-        emit signalAvailableSpeakerBytesChanged( bytesAvail );
-        emit signalCheckSpeakerOutState();
-    }
-    else
-    {
-        // should probably be considered a fatal error
-        if( 0 == pcmDataLenInBytes )
-        {
-            LogMsg( LOG_ERROR, "enqueueAudioData 0 bytes " );
-            return 0;
-        }
-        else
-        {
-            LogMsg( LOG_ERROR, "enqueueAudioData invalid module %d ", appModule );
-        }
-    }
-
-    return toWriteByteCnt;
+    return written;
 }
 
 //============================================================================
-void AudioMixer::verifySpeakerSamples()
+// read audio data from mixer.
+qint64 AudioMixer::readDataFromMixer( char* data, qint64 maxlen, int upSampleMult )
 {
-    int sampleCnt = (m_AudioBuffer.size() - 2) / 2; // leave room to check the last sample
-    int16_t * audioSamples = (int16_t *)m_AudioBuffer.data();
-    for( int i = 0; i < sampleCnt; i++ )
+    // return m_AudioIoMgr.getAudioCallbacks().readGenerated4888HzData( data, maxlen );
+    if( maxlen <= 0 )
     {
-        int16_t diff = audioSamples[ i ] - audioSamples[ i + 1 ];
-        if( std::abs( diff ) > 430 )
-        {
-            LogMsg( LOG_DEBUG, "ERROR Sample diff at idx %d is %d", i, std::abs( diff ) );
-            break;
-        }
-    }
-}
-
-//============================================================================
-// read audio data from mixer.. assumes pcm 2 channel 48000 Hz
-qint64 AudioMixer::readDataFromMixer( char *data, qint64 maxlen )
-{
-    if( ( maxlen <= 0 ) || !m_AudioIoMgr.isAudioInitialized() )
-    {
-//        LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
+        //        LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
+        m_PartialFrameRead = 0;
         return 0;
     }
 
-    m_MixerMutex.lock();
-    int toReadByteCnt = std::min( (int)maxlen, (int)m_AudioBuffer.size() );
- //   LogMsg( LOG_DEBUG, "readDataFromMixer in que %d at %lld ms", toReadByteCnt, m_ElapsedTimer.elapsed() );
-    if( toReadByteCnt != maxlen )
+    if( !m_AudioIoMgr.isAudioInitialized() )
     {
-        LogMsg( LOG_DEBUG, "** readDataFromMixer avail %d of %lld bytes at %3.3f ms ", toReadByteCnt, maxlen, m_ReadBufTimer.elapsedMs() );
-        m_ReadBufTimer.resetTimer();
+        memset( data, 0, maxlen );
+        m_PartialFrameRead = 0;
+        return maxlen;
     }
 
-    if( toReadByteCnt )
+    // all data in mixer in 8000 Hz mono pcm (Int16).. use upSampleMult to convert to sample rate required by audio out
+    // you would think you could just read what bytes are availible but no. It is all or nothing else you will get missing sound and qt wigs out
+    int totalSamplesToRead = (maxlen / upSampleMult) / 2;
+    // int remainderSamples += (maxlen % upSampleMult) / 2;
+
+    m_MixerMutex.lock();
+    int samplesAvailable = getDataReadyForSpeakersLen( true ) / 2;
+    int samplesThatWillBeSilence = 0;
+    if( samplesAvailable < totalSamplesToRead )
     {
-        if( m_SpeakersMuted )
+        // we do not have enough audio to satisfiy the audio out requirements
+        samplesThatWillBeSilence = totalSamplesToRead - samplesAvailable;
+        if( m_WasReset )
         {
-            memset( data, 0, toReadByteCnt );
+            // after reset do not read from mixer until the mixer has enough to satisfy at least on read request size
+            memset( data, 0, maxlen );
+            totalSamplesToRead = 0;
+            samplesThatWillBeSilence = 0;
         }
         else
         {
-            memcpy( data, m_AudioBuffer.data(), toReadByteCnt );
+            LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer will read %d samples past end of mixer data", samplesThatWillBeSilence );
         }
-
-        m_AudioBuffer.remove( 0, toReadByteCnt ); //pop front what is written
-
-            // update indexes that applications write data into buffer at
-        updateReadBufferIndexes( toReadByteCnt );
-        //int bytesRead = (int)maxlen;
-        //if( bytesRead > toReadByteCnt )
-        //{
-        //    // if not enough data to read then fill with silence
-        //    memset( &data[ toReadByteCnt ], 0, bytesRead - toReadByteCnt );
-        //}
-
-        m_AudioCallbacks.speakerAudioPlayed( m_AudioIoMgr.getAudioOutFormat(), (void *)data, toReadByteCnt );
-        //LogMsg( LOG_ERROR, "readDataFromMixer requested %d read %d len left %d ptop len %d", maxlen, toReadByteCnt, m_AudioBuffer.size(), m_BufIndex[ eAppModulePtoP ] );
     }
 
-
-    m_AtomicBufferSize = m_AudioBuffer.size();
-    //int dataLen = m_AtomicBufferSize;
-    m_MixerMutex.unlock();
-    
-    //emit signalAvailableSpeakerBytesChanged( dataLen );
-    return toReadByteCnt;
-}
-
-//============================================================================
-// update indexes that applications write data into buffer at
-void AudioMixer::updateReadBufferIndexes( int byteCnt )
-{
-    if( byteCnt > 0 )
+    int samplesRead = 0;
+    int samplesToRead = std::min( samplesAvailable, totalSamplesToRead );
+    if( samplesToRead )
     {
-        // 0 = eAppModuleInvalid, 1 = eAppModuleAll
-        for( int i = 2; i < eMaxAppModule; i++ )
+        int frameIndex = m_MixerReadIdx;
+        for( int i = 0; i < MAX_MIXER_FRAMES; ++i )
         {
-            if( m_BufIndex[ i ] >= byteCnt )
+            int samplesLeftToRead = samplesToRead - samplesRead;
+            if( !samplesLeftToRead )
             {
-                m_BufIndex[ i ] -= byteCnt;
+                break;
+            }
 
-//                if( m_BufIndex[ i ] )
-//                {
-//                    int bytesInBuffer = m_BufIndex[ i ];
-//                    LogMsg( LOG_ERROR, "updateReadBufferIndexes mod %d bytes %d  ", i, bytesInBuffer );
-//                }
+            AudioMixerFrame& mixerFrame = m_MixerFrames[ frameIndex ];
+
+            int maxSamplesThisRead = std::min( samplesLeftToRead, getMixerSamplesPerFrame() );
+            if( maxSamplesThisRead != getMixerSamplesPerFrame() )
+            {
+                LogMsg( LOG_VERBOSE, "AudioMixer::readDataFromMixer reading %d samples", maxSamplesThisRead );
+            }
+
+            int samplesThisRead = mixerFrame.readMixerFrame( &data[ samplesRead * 2 * upSampleMult ], m_SpeakersMuted, maxSamplesThisRead, upSampleMult, m_PrevLastsample, m_PrevLastsample );
+            if( !samplesThisRead )
+            {
+                // ran out of samples
+                LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer failed to read %d samples", samplesThisRead );
+                break;
             }
             else
             {
-                // more has been read than available so reset
-                if( eAppModulePtoP == i )
-                {
-                    // reset last sample so no pop sound when ptop audio is resarted
-                    m_AudioIoMgr.resetLastSample( eAppModulePtoP );
-                }
-
-                m_BufIndex[ i ] = 0;
+                LogMsg( LOG_VERBOSE, "AudioMixer::readDataFromMixer samplesThisRead %d peak %d has silence %d", samplesThisRead,
+                    AudioUtils::getPeakPcmAmplitude( (int16_t*)(&data[ samplesRead * 2 * upSampleMult ]), samplesThisRead * 2 ),
+                    AudioUtils::hasSomeSilence( (int16_t*)(&data[ samplesRead * 2 * upSampleMult ]), samplesThisRead * 2 ) );
             }
+
+            if( !mixerFrame.audioLenInUse() )
+            {
+                frameIndex = incrementMixerReadIndex();
+            }
+
+            if( samplesThisRead < 0 )
+            {
+                // programmer error
+                LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer negative samplesThisRead %d", samplesThisRead );
+                break;
+            }
+
+            if( samplesThisRead > maxSamplesThisRead )
+            {
+                // programmer error
+                LogMsg( LOG_ERROR, "AudioMixer::readDataFromMixer read more samples then should samplesThisRead %d", samplesThisRead );
+                break;
+            }
+
+            samplesRead += samplesThisRead;
         }
     }
-}
 
-//============================================================================
-// update indexes that applications write data into buffer at ( add data count written to mixer )
-void AudioMixer::updateWriteBufferIndex( EAppModule appModule, int byteCnt )
-{
-    if( ( byteCnt > 0 ) && ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
+    if( samplesThatWillBeSilence )
     {
-        m_BufIndex[ appModule ] += byteCnt;
-        //int bytesInBuffer = m_BufIndex[ appModule ];
-        //LogMsg( LOG_ERROR, "updateWriteBufferIndex mod %d idx %d bytes ", appModule, bytesInBuffer );
+        // fill in at end of buffer
+        int toFillLen = maxlen - (samplesRead * 2);
+        memset( &data[ samplesRead * 2 ], 0, toFillLen );
+        samplesRead += samplesThatWillBeSilence;
     }
+
+    int hasSomSilence = AudioUtils::hasSomeSilence( (int16_t*)(data), maxlen );
+    if( !m_WasReset && hasSomSilence )
+    {
+        LogMsg( LOG_VERBOSE, "AudioMixer::readDataFromMixer has %d samples of silence", hasSomSilence );
+    }
+
+    if( m_WasReset && samplesRead )
+    {
+        // started reading from mixer.. if do not have enough next read it will be a underrun condition
+        m_WasReset = false;
+        m_PartialFrameRead = 0;
+    }
+
+    m_MixerMutex.unlock();
+
+    if( m_MixerVolume != 100.0f )
+    {
+        AudioUtils::applyPcmVolume( m_MixerVolume, (uint8_t*)data, maxlen );
+    }
+
+    
+    int samplesRemainder = (maxlen % upSampleMult) / 2;
+    if( samplesRemainder && samplesRead )
+    {
+        // not a multiple of what we can up sample
+        // best we can do is replicate the last sample
+        int16_t* pcmData = (int16_t*)&data[ ( samplesRead - 1 ) * 2 ];
+        int16_t lastSample = *pcmData;
+        for( int i = 0; i < samplesRemainder; i++ )
+        {
+            pcmData++;
+            *pcmData = lastSample;
+        }
+    }
+
+    m_AudioCallbacks.speakerAudioPlayed( m_AudioIoMgr.getAudioOutFormat(), (void*)data, maxlen );
+
+    // to keep everything in mixer block size we say how many blocks would be read this time if available and keep track of the partial frame part to add to the next call
+    int totalMixerLenRequested = m_PartialFrameRead + (maxlen / upSampleMult);
+    int framesRead = totalMixerLenRequested / getMixerFrameSize();
+    m_PartialFrameRead = totalMixerLenRequested % getMixerFrameSize();
+
+    m_MixerThread.setMixerSpaceAvailable( framesRead * getMixerFrameSize() );
+    m_MixerThread.releaseAudioMixerThread();
+
+    // LogMsg( LOG_VERBOSE, "AudioMixer::readDataFromMixer read %d bytes peak amplitude %d", maxlen, AudioUtils::getPeakPcmAmplitude( (int16_t*)data, maxlen ) );
+    
+    return maxlen;
 }
 
 //============================================================================
 /// space available to que audio data into buffer
-int AudioMixer::audioQueFreeSpace( EAppModule appModule )
+int AudioMixer::audioQueFreeSpace( EAppModule appModule, bool mixerIsLocked)
 {
-    int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - audioQueUsedSpace( appModule );
+    int freeSpace = MAX_MIXER_FRAMES * getMixerFrameSize() - audioQueUsedSpace( appModule, mixerIsLocked );
     if( freeSpace < 0 )
     {
         freeSpace = 0;
@@ -275,20 +265,103 @@ int AudioMixer::audioQueFreeSpace( EAppModule appModule )
 }
 
 //============================================================================
-/// space used in audio que buffer
-int AudioMixer::audioQueUsedSpace( EAppModule appModule )
+/// space available to que audio data into mixer
+int AudioMixer::getAudioMixerFreeSpace( bool mixerIsLocked )
 {
+    return MAX_MIXER_FRAMES * getMixerFrameSize() - audioQueUsedSpace( eAppModuleAll, mixerIsLocked );
+}
+
+//============================================================================
+/// space used in audio que buffer
+int AudioMixer::audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked )
+{
+    int audioUsedSpace = 0;
     if( ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
     {
-        return m_BufIndex[ appModule ];
+        if( !mixerIsLocked )
+        {
+            lockMixer();
+        }
+
+        int frameIndex = getModuleFrameIndex( appModule );
+        for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+        {
+            if( m_MixerFrames[ frameIndex ].hasModuleAudio( appModule ) )
+            {
+                audioUsedSpace += m_MixerFrames[ frameIndex ].audioLenInUse();
+            }
+            else
+            {
+                // ran out of audio filled by this module
+                break;
+            }
+
+            frameIndex++;
+            if( frameIndex >= MAX_MIXER_FRAMES )
+            {
+                frameIndex = 0;
+            }
+        }
+
+        if( !mixerIsLocked )
+        {
+            unlockMixer();
+        }     
+    }
+    else if( eAppModuleAll == appModule )
+    {
+        if( !mixerIsLocked )
+        {
+            lockMixer();
+        }
+
+        int frameIndex = m_MixerReadIdx;
+        for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+        {
+            if( m_MixerFrames[ frameIndex ].hasAnyAudio() )
+            {
+                audioUsedSpace += m_MixerFrames[ frameIndex ].audioLenInUse();
+            }
+            else
+            {
+                // ran out of audio filled by any module
+                break;
+            }
+
+            frameIndex++;
+            if( frameIndex >= MAX_MIXER_FRAMES )
+            {
+                frameIndex = 0;
+            }
+        }
+
+        if( !mixerIsLocked )
+        {
+            unlockMixer();
+        }
     }
 
-    return 0;
+    return audioUsedSpace;
 }
 
 //============================================================================
 // get length of data buffered and ready for speaker out
-int AudioMixer::getDataReadyForSpeakersLen()
+int AudioMixer::getDataReadyForSpeakersLen( bool mixerIsLocked )
 {
-    return m_AtomicBufferSize;
+    return audioQueUsedSpace( eAppModuleAll, mixerIsLocked );
+}
+
+//============================================================================
+// get length of data buffered and ready for speaker total milliseconds in duration
+int AudioMixer::getDataReadyForSpeakersMs( bool mixerIsLocked )
+{
+    int bytesAudio = getDataReadyForSpeakersLen( mixerIsLocked );
+    return calcualateMixerBytesToMs( bytesAudio );
+}
+
+//============================================================================
+int AudioMixer::calcualateMixerBytesToMs( int bytesAudio8000Hz )
+{
+    // 8000 Hz = 8000 samples per second = 8 samples per ms
+    return ( bytesAudio8000Hz / 2 ) / 8;
 }

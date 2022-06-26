@@ -13,20 +13,13 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-//#include "config_corelib.h"
-
-//#include "VxCrypto.h"
 #include "VxFileUtil.h"
-//#include "VxFileIsTypeFunctions.h"
-//#include "VxGlobals.h"
 #include "VxParse.h"
 #include "VxDebug.h"
-//#include "VxUrl.h"
-
-//#include "SHA1.h"
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <sys/stat.h>
 #ifdef TARGET_OS_WINDOWS

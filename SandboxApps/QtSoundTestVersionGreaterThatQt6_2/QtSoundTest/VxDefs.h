@@ -17,9 +17,7 @@
 
 #define VX_DEFS 1
 
-//#include <CoreLib/config_corelib.h>
 #include <stdint.h>
-
 
 #pragma pack(1)
 typedef union U128

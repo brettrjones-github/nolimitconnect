@@ -106,9 +106,9 @@ protected:
     void                        aboutToDestroy();
 
     // update speakers to current mode and output
-    void                        updateSpeakers();
+    void                        enableSpeakers( bool enable );
     // update microphone output
-    void                        updateMicrophone();
+    void                        enableMicrophone( bool enable );
 
 private:
     IAudioCallbacks&            m_AudioCallbacks;
@@ -131,10 +131,6 @@ private:
 
     QAudioFormat                m_AudioInFormat;
     AudioInIo                   m_AudioInIo;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-    QAudioDeviceInfo            m_AudioOutDeviceInfo;
-    QAudioDeviceInfo            m_AudioInDeviceInfo;
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     bool                        m_IsOutPaused = false;
     bool                        m_IsTestMode = true;

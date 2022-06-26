@@ -54,13 +54,16 @@
     <ClInclude Include="..\..\QtSoundTest\VxTime.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSoundTest\VxTimer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\QtSoundTest\VxTimeUtil.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSoundTest\IAudioInterface.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSoundTest\AudioMixerFrame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSoundTest\VxTimer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -107,9 +110,6 @@
     <ClCompile Include="..\..\QtSoundTest\VxTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtSoundTest\VxTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\QtSoundTest\VxTimeUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -119,10 +119,16 @@
     <ClCompile Include="..\..\QtSoundTest\LogWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtSoundTest\AudioOutThread.cpp">
+    <ClCompile Include="..\..\QtSoundTest\AudioInThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtSoundTest\AudioInThread.cpp">
+    <ClCompile Include="..\..\QtSoundTest\AudioMixerFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSoundTest\AudioMixerThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSoundTest\VxTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -157,10 +163,10 @@
     <QtMoc Include="..\..\QtSoundTest\LogWidget.h">
       <Filter>Source Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\QtSoundTest\AudioOutThread.h">
+    <QtMoc Include="..\..\QtSoundTest\AudioInThread.h">
       <Filter>Source Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\QtSoundTest\AudioInThread.h">
+    <QtMoc Include="..\..\QtSoundTest\AudioMixerThread.h">
       <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -18,6 +18,7 @@
 #include "VxDebug.h"
 #include "VxTime.h"
 #include "AudioDefs.h"
+#include "AudioUtils.h"
 
 //============================================================================
 AudioInThread::AudioInThread( AudioIoMgr& audioIoMgr, AudioInIo& audioInIo )

@@ -35,11 +35,12 @@ int VxSleep( int iMilliSec )
     return 0;
 };
 # else
-#  ifndef TARGET_OS_WINDOWS
-// normal Linux
 #   include <unistd.h>
-#   define VxSleep(exp)		usleep(exp * 1000)
-#  endif // TARGET_OS_WINDOWS
+	// normal Linux
+	int VxSleep( int iMilliSec )
+	{
+		return usleep( iMilliSec * 1000 );
+	};
 # endif // TARGET_OS_ANDROID
 #endif // TARGET_OS_WINDOWS
 

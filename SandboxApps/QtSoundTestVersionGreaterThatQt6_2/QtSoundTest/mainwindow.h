@@ -17,10 +17,18 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private:
-    Ui::MainWindow *ui;
+protected slots:
+    void                        slotPeakTimerExpired( void );
 
-    SoundTestLogic *            m_SoundTestLogic = nullptr;
+    void                        slotMicrophoneVolumeChanged( int volume );
+    void                        slotSpeakerVolumeChanged( int volume );
+    void                        slotVoipVolumeChanged( int volume );
+
+protected:
+    Ui::MainWindow*             ui;
+
+    SoundTestLogic*             m_SoundTestLogic{ nullptr };
+    QTimer*                     m_PeakTimer{ nullptr };
 };
 
 #endif // MAINWINDOW_H

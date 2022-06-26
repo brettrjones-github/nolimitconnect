@@ -94,15 +94,14 @@ In general a vpn with P2P support is recommended for developers and users
 ==== Prerequisite tools required to build nolimitconnect ======
 1.) sudo apt-get install g++
 2.) sudo apt-get install nasm
-3.) sudo apt-get install masm
-4.) uuid required but missing in mint
+3.) uuid required but missing in mint
 	sudo apt-get install uuid-dev
-5.) sudo apt install apt-file // optional for installed header dependency search
-6.) Open Gl
+4.) sudo apt install apt-file // optional for installed header dependency search
+5.) Open Gl
 	sudo apt-get install libglu1-mesa-dev
 
 //======= install Qt <Qt Version> ======//
-1.) Download the qt installer from https://doc.qt.io/qt-6/gettingstarted.html or https://www.qt.io/
+1.) Download the qt installer from https://www.qt.io/download-qt-installer or https://doc.qt.io/qt-6/gettingstarted.html or https://www.qt.io/
 // some notes in case the web page is discontinued
 	a. sudo apt-get install build-essential libgl1-mesa-dev
 2.) chmod 777 ~/Downloads/qt-unified-linux-x64-4.3.0.1-online.run
@@ -111,7 +110,7 @@ In general a vpn with P2P support is recommended for developers and users
 5.) Install to /home/nolimitdev/Qt (create the directory if needed)
 6.) Use the custom installation to change the install path to /home/nolimitdev/Qt
 7.) After install you may need to setup the correct paths by editing qtchooser default
-	NOTE: do not do this step unless has issues durring compile
+	NOTE: do not do this step unless has issues during compile
 	cd /usr/lib/x86_64-linux-gnu/qt-default/qtchooser
 	sudo gedit default.conf
 	change the lines 
@@ -141,7 +140,7 @@ In general a vpn with P2P support is recommended for developers and users
 2.) check out source code
 	cd ~/nolimitdev
 	checkout nolimitconnect
-	a.)	git clone https://brettrjones-github:<ghp_GitHubSecurityKey>@github.com/brettrjones-github/nolimitconnect.git
+	a.)	git clone https://brettrjones-github/nolimitconnect.git
 	useful git commands
 	use editor to edit .gitignore and add directories and file extentions like objs/ and .o
 	git status
@@ -152,7 +151,8 @@ In general a vpn with P2P support is recommended for developers and users
 3.) Open the three parts of No Limit Connect and compile in the folowing order
 	a.) /home/nolimitdev/nolimitconnect/BuildNlc1_NlcDependLibs.pro
 	b.) /home/nolimitdev/nolimitconnect/BuildNlc2_NlcCore.pro
-	c.) /home/nolimitdev/nolimitconnect/BuildNlc2_NlcAppOnly.pro
+	c.) /home/nolimitdev/nolimitconnect/BuildNlc3_NlcAppOnly.pro
+
 	
 === compile enviroment issues ===
 
@@ -184,7 +184,7 @@ After many tries the only way I could get android studio installed correctly was
 	NOTE: other cps like x86_64 for android should also compile but are not tested
 9.) For Projects BuildNlc1_NlcDependLibs.pro and BuildNlc2_NlcCore.pro
     In Projects->Build And Run click the cancel icon in step 
-    Build Android APK or will get error: No rule to make target 'install'.      
+    ""Build Android APK"" or will get error: No rule to make target 'install'.      
     After the libraries are built
 
 ====================================================================
@@ -206,14 +206,14 @@ sudo apt-get install automake ant autopoint cmake build-essential libtool patch 
 3.) If you are running a 64-bit version of Ubuntu, you need to install some 32-bit libraries with the following command:
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 
-// Does not seem to be required
-//3.) If you are running a 64-bit linux
+// This step does not seem to be required
+//4.) If you are running a 64-bit linux
 //sudo dpkg --add-architecture i386
 //sudo apt-get update
 //sudo apt-get install zlib1g:i386 libstdc++6:i386 libc6:i386
 	
 
-4.) create directory /home/nolimit/nolimitarchives/ ( to save off downloaded archives and programs for developement )
+5.) create directory /home/nolimit/nolimitarchives/ ( to save off downloaded archives and programs for developement )
 					/home/nolimit/nolimittools/
 					/home/nolimit/Android/ 					
 				    /home/nolimit/Android/Ndk/android-ndk-r18b ( where to put the unziped ndk )
@@ -227,7 +227,7 @@ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-
 //	c.) if 0 then sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
 
 
-9.) Setup android env variables 
+6.) Setup android env variables 
 edit ~/.profile
 and add at bottom
 

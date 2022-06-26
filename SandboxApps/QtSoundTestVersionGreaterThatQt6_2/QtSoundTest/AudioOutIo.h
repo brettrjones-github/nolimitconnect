@@ -23,14 +23,9 @@
 #include <QIODevice>
 #include <QMutex>
 #include <QElapsedTimer>
+#include <QTimer>
 
-#include "VxTimer.h"
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-# include <QAudioSink>
-#else
-# include <QAudioDeviceInfo>
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-#include "AudioOutThread.h"
+#include <QAudioSink>
 
 class AudioIoMgr;
 class QTimer;
@@ -42,27 +37,27 @@ public:
     explicit AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
      ~AudioOutIo() override;
 
-    bool                        initAudioOut( QAudioFormat& audioFormat );
+    bool                        initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
 
-    void                        stopAudio();
-    void                        startAudio();
+    QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice; }
+    QAudio::State               getState()                                  { return (m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
+    QAudio::Error               getError()                                  { return (m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
- 
+    void                        wantSpeakerOutput( bool enableOutput );
+
+    void                        fromGuiCheckSpeakerOutForUnderrun(); 
 
     void                        setVolume( float volume );
     void                        flush();
 
-    QAudio::State               getState()      { return ( m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
-    QAudio::Error               getError()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
-    void                        suspend() { if (m_AudioOutputDevice) m_AudioOutputDevice->suspend(); }
-    void                        resume() { if (m_AudioOutputDevice) m_AudioOutputDevice->resume(); }
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-    QAudioSink*                 getAudioOut() { return m_AudioOutputDevice; }
-#else
+    void                        suspend()       { if (m_AudioOutputDevice) m_AudioOutputDevice->suspend(); }
+    void                        resume()        { if (m_AudioOutputDevice) m_AudioOutputDevice->resume(); }
 
-    QAudioOutput *              getAudioOut( )  { return m_AudioOutputDevice; }
-    bool                        setAudioDevice(QAudioDeviceInfo deviceInfo);
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    void                        stopAudioOut();
+    void                        startAudioOut();
+
+    void                        setUpsampleMultiplier( int upSampleMult )   { m_UpsampleMutiplier = upSampleMult; }
+    int                         getUpsampleMultiplier( void )               { return m_UpsampleMutiplier; }
 
 signals:
     void						signalCheckForBufferUnderun();
@@ -71,14 +66,14 @@ protected slots:
     void                        slotAudioNotify();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
-    void                        slotAvailableSpeakerBytesChanged( int availBytes );
+
+    // send resume callback after qt has processed events
+    void                        slotSendResumeStatus( void );
 
 protected:
-
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
-    qint64                      size() const override;
-    qint64                      bytesAvailable() const override;
+
     bool						isSequential() const  override { return false; } // if true then could not reposition data position
 
 private:
@@ -97,12 +92,9 @@ private:
     QAudio::State               m_AudioOutState{ QAudio::State::StoppedState };
     QAudio::State               m_AudioOutPreviousState{ QAudio::State::StoppedState };
     QAudio::Error               m_AudioOutPreviousError{ QAudio::UnderrunError };
-    AudioOutThread              m_AudioOutThread;
-    int                         m_AudioOutBufferSize = 0;
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     QAudioSink*                 m_AudioOutputDevice = nullptr;
-#else
-    QAudioOutput*               m_AudioOutputDevice = nullptr;
-    QAudioDeviceInfo            m_deviceInfo;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QTimer*                     m_ResumeTimer{ nullptr };
+    bool                        m_AudioOutDeviceIsStarted{ false };
+    int                         m_UpsampleMutiplier{ 0 };
+    int16_t                     m_PrevLastsample{ 0 };
 };

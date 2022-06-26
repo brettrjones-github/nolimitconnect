@@ -57,7 +57,7 @@ int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int p
             //if( eAppModuleKodi == appModule )
             {
                 m_AtomicBufferSize = m_AudioBuffer.size();
-                LogMsg( LOG_DEBUG, "enqueueAudioData need %d space but have %d ", pcmDataLenInBytes, queSpace );
+                LogMsg( LOG_DEBUG, "AudioMixer::enqueueAudioData need %d space but have %d ", pcmDataLenInBytes, queSpace );
                 emit signalCheckSpeakerOutState();
                 m_MixerMutex.unlock();
                 return 0;

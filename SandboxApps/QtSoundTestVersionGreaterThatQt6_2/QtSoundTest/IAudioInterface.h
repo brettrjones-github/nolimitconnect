@@ -46,7 +46,11 @@ public:
     virtual bool				fromGuiIsEchoCancelEnabled( void ) = 0;
     /// Called when need more sound for speaker output
     virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) = 0;
+    /// speaker output has resumed
+    virtual void				fromAudioOutResumed( void ) = 0;
 
+    // temp for testing conversions
+    virtual int                 readGenerated4888HzData( char* data, int maxlen ) = 0;
 };
 
 class IAudioRequests
@@ -57,9 +61,9 @@ public:
     // enable disable speaker sound out
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) = 0;
     // add audio data to play.. assumes float 2 channel 48000 Hz
-    virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) = 0;
+    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) = 0;
     // add audio data to play.. assumes pcm mono 8000 Hz
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) = 0;
+    //virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) = 0;
     // delay of audio calculated from amount of data in queue
     virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) = 0;
     // maximum queue cache size in seconds

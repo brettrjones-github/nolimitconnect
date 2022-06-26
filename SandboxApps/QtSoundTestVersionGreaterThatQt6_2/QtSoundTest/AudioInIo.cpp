@@ -15,9 +15,11 @@
 
 #include "AudioInIo.h"
 #include "AudioIoMgr.h"
+#include "AudioUtils.h"
 
 #include "VxDebug.h"
 
+#include <QMessageBox>
 #include <QDebug>
 #include <QtEndian>
 #include <math.h>
@@ -29,9 +31,6 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 , m_AudioIoMgr( mgr )
 , m_AudioBufMutex( audioOutMutex )
 , m_AudioInThread( mgr, *this )
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-, m_MediaDevices( new QMediaDevices( this ) )
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 {
     memset( m_MicSilence, 0, sizeof( m_MicSilence ) );
     connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
@@ -49,24 +48,17 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
 {
     if( !m_initialized )
     {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
         m_AudioFormat = audioFormat;
-        setDivideSamplesCount( 1 );
+        setDivideSamplesCount( audioFormat.sampleRate() * audioFormat.channelCount() / 8000 );
         bool inputSupported = false;
-        const QAudioDevice& defaultDeviceInfo = m_MediaDevices->defaultAudioInput();
+        const QAudioDevice& defaultDeviceInfo = m_AudioIoMgr.getMediaDevices()->defaultAudioInput();
         inputSupported = defaultDeviceInfo.isFormatSupported( audioFormat );
         if( !inputSupported )
         {
-            // it seems Qt no longer always supports sample rate 8000.. try 48000
-            audioFormat.setSampleRate(48000);
-            inputSupported = defaultDeviceInfo.isFormatSupported( audioFormat );
-            if( inputSupported )
-            {
-                setDivideSamplesCount( 8 );
-                m_AudioFormat = audioFormat;
-            }
+            LogMsg( LOG_DEBUG, "AudioInIo Format not supported rate %d channels %d size %d", audioFormat.sampleRate(), audioFormat.channelCount(), audioFormat.bytesPerSample() );
+            QMessageBox::information( nullptr, QObject::tr( "Format Not supported" ), QObject::tr( "AudioInIo Format Not supported" ), QMessageBox::Ok );
         }
-        if( inputSupported )
+        else
         {
             m_AudioInputDevice = new QAudioSource( defaultDeviceInfo, m_AudioFormat, this );
             m_initialized = m_AudioInputDevice != nullptr;
@@ -75,56 +67,22 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
                 // Set constant values to new audio input
                 //connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
                 connect( m_AudioInputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
-                m_AudioInThread.setThreadShouldRun( true );
-                m_AudioInThread.startAudioInThread();
-                LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d size %d", audioFormat.sampleRate(), audioFormat.bytesPerSample() );
+                LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d channels %d size %d", audioFormat.sampleRate(), audioFormat.channelCount(), audioFormat.bytesPerSample() );
             }
         }
-        else
-        {
-            LogMsg( LOG_DEBUG, "AudioInIo Format not supported rate %d size %d", audioFormat.sampleRate(), audioFormat.bytesPerSample() );
-        }
-#else
-        m_AudioFormat = audioFormat;
-        m_initialized = setAudioDevice( QAudioDeviceInfo::defaultInputDevice() );
-        m_AudioInThread.setThreadShouldRun( true );
-        m_AudioInThread.startAudioInThread();
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     }
 
     return m_initialized;
 }
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-
-//============================================================================
-bool AudioInIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
-{
-    if( !deviceInfo.isFormatSupported( m_AudioFormat ) ) 
-	{
-        qDebug() << "Format not supported!";
-        return false;
-    }
-
-    m_deviceInfo = deviceInfo;
-    delete m_AudioInputDevice;
-    m_AudioInputDevice = new QAudioInput( m_deviceInfo, m_AudioFormat, this );
-
-    // Set constant values to new audio output
-    connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
-    connect( m_AudioInputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
-
-    return true;
-}
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 void AudioInIo::reinit()
 {
     if (m_initialized)
     {
-    this->stopAudio();
-    this->startAudio();
-}
+        this->stopAudio();
+        this->startAudio();
+    }
 }
 
 //============================================================================
@@ -132,19 +90,12 @@ void AudioInIo::startAudio()
 {
     if( m_initialized )
     {
-    m_AudioInThread.setThreadShouldRun( true );
-    m_AudioInThread.startAudioInThread();
-
-    this->open( QIODevice::WriteOnly );
-    m_AudioInputDevice->start( this );
+        m_AudioInThread.setThreadShouldRun( true );
+        m_AudioInThread.startAudioInThread();
+        this->open( QIODevice::WriteOnly );
+        m_AudioInputDevice->start( this );
     }
     //LogMsg( LOG_DEBUG, "AudioInIo default buffer size %d periodic size %d", m_AudioInputDevice->bufferSize(), m_AudioInputDevice->periodSize() );
-}
-
-//============================================================================
-void AudioInIo::setVolume( float volume )
-{
-    m_volume = volume;
 }
 
 //============================================================================
@@ -152,16 +103,16 @@ void AudioInIo::flush()
 {
     if (m_initialized)
     {
-    // Flushing buffers is a bit tricky...
-    // Don't modify this unless you're sure
-    this->stopAudio();
-    if( m_AudioInputDevice )
-	{
-        m_AudioInputDevice->reset();
-	}
+        // Flushing buffers is a bit tricky...
+        // Don't modify this unless you're sure
+        this->stopAudio();
+        if( m_AudioInputDevice )
+	    {
+            m_AudioInputDevice->reset();
+	    }
 
-    this->startAudio();
-}
+        this->startAudio();
+    }
 }
 
 //============================================================================
@@ -169,36 +120,23 @@ void AudioInIo::stopAudio()
 {
     if (m_initialized)
     {
-    m_AudioInThread.setThreadShouldRun( false );
-    m_AudioInThread.stopAudioInThread();
+        m_AudioInThread.setThreadShouldRun( false );
+        m_AudioInThread.stopAudioInThread();
 
-    if( m_AudioInputDevice && m_AudioInputDevice->state() != QAudio::StoppedState )
-    {
-        // Stop audio output
-        m_AudioInputDevice->stop();
-        this->close();
+        if( m_AudioInputDevice && m_AudioInputDevice->state() != QAudio::StoppedState )
+        {
+            // Stop audio output
+            m_AudioInputDevice->stop();
+            this->close();
+        }
     }
 }
-}
-
-////============================================================================
-//static void apply_s16le_volume( float volume, uchar *data, int datalen )
-//{
-//    int samples = datalen / 2;
-//    float mult = pow( 10.0, 0.05 * volume );
-
-//    for( int i = 0; i < samples; i++ ) {
-//        qint16 val = qFromLittleEndian<qint16>( data + i * 2 )*mult;
-//        qToLittleEndian<qint16>( val, data + i * 2 );
-//    }
-//}
 
 //============================================================================
 qint64 AudioInIo::readData( char *data, qint64 maxlen )
 {
     // not used
     Q_UNUSED( data );
-
     return maxlen;
 }
 
@@ -209,7 +147,9 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     m_AudioBuffer.append( data, len );
     updateAtomicBufferSize();
     m_AudioBufMutex.unlock();
+
     m_AudioInThread.releaseAudioInThread();
+    m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude( (int16_t *)data, len );
 
     return len;
 }
@@ -321,11 +261,7 @@ void AudioInIo::slotCheckForBufferUnderun()
  //               m_AudioInputDevice->start( this );
 			}
 			break;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-		case QAudio::InterruptedState:
-            LogMsg( LOG_DEBUG, "Interrupted state.. how to handle?" );
-			break;
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
         default:
             LogMsg(LOG_DEBUG, "Unknown AudioIn State");
             break;
