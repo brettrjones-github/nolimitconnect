@@ -41,8 +41,10 @@ namespace AudioUtils
 
     void                        mixPcmAudio( int16_t * pcmData,  int16_t * outData, int toMixBytes );
 
-    //  expand pcm Audio data to disired number of samples using a multiplier.. typically PCM 8000Hz Mono Channel to PCM 48000Hz Stereo Channel
-    void                        upsamplePcmAudio( int16_t* srcSamples, int16_t prevFrameSample, int origPcmDataLenInBytes, int upResampleMultiplier, int16_t* destSamples, int16_t& lastSampleOfFrame );
+    //  expand pcm Audio data to desired number of samples using a multiplier.. typically PCM 8000Hz Mono Channel to PCM 48000Hz Stereo Channel
+    void                        upsamplePcmAudioLerpPrev( int16_t* srcSamples, int srcSampleCnt, int upResampleMultiplier, int16_t prevFrameSample, int16_t* destSamples );
+    //  expand pcm Audio data to desired number of samples using a multiplier.. typically PCM 8000Hz Mono Channel to PCM 48000Hz Stereo Channel
+    void                        upsamplePcmAudioLerpNext( int16_t* srcSamples, int srcSampleCnt, int upResampleMultiplier, int16_t nextFrameSample, int16_t* destSamples );
 
     //  contract pcm Audio data to disired number of samples using a divider.. typically PCM 48000Hz Stereo Channel to PCM 8000Hz Mono Channel 
     void                        dnsamplePcmAudio( int16_t* srcSamples, int resampledCnt, int dnResampleDivider, int16_t* destSamples );
@@ -52,5 +54,9 @@ namespace AudioUtils
     int                         getPeakPcmAmplitude( int16_t* srcSamples, int datalen );
 
     int                         hasSomeSilence( int16_t* srcSamples, int datalen );
+    int                         countConsecutiveValues( int16_t* srcSamples, int datalen, int minConsecutiveToMatch );
+
+    // interperlate between samples for up sample audio to a higher sample rate
+    int16_t                     lerpPcm( int16_t samp1, int16_t samp2, float totalSteps, int thisLerpIdx );
 
 } // namespace AudioUtils

@@ -44,7 +44,7 @@ AudioInIo::~AudioInIo()
 }
 
 //============================================================================
-bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
+bool AudioInIo::initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo )
 {
     if( !m_initialized )
     {

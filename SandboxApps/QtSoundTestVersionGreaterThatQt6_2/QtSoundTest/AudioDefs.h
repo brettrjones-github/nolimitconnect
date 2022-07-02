@@ -16,8 +16,8 @@ static const double BYTES_TO_MS_MULTIPLIER_MICROPHONE = ( (double)AUDIO_MS_MICRO
 static const int AUDIO_CHANNEL_BYTES_SPEAKERS = 2;      // 2 bytes per sample (sizeof int16)
 static const int AUDIO_SAMPLE_BYTES_SPEAKERS = 2;       // 2 bytes per sample * 1 channels
 static const int AUDIO_MS_SPEAKERS = 80;                // 80 ms = 0.08 sec of audio data
-//static const int AUDIO_BUF_SIZE_48000_2_S16 = 15360;    // ( 48000 * 2 bytes per sample * 2 channels ) * 0.08 = 80 ms of audio data
-static const int AUDIO_BUF_SIZE_48000_1_S16 = 7680;    // ( 48000 * 2 bytes per sample * 1 channels ) * 0.08 = 80 ms of audio data
+static const int AUDIO_BUF_SIZE_48000_2_S16 = 15360;    // ( 48000 * 2 bytes per sample * 2 channels ) * 0.08 = 80 ms of audio data
+static const int AUDIO_BUF_SIZE_48000_1_S16 = 7680;     // ( 48000 * 2 bytes per sample * 1 channels ) * 0.08 = 80 ms of audio data
 static const double BYTES_TO_MS_MULTIPLIER_SPEAKERS = ((double)AUDIO_MS_SPEAKERS / (double)AUDIO_BUF_SIZE_48000_1_S16);
 
 // kodi output (float) 960 frames 

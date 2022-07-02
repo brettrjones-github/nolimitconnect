@@ -1,7 +1,9 @@
 #include "VxTime.h"
 #include "VxTimeUtil.h"
 #include <time.h>
-//#include <sysheaders/sys/time.h>
+#ifdef TARGET_OS_LINUX
+# include <sys/time.h>
+#endif // TARGET_OS_LINUX
 #if defined(TARGET_OS_WINDOWS)
 # include "windows.h"
 #define ZeroMemory2(Destination,Length) memset((Destination),0,(Length))

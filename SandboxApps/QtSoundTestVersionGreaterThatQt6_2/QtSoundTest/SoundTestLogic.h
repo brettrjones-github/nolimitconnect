@@ -27,8 +27,9 @@ public:
     explicit SoundTestLogic( Waveform * waveForm, QWidget *parent );
 
     AudioIoMgr&                 getAudioIoMgr()             { return m_AudioIoMgr; }
-    AudioTestGenerator *        getAudio400HzGenerator()    { return m_Test400HzPtoPGenerator.get(); }
-    AudioTestGenerator *        getAudio100HzGenerator()    { return m_Test100HzGenerator.get(); }
+    AudioTestGenerator*         getAudio100HzGenerator()    { return m_Test100HzGenerator.get(); }
+    AudioTestGenerator *        getAudio400HzGenerator()    { return m_Test400HzGenerator.get(); }
+
     SoundTestThread *           getSoundTestThread()        { return m_SoundTestThread; }
 
     void						setSoundThreadShouldRun( bool shouldRun );
@@ -86,7 +87,8 @@ public:
 
     // temp for testing conversions
     void                        generateAudioTone( QByteArray retAudioData, const QAudioFormat& format, qint64 durationUs, int toneHz );
-    virtual int                 readGenerated4888HzData( char* data, int maxlen ) override;
+    virtual int                 readGenerated4800HzMono100HzToneData( char* data, int maxlen ) override;
+    int                         readGenerated8000HzMono160HzToneData( char* data, int maxlen, int16_t& peekNextSample ) override;
 
 signals:
     void                        signalFrameRendered();
@@ -115,9 +117,11 @@ private:
 
     bool                        m_RenderWindowVisible = false;
 
-    QScopedPointer<AudioTestGenerator>   m_Test200HzKodiFloatGenerator;
     QScopedPointer<AudioTestGenerator>   m_Test100HzGenerator;
-    QScopedPointer<AudioTestGenerator>   m_Test400HzPtoPGenerator;
+    QScopedPointer<AudioTestGenerator>   m_Test400HzGenerator;
+    QScopedPointer<AudioTestGenerator>   m_Test600HzKodiFloatGenerator;
+
+    QScopedPointer<AudioTestGenerator>   m_Test8000HzMono160HzToneGenerator;
 };
 
 #endif // SoundTestLOGIC_H

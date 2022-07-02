@@ -83,6 +83,7 @@ Waveform::Waveform(QWidget *parent)
     connect( this, SIGNAL( signalBufferLengthChanged( qint64 ) ), this, SLOT( slotBufferLengthChanged( qint64 ) ) );
     connect( this, SIGNAL( signalDataLengthChanged( qint64 ) ), this, SLOT( slotDataLengthChanged( qint64 ) ) );
     connect( this, SIGNAL( signalPlayPositionChanged( qint64 ) ), this, SLOT( slotPlayPositionChanged( qint64 ) ) );
+    m_ElapseTimer.start();
 }
 
 Waveform::~Waveform()
@@ -252,6 +253,9 @@ void Waveform::audioPositionChanged(qint64 position)
         m_audioPosition = position;
         setWindowPosition(position);
     }
+
+    setPositionUpdated( true );
+    paintTiles();
 }
 
 void Waveform::deletePixmaps()
@@ -460,8 +464,13 @@ void Waveform::resetTiles(qint64 newStartPos)
 
 void  Waveform::speakerAudioPlayed( void * data, int dataLen )
 {
-    QByteArray audioOutData( (char *)data, dataLen );
-    emit signalAudioOutPlayed( audioOutData );
+    // Qt cannot keep up .. skip if still updating
+    if( getPositionUpdated() )
+    {
+        setPositionUpdated( false );
+        QByteArray audioOutData( (char*)data, dataLen );
+        emit signalAudioOutPlayed( audioOutData );
+    }
 }
 
 void  Waveform::slotAudioOutPlayed( const QByteArray& audioOutData )
@@ -503,6 +512,15 @@ void  Waveform::slotAudioOutPlayed( const QByteArray& audioOutData )
     }
 
     emit audioPositionChanged( m_audioPosition );
+    static bool pixmapCreate = false;
+    if( !pixmapCreate && m_ElapseTimer.elapsed() > 500 )
+    {
+        pixmapCreate = true;
+        m_ElapseTimer.start();
+        createPixmaps( geometry().size() );
+        paintTiles();
+        update();
+    }
 }
 
 void  Waveform::slotBufferLengthChanged( qint64 duration )
@@ -517,5 +535,4 @@ void  Waveform::slotDataLengthChanged( qint64 duration )
 
 void  Waveform::slotPlayPositionChanged( qint64 position )
 {
-
 }

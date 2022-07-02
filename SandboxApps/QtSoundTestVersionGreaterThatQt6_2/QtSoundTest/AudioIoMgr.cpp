@@ -30,17 +30,18 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 , m_AudioOutMixer( *this, audioCallbacks, this )
 , m_AudioOutIo( *this, m_AudioOutMutex, this )
 , m_AudioInIo( *this, m_AudioInMutex, this )
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-, m_AudioOutDeviceInfo( QAudioDeviceInfo::defaultOutputDevice() )
-, m_AudioInDeviceInfo( QAudioDeviceInfo::defaultInputDevice() )
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 {
     memset( m_MyLastAudioOutSample, 0, sizeof( m_MyLastAudioOutSample ) );
     memset( m_MicrophoneEnable, 0, sizeof( m_MicrophoneEnable ) );
     memset( m_SpeakerEnable, 0, sizeof( m_SpeakerEnable ) );
 
     m_AudioOutFormat.setSampleRate( 48000 );
-    m_AudioOutFormat.setChannelCount( 1 );
+#ifdef Q_OS_WIN
+    m_AudioOutFormat.setChannelCount( 2 ); // use 2 channels for as low latency as possible because we do not have much control on the read size requested
+#else
+    m_AudioOutFormat.setChannelCount( 1 ); // android seems to be at the edge of what it can do in a read so use one channel
+#endif // Q_OS_WIN
+
     m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
 
     const QAudioDevice& defaultOutDeviceInfo = m_MediaDevices->defaultAudioOutput();
@@ -91,6 +92,7 @@ void AudioIoMgr::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMi
  // update microphone output
 void AudioIoMgr::enableMicrophone( bool enable )
 {
+    m_AudioInIo.wantMicrophoneInput( enable );
 }
 
 //============================================================================
@@ -112,11 +114,6 @@ void AudioIoMgr::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerO
     {
         m_WantSpeakerOutput = shouldEnable;
         enableSpeakers( shouldEnable );
-
-        //if( enableSpeakers )
-        //{
-        //    m_AudioOutIo.fromGuiCheckSpeakerOutForUnderrun();
-        //}
     }
 }
 
@@ -127,7 +124,6 @@ void AudioIoMgr::enableSpeakers( bool enable )
     m_AudioOutMixer.wantSpeakerOutput( enable );
     m_AudioOutIo.wantSpeakerOutput( enable );
 }
-
 
 //============================================================================
 int AudioIoMgr::fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence )
@@ -273,9 +269,6 @@ void AudioIoMgr::pauseAudioOut()
         else if( m_AudioOutIo.getState() == QAudio::ActiveState )
         {
             m_IsOutPaused = true;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-            m_AudioOutIo.suspend();
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
         }
         else if( m_AudioOutIo.getState() == QAudio::StoppedState )
         {
@@ -296,9 +289,6 @@ void AudioIoMgr::resumeAudioOut()
         if( m_AudioOutIo.getState() == QAudio::SuspendedState )
         {
             m_IsOutPaused = false;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-            m_AudioOutIo.resume();
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
         }
         else if( m_AudioOutIo.getState() == QAudio::ActiveState )
         {
@@ -307,9 +297,6 @@ void AudioIoMgr::resumeAudioOut()
         else if( m_AudioOutIo.getState() == QAudio::StoppedState )
         {
             m_IsOutPaused = false;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-            m_AudioOutIo.resume();
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
         }
         else if( m_AudioOutIo.getState() == QAudio::IdleState )
         {
@@ -330,21 +317,15 @@ void AudioIoMgr::initAudioIoSystem()
 
     if( !m_AudioIoInitialized )
     {
-        m_AudioOutIo.initAudioOut( m_AudioOutFormat, m_MediaDevices->defaultAudioInput() );
+        m_AudioOutIo.initAudioOut( m_AudioOutFormat, m_MediaDevices->defaultAudioOutput() );
 
         connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( speakerStateChanged( QAudio::State ) ) );
-        //connect( m_AudioOutIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
-        //connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
-        // m_AudioOutIo.startAudio();
 
         if( isMicrophoneAvailable() )
         {
-            m_AudioInIo.initAudioIn( m_AudioInFormat );
+            m_AudioInIo.initAudioIn( m_AudioInFormat, m_MediaDevices->defaultAudioInput() );
 
             connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
-            //connect( m_AudioInIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
-            //connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
-            // m_AudioInIo.startAudio();
         }
 
         m_AudioIoInitialized = true;

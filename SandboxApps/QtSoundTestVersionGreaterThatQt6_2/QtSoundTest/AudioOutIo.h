@@ -15,7 +15,7 @@
 //============================================================================
 
 
-#include <QObject>
+#include <QWidget>
 #include <QIODevice>
 #include <QByteArray>
 #include <QAudioFormat>
@@ -33,13 +33,14 @@ class QTimer;
 class AudioOutIo : public QIODevice
 {
     Q_OBJECT
+
 public:
     explicit AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
      ~AudioOutIo() override;
 
     bool                        initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
 
-    QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice; }
+    QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice.data(); }
     QAudio::State               getState()                                  { return (m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
     QAudio::Error               getError()                                  { return (m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
@@ -56,8 +57,12 @@ public:
     void                        stopAudioOut();
     void                        startAudioOut();
 
+    void                        toggleSuspendResume();
+
     void                        setUpsampleMultiplier( int upSampleMult )   { m_UpsampleMutiplier = upSampleMult; }
     int                         getUpsampleMultiplier( void )               { return m_UpsampleMutiplier; }
+
+    void                        setSpeakerVolume( int volume0to100 );
 
 signals:
     void						signalCheckForBufferUnderun();
@@ -71,10 +76,13 @@ protected slots:
     void                        slotSendResumeStatus( void );
 
 protected:
-	qint64                      readData( char *data, qint64 maxlen ) override;
-    qint64                      writeData( const char *data, qint64 len )  override;
+    qint64                      readData( char* data, qint64 maxlen ) override;
+    qint64                      writeData( const char *data, qint64 len ) override;
+    qint64                      bytesAvailable() const override;
+    qint64                      size() const override;
 
-    bool						isSequential() const  override { return false; } // if true then could not reposition data position
+
+    //bool						isSequential() const  override { return false; } // if true then could not reposition data position
 
 private:
     void                        reinit();
@@ -92,9 +100,12 @@ private:
     QAudio::State               m_AudioOutState{ QAudio::State::StoppedState };
     QAudio::State               m_AudioOutPreviousState{ QAudio::State::StoppedState };
     QAudio::Error               m_AudioOutPreviousError{ QAudio::UnderrunError };
-    QAudioSink*                 m_AudioOutputDevice = nullptr;
+    QScopedPointer<QAudioSink>  m_AudioOutputDevice;
+
     QTimer*                     m_ResumeTimer{ nullptr };
     bool                        m_AudioOutDeviceIsStarted{ false };
     int                         m_UpsampleMutiplier{ 0 };
+
     int16_t                     m_PrevLastsample{ 0 };
+    int                         m_PrevLerpedSamplesCnt{ 0 };
 };

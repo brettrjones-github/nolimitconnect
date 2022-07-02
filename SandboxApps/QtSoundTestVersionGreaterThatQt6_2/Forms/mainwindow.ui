@@ -29,22 +29,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>VOIP Volume</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSlider" name="m_VoipVolumeSlider">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <layout class="QHBoxLayout" name="horizontalLayout_4"/>
     </item>
     <item>
      <widget class="QCheckBox" name="m_PauseKodiCheckbox">

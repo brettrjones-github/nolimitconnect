@@ -42,7 +42,6 @@ qreal AudioUtils::nyquistFrequency(const QAudioFormat &format)
 //=============================================================================
 QString AudioUtils::formatToString(const QAudioFormat &format)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     QString result;
     if (QAudioFormat() != format) {
         Q_ASSERT(format.sampleFormat() == QAudioFormat::Int16);
@@ -82,78 +81,18 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
             .arg(formatChannels);
     }
     return result;
-#else
-    QString result;
-
-    if (QAudioFormat() != format) {
-        if (format.codec() == "audio/pcm") {
-            Q_ASSERT(format.sampleType() == QAudioFormat::SignedInt);
-
-            const QString formatEndian = (format.byteOrder() == QAudioFormat::LittleEndian)
-                ?   QString("LE") : QString("BE");
-
-            QString formatType;
-            switch (format.sampleType()) {
-            case QAudioFormat::SignedInt:
-                formatType = "signed";
-                break;
-            case QAudioFormat::UnSignedInt:
-                formatType = "unsigned";
-                break;
-            case QAudioFormat::Float:
-                formatType = "float";
-                break;
-            case QAudioFormat::Unknown:
-                formatType = "unknown";
-                break;
-            }
-
-            QString formatChannels = QString("%1 channels").arg(format.channelCount());
-            switch (format.channelCount()) {
-            case 1:
-                formatChannels = "mono";
-                break;
-            case 2:
-                formatChannels = "stereo";
-                break;
-            }
-
-            result = QString("%1 Hz %2 bit %3 %4 %5")
-                .arg(format.sampleRate())
-                .arg(format.sampleSize())
-                .arg(formatType)
-                .arg(formatEndian)
-                .arg(formatChannels);
-        } else {
-            result = format.codec();
-        }
-    }
-
-    return result;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 //=============================================================================
 bool AudioUtils::isPCM(const QAudioFormat &format)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     return format.sampleFormat() == QAudioFormat::Int16;
-#else
-    return (format.codec() == "audio/pcm");
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 //=============================================================================
 bool AudioUtils::isPCMS16LE(const QAudioFormat &format)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     return isPCM(format) && !IsBigEndianCpu();
-#else
-    return isPCM(format) &&
-           format.sampleType() == QAudioFormat::SignedInt &&
-           format.sampleSize() == 16 &&
-           format.byteOrder() == QAudioFormat::LittleEndian;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 const qint16  PCMS16MaxValue     =  32767;
@@ -237,11 +176,11 @@ void AudioUtils::mixPcmAudio( int16_t* pcmData, int16_t* outData, int toMixBytes
 }
 
 //=============================================================================
-void AudioUtils::upsamplePcmAudio( int16_t* srcSamples, int16_t prevFrameSample, int origPcmDataLenInBytes, int upResampleMultiplier, int16_t* destSamples, int16_t& lastSampleOfFrame )
+void AudioUtils::upsamplePcmAudioLerpPrev( int16_t* srcSamples, int srcSampleCnt, int upResampleMultiplier, int16_t prevFrameSample, int16_t* destSamples )
 {
-    int srcSampleCnt = origPcmDataLenInBytes >> 1;
     int16_t firstSample = prevFrameSample;
-    int16_t secondSample = srcSampleCnt;
+    int16_t secondSample;
+    float sampleUpMult = (float)upResampleMultiplier;
     float sampleStep;
     int iDestIdx = 0;
     for( int i = 0; i < srcSampleCnt; i++ )
@@ -250,15 +189,15 @@ void AudioUtils::upsamplePcmAudio( int16_t* srcSamples, int16_t prevFrameSample,
         if( secondSample >= firstSample )
         {
             // ramp up
-            sampleStep = ((secondSample - firstSample) / upResampleMultiplier);
+            sampleStep = ((secondSample - firstSample) / sampleUpMult);
         }
         else
         {
             // ramp down
-            sampleStep = -((firstSample - secondSample) / upResampleMultiplier);
+            sampleStep = -((firstSample - secondSample) / sampleUpMult);
         }
 
-        if( 0 == sampleStep )
+        if( 0.0f == sampleStep )
         {
             for( int j = 0; j < upResampleMultiplier; ++j )
             {
@@ -269,8 +208,7 @@ void AudioUtils::upsamplePcmAudio( int16_t* srcSamples, int16_t prevFrameSample,
         else
         {
             float sampleOffs = sampleStep;
-            int resampleCnt = (int)upResampleMultiplier;
-            for( int j = 0; j < resampleCnt; ++j )
+            for( int j = 0; j < upResampleMultiplier; ++j )
             {
                 destSamples[ iDestIdx ] = (int16_t)(firstSample + sampleOffs);
                 iDestIdx++;
@@ -280,9 +218,52 @@ void AudioUtils::upsamplePcmAudio( int16_t* srcSamples, int16_t prevFrameSample,
 
         firstSample = secondSample;
     }
+}
 
-    // save the last sample to be used as first sample reference in next frame
-    lastSampleOfFrame = srcSamples[ srcSampleCnt - 1 ];
+//=============================================================================
+void AudioUtils::upsamplePcmAudioLerpNext( int16_t* srcSamples, int srcSampleCnt, int upResampleMultiplier, int16_t nextFrameSample, int16_t* destSamples )
+{
+    int16_t firstSample = srcSamples[ 0 ];
+    int16_t secondSample;
+    float sampleUpMult = (float)upResampleMultiplier;
+    float sampleStep;
+    int iDestIdx = 0;
+    for( int i = 1; i <= srcSampleCnt; i++ )
+    {
+        secondSample = i == srcSampleCnt ? nextFrameSample : srcSamples[ i ];
+
+        if( secondSample >= firstSample )
+        {
+            // ramp up
+            sampleStep = ((secondSample - firstSample) / sampleUpMult);
+        }
+        else
+        {
+            // ramp down
+            sampleStep = -((firstSample - secondSample) / sampleUpMult);
+        }
+
+        if( 0.0f == sampleStep )
+        {
+            for( int j = 0; j < upResampleMultiplier; ++j )
+            {
+                destSamples[ iDestIdx ] = firstSample;
+                iDestIdx++;
+            }
+        }
+        else
+        {
+            float sampleOffs = sampleStep;
+            for( int j = 0; j < upResampleMultiplier; ++j )
+            {
+                destSamples[ iDestIdx ] = (int16_t)(firstSample + sampleOffs);
+                iDestIdx++;
+                sampleOffs += sampleStep;
+            }
+        }
+
+        firstSample = secondSample;
+    }
 }
 
 //=============================================================================
@@ -334,7 +315,6 @@ int AudioUtils::getPeakPcmAmplitude( int16_t* srcSamples, int datalen )
 int AudioUtils::hasSomeSilence( int16_t* srcSamples, int datalen )
 {
     int samples = datalen / 2;
-    int peakValue{ 0 };
     int lastSample = 0;
     int silenceSamples = 0;
     for( int i = 0; i < samples; i++ )
@@ -348,4 +328,50 @@ int AudioUtils::hasSomeSilence( int16_t* srcSamples, int datalen )
     }
 
     return silenceSamples > 4 ? silenceSamples : 0;
+}
+
+
+//============================================================================
+int AudioUtils::countConsecutiveValues( int16_t* srcSamples, int datalen, int minConsecutiveToMatch )
+{
+    int samples = datalen / 2;
+    int lastSample = srcSamples[ 0 ];
+    int consecutiveInARow = 0;
+    int consecutiveTotalCnt = 0;
+    for( int i = 1; i < samples; i++ )
+    {
+        if( srcSamples[ i ] == lastSample )
+        {
+            consecutiveInARow++;
+            if( consecutiveInARow >= minConsecutiveToMatch )
+            {
+                consecutiveTotalCnt++;
+            }
+        }
+        else
+        {
+            consecutiveInARow = 0;
+        }
+
+        lastSample = srcSamples[ i ];
+    }
+
+    return consecutiveTotalCnt;
+}
+
+
+//============================================================================
+// interperlate between samples for up sample audio to a higher sample rate
+int16_t AudioUtils::lerpPcm( int16_t samp1, int16_t samp2, float totalSteps, int thisLerpIdx )
+{
+    float sampleStep = samp1 >= samp2 ? ((samp2 - samp1) / totalSteps) : -((samp1 - samp2) / totalSteps);
+
+    if( 0.0f == sampleStep )
+    {
+        return samp1;
+    }
+    else
+    {
+        return (int16_t)(samp1 + thisLerpIdx * sampleStep);
+    }
 }

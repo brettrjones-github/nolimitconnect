@@ -22,7 +22,6 @@ protected slots:
 
     void                        slotMicrophoneVolumeChanged( int volume );
     void                        slotSpeakerVolumeChanged( int volume );
-    void                        slotVoipVolumeChanged( int volume );
 
 protected:
     Ui::MainWindow*             ui;

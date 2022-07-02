@@ -50,7 +50,9 @@ public:
     virtual void				fromAudioOutResumed( void ) = 0;
 
     // temp for testing conversions
-    virtual int                 readGenerated4888HzData( char* data, int maxlen ) = 0;
+    virtual int                 readGenerated4800HzMono100HzToneData( char* data, int maxlen ) = 0;
+    // temp for testing conversions peekNextSample will be set to what will be the first sample of the next read
+    virtual int                 readGenerated8000HzMono160HzToneData( char* data, int maxlen, int16_t& peekNextSample ) = 0;
 };
 
 class IAudioRequests

@@ -47,46 +47,33 @@ AudioOutIo::~AudioOutIo()
 }
 
 //============================================================================
-bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo )
+bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& deviceInfo )
 {
     if( !m_initialized )
     {
-        m_AudioFormat = audioFormat;
-        m_AudioOutputDevice = new QAudioSink( m_AudioFormat, this);
-        m_AudioOutputDevice->setBufferSize( AUDIO_BUF_SIZE_48000_1_S16 );
+        m_initialized = true;
 
-        #ifdef Q_OS_WIN
-        // hate to hard code this but qt/windows wants a buffer that is not a multiple of 6 (48000 / 8000)
-        // which causes many issues.. the minimum qt will accept in windows is 16384 which is not evenly divisible by 6
+        QAudioFormat format = deviceInfo.preferredFormat();
 
-        // very stange request 16384 and you get 16384 but request  16390 and you get 16384 so request 16390 but it seems to be reverted to 16384 after a few callse
-        m_AudioOutputDevice->setBufferSize( 16390 );
-        #endif // Q_OS_WIN
-
-        m_AudioOutputDevice->start();
-        int syncBufferSize = m_AudioOutputDevice->bufferSize();
-        if( syncBufferSize != AUDIO_BUF_SIZE_48000_1_S16 * 2 )
+        format.setSampleRate(audioFormat.sampleRate());
+        format.setChannelCount(audioFormat.channelCount());
+        format.setSampleFormat(QAudioFormat::Int16); // only pcm is allowed
+        if( !deviceInfo.isFormatSupported(format) )
         {
-            LogMsg( LOG_ERROR, "AudioOutIo::initAudioOut syncBufferSize %d != mixer buffer size %d", syncBufferSize, AUDIO_BUF_SIZE_48000_1_S16 );
+            LogMsg( LOG_ERROR, " AudioOutIo::initAudioOut format not supported");
         }
 
-        m_AudioOutputDevice->stop();
-        m_initialized = m_AudioOutputDevice != nullptr;
-        QAudioFormat audioResultFormat = m_AudioOutputDevice->format();
-        if( audioResultFormat != m_AudioFormat )
-        {
-            LogMsg( LOG_ERROR, "AudioOutIo::initAudioOut format not supported" );
-            m_AudioFormat = audioResultFormat;
-        }
+        m_AudioFormat = format;
+        m_AudioOutputDevice.reset( new QAudioSink( deviceInfo, m_AudioFormat ) );
 
+        m_AudioOutputDevice->setBufferSize(format.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16);
 
-
-        // determine multiply value to go from 8000Hz mono to the format we want
-        setUpsampleMultiplier( audioResultFormat.sampleRate() * audioResultFormat.channelCount() / 8000 );
+        // determine multiply value to go from 8000Hz mono to the speaker format we want
+        setUpsampleMultiplier( (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) / 8000 );
 
         this->open( QIODevice::ReadOnly );
 
-        connect(m_AudioOutputDevice, SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
+        connect(m_AudioOutputDevice.data(), SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
     }
 
     return m_initialized;
@@ -95,13 +82,44 @@ bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& de
 //============================================================================
 void AudioOutIo::wantSpeakerOutput( bool enableOutput ) 
 { 
-    if( m_AudioOutDeviceIsStarted )
+    m_AudioOutputDevice->stop();
+    if( !m_AudioOutDeviceIsStarted )
     {
-        enableOutput ? resume() : suspend();
+        m_AudioOutDeviceIsStarted = true;
     }
-    else if( enableOutput )
+
+    if( enableOutput )
     {
-        startAudioOut();
+        if (m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState)
+        {
+            m_AudioOutputDevice->resume();
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::ActiveState)
+        {
+            // already enabled
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::IdleState)
+        {
+            // no-op
+        }
+
+        // start in pull mode.. qt will call readData as needed for sound output
+        m_AudioOutputDevice->start( this );
+    }
+    else
+    {
+        if (m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState)
+        {
+            // already stopped
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::ActiveState)
+        {
+            m_AudioOutputDevice->suspend();
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::IdleState)
+        {
+            // no-op
+        }
     }
 }
 
@@ -110,6 +128,23 @@ void AudioOutIo::reinit()
 {
     this->stopAudioOut();
     this->startAudioOut();
+}
+
+//============================================================================
+void AudioOutIo::toggleSuspendResume()
+{
+    if( m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState )
+    {
+        m_AudioOutputDevice->resume();
+        //m_suspendResumeButton->setText( tr( "Suspend playback" ) );
+    }
+    else if( m_AudioOutputDevice->state() == QAudio::ActiveState ) {
+        m_AudioOutputDevice->suspend();
+        //m_suspendResumeButton->setText( tr( "Resume playback" ) );
+    }
+    else if( m_AudioOutputDevice->state() == QAudio::IdleState ) {
+        // no-op
+    }
 }
 
 //============================================================================
@@ -122,9 +157,22 @@ void AudioOutIo::startAudioOut()
     m_PeriodicTimer->start();
     m_ElapsedTimer.start();
 
+    // start in pull mode.. qt will call readData as needed for sound output
     m_AudioOutputDevice->start( this );  
 
     //LogMsg( LOG_DEBUG, "AudioOutIo default buffer size %d periodic size %d", m_AudioOutputDevice->bufferSize(), m_AudioOutputDevice->periodSize() );
+}
+
+//============================================================================
+qint64 AudioOutIo::bytesAvailable() const
+{
+    return m_AudioIoMgr.getAudioOutMixer().getDataReadyForSpeakersLen();
+}
+
+//============================================================================
+qint64 AudioOutIo::size() const
+{
+    return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
 }
 
 //============================================================================
@@ -211,9 +259,10 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     }
     */
 
+
     qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readDataFromMixer( data, maxlen, getUpsampleMultiplier() );
-    //totalRead += readAmount;
-    //return readAmount;
+    totalRead += readAmount;
+    return readAmount;
     if( readAmount != maxlen )
     {
         LogMsg( LOG_DEBUG, "readData mismatch with maxlen %d and read %d", maxlen, readAmount );
@@ -402,4 +451,14 @@ void AudioOutIo::slotSendResumeStatus( void )
 {
     m_ResumeTimer->stop();
     m_AudioIoMgr.fromAudioOutResumed();
+}
+
+//============================================================================
+void AudioOutIo::setSpeakerVolume( int volume0to100 )
+{
+    qreal linearVolume = QAudio::convertVolume( volume0to100 / qreal( 100 ),
+        QAudio::LogarithmicVolumeScale,
+        QAudio::LinearVolumeScale );
+
+    m_AudioOutputDevice->setVolume( linearVolume );
 }

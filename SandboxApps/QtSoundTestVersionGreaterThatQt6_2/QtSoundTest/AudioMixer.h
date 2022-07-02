@@ -57,6 +57,8 @@ public:
 
     // read audio data from mixer.. assumes upSampleMult is multiplier to upsample pcm 1 channel 8000 Hz
     qint64                      readDataFromMixer( char *data, qint64 maxlen, int upSampleMult );
+
+    void                        mixerWasReadByOutput( int readLen, int upSampleMult );
  
     // space available and not used by any application
     int                         getAudioMixerFreeSpace( bool mixerIsLocked = false );
@@ -93,10 +95,12 @@ protected:
 
     bool                        m_SpeakersMuted{ false };
     bool                        m_WasReset{ true };
-    int                         m_PartialFrameRead{ 0 };
+    int                         m_AudioOutRead{ 0 };
     int                         m_PeakAmplitude{ 0 };
     float                       m_MixerVolume{ 100.0f };
-    int16_t                     m_PrevLastsample{ 0 };
+
+    int                         m_PrevLerpedSamplesCnt{ 0 };
+    int16_t                     m_PrevLerpedSampleValue{ 0 };
 
     QElapsedTimer               m_ElapsedTimer;
     QAudioFormat                m_MixerFormat;

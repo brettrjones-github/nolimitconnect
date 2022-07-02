@@ -65,6 +65,7 @@ inline NullDebug nullDebug() { return NullDebug(); }
 #include <QPixmap>
 #include <QScopedPointer>
 #include <QWidget>
+#include <QElapsedTimer>
 
 /**
  * Widget which displays a section of the audio waveform.
@@ -91,6 +92,10 @@ public:
     void reset();
 
     void speakerAudioPlayed( void * data, int dataLen );
+
+    bool getPositionUpdated() { return m_PositionUpdated; }
+
+    void setPositionUpdated( bool posUpdated ) { m_PositionUpdated = posUpdated; }
 
 signals:
     void signalAudioOutPlayed( const QByteArray & buffer );
@@ -247,6 +252,8 @@ private:
     qint64                  m_windowPosition;
     qint64                  m_windowLength;
     bool                    m_firstAudioData = true;
+    bool                    m_PositionUpdated{ true };
+    QElapsedTimer           m_ElapseTimer;
 
 };
 

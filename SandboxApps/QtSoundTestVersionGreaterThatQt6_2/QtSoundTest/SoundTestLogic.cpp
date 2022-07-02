@@ -13,7 +13,10 @@ SoundTestLogic::SoundTestLogic( Waveform * waveForm, QWidget *parent )
 , m_AudioIoMgr( *this, this )
 {
     int displayBufCnt = 17; // 16 * 80ms = 1.280 seconds
-    m_WaveForm->initialize( m_AudioIoMgr.getAudioOutFormat(), AUDIO_BUF_SIZE_48000_1_S16, AUDIO_MS_SPEAKERS * (displayBufCnt / 2) * 1000, AUDIO_BUF_SIZE_48000_1_S16 * ( displayBufCnt / 2 ) );
+    int readReqLen = 16384;
+
+    // m_WaveForm->initialize( m_AudioIoMgr.getAudioOutFormat(), AUDIO_BUF_SIZE_48000_1_S16, AUDIO_MS_SPEAKERS * (displayBufCnt / 2) * 1000, AUDIO_BUF_SIZE_48000_1_S16 * ( displayBufCnt / 2 ) );
+    m_WaveForm->initialize( m_AudioIoMgr.getAudioOutFormat(), readReqLen, AUDIO_MS_SPEAKERS * (displayBufCnt / 2) * 1000, readReqLen * (displayBufCnt / 2) );
 
     QAudioFormat kodiSpeakerFormat;
     kodiSpeakerFormat.setSampleRate( 48000 );
@@ -22,20 +25,34 @@ SoundTestLogic::SoundTestLogic( Waveform * waveForm, QWidget *parent )
  
     m_AudioIoMgr.initAudioIoSystem();
 
-    //const QAudioDevice& deviceInfo = m_AudioIoMgr.getAudioOutIo();
-
-    const int durationSeconds = 1;
+    // I have no clue why.. maybe some low freq filter but in qt/android a tone of 100 hz is ignored.. use 200Hz or higher
     int toneSampleRateHz = 200;
-    m_Test200HzKodiFloatGenerator.reset( new AudioTestGenerator( kodiSpeakerFormat, durationSeconds * 1000000, toneSampleRateHz ) );
-    m_Test200HzKodiFloatGenerator->start();
-
-    toneSampleRateHz = 300;
-    m_Test100HzGenerator.reset( new AudioTestGenerator( m_AudioIoMgr.getAudioOutFormat(), durationSeconds * 1000000, toneSampleRateHz ) );
+    double fps = 1.0f / (double)toneSampleRateHz;
+    int durationMicroSeconds = fps * 1000000;
+    m_Test100HzGenerator.reset( new AudioTestGenerator( m_AudioIoMgr.getAudioInFormat(), durationMicroSeconds, toneSampleRateHz ) );
     m_Test100HzGenerator->start();
 
     toneSampleRateHz = 400;
-    m_Test400HzPtoPGenerator.reset( new AudioTestGenerator( m_AudioIoMgr.getAudioInFormat(), durationSeconds * 1000000, toneSampleRateHz ) );
-    m_Test400HzPtoPGenerator->start();
+    fps = 1.0f / (double)toneSampleRateHz;
+    durationMicroSeconds = fps * 1000000;
+    m_Test400HzGenerator.reset( new AudioTestGenerator( m_AudioIoMgr.getAudioInFormat(), durationMicroSeconds, toneSampleRateHz ) );
+    m_Test400HzGenerator->start();
+
+    toneSampleRateHz = 600;
+    fps = 1.0f / (double)toneSampleRateHz;
+    durationMicroSeconds = fps * 1000000;
+    m_Test600HzKodiFloatGenerator.reset( new AudioTestGenerator( kodiSpeakerFormat, durationMicroSeconds, toneSampleRateHz ) );
+    m_Test600HzKodiFloatGenerator->start();
+
+    QAudioFormat mixerFormat;
+    mixerFormat.setSampleRate( 8000 );
+    mixerFormat.setChannelCount( 1 );
+    mixerFormat.setSampleFormat( QAudioFormat::Int16 );
+
+    toneSampleRateHz = 200;
+    fps = 1.0 / (double)toneSampleRateHz;
+    durationMicroSeconds = fps * 1000000;
+    m_Test8000HzMono160HzToneGenerator.reset( new AudioTestGenerator( mixerFormat, durationMicroSeconds, toneSampleRateHz ) );
 
     // kodi float sound thread not currently supported
     //m_SoundTestThread = new SoundTestThread( *this );
@@ -232,7 +249,7 @@ void SoundTestLogic::playP2p400HzIfEnabled( int mixerSpaceAvailable )
         int frameCount = mixerSpaceAvailable ? mixerSpaceAvailable / MIXER_BUF_SIZE_8000_1_S16 : 1;
         QAudioFormat audioFormat = m_Test100HzGenerator->getAudioFormat();
         int divideCnt = (audioFormat.sampleRate() * audioFormat.channelCount()) / 8000;
-        const qreal genBufLen = MIXER_BUF_SIZE_8000_1_S16 * divideCnt;
+        int genBufLen = MIXER_BUF_SIZE_8000_1_S16 * divideCnt;
         char* genBuf = new char[ genBufLen ];
         static char audioBuf[ MIXER_BUF_SIZE_8000_1_S16 ];
 
@@ -250,9 +267,10 @@ void SoundTestLogic::playP2p400HzIfEnabled( int mixerSpaceAvailable )
                     int16_t lastVal = pcmData[ 0 ];
                     for( int i = 0; i < 100; i++ )
                     {
-                        if( std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 2000 )
+                        int dif = std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) );
+                        if( dif > 2000 )
                         {
-                            LogMsg( LOG_VERBOSE, "playP2p400HzIfEnabled 48000Hz ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal, std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
+                            LogMsg( LOG_VERBOSE, "playP2p400HzIfEnabled 48000Hz ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal, dif );
                         }
 
                         lastVal = pcmData[ i ];
@@ -264,9 +282,10 @@ void SoundTestLogic::playP2p400HzIfEnabled( int mixerSpaceAvailable )
                     lastVal = pcmData[ 0 ];
                     for( int i = 0; i < 100; i++ )
                     {
-                        if( std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 11000 )
+                        int dif = std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) );
+                        if( dif > 11000 )
                         {
-                            LogMsg( LOG_VERBOSE, "playP2p400HzIfEnabled 8000Hz ix %d val %d lastVal %d  dif %d", i, pcmData[ i ], lastVal, std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
+                            LogMsg( LOG_VERBOSE, "playP2p400HzIfEnabled 8000Hz ix %d val %d lastVal %d  dif %d", i, pcmData[ i ], lastVal, dif );
                         }
 
                         lastVal = pcmData[ i ];
@@ -277,7 +296,7 @@ void SoundTestLogic::playP2p400HzIfEnabled( int mixerSpaceAvailable )
             }
         }       
 
-        delete genBuf;
+        delete[] genBuf;
     }
 }
 
@@ -302,42 +321,21 @@ void SoundTestLogic::microphoneVolumeChanged( int volume )
 //============================================================================
 void SoundTestLogic::speakerVolumeChanged( int volume )
 {
-    m_AudioIoMgr.getAudioOutMixer().setMixerVolume( (float)volume );
+    m_AudioIoMgr.getAudioOutIo().setSpeakerVolume( (float)volume );
 }
 
 //============================================================================
-void SoundTestLogic::voipVolumeChanged( int volume )
-{
-    m_AudioIoMgr.getAudioOutMixer().setMixerVolume( (float)volume );
-}
-
-//============================================================================
-int SoundTestLogic::readGenerated4888HzData( char* data, int maxlen )
+int SoundTestLogic::readGenerated4800HzMono100HzToneData( char* data, int maxlen )
 {
     if( !m_PauseVoip && maxlen )
     {
-        /*
-        read directly from tone generator
+
+        // read directly from tone generator
         m_Test100HzGenerator->readData( data, maxlen );
+        return maxlen;
 
-        int16_t* pcmData = (int16_t*)data;
-        int16_t lastVal = pcmData[ 0 ];
-        for( int i = 0; i < maxlen / 2; i++ )
-        {
-            int16_t thisVal = pcmData[ i ];
-            if( std::abs( std::abs( lastVal ) - std::abs( thisVal ) ) > 2000 )
-            {
-                LogMsg( LOG_VERBOSE, "readDataFromMixer ix %d val %d lastVal %d dif %d", i, thisVal, lastVal,
-                    std::abs( std::abs( lastVal ) - std::abs( thisVal ) ) );
-            }
-
-            lastVal = thisVal;
-        }
-
-        // m_AudioIoMgr.getAudioCallbacks().speakerAudioPlayed( m_AudioIoMgr.getAudioOutFormat(), (void*)data, maxlen );
-        */
-
-        /* // read from tone generarto and downsample to 8000Hz then back up to 48898Hz.. 
+        /*
+        // read from tone generarto and downsample to 8000Hz then back up to 48898Hz.. 
         QAudioFormat audioFormat = m_Test100HzGenerator->getAudioFormat();
 
         // Note: A small clicking sound will be heard if maxlen is not a multiple of divide cnt and cannot be avoided
@@ -356,23 +354,26 @@ int SoundTestLogic::readGenerated4888HzData( char* data, int maxlen )
             AudioUtils::dnsamplePcmAudio( (int16_t*)genBuf, divBufLen / 2, divideCnt, (int16_t*)divBuf );
 
             static int16_t lastSample = 0;
-            AudioUtils::upsamplePcmAudio( (int16_t*)divBuf, lastSavedSample, divBufLen, divideCnt, (int16_t*)data, lastSample );
+            // AudioUtils::upsamplePcmAudio( (int16_t*)divBuf, lastSavedSample, divBufLen, divideCnt, (int16_t*)data, lastSample );
 
             delete divBuf;
             lastSavedSample = ((int16_t*)data)[ maxlen - 2 ];
         }
 
 
+
         delete genBuf;
-        m_AudioIoMgr.getAudioCallbacks().speakerAudioPlayed( audioFormat, (void*)data, maxlen );
-        */
+                */
+
+
        
+        /*
         QAudioFormat audioFormat = m_Test100HzGenerator->getAudioFormat();
         int divideCnt = (audioFormat.sampleRate() * audioFormat.channelCount()) / 8000;
 
         int mixerSpaceAvailable = maxlen;
         int frameCount = mixerSpaceAvailable ? mixerSpaceAvailable / MIXER_BUF_SIZE_8000_1_S16 : 1;
-        const qreal genBufLen = MIXER_BUF_SIZE_8000_1_S16 * divideCnt;
+        int genBufLen = MIXER_BUF_SIZE_8000_1_S16 * divideCnt;
         char* genBuf = new char[ genBufLen ];
         static char audioBuf[ MIXER_BUF_SIZE_8000_1_S16 ];
 
@@ -390,10 +391,11 @@ int SoundTestLogic::readGenerated4888HzData( char* data, int maxlen )
                     int16_t lastVal = pcmData[ 0 ];
                     for( int i = 0; i < 100; i++ )
                     {
-                        //if( std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 1000 )
-                        //{
-                        LogMsg( LOG_VERBOSE, "playP2p400HzIfEnabled 48000Hz ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal, std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
-                        //}
+                        int dif = std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) );
+                        if( dif > 2000 )
+                        {
+                            LogMsg( LOG_VERBOSE, "readGenerated4888HzData 48000Hz ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal, dif );
+                        }
 
                         lastVal = pcmData[ i ];
                     }
@@ -404,9 +406,10 @@ int SoundTestLogic::readGenerated4888HzData( char* data, int maxlen )
                     lastVal = pcmData[ 0 ];
                     for( int i = 0; i < 100; i++ )
                     {
-                        if( std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 8000 )
+                        int dif = std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) );
+                        if( dif > 11000 )
                         {
-                            LogMsg( LOG_VERBOSE, "playP2p400HzIfEnabled 8000Hz ix %d val %d lastVal %d  dif %d", i, pcmData[ i ], lastVal, std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
+                            LogMsg( LOG_VERBOSE, "readGenerated4888HzData 8000Hz ix %d val %d lastVal %d  dif %d", i, pcmData[ i ], lastVal, dif );
                         }
 
                         lastVal = pcmData[ i ];
@@ -418,10 +421,23 @@ int SoundTestLogic::readGenerated4888HzData( char* data, int maxlen )
         }
 
         delete genBuf;
+        */
 
         return maxlen;
     }
 
     return 0;
 
+}
+
+//============================================================================
+int SoundTestLogic::readGenerated8000HzMono160HzToneData( char* data, int maxlen, int16_t& peekNextSample )
+{
+    if( maxlen )
+    {
+        m_Test8000HzMono160HzToneGenerator->readData( data, maxlen );
+        peekNextSample = m_Test8000HzMono160HzToneGenerator->peekNextSample();
+    }
+
+    return maxlen;
 }

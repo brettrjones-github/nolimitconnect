@@ -70,7 +70,7 @@ int AudioMixerFrame::readMixerFrame( char* readBuf, bool speakerMuted, int sampl
 			}
 			else
 			{
-				AudioUtils::upsamplePcmAudio( (int16_t*)(&m_MixerBuf[ m_LenRead ]), prevSamp, samplesToRead, upMultiply, (int16_t*)readBuf, retPrevSamp );
+				//AudioUtils::upsamplePcmAudio( (int16_t*)(&m_MixerBuf[ m_LenRead ]), prevSamp, samplesToRead, upMultiply, (int16_t*)readBuf, retPrevSamp );
 			}
 		}
 	}
@@ -92,7 +92,7 @@ void AudioMixerFrame::writeMixerFrame( EAppModule appModule, char* writeBuf, int
 {
 	if( hasModuleAudio( appModule ) )
 	{
-		LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
+		// LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
 		return;
 	}
 
@@ -136,7 +136,7 @@ int AudioMixerFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t*
 {
 	if( hasModuleAudio( appModule ) )
 	{
-		LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
+		// LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
 		return 0;
 	}
 

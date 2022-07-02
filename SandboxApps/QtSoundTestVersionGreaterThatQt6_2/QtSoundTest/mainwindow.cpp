@@ -18,9 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->m_AudioOutPeakProgressBar->setRange( 0, 100 );
     ui->m_AudioOutPeakProgressBar->setValue( 0 );
 
-    ui->m_VoipVolumeSlider->setRange( 0, 100 );
-    ui->m_VoipVolumeSlider->setValue( 100 );
-    ui->m_VoipVolumeSlider->setSingleStep( 10 );
     ui->m_SpeakerVolumeSlider->setRange( 0, 100 );
     ui->m_SpeakerVolumeSlider->setValue( 100 );
     ui->m_SpeakerVolumeSlider->setSingleStep( 10 );
@@ -37,7 +34,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect( ui->m_MicrophoneVolumeSlider, SIGNAL(valueChanged(int)), this, SLOT( slotMicrophoneVolumeChanged(int) ) );
     connect( ui->m_SpeakerVolumeSlider, SIGNAL(valueChanged(int)), this, SLOT( slotSpeakerVolumeChanged( int ) ) );
-    connect( ui->m_VoipVolumeSlider, SIGNAL(valueChanged(int)), this, SLOT( slotVoipVolumeChanged( int ) ) );
 
     ui->m_PauseVoipCheckBox->setChecked( true );
     ui->m_PauseKodiCheckbox->setChecked( true );
@@ -66,9 +62,4 @@ void MainWindow::slotMicrophoneVolumeChanged( int volume )
 void MainWindow::slotSpeakerVolumeChanged( int volume )
 {
     m_SoundTestLogic->speakerVolumeChanged( volume );
-}
-
-void MainWindow::slotVoipVolumeChanged( int volume )
-{
-    m_SoundTestLogic->voipVolumeChanged( volume );
 }

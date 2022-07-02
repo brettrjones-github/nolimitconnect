@@ -11,16 +11,16 @@
 #include "VxDefs.h"
 
 #include <inttypes.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-    int VxSleep( int milliSec );
+int VxSleep( int milliSec );
 #if defined(TARGET_OS_WINDOWS)
 # define sleep_os(exp)		VxSleep(exp*1000)
 # define msleep_os(exp)		VxSleep(exp)
 # define usleep_os(exp)		VxSleep(exp/1000)
 #endif // defined(TARGET_OS_WINDOWS)
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 // set time format to military 24hr or AM/PM

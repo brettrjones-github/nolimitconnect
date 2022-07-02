@@ -112,3 +112,24 @@ qint64 AudioTestGenerator::bytesAvailable() const
 {
     return m_buffer.size() + QIODevice::bytesAvailable();
 }
+
+//============================================================================
+int16_t AudioTestGenerator::peekNextSample( void )
+{
+    int16_t nextSample{ 0 };
+    if( !m_buffer.isEmpty() && m_AudioFormat.sampleFormat() == QAudioFormat::Int16 ) 
+    {
+        if( m_pos <= m_buffer.length() - 2 )
+        {
+            // read from current position
+            nextSample = *((int16_t *)(m_buffer.constData() + m_pos));
+        }
+        else
+        {
+            // read from start position
+            nextSample = *((int16_t*)(m_buffer.constData()));
+        }
+    }
+
+    return nextSample;
+}

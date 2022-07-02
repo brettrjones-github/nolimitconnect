@@ -42,6 +42,8 @@ public:
     qint64                      bytesAvailable() const override;
     qint64                      size() const override       { return m_buffer.size(); }
 
+    int16_t                     peekNextSample( void );
+
 private:
     void                        generateData( const QAudioFormat& format, qint64 durationUs, int sampleRate );
 

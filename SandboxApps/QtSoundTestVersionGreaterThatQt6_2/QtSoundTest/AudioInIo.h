@@ -36,12 +36,14 @@ public:
     explicit AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject* parent = 0 );
     ~AudioInIo() override;
 
-    bool                        initAudioIn( QAudioFormat& audioFormat );
+    bool                        initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
 
     void                        stopAudio();
     void                        startAudio();
 
     void                        wantMicrophoneInput( bool enableInput ) { enableInput ? resume() : suspend(); }
+
+    void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
 
     int                         getAudioInPeakAmplitude( void ) { return m_PeakAmplitude; }
 
@@ -108,6 +110,7 @@ private:
     QAtomicInt                  m_AtomicBufferSize;
     int                         m_DivideCnt{ 1 };
     int                         m_PeakAmplitude{ 0 };
+    float                       m_MicrophoneVolume{ 0.0f };
 
     QMediaDevices*              m_MediaDevices = nullptr;
     QAudioSource*               m_AudioInputDevice = nullptr;
