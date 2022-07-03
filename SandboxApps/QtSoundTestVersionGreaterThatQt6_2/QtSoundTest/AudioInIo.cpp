@@ -24,7 +24,6 @@
 #include <QtEndian>
 #include <math.h>
 
-
 //============================================================================
 AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 : QIODevice( parent )
@@ -53,6 +52,7 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defa
         bool inputSupported = false;
         const QAudioDevice& defaultDeviceInfo = m_AudioIoMgr.getMediaDevices()->defaultAudioInput();
         inputSupported = defaultDeviceInfo.isFormatSupported( audioFormat );
+
         if( !inputSupported )
         {
             LogMsg( LOG_DEBUG, "AudioInIo Format not supported rate %d channels %d size %d", audioFormat.sampleRate(), audioFormat.channelCount(), audioFormat.bytesPerSample() );
@@ -60,14 +60,16 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defa
         }
         else
         {
-            m_AudioInputDevice = new QAudioSource( defaultDeviceInfo, m_AudioFormat, this );
+            m_AudioInputDevice.reset( new QAudioSource( defaultDeviceInfo, m_AudioFormat, this ) );
             m_initialized = m_AudioInputDevice != nullptr;
             if( m_initialized )
             {
                 // Set constant values to new audio input
                 //connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
-                connect( m_AudioInputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
+                connect( m_AudioInputDevice.data(), SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
                 LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d channels %d size %d", audioFormat.sampleRate(), audioFormat.channelCount(), audioFormat.bytesPerSample() );
+
+                this->open( QIODevice::WriteOnly );
             }
         }
     }
@@ -92,9 +94,10 @@ void AudioInIo::startAudio()
     {
         m_AudioInThread.setThreadShouldRun( true );
         m_AudioInThread.startAudioInThread();
-        this->open( QIODevice::WriteOnly );
+
         m_AudioInputDevice->start( this );
     }
+
     //LogMsg( LOG_DEBUG, "AudioInIo default buffer size %d periodic size %d", m_AudioInputDevice->bufferSize(), m_AudioInputDevice->periodSize() );
 }
 
@@ -106,6 +109,7 @@ void AudioInIo::flush()
         // Flushing buffers is a bit tricky...
         // Don't modify this unless you're sure
         this->stopAudio();
+
         if( m_AudioInputDevice )
 	    {
             m_AudioInputDevice->reset();
@@ -137,6 +141,7 @@ qint64 AudioInIo::readData( char *data, qint64 maxlen )
 {
     // not used
     Q_UNUSED( data );
+
     return maxlen;
 }
 
@@ -191,11 +196,6 @@ qint64 AudioInIo::bytesAvailable() const
 	//m_AudioBufMutex.unlock();
 
     return audioBytesAvailableToRead;
-}
-
-//============================================================================
-void AudioInIo::slotAudioNotified()
-{
 }
 
 //============================================================================
@@ -267,4 +267,50 @@ void AudioInIo::slotCheckForBufferUnderun()
             break;
 		};
 	}
+}
+
+//============================================================================
+void AudioInIo::wantMicrophoneInput( bool enableInput )
+{
+    m_AudioInputDevice->stop();
+    if( !m_AudioInDeviceIsStarted )
+    {
+        m_AudioInDeviceIsStarted = true;
+    }
+
+    if( enableInput )
+    {
+        if( m_AudioInputDevice->state() == QAudio::SuspendedState || m_AudioInputDevice->state() == QAudio::StoppedState )
+        {
+            m_AudioInputDevice->resume();
+        }
+        else if( m_AudioInputDevice->state() == QAudio::ActiveState )
+        {
+            // already enabled
+        }
+        else if( m_AudioInputDevice->state() == QAudio::IdleState )
+        {
+            // no-op
+        }
+
+        // start in pull mode.. qt will call writeData as needed for microphone input
+        m_AudioInputDevice->start( this );
+        m_AudioInThread.setThreadShouldRun( true );
+        m_AudioInThread.startAudioInThread();
+    }
+    else
+    {
+        if( m_AudioInputDevice->state() == QAudio::SuspendedState || m_AudioInputDevice->state() == QAudio::StoppedState )
+        {
+            // already stopped
+        }
+        else if( m_AudioInputDevice->state() == QAudio::ActiveState )
+        {
+            m_AudioInputDevice->suspend();
+        }
+        else if( m_AudioInputDevice->state() == QAudio::IdleState )
+        {
+            // no-op
+        }
+    }
 }

@@ -41,7 +41,7 @@ public:
     void                        stopAudio();
     void                        startAudio();
 
-    void                        wantMicrophoneInput( bool enableInput ) { enableInput ? resume() : suspend(); }
+    void                        wantMicrophoneInput( bool enableInput );
 
     void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
 
@@ -66,12 +66,14 @@ public:
 	int							audioQueUsedSpace();
 
     int                         calculateMicrophonDelayMs();
-    void                        suspend() { if (m_AudioInputDevice) m_AudioInputDevice->suspend(); }
-    void                        resume() { if (m_AudioInputDevice) m_AudioInputDevice->resume(); }
-    QAudio::State               getState() { return (m_AudioInputDevice ? m_AudioInputDevice->state() : QAudio::StoppedState); }
-    QAudio::Error               getError() { return (m_AudioInputDevice ? m_AudioInputDevice->error() : QAudio::NoError); }
 
-    QAudioSource*               getAudioIn() { return m_AudioInputDevice; }
+    void                        suspend()                       { if (m_AudioInputDevice.data() ) m_AudioInputDevice->suspend(); }
+    void                        resume()                        { if (m_AudioInputDevice.data() ) m_AudioInputDevice->resume(); }
+
+    QAudio::State               getState()                      { return (m_AudioInputDevice.data() ? m_AudioInputDevice->state() : QAudio::StoppedState); }
+    QAudio::Error               getError()                      { return (m_AudioInputDevice.data() ? m_AudioInputDevice->error() : QAudio::NoError); }
+
+    QAudioSource*               getAudioIn()                    { return m_AudioInputDevice.data(); }
 
     void                        setDivideSamplesCount( int cnt )
     {
@@ -83,7 +85,6 @@ signals:
     void						signalCheckForBufferUnderun();
 
 protected slots:
-    void                        slotAudioNotified();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
 
@@ -92,7 +93,7 @@ protected:
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
-    bool						isSequential() const  override { return true; }
+    //bool						isSequential() const  override { return true; }
 
 private:
     void                        reinit();
@@ -100,7 +101,8 @@ private:
     AudioIoMgr&                 m_AudioIoMgr;
     QMutex&                     m_AudioBufMutex;
 
-    bool                        m_initialized = false;
+    bool                        m_initialized{ false };
+    bool                        m_AudioInDeviceIsStarted{ false };
     QAudioFormat                m_AudioFormat;
 
     QByteArray					m_AudioBuffer;
@@ -113,5 +115,5 @@ private:
     float                       m_MicrophoneVolume{ 0.0f };
 
     QMediaDevices*              m_MediaDevices = nullptr;
-    QAudioSource*               m_AudioInputDevice = nullptr;
+    QScopedPointer<QAudioSource> m_AudioInputDevice;
 };

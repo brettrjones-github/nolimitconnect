@@ -19,7 +19,6 @@
 #include <QElapsedTimer>
 #include <QWidget>
 
-
 #include "AudioMixer.h"
 #include "AudioOutIo.h"
 #include "AudioInIo.h"

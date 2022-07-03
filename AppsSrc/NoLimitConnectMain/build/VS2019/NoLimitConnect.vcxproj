@@ -31,7 +31,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.3.0_msvc2019_64</QtInstall>
+    <QtInstall>6.3.1_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets;opengl;svg;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -435,8 +435,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioInThread.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioIoMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixer.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutThread.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioTestGenerator.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\StoryWidget.cpp" />
@@ -614,8 +615,9 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioIoMgr.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixer.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutThread.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioTestGenerator.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\TodGameDefs.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\ToGuiActivityInterface.h" />

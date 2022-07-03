@@ -97,6 +97,7 @@ public slots:
 
     void                        pauseVoipState( int );
     void                        pauseKodiState( int );
+    void                        pauseMicrophoneState( int state );
     void                        muteSpeakerState( int );
     void                        muteMicrophoneState( int );
 
@@ -108,6 +109,7 @@ private:
     SoundTestThread *			m_SoundTestThread = nullptr;
     bool                        m_PauseVoip{ true };
     bool                        m_PauseKodi{ true };
+    bool                        m_PauseMicrophone{ true };
 
     bool                        m_RenderInitialized = false;
   

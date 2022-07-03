@@ -8,29 +8,17 @@
 //=============================================================================
 qint64 AudioUtils::audioDurationUs(const QAudioFormat &format, qint64 bytes)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     return (bytes * 1000000) /
         (format.sampleRate() * format.channelCount() * format.bytesPerSample());
-#else
-    return (bytes * 1000000) /
-        (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8));
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 //=============================================================================
 qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     qint64 result = (format.sampleRate() * format.channelCount() * format.bytesPerSample())
         * microSeconds / 1000000;
     result -= result % (format.channelCount() * format.bytesPerSample() * 8);
     return result;
-#else
-   qint64 result = (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8))
-       * microSeconds / 1000000;
-   result -= result % (format.channelCount() * format.sampleSize());
-   return result;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 //=============================================================================
@@ -43,8 +31,11 @@ qreal AudioUtils::nyquistFrequency(const QAudioFormat &format)
 QString AudioUtils::formatToString(const QAudioFormat &format)
 {
     QString result;
+
     if (QAudioFormat() != format) {
+
         Q_ASSERT(format.sampleFormat() == QAudioFormat::Int16);
+
         const QString formatEndian = !IsBigEndianCpu()
             ? QString("LE") : QString("BE");
         QString formatType;
@@ -61,9 +52,11 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
             formatType = "float";
             break;
         case QAudioFormat::Unknown:
+        default:
             formatType = "unknown";
             break;
         }
+
         QString formatChannels = QString("%1 channels").arg(format.channelCount());
         switch (format.channelCount()) {
         case 1:
@@ -73,6 +66,7 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
             formatChannels = "stereo";
             break;
         }
+
         result = QString("%1 Hz %2 bytes %3 %4 %5")
             .arg(format.sampleRate())
             .arg(format.bytesPerSample())
@@ -80,6 +74,7 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
             .arg(formatEndian)
             .arg(formatChannels);
     }
+
     return result;
 }
 
@@ -305,7 +300,7 @@ int AudioUtils::getPeakPcmAmplitude( int16_t* srcSamples, int datalen )
 
     if( peakValue )
     {
-        return (int)((32768.0f / (float)peakValue) * 100);
+        return (int)(((float)peakValue / 32768.0f ) * 100);
     }
     
     return 0;
@@ -362,6 +357,9 @@ int AudioUtils::countConsecutiveValues( int16_t* srcSamples, int datalen, int mi
 
 //============================================================================
 // interperlate between samples for up sample audio to a higher sample rate
+// example of lerped samples for 12 as upsample multiplier and sample 1 = 0 and sample 2 = 1200 
+// (first number is index and second is the lerped value)
+// 0 (0), 1 (100), 2 (200), 3 (300), 4 (400), 5 (500), 6 (600), 7 (700), 8 (800), 9 (900), 10 (1000), 11 (1100), 12 (1200)
 int16_t AudioUtils::lerpPcm( int16_t samp1, int16_t samp2, float totalSteps, int thisLerpIdx )
 {
     float sampleStep = samp1 >= samp2 ? ((samp2 - samp1) / totalSteps) : -((samp1 - samp2) / totalSteps);

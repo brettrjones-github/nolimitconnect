@@ -28,22 +28,27 @@ class AudioTestGenerator : public QIODevice
     Q_OBJECT
 
 public:
-    AudioTestGenerator( const QAudioFormat &format, qint64 durationUs, int sampleRate, QObject *parent );
+    AudioTestGenerator( const QAudioFormat& format, qint64 durationUs, int sampleRate );
     ~AudioTestGenerator() = default;
+
+    QAudioFormat                getAudioFormat( void ) { return m_AudioFormat;  }
 
     void                        start();
     void                        stop();
 
     qint64                      readData( char *data, qint64 maxlen ) override;
-    qint64                      readData( QByteArray& retData, qint64 maxlen );
-    qint64                      readDataNoPositionUpdate( char *data, qint64 len );
     qint64                      writeData( const char *data, qint64 len ) override;
     qint64                      bytesAvailable() const override;
+    qint64                      size() const override       { return m_buffer.size(); }
+
+    int16_t                     peekNextSample( void );
 
 private:
     void                        generateData( const QAudioFormat &format, qint64 durationUs, int sampleRate );
 
-    qint64                      m_pos;
-    QByteArray                  m_buffer;
+private:
+    qint64                      m_pos = 0;
+    QByteArray                m_buffer;
+    QAudioFormat             m_AudioFormat;
 };
 

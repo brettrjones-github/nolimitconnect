@@ -57,6 +57,9 @@ namespace AudioUtils
     int                         countConsecutiveValues( int16_t* srcSamples, int datalen, int minConsecutiveToMatch );
 
     // interperlate between samples for up sample audio to a higher sample rate
+    // example of lerped samples for 12 as upsample multiplier and sample 1 = 0 and sample 2 = 1200 
+    // (first number is index and second is the lerped value)
+    // 0 (0), 1 (100), 2 (200), 3 (300), 4 (400), 5 (500), 6 (600), 7 (700), 8 (800), 9 (900), 10 (1000), 11 (1100), 12 (1200)
     int16_t                     lerpPcm( int16_t samp1, int16_t samp2, float totalSteps, int thisLerpIdx );
 
 } // namespace AudioUtils

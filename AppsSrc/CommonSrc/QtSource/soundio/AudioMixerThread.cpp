@@ -12,29 +12,29 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "AudioOutThread.h"
+#include "AudioMixerThread.h"
 #include "AudioIoMgr.h"
-#include <QDebug>
-#include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
 #include "AudioDefs.h"
 
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxTime.h>
+
 //============================================================================
-AudioOutThread::AudioOutThread( AudioIoMgr& audioIoMgr )
+AudioMixerThread::AudioMixerThread( AudioIoMgr& audioIoMgr )
 : QThread()
 , m_AudioIoMgr( audioIoMgr )
 {
 }
 
 //============================================================================
-void AudioOutThread::startAudioOutThread()
+void AudioMixerThread::startAudioMixerThread()
 {
     setThreadShouldRun( true );
     start();
 }
 
 //============================================================================
-void AudioOutThread::stopAudioOutThread()
+void AudioMixerThread::stopAudioMixerThread()
 {   
     setThreadShouldRun( false );
     m_AudioSemaphore.release();
@@ -43,17 +43,22 @@ void AudioOutThread::stopAudioOutThread()
 }
 
 //============================================================================
-void AudioOutThread::run()
+void AudioMixerThread::run()
 {
-    LogMsg( LOG_DEBUG, "AudioOutThread thread start 0x%x", VxGetCurrentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioMixerThread thread start 0x%x", currentThreadId() );
+
     while( m_ShouldRun )
     {
         m_AudioSemaphore.acquire();
         if( m_ShouldRun )
         {
-            m_AudioIoMgr.getAudioCallbacks().fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+            while( m_MixerSpaceAvail >= MIXER_BUF_SIZE_8000_1_S16 )
+            {
+                m_AudioIoMgr.getAudioCallbacks().fromGuiAudioOutSpaceAvail( MIXER_BUF_SIZE_8000_1_S16 );
+                m_MixerSpaceAvail -= MIXER_BUF_SIZE_8000_1_S16;
+            }   
         }
     }
  
-    LogMsg( LOG_DEBUG, "AudioOutThread thread done 0x%x", VxGetCurrentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioMixerThread thread done 0x%x", currentThreadId() );
 }

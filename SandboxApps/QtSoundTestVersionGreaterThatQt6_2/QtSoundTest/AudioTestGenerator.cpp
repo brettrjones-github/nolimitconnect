@@ -87,14 +87,17 @@ void AudioTestGenerator::generateData( const QAudioFormat& format, qint64 durati
 qint64 AudioTestGenerator::readData( char* data, qint64 len )
 {
     qint64 total = 0;
-    if( !m_buffer.isEmpty() ) {
-        while( len - total > 0 ) {
+    if( !m_buffer.isEmpty() ) 
+    {
+        while( len - total > 0 ) 
+        {
             const qint64 chunk = qMin( (m_buffer.size() - m_pos), len - total );
             memcpy( data + total, m_buffer.constData() + m_pos, chunk );
             m_pos = (m_pos + chunk) % m_buffer.size();
             total += chunk;
         }
     }
+
     return total;
 }
 

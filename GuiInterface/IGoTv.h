@@ -271,7 +271,7 @@ public:
     virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
     // add audio data to play.. assumes float 2 channel 48000 Hz
-    virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
+    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
     // add audio data to play.. assumes pcm mono 8000 Hz
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
 

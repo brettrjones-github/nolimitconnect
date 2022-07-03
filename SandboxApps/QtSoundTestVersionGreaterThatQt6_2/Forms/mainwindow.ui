@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1140</width>
+    <width>923</width>
     <height>695</height>
    </rect>
   </property>
@@ -35,6 +35,13 @@
      <widget class="QCheckBox" name="m_PauseKodiCheckbox">
       <property name="text">
        <string>Pause Kodi (Kodi is simulated with 100Hz tone Stereo Channel Float)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="m_PauseMicrophoneCheckBox">
+      <property name="text">
+       <string>Pause MicrophoneInput</string>
       </property>
      </widget>
     </item>

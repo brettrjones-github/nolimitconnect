@@ -39,9 +39,6 @@ public:
 
     int                         getAudioOutPeakAmplitude( void )        { return m_PeakAmplitude; }
 
-    void                        setMixerVolume( float volume0to100 )    { m_MixerVolume = volume0to100;  }
-    float                       getMixerVolume( void )                  { return m_MixerVolume; }
-
     QAudioFormat&               getMixerFormat( void )                  { return m_MixerFormat; }
 
     void                        lockMixer()                             { m_MixerMutex.lock(); }
@@ -56,7 +53,10 @@ public:
     virtual int				    toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence );
 
     // read audio data from mixer.. assumes upSampleMult is multiplier to upsample pcm 1 channel 8000 Hz
-    qint64                      readDataFromMixer( char *data, qint64 maxlen, int upSampleMult );
+    qint64                      readRequestFromSpeaker( char *data, qint64 maxlen, int upSampleMult );
+
+    // read mono 8000Hz pcm audio data from mixer.. fill silence for underrun of data. return number of silenced samples
+    int                         readDataFromMixer( int16_t* pcmRetBuf, int sampleCnt, int16_t& peekAtNextSample );
 
     void                        mixerWasReadByOutput( int readLen, int upSampleMult );
  
@@ -97,7 +97,6 @@ protected:
     bool                        m_WasReset{ true };
     int                         m_AudioOutRead{ 0 };
     int                         m_PeakAmplitude{ 0 };
-    float                       m_MixerVolume{ 100.0f };
 
     int                         m_PrevLerpedSamplesCnt{ 0 };
     int16_t                     m_PrevLerpedSampleValue{ 0 };

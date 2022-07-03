@@ -14,7 +14,8 @@
 
 #include "AudioMixerFrame.h"
 #include "AudioUtils.h"
-#include "VxDebug.h"
+
+#include <CoreLib/VxDebug.h>
 
 //============================================================================
 void AudioMixerFrame::clearFrame( void )
@@ -62,7 +63,7 @@ int AudioMixerFrame::readMixerFrame( int16_t* readBuf, bool speakerMuted, int sa
 		}
 		else
 		{
-			memcpy( readBuf, &m_MixerBuf[ m_LenRead ], samplesToRead * 2 );				
+				memcpy( readBuf, &m_MixerBuf[ m_LenRead ], samplesToRead * 2 );				
 		}
 	}
 
@@ -131,18 +132,18 @@ int AudioMixerFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t*
 		return 0;
 	}
 
-	//int16_t* pcmData = (int16_t*)pu16PcmData;
-	//int16_t lastVal = pcmData[ 0 ];
-	//for( int i = 0; i < 100; i++ )
-	//{
-	//	if( std::abs(  std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 11000 )
-	//	{
-	//		LogMsg( LOG_VERBOSE, "readDataFromMixer ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal,
-	//			std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
-	//	}
+	int16_t* pcmData = (int16_t*)pu16PcmData;
+	int16_t lastVal = pcmData[ 0 ];
+	for( int i = 0; i < 100; i++ )
+	{
+		if( std::abs(  std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 11000 )
+		{
+			LogMsg( LOG_VERBOSE, "readDataFromMixer ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal,
+				std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
+		}
 
-	//	lastVal = pcmData[ i ];
-	//}
+		lastVal = pcmData[ i ];
+	}
 
 	if( isSilenceIn )
 	{

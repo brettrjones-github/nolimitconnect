@@ -36,23 +36,22 @@ class AudioOutIo : public QIODevice
 
 public:
     explicit AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
-     ~AudioOutIo() override;
+     ~AudioOutIo() override = default;
 
     bool                        initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
 
     QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice.data(); }
-    QAudio::State               getState()                                  { return (m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
-    QAudio::Error               getError()                                  { return (m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
+    QAudio::State               getState()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutState : QAudio::StoppedState); }
+    QAudio::Error               getError()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
     void                        wantSpeakerOutput( bool enableOutput );
 
     void                        fromGuiCheckSpeakerOutForUnderrun(); 
 
-    void                        setVolume( float volume );
     void                        flush();
 
-    void                        suspend()       { if (m_AudioOutputDevice) m_AudioOutputDevice->suspend(); }
-    void                        resume()        { if (m_AudioOutputDevice) m_AudioOutputDevice->resume(); }
+    void                        suspend()                                   { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->suspend(); }
+    void                        resume()                                    { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->resume(); }
 
     void                        stopAudioOut();
     void                        startAudioOut();
@@ -68,7 +67,6 @@ signals:
     void						signalCheckForBufferUnderun();
 
 protected slots:
-    void                        slotAudioNotify();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
 
@@ -76,18 +74,15 @@ protected slots:
     void                        slotSendResumeStatus( void );
 
 protected:
+
     qint64                      readData( char* data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len ) override;
     qint64                      bytesAvailable() const override;
     qint64                      size() const override;
 
-
-    //bool						isSequential() const  override { return false; } // if true then could not reposition data position
-
 private:
     void                        reinit();
 
-private:
     AudioIoMgr&                 m_AudioIoMgr;
     QMutex&                     m_AudioBufMutex;
 
@@ -102,7 +97,6 @@ private:
     QAudio::Error               m_AudioOutPreviousError{ QAudio::UnderrunError };
     QScopedPointer<QAudioSink>  m_AudioOutputDevice;
 
-    QTimer*                     m_ResumeTimer{ nullptr };
     bool                        m_AudioOutDeviceIsStarted{ false };
     int                         m_UpsampleMutiplier{ 0 };
 

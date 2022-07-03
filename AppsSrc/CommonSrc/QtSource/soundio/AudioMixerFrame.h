@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "IGoTvDefs.h"
+#include <GuiInterface/IDefs.h>
 #include "AudioDefs.h"
 #include <vector>
 #include <algorithm>

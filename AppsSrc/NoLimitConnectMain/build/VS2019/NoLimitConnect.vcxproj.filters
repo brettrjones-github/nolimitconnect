@@ -731,9 +731,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutThread.h">
-      <Filter>Source Files\soundio</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioTestGenerator.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
@@ -925,6 +922,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.h">
+      <Filter>Source Files\soundio</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1630,9 +1630,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutThread.cpp">
-      <Filter>Source Files\soundio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioTestGenerator.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
@@ -1999,6 +1996,12 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetVoiceWidget.cpp">
       <Filter>Source Files\AssetWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2240,6 +2243,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h">
       <Filter>Source Files\GuiConnectId</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.h">
+      <Filter>Source Files\soundio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

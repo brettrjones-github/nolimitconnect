@@ -83,11 +83,13 @@ int IGoTv::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmD
     return getAppCommon().toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
 
+#if ENABLE_KODI
 //============================================================================
 int IGoTv::toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes )
 {
     return getAppCommon().toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
 }
+#endif // ENABLE_KODI
 
 //============================================================================
 double IGoTv::toGuiGetAudioDelaySeconds( EAppModule appModule )

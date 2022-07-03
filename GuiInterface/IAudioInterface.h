@@ -48,8 +48,12 @@ public:
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) = 0;
     // enable disable speaker sound out
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) = 0;
+
+#if ENABLE_KODI
     // add audio data to play.. assumes float 2 channel 48000 Hz
-    virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) = 0;
+    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) = 0;
+#endif // ENABLE_KODI
+
     // add audio data to play.. assumes pcm mono 8000 Hz
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) = 0;
     // delay of audio calculated from amount of data in queue

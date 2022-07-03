@@ -21,7 +21,6 @@
 
 #include "VxDebug.h"
 
-
 //============================================================================
 AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 : QWidget( parent )
@@ -35,6 +34,7 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
     memset( m_MicrophoneEnable, 0, sizeof( m_MicrophoneEnable ) );
     memset( m_SpeakerEnable, 0, sizeof( m_SpeakerEnable ) );
 
+    m_SpeakerAvailable = true;
     m_AudioOutFormat.setSampleRate( 48000 );
 #ifdef Q_OS_WIN
     m_AudioOutFormat.setChannelCount( 2 ); // use 2 channels for as low latency as possible because we do not have much control on the read size requested
@@ -86,10 +86,13 @@ void AudioIoMgr::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMi
         m_WantMicrophone = enableMic;
         enableMicrophone( enableMic );
     }
+
+    // for test only enable the speaker output so can here the microphone input
+    toGuiWantSpeakerOutput( appModule, wantMicInput );
 }
 
 //============================================================================
- // update microphone output
+// update microphone output
 void AudioIoMgr::enableMicrophone( bool enable )
 {
     m_AudioInIo.wantMicrophoneInput( enable );
@@ -173,7 +176,6 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000,
     return wroteByteCnt;
 }
 
-
 //============================================================================
 // add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
 int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
@@ -248,7 +250,7 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
             m_MyLastAudioOutSample[ appModule ] = srcSamples[ mySampleCnt - 1 ];
         }
 
-        wroteByteCnt = m_AudioOutMixer.fromGuiMicrophoneData( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
+        wroteByteCnt = m_AudioOutMixer.enqueueAudioData( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
         delete[] outAudioData;
     }
 
@@ -356,13 +358,13 @@ void AudioIoMgr::stopAudioIn()
 // volume is from 0.0 to 1.0
 void AudioIoMgr::setVolume( float volume )
 {
-    m_AudioOutIo.setVolume( volume );
+    m_AudioOutIo.setSpeakerVolume( (int)( volume * 100 ) );
 }
 
 //============================================================================
 double AudioIoMgr::toGuiGetAudioDelayMs( EAppModule appModule )
 {
-    return ( (double)getCachedDataLength( appModule ) * BYTES_TO_MS_MULTIPLIER_SPEAKERS );
+    return (double)m_AudioOutMixer.calcualateMixerBytesToMs( getCachedDataLength( appModule ) );
 }
 
 //============================================================================
@@ -374,21 +376,13 @@ double AudioIoMgr::toGuiGetAudioDelaySeconds( EAppModule appModule )
 //============================================================================
 double AudioIoMgr::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
-    int bytesInCache = m_AudioOutMixer.audioQueUsedSpace( appModule );
-
-    double sndSeconds = ( (double)bytesInCache / (double)( 48000 * 2 * 2 )); //48000 * 2 bytes per sample * 2 channels
-    //LogMsg( LOG_DEBUG, "Max soundBuffer seconds %3.3f", sndSeconds );
-    return sndSeconds;
+    return m_AudioOutMixer.getDataReadyForSpeakersMs() * 1000;
 }
 
 //============================================================================
 int AudioIoMgr::getCachedDataLength( EAppModule appModule )
 {
-    int bytesInCache = m_AudioOutMixer.audioQueUsedSpace( appModule );
-    
-    //LogMsg( LOG_DEBUG, "Bytes in snd buffer %d", bytesInCache );
-
-    return bytesInCache;
+    return m_AudioOutMixer.audioQueUsedSpace( appModule );
 }
 
 //============================================================================
@@ -439,6 +433,7 @@ void AudioIoMgr::aboutToDestroy()
 }
 
 //============================================================================
+// get length of data ready for write to speakers
 int AudioIoMgr::getDataReadyForSpeakersLen()
 {
     return m_AudioOutMixer.getDataReadyForSpeakersLen();

@@ -31,152 +31,185 @@ AudioOutIo::AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent 
 : QIODevice( parent )
 , m_AudioIoMgr( mgr )
 , m_AudioBufMutex( audioOutMutex )
-, m_PeriodicTimer( new QTimer( this ) )
 , m_AudioOutState( QAudio::StoppedState )
-, m_AudioOutThread( mgr )
 {
-    m_PeriodicTimer->setInterval( 20 );
     connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
-    connect( m_PeriodicTimer, SIGNAL( timeout() ), this, SLOT( slotAudioNotify() ) );
-    connect( &m_AudioIoMgr.getAudioOutMixer(), SIGNAL( signalCheckSpeakerOutState() ), this, SLOT( slotCheckForBufferUnderun() ) );
-    connect( &m_AudioIoMgr.getAudioOutMixer(), SIGNAL( signalAvailableSpeakerBytesChanged( int ) ), this, SLOT( slotAvailableSpeakerBytesChanged( int ) ) );
-
 }
 
 //============================================================================
 AudioOutIo::~AudioOutIo()
 {
-    m_AudioOutThread.setThreadShouldRun( false );
-    m_AudioOutThread.stopAudioOutThread();
 }
 
 //============================================================================
-bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat )
+bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& deviceInfo )
 {
     if( !m_initialized )
     {
-        m_AudioFormat = audioFormat;
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        m_AudioOutputDevice = new QAudioSink(m_AudioFormat, this);
-        m_initialized = m_AudioOutputDevice != nullptr;
-        // qt seems to ignore setBufferSize but try for smaller faster calls anyway
-        m_AudioOutputDevice->setBufferSize(AUDIO_BUF_SIZE_48000_2_S16 * 2); // must be called before start
-        m_AudioOutBufferSize = m_AudioOutputDevice->bufferSize();
+        m_initialized = true;
 
-        connect(m_AudioOutputDevice, SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
-#else
-        m_initialized = setAudioDevice(QAudioDeviceInfo::defaultOutputDevice());
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        QAudioFormat format = deviceInfo.preferredFormat();
 
+        format.setSampleRate(audioFormat.sampleRate());
+        format.setChannelCount(audioFormat.channelCount());
+        format.setSampleFormat(QAudioFormat::Int16); // only pcm is allowed
+        if( !deviceInfo.isFormatSupported(format) )
+        {
+            LogMsg( LOG_ERROR, " AudioOutIo::initAudioOut format not supported");
     }
 
-    m_AudioOutThread.setThreadShouldRun( true );
-    m_AudioOutThread.startAudioOutThread();
+        m_AudioFormat = format;
+        m_AudioOutputDevice.reset( new QAudioSink( deviceInfo, m_AudioFormat ) );
+
+        m_AudioOutputDevice->setBufferSize(format.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16);
+
+        // determine multiply value to go from 8000Hz mono to the speaker format we want
+        setUpsampleMultiplier( (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) / 8000 );
+
+        this->open( QIODevice::ReadOnly );
+
+        connect(m_AudioOutputDevice.data(), SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
+    }
+
     return m_initialized;
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
-bool AudioOutIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
+void AudioOutIo::wantSpeakerOutput( bool enableOutput ) 
 {
-    if( !deviceInfo.isFormatSupported( m_AudioFormat ) ) 
+    m_AudioOutputDevice->stop();
+    if( !m_AudioOutDeviceIsStarted )
 	{
-        qDebug() << "Format not supported!";
-        return false;
+        m_AudioOutDeviceIsStarted = true;
     }
 
-    m_deviceInfo = deviceInfo;
-    delete m_AudioOutputDevice;
-    m_AudioOutputDevice = new QAudioOutput( m_deviceInfo, m_AudioFormat, this );
-    // qt seems to ignore setBufferSize but try for smaller faster calls anyway
-    m_AudioOutputDevice->setBufferSize( AUDIO_BUF_SIZE_48000_2_S16 * 2 ); // must be called before start
-    m_AudioOutBufferSize = m_AudioOutputDevice->bufferSize();
+    if( enableOutput )
+    {
+        if (m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState)
+        {
+            m_AudioOutputDevice->resume();
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::ActiveState)
+        {
+            // already enabled
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::IdleState)
+        {
+            // no-op
+        }
 
-
-    connect( m_AudioOutputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
-
-//    this->reinit();
-    return true;
+        // start in pull mode.. qt will call readData as needed for sound output
+        m_AudioOutputDevice->start( this );
 }
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    else
+    {
+        if (m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState)
+        {
+            // already stopped
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::ActiveState)
+        {
+            m_AudioOutputDevice->suspend();
+        }
+        else if (m_AudioOutputDevice->state() == QAudio::IdleState)
+        {
+            // no-op
+        }
+    }
+}
 
 //============================================================================
 void AudioOutIo::reinit()
 {
-    this->stopAudio();
-    this->startAudio();
+    this->stopAudioOut();
+    this->startAudioOut();
 }
 
 //============================================================================
-void AudioOutIo::startAudio()
+void AudioOutIo::toggleSuspendResume()
+{
+    if( m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState )
+    {
+        m_AudioOutputDevice->resume();
+        //m_suspendResumeButton->setText( tr( "Suspend playback" ) );
+    }
+    else if( m_AudioOutputDevice->state() == QAudio::ActiveState ) {
+        m_AudioOutputDevice->suspend();
+        //m_suspendResumeButton->setText( tr( "Resume playback" ) );
+    }
+    else if( m_AudioOutputDevice->state() == QAudio::IdleState ) {
+        // no-op
+    }
+}
+
+//============================================================================
+void AudioOutIo::startAudioOut()
 {
 	// Reinitialize audio output
+    m_AudioOutDeviceIsStarted = true;
     m_ProccessedMs = 0;
 
-    m_AudioOutThread.setThreadShouldRun( true );
-    m_AudioOutThread.startAudioOutThread();
-
-    this->open( QIODevice::ReadOnly );
+    // start in pull mode.. qt will call readData as needed for sound output
     m_AudioOutputDevice->start( this );
-
-    m_PeriodicTimer->start();
-    m_ElapsedTimer.start();
-    //LogMsg( LOG_DEBUG, "AudioOutIo default buffer size %d periodic size %d", m_AudioOutputDevice->bufferSize(), m_AudioOutputDevice->periodSize() );
 }
 
 //============================================================================
-void AudioOutIo::setVolume( float volume )
+qint64 AudioOutIo::bytesAvailable() const
 {
-    m_volume = volume;
+    // LINUX seems to be the only os that calls this
+    // just always reture a frame size even if there is no audio available.. it will get filled with silence
+    return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
 }
+
+//============================================================================
+qint64 AudioOutIo::size() const
+{
+    return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
+}
+
+//============================================================================
+void AudioOutIo::stopAudioOut()
+{
+    if( m_AudioOutDeviceIsStarted )
+    {
+        m_AudioOutDeviceIsStarted = false;
+    if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
+    {
+        // Stop audio output
+		m_AudioOutputDevice->stop();
+        //this->close();
+        }
+    }
+    }
+
+//============================================================================
+void AudioOutIo::fromGuiCheckSpeakerOutForUnderrun()
+{
+    emit signalCheckForBufferUnderun();
+}
+
 
 //============================================================================
 void AudioOutIo::flush()
 {
     // Flushing buffers is a bit tricky...
     // Don't modify this unless you're sure
-    this->stopAudio();
+    this->stopAudioOut();
 	if( m_AudioOutputDevice )
 	{
 		m_AudioOutputDevice->reset();
 	}
 
-    this->startAudio();
+    this->startAudioOut();
 }
-
-//============================================================================
-void AudioOutIo::stopAudio()
-{
-    //m_PeriodicTimer->stop();
-    if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
-    {
-        // Stop audio output
-		m_AudioOutputDevice->stop();
-        //this->close();
-    }
-
-    m_AudioOutThread.setThreadShouldRun( false );
-    m_AudioOutThread.stopAudioOutThread();
-}
-
-////============================================================================
-//static void apply_s16le_volume( float volume, uchar *data, int datalen )
-//{
-//    int samples = datalen / 2;
-//    float mult = pow( 10.0, 0.05*volume );
-
-//    for( int i = 0; i < samples; i++ ) {
-//        qint16 val = qFromLittleEndian<qint16>( data + i * 2 )*mult;
-//        qToLittleEndian<qint16>( val, data + i * 2 );
-//    }
-//}
 
 //============================================================================
 qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 {
     if( !m_AudioIoMgr.isAudioInitialized() )
     {
-        return 0;
+        memset( data, 0, maxlen );
+        return maxlen;
     }
 
  /*   static qint64 totalRead = 0;
@@ -197,21 +230,26 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
             qint64 byteRate = totalRead / ( secondsNow - secondsStart );
             LogMsg( LOG_DEBUG, "speaker out byte rate = %" PRId64 " at %" PRId64 " sec delay %3.3f ms", byteRate, secondsNow - secondsStart, m_AudioIoMgr.getDataReadyForSpeakersLen() * BYTES_TO_MS_MULTIPLIER_SPEAKERS );
         }
-    }*/
+    }
 
     if( maxlen <= 0 )
     {
-        //LogMsg( LOG_DEBUG, "readData with maxlen 0 with avail %d", m_AudioIoMgr.getDataReadyForSpeakersLen() );
+        // do not try suspend in readData because in android the state becomes active but readData is never called again
+        LogMsg( LOG_DEBUG, "readData with maxlen %d with avail %d", maxlen, m_AudioIoMgr.getDataReadyForSpeakersLen() );
         emit signalCheckForBufferUnderun();
         return maxlen;
     }
+    */
 
     // do not try suspend in readData because in android the state becomes active but readData is never called again
 
-    int toReadCnt = std::min( bytesAvailable(), maxlen );
-    qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readDataFromMixer( data, toReadCnt );
+    qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier() );
+    if( readAmount != maxlen )
+    {
+        LogMsg( LOG_DEBUG, "readData mismatch with maxlen %d and read %d", maxlen, readAmount );
+    }
 
-    return readAmount;
+    return maxlen;
 }
 
 //============================================================================
@@ -225,63 +263,6 @@ qint64 AudioOutIo::writeData( const char *data, qint64 len )
 }
 
 //============================================================================
-qint64 AudioOutIo::size() const
-{
-    return bytesAvailable();
-}
-
-//============================================================================
-qint64 AudioOutIo::bytesAvailable() const
-{
-    qint64 avail = std::min( m_AudioIoMgr.getAudioOutMixer().getDataReadyForSpeakersLen(), m_AudioOutBufferSize );
-    //avail += QIODevice::bytesAvailable();
-    //LogMsg( LOG_DEBUG, "bytesAvailable %" PRId64 " device avail %" PRId64 "", avail, QIODevice::bytesAvailable() );
-    return avail;
-}
-
-//============================================================================
-void AudioOutIo::slotAvailableSpeakerBytesChanged( int availBytes )
-{
-    Q_UNUSED( availBytes );
-    //seek( availBytes );
-}
-
-//============================================================================
-void AudioOutIo::slotAudioNotify()
-{
-    qint64 processedMs = m_AudioOutputDevice->elapsedUSecs() / 1000;
-    static int callCnt = 0;
-    static uint64_t seconds = 0;
-    static uint64_t lastSecond = 0;
-    if( ( processedMs - m_ProccessedMs ) >= AUDIO_MS_SPEAKERS )
-    {
-        // round down to nearest 80 ms
-        m_ProccessedMs = processedMs - ( processedMs % AUDIO_MS_SPEAKERS );
-        m_AudioOutThread.releaseAudioOutThread();
-//        LogMsg( LOG_DEBUG, "AudioOutIo Notify %3.3f ms processed %" PRId64 " interval %d buf size %d elapsed %d", m_NotifyTimer.elapsedMs(), processedMs, m_AudioOutputDevice->notifyInterval(), 
-//            m_AudioOutputDevice->bufferSize(), m_ElapsedTimer.elapsed() );
-
-        callCnt++;
-        uint64_t secondsNow = time( NULL );
-        if( secondsNow != lastSecond )
-        {
-            lastSecond = secondsNow;
-            if( !seconds )
-            {
-                m_ElapsedTimer.restart();
-                seconds = secondsNow;
-            }
-
-            uint64_t elapsedSec = secondsNow - seconds;
-            if( elapsedSec )
-            {
-                //LogMsg( LOG_DEBUG, "* %d calls per second %d-" PRId64 "-" PRId64 "", callCnt / elapsedSec, elapsedSec, m_ElapsedTimer.elapsed() / 1000, processedMs / 1000 );
-            }
-        }
-    }
-}
-
-//============================================================================
 void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 {
     if( VxIsAppShuttingDown() )
@@ -292,7 +273,7 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 
     if( m_AudioOutState != state )
     {
-        LogMsg( LOG_DEBUG, "onAudioDeviceStateChanged  from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioOutState ), m_AudioIoMgr.describeAudioState( state ) );
+        LogMsg( LOG_DEBUG, "AudioOutIo::onAudioDeviceStateChanged  from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioOutState ), m_AudioIoMgr.describeAudioState( state ) );
         m_AudioOutState = state;
         if( m_AudioOutState == QAudio::State::StoppedState )
         {
@@ -306,7 +287,6 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
     }
 
 
-#if defined(TARGET_OS_WINDOWS)
     if( m_AudioOutputDevice )
 	{
 		// Start buffering again in case of underrun...
@@ -314,14 +294,14 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 		if( state == QAudio::IdleState && m_AudioOutputDevice->error() == QAudio::UnderrunError )
 		{
 			// This check is required, because Mac OS X underruns often
-			m_AudioOutputDevice->suspend();
-//#ifdef DEBUG_QT_AUDIO
-            LogMsg( LOG_DEBUG, "onAudioDeviceStateChanged speaker out suspending due to underrun " );
-//#endif // DEBUG_QT_AUDIO
+			//m_AudioOutputDevice->suspend();
+
+            LogMsg( LOG_DEBUG, "AudioOutIo::onAudioDeviceStateChanged speaker out suspending due to underrun " );
+
 			return;
 		}      
 	}
-#endif
+//#endif
 }
 
 //============================================================================
@@ -334,16 +314,18 @@ void AudioOutIo::slotCheckForBufferUnderun()
         return;
     }
 
+    /*
     int bufferedAudioData = m_AudioIoMgr.getDataReadyForSpeakersLen();
     
 	if( m_AudioOutputDevice )
 	{
+        m_AudioOutPreviousState = m_AudioOutState;
 		m_AudioOutState = m_AudioOutputDevice->state();
 		//qWarning() << "checkForBufferUnderun audioState = " << audioState;
 		QAudio::Error audioError = m_AudioOutputDevice->error();
         if( audioError != QAudio::NoError )
         {
-            LogMsg( LOG_DEBUG, "speaker Error %s", m_AudioIoMgr.describeAudioError( audioError ) );
+            LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker Error %s", m_AudioIoMgr.describeAudioError( audioError ) );
         }
 		//qWarning() << "checkForBufferUnderun audioError = " << audioError;
 //		qWarning() << "checkForBufferUnderun bufferSize = " << m_AudioOutputDevice->bufferSize();
@@ -352,32 +334,27 @@ void AudioOutIo::slotCheckForBufferUnderun()
 		switch( m_AudioOutState )
 		{
 		case QAudio::ActiveState:
+            if( QAudio::UnderrunError == m_AudioOutPreviousError )
+            {
+                 m_AudioOutPreviousError = QAudio::NoError;
+            }
 			break;
 		case QAudio::IdleState:
             if( !bufferedAudioData && audioError == QAudio::UnderrunError )
 			{
-                LogMsg( LOG_DEBUG, "speaker idle due to underrun" );
-//#if defined( TARGET_OS_ANDROID )
-//                m_AudioOutputDevice->stop();
-//#elif defined( TARGET_OS_WINDOWS )
+                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker idle due to underrun" );
                 m_AudioOutputDevice->suspend();
-//#endif // TARGET_OS_WINDOWS
+
 			}
             else if( bufferedAudioData >= m_AudioOutputDevice->bufferSize() )
 			{
-//#if defined( TARGET_OS_ANDROID )
-//                m_AudioOutputDevice->stop();
-//                m_AudioOutputDevice->start( this );
-//#elif defined( TARGET_OS_WINDOWS )
-                LogMsg( LOG_DEBUG, "speaker resuming due to idle and have data" );
-//#ifdef Q_OS_WIN
-                // The Windows backend seems to internally go back into ActiveState
-                // while still returning SuspendedState, so to ensure that it doesn't
-                // ignore the resume() call, we first re-suspend
+                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker resuming due to idle and have data" );
+
+
                 m_AudioOutputDevice->suspend();
-//#endif
+
                 m_AudioOutputDevice->resume();
-//#endif // TARGET_OS_WINDOWS
+
             }
 			else
 			{
@@ -386,38 +363,41 @@ void AudioOutIo::slotCheckForBufferUnderun()
 			break;
 
 		case QAudio::SuspendedState:
-            if( bufferedAudioData >= m_AudioOutBufferSize )
+            if( bufferedAudioData >= AUDIO_BUF_SIZE_8000_1_S16 )
 			{ 
-                LogMsg( LOG_DEBUG, "speaker out resuming due to suspended and have data" );
-//#if defined( TARGET_OS_ANDROID )
-//                 m_AudioOutputDevice->resume();
-//#elif defined( TARGET_OS_WINDOWS )
-//#ifdef Q_OS_WIN
-                // The Windows backend seems to internally go back into ActiveState
-                // while still returning SuspendedState, so to ensure that it doesn't
-                // ignore the resume() call, we first re-suspend
-                m_AudioOutputDevice->suspend();
-//#endif
+                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker out resuming due to suspended and have data" );
                 m_AudioOutputDevice->resume();
-//#endif // TARGET_OS_WINDOWS
+
             }
 			break;
 
 		case QAudio::StoppedState: 
             if( bufferedAudioData >= m_AudioOutBufferSize )
 			{
-                LogMsg( LOG_DEBUG, "restarting due to stopped and have data" );
+                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun restarting due to stopped and have data" );
                 m_AudioOutputDevice->start( this );
 			}
 			break;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-        case QAudio::InterruptedState:
-            LogMsg(LOG_DEBUG, "Interrupted state.. how to handle?");
-            break;
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
         default:
-            LogMsg(LOG_DEBUG, "Unknown AudioOut State");
+            LogMsg(LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun Unknown AudioOut State");
             break;
 		};
+
+        if( QAudio::NoError != audioError )
+        {
+            m_AudioOutPreviousError = audioError;
 	}
+	}
+    */
+}
+
+//============================================================================
+void AudioOutIo::setSpeakerVolume( int volume0to100 )
+{
+    qreal linearVolume = QAudio::convertVolume( volume0to100 / qreal( 100 ),
+        QAudio::LogarithmicVolumeScale,
+        QAudio::LinearVolumeScale );
+
+    m_AudioOutputDevice->setVolume( linearVolume );
 }

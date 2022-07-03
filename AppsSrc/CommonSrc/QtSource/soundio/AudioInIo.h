@@ -24,14 +24,8 @@
 #include <QAudioInput>
 #include <QIODevice>
 #include <QMutex>
-
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 #include <QAudioSource>
 #include <QMediaDevices>
-#else
-#include <QAudioDeviceInfo>
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-
 
 class AudioIoMgr;
 
@@ -42,14 +36,19 @@ public:
     explicit AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
     ~AudioInIo() override;
 
-    bool                        initAudioIn( QAudioFormat& audioFormat );
+    bool                        initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
 
     void                        stopAudio();
     void                        startAudio();
 
-    void                        lockAudioIn()       { m_AudioBufMutex.lock(); }
-    void                        unlockAudioIn()     { m_AudioBufMutex.unlock(); }
+    void                        wantMicrophoneInput( bool enableInput );
 
+    void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
+
+    int                         getAudioInPeakAmplitude( void ) { return m_PeakAmplitude; }
+
+    void                        lockAudioIn( void )             { m_AudioBufMutex.lock(); }
+    void                        unlockAudioIn( void )           { m_AudioBufMutex.unlock(); }
  
     void                        setVolume( float volume );
     void                        flush();
@@ -68,18 +67,13 @@ public:
 
     int                         calculateMicrophonDelayMs();
 
-    void                        suspend() { if (m_AudioInputDevice) m_AudioInputDevice->suspend(); }
-    void                        resume() { if (m_AudioInputDevice) m_AudioInputDevice->resume(); }
+    void                        suspend()                       { if (m_AudioInputDevice.data() ) m_AudioInputDevice->suspend(); }
+    void                        resume()                        { if (m_AudioInputDevice.data() ) m_AudioInputDevice->resume(); }
 
-    QAudio::State               getState() { return (m_AudioInputDevice ? m_AudioInputDevice->state() : QAudio::StoppedState); }
-    QAudio::Error               getError() { return (m_AudioInputDevice ? m_AudioInputDevice->error() : QAudio::NoError); }
+    QAudio::State               getState()                      { return (m_AudioInputDevice.data() ? m_AudioInputDevice->state() : QAudio::StoppedState); }
+    QAudio::Error               getError()                      { return (m_AudioInputDevice.data() ? m_AudioInputDevice->error() : QAudio::NoError); }
 
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-    QAudioSource*               getAudioIn() { return m_AudioInputDevice; }
-#else
-    QAudioInput*                getAudioIn() { return m_AudioInputDevice; }
-    bool                        setAudioDevice(QAudioDeviceInfo deviceInfo);
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QAudioSource*               getAudioIn()                    { return m_AudioInputDevice.data(); }
 
     void                        setDivideSamplesCount( int cnt )
     {
@@ -99,7 +93,7 @@ protected:
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
-    bool						isSequential() const  override { return true; }
+    //bool						isSequential() const  override { return true; }
 
 private:
     void                        reinit();
@@ -107,7 +101,8 @@ private:
     AudioIoMgr&                 m_AudioIoMgr;
     QMutex&                     m_AudioBufMutex;
 
-    bool                        m_initialized = false;
+    bool                        m_initialized{ false };
+    bool                        m_AudioInDeviceIsStarted{ false };
     QAudioFormat                m_AudioFormat;
     float                       m_volume = 1.0f;
 
@@ -117,12 +112,9 @@ private:
     AudioInThread               m_AudioInThread;
     QAtomicInt                  m_AtomicBufferSize;
     int                         m_DivideCnt{ 1 };
+    int                         m_PeakAmplitude{ 0 };
+    float                       m_MicrophoneVolume{ 0.0f };
 
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     QMediaDevices*              m_MediaDevices = nullptr;
-    QAudioSource*               m_AudioInputDevice = nullptr;
-#else
-    QAudioInput*                m_AudioInputDevice = nullptr;
-    QAudioDeviceInfo            m_deviceInfo;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QScopedPointer<QAudioSource> m_AudioInputDevice;
 };

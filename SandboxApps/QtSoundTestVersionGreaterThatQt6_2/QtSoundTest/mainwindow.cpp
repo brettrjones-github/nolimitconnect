@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect( ui->m_PauseVoipCheckBox, SIGNAL( stateChanged( int ) ), m_SoundTestLogic, SLOT( pauseVoipState( int ) ) );
     connect( ui->m_PauseKodiCheckbox, SIGNAL( stateChanged( int ) ), m_SoundTestLogic, SLOT( pauseKodiState( int) ) );
+    connect( ui->m_PauseMicrophoneCheckBox, SIGNAL( stateChanged( int ) ), m_SoundTestLogic, SLOT( pauseMicrophoneState( int ) ) );
     connect( ui->m_MuteSpeakersCheckBox, SIGNAL( stateChanged( int ) ), m_SoundTestLogic, SLOT( muteSpeakerState( int ) ) );
     connect( ui->m_MuteMicrophoneCheckBox, SIGNAL( stateChanged( int ) ), m_SoundTestLogic, SLOT( muteMicrophoneState( int ) ) );
 
@@ -37,8 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->m_PauseVoipCheckBox->setChecked( true );
     ui->m_PauseKodiCheckbox->setChecked( true );
+    ui->m_PauseMicrophoneCheckBox->setChecked( true );
     ui->m_PauseKodiCheckbox->setVisible( false );
-    ui->m_MuteMicrophoneCheckBox->setChecked( true );
+    ui->m_MuteMicrophoneCheckBox->setChecked( false );
 
     m_PeakTimer->start();
 }

@@ -221,6 +221,13 @@ void SoundTestLogic::pauseKodiState( int state )
 }
 
 //============================================================================
+void SoundTestLogic::pauseMicrophoneState( int state )
+{
+    m_PauseMicrophone = state ? true : false;
+    m_AudioIoMgr.toGuiWantMicrophoneRecording( eAppModuleAll, !m_PauseMicrophone );
+}
+
+//============================================================================
 void SoundTestLogic::muteSpeakerState( int state )
 {
     bool isChecked = state ? true : false;

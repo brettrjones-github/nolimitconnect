@@ -30,19 +30,6 @@ AudioOutIo::AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent 
 , m_AudioBufMutex( audioOutMutex )
 , m_PeriodicTimer( new QTimer( this ) )
 , m_AudioOutState( QAudio::StoppedState )
-, m_ResumeTimer( new QTimer( this ) )
-{
-    m_ResumeTimer->setInterval( 5 );
-    m_PeriodicTimer->setInterval( 20 );
-
-    connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
-    connect( m_ResumeTimer, SIGNAL( timeout() ), this, SLOT( slotSendResumeStatus() ) );
-    connect( m_PeriodicTimer, SIGNAL( timeout() ), this, SLOT( slotAudioNotify() ) );
-    connect( &m_AudioIoMgr.getAudioOutMixer(), SIGNAL( signalCheckSpeakerOutState() ), this, SLOT( slotCheckForBufferUnderun() ) );
-}
-
-//============================================================================
-AudioOutIo::~AudioOutIo()
 {
 }
 
@@ -166,7 +153,9 @@ void AudioOutIo::startAudioOut()
 //============================================================================
 qint64 AudioOutIo::bytesAvailable() const
 {
-    return m_AudioIoMgr.getAudioOutMixer().getDataReadyForSpeakersLen();
+    // LINUX seems to be the only os that calls this
+    // just always reture a frame size even if there is no audio available.. it will get filled with silence
+    return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
 }
 
 //============================================================================
@@ -178,12 +167,9 @@ qint64 AudioOutIo::size() const
 //============================================================================
 void AudioOutIo::stopAudioOut()
 {
-    m_PeriodicTimer->stop();
-
     if( m_AudioOutDeviceIsStarted )
     {
         m_AudioOutDeviceIsStarted = false;
-        //m_PeriodicTimer->stop();
         if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
         {
             // Stop audio output
@@ -199,11 +185,6 @@ void AudioOutIo::fromGuiCheckSpeakerOutForUnderrun()
     emit signalCheckForBufferUnderun();
 }
 
-//============================================================================
-void AudioOutIo::setVolume( float volume )
-{
-    m_volume = volume;
-}
 
 //============================================================================
 void AudioOutIo::flush()
@@ -260,7 +241,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     */
 
 
-    qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readDataFromMixer( data, maxlen, getUpsampleMultiplier() );
+    qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier() );
     totalRead += readAmount;
     return readAmount;
     if( readAmount != maxlen )
@@ -281,57 +262,6 @@ qint64 AudioOutIo::writeData( const char *data, qint64 len )
     return 0;
 }
 
-/*
-//============================================================================
-qint64 AudioOutIo::size() const
-{
-    return bytesAvailable();
-}
-
-//============================================================================
-qint64 AudioOutIo::bytesAvailable() const
-{
-    return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
-}
-*/
-
-//============================================================================
-void AudioOutIo::slotAudioNotify()
-{
-    /*
-    qint64 processedMs = m_AudioOutputDevice->elapsedUSecs() / 1000;
-    static int callCnt = 0;
-    static uint64_t seconds = 0;
-    static uint64_t lastSecond = 0;
-    if( ( processedMs - m_ProccessedMs ) >= AUDIO_MS_SPEAKERS )
-    {
-        // round down to nearest 80 ms
-        m_ProccessedMs = processedMs - ( processedMs % AUDIO_MS_SPEAKERS );
-        m_AudioOutThread.releaseAudioOutThread();
-//        LogMsg( LOG_DEBUG, "AudioOutIo Notify %3.3f ms processed %lld interval %d buf size %d elapsed %d", m_NotifyTimer.elapsedMs(), processedMs, m_AudioOutputDevice->notifyInterval(), 
-//            m_AudioOutputDevice->bufferSize(), m_ElapsedTimer.elapsed() );
-
-        callCnt++;
-        uint64_t secondsNow = time( NULL );
-        if( secondsNow != lastSecond )
-        {
-            lastSecond = secondsNow;
-            if( !seconds )
-            {
-                m_ElapsedTimer.restart();
-                seconds = secondsNow;
-            }
-
-            uint64_t elapsedSec = secondsNow - seconds;
-            if( elapsedSec )
-            {
-                //LogMsg( LOG_DEBUG, "* %d calls per second %d-%lld-%lld", callCnt / elapsedSec, elapsedSec, m_ElapsedTimer.elapsed() / 1000, processedMs / 1000 );
-            }
-        }
-    }
-    */
-}
-
 //============================================================================
 void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 {
@@ -341,7 +271,7 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
         m_AudioOutState = state;
     }
 
-//#if defined(TARGET_OS_WINDOWS)
+/*
     if( m_AudioOutputDevice )
 	{
 		// Start buffering again in case of underrun...
@@ -357,6 +287,7 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
         }
 	}
 //#endif
+*/
 }
 
 //============================================================================
@@ -449,7 +380,6 @@ void AudioOutIo::slotCheckForBufferUnderun()
 // send resume callback after qt has processed events
 void AudioOutIo::slotSendResumeStatus( void )
 {
-    m_ResumeTimer->stop();
     m_AudioIoMgr.fromAudioOutResumed();
 }
 

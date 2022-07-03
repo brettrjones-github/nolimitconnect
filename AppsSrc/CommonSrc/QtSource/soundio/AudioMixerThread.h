@@ -19,19 +19,20 @@
 #include <QSemaphore>
 
 class AudioIoMgr;
-class AudioTestGenerator;
 
-class AudioOutThread : public QThread
+class AudioMixerThread : public QThread
 {
 	Q_OBJECT
 public:
-    AudioOutThread( AudioIoMgr& audioIoMgr );
+    AudioMixerThread( AudioIoMgr& audioIoMgr );
 
-    void                        startAudioOutThread();
-    void                        stopAudioOutThread();
+    void                        startAudioMixerThread();
+    void                        stopAudioMixerThread();
 
-	void						setThreadShouldRun(bool shouldRun)      { m_ShouldRun = shouldRun; }
-    void                        releaseAudioOutThread()                  { m_AudioSemaphore.release(); }
+	void						setThreadShouldRun(bool shouldRun)          { m_ShouldRun = shouldRun; }
+    void                        releaseAudioMixerThread()                   { m_AudioSemaphore.release(); }
+
+    void                        setMixerSpaceAvailable( int mixerSpace )    { m_MixerSpaceAvail = mixerSpace; }
 
 protected:
     virtual void                run() override;
@@ -40,4 +41,5 @@ protected:
     QSemaphore                  m_AudioSemaphore;
 
 	bool						m_ShouldRun = true;
+    int                         m_MixerSpaceAvail{ 0 };
 };

@@ -94,19 +94,6 @@ void AppCommon::slotEnableSpeakerOutput( bool enableSpeakerOutput )
 
 //============================================================================
 //! playback audio
-int AppCommon::toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return 0;
-	}
-
-	//LogMsg( LOG_INFO, "slotPlayAudio %d len %d from %s\n", ePluginType, u16PcmDataLen, netIdent->getOnlineName());
-	return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
-}
-
-//============================================================================
-//! playback audio
 int AppCommon::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
     if( VxIsAppShuttingDown() )
@@ -116,6 +103,22 @@ int AppCommon::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int 
 
     return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
+
+
+#if ENABLE_KODI
+//============================================================================
+//! playback audio
+int AppCommon::toGuiPlayAudio( EAppModule appModule, float* pu16PcmData, int pcmDataLenInBytes )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return 0;
+	}
+
+	//LogMsg( LOG_INFO, "slotPlayAudio %d len %d from %s\n", ePluginType, u16PcmDataLen, netIdent->getOnlineName());
+	return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
+}
+#endif // ENABLE_KODI
 
 //============================================================================
 //! playback audio
