@@ -1,3 +1,4 @@
+This document is outdated
 
 === Build NoLimitConnect for android in windows ====
 NOTES: ( some hard earned lessons )
@@ -5,6 +6,8 @@ NOTES: ( some hard earned lessons )
 2.) BuildAll.pro may hang because of it's size unless you have a awsome computer so is better to build individualy
 	Build1_xxx Build2_xxx etc
 3.) For Qt the projects must be built in a certain order which is why they are named Build1_xxx Build2_xxx etc
+4.)	For projects with only libraries you can get rid of the Error ""Cannot set up Android, not building an APK.""
+	by disabling the Build Android APK step in Projects->Build & Run->Build
 
 === Build Prerequisites ====
 Follow instructions in docs_for_building/BuildForWindowsPrerequisitesInstructions.txt

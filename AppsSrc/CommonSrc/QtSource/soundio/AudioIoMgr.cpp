@@ -36,7 +36,7 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 
     m_SpeakerAvailable = true;
     m_AudioOutFormat.setSampleRate( 48000 );
-    m_AudioOutFormat.setChannelCount( 1 );
+    m_AudioOutFormat.setChannelCount( 2 );
     m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
 
     const QAudioDevice& defaultOutDeviceInfo = m_MediaDevices->defaultAudioOutput();

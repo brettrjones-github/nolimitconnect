@@ -35,23 +35,22 @@ class AudioOutIo : public QIODevice
 
 public:
     explicit AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
-     ~AudioOutIo() override;
+     ~AudioOutIo() override = default;
 
     bool                        initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
 
     QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice.data(); }
-    QAudio::State               getState()                                  { return (m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
-    QAudio::Error               getError()                                  { return (m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
+    QAudio::State               getState()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutState : QAudio::StoppedState); }
+    QAudio::Error               getError()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
     void                        wantSpeakerOutput( bool enableOutput );
 
     void                        fromGuiCheckSpeakerOutForUnderrun(); 
 
-    void                        setVolume( float volume );
     void                        flush();
 
-    void                        suspend()                                   { if (m_AudioOutputDevice) m_AudioOutputDevice->suspend(); }
-    void                        resume()                                    { if (m_AudioOutputDevice) m_AudioOutputDevice->resume(); }
+    void                        suspend()                                   { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->suspend(); }
+    void                        resume()                                    { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->resume(); }
 
     void                        stopAudioOut();
     void                        startAudioOut();

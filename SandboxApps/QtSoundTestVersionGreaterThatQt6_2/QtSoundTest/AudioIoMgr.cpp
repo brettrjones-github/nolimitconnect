@@ -36,12 +36,7 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 
     m_SpeakerAvailable = true;
     m_AudioOutFormat.setSampleRate( 48000 );
-#ifdef Q_OS_WIN
     m_AudioOutFormat.setChannelCount( 2 ); // use 2 channels for as low latency as possible because we do not have much control on the read size requested
-#else
-    m_AudioOutFormat.setChannelCount( 1 ); // android seems to be at the edge of what it can do in a read so use one channel
-#endif // Q_OS_WIN
-
     m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
 
     const QAudioDevice& defaultOutDeviceInfo = m_MediaDevices->defaultAudioOutput();

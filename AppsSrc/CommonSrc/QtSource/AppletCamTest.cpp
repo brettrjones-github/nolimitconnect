@@ -48,6 +48,7 @@ AppletCamTest::AppletCamTest( AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
+    m_MyApp.getCamLogic().updateCamAvailable();
     if( !m_MyApp.getCamLogic().isCamAvailable() )
     {
         QMessageBox::warning( this, QObject::tr( "Camera Capture" ), QObject::tr( "No Camera Source Available." ) );

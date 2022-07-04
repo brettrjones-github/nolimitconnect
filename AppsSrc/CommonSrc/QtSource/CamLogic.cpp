@@ -71,6 +71,33 @@ bool CamLogic::isCamAvailable( void )
 }
 
 //============================================================================
+bool CamLogic::updateCamAvailable( void )
+{
+    if( !GuiHelpers::checkUserPermission( "android.permission.CAMERA" ) )
+    {
+        QMessageBox( QMessageBox::Information, QObject::tr( "Camera Permission" ), QObject::tr( "Cannot use camera without user permission" ), QMessageBox::Ok );
+        return false;
+    }
+
+    // force update.. a camera device may have become available
+    if( m_CamIsStarted )
+    {
+        stopCamera();
+    }
+    else
+    {
+        setCamera( QMediaDevices::defaultVideoInput() );
+    }
+
+    if( !m_CamInitiated )
+    {
+        m_CamInitiated = true;
+    }
+
+    return !m_camera.isNull() && m_camera->isAvailable();
+}
+
+//============================================================================
 bool CamLogic::isCamCaptureRunning( void )
 {
     assureCamInitiated();
@@ -116,11 +143,7 @@ bool CamLogic::assureCamInitiated( void )
 {
     if( !m_CamInitiated )
     {
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-        setCamera( QCameraInfo::defaultCamera() );
-#else
         setCamera( QMediaDevices::defaultVideoInput() );
-#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     }
 
     return  !m_camera.isNull() && m_camera->isAvailable();

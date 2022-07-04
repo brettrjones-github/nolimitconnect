@@ -1,4 +1,4 @@
-languages
+languages (not yet supported but a list of translations planned )
 
 static const struct LangId 
 {

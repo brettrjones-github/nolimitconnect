@@ -1,0 +1,7 @@
+NOTES for planned linux deployment
+watch the video at https://www.youtube.com/watch?v=PDzlT_ODpM8
+or follow these steps
+download AppImage from https://github.com/probonopd/linuxdeployqt/releases
+and place in ~/project_sources/deploytools/linux
+$ cd ~/project_sources/deploytools/linux
+$ chmod a+x linuxdeployqt-6-x86_64.AppImage

@@ -56,8 +56,9 @@ public:
 
     void                        cameraEnable( bool wantVidCapture );
     bool                        assureCamInitiated( void );
-    bool                        isCamAvailable( void );
     bool                        isCamCaptureRunning( void );
+    bool                        isCamAvailable( void );
+    bool                        updateCamAvailable( void ); // recheck devices for available cam
 
     // set application is exiting.. return true if cam is busy with capture
     bool                        setAppIsExiting( bool isExiting );

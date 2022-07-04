@@ -342,8 +342,6 @@ QString GuiParams::describeHostType( EHostType hostType )
         return QObject::tr( "Chat Room Host " );
     case eHostTypeRandomConnect:	
         return QObject::tr( "Random Connect Host " );
-    case eHostTypePeerUserRelayed:
-        return QObject::tr( "Peer User Relayed Host " );
     case eHostTypePeerUserDirect:
         return QObject::tr( "Peer User Direct Host " );
     case eHostTypeNetwork:
@@ -601,9 +599,6 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Network Search");
         break;
 
-    case ePluginTypeRelay:	// proxy plugin
-        strPluginType = QObject::tr("Relay");
-        break;
     default:
         strPluginType = QObject::tr("Unknown Plugin");
         LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin %d\n", ePluginType );
@@ -721,11 +716,6 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Messanger Service" ).toUtf8().constData();
         break;
 
-
-    case ePluginTypeRelay:
-        strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
-        break;
-
     case ePluginTypeStoryboardServer:
         if( rmtInitiated )
         {
@@ -798,9 +788,6 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
     QString strPluginOffer;
     switch( ePluginType )
     {
-    case ePluginTypeRelay:	// proxy plugin
-        strPluginOffer = QObject::tr(" Relay ");
-        break;
 
     case ePluginTypeWebServer:	// web server plugin ( for profile web page )
         strPluginOffer = QObject::tr(" View Profile Page " );

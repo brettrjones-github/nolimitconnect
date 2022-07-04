@@ -37,11 +37,6 @@ AudioOutIo::AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent 
 }
 
 //============================================================================
-AudioOutIo::~AudioOutIo()
-{
-}
-
-//============================================================================
 bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& deviceInfo )
 {
     if( !m_initialized )
@@ -173,21 +168,20 @@ void AudioOutIo::stopAudioOut()
     if( m_AudioOutDeviceIsStarted )
     {
         m_AudioOutDeviceIsStarted = false;
-    if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
-    {
-        // Stop audio output
-		m_AudioOutputDevice->stop();
-        //this->close();
+        if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
+        {
+            // Stop audio output
+		    m_AudioOutputDevice->stop();
+            //this->close();
         }
     }
-    }
+}
 
 //============================================================================
 void AudioOutIo::fromGuiCheckSpeakerOutForUnderrun()
 {
     emit signalCheckForBufferUnderun();
 }
-
 
 //============================================================================
 void AudioOutIo::flush()
@@ -211,37 +205,6 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         memset( data, 0, maxlen );
         return maxlen;
     }
-
- /*   static qint64 totalRead = 0;
-    static qint64 secondsStart = 0;
-    static qint64 secondsLast = 0;
-    totalRead += maxlen;
-    int64_t secondsNow = time( NULL );
-    if( 0 == secondsStart )
-    {
-        secondsStart = secondsNow;
-    }
-
-    if( secondsNow != secondsLast )
-    {
-        secondsLast = secondsNow;
-        if( secondsNow != secondsStart )
-        {
-            qint64 byteRate = totalRead / ( secondsNow - secondsStart );
-            LogMsg( LOG_DEBUG, "speaker out byte rate = %" PRId64 " at %" PRId64 " sec delay %3.3f ms", byteRate, secondsNow - secondsStart, m_AudioIoMgr.getDataReadyForSpeakersLen() * BYTES_TO_MS_MULTIPLIER_SPEAKERS );
-        }
-    }
-
-    if( maxlen <= 0 )
-    {
-        // do not try suspend in readData because in android the state becomes active but readData is never called again
-        LogMsg( LOG_DEBUG, "readData with maxlen %d with avail %d", maxlen, m_AudioIoMgr.getDataReadyForSpeakersLen() );
-        emit signalCheckForBufferUnderun();
-        return maxlen;
-    }
-    */
-
-    // do not try suspend in readData because in android the state becomes active but readData is never called again
 
     qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier() );
     if( readAmount != maxlen )

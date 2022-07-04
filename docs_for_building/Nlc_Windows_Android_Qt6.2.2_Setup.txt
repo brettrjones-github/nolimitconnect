@@ -1,3 +1,5 @@
+this document needs updated
+
 Warning: Getting the perfect enviroment to build android with Qt on windowws can be very frustrating.
 
 To make this document easier to maintain substitue <Qt Version> with 6.2.2 or whatever is your qt version.
