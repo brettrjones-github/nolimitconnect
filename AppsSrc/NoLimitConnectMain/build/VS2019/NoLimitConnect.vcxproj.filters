@@ -72,6 +72,9 @@
     <Filter Include="Source Files\AssetWidgets">
       <UniqueIdentifier>{b6e32014-8fda-412b-8ad1-d7cb6c816cbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GuiFavorite">
+      <UniqueIdentifier>{d27b18cc-badc-494e-87ee-61a4dffc42e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -2002,6 +2005,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.cpp">
+      <Filter>Source Files\GuiFavorite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2246,6 +2252,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.h">
       <Filter>Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.h">
+      <Filter>Source Files\GuiFavorite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

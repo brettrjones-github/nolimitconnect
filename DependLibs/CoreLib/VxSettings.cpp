@@ -51,7 +51,7 @@ RCODE VxSettings::onCreateTables( int iDbVersion )
 	rc |= sqlExec( (char*)"CREATE TABLE blob (key TEXT, setting TEXT PRIMARY KEY, value BLOB)" );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "VxSettings::DbCreateTables:ERROR %d creating table\n" );
+		LogMsg( LOG_ERROR, "VxSettings::DbCreateTables:ERROR %d creating table" );
 	}
 
 	m_DbMutex.unlock();
@@ -104,6 +104,29 @@ void VxSettings::vxSettingsShutdown( void )
 		LogMsg( LOG_ERROR, "VxSettings::vxSettingsShutdown:ERROR %d", rc );
 	}
 }
+
+//============================================================================
+//! remove a key value from database
+void VxSettings::removeBoolIniValueFromDb( const char* pKey, const char* pSettingName )
+{
+	m_DbMutex.lock();
+
+	char SQL_Statement[ 2048 ];
+	if( 0 == dbOpen() )
+	{
+		const char* tableName = "BOOL";
+		sprintf( SQL_Statement, "DELETE FROM %s WHERE key='%s' AND setting='%s'", tableName, pKey, pSettingName );
+		if( SQLITE_OK != sqlite3_exec( m_Db, SQL_Statement, NULL, NULL, NULL ) )
+		{
+			// LogMsg( LOG_VERBOSE, "VxSettings::removeBoolIniValueFromDb:ERROR %s", sqlite3_errmsg( m_Db ) );
+		}
+	}
+
+	dbClose();
+
+	m_DbMutex.unlock();
+}
+
 //============================================================================
 //! set and save value to database
 void VxSettings::setIniValue( const char * pKey, const char * pSettingName, bool& bValue )
@@ -751,7 +774,7 @@ RCODE VxSettings::prepareIniQuery(	sqlite3_stmt ** ppoRetSqlStatement,
 
 //============================================================================
 //! finalize and close db
-RCODE VxSettings::finalizeIniSetTransaction(	sqlite3_stmt * poSqlStatement, bool bErrorOccured )
+RCODE VxSettings::finalizeIniSetTransaction( sqlite3_stmt * poSqlStatement, bool bErrorOccured )
 {
 	RCODE rc = -1;
 	if( false == bErrorOccured )

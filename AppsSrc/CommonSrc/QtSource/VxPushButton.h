@@ -73,8 +73,8 @@ public:
     bool						getNotifyOfferEnabled( void )						{ return m_NotifyOfferEnabled; }
     void						setNotifyForbiddenEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyForbbidenOverlay );
     bool						getNotifyForbiddenEnabled( void )					{ return m_NotifyOfferEnabled; }
-    void						setNotifyErrorEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyErrorOverlay );
-    bool						getNotifyErrorEnabled( void )						{ return m_NotifyOfferEnabled; }
+    void						setNotifyNlcFavoriteEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNlcFavoriteOverlay );
+    bool						getNotifyNlcFavoritenabled( void )					{ return m_NotifyNlcFavoriteEnabled; }
 
 	void						setIcon( EMyIcons myIcon );
 	void						setIconOverrideColor( QColor iconColor );
@@ -181,21 +181,20 @@ protected:
     QSize						m_NotifyLastIconOfferSize{ 0, 0 };
 
     bool						m_NotifyForbiddenEnabled{ false };
-    EMyIcons					m_NotifyForbiddenIcon;
-    EMyIcons					m_LastNotifyForbiddenIcon;
+    EMyIcons					m_NotifyForbiddenIcon{ eMyIconNone };
+    EMyIcons					m_LastNotifyForbiddenIcon{ eMyIconNone };
     QPixmap						m_NotifyIconForbiddenImage;
     QColor						m_NotifyLastIconForbiddenColor;
     QSize						m_NotifyLastIconForbiddenSize;
 
-    bool						m_NotifyErrorEnabled{ false };
-    EMyIcons					m_NotifyErrorIcon;
-    EMyIcons					m_LastNotifyErrorIcon;
-    QPixmap						m_NotifyIconErrorImage;
-    QColor						m_NotifyLastIconErrorColor;
-    QSize						m_NotifyLastIconErrorSize;
+    bool						m_NotifyNlcFavoriteEnabled{ false };
+    EMyIcons					m_NlcFavoriteIcon{ eMyIconNone };
+    EMyIcons					m_LastNlcFavoriteIcon{ eMyIconNone };
+    QPixmap						m_NlcFavoriteImage;
+    QSize						m_LastIconNlcFavoriteSize;
 
-	EMyIcons					m_OverlayIcon;
-	EMyIcons					m_LastOverlayIcon;
+	EMyIcons					m_OverlayIcon{ eMyIconNone };
+	EMyIcons					m_LastOverlayIcon{ eMyIconNone };
 	QPixmap						m_OverlayIconImage;
 	QColor						m_OverlayLastIconColor;
 	QSize						m_OverlayLastIconSize;

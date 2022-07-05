@@ -63,6 +63,8 @@ private slots:
     virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
     virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
 
+    void                        onCancelButClick( void );
+
 protected:
     virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
 
@@ -73,4 +75,5 @@ protected:
     Ui::AppletGroupListLocalViewUi ui;
     bool                        m_SearchStarted{ false };
     VxGUID                      m_SearchSessionId;
+    QTimer*                     m_CloseAppletTimer{ nullptr };
 };

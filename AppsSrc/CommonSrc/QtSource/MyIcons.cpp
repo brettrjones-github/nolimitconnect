@@ -60,7 +60,7 @@ void MyIcons::myIconsStartup( void )
 }
 
 //============================================================================
-QPixmap	 MyIcons::getIconPixmap( EMyIcons myIcon, QSize iconSize, QColor& iconColor )
+QPixmap	 MyIcons::getIconPixmap( enum EMyIcons myIcon, QSize iconSize, QColor& iconColor )
 {
 	QPixmap iconPixmap;
 	QString svgName = getIconFile( myIcon );
@@ -78,7 +78,7 @@ QPixmap	 MyIcons::getIconPixmap( EMyIcons myIcon, QSize iconSize, QColor& iconCo
 }
 
 //============================================================================
-QPixmap	 MyIcons::getIconPixmap( EMyIcons myIcon, QSize iconSize )
+QPixmap	 MyIcons::getIconPixmap( enum EMyIcons myIcon, QSize iconSize )
 {
 	QPixmap iconPixmap;
 	QString svgName = getIconFile( myIcon );
@@ -107,14 +107,14 @@ bool MyIcons::isSvgFile( QString& iconFileName )
 
 //============================================================================
 //! get path to icon file
-QString MyIcons::getIconFile( EMyIcons eMyIcon )
+QString MyIcons::getIconFile( enum EMyIcons eMyIcon )
 {
 	switch( eMyIcon )
 	{
 	case eMyIconUnknown:
 		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconApp:
-		return ":/AppRes/Resources/gotv_icon.svg";
+		return ":/AppRes/Resources/nlc-icon.svg";
     case eMyIconAvatarImage:
         return ":/AppRes/Resources/avatar.svg";
 
@@ -132,8 +132,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/notify-offer.svg";
     case eMyIconNotifyForbbidenOverlay:		
         return ":/AppRes/Resources/notify-offer.svg";
-    case eMyIconNotifyErrorOverlay:		
-        return ":/AppRes/Resources/notify-offer.svg";
 
 	case eMyIconPlusOverlay:		// add to library or shared files
 		return ":/AppRes/Resources/overlay-plus.svg";
@@ -143,6 +141,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/overlay-friend.svg";
 	case eMyIconGlobeOverlay:		// is global shared or unknown person
 		return ":/AppRes/Resources/overlay-globe.svg";
+	case eMyIconNlcFavoriteOverlay:		// nlc icon in upper right
+		return ":/AppRes/Resources/overlay-nlc.svg";
 
     case eMyIconInformation:
         return ":/AppRes/Resources/info.svg";
@@ -834,7 +834,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 //============================================================================
 //! get preloaded icon
-QIcon& MyIcons::getIcon( EMyIcons eMyIcon )
+QIcon& MyIcons::getIcon( enum EMyIcons eMyIcon )
 {
 	return m_aoIcons[ eMyIcon ];
 }
@@ -862,7 +862,7 @@ EMyIcons MyIcons::getFriendshipIcon( EFriendState eFriendship )
 
 //============================================================================
 //! get icon for given plugin
-EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
+EMyIcons MyIcons::getPluginSettingsIcon( enum EPluginType ePluginType )
 {
     switch( ePluginType )
     {
@@ -939,7 +939,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
 
 //============================================================================
 //! get icon for given plugin
-EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginAccess )
+EMyIcons MyIcons::getPluginIcon( enum EPluginType ePluginType, EPluginAccess ePluginAccess )
 {
 	switch( ePluginType )
 	{
@@ -1371,7 +1371,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 
 //============================================================================
 //! get setup icon for given plugin
-EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
+EMyIcons MyIcons::getPluginSetupIcon( enum EPluginType ePluginType)
 {
     switch( ePluginType )
     {
@@ -1445,7 +1445,7 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
 
 //============================================================================
 //! get disabled plugin icon
-EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
+EMyIcons MyIcons::getDisabledPluginIcon( enum EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
@@ -1478,7 +1478,7 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 
 //============================================================================
 //! get icon for given plugin.. return icon for friendship level
-EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
+EMyIcons MyIcons::getLockedPluginIcon( enum EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
@@ -1509,7 +1509,7 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 	}
 }
 //============================================================================
-EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
+EMyIcons MyIcons::getIgnoredPluginIcon( enum EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
@@ -1564,7 +1564,7 @@ EMyIcons MyIcons::getFileIcon( uint8_t u8FileType )
 
 //============================================================================
 //! draw a icon with given color
-void MyIcons::drawIcon( EMyIcons eIcon, QPainter* painter, const QRect& rect, QColor& iconColor )
+void MyIcons::drawIcon( enum EMyIcons eIcon, QPainter* painter, const QRect& rect, QColor& iconColor )
 {
     if( ( eIcon < eMaxMyIcon ) && painter )
     {

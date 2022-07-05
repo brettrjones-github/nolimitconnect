@@ -59,11 +59,11 @@ public:
 	EMyIcons					getFileIcon( uint8_t u8FileType );
 
 	//! get path to icon file
-	QString						getIconFile( EMyIcons eMyIcon );
+	QString						getIconFile( enum EMyIcons eMyIcon );
 	bool						isSvgFile( QString& iconFileName );
 
     //! draw a icon with given color
-    void                        drawIcon( EMyIcons eIcon, QPainter* painter, const QRect& rect, QColor& iconColor );
+    void                        drawIcon( enum EMyIcons eIcon, QPainter* painter, const QRect& rect, QColor& iconColor );
 
 	std::vector< QIcon >		m_aoIcons;
 

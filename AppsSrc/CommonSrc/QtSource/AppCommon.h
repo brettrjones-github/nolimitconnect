@@ -25,6 +25,7 @@
 #include "GuiMembershipAvailableMgr.h"
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
+#include "GuiFavoriteMgr.h"
 #include "GuiGroupieListMgr.h"
 #include "GuiHostedListMgr.h"
 #include "GuiHostJoinMgr.h"
@@ -146,6 +147,7 @@ public:
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
     GuiConnectIdListMgr&        getConnectIdListMgr( void )					{ return m_ConnectIdListMgr; }
+    GuiFavoriteMgr&             getGuiFavoriteMgr( void )                   { return m_FavoriteMgr; }
     GuiGroupieListMgr&          getGroupieListMgr( void )                   { return m_GroupieListMgr; }
     GuiHostedListMgr&           getHostedListMgr( void )                    { return m_HostedListMgr; }
     GuiHostJoinMgr&             getHostJoinMgr( void )                      { return m_HostJoinMgr; }
@@ -855,6 +857,7 @@ protected:
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
     GuiConnectIdListMgr			m_ConnectIdListMgr;
+    GuiFavoriteMgr			    m_FavoriteMgr;
     GuiThumbMgr					m_ThumbMgr;
     GuiMembershipAvailableMgr   m_MembershipAvailableMgr;
     GuiOfferClientMgr		    m_OfferClientMgr;

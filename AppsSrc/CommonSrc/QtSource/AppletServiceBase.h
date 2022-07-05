@@ -47,7 +47,7 @@ public:
 
     virtual PermissionWidget *  getPermissionWidget() { return ui.m_PermissionWidget; }
     virtual InformationWidget * getInformationWidget() { return ui.m_InfoWidget; }
-    //virtual LogWidget *         getLogWidget() { return ui.m_LogWidget; }
+
     virtual ThumbnailEditWidget *   getThumbEditWidget() { return ui.m_ThumbnailEditWidget; }
 
 protected slots:

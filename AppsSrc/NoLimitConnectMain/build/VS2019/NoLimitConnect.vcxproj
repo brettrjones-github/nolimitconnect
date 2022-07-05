@@ -318,6 +318,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FriendListEntryWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FriendListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFileActionSession.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFileXferSession.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupie.cpp" />
@@ -547,6 +548,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FriendListDelegate.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiFileXferSession.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupie.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupieListCallback.h" />

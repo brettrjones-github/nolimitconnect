@@ -42,6 +42,12 @@ void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType plug
     getStopButton()->setVisible( false );
     getInformationWidget()->setVisible( false );
 
+    // search keyworkds not yet supported
+    getServiceKeyWordsLabel()->setVisible( false );
+    getServiceKeyWordsEdit()->setVisible( false );
+
+    getServiceDescriptionEdit()->setMaximumHeight( GuiParams::getDefaultFontHeight() * 3 + 4 );
+
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
     GuiHelpers::fillContentRating( ui.m_ContentRatingComboBox );
 

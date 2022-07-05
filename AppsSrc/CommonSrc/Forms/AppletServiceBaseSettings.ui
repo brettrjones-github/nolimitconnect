@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>301</width>
-    <height>444</height>
+    <width>643</width>
+    <height>478</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,8 +94,7 @@
    <item>
     <widget class="QLabel" name="m_UserDisplayedNameLabel">
      <property name="text">
-      <string>Name Of Service ( Optional For Detail Information )
-( maximum 63 characters )</string>
+      <string>Name Of Service (optional), max length 63</string>
      </property>
     </widget>
    </item>
@@ -109,8 +108,7 @@
    <item>
     <widget class="QLabel" name="m_DescriptionLabel">
      <property name="text">
-      <string>Description Of Service ( Optional For Detail Information )
-( maximum 511 characters )</string>
+      <string>Description Of Service (optional), max length 511</string>
      </property>
     </widget>
    </item>

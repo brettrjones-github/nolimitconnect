@@ -241,6 +241,10 @@ void AppCommon::loadWithoutThread( void )
     QString strSettingsDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_settings.db3";
     m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
 
+	// create settings database appshortname_settings.db3 in /appshortName/data/
+	QString strFavoriteMgrDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_settings.db3";
+	m_FavoriteMgr.startupFavoriteMgr( strFavoriteMgrDbFileName.toUtf8().constData() );
+
     // Now that settings are set up we can enable logging with log settings
     GetLogMgrInstance().startupLogMgr();
 

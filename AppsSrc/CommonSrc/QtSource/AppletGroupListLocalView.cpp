@@ -34,6 +34,7 @@ namespace
 AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app, 
 												    QWidget *			parent )
 : AppletClientBase( OBJNAME_APPLET_GROUP_LIST_LOCAL_VIEW, app, parent )
+, m_CloseAppletTimer( new QTimer( this ) )
 {
     setAppletType( eAppletGroupListLocalView );
     setHostType( eHostTypeGroup );
@@ -57,15 +58,28 @@ AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app,
         this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
 
 
-    connect( ui.m_HostedListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
-    connect( ui.m_HostedListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
-    connect( ui.m_HostedListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_HostedListWidget,      SIGNAL(signalIconButtonClicked(GuiHostSession*,GuiHostedListItem*)),  this, SLOT(slotIconButtonClicked(GuiHostSession*,GuiHostedListItem*)) );
+    connect( ui.m_HostedListWidget,      SIGNAL(signalMenuButtonClicked(GuiHostSession*,GuiHostedListItem*)),  this, SLOT(slotMenuButtonClicked(GuiHostSession*,GuiHostedListItem*)) );
+    connect( ui.m_HostedListWidget,      SIGNAL(signalJoinButtonClicked(GuiHostSession*,GuiHostedListItem*)),  this, SLOT(slotJoinButtonClicked(GuiHostSession*,GuiHostedListItem*)) );
 
     setStatusLabel( QObject::tr( "Groups Announced To Network Host" ) );
     m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
     slotRefreshGroupList();
 
-    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
+    if( eFriendStateIgnore == m_Engine.getPluginPermission( ePluginTypeHostNetwork ) )
+    {
+        okMessageBox( QObject::tr( "Service Unavailable" ), QObject::tr( "Network Host Service Not Enabled. You view groups announced to this device because the service is not enabled" ) );
+        connect( m_CloseAppletTimer, SIGNAL(timeout()), this, SLOT(onCancelButClick()) );
+        m_CloseAppletTimer->setSingleShot( true );
+        m_CloseAppletTimer->start( 1000 );
+    }
+    else if( eFriendStateIgnore == m_Engine.isDirectConnectReady() )
+    {
+        okMessageBox( QObject::tr( "Service Disabled" ), QObject::tr( "Network Host Service is not enabled because it requires an open port." ) );
+        connect( m_CloseAppletTimer, SIGNAL(timeout()), this, SLOT(onCancelButClick()) );
+        m_CloseAppletTimer->setSingleShot( true );
+        m_CloseAppletTimer->start( 1000 );
+    }
 }
 
 //============================================================================
@@ -226,4 +240,10 @@ void AppletGroupListLocalView::callbackGuiHostedListSearchResult( HostedId& host
 void AppletGroupListLocalView::updateHostedList( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
     ui.m_HostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
+}
+
+//============================================================================   
+void AppletGroupListLocalView::onCancelButClick( void )
+{
+    onBackButtonClicked();
 }

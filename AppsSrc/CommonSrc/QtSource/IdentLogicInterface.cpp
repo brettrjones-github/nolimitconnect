@@ -166,6 +166,8 @@ void IdentLogicInterface::updateIdentity( GuiUser* guiUser, bool queryThumb )
 			{
 				getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( onlineIndicatorColor ) );
 			}
+
+			getIdentFriendshipButton()->setNotifyNlcFavoriteEnabled( m_MyApp.getGuiFavoriteMgr().getIsFavorite( m_GuiUser->getMyOnlineId() ) );
 		}
 	}
 }
@@ -193,6 +195,7 @@ void IdentLogicInterface::updateHosted( GuiHosted* guiHosted )
 
 		getIdentLine1()->setText( guiHosted->getHostTitle().c_str() );
 		getIdentLine2()->setText( guiHosted->getHostDescription().c_str() );
+		getIdentFriendshipButton()->setNotifyNlcFavoriteEnabled( m_MyApp.getGuiFavoriteMgr().getIsFavorite( guiHosted->getOnlineId() ) );
 	}
 	else
 	{

@@ -12,11 +12,11 @@ enum EMyIcons
 	eMyIconNotifyInGroupOverlay,	// in group overlay
     eMyIconNotifyOfferOverlay,		// hand offer overlay
     eMyIconNotifyForbbidenOverlay,	// permission denied
-    eMyIconNotifyErrorOverlay,		// error
 	eMyIconPlusOverlay,				// add to shared or library icon overlay
 	eMyIconMinusOverlay,			// remove from shared or library
 	eMyIconFriendOverlay,			// is friend
 	eMyIconGlobeOverlay,			// is global shared or unknown person
+	eMyIconNlcFavoriteOverlay,		// nlc preferred host or user overlay
 
     eMyIconInformation,
     eMyIconPeople,

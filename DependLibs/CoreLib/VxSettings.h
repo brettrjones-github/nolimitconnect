@@ -79,6 +79,9 @@ public:
 	void				getIniValue( const char * pKey, const char * pSettingName, std::vector<std::string>& aoStrValues );
 	bool				getIniValue( const char * pKey, const char * pSettingName, void * pvRetBuf, int iBufLen );
 
+	//! remove a key value from database
+	void				removeBoolIniValueFromDb( const char* pKey, const char* pSettingName );
+
 private:
 	//! prepare sql statement set value
 	RCODE				prepareIniSet(	sqlite3_stmt ** ppoRetSqlStatement, 

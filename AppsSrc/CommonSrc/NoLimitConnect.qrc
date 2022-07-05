@@ -117,7 +117,6 @@
         <file>Resources/file-folder-search.svg</file>
         <file>Resources/file-folder-share.svg</file>
         <file>Resources/file-text.svg</file>
-        <file>Resources/gotv_icon.svg</file>
         <file>Resources/image-rotate.svg</file>
         <file>Resources/magnifier-on-a-user.svg</file>
         <file>Resources/menu_more_horiz.svg</file>
@@ -325,5 +324,7 @@
         <file>Resources/cloud-upload-settings.svg</file>
         <file>Resources/nolimit_thumb.png</file>
         <file>Resources/video-chat.svg</file>
+        <file>Resources/overlay-nlc.svg</file>
+        <file>Resources/nlc-icon.svg</file>
     </qresource>
 </RCC>

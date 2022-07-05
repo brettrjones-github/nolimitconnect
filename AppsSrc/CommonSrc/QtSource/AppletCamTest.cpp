@@ -52,7 +52,7 @@ AppletCamTest::AppletCamTest( AppCommon& app, QWidget * parent )
     if( !m_MyApp.getCamLogic().isCamAvailable() )
     {
         QMessageBox::warning( this, QObject::tr( "Camera Capture" ), QObject::tr( "No Camera Source Available." ) );
-        connect( m_CloseAppletTimer, SIGNAL( timeout() ), this, SLOT( onCancelButClick() ) );
+        connect( m_CloseAppletTimer, SIGNAL(timeout()), this, SLOT(onCancelButClick()) );
         m_CloseAppletTimer->setSingleShot( true );
         m_CloseAppletTimer->start( 1000 );
         return;

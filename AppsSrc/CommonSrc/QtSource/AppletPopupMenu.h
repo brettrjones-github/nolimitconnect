@@ -58,12 +58,13 @@ public:
 	void						showRefreshMenu();
 
 	void						showAppSystemMenu( void );
+	void						showTitleBarMenu( void );
+
 	void						showFriendMenu( GuiUser* poSelectedFriend, bool inGroup = false );
 	void						showGroupieListSessionMenu( GuiGroupieListSession* hostSession, bool inGroup = false );
 	void						showHostedListSessionMenu( GuiHostedListSession* hostSession );
 	void						showHostSessionMenu( GuiHostSession* hostSession );
 	void						showPersonOfferMenu( GuiUser* poSelectedFriend );
-	void						showTitleBarMenu( void );
 	void						showUserSessionMenu( EApplet appletType, GuiUserSessionBase* userSession );
 
 signals:
@@ -73,6 +74,7 @@ public slots:
 	void						onFriendActionSelected( int iMenuId );
 	void						onGroupieSessionActionSelected( int iMenuId );
 	void						onHostSessionActionSelected( int iMenuId );
+	void						onHostListSessionMenu( int iMenuId );
 	void						onPersonActionSelected( int iMenuId );
 	void						onTitleBarActionSelected( int iMenuId );
 	void						onUserSessionActionSelected( int iMenuId );
@@ -80,11 +82,9 @@ public slots:
 private slots:
 	//! user clicked the upper right x button
 	void						slotBackButtonClicked( void ) override;
-	//! user checked or unchecked menu item
-	//void			userCheckedOrUncheckedAnItem( QListWidgetItem * item );
+;
 	//! user selected menu item
 	void						itemClicked( QListWidgetItem* item );
-
 
 protected:
 	void						initAppletPopupMenu( void );

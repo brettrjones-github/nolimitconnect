@@ -60,12 +60,6 @@ VxPushButton::VxPushButton( QWidget *parent )
 , m_NotifyLastIconForbiddenColor( COLOR_TRANSPARENT)
 , m_NotifyLastIconForbiddenSize( 0, 0 )
 
-, m_NotifyErrorIcon( eMyIconNone )
-, m_LastNotifyErrorIcon( eMyIconNone )
-, m_NotifyIconErrorImage()
-, m_NotifyLastIconErrorColor( COLOR_TRANSPARENT)
-, m_NotifyLastIconErrorSize( 0, 0 )
-
 , m_OverlayIcon( eMyIconNone )
 , m_LastOverlayIcon( eMyIconNone )
 , m_OverlayIconImage()
@@ -100,20 +94,10 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 , m_NotifyIconOfferImage()
 , m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)
 
-, m_NotifyForbiddenIcon( eMyIconNone )
-, m_LastNotifyForbiddenIcon( eMyIconNone )
 , m_NotifyIconForbiddenImage()
 , m_NotifyLastIconForbiddenColor( COLOR_TRANSPARENT)
 , m_NotifyLastIconForbiddenSize( 0, 0 )
 
-, m_NotifyErrorIcon( eMyIconNone )
-, m_LastNotifyErrorIcon( eMyIconNone )
-, m_NotifyIconErrorImage()
-, m_NotifyLastIconErrorColor( COLOR_TRANSPARENT)
-, m_NotifyLastIconErrorSize( 0, 0 )
-
-, m_OverlayIcon( eMyIconNone )
-, m_LastOverlayIcon( eMyIconNone )
 , m_OverlayIconImage()
 , m_OverlayLastIconColor( COLOR_TRANSPARENT )
 , m_OverlayLastIconSize( 0, 0 )
@@ -372,14 +356,14 @@ void VxPushButton::setNotifyForbiddenEnabled( bool enabled, EMyIcons eNotifyIcon
 }
 
 //============================================================================
-void VxPushButton::setNotifyErrorEnabled( bool enabled, EMyIcons eNotifyIcon )
+void VxPushButton::setNotifyNlcFavoriteEnabled( bool enabled, EMyIcons eNotifyIcon )
 {
-    m_NotifyErrorEnabled = enabled;
+    m_NotifyNlcFavoriteEnabled = enabled;
     if( enabled )
     {
         if( eMyIconNone != eNotifyIcon )
         {
-            m_NotifyErrorIcon = eNotifyIcon;
+            m_NlcFavoriteIcon = eNotifyIcon;
         }
     }
 
@@ -692,28 +676,26 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
         }
     }
 
-    if( m_NotifyErrorEnabled && ( eMyIconNone != m_NotifyErrorIcon ) )
+    if( m_NotifyNlcFavoriteEnabled && ( eMyIconNone != m_NlcFavoriteIcon ) )
     {
-        // draw online notify dot
+        // draw no limit connect icon as favorite/preferred icon
         iconColor = appTheme.getButtonColor( this, eColorLayerNotifyError );
 
-        if( ( m_NotifyLastIconErrorColor != iconColor )
-            || m_NotifyIconErrorImage.isNull()
-            || ( drawRect.size() != m_NotifyLastIconErrorSize )
-            || ( m_NotifyErrorIcon != m_LastNotifyErrorIcon ) )
+        if(  m_NlcFavoriteImage.isNull()
+            || ( drawRect.size() != m_LastIconNlcFavoriteSize)
+            || (m_NlcFavoriteIcon != m_LastNlcFavoriteIcon) )
         {
-            m_NotifyIconErrorImage = getMyIcons().getIconPixmap( m_LastNotifyErrorIcon, drawRect.size(), iconColor );
+            m_NlcFavoriteImage = getMyIcons().getIconPixmap( m_LastNlcFavoriteIcon, drawRect.size() );
             if( ! m_IconImage.isNull() )
             {
-                m_LastNotifyErrorIcon = m_NotifyErrorIcon;
-                m_NotifyLastIconErrorColor = iconColor;
-                m_NotifyLastIconErrorSize = drawRect.size();
+                m_LastNlcFavoriteIcon = m_NlcFavoriteIcon;
+                m_LastIconNlcFavoriteSize = drawRect.size();
             }
         }
 
-        if( ! m_NotifyIconErrorImage.isNull() )
+        if( !m_NlcFavoriteImage.isNull() )
         {
-            painter.drawPixmap( drawRect, m_NotifyIconErrorImage );
+            painter.drawPixmap( drawRect, m_NlcFavoriteImage );
         }
     }
 
