@@ -36,6 +36,7 @@ public:
 	GuiOfferSession(QWidget *parent);
 	GuiOfferSession(const GuiOfferSession& rhs);
 	GuiOfferSession& operator=(const GuiOfferSession& rhs); 
+	virtual ~GuiOfferSession() {};
 
 	VxGUID&						assuredValidLclSessionId( void );
 	OfferSessionState *			createNewSessionState( AppCommon& myApp, GuiOfferSession * offerSession );

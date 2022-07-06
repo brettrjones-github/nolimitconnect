@@ -281,6 +281,15 @@ void VxPushButton::setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon )
 }
 
 //============================================================================
+void VxPushButton::setNotifyOnlineVisible( bool visible )
+{
+    m_NotifyOnlineVisible = visible;
+
+
+    update();
+}
+
+//============================================================================
 void VxPushButton::setNotifyDirectConnectEnabled( bool enabled, EMyIcons eNotifyIcon )
 {
     m_NotifyDirectConnectEnabled = enabled;
@@ -570,7 +579,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 			}
 		}
 
-		if( ! m_NotifyIconOnlineImage.isNull() )
+		if( m_NotifyOnlineVisible && !m_NotifyIconOnlineImage.isNull() )
 		{
 			painter.drawPixmap( drawRect, m_NotifyIconOnlineImage );
 		}

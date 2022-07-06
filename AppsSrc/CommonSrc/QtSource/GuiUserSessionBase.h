@@ -27,11 +27,13 @@ class PluginSetting;
 
 class GuiUserSessionBase : public QWidget
 {
+    Q_OBJECT
 public:
 	GuiUserSessionBase( QWidget* parent = nullptr );
     GuiUserSessionBase( GuiUser* hostIdent, QWidget* parent = nullptr );
 	GuiUserSessionBase(	EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent, QWidget* parent = nullptr );
 	GuiUserSessionBase( const GuiUserSessionBase &rhs );
+    virtual ~GuiUserSessionBase() {};
 
 	GuiUserSessionBase&			operator =( const GuiUserSessionBase &rhs );
 

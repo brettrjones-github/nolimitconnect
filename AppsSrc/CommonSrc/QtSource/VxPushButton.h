@@ -61,6 +61,7 @@ public:
     bool						getNotifyOnlineEnabled( void )                      { return m_NotifyOnlineEnabled; }
     void						setNotifyOnlineColor( QColor onlineColor )          { m_NotifyIconOnlineColor = onlineColor; }
     QColor						getNotifyOnlineColor( void )                        { return m_NotifyIconOnlineColor; }
+    void                        setNotifyOnlineVisible( bool visible );
 
     void						setNotifyDirectConnectEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyDirectConnectOverlay );
     bool						getNotifyDirectConnectEnabled( void )               { return m_NotifyDirectConnectEnabled; }
@@ -144,6 +145,7 @@ protected:
 	QSize						m_LastIconSize;
 
     bool						m_NotifyOnlineEnabled{ false };
+    bool                        m_NotifyOnlineVisible{ true };
 	EMyIcons					m_NotifyOnlineIcon{ eMyIconNone };
 	EMyIcons					m_LastNotifyOnlineIcon{ eMyIconNone };
 	QPixmap						m_NotifyIconOnlineImage;

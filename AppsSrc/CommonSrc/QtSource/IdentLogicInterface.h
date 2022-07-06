@@ -79,8 +79,11 @@ public:
 	virtual void				onIdentFriendshipButtonClicked( void );
 	virtual void				onIdentOfferButtonClicked( void )		{};
 	virtual void				onIdentMenuButtonClicked( void )		{};
-	virtual void				onIdentPushToTalkButtonPressed( void );
-	virtual void				onIdentPushToTalkButtonReleased( void );
+
+	virtual void				onIdentPushToTalkButtonPressed( void )  {};
+	virtual void				onIdentPushToTalkButtonReleased( void ) {};
+
+	virtual void 				toggleIdentPushToTalk( void );
 
 signals:
 	void						signalIdentAvatarButtonClicked( void );
@@ -94,11 +97,14 @@ protected slots:
 	void						slotIdentFrienshipButtonClicked( void );
 	void						slotIdentOfferButtonClicked( void );
 	void						slotIdentMenuButtonClicked( void );
+
 	void						slotIdentPushToTalkButtonPressed( void );
 	void						slotIdentPushToTalkButtonReleased( void );
+	void						slotIdentPushToTalkButtonDoubleClicked( void );
 
 protected:
 	AppCommon&					m_MyApp;
 	GuiUser*					m_GuiUser{ nullptr };
 	bool						m_DisableFriendshipChange{ false };
+	bool						m_PushToTalkHeldOn{ false };
 };

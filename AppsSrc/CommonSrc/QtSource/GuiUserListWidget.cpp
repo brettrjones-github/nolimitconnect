@@ -133,9 +133,9 @@ GuiUserListItem* GuiUserListWidget::sessionToWidget( GuiUserSessionBase* userSes
 
     connect( userItem, SIGNAL(signalGuiUserListItemClicked(GuiUserListItem*)),	    this, SLOT(slotUserListItemClicked(GuiUserListItem*)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserListItem*)),	        this, SLOT(slotAvatarButtonClicked(GuiUserListItem*)) );
-    connect( userItem, SIGNAL( signalOfferButtonClicked(GuiUserListItem*) ),        this, SLOT( slotOfferButtonClicked(GuiUserListItem*) ) );
-    connect( userItem, SIGNAL( signalPushToTalkButtonPressed(GuiUserListItem*) ),   this, SLOT( slotPushToTalkButtonPressed(GuiUserListItem*) ) );
-    connect( userItem, SIGNAL( signalPushToTalkButtonReleased(GuiUserListItem*) ),  this, SLOT( slotPushToTalkButtonReleased(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL(signalOfferButtonClicked(GuiUserListItem*)),          this, SLOT(slotOfferButtonClicked(GuiUserListItem*)) );
+    connect( userItem, SIGNAL(signalPushToTalkButtonPressed(GuiUserListItem*)),     this, SLOT(slotPushToTalkButtonPressed(GuiUserListItem*)) );
+    connect( userItem, SIGNAL(signalPushToTalkButtonReleased(GuiUserListItem*)),    this, SLOT(slotPushToTalkButtonReleased(GuiUserListItem*)) );
     connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserListItem*)),	        this, SLOT(slotMenuButtonClicked(GuiUserListItem*)) );
 
     userItem->updateWidgetFromInfo();
@@ -233,7 +233,6 @@ void GuiUserListWidget::removeUser( VxGUID& onlineId )
         GuiUserListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
         if( userItem )
         {
-            delete userItem->getUserSession();
             QListWidgetItem* listItem = dynamic_cast<QListWidgetItem*>( userItem );
             removeItemWidget(listItem);
             delete listItem; // Qt documentation warnings you to destroy item to effectively remove it from QListWidget.

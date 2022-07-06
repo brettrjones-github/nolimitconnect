@@ -33,7 +33,7 @@ GuiUserListItem::~GuiUserListItem()
     GuiUserSessionBase * hostSession = getUserSession();
     if( hostSession && !hostSession->parent() )
     {
-        delete hostSession;
+        hostSession->deleteLater();
     }
 }
 

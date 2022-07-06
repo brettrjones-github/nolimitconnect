@@ -93,8 +93,10 @@ public:
     uint32_t                    getDareCount( void )                    { return m_NetIdent.getDareCount(); }
     void		                setHasTextOffers( bool hasOffers )	    { m_NetIdent.setHasTextOffers( hasOffers ); }
     bool		                getHasTextOffers( void )				{ return m_NetIdent.getHasTextOffers(); }
-    bool                        isMyAccessAllowedFromHim( EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.isMyAccessAllowedFromHim( pluginType, inGroup ); }
-    
+
+    bool                        isMyAccessAllowedFromHim( enum EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.isMyAccessAllowedFromHim( pluginType, inGroup ); }
+    bool						isHisAccessAllowedFromMe( enum EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.isHisAccessAllowedFromMe( pluginType, inGroup ); }
+
     void                        setLastUpdateTime( uint64_t updateTimeMs ) { m_LastUpdateTime = updateTimeMs; }
     uint64_t                    getLastUpdateTime( void )               { return m_LastUpdateTime; }
 

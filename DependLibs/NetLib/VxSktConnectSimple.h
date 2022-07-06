@@ -71,21 +71,6 @@ public:
 
 	virtual void				closeSkt( int iInstance = 0 );
 
-	////! get remote port connection is on
-	//virtual InetAddress			getRemoteIpBinary( void )	{ return m_RmtIp;}
-	////! get local ip as string
-	//virtual const char *		getLocalIp( void )			{ return m_strLclIp.c_str(); }
-
-	//virtual InetAddress			getLocalIpBinary( void )	{ return m_RmtIp;};
-
-	////! used internally to get the remote ip address and set it in the vars
-	//RCODE						doGetRmtAddress( void );
-
-	////! encrypt then send data using session crypto
-	//RCODE						txEncrypted(	const char *	pDataIn, 		// data to send
-	//											int				iDataLen,		// length of data
-	//											bool			bDisconnect );	// if true disconnect after send
-
 	void						dumpConnectionInfo( void );
 
 	//=== vars ===//
@@ -94,12 +79,5 @@ public:
 
 	InetAddrAndPort				m_LclIp;				// local ip address
 	InetAddrAndPort				m_RmtIp;				// remote (peer) ip address
-	
-	////=== encryption vars ===//
-	//VxKey						m_TxKey;				// encryption key for transmit
-	//VxKey						m_RxKey;				// encryption key for receive
-	//VxCrypto					m_TxCrypto;			// encryption object for transmit
-	//VxCrypto					m_RxCrypto;			// encryption object for receive
-
 };
 

@@ -586,7 +586,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoinSession.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.h" />
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiWebPageCallback.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.h" />

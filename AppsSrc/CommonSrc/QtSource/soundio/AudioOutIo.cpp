@@ -51,7 +51,7 @@ bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& de
         if( !deviceInfo.isFormatSupported(format) )
         {
             LogMsg( LOG_ERROR, " AudioOutIo::initAudioOut format not supported");
-    }
+        }
 
         m_AudioFormat = format;
         m_AudioOutputDevice.reset( new QAudioSink( deviceInfo, m_AudioFormat ) );

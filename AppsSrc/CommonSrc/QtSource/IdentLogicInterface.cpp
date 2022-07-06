@@ -40,13 +40,14 @@ void IdentLogicInterface::setupIdentLogic( void ) // call after derived class ui
 	if( getIdentPushToTalkButton() )
 	{
 		getIdentPushToTalkButton()->setVisible( false );
-		connect( getIdentPushToTalkButton(), SIGNAL( pressed() ), this, SLOT( slotIdentPushToTalkButtonPressed() ) );
-		connect( getIdentPushToTalkButton(), SIGNAL( released() ), this, SLOT( slotIdentPushToTalkButtonReleased() ) );
+		connect( getIdentPushToTalkButton(), SIGNAL(pressed()), this, SLOT(slotIdentPushToTalkButtonPressed()) );
+		connect( getIdentPushToTalkButton(), SIGNAL(released()), this, SLOT(slotIdentPushToTalkButtonReleased()) );
+		connect( getIdentPushToTalkButton(), SIGNAL(doubleClicked()), this, SLOT(slotIdentPushToTalkButtonDoubleClicked()) );
 	}
 
-	connect( getIdentAvatarButton(), SIGNAL( clicked() ), this, SLOT( slotIdentAvatarButtonClicked() ) );
-	connect( getIdentFriendshipButton(), SIGNAL( clicked() ), this, SLOT( slotIdentFrienshipButtonClicked() ) );
-	connect( getIdentMenuButton(), SIGNAL( clicked() ), this, SLOT( slotIdentMenuButtonClicked() ) );
+	connect( getIdentAvatarButton(), SIGNAL(clicked()), this, SLOT(slotIdentAvatarButtonClicked()) );
+	connect( getIdentFriendshipButton(), SIGNAL(clicked()), this, SLOT(slotIdentFrienshipButtonClicked()) );
+	connect( getIdentMenuButton(), SIGNAL(clicked()), this, SLOT(slotIdentMenuButtonClicked()) );
 	onIdentLogicIsSetup();
 }
 
@@ -118,7 +119,7 @@ void IdentLogicInterface::updateIdentity( GuiUser* guiUser, bool queryThumb )
 
 		if( getIdentPushToTalkButton() )
 		{
-			if( isOnline && m_GuiUser->isMyAccessAllowedFromHim( ePluginTypePushToTalk ) )
+			if( isOnline && m_GuiUser->isMyAccessAllowedFromHim( ePluginTypePushToTalk ) && m_GuiUser->isHisAccessAllowedFromMe( ePluginTypePushToTalk ) )
 			{
 				getIdentPushToTalkButton()->setVisible( true );
 			}
@@ -348,45 +349,58 @@ void IdentLogicInterface::onIdentFriendshipButtonClicked( void )
 //============================================================================
 void IdentLogicInterface::slotIdentPushToTalkButtonPressed( void )
 {
-	emit signalIdentPushToTalkButtonPressed();
+	toggleIdentPushToTalk();
 	onIdentPushToTalkButtonPressed();
+	emit signalIdentPushToTalkButtonPressed();
+}
+
+//============================================================================
+void IdentLogicInterface::toggleIdentPushToTalk( void )
+{
+	if( m_PushToTalkHeldOn )
+	{
+		m_PushToTalkHeldOn = false;
+		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOff );
+		getIdentPushToTalkButton()->setNotifyOnlineEnabled( false );
+		getIdentPushToTalkButton()->setNotifyOnlineVisible( false );
+		if( m_GuiUser )
+		{
+			bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), false );
+			if( result && getIdentPushToTalkButton() )
+			{
+				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
+			}
+		}
+	}
+	else
+	{
+		m_PushToTalkHeldOn = true;
+		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOn );
+		getIdentPushToTalkButton()->setNotifyOnlineEnabled( true );
+		getIdentPushToTalkButton()->setNotifyOnlineVisible( true );
+		getIdentPushToTalkButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+		if( m_GuiUser )
+		{
+			bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), true );
+			if( result && getIdentPushToTalkButton() )
+			{
+				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+			}
+		}
+	}
 }
 
 //============================================================================
 void IdentLogicInterface::slotIdentPushToTalkButtonReleased( void )
 {
-	getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOn );
-	emit signalIdentPushToTalkButtonReleased();
 	onIdentPushToTalkButtonReleased();
-}
-
-//============================================================================
-void IdentLogicInterface::onIdentPushToTalkButtonPressed( void )
-{
-	getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOff );
-	emit signalIdentPushToTalkButtonPressed();
-	if( m_GuiUser )
-	{
-		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), true );
-		if( result && getIdentPushToTalkButton() )
-		{
-			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-		}
-	}
-}
-
-//============================================================================
-void IdentLogicInterface::onIdentPushToTalkButtonReleased( void )
-{
 	emit signalIdentPushToTalkButtonReleased();
-	if( m_GuiUser )
-	{
-		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), false );
-		if( result && getIdentPushToTalkButton() )
-		{
-			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
-		}
-	}
+}
+
+//============================================================================
+void IdentLogicInterface::slotIdentPushToTalkButtonDoubleClicked( void )
+{
+	toggleIdentPushToTalk();
 }
 
 //============================================================================
@@ -428,7 +442,7 @@ void IdentLogicInterface::updateGroupie( GuiGroupie* guiGroupie )
         else
         {
             getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
-            getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOnlineColor ) );
+            getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOfflineColor ) );
 
             getIdentFriendshipButton()->setNotifyDirectConnectEnabled( false );
         }
