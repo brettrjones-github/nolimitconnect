@@ -10,6 +10,7 @@ void  AppCommon::registerMetaData( void )
 
 	qRegisterMetaType<EAppErr>( "EAppErr" );
 	qRegisterMetaType<EApplet>( "EApplet" );
+	qRegisterMetaType<EAppModule>( "EAppModule" );
 	qRegisterMetaType<EAssetAction>( "EAssetAction" );
 	qRegisterMetaType<EAssetSendState>( "EAssetSendState" );
 	qRegisterMetaType<EAssetType>( "EAssetType" );
@@ -77,11 +78,11 @@ void AppCommon::connectSignals( void )
 
     connect( this, SIGNAL( signalToGuiInstMsg(GuiUser*,EPluginType,QString) ), this, SLOT( slotToGuiInstMsg(GuiUser*,EPluginType,QString) ), Qt::QueuedConnection );
 
-    connect( this, SIGNAL( signalEnableVideoCapture(bool) ), this, SLOT( slotEnableVideoCapture(bool) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalEnableMicrophoneRecording(bool) ), this, SLOT( slotEnableMicrophoneRecording(bool) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalEnableSpeakerOutput(bool) ), this, SLOT( slotEnableSpeakerOutput(bool) ), Qt::QueuedConnection );
+    connect( this, SIGNAL(signalInternalWantMicrophoneRecording(EAppModule,bool)), this, SLOT(slotInternalWantMicrophoneRecording(EAppModule,bool)), Qt::QueuedConnection );
+    connect( this, SIGNAL(signalInternalWantSpeakerOutput(EAppModule,bool)), this, SLOT(slotInternalWantSpeakerOutput(EAppModule,bool)), Qt::QueuedConnection );
 
-	//connect( //ui.m_RelayHelpButton, SIGNAL(clicked()),								this, SLOT(slotRelayHelpButtonClicked()));
+	connect( this, SIGNAL(signalInternalWantVideoCapture(EAppModule,bool)), this, SLOT(slotInternalWantVideoCapture(EAppModule,bool)), Qt::QueuedConnection );
+
     connect( this, SIGNAL( signalSetRelayHelpButtonVisibility(bool) ), this, SLOT( slotSetRelayHelpButtonVisibility(bool) ) );
     connect( this, SIGNAL( signalInternalPluginMessage(EPluginType,VxGUID,EPluginMsgType,QString) ), this, SLOT( slotInternalPluginMessage(EPluginType,VxGUID,EPluginMsgType,QString) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalPluginErrorMsg(EPluginType,VxGUID,EPluginMsgType,ECommErr) ), this, SLOT( slotInternalPluginErrorMsg(EPluginType,VxGUID,EPluginMsgType,ECommErr) ), Qt::QueuedConnection );

@@ -67,7 +67,7 @@ void AppletPeerTodGame::setupAppletPeerTodGame( void )
 	m_TodGameLogic.setGuiWidgets( m_HisIdent, ui.m_TodGameWidget );
 	ui.m_InstMsgWidget->setInstMsgWidgets( m_ePluginType, m_HisIdent );
 
-	ui.m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId() );
+	ui.m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId(), eAppModuleTruthOrDare );
 	ui.m_TodGameWidget->getVidWidget()->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
 	ui.m_TodGameWidget->getVidWidget()->setRecordFriendName( m_HisIdent->getOnlineName().c_str() );
 

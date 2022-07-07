@@ -949,12 +949,12 @@ void PluginMgr::pluginApiWantAppIdle( EPluginType ePluginType, bool bWantAppIdle
 }
 
 //============================================================================
-void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputType mediaType, bool wantInput, void * userData )
+void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputType mediaType, EAppModule appModule, bool wantInput, void * userData )
 {
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		m_Engine.getMediaProcesser().wantMediaInput( mediaType, plugin, userData, wantInput );
+		m_Engine.getMediaProcesser().wantMediaInput( mediaType, plugin, userData, appModule, wantInput );
 	}
 }
 

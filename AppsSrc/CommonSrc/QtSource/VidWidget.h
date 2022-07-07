@@ -31,7 +31,10 @@ public:
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
-	void						setVideoFeedId( VxGUID& feedOnlineId );
+	void						setAppModule( EAppModule appModule )			{ m_AppModule = appModule; }
+	EAppModule					getAppModule( void )							{ return  m_AppModule; }
+
+	void						setVideoFeedId( VxGUID& feedOnlineId, EAppModule appModule );
 	VxGUID&						getFeedId( void )								{ return m_VideoFeedId; }
 
 	void						setRecordFriendName( QString friendName )		{ m_RecFriendName = friendName; }
@@ -126,4 +129,5 @@ protected:
 	bool						m_MotionRecordDetected;
 	QTimer *					m_MotionRecordExpireTimer;
 	bool						m_InNormalRecord;
+	EAppModule					m_AppModule{ eAppModuleInvalid };
 };

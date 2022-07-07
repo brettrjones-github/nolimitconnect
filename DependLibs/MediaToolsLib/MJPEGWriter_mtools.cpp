@@ -136,7 +136,7 @@ bool MJPEGWriter::startAviWrite( const char * fileName, uint32_t timeBetweenFram
 	m_FileHandle = VxFileUtil::fileOpen( m_FileName.c_str(), "wb+" );
 	if( 0 == m_FileHandle )
 	{
-		LogMsg( LOG_ERROR, "MJPEGWriter::startAviWrite could not open file %s\n", m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::startAviWrite could not open file %s", m_FileName.c_str() );
 		return false;
 	}
 
@@ -165,8 +165,8 @@ bool MJPEGWriter::startAviWrite( const char * fileName, uint32_t timeBetweenFram
 
 	setIsRecordingPaused( beginInPausedState );
 	setIsRecording( true );
-	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, true );
-	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, true );
+	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaWriter, true );
+	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaWriter, true );
 	return true;
 }
 
@@ -176,8 +176,8 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 	if( getIsRecording() )
 	{
 		setIsRecordingPaused( true );
-		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, false );
-		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, false );
+		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaReader, false );
+		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaReader, false );
 
 		if( deleteFile )
 		{
@@ -202,7 +202,7 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 			AviFourCC idxFourCC( 'i', 'd', 'x', '1' );
 			if( sizeof( AviFourCC ) != fwrite( &idxFourCC, 1, sizeof( AviFourCC ), m_FileHandle ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
+				LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s", VxGetLastError(), m_FileName.c_str() );
 				closeAviFile();
 				return;
 			}
@@ -210,7 +210,7 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 			uint32_t idxListLen = ( uint32_t )(16 * m_FrameOffsetList.size());
 			if( sizeof( idxListLen ) != fwrite( &idxListLen, 1, sizeof( idxListLen ), m_FileHandle ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
+				LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s", VxGetLastError(), m_FileName.c_str() );
 				closeAviFile();
 				return;
 			}
@@ -267,7 +267,7 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 				prevOffs = nextOffs;
 				if( sizeof( AviFrameIndex ) != fwrite( &frameIdx, 1, sizeof( AviFrameIndex ), m_FileHandle ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
+					LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s", VxGetLastError(), m_FileName.c_str() );
 					closeAviFile();
 					return;
 				}
@@ -302,15 +302,15 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 		m_FileHandle = VxFileUtil::fileOpen( m_FileName.c_str(), "rb+" );
 		if( 0 == m_FileHandle )
 		{
-			LogMsg( LOG_ERROR, "MJPEGWriter::rewrite headers could not open file %s\n", m_FileName.c_str() );
+			LogMsg( LOG_ERROR, "MJPEGWriter::rewrite headers could not open file %s", m_FileName.c_str() );
 		}
 		else if( false == writeRiffHeader() )
 		{
-			LogMsg( LOG_ERROR, "MJPEGWriter::rewrite riff hdr fail file %s\n", m_FileName.c_str() );
+			LogMsg( LOG_ERROR, "MJPEGWriter::rewrite riff hdr fail file %s", m_FileName.c_str() );
 		}
 		else if( false == writeVideoHeader() )
 		{
-			LogMsg( LOG_ERROR, "MJPEGWriter::rewrite video hdr fail file %s\n", m_FileName.c_str() );
+			LogMsg( LOG_ERROR, "MJPEGWriter::rewrite video hdr fail file %s", m_FileName.c_str() );
 		}
 
 		fclose( m_FileHandle );
@@ -360,7 +360,7 @@ bool MJPEGWriter::writeRiffHeader( void )
 {
 	if( sizeof( AviRiffHeader ) != fwrite( &m_RiffHdr, 1, sizeof( AviRiffHeader ), m_FileHandle ) )
 	{
-		LogMsg( LOG_ERROR, "MJPEGWriter::writeRiffHeader error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::writeRiffHeader error %d writing file %s", VxGetLastError(), m_FileName.c_str() );
 		return false;
 	}
 
@@ -372,7 +372,7 @@ bool MJPEGWriter::writeVideoHeader( void )
 {
 	if( sizeof( AviVideoHdr ) != fwrite( &m_AviHdr, 1, sizeof( AviVideoHdr ), m_FileHandle ) )
 	{
-		LogMsg( LOG_ERROR, "MJPEGWriter::writeVideoHeader error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::writeVideoHeader error %d writing file %s", VxGetLastError(), m_FileName.c_str() );
 		return false;
 	}
 
@@ -426,14 +426,14 @@ void MJPEGWriter::callbackVideoJpgSmall( void * /*userData*/, VxGUID& vidFeedId,
 	if( sizeof( AviJpgHdr ) != fwrite( &m_AviJpgHdr, 1, sizeof( AviJpgHdr ), m_FileHandle ) )
 	{
 		m_AviFileAccessMutex.unlock();
-		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing frame hdr to file %s\n", VxGetLastError(), m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing frame hdr to file %s", VxGetLastError(), m_FileName.c_str() );
 		return;
 	}
 
 	if( lenToWrite - 10 != fwrite( &pu8Jpg[10], 1, lenToWrite-10, m_FileHandle ) )
 	{
 		m_AviFileAccessMutex.unlock();
-		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing jpg len %d to file %s\n", VxGetLastError(), lenToWrite, m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing jpg len %d to file %s", VxGetLastError(), lenToWrite, m_FileName.c_str() );
 		return;
 	}
 
@@ -487,14 +487,14 @@ void MJPEGWriter::callbackPcm( void * userData, VxGUID& feedId, int16_t * pcmDat
 	if( sizeof( AviAudioHdr ) != fwrite( &m_AviAudioHdr, 1, sizeof( AviAudioHdr ), m_FileHandle ) )
 	{
 		m_AviFileAccessMutex.unlock();
-		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing frame hdr to file %s\n", VxGetLastError(), m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing frame hdr to file %s", VxGetLastError(), m_FileName.c_str() );
 		return;
 	}
 
 	if( lenToWrite != fwrite( pcmData, 1, lenToWrite, m_FileHandle ) )
 	{
 		m_AviFileAccessMutex.unlock();
-		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing jpg len %d to file %s\n", VxGetLastError(), lenToWrite, m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGWriter::fromGuiJpgFrame error %d writing jpg len %d to file %s", VxGetLastError(), lenToWrite, m_FileName.c_str() );
 		return;
 	}
 

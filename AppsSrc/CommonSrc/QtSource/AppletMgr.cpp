@@ -291,7 +291,18 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
 
     case eAppletFriendListClient:           appletDialog = new AppletFriendListClient( m_MyApp, parent ); break;
-    case eAppletNearbyListClient:           appletDialog = new AppletNearbyListClient( m_MyApp, parent ); break;
+    case eAppletNearbyListClient: 
+        if( m_MyApp.getEngine().isNearbyAvailable() )
+        {
+            appletDialog = new AppletNearbyListClient( m_MyApp, parent );
+        }
+        else
+        {
+            QMessageBox::information( parent, QObject::tr( "Wait For Connection Test" ), QObject::tr( "Requires Connection Test Completion Before Launching Nearby " ), QMessageBox::Ok );
+        }
+        
+        break;
+        
     case eAppletGroupListClient:            appletDialog = new AppletGroupListClient( m_MyApp, parent ); break;
 
     case eAppletGroupHostAdmin:             appletDialog = new AppletGroupHostAdmin( m_MyApp, parent ); break;

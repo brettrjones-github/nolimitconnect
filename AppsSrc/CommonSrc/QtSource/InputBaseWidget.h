@@ -40,6 +40,9 @@ public:
 	void						setIsPersonalRecorder( bool isPersonal );
     void                        setIsChatRoom( bool isChatRoom );
 
+	void						setAppModule( EAppModule appModule )		{ m_AppModule = appModule; }
+	EAppModule					getAppModule( void )						{ return  m_AppModule; }
+
 signals:
 	void						signalChatMessage( QString chatMsg );
 	void						signalElapsedRecTime( QString elapsedSec );
@@ -67,4 +70,5 @@ protected:
 	QTimer *					m_ElapseTimer{ nullptr };
     bool						m_IsPersonalRecorder{ false };
     bool						m_IsChatRoom{ false };
+	EAppModule					m_AppModule{ eAppModuleInvalid };
 };

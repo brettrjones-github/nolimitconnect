@@ -115,7 +115,7 @@ public:
     ENetAvailStatus             getNetAvailStatus( void )           { m_AccumMutex.lock(); ENetAvailStatus status = m_NetAvailStatus;  m_AccumMutex.unlock(); return status;  }
 
     void                        setNearbyAvailable( bool avail )    { m_NearbyAvailable = avail; }
-    bool                        getNearbyAvailable( void )          { return m_NearbyAvailable; }
+    bool                        getNearbyAvailable( void )          { return m_NearbyAvailable && (!m_IpAddr.empty() || !m_LanIpAddr.empty() ); }
     void                        setLanIpAddr( std::string ip )      { m_LanIpAddr = ip; }
     std::string                 getLanIpAddr( void )                { return m_LanIpAddr; }
 

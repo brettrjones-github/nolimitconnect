@@ -19,18 +19,14 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-#include <CoreLib/VxDebug.h>
-
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-Q_DECLARE_METATYPE( QCameraInfo )
-#else
 # include <QMediaDevices>
 # include <QVideoWidget>
 # include <QAudioInput>
 # include <QAudioOutput>
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+
+#include <CoreLib/VxDebug.h>
 
 namespace
 {
@@ -45,6 +41,7 @@ CamLogic::CamLogic( AppCommon& myApp )
     , m_SnapshotTimer( new QTimer( this ))
     , m_VideoSinkGrabber( this )
 {
+    memset( m_WantCamInput, 0, sizeof( m_WantCamInput ) );
     m_SnapshotTimer->setInterval( CAM_SNAPSHOT_INTERVAL_MS );
     connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
 
@@ -52,9 +49,25 @@ CamLogic::CamLogic( AppCommon& myApp )
 }
 
 //============================================================================
-void CamLogic::toGuiWantVideoCapture( bool wantVidCapture )
+void CamLogic::toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture )
 {
-    cameraEnable( wantVidCapture );
+    bool wasRunning = isCamCaptureRunning();
+    bool isRunning = false;
+    m_WantCamInput[ appModule ] = wantVidCapture;
+    for( int i = 0; i < eMaxAppModule; i++ )
+    {
+        if( m_WantCamInput[ i ] )
+        {
+            isRunning = true;
+            break;
+        }
+    }
+
+    if( wasRunning != isRunning )
+    {
+        cameraEnable( isRunning );
+        m_CamIsStarted = isCamCaptureRunning();
+    }
 }
 
 //============================================================================

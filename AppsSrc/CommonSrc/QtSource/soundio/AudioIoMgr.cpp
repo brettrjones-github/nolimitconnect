@@ -252,60 +252,6 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
 }
 
 //============================================================================
-void AudioIoMgr::pauseAudioOut()
-{
-    if( !m_IsOutPaused )
-    {
-        if( m_AudioOutIo.getState() == QAudio::SuspendedState )
-        {
-            //m_AudioDevice->resume();
-        }
-        else if( m_AudioOutIo.getState() == QAudio::ActiveState )
-        {
-            m_IsOutPaused = true;
-        }
-        else if( m_AudioOutIo.getState() == QAudio::StoppedState )
-        {
-            // m_AudioDevice->resume();
-        }
-        else if( m_AudioOutIo.getState() == QAudio::IdleState )
-        {
-            // no-op
-        }
-    }
-}
-
-//============================================================================
-void AudioIoMgr::resumeAudioOut()
-{
-    if( m_IsOutPaused )
-    {
-        if( m_AudioOutIo.getState() == QAudio::SuspendedState )
-        {
-            m_IsOutPaused = false;
-        }
-        else if( m_AudioOutIo.getState() == QAudio::ActiveState )
-        {
-            //m_AudioDevice->suspend();
-        }
-        else if( m_AudioOutIo.getState() == QAudio::StoppedState )
-        {
-            m_IsOutPaused = false;
-        }
-        else if( m_AudioOutIo.getState() == QAudio::IdleState )
-        {
-            // no-op
-        }
-    }
-}
-
-//============================================================================
-void AudioIoMgr::fromAudioOutResumed()
-{
-    //getAudioCallbacks().fromAudioOutResumed();
-}
-
-//============================================================================
 void AudioIoMgr::initAudioIoSystem()
 {
 
@@ -351,6 +297,12 @@ void AudioIoMgr::stopAudioIn()
 void AudioIoMgr::setVolume( float volume )
 {
     m_AudioOutIo.setSpeakerVolume( (int)( volume * 100 ) );
+}
+
+//============================================================================
+int AudioIoMgr::getMicrophonePeakValue0To100( void )
+{
+    return m_AudioInIo.getAudioInPeakAmplitude();
 }
 
 //============================================================================
@@ -469,10 +421,6 @@ const char * AudioIoMgr::describeAudioState( QAudio::State state )
         return " StoppedState ";
     case QAudio::State::IdleState:
         return " IdleState ";
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-    case QAudio::State::InterruptedState:
-        return " InterruptedState ";
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
     default:
         return " Unknown State ";
     }

@@ -100,7 +100,7 @@ public:
 
 	virtual void				pluginApiWantAppIdle( EPluginType ePluginType, bool bWantAppIdle );
 
-	virtual void				pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputType mediaType, bool wantInput, void * userData = 0 );
+	virtual void				pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputType mediaType, EAppModule appModule, bool wantInput, void * userData = 0 );
 
 	virtual bool				pluginApiSktConnectTo(	EPluginType			ePluginType,		// plugin id
 														VxNetIdentBase *	netIdent,			// identity of contact to connect to

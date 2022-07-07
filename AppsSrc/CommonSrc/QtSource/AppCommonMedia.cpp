@@ -28,26 +28,27 @@
 #include <QMessageBox>
 
 //============================================================================
-void AppCommon::toGuiWantVideoCapture( bool wantVidCapture )
+void AppCommon::toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture )
 {
-	LogMsg( LOG_INFO, "#### AppCommon::slotEnableVideoCapture %d\n", wantVidCapture );
+	LogMsg( LOG_INFO, "#### AppCommon::slotEnableVideoCapture %d", wantVidCapture );
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	emit signalEnableVideoCapture( wantVidCapture );
+	emit signalInternalWantVideoCapture( appModule, wantVidCapture );
 }
 
 //============================================================================
-void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
+void AppCommon::slotInternalWantVideoCapture( EAppModule appModule, bool enableVidCapture )
 {
-    if( m_VidCaptureEnabled != enableVidCapture )
-    {
-        m_VidCaptureEnabled = enableVidCapture;
-        m_CamLogic.toGuiWantVideoCapture( enableVidCapture );
+	bool wasCamEnabled = m_CamLogic.isCamCaptureRunning();
+	m_CamLogic.toGuiWantVideoCapture( appModule, enableVidCapture );
+	bool isCamEnabled = m_CamLogic.isCamCaptureRunning();
 
-        if( enableVidCapture )
+    if( wasCamEnabled != isCamEnabled )
+    {
+        if( isCamEnabled )
         {
             static bool bFirstTimeVideoCaptureStarted = true;
             if( bFirstTimeVideoCaptureStarted )
@@ -67,15 +68,15 @@ void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
         }
         else
         {
-            LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture\n" );
+            LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture" );
         }
+
+		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+		{
+			ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+			toGuiClient->callbackToGuiWantVideoCapture( enableVidCapture );
+		}
     }
-	
-	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
-	{
-		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
-		toGuiClient->callbackToGuiWantVideoCapture( enableVidCapture );
-	}
 }
 
 //============================================================================

@@ -16,6 +16,7 @@
 
 #include "ToGuiOfferInterface.h"
 #include "ToGuiActivityInterface.h"
+#include "ToGuiHardwareControlInterface.h"
 #include "MyIconsDefs.h"
 
 #include "ui_TitleBarWidget.h"
@@ -31,7 +32,7 @@ class GuiUser;
 class MyIcons;
 class QLabel;
 
-class TitleBarWidget : public QWidget, public ToGuiActivityInterface
+class TitleBarWidget : public QWidget, public ToGuiActivityInterface, public ToGuiHardwareControlInterface
 {
 	Q_OBJECT
 
@@ -47,8 +48,6 @@ public:
 	QLabel *					getTitleStatusBarLabel( void );
 	VxPushButton *				getAppIconPushButton( void );
     VxPushButton *				getBackButton( void ) { return ui.m_BackDlgButton; }
-
-    // void						setTitleBarAppletIcon( EMyIcons appletIcon );
 
 	void						enableAudioControls( bool enable );
 	void						enableVideoControls( bool enable );
@@ -108,7 +107,6 @@ signals:
 	void						signalMenuTopButtonClicked( void );
 	void						signalBackButtonClicked( void );
     void                        signalCamPlaying( bool isPlaying );
-	void                        signalMicrophonePlaying( bool isPlaying );
 
 public slots:
 	virtual void				updateTitleBar( void );
@@ -143,7 +141,6 @@ public slots:
 
 	virtual void				slotTitleBarMenuButtonClicked( void );
 
-	virtual void				slotMicrophonePlaying( bool isPlaying );
 	virtual void				slotMicrophonePeekTimeout( void );
 
 protected:
@@ -158,6 +155,10 @@ protected:
                                                            uint32_t		    u32JpgDataLen,
                                                            int				motion0To100000 ) override;
 	void						checkTitleBarIconsFit( void );
+
+	virtual void 				callbackToGuiWantMicrophoneRecording( bool wantMicInput ) override;
+	virtual void 				callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
+	virtual void				callbackToGuiWantVideoCapture( bool wantVideoCapture ) override;
 
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;

@@ -51,7 +51,7 @@ public:
     void                        clearFfmpegLogLevel();
 
 private:
-    int                         m_CoreLogLevel;
-    int                         m_ffmpegLogLevel;
-    int                         m_kodiLogLevel;
+    int                         m_CoreLogLevel{ 0 };
+    int                         m_ffmpegLogLevel{ 0 };
+    int                         m_kodiLogLevel{ 0 };
 };

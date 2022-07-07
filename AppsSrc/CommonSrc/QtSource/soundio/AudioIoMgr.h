@@ -37,9 +37,10 @@ public:
 
     QMediaDevices*              getMediaDevices( void )     { return m_MediaDevices; }
 
+    virtual int				    getMicrophonePeakValue0To100( void );
+
     virtual int				    fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence );
     virtual void				fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace );
-    void                        fromAudioOutResumed( void );
 
     void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
 
@@ -61,16 +62,18 @@ public:
     // volume is from 0.0 to 1.0
     void						setVolume( float volume );
 
-    void                        pauseAudioOut();
-    void                        resumeAudioOut();
-
-    bool                        isMicrophoneAvailable()                 { return m_MicrophoneAvailable; }
-    bool                        isMicrophoneEnabled()                   { return m_MicrophoneEnabled; }
+    bool                        isMicrophoneAvailable( void )           { return m_MicrophoneAvailable; }
+    bool                        isMicrophoneEnabled( void )             { return m_WantMicrophone; }
 
     void                        fromGuiMuteMicrophone( bool mute );
-    bool                        fromGuiIsMicrophoneMuted()              { return m_MicrophoneMuted; }
+    bool                        fromGuiIsMicrophoneMuted( void )        { return m_MicrophoneMuted; }
+
+    bool                        isSpeakerAvailable( void )              { return m_SpeakerAvailable; }
+    bool                        isSpeakerEnabled( void )                { return m_WantSpeakerOutput; }
+
     void                        fromGuiMuteSpeaker( bool mute );
     bool                        fromGuiIsSpeakerMuted()                 { return m_SpeakersMuted; }
+
     void                        fromGuiEchoCancelEnable( bool enable )  { m_EchoCancelEnabled = enable; }
     bool                        fromGuiIsEchoCancelEnabled()            { return m_EchoCancelEnabled; }
 
@@ -129,11 +132,13 @@ private:
     IAudioCallbacks&            m_AudioCallbacks;
 
     bool                        m_AudioIoInitialized = false;
+
     bool                        m_MicrophoneAvailable = false;
-    bool                        m_MicrophoneEnabled = false;
     bool                        m_MicrophoneMuted = false;
+
     bool                        m_SpeakerAvailable = false;
     bool                        m_SpeakersMuted = false;
+
     bool                        m_EchoCancelEnabled = false;
 
     QMutex                      m_AudioOutMutex;

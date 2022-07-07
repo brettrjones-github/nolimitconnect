@@ -471,7 +471,7 @@ public:
     virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
 
-    virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
+    virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
@@ -674,10 +674,12 @@ signals:
 
 	void						signalToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
 
-	void						signalEnableVideoCapture( bool enableCapture );
-	void						signalEnableMicrophoneRecording( bool enableMicInput );
     void						signalMicrophonePeak( int peekVal0to32768 );
-	void						signalEnableSpeakerOutput( bool enableSpeakerOutput );
+
+    void						signalInternalWantMicrophoneRecording( EAppModule appModule, bool enableMicInput );
+	void						signalInternalWantSpeakerOutput( EAppModule appModule, bool enableSpeakerOutput );
+
+    void						signalInternalWantVideoCapture( EAppModule appModule, bool enableCapture );
 
 	void						signalSetRelayHelpButtonVisibility( bool isVisible );
 	void						signalMultiSessionAction( VxGUID idPro, EMSessionAction mSessionAction, int pos0to100000 );
@@ -790,6 +792,11 @@ private slots:
     void                        slotInternalToGuiScanResultSuccess( EScanType eScanType, VxNetIdent netIdent );
     void                        slotInternalToGuiSearchResultError( EScanType eScanType, VxNetIdent netIdent, int errCode );
 
+    void						slotInternalWantMicrophoneRecording( EAppModule appModule, bool wantMicInput );
+    void						slotInternalWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput );
+
+    void						slotInternalWantVideoCapture( EAppModule appModule, bool enableCapture );
+
 protected slots:
     void						slotMainWindowResized( void );
     void						slotMainWindowMoved( void );
@@ -797,9 +804,7 @@ protected slots:
 	void						slotPlaySound( ESndDef sndDef );
 	void						slotStatusMsg( QString strMsg );
 	void						slotAppErr( EAppErr eAppErr, QString errMsg );
-	void						slotEnableVideoCapture( bool enableCapture );
-	void						slotEnableMicrophoneRecording( bool enableMicInput );
-	void						slotEnableSpeakerOutput( bool enableSpeakerOutput );
+	
 
 	void						slotOnNotifyIconFlashTimeout( bool bWhite );
 

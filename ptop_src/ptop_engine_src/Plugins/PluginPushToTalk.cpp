@@ -130,7 +130,19 @@ bool PluginPushToTalk::fromGuiInstMsg(	VxNetIdent *	netIdent,
 //============================================================================
 bool PluginPushToTalk::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk )
 {
-	return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, enableTalk );
+	VxSktBase* sktBase = m_Engine.getConnectIdListMgr().findBestOnlineConnection( netIdent->getMyOnlineId() );
+	if( !sktBase )
+	{
+		bool isNewConnection;
+		m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, isNewConnection, eConnectReasonPushToTalk );
+	}
+
+	if( sktBase )
+	{
+		return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, enableTalk );
+	}
+
+	return false;
 }
 
 //============================================================================

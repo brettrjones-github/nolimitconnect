@@ -32,11 +32,6 @@ ChatRoomWidget::ChatRoomWidget( QWidget *parent, EAssetType inputMode )
 }
 
 //============================================================================
-ChatRoomWidget::~ChatRoomWidget()
-{
-}
-
-//============================================================================
 void ChatRoomWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 {
     getSessionChatEntry()->setIdents( myIdent, hisIdent );
@@ -60,6 +55,12 @@ void ChatRoomWidget::setIsPersonalRecorder( bool isPersonal )
 void ChatRoomWidget::setCanSend( bool canSend )
 {
     getSessionChatEntry()->setCanSend( canSend );
+}
+
+//============================================================================
+void ChatRoomWidget::setAppModule( EAppModule appModule )
+{
+	getSessionChatEntry()->setAppModule( appModule );
 }
 
 //============================================================================

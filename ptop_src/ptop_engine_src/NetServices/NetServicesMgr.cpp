@@ -691,7 +691,7 @@ static int uint16_t = 0;
                                                             retMyExternalIp,
                                                             isCellDataNetwork,
 															6000);
-			if( portOpenTestError == eNetCmdErrorResponseTimedOut || portOpenTestError == eNetCmdErrorPortIsClosed )
+			if( portOpenTestError == eNetCmdErrorResponseTimedOut )
 			{
 				portOpenTestError = sendAndRecieveIsMyPortOpen( portTestTimer,
 					&portOpenConn1,
@@ -724,7 +724,7 @@ static int uint16_t = 0;
 
 	if( eNetCmdErrorNone == portOpenTestError )
 	{
-        if( !m_pfuncPortOpenCallbackHandler )
+        if( !m_pfuncPortOpenCallbackHandler || !m_Engine.getNetStatusAccum().isDirectConnectTested() )
         {
             m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, retMyExternalIp );
         }
@@ -738,7 +738,7 @@ static int uint16_t = 0;
 	{
 		portOpenTestError = eNetCmdErrorPortIsClosed;
 
-        if( !m_pfuncPortOpenCallbackHandler )
+        if( !m_pfuncPortOpenCallbackHandler || !m_Engine.getNetStatusAccum().isDirectConnectTested() )
         {
             m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
         }

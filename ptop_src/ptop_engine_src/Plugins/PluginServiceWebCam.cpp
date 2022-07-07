@@ -142,19 +142,19 @@ void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent * netIdent, int 
 {
 	if( netIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() )
 	{
-		LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession is ME\n" );
+		LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession is ME" );
 		if( false == fromGuiIsPluginInSession() )
 		{
 			m_Engine.setHasSharedWebCam(true);
 			setIsPluginInSession(true);
 			// request video capture
-			m_VideoFeedMgr.fromGuiStartPluginSession( false, netIdent );
-			m_VoiceFeedMgr.fromGuiStartPluginSession( false, netIdent );
+			m_VideoFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, netIdent );
+			m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, netIdent );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession is NOT ME\n" );
+		LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession is NOT ME" );
 		AutoPluginLock pluginMutexLock( this );
 		RxSession * rxSession = m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		if( 0 == rxSession )
@@ -181,12 +181,12 @@ void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent * netIdent, int 
 			requestCamSession(	rxSession,
 								false );
 
-			m_VideoFeedMgr.fromGuiStartPluginSession( true, netIdent );
-			m_VoiceFeedMgr.fromGuiStartPluginSession( true, netIdent );
+			m_VideoFeedMgr.fromGuiStartPluginSession( true, eAppModuleCamServer, netIdent );
+			m_VoiceFeedMgr.fromGuiStartPluginSession( true, eAppModuleCamServer, netIdent );
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession could not connect to %s\n", netIdent->getOnlineName() );
+			LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession could not connect to %s", netIdent->getOnlineName() );
 		}
 	}
 }
@@ -195,16 +195,16 @@ void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent * netIdent, int 
 //! called to stop service or session with remote friend
 void PluginServiceWebCam::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStopPluginSession\n" );
+	LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStopPluginSession" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	bool isServerSession = ( netIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() );
 	if( isServerSession )
 	{
 		m_Engine.setHasSharedWebCam(false);
 		setIsPluginInSession( false );
-		m_VoiceFeedMgr.fromGuiStopPluginSession( true, netIdent );
+		m_VoiceFeedMgr.fromGuiStopPluginSession( true, eAppModuleCamServer, netIdent );
 		// don't want video capture anymore
-		m_VideoFeedMgr.fromGuiStopPluginSession( true, netIdent );
+		m_VideoFeedMgr.fromGuiStopPluginSession( true, eAppModuleCamServer, netIdent );
 		if( true == fromGuiIsPluginInSession() )
 		{
 			setIsPluginInSession(false);
@@ -246,7 +246,7 @@ void PluginServiceWebCam::fromGuiStopPluginSession( VxNetIdent * netIdent, int p
 	}
 	else
 	{
-		m_VoiceFeedMgr.fromGuiStopPluginSession( true, netIdent );
+		m_VoiceFeedMgr.fromGuiStopPluginSession( true, eAppModuleCamServer, netIdent );
 		PktSessionStopReq oPkt;
 
 		RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -295,14 +295,14 @@ EPluginAccess PluginServiceWebCam::canAcceptNewSession( VxNetIdent * netIdent )
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
 bool PluginServiceWebCam::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identity of friend
-												int				pvUserData,
-												const char *	pOfferMsg,		// offer message
-												const char *	pFileName,
-												uint8_t *			fileHashId,
-												VxGUID			lclSessionId )		// filename if any
+													int				pvUserData,
+													const char *	pOfferMsg,		// offer message
+													const char *	pFileName,
+													uint8_t *		fileHashId,
+													VxGUID			lclSessionId )		// filename if any
 {
 	VxSktBase * sktBase = NULL;
-	LogMsg( LOG_INFO, " PluginServiceWebCam::fromGuiMakePluginOffer %s\n", netIdent->getOnlineName());
+	LogMsg( LOG_INFO, " PluginServiceWebCam::fromGuiMakePluginOffer %s", netIdent->getOnlineName());
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( true == m_PluginMgr.pluginApiSktConnectTo( m_ePluginType, netIdent, pvUserData, &sktBase ) )
 	{
@@ -317,17 +317,17 @@ bool PluginServiceWebCam::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// ide
                                                         sktBase,
                                                         &oPkt ) )
             {
-                LogMsg( LOG_INFO, " PluginServiceWebCam::fromGuiMakePluginOffer success\n");
+                LogMsg( LOG_INFO, " PluginServiceWebCam::fromGuiMakePluginOffer success");
                 return true;
             }
             else
             {
-                LogMsg( LOG_INFO, " PluginServiceWebCam::fromGuiMakePluginOffer failed to send pkt\n");
+                LogMsg( LOG_INFO, " PluginServiceWebCam::fromGuiMakePluginOffer failed to send pkt");
             }
         }
         else
         {
-            LogMsg( LOG_ERROR, " PluginServiceWebCam::fromGuiMakePluginOffer failed to create session\n");
+            LogMsg( LOG_ERROR, " PluginServiceWebCam::fromGuiMakePluginOffer failed to create session");
         }
     }
 
@@ -363,12 +363,12 @@ bool PluginServiceWebCam::requestCamSession(	RxSession *			rxSession,
 bool PluginServiceWebCam::stopCamSession(	VxNetIdent *		netIdent,	
 										VxSktBase *			sktBase )
 {
-	LogMsg( LOG_ERROR, "PluginServiceWebCam::stopCamSession\n");
+	LogMsg( LOG_ERROR, "PluginServiceWebCam::stopCamSession");
 	PktSessionStopReq oPkt;
 	bool bSuccess = m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-												netIdent->getMyOnlineId(), 
-												sktBase, 
-												&oPkt );
+													netIdent->getMyOnlineId(), 
+													sktBase, 
+													&oPkt );
 	m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), false );
 
 	return bSuccess;
@@ -379,7 +379,7 @@ bool PluginServiceWebCam::stopCamSession(	VxNetIdent *		netIdent,
 //! packet with remote users offer
 void PluginServiceWebCam::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReq\n" );
+	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReq" );
 	PktPluginOfferReq * pktOfferReq = ( PktPluginOfferReq * )pktHdr;
 	PktPluginOfferReply pktReply;
 	pktReply.setRmtSessionId( pktOfferReq->getLclSessionId() );
@@ -392,7 +392,7 @@ void PluginServiceWebCam::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * p
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReq REJECTED in session %d canAcceptNewSession %d\n",
+		LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReq REJECTED in session %d canAcceptNewSession %d",
 			getIsServerInSession(), canAcceptNewSession( netIdent ));
 		pktReply.setOfferResponse(eOfferResponseReject);
 	}
@@ -409,7 +409,7 @@ void PluginServiceWebCam::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr *
 {
 	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
 	EOfferResponse eResponse = poPkt->getOfferResponse();
-	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReply %d\n", eResponse );
+	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReply %d", eResponse );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( eResponse == eOfferResponseAccept )
 	{
@@ -430,7 +430,7 @@ void PluginServiceWebCam::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr *
 //============================================================================
 void PluginServiceWebCam::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktSessionStartReq\n" );
+	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktSessionStartReq" );
 	PktSessionStartReply oPkt;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( getIsServerInSession() && ( ePluginAccessOk == canAcceptNewSession( netIdent ) ) ) 
@@ -439,7 +439,7 @@ void PluginServiceWebCam::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * 
         TxSession * txSession = (TxSession *)m_PluginSessionMgr.findOrCreateTxSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
         if( 0 == txSession )
         {
-            LogMsg( LOG_ERROR, "PluginServiceWebCam::onPktSessionStartReq failed to create or find session\n" );
+            LogMsg( LOG_ERROR, "PluginServiceWebCam::onPktSessionStartReq failed to create or find session" );
             oPkt.setOfferResponse( eOfferResponseReject );
         }
 		else
@@ -466,7 +466,7 @@ void PluginServiceWebCam::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr 
 	RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
-		LogMsg( LOG_INFO, "PluginServiceWebCam::onPktSessionStartReply %d\n", poPkt->getOfferResponse() );
+		LogMsg( LOG_INFO, "PluginServiceWebCam::onPktSessionStartReply %d", poPkt->getOfferResponse() );
 		if( eOfferResponseAccept == poPkt->getOfferResponse() )
 		{
 			poSession->setIsSessionStarted( true );
@@ -509,7 +509,7 @@ void PluginServiceWebCam::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * 
 	RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
-		LogMsg( LOG_INFO, "PluginServiceWebCam::onPktVideoFeedStatus %d\n", pktVideoStatus->getFeedStatus() );
+		LogMsg( LOG_INFO, "PluginServiceWebCam::onPktVideoFeedStatus %d", pktVideoStatus->getFeedStatus() );
 		if( eFeedStatusOnline != pktVideoStatus->getFeedStatus() )
 		{
 			IToGui::getToGui().toGuiRxedOfferReply(	netIdent,			
@@ -570,7 +570,7 @@ void PluginServiceWebCam::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pkt
 		else
 		{
 			poSession = (RxSession *)m_PluginSessionMgr.findOrCreateRxSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
-			LogMsg( LOG_INFO, "PluginServiceWebCam::onPktVideoFeedPic: creating rx session because could not be found\n");
+			LogMsg( LOG_INFO, "PluginServiceWebCam::onPktVideoFeedPic: creating rx session because could not be found");
 		}
 
 		PktVideoFeedPic * poPic = ( PktVideoFeedPic * ) new char[ sizeof( PktVideoFeedPic ) + 16 + poPktCastPic->getTotalDataLen() ];
@@ -634,7 +634,7 @@ void PluginServiceWebCam::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * 
 	TxSession * poSession = (TxSession *)m_PluginSessionMgr.findTxSessionByOnlineId( true, netIdent->getMyOnlineId() );
 	if( NULL == poSession )
 	{
-		LogMsg( LOG_ERROR, "PluginServiceWebCam::onPktVideoFeedPicAck: could not find TxSession\n");
+		LogMsg( LOG_ERROR, "PluginServiceWebCam::onPktVideoFeedPicAck: could not find TxSession");
 		return;
 	}
 

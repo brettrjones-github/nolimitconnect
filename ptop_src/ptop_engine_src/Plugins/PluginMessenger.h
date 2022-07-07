@@ -24,6 +24,8 @@ class PluginMessenger : public PluginBaseMultimedia
 public:
 	PluginMessenger( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginMessenger() = default;
+
+	virtual EAppModule			getAppModule( void )		{ return eAppModuleMessenger; }
 };
 
 

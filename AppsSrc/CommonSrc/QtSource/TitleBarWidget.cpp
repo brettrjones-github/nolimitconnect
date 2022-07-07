@@ -18,11 +18,11 @@
 
 #include "AppCommon.h"
 #include "AppletPopupMenu.h"
-#include "MyIcons.h"
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
-
 #include "GuiHelpers.h"
+#include "MyIcons.h"
+#include "MySndMgr.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
@@ -121,9 +121,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( m_CamTimer,                SIGNAL( timeout() ), this, SLOT( slotCamTimeout() ) );
     connect( this,                      SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
 
-    connect( &m_MyApp,                  SIGNAL( signalMicrophonePeak( int ) ),      this, SLOT( slotMicrophonePeak( int ) ) );
     connect( m_MicrophonePeekTimer,     SIGNAL( timeout() ),                        this, SLOT( slotMicrophonePeekTimeout() ) );
-    connect( this,                      SIGNAL( signalMicrophonePlaying( bool ) ),  this, SLOT( slotMicrophonePlaying( bool ) ) );
 
     connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
 
@@ -192,6 +190,7 @@ void TitleBarWidget::showEvent( QShowEvent * showEvent )
     {
         m_CallbacksRequested = true;
         m_MyApp.wantToGuiActivityCallbacks( this, true );
+        m_MyApp.wantToGuiHardwareCtrlCallbacks( this, true );
     }
 }
 
@@ -200,6 +199,7 @@ void TitleBarWidget::hideEvent( QHideEvent * ev )
 {
     if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
     {
+        m_MyApp.wantToGuiHardwareCtrlCallbacks( this, false );
         m_MyApp.wantToGuiActivityCallbacks( this, false );
         m_CallbacksRequested = false;
     }
@@ -217,22 +217,7 @@ void TitleBarWidget::resizeEvent( QResizeEvent* ev )
 //============================================================================
 void TitleBarWidget::slotCamPlaying( bool isPlaying )
 {
-    if( m_CamPlaying != isPlaying )
-    {
-        m_CamPlaying = isPlaying;
-        enableVideoControls( isPlaying );
-        if( isPlaying )
-        {
-            m_CamTimer->start( 1500 );
-        }
-        else
-        {
-            m_CamTimer->stop();
-            ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
-        }
 
-        checkTitleBarIconsFit();
-    }
 }
 
 //============================================================================
@@ -680,40 +665,6 @@ QWidget* TitleBarWidget::getTitleBarParentPage( void )
     return parentWdiget;
 }
 
-
-//============================================================================
-void TitleBarWidget::slotMicrophonePlaying( bool isPlaying )
-{
-    if( m_MicrophonePlaying != isPlaying )
-    {
-        m_MicrophonePlaying = isPlaying;
-        if( isPlaying )
-        {
-            m_MicrophonePeekTimer->start( 1500 );
-            ui.m_MuteMicButton->setVisible( true );
-            ui.m_MicVolPeakBar->setVisible( true );
-        }
-        else
-        {
-            m_MicrophonePeekTimer->stop();
-            ui.m_MuteMicButton->setVisible( false );
-            ui.m_MicVolPeakBar->setVisible( false );
-        }
-
-        checkTitleBarIconsFit();
-    }
-}
-
-//============================================================================
-void TitleBarWidget::slotMicrophonePeekTimeout()
-{
-    if( GetApplicationAliveMs() - m_LastMicrophonePeekTimeMs > 3000 )
-    {
-        m_MicrophonePeekTimer->stop();
-        emit signalMicrophonePlaying( false );
-    }
-}
-
 //============================================================================
 void TitleBarWidget::checkTitleBarIconsFit( void )
 {
@@ -767,5 +718,61 @@ void TitleBarWidget::slotApplicationIconClicked( void )
     else
     {
         QMessageBox::information( this, QObject::tr( "Application Not Ready" ), QObject::tr( "Cannot Launch Applet Until Application Has Initialized" ) );
+    }
+}
+
+//============================================================================
+void TitleBarWidget::callbackToGuiWantMicrophoneRecording( bool wantMicInput )
+{
+    if( m_MicrophonePlaying != wantMicInput )
+    {
+        m_MicrophonePlaying = wantMicInput;
+        if( wantMicInput )
+        {
+            m_MicrophonePeekTimer->start( 1500 );
+            ui.m_MuteMicButton->setVisible( true );
+            ui.m_MicVolPeakBar->setVisible( true );
+        }
+        else
+        {
+            m_MicrophonePeekTimer->stop();
+            ui.m_MuteMicButton->setVisible( false );
+            ui.m_MicVolPeakBar->setVisible( false );
+        }
+
+        checkTitleBarIconsFit();
+    }
+}
+
+//============================================================================
+void TitleBarWidget::slotMicrophonePeekTimeout()
+{
+    ui.m_MicVolPeakBar->setValue( m_MyApp.getSoundMgr().getMicrophonePeakValue0To100() );
+}
+
+//============================================================================
+void TitleBarWidget::callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput )
+{
+
+}
+
+//============================================================================
+void TitleBarWidget::callbackToGuiWantVideoCapture( bool wantVideoCapture )
+{
+    if( m_CamPlaying != wantVideoCapture )
+    {
+        m_CamPlaying = wantVideoCapture;
+        enableVideoControls( wantVideoCapture );
+        if( wantVideoCapture )
+        {
+            m_CamTimer->start( 1500 );
+        }
+        else
+        {
+            m_CamTimer->stop();
+            ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+        }
+
+        checkTitleBarIconsFit();
     }
 }

@@ -63,8 +63,8 @@ void InputVideoWidget::showEvent(QShowEvent * showEvent)
 	InputBaseWidget::showEvent(showEvent);
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )
 	{
-		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId() );
-		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getCreatorId(), eMediaInputVideoJpgSmall, true );
+		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId(), getAppModule() );
+		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getCreatorId(), eMediaInputVideoJpgSmall, getAppModule(), true );
         ui.m_VidWidget->setVidImageRotation( 0 );
 	}
 }
@@ -83,8 +83,8 @@ void InputVideoWidget::hideEvent(QHideEvent * hideEvent)
             ui.m_CancelRecordButton->setVisible( false );      
 		}
 
-		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId() );
-		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getCreatorId(), eMediaInputVideoJpgSmall, false );		
+		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId(), getAppModule() );
+		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getCreatorId(), eMediaInputVideoJpgSmall, getAppModule(), false );
 	}
 
 	InputBaseWidget::hideEvent(hideEvent);

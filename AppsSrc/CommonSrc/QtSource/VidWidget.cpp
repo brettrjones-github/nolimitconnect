@@ -131,14 +131,14 @@ void VidWidget::setAspectRatio( float aspectRatio )
 }
 
 //============================================================================
-void VidWidget::setVideoFeedId( VxGUID& feedOnlineId )				
+void VidWidget::setVideoFeedId( VxGUID& feedOnlineId, EAppModule appModule )
 { 
 	if( feedOnlineId != m_VideoFeedId )
 	{
 		if( m_VideoFeedId.isVxGUIDValid() )
 		{
 			// stop previous feed
-			m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, false );
+			m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, appModule, false );
 		}
 
 		m_VideoFeedId = feedOnlineId; 
@@ -149,7 +149,7 @@ void VidWidget::setVideoFeedId( VxGUID& feedOnlineId )
 
 		if( m_VideoFeedId.isVxGUIDValid() )
 		{
-			m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, true );
+			m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, appModule, true );
 		}
 		else
 		{
@@ -298,7 +298,7 @@ void VidWidget::updatePreviewVisibility( void )
 		ui.m_CamPreviewButton->setIcon( eMyIconCamPreviewCancelNormal );
 		if( m_MyOnlineId != m_VideoFeedId )
 		{
-			m_Engine.fromGuiWantMediaInput( m_MyOnlineId, eMediaInputVideoJpgSmall, true );
+			m_Engine.fromGuiWantMediaInput( m_MyOnlineId, eMediaInputVideoJpgSmall, getAppModule(), true );
 		}
 	}
 	else
@@ -306,7 +306,7 @@ void VidWidget::updatePreviewVisibility( void )
 		ui.m_CamPreviewButton->setIcons( eMyIconCamPreviewNormal );
 		if( m_MyOnlineId != m_VideoFeedId )
 		{
-			m_Engine.fromGuiWantMediaInput( m_MyOnlineId, eMediaInputVideoJpgSmall, false );
+			m_Engine.fromGuiWantMediaInput( m_MyOnlineId, eMediaInputVideoJpgSmall, getAppModule(), false );
 		}
 	}
 }
@@ -409,7 +409,7 @@ void VidWidget::showEvent( QShowEvent * ev )
 	updatePreviewVisibility();
 	if( m_VideoFeedId.isVxGUIDValid() )
 	{
-		m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, true );
+		m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, getAppModule(), true );
 	}
 }
 
@@ -419,7 +419,7 @@ void VidWidget::hideEvent( QHideEvent * ev )
 	QWidget::hideEvent( ev );
 	if( m_VideoFeedId.isVxGUIDValid() )
 	{
-		m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, false );
+		m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, getAppModule(), false );
 	}
 }
 

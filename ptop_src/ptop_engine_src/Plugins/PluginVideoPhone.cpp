@@ -46,7 +46,7 @@ bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 												int				pvUserData,
 												const char *	pOfferMsg,		
 												const char *	pFileName,
-												uint8_t *			fileHashId,
+												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	
 {
 	bool result = false;
@@ -58,7 +58,7 @@ bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 		if( poSession )
 		{
 			#ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_ERROR, "PluginVideoPhone already in session\n");
+				LogMsg( LOG_ERROR, "PluginVideoPhone already in session");
 			#endif // DEBUG_AUTOPLUGIN_LOCK
 			// assume some error in logic
 			m_PluginSessionMgr.removeSessionBySessionId( true, lclSessionId );
@@ -70,7 +70,7 @@ bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 		if( poSession )
 		{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_ERROR, "PluginVideoPhone already in session\n");
+			LogMsg( LOG_ERROR, "PluginVideoPhone already in session");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 			// assume some error in logic
 			m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -96,7 +96,7 @@ bool PluginVideoPhone::fromGuiOfferReply(	VxNetIdent *	netIdent,
 											VxGUID			lclSessionId )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiOfferReply %d\n", eOfferResponse );
+	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiOfferReply %d", eOfferResponse );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	bool sentReply = m_PluginSessionMgr.fromGuiOfferReply(	false, netIdent, pvUserData, eOfferResponse, lclSessionId );
 
@@ -112,22 +112,22 @@ bool PluginVideoPhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUs
 //============================================================================
 void PluginVideoPhone::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	m_VoiceFeedMgr.fromGuiStartPluginSession( false, netIdent );
-	m_VideoFeedMgr.fromGuiStartPluginSession( false, &getEngine().getMyPktAnnounce() );
+	m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleVideoPhone, netIdent );
+	m_VideoFeedMgr.fromGuiStartPluginSession( false, eAppModuleVideoPhone, &getEngine().getMyPktAnnounce() );
 }
 
 //============================================================================
 void PluginVideoPhone::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiStopPluginSession %s start\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiStopPluginSession %s start", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	m_VoiceFeedMgr.fromGuiStopPluginSession( false, netIdent );
-	m_VideoFeedMgr.fromGuiStopPluginSession( false, netIdent );
-	m_VideoFeedMgr.fromGuiStopPluginSession( false, &getEngine().getMyPktAnnounce() );
+	m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleVideoPhone, netIdent );
+	m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleVideoPhone, netIdent );
+	m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleVideoPhone, &getEngine().getMyPktAnnounce() );
 	m_PluginSessionMgr.fromGuiStopPluginSession( false, netIdent, pvUserData, lclSessionId );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiStopPluginSession %s done\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiStopPluginSession %s done", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -145,7 +145,7 @@ bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent *	netIdent,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginVideoPhone::fromGuiInstMsg session not found\n" );
+		LogMsg( LOG_ERROR, "PluginVideoPhone::fromGuiInstMsg session not found" );
 		return false;
 	}
 
@@ -163,11 +163,11 @@ void PluginVideoPhone::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxN
 void PluginVideoPhone::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReq %s start\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReq %s start", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	m_PluginSessionMgr.onPktPluginOfferReq( sktBase, pktHdr, netIdent );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReq %s done\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReq %s done", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -175,11 +175,11 @@ void PluginVideoPhone::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktH
 void PluginVideoPhone::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReply %s start\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReply %s start", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	m_PluginSessionMgr.onPktPluginOfferReply( sktBase, pktHdr, netIdent );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReply %s done\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onPktPluginOfferReply %s done", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -221,11 +221,11 @@ void PluginVideoPhone::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pkt
 void PluginVideoPhone::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onPktSessionStopReq %s start\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onPktSessionStopReq %s start", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	m_PluginSessionMgr.onPktSessionStopReq( sktBase, pktHdr, netIdent );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onPktSessionStopReq %s done\n", netIdent->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onPktSessionStopReq %s done", netIdent->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -271,15 +271,15 @@ void PluginVideoPhone::callbackVideoPktPicChunk( void * userData, VxGUID& online
 void PluginVideoPhone::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s start\n", session->getIdent()->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s start", session->getIdent()->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::onSessionStart( session, pluginIsLocked );; // mark user session time so contact list is sorted with latest used on top
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s starting voice feed\n", session->getIdent()->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s starting voice feed", session->getIdent()->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	m_VoiceFeedMgr.fromGuiStartPluginSession( pluginIsLocked, session->getIdent() );
+	m_VoiceFeedMgr.fromGuiStartPluginSession( pluginIsLocked, eAppModuleVideoPhone, session->getIdent() );
 	// in order to get my video packets to send out the ident has to be myself
-	m_VideoFeedMgr.fromGuiStartPluginSession( pluginIsLocked, &getEngine().getMyPktAnnounce() );
+	m_VideoFeedMgr.fromGuiStartPluginSession( pluginIsLocked, eAppModuleVideoPhone, &getEngine().getMyPktAnnounce() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s done\n", session->getIdent()->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -289,13 +289,13 @@ void PluginVideoPhone::onSessionStart( PluginSessionBase * session, bool pluginI
 void PluginVideoPhone::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s STOP voice feed\n", session->getIdent()->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s STOP voice feed", session->getIdent()->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	m_VoiceFeedMgr.fromGuiStopPluginSession( pluginIsLocked, session->getIdent() );
-	m_VideoFeedMgr.fromGuiStopPluginSession( pluginIsLocked, session->getIdent() );
-	m_VideoFeedMgr.fromGuiStopPluginSession( pluginIsLocked, &getEngine().getMyPktAnnounce() );
+	m_VoiceFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleVideoPhone, session->getIdent() );
+	m_VideoFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleVideoPhone, session->getIdent() );
+	m_VideoFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleVideoPhone, &getEngine().getMyPktAnnounce() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s done\n", session->getIdent()->getOnlineName() );
+	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s done", session->getIdent()->getOnlineName() );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -314,8 +314,8 @@ void PluginVideoPhone::onConnectionLost( VxSktBase * sktBase )
 //============================================================================
 void PluginVideoPhone::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	m_VoiceFeedMgr.fromGuiStopPluginSession( false, netIdent );
-	m_VideoFeedMgr.fromGuiStopPluginSession( false, netIdent );
-	m_VideoFeedMgr.fromGuiStopPluginSession( false, &getEngine().getMyPktAnnounce() );
+	m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleVideoPhone, netIdent );
+	m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleVideoPhone, netIdent );
+	m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleVideoPhone, &getEngine().getMyPktAnnounce() );
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }

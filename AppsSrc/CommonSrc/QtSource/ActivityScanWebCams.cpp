@@ -184,7 +184,7 @@ void ActivityScanWebCams::doCamConnect( GuiUser * netIdent )
 		startWebCamSession( m_HisIdent->getMyOnlineId(), false );
         m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), 0 );
 		VxGUID nullGuid;
-		ui.m_CamVidWidget->setVideoFeedId( nullGuid );
+		ui.m_CamVidWidget->setVideoFeedId( nullGuid, eAppModuleCamClient );
 	}
 
 	ui.FriendIdentWidget->setVisible( true );
@@ -193,8 +193,8 @@ void ActivityScanWebCams::doCamConnect( GuiUser * netIdent )
 	{
 		setupIdentWidget( m_HisIdent );
 		startWebCamSession( m_HisIdent->getMyOnlineId(), true );
-		ui.m_CamVidWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
-		m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, true );
+		ui.m_CamVidWidget->setVideoFeedId( m_HisIdent->getMyOnlineId(), eAppModuleCamClient );
+		m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, eAppModuleCamClient, true );
         m_FromGui.fromGuiStartPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), 0 );
 	}
 }
@@ -206,17 +206,17 @@ void ActivityScanWebCams::startWebCamSession( VxGUID& onlineId, bool startSessio
 	{
 		if( 0 != ui.m_CamVidWidget )
 		{
-			ui.m_CamVidWidget->setVideoFeedId( onlineId );    			
+			ui.m_CamVidWidget->setVideoFeedId( onlineId, eAppModuleCamClient );
 		}
 
 		m_LclSessionId.initializeWithNewVxGUID();
-		m_Engine.fromGuiWantMediaInput( onlineId, eMediaInputVideoJpgSmall, true );
+		m_Engine.fromGuiWantMediaInput( onlineId, eMediaInputVideoJpgSmall, eAppModuleCamClient, true );
         m_FromGui.fromGuiStartPluginSession( m_ePluginType, onlineId, 0, m_LclSessionId );
 	}
 	else
 	{
 		m_FromGui.fromGuiStopPluginSession( m_ePluginType, onlineId, 0, m_LclSessionId );
-		m_Engine.fromGuiWantMediaInput( onlineId, eMediaInputVideoJpgSmall, false );
+		m_Engine.fromGuiWantMediaInput( onlineId, eMediaInputVideoJpgSmall, eAppModuleCamClient, false );
 		setCamViewToOfflineImage();			
 	}		
 }

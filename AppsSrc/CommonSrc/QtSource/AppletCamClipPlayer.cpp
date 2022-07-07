@@ -121,7 +121,7 @@ void AppletCamClipPlayer::updateAssetInfo( void )
 	ui.m_TagLabel->setAssetInfo( &getAssetInfo() );
 	ui.m_FileNameLabel->setText( getAssetInfo().getRemoteAssetName().c_str() );
 
-	ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId() );
+	ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId(), eAppModuleMediaReader );
 	if( ui.m_TagLabel->text().isEmpty() )
 	{
 		ui.m_TagLabel->setVisible( false );

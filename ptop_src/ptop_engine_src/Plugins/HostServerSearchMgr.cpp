@@ -41,7 +41,7 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInvit
 {
     if( netIdent->requiresRelay() )
     {
-        LogModule( eLogHosts, LOG_VERBOSE, "Host %s announce requries open port from %s %s", DescribeHostType( hostType ), netIdent->getOnlineName(), sktBase->describeSktConnection().c_str() );
+        LogModule( eLogHosts, LOG_VERBOSE, "Host %s announce requries open port from %s %s", DescribeHostType( hostType ), netIdent->getOnlineName(), sktBase ? sktBase->describeSktConnection().c_str() : "Null Skt");
         return;
     }
 

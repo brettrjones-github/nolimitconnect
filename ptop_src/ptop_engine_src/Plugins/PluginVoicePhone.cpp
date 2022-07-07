@@ -62,7 +62,7 @@ bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,
 
 	if( poSession )
 	{
-		LogMsg( LOG_ERROR, "PluginVoicePhone already in session\n");
+		LogMsg( LOG_ERROR, "PluginVoicePhone already in session");
 		// assume some error in logic
 		m_PluginSessionMgr.removeSessionBySessionId( true, netIdent->getMyOnlineId() );
 	}
@@ -88,14 +88,14 @@ bool PluginVoicePhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUs
 //! called to start service or session with remote friend
 void PluginVoicePhone::fromGuiStartPluginSession( VxNetIdent * netIdent,int, VxGUID )
 {
-	m_VoiceFeedMgr.fromGuiStartPluginSession( false, netIdent );
+	m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleVoicePhone, netIdent );
 }
 
 //============================================================================
 //! called to stop service or session with remote friend
 void PluginVoicePhone::fromGuiStopPluginSession( VxNetIdent * netIdent, int, VxGUID )
 {
-	m_VoiceFeedMgr.fromGuiStopPluginSession( false, netIdent );
+	m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleVoicePhone, netIdent );
 	m_PluginSessionMgr.fromGuiStopPluginSession( false, netIdent );
 }
 
@@ -186,13 +186,13 @@ void PluginVoicePhone::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxN
 void PluginVoicePhone::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
 {
 	PluginBase::onSessionStart( session, pluginIsLocked ); // mark user session time so contact list is sorted with latest used on top
-	m_VoiceFeedMgr.fromGuiStartPluginSession( pluginIsLocked, session->getIdent() );
+	m_VoiceFeedMgr.fromGuiStartPluginSession( pluginIsLocked, eAppModuleVoicePhone, session->getIdent() );
 }
 
 //============================================================================
 void PluginVoicePhone::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
 {
-	m_VoiceFeedMgr.fromGuiStopPluginSession( pluginIsLocked, session->getIdent() );
+	m_VoiceFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleVoicePhone, session->getIdent() );
 }
 
 //============================================================================
@@ -210,7 +210,7 @@ void PluginVoicePhone::onConnectionLost( VxSktBase * sktBase )
 //============================================================================
 void PluginVoicePhone::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	m_VoiceFeedMgr.fromGuiStopPluginSession( false, netIdent );
+	m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleVoicePhone, netIdent );
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }
 

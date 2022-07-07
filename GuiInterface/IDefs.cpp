@@ -73,6 +73,8 @@ namespace
         "Connect Reason Network Host",
         "Connect Reason Connect Test",
 
+        "Connect Reason Push To Talk",
+
         "Max Connect Reason ",
     };
 
@@ -657,6 +659,34 @@ const char * DescribeAppModule( EAppModule eAppModule )
         return "eAppModuleKodi";
     case eAppModulePtoP:
         return "eAppModulePtoP";
+    case eAppModulePushToTalk:
+        return "eAppModulePushToTalk";
+    case eAppModuleMediaReader:
+        return "eAppModuleMediaReader";
+    case eAppModuleMediaWriter:
+        return "eAppModuleMediaWriter";
+    case eAppModuleCamServer:
+        return "eAppModuleCamServer";
+    case eAppModuleCamClient:
+        return "eAppModuleCamClient";
+    case eAppModuleVideoChat:
+        return "eAppModuleVideoChat";
+    case eAppModulePersonalNotes:
+        return "eAppModulePersonalNotes";
+    case eAppModuleChatRoomClient:
+        return "eAppModuleChatRoomClient";
+    case eAppModuleMessenger:
+        return "eAppModuleMessenger";
+    case eAppModuleVideoPhone:
+        return "eAppModuleVideoPhone";
+    case eAppModuleVoicePhone:
+        return "eAppModuleVoicePhone";
+    case eAppModuleTruthOrDare:
+        return "eAppModuleTruthOrDare";
+    case eAppModuleSnapshot:
+        return "eAppModuleSnapshot";
+    case eAppModuleMediaPlayer:
+        return "eAppModuleMediaPlayer";
     case eAppModuleTest:
         return "eAppModuleTest";
     default:

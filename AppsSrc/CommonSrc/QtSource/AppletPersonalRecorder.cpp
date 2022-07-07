@@ -26,6 +26,7 @@ AppletPersonalRecorder::AppletPersonalRecorder( AppCommon& app, QWidget * parent
     setAppletType( eAppletPersonalRecorder );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+    ui.m_SessionWidget->setAppModule( eAppModulePersonalNotes );
 
     setupMultiSessionActivity();
 	m_MyApp.activityStateChange( this, true );

@@ -24,13 +24,13 @@
 //============================================================================
 void AppCommon::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput )
 {
-	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantMicrophoneRecording %d\n", wantMicInput );
+	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantMicrophoneRecording %d", wantMicInput );
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	emit signalEnableMicrophoneRecording( wantMicInput );
+	emit signalInternalWantMicrophoneRecording( appModule, wantMicInput );
 }
 
 //============================================================================
@@ -45,25 +45,29 @@ void AppCommon::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
 }
 
 //============================================================================
-void AppCommon::slotEnableMicrophoneRecording( bool enableMicInput )
+void AppCommon::slotInternalWantMicrophoneRecording( EAppModule appModule, bool wanteMicInput )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	m_MicrophoneHardwareEnabled = enableMicInput;
-	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	bool wasMicAvailable = m_MySndMgr.isMicrophoneEnabled();
+	m_MySndMgr.toGuiWantMicrophoneRecording( appModule, wanteMicInput );
+	bool isMicAvailable = m_MySndMgr.isMicrophoneEnabled();
+	if( wasMicAvailable != isMicAvailable )
 	{
-		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
-		toGuiClient->callbackToGuiWantMicrophoneRecording( m_MicrophoneHardwareEnabled );
-	}
+		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+		{
+			ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+			toGuiClient->callbackToGuiWantMicrophoneRecording( isMicAvailable );
+		}
 
-	LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d done", enableMicInput );
+		LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d done", isMicAvailable );
+	}
 }
 
 //============================================================================
-//! called when microphone recoding not needed
 void AppCommon::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput )
 {
 	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantSpeakerOutput %d", wantSpeakerOutput );
@@ -72,11 +76,11 @@ void AppCommon::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOu
 		return;
 	}
 
-	emit signalEnableSpeakerOutput( wantSpeakerOutput );
+	emit signalInternalWantSpeakerOutput( appModule, wantSpeakerOutput );
 }
 
 //============================================================================
-void AppCommon::slotEnableSpeakerOutput( bool enableSpeakerOutput )
+void AppCommon::slotInternalWantSpeakerOutput( EAppModule appModule, bool enableSpeakerOutput )
 {
 	// do nothing.. always on for windows. for android save power by stopping wave output
 	if( VxIsAppShuttingDown() )
@@ -84,11 +88,17 @@ void AppCommon::slotEnableSpeakerOutput( bool enableSpeakerOutput )
 		return;
 	}
 
-	m_SpeakerHardwareEnabled = 	enableSpeakerOutput;
-	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	bool wasSpeakerAvailable = m_MySndMgr.isSpeakerEnabled();
+	m_MySndMgr.toGuiWantSpeakerOutput( appModule, enableSpeakerOutput );
+	bool isSpeakerAvailable = m_MySndMgr.isSpeakerEnabled();
+
+	if( wasSpeakerAvailable != isSpeakerAvailable )
 	{
-		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
-		toGuiClient->callbackToGuiWantSpeakerOutput( m_SpeakerHardwareEnabled );
+		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+		{
+			ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+			toGuiClient->callbackToGuiWantSpeakerOutput( isSpeakerAvailable );
+		}
 	}
 }
 

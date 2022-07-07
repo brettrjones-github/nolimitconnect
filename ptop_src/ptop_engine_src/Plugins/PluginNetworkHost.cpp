@@ -86,7 +86,7 @@ void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * p
 //============================================================================
 void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
-    m_HostServerMgr.updateHostSearchList( hostType, hostAnn, netIdent );
+    m_HostServerMgr.updateHostSearchList( hostType, hostAnn, netIdent, sktBase );
 }
 
 //============================================================================

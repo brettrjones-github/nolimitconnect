@@ -26,12 +26,15 @@ class ChatRoomWidget : public QWidget
 
 public:
 	ChatRoomWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
-	virtual ~ChatRoomWidget();
+	virtual ~ChatRoomWidget() = default;
 
 	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						setEntryMode( EAssetType inputMode );
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );
+
+	void						setAppModule( EAppModule appModule );
+	EAppModule					getAppModule( void ) { return  m_AppModule; }
 
 	void						playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
 
@@ -48,4 +51,5 @@ protected:
 	Ui::ChatRoomWidgetUi		ui;
 	EAssetType					m_InputMode;
 	bool						m_IsInitialized;
+	EAppModule					m_AppModule{ eAppModuleInvalid };
 };

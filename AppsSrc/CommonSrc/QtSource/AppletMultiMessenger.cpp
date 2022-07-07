@@ -89,6 +89,7 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     ui.m_SessionWidget->setIsPersonalRecorder( false );
 
     ui.m_SessionWidget->setEntryMode( eAssetTypeUnknown );
+	ui.m_SessionWidget->setAppModule( eAppModuleMessenger );
     ui.m_OptionsButton->setVisible( false );
     ui.m_OfferFileButton->setVisible( false );
     m_TodGameLogic.setVisible( false );
@@ -133,8 +134,8 @@ void AppletMultiMessenger::setupMultiSessionActivity( GuiUser * hisIdent )
 {
 	m_HisIdent = hisIdent;
 
-	m_VidChatWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
-	m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId() );
+	m_VidChatWidget->setVideoFeedId( m_HisIdent->getMyOnlineId(), eAppModuleMessenger );
+	m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId(), eAppModuleMessenger );
 
 	m_VidChatWidget->setRecordFriendName( m_HisIdent->getOnlineName().c_str() );
 

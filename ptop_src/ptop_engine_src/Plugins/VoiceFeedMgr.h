@@ -14,6 +14,8 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/MediaCallbackInterface.h>
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxGUIDList.h>
@@ -32,8 +34,8 @@ class VoiceFeedMgr
 public:
 	VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 
-	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
+	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
+	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
 
 	virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -42,7 +44,7 @@ public:
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
 
 protected:
-	void						enableAudioCapture( bool enable, VxNetIdent * netIdent );
+	void						enableAudioCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule );
 
     P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;

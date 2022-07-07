@@ -25,6 +25,8 @@ public:
 	PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseMultimedia() = default;
 
+    virtual EAppModule          getAppModule( void ) = 0;
+
     virtual void				fromGuiUserLoggedOn( void ) override;
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				

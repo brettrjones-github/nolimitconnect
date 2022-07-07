@@ -70,6 +70,12 @@ void SessionWidget::setCanSend( bool canSend )
 }
 
 //============================================================================
+void SessionWidget::setAppModule( EAppModule appModule )
+{
+	ui.m_ChatEntry->setAppModule( appModule );
+}
+
+//============================================================================
 void SessionWidget::playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
 {
 	if( m_IsInitialized )

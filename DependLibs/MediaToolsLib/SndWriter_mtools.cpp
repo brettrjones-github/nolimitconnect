@@ -156,7 +156,7 @@ bool SndWriter::startSndWrite( const char * fileName, bool beginInPausedState )
 	{
 		setIsRecordingPaused( beginInPausedState );
 		setIsRecording( true );
-		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioOpus, this,  (void *)ePluginTypeSndWriter, true );
+		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioOpus, this,  (void *)ePluginTypeSndWriter, eAppModuleMediaWriter, true );
 	}
 
 	return result;
@@ -190,7 +190,7 @@ void SndWriter::stopSndWrite( void )
 	if( getIsRecording() )
 	{
 		setIsRecordingPaused( true );
-		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioOpus, this,  (void *)ePluginTypeSndWriter, false );
+		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioOpus, this,  (void *)ePluginTypeSndWriter, eAppModuleMediaWriter, false );
 
 #ifdef MAKE_PCM_INSTEAD_OF_OPUS
 		if( m_FileHandle )

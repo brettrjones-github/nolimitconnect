@@ -14,6 +14,8 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/MediaCallbackInterface.h>
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxGUIDList.h>
@@ -44,7 +46,7 @@ public:
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
 
 protected:
-	void						enableAudioCapture( bool enable, VxNetIdent * netIdent );
+	void						enableAudioCapture( bool enable, VxNetIdent * netIdent, EAppModule appModule );
 
     P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;

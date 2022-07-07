@@ -156,7 +156,7 @@ void PluginBaseHostService::sendHostAnnounce( void )
             if( netHostPlugin )
             {
                 m_AnnMutex.lock();
-                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent );
+                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent, m_Engine.getSktLoopback() );
                 m_AnnMutex.unlock();
                 sentToOurself = true;
             }

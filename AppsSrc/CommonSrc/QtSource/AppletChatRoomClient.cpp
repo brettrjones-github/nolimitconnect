@@ -25,7 +25,10 @@ AppletChatRoomClient::AppletChatRoomClient( AppCommon& app, QWidget * parent )
 {
 	setAppletType( eAppletClientChatRoom );
     setHostType( eHostTypeChatRoom );
+	ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+
+	ui.m_ChatRoomWidget->setAppModule( eAppModuleChatRoomClient );
 
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
 

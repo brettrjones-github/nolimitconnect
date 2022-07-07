@@ -16,30 +16,23 @@
 
 #include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
+#include <GuiInterface/IDefs.h>
+
 #include "VideoSinkGrabber.h"
 
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMediaMetaData>
-
 #include <QMessageBox>
 #include <QPalette>
 #include <QtWidgets>
 #include <QMediaRecorder>
 
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 # include <QCamera>
 # include <QCameraDevice>
 # include <QCameraFormat>
 # include <QImageCapture>
 # include <QMediaCaptureSession>
-#else
-# include <QCameraInfo>
-# include <QMediaService>
-# include <QCameraViewfinder>
-# include <QCameraImageCapture>
-# include <QMediaService>
-#endif //  QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
 class AppCommon;
 class QVideoWidget;
@@ -62,7 +55,7 @@ public:
 
     // set application is exiting.. return true if cam is busy with capture
     bool                        setAppIsExiting( bool isExiting );
-    bool                        getAppIsExiting( void )                             { return m_applicationExiting; }
+    bool                        getAppIsExiting( void )                                 { return m_applicationExiting; }
 
     /// TODO implement option to select cam hardware
     void						setCamSourceId( uint32_t camId )                        { m_CamId = camId; }
@@ -77,7 +70,7 @@ public:
     void						setVidFeedRotation( uint32_t feedRotation )             { m_FeedRotation = feedRotation; };
     uint32_t					getVidFeedRotation( void )                              { return m_FeedRotation; }
 
-    void                        toGuiWantVideoCapture( bool wantVidCapture );
+    void                        toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture );
 
     QString                     getCamDescription( void )                               { return m_CamDescription; }
 
@@ -85,11 +78,8 @@ signals:
     void                        signalCameraDescription( QString camDescription );
 
 public slots:
-#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
-    void setCamera( const QCameraDevice& cameraDevice );
-#else
-    void setCamera( const QCameraInfo &cameraInfo );
-#endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
+    void                        setCamera( const QCameraDevice& cameraDevice );
 
     void                        startCamera();
     void                        stopCamera();
@@ -119,16 +109,9 @@ public slots:
 
     void                        processCapturedImage( int requestId, const QImage &img );
 
-#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
-    void updateCameraActive( bool active );
-    void updateRecorderState( QMediaRecorder::RecorderState state );
-    void displayCaptureError( int, QImageCapture::Error, const QString& errorString );
-#else
-    void cameraStateChanged(QCamera::State camState);
-    void cameraStatusChanged(QCamera::Status camStatus)
-    void updateRecorderState(QMediaRecorder::State state);
-    void displayCaptureError(int, QCameraImageCapture::Error, const QString& errorString);
-#endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    void                        updateCameraActive( bool active );
+    void                        updateRecorderState( QMediaRecorder::RecorderState state );
+    void                        displayCaptureError( int, QImageCapture::Error, const QString& errorString );
 
     void                        displayViewfinder();
     void                        displayCapturedImage();
@@ -163,23 +146,15 @@ protected:
     bool                        m_CamIsStarted{ false };
     bool                        m_ReadyForCapture{ false };
 
-#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
     QImageCapture*              m_imageCapture;
     QMediaCaptureSession        m_captureSession;
     QScopedPointer<QMediaRecorder> m_mediaRecorder;
-#else
-    QCamera::Status             m_CamStatus{ QCamera::Status::UnavailableStatus };
-    QCamera::State              m_CamState{ QCamera::State::UnloadedState };
-    QScopedPointer<QCameraImageCapture> m_imageCapture;
 
-    QImageEncoderSettings       m_imageSettings;
-    QAudioEncoderSettings       m_audioSettings;
-    QVideoEncoderSettings       m_videoSettings;
-#endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
     QString                     m_CamDescription;
     VideoSinkGrabber            m_VideoSinkGrabber;
     int                         m_LastFrameNum{ 0 };
     QSize                       m_DesiredFrameSize;
+    bool                        m_WantCamInput[ eMaxAppModule ];
 };
 
 

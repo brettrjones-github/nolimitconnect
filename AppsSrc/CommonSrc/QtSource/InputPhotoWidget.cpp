@@ -129,7 +129,7 @@ void InputPhotoWidget::hideEvent(QHideEvent * hideEvent)
 	InputBaseWidget::hideEvent(hideEvent);
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )
 	{
-		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getHistoryId(), eMediaInputVideoJpgBig, false );
+		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getHistoryId(), eMediaInputVideoJpgBig, getAppModule(), false );
 	}
 }
 
@@ -139,8 +139,8 @@ void InputPhotoWidget::showEvent(QShowEvent * showEvent)
 	InputBaseWidget::showEvent(showEvent);
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )
 	{
-		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId() );
-		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getHistoryId(), eMediaInputVideoJpgBig, true );
+		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId(), getAppModule() );
+		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getHistoryId(), eMediaInputVideoJpgBig, getAppModule(), true );
 	}
 }
 

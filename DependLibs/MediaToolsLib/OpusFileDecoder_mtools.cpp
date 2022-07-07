@@ -277,7 +277,7 @@ void OpusFileDecoder::enableSpaceAvailCallback( bool enableCallback, bool lockRe
 	if( enableCallback != m_SpaceAvailCallbackEnabled )
 	{
 		m_SpaceAvailCallbackEnabled = enableCallback;
-		m_MediaProcessor.wantMediaInput( eMediaInputMixer, this, this, m_SpaceAvailCallbackEnabled );
+		m_MediaProcessor.wantMediaInput( eMediaInputMixer, this, this, eAppModuleMediaReader, m_SpaceAvailCallbackEnabled );
 	}
 
 	if( lockResources )

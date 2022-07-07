@@ -33,6 +33,9 @@ public:
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );
 
+	void						setAppModule( EAppModule appModule );
+	EAppModule					getAppModule( void ) { return  m_AppModule; }
+
 	void						playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
 
 signals:
@@ -51,6 +54,7 @@ private slots:
 private:
 	Ui::ChatEntryWidget			ui;
 	EAssetType					m_InputMode;
-    GuiUser *				    m_MyIdent;
-    GuiUser *				    m_HisIdent;
+    GuiUser*				    m_MyIdent;
+    GuiUser*				    m_HisIdent;
+	EAppModule					m_AppModule{ eAppModuleInvalid };
 };

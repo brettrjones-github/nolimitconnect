@@ -58,7 +58,7 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 
 	connect( this,					SIGNAL(signalPlayProgress(int)),		this, SLOT(slotPlayProgress(int)) );
 	connect( this,					SIGNAL(signalPlayEnd()),				this, SLOT(slotPlayEnd()) );
-	connect( ui.m_LeftAvatarBar,	SIGNAL( signalResendAsset() ),			this, SLOT( slotResendAsset() ) );
+	connect( ui.m_LeftAvatarBar,	SIGNAL(signalResendAsset()),			this, SLOT(slotResendAsset()) );
     ui.m_VidWidget->setVidImageRotation( 0 );
 }
 
@@ -69,7 +69,7 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 	ui.m_TagLabel->setAssetInfo( &getAssetInfo() );
 	ui.m_FileNameLabel->setText( getAssetInfo().getRemoteAssetName().c_str() );
 
-	ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId() );
+	ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId(), getAppModule() );
 	if( ui.m_TagLabel->text().isEmpty() )
 	{
 		ui.m_TagLabel->setVisible( false );

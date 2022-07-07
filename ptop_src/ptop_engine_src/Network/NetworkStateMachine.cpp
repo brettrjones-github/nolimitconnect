@@ -52,7 +52,7 @@ namespace
 	{
         static std::atomic_int threadCnt(0);
 #ifdef DEBUG_PTOP_NETWORK_STATE
-        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc thread starting %d\n", threadCnt.load() );
+        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc thread starting %d", threadCnt.load() );
 #endif // DEBUG_PTOP_NETWORK_STATE
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
@@ -65,7 +65,7 @@ namespace
 		poThread->threadAboutToExit();
         threadCnt--;
 #ifdef DEBUG_PTOP_NETWORK_STATE
-        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc Thread exiting %d\n", threadCnt.load() );
+        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc Thread exiting %d", threadCnt.load() );
 #endif // DEBUG_PTOP_NETWORK_STATE
         return nullptr;
 	}
@@ -181,15 +181,15 @@ bool NetworkStateMachine::shouldAbort( void )
         {
             if( false == m_StateMachineInitialized )
             {
-                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_StateMachineInitialized false\n" );
+                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_StateMachineInitialized false" );
             }
             else if( m_NetworkStateThread.isAborted() )
             {
-                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_NetworkStateThread.isAborted()\n" );
+                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_NetworkStateThread.isAborted()" );
             }
             else
             {
-                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: VxIsAppShuttingDown()\n" );
+                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: VxIsAppShuttingDown()" );
             }
         }
 
@@ -219,7 +219,7 @@ bool NetworkStateMachine::isNetworkStateChangePending( void )
 void NetworkStateMachine::destroyNetworkStates( void )
 {
 #ifdef DEBUG_PTOP_NETWORK_STATE
-    LogMsg( LOG_INFO, "NetworkStateMachine::destroyNetworkStates\n" );
+    LogMsg( LOG_INFO, "NetworkStateMachine::destroyNetworkStates" );
 #endif // DEBUG_PTOP_NETWORK_STATE
 	std::vector<NetworkStateBase *>::iterator iter;
 	for( iter = m_NetworkStateList.begin(); iter != m_NetworkStateList.end(); ++iter )
@@ -552,7 +552,7 @@ void NetworkStateMachine::startUpnpOpenPort( void )
         u16Port = m_Engine.getEngineSettings().getTcpIpPort();
 		if( u16Port != m_PktAnn.getOnlinePort() )
 		{
-            LogModule( eLogNetworkState, LOG_INFO, "startUpnpOpenPort engine port %d different than pkt ann port %d\n", u16Port, m_PktAnn.getOnlinePort() );
+            LogModule( eLogNetworkState, LOG_INFO, "startUpnpOpenPort engine port %d different than pkt ann port %d", u16Port, m_PktAnn.getOnlinePort() );
 			m_PktAnn.setMyOnlinePort( u16Port );
 		}
 
@@ -566,7 +566,7 @@ void NetworkStateMachine::startUpnpOpenPort( void )
 				&& ( m_LastUpnpForwardIp == lclIp ) )
 			{
 #ifdef DEBUG_PTOP_NETWORK_STATE
-                LogMsg( LOG_INFO, "Skipping UNPNP due to not enough elapsed time\n" );
+                LogMsg( LOG_INFO, "Skipping UNPNP due to not enough elapsed time" );
 #endif // DEBUG_PTOP_NETWORK_STATE
 			}
 			else

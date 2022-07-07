@@ -42,6 +42,20 @@ enum EAppModule
     eAppModuleAll,
     eAppModuleKodi,
     eAppModulePtoP,
+    eAppModulePushToTalk,
+    eAppModuleMediaReader,
+    eAppModuleMediaWriter,
+    eAppModuleCamServer,
+    eAppModuleCamClient,
+    eAppModuleVideoChat,
+    eAppModulePersonalNotes,
+    eAppModuleChatRoomClient,
+    eAppModuleMessenger,
+    eAppModuleVideoPhone,
+    eAppModuleVoicePhone,
+    eAppModuleTruthOrDare,
+    eAppModuleSnapshot,
+    eAppModuleMediaPlayer,
     eAppModuleTest,
 
     eMaxAppModule // must be last
@@ -132,6 +146,8 @@ enum EConnectReason
     eConnectReasonUserDirectConnect,
     eConnectReasonNetworkHost,
     eConnectReasonConnectTest,
+
+    eConnectReasonPushToTalk,
 
     eMaxConnectReason
 };

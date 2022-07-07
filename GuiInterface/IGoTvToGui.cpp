@@ -110,9 +110,9 @@ int IGoTv::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 }
 
 //============================================================================
-void IGoTv::toGuiWantVideoCapture( bool wantVidCapture )
+void IGoTv::toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture )
 {
-    getAppCommon().toGuiWantVideoCapture( wantVidCapture );
+    getAppCommon().toGuiWantVideoCapture( appModule, wantVidCapture );
 }
 
 //============================================================================

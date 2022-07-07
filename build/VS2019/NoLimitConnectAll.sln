@@ -237,25 +237,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcurl", "..\..\DependLibs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs_for_building", "docs_for_building", "{88A7F52D-F2B1-4BBD-9A9D-0AD6BC7216E4}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\docs_for_building\Build_NoLimitConnect_ForAndroid.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForAndroid.txt
 		..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInVBoxImage.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInVBoxImage.txt
 		..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInWindows.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInWindows.txt
 		..\..\docs_for_building\Build_NoLimitConnect_ForLinuxInVBoxImage.txt = ..\..\docs_for_building\Build_NoLimitConnect_ForLinuxInVBoxImage.txt
-		..\..\docs_for_building\Build_NoLimitMinTestApp_Notes.txt = ..\..\docs_for_building\Build_NoLimitMinTestApp_Notes.txt
-		..\..\docs_for_building\BuildEmbeddedPythonForAndroid.txt = ..\..\docs_for_building\BuildEmbeddedPythonForAndroid.txt
-		..\..\docs_for_building\BuildingKodiForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForAndroidInVBoxImage.txt
-		..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt
-		..\..\docs_for_building\BuildingKodiForWindows.txt = ..\..\docs_for_building\BuildingKodiForWindows.txt
-		..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt
 		..\..\docs_for_building\Create_Linux_Virtual_Image_VirtualBoxMint20_3.txt = ..\..\docs_for_building\Create_Linux_Virtual_Image_VirtualBoxMint20_3.txt
 		..\..\docs_for_building\CreatingTranslations.txt = ..\..\docs_for_building\CreatingTranslations.txt
-		..\..\docs_for_building\DeployLinuxGoTvPtoP.txt = ..\..\docs_for_building\DeployLinuxGoTvPtoP.txt
-		..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt = ..\..\docs_for_building\LinuxKodiRecompileFfmpegNotes.txt
 		..\..\docs_for_building\NoLimitConnect_Terminology.txt = ..\..\docs_for_building\NoLimitConnect_Terminology.txt
 		..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt = ..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt
 		..\..\docs_for_building\READ_ME_FIRST.txt = ..\..\docs_for_building\READ_ME_FIRST.txt
-		..\..\docs_for_building\SetupCLionToDebugKodi.txt = ..\..\docs_for_building\SetupCLionToDebugKodi.txt
-		..\..\docs_for_building\SetupQtForAndroid.txt = ..\..\docs_for_building\SetupQtForAndroid.txt
 		..\..\docs_for_building\VPN_Setup_For_NoLimitConnect.txt = ..\..\docs_for_building\VPN_Setup_For_NoLimitConnect.txt
 	EndProjectSection
 EndProject
@@ -1130,7 +1119,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 		Qt5Version = 6.3.0_msvc2019_64
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 	EndGlobalSection
 EndGlobal

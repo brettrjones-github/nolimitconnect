@@ -47,10 +47,12 @@ public:
 	ClientToRemove();
 	ClientToRemove( EMediaInputType				mediaType, 
 					MediaCallbackInterface *	callback,
-					void *						userData)
+					void *						userData,
+					EAppModule					appModule)
 	: m_MediaType( mediaType )
 	, m_Callback( callback )
 	, m_UserData( userData )
+	, m_AppModule( appModule )
 	{
 	}
 
@@ -64,12 +66,14 @@ public:
 		m_MediaType		= rhs.m_MediaType;
 		m_Callback		= rhs.m_Callback;
 		m_UserData		= rhs.m_UserData;
+		m_AppModule		= rhs.m_AppModule;
 		return *this;
 	}
 
 	EMediaInputType				m_MediaType;
 	MediaCallbackInterface *	m_Callback;
 	void *						m_UserData;
+	EAppModule					m_AppModule{ eAppModuleInvalid };
 };
 
 //#define DEBUG_PROCESSOR_LOCK 1
@@ -83,18 +87,18 @@ public:
 		AudioProcessorLock( MediaProcessor * processor ) : m_Mutex(processor->getAudioMutex())	
 		{ 
 #ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	LogMsg( LOG_INFO, "AudioProcessorLock Lock start\n");
+	LogMsg( LOG_INFO, "AudioProcessorLock Lock start");
 #endif //DEBUG_AUDIO_PROCESSOR_LOCK
 			m_Mutex.lock(); 
 #ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "AudioProcessorLock Lock complete\n");
+			LogMsg( LOG_INFO, "AudioProcessorLock Lock complete");
 #endif //DEBUG_AUDIO_PROCESSOR_LOCK
 		}
 
 		~AudioProcessorLock()																		
 		{ 
 #ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "AudioProcessorLock Unlock\n");
+			LogMsg( LOG_INFO, "AudioProcessorLock Unlock");
 #endif //DEBUG_AUDIO_PROCESSOR_LOCK
 			m_Mutex.unlock(); 
 		}
@@ -108,18 +112,18 @@ public:
 		VideoProcessorLock( MediaProcessor * processor ) : m_Mutex(processor->getVideoMutex())	
 		{ 
 #ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "VideoProcessorLock Lock start\n");
+			LogMsg( LOG_INFO, "VideoProcessorLock Lock start");
 #endif //DEBUG_PROCESSOR_LOCK
 			m_Mutex.lock(); 
 #ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "VideoProcessorLock Lock complete\n");
+			LogMsg( LOG_INFO, "VideoProcessorLock Lock complete");
 #endif //DEBUG_PROCESSOR_LOCK
 		}
 
 		~VideoProcessorLock()																		
 		{ 
 #ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "VideoProcessorLock Unlock\n");
+			LogMsg( LOG_INFO, "VideoProcessorLock Unlock");
 #endif //DEBUG_PROCESSOR_LOCK
 			m_Mutex.unlock(); 
 		}
@@ -145,6 +149,7 @@ public:
 	virtual void				wantMediaInput( EMediaInputType				mediaType, 
 												MediaCallbackInterface *	callback, 
 												void *						userData, 
+												EAppModule					appModule,
 												bool						wantInput );
 
 	virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation );
@@ -169,8 +174,8 @@ public:
 	bool						fromGuiIsEchoCancelEnabled( void );
 
 	void						processFriendVideoFeed(	VxGUID&			onlineId, 
-														uint8_t *			jpgData, 
-														uint32_t				jpgDataLen,
+														uint8_t *		jpgData, 
+														uint32_t		jpgDataLen,
 														int				motion0To100000 );
 
 	void						processFriendAudioFeed(	VxGUID&	onlineId, int16_t * pcmData, uint16_t pcmDataLen, bool dontLock = false );
@@ -186,16 +191,19 @@ protected:
 	void						wantAudioMediaInput(	EMediaInputType				mediaType, 
 														MediaCallbackInterface *	callback, 
 														void *						userData, 
+														EAppModule					appModule,
 														bool						wantInput );
 
 	void						wantMixerMediaInput(	EMediaInputType				mediaType, 
 														MediaCallbackInterface *	callback, 
 														void *						userData, 
+														EAppModule					appModule,
 														bool						wantInput );
 
 	void						wantVideoMediaInput(	EMediaInputType				mediaType, 
 														MediaCallbackInterface *	callback, 
 														void *						userData, 
+														EAppModule					appModule,
 														bool						wantInput );
 	
 	void						doMixerClientRemovals( std::vector<ClientToRemove>& clientRemoveList );
@@ -206,10 +214,12 @@ protected:
 													EMediaInputType					mediaType, 
 													MediaCallbackInterface *		callback,
 													void *							userData );
+
 	bool						clientToRemoveExistsInList(	std::vector<ClientToRemove>&	clientRemoveList, 
 															EMediaInputType					mediaType, 
 															MediaCallbackInterface *		callback,
 															void *							userData );
+
 	bool						clientToRemoveRemoveFromList(	std::vector<ClientToRemove>&	clientRemoveList, 
 																EMediaInputType					mediaType, 
 																MediaCallbackInterface *		callback,

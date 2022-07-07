@@ -56,7 +56,7 @@ public:
     /// microphone sound input samples peak value
     virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 ) = 0;
 	/// Start/Stop camera capture
-	virtual void				toGuiWantVideoCapture( bool wantVidCapture ) = 0;
+	virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) = 0;
 	/// Send video feed frame to GUI for playback.. includes amount of motion detected
 	virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0to100000 ) = 0;
     /// Send video feed frame to GUI for playback.. 

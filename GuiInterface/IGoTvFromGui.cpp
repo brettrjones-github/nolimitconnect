@@ -279,9 +279,9 @@ bool IGoTv::fromGuiIsEchoCancelEnabled( void )
 }
 
 //============================================================================
-void IGoTv::fromGuiWantMediaInput( VxGUID& id, EMediaInputType eMediaType, bool bWantInput )
+void IGoTv::fromGuiWantMediaInput( VxGUID& id, EMediaInputType eMediaType, EAppModule appModule, bool wantInput )
 {
-    getPtoP().fromGuiWantMediaInput( id, eMediaType, bWantInput );
+    getPtoP().fromGuiWantMediaInput( id, eMediaType, appModule, wantInput );
 }
 
 //============================================================================

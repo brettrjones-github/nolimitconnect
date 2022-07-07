@@ -112,7 +112,7 @@ void AppletCamTest::setupCamFeed( VxNetIdent* feedNetIdent )
         ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
     }
 
-    ui.m_CamVidWidget->setVideoFeedId( m_CamFeedId );
+    ui.m_CamVidWidget->setVideoFeedId( m_CamFeedId, eAppModuleCamClient );
 }
 
 //============================================================================

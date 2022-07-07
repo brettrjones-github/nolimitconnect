@@ -275,7 +275,7 @@ public:
     // add audio data to play.. assumes pcm mono 8000 Hz
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
 
-    virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
+    virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
@@ -487,7 +487,7 @@ public:
     virtual bool				fromGuiIsSpeakerMuted( void );
     virtual bool				fromGuiIsEchoCancelEnabled( void );
 
-    virtual void				fromGuiWantMediaInput( VxGUID& id, EMediaInputType eMediaType, bool bWantInput );
+    virtual void				fromGuiWantMediaInput( VxGUID& id, EMediaInputType eMediaType, EAppModule appModule, bool wantInput );
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation );
     virtual bool				fromGuiMovieDone( void );
 

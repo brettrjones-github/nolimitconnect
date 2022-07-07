@@ -12,14 +12,15 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "IdentLogicInterface.h"
+#include "AppCommon.h"
 #include "AppletPeerChangeFriendship.h"
 #include "GuiGroupie.h"
 #include "GuiHelpers.h"
 #include "GuiUser.h"
 #include "GuiHostJoin.h"
+#include "IdentLogicInterface.h"
 #include "MyIcons.h"
-#include "AppCommon.h"
+#include "MySndMgr.h"
 
 //============================================================================
 IdentLogicInterface::IdentLogicInterface( QWidget* parent )
@@ -366,7 +367,7 @@ void IdentLogicInterface::toggleIdentPushToTalk( void )
 		if( m_GuiUser )
 		{
 			bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), false );
-			if( result && getIdentPushToTalkButton() )
+			if( result )
 			{
 				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
 			}
@@ -382,9 +383,14 @@ void IdentLogicInterface::toggleIdentPushToTalk( void )
 		if( m_GuiUser )
 		{
 			bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), true );
-			if( result && getIdentPushToTalkButton() )
+			if( result )
 			{
 				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+			}
+			else
+			{
+				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
+				m_MyApp.getSoundMgr().playSnd( eSndDefBusy );
 			}
 		}
 	}

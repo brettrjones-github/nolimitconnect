@@ -842,10 +842,28 @@ bool P2PEngine::isSystemPlugin( EPluginType	ePluginType )
 }
 
 //============================================================================
+bool P2PEngine::isNearbyAvailable( void )
+{
+	return m_NetStatusAccum.getNearbyAvailable();
+}
+
+//============================================================================
+bool P2PEngine::isInternetAvailable( void )
+{
+	return m_NetStatusAccum.isInternetAvailable();
+}
+
+//============================================================================
 bool P2PEngine::isP2POnline( void )
 { 
 	//assureUserSpecificDirIsSet( "P2PEngine::isP2POnline" );
 	return m_NetworkStateMachine.isP2POnline(); 
+}
+
+//============================================================================
+bool P2PEngine::isDirectConnectTested( void )
+{
+	return m_NetStatusAccum.isDirectConnectTested();
 }
 
 //============================================================================
@@ -937,16 +955,16 @@ bool P2PEngine::fromGuiIsEchoCancelEnabled( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, bool wantInput )
+void P2PEngine::fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, EAppModule appModule, bool wantInput )
 {
 	if( false == VxIsAppShuttingDown() )
 	{
-		m_MediaProcessor.wantMediaInput( mediaType, callback, userData, wantInput );
+		m_MediaProcessor.wantMediaInput( mediaType, callback, userData, appModule, wantInput );
 	}
 }
 
 //============================================================================
-void P2PEngine::fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, bool wantInput )
+void P2PEngine::fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, EAppModule appModule, bool wantInput )
 {
 	if( false == VxIsAppShuttingDown() )
 	{
@@ -956,12 +974,12 @@ void P2PEngine::fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaTy
 			if( ( eMediaInputVideoJpgSmall !=  mediaType ) // no need to activate cam if requesting other person's video feed
 				&& ( eMediaInputVideoJpgBig !=  mediaType ) )
 			{			
-				m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent *)poInfo, wantInput );
+				m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent *)poInfo, appModule, wantInput );
 			}
 		}
 		else
 		{
-			m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent *)&m_PktAnn, wantInput );
+			m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent *)&m_PktAnn, appModule, wantInput );
 		}
 	}
 }

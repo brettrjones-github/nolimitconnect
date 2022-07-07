@@ -15,6 +15,8 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/MediaCallbackInterface.h>
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxGUIDList.h>
@@ -31,10 +33,10 @@ class VideoFeedMgr
 {
 public:
 	VideoFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
-	virtual ~VideoFeedMgr();
+	virtual ~VideoFeedMgr() = default;
 
-	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
+	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
+	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
 
 	virtual void				onPktVideoFeedReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktVideoFeedStatus		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -47,7 +49,7 @@ public:
 	virtual void				callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum );
 
 protected:
-	void						enableVideoCapture( bool bStart, VxNetIdent * netIdent );
+	void						enableVideoCapture( bool bStart, VxNetIdent * netIdent, EAppModule appModule );
 
     P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;

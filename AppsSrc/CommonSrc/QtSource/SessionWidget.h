@@ -16,6 +16,8 @@
 
 #include "ui_SessionWidget.h"
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/AssetDefs.h>
 
 class GuiUser;
@@ -32,6 +34,8 @@ public:
 	void						setEntryMode( EAssetType inputMode );
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );
+
+	void						setAppModule( EAppModule appModule );
 
 	void						playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
 

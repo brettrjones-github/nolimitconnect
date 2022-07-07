@@ -119,7 +119,7 @@ void AppletPlayerVideo::setAssetInfo( AssetInfo& assetInfo )
 	//ui.m_LeftAvatarBar->setShredFile( getAssetInfo().getRemoteAssetName().c_str() );
 	//ui.m_RightAvatarBar->setShredFile( getAssetInfo().getRemoteAssetName().c_str() );
 
-	ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId() );
+    ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId(), eAppModuleMediaPlayer );
 	//if( ui.m_TagLabel->text().isEmpty() )
 	//{
 	//	ui.m_TagLabel->setVisible( false );

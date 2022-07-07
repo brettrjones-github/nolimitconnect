@@ -38,6 +38,9 @@ public:
 	MyIcons&					getMyIcons( void );
 	P2PEngine&					getEngine( void )								{ return m_Engine; }
 
+	void						setAppModule( EAppModule appModule )			{ m_AppModule = appModule; }
+	EAppModule					getAppModule( void )							{ return m_AppModule; }
+
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
     virtual AssetBaseInfo&		getAssetInfo( void )                            { return m_AssetInfo; }
 	virtual void				setXferBar( QProgressBar * xferProgressBar );
@@ -77,4 +80,5 @@ protected:
 	QProgressBar *				m_XferProgressBar{ nullptr };
 	bool						m_ProgressBarShouldBeVisible{ false };
 	bool						m_ProgressBarIsVisible{ false };
+	EAppModule					m_AppModule{ eAppModuleInvalid };
 };

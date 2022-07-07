@@ -56,10 +56,24 @@ ChatEntryWidget::ChatEntryWidget( QWidget *parent, EAssetType inputMode )
 }
 
 //============================================================================
+void ChatEntryWidget::setAppModule( EAppModule appModule )
+{
+	m_AppModule = appModule;
+
+	ui.m_InputAllWidget->setAppModule( appModule );
+	ui.m_InputFaceWidget->setAppModule( appModule );
+	ui.m_InputPhotoWidget->setAppModule( appModule );
+	ui.m_InputTextWidget->setAppModule( appModule );
+	ui.m_InputVideoWidget->setAppModule( appModule );
+	ui.m_InputVoiceWidget->setAppModule( appModule );
+}
+
+//============================================================================
 void ChatEntryWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 {
 	m_MyIdent		= myIdent;
 	m_HisIdent		= hisIdent;
+
 	ui.m_InputAllWidget->setIdents( myIdent, hisIdent );
 	ui.m_InputFaceWidget->setIdents( myIdent, hisIdent );
 	ui.m_InputPhotoWidget->setIdents( myIdent, hisIdent );

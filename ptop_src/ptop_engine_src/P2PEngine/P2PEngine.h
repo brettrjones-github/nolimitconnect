@@ -150,9 +150,12 @@ public:
     VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
+    bool                        isNearbyAvailable( void );
+    bool						isInternetAvailable( void );        // is internet available
+    bool						isDirectConnectTested( void );      // has direct connect test completed
 	bool						isP2POnline( void );
-    bool                        isDirectConnectReady( void );    // true if have open port and ready to recieve
-    bool                        isNetworkHostEnabled( void );    // true if netowrk host plugin is enabled
+    bool                        isDirectConnectReady( void );       // true if have open port and ready to recieve
+    bool                        isNetworkHostEnabled( void );       // true if netowrk host plugin is enabled
 
     bool                        getHasHostService( EHostServiceType hostService );
     bool                        getHasAnyAnnonymousHostService( void );
@@ -251,8 +254,8 @@ public:
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 ) override;
     virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo ) override;
 
-    virtual void				fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, bool wantInput ) override;
-    virtual void				fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, bool wantInput ) override;
+    virtual void				fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, EAppModule appModule, bool wantInput ) override;
+    virtual void				fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, EAppModule appModule, bool wantInput ) override;
 
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation ) override;
     virtual bool				fromGuiMovieDone( void ) override							{ return true; };
