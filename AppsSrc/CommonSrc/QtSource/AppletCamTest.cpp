@@ -216,25 +216,6 @@ void AppletCamTest::setCameraButtonVisibility( bool visible )
     //ui.m_TitleBarWidget->setCameraButtonVisibility( visible );
 }
 
-////============================================================================
-//void AppletCamTest::slotMuteMicButtonClicked( bool muteMicrophone )
-//{
-//	// normally we would call m_Engine.fromGuiMuteMicrophone but that mutes all including any video chat sessions... so send custom ctrl to PluginWebCamServer
-//	//m_Engine.fromGuiPluginControl(	m_ePluginType, 
-//	//								m_CamFeedIdent->getMyOnlineId(), 
-//	//								"Mic", 
-//	//								"Mute",
-//	//								muteMicrophone ? 1 : 0 );
-//
-//	m_Engine.fromGuiMuteMicrophone( muteMicrophone );
-//}
-//
-////============================================================================
-//void AppletCamTest::slotMuteSpeakerButtonClicked( bool muteSpeaker )
-//{
-//	m_Engine.fromGuiMuteSpeaker( muteSpeaker );
-//}
-
 //============================================================================
 void AppletCamTest::resizeBitmapToFitScreen( QLabel * VideoScreen, QImage& oPicBitmap )
 {

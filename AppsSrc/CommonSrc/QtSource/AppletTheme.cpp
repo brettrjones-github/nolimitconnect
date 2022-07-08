@@ -34,11 +34,13 @@ AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
 	fillThemeCombo();
     fillExampleCombo();
     ui.m_PlainTextEdit->appendPlainText( QObject::tr( "Some Text To Edit" ) );
+	ui.horizontalSlider->setSingleStep( 1 );
 
-	connect( ui.m_AcceptCancelFrame, SIGNAL( signalAccepted() ), this, SLOT( slotThemeAccepted() ) );
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( slotThemeCanceled() ) );
-	connect( ui.m_AcceptCancelFrame, SIGNAL( signalCanceled() ), this, SLOT( slotThemeCanceled() ) );
-    connect( ui.m_ExampleCheckBox, SIGNAL( stateChanged(int) ), this, SLOT( slotCheckBoxClicked(int) ) );
+	connect( ui.m_AcceptCancelFrame, SIGNAL( signalAccepted() ), this, SLOT(slotThemeAccepted()) );
+	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(slotThemeCanceled()) );
+	connect( ui.m_AcceptCancelFrame, SIGNAL( signalCanceled() ), this, SLOT(slotThemeCanceled()) );
+    connect( ui.m_ExampleCheckBox, SIGNAL(stateChanged(int) ), this, SLOT(slotCheckBoxClicked(int)) );
+	connect( ui.horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotSliderValueChanged(int)) );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -70,6 +72,13 @@ void AppletTheme::slotThemeCanceled( void )
 void AppletTheme::slotCheckBoxClicked( int checkedState )
 {
     LogMsg( LOG_DEBUG,  "check box state %d", checkedState );
+}
+
+//============================================================================
+void AppletTheme::slotSliderValueChanged( int sliderVal )
+{
+	ui.m_ExampleProgressBar->setValue( sliderVal );
+	ui.m_VertProgressBar->setValue( sliderVal );
 }
 
 //============================================================================

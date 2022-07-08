@@ -156,8 +156,6 @@ void ActivityBase::connectTitleBarWidget( TitleBarWidget * titleBar )
     //=== title bar connections ====//
     connect( titleBar, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
     connect( titleBar, SIGNAL( signalHomeButtonClicked() ), this, SLOT( slotHomeButtonClicked() ) );
-    connect( titleBar, SIGNAL( signalMuteMicButtonClicked(bool) ), this, SLOT( slotMuteMicButtonClicked(bool) ) );
-    connect( titleBar, SIGNAL( signalMuteSpeakerButtonClicked(bool) ), this, SLOT( slotMuteSpeakerButtonClicked(bool) ) );
     connect( titleBar, SIGNAL( signalCameraSnapshotButtonClicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
     connect( titleBar, SIGNAL( signalCamPreviewClicked() ), this, SLOT( slotCamPreviewClicked() ) );
     connect( titleBar, SIGNAL( signalTrashButtonClicked() ), this, SLOT( slotTrashButtonClicked() ) );
@@ -1080,18 +1078,6 @@ void ActivityBase::slotPowerButtonClicked( void )
 void ActivityBase::slotHomeButtonClicked( void )
 {
 	emit signalHomeButtonClicked();
-}
-
-//============================================================================
-void ActivityBase::slotMuteMicButtonClicked( bool muteMic )
-{
-    emit signalMuteMicButtonClicked( muteMic );
-}
-
-//============================================================================
-void ActivityBase::slotMuteSpeakerButtonClicked( bool muteSpeaker )
-{
-	emit signalMuteSpeakerButtonClicked(muteSpeaker);
 }
 
 //============================================================================

@@ -33,7 +33,7 @@ namespace
 	const char * QUESTION_DELIM = "?";
     //const char * LEFT_BRACKET_DELIM = "[";
 	const char * RIGHT_BRACKET_DELIM = "]";
-    const char * ONLINE_ID_DELIM = "!";
+    //const char * ONLINE_ID_DELIM = "!";
 
 
     //============================================================================

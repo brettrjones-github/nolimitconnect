@@ -175,7 +175,14 @@ void AppCommon::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLen
 /// Mute/Unmute microphone
 void AppCommon::fromGuiMuteMicrophone( bool muteMic )
 {
+	m_MySndMgr.fromGuiMuteMicrophone( muteMic );
     getEngine().fromGuiMuteMicrophone( muteMic );
+
+	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	{
+		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+		toGuiClient->callbackToGuiMicrophoneMuted( muteMic );
+	}
 }
 
 //============================================================================
@@ -189,7 +196,14 @@ bool AppCommon::fromGuiIsMicrophoneMuted( void )
 /// Mute/Unmute speaker
 void AppCommon::fromGuiMuteSpeaker( bool muteSpeaker )
 {
+	m_MySndMgr.fromGuiMuteSpeaker( muteSpeaker );
     getEngine().fromGuiMuteSpeaker( muteSpeaker );
+
+	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
+	{
+		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
+		toGuiClient->callbackToGuiSpeakerMuted( muteSpeaker );
+	}
 }
 
 //============================================================================

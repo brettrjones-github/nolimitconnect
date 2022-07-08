@@ -288,7 +288,7 @@ void AudioUtils::applyPcmVolume( float volume, uchar *data, int datalen )
 }
 
 //============================================================================
-int AudioUtils::getPeakPcmAmplitude( int16_t* srcSamples, int datalen )
+int AudioUtils::getPeakPcmAmplitude0to100( int16_t* srcSamples, int datalen )
 {
     int samples = datalen / 2;
     int peakValue{ 0 };
@@ -300,9 +300,11 @@ int AudioUtils::getPeakPcmAmplitude( int16_t* srcSamples, int datalen )
         }
     }
 
+    // LogMsg( LOG_VERBOSE, "getPeakPcmAmplitude0to100 peak raw %d 0to100 %d", peakValue, (int)(((float)peakValue / 32768.0f) * 100) );
+
     if( peakValue )
     {
-        return (int)(((float)peakValue / 32768.0f ) * 100);
+        return (int)(( (float)peakValue / 32768.0f ) * 100);
     }
     
     return 0;

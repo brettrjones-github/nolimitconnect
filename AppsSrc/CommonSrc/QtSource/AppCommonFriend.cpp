@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-
 #include "MyIcons.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
@@ -25,7 +24,6 @@
 //============================================================================
 void AppCommon::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 {
-	//ui.mainFriendList->updateFriend( netIdent, sessionTimeChange );
 }
 
 //============================================================================

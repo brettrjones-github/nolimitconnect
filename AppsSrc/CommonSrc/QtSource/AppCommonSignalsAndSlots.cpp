@@ -66,7 +66,6 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<BlobInfo>( "BlobInfo" );
 }
 
-
 //============================================================================
 void AppCommon::connectSignals( void )
 {

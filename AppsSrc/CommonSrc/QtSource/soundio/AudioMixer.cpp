@@ -51,7 +51,7 @@ void AudioMixer::shutdownAudioMixer( void )
 
 //============================================================================
 void AudioMixer::wantSpeakerOutput( bool enableOutput )
-    {
+{
     if( enableOutput )
     {
         // reset everthing to initial start positions
@@ -59,7 +59,7 @@ void AudioMixer::wantSpeakerOutput( bool enableOutput )
         for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
         {
             m_MixerFrames[ i ].clearFrame();
-    }
+        }
 
         memset( m_ModuleBufIndex, 0, sizeof( m_ModuleBufIndex ) );
         m_MixerReadIdx = 0;
@@ -75,7 +75,7 @@ void AudioMixer::wantSpeakerOutput( bool enableOutput )
 
 //============================================================================
 int AudioMixer::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pcmData, int pcmDataLenInBytes, bool isSilence )
-    {
+{
     // add audio data to mixer.. assumes pcm signed short mono channel 8000 Hz. Mix into any existing audio if required return total written to buffer
     if( pcmDataLenInBytes != getMixerFrameSize() )
     {
@@ -83,7 +83,7 @@ int AudioMixer::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pcm
         return pcmDataLenInBytes;
     }
 
-        m_MixerMutex.lock();
+    m_MixerMutex.lock();
     AudioMixerFrame& mixerFrame = m_MixerFrames[ getModuleFrameIndex( appModule ) ];
     int written = mixerFrame.toMixerPcm8000HzMonoChannel( appModule, pcmData, isSilence );
     incrementModuleFrameIndex( appModule );
@@ -140,9 +140,9 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
     int appendLerpCnt{ 0 };
 
     if( remainderSamples )
-        {
+    {
         if( m_PrevLerpedSamplesCnt )
-            {
+        {
             // finish lerping the last read into beginning of this read
             prependLerpCnt = upSampleMult - m_PrevLerpedSamplesCnt;
             if( prependLerpCnt > remainderSamples )
@@ -150,16 +150,16 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
                 // will need a partial read so decrement the fully upsample count
                 upSamplesToRead--;
             }
-            }
+        }
 
         appendLerpCnt = reqSampleCnt - ((upSamplesToRead * upSampleMult) + prependLerpCnt);
     }
 
     int readAppendLerpSample = 0;
     if( appendLerpCnt )
-            {
+    {
         readAppendLerpSample = 1;
-            }
+    }
 
     int16_t* mixerReadBuf = new int16_t[ upSamplesToRead + readAppendLerpSample ];
 
@@ -175,39 +175,38 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
 
     int samplesRead = upSamplesToRead + readAppendLerpSample;
 
-
     samplesRead -= readAppendLerpSample; // only count fully upsampleable samples.. the appended partial lerp sample will be handled seperately
 
     int16_t appendLerpSampleValue = readAppendLerpSample ? mixerReadBuf[ samplesRead ] : mixerReadBuf[ samplesRead - 1 ];
     int16_t nextUpSampleValue = readAppendLerpSample ? appendLerpSampleValue : peekNextSample;
 
-    LogMsg( LOG_VERBOSE, "readDataFromMixer prev lerp cnat %d prev samp %d first %d last %d nextUpVal %d append lerp value %d  peek %d", 
-           m_PrevLerpedSamplesCnt, m_PrevLerpedSampleValue, mixerReadBuf[0], mixerReadBuf[ samplesRead - 1 ], nextUpSampleValue, appendLerpSampleValue, peekNextSample );
+    //LogMsg( LOG_VERBOSE, "readDataFromMixer prev lerp cnat %d prev samp %d first %d last %d nextUpVal %d append lerp value %d  peek %d", 
+    //       m_PrevLerpedSamplesCnt, m_PrevLerpedSampleValue, mixerReadBuf[0], mixerReadBuf[ samplesRead - 1 ], nextUpSampleValue, appendLerpSampleValue, peekNextSample );
 
     int calcSampleCnt = (samplesRead * upSampleMult) + appendLerpCnt + prependLerpCnt;
     if( calcSampleCnt != reqSampleCnt )
-            {
+    {
         LogMsg( LOG_VERBOSE, "readDataFromMixer incorrect sample count requested %d to read %d", reqSampleCnt, calcSampleCnt );
     }
 
     // fill prepended lerps
     if( prependLerpCnt && samplesRead )
-                {
+    {
         for( int i = 0; i < prependLerpCnt; ++i )
-                    {
+        {
             readReqPcmBuf[ i ] = AudioUtils::lerpPcm( m_PrevLerpedSampleValue, mixerReadBuf[ 0 ], upSampleMult, m_PrevLerpedSamplesCnt + i );
         }
-                    }
+    }
 
     // fill upsamples of mixer read
     if( 1 == upSampleMult )
     {
         memcpy( &readReqPcmBuf[ prependLerpCnt ], mixerReadBuf, samplesRead * 2 );
-                }
-                else
-                {
+    }
+    else
+    {
         AudioUtils::upsamplePcmAudioLerpNext( mixerReadBuf, samplesRead, upSampleMult, nextUpSampleValue, &readReqPcmBuf[ 0 ] );
-                }
+    }
 
     // fill apended lerps
     if( appendLerpCnt && samplesRead )
@@ -222,9 +221,8 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
             }
 
             readReqPcmBuf[ i + prependLerpCnt + (samplesRead * upSampleMult) ] = AudioUtils::lerpPcm( appendLerpSampleValue, peekNextSample, (float)upSampleMult, i );
-            }
         }
-
+    }
 
 //    LogMsg( LOG_VERBOSE, "readDataFromMixer reqlen %d prepend lerp %d len %d full samples %d len %d append lerp %d len %d read append lerp sample %d", 
 //        maxlen, prependLerpCnt, prependLerpCnt * 2, samplesRead, samplesRead * upSampleMult * 2, appendLerpCnt, appendLerpCnt * 2 , readAppendLerpSample );
@@ -232,7 +230,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
     // determine last sample for next read
     m_PrevLerpedSampleValue = appendLerpSampleValue;
     m_PrevLerpedSamplesCnt = appendLerpCnt;
-    LogMsg( LOG_VERBOSE, "readDataFromMixer m_PrevLerpedSamplesCnt %d", m_PrevLerpedSamplesCnt );
+    //LogMsg( LOG_VERBOSE, "readDataFromMixer m_PrevLerpedSamplesCnt %d", m_PrevLerpedSamplesCnt );
 
     delete[] mixerReadBuf;
     mixerWasReadByOutput( (int)maxlen, upSampleMult );
@@ -254,7 +252,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
     }
 
     if( lastSampleOutLastRead )
-        {
+    {
         if( std::abs( lastSampleOutLastRead - readReqPcmBuf[ 0 ] ) > 4000 )
         {
             LogMsg( LOG_VERBOSE, "Betwen Req Glitch req %d last %d first %d", readRequestCnt, lastSampleOutLastRead, readReqPcmBuf[ 0 ] );
@@ -285,15 +283,15 @@ void AudioMixer::mixerWasReadByOutput( int readLen, int upSampleMult )
 //============================================================================
 /// space available to que audio data into buffer
 int AudioMixer::audioQueFreeSpace( EAppModule appModule, bool mixerIsLocked)
-    {
+{
     int freeSpace = MAX_MIXER_FRAMES * getMixerFrameSize() - audioQueUsedSpace( appModule, mixerIsLocked );
     if( freeSpace < 0 )
-        {
+    {
         freeSpace = 0;
-        }
+    }
 
     return freeSpace;
-    }
+}
 
 //============================================================================
 /// space available to que audio data into mixer
@@ -312,11 +310,11 @@ int AudioMixer::audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked )
         if( !mixerIsLocked )
         {
             lockMixer();
-    }
+        }
 
         int frameIndex = getModuleFrameIndex( appModule );
         for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
-    {
+        {
             if( m_MixerFrames[ frameIndex ].hasModuleAudio( appModule ) )
             {
                 audioUsedSpace += m_MixerFrames[ frameIndex ].audioLenInUse();
@@ -325,11 +323,11 @@ int AudioMixer::audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked )
             {
                 // ran out of audio filled by this module
                 break;
-    }
+            }
 
             frameIndex++;
             if( frameIndex >= MAX_MIXER_FRAMES )
-    {
+            {
                 frameIndex = 0;
             }
         }
@@ -352,12 +350,12 @@ int AudioMixer::audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked )
             if( m_MixerFrames[ frameIndex ].hasAnyAudio() )
             {
                 audioUsedSpace += m_MixerFrames[ frameIndex ].audioLenInUse();
-        }
-        else
-        {
+            }
+            else
+            {
                 // ran out of audio filled by any module
                 break;
-        }
+            }
 
             frameIndex++;
             if( frameIndex >= MAX_MIXER_FRAMES )
@@ -420,9 +418,9 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
             memset( pcmRetBuf, 0, sampleCnt * 2 );
             sampleCnt = 0;
             samplesThatWillBeSilence = 0;
-            }
-            else
-            {
+        }
+        else
+        {
             LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer will read %d samples past end of mixer data", samplesThatWillBeSilence );
         }
     }
@@ -438,7 +436,7 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
             if( !samplesLeftToRead )
             {
                 break;
-                }
+            }
 
             AudioMixerFrame& mixerFrame = m_MixerFrames[ frameIndex ];
             if( !mixerFrame.audioLenInUse() )
@@ -455,33 +453,33 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
                 // ran out of samples
                 LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer failed to read %d samples", samplesThisRead );
                 break;
-        }
+            }
 
             if( !mixerFrame.audioLenInUse() )
             {
                 frameIndex = incrementMixerReadIndex();
-}
+            }
 
             if( samplesThisRead < 0 )
-{
+            {
                 // programmer error
                 LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer negative samplesThisRead %d", samplesThisRead );
                 break;
-}
+            }
 
             if( samplesThisRead > maxSamplesThisRead )
-{
+            {
                 // programmer error
                 LogMsg( LOG_ERROR, "AudioMixer::readDataFromMixer read more samples then should samplesThisRead %d", samplesThisRead );
                 break;
-    }
+            }
 
             samplesRead += samplesThisRead;
         }
-}
+    }
 
     if( m_WasReset && samplesRead )
-{
+    {
         // started reading from mixer.. if do not have enough next read it will be a underrun condition
         m_WasReset = false;
     }
@@ -495,7 +493,7 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
     {
         // not enough samples available
         memset( &pcmRetBuf[ samplesRead ], 0, (samplesRequested - samplesRead) * 2 );
-}
+    }
 
     return samplesRequested;
 }

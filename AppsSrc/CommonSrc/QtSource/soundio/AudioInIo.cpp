@@ -181,8 +181,15 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     m_AudioBufMutex.unlock();
 
     m_AudioInThread.releaseAudioInThread();
-    m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude( (int16_t *)data, len );
-
+    if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
+    {
+        m_PeakAmplitude = 0;
+    }
+    else
+    {
+        m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( (int16_t*)data, len );
+    }
+    
     return len;
 }
 

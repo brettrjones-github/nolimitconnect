@@ -186,7 +186,7 @@ void VxLabel::setResourceImage( QString resourceUrl, bool scaleToLabelSize )
     }
     else
     {
-        LogMsg( LOG_ERROR, "VxLabel::setResourceImage %s failed\n", resourceUrl.toUtf8().constData() );
+        LogMsg( LOG_ERROR, "VxLabel::setResourceImage %s failed", resourceUrl.toUtf8().constData() );
     }
 }
 
@@ -208,7 +208,7 @@ void VxLabel::loadImageFromFile( QString fileName )
 	}
     else
     {
-        LogMsg( LOG_DEBUG, "ERROR VxLabel::loadImageFromFile failed %s\n", fileName.toUtf8().constData() );
+        LogMsg( LOG_DEBUG, "ERROR VxLabel::loadImageFromFile failed %s", fileName.toUtf8().constData() );
     }
 }
 

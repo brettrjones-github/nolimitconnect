@@ -31,6 +31,7 @@ public:
 	virtual ~VxAppStyle() override = default;
 
     enum GuiDrawDirection { eGuiDirUp, eGuiDirDown, eGuiDirLeft, eGuiDirRight };
+    void                        setEveryColorPossible( QPalette& palette, const QColor& bkgColor, const QColor& fgdColor ) const;
 
     static int					focusFrameBoarderWidth( void ); // get line width of focus frame
     static void					clearFocusFrameWidget( void ); // clear focus frame widget so no focus frame is drawn until new widget gains focus

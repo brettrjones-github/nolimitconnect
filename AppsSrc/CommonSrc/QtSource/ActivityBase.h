@@ -218,8 +218,6 @@ signals:
 	//=== title bar signals ====//
 	void						signalPowerButtonClicked( void );
 	void						signalHomeButtonClicked( void );
-	void						signalMuteMicButtonClicked( bool muteMic );
-	void						signalMuteSpeakerButtonClicked( bool muteSpeaker );
 	void						signalCameraSnapshotButtonClicked( void );
 	void						signalCamPreviewClicked( void );
 	void						signalTrashButtonClicked( void );
@@ -263,8 +261,6 @@ protected slots:
 	//=== title bar slots ====//
 	virtual void				slotPowerButtonClicked( void );
 	virtual void				slotHomeButtonClicked( void );
-	virtual void				slotMuteMicButtonClicked( bool muteMic );
-	virtual void				slotMuteSpeakerButtonClicked( bool muteSpeaker );
 	virtual void				slotCameraSnapshotButtonClicked( void );
 	virtual void				slotCamPreviewClicked( void );
 	virtual void				slotTrashButtonClicked( void );

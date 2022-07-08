@@ -416,11 +416,8 @@ void VxAppStyle::drawControl(   ControlElement			element,
                 br = QBrush( option->palette.light().color(), Qt::Dense4Pattern );
             }
 
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
             painter->setBackground(option->palette.window().color());
-#else
-            painter->setBackground(option->palette.background());
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
             painter->setBrush( br );
         }
 
@@ -485,12 +482,13 @@ void VxAppStyle::drawControl(   ControlElement			element,
         QStyleOptionProgressBar* progressOption = const_cast<QStyleOptionProgressBar*>(qstyleoption_cast<const QStyleOptionProgressBar*>(option));
         if( progressOption )
         {
-            QColor bkgColor = m_AppTheme.getColor( eProgressBarColor );
+            QColor bkgColor = m_AppTheme.getColor( eProgressBarBackgroundColor );
             QBrush editBrush( bkgColor );
             painter->setBrush( editBrush );
 
             painter->fillRect( progressOption->rect, editBrush );
             painter->restore();
+            return;
         }
         else
         {
@@ -506,35 +504,37 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
         if( progressBar && progressOption )
         {
-            QColor bkgColor = m_AppTheme.getColor( eProgressBarBackgroundColor );
-            QBrush editBrush( bkgColor );
+            bool isVertical = !(option->state& QStyle::State_Horizontal);
+            QColor progColor = m_AppTheme.getColor( eProgressBarColor );
+            QBrush editBrush( progColor );
             painter->setBrush( editBrush );
 
-            painter->fillRect( progressOption->rect, editBrush );
+            float progressPercent = progressOption->progress ? (float)(progressOption->maximum - progressOption->minimum) / (float)progressOption->progress : 0.0f;
 
-            float progressPercent = progressOption->progress ? (progressOption->maximum - progressOption->minimum) / progressOption->progress : 0;
-            bool isVertical = progressOption->rect.height() > progressOption->rect.width();
             float progressPixels = 0;
             if( progressPercent > 0 )
             {
-                progressPixels = isVertical ? progressOption->rect.height() : progressOption->rect.width() / progressPercent;
+                QRect drawRect = progressOption->rect;
+                progressPixels = ((float)( isVertical ? drawRect.height() : drawRect.width())) / progressPercent;
+                if( progressPixels <= 0 && progressOption->progress > 0 )
+                {
+                    // progress was rounded down to zero then at least show 1 pixel
+                    progressPixels = 1;
+                }
+
+                if( isVertical )
+                {
+                    drawRect.setTop( drawRect.height() + 1 - progressPixels );
+                    drawRect.setHeight( progressPixels );
+                }
+                else
+                {
+                    drawRect.setWidth( progressPixels );
+                }
+
+                painter->fillRect( drawRect, editBrush );
             }
 
-            QRect progressRect( progressOption->rect );
-            if( isVertical )
-            {
-                progressRect.setHeight( progressPixels );
-            }
-            else
-            {
-                progressRect.setWidth( progressPixels );
-            }
-
-            QColor bkgContentColor = m_AppTheme.getColor( eProgressBarColor );
-            QBrush contentBrush( bkgContentColor );
-            painter->setBrush( contentBrush );
-
-            painter->fillRect( progressRect, contentBrush );
             painter->restore();
             return;
         }
@@ -676,12 +676,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             else
             {
                 painter->setPen( opt->palette.text().color() );
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
                 painter->setBackground(opt->palette.window().color());
-#else
-                painter->setBackground(opt->palette.background());
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-                
             }
 
             if( opt->state & State_HasFocus && !opt->editable )
@@ -1233,7 +1228,8 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
         return focusFrameBoarderWidth();
 
     case PM_ProgressBarChunkWidth:
-        return 1;
+        return (option->state & QStyle::State_Horizontal) ? widget->geometry().width() : widget->geometry().height();
+        break;
 
     case PM_ButtonDefaultIndicator:
     case PM_ButtonShiftHorizontal:
@@ -1401,7 +1397,7 @@ QRect VxAppStyle::itemTextRect(     const QFontMetrics&		metrics,
 //============================================================================
 QPalette VxAppStyle::standardPalette() const
 {
-    return m_AppTheme.getBasePalette(); //QProxyStyle::standardPalette();
+    return m_AppTheme.getBasePalette();
 }
 
 //============================================================================
@@ -1600,4 +1596,257 @@ QRect VxAppStyle::subElementRect( SubElement element,
     }
 
     return QProxyStyle::subElementRect( element, option, widget );
+}
+
+//============================================================================
+// set every color role for testing
+void VxAppStyle::setEveryColorPossible( QPalette& palette, const QColor& bkgColor, const QColor& fgdColor ) const
+{
+    palette.setBrush( QPalette::Active, QPalette::Window, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Window, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Window, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::Window, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::WindowText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::WindowText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::WindowText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::WindowText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Base, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Base, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Base, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Base, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::AlternateBase, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::AlternateBase, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::AlternateBase, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::AlternateBase, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::ToolTipBase, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::ToolTipBase, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::ToolTipBase, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::ToolTipBase, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::ToolTipText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::ToolTipText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::ToolTipText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::ToolTipText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::PlaceholderText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::PlaceholderText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::PlaceholderText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::PlaceholderText, fgdColor );
+
+
+    palette.setBrush( QPalette::Active, QPalette::Text, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Text, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Text, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Text, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Button, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Button, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Button, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::Button, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::ButtonText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::ButtonText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::ButtonText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::ButtonText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::BrightText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::BrightText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::BrightText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::BrightText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Light, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Light, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Light, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Light, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Midlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Inactive, QPalette::Midlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Disabled, QPalette::Midlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Normal, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Active, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Inactive, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Disabled, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Normal, QPalette::Midlight, fgdColor.darker() );
+
+    palette.setBrush( QPalette::Active, QPalette::Dark, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Dark, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Dark, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::Dark, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Mid, bkgColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::Mid, bkgColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::Mid, bkgColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::Mid, bkgColor.lighter() );
+
+    palette.setBrush( QPalette::Active, QPalette::Shadow, bkgColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::Shadow, bkgColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::Shadow, bkgColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::Shadow, bkgColor.lighter() );
+
+    palette.setBrush( QPalette::Active, QPalette::Highlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Inactive, QPalette::Highlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Disabled, QPalette::Highlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Normal, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Active, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Inactive, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Disabled, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Normal, QPalette::Highlight, fgdColor.darker() );
+
+
+    palette.setBrush( QPalette::Active, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::HighlightedText, fgdColor.lighter() );
+
+
+    palette.setBrush( QPalette::Active, QPalette::Link, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Link, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Link, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Link, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::LinkVisited, fgdColor.lighter() );
+
+    palette.setBrush( QPalette::Active, QPalette::NoRole, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::NoRole, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::NoRole, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::NoRole, fgdColor );
+
+    //#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    for( int i = QPalette::Active; i <= QPalette::All; i++ )
+    {
+        QPalette::ColorGroup colorGroup = (QPalette::ColorGroup)i;
+        palette.setColor( colorGroup, QPalette::WindowText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Button, fgdColor );
+        palette.setColor( colorGroup, QPalette::Light, fgdColor );
+        palette.setColor( colorGroup, QPalette::Midlight, fgdColor );
+        palette.setColor( colorGroup, QPalette::Dark, fgdColor );
+        palette.setColor( colorGroup, QPalette::Mid, fgdColor );
+        palette.setColor( colorGroup, QPalette::Text, fgdColor );
+        palette.setColor( colorGroup, QPalette::BrightText, fgdColor );
+        palette.setColor( colorGroup, QPalette::ButtonText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Base, fgdColor );
+        palette.setColor( colorGroup, QPalette::Window, fgdColor );
+        palette.setColor( colorGroup, QPalette::Shadow, fgdColor );
+        palette.setColor( colorGroup, QPalette::Highlight, fgdColor );
+        palette.setColor( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Link, fgdColor );
+        palette.setColor( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Link, fgdColor );
+        palette.setColor( colorGroup, QPalette::LinkVisited, fgdColor );
+        palette.setColor( colorGroup, QPalette::AlternateBase, fgdColor );
+        palette.setColor( colorGroup, QPalette::NoRole, fgdColor );
+        palette.setColor( colorGroup, QPalette::ToolTipBase, fgdColor );
+        palette.setColor( colorGroup, QPalette::ToolTipText, fgdColor );
+        palette.setColor( colorGroup, QPalette::PlaceholderText, fgdColor );
+
+        palette.setBrush( colorGroup, QPalette::WindowText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Button, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Light, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Midlight, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Dark, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Mid, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Text, fgdColor );
+        palette.setBrush( colorGroup, QPalette::BrightText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::ButtonText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Base, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Window, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Shadow, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Highlight, fgdColor );
+        palette.setBrush( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Link, fgdColor );
+        palette.setBrush( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Link, fgdColor );
+        palette.setBrush( colorGroup, QPalette::LinkVisited, fgdColor );
+        palette.setBrush( colorGroup, QPalette::AlternateBase, fgdColor );
+
+        palette.setBrush( colorGroup, QPalette::NoRole, fgdColor );
+        palette.setBrush( colorGroup, QPalette::ToolTipBase, fgdColor );
+        palette.setBrush( colorGroup, QPalette::ToolTipText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::PlaceholderText, fgdColor );
+    }
+
+    //#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }

@@ -97,8 +97,7 @@ public:
 signals:
 	void						signalPowerButtonClicked( void );
 	void						signalHomeButtonClicked( void );
-	void						signalMuteMicButtonClicked( bool muteMic );
-	void						signalMuteSpeakerButtonClicked( bool muteSpeaker );
+
 	void						signalCameraSnapshotButtonClicked( void );
 	void						signalCamPreviewClicked( void );
 
@@ -115,7 +114,7 @@ public slots:
 	virtual void				slotApplicationIconClicked( void );
 	virtual void				slotPowerButtonClicked( void );
 	virtual void				slotHomeButtonClicked( void );
-    virtual void				slotMicrophonePeak( int peekVal0to32768 );
+
 	virtual void				slotMuteMicButtonClicked( void );
 	virtual void				slotMuteSpeakerButtonClicked( void );
 	virtual void				slotCameraSnapshotButtonClicked( void );
@@ -159,6 +158,8 @@ protected:
 	virtual void 				callbackToGuiWantMicrophoneRecording( bool wantMicInput ) override;
 	virtual void 				callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
 	virtual void				callbackToGuiWantVideoCapture( bool wantVideoCapture ) override;
+	virtual void				callbackToGuiMicrophoneMuted( bool isMuted ) override;
+	virtual void				callbackToGuiSpeakerMuted( bool isMuted ) override;
 
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;

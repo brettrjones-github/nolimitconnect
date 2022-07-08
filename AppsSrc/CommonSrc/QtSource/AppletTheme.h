@@ -30,12 +30,12 @@ public:
     // override default behavior of closing dialog when back button is clicked
     virtual void				onBackButtonClicked( void );
 
-
 protected slots:
 	void						slotThemeSelectionChanged( int idx );
 	void						slotThemeAccepted( void );
 	void						slotThemeCanceled( void );
     void				        slotCheckBoxClicked( int checkedState );
+	void						slotSliderValueChanged( int sliderVal );
 
 protected:
 	void						fillThemeCombo( void );

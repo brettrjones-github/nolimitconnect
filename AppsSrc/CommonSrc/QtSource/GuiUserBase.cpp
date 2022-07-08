@@ -61,7 +61,6 @@ bool GuiUserBase::isMyself( void )
 //============================================================================
 bool GuiUserBase::updateIsNearby( void )
 {
-    int64_t nearbyTimeOrZeroIfNotd = 0;
     if( !isMyself() )
     {
         m_NearbyTimeOrZero = m_MyApp.getConnectIdListMgr().isNearbyTime( getMyOnlineId() );
