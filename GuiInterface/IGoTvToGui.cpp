@@ -60,12 +60,6 @@ void IGoTv::toGuiPluginCommError( EPluginType pluginType, VxGUID& onlineId, EPlu
 }
 
 //============================================================================
-void IGoTv::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
-{
-    getAppCommon().toGuiMicrophonePeak( appModule, peekVal0to32768 );
-}
-
-//============================================================================
 void IGoTv::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput )
 {
     getAppCommon().toGuiWantMicrophoneRecording( appModule, wantMicInput );
@@ -101,6 +95,12 @@ double IGoTv::toGuiGetAudioDelaySeconds( EAppModule appModule )
 double IGoTv::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
     return getAppCommon().toGuiGetAudioCacheTotalSeconds( appModule  );
+}
+
+//============================================================================
+double IGoTv::toGuiGetAudioCacheTotalMs( void )
+{
+    return getAppCommon().toGuiGetAudioCacheTotalMs();
 }
 
 //============================================================================
@@ -621,26 +621,15 @@ void IGoTv::toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0
                                         assetId,
                                         pos0to100000 );
 }
+
 //============================================================================
 void IGoTv::toGuiBlobSessionHistory( BlobInfo * hostListInfo )
 {
     getAppCommon().toGuiBlobSessionHistory( hostListInfo );
 }
 
-////============================================================================
-//void IGoTv::toGuiThumbAdded( ThumbInfo * thumbInfo )
-//{
-//    getAppCommon().toGuiThumbAdded( thumbInfo );
-//}
-//
-////============================================================================
-//void IGoTv::toGuiThumbUpdated( ThumbInfo * thumbInfo )
-//{
-//    getAppCommon().toGuiThumbUpdated( thumbInfo );
-//}
-//
-////============================================================================
-//void IGoTv::toGuiThumbRemoved( VxGUID& thumbId )
-//{
-//    getAppCommon().toGuiThumbRemoved( thumbId );
-//}
+//============================================================================
+void IGoTv::toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+    getAppCommon().toGuiPushToTalkStatus( onlineId, pushToTalkStatus );
+}

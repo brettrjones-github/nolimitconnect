@@ -225,6 +225,12 @@ void AppletNearbyListClient::callbackOnUserRemoved( VxGUID& onlineId )
 }
 
 //============================================================================
+void AppletNearbyListClient::callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+    ui.m_UserListWidget->callbackPushToTalkStatus( onlineId, pushToTalkStatus );
+}
+
+//============================================================================
 void AppletNearbyListClient::onShowFriendTypeChanged( void )
 {
     switch( m_FriendListType )

@@ -60,6 +60,8 @@ public:
 
     virtual void				toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline );
 
+    virtual void				toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
+
     bool                        isUserRelayed( VxGUID& onlineId );
     bool                        isUserOnline( VxGUID& onlineId );
     bool                        isUserInSession( VxGUID& onlineId );

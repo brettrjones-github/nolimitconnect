@@ -1706,6 +1706,28 @@ void AppCommon::slotInternalBlobSessionHistory( BlobInfo blobInfo )
 }
 
 //============================================================================
+void AppCommon::toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalInternalPushToTalkStatus( onlineId, pushToTalkStatus );
+}
+
+//============================================================================
+void AppCommon::slotInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	m_UserMgr.toGuiPushToTalkStatus( onlineId, pushToTalkStatus );
+}
+
+//============================================================================
 void AppCommon::okMessageBox( QString title, QString msg )
 {
 	QMessageBox::information( this, title, msg, QMessageBox::Ok );

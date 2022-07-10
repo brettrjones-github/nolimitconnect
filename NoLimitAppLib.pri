@@ -326,7 +326,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixer.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerFrame.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutThread.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.h \

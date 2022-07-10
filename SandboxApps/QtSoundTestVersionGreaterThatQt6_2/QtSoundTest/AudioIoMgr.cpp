@@ -369,6 +369,12 @@ double AudioIoMgr::toGuiGetAudioDelaySeconds( EAppModule appModule )
 }
 
 //============================================================================
+double AudioIoMgr::toGuiGetAudioCacheTotalMs( void )
+{
+    return m_AudioOutMixer.getDataReadyForSpeakersMs();
+}
+
+//============================================================================
 double AudioIoMgr::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
     return m_AudioOutMixer.getDataReadyForSpeakersMs() * 1000;

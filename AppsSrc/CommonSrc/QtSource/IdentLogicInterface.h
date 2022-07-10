@@ -106,5 +106,4 @@ protected:
 	AppCommon&					m_MyApp;
 	GuiUser*					m_GuiUser{ nullptr };
 	bool						m_DisableFriendshipChange{ false };
-	bool						m_PushToTalkHeldOn{ false };
 };

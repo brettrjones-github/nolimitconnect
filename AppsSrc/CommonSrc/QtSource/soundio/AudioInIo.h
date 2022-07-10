@@ -50,7 +50,8 @@ public:
     void                        lockAudioIn( void )             { m_AudioBufMutex.lock(); }
     void                        unlockAudioIn( void )           { m_AudioBufMutex.unlock(); }
  
-    void                        setVolume( float volume );
+    void                        setMicrophoneVolume( int volume0to100 );
+
     void                        flush();
 
     QByteArray&					getAudioBuffer()    { return m_AudioBuffer; }
@@ -75,11 +76,7 @@ public:
 
     QAudioSource*               getAudioIn()                    { return m_AudioInputDevice.data(); }
 
-    void                        setDivideSamplesCount( int cnt )
-    {
-        m_DivideCnt = cnt;
-        m_AudioInThread.setDivideSamplesCount( cnt );
-    }
+    void                        setDivideSamplesCount( int cnt ) { m_DivideCnt = cnt; m_AudioInThread.setDivideSamplesCount( cnt ); }
 
 signals:
     void						signalCheckForBufferUnderun();
@@ -93,7 +90,6 @@ protected:
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
-    //bool						isSequential() const  override { return true; }
 
 private:
     void                        reinit();
@@ -104,7 +100,6 @@ private:
     bool                        m_initialized{ false };
     bool                        m_AudioInDeviceIsStarted{ false };
     QAudioFormat                m_AudioFormat;
-    float                       m_volume = 1.0f;
 
     QByteArray					m_AudioBuffer;
     QAudio::State               m_AudioInState = QAudio::State::StoppedState;

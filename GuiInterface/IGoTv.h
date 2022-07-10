@@ -263,12 +263,11 @@ public:
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
-    /// microphone sound input samples peak value
-    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 ) override;
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
     virtual double  			toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
-    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
+    virtual double  			toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
+    virtual double				toGuiGetAudioCacheTotalMs( void ) override;
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
     // add audio data to play.. assumes float 2 channel 48000 Hz
     //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
@@ -440,6 +439,8 @@ public:
     virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) override;
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
+
+    virtual void				toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
 
     //============================================================================
     //=== from gui ===//

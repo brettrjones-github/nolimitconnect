@@ -124,7 +124,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
     m_PeerMgr.setSktLoopback( &m_SktLoopback );
     m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
     int maxPktType = MAX_PKT_TYPE_CNT;
-    vx_assert(maxPktType == 132); // just to make sure our packet types are not mismatched
+    vx_assert( 134 == maxPktType ); // just to make sure our packet types are not mismatched
 	m_IsEngineCreated = true;
 }
 

@@ -87,15 +87,15 @@ bool PluginPushToTalk::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUs
 //! called to start service or session with remote friend
 void PluginPushToTalk::fromGuiStartPluginSession( VxNetIdent * netIdent,int, VxGUID )
 {
-	m_PushToTalkFeedMgr.fromGuiStartPluginSession( false, netIdent );
+	//m_PushToTalkFeedMgr.fromGuiStartPluginSession( false, netIdent );
 }
 
 //============================================================================
 //! called to stop service or session with remote friend
 void PluginPushToTalk::fromGuiStopPluginSession( VxNetIdent * netIdent, int, VxGUID )
 {
-	m_PushToTalkFeedMgr.fromGuiStopPluginSession( false, netIdent );
-	m_PluginSessionMgr.fromGuiStopPluginSession( false, netIdent );
+	//m_PushToTalkFeedMgr.fromGuiStopPluginSession( false, netIdent );
+	//m_PluginSessionMgr.fromGuiStopPluginSession( false, netIdent );
 }
 
 //============================================================================
@@ -130,16 +130,38 @@ bool PluginPushToTalk::fromGuiInstMsg(	VxNetIdent *	netIdent,
 //============================================================================
 bool PluginPushToTalk::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk )
 {
-	VxSktBase* sktBase = m_Engine.getConnectIdListMgr().findBestOnlineConnection( netIdent->getMyOnlineId() );
-	if( !sktBase )
+	if( enableTalk )
 	{
-		bool isNewConnection;
-		m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, isNewConnection, eConnectReasonPushToTalk );
-	}
+		VxSktBase* sktBase;
+		bool isMyself = (netIdent->getMyOnlineId() == m_PluginMgr.getEngine().getMyOnlineId());
+		if( isMyself )
+		{
+			sktBase = m_Engine.getSktLoopback();
+		}
+		else
+		{
 
-	if( sktBase )
+			sktBase = m_Engine.getConnectIdListMgr().findBestOnlineConnection( netIdent->getMyOnlineId() );
+		}
+
+		if( !sktBase )
+		{
+			bool isNewConnection;
+			m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, isNewConnection, eConnectReasonPushToTalk );
+		}
+
+		if( sktBase )
+		{
+			return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, enableTalk, sktBase );
+		}
+		else
+		{
+			return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, false, nullptr );
+		}
+	}
+	else
 	{
-		return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, enableTalk );
+		return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, false, nullptr );
 	}
 
 	return false;
@@ -188,6 +210,30 @@ void PluginPushToTalk::onPktPushToTalkReply( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
+void PluginPushToTalk::onPktPushToTalkStart( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	m_PushToTalkFeedMgr.onPktPushToTalkStart( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginPushToTalk::onPktPushToTalkStop( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	m_PushToTalkFeedMgr.onPktPushToTalkStop( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginPushToTalk::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	m_PushToTalkFeedMgr.onPktVoiceReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginPushToTalk::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	m_PushToTalkFeedMgr.onPktVoiceReply( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
 void PluginPushToTalk::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktChatReq * poPkt = (PktChatReq *)pktHdr;
@@ -203,31 +249,32 @@ void PluginPushToTalk::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxN
 void PluginPushToTalk::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
 {
 	PluginBase::onSessionStart( session, pluginIsLocked ); // mark user session time so contact list is sorted with latest used on top
-	m_PushToTalkFeedMgr.fromGuiStartPluginSession( pluginIsLocked, session->getIdent() );
+	//m_PushToTalkFeedMgr.fromGuiStartPluginSession( pluginIsLocked, session->getIdent() );
 }
 
 //============================================================================
 void PluginPushToTalk::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
 {
-	m_PushToTalkFeedMgr.fromGuiStopPluginSession( pluginIsLocked, session->getIdent() );
+	//m_PushToTalkFeedMgr.fromGuiStopPluginSession( pluginIsLocked, session->getIdent() );
 }
 
 //============================================================================
-void PluginPushToTalk::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginPushToTalk::replaceConnection( VxNetIdent * netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
-	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
+	//m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginPushToTalk::onConnectionLost( VxSktBase * sktBase )
+void PluginPushToTalk::onConnectionLost( VxSktBase* sktBase )
 {
-	m_PluginSessionMgr.onConnectionLost( sktBase );
+	//m_PushToTalkFeedMgr.onConnectionLost( sktBase );
 }
 
 //============================================================================
-void PluginPushToTalk::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginPushToTalk::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
-	m_PushToTalkFeedMgr.fromGuiStopPluginSession( false, netIdent );
-	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
+	m_PushToTalkFeedMgr.onContactWentOffline( netIdent, sktBase );
+	//m_PushToTalkFeedMgr.fromGuiStopPluginSession( false, netIdent );
+	//m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }
 

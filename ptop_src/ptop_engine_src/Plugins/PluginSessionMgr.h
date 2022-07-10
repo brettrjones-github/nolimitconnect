@@ -82,7 +82,7 @@ public:
 	RxSession *					findOrCreateRxSessionWithOnlineId( VxGUID& onlineId, VxSktBase * sktBase, VxNetIdent * netIdent, 
 																	bool pluginIsLocked, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	void						endPluginSession( PluginSessionBase * session, bool pluginIsLocked );
+	void						endPluginSession( PluginSessionBase* session, bool pluginIsLocked );
 	void						endPluginSession( VxGUID& sessionId, bool pluginIsLocked );
 
 	void						removeTxSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked );

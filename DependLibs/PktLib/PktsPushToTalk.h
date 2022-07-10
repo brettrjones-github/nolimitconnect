@@ -27,26 +27,10 @@ class PktPushToTalkReq : public VxPktHdr
 public:
 	PktPushToTalkReq();
 
-	void calcPktLen( void );
-
-	void						setFrame1Len( uint16_t len )			{ m_u16Frame1DataLen = htons( len ); }
-	uint16_t					getFrame1Len( void )					{ return ntohs( m_u16Frame1DataLen ); }
-	void						setFrame2Len( uint16_t len )			{ m_u16Frame2DataLen = htons( len ); }
-	uint16_t					getFrame2Len( void )					{ return ntohs( m_u16Frame2DataLen ); }
-	uint8_t *					getCompressedData( void )				{ return m_CompressedData; }
-
-	void						setTimeMs( int64_t time )				{ m_s64TimeMs = htonU64( time ); }
-	int64_t 					getTimeMs( void )						{ return ntohU64( m_s64TimeMs ); }
-
 private:
 	//=== vars ===//
-	uint16_t					m_u8CompressionType{ 1 };
-	uint16_t					m_u8CompressionVersion{ 1 };
-	int64_t					    m_s64TimeMs{ 0 };
-	uint16_t					m_u16Frame1DataLen{ 0 };
-	uint16_t					m_u16Frame2DataLen{ 0 };
-	uint32_t					m_u32Res{ 0 };
-	uint8_t						m_CompressedData[PUSH_TO_TALK_PACKET_MAX_COMPRESSED_LEN];
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 class PktPushToTalkReply : public VxPktHdr
@@ -54,16 +38,32 @@ class PktPushToTalkReply : public VxPktHdr
 public:
 	PktPushToTalkReply();
 
-	void						setTimeMs( int64_t time ) { m_s64TimeMs = htonU64( time ); }
-	int64_t 					getTimeMs( void ) { return ntohU64( m_s64TimeMs ); }
+private:
+	//=== vars ===//
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
+};
+
+class PktPushToTalkStart : public VxPktHdr
+{
+public:
+	PktPushToTalkStart();
 
 private:
 	//=== vars ===//
-	uint16_t					m_u16Res1{ 0 };
-	int64_t						m_s64TimeMs{ 0 };
 	uint32_t					m_u32Res1{ 0 };
 	uint32_t					m_u32Res2{ 0 };
-	uint32_t					m_u32Res3{ 0 };
+};
+
+class PktPushToTalkStop : public VxPktHdr
+{
+public:
+	PktPushToTalkStop();
+
+private:
+	//=== vars ===//
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 #pragma pack(pop)

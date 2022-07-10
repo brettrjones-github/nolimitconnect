@@ -79,10 +79,10 @@ class FileListReplySession;
 class GuiFileXferSession;
 class GuiOfferSession;
 class IGoTv;
-class PopupMenu;
-class RenderGlWidget;
 class IVxVidCap;
 class KodiThread;
+class PopupMenu;
+class RenderGlWidget;
 
 class VxPeerMgr;
 class VxMyFileInfo;
@@ -458,8 +458,6 @@ public:
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
-    // microphone sound input samples peak value
-    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
 
@@ -469,6 +467,7 @@ public:
 
     virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
     virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
+    virtual double				toGuiGetAudioCacheTotalMs( void ) override;
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
 
     virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) override;
@@ -607,6 +606,7 @@ public:
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
 
+    virtual void				toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
 	/// a module has changed state
 	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
@@ -739,6 +739,8 @@ signals:
     void                        signalInternalToGuiScanResultSuccess( EScanType eScanType, VxNetIdent netIdent );
     void                        signalInternalToGuiSearchResultError( EScanType eScanType, VxNetIdent netIdent, int errCode );
 
+    void                        signalInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus pushToTalkStatus );
+
 private slots:
     void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
     void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
@@ -796,6 +798,8 @@ private slots:
     void						slotInternalWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput );
 
     void						slotInternalWantVideoCapture( EAppModule appModule, bool enableCapture );
+
+    void                        slotInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus pushToTalkStatus );
 
 protected slots:
     void						slotMainWindowResized( void );

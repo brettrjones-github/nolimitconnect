@@ -294,9 +294,9 @@ void AudioIoMgr::stopAudioIn()
 
 //============================================================================
 // volume is from 0.0 to 1.0
-void AudioIoMgr::setVolume( float volume )
+void AudioIoMgr::setSpeakerVolume( float volume0to1 )
 {
-    m_AudioOutIo.setSpeakerVolume( (int)( volume * 100 ) );
+    m_AudioOutIo.setSpeakerVolume( (int)(volume0to1 * 100 ) );
 }
 
 //============================================================================
@@ -314,13 +314,19 @@ double AudioIoMgr::toGuiGetAudioDelayMs( EAppModule appModule )
 //============================================================================
 double AudioIoMgr::toGuiGetAudioDelaySeconds( EAppModule appModule )
 {
-    return toGuiGetAudioDelayMs( appModule ) / 1000;
+    return toGuiGetAudioDelayMs( appModule ) * 1000;
 }
 
 //============================================================================
 double AudioIoMgr::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
     return m_AudioOutMixer.getDataReadyForSpeakersMs() * 1000;
+}
+
+//============================================================================
+double AudioIoMgr::toGuiGetAudioCacheTotalMs( void )
+{
+    return m_AudioOutMixer.getDataReadyForSpeakersMs();
 }
 
 //============================================================================

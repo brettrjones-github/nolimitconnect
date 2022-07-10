@@ -214,6 +214,12 @@ void AppletFriendListClient::callbackOnUserRemoved( VxGUID& onlineId )
 }
 
 //============================================================================
+void AppletFriendListClient::callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+    ui.m_UserListWidget->callbackPushToTalkStatus( onlineId, pushToTalkStatus );
+}
+
+//============================================================================
 void AppletFriendListClient::onShowFriendTypeChanged( void )
 {
     switch( m_FriendListType )

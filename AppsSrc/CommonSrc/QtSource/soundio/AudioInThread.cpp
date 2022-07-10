@@ -15,8 +15,8 @@
 
 #include "AudioInThread.h"
 #include "AudioIoMgr.h"
-#include <QDebug>
 #include "AudioDefs.h"
+#include "AudioUtils.h"
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
@@ -54,31 +54,34 @@ void AudioInThread::run()
         m_AudioSemaphore.acquire();
         if( m_ShouldRun )
         {
-            m_AudioInIo.lockAudioIn();
-            qint64 audioByteLen = m_AudioInIo.getAtomicBufferSize();
-            if( audioByteLen >= AUDIO_BUF_SIZE_8000_1_S16 )
-            {
-                IAudioCallbacks& audioCallbacks = m_AudioIoMgr.getAudioCallbacks();
-                while( audioByteLen >= AUDIO_BUF_SIZE_8000_1_S16 )
-                {
-                    m_AudioChunkRxedCnt++;
-                    if( m_AudioChunkRxedCnt == m_DivideCnt )
-                    {
-                        m_AudioChunkRxedCnt = 0;
-                        if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
-                        {
-                            audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getMicSilence(), AUDIO_BUF_SIZE_8000_1_S16, true, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
-                        }
-                        else
-                        {
-                            audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getAudioBuffer().data(), AUDIO_BUF_SIZE_8000_1_S16, false, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
-                        }
-                    }
+            static char dnSampleBuf[ AUDIO_BUF_SIZE_8000_1_S16 ];
+            IAudioCallbacks& audioCallbacks = m_AudioIoMgr.getAudioCallbacks();
 
-                    m_AudioInIo.getAudioBuffer().remove( 0, AUDIO_BUF_SIZE_8000_1_S16 ); //pop front what is written
-                    m_AudioInIo.updateAtomicBufferSize();
-                    audioByteLen -= AUDIO_BUF_SIZE_8000_1_S16;
+            m_AudioInIo.lockAudioIn();
+            
+            qint64 audioByteLen = m_AudioInIo.getAtomicBufferSize();
+            while( audioByteLen >= AUDIO_BUF_SIZE_8000_1_S16 * m_DivideCnt )
+            {
+                if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
+                {
+                    audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getMicSilence(), AUDIO_BUF_SIZE_8000_1_S16, true, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
                 }
+                else
+                {
+                    if( m_DivideCnt > 1 )
+                    {
+                        AudioUtils::dnsamplePcmAudio( (int16_t*)m_AudioInIo.getAudioBuffer().data(), AUDIO_BUF_SIZE_8000_1_S16 / 2, m_DivideCnt, (int16_t*)dnSampleBuf );
+                        audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)dnSampleBuf, AUDIO_BUF_SIZE_8000_1_S16, false, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
+                    }
+                    else
+                    {
+                        audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getAudioBuffer().data(), AUDIO_BUF_SIZE_8000_1_S16, false, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
+                    }      
+                }
+
+                m_AudioInIo.getAudioBuffer().remove( 0, AUDIO_BUF_SIZE_8000_1_S16 * m_DivideCnt ); //pop front what is written
+                m_AudioInIo.updateAtomicBufferSize();
+                audioByteLen = m_AudioInIo.getAtomicBufferSize();
             }
 
             m_AudioInIo.unlockAudioIn();

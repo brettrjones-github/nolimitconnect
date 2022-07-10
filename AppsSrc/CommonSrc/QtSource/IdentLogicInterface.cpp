@@ -123,6 +123,7 @@ void IdentLogicInterface::updateIdentity( GuiUser* guiUser, bool queryThumb )
 			if( isOnline && m_GuiUser->isMyAccessAllowedFromHim( ePluginTypePushToTalk ) && m_GuiUser->isHisAccessAllowedFromMe( ePluginTypePushToTalk ) )
 			{
 				getIdentPushToTalkButton()->setVisible( true );
+				getIdentPushToTalkButton()->setPushToTalkStatus( m_GuiUser->getPushToTalkStatus() );
 			}
 			else
 			{
@@ -358,41 +359,27 @@ void IdentLogicInterface::slotIdentPushToTalkButtonPressed( void )
 //============================================================================
 void IdentLogicInterface::toggleIdentPushToTalk( void )
 {
-	if( m_PushToTalkHeldOn )
+	if( m_GuiUser )
 	{
-		m_PushToTalkHeldOn = false;
-		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOff );
-		getIdentPushToTalkButton()->setNotifyOnlineEnabled( false );
-		getIdentPushToTalkButton()->setNotifyOnlineVisible( false );
-		if( m_GuiUser )
+        EPushToTalkStatus status = m_GuiUser->getPushToTalkStatus();
+        if( status == ePushToTalkStatusTxEnabled || status == ePushToTalkStatusDuplexEnabled )
 		{
-			bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), false );
-			if( result )
+			if( !m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), false ) )
 			{
-				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
+				m_MyApp.getSoundMgr().playSnd( eSndDefBusy );
+			}
+		}
+		else
+		{
+			if( !m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), true ) )
+			{
+				m_MyApp.getSoundMgr().playSnd( eSndDefBusy );
 			}
 		}
 	}
 	else
 	{
-		m_PushToTalkHeldOn = true;
-		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOn );
-		getIdentPushToTalkButton()->setNotifyOnlineEnabled( true );
-		getIdentPushToTalkButton()->setNotifyOnlineVisible( true );
-		getIdentPushToTalkButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-		if( m_GuiUser )
-		{
-			bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_GuiUser->getMyOnlineId(), true );
-			if( result )
-			{
-				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-			}
-			else
-			{
-				getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
-				m_MyApp.getSoundMgr().playSnd( eSndDefBusy );
-			}
-		}
+        LogMsg( LOG_VERBOSE, "toggleIdentPushToTalk null gui user");
 	}
 }
 

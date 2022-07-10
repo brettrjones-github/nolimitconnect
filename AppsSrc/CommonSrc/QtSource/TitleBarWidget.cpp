@@ -103,7 +103,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     // will show when have cam frames signal
     enableVideoControls( false );
 
-    connect( ui.m_NoLimitAppButton,               SIGNAL(clicked()), this, SLOT(slotApplicationIconClicked()) );
+    connect( ui.m_NoLimitAppButton,         SIGNAL(clicked()), this, SLOT(slotApplicationIconClicked()) );
 
     connect( ui.m_PowerOffButton,           SIGNAL(clicked()), this, SLOT(slotPowerButtonClicked()) );
     connect( ui.m_HomeButton,               SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()) );
@@ -149,7 +149,7 @@ void TitleBarWidget::updateTitleBar( void )
     callbackToGuiSpeakerMuted( m_MuteSpeaker );
 
     bool isCamEnabled = GetAppInstance().getCamLogic().isCamCaptureRunning();
-    callbackToGuiSpeakerMuted( m_MuteSpeaker );
+    callbackToGuiWantVideoCapture( isCamEnabled );
 
     m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
     checkTitleBarIconsFit();

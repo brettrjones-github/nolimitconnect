@@ -43,6 +43,9 @@ public:
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
+    void                        setPushToTalkStatus( EPushToTalkStatus pushToTalkStatus ) { m_PushToTalkStatus = pushToTalkStatus; }
+    EPushToTalkStatus           getPushToTalkStatus( void )             { return m_PushToTalkStatus; }
+
     bool                        updateIsOnline( void )                  { bool isDirect = updateIsDirectConnect(); bool isRelay = updateIsRelayed(); return isDirect || isRelay; }
     bool                        isOnline( void )                        { return isDirectConnect() || isRelayed(); }
 
@@ -57,6 +60,7 @@ public:
     bool                        updateIsRelayed( void );
     virtual bool                setRelayStatus( bool isRelayed ); // return true if relay state changed.. derived classes can override
     bool                        isRelayed( void )                       { return m_IsRelayed; }
+
 
     VxGUID&                     getMyOnlineId( void )                   { return m_OnlineId; }
     std::string                 getOnlineName( void )                   { return std::string( m_NetIdent.getOnlineName() ); }
@@ -115,4 +119,5 @@ protected:
     bool                        m_IsDirectConnect{ false };
     bool                        m_IsRelayed{ false };
     std::set<EHostType>         m_HostSet;
+    EPushToTalkStatus           m_PushToTalkStatus{ ePushToTalkStatusNotActive };
 };

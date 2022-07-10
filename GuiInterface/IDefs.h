@@ -774,6 +774,19 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     eMaxPluginType	
 };
 
+enum EPushToTalkStatus
+{
+    ePushToTalkStatusInvalid,
+    ePushToTalkStatusNotActive,
+    ePushToTalkStatusTxEnabled,
+    ePushToTalkStatusRxEnabled,
+    ePushToTalkStatusDuplexEnabled,
+
+    ePushToTalStatuskNoConnection,
+
+    eMaxStatusPushToTalk
+};
+
 //! \public In Text Chat Session Actions
 enum EMSessionAction
 {

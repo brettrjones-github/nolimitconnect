@@ -29,7 +29,7 @@ PktHandlerBase::PktHandlerBase()
 	}
 
 	int maxPktType = MAX_PKT_TYPE_CNT;
-    vx_assert( 132 == maxPktType );
+    vx_assert( 134 == maxPktType );
 
 	m_aBaseSysPktFuncTable[ 0 ] = &PktHandlerBase::onPktInvalid;
 
@@ -158,6 +158,8 @@ PktHandlerBase::PktHandlerBase()
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REQ]					= &PktHandlerBase::onPktPushToTalkReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REPLY]					= &PktHandlerBase::onPktPushToTalkReply;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_PUSH_TO_TALK_START ]				= &PktHandlerBase::onPktPushToTalkStart;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_PUSH_TO_TALK_STOP ]				= &PktHandlerBase::onPktPushToTalkStop;
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REQ]						= &PktHandlerBase::onPktHostInfoReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REPLY]					= &PktHandlerBase::onPktHostInfoReply;
@@ -840,6 +842,18 @@ void PktHandlerBase::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 
 //============================================================================
 void PktHandlerBase::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktPushToTalkStart( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktPushToTalkStop( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }

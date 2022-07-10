@@ -107,6 +107,8 @@ public:
     void                        setSquareButtonSize( EButtonSize buttonSize );
     EButtonSize                 getSquareButtonSize( void )                         { return m_SquareButtonSize;  }
 
+    void                        setPushToTalkStatus( EPushToTalkStatus pushToTalkStatus );
+
 signals:
 	void						buttonToggleState( bool isOn );
 	void						slideLeftCompleted( void );

@@ -72,6 +72,7 @@ protected:
     virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override;
+    virtual void				callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
 
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;

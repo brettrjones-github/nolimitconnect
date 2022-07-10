@@ -34,29 +34,38 @@ class PushToTalkFeedMgr
 public:
 	PushToTalkFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 
-	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
+	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk, VxSktBase* sktBase );
 
-	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
+	virtual void				onPktPushToTalkReq					( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPushToTalkReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPushToTalkStart				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPushToTalkStop                 ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				onPktPushToTalkReq					( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktPushToTalkReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktVoiceReq						( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVoiceReply						( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-    virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
+    virtual void				callbackOpusPkt( void * userData, PktVoiceReq* pktOpusAudio );
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
 
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual void				removePushToTalkUser( VxGUID& onlineId, bool txOnly = false );
+
+	virtual bool				sendPushToTalkStop( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual bool				sendPushToTalkReq( VxNetIdent* netIdent, VxSktBase* sktBase );
+
 protected:
-	void						enableAudioCapture( bool enable, VxNetIdent * netIdent, EAppModule appModule );
+	bool						enableAudioCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule, VxSktBase* sktBase );
+	void						updatePushToTalkStatus( VxGUID& onlineId );
 
     P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;
 	PluginMgr&					m_PluginMgr;
 	PluginSessionMgr&			m_SessionMgr;
-	bool						m_Enabled;
-	VxGUIDList					m_GuidList;
-	bool						m_CamServerEnabled;
-	bool						m_AudioPktsRequested;
-	bool						m_MixerInputRequesed;
 
+	VxGUIDList					m_TxOnlineIdList;
+	VxGUIDList					m_RxOnlineIdList;
+
+	bool						m_AudioPktsRequested{ false };
+	bool						m_MixerInputRequesed{ false };
 };
 

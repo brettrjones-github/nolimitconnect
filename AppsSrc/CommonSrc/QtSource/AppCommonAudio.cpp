@@ -34,17 +34,6 @@ void AppCommon::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMic
 }
 
 //============================================================================
-void AppCommon::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
-
-    emit signalMicrophonePeak( peekVal0to32768 );
-}
-
-//============================================================================
 void AppCommon::slotInternalWantMicrophoneRecording( EAppModule appModule, bool wanteMicInput )
 {
 	if( VxIsAppShuttingDown() )
@@ -151,6 +140,17 @@ double AppCommon::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
     }
 
     return m_MySndMgr.toGuiGetAudioCacheTotalSeconds( appModule );
+}
+
+//============================================================================
+double AppCommon::toGuiGetAudioCacheTotalMs( void )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return 0;
+	}
+
+	return m_MySndMgr.toGuiGetAudioCacheTotalMs();
 }
 
 //============================================================================

@@ -189,6 +189,8 @@ public:
 	bool						isContactConnected( VxGUID& onlineId );
 	bool						isSystemPlugin( EPluginType	ePluginType );
 
+    bool                        isUserConnected( VxGUID& onlineId );
+
 	//========================================================================
 	// from gui
 	//========================================================================
@@ -655,6 +657,8 @@ public:
 
     virtual void				onPktPushToTalkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktPushToTalkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktPushToTalkStart        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktPushToTalkStop         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
     virtual void				onPktMembershipReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktMembershipReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;

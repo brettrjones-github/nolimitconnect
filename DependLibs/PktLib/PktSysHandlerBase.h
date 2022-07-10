@@ -157,6 +157,8 @@ public:
 
 	virtual void				onPktPushToTalkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktPushToTalkReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktPushToTalkStart		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktPushToTalkStop         ( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
 	virtual void				onPktMembershipReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktMembershipReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );

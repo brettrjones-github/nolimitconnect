@@ -54,6 +54,7 @@ public:
     virtual GuiUserSessionBase* makeSession( GuiUser* user );
 
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
+    virtual void				callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
 
 signals:
     void                        signalUserListItemClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );

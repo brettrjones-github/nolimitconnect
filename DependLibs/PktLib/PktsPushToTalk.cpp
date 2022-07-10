@@ -21,13 +21,9 @@
 //============================================================================
 PktPushToTalkReq::PktPushToTalkReq()
 {
+	vx_assert( 0 == (sizeof( PktPushToTalkReq ) & 0x0f) );
 	setPktType( PKT_TYPE_PUSH_TO_TALK_REQ );
-}
-
-//============================================================================
-void PktPushToTalkReq::calcPktLen( void )
-{
-	setPktLength( ROUND_TO_16BYTE_BOUNDRY( (sizeof( PktPushToTalkReq ) - ( sizeof( m_CompressedData ) ) + (getFrame1Len() + getFrame2Len()) ) ) );
+	setPktLength( sizeof( PktPushToTalkReq ) );
 }
 
 //============================================================================
@@ -36,4 +32,20 @@ PktPushToTalkReply::PktPushToTalkReply()
     vx_assert( 0 == (sizeof( PktPushToTalkReply ) & 0x0f) );
 	setPktType( PKT_TYPE_PUSH_TO_TALK_REPLY );
 	setPktLength( sizeof( PktPushToTalkReply ) );
+}
+
+//============================================================================
+PktPushToTalkStart::PktPushToTalkStart()
+{
+	vx_assert( 0 == (sizeof( PktPushToTalkStart ) & 0x0f) );
+	setPktType( PKT_TYPE_PUSH_TO_TALK_START );
+	setPktLength( sizeof( PktPushToTalkStart ) );
+}
+
+//============================================================================
+PktPushToTalkStop::PktPushToTalkStop()
+{
+	vx_assert( 0 == (sizeof( PktPushToTalkStop ) & 0x0f) );
+	setPktType( PKT_TYPE_PUSH_TO_TALK_STOP );
+	setPktLength( sizeof( PktPushToTalkStop ) );
 }

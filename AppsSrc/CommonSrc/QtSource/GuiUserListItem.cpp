@@ -141,3 +141,12 @@ void GuiUserListItem::updateThumb( GuiThumb* thumb )
         }
     }
 }
+
+//============================================================================
+void GuiUserListItem::callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+    if( getIdentPushToTalkButton() )
+    {
+        getIdentPushToTalkButton()->setPushToTalkStatus( pushToTalkStatus );
+    }
+}

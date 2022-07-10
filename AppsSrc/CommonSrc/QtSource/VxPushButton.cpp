@@ -901,3 +901,54 @@ void VxPushButton::setOverlayColor( QColor iconColor )
 {
     m_OverlayLastIconColor = iconColor;
 }
+
+//============================================================================
+void VxPushButton::setPushToTalkStatus( EPushToTalkStatus pushToTalkStatus )
+{
+    setIcon( eMyIconPushToTalkOff );
+    setNotifyOnlineEnabled( false );
+    setNotifyOnlineVisible( false );
+    setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
+
+    bool txOn{ false };
+    bool rxOn{ false };
+
+    switch( pushToTalkStatus )
+    {
+    case ePushToTalkStatusTxEnabled:
+        txOn = true;
+        break;
+
+    case ePushToTalkStatusRxEnabled:
+        rxOn = true;
+        break;
+
+    case ePushToTalkStatusDuplexEnabled:
+        txOn = true;
+        rxOn = true;
+        break;
+
+    case ePushToTalStatuskNoConnection:
+    case ePushToTalkStatusInvalid:
+    case ePushToTalkStatusNotActive:
+    default:
+        break;
+    }
+
+    if( txOn || rxOn )
+    {
+        setIcon( eMyIconPushToTalkOn );
+    }
+
+    if( txOn )
+    {
+        setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+    }
+
+    if( rxOn )
+    {
+        setNotifyOnlineEnabled( true );
+        setNotifyOnlineVisible( true );
+        setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+    }
+}

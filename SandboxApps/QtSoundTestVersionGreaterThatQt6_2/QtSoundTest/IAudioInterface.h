@@ -69,6 +69,8 @@ public:
     // delay of audio calculated from amount of data in queue
     virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) = 0;
     // maximum queue cache size in seconds
+    virtual double				toGuiGetAudioCacheTotalMs( void ) = 0;
+    // maximum queue cache size in seconds
     virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) = 0;
     // amount of free queue space in bytes
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) = 0;

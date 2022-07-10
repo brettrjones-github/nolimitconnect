@@ -300,30 +300,8 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 	// it seams that microphone volume is a bit low.. especially on android so increase volume before processing
     // TODO microphone boost
 
-    // calculate microphone peak value
-    if( !isMicrophoneMuted() )
-    {
-        static int peakCounter = 0;
-        peakCounter++;
-        if( peakCounter % 0x03 == 0 ) // avoid to fast of update to gui
-        {
-            int16_t micPeakVal = 0;
-            for( int i = 0; i < pcmDataLen / 4; i+=2 ) // dont need acurracy so skip every other sample
-            {
-                if( pcmData[ i ] > micPeakVal )
-                {
-                    micPeakVal = pcmData[ i ];
-                }
-            }
-
-            // LogMsg( LOG_INFO, "mic peak %d", micPeakVal );
-            m_Engine.getToGui().toGuiMicrophonePeak( eAppModuleAll, micPeakVal );
-        }
-    }
-
 	if( m_AudioPcmList.size() )
 	{
-		std::vector<MediaClient>::iterator iter;
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
 		LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList AudioProcessorLock" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
@@ -332,9 +310,8 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
 			LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList begin" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-		for( iter = m_AudioPcmList.begin(); iter != m_AudioPcmList.end(); ++iter )
+		for( auto& client : m_AudioPcmList )
 		{
-			MediaClient& client = (*iter);
 			client.m_Callback->callbackPcm( client.m_UserData, m_MyOnlineId, pcmData, pcmDataLen );
 		}
 
@@ -350,7 +327,6 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 		m_MediaTools.getAudioEncoder().encodePcmData( pcmData, pcmDataLen, m_PktVoiceReq.getCompressedData(), frame1Len, frame2Len );
 		if( m_AudioOpusList.size() )
 		{
-			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
 			LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList AudioProcessorLock" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
@@ -360,9 +336,8 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 						LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList start" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 
-			for( iter = m_AudioOpusList.begin(); iter != m_AudioOpusList.end(); ++iter )
+			for( auto& client : m_AudioOpusList )
 			{
-				MediaClient& client = (*iter);
 				client.m_Callback->callbackOpusEncoded( client.m_UserData, m_PktVoiceReq.getCompressedData(), frame1Len, frame2Len );
 			}
 
@@ -378,7 +353,6 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 			m_PktVoiceReq.setTimeMs( GetGmtTimeMs() );
 			m_PktVoiceReq.calcPktLen();
 
-			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
 				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList AudioProcessorLock callbackOpusPkt" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
@@ -387,9 +361,8 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
 				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList start" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-			for( iter = m_AudioPktsList.begin(); iter != m_AudioPktsList.end(); ++iter )
+			for( auto& client : m_AudioPktsList )
 			{
-				MediaClient& client = (*iter);
 				client.m_Callback->callbackOpusPkt( client.m_UserData, &m_PktVoiceReq );
 			}
 

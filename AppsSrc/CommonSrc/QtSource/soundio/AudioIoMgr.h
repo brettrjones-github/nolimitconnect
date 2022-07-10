@@ -60,7 +60,7 @@ public:
     void                        unlockAudioIn() { m_AudioInMutex.unlock(); }
 
     // volume is from 0.0 to 1.0
-    void						setVolume( float volume );
+    void						setSpeakerVolume( float volume0to1 );
 
     bool                        isMicrophoneAvailable( void )           { return m_MicrophoneAvailable; }
     bool                        isMicrophoneEnabled( void )             { return m_WantMicrophone; }
@@ -90,6 +90,8 @@ public:
     virtual double				toGuiGetAudioDelayMs( EAppModule appModule );
     // delay of audio calculated from amount of data in queue
     virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
+    // maximum queue cache size in seconds
+    virtual double				toGuiGetAudioCacheTotalMs( void ) override;
     // maximum queue cache size in seconds
     virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     // amount of free queue space in bytes

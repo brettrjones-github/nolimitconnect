@@ -27,4 +27,6 @@ public:
     virtual void				callbackOnUserAdded( GuiUser* guiUser ) {};
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) {};
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) {};
+
+    virtual void				callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) {};
 };

@@ -39,6 +39,7 @@ public:
     virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override {};
+    virtual void				callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override {};
 
     virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
     virtual void				callbackGuiHostedListSearchComplete( EHostType hostType, VxGUID& sessionId ) override;

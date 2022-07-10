@@ -842,6 +842,12 @@ bool P2PEngine::isSystemPlugin( EPluginType	ePluginType )
 }
 
 //============================================================================
+bool P2PEngine::isUserConnected( VxGUID& onlineId )
+{
+	return m_ConnectIdListMgr.isOnline( onlineId );
+}
+
+//============================================================================
 bool P2PEngine::isNearbyAvailable( void )
 {
 	return m_NetStatusAccum.getNearbyAvailable();

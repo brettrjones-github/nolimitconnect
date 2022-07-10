@@ -62,18 +62,13 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defa
         }
         else
         {
-            setDivideSamplesCount( 8 );
             m_AudioInputDevice.reset( new QAudioSource( defaultDeviceInfo, m_AudioFormat, this ) );
-            m_initialized = m_AudioInputDevice != nullptr;
-            if( m_initialized )
-            {
-                // Set constant values to new audio input
-                //connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
-                connect( m_AudioInputDevice.data(), SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
-                LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d channels %d size %d", audioFormat.sampleRate(), audioFormat.channelCount(), audioFormat.bytesPerSample() );
+            m_initialized = true;
 
-                this->open( QIODevice::WriteOnly );
-            }
+            connect( m_AudioInputDevice.data(), SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
+            LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d channels %d size %d", audioFormat.sampleRate(), audioFormat.channelCount(), audioFormat.bytesPerSample() );
+
+            this->open( QIODevice::WriteOnly );
         }
     }
 
@@ -100,14 +95,16 @@ void AudioInIo::startAudio()
 
         m_AudioInputDevice->start(this);
     }
-
-    //LogMsg( LOG_DEBUG, "AudioInIo default buffer size %d periodic size %d", m_AudioInputDevice->bufferSize(), m_AudioInputDevice->periodSize() );
 }
 
 //============================================================================
-void AudioInIo::setVolume( float volume )
+void AudioInIo::setMicrophoneVolume( int volume0to100 )
 {
-    m_volume = volume;
+    qreal linearVolume = QAudio::convertVolume( volume0to100 / qreal( 100 ),
+        QAudio::LogarithmicVolumeScale,
+        QAudio::LinearVolumeScale );
+
+    m_AudioInputDevice->setVolume( linearVolume );
 }
 
 //============================================================================
@@ -203,7 +200,7 @@ int AudioInIo::calculateMicrophonDelayMs()
         return 0;
     }
 
-    return (int)( ( getAtomicBufferSize() * ( BYTES_TO_MS_MULTIPLIER_MICROPHONE / m_DivideCnt )  ) + m_AudioIoMgr.toGuiGetAudioDelayMs( eAppModulePtoP ) );
+    return (int)( AudioUtils::audioDurationUs( m_AudioFormat, getAtomicBufferSize() ) / 1000 + m_AudioIoMgr.toGuiGetAudioCacheTotalMs() );
 }
 
 //============================================================================

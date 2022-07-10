@@ -481,6 +481,8 @@ bool HostedListMgr::requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxN
         PktHostInfoReq pktReq;
         pktReq.setPluginNum( ( uint8_t )HostTypeToHostPlugin( hostType ) );
         pktReq.getSessionId().initializeWithNewVxGUID();
+        pktReq.setSrcOnlineId( m_Engine.getMyOnlineId() );
+        pktReq.setDestOnlineId( netIdent->getMyOnlineId() );
 
         result = sktBase->txPacket( netIdent->getMyOnlineId(), &pktReq);
     }

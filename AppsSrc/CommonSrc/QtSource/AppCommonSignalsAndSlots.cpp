@@ -39,6 +39,7 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<EOfferType>( "EOfferType" );
 	qRegisterMetaType<EPluginAccess>( "EPluginAccess" );
 	qRegisterMetaType<EPluginType>( "EPluginType" );
+	qRegisterMetaType<EPushToTalkStatus>( "EPushToTalkStatus" );
 	qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
 	qRegisterMetaType<EMSessionAction>( "EMSessionAction" );
 	qRegisterMetaType<EScanType>( "EScanType" );
@@ -136,4 +137,6 @@ void AppCommon::connectSignals( void )
     connect( this, SIGNAL( signalInternalToGuiScanSearchComplete(EScanType) ), this, SLOT( slotInternalToGuiScanSearchComplete(EScanType) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalToGuiScanResultSuccess(EScanType,VxNetIdent) ), this, SLOT( slotInternalToGuiScanResultSuccess(EScanType,VxNetIdent) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalToGuiSearchResultError(EScanType,VxNetIdent,int) ), this, SLOT( slotInternalToGuiSearchResultError(EScanType,VxNetIdent,int) ), Qt::QueuedConnection );
+
+	connect( this, SIGNAL( signalInternalPushToTalkStatus(VxGUID,EPushToTalkStatus) ), this, SLOT( slotInternalPushToTalkStatus(VxGUID,EPushToTalkStatus) ), Qt::QueuedConnection );
 }

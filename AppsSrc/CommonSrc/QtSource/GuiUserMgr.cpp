@@ -783,6 +783,39 @@ void GuiUserMgr::toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline )
 }
 
 //============================================================================
+void GuiUserMgr::toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+    guiUserUpdateClientsLock();
+    GuiUser* guiUser = findUser( onlineId );
+    if( guiUser )
+    {
+        guiUser->setPushToTalkStatus( pushToTalkStatus );    
+    }
+
+    guiUserUpdateClientsUnlock();
+    if( guiUser )
+    {
+        sendUserUpdatedToCallbacks( guiUser );
+    }
+   
+    guiUserUpdateClientsLock();
+
+    for( auto client : m_GuiUserUpdateClientList )
+    {
+        if( client )
+        {
+            client->callbackPushToTalkStatus( onlineId, pushToTalkStatus );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "GuiUserMgr::sendUserUpdatedToCallbacks invalid callback" );
+        }
+    }
+
+    guiUserUpdateClientsUnlock();
+}
+
+//============================================================================
 void GuiUserMgr::connnectIdNearbyStatusChange( VxGUID& onlineId, uint64_t nearbyTimeOrZeroIfNot )
 {
     GuiUser* guiUser = findUser( onlineId );

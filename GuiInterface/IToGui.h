@@ -53,8 +53,6 @@ public:
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState ) = 0;
 
-    /// microphone sound input samples peak value
-    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 ) = 0;
 	/// Start/Stop camera capture
 	virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) = 0;
 	/// Send video feed frame to GUI for playback.. includes amount of motion detected
@@ -217,9 +215,7 @@ public:
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) = 0;
 
-    //virtual void				toGuiThumbAdded( ThumbInfo * thumbInfo ) = 0;
-    //virtual void				toGuiThumbUpdated( ThumbInfo * thumbInfo ) = 0;
-    //virtual void				toGuiThumbRemoved( VxGUID& thumbId ) = 0;
+	virtual void				toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
 	virtual void				toGuiSetGameValueVar(	EPluginType	    ePluginType,

@@ -681,3 +681,13 @@ void GuiUserListWidget::callbackOnUserUpdated( GuiUser* guiUser )
 {
     updateUser( guiUser );
 }
+
+//============================================================================
+void GuiUserListWidget::callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus )
+{
+    GuiUserListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
+    if( userItem )
+    {
+        userItem->callbackPushToTalkStatus( onlineId, pushToTalkStatus );
+    }
+}
