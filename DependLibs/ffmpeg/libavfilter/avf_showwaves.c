@@ -538,7 +538,7 @@ static int config_output(AVFilterLink *outlink)
     return 0;
 }
 
-GOTV_INLINE static int push_frame(AVFilterLink *outlink)
+NLC_INLINE static int push_frame(AVFilterLink *outlink)
 {
     AVFilterContext *ctx = outlink->src;
     AVFilterLink *inlink = ctx->inputs[0];

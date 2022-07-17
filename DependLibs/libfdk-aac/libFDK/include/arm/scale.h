@@ -92,7 +92,7 @@ amm-info@iis.fraunhofer.de
 
 #if defined(__ARM_ARCH_6__)
 
-GOTV_INLINE static int32_t shiftRightSat(int32_t src, int scale)
+NLC_INLINE static int32_t shiftRightSat(int32_t src, int scale)
 {
   int32_t result;
   asm(
@@ -107,7 +107,7 @@ GOTV_INLINE static int32_t shiftRightSat(int32_t src, int scale)
 
   #define SATURATE_INT_PCM_RIGHT_SHIFT(src, scale) shiftRightSat(src, scale)
 
-GOTV_INLINE static int32_t shiftLeftSat(int32_t src, int scale)
+NLC_INLINE static int32_t shiftLeftSat(int32_t src, int scale)
 {
   int32_t result;
   asm(
@@ -127,7 +127,7 @@ GOTV_INLINE static int32_t shiftLeftSat(int32_t src, int scale)
 #endif /* compiler selection */
 
 #define FUNCTION_scaleValueInPlace
-GOTV_INLINE
+NLC_INLINE
 void scaleValueInPlace(FIXP_DBL *value, /*!< Value */
                        int32_t scalefactor   /*!< Scalefactor */
                        )

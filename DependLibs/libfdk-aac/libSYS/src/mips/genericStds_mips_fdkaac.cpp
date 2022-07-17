@@ -126,7 +126,7 @@ static unsigned char *__pScratchBuffer = NULL;
 #include <unistd.h>
 
 static int fd;
-static GOTV_INLINE void * getSram(void)
+static NLC_INLINE void * getSram(void)
 {
   unsigned long *ptr = NULL;
 
@@ -159,7 +159,7 @@ static GOTV_INLINE void * getSram(void)
   return (void*)ptr;
 }
 
-static GOTV_INLINE void freeSram(void* ptr)
+static NLC_INLINE void freeSram(void* ptr)
 {
   /* Check if sram driver is being used. */
   if (fd == -1)
@@ -183,7 +183,7 @@ static GOTV_INLINE void freeSram(void* ptr)
 
 static int hasISPRAM, hasDSPRAM;
 
-static GOTV_INLINE void * getSram(void)
+static NLC_INLINE void * getSram(void)
 {
   void *addr;
   unsigned int Config;
@@ -209,7 +209,7 @@ static GOTV_INLINE void * getSram(void)
   }
   return addr;
 }
-static GOTV_INLINE void freeSram(void* ptr)
+static NLC_INLINE void freeSram(void* ptr)
 {
   if (!hasDSPRAM) {
     free(ptr);
@@ -218,11 +218,11 @@ static GOTV_INLINE void freeSram(void* ptr)
 
 #else
 
-static GOTV_INLINE void * getSram(void)
+static NLC_INLINE void * getSram(void)
 {
   return malloc(MIPS_SRAM_SIZE);
 }
-static GOTV_INLINE void freeSram(void* ptr)
+static NLC_INLINE void freeSram(void* ptr)
 {
   free(ptr);
 }

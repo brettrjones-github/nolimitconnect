@@ -130,7 +130,7 @@ poll_padlock (void (*add)(const void*, size_t, enum random_origins),
 # else
 #  define RDRAND_LONG	RDRAND_INT
 # endif
-static GOTV_INLINE int
+static NLC_INLINE int
 rdrand_long (unsigned long *v)
 {
   int ok;
@@ -146,7 +146,7 @@ rdrand_long (unsigned long *v)
 }
 
 
-static GOTV_INLINE int
+static NLC_INLINE int
 rdrand_nlong (unsigned long *v, int count)
 {
   while (count--)

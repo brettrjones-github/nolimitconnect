@@ -15,7 +15,7 @@
 
 
 #include "VxSndInstance.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 #include "VxResourceToRealFile.h"
 
 #include <CoreLib/VxDebug.h>

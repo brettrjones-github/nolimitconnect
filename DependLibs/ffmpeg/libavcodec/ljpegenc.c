@@ -128,7 +128,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
     return 0;
 }
 
-static GOTV_INLINE void ljpeg_encode_yuv_mb(LJpegEncContext *s, PutBitContext *pb,
+static NLC_INLINE void ljpeg_encode_yuv_mb(LJpegEncContext *s, PutBitContext *pb,
                                        const AVFrame *frame, int predictor,
                                        int mb_x, int mb_y)
 {

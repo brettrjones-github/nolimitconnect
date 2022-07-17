@@ -22,7 +22,7 @@
 
 #include <stddef.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 /* Defined in xmalloc.c.  */
@@ -46,17 +46,17 @@ extern void *xcalloc (size_t nmemb, size_t size);
    with error checking.  If PTR is NULL, run xmalloc.  */
 extern void *xrealloc (void *ptr, size_t size);
 
-//GOTV_END_CDECLARES
+//NLC_END_CDECLARES
 //
 //#ifdef __cplusplus
 //template <typename T>
-//  GOTV_INLINE T * xrealloc (T * ptr, size_t size)
+//  NLC_INLINE T * xrealloc (T * ptr, size_t size)
 //  {
 //    return (T *) xrealloc ((void *) ptr, size);
 //  }
 //#endif // __cplusplus
 //
-//  GOTV_BEGIN_CDECLARES
+//  NLC_BEGIN_CDECLARES
 
 /* This function is always triggered when memory is exhausted.  It is
    in charge of honoring the three previous items.  This is the
@@ -88,7 +88,7 @@ extern void xalloc_die (void)
    ((T *) (sizeof (T) == 1 \
            ? xmalloc (N) \
            : xnboundedmalloc(N, (size_t) (sizeof (ptrdiff_t) <= sizeof (size_t) ? -1 : -2) / sizeof (T), sizeof (T))))
-static GOTV_INLINE void *
+static NLC_INLINE void *
 xnboundedmalloc (size_t n, size_t bound, size_t s)
 {
   if (n > bound)
@@ -125,7 +125,7 @@ extern void *xmemdup (const void *p, size_t n);
 //#ifdef __cplusplus
 //}
 //template <typename T>
-//  GOTV_INLINE T * xmemdup (const T * p, size_t n)
+//  NLC_INLINE T * xmemdup (const T * p, size_t n)
 //  {
 //    return (T *) xmemdup ((const void *) p, n);
 //  }
@@ -138,7 +138,7 @@ extern char *xstrdup (const char *string);
 
 /* Return 1 if an array of N objects, each of size S, cannot exist due
    to size arithmetic overflow.  S must be positive and N must be
-   nonnegative.  This is a macro, not an GOTV_INLINE function, so that it
+   nonnegative.  This is a macro, not an NLC_INLINE function, so that it
    works correctly even when SIZE_MAX < N.
 
    By gnulib convention, SIZE_MAX represents overflow in size
@@ -152,6 +152,6 @@ extern char *xstrdup (const char *string);
     ((size_t) (sizeof (ptrdiff_t) <= sizeof (size_t) ? -1 : -2) / (s) < (n))
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* _XALLOC_H_GNU */

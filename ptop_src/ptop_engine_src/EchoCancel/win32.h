@@ -46,7 +46,7 @@ namespace rtc {
 const char* win32_inet_ntop(int af, const void *src, char* dst, socklen_t size);
 int win32_inet_pton(int af, const char* src, void *dst);
 
-GOTV_INLINE std::wstring ToUtf16(const char* utf8, size_t len) {
+NLC_INLINE std::wstring ToUtf16(const char* utf8, size_t len) {
   int len16 = ::MultiByteToWideChar(CP_UTF8, 0, utf8, static_cast<int>(len),
                                     NULL, 0);
   wchar_t* ws = STACK_ARRAY(wchar_t, len16);
@@ -54,11 +54,11 @@ GOTV_INLINE std::wstring ToUtf16(const char* utf8, size_t len) {
   return std::wstring(ws, len16);
 }
 
-GOTV_INLINE std::wstring ToUtf16(const std::string& str) {
+NLC_INLINE std::wstring ToUtf16(const std::string& str) {
   return ToUtf16(str.data(), str.length());
 }
 
-GOTV_INLINE std::string ToUtf8(const wchar_t* wide, size_t len) {
+NLC_INLINE std::string ToUtf8(const wchar_t* wide, size_t len) {
   int len8 = ::WideCharToMultiByte(CP_UTF8, 0, wide, static_cast<int>(len),
                                    NULL, 0, NULL, NULL);
   char* ns = STACK_ARRAY(char, len8);
@@ -67,11 +67,11 @@ GOTV_INLINE std::string ToUtf8(const wchar_t* wide, size_t len) {
   return std::string(ns, len8);
 }
 
-GOTV_INLINE std::string ToUtf8(const wchar_t* wide) {
+NLC_INLINE std::string ToUtf8(const wchar_t* wide) {
   return ToUtf8(wide, wcslen(wide));
 }
 
-GOTV_INLINE std::string ToUtf8(const std::wstring& wstr) {
+NLC_INLINE std::string ToUtf8(const std::wstring& wstr) {
   return ToUtf8(wstr.data(), wstr.length());
 }
 
@@ -85,7 +85,7 @@ void UnixTimeToFileTime(const time_t& ut, FILETIME * ft);
 bool Utf8ToWindowsFilename(const std::string& utf8, std::wstring* filename);
 
 // Convert a FILETIME to a UInt64
-GOTV_INLINE uint64_t ToUInt64(const FILETIME& ft) {
+NLC_INLINE uint64_t ToUInt64(const FILETIME& ft) {
   ULARGE_INTEGER r = {{ft.dwLowDateTime, ft.dwHighDateTime}};
   return r.QuadPart;
 }
@@ -96,19 +96,19 @@ enum WindowsMajorVersions {
 };
 bool GetOsVersion(int* major, int* minor, int* build);
 
-GOTV_INLINE bool IsWindowsVistaOrLater() {
+NLC_INLINE bool IsWindowsVistaOrLater() {
   int major;
   return (GetOsVersion(&major, NULL, NULL) && major >= kWindowsVista);
 }
 
-GOTV_INLINE bool IsWindowsXpOrLater() {
+NLC_INLINE bool IsWindowsXpOrLater() {
   int major, minor;
   return (GetOsVersion(&major, &minor, NULL) &&
           (major >= kWindowsVista ||
           (major == kWindows2000 && minor >= 1)));
 }
 
-GOTV_INLINE bool IsWindows8OrLater() {
+NLC_INLINE bool IsWindows8OrLater() {
   int major, minor;
   return (GetOsVersion(&major, &minor, NULL) &&
           (major > kWindowsVista ||
@@ -118,7 +118,7 @@ GOTV_INLINE bool IsWindows8OrLater() {
 // Determine the current integrity level of the process.
 bool GetCurrentProcessIntegrityLevel(int* level);
 
-GOTV_INLINE bool IsCurrentProcessLowIntegrity() {
+NLC_INLINE bool IsCurrentProcessLowIntegrity() {
   int level;
   return (GetCurrentProcessIntegrityLevel(&level) &&
       level < SECURITY_MANDATORY_MEDIUM_RID);

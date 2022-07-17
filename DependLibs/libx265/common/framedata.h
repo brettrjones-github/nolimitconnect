@@ -161,7 +161,7 @@ public:
     bool create(const x265_param& param, const SPS& sps, int csp);
     void reinit(const SPS& sps);
     void destroy();
-    GOTV_INLINE CUData* getPicCTU(uint32_t ctuAddr) { return &m_picCTU[ctuAddr]; }
+    NLC_INLINE CUData* getPicCTU(uint32_t ctuAddr) { return &m_picCTU[ctuAddr]; }
 };
 
 /* Stores intra analysis data for a single frame. This struct needs better packing */

@@ -1,5 +1,5 @@
 #include  <config_libgnu.h>
-#define XSIZE_INLINE  GOTV_INLINE
+#define XSIZE_INLINE  NLC_INLINE
 #include  "xsize_gnu.h"
 
 /* Sum of two sizes, with overflow check.  */

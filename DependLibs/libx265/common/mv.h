@@ -85,9 +85,9 @@ public:
     // Scale up an FPEL mv to QPEL by shifting up two bits
     MV toQPel() const                          { return *this << 2; }
 
-    bool GOTV_INLINE notZero() const                { return this->word != 0; }
+    bool NLC_INLINE notZero() const                { return this->word != 0; }
 
-    bool GOTV_INLINE isSubpel() const               { return (this->word & 0x00030003) != 0; }
+    bool NLC_INLINE isSubpel() const               { return (this->word & 0x00030003) != 0; }
 
     MV mvmin(const MV& m) const                { return MV(x > m.x ? m.x : x, y > m.y ? m.y : y); }
 

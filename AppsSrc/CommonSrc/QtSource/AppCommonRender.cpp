@@ -18,7 +18,7 @@
 #include "MyIcons.h"
 #include "AppletPopupMenu.h"
 #include "ToGuiActivityInterface.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 #include "MyIcons.h"
 #include "VxTilePositioner.h"
 

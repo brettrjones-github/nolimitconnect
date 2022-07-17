@@ -183,13 +183,13 @@ typedef struct TwinVQContext {
 extern const enum TwinVQFrameType ff_twinvq_wtype_to_ftype_table[];
 
 /** @note not speed critical, hence not optimized */
-static GOTV_INLINE void twinvq_memset_float(float *buf, float val, int size)
+static NLC_INLINE void twinvq_memset_float(float *buf, float val, int size)
 {
     while (size--)
         *buf++ = val;
 }
 
-static GOTV_INLINE float twinvq_mulawinv(float y, float clip, float mu)
+static NLC_INLINE float twinvq_mulawinv(float y, float clip, float mu)
 {
     y = av_clipf(y / clip, -1, 1);
     return clip * FFSIGN(y) * (exp(log(1 + mu) * fabs(y)) - 1) / mu;

@@ -63,7 +63,7 @@
  * plain bytes, with linear interpolation of samples.
  * Could be further improved with a lowpass filter.
  */
-static GOTV_INLINE unsigned int
+static NLC_INLINE unsigned int
 sample(uint8_t *raw, int offs, int bpp, int endian)
 {
 	unsigned char frac = offs;
@@ -98,7 +98,7 @@ sample(uint8_t *raw, int offs, int bpp, int endian)
  * Note this is just a template. The code is inlined,
  * with bpp being const.
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 bit_slicer_tmpl(vbi_bit_slicer *d, uint8_t *raw,
 		uint8_t *buf, int bpp, int endian)
 {

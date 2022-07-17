@@ -711,7 +711,7 @@ EPluginServerState P2PEngine::fromGuiGetPluginServerState( EPluginType ePluginTy
 //============================================================================
 //! called with offer to create session.. return false if cannot connect
 bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType, 
-										VxGUID&			oOnlineId, 
+										VxGUID&			onlineId,
 										int				pvUserData,
 										const char *	pOfferMsg, 
 										const char *	pFileName,
@@ -719,25 +719,15 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 										VxGUID			lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiMakePluginOffer" );
-	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
-	if( poInfo )
+	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	if( netIdent && poPlugin )
 	{
-		PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
-		if( 0 != poPlugin )
-		{
-			return poPlugin->fromGuiMakePluginOffer( poInfo, pvUserData, pOfferMsg, pFileName, fileHashId, lclSessionId );
-		}
-		else
-		{
-			LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiMakePluginOffer invalid plugin" );
-			return false;
-		}
+		return poPlugin->fromGuiMakePluginOffer( netIdent, pvUserData, pOfferMsg, pFileName, fileHashId, lclSessionId );
 	}
 	else
 	{
-		std::string onlineId;
-		oOnlineId.toHexString(onlineId);
-		LogMsg(LOG_ERROR, "P2PEngine::fromGuiMakePluginOffer: poInfo not found VxGUID %s", onlineId.c_str());
+		LogMsg(LOG_ERROR, "P2PEngine::fromGuiMakePluginOffer: poInfo not found VxGUID %s", onlineId.toHexString().c_str());
 	}
 
 	return false;
@@ -746,7 +736,7 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 //============================================================================
 //! handle reply to offer
 bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
-											VxGUID&			oOnlineId, 
+											VxGUID&			onlineId,
 											int				pvUserData,
 											int				iOfferResponse,
 											VxGUID			lclSessionId )
@@ -757,12 +747,11 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 		return false;
 	}
 
-	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
 	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
-	if( ( 0 != poPlugin )
-		&& ( 0 != poInfo ) )
+	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiOfferReply( poInfo, pvUserData, (EOfferResponse)iOfferResponse, lclSessionId );
+		return poPlugin->fromGuiOfferReply( netIdent, pvUserData, (EOfferResponse)iOfferResponse, lclSessionId );
 	}
 	else
 	{
@@ -773,7 +762,7 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 
 //============================================================================
 int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType, 
-										VxGUID&			oOnlineId, 
+										VxGUID&			onlineId,
 										const char *	pControl, 
 										const char *	pAction,
 										uint32_t		u32ActionData,
@@ -781,11 +770,11 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 										uint8_t *		fileHashId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiPluginControl" );
-	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
 	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
-	if( 0 != poPlugin )
+	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiPluginControl( poInfo, pControl, pAction, u32ActionData, lclSessionId, fileHashId );
+		return poPlugin->fromGuiPluginControl( netIdent, pControl, pAction, u32ActionData, lclSessionId, fileHashId );
 	}
 	else
 	{
@@ -796,15 +785,15 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 
 //============================================================================
 bool P2PEngine::fromGuiInstMsg(	EPluginType		ePluginType, 
-								VxGUID&			oOnlineId, 
+								VxGUID&			onlineId,
 								const char *	pMsg )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiInstMsg" );
-	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
 	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
-	if( 0 != poPlugin )
+	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiInstMsg( poInfo, pMsg );
+		return poPlugin->fromGuiInstMsg( netIdent, pMsg );
 	}
 	else
 	{
@@ -816,15 +805,15 @@ bool P2PEngine::fromGuiInstMsg(	EPluginType		ePluginType,
 //============================================================================
 bool P2PEngine::fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk )
 {
-	BigListInfo* poInfo = m_BigListMgr.findBigListInfo( onlineId );
+	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
 	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginTypePushToTalk );
-	if( 0 != poPlugin )
+	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiPushToTalk( poInfo, enableTalk );
+		return poPlugin->fromGuiPushToTalk( netIdent, enableTalk );
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiPushToTalk invalid plugin" );
+		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiPushToTalk invalid plugin or user" );
 		return false;
 	}
 }

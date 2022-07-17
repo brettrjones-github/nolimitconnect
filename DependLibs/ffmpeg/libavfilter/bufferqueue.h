@@ -57,7 +57,7 @@ struct FFBufQueue {
 /**
  * Test if a buffer queue is full.
  */
-static GOTV_INLINE int ff_bufqueue_is_full(struct FFBufQueue *queue)
+static NLC_INLINE int ff_bufqueue_is_full(struct FFBufQueue *queue)
 {
     return queue->available == FF_BUFQUEUE_SIZE;
 }
@@ -68,7 +68,7 @@ static GOTV_INLINE int ff_bufqueue_is_full(struct FFBufQueue *queue)
  * If the queue is already full, then the current last buffer is dropped
  * (and unrefed) with a warning before adding the new buffer.
  */
-static GOTV_INLINE void ff_bufqueue_add(void *log, struct FFBufQueue *queue,
+static NLC_INLINE void ff_bufqueue_add(void *log, struct FFBufQueue *queue,
                                    AVFrame *buf)
 {
     if (ff_bufqueue_is_full(queue)) {
@@ -84,7 +84,7 @@ static GOTV_INLINE void ff_bufqueue_add(void *log, struct FFBufQueue *queue,
  * Buffer with index 0 is the first buffer in the queue.
  * Return NULL if the queue has not enough buffers.
  */
-static GOTV_INLINE AVFrame *ff_bufqueue_peek(struct FFBufQueue *queue,
+static NLC_INLINE AVFrame *ff_bufqueue_peek(struct FFBufQueue *queue,
                                         unsigned index)
 {
     return index < queue->available ? BUCKET(index) : NULL;
@@ -95,7 +95,7 @@ static GOTV_INLINE AVFrame *ff_bufqueue_peek(struct FFBufQueue *queue,
  *
  * Do not use on an empty queue.
  */
-static GOTV_INLINE AVFrame *ff_bufqueue_get(struct FFBufQueue *queue)
+static NLC_INLINE AVFrame *ff_bufqueue_get(struct FFBufQueue *queue)
 {
     AVFrame *ret = queue->queue[queue->head];
     av_assert0(queue->available);
@@ -108,7 +108,7 @@ static GOTV_INLINE AVFrame *ff_bufqueue_get(struct FFBufQueue *queue)
 /**
  * Unref and remove all buffers from the queue.
  */
-static GOTV_INLINE void ff_bufqueue_discard_all(struct FFBufQueue *queue)
+static NLC_INLINE void ff_bufqueue_discard_all(struct FFBufQueue *queue)
 {
     while (queue->available) {
         AVFrame *buf = ff_bufqueue_get(queue);

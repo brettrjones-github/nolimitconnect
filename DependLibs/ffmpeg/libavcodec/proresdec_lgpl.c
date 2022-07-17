@@ -299,7 +299,7 @@ static int decode_picture_header(ProresContext *ctx, const uint8_t *buf,
 /**
  * Read an unsigned rice/exp golomb codeword.
  */
-static GOTV_INLINE int decode_vlc_codeword(GetBitContext *gb, unsigned codebook)
+static NLC_INLINE int decode_vlc_codeword(GetBitContext *gb, unsigned codebook)
 {
     unsigned int rice_order, exp_order, switch_bits;
     unsigned int buf, code;
@@ -343,7 +343,7 @@ static GOTV_INLINE int decode_vlc_codeword(GetBitContext *gb, unsigned codebook)
 /**
  * Decode DC coefficients for all blocks in a slice.
  */
-static GOTV_INLINE void decode_dc_coeffs(GetBitContext *gb, int16_t *out,
+static NLC_INLINE void decode_dc_coeffs(GetBitContext *gb, int16_t *out,
                                     int nblocks)
 {
     int16_t prev_dc;
@@ -372,7 +372,7 @@ static GOTV_INLINE void decode_dc_coeffs(GetBitContext *gb, int16_t *out,
 /**
  * Decode AC coefficients for all blocks in a slice.
  */
-static GOTV_INLINE int decode_ac_coeffs(GetBitContext *gb, int16_t *out,
+static NLC_INLINE int decode_ac_coeffs(GetBitContext *gb, int16_t *out,
                                    int blocks_per_slice,
                                    int plane_size_factor,
                                    const uint8_t *scan)

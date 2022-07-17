@@ -29,7 +29,7 @@
 #include "cr-utils.h"
 #include "cr-parsing-location.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -168,7 +168,7 @@ cr_input_get_nb_bytes_left (CRInput *a_this) ;
 enum CRStatus
 cr_input_end_of_input (CRInput *a_this, gboolean *a_end_of_input) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_INPUT_SRC_H__*/
 

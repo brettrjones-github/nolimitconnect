@@ -66,42 +66,42 @@ bool string_match(const char* target, const char* pattern);
 // APIs that require Utf16.
 ///////////////////////////////////////////////////////////////////////////////
 
-GOTV_INLINE char tolowercase(char c) {
+NLC_INLINE char tolowercase(char c) {
   return static_cast<char>(tolower(c));
 }
 
 #if defined(TARGET_OS_WINDOWS)
 
-GOTV_INLINE size_t strlen(const wchar_t* s) {
+NLC_INLINE size_t strlen(const wchar_t* s) {
   return wcslen(s);
 }
-GOTV_INLINE int strcmp(const wchar_t* s1, const wchar_t* s2) {
+NLC_INLINE int strcmp(const wchar_t* s1, const wchar_t* s2) {
   return wcscmp(s1, s2);
 }
-GOTV_INLINE int stricmp(const wchar_t* s1, const wchar_t* s2) {
+NLC_INLINE int stricmp(const wchar_t* s1, const wchar_t* s2) {
   return _wcsicmp(s1, s2);
 }
-GOTV_INLINE int strncmp(const wchar_t* s1, const wchar_t* s2, size_t n) {
+NLC_INLINE int strncmp(const wchar_t* s1, const wchar_t* s2, size_t n) {
   return wcsncmp(s1, s2, n);
 }
-GOTV_INLINE int strnicmp(const wchar_t* s1, const wchar_t* s2, size_t n) {
+NLC_INLINE int strnicmp(const wchar_t* s1, const wchar_t* s2, size_t n) {
   return _wcsnicmp(s1, s2, n);
 }
-GOTV_INLINE const wchar_t* strchr(const wchar_t* s, wchar_t c) {
+NLC_INLINE const wchar_t* strchr(const wchar_t* s, wchar_t c) {
   return wcschr(s, c);
 }
-GOTV_INLINE const wchar_t* strstr(const wchar_t* haystack, const wchar_t* needle) {
+NLC_INLINE const wchar_t* strstr(const wchar_t* haystack, const wchar_t* needle) {
   return wcsstr(haystack, needle);
 }
 #ifndef vsnprintf
-GOTV_INLINE int vsnprintf(wchar_t* buf, size_t n, const wchar_t* fmt, va_list args) {
+NLC_INLINE int vsnprintf(wchar_t* buf, size_t n, const wchar_t* fmt, va_list args) {
   return _vsnwprintf(buf, n, fmt, args);
 }
 #endif // !vsnprintf
-GOTV_INLINE unsigned long strtoul(const wchar_t* snum, wchar_t** end, int base) {
+NLC_INLINE unsigned long strtoul(const wchar_t* snum, wchar_t** end, int base) {
   return wcstoul(snum, end, base);
 }
-GOTV_INLINE wchar_t tolowercase(wchar_t c) {
+NLC_INLINE wchar_t tolowercase(wchar_t c) {
   return static_cast<wchar_t>(towlower(c));
 }
 
@@ -109,11 +109,11 @@ GOTV_INLINE wchar_t tolowercase(wchar_t c) {
 
 #if defined(TARGET_POSIX)
 #if !defined(_stricmp)
-GOTV_INLINE int _stricmp(const char* s1, const char* s2) {
+NLC_INLINE int _stricmp(const char* s1, const char* s2) {
   return strcasecmp(s1, s2);
 }
 #endif // !defined(_stricmp)
-GOTV_INLINE int _strnicmp(const char* s1, const char* s2, size_t n) {
+NLC_INLINE int _strnicmp(const char* s1, const char* s2, size_t n) {
   return strncasecmp(s1, s2, n);
 }
 
@@ -132,7 +132,7 @@ struct Traits {
   // STL string type
   //typedef XXX string;
   // Null-terminated string
-  //GOTV_INLINE static const CTYPE* empty_str();
+  //NLC_INLINE static const CTYPE* empty_str();
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -140,7 +140,7 @@ struct Traits {
 ///////////////////////////////////////////////////////////////////////////////
 
 template<class CTYPE>
-GOTV_INLINE const CTYPE* nonnull(const CTYPE* str, const CTYPE* def_str = NULL) {
+NLC_INLINE const CTYPE* nonnull(const CTYPE* str, const CTYPE* def_str = NULL) {
   return str ? str : (def_str ? def_str : Traits<CTYPE>::empty_str());
 }
 
@@ -233,19 +233,19 @@ size_t sprintfn(CTYPE* buffer, size_t buflen, const CTYPE* format, ...) {
 // non-wide character strings.
 ///////////////////////////////////////////////////////////////////////////////
 
-GOTV_INLINE int asccmp(const char* s1, const char* s2) {
+NLC_INLINE int asccmp(const char* s1, const char* s2) {
   return strcmp(s1, s2);
 }
-GOTV_INLINE int ascicmp(const char* s1, const char* s2) {
+NLC_INLINE int ascicmp(const char* s1, const char* s2) {
   return _stricmp(s1, s2);
 }
-GOTV_INLINE int ascncmp(const char* s1, const char* s2, size_t n) {
+NLC_INLINE int ascncmp(const char* s1, const char* s2, size_t n) {
   return strncmp(s1, s2, n);
 }
-GOTV_INLINE int ascnicmp(const char* s1, const char* s2, size_t n) {
+NLC_INLINE int ascnicmp(const char* s1, const char* s2, size_t n) {
   return _strnicmp(s1, s2, n);
 }
-GOTV_INLINE size_t asccpyn(char* buffer, size_t buflen,
+NLC_INLINE size_t asccpyn(char* buffer, size_t buflen,
                       const char* source, size_t srclen = SIZE_UNKNOWN) {
   return strcpyn(buffer, buflen, source, srclen);
 }
@@ -253,20 +253,20 @@ GOTV_INLINE size_t asccpyn(char* buffer, size_t buflen,
 #if defined(TARGET_OS_WINDOWS)
 
 typedef wchar_t(*CharacterTransformation)(wchar_t);
-GOTV_INLINE wchar_t identity(wchar_t c) { return c; }
+NLC_INLINE wchar_t identity(wchar_t c) { return c; }
 int ascii_string_compare(const wchar_t* s1, const char* s2, size_t n,
                          CharacterTransformation transformation);
 
-GOTV_INLINE int asccmp(const wchar_t* s1, const char* s2) {
+NLC_INLINE int asccmp(const wchar_t* s1, const char* s2) {
   return ascii_string_compare(s1, s2, static_cast<size_t>(-1), identity);
 }
-GOTV_INLINE int ascicmp(const wchar_t* s1, const char* s2) {
+NLC_INLINE int ascicmp(const wchar_t* s1, const char* s2) {
   return ascii_string_compare(s1, s2, static_cast<size_t>(-1), tolowercase);
 }
-GOTV_INLINE int ascncmp(const wchar_t* s1, const char* s2, size_t n) {
+NLC_INLINE int ascncmp(const wchar_t* s1, const char* s2, size_t n) {
   return ascii_string_compare(s1, s2, n, identity);
 }
-GOTV_INLINE int ascnicmp(const wchar_t* s1, const char* s2, size_t n) {
+NLC_INLINE int ascnicmp(const wchar_t* s1, const char* s2, size_t n) {
   return ascii_string_compare(s1, s2, n, tolowercase);
 }
 size_t asccpyn(wchar_t* buffer, size_t buflen,
@@ -281,7 +281,7 @@ size_t asccpyn(wchar_t* buffer, size_t buflen,
 template<>
 struct Traits<char> {
   typedef std::string string;
-  GOTV_INLINE static const char* empty_str() { return ""; }
+  NLC_INLINE static const char* empty_str() { return ""; }
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -293,7 +293,7 @@ struct Traits<char> {
 template<>
 struct Traits<wchar_t> {
   typedef std::wstring string;
-  GOTV_INLINE static const wchar_t* empty_str() { return L""; }
+  NLC_INLINE static const wchar_t* empty_str() { return L""; }
 };
 
 #endif  // TARGET_OS_WINDOWS 

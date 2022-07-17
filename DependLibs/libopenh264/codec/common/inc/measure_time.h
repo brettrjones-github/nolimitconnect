@@ -60,7 +60,7 @@ extern "C" {
  * \return  time elapsed since run (unit: microsecond)
  */
 
-static GOTV_INLINE int64_t WelsTime (void) {
+static NLC_INLINE int64_t WelsTime (void) {
 #ifndef _WIN32
   struct timeval tv_date;
 

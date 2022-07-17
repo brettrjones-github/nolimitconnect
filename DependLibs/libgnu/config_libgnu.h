@@ -948,7 +948,7 @@ don't. */
 /* Define to 1 if you have the <libiconv/iconv.h> header file. */
 #define HAVE_ICONV_H 1
 
-/* Define to 1 if the compiler supports one of the keywords 'GOTV_INLINE',
+/* Define to 1 if the compiler supports one of the keywords 'NLC_INLINE',
 '__inline__', '__inline' and effectively inlines functions marked as such.
 */
 #define HAVE_INLINE 1
@@ -1674,21 +1674,21 @@ used. */
 
 /* Please see the Gnulib manual for how to use these macros.
 
-Suppress extern GOTV_INLINE with HP-UX cc, as it appears to be broken; see
+Suppress extern NLC_INLINE with HP-UX cc, as it appears to be broken; see
 <http://lists.gnu.org/archive/html/bug-texinfo/2013-02/msg00030.html>.
 
-Suppress extern GOTV_INLINE with Sun C in standards-conformance mode, as it
-mishandles GOTV_INLINE functions that call each other.  E.g., for 'GOTV_INLINE void f
-(void) { } GOTV_INLINE void g (void) { f (); }', c99 incorrectly complains
-'reference to static identifier "f" in extern GOTV_INLINE function'.
+Suppress extern NLC_INLINE with Sun C in standards-conformance mode, as it
+mishandles NLC_INLINE functions that call each other.  E.g., for 'NLC_INLINE void f
+(void) { } NLC_INLINE void g (void) { f (); }', c99 incorrectly complains
+'reference to static identifier "f" in extern NLC_INLINE function'.
 This bug was observed with Sun C 5.12 SunOS_i386 2011/11/16.
 
-Suppress extern GOTV_INLINE (with or without __attribute__ ((__gnu_inline__)))
-on configurations that mistakenly use 'static GOTV_INLINE' to implement
+Suppress extern NLC_INLINE (with or without __attribute__ ((__gnu_inline__)))
+on configurations that mistakenly use 'static NLC_INLINE' to implement
 functions or macros in standard C headers like <ctype.h>.  For example,
-if isdigit is mistakenly implemented via a static GOTV_INLINE function,
-a program containing an extern GOTV_INLINE function that calls isdigit
-may not work since the C standard prohibits extern GOTV_INLINE functions
+if isdigit is mistakenly implemented via a static NLC_INLINE function,
+a program containing an extern NLC_INLINE function that calls isdigit
+may not work since the C standard prohibits extern NLC_INLINE functions
 from calling static functions.  This bug is known to occur on:
 
 OS X 10.8 and earlier; see:
@@ -1715,14 +1715,14 @@ Assume DragonFly and FreeBSD will be similar.  */
 # define _GL_EXTERN_INLINE_STDHEADER_BUG
 #endif
 
-# define _GL_INLINE GOTV_INLINE
+# define _GL_INLINE NLC_INLINE
 
 
 
 /* In GCC 4.6 (inclusive) to 5.1 (exclusive),
 suppress bogus "no previous prototype for 'FOO'"
 and "no previous declaration for 'FOO'" diagnostics,
-when FOO is an GOTV_INLINE function in the header; see
+when FOO is an NLC_INLINE function in the header; see
 <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54113> and
 <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63877>.  */
 #if __GNUC__ == 4 && 6 <= __GNUC_MINOR__
@@ -1749,13 +1749,13 @@ when FOO is an GOTV_INLINE function in the header; see
 
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
-calls it, or to nothing if 'GOTV_INLINE' is not supported under any name.  */
+calls it, or to nothing if 'NLC_INLINE' is not supported under any name.  */
 #ifndef __cplusplus
-/* #undef GOTV_INLINE */
+/* #undef NLC_INLINE */
 #endif
 
 /* Work around a bug in Apple GCC 4.0.1 build 5465: In C99 mode, it supports
-the ISO C 99 semantics of 'extern GOTV_INLINE' (unlike the GNU C semantics of
+the ISO C 99 semantics of 'extern NLC_INLINE' (unlike the GNU C semantics of
 earlier versions), but does not display it by setting __GNUC_STDC_INLINE__.
 __APPLE__ && __MACH__ test for Mac OS X.
 __APPLE_CC__ tests for the Apple compiler and its version.
@@ -1781,15 +1781,15 @@ doesn't define it. */
 /* #undef ptrdiff_t */
 
 /* Define to the equivalent of the C99 'restrict' keyword, or to
-nothing if this is not supported.  Do not define if GOTV_RESTRICT is
+nothing if this is not supported.  Do not define if NLC_RESTRICT is
 supported directly.  */
-//#define GOTV_RESTRICT __restrict // defined in AppDependLibrariesConfig.h
+//#define NLC_RESTRICT __restrict // defined in AppDependLibrariesConfig.h
 
 /* Work around a bug in Sun C++: it does not support _Restrict or
 __restrict__, even though the corresponding Sun C compiler ends up with
-"#define GOTV_RESTRICT _Restrict" or "#define GOTV_RESTRICT __restrict__" in the
+"#define NLC_RESTRICT _Restrict" or "#define NLC_RESTRICT __restrict__" in the
 previous line.  Perhaps some future version of Sun C++ will work with
-GOTV_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
+NLC_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
 #if defined __SUNPRO_CC && !defined __RESTRICT
 # define _Restrict
 # define __restrict__
@@ -1811,11 +1811,11 @@ GOTV_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
 /* Define as a marker that can be attached to declarations that might not
 be used.  This helps to reduce warnings, such as from
 GCC -Wunused-parameter.  */
-#define _GL_UNUSED				GOTV_UNUSED							
+#define _GL_UNUSED				NLC_UNUSED							
 
 /* The name _UNUSED_PARAMETER_ is an earlier spelling, although the name
 is a misnomer outside of parameter lists.  */
-#define  _UNUSED_PARAMETER_		GOTV_UNUSED				
+#define  _UNUSED_PARAMETER_		NLC_UNUSED				
 
 /* gcc supports the "unused" attribute on possibly unused labels, and
 g++ has since version 4.5.  Note to support C++ as well as C,
@@ -1827,8 +1827,8 @@ _GL_UNUSED_LABEL should be used with a trailing ;  */
 # define _GL_UNUSED_LABEL
 #endif
 
-# define _GL_ATTRIBUTE_PURE				GOTV_ATTRIBUTE_PURE
-# define _GL_ATTRIBUTE_CONST			GOTV_ATTRIBUTE_CONST
+# define _GL_ATTRIBUTE_PURE				NLC_ATTRIBUTE_PURE
+# define _GL_ATTRIBUTE_CONST			NLC_ATTRIBUTE_CONST
 
 
 #define __libc_lock_t                   gl_lock_t
@@ -1873,7 +1873,7 @@ _GL_UNUSED_LABEL should be used with a trailing ;  */
 
 
 /* On Windows, variables that may be in a DLL must be marked specially.  */
-# define GOTV_DLL_VARIABLE
+# define NLC_DLL_VARIABLE
 
 
 /* Default value for alignment of strings in .mo file.  */
@@ -2429,7 +2429,7 @@ don't. */
 /* Define to 1 if you have the `inet_ntop' function. */
 #define HAVE_INET_NTOP 1
 
-/* Define to 1 if the compiler supports one of the keywords 'GOTV_INLINE',
+/* Define to 1 if the compiler supports one of the keywords 'NLC_INLINE',
 '__inline__', '__inline' and effectively inlines functions marked as such.
 */
 #define HAVE_INLINE 1
@@ -4016,21 +4016,21 @@ used. */
 
 /* Please see the Gnulib manual for how to use these macros.
 
-Suppress extern GOTV_INLINE with HP-UX cc, as it appears to be broken; see
+Suppress extern NLC_INLINE with HP-UX cc, as it appears to be broken; see
 <http://lists.gnu.org/archive/html/bug-texinfo/2013-02/msg00030.html>.
 
-Suppress extern GOTV_INLINE with Sun C in standards-conformance mode, as it
-mishandles GOTV_INLINE functions that call each other.  E.g., for 'GOTV_INLINE void f
-(void) { } GOTV_INLINE void g (void) { f (); }', c99 incorrectly complains
-'reference to static identifier "f" in extern GOTV_INLINE function'.
+Suppress extern NLC_INLINE with Sun C in standards-conformance mode, as it
+mishandles NLC_INLINE functions that call each other.  E.g., for 'NLC_INLINE void f
+(void) { } NLC_INLINE void g (void) { f (); }', c99 incorrectly complains
+'reference to static identifier "f" in extern NLC_INLINE function'.
 This bug was observed with Sun C 5.12 SunOS_i386 2011/11/16.
 
-Suppress extern GOTV_INLINE (with or without __attribute__ ((__gnu_inline__)))
-on configurations that mistakenly use 'static GOTV_INLINE' to implement
+Suppress extern NLC_INLINE (with or without __attribute__ ((__gnu_inline__)))
+on configurations that mistakenly use 'static NLC_INLINE' to implement
 functions or macros in standard C headers like <ctype.h>.  For example,
-if isdigit is mistakenly implemented via a static GOTV_INLINE function,
-a program containing an extern GOTV_INLINE function that calls isdigit
-may not work since the C standard prohibits extern GOTV_INLINE functions
+if isdigit is mistakenly implemented via a static NLC_INLINE function,
+a program containing an extern NLC_INLINE function that calls isdigit
+may not work since the C standard prohibits extern NLC_INLINE functions
 from calling static functions.  This bug is known to occur on:
 
 OS X 10.8 and earlier; see:
@@ -4060,7 +4060,7 @@ Assume DragonFly and FreeBSD will be similar.  */
 /* In GCC 4.6 (inclusive) to 5.1 (exclusive),
 suppress bogus "no previous prototype for 'FOO'"
 and "no previous declaration for 'FOO'" diagnostics,
-when FOO is an GOTV_INLINE function in the header; see
+when FOO is an NLC_INLINE function in the header; see
 <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54113> and
 <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63877>.  */
 #if __GNUC__ == 4 && 6 <= __GNUC_MINOR__
@@ -4113,16 +4113,16 @@ GCC -Wunused-parameter.  */
 
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
-calls it, or to nothing if 'GOTV_INLINE' is not supported under any name.  */
+calls it, or to nothing if 'NLC_INLINE' is not supported under any name.  */
 #ifndef __cplusplus
-/* #undef GOTV_INLINE */
+/* #undef NLC_INLINE */
 #endif
 
 /* Define to long or long long if <stdint.h> and <inttypes.h> don't define. */
 /* #undef intmax_t */
 
 /* Work around a bug in Apple GCC 4.0.1 build 5465: In C99 mode, it supports
-the ISO C 99 semantics of 'extern GOTV_INLINE' (unlike the GNU C semantics of
+the ISO C 99 semantics of 'extern NLC_INLINE' (unlike the GNU C semantics of
 earlier versions), but does not display it by setting __GNUC_STDC_INLINE__.
 __APPLE__ && __MACH__ test for Mac OS X.
 __APPLE_CC__ tests for the Apple compiler and its version.
@@ -4192,16 +4192,16 @@ doesn't define it. */
 /* Define to rpl_regfree if the replacement should be used. */
 #define regfree rpl_regfree
 
-/* Define to the equivalent of the C99 'GOTV_RESTRICT' keyword, or to
-nothing if this is not supported.  Do not define if GOTV_RESTRICT is
+/* Define to the equivalent of the C99 'NLC_RESTRICT' keyword, or to
+nothing if this is not supported.  Do not define if NLC_RESTRICT is
 supported directly.  */
-//#define GOTV_RESTRICT __restrict
+//#define NLC_RESTRICT __restrict
 
 /* Work around a bug in Sun C++: it does not support _Restrict or
 __restrict__, even though the corresponding Sun C compiler ends up with
-"#define GOTV_RESTRICT _Restrict" or "#define GOTV_RESTRICT __restrict__" in the
+"#define NLC_RESTRICT _Restrict" or "#define NLC_RESTRICT __restrict__" in the
 previous line.  Perhaps some future version of Sun C++ will work with
-GOTV_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
+NLC_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
 #if defined __SUNPRO_CC && !defined __RESTRICT
 # define _Restrict
 # define __restrict__
@@ -4226,7 +4226,7 @@ accessed atomically even in the presence of asynchronous signals. */
 
 /* The name _UNUSED_PARAMETER_ is an earlier spelling, although the name
 is a misnomer outside of parameter lists.  */
-#define _UNUSED_PARAMETER_			GOTV_UNUSED
+#define _UNUSED_PARAMETER_			NLC_UNUSED
 
 /* gcc supports the "unused" attribute on possibly unused labels, and
 g++ has since version 4.5.  Note to support C++ as well as C,
@@ -4239,8 +4239,8 @@ _GL_UNUSED_LABEL should be used with a trailing ;  */
 #endif
 
 
-# define _GL_ATTRIBUTE_PURE   GOTV_ATTRIBUTE_PURE
-# define _GL_ATTRIBUTE_CONST   GOTV_ATTRIBUTE_CONST
+# define _GL_ATTRIBUTE_PURE   NLC_ATTRIBUTE_PURE
+# define _GL_ATTRIBUTE_CONST   NLC_ATTRIBUTE_CONST
 
 
 /* Define as a macro for copying va_list variables. */
@@ -6170,7 +6170,7 @@ whether compiling with -Ae or -D_HPUX_SOURCE=1.  */
 /* #undef intmax_t */
 
 /* Work around a bug in Apple GCC 4.0.1 build 5465: In C99 mode, it supports
-the ISO C 99 semantics of 'extern GOTV_INLINE' (unlike the GNU C semantics of
+the ISO C 99 semantics of 'extern NLC_INLINE' (unlike the GNU C semantics of
 earlier versions), but does not display it by setting __GNUC_STDC_INLINE__.
 __APPLE__ && __MACH__ test for Mac OS X.
 __APPLE_CC__ tests for the Apple compiler and its version.
@@ -6198,15 +6198,15 @@ doesn't define it. */
 /* static lib rename */
 //#define read_file _gnutls_read_file
 
-/* Define to the equivalent of the C99 'GOTV_RESTRICT' keyword, or to
-nothing if this is not supported.  Do not define if GOTV_RESTRICT is
+/* Define to the equivalent of the C99 'NLC_RESTRICT' keyword, or to
+nothing if this is not supported.  Do not define if NLC_RESTRICT is
 supported directly.  */
-//#define GOTV_RESTRICT __restrict
+//#define NLC_RESTRICT __restrict
 /* Work around a bug in Sun C++: it does not support _Restrict or
 __restrict__, even though the corresponding Sun C compiler ends up with
-"#define GOTV_RESTRICT _Restrict" or "#define GOTV_RESTRICT __restrict__" in the
+"#define NLC_RESTRICT _Restrict" or "#define NLC_RESTRICT __restrict__" in the
 previous line.  Perhaps some future version of Sun C++ will work with
-GOTV_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
+NLC_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
 //#if defined __SUNPRO_CC && !defined __RESTRICT
 //# define _Restrict
 //# define __restrict__
@@ -6227,7 +6227,7 @@ GOTV_RESTRICT; if so, hopefully it defines __RESTRICT like Sun C does.  */
 /* Define as a marker that can be attached to declarations that might not
 be used.  This helps to reduce warnings, such as from
 GCC -Wunused-parameter.  */
-#define _UNUSED_PARAMETER_  GOTV_UNUSED
+#define _UNUSED_PARAMETER_  NLC_UNUSED
 
 /* gcc supports the "unused" attribute on possibly unused labels, and
 g++ has since version 4.5.  Note to support C++ as well as C,
@@ -6239,8 +6239,8 @@ _GL_UNUSED_LABEL should be used with a trailing ;  */
 # define _GL_UNUSED_LABEL
 #endif
 
-#define _GL_ATTRIBUTE_PURE  GOTV_ATTRIBUTE_PURE
-#define _GL_ATTRIBUTE_CONST  GOTV_ATTRIBUTE_CONST
+#define _GL_ATTRIBUTE_PURE  NLC_ATTRIBUTE_PURE
+#define _GL_ATTRIBUTE_CONST  NLC_ATTRIBUTE_CONST
 
 
 /* Define as `fork' if `vfork' does not work. */
@@ -6345,22 +6345,22 @@ with special properties like no file modes */
 # define HAVE_GCC_ATTRIBUTE_ALIGNED 1
 #endif // _MSC_VER
 
-/* Defined if GOTV_INLINE assembler supports AVX instructions */
+/* Defined if NLC_INLINE assembler supports AVX instructions */
 /* #undef HAVE_GCC_INLINE_ASM_AVX */
 
-/* Defined if GOTV_INLINE assembler supports AVX2 instructions */
+/* Defined if NLC_INLINE assembler supports AVX2 instructions */
 /* #undef HAVE_GCC_INLINE_ASM_AVX2 */
 
-/* Defined if GOTV_INLINE assembler supports BMI2 instructions */
+/* Defined if NLC_INLINE assembler supports BMI2 instructions */
 /* #undef HAVE_GCC_INLINE_ASM_BMI2 */
 
-/* Defined if GOTV_INLINE assembler supports NEON instructions */
+/* Defined if NLC_INLINE assembler supports NEON instructions */
 #define HAVE_GCC_INLINE_ASM_NEON 1
 
-/* Defined if GOTV_INLINE assembler supports PCLMUL instructions */
+/* Defined if NLC_INLINE assembler supports PCLMUL instructions */
 /* #undef HAVE_GCC_INLINE_ASM_PCLMUL */
 
-/* Defined if GOTV_INLINE assembler supports SSSE3 instructions */
+/* Defined if NLC_INLINE assembler supports SSSE3 instructions */
 /* #undef HAVE_GCC_INLINE_ASM_SSSE3 */
 
 /* Define to 1 if you have the `gethrtime' function. */
@@ -6642,9 +6642,9 @@ supported */
 /* #undef const */
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
-calls it, or to nothing if 'GOTV_INLINE' is not supported under any name.  */
+calls it, or to nothing if 'NLC_INLINE' is not supported under any name.  */
 #ifndef __cplusplus
-/* #undef GOTV_INLINE */
+/* #undef NLC_INLINE */
 #endif
 
 /* Define to `int' if <sys/types.h> does not define. */

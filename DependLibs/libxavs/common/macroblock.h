@@ -303,7 +303,7 @@ void xavs_mb_mc (xavs_t * h);
 void xavs_mb_mc_8x8 (xavs_t * h, int i8);
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_macroblock_cache_ref (xavs_t * h, int x, int y, int width, int height, int i_list, int ref)
 {
   int dy, dx;
@@ -316,7 +316,7 @@ xavs_macroblock_cache_ref (xavs_t * h, int x, int y, int width, int height, int 
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_macroblock_cache_mv (xavs_t * h, int x, int y, int width, int height, int i_list, int mvx, int mvy)
 {
   int dy, dx;
@@ -329,7 +329,7 @@ xavs_macroblock_cache_mv (xavs_t * h, int x, int y, int width, int height, int i
     }
   }
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_macroblock_cache_mvd (xavs_t * h, int x, int y, int width, int height, int i_list, int mdx, int mdy)
 {
   int dy, dx;
@@ -342,7 +342,7 @@ xavs_macroblock_cache_mvd (xavs_t * h, int x, int y, int width, int height, int 
     }
   }
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_macroblock_cache_skip (xavs_t * h, int x, int y, int width, int height, int b_skip)
 {
   int dy, dx;
@@ -354,7 +354,7 @@ xavs_macroblock_cache_skip (xavs_t * h, int x, int y, int width, int height, int
     }
   }
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_macroblock_cache_intra8x8_pred (xavs_t * h, int x, int y, int i_mode)
 {
   int *cache = &h->mb.cache.intra4x4_pred_mode[XAVS_SCAN8_0 + x + 8 * y];

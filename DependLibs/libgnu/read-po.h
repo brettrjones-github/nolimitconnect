@@ -21,6 +21,6 @@
 #include "read-catalog-abstract.h"
 
 /* Describes a .po / .pot file parser.  */
-extern GOTV_DLL_VARIABLE const struct catalog_input_format input_format_po;
+extern NLC_DLL_VARIABLE const struct catalog_input_format input_format_po;
 
 #endif /* _READ_PO_H */

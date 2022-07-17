@@ -42,7 +42,7 @@
 #undef Min
 #undef Max
 
-static GOTV_INLINE int
+static NLC_INLINE int
 min_int(int a, int b)
 {
     if (a < b) {
@@ -51,7 +51,7 @@ min_int(int a, int b)
     return b;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 max_int(int a, int b)
 {
     if (a > b) {

@@ -1150,7 +1150,7 @@ xavs_mb_analyse_inter_b16x16 (xavs_t * h, xavs_mb_analysis_t * a)
 }
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_cache_mv_p8x8 (xavs_t * h, xavs_mb_analysis_t * a, int i)
 {
   const int x = 2 * (i % 2);
@@ -1208,7 +1208,7 @@ xavs_mb_cache_mv_p8x8 (xavs_t * h, xavs_mb_analysis_t * a, int i)
     }
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_cache_mv_b8x8 (xavs_t * h, xavs_mb_analysis_t * a, int i, int b_mvd)
 {
   int x = (i % 2) * 2;
@@ -1228,12 +1228,12 @@ xavs_mb_cache_mv_b8x8 (xavs_t * h, xavs_mb_analysis_t * a, int i, int b_mvd)
     CACHE_MV_BI (x, y, 2, 2, a->l0.me8x8[i], a->l1.me8x8[i], h->mb.i_sub_partition[i]);
   }
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_cache_mv_b16x8 (xavs_t * h, xavs_mb_analysis_t * a, int i, int b_mvd)
 {
   CACHE_MV_BI (0, 2 * i, 4, 2, a->l0.me16x8[i], a->l1.me16x8[i], a->i_mb_partition16x8[i]);
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_cache_mv_b8x16 (xavs_t * h, xavs_mb_analysis_t * a, int i, int b_mvd)
 {
   CACHE_MV_BI (2 * i, 0, 2, 4, a->l0.me8x16[i], a->l1.me8x16[i], a->i_mb_partition8x16[i]);
@@ -1650,7 +1650,7 @@ refine_bidir (xavs_t * h, xavs_mb_analysis_t * a)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_analyse_transform (xavs_t * h)
 {
   h->mb.cache.b_transform_8x8_allowed = h->param.analyse.b_transform_8x8 && !IS_INTRA (h->mb.i_type) && xavs_mb_transform_8x8_allowed (h);
@@ -1668,7 +1668,7 @@ xavs_mb_analyse_transform (xavs_t * h)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_analyse_transform_rd (xavs_t * h, xavs_mb_analysis_t * a, int *i_cost)
 {
   h->mb.cache.b_transform_8x8_allowed = h->param.analyse.b_transform_8x8 && xavs_mb_transform_8x8_allowed (h);

@@ -1,8 +1,8 @@
 #pragma once
 #include <AppDependLibrariesConfig.h>
 
-#define VBI_BEGIN_DECLS		GOTV_BEGIN_CDECLARES
-#define VBI_END_DECLS		GOTV_END_CDECLARES
+#define VBI_BEGIN_DECLS		NLC_BEGIN_CDECLARES
+#define VBI_END_DECLS		NLC_END_CDECLARES
 #define X_DISPLAY_MISSING	1
 
 

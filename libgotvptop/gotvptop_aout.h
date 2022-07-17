@@ -240,14 +240,14 @@ static const uint32_t pi_gotvptop_chan_order_wg4[] =
  * If pi_chan_order_in or pi_chan_order_out is NULL, it will assume that gotvptop
  * internal (WG4) order is requested.
  */
-GOTV_API unsigned aout_CheckChannelReorder( const uint32_t *, const uint32_t *,
+NLC_API unsigned aout_CheckChannelReorder( const uint32_t *, const uint32_t *,
                                            uint32_t mask, uint8_t *table );
-GOTV_API void aout_ChannelReorder(void *, size_t, uint8_t, const uint8_t *, gotvptop_fourcc_t);
+NLC_API void aout_ChannelReorder(void *, size_t, uint8_t, const uint8_t *, gotvptop_fourcc_t);
 
-GOTV_API void aout_Interleave(void *dst, const void *const *planes,
+NLC_API void aout_Interleave(void *dst, const void *const *planes,
                              unsigned samples, unsigned channels,
                              gotvptop_fourcc_t fourcc);
-GOTV_API void aout_Deinterleave(void *dst, const void *src, unsigned samples,
+NLC_API void aout_Deinterleave(void *dst, const void *src, unsigned samples,
                              unsigned channels, gotvptop_fourcc_t fourcc);
 
 /**
@@ -266,7 +266,7 @@ GOTV_API void aout_Deinterleave(void *dst, const void *src, unsigned samples,
  * by GOTV. In this case the channel type pi_order_src[] must be set to 0.
  * XXX It must also be used if multiple channels have the same type.
  */
-GOTV_API bool aout_CheckChannelExtraction( int *pi_selection, uint32_t *pi_layout, int *pi_channels, const uint32_t pi_order_dst[AOUT_CHAN_MAX], const uint32_t *pi_order_src, int i_channels );
+NLC_API bool aout_CheckChannelExtraction( int *pi_selection, uint32_t *pi_layout, int *pi_channels, const uint32_t pi_order_dst[AOUT_CHAN_MAX], const uint32_t *pi_order_src, int i_channels );
 
 /**
  * Do the actual channels extraction using the parameters created by
@@ -275,7 +275,7 @@ GOTV_API bool aout_CheckChannelExtraction( int *pi_selection, uint32_t *pi_layou
  * XXX this function does not work in place (p_dst and p_src must not overlap).
  * XXX Only 8, 16, 32, 64 bits per sample are supported.
  */
-GOTV_API void aout_ChannelExtract( void *p_dst, int i_dst_channels, const void *p_src, int i_src_channels, int i_sample_count, const int *pi_selection, int i_bits_per_sample );
+NLC_API void aout_ChannelExtract( void *p_dst, int i_dst_channels, const void *p_src, int i_src_channels, int i_sample_count, const int *pi_selection, int i_bits_per_sample );
 
 /* */
 static inline unsigned aout_FormatNbChannels(const audio_sample_format_t *fmt)
@@ -283,24 +283,24 @@ static inline unsigned aout_FormatNbChannels(const audio_sample_format_t *fmt)
     return popcount(fmt->i_physical_channels);
 }
 
-GOTV_API unsigned int aout_BitsPerSample( gotvptop_fourcc_t i_format ) GOTV_USED;
-GOTV_API void aout_FormatPrepare( audio_sample_format_t * p_format );
-GOTV_API void gotvptop_aout_FormatPrint(gotvptop_object_t *, const char *,
+NLC_API unsigned int aout_BitsPerSample( gotvptop_fourcc_t i_format ) GOTV_USED;
+NLC_API void aout_FormatPrepare( audio_sample_format_t * p_format );
+NLC_API void gotvptop_aout_FormatPrint(gotvptop_object_t *, const char *,
                               const audio_sample_format_t *);
 #define aout_FormatPrint(o, t, f) gotvptop_aout_FormatPrint(GOTV_OBJECT(o), t, f)
-GOTV_API const char * aout_FormatPrintChannels( const audio_sample_format_t * ) GOTV_USED;
+NLC_API const char * aout_FormatPrintChannels( const audio_sample_format_t * ) GOTV_USED;
 
 #define AOUT_VOLUME_DEFAULT             256
 #define AOUT_VOLUME_MAX                 512
 
-GOTV_API float aout_VolumeGet (audio_output_t *);
-GOTV_API int aout_VolumeSet (audio_output_t *, float);
-GOTV_API int aout_VolumeUpdate (audio_output_t *, int, float *);
-GOTV_API int aout_MuteGet (audio_output_t *);
-GOTV_API int aout_MuteSet (audio_output_t *, bool);
-GOTV_API char *aout_DeviceGet (audio_output_t *);
-GOTV_API int aout_DeviceSet (audio_output_t *, const char *);
-GOTV_API int aout_DevicesList (audio_output_t *, char ***, char ***);
+NLC_API float aout_VolumeGet (audio_output_t *);
+NLC_API int aout_VolumeSet (audio_output_t *, float);
+NLC_API int aout_VolumeUpdate (audio_output_t *, int, float *);
+NLC_API int aout_MuteGet (audio_output_t *);
+NLC_API int aout_MuteSet (audio_output_t *, bool);
+NLC_API char *aout_DeviceGet (audio_output_t *);
+NLC_API int aout_DeviceSet (audio_output_t *, const char *);
+NLC_API int aout_DevicesList (audio_output_t *, char ***, char ***);
 
 /**
  * Report change of configured audio volume to the core and UI.
@@ -385,23 +385,23 @@ typedef struct
 typedef struct aout_filters aout_filters_t;
 typedef struct aout_request_vout aout_request_vout_t;
 
-GOTV_API aout_filters_t * gotvptop_aout_FiltersNew(gotvptop_object_t *,
+NLC_API aout_filters_t * gotvptop_aout_FiltersNew(gotvptop_object_t *,
                                         const audio_sample_format_t *,
                                         const audio_sample_format_t *,
                                         const aout_request_vout_t *,
                                         const aout_filters_cfg_t *cfg) GOTV_USED;
 #define aout_FiltersNew(o,inf,outf,rv,remap) \
         gotvptop_aout_FiltersNew(GOTV_OBJECT(o),inf,outf,rv,remap)
-GOTV_API void gotvptop_aout_FiltersDelete(gotvptop_object_t *, aout_filters_t *);
+NLC_API void gotvptop_aout_FiltersDelete(gotvptop_object_t *, aout_filters_t *);
 #define aout_FiltersDelete(o,f) \
         gotvptop_aout_FiltersDelete(GOTV_OBJECT(o),f)
-GOTV_API bool aout_FiltersAdjustResampling(aout_filters_t *, int);
-GOTV_API block_t *aout_FiltersPlay(aout_filters_t *, block_t *, int rate);
-GOTV_API block_t *aout_FiltersDrain(aout_filters_t *);
-GOTV_API void     aout_FiltersFlush(aout_filters_t *);
-GOTV_API void     aout_FiltersChangeViewpoint(aout_filters_t *, const gotvptop_viewpoint_t *vp);
+NLC_API bool aout_FiltersAdjustResampling(aout_filters_t *, int);
+NLC_API block_t *aout_FiltersPlay(aout_filters_t *, block_t *, int rate);
+NLC_API block_t *aout_FiltersDrain(aout_filters_t *);
+NLC_API void     aout_FiltersFlush(aout_filters_t *);
+NLC_API void     aout_FiltersChangeViewpoint(aout_filters_t *, const gotvptop_viewpoint_t *vp);
 
-GOTV_API vout_thread_t * aout_filter_RequestVout( filter_t *, vout_thread_t *p_vout, const video_format_t *p_fmt );
+NLC_API vout_thread_t * aout_filter_RequestVout( filter_t *, vout_thread_t *p_vout, const video_format_t *p_fmt );
 
 /** @} */
 

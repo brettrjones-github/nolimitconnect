@@ -220,7 +220,7 @@ static av_cold void init_static(void)
     ff_mlp_init_crc();
 }
 
-static GOTV_INLINE int32_t calculate_sign_huff(MLPDecodeContext *m,
+static NLC_INLINE int32_t calculate_sign_huff(MLPDecodeContext *m,
                                           unsigned int substr, unsigned int ch)
 {
     SubStream *s = &m->substream[substr];
@@ -241,7 +241,7 @@ static GOTV_INLINE int32_t calculate_sign_huff(MLPDecodeContext *m,
 /** Read a sample, consisting of either, both or neither of entropy-coded MSBs
  *  and plain LSBs. */
 
-static GOTV_INLINE int read_huff_channels(MLPDecodeContext *m, GetBitContext *gbp,
+static NLC_INLINE int read_huff_channels(MLPDecodeContext *m, GetBitContext *gbp,
                                      unsigned int substr, unsigned int pos)
 {
     SubStream *s = &m->substream[substr];

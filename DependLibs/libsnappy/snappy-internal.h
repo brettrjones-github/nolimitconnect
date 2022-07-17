@@ -83,7 +83,7 @@ char* CompressFragment(const char* input,
 // Separate implementation for x86_64, for speed.  Uses the fact that
 // x86_64 is little endian.
 #if defined(ARCH_K8)
-static GOTV_INLINE std::pair<size_t, bool> FindMatchLength(const char* s1,
+static NLC_INLINE std::pair<size_t, bool> FindMatchLength(const char* s1,
                                                       const char* s2,
                                                       const char* s2_limit) {
   assert(s2_limit >= s2);
@@ -133,7 +133,7 @@ static GOTV_INLINE std::pair<size_t, bool> FindMatchLength(const char* s1,
   return std::pair<size_t, bool>(matched, matched < 8);
 }
 #else
-static GOTV_INLINE std::pair<size_t, bool> FindMatchLength(const char* s1,
+static NLC_INLINE std::pair<size_t, bool> FindMatchLength(const char* s1,
                                                       const char* s2,
                                                       const char* s2_limit) {
   // Implementation based on the x86-64 version, above.

@@ -1,4 +1,4 @@
-/* mpi-GOTV_INLINE.c
+/* mpi-NLC_INLINE.c
  *	Copyright (C) 1999, 2002 Free Software Foundation, Inc.
  *
  * This file is part of Libgcrypt.
@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* put the GOTV_INLINE functions as real functions into the lib */
+/* put the NLC_INLINE functions as real functions into the lib */
 #define G10_MPI_INLINE_DECL
 
 #include "mpi-internal.h"

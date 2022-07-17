@@ -230,7 +230,7 @@ _MHD_bool. */
 /* disable HTTPS support */
 #define HTTPS_SUPPORT 1
 
-/* Define to 1 if your C compiler supports GOTV_INLINE functions. */
+/* Define to 1 if your C compiler supports NLC_INLINE functions. */
 // #define INLINE_FUNC 1 // seems when compiled by qt then inline does not work as expected
 
 /* Defined if libcurl supports AsynchDNS */
@@ -387,7 +387,7 @@ your system. */
 /* Define to type which will be used as boolean type. */
 #define _MHD_bool _Bool
 
-# define _MHD_inline  GOTV_INLINE
+# define _MHD_inline  NLC_INLINE
 
 
 

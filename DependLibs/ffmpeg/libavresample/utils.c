@@ -550,7 +550,7 @@ static int config_changed(AVAudioResampleContext *avr,
     return ret;
 }
 
-static GOTV_INLINE int convert_frame(AVAudioResampleContext *avr,
+static NLC_INLINE int convert_frame(AVAudioResampleContext *avr,
                                 AVFrame *out, AVFrame *in)
 {
     int ret;
@@ -587,7 +587,7 @@ static GOTV_INLINE int convert_frame(AVAudioResampleContext *avr,
     return 0;
 }
 
-static GOTV_INLINE int available_samples(AVFrame *out)
+static NLC_INLINE int available_samples(AVFrame *out)
 {
     int samples;
     int bytes_per_sample = av_get_bytes_per_sample(out->format);

@@ -598,7 +598,7 @@ static struct stream_filter_s *filter_search(cdk_stream_t s,
 	return NULL;
 }
 
-static GOTV_INLINE void set_uint8_t(struct stream_filter_s *f)
+static NLC_INLINE void set_uint8_t(struct stream_filter_s *f)
 {
 	switch (f->type) {
 	case fARMOR:

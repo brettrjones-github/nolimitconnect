@@ -46,7 +46,7 @@ typedef struct PutBitContext {
  * @param buffer the buffer where to put bits
  * @param buffer_size the size in bytes of buffer
  */
-static GOTV_INLINE void init_put_bits(PutBitContext *s, uint8_t *buffer,
+static NLC_INLINE void init_put_bits(PutBitContext *s, uint8_t *buffer,
                                  int buffer_size)
 {
     if (buffer_size < 0) {
@@ -69,7 +69,7 @@ static GOTV_INLINE void init_put_bits(PutBitContext *s, uint8_t *buffer,
  * @param buffer_size the size in bytes of buffer,
  *                    must be larger than the previous size
  */
-static GOTV_INLINE void rebase_put_bits(PutBitContext *s, uint8_t *buffer,
+static NLC_INLINE void rebase_put_bits(PutBitContext *s, uint8_t *buffer,
                                    int buffer_size)
 {
     av_assert0(8*buffer_size > s->size_in_bits);
@@ -83,7 +83,7 @@ static GOTV_INLINE void rebase_put_bits(PutBitContext *s, uint8_t *buffer,
 /**
  * @return the total number of bits written to the bitstream.
  */
-static GOTV_INLINE int put_bits_count(PutBitContext *s)
+static NLC_INLINE int put_bits_count(PutBitContext *s)
 {
     return (s->buf_ptr - s->buf) * 8 + 32 - s->bit_left;
 }
@@ -91,7 +91,7 @@ static GOTV_INLINE int put_bits_count(PutBitContext *s)
 /**
  * @return the number of bits available in the bitstream.
  */
-static GOTV_INLINE int put_bits_left(PutBitContext* s)
+static NLC_INLINE int put_bits_left(PutBitContext* s)
 {
     return (s->buf_end - s->buf_ptr) * 8 - 32 + s->bit_left;
 }
@@ -99,7 +99,7 @@ static GOTV_INLINE int put_bits_left(PutBitContext* s)
 /**
  * Pad the end of the output stream with zeros.
  */
-static GOTV_INLINE void flush_put_bits(PutBitContext *s)
+static NLC_INLINE void flush_put_bits(PutBitContext *s)
 {
 #ifndef BITSTREAM_WRITER_LE
     if (s->bit_left < 32)
@@ -162,7 +162,7 @@ void avpriv_copy_bits(PutBitContext *pb, const uint8_t *src, int length);
  * Write up to 31 bits into a bitstream.
  * Use put_bits32 to write 32 bits.
  */
-static GOTV_INLINE void put_bits(PutBitContext *s, int n, unsigned int value)
+static NLC_INLINE void put_bits(PutBitContext *s, int n, unsigned int value)
 {
     unsigned int bit_buf;
     int bit_left;
@@ -322,7 +322,7 @@ static inline void put_bits64(PutBitContext *s, int n, uint64_t value)
  * Return the pointer to the byte where the bitstream writer will put
  * the next bit.
  */
-static GOTV_INLINE uint8_t *put_bits_ptr(PutBitContext *s)
+static NLC_INLINE uint8_t *put_bits_ptr(PutBitContext *s)
 {
     return s->buf_ptr;
 }
@@ -331,7 +331,7 @@ static GOTV_INLINE uint8_t *put_bits_ptr(PutBitContext *s)
  * Skip the given number of bytes.
  * PutBitContext must be flushed & aligned to a byte boundary before calling this.
  */
-static GOTV_INLINE void skip_put_bytes(PutBitContext *s, int n)
+static NLC_INLINE void skip_put_bytes(PutBitContext *s, int n)
 {
     av_assert2((put_bits_count(s) & 7) == 0);
     av_assert2(s->bit_left == 32);
@@ -344,7 +344,7 @@ static GOTV_INLINE void skip_put_bytes(PutBitContext *s, int n)
  * Must only be used if the actual values in the bitstream do not matter.
  * If n is 0 the behavior is undefined.
  */
-static GOTV_INLINE void skip_put_bits(PutBitContext *s, int n)
+static NLC_INLINE void skip_put_bits(PutBitContext *s, int n)
 {
     s->bit_left -= n;
     s->buf_ptr  -= 4 * (s->bit_left >> 5);
@@ -356,7 +356,7 @@ static GOTV_INLINE void skip_put_bits(PutBitContext *s, int n)
  *
  * @param size the new size in bytes of the buffer where to put bits
  */
-static GOTV_INLINE void set_put_bits_buffer_size(PutBitContext *s, int size)
+static NLC_INLINE void set_put_bits_buffer_size(PutBitContext *s, int size)
 {
     av_assert0(size <= INT_MAX/8 - 32);
     s->buf_end = s->buf + size;

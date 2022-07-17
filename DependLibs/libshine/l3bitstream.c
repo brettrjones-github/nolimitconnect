@@ -209,7 +209,7 @@ static void Huffmancodebits( shine_global_config *config, int *ix, gr_info *gi )
     }
 }
 
-static GOTV_INLINE int shine_abs_and_sign( int *x )
+static NLC_INLINE int shine_abs_and_sign( int *x )
 {
   if ( *x > 0 ) return 0;
   *x *= -1;

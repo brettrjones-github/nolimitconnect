@@ -39,7 +39,7 @@
 ///* Define if you need to convert string parameters to unicode. (eg. WinCE)  */
 //#undef NEED_UNICODE_CONSTS
 //
-///* Define if your C (not C++) compiler supports "GOTV_INLINE" functions. */
+///* Define if your C (not C++) compiler supports "NLC_INLINE" functions. */
 //#undef HAVE_C_INLINE
 //
 ///* Do we know about type mode_t? */

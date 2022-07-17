@@ -444,53 +444,53 @@ static inline void video_format_Clean( video_format_t *p_src )
  * It will fill up a video_format_t using the given arguments.
  * Note that the video_format_t must already be initialized.
  */
-GOTV_API void video_format_Setup( video_format_t *, gotvptop_fourcc_t i_chroma,
+NLC_API void video_format_Setup( video_format_t *, gotvptop_fourcc_t i_chroma,
     int i_width, int i_height, int i_visible_width, int i_visible_height,
     int i_sar_num, int i_sar_den );
 
 /**
  * It will copy the crop properties from a video_format_t to another.
  */
-GOTV_API void video_format_CopyCrop( video_format_t *, const video_format_t * );
+NLC_API void video_format_CopyCrop( video_format_t *, const video_format_t * );
 
 /**
  * It will compute the crop/ar properties when scaling.
  */
-GOTV_API void video_format_ScaleCropAr( video_format_t *, const video_format_t * );
+NLC_API void video_format_ScaleCropAr( video_format_t *, const video_format_t * );
 
 /**
  * This function "normalizes" the formats orientation, by switching the a/r according to the orientation,
  * producing a format whose orientation is ORIENT_NORMAL. It makes a shallow copy (pallette is not alloc'ed).
  */
-GOTV_API void video_format_ApplyRotation(video_format_t * /*restrict*/ out,
+NLC_API void video_format_ApplyRotation(video_format_t * /*restrict*/ out,
                                         const video_format_t *in);
 
 /**
  * This function applies the transform operation to fmt.
  */
-GOTV_API void video_format_TransformBy(video_format_t *fmt, video_transform_t transform);
+NLC_API void video_format_TransformBy(video_format_t *fmt, video_transform_t transform);
 
 /**
  * This function applies the transforms necessary to fmt so that the resulting fmt
  * has the dst_orientation.
  */
-GOTV_API void video_format_TransformTo(video_format_t *fmt, video_orientation_t dst_orientation);
+NLC_API void video_format_TransformTo(video_format_t *fmt, video_orientation_t dst_orientation);
 
 /**
  * Returns the operation required to transform src into dst.
  */
-GOTV_API video_transform_t video_format_GetTransform(video_orientation_t src, video_orientation_t dst);
+NLC_API video_transform_t video_format_GetTransform(video_orientation_t src, video_orientation_t dst);
 
 /**
  * This function will check if the first video format is similar
  * to the second one.
  */
-GOTV_API bool video_format_IsSimilar( const video_format_t *, const video_format_t * );
+NLC_API bool video_format_IsSimilar( const video_format_t *, const video_format_t * );
 
 /**
  * It prints details about the given video_format_t
  */
-GOTV_API void video_format_Print( gotvptop_object_t *, const char *, const video_format_t * );
+NLC_API void video_format_Print( gotvptop_object_t *, const char *, const video_format_t * );
 
 
 static inline video_transform_t transform_Inverse( video_transform_t transform )
@@ -620,29 +620,29 @@ struct es_format_t
 /**
  * This function will fill all RGB shift from RGB masks.
  */
-GOTV_API void video_format_FixRgb( video_format_t * );
+NLC_API void video_format_FixRgb( video_format_t * );
 
 /**
  * This function will initialize a es_format_t structure.
  */
-GOTV_API void es_format_Init( es_format_t *, int i_cat, gotvptop_fourcc_t i_codec );
+NLC_API void es_format_Init( es_format_t *, int i_cat, gotvptop_fourcc_t i_codec );
 
 /**
  * This function will initialize a es_format_t structure from a video_format_t.
  */
-GOTV_API void es_format_InitFromVideo( es_format_t *, const video_format_t * );
+NLC_API void es_format_InitFromVideo( es_format_t *, const video_format_t * );
 
 /**
  * This functions will copy a es_format_t.
  */
-GOTV_API int es_format_Copy( es_format_t *p_dst, const es_format_t *p_src );
+NLC_API int es_format_Copy( es_format_t *p_dst, const es_format_t *p_src );
 
 /**
  * This function will clean up a es_format_t and release all associated
  * resources.
  * You can call it multiple times on the same structure.
  */
-GOTV_API void es_format_Clean( es_format_t *fmt );
+NLC_API void es_format_Clean( es_format_t *fmt );
 
 /**
  * This function will check if the first ES format is similar
@@ -650,7 +650,7 @@ GOTV_API void es_format_Clean( es_format_t *fmt );
  *
  * All descriptive fields are ignored.
  */
-GOTV_API bool es_format_IsSimilar( const es_format_t *, const es_format_t * );
+NLC_API bool es_format_IsSimilar( const es_format_t *, const es_format_t * );
 
 /**
  * Changes ES format to another category

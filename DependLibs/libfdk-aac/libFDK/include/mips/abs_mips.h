@@ -96,9 +96,9 @@ amm-info@iis.fraunhofer.de
     #define FUNCTION_fixabs_D
     #define FUNCTION_fixabs_I
     #define FUNCTION_fixabs_S
-    GOTV_INLINE FIXP_DBL fixabs_D(FIXP_DBL x) { return __builtin_mips_absq_s_w(x); }
-    GOTV_INLINE FIXP_SGL fixabs_S(FIXP_SGL x) { return ((x) > (FIXP_SGL)(0)) ? (x) : -(x) ; }
-    GOTV_INLINE int32_t fixabs_I(int32_t x)           { return __builtin_mips_absq_s_w(x); }
+    NLC_INLINE FIXP_DBL fixabs_D(FIXP_DBL x) { return __builtin_mips_absq_s_w(x); }
+    NLC_INLINE FIXP_SGL fixabs_S(FIXP_SGL x) { return ((x) > (FIXP_SGL)(0)) ? (x) : -(x) ; }
+    NLC_INLINE int32_t fixabs_I(int32_t x)           { return __builtin_mips_absq_s_w(x); }
   #endif /* __mips_dsp */
 
 #endif /* defined(__GNUC__) && defined(__mips__) */

@@ -72,7 +72,7 @@
 #define strtoull _strtoui64
 #endif
 
-#define flac_restrict		GOTV_RESTRICT
+#define flac_restrict		NLC_RESTRICT
 
 #define FLAC__U64L(x) x##ULL
 

@@ -147,7 +147,7 @@ putheader_bits(lame_internal_flags * gfc)
 
 
 /*write j bits into the bit stream */
-GOTV_INLINE static void
+NLC_INLINE static void
 putbits2(lame_internal_flags * gfc, int val, int j)
 {
     EncStateVar_t const *const esv = &gfc->sv_enc;
@@ -183,7 +183,7 @@ putbits2(lame_internal_flags * gfc, int val, int j)
 }
 
 /*write j bits into the bit stream, ignoring frame headers */
-GOTV_INLINE static void
+NLC_INLINE static void
 putbits_noheaders(lame_internal_flags * gfc, int val, int j)
 {
     Bit_stream_struc *bs;
@@ -221,7 +221,7 @@ putbits_noheaders(lame_internal_flags * gfc, int val, int j)
   the ancillary data...
 */
 
-GOTV_INLINE static void
+NLC_INLINE static void
 drain_into_ancillary(lame_internal_flags * gfc, int remainingBits)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
@@ -265,7 +265,7 @@ drain_into_ancillary(lame_internal_flags * gfc, int remainingBits)
 }
 
 /*write N bits into the header */
-GOTV_INLINE static void
+NLC_INLINE static void
 writeheader(lame_internal_flags * gfc, int val, int j)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
@@ -316,7 +316,7 @@ CRC_writeheader(lame_internal_flags const *gfc, char *header)
     header[5] = crc & 255;
 }
 
-GOTV_INLINE static void
+NLC_INLINE static void
 encodeSideInfo2(lame_internal_flags * gfc, int bitsPerFrame)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
@@ -486,7 +486,7 @@ encodeSideInfo2(lame_internal_flags * gfc, int bitsPerFrame)
 }
 
 
-GOTV_INLINE static int
+NLC_INLINE static int
 huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
 {
     /* Write count1 area */
@@ -556,7 +556,7 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
 /*
   Implements the pseudocode of page 98 of the IS
   */
-GOTV_INLINE static int
+NLC_INLINE static int
 Huffmancode(lame_internal_flags * const gfc, const unsigned int tableindex,
             int start, int end, gr_info const *gi)
 {
@@ -681,7 +681,7 @@ LongHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
     return bits;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 writeMainData(lame_internal_flags * const gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;

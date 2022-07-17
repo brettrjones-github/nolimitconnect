@@ -43,7 +43,7 @@
 #endif
 
 
-static GOTV_INLINE void pixel_avg( pixel *dst,  intptr_t i_dst_stride,
+static NLC_INLINE void pixel_avg( pixel *dst,  intptr_t i_dst_stride,
                               pixel *src1, intptr_t i_src1_stride,
                               pixel *src2, intptr_t i_src2_stride, int i_width, int i_height )
 {
@@ -57,7 +57,7 @@ static GOTV_INLINE void pixel_avg( pixel *dst,  intptr_t i_dst_stride,
     }
 }
 
-static GOTV_INLINE void pixel_avg_wxh( pixel *dst,  intptr_t i_dst,
+static NLC_INLINE void pixel_avg_wxh( pixel *dst,  intptr_t i_dst,
                                   pixel *src1, intptr_t i_src1,
                                   pixel *src2, intptr_t i_src2, int width, int height )
 {
@@ -73,7 +73,7 @@ static GOTV_INLINE void pixel_avg_wxh( pixel *dst,  intptr_t i_dst,
 
 /* Implicit weighted bipred only:
  * assumes log2_denom = 5, offset = 0, weight1 + weight2 = 64 */
-static GOTV_INLINE void pixel_avg_weight_wxh( pixel *dst,  intptr_t i_dst,
+static NLC_INLINE void pixel_avg_weight_wxh( pixel *dst,  intptr_t i_dst,
                                          pixel *src1, intptr_t i_src1,
                                          pixel *src2, intptr_t i_src2, int width, int height, int i_weight1 )
 {

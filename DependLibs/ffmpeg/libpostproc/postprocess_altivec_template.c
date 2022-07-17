@@ -57,7 +57,7 @@
     } while (0)
 
 
-static GOTV_INLINE int vertClassify_altivec(uint8_t src[], int stride, PPContext *c) {
+static NLC_INLINE int vertClassify_altivec(uint8_t src[], int stride, PPContext *c) {
     /*
     this code makes no assumption on src or stride.
     One could remove the recomputation of the perm
@@ -212,7 +212,7 @@ static GOTV_INLINE int vertClassify_altivec(uint8_t src[], int stride, PPContext
     else return 2;
 }
 
-static GOTV_INLINE void doVertLowPass_altivec(uint8_t *src, int stride, PPContext *c) {
+static NLC_INLINE void doVertLowPass_altivec(uint8_t *src, int stride, PPContext *c) {
     /*
     this code makes no assumption on src or stride.
     One could remove the recomputation of the perm
@@ -410,7 +410,7 @@ static GOTV_INLINE void doVertLowPass_altivec(uint8_t *src, int stride, PPContex
 
 
 
-static GOTV_INLINE void doVertDefFilter_altivec(uint8_t src[], int stride, PPContext *c) {
+static NLC_INLINE void doVertDefFilter_altivec(uint8_t src[], int stride, PPContext *c) {
     /*
     this code makes no assumption on src or stride.
     One could remove the recomputation of the perm
@@ -531,7 +531,7 @@ static GOTV_INLINE void doVertDefFilter_altivec(uint8_t src[], int stride, PPCon
      STORE(5)
 }
 
-static GOTV_INLINE void dering_altivec(uint8_t src[], int stride, PPContext *c) {
+static NLC_INLINE void dering_altivec(uint8_t src[], int stride, PPContext *c) {
     const vector signed int vsint32_8 = vec_splat_s32(8);
     const vector unsigned int vuint32_4 = vec_splat_u32(4);
     const vector signed char neg1 = vec_splat_s8(-1);
@@ -827,7 +827,7 @@ static GOTV_INLINE void dering_altivec(uint8_t src[], int stride, PPContext *c) 
 #define doHorizDefFilter_altivec(a...) doHorizDefFilter_C(a)
 #define do_a_deblock_altivec(a...) do_a_deblock_C(a)
 
-static GOTV_INLINE void tempNoiseReducer_altivec(uint8_t *src, int stride,
+static NLC_INLINE void tempNoiseReducer_altivec(uint8_t *src, int stride,
                                             uint8_t *tempBlurred, uint32_t *tempBlurredPast, int *maxNoise)
 {
     const vector signed char neg1 = vec_splat_s8(-1);
@@ -1014,7 +1014,7 @@ static GOTV_INLINE void tempNoiseReducer_altivec(uint8_t *src, int stride,
 #undef PACK_AND_STORE
 }
 
-static GOTV_INLINE void transpose_16x8_char_toPackedAlign_altivec(unsigned char* dst, unsigned char* src, int stride) {
+static NLC_INLINE void transpose_16x8_char_toPackedAlign_altivec(unsigned char* dst, unsigned char* src, int stride) {
     const vector unsigned char zero = vec_splat_u8(0);
 
 #define LOAD_DOUBLE_LINE(i, j)                                          \
@@ -1119,7 +1119,7 @@ static GOTV_INLINE void transpose_16x8_char_toPackedAlign_altivec(unsigned char*
     vec_st(temp15, 240, dst);
 }
 
-static GOTV_INLINE void transpose_8x16_char_fromPackedAlign_altivec(unsigned char* dst, unsigned char* src, int stride) {
+static NLC_INLINE void transpose_8x16_char_fromPackedAlign_altivec(unsigned char* dst, unsigned char* src, int stride) {
     const vector unsigned char zero = vec_splat_u8(0);
     const vector signed   char neg1 = vec_splat_s8(-1);
 

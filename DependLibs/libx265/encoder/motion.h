@@ -82,11 +82,11 @@ public:
     /* buf*() and motionEstimate() methods all use cached fenc pixels and thus
      * require setSourcePU() to be called prior. */
 
-    GOTV_INLINE int bufSAD(const pixel* fref, intptr_t stride)  { return sad(fencPUYuv.m_buf[0], FENC_STRIDE, fref, stride); }
+    NLC_INLINE int bufSAD(const pixel* fref, intptr_t stride)  { return sad(fencPUYuv.m_buf[0], FENC_STRIDE, fref, stride); }
 
-    GOTV_INLINE int bufSATD(const pixel* fref, intptr_t stride) { return satd(fencPUYuv.m_buf[0], FENC_STRIDE, fref, stride); }
+    NLC_INLINE int bufSATD(const pixel* fref, intptr_t stride) { return satd(fencPUYuv.m_buf[0], FENC_STRIDE, fref, stride); }
 
-    GOTV_INLINE int bufChromaSATD(const Yuv& refYuv, int puPartIdx)
+    NLC_INLINE int bufChromaSATD(const Yuv& refYuv, int puPartIdx)
     {
         return chromaSatd(refYuv.getCbAddr(puPartIdx), refYuv.m_csize, fencPUYuv.m_buf[1], fencPUYuv.m_csize) +
                chromaSatd(refYuv.getCrAddr(puPartIdx), refYuv.m_csize, fencPUYuv.m_buf[2], fencPUYuv.m_csize);
@@ -98,7 +98,7 @@ public:
 
 protected:
 
-    GOTV_INLINE void StarPatternSearch(ReferencePlanes *ref,
+    NLC_INLINE void StarPatternSearch(ReferencePlanes *ref,
                                   const MV &       mvmin,
                                   const MV &       mvmax,
                                   MV &             bmv,

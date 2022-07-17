@@ -447,7 +447,7 @@ render_glyph(ASS_Renderer *render_priv, Bitmap *bm, int dst_x, int dst_y,
 }
 
 // Calculate bitmap memory footprint
-static GOTV_INLINE size_t bitmap_size(Bitmap *bm)
+static NLC_INLINE size_t bitmap_size(Bitmap *bm)
 {
     return bm ? sizeof(Bitmap) + bm->stride * bm->h : 0;
 }
@@ -2160,13 +2160,13 @@ static void calculate_rotation_params(ASS_Renderer *render_priv, DBBox *bbox,
 }
 
 
-static GOTV_INLINE void rectangle_reset(AssRectangle *rect)
+static NLC_INLINE void rectangle_reset(AssRectangle *rect)
 {
     rect->x_min = rect->y_min = INT_MAX;
     rect->x_max = rect->y_max = INT_MIN;
 }
 
-static GOTV_INLINE void rectangle_combine( AssRectangle *rect, const Bitmap *bm, int x, int y)
+static NLC_INLINE void rectangle_combine( AssRectangle *rect, const Bitmap *bm, int x, int y)
 {
     rect->x_min = FFMIN(rect->x_min, x + bm->left);
     rect->y_min = FFMIN(rect->y_min, y + bm->top);

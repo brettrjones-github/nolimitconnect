@@ -118,7 +118,7 @@ struct wrap {
  * If more data is needed the function returns FALSE, and *src_left
  * will be 0.
  */
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 wrap_around			(struct wrap *		w,
 				 const uint8_t **	dst,
 				 const uint8_t **	scan_end,
@@ -1174,7 +1174,7 @@ extract_data_units		(struct frame *		f,
  * Reset the VBI data unit decoding context at the beginning of a
  * new frame (after extract_data_units() returned -1).
  */
-GOTV_INLINE void
+NLC_INLINE void
 reset_frame			(struct frame *		f)
 {
 	f->sp = f->sliced_begin;

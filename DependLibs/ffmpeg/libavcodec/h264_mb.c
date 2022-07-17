@@ -38,7 +38,7 @@
 #include "qpeldsp.h"
 #include "thread.h"
 
-static GOTV_INLINE int get_lowest_part_list_y(H264SliceContext *sl,
+static NLC_INLINE int get_lowest_part_list_y(H264SliceContext *sl,
                                          int n, int height, int y_offset, int list)
 {
     int raw_my             = sl->mv_cache[list][scan8[n]][1];
@@ -51,7 +51,7 @@ static GOTV_INLINE int get_lowest_part_list_y(H264SliceContext *sl,
     return FFMAX(0, bottom);
 }
 
-static GOTV_INLINE void get_lowest_part_y(const H264Context *h, H264SliceContext *sl,
+static NLC_INLINE void get_lowest_part_y(const H264Context *h, H264SliceContext *sl,
                                      int16_t refs[2][48], int n,
                                      int height, int y_offset, int list0,
                                      int list1, int *nrefs)

@@ -173,7 +173,7 @@ typedef struct PPContext{
 } PPContext;
 
 
-static GOTV_INLINE void linecpy(void *dest, const void *src, int lines, int stride) {
+static NLC_INLINE void linecpy(void *dest, const void *src, int lines, int stride) {
     if (stride > 0) {
         memcpy(dest, src, lines*stride);
     } else {

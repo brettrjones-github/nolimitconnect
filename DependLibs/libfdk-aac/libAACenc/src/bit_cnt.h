@@ -178,7 +178,7 @@ int32_t    FDKaacEnc_codeValues(int16_t *values, int32_t width, int32_t codeBook
 
 int32_t    FDKaacEnc_codeScalefactorDelta(int32_t scalefactor, HANDLE_FDK_BITSTREAM hBitstream);
 
-GOTV_INLINE int32_t FDKaacEnc_bitCountScalefactorDelta(const int32_t delta)
+NLC_INLINE int32_t FDKaacEnc_bitCountScalefactorDelta(const int32_t delta)
 {
   FDK_ASSERT( (0 <= (delta+CODE_BOOK_SCF_LAV)) &&  ((delta+CODE_BOOK_SCF_LAV)<(int)(sizeof(FDKaacEnc_huff_ltabscf)/sizeof((FDKaacEnc_huff_ltabscf[0])))) );
   return((int32_t)FDKaacEnc_huff_ltabscf[delta+CODE_BOOK_SCF_LAV]);

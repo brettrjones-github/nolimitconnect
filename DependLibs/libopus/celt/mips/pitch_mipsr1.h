@@ -35,7 +35,7 @@
 #define PITCH_MIPSR1_H
 
 #define OVERRIDE_DUAL_INNER_PROD
-static GOTV_INLINE void dual_inner_prod(const opus_val16 *x, const opus_val16 *y01, const opus_val16 *y02,
+static NLC_INLINE void dual_inner_prod(const opus_val16 *x, const opus_val16 *y01, const opus_val16 *y02,
       int N, opus_val32 *xy1, opus_val32 *xy2, int arch)
 {
    int j;
@@ -61,7 +61,7 @@ static GOTV_INLINE void dual_inner_prod(const opus_val16 *x, const opus_val16 *y
    *xy2 = xy02;
 }
 
-static GOTV_INLINE void xcorr_kernel_mips(const opus_val16 * x,
+static NLC_INLINE void xcorr_kernel_mips(const opus_val16 * x,
       const opus_val16 * y, opus_val32 sum[4], int len)
 {
    int j;

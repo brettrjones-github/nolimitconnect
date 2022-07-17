@@ -19,7 +19,7 @@
 #include <QString>
 
 class AppCommon;
-class MySndMgr;
+class SoundMgr;
 class QWidget;
 class P2PEngine;
 class IFromGui;

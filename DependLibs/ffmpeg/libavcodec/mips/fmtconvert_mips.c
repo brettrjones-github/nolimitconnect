@@ -57,7 +57,7 @@ static void int32_to_float_fmul_scalar_mips(float *dst, const int *src,
         float mul, int len)
 {
     /*
-     * variables used in GOTV_INLINE assembler
+     * variables used in NLC_INLINE assembler
      */
     float temp1, temp3, temp5, temp7, temp9, temp11, temp13, temp15;
 

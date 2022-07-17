@@ -163,16 +163,16 @@ typedef uint64_t sse_t;
 
 
 template<typename T>
-GOTV_INLINE T x265_min(T a, T b) { return a < b ? a : b; }
+NLC_INLINE T x265_min(T a, T b) { return a < b ? a : b; }
 
 template<typename T>
-GOTV_INLINE T x265_max(T a, T b) { return a > b ? a : b; }
+NLC_INLINE T x265_max(T a, T b) { return a > b ? a : b; }
 
 template<typename T>
-GOTV_INLINE T x265_clip3(T minVal, T maxVal, T a) { return x265_min(x265_max(minVal, a), maxVal); }
+NLC_INLINE T x265_clip3(T minVal, T maxVal, T a) { return x265_min(x265_max(minVal, a), maxVal); }
 
 template<typename T> /* clip to pixel range, 0..255 or 0..1023 */
-GOTV_INLINE pixel x265_clip(T x) { return (pixel)x265_min<T>(T((1 << X265_DEPTH) - 1), x265_max<T>(T(0), x)); }
+NLC_INLINE pixel x265_clip(T x) { return (pixel)x265_min<T>(T((1 << X265_DEPTH) - 1), x265_max<T>(T(0), x)); }
 
 typedef int16_t  coeff_t;      // transform coefficient
 

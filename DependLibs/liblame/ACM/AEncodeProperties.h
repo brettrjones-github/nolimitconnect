@@ -81,100 +81,100 @@ public:
 	/**
 		\brief Check wether the Encode process should use the Copyright bit
 	*/
-	GOTV_INLINE const bool GetCopyrightMode() const { return bCopyright; }
+	NLC_INLINE const bool GetCopyrightMode() const { return bCopyright; }
 	/**
 		\brief Check wether the Encode process should use the CRC bit
 	*/
-	GOTV_INLINE const bool GetCRCMode() const { return bCRC; }
+	NLC_INLINE const bool GetCRCMode() const { return bCRC; }
 	/**
 		\brief Check wether the Encode process should use the Original bit
 	*/
-	GOTV_INLINE const bool GetOriginalMode() const { return bOriginal; }
+	NLC_INLINE const bool GetOriginalMode() const { return bOriginal; }
 	/**
 		\brief Check wether the Encode process should use the Private bit
 	*/
-	GOTV_INLINE const bool GetPrivateMode() const { return bPrivate; }
+	NLC_INLINE const bool GetPrivateMode() const { return bPrivate; }
 	/**
 		\brief Check wether the Encode process should use the Smart Bitrate output
 	*/
-	GOTV_INLINE const bool GetSmartOutputMode() const { return bSmartOutput; }
+	NLC_INLINE const bool GetSmartOutputMode() const { return bSmartOutput; }
 	/**
 		\brief Check wether the Encode process should allow Average Bitrate output
 	*/
-	GOTV_INLINE const bool GetAbrOutputMode() const { return bAbrOutput; }
+	NLC_INLINE const bool GetAbrOutputMode() const { return bAbrOutput; }
 
 	/**
 		\brief Check wether the Encode process shouldn't use the Bit Reservoir
 	*/
-	GOTV_INLINE const bool GetNoBiResMode() const { return bNoBitRes; }
+	NLC_INLINE const bool GetNoBiResMode() const { return bNoBitRes; }
 
 	/**
 		\brief Check wether the Encode process should force the channel mode (stereo or mono resampling)
 	*/
-	GOTV_INLINE const bool GetForceChannelMode() const { return bForceChannel; }
+	NLC_INLINE const bool GetForceChannelMode() const { return bForceChannel; }
 
 	/**
 		\brief Check wether the Encode process should use the VBR mode
 	*/
-	GOTV_INLINE const BRMode GetVBRUseMode() const { return mBRmode; }
+	NLC_INLINE const BRMode GetVBRUseMode() const { return mBRmode; }
 	/**
 		\brief Check wether the Encode process should use the Xing frame in the VBR mode
 		\note the Xing frame is a silent frame at the beginning that contain VBR statistics about the file.
 	*/
-	GOTV_INLINE const bool GetXingFrameMode() const { return bXingFrame; }
+	NLC_INLINE const bool GetXingFrameMode() const { return bXingFrame; }
 
 	/**
 		\brief Check wether the Encode process should resample before encoding
 	*/
-	GOTV_INLINE const bool GetResampleMode() const { return bResample; }
+	NLC_INLINE const bool GetResampleMode() const { return bResample; }
 	
 	/**
 		\brief Set wether the Encode process should use the Copyright bit
 	*/
-	GOTV_INLINE void SetCopyrightMode(const bool bMode) { bCopyright = bMode; }
+	NLC_INLINE void SetCopyrightMode(const bool bMode) { bCopyright = bMode; }
 	/**
 		\brief Set wether the Encode process should use the CRC bit
 	*/
-	GOTV_INLINE void SetCRCMode(const bool bMode) { bCRC = bMode; }
+	NLC_INLINE void SetCRCMode(const bool bMode) { bCRC = bMode; }
 	/**
 		\brief Set wether the Encode process should use the Original bit
 	*/
-	GOTV_INLINE void SetOriginalMode(const bool bMode) { bOriginal = bMode; }
+	NLC_INLINE void SetOriginalMode(const bool bMode) { bOriginal = bMode; }
 	/**
 		\brief Set wether the Encode process should use the Private bit
 	*/
-	GOTV_INLINE void SetPrivateMode(const bool bMode) { bPrivate = bMode; }
+	NLC_INLINE void SetPrivateMode(const bool bMode) { bPrivate = bMode; }
 
 	/**
 		\brief Set wether the Encode process should use the Smart Bitrate output
 	*/
-	GOTV_INLINE void SetSmartOutputMode(const bool bMode) { bSmartOutput = bMode; }
+	NLC_INLINE void SetSmartOutputMode(const bool bMode) { bSmartOutput = bMode; }
 	/**
 		\brief Set wether the Encode process should use the Average Bitrate output
 	*/
-	GOTV_INLINE void SetAbrOutputMode(const bool bMode) { bAbrOutput = bMode; }
+	NLC_INLINE void SetAbrOutputMode(const bool bMode) { bAbrOutput = bMode; }
 
 
 	/**
 		\brief Set wether the Encode process shouldn't use the Bit Reservoir
 	*/
-	GOTV_INLINE void SetNoBiResMode(const bool bMode) { bNoBitRes = bMode; }
+	NLC_INLINE void SetNoBiResMode(const bool bMode) { bNoBitRes = bMode; }
 	
 	/**
 		\brief Set wether the Encode process should force the channel mode (stereo or mono resampling)
 	*/
-	GOTV_INLINE void SetForceChannelMode(const bool bMode) { bForceChannel = bMode; }
+	NLC_INLINE void SetForceChannelMode(const bool bMode) { bForceChannel = bMode; }
 	
 	/**
 		\brief Set wether the Encode process should use the VBR mode
 	*/
-	GOTV_INLINE void SetVBRUseMode(const BRMode mode) { mBRmode = mode; }
+	NLC_INLINE void SetVBRUseMode(const BRMode mode) { mBRmode = mode; }
 
 	/**
 		\brief Set wether the Encode process should use the Xing frame in the VBR mode
 		\note the Xing frame is a silent frame at the beginning that contain VBR statistics about the file.
 	*/
-	GOTV_INLINE void SetXingFrameMode(const bool bMode) { bXingFrame = bMode; }
+	NLC_INLINE void SetXingFrameMode(const bool bMode) { bXingFrame = bMode; }
 
 	/**
 		\brief CBR : Get the bitrate to use         / 
@@ -216,7 +216,7 @@ public:
 
 		\return -1 if the bitrate is not found, and the number of char copied otherwise
 	*/
-	GOTV_INLINE const int GetBitrateString(char * string, int string_size) const {return GetBitrateString(string,string_size,nMinBitrateIndex); }
+	NLC_INLINE const int GetBitrateString(char * string, int string_size) const {return GetBitrateString(string,string_size,nMinBitrateIndex); }
 
 	/**
 		\brief Get the (VBR:min) bitrate corresponding to the specified index in the form of a string
@@ -232,27 +232,27 @@ public:
 	/**
 		\brief Get the number of possible bitrates
 	*/
-	GOTV_INLINE const int GetBitrateLentgh() const { return sizeof(the_Bitrates) / sizeof(unsigned int); }
+	NLC_INLINE const int GetBitrateLentgh() const { return sizeof(the_Bitrates) / sizeof(unsigned int); }
 	/**
 		\brief Get the number of possible sampling frequencies
 	*/
-	GOTV_INLINE const unsigned int GetResampleFreq() const { return the_SamplingFreqs[nSamplingFreqIndex]; }
+	NLC_INLINE const unsigned int GetResampleFreq() const { return the_SamplingFreqs[nSamplingFreqIndex]; }
 	/**
 		\brief Get the max compression ratio allowed (1:15 default)
 	*/
-	GOTV_INLINE double GetSmartRatio() const { return SmartRatioMax;}
+	NLC_INLINE double GetSmartRatio() const { return SmartRatioMax;}
 	/**
 		\brief Get the min ABR bitrate possible
 	*/
-	GOTV_INLINE unsigned int GetAbrBitrateMin() const { return AverageBitrate_Min;}
+	NLC_INLINE unsigned int GetAbrBitrateMin() const { return AverageBitrate_Min;}
 	/**
 		\brief Get the max ABR bitrate possible
 	*/
-	GOTV_INLINE unsigned int GetAbrBitrateMax() const { return AverageBitrate_Max;}
+	NLC_INLINE unsigned int GetAbrBitrateMax() const { return AverageBitrate_Max;}
 	/**
 		\brief Get the step between ABR bitrates
 	*/
-	GOTV_INLINE unsigned int GetAbrBitrateStep() const { return AverageBitrate_Step;}
+	NLC_INLINE unsigned int GetAbrBitrateStep() const { return AverageBitrate_Step;}
 
 	/**
 		\brief Get the VBR attributes for a specified MPEG version
@@ -291,7 +291,7 @@ public:
 	/**
 		\brief Get the current channel mode in the form of a string
 	*/
-	GOTV_INLINE const char * GetChannelModeString() const {return GetChannelModeString(nChannelIndex); }
+	NLC_INLINE const char * GetChannelModeString() const {return GetChannelModeString(nChannelIndex); }
 	/**
 		\brief Get the channel mode in the form of a string for the specified Channel mode index
 
@@ -301,7 +301,7 @@ public:
 	/**
 		\brief Get the number of possible channel mode
 	*/
-	GOTV_INLINE const int GetChannelLentgh() const { return 3; }
+	NLC_INLINE const int GetChannelLentgh() const { return 3; }
 
 	/**
 		\brief Get the current preset to use, see lame documentation/code for more info on the possible presets
@@ -316,7 +316,7 @@ public:
 	/**
 		\brief Get the number of possible presets
 	*/
-//	GOTV_INLINE const int GetPresetLentgh() const { return sizeof(the_Presets) / sizeof(LAME_QUALTIY_PRESET); }
+//	NLC_INLINE const int GetPresetLentgh() const { return sizeof(the_Presets) / sizeof(LAME_QUALTIY_PRESET); }
 
 	/**
 		\brief Start the user configuration process (called by AOut::config())
@@ -430,7 +430,7 @@ private:
 //	HINSTANCE hDllInstance;
 
 	void SaveValuesToElement(TiXmlElement * the_element) const;
-	GOTV_INLINE void SetAttributeBool(TiXmlElement * the_elt,const std::string & the_string, const bool the_value) const;
+	NLC_INLINE void SetAttributeBool(TiXmlElement * the_elt,const std::string & the_string, const bool the_value) const;
 	void UpdateConfigs(const HWND HwndDlg);
 	void EnableAbrOptions(HWND hDialog, bool enable);
 

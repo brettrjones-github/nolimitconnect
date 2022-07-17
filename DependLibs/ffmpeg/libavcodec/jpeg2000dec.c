@@ -1651,7 +1651,7 @@ static void dequantization_int_97(int x, int y, Jpeg2000Cblk *cblk,
     }
 }
 
-static GOTV_INLINE void mct_decode(Jpeg2000DecoderContext *s, Jpeg2000Tile *tile)
+static NLC_INLINE void mct_decode(Jpeg2000DecoderContext *s, Jpeg2000Tile *tile)
 {
     int i, csize = 1;
     void *src[3];
@@ -1679,7 +1679,7 @@ static GOTV_INLINE void mct_decode(Jpeg2000DecoderContext *s, Jpeg2000Tile *tile
     s->dsp.mct_decode[tile->codsty[0].transform](src[0], src[1], src[2], csize);
 }
 
-static GOTV_INLINE void tile_codeblocks(Jpeg2000DecoderContext *s, Jpeg2000Tile *tile)
+static NLC_INLINE void tile_codeblocks(Jpeg2000DecoderContext *s, Jpeg2000Tile *tile)
 {
     Jpeg2000T1Context t1;
 
@@ -1743,7 +1743,7 @@ static GOTV_INLINE void tile_codeblocks(Jpeg2000DecoderContext *s, Jpeg2000Tile 
 }
 
 #define WRITE_FRAME(D, PIXEL)                                                                     \
-    static GOTV_INLINE void write_frame_ ## D(Jpeg2000DecoderContext * s, Jpeg2000Tile * tile,         \
+    static NLC_INLINE void write_frame_ ## D(Jpeg2000DecoderContext * s, Jpeg2000Tile * tile,         \
                                          AVFrame * picture, int precision)                        \
     {                                                                                             \
         const AVPixFmtDescriptor *pixdesc = av_pix_fmt_desc_get(s->avctx->pix_fmt);               \

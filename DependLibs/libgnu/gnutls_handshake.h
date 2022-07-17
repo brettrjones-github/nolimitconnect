@@ -56,7 +56,7 @@ void _gnutls_handshake_hash_buffers_clear(gnutls_session_t session);
 #define FAGAIN(target) (FINAL_STATE==target?1:0)
 #define AGAIN2(state, target) (state==target?1:0)
 
-GOTV_INLINE static int handshake_remaining_time(gnutls_session_t session)
+NLC_INLINE static int handshake_remaining_time(gnutls_session_t session)
 {
 	if (session->internals.handshake_endtime) {
 		struct timespec now;

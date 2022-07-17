@@ -207,14 +207,14 @@ struct vout_window_t {
  / vout_display_NewWindow() and vout_display_DeleteWindow() instead.
  * This enables recycling windows.
  */
-GOTV_API vout_window_t * vout_window_New(gotvptop_object_t *, const char *module, const vout_window_cfg_t *, const vout_window_owner_t *);
+NLC_API vout_window_t * vout_window_New(gotvptop_object_t *, const char *module, const vout_window_cfg_t *, const vout_window_owner_t *);
 
 /**
  * Deletes a window created by vout_window_New().
  *
  * @note See vout_window_New() about window recycling.
  */
-GOTV_API void vout_window_Delete(vout_window_t *);
+NLC_API void vout_window_Delete(vout_window_t *);
 
 void vout_window_SetInhibition(vout_window_t *window, bool enabled);
 

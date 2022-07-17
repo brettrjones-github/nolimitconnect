@@ -1166,7 +1166,7 @@ static void LPSX (uint64_t *out, const uint64_t *a, const uint64_t *b)
   strido (out, temp, 7);
 }
 
-static GOTV_INLINE void g (uint64_t *h, uint64_t *m, uint64_t *N)
+static NLC_INLINE void g (uint64_t *h, uint64_t *m, uint64_t *N)
 {
   uint64_t K[8];
   uint64_t T[8];

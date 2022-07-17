@@ -323,7 +323,7 @@ int SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect,
 			}
 		}
 #else
-#error Need GOTV_INLINE assembly for this compiler
+#error Need NLC_INLINE assembly for this compiler
 #endif
 		} else
 #endif

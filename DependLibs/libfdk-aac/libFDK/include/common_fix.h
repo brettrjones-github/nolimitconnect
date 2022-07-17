@@ -186,47 +186,47 @@ amm-info@iis.fraunhofer.de
 /* ############################################################# */
 #include "fixmul.h"
 
-GOTV_INLINE int32_t fMult(int16_t a, int16_t b)         { return fixmul_SS(a, b); }
-GOTV_INLINE int32_t fMult(int16_t a, int32_t b)          { return fixmul_SD(a, b); }
-GOTV_INLINE int32_t fMult(int32_t a, int16_t b)          { return fixmul_DS(a, b); }
-GOTV_INLINE int32_t fMult(int32_t a, int32_t b)           { return fixmul_DD(a, b); }
-GOTV_INLINE int32_t fPow2(int32_t a)                   { return fixpow2_D(a);    }
-GOTV_INLINE int32_t fPow2(int16_t a)                  { return fixpow2_S(a);    }
+NLC_INLINE int32_t fMult(int16_t a, int16_t b)         { return fixmul_SS(a, b); }
+NLC_INLINE int32_t fMult(int16_t a, int32_t b)          { return fixmul_SD(a, b); }
+NLC_INLINE int32_t fMult(int32_t a, int16_t b)          { return fixmul_DS(a, b); }
+NLC_INLINE int32_t fMult(int32_t a, int32_t b)           { return fixmul_DD(a, b); }
+NLC_INLINE int32_t fPow2(int32_t a)                   { return fixpow2_D(a);    }
+NLC_INLINE int32_t fPow2(int16_t a)                  { return fixpow2_S(a);    }
 
-GOTV_INLINE int32_t  fMultI(int32_t a, int16_t b)         { return ( (int32_t)(((1<<(FRACT_BITS-2)) +
+NLC_INLINE int32_t  fMultI(int32_t a, int16_t b)         { return ( (int32_t)(((1<<(FRACT_BITS-2)) +
                                                           fixmuldiv2_DD(a,((int32_t)b<<FRACT_BITS)))>>(FRACT_BITS-1)) ); }
 
-GOTV_INLINE int32_t  fMultIfloor(int32_t a, int32_t b)      { return ( (int32_t)((1 +
+NLC_INLINE int32_t  fMultIfloor(int32_t a, int32_t b)      { return ( (int32_t)((1 +
                                                           fixmuldiv2_DD(a,(b<<FRACT_BITS))) >> (FRACT_BITS-1)) ); }
 
-GOTV_INLINE int32_t  fMultIceil(int32_t a, int32_t b)       { return ( (int32_t)(((int32_t)0x7fff +
+NLC_INLINE int32_t  fMultIceil(int32_t a, int32_t b)       { return ( (int32_t)(((int32_t)0x7fff +
                                                           fixmuldiv2_DD(a,(b<<FRACT_BITS))) >> (FRACT_BITS-1)) ); }
 
-GOTV_INLINE int32_t fMultDiv2(int16_t a, int16_t b)     { return fixmuldiv2_SS(a, b); }
-GOTV_INLINE int32_t fMultDiv2(int16_t a, int32_t b)      { return fixmuldiv2_SD(a, b); }
-GOTV_INLINE int32_t fMultDiv2(int32_t a, int16_t b)      { return fixmuldiv2_DS(a, b); }
-GOTV_INLINE int32_t fMultDiv2(int32_t a, int32_t b)       { return fixmuldiv2_DD(a, b); }
-GOTV_INLINE int32_t fPow2Div2(int32_t a)               { return fixpow2div2_D(a);    }
-GOTV_INLINE int32_t fPow2Div2(int16_t a)              { return fixpow2div2_S(a);    }
+NLC_INLINE int32_t fMultDiv2(int16_t a, int16_t b)     { return fixmuldiv2_SS(a, b); }
+NLC_INLINE int32_t fMultDiv2(int16_t a, int32_t b)      { return fixmuldiv2_SD(a, b); }
+NLC_INLINE int32_t fMultDiv2(int32_t a, int16_t b)      { return fixmuldiv2_DS(a, b); }
+NLC_INLINE int32_t fMultDiv2(int32_t a, int32_t b)       { return fixmuldiv2_DD(a, b); }
+NLC_INLINE int32_t fPow2Div2(int32_t a)               { return fixpow2div2_D(a);    }
+NLC_INLINE int32_t fPow2Div2(int16_t a)              { return fixpow2div2_S(a);    }
 
-GOTV_INLINE int32_t fMultDiv2BitExact(int32_t a, int32_t b)   { return fixmuldiv2BitExact_DD(a, b); }
-GOTV_INLINE int32_t fMultDiv2BitExact(int16_t a, int32_t  b) { return fixmuldiv2BitExact_SD(a, b); }
-GOTV_INLINE int32_t fMultDiv2BitExact(int32_t  a, int16_t b) { return fixmuldiv2BitExact_DS(a, b); }
-GOTV_INLINE int32_t fMultBitExact(int32_t a, int32_t b)       { return fixmulBitExact_DD(a, b); }
-GOTV_INLINE int32_t fMultBitExact(int16_t a, int32_t  b)     { return fixmulBitExact_SD(a, b); }
-GOTV_INLINE int32_t fMultBitExact(int32_t  a, int16_t b)     { return fixmulBitExact_DS(a, b); }
+NLC_INLINE int32_t fMultDiv2BitExact(int32_t a, int32_t b)   { return fixmuldiv2BitExact_DD(a, b); }
+NLC_INLINE int32_t fMultDiv2BitExact(int16_t a, int32_t  b) { return fixmuldiv2BitExact_SD(a, b); }
+NLC_INLINE int32_t fMultDiv2BitExact(int32_t  a, int16_t b) { return fixmuldiv2BitExact_DS(a, b); }
+NLC_INLINE int32_t fMultBitExact(int32_t a, int32_t b)       { return fixmulBitExact_DD(a, b); }
+NLC_INLINE int32_t fMultBitExact(int16_t a, int32_t  b)     { return fixmulBitExact_SD(a, b); }
+NLC_INLINE int32_t fMultBitExact(int32_t  a, int16_t b)     { return fixmulBitExact_DS(a, b); }
 
 /* ******************************************************************************** */
 #include "abs.h"
 
-GOTV_INLINE FIXP_DBL fAbs_FDK(FIXP_DBL x)
+NLC_INLINE FIXP_DBL fAbs_FDK(FIXP_DBL x)
                 { return fixabs_D(x); }
-GOTV_INLINE FIXP_SGL fAbs_FDK(FIXP_SGL x)
+NLC_INLINE FIXP_SGL fAbs_FDK(FIXP_SGL x)
                 { return fixabs_S(x); }
 
 ///* workaround for TI C6x compiler but not for TI ARM9E compiler */
 //#if (!defined(__TI_COMPILER_VERSION__) || defined(__TI_TMS470_V5__)) && !defined(__LP64__)
-//GOTV_INLINE int32_t  fAbs_FDK(int32_t x)
+//NLC_INLINE int32_t  fAbs_FDK(int32_t x)
 //                { return fixabs_I(x); }
 //#endif
 
@@ -234,13 +234,13 @@ GOTV_INLINE FIXP_SGL fAbs_FDK(FIXP_SGL x)
 
 #include "clz.h"
 
-GOTV_INLINE int32_t fNormz_FDK(FIXP_DBL x)
+NLC_INLINE int32_t fNormz_FDK(FIXP_DBL x)
                { return fixnormz_D(x); }
-GOTV_INLINE int32_t fNormz_FDK(FIXP_SGL x)
+NLC_INLINE int32_t fNormz_FDK(FIXP_SGL x)
                { return fixnormz_S(x); }
-GOTV_INLINE int32_t fNorm(FIXP_DBL x)
+NLC_INLINE int32_t fNorm(FIXP_DBL x)
                { return fixnorm_D(x); }
-GOTV_INLINE int32_t fNorm(FIXP_SGL x)
+NLC_INLINE int32_t fNorm(FIXP_SGL x)
                { return fixnorm_S(x); }
 
 
@@ -258,93 +258,93 @@ GOTV_INLINE int32_t fNorm(FIXP_SGL x)
 #include "fixmadd.h"
 
 /* y = (x+0.5*a*b) */
-GOTV_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
                 { return fixmadddiv2_DD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
                 { return fixmadddiv2_SD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
                 { return fixmadddiv2_DS(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
                 { return fixmadddiv2_SS(x, a, b); }
 
-GOTV_INLINE FIXP_DBL fPow2AddDiv2(FIXP_DBL x, FIXP_DBL a)
+NLC_INLINE FIXP_DBL fPow2AddDiv2(FIXP_DBL x, FIXP_DBL a)
                 { return fixpadddiv2_D(x, a); }
-GOTV_INLINE FIXP_DBL fPow2AddDiv2(FIXP_DBL x, FIXP_SGL a)
+NLC_INLINE FIXP_DBL fPow2AddDiv2(FIXP_DBL x, FIXP_SGL a)
                 { return fixpadddiv2_S(x, a); }
 
 
 /* y = 2*(x+0.5*a*b) = (2x+a*b) */
-GOTV_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
                 { return fixmadd_DD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
                 { return fixmadd_SD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
                 { return fixmadd_DS(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultAdd(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
                 { return fixmadd_SS(x, a, b); }
 
-GOTV_INLINE FIXP_DBL fPow2Add(FIXP_DBL x, FIXP_DBL a)
+NLC_INLINE FIXP_DBL fPow2Add(FIXP_DBL x, FIXP_DBL a)
                 { return fixpadd_D(x, a); }
-GOTV_INLINE FIXP_DBL fPow2Add(FIXP_DBL x, FIXP_SGL a)
+NLC_INLINE FIXP_DBL fPow2Add(FIXP_DBL x, FIXP_SGL a)
                 { return fixpadd_S(x, a); }
 
 
 /* y = (x-0.5*a*b) */
-GOTV_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
                 { return fixmsubdiv2_DD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
                 { return fixmsubdiv2_SD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
                 { return fixmsubdiv2_DS(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
                 { return fixmsubdiv2_SS(x, a, b); }
 
 /* y = 2*(x-0.5*a*b) = (2*x-a*b) */
-GOTV_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
                 { return fixmsub_DD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
                 { return fixmsub_SD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
                 { return fixmsub_DS(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultSub(FIXP_DBL x, FIXP_SGL a, FIXP_SGL b)
                 { return fixmsub_SS(x, a, b); }
 
-GOTV_INLINE FIXP_DBL fMultAddDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
                 { return fixmadddiv2BitExact_DD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAddDiv2BitExact(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2BitExact(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
                 { return fixmadddiv2BitExact_SD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultAddDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultAddDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
                 { return fixmadddiv2BitExact_DS(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSubDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_DBL b)
                 { return fixmsubdiv2BitExact_DD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSubDiv2BitExact(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2BitExact(FIXP_DBL x, FIXP_SGL a, FIXP_DBL b)
                 { return fixmsubdiv2BitExact_SD(x, a, b); }
-GOTV_INLINE FIXP_DBL fMultSubDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
+NLC_INLINE FIXP_DBL fMultSubDiv2BitExact(FIXP_DBL x, FIXP_DBL a, FIXP_SGL b)
                 { return fixmsubdiv2BitExact_DS(x, a, b); }
 
 #include "fixminmax.h"
 
-GOTV_INLINE FIXP_DBL fMin_FDK(FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMin_FDK(FIXP_DBL a, FIXP_DBL b)
                 { return fixmin_D(a,b); }
-GOTV_INLINE FIXP_DBL fMax_FDK(FIXP_DBL a, FIXP_DBL b)
+NLC_INLINE FIXP_DBL fMax_FDK(FIXP_DBL a, FIXP_DBL b)
                 { return fixmax_D(a,b); }
 
-GOTV_INLINE FIXP_SGL fMin_FDK(FIXP_SGL a, FIXP_SGL b)
+NLC_INLINE FIXP_SGL fMin_FDK(FIXP_SGL a, FIXP_SGL b)
                 { return fixmin_S(a,b); }
-GOTV_INLINE FIXP_SGL fMax_FDK(FIXP_SGL a, FIXP_SGL b)
+NLC_INLINE FIXP_SGL fMax_FDK(FIXP_SGL a, FIXP_SGL b)
                 { return fixmax_S(a,b); }
 
 ///* workaround for TI C6x compiler but not for TI ARM9E */
 //#if ((!defined(__TI_COMPILER_VERSION__) || defined(__TI_TMS470_V5__)) && !defined(__LP64__)) || (FIX_FRACT == 1)
-//GOTV_INLINE int32_t fMax_FDK(int32_t a, int32_t b)
+//NLC_INLINE int32_t fMax_FDK(int32_t a, int32_t b)
 //                { return fixmax_I(a,b); }
-//GOTV_INLINE int32_t fMin_FDK(int32_t a, int32_t b)
+//NLC_INLINE int32_t fMin_FDK(int32_t a, int32_t b)
 //                { return fixmin_I(a,b); }
 //#endif
 
-GOTV_INLINE uint32_t fMax_FDK(uint32_t a, uint32_t b)
+NLC_INLINE uint32_t fMax_FDK(uint32_t a, uint32_t b)
                 { return fixmax_UI(a,b); }
-GOTV_INLINE uint32_t fMin_FDK(uint32_t a, uint32_t b)
+NLC_INLINE uint32_t fMin_FDK(uint32_t a, uint32_t b)
                 { return fixmin_UI(a,b); }
 
 /* Complex data types */

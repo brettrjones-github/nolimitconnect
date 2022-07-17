@@ -47,7 +47,7 @@ extern long long spx_mips;
 #define VERIFY_SHORT(x) ((x)<=32767&&(x)>=-32768)
 #define VERIFY_INT(x) ((x)<=2147483647LL&&(x)>=-2147483648LL)
 
-static GOTV_INLINE short NEG16(int x)
+static NLC_INLINE short NEG16(int x)
 {
    int res;
    if (!VERIFY_SHORT(x))
@@ -60,7 +60,7 @@ static GOTV_INLINE short NEG16(int x)
    spx_mips++;
    return res;
 }
-static GOTV_INLINE int NEG32(long long x)
+static NLC_INLINE int NEG32(long long x)
 {
    long long res;
    if (!VERIFY_INT(x))
@@ -75,7 +75,7 @@ static GOTV_INLINE int NEG32(long long x)
 }
 
 #define EXTRACT16(x) _EXTRACT16(x, __FILE__, __LINE__)
-static GOTV_INLINE short _EXTRACT16(int x, char *file, int line)
+static NLC_INLINE short _EXTRACT16(int x, char *file, int line)
 {
    int res;
    if (!VERIFY_SHORT(x))
@@ -88,7 +88,7 @@ static GOTV_INLINE short _EXTRACT16(int x, char *file, int line)
 }
 
 #define EXTEND32(x) _EXTEND32(x, __FILE__, __LINE__)
-static GOTV_INLINE int _EXTEND32(int x, char *file, int line)
+static NLC_INLINE int _EXTEND32(int x, char *file, int line)
 {
    int res;
    if (!VERIFY_SHORT(x))
@@ -101,7 +101,7 @@ static GOTV_INLINE int _EXTEND32(int x, char *file, int line)
 }
 
 #define SHR16(a, shift) _SHR16(a, shift, __FILE__, __LINE__)
-static GOTV_INLINE short _SHR16(int a, int shift, char *file, int line) 
+static NLC_INLINE short _SHR16(int a, int shift, char *file, int line) 
 {
    int res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(shift))
@@ -115,7 +115,7 @@ static GOTV_INLINE short _SHR16(int a, int shift, char *file, int line)
    return res;
 }
 #define SHL16(a, shift) _SHL16(a, shift, __FILE__, __LINE__)
-static GOTV_INLINE short _SHL16(int a, int shift, char *file, int line) 
+static NLC_INLINE short _SHL16(int a, int shift, char *file, int line) 
 {
    int res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(shift))
@@ -129,7 +129,7 @@ static GOTV_INLINE short _SHL16(int a, int shift, char *file, int line)
    return res;
 }
 
-static GOTV_INLINE int SHR32(long long a, int shift) 
+static NLC_INLINE int SHR32(long long a, int shift) 
 {
    long long  res;
    if (!VERIFY_INT(a) || !VERIFY_SHORT(shift))
@@ -144,7 +144,7 @@ static GOTV_INLINE int SHR32(long long a, int shift)
    spx_mips++;
    return res;
 }
-static GOTV_INLINE int SHL32(long long a, int shift) 
+static NLC_INLINE int SHL32(long long a, int shift) 
 {
    long long  res;
    if (!VERIFY_INT(a) || !VERIFY_SHORT(shift))
@@ -171,7 +171,7 @@ static GOTV_INLINE int SHL32(long long a, int shift)
 //#define SHL(a,shift) ((a) << (shift))
 
 #define ADD16(a, b) _ADD16(a, b, __FILE__, __LINE__)
-static GOTV_INLINE short _ADD16(int a, int b, char *file, int line) 
+static NLC_INLINE short _ADD16(int a, int b, char *file, int line) 
 {
    int res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -188,7 +188,7 @@ static GOTV_INLINE short _ADD16(int a, int b, char *file, int line)
 }
 
 #define SUB16(a, b) _SUB16(a, b, __FILE__, __LINE__)
-static GOTV_INLINE short _SUB16(int a, int b, char *file, int line) 
+static NLC_INLINE short _SUB16(int a, int b, char *file, int line) 
 {
    int res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -203,7 +203,7 @@ static GOTV_INLINE short _SUB16(int a, int b, char *file, int line)
 }
 
 #define ADD32(a, b) _ADD32(a, b, __FILE__, __LINE__)
-static GOTV_INLINE int _ADD32(long long a, long long b, char *file, int line) 
+static NLC_INLINE int _ADD32(long long a, long long b, char *file, int line) 
 {
    long long res;
    if (!VERIFY_INT(a) || !VERIFY_INT(b))
@@ -219,7 +219,7 @@ static GOTV_INLINE int _ADD32(long long a, long long b, char *file, int line)
    return res;
 }
 
-static GOTV_INLINE int SUB32(long long a, long long b) 
+static NLC_INLINE int SUB32(long long a, long long b) 
 {
    long long res;
    if (!VERIFY_INT(a) || !VERIFY_INT(b))
@@ -236,7 +236,7 @@ static GOTV_INLINE int SUB32(long long a, long long b)
 #define ADD64(a,b) (MIPS_INC(a)+(b))
 
 /* result fits in 16 bits */
-static GOTV_INLINE short MULT16_16_16(int a, int b) 
+static NLC_INLINE short MULT16_16_16(int a, int b) 
 {
    int res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -251,7 +251,7 @@ static GOTV_INLINE short MULT16_16_16(int a, int b)
 }
 
 #define MULT16_16(a, b) _MULT16_16(a, b, __FILE__, __LINE__)
-static GOTV_INLINE int _MULT16_16(int a, int b, char *file, int line) 
+static NLC_INLINE int _MULT16_16(int a, int b, char *file, int line) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -272,7 +272,7 @@ static GOTV_INLINE int _MULT16_16(int a, int b, char *file, int line)
 
 
 #define MULT16_32_QX(a, b, Q) _MULT16_32_QX(a, b, Q, __FILE__, __LINE__)
-static GOTV_INLINE int _MULT16_32_QX(int a, long long b, int Q, char *file, int line)
+static NLC_INLINE int _MULT16_32_QX(int a, long long b, int Q, char *file, int line)
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_INT(b))
@@ -288,7 +288,7 @@ static GOTV_INLINE int _MULT16_32_QX(int a, long long b, int Q, char *file, int 
    return res;
 }
 
-static GOTV_INLINE int MULT16_32_PX(int a, long long b, int Q)
+static NLC_INLINE int MULT16_32_PX(int a, long long b, int Q)
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_INT(b))
@@ -314,7 +314,7 @@ static GOTV_INLINE int MULT16_32_PX(int a, long long b, int Q)
 #define MULT16_32_P15(a,b) MULT16_32_PX(a,b,15)
 #define MAC16_32_Q15(c,a,b) ADD32((c),MULT16_32_Q15((a),(b)))
 
-static GOTV_INLINE int SATURATE(int a, int b)
+static NLC_INLINE int SATURATE(int a, int b)
 {
    if (a>b)
       a=b;
@@ -323,7 +323,7 @@ static GOTV_INLINE int SATURATE(int a, int b)
    return a;
 }
 
-static GOTV_INLINE int MULT16_16_Q11_32(int a, int b) 
+static NLC_INLINE int MULT16_16_Q11_32(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -337,7 +337,7 @@ static GOTV_INLINE int MULT16_16_Q11_32(int a, int b)
    spx_mips+=3;
    return res;
 }
-static GOTV_INLINE short MULT16_16_Q13(int a, int b) 
+static NLC_INLINE short MULT16_16_Q13(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -351,7 +351,7 @@ static GOTV_INLINE short MULT16_16_Q13(int a, int b)
    spx_mips+=3;
    return res;
 }
-static GOTV_INLINE short MULT16_16_Q14(int a, int b) 
+static NLC_INLINE short MULT16_16_Q14(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -365,7 +365,7 @@ static GOTV_INLINE short MULT16_16_Q14(int a, int b)
    spx_mips+=3;
    return res;
 }
-static GOTV_INLINE short MULT16_16_Q15(int a, int b) 
+static NLC_INLINE short MULT16_16_Q15(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -382,7 +382,7 @@ static GOTV_INLINE short MULT16_16_Q15(int a, int b)
    return res;
 }
 
-static GOTV_INLINE short MULT16_16_P13(int a, int b) 
+static NLC_INLINE short MULT16_16_P13(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -399,7 +399,7 @@ static GOTV_INLINE short MULT16_16_P13(int a, int b)
    spx_mips+=4;
    return res;
 }
-static GOTV_INLINE short MULT16_16_P14(int a, int b) 
+static NLC_INLINE short MULT16_16_P14(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -416,7 +416,7 @@ static GOTV_INLINE short MULT16_16_P14(int a, int b)
    spx_mips+=4;
    return res;
 }
-static GOTV_INLINE short MULT16_16_P15(int a, int b) 
+static NLC_INLINE short MULT16_16_P15(int a, int b) 
 {
    long long res;
    if (!VERIFY_SHORT(a) || !VERIFY_SHORT(b))
@@ -436,7 +436,7 @@ static GOTV_INLINE short MULT16_16_P15(int a, int b)
 
 #define DIV32_16(a, b) _DIV32_16(a, b, __FILE__, __LINE__)
 
-static GOTV_INLINE int _DIV32_16(long long a, long long b, char *file, int line) 
+static NLC_INLINE int _DIV32_16(long long a, long long b, char *file, int line) 
 {
    long long res;
    if (b==0)
@@ -462,7 +462,7 @@ static GOTV_INLINE int _DIV32_16(long long a, long long b, char *file, int line)
 }
 
 #define DIV32(a, b) _DIV32(a, b, __FILE__, __LINE__)
-static GOTV_INLINE int _DIV32(long long a, long long b, char *file, int line) 
+static NLC_INLINE int _DIV32(long long a, long long b, char *file, int line) 
 {
    long long res;
    if (b==0)

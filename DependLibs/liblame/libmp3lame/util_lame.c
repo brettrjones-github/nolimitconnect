@@ -481,7 +481,7 @@ SmpFrqIndex(int sample_freq, int *const version)
 
 
 /* resampling via FIR filter, blackman window */
-GOTV_INLINE static FLOAT
+NLC_INLINE static FLOAT
 blackman(FLOAT x, FLOAT fcn, int l)
 {
     /* This algorithm from:

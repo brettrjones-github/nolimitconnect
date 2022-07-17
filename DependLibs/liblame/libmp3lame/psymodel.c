@@ -268,7 +268,7 @@ static const FLOAT tab[] = {
 static const int tab_mask_add_delta[] = { 2, 2, 2, 1, 1, 1, 0, 0, -1 };
 #define STATIC_ASSERT_EQUAL_DIMENSION(A,B) {extern char static_assert_##A[dimension_of(A) == dimension_of(B) ? 1 : -1];(void) static_assert_##A;}
 
-GOTV_INLINE static int
+NLC_INLINE static int
 mask_add_delta(int i)
 {
     STATIC_ASSERT_EQUAL_DIMENSION(tab_mask_add_delta,tab);
@@ -289,7 +289,7 @@ init_mask_add_max_values(void)
 
 
 /* addition of simultaneous masking   Naoki Shibata 2000/7 */
-GOTV_INLINE static FLOAT
+NLC_INLINE static FLOAT
 vbrpsy_mask_add(FLOAT m1, FLOAT m2, int b, int delta)
 {
     static const FLOAT table2[] = {
@@ -438,7 +438,7 @@ convert_partition2scalefac_l_to_s(lame_internal_flags * gfc, FLOAT const *eb, FL
 
 
 
-static GOTV_INLINE FLOAT
+static NLC_INLINE FLOAT
 NS_INTERP(FLOAT x, FLOAT y, FLOAT r)
 {
     /* was pow((x),(r))*pow((y),1-(r)) */

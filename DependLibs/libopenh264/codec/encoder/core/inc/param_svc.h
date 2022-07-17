@@ -62,7 +62,7 @@ extern const uint8_t   g_kuiTemporalIdListTable[MAX_TEMPORAL_LEVEL][MAX_GOP_SIZE
 * \param    upper   input upper value
 * \return   2 based scaling factor
 */
-static GOTV_INLINE uint32_t GetLogFactor (float base, float upper) {
+static NLC_INLINE uint32_t GetLogFactor (float base, float upper) {
   const double dLog2factor      = log10 (1.0 * upper / base) / log10 (2.0);
   const double dEpsilon         = 0.0001;
   const double dRound           = floor (dLog2factor + 0.5);
@@ -524,7 +524,7 @@ typedef struct TagExistingParasetList {
 } SExistingParasetList;
 
 
-static GOTV_INLINE int32_t FreeCodingParam (SWelsSvcCodingParam** pParam, CMemoryAlign* pMa) {
+static NLC_INLINE int32_t FreeCodingParam (SWelsSvcCodingParam** pParam, CMemoryAlign* pMa) {
   if (pParam == NULL || *pParam == NULL || pMa == NULL)
     return 1;
   pMa->WelsFree (*pParam, "SWelsSvcCodingParam");
@@ -532,7 +532,7 @@ static GOTV_INLINE int32_t FreeCodingParam (SWelsSvcCodingParam** pParam, CMemor
   return 0;
 }
 
-static GOTV_INLINE int32_t AllocCodingParam (SWelsSvcCodingParam** pParam, CMemoryAlign* pMa) {
+static NLC_INLINE int32_t AllocCodingParam (SWelsSvcCodingParam** pParam, CMemoryAlign* pMa) {
   if (pParam == NULL || pMa == NULL)
     return 1;
   if (*pParam != NULL) {

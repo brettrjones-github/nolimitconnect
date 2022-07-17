@@ -534,7 +534,7 @@ trancate_smallspectrums(lame_internal_flags const *gfc,
  *
  *************************************************************************/
 
-GOTV_INLINE static int
+NLC_INLINE static int
 loop_break(const gr_info * const cod_info)
 {
     int     sfb;
@@ -579,7 +579,7 @@ get_klemm_noise(const FLOAT * distort, const gr_info * const gi)
     return Max(1e-20, klemm_noise);
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 quant_compare(const int quant_comp,
               const calc_noise_result * const best,
               calc_noise_result * const calc, const gr_info * const gi, const FLOAT * distort)
@@ -934,7 +934,7 @@ inc_subblock_gain(const lame_internal_flags * const gfc, gr_info * const cod_inf
  *          try on short blocks to increase subblock gain
  *
  ********************************************************************/
-GOTV_INLINE static int
+NLC_INLINE static int
 balance_noise(lame_internal_flags * gfc,
               gr_info * const cod_info, FLOAT const *distort, FLOAT xrpow[576], int bRefine)
 {

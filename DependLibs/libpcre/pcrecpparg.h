@@ -47,7 +47,7 @@ class StringPiece;
 template <class T>
 class _RE_MatchObject {
  public:
-  static GOTV_INLINE bool Parse(const char* str, int n, void* dest) {
+  static NLC_INLINE bool Parse(const char* str, int n, void* dest) {
     T* object = reinterpret_cast<T*>(dest);
     return object->ParseFrom(str, n);
   }
@@ -134,20 +134,20 @@ class Arg {
 #undef PCRE_DECLARE_INTEGER_PARSER
 };
 
-GOTV_INLINE Arg::Arg() : arg_(NULL), parser_(parse_null) { }
-GOTV_INLINE Arg::Arg(void* p) : arg_(p), parser_(parse_null) { }
+NLC_INLINE Arg::Arg() : arg_(NULL), parser_(parse_null) { }
+NLC_INLINE Arg::Arg(void* p) : arg_(p), parser_(parse_null) { }
 
-GOTV_INLINE bool Arg::Parse(const char* str, int n) const {
+NLC_INLINE bool Arg::Parse(const char* str, int n) const {
   return (*parser_)(str, n, arg_);
 }
 
 // This part of the parser, appropriate only for ints, deals with bases
 #define MAKE_INTEGER_PARSER(type, name) \
-  GOTV_INLINE Arg Hex(type* ptr) { \
+  NLC_INLINE Arg Hex(type* ptr) { \
     return Arg(ptr, Arg::parse_ ## name ## _hex); } \
-  GOTV_INLINE Arg Octal(type* ptr) { \
+  NLC_INLINE Arg Octal(type* ptr) { \
     return Arg(ptr, Arg::parse_ ## name ## _octal); } \
-  GOTV_INLINE Arg CRadix(type* ptr) { \
+  NLC_INLINE Arg CRadix(type* ptr) { \
     return Arg(ptr, Arg::parse_ ## name ## _cradix); }
 
 MAKE_INTEGER_PARSER(short,              short)     /*                        */

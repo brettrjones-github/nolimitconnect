@@ -334,13 +334,13 @@ enum demux_query_e
  *************************************************************************/
 
 /* stream_t *s could be null and then it mean a access+demux in one */
-GOTV_API demux_t *demux_New( gotvptop_object_t *p_obj, const char *psz_name,
+NLC_API demux_t *demux_New( gotvptop_object_t *p_obj, const char *psz_name,
                             const char *psz_path, stream_t *s, es_out_t *out );
 
-GOTV_API void demux_Delete( demux_t * );
+NLC_API void demux_Delete( demux_t * );
 
 
-GOTV_API int demux_vaControlHelper( stream_t *, int64_t i_start, int64_t i_end,
+NLC_API int demux_vaControlHelper( stream_t *, int64_t i_start, int64_t i_end,
                                    int64_t i_bitrate, int i_align, int i_query, va_list args );
 
 GOTV_USED static inline int demux_Demux( demux_t *p_demux )
@@ -351,7 +351,7 @@ GOTV_USED static inline int demux_Demux( demux_t *p_demux )
     return p_demux->pf_demux( p_demux );
 }
 
-GOTV_API int demux_vaControl( demux_t *p_demux, int i_query, va_list args );
+NLC_API int demux_vaControl( demux_t *p_demux, int i_query, va_list args );
 
 static inline int demux_Control( demux_t *p_demux, int i_query, ... )
 {
@@ -428,12 +428,12 @@ static inline bool demux_IsForced( demux_t *p_demux, const char *psz_name )
  * The provided es_format_t will be cleaned on error or by
  * demux_PacketizerDestroy.
  */
-GOTV_API decoder_t * demux_PacketizerNew( demux_t *p_demux, es_format_t *p_fmt, const char *psz_msg ) GOTV_USED;
+NLC_API decoder_t * demux_PacketizerNew( demux_t *p_demux, es_format_t *p_fmt, const char *psz_msg ) GOTV_USED;
 
 /**
  * This function will destroy a packetizer create by demux_PacketizerNew.
  */
-GOTV_API void demux_PacketizerDestroy( decoder_t *p_packetizer );
+NLC_API void demux_PacketizerDestroy( decoder_t *p_packetizer );
 
 /* */
 #define DEMUX_INIT_COMMON() do {            \
@@ -469,7 +469,7 @@ typedef struct gotvptop_demux_chained_t gotvptop_demux_chained_t;
  * \param out elementary stream output for the chained demux
  * \return a non-NULL pointer on success, NULL on failure.
  */
-GOTV_API gotvptop_demux_chained_t *gotvptop_demux_chained_New(gotvptop_object_t *parent,
+NLC_API gotvptop_demux_chained_t *gotvptop_demux_chained_New(gotvptop_object_t *parent,
                                                    const char *name,
                                                    es_out_t *out);
 
@@ -479,7 +479,7 @@ GOTV_API gotvptop_demux_chained_t *gotvptop_demux_chained_New(gotvptop_object_t 
  * Sends an end-of-stream to the chained demuxer, and releases all underlying
  * allocated resources.
  */
-GOTV_API void gotvptop_demux_chained_Delete(gotvptop_demux_chained_t *);
+NLC_API void gotvptop_demux_chained_Delete(gotvptop_demux_chained_t *);
 
 /**
  * Sends data to a chained demuxer.
@@ -488,7 +488,7 @@ GOTV_API void gotvptop_demux_chained_Delete(gotvptop_demux_chained_t *);
  *
  * \param block data block to queue
  */
-GOTV_API void gotvptop_demux_chained_Send(gotvptop_demux_chained_t *, block_t *block);
+NLC_API void gotvptop_demux_chained_Send(gotvptop_demux_chained_t *, block_t *block);
 
 /**
  * Controls a chained demuxer.
@@ -503,7 +503,7 @@ GOTV_API void gotvptop_demux_chained_Send(gotvptop_demux_chained_t *, block_t *b
  * \param query demux control (see \ref demux_query_e)
  * \param args variable arguments (depending on the query)
  */
-GOTV_API int gotvptop_demux_chained_ControlVa(gotvptop_demux_chained_t *, int query,
+NLC_API int gotvptop_demux_chained_ControlVa(gotvptop_demux_chained_t *, int query,
                                         va_list args);
 
 static inline int gotvptop_demux_chained_Control(gotvptop_demux_chained_t *dc, int query,

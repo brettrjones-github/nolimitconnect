@@ -37,7 +37,7 @@
 /*
  * \brief Add a single point to a contour.
  */
-static GOTV_INLINE bool drawing_add_point(ASS_Drawing *drawing,
+static NLC_INLINE bool drawing_add_point(ASS_Drawing *drawing,
                                      const FT_Vector *point, char tags)
 {
     ASS_Outline *ol = &drawing->outline;
@@ -60,7 +60,7 @@ static GOTV_INLINE bool drawing_add_point(ASS_Drawing *drawing,
 /*
  * \brief Close a contour and check outline size overflow.
  */
-static GOTV_INLINE bool drawing_close_shape(ASS_Drawing *drawing)
+static NLC_INLINE bool drawing_close_shape(ASS_Drawing *drawing)
 {
     ASS_Outline *ol = &drawing->outline;
     if (ol->n_contours >= ol->max_contours) {
@@ -222,7 +222,7 @@ static void drawing_free_tokens(ASS_DrawingToken *token)
 /*
  * \brief Update drawing cbox
  */
-static GOTV_INLINE void update_cbox(ASS_Drawing *drawing, FT_Vector *point)
+static NLC_INLINE void update_cbox(ASS_Drawing *drawing, FT_Vector *point)
 {
     FT_BBox *box = &drawing->cbox;
 
@@ -236,7 +236,7 @@ static GOTV_INLINE void update_cbox(ASS_Drawing *drawing, FT_Vector *point)
  * \brief Translate and scale a point coordinate according to baseline
  * offset and scale.
  */
-static GOTV_INLINE void translate_point(ASS_Drawing *drawing, FT_Vector *point)
+static NLC_INLINE void translate_point(ASS_Drawing *drawing, FT_Vector *point)
 {
     point->x = drawing->point_scale_x * point->x;
     point->y = drawing->point_scale_y * -point->y;

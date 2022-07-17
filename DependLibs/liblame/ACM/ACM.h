@@ -68,19 +68,19 @@ public:
 	static const char * GetVersionString(void) {return VersionString;}
 
 protected:
-//	GOTV_INLINE DWORD Configure( HWND hParentWindow, LPDRVCONFIGINFO pConfig );
-	GOTV_INLINE DWORD About( HWND hParentWindow );
+//	NLC_INLINE DWORD Configure( HWND hParentWindow, LPDRVCONFIGINFO pConfig );
+	NLC_INLINE DWORD About( HWND hParentWindow );
 
-	GOTV_INLINE DWORD OnDriverDetails(const HDRVR hdrvr, LPACMDRIVERDETAILS a_DriverDetail);
-	GOTV_INLINE DWORD OnFormatTagDetails(LPACMFORMATTAGDETAILS a_FormatTagDetails, const LPARAM a_Query);
-	GOTV_INLINE DWORD OnFormatDetails(LPACMFORMATDETAILS a_FormatDetails, const LPARAM a_Query);
-	GOTV_INLINE DWORD OnFormatSuggest(LPACMDRVFORMATSUGGEST a_FormatSuggest);
-	GOTV_INLINE DWORD OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance);
-	GOTV_INLINE DWORD OnStreamClose(LPACMDRVSTREAMINSTANCE a_StreamInstance);
-	GOTV_INLINE DWORD OnStreamSize(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMSIZE the_StreamSize);
-	GOTV_INLINE DWORD OnStreamPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader);
-	GOTV_INLINE DWORD OnStreamUnPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader);
-	GOTV_INLINE DWORD OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMHEADER a_StreamHeader);
+	NLC_INLINE DWORD OnDriverDetails(const HDRVR hdrvr, LPACMDRIVERDETAILS a_DriverDetail);
+	NLC_INLINE DWORD OnFormatTagDetails(LPACMFORMATTAGDETAILS a_FormatTagDetails, const LPARAM a_Query);
+	NLC_INLINE DWORD OnFormatDetails(LPACMFORMATDETAILS a_FormatDetails, const LPARAM a_Query);
+	NLC_INLINE DWORD OnFormatSuggest(LPACMDRVFORMATSUGGEST a_FormatSuggest);
+	NLC_INLINE DWORD OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance);
+	NLC_INLINE DWORD OnStreamClose(LPACMDRVSTREAMINSTANCE a_StreamInstance);
+	NLC_INLINE DWORD OnStreamSize(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMSIZE the_StreamSize);
+	NLC_INLINE DWORD OnStreamPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader);
+	NLC_INLINE DWORD OnStreamUnPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader);
+	NLC_INLINE DWORD OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMHEADER a_StreamHeader);
 
 	void GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned short the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const;
 	void GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned short the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const;

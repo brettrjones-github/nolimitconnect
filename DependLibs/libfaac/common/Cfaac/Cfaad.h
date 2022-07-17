@@ -189,7 +189,7 @@ public:
 
 	int (*ShowDlg4RawAAC)(); // set this to show your dialog (to decode raw aac files)
 	int IsMP4(LPSTR lpstrFilename);
-	GOTV_INLINE bool CanSeek() { MYINPUT	*mi; GLOBALLOCK(mi,hInput,MYINPUT,return 0); bool IsSeekable=mi->IsSeekable; GlobalUnlock(hInput); return IsSeekable; }
+	NLC_INLINE bool CanSeek() { MYINPUT	*mi; GLOBALLOCK(mi,hInput,MYINPUT,return 0); bool IsSeekable=mi->IsSeekable; GlobalUnlock(hInput); return IsSeekable; }
 //	virtual void GetAACInfos(char *Filename, aac_buffer *b, DWORD *header_type, float *song_length, int *pbitrate);
     virtual HANDLE getInfos(LPSTR lpstrFilename);
     virtual int processData(HANDLE hInput, unsigned char far *bufout, long lBytes);

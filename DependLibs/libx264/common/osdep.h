@@ -50,7 +50,7 @@
 #endif
 
 #ifdef _MSC_VER
-//#define GOTV_INLINE __inline
+//#define NLC_INLINE __inline
 #define strcasecmp _stricmp
 #define strncasecmp _strnicmp
 //#define strtok_r strtok_s
@@ -163,7 +163,7 @@ int x264_is_pipe( const char *path );
 
 #if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ > 0)
 #define UNUSED __attribute__((unused))
-#define ALWAYS_INLINE __attribute__((always_inline)) GOTV_INLINE
+#define ALWAYS_INLINE __attribute__((always_inline)) NLC_INLINE
 #define NOINLINE __attribute__((noinline))
 #define MAY_ALIAS __attribute__((may_alias))
 #define x264_constant_p(x) __builtin_constant_p(x)
@@ -173,7 +173,7 @@ int x264_is_pipe( const char *path );
 #define ALWAYS_INLINE __forceinline
 #define NOINLINE __declspec(noinline)
 #else
-#define ALWAYS_INLINE GOTV_INLINE
+#define ALWAYS_INLINE NLC_INLINE
 #define NOINLINE
 #endif
 #define UNUSED
@@ -186,7 +186,7 @@ int x264_is_pipe( const char *path );
 #if HAVE_BEOSTHREAD
 #include <kernel/OS.h>
 #define x264_pthread_t               thread_id
-static GOTV_INLINE int x264_pthread_create( x264_pthread_t *t, void *a, void *(*f)(void *), void *d )
+static NLC_INLINE int x264_pthread_create( x264_pthread_t *t, void *a, void *(*f)(void *), void *d )
 {
      *t = spawn_thread( f, "", 10, d );
      if( *t < B_NO_ERROR )
@@ -357,7 +357,7 @@ static int ALWAYS_INLINE x264_ctz( uint32_t x )
 
 #if HAVE_X86_INLINE_ASM && HAVE_MMX
 /* Don't use __builtin_prefetch; even as recent as 4.3.4, GCC seems incapable of
- * using complex address modes properly unless we use GOTV_INLINE asm. */
+ * using complex address modes properly unless we use NLC_INLINE asm. */
 static ALWAYS_INLINE void x264_prefetch( void *p )
 {
     asm volatile( "prefetcht0 %0"::"m"(*(uint8_t*)p) );
@@ -396,7 +396,7 @@ static ALWAYS_INLINE void x264_prefetch( void *p )
 #define x264_lower_thread_priority(p)
 #endif
 
-static GOTV_INLINE int x264_is_regular_file( FILE *filehandle )
+static NLC_INLINE int x264_is_regular_file( FILE *filehandle )
 {
     x264_struct_stat file_stat;
     if( x264_fstat( fileno( filehandle ), &file_stat ) )
@@ -404,7 +404,7 @@ static GOTV_INLINE int x264_is_regular_file( FILE *filehandle )
     return S_ISREG( file_stat.st_mode );
 }
 
-static GOTV_INLINE int x264_is_regular_file_path( const char *filename )
+static NLC_INLINE int x264_is_regular_file_path( const char *filename )
 {
     x264_struct_stat file_stat;
     if( x264_stat( filename, &file_stat ) )

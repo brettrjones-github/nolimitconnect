@@ -63,7 +63,7 @@ static void put_swf_end_tag(AVFormatContext *s)
     avio_seek(pb, pos, SEEK_SET);
 }
 
-static GOTV_INLINE void max_nbits(int *nbits_ptr, int val)
+static NLC_INLINE void max_nbits(int *nbits_ptr, int val)
 {
     int n;
 

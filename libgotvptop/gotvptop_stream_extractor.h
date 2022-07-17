@@ -107,7 +107,7 @@ typedef struct stream_directory_t {
  * \param mrl the mrl for which the stream_t should be created
  * \return `NULL` on error, a pointer to \ref stream_t on success.
  **/
-GOTV_API stream_t * gotvptop_stream_NewMRL(gotvptop_object_t *obj, const char *mrl)
+NLC_API stream_t * gotvptop_stream_NewMRL(gotvptop_object_t *obj, const char *mrl)
 GOTV_USED;
 #define gotvptop_stream_NewMRL(a, b) gotvptop_stream_NewMRL(GOTV_OBJECT(a), b)
 
@@ -126,7 +126,7 @@ GOTV_USED;
  *
  * \return a pointer to the resulting MRL on success, NULL on failure
  **/
-GOTV_API char* gotvptop_stream_extractor_CreateMRL( stream_directory_t*,
+NLC_API char* gotvptop_stream_extractor_CreateMRL( stream_directory_t*,
                                               char const* subentry );
 
 /**
@@ -150,11 +150,11 @@ GOTV_API char* gotvptop_stream_extractor_CreateMRL( stream_directory_t*,
  * @{
  **/
 
-GOTV_API int gotvptop_stream_extractor_Attach( stream_t** source,
+NLC_API int gotvptop_stream_extractor_Attach( stream_t** source,
                                          char const* identifier,
                                          char const* module_name );
 
-GOTV_API int gotvptop_stream_directory_Attach( stream_t** source,
+NLC_API int gotvptop_stream_directory_Attach( stream_t** source,
                                          char const* module_name );
 /**
  * @}

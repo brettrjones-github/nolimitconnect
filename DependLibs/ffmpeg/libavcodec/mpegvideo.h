@@ -738,7 +738,7 @@ void ff_mpv_motion(MpegEncContext *s,
                    op_pixels_func (*pix_op)[4],
                    qpel_mc_func (*qpix_op)[16]);
 
-static GOTV_INLINE void ff_update_block_index(MpegEncContext *s){
+static NLC_INLINE void ff_update_block_index(MpegEncContext *s){
     const int bytes_per_pixel = 1 + (s->avctx->bits_per_raw_sample > 8);
     const int block_size= (8*bytes_per_pixel) >> s->avctx->lowres;
 
@@ -753,7 +753,7 @@ static GOTV_INLINE void ff_update_block_index(MpegEncContext *s){
     s->dest[2]+= (2 >> s->chroma_x_shift) * block_size;
 }
 
-static GOTV_INLINE int get_bits_diff(MpegEncContext *s){
+static NLC_INLINE int get_bits_diff(MpegEncContext *s){
     const int bits= put_bits_count(&s->pb);
     const int last= s->last_bits;
 

@@ -39,7 +39,7 @@ typedef struct SMVJpegDecodeContext {
     int mjpeg_data_size;
 } SMVJpegDecodeContext;
 
-static GOTV_INLINE void smv_img_pnt_plane(uint8_t      **dst, uint8_t *src,
+static NLC_INLINE void smv_img_pnt_plane(uint8_t      **dst, uint8_t *src,
                                      int src_linesize, int height, int nlines)
 {
     if (!dst || !src)
@@ -48,7 +48,7 @@ static GOTV_INLINE void smv_img_pnt_plane(uint8_t      **dst, uint8_t *src,
     *dst = src;
 }
 
-static GOTV_INLINE void smv_img_pnt(uint8_t *dst_data[4], uint8_t *src_data[4],
+static NLC_INLINE void smv_img_pnt(uint8_t *dst_data[4], uint8_t *src_data[4],
                                const int src_linesizes[4],
                                enum AVPixelFormat pix_fmt, int width, int height,
                                int nlines)

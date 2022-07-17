@@ -1331,7 +1331,7 @@ static int pps_range_extensions(GetBitContext *gb, AVCodecContext *avctx,
     return(0);
 }
 
-static GOTV_INLINE int setup_pps(AVCodecContext *avctx, GetBitContext *gb,
+static NLC_INLINE int setup_pps(AVCodecContext *avctx, GetBitContext *gb,
                             HEVCPPS *pps, HEVCSPS *sps)
 {
     int log2_diff;

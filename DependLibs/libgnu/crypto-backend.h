@@ -25,10 +25,10 @@
 
 #include <libgnu/abstract_gnu.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 int gnutls_crypto_bigint_register( int priority,
 								   gnutls_crypto_bigint_st * s );
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #include <libgnu/crypto.h>
 
@@ -179,7 +179,7 @@ typedef struct gnutls_crypto_rnd {
 #define RSA_E1 6
 #define RSA_E2 7
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  * gnutls_direction_t:
@@ -253,6 +253,6 @@ int gnutls_crypto_rnd_register(int priority,
 			       const gnutls_crypto_rnd_st * s);
 int gnutls_crypto_pk_register(int priority, const gnutls_crypto_pk_st * s);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

@@ -78,7 +78,7 @@ void ff_mpeg4_init_direct_mv(MpegEncContext *s)
     }
 }
 
-static GOTV_INLINE void ff_mpeg4_set_one_direct_mv(MpegEncContext *s, int mx,
+static NLC_INLINE void ff_mpeg4_set_one_direct_mv(MpegEncContext *s, int mx,
                                               int my, int i)
 {
     int xy           = s->block_index[i];

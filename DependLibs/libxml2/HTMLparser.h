@@ -48,7 +48,7 @@ struct _htmlElemDesc {
     char empty;         /* Is this an empty element ? */
     char depr;          /* Is this a deprecated element ? */
     char dtd;           /* 1: only in Loose DTD, 2: only Frameset one */
-    char isinline;      /* is this a block 0 or GOTV_INLINE 1 element */
+    char isinline;      /* is this a block 0 or NLC_INLINE 1 element */
     const char *desc;   /* the description */
 
 /* NRK Jan.2003

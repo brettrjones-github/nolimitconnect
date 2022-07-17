@@ -46,7 +46,7 @@
 #include "share/compat.h"
 
 FLAC__SSE_TARGET("sse2")
-static GOTV_INLINE __m128i local_abs_epi32(__m128i val)
+static NLC_INLINE __m128i local_abs_epi32(__m128i val)
 {
 	__m128i mask = _mm_srai_epi32(val, 31);
 	val = _mm_xor_si128(val, mask);

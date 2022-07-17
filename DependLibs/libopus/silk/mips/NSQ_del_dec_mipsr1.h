@@ -36,7 +36,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "stack_alloc.h"
 
 #define OVERRIDE_silk_noise_shape_quantizer_del_dec
-static GOTV_INLINE void silk_noise_shape_quantizer_del_dec(
+static NLC_INLINE void silk_noise_shape_quantizer_del_dec(
     silk_nsq_state      *NSQ,                   /* I/O  NSQ state                           */
     NSQ_del_dec_struct  psDelDec[],             /* I/O  Delayed decision states             */
     opus_int            signalType,             /* I    Signal type                         */

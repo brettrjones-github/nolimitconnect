@@ -196,7 +196,7 @@ static inline int isHorizDC_C(const uint8_t src[], int stride, const PPContext *
 /**
  * Check if the middle 8x8 Block in the given 8x16 block is flat
  */
-static GOTV_INLINE int isVertDC_C(const uint8_t src[], int stride, const PPContext *c)
+static NLC_INLINE int isVertDC_C(const uint8_t src[], int stride, const PPContext *c)
 {
     int numEq= 0;
     int y;
@@ -218,7 +218,7 @@ static GOTV_INLINE int isVertDC_C(const uint8_t src[], int stride, const PPConte
     return numEq > c->ppMode.flatnessThreshold;
 }
 
-static GOTV_INLINE int isHorizMinMaxOk_C(const uint8_t src[], int stride, int QP)
+static NLC_INLINE int isHorizMinMaxOk_C(const uint8_t src[], int stride, int QP)
 {
     int i;
     for(i=0; i<2; i++){
@@ -234,7 +234,7 @@ static GOTV_INLINE int isHorizMinMaxOk_C(const uint8_t src[], int stride, int QP
     return 1;
 }
 
-static GOTV_INLINE int isVertMinMaxOk_C(const uint8_t src[], int stride, int QP)
+static NLC_INLINE int isVertMinMaxOk_C(const uint8_t src[], int stride, int QP)
 {
     int x;
     src+= stride*4;

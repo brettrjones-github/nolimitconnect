@@ -44,7 +44,7 @@
 #define Cdecl               __cdecl
 #define __attribute__(x)
 #define sleep(__sec)        Sleep ((__sec) * 1000)
-#define GOTV_INLINE              __inline
+#define NLC_INLINE              __inline
 #define restrict
 
 //// constants /////////////////////////////////////////////////////

@@ -52,15 +52,15 @@ namespace WelsEnc {
 typedef void (*PFillingPred) (uint8_t* pPred, uint8_t* pSrc);
 typedef void (*PFillingPred1to16) (uint8_t* pPred, const uint8_t kuiSrc);
 
-static GOTV_INLINE void WelsFillingPred8to16_c (uint8_t* pPred, uint8_t* pSrc) {
+static NLC_INLINE void WelsFillingPred8to16_c (uint8_t* pPred, uint8_t* pSrc) {
   ST64 (pPred  , LD64 (pSrc));
   ST64 (pPred + 8, LD64 (pSrc));
 }
-static GOTV_INLINE void WelsFillingPred8x2to16_c (uint8_t* pPred, uint8_t* pSrc) {
+static NLC_INLINE void WelsFillingPred8x2to16_c (uint8_t* pPred, uint8_t* pSrc) {
   ST64 (pPred  , LD64 (pSrc));
   ST64 (pPred + 8, LD64 (pSrc + 8));
 }
-static GOTV_INLINE void WelsFillingPred1to16_c (uint8_t* pPred, const uint8_t kuiSrc) {
+static NLC_INLINE void WelsFillingPred1to16_c (uint8_t* pPred, const uint8_t kuiSrc) {
   const uint8_t kuiSrc8[8] = { kuiSrc, kuiSrc, kuiSrc, kuiSrc, kuiSrc, kuiSrc, kuiSrc, kuiSrc };
   ST64 (pPred  , LD64 (kuiSrc8));
   ST64 (pPred + 8, LD64 (kuiSrc8));

@@ -32,7 +32,7 @@
 
 #include "libavcodec/mpegvideo.h"
 
-static void GOTV_INLINE ff_dct_unquantize_h263_neon(int qscale, int qadd, int nCoeffs,
+static void NLC_INLINE ff_dct_unquantize_h263_neon(int qscale, int qadd, int nCoeffs,
                                                int16_t *block)
 {
     int16x8_t q0s16, q2s16, q3s16, q8s16, q10s16, q11s16, q13s16;

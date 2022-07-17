@@ -34,7 +34,7 @@
  *Various type declarations about font selection related
  *properties.
  */
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 enum CRFontFamilyType
@@ -310,6 +310,6 @@ const gchar * cr_font_variant_to_string (enum CRFontVariant a_code) ;
 
 const gchar * cr_font_stretch_to_string (enum CRFontStretch a_code) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __CR_FONTS_H__ */

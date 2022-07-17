@@ -300,7 +300,7 @@ static int config_out_props(AVFilterLink *outlink)
  *        only meaningful when interleave is selected
  * @param flags context flags
  */
-static GOTV_INLINE
+static NLC_INLINE
 void copy_picture_field(TInterlaceContext *tinterlace,
                         uint8_t *dst[4], int dst_linesize[4],
                         const uint8_t *src[4], int src_linesize[4],

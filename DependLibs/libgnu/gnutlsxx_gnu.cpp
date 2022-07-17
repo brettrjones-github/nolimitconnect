@@ -27,7 +27,7 @@
 namespace gnutls
 {
 
-  GOTV_INLINE static int RETWRAP (int ret)
+  NLC_INLINE static int RETWRAP (int ret)
   {
     if (ret < 0)
       throw (exception (ret));

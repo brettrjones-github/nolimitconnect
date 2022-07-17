@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-extern GOTV_DLL_VARIABLE const struct gl_list_implementation gl_linkedhash_list_implementation;
+extern NLC_DLL_VARIABLE const struct gl_list_implementation gl_linkedhash_list_implementation;
 #define GL_LINKEDHASH_LIST &gl_linkedhash_list_implementation
 
 #ifdef __cplusplus

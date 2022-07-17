@@ -33,7 +33,7 @@
 #include "rsvg-shapes.h"
 #include <libxml/SAX.h>
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 typedef RsvgCoordUnits RsvgMaskUnits;
 
@@ -59,5 +59,5 @@ struct _RsvgClipPath {
 G_GNUC_INTERNAL
 RsvgNode *rsvg_new_clip_path	(const char *element_name);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 #endif

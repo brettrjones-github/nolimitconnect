@@ -21,6 +21,6 @@
 #include "write-catalog.h"
 
 /* Describes a PO file in .strings syntax.  */
-extern GOTV_DLL_VARIABLE const struct catalog_output_format output_format_stringtable;
+extern NLC_DLL_VARIABLE const struct catalog_output_format output_format_stringtable;
 
 #endif /* _WRITE_STRINGTABLE_H */

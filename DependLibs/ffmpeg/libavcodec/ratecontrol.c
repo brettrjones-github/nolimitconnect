@@ -61,7 +61,7 @@ static double get_fps(AVCodecContext *avctx)
     return 1.0 / av_q2d(avctx->time_base) / FFMAX(avctx->ticks_per_frame, 1);
 }
 
-static GOTV_INLINE double qp2bits(RateControlEntry *rce, double qp)
+static NLC_INLINE double qp2bits(RateControlEntry *rce, double qp)
 {
     if (qp <= 0.0) {
         av_log(NULL, AV_LOG_ERROR, "qp<=0.0\n");
@@ -69,7 +69,7 @@ static GOTV_INLINE double qp2bits(RateControlEntry *rce, double qp)
     return rce->qscale * (double)(rce->i_tex_bits + rce->p_tex_bits + 1) / qp;
 }
 
-static GOTV_INLINE double bits2qp(RateControlEntry *rce, double bits)
+static NLC_INLINE double bits2qp(RateControlEntry *rce, double bits)
 {
     if (bits < 0.9) {
         av_log(NULL, AV_LOG_ERROR, "bits<0.9\n");

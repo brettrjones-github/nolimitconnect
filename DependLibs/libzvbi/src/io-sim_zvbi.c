@@ -123,7 +123,7 @@ do {									\
 #ifndef HAVE_SINCOS
 
 /* This is a GNU extension. */
-GOTV_INLINE void
+NLC_INLINE void
 sincos				(double			x,
 				 double *		sinx,
 				 double *		cosx)

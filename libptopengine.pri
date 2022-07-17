@@ -175,6 +175,8 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoredHostsDb.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioInputFrame.h \
+    $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioProcessorDefs.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaClient.h \
@@ -485,6 +487,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoredHostsDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioInputFrame.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.cpp \

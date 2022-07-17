@@ -46,7 +46,7 @@ struct SDL_PrivateAudioData {
 
 #if (PA_API_VERSION < 12)
 /** Return non-zero if the passed state is one of the connected states */
-static GOTV_INLINE int PA_CONTEXT_IS_GOOD(pa_context_state_t x) {
+static NLC_INLINE int PA_CONTEXT_IS_GOOD(pa_context_state_t x) {
     return
         x == PA_CONTEXT_CONNECTING ||
         x == PA_CONTEXT_AUTHORIZING ||
@@ -54,7 +54,7 @@ static GOTV_INLINE int PA_CONTEXT_IS_GOOD(pa_context_state_t x) {
         x == PA_CONTEXT_READY;
 }
 /** Return non-zero if the passed state is one of the connected states */
-static GOTV_INLINE int PA_STREAM_IS_GOOD(pa_stream_state_t x) {
+static NLC_INLINE int PA_STREAM_IS_GOOD(pa_stream_state_t x) {
     return
         x == PA_STREAM_CREATING ||
         x == PA_STREAM_READY;

@@ -70,13 +70,13 @@ int _gnutls_cipher_init(cipher_hd_st *, const cipher_entry_st * e,
 			const gnutls_datum_t * key,
 			const gnutls_datum_t * iv, int enc);
 
-GOTV_INLINE static int _gnutls_cipher_setiv(const cipher_hd_st * handle,
+NLC_INLINE static int _gnutls_cipher_setiv(const cipher_hd_st * handle,
 					const void *iv, size_t ivlen)
 {
 	return handle->setiv(handle->handle, iv, ivlen);
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_cipher_encrypt2(const cipher_hd_st * handle, const void *text,
 			size_t textlen, void *ciphertext,
 			size_t ciphertextlen)
@@ -92,7 +92,7 @@ _gnutls_cipher_encrypt2(const cipher_hd_st * handle, const void *text,
 	return 0;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_cipher_decrypt2(const cipher_hd_st * handle,
 			const void *ciphertext, size_t ciphertextlen,
 			void *text, size_t textlen)
@@ -108,7 +108,7 @@ _gnutls_cipher_decrypt2(const cipher_hd_st * handle,
 	return 0;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_aead_cipher_encrypt(const cipher_hd_st * handle,
 			    const void *nonce, size_t nonce_len,
 			    const void *auth, size_t auth_len,
@@ -128,7 +128,7 @@ _gnutls_aead_cipher_encrypt(const cipher_hd_st * handle,
 	return GNUTLS_E_INVALID_REQUEST;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_aead_cipher_decrypt(const cipher_hd_st * handle,
 			    const void *nonce, size_t nonce_len,
 			    const void *auth, size_t auth_len,
@@ -148,7 +148,7 @@ _gnutls_aead_cipher_decrypt(const cipher_hd_st * handle,
 	return GNUTLS_E_INVALID_REQUEST;
 }
 
-GOTV_INLINE static void _gnutls_cipher_deinit(cipher_hd_st * handle)
+NLC_INLINE static void _gnutls_cipher_deinit(cipher_hd_st * handle)
 {
 	if (likely(handle != NULL && handle->handle != NULL)) {
 		handle->deinit(handle->handle);
@@ -161,7 +161,7 @@ int _gnutls_cipher_exists(gnutls_cipher_algorithm_t cipher);
 #define _gnutls_cipher_is_aead(h) _gnutls_cipher_algo_is_aead((h)->e)
 
 /* returns the tag in AUTHENC ciphers */
-GOTV_INLINE static void _gnutls_cipher_tag(const cipher_hd_st * handle,
+NLC_INLINE static void _gnutls_cipher_tag(const cipher_hd_st * handle,
 				      void *tag, size_t tag_size)
 {
 	if (likely(handle != NULL && handle->handle != NULL)) {
@@ -171,7 +171,7 @@ GOTV_INLINE static void _gnutls_cipher_tag(const cipher_hd_st * handle,
 
 /* Add auth data for AUTHENC ciphers
  */
-GOTV_INLINE static int _gnutls_cipher_auth(const cipher_hd_st * handle,
+NLC_INLINE static int _gnutls_cipher_auth(const cipher_hd_st * handle,
 				      const void *text, size_t textlen)
 {
 	if (likely(handle != NULL && handle->handle != NULL)) {
@@ -222,14 +222,14 @@ int _gnutls_auth_cipher_decrypt2(auth_cipher_hd_st * handle,
 int _gnutls_auth_cipher_tag(auth_cipher_hd_st * handle, void *tag,
 			    int tag_size);
 
-GOTV_INLINE static void _gnutls_auth_cipher_setiv(const auth_cipher_hd_st *
+NLC_INLINE static void _gnutls_auth_cipher_setiv(const auth_cipher_hd_st *
 					     handle, const void *iv,
 					     size_t ivlen)
 {
 	_gnutls_cipher_setiv(&handle->cipher, iv, ivlen);
 }
 
-GOTV_INLINE static size_t _gnutls_auth_cipher_tag_len(auth_cipher_hd_st *
+NLC_INLINE static size_t _gnutls_auth_cipher_tag_len(auth_cipher_hd_st *
 						 handle)
 {
 	return handle->tag_size;

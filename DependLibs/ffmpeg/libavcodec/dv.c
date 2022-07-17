@@ -51,7 +51,7 @@
 /* XXX: also include quantization */
 RL_VLC_ELEM ff_dv_rl_vlc[1664];
 
-static GOTV_INLINE void dv_calc_mb_coordinates(const AVDVProfile *d, int chan,
+static NLC_INLINE void dv_calc_mb_coordinates(const AVDVProfile *d, int chan,
                                           int seq, int slot, uint16_t *tbl)
 {
     static const uint8_t off[]   = {  2,  6,  8, 0,  4 };

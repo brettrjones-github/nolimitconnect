@@ -66,7 +66,7 @@ enum
 
 #include  "lbrkprop1.h"
 
-static GOTV_INLINE unsigned char
+static NLC_INLINE unsigned char
 unilbrkprop_lookup (ucs4_t uc)
 {
   unsigned int index1 = uc >> lbrkprop_header_0;

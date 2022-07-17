@@ -109,7 +109,7 @@ static int query_formats(AVFilterContext *ctx)
     return ff_set_common_formats(ctx, fmts_list);
 }
 
-static GOTV_INLINE double get_coeff(double d)
+static NLC_INLINE double get_coeff(double d)
 {
     double coeff, A = -0.60;
 

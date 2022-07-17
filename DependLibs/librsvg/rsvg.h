@@ -33,7 +33,7 @@
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #if defined(RSVG_DISABLE_DEPRECATION_WARNINGS) || !GLIB_CHECK_VERSION (2, 31, 0)
 #define RSVG_DEPRECATED
@@ -256,7 +256,7 @@ const char *rsvg_handle_get_metadata    (RsvgHandle * handle);
 
 /* END deprecated APIs. */
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #include "librsvg-enum-types.h"
 #include "librsvg-features.h"

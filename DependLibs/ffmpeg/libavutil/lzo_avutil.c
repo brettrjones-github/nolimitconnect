@@ -42,7 +42,7 @@ typedef struct LZOContext {
  * @brief Reads one byte from the input buffer, avoiding an overrun.
  * @return byte read
  */
-static GOTV_INLINE int get_byte(LZOContext *c)
+static NLC_INLINE int get_byte(LZOContext *c)
 {
     if (c->in < c->in_end)
         return *c->in++;
@@ -62,7 +62,7 @@ static GOTV_INLINE int get_byte(LZOContext *c)
  * @param mask bits used from x
  * @return decoded length value
  */
-static GOTV_INLINE int get_len(LZOContext *c, int x, int mask)
+static NLC_INLINE int get_len(LZOContext *c, int x, int mask)
 {
     int cnt = x & mask;
     if (!cnt) {
@@ -82,7 +82,7 @@ static GOTV_INLINE int get_len(LZOContext *c, int x, int mask)
  * @brief Copies bytes from input to output buffer with checking.
  * @param cnt number of bytes to copy, must be >= 0
  */
-static GOTV_INLINE void copy(LZOContext *c, int cnt)
+static NLC_INLINE void copy(LZOContext *c, int cnt)
 {
     register const uint8_t *src = c->in;
     register uint8_t *dst       = c->out;
@@ -115,7 +115,7 @@ static GOTV_INLINE void copy(LZOContext *c, int cnt)
  * cnt > back is valid, this will copy the bytes we just copied,
  * thus creating a repeating pattern with a period length of back.
  */
-static GOTV_INLINE void copy_backptr(LZOContext *c, int back, int cnt)
+static NLC_INLINE void copy_backptr(LZOContext *c, int back, int cnt)
 {
     register uint8_t *dst       = c->out;
     av_assert0(cnt > 0);

@@ -53,7 +53,7 @@ EXTERN(void) jpeg_make_d_derived_tbl
 
 /*
  * Fetching the next N bits from the input stream is a time-critical operation
- * for the Huffman decoders.  We implement it with a combination of GOTV_INLINE
+ * for the Huffman decoders.  We implement it with a combination of NLC_INLINE
  * macros and out-of-line subroutines.  Note that N (the number of bits
  * demanded at one time) never exceeds 15 for JPEG use.
  *
@@ -163,7 +163,7 @@ EXTERN(boolean) jpeg_fill_bit_buffer
  * We use a lookahead table to process codes of up to HUFF_LOOKAHEAD bits
  * without looping.  Usually, more than 95% of the Huffman codes will be 8
  * or fewer bits long.  The few overlength codes are handled with a loop,
- * which need not be GOTV_INLINE code.
+ * which need not be NLC_INLINE code.
  *
  * Notes about the HUFF_DECODE macro:
  * 1. Near the end of the data segment, we may fail to get enough bits

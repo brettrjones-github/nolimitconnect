@@ -112,22 +112,22 @@ private:
 // Global Helpers (deprecated)
 ///////////////////////////////////////////////////////////////////////////////
 
-GOTV_INLINE void SetOrganizationName(const std::string& organization) {
+NLC_INLINE void SetOrganizationName(const std::string& organization) {
   Filesystem::SetOrganizationName(organization);
 }
-GOTV_INLINE void SetApplicationName(const std::string& application) {
+NLC_INLINE void SetApplicationName(const std::string& application) {
   Filesystem::SetApplicationName(application);
 }
-GOTV_INLINE void GetOrganizationName(std::string* organization) {
+NLC_INLINE void GetOrganizationName(std::string* organization) {
   Filesystem::GetOrganizationName(organization);
 }
-GOTV_INLINE void GetApplicationName(std::string* application) {
+NLC_INLINE void GetApplicationName(std::string* application) {
   Filesystem::GetApplicationName(application);
 }
-GOTV_INLINE bool CreateFolder(const Pathname& path) {
+NLC_INLINE bool CreateFolder(const Pathname& path) {
   return Filesystem::CreateFolder(path);
 }
-GOTV_INLINE bool FinishPath(Pathname& path, bool create, const std::string& append) {
+NLC_INLINE bool FinishPath(Pathname& path, bool create, const std::string& append) {
   if (!append.empty())
     path.AppendFolder(append);
   return !create || CreateFolder(path);
@@ -136,7 +136,7 @@ GOTV_INLINE bool FinishPath(Pathname& path, bool create, const std::string& appe
 // folder.  Filesystem uses <temp>/<exename>.  We will be migrating exclusively
 // to <temp>/<orgname>/<appname> eventually.  Since these are temp folders,
 // it's probably ok to orphan them during the transition.
-GOTV_INLINE bool GetTemporaryFolder(Pathname& path, bool create,
+NLC_INLINE bool GetTemporaryFolder(Pathname& path, bool create,
                                const std::string& append) {
   std::string application_name;
   Filesystem::GetApplicationName(&application_name);
@@ -144,13 +144,13 @@ GOTV_INLINE bool GetTemporaryFolder(Pathname& path, bool create,
   return Filesystem::GetTemporaryFolder(path, create, &application_name)
          && FinishPath(path, create, append);
 }
-GOTV_INLINE bool GetAppDataFolder(Pathname& path, bool create,
+NLC_INLINE bool GetAppDataFolder(Pathname& path, bool create,
                              const std::string& append) {
   vx_assert(!create); // TODO: Support create flag on Filesystem::GetAppDataFolder.
   return Filesystem::GetAppDataFolder(&path, true)
          && FinishPath(path, create, append);
 }
-GOTV_INLINE bool CleanupTemporaryFolder() {
+NLC_INLINE bool CleanupTemporaryFolder() {
   Pathname path;
   if (!GetTemporaryFolder(path, false, ""))
     return false;

@@ -31,7 +31,7 @@
 #ifndef __CR_TERM_H__
 #define __CR_TERM_H__
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -185,6 +185,6 @@ gboolean cr_term_unref (CRTerm *a_this) ;
 
 void cr_term_destroy (CRTerm * a_term) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_TERM_H__*/

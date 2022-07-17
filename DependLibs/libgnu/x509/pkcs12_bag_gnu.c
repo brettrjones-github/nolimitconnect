@@ -53,7 +53,7 @@ int gnutls_pkcs12_bag_init(gnutls_pkcs12_bag_t * bag)
 	return GNUTLS_E_MEMORY_ERROR;
 }
 
-static GOTV_INLINE void _pkcs12_bag_free_data(gnutls_pkcs12_bag_t bag)
+static NLC_INLINE void _pkcs12_bag_free_data(gnutls_pkcs12_bag_t bag)
 {
 	int i;
 

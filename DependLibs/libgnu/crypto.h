@@ -24,7 +24,7 @@
 #include <libgnu/config_libgnu.h>
 #include <libgnu/abstract_gnu.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct api_cipher_hd_st *gnutls_cipher_hd_t;
 
@@ -219,5 +219,5 @@ gnutls_crypto_register_digest(gnutls_digest_algorithm_t digest,
 			   gnutls_digest_deinit_func deinit,
 			   gnutls_digest_fast_func hash_fast);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 

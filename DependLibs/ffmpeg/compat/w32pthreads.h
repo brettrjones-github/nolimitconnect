@@ -101,22 +101,22 @@ static av_unused int pthread_join(pthread_t thread, void **value_ptr)
     return 0;
 }
 
-static GOTV_INLINE int pthread_mutex_init(pthread_mutex_t *m, void* attr)
+static NLC_INLINE int pthread_mutex_init(pthread_mutex_t *m, void* attr)
 {
     InitializeSRWLock(m);
     return 0;
 }
-static GOTV_INLINE int pthread_mutex_destroy(pthread_mutex_t *m)
+static NLC_INLINE int pthread_mutex_destroy(pthread_mutex_t *m)
 {
     /* Unlocked SWR locks use no resources */
     return 0;
 }
-static GOTV_INLINE int pthread_mutex_lock(pthread_mutex_t *m)
+static NLC_INLINE int pthread_mutex_lock(pthread_mutex_t *m)
 {
     AcquireSRWLockExclusive(m);
     return 0;
 }
-static GOTV_INLINE int pthread_mutex_unlock(pthread_mutex_t *m)
+static NLC_INLINE int pthread_mutex_unlock(pthread_mutex_t *m)
 {
     ReleaseSRWLockExclusive(m);
     return 0;
@@ -135,31 +135,31 @@ static av_unused int pthread_once(pthread_once_t *once_control, void (*init_rout
     return 0;
 }
 
-static GOTV_INLINE int pthread_cond_init(pthread_cond_t *cond, const void *unused_attr)
+static NLC_INLINE int pthread_cond_init(pthread_cond_t *cond, const void *unused_attr)
 {
     InitializeConditionVariable(cond);
     return 0;
 }
 
 /* native condition variables do not destroy */
-static GOTV_INLINE int pthread_cond_destroy(pthread_cond_t *cond)
+static NLC_INLINE int pthread_cond_destroy(pthread_cond_t *cond)
 {
     return 0;
 }
 
-static GOTV_INLINE int pthread_cond_broadcast(pthread_cond_t *cond)
+static NLC_INLINE int pthread_cond_broadcast(pthread_cond_t *cond)
 {
     WakeAllConditionVariable(cond);
     return 0;
 }
 
-static GOTV_INLINE int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)
+static NLC_INLINE int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)
 {
     SleepConditionVariableSRW(cond, mutex, INFINITE, 0);
     return 0;
 }
 
-static GOTV_INLINE int pthread_cond_signal(pthread_cond_t *cond)
+static NLC_INLINE int pthread_cond_signal(pthread_cond_t *cond)
 {
     WakeConditionVariable(cond);
     return 0;

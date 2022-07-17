@@ -30,7 +30,7 @@
 #ifndef __CR_STATEMENT_H__
 #define __CR_STATEMENT_H__
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -435,6 +435,6 @@ cr_statement_get_from_list (CRStatement *a_this, int itemnr) ;
 void
 cr_statement_destroy (CRStatement *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_STATEMENT_H__*/

@@ -35,36 +35,36 @@ public:
 	};
 };
 
-GOTV_INLINE RandomGenerator api_random::GetFunction()
+NLC_INLINE RandomGenerator api_random::GetFunction()
 {
 	return _call(API_RANDOM_GETFUNCTION, (RandomGenerator )0);
 }
-GOTV_INLINE UnsignedRandomGenerator api_random::GetUnsignedFunction()
+NLC_INLINE UnsignedRandomGenerator api_random::GetUnsignedFunction()
 {
 	return _call(API_RANDOM_GETFUNCTION_UNSIGNED, (UnsignedRandomGenerator )0);
 }
 
-GOTV_INLINE int api_random::GetNumber()
+NLC_INLINE int api_random::GetNumber()
 {
 	return _call(API_RANDOM_GETNUMBER, 0);
 }
-GOTV_INLINE int api_random::GetPositiveNumber()
+NLC_INLINE int api_random::GetPositiveNumber()
 {
 	return _call(API_RANDOM_GETPOSITIVENUMBER, 0);
 }
-GOTV_INLINE float api_random::GetFloat()
+NLC_INLINE float api_random::GetFloat()
 {
 	return _call(API_RANDOM_GETFLOAT, 0.f);
 }
-GOTV_INLINE float api_random::GetFloat_LessThanOne()
+NLC_INLINE float api_random::GetFloat_LessThanOne()
 {
 	return _call(API_RANDOM_GETFLOAT2, 0.f);
 }
-GOTV_INLINE float api_random::GetFloat_LessThanOne_NotZero()
+NLC_INLINE float api_random::GetFloat_LessThanOne_NotZero()
 {
 	return _call(API_RANDOM_GETFLOAT3, 0.f);
 }
-GOTV_INLINE double api_random::GetDouble()
+NLC_INLINE double api_random::GetDouble()
 {
 	return _call(API_RANDOM_GETDOUBLE, 0.);
 }

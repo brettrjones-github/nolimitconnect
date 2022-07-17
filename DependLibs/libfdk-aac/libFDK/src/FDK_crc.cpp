@@ -175,7 +175,7 @@ static const uint16_t crcLookup_16_12_5_0[256] =
 
 /*--------------- function declarations --------------------*/
 
-static GOTV_INLINE int32_t calcCrc_Bits(
+static NLC_INLINE int32_t calcCrc_Bits(
         uint16_t * const                  pCrc,
         uint16_t                          crcMask,
         uint16_t                          crcPoly,
@@ -183,7 +183,7 @@ static GOTV_INLINE int32_t calcCrc_Bits(
         int32_t                             nBits
         );
 
-static GOTV_INLINE int32_t calcCrc_Bytes(
+static NLC_INLINE int32_t calcCrc_Bytes(
         uint16_t * const                  pCrc,
         const uint16_t *                  pCrcLookup,
         HANDLE_FDK_BITSTREAM            hBs,
@@ -317,7 +317,7 @@ uint16_t FDKcrcGetCRC(
  *
  * \return  Number of processed bits.
  */
-static GOTV_INLINE int32_t calcCrc_Bits(
+static NLC_INLINE int32_t calcCrc_Bits(
         uint16_t * const                  pCrc,
         uint16_t                          crcMask,
         uint16_t                          crcPoly,
@@ -363,7 +363,7 @@ static GOTV_INLINE int32_t calcCrc_Bits(
  *
  * \return  Number of processed bits.
  */
-static GOTV_INLINE int32_t calcCrc_Bytes(
+static NLC_INLINE int32_t calcCrc_Bytes(
         uint16_t * const                  pCrc,
         const uint16_t *                  pCrcLookup,
         HANDLE_FDK_BITSTREAM            hBs,

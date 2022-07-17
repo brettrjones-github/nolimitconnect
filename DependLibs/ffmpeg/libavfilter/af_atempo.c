@@ -162,12 +162,12 @@ static const AVOption atempo_options[] = {
 
 AVFILTER_DEFINE_CLASS(atempo);
 
-GOTV_INLINE static AudioFragment *yae_curr_frag(ATempoContext *atempo)
+NLC_INLINE static AudioFragment *yae_curr_frag(ATempoContext *atempo)
 {
     return &atempo->frag[atempo->nfrag % 2];
 }
 
-GOTV_INLINE static AudioFragment *yae_prev_frag(ATempoContext *atempo)
+NLC_INLINE static AudioFragment *yae_prev_frag(ATempoContext *atempo)
 {
     return &atempo->frag[(atempo->nfrag + 1) % 2];
 }

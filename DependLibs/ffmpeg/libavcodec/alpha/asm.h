@@ -39,14 +39,14 @@
 #define AMASK_CIX (1 << 2)
 #define AMASK_MVI (1 << 8)
 
-static GOTV_INLINE uint64_t BYTE_VEC(uint64_t x)
+static NLC_INLINE uint64_t BYTE_VEC(uint64_t x)
 {
     x |= x <<  8;
     x |= x << 16;
     x |= x << 32;
     return x;
 }
-static GOTV_INLINE uint64_t WORD_VEC(uint64_t x)
+static NLC_INLINE uint64_t WORD_VEC(uint64_t x)
 {
     x |= x << 16;
     x |= x << 32;

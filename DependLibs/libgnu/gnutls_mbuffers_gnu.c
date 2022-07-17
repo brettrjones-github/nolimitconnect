@@ -197,7 +197,7 @@ mbuffer_st *_mbuffer_head_get_next(mbuffer_st * cur, gnutls_datum_t * msg)
  *
  * Cost: O(1)
  */
-static GOTV_INLINE void remove_front(mbuffer_head_st * buf)
+static NLC_INLINE void remove_front(mbuffer_head_st * buf)
 {
 	mbuffer_st *bufel = buf->head;
 

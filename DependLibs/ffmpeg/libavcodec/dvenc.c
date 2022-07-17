@@ -350,7 +350,7 @@ static av_always_inline int dv_init_enc_block(EncBlockInfo *bi, uint8_t *data,
            bi->bit_size[2] + bi->bit_size[3];
 }
 
-static GOTV_INLINE void dv_guess_qnos(EncBlockInfo *blks, int *qnos)
+static NLC_INLINE void dv_guess_qnos(EncBlockInfo *blks, int *qnos)
 {
     int size[5];
     int i, j, k, a, prev, a2;
@@ -562,7 +562,7 @@ static int dv_encode_video_segment(AVCodecContext *avctx, void *arg)
     return 0;
 }
 
-static GOTV_INLINE int dv_write_pack(enum dv_pack_type pack_id, DVVideoContext *c,
+static NLC_INLINE int dv_write_pack(enum dv_pack_type pack_id, DVVideoContext *c,
                                 uint8_t *buf)
 {
     /*
@@ -639,7 +639,7 @@ static GOTV_INLINE int dv_write_pack(enum dv_pack_type pack_id, DVVideoContext *
     return 5;
 }
 
-static GOTV_INLINE int dv_write_dif_id(enum dv_section_type t, uint8_t chan_num,
+static NLC_INLINE int dv_write_dif_id(enum dv_section_type t, uint8_t chan_num,
                                   uint8_t seq_num, uint8_t dif_num,
                                   uint8_t *buf)
 {
@@ -651,7 +651,7 @@ static GOTV_INLINE int dv_write_dif_id(enum dv_section_type t, uint8_t chan_num,
     return 3;
 }
 
-static GOTV_INLINE int dv_write_ssyb_id(uint8_t syb_num, uint8_t fr, uint8_t *buf)
+static NLC_INLINE int dv_write_ssyb_id(uint8_t syb_num, uint8_t fr, uint8_t *buf)
 {
     if (syb_num == 0 || syb_num == 6) {
         buf[0] = (fr << 7) | /* FR ID 1 - first half of each channel; 0 - second */

@@ -36,17 +36,17 @@ public:
 	};
 };
 
-GOTV_INLINE ifc_configgroup *api_config::GetGroup(GUID groupGUID)
+NLC_INLINE ifc_configgroup *api_config::GetGroup(GUID groupGUID)
 {
 	return _call(API_CONFIG_GETGROUP, (ifc_configgroup *)0, groupGUID);
 }
 
-GOTV_INLINE void api_config::RegisterGroup(ifc_configgroup *newGroup)
+NLC_INLINE void api_config::RegisterGroup(ifc_configgroup *newGroup)
 {
 	_voidcall(API_CONFIG_REGISTERGROUP, newGroup);
 }
 
-GOTV_INLINE bool api_config::GetBool(GUID groupGUID, const wchar_t *configItem, bool defaultValue)
+NLC_INLINE bool api_config::GetBool(GUID groupGUID, const wchar_t *configItem, bool defaultValue)
 {
 	ifc_configgroup *group = GetGroup(groupGUID);
 	if (group)
@@ -58,7 +58,7 @@ GOTV_INLINE bool api_config::GetBool(GUID groupGUID, const wchar_t *configItem, 
 	return defaultValue;
 }
 
-GOTV_INLINE uintptr_t api_config::GetUnsigned(GUID groupGUID, const wchar_t *configItem, uintptr_t defaultValue)
+NLC_INLINE uintptr_t api_config::GetUnsigned(GUID groupGUID, const wchar_t *configItem, uintptr_t defaultValue)
 {
 	ifc_configgroup *group = GetGroup(groupGUID);
 	if (group)
@@ -70,7 +70,7 @@ GOTV_INLINE uintptr_t api_config::GetUnsigned(GUID groupGUID, const wchar_t *con
 	return defaultValue;
 }
 
-GOTV_INLINE intptr_t api_config::GetInt(GUID groupGUID, const wchar_t *configItem, intptr_t defaultValue)
+NLC_INLINE intptr_t api_config::GetInt(GUID groupGUID, const wchar_t *configItem, intptr_t defaultValue)
 {
 	ifc_configgroup *group = GetGroup(groupGUID);
 	if (group)
@@ -82,7 +82,7 @@ GOTV_INLINE intptr_t api_config::GetInt(GUID groupGUID, const wchar_t *configIte
 	return defaultValue;
 }
 
-GOTV_INLINE float api_config::GetFloat(GUID groupGUID, const wchar_t *configItem, float defaultValue)
+NLC_INLINE float api_config::GetFloat(GUID groupGUID, const wchar_t *configItem, float defaultValue)
 {
 	ifc_configgroup *group = GetGroup(groupGUID);
 	if (group)
@@ -94,7 +94,7 @@ GOTV_INLINE float api_config::GetFloat(GUID groupGUID, const wchar_t *configItem
 	return defaultValue;
 }
 
-GOTV_INLINE const wchar_t *api_config::GetString(GUID groupGUID, const wchar_t *configItem, const wchar_t *defaultValue)
+NLC_INLINE const wchar_t *api_config::GetString(GUID groupGUID, const wchar_t *configItem, const wchar_t *defaultValue)
 {
 	ifc_configgroup *group = GetGroup(groupGUID);
 	if (group)
@@ -106,7 +106,7 @@ GOTV_INLINE const wchar_t *api_config::GetString(GUID groupGUID, const wchar_t *
 	return defaultValue;
 }
 
-GOTV_INLINE ifc_configitem *api_config::GetItem(GUID groupGUID, const wchar_t *configItem)
+NLC_INLINE ifc_configitem *api_config::GetItem(GUID groupGUID, const wchar_t *configItem)
 {
 	ifc_configgroup *group = GetGroup(groupGUID);
 	if (group)

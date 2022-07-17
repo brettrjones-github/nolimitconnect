@@ -73,7 +73,7 @@ static struct rnd_ctx_st rnd_ctx;
 #define NONCE_RESEED_BYTES (1048576)
 static struct nonce_ctx_st nonce_ctx;
 
-GOTV_INLINE static unsigned int
+NLC_INLINE static unsigned int
 timespec_sub_sec(struct timespec *a, struct timespec *b)
 {
 	return (a->tv_sec - b->tv_sec);

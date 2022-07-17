@@ -211,7 +211,7 @@ static void close_connection(HTTPContext *c);
 
 /* HTTP handling */
 static int handle_connection(HTTPContext *c);
-static GOTV_INLINE void print_stream_params(AVIOContext *pb, FFServerStream *stream);
+static NLC_INLINE void print_stream_params(AVIOContext *pb, FFServerStream *stream);
 static void compute_status(HTTPContext *c);
 static int open_input_stream(HTTPContext *c, const char *info);
 static int http_parse_request(HTTPContext *c);
@@ -244,8 +244,8 @@ static int rtp_new_av_stream(HTTPContext *c,
                              HTTPContext *rtsp_c);
 /* utils */
 static size_t htmlencode (const char *src, char **dest);
-static GOTV_INLINE void cp_html_entity (char *buffer, const char *entity);
-static GOTV_INLINE int check_codec_match(AVCodecContext *ccf, AVCodecContext *ccs,
+static NLC_INLINE void cp_html_entity (char *buffer, const char *entity);
+static NLC_INLINE int check_codec_match(AVCodecContext *ccf, AVCodecContext *ccs,
                                     int stream);
 
 static const char *my_program_name;
@@ -265,7 +265,7 @@ static AVLFG random_state;
 
 static FILE *logfile = NULL;
 
-static GOTV_INLINE void cp_html_entity (char *buffer, const char *entity) {
+static NLC_INLINE void cp_html_entity (char *buffer, const char *entity) {
     if (!buffer || !entity)
         return;
     while (*entity)
@@ -1867,7 +1867,7 @@ static void fmt_bytecount(AVIOContext *pb, int64_t count)
     avio_printf(pb, "%"PRId64"%c", count, *s);
 }
 
-static GOTV_INLINE void print_stream_params(AVIOContext *pb, FFServerStream *stream)
+static NLC_INLINE void print_stream_params(AVIOContext *pb, FFServerStream *stream)
 {
     int i, stream_no;
     const char *type = "unknown";
@@ -3716,7 +3716,7 @@ static void build_file_streams(void)
     }
 }
 
-static GOTV_INLINE
+static NLC_INLINE
 int check_codec_match(AVCodecContext *ccf, AVCodecContext *ccs, int stream)
 {
     int matches = 1;

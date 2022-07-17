@@ -216,7 +216,7 @@ static av_always_inline int get_coeff_bits(GetBitContext *gb, int nbits)
     return val;
 }
 
-static GOTV_INLINE int get_coeff(GetBitContext *gb, VLC *vlc)
+static NLC_INLINE int get_coeff(GetBitContext *gb, VLC *vlc)
 {
     int val = get_vlc2(gb, vlc->table, vlc->bits, 2);
 
@@ -486,7 +486,7 @@ static int mss4_decode_image_block(MSS4Context *ctx, GetBitContext *gb,
     return 0;
 }
 
-static GOTV_INLINE void mss4_update_dc_cache(MSS4Context *c, int mb_x)
+static NLC_INLINE void mss4_update_dc_cache(MSS4Context *c, int mb_x)
 {
     int i;
 

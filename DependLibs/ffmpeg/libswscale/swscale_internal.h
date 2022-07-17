@@ -905,7 +905,7 @@ int ff_sws_alphablendaway(SwsContext *c, const uint8_t *src[],
                           int srcStride[], int srcSliceY, int srcSliceH,
                           uint8_t *dst[], int dstStride[]);
 
-static GOTV_INLINE void fillPlane16(uint8_t *plane, int stride, int width, int height, int y,
+static NLC_INLINE void fillPlane16(uint8_t *plane, int stride, int width, int height, int y,
                                int alpha, int bits, const int big_endian)
 {
     int i, j;

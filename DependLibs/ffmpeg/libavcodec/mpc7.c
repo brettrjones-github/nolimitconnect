@@ -139,7 +139,7 @@ static av_cold int mpc7_decode_init(AVCodecContext * avctx)
 /**
  * Fill samples for given subband
  */
-static GOTV_INLINE void idx_to_quant(MPCContext *c, GetBitContext *gb, int idx, int *dst)
+static NLC_INLINE void idx_to_quant(MPCContext *c, GetBitContext *gb, int idx, int *dst)
 {
     int i, i1, t;
     switch(idx){

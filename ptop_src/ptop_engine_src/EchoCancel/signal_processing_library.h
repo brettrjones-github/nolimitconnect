@@ -46,9 +46,9 @@
     ((int32_t)(int16_t)(a) * (uint16_t)(b))
 
 #ifndef WEBRTC_ARCH_ARM_V7
-// For ARMv7 platforms, these are GOTV_INLINE functions in spl_inl_armv7.h
+// For ARMv7 platforms, these are NLC_INLINE functions in spl_inl_armv7.h
 #ifndef MIPS32_LE
-// For MIPS platforms, these are GOTV_INLINE functions in spl_inl_mips.h
+// For MIPS platforms, these are NLC_INLINE functions in spl_inl_mips.h
 #define WEBRTC_SPL_MUL_16_16(a, b) \
     ((int32_t) (((int16_t)(a)) * ((int16_t)(b))))
 #define WEBRTC_SPL_MUL_16_32_RSFT16(a, b) \
@@ -101,7 +101,7 @@ extern "C" {
 #define WEBRTC_SPL_MEMCPY_W16(v1, v2, length) \
   memcpy(v1, v2, (length) * sizeof(int16_t))
 
-// GOTV_INLINE functions:
+// NLC_INLINE functions:
 #include "spl_inl.h"
 
 // Initialize SPL. Currently it contains only function pointer initialization.

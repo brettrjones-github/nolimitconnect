@@ -26,7 +26,7 @@ extern "C" {
 
 /* The minimal number of white spaces which should follow after the
    end of sentence.  */
-extern GOTV_DLL_VARIABLE int sentence_end_required_spaces;
+extern NLC_DLL_VARIABLE int sentence_end_required_spaces;
 
 /* Locate the position of a sentence end marker (a period, a question
    mark, etc) in a null-terminated string STR.  If there is no

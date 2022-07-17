@@ -231,7 +231,7 @@ static void get_exponent_greedy(NellyMoserEncodeContext *s, float *cand, int *id
     }
 }
 
-static GOTV_INLINE float distance(float x, float y, int band)
+static NLC_INLINE float distance(float x, float y, int band)
 {
     //return pow(fabs(x-y), 2.0);
     float tmp = x - y;

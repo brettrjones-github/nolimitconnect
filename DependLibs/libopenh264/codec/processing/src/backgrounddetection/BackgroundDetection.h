@@ -80,17 +80,17 @@ class CBackgroundDetection : public IStrategy {
   int32_t     m_iLargestFrameSize;
 
  private:
-  GOTV_INLINE SBackgroundOU* AllocateOUArrayMemory (int32_t iWidth, int32_t iHeight);
-  GOTV_INLINE int32_t  CalculateAsdChromaEdge (uint8_t* pOriRef, uint8_t* pOriCur, int32_t iStride);
-  GOTV_INLINE bool   ForegroundDilation23Luma (SBackgroundOU* pBackgroundOU,
+  NLC_INLINE SBackgroundOU* AllocateOUArrayMemory (int32_t iWidth, int32_t iHeight);
+  NLC_INLINE int32_t  CalculateAsdChromaEdge (uint8_t* pOriRef, uint8_t* pOriCur, int32_t iStride);
+  NLC_INLINE bool   ForegroundDilation23Luma (SBackgroundOU* pBackgroundOU,
                                           SBackgroundOU* pOUNeighbours[]); //Foreground_Dilation_2_3_Luma
-  GOTV_INLINE bool   ForegroundDilation23Chroma (int8_t iNeighbourForegroundFlags, int32_t iStartSamplePos,
+  NLC_INLINE bool   ForegroundDilation23Chroma (int8_t iNeighbourForegroundFlags, int32_t iStartSamplePos,
       int32_t iPicStrideUV, vBGDParam* pBgdParam);//Foreground_Dilation_2_3_Chroma
-  GOTV_INLINE void     ForegroundDilation (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[], vBGDParam* pBgdParam,
+  NLC_INLINE void     ForegroundDilation (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[], vBGDParam* pBgdParam,
                                       int32_t iChromaSampleStartPos);
-  GOTV_INLINE void     BackgroundErosion (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[]);
-  GOTV_INLINE void     SetBackgroundMbFlag (int8_t* pBackgroundMbFlag, int32_t iPicWidthInMb, int32_t iBackgroundMbFlag);
-  GOTV_INLINE void     UpperOUForegroundCheck (SBackgroundOU* pCurOU, int8_t* pBackgroundMbFlag, int32_t iPicWidthInOU,
+  NLC_INLINE void     BackgroundErosion (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[]);
+  NLC_INLINE void     SetBackgroundMbFlag (int8_t* pBackgroundMbFlag, int32_t iPicWidthInMb, int32_t iBackgroundMbFlag);
+  NLC_INLINE void     UpperOUForegroundCheck (SBackgroundOU* pCurOU, int8_t* pBackgroundMbFlag, int32_t iPicWidthInOU,
                                           int32_t iPicWidthInMb);
 
   void    GetOUParameters (SVAACalcResult* sVaaCalcInfo, int32_t iMbIndex, int32_t iMbWidth,

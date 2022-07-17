@@ -77,7 +77,7 @@ static inline void quantize_bands(int *out, const float *in, const float *scaled
     }
 }
 
-static GOTV_INLINE float find_max_val(int group_len, int swb_size, const float *scaled)
+static NLC_INLINE float find_max_val(int group_len, int swb_size, const float *scaled)
 {
     float maxval = 0.0f;
     int w2, i;
@@ -89,7 +89,7 @@ static GOTV_INLINE float find_max_val(int group_len, int swb_size, const float *
     return maxval;
 }
 
-static GOTV_INLINE int find_min_book(float maxval, int sf)
+static NLC_INLINE int find_min_book(float maxval, int sf)
 {
     float Q34 = ff_aac_pow34sf_tab[POW_SF2_ZERO - sf + SCALE_ONE_POS - SCALE_DIV_512];
     int qmaxval, cb;
@@ -101,7 +101,7 @@ static GOTV_INLINE int find_min_book(float maxval, int sf)
     return cb;
 }
 
-static GOTV_INLINE float find_form_factor(int group_len, int swb_size, float thresh,
+static NLC_INLINE float find_form_factor(int group_len, int swb_size, float thresh,
                                      const float *scaled, float nzslope) {
     const float iswb_size = 1.0f / swb_size;
     const float iswb_sizem1 = 1.0f / (swb_size - 1);
@@ -154,13 +154,13 @@ static GOTV_INLINE float find_form_factor(int group_len, int swb_size, float thr
 }
 
 /** Return the minimum scalefactor where the quantized coef does not clip. */
-static GOTV_INLINE uint8_t coef2minsf(float coef)
+static NLC_INLINE uint8_t coef2minsf(float coef)
 {
     return av_clip_uint8(log2f(coef)*4 - 69 + SCALE_ONE_POS - SCALE_DIV_512);
 }
 
 /** Return the maximum scalefactor where the quantized coef is not zero. */
-static GOTV_INLINE uint8_t coef2maxsf(float coef)
+static NLC_INLINE uint8_t coef2maxsf(float coef)
 {
     return av_clip_uint8(log2f(coef)*4 +  6 + SCALE_ONE_POS - SCALE_DIV_512);
 }
@@ -168,7 +168,7 @@ static GOTV_INLINE uint8_t coef2maxsf(float coef)
 /*
  * Returns the closest possible index to an array of float values, given a value.
  */
-static GOTV_INLINE int quant_array_idx(const float val, const float *arr, const int num)
+static NLC_INLINE int quant_array_idx(const float val, const float *arr, const int num)
 {
     int i, index = 0;
     float quant_min_err = INFINITY;
@@ -196,7 +196,7 @@ static av_always_inline float bval2bmax(float b)
  * map to valid, nonzero bands of the form w*16+g (with w being the initial
  * window of the window group, only) are left indetermined.
  */
-static GOTV_INLINE void ff_init_nextband_map(const SingleChannelElement *sce, uint8_t *nextband)
+static NLC_INLINE void ff_init_nextband_map(const SingleChannelElement *sce, uint8_t *nextband)
 {
     unsigned char prevband = 0;
     int w, g;
@@ -218,7 +218,7 @@ static GOTV_INLINE void ff_init_nextband_map(const SingleChannelElement *sce, ui
  * Updates nextband to reflect a removed band (equivalent to
  * calling ff_init_nextband_map after marking a band as zero)
  */
-static GOTV_INLINE void ff_nextband_remove(uint8_t *nextband, int prevband, int band)
+static NLC_INLINE void ff_nextband_remove(uint8_t *nextband, int prevband, int band)
 {
     nextband[prevband] = nextband[band];
 }
@@ -229,7 +229,7 @@ static GOTV_INLINE void ff_nextband_remove(uint8_t *nextband, int prevband, int 
  * prev_sf has to be the scalefactor of the previous nonzero, nonspecial
  * band, in encoding order, or negative if there was no such band.
  */
-static GOTV_INLINE int ff_sfdelta_can_remove_band(const SingleChannelElement *sce,
+static NLC_INLINE int ff_sfdelta_can_remove_band(const SingleChannelElement *sce,
     const uint8_t *nextband, int prev_sf, int band)
 {
     return prev_sf >= 0
@@ -243,7 +243,7 @@ static GOTV_INLINE int ff_sfdelta_can_remove_band(const SingleChannelElement *sc
  * prev_sf has to be the scalefactor of the previous nonzero, nonsepcial
  * band, in encoding order, or negative if there was no such band.
  */
-static GOTV_INLINE int ff_sfdelta_can_replace(const SingleChannelElement *sce,
+static NLC_INLINE int ff_sfdelta_can_replace(const SingleChannelElement *sce,
     const uint8_t *nextband, int prev_sf, int new_sf, int band)
 {
     return new_sf >= (prev_sf - SCALE_MAX_DIFF)

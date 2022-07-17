@@ -108,7 +108,7 @@ _dsa_generate_dss_xy(struct dsa_params *pub,
 		     void *random_ctx, nettle_random_func *randomFunc);
 
 #define DIGEST_SIZE SHA384_DIGEST_SIZE
-GOTV_INLINE static void
+NLC_INLINE static void
 hash (uint8_t digest[DIGEST_SIZE], unsigned length, void *data)
 {
   struct sha384_ctx ctx;

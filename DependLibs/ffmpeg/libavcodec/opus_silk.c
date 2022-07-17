@@ -140,7 +140,7 @@ static inline void silk_stabilize_lsf(int16_t nlsf[16], int order, const uint16_
     return;
 }
 
-static GOTV_INLINE int silk_is_lpc_stable(const int16_t lpc[16], int order)
+static NLC_INLINE int silk_is_lpc_stable(const int16_t lpc[16], int order)
 {
     int k, j, DC_resp = 0;
     int32_t lpc32[2][16];       // Q24
@@ -301,7 +301,7 @@ static void silk_lsf2lpc(const int16_t nlsf[16], float lpcf[16], int order)
         lpcf[i] = lpc[i] / 4096.0f;
 }
 
-static GOTV_INLINE void silk_decode_lpc(SilkContext *s, SilkFrame *frame,
+static NLC_INLINE void silk_decode_lpc(SilkContext *s, SilkFrame *frame,
                                    OpusRangeCoder *rc,
                                    float lpc_leadin[16], float lpc[16],
                                    int *lpc_order, int *has_lpc_leadin, int voiced)
@@ -398,7 +398,7 @@ static GOTV_INLINE void silk_decode_lpc(SilkContext *s, SilkFrame *frame,
     memcpy(frame->lpc,  lpc,  order * sizeof(lpc[0]));
 }
 
-static GOTV_INLINE void silk_count_children(OpusRangeCoder *rc, int model, int32_t total,
+static NLC_INLINE void silk_count_children(OpusRangeCoder *rc, int model, int32_t total,
                                        int32_t child[2])
 {
     if (total != 0) {
@@ -411,7 +411,7 @@ static GOTV_INLINE void silk_count_children(OpusRangeCoder *rc, int model, int32
     }
 }
 
-static GOTV_INLINE void silk_decode_excitation(SilkContext *s, OpusRangeCoder *rc,
+static NLC_INLINE void silk_decode_excitation(SilkContext *s, OpusRangeCoder *rc,
                                           float* excitationf,
                                           int qoffset_high, int active, int voiced)
 {

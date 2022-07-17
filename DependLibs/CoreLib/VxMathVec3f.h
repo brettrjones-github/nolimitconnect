@@ -526,7 +526,7 @@ VXMATH_INLINE float Vec3f::GetLiftDeg( void )
 VXMATH_INLINE float Vec3f::GetZoom( void )
 	{ return z;}
 
-//=== GOTV_INLINE functions ===//
+//=== NLC_INLINE functions ===//
 VXMATH_INLINE float Vec3fNormalize (Vec3f v)
 	{float l,f;l=(float)Vec3fLen(v);if(l){f=1/l;v.x*=f;v.y*=f;v.z*=f;}return l;}
 

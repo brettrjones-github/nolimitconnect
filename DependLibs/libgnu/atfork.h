@@ -38,14 +38,14 @@ extern unsigned int _gnutls_forkid;
 int _gnutls_register_fork_handler(void); /* global init */
 
 # if defined(HAVE_ATFORK)
-GOTV_INLINE static int _gnutls_detect_fork(unsigned int forkid)
+NLC_INLINE static int _gnutls_detect_fork(unsigned int forkid)
 {
 	if (forkid == _gnutls_forkid)
 		return 0;
 	return 1;
 }
 
-GOTV_INLINE static unsigned int _gnutls_get_forkid(void)
+NLC_INLINE static unsigned int _gnutls_get_forkid(void)
 {
 	return _gnutls_forkid;
 }

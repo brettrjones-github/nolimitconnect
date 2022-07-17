@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AppDependLibrariesConfig.h>
-# define RAOP_API	GOTV_API
+# define RAOP_API	NLC_API
 
 #ifdef __cplusplus
 extern "C" {

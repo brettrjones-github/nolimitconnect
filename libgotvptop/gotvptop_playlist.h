@@ -264,7 +264,7 @@ enum {
  *   - playlist export,
  *   - logger message callback.
  */
-GOTV_API void playlist_Lock( playlist_t * );
+NLC_API void playlist_Lock( playlist_t * );
 
 /**
  * Unlocks the playlist.
@@ -288,10 +288,10 @@ GOTV_API void playlist_Lock( playlist_t * );
  * another item could be assigned the same ID. To avoid that problem, use
  * the input item instead of the ID.
  */
-GOTV_API void playlist_Unlock( playlist_t * );
+NLC_API void playlist_Unlock( playlist_t * );
 
-GOTV_API void playlist_AssertLocked( playlist_t * );
-GOTV_API void playlist_Deactivate( playlist_t * );
+NLC_API void playlist_AssertLocked( playlist_t * );
+NLC_API void playlist_Deactivate( playlist_t * );
 
 /**
  * Do a playlist action.
@@ -302,7 +302,7 @@ GOTV_API void playlist_Deactivate( playlist_t * );
  * \param b_locked TRUE if playlist is locked when entering this function
  * \param variable number of arguments
  */
-GOTV_API void playlist_Control( playlist_t *p_playlist, int i_query, int b_locked, ...  );
+NLC_API void playlist_Control( playlist_t *p_playlist, int i_query, int b_locked, ...  );
 
 static inline void playlist_ViewPlay(playlist_t *pl, playlist_item_t *node,
                                      playlist_item_t *item)
@@ -312,25 +312,25 @@ static inline void playlist_ViewPlay(playlist_t *pl, playlist_item_t *node,
 
 /** Get current playing input. The object is retained.
  */
-GOTV_API input_thread_t * playlist_CurrentInput( playlist_t *p_playlist ) GOTV_USED;
-GOTV_API input_thread_t *playlist_CurrentInputLocked( playlist_t *p_playlist ) GOTV_USED;
+NLC_API input_thread_t * playlist_CurrentInput( playlist_t *p_playlist ) GOTV_USED;
+NLC_API input_thread_t *playlist_CurrentInputLocked( playlist_t *p_playlist ) GOTV_USED;
 
 /** Get the duration of all items in a node.
  */
-GOTV_API mtime_t playlist_GetNodeDuration( playlist_item_t * );
+NLC_API mtime_t playlist_GetNodeDuration( playlist_item_t * );
 
 /** Clear the playlist
  * \param b_locked TRUE if playlist is locked when entering this function
  */
-GOTV_API void playlist_Clear( playlist_t *, bool );
+NLC_API void playlist_Clear( playlist_t *, bool );
 
 /* Playlist sorting */
-GOTV_API int playlist_TreeMove( playlist_t *, playlist_item_t *, playlist_item_t *, int );
-GOTV_API int playlist_TreeMoveMany( playlist_t *, int, playlist_item_t **, playlist_item_t *, int );
-GOTV_API int playlist_RecursiveNodeSort( playlist_t *, playlist_item_t *,int, int );
+NLC_API int playlist_TreeMove( playlist_t *, playlist_item_t *, playlist_item_t *, int );
+NLC_API int playlist_TreeMoveMany( playlist_t *, int, playlist_item_t **, playlist_item_t *, int );
+NLC_API int playlist_RecursiveNodeSort( playlist_t *, playlist_item_t *,int, int );
 
-GOTV_API playlist_item_t * playlist_CurrentPlayingItem( playlist_t * ) GOTV_USED;
-GOTV_API int playlist_Status( playlist_t * );
+NLC_API playlist_item_t * playlist_CurrentPlayingItem( playlist_t * ) GOTV_USED;
+NLC_API int playlist_Status( playlist_t * );
 
 /**
  * Export a node of the playlist to a certain type of playlistfile
@@ -339,24 +339,24 @@ GOTV_API int playlist_Status( playlist_t * );
  * \param psz_type the type of playlist file to create (m3u, pls, ..)
  * \return GOTV_SUCCESS on success
  */
-GOTV_API int playlist_Export( playlist_t *p_playlist, const char *psz_name,
+NLC_API int playlist_Export( playlist_t *p_playlist, const char *psz_name,
                              bool b_playlist, const char *psz_type );
 
 /**
  * Open a playlist file, add its content to the current playlist
  */
-GOTV_API int playlist_Import( playlist_t *p_playlist, const char *psz_file );
+NLC_API int playlist_Import( playlist_t *p_playlist, const char *psz_file );
 
 /********************** Services discovery ***********************/
 
 /** Add a service discovery module */
-GOTV_API int playlist_ServicesDiscoveryAdd(playlist_t *, const char *);
+NLC_API int playlist_ServicesDiscoveryAdd(playlist_t *, const char *);
 /** Remove a services discovery module by name */
-GOTV_API int playlist_ServicesDiscoveryRemove(playlist_t *, const char *);
+NLC_API int playlist_ServicesDiscoveryRemove(playlist_t *, const char *);
 /** Check whether a given SD is loaded */
-GOTV_API bool playlist_IsServicesDiscoveryLoaded( playlist_t *,const char *) GOTV_DEPRECATED;
+NLC_API bool playlist_IsServicesDiscoveryLoaded( playlist_t *,const char *) GOTV_DEPRECATED;
 /** Query a services discovery */
-GOTV_API int playlist_ServicesDiscoveryControl( playlist_t *, const char *, int, ... );
+NLC_API int playlist_ServicesDiscoveryControl( playlist_t *, const char *, int, ... );
 
 /********************** Renderer ***********************/
 /**
@@ -365,7 +365,7 @@ GOTV_API int playlist_ServicesDiscoveryControl( playlist_t *, const char *, int,
  *                  one. If a renderer is provided, its reference count will be
  *                  incremented.
  */
-GOTV_API int playlist_SetRenderer( playlist_t* p_pl, gotvptop_renderer_item_t* p_item );
+NLC_API int playlist_SetRenderer( playlist_t* p_pl, gotvptop_renderer_item_t* p_item );
 
 
 /********************************************************
@@ -373,40 +373,40 @@ GOTV_API int playlist_SetRenderer( playlist_t* p_pl, gotvptop_renderer_item_t* p
  ********************************************************/
 
 /******************** Item addition ********************/
-GOTV_API int playlist_Add( playlist_t *, const char *, bool );
-GOTV_API int playlist_AddExt( playlist_t *, const char *, const char *, bool, int, const char *const *, unsigned, bool );
-GOTV_API int playlist_AddInput( playlist_t *, input_item_t *, bool, bool );
-GOTV_API playlist_item_t * playlist_NodeAddInput( playlist_t *, input_item_t *, playlist_item_t *, int );
-GOTV_API int playlist_NodeAddCopy( playlist_t *, playlist_item_t *, playlist_item_t *, int );
+NLC_API int playlist_Add( playlist_t *, const char *, bool );
+NLC_API int playlist_AddExt( playlist_t *, const char *, const char *, bool, int, const char *const *, unsigned, bool );
+NLC_API int playlist_AddInput( playlist_t *, input_item_t *, bool, bool );
+NLC_API playlist_item_t * playlist_NodeAddInput( playlist_t *, input_item_t *, playlist_item_t *, int );
+NLC_API int playlist_NodeAddCopy( playlist_t *, playlist_item_t *, playlist_item_t *, int );
 
 /********************************** Item search *************************/
-GOTV_API playlist_item_t * playlist_ItemGetById(playlist_t *, int ) GOTV_USED;
-GOTV_API playlist_item_t *playlist_ItemGetByInput(playlist_t *,
+NLC_API playlist_item_t * playlist_ItemGetById(playlist_t *, int ) GOTV_USED;
+NLC_API playlist_item_t *playlist_ItemGetByInput(playlist_t *,
                                                  const input_item_t * )
 GOTV_USED;
 
-GOTV_API int playlist_LiveSearchUpdate(playlist_t *, playlist_item_t *, const char *, bool );
+NLC_API int playlist_LiveSearchUpdate(playlist_t *, playlist_item_t *, const char *, bool );
 
 /********************************************************
  * Tree management
  ********************************************************/
 /* Node management */
-GOTV_API playlist_item_t * playlist_NodeCreate( playlist_t *, const char *, playlist_item_t * p_parent, int i_pos, int i_flags );
-GOTV_API playlist_item_t * playlist_ChildSearchName(playlist_item_t*, const char* ) GOTV_USED;
-GOTV_API void playlist_NodeDelete( playlist_t *, playlist_item_t * );
+NLC_API playlist_item_t * playlist_NodeCreate( playlist_t *, const char *, playlist_item_t * p_parent, int i_pos, int i_flags );
+NLC_API playlist_item_t * playlist_ChildSearchName(playlist_item_t*, const char* ) GOTV_USED;
+NLC_API void playlist_NodeDelete( playlist_t *, playlist_item_t * );
 
 /**************************
  * Audio output management
  **************************/
 
-GOTV_API audio_output_t *playlist_GetAout( playlist_t * );
+NLC_API audio_output_t *playlist_GetAout( playlist_t * );
 
-GOTV_API float playlist_VolumeGet( playlist_t * );
-GOTV_API int playlist_VolumeSet( playlist_t *, float );
-GOTV_API int playlist_VolumeUp( playlist_t *, int, float * );
+NLC_API float playlist_VolumeGet( playlist_t * );
+NLC_API int playlist_VolumeSet( playlist_t *, float );
+NLC_API int playlist_VolumeUp( playlist_t *, int, float * );
 #define playlist_VolumeDown(a, b, c) playlist_VolumeUp(a, -(b), c)
-GOTV_API int playlist_MuteSet( playlist_t *, bool );
-GOTV_API int playlist_MuteGet( playlist_t * );
+NLC_API int playlist_MuteSet( playlist_t *, bool );
+NLC_API int playlist_MuteGet( playlist_t * );
 
 static inline int playlist_MuteToggle( playlist_t *pl )
 {
@@ -416,7 +416,7 @@ static inline int playlist_MuteToggle( playlist_t *pl )
     return val;
 }
 
-GOTV_API void playlist_EnableAudioFilter( playlist_t *, const char *, bool );
+NLC_API void playlist_EnableAudioFilter( playlist_t *, const char *, bool );
 
 /***********************************************************************
  * Inline functions

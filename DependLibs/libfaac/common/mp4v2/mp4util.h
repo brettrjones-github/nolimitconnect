@@ -78,17 +78,17 @@
 #define VERBOSE_EDIT(verbosity, expr)		\
 	VERBOSE(MP4_DETAILS_EDIT, verbosity, expr)
 
-GOTV_INLINE void Indent(FILE* pFile, u_int8_t depth) {
+NLC_INLINE void Indent(FILE* pFile, u_int8_t depth) {
 	fprintf(pFile, "%*c", depth, ' ');
 }
 
-static GOTV_INLINE void MP4Printf(const char* fmt, ...) 
+static NLC_INLINE void MP4Printf(const char* fmt, ...) 
 #ifndef _WIN32
  __attribute__((format(__printf__, 1, 2)))
 #endif
 ;
 
-static GOTV_INLINE void MP4Printf(const char* fmt, ...) 
+static NLC_INLINE void MP4Printf(const char* fmt, ...) 
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -162,7 +162,7 @@ void MP4HexDump(
 	u_int8_t* pBytes, u_int32_t numBytes,
 	FILE* pFile = stdout, u_int8_t indent = 0);
 
-GOTV_INLINE void* MP4Malloc(size_t size) {
+NLC_INLINE void* MP4Malloc(size_t size) {
   if (size == 0) return NULL;
 	void* p = malloc(size);
 	if (p == NULL && size > 0) {
@@ -171,26 +171,26 @@ GOTV_INLINE void* MP4Malloc(size_t size) {
 	return p;
 }
 
-GOTV_INLINE void* MP4Calloc(size_t size) {
+NLC_INLINE void* MP4Calloc(size_t size) {
   if (size == 0) return NULL;
 	return memset(MP4Malloc(size), 0, size);
 }
 
-GOTV_INLINE char* MP4Stralloc(const char* s1) {
+NLC_INLINE char* MP4Stralloc(const char* s1) {
 	char* s2 = (char*)MP4Malloc(strlen(s1) + 1);
 	strcpy(s2, s1);
 	return s2;
 }
 
 #ifdef _WIN32
-GOTV_INLINE wchar_t* MP4Stralloc(const wchar_t* s1) {
+NLC_INLINE wchar_t* MP4Stralloc(const wchar_t* s1) {
 	wchar_t* s2 = (wchar_t*)MP4Malloc((wcslen(s1) + 1)*sizeof(wchar_t));
 	wcscpy(s2, s1);
 	return s2;
 }
 #endif
 
-GOTV_INLINE void* MP4Realloc(void* p, u_int32_t newSize) {
+NLC_INLINE void* MP4Realloc(void* p, u_int32_t newSize) {
 	// workaround library bug
 	if (p == NULL && newSize == 0) {
 		return NULL;
@@ -202,16 +202,16 @@ GOTV_INLINE void* MP4Realloc(void* p, u_int32_t newSize) {
 	return p;
 }
 
-GOTV_INLINE u_int32_t STRTOINT32(const char* s) {
+NLC_INLINE u_int32_t STRTOINT32(const char* s) {
   return ntohl(*(uint32_t *)s);
 }
 
-GOTV_INLINE void INT32TOSTR(u_int32_t i, char* s) {
+NLC_INLINE void INT32TOSTR(u_int32_t i, char* s) {
   *(uint32_t *)s = htonl(i);
   s[4] = 0;
 }
 
-GOTV_INLINE MP4Timestamp MP4GetAbsTimestamp() {
+NLC_INLINE MP4Timestamp MP4GetAbsTimestamp() {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
 	MP4Timestamp ret;

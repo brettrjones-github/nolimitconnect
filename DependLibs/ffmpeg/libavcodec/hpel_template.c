@@ -26,7 +26,7 @@
 #include "bit_depth_template.c"
 
 #define DEF_HPEL(OPNAME, OP)                                            \
-static GOTV_INLINE void FUNC(OPNAME ## _pixels8_l2)(uint8_t *dst,            \
+static NLC_INLINE void FUNC(OPNAME ## _pixels8_l2)(uint8_t *dst,            \
                                                const uint8_t *src1,     \
                                                const uint8_t *src2,     \
                                                int dst_stride,          \
@@ -47,7 +47,7 @@ static GOTV_INLINE void FUNC(OPNAME ## _pixels8_l2)(uint8_t *dst,            \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void FUNC(OPNAME ## _pixels4_l2)(uint8_t *dst,            \
+static NLC_INLINE void FUNC(OPNAME ## _pixels4_l2)(uint8_t *dst,            \
                                                const uint8_t *src1,     \
                                                const uint8_t *src2,     \
                                                int dst_stride,          \
@@ -64,7 +64,7 @@ static GOTV_INLINE void FUNC(OPNAME ## _pixels4_l2)(uint8_t *dst,            \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void FUNC(OPNAME ## _pixels2_l2)(uint8_t *dst,            \
+static NLC_INLINE void FUNC(OPNAME ## _pixels2_l2)(uint8_t *dst,            \
                                                const uint8_t *src1,     \
                                                const uint8_t *src2,     \
                                                int dst_stride,          \
@@ -81,7 +81,7 @@ static GOTV_INLINE void FUNC(OPNAME ## _pixels2_l2)(uint8_t *dst,            \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void FUNC(OPNAME ## _pixels16_l2)(uint8_t *dst,           \
+static NLC_INLINE void FUNC(OPNAME ## _pixels16_l2)(uint8_t *dst,           \
                                                 const uint8_t *src1,    \
                                                 const uint8_t *src2,    \
                                                 int dst_stride,         \

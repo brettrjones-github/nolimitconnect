@@ -94,7 +94,7 @@ static void interpolate(float *out, float v1, float v2, int size)
     }
 }
 
-static GOTV_INLINE float get_cos(int idx, int part, const float *cos_tab, int size)
+static NLC_INLINE float get_cos(int idx, int part, const float *cos_tab, int size)
 {
     return part ? -cos_tab[size - idx - 1]
                 :  cos_tab[idx];
@@ -114,7 +114,7 @@ static GOTV_INLINE float get_cos(int idx, int part, const float *cos_tab, int si
  *        (negative cosine values)
  * @param size the size of the whole output
  */
-static GOTV_INLINE void eval_lpcenv_or_interp(TwinVQContext *tctx,
+static NLC_INLINE void eval_lpcenv_or_interp(TwinVQContext *tctx,
                                          enum TwinVQFrameType ftype,
                                          float *out, const float *in,
                                          int size, int step, int part)

@@ -125,7 +125,7 @@ struct gl_list_implementation;
 /* Type representing a list datatype implementation.  */
 typedef const struct gl_list_implementation * gl_list_implementation_t;
 
-#if 0 /* Unless otherwise specified, these are defined GOTV_INLINE below.  */
+#if 0 /* Unless otherwise specified, these are defined NLC_INLINE below.  */
 
 /* Create an empty list.
    IMPLEMENTATION is one of GL_ARRAY_LIST, GL_CARRAY_LIST, GL_LINKED_LIST,
@@ -333,7 +333,7 @@ extern bool gl_list_remove (gl_list_t list, const void *elt);
    (But this call does not free the elements of the list.)  */
 extern void gl_list_free (gl_list_t list);
 
-#endif /* End of GOTV_INLINE and gl_xlist.h-defined functions.  */
+#endif /* End of NLC_INLINE and gl_xlist.h-defined functions.  */
 
 /* --------------------- gl_list_iterator_t Data Type --------------------- */
 
@@ -354,7 +354,7 @@ typedef struct
   size_t i; size_t j;
 } gl_list_iterator_t;
 
-#if 0 /* These are defined GOTV_INLINE below.  */
+#if 0 /* These are defined NLC_INLINE below.  */
 
 /* Create an iterator traversing a list.
    The list contents must not be modified while the iterator is in use,
@@ -378,7 +378,7 @@ extern bool gl_list_iterator_next (gl_list_iterator_t *iterator,
 /* Free an iterator.  */
 extern void gl_list_iterator_free (gl_list_iterator_t *iterator);
 
-#endif /* End of GOTV_INLINE functions.  */
+#endif /* End of NLC_INLINE functions.  */
 
 /* ---------------------- Sorted gl_list_t Data Type ---------------------- */
 
@@ -389,7 +389,7 @@ extern void gl_list_iterator_free (gl_list_iterator_t *iterator);
    NULL denotes pointer comparison.  */
 typedef int (*gl_listelement_compar_fn) (const void *elt1, const void *elt2);
 
-#if 0 /* Unless otherwise specified, these are defined GOTV_INLINE below.  */
+#if 0 /* Unless otherwise specified, these are defined NLC_INLINE below.  */
 
 /* Search whether an element is already in the list.
    The list is assumed to be sorted with COMPAR.
@@ -462,7 +462,7 @@ extern bool gl_sortedlist_remove (gl_list_t list,
                                   gl_listelement_compar_fn compar,
                                   const void *elt);
 
-#endif /* End of GOTV_INLINE and gl_xlist.h-defined functions.  */
+#endif /* End of NLC_INLINE and gl_xlist.h-defined functions.  */
 
 /* ------------------------ Implementation Details ------------------------ */
 
@@ -549,7 +549,7 @@ struct gl_list_impl_base
 /* Define all functions of this file as accesses to the
    struct gl_list_implementation.  */
 
-GOTV_INLINE gl_list_t
+NLC_INLINE gl_list_t
 gl_list_nx_create_empty (gl_list_implementation_t implementation,
                          gl_listelement_equals_fn equals_fn,
                          gl_listelement_hashcode_fn hashcode_fn,
@@ -561,7 +561,7 @@ gl_list_nx_create_empty (gl_list_implementation_t implementation,
                                           allow_duplicates);
 }
 
-GOTV_INLINE gl_list_t
+NLC_INLINE gl_list_t
 gl_list_nx_create (gl_list_implementation_t implementation,
                    gl_listelement_equals_fn equals_fn,
                    gl_listelement_hashcode_fn hashcode_fn,
@@ -574,21 +574,21 @@ gl_list_nx_create (gl_list_implementation_t implementation,
                                     contents);
 }
 
-GOTV_INLINE size_t
+NLC_INLINE size_t
 gl_list_size (gl_list_t list)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->size (list);
 }
 
-GOTV_INLINE const void *
+NLC_INLINE const void *
 gl_list_node_value (gl_list_t list, gl_list_node_t node)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->node_value (list, node);
 }
 
-GOTV_INLINE int
+NLC_INLINE int
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -599,28 +599,28 @@ gl_list_node_nx_set_value (gl_list_t list, gl_list_node_t node,
          ->node_nx_set_value (list, node, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_list_next_node (gl_list_t list, gl_list_node_t node)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->next_node (list, node);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_list_previous_node (gl_list_t list, gl_list_node_t node)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->previous_node (list, node);
 }
 
-GOTV_INLINE const void *
+NLC_INLINE const void *
 gl_list_get_at (gl_list_t list, size_t position)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->get_at (list, position);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -630,7 +630,7 @@ gl_list_nx_set_at (gl_list_t list, size_t position, const void *elt)
          ->nx_set_at (list, position, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_list_search (gl_list_t list, const void *elt)
 {
   size_t size = ((const struct gl_list_impl_base *) list)->vtable->size (list);
@@ -638,7 +638,7 @@ gl_list_search (gl_list_t list, const void *elt)
          ->search_from_to (list, 0, size, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_list_search_from (gl_list_t list, size_t start_index, const void *elt)
 {
   size_t size = ((const struct gl_list_impl_base *) list)->vtable->size (list);
@@ -646,7 +646,7 @@ gl_list_search_from (gl_list_t list, size_t start_index, const void *elt)
          ->search_from_to (list, start_index, size, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_list_search_from_to (gl_list_t list, size_t start_index, size_t end_index,
                         const void *elt)
 {
@@ -654,7 +654,7 @@ gl_list_search_from_to (gl_list_t list, size_t start_index, size_t end_index,
          ->search_from_to (list, start_index, end_index, elt);
 }
 
-GOTV_INLINE size_t
+NLC_INLINE size_t
 gl_list_indexof (gl_list_t list, const void *elt)
 {
   size_t size = ((const struct gl_list_impl_base *) list)->vtable->size (list);
@@ -662,7 +662,7 @@ gl_list_indexof (gl_list_t list, const void *elt)
          ->indexof_from_to (list, 0, size, elt);
 }
 
-GOTV_INLINE size_t
+NLC_INLINE size_t
 gl_list_indexof_from (gl_list_t list, size_t start_index, const void *elt)
 {
   size_t size = ((const struct gl_list_impl_base *) list)->vtable->size (list);
@@ -670,7 +670,7 @@ gl_list_indexof_from (gl_list_t list, size_t start_index, const void *elt)
          ->indexof_from_to (list, start_index, size, elt);
 }
 
-GOTV_INLINE size_t
+NLC_INLINE size_t
 gl_list_indexof_from_to (gl_list_t list, size_t start_index, size_t end_index,
                          const void *elt)
 {
@@ -678,7 +678,7 @@ gl_list_indexof_from_to (gl_list_t list, size_t start_index, size_t end_index,
          ->indexof_from_to (list, start_index, end_index, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -688,7 +688,7 @@ gl_list_nx_add_first (gl_list_t list, const void *elt)
          ->nx_add_first (list, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -698,7 +698,7 @@ gl_list_nx_add_last (gl_list_t list, const void *elt)
          ->nx_add_last (list, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -708,7 +708,7 @@ gl_list_nx_add_before (gl_list_t list, gl_list_node_t node, const void *elt)
          ->nx_add_before (list, node, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -718,7 +718,7 @@ gl_list_nx_add_after (gl_list_t list, gl_list_node_t node, const void *elt)
          ->nx_add_after (list, node, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -728,68 +728,68 @@ gl_list_nx_add_at (gl_list_t list, size_t position, const void *elt)
          ->nx_add_at (list, position, elt);
 }
 
-GOTV_INLINE bool
+NLC_INLINE bool
 gl_list_remove_node (gl_list_t list, gl_list_node_t node)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->remove_node (list, node);
 }
 
-GOTV_INLINE bool
+NLC_INLINE bool
 gl_list_remove_at (gl_list_t list, size_t position)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->remove_at (list, position);
 }
 
-GOTV_INLINE bool
+NLC_INLINE bool
 gl_list_remove (gl_list_t list, const void *elt)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->remove_elt (list, elt);
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 gl_list_free (gl_list_t list)
 {
   ((const struct gl_list_impl_base *) list)->vtable->list_free (list);
 }
 
-GOTV_INLINE gl_list_iterator_t
+NLC_INLINE gl_list_iterator_t
 gl_list_iterator (gl_list_t list)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->iterator (list);
 }
 
-GOTV_INLINE gl_list_iterator_t
+NLC_INLINE gl_list_iterator_t
 gl_list_iterator_from_to (gl_list_t list, size_t start_index, size_t end_index)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->iterator_from_to (list, start_index, end_index);
 }
 
-GOTV_INLINE bool
+NLC_INLINE bool
 gl_list_iterator_next (gl_list_iterator_t *iterator,
                        const void **eltp, gl_list_node_t *nodep)
 {
   return iterator->vtable->iterator_next (iterator, eltp, nodep);
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 gl_list_iterator_free (gl_list_iterator_t *iterator)
 {
   iterator->vtable->iterator_free (iterator);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_sortedlist_search (gl_list_t list, gl_listelement_compar_fn compar, const void *elt)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->sortedlist_search (list, compar, elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 gl_sortedlist_search_from_to (gl_list_t list, gl_listelement_compar_fn compar, size_t start_index, size_t end_index, const void *elt)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
@@ -797,14 +797,14 @@ gl_sortedlist_search_from_to (gl_list_t list, gl_listelement_compar_fn compar, s
                                       elt);
 }
 
-GOTV_INLINE size_t
+NLC_INLINE size_t
 gl_sortedlist_indexof (gl_list_t list, gl_listelement_compar_fn compar, const void *elt)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
          ->sortedlist_indexof (list, compar, elt);
 }
 
-GOTV_INLINE size_t
+NLC_INLINE size_t
 gl_sortedlist_indexof_from_to (gl_list_t list, gl_listelement_compar_fn compar, size_t start_index, size_t end_index, const void *elt)
 {
   return ((const struct gl_list_impl_base *) list)->vtable
@@ -812,7 +812,7 @@ gl_sortedlist_indexof_from_to (gl_list_t list, gl_listelement_compar_fn compar, 
                                        elt);
 }
 
-GOTV_INLINE gl_list_node_t
+NLC_INLINE gl_list_node_t
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
   __attribute__ ((__warn_unused_result__))
 #endif
@@ -822,7 +822,7 @@ gl_sortedlist_nx_add (gl_list_t list, gl_listelement_compar_fn compar, const voi
          ->sortedlist_nx_add (list, compar, elt);
 }
 
-GOTV_INLINE bool
+NLC_INLINE bool
 gl_sortedlist_remove (gl_list_t list, gl_listelement_compar_fn compar, const void *elt)
 {
   return ((const struct gl_list_impl_base *) list)->vtable

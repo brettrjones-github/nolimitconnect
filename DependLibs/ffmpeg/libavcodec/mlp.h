@@ -157,7 +157,7 @@ uint8_t ff_mlp_calculate_parity(const uint8_t *buf, unsigned int buf_size);
 void ff_mlp_init_crc(void);
 
 /** XOR four bytes into one. */
-static GOTV_INLINE uint8_t xor_32_to_8(uint32_t value)
+static NLC_INLINE uint8_t xor_32_to_8(uint32_t value)
 {
     value ^= value >> 16;
     value ^= value >>  8;

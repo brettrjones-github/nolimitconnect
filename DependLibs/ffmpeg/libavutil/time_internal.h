@@ -26,7 +26,7 @@
 #include <stdlib.h>
 
 #if !HAVE_GMTIME_R && !defined(gmtime_r)
-static GOTV_INLINE struct tm *gmtime_r(const time_t* clock, struct tm *result)
+static NLC_INLINE struct tm *gmtime_r(const time_t* clock, struct tm *result)
 {
     struct tm *ptr = gmtime(clock);
     if (!ptr)
@@ -37,7 +37,7 @@ static GOTV_INLINE struct tm *gmtime_r(const time_t* clock, struct tm *result)
 #endif
 
 #if !HAVE_LOCALTIME_R && !defined(localtime_r)
-static GOTV_INLINE struct tm *localtime_r(const time_t* clock, struct tm *result)
+static NLC_INLINE struct tm *localtime_r(const time_t* clock, struct tm *result)
 {
     struct tm *ptr = localtime(clock);
     if (!ptr)

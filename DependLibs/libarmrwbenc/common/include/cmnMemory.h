@@ -25,7 +25,7 @@
 
 #include <AppDependLibrariesConfig.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #include <libarmrwbenc/common/include/voMem.h>
 
@@ -96,7 +96,7 @@ VO_S32	cmnMemCompare (VO_S32 uID, VO_PTR pBuffer1, VO_PTR pBuffer2, VO_U32 uSize
  */
 VO_U32	cmnMemMove (VO_S32 uID, VO_PTR pDest, VO_PTR pSource, VO_U32 uSize);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif // __cmnMemory_H__
 

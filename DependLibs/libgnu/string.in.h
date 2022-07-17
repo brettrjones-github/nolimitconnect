@@ -183,12 +183,12 @@ _GL_WARN_ON_USE (memmem, "memmem is unportable and often quadratic - "
 #if @GNULIB_MEMPCPY@
 # if ! @HAVE_MEMPCPY@
 _GL_FUNCDECL_SYS (mempcpy, void *,
-                  (void *GOTV_RESTRICT __dest, void const *GOTV_RESTRICT __src,
+                  (void *NLC_RESTRICT __dest, void const *NLC_RESTRICT __src,
                    size_t __n)
                   _GL_ARG_NONNULL ((1, 2)));
 # endif
 _GL_CXXALIAS_SYS (mempcpy, void *,
-                  (void *GOTV_RESTRICT __dest, void const *GOTV_RESTRICT __src,
+                  (void *NLC_RESTRICT __dest, void const *NLC_RESTRICT __src,
                    size_t __n));
 _GL_CXXALIASWARN (mempcpy);
 #elif defined GNULIB_POSIXCHECK
@@ -261,11 +261,11 @@ _GL_WARN_ON_USE (rawmemchr, "rawmemchr is unportable - "
 #if @GNULIB_STPCPY@
 # if ! @HAVE_STPCPY@
 _GL_FUNCDECL_SYS (stpcpy, char *,
-                  (char *GOTV_RESTRICT __dst, char const *GOTV_RESTRICT __src)
+                  (char *NLC_RESTRICT __dst, char const *NLC_RESTRICT __src)
                   _GL_ARG_NONNULL ((1, 2)));
 # endif
 _GL_CXXALIAS_SYS (stpcpy, char *,
-                  (char *GOTV_RESTRICT __dst, char const *GOTV_RESTRICT __src));
+                  (char *NLC_RESTRICT __dst, char const *NLC_RESTRICT __src));
 _GL_CXXALIASWARN (stpcpy);
 #elif defined GNULIB_POSIXCHECK
 # undef stpcpy
@@ -284,21 +284,21 @@ _GL_WARN_ON_USE (stpcpy, "stpcpy is unportable - "
 #   define stpncpy rpl_stpncpy
 #  endif
 _GL_FUNCDECL_RPL (stpncpy, char *,
-                  (char *GOTV_RESTRICT __dst, char const *GOTV_RESTRICT __src,
+                  (char *NLC_RESTRICT __dst, char const *NLC_RESTRICT __src,
                    size_t __n)
                   _GL_ARG_NONNULL ((1, 2)));
 _GL_CXXALIAS_RPL (stpncpy, char *,
-                  (char *GOTV_RESTRICT __dst, char const *GOTV_RESTRICT __src,
+                  (char *NLC_RESTRICT __dst, char const *NLC_RESTRICT __src,
                    size_t __n));
 # else
 #  if ! @HAVE_STPNCPY@
 _GL_FUNCDECL_SYS (stpncpy, char *,
-                  (char *GOTV_RESTRICT __dst, char const *GOTV_RESTRICT __src,
+                  (char *NLC_RESTRICT __dst, char const *NLC_RESTRICT __src,
                    size_t __n)
                   _GL_ARG_NONNULL ((1, 2)));
 #  endif
 _GL_CXXALIAS_SYS (stpncpy, char *,
-                  (char *GOTV_RESTRICT __dst, char const *GOTV_RESTRICT __src,
+                  (char *NLC_RESTRICT __dst, char const *NLC_RESTRICT __src,
                    size_t __n));
 # endif
 _GL_CXXALIASWARN (stpncpy);
@@ -555,11 +555,11 @@ _GL_WARN_ON_USE (strrchr, "strrchr cannot work correctly on character strings "
 #if @GNULIB_STRSEP@
 # if ! @HAVE_STRSEP@
 _GL_FUNCDECL_SYS (strsep, char *,
-                  (char **GOTV_RESTRICT __stringp, char const *GOTV_RESTRICT __delim)
+                  (char **NLC_RESTRICT __stringp, char const *NLC_RESTRICT __delim)
                   _GL_ARG_NONNULL ((1, 2)));
 # endif
 _GL_CXXALIAS_SYS (strsep, char *,
-                  (char **GOTV_RESTRICT __stringp, char const *GOTV_RESTRICT __delim));
+                  (char **NLC_RESTRICT __stringp, char const *NLC_RESTRICT __delim));
 _GL_CXXALIASWARN (strsep);
 # if defined GNULIB_POSIXCHECK
 #  undef strsep
@@ -692,25 +692,25 @@ _GL_WARN_ON_USE (strcasestr, "strcasestr does work correctly on character "
 #   define strtok_r rpl_strtok_r
 #  endif
 _GL_FUNCDECL_RPL (strtok_r, char *,
-                  (char *GOTV_RESTRICT s, char const *GOTV_RESTRICT delim,
-                   char **GOTV_RESTRICT save_ptr)
+                  (char *NLC_RESTRICT s, char const *NLC_RESTRICT delim,
+                   char **NLC_RESTRICT save_ptr)
                   _GL_ARG_NONNULL ((2, 3)));
 _GL_CXXALIAS_RPL (strtok_r, char *,
-                  (char *GOTV_RESTRICT s, char const *GOTV_RESTRICT delim,
-                   char **GOTV_RESTRICT save_ptr));
+                  (char *NLC_RESTRICT s, char const *NLC_RESTRICT delim,
+                   char **NLC_RESTRICT save_ptr));
 # else
 #  if @UNDEFINE_STRTOK_R@ || defined GNULIB_POSIXCHECK
 #   undef strtok_r
 #  endif
 #  if ! @HAVE_DECL_STRTOK_R@
 _GL_FUNCDECL_SYS (strtok_r, char *,
-                  (char *GOTV_RESTRICT s, char const *GOTV_RESTRICT delim,
-                   char **GOTV_RESTRICT save_ptr)
+                  (char *NLC_RESTRICT s, char const *NLC_RESTRICT delim,
+                   char **NLC_RESTRICT save_ptr)
                   _GL_ARG_NONNULL ((2, 3)));
 #  endif
 _GL_CXXALIAS_SYS (strtok_r, char *,
-                  (char *GOTV_RESTRICT s, char const *GOTV_RESTRICT delim,
-                   char **GOTV_RESTRICT save_ptr));
+                  (char *NLC_RESTRICT s, char const *NLC_RESTRICT delim,
+                   char **NLC_RESTRICT save_ptr));
 # endif
 _GL_CXXALIASWARN (strtok_r);
 # if defined GNULIB_POSIXCHECK
@@ -756,7 +756,7 @@ _GL_CXXALIASWARN (mbslen);
 #if @GNULIB_MBSNLEN@
 /* Return the number of multibyte characters in the character string starting
    at STRING and ending at STRING + LEN.  */
-GOTV_EXTERN_C size_t mbsnlen (const char *string, size_t len)
+NLC_EXTERN_C size_t mbsnlen (const char *string, size_t len)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1));
 #endif
@@ -810,7 +810,7 @@ _GL_CXXALIASWARN (mbsrchr);
    string HAYSTACK.  Return NULL if NEEDLE is not found in HAYSTACK.
    Unlike strstr(), this function works correctly in multibyte locales with
    encodings different from UTF-8.  */
-GOTV_EXTERN_C char * mbsstr (const char *haystack, const char *needle)
+NLC_EXTERN_C char * mbsstr (const char *haystack, const char *needle)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -822,7 +822,7 @@ GOTV_EXTERN_C char * mbsstr (const char *haystack, const char *needle)
    Note: This function may, in multibyte locales, return 0 for strings of
    different lengths!
    Unlike strcasecmp(), this function works correctly in multibyte locales.  */
-GOTV_EXTERN_C int mbscasecmp (const char *s1, const char *s2)
+NLC_EXTERN_C int mbscasecmp (const char *s1, const char *s2)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -837,7 +837,7 @@ GOTV_EXTERN_C int mbscasecmp (const char *s1, const char *s2)
    of different lengths!
    Unlike strncasecmp(), this function works correctly in multibyte locales.
    But beware that N is not a byte count but a character count!  */
-GOTV_EXTERN_C int mbsncasecmp (const char *s1, const char *s2, size_t n)
+NLC_EXTERN_C int mbsncasecmp (const char *s1, const char *s2, size_t n)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -851,7 +851,7 @@ GOTV_EXTERN_C int mbsncasecmp (const char *s1, const char *s2, size_t n)
    is of smaller length than PREFIX!
    Unlike strncasecmp(), this function works correctly in multibyte
    locales.  */
-GOTV_EXTERN_C char * mbspcasecmp (const char *string, const char *prefix)
+NLC_EXTERN_C char * mbspcasecmp (const char *string, const char *prefix)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -862,7 +862,7 @@ GOTV_EXTERN_C char * mbspcasecmp (const char *string, const char *prefix)
    Note: This function may, in multibyte locales, return success even if
    strlen (haystack) < strlen (needle) !
    Unlike strcasestr(), this function works correctly in multibyte locales.  */
-GOTV_EXTERN_C char * mbscasestr (const char *haystack, const char *needle)
+NLC_EXTERN_C char * mbscasestr (const char *haystack, const char *needle)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -873,7 +873,7 @@ GOTV_EXTERN_C char * mbscasestr (const char *haystack, const char *needle)
    beginning of the string to this occurrence, or to the end of the string
    if none exists.
    Unlike strcspn(), this function works correctly in multibyte locales.  */
-GOTV_EXTERN_C size_t mbscspn (const char *string, const char *accept)
+NLC_EXTERN_C size_t mbscspn (const char *string, const char *accept)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -906,7 +906,7 @@ _GL_CXXALIASWARN (mbspbrk);
    beginning of the string to this occurrence, or to the end of the string
    if none exists.
    Unlike strspn(), this function works correctly in multibyte locales.  */
-GOTV_EXTERN_C size_t mbsspn (const char *string, const char *reject)
+NLC_EXTERN_C size_t mbsspn (const char *string, const char *reject)
      _GL_ATTRIBUTE_PURE
      _GL_ARG_NONNULL ((1, 2));
 #endif
@@ -926,7 +926,7 @@ GOTV_EXTERN_C size_t mbsspn (const char *string, const char *reject)
    Caveat: The identity of the delimiting character is lost.
 
    See also mbstok_r().  */
-GOTV_EXTERN_C char * mbssep (char **stringp, const char *delim)
+NLC_EXTERN_C char * mbssep (char **stringp, const char *delim)
      _GL_ARG_NONNULL ((1, 2));
 #endif
 
@@ -947,7 +947,7 @@ GOTV_EXTERN_C char * mbssep (char **stringp, const char *delim)
    Caveat: The identity of the delimiting character is lost.
 
    See also mbssep().  */
-GOTV_EXTERN_C char * mbstok_r (char *string, const char *delim, char **save_ptr)
+NLC_EXTERN_C char * mbstok_r (char *string, const char *delim, char **save_ptr)
      _GL_ARG_NONNULL ((2, 3));
 #endif
 

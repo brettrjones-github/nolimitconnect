@@ -243,7 +243,7 @@ int ff_wmv2_decode_secondary_picture_header(MpegEncContext *s)
     return 0;
 }
 
-static GOTV_INLINE int wmv2_decode_motion(Wmv2Context *w, int *mx_ptr, int *my_ptr)
+static NLC_INLINE int wmv2_decode_motion(Wmv2Context *w, int *mx_ptr, int *my_ptr)
 {
     MpegEncContext *const s = &w->s;
     int ret;
@@ -306,7 +306,7 @@ static int16_t *wmv2_pred_motion(Wmv2Context *w, int *px, int *py)
     return mot_val;
 }
 
-static GOTV_INLINE int wmv2_decode_inter_block(Wmv2Context *w, int16_t *block,
+static NLC_INLINE int wmv2_decode_inter_block(Wmv2Context *w, int16_t *block,
                                           int n, int cbp)
 {
     MpegEncContext *const s = &w->s;

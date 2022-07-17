@@ -420,7 +420,7 @@ int quantize(int ix[GRANULE_SIZE], int stepsize, shine_global_config *config )
  * -------
  * Function: Calculate the maximum of ix from 0 to 575
  */
-static GOTV_INLINE int ix_max( int ix[GRANULE_SIZE], unsigned int begin, unsigned int end )
+static NLC_INLINE int ix_max( int ix[GRANULE_SIZE], unsigned int begin, unsigned int end )
 {
   register int i;
   register int max = 0;

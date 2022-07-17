@@ -50,7 +50,7 @@ void ff_printGUID(const GUID *g);
 extern const AVClass *ff_dshow_context_class_ptr;
 #define dshowdebug(...) ff_dlog(&ff_dshow_context_class_ptr, __VA_ARGS__)
 
-static GOTV_INLINE void nothing(void *foo)
+static NLC_INLINE void nothing(void *foo)
 {
 }
 

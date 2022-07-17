@@ -49,13 +49,13 @@ struct update_release_t
 
 typedef struct update_release_t update_release_t;
 
-GOTV_API update_t * update_New( gotvptop_object_t * );
+NLC_API update_t * update_New( gotvptop_object_t * );
 #define update_New( a ) update_New( GOTV_OBJECT( a ) )
-GOTV_API void update_Delete( update_t * );
-GOTV_API void update_Check( update_t *, void (*callback)( void*, bool ), void * );
-GOTV_API bool update_NeedUpgrade( update_t * );
-GOTV_API void update_Download( update_t *, const char* );
-GOTV_API update_release_t* update_GetRelease( update_t * );
+NLC_API void update_Delete( update_t * );
+NLC_API void update_Check( update_t *, void (*callback)( void*, bool ), void * );
+NLC_API bool update_NeedUpgrade( update_t * );
+NLC_API void update_Download( update_t *, const char* );
+NLC_API update_release_t* update_GetRelease( update_t * );
 
 /**
  * @}

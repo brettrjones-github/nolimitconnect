@@ -42,7 +42,7 @@ break_list(char *etag,
 
 typedef void (bulk_rmadd_func) (priority_st * priority_list, const int *);
 
-GOTV_INLINE static void _set_priority(priority_st * st, const int *list)
+NLC_INLINE static void _set_priority(priority_st * st, const int *list)
 {
 	int num = 0, i;
 
@@ -59,7 +59,7 @@ GOTV_INLINE static void _set_priority(priority_st * st, const int *list)
 	return;
 }
 
-GOTV_INLINE static void _add_priority(priority_st * st, const int *list)
+NLC_INLINE static void _add_priority(priority_st * st, const int *list)
 {
 	int num, i, j, init;
 

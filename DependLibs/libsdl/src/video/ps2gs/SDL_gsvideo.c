@@ -178,7 +178,7 @@ static unsigned long long head_tags[] __attribute__((aligned(16))) = {
 #define MAXIMG		(32767 * 16)
 #define MAXTAGS		8
 
-static GOTV_INLINE int loadimage_nonblock(int fd, struct ps2_image *image, int size,
+static NLC_INLINE int loadimage_nonblock(int fd, struct ps2_image *image, int size,
                                      unsigned long long *hm,
                                      unsigned long long *im)
 {

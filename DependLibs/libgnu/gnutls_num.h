@@ -33,7 +33,7 @@ int _gnutls_uint48pp(uint64 *);
 
 #define UINT64DATA(x) ((x).i)
 
-GOTV_INLINE static uint32_t _gnutls_uint24touint32(uint24 num)
+NLC_INLINE static uint32_t _gnutls_uint24touint32(uint24 num)
 {
 	uint32_t ret = 0;
 
@@ -43,7 +43,7 @@ GOTV_INLINE static uint32_t _gnutls_uint24touint32(uint24 num)
 	return ret;
 }
 
-GOTV_INLINE static uint24 _gnutls_uint32touint24(uint32_t num)
+NLC_INLINE static uint24 _gnutls_uint32touint24(uint32_t num)
 {
 	uint24 ret;
 
@@ -55,7 +55,7 @@ GOTV_INLINE static uint24 _gnutls_uint32touint24(uint32_t num)
 }
 
 /* data should be at least 3 bytes */
-GOTV_INLINE static uint32_t _gnutls_read_uint24(const uint8_t * data)
+NLC_INLINE static uint32_t _gnutls_read_uint24(const uint8_t * data)
 {
 	uint32_t res;
 	uint24 num;
@@ -71,7 +71,7 @@ GOTV_INLINE static uint32_t _gnutls_read_uint24(const uint8_t * data)
 	return res;
 }
 
-GOTV_INLINE static void _gnutls_write_uint64(uint64_t num, uint8_t * data)
+NLC_INLINE static void _gnutls_write_uint64(uint64_t num, uint8_t * data)
 {
 #ifndef GOTV_ARCH_BIGENDIAN
 	num = bswap_64(num);
@@ -79,7 +79,7 @@ GOTV_INLINE static void _gnutls_write_uint64(uint64_t num, uint8_t * data)
 	memcpy(data, &num, 8);
 }
 
-GOTV_INLINE static void _gnutls_write_uint24(uint32_t num, uint8_t * data)
+NLC_INLINE static void _gnutls_write_uint24(uint32_t num, uint8_t * data)
 {
 	uint24 tmp;
 
@@ -93,7 +93,7 @@ GOTV_INLINE static void _gnutls_write_uint24(uint32_t num, uint8_t * data)
 	data[2] = tmp.pint[2];
 }
 
-GOTV_INLINE static uint32_t _gnutls_read_uint32(const uint8_t * data)
+NLC_INLINE static uint32_t _gnutls_read_uint32(const uint8_t * data)
 {
 	uint32_t res;
 
@@ -104,7 +104,7 @@ GOTV_INLINE static uint32_t _gnutls_read_uint32(const uint8_t * data)
 	return res;
 }
 
-GOTV_INLINE static void _gnutls_write_uint32(uint32_t num, uint8_t * data)
+NLC_INLINE static void _gnutls_write_uint32(uint32_t num, uint8_t * data)
 {
 
 #ifndef GOTV_ARCH_BIGENDIAN
@@ -113,7 +113,7 @@ GOTV_INLINE static void _gnutls_write_uint32(uint32_t num, uint8_t * data)
 	memcpy(data, &num, sizeof(uint32_t));
 }
 
-GOTV_INLINE static uint16_t _gnutls_read_uint16(const uint8_t * data)
+NLC_INLINE static uint16_t _gnutls_read_uint16(const uint8_t * data)
 {
 	uint16_t res;
 	memcpy(&res, data, sizeof(uint16_t));
@@ -123,7 +123,7 @@ GOTV_INLINE static uint16_t _gnutls_read_uint16(const uint8_t * data)
 	return res;
 }
 
-GOTV_INLINE static void _gnutls_write_uint16(uint16_t num, uint8_t * data)
+NLC_INLINE static void _gnutls_write_uint16(uint16_t num, uint8_t * data)
 {
 
 #ifndef GOTV_ARCH_BIGENDIAN
@@ -132,7 +132,7 @@ GOTV_INLINE static void _gnutls_write_uint16(uint16_t num, uint8_t * data)
 	memcpy(data, &num, sizeof(uint16_t));
 }
 
-GOTV_INLINE static uint32_t _gnutls_conv_uint32(uint32_t data)
+NLC_INLINE static uint32_t _gnutls_conv_uint32(uint32_t data)
 {
 #ifndef GOTV_ARCH_BIGENDIAN
 	return bswap_32(data);
@@ -141,7 +141,7 @@ GOTV_INLINE static uint32_t _gnutls_conv_uint32(uint32_t data)
 #endif
 }
 
-GOTV_INLINE static uint16_t _gnutls_conv_uint16(uint16_t data)
+NLC_INLINE static uint16_t _gnutls_conv_uint16(uint16_t data)
 {
 #ifndef GOTV_ARCH_BIGENDIAN
 	return bswap_16(data);
@@ -150,7 +150,7 @@ GOTV_INLINE static uint16_t _gnutls_conv_uint16(uint16_t data)
 #endif
 }
 
-GOTV_INLINE static uint32_t _gnutls_uint64touint32(const uint64 * num)
+NLC_INLINE static uint32_t _gnutls_uint64touint32(const uint64 * num)
 {
 	uint32_t ret;
 

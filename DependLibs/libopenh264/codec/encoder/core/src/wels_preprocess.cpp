@@ -71,7 +71,7 @@ const uint8_t g_kuiRefTemporalIdx[MAX_TEMPORAL_LEVEL][MAX_GOP_SIZE] = {
 const int32_t g_kiPixMapSizeInBits = sizeof (uint8_t) * 8;
 
 
-GOTV_INLINE  void   WelsUpdateSpatialIdxMap (sWelsEncCtx* pEncCtx, const int32_t iPos, SPicture* const pPic,
+NLC_INLINE  void   WelsUpdateSpatialIdxMap (sWelsEncCtx* pEncCtx, const int32_t iPos, SPicture* const pPic,
                                         const int32_t iDidx) {
   pEncCtx->sSpatialIndexMap[iPos].pSrc = pPic;
   pEncCtx->sSpatialIndexMap[iPos].iDid = iDidx;

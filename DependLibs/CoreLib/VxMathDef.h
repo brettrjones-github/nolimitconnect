@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #ifndef _MSC_VER
     // gcc does not have msvc style inlines
-    #define _inline GOTV_INLINE
-    #define VX_INLINE GOTV_INLINE
-    #define VXMATH_INLINE GOTV_INLINE
+    #define _inline NLC_INLINE
+    #define VX_INLINE NLC_INLINE
+    #define VXMATH_INLINE NLC_INLINE
 #else
     // MSVC
     #ifndef VX_INLINE

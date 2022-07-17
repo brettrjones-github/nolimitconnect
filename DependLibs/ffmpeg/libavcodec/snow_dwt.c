@@ -740,7 +740,7 @@ void ff_spatial_idwt(IDWTELEM *buffer, IDWTELEM *temp, int width, int height,
                               decomposition_count, y);
 }
 
-static GOTV_INLINE int w_c(struct MpegEncContext *v, uint8_t *pix1, uint8_t *pix2, ptrdiff_t line_size,
+static NLC_INLINE int w_c(struct MpegEncContext *v, uint8_t *pix1, uint8_t *pix2, ptrdiff_t line_size,
                       int w, int h, int type)
 {
     int s, i, j;

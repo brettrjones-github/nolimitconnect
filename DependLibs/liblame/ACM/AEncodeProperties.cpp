@@ -286,7 +286,7 @@ const unsigned int AEncodeProperties::GetBitrateValue() const
 	return the_Bitrates[nMinBitrateIndex];
 }
 
-GOTV_INLINE const int AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) const
+NLC_INLINE const int AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) const
 {
 	int i;
 
@@ -308,7 +308,7 @@ GOTV_INLINE const int AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) c
 	return -1;
 }
 
-GOTV_INLINE const int AEncodeProperties::GetBitrateValueMPEG1(DWORD & bitrate) const
+NLC_INLINE const int AEncodeProperties::GetBitrateValueMPEG1(DWORD & bitrate) const
 {
 	int i;
 
@@ -1283,7 +1283,7 @@ void AEncodeProperties::SelectSavedParams(const std::string the_string)
 	}
 }
 
-GOTV_INLINE void AEncodeProperties::SetAttributeBool(TiXmlElement * the_elt,const std::string & the_string, const bool the_value) const
+NLC_INLINE void AEncodeProperties::SetAttributeBool(TiXmlElement * the_elt,const std::string & the_string, const bool the_value) const
 {
 	if (the_value == false)
 		the_elt->SetAttribute(the_string, "false");

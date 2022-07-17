@@ -105,6 +105,12 @@ public:
 	void						setFavoriteHostGroupUrl( std::string& hostUrl );
 	void						getFavoriteHostGroupUrl( std::string& hostUrl );
 
+	void						setSoundInDeviceIndex( int32_t deviceIndex );
+	int32_t						getSoundInDeviceIndex( void );
+
+	void						setSoundOutDeviceIndex( int32_t deviceIndex );
+	int32_t						getSoundOutDeviceIndex( void );
+
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );

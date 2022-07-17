@@ -19,7 +19,7 @@ public:
   int setcompressionlevel( int comp_level );
   int setcompressionstrategy( int comp_strategy );
 
-  GOTV_INLINE int is_open() const { return (file !=NULL); }
+  NLC_INLINE int is_open() const { return (file !=NULL); }
 
   virtual streampos seekoff( streamoff, ios::seek_dir, int );
 
@@ -103,24 +103,24 @@ template<class T> gzofstream &operator<<(gzofstream &s, const gzomanip<T> &m)
   return (*m.func)(s, m.val);
 }
 
-GOTV_INLINE gzofstream &setcompressionlevel( gzofstream &s, int l )
+NLC_INLINE gzofstream &setcompressionlevel( gzofstream &s, int l )
 {
   (s.rdbuf())->setcompressionlevel(l);
   return s;
 }
 
-GOTV_INLINE gzofstream &setcompressionstrategy( gzofstream &s, int l )
+NLC_INLINE gzofstream &setcompressionstrategy( gzofstream &s, int l )
 {
   (s.rdbuf())->setcompressionstrategy(l);
   return s;
 }
 
-GOTV_INLINE gzomanip<int> setcompressionlevel(int l)
+NLC_INLINE gzomanip<int> setcompressionlevel(int l)
 {
   return gzomanip<int>(&setcompressionlevel,l);
 }
 
-GOTV_INLINE gzomanip<int> setcompressionstrategy(int l)
+NLC_INLINE gzomanip<int> setcompressionstrategy(int l)
 {
   return gzomanip<int>(&setcompressionstrategy,l);
 }

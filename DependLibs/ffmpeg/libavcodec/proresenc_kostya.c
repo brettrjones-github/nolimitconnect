@@ -337,7 +337,7 @@ static void get_alpha_data(ProresContext *ctx, const uint16_t *src,
 /**
  * Write an unsigned rice/exp golomb codeword.
  */
-static GOTV_INLINE void encode_vlc_codeword(PutBitContext *pb, unsigned codebook, int val)
+static NLC_INLINE void encode_vlc_codeword(PutBitContext *pb, unsigned codebook, int val)
 {
     unsigned int rice_order, exp_order, switch_bits, switch_val;
     int exponent;
@@ -590,7 +590,7 @@ static int encode_slice(AVCodecContext *avctx, const AVFrame *pic,
     return total_size;
 }
 
-static GOTV_INLINE int estimate_vlc(unsigned codebook, int val)
+static NLC_INLINE int estimate_vlc(unsigned codebook, int val)
 {
     unsigned int rice_order, exp_order, switch_bits, switch_val;
     int exponent;

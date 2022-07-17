@@ -32,7 +32,7 @@
 #if USE_FLOATS
 #define RENAME(n) n##_float
 
-static GOTV_INLINE float round_sample(float *sum)
+static NLC_INLINE float round_sample(float *sum)
 {
     float sum1=*sum;
     *sum = 0;
@@ -53,7 +53,7 @@ static GOTV_INLINE float round_sample(float *sum)
 #define RENAME(n) n##_fixed
 #define OUT_SHIFT (WFRAC_BITS + FRAC_BITS - 15)
 
-static GOTV_INLINE int round_sample(int64_t *sum)
+static NLC_INLINE int round_sample(int64_t *sum)
 {
     int sum1;
     sum1 = (int)((*sum) >> OUT_SHIFT);

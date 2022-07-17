@@ -28,7 +28,7 @@
 #include <math.h>
 
 /* Include only the enabled headers since some compilers (namely, Sun
-   Studio) will not omit unused GOTV_INLINE functions and create undefined
+   Studio) will not omit unused NLC_INLINE functions and create undefined
    references to libraries that are not being built. */
 
 #include <ffmpeg/config_ffmpeg.h>

@@ -107,7 +107,7 @@ struct picture_t
  * with picture_Hold and picture_Release. This default management will release
  * p_sys, gc.p_sys fields if non NULL.
  */
-GOTV_API picture_t * picture_New( gotvptop_fourcc_t i_chroma, int i_width, int i_height, int i_sar_num, int i_sar_den ) GOTV_USED;
+NLC_API picture_t * picture_New( gotvptop_fourcc_t i_chroma, int i_width, int i_height, int i_sar_num, int i_sar_den ) GOTV_USED;
 
 /**
  * This function will create a new picture using the given format.
@@ -115,7 +115,7 @@ GOTV_API picture_t * picture_New( gotvptop_fourcc_t i_chroma, int i_width, int i
  * When possible, it is preferred to use this function over picture_New
  * as more information about the format is kept.
  */
-GOTV_API picture_t * picture_NewFromFormat( const video_format_t *p_fmt ) GOTV_USED;
+NLC_API picture_t * picture_NewFromFormat( const video_format_t *p_fmt ) GOTV_USED;
 
 /**
  * Resource for a picture.
@@ -142,7 +142,7 @@ typedef struct
  *
  * If the resource is NULL then a plain picture_NewFromFormat is returned.
  */
-GOTV_API picture_t * picture_NewFromResource( const video_format_t *, const picture_resource_t * ) GOTV_USED;
+NLC_API picture_t * picture_NewFromResource( const video_format_t *, const picture_resource_t * ) GOTV_USED;
 
 /**
  * This function will increase the picture reference count.
@@ -150,32 +150,32 @@ GOTV_API picture_t * picture_NewFromResource( const video_format_t *, const pict
  *
  * It returns the given picture for convenience.
  */
-GOTV_API picture_t *picture_Hold( picture_t *p_picture );
+NLC_API picture_t *picture_Hold( picture_t *p_picture );
 
 /**
  * This function will release a picture.
  * It will not have any effect on picture obtained from vout
  */
-GOTV_API void picture_Release( picture_t *p_picture );
+NLC_API void picture_Release( picture_t *p_picture );
 
 /**
  * This function will copy all picture dynamic properties.
  */
-GOTV_API void picture_CopyProperties( picture_t *p_dst, const picture_t *p_src );
+NLC_API void picture_CopyProperties( picture_t *p_dst, const picture_t *p_src );
 
 /**
  * This function will reset a picture information (properties and quantizers).
  * It is sometimes useful for reusing pictures (like from a pool).
  */
-GOTV_API void picture_Reset( picture_t * );
+NLC_API void picture_Reset( picture_t * );
 
 /**
  * This function will copy the picture pixels.
  * You can safely copy between pictures that do not have the same size,
  * only the compatible(smaller) part will be copied.
  */
-GOTV_API void picture_CopyPixels( picture_t *p_dst, const picture_t *p_src );
-GOTV_API void plane_CopyPixels( plane_t *p_dst, const plane_t *p_src );
+NLC_API void picture_CopyPixels( picture_t *p_dst, const picture_t *p_src );
+NLC_API void plane_CopyPixels( plane_t *p_dst, const plane_t *p_src );
 
 /**
  * This function will copy both picture dynamic properties and pixels.
@@ -186,7 +186,7 @@ GOTV_API void plane_CopyPixels( plane_t *p_dst, const plane_t *p_src );
  * \param p_dst pointer to the destination picture.
  * \param p_src pointer to the source picture.
  */
-GOTV_API void picture_Copy( picture_t *p_dst, const picture_t *p_src );
+NLC_API void picture_Copy( picture_t *p_dst, const picture_t *p_src );
 
 /**
  * Perform a shallow picture copy
@@ -197,7 +197,7 @@ GOTV_API void picture_Copy( picture_t *p_dst, const picture_t *p_src );
  *
  * \return A clone picture on success, NULL on error.
  */
-GOTV_API picture_t *picture_Clone(picture_t *pic);
+NLC_API picture_t *picture_Clone(picture_t *pic);
 
 /**
  * This function will export a picture to an encoded bitstream.
@@ -215,7 +215,7 @@ GOTV_API picture_t *picture_Clone(picture_t *pic);
  *  - if strictly higher than 0, it will override the dimension.
  * If at most one of them is > 0 then the picture aspect ratio will be kept.
  */
-GOTV_API int picture_Export( gotvptop_object_t *p_obj, block_t **pp_image, video_format_t *p_fmt, picture_t *p_picture, gotvptop_fourcc_t i_format, int i_override_width, int i_override_height );
+NLC_API int picture_Export( gotvptop_object_t *p_obj, block_t **pp_image, video_format_t *p_fmt, picture_t *p_picture, gotvptop_fourcc_t i_format, int i_override_width, int i_override_height );
 
 /**
  * This function will setup all fields of a picture_t without allocating any
@@ -228,7 +228,7 @@ GOTV_API int picture_Export( gotvptop_object_t *p_obj, block_t **pp_image, video
  *
  * It can be useful to get the properties of planes.
  */
-GOTV_API int picture_Setup( picture_t *, const video_format_t * );
+NLC_API int picture_Setup( picture_t *, const video_format_t * );
 
 
 /*****************************************************************************

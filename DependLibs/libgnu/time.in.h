@@ -143,19 +143,19 @@ _GL_CXXALIASWARN (mktime);
 #    undef localtime_r
 #    define localtime_r rpl_localtime_r
 #   endif
-_GL_FUNCDECL_RPL (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_RPL (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result)
                                             _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_RPL (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result));
 #  else
 #   if ! @HAVE_DECL_LOCALTIME_R@
-_GL_FUNCDECL_SYS (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_SYS (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result)
                                             _GL_ARG_NONNULL ((1, 2)));
 #   endif
-_GL_CXXALIAS_SYS (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_SYS (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result));
 #  endif
 #  if @HAVE_DECL_LOCALTIME_R@
 _GL_CXXALIASWARN (localtime_r);
@@ -165,19 +165,19 @@ _GL_CXXALIASWARN (localtime_r);
 #    undef gmtime_r
 #    define gmtime_r rpl_gmtime_r
 #   endif
-_GL_FUNCDECL_RPL (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_RPL (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result)
                                          _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_RPL (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result));
 #  else
 #   if ! @HAVE_DECL_LOCALTIME_R@
-_GL_FUNCDECL_SYS (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_SYS (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result)
                                          _GL_ARG_NONNULL ((1, 2)));
 #   endif
-_GL_CXXALIAS_SYS (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_SYS (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result));
 #  endif
 #  if @HAVE_DECL_LOCALTIME_R@
 _GL_CXXALIASWARN (gmtime_r);
@@ -222,14 +222,14 @@ _GL_CXXALIASWARN (gmtime);
    <http://www.opengroup.org/susv3xsh/strptime.html>.  */
 # if @GNULIB_STRPTIME@
 #  if ! @HAVE_STRPTIME@
-_GL_FUNCDECL_SYS (strptime, char *, (char const *GOTV_RESTRICT __buf,
-                                     char const *GOTV_RESTRICT __format,
-                                     struct tm *GOTV_RESTRICT __tm)
+_GL_FUNCDECL_SYS (strptime, char *, (char const *NLC_RESTRICT __buf,
+                                     char const *NLC_RESTRICT __format,
+                                     struct tm *NLC_RESTRICT __tm)
                                     _GL_ARG_NONNULL ((1, 2, 3)));
 #  endif
-_GL_CXXALIAS_SYS (strptime, char *, (char const *GOTV_RESTRICT __buf,
-                                     char const *GOTV_RESTRICT __format,
-                                     struct tm *GOTV_RESTRICT __tm));
+_GL_CXXALIAS_SYS (strptime, char *, (char const *NLC_RESTRICT __buf,
+                                     char const *NLC_RESTRICT __format,
+                                     struct tm *NLC_RESTRICT __tm));
 _GL_CXXALIASWARN (strptime);
 # endif
 
@@ -240,16 +240,16 @@ _GL_CXXALIAS_SYS (tzalloc, timezone_t, (char const *__name));
 _GL_FUNCDECL_SYS (tzfree, void, (timezone_t __tz));
 _GL_CXXALIAS_SYS (tzfree, void, (timezone_t __tz));
 _GL_FUNCDECL_SYS (localtime_rz, struct tm *,
-                  (timezone_t __tz, time_t const *GOTV_RESTRICT __timer,
-                   struct tm *GOTV_RESTRICT __result) _GL_ARG_NONNULL ((2, 3)));
+                  (timezone_t __tz, time_t const *NLC_RESTRICT __timer,
+                   struct tm *NLC_RESTRICT __result) _GL_ARG_NONNULL ((2, 3)));
 _GL_CXXALIAS_SYS (localtime_rz, struct tm *,
-                  (timezone_t __tz, time_t const *GOTV_RESTRICT __timer,
-                   struct tm *GOTV_RESTRICT __result));
+                  (timezone_t __tz, time_t const *NLC_RESTRICT __timer,
+                   struct tm *NLC_RESTRICT __result));
 _GL_FUNCDECL_SYS (mktime_z, time_t,
-                  (timezone_t __tz, struct tm *GOTV_RESTRICT __result)
+                  (timezone_t __tz, struct tm *NLC_RESTRICT __result)
                   _GL_ARG_NONNULL ((2)));
 _GL_CXXALIAS_SYS (mktime_z, time_t,
-                  (timezone_t __tz, struct tm *GOTV_RESTRICT __result));
+                  (timezone_t __tz, struct tm *NLC_RESTRICT __result));
 # endif
 
 /* Convert TM to a time_t value, assuming UTC.  */

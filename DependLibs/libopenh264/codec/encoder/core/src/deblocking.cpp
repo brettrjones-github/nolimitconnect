@@ -123,7 +123,7 @@ static const uint8_t g_kuiTableBIdx[2][8] = {
   iTc[3] = g_kiTc0Table(iIdexA)[pBS[3]] + bchroma;\
 }
 
-void GOTV_INLINE DeblockingBSInsideMBAvsbase (int8_t* pNnzTab, uint8_t uiBS[2][4][4], int32_t iLShiftFactor) {
+void NLC_INLINE DeblockingBSInsideMBAvsbase (int8_t* pNnzTab, uint8_t uiBS[2][4][4], int32_t iLShiftFactor) {
   uint32_t uiNnz32b0, uiNnz32b1, uiNnz32b2, uiNnz32b3;
 
   uiNnz32b0 = * (uint32_t*) (pNnzTab + 0);
@@ -152,7 +152,7 @@ void GOTV_INLINE DeblockingBSInsideMBAvsbase (int8_t* pNnzTab, uint8_t uiBS[2][4
 
 }
 
-void GOTV_INLINE DeblockingBSInsideMBNormal (SMB* pCurMb, uint8_t uiBS[2][4][4], int8_t* pNnzTab) {
+void NLC_INLINE DeblockingBSInsideMBNormal (SMB* pCurMb, uint8_t uiBS[2][4][4], int8_t* pNnzTab) {
   uint32_t uiNnz32b0, uiNnz32b1, uiNnz32b2, uiNnz32b3;
   ENFORCE_STACK_ALIGN_1D (uint8_t, uiBsx4, 4, 4);
 

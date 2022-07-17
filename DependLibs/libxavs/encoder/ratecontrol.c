@@ -162,12 +162,12 @@ static void update_predictor (predictor_t * p, double q, double var, double bits
 * qp = h.avs's quantizer
 * qscale = linearized quantizer = Lagrange multiplier
 */
-static GOTV_INLINE double
+static NLC_INLINE double
 qp2qscale (double qp)
 {
   return 0.85 * pow (2.0, (qp - 12.0) / 8.0);
 }
-static GOTV_INLINE double
+static NLC_INLINE double
 qscale2qp (double qscale)
 {
   return 12.0 + 8.0 * log (qscale / 0.85) / log (2.0);
@@ -177,7 +177,7 @@ qscale2qp (double qscale)
 * probably due the the changing number of SKIP blocks.
 * MV bits level off at about qp<=12, because the lambda used
 * for motion estimation is constant there. */
-static GOTV_INLINE double
+static NLC_INLINE double
 qscale2bits (ratecontrol_entry_t * rce, double qscale)
 {
   if (qscale < 0.1)

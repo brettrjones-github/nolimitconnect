@@ -77,7 +77,7 @@
      We use this technique for libgettextlib (because it contains many gnulib
      modules) and for libgettextsrc (because this makes it easy to move source
      code from an msg* program to libgettextsrc).  The macro is called
-     GOTV_DLL_VARIABLE.
+     NLC_DLL_VARIABLE.
 
    This file allows building an explicit export list.  You can either
      - specify the variables to be exported, and use the GNU ld option

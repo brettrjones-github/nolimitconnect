@@ -606,7 +606,7 @@ xavs_mb_predict_mv_ref16x16 (xavs_t * h, int i_list, int i_ref, int mvc[8][2], i
   *i_mvc = i;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_mc_0xywh (xavs_t * h, int x, int y, int width, int height)
 {
   const int i8 = xavs_scan8[0] + x + 8 * y;
@@ -620,7 +620,7 @@ xavs_mb_mc_0xywh (xavs_t * h, int x, int y, int width, int height)
 
   h->mc.mc_chroma (&h->mb.pic.p_fref[0][i_ref][5][2 * y * h->mb.pic.i_stride[2] + 2 * x], h->mb.pic.i_stride[2], &h->mb.pic.p_fdec[2][2 * y * FDEC_STRIDE + 2 * x], FDEC_STRIDE, mvx, mvy, 2 * width, 2 * height);
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_mc_1xywh (xavs_t * h, int x, int y, int width, int height)
 {
   const int i8 = xavs_scan8[0] + x + 8 * y;
@@ -635,7 +635,7 @@ xavs_mb_mc_1xywh (xavs_t * h, int x, int y, int width, int height)
   h->mc.mc_chroma (&h->mb.pic.p_fref[1][i_ref][5][2 * y * h->mb.pic.i_stride[2] + 2 * x], h->mb.pic.i_stride[2], &h->mb.pic.p_fdec[2][2 * y * FDEC_STRIDE + 2 * x], FDEC_STRIDE, mvx, mvy, 2 * width, 2 * height);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_mb_mc_01xywh (xavs_t * h, int x, int y, int width, int height)
 {
   //int mvBw[0], mvBw[1];

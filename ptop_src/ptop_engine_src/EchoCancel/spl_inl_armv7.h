@@ -9,7 +9,7 @@
  */
 
 
-/* This header file includes the GOTV_INLINE functions for ARM processors in
+/* This header file includes the NLC_INLINE functions for ARM processors in
  * the fix point signal processing library.
  */
 

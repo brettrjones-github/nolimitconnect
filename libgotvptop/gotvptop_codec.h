@@ -298,7 +298,7 @@ static inline picture_t *decoder_NewPicture( decoder_t *dec )
  * will be aborted. This function can be used by asynchronous video decoders
  * to unblock a thread that is waiting for a picture.
  */
-GOTV_API void decoder_AbortPictures( decoder_t *dec, bool b_abort );
+NLC_API void decoder_AbortPictures( decoder_t *dec, bool b_abort );
 
 /**
  * This function queues a single picture to the video output.
@@ -388,34 +388,34 @@ static inline int decoder_UpdateAudioFormat( decoder_t *dec )
  * output buffer. It must be released with block_Release() or returned it to
  * the caller as a decoder_QueueAudio parameter.
  */
-GOTV_API block_t * decoder_NewAudioBuffer( decoder_t *, int i_nb_samples ) GOTV_USED;
+NLC_API block_t * decoder_NewAudioBuffer( decoder_t *, int i_nb_samples ) GOTV_USED;
 
 /**
  * This function will return a new subpicture usable by a decoder as an output
  * buffer. You have to release it using subpicture_Delete() or by returning
  * it to the caller as a decoder_QueueSub parameter.
  */
-GOTV_API subpicture_t * decoder_NewSubpicture( decoder_t *, const subpicture_updater_t * ) GOTV_USED;
+NLC_API subpicture_t * decoder_NewSubpicture( decoder_t *, const subpicture_updater_t * ) GOTV_USED;
 
 /**
  * This function gives all input attachments at once.
  *
  * You MUST release the returned values
  */
-GOTV_API int decoder_GetInputAttachments( decoder_t *, input_attachment_t ***ppp_attachment, int *pi_attachment );
+NLC_API int decoder_GetInputAttachments( decoder_t *, input_attachment_t ***ppp_attachment, int *pi_attachment );
 
 /**
  * This function converts a decoder timestamp into a display date comparable
  * to mdate().
  * You MUST use it *only* for gathering statistics about speed.
  */
-GOTV_API mtime_t decoder_GetDisplayDate( decoder_t *, mtime_t ) GOTV_USED;
+NLC_API mtime_t decoder_GetDisplayDate( decoder_t *, mtime_t ) GOTV_USED;
 
 /**
  * This function returns the current input rate.
  * You MUST use it *only* for gathering statistics about speed.
  */
-GOTV_API int decoder_GetDisplayRate( decoder_t * ) GOTV_USED;
+NLC_API int decoder_GetDisplayRate( decoder_t * ) GOTV_USED;
 
 /** @} */
 /** @} */

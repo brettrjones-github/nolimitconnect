@@ -99,7 +99,7 @@ static const AVOption hue_options[] = {
 
 AVFILTER_DEFINE_CLASS(hue);
 
-static GOTV_INLINE void compute_sin_and_cos(HueContext *hue)
+static NLC_INLINE void compute_sin_and_cos(HueContext *hue)
 {
     /*
      * Scale the value to the norm of the resulting (U,V) vector, that is
@@ -110,7 +110,7 @@ static GOTV_INLINE void compute_sin_and_cos(HueContext *hue)
     hue->hue_cos = lrint(cos(hue->hue) * (1 << 16) * hue->saturation);
 }
 
-static GOTV_INLINE void create_luma_lut(HueContext *h)
+static NLC_INLINE void create_luma_lut(HueContext *h)
 {
     const float b = h->brightness;
     int i;
@@ -120,7 +120,7 @@ static GOTV_INLINE void create_luma_lut(HueContext *h)
     }
 }
 
-static GOTV_INLINE void create_chrominance_lut(HueContext *h, const int32_t c,
+static NLC_INLINE void create_chrominance_lut(HueContext *h, const int32_t c,
                                           const int32_t s)
 {
     int32_t i, j, u, v, new_u, new_v;

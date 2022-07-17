@@ -244,7 +244,7 @@ void _gcry_set_progress_handler (gcry_handler_progress_t cb, void *cb_data);
 
 /* Return a pointer to a string containing a description of the error
    code in the error value ERR.  */
-static GOTV_INLINE const char *
+static NLC_INLINE const char *
 _gcry_strerror (gcry_error_t err)
 {
   return gpg_strerror (err);
@@ -252,7 +252,7 @@ _gcry_strerror (gcry_error_t err)
 
 /* Return a pointer to a string containing a description of the error
    source in the error value ERR.  */
-static GOTV_INLINE const char *
+static NLC_INLINE const char *
 _gcry_strsource (gcry_error_t err)
 {
   return gpg_strsource (err);
@@ -261,7 +261,7 @@ _gcry_strsource (gcry_error_t err)
 /* Retrieve the error code for the system error ERR.  This returns
    GPG_ERR_UNKNOWN_ERRNO if the system error is not mapped (report
    this).  */
-static GOTV_INLINE gcry_err_code_t
+static NLC_INLINE gcry_err_code_t
 _gcry_err_code_from_errno (int err)
 {
   return gpg_err_code_from_errno (err);
@@ -269,7 +269,7 @@ _gcry_err_code_from_errno (int err)
 
 /* Retrieve the system error for the error code CODE.  This returns 0
    if CODE is not a system error code.  */
-static GOTV_INLINE int
+static NLC_INLINE int
 _gcry_err_code_to_errno (gcry_err_code_t code)
 {
   return gpg_err_code_from_errno (code);
@@ -277,7 +277,7 @@ _gcry_err_code_to_errno (gcry_err_code_t code)
 
 /* Return an error value with the error source SOURCE and the system
    error ERR.  */
-static GOTV_INLINE gcry_err_code_t
+static NLC_INLINE gcry_err_code_t
 _gcry_err_make_from_errno (gpg_err_source_t source, int err)
 {
   return gpg_err_make_from_errno (source, err);
@@ -285,7 +285,7 @@ _gcry_err_make_from_errno (gpg_err_source_t source, int err)
 
 
 /* Return an error value with the system error ERR.  */
-static GOTV_INLINE gcry_err_code_t
+static NLC_INLINE gcry_err_code_t
 _gcry_error_from_errno (int err)
 {
   return gpg_error (gpg_err_code_from_errno (err));

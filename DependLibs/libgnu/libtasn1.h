@@ -23,14 +23,14 @@
 #pragma once
 #include <libgnu/config_libgnu.h>
 #ifndef ASN1_API
-# define ASN1_API GOTV_API
+# define ASN1_API NLC_API
 #endif // ASN1_API
 
 #include <sys/types.h>
 #include <time.h>
 #include <stdio.h>		/* for FILE* */
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #define ASN1_VERSION "4.8"
 
@@ -383,4 +383,4 @@ GOTV_BEGIN_CDECLARES
 #define node_data_struct asn1_data_node_st
 #define ASN1_DATA_NODE asn1_data_node_st
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES

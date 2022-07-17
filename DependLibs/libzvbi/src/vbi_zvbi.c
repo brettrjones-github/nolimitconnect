@@ -384,7 +384,7 @@ vbi_send_event(vbi_decoder *vbi, vbi_event *ev)
  *  VBI Decoder
  */
 
-static GOTV_INLINE double
+static NLC_INLINE double
 current_time(void)
 {
 	struct timeval tv;
@@ -590,7 +590,7 @@ vbi_channel_switched(vbi_decoder *vbi, vbi_nuid nuid)
 	pthread_mutex_unlock(&vbi->chswcd_mutex);
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 transp(int val, int brig, int cont)
 {
 	int r = (((val - 128) * cont) / 64) + brig;

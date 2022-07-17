@@ -145,28 +145,28 @@ sha224_init (void *context, unsigned int flags)
           } while (0)
 
 /* (4.2) same as SHA-1's F1.  */
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 Cho (uint32_t x, uint32_t y, uint32_t z)
 {
   return (z ^ (x & (y ^ z)));
 }
 
 /* (4.3) same as SHA-1's F3 */
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 Maj (uint32_t x, uint32_t y, uint32_t z)
 {
   return ((x & y) | (z & (x|y)));
 }
 
 /* (4.4) */
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 Sum0 (uint32_t x)
 {
   return (ror (x, 2) ^ ror (x, 13) ^ ror (x, 22));
 }
 
 /* (4.5) */
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 Sum1 (uint32_t x)
 {
   return (ror (x, 6) ^ ror (x, 11) ^ ror (x, 25));

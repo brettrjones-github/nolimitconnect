@@ -104,7 +104,7 @@ static int write_pkcs12_kdf_params( ASN1_TYPE pbes2_asn,
   * For RSA it is a PKCS #1 DER private key and for DSA it is
   * an ASN.1 INTEGER of the x value.
   */
-GOTV_INLINE static int
+NLC_INLINE static int
 _encode_privkey( gnutls_x509_privkey_t pkey, gnutls_datum_t * raw )
 {
 	int ret;

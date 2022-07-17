@@ -139,7 +139,7 @@ static int copy_certificate_auth_info(cert_auth_info_t info, gnutls_pcert_st * c
 /* returns 0 if the algo_to-check exists in the pk_algos list,
  * -1 otherwise.
  */
-GOTV_INLINE static int
+NLC_INLINE static int
 check_pk_algo_in_list(const gnutls_pk_algorithm_t *
 		      pk_algos, int pk_algos_length,
 		      gnutls_pk_algorithm_t algo_to_check)
@@ -1336,7 +1336,7 @@ int _gnutls_proc_crt(gnutls_session_t session, uint8_t * data, size_t data_size)
  * (RSA or DSA). Returns the corresponding gnutls_pk_algorithm_t
  * if true;
  */
-GOTV_INLINE static int _gnutls_check_supported_sign_algo(CertificateSigType algo)
+NLC_INLINE static int _gnutls_check_supported_sign_algo(CertificateSigType algo)
 {
 	switch (algo) {
 	case RSA_SIGN:

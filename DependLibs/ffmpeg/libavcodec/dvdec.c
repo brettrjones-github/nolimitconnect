@@ -260,7 +260,7 @@ static void dv_decode_ac(GetBitContext *gb, BlockInfo *mb, int16_t *block)
     mb->pos = pos;
 }
 
-static GOTV_INLINE void bit_copy(PutBitContext *pb, GetBitContext *gb)
+static NLC_INLINE void bit_copy(PutBitContext *pb, GetBitContext *gb)
 {
     int bits_left = get_bits_left(gb);
     while (bits_left >= MIN_CACHE_BITS) {

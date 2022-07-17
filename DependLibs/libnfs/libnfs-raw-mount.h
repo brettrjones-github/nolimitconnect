@@ -39,7 +39,7 @@ either expressed or implied, of the FreeBSD Project.
 
 
 #ifdef __cplusplus
-GOTV_EXTERN "C" {
+NLC_EXTERN "C" {
 #endif
 
 #define MNTPATHLEN 1024
@@ -147,128 +147,128 @@ typedef struct mountres1 mountres1;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define MOUNT1_NULL 0
-GOTV_EXTERN  void * mount1_null_1(void *, void *);
-GOTV_EXTERN  void * mount1_null_1_svc(void *, struct svc_req *);
+NLC_EXTERN  void * mount1_null_1(void *, void *);
+NLC_EXTERN  void * mount1_null_1_svc(void *, struct svc_req *);
 #define MOUNT1_MNT 1
-GOTV_EXTERN  mountres1 * mount1_mnt_1(dirpath *, void *);
-GOTV_EXTERN  mountres1 * mount1_mnt_1_svc(dirpath *, struct svc_req *);
+NLC_EXTERN  mountres1 * mount1_mnt_1(dirpath *, void *);
+NLC_EXTERN  mountres1 * mount1_mnt_1_svc(dirpath *, struct svc_req *);
 #define MOUNT1_DUMP 2
-GOTV_EXTERN  mountlist * mount1_dump_1(void *, void *);
-GOTV_EXTERN  mountlist * mount1_dump_1_svc(void *, struct svc_req *);
+NLC_EXTERN  mountlist * mount1_dump_1(void *, void *);
+NLC_EXTERN  mountlist * mount1_dump_1_svc(void *, struct svc_req *);
 #define MOUNT1_UMNT 3
-GOTV_EXTERN  void * mount1_umnt_1(dirpath *, void *);
-GOTV_EXTERN  void * mount1_umnt_1_svc(dirpath *, struct svc_req *);
+NLC_EXTERN  void * mount1_umnt_1(dirpath *, void *);
+NLC_EXTERN  void * mount1_umnt_1_svc(dirpath *, struct svc_req *);
 #define MOUNT1_UMNTALL 4
-GOTV_EXTERN  void * mount1_umntall_1(void *, void *);
-GOTV_EXTERN  void * mount1_umntall_1_svc(void *, struct svc_req *);
+NLC_EXTERN  void * mount1_umntall_1(void *, void *);
+NLC_EXTERN  void * mount1_umntall_1_svc(void *, struct svc_req *);
 #define MOUNT1_EXPORT 5
-GOTV_EXTERN  exports * mount1_export_1(void *, void *);
-GOTV_EXTERN  exports * mount1_export_1_svc(void *, struct svc_req *);
-GOTV_EXTERN int mount_program_1_freeresult (void *, zdrproc_t, caddr_t);
+NLC_EXTERN  exports * mount1_export_1(void *, void *);
+NLC_EXTERN  exports * mount1_export_1_svc(void *, struct svc_req *);
+NLC_EXTERN int mount_program_1_freeresult (void *, zdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define MOUNT1_NULL 0
-GOTV_EXTERN  void * mount1_null_1();
-GOTV_EXTERN  void * mount1_null_1_svc();
+NLC_EXTERN  void * mount1_null_1();
+NLC_EXTERN  void * mount1_null_1_svc();
 #define MOUNT1_MNT 1
-GOTV_EXTERN  mountres1 * mount1_mnt_1();
-GOTV_EXTERN  mountres1 * mount1_mnt_1_svc();
+NLC_EXTERN  mountres1 * mount1_mnt_1();
+NLC_EXTERN  mountres1 * mount1_mnt_1_svc();
 #define MOUNT1_DUMP 2
-GOTV_EXTERN  mountlist * mount1_dump_1();
-GOTV_EXTERN  mountlist * mount1_dump_1_svc();
+NLC_EXTERN  mountlist * mount1_dump_1();
+NLC_EXTERN  mountlist * mount1_dump_1_svc();
 #define MOUNT1_UMNT 3
-GOTV_EXTERN  void * mount1_umnt_1();
-GOTV_EXTERN  void * mount1_umnt_1_svc();
+NLC_EXTERN  void * mount1_umnt_1();
+NLC_EXTERN  void * mount1_umnt_1_svc();
 #define MOUNT1_UMNTALL 4
-GOTV_EXTERN  void * mount1_umntall_1();
-GOTV_EXTERN  void * mount1_umntall_1_svc();
+NLC_EXTERN  void * mount1_umntall_1();
+NLC_EXTERN  void * mount1_umntall_1_svc();
 #define MOUNT1_EXPORT 5
-GOTV_EXTERN  exports * mount1_export_1();
-GOTV_EXTERN  exports * mount1_export_1_svc();
-GOTV_EXTERN int mount_program_1_freeresult ();
+NLC_EXTERN  exports * mount1_export_1();
+NLC_EXTERN  exports * mount1_export_1_svc();
+NLC_EXTERN int mount_program_1_freeresult ();
 #endif /* K&R C */
 #define MOUNT_V3 3
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define MOUNT3_NULL 0
-GOTV_EXTERN  void * mount3_null_3(void *, void *);
-GOTV_EXTERN  void * mount3_null_3_svc(void *, struct svc_req *);
+NLC_EXTERN  void * mount3_null_3(void *, void *);
+NLC_EXTERN  void * mount3_null_3_svc(void *, struct svc_req *);
 #define MOUNT3_MNT 1
-GOTV_EXTERN  mountres3 * mount3_mnt_3(dirpath *, void *);
-GOTV_EXTERN  mountres3 * mount3_mnt_3_svc(dirpath *, struct svc_req *);
+NLC_EXTERN  mountres3 * mount3_mnt_3(dirpath *, void *);
+NLC_EXTERN  mountres3 * mount3_mnt_3_svc(dirpath *, struct svc_req *);
 #define MOUNT3_DUMP 2
-GOTV_EXTERN  mountlist * mount3_dump_3(void *, void *);
-GOTV_EXTERN  mountlist * mount3_dump_3_svc(void *, struct svc_req *);
+NLC_EXTERN  mountlist * mount3_dump_3(void *, void *);
+NLC_EXTERN  mountlist * mount3_dump_3_svc(void *, struct svc_req *);
 #define MOUNT3_UMNT 3
-GOTV_EXTERN  void * mount3_umnt_3(dirpath *, void *);
-GOTV_EXTERN  void * mount3_umnt_3_svc(dirpath *, struct svc_req *);
+NLC_EXTERN  void * mount3_umnt_3(dirpath *, void *);
+NLC_EXTERN  void * mount3_umnt_3_svc(dirpath *, struct svc_req *);
 #define MOUNT3_UMNTALL 4
-GOTV_EXTERN  void * mount3_umntall_3(void *, void *);
-GOTV_EXTERN  void * mount3_umntall_3_svc(void *, struct svc_req *);
+NLC_EXTERN  void * mount3_umntall_3(void *, void *);
+NLC_EXTERN  void * mount3_umntall_3_svc(void *, struct svc_req *);
 #define MOUNT3_EXPORT 5
-GOTV_EXTERN  exports * mount3_export_3(void *, void *);
-GOTV_EXTERN  exports * mount3_export_3_svc(void *, struct svc_req *);
-GOTV_EXTERN int mount_program_3_freeresult (void *, zdrproc_t, caddr_t);
+NLC_EXTERN  exports * mount3_export_3(void *, void *);
+NLC_EXTERN  exports * mount3_export_3_svc(void *, struct svc_req *);
+NLC_EXTERN int mount_program_3_freeresult (void *, zdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define MOUNT3_NULL 0
-GOTV_EXTERN  void * mount3_null_3();
-GOTV_EXTERN  void * mount3_null_3_svc();
+NLC_EXTERN  void * mount3_null_3();
+NLC_EXTERN  void * mount3_null_3_svc();
 #define MOUNT3_MNT 1
-GOTV_EXTERN  mountres3 * mount3_mnt_3();
-GOTV_EXTERN  mountres3 * mount3_mnt_3_svc();
+NLC_EXTERN  mountres3 * mount3_mnt_3();
+NLC_EXTERN  mountres3 * mount3_mnt_3_svc();
 #define MOUNT3_DUMP 2
-GOTV_EXTERN  mountlist * mount3_dump_3();
-GOTV_EXTERN  mountlist * mount3_dump_3_svc();
+NLC_EXTERN  mountlist * mount3_dump_3();
+NLC_EXTERN  mountlist * mount3_dump_3_svc();
 #define MOUNT3_UMNT 3
-GOTV_EXTERN  void * mount3_umnt_3();
-GOTV_EXTERN  void * mount3_umnt_3_svc();
+NLC_EXTERN  void * mount3_umnt_3();
+NLC_EXTERN  void * mount3_umnt_3_svc();
 #define MOUNT3_UMNTALL 4
-GOTV_EXTERN  void * mount3_umntall_3();
-GOTV_EXTERN  void * mount3_umntall_3_svc();
+NLC_EXTERN  void * mount3_umntall_3();
+NLC_EXTERN  void * mount3_umntall_3_svc();
 #define MOUNT3_EXPORT 5
-GOTV_EXTERN  exports * mount3_export_3();
-GOTV_EXTERN  exports * mount3_export_3_svc();
-GOTV_EXTERN int mount_program_3_freeresult ();
+NLC_EXTERN  exports * mount3_export_3();
+NLC_EXTERN  exports * mount3_export_3_svc();
+NLC_EXTERN int mount_program_3_freeresult ();
 #endif /* K&R C */
 
 /* the zdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-GOTV_EXTERN  uint32_t zdr_fhandle3 (ZDR *, fhandle3*);
-GOTV_EXTERN  uint32_t zdr_dirpath (ZDR *, dirpath*);
-GOTV_EXTERN  uint32_t zdr_name (ZDR *, name*);
-GOTV_EXTERN  uint32_t zdr_mountstat3 (ZDR *, mountstat3*);
-GOTV_EXTERN  uint32_t zdr_mountlist (ZDR *, mountlist*);
-GOTV_EXTERN  uint32_t zdr_mountbody (ZDR *, mountbody*);
-GOTV_EXTERN  uint32_t zdr_groups (ZDR *, groups*);
-GOTV_EXTERN  uint32_t zdr_groupnode (ZDR *, groupnode*);
-GOTV_EXTERN  uint32_t zdr_exports (ZDR *, exports*);
-GOTV_EXTERN  uint32_t zdr_exportnode (ZDR *, exportnode*);
-GOTV_EXTERN  uint32_t zdr_mountres3_ok (ZDR *, mountres3_ok*);
-GOTV_EXTERN  uint32_t zdr_mountres3 (ZDR *, mountres3*);
-GOTV_EXTERN  uint32_t zdr_mountstat1 (ZDR *, mountstat1*);
-GOTV_EXTERN  uint32_t zdr_fhandle1 (ZDR *, fhandle1);
-GOTV_EXTERN  uint32_t zdr_mountres1_ok (ZDR *, mountres1_ok*);
-GOTV_EXTERN  uint32_t zdr_mountres1 (ZDR *, mountres1*);
+NLC_EXTERN  uint32_t zdr_fhandle3 (ZDR *, fhandle3*);
+NLC_EXTERN  uint32_t zdr_dirpath (ZDR *, dirpath*);
+NLC_EXTERN  uint32_t zdr_name (ZDR *, name*);
+NLC_EXTERN  uint32_t zdr_mountstat3 (ZDR *, mountstat3*);
+NLC_EXTERN  uint32_t zdr_mountlist (ZDR *, mountlist*);
+NLC_EXTERN  uint32_t zdr_mountbody (ZDR *, mountbody*);
+NLC_EXTERN  uint32_t zdr_groups (ZDR *, groups*);
+NLC_EXTERN  uint32_t zdr_groupnode (ZDR *, groupnode*);
+NLC_EXTERN  uint32_t zdr_exports (ZDR *, exports*);
+NLC_EXTERN  uint32_t zdr_exportnode (ZDR *, exportnode*);
+NLC_EXTERN  uint32_t zdr_mountres3_ok (ZDR *, mountres3_ok*);
+NLC_EXTERN  uint32_t zdr_mountres3 (ZDR *, mountres3*);
+NLC_EXTERN  uint32_t zdr_mountstat1 (ZDR *, mountstat1*);
+NLC_EXTERN  uint32_t zdr_fhandle1 (ZDR *, fhandle1);
+NLC_EXTERN  uint32_t zdr_mountres1_ok (ZDR *, mountres1_ok*);
+NLC_EXTERN  uint32_t zdr_mountres1 (ZDR *, mountres1*);
 
 #else /* K&R C */
-GOTV_EXTERN uint32_t zdr_fhandle3 ();
-GOTV_EXTERN uint32_t zdr_dirpath ();
-GOTV_EXTERN uint32_t zdr_name ();
-GOTV_EXTERN uint32_t zdr_mountstat3 ();
-GOTV_EXTERN uint32_t zdr_mountlist ();
-GOTV_EXTERN uint32_t zdr_mountbody ();
-GOTV_EXTERN uint32_t zdr_groups ();
-GOTV_EXTERN uint32_t zdr_groupnode ();
-GOTV_EXTERN uint32_t zdr_exports ();
-GOTV_EXTERN uint32_t zdr_exportnode ();
-GOTV_EXTERN uint32_t zdr_mountres3_ok ();
-GOTV_EXTERN uint32_t zdr_mountres3 ();
-GOTV_EXTERN uint32_t zdr_mountstat1 ();
-GOTV_EXTERN uint32_t zdr_fhandle1 ();
-GOTV_EXTERN uint32_t zdr_mountres1_ok ();
-GOTV_EXTERN uint32_t zdr_mountres1 ();
+NLC_EXTERN uint32_t zdr_fhandle3 ();
+NLC_EXTERN uint32_t zdr_dirpath ();
+NLC_EXTERN uint32_t zdr_name ();
+NLC_EXTERN uint32_t zdr_mountstat3 ();
+NLC_EXTERN uint32_t zdr_mountlist ();
+NLC_EXTERN uint32_t zdr_mountbody ();
+NLC_EXTERN uint32_t zdr_groups ();
+NLC_EXTERN uint32_t zdr_groupnode ();
+NLC_EXTERN uint32_t zdr_exports ();
+NLC_EXTERN uint32_t zdr_exportnode ();
+NLC_EXTERN uint32_t zdr_mountres3_ok ();
+NLC_EXTERN uint32_t zdr_mountres3 ();
+NLC_EXTERN uint32_t zdr_mountstat1 ();
+NLC_EXTERN uint32_t zdr_fhandle1 ();
+NLC_EXTERN uint32_t zdr_mountres1_ok ();
+NLC_EXTERN uint32_t zdr_mountres1 ();
 
 #endif /* K&R C */
 

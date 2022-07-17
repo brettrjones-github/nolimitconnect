@@ -15,6 +15,13 @@ qint64 AudioUtils::audioDurationUs( const QAudioFormat& format, qint64 bytes )
 }
 
 //=============================================================================
+int AudioUtils::audioDurationMs( const QAudioFormat& format, int bytes )
+{
+    return (bytes * 1000) /
+        (format.sampleRate() * format.channelCount() * format.bytesPerSample());
+}
+
+//=============================================================================
 qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 {
     qint64 result = (format.sampleRate() * format.channelCount() * format.bytesPerSample())

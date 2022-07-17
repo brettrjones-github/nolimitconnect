@@ -64,7 +64,7 @@
 #define MUNGE_ROW(x) (((x) + 0x7F)>>8)
 #define IDCT_ROW(dest,src) IDCT_TRANSFORM(dest,0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7,MUNGE_ROW,src)
 
-static GOTV_INLINE void bink_idct_col(int *dest, const int32_t *src)
+static NLC_INLINE void bink_idct_col(int *dest, const int32_t *src)
 {
     if ((src[8]|src[16]|src[24]|src[32]|src[40]|src[48]|src[56])==0) {
         dest[0]  =

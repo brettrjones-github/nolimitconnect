@@ -58,7 +58,7 @@ typedef struct gnutls_x509_policies_st *gnutls_x509_policies_t;
 #define HASH_OID_SHA384 "2.16.840.1.101.3.4.2.2"
 #define HASH_OID_SHA512 "2.16.840.1.101.3.4.2.3"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 struct gnutls_x509_crl_iter {
 	/* This is used to optimize reads by gnutls_x509_crl_iter_crt_serial() */
@@ -339,6 +339,6 @@ int _gnutls_extract_name_constraints(ASN1_TYPE c2, const char *vstr,
 				    name_constraints_node_st ** _nc);
 
 void _gnutls_x509_policies_erase(gnutls_x509_policies_t policies, unsigned int seq);
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif // _X509_INT_H_GNU

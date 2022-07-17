@@ -46,7 +46,7 @@ typedef struct bs_s
   int i_bits_encoded;           /* RD only */
 } bs_t;
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_init (bs_t * s, void *p_data, int i_data)
 {
   s->p_start = p_data;
@@ -54,17 +54,17 @@ bs_init (bs_t * s, void *p_data, int i_data)
   s->p_end = s->p + i_data;
   s->i_left = 8;
 }
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_pos (bs_t * s)
 {
   return ((int) (8 * (s->p - s->p_start) + 8 - s->i_left));
 }
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_eof (bs_t * s)
 {
   return (s->p >= s->p_end ? 1 : 0);
 }
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 bs_read (bs_t * s, int i_count)
 {
   static uint32_t i_mask[33] = { 0x00,
@@ -112,7 +112,7 @@ bs_read (bs_t * s, int i_count)
   return (i_result);
 }
 
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 bs_read1 (bs_t * s)
 {
 
@@ -132,7 +132,7 @@ bs_read1 (bs_t * s)
 
   return 0;
 }
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 bs_show (bs_t * s, int i_count)
 {
   if (s->p < s->p_end && i_count > 0)
@@ -144,7 +144,7 @@ bs_show (bs_t * s, int i_count)
 }
 
 /* TODO optimize */
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_skip (bs_t * s, int i_count)
 {
   s->i_left -= i_count;
@@ -157,7 +157,7 @@ bs_skip (bs_t * s, int i_count)
 }
 
 
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_read_ue (bs_t * s)
 {
   int i = 0;
@@ -168,7 +168,7 @@ bs_read_ue (bs_t * s)
   }
   return ((1 << i) - 1 + bs_read (s, i));
 }
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_read_se (bs_t * s)
 {
   int val = bs_read_ue (s);
@@ -176,7 +176,7 @@ bs_read_se (bs_t * s)
   return val & 0x01 ? (val + 1) / 2 : -(val / 2);
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_read_te (bs_t * s, int x)
 {
   if (x == 1)
@@ -190,7 +190,7 @@ bs_read_te (bs_t * s, int x)
   return 0;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_write (bs_t * s, int i_count, uint32_t i_bits)
 {
   if (s->p >= s->p_end - 4)
@@ -215,7 +215,7 @@ bs_write (bs_t * s, int i_count, uint32_t i_bits)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_write1 (bs_t * s, uint32_t i_bit)
 {
   if (s->p < s->p_end)
@@ -231,7 +231,7 @@ bs_write1 (bs_t * s, uint32_t i_bit)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_align_0 (bs_t * s)
 {
   if (s->i_left != 8)
@@ -241,7 +241,7 @@ bs_align_0 (bs_t * s)
     s->p++;
   }
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_align_1 (bs_t * s)
 {
   if (s->i_left != 8)
@@ -252,7 +252,7 @@ bs_align_1 (bs_t * s)
     s->p++;
   }
 }
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_align (bs_t * s)
 {
   bs_align_0 (s);
@@ -262,7 +262,7 @@ bs_align (bs_t * s)
 
 /* golomb functions */
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_write_ue (bs_t * s, unsigned int val)
 {
   int i_size = 0;
@@ -301,13 +301,13 @@ bs_write_ue (bs_t * s, unsigned int val)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_write_se (bs_t * s, int val)
 {
   bs_write_ue (s, val <= 0 ? -val * 2 : val * 2 - 1);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_write_te (bs_t * s, int x, int val)
 {
   if (x == 1)
@@ -320,7 +320,7 @@ bs_write_te (bs_t * s, int x, int val)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_rbsp_trailing (bs_t * s)
 {
   bs_write1 (s, 1);
@@ -330,7 +330,7 @@ bs_rbsp_trailing (bs_t * s)
   }
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_size_ue (unsigned int val)
 {
   static const int i_size0_254[255] = {
@@ -372,13 +372,13 @@ bs_size_ue (unsigned int val)
   }
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_size_se (int val)
 {
   return bs_size_ue (val <= 0 ? -val * 2 : val * 2 - 1);
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 bs_size_te (int x, int val)
 {
   if (x == 1)

@@ -201,7 +201,7 @@ typedef int16_t coeff_t;
   #define INLINE __forceinline
   #pragma inline_recursion(on)
 #else /* others */
-  #define INLINE GOTV_INLINE
+  #define INLINE NLC_INLINE
 #endif
 
 // Return the next aligned address for *p. Result is at most alignment larger than p.

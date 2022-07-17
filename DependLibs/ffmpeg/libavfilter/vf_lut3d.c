@@ -87,12 +87,12 @@ typedef struct ThreadData {
         { "tetrahedral", "interpolate values using a tetrahedron",                0, AV_OPT_TYPE_CONST, {.i64=INTERPOLATE_TETRAHEDRAL}, INT_MIN, INT_MAX, FLAGS, "interp_mode" }, \
     { NULL }
 
-static GOTV_INLINE float lerpf(float v0, float v1, float f)
+static NLC_INLINE float lerpf(float v0, float v1, float f)
 {
     return v0 + (v1 - v0) * f;
 }
 
-static GOTV_INLINE struct rgbvec lerp(const struct rgbvec *v0, const struct rgbvec *v1, float f)
+static NLC_INLINE struct rgbvec lerp(const struct rgbvec *v0, const struct rgbvec *v1, float f)
 {
     struct rgbvec v = {
         lerpf(v0->r, v1->r, f), lerpf(v0->g, v1->g, f), lerpf(v0->b, v1->b, f)
@@ -107,7 +107,7 @@ static GOTV_INLINE struct rgbvec lerp(const struct rgbvec *v0, const struct rgbv
 /**
  * Get the nearest defined point
  */
-static GOTV_INLINE struct rgbvec interp_nearest(const LUT3DContext *lut3d,
+static NLC_INLINE struct rgbvec interp_nearest(const LUT3DContext *lut3d,
                                            const struct rgbvec *s)
 {
     return lut3d->lut[VF_NEAR(s->r)][VF_NEAR(s->g)][VF_NEAR(s->b)];
@@ -117,7 +117,7 @@ static GOTV_INLINE struct rgbvec interp_nearest(const LUT3DContext *lut3d,
  * Interpolate using the 8 vertices of a cube
  * @see https://en.wikipedia.org/wiki/Trilinear_interpolation
  */
-static GOTV_INLINE struct rgbvec interp_trilinear(const LUT3DContext *lut3d,
+static NLC_INLINE struct rgbvec interp_trilinear(const LUT3DContext *lut3d,
                                              const struct rgbvec *s)
 {
     const int prev[] = {PREV(s->r), PREV(s->g), PREV(s->b)};
@@ -145,7 +145,7 @@ static GOTV_INLINE struct rgbvec interp_trilinear(const LUT3DContext *lut3d,
  * Tetrahedral interpolation. Based on code found in Truelight Software Library paper.
  * @see http://www.filmlight.ltd.uk/pdf/whitepapers/FL-TL-TN-0057-SoftwareLib.pdf
  */
-static GOTV_INLINE struct rgbvec interp_tetrahedral(const LUT3DContext *lut3d,
+static NLC_INLINE struct rgbvec interp_tetrahedral(const LUT3DContext *lut3d,
                                                const struct rgbvec *s)
 {
     const int prev[] = {PREV(s->r), PREV(s->g), PREV(s->b)};

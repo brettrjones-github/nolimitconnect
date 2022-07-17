@@ -22,7 +22,7 @@
 #include "GuiOfferHostMgr.h"
 #include "GuiHelpers.h"
 #include "MyIcons.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>

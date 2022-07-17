@@ -25,7 +25,7 @@
 #include "libavutil/opencl.h"
 
 const char *ff_kernel_unsharp_opencl = AV_OPENCL_KERNEL(
-GOTV_INLINE unsigned char clip_uint8(int a)
+NLC_INLINE unsigned char clip_uint8(int a)
 {
     if (a & (~0xFF))
         return (-a)>>31;

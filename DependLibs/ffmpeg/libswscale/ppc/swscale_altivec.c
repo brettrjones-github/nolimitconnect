@@ -121,7 +121,7 @@ static void yuv2planeX_16_altivec(const int16_t *filter, int filterSize,
 }
 
 
-static GOTV_INLINE void yuv2planeX_u(const int16_t *filter, int filterSize,
+static NLC_INLINE void yuv2planeX_u(const int16_t *filter, int filterSize,
                                 const int16_t **src, uint8_t *dest, int dstW,
                                 const uint8_t *dither, int offset, int x)
 {

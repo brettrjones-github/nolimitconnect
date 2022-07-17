@@ -31,18 +31,18 @@ public:
 		m_maxNumElements = 0;
 	}
 
-	GOTV_INLINE bool ValidIndex(MP4ArrayIndex index) {
+	NLC_INLINE bool ValidIndex(MP4ArrayIndex index) {
 		if (m_numElements == 0 || index > m_numElements - 1) {
 			return false;
 		}
 		return true;
 	}
 
-	GOTV_INLINE MP4ArrayIndex Size(void) {
+	NLC_INLINE MP4ArrayIndex Size(void) {
 		return m_numElements;
 	}
 
-	GOTV_INLINE MP4ArrayIndex MaxSize(void) {
+	NLC_INLINE MP4ArrayIndex MaxSize(void) {
 		return m_maxNumElements;
 	}
 
@@ -66,7 +66,7 @@ protected:
 			MP4Free(m_elements); \
 		} \
 		\
-		GOTV_INLINE void Add(type newElement) { \
+		NLC_INLINE void Add(type newElement) { \
 			Insert(newElement, m_numElements); \
 		} \
 		\

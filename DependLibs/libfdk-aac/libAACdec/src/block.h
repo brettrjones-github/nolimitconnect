@@ -229,7 +229,7 @@ AAC_DECODER_ERROR CBlock_InverseQuantizeSpectralData(CAacDecoderChannelInfo *pAa
  *        resulting inverse quantized value.
  * \return the exponent of the result (mantissa) stored into *pValue.
  */
-GOTV_INLINE
+NLC_INLINE
 int EvaluatePower43 ( FIXP_DBL *pValue,
                       uint32_t lsb )
 {
@@ -264,7 +264,7 @@ int EvaluatePower43 ( FIXP_DBL *pValue,
 /**
  * \brief determine the required shift scale for the given quantized value and scale (factor % 4) value.
  */
-GOTV_INLINE int GetScaleFromValue (FIXP_DBL value, unsigned int lsb)
+NLC_INLINE int GetScaleFromValue (FIXP_DBL value, unsigned int lsb)
 {
   if (value!=(FIXP_DBL)0)
   {
@@ -286,7 +286,7 @@ GOTV_INLINE int GetScaleFromValue (FIXP_DBL value, unsigned int lsb)
 
   \return  index value
 */
-GOTV_INLINE int CBlock_DecodeHuffmanWord( HANDLE_FDK_BITSTREAM bs,                           /*!< pointer to bitstream */
+NLC_INLINE int CBlock_DecodeHuffmanWord( HANDLE_FDK_BITSTREAM bs,                           /*!< pointer to bitstream */
                                      const CodeBookDescription *hcb )                   /*!< pointer to codebook description */
 {
   uint32_t val;

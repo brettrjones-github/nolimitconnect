@@ -122,6 +122,7 @@
 #include "AppletShareOfferList.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSnapshot.h"
+#include "AppletSoundSettings.h"
 #include "AppletStoryboardClient.h"
 
 #include "AppletTestAndDebug.h"
@@ -260,6 +261,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletHelpNetSignalBars:          appletDialog = new AppletHelpNetSignalBars( m_MyApp, parent ); break;
     case eAppletRandomConnectJoin:          appletDialog = new AppletRandomConnectJoin( m_MyApp, parent ); break;
     case eAppletRandomConnectJoinSearch:    appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
+    case eAppletSoundSettings:              appletDialog = new AppletSoundSettings( m_MyApp, parent ); break;
     case eAppletStoryboardClient:           appletDialog = new AppletStoryboardClient( m_MyApp, parent ); break;
     case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 

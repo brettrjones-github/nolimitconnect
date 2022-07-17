@@ -20,7 +20,7 @@
 #include "GuiHostJoin.h"
 #include "IdentLogicInterface.h"
 #include "MyIcons.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 
 //============================================================================
 IdentLogicInterface::IdentLogicInterface( QWidget* parent )

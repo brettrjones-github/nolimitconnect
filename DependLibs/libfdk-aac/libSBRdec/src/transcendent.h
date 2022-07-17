@@ -103,7 +103,7 @@ amm-info@iis.fraunhofer.de
   \return   ld(a/b) / 8
 */
 /************************************************************************/
-static GOTV_INLINE FIXP_SGL FDK_getNumOctavesDiv8(int32_t a, /*!< lower band */
+static NLC_INLINE FIXP_SGL FDK_getNumOctavesDiv8(int32_t a, /*!< lower band */
                                              int32_t b) /*!< upper band */
 {
   return ( (int16_t)((int32_t)(CalcLdInt(b) - CalcLdInt(a))>>(FRACT_BITS-3)) );
@@ -118,7 +118,7 @@ static GOTV_INLINE FIXP_SGL FDK_getNumOctavesDiv8(int32_t a, /*!< lower band */
   The base for exponents is 2.  Example:  \f$  a = a\_m * 2^{a\_e}  \f$<br>
 */
 /************************************************************************/
-GOTV_INLINE void FDK_add_MantExp(FIXP_SGL a_m, /*!< Mantissa of 1st operand a */
+NLC_INLINE void FDK_add_MantExp(FIXP_SGL a_m, /*!< Mantissa of 1st operand a */
                      int8_t     a_e,       /*!< Exponent of 1st operand a */
                      FIXP_SGL  b_m,       /*!< Mantissa of 2nd operand b */
                      int8_t     b_e,       /*!< Exponent of 2nd operand b */
@@ -156,7 +156,7 @@ GOTV_INLINE void FDK_add_MantExp(FIXP_SGL a_m, /*!< Mantissa of 1st operand a */
 
 }
 
-GOTV_INLINE void FDK_add_MantExp(FIXP_DBL a,   /*!< Mantissa of 1st operand a */
+NLC_INLINE void FDK_add_MantExp(FIXP_DBL a,   /*!< Mantissa of 1st operand a */
                      int8_t     a_e,       /*!< Exponent of 1st operand a */
                      FIXP_DBL  b,         /*!< Mantissa of 2nd operand b */
                      int8_t     b_e,       /*!< Exponent of 2nd operand b */
@@ -205,7 +205,7 @@ GOTV_INLINE void FDK_add_MantExp(FIXP_DBL a,   /*!< Mantissa of 1st operand a */
   which limits accuracy.
 */
 /************************************************************************/
-static GOTV_INLINE void FDK_divide_MantExp(FIXP_SGL a_m,           /*!< Mantissa of dividend a */
+static NLC_INLINE void FDK_divide_MantExp(FIXP_SGL a_m,           /*!< Mantissa of dividend a */
                                       int8_t     a_e,          /*!< Exponent of dividend a */
                                       FIXP_SGL  b_m,          /*!< Mantissa of divisor b */
                                       int8_t     b_e,          /*!< Exponent of divisor b */
@@ -261,7 +261,7 @@ static GOTV_INLINE void FDK_divide_MantExp(FIXP_SGL a_m,           /*!< Mantissa
   *ptrResult_e = a_e - b_e + 1 + preShift - postShift;
 }
 
-static GOTV_INLINE void FDK_divide_MantExp(FIXP_DBL a_m,           /*!< Mantissa of dividend a */
+static NLC_INLINE void FDK_divide_MantExp(FIXP_DBL a_m,           /*!< Mantissa of dividend a */
                                       int8_t     a_e,          /*!< Exponent of dividend a */
                                       FIXP_DBL  b_m,          /*!< Mantissa of divisor b */
                                       int8_t     b_e,          /*!< Exponent of divisor b */
@@ -327,7 +327,7 @@ static GOTV_INLINE void FDK_divide_MantExp(FIXP_DBL a_m,           /*!< Mantissa
   For performance reasons, the square root is based on a table lookup
   which limits accuracy.
 */
-static GOTV_INLINE void FDK_sqrt_MantExp(FIXP_DBL *mantissa,    /*!< Pointer to mantissa */
+static NLC_INLINE void FDK_sqrt_MantExp(FIXP_DBL *mantissa,    /*!< Pointer to mantissa */
                                     int8_t    *exponent,
                                     const int8_t *destScale)
 {

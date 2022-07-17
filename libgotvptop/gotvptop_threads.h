@@ -46,7 +46,7 @@
  * This is also used to force a cancellation point in a function that would
  * otherwise <em>not always</em> be one (block_FifoGet() is an example).
  */
-GOTV_API void gotvptop_testcancel(void);
+NLC_API void gotvptop_testcancel(void);
 
 #if defined (TARGET_OS_WINDOWS)
 //==== windows implementation ===//
@@ -377,20 +377,20 @@ typedef struct gotvptop_rwlock
  * Recursive locking of a fast mutex is undefined behaviour. (In debug builds,
  * recursive locking will cause an assertion failure.)
  */
-GOTV_API void gotvptop_mutex_init(gotvptop_mutex_t *);
+NLC_API void gotvptop_mutex_init(gotvptop_mutex_t *);
 
 /**
  * Initializes a recursive mutex.
  * \warning This is strongly discouraged. Please use normal mutexes.
  */
-GOTV_API void gotvptop_mutex_init_recursive(gotvptop_mutex_t *);
+NLC_API void gotvptop_mutex_init_recursive(gotvptop_mutex_t *);
 
 /**
  * Deinitializes a mutex.
  *
  * The mutex must not be locked, otherwise behaviour is undefined.
  */
-GOTV_API void gotvptop_mutex_destroy(gotvptop_mutex_t *);
+NLC_API void gotvptop_mutex_destroy(gotvptop_mutex_t *);
 
 /**
  * Acquires a mutex.
@@ -402,7 +402,7 @@ GOTV_API void gotvptop_mutex_destroy(gotvptop_mutex_t *);
  *
  * \note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_mutex_lock(gotvptop_mutex_t *);
+NLC_API void gotvptop_mutex_lock(gotvptop_mutex_t *);
 
 /**
  * Tries to acquire a mutex.
@@ -421,7 +421,7 @@ GOTV_API void gotvptop_mutex_lock(gotvptop_mutex_t *);
  *
  * @return 0 if the mutex could be acquired, an error code otherwise.
  */
-GOTV_API int gotvptop_mutex_trylock( gotvptop_mutex_t * ) GOTV_USED;
+NLC_API int gotvptop_mutex_trylock( gotvptop_mutex_t * ) GOTV_USED;
 
 /**
  * Releases a mutex.
@@ -430,12 +430,12 @@ GOTV_API int gotvptop_mutex_trylock( gotvptop_mutex_t * ) GOTV_USED;
  *
  * \note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_mutex_unlock(gotvptop_mutex_t *);
+NLC_API void gotvptop_mutex_unlock(gotvptop_mutex_t *);
 
 /**
  * Initializes a condition variable.
  */
-GOTV_API void gotvptop_cond_init(gotvptop_cond_t *);
+NLC_API void gotvptop_cond_init(gotvptop_cond_t *);
 
 /**
  * Initializes a condition variable (wall clock).
@@ -454,7 +454,7 @@ void gotvptop_cond_init_daytime(gotvptop_cond_t *);
  * No threads shall be waiting or signaling the condition, otherwise the
  * behavior is undefined.
  */
-GOTV_API void gotvptop_cond_destroy(gotvptop_cond_t *);
+NLC_API void gotvptop_cond_destroy(gotvptop_cond_t *);
 
 /**
  * Wakes up one thread waiting on a condition variable.
@@ -464,14 +464,14 @@ GOTV_API void gotvptop_cond_destroy(gotvptop_cond_t *);
  *
  * \note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_cond_signal(gotvptop_cond_t *);
+NLC_API void gotvptop_cond_signal(gotvptop_cond_t *);
 
 /**
  * Wakes up all threads waiting on a condition variable.
  *
  * \note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_cond_broadcast(gotvptop_cond_t *);
+NLC_API void gotvptop_cond_broadcast(gotvptop_cond_t *);
 
 /**
  * Waits on a condition variable.
@@ -507,7 +507,7 @@ GOTV_API void gotvptop_cond_broadcast(gotvptop_cond_t *);
  * \param mutex mutex which is unlocked while waiting,
  *              then locked again when waking up.
  */
-GOTV_API void gotvptop_cond_wait(gotvptop_cond_t *cond, gotvptop_mutex_t *mutex);
+NLC_API void gotvptop_cond_wait(gotvptop_cond_t *cond, gotvptop_mutex_t *mutex);
 
 /**
  * Waits on a condition variable up to a certain date.
@@ -531,7 +531,7 @@ GOTV_API void gotvptop_cond_wait(gotvptop_cond_t *cond, gotvptop_mutex_t *mutex)
  *
  * \return 0 if the condition was signaled, an error code in case of timeout.
  */
-GOTV_API int gotvptop_cond_timedwait(gotvptop_cond_t *cond, gotvptop_mutex_t *mutex,
+NLC_API int gotvptop_cond_timedwait(gotvptop_cond_t *cond, gotvptop_mutex_t *mutex,
                                mtime_t deadline);
 
 int gotvptop_cond_timedwait_daytime(gotvptop_cond_t *, gotvptop_mutex_t *, time_t);
@@ -541,12 +541,12 @@ int gotvptop_cond_timedwait_daytime(gotvptop_cond_t *, gotvptop_mutex_t *, time_
  *
  * @param count initial semaphore value (typically 0)
  */
-GOTV_API void gotvptop_sem_init(gotvptop_sem_t *, unsigned count);
+NLC_API void gotvptop_sem_init(gotvptop_sem_t *, unsigned count);
 
 /**
  * Deinitializes a semaphore.
  */
-GOTV_API void gotvptop_sem_destroy(gotvptop_sem_t *);
+NLC_API void gotvptop_sem_destroy(gotvptop_sem_t *);
 
 /**
  * Increments the value of a semaphore.
@@ -555,7 +555,7 @@ GOTV_API void gotvptop_sem_destroy(gotvptop_sem_t *);
  *
  * \return 0 on success, EOVERFLOW in case of integer overflow.
  */
-GOTV_API int gotvptop_sem_post(gotvptop_sem_t *);
+NLC_API int gotvptop_sem_post(gotvptop_sem_t *);
 
 /**
  * Waits on a semaphore.
@@ -566,17 +566,17 @@ GOTV_API int gotvptop_sem_post(gotvptop_sem_t *);
  *
  * \note This function may be a point of cancellation.
  */
-GOTV_API void gotvptop_sem_wait(gotvptop_sem_t *);
+NLC_API void gotvptop_sem_wait(gotvptop_sem_t *);
 
 /**
  * Initializes a read/write lock.
  */
-GOTV_API void gotvptop_rwlock_init(gotvptop_rwlock_t *);
+NLC_API void gotvptop_rwlock_init(gotvptop_rwlock_t *);
 
 /**
  * Destroys an initialized unused read/write lock.
  */
-GOTV_API void gotvptop_rwlock_destroy(gotvptop_rwlock_t *);
+NLC_API void gotvptop_rwlock_destroy(gotvptop_rwlock_t *);
 
 /**
  * Acquires a read/write lock for reading.
@@ -584,13 +584,13 @@ GOTV_API void gotvptop_rwlock_destroy(gotvptop_rwlock_t *);
  * \note Recursion is allowed.
  * \note This function may be a point of cancellation.
  */
-GOTV_API void gotvptop_rwlock_rdlock(gotvptop_rwlock_t *);
+NLC_API void gotvptop_rwlock_rdlock(gotvptop_rwlock_t *);
 
 /**
  * Acquires a read/write lock for writing. Recursion is not allowed.
  * \note This function may be a point of cancellation.
  */
-GOTV_API void gotvptop_rwlock_wrlock(gotvptop_rwlock_t *);
+NLC_API void gotvptop_rwlock_wrlock(gotvptop_rwlock_t *);
 
 /**
  * Releases a read/write lock.
@@ -599,7 +599,7 @@ GOTV_API void gotvptop_rwlock_wrlock(gotvptop_rwlock_t *);
  *
  * \note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_rwlock_unlock(gotvptop_rwlock_t *);
+NLC_API void gotvptop_rwlock_unlock(gotvptop_rwlock_t *);
 
 /**
  * Allocates a thread-specific variable.
@@ -612,12 +612,12 @@ GOTV_API void gotvptop_rwlock_unlock(gotvptop_rwlock_t *);
  * This function can actually fail: on most systems, there is a fixed limit to
  * the number of thread-specific variables in a given process.
  */
-GOTV_API int gotvptop_threadvar_create(gotvptop_threadvar_t *key, void (*destr) (void *));
+NLC_API int gotvptop_threadvar_create(gotvptop_threadvar_t *key, void (*destr) (void *));
 
 /**
  * Deallocates a thread-specific variable.
  */
-GOTV_API void gotvptop_threadvar_delete(gotvptop_threadvar_t *);
+NLC_API void gotvptop_threadvar_delete(gotvptop_threadvar_t *);
 
 /**
  * Sets a thread-specific variable.
@@ -626,7 +626,7 @@ GOTV_API void gotvptop_threadvar_delete(gotvptop_threadvar_t *);
  * \param value new value for the variable for the calling thread
  * \return 0 on success, a system error code otherwise.
  */
-GOTV_API int gotvptop_threadvar_set(gotvptop_threadvar_t key, void *value);
+NLC_API int gotvptop_threadvar_set(gotvptop_threadvar_t key, void *value);
 
 /**
  * Gets the value of a thread-local variable for the calling thread.
@@ -635,7 +635,7 @@ GOTV_API int gotvptop_threadvar_set(gotvptop_threadvar_t key, void *value);
  * \return the value associated with the given variable for the calling
  * or NULL if no value was set.
  */
-GOTV_API void *gotvptop_threadvar_get(gotvptop_threadvar_t);
+NLC_API void *gotvptop_threadvar_get(gotvptop_threadvar_t);
 
 /**
  * Waits on an address.
@@ -704,7 +704,7 @@ void gotvptop_addr_broadcast(void *addr);
  * @return 0 on success, a standard error code on error.
  * @note In case of error, the value of *th is undefined.
  */
-GOTV_API int gotvptop_clone(gotvptop_thread_t *th, void *(*entry)(void *), void *data,
+NLC_API int gotvptop_clone(gotvptop_thread_t *th, void *(*entry)(void *), void *data,
                       int priority) GOTV_USED;
 
 /**
@@ -717,7 +717,7 @@ GOTV_API int gotvptop_clone(gotvptop_thread_t *th, void *(*entry)(void *), void 
  * gotvptop_join() must be used regardless of a thread being cancelled or not, to
  * avoid leaking resources.
  */
-GOTV_API void gotvptop_cancel(gotvptop_thread_t);
+NLC_API void gotvptop_cancel(gotvptop_thread_t);
 
 /**
  * Waits for a thread to complete (if needed), then destroys it.
@@ -731,7 +731,7 @@ GOTV_API void gotvptop_cancel(gotvptop_thread_t);
  * @param th thread handle
  * @param result [OUT] pointer to write the thread return value or NULL
  */
-GOTV_API void gotvptop_join(gotvptop_thread_t th, void **result);
+NLC_API void gotvptop_join(gotvptop_thread_t th, void **result);
 
 /**
  * Disables thread cancellation.
@@ -745,7 +745,7 @@ GOTV_API void gotvptop_join(gotvptop_thread_t th, void **result);
  *
  * \return Previous cancellation state (opaque value for gotvptop_restorecancel()).
  */
-GOTV_API int gotvptop_savecancel(void);
+NLC_API int gotvptop_savecancel(void);
 
 /**
  * Restores the cancellation state.
@@ -757,7 +757,7 @@ GOTV_API int gotvptop_savecancel(void);
  *
  * \param state previous state as returned by gotvptop_savecancel().
  */
-GOTV_API void gotvptop_restorecancel(int state);
+NLC_API void gotvptop_restorecancel(int state);
 
 /**
  * Internal handler for thread cancellation.
@@ -765,7 +765,7 @@ GOTV_API void gotvptop_restorecancel(int state);
  * Do not call this function directly. Use wrapper macros instead:
  * gotvptop_cleanup_push(), gotvptop_cleanup_pop().
  */
-GOTV_API void gotvptop_control_cancel(int cmd, ...);
+NLC_API void gotvptop_control_cancel(int cmd, ...);
 
 /**
  * Thread handle.
@@ -782,7 +782,7 @@ GOTV_API void gotvptop_control_cancel(int cmd, ...);
  *
  * \return the thread handle
  */
-GOTV_API gotvptop_thread_t gotvptop_thread_self(void) GOTV_USED;
+NLC_API gotvptop_thread_t gotvptop_thread_self(void) GOTV_USED;
 
 /**
  * Thread identifier.
@@ -801,7 +801,7 @@ GOTV_API gotvptop_thread_t gotvptop_thread_self(void) GOTV_USED;
  *
  * \return the thread identifier (or -1 if unimplemented)
  */
-GOTV_API unsigned long gotvptop_thread_id(void) GOTV_USED;
+NLC_API unsigned long gotvptop_thread_id(void) GOTV_USED;
 
 /**
  * Precision monotonic clock.
@@ -817,7 +817,7 @@ GOTV_API unsigned long gotvptop_thread_id(void) GOTV_USED;
  *
  * \return a timestamp in microseconds.
  */
-GOTV_API mtime_t mdate(void);
+NLC_API mtime_t mdate(void);
 
 /**
  * Waits until a deadline.
@@ -827,7 +827,7 @@ GOTV_API mtime_t mdate(void);
  * \note The deadline may be exceeded due to OS scheduling.
  * \note This function is a cancellation point.
  */
-GOTV_API void mwait(mtime_t deadline);
+NLC_API void mwait(mtime_t deadline);
 
 /**
  * Waits for an interval of time.
@@ -837,7 +837,7 @@ GOTV_API void mwait(mtime_t deadline);
  * \note The delay may be exceeded due to OS scheduling.
  * \note This function is a cancellation point.
  */
-GOTV_API void msleep(mtime_t delay);
+NLC_API void msleep(mtime_t delay);
 
 #define GOTV_HARD_MIN_SLEEP   10000 /* 10 milliseconds = 1 tick at 100Hz */
 #define GOTV_SOFT_MIN_SLEEP 9000000 /* 9 seconds */
@@ -907,7 +907,7 @@ mtime_t impossible_deadline( mtime_t deadline )
  * \note Multiple occurrences of a single interval timer are serialized:
  * they cannot run concurrently.
  */
-GOTV_API int gotvptop_timer_create(gotvptop_timer_t *id, void (*func)(void *), void *data)
+NLC_API int gotvptop_timer_create(gotvptop_timer_t *id, void (*func)(void *), void *data)
 GOTV_USED;
 
 /**
@@ -921,7 +921,7 @@ GOTV_USED;
  *
  * \param timer timer to destroy
  */
-GOTV_API void gotvptop_timer_destroy(gotvptop_timer_t timer);
+NLC_API void gotvptop_timer_destroy(gotvptop_timer_t timer);
 
 /**
  * Arms or disarms an initialized timer.
@@ -941,7 +941,7 @@ GOTV_API void gotvptop_timer_destroy(gotvptop_timer_t timer);
  * \param interval zero to fire the timer just once, otherwise the timer
  *                 repetition interval.
  */
-GOTV_API void gotvptop_timer_schedule(gotvptop_timer_t timer, bool absolute,
+NLC_API void gotvptop_timer_schedule(gotvptop_timer_t timer, bool absolute,
                                 mtime_t value, mtime_t interval);
 
 /**
@@ -954,14 +954,14 @@ GOTV_API void gotvptop_timer_schedule(gotvptop_timer_t timer, bool absolute,
  * \param timer initialized timer
  * \return the timer overrun counter (typically zero)
  */
-GOTV_API unsigned gotvptop_timer_getoverrun(gotvptop_timer_t) GOTV_USED;
+NLC_API unsigned gotvptop_timer_getoverrun(gotvptop_timer_t) GOTV_USED;
 
 /**
  * Count CPUs.
  *
  * \return number of available (logical) CPUs.
  */
-GOTV_API unsigned gotvptop_GetCPUCount(void);
+NLC_API unsigned gotvptop_GetCPUCount(void);
 
 enum
 {
@@ -1081,7 +1081,7 @@ enum
  * Do not use this function directly. Use helper macros instead:
  * gotvptop_global_lock(), gotvptop_global_unlock().
  */
-GOTV_API void gotvptop_global_mutex(unsigned, bool);
+NLC_API void gotvptop_global_mutex(unsigned, bool);
 
 /**
  * Acquires a global mutex.

@@ -151,7 +151,7 @@ typedef struct vorbis_enc_context {
 #define RESIDUE_PART_SIZE      32
 #define NUM_RESIDUE_PARTITIONS (RESIDUE_SIZE/RESIDUE_PART_SIZE)
 
-static GOTV_INLINE int put_codeword(PutBitContext *pb, vorbis_enc_codebook *cb,
+static NLC_INLINE int put_codeword(PutBitContext *pb, vorbis_enc_codebook *cb,
                                int entry)
 {
     av_assert2(entry >= 0);

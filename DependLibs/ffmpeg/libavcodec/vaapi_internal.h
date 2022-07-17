@@ -57,13 +57,13 @@ typedef struct {
 } FFVAContext;
 
 /** Extract vaapi_context from an AVCodecContext */
-static GOTV_INLINE FFVAContext *ff_vaapi_get_context(AVCodecContext *avctx)
+static NLC_INLINE FFVAContext *ff_vaapi_get_context(AVCodecContext *avctx)
 {
     return avctx->internal->hwaccel_priv_data;
 }
 
 /** Extract VASurfaceID from an AVFrame */
-static GOTV_INLINE VASurfaceID ff_vaapi_get_surface_id(AVFrame *pic)
+static NLC_INLINE VASurfaceID ff_vaapi_get_surface_id(AVFrame *pic)
 {
     return (uintptr_t)pic->data[3];
 }

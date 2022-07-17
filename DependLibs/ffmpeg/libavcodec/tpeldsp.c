@@ -34,7 +34,7 @@
 #define FFMPEG_CONFIG_H 1
 #include "pel_template.c"
 
-static GOTV_INLINE void put_tpel_pixels_mc00_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc00_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     switch (width) {
@@ -53,7 +53,7 @@ static GOTV_INLINE void put_tpel_pixels_mc00_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc10_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc10_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -67,7 +67,7 @@ static GOTV_INLINE void put_tpel_pixels_mc10_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc20_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc20_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -81,7 +81,7 @@ static GOTV_INLINE void put_tpel_pixels_mc20_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc01_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc01_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -95,7 +95,7 @@ static GOTV_INLINE void put_tpel_pixels_mc01_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc11_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc11_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -110,7 +110,7 @@ static GOTV_INLINE void put_tpel_pixels_mc11_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc12_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc12_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -125,7 +125,7 @@ static GOTV_INLINE void put_tpel_pixels_mc12_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc02_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc02_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -139,7 +139,7 @@ static GOTV_INLINE void put_tpel_pixels_mc02_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc21_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc21_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -154,7 +154,7 @@ static GOTV_INLINE void put_tpel_pixels_mc21_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void put_tpel_pixels_mc22_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void put_tpel_pixels_mc22_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -169,7 +169,7 @@ static GOTV_INLINE void put_tpel_pixels_mc22_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc00_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc00_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     switch (width) {
@@ -188,7 +188,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc00_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc10_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc10_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -203,7 +203,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc10_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc20_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc20_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -218,7 +218,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc20_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc01_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc01_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -233,7 +233,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc01_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc11_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc11_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -249,7 +249,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc11_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc12_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc12_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -265,7 +265,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc12_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc02_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc02_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -280,7 +280,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc02_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc21_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc21_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;
@@ -296,7 +296,7 @@ static GOTV_INLINE void avg_tpel_pixels_mc21_c(uint8_t *dst, const uint8_t *src,
     }
 }
 
-static GOTV_INLINE void avg_tpel_pixels_mc22_c(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void avg_tpel_pixels_mc22_c(uint8_t *dst, const uint8_t *src,
                                           int stride, int width, int height)
 {
     int i, j;

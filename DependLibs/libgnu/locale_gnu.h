@@ -128,7 +128,7 @@
 #define _GL_FUNCDECL_RPL(func,rettype,parameters_and_attributes) \
   _GL_FUNCDECL_RPL_1 (rpl_##func, rettype, parameters_and_attributes)
 #define _GL_FUNCDECL_RPL_1(rpl_func,rettype,parameters_and_attributes) \
-  GOTV_EXTERN_C rettype rpl_func parameters_and_attributes
+  NLC_EXTERN_C rettype rpl_func parameters_and_attributes
 
 /* _GL_FUNCDECL_SYS (func, rettype, parameters_and_attributes);
    declares the system function, named func, with the given prototype,
@@ -138,7 +138,7 @@
                                   _GL_ARG_NONNULL ((1)));
  */
 #define _GL_FUNCDECL_SYS(func,rettype,parameters_and_attributes) \
-  GOTV_EXTERN_C rettype func parameters_and_attributes
+  NLC_EXTERN_C rettype func parameters_and_attributes
 
 /* _GL_CXXALIAS_RPL (func, rettype, parameters);
    declares a C++ alias called GNULIB_NAMESPACE::func
@@ -154,10 +154,10 @@
     {                                                         \
       rettype (*const func) parameters = ::rpl_func;          \
     }                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_RPL_1(func,rpl_func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_RPL_CAST_1 (func, rpl_func, rettype, parameters);
@@ -172,10 +172,10 @@
       rettype (*const func) parameters =                           \
         reinterpret_cast<rettype(*)parameters>(::rpl_func);        \
     }                                                              \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_RPL_CAST_1(func,rpl_func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS (func, rettype, parameters);
@@ -197,10 +197,10 @@
     {                                              \
       static rettype (*func) parameters = ::func;  \
     }                                              \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST (func, rettype, parameters);
@@ -215,10 +215,10 @@
       static rettype (*func) parameters =               \
         reinterpret_cast<rettype(*)parameters>(::func); \
     }                                                   \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST2 (func, rettype, parameters, rettype2, parameters2);
@@ -240,10 +240,10 @@
         reinterpret_cast<rettype(*)parameters>(                               \
           (rettype2(*)parameters2)(::func));                                  \
     }                                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST2(func,rettype,parameters,rettype2,parameters2) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN (func);
@@ -267,11 +267,11 @@
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN_2(func,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN(func) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN1 (func, rettype, parameters_and_attributes);
@@ -295,11 +295,11 @@
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN1_2(func,rettype,parameters_and_attributes,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN1(func,rettype,parameters_and_attributes) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 #endif /* _GL_CXXDEFS_H */

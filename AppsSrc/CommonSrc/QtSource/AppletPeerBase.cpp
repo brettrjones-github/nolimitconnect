@@ -20,7 +20,7 @@
 
 #include "AppGlobals.h"
 #include "MyIcons.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 #include "AppCommon.h"
 #include "VidWidget.h"
 #include "GuiParams.h"

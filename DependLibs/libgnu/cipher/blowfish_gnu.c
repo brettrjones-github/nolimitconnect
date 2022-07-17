@@ -373,7 +373,7 @@ decrypt_block (void *context, byte *outbuf, const byte *inbuf)
 #else /*USE_ARM_ASM*/
 
 #if BLOWFISH_ROUNDS != 16
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 function_F( BLOWFISH_context *bc, uint32_t x )
 {
     uint16_t a, b, c, d;
@@ -866,14 +866,14 @@ struct hashset_elem {
   char used;
 };
 
-static GOTV_INLINE byte
+static NLC_INLINE byte
 val_to_hidx(uint32_t val)
 {
   /* bf sboxes are quite random already. */
   return (val >> 24) ^ (val >> 16)  ^ (val >> 8) ^ val;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 add_val(struct hashset_elem hset[256], uint32_t val, int *midx,
 	struct hashset_elem *mpool)
 {

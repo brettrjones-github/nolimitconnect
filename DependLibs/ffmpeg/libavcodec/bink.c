@@ -517,7 +517,7 @@ static int read_dcs(AVCodecContext *avctx, GetBitContext *gb, Bundle *b,
  * @param c      decoder context
  * @param bundle bundle number
  */
-static GOTV_INLINE int get_value(BinkContext *c, int bundle)
+static NLC_INLINE int get_value(BinkContext *c, int bundle)
 {
     int ret;
 
@@ -578,7 +578,7 @@ static int binkb_read_bundle(BinkContext *c, GetBitContext *gb, int bundle_num)
     return 0;
 }
 
-static GOTV_INLINE int binkb_get_value(BinkContext *c, int bundle_num)
+static NLC_INLINE int binkb_get_value(BinkContext *c, int bundle_num)
 {
     int16_t ret;
     const int bits = binkb_bundle_sizes[bundle_num];
@@ -799,7 +799,7 @@ static int read_residue(GetBitContext *gb, int16_t block[64], int masks_count)
 /**
  * Copy 8x8 block from source to destination, where src and dst may be overlapped
  */
-static GOTV_INLINE void put_pixels8x8_overlapped(uint8_t *dst, uint8_t *src, int stride)
+static NLC_INLINE void put_pixels8x8_overlapped(uint8_t *dst, uint8_t *src, int stride)
 {
     uint8_t tmp[64];
     int i;

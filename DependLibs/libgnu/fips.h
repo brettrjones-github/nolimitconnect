@@ -41,14 +41,14 @@ typedef enum {
 extern unsigned int _gnutls_lib_mode;
 extern gnutls_crypto_rnd_st _gnutls_fips_rnd_ops;
 
-GOTV_INLINE static 
+NLC_INLINE static 
 void _gnutls_switch_lib_state(gnutls_lib_state_t state)
 {
 	/* Once into zombie state no errors can change us */
 	_gnutls_lib_mode = state;
 }
 
-GOTV_INLINE static gnutls_lib_state_t _gnutls_get_lib_state(void)
+NLC_INLINE static gnutls_lib_state_t _gnutls_get_lib_state(void)
 {
 	return _gnutls_lib_mode;
 }

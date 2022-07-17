@@ -29,7 +29,7 @@
    allocated on the stack, and which will last until the function returns.
    Use of alloca should be avoided:
      - inside arguments of function calls - undefined behaviour,
-     - in GOTV_INLINE functions - the allocation may actually last until the
+     - in NLC_INLINE functions - the allocation may actually last until the
        calling function returns,
      - for huge N (say, N >= 65536) - you never know how large (or small)
        the stack is, and when the stack cannot fulfill the memory allocation

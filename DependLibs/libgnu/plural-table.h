@@ -27,7 +27,7 @@ struct plural_table_entry
   const char *value;
 };
 
-extern GOTV_DLL_VARIABLE struct plural_table_entry plural_table[];
-extern GOTV_DLL_VARIABLE const size_t plural_table_size;
+extern NLC_DLL_VARIABLE struct plural_table_entry plural_table[];
+extern NLC_DLL_VARIABLE const size_t plural_table_size;
 
 #endif /* _PLURAL_TABLE_H */

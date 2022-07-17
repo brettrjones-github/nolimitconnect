@@ -100,7 +100,7 @@ static const double icoeff[2][5] = {
 };
 
 
-static GOTV_INLINE void decompose(float *dst_l, float *dst_h, const float *src,
+static NLC_INLINE void decompose(float *dst_l, float *dst_h, const float *src,
                              int linesize, int w)
 {
     int x, i;
@@ -119,7 +119,7 @@ static GOTV_INLINE void decompose(float *dst_l, float *dst_h, const float *src,
     }
 }
 
-static GOTV_INLINE void compose(float *dst, const float *src_l, const float *src_h,
+static NLC_INLINE void compose(float *dst, const float *src_l, const float *src_h,
                            int linesize, int w)
 {
     int x, i;
@@ -137,7 +137,7 @@ static GOTV_INLINE void compose(float *dst, const float *src_l, const float *src
     }
 }
 
-static GOTV_INLINE void decompose2D(float *dst_l, float *dst_h, const float *src,
+static NLC_INLINE void decompose2D(float *dst_l, float *dst_h, const float *src,
                                int xlinesize, int ylinesize,
                                int step, int w, int h)
 {
@@ -150,7 +150,7 @@ static GOTV_INLINE void decompose2D(float *dst_l, float *dst_h, const float *src
                       step * xlinesize, (w - x + step - 1) / step);
 }
 
-static GOTV_INLINE void compose2D(float *dst, const float *src_l, const float *src_h,
+static NLC_INLINE void compose2D(float *dst, const float *src_l, const float *src_h,
                              int xlinesize, int ylinesize,
                              int step, int w, int h)
 {

@@ -37,9 +37,9 @@ struct md5_s
     int count;
 };
 
-GOTV_API void InitMD5( struct md5_s * );
-GOTV_API void AddMD5( struct md5_s *, const void *, size_t );
-GOTV_API void EndMD5( struct md5_s * );
+NLC_API void InitMD5( struct md5_s * );
+NLC_API void AddMD5( struct md5_s *, const void *, size_t );
+NLC_API void EndMD5( struct md5_s * );
 
 /**
  * Returns a char representation of the md5 hash, as shown by UNIX md5 or

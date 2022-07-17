@@ -50,7 +50,7 @@
 # if defined(TARGET_CPU_64BIT)
 /* Make use of ARM asm optimization */
 //# define  OPUS_ARM_ASM
-/* Use generic ARMv4 GOTV_INLINE asm optimizations */
+/* Use generic ARMv4 NLC_INLINE asm optimizations */
 //# define  OPUS_ARM_INLINE_ASM
 /* Use ARMv5E INLINE asm optimizations */
 //# define  OPUS_ARM_INLINE_EDSP
@@ -86,7 +86,7 @@
 # define  OPUS_ARM_INLINE_EDSP
 /* Use ARMv6 INLINE asm optimizations */
 # define  OPUS_ARM_INLINE_MEDIA	0
-/* Use ARM NEON GOTV_INLINE asm optimizations */
+/* Use ARM NEON NLC_INLINE asm optimizations */
 //# define  OPUS_ARM_INLINE_NEON	0
 /* Define if assembler supports EDSP instructions */
 # define  OPUS_ARM_MAY_HAVE_EDSP	0

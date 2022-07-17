@@ -306,7 +306,7 @@ static int subtract_sf_weights(Atrac3pChanUnitCtx *ctx,
  * @param[out]   dst          ptr to output array
  * @param[in]    num_values   number of values to unpack
  */
-static GOTV_INLINE void unpack_vq_shape(int start_val, const int8_t *shape_vec,
+static NLC_INLINE void unpack_vq_shape(int start_val, const int8_t *shape_vec,
                                    int *dst, int num_values)
 {
     int i;
@@ -1027,7 +1027,7 @@ static int decode_gainc_npoints(GetBitContext *gb, Atrac3pChanUnitCtx *ctx,
  * @param[out]   dst   ptr to the output array
  * @param[in]    ref   ptr to the reference channel
  */
-static GOTV_INLINE void gainc_level_mode3s(AtracGainInfo *dst, AtracGainInfo *ref)
+static NLC_INLINE void gainc_level_mode3s(AtracGainInfo *dst, AtracGainInfo *ref)
 {
     int i;
 
@@ -1042,7 +1042,7 @@ static GOTV_INLINE void gainc_level_mode3s(AtracGainInfo *dst, AtracGainInfo *re
  * @param[in]     ctx    ptr to the channel unit context
  * @param[out]    dst    ptr to the output array
  */
-static GOTV_INLINE void gainc_level_mode1m(GetBitContext *gb,
+static NLC_INLINE void gainc_level_mode1m(GetBitContext *gb,
                                       Atrac3pChanUnitCtx *ctx,
                                       AtracGainInfo *dst)
 {
@@ -1150,7 +1150,7 @@ static int decode_gainc_levels(GetBitContext *gb, Atrac3pChanUnitCtx *ctx,
  * @param[out]    dst    ptr to the output array
  * @param[in]     pos    position of the value to be processed
  */
-static GOTV_INLINE void gainc_loc_mode0(GetBitContext *gb, Atrac3pChanUnitCtx *ctx,
+static NLC_INLINE void gainc_loc_mode0(GetBitContext *gb, Atrac3pChanUnitCtx *ctx,
                                    AtracGainInfo *dst, int pos)
 {
     int delta_bits;
@@ -1173,7 +1173,7 @@ static GOTV_INLINE void gainc_loc_mode0(GetBitContext *gb, Atrac3pChanUnitCtx *c
  * @param[in]     ctx    ptr to the channel unit context
  * @param[out]    dst    ptr to the output array
  */
-static GOTV_INLINE void gainc_loc_mode1(GetBitContext *gb, Atrac3pChanUnitCtx *ctx,
+static NLC_INLINE void gainc_loc_mode1(GetBitContext *gb, Atrac3pChanUnitCtx *ctx,
                                    AtracGainInfo *dst)
 {
     int i;

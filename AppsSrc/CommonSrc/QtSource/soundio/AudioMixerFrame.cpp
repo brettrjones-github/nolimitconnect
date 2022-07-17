@@ -126,6 +126,7 @@ void AudioMixerFrame::writeMixerFrame( EAppModule appModule, char* writeBuf, int
 //============================================================================
 int AudioMixerFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t* pu16PcmData, bool isSilenceIn )
 {
+	/*
 	if( hasModuleAudio( appModule ) )
 	{
 		// LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
@@ -164,6 +165,11 @@ int AudioMixerFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t*
 		// first write after has been read.. reset partial read counters
 		m_LenWrote = MIXER_BUF_SIZE_8000_1_S16;
 	}
+	*/
+
+	memcpy( m_MixerBuf, pu16PcmData, MIXER_BUF_SIZE_8000_1_S16 );
+	m_LenWrote = MIXER_BUF_SIZE_8000_1_S16;
+	m_LenRead = 0;
 
 	if( !hasModuleAudio( appModule ) )
 	{

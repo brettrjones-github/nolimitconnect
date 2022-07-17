@@ -56,9 +56,9 @@ the CoreFoundation framework. */
 /* Name of package */
 #define PACKAGE "cpluff"
 
-#define CP_EXPORT	GOTV_EXPORT
-#define CP_IMPORT	GOTV_IMPORT
-#define CP_HIDDEN	GOTV_HIDDEN
+#define CP_EXPORT	NLC_EXPORT
+#define CP_IMPORT	NLC_IMPORT
+#define CP_HIDDEN	NLC_HIDDEN
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */

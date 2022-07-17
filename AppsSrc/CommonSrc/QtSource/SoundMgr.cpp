@@ -13,8 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 #include "VxSndInstance.h"
 #include "AppCommon.h"
 
@@ -28,15 +27,14 @@
 #undef USE_ECHO_CANCEL
 
 //============================================================================
-MySndMgr& GetSndMgrInstance( void )
+SoundMgr& GetSndMgrInstance( void )
 {
 	return GetAppInstance().getSoundMgr();
 }
 
 //============================================================================
-MySndMgr::MySndMgr( AppCommon& app )
-: AudioIoMgr( app, &app )
-, m_MyApp( app )
+SoundMgr::SoundMgr( AppCommon& app )
+: AudioIoMgr( app, app, &app )
 , m_Engine( app.getEngine() )
 , m_MicrophoneInput(NULL)
 , m_bMicrophoneEnabled(true)
@@ -49,13 +47,13 @@ MySndMgr::MySndMgr( AppCommon& app )
 }
 
 //============================================================================ 
-void MySndMgr::slotStartPhoneRinging( void )
+void SoundMgr::slotStartPhoneRinging( void )
 {
 	playSnd( eSndDefPhoneRing1, true );
 }
 
 //============================================================================ 
-void MySndMgr::slotStopPhoneRinging( void )
+void SoundMgr::slotStopPhoneRinging( void )
 {
 	if( m_CurSndPlaying 
 		&& ( eSndDefPhoneRing1 == m_CurSndPlaying->getSndDef() ) )
@@ -65,19 +63,19 @@ void MySndMgr::slotStopPhoneRinging( void )
 }
 
 //============================================================================
-void MySndMgr::slotPlayNotifySound( void )
+void SoundMgr::slotPlayNotifySound( void )
 {
 	playSnd( eSndDefNotify1, true );
 }
 
 //============================================================================
-void MySndMgr::slotPlayShredderSound( void )
+void SoundMgr::slotPlayShredderSound( void )
 {
 	playSnd( eSndDefPaperShredder, true );
 }
 
 //============================================================================
-void MySndMgr::mutePhoneRing( bool bMute )
+void SoundMgr::mutePhoneRing( bool bMute )
 {
 	m_bMutePhoneRing = bMute;
 	if( bMute )
@@ -87,13 +85,13 @@ void MySndMgr::mutePhoneRing( bool bMute )
 }
 
 //============================================================================
-void MySndMgr::muteNotifySound( bool bMute )
+void SoundMgr::muteNotifySound( bool bMute )
 {
 	m_bMuteNotifySnd = bMute;
 }
 
 //============================================================================
-bool MySndMgr::sndMgrStartup( void )
+bool SoundMgr::sndMgrStartup( void )
 {
     for( int i = 0; i < eMaxSndDef; i++ )
     {
@@ -108,7 +106,7 @@ bool MySndMgr::sndMgrStartup( void )
 
 
 //============================================================================
-bool MySndMgr::sndMgrShutdown( void )
+bool SoundMgr::sndMgrShutdown( void )
 {
 	m_MyApp.wantToGuiHardwareCtrlCallbacks( this, false );
     destroyAudioIoSystem();
@@ -116,7 +114,7 @@ bool MySndMgr::sndMgrShutdown( void )
 }
 
 //============================================================================
-void MySndMgr::callbackToGuiWantMicrophoneRecording( bool wantMicInput )
+void SoundMgr::callbackToGuiWantMicrophoneRecording( bool wantMicInput )
 {
 	if( wantMicInput )
 	{
@@ -129,13 +127,13 @@ void MySndMgr::callbackToGuiWantMicrophoneRecording( bool wantMicInput )
 }
 
 //============================================================================
-void MySndMgr::callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput )
+void SoundMgr::callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput )
 {
 	enableSpeakerOutput( wantSpeakerOutput );
 }
 
 //============================================================================
-VxSndInstance * MySndMgr::playSnd( ESndDef sndDef, bool loopContinuous  )
+VxSndInstance * SoundMgr::playSnd( ESndDef sndDef, bool loopContinuous  )
 {
 
 #ifdef DISABLE_AUDIO
@@ -173,7 +171,7 @@ VxSndInstance * MySndMgr::playSnd( ESndDef sndDef, bool loopContinuous  )
 }
 
 //============================================================================
-void MySndMgr::stopSnd( ESndDef sndDef )
+void SoundMgr::stopSnd( ESndDef sndDef )
 {
 	if( m_CurSndPlaying 
 		&& ( sndDef == m_CurSndPlaying->getSndDef() ) )
@@ -184,7 +182,7 @@ void MySndMgr::stopSnd( ESndDef sndDef )
 }
 
 //============================================================================
-void MySndMgr::slotSndFinished( VxSndInstance * sndInstance )
+void SoundMgr::slotSndFinished( VxSndInstance * sndInstance )
 {
 	if( m_CurSndPlaying == sndInstance )
 	{
@@ -194,20 +192,20 @@ void MySndMgr::slotSndFinished( VxSndInstance * sndInstance )
 
 //============================================================================
 //! called when microphone recoding is needed
-void MySndMgr::startMicrophoneRecording()
+void SoundMgr::startMicrophoneRecording()
 {
 	enableMicrophoneInput( true );
 }
 
 //============================================================================
 //! called when microphone recoding not needed
-void MySndMgr::stopMicrophoneRecording()
+void SoundMgr::stopMicrophoneRecording()
 {
 	enableMicrophoneInput( false );
 }
 
 //============================================================================
-void MySndMgr::enableMicrophoneInput( bool enable )
+void SoundMgr::enableMicrophoneInput( bool enable )
 {
 	if( enable != m_bMicrophoneEnabled )
 	{
@@ -217,7 +215,7 @@ void MySndMgr::enableMicrophoneInput( bool enable )
 }
 
 //============================================================================
-void MySndMgr::enableSpeakerOutput( bool bEnable )
+void SoundMgr::enableSpeakerOutput( bool bEnable )
 {
 	if( bEnable != m_bVoiceOutputEnabled )
 	{

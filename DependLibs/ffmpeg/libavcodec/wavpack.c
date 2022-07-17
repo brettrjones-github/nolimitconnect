@@ -371,7 +371,7 @@ static void wv_reset_saved_context(WavpackFrameContext *s)
     s->sc.crc = s->extra_sc.crc = 0xFFFFFFFF;
 }
 
-static GOTV_INLINE int wv_check_crc(WavpackFrameContext *s, uint32_t crc,
+static NLC_INLINE int wv_check_crc(WavpackFrameContext *s, uint32_t crc,
                                uint32_t crc_extra_bits)
 {
     if (crc != s->CRC) {
@@ -386,7 +386,7 @@ static GOTV_INLINE int wv_check_crc(WavpackFrameContext *s, uint32_t crc,
     return 0;
 }
 
-static GOTV_INLINE int wv_unpack_stereo(WavpackFrameContext *s, GetBitContext *gb,
+static NLC_INLINE int wv_unpack_stereo(WavpackFrameContext *s, GetBitContext *gb,
                                    void *dst_l, void *dst_r, const int type)
 {
     int i, j, count = 0;
@@ -519,7 +519,7 @@ static GOTV_INLINE int wv_unpack_stereo(WavpackFrameContext *s, GetBitContext *g
     return 0;
 }
 
-static GOTV_INLINE int wv_unpack_mono(WavpackFrameContext *s, GetBitContext *gb,
+static NLC_INLINE int wv_unpack_mono(WavpackFrameContext *s, GetBitContext *gb,
                                  void *dst, const int type)
 {
     int i, j, count = 0;

@@ -203,12 +203,12 @@ static int str_to_time(const char *str, int64_t *rtime)
     return cur - str;
 }
 
-static GOTV_INLINE int is_space(char c)
+static NLC_INLINE int is_space(char c)
 {
     return c == ' '  || c == '\t' || c == '\r';
 }
 
-static GOTV_INLINE int scale_double(void *log, double d, double m, int *r)
+static NLC_INLINE int scale_double(void *log, double d, double m, int *r)
 {
     m *= d * SBG_SCALE;
     if (m < INT_MIN || m >= INT_MAX) {

@@ -219,7 +219,7 @@ static int config_input(AVFilterLink *inlink)
  * The following code adopts this faster variant.
  */
 #define BLUR(type, depth)                                                   \
-static GOTV_INLINE void blur ## depth(type *dst, int dst_step, const type *src,  \
+static NLC_INLINE void blur ## depth(type *dst, int dst_step, const type *src,  \
                                  int src_step, int len, int radius)         \
 {                                                                           \
     const int length = radius*2 + 1;                                        \
@@ -252,14 +252,14 @@ BLUR(uint16_t, 16)
 
 #undef BLUR
 
-static GOTV_INLINE void blur(uint8_t *dst, int dst_step, const uint8_t *src, int src_step,
+static NLC_INLINE void blur(uint8_t *dst, int dst_step, const uint8_t *src, int src_step,
                         int len, int radius, int pixsize)
 {
     if (pixsize == 1) blur8 (dst, dst_step   , src, src_step   , len, radius);
     else              blur16((uint16_t*)dst, dst_step>>1, (const uint16_t*)src, src_step>>1, len, radius);
 }
 
-static GOTV_INLINE void blur_power(uint8_t *dst, int dst_step, const uint8_t *src, int src_step,
+static NLC_INLINE void blur_power(uint8_t *dst, int dst_step, const uint8_t *src, int src_step,
                               int len, int radius, int power, uint8_t *temp[2], int pixsize)
 {
     uint8_t *a = temp[0], *b = temp[1];

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AppDependLibrariesConfig.h>
-#define EXIF_EXPORT		GOTV_EXPORT
+#define EXIF_EXPORT		NLC_EXPORT
 
 #ifdef __cplusplus
 extern "C" {

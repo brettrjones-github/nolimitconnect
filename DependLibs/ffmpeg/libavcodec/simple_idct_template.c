@@ -113,9 +113,9 @@
 #endif
 
 #ifdef EXTRA_SHIFT
-static GOTV_INLINE void FUNC(idctRowCondDC_extrashift)(int16_t *row, int extra_shift)
+static NLC_INLINE void FUNC(idctRowCondDC_extrashift)(int16_t *row, int extra_shift)
 #else
-static GOTV_INLINE void FUNC6(idctRowCondDC)(idctin *row, int extra_shift)
+static NLC_INLINE void FUNC6(idctRowCondDC)(idctin *row, int extra_shift)
 #endif
 {
     SUINT a0, a1, a2, a3, b0, b1, b2, b3;
@@ -261,9 +261,9 @@ static GOTV_INLINE void FUNC6(idctRowCondDC)(idctin *row, int extra_shift)
     } while (0)
 
 #ifdef EXTRA_SHIFT
-static GOTV_INLINE void FUNC(idctSparseCol_extrashift)(int16_t *col)
+static NLC_INLINE void FUNC(idctSparseCol_extrashift)(int16_t *col)
 #else
-static GOTV_INLINE void FUNC6(idctSparseColPut)(pixel *dest, ptrdiff_t line_size,
+static NLC_INLINE void FUNC6(idctSparseColPut)(pixel *dest, ptrdiff_t line_size,
                                           idctin *col)
 {
     SUINT a0, a1, a2, a3, b0, b1, b2, b3;
@@ -287,7 +287,7 @@ static GOTV_INLINE void FUNC6(idctSparseColPut)(pixel *dest, ptrdiff_t line_size
     dest[0] = av_clip_pixel((int)(a0 - b0) >> COL_SHIFT);
 }
 
-static GOTV_INLINE void FUNC6(idctSparseColAdd)(pixel *dest, ptrdiff_t line_size,
+static NLC_INLINE void FUNC6(idctSparseColAdd)(pixel *dest, ptrdiff_t line_size,
                                           idctin *col)
 {
     int a0, a1, a2, a3, b0, b1, b2, b3;
@@ -311,7 +311,7 @@ static GOTV_INLINE void FUNC6(idctSparseColAdd)(pixel *dest, ptrdiff_t line_size
     dest[0] = av_clip_pixel(dest[0] + ((a0 - b0) >> COL_SHIFT));
 }
 
-static GOTV_INLINE void FUNC6(idctSparseCol)(idctin *col)
+static NLC_INLINE void FUNC6(idctSparseCol)(idctin *col)
 #endif
 {
     int a0, a1, a2, a3, b0, b1, b2, b3;

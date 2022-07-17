@@ -145,7 +145,7 @@ static int sum_abs_dctelem_c(int16_t *block)
 #define avg2(a, b) (((a) + (b) + 1) >> 1)
 #define avg4(a, b, c, d) (((a) + (b) + (c) + (d) + 2) >> 2)
 
-static GOTV_INLINE int pix_abs16_c(MpegEncContext *v, uint8_t *pix1, uint8_t *pix2,
+static NLC_INLINE int pix_abs16_c(MpegEncContext *v, uint8_t *pix1, uint8_t *pix2,
                               ptrdiff_t stride, int h)
 {
     int s = 0, i;
@@ -300,7 +300,7 @@ static int pix_abs16_xy2_c(MpegEncContext *v, uint8_t *pix1, uint8_t *pix2,
     return s;
 }
 
-static GOTV_INLINE int pix_abs8_c(MpegEncContext *v, uint8_t *pix1, uint8_t *pix2,
+static NLC_INLINE int pix_abs8_c(MpegEncContext *v, uint8_t *pix1, uint8_t *pix2,
                              ptrdiff_t stride, int h)
 {
     int s = 0, i;

@@ -42,14 +42,14 @@ extern "C" {
      - The functions must increment the error_message_count variable declared
        in error.h.  */
 
-extern GOTV_DLL_VARIABLE
+extern NLC_DLL_VARIABLE
        void (*po_error) (int status, int errnum,
                          const char *format, ...)
 #if (__GNUC__ == 3 && __GNUC_MINOR__ >= 1) || __GNUC__ > 3
        __attribute__ ((__format__ (__printf__, 3, 4)))
 #endif
        ;
-extern GOTV_DLL_VARIABLE
+extern NLC_DLL_VARIABLE
        void (*po_error_at_line) (int status, int errnum,
                                  const char *filename, unsigned int lineno,
                                  const char *format, ...)
@@ -63,9 +63,9 @@ extern GOTV_DLL_VARIABLE
      - multiline_error must increment the error_message_count variable declared
        in error.h if prefix != NULL.  */
 
-extern GOTV_DLL_VARIABLE
+extern NLC_DLL_VARIABLE
        void (*po_multiline_warning) (char *prefix, char *message);
-extern GOTV_DLL_VARIABLE
+extern NLC_DLL_VARIABLE
        void (*po_multiline_error) (char *prefix, char *message);
 
 

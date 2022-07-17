@@ -43,7 +43,7 @@ struct alias { int name; unsigned int encoding_index; };
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static unsigned int

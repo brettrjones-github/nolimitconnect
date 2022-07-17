@@ -79,7 +79,7 @@ void WelsResetRefList (sWelsEncCtx* pCtx) {
   pRefList->pNextBuffer = pRefList->pRef[0];
 }
 
-static GOTV_INLINE void DeleteLTRFromLongList (sWelsEncCtx* pCtx, int32_t iIdx) {
+static NLC_INLINE void DeleteLTRFromLongList (sWelsEncCtx* pCtx, int32_t iIdx) {
   SRefList* pRefList = pCtx->ppRefPicListExt[pCtx->uiDependencyId];
   int32_t k ;
 
@@ -90,7 +90,7 @@ static GOTV_INLINE void DeleteLTRFromLongList (sWelsEncCtx* pCtx, int32_t iIdx) 
   pRefList->uiLongRefCount--;
 
 }
-static GOTV_INLINE void DeleteSTRFromShortList (sWelsEncCtx* pCtx, int32_t iIdx) {
+static NLC_INLINE void DeleteSTRFromShortList (sWelsEncCtx* pCtx, int32_t iIdx) {
   SRefList* pRefList = pCtx->ppRefPicListExt[pCtx->uiDependencyId];
   int32_t k ;
 
@@ -115,7 +115,7 @@ static void DeleteNonSceneLTR (sWelsEncCtx* pCtx) {
   }
 }
 
-static GOTV_INLINE int32_t CompareFrameNum (int32_t iFrameNumA, int32_t iFrameNumB, int32_t iMaxFrameNumPlus1) {
+static NLC_INLINE int32_t CompareFrameNum (int32_t iFrameNumA, int32_t iFrameNumB, int32_t iMaxFrameNumPlus1) {
   int64_t iNumA, iNumB, iDiffAB, iDiffMin;
   if (iFrameNumA > iMaxFrameNumPlus1 || iFrameNumB > iMaxFrameNumPlus1) {
     return -2;
@@ -149,7 +149,7 @@ static GOTV_INLINE int32_t CompareFrameNum (int32_t iFrameNumA, int32_t iFrameNu
 /*
 *   delete failed mark according LTR recovery pRequest
 */
-static GOTV_INLINE void DeleteInvalidLTR (sWelsEncCtx* pCtx) {
+static NLC_INLINE void DeleteInvalidLTR (sWelsEncCtx* pCtx) {
   SRefList* pRefList = pCtx->ppRefPicListExt[pCtx->uiDependencyId];
   SPicture** pLongRefList = pRefList->pLongRefList;
   SLTRState* pLtr = &pCtx->pLtr[pCtx->uiDependencyId];
@@ -192,7 +192,7 @@ static GOTV_INLINE void DeleteInvalidLTR (sWelsEncCtx* pCtx) {
 /*
 *   handle LTR Mark feedback message
 */
-static GOTV_INLINE void HandleLTRMarkFeedback (sWelsEncCtx* pCtx) {
+static NLC_INLINE void HandleLTRMarkFeedback (sWelsEncCtx* pCtx) {
   SRefList* pRefList            = pCtx->ppRefPicListExt[pCtx->uiDependencyId];
   SPicture** pLongRefList       = pRefList->pLongRefList;
   SLTRState* pLtr = &pCtx->pLtr[pCtx->uiDependencyId];
@@ -248,7 +248,7 @@ static GOTV_INLINE void HandleLTRMarkFeedback (sWelsEncCtx* pCtx) {
 /*
  *  LTR mark process
  */
-static GOTV_INLINE void LTRMarkProcess (sWelsEncCtx* pCtx) {
+static NLC_INLINE void LTRMarkProcess (sWelsEncCtx* pCtx) {
   SRefList* pRefList = pCtx->ppRefPicListExt[pCtx->uiDependencyId];
   SPicture** pLongRefList = pRefList->pLongRefList;
   SPicture** pShortRefList = pRefList->pShortRefList;
@@ -311,7 +311,7 @@ static GOTV_INLINE void LTRMarkProcess (sWelsEncCtx* pCtx) {
   }
 }
 
-static GOTV_INLINE void LTRMarkProcessScreen (sWelsEncCtx* pCtx) {
+static NLC_INLINE void LTRMarkProcessScreen (sWelsEncCtx* pCtx) {
   SRefList* pRefList = pCtx->ppRefPicListExt[pCtx->uiDependencyId];
   SPicture** pLongRefList = pRefList->pLongRefList;
   int32_t iLtrIdx =  pCtx->pDecPic->iLongTermPicNum;
@@ -450,7 +450,7 @@ bool CheckCurMarkFrameNumUsed (sWelsEncCtx* pCtx) {
   return true;
 }
 
-static GOTV_INLINE void WelsMarkMMCORefInfoWithBase(SSlice** ppSliceList,
+static NLC_INLINE void WelsMarkMMCORefInfoWithBase(SSlice** ppSliceList,
                                                SSlice* pBaseSlice,
                                                const int32_t kiCountSliceNum) {
   int32_t iSliceIdx = 0;
@@ -726,7 +726,7 @@ void WelsUpdateRefSyntax (sWelsEncCtx* pCtx, const int32_t iPOC, const int32_t u
   WelsUpdateSliceHeaderSyntax (pCtx, iAbsDiffPicNumMinus1, pCtx->pCurDqLayer->ppSliceInLayer, uiFrameType);
 }
 
-static GOTV_INLINE void UpdateOriginalPicInfo (SPicture* pOrigPic, SPicture* pReconPic) {
+static NLC_INLINE void UpdateOriginalPicInfo (SPicture* pOrigPic, SPicture* pReconPic) {
   if (!pOrigPic)
     return;
 
@@ -887,7 +887,7 @@ bool WelsBuildRefListScreen (sWelsEncCtx* pCtx, const int32_t iPOC, int32_t iBes
   return (pCtx->iNumRef0 > 0 || pCtx->eSliceType == I_SLICE) ? (true) : (false);
 }
 
-static GOTV_INLINE bool IsValidFrameNum (const int32_t kiFrameNum) {
+static NLC_INLINE bool IsValidFrameNum (const int32_t kiFrameNum) {
   return (kiFrameNum < (1 << 30)); // TODO: use the original judge first, may be improved
 }
 

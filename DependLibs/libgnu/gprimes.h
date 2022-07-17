@@ -33,7 +33,7 @@
 
 #include <libgnu/gtypes.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* Prime numbers.
  */
@@ -46,6 +46,6 @@ GOTV_BEGIN_CDECLARES
  */
 guint	   g_spaced_primes_closest (guint num);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_PRIMES_H__ */

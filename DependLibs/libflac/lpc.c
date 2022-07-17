@@ -50,11 +50,11 @@
 
 #if defined(_MSC_VER) && (_MSC_VER < 1800)
 #include <float.h>
-static GOTV_INLINE long int lround(double x) {
+static NLC_INLINE long int lround(double x) {
 	return (long)(x + _copysign(0.5, x));
 }
 #elif !defined(HAVE_LROUND) && defined(__GNUC__)
-static GOTV_INLINE long int lround(double x) {
+static NLC_INLINE long int lround(double x) {
 	return (long)(x + __builtin_copysign(0.5, x));
 }
 /* If this fails, we are in the presence of a mid 90's compiler, move along... */

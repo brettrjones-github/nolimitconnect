@@ -96,7 +96,7 @@ static av_always_inline unsigned UMULH(unsigned a, unsigned b){
 /* median of 3 */
 #ifndef mid_pred
 #define mid_pred mid_pred
-static GOTV_INLINE av_const int mid_pred(int a, int b, int c)
+static NLC_INLINE av_const int mid_pred(int a, int b, int c)
 {
     if(a>b){
         if(c>b){
@@ -115,7 +115,7 @@ static GOTV_INLINE av_const int mid_pred(int a, int b, int c)
 
 #ifndef median4
 #define median4 median4
-static GOTV_INLINE av_const int median4(int a, int b, int c, int d)
+static NLC_INLINE av_const int median4(int a, int b, int c, int d)
 {
     if (a < b) {
         if (c < d) return (FFMIN(b, d) + FFMAX(a, c)) / 2;
@@ -128,7 +128,7 @@ static GOTV_INLINE av_const int median4(int a, int b, int c, int d)
 #endif
 
 #ifndef sign_extend
-static GOTV_INLINE av_const int sign_extend(int val, unsigned bits)
+static NLC_INLINE av_const int sign_extend(int val, unsigned bits)
 {
     unsigned shift = 8 * sizeof(int) - bits;
     union { unsigned u; int s; } v = { (unsigned) val << shift };
@@ -137,7 +137,7 @@ static GOTV_INLINE av_const int sign_extend(int val, unsigned bits)
 #endif
 
 #ifndef zero_extend
-static GOTV_INLINE av_const unsigned zero_extend(unsigned val, unsigned bits)
+static NLC_INLINE av_const unsigned zero_extend(unsigned val, unsigned bits)
 {
     return (val << ((8 * sizeof(int)) - bits)) >> ((8 * sizeof(int)) - bits);
 }
@@ -205,7 +205,7 @@ if ((y) < (x)) {\
 
 #ifndef ff_sqrt
 #define ff_sqrt ff_sqrt
-static GOTV_INLINE av_const unsigned int ff_sqrt(unsigned int a)
+static NLC_INLINE av_const unsigned int ff_sqrt(unsigned int a)
 {
     unsigned int b;
 
@@ -226,12 +226,12 @@ static GOTV_INLINE av_const unsigned int ff_sqrt(unsigned int a)
 }
 #endif
 
-static GOTV_INLINE av_const float ff_sqrf(float a)
+static NLC_INLINE av_const float ff_sqrf(float a)
 {
     return a*a;
 }
 
-static GOTV_INLINE int8_t ff_u8_to_s8(uint8_t a)
+static NLC_INLINE int8_t ff_u8_to_s8(uint8_t a)
 {
     union {
         uint8_t u8;

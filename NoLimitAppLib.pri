@@ -174,6 +174,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareOfferList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSoundSettings.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletStoryboardClient.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletTestAndDebug.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestBase.h \
@@ -290,7 +291,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/MessengerPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/MyIcons.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/MyIconsDefs.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/MySndMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/MultiSessionState.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/NetworkKeyWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/NetworkTestWidget.h \
@@ -317,7 +317,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/SessionWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListItem.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/SoundCtrlWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/StoryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioDefs.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInIo.h \
@@ -330,6 +329,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/SoundDefs.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/SoundMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/TextChatLogic.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ThumbnailEditWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ThumbnailChooseWidget.h \
@@ -550,6 +550,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareOfferList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSoundSettings.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletStoryboardClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletTestAndDebug.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestBase.cpp \
@@ -657,7 +658,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/MessengerPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/MultiSessionState.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/MyIcons.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/MySndMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/NetAvailStatusWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/NetworkKeyWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/NetworkTestWidget.cpp \
@@ -697,7 +697,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/SoundCtrlWidget.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/SoundMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/StoryWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/TextChatLogic.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/TitleBarWidget.cpp \
@@ -846,6 +846,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSharedContent.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletShareOfferList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSnapshot.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletSoundSettings.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletStoryBoardClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletTestAndDebug.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostClient.ui \
@@ -903,7 +904,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ServiceSettingsWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/SessionWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ShareOfferListItem.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/SoundCtrlWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/StoryWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ThumbnailEditWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ThumbnailChooseWidget.ui \

@@ -128,7 +128,7 @@ xavs_pixel_ssd_wxh (xavs_pixel_function_t * pf, uint8_t * pix1, int i_pix1, uint
 }
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 pixel_sub_wxh (int16_t * diff, int i_size, uint8_t * pix1, int i_pix1, uint8_t * pix2, int i_pix2)
 {
   int y, x;
@@ -236,7 +236,7 @@ PIXEL_SATD_C (xavs_pixel_satd_16x8, 16, 8) PIXEL_SATD_C (xavs_pixel_satd_8x16, 8
     DST(6, b6 + b7);\
     DST(7, b6 - b7);\
 }
-     static GOTV_INLINE int
+     static NLC_INLINE int
      pixel_sa8d_wxh (uint8_t * pix1, int i_pix1, uint8_t * pix2, int i_pix2, int i_width, int i_height)
 {
   int16_t diff[8][8];

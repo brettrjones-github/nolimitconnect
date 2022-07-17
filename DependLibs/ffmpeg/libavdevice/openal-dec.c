@@ -63,7 +63,7 @@ typedef struct {
  * @param al_fmt the AL_FORMAT value to find information about.
  * @return A pointer to a structure containing information about the AL_FORMAT value.
  */
-static const GOTV_INLINE al_format_info* get_al_format_info(ALCenum al_fmt)
+static const NLC_INLINE al_format_info* get_al_format_info(ALCenum al_fmt)
 {
     static const al_format_info info_table[] = {
         [AL_FORMAT_MONO8-LOWEST_AL_FORMAT]    = {AL_FORMAT_MONO8, AV_CODEC_ID_PCM_U8, 1},
@@ -81,7 +81,7 @@ static const GOTV_INLINE al_format_info* get_al_format_info(ALCenum al_fmt)
  * @param error_msg_ret A pointer to a char* in which to return the error message, or NULL if desired.
  * @return The error code, or 0 if there is no error.
  */
-static GOTV_INLINE int al_get_error(ALCdevice *device, const char** error_msg_ret)
+static NLC_INLINE int al_get_error(ALCdevice *device, const char** error_msg_ret)
 {
     ALCenum error = alcGetError(device);
     if (error_msg_ret)
@@ -108,7 +108,7 @@ static GOTV_INLINE int al_get_error(ALCdevice *device, const char** error_msg_re
 /**
  * Print out a list of OpenAL capture devices on this system.
  */
-static GOTV_INLINE void print_al_capture_devices(void *log_ctx)
+static NLC_INLINE void print_al_capture_devices(void *log_ctx)
 {
     const char *devices;
 

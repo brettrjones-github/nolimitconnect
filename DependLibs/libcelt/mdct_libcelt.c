@@ -100,7 +100,7 @@ void clt_mdct_clear(mdct_lookup *l)
 
 #endif /* CUSTOM_MODES */
 
-void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar * GOTV_RESTRICT out, const libcelt_word16 *window, int overlap, int shift)
+void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar * NLC_RESTRICT out, const libcelt_word16 *window, int overlap, int shift)
 {
    int i;
    int N, N2, N4;
@@ -123,11 +123,11 @@ void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar
    /* Window, shuffle, fold */
    {
       /* Temp pointers to make it really clear to the compiler what we're doing */
-      const kiss_fft_scalar * GOTV_RESTRICT xp1 = in+(overlap>>1);
-      const kiss_fft_scalar * GOTV_RESTRICT xp2 = in+N2-1+(overlap>>1);
-      kiss_fft_scalar * GOTV_RESTRICT yp = out;
-      const libcelt_word16 * GOTV_RESTRICT wp1 = window+(overlap>>1);
-      const libcelt_word16 * GOTV_RESTRICT wp2 = window+(overlap>>1)-1;
+      const kiss_fft_scalar * NLC_RESTRICT xp1 = in+(overlap>>1);
+      const kiss_fft_scalar * NLC_RESTRICT xp2 = in+N2-1+(overlap>>1);
+      kiss_fft_scalar * NLC_RESTRICT yp = out;
+      const libcelt_word16 * NLC_RESTRICT wp1 = window+(overlap>>1);
+      const libcelt_word16 * NLC_RESTRICT wp2 = window+(overlap>>1)-1;
       for(i=0;i<(overlap>>2);i++)
       {
          /* Real part arranged as -d-cR, Imag part arranged as -b+aR*/
@@ -161,7 +161,7 @@ void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar
    }
    /* Pre-rotation */
    {
-      kiss_fft_scalar * GOTV_RESTRICT yp = out;
+      kiss_fft_scalar * NLC_RESTRICT yp = out;
       const kiss_twiddle_scalar *t = &l->trig[0];
       for(i=0;i<N4;i++)
       {
@@ -182,9 +182,9 @@ void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar
    /* Post-rotate */
    {
       /* Temp pointers to make it really clear to the compiler what we're doing */
-      const kiss_fft_scalar * GOTV_RESTRICT fp = f;
-      kiss_fft_scalar * GOTV_RESTRICT yp1 = out;
-      kiss_fft_scalar * GOTV_RESTRICT yp2 = out+N2-1;
+      const kiss_fft_scalar * NLC_RESTRICT fp = f;
+      kiss_fft_scalar * NLC_RESTRICT yp1 = out;
+      kiss_fft_scalar * NLC_RESTRICT yp2 = out+N2-1;
       const kiss_twiddle_scalar *t = &l->trig[0];
       /* Temp pointers to make it really clear to the compiler what we're doing */
       for(i=0;i<N4;i++)
@@ -204,7 +204,7 @@ void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar
 }
 
 
-void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar * GOTV_RESTRICT out, const libcelt_word16 * GOTV_RESTRICT window, int overlap, int shift)
+void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar * NLC_RESTRICT out, const libcelt_word16 * NLC_RESTRICT window, int overlap, int shift)
 {
    int i;
    int N, N2, N4;
@@ -228,9 +228,9 @@ void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scala
    /* Pre-rotate */
    {
       /* Temp pointers to make it really clear to the compiler what we're doing */
-      const kiss_fft_scalar * GOTV_RESTRICT xp1 = in;
-      const kiss_fft_scalar * GOTV_RESTRICT xp2 = in+N2-1;
-      kiss_fft_scalar * GOTV_RESTRICT yp = f2;
+      const kiss_fft_scalar * NLC_RESTRICT xp1 = in;
+      const kiss_fft_scalar * NLC_RESTRICT xp2 = in+N2-1;
+      kiss_fft_scalar * NLC_RESTRICT yp = f2;
       const kiss_twiddle_scalar *t = &l->trig[0];
       for(i=0;i<N4;i++) 
       {
@@ -250,7 +250,7 @@ void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scala
    
    /* Post-rotate */
    {
-      kiss_fft_scalar * GOTV_RESTRICT fp = f;
+      kiss_fft_scalar * NLC_RESTRICT fp = f;
       const kiss_twiddle_scalar *t = &l->trig[0];
 
       for(i=0;i<N4;i++)
@@ -268,9 +268,9 @@ void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scala
    }
    /* De-shuffle the components for the middle of the window only */
    {
-      const kiss_fft_scalar * GOTV_RESTRICT fp1 = f;
-      const kiss_fft_scalar * GOTV_RESTRICT fp2 = f+N2-1;
-      kiss_fft_scalar * GOTV_RESTRICT yp = f2;
+      const kiss_fft_scalar * NLC_RESTRICT fp1 = f;
+      const kiss_fft_scalar * NLC_RESTRICT fp2 = f+N2-1;
+      kiss_fft_scalar * NLC_RESTRICT yp = f2;
       for(i = 0; i < N4; i++)
       {
          *yp++ =-*fp1;
@@ -282,11 +282,11 @@ void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scala
    out -= (N2-overlap)>>1;
    /* Mirror on both sides for TDAC */
    {
-      kiss_fft_scalar * GOTV_RESTRICT fp1 = f2+N4-1;
-      kiss_fft_scalar * GOTV_RESTRICT xp1 = out+N2-1;
-      kiss_fft_scalar * GOTV_RESTRICT yp1 = out+N4-overlap/2;
-      const libcelt_word16 * GOTV_RESTRICT wp1 = window;
-      const libcelt_word16 * GOTV_RESTRICT wp2 = window+overlap-1;
+      kiss_fft_scalar * NLC_RESTRICT fp1 = f2+N4-1;
+      kiss_fft_scalar * NLC_RESTRICT xp1 = out+N2-1;
+      kiss_fft_scalar * NLC_RESTRICT yp1 = out+N4-overlap/2;
+      const libcelt_word16 * NLC_RESTRICT wp1 = window;
+      const libcelt_word16 * NLC_RESTRICT wp2 = window+overlap-1;
       for(i = 0; i< N4-overlap/2; i++)
       {
          *xp1 = *fp1;
@@ -304,11 +304,11 @@ void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scala
       }
    }
    {
-      kiss_fft_scalar * GOTV_RESTRICT fp2 = f2+N4;
-      kiss_fft_scalar * GOTV_RESTRICT xp2 = out+N2;
-      kiss_fft_scalar * GOTV_RESTRICT yp2 = out+N-1-(N4-overlap/2);
-      const libcelt_word16 * GOTV_RESTRICT wp1 = window;
-      const libcelt_word16 * GOTV_RESTRICT wp2 = window+overlap-1;
+      kiss_fft_scalar * NLC_RESTRICT fp2 = f2+N4;
+      kiss_fft_scalar * NLC_RESTRICT xp2 = out+N2;
+      kiss_fft_scalar * NLC_RESTRICT yp2 = out+N-1-(N4-overlap/2);
+      const libcelt_word16 * NLC_RESTRICT wp1 = window;
+      const libcelt_word16 * NLC_RESTRICT wp2 = window+overlap-1;
       for(i = 0; i< N4-overlap/2; i++)
       {
          *xp2 = *fp2;

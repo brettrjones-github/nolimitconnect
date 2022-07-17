@@ -927,7 +927,7 @@ cache_page_copy			(cache_page *		dst,
 	return TRUE;
 }
 
-GOTV_INLINE unsigned int
+NLC_INLINE unsigned int
 hash				(vbi_pgno		pgno)
 {
 	return pgno % HASH_SIZE;

@@ -251,7 +251,7 @@ int ff_snow_get_buffer(SnowContext *s, AVFrame *frame);
 /* common inline functions */
 //XXX doublecheck all of them should stay inlined
 
-static GOTV_INLINE void pred_mv(SnowContext *s, int *mx, int *my, int ref,
+static NLC_INLINE void pred_mv(SnowContext *s, int *mx, int *my, int ref,
                            const BlockNode *left, const BlockNode *top, const BlockNode *tr){
     if(s->ref_frames == 1){
         *mx = mid_pred(left->mx, top->mx, tr->mx);
@@ -459,7 +459,7 @@ static av_always_inline void predict_plane(SnowContext *s, IDWTELEM *buf, int pl
         predict_slice(s, buf, plane_index, add, mb_y);
 }
 
-static GOTV_INLINE void set_blocks(SnowContext *s, int level, int x, int y, int l, int cb, int cr, int mx, int my, int ref, int type){
+static NLC_INLINE void set_blocks(SnowContext *s, int level, int x, int y, int l, int cb, int cr, int mx, int my, int ref, int type){
     const int w= s->b_width << s->block_max_depth;
     const int rem_depth= s->block_max_depth - level;
     const int index= (x + y*w) << rem_depth;
@@ -484,7 +484,7 @@ static GOTV_INLINE void set_blocks(SnowContext *s, int level, int x, int y, int 
     }
 }
 
-static GOTV_INLINE void init_ref(MotionEstContext *c, uint8_t *src[3], uint8_t *ref[3], uint8_t *ref2[3], int x, int y, int ref_index){
+static NLC_INLINE void init_ref(MotionEstContext *c, uint8_t *src[3], uint8_t *ref[3], uint8_t *ref2[3], int x, int y, int ref_index){
     SnowContext *s = c->avctx->priv_data;
     const int offset[3]= {
           y*c->  stride + x,
@@ -506,7 +506,7 @@ extern const int8_t ff_quant3bA[256];
 
 #define QEXPSHIFT (7-FRAC_BITS+8) //FIXME try to change this to 0
 
-static GOTV_INLINE void put_symbol(RangeCoder *c, uint8_t *state, int v, int is_signed){
+static NLC_INLINE void put_symbol(RangeCoder *c, uint8_t *state, int v, int is_signed){
     int i;
 
     if(v){
@@ -537,7 +537,7 @@ static GOTV_INLINE void put_symbol(RangeCoder *c, uint8_t *state, int v, int is_
     }
 }
 
-static GOTV_INLINE int get_symbol(RangeCoder *c, uint8_t *state, int is_signed){
+static NLC_INLINE int get_symbol(RangeCoder *c, uint8_t *state, int is_signed){
     if(get_rac(c, state+0))
         return 0;
     else{
@@ -560,7 +560,7 @@ static GOTV_INLINE int get_symbol(RangeCoder *c, uint8_t *state, int is_signed){
     }
 }
 
-static GOTV_INLINE void put_symbol2(RangeCoder *c, uint8_t *state, int v, int log2){
+static NLC_INLINE void put_symbol2(RangeCoder *c, uint8_t *state, int v, int log2){
     int i;
     int r= log2>=0 ? 1<<log2 : 1;
 
@@ -580,7 +580,7 @@ static GOTV_INLINE void put_symbol2(RangeCoder *c, uint8_t *state, int v, int lo
     }
 }
 
-static GOTV_INLINE int get_symbol2(RangeCoder *c, uint8_t *state, int log2){
+static NLC_INLINE int get_symbol2(RangeCoder *c, uint8_t *state, int log2){
     int i;
     int r= log2>=0 ? 1<<log2 : 1;
     int v=0;
@@ -600,7 +600,7 @@ static GOTV_INLINE int get_symbol2(RangeCoder *c, uint8_t *state, int log2){
     return v;
 }
 
-static GOTV_INLINE void unpack_coeffs(SnowContext *s, SubBand *b, SubBand * parent, int orientation){
+static NLC_INLINE void unpack_coeffs(SnowContext *s, SubBand *b, SubBand * parent, int orientation){
     const int w= b->width;
     const int h= b->height;
     int x,y;

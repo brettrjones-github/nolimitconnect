@@ -59,7 +59,7 @@ static av_cold void uninit(AVFilterContext *ctx)
     av_freep(&s->buffer);
 }
 
-static GOTV_INLINE void line_copy8(uint8_t *line, const uint8_t *srcp, int width, int mergin)
+static NLC_INLINE void line_copy8(uint8_t *line, const uint8_t *srcp, int width, int mergin)
 {
     int i;
 

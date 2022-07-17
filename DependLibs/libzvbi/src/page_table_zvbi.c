@@ -84,7 +84,7 @@ struct _vbi_page_table {
 	unsigned int		subpages_capacity;
 };
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 valid_pgno			(vbi_pgno		pgno)
 {
 	return ((unsigned int) pgno - 0x100 < 0x800);

@@ -168,7 +168,7 @@ extern default_catalog_reader_ty *
 /* If false, duplicate msgids in the same domain and file generate an error.
    If true, such msgids are allowed; the caller should treat them
    appropriately.  Defaults to false.  */
-extern GOTV_DLL_VARIABLE bool allow_duplicates;
+extern NLC_DLL_VARIABLE bool allow_duplicates;
 
 /* Read the input file from a stream.  Returns a list of messages.  */
 extern msgdomain_list_ty *

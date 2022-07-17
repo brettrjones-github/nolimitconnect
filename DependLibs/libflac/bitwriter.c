@@ -279,7 +279,7 @@ void FLAC__bitwriter_release_buffer(FLAC__BitWriter *bw)
 	(void)bw;
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitwriter_write_zeroes(FLAC__BitWriter *bw, unsigned bits)
+NLC_INLINE FLAC__bool FLAC__bitwriter_write_zeroes(FLAC__BitWriter *bw, unsigned bits)
 {
 	unsigned n;
 
@@ -317,7 +317,7 @@ GOTV_INLINE FLAC__bool FLAC__bitwriter_write_zeroes(FLAC__BitWriter *bw, unsigne
 	return true;
 }
 
-static GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32_nocheck(FLAC__BitWriter *bw, FLAC__uint32 val, unsigned bits)
+static NLC_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32_nocheck(FLAC__BitWriter *bw, FLAC__uint32 val, unsigned bits)
 {
 	register unsigned left;
 
@@ -358,7 +358,7 @@ static GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32_nocheck(FLAC__Bit
 	return true;
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32(FLAC__BitWriter *bw, FLAC__uint32 val, unsigned bits)
+NLC_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32(FLAC__BitWriter *bw, FLAC__uint32 val, unsigned bits)
 {
 	/* check that unused bits are unset */
 	if((bits < 32) && (val>>bits != 0))
@@ -367,7 +367,7 @@ GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32(FLAC__BitWriter *bw, FLA
 	return FLAC__bitwriter_write_raw_uint32_nocheck(bw, val, bits);
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_int32(FLAC__BitWriter *bw, FLAC__int32 val, unsigned bits)
+NLC_INLINE FLAC__bool FLAC__bitwriter_write_raw_int32(FLAC__BitWriter *bw, FLAC__int32 val, unsigned bits)
 {
 	/* zero-out unused bits */
 	if(bits < 32)
@@ -376,7 +376,7 @@ GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_int32(FLAC__BitWriter *bw, FLAC
 	return FLAC__bitwriter_write_raw_uint32_nocheck(bw, (FLAC__uint32)val, bits);
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint64(FLAC__BitWriter *bw, FLAC__uint64 val, unsigned bits)
+NLC_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint64(FLAC__BitWriter *bw, FLAC__uint64 val, unsigned bits)
 {
 	/* this could be a little faster but it's not used for much */
 	if(bits > 32) {
@@ -388,7 +388,7 @@ GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint64(FLAC__BitWriter *bw, FLA
 		return FLAC__bitwriter_write_raw_uint32(bw, (FLAC__uint32)val, bits);
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32_little_endian(FLAC__BitWriter *bw, FLAC__uint32 val)
+NLC_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32_little_endian(FLAC__BitWriter *bw, FLAC__uint32 val)
 {
 	/* this doesn't need to be that fast as currently it is only used for vorbis comments */
 
@@ -404,7 +404,7 @@ GOTV_INLINE FLAC__bool FLAC__bitwriter_write_raw_uint32_little_endian(FLAC__BitW
 	return true;
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitwriter_write_byte_block(FLAC__BitWriter *bw, const FLAC__byte vals[], unsigned nvals)
+NLC_INLINE FLAC__bool FLAC__bitwriter_write_byte_block(FLAC__BitWriter *bw, const FLAC__byte vals[], unsigned nvals)
 {
 	unsigned i;
 
@@ -863,10 +863,10 @@ FLAC__bool FLAC__bitwriter_zero_pad_to_byte_boundary(FLAC__BitWriter *bw)
 		return true;
 }
 
-/* These functions are declared GOTV_INLINE in this file but are also callable as
+/* These functions are declared NLC_INLINE in this file but are also callable as
  * externs from elsewhere.
  * According to the C99 spec, section 6.7.4, simply providing a function
- * prototype in a header file without 'GOTV_INLINE' and making the function GOTV_INLINE
+ * prototype in a header file without 'NLC_INLINE' and making the function NLC_INLINE
  * in this file should be sufficient.
  * Unfortunately, the Microsoft VS compiler doesn't pick them up externally. To
  * fix that we add extern declarations here.

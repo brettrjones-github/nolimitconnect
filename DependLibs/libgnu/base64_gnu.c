@@ -66,7 +66,7 @@ static const char b64c[64] =
    to be of length >= BASE64_LENGTH(INLEN), and INLEN needs to be
    a multiple of 3.  */
 static void
-base64_encode_fast (const char *GOTV_RESTRICT in, size_t inlen, char *GOTV_RESTRICT out)
+base64_encode_fast (const char *NLC_RESTRICT in, size_t inlen, char *NLC_RESTRICT out)
 {
   while (inlen)
     {
@@ -85,8 +85,8 @@ base64_encode_fast (const char *GOTV_RESTRICT in, size_t inlen, char *GOTV_RESTR
    possible.  If OUTLEN is larger than BASE64_LENGTH(INLEN), also zero
    terminate the output buffer. */
 void
-base64_encode (const char *GOTV_RESTRICT in, size_t inlen,
-               char *GOTV_RESTRICT out, size_t outlen)
+base64_encode (const char *NLC_RESTRICT in, size_t inlen,
+               char *NLC_RESTRICT out, size_t outlen)
 {
   /* Note this outlen constraint can be enforced at compile time.
      I.E. that the output buffer is exactly large enough to hold
@@ -347,7 +347,7 @@ base64_decode_ctx_init (struct base64_decode_context *ctx)
    verified non-newline bytes accessible through the returned pointer.  */
 static char *
 get_4 (struct base64_decode_context *ctx,
-       char const *GOTV_RESTRICT *in, char const *GOTV_RESTRICT in_end,
+       char const *NLC_RESTRICT *in, char const *NLC_RESTRICT in_end,
        size_t *n_non_newline)
 {
   if (ctx->i == 4)
@@ -400,8 +400,8 @@ get_4 (struct base64_decode_context *ctx,
    *OUT to point to the byte after the last one written, and decrement
    *OUTLEN to reflect the number of bytes remaining in *OUT.  */
 static bool
-decode_4 (char const *GOTV_RESTRICT in, size_t inlen,
-          char *GOTV_RESTRICT *outp, size_t *outleft)
+decode_4 (char const *NLC_RESTRICT in, size_t inlen,
+          char *NLC_RESTRICT *outp, size_t *outleft)
 {
   char *out = *outp;
   if (inlen < 2)
@@ -486,8 +486,8 @@ decode_4 (char const *GOTV_RESTRICT in, size_t inlen,
 
 bool
 base64_decode_ctx (struct base64_decode_context *ctx,
-                   const char *GOTV_RESTRICT in, size_t inlen,
-                   char *GOTV_RESTRICT out, size_t *outlen)
+                   const char *NLC_RESTRICT in, size_t inlen,
+                   char *NLC_RESTRICT out, size_t *outlen)
 {
   size_t outleft = *outlen;
   bool ignore_newlines = ctx != NULL;

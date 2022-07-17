@@ -29,7 +29,7 @@ if HAVE_MMXEXT
 #   include "ppc/dct.h"
 #endif
 */
-static GOTV_INLINE void pixel_sub_wxh( int16_t *diff, int i_size,
+static NLC_INLINE void pixel_sub_wxh( int16_t *diff, int i_size,
                                   uint8_t *pix1, int i_pix1, uint8_t *pix2, int i_pix2 )
 {
     int y, x;
@@ -44,7 +44,7 @@ static GOTV_INLINE void pixel_sub_wxh( int16_t *diff, int i_size,
     }
 }
 //dct_sse2 ±∫Ú”√
-static GOTV_INLINE void pixel_sub_8x8( int16_t dct[8][8], uint8_t *pix1,  uint8_t *pix2 )
+static NLC_INLINE void pixel_sub_8x8( int16_t dct[8][8], uint8_t *pix1,  uint8_t *pix2 )
 {
     int y, x;
     for( y = 0; y < 8; y++ )

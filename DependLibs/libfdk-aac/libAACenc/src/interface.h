@@ -165,7 +165,7 @@ typedef struct {
 
 }PSY_OUT;
 
-GOTV_INLINE int isLowDelay( AUDIO_OBJECT_TYPE aot )
+NLC_INLINE int isLowDelay( AUDIO_OBJECT_TYPE aot )
 {
   return (aot==AOT_ER_AAC_LD || aot==AOT_ER_AAC_ELD);
 }

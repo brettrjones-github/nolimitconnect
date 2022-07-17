@@ -316,7 +316,7 @@ filter_alloc_fail:
 #define BOTTOM_VALUE (TOP_VALUE >> 8)
 
 /** Start the decoder */
-static GOTV_INLINE void range_start_decoding(APEContext *ctx)
+static NLC_INLINE void range_start_decoding(APEContext *ctx)
 {
     ctx->rc.buffer = bytestream_get_byte(&ctx->ptr);
     ctx->rc.low    = ctx->rc.buffer >> (8 - EXTRA_BITS);
@@ -324,7 +324,7 @@ static GOTV_INLINE void range_start_decoding(APEContext *ctx)
 }
 
 /** Perform normalization */
-static GOTV_INLINE void range_dec_normalize(APEContext *ctx)
+static NLC_INLINE void range_dec_normalize(APEContext *ctx)
 {
     while (ctx->rc.range <= BOTTOM_VALUE) {
         ctx->rc.buffer <<= 8;
@@ -345,7 +345,7 @@ static GOTV_INLINE void range_dec_normalize(APEContext *ctx)
  * @param tot_f is the total frequency or (code_value)1<<shift
  * @return the cumulative frequency
  */
-static GOTV_INLINE int range_decode_culfreq(APEContext *ctx, int tot_f)
+static NLC_INLINE int range_decode_culfreq(APEContext *ctx, int tot_f)
 {
     range_dec_normalize(ctx);
     ctx->rc.help = ctx->rc.range / tot_f;
@@ -357,7 +357,7 @@ static GOTV_INLINE int range_decode_culfreq(APEContext *ctx, int tot_f)
  * @param ctx decoder context
  * @param shift number of bits to decode
  */
-static GOTV_INLINE int range_decode_culshift(APEContext *ctx, int shift)
+static NLC_INLINE int range_decode_culshift(APEContext *ctx, int shift)
 {
     range_dec_normalize(ctx);
     ctx->rc.help = ctx->rc.range >> shift;
@@ -371,14 +371,14 @@ static GOTV_INLINE int range_decode_culshift(APEContext *ctx, int shift)
  * @param sy_f the interval length (frequency of the symbol)
  * @param lt_f the lower end (frequency sum of < symbols)
  */
-static GOTV_INLINE void range_decode_update(APEContext *ctx, int sy_f, int lt_f)
+static NLC_INLINE void range_decode_update(APEContext *ctx, int sy_f, int lt_f)
 {
     ctx->rc.low  -= ctx->rc.help * lt_f;
     ctx->rc.range = ctx->rc.help * sy_f;
 }
 
 /** Decode n bits (n <= 16) without modelling */
-static GOTV_INLINE int range_decode_bits(APEContext *ctx, int n)
+static NLC_INLINE int range_decode_bits(APEContext *ctx, int n)
 {
     int sym = range_decode_culshift(ctx, n);
     range_decode_update(ctx, 1, sym);
@@ -430,7 +430,7 @@ static const uint16_t counts_diff_3980[21] = {
  * @param counts probability range start position
  * @param counts_diff probability range widths
  */
-static GOTV_INLINE int range_get_symbol(APEContext *ctx,
+static NLC_INLINE int range_get_symbol(APEContext *ctx,
                                    const uint16_t counts[],
                                    const uint16_t counts_diff[])
 {
@@ -454,7 +454,7 @@ static GOTV_INLINE int range_get_symbol(APEContext *ctx,
 }
 /** @} */ // group rangecoder
 
-static GOTV_INLINE void update_rice(APERice *rice, unsigned int x)
+static NLC_INLINE void update_rice(APERice *rice, unsigned int x)
 {
     int lim = rice->k ? (1 << (rice->k + 4)) : 0;
     rice->ksum += ((x + 1) / 2) - ((rice->ksum + 16) >> 5);
@@ -465,7 +465,7 @@ static GOTV_INLINE void update_rice(APERice *rice, unsigned int x)
         rice->k++;
 }
 
-static GOTV_INLINE int get_rice_ook(GetBitContext *gb, int k)
+static NLC_INLINE int get_rice_ook(GetBitContext *gb, int k)
 {
     unsigned int x;
 
@@ -477,7 +477,7 @@ static GOTV_INLINE int get_rice_ook(GetBitContext *gb, int k)
     return x;
 }
 
-static GOTV_INLINE int ape_decode_value_3860(APEContext *ctx, GetBitContext *gb,
+static NLC_INLINE int ape_decode_value_3860(APEContext *ctx, GetBitContext *gb,
                                         APERice *rice)
 {
     unsigned int x, overflow;
@@ -509,7 +509,7 @@ static GOTV_INLINE int ape_decode_value_3860(APEContext *ctx, GetBitContext *gb,
     return ((x >> 1) ^ ((x & 1) - 1)) + 1;
 }
 
-static GOTV_INLINE int ape_decode_value_3900(APEContext *ctx, APERice *rice)
+static NLC_INLINE int ape_decode_value_3900(APEContext *ctx, APERice *rice)
 {
     unsigned int x, overflow;
     int tmpk;
@@ -543,7 +543,7 @@ static GOTV_INLINE int ape_decode_value_3900(APEContext *ctx, APERice *rice)
     return ((x >> 1) ^ ((x & 1) - 1)) + 1;
 }
 
-static GOTV_INLINE int ape_decode_value_3990(APEContext *ctx, APERice *rice)
+static NLC_INLINE int ape_decode_value_3990(APEContext *ctx, APERice *rice)
 {
     unsigned int x, overflow;
     int base, pivot;
@@ -812,7 +812,7 @@ static void init_predictor_decoder(APEContext *ctx)
 }
 
 /** Get inverse sign of integer (-1 for positive, 1 for negative and 0 for zero) */
-static GOTV_INLINE int APESIGN(int32_t x) {
+static NLC_INLINE int APESIGN(int32_t x) {
     return (x < 0) - (x > 0);
 }
 

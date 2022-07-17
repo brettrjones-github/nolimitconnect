@@ -418,7 +418,7 @@ MHD_create_response_from_fd_at_offset (size_t size,
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_fd_at_offset64 (uint64_t size,
                                          int fd,
                                          uint64_t offset)
@@ -479,7 +479,7 @@ MHD_create_response_from_fd (size_t size,
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_fd64 (uint64_t size,
                                int fd)
 {

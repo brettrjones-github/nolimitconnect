@@ -183,7 +183,7 @@ static int on2avc_decode_band_scales(On2AVCContext *c, GetBitContext *gb)
     return 0;
 }
 
-static GOTV_INLINE float on2avc_scale(int v, float scale)
+static NLC_INLINE float on2avc_scale(int v, float scale)
 {
     return v * sqrtf(abs(v)) * scale;
 }
@@ -206,7 +206,7 @@ static int on2avc_decode_quads(On2AVCContext *c, GetBitContext *gb, float *dst,
     return 0;
 }
 
-static GOTV_INLINE int get_egolomb(GetBitContext *gb)
+static NLC_INLINE int get_egolomb(GetBitContext *gb)
 {
     int v = 4;
 

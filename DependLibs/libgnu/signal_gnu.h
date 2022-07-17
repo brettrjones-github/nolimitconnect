@@ -24,7 +24,7 @@
 #include <sys/types.h>
 #include <signal.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 
@@ -40,10 +40,10 @@ GOTV_BEGIN_CDECLARES
       static rettype (*func) parameters =               \
         reinterpret_cast<rettype(*)parameters>(::func); \
     }                                                   \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST2 (func, rettype, parameters, rettype2, parameters2);
@@ -65,10 +65,10 @@ GOTV_BEGIN_CDECLARES
         reinterpret_cast<rettype(*)parameters>(                               \
           (rettype2(*)parameters2)(::func));                                  \
     }                                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST2(func,rettype,parameters,rettype2,parameters2) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN (func);
@@ -92,11 +92,11 @@ GOTV_BEGIN_CDECLARES
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN_2(func,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN(func) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN1 (func, rettype, parameters_and_attributes);
@@ -120,11 +120,11 @@ GOTV_BEGIN_CDECLARES
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN1_2(func,rettype,parameters_and_attributes,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN1(func,rettype,parameters_and_attributes) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 
@@ -308,7 +308,7 @@ _GL_CXXALIAS_SYS (signal, _gl_function_taking_int_returning_void_t,
 
 # if !1 && GNULIB_defined_SIGPIPE
 /* Raise signal SIGPIPE.  */
-GOTV_EXTERN_C int _gl_raise_SIGPIPE (void);
+NLC_EXTERN_C int _gl_raise_SIGPIPE (void);
 # endif
 
 
@@ -380,7 +380,7 @@ extern int gnu_sigaction( int, const struct sigaction*, struct sigaction* );
 #endif // TARGET_OS_WINDOWS
 
 //extern int gnu_sigaction( int, const struct sigaction *sigAction );
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 //# define sa_sigaction sa_handler
 

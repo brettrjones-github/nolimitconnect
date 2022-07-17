@@ -28,7 +28,7 @@
 #include "cr-term.h"
 #include "cr-parsing-location.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -131,6 +131,6 @@ gboolean cr_declaration_unref (CRDeclaration *a_this) ;
 
 void cr_declaration_destroy (CRDeclaration *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_DECLARATION_H__*/

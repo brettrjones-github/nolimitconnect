@@ -33,7 +33,7 @@
 
 #define IDNA_SUCCESS 0
 
-static GOTV_INLINE
+static NLC_INLINE
 int idna_to_ascii_8z(const char * input, char ** output, int flags)
 {
 	*output = (char*)input;
@@ -42,7 +42,7 @@ int idna_to_ascii_8z(const char * input, char ** output, int flags)
 
 #define idn_free(x)
 
-static GOTV_INLINE
+static NLC_INLINE
 const char *idna_strerror(int ret)
 {
 	return "";

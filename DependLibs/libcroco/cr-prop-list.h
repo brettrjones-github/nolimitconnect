@@ -26,7 +26,7 @@
 #include "cr-declaration.h"
 #include "cr-string.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _CRPropList CRPropList ;
 typedef struct _CRPropListPriv CRPropListPriv ;
@@ -75,6 +75,6 @@ CRPropList * cr_prop_list_unlink (CRPropList *a_this,
 
 void cr_prop_list_destroy (CRPropList *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_PROP_LIST_H__*/

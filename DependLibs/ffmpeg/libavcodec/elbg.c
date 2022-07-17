@@ -59,7 +59,7 @@ typedef struct elbg_data {
     int *scratchbuf;
 } elbg_data;
 
-static GOTV_INLINE int distance_limited(int *a, int *b, int dim, int limit)
+static NLC_INLINE int distance_limited(int *a, int *b, int dim, int limit)
 {
     int i, dist=0;
     for (i=0; i<dim; i++) {
@@ -71,7 +71,7 @@ static GOTV_INLINE int distance_limited(int *a, int *b, int dim, int limit)
     return dist;
 }
 
-static GOTV_INLINE void vect_division(int *res, int *vect, int div, int dim)
+static NLC_INLINE void vect_division(int *res, int *vect, int div, int dim)
 {
     int i;
     if (div > 1)

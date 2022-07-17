@@ -76,6 +76,7 @@ public:
     int                         audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked = false );
 
     int                         calcualateMixerBytesToMs( int bytesAudio8000Hz );
+    int                         calcualateAudioOutDelayMs( void );
 
 protected:
     int                         getModuleFrameIndex( EAppModule appModule )         { return m_ModuleBufIndex[ appModule ]; }
@@ -103,5 +104,8 @@ protected:
 
     QElapsedTimer               m_ElapsedTimer;
     QAudioFormat                m_MixerFormat;
+
+    int64_t                     m_LastReadTimeStamp{ 0 };
+    int                         m_LastReadSamplesMs{ 0 };
  };
     

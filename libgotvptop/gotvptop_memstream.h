@@ -35,30 +35,30 @@ struct gotvptop_memstream
     size_t length;
 };
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_open(struct gotvptop_memstream *ms);
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_flush(struct gotvptop_memstream *ms) GOTV_USED;
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_close(struct gotvptop_memstream *ms) GOTV_USED;
 
-GOTV_API
+NLC_API
 size_t gotvptop_memstream_write(struct gotvptop_memstream *ms,
                            const void *ptr, size_t len);
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_putc(struct gotvptop_memstream *ms, int c);
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_puts(struct gotvptop_memstream *ms, const char *str);
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_vprintf(struct gotvptop_memstream *ms, const char *fmt,
                           va_list args);
 
-GOTV_API
+NLC_API
 int gotvptop_memstream_printf(struct gotvptop_memstream *s, const char *fmt,
                          ...) GOTV_FORMAT(2,3);
 

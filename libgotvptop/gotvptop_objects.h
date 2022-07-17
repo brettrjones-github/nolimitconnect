@@ -117,13 +117,13 @@ struct libgotvptop_int_t
 /*****************************************************************************
  * Prototypes
  *****************************************************************************/
-GOTV_API void *libgotvptop_object_create( gotvptop_object_t *, size_t ) GOTV_MALLOC GOTV_USED;
-GOTV_API gotvptop_object_t * libgotvptop_object_find_name( gotvptop_object_t *, const char * ) GOTV_USED GOTV_DEPRECATED;
-GOTV_API void * libgotvptop_object_hold( gotvptop_object_t * );
-GOTV_API void libgotvptop_object_release( gotvptop_object_t * );
-GOTV_API gotvptop_list_t * libgotvptop_list_children( gotvptop_object_t * ) GOTV_USED;
-GOTV_API void gotvptop_list_release( gotvptop_list_t * );
-GOTV_API char *libgotvptop_object_get_name( const gotvptop_object_t * ) GOTV_USED;
+NLC_API void *libgotvptop_object_create( gotvptop_object_t *, size_t ) GOTV_MALLOC GOTV_USED;
+NLC_API gotvptop_object_t * libgotvptop_object_find_name( gotvptop_object_t *, const char * ) GOTV_USED GOTV_DEPRECATED;
+NLC_API void * libgotvptop_object_hold( gotvptop_object_t * );
+NLC_API void libgotvptop_object_release( gotvptop_object_t * );
+NLC_API gotvptop_list_t * libgotvptop_list_children( gotvptop_object_t * ) GOTV_USED;
+NLC_API void gotvptop_list_release( gotvptop_list_t * );
+NLC_API char *libgotvptop_object_get_name( const gotvptop_object_t * ) GOTV_USED;
 #define gotvptop_object_get_name(o) libgotvptop_object_get_name(GOTV_OBJECT(o))
 
 #define gotvptop_object_create(a,b) libgotvptop_object_create( GOTV_OBJECT(a), b )
@@ -140,8 +140,8 @@ GOTV_API char *libgotvptop_object_get_name( const gotvptop_object_t * ) GOTV_USE
 #define gotvptop_list_children(a) \
     libgotvptop_list_children( GOTV_OBJECT(a) )
 
-GOTV_API GOTV_MALLOC void *gotvptop_obj_malloc(gotvptop_object_t *, size_t);
-GOTV_API GOTV_MALLOC void *gotvptop_obj_calloc(gotvptop_object_t *, size_t, size_t);
-GOTV_API void gotvptop_obj_free(gotvptop_object_t *, void *);
+NLC_API GOTV_MALLOC void *gotvptop_obj_malloc(gotvptop_object_t *, size_t);
+NLC_API GOTV_MALLOC void *gotvptop_obj_calloc(gotvptop_object_t *, size_t, size_t);
+NLC_API void gotvptop_obj_free(gotvptop_object_t *, void *);
 
 /** @} */

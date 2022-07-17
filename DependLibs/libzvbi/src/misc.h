@@ -272,7 +272,7 @@ extern void
 
 /* Helper functions. */
 
-GOTV_INLINE int  _vbi_to_ascii( int c)
+NLC_INLINE int  _vbi_to_ascii( int c)
 {
 	if (c < 0)
 		return '?';
@@ -352,7 +352,7 @@ _vbi_log_printf		(vbi_log_fn *		log_fn,
 
 #ifndef TIME_MIN
 #  define TIME_MIN (_vbi_time_min ())
-GOTV_INLINE time_t
+NLC_INLINE time_t
 _vbi_time_min			(void)
 {
 	const time_t t = (time_t) -1.25;
@@ -373,7 +373,7 @@ _vbi_time_min			(void)
 
 #ifndef TIME_MAX
 #  define TIME_MAX (_vbi_time_max ())
-GOTV_INLINE time_t
+NLC_INLINE time_t
 _vbi_time_max			(void)
 {
 	const time_t t = (time_t) -1.25;

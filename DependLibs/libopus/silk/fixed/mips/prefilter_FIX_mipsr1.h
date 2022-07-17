@@ -113,7 +113,7 @@ void silk_warped_LPC_analysis_filter_FIX(
 
 /* Prefilter for finding Quantizer input signal */
 #define OVERRIDE_silk_prefilt_FIX
-static GOTV_INLINE void silk_prefilt_FIX(
+static NLC_INLINE void silk_prefilt_FIX(
     silk_prefilter_state_FIX    *P,                         /* I/O  state                               */
     opus_int32                  st_res_Q12[],               /* I    short term residual signal          */
     opus_int32                  xw_Q3[],                    /* O    prefiltered signal                  */

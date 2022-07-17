@@ -96,14 +96,14 @@ amm-info@iis.fraunhofer.de
   #define FUNCTION_fixnormz_D
   #define FUNCTION_fixnorm_D
 
-  GOTV_INLINE int32_t fixnormz_D(int32_t value)
+  NLC_INLINE int32_t fixnormz_D(int32_t value)
   {
     int32_t result;
     asm("clz %w0, %w1 ": "=r"(result) : "r"(value) );
     return result;
   }
 
-  GOTV_INLINE int32_t fixnorm_D(int32_t value)
+  NLC_INLINE int32_t fixnorm_D(int32_t value)
   {
     int32_t result;
     if (value == 0) {

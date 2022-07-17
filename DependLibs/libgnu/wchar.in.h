@@ -447,7 +447,7 @@ _GL_CXXALIAS_RPL (wcwidth, int, (wchar_t));
 _GL_FUNCDECL_SYS (wcwidth, int, (wchar_t) _GL_ATTRIBUTE_PURE);
 #  elif defined __KLIBC__
 /* On OS/2 kLIBC, wcwidth is a macro that expands to the name of a
-   static GOTV_INLINE function.  The implementation of wcwidth in wcwidth.c
+   static NLC_INLINE function.  The implementation of wcwidth in wcwidth.c
    causes a "conflicting types" error. */
 #   undef wcwidth
 #  endif

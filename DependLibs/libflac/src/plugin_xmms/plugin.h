@@ -23,7 +23,7 @@
 #  include <libflac/config_libflac.h>
 
 #if defined(__GNUC_STDC_INLINE__)
-#  define G_INLINE_FUNC extern GOTV_INLINE __attribute__((gnu_inline))
+#  define G_INLINE_FUNC extern NLC_INLINE __attribute__((gnu_inline))
 #endif
 
 void set_track_info(const char* title, int length_in_msec);

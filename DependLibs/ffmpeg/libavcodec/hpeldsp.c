@@ -37,7 +37,7 @@
 #include "pel_template.c"
 
 #define PIXOP2(OPNAME, OP)                                              \
-static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_l2_8(uint8_t *dst,         \
+static NLC_INLINE void OPNAME ## _no_rnd_pixels8_l2_8(uint8_t *dst,         \
                                                   const uint8_t *src1,  \
                                                   const uint8_t *src2,  \
                                                   int dst_stride,       \
@@ -60,7 +60,7 @@ static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_l2_8(uint8_t *dst,         \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_x2_8_c(uint8_t *block,     \
+static NLC_INLINE void OPNAME ## _no_rnd_pixels8_x2_8_c(uint8_t *block,     \
                                                     const uint8_t *pixels, \
                                                     ptrdiff_t line_size, \
                                                     int h)              \
@@ -69,7 +69,7 @@ static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_x2_8_c(uint8_t *block,     \
                                    line_size, line_size, line_size, h); \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels8_x2_8_c(uint8_t *block,            \
+static NLC_INLINE void OPNAME ## _pixels8_x2_8_c(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -78,7 +78,7 @@ static GOTV_INLINE void OPNAME ## _pixels8_x2_8_c(uint8_t *block,            \
                             line_size, line_size, line_size, h);        \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_y2_8_c(uint8_t *block,     \
+static NLC_INLINE void OPNAME ## _no_rnd_pixels8_y2_8_c(uint8_t *block,     \
                                                     const uint8_t *pixels, \
                                                     ptrdiff_t line_size, \
                                                     int h)              \
@@ -87,7 +87,7 @@ static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_y2_8_c(uint8_t *block,     \
                                    line_size, line_size, line_size, h); \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels8_y2_8_c(uint8_t *block,            \
+static NLC_INLINE void OPNAME ## _pixels8_y2_8_c(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -96,7 +96,7 @@ static GOTV_INLINE void OPNAME ## _pixels8_y2_8_c(uint8_t *block,            \
                             line_size, line_size, line_size, h);        \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels4_x2_8_c(uint8_t *block,            \
+static NLC_INLINE void OPNAME ## _pixels4_x2_8_c(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -105,7 +105,7 @@ static GOTV_INLINE void OPNAME ## _pixels4_x2_8_c(uint8_t *block,            \
                             line_size, line_size, line_size, h);        \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels4_y2_8_c(uint8_t *block,            \
+static NLC_INLINE void OPNAME ## _pixels4_y2_8_c(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -114,7 +114,7 @@ static GOTV_INLINE void OPNAME ## _pixels4_y2_8_c(uint8_t *block,            \
                             line_size, line_size, line_size, h);        \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels2_x2_8_c(uint8_t *block,            \
+static NLC_INLINE void OPNAME ## _pixels2_x2_8_c(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -123,7 +123,7 @@ static GOTV_INLINE void OPNAME ## _pixels2_x2_8_c(uint8_t *block,            \
                             line_size, line_size, line_size, h);        \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels2_y2_8_c(uint8_t *block,            \
+static NLC_INLINE void OPNAME ## _pixels2_y2_8_c(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -132,7 +132,7 @@ static GOTV_INLINE void OPNAME ## _pixels2_y2_8_c(uint8_t *block,            \
                             line_size, line_size, line_size, h);        \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels2_xy2_8_c(uint8_t *block,           \
+static NLC_INLINE void OPNAME ## _pixels2_xy2_8_c(uint8_t *block,           \
                                               const uint8_t *pixels,    \
                                               ptrdiff_t line_size,      \
                                               int h)                    \
@@ -168,7 +168,7 @@ static GOTV_INLINE void OPNAME ## _pixels2_xy2_8_c(uint8_t *block,           \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels4_xy2_8_c(uint8_t *block,           \
+static NLC_INLINE void OPNAME ## _pixels4_xy2_8_c(uint8_t *block,           \
                                               const uint8_t *pixels,    \
                                               ptrdiff_t line_size,      \
                                               int h)                    \
@@ -210,7 +210,7 @@ static GOTV_INLINE void OPNAME ## _pixels4_xy2_8_c(uint8_t *block,           \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _pixels8_xy2_8_c(uint8_t *block,           \
+static NLC_INLINE void OPNAME ## _pixels8_xy2_8_c(uint8_t *block,           \
                                               const uint8_t *pixels,    \
                                               ptrdiff_t line_size,      \
                                               int h)                    \
@@ -258,7 +258,7 @@ static GOTV_INLINE void OPNAME ## _pixels8_xy2_8_c(uint8_t *block,           \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void OPNAME ## _no_rnd_pixels8_xy2_8_c(uint8_t *block,    \
+static NLC_INLINE void OPNAME ## _no_rnd_pixels8_xy2_8_c(uint8_t *block,    \
                                                      const uint8_t *pixels, \
                                                      ptrdiff_t line_size, \
                                                      int h)             \

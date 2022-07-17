@@ -212,10 +212,10 @@ extern _OBSTACK_SIZE_T _obstack_memory_used (struct obstack *)
    more memory.  This can be set to a user defined function which
    should either abort gracefully or use longjump - but shouldn't
    return.  The default action is to print a message and abort.  */
-extern GOTV_DLL_VARIABLE void (*obstack_alloc_failed_handler) (void);
+extern NLC_DLL_VARIABLE void (*obstack_alloc_failed_handler) (void);
 
 /* Exit value used when 'print_and_abort' is used.  */
-extern GOTV_DLL_VARIABLE int obstack_exit_failure;
+extern NLC_DLL_VARIABLE int obstack_exit_failure;
 
 /* Pointer to beginning of object being allocated or to be allocated next.
    Note that this might not be the final address of the object

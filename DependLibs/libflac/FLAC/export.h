@@ -58,7 +58,7 @@
 
 #include <libfaac/config_libfaac.h>
 
-#define FLAC_API	GOTV_API
+#define FLAC_API	NLC_API
 
 
 /** These #defines will mirror the libtool-based library version number, see
@@ -68,12 +68,12 @@
 #define FLAC_API_VERSION_REVISION 0 /**< see above */
 #define FLAC_API_VERSION_AGE 3 /**< see above */
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /** \c 1 if the library has been compiled with support for Ogg FLAC, else \c 0. */
 extern FLAC_API int FLAC_API_SUPPORTS_OGG_FLAC;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 /* \} */

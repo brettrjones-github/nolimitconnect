@@ -137,36 +137,36 @@ struct text_segment_t {
 /**
  * Create a default text style
  */
-GOTV_API text_style_t * text_style_New( void );
+NLC_API text_style_t * text_style_New( void );
 
 /**
  * Create a text style
  *
  * Set feature flags as argument if you want to set style defaults
  */
-GOTV_API text_style_t * text_style_Create( int );
+NLC_API text_style_t * text_style_Create( int );
 
 /**
  * Copy a text style into another
  */
-GOTV_API text_style_t * text_style_Copy( text_style_t *, const text_style_t * );
+NLC_API text_style_t * text_style_Copy( text_style_t *, const text_style_t * );
 
 /**
  * Duplicate a text style
  */
-GOTV_API text_style_t * text_style_Duplicate( const text_style_t * );
+NLC_API text_style_t * text_style_Duplicate( const text_style_t * );
 
 /**
  * Merge two styles using non default values
  *
  * Set b_override to true if you also want to overwrite non-defaults
  */
-GOTV_API void text_style_Merge( text_style_t *, const text_style_t *, bool b_override );
+NLC_API void text_style_Merge( text_style_t *, const text_style_t *, bool b_override );
 
 /**
  * Delete a text style created by text_style_New or text_style_Duplicate
  */
-GOTV_API void text_style_Delete( text_style_t * );
+NLC_API void text_style_Delete( text_style_t * );
 
 /**
  * This function will create a new text segment.
@@ -176,7 +176,7 @@ GOTV_API void text_style_Delete( text_style_t * );
  *
  * This duplicates the string passed as argument
  */
-GOTV_API text_segment_t *text_segment_New( const char * );
+NLC_API text_segment_t *text_segment_New( const char * );
 
 /**
  * This function will create a new text segment and duplicates the style passed as argument
@@ -186,14 +186,14 @@ GOTV_API text_segment_t *text_segment_New( const char * );
  *
  * This doesn't initialize the text.
  */
-GOTV_API text_segment_t *text_segment_NewInheritStyle( const text_style_t* p_style );
+NLC_API text_segment_t *text_segment_NewInheritStyle( const text_style_t* p_style );
 
 /**
  * Delete a text segment and its content.
  *
  * This assumes the segment is not part of a chain
  */
-GOTV_API void text_segment_Delete( text_segment_t * );
+NLC_API void text_segment_Delete( text_segment_t * );
 
 /**
  * This function will destroy a list of text segments allocated
@@ -201,14 +201,14 @@ GOTV_API void text_segment_Delete( text_segment_t * );
  *
  * You may pass it NULL.
  */
-GOTV_API void text_segment_ChainDelete( text_segment_t * );
+NLC_API void text_segment_ChainDelete( text_segment_t * );
 
 /**
  * This function will copy a text_segment and its chain into a new one
  *
  * You may give it NULL, but it will return NULL.
  */
-GOTV_API text_segment_t * text_segment_Copy( text_segment_t * );
+NLC_API text_segment_t * text_segment_Copy( text_segment_t * );
 
 static const struct {
     const char *psz_name;
@@ -394,7 +394,7 @@ static const struct {
  * @param ok If non-null, true will be stored in this pointer to signal
  *           a successful conversion
  */
-GOTV_API unsigned int gotvptop_html_color( const char *psz_value, bool* ok );
+NLC_API unsigned int gotvptop_html_color( const char *psz_value, bool* ok );
 
 #ifdef __cplusplus
 }

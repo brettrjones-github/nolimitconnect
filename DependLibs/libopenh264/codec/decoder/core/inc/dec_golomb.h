@@ -74,7 +74,7 @@ namespace WelsDec {
   NEED_BITS(iCurBits, pBufPtr, iLeftBits, iAllowedBytes, iReadBytes); \
 }
 
-static GOTV_INLINE int32_t BsGetBits (PBitStringAux pBs, int32_t iNumBits, uint32_t* pCode) {
+static NLC_INLINE int32_t BsGetBits (PBitStringAux pBs, int32_t iNumBits, uint32_t* pCode) {
   intX_t iRc = UBITS (pBs->uiCurBits, iNumBits);
   intX_t iAllowedBytes = pBs->pEndBuf - pBs->pStartBuf; //actual stream bytes
   intX_t iReadBytes = pBs->pCurBuf - pBs->pStartBuf;
@@ -100,7 +100,7 @@ static const uint32_t g_kuiPrefix8BitsTable[16] = {
 };
 
 
-static GOTV_INLINE uint32_t GetPrefixBits (uint32_t uiValue) {
+static NLC_INLINE uint32_t GetPrefixBits (uint32_t uiValue) {
   uint32_t iNumBit = 0;
 
   if (uiValue & 0xffff0000) {
@@ -124,11 +124,11 @@ static GOTV_INLINE uint32_t GetPrefixBits (uint32_t uiValue) {
 /*
  *  Read one bit from bit stream followed
  */
-static GOTV_INLINE uint32_t BsGetOneBit (PBitStringAux pBs, uint32_t* pCode) {
+static NLC_INLINE uint32_t BsGetOneBit (PBitStringAux pBs, uint32_t* pCode) {
   return (BsGetBits (pBs, 1, pCode));
 }
 
-static GOTV_INLINE int32_t GetLeadingZeroBits (uint32_t iCurBits) { //<=32 bits
+static NLC_INLINE int32_t GetLeadingZeroBits (uint32_t iCurBits) { //<=32 bits
   uint32_t  uiValue;
 
   uiValue = UBITS (iCurBits, 8); //ShowBits( bs, 8 );
@@ -154,7 +154,7 @@ static GOTV_INLINE int32_t GetLeadingZeroBits (uint32_t iCurBits) { //<=32 bits
   return -1;
 }
 
-static GOTV_INLINE uint32_t BsGetUe (PBitStringAux pBs, uint32_t* pCode) {
+static NLC_INLINE uint32_t BsGetUe (PBitStringAux pBs, uint32_t* pCode) {
   uint32_t iValue = 0;
   int32_t  iLeadingZeroBits = GetLeadingZeroBits (pBs->uiCurBits);
   intX_t iAllowedBytes, iReadBytes;
@@ -187,7 +187,7 @@ static GOTV_INLINE uint32_t BsGetUe (PBitStringAux pBs, uint32_t* pCode) {
 /*
  *  Read signed exp golomb codes
  */
-static GOTV_INLINE int32_t BsGetSe (PBitStringAux pBs, int32_t* pCode) {
+static NLC_INLINE int32_t BsGetSe (PBitStringAux pBs, int32_t* pCode) {
   uint32_t uiCodeNum;
 
   WELS_READ_VERIFY (BsGetUe (pBs, &uiCodeNum));
@@ -203,7 +203,7 @@ static GOTV_INLINE int32_t BsGetSe (PBitStringAux pBs, int32_t* pCode) {
 /*
  * Get unsigned truncated exp golomb code.
  */
-static GOTV_INLINE int32_t BsGetTe0 (PBitStringAux pBs, int32_t iRange, uint32_t* pCode) {
+static NLC_INLINE int32_t BsGetTe0 (PBitStringAux pBs, int32_t iRange, uint32_t* pCode) {
   if (iRange == 1) {
     *pCode = 0;
   } else if (iRange == 2) {
@@ -218,7 +218,7 @@ static GOTV_INLINE int32_t BsGetTe0 (PBitStringAux pBs, int32_t iRange, uint32_t
 /*
  *  Get number of trailing bits
  */
-static GOTV_INLINE int32_t BsGetTrailingBits (uint8_t* pBuf) {
+static NLC_INLINE int32_t BsGetTrailingBits (uint8_t* pBuf) {
 // TODO
   uint32_t uiValue = *pBuf;
   int32_t iRetNum = 0;
@@ -236,7 +236,7 @@ static GOTV_INLINE int32_t BsGetTrailingBits (uint8_t* pBuf) {
 /*
  *      Check whether there is more rbsp data for processing
  */
-static GOTV_INLINE bool CheckMoreRBSPData(PBitStringAux pBsAux) {
+static NLC_INLINE bool CheckMoreRBSPData(PBitStringAux pBsAux) {
   if ((pBsAux->iBits - ((pBsAux->pCurBuf - pBsAux->pStartBuf - 2) << 3) - pBsAux->iLeftBits) > 1) {
     return true;
   } else {

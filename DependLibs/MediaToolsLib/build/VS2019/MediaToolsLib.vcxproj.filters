@@ -13,12 +13,6 @@
     <ClInclude Include="..\..\..\..\dlfcn.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\langinfo.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>

@@ -160,7 +160,7 @@ VideoBootStrap BWINDOW_bootstrap = {
 	BE_Available, BE_CreateDevice
 };
 
-static GOTV_INLINE int ColorSpaceToBitsPerPixel(uint32 colorspace)
+static NLC_INLINE int ColorSpaceToBitsPerPixel(uint32 colorspace)
 {
 	int bitsperpixel;
 

@@ -134,18 +134,18 @@ static inline int gotvptop_sd_control( services_discovery_t *p_sd, int i_control
 
 /* Get the services discovery modules names to use in Create(), in a null
  * terminated string array. Array and string must be freed after use. */
-GOTV_API char ** libgotvptop_sd_GetNames( gotvptop_object_t *, char ***, int ** ) GOTV_USED;
+NLC_API char ** libgotvptop_sd_GetNames( gotvptop_object_t *, char ***, int ** ) GOTV_USED;
 #define gotvptop_sd_GetNames(obj, pln, pcat ) \
         libgotvptop_sd_GetNames(GOTV_OBJECT(obj), pln, pcat)
 
 /**
  * Creates a services discoverer.
  */
-GOTV_API services_discovery_t *gotvptop_sd_Create(gotvptop_object_t *parent,
+NLC_API services_discovery_t *gotvptop_sd_Create(gotvptop_object_t *parent,
     const char *chain, const struct services_discovery_owner_t *owner)
 GOTV_USED;
 
-GOTV_API void gotvptop_sd_Destroy( services_discovery_t * );
+NLC_API void gotvptop_sd_Destroy( services_discovery_t * );
 
 /**
  * Added top-level service callback.
@@ -212,7 +212,7 @@ static inline void services_discovery_RemoveItem(services_discovery_t *sd,
 
 /* SD probing */
 
-GOTV_API int gotvptop_sd_probe_Add(gotvptop_probe_t *, const char *, const char *, int category);
+NLC_API int gotvptop_sd_probe_Add(gotvptop_probe_t *, const char *, const char *, int category);
 
 #define GOTV_SD_PROBE_SUBMODULE \
     add_submodule() \

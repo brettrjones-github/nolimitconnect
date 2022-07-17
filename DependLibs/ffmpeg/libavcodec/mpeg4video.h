@@ -199,7 +199,7 @@ extern uint8_t ff_mpeg4_static_rl_table_store[3][2][2 * MAX_RUN + MAX_LEVEL + 3]
  * @param n block index (0-3 are luma, 4-5 are chroma)
  * @param dir_ptr pointer to an integer where the prediction direction will be stored
  */
-static GOTV_INLINE int ff_mpeg4_pred_dc(MpegEncContext *s, int n, int level,
+static NLC_INLINE int ff_mpeg4_pred_dc(MpegEncContext *s, int n, int level,
                                    int *dir_ptr, int encoding)
 {
     int a, b, c, wrap, pred, scale, ret;

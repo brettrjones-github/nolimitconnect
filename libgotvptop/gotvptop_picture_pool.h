@@ -66,7 +66,7 @@ typedef struct {
  * @return A pointer to the new pool on success, or NULL on error
  * (pictures are <b>not</b> released on error).
  */
-GOTV_API picture_pool_t * picture_pool_NewExtended( const picture_pool_configuration_t * ) GOTV_USED;
+NLC_API picture_pool_t * picture_pool_NewExtended( const picture_pool_configuration_t * ) GOTV_USED;
 
 /**
  * Creates a picture pool with pictures in a given array.
@@ -79,7 +79,7 @@ GOTV_API picture_pool_t * picture_pool_NewExtended( const picture_pool_configura
  * @return a pointer to the new pool on success, or NULL on error
  * (pictures are <b>not</b> released on error)
  */
-GOTV_API picture_pool_t * picture_pool_New(unsigned count,
+NLC_API picture_pool_t * picture_pool_New(unsigned count,
                                           picture_t *const *tab) GOTV_USED;
 
 /**
@@ -92,7 +92,7 @@ GOTV_API picture_pool_t * picture_pool_New(unsigned count,
  *
  * @return a pointer to the new pool on success, NULL on error
  */
-GOTV_API picture_pool_t * picture_pool_NewFromFormat(const video_format_t *fmt,
+NLC_API picture_pool_t * picture_pool_NewFromFormat(const video_format_t *fmt,
                                                     unsigned count) GOTV_USED;
 
 /**
@@ -107,7 +107,7 @@ GOTV_API picture_pool_t * picture_pool_NewFromFormat(const video_format_t *fmt,
  * pictures will remain valid until the all pending references are dropped by
  * picture_Release().
  */
-GOTV_API void picture_pool_Release( picture_pool_t * );
+NLC_API void picture_pool_Release( picture_pool_t * );
 
 /**
  * Obtains a picture from a pool if any is immediately available.
@@ -118,7 +118,7 @@ GOTV_API void picture_pool_Release( picture_pool_t * );
  *
  * @note This function is thread-safe.
  */
-GOTV_API picture_t * picture_pool_Get( picture_pool_t * ) GOTV_USED;
+NLC_API picture_t * picture_pool_Get( picture_pool_t * ) GOTV_USED;
 
 /**
  * Obtains a picture from a pool.
@@ -129,7 +129,7 @@ GOTV_API picture_t * picture_pool_Get( picture_pool_t * ) GOTV_USED;
  *
  * @note This function is thread-safe.
  */
-GOTV_API picture_t *picture_pool_Wait(picture_pool_t *) GOTV_USED;
+NLC_API picture_t *picture_pool_Wait(picture_pool_t *) GOTV_USED;
 
 /**
  * Enumerates all pictures in a pool, both free and allocated.
@@ -142,7 +142,7 @@ GOTV_API picture_t *picture_pool_Wait(picture_pool_t *) GOTV_USED;
  * typically picture_t.p_sys.
  * Provided those rules are respected, the function is thread-safe.
  */
-GOTV_API void picture_pool_Enum( picture_pool_t *,
+NLC_API void picture_pool_Enum( picture_pool_t *,
                                 void (*cb)(void *, picture_t *), void *data );
 
 /**
@@ -175,14 +175,14 @@ bool picture_pool_OwnsPic( picture_pool_t *, picture_t *);
  * @note This function is thread-safe (but it might return NULL if other
  * threads have already allocated too many pictures).
  */
-GOTV_API picture_pool_t * picture_pool_Reserve(picture_pool_t *, unsigned count)
+NLC_API picture_pool_t * picture_pool_Reserve(picture_pool_t *, unsigned count)
 GOTV_USED;
 
 /**
  * @return the total number of pictures in the given pool
  * @note This function is thread-safe.
  */
-GOTV_API unsigned picture_pool_GetSize(const picture_pool_t *);
+NLC_API unsigned picture_pool_GetSize(const picture_pool_t *);
 
 
 #endif /* GOTV_PICTURE_POOL_H */

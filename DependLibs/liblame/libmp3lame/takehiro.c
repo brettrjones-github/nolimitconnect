@@ -533,7 +533,7 @@ count_bit_noESC_from2(const int *ix, const int *end, int max, unsigned int *s)
 }
 
 
-GOTV_INLINE static int
+NLC_INLINE static int
 count_bit_noESC_from3(const int *ix, const int *end, int max, unsigned int * s)
 {
     int t1 = huf_tbl_noESC[max - 1];
@@ -804,7 +804,7 @@ count_bits(lame_internal_flags const *const gfc,
  **********************************************************************/
 
 
-GOTV_INLINE static void
+NLC_INLINE static void
 recalc_divide_init(const lame_internal_flags * const gfc,
                    gr_info const *cod_info,
                    int const *const ix, int r01_bits[], int r01_div[], int r0_tbl[], int r1_tbl[])
@@ -842,7 +842,7 @@ recalc_divide_init(const lame_internal_flags * const gfc,
     }
 }
 
-GOTV_INLINE static void
+NLC_INLINE static void
 recalc_divide_sub(const lame_internal_flags * const gfc,
                   const gr_info * cod_info2,
                   gr_info * const gi,

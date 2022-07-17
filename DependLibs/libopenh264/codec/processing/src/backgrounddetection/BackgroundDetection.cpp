@@ -106,7 +106,7 @@ EResult CBackgroundDetection::Set (int32_t iType, void* pParam) {
   return RET_SUCCESS;
 }
 
-GOTV_INLINE SBackgroundOU* CBackgroundDetection::AllocateOUArrayMemory (int32_t iWidth, int32_t iHeight) {
+NLC_INLINE SBackgroundOU* CBackgroundDetection::AllocateOUArrayMemory (int32_t iWidth, int32_t iHeight) {
   int32_t       iMaxOUWidth     = (BGD_OU_SIZE - 1 + iWidth) >> LOG2_BGD_OU_SIZE;
   int32_t       iMaxOUHeight    = (BGD_OU_SIZE - 1 + iHeight) >> LOG2_BGD_OU_SIZE;
   return (SBackgroundOU*)WelsMalloc (iMaxOUWidth * iMaxOUHeight * sizeof (SBackgroundOU));
@@ -186,7 +186,7 @@ void CBackgroundDetection::ForegroundBackgroundDivision (vBGDParam* pBgdParam) {
     }
   }
 }
-GOTV_INLINE int32_t CBackgroundDetection::CalculateAsdChromaEdge (uint8_t* pOriRef, uint8_t* pOriCur, int32_t iStride) {
+NLC_INLINE int32_t CBackgroundDetection::CalculateAsdChromaEdge (uint8_t* pOriRef, uint8_t* pOriCur, int32_t iStride) {
   int32_t ASD = 0;
   int32_t idx;
   for (idx = 0; idx < BGD_OU_SIZE_UV; idx++) {
@@ -197,7 +197,7 @@ GOTV_INLINE int32_t CBackgroundDetection::CalculateAsdChromaEdge (uint8_t* pOriR
   return WELS_ABS (ASD);
 }
 
-GOTV_INLINE bool CBackgroundDetection::ForegroundDilation23Luma (SBackgroundOU* pBackgroundOU,
+NLC_INLINE bool CBackgroundDetection::ForegroundDilation23Luma (SBackgroundOU* pBackgroundOU,
     SBackgroundOU* pOUNeighbours[]) {
   SBackgroundOU* pOU_L = pOUNeighbours[0];
   SBackgroundOU* pOU_R = pOUNeighbours[1];
@@ -230,7 +230,7 @@ GOTV_INLINE bool CBackgroundDetection::ForegroundDilation23Luma (SBackgroundOU* 
   return 0;
 }
 
-GOTV_INLINE bool CBackgroundDetection::ForegroundDilation23Chroma (int8_t iNeighbourForegroundFlags,
+NLC_INLINE bool CBackgroundDetection::ForegroundDilation23Chroma (int8_t iNeighbourForegroundFlags,
     int32_t iStartSamplePos, int32_t iPicStrideUV, vBGDParam* pBgdParam) {
   static const int8_t kaOUPos[4]        = {OU_LEFT, OU_RIGHT, OU_TOP, OU_BOTTOM};
   int32_t       aEdgeOffset[4]          = {0, BGD_OU_SIZE_UV - 1, 0, iPicStrideUV* (BGD_OU_SIZE_UV - 1)};
@@ -260,7 +260,7 @@ GOTV_INLINE bool CBackgroundDetection::ForegroundDilation23Chroma (int8_t iNeigh
   return 0;
 }
 
-GOTV_INLINE void CBackgroundDetection::ForegroundDilation (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[],
+NLC_INLINE void CBackgroundDetection::ForegroundDilation (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[],
     vBGDParam* pBgdParam, int32_t iChromaSampleStartPos) {
   int32_t iPicStrideUV = pBgdParam->iStride[1];
   int32_t iSumNeighBackgroundFlags = pOUNeighbours[0]->iBackgroundFlag + pOUNeighbours[1]->iBackgroundFlag +
@@ -289,7 +289,7 @@ GOTV_INLINE void CBackgroundDetection::ForegroundDilation (SBackgroundOU* pBackg
     }
   }
 }
-GOTV_INLINE void CBackgroundDetection::BackgroundErosion (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[]) {
+NLC_INLINE void CBackgroundDetection::BackgroundErosion (SBackgroundOU* pBackgroundOU, SBackgroundOU* pOUNeighbours[]) {
   if (pBackgroundOU->iMaxDiffSubSd <= (BGD_OU_SIZE * Q_FACTOR)) { //BGD_OU_SIZE*BGD_OU_SIZE>>2
     int32_t iSumNeighBackgroundFlags = pOUNeighbours[0]->iBackgroundFlag + pOUNeighbours[1]->iBackgroundFlag +
                                        pOUNeighbours[2]->iBackgroundFlag + pOUNeighbours[3]->iBackgroundFlag;
@@ -310,12 +310,12 @@ GOTV_INLINE void CBackgroundDetection::BackgroundErosion (SBackgroundOU* pBackgr
   }
 }
 
-GOTV_INLINE void CBackgroundDetection::SetBackgroundMbFlag (int8_t* pBackgroundMbFlag, int32_t iPicWidthInMb,
+NLC_INLINE void CBackgroundDetection::SetBackgroundMbFlag (int8_t* pBackgroundMbFlag, int32_t iPicWidthInMb,
     int32_t iBackgroundMbFlag) {
   *pBackgroundMbFlag = iBackgroundMbFlag;
 }
 
-GOTV_INLINE void CBackgroundDetection::UpperOUForegroundCheck (SBackgroundOU* pCurOU, int8_t* pBackgroundMbFlag,
+NLC_INLINE void CBackgroundDetection::UpperOUForegroundCheck (SBackgroundOU* pCurOU, int8_t* pBackgroundMbFlag,
     int32_t iPicWidthInOU, int32_t iPicWidthInMb) {
   if (pCurOU->iSAD > BGD_OU_SIZE * Q_FACTOR) {
     SBackgroundOU* pOU_L = pCurOU - 1;

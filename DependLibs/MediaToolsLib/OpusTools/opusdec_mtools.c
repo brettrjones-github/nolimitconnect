@@ -126,7 +126,7 @@ struct shapestate {
 };
 
 static unsigned int rngseed = 22222;
-static GOTV_INLINE unsigned int fast_rand(void) {
+static NLC_INLINE unsigned int fast_rand(void) {
   rngseed = (rngseed * 96314165) + 907633515;
   return rngseed;
 }
@@ -165,7 +165,7 @@ static void quit(int _x) {
    only two thousandths of a dB more, so this just uses the worst case.
    The attenuation is probably also helpful to prevent clipping in the DAC
    reconstruction filters or downstream resampling in any case.*/
-static GOTV_INLINE void shape_dither_toshort(shapestate *_ss, short *_o, float *_i, int _n, int _CC)
+static NLC_INLINE void shape_dither_toshort(shapestate *_ss, short *_o, float *_i, int _n, int _CC)
 {
   const float gains[3]={32768.f-15.f,32768.f-15.f,32768.f-3.f};
   const float fcoef[3][8] =

@@ -79,7 +79,7 @@ static av_always_inline double copysign(double x, double y)
 #endif /* HAVE_COSF */
 
 #if !HAVE_ERF
-static GOTV_INLINE double ff_eval_poly(const double *coeff, int size, double x) {
+static NLC_INLINE double ff_eval_poly(const double *coeff, int size, double x) {
     double sum = coeff[size-1];
     int i;
     for (i = size-2; i >= 0; --i) {
@@ -118,7 +118,7 @@ FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
  */
-static GOTV_INLINE double erf(double z)
+static NLC_INLINE double erf(double z)
 {
 #ifndef FF_ARRAY_ELEMS
 #define FF_ARRAY_ELEMS(a) (sizeof(a) / sizeof((a)[0]))
@@ -363,7 +363,7 @@ static av_always_inline av_const int avpriv_isfinite(double x)
 #endif /* HAVE_ISFINITE */
 
 #if !HAVE_HYPOT
-static GOTV_INLINE av_const double hypot(double x, double y)
+static NLC_INLINE av_const double hypot(double x, double y)
 {
     double ret, temp;
     x = fabs(x);
@@ -420,7 +420,7 @@ static GOTV_INLINE av_const double hypot(double x, double y)
 #endif /* HAVE_SINF */
 
 #if !HAVE_RINT
-static GOTV_INLINE double rint(double x)
+static NLC_INLINE double rint(double x)
 {
     return x >= 0 ? floor(x + 0.5) : ceil(x - 0.5);
 }

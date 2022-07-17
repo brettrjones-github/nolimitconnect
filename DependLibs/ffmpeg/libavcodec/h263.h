@@ -96,7 +96,7 @@ int ff_h263_resync(MpegEncContext *s);
 void ff_h263_encode_motion(PutBitContext *pb, int val, int f_code);
 
 
-static GOTV_INLINE int h263_get_motion_length(int val, int f_code){
+static NLC_INLINE int h263_get_motion_length(int val, int f_code){
     int l, bit_size, code;
 
     if (val == 0) {
@@ -113,7 +113,7 @@ static GOTV_INLINE int h263_get_motion_length(int val, int f_code){
     }
 }
 
-static GOTV_INLINE void ff_h263_encode_motion_vector(MpegEncContext * s, int x, int y, int f_code){
+static NLC_INLINE void ff_h263_encode_motion_vector(MpegEncContext * s, int x, int y, int f_code){
     if (s->avctx->flags2 & AV_CODEC_FLAG2_NO_OUTPUT) {
         skip_put_bits(&s->pb,
             h263_get_motion_length(x, f_code)
@@ -124,7 +124,7 @@ static GOTV_INLINE void ff_h263_encode_motion_vector(MpegEncContext * s, int x, 
     }
 }
 
-static GOTV_INLINE int get_p_cbp(MpegEncContext * s,
+static NLC_INLINE int get_p_cbp(MpegEncContext * s,
                       int16_t block[6][64],
                       int motion_x, int motion_y){
     int cbp, i;

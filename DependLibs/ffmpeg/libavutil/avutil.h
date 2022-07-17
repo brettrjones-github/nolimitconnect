@@ -306,7 +306,7 @@ char av_get_picture_type_char(enum AVPictureType pict_type);
 /**
  * Return x default pointer in case p is NULL.
  */
-static GOTV_INLINE void *av_x_if_null(const void *p, const void *x)
+static NLC_INLINE void *av_x_if_null(const void *p, const void *x)
 {
     return (void *)(intptr_t)(p ? p : x);
 }

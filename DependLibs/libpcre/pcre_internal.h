@@ -52,7 +52,7 @@ functions whose names all begin with "_pcre_". */
 #endif
 
 /* Use a macro for debugging printing, 'cause that eliminates the use of #ifdef
-GOTV_INLINE, and there are *still* stupid compilers about that don't like indented
+NLC_INLINE, and there are *still* stupid compilers about that don't like indented
 pre-processor statements, or at least there were when I first wrote this. After
 all, it had only been about 10 years then...
 

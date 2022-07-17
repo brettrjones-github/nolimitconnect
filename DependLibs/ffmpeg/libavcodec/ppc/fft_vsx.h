@@ -46,7 +46,7 @@ void ff_fft_calc_vsx(FFTContext *s, FFTComplex *z);
 #define byte_12complex (12*sizeof(FFTComplex))
 #define byte_14complex (14*sizeof(FFTComplex))
 
-GOTV_INLINE static void pass_vsx_interleave(FFTComplex *z, const FFTSample *wre, unsigned int n)
+NLC_INLINE static void pass_vsx_interleave(FFTComplex *z, const FFTSample *wre, unsigned int n)
 {
     int o1 = n<<1;
     int o2 = n<<2;
@@ -244,7 +244,7 @@ GOTV_INLINE static void pass_vsx_interleave(FFTComplex *z, const FFTSample *wre,
     } while (n-=2);
 }
 
-GOTV_INLINE static void fft2_vsx_interleave(FFTComplex *z)
+NLC_INLINE static void fft2_vsx_interleave(FFTComplex *z)
 {
     FFTSample r1, i1;
 
@@ -257,7 +257,7 @@ GOTV_INLINE static void fft2_vsx_interleave(FFTComplex *z)
     z[1].im = i1;
  }
 
-GOTV_INLINE static void fft4_vsx_interleave(FFTComplex *z)
+NLC_INLINE static void fft4_vsx_interleave(FFTComplex *z)
 {
     vec_f a, b, c, d;
     float* out=  (float*)z;
@@ -278,7 +278,7 @@ GOTV_INLINE static void fft4_vsx_interleave(FFTComplex *z)
     vec_st(b, byte_2complex, &(out[0]));
 }
 
-GOTV_INLINE static void fft8_vsx_interleave(FFTComplex *z)
+NLC_INLINE static void fft8_vsx_interleave(FFTComplex *z)
 {
     vec_f vz0, vz1, vz2, vz3;
     vec_f x0, x1, x2, x3;
@@ -347,7 +347,7 @@ GOTV_INLINE static void fft8_vsx_interleave(FFTComplex *z)
     vec_st(x34, byte_6complex, &(out[0]));
 }
 
-GOTV_INLINE static void fft16_vsx_interleave(FFTComplex *z)
+NLC_INLINE static void fft16_vsx_interleave(FFTComplex *z)
 {
     float* out=  (float*)z;
     vec_f vc0 = {sqrthalf, sqrthalf, sqrthalf, sqrthalf};
@@ -499,7 +499,7 @@ GOTV_INLINE static void fft16_vsx_interleave(FFTComplex *z)
     vec_st(x86, byte_14complex, &(out[0]));
 }
 
-GOTV_INLINE static void fft4_vsx(FFTComplex *z)
+NLC_INLINE static void fft4_vsx(FFTComplex *z)
 {
     vec_f a, b, c, d;
     float* out=  (float*)z;
@@ -525,7 +525,7 @@ GOTV_INLINE static void fft4_vsx(FFTComplex *z)
     return;
 }
 
-GOTV_INLINE static void fft8_vsx(FFTComplex *z)
+NLC_INLINE static void fft8_vsx(FFTComplex *z)
 {
     vec_f vz0, vz1, vz2, vz3;
     vec_f vz4, vz5, vz6, vz7, vz8;
@@ -584,7 +584,7 @@ GOTV_INLINE static void fft8_vsx(FFTComplex *z)
     return;
 }
 
-GOTV_INLINE static void fft16_vsx(FFTComplex *z)
+NLC_INLINE static void fft16_vsx(FFTComplex *z)
 {
     float* out=  (float*)z;
     vec_f vc0 = {0.0, 0.0, 0.0, 0.0};
@@ -706,7 +706,7 @@ GOTV_INLINE static void fft16_vsx(FFTComplex *z)
     return;
 
 }
-GOTV_INLINE static void pass_vsx(FFTComplex * z, const FFTSample * wre, unsigned int n)
+NLC_INLINE static void pass_vsx(FFTComplex * z, const FFTSample * wre, unsigned int n)
 {
     int o1 = n<<1;
     int o2 = n<<2;

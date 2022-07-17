@@ -224,13 +224,13 @@ new_exp (int nargs, enum expression_operator op,
   return NULL;
 }
 
-static GOTV_INLINE struct expression *
+static NLC_INLINE struct expression *
 new_exp_0 (enum expression_operator op)
 {
   return new_exp (0, op, NULL);
 }
 
-static GOTV_INLINE struct expression *
+static NLC_INLINE struct expression *
 new_exp_1 (enum expression_operator op, struct expression *right)
 {
   struct expression *args[1];
@@ -250,7 +250,7 @@ new_exp_2 (enum expression_operator op, struct expression *left,
   return new_exp (2, op, args);
 }
 
-static GOTV_INLINE struct expression *
+static NLC_INLINE struct expression *
 new_exp_3 (enum expression_operator op, struct expression *bexp,
 	   struct expression *tbranch, struct expression *fbranch)
 {

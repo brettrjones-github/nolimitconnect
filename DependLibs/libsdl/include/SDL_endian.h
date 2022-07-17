@@ -64,9 +64,9 @@ extern "C" {
 
 /**
  *  @name SDL_Swap Functions
- *  Use GOTV_INLINE functions for compilers that support them, and static
+ *  Use NLC_INLINE functions for compilers that support them, and static
  *  functions for those that do not.  Because these functions become
- *  static for compilers that do not support GOTV_INLINE functions, this
+ *  static for compilers that do not support NLC_INLINE functions, this
  *  header should only be included in files that actually use them.
  */
 /*@{*/

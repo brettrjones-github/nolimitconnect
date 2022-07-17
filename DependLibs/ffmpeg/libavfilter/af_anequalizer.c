@@ -524,7 +524,7 @@ static double chebyshev2_compute_bw_gain_db(double gain)
     return bw_gain;
 }
 
-static GOTV_INLINE double hz_2_rad(double x, double fs)
+static NLC_INLINE double hz_2_rad(double x, double fs)
 {
     return 2 * M_PI * x / fs;
 }
@@ -662,7 +662,7 @@ static int process_command(AVFilterContext *ctx, const char *cmd, const char *ar
     return ret;
 }
 
-static GOTV_INLINE double section_process(FoSection *S, double in)
+static NLC_INLINE double section_process(FoSection *S, double in)
 {
     double out;
 

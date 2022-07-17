@@ -1379,7 +1379,7 @@ static void apply_loop_filter(Vp3DecodeContext *s, int plane,
  * Pull DCT tokens from the 64 levels to decode and dequant the coefficients
  * for the next block in coding order
  */
-static GOTV_INLINE int vp3_dequant(Vp3DecodeContext *s, Vp3Fragment *frag,
+static NLC_INLINE int vp3_dequant(Vp3DecodeContext *s, Vp3Fragment *frag,
                               int plane, int inter, int16_t block[64])
 {
     int16_t *dequantizer = s->qmat[frag->qpi][inter][plane];

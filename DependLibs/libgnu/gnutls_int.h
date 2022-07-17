@@ -998,12 +998,12 @@ void _gnutls_free_auth_info(gnutls_session_t session);
 
 int _gnutls_is_secure_mem_null(const void *);
 
-GOTV_INLINE static const version_entry_st *get_version(gnutls_session_t session)
+NLC_INLINE static const version_entry_st *get_version(gnutls_session_t session)
 {
 	return session->security_parameters.pversion;
 }
 
-GOTV_INLINE static unsigned get_num_version(gnutls_session_t session)
+NLC_INLINE static unsigned get_num_version(gnutls_session_t session)
 {
 	if (likely(session->security_parameters.pversion != NULL))
 		return session->security_parameters.pversion->id;
@@ -1019,7 +1019,7 @@ unsigned int
  timespec_sub_ms(struct timespec *a, struct timespec *b);
 
 #include <libgnu/algorithms_gnu.h>
-GOTV_INLINE static int _gnutls_set_current_version(gnutls_session_t s, unsigned v)
+NLC_INLINE static int _gnutls_set_current_version(gnutls_session_t s, unsigned v)
 {
 	s->security_parameters.pversion = ( const version_entry_st * )version_to_entry(( gnutls_protocol_t)v);
 	if (s->security_parameters.pversion == NULL) {
@@ -1029,7 +1029,7 @@ GOTV_INLINE static int _gnutls_set_current_version(gnutls_session_t s, unsigned 
 	return 0;
 }
 
-GOTV_INLINE static size_t max_user_send_size(gnutls_session_t session,
+NLC_INLINE static size_t max_user_send_size(gnutls_session_t session,
 					record_parameters_st *
 					record_params)
 {

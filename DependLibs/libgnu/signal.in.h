@@ -197,7 +197,7 @@ typedef int verify_NSIG_constraint[NSIG <= 32 ? 1 : -1];
 
 # endif
 
-/* When also using extern GOTV_INLINE, suppress the use of static GOTV_INLINE in
+/* When also using extern NLC_INLINE, suppress the use of static NLC_INLINE in
    standard headers of problematic Apple configurations, as Libc at
    least through Libc-825.26 (2013-04-09) mishandles it; see, e.g.,
    <http://lists.gnu.org/archive/html/bug-gnulib/2012-12/msg00023.html>.
@@ -325,7 +325,7 @@ _GL_CXXALIASWARN (signal);
 
 # if !@HAVE_POSIX_SIGNALBLOCKING@ && GNULIB_defined_SIGPIPE
 /* Raise signal SIGPIPE.  */
-GOTV_EXTERN_C int _gl_raise_SIGPIPE (void);
+NLC_EXTERN_C int _gl_raise_SIGPIPE (void);
 # endif
 
 #elif defined GNULIB_POSIXCHECK
@@ -431,8 +431,8 @@ struct sigaction
 #   define GNULIB_defined_struct_sigaction 1
 #  endif
 
-_GL_FUNCDECL_SYS (sigaction, int, (int, const struct sigaction *GOTV_RESTRICT,
-                                   struct sigaction *GOTV_RESTRICT));
+_GL_FUNCDECL_SYS (sigaction, int, (int, const struct sigaction *NLC_RESTRICT,
+                                   struct sigaction *NLC_RESTRICT));
 
 # elif !@HAVE_STRUCT_SIGACTION_SA_SIGACTION@
 
@@ -440,8 +440,8 @@ _GL_FUNCDECL_SYS (sigaction, int, (int, const struct sigaction *GOTV_RESTRICT,
 
 # endif /* !@HAVE_SIGACTION@, !@HAVE_STRUCT_SIGACTION_SA_SIGACTION@ */
 
-_GL_CXXALIAS_SYS (sigaction, int, (int, const struct sigaction *GOTV_RESTRICT,
-                                   struct sigaction *GOTV_RESTRICT));
+_GL_CXXALIAS_SYS (sigaction, int, (int, const struct sigaction *NLC_RESTRICT,
+                                   struct sigaction *NLC_RESTRICT));
 _GL_CXXALIASWARN (sigaction);
 
 #elif defined GNULIB_POSIXCHECK

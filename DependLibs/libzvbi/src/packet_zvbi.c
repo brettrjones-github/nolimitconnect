@@ -48,7 +48,7 @@
 
 static vbi_bool convert_drcs(cache_page *vtp, uint8_t *raw);
 
-GOTV_INLINE void
+NLC_INLINE void
 dump_page_link			(struct ttx_page_link	link)
 {
 	printf ("T%x %3x/%04x\n", link.function, link.pgno, link.subno);
@@ -148,7 +148,7 @@ dump_page_info(struct teletext *vt)
 }
 #endif
 
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 unham_page_link(struct ttx_page_link *p, const uint8_t *raw, int magazine)
 {
 	int b1, b2, b3, err, m;
@@ -168,7 +168,7 @@ unham_page_link(struct ttx_page_link *p, const uint8_t *raw, int magazine)
 	return TRUE;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 parse_mot(struct ttx_magazine *mag, uint8_t *raw, int packet)
 {
 	int err, i, j;
@@ -819,7 +819,7 @@ unham_top_page_link		(struct ttx_page_link *	pl,
 	return TRUE;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 parse_btt(vbi_decoder *vbi, uint8_t *raw, int packet)
 {
 	switch (packet) 
@@ -1001,7 +1001,7 @@ parse_ait(cache_page *vtp, uint8_t *raw, int packet)
 	return TRUE;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 parse_mpt(cache_network *cn, uint8_t *raw, int packet)
 {
 	int i, j, index;
@@ -1057,7 +1057,7 @@ parse_mpt(cache_network *cn, uint8_t *raw, int packet)
 	return TRUE;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 parse_mpt_ex(cache_network *cn, uint8_t *raw, int packet)
 {
 	int i, code, subc;
@@ -1651,7 +1651,7 @@ same_header(int cur_pgno, const uint8_t *cur,
 	return FALSE;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 same_clock(const uint8_t *cur, const uint8_t *ref)
 {
 	int i;
@@ -1663,7 +1663,7 @@ same_clock(const uint8_t *cur, const uint8_t *ref)
 	return TRUE;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 store_lop(vbi_decoder *vbi, const cache_page *vtp)
 {
 	struct ttx_page_stat *ps;
@@ -1926,7 +1926,7 @@ lop_parity_check		(cache_page *		cvtp,
 /*
  *  Teletext packet 27, page linking
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 parse_27(vbi_decoder *vbi, uint8_t *p,
 	 cache_page *cvtp, int mag0)
 {
@@ -2265,7 +2265,7 @@ parse_28_29(vbi_decoder *vbi, uint8_t *p,
 /*
  *  Teletext packet 8/30, broadcast service data
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 parse_8_30(vbi_decoder *vbi, uint8_t *buffer, int packet)
 {
 	uint8_t *p;

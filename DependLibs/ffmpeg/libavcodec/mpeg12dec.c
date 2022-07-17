@@ -136,7 +136,7 @@ static int mpeg_decode_motion(MpegEncContext *s, int fcode, int pred)
         }                                                                     \
     } while (0)
 
-static GOTV_INLINE int mpeg1_decode_block_inter(MpegEncContext *s,
+static NLC_INLINE int mpeg1_decode_block_inter(MpegEncContext *s,
                                            int16_t *block, int n)
 {
     int level, i, j, run;
@@ -226,7 +226,7 @@ end:
  * Changing this would eat up any speed benefits it has.
  * Do not use "fast" flag if you need the code to be robust.
  */
-static GOTV_INLINE int mpeg1_fast_decode_block_inter(MpegEncContext *s,
+static NLC_INLINE int mpeg1_fast_decode_block_inter(MpegEncContext *s,
                                                 int16_t *block, int n)
 {
     int level, i, j, run;
@@ -311,7 +311,7 @@ end:
     return 0;
 }
 
-static GOTV_INLINE int mpeg2_decode_block_non_intra(MpegEncContext *s,
+static NLC_INLINE int mpeg2_decode_block_non_intra(MpegEncContext *s,
                                                int16_t *block, int n)
 {
     int level, i, j, run;
@@ -402,7 +402,7 @@ end:
  * Changing this would eat up any speed benefits it has.
  * Do not use "fast" flag if you need the code to be robust.
  */
-static GOTV_INLINE int mpeg2_fast_decode_block_non_intra(MpegEncContext *s,
+static NLC_INLINE int mpeg2_fast_decode_block_non_intra(MpegEncContext *s,
                                                     int16_t *block, int n)
 {
     int level, i, j, run;
@@ -474,7 +474,7 @@ end:
     return 0;
 }
 
-static GOTV_INLINE int mpeg2_decode_block_intra(MpegEncContext *s,
+static NLC_INLINE int mpeg2_decode_block_intra(MpegEncContext *s,
                                            int16_t *block, int n)
 {
     int level, dc, diff, i, j, run;
@@ -564,7 +564,7 @@ static GOTV_INLINE int mpeg2_decode_block_intra(MpegEncContext *s,
  * Changing this would eat up any speed benefits it has.
  * Do not use "fast" flag if you need the code to be robust.
  */
-static GOTV_INLINE int mpeg2_fast_decode_block_intra(MpegEncContext *s,
+static NLC_INLINE int mpeg2_fast_decode_block_intra(MpegEncContext *s,
                                                 int16_t *block, int n)
 {
     int level, dc, diff, i, j, run;
@@ -643,7 +643,7 @@ static GOTV_INLINE int mpeg2_fast_decode_block_intra(MpegEncContext *s,
 /******************************************/
 /* decoding */
 
-static GOTV_INLINE int get_dmv(MpegEncContext *s)
+static NLC_INLINE int get_dmv(MpegEncContext *s)
 {
     if (get_bits1(&s->gb))
         return 1 - (get_bits1(&s->gb) << 1);

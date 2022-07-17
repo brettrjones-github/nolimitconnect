@@ -54,15 +54,15 @@ typedef struct {
   int    sequencep; /* bitflag */
 } quant_meta;
 
-static GOTV_INLINE float *_point(vqgen *v,long ptr){
+static NLC_INLINE float *_point(vqgen *v,long ptr){
   return v->pointlist+((v->elements+v->aux)*ptr);
 }
 
-static GOTV_INLINE float *_aux(vqgen *v,long ptr){
+static NLC_INLINE float *_aux(vqgen *v,long ptr){
   return _point(v,ptr)+v->aux;
 }
 
-static GOTV_INLINE float *_now(vqgen *v,long ptr){
+static NLC_INLINE float *_now(vqgen *v,long ptr){
   return v->entrylist+(v->elements*ptr);
 }
 

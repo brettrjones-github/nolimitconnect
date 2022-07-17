@@ -943,6 +943,9 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioInputFrame.cpp">
+      <Filter>Source Files\MediaProcessor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
@@ -2030,6 +2033,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.h">
       <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioInputFrame.h">
+      <Filter>Source Files\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioProcessorDefs.h">
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

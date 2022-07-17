@@ -73,7 +73,7 @@ static av_always_inline av_const int64_t MUL64(int a, int b)
 #if HAVE_I686
 /* median of 3 */
 #define mid_pred mid_pred
-static GOTV_INLINE av_const int mid_pred(int a, int b, int c)
+static NLC_INLINE av_const int mid_pred(int a, int b, int c)
 {
     int i=b;
     __asm__ (
@@ -112,7 +112,7 @@ __asm__ volatile(\
 
 // avoid +32 for shift optimization (gcc should do that ...)
 #define NEG_SSR32 NEG_SSR32
-static GOTV_INLINE  int32_t NEG_SSR32( int32_t a, int8_t s){
+static NLC_INLINE  int32_t NEG_SSR32( int32_t a, int8_t s){
     __asm__ ("sarl %1, %0\n\t"
          : "+r" (a)
          : "ic" ((uint8_t)(-s))
@@ -121,7 +121,7 @@ static GOTV_INLINE  int32_t NEG_SSR32( int32_t a, int8_t s){
 }
 
 #define NEG_USR32 NEG_USR32
-static GOTV_INLINE uint32_t NEG_USR32(uint32_t a, int8_t s){
+static NLC_INLINE uint32_t NEG_USR32(uint32_t a, int8_t s){
     __asm__ ("shrl %1, %0\n\t"
          : "+r" (a)
          : "ic" ((uint8_t)(-s))

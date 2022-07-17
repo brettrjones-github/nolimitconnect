@@ -4887,7 +4887,7 @@ MHD_get_version( void )
  * feature is not supported or feature is unknown.
  * @ingroup specialized
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_is_feature_supported( enum MHD_FEATURE feature )
 {
 	switch( feature )

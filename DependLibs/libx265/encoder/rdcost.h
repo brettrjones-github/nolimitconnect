@@ -96,7 +96,7 @@ public:
         m_lambda = (uint64_t)floor(256.0 * lambda);
     }
 
-    GOTV_INLINE uint64_t calcRdCost(sse_t distortion, uint32_t bits) const
+    NLC_INLINE uint64_t calcRdCost(sse_t distortion, uint32_t bits) const
     {
 #if X265_DEPTH < 10
         X265_CHECK(bits <= (UINT64_MAX - 128) / m_lambda2,
@@ -111,13 +111,13 @@ public:
     }
 
     /* return the difference in energy between the source block and the recon block */
-    GOTV_INLINE int psyCost(int size, const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride) const
+    NLC_INLINE int psyCost(int size, const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride) const
     {
         return primitives.cu[size].psy_cost_pp(source, sstride, recon, rstride);
     }
 
     /* return the RD cost of this prediction, including the effect of psy-rd */
-    GOTV_INLINE uint64_t calcPsyRdCost(sse_t distortion, uint32_t bits, uint32_t psycost) const
+    NLC_INLINE uint64_t calcPsyRdCost(sse_t distortion, uint32_t bits, uint32_t psycost) const
     {
 #if X265_DEPTH < 10
         X265_CHECK((bits <= (UINT64_MAX / m_lambda2)) && (psycost <= UINT64_MAX / (m_lambda * m_psyRd)),
@@ -131,7 +131,7 @@ public:
         return distortion + ((m_lambda * m_psyRd * psycost) >> 24) + ((bits * m_lambda2) >> 8);
     }
 
-    GOTV_INLINE uint64_t calcSsimRdCost(uint64_t distortion, uint32_t bits, uint32_t ssimCost) const
+    NLC_INLINE uint64_t calcSsimRdCost(uint64_t distortion, uint32_t bits, uint32_t ssimCost) const
     {
 #if X265_DEPTH < 10
         X265_CHECK((bits <= (UINT64_MAX / m_lambda2)) && (ssimCost <= UINT64_MAX / m_lambda),
@@ -145,14 +145,14 @@ public:
         return distortion + ((m_lambda * ssimCost) >> 14) + ((bits * m_lambda2) >> 8);
     }
 
-    GOTV_INLINE uint64_t calcRdSADCost(uint32_t sadCost, uint32_t bits) const
+    NLC_INLINE uint64_t calcRdSADCost(uint32_t sadCost, uint32_t bits) const
     {
         X265_CHECK(bits <= (UINT64_MAX - 128) / m_lambda,
                    "calcRdSADCost wrap detected dist: %u, bits %u, lambda: " X265_LL "\n", sadCost, bits, m_lambda);
         return sadCost + ((bits * m_lambda + 128) >> 8);
     }
 
-    GOTV_INLINE sse_t scaleChromaDist(uint32_t plane, sse_t dist) const
+    NLC_INLINE sse_t scaleChromaDist(uint32_t plane, sse_t dist) const
     {
 #if X265_DEPTH < 10
         X265_CHECK(dist <= (UINT64_MAX - 128) / m_chromaDistWeight[plane - 1],
@@ -166,7 +166,7 @@ public:
         return (sse_t)((dist * (uint64_t)m_chromaDistWeight[plane - 1] + 128) >> 8);
     }
 
-    GOTV_INLINE uint32_t getCost(uint32_t bits) const
+    NLC_INLINE uint32_t getCost(uint32_t bits) const
     {
         X265_CHECK(bits <= (UINT64_MAX - 128) / m_lambda,
                    "getCost wrap detected bits: %u, lambda: " X265_LL "\n", bits, m_lambda);

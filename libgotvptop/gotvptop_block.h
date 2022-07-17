@@ -129,7 +129,7 @@ struct block_t
     block_free_t pf_release;
 };
 
-GOTV_API void block_Init( block_t *, void *, size_t );
+NLC_API void block_Init( block_t *, void *, size_t );
 
 /**
  * Allocates a block.
@@ -140,9 +140,9 @@ GOTV_API void block_Init( block_t *, void *, size_t );
  * @param size size in bytes (possibly zero)
  * @return the created block, or NULL on memory error.
  */
-GOTV_API block_t *block_Alloc(size_t size) GOTV_USED GOTV_MALLOC;
+NLC_API block_t *block_Alloc(size_t size) GOTV_USED GOTV_MALLOC;
 
-GOTV_API block_t *block_TryRealloc(block_t *, ssize_t pre, size_t body) GOTV_USED;
+NLC_API block_t *block_TryRealloc(block_t *, ssize_t pre, size_t body) GOTV_USED;
 
 /**
  * Reallocates a block.
@@ -165,7 +165,7 @@ GOTV_API block_t *block_TryRealloc(block_t *, ssize_t pre, size_t body) GOTV_USE
  * @note On error, the block is discarded.
  * To avoid that, use block_TryRealloc() instead.
  */
-GOTV_API block_t *block_Realloc(block_t *, ssize_t pre, size_t body) GOTV_USED;
+NLC_API block_t *block_Realloc(block_t *, ssize_t pre, size_t body) GOTV_USED;
 
 /**
  * Releases a block.
@@ -227,7 +227,7 @@ static inline block_t *block_Duplicate( block_t *p_block )
  * @return NULL in case of error (ptr free()'d in that case), or a valid
  * block_t pointer.
  */
-GOTV_API block_t *block_heap_Alloc(void *, size_t) GOTV_USED GOTV_MALLOC;
+NLC_API block_t *block_heap_Alloc(void *, size_t) GOTV_USED GOTV_MALLOC;
 
 /**
  * Wraps a memory mapping in a block
@@ -241,7 +241,7 @@ GOTV_API block_t *block_heap_Alloc(void *, size_t) GOTV_USED GOTV_MALLOC;
  * @return NULL if addr is MAP_FAILED, or an error occurred (in the later
  * case, munmap(addr, length) is invoked before returning).
  */
-GOTV_API block_t *block_mmap_Alloc(void *addr, size_t length) GOTV_USED GOTV_MALLOC;
+NLC_API block_t *block_mmap_Alloc(void *addr, size_t length) GOTV_USED GOTV_MALLOC;
 
 /**
  * Wraps a System V memory segment in a block
@@ -255,7 +255,7 @@ GOTV_API block_t *block_mmap_Alloc(void *addr, size_t length) GOTV_USED GOTV_MAL
  * @return NULL if an error occurred (in that case, shmdt(addr) is invoked
  * before returning NULL).
  */
-GOTV_API block_t * block_shm_Alloc(void *addr, size_t length) GOTV_USED GOTV_MALLOC;
+NLC_API block_t * block_shm_Alloc(void *addr, size_t length) GOTV_USED GOTV_MALLOC;
 
 /**
  * Maps a file handle in memory.
@@ -275,7 +275,7 @@ GOTV_API block_t * block_shm_Alloc(void *addr, size_t length) GOTV_USED GOTV_MAL
  * @return a new block with the file content at p_buffer, and file length at
  * i_buffer (release it with block_Release()), or NULL upon error (see errno).
  */
-GOTV_API block_t *block_File(int fd, bool write) GOTV_USED GOTV_MALLOC;
+NLC_API block_t *block_File(int fd, bool write) GOTV_USED GOTV_MALLOC;
 
 /**
  * Maps a file in memory.
@@ -286,7 +286,7 @@ GOTV_API block_t *block_File(int fd, bool write) GOTV_USED GOTV_MALLOC;
  * @param write If true, request a read/write private mapping.
  *              If false, request a read-only potentially shared mapping.
  */
-GOTV_API block_t *block_FilePath(const char *, bool write) GOTV_USED GOTV_MALLOC;
+NLC_API block_t *block_FilePath(const char *, bool write) GOTV_USED GOTV_MALLOC;
 
 static inline void block_Cleanup (void *block)
 {
@@ -428,7 +428,7 @@ static inline block_t *block_ChainGather( block_t *p_list )
  *
  * @return the FIFO or NULL on memory error
  */
-GOTV_API block_fifo_t *block_FifoNew(void) GOTV_USED GOTV_MALLOC;
+NLC_API block_fifo_t *block_FifoNew(void) GOTV_USED GOTV_MALLOC;
 
 /**
  * Destroys a FIFO created by block_FifoNew().
@@ -437,12 +437,12 @@ GOTV_API block_fifo_t *block_FifoNew(void) GOTV_USED GOTV_MALLOC;
  * @warning No other threads may be using the FIFO when this function is
  * called. Otherwise, undefined behaviour will occur.
  */
-GOTV_API void block_FifoRelease(block_fifo_t *);
+NLC_API void block_FifoRelease(block_fifo_t *);
 
 /**
  * Clears all blocks in a FIFO.
  */
-GOTV_API void block_FifoEmpty(block_fifo_t *);
+NLC_API void block_FifoEmpty(block_fifo_t *);
 
 /**
  * Immediately queue one block at the end of a FIFO.
@@ -450,7 +450,7 @@ GOTV_API void block_FifoEmpty(block_fifo_t *);
  * @param fifo queue
  * @param block head of a block list to queue (may be NULL)
  */
-GOTV_API void block_FifoPut(block_fifo_t *fifo, block_t *block);
+NLC_API void block_FifoPut(block_fifo_t *fifo, block_t *block);
 
 /**
  * Dequeue the first block from the FIFO. If necessary, wait until there is
@@ -458,7 +458,7 @@ GOTV_API void block_FifoPut(block_fifo_t *fifo, block_t *block);
  *
  * @return a valid block
  */
-GOTV_API block_t *block_FifoGet(block_fifo_t *) GOTV_USED;
+NLC_API block_t *block_FifoGet(block_fifo_t *) GOTV_USED;
 
 /**
  * Peeks the first block in the FIFO.
@@ -471,10 +471,10 @@ GOTV_API block_t *block_FifoGet(block_fifo_t *) GOTV_USED;
  *
  * @return a valid block.
  */
-GOTV_API block_t *block_FifoShow(block_fifo_t *);
+NLC_API block_t *block_FifoShow(block_fifo_t *);
 
 size_t block_FifoSize(block_fifo_t *) GOTV_USED GOTV_DEPRECATED;
-GOTV_API size_t block_FifoCount(block_fifo_t *) GOTV_USED GOTV_DEPRECATED;
+NLC_API size_t block_FifoCount(block_fifo_t *) GOTV_USED GOTV_DEPRECATED;
 
 typedef struct block_fifo_t gotvptop_fifo_t;
 
@@ -491,7 +491,7 @@ typedef struct block_fifo_t gotvptop_fifo_t;
  * @warning Recursively locking a single FIFO is undefined. Locking more than
  * one FIFO at a time may lead to lock inversion; mind the locking order.
  */
-GOTV_API void gotvptop_fifo_Lock(gotvptop_fifo_t *);
+NLC_API void gotvptop_fifo_Lock(gotvptop_fifo_t *);
 
 /**
  * Unlocks a block FIFO.
@@ -501,7 +501,7 @@ GOTV_API void gotvptop_fifo_Lock(gotvptop_fifo_t *);
  *
  * @note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_fifo_Unlock(gotvptop_fifo_t *);
+NLC_API void gotvptop_fifo_Unlock(gotvptop_fifo_t *);
 
 /**
  * Wakes up one thread waiting on the FIFO, if any.
@@ -511,7 +511,7 @@ GOTV_API void gotvptop_fifo_Unlock(gotvptop_fifo_t *);
  * @warning For race-free operations, the FIFO should be locked by the calling
  * thread. The function can be called on a unlocked FIFO however.
  */
-GOTV_API void gotvptop_fifo_Signal(gotvptop_fifo_t *);
+NLC_API void gotvptop_fifo_Signal(gotvptop_fifo_t *);
 
 /**
  * Waits on the FIFO.
@@ -524,9 +524,9 @@ GOTV_API void gotvptop_fifo_Signal(gotvptop_fifo_t *);
  * @note This function is a cancellation point. In case of cancellation, the
  * the FIFO will be locked before cancellation cleanup handlers are processed.
  */
-GOTV_API void gotvptop_fifo_Wait(gotvptop_fifo_t *);
+NLC_API void gotvptop_fifo_Wait(gotvptop_fifo_t *);
 
-GOTV_API void gotvptop_fifo_WaitCond(gotvptop_fifo_t *, gotvptop_cond_t *);
+NLC_API void gotvptop_fifo_WaitCond(gotvptop_fifo_t *, gotvptop_cond_t *);
 
 /**
  * Timed variant of gotvptop_fifo_WaitCond().
@@ -547,7 +547,7 @@ int gotvptop_fifo_TimedWaitCond(gotvptop_fifo_t *, gotvptop_cond_t *, mtime_t);
  * @warning The FIFO must be locked by the calling thread using
  * gotvptop_fifo_Lock(). Otherwise behaviour is undefined.
  */
-GOTV_API void gotvptop_fifo_QueueUnlocked(gotvptop_fifo_t *, block_t *);
+NLC_API void gotvptop_fifo_QueueUnlocked(gotvptop_fifo_t *, block_t *);
 
 /**
  * Dequeues the first block from a locked FIFO, if any.
@@ -559,7 +559,7 @@ GOTV_API void gotvptop_fifo_QueueUnlocked(gotvptop_fifo_t *, block_t *);
  *
  * @return the first block in the FIFO or NULL if the FIFO is empty
  */
-GOTV_API block_t *gotvptop_fifo_DequeueUnlocked(gotvptop_fifo_t *) GOTV_USED;
+NLC_API block_t *gotvptop_fifo_DequeueUnlocked(gotvptop_fifo_t *) GOTV_USED;
 
 /**
  * Dequeues the all blocks from a locked FIFO.
@@ -574,7 +574,7 @@ GOTV_API block_t *gotvptop_fifo_DequeueUnlocked(gotvptop_fifo_t *) GOTV_USED;
  *
  * @return a linked-list of all blocks in the FIFO (possibly NULL)
  */
-GOTV_API block_t *gotvptop_fifo_DequeueAllUnlocked(gotvptop_fifo_t *) GOTV_USED;
+NLC_API block_t *gotvptop_fifo_DequeueAllUnlocked(gotvptop_fifo_t *) GOTV_USED;
 
 /**
  * Counts blocks in a FIFO.
@@ -588,7 +588,7 @@ GOTV_API block_t *gotvptop_fifo_DequeueAllUnlocked(gotvptop_fifo_t *) GOTV_USED;
  *
  * @return the number of blocks in the FIFO (zero if it is empty)
  */
-GOTV_API size_t gotvptop_fifo_GetCount(const gotvptop_fifo_t *) GOTV_USED;
+NLC_API size_t gotvptop_fifo_GetCount(const gotvptop_fifo_t *) GOTV_USED;
 
 /**
  * Counts bytes in a FIFO.
@@ -606,7 +606,7 @@ GOTV_API size_t gotvptop_fifo_GetCount(const gotvptop_fifo_t *) GOTV_USED;
  * a block could contain zero bytes. Use gotvptop_fifo_GetCount() to determine if
  * a FIFO is empty.
  */
-GOTV_API size_t gotvptop_fifo_GetBytes(const gotvptop_fifo_t *) GOTV_USED;
+NLC_API size_t gotvptop_fifo_GetBytes(const gotvptop_fifo_t *) GOTV_USED;
 
 GOTV_USED static inline bool gotvptop_fifo_IsEmpty(const gotvptop_fifo_t *fifo)
 {

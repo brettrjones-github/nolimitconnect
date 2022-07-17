@@ -252,7 +252,7 @@ void _gnutls_mac_deinit(mac_hd_st * handle, void *digest)
 	handle->handle = NULL;
 }
 
-GOTV_INLINE static int get_padsize(gnutls_mac_algorithm_t algorithm)
+NLC_INLINE static int get_padsize(gnutls_mac_algorithm_t algorithm)
 {
 	switch (algorithm) {
 	case GNUTLS_MAC_MD5:

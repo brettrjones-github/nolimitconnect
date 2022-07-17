@@ -425,7 +425,7 @@ static const int order[] = {
 
 
 /* returns sum_j=0^31 a[j]*cos(PI*j*(k+1/2)/32), 0<=k<32 */
-GOTV_INLINE static void
+NLC_INLINE static void
 window_subband(const sample_t * x1, FLOAT a[SBLIMIT])
 {
     int     i;
@@ -827,7 +827,7 @@ window_subband(const sample_t * x1, FLOAT a[SBLIMIT])
 /*                                                                   */
 /*-------------------------------------------------------------------*/
 
-GOTV_INLINE static void
+NLC_INLINE static void
 mdct_short(FLOAT * inout)
 {
     int     l;
@@ -864,7 +864,7 @@ mdct_short(FLOAT * inout)
     }
 }
 
-GOTV_INLINE static void
+NLC_INLINE static void
 mdct_long(FLOAT * out, FLOAT const *in)
 {
     FLOAT   ct, st;

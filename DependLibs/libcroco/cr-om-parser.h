@@ -39,7 +39,7 @@
  *in cr-parser.h and cr-doc-handler.h
  */
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _CROMParser CROMParser ;
 typedef struct _CROMParserPriv CROMParserPriv ;
@@ -93,6 +93,6 @@ enum CRStatus cr_om_parser_simply_parse_paths_to_cascade (const guchar *a_author
 
 void cr_om_parser_destroy (CROMParser *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_OM_PARSER_H__*/

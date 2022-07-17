@@ -27,7 +27,7 @@
 #include "cr-utils.h"
 #include "cr-statement.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -97,6 +97,6 @@ gboolean cr_stylesheet_unref (CRStyleSheet *a_this) ;
 
 void cr_stylesheet_destroy (CRStyleSheet *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_STYLESHEET_H__*/

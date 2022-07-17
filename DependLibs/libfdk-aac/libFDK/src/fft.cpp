@@ -201,7 +201,7 @@ static FORCEINLINE void fft5(FIXP_DBL *RESTRICT pDat)
 #define N15                   15
 
 /* Performs the FFT of length 15. It is split into FFTs of length 3 and length 5. */
-static GOTV_INLINE void fft15(FIXP_DBL *pInput)
+static NLC_INLINE void fft15(FIXP_DBL *pInput)
 {
   FIXP_DBL  aDst[2*N15];
   FIXP_DBL  aDst1[2*N15];
@@ -355,7 +355,7 @@ static GOTV_INLINE void fft15(FIXP_DBL *pInput)
 static const FIXP_STP fft16_w16[2] =  { STCP(0x7641af3d, 0x30fbc54d), STCP(0x30fbc54d, 0x7641af3d) };
 
 LNK_SECTION_CODE_L1
-GOTV_INLINE void fft_16(FIXP_DBL *RESTRICT x)
+NLC_INLINE void fft_16(FIXP_DBL *RESTRICT x)
 {
   FIXP_DBL vr, vi, ur, ui;
   FIXP_DBL y[32];
@@ -542,7 +542,7 @@ static const FIXP_STP fft32_w32[6] =
 };
 
 LNK_SECTION_CODE_L1
-GOTV_INLINE void fft_32(FIXP_DBL *x)
+NLC_INLINE void fft_32(FIXP_DBL *x)
 {
 
 #define W_PiFOURTH STC(0x5a82799a)
@@ -1044,7 +1044,7 @@ GOTV_INLINE void fft_32(FIXP_DBL *x)
  * \param pVecRe real part of rotation ceofficient vector.
  * \param pVecIm imaginary part of rotation ceofficient vector.
  */
-static GOTV_INLINE void fft_apply_rot_vector(FIXP_DBL *RESTRICT pData, const int cl, const int l, const FIXP_STB *pVecRe, const FIXP_STB *pVecIm)
+static NLC_INLINE void fft_apply_rot_vector(FIXP_DBL *RESTRICT pData, const int cl, const int l, const FIXP_STB *pVecRe, const FIXP_STB *pVecIm)
 {
   FIXP_DBL re, im;
   FIXP_STB vre, vim;
@@ -1156,7 +1156,7 @@ static GOTV_INLINE void fft_apply_rot_vector(FIXP_DBL *RESTRICT pData, const int
 /* select either switch case of function pointer. */
 //#define FFT_TWO_STAGE_SWITCH_CASE
 
-static GOTV_INLINE void fftN2(
+static NLC_INLINE void fftN2(
         FIXP_DBL *pInput,
         const int length,
         const int dim1,
@@ -1280,7 +1280,7 @@ static GOTV_INLINE void fftN2(
 The function performs the fft of length 60. It is splittet into fft's of length 4 and fft's of
 length 15. Between the fft's a modolation is calculated.
 */
-static GOTV_INLINE void fft60(FIXP_DBL *pInput, int32_t *pScalefactor)
+static NLC_INLINE void fft60(FIXP_DBL *pInput, int32_t *pScalefactor)
 {
   fftN2(
           pInput, 60, 4, 15, 
@@ -1300,7 +1300,7 @@ static GOTV_INLINE void fft60(FIXP_DBL *pInput, int32_t *pScalefactor)
 The function performs the fft of length 240. It is splittet into fft's of length 16 and fft's of
 length 15. Between the fft's a modulation is calculated.
 */
-static GOTV_INLINE void fft240(FIXP_DBL *pInput, int32_t *pScalefactor)
+static NLC_INLINE void fft240(FIXP_DBL *pInput, int32_t *pScalefactor)
 {
   fftN2(
           pInput, 240, 16, 15, 
@@ -1319,7 +1319,7 @@ static GOTV_INLINE void fft240(FIXP_DBL *pInput, int32_t *pScalefactor)
 The function performs the fft of length 480. It is splittet into fft's of length 32 and fft's of
 length 15. Between the fft's a modulation is calculated.
 */
-static GOTV_INLINE void fft480(FIXP_DBL *pInput, int32_t *pScalefactor)
+static NLC_INLINE void fft480(FIXP_DBL *pInput, int32_t *pScalefactor)
 {
   fftN2(
           pInput, 480, 32, 15, 

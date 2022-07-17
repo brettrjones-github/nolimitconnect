@@ -326,7 +326,7 @@ xavs_frame_expand_border_mod16 (xavs_t * h, xavs_frame_t * frame)
 }
 
 /* Deblocking filter */
-static GOTV_INLINE int
+static NLC_INLINE int
 clip_uint8 (int a)
 {
   if (a & (~255))
@@ -368,7 +368,7 @@ static const int CLIP_TAB[64] = {
   7, 7, 8, 8, 8, 9, 9, 9
 };
 
-static GOTV_INLINE void
+static NLC_INLINE void
 deblock_luma_intra_c (uint8_t * pix, int xstride, int ystride, int alpha, int beta)
 {
   int d;
@@ -411,7 +411,7 @@ deblock_luma_intra_c (uint8_t * pix, int xstride, int ystride, int alpha, int be
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 deblock_chroma_intra_c (uint8_t * pix, int xstride, int ystride, int alpha, int beta)
 {
   int d;
@@ -443,7 +443,7 @@ deblock_chroma_intra_c (uint8_t * pix, int xstride, int ystride, int alpha, int 
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 deblock_luma_c (uint8_t * pix, int xstride, int ystride, int alpha, int beta, int8_t * tc0)
 {
   int i, d;
@@ -486,7 +486,7 @@ deblock_luma_c (uint8_t * pix, int xstride, int ystride, int alpha, int beta, in
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 deblock_chroma_c (uint8_t * pix, int xstride, int ystride, int alpha, int beta, int8_t * tc0)
 {
   int i, d;
@@ -562,7 +562,7 @@ deblock_h_chroma_c (uint8_t * pix, int stride, int alpha, int beta, int8_t * tc0
   deblock_chroma_c (pix, 1, stride, alpha, beta, tc0);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_deblock_edge (xavs_t * h, uint8_t * pix, int i_stride, int bS[2], int i_qp, int b_chroma, xavs_deblock_inter_t pf_inter, xavs_deblock_intra_t pf_intra)
 {
   int i;

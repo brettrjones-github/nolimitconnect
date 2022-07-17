@@ -75,7 +75,7 @@ static int config_changed(SwrContext *s,
     return ret;
 }
 
-static GOTV_INLINE int convert_frame(SwrContext *s,
+static NLC_INLINE int convert_frame(SwrContext *s,
                                 AVFrame *out, const AVFrame *in)
 {
     int ret;
@@ -107,7 +107,7 @@ static GOTV_INLINE int convert_frame(SwrContext *s,
     return 0;
 }
 
-static GOTV_INLINE int available_samples(AVFrame *out)
+static NLC_INLINE int available_samples(AVFrame *out)
 {
     int bytes_per_sample = av_get_bytes_per_sample(out->format);
     int samples = out->linesize[0] / bytes_per_sample;

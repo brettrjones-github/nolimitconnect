@@ -181,7 +181,7 @@ static OPJ_BOOL stream_seek(OPJ_OFF_T nb_bytes, void *user_data)
 }
 #endif // OPENJPEG_MAJOR_VERSION == 2
 
-static GOTV_INLINE int libopenjpeg_matches_pix_fmt(const opj_image_t *image, enum AVPixelFormat pix_fmt)
+static NLC_INLINE int libopenjpeg_matches_pix_fmt(const opj_image_t *image, enum AVPixelFormat pix_fmt)
 {
     const AVPixFmtDescriptor *desc = av_pix_fmt_desc_get(pix_fmt);
     int match = 1;
@@ -218,7 +218,7 @@ static GOTV_INLINE int libopenjpeg_matches_pix_fmt(const opj_image_t *image, enu
     return match;
 }
 
-static GOTV_INLINE enum AVPixelFormat libopenjpeg_guess_pix_fmt(const opj_image_t *image) {
+static NLC_INLINE enum AVPixelFormat libopenjpeg_guess_pix_fmt(const opj_image_t *image) {
     int index;
     const enum AVPixelFormat *possible_fmts = NULL;
     int possible_fmts_nb = 0;
@@ -250,7 +250,7 @@ static GOTV_INLINE enum AVPixelFormat libopenjpeg_guess_pix_fmt(const opj_image_
     return AV_PIX_FMT_NONE;
 }
 
-static GOTV_INLINE int libopenjpeg_ispacked(enum AVPixelFormat pix_fmt)
+static NLC_INLINE int libopenjpeg_ispacked(enum AVPixelFormat pix_fmt)
 {
     const AVPixFmtDescriptor *desc = av_pix_fmt_desc_get(pix_fmt);
     int i, component_plane;
@@ -265,7 +265,7 @@ static GOTV_INLINE int libopenjpeg_ispacked(enum AVPixelFormat pix_fmt)
     return 1;
 }
 
-static GOTV_INLINE void libopenjpeg_copy_to_packed8(AVFrame *picture, opj_image_t *image) {
+static NLC_INLINE void libopenjpeg_copy_to_packed8(AVFrame *picture, opj_image_t *image) {
     uint8_t *img_ptr;
     int index, x, y, c;
     for (y = 0; y < picture->height; y++) {
@@ -277,7 +277,7 @@ static GOTV_INLINE void libopenjpeg_copy_to_packed8(AVFrame *picture, opj_image_
     }
 }
 
-static GOTV_INLINE void libopenjpeg_copy_to_packed16(AVFrame *picture, opj_image_t *image) {
+static NLC_INLINE void libopenjpeg_copy_to_packed16(AVFrame *picture, opj_image_t *image) {
     uint16_t *img_ptr;
     const AVPixFmtDescriptor *desc = av_pix_fmt_desc_get(picture->format);
     int index, x, y, c;
@@ -295,7 +295,7 @@ static GOTV_INLINE void libopenjpeg_copy_to_packed16(AVFrame *picture, opj_image
     }
 }
 
-static GOTV_INLINE void libopenjpeg_copyto8(AVFrame *picture, opj_image_t *image) {
+static NLC_INLINE void libopenjpeg_copyto8(AVFrame *picture, opj_image_t *image) {
     int *comp_data;
     uint8_t *img_ptr;
     int index, x, y;
@@ -313,7 +313,7 @@ static GOTV_INLINE void libopenjpeg_copyto8(AVFrame *picture, opj_image_t *image
     }
 }
 
-static GOTV_INLINE void libopenjpeg_copyto16(AVFrame *picture, opj_image_t *image) {
+static NLC_INLINE void libopenjpeg_copyto16(AVFrame *picture, opj_image_t *image) {
     int *comp_data;
     uint16_t *img_ptr;
     const AVPixFmtDescriptor *desc = av_pix_fmt_desc_get(picture->format);

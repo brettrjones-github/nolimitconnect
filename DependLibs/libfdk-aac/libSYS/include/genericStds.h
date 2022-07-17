@@ -229,7 +229,7 @@ typedef enum {
 /*--------------------------------------------
  * Runtime support declarations
  *---------------------------------------------*/
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /** printf() using stdout. If ::ARCH_WA_FLUSH_CONSOLE defined, a flush is  done additionally after printf(). */
 void FDKprintf    ( const char* szFmt, ...);
@@ -392,7 +392,7 @@ float FDKatof(const char *nptr);
  * \return  1 if platform is little endian, non-1 if platform is big endian.
  */
 
-GOTV_INLINE int IS_LITTLE_ENDIAN( void ) 
+NLC_INLINE int IS_LITTLE_ENDIAN( void ) 
 {
   int __dummy = 1;
   return ( *( (uint8_t*)(&(__dummy) ) ) );
@@ -467,6 +467,6 @@ uint32_t FDKfread_EL(void *dst, int32_t size, uint32_t nmemb, FDKFILE *fp);
  */
 void FDKprintDisclaimer(void);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __GENERICSTDS_H__ */

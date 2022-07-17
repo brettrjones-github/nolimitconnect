@@ -33,12 +33,12 @@ class AutoFILE {
 protected:
 	::FILE *f_;
 public:
-	GOTV_INLINE AutoFILE(const char *path, const char *mode): f_(::fopen(path, mode)) { }
-	GOTV_INLINE virtual ~AutoFILE() { if (f_) (void)::fclose(f_); }
+	NLC_INLINE AutoFILE(const char *path, const char *mode): f_(::fopen(path, mode)) { }
+	NLC_INLINE virtual ~AutoFILE() { if (f_) (void)::fclose(f_); }
 
-	GOTV_INLINE operator bool() const { return 0 != f_; }
-	GOTV_INLINE operator const ::FILE *() const { return f_; }
-	GOTV_INLINE operator ::FILE *() { return f_; }
+	NLC_INLINE operator bool() const { return 0 != f_; }
+	NLC_INLINE operator const ::FILE *() const { return f_; }
+	NLC_INLINE operator ::FILE *() { return f_; }
 private:
 	AutoFILE();
 	AutoFILE(const AutoFILE &);

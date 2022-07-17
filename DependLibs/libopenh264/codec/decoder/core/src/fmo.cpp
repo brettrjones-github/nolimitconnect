@@ -52,7 +52,7 @@ namespace WelsDec {
  *
  * \return  0 - successful; none 0 - failed
  */
-static GOTV_INLINE int32_t FmoGenerateMbAllocMapType0 (PFmo pFmo, PPps pPps) {
+static NLC_INLINE int32_t FmoGenerateMbAllocMapType0 (PFmo pFmo, PPps pPps) {
   uint32_t uiNumSliceGroups = 0;
   int32_t iMbNum = 0;
   int32_t i = 0;
@@ -89,7 +89,7 @@ static GOTV_INLINE int32_t FmoGenerateMbAllocMapType0 (PFmo pFmo, PPps pPps) {
  *
  * \return  0 - successful; none 0 - failed
  */
-static GOTV_INLINE int32_t FmoGenerateMbAllocMapType1 (PFmo pFmo, PPps pPps, const int32_t kiMbWidth) {
+static NLC_INLINE int32_t FmoGenerateMbAllocMapType1 (PFmo pFmo, PPps pPps, const int32_t kiMbWidth) {
   uint32_t uiNumSliceGroups = 0;
   int32_t iMbNum = 0;
   int32_t i = 0;
@@ -117,7 +117,7 @@ static GOTV_INLINE int32_t FmoGenerateMbAllocMapType1 (PFmo pFmo, PPps pPps, con
  *
  * \return  0 - successful; none 0 - failed
  */
-static GOTV_INLINE int32_t FmoGenerateSliceGroup (PFmo pFmo, const PPps kpPps, const int32_t kiMbWidth,
+static NLC_INLINE int32_t FmoGenerateSliceGroup (PFmo pFmo, const PPps kpPps, const int32_t kiMbWidth,
     const int32_t kiMbHeight, CMemoryAlign* pMa) {
   int32_t iNumMb = 0;
   int32_t iErr   = 0;

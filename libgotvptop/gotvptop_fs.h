@@ -82,7 +82,7 @@ struct iovec;
  * @note Contrary to standard open(), this function returns a file handle
  * with the close-on-exec flag preset.
  */
-GOTV_API int gotvptop_open(const char *filename, int flags, ...) GOTV_USED;
+NLC_API int gotvptop_open(const char *filename, int flags, ...) GOTV_USED;
 
 /**
  * Opens a system file handle relative to an existing directory handle.
@@ -94,23 +94,23 @@ GOTV_API int gotvptop_open(const char *filename, int flags, ...) GOTV_USED;
  * @note Contrary to standard open(), this function returns a file handle
  * with the close-on-exec flag preset.
  */
-GOTV_API int gotvptop_openat(int fd, const char *filename, int flags, ...) GOTV_USED;
+NLC_API int gotvptop_openat(int fd, const char *filename, int flags, ...) GOTV_USED;
 
-GOTV_API int gotvptop_mkstemp( char * );
+NLC_API int gotvptop_mkstemp( char * );
 
 /**
  * Duplicates a file descriptor. The new file descriptor has the close-on-exec
  * descriptor flag preset.
  * @return a new file descriptor, -1 (see errno)
  */
-GOTV_API int gotvptop_dup(int) GOTV_USED;
+NLC_API int gotvptop_dup(int) GOTV_USED;
 
 /**
  * Creates a pipe (see "man pipe" for further reference). The new file
  * descriptors have the close-on-exec flag preset.
  * @return 0 on success, -1 on error (see errno)
  */
-GOTV_API int gotvptop_pipe(int [2]) GOTV_USED;
+NLC_API int gotvptop_pipe(int [2]) GOTV_USED;
 
 /**
  * Creates an anonymous regular file descriptor, i.e. a descriptor for a
@@ -123,7 +123,7 @@ GOTV_API int gotvptop_pipe(int [2]) GOTV_USED;
  *
  * @return a file descriptor on success, -1 on error (see errno)
  */
-GOTV_API int gotvptop_memfd(void) GOTV_USED;
+NLC_API int gotvptop_memfd(void) GOTV_USED;
 
 /**
  * Writes data to a file descriptor. Unlike write(), if EPIPE error occurs,
@@ -131,13 +131,13 @@ GOTV_API int gotvptop_memfd(void) GOTV_USED;
  * @note If the file descriptor is known to be neither a pipe/FIFO nor a
  * connection-oriented socket, the normal write() should be used.
  */
-GOTV_API ssize_t gotvptop_write(int, const void *, size_t);
+NLC_API ssize_t gotvptop_write(int, const void *, size_t);
 
 /**
  * Writes data from an iovec structure to a file descriptor. Unlike writev(),
  * if EPIPE error occurs, this function does not generate a SIGPIPE signal.
  */
-GOTV_API ssize_t gotvptop_writev(int, const struct iovec *, int);
+NLC_API ssize_t gotvptop_writev(int, const struct iovec *, int);
 
 /**
  * Closes a file descriptor.
@@ -159,7 +159,7 @@ GOTV_API ssize_t gotvptop_writev(int, const struct iovec *, int);
  * A nul return value does not necessarily imply that all pending I/O
  * succeeded, since I/O might still occur asynchronously afterwards.
  */
-GOTV_API int gotvptop_close(int fd);
+NLC_API int gotvptop_close(int fd);
 
 /**
  * @}
@@ -171,7 +171,7 @@ GOTV_API int gotvptop_close(int fd);
  *
  * @param filename UTF-8 file path
  */
-GOTV_API int gotvptop_stat(const char *filename, struct stat *) GOTV_USED;
+NLC_API int gotvptop_stat(const char *filename, struct stat *) GOTV_USED;
 
 /**
  * Finds file/inode information, as lstat().
@@ -179,7 +179,7 @@ GOTV_API int gotvptop_stat(const char *filename, struct stat *) GOTV_USED;
  *
  * @param filename UTF-8 file path
  */
-GOTV_API int gotvptop_lstat(const char *filename, struct stat *) GOTV_USED;
+NLC_API int gotvptop_lstat(const char *filename, struct stat *) GOTV_USED;
 
 /**
  * Removes a file.
@@ -188,7 +188,7 @@ GOTV_API int gotvptop_lstat(const char *filename, struct stat *) GOTV_USED;
  * @return A 0 return value indicates success. A -1 return value indicates an
  *        error, and an error code is stored in errno
  */
-GOTV_API int gotvptop_unlink(const char *filename);
+NLC_API int gotvptop_unlink(const char *filename);
 
 /**
  * Moves a file atomically. This only works within a single file system.
@@ -198,9 +198,9 @@ GOTV_API int gotvptop_unlink(const char *filename);
  * @return A 0 return value indicates success. A -1 return value indicates an
  *        error, and an error code is stored in errno
  */
-GOTV_API int gotvptop_rename(const char *oldpath, const char *newpath);
+NLC_API int gotvptop_rename(const char *oldpath, const char *newpath);
 
-GOTV_API FILE * gotvptop_fopen( const char *filename, const char *mode ) GOTV_USED;
+NLC_API FILE * gotvptop_fopen( const char *filename, const char *mode ) GOTV_USED;
 
 /**
  * \defgroup dir Directories
@@ -214,7 +214,7 @@ GOTV_API FILE * gotvptop_fopen( const char *filename, const char *mode ) GOTV_US
  * @return a pointer to the DIR struct, or NULL in case of error.
  * Release with standard closedir().
  */
-GOTV_API DIR *gotvptop_opendir(const char *dirname) GOTV_USED;
+NLC_API DIR *gotvptop_opendir(const char *dirname) GOTV_USED;
 
 /**
  * Reads the next file name from an open directory.
@@ -227,10 +227,10 @@ GOTV_API DIR *gotvptop_opendir(const char *dirname) GOTV_USED;
  * If there are no more entries in the directory, NULL is returned.
  * If an error occurs, errno is set and NULL is returned.
  */
-GOTV_API const char *gotvptop_readdir(DIR *dir) GOTV_USED;
+NLC_API const char *gotvptop_readdir(DIR *dir) GOTV_USED;
 
-GOTV_API int gotvptop_loaddir( DIR *dir, char ***namelist, int (*select)( const char * ), int (*compar)( const char **, const char ** ) );
-GOTV_API int gotvptop_scandir( const char *dirname, char ***namelist, int (*select)( const char * ), int (*compar)( const char **, const char ** ) );
+NLC_API int gotvptop_loaddir( DIR *dir, char ***namelist, int (*select)( const char * ), int (*compar)( const char **, const char ** ) );
+NLC_API int gotvptop_scandir( const char *dirname, char ***namelist, int (*select)( const char * ), int (*compar)( const char **, const char ** ) );
 
 /**
  * Creates a directory.
@@ -240,7 +240,7 @@ GOTV_API int gotvptop_scandir( const char *dirname, char ***namelist, int (*sele
  * @param mode directory permissions
  * @return 0 on success, -1 on error (see errno).
  */
-GOTV_API int gotvptop_mkdir(const char *dirname, mode_t mode);
+NLC_API int gotvptop_mkdir(const char *dirname, mode_t mode);
 
 /**
  * Determines the current working directory.
@@ -248,7 +248,7 @@ GOTV_API int gotvptop_mkdir(const char *dirname, mode_t mode);
  * @return the current working directory (must be free()'d)
  *         or NULL on error
  */
-GOTV_API char *gotvptop_getcwd(void) GOTV_USED;
+NLC_API char *gotvptop_getcwd(void) GOTV_USED;
 
 /** @} */
 /** @} */

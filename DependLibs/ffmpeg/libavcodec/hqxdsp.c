@@ -24,7 +24,7 @@
 
 #include "hqxdsp.h"
 
-static GOTV_INLINE void idct_col(int16_t *blk, const uint8_t *quant)
+static NLC_INLINE void idct_col(int16_t *blk, const uint8_t *quant)
 {
     int t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, tA, tB, tC, tD, tE, tF;
     int t10, t11, t12, t13;
@@ -70,7 +70,7 @@ static GOTV_INLINE void idct_col(int16_t *blk, const uint8_t *quant)
     blk[7 * 8] = t13;
 }
 
-static GOTV_INLINE void idct_row(int16_t *blk)
+static NLC_INLINE void idct_row(int16_t *blk)
 {
     int t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, tA, tB, tC, tD, tE, tF;
     int t10, t11, t12, t13;

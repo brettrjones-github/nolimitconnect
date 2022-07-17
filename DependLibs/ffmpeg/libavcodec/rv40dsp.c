@@ -208,7 +208,7 @@ RV40_MC(avg_, 8)
 RV40_MC(avg_, 16)
 
 #define PIXOP2(OPNAME, OP)                                              \
-static GOTV_INLINE void OPNAME ## _pixels8_xy2_8_c(uint8_t *block,           \
+static NLC_INLINE void OPNAME ## _pixels8_xy2_8_c(uint8_t *block,           \
                                               const uint8_t *pixels,    \
                                               ptrdiff_t line_size,      \
                                               int h)                    \

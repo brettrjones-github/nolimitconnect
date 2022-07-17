@@ -212,7 +212,7 @@ static void xan_unpack(uint8_t *dest, int dest_len,
     }
 }
 
-static GOTV_INLINE void xan_wc3_output_pixel_run(XanContext *s, AVFrame *frame,
+static NLC_INLINE void xan_wc3_output_pixel_run(XanContext *s, AVFrame *frame,
     const uint8_t *pixel_buffer, int x, int y, int pixel_count)
 {
     int stride;
@@ -242,7 +242,7 @@ static GOTV_INLINE void xan_wc3_output_pixel_run(XanContext *s, AVFrame *frame,
     }
 }
 
-static GOTV_INLINE void xan_wc3_copy_pixel_run(XanContext *s, AVFrame *frame,
+static NLC_INLINE void xan_wc3_copy_pixel_run(XanContext *s, AVFrame *frame,
                                           int x, int y,
                                           int pixel_count, int motion_x,
                                           int motion_y)
@@ -462,18 +462,18 @@ static int xan_wc3_decode_frame(XanContext *s, AVFrame *frame)
 }
 
 #if RUNTIME_GAMMA
-static GOTV_INLINE unsigned mul(unsigned a, unsigned b)
+static NLC_INLINE unsigned mul(unsigned a, unsigned b)
 {
     return (a * b) >> 16;
 }
 
-static GOTV_INLINE unsigned pow4(unsigned a)
+static NLC_INLINE unsigned pow4(unsigned a)
 {
     unsigned square = mul(a, a);
     return mul(square, square);
 }
 
-static GOTV_INLINE unsigned pow5(unsigned a)
+static NLC_INLINE unsigned pow5(unsigned a)
 {
     return mul(pow4(a), a);
 }

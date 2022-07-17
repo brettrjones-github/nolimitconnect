@@ -28,7 +28,7 @@ int GetCPUInfoNoASM(CPUFeature feature) {
 #ifndef _MSC_VER
 // Intrinsic for "cpuid".
 #if defined(__pic__) && defined(__i386__)
-static GOTV_INLINE void __cpuid(int cpu_info[4], int info_type) {
+static NLC_INLINE void __cpuid(int cpu_info[4], int info_type) {
   __asm__ volatile(
     "mov %%ebx, %%edi\n"
     "cpuid\n"
@@ -37,7 +37,7 @@ static GOTV_INLINE void __cpuid(int cpu_info[4], int info_type) {
     : "a"(info_type));
 }
 #else
-static GOTV_INLINE void __cpuid(int cpu_info[4], int info_type) {
+static NLC_INLINE void __cpuid(int cpu_info[4], int info_type) {
   __asm__ volatile(
     "cpuid\n"
     : "=a"(cpu_info[0]), "=b"(cpu_info[1]), "=c"(cpu_info[2]), "=d"(cpu_info[3])

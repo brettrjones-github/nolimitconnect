@@ -72,7 +72,7 @@ const int ff_lzw_encode_state_size = sizeof(LZWEncodeState);
  * @param add Character to add
  * @return New hash value
  */
-static GOTV_INLINE int hash(int head, const int add)
+static NLC_INLINE int hash(int head, const int add)
 {
     head ^= (add << LZW_HASH_SHIFT);
     if (head >= LZW_HASH_SIZE)
@@ -87,7 +87,7 @@ static GOTV_INLINE int hash(int head, const int add)
  * @param offset Offset calculated by hashOffset
  * @return New hash value
  */
-static GOTV_INLINE int hashNext(int head, const int offset)
+static NLC_INLINE int hashNext(int head, const int offset)
 {
     head -= offset;
     if(head < 0)
@@ -100,7 +100,7 @@ static GOTV_INLINE int hashNext(int head, const int offset)
  * @param head Actual hash code
  * @return Hash offset
  */
-static GOTV_INLINE int hashOffset(const int head)
+static NLC_INLINE int hashOffset(const int head)
 {
     return head ? LZW_HASH_SIZE - head : 1;
 }
@@ -110,7 +110,7 @@ static GOTV_INLINE int hashOffset(const int head)
  * @param s LZW state
  * @param c code to write
  */
-static GOTV_INLINE void writeCode(LZWEncodeState * s, int c)
+static NLC_INLINE void writeCode(LZWEncodeState * s, int c)
 {
     av_assert2(0 <= c && c < 1 << s->bits);
     s->put_bits(&s->pb, s->bits, c);
@@ -124,7 +124,7 @@ static GOTV_INLINE void writeCode(LZWEncodeState * s, int c)
  * @param hash_prefix LZW code for prefix
  * @return LZW code for block or -1 if not found in table
  */
-static GOTV_INLINE int findCode(LZWEncodeState * s, uint8_t c, int hash_prefix)
+static NLC_INLINE int findCode(LZWEncodeState * s, uint8_t c, int hash_prefix)
 {
     int h = hash(FFMAX(hash_prefix, 0), c);
     int hash_offset = hashOffset(h);
@@ -146,7 +146,7 @@ static GOTV_INLINE int findCode(LZWEncodeState * s, uint8_t c, int hash_prefix)
  * @param hash_prefix LZW code for prefix
  * @param hash_code LZW code for bytes block
  */
-static GOTV_INLINE void addCode(LZWEncodeState * s, uint8_t c, int hash_prefix, int hash_code)
+static NLC_INLINE void addCode(LZWEncodeState * s, uint8_t c, int hash_prefix, int hash_code)
 {
     s->tab[hash_code].code = s->tabsize;
     s->tab[hash_code].suffix = c;

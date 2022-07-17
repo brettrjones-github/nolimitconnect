@@ -606,7 +606,7 @@
  *
  * You may use UNKNOWN_ES for the ES category if you don't have the information.
  */
-GOTV_API gotvptop_fourcc_t gotvptop_fourcc_GetCodec( int i_cat, gotvptop_fourcc_t i_fourcc );
+NLC_API gotvptop_fourcc_t gotvptop_fourcc_GetCodec( int i_cat, gotvptop_fourcc_t i_fourcc );
 
 /**
  * It returns the codec associated to a fourcc stored in a zero terminated
@@ -617,7 +617,7 @@ GOTV_API gotvptop_fourcc_t gotvptop_fourcc_GetCodec( int i_cat, gotvptop_fourcc_
  *
  * Provided for convenience.
  */
-GOTV_API gotvptop_fourcc_t gotvptop_fourcc_GetCodecFromString( int i_cat, const char * );
+NLC_API gotvptop_fourcc_t gotvptop_fourcc_GetCodecFromString( int i_cat, const char * );
 
 /**
  * It converts the given fourcc to an audio codec when possible.
@@ -626,14 +626,14 @@ GOTV_API gotvptop_fourcc_t gotvptop_fourcc_GetCodecFromString( int i_cat, const 
  * is detected, 0 is returned.
  * The other fourccs go through gotvptop_fourcc_GetCodec and i_bits is not checked.
  */
-GOTV_API gotvptop_fourcc_t gotvptop_fourcc_GetCodecAudio( gotvptop_fourcc_t i_fourcc, int i_bits );
+NLC_API gotvptop_fourcc_t gotvptop_fourcc_GetCodecAudio( gotvptop_fourcc_t i_fourcc, int i_bits );
 
 /**
  * It returns the description of the given fourcc or NULL if not found.
  *
  * You may use UNKNOWN_ES for the ES category if you don't have the information.
  */
-GOTV_API const char * gotvptop_fourcc_GetDescription( int i_cat, gotvptop_fourcc_t i_fourcc );
+NLC_API const char * gotvptop_fourcc_GetDescription( int i_cat, gotvptop_fourcc_t i_fourcc );
 
 /**
  * It returns a list (terminated with the value 0) of YUV fourccs in
@@ -641,7 +641,7 @@ GOTV_API const char * gotvptop_fourcc_GetDescription( int i_cat, gotvptop_fourcc
  *
  * It will always return a non NULL pointer that must not be freed.
  */
-GOTV_API const gotvptop_fourcc_t * gotvptop_fourcc_GetYUVFallback( gotvptop_fourcc_t );
+NLC_API const gotvptop_fourcc_t * gotvptop_fourcc_GetYUVFallback( gotvptop_fourcc_t );
 
 /**
  * It returns a list (terminated with the value 0) of RGB fourccs in
@@ -649,18 +649,18 @@ GOTV_API const gotvptop_fourcc_t * gotvptop_fourcc_GetYUVFallback( gotvptop_four
  *
  * It will always return a non NULL pointer that must not be freed.
  */
-GOTV_API const gotvptop_fourcc_t * gotvptop_fourcc_GetRGBFallback( gotvptop_fourcc_t );
+NLC_API const gotvptop_fourcc_t * gotvptop_fourcc_GetRGBFallback( gotvptop_fourcc_t );
 
 /**
  * It returns true if the given fourcc is YUV and false otherwise.
  */
-GOTV_API bool gotvptop_fourcc_IsYUV( gotvptop_fourcc_t );
+NLC_API bool gotvptop_fourcc_IsYUV( gotvptop_fourcc_t );
 
 /**
  * It returns true if the two fourccs are equivalent if their U&V planes are
  * swapped.
  */
-GOTV_API bool gotvptop_fourcc_AreUVPlanesSwapped(gotvptop_fourcc_t , gotvptop_fourcc_t );
+NLC_API bool gotvptop_fourcc_AreUVPlanesSwapped(gotvptop_fourcc_t , gotvptop_fourcc_t );
 
 /**
  * Chroma related information.
@@ -679,7 +679,7 @@ typedef struct {
  * It returns a gotvptop_chroma_description_t describing the requested fourcc or NULL
  * if not found.
  */
-GOTV_API const gotvptop_chroma_description_t * gotvptop_fourcc_GetChromaDescription( gotvptop_fourcc_t fourcc ) GOTV_USED;
+NLC_API const gotvptop_chroma_description_t * gotvptop_fourcc_GetChromaDescription( gotvptop_fourcc_t fourcc ) GOTV_USED;
 
 #endif /* _GOTV_FOURCC_H */
 

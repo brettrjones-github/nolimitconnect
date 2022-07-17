@@ -183,7 +183,7 @@ public:
         std::string & err,
         JsonParse strategy = JsonParse::STANDARD);
 
-    static GOTV_INLINE std::vector<Json> parse_multi(
+    static NLC_INLINE std::vector<Json> parse_multi(
         const std::string & in,
         std::string & err,
         JsonParse strategy = JsonParse::STANDARD) {

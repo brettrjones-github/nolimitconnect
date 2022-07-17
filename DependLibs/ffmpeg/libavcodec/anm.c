@@ -75,7 +75,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
  * a fill operation is achieved when 'gb' is null and pixel is >= 0
  * a skip operation is achieved when 'gb' is null and pixel is < 0
  */
-static GOTV_INLINE int op(uint8_t **dst, const uint8_t *dst_end,
+static NLC_INLINE int op(uint8_t **dst, const uint8_t *dst_end,
                      GetByteContext *gb,
                      int pixel, int count,
                      int *x, int width, int linesize)

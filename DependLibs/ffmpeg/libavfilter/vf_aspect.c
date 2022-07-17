@@ -76,7 +76,7 @@ static int filter_frame(AVFilterLink *link, AVFrame *frame)
 #define OFFSET(x) offsetof(AspectContext, x)
 #define FLAGS AV_OPT_FLAG_FILTERING_PARAM|AV_OPT_FLAG_VIDEO_PARAM
 
-static GOTV_INLINE void compute_dar(AVRational *dar, AVRational sar, int w, int h)
+static NLC_INLINE void compute_dar(AVRational *dar, AVRational sar, int w, int h)
 {
     if (sar.num && sar.den) {
         av_reduce(&dar->num, &dar->den, sar.num * w, sar.den * h, INT_MAX);

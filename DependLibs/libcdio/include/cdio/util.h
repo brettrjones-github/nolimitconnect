@@ -31,7 +31,7 @@
 #include <libcdio/include/cdio/types.h>
 
 #if !defined CDIO_INLINE
-# define CDIO_INLINE GOTV_INLINE
+# define CDIO_INLINE NLC_INLINE
 #endif /* CDIO_INLINE */
 
 #undef  MAX

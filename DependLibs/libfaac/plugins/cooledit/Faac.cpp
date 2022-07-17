@@ -32,7 +32,7 @@ ntnfrn_email-temp@yahoo.it
 
 
 
-GOTV_INLINE DWORD ERROR_FGO(char *msg)
+NLC_INLINE DWORD ERROR_FGO(char *msg)
 {
 	if(msg)
 	{

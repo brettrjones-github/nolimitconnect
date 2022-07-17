@@ -53,7 +53,7 @@ typedef struct
 
 
 /* Set the value from S into D.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 point_set (mpi_point_t d, mpi_point_t s)
 {
   mpi_set (d->x, s->x);

@@ -38,6 +38,7 @@ public:
      ~AudioOutIo() override = default;
 
     bool                        initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
+    bool                        soundOutDeviceChanged( int deviceIndex );
 
     QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice.data(); }
     QAudio::State               getState()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutState : QAudio::StoppedState); }
@@ -75,9 +76,6 @@ protected:
     qint64                      writeData( const char *data, qint64 len )  override;
     qint64                      bytesAvailable() const override;
     qint64                      size() const override;
-
-private:
-    void                        reinit();
 
 private:
     AudioIoMgr&                 m_AudioIoMgr;

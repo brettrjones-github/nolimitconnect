@@ -728,7 +728,7 @@ xyuv_count_frames (xyuv_t * xyuv)
   }
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 ssd (int a)
 {
   return a * a;

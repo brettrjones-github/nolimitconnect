@@ -94,7 +94,7 @@ amm-info@iis.fraunhofer.de
 #define FUNCTION_scramble
 
 #if defined(FUNCTION_scramble)
-GOTV_INLINE void scramble(FIXP_DBL *x, int32_t n) {
+NLC_INLINE void scramble(FIXP_DBL *x, int32_t n) {
   int32_t m,j;
   int ldn=1;
   do {ldn++;} while((1<<ldn)<n);

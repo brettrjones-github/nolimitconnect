@@ -73,12 +73,12 @@
 
 #if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ > 0)
 #define UNUSED __attribute__((unused))
-#define ALWAYS_INLINE __attribute__((always_inline)) GOTV_INLINE
+#define ALWAYS_INLINE __attribute__((always_inline)) NLC_INLINE
 #define NOINLINE __attribute__((noinline))
 #define xavs_constant_p(x) __builtin_constant_p(x)
 #else
 #define UNUSED
-#define ALWAYS_INLINE GOTV_INLINE
+#define ALWAYS_INLINE NLC_INLINE
 #define NOINLINE
 #define xavs_constant_p(x) 0
 #endif
@@ -87,7 +87,7 @@
 #if defined(SYS_BEOS)
 #include <kernel/OS.h>
 #define xavs_pthread_t               thread_id
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_pthread_create (xavs_pthread_t * t, void *a, void *(*f) (void *), void *d)
 {
   *t = spawn_thread (f, "", 10, d);
@@ -107,7 +107,7 @@ xavs_pthread_create (xavs_pthread_t * t, void *a, void *(*f) (void *), void *d)
 #elif defined(__WIN32__)
 #include <windows.h>
 #define xavs_pthread_t   HANDLE
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_pthread_create (xavs_pthread_t * t, void *a, LPVOID f, void *d)
 {
 	 *t = CreateThread(NULL,0,f,d,0,NULL);

@@ -38,7 +38,7 @@
 	((buf[base+1]<<8)&0xff00)| \
 	(buf[base]&0xff))
 static unsigned int rngseed = 22222;
-static GOTV_INLINE unsigned int fast_rand(void) {
+static NLC_INLINE unsigned int fast_rand(void) {
 	rngseed = (rngseed * 96314165) + 907633515;
 	return rngseed;
 }

@@ -36,7 +36,7 @@
 #define FIXED_ARM4_H
 
 #undef MULT16_32_Q14
-static GOTV_INLINE spx_word32_t MULT16_32_Q14(spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MULT16_32_Q14(spx_word16_t x, spx_word32_t y) {
   int res;
   int dummy;
   asm (
@@ -49,7 +49,7 @@ static GOTV_INLINE spx_word32_t MULT16_32_Q14(spx_word16_t x, spx_word32_t y) {
 }
 
 #undef MULT16_32_Q15
-static GOTV_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
   int res;
   int dummy;
   asm (
@@ -62,7 +62,7 @@ static GOTV_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
 }
 
 #undef DIV32_16
-static GOTV_INLINE short DIV32_16(int a, int b)
+static NLC_INLINE short DIV32_16(int a, int b)
 {
    int res=0;
    int dead1, dead2, dead3, dead4, dead5;

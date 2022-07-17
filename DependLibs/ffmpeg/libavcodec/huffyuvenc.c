@@ -38,7 +38,7 @@
 #include "libavutil/opt.h"
 #include "libavutil/pixdesc.h"
 
-static GOTV_INLINE void diff_bytes(HYuvContext *s, uint8_t *dst,
+static NLC_INLINE void diff_bytes(HYuvContext *s, uint8_t *dst,
                               const uint8_t *src0, const uint8_t *src1, int w)
 {
     if (s->bps <= 8) {
@@ -48,7 +48,7 @@ static GOTV_INLINE void diff_bytes(HYuvContext *s, uint8_t *dst,
     }
 }
 
-static GOTV_INLINE int sub_left_prediction(HYuvContext *s, uint8_t *dst,
+static NLC_INLINE int sub_left_prediction(HYuvContext *s, uint8_t *dst,
                                       const uint8_t *src, int w, int left)
 {
     int i;
@@ -79,7 +79,7 @@ static GOTV_INLINE int sub_left_prediction(HYuvContext *s, uint8_t *dst,
     }
 }
 
-static GOTV_INLINE void sub_left_prediction_bgr32(HYuvContext *s, uint8_t *dst,
+static NLC_INLINE void sub_left_prediction_bgr32(HYuvContext *s, uint8_t *dst,
                                              const uint8_t *src, int w,
                                              int *red, int *green, int *blue,
                                              int *alpha)
@@ -699,7 +699,7 @@ static int encode_gray_bitstream(HYuvContext *s, int count)
     return 0;
 }
 
-static GOTV_INLINE int encode_bgra_bitstream(HYuvContext *s, int count, int planes)
+static NLC_INLINE int encode_bgra_bitstream(HYuvContext *s, int count, int planes)
 {
     int i;
 

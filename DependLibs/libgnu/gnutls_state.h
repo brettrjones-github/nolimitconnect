@@ -28,7 +28,7 @@
 void _gnutls_session_cert_type_set(gnutls_session_t session,
 				   gnutls_certificate_type_t);
 
-GOTV_INLINE static gnutls_ecc_curve_t
+NLC_INLINE static gnutls_ecc_curve_t
 _gnutls_session_ecc_curve_get(gnutls_session_t session)
 {
 	return session->security_parameters.ecc_curve;
@@ -67,7 +67,7 @@ int _gnutls_dh_set_peer_public(gnutls_session_t session, bigint_t public);
 int _gnutls_dh_set_group(gnutls_session_t session, bigint_t gen,
 			 bigint_t prime);
 
-static GOTV_INLINE int _gnutls_dh_get_min_prime_bits(gnutls_session_t session)
+static NLC_INLINE int _gnutls_dh_get_min_prime_bits(gnutls_session_t session)
 {
 	if (session->internals.priorities.dh_prime_bits != 0)
 		return session->internals.priorities.dh_prime_bits;

@@ -62,7 +62,7 @@
 
 #if HAVE_INLINE_ASM && HAVE_MIPSFPU
 #if !HAVE_MIPS32R6 && !HAVE_MIPS64R6
-static GOTV_INLINE float *VMUL2_mips(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL2_mips(float *dst, const float *v, unsigned idx,
                            const float *scale)
 {
     float temp0, temp1, temp2;
@@ -93,7 +93,7 @@ static GOTV_INLINE float *VMUL2_mips(float *dst, const float *v, unsigned idx,
     return ret;
 }
 
-static GOTV_INLINE float *VMUL4_mips(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL4_mips(float *dst, const float *v, unsigned idx,
                            const float *scale)
 {
     int temp0, temp1, temp2, temp3;
@@ -135,7 +135,7 @@ static GOTV_INLINE float *VMUL4_mips(float *dst, const float *v, unsigned idx,
     return ret;
 }
 
-static GOTV_INLINE float *VMUL2S_mips(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL2S_mips(float *dst, const float *v, unsigned idx,
                             unsigned sign, const float *scale)
 {
     int temp0, temp1, temp2, temp3, temp4, temp5;
@@ -176,7 +176,7 @@ static GOTV_INLINE float *VMUL2S_mips(float *dst, const float *v, unsigned idx,
     return ret;
 }
 
-static GOTV_INLINE float *VMUL4S_mips(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL4S_mips(float *dst, const float *v, unsigned idx,
                             unsigned sign, const float *scale)
 {
     int temp0, temp1, temp2, temp3, temp4;

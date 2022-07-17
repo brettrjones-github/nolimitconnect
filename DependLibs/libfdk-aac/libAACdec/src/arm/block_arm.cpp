@@ -100,7 +100,7 @@ amm-info@iis.fraunhofer.de
          with an optimal 4x-loop construct (do - 4x - while).
 */
 
-GOTV_INLINE static void CBlock_ScaleSpectralData_func1(
+NLC_INLINE static void CBlock_ScaleSpectralData_func1(
     FIXP_DBL *pSpectrum,
     int max_band,
     const int16_t * RESTRICT BandOffsets,

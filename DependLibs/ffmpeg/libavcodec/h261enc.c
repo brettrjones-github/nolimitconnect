@@ -151,7 +151,7 @@ static void h261_encode_motion(H261Context *h, int val)
     }
 }
 
-static GOTV_INLINE int get_cbp(MpegEncContext *s, int16_t block[6][64])
+static NLC_INLINE int get_cbp(MpegEncContext *s, int16_t block[6][64])
 {
     int i, cbp;
     cbp = 0;

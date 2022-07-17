@@ -109,7 +109,7 @@ static DOUBLEX const ROUNDFAC = ROUNDFAC_def;
 static DOUBLEX const MAGIC_FLOAT = MAGIC_FLOAT_def;
 
 
-GOTV_INLINE static  float
+NLC_INLINE static  float
 vec_max_c(const float * xr34, unsigned int bw)
 {
     float   xfsf = 0;
@@ -141,7 +141,7 @@ vec_max_c(const float * xr34, unsigned int bw)
 }
 
 
-GOTV_INLINE static  uint8_t
+NLC_INLINE static  uint8_t
 find_lowest_scalefac(const FLOAT xr34)
 {
     uint8_t sf_ok = 255;
@@ -163,7 +163,7 @@ find_lowest_scalefac(const FLOAT xr34)
 }
 
 
-GOTV_INLINE static void
+NLC_INLINE static void
 k_34_4(DOUBLEX x[4], int l3[4])
 {
 #ifdef TAKEHIRO_IEEE754_HACK

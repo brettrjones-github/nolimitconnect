@@ -100,7 +100,7 @@ struct vout_thread_t {
  * \param cfg the video configuration requested.
  * \return a vout
  */
-GOTV_API vout_thread_t * vout_Request( gotvptop_object_t *object, const vout_configuration_t *cfg );
+NLC_API vout_thread_t * vout_Request( gotvptop_object_t *object, const vout_configuration_t *cfg );
 #define vout_Request(a,b) vout_Request(GOTV_OBJECT(a),b)
 
 /**
@@ -111,7 +111,7 @@ GOTV_API vout_thread_t * vout_Request( gotvptop_object_t *object, const vout_con
  *
  * \param p_vout the vout to close
  */
-GOTV_API void vout_Close( vout_thread_t *p_vout );
+NLC_API void vout_Close( vout_thread_t *p_vout );
 
 /**
  * This function will close a vout created by vout_Create
@@ -140,26 +140,26 @@ static inline void vout_CloseAndRelease( vout_thread_t *p_vout )
  * available.
  *
  */
-GOTV_API int vout_GetSnapshot( vout_thread_t *p_vout,
+NLC_API int vout_GetSnapshot( vout_thread_t *p_vout,
                               block_t **pp_image, picture_t **pp_picture,
                               video_format_t *p_fmt,
                               const char *psz_format, mtime_t i_timeout );
 
-GOTV_API void vout_ChangeAspectRatio( vout_thread_t *p_vout,
+NLC_API void vout_ChangeAspectRatio( vout_thread_t *p_vout,
                                      unsigned int i_num, unsigned int i_den );
 
 /* */
-GOTV_API picture_t * vout_GetPicture( vout_thread_t * );
-GOTV_API void vout_PutPicture( vout_thread_t *, picture_t * );
+NLC_API picture_t * vout_GetPicture( vout_thread_t * );
+NLC_API void vout_PutPicture( vout_thread_t *, picture_t * );
 
 /* Subpictures channels ID */
 #define VOUT_SPU_CHANNEL_OSD            1 /* OSD channel is automatically cleared */
 #define VOUT_SPU_CHANNEL_AVAIL_FIRST    8 /* Registerable channels from this offset */
 
 /* */
-GOTV_API void vout_PutSubpicture( vout_thread_t *, subpicture_t * );
-GOTV_API int vout_RegisterSubpictureChannel( vout_thread_t * );
-GOTV_API void vout_FlushSubpictureChannel( vout_thread_t *, int );
+NLC_API void vout_PutSubpicture( vout_thread_t *, subpicture_t * );
+NLC_API int vout_RegisterSubpictureChannel( vout_thread_t * );
+NLC_API void vout_FlushSubpictureChannel( vout_thread_t *, int );
 
 /**@}*/
 

@@ -247,7 +247,7 @@ NAME(uint8_t *x_ptr, int x_stride,  \
 #define FIX_IN(x)		((uint16_t) ((x) * (1L<<SCALEBITS_IN) + 0.5))
 
 
-static GOTV_INLINE unsigned
+static NLC_INLINE unsigned
 build_prefetch(unsigned char block_size, unsigned char block_count, short stride)
 {    
     return ((block_size << 24) | (block_count << 16) | stride);

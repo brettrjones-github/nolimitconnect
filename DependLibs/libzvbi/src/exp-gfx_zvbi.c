@@ -260,7 +260,7 @@ slant:
  * Draw one character (function template - define a static version with
  * constant @a canvas_type, @a font, @a cpl, @a cw, @a ch).
  */
-static GOTV_INLINE void
+static NLC_INLINE void
 draw_char(int canvas_type, uint8_t *canvas, int rowstride,
 	  uint8_t *pen, uint8_t *font, int cpl, int cw, int ch,
 	  int glyph, int bold, unsigned int underline, vbi_size size)
@@ -386,7 +386,7 @@ draw_char(int canvas_type, uint8_t *canvas, int rowstride,
  * Draw one Teletext Dynamically Redefinable Character (function template -
  * define a static version with constant @a canvas_type, @a font).
  */
-static GOTV_INLINE void
+static NLC_INLINE void
 draw_drcs(int canvas_type, uint8_t *canvas, unsigned int rowstride,
 	  uint8_t *pen, int color, uint8_t *font, int glyph, vbi_size size)
 {
@@ -471,7 +471,7 @@ draw_drcs(int canvas_type, uint8_t *canvas, unsigned int rowstride,
  * 
  * Draw blank character.
  */
-static GOTV_INLINE void
+static NLC_INLINE void
 draw_blank(int canvas_type, uint8_t *canvas, unsigned int rowstride,
 	   unsigned int color, int cw, int ch)
 {

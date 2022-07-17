@@ -51,10 +51,10 @@ extern char *spxGlobalScratchPtr, *spxGlobalScratchEnd;
 
 /* Make sure that all structures are aligned to largest type */
 #define BLOCK_MASK      (sizeof(long double)-1)
-extern GOTV_INLINE void speex_warning(const char *str);
+extern NLC_INLINE void speex_warning(const char *str);
 
 #define OVERRIDE_SPEEX_ALLOC
-static GOTV_INLINE void *speex_alloc (int size)
+static NLC_INLINE void *speex_alloc (int size)
 {
     void *ptr;
     
@@ -78,7 +78,7 @@ static GOTV_INLINE void *speex_alloc (int size)
 }
 
 #define OVERRIDE_SPEEX_ALLOC_SCRATCH
-static GOTV_INLINE void *speex_alloc_scratch (int size)
+static NLC_INLINE void *speex_alloc_scratch (int size)
 {
     void *ptr;
 
@@ -102,7 +102,7 @@ static GOTV_INLINE void *speex_alloc_scratch (int size)
 }
 
 #define OVERRIDE_SPEEX_REALLOC
-static GOTV_INLINE void *speex_realloc (void *ptr, int size)
+static NLC_INLINE void *speex_realloc (void *ptr, int size)
 {
 #ifdef VERBOSE_ALLOC
    speex_warning("realloc attempted, not allowed");
@@ -111,14 +111,14 @@ static GOTV_INLINE void *speex_realloc (void *ptr, int size)
 }
 
 #define OVERRIDE_SPEEX_FREE
-static GOTV_INLINE void speex_free (void *ptr)
+static NLC_INLINE void speex_free (void *ptr)
 {
 #ifdef VERBOSE_ALLOC
    speex_warning("at speex_free");
 #endif
 }
 #define OVERRIDE_SPEEX_FREE_SCRATCH
-static GOTV_INLINE void speex_free_scratch (void *ptr)
+static NLC_INLINE void speex_free_scratch (void *ptr)
 {
 #ifdef VERBOSE_ALLOC
    speex_warning("at speex_free_scratch");

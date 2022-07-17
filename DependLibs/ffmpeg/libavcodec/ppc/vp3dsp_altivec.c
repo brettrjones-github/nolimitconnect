@@ -67,11 +67,11 @@ static const vec_u8 interleave_high =
 // things are tricky because a is signed, but C unsigned.
 // M15 is used if C fits in 15 bit unsigned (C6,C7)
 // M16 is used if C requires 16 bits unsigned
-static GOTV_INLINE vec_s16 M15(vec_s16 a, vec_s16 C)
+static NLC_INLINE vec_s16 M15(vec_s16 a, vec_s16 C)
 {
     return (vec_s16)vec_perm(vec_mule(a,C), vec_mulo(a,C), interleave_high);
 }
-static GOTV_INLINE vec_s16 M16(vec_s16 a, vec_s16 C)
+static NLC_INLINE vec_s16 M16(vec_s16 a, vec_s16 C)
 {
     return vec_add(a, M15(a, C));
 }

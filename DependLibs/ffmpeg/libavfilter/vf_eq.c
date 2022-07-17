@@ -301,7 +301,7 @@ static int filter_frame(AVFilterLink *inlink, AVFrame *in)
     return ff_filter_frame(outlink, out);
 }
 
-static GOTV_INLINE int set_param(AVExpr **pexpr, const char *args, const char *cmd,
+static NLC_INLINE int set_param(AVExpr **pexpr, const char *args, const char *cmd,
                             void (*set_fn)(EQContext *eq), AVFilterContext *ctx)
 {
     EQContext *eq = ctx->priv;

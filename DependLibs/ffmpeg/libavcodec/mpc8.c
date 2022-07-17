@@ -42,7 +42,7 @@ static VLC q1_vlc, q2_vlc[2], q3_vlc[2], quant_vlc[4][2], q9up_vlc;
 static const int q3_offsets[2] = { MPC8_Q3_OFFSET, MPC8_Q4_OFFSET };
 static const int quant_offsets[6] = { MPC8_Q5_OFFSET, MPC8_Q6_OFFSET, MPC8_Q7_OFFSET, MPC8_Q8_OFFSET };
 
-static GOTV_INLINE int mpc8_dec_base(GetBitContext *gb, int k, int n)
+static NLC_INLINE int mpc8_dec_base(GetBitContext *gb, int k, int n)
 {
     int len = mpc8_cnk_len[k-1][n-1] - 1;
     int code = len ? get_bits_long(gb, len) : 0;
@@ -53,7 +53,7 @@ static GOTV_INLINE int mpc8_dec_base(GetBitContext *gb, int k, int n)
     return code;
 }
 
-static GOTV_INLINE int mpc8_dec_enum(GetBitContext *gb, int k, int n)
+static NLC_INLINE int mpc8_dec_enum(GetBitContext *gb, int k, int n)
 {
     int bits = 0;
     const uint32_t * C = mpc8_cnk[k-1];
@@ -72,7 +72,7 @@ static GOTV_INLINE int mpc8_dec_enum(GetBitContext *gb, int k, int n)
     return bits;
 }
 
-static GOTV_INLINE int mpc8_get_mod_golomb(GetBitContext *gb, int m)
+static NLC_INLINE int mpc8_get_mod_golomb(GetBitContext *gb, int m)
 {
     if(mpc8_cnk_len[0][m] < 1) return 0;
     return mpc8_dec_base(gb, 1, m+1);

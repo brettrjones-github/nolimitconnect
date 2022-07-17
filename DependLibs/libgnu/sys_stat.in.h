@@ -679,7 +679,7 @@ _GL_WARN_ON_USE (mknodat, "mknodat is not portable - "
 #   undef stat
 #   define stat(name, st) rpl_stat (name, st)
 #  endif /* !_LARGE_FILES */
-GOTV_EXTERN_C int stat (const char *name, struct stat *buf)
+NLC_EXTERN_C int stat (const char *name, struct stat *buf)
                       _GL_ARG_NONNULL ((1, 2));
 # endif
 #elif defined GNULIB_POSIXCHECK

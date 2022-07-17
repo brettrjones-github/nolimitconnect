@@ -471,7 +471,7 @@ AAC_ENCODER_ERROR FDKaacEnc_InitTnsConfiguration(int32_t bitRate,
   \return scale factor
 
 ****************************************************************************/
-static GOTV_INLINE int32_t FDKaacEnc_ScaleUpSpectrum(
+static NLC_INLINE int32_t FDKaacEnc_ScaleUpSpectrum(
         FIXP_DBL                 *dest,
         const FIXP_DBL           *src,
         const int32_t                 startLine,
@@ -509,7 +509,7 @@ static GOTV_INLINE int32_t FDKaacEnc_ScaleUpSpectrum(
   \param scaling of the lag
 
 ****************************************************************************/
-static GOTV_INLINE FIXP_DBL FDKaacEnc_CalcAutoCorrValue(
+static NLC_INLINE FIXP_DBL FDKaacEnc_CalcAutoCorrValue(
         const FIXP_DBL           *spectrum,
         const int32_t                 startLine,
         const int32_t                 stopLine,
@@ -545,7 +545,7 @@ static GOTV_INLINE FIXP_DBL FDKaacEnc_CalcAutoCorrValue(
   \param filter start line
 
 ****************************************************************************/
-static GOTV_INLINE FIXP_DBL FDKaacEnc_AutoCorrNormFac(
+static NLC_INLINE FIXP_DBL FDKaacEnc_AutoCorrNormFac(
         const FIXP_DBL            value,
         const int32_t                 scale,
         int32_t                      *sc

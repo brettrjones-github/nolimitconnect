@@ -7,7 +7,7 @@
 // be found in the AUTHORS file in the root of the source tree.
 // -----------------------------------------------------------------------------
 //
-// GOTV_INLINE YUV<->RGB conversion function
+// NLC_INLINE YUV<->RGB conversion function
 //
 // The exact naming is Y'CbCr, following the ITU-R BT.601 standard.
 // More information at: http://en.wikipedia.org/wiki/YCbCr

@@ -119,7 +119,7 @@ static int oggvorbis_decode_init(AVCodecContext *avccontext) {
 }
 
 
-static GOTV_INLINE int conv(int samples, float **pcm, char *buf, int channels) {
+static NLC_INLINE int conv(int samples, float **pcm, char *buf, int channels) {
     int i, j;
     ogg_int16_t *ptr, *data = (ogg_int16_t*)buf ;
     float *mono ;

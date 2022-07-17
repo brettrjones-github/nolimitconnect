@@ -34,7 +34,7 @@
 #include <libgnu/gtypes.h>
 #include <libgnu/gthread.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef enum
 {
@@ -281,6 +281,6 @@ gboolean        g_cond_timed_wait       (GCond          *cond,
                                          GMutex         *mutex,
                                          GTimeVal       *timeval);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_DEPRECATED_THREAD_H__ */

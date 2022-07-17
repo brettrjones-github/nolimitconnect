@@ -66,7 +66,7 @@ typedef enum gotvptop_dialog_question_type
  * @param psz_fmt format string for the error message
  * @return GOTV_SUCCESS on success, or a GOTV error code on error
  */
-GOTV_API int
+NLC_API int
 libgotvptop_dialog_display_error(gotvptop_object_t *p_obj, const char *psz_title,
                          const char *psz_fmt, ...) GOTV_FORMAT(3,4);
 #define gotvptop_dialog_display_error(a, b, c, ...) \
@@ -78,7 +78,7 @@ libgotvptop_dialog_display_error(gotvptop_object_t *p_obj, const char *psz_title
  * Equivalent to gotvptop_dialog_display_error() expect that it's called with a
  * va_list.
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_display_error_va(gotvptop_object_t *p_obj, const char *psz_title,
                             const char *psz_fmt, va_list ap);
 
@@ -102,7 +102,7 @@ gotvptop_dialog_display_error_va(gotvptop_object_t *p_obj, const char *psz_title
  * @return < 0 on error, 0 if the user cancelled it, and 1 if ppsz_username and
  * ppsz_password are valid.
  */
-GOTV_API int
+NLC_API int
 libgotvptop_dialog_wait_login(gotvptop_object_t *p_obj, char **ppsz_username,
                       char **ppsz_password, bool *p_store,
                       const char *psz_default_username,
@@ -117,7 +117,7 @@ libgotvptop_dialog_wait_login(gotvptop_object_t *p_obj, char **ppsz_username,
  * Equivalent to gotvptop_dialog_wait_login() expect that it's called with a
  * va_list.
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_wait_login_va(gotvptop_object_t *p_obj, char **ppsz_username,
                          char **ppsz_password, bool *p_store,
                          const char *psz_default_username,
@@ -140,7 +140,7 @@ gotvptop_dialog_wait_login_va(gotvptop_object_t *p_obj, char **ppsz_username,
  * @param psz_fmt format string for the question message
  * @return < 0 on error, 0 if the user cancelled it, 1 on action1, 2 on action2
  */
-GOTV_API int
+NLC_API int
 libgotvptop_dialog_wait_question(gotvptop_object_t *p_obj,
                          gotvptop_dialog_question_type i_type,
                          const char *psz_cancel, const char *psz_action1,
@@ -155,7 +155,7 @@ libgotvptop_dialog_wait_question(gotvptop_object_t *p_obj,
  * Equivalent to gotvptop_dialog_wait_question() expect that it's called with a
  * va_list.
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_wait_question_va(gotvptop_object_t *p_obj,
                             gotvptop_dialog_question_type i_type,
                             const char *psz_cancel, const char *psz_action1,
@@ -177,7 +177,7 @@ gotvptop_dialog_wait_question_va(gotvptop_object_t *p_obj,
  * @return a valid gotvptop_dialog_id on success, must be released with
  * gotvptop_dialog_id_release()
  */
-GOTV_API gotvptop_dialog_id *
+NLC_API gotvptop_dialog_id *
 libgotvptop_dialog_display_progress(gotvptop_object_t *p_obj, bool b_indeterminate,
                             float f_position, const char *psz_cancel,
                             const char *psz_title, const char *psz_fmt, ...)
@@ -191,7 +191,7 @@ libgotvptop_dialog_display_progress(gotvptop_object_t *p_obj, bool b_indetermina
  * Equivalent to gotvptop_dialog_display_progress() expect that it's called with a
  * va_list.
  */
-GOTV_API gotvptop_dialog_id *
+NLC_API gotvptop_dialog_id *
 gotvptop_dialog_display_progress_va(gotvptop_object_t *p_obj, bool b_indeterminate,
                                float f_position, const char *psz_cancel,
                                const char *psz_title, const char *psz_fmt,
@@ -205,7 +205,7 @@ gotvptop_dialog_display_progress_va(gotvptop_object_t *p_obj, bool b_indetermina
  * @param f_position position of the progress bar (between 0.0 and 1.0)
  * @return GOTV_SUCCESS on success, or a GOTV error code on error
  */
-GOTV_API int
+NLC_API int
 libgotvptop_dialog_update_progress(gotvptop_object_t *p_obj, gotvptop_dialog_id *p_id,
                            float f_position);
 #define gotvptop_dialog_update_progress(a, b, c) \
@@ -220,7 +220,7 @@ libgotvptop_dialog_update_progress(gotvptop_object_t *p_obj, gotvptop_dialog_id 
  * @param psz_fmt format string for the progress message
  * @return GOTV_SUCCESS on success, or a GOTV error code on error
  */
-GOTV_API int
+NLC_API int
 libgotvptop_dialog_update_progress_text(gotvptop_object_t *p_obj, gotvptop_dialog_id *p_id,
                                 float f_position, const char *psz_fmt, ...)
                                 GOTV_FORMAT(4, 5);
@@ -233,7 +233,7 @@ libgotvptop_dialog_update_progress_text(gotvptop_object_t *p_obj, gotvptop_dialo
  * Equivalent to gotvptop_dialog_update_progress_text() expect that it's called
  * with a va_list.
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_update_progress_text_va(gotvptop_object_t *p_obj, gotvptop_dialog_id *p_id,
                                    float f_position, const char *psz_fmt,
                                    va_list ap);
@@ -246,7 +246,7 @@ gotvptop_dialog_update_progress_text_va(gotvptop_object_t *p_obj, gotvptop_dialo
  * @param p_obj the GOTV object emitting the dialog
  * @param p_id id of the dialog to release
  */
-GOTV_API void
+NLC_API void
 libgotvptop_dialog_release(gotvptop_object_t *p_obj, gotvptop_dialog_id *p_id);
 #define gotvptop_dialog_release(a, b) \
     libgotvptop_dialog_release(GOTV_OBJECT(a), b)
@@ -257,7 +257,7 @@ libgotvptop_dialog_release(gotvptop_object_t *p_obj, gotvptop_dialog_id *p_id);
  * @param p_obj the GOTV object emitting the dialog
  * @param p_id id of the dialog
  */
-GOTV_API bool
+NLC_API bool
 libgotvptop_dialog_is_cancelled(gotvptop_object_t *p_obj, gotvptop_dialog_id *p_id);
 #define gotvptop_dialog_is_cancelled(a, b) \
     libgotvptop_dialog_is_cancelled(GOTV_OBJECT(a), b)
@@ -385,7 +385,7 @@ typedef struct gotvptop_dialog_cbs
  * @param p_cbs a pointer to callbacks, or NULL to unregister callbacks.
  * @param p_data opaque pointer for the callback
  */
-GOTV_API void
+NLC_API void
 libgotvptop_dialog_provider_set_callbacks(gotvptop_object_t *p_obj,
                                   const gotvptop_dialog_cbs *p_cbs, void *p_data);
 #define gotvptop_dialog_provider_set_callbacks(a, b, c) \
@@ -394,13 +394,13 @@ libgotvptop_dialog_provider_set_callbacks(gotvptop_object_t *p_obj,
 /**
  * Associate an opaque pointer with the dialog id
  */
-GOTV_API void
+NLC_API void
 gotvptop_dialog_id_set_context(gotvptop_dialog_id *p_id, void *p_context);
 
 /**
  * Return the opaque pointer associated with the dialog id
  */
-GOTV_API void *
+NLC_API void *
 gotvptop_dialog_id_get_context(gotvptop_dialog_id *p_id);
 
 /**
@@ -416,7 +416,7 @@ gotvptop_dialog_id_get_context(gotvptop_dialog_id *p_id);
  * @param b_store if true, store the credentials
  * @return GOTV_SUCCESS on success, or a GOTV error code on error
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_id_post_login(gotvptop_dialog_id *p_id, const char *psz_username,
                          const char *psz_password, bool b_store);
 
@@ -431,7 +431,7 @@ gotvptop_dialog_id_post_login(gotvptop_dialog_id *p_id, const char *psz_username
  * @param i_action 1 for action1, 2 for action2
  * @return GOTV_SUCCESS on success, or a GOTV error code on error
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_id_post_action(gotvptop_dialog_id *p_id, int i_action);
 
 /**
@@ -444,7 +444,7 @@ gotvptop_dialog_id_post_action(gotvptop_dialog_id *p_id, int i_action);
  * @param p_id id of the dialog
  * @return GOTV_SUCCESS on success, or a GOTV error code on error
  */
-GOTV_API int
+NLC_API int
 gotvptop_dialog_id_dismiss(gotvptop_dialog_id *p_id);
 
 /**
@@ -453,7 +453,7 @@ gotvptop_dialog_id_dismiss(gotvptop_dialog_id *p_id);
  * @{
  */
 
-GOTV_API int
+NLC_API int
 libgotvptop_ext_dialog_update(gotvptop_object_t *p_obj, extension_dialog_t *dialog);
 #define gotvptop_ext_dialog_update(a, b) \
     libgotvptop_ext_dialog_update(GOTV_OBJECT(a), b)
@@ -471,7 +471,7 @@ typedef void (*gotvptop_dialog_ext_update_cb)(extension_dialog_t *p_ext_dialog,
  * callback
  * @param p_data opaque pointer for the callback
  */
-GOTV_API void
+NLC_API void
 libgotvptop_dialog_provider_set_ext_callback(gotvptop_object_t *p_obj,
                                      gotvptop_dialog_ext_update_cb pf_update,
                                      void *p_data);

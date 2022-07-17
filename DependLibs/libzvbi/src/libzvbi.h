@@ -65,11 +65,11 @@ VBI_BEGIN_DECLS
 #if __GNUC__ >= 2
 #  define _vbi_unused __attribute__ ((__unused__))
 #  define _vbi_const __attribute__ ((__const__))
-//#  define GOTV_INLINE static GOTV_INLINE
+//#  define NLC_INLINE static NLC_INLINE
 #else
 #  define _vbi_unused
 #  define _vbi_const
-//#  define GOTV_INLINE static
+//#  define NLC_INLINE static
 #endif
 
 #ifndef TRUE
@@ -130,14 +130,14 @@ VBI_BEGIN_DECLS
 #define VBI_ANY_SUBNO 0x3F7F
 #define VBI_NO_SUBNO 0x3F7F
 
-	GOTV_INLINE unsigned int vbi_dec2bcd( unsigned int dec )
+	NLC_INLINE unsigned int vbi_dec2bcd( unsigned int dec )
 	{
 		return ( dec % 10 ) + ( ( dec / 10 ) % 10 ) * 16 + ( ( dec / 100 ) % 10 ) * 256;
 	}
 
 #define vbi_bin2bcd(n) vbi_dec2bcd(n)
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_bcd2dec( unsigned int bcd )
 	{
 		return ( bcd & 15 ) + ( ( bcd >> 4 ) & 15 ) * 10 + ( ( bcd >> 8 ) & 15 ) * 100;
@@ -145,7 +145,7 @@ VBI_BEGIN_DECLS
 
 #define vbi_bcd2bin(n) vbi_bcd2dec(n)
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_add_bcd( unsigned int a, unsigned int b )
 	{
 		unsigned int t;
@@ -159,7 +159,7 @@ VBI_BEGIN_DECLS
 		return t - b;
 	}
 
-	GOTV_INLINE vbi_bool
+	NLC_INLINE vbi_bool
 		vbi_is_bcd( unsigned int bcd )
 	{
 		static const unsigned int x = 0x06666666;
@@ -167,7 +167,7 @@ VBI_BEGIN_DECLS
 		return ( ( ( bcd + x ) ^ ( bcd ^ x ) ) & 0x11111110 ) == 0;
 	}
 
-	GOTV_INLINE vbi_bool
+	NLC_INLINE vbi_bool
 		vbi_bcd_digits_greater( unsigned int		bcd,
 								unsigned int		maximum )
 	{
@@ -830,19 +830,19 @@ VBI_BEGIN_DECLS
 
 	typedef struct vbi_font_descr vbi_font_descr;
 
-	GOTV_INLINE vbi_bool
+	NLC_INLINE vbi_bool
 		vbi_is_print( unsigned int unicode )
 	{
 		return unicode < 0xE600;
 	}
 
-	GOTV_INLINE vbi_bool
+	NLC_INLINE vbi_bool
 		vbi_is_gfx( unsigned int unicode )
 	{
 		return unicode >= 0xEE00 && unicode <= 0xEFFF;
 	}
 
-	GOTV_INLINE vbi_bool
+	NLC_INLINE vbi_bool
 		vbi_is_drcs( unsigned int unicode )
 	{
 		return unicode >= 0xF000;
@@ -1113,7 +1113,7 @@ VBI_BEGIN_DECLS
 										 unsigned int cri_frc, unsigned int cri_mask,
 										 int cri_bits, int frc_bits, int payload,
 										 vbi_modulation modulation, vbi_pixfmt fmt );
-	GOTV_INLINE vbi_bool
+	NLC_INLINE vbi_bool
 		vbi_bit_slice( vbi_bit_slicer *slicer, uint8_t *raw, uint8_t *buf )
 	{
 		return slicer->func( slicer, raw, buf );
@@ -1904,7 +1904,7 @@ VBI_BEGIN_DECLS
 											 int column, int row,
 											 int width, int height,
 											 int reveal, int flash_on );
-	GOTV_INLINE void
+	NLC_INLINE void
 		vbi_draw_vt_page( vbi_page *pg, vbi_pixfmt fmt, void *canvas,
 						  int reveal, int flash_on )
 	{
@@ -1917,7 +1917,7 @@ VBI_BEGIN_DECLS
 											 int column, int row,
 											 int width, int height );
 
-	GOTV_INLINE void
+	NLC_INLINE void
 		vbi_draw_cc_page( vbi_page *pg, vbi_pixfmt fmt, void *canvas )
 	{
 		vbi_draw_cc_page_region( pg, fmt, canvas, -1, 0, 0, pg->columns, pg->rows );
@@ -1933,7 +1933,7 @@ VBI_BEGIN_DECLS
 										   const char *format, vbi_bool table, vbi_bool ltr,
 										   int column, int row, int width, int height );
 
-	GOTV_INLINE int vbi_print_page( vbi_page *pg, char *buf, int size,
+	NLC_INLINE int vbi_print_page( vbi_page *pg, char *buf, int size,
 						const char *format, vbi_bool table, vbi_bool ltr )
 	{
 		return vbi_print_page_region( pg, buf, size,
@@ -1950,27 +1950,27 @@ VBI_BEGIN_DECLS
 	extern const int8_t		_vbi_hamm24_inv_par[ 3 ][ 256 ];
 
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_rev8( unsigned int		c )
 	{
 		return _vbi_bit_reverse[ (uint8_t)c ];
 	}
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_rev16( unsigned int		c )
 	{
 		return _vbi_bit_reverse[ (uint8_t)c ] * 256
 			+ _vbi_bit_reverse[ (uint8_t)( c >> 8 ) ];
 	}
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_rev16p( const uint8_t *	p )
 	{
 		return _vbi_bit_reverse[ p[ 0 ] ] * 256
 			+ _vbi_bit_reverse[ p[ 1 ] ];
 	}
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_par8( unsigned int		c )
 	{
 		c &= 255;
@@ -1981,7 +1981,7 @@ VBI_BEGIN_DECLS
 		return c;
 	}
 
-	GOTV_INLINE int
+	NLC_INLINE int
 		vbi_unpar8( unsigned int		c )
 	{
 		/* Disabled until someone finds a reliable way
@@ -2013,19 +2013,19 @@ VBI_BEGIN_DECLS
 		vbi_unpar( uint8_t *		p,
 				   unsigned int		n );
 
-	GOTV_INLINE unsigned int
+	NLC_INLINE unsigned int
 		vbi_ham8( unsigned int		c )
 	{
 		return _vbi_hamm8_fwd[ c & 15 ];
 	}
 
-	GOTV_INLINE int
+	NLC_INLINE int
 		vbi_unham8( unsigned int		c )
 	{
 		return _vbi_hamm8_inv[ (uint8_t)c ];
 	}
 
-	GOTV_INLINE int
+	NLC_INLINE int
 		vbi_unham16p( const uint8_t *	p )
 	{
 		return ( (int)_vbi_hamm8_inv[ p[ 0 ] ] )

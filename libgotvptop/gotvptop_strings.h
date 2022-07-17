@@ -100,7 +100,7 @@ static inline int gotvptop_ascii_strncasecmp( const char *psz1, const char *psz2
  *
  * \param str null-terminated string [IN/OUT]
  */
-GOTV_API void gotvptop_xml_decode(char *st);
+NLC_API void gotvptop_xml_decode(char *st);
 
 /**
  * Encodes XML entites.
@@ -114,14 +114,14 @@ GOTV_API void gotvptop_xml_decode(char *st);
  * errno is set to EILSEQ.
  * If there was not enough memory, NULL is returned and errno is to ENOMEM.
  */
-GOTV_API char *gotvptop_xml_encode(const char *str) GOTV_MALLOC;
+NLC_API char *gotvptop_xml_encode(const char *str) GOTV_MALLOC;
 
-GOTV_API char * gotvptop_b64_encode_binary( const uint8_t *, size_t );
-GOTV_API char * gotvptop_b64_encode( const char * );
+NLC_API char * gotvptop_b64_encode_binary( const uint8_t *, size_t );
+NLC_API char * gotvptop_b64_encode( const char * );
 
-GOTV_API size_t gotvptop_b64_decode_binary_to_buffer( uint8_t *p_dst, size_t i_dst_max, const char *psz_src );
-GOTV_API size_t gotvptop_b64_decode_binary( uint8_t **pp_dst, const char *psz_src );
-GOTV_API char * gotvptop_b64_decode( const char *psz_src );
+NLC_API size_t gotvptop_b64_decode_binary_to_buffer( uint8_t *p_dst, size_t i_dst_max, const char *psz_src );
+NLC_API size_t gotvptop_b64_decode_binary( uint8_t **pp_dst, const char *psz_src );
+NLC_API char * gotvptop_b64_decode( const char *psz_src );
 
 /**
  * Convenience wrapper for strftime().
@@ -131,14 +131,14 @@ GOTV_API char * gotvptop_b64_decode( const char *psz_src );
  * @param tformat time format (as with C strftime())
  * @return an allocated string (must be free()'d), or NULL on memory error.
  */
-GOTV_API char *gotvptop_strftime( const char * );
+NLC_API char *gotvptop_strftime( const char * );
 
 /**
  * Formats input meta-data.
  *
  * Formats input and input item meta-informations into a heap-allocated string.
  */
-GOTV_API char *gotvptop_strfinput( input_thread_t *, const char * );
+NLC_API char *gotvptop_strfinput( input_thread_t *, const char * );
 
 static inline char *str_format( input_thread_t *input, const char *fmt )
 {
@@ -148,7 +148,7 @@ static inline char *str_format( input_thread_t *input, const char *fmt )
     return s2;
 }
 
-GOTV_API int gotvptop_filenamecmp(const char *, const char *);
+NLC_API int gotvptop_filenamecmp(const char *, const char *);
 
 void filename_sanitize(char *);
 

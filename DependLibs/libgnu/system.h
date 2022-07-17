@@ -65,7 +65,7 @@ ssize_t system_read(gnutls_transport_ptr_t ptr, void *data,
 
 extern gnutls_time_func gnutls_time;
 
-static GOTV_INLINE void millisleep(unsigned int ms)
+static NLC_INLINE void millisleep(unsigned int ms)
 {
 #ifdef _WIN32
 	Sleep(ms);
@@ -81,7 +81,7 @@ static GOTV_INLINE void millisleep(unsigned int ms)
 
 /* emulate gnulib's gettime using gettimeofday to avoid linking to
  * librt */
-GOTV_INLINE static void gettime(struct timespec *t)
+NLC_INLINE static void gettime(struct timespec *t)
 {
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
 	clock_gettime(CLOCK_REALTIME, t);

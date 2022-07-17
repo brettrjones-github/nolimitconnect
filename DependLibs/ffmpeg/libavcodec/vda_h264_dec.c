@@ -99,7 +99,7 @@ static int get_buffer2(AVCodecContext *avctx, AVFrame *pic, int flag)
     return 0;
 }
 
-static GOTV_INLINE void set_context(AVCodecContext *avctx)
+static NLC_INLINE void set_context(AVCodecContext *avctx)
 {
     VDADecoderContext *ctx = avctx->priv_data;
     ctx->hwaccel_context = avctx->hwaccel_context;
@@ -110,7 +110,7 @@ static GOTV_INLINE void set_context(AVCodecContext *avctx)
     avctx->get_buffer2 = get_buffer2;
 }
 
-static GOTV_INLINE void restore_context(AVCodecContext *avctx)
+static NLC_INLINE void restore_context(AVCodecContext *avctx)
 {
     VDADecoderContext *ctx = avctx->priv_data;
     avctx->hwaccel_context = ctx->hwaccel_context;

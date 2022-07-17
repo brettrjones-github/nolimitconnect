@@ -188,7 +188,7 @@ struct SpeexEchoState_ {
    int play_buf_started;
 };
 
-static GOTV_INLINE void filter_dc_notch16(const spx_int16_t *in, spx_word16_t radius, spx_word16_t *out, int len, spx_mem_t *mem, int stride)
+static NLC_INLINE void filter_dc_notch16(const spx_int16_t *in, spx_word16_t radius, spx_word16_t *out, int len, spx_mem_t *mem, int stride)
 {
    int i;
    spx_word16_t den2;
@@ -213,7 +213,7 @@ static GOTV_INLINE void filter_dc_notch16(const spx_int16_t *in, spx_word16_t ra
 }
 
 /* This inner product is slightly different from the codec version because of fixed-point */
-static GOTV_INLINE spx_word32_t mdf_inner_prod(const spx_word16_t *x, const spx_word16_t *y, int len)
+static NLC_INLINE spx_word32_t mdf_inner_prod(const spx_word16_t *x, const spx_word16_t *y, int len)
 {
    spx_word32_t sum=0;
    len >>= 1;
@@ -229,7 +229,7 @@ static GOTV_INLINE spx_word32_t mdf_inner_prod(const spx_word16_t *x, const spx_
 }
 
 /** Compute power spectrum of a half-complex (packed) vector */
-static GOTV_INLINE void power_spectrum(const spx_word16_t *X, spx_word32_t *ps, int N)
+static NLC_INLINE void power_spectrum(const spx_word16_t *X, spx_word32_t *ps, int N)
 {
    int i, j;
    ps[0]=MULT16_16(X[0],X[0]);
@@ -241,7 +241,7 @@ static GOTV_INLINE void power_spectrum(const spx_word16_t *X, spx_word32_t *ps, 
 }
 
 /** Compute power spectrum of a half-complex (packed) vector and accumulate */
-static GOTV_INLINE void power_spectrum_accum(const spx_word16_t *X, spx_word32_t *ps, int N)
+static NLC_INLINE void power_spectrum_accum(const spx_word16_t *X, spx_word32_t *ps, int N)
 {
    int i, j;
    ps[0]+=MULT16_16(X[0],X[0]);
@@ -254,7 +254,7 @@ static GOTV_INLINE void power_spectrum_accum(const spx_word16_t *X, spx_word32_t
 
 /** Compute cross-power spectrum of a half-complex (packed) vectors and add to acc */
 #ifdef FIXED_POINT
-static GOTV_INLINE void spectral_mul_accum(const spx_word16_t *X, const spx_word32_t *Y, spx_word16_t *acc, int N, int M)
+static NLC_INLINE void spectral_mul_accum(const spx_word16_t *X, const spx_word32_t *Y, spx_word16_t *acc, int N, int M)
 {
    int i,j;
    spx_word32_t tmp1=0,tmp2=0;
@@ -281,7 +281,7 @@ static GOTV_INLINE void spectral_mul_accum(const spx_word16_t *X, const spx_word
    }
    acc[N-1] = PSHR32(tmp1,WEIGHT_SHIFT);
 }
-static GOTV_INLINE void spectral_mul_accum16(const spx_word16_t *X, const spx_word16_t *Y, spx_word16_t *acc, int N, int M)
+static NLC_INLINE void spectral_mul_accum16(const spx_word16_t *X, const spx_word16_t *Y, spx_word16_t *acc, int N, int M)
 {
    int i,j;
    spx_word32_t tmp1=0,tmp2=0;
@@ -310,7 +310,7 @@ static GOTV_INLINE void spectral_mul_accum16(const spx_word16_t *X, const spx_wo
 }
 
 #else
-static GOTV_INLINE void spectral_mul_accum(const spx_word16_t *X, const spx_word32_t *Y, spx_word16_t *acc, int N, int M)
+static NLC_INLINE void spectral_mul_accum(const spx_word16_t *X, const spx_word32_t *Y, spx_word16_t *acc, int N, int M)
 {
    int i,j;
    for (i=0;i<N;i++)
@@ -332,7 +332,7 @@ static GOTV_INLINE void spectral_mul_accum(const spx_word16_t *X, const spx_word
 #endif
 
 /** Compute weighted cross-power spectrum of a half-complex (packed) vector with conjugate */
-static GOTV_INLINE void weighted_spectral_mul_conj(const spx_float_t *w, const spx_float_t p, const spx_word16_t *X, const spx_word16_t *Y, spx_word32_t *prod, int N)
+static NLC_INLINE void weighted_spectral_mul_conj(const spx_float_t *w, const spx_float_t p, const spx_word16_t *X, const spx_word16_t *Y, spx_word32_t *prod, int N)
 {
    int i, j;
    spx_float_t W;
@@ -348,7 +348,7 @@ static GOTV_INLINE void weighted_spectral_mul_conj(const spx_float_t *w, const s
    prod[i] = FLOAT_MUL32(W,MULT16_16(X[i],Y[i]));
 }
 
-static GOTV_INLINE void mdf_adjust_prop(const spx_word32_t *W, int N, int M, int P, spx_word16_t *prop)
+static NLC_INLINE void mdf_adjust_prop(const spx_word32_t *W, int N, int M, int P, spx_word16_t *prop)
 {
    int i, j, p;
    spx_word16_t max_sum = 1;

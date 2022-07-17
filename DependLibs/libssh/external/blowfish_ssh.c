@@ -53,11 +53,11 @@
 
 #include "libssh/blf.h"
 
-#undef GOTV_INLINE
+#undef NLC_INLINE
 #ifdef __GNUC__
-#define GOTV_INLINE __inline
+#define NLC_INLINE __inline
 #else				/* !__GNUC__ */
-#define GOTV_INLINE
+#define NLC_INLINE
 #endif				/* !__GNUC__ */
 
 /* Function for Feistel Networks */

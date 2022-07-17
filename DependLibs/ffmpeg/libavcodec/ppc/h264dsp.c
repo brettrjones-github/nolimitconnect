@@ -398,7 +398,7 @@ static void h264_idct_add8_altivec(uint8_t **dest, const int *block_offset,
     r3 = vec_mergel(r5, r7);  /*all set 3*/  \
 }
 
-static GOTV_INLINE void write16x4(uint8_t *dst, int dst_stride,
+static NLC_INLINE void write16x4(uint8_t *dst, int dst_stride,
                              register vec_u8 r0, register vec_u8 r1,
                              register vec_u8 r2, register vec_u8 r3) {
     DECLARE_ALIGNED(16, unsigned char, result)[64];
@@ -491,7 +491,7 @@ static GOTV_INLINE void write16x4(uint8_t *dst, int dst_stride,
 }
 
 // out: o = |x-y| < a
-static GOTV_INLINE vec_u8 diff_lt_altivec ( register vec_u8 x,
+static NLC_INLINE vec_u8 diff_lt_altivec ( register vec_u8 x,
                                          register vec_u8 y,
                                          register vec_u8 a) {
 
@@ -502,7 +502,7 @@ static GOTV_INLINE vec_u8 diff_lt_altivec ( register vec_u8 x,
     return o;
 }
 
-static GOTV_INLINE vec_u8 h264_deblock_mask ( register vec_u8 p0,
+static NLC_INLINE vec_u8 h264_deblock_mask ( register vec_u8 p0,
                                            register vec_u8 p1,
                                            register vec_u8 q0,
                                            register vec_u8 q1,
@@ -522,7 +522,7 @@ static GOTV_INLINE vec_u8 h264_deblock_mask ( register vec_u8 p0,
 }
 
 // out: newp1 = clip((p2 + ((p0 + q0 + 1) >> 1)) >> 1, p1-tc0, p1+tc0)
-static GOTV_INLINE vec_u8 h264_deblock_q1(register vec_u8 p0,
+static NLC_INLINE vec_u8 h264_deblock_q1(register vec_u8 p0,
                                        register vec_u8 p1,
                                        register vec_u8 p2,
                                        register vec_u8 q0,

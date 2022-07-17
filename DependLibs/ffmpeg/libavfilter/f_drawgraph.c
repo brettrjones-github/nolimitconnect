@@ -146,7 +146,7 @@ static void clear_image(DrawGraphContext *s, AVFrame *out, AVFilterLink *outlink
             AV_WN32(out->data[0] + i * out->linesize[0] + j * 4, bg);
 }
 
-static GOTV_INLINE void draw_dot(int fg, int x, int y, AVFrame *out)
+static NLC_INLINE void draw_dot(int fg, int x, int y, AVFrame *out)
 {
     AV_WN32(out->data[0] + y * out->linesize[0] + x * 4, fg);
 }

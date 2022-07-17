@@ -106,7 +106,7 @@ static void psycho_4_trigtable_init(psycho_4_mem * p4mem)
 }
 
 #ifdef NEWTAN
-static GOTV_INLINE FLOAT psycho_4_cos(psycho_4_mem * p4mem, FLOAT phi)
+static NLC_INLINE FLOAT psycho_4_cos(psycho_4_mem * p4mem, FLOAT phi)
 {
     int index;
     int sign = 1;

@@ -199,7 +199,7 @@ static int ebur128_init_channel_map(FFEBUR128State * st)
     return 0;
 }
 
-static GOTV_INLINE void init_histogram(void)
+static NLC_INLINE void init_histogram(void)
 {
     int i;
     /* initialize static constants */

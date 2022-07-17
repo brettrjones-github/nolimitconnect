@@ -535,7 +535,7 @@ fail:
     return ret;
 }
 
-static GOTV_INLINE void writer_print_section_header(WriterContext *wctx,
+static NLC_INLINE void writer_print_section_header(WriterContext *wctx,
                                                int section_id)
 {
     int parent_section_id;
@@ -559,7 +559,7 @@ static GOTV_INLINE void writer_print_section_header(WriterContext *wctx,
         wctx->writer->print_section_header(wctx);
 }
 
-static GOTV_INLINE void writer_print_section_footer(WriterContext *wctx)
+static NLC_INLINE void writer_print_section_footer(WriterContext *wctx)
 {
     int section_id = wctx->section[wctx->level]->id;
     int parent_section_id = wctx->level ?
@@ -576,7 +576,7 @@ static GOTV_INLINE void writer_print_section_footer(WriterContext *wctx)
     wctx->level--;
 }
 
-static GOTV_INLINE void writer_print_integer(WriterContext *wctx,
+static NLC_INLINE void writer_print_integer(WriterContext *wctx,
                                         const char *key, long long int val)
 {
     const struct section *section = wctx->section[wctx->level];
@@ -587,7 +587,7 @@ static GOTV_INLINE void writer_print_integer(WriterContext *wctx,
     }
 }
 
-static GOTV_INLINE int validate_string(WriterContext *wctx, char **dstp, const char *src)
+static NLC_INLINE int validate_string(WriterContext *wctx, char **dstp, const char *src)
 {
     const uint8_t *p, *endp;
     AVBPrint dstbuf;
@@ -645,7 +645,7 @@ end:
 #define PRINT_STRING_OPT      1
 #define PRINT_STRING_VALIDATE 2
 
-static GOTV_INLINE int writer_print_string(WriterContext *wctx,
+static NLC_INLINE int writer_print_string(WriterContext *wctx,
                                       const char *key, const char *val, int flags)
 {
     const struct section *section = wctx->section[wctx->level];
@@ -681,7 +681,7 @@ static GOTV_INLINE int writer_print_string(WriterContext *wctx,
     return ret;
 }
 
-static GOTV_INLINE void writer_print_rational(WriterContext *wctx,
+static NLC_INLINE void writer_print_rational(WriterContext *wctx,
                                          const char *key, AVRational q, char sep)
 {
     AVBPrint buf;
@@ -848,7 +848,7 @@ static const AVOption default_options[] = {
 DEFINE_WRITER_CLASS(default);
 
 /* lame uppercasing routine, assumes the string is lower case ASCII */
-static GOTV_INLINE char *upcase_string(char *dst, size_t dst_size, const char *src)
+static NLC_INLINE char *upcase_string(char *dst, size_t dst_size, const char *src)
 {
     int i;
     for (i = 0; src[i] && i < dst_size-1; i++)
@@ -1473,7 +1473,7 @@ static void json_print_section_footer(WriterContext *wctx)
     }
 }
 
-static GOTV_INLINE void json_print_item_str(WriterContext *wctx,
+static NLC_INLINE void json_print_item_str(WriterContext *wctx,
                                        const char *key, const char *value)
 {
     AVBPrint buf;
@@ -1745,7 +1745,7 @@ static void writer_register_all(void)
     memset( (ptr) + (cur_n), 0, ((new_n) - (cur_n)) * sizeof(*(ptr)) ); \
 }
 
-static GOTV_INLINE int show_tags(WriterContext *w, AVDictionary *tags, int section_id)
+static NLC_INLINE int show_tags(WriterContext *w, AVDictionary *tags, int section_id)
 {
     AVDictionaryEntry *tag = NULL;
     int ret = 0;
@@ -2844,7 +2844,7 @@ static int opt_format(void *optctx, const char *opt, const char *arg)
     return 0;
 }
 
-static GOTV_INLINE void mark_section_show_entries(SectionID section_id,
+static NLC_INLINE void mark_section_show_entries(SectionID section_id,
                                              int show_all_entries, AVDictionary *entries)
 {
     struct section *section = &sections[section_id];
@@ -3219,7 +3219,7 @@ static const OptionDef real_options[] = {
     { NULL, },
 };
 
-static GOTV_INLINE int check_section_show_entries(int section_id)
+static NLC_INLINE int check_section_show_entries(int section_id)
 {
     int *id;
     struct section *section = &sections[section_id];

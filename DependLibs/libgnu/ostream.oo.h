@@ -52,7 +52,7 @@ extern "C" {
 #if HAVE_INLINE
 
 #define ostream_write_str ostream_write_str_inline
-static GOTV_INLINE void
+static NLC_INLINE void
 ostream_write_str (ostream_t stream, const char *string)
 {
   ostream_write_mem (stream, string, strlen (string));

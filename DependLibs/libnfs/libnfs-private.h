@@ -27,7 +27,7 @@
 #include "libnfs-zdr.h"
 
 #ifdef __cplusplus
-GOTV_EXTERN "C" {
+NLC_EXTERN "C" {
 #endif
 
 #if !defined(HAVE_SOCKADDR_STORAGE) && !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_LINUX)  && !defined(TARGET_OS_ANDROID)

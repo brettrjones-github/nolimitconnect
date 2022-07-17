@@ -152,7 +152,7 @@ static const uint8_t match6[256][2] = {
 #define lerp13(a, b) ((2 * (a) + (b)) / 3)
 
 /* Linear interpolation on an RGB pixel */
-static GOTV_INLINE void lerp13rgb(uint8_t *out, uint8_t *p1, uint8_t *p2)
+static NLC_INLINE void lerp13rgb(uint8_t *out, uint8_t *p1, uint8_t *p2)
 {
     out[0] = lerp13(p1[0], p2[0]);
     out[1] = lerp13(p1[1], p2[1]);
@@ -160,7 +160,7 @@ static GOTV_INLINE void lerp13rgb(uint8_t *out, uint8_t *p1, uint8_t *p2)
 }
 
 /* Conversion from rgb565 to rgb24 */
-static GOTV_INLINE void rgb5652rgb(uint8_t *out, uint16_t v)
+static NLC_INLINE void rgb5652rgb(uint8_t *out, uint16_t v)
 {
     int rv = (v & 0xf800) >> 11;
     int gv = (v & 0x07e0) >> 5;

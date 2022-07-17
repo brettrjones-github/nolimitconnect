@@ -52,7 +52,7 @@
 #include <fips.h>
 #include "gnutls_random.h"
 
-static GOTV_INLINE const struct ecc_curve *get_supported_curve(int curve);
+static NLC_INLINE const struct ecc_curve *get_supported_curve(int curve);
 
 static void rnd_func(void *_ctx, size_t length, uint8_t * data)
 {
@@ -721,7 +721,7 @@ _wrap_nettle_pk_verify(gnutls_pk_algorithm_t algo,
 	return ret;
 }
 
-static GOTV_INLINE const struct ecc_curve *get_supported_curve(int curve)
+static NLC_INLINE const struct ecc_curve *get_supported_curve(int curve)
 {
 	switch (curve) {
 #ifdef ENABLE_NON_SUITEB_CURVES

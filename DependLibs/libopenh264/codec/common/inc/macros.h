@@ -71,7 +71,7 @@
 #if defined(_MSC_VER)
 
 #if(_MSC_VER < 1700)
-#define GOTV_INLINE __inline
+#define NLC_INLINE __inline
 #endif
 
 #define ALIGNED_DECLARE( type, var, n ) __declspec(align(n)) type var
@@ -136,7 +136,7 @@
   nC += (uint8_t)(nA == -1 && nB == -1);                \
 }
 
-static GOTV_INLINE int32_t CeilLog2 (int32_t i) {
+static NLC_INLINE int32_t CeilLog2 (int32_t i) {
   int32_t s = 0;
   i--;
   while (i > 0) {
@@ -149,7 +149,7 @@ static GOTV_INLINE int32_t CeilLog2 (int32_t i) {
 the second path will degrades the performance
 */
 #if 1
-static GOTV_INLINE int32_t WelsMedian (int32_t iX,  int32_t iY, int32_t iZ) {
+static NLC_INLINE int32_t WelsMedian (int32_t iX,  int32_t iY, int32_t iZ) {
   int32_t iMin = iX, iMax = iX;
 
   if (iY < iMin)
@@ -165,7 +165,7 @@ static GOTV_INLINE int32_t WelsMedian (int32_t iX,  int32_t iY, int32_t iZ) {
   return (iX + iY + iZ) - (iMin + iMax);
 }
 #else
-static GOTV_INLINE int32_t WelsMedian (int32_t iX,  int32_t iY, int32_t iZ) {
+static NLC_INLINE int32_t WelsMedian (int32_t iX,  int32_t iY, int32_t iZ) {
   int32_t iTmp = (iX - iY) & ((iX - iY) >> 31);
   iX -= iTmp;
   iY += iTmp;
@@ -181,7 +181,7 @@ static GOTV_INLINE int32_t WelsMedian (int32_t iX,  int32_t iY, int32_t iZ) {
 #define NEG_NUM(iX) (1+(~(iX)))
 #endif// NEG_NUM
 
-static GOTV_INLINE uint8_t WelsClip1 (int32_t iX) {
+static NLC_INLINE uint8_t WelsClip1 (int32_t iX) {
   uint8_t uiTmp = (uint8_t) (((iX) & ~255) ? (- (iX) >> 31) : (iX));
   return uiTmp;
 }
@@ -254,7 +254,7 @@ cclass& operator=(const cclass &);
   }
 #endif//#if WELS_VERIFY_RETURN_PROC_IF
 
-static GOTV_INLINE int32_t WELS_LOG2 (uint32_t v) {
+static NLC_INLINE int32_t WELS_LOG2 (uint32_t v) {
   int32_t r = 0;
   while (v >>= 1) {
     ++r;
@@ -281,7 +281,7 @@ static GOTV_INLINE int32_t WELS_LOG2 (uint32_t v) {
 #define BUTTERFLY4x8(dw) (((uint64_t)(dw)<<32) | (dw))
 #endif//BUTTERFLY4x8
 
-static GOTV_INLINE bool WELS_POWER2_IF (uint32_t v) {
+static NLC_INLINE bool WELS_POWER2_IF (uint32_t v) {
   return (v && ! (v & (v - 1)));
 }
 
@@ -291,23 +291,23 @@ static GOTV_INLINE bool WELS_POWER2_IF (uint32_t v) {
 #define WELS_GCC_UNUSED
 #endif
 
-GOTV_INLINE bool CheckInRangeCloseOpen (const int16_t kiCurrent, const int16_t kiMin, const int16_t kiMax) {
+NLC_INLINE bool CheckInRangeCloseOpen (const int16_t kiCurrent, const int16_t kiMin, const int16_t kiMax) {
   return ((kiCurrent >= kiMin) && (kiCurrent < kiMax));
 }
 
-static GOTV_INLINE void WelsSetMemUint32_c (uint32_t* pDst, uint32_t iValue, int32_t iSizeOfData) {
+static NLC_INLINE void WelsSetMemUint32_c (uint32_t* pDst, uint32_t iValue, int32_t iSizeOfData) {
   for (int i = 0; i < iSizeOfData; i++) {
     pDst[i] = iValue;
   }
 }
 
-static GOTV_INLINE void WelsSetMemUint16_c (uint16_t* pDst, uint16_t iValue, int32_t iSizeOfData) {
+static NLC_INLINE void WelsSetMemUint16_c (uint16_t* pDst, uint16_t iValue, int32_t iSizeOfData) {
   for (int i = 0; i < iSizeOfData; i++) {
     pDst[i] = iValue;
   }
 }
 
-GOTV_INLINE void WelsSetMemMultiplebytes_c (void* pDst, uint32_t iValue, int32_t iSizeOfData, int32_t iDataLengthOfData) {
+NLC_INLINE void WelsSetMemMultiplebytes_c (void* pDst, uint32_t iValue, int32_t iSizeOfData, int32_t iDataLengthOfData) {
   assert (4 == iDataLengthOfData || 2 == iDataLengthOfData || 1 == iDataLengthOfData);
 
   // TODO: consider add assembly for these functions

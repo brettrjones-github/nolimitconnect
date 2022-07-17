@@ -76,7 +76,7 @@ int _asn1_set_default_tag (asn1_node node);
 /*   node: NODE_ASN element pointer.                              */
 /* Return: field RIGHT of NODE.                                   */
 /******************************************************************/
-GOTV_INLINE static asn1_node
+NLC_INLINE static asn1_node
 _asn1_get_right (asn1_node node)
 {
   if (node == NULL)
@@ -93,7 +93,7 @@ _asn1_get_right (asn1_node node)
 /*          by NODE.                                              */
 /* Return: pointer to *NODE.                                      */
 /******************************************************************/
-GOTV_INLINE static asn1_node
+NLC_INLINE static asn1_node
 _asn1_set_down (asn1_node node, asn1_node down)
 {
   if (node == NULL)
@@ -112,7 +112,7 @@ _asn1_set_down (asn1_node node, asn1_node down)
 /*   node: NODE_ASN element pointer.                              */
 /* Return: field DOWN of NODE.                                    */
 /******************************************************************/
-GOTV_INLINE static asn1_node
+NLC_INLINE static asn1_node
 _asn1_get_down (asn1_node node)
 {
   if (node == NULL)
@@ -127,7 +127,7 @@ _asn1_get_down (asn1_node node)
 /*   node: NODE_ASN element pointer.                              */
 /* Return: a null terminated string.                              */
 /******************************************************************/
-GOTV_INLINE static char *
+NLC_INLINE static char *
 _asn1_get_name (asn1_node node)
 {
   if (node == NULL)
@@ -146,7 +146,7 @@ _asn1_get_name (asn1_node node)
 /*          value of field TYPE.                                  */
 /* Return: NODE pointer.                                          */
 /******************************************************************/
-GOTV_INLINE static asn1_node
+NLC_INLINE static asn1_node
 _asn1_mod_type (asn1_node node, unsigned int value)
 {
   if (node == NULL)

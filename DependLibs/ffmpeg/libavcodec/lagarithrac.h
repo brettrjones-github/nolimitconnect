@@ -57,7 +57,7 @@ typedef struct lag_rac {
 void ff_lag_rac_init(lag_rac *l, GetBitContext *gb, int length);
 
 /* TODO: Optimize */
-static GOTV_INLINE void lag_rac_refill(lag_rac *l)
+static NLC_INLINE void lag_rac_refill(lag_rac *l)
 {
     while (l->range <= 0x800000) {
         l->low   <<= 8;
@@ -75,7 +75,7 @@ static GOTV_INLINE void lag_rac_refill(lag_rac *l)
  * @param l pointer to lag_rac for the current plane
  * @return next byte of decoded data
  */
-static GOTV_INLINE uint8_t lag_get_rac(lag_rac *l)
+static NLC_INLINE uint8_t lag_get_rac(lag_rac *l)
 {
     unsigned range_scaled, low_scaled;
     int val;

@@ -248,7 +248,7 @@ enum dirac_subband {
 };
 
 /* magic number division by 3 from schroedinger */
-static GOTV_INLINE int divide3(int x)
+static NLC_INLINE int divide3(int x)
 {
     return (int)((x+1U)*21845 + 10922) >> 16;
 }
@@ -488,7 +488,7 @@ UNPACK_ARITH(10, int32_t)
  * Decode the coeffs in the rectangle defined by left, right, top, bottom
  * [DIRAC_STD] 13.4.3.2 Codeblock unpacking loop. codeblock()
  */
-static GOTV_INLINE void codeblock(DiracContext *s, SubBand *b,
+static NLC_INLINE void codeblock(DiracContext *s, SubBand *b,
                              GetBitContext *gb, DiracArith *c,
                              int left, int right, int top, int bottom,
                              int blockcnt_one, int is_arith)
@@ -566,7 +566,7 @@ static GOTV_INLINE void codeblock(DiracContext *s, SubBand *b,
  * 13.3 intra_dc_prediction(band)
  */
 #define INTRA_DC_PRED(n, type) \
-    static GOTV_INLINE void intra_dc_prediction_##n(SubBand *b) \
+    static NLC_INLINE void intra_dc_prediction_##n(SubBand *b) \
     { \
         type *buf = (type*)b->ibuf; \
         int x, y; \
@@ -1291,7 +1291,7 @@ static int dirac_unpack_idwt_params(DiracContext *s)
     return 0;
 }
 
-static GOTV_INLINE int pred_sbsplit(uint8_t *sbsplit, int stride, int x, int y)
+static NLC_INLINE int pred_sbsplit(uint8_t *sbsplit, int stride, int x, int y)
 {
     static const uint8_t avgsplit[7] = { 0, 0, 1, 1, 1, 2, 2 };
 
@@ -1305,7 +1305,7 @@ static GOTV_INLINE int pred_sbsplit(uint8_t *sbsplit, int stride, int x, int y)
     return avgsplit[sbsplit[-1] + sbsplit[-stride] + sbsplit[-stride-1]];
 }
 
-static GOTV_INLINE int pred_block_mode(DiracBlock *block, int stride, int x, int y, int refmask)
+static NLC_INLINE int pred_block_mode(DiracBlock *block, int stride, int x, int y, int refmask)
 {
     int pred;
 
@@ -1321,7 +1321,7 @@ static GOTV_INLINE int pred_block_mode(DiracBlock *block, int stride, int x, int
     return (pred >> 1) & refmask;
 }
 
-static GOTV_INLINE void pred_block_dc(DiracBlock *block, int stride, int x, int y)
+static NLC_INLINE void pred_block_dc(DiracBlock *block, int stride, int x, int y)
 {
     int i, n = 0;
 
@@ -1354,7 +1354,7 @@ static GOTV_INLINE void pred_block_dc(DiracBlock *block, int stride, int x, int 
     }
 }
 
-static GOTV_INLINE void pred_mv(DiracBlock *block, int stride, int x, int y, int ref)
+static NLC_INLINE void pred_mv(DiracBlock *block, int stride, int x, int y, int ref)
 {
     int16_t *pred[3];
     int refmask = ref+1;

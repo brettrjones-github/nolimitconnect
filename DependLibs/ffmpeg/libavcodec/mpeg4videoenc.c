@@ -61,7 +61,7 @@ static uint8_t  uni_mpeg4_inter_rl_len[64 * 64 * 2 * 2];
  * Return the number of bits that encoding the 8x8 block in block would need.
  * @param[in]  block_last_index last index in scantable order that refers to a non zero element in block.
  */
-static GOTV_INLINE int get_block_rate(MpegEncContext *s, int16_t block[64],
+static NLC_INLINE int get_block_rate(MpegEncContext *s, int16_t block[64],
                                  int block_last_index, uint8_t scantable[64])
 {
     int last = 0;
@@ -96,7 +96,7 @@ static GOTV_INLINE int get_block_rate(MpegEncContext *s, int16_t block[64],
  * @param[out] st scantable for each 8x8 block
  * @param[in] zigzag_last_index index referring to the last non zero coefficient in zigzag order
  */
-static GOTV_INLINE void restore_ac_coeffs(MpegEncContext *s, int16_t block[6][64],
+static NLC_INLINE void restore_ac_coeffs(MpegEncContext *s, int16_t block[6][64],
                                      const int dir[6], uint8_t *st[6],
                                      const int zigzag_last_index[6])
 {
@@ -127,7 +127,7 @@ static GOTV_INLINE void restore_ac_coeffs(MpegEncContext *s, int16_t block[6][64
  * @param[out] st scantable for each 8x8 block
  * @param[out] zigzag_last_index index referring to the last non zero coefficient in zigzag order
  */
-static GOTV_INLINE int decide_ac_pred(MpegEncContext *s, int16_t block[6][64],
+static NLC_INLINE int decide_ac_pred(MpegEncContext *s, int16_t block[6][64],
                                  const int dir[6], uint8_t *st[6],
                                  int zigzag_last_index[6])
 {
@@ -254,7 +254,7 @@ void ff_clean_mpeg4_qscales(MpegEncContext *s)
  * Encode the dc value.
  * @param n block index (0-3 are luma, 4-5 are chroma)
  */
-static GOTV_INLINE void mpeg4_encode_dc(PutBitContext *s, int level, int n)
+static NLC_INLINE void mpeg4_encode_dc(PutBitContext *s, int level, int n)
 {
     /* DC will overflow if level is outside the [-255,255] range. */
     level += 256;
@@ -279,7 +279,7 @@ static inline int mpeg4_get_dc_length(int level, int n)
  * Encode an 8x8 block.
  * @param n block index (0-3 are luma, 4-5 are chroma)
  */
-static GOTV_INLINE void mpeg4_encode_block(MpegEncContext *s,
+static NLC_INLINE void mpeg4_encode_block(MpegEncContext *s,
                                       int16_t *block, int n, int intra_dc,
                                       uint8_t *scan_table, PutBitContext *dc_pb,
                                       PutBitContext *ac_pb)
@@ -394,7 +394,7 @@ static int mpeg4_get_block_length(MpegEncContext *s,
     return len;
 }
 
-static GOTV_INLINE void mpeg4_encode_blocks(MpegEncContext *s, int16_t block[6][64],
+static NLC_INLINE void mpeg4_encode_blocks(MpegEncContext *s, int16_t block[6][64],
                                        int intra_dc[6], uint8_t **scan_table,
                                        PutBitContext *dc_pb,
                                        PutBitContext *ac_pb)
@@ -428,7 +428,7 @@ static GOTV_INLINE void mpeg4_encode_blocks(MpegEncContext *s, int16_t block[6][
     }
 }
 
-static GOTV_INLINE int get_b_cbp(MpegEncContext *s, int16_t block[6][64],
+static NLC_INLINE int get_b_cbp(MpegEncContext *s, int16_t block[6][64],
                             int motion_x, int motion_y, int mb_type)
 {
     int cbp = 0, i;

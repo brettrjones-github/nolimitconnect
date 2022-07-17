@@ -237,19 +237,19 @@ amm-info@iis.fraunhofer.de
  *       Sometimes compiler do not do what they are told to do, and in case of inlining some
  *       additional command might be necessary depending on the platform.
  *
- * \def  GOTV_INLINE
- *       Defines how the compiler is told to GOTV_INLINE stuff.
+ * \def  NLC_INLINE
+ *       Defines how the compiler is told to NLC_INLINE stuff.
  */
 
 #ifdef DEBUG
 # undef FORCEINLINE
 # define FORCEINLINE
 #else
-# define FORCEINLINE GOTV_FORCE_INLINE
+# define FORCEINLINE NLC_FORCE_INLINE
 #endif
 
 /* for all other platforms */
-//#define FDK_INLINE GOTV_INLINE
+//#define FDK_INLINE NLC_INLINE
 
 
 /*!

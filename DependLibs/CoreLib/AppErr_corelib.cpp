@@ -41,7 +41,7 @@ void VxSetAppErrHandler( APP_ERR_FUNCTION pfuncAppErrHandler, void * userData )
 //============================================================================
 void default_app_err_handler( void * userData, EAppErr eAppErr, char * errMsg )
 {
-    GOTV_DECLARE_UNUSED( userData );
+    NLC_DECLARE_UNUSED( userData );
 	LogMsg( LOG_ERROR, "AppErr: %d %s\n", eAppErr, errMsg );
 }
 

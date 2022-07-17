@@ -232,7 +232,7 @@ static const char *getSearchPath(int i);
 static const char *getFullPath(int i, const char *file);
 static const struct stat *findFile(const char *file, const char **fullPath);
 static int isValidStatus(struct dlstatus *status);
-static GOTV_INLINE int isFlagSet(int mode, int flag);
+static NLC_INLINE int isFlagSet(int mode, int flag);
 static struct dlstatus *lookupStatus(const struct stat *sbuf);
 static void insertStatus(struct dlstatus *dls, const struct stat *sbuf);
 static int promoteLocalToGlobal(struct dlstatus *dls);
@@ -244,14 +244,14 @@ static NSSymbol search_linked_libs(const struct mach_header *mh, const char *sym
 static const char *get_lib_name(const struct mach_header *mh);
 static const struct mach_header *get_mach_header_from_NSModule(NSModule mod);
 static void dlcompat_init_func(void);
-static GOTV_INLINE void dlcompat_init_check(void);
-static GOTV_INLINE void dolock(void);
-static GOTV_INLINE void dounlock(void);
+static NLC_INLINE void dlcompat_init_check(void);
+static NLC_INLINE void dolock(void);
+static NLC_INLINE void dounlock(void);
 static void dlerrorfree(void *data);
 static void resetdlerror(void);
 static const struct mach_header *my_find_image(const char *name);
 static const struct mach_header *image_for_address(const void *address);
-static GOTV_INLINE char *dyld_error_str(void);
+static NLC_INLINE char *dyld_error_str(void);
 
 #if FINK_BUILD
 /* Two Global Functions */
@@ -480,7 +480,7 @@ static int isValidStatus(struct dlstatus *status)
 	return FALSE;
 }
 
-static GOTV_INLINE int isFlagSet(int mode, int flag)
+static NLC_INLINE int isFlagSet(int mode, int flag)
 {
 	return (mode & flag) == flag;
 }
@@ -625,7 +625,7 @@ static NSSymbol search_linked_libs(const struct mach_header * mh, const char *sy
 }
 
 /* Up to the caller to SDL_free() returned string */
-static GOTV_INLINE char *dyld_error_str()
+static NLC_INLINE char *dyld_error_str()
 {
 	NSLinkEditErrors dylder;
 	int dylderno;
@@ -886,7 +886,7 @@ static struct dlstatus *loadModule(const char *path, const struct stat *sbuf, in
 	return dls;
 }
 
-GOTV_INLINE static void dlcompat_init_check(void)
+NLC_INLINE static void dlcompat_init_check(void)
 {
 	static pthread_mutex_t l = PTHREAD_MUTEX_INITIALIZER;
 	static int init_done = 0;
@@ -927,7 +927,7 @@ static void dlerrorfree(void *data)
  * because they are not available pre OS X 10.2, so we fake it
  * using thread specific storage to keep a lock count
  */ 
-static GOTV_INLINE void dolock(void)
+static NLC_INLINE void dolock(void)
 {
 	int err = 0;
 	struct dlthread *tss;
@@ -951,7 +951,7 @@ static GOTV_INLINE void dolock(void)
 		exit(err);
 }
 
-static GOTV_INLINE void dounlock(void)
+static NLC_INLINE void dounlock(void)
 {
 	int err = 0;
 	struct dlthread *tss;

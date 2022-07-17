@@ -101,7 +101,7 @@ int ff_dv_init_dynamic_tables(DVVideoContext *s, const AVDVProfile *d);
 
 int ff_dvvideo_init(AVCodecContext *avctx);
 
-static GOTV_INLINE int dv_work_pool_size(const AVDVProfile *d)
+static NLC_INLINE int dv_work_pool_size(const AVDVProfile *d)
 {
     int size = d->n_difchan * d->difseg_size * 27;
     if (DV_PROFILE_IS_1080i50(d))
@@ -111,7 +111,7 @@ static GOTV_INLINE int dv_work_pool_size(const AVDVProfile *d)
     return size;
 }
 
-static GOTV_INLINE void dv_calculate_mb_xy(DVVideoContext *s,
+static NLC_INLINE void dv_calculate_mb_xy(DVVideoContext *s,
                                       DVwork_chunk *work_chunk,
                                       int m, int *mb_x, int *mb_y)
 {

@@ -1876,7 +1876,7 @@ createDefFrameInfo(HANDLE_SBR_FRAME_INFO hSbrFrameInfo, int32_t nEnv, int32_t nT
               envelope and noise floor estimators.
               This is basically (except for "low level" calculations) the
               bitstream decoder defined in the MPEG-4 standard, sub clause
-              4.6.18.3.3, Time / Frequency Grid.  See GOTV_INLINE comments for
+              4.6.18.3.3, Time / Frequency Grid.  See NLC_INLINE comments for
               explanation of the shorten and noise border algorithms.
 
  Arguments:   hSbrGrid - source

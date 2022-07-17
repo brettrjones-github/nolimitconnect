@@ -491,7 +491,7 @@ unsigned kvz_image_calc_sad(const kvz_picture *pic, const kvz_picture *ref, int 
  * \param dst_stride  Width of a row in the destination buffer.
  *
  * This should be inlined, but it's defined here for now to see if Visual
- * Studios LTCG will GOTV_INLINE it.
+ * Studios LTCG will NLC_INLINE it.
  */
 #define BLIT_PIXELS_CASE(n) case n:\
   for (y = 0; y < n; ++y) {\

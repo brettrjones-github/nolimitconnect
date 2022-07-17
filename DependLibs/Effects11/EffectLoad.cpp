@@ -1792,12 +1792,12 @@ HRESULT CEffectLoader::LoadAssignments( uint32_t Assignments, SAssignment **ppAs
             if( psAssignments[i].AssignmentType == ECAT_InlineShader )
             {
                 VHD( m_msUnstructured.ReadAtOffset(psAssignments[i].oInitializer, sizeof(*psInlineShader), (void**) &psInlineShader),
-                     "Invalid pEffectBuffer: cannot read GOTV_INLINE shader." );
+                     "Invalid pEffectBuffer: cannot read NLC_INLINE shader." );
             }
             else
             {
                 VHD( m_msUnstructured.ReadAtOffset(psAssignments[i].oInitializer, sizeof(*psInlineShader5), (void**) &psInlineShader5),
-                    "Invalid pEffectBuffer: cannot read GOTV_INLINE shader." );
+                    "Invalid pEffectBuffer: cannot read NLC_INLINE shader." );
             }
             
             VBD( m_pEffect->m_ShaderBlockCount < m_pHeader->cTotalShaders, "Internal loading error: shader count is out incorrect." );
@@ -2062,7 +2062,7 @@ HRESULT CEffectLoader::LoadObjectVariables()
                     break;
 
                 case EOT_GeometryShaderSO:
-                    VHD( m_msStructured.Read((void**)&psInlineGSSO4, sizeof(*psInlineGSSO4)), "Invalid pEffectBuffer: cannot read GOTV_INLINE GS with SO." );
+                    VHD( m_msStructured.Read((void**)&psInlineGSSO4, sizeof(*psInlineGSSO4)), "Invalid pEffectBuffer: cannot read NLC_INLINE GS with SO." );
                     break;
 
                 case EOT_VertexShader5:
@@ -2071,7 +2071,7 @@ HRESULT CEffectLoader::LoadObjectVariables()
                 case EOT_DomainShader5:
                 case EOT_PixelShader5:
                 case EOT_ComputeShader5:
-                    VHD( m_msStructured.Read((void**)&psInlineShader5, sizeof(*psInlineShader5)), "Invalid pEffectBuffer: cannot read GOTV_INLINE shader." );
+                    VHD( m_msStructured.Read((void**)&psInlineShader5, sizeof(*psInlineShader5)), "Invalid pEffectBuffer: cannot read NLC_INLINE shader." );
                     break;
 
                 default:

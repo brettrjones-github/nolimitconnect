@@ -172,13 +172,13 @@ struct Unaligned32Struct {
 // See if that would be more efficient on platforms supporting it,
 // at least for copies.
 
-GOTV_INLINE uint64 UNALIGNED_LOAD64(const void *p) {
+NLC_INLINE uint64 UNALIGNED_LOAD64(const void *p) {
   uint64 t;
   memcpy(&t, p, sizeof t);
   return t;
 }
 
-GOTV_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
+NLC_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
   memcpy(p, &v, sizeof v);
 }
 
@@ -187,33 +187,33 @@ GOTV_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
 // These functions are provided for architectures that don't support
 // unaligned loads and stores.
 
-GOTV_INLINE uint16 UNALIGNED_LOAD16(const void *p) {
+NLC_INLINE uint16 UNALIGNED_LOAD16(const void *p) {
   uint16 t;
   memcpy(&t, p, sizeof t);
   return t;
 }
 
-GOTV_INLINE uint32 UNALIGNED_LOAD32(const void *p) {
+NLC_INLINE uint32 UNALIGNED_LOAD32(const void *p) {
   uint32 t;
   memcpy(&t, p, sizeof t);
   return t;
 }
 
-GOTV_INLINE uint64 UNALIGNED_LOAD64(const void *p) {
+NLC_INLINE uint64 UNALIGNED_LOAD64(const void *p) {
   uint64 t;
   memcpy(&t, p, sizeof t);
   return t;
 }
 
-GOTV_INLINE void UNALIGNED_STORE16(void *p, uint16 v) {
+NLC_INLINE void UNALIGNED_STORE16(void *p, uint16 v) {
   memcpy(p, &v, sizeof v);
 }
 
-GOTV_INLINE void UNALIGNED_STORE32(void *p, uint32 v) {
+NLC_INLINE void UNALIGNED_STORE32(void *p, uint32 v) {
   memcpy(p, &v, sizeof v);
 }
 
-GOTV_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
+NLC_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
   memcpy(p, &v, sizeof v);
 }
 
@@ -260,16 +260,16 @@ GOTV_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
 
 #else
 
-GOTV_INLINE uint16 bswap_16(uint16 x) {
+NLC_INLINE uint16 bswap_16(uint16 x) {
   return (x << 8) | (x >> 8);
 }
 
-GOTV_INLINE uint32 bswap_32(uint32 x) {
+NLC_INLINE uint32 bswap_32(uint32 x) {
   x = ((x & 0xff00ff00UL) >> 8) | ((x & 0x00ff00ffUL) << 8);
   return (x >> 16) | (x << 16);
 }
 
-GOTV_INLINE uint64 bswap_64(uint64 x) {
+NLC_INLINE uint64 bswap_64(uint64 x) {
   x = ((x & 0xff00ff00ff00ff00ULL) >> 8) | ((x & 0x00ff00ff00ff00ffULL) << 8);
   x = ((x & 0xffff0000ffff0000ULL) >> 16) | ((x & 0x0000ffff0000ffffULL) << 16);
   return (x >> 32) | (x << 32);
@@ -349,21 +349,21 @@ class Bits {
 
 #ifdef HAVE_BUILTIN_CTZ
 
-GOTV_INLINE int Bits::Log2Floor(uint32 n) {
+NLC_INLINE int Bits::Log2Floor(uint32 n) {
   return n == 0 ? -1 : 31 ^ __builtin_clz(n);
 }
 
-GOTV_INLINE int Bits::FindLSBSetNonZero(uint32 n) {
+NLC_INLINE int Bits::FindLSBSetNonZero(uint32 n) {
   return __builtin_ctz(n);
 }
 
-GOTV_INLINE int Bits::FindLSBSetNonZero64(uint64 n) {
+NLC_INLINE int Bits::FindLSBSetNonZero64(uint64 n) {
   return __builtin_ctzll(n);
 }
 
 #else  // Portable versions.
 
-GOTV_INLINE int Bits::Log2Floor(uint32 n) {
+NLC_INLINE int Bits::Log2Floor(uint32 n) {
   if (n == 0)
     return -1;
   int log = 0;
@@ -380,7 +380,7 @@ GOTV_INLINE int Bits::Log2Floor(uint32 n) {
   return log;
 }
 
-GOTV_INLINE int Bits::FindLSBSetNonZero(uint32 n) {
+NLC_INLINE int Bits::FindLSBSetNonZero(uint32 n) {
   int rc = 31;
   for (int i = 4, shift = 1 << 4; i >= 0; --i) {
     const uint32 x = n << shift;
@@ -394,7 +394,7 @@ GOTV_INLINE int Bits::FindLSBSetNonZero(uint32 n) {
 }
 
 // FindLSBSetNonZero64() is defined in terms of FindLSBSetNonZero().
-GOTV_INLINE int Bits::FindLSBSetNonZero64(uint64 n) {
+NLC_INLINE int Bits::FindLSBSetNonZero64(uint64 n) {
   const uint32 bottombits = static_cast<uint32>(n);
   if (bottombits == 0) {
     // Bottom bits are zero, so scan in top bits
@@ -429,7 +429,7 @@ class Varint {
   static void Append32(string* s, uint32 value);
 };
 
-GOTV_INLINE const char* Varint::Parse32WithLimit(const char* p,
+NLC_INLINE const char* Varint::Parse32WithLimit(const char* p,
                                             const char* l,
                                             uint32* OUTPUT) {
   const unsigned char* ptr = reinterpret_cast<const unsigned char*>(p);
@@ -451,7 +451,7 @@ GOTV_INLINE const char* Varint::Parse32WithLimit(const char* p,
   return reinterpret_cast<const char*>(ptr);
 }
 
-GOTV_INLINE char* Varint::Encode32(char* sptr, uint32 v) {
+NLC_INLINE char* Varint::Encode32(char* sptr, uint32 v) {
   // Operate on characters as unsigneds
   unsigned char* ptr = reinterpret_cast<unsigned char*>(sptr);
   static const int B = 128;
@@ -483,7 +483,7 @@ GOTV_INLINE char* Varint::Encode32(char* sptr, uint32 v) {
 // replace this function with one that resizes the string without
 // filling the new space with zeros (if applicable) --
 // it will be non-portable but faster.
-GOTV_INLINE void STLStringResizeUninitialized(string* s, size_t new_size) {
+NLC_INLINE void STLStringResizeUninitialized(string* s, size_t new_size) {
   s->resize(new_size);
 }
 
@@ -499,7 +499,7 @@ GOTV_INLINE void STLStringResizeUninitialized(string* s, size_t new_size) {
 // (http://www.open-std.org/JTC1/SC22/WG21/docs/lwg-defects.html#530)
 // proposes this as the method. It will officially be part of the standard
 // for C++0x. This should already work on all current implementations.
-GOTV_INLINE char* string_as_array(string* str) {
+NLC_INLINE char* string_as_array(string* str) {
   return str->empty() ? NULL : &*str->begin();
 }
 

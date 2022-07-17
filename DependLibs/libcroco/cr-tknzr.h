@@ -34,7 +34,7 @@
 #include "cr-input.h"
 #include "cr-token.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 	
 	
 typedef struct _CRTknzr CRTknzr ;
@@ -110,6 +110,6 @@ enum CRStatus cr_tknzr_get_input (CRTknzr *a_this, CRInput **a_input) ;
 
 void cr_tknzr_destroy (CRTknzr *a_this) ;
 	
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_TKZNR_H__*/

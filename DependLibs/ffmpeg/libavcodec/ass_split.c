@@ -217,12 +217,12 @@ static uint8_t *realloc_section_array(ASSSplitContext *ctx)
     return tmp;
 }
 
-static GOTV_INLINE int is_eol(char buf)
+static NLC_INLINE int is_eol(char buf)
 {
     return buf == '\r' || buf == '\n' || buf == 0;
 }
 
-static GOTV_INLINE const char *skip_space(const char *buf)
+static NLC_INLINE const char *skip_space(const char *buf)
 {
     while (*buf == ' ')
         buf++;

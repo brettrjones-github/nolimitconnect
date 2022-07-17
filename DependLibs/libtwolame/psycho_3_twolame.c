@@ -44,7 +44,7 @@
    a tiny fraction slower than the dist10 code, and nothing has been optimized)
    MFC Feb 2003 */
 
-static GOTV_INLINE FLOAT psycho_3_add_db(psycho_3_mem * mem, FLOAT a, FLOAT b)
+static NLC_INLINE FLOAT psycho_3_add_db(psycho_3_mem * mem, FLOAT a, FLOAT b)
 {
     /* MFC - if the difference between a and b is large (>99), then just return the largest one.
        (about 10% of the time) - For differences between 0 and 99, return the largest value, but

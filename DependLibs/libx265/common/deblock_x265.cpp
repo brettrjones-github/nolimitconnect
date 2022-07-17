@@ -43,7 +43,7 @@ void Deblock::deblockCTU(const CUData* ctu, const CUGeom& cuGeom, int32_t dir)
     deblockCU(ctu, cuGeom, dir, blockStrength);
 }
 
-static GOTV_INLINE uint8_t bsCuEdge(const CUData* cu, uint32_t absPartIdx, int32_t dir)
+static NLC_INLINE uint8_t bsCuEdge(const CUData* cu, uint32_t absPartIdx, int32_t dir)
 {
     if (dir == Deblock::EDGE_VER)
     {
@@ -114,7 +114,7 @@ void Deblock::deblockCU(const CUData* cu, const CUGeom& cuGeom, const int32_t di
     }
 }
 
-static GOTV_INLINE uint32_t calcBsIdx(uint32_t absPartIdx, int32_t dir, int32_t edgeIdx, int32_t baseUnitIdx)
+static NLC_INLINE uint32_t calcBsIdx(uint32_t absPartIdx, int32_t dir, int32_t edgeIdx, int32_t baseUnitIdx)
 {
     if (dir)
         return g_rasterToZscan[g_zscanToRaster[absPartIdx] + (edgeIdx << LOG2_RASTER_SIZE) + baseUnitIdx];
@@ -249,17 +249,17 @@ uint8_t Deblock::getBoundaryStrength(const CUData* cuQ, int32_t dir, uint32_t pa
     return 1;
 }
 
-static GOTV_INLINE int32_t calcDP(pixel* src, intptr_t offset)
+static NLC_INLINE int32_t calcDP(pixel* src, intptr_t offset)
 {
     return abs(static_cast<int32_t>(src[-offset * 3]) - 2 * src[-offset * 2] + src[-offset]);
 }
 
-static GOTV_INLINE int32_t calcDQ(pixel* src, intptr_t offset)
+static NLC_INLINE int32_t calcDQ(pixel* src, intptr_t offset)
 {
     return abs(static_cast<int32_t>(src[0]) - 2 * src[offset] + src[offset * 2]);
 }
 
-static GOTV_INLINE bool useStrongFiltering(intptr_t offset, int32_t beta, int32_t tc, pixel* src)
+static NLC_INLINE bool useStrongFiltering(intptr_t offset, int32_t beta, int32_t tc, pixel* src)
 {
     int16_t m4     = (int16_t)src[0];
     int16_t m3     = (int16_t)src[-offset];
@@ -278,7 +278,7 @@ static GOTV_INLINE bool useStrongFiltering(intptr_t offset, int32_t beta, int32_
  * \param maskQ   indicator to enable filtering on partQ
  * \param maskP1  decision weak filter/no filter for partP
  * \param maskQ1  decision weak filter/no filter for partQ */
-static GOTV_INLINE void pelFilterLuma(pixel* src, intptr_t srcStep, intptr_t offset, int32_t tc, int32_t maskP, int32_t maskQ,
+static NLC_INLINE void pelFilterLuma(pixel* src, intptr_t srcStep, intptr_t offset, int32_t tc, int32_t maskP, int32_t maskQ,
                                  int32_t maskP1, int32_t maskQ1)
 {
     int32_t thrCut = tc * 10;

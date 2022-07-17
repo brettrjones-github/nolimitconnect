@@ -124,7 +124,7 @@ static const AVOption loudnorm_options[] = {
 
 AVFILTER_DEFINE_CLASS(loudnorm);
 
-static GOTV_INLINE int frame_size(int sample_rate, int frame_len_msec)
+static NLC_INLINE int frame_size(int sample_rate, int frame_len_msec)
 {
     const int frame_size = round((double)sample_rate * (frame_len_msec / 1000.0));
     return frame_size + (frame_size % 2);

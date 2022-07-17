@@ -289,7 +289,7 @@ g_list_remove_all (GList	*list,
 
 #endif
 
-static GOTV_INLINE GList*
+static NLC_INLINE GList*
 _g_list_remove_link (GList *list,
 		     GList *link)
 {

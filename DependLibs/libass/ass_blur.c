@@ -56,12 +56,12 @@ static int16_t dither_line[2 * STRIPE_WIDTH] = {
 #endif
 };
 
-GOTV_INLINE static const int16_t *get_line(const int16_t *ptr, uintptr_t offs, uintptr_t size)
+NLC_INLINE static const int16_t *get_line(const int16_t *ptr, uintptr_t offs, uintptr_t size)
 {
     return offs < size ? ptr + offs : zero_line;
 }
 
-GOTV_INLINE static void copy_line(int16_t *buf, const int16_t *ptr, uintptr_t offs, uintptr_t size)
+NLC_INLINE static void copy_line(int16_t *buf, const int16_t *ptr, uintptr_t offs, uintptr_t size)
 {
     ptr = get_line(ptr, offs, size);
     for (int k = 0; k < STRIPE_WIDTH; ++k)
@@ -121,7 +121,7 @@ void ass_stripe_pack_c(uint8_t *dst, ptrdiff_t dst_stride, const int16_t *src,
  * Contract image by factor 2 with kernel [1, 5, 10, 10, 5, 1].
  */
 
-static GOTV_INLINE int16_t shrink_func(int16_t p1p, int16_t p1n,
+static NLC_INLINE int16_t shrink_func(int16_t p1p, int16_t p1n,
                                   int16_t z0p, int16_t z0n,
                                   int16_t n1p, int16_t n1n)
 {
@@ -190,7 +190,7 @@ void ass_shrink_vert_c(int16_t *dst, const int16_t *src,
  * Expand image by factor 2 with kernel [5, 10, 1], [1, 10, 5].
  */
 
-static GOTV_INLINE void expand_func(int16_t *rp, int16_t *rn,
+static NLC_INLINE void expand_func(int16_t *rp, int16_t *rn,
                                int16_t p1, int16_t z0, int16_t n1)
 {
     /*
@@ -270,7 +270,7 @@ void ass_expand_vert_c(int16_t *dst, const int16_t *src,
  * Perform 1D convolution with kernel [1, 2, 1].
  */
 
-static GOTV_INLINE int16_t pre_blur1_func(int16_t p1, int16_t z0, int16_t n1)
+static NLC_INLINE int16_t pre_blur1_func(int16_t p1, int16_t z0, int16_t n1)
 {
     /*
     return (1 * p1 + 2 * z0 + 1 * n1 + 2) >> 2;
@@ -327,7 +327,7 @@ void ass_pre_blur1_vert_c(int16_t *dst, const int16_t *src,
  * Perform 1D convolution with kernel [1, 4, 6, 4, 1].
  */
 
-static GOTV_INLINE int16_t pre_blur2_func(int16_t p2, int16_t p1, int16_t z0,
+static NLC_INLINE int16_t pre_blur2_func(int16_t p2, int16_t p1, int16_t z0,
                                      int16_t n1, int16_t n2)
 {
     /*
@@ -390,7 +390,7 @@ void ass_pre_blur2_vert_c(int16_t *dst, const int16_t *src,
  * Perform 1D convolution with kernel [1, 6, 15, 20, 15, 6, 1].
  */
 
-static GOTV_INLINE int16_t pre_blur3_func(int16_t p3, int16_t p2, int16_t p1, int16_t z0,
+static NLC_INLINE int16_t pre_blur3_func(int16_t p3, int16_t p2, int16_t p1, int16_t z0,
                                      int16_t n1, int16_t n2, int16_t n3)
 {
     /*
@@ -461,7 +461,7 @@ void ass_pre_blur3_vert_c(int16_t *dst, const int16_t *src,
  * cN = param[N], d = 1 - 2 * (c0 + c1 + c2 + c3).
  */
 
-static GOTV_INLINE int16_t blur_func(int16_t p4, int16_t p3, int16_t p2, int16_t p1, int16_t z0,
+static NLC_INLINE int16_t blur_func(int16_t p4, int16_t p3, int16_t p2, int16_t p1, int16_t z0,
                                 int16_t n1, int16_t n2, int16_t n3, int16_t n4, const int16_t c[])
 {
     p1 -= z0;

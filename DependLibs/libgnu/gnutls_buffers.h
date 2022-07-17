@@ -29,7 +29,7 @@ _gnutls_record_buffer_put(gnutls_session_t session,
 			  content_type_t type, uint64 * seq,
 			  mbuffer_st * bufel);
 
-GOTV_INLINE static int _gnutls_record_buffer_get_size(gnutls_session_t session)
+NLC_INLINE static int _gnutls_record_buffer_get_size(gnutls_session_t session)
 {
 	return session->internals.record_buffer.byte_length;
 }
@@ -44,7 +44,7 @@ GOTV_INLINE static int _gnutls_record_buffer_get_size(gnutls_session_t session)
  *
  * Returns: Returns the size of the data or zero.
  -*/
-GOTV_INLINE static size_t record_check_unprocessed(gnutls_session_t session)
+NLC_INLINE static size_t record_check_unprocessed(gnutls_session_t session)
 {
 	return session->internals.record_recv_buffer.byte_length;
 }
@@ -76,21 +76,21 @@ ssize_t _gnutls_io_write_flush(gnutls_session_t session);
 int _gnutls_io_check_recv(gnutls_session_t session, unsigned int ms);
 ssize_t _gnutls_handshake_io_write_flush(gnutls_session_t session);
 
-GOTV_INLINE static void _gnutls_handshake_buffer_clear(handshake_buffer_st *
+NLC_INLINE static void _gnutls_handshake_buffer_clear(handshake_buffer_st *
 						  hsk)
 {
 	_gnutls_buffer_clear(&hsk->data);
 	hsk->htype = -1;
 }
 
-GOTV_INLINE static void _gnutls_handshake_buffer_init(handshake_buffer_st * hsk)
+NLC_INLINE static void _gnutls_handshake_buffer_init(handshake_buffer_st * hsk)
 {
 	memset(hsk, 0, sizeof(*hsk));
 	_gnutls_buffer_init(&hsk->data);
 	hsk->htype = -1;
 }
 
-GOTV_INLINE static void _gnutls_handshake_recv_buffer_clear(gnutls_session_t
+NLC_INLINE static void _gnutls_handshake_recv_buffer_clear(gnutls_session_t
 						       session)
 {
 	int i;
@@ -100,7 +100,7 @@ GOTV_INLINE static void _gnutls_handshake_recv_buffer_clear(gnutls_session_t
 	session->internals.handshake_recv_buffer_size = 0;
 }
 
-GOTV_INLINE static void _gnutls_handshake_recv_buffer_init(gnutls_session_t
+NLC_INLINE static void _gnutls_handshake_recv_buffer_init(gnutls_session_t
 						      session)
 {
 	int i;

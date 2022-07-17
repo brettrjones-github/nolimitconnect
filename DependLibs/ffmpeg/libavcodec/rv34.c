@@ -43,7 +43,7 @@
 #include "rv34data.h"
 #include "rv34.h"
 
-static GOTV_INLINE void ZERO8x2(void* dst, int stride)
+static NLC_INLINE void ZERO8x2(void* dst, int stride)
 {
     fill_rectangle(dst,                 1, 2, stride, 0, 4);
     fill_rectangle(((uint8_t*)(dst))+4, 1, 2, stride, 0, 4);
@@ -218,7 +218,7 @@ static int rv34_decode_cbp(GetBitContext *gb, RV34VLC *vlc, int table)
 /**
  * Get one coefficient value from the bitstream and store it.
  */
-static GOTV_INLINE void decode_coeff(int16_t *dst, int coef, int esc, GetBitContext *gb, VLC* vlc, int q)
+static NLC_INLINE void decode_coeff(int16_t *dst, int coef, int esc, GetBitContext *gb, VLC* vlc, int q)
 {
     if(coef){
         if(coef == esc){
@@ -238,7 +238,7 @@ static GOTV_INLINE void decode_coeff(int16_t *dst, int coef, int esc, GetBitCont
 /**
  * Decode 2x2 subblock of coefficients.
  */
-static GOTV_INLINE void decode_subblock(int16_t *dst, int code, const int is_block2, GetBitContext *gb, VLC *vlc, int q)
+static NLC_INLINE void decode_subblock(int16_t *dst, int code, const int is_block2, GetBitContext *gb, VLC *vlc, int q)
 {
     int flags = modulo_three_table[code];
 
@@ -256,13 +256,13 @@ static GOTV_INLINE void decode_subblock(int16_t *dst, int code, const int is_blo
 /**
  * Decode a single coefficient.
  */
-static GOTV_INLINE void decode_subblock1(int16_t *dst, int code, GetBitContext *gb, VLC *vlc, int q)
+static NLC_INLINE void decode_subblock1(int16_t *dst, int code, GetBitContext *gb, VLC *vlc, int q)
 {
     int coeff = modulo_three_table[code] >> 6;
     decode_coeff(dst, coeff, 3, gb, vlc, q);
 }
 
-static GOTV_INLINE void decode_subblock3(int16_t *dst, int code, GetBitContext *gb, VLC *vlc,
+static NLC_INLINE void decode_subblock3(int16_t *dst, int code, GetBitContext *gb, VLC *vlc,
                                     int q_dc, int q_ac1, int q_ac2)
 {
     int flags = modulo_three_table[code];
@@ -339,7 +339,7 @@ int ff_rv34_get_start_offset(GetBitContext *gb, int mb_size)
 /**
  * Select VLC set for decoding from current quantizer, modifier and frame type.
  */
-static GOTV_INLINE RV34VLC* choose_vlc_set(int quant, int mod, int type)
+static NLC_INLINE RV34VLC* choose_vlc_set(int quant, int mod, int type)
 {
     if(mod == 2 && quant < 19) quant += 10;
     else if(mod && quant < 26) quant += 5;
@@ -527,7 +527,7 @@ static int calc_add_mv(RV34DecContext *r, int dir, int val)
 /**
  * Predict motion vector for B-frame macroblock.
  */
-static GOTV_INLINE void rv34_pred_b_vector(int A[2], int B[2], int C[2],
+static NLC_INLINE void rv34_pred_b_vector(int A[2], int B[2], int C[2],
                                       int A_avail, int B_avail, int C_avail,
                                       int *mx, int *my)
 {
@@ -662,7 +662,7 @@ static const int chroma_coeffs[3] = { 0, 3, 5 };
  * @param qpel_mc a set of functions used to perform luma motion compensation
  * @param chroma_mc a set of functions used to perform chroma motion compensation
  */
-static GOTV_INLINE void rv34_mc(RV34DecContext *r, const int block_type,
+static NLC_INLINE void rv34_mc(RV34DecContext *r, const int block_type,
                           const int xoff, const int yoff, int mv_off,
                           const int width, const int height, int dir,
                           const int thirdpel, int weighted,
@@ -996,7 +996,7 @@ static void rv34_pred_4x4_block(RV34DecContext *r, uint8_t *dst, int stride, int
     r->h.pred4x4[itype](dst, prev, stride);
 }
 
-static GOTV_INLINE int adjust_pred16(int itype, int up, int left)
+static NLC_INLINE int adjust_pred16(int itype, int up, int left)
 {
     if(!up && !left)
         itype = DC_128_PRED8x8;
@@ -1012,7 +1012,7 @@ static GOTV_INLINE int adjust_pred16(int itype, int up, int left)
     return itype;
 }
 
-static GOTV_INLINE void rv34_process_block(RV34DecContext *r,
+static NLC_INLINE void rv34_process_block(RV34DecContext *r,
                                       uint8_t *pdst, int stride,
                                       int fc, int sc, int q_dc, int q_ac)
 {

@@ -45,7 +45,7 @@ static const uint16_t code_tab[16][2] = {
 static VLC code_vlc;
 
 /* returns modified base_value */
-static GOTV_INLINE int wnv1_get_code(WNV1Context *w, int base_value)
+static NLC_INLINE int wnv1_get_code(WNV1Context *w, int base_value)
 {
     int v = get_vlc2(&w->gb, code_vlc.table, CODE_VLC_BITS, 1);
 

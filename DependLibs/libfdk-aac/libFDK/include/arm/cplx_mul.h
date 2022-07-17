@@ -101,7 +101,7 @@ amm-info@iis.fraunhofer.de
 //#define FUNCTION_cplxMult_32x32X2
 
 #ifdef FUNCTION_cplxMultDiv2_32x16
-GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
+NLC_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
                           FIXP_DBL *c_Im,
                           const FIXP_DBL a_Re,
                           const FIXP_DBL a_Im,
@@ -125,7 +125,7 @@ GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
 #endif /* FUNCTION_cplxMultDiv2_32x16 */
 
 #ifdef FUNCTION_cplxMultDiv2_32x16X2
-GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
+NLC_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
                           FIXP_DBL *c_Im,
                           const FIXP_DBL a_Re,
                           const FIXP_DBL a_Im,
@@ -149,7 +149,7 @@ GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
 #endif /* FUNCTION_cplxMultDiv2_32x16X2 */
 
 #ifdef FUNCTION_cplxMultAddDiv2_32x16X2
-GOTV_INLINE void cplxMultAddDiv2( FIXP_DBL *c_Re,
+NLC_INLINE void cplxMultAddDiv2( FIXP_DBL *c_Re,
                              FIXP_DBL *c_Im,
                              const FIXP_DBL  a_Re,
                              const FIXP_DBL  a_Im,
@@ -174,7 +174,7 @@ GOTV_INLINE void cplxMultAddDiv2( FIXP_DBL *c_Re,
 
 
 #ifdef FUNCTION_cplxMultDiv2_32x32X2
-GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
+NLC_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
                           FIXP_DBL *c_Im,
                           const FIXP_DBL a_Re,
                           const FIXP_DBL a_Im,

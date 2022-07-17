@@ -180,7 +180,7 @@ static void mpegts_write_section(MpegTSSection *s, uint8_t *buf, int len)
     }
 }
 
-static GOTV_INLINE void put16(uint8_t **q_ptr, int val)
+static NLC_INLINE void put16(uint8_t **q_ptr, int val)
 {
     uint8_t *q;
     q      = *q_ptr;

@@ -52,7 +52,7 @@ static const AVOption filt_name##_options[] = {                     \
    { NULL }                                                         \
 }
 
-GOTV_INLINE static int push_frame(AVFilterContext *ctx)
+NLC_INLINE static int push_frame(AVFilterContext *ctx)
 {
     InterleaveContext *s = ctx->priv;
     AVFrame *frame;

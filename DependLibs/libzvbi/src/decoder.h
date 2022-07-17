@@ -286,7 +286,7 @@ typedef uint64_t vbi_pixfmt_set;
  * result from a too weak or noisy signal. Error correction must be
  * implemented at a higher layer.
  */
-//GOTV_INLINE vbi_bool
+//NLC_INLINE vbi_bool
 //vbi_bit_slice(vbi_bit_slicer *slicer, uint8_t *raw, uint8_t *buf)
 //{
 //	return slicer->func(slicer, raw, buf);

@@ -312,7 +312,7 @@ bool Json::operator< (const Json &other) const {
  *
  * Format char c suitable for printing in an error message.
  */
-static GOTV_INLINE string esc(char c) {
+static NLC_INLINE string esc(char c) {
     char buf[12];
     if (static_cast<uint8_t>(c) >= 0x20 && static_cast<uint8_t>(c) <= 0x7f) {
         snprintf(buf, sizeof buf, "'%c' (%d)", c, c);
@@ -322,7 +322,7 @@ static GOTV_INLINE string esc(char c) {
     return string(buf);
 }
 
-static GOTV_INLINE bool in_range(long x, long lower, long upper) {
+static NLC_INLINE bool in_range(long x, long lower, long upper) {
     return (x >= lower && x <= upper);
 }
 
@@ -368,7 +368,7 @@ struct JsonParser final {
 
     /* consume_comment()
      *
-     * Advance comments (c-style GOTV_INLINE and multiline).
+     * Advance comments (c-style NLC_INLINE and multiline).
      */
     bool consume_comment() {
       bool comment_found = false;
@@ -376,15 +376,15 @@ struct JsonParser final {
         i++;
         if (i == str.size())
           return fail("unexpected end of input inside comment", false);
-        if (str[i] == '/') { // GOTV_INLINE comment
+        if (str[i] == '/') { // NLC_INLINE comment
           i++;
           if (i == str.size())
-            return fail("unexpected end of input inside GOTV_INLINE comment", false);
+            return fail("unexpected end of input inside NLC_INLINE comment", false);
           // advance until next line
           while (str[i] != '\n') {
             i++;
             if (i == str.size())
-              return fail("unexpected end of input inside GOTV_INLINE comment", false);
+              return fail("unexpected end of input inside NLC_INLINE comment", false);
           }
           comment_found = true;
         }

@@ -1,4 +1,4 @@
-/* mpi-GOTV_INLINE.h  -  Internal to the Multi Precision Integers
+/* mpi-NLC_INLINE.h  -  Internal to the Multi Precision Integers
  * Copyright (C) 1994, 1996, 1998, 1999,
  *               2001, 2002 Free Software Foundation, Inc.
  *
@@ -28,12 +28,12 @@
 #ifndef G10_MPI_INLINE_H
 #define G10_MPI_INLINE_H
 
-/* Starting with gcc 4.3 "extern GOTV_INLINE" conforms in c99 mode to the
+/* Starting with gcc 4.3 "extern NLC_INLINE" conforms in c99 mode to the
    c99 semantics.  To keep the useful old semantics we use an
    attribute.  */
 #ifndef G10_MPI_INLINE_DECL
 # ifdef __GNUC_STDC_INLINE__
-#  define G10_MPI_INLINE_DECL  extern GOTV_INLINE __attribute__ ((__gnu_inline__))
+#  define G10_MPI_INLINE_DECL  extern NLC_INLINE __attribute__ ((__gnu_inline__))
 # else
 #  define G10_MPI_INLINE_DECL  extern __inline__
 # endif

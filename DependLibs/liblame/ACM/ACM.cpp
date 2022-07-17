@@ -152,7 +152,7 @@ LPARAM lParam  // second message parameter
 }
 
 
-GOTV_INLINE DWORD ACM::Configure(HWND hParentWindow, LPDRVCONFIGINFO pConfig)
+NLC_INLINE DWORD ACM::Configure(HWND hParentWindow, LPDRVCONFIGINFO pConfig)
 {
 	my_debug.OutPut(DEBUG_LEVEL_FUNC_START, "ACM : Configure (Parent Window = 0x%08X)",hParentWindow);
 
@@ -278,7 +278,7 @@ LPARAM lParam  // second message parameter
 	return bResult;
 }
 
-GOTV_INLINE DWORD ACM::About(HWND hParentWindow)
+NLC_INLINE DWORD ACM::About(HWND hParentWindow)
 {
 	my_debug.OutPut(DEBUG_LEVEL_FUNC_START, "ACM : About (Parent Window = 0x%08X)",hParentWindow);
 
@@ -494,7 +494,7 @@ switch (msg) {
 
 	\param a_FormatDetails will be filled with all the corresponding data
 */
-GOTV_INLINE DWORD ACM::OnFormatDetails(LPACMFORMATDETAILS a_FormatDetails, const LPARAM a_Query)
+NLC_INLINE DWORD ACM::OnFormatDetails(LPACMFORMATDETAILS a_FormatDetails, const LPARAM a_Query)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 
@@ -569,7 +569,7 @@ GOTV_INLINE DWORD ACM::OnFormatDetails(LPACMFORMATDETAILS a_FormatDetails, const
 
 	\param a_FormatTagDetails will be filled with all the corresponding data
 */
-GOTV_INLINE DWORD ACM::OnFormatTagDetails(LPACMFORMATTAGDETAILS a_FormatTagDetails, const LPARAM a_Query)
+NLC_INLINE DWORD ACM::OnFormatTagDetails(LPACMFORMATTAGDETAILS a_FormatTagDetails, const LPARAM a_Query)
 {
 	DWORD Result;
 	DWORD the_format = WAVE_FORMAT_UNKNOWN; // the format to give details
@@ -668,7 +668,7 @@ GOTV_INLINE DWORD ACM::OnFormatTagDetails(LPACMFORMATTAGDETAILS a_FormatTagDetai
 
 	\param a_DriverDetail will be filled with all the corresponding data
 */
-GOTV_INLINE DWORD ACM::OnDriverDetails(const HDRVR hdrvr, LPACMDRIVERDETAILS a_DriverDetail)
+NLC_INLINE DWORD ACM::OnDriverDetails(const HDRVR hdrvr, LPACMDRIVERDETAILS a_DriverDetail)
 {
 	if (my_hIcon == NULL)
 		my_hIcon = LoadIcon(GetDriverModuleHandle(hdrvr), MAKEINTRESOURCE(IDI_ICON));
@@ -707,7 +707,7 @@ GOTV_INLINE DWORD ACM::OnDriverDetails(const HDRVR hdrvr, LPACMDRIVERDETAILS a_D
 
 	\param a_FormatSuggest will be filled with all the corresponding data
 */
-GOTV_INLINE DWORD ACM::OnFormatSuggest(LPACMDRVFORMATSUGGEST a_FormatSuggest)
+NLC_INLINE DWORD ACM::OnFormatSuggest(LPACMDRVFORMATSUGGEST a_FormatSuggest)
 {
 	DWORD Result = MMSYSERR_NOTSUPPORTED;
     DWORD fdwSuggest = (ACM_FORMATSUGGESTF_TYPEMASK & a_FormatSuggest->fdwSuggest);
@@ -921,7 +921,7 @@ my_debug.OutPut(DEBUG_LEVEL_FUNC_CODE, "Suggest succeed C");
 
 	\param a_StreamInstance contain information about the stream desired
 */
-GOTV_INLINE DWORD ACM::OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance)
+NLC_INLINE DWORD ACM::OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 
@@ -1030,7 +1030,7 @@ GOTV_INLINE DWORD ACM::OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance)
 	return Result;
 }
 
-GOTV_INLINE DWORD ACM::OnStreamSize(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMSIZE the_StreamSize)
+NLC_INLINE DWORD ACM::OnStreamSize(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMSIZE the_StreamSize)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 
@@ -1072,7 +1072,7 @@ GOTV_INLINE DWORD ACM::OnStreamSize(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPA
 	return Result;
 }
 
-GOTV_INLINE DWORD ACM::OnStreamClose(LPACMDRVSTREAMINSTANCE a_StreamInstance)
+NLC_INLINE DWORD ACM::OnStreamClose(LPACMDRVSTREAMINSTANCE a_StreamInstance)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 
@@ -1096,7 +1096,7 @@ GOTV_INLINE DWORD ACM::OnStreamClose(LPACMDRVSTREAMINSTANCE a_StreamInstance)
 	return Result;
 }
 
-GOTV_INLINE DWORD ACM::OnStreamPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader)
+NLC_INLINE DWORD ACM::OnStreamPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 
@@ -1131,7 +1131,7 @@ GOTV_INLINE DWORD ACM::OnStreamPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInst
 	return Result;
 }
 
-GOTV_INLINE DWORD ACM::OnStreamUnPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader)
+NLC_INLINE DWORD ACM::OnStreamUnPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 
@@ -1171,7 +1171,7 @@ GOTV_INLINE DWORD ACM::OnStreamUnPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamIn
 	return Result;
 }
 
-GOTV_INLINE DWORD ACM::OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMHEADER a_StreamHeader)
+NLC_INLINE DWORD ACM::OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMHEADER a_StreamHeader)
 {
 	DWORD Result = ACMERR_NOTPOSSIBLE;
 

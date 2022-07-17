@@ -42,7 +42,7 @@
 #elif defined(_MSC_VER) && _MSC_VER >= 1300
 # define GPG_ERR_INLINE __inline
 #elif defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-# define GPG_ERR_INLINE GOTV_INLINE
+# define GPG_ERR_INLINE NLC_INLINE
 #else
 # ifndef GPG_ERR_INLINE
 #  define GPG_ERR_INLINE
@@ -783,7 +783,7 @@ typedef unsigned int gpg_error_t;
 #endif
 
 
-/* The new name for the GOTV_INLINE macro.  */
+/* The new name for the NLC_INLINE macro.  */
 #define GPGRT_INLINE GPG_ERR_INLINE
 
 

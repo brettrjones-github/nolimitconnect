@@ -43,7 +43,7 @@ typedef struct Ir2Context{
 static VLC ir2_vlc;
 
 /* Indeo 2 codes are in range 0x01..0x7F and 0x81..0x90 */
-static GOTV_INLINE int ir2_get_code(GetBitContext *gb)
+static NLC_INLINE int ir2_get_code(GetBitContext *gb)
 {
     return get_vlc2(gb, ir2_vlc.table, CODE_VLC_BITS, 1) + 1;
 }

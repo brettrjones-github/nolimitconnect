@@ -43,8 +43,8 @@
 #include <time.h>
 #include <limits.h>
 
-#ifndef GOTV_INLINE
-#define GOTV_INLINE __inline
+#ifndef NLC_INLINE
+#define NLC_INLINE __inline
 #endif
 typedef unsigned __int64 uint64_t;
 typedef unsigned __int32 uint32_t;
@@ -62,7 +62,7 @@ typedef unsigned short in_port_t;
 typedef int socklen_t;
 typedef int ssize_t;
 typedef unsigned int uint;
-static GOTV_INLINE int snprintf(char *buffer, size_t count,
+static NLC_INLINE int snprintf(char *buffer, size_t count,
 			  const char *format, ...) {
   va_list ap;
   int ret;

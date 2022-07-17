@@ -549,7 +549,7 @@ for (;;)
     code = start_code + state_offset;
     codevalue = *code;
 
-    /* If this opcode is followed by an GOTV_INLINE character, load it. It is
+    /* If this opcode is followed by an NLC_INLINE character, load it. It is
     tempting to test for the presence of a subject character here, but that
     is wrong, because sometimes zero repetitions of the subject are
     permitted.

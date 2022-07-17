@@ -226,7 +226,7 @@ static int wav_parse_xma2_tag(AVFormatContext *s, int64_t size, AVStream **st)
     return 0;
 }
 
-static GOTV_INLINE int wav_parse_bext_string(AVFormatContext *s, const char *key,
+static NLC_INLINE int wav_parse_bext_string(AVFormatContext *s, const char *key,
                                         int length)
 {
     char temp[257];

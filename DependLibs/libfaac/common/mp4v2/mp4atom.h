@@ -247,12 +247,12 @@ protected:
 	MP4AtomArray		m_pChildAtoms;
 };
 
-GOTV_INLINE u_int32_t ATOMID(const char* type) {
+NLC_INLINE u_int32_t ATOMID(const char* type) {
 	return STRTOINT32(type);
 }
 
 // inverse ATOMID - 32 bit id to string
-GOTV_INLINE void IDATOM(u_int32_t type, char *s) {
+NLC_INLINE void IDATOM(u_int32_t type, char *s) {
 	INT32TOSTR(type, s);
 }
 

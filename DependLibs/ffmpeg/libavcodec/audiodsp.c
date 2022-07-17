@@ -24,7 +24,7 @@
 #include "libavutil/avutil_common.h"
 #include "audiodsp.h"
 
-static GOTV_INLINE uint32_t clipf_c_one(uint32_t a, uint32_t mini,
+static NLC_INLINE uint32_t clipf_c_one(uint32_t a, uint32_t mini,
                                    uint32_t maxi, uint32_t maxisign)
 {
     if (a > mini)

@@ -124,7 +124,7 @@ public:
   virtual int setErr(int err_code, const char *qry)=0;
   virtual const char *getErrorMsg(void) { return error.c_str(); }
 	
-  virtual int connect(bool create) { GOTV_UNUSED( create ); return DB_COMMAND_OK; }
+  virtual int connect(bool create) { NLC_UNUSED( create ); return DB_COMMAND_OK; }
   virtual int connectFull( const char *newDb, const char *newHost=NULL,
                       const char *newLogin=NULL, const char *newPasswd=NULL,const char *newPort=NULL,
                       const char *newKey=NULL, const char *newCert=NULL, const char *newCA=NULL, 
@@ -136,7 +136,7 @@ public:
   virtual long nextid(const char* seq_name)=0;
 
 /* \brief copy database */
-  virtual int copy(const char *new_name) { GOTV_UNUSED(new_name); return -1; }
+  virtual int copy(const char *new_name) { NLC_UNUSED(new_name); return -1; }
 
 /* \brief drop all extra analytics from database */
   virtual int drop_analytics(void) { return -1; }

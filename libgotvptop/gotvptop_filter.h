@@ -236,7 +236,7 @@ static inline int filter_GetInputAttachments( filter_t *p_filter,
  * \param restart_cb a gotvptop_callback_t to call if the event means restarting the
  * filter (i.e. an event on a non-command variable)
  */
-GOTV_API void filter_AddProxyCallbacks( gotvptop_object_t *obj, filter_t *filter,
+NLC_API void filter_AddProxyCallbacks( gotvptop_object_t *obj, filter_t *filter,
                                        gotvptop_callback_t restart_cb );
 # define filter_AddProxyCallbacks(a, b, c) \
     filter_AddProxyCallbacks(GOTV_OBJECT(a), b, c)
@@ -247,7 +247,7 @@ GOTV_API void filter_AddProxyCallbacks( gotvptop_object_t *obj, filter_t *filter
  *
  * \param restart_cb the same gotvptop_callback_t passed to filter_AddProxyCallbacks
  */
-GOTV_API void filter_DelProxyCallbacks( gotvptop_object_t *obj, filter_t *filter,
+NLC_API void filter_DelProxyCallbacks( gotvptop_object_t *obj, filter_t *filter,
                                        gotvptop_callback_t restart_cb);
 # define filter_DelProxyCallbacks(a, b, c) \
     filter_DelProxyCallbacks(GOTV_OBJECT(a), b, c)
@@ -258,25 +258,25 @@ GOTV_API void filter_DelProxyCallbacks( gotvptop_object_t *obj, filter_t *filter
  * Only the chroma properties of the dest format is used (chroma
  * type, rgb masks and shifts)
  */
-GOTV_API filter_t * filter_NewBlend( gotvptop_object_t *, const video_format_t *p_dst_chroma ) GOTV_USED;
+NLC_API filter_t * filter_NewBlend( gotvptop_object_t *, const video_format_t *p_dst_chroma ) GOTV_USED;
 
 /**
  * It configures blend filter parameters that are allowed to changed
  * after the creation.
  */
-GOTV_API int filter_ConfigureBlend( filter_t *, int i_dst_width, int i_dst_height, const video_format_t *p_src );
+NLC_API int filter_ConfigureBlend( filter_t *, int i_dst_width, int i_dst_height, const video_format_t *p_src );
 
 /**
  * It blends a picture into another one.
  *
  * The input picture is not modified and not released.
  */
-GOTV_API int filter_Blend( filter_t *, picture_t *p_dst, int i_dst_x, int i_dst_y, const picture_t *p_src, int i_alpha );
+NLC_API int filter_Blend( filter_t *, picture_t *p_dst, int i_dst_x, int i_dst_y, const picture_t *p_src, int i_alpha );
 
 /**
  * It destroys a blend filter created by filter_NewBlend.
  */
-GOTV_API void filter_DeleteBlend( filter_t * );
+NLC_API void filter_DeleteBlend( filter_t * );
 
 /**
  * Create a picture_t *(*)( filter_t *, picture_t * ) compatible wrapper
@@ -325,7 +325,7 @@ GOTV_USED;
  * \param owner owner video buffer callbacks
  * \return new filter chain, or NULL on error
  */
-GOTV_API filter_chain_t * filter_chain_NewVideo( gotvptop_object_t *obj, bool change,
+NLC_API filter_chain_t * filter_chain_NewVideo( gotvptop_object_t *obj, bool change,
                                                 const filter_owner_t *owner )
 GOTV_USED;
 #define filter_chain_NewVideo( a, b, c ) \
@@ -337,7 +337,7 @@ GOTV_USED;
  *
  * \param p_chain pointer to filter chain
  */
-GOTV_API void filter_chain_Delete( filter_chain_t * );
+NLC_API void filter_chain_Delete( filter_chain_t * );
 
 /**
  * Reset filter chain will delete all filters in the chain and
@@ -347,7 +347,7 @@ GOTV_API void filter_chain_Delete( filter_chain_t * );
  * \param p_fmt_in new fmt_in params, may be NULL to leave input fmt unchanged
  * \param p_fmt_out new fmt_out params, may be NULL to leave output fmt unchanged
  */
-GOTV_API void filter_chain_Reset( filter_chain_t *, const es_format_t *, const es_format_t * );
+NLC_API void filter_chain_Reset( filter_chain_t *, const es_format_t *, const es_format_t * );
 
 /**
  * Append a filter to the chain.
@@ -358,7 +358,7 @@ GOTV_API void filter_chain_Reset( filter_chain_t *, const es_format_t *, const e
  * \param fmt_out filter output format
  * \return a pointer to the filter or NULL on error
  */
-GOTV_API filter_t *filter_chain_AppendFilter(filter_chain_t *chain,
+NLC_API filter_t *filter_chain_AppendFilter(filter_chain_t *chain,
     const char *name, config_chain_t *cfg, const es_format_t *fmt_in,
     const es_format_t *fmt_out);
 
@@ -371,7 +371,7 @@ GOTV_API filter_t *filter_chain_AppendFilter(filter_chain_t *chain,
  * \retval 0 on success
  * \retval -1 on failure
  */
-GOTV_API int filter_chain_AppendConverter(filter_chain_t *chain,
+NLC_API int filter_chain_AppendConverter(filter_chain_t *chain,
     const es_format_t *fmt_in, const es_format_t *fmt_out);
 
 /**
@@ -380,7 +380,7 @@ GOTV_API int filter_chain_AppendConverter(filter_chain_t *chain,
  * \param chain filter chain to append a filter to
  * \param str filters chain nul-terminated string
  */
-GOTV_API int filter_chain_AppendFromString(filter_chain_t *chain,
+NLC_API int filter_chain_AppendFromString(filter_chain_t *chain,
                                           const char *str);
 
 /**
@@ -391,7 +391,7 @@ GOTV_API int filter_chain_AppendFromString(filter_chain_t *chain,
  * \param chain filter chain to remove the filter from
  * \param filter filter to remove from the chain and delete
  */
-GOTV_API void filter_chain_DeleteFilter(filter_chain_t *chain,
+NLC_API void filter_chain_DeleteFilter(filter_chain_t *chain,
                                        filter_t *filter);
 
 /**
@@ -400,14 +400,14 @@ GOTV_API void filter_chain_DeleteFilter(filter_chain_t *chain,
  * \param chain pointer to filter chain
  * \return true if and only if there are no filters in this filter chain
  */
-GOTV_API bool filter_chain_IsEmpty(const filter_chain_t *chain);
+NLC_API bool filter_chain_IsEmpty(const filter_chain_t *chain);
 
 /**
  * Get last output format of the last element in the filter chain.
  *
  * \param chain filter chain
  */
-GOTV_API const es_format_t *filter_chain_GetFmtOut(filter_chain_t *chain);
+NLC_API const es_format_t *filter_chain_GetFmtOut(filter_chain_t *chain);
 
 /**
  * Apply the filter chain to a video picture.
@@ -416,13 +416,13 @@ GOTV_API const es_format_t *filter_chain_GetFmtOut(filter_chain_t *chain);
  * \param pic picture to apply filters to
  * \return modified picture after applying all video filters
  */
-GOTV_API picture_t *filter_chain_VideoFilter(filter_chain_t *chain,
+NLC_API picture_t *filter_chain_VideoFilter(filter_chain_t *chain,
                                             picture_t *pic);
 
 /**
  * Flush a video filter chain.
  */
-GOTV_API void filter_chain_VideoFlush( filter_chain_t * );
+NLC_API void filter_chain_VideoFlush( filter_chain_t * );
 
 /**
  * Generate subpictures from a chain of subpicture source "filters".
@@ -440,7 +440,7 @@ void filter_chain_SubSource(filter_chain_t *chain, spu_t *,
  * \param subpic subpicture to apply filters on
  * \return modified subpicture after applying all subpicture filters
  */
-GOTV_API subpicture_t *filter_chain_SubFilter(filter_chain_t *chain,
+NLC_API subpicture_t *filter_chain_SubFilter(filter_chain_t *chain,
                                              subpicture_t *subpic);
 
 /**
@@ -451,7 +451,7 @@ GOTV_API subpicture_t *filter_chain_SubFilter(filter_chain_t *chain,
  *
  * The gotvptop_mouse_t* pointers may be the same.
  */
-GOTV_API int filter_chain_MouseFilter( filter_chain_t *, struct gotvptop_mouse_t *,
+NLC_API int filter_chain_MouseFilter( filter_chain_t *, struct gotvptop_mouse_t *,
                                       const struct gotvptop_mouse_t * );
 
 /**
@@ -459,7 +459,7 @@ GOTV_API int filter_chain_MouseFilter( filter_chain_t *, struct gotvptop_mouse_t
  *
  * It makes sense only for a sub source chain.
  */
-GOTV_API int filter_chain_MouseEvent( filter_chain_t *,
+NLC_API int filter_chain_MouseEvent( filter_chain_t *,
                                      const struct gotvptop_mouse_t *,
                                      const video_format_t * );
 

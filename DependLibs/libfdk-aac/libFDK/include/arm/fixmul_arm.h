@@ -107,7 +107,7 @@ amm-info@iis.fraunhofer.de
 #define fixmulBitExact_DS(a,b) fixmul_DS(a,b)
 
 #if defined(__ARM_ARCH_6__) || defined(__TARGET_ARCH_7E_M)
-GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smmul %0, %1, %2" : "=r" (result)
@@ -115,7 +115,7 @@ GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
   return result ;
 }
 #else
-GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 {
   int32_t discard, result ;
   __asm__ ("smull %0, %1, %2, %3" : "=&r" (discard), "=r" (result)
@@ -126,7 +126,7 @@ GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 
 #if defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_6__)
 #define FUNCTION_fixmuldiv2_SD
-GOTV_INLINE int32_t fixmuldiv2_SD (const int16_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_SD (const int16_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smulwb %0, %1, %2"

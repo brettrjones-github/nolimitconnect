@@ -39,7 +39,7 @@ either expressed or implied, of the FreeBSD Project.
 
 
 #ifdef __cplusplus
-GOTV_EXTERN "C" {
+NLC_EXTERN "C" {
 #endif
 
 
@@ -190,150 +190,150 @@ typedef struct NLM4_GRANTEDres NLM4_GRANTEDres;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define NLM4_NULL 0
-GOTV_EXTERN  void * nlm4_null_4(void *, void *);
-GOTV_EXTERN  void * nlm4_null_4_svc(void *, struct svc_req *);
+NLC_EXTERN  void * nlm4_null_4(void *, void *);
+NLC_EXTERN  void * nlm4_null_4_svc(void *, struct svc_req *);
 #define NLM4_TEST 1
-GOTV_EXTERN  NLM4_TESTres * nlm4_test_4(NLM4_TESTargs *, void *);
-GOTV_EXTERN  NLM4_TESTres * nlm4_test_4_svc(NLM4_TESTargs *, struct svc_req *);
+NLC_EXTERN  NLM4_TESTres * nlm4_test_4(NLM4_TESTargs *, void *);
+NLC_EXTERN  NLM4_TESTres * nlm4_test_4_svc(NLM4_TESTargs *, struct svc_req *);
 #define NLM4_LOCK 2
-GOTV_EXTERN  NLM4_LOCKres * nlm4_lock_4(NLM4_LOCKargs *, void *);
-GOTV_EXTERN  NLM4_LOCKres * nlm4_lock_4_svc(NLM4_LOCKargs *, struct svc_req *);
+NLC_EXTERN  NLM4_LOCKres * nlm4_lock_4(NLM4_LOCKargs *, void *);
+NLC_EXTERN  NLM4_LOCKres * nlm4_lock_4_svc(NLM4_LOCKargs *, struct svc_req *);
 #define NLM4_CANCEL 3
-GOTV_EXTERN  NLM4_CANCres * nlm4_cancel_4(NLM4_CANCargs *, void *);
-GOTV_EXTERN  NLM4_CANCres * nlm4_cancel_4_svc(NLM4_CANCargs *, struct svc_req *);
+NLC_EXTERN  NLM4_CANCres * nlm4_cancel_4(NLM4_CANCargs *, void *);
+NLC_EXTERN  NLM4_CANCres * nlm4_cancel_4_svc(NLM4_CANCargs *, struct svc_req *);
 #define NLM4_UNLOCK 4
-GOTV_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4(NLM4_UNLOCKargs *, void *);
-GOTV_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4_svc(NLM4_UNLOCKargs *, struct svc_req *);
+NLC_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4(NLM4_UNLOCKargs *, void *);
+NLC_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4_svc(NLM4_UNLOCKargs *, struct svc_req *);
 #define NLM4_GRANT 5
-GOTV_EXTERN  NLM4_GRANTEDres * nlm4_grant_4(NLM4_GRANTEDargs *, void *);
-GOTV_EXTERN  NLM4_GRANTEDres * nlm4_grant_4_svc(NLM4_GRANTEDargs *, struct svc_req *);
+NLC_EXTERN  NLM4_GRANTEDres * nlm4_grant_4(NLM4_GRANTEDargs *, void *);
+NLC_EXTERN  NLM4_GRANTEDres * nlm4_grant_4_svc(NLM4_GRANTEDargs *, struct svc_req *);
 #define NLM4_TEST_MSG 6
-GOTV_EXTERN  void * nlm4_test_msg_4(NLM4_TESTargs *, void *);
-GOTV_EXTERN  void * nlm4_test_msg_4_svc(NLM4_TESTargs *, struct svc_req *);
+NLC_EXTERN  void * nlm4_test_msg_4(NLM4_TESTargs *, void *);
+NLC_EXTERN  void * nlm4_test_msg_4_svc(NLM4_TESTargs *, struct svc_req *);
 #define NLM4_LOCK_MSG 7
-GOTV_EXTERN  void * nlm4_lock_msg_4(NLM4_LOCKargs *, void *);
-GOTV_EXTERN  void * nlm4_lock_msg_4_svc(NLM4_LOCKargs *, struct svc_req *);
+NLC_EXTERN  void * nlm4_lock_msg_4(NLM4_LOCKargs *, void *);
+NLC_EXTERN  void * nlm4_lock_msg_4_svc(NLM4_LOCKargs *, struct svc_req *);
 #define NLM4_CANCEL_MSG 8
-GOTV_EXTERN  void * nlm4_cancel_msg_4(NLM4_CANCargs *, void *);
-GOTV_EXTERN  void * nlm4_cancel_msg_4_svc(NLM4_CANCargs *, struct svc_req *);
+NLC_EXTERN  void * nlm4_cancel_msg_4(NLM4_CANCargs *, void *);
+NLC_EXTERN  void * nlm4_cancel_msg_4_svc(NLM4_CANCargs *, struct svc_req *);
 #define NLM4_UNLOCK_MSG 9
-GOTV_EXTERN  void * nlm4_unlock_msg_4(NLM4_UNLOCKargs *, void *);
-GOTV_EXTERN  void * nlm4_unlock_msg_4_svc(NLM4_UNLOCKargs *, struct svc_req *);
+NLC_EXTERN  void * nlm4_unlock_msg_4(NLM4_UNLOCKargs *, void *);
+NLC_EXTERN  void * nlm4_unlock_msg_4_svc(NLM4_UNLOCKargs *, struct svc_req *);
 #define NLM4_GRANT_MSG 10
-GOTV_EXTERN  void * nlm4_grant_msg_4(NLM4_GRANTEDargs *, void *);
-GOTV_EXTERN  void * nlm4_grant_msg_4_svc(NLM4_GRANTEDargs *, struct svc_req *);
+NLC_EXTERN  void * nlm4_grant_msg_4(NLM4_GRANTEDargs *, void *);
+NLC_EXTERN  void * nlm4_grant_msg_4_svc(NLM4_GRANTEDargs *, struct svc_req *);
 #define NLM4_TEST_RES 11
-GOTV_EXTERN  void * nlm4_test_res_4(NLM4_TESTres *, void *);
-GOTV_EXTERN  void * nlm4_test_res_4_svc(NLM4_TESTres *, struct svc_req *);
+NLC_EXTERN  void * nlm4_test_res_4(NLM4_TESTres *, void *);
+NLC_EXTERN  void * nlm4_test_res_4_svc(NLM4_TESTres *, struct svc_req *);
 #define NLM4_LOCK_RES 12
-GOTV_EXTERN  void * nlm4_lock_res_4(NLM4_LOCKres *, void *);
-GOTV_EXTERN  void * nlm4_lock_res_4_svc(NLM4_LOCKres *, struct svc_req *);
+NLC_EXTERN  void * nlm4_lock_res_4(NLM4_LOCKres *, void *);
+NLC_EXTERN  void * nlm4_lock_res_4_svc(NLM4_LOCKres *, struct svc_req *);
 #define NLM4_CANCEL_RES 13
-GOTV_EXTERN  void * nlm4_cancel_res_4(NLM4_CANCres *, void *);
-GOTV_EXTERN  void * nlm4_cancel_res_4_svc(NLM4_CANCres *, struct svc_req *);
+NLC_EXTERN  void * nlm4_cancel_res_4(NLM4_CANCres *, void *);
+NLC_EXTERN  void * nlm4_cancel_res_4_svc(NLM4_CANCres *, struct svc_req *);
 #define NLM4_UNLOCK_RES 14
-GOTV_EXTERN  void * nlm4_unlock_res_4(NLM4_UNLOCKres *, void *);
-GOTV_EXTERN  void * nlm4_unlock_res_4_svc(NLM4_UNLOCKres *, struct svc_req *);
+NLC_EXTERN  void * nlm4_unlock_res_4(NLM4_UNLOCKres *, void *);
+NLC_EXTERN  void * nlm4_unlock_res_4_svc(NLM4_UNLOCKres *, struct svc_req *);
 #define NLM4_GRANT_RES 15
-GOTV_EXTERN  void * nlm4_grant_res_4(NLM4_GRANTEDres *, void *);
-GOTV_EXTERN  void * nlm4_grant_res_4_svc(NLM4_GRANTEDres *, struct svc_req *);
-GOTV_EXTERN int nlm_program_4_freeresult (void *, zdrproc_t, caddr_t);
+NLC_EXTERN  void * nlm4_grant_res_4(NLM4_GRANTEDres *, void *);
+NLC_EXTERN  void * nlm4_grant_res_4_svc(NLM4_GRANTEDres *, struct svc_req *);
+NLC_EXTERN int nlm_program_4_freeresult (void *, zdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define NLM4_NULL 0
-GOTV_EXTERN  void * nlm4_null_4();
-GOTV_EXTERN  void * nlm4_null_4_svc();
+NLC_EXTERN  void * nlm4_null_4();
+NLC_EXTERN  void * nlm4_null_4_svc();
 #define NLM4_TEST 1
-GOTV_EXTERN  NLM4_TESTres * nlm4_test_4();
-GOTV_EXTERN  NLM4_TESTres * nlm4_test_4_svc();
+NLC_EXTERN  NLM4_TESTres * nlm4_test_4();
+NLC_EXTERN  NLM4_TESTres * nlm4_test_4_svc();
 #define NLM4_LOCK 2
-GOTV_EXTERN  NLM4_LOCKres * nlm4_lock_4();
-GOTV_EXTERN  NLM4_LOCKres * nlm4_lock_4_svc();
+NLC_EXTERN  NLM4_LOCKres * nlm4_lock_4();
+NLC_EXTERN  NLM4_LOCKres * nlm4_lock_4_svc();
 #define NLM4_CANCEL 3
-GOTV_EXTERN  NLM4_CANCres * nlm4_cancel_4();
-GOTV_EXTERN  NLM4_CANCres * nlm4_cancel_4_svc();
+NLC_EXTERN  NLM4_CANCres * nlm4_cancel_4();
+NLC_EXTERN  NLM4_CANCres * nlm4_cancel_4_svc();
 #define NLM4_UNLOCK 4
-GOTV_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4();
-GOTV_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4_svc();
+NLC_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4();
+NLC_EXTERN  NLM4_UNLOCKres * nlm4_unlock_4_svc();
 #define NLM4_GRANT 5
-GOTV_EXTERN  NLM4_GRANTEDres * nlm4_grant_4();
-GOTV_EXTERN  NLM4_GRANTEDres * nlm4_grant_4_svc();
+NLC_EXTERN  NLM4_GRANTEDres * nlm4_grant_4();
+NLC_EXTERN  NLM4_GRANTEDres * nlm4_grant_4_svc();
 #define NLM4_TEST_MSG 6
-GOTV_EXTERN  void * nlm4_test_msg_4();
-GOTV_EXTERN  void * nlm4_test_msg_4_svc();
+NLC_EXTERN  void * nlm4_test_msg_4();
+NLC_EXTERN  void * nlm4_test_msg_4_svc();
 #define NLM4_LOCK_MSG 7
-GOTV_EXTERN  void * nlm4_lock_msg_4();
-GOTV_EXTERN  void * nlm4_lock_msg_4_svc();
+NLC_EXTERN  void * nlm4_lock_msg_4();
+NLC_EXTERN  void * nlm4_lock_msg_4_svc();
 #define NLM4_CANCEL_MSG 8
-GOTV_EXTERN  void * nlm4_cancel_msg_4();
-GOTV_EXTERN  void * nlm4_cancel_msg_4_svc();
+NLC_EXTERN  void * nlm4_cancel_msg_4();
+NLC_EXTERN  void * nlm4_cancel_msg_4_svc();
 #define NLM4_UNLOCK_MSG 9
-GOTV_EXTERN  void * nlm4_unlock_msg_4();
-GOTV_EXTERN  void * nlm4_unlock_msg_4_svc();
+NLC_EXTERN  void * nlm4_unlock_msg_4();
+NLC_EXTERN  void * nlm4_unlock_msg_4_svc();
 #define NLM4_GRANT_MSG 10
-GOTV_EXTERN  void * nlm4_grant_msg_4();
-GOTV_EXTERN  void * nlm4_grant_msg_4_svc();
+NLC_EXTERN  void * nlm4_grant_msg_4();
+NLC_EXTERN  void * nlm4_grant_msg_4_svc();
 #define NLM4_TEST_RES 11
-GOTV_EXTERN  void * nlm4_test_res_4();
-GOTV_EXTERN  void * nlm4_test_res_4_svc();
+NLC_EXTERN  void * nlm4_test_res_4();
+NLC_EXTERN  void * nlm4_test_res_4_svc();
 #define NLM4_LOCK_RES 12
-GOTV_EXTERN  void * nlm4_lock_res_4();
-GOTV_EXTERN  void * nlm4_lock_res_4_svc();
+NLC_EXTERN  void * nlm4_lock_res_4();
+NLC_EXTERN  void * nlm4_lock_res_4_svc();
 #define NLM4_CANCEL_RES 13
-GOTV_EXTERN  void * nlm4_cancel_res_4();
-GOTV_EXTERN  void * nlm4_cancel_res_4_svc();
+NLC_EXTERN  void * nlm4_cancel_res_4();
+NLC_EXTERN  void * nlm4_cancel_res_4_svc();
 #define NLM4_UNLOCK_RES 14
-GOTV_EXTERN  void * nlm4_unlock_res_4();
-GOTV_EXTERN  void * nlm4_unlock_res_4_svc();
+NLC_EXTERN  void * nlm4_unlock_res_4();
+NLC_EXTERN  void * nlm4_unlock_res_4_svc();
 #define NLM4_GRANT_RES 15
-GOTV_EXTERN  void * nlm4_grant_res_4();
-GOTV_EXTERN  void * nlm4_grant_res_4_svc();
-GOTV_EXTERN int nlm_program_4_freeresult ();
+NLC_EXTERN  void * nlm4_grant_res_4();
+NLC_EXTERN  void * nlm4_grant_res_4_svc();
+NLC_EXTERN int nlm_program_4_freeresult ();
 #endif /* K&R C */
 
 /* the zdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-GOTV_EXTERN  uint32_t zdr_nlm_fh4 (ZDR *, nlm_fh4*);
-GOTV_EXTERN  uint32_t zdr_nlm4_oh (ZDR *, nlm4_oh*);
-GOTV_EXTERN  uint32_t zdr_nlm_cookie (ZDR *, nlm_cookie*);
-GOTV_EXTERN  uint32_t zdr_nlmstat4 (ZDR *, nlmstat4*);
-GOTV_EXTERN  uint32_t zdr_nlm4_holder (ZDR *, nlm4_holder*);
-GOTV_EXTERN  uint32_t zdr_nlm4_lock (ZDR *, nlm4_lock*);
-GOTV_EXTERN  uint32_t zdr_nlm4_share (ZDR *, nlm4_share*);
-GOTV_EXTERN  uint32_t zdr_nlm4_testres_denied (ZDR *, nlm4_testres_denied*);
-GOTV_EXTERN  uint32_t zdr_nlm4_testreply (ZDR *, nlm4_testreply*);
-GOTV_EXTERN  uint32_t zdr_NLM4_TESTres (ZDR *, NLM4_TESTres*);
-GOTV_EXTERN  uint32_t zdr_NLM4_TESTargs (ZDR *, NLM4_TESTargs*);
-GOTV_EXTERN  uint32_t zdr_NLM4_CANCres (ZDR *, NLM4_CANCres*);
-GOTV_EXTERN  uint32_t zdr_NLM4_CANCargs (ZDR *, NLM4_CANCargs*);
-GOTV_EXTERN  uint32_t zdr_NLM4_UNLOCKres (ZDR *, NLM4_UNLOCKres*);
-GOTV_EXTERN  uint32_t zdr_NLM4_UNLOCKargs (ZDR *, NLM4_UNLOCKargs*);
-GOTV_EXTERN  uint32_t zdr_NLM4_LOCKres (ZDR *, NLM4_LOCKres*);
-GOTV_EXTERN  uint32_t zdr_NLM4_LOCKargs (ZDR *, NLM4_LOCKargs*);
-GOTV_EXTERN  uint32_t zdr_NLM4_GRANTEDargs (ZDR *, NLM4_GRANTEDargs*);
-GOTV_EXTERN  uint32_t zdr_NLM4_GRANTEDres (ZDR *, NLM4_GRANTEDres*);
+NLC_EXTERN  uint32_t zdr_nlm_fh4 (ZDR *, nlm_fh4*);
+NLC_EXTERN  uint32_t zdr_nlm4_oh (ZDR *, nlm4_oh*);
+NLC_EXTERN  uint32_t zdr_nlm_cookie (ZDR *, nlm_cookie*);
+NLC_EXTERN  uint32_t zdr_nlmstat4 (ZDR *, nlmstat4*);
+NLC_EXTERN  uint32_t zdr_nlm4_holder (ZDR *, nlm4_holder*);
+NLC_EXTERN  uint32_t zdr_nlm4_lock (ZDR *, nlm4_lock*);
+NLC_EXTERN  uint32_t zdr_nlm4_share (ZDR *, nlm4_share*);
+NLC_EXTERN  uint32_t zdr_nlm4_testres_denied (ZDR *, nlm4_testres_denied*);
+NLC_EXTERN  uint32_t zdr_nlm4_testreply (ZDR *, nlm4_testreply*);
+NLC_EXTERN  uint32_t zdr_NLM4_TESTres (ZDR *, NLM4_TESTres*);
+NLC_EXTERN  uint32_t zdr_NLM4_TESTargs (ZDR *, NLM4_TESTargs*);
+NLC_EXTERN  uint32_t zdr_NLM4_CANCres (ZDR *, NLM4_CANCres*);
+NLC_EXTERN  uint32_t zdr_NLM4_CANCargs (ZDR *, NLM4_CANCargs*);
+NLC_EXTERN  uint32_t zdr_NLM4_UNLOCKres (ZDR *, NLM4_UNLOCKres*);
+NLC_EXTERN  uint32_t zdr_NLM4_UNLOCKargs (ZDR *, NLM4_UNLOCKargs*);
+NLC_EXTERN  uint32_t zdr_NLM4_LOCKres (ZDR *, NLM4_LOCKres*);
+NLC_EXTERN  uint32_t zdr_NLM4_LOCKargs (ZDR *, NLM4_LOCKargs*);
+NLC_EXTERN  uint32_t zdr_NLM4_GRANTEDargs (ZDR *, NLM4_GRANTEDargs*);
+NLC_EXTERN  uint32_t zdr_NLM4_GRANTEDres (ZDR *, NLM4_GRANTEDres*);
 
 #else /* K&R C */
-GOTV_EXTERN uint32_t zdr_nlm_fh4 ();
-GOTV_EXTERN uint32_t zdr_nlm4_oh ();
-GOTV_EXTERN uint32_t zdr_nlm_cookie ();
-GOTV_EXTERN uint32_t zdr_nlmstat4 ();
-GOTV_EXTERN uint32_t zdr_nlm4_holder ();
-GOTV_EXTERN uint32_t zdr_nlm4_lock ();
-GOTV_EXTERN uint32_t zdr_nlm4_share ();
-GOTV_EXTERN uint32_t zdr_nlm4_testres_denied ();
-GOTV_EXTERN uint32_t zdr_nlm4_testreply ();
-GOTV_EXTERN uint32_t zdr_NLM4_TESTres ();
-GOTV_EXTERN uint32_t zdr_NLM4_TESTargs ();
-GOTV_EXTERN uint32_t zdr_NLM4_CANCres ();
-GOTV_EXTERN uint32_t zdr_NLM4_CANCargs ();
-GOTV_EXTERN uint32_t zdr_NLM4_UNLOCKres ();
-GOTV_EXTERN uint32_t zdr_NLM4_UNLOCKargs ();
-GOTV_EXTERN uint32_t zdr_NLM4_LOCKres ();
-GOTV_EXTERN uint32_t zdr_NLM4_LOCKargs ();
-GOTV_EXTERN uint32_t zdr_NLM4_GRANTEDargs ();
-GOTV_EXTERN uint32_t zdr_NLM4_GRANTEDres ();
+NLC_EXTERN uint32_t zdr_nlm_fh4 ();
+NLC_EXTERN uint32_t zdr_nlm4_oh ();
+NLC_EXTERN uint32_t zdr_nlm_cookie ();
+NLC_EXTERN uint32_t zdr_nlmstat4 ();
+NLC_EXTERN uint32_t zdr_nlm4_holder ();
+NLC_EXTERN uint32_t zdr_nlm4_lock ();
+NLC_EXTERN uint32_t zdr_nlm4_share ();
+NLC_EXTERN uint32_t zdr_nlm4_testres_denied ();
+NLC_EXTERN uint32_t zdr_nlm4_testreply ();
+NLC_EXTERN uint32_t zdr_NLM4_TESTres ();
+NLC_EXTERN uint32_t zdr_NLM4_TESTargs ();
+NLC_EXTERN uint32_t zdr_NLM4_CANCres ();
+NLC_EXTERN uint32_t zdr_NLM4_CANCargs ();
+NLC_EXTERN uint32_t zdr_NLM4_UNLOCKres ();
+NLC_EXTERN uint32_t zdr_NLM4_UNLOCKargs ();
+NLC_EXTERN uint32_t zdr_NLM4_LOCKres ();
+NLC_EXTERN uint32_t zdr_NLM4_LOCKargs ();
+NLC_EXTERN uint32_t zdr_NLM4_GRANTEDargs ();
+NLC_EXTERN uint32_t zdr_NLM4_GRANTEDres ();
 
 #endif /* K&R C */
 

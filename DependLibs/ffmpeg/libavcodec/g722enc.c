@@ -130,7 +130,7 @@ static const int16_t low_quant[33] = {
     1765, 1980, 2195, 2557, 2919
 };
 
-static GOTV_INLINE void filter_samples(G722Context *c, const int16_t *samples,
+static NLC_INLINE void filter_samples(G722Context *c, const int16_t *samples,
                                   int *xlow, int *xhigh)
 {
     int xout[2];
@@ -147,7 +147,7 @@ static GOTV_INLINE void filter_samples(G722Context *c, const int16_t *samples,
     }
 }
 
-static GOTV_INLINE int encode_high(const struct G722Band *state, int xhigh)
+static NLC_INLINE int encode_high(const struct G722Band *state, int xhigh)
 {
     int diff = av_clip_int16(xhigh - state->s_predictor);
     int pred = 141 * state->scale_factor >> 8;
@@ -155,7 +155,7 @@ static GOTV_INLINE int encode_high(const struct G722Band *state, int xhigh)
     return ((diff ^ (diff >> (sizeof(diff)*8-1))) < pred) + 2*(diff >= 0);
 }
 
-static GOTV_INLINE int encode_low(const struct G722Band* state, int xlow)
+static NLC_INLINE int encode_low(const struct G722Band* state, int xlow)
 {
     int diff  = av_clip_int16(xlow - state->s_predictor);
            /* = diff >= 0 ? diff : -(diff + 1) */

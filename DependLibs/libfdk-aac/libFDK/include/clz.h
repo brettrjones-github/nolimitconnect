@@ -120,12 +120,12 @@ amm-info@iis.fraunhofer.de
 
 #if !defined(FUNCTION_fixnormz_S)
 #ifdef FUNCTION_fixnormz_D
-GOTV_INLINE int32_t fixnormz_S (int16_t a)
+NLC_INLINE int32_t fixnormz_S (int16_t a)
 {
   return fixnormz_D((int32_t)(a));
 }
 #else
-GOTV_INLINE int32_t fixnormz_S (int16_t a)
+NLC_INLINE int32_t fixnormz_S (int16_t a)
 {
     int leadingBits = 0;
     a = ~a;
@@ -140,7 +140,7 @@ GOTV_INLINE int32_t fixnormz_S (int16_t a)
 #endif
 
 #if !defined(FUNCTION_fixnormz_D)
-GOTV_INLINE int32_t fixnormz_D (int32_t a)
+NLC_INLINE int32_t fixnormz_D (int32_t a)
 {
     int32_t leadingBits = 0;
     a = ~a;
@@ -162,12 +162,12 @@ GOTV_INLINE int32_t fixnormz_D (int32_t a)
 *****************************************************************************/
 #if !defined(FUNCTION_fixnorm_S)
 #ifdef FUNCTION_fixnorm_D
-GOTV_INLINE int32_t fixnorm_S(FIXP_SGL val)
+NLC_INLINE int32_t fixnorm_S(FIXP_SGL val)
 {
   return fixnorm_D((int32_t)(val));
 }
 #else
-GOTV_INLINE int32_t fixnorm_S(FIXP_SGL val)
+NLC_INLINE int32_t fixnorm_S(FIXP_SGL val)
 {
     int32_t leadingBits = 0;
     if ( val != (FIXP_SGL)0 ) {
@@ -182,7 +182,7 @@ GOTV_INLINE int32_t fixnorm_S(FIXP_SGL val)
 #endif
 
 #if !defined(FUNCTION_fixnorm_D)
-GOTV_INLINE int32_t fixnorm_D(FIXP_DBL val)
+NLC_INLINE int32_t fixnorm_D(FIXP_DBL val)
 {
     int32_t leadingBits = 0;
     if ( val != (FIXP_DBL)0 ) {

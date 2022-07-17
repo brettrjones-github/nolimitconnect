@@ -48,7 +48,7 @@ struct node {
    An empty list: list.succ -> list.
                   list.pred -> list. */
 
-GOTV_INLINE void
+NLC_INLINE void
 verify_ring			(const struct node *	n)
 {
 	unsigned int counter;
@@ -69,7 +69,7 @@ verify_ring			(const struct node *	n)
 	} while (n != start);
 }
 
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 _remove_nodes			(struct node *		before,
 				 struct node *		after,
 				 struct node *		first,
@@ -98,7 +98,7 @@ _remove_nodes			(struct node *		before,
 	return first;
 }
 
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 _insert_nodes			(struct node *		before,
 				 struct node *		after,
 				 struct node *		first,
@@ -121,7 +121,7 @@ _insert_nodes			(struct node *		before,
  * @returns
  * n.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 insert_after			(struct node *		a,
 				 struct node *		n)
 {
@@ -134,7 +134,7 @@ insert_after			(struct node *		a,
  * @returns
  * n.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 insert_before			(struct node *		b,
 				 struct node *		n)
 {
@@ -149,7 +149,7 @@ insert_before			(struct node *		b,
  * @returns
  * n.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 unlink_node			(struct node *		n)
 {
 	return _remove_nodes (n->_pred, n->_succ, n, n, TRUE, FALSE);
@@ -202,7 +202,7 @@ for (verify_ring (l), p = DLIST_PARENT ((l)->_pred, __typeof__ (* p), _node);	\
   * @returns
  * l.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 list_destroy			(struct node *		l)
 {
 	struct node *n = l;
@@ -226,7 +226,7 @@ list_destroy			(struct node *		l)
  * @returns
  * l.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 list_init			(struct node *		l)
 {
 	l->_succ = l;
@@ -240,7 +240,7 @@ list_init			(struct node *		l)
  * @returns
  * @c TRUE if node n is the first node of list l.
  */
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 is_head				(const struct node *	l,
 				 const struct node *	n)
 {
@@ -254,7 +254,7 @@ is_head				(const struct node *	l,
  * @returns
  * @c TRUE if node n is the last node of list l.
  */
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 is_tail				(const struct node *	l,
 				 const struct node *	n)
 {
@@ -268,7 +268,7 @@ is_tail				(const struct node *	l,
  * @returns
  * @c TRUE if list l is empty.
  */
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 is_empty			(const struct node *	l)
 {
 	verify_ring (l);
@@ -281,7 +281,7 @@ is_empty			(const struct node *	l)
  * @returns
  * @c TRUE if node n is a member of list l.
  */
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 is_member			(const struct node *	l,
 				 const struct node *	n)
 {
@@ -307,7 +307,7 @@ is_member			(const struct node *	l,
  * @returns
  * n.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 add_head			(struct node *		l,
 				 struct node *		n)
 {
@@ -320,7 +320,7 @@ add_head			(struct node *		l,
  * @returns
  * n.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 add_tail			(struct node *		l,
 				 struct node *		n)
 {
@@ -334,7 +334,7 @@ add_tail			(struct node *		l,
  * @returns
  * First node of l2, or @c NULL if l2 is empty.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 add_tail_list			(struct node *		l1,
 				 struct node *		l2)
 {
@@ -362,7 +362,7 @@ add_tail_list			(struct node *		l1,
  * @returns
  * n if it is a member of l, @c NULL otherwise.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 rem_node			(struct node *		l,
 				 struct node *		n)
 {
@@ -379,7 +379,7 @@ rem_node			(struct node *		l,
  * @returns
  * First node of l, or @c NULL if l is empty.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 rem_head			(struct node *		l)
 {
 	struct node *n = l->_succ;
@@ -397,7 +397,7 @@ rem_head			(struct node *		l)
  * @returns
  * Last node of l, or @c NULL if l is empty.
  */
-GOTV_INLINE struct node *
+NLC_INLINE struct node *
 rem_tail			(struct node *		l)
 {
 	struct node *n = l->_pred;
@@ -414,7 +414,7 @@ rem_tail			(struct node *		l)
  * @returns
  * Number of nodes in list l.
  */
-GOTV_INLINE unsigned int
+NLC_INLINE unsigned int
 list_length			(struct node *		l)
 {
 	unsigned int count = 0;

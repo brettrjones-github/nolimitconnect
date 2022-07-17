@@ -402,7 +402,7 @@ match:
             {
                 lzo_uint t = pd(ip,ii);
 #if 1
-                /* OPTIMIZED: GOTV_INLINE the copying of a short run */
+                /* OPTIMIZED: NLC_INLINE the copying of a short run */
                 if (t < R0MIN)
                 {
                     *op++ = LZO_BYTE(t);

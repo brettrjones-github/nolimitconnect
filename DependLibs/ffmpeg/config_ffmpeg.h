@@ -6,7 +6,7 @@
 #define FFMPEG_CONFIGURATION		"ffmpeg_built_for_NoLimitConnect"
 #define FFMPEG_CONFIG_H				1 // some code relies on this being defined to detect if config has been included ( template compile )
 
-#define av_restrict GOTV_RESTRICT
+#define av_restrict NLC_RESTRICT
 // NOTE: HAVE_INLINE_ASM is defined in AppCompilerConfig.h
 //#define HAVE_INLINE_ASM		0
 #define HAVE_ALIGNED_STACK	0
@@ -2928,7 +2928,7 @@
 #define SWS_MAX_FILTER_SIZE 256
 
 #define HAVE_MMX2 HAVE_MMXEXT
-#define av_always_inline GOTV_FORCE_INLINE
+#define av_always_inline NLC_FORCE_INLINE
 
 //#if AV_GCC_VERSION_AT_LEAST(2,6) || defined(__clang__)
 //#    define av_const __attribute__((const))

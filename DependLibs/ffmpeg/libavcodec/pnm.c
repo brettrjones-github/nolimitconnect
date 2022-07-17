@@ -29,7 +29,7 @@
 #include "avcodec_internal.h"
 #include "pnm.h"
 
-static GOTV_INLINE int pnm_space(int c)
+static NLC_INLINE int pnm_space(int c)
 {
     return c == ' ' || c == '\n' || c == '\r' || c == '\t';
 }

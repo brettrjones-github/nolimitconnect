@@ -200,7 +200,7 @@ static void update_context(VignetteContext *s, AVFilterLink *inlink, AVFrame *fr
     }
 }
 
-static GOTV_INLINE double get_dither_value(VignetteContext *s)
+static NLC_INLINE double get_dither_value(VignetteContext *s)
 {
     double dv = 0;
     if (s->do_dither) {

@@ -200,7 +200,7 @@ depricated
     "paddusb "RED_DITHER"(%4),   %%mm1\n\t"      \
 
 #if !COMPILE_TEMPLATE_MMXEXT
-static GOTV_INLINE int RENAME(yuv420_rgb15)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuv420_rgb15)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
                                        int srcSliceY, int srcSliceH,
                                        uint8_t *dst[], int dstStride[])
@@ -228,7 +228,7 @@ static GOTV_INLINE int RENAME(yuv420_rgb15)(SwsContext *c, const uint8_t *src[],
     YUV2RGB_ENDFUNC
 }
 
-static GOTV_INLINE int RENAME(yuv420_rgb16)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuv420_rgb16)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
                                        int srcSliceY, int srcSliceH,
                                        uint8_t *dst[], int dstStride[])
@@ -318,7 +318,7 @@ DECLARE_ASM_CONST(8, int16_t, mask0100[4]) = { 0,-1, 0, 0};
 
 #endif
 
-static GOTV_INLINE int RENAME(yuv420_rgb24)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuv420_rgb24)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
                                        int srcSliceY, int srcSliceH,
                                        uint8_t *dst[], int dstStride[])
@@ -336,7 +336,7 @@ static GOTV_INLINE int RENAME(yuv420_rgb24)(SwsContext *c, const uint8_t *src[],
     YUV2RGB_ENDFUNC
 }
 
-static GOTV_INLINE int RENAME(yuv420_bgr24)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuv420_bgr24)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
                                        int srcSliceY, int srcSliceH,
                                        uint8_t *dst[], int dstStride[])
@@ -380,7 +380,7 @@ static GOTV_INLINE int RENAME(yuv420_bgr24)(SwsContext *c, const uint8_t *src[],
     MOVNTQ "   %%mm"alpha", 24(%1)\n\t"      \
 
 #if !COMPILE_TEMPLATE_MMXEXT
-static GOTV_INLINE int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
                                        int srcSliceY, int srcSliceH,
                                        uint8_t *dst[], int dstStride[])
@@ -401,7 +401,7 @@ static GOTV_INLINE int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
 }
 
 #if HAVE_7REGS && CONFIG_SWSCALE_ALPHA
-static GOTV_INLINE int RENAME(yuva420_rgb32)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuva420_rgb32)(SwsContext *c, const uint8_t *src[],
                                         int srcStride[],
                                         int srcSliceY, int srcSliceH,
                                         uint8_t *dst[], int dstStride[])
@@ -423,7 +423,7 @@ static GOTV_INLINE int RENAME(yuva420_rgb32)(SwsContext *c, const uint8_t *src[]
 }
 #endif
 
-static GOTV_INLINE int RENAME(yuv420_bgr32)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuv420_bgr32)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
                                        int srcSliceY, int srcSliceH,
                                        uint8_t *dst[], int dstStride[])
@@ -444,7 +444,7 @@ static GOTV_INLINE int RENAME(yuv420_bgr32)(SwsContext *c, const uint8_t *src[],
 }
 
 #if HAVE_7REGS && CONFIG_SWSCALE_ALPHA
-static GOTV_INLINE int RENAME(yuva420_bgr32)(SwsContext *c, const uint8_t *src[],
+static NLC_INLINE int RENAME(yuva420_bgr32)(SwsContext *c, const uint8_t *src[],
                                         int srcStride[],
                                         int srcSliceY, int srcSliceH,
                                         uint8_t *dst[], int dstStride[])

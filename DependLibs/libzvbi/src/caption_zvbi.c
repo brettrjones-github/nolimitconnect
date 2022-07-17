@@ -42,7 +42,7 @@
 #define CC_DUMP(x) /* x */
 #define CC_TEXT_DUMP(x) /* x */
 
-static GOTV_INLINE void
+static NLC_INLINE void
 caption_send_event(vbi_decoder *vbi, vbi_event *ev)
 {
 	/* Permits calling vbi_fetch_cc_page from handler */
@@ -142,7 +142,7 @@ flush_prog_info(vbi_decoder *vbi, vbi_program_info *pi, vbi_event *e)
 	vbi->cc.info_cycle[pi->future] = 0;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xds_decoder(vbi_decoder *vbi, int _class, int type,
 	    uint8_t *buffer, int length)
 {
@@ -803,7 +803,7 @@ roll_up(vbi_page *pg, int first_row, int last_row)
 	caption_send_event(pg->vbi, &event);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 update(cc_channel *ch)
 {
 	vbi_char *acp = ch->line - ch->pg[ch->hidden].text
@@ -855,7 +855,7 @@ word_break(struct caption *cc, cc_channel *ch, int upd)
 	render(ch->pg + 1, ch->row);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 set_cursor(cc_channel *ch, int col, int row)
 {
 	ch->col = ch->col1 = col;
@@ -891,7 +891,7 @@ put_char_space(struct caption *cc, cc_channel *ch)
 	put_char (cc, ch, c);
 }
 
-static GOTV_INLINE cc_channel *
+static NLC_INLINE cc_channel *
 switch_channel(struct caption *cc, cc_channel *ch, int new_chan)
 {
 	word_break(cc, ch, 1); // we leave for a number of frames
@@ -929,7 +929,7 @@ row_mapping[] = {
 // not verified means I didn't encounter the code in a
 // sample stream yet
 
-GOTV_INLINE void
+NLC_INLINE void
 caption_command(vbi_decoder *vbi, struct caption *cc,
 	unsigned char c1, unsigned char c2, vbi_bool field2)
 {

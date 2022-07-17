@@ -331,8 +331,8 @@ void UpdateFMESwitchNull (SDqLayer* pCurLayer);
 void WelsDiamondCrossFeatureSearch (SWelsFuncPtrList* pFuncList, SWelsME* pMe, SSlice* pSlice,
                                     const int32_t kiEncStride, const int32_t kiRefStride);
 
-//GOTV_INLINE functions
-GOTV_INLINE void SetMvWithinIntegerMvRange (const int32_t kiMbWidth, const int32_t kiMbHeight, const int32_t kiMbX,
+//NLC_INLINE functions
+NLC_INLINE void SetMvWithinIntegerMvRange (const int32_t kiMbWidth, const int32_t kiMbHeight, const int32_t kiMbX,
                                        const int32_t kiMbY,
                                        const int32_t kiMaxMvRange,
                                        SMVUnitXY* pMvMin, SMVUnitXY* pMvMax) {
@@ -342,12 +342,12 @@ pMvMax->iMvX = WELS_MIN (((kiMbWidth - kiMbX) * (1 << 4)) - INTPEL_NEEDED_MARGIN
 pMvMax->iMvY = WELS_MIN (((kiMbHeight - kiMbY) * (1 << 4)) - INTPEL_NEEDED_MARGIN, kiMaxMvRange);
 }
 
-GOTV_INLINE bool CheckMvInRange (const SMVUnitXY ksCurrentMv, const SMVUnitXY ksMinMv, const SMVUnitXY ksMaxMv) {
+NLC_INLINE bool CheckMvInRange (const SMVUnitXY ksCurrentMv, const SMVUnitXY ksMinMv, const SMVUnitXY ksMaxMv) {
 return (CheckInRangeCloseOpen (ksCurrentMv.iMvX, ksMinMv.iMvX, ksMaxMv.iMvX)
         && CheckInRangeCloseOpen (ksCurrentMv.iMvY, ksMinMv.iMvY, ksMaxMv.iMvY));
 }
 //FME switch related
-GOTV_INLINE bool CalcFMESwitchFlag (const uint8_t uiFMEGoodFrameCount, const int32_t iHighFreMbPrecentage,
+NLC_INLINE bool CalcFMESwitchFlag (const uint8_t uiFMEGoodFrameCount, const int32_t iHighFreMbPrecentage,
                                const int32_t iAvgMbSAD, const bool bScrollingDetected) {
 return (bScrollingDetected || (uiFMEGoodFrameCount > 0 && iAvgMbSAD > FMESWITCH_MBSAD_THRESHOLD));
 //TODO: add the logic of iHighFreMbPrecentage

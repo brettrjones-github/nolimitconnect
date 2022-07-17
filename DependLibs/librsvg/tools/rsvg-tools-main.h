@@ -21,10 +21,10 @@
 #ifndef __RSVG_TOOLS_MAIN_H__
 #define __RSVG_TOOLS_MAIN_H__
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 int rsvg_tools_main (int *argc, char ***argv);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __RSVG_TOOLS_MAIN_H__ */

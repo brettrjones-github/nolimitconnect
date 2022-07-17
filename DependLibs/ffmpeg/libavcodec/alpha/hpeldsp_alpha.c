@@ -24,12 +24,12 @@
 #include "hpeldsp_alpha.h"
 #include "asm.h"
 
-static GOTV_INLINE uint64_t avg2_no_rnd(uint64_t a, uint64_t b)
+static NLC_INLINE uint64_t avg2_no_rnd(uint64_t a, uint64_t b)
 {
     return (a & b) + (((a ^ b) & BYTE_VEC(0xfe)) >> 1);
 }
 
-static GOTV_INLINE uint64_t avg2(uint64_t a, uint64_t b)
+static NLC_INLINE uint64_t avg2(uint64_t a, uint64_t b)
 {
     return (a | b) - (((a ^ b) & BYTE_VEC(0xfe)) >> 1);
 }
@@ -37,7 +37,7 @@ static GOTV_INLINE uint64_t avg2(uint64_t a, uint64_t b)
 #if 0
 /* The XY2 routines basically utilize this scheme, but reuse parts in
    each iteration.  */
-static GOTV_INLINE uint64_t avg4(uint64_t l1, uint64_t l2, uint64_t l3, uint64_t l4)
+static NLC_INLINE uint64_t avg4(uint64_t l1, uint64_t l2, uint64_t l3, uint64_t l4)
 {
     uint64_t r1 = ((l1 & ~BYTE_VEC(0x03)) >> 2)
                 + ((l2 & ~BYTE_VEC(0x03)) >> 2)

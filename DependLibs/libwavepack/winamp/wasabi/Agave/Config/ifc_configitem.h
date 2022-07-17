@@ -94,104 +94,104 @@ public:
 
 
 
-GOTV_INLINE const wchar_t *ifc_configitem::GetName()
+NLC_INLINE const wchar_t *ifc_configitem::GetName()
 {
 	return _call(IFC_CONFIGITEM_GETNAME, (const wchar_t *)0);
 }
 
-GOTV_INLINE int ifc_configitem::GetType()
+NLC_INLINE int ifc_configitem::GetType()
 {
 	return _call(IFC_CONFIGITEM_GETTYPE, (int)0);
 }
 
-GOTV_INLINE const wchar_t *ifc_configitem::GetString()
+NLC_INLINE const wchar_t *ifc_configitem::GetString()
 {
 	return _call(IFC_CONFIGITEM_GETSTRING, (const wchar_t *)0);
 }
 
-GOTV_INLINE void ifc_configitem::SetString(const wchar_t *stringValue)
+NLC_INLINE void ifc_configitem::SetString(const wchar_t *stringValue)
 {
 	_voidcall(IFC_CONFIGITEM_SETSTRING, stringValue);
 }
 
 
-GOTV_INLINE intptr_t ifc_configitem::GetInt()
+NLC_INLINE intptr_t ifc_configitem::GetInt()
 {
 	return _call(IFC_CONFIGITEM_GETINT, (intptr_t)0);
 }
 #pragma warning(push)
 #pragma warning(disable: 4244)
-GOTV_INLINE void ifc_configitem::SetInt(intptr_t intValue)
+NLC_INLINE void ifc_configitem::SetInt(intptr_t intValue)
 {
 	_voidcall(IFC_CONFIGITEM_SETINT, intValue);
 }
 #pragma warning(pop)
 
-GOTV_INLINE uintptr_t ifc_configitem::GetUnsigned()
+NLC_INLINE uintptr_t ifc_configitem::GetUnsigned()
 {
 	return _call(IFC_CONFIGITEM_GETUNSIGNED, (uintptr_t)0);
 }
 
-GOTV_INLINE void ifc_configitem::SetUnsigned(uintptr_t unsignedValue)
+NLC_INLINE void ifc_configitem::SetUnsigned(uintptr_t unsignedValue)
 {
 	_voidcall(IFC_CONFIGITEM_SETUNSIGNED, unsignedValue);
 }
 
 
-GOTV_INLINE bool ifc_configitem::GetBool()
+NLC_INLINE bool ifc_configitem::GetBool()
 {
 	return _call(IFC_CONFIGITEM_GETBOOL, (bool)false);
 }
 
-GOTV_INLINE void ifc_configitem::SetBool(bool boolValue)
+NLC_INLINE void ifc_configitem::SetBool(bool boolValue)
 {
 	_voidcall(IFC_CONFIGITEM_SETBOOL, boolValue);
 }
 
-GOTV_INLINE size_t ifc_configitem::GetBinarySize()
+NLC_INLINE size_t ifc_configitem::GetBinarySize()
 {
 	return _call(IFC_CONFIGITEM_GETBINARYSIZE, (size_t)0);
 }
 
-GOTV_INLINE size_t ifc_configitem::GetBinaryData(void *data, size_t bytes)
+NLC_INLINE size_t ifc_configitem::GetBinaryData(void *data, size_t bytes)
 {
 	return _call(IFC_CONFIGITEM_GETBINARYDATA, (size_t)0, data, bytes);
 }
 
-GOTV_INLINE void ifc_configitem::SetBinaryData(void *data, size_t bytes)
+NLC_INLINE void ifc_configitem::SetBinaryData(void *data, size_t bytes)
 {
 	_voidcall(IFC_CONFIGITEM_SETBINARYDATA, data, bytes);
 }
 
-GOTV_INLINE size_t ifc_configitem::GetIntArrayElements()
+NLC_INLINE size_t ifc_configitem::GetIntArrayElements()
 {
 	return _call(IFC_CONFIGITEM_GETINTARRAYELEMENTS, (size_t)0);
 }
 
-GOTV_INLINE size_t ifc_configitem::GetIntArray(intptr_t *array, size_t elements)
+NLC_INLINE size_t ifc_configitem::GetIntArray(intptr_t *array, size_t elements)
 {
 	return _call(IFC_CONFIGITEM_GETINTARRAY, (size_t)0, array, elements);
 }
-GOTV_INLINE void ifc_configitem::SetIntArray(intptr_t *array, size_t elements)
+NLC_INLINE void ifc_configitem::SetIntArray(intptr_t *array, size_t elements)
 {
 	_voidcall(IFC_CONFIGITEM_SETINTARRAY, array, elements);
 }
 
-GOTV_INLINE const wchar_t *ifc_configitem::GetStringInternal()
+NLC_INLINE const wchar_t *ifc_configitem::GetStringInternal()
 {
 	return _call(IFC_CONFIGITEM_GETSTRINGINTERNAL, (const wchar_t *)0);
 }
-GOTV_INLINE void ifc_configitem::SetStringInternal(const wchar_t *internalString)
+NLC_INLINE void ifc_configitem::SetStringInternal(const wchar_t *internalString)
 {
 	_voidcall(IFC_CONFIGITEM_SETSTRINGINTERNAL, internalString);
 }
 
-GOTV_INLINE float ifc_configitem::GetFloat()
+NLC_INLINE float ifc_configitem::GetFloat()
 {
 	return _call(IFC_CONFIGITEM_GETFLOAT, (float)0);
 }
 
-GOTV_INLINE void ifc_configitem::SetFloat(float floatValue)
+NLC_INLINE void ifc_configitem::SetFloat(float floatValue)
 {
 	_voidcall(IFC_CONFIGITEM_SETFLOAT, floatValue);
 }

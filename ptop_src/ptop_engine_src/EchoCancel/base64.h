@@ -67,22 +67,22 @@ public:
                               std::vector<char>* result, size_t* data_used);
 
   // Convenience Methods
-  static GOTV_INLINE std::string Encode(const std::string& data) {
+  static NLC_INLINE std::string Encode(const std::string& data) {
     std::string result;
     EncodeFromArray(data.data(), data.size(), &result);
     return result;
   }
-  static GOTV_INLINE std::string Decode(const std::string& data, DecodeFlags flags) {
+  static NLC_INLINE std::string Decode(const std::string& data, DecodeFlags flags) {
     std::string result;
     DecodeFromArray(data.data(), data.size(), flags, &result, NULL);
     return result;
   }
-  static GOTV_INLINE bool Decode(const std::string& data, DecodeFlags flags,
+  static NLC_INLINE bool Decode(const std::string& data, DecodeFlags flags,
                             std::string* result, size_t* data_used)
   {
     return DecodeFromArray(data.data(), data.size(), flags, result, data_used);
   }
-  static GOTV_INLINE bool Decode(const std::string& data, DecodeFlags flags,
+  static NLC_INLINE bool Decode(const std::string& data, DecodeFlags flags,
                             std::vector<char>* result, size_t* data_used)
   {
     return DecodeFromArray(data.data(), data.size(), flags, result, data_used);

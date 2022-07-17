@@ -97,7 +97,7 @@ void oc_state_frag_recon_mmx(const oc_theora_state *_state,ptrdiff_t _fragi,
   }
 }
 
-/*We copy these entire function to GOTV_INLINE the actual MMX routines so that we
+/*We copy these entire function to NLC_INLINE the actual MMX routines so that we
    use only a single indirect call.*/
 
 /*Copies the fragments specified by the lists of fragment indices from one

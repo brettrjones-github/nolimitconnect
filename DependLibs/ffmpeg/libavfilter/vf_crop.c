@@ -118,7 +118,7 @@ static av_cold void uninit(AVFilterContext *ctx)
     s->y_pexpr = NULL;
 }
 
-static GOTV_INLINE int normalize_double(int *n, double d)
+static NLC_INLINE int normalize_double(int *n, double d)
 {
     int ret = 0;
 

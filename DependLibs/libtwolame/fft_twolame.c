@@ -736,7 +736,7 @@ static void fht(FLOAT * fz)
    MFC March 2003 */
 static FLOAT atan_t[ATANSIZE];
 
-static GOTV_INLINE FLOAT atan_table(FLOAT y, FLOAT x)
+static NLC_INLINE FLOAT atan_table(FLOAT y, FLOAT x)
 {
     int index;
 

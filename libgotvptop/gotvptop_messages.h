@@ -64,10 +64,10 @@ typedef struct gotvptop_log_t
     unsigned long tid; /**< Emitter thread ID */
 } gotvptop_log_t;
 
-GOTV_API void gotvptop_Log(gotvptop_object_t *obj, int prio, const char *module,
+NLC_API void gotvptop_Log(gotvptop_object_t *obj, int prio, const char *module,
                      const char *file, unsigned line, const char *func,
                      const char *format, ...) GOTV_FORMAT(7, 8);
-GOTV_API void gotvptop_vaLog(gotvptop_object_t *obj, int prio, const char *module,
+NLC_API void gotvptop_vaLog(gotvptop_object_t *obj, int prio, const char *module,
                        const char *file, unsigned line, const char *func,
                        const char *format, va_list ap);
 #define msg_GenericVa(o, p, fmt, ap) \
@@ -88,8 +88,8 @@ GOTV_API void gotvptop_vaLog(gotvptop_object_t *obj, int prio, const char *modul
 
 extern const char gotvptop_module_name[];
 
-GOTV_API const char *gotvptop_strerror(int);
-GOTV_API const char *gotvptop_strerror_c(int);
+NLC_API const char *gotvptop_strerror(int);
+NLC_API const char *gotvptop_strerror_c(int);
 
 /**
  * Message logging callback signature.

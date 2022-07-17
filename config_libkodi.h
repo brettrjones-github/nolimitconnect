@@ -11,7 +11,7 @@
 // under gcc, inline will only take place if optimizations are applied (-O). this will force inline even with optimizations.
 # define XBMC_FORCE_INLINE __attribute__((always_inline))
 #else
-# define XBMC_FORCE_INLINE // donot use GOTV_FORCE_INLINE.. __forceinline causes errors if not declared in correct place
+# define XBMC_FORCE_INLINE // donot use NLC_FORCE_INLINE.. __forceinline causes errors if not declared in correct place
 #endif
 
 

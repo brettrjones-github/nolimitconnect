@@ -38,13 +38,13 @@
      (c_toupper (other) == (upper))
 # endif
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq9 (const char *s1, const char *s2)
 {
   return c_strcasecmp (s1 + 9, s2 + 9) == 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq8 (const char *s1, const char *s2, char s28)
 {
   if (CASEEQ (s1[8], s28))
@@ -58,7 +58,7 @@ strcaseeq8 (const char *s1, const char *s2, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq7 (const char *s1, const char *s2, char s27, char s28)
 {
   if (CASEEQ (s1[7], s27))
@@ -72,7 +72,7 @@ strcaseeq7 (const char *s1, const char *s2, char s27, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq6 (const char *s1, const char *s2, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[6], s26))
@@ -86,7 +86,7 @@ strcaseeq6 (const char *s1, const char *s2, char s26, char s27, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq5 (const char *s1, const char *s2, char s25, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[5], s25))
@@ -100,7 +100,7 @@ strcaseeq5 (const char *s1, const char *s2, char s25, char s26, char s27, char s
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq4 (const char *s1, const char *s2, char s24, char s25, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[4], s24))
@@ -114,7 +114,7 @@ strcaseeq4 (const char *s1, const char *s2, char s24, char s25, char s26, char s
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq3 (const char *s1, const char *s2, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[3], s23))
@@ -128,7 +128,7 @@ strcaseeq3 (const char *s1, const char *s2, char s23, char s24, char s25, char s
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq2 (const char *s1, const char *s2, char s22, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[2], s22))
@@ -142,7 +142,7 @@ strcaseeq2 (const char *s1, const char *s2, char s22, char s23, char s24, char s
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq1 (const char *s1, const char *s2, char s21, char s22, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[1], s21))
@@ -156,7 +156,7 @@ strcaseeq1 (const char *s1, const char *s2, char s21, char s22, char s23, char s
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 strcaseeq0 (const char *s1, const char *s2, char s20, char s21, char s22, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (CASEEQ (s1[0], s20))

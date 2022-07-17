@@ -179,7 +179,7 @@ protected:
     void calculateNormFactor(CUData& ctu, int qp);
     void normFactor(const pixel* src, uint32_t blockSize, CUData& ctu, int qp, TextType ttype);
     /* check whether current mode is the new best */
-    GOTV_INLINE void checkBestMode(Mode& mode, uint32_t depth)
+    NLC_INLINE void checkBestMode(Mode& mode, uint32_t depth)
     {
         ModeDepth& md = m_modeDepth[depth];
         if (md.bestMode)

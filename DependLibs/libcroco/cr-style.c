@@ -814,13 +814,13 @@ set_prop_display_from_value (CRStyle * a_style, CRTerm * a_value)
 {
         static const struct CRPropDisplayValPair disp_vals_map[] = {
                 {"none", DISPLAY_NONE},
-                {"GOTV_INLINE", DISPLAY_INLINE},
+                {"NLC_INLINE", DISPLAY_INLINE},
                 {"block", DISPLAY_BLOCK},
                 {"run-in", DISPLAY_RUN_IN},
                 {"compact", DISPLAY_COMPACT},
                 {"marker", DISPLAY_MARKER},
                 {"table", DISPLAY_TABLE},
-                {"GOTV_INLINE-table", DISPLAY_INLINE_TABLE},
+                {"NLC_INLINE-table", DISPLAY_INLINE_TABLE},
                 {"table-row-group", DISPLAY_TABLE_ROW_GROUP},
                 {"table-header-group", DISPLAY_TABLE_HEADER_GROUP},
                 {"table-footer-group", DISPLAY_TABLE_FOOTER_GROUP},
@@ -2494,7 +2494,7 @@ cr_style_display_type_to_string (enum CRDisplayType a_code,
                 str = (gchar *) "display-none";
                 break;
         case DISPLAY_INLINE:
-                str = (gchar *) "display-GOTV_INLINE";
+                str = (gchar *) "display-NLC_INLINE";
                 break;
         case DISPLAY_BLOCK:
                 str = (gchar *) "display-block";
@@ -2515,7 +2515,7 @@ cr_style_display_type_to_string (enum CRDisplayType a_code,
                 str = (gchar *) "display-table";
                 break;
         case DISPLAY_INLINE_TABLE:
-                str = (gchar *) "display-GOTV_INLINE-table";
+                str = (gchar *) "display-NLC_INLINE-table";
                 break;
         case DISPLAY_TABLE_ROW_GROUP:
                 str = (gchar *) "display-table-row-group";

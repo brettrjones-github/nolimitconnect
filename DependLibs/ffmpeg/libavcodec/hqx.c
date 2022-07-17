@@ -84,7 +84,7 @@ static const uint8_t hqx_quant_chroma[64] = {
     44,  91,  96, 197, 203, 209, 232, 246,
 };
 
-static GOTV_INLINE void put_blocks(HQXContext *ctx, int plane,
+static NLC_INLINE void put_blocks(HQXContext *ctx, int plane,
                               int x, int y, int ilace,
                               int16_t *block0, int16_t *block1,
                               const uint8_t *quant)
@@ -99,7 +99,7 @@ static GOTV_INLINE void put_blocks(HQXContext *ctx, int plane,
                          lsize * fields, block1, quant);
 }
 
-static GOTV_INLINE void hqx_get_ac(GetBitContext *gb, const HQXAC *ac,
+static NLC_INLINE void hqx_get_ac(GetBitContext *gb, const HQXAC *ac,
                               int *run, int *lev)
 {
     int val;

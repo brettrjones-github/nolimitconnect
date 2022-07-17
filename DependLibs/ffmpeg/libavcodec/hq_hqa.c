@@ -47,7 +47,7 @@
  * while lavc simply aligns coded_width and coded_height.
  */
 
-static GOTV_INLINE void put_blocks(HQContext *c, AVFrame *pic,
+static NLC_INLINE void put_blocks(HQContext *c, AVFrame *pic,
                               int plane, int x, int y, int ilace,
                               int16_t *block0, int16_t *block1)
 {

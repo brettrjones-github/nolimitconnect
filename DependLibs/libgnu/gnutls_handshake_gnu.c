@@ -78,7 +78,7 @@ send_handshake_final(gnutls_session_t session, int init);
 
 /* Empties but does not free the buffer
  */
-static GOTV_INLINE void
+static NLC_INLINE void
 handshake_hash_buffer_empty(gnutls_session_t session)
 {
 
@@ -1179,7 +1179,7 @@ _gnutls_send_empty_handshake(gnutls_session_t session,
 	return _gnutls_send_handshake(session, bufel, type);
 }
 
-GOTV_INLINE
+NLC_INLINE
     static int call_hook_func(gnutls_session_t session,
 			      gnutls_handshake_description_t type,
 			      int post, unsigned incoming,
@@ -2424,7 +2424,7 @@ int gnutls_rehandshake(gnutls_session_t session)
 	return 0;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_abort_handshake(gnutls_session_t session, int ret)
 {
 	if (((ret == GNUTLS_E_WARNING_ALERT_RECEIVED) &&

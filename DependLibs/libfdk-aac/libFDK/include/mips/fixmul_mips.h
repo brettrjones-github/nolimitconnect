@@ -98,7 +98,7 @@ amm-info@iis.fraunhofer.de
 #define FUNCTION_fixmuldiv2BitExact_DD
 #define fixmuldiv2BitExact_DD(a,b) fixmuldiv2_DD(a,b)
 
-GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 {
   int32_t result ;
   result = ((long long)a * b)>>32;

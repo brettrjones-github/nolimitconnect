@@ -34,7 +34,7 @@
 
 #include <xmmintrin.h>
 
-static GOTV_INLINE void _spx_mm_getr_ps (__m128 U, float *__Z, float *__Y, float *__X, float *__W)
+static NLC_INLINE void _spx_mm_getr_ps (__m128 U, float *__Z, float *__Y, float *__X, float *__W)
 {
   union {
     float __a[4];

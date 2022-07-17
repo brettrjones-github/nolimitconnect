@@ -118,7 +118,7 @@ bool							VxMakeBroadcastIp( std::string localIp, std::string& retBroadcastIp )
 //============================================================================
 // C functions
 //============================================================================
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 RCODE							VxSetSktBlocking( SOCKET sktHandle, bool bBlock );
 
@@ -148,4 +148,4 @@ void							VxIPv6_ntop( void * pvBinary, char * pBuf, int iBufLen );
 void							VxIPv4_pton( const char * pIpString,  void * pvBinary, bool wantHostOrder );
 void							VxIPv6_pton( const char * pIpString,  void * pvBinary );
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES

@@ -36,7 +36,7 @@
 #define S_MUL_SUB(a, b, c, d) (S_MUL(a,b)-S_MUL(c,d))
 
 #undef S_MUL_ADD
-static GOTV_INLINE int S_MUL_ADD(int a, int b, int c, int d) {
+static NLC_INLINE int S_MUL_ADD(int a, int b, int c, int d) {
     int m;
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a), "r" ((int)b));
     asm volatile("madd $ac1, %0, %1" : : "r" ((int)c), "r" ((int)d));
@@ -45,7 +45,7 @@ static GOTV_INLINE int S_MUL_ADD(int a, int b, int c, int d) {
 }
 
 #undef S_MUL_SUB
-static GOTV_INLINE int S_MUL_SUB(int a, int b, int c, int d) {
+static NLC_INLINE int S_MUL_SUB(int a, int b, int c, int d) {
     int m;
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a), "r" ((int)b));
     asm volatile("msub $ac1, %0, %1" : : "r" ((int)c), "r" ((int)d));
@@ -55,7 +55,7 @@ static GOTV_INLINE int S_MUL_SUB(int a, int b, int c, int d) {
 
 #undef C_MUL
 #   define C_MUL(m,a,b) (m=C_MUL_fun(a,b))
-static GOTV_INLINE kiss_fft_cpx C_MUL_fun(kiss_fft_cpx a, kiss_twiddle_cpx b) {
+static NLC_INLINE kiss_fft_cpx C_MUL_fun(kiss_fft_cpx a, kiss_twiddle_cpx b) {
     kiss_fft_cpx m;
 
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a.r), "r" ((int)b.r));
@@ -69,7 +69,7 @@ static GOTV_INLINE kiss_fft_cpx C_MUL_fun(kiss_fft_cpx a, kiss_twiddle_cpx b) {
 }
 #undef C_MULC
 #   define C_MULC(m,a,b) (m=C_MULC_fun(a,b))
-static GOTV_INLINE kiss_fft_cpx C_MULC_fun(kiss_fft_cpx a, kiss_twiddle_cpx b) {
+static NLC_INLINE kiss_fft_cpx C_MULC_fun(kiss_fft_cpx a, kiss_twiddle_cpx b) {
     kiss_fft_cpx m;
 
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a.r), "r" ((int)b.r));

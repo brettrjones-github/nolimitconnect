@@ -94,7 +94,7 @@ static int query_formats(AVFilterContext *ctx)
 }
 
 //FIXME: replace with DSPContext.scalarproduct_int16
-static GOTV_INLINE int16_t *scalarproduct(const int16_t *in, const int16_t *endin, int16_t *out)
+static NLC_INLINE int16_t *scalarproduct(const int16_t *in, const int16_t *endin, int16_t *out)
 {
     int32_t sample;
     int16_t j;

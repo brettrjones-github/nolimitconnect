@@ -113,7 +113,7 @@ const static unsigned char logs[] = {
 #define AICA_VOL(x) (0xff - logs[128 + (((x) & 0xff) / 2)])
 //#define AICA_VOL(x) (0xff - logs[x&255])
 
-static GOTV_INLINE unsigned  AICA_FREQ(unsigned freq)	{
+static NLC_INLINE unsigned  AICA_FREQ(unsigned freq)	{
 	unsigned long freq_lo, freq_base = 5644800;
 	int freq_hi = 7;
 

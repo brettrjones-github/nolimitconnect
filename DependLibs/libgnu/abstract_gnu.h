@@ -35,7 +35,7 @@
 #define GNUTLS_TL_NO_DUPLICATE_KEY (1<<3)
 #define GNUTLS_TL_GET_COPY (1<<4)
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* Gnutls error codes. The mapping to a TLS alert is also shown in
 * comments.
@@ -1104,12 +1104,12 @@ typedef void *( *gnutls_realloc_function ) ( void *, size_t );
 void gnutls_memset( void *data, int c, size_t size );
 
 /* For use in callbacks */
-extern GOTV_EXPORT gnutls_alloc_function		gnutls_malloc;
-extern GOTV_EXPORT gnutls_realloc_function		gnutls_realloc;
-extern GOTV_EXPORT gnutls_calloc_function		gnutls_calloc;
-extern GOTV_EXPORT gnutls_free_function			gnutls_free;
+extern NLC_EXPORT gnutls_alloc_function		gnutls_malloc;
+extern NLC_EXPORT gnutls_realloc_function		gnutls_realloc;
+extern NLC_EXPORT gnutls_calloc_function		gnutls_calloc;
+extern NLC_EXPORT gnutls_free_function			gnutls_free;
 
-extern GOTV_EXPORT char *( *gnutls_strdup ) ( const char * );
+extern NLC_EXPORT char *( *gnutls_strdup ) ( const char * );
 
 /* for message digests */
 
@@ -1330,7 +1330,7 @@ typedef void( *gnutls_privkey_deinit_func ) ( gnutls_privkey_t key,
 											  void *userdata );
 /* returns information on the public key associated with userdata */
 typedef int( *gnutls_privkey_info_func ) ( gnutls_privkey_t key, unsigned int flags, void *userdata );
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 #include <libgnu/pkcs11.h>
@@ -1340,7 +1340,7 @@ GOTV_END_CDECLARES
 #include <libgnu/tpm.h>
 #include <libgnu/libtasn1.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 //#include <libgnu/abstract_gnu.h>
 /* Public key operations */
@@ -2449,5 +2449,5 @@ void gnutls_pk_params_release( gnutls_pk_params_st * p );
 void gnutls_pk_params_clear( gnutls_pk_params_st * p );
 void gnutls_pk_params_init( gnutls_pk_params_st * p );
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 #endif // ABSTRACT_GNU_H

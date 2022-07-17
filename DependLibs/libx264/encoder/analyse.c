@@ -678,7 +678,7 @@ static ALWAYS_INLINE const int8_t *predict_4x4_mode_available( int force_intra, 
 }
 
 /* For trellis=2, we need to do this for both sizes of DCT, for trellis=1 we only need to use it on the chosen mode. */
-static void GOTV_INLINE x264_psy_trellis_init( x264_t *h, int do_both_dct )
+static void NLC_INLINE x264_psy_trellis_init( x264_t *h, int do_both_dct )
 {
     ALIGNED_16( static pixel zero[16*FDEC_STRIDE] ) = {0};
 
@@ -689,7 +689,7 @@ static void GOTV_INLINE x264_psy_trellis_init( x264_t *h, int do_both_dct )
 }
 
 /* Reset fenc satd scores cache for psy RD */
-static GOTV_INLINE void x264_mb_init_fenc_cache( x264_t *h, int b_satd )
+static NLC_INLINE void x264_mb_init_fenc_cache( x264_t *h, int b_satd )
 {
     if( h->param.analyse.i_trellis == 2 && h->mb.i_psy_trellis )
         x264_psy_trellis_init( h, h->param.analyse.b_transform_8x8 );
@@ -2183,7 +2183,7 @@ static void x264_mb_analyse_inter_b16x16( x264_t *h, x264_mb_analysis_t *a )
     a->l1.me16x16.cost += a->i_lambda * i_mb_b_cost_table[B_L1_L1];
 }
 
-static GOTV_INLINE void x264_mb_cache_mv_p8x8( x264_t *h, x264_mb_analysis_t *a, int i )
+static NLC_INLINE void x264_mb_cache_mv_p8x8( x264_t *h, x264_mb_analysis_t *a, int i )
 {
     int x = 2*(i&1);
     int y = i&2;
@@ -2249,7 +2249,7 @@ static void x264_mb_load_mv_direct8x8( x264_t *h, int idx )
             x264_macroblock_cache_mvd( h, x,y,dx,dy, 1, 0 ); \
     }
 
-static GOTV_INLINE void x264_mb_cache_mv_b8x8( x264_t *h, x264_mb_analysis_t *a, int i, int b_mvd )
+static NLC_INLINE void x264_mb_cache_mv_b8x8( x264_t *h, x264_mb_analysis_t *a, int i, int b_mvd )
 {
     int x = 2*(i&1);
     int y = i&2;
@@ -2268,11 +2268,11 @@ static GOTV_INLINE void x264_mb_cache_mv_b8x8( x264_t *h, x264_mb_analysis_t *a,
         CACHE_MV_BI( x, y, 2, 2, a->l0.me8x8[i], a->l1.me8x8[i], h->mb.i_sub_partition[i] );
     }
 }
-static GOTV_INLINE void x264_mb_cache_mv_b16x8( x264_t *h, x264_mb_analysis_t *a, int i, int b_mvd )
+static NLC_INLINE void x264_mb_cache_mv_b16x8( x264_t *h, x264_mb_analysis_t *a, int i, int b_mvd )
 {
     CACHE_MV_BI( 0, 2*i, 4, 2, a->l0.me16x8[i], a->l1.me16x8[i], a->i_mb_partition16x8[i] );
 }
-static GOTV_INLINE void x264_mb_cache_mv_b8x16( x264_t *h, x264_mb_analysis_t *a, int i, int b_mvd )
+static NLC_INLINE void x264_mb_cache_mv_b8x16( x264_t *h, x264_mb_analysis_t *a, int i, int b_mvd )
 {
     CACHE_MV_BI( 2*i, 0, 2, 4, a->l0.me8x16[i], a->l1.me8x16[i], a->i_mb_partition8x16[i] );
 }
@@ -2842,7 +2842,7 @@ static void x264_refine_bidir( x264_t *h, x264_mb_analysis_t *a )
     }
 }
 
-static GOTV_INLINE void x264_mb_analyse_transform( x264_t *h )
+static NLC_INLINE void x264_mb_analyse_transform( x264_t *h )
 {
     if( x264_mb_transform_8x8_allowed( h ) && h->param.analyse.b_transform_8x8 && !h->mb.b_lossless )
     {
@@ -2880,7 +2880,7 @@ static GOTV_INLINE void x264_mb_analyse_transform( x264_t *h )
     }
 }
 
-static GOTV_INLINE void x264_mb_analyse_transform_rd( x264_t *h, x264_mb_analysis_t *a, int *i_satd, int *i_rd )
+static NLC_INLINE void x264_mb_analyse_transform_rd( x264_t *h, x264_mb_analysis_t *a, int *i_satd, int *i_rd )
 {
     if( h->param.analyse.b_transform_8x8 && h->pps->b_transform_8x8_mode )
     {
@@ -2917,7 +2917,7 @@ static GOTV_INLINE void x264_mb_analyse_transform_rd( x264_t *h, x264_mb_analysi
  * There must be a more efficient way to get that portion of the benefit
  * without doing full QP-RD, but RD-decimation doesn't seem to do the
  * trick. */
-static GOTV_INLINE void x264_mb_analyse_qp_rd( x264_t *h, x264_mb_analysis_t *a )
+static NLC_INLINE void x264_mb_analyse_qp_rd( x264_t *h, x264_mb_analysis_t *a )
 {
     int bcost, cost, failures, prevcost, origcost;
     int orig_qp = h->mb.i_qp, bqp = h->mb.i_qp;

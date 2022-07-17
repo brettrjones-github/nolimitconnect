@@ -105,7 +105,7 @@ static void remove_sps(H264ParamSets *s, int id)
     av_buffer_unref(&s->sps_list[id]);
 }
 
-static GOTV_INLINE int decode_hrd_parameters(GetBitContext *gb, AVCodecContext *avctx,
+static NLC_INLINE int decode_hrd_parameters(GetBitContext *gb, AVCodecContext *avctx,
                                         SPS *sps)
 {
     int cpb_count, i;
@@ -131,7 +131,7 @@ static GOTV_INLINE int decode_hrd_parameters(GetBitContext *gb, AVCodecContext *
     return 0;
 }
 
-static GOTV_INLINE int decode_vui_parameters(GetBitContext *gb, AVCodecContext *avctx,
+static NLC_INLINE int decode_vui_parameters(GetBitContext *gb, AVCodecContext *avctx,
                                         SPS *sps)
 {
     int aspect_ratio_info_present_flag;

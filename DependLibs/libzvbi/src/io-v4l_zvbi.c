@@ -62,7 +62,7 @@ static const char rcsid [] =
 
 /* Custom ioctl of the bttv driver. */
 #define BTTV_VBISIZE		_IOR('v' , BASE_VIDIOCPRIVATE+8, int)
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_BTTV_VBISIZE
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_BTTV_VBISIZE
   (const int *arg _vbi_unused) {}
 
 #undef REQUIRE_SELECT

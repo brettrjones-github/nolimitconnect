@@ -1,7 +1,7 @@
 #pragma once
 #include <AppDependLibrariesConfig.h>
-#define ZIP_EXTERN		GOTV_EXTERN
-#define ZIP_EXPORT		GOTV_EXPORT
+#define ZIP_EXTERN		NLC_EXTERN
+#define ZIP_EXPORT		NLC_EXPORT
 #define Z_NULL			0
 
 #define LIBZIP_VERSION "1.1.2"

@@ -306,7 +306,7 @@ static const uint32_t SamplingRateTable[] =
   0
 };
 
-static GOTV_INLINE
+static NLC_INLINE
 int getSamplingRateIndex( uint32_t samplingRate )
 {
   uint32_t sf_index, tableSize=sizeof(SamplingRateTable)/sizeof(uint32_t);
@@ -325,7 +325,7 @@ int getSamplingRateIndex( uint32_t samplingRate )
 /*
  * Get Channel count from channel configuration
  */
-static GOTV_INLINE int getNumberOfTotalChannels(int channelConfig)
+static NLC_INLINE int getNumberOfTotalChannels(int channelConfig)
 {
   switch (channelConfig) {
   case 1: case 2: case 3:
@@ -340,7 +340,7 @@ static GOTV_INLINE int getNumberOfTotalChannels(int channelConfig)
   }
 }
 
-static GOTV_INLINE
+static NLC_INLINE
 int getNumberOfEffectiveChannels(const int channelConfig)
 {        /* index: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 */
   const int n[] = {0,1,2,3,4,5,5,7,0,0, 0, 6, 7, 0, 7, 0};

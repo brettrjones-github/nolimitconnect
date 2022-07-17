@@ -88,11 +88,11 @@ void _gnutls_null_log(void *, ...);
 
 #endif				/* C99_MACROS */
 
-/* GCC won't GOTV_INLINE this by itself and results in a "fatal warning"
+/* GCC won't NLC_INLINE this by itself and results in a "fatal warning"
    otherwise. Making this a macro has been tried, but it interacts
    badly with the do..while in the expansion. Welcome to the dark
    side. */
-static GOTV_INLINE
+static NLC_INLINE
 #ifdef __GNUC__
     __attribute__ ((always_inline))
 #endif

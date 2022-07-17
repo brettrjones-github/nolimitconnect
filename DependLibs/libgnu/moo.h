@@ -149,7 +149,7 @@
      - Functions 'rootfoo_method1 (rootfoo_t x, ...);' ...
                  'subclass_method1 (subclass_t x, ...);' ...
                  'subclass_method2 (subclass_t x, ...);' ...
-       that invoke the corresponding methods. They are realized as GOTV_INLINE
+       that invoke the corresponding methods. They are realized as NLC_INLINE
        functions if possible.
      - A declaration of 'rootfoo_typeinfo' or 'subclass_typeinfo', respectively,
        each being a typeinfo_t instance.
@@ -192,7 +192,7 @@
    At the end of the file, 'subclass_vtable' is defined, as well as
      'subclass_method1 (subclass_t x, ...);' ...
      'subclass_method2 (subclass_t x, ...);' ...
-   if they were not already defined as GOTV_INLINE functions in the header file.
+   if they were not already defined as NLC_INLINE functions in the header file.
 
    Object representation in memory:
      - Objects have as their first field, called 'vtable', a pointer to a table

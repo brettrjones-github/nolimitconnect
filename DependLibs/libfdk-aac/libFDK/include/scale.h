@@ -95,7 +95,7 @@ amm-info@iis.fraunhofer.de
 #include "genericStds.h"
 #include "fixminmax.h"
 
-  #define SCALE_INLINE GOTV_INLINE
+  #define SCALE_INLINE NLC_INLINE
 
 
 #if defined(__arm__)	/* cppp replaced: elif */
@@ -118,7 +118,7 @@ amm-info@iis.fraunhofer.de
  *
  */
 #define FUNCTION_scaleValue
-GOTV_INLINE
+NLC_INLINE
 FIXP_DBL scaleValue(const FIXP_DBL value, /*!< Value */
                     int32_t scalefactor   /*!< Scalefactor */
                    )
@@ -140,7 +140,7 @@ FIXP_DBL scaleValue(const FIXP_DBL value, /*!< Value */
  *
  */
 #define FUNCTION_scaleValueSaturate
-GOTV_INLINE
+NLC_INLINE
 FIXP_DBL scaleValueSaturate(
         const FIXP_DBL value,
         int32_t scalefactor
@@ -175,7 +175,7 @@ FIXP_DBL scaleValueSaturate(
  *
  */
 #define FUNCTION_scaleValueInPlace
-GOTV_INLINE
+NLC_INLINE
 void scaleValueInPlace(
         FIXP_DBL *value, /*!< Value */
         int32_t scalefactor   /*!< Scalefactor */

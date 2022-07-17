@@ -66,14 +66,17 @@
     <Filter Include="Source Files\GuiConnectId">
       <UniqueIdentifier>{10d7bfbc-85f1-4fdd-b2c2-200c099d8913}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\InputWidgets">
-      <UniqueIdentifier>{3c437382-3e3c-4d3a-a82e-10b168684117}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\AssetWidgets">
       <UniqueIdentifier>{b6e32014-8fda-412b-8ad1-d7cb6c816cbe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GuiFavorite">
       <UniqueIdentifier>{d27b18cc-badc-494e-87ee-61a4dffc42e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiWebPage\InputWidgets">
+      <UniqueIdentifier>{3c437382-3e3c-4d3a-a82e-10b168684117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CompilerConfig">
+      <UniqueIdentifier>{4f792643-1bde-4a8d-87dd-372327a009dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -560,9 +563,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\MultiSessionState.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\MySndMgr.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\NetAvailStatusWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -615,9 +615,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\SessionWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\SoundCtrlWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\StoryWidget.h">
@@ -931,6 +928,12 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h">
       <Filter>Source Files\GuiUser</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\SoundMgr.h">
+      <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1414,9 +1417,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\MyIcons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\MySndMgr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\NetAvailStatusWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1505,9 +1505,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SessionWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\SoundCtrlWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\StoryWidget.cpp">
@@ -1955,34 +1952,34 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputAllWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputBaseWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputFaceWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputPhotoWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputTextWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVideoWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVoiceWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InstMsgWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp">
-      <Filter>Source Files\InputWidgets</Filter>
+      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetBaseWidget.cpp">
       <Filter>Source Files\AssetWidgets</Filter>
@@ -2010,6 +2007,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.cpp">
       <Filter>Source Files\GuiFavorite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\SoundMgr.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2255,6 +2258,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.h">
       <Filter>Source Files\GuiFavorite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppCommonConfig.h">
+      <Filter>CompilerConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
+      <Filter>CompilerConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
+      <Filter>CompilerConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
+      <Filter>CompilerConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
+      <Filter>CompilerConfig</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2662,9 +2680,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\SessionWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\SoundCtrlWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\StoryWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2768,6 +2783,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletIgnoredHosts.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletSoundSettings.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -38,19 +38,19 @@ constant int2 dia_offs[4] =
     {0, -1}, {-1, 0}, {1, 0}, {0, 1},
 };
 
-GOTV_INLINE pixel x264_clip_pixel( int x )
+NLC_INLINE pixel x264_clip_pixel( int x )
 {
     return (pixel) clamp( x, (int) 0, (int) PIXEL_MAX );
 }
 
-GOTV_INLINE int2 x264_median_mv( short2 a, short2 b, short2 c )
+NLC_INLINE int2 x264_median_mv( short2 a, short2 b, short2 c )
 {
     short2 t1 = min(a, b);
     short2 t2 = min(max(a, b), c);
     return convert_int2(max(t1, t2));
 }
 
-GOTV_INLINE sum2_t abs2( sum2_t a )
+NLC_INLINE sum2_t abs2( sum2_t a )
 {
     sum2_t s = ((a >> (BITS_PER_SUM - 1)) & (((sum2_t)1 << BITS_PER_SUM) + 1)) * ((sum_t)-1);
     return (a + s) ^ s;

@@ -76,7 +76,7 @@ void local_strcat(char **dest, const char *source)
 	safe_strncpy((*dest)+ndest, source, nsource + 1);
 }
 
-static GOTV_INLINE int local_isprint(int c)
+static NLC_INLINE int local_isprint(int c)
 {
 	if (c < 32) return 0;
 	return isprint(c);

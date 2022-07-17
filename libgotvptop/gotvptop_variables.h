@@ -119,38 +119,38 @@ enum {
 /*****************************************************************************
  * Prototypes
  *****************************************************************************/
-GOTV_API int libgotvptop_var_Create( gotvptop_object_t *, const char *, int );
+NLC_API int libgotvptop_var_Create( gotvptop_object_t *, const char *, int );
 #define var_Create(a,b,c) libgotvptop_var_Create( GOTV_OBJECT(a), b, c )
 
-GOTV_API void libgotvptop_var_Destroy( gotvptop_object_t *, const char * );
+NLC_API void libgotvptop_var_Destroy( gotvptop_object_t *, const char * );
 #define var_Destroy(a,b) libgotvptop_var_Destroy( GOTV_OBJECT(a), b )
 
-GOTV_API int libgotvptop_var_Change( gotvptop_object_t *, const char *, int, gotvptop_value_t *, gotvptop_value_t * );
+NLC_API int libgotvptop_var_Change( gotvptop_object_t *, const char *, int, gotvptop_value_t *, gotvptop_value_t * );
 #define var_Change(a,b,c,d,e) libgotvptop_var_Change( GOTV_OBJECT(a), b, c, d, e )
 
-GOTV_API int libgotvptop_var_Type( gotvptop_object_t *, const char * ) GOTV_USED;
+NLC_API int libgotvptop_var_Type( gotvptop_object_t *, const char * ) GOTV_USED;
 #define var_Type(a,b) libgotvptop_var_Type( GOTV_OBJECT(a), b )
 
-GOTV_API int libgotvptop_var_Set( gotvptop_object_t *, const char *, gotvptop_value_t );
+NLC_API int libgotvptop_var_Set( gotvptop_object_t *, const char *, gotvptop_value_t );
 #define var_Set(a,b,c) libgotvptop_var_Set( GOTV_OBJECT(a), b, c )
 
-GOTV_API int libgotvptop_var_Get( gotvptop_object_t *, const char *, gotvptop_value_t * );
+NLC_API int libgotvptop_var_Get( gotvptop_object_t *, const char *, gotvptop_value_t * );
 #define var_Get(a,b,c) libgotvptop_var_Get( GOTV_OBJECT(a), b, c )
 
-GOTV_API int libgotvptop_var_SetChecked( gotvptop_object_t *, const char *, int, gotvptop_value_t );
+NLC_API int libgotvptop_var_SetChecked( gotvptop_object_t *, const char *, int, gotvptop_value_t );
 #define var_SetChecked(o,n,t,v) libgotvptop_var_SetChecked(GOTV_OBJECT(o),n,t,v)
 
-GOTV_API int libgotvptop_var_GetChecked( gotvptop_object_t *, const char *, int, gotvptop_value_t * );
+NLC_API int libgotvptop_var_GetChecked( gotvptop_object_t *, const char *, int, gotvptop_value_t * );
 #define var_GetChecked(o,n,t,v) libgotvptop_var_GetChecked(GOTV_OBJECT(o),n,t,v)
 
-GOTV_API int libgotvptop_var_GetAndSet( gotvptop_object_t *, const char *, int, gotvptop_value_t * );
+NLC_API int libgotvptop_var_GetAndSet( gotvptop_object_t *, const char *, int, gotvptop_value_t * );
 #define var_GetAndSet(o,n,t,v) libgotvptop_var_GetAndSet(GOTV_OBJECT(o),n,t,v)
 
-GOTV_API int libgotvptop_var_Inherit( gotvptop_object_t *, const char *, int, gotvptop_value_t * );
+NLC_API int libgotvptop_var_Inherit( gotvptop_object_t *, const char *, int, gotvptop_value_t * );
 #define var_Inherit(o,n,t,v) libgotvptop_var_Inherit(GOTV_OBJECT(o),n,t,v)
 
 
-GOTV_API void libgotvptop_var_FreeList( gotvptop_value_t *, gotvptop_value_t * );
+NLC_API void libgotvptop_var_FreeList( gotvptop_value_t *, gotvptop_value_t * );
 #define var_FreeList(t,v) libgotvptop_var_FreeList(t,v)
 
 
@@ -163,20 +163,20 @@ GOTV_API void libgotvptop_var_FreeList( gotvptop_value_t *, gotvptop_value_t * )
  *                 gotvptop_value_t newvalue,
  *                 void *p_data);
  *****************************************************************************/
-GOTV_API void libgotvptop_var_AddCallback( gotvptop_object_t *, const char *, gotvptop_callback_t, void * );
+NLC_API void libgotvptop_var_AddCallback( gotvptop_object_t *, const char *, gotvptop_callback_t, void * );
 #define var_AddCallback(a,b,c,d) libgotvptop_var_AddCallback( GOTV_OBJECT(a), b, c, d )
 
-GOTV_API void libgotvptop_var_DelCallback( gotvptop_object_t *, const char *, gotvptop_callback_t, void * );
+NLC_API void libgotvptop_var_DelCallback( gotvptop_object_t *, const char *, gotvptop_callback_t, void * );
 #define var_DelCallback(a,b,c,d) libgotvptop_var_DelCallback( GOTV_OBJECT(a), b, c, d )
 
-GOTV_API void libgotvptop_var_TriggerCallback( gotvptop_object_t *, const char * );
+NLC_API void libgotvptop_var_TriggerCallback( gotvptop_object_t *, const char * );
 #define var_TriggerCallback(a,b) libgotvptop_var_TriggerCallback( GOTV_OBJECT(a), b )
 
 
-GOTV_API void libgotvptop_var_AddListCallback( gotvptop_object_t *, const char *, gotvptop_list_callback_t, void * );
+NLC_API void libgotvptop_var_AddListCallback( gotvptop_object_t *, const char *, gotvptop_list_callback_t, void * );
 #define var_AddListCallback(a,b,c,d) libgotvptop_var_AddListCallback( GOTV_OBJECT(a), b, c, d )
 
-GOTV_API void libgotvptop_var_DelListCallback( gotvptop_object_t *, const char *, gotvptop_list_callback_t, void * );
+NLC_API void libgotvptop_var_DelListCallback( gotvptop_object_t *, const char *, gotvptop_list_callback_t, void * );
 #define var_DelListCallback(a,b,c,d) libgotvptop_var_DelListCallback( GOTV_OBJECT(a), b, c, d )
 
 /*****************************************************************************
@@ -661,7 +661,7 @@ static inline void *var_InheritAddress( gotvptop_object_t *obj, const char *name
 }
 #define var_InheritAddress(o, n) var_InheritAddress(GOTV_OBJECT(o), n)
 
-GOTV_API int var_InheritURational( gotvptop_object_t *, unsigned *num, unsigned *den, const char *var );
+NLC_API int var_InheritURational( gotvptop_object_t *, unsigned *num, unsigned *den, const char *var );
 #define var_InheritURational(a,b,c,d) var_InheritURational(GOTV_OBJECT(a), b, c, d)
 
 #define var_GetInteger(a,b)   var_GetInteger( GOTV_OBJECT(a),b)
@@ -671,7 +671,7 @@ GOTV_API int var_InheritURational( gotvptop_object_t *, unsigned *num, unsigned 
 #define var_GetNonEmptyString(a,b)   var_GetNonEmptyString( GOTV_OBJECT(a),b)
 #define var_GetAddress(a,b)  var_GetAddress( GOTV_OBJECT(a),b)
 
-GOTV_API int var_LocationParse(gotvptop_object_t *, const char *mrl, const char *prefix);
+NLC_API int var_LocationParse(gotvptop_object_t *, const char *mrl, const char *prefix);
 #define var_LocationParse(o, m, p) var_LocationParse(GOTV_OBJECT(o), m, p)
 
 /**

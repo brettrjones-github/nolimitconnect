@@ -138,7 +138,7 @@ class TiXmlBase
 	static const char* GetEntity( const char* in, char* value );
 
 	// Get a character, while interpreting entities.
-	GOTV_INLINE static const char* GetChar( const char* p, char* value )		
+	NLC_INLINE static const char* GetChar( const char* p, char* value )		
 											{		
 												assert( p );
 												if ( *p == '&' ) 

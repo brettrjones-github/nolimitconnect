@@ -32,7 +32,7 @@
 #define RDO_SKIP_BS 0
 #endif
 
-static GOTV_INLINE void x264_cabac_mb_type_intra( x264_t *h, x264_cabac_t *cb, int i_mb_type,
+static NLC_INLINE void x264_cabac_mb_type_intra( x264_t *h, x264_cabac_t *cb, int i_mb_type,
                     int ctx0, int ctx1, int ctx2, int ctx3, int ctx4, int ctx5 )
 {
     if( i_mb_type == I_4x4 || i_mb_type == I_8x8 )
@@ -195,7 +195,7 @@ void x264_cabac_mb_skip( x264_t *h, int b_skip )
 }
 #endif
 
-static GOTV_INLINE void x264_cabac_subpartition_p( x264_cabac_t *cb, int i_sub )
+static NLC_INLINE void x264_cabac_subpartition_p( x264_cabac_t *cb, int i_sub )
 {
     if( i_sub == D_L0_8x8 )
     {
@@ -352,7 +352,7 @@ do\
     x264_macroblock_cache_mvd( h, block_idx_x[idx], block_idx_y[idx], width, height, i_list, mvd );\
 } while( 0 )
 
-static GOTV_INLINE void x264_cabac_8x8_mvd( x264_t *h, x264_cabac_t *cb, int i )
+static NLC_INLINE void x264_cabac_8x8_mvd( x264_t *h, x264_cabac_t *cb, int i )
 {
     switch( h->mb.i_sub_partition[i] )
     {

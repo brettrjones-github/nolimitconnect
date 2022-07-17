@@ -100,7 +100,7 @@ amm-info@iis.fraunhofer.de
 #define FUNCTION_fixmulBitExact_DD
 #define fixmulBitExact_DD(a,b) fixmul_DD(a,b)
 
-GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 {
   int32_t result ;
   result = ((long long)a * b)>>32;

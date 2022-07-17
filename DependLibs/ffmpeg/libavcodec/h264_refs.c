@@ -465,7 +465,7 @@ int ff_h264_decode_ref_pic_list_reordering(H264SliceContext *sl, void *logctx)
  *         for display purposes) zero if one of the fields remains in
  *         reference
  */
-static GOTV_INLINE int unreference_pic(H264Context *h, H264Picture *pic, int refmask)
+static NLC_INLINE int unreference_pic(H264Context *h, H264Picture *pic, int refmask)
 {
     int i;
     if (pic->reference &= refmask) {

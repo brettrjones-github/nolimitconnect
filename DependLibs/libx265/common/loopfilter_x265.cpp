@@ -31,7 +31,7 @@
 namespace {
 
 /* get the sign of input variable (TODO: this is a dup, make common) */
-GOTV_INLINE int8_t signOf(int x)
+NLC_INLINE int8_t signOf(int x)
 {
     return (x >> 31) | ((int)((((uint32_t)-x)) >> 31));
 }

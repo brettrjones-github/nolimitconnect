@@ -39,7 +39,7 @@ either expressed or implied, of the FreeBSD Project.
 
 
 #ifdef __cplusplus
-GOTV_EXTERN "C" {
+NLC_EXTERN "C" {
 #endif
 
 #define NSM_MAXSTRLEN 1024
@@ -118,82 +118,82 @@ typedef struct NSM1_NOTIFYargs NSM1_NOTIFYargs;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define NSM1_NULL 0
-GOTV_EXTERN  void * nsm1_null_1(void *, void *);
-GOTV_EXTERN  void * nsm1_null_1_svc(void *, struct svc_req *);
+NLC_EXTERN  void * nsm1_null_1(void *, void *);
+NLC_EXTERN  void * nsm1_null_1_svc(void *, struct svc_req *);
 #define NSM1_STAT 1
-GOTV_EXTERN  struct NSM1_STATres * nsm1_stat_1(struct NSM1_STATargs *, void *);
-GOTV_EXTERN  struct NSM1_STATres * nsm1_stat_1_svc(struct NSM1_STATargs *, struct svc_req *);
+NLC_EXTERN  struct NSM1_STATres * nsm1_stat_1(struct NSM1_STATargs *, void *);
+NLC_EXTERN  struct NSM1_STATres * nsm1_stat_1_svc(struct NSM1_STATargs *, struct svc_req *);
 #define NSM1_MON 2
-GOTV_EXTERN  struct NSM1_MONres * nsm1_mon_1(struct NSM1_MONargs *, void *);
-GOTV_EXTERN  struct NSM1_MONres * nsm1_mon_1_svc(struct NSM1_MONargs *, struct svc_req *);
+NLC_EXTERN  struct NSM1_MONres * nsm1_mon_1(struct NSM1_MONargs *, void *);
+NLC_EXTERN  struct NSM1_MONres * nsm1_mon_1_svc(struct NSM1_MONargs *, struct svc_req *);
 #define NSM1_UNMON 3
-GOTV_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1(struct NSM1_UNMONargs *, void *);
-GOTV_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1_svc(struct NSM1_UNMONargs *, struct svc_req *);
+NLC_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1(struct NSM1_UNMONargs *, void *);
+NLC_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1_svc(struct NSM1_UNMONargs *, struct svc_req *);
 #define NSM1_UNMON_ALL 4
-GOTV_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1(struct NSM1_UNMONALLargs *, void *);
-GOTV_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1_svc(struct NSM1_UNMONALLargs *, struct svc_req *);
+NLC_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1(struct NSM1_UNMONALLargs *, void *);
+NLC_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1_svc(struct NSM1_UNMONALLargs *, struct svc_req *);
 #define NSM1_SIMU_CRASH 5
-GOTV_EXTERN  void * nsm1_simu_crash_1(void *, void *);
-GOTV_EXTERN  void * nsm1_simu_crash_1_svc(void *, struct svc_req *);
+NLC_EXTERN  void * nsm1_simu_crash_1(void *, void *);
+NLC_EXTERN  void * nsm1_simu_crash_1_svc(void *, struct svc_req *);
 #define NSM1_NOTIFY 6
-GOTV_EXTERN  void * nsm1_notify_1(struct NSM1_NOTIFYargs *, void *);
-GOTV_EXTERN  void * nsm1_notify_1_svc(struct NSM1_NOTIFYargs *, struct svc_req *);
-GOTV_EXTERN int nsm_program_1_freeresult (void *, zdrproc_t, caddr_t);
+NLC_EXTERN  void * nsm1_notify_1(struct NSM1_NOTIFYargs *, void *);
+NLC_EXTERN  void * nsm1_notify_1_svc(struct NSM1_NOTIFYargs *, struct svc_req *);
+NLC_EXTERN int nsm_program_1_freeresult (void *, zdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define NSM1_NULL 0
-GOTV_EXTERN  void * nsm1_null_1();
-GOTV_EXTERN  void * nsm1_null_1_svc();
+NLC_EXTERN  void * nsm1_null_1();
+NLC_EXTERN  void * nsm1_null_1_svc();
 #define NSM1_STAT 1
-GOTV_EXTERN  struct NSM1_STATres * nsm1_stat_1();
-GOTV_EXTERN  struct NSM1_STATres * nsm1_stat_1_svc();
+NLC_EXTERN  struct NSM1_STATres * nsm1_stat_1();
+NLC_EXTERN  struct NSM1_STATres * nsm1_stat_1_svc();
 #define NSM1_MON 2
-GOTV_EXTERN  struct NSM1_MONres * nsm1_mon_1();
-GOTV_EXTERN  struct NSM1_MONres * nsm1_mon_1_svc();
+NLC_EXTERN  struct NSM1_MONres * nsm1_mon_1();
+NLC_EXTERN  struct NSM1_MONres * nsm1_mon_1_svc();
 #define NSM1_UNMON 3
-GOTV_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1();
-GOTV_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1_svc();
+NLC_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1();
+NLC_EXTERN  struct NSM1_UNMONres * nsm1_unmon_1_svc();
 #define NSM1_UNMON_ALL 4
-GOTV_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1();
-GOTV_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1_svc();
+NLC_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1();
+NLC_EXTERN  struct NSM1_UNMONALLres * nsm1_unmon_all_1_svc();
 #define NSM1_SIMU_CRASH 5
-GOTV_EXTERN  void * nsm1_simu_crash_1();
-GOTV_EXTERN  void * nsm1_simu_crash_1_svc();
+NLC_EXTERN  void * nsm1_simu_crash_1();
+NLC_EXTERN  void * nsm1_simu_crash_1_svc();
 #define NSM1_NOTIFY 6
-GOTV_EXTERN  void * nsm1_notify_1();
-GOTV_EXTERN  void * nsm1_notify_1_svc();
-GOTV_EXTERN int nsm_program_1_freeresult ();
+NLC_EXTERN  void * nsm1_notify_1();
+NLC_EXTERN  void * nsm1_notify_1_svc();
+NLC_EXTERN int nsm_program_1_freeresult ();
 #endif /* K&R C */
 
 /* the zdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-GOTV_EXTERN  uint32_t zdr_nsmstat1 (ZDR *, nsmstat1*);
-GOTV_EXTERN  uint32_t zdr_nsm_my_id (ZDR *, nsm_my_id*);
-GOTV_EXTERN  uint32_t zdr_nsm_mon_id (ZDR *, nsm_mon_id*);
-GOTV_EXTERN  uint32_t zdr_NSM1_STATres (ZDR *, NSM1_STATres*);
-GOTV_EXTERN  uint32_t zdr_NSM1_STATargs (ZDR *, NSM1_STATargs*);
-GOTV_EXTERN  uint32_t zdr_NSM1_MONres (ZDR *, NSM1_MONres*);
-GOTV_EXTERN  uint32_t zdr_NSM1_MONargs (ZDR *, NSM1_MONargs*);
-GOTV_EXTERN  uint32_t zdr_NSM1_UNMONres (ZDR *, NSM1_UNMONres*);
-GOTV_EXTERN  uint32_t zdr_NSM1_UNMONargs (ZDR *, NSM1_UNMONargs*);
-GOTV_EXTERN  uint32_t zdr_NSM1_UNMONALLres (ZDR *, NSM1_UNMONALLres*);
-GOTV_EXTERN  uint32_t zdr_NSM1_UNMONALLargs (ZDR *, NSM1_UNMONALLargs*);
-GOTV_EXTERN  uint32_t zdr_NSM1_NOTIFYargs (ZDR *, NSM1_NOTIFYargs*);
+NLC_EXTERN  uint32_t zdr_nsmstat1 (ZDR *, nsmstat1*);
+NLC_EXTERN  uint32_t zdr_nsm_my_id (ZDR *, nsm_my_id*);
+NLC_EXTERN  uint32_t zdr_nsm_mon_id (ZDR *, nsm_mon_id*);
+NLC_EXTERN  uint32_t zdr_NSM1_STATres (ZDR *, NSM1_STATres*);
+NLC_EXTERN  uint32_t zdr_NSM1_STATargs (ZDR *, NSM1_STATargs*);
+NLC_EXTERN  uint32_t zdr_NSM1_MONres (ZDR *, NSM1_MONres*);
+NLC_EXTERN  uint32_t zdr_NSM1_MONargs (ZDR *, NSM1_MONargs*);
+NLC_EXTERN  uint32_t zdr_NSM1_UNMONres (ZDR *, NSM1_UNMONres*);
+NLC_EXTERN  uint32_t zdr_NSM1_UNMONargs (ZDR *, NSM1_UNMONargs*);
+NLC_EXTERN  uint32_t zdr_NSM1_UNMONALLres (ZDR *, NSM1_UNMONALLres*);
+NLC_EXTERN  uint32_t zdr_NSM1_UNMONALLargs (ZDR *, NSM1_UNMONALLargs*);
+NLC_EXTERN  uint32_t zdr_NSM1_NOTIFYargs (ZDR *, NSM1_NOTIFYargs*);
 
 #else /* K&R C */
-GOTV_EXTERN uint32_t zdr_nsmstat1 ();
-GOTV_EXTERN uint32_t zdr_nsm_my_id ();
-GOTV_EXTERN uint32_t zdr_nsm_mon_id ();
-GOTV_EXTERN uint32_t zdr_NSM1_STATres ();
-GOTV_EXTERN uint32_t zdr_NSM1_STATargs ();
-GOTV_EXTERN uint32_t zdr_NSM1_MONres ();
-GOTV_EXTERN uint32_t zdr_NSM1_MONargs ();
-GOTV_EXTERN uint32_t zdr_NSM1_UNMONres ();
-GOTV_EXTERN uint32_t zdr_NSM1_UNMONargs ();
-GOTV_EXTERN uint32_t zdr_NSM1_UNMONALLres ();
-GOTV_EXTERN uint32_t zdr_NSM1_UNMONALLargs ();
-GOTV_EXTERN uint32_t zdr_NSM1_NOTIFYargs ();
+NLC_EXTERN uint32_t zdr_nsmstat1 ();
+NLC_EXTERN uint32_t zdr_nsm_my_id ();
+NLC_EXTERN uint32_t zdr_nsm_mon_id ();
+NLC_EXTERN uint32_t zdr_NSM1_STATres ();
+NLC_EXTERN uint32_t zdr_NSM1_STATargs ();
+NLC_EXTERN uint32_t zdr_NSM1_MONres ();
+NLC_EXTERN uint32_t zdr_NSM1_MONargs ();
+NLC_EXTERN uint32_t zdr_NSM1_UNMONres ();
+NLC_EXTERN uint32_t zdr_NSM1_UNMONargs ();
+NLC_EXTERN uint32_t zdr_NSM1_UNMONALLres ();
+NLC_EXTERN uint32_t zdr_NSM1_UNMONALLargs ();
+NLC_EXTERN uint32_t zdr_NSM1_NOTIFYargs ();
 
 #endif /* K&R C */
 

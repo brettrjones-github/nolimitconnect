@@ -84,7 +84,7 @@ const MV offsets[] =
 }; // offsets for Two Point Search
 
 /* sum of absolute differences between MV candidates, used for adaptive ME range */
-GOTV_INLINE int predictorDifference(const MV *mvc, intptr_t numCandidates)
+NLC_INLINE int predictorDifference(const MV *mvc, intptr_t numCandidates)
 {
     int sum = 0;
 

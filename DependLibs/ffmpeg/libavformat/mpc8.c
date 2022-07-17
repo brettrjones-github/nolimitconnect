@@ -55,7 +55,7 @@ typedef struct MPCContext {
     int64_t apetag_start;
 } MPCContext;
 
-static GOTV_INLINE int64_t bs_get_v(const uint8_t **bs)
+static NLC_INLINE int64_t bs_get_v(const uint8_t **bs)
 {
     uint64_t v = 0;
     int br = 0;
@@ -106,7 +106,7 @@ static int mpc8_probe(AVProbeData *p)
     return 0;
 }
 
-static GOTV_INLINE int64_t gb_get_v(GetBitContext *gb)
+static NLC_INLINE int64_t gb_get_v(GetBitContext *gb)
 {
     uint64_t v = 0;
     int bits = 0;

@@ -22,7 +22,7 @@
 
 extern GMPPlatformAPI* g_platform_api;
 
-GOTV_INLINE GMPMutex* GMPCreateMutex() {
+NLC_INLINE GMPMutex* GMPCreateMutex() {
   GMPMutex* mutex;
   if (!g_platform_api) {
     return nullptr;

@@ -448,7 +448,7 @@ vbi_capture_delete(vbi_capture *capture)
 		capture->_delete(capture);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 timeval_subtract		(struct timeval *	delta,
 				 const struct timeval *	tv1,
 				 const struct timeval *	tv2)

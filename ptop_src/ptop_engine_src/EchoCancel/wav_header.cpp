@@ -112,35 +112,35 @@ bool CheckWavParameters(size_t num_channels,
 }
 
 #ifdef WEBRTC_ARCH_LITTLE_ENDIAN
-static GOTV_INLINE void WriteLE16(uint16_t* f, uint16_t x) { *f = x; }
-static GOTV_INLINE void WriteLE32(uint32_t* f, uint32_t x) { *f = x; }
-static GOTV_INLINE void WriteFourCC(uint32_t* f, char a, char b, char c, char d) {
+static NLC_INLINE void WriteLE16(uint16_t* f, uint16_t x) { *f = x; }
+static NLC_INLINE void WriteLE32(uint32_t* f, uint32_t x) { *f = x; }
+static NLC_INLINE void WriteFourCC(uint32_t* f, char a, char b, char c, char d) {
   *f = static_cast<uint32_t>(a)
       | static_cast<uint32_t>(b) << 8
       | static_cast<uint32_t>(c) << 16
       | static_cast<uint32_t>(d) << 24;
 }
 
-static GOTV_INLINE uint16_t ReadLE16(uint16_t x) { return x; }
-static GOTV_INLINE uint32_t ReadLE32(uint32_t x) { return x; }
-static GOTV_INLINE std::string ReadFourCC(uint32_t x) {
+static NLC_INLINE uint16_t ReadLE16(uint16_t x) { return x; }
+static NLC_INLINE uint32_t ReadLE32(uint32_t x) { return x; }
+static NLC_INLINE std::string ReadFourCC(uint32_t x) {
   return std::string(reinterpret_cast<char*>(&x), 4);
 }
 #else
 #error "Write be-to-le conversion functions"
 #endif
 
-static GOTV_INLINE uint32_t RiffChunkSize(size_t bytes_in_payload) {
+static NLC_INLINE uint32_t RiffChunkSize(size_t bytes_in_payload) {
   return static_cast<uint32_t>(
       bytes_in_payload + kWavHeaderSize - sizeof(ChunkHeader));
 }
 
-static GOTV_INLINE uint32_t ByteRate(size_t num_channels, int sample_rate,
+static NLC_INLINE uint32_t ByteRate(size_t num_channels, int sample_rate,
                                 size_t bytes_per_sample) {
   return static_cast<uint32_t>(num_channels * sample_rate * bytes_per_sample);
 }
 
-static GOTV_INLINE uint16_t BlockAlign(size_t num_channels,
+static NLC_INLINE uint16_t BlockAlign(size_t num_channels,
                                   size_t bytes_per_sample) {
   return static_cast<uint16_t>(num_channels * bytes_per_sample);
 }

@@ -1162,7 +1162,7 @@ static int dnxhd_find_qscale(DNXHDEncContext *ctx)
 #define RADIX_PASSES 4
 #define NBUCKETS (1 << BUCKET_BITS)
 
-static GOTV_INLINE int get_bucket(int value, int shift)
+static NLC_INLINE int get_bucket(int value, int shift)
 {
     value >>= shift;
     value  &= NBUCKETS - 1;

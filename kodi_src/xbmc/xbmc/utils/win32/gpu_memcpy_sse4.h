@@ -27,7 +27,7 @@
 // GPU tiled memory (write back)
 // Performance tip: page offset (12 lsb) of both addresses should be different
 //  optimally use a 2K offset between them.
-GOTV_INLINE void* gpu_memcpy(void* d, const void* s, size_t size)
+NLC_INLINE void* gpu_memcpy(void* d, const void* s, size_t size)
 {
     static const size_t regsInLoop = sizeof(size_t) * 2; // 8 or 16
 

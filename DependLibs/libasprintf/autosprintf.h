@@ -56,7 +56,7 @@ namespace gnu
     operator char * () const;
     operator std::string () const;
     /* Output to an ostream.  */
-	GOTV_INLINE friend std::ostream& operator<< (std::ostream& stream, const autosprintf& tmp)
+	NLC_INLINE friend std::ostream& operator<< (std::ostream& stream, const autosprintf& tmp)
     {
       stream << (tmp.str ? tmp.str : "(error in autosprintf)");
       return stream;

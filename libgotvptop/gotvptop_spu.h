@@ -51,9 +51,9 @@ struct spu_t
     spu_private_t *p;
 };
 
-    GOTV_API spu_t * spu_Create( gotvptop_object_t *, vout_thread_t * );
+    NLC_API spu_t * spu_Create( gotvptop_object_t *, vout_thread_t * );
 #define spu_Create(a,b) spu_Create(GOTV_OBJECT(a),b)
-GOTV_API void spu_Destroy( spu_t * );
+NLC_API void spu_Destroy( spu_t * );
 
 /**
  * This function sends a subpicture to the spu_t core.
@@ -61,7 +61,7 @@ GOTV_API void spu_Destroy( spu_t * );
  * You cannot use the provided subpicture anymore. The spu_t core
  * will destroy it at its convenience.
  */
-GOTV_API void spu_PutSubpicture( spu_t *, subpicture_t * );
+NLC_API void spu_PutSubpicture( spu_t *, subpicture_t * );
 
 /**
  * This function will return an unique subpicture containing the OSD and
@@ -73,27 +73,27 @@ GOTV_API void spu_PutSubpicture( spu_t *, subpicture_t * );
  *
  * The returned value if non NULL must be released by subpicture_Delete().
  */
-GOTV_API subpicture_t * spu_Render( spu_t *, const gotvptop_fourcc_t *p_chroma_list, const video_format_t *p_fmt_dst, const video_format_t *p_fmt_src, mtime_t render_subtitle_date, mtime_t render_osd_date, bool ignore_osd );
+NLC_API subpicture_t * spu_Render( spu_t *, const gotvptop_fourcc_t *p_chroma_list, const video_format_t *p_fmt_dst, const video_format_t *p_fmt_src, mtime_t render_subtitle_date, mtime_t render_osd_date, bool ignore_osd );
 
 /**
  * It registers a new SPU channel.
  */
-GOTV_API int spu_RegisterChannel( spu_t * );
+NLC_API int spu_RegisterChannel( spu_t * );
 
 /**
  * It clears all subpictures associated to a SPU channel.
  */
-GOTV_API void spu_ClearChannel( spu_t *, int );
+NLC_API void spu_ClearChannel( spu_t *, int );
 
 /**
  * It changes the sub sources list
  */
-GOTV_API void spu_ChangeSources( spu_t *, const char * );
+NLC_API void spu_ChangeSources( spu_t *, const char * );
 
 /**
  * It changes the sub filters list
  */
-GOTV_API void spu_ChangeFilters( spu_t *, const char * );
+NLC_API void spu_ChangeFilters( spu_t *, const char * );
 
 /** @}*/
 

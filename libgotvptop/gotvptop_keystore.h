@@ -85,14 +85,14 @@ struct gotvptop_keystore_entry
  *
  * @return a pointer to the keystore object, or NULL in case of error
  */
-GOTV_API gotvptop_keystore *
+NLC_API gotvptop_keystore *
 gotvptop_keystore_create(gotvptop_object_t *p_parent);
 #define gotvptop_keystore_create(x) gotvptop_keystore_create(GOTV_OBJECT(x))
 
 /**
  * Release a keystore object
  */
-GOTV_API void
+NLC_API void
 gotvptop_keystore_release(gotvptop_keystore *p_keystore);
 
 
@@ -109,7 +109,7 @@ gotvptop_keystore_release(gotvptop_keystore *p_keystore);
  *
  * @return GOTV_SUCCESS on success, or GOTV_EGENERIC on error
  */
-GOTV_API int
+NLC_API int
 gotvptop_keystore_store(gotvptop_keystore *p_keystore,
                    const char *const ppsz_values[KEY_MAX],
                    const uint8_t* p_secret, ssize_t i_secret_len,
@@ -125,7 +125,7 @@ gotvptop_keystore_store(gotvptop_keystore *p_keystore,
  *
  * @return the number of entries
  */
-GOTV_API unsigned int
+NLC_API unsigned int
 gotvptop_keystore_find(gotvptop_keystore *p_keystore,
                   const char *const ppsz_values[KEY_MAX],
                   gotvptop_keystore_entry **pp_entries) GOTV_USED;
@@ -140,14 +140,14 @@ gotvptop_keystore_find(gotvptop_keystore *p_keystore,
  *
  * @return the number of entries
  */
-GOTV_API unsigned int
+NLC_API unsigned int
 gotvptop_keystore_remove(gotvptop_keystore *p_keystore,
                     const char *const ppsz_values[KEY_MAX]);
 
 /**
  * Release the list of entries returned by gotvptop_keystore_find()
  */
-GOTV_API void
+NLC_API void
 gotvptop_keystore_release_entries(gotvptop_keystore_entry *p_entries, unsigned int i_count);
 
 /**
@@ -204,13 +204,13 @@ struct gotvptop_credential
  *
  * @param psz_url url to store or to search
  */
-GOTV_API void
+NLC_API void
 gotvptop_credential_init(gotvptop_credential *p_credential, const gotvptop_url_t *p_url);
 
 /**
  * Clean a credential struct
  */
-GOTV_API void
+NLC_API void
 gotvptop_credential_clean(gotvptop_credential *p_credential);
 
 /**
@@ -234,7 +234,7 @@ gotvptop_credential_clean(gotvptop_credential *p_credential);
  * are valid, otherwise this function should not be called again.
  */
 
-GOTV_API bool
+NLC_API bool
 gotvptop_credential_get(gotvptop_credential *p_credential, gotvptop_object_t *p_parent,
                    const char *psz_option_username,
                    const char *psz_option_password,
@@ -253,7 +253,7 @@ gotvptop_credential_get(gotvptop_credential *p_credential, gotvptop_object_t *p_
  * @return true if the credential was stored or comes from the keystore, false
  * otherwise
  */
-GOTV_API bool
+NLC_API bool
 gotvptop_credential_store(gotvptop_credential *p_credential, gotvptop_object_t *p_parent);
 #define gotvptop_credential_store(a, b) \
     gotvptop_credential_store(a, GOTV_OBJECT(b))

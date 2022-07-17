@@ -1723,12 +1723,12 @@ static void nvenc_codec_specific_pic_params(AVCodecContext *avctx,
     }
 }
 
-static GOTV_INLINE void timestamp_queue_enqueue(AVFifoBuffer* queue, int64_t timestamp)
+static NLC_INLINE void timestamp_queue_enqueue(AVFifoBuffer* queue, int64_t timestamp)
 {
     av_fifo_generic_write(queue, &timestamp, sizeof(timestamp), NULL);
 }
 
-static GOTV_INLINE int64_t timestamp_queue_dequeue(AVFifoBuffer* queue)
+static NLC_INLINE int64_t timestamp_queue_dequeue(AVFifoBuffer* queue)
 {
     int64_t timestamp = AV_NOPTS_VALUE;
     if (av_fifo_size(queue) > 0)

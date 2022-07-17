@@ -43,7 +43,7 @@
 # include <float.h>
 #endif
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 typedef struct RsvgSaxHandler RsvgSaxHandler;
 typedef struct RsvgDrawingCtx RsvgDrawingCtx;
@@ -231,7 +231,7 @@ struct RsvgRender {
                                                  double w, double h);
 };
 
-static GOTV_INLINE RsvgRender *
+static NLC_INLINE RsvgRender *
 _rsvg_render_check_type (RsvgRender *render,
                          RsvgRenderType type)
 {
@@ -516,6 +516,6 @@ GInputStream *_rsvg_handle_acquire_stream (RsvgHandle *handle,
            return (val);                                            \
        };				}G_STMT_END
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

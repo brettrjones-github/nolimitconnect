@@ -84,7 +84,7 @@ amm-info@iis.fraunhofer.de
 /***************************  Fraunhofer IIS FDK Tools  **********************
 
    Author(s):   M. Lohwasser, M. Gayer
-   Description: min/max GOTV_INLINE functions and defines
+   Description: min/max NLC_INLINE functions and defines
 
 ******************************************************************************/
 
@@ -96,12 +96,12 @@ amm-info@iis.fraunhofer.de
 /* Inline Function to determine the smaller/bigger value of two values with same type. */
 
 
-template <class T> GOTV_INLINE T fixmin (T a, T b)
+template <class T> NLC_INLINE T fixmin (T a, T b)
 {
 	return (a < b ? a : b);
 }
 
-template <class T> GOTV_INLINE T fixmax (T a, T b)
+template <class T> NLC_INLINE T fixmax (T a, T b)
 {
 	return (a > b ? a : b);
 }

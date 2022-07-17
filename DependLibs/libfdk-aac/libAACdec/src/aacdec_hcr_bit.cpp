@@ -111,7 +111,7 @@ uint8_t ToggleReadDirection(uint8_t readDirection)
 
 /*---------------------------------------------------------------------------------------------
      description:   This function returns a bit from the bitstream according to read direction.
-                    It is called very often, therefore it makes sense to GOTV_INLINE it (runtime).
+                    It is called very often, therefore it makes sense to NLC_INLINE it (runtime).
 -----------------------------------------------------------------------------------------------
         input:    - handle to FDK bitstream
                   - reference value marking start of bitfield

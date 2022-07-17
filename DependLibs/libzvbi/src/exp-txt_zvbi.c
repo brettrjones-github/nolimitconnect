@@ -246,7 +246,7 @@ option_set(vbi_export *e, const char *keyword, va_list args)
 	return TRUE;
 }
 
-static GOTV_INLINE char *
+static NLC_INLINE char *
 _stpcpy(char *dst, const char *src)
 {
 	while ((*dst = *src++))

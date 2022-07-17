@@ -73,7 +73,7 @@ typedef struct tagRECT
 RECT;
 typedef RECT * LPRECT;
 
-GOTV_INLINE RECT RECTFromHIRect(const HIRect *r)
+NLC_INLINE RECT RECTFromHIRect(const HIRect *r)
 {
 	RECT rect;
 	rect.left = r->origin.x;
@@ -83,7 +83,7 @@ GOTV_INLINE RECT RECTFromHIRect(const HIRect *r)
 	return rect;
 }
 
-GOTV_INLINE HIRect HIRectFromRECT(const RECT *r)
+NLC_INLINE HIRect HIRectFromRECT(const RECT *r)
 {
 	HIRect rect;
 	rect.origin.x = r->left;
@@ -101,7 +101,7 @@ typedef struct tagPOINT
 POINT;
 typedef struct tagPOINT * LPPOINT;
 
-GOTV_INLINE HIPoint HIPointFromPOINT(const POINT *pt)
+NLC_INLINE HIPoint HIPointFromPOINT(const POINT *pt)
 {
 	HIPoint p;
 	p.x = pt->x;
@@ -109,7 +109,7 @@ GOTV_INLINE HIPoint HIPointFromPOINT(const POINT *pt)
 	return p;
 }
 
-GOTV_INLINE int MulDiv(int a, int b, int c)
+NLC_INLINE int MulDiv(int a, int b, int c)
 {
 	int s;
 	int v;

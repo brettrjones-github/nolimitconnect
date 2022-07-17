@@ -26,6 +26,6 @@
  * Mime type recognition helpers.
  */
 
-GOTV_API const char * gotvptop_mime_Ext2Mime( const char *psz_url );
+NLC_API const char * gotvptop_mime_Ext2Mime( const char *psz_url );
 
 #endif /* _GOTV_MIME_H */

@@ -50,22 +50,22 @@ int _mbuffer_append_data(mbuffer_st * bufel, void *newdata,
 /* For "user" use. One can have buffer data and header.
  */
 
-GOTV_INLINE static void *_mbuffer_get_uhead_ptr(mbuffer_st * bufel)
+NLC_INLINE static void *_mbuffer_get_uhead_ptr(mbuffer_st * bufel)
 {
 	return bufel->msg.data + bufel->mark;
 }
 
-GOTV_INLINE static void *_mbuffer_get_udata_ptr(mbuffer_st * bufel)
+NLC_INLINE static void *_mbuffer_get_udata_ptr(mbuffer_st * bufel)
 {
 	return bufel->msg.data + bufel->uhead_mark + bufel->mark;
 }
 
-GOTV_INLINE static void _mbuffer_set_udata_size(mbuffer_st * bufel, size_t size)
+NLC_INLINE static void _mbuffer_set_udata_size(mbuffer_st * bufel, size_t size)
 {
 	bufel->msg.size = size + bufel->uhead_mark + bufel->mark;
 }
 
-GOTV_INLINE static void
+NLC_INLINE static void
 _mbuffer_set_udata(mbuffer_st * bufel, void *data, size_t data_size)
 {
 	memcpy(_mbuffer_get_udata_ptr(bufel), data,
@@ -73,13 +73,13 @@ _mbuffer_set_udata(mbuffer_st * bufel, void *data, size_t data_size)
 	_mbuffer_set_udata_size(bufel, data_size);
 }
 
-GOTV_INLINE static size_t _mbuffer_get_udata_size(mbuffer_st * bufel)
+NLC_INLINE static size_t _mbuffer_get_udata_size(mbuffer_st * bufel)
 {
 	return bufel->msg.size - bufel->uhead_mark - bufel->mark;
 }
 
 /* discards size bytes from the begging of the buffer */
-GOTV_INLINE static void
+NLC_INLINE static void
 _mbuffer_consume(mbuffer_head_st * buf, mbuffer_st * bufel, size_t size)
 {
 	bufel->uhead_mark = 0;
@@ -91,19 +91,19 @@ _mbuffer_consume(mbuffer_head_st * buf, mbuffer_st * bufel, size_t size)
 	buf->byte_length -= size;
 }
 
-GOTV_INLINE static size_t _mbuffer_get_uhead_size(mbuffer_st * bufel)
+NLC_INLINE static size_t _mbuffer_get_uhead_size(mbuffer_st * bufel)
 {
 	return bufel->uhead_mark;
 }
 
-GOTV_INLINE static void _mbuffer_set_uhead_size(mbuffer_st * bufel, size_t size)
+NLC_INLINE static void _mbuffer_set_uhead_size(mbuffer_st * bufel, size_t size)
 {
 	bufel->uhead_mark = size;
 }
 
 
 
-GOTV_INLINE static mbuffer_st *_gnutls_handshake_alloc(gnutls_session_t session,
+NLC_INLINE static mbuffer_st *_gnutls_handshake_alloc(gnutls_session_t session,
 						  size_t maximum)
 {
 	mbuffer_st *bufel =
@@ -124,7 +124,7 @@ GOTV_INLINE static mbuffer_st *_gnutls_handshake_alloc(gnutls_session_t session,
  * pointer case). It also makes sure the pointer has a known value
  * after freeing.
  */
-GOTV_INLINE static void _mbuffer_xfree(mbuffer_st ** bufel)
+NLC_INLINE static void _mbuffer_xfree(mbuffer_st ** bufel)
 {
 	if (*bufel)
 		gnutls_free(*bufel);

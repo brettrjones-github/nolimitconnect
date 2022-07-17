@@ -33,7 +33,7 @@
 #include "rsvg-private.h"
 #endif
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #define RSVG_ASPECT_RATIO_NONE (0)
 #define RSVG_ASPECT_RATIO_XMIN_YMIN (1 << 0)
@@ -87,6 +87,6 @@ char        **rsvg_css_parse_xml_attribute_string   (const char *attribute_strin
 
 #endif /* RSVG_COMPILATION */
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif  

@@ -401,7 +401,7 @@ fail:
     return ret;
 }
 
-static GOTV_INLINE int pic_is_unused(Picture *pic)
+static NLC_INLINE int pic_is_unused(Picture *pic)
 {
     if (!pic->f->buf[0])
         return 1;

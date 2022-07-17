@@ -28,6 +28,7 @@
 #include <QMediaDevices>
 
 class AudioIoMgr;
+class P2PEngine;
 
 class AudioInIo : public QIODevice
 {
@@ -37,6 +38,7 @@ public:
     ~AudioInIo() override;
 
     bool                        initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
+    bool                        soundInDeviceChanged( int deviceIndex );
 
     void                        stopAudio();
     void                        startAudio();
@@ -91,10 +93,8 @@ protected:
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
 
-private:
-    void                        reinit();
-
     AudioIoMgr&                 m_AudioIoMgr;
+    P2PEngine&                  m_Engine;
     QMutex&                     m_AudioBufMutex;
 
     bool                        m_initialized{ false };

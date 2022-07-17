@@ -43,7 +43,7 @@ struct mapping { int standard_name; const char vendor_name[10 + 1]; };
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static unsigned int

@@ -243,7 +243,7 @@ struct CUStats
 }; 
 #endif
 
-GOTV_INLINE int getTUBits(int idx, int numIdx)
+NLC_INLINE int getTUBits(int idx, int numIdx)
 {
     return idx + (idx < numIdx - 1);
 }

@@ -84,7 +84,7 @@ static av_always_inline void extract_color(uint32_t colors[4],
     }
 }
 
-static GOTV_INLINE void dxt1_block_internal(uint8_t *dst, ptrdiff_t stride,
+static NLC_INLINE void dxt1_block_internal(uint8_t *dst, ptrdiff_t stride,
                                        const uint8_t *block, uint8_t alpha)
 {
     int x, y;
@@ -138,7 +138,7 @@ static int dxt1a_block(uint8_t *dst, ptrdiff_t stride, const uint8_t *block)
     return 8;
 }
 
-static GOTV_INLINE void dxt3_block_internal(uint8_t *dst, ptrdiff_t stride,
+static NLC_INLINE void dxt3_block_internal(uint8_t *dst, ptrdiff_t stride,
                                        const uint8_t *block)
 {
     int x, y;
@@ -252,7 +252,7 @@ static void decompress_indices(uint8_t *dst, const uint8_t *src)
     }
 }
 
-static GOTV_INLINE void dxt5_block_internal(uint8_t *dst, ptrdiff_t stride,
+static NLC_INLINE void dxt5_block_internal(uint8_t *dst, ptrdiff_t stride,
                                        const uint8_t *block)
 {
     int x, y;
@@ -413,7 +413,7 @@ static int dxt5ys_block(uint8_t *dst, ptrdiff_t stride, const uint8_t *block)
     return 16;
 }
 
-static GOTV_INLINE void rgtc_block_internal(uint8_t *dst, ptrdiff_t stride,
+static NLC_INLINE void rgtc_block_internal(uint8_t *dst, ptrdiff_t stride,
                                        const uint8_t *block,
                                        const int *color_tab, int mono, int offset, int pix_size)
 {
@@ -443,7 +443,7 @@ static GOTV_INLINE void rgtc_block_internal(uint8_t *dst, ptrdiff_t stride,
     }
 }
 
-static GOTV_INLINE void rgtc1_block_internal(uint8_t *dst, ptrdiff_t stride,
+static NLC_INLINE void rgtc1_block_internal(uint8_t *dst, ptrdiff_t stride,
                                         const uint8_t *block, int sign, int mono, int offset, int pix_size)
 {
     int color_table[8];

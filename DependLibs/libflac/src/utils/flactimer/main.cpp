@@ -27,7 +27,7 @@
 #include "share/compat.h"
 #include "share/safe_str.h"
 
-static GOTV_INLINE uint64_t time2nsec(const FILETIME &t)
+static NLC_INLINE uint64_t time2nsec(const FILETIME &t)
 {
 	uint64_t n = t.dwHighDateTime;
 	n <<= 32;

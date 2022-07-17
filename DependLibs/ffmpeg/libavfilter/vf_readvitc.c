@@ -80,7 +80,7 @@ static uint8_t get_vitc_crc( uint8_t *line ) {
     return crc;
 }
 
-static GOTV_INLINE uint8_t get_pit_avg3( uint8_t *line, int i ) {
+static NLC_INLINE uint8_t get_pit_avg3( uint8_t *line, int i ) {
     return ((line[i-1] + line[i] + line[i+1]) / 3);
 }
 

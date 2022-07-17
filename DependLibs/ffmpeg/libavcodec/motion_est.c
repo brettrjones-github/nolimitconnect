@@ -54,7 +54,7 @@ static int sad_hpel_motion_search(MpegEncContext * s,
                                   int src_index, int ref_index,
                                   int size, int h);
 
-static GOTV_INLINE unsigned update_map_generation(MotionEstContext *c)
+static NLC_INLINE unsigned update_map_generation(MotionEstContext *c)
 {
     c->map_generation+= 1<<(ME_MAP_MV_BITS*2);
     if(c->map_generation==0){
@@ -82,7 +82,7 @@ static int minima_cmp(const void *a, const void *b){
 #define FLAG_CHROMA 2
 #define FLAG_DIRECT 4
 
-static GOTV_INLINE void init_ref(MotionEstContext *c, uint8_t *src[3], uint8_t *ref[3], uint8_t *ref2[3], int x, int y, int ref_index){
+static NLC_INLINE void init_ref(MotionEstContext *c, uint8_t *src[3], uint8_t *ref[3], uint8_t *ref2[3], int x, int y, int ref_index){
     const int offset[3]= {
           y*c->  stride + x,
         ((y*c->uvstride + x)>>1),
@@ -497,7 +497,7 @@ static int sad_hpel_motion_search(MpegEncContext * s,
     return dminh;
 }
 
-static GOTV_INLINE void set_p_mv_tables(MpegEncContext * s, int mx, int my, int mv4)
+static NLC_INLINE void set_p_mv_tables(MpegEncContext * s, int mx, int my, int mv4)
 {
     const int xy= s->mb_x + s->mb_y*s->mb_stride;
 
@@ -524,7 +524,7 @@ static GOTV_INLINE void set_p_mv_tables(MpegEncContext * s, int mx, int my, int 
 /**
  * get fullpel ME search limits.
  */
-static GOTV_INLINE void get_limits(MpegEncContext *s, int x, int y)
+static NLC_INLINE void get_limits(MpegEncContext *s, int x, int y)
 {
     MotionEstContext * const c= &s->me;
     int range= c->avctx->me_range >> (1 + !!(c->flags&FLAG_QPEL));
@@ -560,7 +560,7 @@ static GOTV_INLINE void get_limits(MpegEncContext *s, int x, int y)
     }
 }
 
-static GOTV_INLINE void init_mv4_ref(MotionEstContext *c){
+static NLC_INLINE void init_mv4_ref(MotionEstContext *c){
     const int stride= c->stride;
 
     c->ref[1][0] = c->ref[0][0] + 8;
@@ -571,7 +571,7 @@ static GOTV_INLINE void init_mv4_ref(MotionEstContext *c){
     c->src[3][0] = c->src[2][0] + 8;
 }
 
-static GOTV_INLINE int h263_mv4_search(MpegEncContext *s, int mx, int my, int shift)
+static NLC_INLINE int h263_mv4_search(MpegEncContext *s, int mx, int my, int shift)
 {
     MotionEstContext * const c= &s->me;
     const int size= 1;
@@ -725,7 +725,7 @@ static GOTV_INLINE int h263_mv4_search(MpegEncContext *s, int mx, int my, int sh
     }
 }
 
-static GOTV_INLINE void init_interlaced_ref(MpegEncContext *s, int ref_index){
+static NLC_INLINE void init_interlaced_ref(MpegEncContext *s, int ref_index){
     MotionEstContext * const c= &s->me;
 
     c->ref[1+ref_index][0] = c->ref[0+ref_index][0] + s->linesize;
@@ -860,7 +860,7 @@ static int interlaced_search(MpegEncContext *s, int ref_index,
     }
 }
 
-static GOTV_INLINE int get_penalty_factor(int lambda, int lambda2, int type){
+static NLC_INLINE int get_penalty_factor(int lambda, int lambda2, int type){
     switch(type&0xFF){
     default:
     case FF_CMP_SAD:
@@ -1176,7 +1176,7 @@ static int estimate_motion_b(MpegEncContext *s, int mb_x, int mb_y,
     return dmin;
 }
 
-static GOTV_INLINE int check_bidir_mv(MpegEncContext * s,
+static NLC_INLINE int check_bidir_mv(MpegEncContext * s,
                    int motion_fx, int motion_fy,
                    int motion_bx, int motion_by,
                    int pred_fx, int pred_fy,
@@ -1241,7 +1241,7 @@ static GOTV_INLINE int check_bidir_mv(MpegEncContext * s,
 }
 
 /* refine the bidir vectors in hq mode and return the score in both lq & hq mode*/
-static GOTV_INLINE int bidir_refine(MpegEncContext * s, int mb_x, int mb_y)
+static NLC_INLINE int bidir_refine(MpegEncContext * s, int mb_x, int mb_y)
 {
     MotionEstContext * const c= &s->me;
     const int mot_stride = s->mb_stride;
@@ -1388,7 +1388,7 @@ CHECK_BIDIR(-(a),-(b),-(c),-(d))
     return fbmin;
 }
 
-static GOTV_INLINE int direct_search(MpegEncContext * s, int mb_x, int mb_y)
+static NLC_INLINE int direct_search(MpegEncContext * s, int mb_x, int mb_y)
 {
     MotionEstContext * const c= &s->me;
     int P[10][2];

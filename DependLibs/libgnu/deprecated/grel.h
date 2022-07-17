@@ -33,7 +33,7 @@
 
 #include <libgnu/gtypes.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GRelation       GRelation;
 typedef struct _GTuples         GTuples;
@@ -102,6 +102,6 @@ gpointer   g_tuples_index     (GTuples     *tuples,
                                gint         index_,
                                gint         field);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_REL_H__ */

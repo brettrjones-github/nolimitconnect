@@ -648,7 +648,7 @@ static int sid_gain_to_lsp_index(int gain)
         return gain - 20 << 8;
 }
 
-static GOTV_INLINE int cng_rand(int *state, int base)
+static NLC_INLINE int cng_rand(int *state, int base)
 {
     *state = (*state * 521 + 259) & 0xFFFF;
     return (*state & 0x7FFF) * base >> 15;

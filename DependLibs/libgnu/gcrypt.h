@@ -57,7 +57,7 @@ typedef socklen_t gcry_socklen_t;
 /* This is required for error code compatibility. */
 #define _GCRY_ERR_SOURCE_DEFAULT GPG_ERR_SOURCE_GCRYPT
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 /* The version of this header should match the one of the library. It
@@ -1672,7 +1672,7 @@ int gcry_is_secure (const void *a) _GCRY_GCC_ATTR_PURE;
 
 // #endif // TARGET_OS_WINDOWS
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 

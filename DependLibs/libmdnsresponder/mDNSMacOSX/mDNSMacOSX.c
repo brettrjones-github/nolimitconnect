@@ -4367,7 +4367,7 @@ mDNSlocal mStatus UpdateRRStatus(const mDNS *const m, char *buffer, int bufsz, c
     {
         // This function is called from UpdateAutoTunnelDomainStatus which in turn may be called from
         // a callback e.g., CheckNATMappings. GetAuthInfoFor_internal does not like that (reentrancy being 1),
-        // hence we GOTV_INLINE the code here. We just need the lock to walk the list of AuthInfos which the caller
+        // hence we NLC_INLINE the code here. We just need the lock to walk the list of AuthInfos which the caller
         // has already checked
         const domainname *n = r->resrec.name;
         while (n->c[0])

@@ -290,58 +290,58 @@ private:
 /*----------------------------------------------------------------------
 |   external operators
 +---------------------------------------------------------------------*/
-GOTV_INLINE bool operator==(const NPT_String& s1, const NPT_String& s2) { 
+NLC_INLINE bool operator==(const NPT_String& s1, const NPT_String& s2) { 
     return s1.Compare(s2) == 0; 
 }
-GOTV_INLINE bool operator==(const NPT_String& s1, const char* s2) {
+NLC_INLINE bool operator==(const NPT_String& s1, const char* s2) {
     return s1.Compare(s2) == 0; 
 }
-GOTV_INLINE bool operator==(const char* s1, const NPT_String& s2) {
+NLC_INLINE bool operator==(const char* s1, const NPT_String& s2) {
     return s2.Compare(s1) == 0; 
 }
-GOTV_INLINE bool operator!=(const NPT_String& s1, const NPT_String& s2) {
+NLC_INLINE bool operator!=(const NPT_String& s1, const NPT_String& s2) {
     return s1.Compare(s2) != 0; 
 }
-GOTV_INLINE bool operator!=(const NPT_String& s1, const char* s2) {
+NLC_INLINE bool operator!=(const NPT_String& s1, const char* s2) {
     return s1.Compare(s2) != 0; 
 }
-GOTV_INLINE bool operator!=(const char* s1, const NPT_String& s2) {
+NLC_INLINE bool operator!=(const char* s1, const NPT_String& s2) {
     return s2.Compare(s1) != 0; 
 }
-GOTV_INLINE bool operator<(const NPT_String& s1, const NPT_String& s2) {
+NLC_INLINE bool operator<(const NPT_String& s1, const NPT_String& s2) {
     return s1.Compare(s2) < 0; 
 }
-GOTV_INLINE bool operator<(const NPT_String& s1, const char* s2) {
+NLC_INLINE bool operator<(const NPT_String& s1, const char* s2) {
     return s1.Compare(s2) < 0; 
 }
-GOTV_INLINE bool operator<(const char* s1, const NPT_String& s2) {
+NLC_INLINE bool operator<(const char* s1, const NPT_String& s2) {
     return s2.Compare(s1) > 0; 
 }
-GOTV_INLINE bool operator>(const NPT_String& s1, const NPT_String& s2) {
+NLC_INLINE bool operator>(const NPT_String& s1, const NPT_String& s2) {
     return s1.Compare(s2) > 0; 
 }
-GOTV_INLINE bool operator>(const NPT_String& s1, const char* s2) {
+NLC_INLINE bool operator>(const NPT_String& s1, const char* s2) {
     return s1.Compare(s2) > 0; 
 }
-GOTV_INLINE bool operator>(const char* s1, const NPT_String& s2) {
+NLC_INLINE bool operator>(const char* s1, const NPT_String& s2) {
     return s2.Compare(s1) < 0; 
 }
-GOTV_INLINE bool operator<=(const NPT_String& s1, const NPT_String& s2) {
+NLC_INLINE bool operator<=(const NPT_String& s1, const NPT_String& s2) {
     return s1.Compare(s2) <= 0; 
 }
-GOTV_INLINE bool operator<=(const NPT_String& s1, const char* s2) {
+NLC_INLINE bool operator<=(const NPT_String& s1, const char* s2) {
     return s1.Compare(s2) <= 0; 
 }
-GOTV_INLINE bool operator<=(const char* s1, const NPT_String& s2) {
+NLC_INLINE bool operator<=(const char* s1, const NPT_String& s2) {
     return s2.Compare(s1) >= 0; 
 }
-GOTV_INLINE bool operator>=(const NPT_String& s1, const NPT_String& s2) {
+NLC_INLINE bool operator>=(const NPT_String& s1, const NPT_String& s2) {
     return s1.Compare(s2) >= 0; 
 }
-GOTV_INLINE bool operator>=(const NPT_String& s1, const char* s2) {
+NLC_INLINE bool operator>=(const NPT_String& s1, const char* s2) {
     return s1.Compare(s2) >= 0; 
 }
-GOTV_INLINE bool operator>=(const char* s1, const NPT_String& s2) {
+NLC_INLINE bool operator>=(const char* s1, const NPT_String& s2) {
     return s2.Compare(s1) <= 0; 
 }
 

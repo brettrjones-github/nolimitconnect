@@ -453,7 +453,7 @@ static const struct dec_2dvlc chroma_dec[5] = {
  *
  ****************************************************************************/
 
-static GOTV_INLINE void store_mvs(AVSContext *h)
+static NLC_INLINE void store_mvs(AVSContext *h)
 {
     h->col_mv[h->mbidx * 4 + 0] = h->mv[MV_FWD_X0];
     h->col_mv[h->mbidx * 4 + 1] = h->mv[MV_FWD_X1];
@@ -461,7 +461,7 @@ static GOTV_INLINE void store_mvs(AVSContext *h)
     h->col_mv[h->mbidx * 4 + 3] = h->mv[MV_FWD_X3];
 }
 
-static GOTV_INLINE void mv_pred_direct(AVSContext *h, cavs_vector *pmv_fw,
+static NLC_INLINE void mv_pred_direct(AVSContext *h, cavs_vector *pmv_fw,
                                   cavs_vector *col_mv)
 {
     cavs_vector *pmv_bw = pmv_fw + MV_BWD_OFFS;
@@ -480,7 +480,7 @@ static GOTV_INLINE void mv_pred_direct(AVSContext *h, cavs_vector *pmv_fw,
     pmv_bw->y = m - (((den + (den * col_mv->y * pmv_bw->dist ^ m) - m - 1) >> 14) ^ m);
 }
 
-static GOTV_INLINE void mv_pred_sym(AVSContext *h, cavs_vector *src,
+static NLC_INLINE void mv_pred_sym(AVSContext *h, cavs_vector *src,
                                enum cavs_block size)
 {
     cavs_vector *dst = src + MV_BWD_OFFS;
@@ -500,7 +500,7 @@ static GOTV_INLINE void mv_pred_sym(AVSContext *h, cavs_vector *src,
  ****************************************************************************/
 
 /** kth-order exponential golomb code */
-static GOTV_INLINE int get_ue_code(GetBitContext *gb, int order)
+static NLC_INLINE int get_ue_code(GetBitContext *gb, int order)
 {
     unsigned ret = get_ue_golomb(gb);
     if (ret >= ((1U<<31)>>order)) {
@@ -513,7 +513,7 @@ static GOTV_INLINE int get_ue_code(GetBitContext *gb, int order)
     return ret;
 }
 
-static GOTV_INLINE int dequant(AVSContext *h, int16_t *level_buf, uint8_t *run_buf,
+static NLC_INLINE int dequant(AVSContext *h, int16_t *level_buf, uint8_t *run_buf,
                           int16_t *dst, int mul, int shift, int coeff_num)
 {
     int round = 1 << (shift - 1);
@@ -591,7 +591,7 @@ static int decode_residual_block(AVSContext *h, GetBitContext *gb,
 }
 
 
-static GOTV_INLINE void decode_residual_chroma(AVSContext *h)
+static NLC_INLINE void decode_residual_chroma(AVSContext *h)
 {
     if (h->cbp & (1 << 4))
         decode_residual_block(h, &h->gb, chroma_dec, 0,
@@ -601,7 +601,7 @@ static GOTV_INLINE void decode_residual_chroma(AVSContext *h)
                               ff_cavs_chroma_qp[h->qp], h->cv, h->c_stride);
 }
 
-static GOTV_INLINE int decode_residual_inter(AVSContext *h)
+static NLC_INLINE int decode_residual_inter(AVSContext *h)
 {
     int block;
 
@@ -631,7 +631,7 @@ static GOTV_INLINE int decode_residual_inter(AVSContext *h)
  *
  ****************************************************************************/
 
-static GOTV_INLINE void set_mv_intra(AVSContext *h)
+static NLC_INLINE void set_mv_intra(AVSContext *h)
 {
     h->mv[MV_FWD_X0] = ff_cavs_intra_mv;
     set_mvs(&h->mv[MV_FWD_X0], BLK_16X16);
@@ -709,7 +709,7 @@ static int decode_mb_i(AVSContext *h, int cbp_code)
     return 0;
 }
 
-static GOTV_INLINE void set_intra_mode_default(AVSContext *h)
+static NLC_INLINE void set_intra_mode_default(AVSContext *h)
 {
     if (h->stream_revision > 0) {
         h->pred_mode_Y[3] =  h->pred_mode_Y[6] = NOT_AVAIL;
@@ -908,7 +908,7 @@ static int decode_mb_b(AVSContext *h, enum cavs_mb mb_type)
  *
  ****************************************************************************/
 
-static GOTV_INLINE int decode_slice_header(AVSContext *h, GetBitContext *gb)
+static NLC_INLINE int decode_slice_header(AVSContext *h, GetBitContext *gb)
 {
     if (h->stc > 0xAF)
         av_log(h->avctx, AV_LOG_ERROR, "unexpected start code 0x%02x\n", h->stc);
@@ -937,7 +937,7 @@ static GOTV_INLINE int decode_slice_header(AVSContext *h, GetBitContext *gb)
     return 0;
 }
 
-static GOTV_INLINE int check_for_slice(AVSContext *h)
+static NLC_INLINE int check_for_slice(AVSContext *h)
 {
     GetBitContext *gb = &h->gb;
     int align;

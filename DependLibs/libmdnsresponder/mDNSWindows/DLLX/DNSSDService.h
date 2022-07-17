@@ -129,7 +129,7 @@ public:
 
 
 
-	GOTV_INLINE DNSServiceRef
+	NLC_INLINE DNSServiceRef
 
 	GetPrimaryRef()
 
@@ -141,7 +141,7 @@ public:
 
 
 
-	GOTV_INLINE void
+	NLC_INLINE void
 
 	SetPrimaryRef( DNSServiceRef primary )
 
@@ -153,7 +153,7 @@ public:
 
 
 
-	GOTV_INLINE DNSServiceRef
+	NLC_INLINE DNSServiceRef
 
 	GetSubordRef()
 
@@ -165,7 +165,7 @@ public:
 
 
 
-	GOTV_INLINE void
+	NLC_INLINE void
 
 	SetSubordRef( DNSServiceRef subord )
 
@@ -177,7 +177,7 @@ public:
 
 
 
-	GOTV_INLINE CDNSSDEventManager*
+	NLC_INLINE CDNSSDEventManager*
 
 	GetEventManager()
 
@@ -189,7 +189,7 @@ public:
 
 
 
-	GOTV_INLINE void
+	NLC_INLINE void
 
 	SetEventManager( IDNSSDEventManager * eventManager )
 
@@ -223,7 +223,7 @@ public:
 
 
 
-	GOTV_INLINE BOOL
+	NLC_INLINE BOOL
 
 	Stopped()
 
@@ -363,7 +363,7 @@ private:
 
 
 
-	GOTV_INLINE BOOL
+	NLC_INLINE BOOL
 
 	ShouldHandleReply( DNSServiceErrorType errorCode, CDNSSDEventManager *& eventManager );
 

@@ -623,7 +623,7 @@ fail:
     return ret;
 }
 
-static GOTV_INLINE void wdec14(uint16_t l, uint16_t h, uint16_t *a, uint16_t *b)
+static NLC_INLINE void wdec14(uint16_t l, uint16_t h, uint16_t *a, uint16_t *b)
 {
     int16_t ls = l;
     int16_t hs = h;
@@ -640,7 +640,7 @@ static GOTV_INLINE void wdec14(uint16_t l, uint16_t h, uint16_t *a, uint16_t *b)
 #define A_OFFSET  (1 << (NBITS - 1))
 #define MOD_MASK  ((1 << NBITS) - 1)
 
-static GOTV_INLINE void wdec16(uint16_t l, uint16_t h, uint16_t *a, uint16_t *b)
+static NLC_INLINE void wdec16(uint16_t l, uint16_t h, uint16_t *a, uint16_t *b)
 {
     int m  = l;
     int d  = h;

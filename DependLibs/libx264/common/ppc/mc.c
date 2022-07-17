@@ -32,7 +32,7 @@
 typedef void (*pf_mc_t)( uint8_t *src, intptr_t i_src,
                          uint8_t *dst, intptr_t i_dst, int i_height );
 
-static GOTV_INLINE void x264_pixel_avg2_w4_altivec( uint8_t *dst,  intptr_t i_dst,
+static NLC_INLINE void x264_pixel_avg2_w4_altivec( uint8_t *dst,  intptr_t i_dst,
                                                uint8_t *src1, intptr_t i_src1,
                                                uint8_t *src2, int i_height )
 {
@@ -46,7 +46,7 @@ static GOTV_INLINE void x264_pixel_avg2_w4_altivec( uint8_t *dst,  intptr_t i_ds
     }
 }
 
-static GOTV_INLINE void x264_pixel_avg2_w8_altivec( uint8_t *dst,  intptr_t i_dst,
+static NLC_INLINE void x264_pixel_avg2_w8_altivec( uint8_t *dst,  intptr_t i_dst,
                                                uint8_t *src1, intptr_t i_src1,
                                                uint8_t *src2, int i_height )
 {
@@ -67,7 +67,7 @@ static GOTV_INLINE void x264_pixel_avg2_w8_altivec( uint8_t *dst,  intptr_t i_ds
     }
 }
 
-static GOTV_INLINE void x264_pixel_avg2_w16_altivec( uint8_t *dst,  intptr_t i_dst,
+static NLC_INLINE void x264_pixel_avg2_w16_altivec( uint8_t *dst,  intptr_t i_dst,
                                                 uint8_t *src1, intptr_t i_src1,
                                                 uint8_t *src2, int i_height )
 {
@@ -86,7 +86,7 @@ static GOTV_INLINE void x264_pixel_avg2_w16_altivec( uint8_t *dst,  intptr_t i_d
     }
 }
 
-static GOTV_INLINE void x264_pixel_avg2_w20_altivec( uint8_t *dst,  intptr_t i_dst,
+static NLC_INLINE void x264_pixel_avg2_w20_altivec( uint8_t *dst,  intptr_t i_dst,
                                                 uint8_t *src1, intptr_t i_src1,
                                                 uint8_t *src2, int i_height )
 {

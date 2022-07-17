@@ -40,7 +40,7 @@
 #endif 
 
 /** Convert little endian */
-static GOTV_INLINE opus_int32 le_int(opus_int32 i)
+static NLC_INLINE opus_int32 le_int(opus_int32 i)
 {
 #if !defined(__LITTLE_ENDIAN__) && ( defined(GOTV_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
    opus_uint32 ui, ret;

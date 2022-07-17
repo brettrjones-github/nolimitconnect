@@ -170,8 +170,6 @@
     <ClInclude Include="..\..\..\..\byteswap.h" />
     <ClInclude Include="..\..\..\..\dirent.h" />
     <ClInclude Include="..\..\..\..\dlfcn.h" />
-    <ClInclude Include="..\..\..\..\GoTvConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
     <ClInclude Include="..\..\..\..\langinfo.h" />
     <ClInclude Include="..\..\..\..\netdb.h" />
     <ClInclude Include="..\..\..\..\pwd.h" />

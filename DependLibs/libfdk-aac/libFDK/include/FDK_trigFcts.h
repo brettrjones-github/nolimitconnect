@@ -141,7 +141,7 @@ FIXP_DBL fixp_sin(FIXP_DBL x, int scale);
  * Calculates coarse lookup index and sign for sine.
  * Returns delta x residual.
  */
-static GOTV_INLINE FIXP_DBL fixp_sin_cos_residual_inline(FIXP_DBL x, int scale, FIXP_DBL *sine, FIXP_DBL *cosine)
+static NLC_INLINE FIXP_DBL fixp_sin_cos_residual_inline(FIXP_DBL x, int scale, FIXP_DBL *sine, FIXP_DBL *cosine)
 {
     FIXP_DBL residual;
     int s;
@@ -210,7 +210,7 @@ static GOTV_INLINE FIXP_DBL fixp_sin_cos_residual_inline(FIXP_DBL x, int scale, 
  * \param out pointer to 4 FIXP_DBL locations, were the values cos(x1), sin(x1), cos(x2), sin(x2)
  *            will be stored into.
  */
-static GOTV_INLINE void inline_fixp_cos_sin (FIXP_DBL x1, FIXP_DBL x2, const int scale, FIXP_DBL *out)
+static NLC_INLINE void inline_fixp_cos_sin (FIXP_DBL x1, FIXP_DBL x2, const int scale, FIXP_DBL *out)
 {
     FIXP_DBL residual, error0, error1, sine, cosine;
     residual = fixp_sin_cos_residual_inline(x1, scale, &sine, &cosine);

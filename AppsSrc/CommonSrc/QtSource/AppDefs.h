@@ -85,6 +85,7 @@ enum EApplet
     eAppletTheme,
     eAppletNetworkSettings,
     eAppletPermissionList,          // list of all users plugin permission levels
+    eAppletSoundSettings,
     eAppletCamTest,
 
     eAppletTestAndDebug,

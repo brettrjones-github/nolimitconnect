@@ -34,7 +34,7 @@
 
 #include "rsvg-structure.h"
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 RsvgNode *rsvg_new_path (const char *element_name);
@@ -51,6 +51,6 @@ RsvgNode *rsvg_new_circle (const char *element_name);
 G_GNUC_INTERNAL
 RsvgNode *rsvg_new_ellipse (const char *element_name);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif                          /* RSVG_SHAPES_H */

@@ -45,7 +45,7 @@
 
 
 /* Optimized function for small buffer copying */
-static GOTV_INLINE void
+static NLC_INLINE void
 buf_cpy(void *_dst, const void *_src, size_t len)
 {
 #if __GNUC__ >= 4 && (defined(__x86_64__) || defined(__i386__))
@@ -84,7 +84,7 @@ do_bytes:
 
 
 /* Optimized function for buffer xoring */
-static GOTV_INLINE void
+static NLC_INLINE void
 buf_xor(void *_dst, const void *_src1, const void *_src2, size_t len)
 {
   byte *dst = _dst;
@@ -122,7 +122,7 @@ do_bytes:
 
 /* Optimized function for buffer xoring with two destination buffers.  Used
    mainly by CFB mode encryption.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 buf_xor_2dst(void *_dst1, void *_dst2, const void *_src, size_t len)
 {
   byte *dst1 = _dst1;
@@ -160,7 +160,7 @@ do_bytes:
 
 /* Optimized function for combined buffer xoring and copying.  Used by mainly
    CBC mode decryption.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 buf_xor_n_copy_2(void *_dst_xor, const void *_src_xor, void *_srcdst_cpy,
 		 const void *_src_cpy, size_t len)
 {
@@ -213,7 +213,7 @@ do_bytes:
 
 /* Optimized function for combined buffer xoring and copying.  Used by mainly
    CFB mode decryption.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 buf_xor_n_copy(void *_dst_xor, void *_srcdst_cpy, const void *_src, size_t len)
 {
   buf_xor_n_copy_2(_dst_xor, _src, _srcdst_cpy, _src, len);
@@ -222,7 +222,7 @@ buf_xor_n_copy(void *_dst_xor, void *_srcdst_cpy, const void *_src, size_t len)
 
 /* Constant-time compare of two buffers.  Returns 1 if buffers are equal,
    and 0 if buffers differ.  */
-static GOTV_INLINE int
+static NLC_INLINE int
 buf_eq_const(const void *_a, const void *_b, size_t len)
 {
   const byte *a = _a;
@@ -241,21 +241,21 @@ buf_eq_const(const void *_a, const void *_b, size_t len)
 
 /* Functions for loading and storing unaligned uint32_t values of different
    endianness.  */
-static GOTV_INLINE uint32_t buf_get_be32(const void *_buf)
+static NLC_INLINE uint32_t buf_get_be32(const void *_buf)
 {
   const byte *in = _buf;
   return ((uint32_t)in[0] << 24) | ((uint32_t)in[1] << 16) | \
          ((uint32_t)in[2] << 8) | (uint32_t)in[3];
 }
 
-static GOTV_INLINE uint32_t buf_get_le32(const void *_buf)
+static NLC_INLINE uint32_t buf_get_le32(const void *_buf)
 {
   const byte *in = _buf;
   return ((uint32_t)in[3] << 24) | ((uint32_t)in[2] << 16) | \
          ((uint32_t)in[1] << 8) | (uint32_t)in[0];
 }
 
-static GOTV_INLINE void buf_put_be32(void *_buf, uint32_t val)
+static NLC_INLINE void buf_put_be32(void *_buf, uint32_t val)
 {
   byte *out = _buf;
   out[0] = val >> 24;
@@ -264,7 +264,7 @@ static GOTV_INLINE void buf_put_be32(void *_buf, uint32_t val)
   out[3] = val;
 }
 
-static GOTV_INLINE void buf_put_le32(void *_buf, uint32_t val)
+static NLC_INLINE void buf_put_le32(void *_buf, uint32_t val)
 {
   byte *out = _buf;
   out[3] = val >> 24;
@@ -276,7 +276,7 @@ static GOTV_INLINE void buf_put_le32(void *_buf, uint32_t val)
 #ifdef HAVE_U64_TYPEDEF
 /* Functions for loading and storing unaligned uint64_t values of different
    endianness.  */
-static GOTV_INLINE uint64_t buf_get_be64(const void *_buf)
+static NLC_INLINE uint64_t buf_get_be64(const void *_buf)
 {
   const byte *in = _buf;
   return ((uint64_t)in[0] << 56) | ((uint64_t)in[1] << 48) | \
@@ -285,7 +285,7 @@ static GOTV_INLINE uint64_t buf_get_be64(const void *_buf)
          ((uint64_t)in[6] << 8) | (uint64_t)in[7];
 }
 
-static GOTV_INLINE uint64_t buf_get_le64(const void *_buf)
+static NLC_INLINE uint64_t buf_get_le64(const void *_buf)
 {
   const byte *in = _buf;
   return ((uint64_t)in[7] << 56) | ((uint64_t)in[6] << 48) | \
@@ -294,7 +294,7 @@ static GOTV_INLINE uint64_t buf_get_le64(const void *_buf)
          ((uint64_t)in[1] << 8) | (uint64_t)in[0];
 }
 
-static GOTV_INLINE void buf_put_be64(void *_buf, uint64_t val)
+static NLC_INLINE void buf_put_be64(void *_buf, uint64_t val)
 {
   byte *out = _buf;
   out[0] = val >> 56;
@@ -307,7 +307,7 @@ static GOTV_INLINE void buf_put_be64(void *_buf, uint64_t val)
   out[7] = val;
 }
 
-static GOTV_INLINE void buf_put_le64(void *_buf, uint64_t val)
+static NLC_INLINE void buf_put_le64(void *_buf, uint64_t val)
 {
   byte *out = _buf;
   out[7] = val >> 56;
@@ -325,23 +325,23 @@ static GOTV_INLINE void buf_put_le64(void *_buf, uint64_t val)
 
 /* Functions for loading and storing unaligned uint32_t values of different
    endianness.  */
-static GOTV_INLINE uint32_t buf_get_be32(const void *_buf)
+static NLC_INLINE uint32_t buf_get_be32(const void *_buf)
 {
   return be_bswap32(*(const uint32_t *)_buf);
 }
 
-static GOTV_INLINE uint32_t buf_get_le32(const void *_buf)
+static NLC_INLINE uint32_t buf_get_le32(const void *_buf)
 {
   return le_bswap32(*(const uint32_t *)_buf);
 }
 
-static GOTV_INLINE void buf_put_be32(void *_buf, uint32_t val)
+static NLC_INLINE void buf_put_be32(void *_buf, uint32_t val)
 {
   uint32_t *out = _buf;
   *out = be_bswap32(val);
 }
 
-static GOTV_INLINE void buf_put_le32(void *_buf, uint32_t val)
+static NLC_INLINE void buf_put_le32(void *_buf, uint32_t val)
 {
   uint32_t *out = _buf;
   *out = le_bswap32(val);
@@ -350,23 +350,23 @@ static GOTV_INLINE void buf_put_le32(void *_buf, uint32_t val)
 #ifdef HAVE_U64_TYPEDEF
 /* Functions for loading and storing unaligned uint64_t values of different
    endianness.  */
-static GOTV_INLINE uint64_t buf_get_be64(const void *_buf)
+static NLC_INLINE uint64_t buf_get_be64(const void *_buf)
 {
   return be_bswap64(*(const uint64_t *)_buf);
 }
 
-static GOTV_INLINE uint64_t buf_get_le64(const void *_buf)
+static NLC_INLINE uint64_t buf_get_le64(const void *_buf)
 {
   return le_bswap64(*(const uint64_t *)_buf);
 }
 
-static GOTV_INLINE void buf_put_be64(void *_buf, uint64_t val)
+static NLC_INLINE void buf_put_be64(void *_buf, uint64_t val)
 {
   uint64_t *out = _buf;
   *out = be_bswap64(val);
 }
 
-static GOTV_INLINE void buf_put_le64(void *_buf, uint64_t val)
+static NLC_INLINE void buf_put_le64(void *_buf, uint64_t val)
 {
   uint64_t *out = _buf;
   *out = le_bswap64(val);

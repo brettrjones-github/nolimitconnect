@@ -102,7 +102,7 @@ amm-info@iis.fraunhofer.de
  *  bitrate. Since it is a rather small function, effective assembler optimization might be possible.
  *
  */
-GOTV_INLINE int32_t getScalefactor(const FIXP_DBL *vector, /*!< Pointer to input vector */
+NLC_INLINE int32_t getScalefactor(const FIXP_DBL *vector, /*!< Pointer to input vector */
                           int32_t len)                /*!< Length of input vector */
 {
   int32_t i;

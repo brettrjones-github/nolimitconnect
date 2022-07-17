@@ -76,12 +76,12 @@ struct file_ostream_representation_header
 
 #if HAVE_INLINE
 
-/* Define the functions that invoke the methods as GOTV_INLINE accesses to
+/* Define the functions that invoke the methods as NLC_INLINE accesses to
    the file_ostream_implementation.
    Use #define to avoid a warning because of extern vs. static.  */
 
 # define file_ostream_write_mem file_ostream_write_mem_inline
-static GOTV_INLINE void
+static NLC_INLINE void
 file_ostream_write_mem (file_ostream_t first_arg, const void *data, size_t len)
 {
   const struct file_ostream_implementation *vtable =
@@ -90,7 +90,7 @@ file_ostream_write_mem (file_ostream_t first_arg, const void *data, size_t len)
 }
 
 # define file_ostream_flush file_ostream_flush_inline
-static GOTV_INLINE void
+static NLC_INLINE void
 file_ostream_flush (file_ostream_t first_arg)
 {
   const struct file_ostream_implementation *vtable =
@@ -99,7 +99,7 @@ file_ostream_flush (file_ostream_t first_arg)
 }
 
 # define file_ostream_free file_ostream_free_inline
-static GOTV_INLINE void
+static NLC_INLINE void
 file_ostream_free (file_ostream_t first_arg)
 {
   const struct file_ostream_implementation *vtable =

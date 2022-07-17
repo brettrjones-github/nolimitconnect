@@ -73,7 +73,7 @@ const int16_t ff_g722_low_inv_quant6[64] = {
      211,   170,   130,    91,    54,    17,   -54,   -17
 };
 
-static GOTV_INLINE void s_zero(int cur_diff, struct G722Band *band)
+static NLC_INLINE void s_zero(int cur_diff, struct G722Band *band)
 {
     int s_zero = 0;
 

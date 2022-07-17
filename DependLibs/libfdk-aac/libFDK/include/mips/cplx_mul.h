@@ -100,7 +100,7 @@ amm-info@iis.fraunhofer.de
 #define FUNCTION_cplxMult_32x32X2
 
 #if defined(FUNCTION_cplxMultDiv2_32x32X2)
-GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
+NLC_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
                           FIXP_DBL *c_Im,
                           FIXP_DBL  a_Re,
                           FIXP_DBL  a_Im,
@@ -113,7 +113,7 @@ GOTV_INLINE void cplxMultDiv2( FIXP_DBL *c_Re,
 #endif
 
 #if defined(FUNCTION_cplxMult_32x32X2)
-GOTV_INLINE void cplxMult( FIXP_DBL *c_Re,
+NLC_INLINE void cplxMult( FIXP_DBL *c_Re,
                       FIXP_DBL *c_Im,
                       FIXP_DBL  a_Re,
                       FIXP_DBL  a_Im,

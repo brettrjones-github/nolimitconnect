@@ -279,7 +279,7 @@ int ff_insert_pad(unsigned idx, unsigned *count, size_t padidx_off,
                    AVFilterPad *newpad);
 
 /** Insert a new input pad for the filter. */
-static GOTV_INLINE int ff_insert_inpad(AVFilterContext *f, unsigned index,
+static NLC_INLINE int ff_insert_inpad(AVFilterContext *f, unsigned index,
                                    AVFilterPad *p)
 {
     return ff_insert_pad(index, &f->nb_inputs, offsetof(AVFilterLink, dstpad),
@@ -287,7 +287,7 @@ static GOTV_INLINE int ff_insert_inpad(AVFilterContext *f, unsigned index,
 }
 
 /** Insert a new output pad for the filter. */
-static GOTV_INLINE int ff_insert_outpad(AVFilterContext *f, unsigned index,
+static NLC_INLINE int ff_insert_outpad(AVFilterContext *f, unsigned index,
                                     AVFilterPad *p)
 {
     return ff_insert_pad(index, &f->nb_outputs, offsetof(AVFilterLink, srcpad),
@@ -398,7 +398,7 @@ int ff_filter_graph_run_once(AVFilterGraph *graph);
  * FIXME the H264 qscale is a log based scale, mpeg1/2 is not, the code below
  *       cannot be optimal
  */
-static GOTV_INLINE int ff_norm_qscale(int qscale, int type)
+static NLC_INLINE int ff_norm_qscale(int qscale, int type)
 {
     switch (type) {
     case FF_QSCALE_TYPE_MPEG1: return qscale;

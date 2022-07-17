@@ -97,7 +97,7 @@ amm-info@iis.fraunhofer.de
 #define USE_LDRD_STRD   /* LDRD requires 8 byte data alignment. */
 #endif
 
-GOTV_INLINE void scramble(FIXP_DBL x [], int32_t n) {
+NLC_INLINE void scramble(FIXP_DBL x [], int32_t n) {
   FDK_ASSERT(!(((int32_t)x)&(ALIGNMENT_DEFAULT-1)));
   asm("mov     r2, #1;\n"               /* r2(m) = 1;           */
       "sub     r3, %1, #1;\n"           /* r3 = n-1;            */

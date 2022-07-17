@@ -65,11 +65,11 @@ enum
 typedef struct httpd_host_t   httpd_host_t;
 typedef struct httpd_client_t httpd_client_t;
 /* create a new host */
-GOTV_API httpd_host_t *gotvptop_http_HostNew( gotvptop_object_t * ) GOTV_USED;
-GOTV_API httpd_host_t *gotvptop_https_HostNew( gotvptop_object_t * ) GOTV_USED;
-GOTV_API httpd_host_t *gotvptop_rtsp_HostNew( gotvptop_object_t * ) GOTV_USED;
+NLC_API httpd_host_t *gotvptop_http_HostNew( gotvptop_object_t * ) GOTV_USED;
+NLC_API httpd_host_t *gotvptop_https_HostNew( gotvptop_object_t * ) GOTV_USED;
+NLC_API httpd_host_t *gotvptop_rtsp_HostNew( gotvptop_object_t * ) GOTV_USED;
 /* delete a host */
-GOTV_API void httpd_HostDelete( httpd_host_t * );
+NLC_API void httpd_HostDelete( httpd_host_t * );
 
 typedef struct
 {
@@ -109,44 +109,44 @@ typedef struct httpd_url_t      httpd_url_t;
 typedef struct httpd_callback_sys_t httpd_callback_sys_t;
 typedef int    (*httpd_callback_t)( httpd_callback_sys_t *, httpd_client_t *, httpd_message_t *answer, const httpd_message_t *query );
 /* register a new url */
-GOTV_API httpd_url_t * httpd_UrlNew( httpd_host_t *, const char *psz_url, const char *psz_user, const char *psz_password ) GOTV_USED;
+NLC_API httpd_url_t * httpd_UrlNew( httpd_host_t *, const char *psz_url, const char *psz_user, const char *psz_password ) GOTV_USED;
 /* register callback on a url */
-GOTV_API int httpd_UrlCatch( httpd_url_t *, int i_msg, httpd_callback_t, httpd_callback_sys_t * );
+NLC_API int httpd_UrlCatch( httpd_url_t *, int i_msg, httpd_callback_t, httpd_callback_sys_t * );
 /* delete a url */
-GOTV_API void httpd_UrlDelete( httpd_url_t * );
+NLC_API void httpd_UrlDelete( httpd_url_t * );
 
-GOTV_API char* httpd_ClientIP( const httpd_client_t *cl, char *, int * );
-GOTV_API char* httpd_ServerIP( const httpd_client_t *cl, char *, int * );
+NLC_API char* httpd_ClientIP( const httpd_client_t *cl, char *, int * );
+NLC_API char* httpd_ServerIP( const httpd_client_t *cl, char *, int * );
 
 /* High level */
 
 typedef struct httpd_file_t     httpd_file_t;
 typedef struct httpd_file_sys_t httpd_file_sys_t;
 typedef int (*httpd_file_callback_t)( httpd_file_sys_t *, httpd_file_t *, uint8_t *psz_request, uint8_t **pp_data, int *pi_data );
-GOTV_API httpd_file_t * httpd_FileNew( httpd_host_t *, const char *psz_url, const char *psz_mime, const char *psz_user, const char *psz_password, httpd_file_callback_t pf_fill, httpd_file_sys_t * ) GOTV_USED;
-GOTV_API httpd_file_sys_t * httpd_FileDelete( httpd_file_t * );
+NLC_API httpd_file_t * httpd_FileNew( httpd_host_t *, const char *psz_url, const char *psz_mime, const char *psz_user, const char *psz_password, httpd_file_callback_t pf_fill, httpd_file_sys_t * ) GOTV_USED;
+NLC_API httpd_file_sys_t * httpd_FileDelete( httpd_file_t * );
 
 
 typedef struct httpd_handler_t  httpd_handler_t;
 typedef int (*httpd_handler_callback_t)( void *, httpd_handler_t *, char *psz_url, uint8_t *psz_request, int i_type, uint8_t *p_in, int i_in, char *psz_remote_addr, char *psz_remote_host, uint8_t **pp_data, int *pi_data );
-GOTV_API httpd_handler_t * httpd_HandlerNew( httpd_host_t *, const char *psz_url, const char *psz_user, const char *psz_password, httpd_handler_callback_t pf_fill, void * ) GOTV_USED;
-GOTV_API void * httpd_HandlerDelete( httpd_handler_t * );
+NLC_API httpd_handler_t * httpd_HandlerNew( httpd_host_t *, const char *psz_url, const char *psz_user, const char *psz_password, httpd_handler_callback_t pf_fill, void * ) GOTV_USED;
+NLC_API void * httpd_HandlerDelete( httpd_handler_t * );
 
 typedef struct httpd_redirect_t httpd_redirect_t;
-GOTV_API httpd_redirect_t * httpd_RedirectNew( httpd_host_t *, const char *psz_url_dst, const char *psz_url_src ) GOTV_USED;
-GOTV_API void httpd_RedirectDelete( httpd_redirect_t * );
+NLC_API httpd_redirect_t * httpd_RedirectNew( httpd_host_t *, const char *psz_url_dst, const char *psz_url_src ) GOTV_USED;
+NLC_API void httpd_RedirectDelete( httpd_redirect_t * );
 
 
 typedef struct httpd_stream_t httpd_stream_t;
-GOTV_API httpd_stream_t * httpd_StreamNew( httpd_host_t *, const char *psz_url, const char *psz_mime, const char *psz_user, const char *psz_password ) GOTV_USED;
-GOTV_API void httpd_StreamDelete( httpd_stream_t * );
-GOTV_API int httpd_StreamHeader( httpd_stream_t *, uint8_t *p_data, int i_data );
-GOTV_API int httpd_StreamSend( httpd_stream_t *, const block_t *p_block );
-GOTV_API int httpd_StreamSetHTTPHeaders(httpd_stream_t *, const httpd_header *, size_t);
+NLC_API httpd_stream_t * httpd_StreamNew( httpd_host_t *, const char *psz_url, const char *psz_mime, const char *psz_user, const char *psz_password ) GOTV_USED;
+NLC_API void httpd_StreamDelete( httpd_stream_t * );
+NLC_API int httpd_StreamHeader( httpd_stream_t *, uint8_t *p_data, int i_data );
+NLC_API int httpd_StreamSend( httpd_stream_t *, const block_t *p_block );
+NLC_API int httpd_StreamSetHTTPHeaders(httpd_stream_t *, const httpd_header *, size_t);
 
 /* Msg functions facilities */
-GOTV_API void httpd_MsgAdd( httpd_message_t *, const char *psz_name, const char *psz_value, ... ) GOTV_FORMAT( 3, 4 );
+NLC_API void httpd_MsgAdd( httpd_message_t *, const char *psz_name, const char *psz_value, ... ) GOTV_FORMAT( 3, 4 );
 /* return "" if not found. The string is not allocated */
-GOTV_API const char * httpd_MsgGet( const httpd_message_t *, const char *psz_name );
+NLC_API const char * httpd_MsgGet( const httpd_message_t *, const char *psz_name );
 
 #endif /* _GOTV_HTTPD_H */

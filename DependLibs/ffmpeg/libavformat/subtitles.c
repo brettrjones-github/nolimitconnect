@@ -347,7 +347,7 @@ const char *ff_smil_get_attr_ptr(const char *s, const char *attr)
     return NULL;
 }
 
-static GOTV_INLINE int is_eol(char c)
+static NLC_INLINE int is_eol(char c)
 {
     return c == '\r' || c == '\n';
 }

@@ -61,7 +61,7 @@ static const spx_float_t FLOAT_ONE = {16384,-14};
 static const spx_float_t FLOAT_HALF = {16384,-15};
 
 #define MIN(a,b) ((a)<(b)?(a):(b))
-static GOTV_INLINE spx_float_t PSEUDOFLOAT(spx_int32_t x)
+static NLC_INLINE spx_float_t PSEUDOFLOAT(spx_int32_t x)
 {
    int e=0;
    int sign=0;
@@ -94,7 +94,7 @@ static GOTV_INLINE spx_float_t PSEUDOFLOAT(spx_int32_t x)
 }
 
 
-static GOTV_INLINE spx_float_t FLOAT_ADD(spx_float_t a, spx_float_t b)
+static NLC_INLINE spx_float_t FLOAT_ADD(spx_float_t a, spx_float_t b)
 {
    spx_float_t r;
    if (a.m==0)
@@ -129,7 +129,7 @@ static GOTV_INLINE spx_float_t FLOAT_ADD(spx_float_t a, spx_float_t b)
    return r;
 }
 
-static GOTV_INLINE spx_float_t FLOAT_SUB(spx_float_t a, spx_float_t b)
+static NLC_INLINE spx_float_t FLOAT_SUB(spx_float_t a, spx_float_t b)
 {
    spx_float_t r;
    if (a.m==0)
@@ -164,7 +164,7 @@ static GOTV_INLINE spx_float_t FLOAT_SUB(spx_float_t a, spx_float_t b)
    return r;
 }
 
-static GOTV_INLINE int FLOAT_LT(spx_float_t a, spx_float_t b)
+static NLC_INLINE int FLOAT_LT(spx_float_t a, spx_float_t b)
 {
    if (a.m==0)
       return b.m>0;
@@ -177,12 +177,12 @@ static GOTV_INLINE int FLOAT_LT(spx_float_t a, spx_float_t b)
 
 }
 
-static GOTV_INLINE int FLOAT_GT(spx_float_t a, spx_float_t b)
+static NLC_INLINE int FLOAT_GT(spx_float_t a, spx_float_t b)
 {
    return FLOAT_LT(b,a);
 }
 
-static GOTV_INLINE spx_float_t FLOAT_MULT(spx_float_t a, spx_float_t b)
+static NLC_INLINE spx_float_t FLOAT_MULT(spx_float_t a, spx_float_t b)
 {
    spx_float_t r;
    r.m = (spx_int16_t)((spx_int32_t)(a).m*(b).m>>15);
@@ -205,7 +205,7 @@ static GOTV_INLINE spx_float_t FLOAT_MULT(spx_float_t a, spx_float_t b)
    return r;   
 }
 
-static GOTV_INLINE spx_float_t FLOAT_AMULT(spx_float_t a, spx_float_t b)
+static NLC_INLINE spx_float_t FLOAT_AMULT(spx_float_t a, spx_float_t b)
 {
    spx_float_t r;
    r.m = (spx_int16_t)((spx_int32_t)(a).m*(b).m>>15);
@@ -214,7 +214,7 @@ static GOTV_INLINE spx_float_t FLOAT_AMULT(spx_float_t a, spx_float_t b)
 }
 
 
-static GOTV_INLINE spx_float_t FLOAT_SHL(spx_float_t a, int b)
+static NLC_INLINE spx_float_t FLOAT_SHL(spx_float_t a, int b)
 {
    spx_float_t r;
    r.m = a.m;
@@ -222,7 +222,7 @@ static GOTV_INLINE spx_float_t FLOAT_SHL(spx_float_t a, int b)
    return r;
 }
 
-static GOTV_INLINE spx_int16_t FLOAT_EXTRACT16(spx_float_t a)
+static NLC_INLINE spx_int16_t FLOAT_EXTRACT16(spx_float_t a)
 {
    if (a.e<0)
       return EXTRACT16((EXTEND32(a.m)+(EXTEND32(1)<<(-a.e-1)))>>-a.e);
@@ -230,7 +230,7 @@ static GOTV_INLINE spx_int16_t FLOAT_EXTRACT16(spx_float_t a)
       return a.m<<a.e;
 }
 
-static GOTV_INLINE spx_int32_t FLOAT_EXTRACT32(spx_float_t a)
+static NLC_INLINE spx_int32_t FLOAT_EXTRACT32(spx_float_t a)
 {
    if (a.e<0)
       return (EXTEND32(a.m)+(EXTEND32(1)<<(-a.e-1)))>>-a.e;
@@ -238,12 +238,12 @@ static GOTV_INLINE spx_int32_t FLOAT_EXTRACT32(spx_float_t a)
       return EXTEND32(a.m)<<a.e;
 }
 
-static GOTV_INLINE spx_int32_t FLOAT_MUL32(spx_float_t a, spx_word32_t b)
+static NLC_INLINE spx_int32_t FLOAT_MUL32(spx_float_t a, spx_word32_t b)
 {
    return VSHR32(MULT16_32_Q15(a.m, b),-a.e-15);
 }
 
-static GOTV_INLINE spx_float_t FLOAT_MUL32U(spx_word32_t a, spx_word32_t b)
+static NLC_INLINE spx_float_t FLOAT_MUL32U(spx_word32_t a, spx_word32_t b)
 {
    int e1, e2;
    spx_float_t r;
@@ -261,7 +261,7 @@ static GOTV_INLINE spx_float_t FLOAT_MUL32U(spx_word32_t a, spx_word32_t b)
 }
 
 /* Do NOT attempt to divide by a negative number */
-static GOTV_INLINE spx_float_t FLOAT_DIV32_FLOAT(spx_word32_t a, spx_float_t b)
+static NLC_INLINE spx_float_t FLOAT_DIV32_FLOAT(spx_word32_t a, spx_float_t b)
 {
    int e=0;
    spx_float_t r;
@@ -283,7 +283,7 @@ static GOTV_INLINE spx_float_t FLOAT_DIV32_FLOAT(spx_word32_t a, spx_float_t b)
 
 
 /* Do NOT attempt to divide by a negative number */
-static GOTV_INLINE spx_float_t FLOAT_DIV32(spx_word32_t a, spx_word32_t b)
+static NLC_INLINE spx_float_t FLOAT_DIV32(spx_word32_t a, spx_word32_t b)
 {
    int e0=0,e=0;
    spx_float_t r;
@@ -311,7 +311,7 @@ static GOTV_INLINE spx_float_t FLOAT_DIV32(spx_word32_t a, spx_word32_t b)
 }
 
 /* Do NOT attempt to divide by a negative number */
-static GOTV_INLINE spx_float_t FLOAT_DIVU(spx_float_t a, spx_float_t b)
+static NLC_INLINE spx_float_t FLOAT_DIVU(spx_float_t a, spx_float_t b)
 {
    int e=0;
    spx_int32_t num;
@@ -334,7 +334,7 @@ static GOTV_INLINE spx_float_t FLOAT_DIVU(spx_float_t a, spx_float_t b)
    return r;
 }
 
-static GOTV_INLINE spx_float_t FLOAT_SQRT(spx_float_t a)
+static NLC_INLINE spx_float_t FLOAT_SQRT(spx_float_t a)
 {
    spx_float_t r;
    spx_int32_t m;

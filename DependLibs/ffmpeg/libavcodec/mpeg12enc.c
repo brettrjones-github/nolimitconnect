@@ -390,7 +390,7 @@ static void mpeg1_encode_sequence_header(MpegEncContext *s)
     }
 }
 
-static GOTV_INLINE void encode_mb_skip_run(MpegEncContext *s, int run)
+static NLC_INLINE void encode_mb_skip_run(MpegEncContext *s, int run)
 {
     while (run >= 33) {
         put_bits(&s->pb, 11, 0x008);
@@ -548,7 +548,7 @@ void ff_mpeg1_encode_picture_header(MpegEncContext *s, int picture_number)
     ff_mpeg1_encode_slice_header(s);
 }
 
-static GOTV_INLINE void put_mb_modes(MpegEncContext *s, int n, int bits,
+static NLC_INLINE void put_mb_modes(MpegEncContext *s, int n, int bits,
                                 int has_mv, int field_motion)
 {
     put_bits(&s->pb, n, bits);
@@ -600,7 +600,7 @@ static void mpeg1_encode_motion(MpegEncContext *s, int val, int f_or_b_code)
     }
 }
 
-static GOTV_INLINE void encode_dc(MpegEncContext *s, int diff, int component)
+static NLC_INLINE void encode_dc(MpegEncContext *s, int diff, int component)
 {
     unsigned int diff_u = diff + 255;
     if (diff_u >= 511) {

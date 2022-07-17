@@ -26,7 +26,7 @@ void _asn1_str_cat (char *dest, size_t dest_tot_size, const char *src);
 #define Estrcpy(x,y) _asn1_str_cpy(x,ASN1_MAX_ERROR_DESCRIPTION_SIZE,y)
 #define Estrcat(x,y) _asn1_str_cat(x,ASN1_MAX_ERROR_DESCRIPTION_SIZE,y)
 
-GOTV_INLINE static
+NLC_INLINE static
 void safe_memset(void *data, int c, size_t size)
 {
 	volatile unsigned volatile_zero = 0;

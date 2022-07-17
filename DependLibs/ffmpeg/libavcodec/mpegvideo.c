@@ -1456,7 +1456,7 @@ int ff_mpv_export_qp_table(MpegEncContext *s, AVFrame *f, Picture *p, int qp_typ
     return av_frame_set_qp_table(f, ref, s->mb_stride, qp_type);
 }
 
-static GOTV_INLINE int hpel_motion_lowres(MpegEncContext *s,
+static NLC_INLINE int hpel_motion_lowres(MpegEncContext *s,
                                      uint8_t *dest, uint8_t *src,
                                      int field_based, int field_select,
                                      int src_x, int src_y,
@@ -1642,7 +1642,7 @@ static av_always_inline void mpeg_motion_lowres(MpegEncContext *s,
     // FIXME h261 lowres loop filter
 }
 
-static GOTV_INLINE void chroma_4mv_motion_lowres(MpegEncContext *s,
+static NLC_INLINE void chroma_4mv_motion_lowres(MpegEncContext *s,
                                             uint8_t *dest_cb, uint8_t *dest_cr,
                                             uint8_t **ref_picture,
                                             h264_chroma_mc_func * pix_op,
@@ -1710,7 +1710,7 @@ static GOTV_INLINE void chroma_4mv_motion_lowres(MpegEncContext *s,
  * @param pix_op halfpel motion compensation function (average or put normally)
  * the motion vectors are taken from s->mv and the MV type from s->mv_type
  */
-static GOTV_INLINE void MPV_motion_lowres(MpegEncContext *s,
+static NLC_INLINE void MPV_motion_lowres(MpegEncContext *s,
                                      uint8_t *dest_y, uint8_t *dest_cb,
                                      uint8_t *dest_cr,
                                      int dir, uint8_t **ref_picture,
@@ -1880,7 +1880,7 @@ unhandled:
 }
 
 /* put block[] to dest[] */
-static GOTV_INLINE void put_dct(MpegEncContext *s,
+static NLC_INLINE void put_dct(MpegEncContext *s,
                            int16_t *block, int i, uint8_t *dest, int line_size, int qscale)
 {
     s->dct_unquantize_intra(s, block, i, qscale);
@@ -1888,7 +1888,7 @@ static GOTV_INLINE void put_dct(MpegEncContext *s,
 }
 
 /* add block[] to dest[] */
-static GOTV_INLINE void add_dct(MpegEncContext *s,
+static NLC_INLINE void add_dct(MpegEncContext *s,
                            int16_t *block, int i, uint8_t *dest, int line_size)
 {
     if (s->block_last_index[i] >= 0) {
@@ -1896,7 +1896,7 @@ static GOTV_INLINE void add_dct(MpegEncContext *s,
     }
 }
 
-static GOTV_INLINE void add_dequant_dct(MpegEncContext *s,
+static NLC_INLINE void add_dequant_dct(MpegEncContext *s,
                            int16_t *block, int i, uint8_t *dest, int line_size, int qscale)
 {
     if (s->block_last_index[i] >= 0) {

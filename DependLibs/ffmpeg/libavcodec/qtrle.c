@@ -141,7 +141,7 @@ static void qtrle_decode_1bpp(QtrleContext *s, int row_ptr, int lines_to_change)
     }
 }
 
-static GOTV_INLINE void qtrle_decode_2n4bpp(QtrleContext *s, int row_ptr,
+static NLC_INLINE void qtrle_decode_2n4bpp(QtrleContext *s, int row_ptr,
                                        int lines_to_change, int bpp)
 {
     int rle_code, i;

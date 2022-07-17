@@ -34,7 +34,7 @@
 #define PLANE_NUM 3
 #define ROUND_TO_16(a) (((((a) - 1)/16)+1)*16)
 
-static GOTV_INLINE void add_mask_counter(uint32_t *dst, uint32_t *counter1, uint32_t *counter2, int len)
+static NLC_INLINE void add_mask_counter(uint32_t *dst, uint32_t *counter1, uint32_t *counter2, int len)
 {
     int i;
     for (i = 0; i < len; i++) {

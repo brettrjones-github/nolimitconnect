@@ -33,7 +33,7 @@
 #undef DEBUG
 #include <stdio.h>
 
-static GOTV_INLINE unsigned
+static NLC_INLINE unsigned
 build_prefetch(unsigned char block_size, unsigned char block_count, short stride)
 {
     if(block_size > 31)

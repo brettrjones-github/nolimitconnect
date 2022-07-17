@@ -139,7 +139,7 @@ namespace JSONRPC
 		 the given object is not an array) or for a parameter at the
 		 given position (if the given object is an array).
 		 */
-		static GOTV_INLINE bool ParameterExists( const CVariant &parameterObject, std::string key, unsigned int position ) { return IsValueMember( parameterObject, key ) || ( parameterObject.isArray() && parameterObject.size() > position ); }
+		static NLC_INLINE bool ParameterExists( const CVariant &parameterObject, std::string key, unsigned int position ) { return IsValueMember( parameterObject, key ) || ( parameterObject.isArray() && parameterObject.size() > position ); }
 
 		/*!
 		 \brief Checks if the given object contains a value
@@ -149,7 +149,7 @@ namespace JSONRPC
 		 \return True if the given object contains a member with
 		 the given key otherwise false
 		 */
-		static GOTV_INLINE bool IsValueMember( const CVariant &value, std::string key ) { return value.isObject() && value.isMember( key ); }
+		static NLC_INLINE bool IsValueMember( const CVariant &value, std::string key ) { return value.isObject() && value.isMember( key ); }
 
 		/*!
 		 \brief Returns the json value of a parameter
@@ -163,7 +163,7 @@ namespace JSONRPC
 		 the given object is not an array) or of the parameter at the
 		 given position (if the given object is an array).
 		 */
-		static GOTV_INLINE CVariant GetParameter( const CVariant &parameterObject, std::string key, unsigned int position ) { return IsValueMember( parameterObject, key ) ? parameterObject[key] : parameterObject[position]; }
+		static NLC_INLINE CVariant GetParameter( const CVariant &parameterObject, std::string key, unsigned int position ) { return IsValueMember( parameterObject, key ) ? parameterObject[key] : parameterObject[position]; }
 
 		/*!
 		 \brief Returns the json value of a parameter or the given
@@ -180,7 +180,7 @@ namespace JSONRPC
 		 given position (if the given object is an array). If the
 		 parameter does not exist the given default value is returned.
 		 */
-		static GOTV_INLINE CVariant GetParameter( const CVariant &parameterObject, std::string key, unsigned int position, CVariant fallback ) { return IsValueMember( parameterObject, key ) ? parameterObject[key] : ( ( parameterObject.isArray() && parameterObject.size() > position ) ? parameterObject[position] : fallback ); }
+		static NLC_INLINE CVariant GetParameter( const CVariant &parameterObject, std::string key, unsigned int position, CVariant fallback ) { return IsValueMember( parameterObject, key ) ? parameterObject[key] : ( ( parameterObject.isArray() && parameterObject.size() > position ) ? parameterObject[position] : fallback ); }
 
 		/*!
 		 \brief Returns the given json value as a string
@@ -189,7 +189,7 @@ namespace JSONRPC
 		 \return String value of the given json value or the default value
 		 if the given json value is no string
 		 */
-		static GOTV_INLINE std::string GetString( const CVariant &value, const char* defaultValue )
+		static NLC_INLINE std::string GetString( const CVariant &value, const char* defaultValue )
 		{
 			std::string str = defaultValue;
 			if( value.isString() )
@@ -206,7 +206,7 @@ namespace JSONRPC
 		 \param transport String representation of the TransportLayerCapability
 		 \return TransportLayerCapability value of the given string representation
 		 */
-		static GOTV_INLINE TransportLayerCapability StringToTransportLayer( std::string transport )
+		static NLC_INLINE TransportLayerCapability StringToTransportLayer( std::string transport )
 		{
 			if( transport.compare( "Announcing" ) == 0 )
 				return Announcing;
@@ -224,7 +224,7 @@ namespace JSONRPC
 		 \param valueType String representation of the JSONSchemaType
 		 \return JSONSchemaType value of the given string representation
 		 */
-		static GOTV_INLINE JSONSchemaType StringToSchemaValueType( std::string valueType )
+		static NLC_INLINE JSONSchemaType StringToSchemaValueType( std::string valueType )
 		{
 			if( valueType.compare( "null" ) == 0 )
 				return NullValue;
@@ -250,7 +250,7 @@ namespace JSONRPC
 		 \param valueType Specific JSONSchemaType
 		 \return String representation of the given JSONSchemaType
 		 */
-		static GOTV_INLINE std::string SchemaValueTypeToString( JSONSchemaType valueType )
+		static NLC_INLINE std::string SchemaValueTypeToString( JSONSchemaType valueType )
 		{
 			std::vector<JSONSchemaType> types = std::vector<JSONSchemaType>();
 			for( unsigned int value = 0x01; value <= (unsigned int)AnyValue; value *= 2 )
@@ -311,7 +311,7 @@ namespace JSONRPC
 		 \param valueTye json schema type(s)
 		 \param jsonObject json object into which the json schema type(s) are stored
 		 */
-		static GOTV_INLINE void SchemaValueTypeToJson( JSONSchemaType valueType, CVariant &jsonObject )
+		static NLC_INLINE void SchemaValueTypeToJson( JSONSchemaType valueType, CVariant &jsonObject )
 		{
 			jsonObject = CVariant( CVariant::VariantTypeArray );
 			for( unsigned int value = 0x01; value <= (unsigned int)AnyValue; value *= 2 )
@@ -327,7 +327,7 @@ namespace JSONRPC
 			}
 		}
 
-		static GOTV_INLINE const char *ValueTypeToString( CVariant::VariantType valueType )
+		static NLC_INLINE const char *ValueTypeToString( CVariant::VariantType valueType )
 		{
 			switch( valueType )
 			{
@@ -361,7 +361,7 @@ namespace JSONRPC
 		 \param valueType Expected type of the parameter
 		 \return True if the specific parameter is of the given type otherwise false
 		 */
-		static GOTV_INLINE bool IsParameterType( const CVariant &parameterObject, const char *key, unsigned int position, JSONSchemaType valueType )
+		static NLC_INLINE bool IsParameterType( const CVariant &parameterObject, const char *key, unsigned int position, JSONSchemaType valueType )
 		{
 			if( ( valueType & AnyValue ) == AnyValue )
 				return true;
@@ -381,7 +381,7 @@ namespace JSONRPC
 		 \param valueType Expected type of the json value
 		 \return True if the given json value is of the given type otherwise false
 		*/
-		static GOTV_INLINE bool IsType( const CVariant &value, JSONSchemaType valueType )
+		static NLC_INLINE bool IsType( const CVariant &value, JSONSchemaType valueType )
 		{
 			if( HasType( valueType, AnyValue ) )
 				return true;
@@ -407,7 +407,7 @@ namespace JSONRPC
 		 \param value Json value to be set
 		 \param valueType Type of the default value
 		 */
-		static GOTV_INLINE void SetDefaultValue( CVariant &value, JSONSchemaType valueType )
+		static NLC_INLINE void SetDefaultValue( CVariant &value, JSONSchemaType valueType )
 		{
 			switch( valueType )
 			{
@@ -434,9 +434,9 @@ namespace JSONRPC
 			}
 		}
 
-		static GOTV_INLINE bool HasType( JSONSchemaType typeObject, JSONSchemaType type ) { return ( typeObject & type ) == type; }
+		static NLC_INLINE bool HasType( JSONSchemaType typeObject, JSONSchemaType type ) { return ( typeObject & type ) == type; }
 
-		static GOTV_INLINE bool ParameterNotNull( const CVariant &parameterObject, std::string key ) { return parameterObject.isMember( key ) && !parameterObject[key].isNull(); }
+		static NLC_INLINE bool ParameterNotNull( const CVariant &parameterObject, std::string key ) { return parameterObject.isMember( key ) && !parameterObject[key].isNull(); }
 
 		/*!
 		 \brief Copies the values from the jsonStringArray to the stringArray.

@@ -140,7 +140,7 @@ protected:
 |   NPT_Array<T>::NPT_Array<T>
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Array<T>::NPT_Array(NPT_Cardinal count) :
     m_Capacity(0),
     m_ItemCount(0),
@@ -153,7 +153,7 @@ NPT_Array<T>::NPT_Array(NPT_Cardinal count) :
 |   NPT_Array<T>::NPT_Array<T>
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Array<T>::NPT_Array(const NPT_Array<T>& copy) :
     m_Capacity(0),
     m_ItemCount(0),
@@ -170,7 +170,7 @@ NPT_Array<T>::NPT_Array(const NPT_Array<T>& copy) :
 |   NPT_Array<T>::NPT_Array<T>
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Array<T>::NPT_Array(NPT_Cardinal count, const T& item) :
     m_Capacity(0),
     m_ItemCount(count),
@@ -186,7 +186,7 @@ NPT_Array<T>::NPT_Array(NPT_Cardinal count, const T& item) :
 |   NPT_Array<T>::NPT_Array<T>
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Array<T>::NPT_Array(const T* items, NPT_Cardinal item_count) :
     m_Capacity(0),
     m_ItemCount(item_count),
@@ -202,7 +202,7 @@ NPT_Array<T>::NPT_Array(const T* items, NPT_Cardinal item_count) :
 |   NPT_Array<T>::~NPT_Array<T>
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Array<T>::~NPT_Array()
 {
     // remove all items
@@ -308,7 +308,7 @@ NPT_Array<T>::Reserve(NPT_Cardinal count)
 |   NPT_Array<T>::Add
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result
 NPT_Array<T>::Add(const T& item)
 {
@@ -326,7 +326,7 @@ NPT_Array<T>::Add(const T& item)
 |   NPT_Array<T>::Erase
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result
 NPT_Array<T>::Erase(Iterator which)
 {
@@ -499,7 +499,7 @@ NPT_Array<T>::operator==(const NPT_Array<T>& other) const
 |   NPT_Array<T>::operator!=
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 bool
 NPT_Array<T>::operator!=(const NPT_Array<T>& other) const
 {

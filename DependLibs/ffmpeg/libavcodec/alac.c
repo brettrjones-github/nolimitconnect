@@ -88,7 +88,7 @@ typedef struct ALACContext {
     ALACDSPContext dsp;
 } ALACContext;
 
-static GOTV_INLINE unsigned int decode_scalar(GetBitContext *gb, int k, int bps)
+static NLC_INLINE unsigned int decode_scalar(GetBitContext *gb, int k, int bps)
 {
     unsigned int x = get_unary_0_9(gb);
 
@@ -167,7 +167,7 @@ static int rice_decompress(ALACContext *alac, int32_t *output_buffer,
     return 0;
 }
 
-static GOTV_INLINE int sign_only(int v)
+static NLC_INLINE int sign_only(int v)
 {
     return v ? FFSIGN(v) : 0;
 }

@@ -3,7 +3,7 @@
  *
  * Description:
  * This translation unit agregates pthreads-win32 translation units.
- * It is used for GOTV_INLINE optimisation of the library,
+ * It is used for NLC_INLINE optimisation of the library,
  * maximising for speed at the expense of size.
  *
  * --------------------------------------------------------------------------

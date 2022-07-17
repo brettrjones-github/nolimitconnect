@@ -135,7 +135,7 @@ static int query_formats(AVFilterContext *ctx)
     return ff_set_common_samplerates(ctx, formats);
 }
 
-static GOTV_INLINE int frame_size(int sample_rate, int frame_len_msec)
+static NLC_INLINE int frame_size(int sample_rate, int frame_len_msec)
 {
     const int frame_size = lrint((double)sample_rate * (frame_len_msec / 1000.0));
     return frame_size + (frame_size % 2);
@@ -486,7 +486,7 @@ static void update_gain_history(DynamicAudioNormalizerContext *s, int channel,
     }
 }
 
-static GOTV_INLINE double update_value(double new, double old, double aggressiveness)
+static NLC_INLINE double update_value(double new, double old, double aggressiveness)
 {
     av_assert0((aggressiveness >= 0.0) && (aggressiveness <= 1.0));
     return aggressiveness * new + (1.0 - aggressiveness) * old;

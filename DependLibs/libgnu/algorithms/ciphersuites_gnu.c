@@ -1218,7 +1218,7 @@ static const gnutls_cipher_suite_entry_st
 /* Returns 1 if the given KX has not the corresponding parameters
  * (DH or RSA) set up. Otherwise returns 0.
  */
-GOTV_INLINE static int
+NLC_INLINE static int
 check_server_params(gnutls_session_t session,
 		    gnutls_kx_algorithm_t kx,
 		    gnutls_kx_algorithm_t * alg, int alg_size)
@@ -1534,7 +1534,7 @@ const char *gnutls_cipher_suite_info(size_t idx,
 }
 
 
-static GOTV_INLINE int _gnutls_cipher_suite_is_ok(const uint8_t suite[2])
+static NLC_INLINE int _gnutls_cipher_suite_is_ok(const uint8_t suite[2])
 {
 	size_t ret;
 	const char *name = NULL;

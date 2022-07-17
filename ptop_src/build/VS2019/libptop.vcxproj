@@ -591,6 +591,7 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostsDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioInputFrame.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp" />
@@ -960,6 +961,8 @@
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostsDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioInputFrame.h" />
+    <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioProcessorDefs.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaClient.h" />

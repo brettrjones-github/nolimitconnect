@@ -111,7 +111,7 @@ END_COM_MAP()
 
 
 
-	GOTV_INLINE CDNSSDService*
+	NLC_INLINE CDNSSDService*
 
 	GetServiceObject()
 
@@ -123,7 +123,7 @@ END_COM_MAP()
 
 
 
-	GOTV_INLINE void
+	NLC_INLINE void
 
 	SetServiceObject( CDNSSDService * serviceObject )
 
@@ -135,7 +135,7 @@ END_COM_MAP()
 
 
 
-	GOTV_INLINE DNSRecordRef
+	NLC_INLINE DNSRecordRef
 
 	GetRecordRef()
 
@@ -147,7 +147,7 @@ END_COM_MAP()
 
 
 
-	GOTV_INLINE void
+	NLC_INLINE void
 
 	SetRecordRef( DNSRecordRef rref )
 

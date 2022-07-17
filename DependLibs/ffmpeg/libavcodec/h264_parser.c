@@ -240,7 +240,7 @@ static int scan_mmco_reset(AVCodecParserContext *s, GetBitContext *gb,
  * @param buf buffer with field/frame data.
  * @param buf_size size of the buffer.
  */
-static GOTV_INLINE int parse_nal_units(AVCodecParserContext *s,
+static NLC_INLINE int parse_nal_units(AVCodecParserContext *s,
                                   AVCodecContext *avctx,
                                   const uint8_t * const buf, int buf_size)
 {

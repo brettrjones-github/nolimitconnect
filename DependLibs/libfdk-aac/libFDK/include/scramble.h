@@ -112,7 +112,7 @@ amm-info@iis.fraunhofer.de
 *****************************************************************************/
 #if !defined(FUNCTION_scramble_sgl)
 
-GOTV_INLINE void scramble_sgl(FIXP_SGL *x, int32_t n)
+NLC_INLINE void scramble_sgl(FIXP_SGL *x, int32_t n)
 {
   int32_t m,k,j;
 
@@ -138,7 +138,7 @@ GOTV_INLINE void scramble_sgl(FIXP_SGL *x, int32_t n)
 #if !defined(FUNCTION_scramble)
 
 /* default scramble functionality */
-GOTV_INLINE void scramble(FIXP_DBL *x, int32_t n)
+NLC_INLINE void scramble(FIXP_DBL *x, int32_t n)
 {
   int32_t m,k,j;
   FDK_ASSERT(!(((uint64_t)x)&(ALIGNMENT_DEFAULT-1)));

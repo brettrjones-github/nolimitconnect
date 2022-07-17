@@ -303,7 +303,7 @@ struct string_list_ty
 };
 
 /* Initialize an empty list of strings.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 string_list_init (string_list_ty *slp)
 {
   slp->item = NULL;
@@ -312,7 +312,7 @@ string_list_init (string_list_ty *slp)
 }
 
 /* Append a single string to the end of a list of strings.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 string_list_append (string_list_ty *slp, const char *s)
 {
   /* Grow the list.  */
@@ -340,7 +340,7 @@ cmp_string (const void *pstr1, const void *pstr2)
 }
 
 /* Sort a list of strings.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 string_list_sort (string_list_ty *slp)
 {
   if (slp->nitems > 0)
@@ -348,7 +348,7 @@ string_list_sort (string_list_ty *slp)
 }
 
 /* Test whether a string list contains a given string.  */
-static GOTV_INLINE int
+static NLC_INLINE int
 string_list_member (const string_list_ty *slp, const char *s)
 {
   size_t j;
@@ -392,7 +392,7 @@ sorted_string_list_member (const string_list_ty *slp, const char *s)
 }
 
 /* Destroy a list of strings.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 string_list_destroy (string_list_ty *slp)
 {
   size_t j;
@@ -444,7 +444,7 @@ error while reading \"%s\""), _("standard input"));
   return c;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 do_ungetc (int c)
 {
   if (c != EOF)

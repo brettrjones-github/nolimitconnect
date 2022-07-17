@@ -98,17 +98,17 @@ char   *strchr(), *strrchr();
 /*#define IPOW20(x)  pow(2.0,-((double)(x)-210)*.1875) */
 
 /* in case this is used without configure */
-#ifndef GOTV_INLINE
-# define GOTV_INLINE
+#ifndef NLC_INLINE
+# define NLC_INLINE
 #endif
 
 #if defined(_MSC_VER)
-# undef GOTV_INLINE
-# define GOTV_INLINE _inline
+# undef NLC_INLINE
+# define NLC_INLINE _inline
 #elif defined(__SASC) || defined(__GNUC__) || defined(__ICC) || defined(__ECC)
-/* if __GNUC__ we always want to GOTV_INLINE, not only if the user requests it */
-# undef GOTV_INLINE
-# define GOTV_INLINE __inline
+/* if __GNUC__ we always want to NLC_INLINE, not only if the user requests it */
+# undef NLC_INLINE
+# define NLC_INLINE __inline
 #endif
 
 #if    defined(_MSC_VER)

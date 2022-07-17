@@ -1062,7 +1062,7 @@ SDL_Overlay *SDL_CreateYUV_SW(_THIS, int width, int height, Uint32 format, SDL_S
 	    case SDL_IYUV_OVERLAY:
 		if ( display->format->BytesPerPixel == 2 ) {
 #if (__GNUC__ > 2) && defined(__i386__) && __OPTIMIZE__ && SDL_ASSEMBLY_ROUTINES
-			/* GOTV_INLINE assembly functions */
+			/* NLC_INLINE assembly functions */
 			if ( SDL_HasMMX() && (Rmask == 0xF800) &&
 			                     (Gmask == 0x07E0) &&
 				             (Bmask == 0x001F) &&
@@ -1084,7 +1084,7 @@ SDL_Overlay *SDL_CreateYUV_SW(_THIS, int width, int height, Uint32 format, SDL_S
 		}
 		if ( display->format->BytesPerPixel == 4 ) {
 #if (__GNUC__ > 2) && defined(__i386__) && __OPTIMIZE__ && SDL_ASSEMBLY_ROUTINES
-			/* GOTV_INLINE assembly functions */
+			/* NLC_INLINE assembly functions */
 			if ( SDL_HasMMX() && (Rmask == 0x00FF0000) &&
 			                     (Gmask == 0x0000FF00) &&
 				             (Bmask == 0x000000FF) && 

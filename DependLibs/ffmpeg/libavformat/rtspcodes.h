@@ -141,7 +141,7 @@ enum RTSPMethod {
     UNKNOWN = -1,
 };
 
-static GOTV_INLINE int ff_rtsp_averror(enum RTSPStatusCode status_code, int default_averror)
+static NLC_INLINE int ff_rtsp_averror(enum RTSPStatusCode status_code, int default_averror)
 {
     return ff_http_averror(status_code, default_averror);
 }

@@ -33,7 +33,7 @@
 
 #include <libgnu/glist.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GCompletion     GCompletion;
 
@@ -80,6 +80,6 @@ void         g_completion_set_compare   (GCompletion *cmp,
 GLIB_DEPRECATED_IN_2_26
 void         g_completion_free          (GCompletion*    cmp);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_COMPLETION_H__ */

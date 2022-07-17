@@ -47,15 +47,15 @@
 
 WELSVP_NAMESPACE_BEGIN
 
-GOTV_INLINE void* WelsMemset (void* pPointer, int32_t iValue, uint32_t uiSize) {
+NLC_INLINE void* WelsMemset (void* pPointer, int32_t iValue, uint32_t uiSize) {
   return ::memset (pPointer, iValue, uiSize);
 }
 
-GOTV_INLINE void* WelsMemcpy (void* pDst, const void* kpSrc, uint32_t uiSize) {
+NLC_INLINE void* WelsMemcpy (void* pDst, const void* kpSrc, uint32_t uiSize) {
   return ::memcpy (pDst, kpSrc, uiSize);
 }
 
-GOTV_INLINE int32_t WelsMemcmp (const void* kpBuf1, const void* kpBuf2, uint32_t uiSize) {
+NLC_INLINE int32_t WelsMemcmp (const void* kpBuf1, const void* kpBuf2, uint32_t uiSize) {
   return ::memcmp (kpBuf1, kpBuf2, uiSize);
 }
 

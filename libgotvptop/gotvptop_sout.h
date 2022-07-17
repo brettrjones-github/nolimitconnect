@@ -93,14 +93,14 @@ enum access_out_query_e
     ACCESS_OUT_CAN_SEEK, /* arg1=bool *, can fail (assume false) */
 };
 
-GOTV_API sout_access_out_t * sout_AccessOutNew( gotvptop_object_t *, const char *psz_access, const char *psz_name ) GOTV_USED;
+NLC_API sout_access_out_t * sout_AccessOutNew( gotvptop_object_t *, const char *psz_access, const char *psz_name ) GOTV_USED;
 #define sout_AccessOutNew( obj, access, name ) \
         sout_AccessOutNew( GOTV_OBJECT(obj), access, name )
-GOTV_API void sout_AccessOutDelete( sout_access_out_t * );
-GOTV_API int sout_AccessOutSeek( sout_access_out_t *, off_t );
-GOTV_API ssize_t sout_AccessOutRead( sout_access_out_t *, block_t * );
-GOTV_API ssize_t sout_AccessOutWrite( sout_access_out_t *, block_t * );
-GOTV_API int sout_AccessOutControl( sout_access_out_t *, int, ... );
+NLC_API void sout_AccessOutDelete( sout_access_out_t * );
+NLC_API int sout_AccessOutSeek( sout_access_out_t *, off_t );
+NLC_API ssize_t sout_AccessOutRead( sout_access_out_t *, block_t * );
+NLC_API ssize_t sout_AccessOutWrite( sout_access_out_t *, block_t * );
+NLC_API int sout_AccessOutControl( sout_access_out_t *, int, ... );
 
 static inline bool sout_AccessOutCanControlPace( sout_access_out_t *p_ao )
 {
@@ -169,13 +169,13 @@ struct sout_input_t
 };
 
 
-GOTV_API sout_mux_t * sout_MuxNew( sout_instance_t*, const char *, sout_access_out_t * ) GOTV_USED;
-GOTV_API sout_input_t *sout_MuxAddStream( sout_mux_t *, const es_format_t * ) GOTV_USED;
-GOTV_API void sout_MuxDeleteStream( sout_mux_t *, sout_input_t * );
-GOTV_API void sout_MuxDelete( sout_mux_t * );
-GOTV_API int sout_MuxSendBuffer( sout_mux_t *, sout_input_t  *, block_t * );
-GOTV_API int sout_MuxGetStream(sout_mux_t *, unsigned, mtime_t *);
-GOTV_API void sout_MuxFlush( sout_mux_t *, sout_input_t * );
+NLC_API sout_mux_t * sout_MuxNew( sout_instance_t*, const char *, sout_access_out_t * ) GOTV_USED;
+NLC_API sout_input_t *sout_MuxAddStream( sout_mux_t *, const es_format_t * ) GOTV_USED;
+NLC_API void sout_MuxDeleteStream( sout_mux_t *, sout_input_t * );
+NLC_API void sout_MuxDelete( sout_mux_t * );
+NLC_API int sout_MuxSendBuffer( sout_mux_t *, sout_input_t  *, block_t * );
+NLC_API int sout_MuxGetStream(sout_mux_t *, unsigned, mtime_t *);
+NLC_API void sout_MuxFlush( sout_mux_t *, sout_input_t * );
 
 static inline int sout_MuxControl( sout_mux_t *p_mux, int i_query, ... )
 {
@@ -217,8 +217,8 @@ struct sout_stream_t
     bool pace_nocontrol;
 };
 
-GOTV_API void sout_StreamChainDelete(sout_stream_t *p_first, sout_stream_t *p_last );
-GOTV_API sout_stream_t *sout_StreamChainNew(sout_instance_t *p_sout,
+NLC_API void sout_StreamChainDelete(sout_stream_t *p_first, sout_stream_t *p_last );
+NLC_API sout_stream_t *sout_StreamChainNew(sout_instance_t *p_sout,
         const char *psz_chain, sout_stream_t *p_next, sout_stream_t **p_last) GOTV_USED;
 
 static inline sout_stream_id_sys_t *sout_StreamIdAdd( sout_stream_t *s,
@@ -264,14 +264,14 @@ static inline int sout_StreamControl( sout_stream_t *s, int i_query, ... )
  * Encoder
  ****************************************************************************/
 
-GOTV_API encoder_t * sout_EncoderCreate( gotvptop_object_t *obj );
+NLC_API encoder_t * sout_EncoderCreate( gotvptop_object_t *obj );
 #define sout_EncoderCreate(o) sout_EncoderCreate(GOTV_OBJECT(o))
 
 /****************************************************************************
  * Announce handler
  ****************************************************************************/
-GOTV_API session_descriptor_t* sout_AnnounceRegisterSDP( gotvptop_object_t *, const char *, const char * ) GOTV_USED;
-GOTV_API void sout_AnnounceUnRegister(gotvptop_object_t *,session_descriptor_t* );
+NLC_API session_descriptor_t* sout_AnnounceRegisterSDP( gotvptop_object_t *, const char *, const char * ) GOTV_USED;
+NLC_API void sout_AnnounceUnRegister(gotvptop_object_t *,session_descriptor_t* );
 #define sout_AnnounceRegisterSDP(o, sdp, addr) \
         sout_AnnounceRegisterSDP(GOTV_OBJECT (o), sdp, addr)
 #define sout_AnnounceUnRegister(o, a) \
@@ -282,16 +282,16 @@ GOTV_API void sout_AnnounceUnRegister(gotvptop_object_t *,session_descriptor_t* 
 struct sockaddr;
 struct gotvptop_memstream;
 
-GOTV_API int gotvptop_sdp_Start(struct gotvptop_memstream *, gotvptop_object_t *obj,
+NLC_API int gotvptop_sdp_Start(struct gotvptop_memstream *, gotvptop_object_t *obj,
                           const char *cfgpref,
                           const struct sockaddr *src, size_t slen,
                           const struct sockaddr *addr, size_t alen) GOTV_USED;
-GOTV_API void sdp_AddMedia(struct gotvptop_memstream *, const char *type,
+NLC_API void sdp_AddMedia(struct gotvptop_memstream *, const char *type,
                           const char *protocol, int dport, unsigned pt,
                           bool bw_indep, unsigned bw, const char *ptname,
                           unsigned clockrate, unsigned channels,
                           const char *fmtp);
-GOTV_API void sdp_AddAttribute(struct gotvptop_memstream *, const char *name,
+NLC_API void sdp_AddAttribute(struct gotvptop_memstream *, const char *name,
                               const char *fmt, ...) GOTV_FORMAT(3, 4);
 
 /** Description module */

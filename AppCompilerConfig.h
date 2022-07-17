@@ -24,65 +24,65 @@
 # endif // PRId64
 #endif // TARGET_OS_WINDOWS
 
-#define GOTV_UINT64_FORMAT	"%llu"	// specifier for printing unsigned long long type ( works in Windows and Linux and Android )
-#define GOTV_INT64_FORMAT	"%lld"	// specifier for printing long long type ( works in Windows and Linux and Android )
+#define NLC_UINT64_FORMAT	"%llu"	// specifier for printing unsigned long long type ( works in Windows and Linux and Android )
+#define NLC_INT64_FORMAT	"%lld"	// specifier for printing long long type ( works in Windows and Linux and Android )
 
 //============================================================================
 // Compiler directives
 //============================================================================
 #if defined(_MSC_VER)
-# define GOTV_EXPORT			// GoTv uses Static libs so no more import/export crap
-# define GOTV_IMPORT extern
-# define GOTV_HIDDEN
-# define GOTV_DLL_VARIABLE		// GoTv uses Static libs so no more import/export crap
+# define NLC_EXPORT			// GoTv uses Static libs so no more import/export crap
+# define NLC_IMPORT extern
+# define NLC_HIDDEN
+# define NLC_DLL_VARIABLE		// GoTv uses Static libs so no more import/export crap
 #elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 3))
-# define  GOTV_EXPORT
-# define  GOTV_IMPORT extern
-# define  GOTV_HIDDEN //__attribute__ ((visibility ("hidden")))
+# define  NLC_EXPORT
+# define  NLC_IMPORT extern
+# define  NLC_HIDDEN //__attribute__ ((visibility ("hidden")))
 #else
-# define  GOTV_EXPORT
-# define  GOTV_IMPORT extern
-# define  GOTV_HIDDEN
+# define  NLC_EXPORT
+# define  NLC_IMPORT extern
+# define  NLC_HIDDEN
 #endif
 
 #if __GNUC__ >= 4
-# define GOTV_API    __attribute__ ((visibility ("default")))
-# define GOTV_LOCAL  __attribute__ ((visibility ("hidden")))
+# define NLC_API    __attribute__ ((visibility ("default")))
+# define NLC_LOCAL  __attribute__ ((visibility ("hidden")))
 #else
-# define GOTV_API
-# define GOTV_LOCAL
+# define NLC_API
+# define NLC_LOCAL
 #endif
 
-#define GOTV_EXTERN		extern
-//#define GOTV_CALLCONV __stdcall
+#define NLC_EXTERN		extern
+//#define NLC_CALLCONV __stdcall
 // seems best not to specify any convention with static linked libs
-#define GOTV_CALLCONV
+#define NLC_CALLCONV
 
 #if defined __cplusplus
-# define GOTV_EXTERN_C extern "C"
-# define GOTV_BEGIN_CDECLARES extern "C" {
-# define GOTV_END_CDECLARES }
+# define NLC_EXTERN_C extern "C"
+# define NLC_BEGIN_CDECLARES extern "C" {
+# define NLC_END_CDECLARES }
 #else
-# define GOTV_EXTERN_C extern
-# define GOTV_BEGIN_CDECLARES
-# define GOTV_END_CDECLARES
+# define NLC_EXTERN_C extern
+# define NLC_BEGIN_CDECLARES
+# define NLC_END_CDECLARES
 #endif // __cplusplus
 
 #if defined __cplusplus
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 #endif // defined __cplusplus
     int VxSleep( int milliSec ); // microsoft sleep returns void so had to make a function to return no error
 #if defined __cplusplus
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 #endif // defined __cplusplus
 
 
-# if !defined(GOTV_GNUC_PREREQ)
+# if !defined(NLC_GNUC_PREREQ)
 #  if defined(__GNUC__)&&defined(__GNUC_MINOR__)
-#   define GOTV_GNUC_PREREQ(_maj,_min) \
+#   define NLC_GNUC_PREREQ(_maj,_min) \
  ((__GNUC__<<16)+__GNUC_MINOR__>=((_maj)<<16)+(_min))
 #  else
-#   define GOTV_GNUC_PREREQ(_maj,_min) 0
+#   define NLC_GNUC_PREREQ(_maj,_min) 0
 #  endif
 # endif
 
@@ -112,82 +112,82 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 
 /* deprecated attribute */
 #if (__GNUC__ > 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ >= 5)))
-# ifndef GOTV_WARN_DEPRECATED
-#  define GOTV_WARN_DEPRECATED(x) __attribute__((deprecated(x)))
+# ifndef NLC_WARN_DEPRECATED
+#  define NLC_WARN_DEPRECATED(x) __attribute__((deprecated(x)))
 # endif
 #elif defined(_MSC_VER)
-# ifndef GOTV_WARN_DEPRECATED
-#  define GOTV_WARN_DEPRECATED(x) __declspec(deprecated(x))
+# ifndef NLC_WARN_DEPRECATED
+#  define NLC_WARN_DEPRECATED(x) __declspec(deprecated(x))
 # endif
 #elif defined(__clang__)
-# ifndef GOTV_WARN_DEPRECATED
-#  define GOTV_WARN_DEPRECATED(x) __attribute__((deprecated(x)))
+# ifndef NLC_WARN_DEPRECATED
+#  define NLC_WARN_DEPRECATED(x) __attribute__((deprecated(x)))
 # endif
 #else
-# define GOTV_WARN_DEPRECATED(x)
+# define NLC_WARN_DEPRECATED(x)
 # pragma message("WARNING: You need to implement DEPRECATED for this compiler")
 #endif
 
 #ifdef _MSC_VER
-# define GOTV_INLINE			_inline
-# define GOTV_FORCE_INLINE		__forceinline
+# define NLC_INLINE			_inline
+# define NLC_FORCE_INLINE		__forceinline
 #elif defined(__GNUC__)
-# define GOTV_INLINE			inline
-# define GOTV_FORCE_INLINE		inline // __attribute((always_inline))
+# define NLC_INLINE			inline
+# define NLC_FORCE_INLINE		inline // __attribute((always_inline))
 #elif defined(__MWERKS__)
-# define GOTV_FORCE_INLINE		inline
-# define GOTV_FORCE_INLINE		inline
+# define NLC_FORCE_INLINE		inline
+# define NLC_FORCE_INLINE		inline
 #else
 /* add other compilers here ... */
-# define GOTV_INLINE
-# define GOTV_FORCE_INLINE
+# define NLC_INLINE
+# define NLC_FORCE_INLINE
 #endif
 
 #if defined(__GNUC__)
 # if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 95)
-#  define GOTV_ATTRIBUTE_PACKED __attribute__ ((packed))
-#  define GOTV_PRAGMA_PACK 0
+#  define NLC_ATTRIBUTE_PACKED __attribute__ ((packed))
+#  define NLC_PRAGMA_PACK 0
 # endif // if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 95)
 #endif // defined(__GNUC__)
 
-#if !defined(GOTV_ATTRIBUTE_PACKED)
-# define GOTV_ATTRIBUTE_PACKED
-# define GOTV_PRAGMA_PACK 1
-#endif // !defined(GOTV_ATTRIBUTE_PACKED)
+#if !defined(NLC_ATTRIBUTE_PACKED)
+# define NLC_ATTRIBUTE_PACKED
+# define NLC_PRAGMA_PACK 1
+#endif // !defined(NLC_ATTRIBUTE_PACKED)
 
 #if (!defined(__STDC_VERSION__) || (__STDC_VERSION__ < 199901L) )
-# if GOTV_GNUC_PREREQ(3,0)
-#  define GOTV_RESTRICT __restrict__
+# if NLC_GNUC_PREREQ(3,0)
+#  define NLC_RESTRICT __restrict__
 # elif (defined(_MSC_VER) && _MSC_VER >= 1400)
-#  define GOTV_RESTRICT __restrict
+#  define NLC_RESTRICT __restrict
 # else
-#  define GOTV_RESTRICT
+#  define NLC_RESTRICT
 # endif
 #else
-# define GOTV_RESTRICT restrict
+# define NLC_RESTRICT restrict
 #endif
 
 /* The __pure__ attribute was added in gcc 2.96.  */
 #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 96)
-# define GOTV_ATTRIBUTE_PURE __attribute__ ((__pure__))
+# define NLC_ATTRIBUTE_PURE __attribute__ ((__pure__))
 #else
-# define GOTV_ATTRIBUTE_PURE
+# define NLC_ATTRIBUTE_PURE
 #endif
 
 /* The __const__ attribute was added in gcc 2.95.  */
 #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 95)
-# define GOTV_ATTRIBUTE_CONST __attribute__ ((__const__))
+# define NLC_ATTRIBUTE_CONST __attribute__ ((__const__))
 #else
-# define GOTV_ATTRIBUTE_CONST
+# define NLC_ATTRIBUTE_CONST
 #endif
 
 /**Warning attributes for functions
 * NONNULL is not used to avoid the compiler optimizing out
 * some paranoid null checks. */
-#if defined(__GNUC__) && GOTV_GNUC_PREREQ(3, 4)
-# define GOTV_WARN_UNUSED_RESULT __attribute__ ((__warn_unused_result__))
+#if defined(__GNUC__) && NLC_GNUC_PREREQ(3, 4)
+# define NLC_WARN_UNUSED_RESULT __attribute__ ((__warn_unused_result__))
 #else
-# define GOTV_WARN_UNUSED_RESULT
+# define NLC_WARN_UNUSED_RESULT
 #endif
 
 // Borrowed from Chromium's base/compiler_specific.h.
@@ -196,39 +196,39 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 // Use like:
 //   virtual void foo() OVERRIDE;
 #if defined(_MSC_VER)
-# define GOTV_OVERRIDE override
+# define NLC_OVERRIDE override
 #elif defined(__clang__)
 // Clang defaults to C++03 and warns about using override. Squelch that.
 // Intentionally no push/pop here so all users of OVERRIDE ignore the warning
 // too. This is like passing -Wno-c++11-extensions, except that GCC won't die
 // (because it won't see this pragma).
 # pragma clang diagnostic ignored "-Wc++11-extensions"
-# define GOTV_OVERRIDE override
+# define NLC_OVERRIDE override
 #elif defined(__GNUC__) && __cplusplus >= 201103 && \
     (__GNUC__ * 10000 + __GNUC_MINOR__ * 100) >= 40700
 // GCC 4.7 supports explicit virtual overrides when C++11 support is enabled.
-# define GOTV_OVERRIDE override
+# define NLC_OVERRIDE override
 #else
-# define GOTV_OVERRIDE
+# define NLC_OVERRIDE
 #endif
 
 # ifdef _MSC_VER
-#  define GOTV_ALLOC(var, size, type) var = ((type*)_alloca(sizeof(type)*(size)))
+#  define NLC_ALLOC(var, size, type) var = ((type*)_alloca(sizeof(type)*(size)))
 # else
-#  define GOTV_ALLOC(var, size, type) var = ((type*)alloca(sizeof(type)*(size)))
+#  define NLC_ALLOC(var, size, type) var = ((type*)alloca(sizeof(type)*(size)))
 # endif
 
-//#define GOTV_DECLARE_UNUSED(a,b) a __attribute__((unused)) b;
-#define GOTV_DECLARE_UNUSED(x) ((void)(x))
-#define GOTV_UNUSED				GOTV_DECLARE_UNUSED // alias for ease of use
+//#define NLC_DECLARE_UNUSED(a,b) a __attribute__((unused)) b;
+#define NLC_DECLARE_UNUSED(x) ((void)(x))
+#define NLC_UNUSED				NLC_DECLARE_UNUSED // alias for ease of use
 
 // Annotate a function that will not return control flow to the caller.
 #if defined(_MSC_VER)
-# define GOTV_NO_RETURN __declspec(noreturn)
+# define NLC_NO_RETURN __declspec(noreturn)
 #elif defined(__GNUC__)
-# define GOTV_NO_RETURN __attribute__((noreturn))
+# define NLC_NO_RETURN __attribute__((noreturn))
 #else
-# define GOTV_NO_RETURN
+# define NLC_NO_RETURN
 #endif
 
 # ifndef __STDC_CONSTANT_MACROS
@@ -561,7 +561,7 @@ typedef unsigned int sigset_t;
 
 
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 // functions missing from windows .. implemented in CoreLib/VxFuntionsMissingInWindows.cpp
 // simulate gettimeofday
@@ -580,7 +580,7 @@ uint32_t						getpagesize( void );
 // Find the first occurrence of the byte string s in byte string
 const void *					memmem( const void *l, size_t l_len, const void *s, size_t s_len );
 //size_t							getline( char **lineptr, size_t *n, FILE *stream );
-GOTV_INLINE uint32_t			setuid( uint32_t id ) { return id; } // windows does not have user id's so fake it for now
+NLC_INLINE uint32_t			setuid( uint32_t id ) { return id; } // windows does not have user id's so fake it for now
 char *							strchrnul( const char *s, int c_in ); // implemented in libgnu/strchrnul.c
 char *							stpcpy( char *a, const char *b );
 char *							stpncpy( char *dest, const char *src, size_t n ); // implemented in libgnu/stpncpy
@@ -598,7 +598,7 @@ char *							strndup( const char *_s, size_t _n );
 // create temp unique directory in given path 
 char *							mkdtemp( char * path );	// implemented in VxFuntionsMissingInWindows.cpp
 int								setenv( const char *name, const char *value, int overwrite ); // implemented in VxFuntionsMissingInWindows.cpp
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #define HAVE_SECURE_GETENV		1 // have secure_getenv
 /* Define if you have the <winsock2.h> header file. */
@@ -1235,7 +1235,7 @@ typedef int64_t              time64_t;
 # define	HAS_FSTAT 			1		/* fstat syscall		*/
 #endif // _MSC_VER
 
-/* Define if GOTV_INLINE asm memory barrier is supported */
+/* Define if NLC_INLINE asm memory barrier is supported */
 #ifndef TARGET_OS_WINDOWS
 # define HAVE_GCC_ASM_VOLATILE_MEMORY 1
 #endif // TARGET_OS_WINDOWS

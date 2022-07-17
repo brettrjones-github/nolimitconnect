@@ -69,12 +69,12 @@ static av_cold void init_vlcs(ASV1Context *a)
 }
 
 // FIXME write a reversed bitstream reader to avoid the double reverse
-static GOTV_INLINE int asv2_get_bits(GetBitContext *gb, int n)
+static NLC_INLINE int asv2_get_bits(GetBitContext *gb, int n)
 {
     return ff_reverse[get_bits(gb, n) << (8 - n)];
 }
 
-static GOTV_INLINE int asv1_get_level(GetBitContext *gb)
+static NLC_INLINE int asv1_get_level(GetBitContext *gb)
 {
     int code = get_vlc2(gb, level_vlc.table, VLC_BITS, 1);
 
@@ -84,7 +84,7 @@ static GOTV_INLINE int asv1_get_level(GetBitContext *gb)
         return code - 3;
 }
 
-static GOTV_INLINE int asv2_get_level(GetBitContext *gb)
+static NLC_INLINE int asv2_get_level(GetBitContext *gb)
 {
     int code = get_vlc2(gb, asv2_level_vlc.table, ASV2_LEVEL_VLC_BITS, 1);
 
@@ -94,7 +94,7 @@ static GOTV_INLINE int asv2_get_level(GetBitContext *gb)
         return code - 31;
 }
 
-static GOTV_INLINE int asv1_decode_block(ASV1Context *a, int16_t block[64])
+static NLC_INLINE int asv1_decode_block(ASV1Context *a, int16_t block[64])
 {
     int i;
 
@@ -125,7 +125,7 @@ static GOTV_INLINE int asv1_decode_block(ASV1Context *a, int16_t block[64])
     return 0;
 }
 
-static GOTV_INLINE int asv2_decode_block(ASV1Context *a, int16_t block[64])
+static NLC_INLINE int asv2_decode_block(ASV1Context *a, int16_t block[64])
 {
     int i, count, ccp;
 
@@ -161,7 +161,7 @@ static GOTV_INLINE int asv2_decode_block(ASV1Context *a, int16_t block[64])
     return 0;
 }
 
-static GOTV_INLINE int decode_mb(ASV1Context *a, int16_t block[6][64])
+static NLC_INLINE int decode_mb(ASV1Context *a, int16_t block[6][64])
 {
     int i, ret;
 
@@ -181,7 +181,7 @@ static GOTV_INLINE int decode_mb(ASV1Context *a, int16_t block[6][64])
     return 0;
 }
 
-static GOTV_INLINE void idct_put(ASV1Context *a, AVFrame *frame, int mb_x, int mb_y)
+static NLC_INLINE void idct_put(ASV1Context *a, AVFrame *frame, int mb_x, int mb_y)
 {
     int16_t(*block)[64] = a->block;
     int linesize = frame->linesize[0];

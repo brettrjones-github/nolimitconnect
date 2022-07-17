@@ -29,7 +29,7 @@
 #include <sys/time.h>
 #endif
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #define LIBNFS_FEATURE_READAHEAD
 #define LIBNFS_FEATURE_DEBUG
@@ -85,22 +85,22 @@ struct utimbuf {
 /*
  * Used for interfacing the async version of the api into an GOTV_EXTERNal eventsystem
  */
-GOTV_EXTERN int nfs_get_fd(struct nfs_context *nfs);
-GOTV_EXTERN int nfs_which_events(struct nfs_context *nfs);
-GOTV_EXTERN int nfs_service(struct nfs_context *nfs, int revents);
-GOTV_EXTERN int nfs_queue_length(struct nfs_context *nfs);
+NLC_EXTERN int nfs_get_fd(struct nfs_context *nfs);
+NLC_EXTERN int nfs_which_events(struct nfs_context *nfs);
+NLC_EXTERN int nfs_service(struct nfs_context *nfs, int revents);
+NLC_EXTERN int nfs_queue_length(struct nfs_context *nfs);
 
 /*
  * Used if you need different credentials than the default for the current user.
  */
 struct AUTH;
-GOTV_EXTERN void nfs_set_auth(struct nfs_context *nfs, struct AUTH *auth);
+NLC_EXTERN void nfs_set_auth(struct nfs_context *nfs, struct AUTH *auth);
 
 
 /*
  * When an operation failed, this function can extract a detailed error string.
  */
-GOTV_EXTERN char *nfs_get_error(struct nfs_context *nfs);
+NLC_EXTERN char *nfs_get_error(struct nfs_context *nfs);
 
 
 /*
@@ -124,11 +124,11 @@ typedef void (*rpc_cb)(struct rpc_context *rpc, int status, void *data, void *pr
  *  NULL : Failed to create a context.
  *  *nfs : A pointer to an nfs context.
  */
-GOTV_EXTERN struct nfs_context *nfs_init_context(void);
+NLC_EXTERN struct nfs_context *nfs_init_context(void);
 /*
  * Destroy an nfs context.
  */
-GOTV_EXTERN void nfs_destroy_context(struct nfs_context *nfs);
+NLC_EXTERN void nfs_destroy_context(struct nfs_context *nfs);
 
 
 /*
@@ -155,37 +155,37 @@ GOTV_EXTERN void nfs_destroy_context(struct nfs_context *nfs);
 * Parse a complete NFS URL including, server, path and
 * filename. Fail if any component is missing.
 */
-GOTV_EXTERN struct nfs_url *nfs_parse_url_full(struct nfs_context *nfs, const char *url);
+NLC_EXTERN struct nfs_url *nfs_parse_url_full(struct nfs_context *nfs, const char *url);
 
 /*
 * Parse an NFS URL, but do not split path and file. File
 * in the resulting struct remains NULL.
 */
-GOTV_EXTERN struct nfs_url *nfs_parse_url_dir(struct nfs_context *nfs, const char *url);
+NLC_EXTERN struct nfs_url *nfs_parse_url_dir(struct nfs_context *nfs, const char *url);
 
 /*
 * Parse an NFS URL, but do not fail if file, path or even server is missing.
 * Check elements of the resulting struct for NULL.
 */
-GOTV_EXTERN struct nfs_url *nfs_parse_url_incomplete(struct nfs_context *nfs, const char *url);
+NLC_EXTERN struct nfs_url *nfs_parse_url_incomplete(struct nfs_context *nfs, const char *url);
 
 
 /*
 * Free the URL struct returned by the nfs_parse_url_* functions.
 */
-GOTV_EXTERN void nfs_destroy_url(struct nfs_url *url);
+NLC_EXTERN void nfs_destroy_url(struct nfs_url *url);
 
 struct nfsfh;
 
 /*
  * Get the maximum supported READ3 size by the server
  */
-GOTV_EXTERN uint64_t nfs_get_readmax(struct nfs_context *nfs);
+NLC_EXTERN uint64_t nfs_get_readmax(struct nfs_context *nfs);
 
 /*
  * Get the maximum supported WRITE3 size by the server
  */
-GOTV_EXTERN uint64_t nfs_get_writemax(struct nfs_context *nfs);
+NLC_EXTERN uint64_t nfs_get_writemax(struct nfs_context *nfs);
 
 
 /*
@@ -204,7 +204,7 @@ GOTV_EXTERN uint64_t nfs_get_writemax(struct nfs_context *nfs);
 *          data is the error string.
 */
 /* This function is deprecated. Use nfs_stat64_async() instead */
-GOTV_EXTERN int nfs_stat_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_stat_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
 * Sync stat(<filename>)
 * Function returns
@@ -213,9 +213,9 @@ GOTV_EXTERN int nfs_stat_async(struct nfs_context *nfs, const char *path, nfs_cb
 */
 /* This function is deprecated. Use nfs_stat64() instead */
 #ifdef WIN32
-GOTV_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, NFSSTAT *st);
+NLC_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, NFSSTAT *st);
 #else
-GOTV_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, NFSSTAT *st);
+NLC_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, NFSSTAT *st);
 #endif
 
 /*
@@ -233,14 +233,14 @@ GOTV_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, NFSSTAT *st)
  * -errno : An error occurred.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_mount_async(struct nfs_context *nfs, const char *server, const char *exportname, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_mount_async(struct nfs_context *nfs, const char *server, const char *exportname, nfs_cb cb, void *private_data);
 /*
  * Sync nfs mount.
  * Function returns
  *      0 : The operation was successfully.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_mount(struct nfs_context *nfs, const char *server, const char *exportname);
+NLC_EXTERN int nfs_mount(struct nfs_context *nfs, const char *server, const char *exportname);
 
 
 /* nfs_stat64
@@ -288,7 +288,7 @@ struct nfs_stat_64 {
  *          data is the error string.
  */
 struct stat;
-GOTV_EXTERN int nfs_stat_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_stat_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync stat(<filename>)
  * Function returns
@@ -296,9 +296,9 @@ GOTV_EXTERN int nfs_stat_async(struct nfs_context *nfs, const char *path, nfs_cb
  * -errno : The command failed.
  */
  #ifdef TARGET_OS_WINDOWS
-GOTV_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, struct __stat64 *st);
+NLC_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, struct __stat64 *st);
 #else
-GOTV_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, struct stat *st);
+NLC_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, struct stat *st);
 #endif
 
 
@@ -317,14 +317,14 @@ GOTV_EXTERN int nfs_stat(struct nfs_context *nfs, const char *path, struct stat 
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_fstat_async(struct nfs_context *nfs, struct nfsfh *nfsfh, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_fstat_async(struct nfs_context *nfs, struct nfsfh *nfsfh, nfs_cb cb, void *private_data);
 /*
  * Sync fstat(nfsfh *)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_fstat(struct nfs_context *nfs, struct nfsfh *nfsfh, NFSSTAT *st);
+NLC_EXTERN int nfs_fstat(struct nfs_context *nfs, struct nfsfh *nfsfh, NFSSTAT *st);
 
 
 
@@ -347,14 +347,14 @@ GOTV_EXTERN int nfs_fstat(struct nfs_context *nfs, struct nfsfh *nfsfh, NFSSTAT 
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_open_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_open_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
 /*
  * Sync stat(<filename>)
  * Function returns
  *      0 : The operation was successfull. *nfsfh is filled in.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_open(struct nfs_context *nfs, const char *path, int mode, struct nfsfh **nfsfh);
+NLC_EXTERN int nfs_open(struct nfs_context *nfs, const char *path, int mode, struct nfsfh **nfsfh);
 
 
 
@@ -375,14 +375,14 @@ GOTV_EXTERN int nfs_open(struct nfs_context *nfs, const char *path, int mode, st
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_close_async(struct nfs_context *nfs, struct nfsfh *nfsfh, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_close_async(struct nfs_context *nfs, struct nfsfh *nfsfh, nfs_cb cb, void *private_data);
 /*
  * Sync close(nfsfh)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_close(struct nfs_context *nfs, struct nfsfh *nfsfh);
+NLC_EXTERN int nfs_close(struct nfs_context *nfs, struct nfsfh *nfsfh);
 
 
 /*
@@ -402,14 +402,14 @@ GOTV_EXTERN int nfs_close(struct nfs_context *nfs, struct nfsfh *nfsfh);
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_pread_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_pread_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, nfs_cb cb, void *private_data);
 /*
  * Sync pread()
  * Function returns
  *    >=0 : numer of bytes read.
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_pread(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, char *buf);
+NLC_EXTERN int nfs_pread(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, char *buf);
 
 
 
@@ -430,14 +430,14 @@ GOTV_EXTERN int nfs_pread(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_read_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_read_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, nfs_cb cb, void *private_data);
 /*
  * Sync read()
  * Function returns
  *    >=0 : numer of bytes read.
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_read(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, char *buf);
+NLC_EXTERN int nfs_read(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, char *buf);
 
 
 
@@ -458,14 +458,14 @@ GOTV_EXTERN int nfs_read(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t 
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_pwrite_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, char *buf, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_pwrite_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, char *buf, nfs_cb cb, void *private_data);
 /*
  * Sync pwrite()
  * Function returns
  *    >=0 : numer of bytes written.
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_pwrite(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, char *buf);
+NLC_EXTERN int nfs_pwrite(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, uint64_t count, char *buf);
 
 
 /*
@@ -484,14 +484,14 @@ GOTV_EXTERN int nfs_pwrite(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_write_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, char *buf, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_write_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, char *buf, nfs_cb cb, void *private_data);
 /*
  * Sync write()
  * Function returns
  *    >=0 : numer of bytes written.
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_write(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, char *buf);
+NLC_EXTERN int nfs_write(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t count, char *buf);
 
 
 /*
@@ -510,14 +510,14 @@ GOTV_EXTERN int nfs_write(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_lseek_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_lseek_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, nfs_cb cb, void *private_data);
 /*
  * Sync lseek()
  * Function returns
  *    >=0 : numer of bytes read.
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, uint64_t *current_offset);
+NLC_EXTERN int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, uint64_t *current_offset);
 
 
 /*
@@ -535,14 +535,14 @@ GOTV_EXTERN int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t 
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_fsync_async(struct nfs_context *nfs, struct nfsfh *nfsfh, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_fsync_async(struct nfs_context *nfs, struct nfsfh *nfsfh, nfs_cb cb, void *private_data);
 /*
  * Sync fsync()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_fsync(struct nfs_context *nfs, struct nfsfh *nfsfh);
+NLC_EXTERN int nfs_fsync(struct nfs_context *nfs, struct nfsfh *nfsfh);
 
 
 
@@ -561,14 +561,14 @@ GOTV_EXTERN int nfs_fsync(struct nfs_context *nfs, struct nfsfh *nfsfh);
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_truncate_async(struct nfs_context *nfs, const char *path, uint64_t length, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_truncate_async(struct nfs_context *nfs, const char *path, uint64_t length, nfs_cb cb, void *private_data);
 /*
  * Sync truncate()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_truncate(struct nfs_context *nfs, const char *path, uint64_t length);
+NLC_EXTERN int nfs_truncate(struct nfs_context *nfs, const char *path, uint64_t length);
 
 
 
@@ -587,14 +587,14 @@ GOTV_EXTERN int nfs_truncate(struct nfs_context *nfs, const char *path, uint64_t
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_ftruncate_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t length, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_ftruncate_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t length, nfs_cb cb, void *private_data);
 /*
  * Sync ftruncate()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_ftruncate(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t length);
+NLC_EXTERN int nfs_ftruncate(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t length);
 
 
 
@@ -616,14 +616,14 @@ GOTV_EXTERN int nfs_ftruncate(struct nfs_context *nfs, struct nfsfh *nfsfh, uint
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_mkdir_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_mkdir_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync mkdir()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_mkdir(struct nfs_context *nfs, const char *path);
+NLC_EXTERN int nfs_mkdir(struct nfs_context *nfs, const char *path);
 
 
 
@@ -642,14 +642,14 @@ GOTV_EXTERN int nfs_mkdir(struct nfs_context *nfs, const char *path);
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_rmdir_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_rmdir_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync rmdir()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_rmdir(struct nfs_context *nfs, const char *path);
+NLC_EXTERN int nfs_rmdir(struct nfs_context *nfs, const char *path);
 
 
 
@@ -670,14 +670,14 @@ GOTV_EXTERN int nfs_rmdir(struct nfs_context *nfs, const char *path);
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_creat_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_creat_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
 /*
  * Sync creat()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_creat(struct nfs_context *nfs, const char *path, int mode, struct nfsfh **nfsfh);
+NLC_EXTERN int nfs_creat(struct nfs_context *nfs, const char *path, int mode, struct nfsfh **nfsfh);
 
 
 /*
@@ -695,14 +695,14 @@ GOTV_EXTERN int nfs_creat(struct nfs_context *nfs, const char *path, int mode, s
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_mknod_async(struct nfs_context *nfs, const char *path, int mode, int dev, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_mknod_async(struct nfs_context *nfs, const char *path, int mode, int dev, nfs_cb cb, void *private_data);
 /*
  * Sync mknod()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_mknod(struct nfs_context *nfs, const char *path, int mode, int dev);
+NLC_EXTERN int nfs_mknod(struct nfs_context *nfs, const char *path, int mode, int dev);
 
 
 
@@ -722,14 +722,14 @@ GOTV_EXTERN int nfs_mknod(struct nfs_context *nfs, const char *path, int mode, i
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_unlink_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_unlink_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync unlink()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_unlink(struct nfs_context *nfs, const char *path);
+NLC_EXTERN int nfs_unlink(struct nfs_context *nfs, const char *path);
 
 
 
@@ -753,14 +753,14 @@ struct nfsdir;
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_opendir_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_opendir_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync opendir()
  * Function returns
  *      0 : Success
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_opendir(struct nfs_context *nfs, const char *path, struct nfsdir **nfsdir);
+NLC_EXTERN int nfs_opendir(struct nfs_context *nfs, const char *path, struct nfsdir **nfsdir);
 
 
 //// READDIR()
@@ -809,7 +809,7 @@ struct nfsdirent {
 /*
  * nfs_readdir() never blocks, so no special sync/async versions are available
  */
-GOTV_EXTERN struct nfsdirent *nfs_readdir(struct nfs_context *nfs, struct nfsdir *nfsdir);
+NLC_EXTERN struct nfsdirent *nfs_readdir(struct nfs_context *nfs, struct nfsdir *nfsdir);
 
 
 
@@ -819,7 +819,7 @@ GOTV_EXTERN struct nfsdirent *nfs_readdir(struct nfs_context *nfs, struct nfsdir
 /*
  * nfs_closedir() never blocks, so no special sync/async versions are available
  */
-GOTV_EXTERN void nfs_closedir(struct nfs_context *nfs, struct nfsdir *nfsdir);
+NLC_EXTERN void nfs_closedir(struct nfs_context *nfs, struct nfsdir *nfsdir);
 
 
 
@@ -839,14 +839,14 @@ GOTV_EXTERN void nfs_closedir(struct nfs_context *nfs, struct nfsdir *nfsdir);
  *          data is the error string.
  */
 struct statvfs;
-GOTV_EXTERN int nfs_statvfs_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_statvfs_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync statvfs(<dirname>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_statvfs(struct nfs_context *nfs, const char *path, struct statvfs *svfs);
+NLC_EXTERN int nfs_statvfs(struct nfs_context *nfs, const char *path, struct statvfs *svfs);
 
 
 /*
@@ -866,14 +866,14 @@ GOTV_EXTERN int nfs_statvfs(struct nfs_context *nfs, const char *path, struct st
  *          data is the error string.
  */
 struct statvfs;
-GOTV_EXTERN int nfs_readlink_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_readlink_async(struct nfs_context *nfs, const char *path, nfs_cb cb, void *private_data);
 /*
  * Sync readlink(<name>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_readlink(struct nfs_context *nfs, const char *path, char *buf, int bufsize);
+NLC_EXTERN int nfs_readlink(struct nfs_context *nfs, const char *path, char *buf, int bufsize);
 
 
 
@@ -892,14 +892,14 @@ GOTV_EXTERN int nfs_readlink(struct nfs_context *nfs, const char *path, char *bu
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_chmod_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_chmod_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
 /*
  * Sync chmod(<name>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_chmod(struct nfs_context *nfs, const char *path, int mode);
+NLC_EXTERN int nfs_chmod(struct nfs_context *nfs, const char *path, int mode);
 
 
 
@@ -918,14 +918,14 @@ GOTV_EXTERN int nfs_chmod(struct nfs_context *nfs, const char *path, int mode);
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_fchmod_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int mode, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_fchmod_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int mode, nfs_cb cb, void *private_data);
 /*
  * Sync fchmod(<handle>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_fchmod(struct nfs_context *nfs, struct nfsfh *nfsfh, int mode);
+NLC_EXTERN int nfs_fchmod(struct nfs_context *nfs, struct nfsfh *nfsfh, int mode);
 
 
 
@@ -944,14 +944,14 @@ GOTV_EXTERN int nfs_fchmod(struct nfs_context *nfs, struct nfsfh *nfsfh, int mod
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_chown_async(struct nfs_context *nfs, const char *path, int uid, int gid, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_chown_async(struct nfs_context *nfs, const char *path, int uid, int gid, nfs_cb cb, void *private_data);
 /*
  * Sync chown(<name>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_chown(struct nfs_context *nfs, const char *path, int uid, int gid);
+NLC_EXTERN int nfs_chown(struct nfs_context *nfs, const char *path, int uid, int gid);
 
 
 
@@ -970,14 +970,14 @@ GOTV_EXTERN int nfs_chown(struct nfs_context *nfs, const char *path, int uid, in
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_fchown_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int uid, int gid, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_fchown_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int uid, int gid, nfs_cb cb, void *private_data);
 /*
  * Sync fchown(<handle>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_fchown(struct nfs_context *nfs, struct nfsfh *nfsfh, int uid, int gid);
+NLC_EXTERN int nfs_fchown(struct nfs_context *nfs, struct nfsfh *nfsfh, int uid, int gid);
 
 
 
@@ -997,14 +997,14 @@ GOTV_EXTERN int nfs_fchown(struct nfs_context *nfs, struct nfsfh *nfsfh, int uid
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_utimes_async(struct nfs_context *nfs, const char *path, struct timeval *times, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_utimes_async(struct nfs_context *nfs, const char *path, struct timeval *times, nfs_cb cb, void *private_data);
 /*
  * Sync utimes(<path>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_utimes(struct nfs_context *nfs, const char *path, struct timeval *times);
+NLC_EXTERN int nfs_utimes(struct nfs_context *nfs, const char *path, struct timeval *times);
 
 
 /*
@@ -1023,14 +1023,14 @@ GOTV_EXTERN int nfs_utimes(struct nfs_context *nfs, const char *path, struct tim
  *          data is the error string.
  */
 struct utimbuf;
-GOTV_EXTERN int nfs_utime_async(struct nfs_context *nfs, const char *path, struct utimbuf *times, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_utime_async(struct nfs_context *nfs, const char *path, struct utimbuf *times, nfs_cb cb, void *private_data);
 /*
  * Sync utime(<path>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_utime(struct nfs_context *nfs, const char *path, struct utimbuf *times);
+NLC_EXTERN int nfs_utime(struct nfs_context *nfs, const char *path, struct utimbuf *times);
 
 
 
@@ -1050,14 +1050,14 @@ GOTV_EXTERN int nfs_utime(struct nfs_context *nfs, const char *path, struct utim
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_access_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_access_async(struct nfs_context *nfs, const char *path, int mode, nfs_cb cb, void *private_data);
 /*
  * Sync access(<path>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_access(struct nfs_context *nfs, const char *path, int mode);
+NLC_EXTERN int nfs_access(struct nfs_context *nfs, const char *path, int mode);
 
 
 
@@ -1077,14 +1077,14 @@ GOTV_EXTERN int nfs_access(struct nfs_context *nfs, const char *path, int mode);
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_symlink_async(struct nfs_context *nfs, const char *oldpath, const char *newpath, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_symlink_async(struct nfs_context *nfs, const char *oldpath, const char *newpath, nfs_cb cb, void *private_data);
 /*
  * Sync symlink(<path>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_symlink(struct nfs_context *nfs, const char *oldpath, const char *newpath);
+NLC_EXTERN int nfs_symlink(struct nfs_context *nfs, const char *oldpath, const char *newpath);
 
 
 /*
@@ -1102,14 +1102,14 @@ GOTV_EXTERN int nfs_symlink(struct nfs_context *nfs, const char *oldpath, const 
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_rename_async(struct nfs_context *nfs, const char *oldpath, const char *newpath, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_rename_async(struct nfs_context *nfs, const char *oldpath, const char *newpath, nfs_cb cb, void *private_data);
 /*
  * Sync rename(<oldpath>, <newpath>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_rename(struct nfs_context *nfs, const char *oldpath, const char *newpath);
+NLC_EXTERN int nfs_rename(struct nfs_context *nfs, const char *oldpath, const char *newpath);
 
 
 
@@ -1128,14 +1128,14 @@ GOTV_EXTERN int nfs_rename(struct nfs_context *nfs, const char *oldpath, const c
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_link_async(struct nfs_context *nfs, const char *oldpath, const char *newpath, nfs_cb cb, void *private_data);
+NLC_EXTERN int nfs_link_async(struct nfs_context *nfs, const char *oldpath, const char *newpath, nfs_cb cb, void *private_data);
 /*
  * Sync link(<oldpath>, <newpath>)
  * Function returns
  *      0 : The operation was successfull.
  * -errno : The command failed.
  */
-GOTV_EXTERN int nfs_link(struct nfs_context *nfs, const char *oldpath, const char *newpath);
+NLC_EXTERN int nfs_link(struct nfs_context *nfs, const char *oldpath, const char *newpath);
 
 
 /*
@@ -1159,7 +1159,7 @@ GOTV_EXTERN int nfs_link(struct nfs_context *nfs, const char *oldpath, const cha
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int mount_getexports_async(struct rpc_context *rpc, const char *server, rpc_cb cb, void *private_data);
+NLC_EXTERN int mount_getexports_async(struct rpc_context *rpc, const char *server, rpc_cb cb, void *private_data);
 /*
  * Sync getexports(<server>)
  * Function returns
@@ -1168,9 +1168,9 @@ GOTV_EXTERN int mount_getexports_async(struct rpc_context *rpc, const char *serv
  * 
  * returned data must be freed by calling mount_free_export_list(exportnode);
  */
-GOTV_EXTERN struct exportnode *mount_getexports(const char *server);
+NLC_EXTERN struct exportnode *mount_getexports(const char *server);
 
-GOTV_EXTERN void mount_free_export_list(struct exportnode *exports);
+NLC_EXTERN void mount_free_export_list(struct exportnode *exports);
 
 
 //qqq replace later with lseek(cur, 0)
@@ -1200,4 +1200,4 @@ struct nfs_server_list {
 struct nfs_server_list *nfs_find_local_servers(void);
 void free_nfs_srvr_list(struct nfs_server_list *srv);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES

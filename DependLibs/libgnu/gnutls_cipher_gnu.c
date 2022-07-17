@@ -55,7 +55,7 @@ static int ciphertext_to_compressed(gnutls_session_t session,
 				    record_parameters_st * params,
 				    uint64 * sequence);
 
-GOTV_INLINE static int is_write_comp_null(record_parameters_st * record_params)
+NLC_INLINE static int is_write_comp_null(record_parameters_st * record_params)
 {
 	if (record_params->compression_algorithm == GNUTLS_COMP_NULL)
 		return 0;
@@ -63,7 +63,7 @@ GOTV_INLINE static int is_write_comp_null(record_parameters_st * record_params)
 	return 1;
 }
 
-GOTV_INLINE static int is_read_comp_null(record_parameters_st * record_params)
+NLC_INLINE static int is_read_comp_null(record_parameters_st * record_params)
 {
 	if (record_params->compression_algorithm == GNUTLS_COMP_NULL)
 		return 0;
@@ -201,7 +201,7 @@ _gnutls_decrypt(gnutls_session_t session,
 }
 
 
-GOTV_INLINE static int
+NLC_INLINE static int
 calc_enc_length_block(gnutls_session_t session,
 		      const version_entry_st * ver,
 		      int data_size,
@@ -233,7 +233,7 @@ calc_enc_length_block(gnutls_session_t session,
 	return length;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 calc_enc_length_stream(gnutls_session_t session, int data_size,
 		       int hash_size, unsigned auth_cipher,
 		       unsigned exp_iv_size)
@@ -252,7 +252,7 @@ calc_enc_length_stream(gnutls_session_t session, int data_size,
 /* generates the authentication data (data to be hashed only
  * and are not to be sent). Returns their size.
  */
-static GOTV_INLINE int
+static NLC_INLINE int
 make_preamble(uint8_t * uint64_data, uint8_t type, unsigned int length,
 	      const version_entry_st * ver, uint8_t * preamble)
 {

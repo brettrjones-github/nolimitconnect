@@ -40,14 +40,14 @@
 #endif
 
 #define MULH MULH
-static GOTV_INLINE av_const int MULH(int a, int b){
+static NLC_INLINE av_const int MULH(int a, int b){
     int r;
     __asm__ ("mulhw %0, %1, %2" : "=r"(r) : "r"(a), "r"(b));
     return r;
 }
 
 #if !ARCH_PPC64
-static GOTV_INLINE av_const int64_t MAC64(int64_t d, int a, int b)
+static NLC_INLINE av_const int64_t MAC64(int64_t d, int a, int b)
 {
     union { uint64_t x; unsigned hl[2]; } x = { d };
     int h, l;
@@ -61,7 +61,7 @@ static GOTV_INLINE av_const int64_t MAC64(int64_t d, int a, int b)
 }
 #define MAC64(d, a, b) ((d) = MAC64(d, a, b))
 
-static GOTV_INLINE av_const int64_t MLS64(int64_t d, int a, int b)
+static NLC_INLINE av_const int64_t MLS64(int64_t d, int a, int b)
 {
     union { uint64_t x; unsigned hl[2]; } x = { d };
     int h, l;

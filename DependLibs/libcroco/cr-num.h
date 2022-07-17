@@ -35,7 +35,7 @@
 #include "cr-utils.h"
 #include "cr-parsing-location.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -121,7 +121,7 @@ void
 cr_num_destroy (CRNum *a_this) ;
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 #endif /*__CR_NUM_H__*/

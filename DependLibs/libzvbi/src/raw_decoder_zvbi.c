@@ -248,7 +248,7 @@ _vbi_service_table [] = {
 	}
 };
 
-GOTV_INLINE const _vbi_service_par *
+NLC_INLINE const _vbi_service_par *
 find_service_par		(unsigned int		service)
 {
 	unsigned int i;
@@ -405,7 +405,7 @@ _vbi3_raw_decoder_dump		(const vbi3_raw_decoder *rd,
 	}
 }
 
-GOTV_INLINE int
+NLC_INLINE int
 cpr1204_crc			(const vbi_sliced *	sliced)
 {
 	const int poly = (1 << 6) + (1 << 1) + 1;
@@ -450,7 +450,7 @@ slice				(vbi3_raw_decoder *	rd,
 	}
 }
 
-GOTV_INLINE vbi_sliced *
+NLC_INLINE vbi_sliced *
 decode_pattern			(vbi3_raw_decoder *	rd,
 				 vbi_sliced *		sliced,
 				 int8_t *		pattern,

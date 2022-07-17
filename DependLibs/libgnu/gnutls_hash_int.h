@@ -25,7 +25,7 @@
 
 #include <libgnu/abstract_gnu.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 /* basic functions */
@@ -39,7 +39,7 @@ int _gnutls_mac_fast(gnutls_mac_algorithm_t algorithm, const void *key,
 		     int keylen, const void *text, size_t textlen,
 		     void *digest);
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_mac(mac_hd_st * handle, const void *text, size_t textlen)
 {
 	if (textlen > 0) {
@@ -48,14 +48,14 @@ _gnutls_mac(mac_hd_st * handle, const void *text, size_t textlen)
 	return 0;
 }
 
-GOTV_INLINE static void _gnutls_mac_output(mac_hd_st * handle, void *digest)
+NLC_INLINE static void _gnutls_mac_output(mac_hd_st * handle, void *digest)
 {
 	if (digest != NULL) {
 		handle->output(handle->handle, digest, handle->mac_len);
 	}
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_mac_set_nonce(mac_hd_st * handle, const void *nonce, size_t n_size)
 {
 	if (handle->setnonce)
@@ -68,7 +68,7 @@ void _gnutls_mac_deinit(mac_hd_st * handle, void *digest);
 /* Hash interface */
 int _gnutls_hash_init(digest_hd_st *, const mac_entry_st * e);
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_hash(digest_hd_st * handle, const void *text, size_t textlen)
 {
 	if (textlen > 0) {
@@ -104,7 +104,7 @@ int _gnutls_ssl3_hash_md5(const void *first, int first_len,
 int _gnutls_mac_deinit_ssl3_handshake(digest_hd_st * handle, void *digest,
 				      uint8_t * key, uint32_t key_size);
 
-GOTV_INLINE static int IS_SHA(gnutls_digest_algorithm_t algo)
+NLC_INLINE static int IS_SHA(gnutls_digest_algorithm_t algo)
 {
 	if (algo == GNUTLS_DIG_SHA1 || algo == GNUTLS_DIG_SHA224 ||
 	    algo == GNUTLS_DIG_SHA256 || algo == GNUTLS_DIG_SHA384 ||
@@ -120,7 +120,7 @@ extern gnutls_crypto_mac_st _gnutls_mac_ops;
 extern int crypto_digest_prio;
 extern gnutls_crypto_digest_st _gnutls_digest_ops;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #include <libgnu/gnutls_int.h>
 #include <libgnu/gnutls_crypto.h>

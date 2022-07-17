@@ -34,7 +34,7 @@
 #   include "i386/dct.h"
 #endif
 
-static GOTV_INLINE void
+static NLC_INLINE void
 pixel_sub_wxh (int16_t * diff, int i_size, uint8_t * pix1, int i_pix1, uint8_t * pix2, int i_pix2)
 {
   int y, x;

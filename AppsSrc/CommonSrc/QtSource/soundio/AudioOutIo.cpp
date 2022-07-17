@@ -24,6 +24,8 @@
 #include <QDebug>
 #include <QtEndian>
 #include <QTimer>
+#include <QMessageBox>
+
 #include <math.h>
 
 //============================================================================
@@ -41,32 +43,69 @@ bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& de
 {
     if( !m_initialized )
     {
-        m_initialized = true;
-
-        QAudioFormat format = deviceInfo.preferredFormat();
-
-        format.setSampleRate(audioFormat.sampleRate());
-        format.setChannelCount(audioFormat.channelCount());
-        format.setSampleFormat(QAudioFormat::Int16); // only pcm is allowed
-        if( !deviceInfo.isFormatSupported(format) )
-        {
-            LogMsg( LOG_ERROR, " AudioOutIo::initAudioOut format not supported");
-        }
-
-        m_AudioFormat = format;
-        m_AudioOutputDevice.reset( new QAudioSink( deviceInfo, m_AudioFormat ) );
-
-        m_AudioOutputDevice->setBufferSize(format.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16);
-
-        // determine multiply value to go from 8000Hz mono to the speaker format we want
+        m_AudioFormat = audioFormat;
         setUpsampleMultiplier( (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) / 8000 );
-
-        this->open( QIODevice::ReadOnly );
-
-        connect(m_AudioOutputDevice.data(), SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
+        int deviceIndex = 0;
+        m_AudioIoMgr.getSoundOutDeviceIndex( deviceIndex );
+        m_initialized = soundOutDeviceChanged( deviceIndex );
     }
 
     return m_initialized;
+}
+
+//============================================================================
+bool AudioOutIo::soundOutDeviceChanged( int deviceIndex )
+{
+    if( !m_AudioOutputDevice.isNull() )
+    {
+        m_AudioOutputDevice->disconnect( this );
+    }
+
+    std::vector< std::pair<QString, QAudioDevice> > outDeviceList;
+    m_AudioIoMgr.getSoundOutDevices( outDeviceList );
+    if( outDeviceList.empty() )
+    {
+        QMessageBox::information( nullptr, QObject::tr( "Sound Out Device" ), QObject::tr( "No Sound Output Devices Avalable" ), QMessageBox::Ok );
+        return false;
+    }
+
+    if( deviceIndex >= outDeviceList.size() )
+    {
+        QMessageBox::information( nullptr, QObject::tr( "Sound Out Device" ), QObject::tr( "Sound Output Device Index Out Of Range. Will Use Default Device" ), QMessageBox::Ok );
+        deviceIndex = 0;
+    }
+
+    QString deviceDesc = outDeviceList[ deviceIndex ].first;
+    const QAudioDevice& deviceInfo = outDeviceList[ deviceIndex ].second;
+
+    QAudioFormat format = deviceInfo.preferredFormat();
+
+    format.setSampleRate( m_AudioFormat.sampleRate() );
+    format.setChannelCount( m_AudioFormat.channelCount() );
+    format.setSampleFormat( QAudioFormat::Int16 ); // only pcm is allowed
+
+    if( !deviceInfo.isFormatSupported( m_AudioFormat ) )
+    {
+        LogMsg( LOG_DEBUG, "AudioOutIo Format not supported rate %d channels %d size %d", m_AudioFormat.sampleRate(), m_AudioFormat.channelCount(), m_AudioFormat.bytesPerSample() );
+        QMessageBox::information( nullptr, QObject::tr( "Sound Out Format Not supported" ), QObject::tr( "Audio Out Format Not supported" ), QMessageBox::Ok );
+        return false;
+    }
+
+    m_AudioOutputDevice.reset( new QAudioSink( deviceInfo, m_AudioFormat ) );
+    m_AudioOutputDevice->setBufferSize( format.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+    m_initialized = true;
+
+    connect( m_AudioOutputDevice.data(), SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
+    LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d channels %d size %d", m_AudioFormat.sampleRate(), m_AudioFormat.channelCount(), m_AudioFormat.bytesPerSample() );
+
+    this->open( QIODevice::ReadOnly );
+
+    if( m_AudioIoMgr.isSpeakerOutputWanted() )
+    {
+        wantSpeakerOutput( true );
+    }
+
+    return true;
 }
 
 //============================================================================
@@ -95,7 +134,8 @@ void AudioOutIo::wantSpeakerOutput( bool enableOutput )
 
         // start in pull mode.. qt will call readData as needed for sound output
         m_AudioOutputDevice->start( this );
-}
+        m_AudioOutputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+    }
     else
     {
         if (m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState)
@@ -111,13 +151,6 @@ void AudioOutIo::wantSpeakerOutput( bool enableOutput )
             // no-op
         }
     }
-}
-
-//============================================================================
-void AudioOutIo::reinit()
-{
-    this->stopAudioOut();
-    this->startAudioOut();
 }
 
 //============================================================================

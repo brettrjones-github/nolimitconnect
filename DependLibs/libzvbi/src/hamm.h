@@ -53,7 +53,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_rev8			(unsigned int		c)
 //{
 //	return _vbi_bit_reverse[(uint8_t) c];
@@ -69,7 +69,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_rev16			(unsigned int		c)
 //{
 //	return _vbi_bit_reverse[(uint8_t) c] * 256
@@ -87,7 +87,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_rev16p			(const uint8_t *	p)
 //{
 //	return _vbi_bit_reverse[p[0]] * 256
@@ -103,7 +103,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_par8			(unsigned int		c)
 //{
 //	c &= 255;
@@ -123,7 +123,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE int
+//NLC_INLINE int
 //vbi_unpar8			(unsigned int		c)
 //{
 ///* Disabled until someone finds a reliable way
@@ -165,7 +165,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_ham8			(unsigned int		c)
 //{
 //	return _vbi_hamm8_fwd[c & 15];
@@ -183,7 +183,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE int
+//NLC_INLINE int
 //vbi_unham8			(unsigned int		c)
 //{
 //	return _vbi_hamm8_inv[(uint8_t) c];
@@ -203,7 +203,7 @@ extern const int8_t		_vbi_hamm24_inv_par [3][256];
  *
  * @since 0.2.12
  */
-//GOTV_INLINE int
+//NLC_INLINE int
 //vbi_unham16p			(const uint8_t *	p)
 //{
 //	return ((int) _vbi_hamm8_inv[p[0]])

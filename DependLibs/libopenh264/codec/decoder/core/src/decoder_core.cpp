@@ -44,7 +44,7 @@
 #include "error_concealment.h"
 
 namespace WelsDec {
-static GOTV_INLINE int32_t DecodeFrameConstruction (PWelsDecoderContext pCtx, uint8_t** ppDst, SBufferInfo* pDstInfo) {
+static NLC_INLINE int32_t DecodeFrameConstruction (PWelsDecoderContext pCtx, uint8_t** ppDst, SBufferInfo* pDstInfo) {
   PDqLayer pCurDq = pCtx->pCurDqLayer;
   PPicture pPic = pCtx->pDec;
 
@@ -260,32 +260,32 @@ static GOTV_INLINE int32_t DecodeFrameConstruction (PWelsDecoderContext pCtx, ui
   return ERR_NONE;
 }
 
-GOTV_INLINE bool    CheckSliceNeedReconstruct (uint8_t uiLayerDqId, uint8_t uiTargetDqId) {
+NLC_INLINE bool    CheckSliceNeedReconstruct (uint8_t uiLayerDqId, uint8_t uiTargetDqId) {
   return (uiLayerDqId == uiTargetDqId); // target layer
 }
 
-GOTV_INLINE uint8_t GetTargetDqId (uint8_t uiTargetDqId,  SDecodingParam* psParam) {
+NLC_INLINE uint8_t GetTargetDqId (uint8_t uiTargetDqId,  SDecodingParam* psParam) {
   uint8_t  uiRequiredDqId = psParam ? psParam->uiTargetDqLayer : (uint8_t)255;
 
   return WELS_MIN (uiTargetDqId, uiRequiredDqId);
 }
 
 
-GOTV_INLINE void    HandleReferenceLostL0 (PWelsDecoderContext pCtx, PNalUnit pCurNal) {
+NLC_INLINE void    HandleReferenceLostL0 (PWelsDecoderContext pCtx, PNalUnit pCurNal) {
   if (0 == pCurNal->sNalHeaderExt.uiTemporalId) {
     pCtx->bReferenceLostAtT0Flag = true;
   }
   pCtx->iErrorCode |= dsBitstreamError;
 }
 
-GOTV_INLINE void    HandleReferenceLost (PWelsDecoderContext pCtx, PNalUnit pCurNal) {
+NLC_INLINE void    HandleReferenceLost (PWelsDecoderContext pCtx, PNalUnit pCurNal) {
   if ((0 == pCurNal->sNalHeaderExt.uiTemporalId) || (1 == pCurNal->sNalHeaderExt.uiTemporalId)) {
     pCtx->bReferenceLostAtT0Flag = true;
   }
   pCtx->iErrorCode |= dsRefLost;
 }
 
-GOTV_INLINE int32_t  WelsDecodeConstructSlice (PWelsDecoderContext pCtx, PNalUnit pCurNal) {
+NLC_INLINE int32_t  WelsDecodeConstructSlice (PWelsDecoderContext pCtx, PNalUnit pCurNal) {
   int32_t  iRet = WelsTargetSliceConstruction (pCtx);
 
   if (iRet) {
@@ -2140,7 +2140,7 @@ int32_t ConstructAccessUnit (PWelsDecoderContext pCtx, uint8_t** ppDst, SBufferI
   return ERR_NONE;
 }
 
-static GOTV_INLINE void InitDqLayerInfo (PDqLayer pDqLayer, PLayerInfo pLayerInfo, PNalUnit pNalUnit, PPicture pPicDec) {
+static NLC_INLINE void InitDqLayerInfo (PDqLayer pDqLayer, PLayerInfo pLayerInfo, PNalUnit pNalUnit, PPicture pPicDec) {
   PNalUnitHeaderExt pNalHdrExt    = &pNalUnit->sNalHeaderExt;
   PSliceHeaderExt pShExt          = &pNalUnit->sNalData.sVclNal.sSliceHeaderExt;
   PSliceHeader pSh                = &pShExt->sSliceHeader;

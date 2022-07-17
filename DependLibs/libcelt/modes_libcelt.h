@@ -101,10 +101,10 @@ struct CELTMode {
 
 #ifdef OPUS_BUILD
 /* Prototypes for _ec versions of the encoder/decoder calls (not public) */
-int libcelt_encode_with_ec(CELTEncoder * GOTV_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc);
-int libcelt_encode_with_ec_float(CELTEncoder * GOTV_RESTRICT st, const float * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc);
-int libcelt_decode_with_ec(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * GOTV_RESTRICT pcm, int frame_size, ec_dec *dec);
-int libcelt_decode_with_ec_float(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, float * GOTV_RESTRICT pcm, int frame_size, ec_dec *dec);
+int libcelt_encode_with_ec(CELTEncoder * NLC_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc);
+int libcelt_encode_with_ec_float(CELTEncoder * NLC_RESTRICT st, const float * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc);
+int libcelt_decode_with_ec(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * NLC_RESTRICT pcm, int frame_size, ec_dec *dec);
+int libcelt_decode_with_ec_float(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, float * NLC_RESTRICT pcm, int frame_size, ec_dec *dec);
 #endif /* OPUS_BUILD */
 
 #endif

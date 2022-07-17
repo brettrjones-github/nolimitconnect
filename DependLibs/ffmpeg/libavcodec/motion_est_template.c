@@ -164,7 +164,7 @@ static int no_sub_motion_search(MpegEncContext * s,
     return dmin;
 }
 
-static GOTV_INLINE int get_mb_score(MpegEncContext *s, int mx, int my,
+static NLC_INLINE int get_mb_score(MpegEncContext *s, int mx, int my,
                                int src_index, int ref_index, int size,
                                int h, int add_rate)
 {

@@ -969,7 +969,7 @@ g_static_rw_lock_init (GStaticRWLock* lock)
   *lock = init_lock;
 }
 
-GOTV_INLINE static void
+NLC_INLINE static void
 g_static_rw_lock_wait (GCond** cond, GStaticMutex* mutex)
 {
   if (!*cond)
@@ -977,7 +977,7 @@ g_static_rw_lock_wait (GCond** cond, GStaticMutex* mutex)
   g_cond_wait (*cond, g_static_mutex_get_mutex (mutex));
 }
 
-GOTV_INLINE static void
+NLC_INLINE static void
 g_static_rw_lock_signal (GStaticRWLock* lock)
 {
   if (lock->want_to_write && lock->write_cond)

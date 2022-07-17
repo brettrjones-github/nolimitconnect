@@ -56,7 +56,7 @@ typedef struct MDECContext {
 } MDECContext;
 
 //very similar to MPEG-1
-static GOTV_INLINE int mdec_decode_block_intra(MDECContext *a, int16_t *block, int n)
+static NLC_INLINE int mdec_decode_block_intra(MDECContext *a, int16_t *block, int n)
 {
     int level, diff, i, j, run;
     int component;
@@ -129,7 +129,7 @@ static GOTV_INLINE int mdec_decode_block_intra(MDECContext *a, int16_t *block, i
     return 0;
 }
 
-static GOTV_INLINE int decode_mb(MDECContext *a, int16_t block[6][64])
+static NLC_INLINE int decode_mb(MDECContext *a, int16_t block[6][64])
 {
     int i, ret;
     static const int block_index[6] = { 5, 4, 0, 1, 2, 3 };
@@ -146,7 +146,7 @@ static GOTV_INLINE int decode_mb(MDECContext *a, int16_t block[6][64])
     return 0;
 }
 
-static GOTV_INLINE void idct_put(MDECContext *a, AVFrame *frame, int mb_x, int mb_y)
+static NLC_INLINE void idct_put(MDECContext *a, AVFrame *frame, int mb_x, int mb_y)
 {
     int16_t (*block)[64] = a->block;
     int linesize = frame->linesize[0];

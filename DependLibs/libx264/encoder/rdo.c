@@ -116,7 +116,7 @@ static ALWAYS_INLINE int cached_satd( x264_t *h, int size, int x, int y )
 /* Hadamard transform is recursive, so a SATD+SA8D can be done faster by taking advantage of this fact. */
 /* This optimization can also be used in non-RD transform decision. */
 
-static GOTV_INLINE int ssd_plane( x264_t *h, int size, int p, int x, int y )
+static NLC_INLINE int ssd_plane( x264_t *h, int size, int p, int x, int y )
 {
     ALIGNED_16( static pixel zero[16] ) = {0};
     int satd = 0;
@@ -143,7 +143,7 @@ static GOTV_INLINE int ssd_plane( x264_t *h, int size, int p, int x, int y )
     return h->pixf.ssd[size](fenc, FENC_STRIDE, fdec, FDEC_STRIDE) + satd;
 }
 
-static GOTV_INLINE int ssd_mb( x264_t *h )
+static NLC_INLINE int ssd_mb( x264_t *h )
 {
     int chroma_size = h->luma2chroma_pixel[PIXEL_16x16];
     int chroma_ssd = ssd_plane(h, chroma_size, 1, 0, 0) + ssd_plane(h, chroma_size, 2, 0, 0);

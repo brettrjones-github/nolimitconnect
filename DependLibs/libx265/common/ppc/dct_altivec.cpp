@@ -280,7 +280,7 @@ static uint32_t quant_altivec(const int16_t* coef, const int32_t* quantCoeff, in
 } // end quant_altivec()
 
 
-GOTV_INLINE void denoiseDct_unroll8_altivec(int16_t* dctCoef, uint32_t* resSum, const uint16_t* offset, int numCoeff, int index_offset)
+NLC_INLINE void denoiseDct_unroll8_altivec(int16_t* dctCoef, uint32_t* resSum, const uint16_t* offset, int numCoeff, int index_offset)
 {
     vector short v_level_ss, v_sign_ss ;
     vector int v_level_h_sw, v_level_l_sw ;
@@ -410,7 +410,7 @@ void denoiseDct_altivec(int16_t* dctCoef, uint32_t* resSum, const uint16_t* offs
 
 
 
-GOTV_INLINE void transpose_matrix_8_altivec(int16_t *src, intptr_t srcStride, int16_t *dst, intptr_t dstStride)
+NLC_INLINE void transpose_matrix_8_altivec(int16_t *src, intptr_t srcStride, int16_t *dst, intptr_t dstStride)
 {
     vector signed short v_src_0 ;
     vector signed short v_src_1 ;
@@ -504,7 +504,7 @@ GOTV_INLINE void transpose_matrix_8_altivec(int16_t *src, intptr_t srcStride, in
 } // end transpose_matrix_8_altivec()
 
 
-GOTV_INLINE void transpose_matrix_16_altivec(int16_t *src, intptr_t srcStride, int16_t *dst, intptr_t dstStride)
+NLC_INLINE void transpose_matrix_16_altivec(int16_t *src, intptr_t srcStride, int16_t *dst, intptr_t dstStride)
 {
     transpose_matrix_8_altivec((int16_t *)src, srcStride, (int16_t *)dst, dstStride) ;
     transpose_matrix_8_altivec((int16_t *)&src[8] , srcStride, (int16_t *)&dst[dstStride*8], dstStride) ;
@@ -513,7 +513,7 @@ GOTV_INLINE void transpose_matrix_16_altivec(int16_t *src, intptr_t srcStride, i
 } // end transpose_matrix_16_altivec()
 
 
-GOTV_INLINE void transpose_matrix_32_altivec(int16_t *src, intptr_t srcStride, int16_t *dst, intptr_t dstStride)
+NLC_INLINE void transpose_matrix_32_altivec(int16_t *src, intptr_t srcStride, int16_t *dst, intptr_t dstStride)
 {
     transpose_matrix_16_altivec((int16_t *)src, srcStride, (int16_t *)dst, dstStride) ;
     transpose_matrix_16_altivec((int16_t *)&src[16] , srcStride, (int16_t *)&dst[dstStride*16], dstStride) ;
@@ -522,7 +522,7 @@ GOTV_INLINE void transpose_matrix_32_altivec(int16_t *src, intptr_t srcStride, i
 } // end transpose_matrix_32_altivec()
 
 
-GOTV_INLINE static void partialButterfly32_transposedSrc_altivec(const int16_t* __restrict__ src, int16_t* __restrict__ dst, int shift)
+NLC_INLINE static void partialButterfly32_transposedSrc_altivec(const int16_t* __restrict__ src, int16_t* __restrict__ dst, int shift)
 {
     const int line = 32 ;
     
@@ -678,7 +678,7 @@ GOTV_INLINE static void partialButterfly32_transposedSrc_altivec(const int16_t* 
 } // end partialButterfly32_transposedSrc_altivec()
 
 
-GOTV_INLINE static void partialButterfly16_transposedSrc_altivec(const int16_t* __restrict__ src, int16_t* __restrict__ dst, int shift)
+NLC_INLINE static void partialButterfly16_transposedSrc_altivec(const int16_t* __restrict__ src, int16_t* __restrict__ dst, int shift)
 {
     const int line = 16 ;
 

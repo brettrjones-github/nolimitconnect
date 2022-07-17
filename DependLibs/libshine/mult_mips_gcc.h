@@ -39,7 +39,7 @@ do { \
 } while (0)
 
 #if __mips_isa_rev >= 2
-static GOTV_INLINE uint32_t SWAB32(uint32_t x)
+static NLC_INLINE uint32_t SWAB32(uint32_t x)
 {
 	__asm__(
 	"	wsbh	%0, %1			\n"

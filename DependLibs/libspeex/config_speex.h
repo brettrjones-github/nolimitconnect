@@ -3,7 +3,7 @@
 
 #include <AppDependLibrariesConfig.h>
 
-#define SPEEX_EXPORT	GOTV_EXPORT
+#define SPEEX_EXPORT	NLC_EXPORT
 
 #ifdef GOTV_FLOATING_POINT
 # define FLOATING_POINT 1

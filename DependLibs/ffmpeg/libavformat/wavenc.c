@@ -88,7 +88,7 @@ typedef struct WAVMuxContext {
 } WAVMuxContext;
 
 #if CONFIG_WAV_MUXER
-static GOTV_INLINE void bwf_write_bext_string(AVFormatContext *s, const char *key, int maxlen)
+static NLC_INLINE void bwf_write_bext_string(AVFormatContext *s, const char *key, int maxlen)
 {
     AVDictionaryEntry *tag;
     size_t len = 0;

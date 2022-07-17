@@ -410,5 +410,7 @@ enum EMyIcons
 	eMyIconNetworkInfo,
 	eMyIconRandomConnectInfo,
 
+    eMyIconSoundSettings,
+
 	eMaxMyIcon	// must be last
 };

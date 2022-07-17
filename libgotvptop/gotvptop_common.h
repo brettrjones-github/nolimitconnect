@@ -123,20 +123,20 @@
 
 /* Linkage */
 //#ifdef __cplusplus
-//# define GOTV_EXTERN extern "C"
+//# define NLC_EXTERN extern "C"
 //#else
-//# define GOTV_EXTERN
+//# define NLC_EXTERN
 //#endif
 
 //#if defined (_WIN32) && defined (DLL_EXPORT)
-//# define GOTV_EXPORT __declspec(dllexport)
+//# define NLC_EXPORT __declspec(dllexport)
 //#elif defined (__GNUC__)
-//# define GOTV_EXPORT __attribute__((visibility("default")))
+//# define NLC_EXPORT __attribute__((visibility("default")))
 //#else
-//# define GOTV_EXPORT
+//# define NLC_EXPORT
 //#endif
 
-//#define GOTV_API GOTV_EXTERN GOTV_EXPORT
+//#define NLC_API NLC_EXTERN NLC_EXPORT
 
 
 /*****************************************************************************
@@ -702,7 +702,7 @@ static inline bool mul_overflow(unsigned long long a, unsigned long long b,
 
 #define EMPTY_STR(str) (!str || !*str)
 
-GOTV_API char const * gotvptop_error( int ) GOTV_USED;
+NLC_API char const * gotvptop_error( int ) GOTV_USED;
 
 #include <gotvptop_arrays.h>
 
@@ -844,7 +844,7 @@ static inline void SetQWLE (void *p, uint64_t qw)
 }
 
 /* */
-//#define GOTV_UNUSED(x) (void)(x)
+//#define NLC_UNUSED(x) (void)(x)
 
 /* Stuff defined in src/extras/libc.c */
 
@@ -874,7 +874,7 @@ typedef struct {
     unsigned num, den;
 } gotvptop_rational_t;
 
-GOTV_API bool gotvptop_ureduce( unsigned *, unsigned *, uint64_t, uint64_t, uint64_t );
+NLC_API bool gotvptop_ureduce( unsigned *, unsigned *, uint64_t, uint64_t, uint64_t );
 
 #define container_of(ptr, type, member) \
     ((type *)(((char *)(ptr)) - offsetof(type, member)))
@@ -888,8 +888,8 @@ static inline void *gotvptop_alloc(size_t count, size_t size)
 /*****************************************************************************
  * I18n stuff
  *****************************************************************************/
-GOTV_API char *gotvptop_gettext( const char *msgid ) GOTV_FORMAT_ARG(1);
-GOTV_API char *gotvptop_ngettext( const char *s, const char *p, unsigned long n ) GOTV_FORMAT_ARG(1) GOTV_FORMAT_ARG(2);
+NLC_API char *gotvptop_gettext( const char *msgid ) GOTV_FORMAT_ARG(1);
+NLC_API char *gotvptop_ngettext( const char *s, const char *p, unsigned long n ) GOTV_FORMAT_ARG(1) GOTV_FORMAT_ARG(2);
 
 #define gotvptop_pgettext( ctx, id ) \
         gotvptop_pgettext_aux( ctx "\004" id, id )
@@ -939,9 +939,9 @@ static inline char *xstrdup (const char *str)
 /*****************************************************************************
  * libgotvptop features
  *****************************************************************************/
-GOTV_API const char * GOTV_CompileBy( void ) GOTV_USED;
-GOTV_API const char * GOTV_CompileHost( void ) GOTV_USED;
-GOTV_API const char * GOTV_Compiler( void ) GOTV_USED;
+NLC_API const char * GOTV_CompileBy( void ) GOTV_USED;
+NLC_API const char * GOTV_CompileHost( void ) GOTV_USED;
+NLC_API const char * GOTV_Compiler( void ) GOTV_USED;
 
 /*****************************************************************************
  * Additional gotvptop stuff

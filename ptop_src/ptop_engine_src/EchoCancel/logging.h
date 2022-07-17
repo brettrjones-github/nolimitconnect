@@ -147,7 +147,7 @@ class LogMessage {
 
   ~LogMessage();
 
-  static GOTV_INLINE bool Loggable(LoggingSeverity sev) { return (sev >= min_sev_); }
+  static NLC_INLINE bool Loggable(LoggingSeverity sev) { return (sev >= min_sev_); }
   std::ostream& stream() { return print_stream_; }
 
   // Returns the time at which this function was called for the first time.
@@ -304,7 +304,7 @@ class LogMessageVoidify {
 #define LOG_CHECK_LEVEL_V(sev) \
   rtc::LogCheckLevel(sev)
 
-GOTV_INLINE bool LogCheckLevel(LoggingSeverity sev) {
+NLC_INLINE bool LogCheckLevel(LoggingSeverity sev) {
   return (LogMessage::GetMinLogSeverity() <= sev);
 }
 

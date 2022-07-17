@@ -54,7 +54,7 @@ static ogg_uint32_t oc_cpu_flags_get(void){
 
 /*Visual C cpuid helper function.
   For VS2005 we could as well use the _cpuid builtin, but that wouldn't work
-   for VS2003 users, so we do it in GOTV_INLINE assembler.*/
+   for VS2003 users, so we do it in NLC_INLINE assembler.*/
 static void oc_cpuid_helper(ogg_uint32_t _cpu_info[4],ogg_uint32_t _op){
   _asm{
     mov eax,[_op]

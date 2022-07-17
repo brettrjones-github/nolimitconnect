@@ -132,7 +132,7 @@ vbi_sliced_filter_keep_ttx_system_pages
 	sf->keep_ttx_system_pages = !!keep;
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 valid_ttx_page			(vbi_pgno		pgno)
 {
 	return ((unsigned int) pgno - 0x100 < 0x800);

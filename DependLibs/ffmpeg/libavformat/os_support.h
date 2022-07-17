@@ -175,7 +175,7 @@ int ff_poll(struct pollfd *fds, nfds_t numfds, int timeout);
 #endif
 
 #define DEF_FS_FUNCTION(name, wfunc, afunc)               \
-static GOTV_INLINE int win32_##name(const char *filename_utf8) \
+static NLC_INLINE int win32_##name(const char *filename_utf8) \
 {                                                         \
     wchar_t *filename_w;                                  \
     int ret;                                              \
@@ -199,7 +199,7 @@ DEF_FS_FUNCTION(mkdir,  _wmkdir,  _mkdir)
 DEF_FS_FUNCTION(rmdir,  _wrmdir , _rmdir)
 
 #define DEF_FS_FUNCTION2(name, wfunc, afunc, partype)     \
-static GOTV_INLINE int win32_##name(const char *filename_utf8, partype par) \
+static NLC_INLINE int win32_##name(const char *filename_utf8, partype par) \
 {                                                         \
     wchar_t *filename_w;                                  \
     int ret;                                              \
@@ -221,7 +221,7 @@ fallback:                                                 \
 DEF_FS_FUNCTION2(access, _waccess, _access, int)
 DEF_FS_FUNCTION2(stat, _wstati64, _stati64, struct stat*)
 
-static GOTV_INLINE int win32_rename(const char *src_utf8, const char *dest_utf8)
+static NLC_INLINE int win32_rename(const char *src_utf8, const char *dest_utf8)
 {
     wchar_t *src_w, *dest_w;
     int ret;

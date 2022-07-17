@@ -37,7 +37,7 @@
 #define COMMAND_FLAG_ENTER 1
 #define COMMAND_FLAG_LEAVE 2
 
-static GOTV_INLINE char *make_command_flags_str(AVBPrint *pbuf, int flags)
+static NLC_INLINE char *make_command_flags_str(AVBPrint *pbuf, int flags)
 {
     static const char * const flag_strings[] = { "enter", "leave" };
     int i, is_first = 1;

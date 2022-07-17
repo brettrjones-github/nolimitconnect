@@ -76,74 +76,74 @@ class NOVTABLE api_service: public Dispatchable {
 
 // ----------------------------------------------------------------------------
 
-GOTV_INLINE int api_service::service_register(waServiceFactory *svc) {
+NLC_INLINE int api_service::service_register(waServiceFactory *svc) {
   int __retval = _call(API_SERVICE_SERVICE_REGISTER, (int)0, svc);
   return __retval;
 }
 
-GOTV_INLINE int api_service::service_deregister(waServiceFactory *svc) {
+NLC_INLINE int api_service::service_deregister(waServiceFactory *svc) {
   int __retval = _call(API_SERVICE_SERVICE_DEREGISTER, (int)0, svc);
   return __retval;
 }
 
-GOTV_INLINE size_t api_service::service_getNumServices(FOURCC svc_type) {
+NLC_INLINE size_t api_service::service_getNumServices(FOURCC svc_type) {
   int __retval = _call(API_SERVICE_SERVICE_GETNUMSERVICES, (int)0, svc_type);
   return __retval;
 }
 
-GOTV_INLINE waServiceFactory *api_service::service_enumService(FOURCC svc_type, size_t n) {
+NLC_INLINE waServiceFactory *api_service::service_enumService(FOURCC svc_type, size_t n) {
   waServiceFactory *__retval = _call(API_SERVICE_SERVICE_ENUMSERVICE, (waServiceFactory *)0, svc_type, n);
   return __retval;
 }
 
-GOTV_INLINE waServiceFactory *api_service::service_getServiceByGuid(GUID guid) {
+NLC_INLINE waServiceFactory *api_service::service_getServiceByGuid(GUID guid) {
   waServiceFactory *__retval = _call(API_SERVICE_SERVICE_GETSERVICEBYGUID, (waServiceFactory *)0, guid);
   return __retval;
 }
 
-GOTV_INLINE int api_service::service_lock(waServiceFactory *owner, void *svcptr) {
+NLC_INLINE int api_service::service_lock(waServiceFactory *owner, void *svcptr) {
   int __retval = _call(API_SERVICE_SERVICE_LOCK, (int)0, owner, svcptr);
   return __retval;
 }
 
-GOTV_INLINE int api_service::service_clientLock(void *svcptr) {
+NLC_INLINE int api_service::service_clientLock(void *svcptr) {
   int __retval = _call(API_SERVICE_SERVICE_CLIENTLOCK, (int)0, svcptr);
   return __retval;
 }
 
-GOTV_INLINE int api_service::service_release(void *svcptr) {
+NLC_INLINE int api_service::service_release(void *svcptr) {
   int __retval = _call(API_SERVICE_SERVICE_RELEASE, (int)0, svcptr);
   return __retval;
 }
 
-GOTV_INLINE const char *api_service::service_getTypeName(FOURCC svc_type) {
+NLC_INLINE const char *api_service::service_getTypeName(FOURCC svc_type) {
   const char *__retval = _call(API_SERVICE_SERVICE_GETTYPENAME, (const char *)0, svc_type);
   return __retval;
 }
 
 #ifdef WASABI_COMPILE_COMPONENTS
-GOTV_INLINE GUID api_service::service_getOwningComponent(void *svcptr) {
+NLC_INLINE GUID api_service::service_getOwningComponent(void *svcptr) {
   GUID __retval = _call(API_SERVICE_SERVICE_GETOWNINGCOMPONENT, INVALID_GUID, svcptr);
   return __retval;
 }
 
-GOTV_INLINE GUID api_service::service_getLockingComponent(void *svcptr) {
+NLC_INLINE GUID api_service::service_getLockingComponent(void *svcptr) {
   GUID __retval = _call(API_SERVICE_SERVICE_GETLOCKINGCOMPONENT, INVALID_GUID, svcptr);
   return __retval;
 }
 
 #endif // WASABI_COMPILE_COMPONENTS
-GOTV_INLINE int api_service::service_unlock(void *svcptr) {
+NLC_INLINE int api_service::service_unlock(void *svcptr) {
   int __retval = _call(API_SERVICE_SERVICE_UNLOCK, (int)0, svcptr);
   return __retval;
 }
 
-GOTV_INLINE int api_service::service_isvalid(FOURCC svctype, waServiceFactory *service) {
+NLC_INLINE int api_service::service_isvalid(FOURCC svctype, waServiceFactory *service) {
   int __retval = _call(API_SERVICE_ISVALID, (int)0, svctype, service);
   return __retval;
 }
 
-GOTV_INLINE int api_service::service_compactDuplicates(waServiceFactory *me)
+NLC_INLINE int api_service::service_compactDuplicates(waServiceFactory *me)
 {
 	return _call(API_SERVICE_COMPACT_DUPLICATES, (int)1, me);
 }

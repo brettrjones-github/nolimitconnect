@@ -15,7 +15,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-static GOTV_INLINE int bitmap_lookup (const void *table, ucs4_t uc);
+static NLC_INLINE int bitmap_lookup (const void *table, ucs4_t uc);
 
 /* These values are currently hardcoded into gen-ctype.c.  */
 #define header_0 16
@@ -23,7 +23,7 @@ static GOTV_INLINE int bitmap_lookup (const void *table, ucs4_t uc);
 #define header_3 127
 #define header_4 15
 
-static GOTV_INLINE int
+static NLC_INLINE int
 bitmap_lookup (const void *table, ucs4_t uc)
 {
   unsigned int index1 = uc >> header_0;

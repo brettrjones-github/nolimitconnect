@@ -69,7 +69,7 @@ static int loco_get_rice_param(RICEContext *r)
     return cnt;
 }
 
-static GOTV_INLINE void loco_update_rice_param(RICEContext *r, int val)
+static NLC_INLINE void loco_update_rice_param(RICEContext *r, int val)
 {
     r->sum += val;
     r->count++;
@@ -80,7 +80,7 @@ static GOTV_INLINE void loco_update_rice_param(RICEContext *r, int val)
     }
 }
 
-static GOTV_INLINE int loco_get_rice(RICEContext *r)
+static NLC_INLINE int loco_get_rice(RICEContext *r)
 {
     int v;
     if (r->run > 0) { /* we have zero run */
@@ -114,7 +114,7 @@ static GOTV_INLINE int loco_get_rice(RICEContext *r)
 }
 
 /* LOCO main predictor - LOCO-I/JPEG-LS predictor */
-static GOTV_INLINE int loco_predict(uint8_t* data, int stride, int step)
+static NLC_INLINE int loco_predict(uint8_t* data, int stride, int step)
 {
     int a, b, c;
 

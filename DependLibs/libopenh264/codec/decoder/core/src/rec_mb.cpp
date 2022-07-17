@@ -214,7 +214,7 @@ int32_t RecI16x16Mb (int32_t iMBXY, PWelsDecoderContext pCtx, int16_t* pScoeffLe
 
 
 //according to current 8*8 block ref_index to gain reference picture
-static GOTV_INLINE void GetRefPic (sMCRefMember* pMCRefMem, PWelsDecoderContext pCtx, int8_t* pRefIdxList,
+static NLC_INLINE void GetRefPic (sMCRefMember* pMCRefMem, PWelsDecoderContext pCtx, int8_t* pRefIdxList,
                               int32_t iIndex) {
   PPicture pRefPic;
 

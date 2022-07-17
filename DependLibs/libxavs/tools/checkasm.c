@@ -85,7 +85,7 @@ static const char **intra_predict_8x8_names = intra_predict_4x4_names;
 
 #define set_func_name(...) snprintf( func_name, sizeof(func_name), __VA_ARGS__ )
 
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 read_time (void)
 {
 #if defined(__GNUC__) && (ARCH_X86 || defined(ARCH_X86_64))

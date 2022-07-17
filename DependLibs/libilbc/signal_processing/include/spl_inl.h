@@ -9,7 +9,7 @@
  */
 
 
-// This header file includes the GOTV_INLINE functions in
+// This header file includes the NLC_INLINE functions in
 // the fix point signal processing library.
 
 #ifndef WEBRTC_SPL_SPL_INL_H_

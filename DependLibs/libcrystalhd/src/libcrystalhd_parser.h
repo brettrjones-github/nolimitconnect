@@ -155,7 +155,7 @@ BC_STATUS DtsFindIDR(HANDLE hDevice, uint8_t* pInputBuffer, uint32_t ulSizeInByt
 BC_STATUS DtsFindStartCode(HANDLE hDevice, uint8_t* pInputBuffer, uint32_t ulSizeInBytes, uint32_t* pOffset);
 BOOL DtsFindPTSInfoCode(HANDLE hDevice, uint8_t* pInputBuffer, uint32_t ulSizeInBytes);
 
-GOTV_INLINE int32_t DtsSymbIntNextBit ( HANDLE hDevice );
+NLC_INLINE int32_t DtsSymbIntNextBit ( HANDLE hDevice );
 BC_STATUS DtsSymbIntSiUe (HANDLE hDevice, uint32_t* pCode);
 BC_STATUS DtsSymbIntSiBuffer (HANDLE hDevice, uint8_t* pInputBuffer, uint32_t ulSize);
 

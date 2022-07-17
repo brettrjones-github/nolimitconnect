@@ -84,7 +84,7 @@ typedef struct
 } xavs_me_t;
 
 void xavs_me_search_ref (xavs_t * h, xavs_me_t * m, int (*mvc)[2], int i_mvc, int *p_fullpel_thresh);
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_me_search (xavs_t * h, xavs_me_t * m, int (*mvc)[2], int i_mvc)
 {
   xavs_me_search_ref (h, m, mvc, i_mvc, NULL);

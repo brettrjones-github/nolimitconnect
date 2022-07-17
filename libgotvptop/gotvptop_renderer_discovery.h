@@ -52,7 +52,7 @@
  * @param i_flags flags for the item
  * @return a renderer item or NULL in case of error
  */
-GOTV_API gotvptop_renderer_item_t *
+NLC_API gotvptop_renderer_item_t *
 gotvptop_renderer_item_new(const char *psz_type, const char *psz_name,
                       const char *psz_uri, const char *psz_extra_sout,
                       const char *psz_demux_filter, const char *psz_icon_uri,
@@ -61,50 +61,50 @@ gotvptop_renderer_item_new(const char *psz_type, const char *psz_name,
 /**
  * Hold a renderer item, i.e. creates a new reference
  */
-GOTV_API gotvptop_renderer_item_t *
+NLC_API gotvptop_renderer_item_t *
 gotvptop_renderer_item_hold(gotvptop_renderer_item_t *p_item);
 
 /**
  * Releases a renderer item, i.e. decrements its reference counter
  */
-GOTV_API void
+NLC_API void
 gotvptop_renderer_item_release(gotvptop_renderer_item_t *p_item);
 
 /**
  * Get the human readable name of a renderer item
  */
-GOTV_API const char *
+NLC_API const char *
 gotvptop_renderer_item_name(const gotvptop_renderer_item_t *p_item);
 
 /**
  * Get the type (not translated) of a renderer item. For now, the type can only
  * be "chromecast" ("upnp", "airplay" may come later).
  */
-GOTV_API const char *
+NLC_API const char *
 gotvptop_renderer_item_type(const gotvptop_renderer_item_t *p_item);
 
 /**
  * Get the demux filter to use with a renderer item
  */
-GOTV_API const char *
+NLC_API const char *
 gotvptop_renderer_item_demux_filter(const gotvptop_renderer_item_t *p_item);
 
 /**
  * Get the sout command of a renderer item
  */
-GOTV_API const char *
+NLC_API const char *
 gotvptop_renderer_item_sout(const gotvptop_renderer_item_t *p_item);
 
 /**
  * Get the icon uri of a renderer item
  */
-GOTV_API const char *
+NLC_API const char *
 gotvptop_renderer_item_icon_uri(const gotvptop_renderer_item_t *p_item);
 
 /**
  * Get the flags of a renderer item
  */
-GOTV_API int
+NLC_API int
 gotvptop_renderer_item_flags(const gotvptop_renderer_item_t *p_item);
 
 /**
@@ -125,7 +125,7 @@ struct gotvptop_renderer_discovery_owner;
  *
  * @return GOTV_SUCCESS on success, or GOTV_EGENERIC on error
  */
-GOTV_API int
+NLC_API int
 libgotvptop_rd_get_names(gotvptop_object_t *p_obj, char ***pppsz_names,
                  char ***pppsz_longnames) GOTV_USED;
 #define gotvptop_rd_get_names(a, b, c) \
@@ -140,11 +140,11 @@ libgotvptop_rd_get_names(gotvptop_object_t *p_obj, char ***pppsz_names,
  * @return a valid gotvptop_renderer_discovery, need to be released with
  * gotvptop_rd_release()
  */
-GOTV_API gotvptop_renderer_discovery_t *
+NLC_API gotvptop_renderer_discovery_t *
 gotvptop_rd_new(gotvptop_object_t *p_obj, const char *psz_name,
            const struct gotvptop_renderer_discovery_owner *owner) GOTV_USED;
 
-GOTV_API void gotvptop_rd_release(gotvptop_renderer_discovery_t *p_rd);
+NLC_API void gotvptop_rd_release(gotvptop_renderer_discovery_t *p_rd);
 
 /**
  * @}
@@ -199,7 +199,7 @@ static inline void gotvptop_rd_remove_item(gotvptop_renderer_discovery_t * p_rd,
 /**
  * Renderer Discovery proble helpers
  */
-GOTV_API int
+NLC_API int
 gotvptop_rd_probe_add(gotvptop_probe_t *p_probe, const char *psz_name,
                  const char *psz_longname);
 

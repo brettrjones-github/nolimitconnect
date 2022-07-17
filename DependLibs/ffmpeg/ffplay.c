@@ -375,7 +375,7 @@ static int opt_add_vfilter(void *optctx, const char *opt, const char *arg)
 }
 #endif
 
-static GOTV_INLINE
+static NLC_INLINE
 int cmp_audio_fmts(enum AVSampleFormat fmt1, int64_t channel_count1,
                    enum AVSampleFormat fmt2, int64_t channel_count2)
 {
@@ -386,7 +386,7 @@ int cmp_audio_fmts(enum AVSampleFormat fmt1, int64_t channel_count1,
         return channel_count1 != channel_count2 || fmt1 != fmt2;
 }
 
-static GOTV_INLINE
+static NLC_INLINE
 int64_t get_valid_channel_layout(int64_t channel_layout, int channels)
 {
     if (channel_layout && av_get_channel_layout_nb_channels(channel_layout) == channels)
@@ -800,7 +800,7 @@ static void decoder_abort(Decoder *d, FrameQueue *fq)
     packet_queue_flush(d->queue);
 }
 
-static GOTV_INLINE void fill_rectangle(SDL_Surface *screen,
+static NLC_INLINE void fill_rectangle(SDL_Surface *screen,
                                   int x, int y, int w, int h, int color, int update)
 {
     SDL_Rect rect;
@@ -986,7 +986,7 @@ static void video_image_display(VideoState *is)
     }
 }
 
-static GOTV_INLINE int compute_mod(int a, int b)
+static NLC_INLINE int compute_mod(int a, int b)
 {
     return a < 0 ? a%b + b : a%b;
 }

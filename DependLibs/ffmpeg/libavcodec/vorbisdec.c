@@ -1531,7 +1531,7 @@ static av_always_inline int vorbis_residue_decode_internal(vorbis_context *vc,
     return 0;
 }
 
-static GOTV_INLINE int vorbis_residue_decode(vorbis_context *vc, vorbis_residue *vr,
+static NLC_INLINE int vorbis_residue_decode(vorbis_context *vc, vorbis_residue *vr,
                                         unsigned ch,
                                         uint8_t *do_not_decode,
                                         float *vec, unsigned vlen,

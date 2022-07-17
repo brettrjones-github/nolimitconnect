@@ -64,7 +64,7 @@ namespace WelsCommon {
  *
  * \return  iSize of pBuffer pData in byte; failed in -1 return
  */
-static GOTV_INLINE int32_t InitBits (SBitStringAux* pBs, const uint8_t* kpBuf, const int32_t kiSize) {
+static NLC_INLINE int32_t InitBits (SBitStringAux* pBs, const uint8_t* kpBuf, const int32_t kiSize) {
   uint8_t* ptr = (uint8_t*)kpBuf;
 
   pBs->pStartBuf = ptr;
@@ -76,7 +76,7 @@ static GOTV_INLINE int32_t InitBits (SBitStringAux* pBs, const uint8_t* kpBuf, c
   return kiSize;
 }
 
-static GOTV_INLINE int32_t BsWriteBits (PBitStringAux pBitString, int32_t iLen, const uint32_t kuiValue) {
+static NLC_INLINE int32_t BsWriteBits (PBitStringAux pBitString, int32_t iLen, const uint32_t kuiValue) {
   if (iLen < pBitString->iLeftBits) {
     pBitString->uiCurBits = (pBitString->uiCurBits << iLen) | kuiValue;
     pBitString->iLeftBits -= iLen;
@@ -94,12 +94,12 @@ static GOTV_INLINE int32_t BsWriteBits (PBitStringAux pBitString, int32_t iLen, 
 /*
  *  Write 1 bit
  */
-static GOTV_INLINE int32_t BsWriteOneBit (PBitStringAux pBitString, const uint32_t kuiValue) {
+static NLC_INLINE int32_t BsWriteOneBit (PBitStringAux pBitString, const uint32_t kuiValue) {
   BsWriteBits (pBitString, 1, kuiValue);
   return 0;
 }
 
-static GOTV_INLINE int32_t BsFlush (PBitStringAux pBitString) {
+static NLC_INLINE int32_t BsFlush (PBitStringAux pBitString) {
   WRITE_BE_32 (pBitString->pCurBuf, pBitString->uiCurBits << pBitString->iLeftBits);
   pBitString->pCurBuf += 4 - pBitString->iLeftBits / 8;
   pBitString->iLeftBits = 32;
@@ -111,7 +111,7 @@ static GOTV_INLINE int32_t BsFlush (PBitStringAux pBitString) {
  *  Write unsigned exp golomb codes
  */
 
-static GOTV_INLINE int32_t BsWriteUE (PBitStringAux pBitString, const uint32_t kuiValue) {
+static NLC_INLINE int32_t BsWriteUE (PBitStringAux pBitString, const uint32_t kuiValue) {
   uint32_t iTmpValue = kuiValue + 1;
   if (256 > kuiValue) {
     BsWriteBits (pBitString, g_kuiGolombUELength[kuiValue], kuiValue + 1);
@@ -137,7 +137,7 @@ static GOTV_INLINE int32_t BsWriteUE (PBitStringAux pBitString, const uint32_t k
 /*
  *  Write signed exp golomb codes
  */
-static GOTV_INLINE int32_t BsWriteSE (PBitStringAux pBitString, const int32_t kiValue) {
+static NLC_INLINE int32_t BsWriteSE (PBitStringAux pBitString, const int32_t kiValue) {
   uint32_t iTmpValue;
   if (0 == kiValue) {
     BsWriteOneBit (pBitString, 1);
@@ -155,7 +155,7 @@ static GOTV_INLINE int32_t BsWriteSE (PBitStringAux pBitString, const int32_t ki
 /*
  *  Write RBSP trailing bits
  */
-static GOTV_INLINE int32_t BsRbspTrailingBits (PBitStringAux pBitString) {
+static NLC_INLINE int32_t BsRbspTrailingBits (PBitStringAux pBitString) {
   BsWriteOneBit (pBitString, 1);
   BsFlush (pBitString);
 

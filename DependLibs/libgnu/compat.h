@@ -197,13 +197,13 @@ int gnutls_x509_crl_sign(gnutls_x509_crl_t crl,
 	/* use gnutls_privkey_sign_hash() with the GNUTLS_PRIVKEY_SIGN_FLAG_TLS1_RSA flag */
 
 #ifdef _ISOC99_SOURCE
-/* we provide older functions for compatibility as GOTV_INLINE functions that
+/* we provide older functions for compatibility as NLC_INLINE functions that
  * depend on gnutls_session_get_random. */
 
-static GOTV_INLINE const void
+static NLC_INLINE const void
 *gnutls_session_get_server_random(gnutls_session_t session)
     _GNUTLS_GCC_ATTR_DEPRECATED;
-static GOTV_INLINE const void
+static NLC_INLINE const void
 *gnutls_session_get_server_random(gnutls_session_t session)
 {
 	gnutls_datum_t rnd;
@@ -211,10 +211,10 @@ static GOTV_INLINE const void
 	return rnd.data;
 }
 
-static GOTV_INLINE const void
+static NLC_INLINE const void
 *gnutls_session_get_client_random(gnutls_session_t session)
     _GNUTLS_GCC_ATTR_DEPRECATED;
-static GOTV_INLINE const void
+static NLC_INLINE const void
 *gnutls_session_get_client_random(gnutls_session_t session)
 {
 	gnutls_datum_t rnd;

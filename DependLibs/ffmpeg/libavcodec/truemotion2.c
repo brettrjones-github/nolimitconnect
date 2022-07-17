@@ -229,7 +229,7 @@ static void tm2_free_codes(TM2Codes *code)
         ff_free_vlc(&code->vlc);
 }
 
-static GOTV_INLINE int tm2_get_token(GetBitContext *gb, TM2Codes *code)
+static NLC_INLINE int tm2_get_token(GetBitContext *gb, TM2Codes *code)
 {
     int val;
     val = get_vlc2(gb, code->vlc.table, code->bits, 1);
@@ -241,7 +241,7 @@ static GOTV_INLINE int tm2_get_token(GetBitContext *gb, TM2Codes *code)
 #define TM2_OLD_HEADER_MAGIC 0x00000100
 #define TM2_NEW_HEADER_MAGIC 0x00000101
 
-static GOTV_INLINE int tm2_read_header(TM2Context *ctx, const uint8_t *buf)
+static NLC_INLINE int tm2_read_header(TM2Context *ctx, const uint8_t *buf)
 {
     uint32_t magic = AV_RL32(buf);
 
@@ -397,7 +397,7 @@ end:
     return ret;
 }
 
-static GOTV_INLINE int GET_TOK(TM2Context *ctx,int type)
+static NLC_INLINE int GET_TOK(TM2Context *ctx,int type)
 {
     if (ctx->tok_ptrs[type] >= ctx->tok_lens[type]) {
         av_log(ctx->avctx, AV_LOG_ERROR, "Read token from stream %i out of bounds (%i>=%i)\n", type, ctx->tok_ptrs[type], ctx->tok_lens[type]);
@@ -451,7 +451,7 @@ static GOTV_INLINE int GET_TOK(TM2Context *ctx,int type)
     last[1] = (int)CHR[stride + 1];}
 
 /* common operations - add deltas to 4x4 block of luma or 2x2 blocks of chroma */
-static GOTV_INLINE void tm2_apply_deltas(TM2Context *ctx, int* Y, int stride, int *deltas, int *last)
+static NLC_INLINE void tm2_apply_deltas(TM2Context *ctx, int* Y, int stride, int *deltas, int *last)
 {
     unsigned ct, d;
     int i, j;
@@ -482,7 +482,7 @@ static inline void tm2_high_chroma(int *data, int stride, int *last, unsigned *C
     }
 }
 
-static GOTV_INLINE void tm2_low_chroma(int *data, int stride, int *clast, int *CD, int *deltas, int bx)
+static NLC_INLINE void tm2_low_chroma(int *data, int stride, int *clast, int *CD, int *deltas, int bx)
 {
     int t;
     int l;
@@ -501,7 +501,7 @@ static GOTV_INLINE void tm2_low_chroma(int *data, int stride, int *clast, int *C
     tm2_high_chroma(data, stride, clast, CD, deltas);
 }
 
-static GOTV_INLINE void tm2_hi_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_hi_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i;
     int deltas[16];
@@ -522,7 +522,7 @@ static GOTV_INLINE void tm2_hi_res_block(TM2Context *ctx, AVFrame *pic, int bx, 
     tm2_apply_deltas(ctx, Y, Ystride, deltas, last);
 }
 
-static GOTV_INLINE void tm2_med_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_med_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i;
     int deltas[16];
@@ -544,7 +544,7 @@ static GOTV_INLINE void tm2_med_res_block(TM2Context *ctx, AVFrame *pic, int bx,
     tm2_apply_deltas(ctx, Y, Ystride, deltas, last);
 }
 
-static GOTV_INLINE void tm2_low_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_low_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i;
     int t1, t2;
@@ -585,7 +585,7 @@ static GOTV_INLINE void tm2_low_res_block(TM2Context *ctx, AVFrame *pic, int bx,
     tm2_apply_deltas(ctx, Y, Ystride, deltas, last);
 }
 
-static GOTV_INLINE void tm2_null_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_null_res_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i;
     int ct;
@@ -631,7 +631,7 @@ static GOTV_INLINE void tm2_null_res_block(TM2Context *ctx, AVFrame *pic, int bx
     tm2_apply_deltas(ctx, Y, Ystride, deltas, last);
 }
 
-static GOTV_INLINE void tm2_still_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_still_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i, j;
     TM2_INIT_POINTERS_2();
@@ -666,7 +666,7 @@ static GOTV_INLINE void tm2_still_block(TM2Context *ctx, AVFrame *pic, int bx, i
     }
 }
 
-static GOTV_INLINE void tm2_update_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_update_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i, j;
     int d;
@@ -706,7 +706,7 @@ static GOTV_INLINE void tm2_update_block(TM2Context *ctx, AVFrame *pic, int bx, 
     }
 }
 
-static GOTV_INLINE void tm2_motion_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
+static NLC_INLINE void tm2_motion_block(TM2Context *ctx, AVFrame *pic, int bx, int by)
 {
     int i, j;
     int mx, my;

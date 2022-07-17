@@ -23,7 +23,7 @@
 
 #include "GuiHelpers.h"
 #include "GuiParams.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 #include "MyIcons.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>

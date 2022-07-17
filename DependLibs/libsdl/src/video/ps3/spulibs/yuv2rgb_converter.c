@@ -133,7 +133,7 @@ int main(unsigned long long spe_id __attribute__((unused)), unsigned long long a
  * @param s float for conversion
  * @returns converted character
  */
-GOTV_INLINE static unsigned char float_to_char(float s) {
+NLC_INLINE static unsigned char float_to_char(float s) {
 	vector float vec_s = spu_splats(s);
 	vector unsigned int select_1 = spu_cmpgt(vec_0_1, vec_s);
 	vec_s = spu_sel(vec_s, vec_0_1, select_1);
@@ -153,7 +153,7 @@ GOTV_INLINE static unsigned char float_to_char(float s) {
  * @param vec_s float vector for conversion
  * @returns converted unsigned int vector
  */
-GOTV_INLINE static vector unsigned int vfloat_to_vuint(vector float vec_s) {
+NLC_INLINE static vector unsigned int vfloat_to_vuint(vector float vec_s) {
 	vector unsigned int select_1 = spu_cmpgt(vec_0_1, vec_s);
 	vec_s = spu_sel(vec_s, vec_0_1, select_1);
 

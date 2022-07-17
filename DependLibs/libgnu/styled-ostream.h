@@ -132,11 +132,11 @@ styled_ostream_end_use_class (styled_ostream_t first_arg, const char *classname)
 
 #endif
 
-extern GOTV_DLL_VARIABLE const typeinfo_t styled_ostream_typeinfo;
+extern NLC_DLL_VARIABLE const typeinfo_t styled_ostream_typeinfo;
 #define styled_ostream_SUPERCLASSES &styled_ostream_typeinfo, ostream_SUPERCLASSES
 #define styled_ostream_SUPERCLASSES_LENGTH (1 + ostream_SUPERCLASSES_LENGTH)
 
-extern GOTV_DLL_VARIABLE const struct styled_ostream_implementation styled_ostream_vtable;
+extern NLC_DLL_VARIABLE const struct styled_ostream_implementation styled_ostream_vtable;
 
 #line 42 "styled-ostream.oo.h"
 

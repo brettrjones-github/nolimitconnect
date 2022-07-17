@@ -34,12 +34,12 @@ class MyQtSoundInput;
 class MyQtSoundOutput;
 class VxSndInstance;
 
-class MySndMgr : public AudioIoMgr, public ToGuiHardwareControlInterface
+class SoundMgr : public AudioIoMgr, public ToGuiHardwareControlInterface
 {
 	Q_OBJECT
 public:
-	MySndMgr( AppCommon& app );
-	virtual ~MySndMgr() override = default;
+	SoundMgr( AppCommon& app );
+	virtual ~SoundMgr() override = default;
 
 	AppCommon&				    getApp( void )						{ return m_MyApp; }
 
@@ -74,7 +74,6 @@ protected:
 	void						enableSpeakerOutput( bool bEnable );
 
 	//=== vars ===//
-	AppCommon&				    m_MyApp;
 	P2PEngine&					m_Engine;
 	MyQtSoundInput *			m_MicrophoneInput;
 	bool						m_bMicrophoneEnabled;

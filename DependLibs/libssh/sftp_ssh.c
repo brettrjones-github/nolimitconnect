@@ -764,7 +764,7 @@ static sftp_message sftp_dequeue(sftp_session sftp, uint32_t id){
  * between them.
  * Returns a new ID ready to use in a request
  */
-static GOTV_INLINE uint32_t sftp_get_new_id(sftp_session session) {
+static NLC_INLINE uint32_t sftp_get_new_id(sftp_session session) {
   return ++session->id_counter;
 }
 

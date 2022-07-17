@@ -103,7 +103,7 @@ amm-info@iis.fraunhofer.de
  * \param b_e exponent of the second input value.
  * \return non-zero if (a_m*2^a_e) < (b_m*2^b_e), 0 otherwise
  */
-GOTV_INLINE int32_t fIsLessThan(FIXP_DBL a_m, int32_t a_e, FIXP_DBL b_m, int32_t b_e)
+NLC_INLINE int32_t fIsLessThan(FIXP_DBL a_m, int32_t a_e, FIXP_DBL b_m, int32_t b_e)
 {
   if (a_e > b_e) {
     return (b_m >> fMin_FDK(a_e-b_e, DFRACT_BITS-1) > a_m);
@@ -112,7 +112,7 @@ GOTV_INLINE int32_t fIsLessThan(FIXP_DBL a_m, int32_t a_e, FIXP_DBL b_m, int32_t
   }
 }
 
-GOTV_INLINE int32_t fIsLessThan(FIXP_SGL a_m, int32_t a_e, FIXP_SGL b_m, int32_t b_e)
+NLC_INLINE int32_t fIsLessThan(FIXP_SGL a_m, int32_t a_e, FIXP_SGL b_m, int32_t b_e)
 {
   if (a_e > b_e) {
     return (b_m >> fMin_FDK(a_e-b_e, FRACT_BITS-1) > a_m);
@@ -142,7 +142,7 @@ FIXP_DBL CalcLdInt(int32_t i);
 
 extern const uint16_t sqrt_tab[49];
 
-GOTV_INLINE FIXP_DBL sqrtFixp_lookup(FIXP_DBL x)
+NLC_INLINE FIXP_DBL sqrtFixp_lookup(FIXP_DBL x)
 {
   uint32_t y = (int32_t)x;
   uint8_t is_zero=(y==0);
@@ -156,7 +156,7 @@ GOTV_INLINE FIXP_DBL sqrtFixp_lookup(FIXP_DBL x)
   return(is_zero ? 0 : t);
 }
 
-GOTV_INLINE FIXP_DBL sqrtFixp_lookup(FIXP_DBL x, int32_t *x_e)
+NLC_INLINE FIXP_DBL sqrtFixp_lookup(FIXP_DBL x, int32_t *x_e)
 {
   uint32_t y = (int32_t)x;
   int32_t e;
@@ -200,7 +200,7 @@ FIXP_DBL invSqrtNorm2(FIXP_DBL op, int32_t *shift);
     description:  delivers 1/(op)
 
 *****************************************************************************/
-GOTV_INLINE FIXP_DBL invFixp(FIXP_DBL op)
+NLC_INLINE FIXP_DBL invFixp(FIXP_DBL op)
 {
     int32_t tmp_exp ;
     FIXP_DBL tmp_inv = invSqrtNorm2(op, &tmp_exp) ;
@@ -213,7 +213,7 @@ GOTV_INLINE FIXP_DBL invFixp(FIXP_DBL op)
 #if defined(__mips__) && (__GNUC__==2)
 
 #define FUNCTION_schur_div
-GOTV_INLINE FIXP_DBL schur_div(FIXP_DBL num,FIXP_DBL denum, int32_t count)
+NLC_INLINE FIXP_DBL schur_div(FIXP_DBL num,FIXP_DBL denum, int32_t count)
 {
   int32_t result, tmp ;
    __asm__ ("srl %1, %2, 15\n"
@@ -227,7 +227,7 @@ GOTV_INLINE FIXP_DBL schur_div(FIXP_DBL num,FIXP_DBL denum, int32_t count)
 #elif defined(__mips__) && (__GNUC__==3)
 
 #define FUNCTION_schur_div
-GOTV_INLINE FIXP_DBL schur_div(FIXP_DBL num,FIXP_DBL denum, int32_t count)
+NLC_INLINE FIXP_DBL schur_div(FIXP_DBL num,FIXP_DBL denum, int32_t count)
 {
   int32_t result, tmp;
 
@@ -243,7 +243,7 @@ GOTV_INLINE FIXP_DBL schur_div(FIXP_DBL num,FIXP_DBL denum, int32_t count)
 #elif defined(SIMULATE_MIPS_DIV)
 
 #define FUNCTION_schur_div
-GOTV_INLINE FIXP_DBL schur_div(FIXP_DBL num, FIXP_DBL denum, int32_t count)
+NLC_INLINE FIXP_DBL schur_div(FIXP_DBL num, FIXP_DBL denum, int32_t count)
 {
     FDK_ASSERT (count<=DFRACT_BITS-1);
     FDK_ASSERT (num>=(FIXP_DBL)0);
@@ -296,7 +296,7 @@ FIXP_DBL fMultNorm(
         int32_t *result_e
         );
 
-GOTV_INLINE FIXP_DBL fMultNorm(FIXP_DBL f1, FIXP_DBL f2)
+NLC_INLINE FIXP_DBL fMultNorm(FIXP_DBL f1, FIXP_DBL f2)
 {
   FIXP_DBL m;
   int32_t e;
@@ -436,7 +436,7 @@ FIXP_DBL fLog2(FIXP_DBL x_m, int32_t x_e);
  * \param b second summand
  * \return saturated sum of a and b.
  */
-GOTV_INLINE FIXP_SGL fAddSaturate(const FIXP_SGL a, const FIXP_SGL b)
+NLC_INLINE FIXP_SGL fAddSaturate(const FIXP_SGL a, const FIXP_SGL b)
 {
   int32_t sum;
 
@@ -451,7 +451,7 @@ GOTV_INLINE FIXP_SGL fAddSaturate(const FIXP_SGL a, const FIXP_SGL b)
  * \param b second summand
  * \return saturated sum of a and b.
  */
-GOTV_INLINE FIXP_DBL fAddSaturate(const FIXP_DBL a, const FIXP_DBL b)
+NLC_INLINE FIXP_DBL fAddSaturate(const FIXP_DBL a, const FIXP_DBL b)
 {
   int32_t sum;
 
@@ -474,7 +474,7 @@ GOTV_INLINE FIXP_DBL fAddSaturate(const FIXP_DBL a, const FIXP_DBL b)
   extern const FIXP_DBL invCount[80];
 
   LNK_SECTION_INITCODE
-  GOTV_INLINE void InitInvInt(void) {}
+  NLC_INLINE void InitInvInt(void) {}
 
 
 /**
@@ -483,7 +483,7 @@ GOTV_INLINE FIXP_DBL fAddSaturate(const FIXP_DBL a, const FIXP_DBL b)
  * \param intValue Integer input value.
  * \param FIXP_DBL representation of 1/intValue
  */
-GOTV_INLINE FIXP_DBL GetInvInt(int intValue)
+NLC_INLINE FIXP_DBL GetInvInt(int intValue)
 {
   FDK_ASSERT((intValue > 0) && (intValue < 80));
   FDK_ASSERT(intValue<80);

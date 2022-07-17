@@ -43,7 +43,7 @@ void _gnutls_epoch_gc(gnutls_session_t session);
 void _gnutls_epoch_free(gnutls_session_t session,
 			record_parameters_st * state);
 
-static GOTV_INLINE int _gnutls_epoch_is_valid(gnutls_session_t session,
+static NLC_INLINE int _gnutls_epoch_is_valid(gnutls_session_t session,
 					 int epoch)
 {
 	record_parameters_st *params;
@@ -57,7 +57,7 @@ static GOTV_INLINE int _gnutls_epoch_is_valid(gnutls_session_t session,
 }
 
 
-static GOTV_INLINE int _gnutls_epoch_refcount_inc(gnutls_session_t session,
+static NLC_INLINE int _gnutls_epoch_refcount_inc(gnutls_session_t session,
 					     int epoch)
 {
 	record_parameters_st *params;
@@ -72,7 +72,7 @@ static GOTV_INLINE int _gnutls_epoch_refcount_inc(gnutls_session_t session,
 	return params->epoch;
 }
 
-static GOTV_INLINE int _gnutls_epoch_refcount_dec(gnutls_session_t session,
+static NLC_INLINE int _gnutls_epoch_refcount_dec(gnutls_session_t session,
 					     uint16_t epoch)
 {
 	record_parameters_st *params;

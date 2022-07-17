@@ -32,7 +32,7 @@
 #include <glib.h>
 #include <cairo.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* All the following functions and types are implemented in the Rust code.
  */
@@ -79,6 +79,6 @@ void rsvg_path_builder_add_to_cairo_context (RsvgPathBuilder *builder, cairo_t *
 G_GNUC_INTERNAL
 RsvgPathBuilder *rsvg_path_parser_from_str_into_builder (const char *path_str);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* RSVG_PATH_BUILDER_H */

@@ -16,6 +16,8 @@
 
 #include "EchoCancel.h"
 
+#include "AudioInputFrame.h"
+
 #include <GuiInterface/IFromGui.h>
 
 #include <PktLib/PktVoiceReq.h>
@@ -37,9 +39,6 @@ class RawVideo;
 class MediaClient;
 class PktVideoFeedPic;
 class PktVideoFeedPicChunk;
-
-#define MIXER_CHUNK_LEN_BYTES		1280
-#define MIXER_CHUNK_LEN_SAMPLES		640
 
 class ClientToRemove
 {
@@ -157,8 +156,8 @@ public:
 														int yRowStride, int uRowStride, int vRowStride,
 														int yPixStride, int uPixStride, int vPixStride,
 														int imageWidth, int imageHeight, int imageRotate );
-	//virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes );
 	virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
+	virtual void				fromGuiMicrophoneSamples( int16_t* pcmData, int pcmSampleCnt, int peakValue0to100, int divideDnSample, int outDelayMs );
 	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
 
 	virtual void				fromGuiSoundDelayTest( void );
@@ -181,6 +180,7 @@ public:
 	void						processFriendAudioFeed(	VxGUID&	onlineId, int16_t * pcmData, uint16_t pcmDataLen, bool dontLock = false );
 
 	void						processAudioIn( void );
+	void						processAudioInFrame( AudioInputFrame& inFrame );
 	void						processVideoIn( void );
 
 
@@ -283,7 +283,11 @@ protected:
 	EchoCancel					m_EchoCancel;
 #endif //USE_ECHO_CANCEL
 	int16_t						m_EchoOutBuf[ MIXER_CHUNK_LEN_SAMPLES ];
-	int							m_EchoOutBufIdx;
+	int							m_EchoOutBufIdx{ 0 };
 	int							m_EchoOutDataProcessedLen;
 	bool						m_VidPktListContainsMyId;
+
+	AudioInputFrame				m_InputFrames[ MAX_INPUT_FRAMES ];
+	int							m_InputFrameIndex{ 0 };
+	int							m_InputDownSampleRemainder{ 0 };
 };

@@ -208,7 +208,7 @@ static void OPNAME ## h264_qpel ## SIZE ## _mc32_ ## CODETYPE(uint8_t *dst, cons
 #define put_unligned_store(s, dest) vec_vsx_st(s, 0, dest);
 #endif /* HAVE_BIGENDIAN */
 
-static GOTV_INLINE void put_pixels16_l2_altivec( uint8_t * dst, const uint8_t * src1,
+static NLC_INLINE void put_pixels16_l2_altivec( uint8_t * dst, const uint8_t * src1,
                                     const uint8_t * src2, int dst_stride,
                                     int src_stride1, int h)
 {
@@ -248,7 +248,7 @@ static GOTV_INLINE void put_pixels16_l2_altivec( uint8_t * dst, const uint8_t * 
  }
 #endif /* HAVE_BIGENDIAN */
 
-static GOTV_INLINE void avg_pixels16_l2_altivec( uint8_t * dst, const uint8_t * src1,
+static NLC_INLINE void avg_pixels16_l2_altivec( uint8_t * dst, const uint8_t * src1,
                                     const uint8_t * src2, int dst_stride,
                                     int src_stride1, int h)
 {

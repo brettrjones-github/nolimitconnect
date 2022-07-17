@@ -45,7 +45,7 @@ using namespace X265_NS;
 namespace {
 
 /* Compute variance to derive AC energy of each block */
-GOTV_INLINE uint32_t acEnergyVar(Frame *curFrame, uint64_t sum_ssd, int shift, int plane)
+NLC_INLINE uint32_t acEnergyVar(Frame *curFrame, uint64_t sum_ssd, int shift, int plane)
 {
     uint32_t sum = (uint32_t)sum_ssd;
     uint32_t ssd = (uint32_t)(sum_ssd >> 32);
@@ -56,7 +56,7 @@ GOTV_INLINE uint32_t acEnergyVar(Frame *curFrame, uint64_t sum_ssd, int shift, i
 }
 
 /* Find the energy of each block in Y/Cb/Cr plane */
-GOTV_INLINE uint32_t acEnergyPlane(Frame *curFrame, pixel* src, intptr_t srcStride, int plane, int colorFormat, uint32_t qgSize)
+NLC_INLINE uint32_t acEnergyPlane(Frame *curFrame, pixel* src, intptr_t srcStride, int plane, int colorFormat, uint32_t qgSize)
 {
     if ((colorFormat != X265_CSP_I444) && plane)
     {

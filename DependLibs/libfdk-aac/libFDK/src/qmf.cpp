@@ -662,7 +662,7 @@ qmfAnalysisFiltering( HANDLE_QMF_FILTER_BANK anaQmf,    /*!< Handle of Qmf Analy
  *        part) and stores the result in pWorkBuffer.
  *
  */
-GOTV_INLINE
+NLC_INLINE
 static void
 qmfInverseModulationLP_even( HANDLE_QMF_FILTER_BANK synQmf,   /*!< Handle of Qmf Synthesis Bank  */
                              const FIXP_QMF *qmfReal,         /*!< Pointer to qmf real subband slot (input) */
@@ -720,7 +720,7 @@ qmfInverseModulationLP_even( HANDLE_QMF_FILTER_BANK synQmf,   /*!< Handle of Qmf
   tReal [M + M/2] = tReal[M/2];
 }
 
-GOTV_INLINE
+NLC_INLINE
 static void
 qmfInverseModulationLP_odd( HANDLE_QMF_FILTER_BANK synQmf,   /*!< Handle of Qmf Synthesis Bank  */
                             const FIXP_QMF *qmfReal,         /*!< Pointer to qmf real subband slot (input) */
@@ -754,7 +754,7 @@ qmfInverseModulationLP_odd( HANDLE_QMF_FILTER_BANK synQmf,   /*!< Handle of Qmf 
  *        part) and stores the result in pWorkBuffer.
  *
  */
-GOTV_INLINE
+NLC_INLINE
 static void
 qmfInverseModulationHQ( HANDLE_QMF_FILTER_BANK synQmf,  /*!< Handle of Qmf Synthesis Bank     */
                         const FIXP_QMF *qmfReal,        /*!< Pointer to qmf real subband slot */
@@ -1062,7 +1062,7 @@ qmfInitFilterBank (HANDLE_QMF_FILTER_BANK h_Qmf,     /*!< Handle to return */
  * \return void
  *
  */
-static GOTV_INLINE void
+static NLC_INLINE void
 qmfAdaptFilterStates (HANDLE_QMF_FILTER_BANK synQmf,     /*!< Handle of Qmf Filter Bank */
                       int scaleFactorDiff)               /*!< Scale factor difference to be applied */
 {

@@ -53,15 +53,15 @@ extern "C" {
 /* Global variables from po-lex.c.  */
 
 /* Current position within the PO file.  */
-extern GOTV_DLL_VARIABLE lex_pos_ty gram_pos;
-extern GOTV_DLL_VARIABLE int gram_pos_column;
+extern NLC_DLL_VARIABLE lex_pos_ty gram_pos;
+extern NLC_DLL_VARIABLE int gram_pos_column;
 
 /* Number of parse errors within a PO file that cause the program to
    terminate.  Cf. error_message_count, declared in <error.h>.  */
-extern GOTV_DLL_VARIABLE unsigned int gram_max_allowed_errors;
+extern NLC_DLL_VARIABLE unsigned int gram_max_allowed_errors;
 
 /* True if obsolete entries shall be considered as valid.  */
-extern GOTV_DLL_VARIABLE bool pass_obsolete_entries;
+extern NLC_DLL_VARIABLE bool pass_obsolete_entries;
 
 
 /* Prepare lexical analysis.  */

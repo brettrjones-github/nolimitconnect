@@ -16,7 +16,7 @@
 // some issues in Qtopia where there are left-over qcop files in /tmp/.
 // I'm guessing this will also clean up the taskbar in the Sharp version
 // of Qtopia.
-static GOTV_INLINE void cleanupQCop() {
+static NLC_INLINE void cleanupQCop() {
   QString appname(qApp->argv()[0]);
   int slash = appname.findRev("/");
   if(slash != -1) {  appname = appname.mid(slash+1); }

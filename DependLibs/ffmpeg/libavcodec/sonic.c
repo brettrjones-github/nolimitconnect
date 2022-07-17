@@ -79,12 +79,12 @@ typedef struct SonicContext {
 #define BASE_QUANT      0.6
 #define RATE_VARIATION  3.0
 
-static GOTV_INLINE int shift(int a,int b)
+static NLC_INLINE int shift(int a,int b)
 {
     return (a+(1<<(b-1))) >> b;
 }
 
-static GOTV_INLINE int shift_down(int a,int b)
+static NLC_INLINE int shift_down(int a,int b)
 {
     return (a>>b)+(a<0);
 }
@@ -136,7 +136,7 @@ do{\
 #undef put_rac
 }
 
-static GOTV_INLINE av_flatten int get_symbol(RangeCoder *c, uint8_t *state, int is_signed){
+static NLC_INLINE av_flatten int get_symbol(RangeCoder *c, uint8_t *state, int is_signed){
     if(get_rac(c, state+0))
         return 0;
     else{
@@ -157,7 +157,7 @@ static GOTV_INLINE av_flatten int get_symbol(RangeCoder *c, uint8_t *state, int 
 }
 
 #if 1
-static GOTV_INLINE int intlist_write(RangeCoder *c, uint8_t *state, int *buf, int entries, int base_2_part)
+static NLC_INLINE int intlist_write(RangeCoder *c, uint8_t *state, int *buf, int entries, int base_2_part)
 {
     int i;
 
@@ -167,7 +167,7 @@ static GOTV_INLINE int intlist_write(RangeCoder *c, uint8_t *state, int *buf, in
     return 1;
 }
 
-static GOTV_INLINE int intlist_read(RangeCoder *c, uint8_t *state, int *buf, int entries, int base_2_part)
+static NLC_INLINE int intlist_read(RangeCoder *c, uint8_t *state, int *buf, int entries, int base_2_part)
 {
     int i;
 
@@ -177,7 +177,7 @@ static GOTV_INLINE int intlist_read(RangeCoder *c, uint8_t *state, int *buf, int
     return 1;
 }
 #elif 1
-static GOTV_INLINE int intlist_write(PutBitContext *pb, int *buf, int entries, int base_2_part)
+static NLC_INLINE int intlist_write(PutBitContext *pb, int *buf, int entries, int base_2_part)
 {
     int i;
 
@@ -187,7 +187,7 @@ static GOTV_INLINE int intlist_write(PutBitContext *pb, int *buf, int entries, i
     return 1;
 }
 
-static GOTV_INLINE int intlist_read(GetBitContext *gb, int *buf, int entries, int base_2_part)
+static NLC_INLINE int intlist_read(GetBitContext *gb, int *buf, int entries, int base_2_part)
 {
     int i;
 
@@ -573,7 +573,7 @@ static int modified_levinson_durbin(int *window, int window_entries,
     return 0;
 }
 
-static GOTV_INLINE int code_samplerate(int samplerate)
+static NLC_INLINE int code_samplerate(int samplerate)
 {
     switch (samplerate)
     {

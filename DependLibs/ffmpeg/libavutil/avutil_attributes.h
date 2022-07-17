@@ -37,13 +37,13 @@
 #    define AV_GCC_VERSION_AT_MOST(x,y)  0
 #endif
 
-# define av_always_inline  GOTV_FORCE_INLINE
+# define av_always_inline  NLC_FORCE_INLINE
 
 #ifndef av_extern_inline
 #if defined(__ICL) && __ICL >= 1210 || defined(__GNUC_STDC_INLINE__)
-#    define av_extern_inline extern GOTV_INLINE
+#    define av_extern_inline extern NLC_INLINE
 #else
-#    define av_extern_inline GOTV_INLINE
+#    define av_extern_inline NLC_INLINE
 #endif
 #endif
 

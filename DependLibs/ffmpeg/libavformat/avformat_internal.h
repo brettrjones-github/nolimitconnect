@@ -565,7 +565,7 @@ int ff_stream_encode_params_copy(AVStream *dst, const AVStream *src);
  * @param newpath destination path
  * @return        0 or AVERROR on failure
  */
-static GOTV_INLINE int ff_rename(const char *oldpath, const char *newpath, void *logctx)
+static NLC_INLINE int ff_rename(const char *oldpath, const char *newpath, void *logctx)
 {
     int ret = 0;
     if (rename(oldpath, newpath) == -1) {

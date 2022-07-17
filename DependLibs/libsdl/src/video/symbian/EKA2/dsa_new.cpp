@@ -12,36 +12,36 @@ LOCAL_C TInt BytesPerPixel(TDisplayMode aMode)
 NONSHARABLE_CLASS(TDsa)
 	{
 	public:
-		GOTV_INLINE TDsa(const CDsa& aDsa);
-		GOTV_INLINE TBool IsFlip() const;
-		GOTV_INLINE TBool IsTurn() const;
-		GOTV_INLINE const TSize& SwSize() const;
-		GOTV_INLINE void Copy(TUint32* aTarget, const TUint8* aSrc, TInt aBytes, TInt aHeight) const;
+		NLC_INLINE TDsa(const CDsa& aDsa);
+		NLC_INLINE TBool IsFlip() const;
+		NLC_INLINE TBool IsTurn() const;
+		NLC_INLINE const TSize& SwSize() const;
+		NLC_INLINE void Copy(TUint32* aTarget, const TUint8* aSrc, TInt aBytes, TInt aHeight) const;
 	private:
 		const CDsa& iDsa;
 	};
 
 
-GOTV_INLINE TDsa::TDsa(const CDsa& aDsa) : iDsa(aDsa)
+NLC_INLINE TDsa::TDsa(const CDsa& aDsa) : iDsa(aDsa)
 	{	
 	}
 
-GOTV_INLINE TBool TDsa::IsTurn() const
+NLC_INLINE TBool TDsa::IsTurn() const
 	{
 	return iDsa.iStateFlags & CDsa::EOrientation90;
 	}
 	
-GOTV_INLINE TBool TDsa::IsFlip() const
+NLC_INLINE TBool TDsa::IsFlip() const
 	{
 	return iDsa.iStateFlags & CDsa::EOrientation180;
 	}	
 	
-GOTV_INLINE const TSize& TDsa::SwSize() const
+NLC_INLINE const TSize& TDsa::SwSize() const
 	{
 	return iDsa.SwSize();
 	}
 		
-GOTV_INLINE void TDsa::Copy(TUint32* aTarget, const TUint8* aSrc, TInt aBytes, TInt aHeight) const
+NLC_INLINE void TDsa::Copy(TUint32* aTarget, const TUint8* aSrc, TInt aBytes, TInt aHeight) const
 	{
 	iDsa.iCopyFunction(iDsa, aTarget, aSrc, aBytes, aHeight);
 	}
@@ -910,7 +910,7 @@ void CDsa::SetCopyFunction()
 	Wipe();
 	}
 	
-GOTV_INLINE void Rotate(TRect& aRect)
+NLC_INLINE void Rotate(TRect& aRect)
 	{
 	const TInt dx = aRect.iBr.iX - aRect.iTl.iX;
 	const TInt dy = aRect.iBr.iY - aRect.iTl.iY;

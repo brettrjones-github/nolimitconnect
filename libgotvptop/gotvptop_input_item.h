@@ -184,25 +184,25 @@ struct input_item_node_t
     input_item_node_t      **pp_children;
 };
 
-GOTV_API void input_item_CopyOptions( input_item_t *p_child, input_item_t *p_parent );
-GOTV_API void input_item_SetName( input_item_t *p_item, const char *psz_name );
+NLC_API void input_item_CopyOptions( input_item_t *p_child, input_item_t *p_parent );
+NLC_API void input_item_SetName( input_item_t *p_item, const char *psz_name );
 
 /**
  * Start adding multiple subitems.
  *
  * Create a root node to hold a tree of subitems for given item
  */
-GOTV_API input_item_node_t * input_item_node_Create( input_item_t *p_input ) GOTV_USED;
+NLC_API input_item_node_t * input_item_node_Create( input_item_t *p_input ) GOTV_USED;
 
 /**
  * Add a new child node to this parent node that will point to this subitem.
  */
-GOTV_API input_item_node_t * input_item_node_AppendItem( input_item_node_t *p_node, input_item_t *p_item );
+NLC_API input_item_node_t * input_item_node_AppendItem( input_item_node_t *p_node, input_item_t *p_item );
 
 /**
  * Add an already created node to children of this parent node.
  */
-GOTV_API void input_item_node_AppendNode( input_item_node_t *p_parent, input_item_node_t *p_child );
+NLC_API void input_item_node_AppendNode( input_item_node_t *p_parent, input_item_node_t *p_child );
 
 /**
  * Remove a node from its parent.
@@ -213,7 +213,7 @@ void input_item_node_RemoveNode( input_item_node_t *parent,
 /**
  * Delete a node created with input_item_node_Create() and all its children.
  */
-GOTV_API void input_item_node_Delete( input_item_node_t *p_node );
+NLC_API void input_item_node_Delete( input_item_node_t *p_node );
 
 /**
  * Option flags
@@ -232,20 +232,20 @@ enum input_item_option_e
 /**
  * This function allows to add an option to an existing input_item_t.
  */
-GOTV_API int input_item_AddOption(input_item_t *, const char *, unsigned i_flags );
+NLC_API int input_item_AddOption(input_item_t *, const char *, unsigned i_flags );
 /**
  * This function add several options to an existing input_item_t.
  */
-GOTV_API int input_item_AddOptions(input_item_t *, int i_options,
+NLC_API int input_item_AddOptions(input_item_t *, int i_options,
                                   const char *const *ppsz_options,
                                   unsigned i_flags );
-GOTV_API int input_item_AddOpaque(input_item_t *, const char *, void *);
+NLC_API int input_item_AddOpaque(input_item_t *, const char *, void *);
 
 void input_item_ApplyOptions(gotvptop_object_t *, input_item_t *);
 
-GOTV_API bool input_item_slave_GetType(const char *, enum slave_type *);
+NLC_API bool input_item_slave_GetType(const char *, enum slave_type *);
 
-GOTV_API input_item_slave_t *input_item_slave_New(const char *, enum slave_type,
+NLC_API input_item_slave_t *input_item_slave_New(const char *, enum slave_type,
                                                enum slave_priority);
 #define input_item_slave_Delete(p_slave) free(p_slave)
 
@@ -253,22 +253,22 @@ GOTV_API input_item_slave_t *input_item_slave_New(const char *, enum slave_type,
  * This function allows adding a slave to an existing input item.
  * The slave is owned by the input item after this call.
  */
-GOTV_API int input_item_AddSlave(input_item_t *, input_item_slave_t *);
+NLC_API int input_item_AddSlave(input_item_t *, input_item_slave_t *);
 
 /* */
-GOTV_API bool input_item_HasErrorWhenReading( input_item_t * );
-GOTV_API void input_item_SetMeta( input_item_t *, gotvptop_meta_type_t meta_type, const char *psz_val );
-GOTV_API bool input_item_MetaMatch( input_item_t *p_i, gotvptop_meta_type_t meta_type, const char *psz );
-GOTV_API char * input_item_GetMeta( input_item_t *p_i, gotvptop_meta_type_t meta_type ) GOTV_USED;
-GOTV_API char * input_item_GetName( input_item_t * p_i ) GOTV_USED;
-GOTV_API char * input_item_GetTitleFbName( input_item_t * p_i ) GOTV_USED;
-GOTV_API char * input_item_GetURI( input_item_t * p_i ) GOTV_USED;
-GOTV_API char * input_item_GetNowPlayingFb( input_item_t *p_item ) GOTV_USED;
-GOTV_API void input_item_SetURI( input_item_t * p_i, const char *psz_uri );
-GOTV_API mtime_t input_item_GetDuration( input_item_t * p_i );
-GOTV_API void input_item_SetDuration( input_item_t * p_i, mtime_t i_duration );
-GOTV_API bool input_item_IsPreparsed( input_item_t *p_i );
-GOTV_API bool input_item_IsArtFetched( input_item_t *p_i );
+NLC_API bool input_item_HasErrorWhenReading( input_item_t * );
+NLC_API void input_item_SetMeta( input_item_t *, gotvptop_meta_type_t meta_type, const char *psz_val );
+NLC_API bool input_item_MetaMatch( input_item_t *p_i, gotvptop_meta_type_t meta_type, const char *psz );
+NLC_API char * input_item_GetMeta( input_item_t *p_i, gotvptop_meta_type_t meta_type ) GOTV_USED;
+NLC_API char * input_item_GetName( input_item_t * p_i ) GOTV_USED;
+NLC_API char * input_item_GetTitleFbName( input_item_t * p_i ) GOTV_USED;
+NLC_API char * input_item_GetURI( input_item_t * p_i ) GOTV_USED;
+NLC_API char * input_item_GetNowPlayingFb( input_item_t *p_item ) GOTV_USED;
+NLC_API void input_item_SetURI( input_item_t * p_i, const char *psz_uri );
+NLC_API mtime_t input_item_GetDuration( input_item_t * p_i );
+NLC_API void input_item_SetDuration( input_item_t * p_i, mtime_t i_duration );
+NLC_API bool input_item_IsPreparsed( input_item_t *p_i );
+NLC_API bool input_item_IsArtFetched( input_item_t *p_i );
 
 #define INPUT_META( name ) \
 static inline \
@@ -314,18 +314,18 @@ INPUT_META(DiscNumber)
 #define input_item_SetArtURL   input_item_SetArtworkURL
 #define input_item_GetArtURL   input_item_GetArtworkURL
 
-GOTV_API char * input_item_GetInfo( input_item_t *p_i, const char *psz_cat,const char *psz_name ) GOTV_USED;
-GOTV_API int input_item_AddInfo( input_item_t *p_i, const char *psz_cat, const char *psz_name, const char *psz_format, ... ) GOTV_FORMAT( 4, 5 );
-GOTV_API int input_item_DelInfo( input_item_t *p_i, const char *psz_cat, const char *psz_name );
-GOTV_API void input_item_ReplaceInfos( input_item_t *, info_category_t * );
-GOTV_API void input_item_MergeInfos( input_item_t *, info_category_t * );
+NLC_API char * input_item_GetInfo( input_item_t *p_i, const char *psz_cat,const char *psz_name ) GOTV_USED;
+NLC_API int input_item_AddInfo( input_item_t *p_i, const char *psz_cat, const char *psz_name, const char *psz_format, ... ) GOTV_FORMAT( 4, 5 );
+NLC_API int input_item_DelInfo( input_item_t *p_i, const char *psz_cat, const char *psz_name );
+NLC_API void input_item_ReplaceInfos( input_item_t *, info_category_t * );
+NLC_API void input_item_MergeInfos( input_item_t *, info_category_t * );
 
 /**
  * This function creates a new input_item_t with the provided information.
  *
  * XXX You may also use input_item_New, as they need less arguments.
  */
-GOTV_API input_item_t * input_item_NewExt( const char *psz_uri,
+NLC_API input_item_t * input_item_NewExt( const char *psz_uri,
                                           const char *psz_name,
                                           mtime_t i_duration, int i_type,
                                           enum input_item_net_type i_net ) GOTV_USED;
@@ -351,13 +351,13 @@ GOTV_API input_item_t * input_item_NewExt( const char *psz_uri,
 /**
  * This function creates a new input_item_t as a copy of another.
  */
-GOTV_API input_item_t * input_item_Copy(input_item_t * ) GOTV_USED;
+NLC_API input_item_t * input_item_Copy(input_item_t * ) GOTV_USED;
 
 /** Holds an input item, i.e. creates a new reference. */
-GOTV_API input_item_t *input_item_Hold(input_item_t *);
+NLC_API input_item_t *input_item_Hold(input_item_t *);
 
 /** Releases an input item, i.e. decrements its reference counter. */
-GOTV_API void input_item_Release(input_item_t *);
+NLC_API void input_item_Release(input_item_t *);
 
 typedef enum input_item_meta_request_option_t
 {
@@ -377,12 +377,12 @@ enum input_item_preparse_status
     ITEM_PREPARSE_DONE
 };
 
-GOTV_API int libgotvptop_MetadataRequest( libgotvptop_int_t *, input_item_t *,
+NLC_API int libgotvptop_MetadataRequest( libgotvptop_int_t *, input_item_t *,
                                     input_item_meta_request_option_t,
                                     int, void * );
-GOTV_API int libgotvptop_ArtRequest(libgotvptop_int_t *, input_item_t *,
+NLC_API int libgotvptop_ArtRequest(libgotvptop_int_t *, input_item_t *,
                               input_item_meta_request_option_t );
-GOTV_API void libgotvptop_MetadataCancel( libgotvptop_int_t *, void * );
+NLC_API void libgotvptop_MetadataCancel( libgotvptop_int_t *, void * );
 
 /******************
  * Input stats
@@ -439,7 +439,7 @@ struct gotvptop_readdir_helper
  * \param p_rdh need to be cleaned with gotvptop_readdir_helper_finish()
  * \param p_node node that will be used to add items
  */
-GOTV_API void libgotvptop_readdir_helper_init(struct gotvptop_readdir_helper *p_rdh,
+NLC_API void libgotvptop_readdir_helper_init(struct gotvptop_readdir_helper *p_rdh,
                                      gotvptop_object_t *p_obj, input_item_node_t *p_node);
 #define gotvptop_readdir_helper_init(p_rdh, p_obj, p_node) \
     libgotvptop_readdir_helper_init(p_rdh, GOTV_OBJECT(p_obj), p_node)
@@ -449,7 +449,7 @@ GOTV_API void libgotvptop_readdir_helper_init(struct gotvptop_readdir_helper *p_
  *
  * \param b_success if true, items of the node will be sorted.
  */
-GOTV_API void gotvptop_readdir_helper_finish(struct gotvptop_readdir_helper *p_rdh, bool b_success);
+NLC_API void gotvptop_readdir_helper_finish(struct gotvptop_readdir_helper *p_rdh, bool b_success);
 
 /**
  * Add a new input_item_t entry to the node of the gotvptop_readdir_helper struct.
@@ -466,7 +466,7 @@ GOTV_API void gotvptop_readdir_helper_finish(struct gotvptop_readdir_helper *p_r
  * \param i_type see \ref input_item_type_e
  * \param i_net see \ref input_item_net_type
  */
-GOTV_API int gotvptop_readdir_helper_additem(struct gotvptop_readdir_helper *p_rdh,
+NLC_API int gotvptop_readdir_helper_additem(struct gotvptop_readdir_helper *p_rdh,
                                        const char *psz_uri, const char *psz_flatpath,
                                        const char *psz_filename,
                                        int i_type, int i_net);

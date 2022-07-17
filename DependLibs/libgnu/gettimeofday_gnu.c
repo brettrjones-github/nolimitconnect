@@ -99,7 +99,7 @@ rpl_tzset (void)
    causes problems.  */
 #if 0 //NOTE: have this missing function in CoreLib/VxFuntionsMissingInWindows.cpp
 int
-gettimeofday (struct timeval *GOTV_RESTRICT tv, void *GOTV_RESTRICT tz)
+gettimeofday (struct timeval *NLC_RESTRICT tv, void *NLC_RESTRICT tz)
 {
 #undef gettimeofday
 #if HAVE_GETTIMEOFDAY

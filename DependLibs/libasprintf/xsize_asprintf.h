@@ -32,7 +32,7 @@
  #error "Please include config.h first."
 #endif // _GL_INLINE_HEADER_BEGIN
 #ifndef XSIZE_INLINE
-# define XSIZE_INLINE GOTV_INLINE
+# define XSIZE_INLINE NLC_INLINE
 #endif
 
 /* The size of memory objects is often computed through expressions of

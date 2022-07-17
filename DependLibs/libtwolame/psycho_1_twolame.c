@@ -129,7 +129,7 @@ static void psycho_1_init_add_db(psycho_1_mem * mem)
     }
 }
 
-static GOTV_INLINE FLOAT add_db(psycho_1_mem * mem, FLOAT a, FLOAT b)
+static NLC_INLINE FLOAT add_db(psycho_1_mem * mem, FLOAT a, FLOAT b)
 {
     /* MFC - if the difference between a and b is large (>99), then just return the largest one.
        (about 10% of the time) - For differences between 0 and 99, return the largest value, but

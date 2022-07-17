@@ -110,7 +110,7 @@
 /**
  * Check if the middle 8x8 Block in the given 8x16 block is flat
  */
-static GOTV_INLINE int RENAME(vertClassify)(const uint8_t src[], int stride, PPContext *c){
+static NLC_INLINE int RENAME(vertClassify)(const uint8_t src[], int stride, PPContext *c){
     int numEq= 0, dcOk;
     src+= stride*4; // src points to begin of the 8x8 Block
     __asm__ volatile(
@@ -227,7 +227,7 @@ static GOTV_INLINE int RENAME(vertClassify)(const uint8_t src[], int stride, PPC
  * using the 9-Tap Filter (1,1,2,2,4,2,2,1,1)/16
  */
 #if !TEMPLATE_PP_ALTIVEC
-static GOTV_INLINE void RENAME(doVertLowPass)(uint8_t *src, int stride, PPContext *c)
+static NLC_INLINE void RENAME(doVertLowPass)(uint8_t *src, int stride, PPContext *c)
 {
 #if TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
     src+= stride*3;
@@ -406,7 +406,7 @@ static GOTV_INLINE void RENAME(doVertLowPass)(uint8_t *src, int stride, PPContex
  * can only smooth blocks at the expected locations (it cannot smooth them if they did move)
  * MMX2 version does correct clipping C version does not
  */
-static GOTV_INLINE void RENAME(vertX1Filter)(uint8_t *src, int stride, PPContext *co)
+static NLC_INLINE void RENAME(vertX1Filter)(uint8_t *src, int stride, PPContext *co)
 {
 #if TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
     src+= stride*3;
@@ -533,7 +533,7 @@ static GOTV_INLINE void RENAME(vertX1Filter)(uint8_t *src, int stride, PPContext
 }
 
 #if !TEMPLATE_PP_ALTIVEC
-static GOTV_INLINE void RENAME(doVertDefFilter)(uint8_t src[], int stride, PPContext *c)
+static NLC_INLINE void RENAME(doVertDefFilter)(uint8_t src[], int stride, PPContext *c)
 {
 #if TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
 /*
@@ -1092,7 +1092,7 @@ static GOTV_INLINE void RENAME(doVertDefFilter)(uint8_t src[], int stride, PPCon
 #endif //TEMPLATE_PP_ALTIVEC
 
 #if !TEMPLATE_PP_ALTIVEC
-static GOTV_INLINE void RENAME(dering)(uint8_t src[], int stride, PPContext *c)
+static NLC_INLINE void RENAME(dering)(uint8_t src[], int stride, PPContext *c)
 {
 #if HAVE_7REGS && (TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW)
     DECLARE_ALIGNED(8, uint64_t, tmp)[3];
@@ -1449,7 +1449,7 @@ DERING_CORE((%0, %1, 8)       ,(%%FF_REGd, %1, 4),%%mm2,%%mm4,%%mm0,%%mm3,%%mm5,
  * lines 0-3 have been passed through the deblock / dering filters already, but can be read, too.
  * lines 4-12 will be read into the deblocking filter and should be deinterlaced
  */
-static GOTV_INLINE void RENAME(deInterlaceInterpolateLinear)(uint8_t src[], int stride)
+static NLC_INLINE void RENAME(deInterlaceInterpolateLinear)(uint8_t src[], int stride)
 {
 #if TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
     src+= 4*stride;
@@ -1502,7 +1502,7 @@ static GOTV_INLINE void RENAME(deInterlaceInterpolateLinear)(uint8_t src[], int 
  * lines 4-12 will be read into the deblocking filter and should be deinterlaced
  * this filter will read lines 3-15 and write 7-13
  */
-static GOTV_INLINE void RENAME(deInterlaceInterpolateCubic)(uint8_t src[], int stride)
+static NLC_INLINE void RENAME(deInterlaceInterpolateCubic)(uint8_t src[], int stride)
 {
 #if TEMPLATE_PP_SSE2 || TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
     src+= stride*3;
@@ -1589,7 +1589,7 @@ DEINT_CUBIC((%%FF_REGd, %1), (%0, %1, 8)    , (%%FF_REGd, %1, 4), (%%FF_REGc)   
  * lines 4-12 will be read into the deblocking filter and should be deinterlaced
  * this filter will read lines 4-13 and write 5-11
  */
-static GOTV_INLINE void RENAME(deInterlaceFF)(uint8_t src[], int stride, uint8_t *tmp)
+static NLC_INLINE void RENAME(deInterlaceFF)(uint8_t src[], int stride, uint8_t *tmp)
 {
 #if TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
     src+= stride*4;
@@ -1668,7 +1668,7 @@ DEINT_FF((%%FF_REGd, %1), (%%FF_REGd, %1, 2), (%0, %1, 8)    , (%%FF_REGd, %1, 4
  * lines 4-12 will be read into the deblocking filter and should be deinterlaced
  * this filter will read lines 4-13 and write 4-11
  */
-static GOTV_INLINE void RENAME(deInterlaceL5)(uint8_t src[], int stride, uint8_t *tmp, uint8_t *tmp2)
+static NLC_INLINE void RENAME(deInterlaceL5)(uint8_t src[], int stride, uint8_t *tmp, uint8_t *tmp2)
 {
 #if (TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW) && HAVE_6REGS
     src+= stride*4;
@@ -1769,7 +1769,7 @@ DEINT_L5(%%mm1, %%mm0, (%%FF_REGd, %1, 2), (%0, %1, 8)       , (%%FF_REGd, %1, 4
  * lines 4-12 will be read into the deblocking filter and should be deinterlaced
  * this filter will read lines 4-13 and write 4-11
  */
-static GOTV_INLINE void RENAME(deInterlaceBlendLinear)(uint8_t src[], int stride, uint8_t *tmp)
+static NLC_INLINE void RENAME(deInterlaceBlendLinear)(uint8_t src[], int stride, uint8_t *tmp)
 {
 #if TEMPLATE_PP_MMXEXT || TEMPLATE_PP_3DNOW
     src+= 4*stride;
@@ -1870,7 +1870,7 @@ static GOTV_INLINE void RENAME(deInterlaceBlendLinear)(uint8_t src[], int stride
  * lines 0-3 have been passed through the deblock / dering filters already, but can be read, too.
  * lines 4-12 will be read into the deblocking filter and should be deinterlaced
  */
-static GOTV_INLINE void RENAME(deInterlaceMedian)(uint8_t src[], int stride)
+static NLC_INLINE void RENAME(deInterlaceMedian)(uint8_t src[], int stride)
 {
 #if TEMPLATE_PP_MMX
     src+= 4*stride;
@@ -1991,7 +1991,7 @@ MEDIAN((%%FF_REGd, %1), (%%FF_REGd, %1, 2), (%0, %1, 8))
 /**
  * Transpose and shift the given 8x8 Block into dst1 and dst2.
  */
-static GOTV_INLINE void RENAME(transpose1)(uint8_t *dst1, uint8_t *dst2, const uint8_t *src, int srcStride)
+static NLC_INLINE void RENAME(transpose1)(uint8_t *dst1, uint8_t *dst2, const uint8_t *src, int srcStride)
 {
     __asm__(
         "lea (%0, %1), %%"FF_REG_a"             \n\t"
@@ -2076,7 +2076,7 @@ static GOTV_INLINE void RENAME(transpose1)(uint8_t *dst1, uint8_t *dst2, const u
 /**
  * Transpose the given 8x8 block.
  */
-static GOTV_INLINE void RENAME(transpose2)(uint8_t *dst, int dstStride, const uint8_t *src)
+static NLC_INLINE void RENAME(transpose2)(uint8_t *dst, int dstStride, const uint8_t *src)
 {
     __asm__(
         "lea (%0, %1), %%"FF_REG_a"             \n\t"
@@ -2156,7 +2156,7 @@ static GOTV_INLINE void RENAME(transpose2)(uint8_t *dst, int dstStride, const ui
 //static long test=0;
 
 #if !TEMPLATE_PP_ALTIVEC
-static GOTV_INLINE void RENAME(tempNoiseReducer)(uint8_t *src, int stride,
+static NLC_INLINE void RENAME(tempNoiseReducer)(uint8_t *src, int stride,
                                     uint8_t *tempBlurred, uint32_t *tempBlurredPast, const int *maxNoise)
 {
     // to save a register (FIXME do this outside of the loops)
@@ -3092,7 +3092,7 @@ static void RENAME(postProcess)(const uint8_t src[], int srcStride, uint8_t dst[
 #undef REAL_SCALED_CPY
 #undef SCALED_CPY
 
-static GOTV_INLINE void RENAME(blockCopy)(uint8_t dst[], int dstStride, const uint8_t src[], int srcStride,
+static NLC_INLINE void RENAME(blockCopy)(uint8_t dst[], int dstStride, const uint8_t src[], int srcStride,
                                      int levelFix, int64_t *packedOffsetAndScale)
 {
 #if !TEMPLATE_PP_MMX || !HAVE_6REGS
@@ -3245,64 +3245,64 @@ static inline void RENAME(duplicate)(uint8_t src[], int stride)
 }
 
 #if ARCH_X86 && TEMPLATE_PP_MMXEXT
-static GOTV_INLINE void RENAME(prefetchnta)(const void *p)
+static NLC_INLINE void RENAME(prefetchnta)(const void *p)
 {
     __asm__ volatile(   "prefetchnta (%0)\n\t"
         : : "r" (p)
     );
 }
 
-static GOTV_INLINE void RENAME(prefetcht0)(const void *p)
+static NLC_INLINE void RENAME(prefetcht0)(const void *p)
 {
     __asm__ volatile(   "prefetcht0 (%0)\n\t"
         : : "r" (p)
     );
 }
 
-static GOTV_INLINE void RENAME(prefetcht1)(const void *p)
+static NLC_INLINE void RENAME(prefetcht1)(const void *p)
 {
     __asm__ volatile(   "prefetcht1 (%0)\n\t"
         : : "r" (p)
     );
 }
 
-static GOTV_INLINE void RENAME(prefetcht2)(const void *p)
+static NLC_INLINE void RENAME(prefetcht2)(const void *p)
 {
     __asm__ volatile(   "prefetcht2 (%0)\n\t"
         : : "r" (p)
     );
 }
 #elif !ARCH_X86 && AV_GCC_VERSION_AT_LEAST(3,2)
-static GOTV_INLINE void RENAME(prefetchnta)(const void *p)
+static NLC_INLINE void RENAME(prefetchnta)(const void *p)
 {
     __builtin_prefetch(p,0,0);
 }
-static GOTV_INLINE void RENAME(prefetcht0)(const void *p)
+static NLC_INLINE void RENAME(prefetcht0)(const void *p)
 {
     __builtin_prefetch(p,0,1);
 }
-static GOTV_INLINE void RENAME(prefetcht1)(const void *p)
+static NLC_INLINE void RENAME(prefetcht1)(const void *p)
 {
     __builtin_prefetch(p,0,2);
 }
-static GOTV_INLINE void RENAME(prefetcht2)(const void *p)
+static NLC_INLINE void RENAME(prefetcht2)(const void *p)
 {
     __builtin_prefetch(p,0,3);
 }
 #else
-static GOTV_INLINE void RENAME(prefetchnta)(const void *p)
+static NLC_INLINE void RENAME(prefetchnta)(const void *p)
 {
     return;
 }
-static GOTV_INLINE void RENAME(prefetcht0)(const void *p)
+static NLC_INLINE void RENAME(prefetcht0)(const void *p)
 {
     return;
 }
-static GOTV_INLINE void RENAME(prefetcht1)(const void *p)
+static NLC_INLINE void RENAME(prefetcht1)(const void *p)
 {
     return;
 }
-static GOTV_INLINE void RENAME(prefetcht2)(const void *p)
+static NLC_INLINE void RENAME(prefetcht2)(const void *p)
 {
     return;
 }

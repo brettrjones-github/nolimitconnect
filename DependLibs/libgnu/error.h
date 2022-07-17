@@ -69,14 +69,14 @@ extern void error_at_line (int __status, int __errnum, const char *__fname,
 /* If NULL, error will flush stdout, then print on stderr the program
    name, a colon and a space.  Otherwise, error will call this
    function without parameters instead.  */
-extern GOTV_DLL_VARIABLE void (*error_print_progname) (void);
+extern NLC_DLL_VARIABLE void (*error_print_progname) (void);
 
 /* This variable is incremented each time 'error' is called.  */
-extern GOTV_DLL_VARIABLE unsigned int error_message_count;
+extern NLC_DLL_VARIABLE unsigned int error_message_count;
 
 /* Sometimes we want to have at most one error per line.  This
    variable controls whether this mode is selected or not.  */
-extern GOTV_DLL_VARIABLE int error_one_per_line;
+extern NLC_DLL_VARIABLE int error_one_per_line;
 
 #ifdef __cplusplus
 }

@@ -24,7 +24,7 @@
 
 #include <libgnu/gtypes.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GAllocator GAllocator;
 typedef struct _GMemChunk  GMemChunk;
@@ -85,6 +85,6 @@ void            g_node_push_allocator   (GAllocator   *allocator);
 GLIB_DEPRECATED
 void            g_node_pop_allocator    (void);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_ALLOCATOR_H__ */

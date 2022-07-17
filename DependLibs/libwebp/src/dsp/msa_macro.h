@@ -70,7 +70,7 @@
 #define ST_SW(...) ST_W(v4i32, __VA_ARGS__)
 
 #define MSA_LOAD_FUNC(TYPE, INSTR, FUNC_NAME)             \
-  static GOTV_INLINE TYPE FUNC_NAME(const void* const psrc) {  \
+  static NLC_INLINE TYPE FUNC_NAME(const void* const psrc) {  \
     const uint8_t* const psrc_m = (const uint8_t*)psrc;   \
     TYPE val_m;                                           \
     asm volatile (                                        \
@@ -83,7 +83,7 @@
 #define MSA_LOAD(psrc, FUNC_NAME)  FUNC_NAME(psrc)
 
 #define MSA_STORE_FUNC(TYPE, INSTR, FUNC_NAME)               \
-  static GOTV_INLINE void FUNC_NAME(TYPE val, void* const pdst) { \
+  static NLC_INLINE void FUNC_NAME(TYPE val, void* const pdst) { \
     uint8_t* const pdst_m = (uint8_t*)pdst;                  \
     TYPE val_m = val;                                        \
     asm volatile (                                           \

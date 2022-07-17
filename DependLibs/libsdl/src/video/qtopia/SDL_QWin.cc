@@ -125,7 +125,7 @@ void SDL_QWin::mouseReleaseEvent(QMouseEvent *e) {
   my_mouse_pos = QPoint(-1, -1);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 gs_fastRotateBlit_3 ( unsigned short *fb,
 		      unsigned short *bits,
 		      const QRect& rect )
@@ -182,7 +182,7 @@ gs_fastRotateBlit_3 ( unsigned short *fb,
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 gs_fastRotateBlit_1 ( unsigned short *fb,
 		      unsigned short *bits,
 		      const QRect& rect ) {

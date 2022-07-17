@@ -126,21 +126,21 @@
 
 /* Please see the Gnulib manual for how to use these macros.
 
-   Suppress extern GOTV_INLINE with HP-UX cc, as it appears to be broken; see
+   Suppress extern NLC_INLINE with HP-UX cc, as it appears to be broken; see
    <http://lists.gnu.org/archive/html/bug-texinfo/2013-02/msg00030.html>.
 
-   Suppress extern GOTV_INLINE with Sun C in standards-conformance mode, as it
-   mishandles GOTV_INLINE functions that call each other.  E.g., for 'GOTV_INLINE void f
-   (void) { } GOTV_INLINE void g (void) { f (); }', c99 incorrectly complains
-   'reference to static identifier "f" in extern GOTV_INLINE function'.
+   Suppress extern NLC_INLINE with Sun C in standards-conformance mode, as it
+   mishandles NLC_INLINE functions that call each other.  E.g., for 'NLC_INLINE void f
+   (void) { } NLC_INLINE void g (void) { f (); }', c99 incorrectly complains
+   'reference to static identifier "f" in extern NLC_INLINE function'.
    This bug was observed with Sun C 5.12 SunOS_i386 2011/11/16.
 
-   Suppress extern GOTV_INLINE (with or without __attribute__ ((__gnu_inline__)))
-   on configurations that mistakenly use 'static GOTV_INLINE' to implement
+   Suppress extern NLC_INLINE (with or without __attribute__ ((__gnu_inline__)))
+   on configurations that mistakenly use 'static NLC_INLINE' to implement
    functions or macros in standard C headers like <ctype.h>.  For example,
-   if isdigit is mistakenly implemented via a static GOTV_INLINE function,
-   a program containing an extern GOTV_INLINE function that calls isdigit
-   may not work since the C standard prohibits extern GOTV_INLINE functions
+   if isdigit is mistakenly implemented via a static NLC_INLINE function,
+   a program containing an extern NLC_INLINE function that calls isdigit
+   may not work since the C standard prohibits extern NLC_INLINE functions
    from calling static functions.  This bug is known to occur on:
 
      OS X 10.8 and earlier; see:
@@ -174,16 +174,16 @@
 //         && !defined __PGI \
 //         && !(defined __SUNPRO_C && __STDC__))) \
 //     && !defined _GL_EXTERN_INLINE_STDHEADER_BUG)
-//# define _GL_INLINE GOTV_INLINE
-//# define _GL_EXTERN_INLINE extern GOTV_INLINE
+//# define _GL_INLINE NLC_INLINE
+//# define _GL_EXTERN_INLINE extern NLC_INLINE
 //# define _GL_EXTERN_INLINE_IN_USE
 //#elif (2 < __GNUC__ + (7 <= __GNUC_MINOR__) && !defined __STRICT_ANSI__ \
 //       && !defined _GL_EXTERN_INLINE_STDHEADER_BUG)
 //# if defined __GNUC_GNU_INLINE__ && __GNUC_GNU_INLINE__
 //   /* __gnu_inline__ suppresses a GCC 4.2 diagnostic.  */
-//#  define _GL_INLINE extern GOTV_INLINE __attribute__ ((__gnu_inline__))
+//#  define _GL_INLINE extern NLC_INLINE __attribute__ ((__gnu_inline__))
 //# else
-//#  define _GL_INLINE extern GOTV_INLINE
+//#  define _GL_INLINE extern NLC_INLINE
 //# endif
 //# define _GL_EXTERN_INLINE extern
 //# define _GL_EXTERN_INLINE_IN_USE
@@ -195,7 +195,7 @@
 /* In GCC 4.6 (inclusive) to 5.1 (exclusive),
    suppress bogus "no previous prototype for 'FOO'"
    and "no previous declaration for 'FOO'" diagnostics,
-   when FOO is an GOTV_INLINE function in the header; see
+   when FOO is an NLC_INLINE function in the header; see
    <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54113> and
    <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63877>.  */
 #if __GNUC__ == 4 && 6 <= __GNUC_MINOR__
@@ -218,16 +218,16 @@
 #endif
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
-   calls it, or to nothing if 'GOTV_INLINE' is not supported under any name.  */
+   calls it, or to nothing if 'NLC_INLINE' is not supported under any name.  */
 #ifndef __cplusplus
-/* #undef GOTV_INLINE */
+/* #undef NLC_INLINE */
 #endif
 
 /* Define to long or long long if <inttypes.h> and <stdint.h> don't define. */
 /* #undef intmax_t */
 
 /* Work around a bug in Apple GCC 4.0.1 build 5465: In C99 mode, it supports
-   the ISO C 99 semantics of 'extern GOTV_INLINE' (unlike the GNU C semantics of
+   the ISO C 99 semantics of 'extern NLC_INLINE' (unlike the GNU C semantics of
    earlier versions), but does not display it by setting __GNUC_STDC_INLINE__.
    __APPLE__ && __MACH__ test for Mac OS X.
    __APPLE_CC__ tests for the Apple compiler and its version.

@@ -176,7 +176,7 @@ static int query_formats(AVFilterContext *ctx)
     return ff_set_common_samplerates(ctx, formats);
 }
 
-static GOTV_INLINE void scale_samples_u8(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void scale_samples_u8(uint8_t *dst, const uint8_t *src,
                                     int nb_samples, int volume)
 {
     int i;
@@ -184,7 +184,7 @@ static GOTV_INLINE void scale_samples_u8(uint8_t *dst, const uint8_t *src,
         dst[i] = av_clip_uint8(((((int64_t)src[i] - 128) * volume + 128) >> 8) + 128);
 }
 
-static GOTV_INLINE void scale_samples_u8_small(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void scale_samples_u8_small(uint8_t *dst, const uint8_t *src,
                                           int nb_samples, int volume)
 {
     int i;
@@ -192,7 +192,7 @@ static GOTV_INLINE void scale_samples_u8_small(uint8_t *dst, const uint8_t *src,
         dst[i] = av_clip_uint8((((src[i] - 128) * volume + 128) >> 8) + 128);
 }
 
-static GOTV_INLINE void scale_samples_s16(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void scale_samples_s16(uint8_t *dst, const uint8_t *src,
                                      int nb_samples, int volume)
 {
     int i;
@@ -202,7 +202,7 @@ static GOTV_INLINE void scale_samples_s16(uint8_t *dst, const uint8_t *src,
         smp_dst[i] = av_clip_int16(((int64_t)smp_src[i] * volume + 128) >> 8);
 }
 
-static GOTV_INLINE void scale_samples_s16_small(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void scale_samples_s16_small(uint8_t *dst, const uint8_t *src,
                                            int nb_samples, int volume)
 {
     int i;
@@ -212,7 +212,7 @@ static GOTV_INLINE void scale_samples_s16_small(uint8_t *dst, const uint8_t *src
         smp_dst[i] = av_clip_int16((smp_src[i] * volume + 128) >> 8);
 }
 
-static GOTV_INLINE void scale_samples_s32(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void scale_samples_s32(uint8_t *dst, const uint8_t *src,
                                      int nb_samples, int volume)
 {
     int i;

@@ -552,7 +552,7 @@ typedef struct LIB_INFO
 } LIB_INFO;
 
 /** Initialize library info. */
-static GOTV_INLINE void FDKinitLibInfo( struct LIB_INFO* info )
+static NLC_INLINE void FDKinitLibInfo( struct LIB_INFO* info )
 {
   int i;
 
@@ -562,7 +562,7 @@ static GOTV_INLINE void FDKinitLibInfo( struct LIB_INFO* info )
 }
 
 /** Aquire supported features of library. */
-static GOTV_INLINE uint32_t FDKlibInfo_getCapabilities( const LIB_INFO* info, enum FDK_MODULE_ID module_id )
+static NLC_INLINE uint32_t FDKlibInfo_getCapabilities( const LIB_INFO* info, enum FDK_MODULE_ID module_id )
 {
   int i;
 
@@ -575,7 +575,7 @@ static GOTV_INLINE uint32_t FDKlibInfo_getCapabilities( const LIB_INFO* info, en
 }
 
 /** Search for next free tab. */
-static GOTV_INLINE int32_t FDKlibInfo_lookup( const struct LIB_INFO* info, enum FDK_MODULE_ID module_id )
+static NLC_INLINE int32_t FDKlibInfo_lookup( const struct LIB_INFO* info, enum FDK_MODULE_ID module_id )
 {
   int i = -1;
 

@@ -21,7 +21,7 @@
  */
 
 const char *_gnutls_packet2str(content_type_t packet);
-GOTV_INLINE static const char *_gnutls_handshake2str(unsigned x)
+NLC_INLINE static const char *_gnutls_handshake2str(unsigned x)
 {
 	const char *s = gnutls_handshake_description_get_name(x);
 	if (s == NULL)

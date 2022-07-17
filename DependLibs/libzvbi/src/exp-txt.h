@@ -60,7 +60,7 @@ extern int		vbi_print_page_region(vbi_page *pg, char *buf, int size,
  * data. Note this function does not append a terminating null
  * character.
  **/
-//GOTV_INLINE int
+//NLC_INLINE int
 //vbi_print_page(vbi_page *pg, char *buf, int size,
 //	       const char *format, vbi_bool table, vbi_bool ltr)
 //{

@@ -75,8 +75,8 @@ typedef struct TagCabacCtx {
 
 void WelsCabacContextInit (void* pCtx, SCabacCtx* pCbCtx, int32_t iModel);
 void WelsCabacEncodeInit (SCabacCtx* pCbCtx, uint8_t* pBuf,  uint8_t* pEnd);
-GOTV_INLINE void WelsCabacEncodeDecision (SCabacCtx* pCbCtx, int32_t iCtx, uint32_t uiBin);
-GOTV_INLINE void WelsCabacEncodeBypassOne (SCabacCtx* pCbCtx, int32_t uiBin);
+NLC_INLINE void WelsCabacEncodeDecision (SCabacCtx* pCbCtx, int32_t iCtx, uint32_t uiBin);
+NLC_INLINE void WelsCabacEncodeBypassOne (SCabacCtx* pCbCtx, int32_t uiBin);
 void WelsCabacEncodeTerminate (SCabacCtx* pCbCtx, uint32_t uiBin);
 void WelsCabacEncodeUeBypass (SCabacCtx* pCbCtx, int32_t iExpBits, uint32_t uiVal);
 void WelsCabacEncodeFlush (SCabacCtx* pCbCtx);
@@ -86,10 +86,10 @@ int32_t  WriteBlockResidualCabac (void* pEncCtx,  int16_t* pCoffLevel, int32_t i
                                   int32_t iResidualProperty, int8_t iNC, SBitStringAux* pBs);
 
 
-// private functions used by public GOTV_INLINE functions.
+// private functions used by public NLC_INLINE functions.
 void WelsCabacEncodeDecisionLps_ (SCabacCtx* pCbCtx, int32_t iCtx);
 void WelsCabacEncodeUpdateLowNontrivial_ (SCabacCtx* pCbCtx);
-GOTV_INLINE void WelsCabacEncodeUpdateLow_ (SCabacCtx* pCbCtx) {
+NLC_INLINE void WelsCabacEncodeUpdateLow_ (SCabacCtx* pCbCtx) {
   if (pCbCtx->m_iLowBitCnt + pCbCtx->m_iRenormCnt < CABAC_LOW_WIDTH) {
     pCbCtx->m_iLowBitCnt  += pCbCtx->m_iRenormCnt;
     pCbCtx->m_uiLow      <<= pCbCtx->m_iRenormCnt;
@@ -99,7 +99,7 @@ GOTV_INLINE void WelsCabacEncodeUpdateLow_ (SCabacCtx* pCbCtx) {
   pCbCtx->m_iRenormCnt = 0;
 }
 
-// GOTV_INLINE function definitions.
+// NLC_INLINE function definitions.
 void WelsCabacEncodeDecision (SCabacCtx* pCbCtx, int32_t iCtx, uint32_t uiBin) {
   if (uiBin == pCbCtx->m_sStateCtx[iCtx].Mps()) {
     const int32_t kiState = pCbCtx->m_sStateCtx[iCtx].State();

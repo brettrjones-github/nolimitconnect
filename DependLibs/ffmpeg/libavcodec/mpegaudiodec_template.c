@@ -210,7 +210,7 @@ static void compute_band_indexes(MPADecodeContext *s, GranuleDef *g)
 
 /* layer 1 unscaling */
 /* n = number of bits of the mantissa minus 1 */
-static GOTV_INLINE int l1_unscale(int n, int mant, int scale_factor)
+static NLC_INLINE int l1_unscale(int n, int mant, int scale_factor)
 {
     int shift, mod;
     int64_t val;
@@ -224,7 +224,7 @@ static GOTV_INLINE int l1_unscale(int n, int mant, int scale_factor)
     return (int)((val + (1LL << (shift - 1))) >> shift);
 }
 
-static GOTV_INLINE int l2_unscale_group(int steps, int mant, int scale_factor)
+static NLC_INLINE int l2_unscale_group(int steps, int mant, int scale_factor)
 {
     int shift, mod, val;
 
@@ -240,7 +240,7 @@ static GOTV_INLINE int l2_unscale_group(int steps, int mant, int scale_factor)
 }
 
 /* compute value^(4/3) * 2^(exponent/4). It normalized to FRAC_BITS */
-static GOTV_INLINE int l3_unscale(int value, int exponent)
+static NLC_INLINE int l3_unscale(int value, int exponent)
 {
     unsigned int m;
     int e;

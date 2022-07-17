@@ -180,16 +180,16 @@ struct vlm_message_t
 
 
 
-GOTV_API vlm_t * libgotvptop_vlm_New( gotvptop_object_t * );
+NLC_API vlm_t * libgotvptop_vlm_New( gotvptop_object_t * );
 #define vlm_New( a ) libgotvptop_vlm_New( GOTV_OBJECT(a) )
-GOTV_API void vlm_Delete( vlm_t * );
-GOTV_API int vlm_ExecuteCommand( vlm_t *, const char *, vlm_message_t ** );
-GOTV_API int vlm_Control( vlm_t *p_vlm, int i_query, ... );
+NLC_API void vlm_Delete( vlm_t * );
+NLC_API int vlm_ExecuteCommand( vlm_t *, const char *, vlm_message_t ** );
+NLC_API int vlm_Control( vlm_t *p_vlm, int i_query, ... );
 
-GOTV_API vlm_message_t * vlm_MessageSimpleNew( const char * );
-GOTV_API vlm_message_t * vlm_MessageNew( const char *, const char *, ... ) GOTV_FORMAT( 2, 3 );
-GOTV_API vlm_message_t * vlm_MessageAdd( vlm_message_t *, vlm_message_t * );
-GOTV_API void vlm_MessageDelete( vlm_message_t * );
+NLC_API vlm_message_t * vlm_MessageSimpleNew( const char * );
+NLC_API vlm_message_t * vlm_MessageNew( const char *, const char *, ... ) GOTV_FORMAT( 2, 3 );
+NLC_API vlm_message_t * vlm_MessageAdd( vlm_message_t *, vlm_message_t * );
+NLC_API void vlm_MessageDelete( vlm_message_t * );
 
 /* media helpers */
 

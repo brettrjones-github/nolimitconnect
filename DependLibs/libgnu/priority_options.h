@@ -47,7 +47,7 @@ struct priority_options_st { const char *name; option_set_func func; };
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static unsigned int

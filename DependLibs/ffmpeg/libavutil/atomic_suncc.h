@@ -25,27 +25,27 @@
 #include "atomic.h"
 
 #define avpriv_atomic_int_get atomic_int_get_suncc
-static GOTV_INLINE int atomic_int_get_suncc(volatile int *ptr)
+static NLC_INLINE int atomic_int_get_suncc(volatile int *ptr)
 {
     __machine_rw_barrier();
     return *ptr;
 }
 
 #define avpriv_atomic_int_set atomic_int_set_suncc
-static GOTV_INLINE void atomic_int_set_suncc(volatile int *ptr, int val)
+static NLC_INLINE void atomic_int_set_suncc(volatile int *ptr, int val)
 {
     *ptr = val;
     __machine_rw_barrier();
 }
 
 #define avpriv_atomic_int_add_and_fetch atomic_int_add_and_fetch_suncc
-static GOTV_INLINE int atomic_int_add_and_fetch_suncc(volatile int *ptr, int inc)
+static NLC_INLINE int atomic_int_add_and_fetch_suncc(volatile int *ptr, int inc)
 {
     return atomic_add_int_nv(ptr, inc);
 }
 
 #define avpriv_atomic_ptr_cas atomic_ptr_cas_suncc
-static GOTV_INLINE void *atomic_ptr_cas_suncc(void * volatile *ptr,
+static NLC_INLINE void *atomic_ptr_cas_suncc(void * volatile *ptr,
                                          void *oldval, void *newval)
 {
     return atomic_cas_ptr(ptr, oldval, newval);

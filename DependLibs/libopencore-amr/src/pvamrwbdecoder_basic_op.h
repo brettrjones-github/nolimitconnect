@@ -76,7 +76,7 @@ terms listed above has been obtained from the copyright holder.
                range : 0x8000 <= var_out <= 0x7fff.
  ----------------------------------------------------------------------------*/
 
-static GOTV_INLINE  int16 negate_int16(int16 var1)
+static NLC_INLINE  int16 negate_int16(int16 var1)
 {
     return (((var1 == MIN_16) ? MAX_16 : -var1));
 }
@@ -106,7 +106,7 @@ static GOTV_INLINE  int16 negate_int16(int16 var1)
                range : 0x8000 <= var_out <= 0x7fff.
  ----------------------------------------------------------------------------*/
 
-static GOTV_INLINE  int16 shl_int16(int16 var1, int16 var2)
+static NLC_INLINE  int16 shl_int16(int16 var1, int16 var2)
 {
     int16 var_out;
 
@@ -150,7 +150,7 @@ static GOTV_INLINE  int16 shl_int16(int16 var1, int16 var2)
 
  ----------------------------------------------------------------------------*/
 
-static GOTV_INLINE  int32 shl_int32(int32 L_var1, int16 var2)
+static NLC_INLINE  int32 shl_int32(int32 L_var1, int16 var2)
 {
     int32 L_var_out;
 
@@ -194,7 +194,7 @@ static GOTV_INLINE  int32 shl_int32(int32 L_var1, int16 var2)
 
  ----------------------------------------------------------------------------*/
 
-static GOTV_INLINE  int32 shr_int32(int32 L_var1, int16 var2)
+static NLC_INLINE  int32 shr_int32(int32 L_var1, int16 var2)
 {
     int32 L_var_out;
 

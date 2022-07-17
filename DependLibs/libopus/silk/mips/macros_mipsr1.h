@@ -32,7 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define mips_clz(x) __builtin_clz(x)
 
 #undef silk_SMULWB
-static GOTV_INLINE int silk_SMULWB(int a, int b)
+static NLC_INLINE int silk_SMULWB(int a, int b)
 {
     long long ac;
     int c;
@@ -47,7 +47,7 @@ static GOTV_INLINE int silk_SMULWB(int a, int b)
 #define silk_SMLAWB(a32, b32, c32)       ((a32) + silk_SMULWB(b32, c32))
 
 #undef silk_SMULWW
-static GOTV_INLINE int silk_SMULWW(int a, int b)
+static NLC_INLINE int silk_SMULWW(int a, int b)
 {
     long long ac;
     int c;
@@ -59,7 +59,7 @@ static GOTV_INLINE int silk_SMULWW(int a, int b)
 }
 
 #undef silk_SMLAWW
-static GOTV_INLINE int silk_SMLAWW(int a, int b, int c)
+static NLC_INLINE int silk_SMLAWW(int a, int b, int c)
 {
     long long ac;
     int res;
@@ -72,7 +72,7 @@ static GOTV_INLINE int silk_SMLAWW(int a, int b, int c)
 }
 
 #define OVERRIDE_silk_CLZ16
-static GOTV_INLINE opus_int32 silk_CLZ16(opus_int16 in16)
+static NLC_INLINE opus_int32 silk_CLZ16(opus_int16 in16)
 {
     int re32;
     opus_int32 in32 = (opus_int32 )in16;
@@ -82,7 +82,7 @@ static GOTV_INLINE opus_int32 silk_CLZ16(opus_int16 in16)
 }
 
 #define OVERRIDE_silk_CLZ32
-static GOTV_INLINE opus_int32 silk_CLZ32(opus_int32 in32)
+static NLC_INLINE opus_int32 silk_CLZ32(opus_int32 in32)
 {
     int re32;
     re32 = mips_clz(in32);

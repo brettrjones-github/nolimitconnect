@@ -78,12 +78,12 @@ static void vb_decode_palette(VBDecContext *c, int data_size)
         c->pal[i] = 0xFFU << 24 | bytestream2_get_be24(&c->stream);
 }
 
-static GOTV_INLINE int check_pixel(uint8_t *buf, uint8_t *start, uint8_t *end)
+static NLC_INLINE int check_pixel(uint8_t *buf, uint8_t *start, uint8_t *end)
 {
     return buf >= start && buf < end;
 }
 
-static GOTV_INLINE int check_line(uint8_t *buf, uint8_t *start, uint8_t *end)
+static NLC_INLINE int check_line(uint8_t *buf, uint8_t *start, uint8_t *end)
 {
     return buf >= start && (buf + 4) <= end;
 }

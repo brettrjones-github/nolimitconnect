@@ -108,7 +108,7 @@ amm-info@iis.fraunhofer.de
 #define FUNCTION_fixmulBitExact_DS
 #define fixmulBitExact_DS(a,b) fixmul_DS(a,b)
 
-GOTV_INLINE int32_t fixmul_DD (int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmul_DD (int32_t a, const int32_t b)
 {
   __asm
   {
@@ -121,7 +121,7 @@ GOTV_INLINE int32_t fixmul_DD (int32_t a, const int32_t b)
 }
 
 
-GOTV_INLINE int32_t fixmuldiv2_DD (int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (int32_t a, const int32_t b)
 {
   __asm
   {
@@ -150,7 +150,7 @@ GOTV_INLINE int32_t fixmuldiv2_DD (int32_t a, const int32_t b)
 #define FUNCTION_fixmulBitExact_DS
 #define fixmulBitExact_DS(a,b) fixmul_DS(a,b)
 
-GOTV_INLINE int32_t fixmul_DD (int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmul_DD (int32_t a, const int32_t b)
 {
   int32_t result;
 
@@ -163,7 +163,7 @@ GOTV_INLINE int32_t fixmul_DD (int32_t a, const int32_t b)
 }
 
 
-GOTV_INLINE int32_t fixmuldiv2_DD (int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (int32_t a, const int32_t b)
 {
   int32_t result;
 

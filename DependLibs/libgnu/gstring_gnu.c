@@ -109,7 +109,7 @@ g_str_hash (gconstpointer v)
 
 #define MY_MAXSIZE ((gsize)-1)
 
-static GOTV_INLINE gsize
+static NLC_INLINE gsize
 nearest_power (gsize base, gsize num)    
 {
   if (num > MY_MAXSIZE / 2)

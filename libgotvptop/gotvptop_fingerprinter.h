@@ -81,8 +81,8 @@ struct fingerprinter_thread_t
 };
 typedef struct fingerprinter_thread_t fingerprinter_thread_t;
 
-GOTV_API fingerprinter_thread_t *fingerprinter_Create( gotvptop_object_t *p_this );
-GOTV_API void fingerprinter_Destroy( fingerprinter_thread_t *p_fingerprint );
+NLC_API fingerprinter_thread_t *fingerprinter_Create( gotvptop_object_t *p_this );
+NLC_API void fingerprinter_Destroy( fingerprinter_thread_t *p_fingerprint );
 
 # ifdef __cplusplus
 }

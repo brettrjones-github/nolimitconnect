@@ -82,9 +82,9 @@ enum {
     GOTV_OPENGL_ES2,
 };
 
-GOTV_API gotvptop_gl_t *gotvptop_gl_Create(struct vout_window_t *, unsigned, const char *) GOTV_USED;
-GOTV_API void gotvptop_gl_Release(gotvptop_gl_t *);
-GOTV_API void gotvptop_gl_Hold(gotvptop_gl_t *);
+NLC_API gotvptop_gl_t *gotvptop_gl_Create(struct vout_window_t *, unsigned, const char *) GOTV_USED;
+NLC_API void gotvptop_gl_Release(gotvptop_gl_t *);
+NLC_API void gotvptop_gl_Hold(gotvptop_gl_t *);
 
 static inline int gotvptop_gl_MakeCurrent(gotvptop_gl_t *gl)
 {
@@ -112,10 +112,10 @@ static inline void *gotvptop_gl_GetProcAddress(gotvptop_gl_t *gl, const char *na
     return (gl->getProcAddress != NULL) ? gl->getProcAddress(gl, name) : NULL;
 }
 
-GOTV_API gotvptop_gl_t *gotvptop_gl_surface_Create(gotvptop_object_t *,
+NLC_API gotvptop_gl_t *gotvptop_gl_surface_Create(gotvptop_object_t *,
                                         const struct vout_window_cfg_t *,
                                         struct vout_window_t **) GOTV_USED;
-GOTV_API bool gotvptop_gl_surface_CheckSize(gotvptop_gl_t *, unsigned *w, unsigned *h);
-GOTV_API void gotvptop_gl_surface_Destroy(gotvptop_gl_t *);
+NLC_API bool gotvptop_gl_surface_CheckSize(gotvptop_gl_t *, unsigned *w, unsigned *h);
+NLC_API void gotvptop_gl_surface_Destroy(gotvptop_gl_t *);
 
 #endif /* GOTV_GL_H */

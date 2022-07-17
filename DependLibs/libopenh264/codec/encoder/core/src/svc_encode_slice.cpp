@@ -1164,7 +1164,7 @@ void InitSliceRefInfoWithBase (SSlice* pSlice, SSlice* pBaseSlice, const uint8_t
 
 }
 
-static GOTV_INLINE int32_t InitSliceRC (SSlice* pSlice, const int32_t kiGlobalQp) {
+static NLC_INLINE int32_t InitSliceRC (SSlice* pSlice, const int32_t kiGlobalQp) {
 
   if (NULL == pSlice || kiGlobalQp < 0)
     return ENC_RETURN_INVALIDINPUT;
@@ -1429,7 +1429,7 @@ int32_t ReallocSliceBuffer (sWelsEncCtx* pCtx) {
   return ENC_RETURN_SUCCESS;
 }
 
-static GOTV_INLINE int32_t CheckAllSliceBuffer(SDqLayer* pCurLayer, const int32_t kiCodedSliceNum) {
+static NLC_INLINE int32_t CheckAllSliceBuffer(SDqLayer* pCurLayer, const int32_t kiCodedSliceNum) {
   int32_t iSliceIdx = 0;
   for(; iSliceIdx <kiCodedSliceNum ; iSliceIdx ++ ) {
     if ( NULL == pCurLayer->ppSliceInLayer[iSliceIdx]) {
@@ -1775,7 +1775,7 @@ bool DynSlcJudgeSliceBoundaryStepBack (void* pCtx, void* pSlice, SSliceCtx* pSli
 ///////////////
 //  pMb loop
 ///////////////
-GOTV_INLINE void WelsInitInterMDStruc (const SMB* pCurMb, uint16_t* pMvdCostTable, const int32_t kiMvdInterTableStride,
+NLC_INLINE void WelsInitInterMDStruc (const SMB* pCurMb, uint16_t* pMvdCostTable, const int32_t kiMvdInterTableStride,
                                   SWelsMD* pMd) {
   pMd->iLambda = g_kiQpCostTable[pCurMb->uiLumaQp];
   pMd->pMvdCost = &pMvdCostTable[pCurMb->uiLumaQp * kiMvdInterTableStride];

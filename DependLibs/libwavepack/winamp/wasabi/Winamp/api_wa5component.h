@@ -22,12 +22,12 @@ public:
 	HMODULE hModule;
 #endif
 };
-GOTV_INLINE void api_wa5component::RegisterServices(api_service *service)
+NLC_INLINE void api_wa5component::RegisterServices(api_service *service)
 {
 	_voidcall(API_WA5COMPONENT_REGISTERSERVICES, service);
 }
 
-GOTV_INLINE void api_wa5component::DeregisterServices(api_service *service)
+NLC_INLINE void api_wa5component::DeregisterServices(api_service *service)
 {
 	_voidcall(API_WA5COMPONENT_DEREEGISTERSERVICES, service);
 }

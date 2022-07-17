@@ -96,7 +96,7 @@ int ff_h2645_packet_split(H2645Packet *pkt, const uint8_t *buf, int length,
  */
 void ff_h2645_packet_uninit(H2645Packet *pkt);
 
-static GOTV_INLINE int get_nalsize(int nal_length_size, const uint8_t *buf,
+static NLC_INLINE int get_nalsize(int nal_length_size, const uint8_t *buf,
                               int buf_size, int *buf_index, void *logctx)
 {
     int i, nalsize = 0;

@@ -242,12 +242,12 @@ static FORCEINLINE void fft_8(FIXP_DBL *x)
 /**
  * \brief FFT of fixed length 16
  */
-GOTV_INLINE void fft_16(FIXP_DBL *x);
+NLC_INLINE void fft_16(FIXP_DBL *x);
 
 /**
  * \brief FFT of fixed length 32
  */
-GOTV_INLINE void fft_32(FIXP_DBL *x);
+NLC_INLINE void fft_32(FIXP_DBL *x);
 
 
 #endif

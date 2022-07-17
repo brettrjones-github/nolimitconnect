@@ -177,7 +177,7 @@ static const G729FormatDescription format_g729d_6k4 = {
 /**
  * @brief pseudo random number generator
  */
-static GOTV_INLINE uint16_t g729_prng(uint16_t value)
+static NLC_INLINE uint16_t g729_prng(uint16_t value)
 {
     return 31821 * value + 13849;
 }

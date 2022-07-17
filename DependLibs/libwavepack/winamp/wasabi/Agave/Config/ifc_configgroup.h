@@ -23,12 +23,12 @@ public:
 	
 };
 
-GOTV_INLINE ifc_configitem *ifc_configgroup::GetItem(const wchar_t *name)
+NLC_INLINE ifc_configitem *ifc_configgroup::GetItem(const wchar_t *name)
 {
 	return _call(IFC_CONFIGGROUP_GETITEM, (ifc_configitem *)0, name);
 }
 
-GOTV_INLINE GUID ifc_configgroup::GetGUID()
+NLC_INLINE GUID ifc_configgroup::GetGUID()
 {
 	return _call(IFC_CONFIGGROUP_GETGUID, (GUID)INVALID_GUID);
 }

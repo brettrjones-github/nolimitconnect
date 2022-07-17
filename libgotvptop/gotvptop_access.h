@@ -54,7 +54,7 @@
  * \param mrl media resource location to read
  * \return a new access object on success, NULL on failure
  */
-GOTV_API stream_t *gotvptop_access_NewMRL(gotvptop_object_t *obj, const char *mrl);
+NLC_API stream_t *gotvptop_access_NewMRL(gotvptop_object_t *obj, const char *mrl);
 
 /**
  * \defgroup access_helper Access Helpers
@@ -64,7 +64,7 @@ GOTV_API stream_t *gotvptop_access_NewMRL(gotvptop_object_t *obj, const char *mr
 /**
  * Default pf_control callback for directory accesses.
  */
-GOTV_API int access_vaDirectoryControlHelper( stream_t *p_access, int i_query, va_list args );
+NLC_API int access_vaDirectoryControlHelper( stream_t *p_access, int i_query, va_list args );
 
 #define ACCESS_SET_CALLBACKS( read, block, control, seek ) \
     do { \

@@ -48,7 +48,7 @@
 #define I_LFTG_X       53274ll
 #define I_PRESHIFT 8
 
-static GOTV_INLINE void extend53(int *p, int i0, int i1)
+static NLC_INLINE void extend53(int *p, int i0, int i1)
 {
     p[i0 - 1] = p[i0 + 1];
     p[i1]     = p[i1 - 2];
@@ -56,7 +56,7 @@ static GOTV_INLINE void extend53(int *p, int i0, int i1)
     p[i1 + 1] = p[i1 - 3];
 }
 
-static GOTV_INLINE void extend97_float(float *p, int i0, int i1)
+static NLC_INLINE void extend97_float(float *p, int i0, int i1)
 {
     int i;
 
@@ -66,7 +66,7 @@ static GOTV_INLINE void extend97_float(float *p, int i0, int i1)
     }
 }
 
-static GOTV_INLINE void extend97_int(int32_t *p, int i0, int i1)
+static NLC_INLINE void extend97_int(int32_t *p, int i0, int i1)
 {
     int i;
 

@@ -33,12 +33,12 @@ public:
 	};
 };
 
-GOTV_INLINE size_t api_audiostream::ReadAudio(void *buffer, size_t sizeBytes)
+NLC_INLINE size_t api_audiostream::ReadAudio(void *buffer, size_t sizeBytes)
 {
 	return _call(API_AUDIOSTREAM_READAUDIO, (size_t)0, buffer, sizeBytes);
 }
 
-GOTV_INLINE size_t api_audiostream::ReadAudio(void *buffer, size_t sizeBytes, int *killswitch, int *errorCode)
+NLC_INLINE size_t api_audiostream::ReadAudio(void *buffer, size_t sizeBytes, int *killswitch, int *errorCode)
 {
 	void *params[4] = { &buffer, &sizeBytes, &killswitch, &errorCode};
 	size_t retval;
@@ -52,12 +52,12 @@ GOTV_INLINE size_t api_audiostream::ReadAudio(void *buffer, size_t sizeBytes, in
 	}	
 }
 
-GOTV_INLINE int api_audiostream::SeekToTimeMs(int millisecs)
+NLC_INLINE int api_audiostream::SeekToTimeMs(int millisecs)
 {
 	return _call(API_AUDIOSTREAM_SEEKTOTIMEMS, (int)0, millisecs);
 }
 
-GOTV_INLINE int api_audiostream::CanSeek()
+NLC_INLINE int api_audiostream::CanSeek()
 {
 	return _call(API_AUDIOSTREAM_CANSEEK, (int)0);
 }

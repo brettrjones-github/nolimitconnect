@@ -42,7 +42,7 @@
 
 namespace WelsDec {
 
-GOTV_INLINE uint32_t GetValue4Bytes (uint8_t* pDstNal) {
+NLC_INLINE uint32_t GetValue4Bytes (uint8_t* pDstNal) {
   uint32_t uiValue = 0;
   uiValue = (pDstNal[0] << 24) | (pDstNal[1] << 16) | (pDstNal[2] << 8) | (pDstNal[3]);
   return uiValue;

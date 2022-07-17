@@ -320,7 +320,7 @@ static unsigned char next_nibble () {
 } 
 */
 
-static GOTV_INLINE void set_palette(int region_id,int id,int Y_value, int Cr_value, int Cb_value, int T_value) {
+static NLC_INLINE void set_palette(int region_id,int id,int Y_value, int Cr_value, int Cb_value, int T_value) {
   Cr_value = Cr_value; /* unused */
   Cb_value = Cb_value;
 
@@ -1186,7 +1186,7 @@ my_memalign			(size_t			boundary,
 #  define my_memalign(boundary, size) malloc (size)
 #endif
 
-static GOTV_INLINE unsigned int
+static NLC_INLINE unsigned int
 get16be				(const uint8_t *	s)
 {
 	/* XXX Use movw & xchg if available. */
@@ -1194,7 +1194,7 @@ get16be				(const uint8_t *	s)
 	return s[0] * 256 + s[1];
 }
 
-static GOTV_INLINE unsigned int
+static NLC_INLINE unsigned int
 get32be				(const uint8_t *	s)
 {
 	/* XXX Use movl & bswap if available. */
@@ -1241,7 +1241,7 @@ get_bits			(struct bit_stream *	bs,
 	return (value & 0xFFFF) >> (16 - n_bits);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 realign_bit_stream		(struct bit_stream *	bs,
 				 unsigned int		n_bits)
 {
@@ -1250,7 +1250,7 @@ realign_bit_stream		(struct bit_stream *	bs,
 	bs->pos = (bs->pos + (n_bits - 1)) & ~(n_bits - 1);
 }
 
-static GOTV_INLINE bool
+static NLC_INLINE bool
 init_bit_stream			(struct bit_stream *	bs,
 				 const uint8_t *	s,
 				 const uint8_t *	e)

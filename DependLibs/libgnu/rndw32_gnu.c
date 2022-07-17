@@ -729,7 +729,7 @@ slow_gatherer ( void (*add)(const void*, size_t, enum random_origins),
 
   /* Finally, do the same for the system power status information.  There
      are only a limited number of useful information types available so we
-     GOTV_RESTRICT ourselves to the useful types.  In addition since this
+     NLC_RESTRICT ourselves to the useful types.  In addition since this
      function doesn't return length information, we have to hardcode in
      length data.  */
   if (pNtPowerInformation)

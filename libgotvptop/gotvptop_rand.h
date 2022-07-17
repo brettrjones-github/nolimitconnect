@@ -27,11 +27,11 @@
  * This file defined random number generator function in gotvptop
  */
 
-GOTV_API void gotvptop_rand_bytes(void *buf, size_t len);
+NLC_API void gotvptop_rand_bytes(void *buf, size_t len);
 
 /* Interlocked (but not reproducible) functions for the POSIX PRNG */
-GOTV_API double gotvptop_drand48(void) GOTV_USED;
-GOTV_API long gotvptop_lrand48(void) GOTV_USED;
-GOTV_API long gotvptop_mrand48(void) GOTV_USED;
+NLC_API double gotvptop_drand48(void) GOTV_USED;
+NLC_API long gotvptop_lrand48(void) GOTV_USED;
+NLC_API long gotvptop_mrand48(void) GOTV_USED;
 
 #endif

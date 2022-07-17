@@ -187,7 +187,7 @@ static unsigned char *__pScratchBuffer = NULL;
 #include <unistd.h>
 
 static int fd;
-static GOTV_INLINE void * getSram(void)
+static NLC_INLINE void * getSram(void)
 {
   unsigned long *ptr = NULL;
 
@@ -220,7 +220,7 @@ static GOTV_INLINE void * getSram(void)
   return (void*)ptr;
 }
 
-static GOTV_INLINE void freeSram(void* ptr)
+static NLC_INLINE void freeSram(void* ptr)
 {
   /* Check if sram driver is being used. */
   if (fd == -1)
@@ -239,11 +239,11 @@ static GOTV_INLINE void freeSram(void* ptr)
 
 #else
 
-static GOTV_INLINE void * getSram(void)
+static NLC_INLINE void * getSram(void)
 {
   return FDKaalloc(KERNEL_SRAM_SIZE, 8);
 }
-static GOTV_INLINE void * freeSram(void* ptr)
+static NLC_INLINE void * freeSram(void* ptr)
 {
   FDKafree(ptr);
 }

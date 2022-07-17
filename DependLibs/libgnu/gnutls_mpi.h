@@ -29,7 +29,7 @@
 
 #include <libgnu/crypto-backend.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 extern int crypto_bigint_prio;
 extern gnutls_crypto_bigint_st _gnutls_mpi_ops;
@@ -66,7 +66,7 @@ bigint_t _gnutls_mpi_random_modp(bigint_t, bigint_t p,
 #define _gnutls_mpi_scan(r, b, s) _gnutls_mpi_ops.bigint_scan(r, b, s, GNUTLS_MPI_FORMAT_USG)
 #define _gnutls_mpi_scan_pgp(r, b, s) _gnutls_mpi_ops.bigint_scan(r, b, s, GNUTLS_MPI_FORMAT_PGP)
 
-GOTV_INLINE static void _gnutls_mpi_release(bigint_t * x)
+NLC_INLINE static void _gnutls_mpi_release(bigint_t * x)
 {
 	if (*x == NULL)
 		return;
@@ -89,6 +89,6 @@ int _gnutls_mpi_dprint_size(const bigint_t a, gnutls_datum_t * dest,
 
 #define _gnutls_mpi_generate_group( gg, bits) _gnutls_mpi_ops.bigint_generate_group( gg, bits)
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif //  GNUTLS_MPI_H_GNU

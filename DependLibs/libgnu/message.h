@@ -73,8 +73,8 @@ enum format_type
   format_javascript
 };
 #define NFORMATS 28     /* Number of format_type enum values.  */
-extern GOTV_DLL_VARIABLE const char *const format_language[NFORMATS];
-extern GOTV_DLL_VARIABLE const char *const format_language_pretty[NFORMATS];
+extern NLC_DLL_VARIABLE const char *const format_language[NFORMATS];
+extern NLC_DLL_VARIABLE const char *const format_language_pretty[NFORMATS];
 
 /* Is current msgid a format string?  */
 enum is_format
@@ -124,7 +124,7 @@ enum syntax_check_type
   sc_bullet_unicode
 };
 #define NSYNTAXCHECKS 4
-extern GOTV_DLL_VARIABLE const char *const syntax_check_name[NSYNTAXCHECKS];
+extern NLC_DLL_VARIABLE const char *const syntax_check_name[NSYNTAXCHECKS];
 
 /* Is current msgid subject to a syntax check?  */
 #if 0

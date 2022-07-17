@@ -4243,7 +4243,7 @@ for (;; ptr++)
          }
       while (*tc != OP_KET);
 
-      /* A DEFINE group is never obeyed GOTV_INLINE (the "condition" is always
+      /* A DEFINE group is never obeyed NLC_INLINE (the "condition" is always
       false). It must have only one branch. */
 
       if (code[LINK_SIZE+1] == OP_DEF)

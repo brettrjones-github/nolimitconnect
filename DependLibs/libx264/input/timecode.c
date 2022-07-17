@@ -40,7 +40,7 @@ typedef struct
     double last_timecode;
 } timecode_hnd_t;
 
-static GOTV_INLINE double sigexp10( double value, double *exponent )
+static NLC_INLINE double sigexp10( double value, double *exponent )
 {
     /* This function separates significand and exp10 from double floating point. */
     *exponent = pow( 10, floor( log10( value ) ) );

@@ -74,7 +74,7 @@ typedef struct {
 //	}								\
 //} while (0)
 
-static GOTV_INLINE void
+static NLC_INLINE void
 timeval_subtract		(struct timeval *	delta,
 				 const struct timeval *	tv1,
 				 const struct timeval *	tv2)

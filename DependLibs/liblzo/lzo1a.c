@@ -348,7 +348,7 @@ match:
                 }
                 else if (t < R0MIN)
                 {
-                    /* GOTV_INLINE the copying of a short run */
+                    /* NLC_INLINE the copying of a short run */
 #if (LBITS < 8)
                     if (t < (1 << (8-LBITS)) && ii - im >= MIN_MATCH_LONG)
                     {
@@ -374,7 +374,7 @@ match:
                 }
                 else if (t < R0FAST)
                 {
-                    /* GOTV_INLINE the copying of a short R0 run */
+                    /* NLC_INLINE the copying of a short R0 run */
                     LZO_STATS(lzo_stats->r0short_runs++);
                     *op++ = 0; *op++ = LZO_BYTE(t - R0MIN);
                     MEMCPY_DS(op, ii, t);

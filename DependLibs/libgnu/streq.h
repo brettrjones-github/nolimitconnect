@@ -33,13 +33,13 @@
    immediate strings. */
 #if defined (__GNUC__) && defined (__OPTIMIZE__)
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq9 (const char *s1, const char *s2)
 {
   return strcmp (s1 + 9, s2 + 9) == 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq8 (const char *s1, const char *s2, char s28)
 {
   if (s1[8] == s28)
@@ -53,7 +53,7 @@ streq8 (const char *s1, const char *s2, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq7 (const char *s1, const char *s2, char s27, char s28)
 {
   if (s1[7] == s27)
@@ -67,7 +67,7 @@ streq7 (const char *s1, const char *s2, char s27, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq6 (const char *s1, const char *s2, char s26, char s27, char s28)
 {
   if (s1[6] == s26)
@@ -81,7 +81,7 @@ streq6 (const char *s1, const char *s2, char s26, char s27, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq5 (const char *s1, const char *s2, char s25, char s26, char s27, char s28)
 {
   if (s1[5] == s25)
@@ -95,7 +95,7 @@ streq5 (const char *s1, const char *s2, char s25, char s26, char s27, char s28)
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq4 (const char *s1, const char *s2, char s24, char s25, char s26, char s27, char s28)
 {
   if (s1[4] == s24)
@@ -109,7 +109,7 @@ streq4 (const char *s1, const char *s2, char s24, char s25, char s26, char s27, 
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq3 (const char *s1, const char *s2, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (s1[3] == s23)
@@ -123,7 +123,7 @@ streq3 (const char *s1, const char *s2, char s23, char s24, char s25, char s26, 
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq2 (const char *s1, const char *s2, char s22, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (s1[2] == s22)
@@ -137,7 +137,7 @@ streq2 (const char *s1, const char *s2, char s22, char s23, char s24, char s25, 
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq1 (const char *s1, const char *s2, char s21, char s22, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (s1[1] == s21)
@@ -151,7 +151,7 @@ streq1 (const char *s1, const char *s2, char s21, char s22, char s23, char s24, 
     return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 streq0 (const char *s1, const char *s2, char s20, char s21, char s22, char s23, char s24, char s25, char s26, char s27, char s28)
 {
   if (s1[0] == s20)

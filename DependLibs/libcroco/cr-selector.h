@@ -35,7 +35,7 @@
  *The declaration file of the #CRSelector file.
  */
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _CRSelector CRSelector ;
 
@@ -90,6 +90,6 @@ gboolean cr_selector_unref (CRSelector *a_this) ;
 
 void cr_selector_destroy (CRSelector *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_SELECTOR_H__*/

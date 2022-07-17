@@ -150,14 +150,14 @@ break;
 	}
 }
 
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGCAP (struct video_capability *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGCHAN (struct video_channel *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSCHAN (const struct video_channel *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGTUNER (struct video_tuner *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSTUNER (const struct video_tuner *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGFREQ (unsigned long *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSFREQ (const unsigned long *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGUNIT (struct video_unit *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGVBIFMT (struct vbi_format *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSVBIFMT (const struct vbi_format *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGCAP (struct video_capability *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGCHAN (struct video_channel *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSCHAN (const struct video_channel *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGTUNER (struct video_tuner *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSTUNER (const struct video_tuner *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGFREQ (unsigned long *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSFREQ (const unsigned long *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGUNIT (struct video_unit *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCGVBIFMT (struct vbi_format *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOCSVBIFMT (const struct vbi_format *arg __attribute__ ((unused))) {}
 

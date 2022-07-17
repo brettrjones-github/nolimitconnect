@@ -51,7 +51,7 @@ bool hex_encode(const void *buf, size_t bufsize, char *dest, size_t destsize);
  *
  *	hex_encode(buf, sizeof(buf), str, sizeof(str));
  */
-static GOTV_INLINE size_t hex_str_size(size_t bytes)
+static NLC_INLINE size_t hex_str_size(size_t bytes)
 {
 	return 2 * bytes + 1;
 }
@@ -66,7 +66,7 @@ static GOTV_INLINE size_t hex_str_size(size_t bytes)
  *
  *	hex_decode(str, strlen(str), buf, sizeof(buf));
  */
-static GOTV_INLINE size_t hex_data_size(size_t strlen)
+static NLC_INLINE size_t hex_data_size(size_t strlen)
 {
 	return strlen / 2;
 }

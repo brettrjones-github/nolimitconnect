@@ -174,7 +174,7 @@ typedef void * trio_pointer_t;
 #endif
 
 #if defined(TRIO_COMPILER_SUPPORTS_C99) || defined(__cplusplus)
-# define TRIO_INLINE GOTV_INLINE
+# define TRIO_INLINE NLC_INLINE
 #elif defined(TRIO_COMPILER_GCC)
 # define TRIO_INLINE __inline__
 #elif defined(TRIO_COMPILER_MSVC)

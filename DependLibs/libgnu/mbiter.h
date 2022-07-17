@@ -103,8 +103,8 @@
  #error "Please include config.h first."
 #endif
 _GL_INLINE_HEADER_BEGIN
-#ifndef GOTV_INLINE
-# define GOTV_INLINE GOTV_INLINE
+#ifndef NLC_INLINE
+# define NLC_INLINE NLC_INLINE
 #endif
 
 struct mbiter_multi
@@ -122,7 +122,7 @@ struct mbiter_multi
         */
 };
 
-GOTV_INLINE void
+NLC_INLINE void
 mbiter_multi_next (struct mbiter_multi *iter)
 {
   if (iter->next_done)
@@ -182,14 +182,14 @@ mbiter_multi_next (struct mbiter_multi *iter)
   iter->next_done = true;
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 mbiter_multi_reloc (struct mbiter_multi *iter, ptrdiff_t ptrdiff)
 {
   iter->cur.ptr += ptrdiff;
   iter->limit += ptrdiff;
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 mbiter_multi_copy (struct mbiter_multi *new_iter, const struct mbiter_multi *old_iter)
 {
   new_iter->limit = old_iter->limit;

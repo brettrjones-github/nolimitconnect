@@ -341,7 +341,7 @@ _gcry_mpih_sqr_n( mpi_ptr_t prodp,
 }
 
 
-/* This should be made into an GOTV_INLINE function in gmp.h.  */
+/* This should be made into an NLC_INLINE function in gmp.h.  */
 void
 _gcry_mpih_mul_n( mpi_ptr_t prodp,
                      mpi_ptr_t up, mpi_ptr_t vp, mpi_size_t size)

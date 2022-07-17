@@ -180,7 +180,7 @@ enum stream_query_e
  * \param len number of bytes to read
  * \return the number of bytes read or a negative value on error.
  */
-GOTV_API ssize_t gotvptop_stream_Read(stream_t *, void *buf, size_t len) GOTV_USED;
+NLC_API ssize_t gotvptop_stream_Read(stream_t *, void *buf, size_t len) GOTV_USED;
 
 /**
  * Reads partial data from a byte stream.
@@ -196,7 +196,7 @@ GOTV_API ssize_t gotvptop_stream_Read(stream_t *, void *buf, size_t len) GOTV_US
  * \param len buffer size (maximum number of bytes to read)
  * \return the number of bytes read or a negative value on error.
  */
-GOTV_API ssize_t gotvptop_stream_ReadPartial(stream_t *, void *buf, size_t len)
+NLC_API ssize_t gotvptop_stream_ReadPartial(stream_t *, void *buf, size_t len)
 GOTV_USED;
 
 /**
@@ -215,7 +215,7 @@ GOTV_USED;
  * \return the number of bytes actually available (shorter than requested if
  * the end-of-stream is reached), or a negative value on error.
  */
-GOTV_API ssize_t gotvptop_stream_Peek(stream_t *, const uint8_t **, size_t) GOTV_USED;
+NLC_API ssize_t gotvptop_stream_Peek(stream_t *, const uint8_t **, size_t) GOTV_USED;
 
 /**
  * Reads a data block from a byte stream.
@@ -233,7 +233,7 @@ GOTV_API ssize_t gotvptop_stream_Peek(stream_t *, const uint8_t **, size_t) GOTV
  *
  * \return either a data block or NULL
  */
-GOTV_API block_t *gotvptop_stream_ReadBlock(stream_t *) GOTV_USED;
+NLC_API block_t *gotvptop_stream_ReadBlock(stream_t *) GOTV_USED;
 
 /**
  * Tells the current stream position.
@@ -245,7 +245,7 @@ GOTV_API block_t *gotvptop_stream_ReadBlock(stream_t *) GOTV_USED;
  *
  * @return the byte offset from the beginning of the stream (cannot fail)
  */
-GOTV_API uint64_t gotvptop_stream_Tell(const stream_t *) GOTV_USED;
+NLC_API uint64_t gotvptop_stream_Tell(const stream_t *) GOTV_USED;
 
 /**
  * Checks for end of stream.
@@ -267,7 +267,7 @@ GOTV_API uint64_t gotvptop_stream_Tell(const stream_t *) GOTV_USED;
  * the end-of-stream is reached. But that rule is not enforced; it is entirely
  * dependent on the underlying implementation of the stream.
  */
-GOTV_API bool gotvptop_stream_Eof(const stream_t *) GOTV_USED;
+NLC_API bool gotvptop_stream_Eof(const stream_t *) GOTV_USED;
 
 /**
  * Sets the current stream position.
@@ -280,9 +280,9 @@ GOTV_API bool gotvptop_stream_Eof(const stream_t *) GOTV_USED;
  * @param offset byte offset from the beginning of the stream
  * @return zero on success, a negative value on error
  */
-GOTV_API int gotvptop_stream_Seek(stream_t *, uint64_t offset) GOTV_USED;
+NLC_API int gotvptop_stream_Seek(stream_t *, uint64_t offset) GOTV_USED;
 
-GOTV_API int gotvptop_stream_vaControl(stream_t *s, int query, va_list args);
+NLC_API int gotvptop_stream_vaControl(stream_t *s, int query, va_list args);
 
 static inline int gotvptop_stream_Control(stream_t *s, int query, ...)
 {
@@ -295,17 +295,17 @@ static inline int gotvptop_stream_Control(stream_t *s, int query, ...)
     return ret;
 }
 
-GOTV_API block_t *gotvptop_stream_Block(stream_t *s, size_t);
-GOTV_API char *gotvptop_stream_ReadLine(stream_t *);
-GOTV_API int gotvptop_stream_ReadDir(stream_t *, input_item_node_t *);
+NLC_API block_t *gotvptop_stream_Block(stream_t *s, size_t);
+NLC_API char *gotvptop_stream_ReadLine(stream_t *);
+NLC_API int gotvptop_stream_ReadDir(stream_t *, input_item_node_t *);
 
 /**
  * Closes a byte stream.
  * \param s byte stream to close
  */
-GOTV_API void gotvptop_stream_Delete(stream_t *s);
+NLC_API void gotvptop_stream_Delete(stream_t *s);
 
-GOTV_API stream_t *gotvptop_stream_CommonNew(gotvptop_object_t *, void (*)(stream_t *));
+NLC_API stream_t *gotvptop_stream_CommonNew(gotvptop_object_t *, void (*)(stream_t *));
 
 /**
  * Get the size of the stream.
@@ -390,7 +390,7 @@ static inline bool stream_IsMimeType(stream_t *s, const char *type)
  * \param preserve if false, free(base) will be called when the stream is
  *                 destroyed; if true, the memory buffer is preserved
  */
-GOTV_API stream_t *gotvptop_stream_MemoryNew(gotvptop_object_t *obj, uint8_t *base,
+NLC_API stream_t *gotvptop_stream_MemoryNew(gotvptop_object_t *obj, uint8_t *base,
                                        size_t size, bool preserve) GOTV_USED;
 #define gotvptop_stream_MemoryNew(a, b, c, d) \
         gotvptop_stream_MemoryNew(GOTV_OBJECT(a), b, c, d)
@@ -399,7 +399,7 @@ GOTV_API stream_t *gotvptop_stream_MemoryNew(gotvptop_object_t *obj, uint8_t *ba
  * Create a stream_t reading from a URL.
  * You must delete it using gotvptop_stream_Delete.
  */
-GOTV_API stream_t * gotvptop_stream_NewURL(gotvptop_object_t *obj, const char *url)
+NLC_API stream_t * gotvptop_stream_NewURL(gotvptop_object_t *obj, const char *url)
 GOTV_USED;
 #define gotvptop_stream_NewURL(a, b) gotvptop_stream_NewURL(GOTV_OBJECT(a), b)
 
@@ -426,7 +426,7 @@ GOTV_USED;
  * \param parent parent GOTV object for the stream
  * \return a stream object or NULL on memory error.
  */
-GOTV_API stream_t *gotvptop_stream_fifo_New(gotvptop_object_t *parent);
+NLC_API stream_t *gotvptop_stream_fifo_New(gotvptop_object_t *parent);
 
 /**
  * Writes a block to a FIFO stream.
@@ -439,7 +439,7 @@ GOTV_API stream_t *gotvptop_stream_fifo_New(gotvptop_object_t *parent);
  * \bug No congestion control is performed. If the reader end is not keeping
  * up with the writer end, buffers will accumulate in memory.
  */
-GOTV_API int gotvptop_stream_fifo_Queue(stream_t *s, block_t *block);
+NLC_API int gotvptop_stream_fifo_Queue(stream_t *s, block_t *block);
 
 /**
  * Writes data to a FIFO stream.
@@ -450,7 +450,7 @@ GOTV_API int gotvptop_stream_fifo_Queue(stream_t *s, block_t *block);
  * \param len length of data to write in bytes
  * \return len on success, or -1 on error (errno is set accordingly)
  */
-GOTV_API ssize_t gotvptop_stream_fifo_Write(stream_t *s, const void *buf,
+NLC_API ssize_t gotvptop_stream_fifo_Write(stream_t *s, const void *buf,
                                       size_t len);
 
 /**
@@ -459,7 +459,7 @@ GOTV_API ssize_t gotvptop_stream_fifo_Write(stream_t *s, const void *buf,
  * Marks the end of the FIFO stream and releases any underlying resources.
  * \param s FIFO stream created by gotvptop_stream_fifo_New()
  */
-GOTV_API void gotvptop_stream_fifo_Close(stream_t *s);
+NLC_API void gotvptop_stream_fifo_Close(stream_t *s);
 
 /**
  * @}
@@ -469,13 +469,13 @@ GOTV_API void gotvptop_stream_fifo_Close(stream_t *s);
  * Try to add a stream filter to an open stream.
  * @return New stream to use, or NULL if the filter could not be added.
  **/
-GOTV_API stream_t* gotvptop_stream_FilterNew( stream_t *p_source, const char *psz_stream_filter );
+NLC_API stream_t* gotvptop_stream_FilterNew( stream_t *p_source, const char *psz_stream_filter );
 
 /**
  * Default ReadDir implementation for stream Filter. This implementation just
  * forward the pf_readdir call to the p_source stream.
  */
-GOTV_API int gotvptop_stream_FilterDefaultReadDir(stream_t *s,
+NLC_API int gotvptop_stream_FilterDefaultReadDir(stream_t *s,
                                             input_item_node_t *p_node);
 
 /**

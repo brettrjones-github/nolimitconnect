@@ -24,7 +24,7 @@
 //#define _CRT_NONSTDC_NO_DEPRECATE
 ////#define _CRT_SECURE_NO_WARNINGS
 //#define _USE_MATH_DEFINES
-//#define GOTV_INLINE __inline
+//#define NLC_INLINE __inline
 //#endif
 
 #endif                          /* LIBASS_COMPAT_H */

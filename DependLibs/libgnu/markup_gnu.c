@@ -228,7 +228,7 @@ markup_string_append (markup_string_ty *string, const char *to_append,
   string->buflen = length;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 string_blank (markup_string_ty *string)
 {
   if (string->bufmax > 0)
@@ -623,7 +623,7 @@ unescape_string_inplace (markup_parse_context_ty *context,
   return true;
 }
 
-static GOTV_INLINE bool
+static NLC_INLINE bool
 advance_char (markup_parse_context_ty *context)
 {
   context->iter++;
@@ -641,7 +641,7 @@ advance_char (markup_parse_context_ty *context)
   return true;
 }
 
-static GOTV_INLINE bool
+static NLC_INLINE bool
 xml_isspace (char c)
 {
   return c == ' ' || c == '\t' || c == '\n' || c == '\r';
@@ -687,14 +687,14 @@ add_to_partial (markup_parse_context_ty *context,
                           text_start, text_end - text_start);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 truncate_partial (markup_parse_context_ty *context)
 {
   if (context->partial_chunk != NULL)
     string_blank (context->partial_chunk);
 }
 
-static GOTV_INLINE const char*
+static NLC_INLINE const char*
 current_element (markup_parse_context_ty *context)
 {
   const markup_string_ty *string = gl_list_get_at (context->tag_stack, 0);
@@ -814,7 +814,7 @@ markup_parse_context_pop (markup_parse_context_ty *context)
  * are unwound on exit - otherwise we grow & blow the stack
  * with large documents
  */
-static GOTV_INLINE void
+static NLC_INLINE void
 emit_start_element (markup_parse_context_ty *context)
 {
   int i, j = 0;

@@ -174,7 +174,7 @@ struct RangeCheckImpl<Dst, Src, DST_UNSIGNED, SRC_SIGNED, OVERLAPS_RANGE> {
 };
 
 template <typename Dst, typename Src>
-GOTV_INLINE RangeCheckResult RangeCheck(Src value) {
+NLC_INLINE RangeCheckResult RangeCheck(Src value) {
   //static_assert(std::numeric_limits<Src>::is_specialized,
   //              "argument must be numeric");
   //static_assert(std::numeric_limits<Dst>::is_specialized,

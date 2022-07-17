@@ -52,7 +52,7 @@ class Atomic32 {
   Atomic32 operator-(const Atomic32& other);
 
   // Checks if |_value| is 32bit aligned.
-  GOTV_INLINE bool Is32bitAligned() const {
+  NLC_INLINE bool Is32bitAligned() const {
     return (reinterpret_cast<ptrdiff_t>(&value_) & 3) == 0;
   }
 

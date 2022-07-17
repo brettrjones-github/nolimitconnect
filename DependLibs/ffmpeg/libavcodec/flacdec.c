@@ -402,7 +402,7 @@ static int decode_subframe_lpc(FLACContext *s, int32_t *decoded, int pred_order,
     return 0;
 }
 
-static GOTV_INLINE int decode_subframe(FLACContext *s, int channel)
+static NLC_INLINE int decode_subframe(FLACContext *s, int channel)
 {
     int32_t *decoded = s->decoded[channel];
     int type, wasted = 0;

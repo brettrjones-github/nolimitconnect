@@ -40,7 +40,7 @@
 #include "mathops.h"
 #include "ffv1.h"
 
-static GOTV_INLINE av_flatten int get_symbol_inline(RangeCoder *c, uint8_t *state,
+static NLC_INLINE av_flatten int get_symbol_inline(RangeCoder *c, uint8_t *state,
                                                int is_signed)
 {
     if (get_rac(c, state + 0))
@@ -69,7 +69,7 @@ static av_noinline int get_symbol(RangeCoder *c, uint8_t *state, int is_signed)
     return get_symbol_inline(c, state, is_signed);
 }
 
-static GOTV_INLINE int get_vlc_symbol(GetBitContext *gb, VlcState *const state,
+static NLC_INLINE int get_vlc_symbol(GetBitContext *gb, VlcState *const state,
                                  int bits)
 {
     int k, i, v, ret;

@@ -34,8 +34,8 @@
     Constants:
 
      GOTV_ARCH_BIGENDIAN       Defined to 1 on big endian systems.
-     GOTV_INLINE                If defined, it should yield the keyword used
-                           to GOTV_INLINE a function.
+     NLC_INLINE                If defined, it should yield the keyword used
+                           to NLC_INLINE a function.
      HAVE_U32_TYPEDEF      Defined if the uint32_t type is available.
      SIZEOF_UNSIGNED_INT   Defined to the size in bytes of an unsigned int.
      SIZEOF_UNSIGNED_LONG  Defined to the size in bytes of an unsigned long.
@@ -99,7 +99,7 @@ struct hmac256_context
 
 
 /* Rotate a 32 bit word.  */
-static GOTV_INLINE uint32_t ror(uint32_t x, int n)
+static NLC_INLINE uint32_t ror(uint32_t x, int n)
 {
 	return ( ((x) >> (n)) | ((x) << (32-(n))) );
 }

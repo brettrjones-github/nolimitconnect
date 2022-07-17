@@ -154,16 +154,16 @@ namespace FLAC {
 			//@{
 			/** Check for equality, performing a deep compare by following pointers.
 			 */
-			GOTV_INLINE bool operator==(const Prototype &) const;
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &) const;
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *) const;
+			NLC_INLINE bool operator==(const Prototype &) const;
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &) const;
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *) const;
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const Prototype &) const;
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &) const;
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *) const;
+			NLC_INLINE bool operator!=(const Prototype &) const;
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &) const;
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *) const;
 			//@}
 
 			friend class SimpleIterator;
@@ -173,7 +173,7 @@ namespace FLAC {
 			 *  (i.e. the underlying ::FLAC__StreamMetadata object was
 			 *  properly allocated), else \c false.
 			 */
-			GOTV_INLINE bool is_valid() const;
+			NLC_INLINE bool is_valid() const;
 
 			/** Returns \c true if this block is the last block in a
 			 *  stream, else \c false.
@@ -216,14 +216,14 @@ namespace FLAC {
 			 * \assert
 			 *   \code is_valid() \endcode
 			 */
-			GOTV_INLINE operator const ::FLAC__StreamMetadata *() const;
+			NLC_INLINE operator const ::FLAC__StreamMetadata *() const;
 		private:
 			/** Private and undefined so you can't use it. */
 			Prototype();
 
 			// These are used only by Iterator
 			bool is_reference_;
-			GOTV_INLINE void set_reference(bool x) { is_reference_ = x; }
+			NLC_INLINE void set_reference(bool x) { is_reference_ = x; }
 		};
 
 #ifdef _MSC_VER
@@ -231,32 +231,32 @@ namespace FLAC {
 #pragma warning ( disable : 4800 )
 #endif
 
-		GOTV_INLINE bool Prototype::operator==(const Prototype &object) const
+		NLC_INLINE bool Prototype::operator==(const Prototype &object) const
 		{ return (bool)::FLAC__metadata_object_is_equal(object_, object.object_); }
 
-		GOTV_INLINE bool Prototype::operator==(const ::FLAC__StreamMetadata &object) const
+		NLC_INLINE bool Prototype::operator==(const ::FLAC__StreamMetadata &object) const
 		{ return (bool)::FLAC__metadata_object_is_equal(object_, &object); }
 
-		GOTV_INLINE bool Prototype::operator==(const ::FLAC__StreamMetadata *object) const
+		NLC_INLINE bool Prototype::operator==(const ::FLAC__StreamMetadata *object) const
 		{ return (bool)::FLAC__metadata_object_is_equal(object_, object); }
 
 #ifdef _MSC_VER
 #pragma warning ( default : 4800 )
 #endif
 
-		GOTV_INLINE bool Prototype::operator!=(const Prototype &object) const
+		NLC_INLINE bool Prototype::operator!=(const Prototype &object) const
 		{ return !operator==(object); }
 
-		GOTV_INLINE bool Prototype::operator!=(const ::FLAC__StreamMetadata &object) const
+		NLC_INLINE bool Prototype::operator!=(const ::FLAC__StreamMetadata &object) const
 		{ return !operator==(object); }
 
-		GOTV_INLINE bool Prototype::operator!=(const ::FLAC__StreamMetadata *object) const
+		NLC_INLINE bool Prototype::operator!=(const ::FLAC__StreamMetadata *object) const
 		{ return !operator==(object); }
 
-		GOTV_INLINE bool Prototype::is_valid() const
+		NLC_INLINE bool Prototype::is_valid() const
 		{ return 0 != object_; }
 
-		GOTV_INLINE Prototype::operator const ::FLAC__StreamMetadata *() const
+		NLC_INLINE Prototype::operator const ::FLAC__StreamMetadata *() const
 		{ return object_; }
 
 		/** Create a deep copy of an object and return it. */
@@ -275,42 +275,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE StreamInfo(const StreamInfo &object): Prototype(object) { }
-			GOTV_INLINE StreamInfo(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE StreamInfo(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE StreamInfo(const StreamInfo &object): Prototype(object) { }
+			NLC_INLINE StreamInfo(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE StreamInfo(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE StreamInfo(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE StreamInfo(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~StreamInfo();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE StreamInfo &operator=(const StreamInfo &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE StreamInfo &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE StreamInfo &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE StreamInfo &operator=(const StreamInfo &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE StreamInfo &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE StreamInfo &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE StreamInfo &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE StreamInfo &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const StreamInfo &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const StreamInfo &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const StreamInfo &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const StreamInfo &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			//@{
@@ -349,15 +349,15 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE Padding(const Padding &object): Prototype(object) { }
-			GOTV_INLINE Padding(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE Padding(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE Padding(const Padding &object): Prototype(object) { }
+			NLC_INLINE Padding(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE Padding(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Padding(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE Padding(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			/** Constructs an object with the given length.
 			 */
@@ -367,28 +367,28 @@ namespace FLAC {
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE Padding &operator=(const Padding &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Padding &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Padding &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Padding &operator=(const Padding &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Padding &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Padding &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Padding &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE Padding &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const Padding &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const Padding &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const Padding &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const Padding &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			/** Sets the length in bytes of the padding block.
@@ -408,42 +408,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE Application(const Application &object): Prototype(object) { }
-			GOTV_INLINE Application(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE Application(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE Application(const Application &object): Prototype(object) { }
+			NLC_INLINE Application(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE Application(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Application(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE Application(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~Application();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE Application &operator=(const Application &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Application &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Application &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Application &operator=(const Application &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Application &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Application &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Application &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE Application &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const Application &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const Application &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const Application &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const Application &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			const FLAC__byte *get_id() const;
@@ -467,42 +467,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE SeekTable(const SeekTable &object): Prototype(object) { }
-			GOTV_INLINE SeekTable(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE SeekTable(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE SeekTable(const SeekTable &object): Prototype(object) { }
+			NLC_INLINE SeekTable(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE SeekTable(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE SeekTable(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE SeekTable(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~SeekTable();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE SeekTable &operator=(const SeekTable &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE SeekTable &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE SeekTable &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE SeekTable &operator=(const SeekTable &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE SeekTable &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE SeekTable &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE SeekTable &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE SeekTable &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const SeekTable &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const SeekTable &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const SeekTable &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const SeekTable &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			unsigned get_num_points() const;
@@ -636,42 +636,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE VorbisComment(const VorbisComment &object): Prototype(object) { }
-			GOTV_INLINE VorbisComment(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE VorbisComment(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE VorbisComment(const VorbisComment &object): Prototype(object) { }
+			NLC_INLINE VorbisComment(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE VorbisComment(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE VorbisComment(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE VorbisComment(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~VorbisComment();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE VorbisComment &operator=(const VorbisComment &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE VorbisComment &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE VorbisComment &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE VorbisComment &operator=(const VorbisComment &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE VorbisComment &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE VorbisComment &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE VorbisComment &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE VorbisComment &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const VorbisComment &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const VorbisComment &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const VorbisComment &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const VorbisComment &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			unsigned get_num_comments() const;
@@ -735,22 +735,22 @@ namespace FLAC {
 				virtual bool is_valid() const; ///< Returns \c true iff object was properly constructed.
 
 
-				GOTV_INLINE FLAC__uint64 get_offset() const { return object_->offset; }
-				GOTV_INLINE FLAC__byte get_number() const { return object_->number; }
-				GOTV_INLINE const char *get_isrc() const { return object_->isrc; }
-				GOTV_INLINE unsigned get_type() const { return object_->type; }
-				GOTV_INLINE bool get_pre_emphasis() const { return object_->pre_emphasis; }
+				NLC_INLINE FLAC__uint64 get_offset() const { return object_->offset; }
+				NLC_INLINE FLAC__byte get_number() const { return object_->number; }
+				NLC_INLINE const char *get_isrc() const { return object_->isrc; }
+				NLC_INLINE unsigned get_type() const { return object_->type; }
+				NLC_INLINE bool get_pre_emphasis() const { return object_->pre_emphasis; }
 
-				GOTV_INLINE FLAC__byte get_num_indices() const { return object_->num_indices; }
+				NLC_INLINE FLAC__byte get_num_indices() const { return object_->num_indices; }
 				::FLAC__StreamMetadata_CueSheet_Index get_index(unsigned i) const;
 
-				GOTV_INLINE const ::FLAC__StreamMetadata_CueSheet_Track *get_track() const { return object_; }
+				NLC_INLINE const ::FLAC__StreamMetadata_CueSheet_Track *get_track() const { return object_; }
 
-				GOTV_INLINE void set_offset(FLAC__uint64 value) { object_->offset = value; }
-				GOTV_INLINE void set_number(FLAC__byte value) { object_->number = value; }
+				NLC_INLINE void set_offset(FLAC__uint64 value) { object_->offset = value; }
+				NLC_INLINE void set_number(FLAC__byte value) { object_->number = value; }
 				void set_isrc(const char value[12]);
 				void set_type(unsigned value);
-				GOTV_INLINE void set_pre_emphasis(bool value) { object_->pre_emphasis = value? 1 : 0; }
+				NLC_INLINE void set_pre_emphasis(bool value) { object_->pre_emphasis = value? 1 : 0; }
 
  				void set_index(unsigned i, const ::FLAC__StreamMetadata_CueSheet_Index &index);
 				//@@@ It's awkward but to insert/delete index points
@@ -763,42 +763,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE CueSheet(const CueSheet &object): Prototype(object) { }
-			GOTV_INLINE CueSheet(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE CueSheet(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE CueSheet(const CueSheet &object): Prototype(object) { }
+			NLC_INLINE CueSheet(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE CueSheet(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE CueSheet(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE CueSheet(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~CueSheet();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE CueSheet &operator=(const CueSheet &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE CueSheet &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE CueSheet &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE CueSheet &operator=(const CueSheet &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE CueSheet &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE CueSheet &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE CueSheet &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE CueSheet &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const CueSheet &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const CueSheet &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const CueSheet &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const CueSheet &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			const char *get_media_catalog_number() const;
@@ -860,42 +860,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE Picture(const Picture &object): Prototype(object) { }
-			GOTV_INLINE Picture(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE Picture(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE Picture(const Picture &object): Prototype(object) { }
+			NLC_INLINE Picture(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE Picture(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Picture(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE Picture(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~Picture();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE Picture &operator=(const Picture &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Picture &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Picture &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Picture &operator=(const Picture &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Picture &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Picture &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Picture &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE Picture &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const Picture &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const Picture &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const Picture &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const Picture &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			::FLAC__StreamMetadata_Picture_Type get_type() const;
@@ -942,42 +942,42 @@ namespace FLAC {
 			/** Constructs a copy of the given object.  This form
 			 *  always performs a deep copy.
 			 */
-			GOTV_INLINE Unknown(const Unknown &object): Prototype(object) { }
-			GOTV_INLINE Unknown(const ::FLAC__StreamMetadata &object): Prototype(object) { }
-			GOTV_INLINE Unknown(const ::FLAC__StreamMetadata *object): Prototype(object) { }
+			NLC_INLINE Unknown(const Unknown &object): Prototype(object) { }
+			NLC_INLINE Unknown(const ::FLAC__StreamMetadata &object): Prototype(object) { }
+			NLC_INLINE Unknown(const ::FLAC__StreamMetadata *object): Prototype(object) { }
 			//@}
 
 			/** Constructs an object with copy control.  See
 			 *  Prototype(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Unknown(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
+			NLC_INLINE Unknown(::FLAC__StreamMetadata *object, bool copy): Prototype(object, copy) { }
 
 			~Unknown();
 
 			//@{
 			/** Assign from another object.  Always performs a deep copy. */
-			GOTV_INLINE Unknown &operator=(const Unknown &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Unknown &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
-			GOTV_INLINE Unknown &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Unknown &operator=(const Unknown &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Unknown &operator=(const ::FLAC__StreamMetadata &object) { Prototype::operator=(object); return *this; }
+			NLC_INLINE Unknown &operator=(const ::FLAC__StreamMetadata *object) { Prototype::operator=(object); return *this; }
 			//@}
 
 			/** Assigns an object with copy control.  See
 			 *  Prototype::assign_object(::FLAC__StreamMetadata *object, bool copy).
 			 */
-			GOTV_INLINE Unknown &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
+			NLC_INLINE Unknown &assign(::FLAC__StreamMetadata *object, bool copy) { Prototype::assign_object(object, copy); return *this; }
 
 			//@{
 			/** Check for equality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator==(const Unknown &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
-			GOTV_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const Unknown &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata &object) const { return Prototype::operator==(object); }
+			NLC_INLINE bool operator==(const ::FLAC__StreamMetadata *object) const { return Prototype::operator==(object); }
 			//@}
 
 			//@{
 			/** Check for inequality, performing a deep compare by following pointers. */
-			GOTV_INLINE bool operator!=(const Unknown &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
-			GOTV_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const Unknown &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata &object) const { return Prototype::operator!=(object); }
+			NLC_INLINE bool operator!=(const ::FLAC__StreamMetadata *object) const { return Prototype::operator!=(object); }
 			//@}
 
 			const FLAC__byte *get_data() const;
@@ -1056,9 +1056,9 @@ namespace FLAC {
 			 */
 			class FLACPP_API Status {
 			public:
-				GOTV_INLINE Status(::FLAC__Metadata_SimpleIteratorStatus status): status_(status) { }
-				GOTV_INLINE operator ::FLAC__Metadata_SimpleIteratorStatus() const { return status_; }
-				GOTV_INLINE const char *as_cstring() const { return ::FLAC__Metadata_SimpleIteratorStatusString[status_]; }
+				NLC_INLINE Status(::FLAC__Metadata_SimpleIteratorStatus status): status_(status) { }
+				NLC_INLINE operator ::FLAC__Metadata_SimpleIteratorStatus() const { return status_; }
+				NLC_INLINE const char *as_cstring() const { return ::FLAC__Metadata_SimpleIteratorStatusString[status_]; }
 			protected:
 				::FLAC__Metadata_SimpleIteratorStatus status_;
 			};
@@ -1146,9 +1146,9 @@ namespace FLAC {
 			 */
 			class FLACPP_API Status {
 			public:
-				GOTV_INLINE Status(::FLAC__Metadata_ChainStatus status): status_(status) { }
-				GOTV_INLINE operator ::FLAC__Metadata_ChainStatus() const { return status_; }
-				GOTV_INLINE const char *as_cstring() const { return ::FLAC__Metadata_ChainStatusString[status_]; }
+				NLC_INLINE Status(::FLAC__Metadata_ChainStatus status): status_(status) { }
+				NLC_INLINE operator ::FLAC__Metadata_ChainStatus() const { return status_; }
+				NLC_INLINE const char *as_cstring() const { return ::FLAC__Metadata_ChainStatusString[status_]; }
 			protected:
 				::FLAC__Metadata_ChainStatus status_;
 			};

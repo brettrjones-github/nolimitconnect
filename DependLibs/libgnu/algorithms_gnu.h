@@ -45,7 +45,7 @@ int _gnutls_version_is_supported(gnutls_session_t session,
 gnutls_protocol_t _gnutls_version_get(uint8_t major, uint8_t minor);
 
 /* Functions for feature checks */
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_version_has_selectable_prf(const version_entry_st * ver)
 {
 	if (unlikely(ver == NULL))
@@ -53,7 +53,7 @@ _gnutls_version_has_selectable_prf(const version_entry_st * ver)
 	return ver->selectable_prf;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_version_has_selectable_sighash(const version_entry_st * ver)
 {
 	if (unlikely(ver == NULL))
@@ -61,7 +61,7 @@ _gnutls_version_has_selectable_sighash(const version_entry_st * ver)
 	return ver->selectable_sighash;
 }
 
-GOTV_INLINE static
+NLC_INLINE static
 int _gnutls_version_has_extensions(const version_entry_st * ver)
 {
 	if (unlikely(ver == NULL))
@@ -69,7 +69,7 @@ int _gnutls_version_has_extensions(const version_entry_st * ver)
 	return ver->extensions;
 }
 
-GOTV_INLINE static
+NLC_INLINE static
 int _gnutls_version_has_explicit_iv(const version_entry_st * ver)
 {
 	if (unlikely(ver == NULL))
@@ -82,7 +82,7 @@ const mac_entry_st *_gnutls_mac_to_entry(gnutls_mac_algorithm_t c);
 #define mac_to_entry(x) _gnutls_mac_to_entry(x)
 #define hash_to_entry(x) mac_to_entry((gnutls_mac_algorithm_t)(x))
 
-GOTV_INLINE static int _gnutls_mac_is_ok(const mac_entry_st * e)
+NLC_INLINE static int _gnutls_mac_is_ok(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL) || e->id == 0)
 		return 0;
@@ -99,7 +99,7 @@ GOTV_INLINE static int _gnutls_mac_is_ok(const mac_entry_st * e)
  * Returns: length (in bytes) of the MAC output size, or 0 if the
  *   given MAC algorithm is invalid.
  -*/
-GOTV_INLINE static size_t _gnutls_mac_get_algo_len(const mac_entry_st * e)
+NLC_INLINE static size_t _gnutls_mac_get_algo_len(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return 0;
@@ -107,7 +107,7 @@ GOTV_INLINE static size_t _gnutls_mac_get_algo_len(const mac_entry_st * e)
 		return e->output_size;
 }
 
-GOTV_INLINE static const char *_gnutls_x509_mac_to_oid(const mac_entry_st * e)
+NLC_INLINE static const char *_gnutls_x509_mac_to_oid(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return NULL;
@@ -115,7 +115,7 @@ GOTV_INLINE static const char *_gnutls_x509_mac_to_oid(const mac_entry_st * e)
 		return e->oid;
 }
 
-GOTV_INLINE static const char *_gnutls_mac_get_name(const mac_entry_st * e)
+NLC_INLINE static const char *_gnutls_mac_get_name(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return NULL;
@@ -123,7 +123,7 @@ GOTV_INLINE static const char *_gnutls_mac_get_name(const mac_entry_st * e)
 		return e->name;
 }
 
-GOTV_INLINE static int _gnutls_mac_block_size(const mac_entry_st * e)
+NLC_INLINE static int _gnutls_mac_block_size(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return 0;
@@ -131,7 +131,7 @@ GOTV_INLINE static int _gnutls_mac_block_size(const mac_entry_st * e)
 		return e->block_size;
 }
 
-GOTV_INLINE static int _gnutls_mac_get_key_size(const mac_entry_st * e)
+NLC_INLINE static int _gnutls_mac_get_key_size(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return 0;
@@ -146,7 +146,7 @@ GOTV_INLINE static int _gnutls_mac_get_key_size(const mac_entry_st * e)
 #define _gnutls_digest_get_name _gnutls_mac_get_name
 #define _gnutls_hash_get_algo_len _gnutls_mac_get_algo_len
 
-GOTV_INLINE static int _gnutls_digest_is_secure(const mac_entry_st * e)
+NLC_INLINE static int _gnutls_digest_is_secure(const mac_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return 0;
@@ -187,21 +187,21 @@ const gnutls_cipher_suite_entry_st *ciphersuite_to_entry(const uint8_t suite[2])
 const cipher_entry_st *cipher_to_entry(gnutls_cipher_algorithm_t c);
 const cipher_entry_st *cipher_name_to_entry(const char *name);
 
-GOTV_INLINE static cipher_type_t _gnutls_cipher_type(const cipher_entry_st * e)
+NLC_INLINE static cipher_type_t _gnutls_cipher_type(const cipher_entry_st * e)
 {
 	if ( e == NULL)
 		return ( cipher_type_t)0;
 	return e->type;
 }
 
-GOTV_INLINE static int _gnutls_cipher_get_block_size(const cipher_entry_st * e)
+NLC_INLINE static int _gnutls_cipher_get_block_size(const cipher_entry_st * e)
 {
 	if ( e == NULL )
 		return 0;
 	return e->blocksize;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_cipher_get_implicit_iv_size(const cipher_entry_st * e)
 {
 	if (unlikely(e == NULL))
@@ -209,7 +209,7 @@ _gnutls_cipher_get_implicit_iv_size(const cipher_entry_st * e)
 	return e->implicit_iv;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_cipher_get_iv_size(const cipher_entry_st * e)
 {
 	if (unlikely(e == NULL))
@@ -217,7 +217,7 @@ _gnutls_cipher_get_iv_size(const cipher_entry_st * e)
 	return e->cipher_iv;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_cipher_get_explicit_iv_size(const cipher_entry_st * e)
 {
 	if (unlikely(e == NULL))
@@ -225,14 +225,14 @@ _gnutls_cipher_get_explicit_iv_size(const cipher_entry_st * e)
 	return e->explicit_iv;
 }
 
-GOTV_INLINE static int _gnutls_cipher_get_key_size(const cipher_entry_st * e)
+NLC_INLINE static int _gnutls_cipher_get_key_size(const cipher_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return 0;
 	return e->keysize;
 }
 
-GOTV_INLINE static const char *_gnutls_cipher_get_name(const cipher_entry_st *
+NLC_INLINE static const char *_gnutls_cipher_get_name(const cipher_entry_st *
 						  e)
 {
 	if (unlikely(e == NULL))
@@ -240,14 +240,14 @@ GOTV_INLINE static const char *_gnutls_cipher_get_name(const cipher_entry_st *
 	return e->name;
 }
 
-GOTV_INLINE static int _gnutls_cipher_algo_is_aead(const cipher_entry_st * e)
+NLC_INLINE static int _gnutls_cipher_algo_is_aead(const cipher_entry_st * e)
 {
 	if (unlikely(e == NULL))
 		return 0;
 	return (e->type == CIPHER_AEAD)?1:0;
 }
 
-GOTV_INLINE static int _gnutls_cipher_is_ok(const cipher_entry_st * e)
+NLC_INLINE static int _gnutls_cipher_is_ok(const cipher_entry_st * e)
 {
 	if (unlikely(e == NULL) || e->id == 0)
 		return 0;
@@ -255,7 +255,7 @@ GOTV_INLINE static int _gnutls_cipher_is_ok(const cipher_entry_st * e)
 		return 1;
 }
 
-GOTV_INLINE static int _gnutls_cipher_get_tag_size(const cipher_entry_st * e)
+NLC_INLINE static int _gnutls_cipher_get_tag_size(const cipher_entry_st * e)
 {
 	size_t ret = 0;
 
@@ -331,7 +331,7 @@ int _gnutls_ecc_curve_get_tls_id(gnutls_ecc_curve_t supported_ecc);
 gnutls_ecc_curve_t _gnutls_ecc_bits_to_curve(int bits);
 #define MAX_ECC_CURVE_SIZE 66
 
-static GOTV_INLINE int _gnutls_kx_is_ecc(gnutls_kx_algorithm_t kx)
+static NLC_INLINE int _gnutls_kx_is_ecc(gnutls_kx_algorithm_t kx)
 {
 	if (kx == GNUTLS_KX_ECDHE_RSA || kx == GNUTLS_KX_ECDHE_ECDSA ||
 	    kx == GNUTLS_KX_ANON_ECDH || kx == GNUTLS_KX_ECDHE_PSK)
@@ -340,7 +340,7 @@ static GOTV_INLINE int _gnutls_kx_is_ecc(gnutls_kx_algorithm_t kx)
 	return 0;
 }
 
-static GOTV_INLINE int _sig_is_ecdsa(gnutls_sign_algorithm_t sig)
+static NLC_INLINE int _sig_is_ecdsa(gnutls_sign_algorithm_t sig)
 {
 	if (sig == GNUTLS_SIGN_ECDSA_SHA1 || sig == GNUTLS_SIGN_ECDSA_SHA224 ||
 	    sig == GNUTLS_SIGN_ECDSA_SHA256 || sig == GNUTLS_SIGN_ECDSA_SHA384 ||

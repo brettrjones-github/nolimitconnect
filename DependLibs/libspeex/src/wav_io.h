@@ -44,7 +44,7 @@
 #endif 
 
 /** Convert little endian */
-static GOTV_INLINE spx_int32_t le_int(spx_int32_t i)
+static NLC_INLINE spx_int32_t le_int(spx_int32_t i)
 {
 #if !defined(__LITTLE_ENDIAN__) && ( defined(GOTV_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
    spx_uint32_t ui, ret;

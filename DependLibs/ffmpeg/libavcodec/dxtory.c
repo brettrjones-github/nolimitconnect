@@ -176,7 +176,7 @@ static const uint8_t def_lru[8] = { 0x00, 0x20, 0x40, 0x60, 0x80, 0xA0, 0xC0, 0x
 static const uint8_t def_lru_555[8] = { 0x00, 0x08, 0x10, 0x18, 0x1F };
 static const uint8_t def_lru_565[8] = { 0x00, 0x08, 0x10, 0x20, 0x30, 0x3F };
 
-static GOTV_INLINE uint8_t decode_sym(GetBitContext *gb, uint8_t lru[8])
+static NLC_INLINE uint8_t decode_sym(GetBitContext *gb, uint8_t lru[8])
 {
     uint8_t c, val;
 
@@ -243,7 +243,7 @@ static int load_buffer(AVCodecContext *avctx,
     return 0;
 }
 
-static GOTV_INLINE uint8_t decode_sym_565(GetBitContext *gb, uint8_t lru[8],
+static NLC_INLINE uint8_t decode_sym_565(GetBitContext *gb, uint8_t lru[8],
                                      int bits)
 {
     uint8_t c, val;

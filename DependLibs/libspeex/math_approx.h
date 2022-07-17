@@ -46,7 +46,7 @@
 #define spx_atan atan
 
 /** Generate a pseudo-random number */
-static GOTV_INLINE spx_word16_t speex_rand(spx_word16_t std, spx_int32_t *seed)
+static NLC_INLINE spx_word16_t speex_rand(spx_word16_t std, spx_int32_t *seed)
 {
    const unsigned int jflone = 0x3f800000;
    const unsigned int jflmsk = 0x007fffff;
@@ -61,7 +61,7 @@ static GOTV_INLINE spx_word16_t speex_rand(spx_word16_t std, spx_int32_t *seed)
 #endif
 
 
-static GOTV_INLINE spx_int16_t spx_ilog2(spx_uint32_t x)
+static NLC_INLINE spx_int16_t spx_ilog2(spx_uint32_t x)
 {
    int r=0;
    if (x>=(spx_int32_t)65536)
@@ -91,7 +91,7 @@ static GOTV_INLINE spx_int16_t spx_ilog2(spx_uint32_t x)
    return r;
 }
 
-static GOTV_INLINE spx_int16_t spx_ilog4(spx_uint32_t x)
+static NLC_INLINE spx_int16_t spx_ilog4(spx_uint32_t x)
 {
    int r=0;
    if (x>=(spx_int32_t)65536)
@@ -119,7 +119,7 @@ static GOTV_INLINE spx_int16_t spx_ilog4(spx_uint32_t x)
 #ifdef FIXED_POINT
 
 /** Generate a pseudo-random number */
-static GOTV_INLINE spx_word16_t speex_rand(spx_word16_t std, spx_int32_t *seed)
+static NLC_INLINE spx_word16_t speex_rand(spx_word16_t std, spx_int32_t *seed)
 {
    spx_word32_t res;
    *seed = 1664525 * *seed + 1013904223;
@@ -139,7 +139,7 @@ static GOTV_INLINE spx_word16_t speex_rand(spx_word16_t std, spx_int32_t *seed)
 #define C2 -12627
 #define C3 4204
 
-static GOTV_INLINE spx_word16_t spx_sqrt(spx_word32_t x)
+static NLC_INLINE spx_word16_t spx_sqrt(spx_word32_t x)
 {
    int k;
    spx_word32_t rt;
@@ -157,7 +157,7 @@ static GOTV_INLINE spx_word16_t spx_sqrt(spx_word32_t x)
 #define A2 2242
 #define A3 1486
 
-static GOTV_INLINE spx_word16_t spx_acos(spx_word16_t x)
+static NLC_INLINE spx_word16_t spx_acos(spx_word16_t x)
 {
    int s=0;
    spx_word16_t ret;
@@ -185,7 +185,7 @@ static GOTV_INLINE spx_word16_t spx_acos(spx_word16_t x)
 #define K3 340
 #define K4 -10
 
-static GOTV_INLINE spx_word16_t spx_cos(spx_word16_t x)
+static NLC_INLINE spx_word16_t spx_cos(spx_word16_t x)
 {
    spx_word16_t x2;
 
@@ -205,7 +205,7 @@ static GOTV_INLINE spx_word16_t spx_cos(spx_word16_t x)
 #define L3 8277
 #define L4 -626
 
-static GOTV_INLINE spx_word16_t _spx_cos_pi_2(spx_word16_t x)
+static NLC_INLINE spx_word16_t _spx_cos_pi_2(spx_word16_t x)
 {
    spx_word16_t x2;
    
@@ -213,7 +213,7 @@ static GOTV_INLINE spx_word16_t _spx_cos_pi_2(spx_word16_t x)
    return ADD16(1,MIN16(32766,ADD32(SUB16(L1,x2), MULT16_16_P15(x2, ADD32(L2, MULT16_16_P15(x2, ADD32(L3, MULT16_16_P15(L4, x2))))))));
 }
 
-static GOTV_INLINE spx_word16_t spx_cos_norm(spx_word32_t x)
+static NLC_INLINE spx_word16_t spx_cos_norm(spx_word32_t x)
 {
    x = x&0x0001ffff;
    if (x>SHL32(EXTEND32(1), 16))
@@ -247,7 +247,7 @@ static GOTV_INLINE spx_word16_t spx_cos_norm(spx_word32_t x)
 #define D2 3726
 #define D3 1301
 /* Input in Q11 format, output in Q16 */
-static GOTV_INLINE spx_word32_t spx_exp2(spx_word16_t x)
+static NLC_INLINE spx_word32_t spx_exp2(spx_word16_t x)
 {
    int integer;
    spx_word16_t frac;
@@ -262,7 +262,7 @@ static GOTV_INLINE spx_word32_t spx_exp2(spx_word16_t x)
 }
 
 /* Input in Q11 format, output in Q16 */
-static GOTV_INLINE spx_word32_t spx_exp(spx_word16_t x)
+static NLC_INLINE spx_word32_t spx_exp(spx_word16_t x)
 {
    if (x>21290)
       return 0x7fffffff;
@@ -276,7 +276,7 @@ static GOTV_INLINE spx_word32_t spx_exp(spx_word16_t x)
 #define M3 -11943
 #define M4 4936
 
-static GOTV_INLINE spx_word16_t spx_atan01(spx_word16_t x)
+static NLC_INLINE spx_word16_t spx_atan01(spx_word16_t x)
 {
    return MULT16_16_P15(x, ADD32(M1, MULT16_16_P15(x, ADD32(M2, MULT16_16_P15(x, ADD32(M3, MULT16_16_P15(M4, x)))))));
 }
@@ -287,7 +287,7 @@ static GOTV_INLINE spx_word16_t spx_atan01(spx_word16_t x)
 #undef M4
 
 /* Input in Q15, output in Q14 */
-static GOTV_INLINE spx_word16_t spx_atan(spx_word32_t x)
+static NLC_INLINE spx_word16_t spx_atan(spx_word32_t x)
 {
    if (x <= 32767)
    {
@@ -313,7 +313,7 @@ static GOTV_INLINE spx_word16_t spx_atan(spx_word32_t x)
 
 
 #define SPX_PI_2 1.5707963268
-static GOTV_INLINE spx_word16_t spx_cos(spx_word16_t x)
+static NLC_INLINE spx_word16_t spx_cos(spx_word16_t x)
 {
    if (x<SPX_PI_2)
    {

@@ -35,7 +35,7 @@
 #include "expand_pic.h"
 
 // rewrite it (split into luma & chroma) that is helpful for mmx/sse2 optimization perform, 9/27/2009
-static GOTV_INLINE void ExpandPictureLuma_c (uint8_t* pDst, const int32_t kiStride, const int32_t kiPicW,
+static NLC_INLINE void ExpandPictureLuma_c (uint8_t* pDst, const int32_t kiStride, const int32_t kiPicW,
                                         const int32_t kiPicH) {
   uint8_t* pTmp              = pDst;
   uint8_t* pDstLastLine      = pTmp + (kiPicH - 1) * kiStride;
@@ -75,7 +75,7 @@ static GOTV_INLINE void ExpandPictureLuma_c (uint8_t* pDst, const int32_t kiStri
   } while (i < kiPicH);
 }
 
-static GOTV_INLINE void ExpandPictureChroma_c (uint8_t* pDst, const int32_t kiStride, const int32_t kiPicW,
+static NLC_INLINE void ExpandPictureChroma_c (uint8_t* pDst, const int32_t kiStride, const int32_t kiPicW,
     const int32_t kiPicH) {
   uint8_t* pTmp                 = pDst;
   uint8_t* pDstLastLine         = pTmp + (kiPicH - 1) * kiStride;

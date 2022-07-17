@@ -298,7 +298,7 @@ static void svq3_add_idct_c(uint8_t *dst, int16_t *block,
     memset(block, 0, 16 * sizeof(int16_t));
 }
 
-static GOTV_INLINE int svq3_decode_block(GetBitContext *gb, int16_t *block,
+static NLC_INLINE int svq3_decode_block(GetBitContext *gb, int16_t *block,
                                     int index, const int type)
 {
     static const uint8_t *const scan_patterns[4] = {
@@ -428,7 +428,7 @@ static av_always_inline void svq3_pred_motion(const SVQ3Context *s, int n,
     }
 }
 
-static GOTV_INLINE void svq3_mc_dir_part(SVQ3Context *s,
+static NLC_INLINE void svq3_mc_dir_part(SVQ3Context *s,
                                     int x, int y, int width, int height,
                                     int mx, int my, int dxy,
                                     int thirdpel, int dir, int avg)
@@ -503,7 +503,7 @@ static GOTV_INLINE void svq3_mc_dir_part(SVQ3Context *s,
     }
 }
 
-static GOTV_INLINE int svq3_mc_dir(SVQ3Context *s, int size, int mode,
+static NLC_INLINE int svq3_mc_dir(SVQ3Context *s, int size, int mode,
                               int dir, int avg)
 {
     int i, j, k, mx, my, dx, dy, x, y;

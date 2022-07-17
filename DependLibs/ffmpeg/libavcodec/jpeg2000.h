@@ -213,12 +213,12 @@ typedef struct Jpeg2000Component {
 } Jpeg2000Component;
 
 /* misc tools */
-static GOTV_INLINE int ff_jpeg2000_ceildivpow2(int a, int b)
+static NLC_INLINE int ff_jpeg2000_ceildivpow2(int a, int b)
 {
     return -((-(int64_t)a) >> b);
 }
 
-static GOTV_INLINE int ff_jpeg2000_ceildiv(int a, int b)
+static NLC_INLINE int ff_jpeg2000_ceildiv(int a, int b)
 {
     return (a + (int64_t)b - 1) / b;
 }
@@ -237,7 +237,7 @@ extern uint8_t ff_jpeg2000_sigctxno_lut[256][4];
 
 /* Get context label (number in range[0..8]) of a coefficient for significance
  * propagation and cleanup coding passes. */
-static GOTV_INLINE int ff_jpeg2000_getsigctxno(int flag, int bandno)
+static NLC_INLINE int ff_jpeg2000_getsigctxno(int flag, int bandno)
 {
     return ff_jpeg2000_sigctxno_lut[flag & 255][bandno];
 }
@@ -246,7 +246,7 @@ static const uint8_t refctxno_lut[2][2] = { { 14, 15 }, { 16, 16 } };
 
 /* Get context label (number in range[14..16]) of a coefficient for magnitude
  * refinement pass. */
-static GOTV_INLINE int ff_jpeg2000_getrefctxno(int flag)
+static NLC_INLINE int ff_jpeg2000_getrefctxno(int flag)
 {
     return refctxno_lut[(flag >> 14) & 1][(flag & 255) != 0];
 }
@@ -255,7 +255,7 @@ extern uint8_t ff_jpeg2000_sgnctxno_lut[16][16];
 extern uint8_t ff_jpeg2000_xorbit_lut[16][16];
 
 /* Get context label (number in range[9..13]) for sign decoding. */
-static GOTV_INLINE int ff_jpeg2000_getsgnctxno(int flag, int *xorbit)
+static NLC_INLINE int ff_jpeg2000_getsgnctxno(int flag, int *xorbit)
 {
     *xorbit = ff_jpeg2000_xorbit_lut[flag & 15][(flag >> 8) & 15];
     return ff_jpeg2000_sgnctxno_lut[flag & 15][(flag >> 8) & 15];
@@ -271,7 +271,7 @@ void ff_jpeg2000_reinit(Jpeg2000Component *comp, Jpeg2000CodingStyle *codsty);
 
 void ff_jpeg2000_cleanup(Jpeg2000Component *comp, Jpeg2000CodingStyle *codsty);
 
-static GOTV_INLINE int needs_termination(int style, int passno) {
+static NLC_INLINE int needs_termination(int style, int passno) {
     if (style & JPEG2000_CBLK_BYPASS) {
         int type = passno % 3;
         passno /= 3;

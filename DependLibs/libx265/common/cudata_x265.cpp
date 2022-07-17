@@ -58,49 +58,49 @@ namespace {
 // file private namespace
 
 /* Check whether 2 addresses point to the same column */
-GOTV_INLINE bool isEqualCol(int addrA, int addrB)
+NLC_INLINE bool isEqualCol(int addrA, int addrB)
 {
     return ((addrA ^ addrB) & (RASTER_SIZE - 1)) == 0;
 }
 
 /* Check whether 2 addresses point to the same row */
-GOTV_INLINE bool isEqualRow(int addrA, int addrB)
+NLC_INLINE bool isEqualRow(int addrA, int addrB)
 {
     return ((addrA ^ addrB) < RASTER_SIZE);
 }
 
 /* Check whether 2 addresses point to the same row or column */
-GOTV_INLINE bool isEqualRowOrCol(int addrA, int addrB)
+NLC_INLINE bool isEqualRowOrCol(int addrA, int addrB)
 {
     return isEqualCol(addrA, addrB) | isEqualRow(addrA, addrB);
 }
 
 /* Check whether one address points to the first column */
-GOTV_INLINE bool isZeroCol(int addr)
+NLC_INLINE bool isZeroCol(int addr)
 {
     return (addr & (RASTER_SIZE - 1)) == 0;
 }
 
 /* Check whether one address points to the first row */
-GOTV_INLINE bool isZeroRow(int addr)
+NLC_INLINE bool isZeroRow(int addr)
 {
     return (addr < RASTER_SIZE);
 }
 
 /* Check whether one address points to a column whose index is smaller than a given value */
-GOTV_INLINE bool lessThanCol(int addr, int val)
+NLC_INLINE bool lessThanCol(int addr, int val)
 {
     return (addr & (RASTER_SIZE - 1)) < val;
 }
 
 /* Check whether one address points to a row whose index is smaller than a given value */
-GOTV_INLINE bool lessThanRow(int addr, int val)
+NLC_INLINE bool lessThanRow(int addr, int val)
 {
     // addr / numUnits < val
     return (addr >> LOG2_RASTER_SIZE) < val;
 }
 
-GOTV_INLINE MV scaleMv(MV mv, int scale)
+NLC_INLINE MV scaleMv(MV mv, int scale)
 {
     int mvx = x265_clip3(-32768, 32767, (scale * mv.x + 127 + (scale * mv.x < 0)) >> 8);
     int mvy = x265_clip3(-32768, 32767, (scale * mv.y + 127 + (scale * mv.y < 0)) >> 8);

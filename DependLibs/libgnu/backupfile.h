@@ -46,7 +46,7 @@ enum backup_type
    || (Type) == numbered_existing       \
    || (Type) == numbered)
 
-extern GOTV_DLL_VARIABLE char const *simple_backup_suffix;
+extern NLC_DLL_VARIABLE char const *simple_backup_suffix;
 
 extern char *find_backup_file_name (char const *file,
                                     enum backup_type backup_type);

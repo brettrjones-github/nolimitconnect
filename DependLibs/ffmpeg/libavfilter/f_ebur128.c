@@ -194,7 +194,7 @@ static const uint8_t *get_graph_color(const EBUR128Context *ebur128, int v, int 
     return graph_colors + 3*colorid;
 }
 
-static GOTV_INLINE int lu_to_y(const EBUR128Context *ebur128, double v)
+static NLC_INLINE int lu_to_y(const EBUR128Context *ebur128, double v)
 {
     v += 2 * ebur128->meter;                            // make it in range [0;...]
     v  = av_clipf(v, 0, ebur128->scale_range);          // make sure it's in the graph scale

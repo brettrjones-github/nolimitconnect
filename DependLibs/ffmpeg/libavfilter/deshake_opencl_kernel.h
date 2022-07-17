@@ -26,7 +26,7 @@
 #include "libavutil/opencl.h"
 
 const char *ff_kernel_deshake_opencl = AV_OPENCL_KERNEL(
-GOTV_INLINE unsigned char pixel(global const unsigned char *src, int x, int y,
+NLC_INLINE unsigned char pixel(global const unsigned char *src, int x, int y,
                            int w, int h,int stride, unsigned char def)
 {
     return (x < 0 || y < 0 || x >= w || y >= h) ? def : src[x + y * stride];
@@ -87,14 +87,14 @@ unsigned char interpolate_biquadratic(float x, float y, global const unsigned ch
     }
 }
 
-GOTV_INLINE const float clipf(float a, float amin, float amax)
+NLC_INLINE const float clipf(float a, float amin, float amax)
 {
     if      (a < amin) return amin;
     else if (a > amax) return amax;
     else               return a;
 }
 
-GOTV_INLINE int mirror(int v, int m)
+NLC_INLINE int mirror(int v, int m)
 {
     while ((unsigned)v > (unsigned)m) {
         v = -v;

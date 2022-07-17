@@ -32,7 +32,7 @@
 #include "cr-pseudo.h"
 #include "cr-additional-sel.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 enum AddSelectorType
 {
@@ -93,6 +93,6 @@ void cr_additional_sel_dump (CRAdditionalSel *a_this, FILE *a_fp) ;
 
 void cr_additional_sel_destroy (CRAdditionalSel *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_ADD_SEL_H*/

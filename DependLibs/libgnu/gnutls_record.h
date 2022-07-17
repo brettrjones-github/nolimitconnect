@@ -34,7 +34,7 @@ ssize_t _gnutls_send_tlen_int(gnutls_session_t session,
 			      size_t sizeofdata, size_t min_pad,
 			      unsigned int mflags);
 
-GOTV_INLINE static ssize_t
+NLC_INLINE static ssize_t
 _gnutls_send_int(gnutls_session_t session, content_type_t type,
 		 gnutls_handshake_description_t htype,
 		 unsigned int epoch_rel, const void *_data,
@@ -50,7 +50,7 @@ ssize_t _gnutls_recv_int(gnutls_session_t session, content_type_t type,
 			 uint8_t * data,
 			 size_t sizeofdata, void *seq, unsigned int ms);
 
-GOTV_INLINE static unsigned max_record_recv_size(gnutls_session_t session)
+NLC_INLINE static unsigned max_record_recv_size(gnutls_session_t session)
 {
 	unsigned size;
 
@@ -64,7 +64,7 @@ GOTV_INLINE static unsigned max_record_recv_size(gnutls_session_t session)
 	return size;
 }
 
-GOTV_INLINE static unsigned max_decrypted_size(gnutls_session_t session)
+NLC_INLINE static unsigned max_decrypted_size(gnutls_session_t session)
 {
 	unsigned size = 0;
 
@@ -78,7 +78,7 @@ GOTV_INLINE static unsigned max_decrypted_size(gnutls_session_t session)
 
 /* Returns the headers + any IV that the ciphersuite
  * requires */
-GOTV_INLINE static
+NLC_INLINE static
 unsigned int get_total_headers(gnutls_session_t session)
 {
 	int ret;
@@ -93,7 +93,7 @@ unsigned int get_total_headers(gnutls_session_t session)
 	return total + _gnutls_cipher_get_explicit_iv_size(params->cipher);
 }
 
-GOTV_INLINE static
+NLC_INLINE static
 unsigned int get_total_headers2(gnutls_session_t session, record_parameters_st *params)
 {
 	unsigned total = RECORD_HEADER_SIZE(session);
@@ -101,7 +101,7 @@ unsigned int get_total_headers2(gnutls_session_t session, record_parameters_st *
 	return total + _gnutls_cipher_get_explicit_iv_size(params->cipher);
 }
 
-GOTV_INLINE static void session_invalidate(gnutls_session_t session)
+NLC_INLINE static void session_invalidate(gnutls_session_t session)
 {
 	session->internals.invalid_connection = 1;
 }

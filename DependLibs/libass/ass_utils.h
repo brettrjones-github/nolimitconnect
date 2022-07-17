@@ -100,14 +100,14 @@ ASS_Style *lookup_style_strict(ASS_Track *track, char *name, size_t len);
 /* defined in ass_strtod.c */
 double ass_strtod(const char *string, char **endPtr);
 
-static GOTV_INLINE size_t ass_align(size_t alignment, size_t s)
+static NLC_INLINE size_t ass_align(size_t alignment, size_t s)
 {
     if (s > SIZE_MAX - (alignment - 1))
         return s;
     return (s + (alignment - 1)) & ~(alignment - 1);
 }
 
-static GOTV_INLINE uint32_t ass_bswap32(uint32_t x)
+static NLC_INLINE uint32_t ass_bswap32(uint32_t x)
 {
 #ifdef _MSC_VER
     return _byteswap_ulong(x);
@@ -117,57 +117,57 @@ static GOTV_INLINE uint32_t ass_bswap32(uint32_t x)
 #endif
 }
 
-static GOTV_INLINE int d6_to_int(int x)
+static NLC_INLINE int d6_to_int(int x)
 {
     return (x + 32) >> 6;
 }
-static GOTV_INLINE int d16_to_int(int x)
+static NLC_INLINE int d16_to_int(int x)
 {
     return (x + 32768) >> 16;
 }
-static GOTV_INLINE int int_to_d6(int x)
+static NLC_INLINE int int_to_d6(int x)
 {
     return x * (1 << 6);
 }
-static GOTV_INLINE int int_to_d16(int x)
+static NLC_INLINE int int_to_d16(int x)
 {
     return x * (1 << 16);
 }
-static GOTV_INLINE int d16_to_d6(int x)
+static NLC_INLINE int d16_to_d6(int x)
 {
     return (x + 512) >> 10;
 }
-static GOTV_INLINE int d6_to_d16(int x)
+static NLC_INLINE int d6_to_d16(int x)
 {
     return x * (1 << 10);
 }
-static GOTV_INLINE double d6_to_double(int x)
+static NLC_INLINE double d6_to_double(int x)
 {
     return x / 64.;
 }
-static GOTV_INLINE int double_to_d6(double x)
+static NLC_INLINE int double_to_d6(double x)
 {
     return (int) (x * 64);
 }
-static GOTV_INLINE double d16_to_double(int x)
+static NLC_INLINE double d16_to_double(int x)
 {
     return ((double) x) / 0x10000;
 }
-static GOTV_INLINE int double_to_d16(double x)
+static NLC_INLINE int double_to_d16(double x)
 {
     return (int) (x * 0x10000);
 }
-static GOTV_INLINE double d22_to_double(int x)
+static NLC_INLINE double d22_to_double(int x)
 {
     return ((double) x) / 0x400000;
 }
-static GOTV_INLINE int double_to_d22(double x)
+static NLC_INLINE int double_to_d22(double x)
 {
     return (int) (x * 0x400000);
 }
 
 // Calculate cache key for a rotational angle in radians
-static GOTV_INLINE int rot_key(double a)
+static NLC_INLINE int rot_key(double a)
 {
     return double_to_d22(remainder(a, 2 * M_PI));
 }
@@ -175,7 +175,7 @@ static GOTV_INLINE int rot_key(double a)
 #define FNV1_32A_INIT 0x811c9dc5U
 #define FNV1_32A_PRIME 16777619U
 
-static GOTV_INLINE unsigned fnv_32a_buf(void *buf, size_t len, unsigned hval)
+static NLC_INLINE unsigned fnv_32a_buf(void *buf, size_t len, unsigned hval)
 {
     unsigned char *bp = (unsigned char*)buf;
     size_t n = (len + 3) / 4;
@@ -190,7 +190,7 @@ static GOTV_INLINE unsigned fnv_32a_buf(void *buf, size_t len, unsigned hval)
 
     return hval;
 }
-static GOTV_INLINE unsigned fnv_32a_str(char *str, unsigned hval)
+static NLC_INLINE unsigned fnv_32a_str(char *str, unsigned hval)
 {
     unsigned char *s = (unsigned char *) str;
     while (*s) {

@@ -32,7 +32,7 @@
 
 #define IDCTMUL(a, b) ((int)((a) * (unsigned)(b)) >> 16)
 
-static GOTV_INLINE void idct_row(int16_t *blk)
+static NLC_INLINE void idct_row(int16_t *blk)
 {
     int tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmpA;
     int tmpB, tmpC, tmpD, tmpE, tmpF, tmp10, tmp11, tmp12, tmp13, tmp14;
@@ -70,7 +70,7 @@ static GOTV_INLINE void idct_row(int16_t *blk)
     blk[7] = tmp14 - tmp8;
 }
 
-static GOTV_INLINE void idct_col(int16_t *blk)
+static NLC_INLINE void idct_col(int16_t *blk)
 {
     int tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmpA;
     int tmpB, tmpC, tmpD, tmpE, tmpF, tmp10, tmp11, tmp12, tmp13, tmp14;

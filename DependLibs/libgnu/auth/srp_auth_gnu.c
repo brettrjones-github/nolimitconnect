@@ -66,7 +66,7 @@ const mod_auth_st srp_auth_struct = {
  * Returns a proper error code in that case, and 0 when
  * all are ok.
  */
-GOTV_INLINE static int check_param_mod_n(bigint_t a, bigint_t n, int is_a)
+NLC_INLINE static int check_param_mod_n(bigint_t a, bigint_t n, int is_a)
 {
 	int ret, err = 0;
 	bigint_t r;

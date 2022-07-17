@@ -68,7 +68,7 @@ static int rtsp_read_close(AVFormatContext *s)
     return 0;
 }
 
-static GOTV_INLINE int read_line(AVFormatContext *s, char *rbuf, const int rbufsize,
+static NLC_INLINE int read_line(AVFormatContext *s, char *rbuf, const int rbufsize,
                             int *rbuflen)
 {
     RTSPState *rt = s->priv_data;
@@ -120,7 +120,7 @@ static int rtsp_send_reply(AVFormatContext *s, enum RTSPStatusCode code,
     return 0;
 }
 
-static GOTV_INLINE int check_sessionid(AVFormatContext *s,
+static NLC_INLINE int check_sessionid(AVFormatContext *s,
                                   RTSPMessageHeader *request)
 {
     RTSPState *rt = s->priv_data;
@@ -138,7 +138,7 @@ static GOTV_INLINE int check_sessionid(AVFormatContext *s,
     return 0;
 }
 
-static GOTV_INLINE int rtsp_read_request(AVFormatContext *s,
+static NLC_INLINE int rtsp_read_request(AVFormatContext *s,
                                     RTSPMessageHeader *request,
                                     const char *method)
 {
@@ -359,7 +359,7 @@ static int rtsp_read_record(AVFormatContext *s)
     return 0;
 }
 
-static GOTV_INLINE int parse_command_line(AVFormatContext *s, const char *line,
+static NLC_INLINE int parse_command_line(AVFormatContext *s, const char *line,
                                      int linelen, char *uri, int urisize,
                                      char *method, int methodsize,
                                      enum RTSPMethod *methodcode)

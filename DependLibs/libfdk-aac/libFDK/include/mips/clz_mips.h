@@ -93,7 +93,7 @@ amm-info@iis.fraunhofer.de
 #if defined(__mips__) && (__GNUC__==2) && (mips>=32)
 
   #define FUNCTION_fixnormz_D
-  GOTV_INLINE int32_t fixnormz_D(int32_t value)
+  NLC_INLINE int32_t fixnormz_D(int32_t value)
   {
     int32_t result;
     __asm__ ("clz %0,%1" : "=d" (result) : "d" (value));
@@ -104,7 +104,7 @@ amm-info@iis.fraunhofer.de
 #elif defined(__mips__) && (__GNUC__==3) && (__mips>=32)
 
   #define FUNCTION_fixnormz_D
-  int32_t GOTV_INLINE fixnormz_D(int32_t value)
+  int32_t NLC_INLINE fixnormz_D(int32_t value)
   {
     int32_t result;
     __asm__ ("clz %[result], %[value]" : [result] "=r" (result) : [value] "r" (value)) ;

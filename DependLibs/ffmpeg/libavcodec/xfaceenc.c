@@ -78,7 +78,7 @@ typedef struct {
     int prob_ranges_idx;
 } ProbRangesQueue;
 
-static GOTV_INLINE int pq_push(ProbRangesQueue *pq, const ProbRange *p)
+static NLC_INLINE int pq_push(ProbRangesQueue *pq, const ProbRange *p)
 {
     if (pq->prob_ranges_idx >= XFACE_PIXELS * 2 - 1)
         return -1;

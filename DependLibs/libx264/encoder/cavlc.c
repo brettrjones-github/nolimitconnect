@@ -67,7 +67,7 @@ static const uint8_t subpartition_b_to_golomb[13]=
 /****************************************************************************
  * x264_cavlc_block_residual:
  ****************************************************************************/
-static GOTV_INLINE int x264_cavlc_block_residual_escape( x264_t *h, int i_suffix_length, int level )
+static NLC_INLINE int x264_cavlc_block_residual_escape( x264_t *h, int i_suffix_length, int level )
 {
     bs_t *s = &h->out.bs;
     static const uint16_t next_suffix[7] = { 0, 3, 6, 12, 24, 48, 0xffff };
@@ -247,7 +247,7 @@ static void x264_cavlc_mvd( x264_t *h, int i_list, int idx, int width )
     bs_write_se( s, h->mb.cache.mv[i_list][x264_scan8[idx]][1] - mvp[1] );
 }
 
-static GOTV_INLINE void x264_cavlc_8x8_mvd( x264_t *h, int i )
+static NLC_INLINE void x264_cavlc_8x8_mvd( x264_t *h, int i )
 {
     switch( h->mb.i_sub_partition[i] )
     {

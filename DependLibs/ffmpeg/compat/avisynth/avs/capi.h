@@ -47,7 +47,7 @@
 #  define AVSC_CC __stdcall
 #endif
 
-#define AVSC_INLINE GOTV_INLINE
+#define AVSC_INLINE NLC_INLINE
 
 #ifdef BUILDING_AVSCORE
 #  define AVSC_EXPORT EXTERN_C

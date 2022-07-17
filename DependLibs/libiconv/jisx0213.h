@@ -5857,7 +5857,7 @@ static const Summary16 jisx0213_from_ucs_level2_2indx[] = {
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)
@@ -5895,7 +5895,7 @@ static ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static unsigned short ucs4_to_jisx0213 (ucs4_t ucs)

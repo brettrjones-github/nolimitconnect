@@ -1088,7 +1088,7 @@ void getParamAspectRatio(x265_param* p, int& width, int& height)
         width = height = 0;
 }
 
-static GOTV_INLINE int _confirm(x265_param* param, bool bflag, const char* message)
+static NLC_INLINE int _confirm(x265_param* param, bool bflag, const char* message)
 {
     if (!bflag)
         return 0;

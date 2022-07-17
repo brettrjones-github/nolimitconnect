@@ -98,7 +98,7 @@ amm-info@iis.fraunhofer.de
     #define FUNCTION_fixmadddiv2_DD
 
     #ifdef __ARM_ARCH_6__
-      GOTV_INLINE FIXP_DBL fixmadddiv2_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
+      NLC_INLINE FIXP_DBL fixmadddiv2_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
         int32_t result;
         asm  ("smmla %0, %1, %2, %3;\n"
               : "=r" (result)
@@ -106,7 +106,7 @@ amm-info@iis.fraunhofer.de
         return result ;
       }
       #define FUNCTION_fixmsubdiv2_DD
-      GOTV_INLINE FIXP_DBL fixmsubdiv2_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
+      NLC_INLINE FIXP_DBL fixmsubdiv2_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
         int32_t result;
         asm  ("smmls %0, %1, %2, %3;\n"
               : "=r" (result)
@@ -114,7 +114,7 @@ amm-info@iis.fraunhofer.de
         return result ;
       }
     #else /* __ARM_ARCH_6__ */
-      GOTV_INLINE FIXP_DBL fixmadddiv2_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
+      NLC_INLINE FIXP_DBL fixmadddiv2_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
         int32_t discard, result = x;
         asm  ("smlal %0, %1, %2, %3;\n"
               : "=r" (discard), "+r" (result)
@@ -127,7 +127,7 @@ amm-info@iis.fraunhofer.de
 
       #define FUNCTION_fixmadddiv2_DS
 
-      GOTV_INLINE FIXP_DBL fixmadddiv2_DS (FIXP_DBL x, const FIXP_DBL a, const FIXP_SGL b) {
+      NLC_INLINE FIXP_DBL fixmadddiv2_DS (FIXP_DBL x, const FIXP_DBL a, const FIXP_SGL b) {
         int32_t result;
         asm("smlawb %0, %1, %2, %3 "
               : "=r" (result)
@@ -141,7 +141,7 @@ amm-info@iis.fraunhofer.de
     #define fixmadddiv2BitExact_DD(a, b, c) fixmadddiv2_DD(a, b, c)
 
     #define FUNCTION_fixmsubdiv2BitExact_DD
-    GOTV_INLINE FIXP_DBL fixmsubdiv2BitExact_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
+    NLC_INLINE FIXP_DBL fixmsubdiv2BitExact_DD (FIXP_DBL x, const FIXP_DBL a, const FIXP_DBL b) {
       return x - fixmuldiv2BitExact_DD(a, b);
     }
 
@@ -149,7 +149,7 @@ amm-info@iis.fraunhofer.de
     #define fixmadddiv2BitExact_DS(a, b, c) fixmadddiv2_DS(a, b, c)
 
     #define FUNCTION_fixmsubdiv2BitExact_DS
-    GOTV_INLINE FIXP_DBL fixmsubdiv2BitExact_DS (FIXP_DBL x, const FIXP_DBL a, const FIXP_SGL b) {
+    NLC_INLINE FIXP_DBL fixmsubdiv2BitExact_DS (FIXP_DBL x, const FIXP_DBL a, const FIXP_SGL b) {
       return x - fixmuldiv2BitExact_DS(a, b);
     }
   /* ############################################################################# */

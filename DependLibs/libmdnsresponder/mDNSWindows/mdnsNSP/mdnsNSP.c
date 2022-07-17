@@ -547,7 +547,7 @@ DEBUG_LOCAL int WSPAPI
 	// The name may or may not end with a "." (fully qualified) so handle both cases. DNS is also case 
 	// insensitive the check for .local has to be case insensitive (.LoCaL is equivalent to .local). This
 	// manually does the wchar_t strlen and stricmp to avoid needing any special wchar_t versions of the 
-	// libraries. It is probably faster to do the GOTV_INLINE compare than invoke functions to do it anyway.
+	// libraries. It is probably faster to do the NLC_INLINE compare than invoke functions to do it anyway.
 	
 	for( p = name; *p; ++p ) {}		// Find end of string
 	size = (size_t)( p - name );

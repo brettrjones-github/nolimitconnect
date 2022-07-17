@@ -93,7 +93,7 @@ amm-info@iis.fraunhofer.de
   #define FUNCTION_fixnormz_D
   #define FUNCTION_fixnorm_D
 
-  GOTV_INLINE int32_t fixnormz_D(int32_t value)
+  NLC_INLINE int32_t fixnormz_D(int32_t value)
   {
     int32_t result;
 
@@ -105,7 +105,7 @@ amm-info@iis.fraunhofer.de
     return result;
   }
 
-  GOTV_INLINE int32_t fixnorm_D(int32_t value)
+  NLC_INLINE int32_t fixnorm_D(int32_t value)
   {
     int32_t result;
     if (value == 0) {
@@ -126,7 +126,7 @@ amm-info@iis.fraunhofer.de
   #define FUNCTION_fixnormz_D
   #define FUNCTION_fixnorm_D
 
-  GOTV_INLINE int32_t fixnormz_D(int32_t value)
+  NLC_INLINE int32_t fixnormz_D(int32_t value)
   {
     unsigned long result = 0;
     unsigned char err;
@@ -138,7 +138,7 @@ amm-info@iis.fraunhofer.de
     }
   }
 
-  GOTV_INLINE int32_t fixnorm_D(int32_t value)
+  NLC_INLINE int32_t fixnorm_D(int32_t value)
   {
     int32_t result;
     if (value == 0) {

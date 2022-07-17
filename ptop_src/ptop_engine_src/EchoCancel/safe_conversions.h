@@ -23,7 +23,7 @@ namespace rtc {
 // Convenience function that returns true if the supplied value is in range
 // for the destination type.
 template <typename Dst, typename Src>
-GOTV_INLINE bool IsValueInRangeForNumericType(Src value) {
+NLC_INLINE bool IsValueInRangeForNumericType(Src value) {
   return internal::RangeCheck<Dst>(value) == internal::TYPE_VALID;
 }
 
@@ -31,7 +31,7 @@ GOTV_INLINE bool IsValueInRangeForNumericType(Src value) {
 // except that it CHECKs that the specified numeric conversion will not
 // overflow or underflow. NaN source will always trigger a CHECK.
 template <typename Dst, typename Src>
-GOTV_INLINE Dst checked_cast(Src value) {
+NLC_INLINE Dst checked_cast(Src value) {
   RTC_CHECK(IsValueInRangeForNumericType<Dst>(value));
   return static_cast<Dst>(value);
 }
@@ -40,7 +40,7 @@ GOTV_INLINE Dst checked_cast(Src value) {
 // that the specified numeric conversion will saturate rather than overflow or
 // underflow. NaN assignment to an integral will trigger a RTC_CHECK condition.
 template <typename Dst, typename Src>
-GOTV_INLINE Dst saturated_cast(Src value) {
+NLC_INLINE Dst saturated_cast(Src value) {
   // Optimization for floating point values, which already saturate.
   if (std::numeric_limits<Dst>::is_iec559)
     return static_cast<Dst>(value);

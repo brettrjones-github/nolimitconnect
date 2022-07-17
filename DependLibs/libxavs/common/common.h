@@ -159,30 +159,30 @@ void xavs_log (xavs_t * h, int i_level, const char *psz_fmt, ...);
 
 void xavs_reduce_fraction (int *n, int *d);
 
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_clip3 (int v, int i_min, int i_max)
 {
   return ((v < i_min) ? i_min : (v > i_max) ? i_max : v);
 }
-static GOTV_INLINE float
+static NLC_INLINE float
 xavs_clip3f (float v, float f_min, float f_max)
 {
   return ((v < f_min) ? f_min : (v > f_max) ? f_max : v);
 }
-static GOTV_INLINE double
+static NLC_INLINE double
 xavs_clip3lf (double v, double f_min, double f_max)
 {
   return ((v < f_min) ? f_min : (v > f_max) ? f_max : v);
 }
 
-static GOTV_INLINE uint8_t
+static NLC_INLINE uint8_t
 xavs_clip_uint8 (int x)
 {
   return x & (~255) ? (-x) >> 31 : x;
 }
 
 
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_median (int a, int b, int c)
 {
   int min = a, max = a;

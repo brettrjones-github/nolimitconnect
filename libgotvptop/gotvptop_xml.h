@@ -46,9 +46,9 @@ struct xml_t
                             const char * );
 };
 
-GOTV_API xml_t * xml_Create( gotvptop_object_t * ) GOTV_USED;
+NLC_API xml_t * xml_Create( gotvptop_object_t * ) GOTV_USED;
 #define xml_Create( a ) xml_Create( GOTV_OBJECT(a) )
-GOTV_API void xml_Delete( xml_t * );
+NLC_API void xml_Delete( xml_t * );
 
 static inline void xml_CatalogLoad( xml_t *xml, const char *catalog )
 {
@@ -77,10 +77,10 @@ struct xml_reader_t
     int (*pf_is_empty) ( xml_reader_t * );
 };
 
-GOTV_API xml_reader_t * xml_ReaderCreate(gotvptop_object_t *, stream_t *) GOTV_USED;
+NLC_API xml_reader_t * xml_ReaderCreate(gotvptop_object_t *, stream_t *) GOTV_USED;
 #define xml_ReaderCreate( a, s ) xml_ReaderCreate(GOTV_OBJECT(a), s)
-GOTV_API void xml_ReaderDelete(xml_reader_t *);
-GOTV_API xml_reader_t * xml_ReaderReset(xml_reader_t *, stream_t *) GOTV_USED;
+NLC_API void xml_ReaderDelete(xml_reader_t *);
+NLC_API xml_reader_t * xml_ReaderReset(xml_reader_t *, stream_t *) GOTV_USED;
 
 static inline int xml_ReaderNextNode( xml_reader_t *reader, const char **pval )
 {

@@ -3,7 +3,7 @@
  *
  * Description:
  * This translation unit agregates operations on thread attribute objects.
- * It is used for GOTV_INLINE optimisation.
+ * It is used for NLC_INLINE optimisation.
  *
  * The included modules are used separately when static executable sizes
  * must be minimised.

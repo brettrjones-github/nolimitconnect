@@ -55,7 +55,7 @@ typedef struct DaalaInfoHeader {
     struct DaalaPixFmtMap format;
 } DaalaInfoHeader;
 
-static GOTV_INLINE int daala_match_pix_fmt(struct DaalaPixFmtMap *fmt)
+static NLC_INLINE int daala_match_pix_fmt(struct DaalaPixFmtMap *fmt)
 {
     int i, j;
     for (i = 0; i < FF_ARRAY_ELEMS(list_fmts); i++) {

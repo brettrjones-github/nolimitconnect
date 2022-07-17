@@ -1876,7 +1876,7 @@ bool VxMakeBroadcastIp( std::string localIp, std::string& retBroadcastIp )
 //============================================================================
 // C functions
 //============================================================================
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 //============================================================================
 //! set socket to blocking or not
@@ -2507,5 +2507,5 @@ const char * VxDescribeSktError( int iErr )
 #endif // TARGET_OS_WINDOWS
 }
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 

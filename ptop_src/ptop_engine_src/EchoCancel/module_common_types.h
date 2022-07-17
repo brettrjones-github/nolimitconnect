@@ -539,12 +539,12 @@ class AudioFrame {
 
 // TODO(henrik.lundin) Can we remove the call to data_()?
 // See https://bugs.chromium.org/p/webrtc/issues/detail?id=5647.
-GOTV_INLINE AudioFrame::AudioFrame()
+NLC_INLINE AudioFrame::AudioFrame()
     : data_() {
   Reset();
 }
 
-GOTV_INLINE void AudioFrame::Reset() {
+NLC_INLINE void AudioFrame::Reset() {
   id_ = -1;
   // TODO(wu): Zero is a valid value for |timestamp_|. We should initialize
   // to an invalid value, or add a new member to indicate invalidity.
@@ -558,7 +558,7 @@ GOTV_INLINE void AudioFrame::Reset() {
   vad_activity_ = kVadUnknown;
 }
 
-GOTV_INLINE void AudioFrame::UpdateFrame(int id,
+NLC_INLINE void AudioFrame::UpdateFrame(int id,
                                     uint32_t timestamp,
                                     const int16_t* data,
                                     size_t samples_per_channel,
@@ -583,7 +583,7 @@ GOTV_INLINE void AudioFrame::UpdateFrame(int id,
   }
 }
 
-GOTV_INLINE void AudioFrame::CopyFrom(const AudioFrame& src) {
+NLC_INLINE void AudioFrame::CopyFrom(const AudioFrame& src) {
   if (this == &src) return;
 
   id_ = src.id_;
@@ -601,11 +601,11 @@ GOTV_INLINE void AudioFrame::CopyFrom(const AudioFrame& src) {
   memcpy(data_, src.data_, sizeof(int16_t) * length);
 }
 
-GOTV_INLINE void AudioFrame::Mute() {
+NLC_INLINE void AudioFrame::Mute() {
   memset(data_, 0, samples_per_channel_ * num_channels_ * sizeof(int16_t));
 }
 
-GOTV_INLINE AudioFrame& AudioFrame::operator>>=(const int rhs) {
+NLC_INLINE AudioFrame& AudioFrame::operator>>=(const int rhs) {
   assert((num_channels_ > 0) && (num_channels_ < 3));
   if ((num_channels_ > 2) || (num_channels_ < 1)) return *this;
 
@@ -616,7 +616,7 @@ GOTV_INLINE AudioFrame& AudioFrame::operator>>=(const int rhs) {
 }
 
 namespace {
-GOTV_INLINE int16_t ClampToInt16(int32_t input) {
+NLC_INLINE int16_t ClampToInt16(int32_t input) {
   if (input < -0x00008000) {
     return -0x8000;
   } else if (input > 0x00007FFF) {
@@ -627,7 +627,7 @@ GOTV_INLINE int16_t ClampToInt16(int32_t input) {
 }
 }
 
-GOTV_INLINE AudioFrame& AudioFrame::operator+=(const AudioFrame& rhs) {
+NLC_INLINE AudioFrame& AudioFrame::operator+=(const AudioFrame& rhs) {
   // Sanity check
   assert((num_channels_ > 0) && (num_channels_ < 3));
   if ((num_channels_ > 2) || (num_channels_ < 1)) return *this;
@@ -666,7 +666,7 @@ GOTV_INLINE AudioFrame& AudioFrame::operator+=(const AudioFrame& rhs) {
   return *this;
 }
 
-GOTV_INLINE bool IsNewerSequenceNumber(uint16_t sequence_number,
+NLC_INLINE bool IsNewerSequenceNumber(uint16_t sequence_number,
                                   uint16_t prev_sequence_number) {
   // Distinguish between elements that are exactly 0x8000 apart.
   // If s1>s2 and |s1-s2| = 0x8000: IsNewer(s1,s2)=true, IsNewer(s2,s1)=false
@@ -678,7 +678,7 @@ GOTV_INLINE bool IsNewerSequenceNumber(uint16_t sequence_number,
          static_cast<uint16_t>(sequence_number - prev_sequence_number) < 0x8000;
 }
 
-GOTV_INLINE bool IsNewerTimestamp(uint32_t timestamp, uint32_t prev_timestamp) {
+NLC_INLINE bool IsNewerTimestamp(uint32_t timestamp, uint32_t prev_timestamp) {
   // Distinguish between elements that are exactly 0x80000000 apart.
   // If t1>t2 and |t1-t2| = 0x80000000: IsNewer(t1,t2)=true,
   // IsNewer(t2,t1)=false
@@ -690,14 +690,14 @@ GOTV_INLINE bool IsNewerTimestamp(uint32_t timestamp, uint32_t prev_timestamp) {
          static_cast<uint32_t>(timestamp - prev_timestamp) < 0x80000000;
 }
 
-GOTV_INLINE uint16_t LatestSequenceNumber(uint16_t sequence_number1,
+NLC_INLINE uint16_t LatestSequenceNumber(uint16_t sequence_number1,
                                      uint16_t sequence_number2) {
   return IsNewerSequenceNumber(sequence_number1, sequence_number2)
              ? sequence_number1
              : sequence_number2;
 }
 
-GOTV_INLINE uint32_t LatestTimestamp(uint32_t timestamp1, uint32_t timestamp2) {
+NLC_INLINE uint32_t LatestTimestamp(uint32_t timestamp1, uint32_t timestamp2) {
   return IsNewerTimestamp(timestamp1, timestamp2) ? timestamp1 : timestamp2;
 }
 

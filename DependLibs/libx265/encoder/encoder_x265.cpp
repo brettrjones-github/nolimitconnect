@@ -92,7 +92,7 @@ Encoder::Encoder()
 
     m_prevTonemapPayload.payload = NULL;
 }
-GOTV_INLINE char *strcatFilename(const char *input, const char *suffix)
+NLC_INLINE char *strcatFilename(const char *input, const char *suffix)
 {
     char *output = X265_MALLOC(char, strlen(input) + strlen(suffix) + 1);
     if (!output)

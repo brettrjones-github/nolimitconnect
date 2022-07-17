@@ -192,7 +192,7 @@ static int pix_norm1(uint8_t * pix, int line_size, int w)
     return s;
 }
 
-static GOTV_INLINE int get_penalty_factor(int lambda, int lambda2, int type){
+static NLC_INLINE int get_penalty_factor(int lambda, int lambda2, int type){
     switch(type&0xFF){
     default:
     case FF_CMP_SAD:
@@ -566,7 +566,7 @@ static int get_dc(SnowContext *s, int mb_x, int mb_y, int plane_index){
     return av_clip_uint8( ROUNDED_DIV(ab<<LOG2_OBMC_MAX, aa) ); //FIXME we should not need clipping
 }
 
-static GOTV_INLINE int get_block_bits(SnowContext *s, int x, int y, int w){
+static NLC_INLINE int get_block_bits(SnowContext *s, int x, int y, int w){
     const int b_stride = s->b_width << s->block_max_depth;
     const int b_height = s->b_height<< s->block_max_depth;
     int index= x + y*b_stride;

@@ -59,7 +59,7 @@ struct ReferencePlanes
 
     /* lowres motion compensation, you must provide a buffer and stride for QPEL averaged pixels
      * in case QPEL is required.  Else it returns a pointer to the HPEL pixels */
-    GOTV_INLINE pixel *lowresMC(intptr_t blockOffset, const MV& qmv, pixel *buf, intptr_t& outstride)
+    NLC_INLINE pixel *lowresMC(intptr_t blockOffset, const MV& qmv, pixel *buf, intptr_t& outstride)
     {
         if ((qmv.x | qmv.y) & 1)
         {
@@ -80,7 +80,7 @@ struct ReferencePlanes
         }
     }
 
-    GOTV_INLINE int lowresQPelCost(pixel *fenc, intptr_t blockOffset, const MV& qmv, pixelcmp_t comp)
+    NLC_INLINE int lowresQPelCost(pixel *fenc, intptr_t blockOffset, const MV& qmv, pixelcmp_t comp)
     {
         if ((qmv.x | qmv.y) & 1)
         {

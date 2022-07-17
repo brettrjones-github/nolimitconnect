@@ -34,7 +34,7 @@
 #define CELT_FIXED_GENERIC_MIPSR1_H
 
 #undef MULT16_32_Q15_ADD
-static GOTV_INLINE int MULT16_32_Q15_ADD(int a, int b, int c, int d) {
+static NLC_INLINE int MULT16_32_Q15_ADD(int a, int b, int c, int d) {
     int m;
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a), "r" ((int)b));
     asm volatile("madd $ac1, %0, %1" : : "r" ((int)c), "r" ((int)d));
@@ -43,7 +43,7 @@ static GOTV_INLINE int MULT16_32_Q15_ADD(int a, int b, int c, int d) {
 }
 
 #undef MULT16_32_Q15_SUB
-static GOTV_INLINE int MULT16_32_Q15_SUB(int a, int b, int c, int d) {
+static NLC_INLINE int MULT16_32_Q15_SUB(int a, int b, int c, int d) {
     int m;
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a), "r" ((int)b));
     asm volatile("msub $ac1, %0, %1" : : "r" ((int)c), "r" ((int)d));
@@ -52,7 +52,7 @@ static GOTV_INLINE int MULT16_32_Q15_SUB(int a, int b, int c, int d) {
 }
 
 #undef MULT16_16_Q15_ADD
-static GOTV_INLINE int MULT16_16_Q15_ADD(int a, int b, int c, int d) {
+static NLC_INLINE int MULT16_16_Q15_ADD(int a, int b, int c, int d) {
     int m;
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a), "r" ((int)b));
     asm volatile("madd $ac1, %0, %1" : : "r" ((int)c), "r" ((int)d));
@@ -61,7 +61,7 @@ static GOTV_INLINE int MULT16_16_Q15_ADD(int a, int b, int c, int d) {
 }
 
 #undef MULT16_16_Q15_SUB
-static GOTV_INLINE int MULT16_16_Q15_SUB(int a, int b, int c, int d) {
+static NLC_INLINE int MULT16_16_Q15_SUB(int a, int b, int c, int d) {
     int m;
     asm volatile("MULT $ac1, %0, %1" : : "r" ((int)a), "r" ((int)b));
     asm volatile("msub $ac1, %0, %1" : : "r" ((int)c), "r" ((int)d));
@@ -71,7 +71,7 @@ static GOTV_INLINE int MULT16_16_Q15_SUB(int a, int b, int c, int d) {
 
 
 #undef MULT16_32_Q16
-static GOTV_INLINE int MULT16_32_Q16(int a, int b)
+static NLC_INLINE int MULT16_32_Q16(int a, int b)
 {
     int c;
     asm volatile("MULT $ac1,%0, %1" : : "r" (a), "r" (b));
@@ -80,7 +80,7 @@ static GOTV_INLINE int MULT16_32_Q16(int a, int b)
 }
 
 #undef MULT16_32_P16
-static GOTV_INLINE int MULT16_32_P16(int a, int b)
+static NLC_INLINE int MULT16_32_P16(int a, int b)
 {
     int c;
     asm volatile("MULT $ac1, %0, %1" : : "r" (a), "r" (b));
@@ -89,7 +89,7 @@ static GOTV_INLINE int MULT16_32_P16(int a, int b)
 }
 
 #undef MULT16_32_Q15
-static GOTV_INLINE int MULT16_32_Q15(int a, int b)
+static NLC_INLINE int MULT16_32_Q15(int a, int b)
 {
     int c;
     asm volatile("MULT $ac1, %0, %1" : : "r" (a), "r" (b));
@@ -98,7 +98,7 @@ static GOTV_INLINE int MULT16_32_Q15(int a, int b)
 }
 
 #undef MULT32_32_Q31
-static GOTV_INLINE int MULT32_32_Q31(int a, int b)
+static NLC_INLINE int MULT32_32_Q31(int a, int b)
 {
     int r;
     asm volatile("MULT $ac1, %0, %1" : : "r" (a), "r" (b));
@@ -107,7 +107,7 @@ static GOTV_INLINE int MULT32_32_Q31(int a, int b)
 }
 
 #undef PSHR32
-static GOTV_INLINE int PSHR32(int a, int shift)
+static NLC_INLINE int PSHR32(int a, int shift)
 {
     int r;
     asm volatile ("SHRAV_R.W %0, %1, %2" :"=r" (r): "r" (a), "r" (shift));
@@ -115,7 +115,7 @@ static GOTV_INLINE int PSHR32(int a, int shift)
 }
 
 #undef MULT16_16_P15
-static GOTV_INLINE int MULT16_16_P15(int a, int b)
+static NLC_INLINE int MULT16_16_P15(int a, int b)
 {
     int r;
     asm volatile ("mul %0, %1, %2" :"=r" (r): "r" (a), "r" (b));

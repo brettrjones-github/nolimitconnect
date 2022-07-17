@@ -67,7 +67,7 @@ static void refill(CABACContext *c){
 #endif
 
 #ifndef get_cabac_terminate
-static GOTV_INLINE void renorm_cabac_decoder_once(CABACContext *c){
+static NLC_INLINE void renorm_cabac_decoder_once(CABACContext *c){
     int shift= (uint32_t)(c->range - 0x100)>>31;
     c->range<<= shift;
     c->low  <<= shift;

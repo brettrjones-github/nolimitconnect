@@ -29,7 +29,7 @@
 #include "hpel_template.c"
 #include "pel_template.c"
 
-static GOTV_INLINE void FUNC(copy_block2)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
+static NLC_INLINE void FUNC(copy_block2)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
 {
     int i;
     for(i=0; i<h; i++)
@@ -40,7 +40,7 @@ static GOTV_INLINE void FUNC(copy_block2)(uint8_t *dst, const uint8_t *src, int 
     }
 }
 
-static GOTV_INLINE void FUNC(copy_block4)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
+static NLC_INLINE void FUNC(copy_block4)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
 {
     int i;
     for(i=0; i<h; i++)
@@ -51,7 +51,7 @@ static GOTV_INLINE void FUNC(copy_block4)(uint8_t *dst, const uint8_t *src, int 
     }
 }
 
-static GOTV_INLINE void FUNC(copy_block8)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
+static NLC_INLINE void FUNC(copy_block8)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
 {
     int i;
     for(i=0; i<h; i++)
@@ -63,7 +63,7 @@ static GOTV_INLINE void FUNC(copy_block8)(uint8_t *dst, const uint8_t *src, int 
     }
 }
 
-static GOTV_INLINE void FUNC(copy_block16)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
+static NLC_INLINE void FUNC(copy_block16)(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h)
 {
     int i;
     for(i=0; i<h; i++)

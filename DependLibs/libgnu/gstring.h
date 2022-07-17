@@ -37,7 +37,7 @@
 #include <libgnu/gutils.h>  /* for G_CAN_INLINE */
 #endif
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GString		GString;
 #if 0
@@ -138,7 +138,7 @@ void         g_string_append_printf     (GString	 *string,
 
 /* -- optimize g_strig_append_c --- */
 #ifdef G_CAN_INLINE
-static GOTV_INLINE GString*
+static NLC_INLINE GString*
 g_string_append_c_inline (GString *gstring,
                           gchar    c)
 {
@@ -173,7 +173,7 @@ GString*     g_string_up                (GString	 *string);
 
 #endif
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_STRING_H__ */
 

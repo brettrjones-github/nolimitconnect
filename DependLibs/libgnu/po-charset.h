@@ -39,10 +39,10 @@ extern "C" {
 extern const char *po_charset_canonicalize (const char *charset);
 
 /* The canonicalized encoding name for ASCII.  */
-extern GOTV_DLL_VARIABLE const char *po_charset_ascii;
+extern NLC_DLL_VARIABLE const char *po_charset_ascii;
 
 /* The canonicalized encoding name for UTF-8.  */
-extern GOTV_DLL_VARIABLE const char *po_charset_utf8;
+extern NLC_DLL_VARIABLE const char *po_charset_utf8;
 
 /* Test for ASCII compatibility.  */
 extern bool po_charset_ascii_compatible (const char *canon_charset);
@@ -66,15 +66,15 @@ extern character_iterator_t po_charset_character_iterator (const char *canon_cha
 
 
 /* The PO file's encoding, as specified in the header entry.  */
-extern GOTV_DLL_VARIABLE const char *po_lex_charset;
+extern NLC_DLL_VARIABLE const char *po_lex_charset;
 
 #if HAVE_ICONV
 /* Converter from the PO file's encoding to UTF-8.  */
-extern GOTV_DLL_VARIABLE iconv_t po_lex_iconv;
+extern NLC_DLL_VARIABLE iconv_t po_lex_iconv;
 #endif
 /* If no converter is available, some information about the structure of the
    PO file's encoding.  */
-extern GOTV_DLL_VARIABLE bool po_lex_weird_cjk;
+extern NLC_DLL_VARIABLE bool po_lex_weird_cjk;
 
 /* Initialize the PO file's encoding.  */
 extern void po_lex_charset_init (void);

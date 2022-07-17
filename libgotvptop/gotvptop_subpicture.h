@@ -89,7 +89,7 @@ struct subpicture_region_t
  *
  * You must use subpicture_region_Delete to destroy it.
  */
-GOTV_API subpicture_region_t * subpicture_region_New( const video_format_t *p_fmt );
+NLC_API subpicture_region_t * subpicture_region_New( const video_format_t *p_fmt );
 
 /**
  * This function will destroy a subpicture region allocated by
@@ -97,7 +97,7 @@ GOTV_API subpicture_region_t * subpicture_region_New( const video_format_t *p_fm
  *
  * You may give it NULL.
  */
-GOTV_API void subpicture_region_Delete( subpicture_region_t *p_region );
+NLC_API void subpicture_region_Delete( subpicture_region_t *p_region );
 
 /**
  * This function will destroy a list of subpicture regions allocated by
@@ -105,7 +105,7 @@ GOTV_API void subpicture_region_Delete( subpicture_region_t *p_region );
  *
  * Provided for convenience.
  */
-GOTV_API void subpicture_region_ChainDelete( subpicture_region_t *p_head );
+NLC_API void subpicture_region_ChainDelete( subpicture_region_t *p_head );
 
 /**
  * This function will copy a subpicture region to a new allocated one
@@ -113,7 +113,7 @@ GOTV_API void subpicture_region_ChainDelete( subpicture_region_t *p_head );
  *
  * Provided for convenience.
  */
-GOTV_API subpicture_region_t *subpicture_region_Copy( subpicture_region_t *p_region );
+NLC_API subpicture_region_t *subpicture_region_Copy( subpicture_region_t *p_region );
 
 /**
  *
@@ -197,13 +197,13 @@ struct subpicture_t
  *
  * You must use subpicture_Delete to destroy it.
  */
-GOTV_API subpicture_t * subpicture_New( const subpicture_updater_t * );
+NLC_API subpicture_t * subpicture_New( const subpicture_updater_t * );
 
 /**
  * This function delete a subpicture created by subpicture_New.
  * You may give it NULL.
  */
-GOTV_API void subpicture_Delete( subpicture_t *p_subpic );
+NLC_API void subpicture_Delete( subpicture_t *p_subpic );
 
 /**
  * This function will create a subpicture having one region in the requested
@@ -212,13 +212,13 @@ GOTV_API void subpicture_Delete( subpicture_t *p_subpic );
  * The picture_t given is not released nor used inside the
  * returned subpicture_t.
  */
-GOTV_API subpicture_t * subpicture_NewFromPicture( gotvptop_object_t *, picture_t *, gotvptop_fourcc_t i_chroma );
+NLC_API subpicture_t * subpicture_NewFromPicture( gotvptop_object_t *, picture_t *, gotvptop_fourcc_t i_chroma );
 
 /**
  * This function will update the content of a subpicture created with
  * a non NULL subpicture_updater_t.
  */
-GOTV_API void subpicture_Update( subpicture_t *, const video_format_t *src, const video_format_t *, mtime_t );
+NLC_API void subpicture_Update( subpicture_t *, const video_format_t *src, const video_format_t *, mtime_t );
 
 /**
  * This function will blend a given subpicture onto a picture.
@@ -230,7 +230,7 @@ GOTV_API void subpicture_Update( subpicture_t *, const video_format_t *src, cons
  *  - contains only picture (no text rendering).
  * \return the number of region(s) successfully blent
  */
-GOTV_API unsigned picture_BlendSubpicture( picture_t *, filter_t *p_blend, subpicture_t * );
+NLC_API unsigned picture_BlendSubpicture( picture_t *, filter_t *p_blend, subpicture_t * );
 
 /**@}*/
 

@@ -55,7 +55,7 @@ void _dtls_async_timer_delete(gnutls_session_t session)
  * outgoing message. It accepts mtu_data which is a buffer to
  * be reused (should be set to NULL initially).
  */
-static GOTV_INLINE int
+static NLC_INLINE int
 transmit_message(gnutls_session_t session,
 		 mbuffer_st * bufel, uint8_t ** buf)
 {

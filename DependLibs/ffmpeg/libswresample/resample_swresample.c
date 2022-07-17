@@ -31,7 +31,7 @@
 
 #include "resample.h"
 
-static GOTV_INLINE double eval_poly(const double *coeff, int size, double x) {
+static NLC_INLINE double eval_poly(const double *coeff, int size, double x) {
     double sum = coeff[size-1];
     int i;
     for (i = size-2; i >= 0; --i) {

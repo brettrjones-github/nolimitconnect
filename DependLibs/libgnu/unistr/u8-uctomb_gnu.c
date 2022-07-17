@@ -18,7 +18,7 @@
 #include <config_libgnu.h>
 
 #if defined IN_LIBUNISTRING
-/* Tell unistr.h to declare u8_uctomb as 'extern', not 'static GOTV_INLINE'.  */
+/* Tell unistr.h to declare u8_uctomb as 'extern', not 'static NLC_INLINE'.  */
 # include "unistring-notinline.h"
 #endif
 

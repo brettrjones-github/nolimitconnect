@@ -164,7 +164,7 @@ _gnutls_pkcs11_privkey_decrypt_data(gnutls_pkcs11_privkey_t key,
 int
 _pkcs11_privkey_get_pubkey (gnutls_pkcs11_privkey_t pkey, gnutls_pubkey_t *pub, unsigned flags);
 
-static GOTV_INLINE int pk_to_mech(gnutls_pk_algorithm_t pk)
+static NLC_INLINE int pk_to_mech(gnutls_pk_algorithm_t pk)
 {
 	if (pk == GNUTLS_PK_DSA)
 		return CKM_DSA;
@@ -174,7 +174,7 @@ static GOTV_INLINE int pk_to_mech(gnutls_pk_algorithm_t pk)
 		return CKM_RSA_PKCS;
 }
 
-static GOTV_INLINE int pk_to_key_type(gnutls_pk_algorithm_t pk)
+static NLC_INLINE int pk_to_key_type(gnutls_pk_algorithm_t pk)
 {
 	if (pk == GNUTLS_PK_DSA)
 		return CKK_DSA;
@@ -184,7 +184,7 @@ static GOTV_INLINE int pk_to_key_type(gnutls_pk_algorithm_t pk)
 		return CKK_RSA;
 }
 
-static GOTV_INLINE gnutls_pk_algorithm_t key_type_to_pk(ck_key_type_t m)
+static NLC_INLINE gnutls_pk_algorithm_t key_type_to_pk(ck_key_type_t m)
 {
 	if (m == CKK_RSA)
 		return GNUTLS_PK_RSA;
@@ -196,7 +196,7 @@ static GOTV_INLINE gnutls_pk_algorithm_t key_type_to_pk(ck_key_type_t m)
 		return GNUTLS_PK_UNKNOWN;
 }
 
-static GOTV_INLINE int pk_to_genmech(gnutls_pk_algorithm_t pk, ck_key_type_t *type)
+static NLC_INLINE int pk_to_genmech(gnutls_pk_algorithm_t pk, ck_key_type_t *type)
 {
 	if (pk == GNUTLS_PK_DSA) {
 		*type = CKK_DSA;
@@ -350,7 +350,7 @@ _gnutls_pkcs11_get_random(struct ck_function_list *module,
 
 const char *pkcs11_strerror(ck_rv_t rv);
 
-GOTV_INLINE static bool is_object_pkcs11_url(const char *url)
+NLC_INLINE static bool is_object_pkcs11_url(const char *url)
 {
 	if (strstr(url, "id=") != 0 || strstr(url, "object=") != 0)
 		return 1;

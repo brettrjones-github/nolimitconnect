@@ -489,11 +489,11 @@ _GL_WARN_ON_USE (faccessat, "faccessat is not portable - "
 _GL_FUNCDECL_SYS (fchdir, int, (int /*fd*/));
 
 /* Gnulib internal hooks needed to maintain the fchdir metadata.  */
-GOTV_EXTERN_C int _gl_register_fd (int fd, const char *filename)
+NLC_EXTERN_C int _gl_register_fd (int fd, const char *filename)
      _GL_ARG_NONNULL ((2));
-GOTV_EXTERN_C void _gl_unregister_fd (int fd);
-GOTV_EXTERN_C int _gl_register_dup (int oldfd, int newfd);
-GOTV_EXTERN_C const char *_gl_directory_name (int fd);
+NLC_EXTERN_C void _gl_unregister_fd (int fd);
+NLC_EXTERN_C int _gl_register_dup (int oldfd, int newfd);
+NLC_EXTERN_C const char *_gl_directory_name (int fd);
 
 # else
 #  if !@HAVE_DECL_FCHDIR@

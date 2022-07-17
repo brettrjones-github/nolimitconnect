@@ -45,7 +45,7 @@
 //#endif
 //#endif
 
-#define NO_RETURN		GOTV_NO_RETURN
+#define NO_RETURN		NLC_NO_RETURN
 
 
 

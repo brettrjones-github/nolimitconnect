@@ -120,7 +120,7 @@ static const AVOption options[] = {
  * Helper functions
  ****************************************************************************/
 
-static GOTV_INLINE BC_MEDIA_SUBTYPE id2subtype(CHDContext *priv, enum AVCodecID id)
+static NLC_INLINE BC_MEDIA_SUBTYPE id2subtype(CHDContext *priv, enum AVCodecID id)
 {
     switch (id) {
     case AV_CODEC_ID_MPEG4:
@@ -421,7 +421,7 @@ static av_cold int init(AVCodecContext *avctx)
 }
 
 
-static GOTV_INLINE CopyRet copy_frame(AVCodecContext *avctx,
+static NLC_INLINE CopyRet copy_frame(AVCodecContext *avctx,
                                  BC_DTS_PROC_OUT *output,
                                  AVFrame *frame, int *got_frame)
 {

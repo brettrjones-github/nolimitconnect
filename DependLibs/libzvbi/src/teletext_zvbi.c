@@ -68,7 +68,7 @@ extern const char _zvbi_intl_domainname[];
 static const vbi_color
 flof_link_col[4] = { VBI_RED, VBI_GREEN, VBI_YELLOW, VBI_CYAN };
 
-static GOTV_INLINE void
+static NLC_INLINE void
 flof_navigation_bar(vbi_page *pg, cache_page *vtp)
 {
 	vbi_char ac;
@@ -106,7 +106,7 @@ flof_navigation_bar(vbi_page *pg, cache_page *vtp)
 	}
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 flof_links(vbi_page *pg, cache_page *vtp)
 {
 	vbi_char *acp = pg->text + LAST_ROW;
@@ -239,14 +239,14 @@ top_label(vbi_decoder *vbi, vbi_page *pg, struct vbi_font_descr *font,
 	return FALSE;
 }
 
-static GOTV_INLINE vbi_pgno
+static NLC_INLINE vbi_pgno
 add_modulo			(vbi_pgno		pgno,
 				 int			incr)
 {
 	return ((pgno - 0x100 + incr) & 0x7FF) + 0x100;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 top_navigation_bar(vbi_decoder *vbi, vbi_page *pg,
 		   cache_page *vtp)
 {
@@ -870,7 +870,7 @@ keyword(vbi_link *ld, uint8_t *p, int column,
 	return i + j;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 zap_links(vbi_page *pg, int row)
 {
 	unsigned char buffer[43]; /* One row, two spaces on the sides and NUL */
@@ -1002,7 +1002,7 @@ vbi_resolve_home(vbi_page *pg, vbi_link *ld)
 	ld->subno = pg->nav_link[5].subno;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 ait_title(vbi_decoder *vbi, cache_page *vtp, struct ttx_ait_title *ait, char *buf)
 {
 	struct ttx_magazine *mag;
@@ -2315,7 +2315,7 @@ post_enhance(vbi_page *pg, int display_rows)
 	}
 }
 
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 default_object_invocation	(vbi_decoder *		vbi,
 				 struct ttx_magazine *	mag,
 				 struct ttx_extension *	ext,

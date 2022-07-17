@@ -167,7 +167,7 @@ NONSHARABLE_CLASS(CEpocAudio) : public CBase, public MStreamObs, public MStreamP
     {
     public:
     	static void* NewL(TInt BufferSize, TInt aFill);
-    	GOTV_INLINE static CEpocAudio& Current(SDL_AudioDevice* thisdevice);
+    	NLC_INLINE static CEpocAudio& Current(SDL_AudioDevice* thisdevice);
     	
     	static void Free(SDL_AudioDevice* thisdevice);
  		
@@ -207,7 +207,7 @@ NONSHARABLE_CLASS(CEpocAudio) : public CBase, public MStreamObs, public MStreamP
     #endif
     };
 
-GOTV_INLINE CEpocAudio& CEpocAudio::Current(SDL_AudioDevice* thisdevice)
+NLC_INLINE CEpocAudio& CEpocAudio::Current(SDL_AudioDevice* thisdevice)
 	{
 	return *static_cast<CEpocAudio*>((void*)thisdevice->hidden);
 	}

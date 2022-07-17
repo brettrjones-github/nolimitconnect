@@ -96,7 +96,7 @@ amm-info@iis.fraunhofer.de
  * Inline definitions
  **************************************************/
 
-#define SCALE_INLINE GOTV_INLINE
+#define SCALE_INLINE NLC_INLINE
 
 
 #if defined(__mips__)	/* cppp replaced: elif */

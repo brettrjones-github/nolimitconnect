@@ -48,7 +48,7 @@ private:
 
 private:
     qint64                      m_pos = 0;
-    QByteArray                m_buffer;
-    QAudioFormat             m_AudioFormat;
+    QByteArray                  m_buffer;
+    QAudioFormat                m_AudioFormat;
 };
 

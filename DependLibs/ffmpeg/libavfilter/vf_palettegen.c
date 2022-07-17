@@ -394,7 +394,7 @@ static AVFrame *get_palette_frame(AVFilterContext *ctx)
  * It keeps the NBITS least significant bit of each component to make it
  * "random" even if the scene doesn't have much different colors.
  */
-static GOTV_INLINE unsigned color_hash(uint32_t color)
+static NLC_INLINE unsigned color_hash(uint32_t color)
 {
     const uint8_t r = color >> 16 & ((1<<NBITS)-1);
     const uint8_t g = color >>  8 & ((1<<NBITS)-1);

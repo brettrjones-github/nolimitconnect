@@ -214,7 +214,7 @@ static int request_frame(AVFilterLink *outlink)
  * @param ns        number of samples to copy
  * @param bps       bytes per sample
  */
-static GOTV_INLINE void copy_samples(int nb_inputs, struct amerge_input in[],
+static NLC_INLINE void copy_samples(int nb_inputs, struct amerge_input in[],
                                 int *route, uint8_t *ins[],
                                 uint8_t **outs, int ns, int bps)
 {

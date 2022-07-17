@@ -6763,7 +6763,7 @@ xmlParseReference(xmlParserCtxtPtr ctxt) {
 	val = ent->content;
 	if (val == NULL) return;
 	/*
-	 * GOTV_INLINE the entity.
+	 * NLC_INLINE the entity.
 	 */
 	if ((ctxt->sax != NULL) && (ctxt->sax->characters != NULL) &&
 	    (!ctxt->disableSAX))

@@ -45,22 +45,22 @@ class NOVTABLE waServiceFactory: public Dispatchable {
 
 // ----------------------------------------------------------------------------
 
-GOTV_INLINE FOURCC waServiceFactory::getServiceType() {
+NLC_INLINE FOURCC waServiceFactory::getServiceType() {
   FOURCC __retval = _call(WASERVICEFACTORY_GETSERVICETYPE, (FOURCC)NULL);
   return __retval;
 }
 
-GOTV_INLINE const char *waServiceFactory::getServiceName() {
+NLC_INLINE const char *waServiceFactory::getServiceName() {
   const char *__retval = _call(WASERVICEFACTORY_GETSERVICENAME, (const char *)0);
   return __retval;
 }
 
-GOTV_INLINE GUID waServiceFactory::getGuid() {
+NLC_INLINE GUID waServiceFactory::getGuid() {
   GUID __retval = _call(WASERVICEFACTORY_GETGUID, INVALID_GUID);
   return __retval;
 }
 
-GOTV_INLINE void *waServiceFactory::getInterface(int global_lock) {
+NLC_INLINE void *waServiceFactory::getInterface(int global_lock) {
   void *__retval = _call(WASERVICEFACTORY_GETINTERFACE, (void *)NULL, global_lock);
   
 #if 0 // unused in Winamp 5
@@ -72,22 +72,22 @@ GOTV_INLINE void *waServiceFactory::getInterface(int global_lock) {
   return __retval;
 }
 
-GOTV_INLINE int waServiceFactory::supportNonLockingGetInterface() {
+NLC_INLINE int waServiceFactory::supportNonLockingGetInterface() {
   int __retval = _call(WASERVICEFACTORY_SUPPORTNONLOCKINGGETINTERFACE, (int)0);
   return __retval;
 }
 
-GOTV_INLINE int waServiceFactory::releaseInterface(void *ifc) {
+NLC_INLINE int waServiceFactory::releaseInterface(void *ifc) {
   int __retval = _call(WASERVICEFACTORY_RELEASEINTERFACE, (int)0, ifc);
   return __retval;
 }
 
-GOTV_INLINE const wchar_t *waServiceFactory::getTestString() {
+NLC_INLINE const wchar_t *waServiceFactory::getTestString() {
   return _call(WASERVICEFACTORY_GETTESTSTRING, (const wchar_t *)0);
 
 }
 
-GOTV_INLINE int waServiceFactory::serviceNotify(int msg, intptr_t param1, intptr_t param2) {
+NLC_INLINE int waServiceFactory::serviceNotify(int msg, intptr_t param1, intptr_t param2) {
   int __retval = _call(WASERVICEFACTORY_SERVICENOTIFY, (int)0, msg, param1, param2);
   return __retval;
 }

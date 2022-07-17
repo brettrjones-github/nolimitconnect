@@ -47,7 +47,7 @@ typedef char *caddr_t;
 #define _RPC_ZDR_H 1
 #define _RPC_AUTH_H 1
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* we dont need these */
 typedef void CLIENT;
@@ -109,7 +109,7 @@ struct opaque_auth {
 	caddr_t  oa_base;
 	uint32_t oa_length;
 };
-GOTV_EXTERN struct opaque_auth _null_auth;
+NLC_EXTERN struct opaque_auth _null_auth;
 
 struct AUTH {
 	struct opaque_auth	ah_cred;
@@ -314,6 +314,6 @@ void libnfs_auth_destroy(struct AUTH *auth);
 
 #endif // TARGET_OS_WINDOWS
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif //_LIBNFS_ZDR_H_

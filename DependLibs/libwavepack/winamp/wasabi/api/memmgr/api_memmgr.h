@@ -48,22 +48,22 @@ public:
 	}
 };
 
-GOTV_INLINE void *api_memmgr::sysMalloc(size_t size)
+NLC_INLINE void *api_memmgr::sysMalloc(size_t size)
 {
 	return _call(API_MEMMGR_SYSMALLOC, (void *)NULL, size);
 }
 
-GOTV_INLINE void api_memmgr::sysFree(void *ptr)
+NLC_INLINE void api_memmgr::sysFree(void *ptr)
 {
 	_voidcall(API_MEMMGR_SYSFREE, ptr);
 }
 
-GOTV_INLINE void *api_memmgr::sysRealloc(void *ptr, size_t newsize)
+NLC_INLINE void *api_memmgr::sysRealloc(void *ptr, size_t newsize)
 {
 	return _call(API_MEMMGR_SYSREALLOC, (void *)NULL, ptr, newsize);
 }
 
-GOTV_INLINE void api_memmgr::sysMemChanged(void *ptr)
+NLC_INLINE void api_memmgr::sysMemChanged(void *ptr)
 {
 	_voidcall(API_MEMMGR_SYSMEMCHANGED, ptr);
 }

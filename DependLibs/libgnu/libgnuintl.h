@@ -18,7 +18,7 @@
 #define _LIBINTL_H 1
 #include <libgnu/config_libgnu.h>
 
-#define LIBINTL_DLL_EXPORTED  GOTV_EXPORT
+#define LIBINTL_DLL_EXPORTED  NLC_EXPORT
 #ifndef _MSC_VER
 # include  <libgnu/locale_gnu.h> // windows already has a locale.h
 #else
@@ -98,7 +98,7 @@ extern LIBINTL_DLL_EXPORTED int libintl_version;
    would be unacceptable.
 
    The redirection happens by default through macros in C, so that &gettext
-   is independent of the compilation unit, but through GOTV_INLINE functions in
+   is independent of the compilation unit, but through NLC_INLINE functions in
    C++, in order not to interfere with the name mangling of class fields or
    class methods called 'gettext'.  */
 
@@ -141,7 +141,7 @@ extern LIBINTL_DLL_EXPORTED int libintl_version;
 #ifdef _INTL_REDIRECT_INLINE
 extern LIBINTL_DLL_EXPORTED char *libintl_gettext (const char *__msgid)
        _INTL_MAY_RETURN_STRING_ARG (1);
-static GOTV_INLINE char *gettext (const char *__msgid)
+static NLC_INLINE char *gettext (const char *__msgid)
 {
   return libintl_gettext (__msgid);
 }
@@ -159,7 +159,7 @@ extern LIBINTL_DLL_EXPORTED char *gettext (const char *__msgid)
 #ifdef _INTL_REDIRECT_INLINE
 extern LIBINTL_DLL_EXPORTED char *libintl_dgettext (const char *__domainname, const char *__msgid)
        _INTL_MAY_RETURN_STRING_ARG (2);
-static GOTV_INLINE char *dgettext (const char *__domainname, const char *__msgid)
+static NLC_INLINE char *dgettext (const char *__domainname, const char *__msgid)
 {
   return libintl_dgettext (__domainname, __msgid);
 }
@@ -178,7 +178,7 @@ extern LIBINTL_DLL_EXPORTED char *dgettext (const char *__domainname, const char
 extern LIBINTL_DLL_EXPORTED char *libintl_dcgettext (const char *__domainname, const char *__msgid,
                                 int __category)
        _INTL_MAY_RETURN_STRING_ARG (2);
-static GOTV_INLINE char *dcgettext (const char *__domainname, const char *__msgid,
+static NLC_INLINE char *dcgettext (const char *__domainname, const char *__msgid,
                                int __category)
 {
   return libintl_dcgettext (__domainname, __msgid, __category);
@@ -200,7 +200,7 @@ extern LIBINTL_DLL_EXPORTED char *dcgettext (const char *__domainname, const cha
 extern LIBINTL_DLL_EXPORTED char *libintl_ngettext (const char *__msgid1, const char *__msgid2,
                                unsigned long int __n)
        _INTL_MAY_RETURN_STRING_ARG (1) _INTL_MAY_RETURN_STRING_ARG (2);
-static GOTV_INLINE char *ngettext (const char *__msgid1, const char *__msgid2,
+static NLC_INLINE char *ngettext (const char *__msgid1, const char *__msgid2,
                               unsigned long int __n)
 {
   return libintl_ngettext (__msgid1, __msgid2, __n);
@@ -221,7 +221,7 @@ extern LIBINTL_DLL_EXPORTED char *ngettext (const char *__msgid1, const char *__
 extern LIBINTL_DLL_EXPORTED char *libintl_dngettext (const char *__domainname, const char *__msgid1,
                                 const char *__msgid2, unsigned long int __n)
        _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
-static GOTV_INLINE char *dngettext (const char *__domainname, const char *__msgid1,
+static NLC_INLINE char *dngettext (const char *__domainname, const char *__msgid1,
                                const char *__msgid2, unsigned long int __n)
 {
   return libintl_dngettext (__domainname, __msgid1, __msgid2, __n);
@@ -244,7 +244,7 @@ extern LIBINTL_DLL_EXPORTED char *libintl_dcngettext (const char *__domainname,
                                  const char *__msgid1, const char *__msgid2,
                                  unsigned long int __n, int __category)
        _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
-static GOTV_INLINE char *dcngettext (const char *__domainname,
+static NLC_INLINE char *dcngettext (const char *__domainname,
                                 const char *__msgid1, const char *__msgid2,
                                 unsigned long int __n, int __category)
 {
@@ -268,7 +268,7 @@ extern LIBINTL_DLL_EXPORTED char *dcngettext (const char *__domainname,
    If DOMAINNAME is "", reset to the default of "messages".  */
 #ifdef _INTL_REDIRECT_INLINE
 extern LIBINTL_DLL_EXPORTED char * libintl_textdomain (const char *__domainname);
-static GOTV_INLINE char *textdomain (const char *__domainname)
+static NLC_INLINE char *textdomain (const char *__domainname)
 {
   return libintl_textdomain (__domainname);
 }
@@ -285,7 +285,7 @@ extern LIBINTL_DLL_EXPORTED char *textdomain (const char *__domainname)
 #ifdef _INTL_REDIRECT_INLINE
 extern LIBINTL_DLL_EXPORTED char *libintl_bindtextdomain (const char *__domainname,
                                      const char *__dirname);
-static GOTV_INLINE char *bindtextdomain (const char *__domainname,
+static NLC_INLINE char *bindtextdomain (const char *__domainname,
                                     const char *__dirname)
 {
   return libintl_bindtextdomain (__domainname, __dirname);
@@ -303,7 +303,7 @@ extern LIBINTL_DLL_EXPORTED char *bindtextdomain (const char *__domainname, cons
 #ifdef _INTL_REDIRECT_INLINE
 extern LIBINTL_DLL_EXPORTED char *libintl_bind_textdomain_codeset (const char *__domainname,
                                               const char *__codeset);
-static GOTV_INLINE char *bind_textdomain_codeset (const char *__domainname,
+static NLC_INLINE char *bind_textdomain_codeset (const char *__domainname,
                                              const char *__codeset)
 {
   return libintl_bind_textdomain_codeset (__domainname, __codeset);

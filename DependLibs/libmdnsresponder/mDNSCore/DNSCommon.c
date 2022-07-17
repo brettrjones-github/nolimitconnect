@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-// Set mDNS_InstantiateInlines to tell mDNSEmbeddedAPI.h to instantiate GOTV_INLINE functions, if necessary
+// Set mDNS_InstantiateInlines to tell mDNSEmbeddedAPI.h to instantiate NLC_INLINE functions, if necessary
 #define mDNS_InstantiateInlines 1
 #include "DNSCommon.h"
 #include "CryptoAlg.h"

@@ -1,8 +1,8 @@
 #pragma once
 #include <AppDependLibrariesConfig.h>
 
-# define LZMA_API_EXPORT		GOTV_EXPORT
-# define LZMA_RESTRICT			GOTV_RESTRICT
+# define LZMA_API_EXPORT		NLC_EXPORT
+# define LZMA_RESTRICT			NLC_RESTRICT
 
 #define LZMA_API(type) LZMA_API_EXPORT type LZMA_API_CALL
 #define LZMA_API_STATIC			1

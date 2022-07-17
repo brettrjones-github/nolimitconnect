@@ -86,7 +86,7 @@ static Boolean		gSaveCSVis = true;
 		{ 0x41FA, 0x0014, 0x209F, (p1), (p2), (p3), 0x41FA, \
 		  0x0008, 0x2F10, 0x4E75, 0x0000, 0x0000, 0x0000 }
 
-/* ControlStrip GOTV_INLINE glue for PowerPC */
+/* ControlStrip NLC_INLINE glue for PowerPC */
 static pascal Boolean SBIsControlStripVisible(void)
 {
 	static short procData[] = TWOWORDSTUB(0x7000, 0xAAF2);

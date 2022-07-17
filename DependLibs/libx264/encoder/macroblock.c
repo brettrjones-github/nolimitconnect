@@ -32,7 +32,7 @@
 /* These chroma DC functions don't have assembly versions and are only used here. */
 
 #define ZIG(i,y,x) level[i] = dct[x*2+y];
-static GOTV_INLINE void zigzag_scan_2x2_dc( dctcoef level[4], dctcoef dct[4] )
+static NLC_INLINE void zigzag_scan_2x2_dc( dctcoef level[4], dctcoef dct[4] )
 {
     ZIG(0,0,0)
     ZIG(1,0,1)
@@ -41,7 +41,7 @@ static GOTV_INLINE void zigzag_scan_2x2_dc( dctcoef level[4], dctcoef dct[4] )
 }
 #undef ZIG
 
-static GOTV_INLINE void zigzag_scan_2x4_dc( dctcoef level[8], dctcoef dct[8] )
+static NLC_INLINE void zigzag_scan_2x4_dc( dctcoef level[8], dctcoef dct[8] )
 {
     level[0] = dct[0];
     level[1] = dct[2];
@@ -60,7 +60,7 @@ static GOTV_INLINE void zigzag_scan_2x4_dc( dctcoef level[8], dctcoef dct[8] )
     int d3 = dct[2] - dct[3]; \
     int dmf = dequant_mf[i_qp%6][0] << i_qp/6;
 
-static GOTV_INLINE void idct_dequant_2x2_dc( dctcoef dct[4], dctcoef dct4x4[4][16], int dequant_mf[6][16], int i_qp )
+static NLC_INLINE void idct_dequant_2x2_dc( dctcoef dct[4], dctcoef dct4x4[4][16], int dequant_mf[6][16], int i_qp )
 {
     IDCT_DEQUANT_2X2_START
     dct4x4[0][0] = (d0 + d1) * dmf >> 5;
@@ -69,7 +69,7 @@ static GOTV_INLINE void idct_dequant_2x2_dc( dctcoef dct[4], dctcoef dct4x4[4][1
     dct4x4[3][0] = (d2 - d3) * dmf >> 5;
 }
 
-static GOTV_INLINE void idct_dequant_2x2_dconly( dctcoef dct[4], int dequant_mf[6][16], int i_qp )
+static NLC_INLINE void idct_dequant_2x2_dconly( dctcoef dct[4], int dequant_mf[6][16], int i_qp )
 {
     IDCT_DEQUANT_2X2_START
     dct[0] = (d0 + d1) * dmf >> 5;
@@ -79,7 +79,7 @@ static GOTV_INLINE void idct_dequant_2x2_dconly( dctcoef dct[4], int dequant_mf[
 }
 #undef IDCT_2X2_DEQUANT_START
 
-static GOTV_INLINE void dct2x2dc( dctcoef d[4], dctcoef dct4x4[4][16] )
+static NLC_INLINE void dct2x2dc( dctcoef d[4], dctcoef dct4x4[4][16] )
 {
     int d0 = dct4x4[0][0] + dct4x4[1][0];
     int d1 = dct4x4[2][0] + dct4x4[3][0];

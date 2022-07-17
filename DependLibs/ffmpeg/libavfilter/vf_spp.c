@@ -217,7 +217,7 @@ static void store_slice16_c(uint16_t *dst, const int16_t *src,
     }
 }
 
-static GOTV_INLINE void add_block(uint16_t *dst, int linesize, const int16_t block[64])
+static NLC_INLINE void add_block(uint16_t *dst, int linesize, const int16_t block[64])
 {
     int y;
 

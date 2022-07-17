@@ -25,7 +25,7 @@
 
 #include <glib.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef enum {
     RSVG_SIZE_ZOOM,
@@ -47,6 +47,6 @@ struct RsvgSizeCallbackData {
 G_GNUC_INTERNAL
 void _rsvg_size_callback (int *width, int *height, gpointer data);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* RSVG_SIZE_CALLBACK_H */

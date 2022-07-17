@@ -133,7 +133,7 @@ static av_cold int wma_decode_init(AVCodecContext *avctx)
  * expense (linear interpolation approximately doubles the number of
  * bits of precision).
  */
-static GOTV_INLINE float pow_m1_4(WMACodecContext *s, float x)
+static NLC_INLINE float pow_m1_4(WMACodecContext *s, float x)
 {
     union {
         float f;

@@ -41,14 +41,14 @@ int _gnutls_sign_algorithm_write_params(gnutls_session_t session,
 int _gnutls_session_sign_algo_enabled(gnutls_session_t session,
 				      gnutls_sign_algorithm_t sig);
 
-static GOTV_INLINE void
+static NLC_INLINE void
 gnutls_sign_algorithm_set_server(gnutls_session_t session,
 				 gnutls_sign_algorithm_t sign)
 {
 	session->security_parameters.server_sign_algo = sign;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 gnutls_sign_algorithm_set_client(gnutls_session_t session,
 				 gnutls_sign_algorithm_t sign)
 {

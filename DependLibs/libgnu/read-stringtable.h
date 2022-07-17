@@ -21,6 +21,6 @@
 #include "read-catalog-abstract.h"
 
 /* Describes a .strings file parser.  */
-extern GOTV_DLL_VARIABLE const struct catalog_input_format input_format_stringtable;
+extern NLC_DLL_VARIABLE const struct catalog_input_format input_format_stringtable;
 
 #endif /* _READ_STRINGTABLE_H */

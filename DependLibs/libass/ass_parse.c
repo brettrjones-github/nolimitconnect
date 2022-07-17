@@ -35,28 +35,28 @@ struct arg {
     char *start, *end;
 };
 
-static GOTV_INLINE int argtoi(struct arg arg)
+static NLC_INLINE int argtoi(struct arg arg)
 {
     int value;
     mystrtoi(&arg.start, &value);
     return value;
 }
 
-static GOTV_INLINE long long argtoll(struct arg arg)
+static NLC_INLINE long long argtoll(struct arg arg)
 {
     long long value;
     mystrtoll(&arg.start, &value);
     return value;
 }
 
-static GOTV_INLINE double argtod(struct arg arg)
+static NLC_INLINE double argtod(struct arg arg)
 {
     double value;
     mystrtod(&arg.start, &value);
     return value;
 }
 
-static GOTV_INLINE void push_arg(struct arg *args, int *nargs, char *start, char *end)
+static NLC_INLINE void push_arg(struct arg *args, int *nargs, char *start, char *end)
 {
     if (*nargs <= MAX_VALID_NARGS) {
         rskip_spaces(&end, start);
@@ -71,7 +71,7 @@ static GOTV_INLINE void push_arg(struct arg *args, int *nargs, char *start, char
  * \brief Check if starting part of (*p) matches sample.
  * If true, shift p to the first symbol after the matching part.
  */
-static GOTV_INLINE int mystrcmp(char **p, const char *sample)
+static NLC_INLINE int mystrcmp(char **p, const char *sample)
 {
     int len = strlen(sample);
     if (strncmp(*p, sample, len) == 0) {
@@ -184,7 +184,7 @@ static void change_color(uint32_t *var, uint32_t new, double pwr)
 }
 
 // like change_color, but for alpha component only
-GOTV_INLINE void change_alpha(uint32_t *var, int32_t new, double pwr)
+NLC_INLINE void change_alpha(uint32_t *var, int32_t new, double pwr)
 {
     *var = (*var & 0xFFFFFF00) | (uint8_t) (_a(*var) * (1 - pwr) + new * pwr);
 }
@@ -196,7 +196,7 @@ GOTV_INLINE void change_alpha(uint32_t *var, int32_t new, double pwr)
  * \return result of multiplication
  * Parameters and result are limited by 0xFF.
  */
-GOTV_INLINE uint32_t mult_alpha(uint32_t a, uint32_t b)
+NLC_INLINE uint32_t mult_alpha(uint32_t a, uint32_t b)
 {
     return 0xFF - (0xFF - a) * (0xFF - b) / 0xFF;
 }

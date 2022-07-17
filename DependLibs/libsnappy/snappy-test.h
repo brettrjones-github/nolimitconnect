@@ -158,7 +158,7 @@ namespace file {
     return DummyStatus();
   }
 
-  GOTV_INLINE DummyStatus SetContents(
+  NLC_INLINE DummyStatus SetContents(
       const std::string& filename, const std::string& str, int unused) {
     FILE* fp = fopen(filename.c_str(), "wb");
     if (fp == NULL) {
@@ -230,7 +230,7 @@ class ACMRandom {
   uint32 seed_;
 };
 
-GOTV_INLINE int32 ACMRandom::Next() {
+NLC_INLINE int32 ACMRandom::Next() {
   static const uint64 A = 16807;  // bits 14, 8, 7, 5, 2, 1, 0
   // We are computing
   //       seed_ = (seed_ * A) % M,    where M = 2^31-1
@@ -250,7 +250,7 @@ GOTV_INLINE int32 ACMRandom::Next() {
   return seed_;
 }
 
-GOTV_INLINE int32 ACMRandom::Skewed(int max_log) {
+NLC_INLINE int32 ACMRandom::Skewed(int max_log) {
   const int32 base = (Next() - 1) % (max_log+1);
   return (Next() - 1) & ((1u << base)-1);
 }
@@ -463,7 +463,7 @@ class ZLib {
 
 DECLARE_bool(run_microbenchmarks);
 
-static GOTV_INLINE void RunSpecifiedBenchmarks() {
+static NLC_INLINE void RunSpecifiedBenchmarks() {
   if (!FLAGS_run_microbenchmarks) {
     return;
   }
@@ -488,7 +488,7 @@ static GOTV_INLINE void RunSpecifiedBenchmarks() {
 
 #ifndef HAVE_GTEST
 
-static GOTV_INLINE int RUN_ALL_TESTS() {
+static NLC_INLINE int RUN_ALL_TESTS() {
   fprintf(stderr, "Running correctness tests.\n");
   snappy::Test_CorruptedTest_VerifyCorrupted();
   snappy::Test_Snappy_SimpleTests();

@@ -105,7 +105,7 @@ typedef int vbi_subno;
  * @return
  * BCD number.
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_dec2bcd(unsigned int dec)
 //{
 //	return (dec % 10) + ((dec / 10) % 10) * 16 + ((dec / 100) % 10) * 256;
@@ -129,7 +129,7 @@ typedef int vbi_subno;
  * Decimal number. The result is undefined when the bcd number contains
  * hex digits 0xA ... 0xF.
  **/
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_bcd2dec(unsigned int bcd)
 //{
 //	return (bcd & 15) + ((bcd >> 4) & 15) * 10 + ((bcd >> 8) & 15) * 100;
@@ -155,7 +155,7 @@ typedef int vbi_subno;
  * Packed bcd number. The result is undefined when any of the arguments
  * contain hex digits 0xA ... 0xF.
  */
-//GOTV_INLINE unsigned int
+//NLC_INLINE unsigned int
 //vbi_add_bcd(unsigned int a, unsigned int b)
 //{
 //	unsigned int t;
@@ -179,7 +179,7 @@ typedef int vbi_subno;
  * @return
  * @c FALSE if @a bcd contains hex digits 0xA ... 0xF.
  */
-//GOTV_INLINE vbi_bool
+//NLC_INLINE vbi_bool
 //vbi_is_bcd(unsigned int bcd)
 //{
 //	static const unsigned int x = 0x06666666;
@@ -202,7 +202,7 @@ typedef int vbi_subno;
  *
  * @since 0.2.28
  */
-//GOTV_INLINE vbi_bool
+//NLC_INLINE vbi_bool
 //vbi_bcd_digits_greater		(unsigned int		bcd,
 //				 unsigned int		maximum)
 //{

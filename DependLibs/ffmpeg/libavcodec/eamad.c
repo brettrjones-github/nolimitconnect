@@ -89,7 +89,7 @@ static inline void comp(unsigned char *dst, ptrdiff_t dst_stride,
             dst[j*dst_stride + i] = av_clip_uint8(src[j*src_stride + i] + add);
 }
 
-static GOTV_INLINE void comp_block(MadContext *t, AVFrame *frame,
+static NLC_INLINE void comp_block(MadContext *t, AVFrame *frame,
                               int mb_x, int mb_y,
                               int j, int mv_x, int mv_y, int add)
 {
@@ -113,7 +113,7 @@ static GOTV_INLINE void comp_block(MadContext *t, AVFrame *frame,
     }
 }
 
-static GOTV_INLINE void idct_put(MadContext *t, AVFrame *frame, int16_t *block,
+static NLC_INLINE void idct_put(MadContext *t, AVFrame *frame, int16_t *block,
                             int mb_x, int mb_y, int j)
 {
     if (j < 4) {
@@ -128,7 +128,7 @@ static GOTV_INLINE void idct_put(MadContext *t, AVFrame *frame, int16_t *block,
     }
 }
 
-static GOTV_INLINE int decode_block_intra(MadContext *s, int16_t * block)
+static NLC_INLINE int decode_block_intra(MadContext *s, int16_t * block)
 {
     int level, i, j, run;
     RLTable *rl = &ff_rl_mpeg1;

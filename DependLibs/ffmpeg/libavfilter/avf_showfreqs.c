@@ -285,7 +285,7 @@ static float get_bsize(ShowFreqsContext *s, int f)
     return 1.;
 }
 
-static GOTV_INLINE void plot_freq(ShowFreqsContext *s, int ch,
+static NLC_INLINE void plot_freq(ShowFreqsContext *s, int ch,
                              double a, int f, uint8_t fg[4], int *prev_y,
                              AVFrame *out, AVFilterLink *outlink)
 {

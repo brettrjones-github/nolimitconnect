@@ -52,7 +52,7 @@
    __cygwin_environ variable on cygwin64:
    <https://cygwin.com/ml/cygwin/2013-06/msg00228.html>.  */
 #if defined __CYGWIN__ && defined __x86_64__
-extern GOTV_DLL_VARIABLE char **environ;
+extern NLC_DLL_VARIABLE char **environ;
 #endif
 
 

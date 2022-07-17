@@ -495,23 +495,23 @@ enum input_query_e
  * Prototypes
  *****************************************************************************/
 
-GOTV_API input_thread_t * libgotvptop_input_Create( gotvptop_object_t *p_parent, input_item_t *,
+NLC_API input_thread_t * libgotvptop_input_Create( gotvptop_object_t *p_parent, input_item_t *,
                                        const char *psz_log, input_resource_t *,
                                        gotvptop_renderer_item_t* p_renderer ) GOTV_USED;
 #define input_Create(a,b,c,d,e) libgotvptop_input_Create(GOTV_OBJECT(a),b,c,d,e)
 
-GOTV_API int input_Start( input_thread_t * );
+NLC_API int input_Start( input_thread_t * );
 
-GOTV_API void input_Stop( input_thread_t * );
+NLC_API void input_Stop( input_thread_t * );
 
-GOTV_API int libgotvptop_input_Read( gotvptop_object_t *, input_item_t * );
+NLC_API int libgotvptop_input_Read( gotvptop_object_t *, input_item_t * );
 #define input_Read(a,b) libgotvptop_input_Read(GOTV_OBJECT(a),b)
 
-GOTV_API int input_vaControl( input_thread_t *, int i_query, va_list  );
+NLC_API int input_vaControl( input_thread_t *, int i_query, va_list  );
 
-GOTV_API int input_Control( input_thread_t *, int i_query, ...  );
+NLC_API int input_Control( input_thread_t *, int i_query, ...  );
 
-GOTV_API void input_Close( input_thread_t * );
+NLC_API void input_Close( input_thread_t * );
 
 /**
  * Create a new input_thread_t and start it.
@@ -540,7 +540,7 @@ input_thread_t *libgotvptop_input_CreateAndStart( gotvptop_object_t *parent,
  * You have to keep a reference to the input or to the input_item_t until
  * you do not need it anymore.
  */
-GOTV_API input_item_t* input_GetItem( input_thread_t * ) GOTV_USED;
+NLC_API input_item_t* input_GetItem( input_thread_t * ) GOTV_USED;
 
 /**
  * It will return the current state of the input.
@@ -644,16 +644,16 @@ static inline int input_ModifyPcrSystem( input_thread_t *p_input, bool b_absolut
 }
 
 /* */
-GOTV_API decoder_t * input_DecoderCreate( gotvptop_object_t *, const es_format_t *, input_resource_t * ) GOTV_USED;
-GOTV_API void input_DecoderDelete( decoder_t * );
-GOTV_API void input_DecoderDecode( decoder_t *, block_t *, bool b_do_pace );
-GOTV_API void input_DecoderDrain( decoder_t * );
-GOTV_API void input_DecoderFlush( decoder_t * );
+NLC_API decoder_t * input_DecoderCreate( gotvptop_object_t *, const es_format_t *, input_resource_t * ) GOTV_USED;
+NLC_API void input_DecoderDelete( decoder_t * );
+NLC_API void input_DecoderDecode( decoder_t *, block_t *, bool b_do_pace );
+NLC_API void input_DecoderDrain( decoder_t * );
+NLC_API void input_DecoderFlush( decoder_t * );
 
 /**
  * This function creates a sane filename path.
  */
-GOTV_API char * input_CreateFilename( input_thread_t *, const char *psz_path, const char *psz_prefix, const char *psz_extension ) GOTV_USED;
+NLC_API char * input_CreateFilename( input_thread_t *, const char *psz_path, const char *psz_prefix, const char *psz_extension ) GOTV_USED;
 
 /**
  * It creates an empty input resource handler.
@@ -661,43 +661,43 @@ GOTV_API char * input_CreateFilename( input_thread_t *, const char *psz_path, co
  * The given object MUST stay alive as long as the input_resource_t is
  * not deleted.
  */
-GOTV_API input_resource_t * input_resource_New( gotvptop_object_t * ) GOTV_USED;
+NLC_API input_resource_t * input_resource_New( gotvptop_object_t * ) GOTV_USED;
 
 /**
  * It releases an input resource.
  */
-GOTV_API void input_resource_Release( input_resource_t * );
+NLC_API void input_resource_Release( input_resource_t * );
 
 /**
  * Forcefully destroys the video output (e.g. when the playlist is stopped).
  */
-GOTV_API void input_resource_TerminateVout( input_resource_t * );
+NLC_API void input_resource_TerminateVout( input_resource_t * );
 
 /**
  * This function releases all resources (object).
  */
-GOTV_API void input_resource_Terminate( input_resource_t * );
+NLC_API void input_resource_Terminate( input_resource_t * );
 
 /**
  * \return the current audio output if any.
  * Use gotvptop_object_release() to drop the reference.
  */
-GOTV_API audio_output_t *input_resource_HoldAout( input_resource_t * );
+NLC_API audio_output_t *input_resource_HoldAout( input_resource_t * );
 
 /**
  * This function creates or recycles an audio output.
  */
-GOTV_API audio_output_t *input_resource_GetAout( input_resource_t * );
+NLC_API audio_output_t *input_resource_GetAout( input_resource_t * );
 
 /**
  * This function retains or destroys an audio output.
  */
-GOTV_API void input_resource_PutAout( input_resource_t *, audio_output_t * );
+NLC_API void input_resource_PutAout( input_resource_t *, audio_output_t * );
 
 /**
  * Prevents the existing audio output (if any) from being recycled.
  */
-GOTV_API void input_resource_ResetAout( input_resource_t * );
+NLC_API void input_resource_ResetAout( input_resource_t * );
 
 /** @} */
 #endif

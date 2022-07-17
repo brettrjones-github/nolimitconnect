@@ -411,7 +411,7 @@ void md5_block_data_order (MD5_CTX *c, const void *p,int num);
 #  endif
 # elif defined(__GNUC__) && __GNUC__>=2 && !defined(OPENSSL_NO_ASM) && !defined(OPENSSL_NO_INLINE_ASM)
 /*
- * Some GNU C GOTV_INLINE assembler templates. Note that these are
+ * Some GNU C NLC_INLINE assembler templates. Note that these are
  * rotates by *constant* number of bits! But that's exactly
  * what we need here...
  *
@@ -447,7 +447,7 @@ void md5_block_data_order (MD5_CTX *c, const void *p,int num);
  * intrinsic function if available.
  */
 # if defined(__GNUC__) && __GNUC__>=2 && !defined(OPENSSL_NO_ASM) && !defined(OPENSSL_NO_INLINE_ASM)
-/* some GNU C GOTV_INLINE assembler templates by <appro@fy.chalmers.se> */
+/* some GNU C NLC_INLINE assembler templates by <appro@fy.chalmers.se> */
 #  if (defined(__i386) || defined(__i386__) || defined(__x86_64) || defined(__x86_64__)) && !defined(I386_ONLY)
 #   define BE_FETCH32(a)    ({ register unsigned int l=(a); \
                                asm (           \

@@ -29,7 +29,7 @@
 #include "bit_depth_template.c"
 
 #define DEF_PEL(OPNAME, OP)                                             \
-static GOTV_INLINE void FUNCC(OPNAME ## _pixels2)(uint8_t *block,            \
+static NLC_INLINE void FUNCC(OPNAME ## _pixels2)(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -42,7 +42,7 @@ static GOTV_INLINE void FUNCC(OPNAME ## _pixels2)(uint8_t *block,            \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void FUNCC(OPNAME ## _pixels4)(uint8_t *block,            \
+static NLC_INLINE void FUNCC(OPNAME ## _pixels4)(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \
@@ -55,7 +55,7 @@ static GOTV_INLINE void FUNCC(OPNAME ## _pixels4)(uint8_t *block,            \
     }                                                                   \
 }                                                                       \
                                                                         \
-static GOTV_INLINE void FUNCC(OPNAME ## _pixels8)(uint8_t *block,            \
+static NLC_INLINE void FUNCC(OPNAME ## _pixels8)(uint8_t *block,            \
                                              const uint8_t *pixels,     \
                                              ptrdiff_t line_size,       \
                                              int h)                     \

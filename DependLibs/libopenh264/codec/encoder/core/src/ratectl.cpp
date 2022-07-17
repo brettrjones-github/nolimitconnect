@@ -91,10 +91,10 @@ void RcFreeLayerMemory (SWelsSvcRc* pWelsSvcRc, CMemoryAlign* pMA) {
   }
 }
 
-static GOTV_INLINE int32_t RcConvertQp2QStep (int32_t iQP) {
+static NLC_INLINE int32_t RcConvertQp2QStep (int32_t iQP) {
   return g_kiQpToQstepTable[iQP];
 }
-static GOTV_INLINE int32_t RcConvertQStep2Qp (int32_t iQpStep) {
+static NLC_INLINE int32_t RcConvertQStep2Qp (int32_t iQpStep) {
   return WELS_ROUND ((6 * log (iQpStep * 1.0f / INT_MULTIPLY) / log (2.0) + 4.0));
 }
 

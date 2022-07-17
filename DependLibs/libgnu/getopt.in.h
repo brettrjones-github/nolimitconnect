@@ -38,7 +38,7 @@
 # define _@GUARD_PREFIX@_GETOPT_H 1
 #endif
 
-/* Ensure that GOTV_DLL_VARIABLE is defined.  Since on OSF/1 4.0 and Irix 6.5
+/* Ensure that NLC_DLL_VARIABLE is defined.  Since on OSF/1 4.0 and Irix 6.5
    <stdlib.h> includes <getopt.h>, and <config_libgnu.h> is not a prerequisite for
    using <stdlib.h>, this file can be included without a prior
    "#include <config_libgnu.h>".  */
@@ -142,7 +142,7 @@ extern "C" {
    Also, when 'ordering' is RETURN_IN_ORDER,
    each non-option ARGV-element is returned here.  */
 
-extern GOTV_DLL_VARIABLE char *optarg;
+extern NLC_DLL_VARIABLE char *optarg;
 
 /* Index in ARGV of the next element to be scanned.
    This is used for communication to and from the caller
@@ -156,16 +156,16 @@ extern GOTV_DLL_VARIABLE char *optarg;
    Otherwise, 'optind' communicates from one call to the next
    how much of ARGV has been scanned so far.  */
 
-extern GOTV_DLL_VARIABLE int optind;
+extern NLC_DLL_VARIABLE int optind;
 
 /* Callers store zero here to inhibit the error message 'getopt' prints
    for unrecognized options.  */
 
-extern GOTV_DLL_VARIABLE int opterr;
+extern NLC_DLL_VARIABLE int opterr;
 
 /* Set to an option character which was unrecognized.  */
 
-extern GOTV_DLL_VARIABLE int optopt;
+extern NLC_DLL_VARIABLE int optopt;
 
 #ifndef __need_getopt
 /* Describe the long-named options requested by the application.

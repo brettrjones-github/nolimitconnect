@@ -82,7 +82,7 @@ static int filter_frame(AVFilterLink *inlink, AVFrame *samples)
 
 #define MAX_DB 91
 
-static GOTV_INLINE double logdb(uint64_t v)
+static NLC_INLINE double logdb(uint64_t v)
 {
     double d = v / (double)(0x8000 * 0x8000);
     if (!v)

@@ -30,7 +30,7 @@
 
 
 
-static GOTV_INLINE int ilog2(uint32_t n)  // XXX: different compilers
+static NLC_INLINE int ilog2(uint32_t n)  // XXX: different compilers
 {
 #ifdef __GNUC__
     return __builtin_clz(n) ^ 31;
@@ -64,7 +64,7 @@ void rasterizer_init(RasterizerData *rst, int outline_error)
  * \param delta requested size increase
  * \return zero on error
  */
-static GOTV_INLINE int check_capacity(RasterizerData *rst, int index, size_t delta)
+static NLC_INLINE int check_capacity(RasterizerData *rst, int index, size_t delta)
 {
     delta += rst->size[index];
     if (rst->capacity[index] >= delta)
@@ -120,7 +120,7 @@ typedef struct {
     int64_t r2, er;
 } OutlineSegment;
 
-static GOTV_INLINE void segment_init(OutlineSegment *seg,
+static NLC_INLINE void segment_init(OutlineSegment *seg,
                                 OutlinePoint beg, OutlinePoint end,
                                 int32_t outline_error)
 {
@@ -135,7 +135,7 @@ static GOTV_INLINE void segment_init(OutlineSegment *seg,
     seg->er = outline_error * (int64_t)FFMAX(abs_x, abs_y);
 }
 
-static GOTV_INLINE int segment_subdivide(const OutlineSegment *seg,
+static NLC_INLINE int segment_subdivide(const OutlineSegment *seg,
                                     OutlinePoint beg, OutlinePoint pt)
 {
     int32_t x = pt.x - beg.x;
@@ -149,7 +149,7 @@ static GOTV_INLINE int segment_subdivide(const OutlineSegment *seg,
 /**
  * \brief Add new segment to polyline
  */
-static GOTV_INLINE int add_line(RasterizerData *rst, OutlinePoint pt0, OutlinePoint pt1)
+static NLC_INLINE int add_line(RasterizerData *rst, OutlinePoint pt0, OutlinePoint pt1)
 {
     int32_t x = pt1.x - pt0.x;
     int32_t y = pt1.y - pt0.y;
@@ -503,7 +503,7 @@ static void segment_split_vert(struct segment *line, struct segment *next, int32
     next->flags |= SEGFLAG_EXACT_TOP;
 }
 
-static GOTV_INLINE int segment_check_left(const struct segment *line, int32_t x)
+static NLC_INLINE int segment_check_left(const struct segment *line, int32_t x)
 {
     if (line->flags & SEGFLAG_EXACT_LEFT)
         return line->x_min >= x;
@@ -514,7 +514,7 @@ static GOTV_INLINE int segment_check_left(const struct segment *line, int32_t x)
     return cc >= 0;
 }
 
-static GOTV_INLINE int segment_check_right(const struct segment *line, int32_t x)
+static NLC_INLINE int segment_check_right(const struct segment *line, int32_t x)
 {
     if (line->flags & SEGFLAG_EXACT_RIGHT)
         return line->x_max <= x;
@@ -525,7 +525,7 @@ static GOTV_INLINE int segment_check_right(const struct segment *line, int32_t x
     return cc >= 0;
 }
 
-static GOTV_INLINE int segment_check_top(const struct segment *line, int32_t y)
+static NLC_INLINE int segment_check_top(const struct segment *line, int32_t y)
 {
     if (line->flags & SEGFLAG_EXACT_TOP)
         return line->y_min >= y;
@@ -536,7 +536,7 @@ static GOTV_INLINE int segment_check_top(const struct segment *line, int32_t y)
     return cc >= 0;
 }
 
-static GOTV_INLINE int segment_check_bottom(const struct segment *line, int32_t y)
+static NLC_INLINE int segment_check_bottom(const struct segment *line, int32_t y)
 {
     if (line->flags & SEGFLAG_EXACT_BOTTOM)
         return line->y_max <= y;
@@ -627,7 +627,7 @@ static int polyline_split_vert(const struct segment *src, size_t n_src,
 }
 
 
-static GOTV_INLINE void rasterizer_fill_solid(const BitmapEngine *engine,
+static NLC_INLINE void rasterizer_fill_solid(const BitmapEngine *engine,
                                          uint8_t *buf, int width, int height, ptrdiff_t stride,
                                          int set)
 {
@@ -646,7 +646,7 @@ static GOTV_INLINE void rasterizer_fill_solid(const BitmapEngine *engine,
     }
 }
 
-static GOTV_INLINE void rasterizer_fill_halfplane(const BitmapEngine *engine,
+static NLC_INLINE void rasterizer_fill_halfplane(const BitmapEngine *engine,
                                              uint8_t *buf, int width, int height, ptrdiff_t stride,
                                              int32_t a, int32_t b, int64_t c, int32_t scale)
 {

@@ -116,7 +116,7 @@ extern const uint8_t g_kuiZeroLeftBitNumMap[16];
 #define WELS_GET_PREFIX_BITS(inval, outval) outval = GetPrefixBits(inval)
 #endif
 
-static GOTV_INLINE void InitVlcTable (SVlcTable* pVlcTable) {
+static NLC_INLINE void InitVlcTable (SVlcTable* pVlcTable) {
 pVlcTable->kpChromaCoeffTokenVlcTable = g_kuiVlcChromaTable;
 
 pVlcTable->kpCoeffTokenVlcTable[0][0] = g_kuiVlcTable_0;

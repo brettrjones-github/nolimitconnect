@@ -127,7 +127,7 @@ qmfForwardModulationLP_odd( HANDLE_QMF_FILTER_BANK anaQmf, /*!< Handle of Qmf An
 
 #if defined(__GNUC__)	/* cppp replaced: elif */
 
-GOTV_INLINE int32_t SMULBB (const int16_t a, const int32_t b)
+NLC_INLINE int32_t SMULBB (const int16_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smulbb %0, %1, %2"
@@ -135,7 +135,7 @@ GOTV_INLINE int32_t SMULBB (const int16_t a, const int32_t b)
      : "r" (a), "r" (b)) ;
   return result ;
 }
-GOTV_INLINE int32_t SMULBT (const int16_t a, const int32_t b)
+NLC_INLINE int32_t SMULBT (const int16_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smulbt %0, %1, %2"
@@ -144,7 +144,7 @@ GOTV_INLINE int32_t SMULBT (const int16_t a, const int32_t b)
   return result ;
 }
 
-GOTV_INLINE int32_t SMLABB(const int32_t accu, const int16_t a, const int32_t b)
+NLC_INLINE int32_t SMLABB(const int32_t accu, const int16_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smlabb %0, %1, %2,%3"
@@ -152,7 +152,7 @@ GOTV_INLINE int32_t SMLABB(const int32_t accu, const int16_t a, const int32_t b)
      : "r" (a), "r" (b), "r" (accu)) ;
   return result;
 }
-GOTV_INLINE int32_t SMLABT(const int32_t accu, const int16_t a, const int32_t b)
+NLC_INLINE int32_t SMLABT(const int32_t accu, const int16_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smlabt %0, %1, %2,%3"
@@ -421,7 +421,7 @@ void qmfAnaPrototypeFirSlot( FIXP_QMF *analysisBuffer,
 
 #if defined(__GNUC__)	/* cppp replaced: elif */
 
-GOTV_INLINE int32_t SMULWB (const int32_t a, const int32_t b)
+NLC_INLINE int32_t SMULWB (const int32_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smulwb %0, %1, %2"
@@ -430,7 +430,7 @@ GOTV_INLINE int32_t SMULWB (const int32_t a, const int32_t b)
 
   return result ;
 }
-GOTV_INLINE int32_t SMULWT (const int32_t a, const int32_t b)
+NLC_INLINE int32_t SMULWT (const int32_t a, const int32_t b)
 {
   int32_t result ;
   __asm__ ("smulwt %0, %1, %2"
@@ -440,7 +440,7 @@ GOTV_INLINE int32_t SMULWT (const int32_t a, const int32_t b)
   return result ;
 }
 
-GOTV_INLINE int32_t SMLAWB(const int32_t accu, const int32_t a, const int32_t b)
+NLC_INLINE int32_t SMLAWB(const int32_t accu, const int32_t a, const int32_t b)
 {
   int32_t result;
   asm("smlawb %0, %1, %2, %3 "
@@ -449,7 +449,7 @@ GOTV_INLINE int32_t SMLAWB(const int32_t accu, const int32_t a, const int32_t b)
   return result ;
 }
 
-GOTV_INLINE int32_t SMLAWT(const int32_t accu, const int32_t a, const int32_t b)
+NLC_INLINE int32_t SMLAWT(const int32_t accu, const int32_t a, const int32_t b)
 {
   int32_t result;
   asm("smlawt %0, %1, %2, %3 "

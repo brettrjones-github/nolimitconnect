@@ -112,7 +112,9 @@ protected:
 	VxMutex						m_AecMutex;
 	float						m_MicInBuf[8][80];
 	float						m_MicOutBuf[8][80];
-	float						m_MixerInBuf[ECHO_MIXER_BUF_CNT][ECHO_MIXER_IN_BUF_SAMPLE_CNT];
+	float						m_MixerEchoProcessBuf[ECHO_MIXER_BUF_CNT][ECHO_MIXER_IN_BUF_SAMPLE_CNT];
+	int64_t						m_MixerEchoProcessTimestamps[ ECHO_MIXER_BUF_CNT ];
+
 	int							m_MixerWriteIdx;
 	int							m_MixerReadIdx;
 	int							m_MixerReadOffset;

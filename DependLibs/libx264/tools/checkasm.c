@@ -90,7 +90,7 @@ static const char **intra_predict_8x16c_names = intra_predict_8x8c_names;
 
 #define set_func_name(...) snprintf( func_name, sizeof(func_name), __VA_ARGS__ )
 
-static GOTV_INLINE uint32_t read_time(void)
+static NLC_INLINE uint32_t read_time(void)
 {
     uint32_t a = 0;
 #if HAVE_X86_INLINE_ASM

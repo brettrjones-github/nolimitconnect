@@ -68,9 +68,9 @@
 #  include <stdio.h>
 #  include <stdarg.h> /* va_copy define check */
 
-/* On Microsoft compilers define GOTV_INLINE to __inline on all others use GOTV_INLINE */
-#  undef GOTV_INLINE
-#  define GOTV_INLINE __inline
+/* On Microsoft compilers define NLC_INLINE to __inline on all others use NLC_INLINE */
+#  undef NLC_INLINE
+#  define NLC_INLINE __inline
 
 #  ifndef va_copy
 #   define va_copy(dest, src) (dest = src)

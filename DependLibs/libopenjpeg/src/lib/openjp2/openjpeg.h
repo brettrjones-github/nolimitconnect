@@ -54,14 +54,14 @@ The inline keyword is supported by C99 but not by C90.
 Most compilers implement their own version of this keyword ...
 */
 #ifndef INLINE
-# define INLINE					GOTV_FORCE_INLINE
+# define INLINE					NLC_FORCE_INLINE
 #endif /* INLINE */
 
 #define OPJ_DEPRECATED			GOTV_DEPRECATED
-#define OPJ_API					GOTV_API
-#define OPJ_LOCAL				GOTV_LOCAL
-#define OPJ_CALLCONV			GOTV_CALLCONV
-#define OPJ_ARG_NOT_USED		GOTV_UNUSED
+#define OPJ_API					NLC_API
+#define OPJ_LOCAL				NLC_LOCAL
+#define OPJ_CALLCONV			NLC_CALLCONV
+#define OPJ_ARG_NOT_USED		NLC_UNUSED
 
 #define OPJ_TRUE 1
 #define OPJ_FALSE 0

@@ -640,7 +640,7 @@ xavs_encoder_headers (xavs_t * h, xavs_nal_t ** pp_nal, int *pi_nal)
   return 0;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_frame_sort (xavs_frame_t * list[XAVS_BFRAME_MAX + 1], int b_dts)
 {
   int i, b_ok;
@@ -665,7 +665,7 @@ xavs_frame_sort (xavs_frame_t * list[XAVS_BFRAME_MAX + 1], int b_dts)
 #define xavs_frame_sort_dts(list) xavs_frame_sort(list, 1)
 #define xavs_frame_sort_pts(list) xavs_frame_sort(list, 0)
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_reference_build_list (xavs_t * h, int i_poc, int i_slice_type)
 {
   int i;
@@ -739,7 +739,7 @@ xavs_reference_build_list (xavs_t * h, int i_poc, int i_slice_type)
   h->i_ref0 = (i_slice_type == SLICE_TYPE_B) ? 1 : XAVS_MIN (h->i_ref0, 16 - h->i_ref1);
 }
 
-static GOTV_INLINE int 
+static NLC_INLINE int 
 xavs_update_reference_list (xavs_t *h)
 {
   if( !h->fdec->b_kept_as_ref )
@@ -766,7 +766,7 @@ xavs_update_reference_list (xavs_t *h)
   return 0;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_reference_update (xavs_t * h)
 {
   int i;
@@ -785,7 +785,7 @@ xavs_reference_update (xavs_t * h)
     XCHG (uint8_t *, h->fdec->lowres[i], h->fenc->lowres[i]);
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_reference_reset (xavs_t * h)
 {
   while (h->frames.reference[0])
@@ -829,7 +829,7 @@ xavs_i_pic_header_init (xavs_t * h, xavs_i_pic_header_t * ih, int i_qp)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_pb_pic_header_init (xavs_t * h, xavs_pb_pic_header_t * pbh, int i_qp, int i_slice_type)
 {
   pbh->i_pb_picture_start_code = 0xB6;
@@ -992,7 +992,7 @@ xavs_slice_write (xavs_t * h)
   return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_slices_write (xavs_t * h)
 {
   int i_frame_size = 0;

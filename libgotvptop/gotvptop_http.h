@@ -52,16 +52,16 @@ typedef struct gotvptop_http_auth_t
 } gotvptop_http_auth_t;
 
 
-GOTV_API void gotvptop_http_auth_Init( gotvptop_http_auth_t * );
-GOTV_API void gotvptop_http_auth_Deinit( gotvptop_http_auth_t * );
-GOTV_API void gotvptop_http_auth_ParseWwwAuthenticateHeader
+NLC_API void gotvptop_http_auth_Init( gotvptop_http_auth_t * );
+NLC_API void gotvptop_http_auth_Deinit( gotvptop_http_auth_t * );
+NLC_API void gotvptop_http_auth_ParseWwwAuthenticateHeader
             ( gotvptop_object_t *, gotvptop_http_auth_t * , const char * );
-GOTV_API int gotvptop_http_auth_ParseAuthenticationInfoHeader
+NLC_API int gotvptop_http_auth_ParseAuthenticationInfoHeader
             ( gotvptop_object_t *, gotvptop_http_auth_t *,
               const char *, const char *,
               const char *, const char *,
               const char * );
-GOTV_API char *gotvptop_http_auth_FormatAuthorizationHeader
+NLC_API char *gotvptop_http_auth_FormatAuthorizationHeader
             ( gotvptop_object_t *, gotvptop_http_auth_t *,
               const char *, const char *,
               const char *, const char * ) GOTV_USED;
@@ -70,8 +70,8 @@ GOTV_API char *gotvptop_http_auth_FormatAuthorizationHeader
 
 typedef struct gotvptop_http_cookie_jar_t gotvptop_http_cookie_jar_t;
 
-GOTV_API gotvptop_http_cookie_jar_t * gotvptop_http_cookies_new( void ) GOTV_USED;
-GOTV_API void gotvptop_http_cookies_destroy( gotvptop_http_cookie_jar_t * p_jar );
+NLC_API gotvptop_http_cookie_jar_t * gotvptop_http_cookies_new( void ) GOTV_USED;
+NLC_API void gotvptop_http_cookies_destroy( gotvptop_http_cookie_jar_t * p_jar );
 
 /**
  * Parse a value of an incoming Set-Cookie header and append the
@@ -81,7 +81,7 @@ GOTV_API void gotvptop_http_cookies_destroy( gotvptop_http_cookie_jar_t * p_jar 
  * @param cookie header field value of Set-Cookie
  * @return true, if the cookie was added, false otherwise
  */
-GOTV_API bool gotvptop_http_cookies_store( gotvptop_http_cookie_jar_t *jar,
+NLC_API bool gotvptop_http_cookies_store( gotvptop_http_cookie_jar_t *jar,
     const char *cookie, const char *host, const char *path );
 
 /**
@@ -91,7 +91,7 @@ GOTV_API bool gotvptop_http_cookies_store( gotvptop_http_cookie_jar_t *jar,
  * @param p_url the URL for which the cookies are returned
  * @return A string consisting of semicolon-separated cookie NAME=VALUE pairs.
  */
-GOTV_API char *gotvptop_http_cookies_fetch( gotvptop_http_cookie_jar_t *jar, bool secure,
+NLC_API char *gotvptop_http_cookies_fetch( gotvptop_http_cookie_jar_t *jar, bool secure,
                                       const char *host, const char *path );
 
 #endif /* GOTV_HTTP_H */

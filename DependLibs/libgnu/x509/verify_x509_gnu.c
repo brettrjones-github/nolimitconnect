@@ -328,7 +328,7 @@ bool _gnutls_is_same_dn(gnutls_x509_crt_t cert1, gnutls_x509_crt_t cert2)
 /* Finds an issuer of the certificate. If multiple issuers
  * are present, returns one that is activated and not expired.
  */
-static GOTV_INLINE gnutls_x509_crt_t
+static NLC_INLINE gnutls_x509_crt_t
 find_issuer(gnutls_x509_crt_t cert,
 	    const gnutls_x509_crt_t * trusted_cas, int tcas_size)
 {
@@ -1349,7 +1349,7 @@ gnutls_x509_crl_check_issuer(gnutls_x509_crl_t crl,
 	return is_crl_issuer(crl, issuer);
 }
 
-static GOTV_INLINE gnutls_x509_crt_t
+static NLC_INLINE gnutls_x509_crt_t
 find_crl_issuer(gnutls_x509_crl_t crl,
 		const gnutls_x509_crt_t * trusted_cas, int tcas_size)
 {

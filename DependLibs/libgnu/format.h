@@ -95,37 +95,37 @@ struct formatstring_parser
 };
 
 /* Format string parsers, each defined in its own file.  */
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_c;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_objc;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_sh;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_python;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_python_brace;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_lisp;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_elisp;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_librep;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_scheme;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_smalltalk;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_java;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_csharp;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_awk;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_pascal;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_ycp;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_tcl;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_perl;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_perl_brace;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_php;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_gcc_internal;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_gfc_internal;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_qt;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_qt_plural;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_kde;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_kde_kuit;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_boost;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_lua;
-extern GOTV_DLL_VARIABLE struct formatstring_parser formatstring_javascript;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_c;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_objc;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_sh;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_python;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_python_brace;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_lisp;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_elisp;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_librep;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_scheme;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_smalltalk;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_java;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_csharp;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_awk;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_pascal;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_ycp;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_tcl;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_perl;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_perl_brace;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_php;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_gcc_internal;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_gfc_internal;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_qt;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_qt_plural;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_kde;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_kde_kuit;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_boost;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_lua;
+extern NLC_DLL_VARIABLE struct formatstring_parser formatstring_javascript;
 
 /* Table of all format string parsers.  */
-extern GOTV_DLL_VARIABLE struct formatstring_parser *formatstring_parsers[NFORMATS];
+extern NLC_DLL_VARIABLE struct formatstring_parser *formatstring_parsers[NFORMATS];
 
 /* Returns an array of the ISO C 99 <inttypes.h> format directives and other
    format flags or directives with a system dependent expansion contained in

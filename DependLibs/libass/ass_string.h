@@ -24,13 +24,13 @@
 int ass_strcasecmp(const char *s1, const char *s2);
 int ass_strncasecmp(const char *s1, const char *s2, size_t n);
 
-static GOTV_INLINE int ass_isspace(int c)
+static NLC_INLINE int ass_isspace(int c)
 {
     return c == ' ' || c == '\t' || c == '\n' || c == '\v' ||
            c == '\f' || c == '\r';
 }
 
-static GOTV_INLINE int ass_isdigit(int c)
+static NLC_INLINE int ass_isdigit(int c)
 {
     return c >= '0' && c <= '9';
 }

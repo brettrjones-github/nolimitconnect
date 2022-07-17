@@ -42,13 +42,13 @@
 # include "ppc/mc.h"
 #endif
 
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_tapfilter (uint8_t * pix, int i_pix_next)
 {
   return -pix[-1 * i_pix_next] + 5 * (pix[0] + pix[1 * i_pix_next]) - pix[2 * i_pix_next];
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_tapfilter1 (uint8_t * pix)
 {
   return -pix[-1] + 5 * (pix[0] + pix[1]) - pix[2];
@@ -61,7 +61,7 @@ static const int hpel_table[16][4] = {
   {1, 0, -1, 0}, {0, 0, 0, 0}, {-1, 0, 1, 0}, {0, 0, 0, 0}
 };
 
-static GOTV_INLINE void
+static NLC_INLINE void
 pixel_avg (uint8_t * dst, int i_dst_stride, uint8_t * src1, int i_src1_stride, uint8_t * src2, int i_src2_stride, int i_width, int i_height, int qpel_idx)
 {
   int x, y;
@@ -137,7 +137,7 @@ pixel_avg (uint8_t * dst, int i_dst_stride, uint8_t * src1, int i_src1_stride, u
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 pixel_avg_wxh (uint8_t * dst, int i_dst, uint8_t * src, int i_src, int width, int height)
 {
   int x, y;
@@ -164,7 +164,7 @@ PIXEL_AVG_C (pixel_avg_8x16, 8, 16) PIXEL_AVG_C (pixel_avg_8x8, 8, 8) PIXEL_AVG_
 /* Implicit weighted bipred only:
  * assumes log2_denom = 5, offset = 0, weight1 + weight2 = 64 */
 #define op_scale2(x) dst[x] = xavs_clip_uint8( (dst[x]*i_weight1 + src[x]*i_weight2 + (1<<5)) >> 6 )
-     static GOTV_INLINE void
+     static NLC_INLINE void
      pixel_avg_weight_wxh (uint8_t * dst, int i_dst, uint8_t * src, int i_src, int width, int height, int i_weight1)
 {
   int y;
@@ -223,7 +223,7 @@ PIXEL_AVG_WEIGHT_C (16, 16) PIXEL_AVG_WEIGHT_C (16, 8) PIXEL_AVG_WEIGHT_C (8, 16
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 mc_hh (uint8_t * src, int i_src_stride, uint8_t * dst, int i_dst_stride, int i_width, int i_height)
 {
   int x, y;
@@ -239,7 +239,7 @@ mc_hh (uint8_t * src, int i_src_stride, uint8_t * dst, int i_dst_stride, int i_w
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 mc_hv (uint8_t * src, int i_src_stride, uint8_t * dst, int i_dst_stride, int i_width, int i_height)
 {
   int x, y;
@@ -255,7 +255,7 @@ mc_hv (uint8_t * src, int i_src_stride, uint8_t * dst, int i_dst_stride, int i_w
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 mc_hc (uint8_t * src, int i_src_stride, uint8_t * dst, int i_dst_stride, int i_width, int i_height)
 {
   uint8_t *out;

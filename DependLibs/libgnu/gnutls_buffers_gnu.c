@@ -193,12 +193,12 @@ _gnutls_record_buffer_get_packet(content_type_t type, gnutls_session_t session, 
 	return bufel->msg.size - bufel->mark;
 }
 
-GOTV_INLINE static void reset_errno(gnutls_session_t session)
+NLC_INLINE static void reset_errno(gnutls_session_t session)
 {
 	session->internals.errnum = 0;
 }
 
-GOTV_INLINE static int get_errno(gnutls_session_t session)
+NLC_INLINE static int get_errno(gnutls_session_t session)
 {
 	int ret;
 
@@ -211,7 +211,7 @@ GOTV_INLINE static int get_errno(gnutls_session_t session)
 	return ret;
 }
 
-GOTV_INLINE static
+NLC_INLINE static
 int errno_to_gerr(int err, unsigned dtls)
 {
 	switch (err) {
@@ -1071,7 +1071,7 @@ static int merge_handshake_packet(gnutls_session_t session,
 
 /* returns non-zero on match and zero on mismatch
  */
-GOTV_INLINE static int cmp_hsk_types(gnutls_handshake_description_t expected,
+NLC_INLINE static int cmp_hsk_types(gnutls_handshake_description_t expected,
 				gnutls_handshake_description_t recvd)
 {
 	if ((expected != GNUTLS_HANDSHAKE_CLIENT_HELLO

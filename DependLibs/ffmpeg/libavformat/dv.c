@@ -53,7 +53,7 @@ struct DVDemuxContext {
     uint64_t          abytes;
 };
 
-static GOTV_INLINE uint16_t dv_audio_12to16(uint16_t sample)
+static NLC_INLINE uint16_t dv_audio_12to16(uint16_t sample)
 {
     uint16_t shift, result;
 

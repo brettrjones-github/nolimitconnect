@@ -1367,7 +1367,7 @@ void x264_cabac_encode_init( x264_cabac_t *cb, uint8_t *p_data, uint8_t *p_end )
     cb->p_end   = p_end;
 }
 
-static GOTV_INLINE void x264_cabac_putbyte( x264_cabac_t *cb )
+static NLC_INLINE void x264_cabac_putbyte( x264_cabac_t *cb )
 {
     if( cb->i_queue >= 0 )
     {
@@ -1399,7 +1399,7 @@ static GOTV_INLINE void x264_cabac_putbyte( x264_cabac_t *cb )
     }
 }
 
-static GOTV_INLINE void x264_cabac_encode_renorm( x264_cabac_t *cb )
+static NLC_INLINE void x264_cabac_encode_renorm( x264_cabac_t *cb )
 {
     int shift = x264_cabac_renorm_shift[cb->i_range>>3];
     cb->i_range <<= shift;

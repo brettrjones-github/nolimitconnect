@@ -166,7 +166,7 @@ extern "C" {
          if (c_isalpha (*s)) ...
  */
 
-GOTV_INLINE bool
+NLC_INLINE bool
 c_isalnum (int c)
 {
   switch (c)

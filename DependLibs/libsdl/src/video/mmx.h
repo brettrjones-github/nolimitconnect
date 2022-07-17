@@ -59,7 +59,7 @@ typedef	union {
 #if 0
 /*	Function to test if multimedia instructions are supported...
 */
-GOTV_INLINE extern int
+NLC_INLINE extern int
 mm_support(void)
 {
 	/* Returns 1 if MMX instructions are supported,
@@ -218,7 +218,7 @@ mm_support(void)
 
 /*	Function to test if mmx instructions are supported...
 */
-GOTV_INLINE extern int
+NLC_INLINE extern int
 mmx_ok(void)
 {
 	/* Returns 1 if MMX instructions are supported, 0 otherwise */

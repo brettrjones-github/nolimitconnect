@@ -158,11 +158,11 @@ void SetMvBaseEnhancelayer (SWelsMD* pMd, SMB* pCurMb, const SMB* kpRefMb) {
 //////
 //  try the BGD Pskip
 //////
-GOTV_INLINE int32_t GetChromaCost (PSampleSadSatdCostFunc* pCalculateFunc,
+NLC_INLINE int32_t GetChromaCost (PSampleSadSatdCostFunc* pCalculateFunc,
                               uint8_t* pSrcChroma, int32_t iSrcStride, uint8_t* pRefChroma, int32_t iRefStride) {
   return pCalculateFunc[BLOCK_8x8] (pSrcChroma, iSrcStride, pRefChroma, iRefStride);
 }
-GOTV_INLINE bool IsCostLessEqualSkipCost (int32_t iCurCost, const int32_t iPredPskipSad, const int32_t iRefMbType,
+NLC_INLINE bool IsCostLessEqualSkipCost (int32_t iCurCost, const int32_t iPredPskipSad, const int32_t iRefMbType,
                                      const SPicture* pRef, const int32_t iMbXy,  const int32_t iSmallestInvisibleTh) {
   return ((iPredPskipSad > iSmallestInvisibleTh && iCurCost >= iPredPskipSad)  ||
           (pRef->iPictureType == P_SLICE     &&
@@ -290,27 +290,27 @@ void WelsMdUpdateBGDInfoNULL (SDqLayer* pCurLayer, SMB* pCurMb, const bool bColl
 //////////////
 // MD for screen contents
 //////////////
-GOTV_INLINE bool IsMbStatic (int32_t* pBlockType, EStaticBlockIdc eType) {
+NLC_INLINE bool IsMbStatic (int32_t* pBlockType, EStaticBlockIdc eType) {
   return (pBlockType != NULL &&
           eType == pBlockType[0] &&
           eType == pBlockType[1] &&
           eType == pBlockType[2] &&
           eType == pBlockType[3]);
 }
-GOTV_INLINE bool IsMbCollocatedStatic (int32_t* pBlockType) {
+NLC_INLINE bool IsMbCollocatedStatic (int32_t* pBlockType) {
   return IsMbStatic (pBlockType, COLLOCATED_STATIC);
 }
 
-GOTV_INLINE bool IsMbScrolledStatic (int32_t* pBlockType) {
+NLC_INLINE bool IsMbScrolledStatic (int32_t* pBlockType) {
   return IsMbStatic (pBlockType, SCROLLED_STATIC);
 }
 
-GOTV_INLINE int32_t CalUVSadCost (SWelsFuncPtrList* pFunc, uint8_t* pEncOri, int32_t iStrideUV, uint8_t* pRefOri,
+NLC_INLINE int32_t CalUVSadCost (SWelsFuncPtrList* pFunc, uint8_t* pEncOri, int32_t iStrideUV, uint8_t* pRefOri,
                              int32_t iRefLineSize) {
   return pFunc->sSampleDealingFuncs.pfSampleSad[BLOCK_8x8] (pEncOri, iStrideUV, pRefOri, iRefLineSize);
 }
 
-GOTV_INLINE bool CheckBorder (int32_t iMbX, int32_t iMbY, int32_t iScrollMvX, int32_t iScrollMvY, int32_t iMbWidth,
+NLC_INLINE bool CheckBorder (int32_t iMbX, int32_t iMbY, int32_t iScrollMvX, int32_t iScrollMvY, int32_t iMbWidth,
                          int32_t iMbHeight) {
   return ((iMbX << 4) + iScrollMvX < 0 ||
           (iMbX << 4) + iScrollMvX > (iMbWidth - 1) << 4 ||
@@ -554,13 +554,13 @@ void WelsInitSCDPskipFunc (SWelsFuncPtrList* pFuncList, const bool bScrollingDet
 //
 //func pointer of inter MD for sub16x16 INTER MD for screen content coding
 //
-static GOTV_INLINE void MergeSub16Me (const SWelsME& sSrcMe0, const SWelsME& sSrcMe1, SWelsME* pTarMe) {
+static NLC_INLINE void MergeSub16Me (const SWelsME& sSrcMe0, const SWelsME& sSrcMe1, SWelsME* pTarMe) {
   memcpy (pTarMe, &sSrcMe0, sizeof (sSrcMe0)); // confirmed_safe_unsafe_usage
 
   pTarMe->uiSadCost = sSrcMe0.uiSadCost + sSrcMe1.uiSadCost;//not precise cost since MVD cost is not the same
   pTarMe->uiSatdCost = sSrcMe0.uiSatdCost + sSrcMe1.uiSatdCost;//not precise cost since MVD cost is not the same
 }
-static GOTV_INLINE bool IsSameMv (const SMVUnitXY& sMv0, const SMVUnitXY& sMv1) {
+static NLC_INLINE bool IsSameMv (const SMVUnitXY& sMv0, const SMVUnitXY& sMv1) {
   return ((sMv0.iMvX == sMv1.iMvX) && (sMv0.iMvY == sMv1.iMvY));
 }
 bool TryModeMerge (SMbCache* pMbCache, SWelsMD* pWelsMd, SMB* pCurMb) {

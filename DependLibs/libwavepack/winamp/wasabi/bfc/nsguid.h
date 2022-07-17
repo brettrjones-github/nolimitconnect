@@ -29,7 +29,7 @@ public:
 #endif
 };
 
-GOTV_INLINE
+NLC_INLINE
 int operator <(const GUID &a, const GUID &b) {
   return (nsGUID::compare(a, b) < 0);
 }

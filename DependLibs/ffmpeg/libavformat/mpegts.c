@@ -602,7 +602,7 @@ static int skip_identical(const SectionHeader *h, MpegTSSectionFilter *tssf)
     return 0;
 }
 
-static GOTV_INLINE int get8(const uint8_t **pp, const uint8_t *p_end)
+static NLC_INLINE int get8(const uint8_t **pp, const uint8_t *p_end)
 {
     const uint8_t *p;
     int c;
@@ -615,7 +615,7 @@ static GOTV_INLINE int get8(const uint8_t **pp, const uint8_t *p_end)
     return c;
 }
 
-static GOTV_INLINE int get16(const uint8_t **pp, const uint8_t *p_end)
+static NLC_INLINE int get16(const uint8_t **pp, const uint8_t *p_end)
 {
     const uint8_t *p;
     int c;

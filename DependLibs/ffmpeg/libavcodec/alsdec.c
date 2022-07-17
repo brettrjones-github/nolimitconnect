@@ -1196,7 +1196,7 @@ fail:
     return ret;
 }
 
-static GOTV_INLINE int als_weighting(GetBitContext *gb, int k, int off)
+static NLC_INLINE int als_weighting(GetBitContext *gb, int k, int off)
 {
     int idx = av_clip(decode_rice(gb, k) + off,
                       0, FF_ARRAY_ELEMS(mcc_weightings) - 1);

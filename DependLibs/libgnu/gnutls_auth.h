@@ -74,7 +74,7 @@ int _gnutls_auth_info_set(gnutls_session_t session,
  * In case of GNUTLS_CRD_CERTIFICATE returns a type of &cert_auth_info_t;
  * In case of GNUTLS_CRD_SRP returns a type of &srp_(server/client)_auth_info_t;
  -*/
-GOTV_INLINE static
+NLC_INLINE static
 void *_gnutls_get_auth_info(gnutls_session_t session, gnutls_credentials_type_t type)
 {
 	if (type == session->key.auth_info_type)

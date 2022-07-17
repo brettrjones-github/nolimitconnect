@@ -35,7 +35,7 @@
 
 /* GCC prior to 4.8 didn't provide bswap16 on x86_64 */
 #if ! HAVE_BSWAP16
-static GOTV_INLINE unsigned short __builtin_bswap16(unsigned short a)
+static NLC_INLINE unsigned short __builtin_bswap16(unsigned short a)
 {
 	return (a<<8)|(a>>8);
 }

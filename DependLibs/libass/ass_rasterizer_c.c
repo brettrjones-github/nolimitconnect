@@ -147,7 +147,7 @@ void ass_fill_halfplane_tile32_c(uint8_t *buf, ptrdiff_t stride,
  */
 
 // Render top/bottom line of the trapeziod with antialiasing
-static GOTV_INLINE void update_border_line16(int16_t res[16],
+static NLC_INLINE void update_border_line16(int16_t res[16],
                                         int16_t abs_a, const int16_t va[16],
                                         int16_t b, int16_t abs_b,
                                         int16_t c, int up, int dn)
@@ -266,7 +266,7 @@ void ass_fill_generic_tile16_c(uint8_t *buf, ptrdiff_t stride,
 }
 
 // Render top/bottom line of the trapeziod with antialiasing
-static GOTV_INLINE void update_border_line32(int16_t res[32],
+static NLC_INLINE void update_border_line32(int16_t res[32],
                                         int16_t abs_a, const int16_t va[32],
                                         int16_t b, int16_t abs_b,
                                         int16_t c, int up, int dn)

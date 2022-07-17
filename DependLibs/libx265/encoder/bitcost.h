@@ -42,16 +42,16 @@ public:
     void setMVP(const MV& mvp)                      { m_mvp = mvp; m_cost_mvx = m_cost - mvp.x; m_cost_mvy = m_cost - mvp.y; }
 
     // return bit cost of motion vector difference, multiplied by lambda
-    GOTV_INLINE uint16_t mvcost(const MV& mv) const      { return m_cost_mvx[mv.x] + m_cost_mvy[mv.y]; }
+    NLC_INLINE uint16_t mvcost(const MV& mv) const      { return m_cost_mvx[mv.x] + m_cost_mvy[mv.y]; }
 
     // return bit cost of motion vector difference, without lambda
-    GOTV_INLINE uint32_t bitcost(const MV& mv) const
+    NLC_INLINE uint32_t bitcost(const MV& mv) const
     {
         return (uint32_t)(s_bitsizes[mv.x - m_mvp.x] +
                           s_bitsizes[mv.y - m_mvp.y] + 0.5f);
     }
 
-    static GOTV_INLINE uint32_t bitcost(const MV& mv, const MV& mvp)
+    static NLC_INLINE uint32_t bitcost(const MV& mv, const MV& mvp)
     {
         return (uint32_t)(s_bitsizes[mv.x - mvp.x] +
                           s_bitsizes[mv.y - mvp.y] + 0.5f);

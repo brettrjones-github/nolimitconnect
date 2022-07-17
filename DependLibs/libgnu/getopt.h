@@ -39,7 +39,7 @@
 # define _GL_GETOPT_H 1
 #endif
 
-/* Ensure that GOTV_DLL_VARIABLE is defined.  Since on OSF/1 4.0 and Irix 6.5
+/* Ensure that NLC_DLL_VARIABLE is defined.  Since on OSF/1 4.0 and Irix 6.5
    <stdlib.h> includes <getopt.h>, and <config_libgnu.h> is not a prerequisite for
    using <stdlib.h>, this file can be included without a prior
    "#include <config_libgnu.h>".  */
@@ -143,7 +143,7 @@
 # endif
 #endif
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* For communication from 'getopt' to the caller.
    When 'getopt' finds an option that takes an argument,
@@ -255,7 +255,7 @@ extern int getopt_long_only( int ___argc, char *__getopt_argv_const *___argv,
 
 //#endif
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 /* Make sure we later can get all the definitions and declarations.  */
 //#undef __need_getopt

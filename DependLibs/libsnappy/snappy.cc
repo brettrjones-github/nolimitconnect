@@ -53,11 +53,11 @@ using internal::kMaximumTagLength;
 // compression for compressible input, and more speed for incompressible
 // input. Of course, it doesn't hurt if the hash function is reasonably fast
 // either, as it gets called a lot.
-static GOTV_INLINE uint32 HashBytes(uint32 bytes, int shift) {
+static NLC_INLINE uint32 HashBytes(uint32 bytes, int shift) {
   uint32 kMul = 0x1e35a7bd;
   return (bytes * kMul) >> shift;
 }
-static GOTV_INLINE uint32 Hash(const char* p, int shift) {
+static NLC_INLINE uint32 Hash(const char* p, int shift) {
   return HashBytes(UNALIGNED_LOAD32(p), shift);
 }
 
@@ -116,7 +116,7 @@ void UnalignedCopy128(const void* src, void* dst) {
 // copies of "ab"
 //    ababababababababababab
 // Note that this does not match the semantics of either memcpy() or memmove().
-GOTV_INLINE char* IncrementalCopySlow(const char* src, char* op,
+NLC_INLINE char* IncrementalCopySlow(const char* src, char* op,
                                  char* const op_limit) {
   while (op < op_limit) {
     *op++ = *src++;
@@ -127,7 +127,7 @@ GOTV_INLINE char* IncrementalCopySlow(const char* src, char* op,
 // Copy [src, src+(op_limit-op)) to [op, (op_limit-op)) but faster than
 // IncrementalCopySlow. buf_limit is the address past the end of the writable
 // region of the buffer.
-GOTV_INLINE char* IncrementalCopy(const char* src, char* op, char* const op_limit,
+NLC_INLINE char* IncrementalCopy(const char* src, char* op, char* const op_limit,
                              char* const buf_limit) {
   // Terminology:
   //
@@ -212,7 +212,7 @@ GOTV_INLINE char* IncrementalCopy(const char* src, char* op, char* const op_limi
 
 }  // namespace
 
-static GOTV_INLINE char* EmitLiteral(char* op,
+static NLC_INLINE char* EmitLiteral(char* op,
                                 const char* literal,
                                 int len,
                                 bool allow_fast_path) {
@@ -257,7 +257,7 @@ static GOTV_INLINE char* EmitLiteral(char* op,
   return op + len;
 }
 
-static GOTV_INLINE char* EmitCopyAtMost64(char* op, size_t offset, size_t len,
+static NLC_INLINE char* EmitCopyAtMost64(char* op, size_t offset, size_t len,
                                      bool len_less_than_12) {
   assert(len <= 64);
   assert(len >= 4);
@@ -279,7 +279,7 @@ static GOTV_INLINE char* EmitCopyAtMost64(char* op, size_t offset, size_t len,
   return op;
 }
 
-static GOTV_INLINE char* EmitCopy(char* op, size_t offset, size_t len,
+static NLC_INLINE char* EmitCopy(char* op, size_t offset, size_t len,
                              bool len_less_than_12) {
   assert(len_less_than_12 == (len < 12));
   if (len_less_than_12) {
@@ -352,7 +352,7 @@ uint16* WorkingMemory::GetHashTable(size_t input_size, int* table_size) {
 // are slower than UNALIGNED_LOAD64(p) followed by shifts and casts to uint32.
 //
 // We have different versions for 64- and 32-bit; ideally we would avoid the
-// two functions and just GOTV_INLINE the UNALIGNED_LOAD64 call into
+// two functions and just NLC_INLINE the UNALIGNED_LOAD64 call into
 // GetUint32AtOffset, but GCC (at least not as of 4.6) is seemingly not clever
 // enough to avoid loading the value multiple times then. For 64-bit, the load
 // is done when GetEightBytesAt() is called, whereas for 32-bit, the load is
@@ -362,11 +362,11 @@ uint16* WorkingMemory::GetHashTable(size_t input_size, int* table_size) {
 
 typedef uint64 EightBytesReference;
 
-static GOTV_INLINE EightBytesReference GetEightBytesAt(const char* ptr) {
+static NLC_INLINE EightBytesReference GetEightBytesAt(const char* ptr) {
   return UNALIGNED_LOAD64(ptr);
 }
 
-static GOTV_INLINE uint32 GetUint32AtOffset(uint64 v, int offset) {
+static NLC_INLINE uint32 GetUint32AtOffset(uint64 v, int offset) {
   assert(offset >= 0);
   assert(offset <= 4);
   return v >> (LittleEndian::IsLittleEndian() ? 8 * offset : 32 - 8 * offset);
@@ -376,11 +376,11 @@ static GOTV_INLINE uint32 GetUint32AtOffset(uint64 v, int offset) {
 
 typedef const char* EightBytesReference;
 
-static GOTV_INLINE EightBytesReference GetEightBytesAt(const char* ptr) {
+static NLC_INLINE EightBytesReference GetEightBytesAt(const char* ptr) {
   return ptr;
 }
 
-static GOTV_INLINE uint32 GetUint32AtOffset(const char* v, int offset) {
+static NLC_INLINE uint32 GetUint32AtOffset(const char* v, int offset) {
   assert(offset >= 0);
   assert(offset <= 4);
   return UNALIGNED_LOAD32(v + offset);
@@ -531,7 +531,7 @@ char* CompressFragment(const char* input,
 }  // end namespace internal
 
 // Called back at avery compression call to trace parameters and sizes.
-static GOTV_INLINE void Report(const char *algorithm, size_t compressed_size,
+static NLC_INLINE void Report(const char *algorithm, size_t compressed_size,
                           size_t uncompressed_size) {}
 
 // Signature of output types needed by decompression code.
@@ -934,7 +934,7 @@ class SnappyIOVecWriter {
   // Maximum number of bytes that will be decompressed into output_iov_.
   size_t output_limit_;
 
-  GOTV_INLINE char* GetIOVecPointer(size_t index, size_t offset) {
+  NLC_INLINE char* GetIOVecPointer(size_t index, size_t offset) {
     return reinterpret_cast<char*>(output_iov_[index].iov_base) +
         offset;
   }
@@ -942,7 +942,7 @@ class SnappyIOVecWriter {
  public:
   // Does not take ownership of iov. iov must be valid during the
   // entire lifetime of the SnappyIOVecWriter.
-  GOTV_INLINE SnappyIOVecWriter(const struct iovec* iov, size_t iov_count)
+  NLC_INLINE SnappyIOVecWriter(const struct iovec* iov, size_t iov_count)
       : output_iov_(iov),
         output_iov_count_(iov_count),
         curr_iov_index_(0),
@@ -951,15 +951,15 @@ class SnappyIOVecWriter {
         output_limit_(-1) {
   }
 
-  GOTV_INLINE void SetExpectedLength(size_t len) {
+  NLC_INLINE void SetExpectedLength(size_t len) {
     output_limit_ = len;
   }
 
-  GOTV_INLINE bool CheckLength() const {
+  NLC_INLINE bool CheckLength() const {
     return total_written_ == output_limit_;
   }
 
-  GOTV_INLINE bool Append(const char* ip, size_t len) {
+  NLC_INLINE bool Append(const char* ip, size_t len) {
     if (total_written_ + len > output_limit_) {
       return false;
     }
@@ -989,7 +989,7 @@ class SnappyIOVecWriter {
     return true;
   }
 
-  GOTV_INLINE bool TryFastAppend(const char* ip, size_t available, size_t len) {
+  NLC_INLINE bool TryFastAppend(const char* ip, size_t available, size_t len) {
     const size_t space_left = output_limit_ - total_written_;
     if (len <= 16 && available >= 16 + kMaximumTagLength && space_left >= 16 &&
         output_iov_[curr_iov_index_].iov_len - curr_iov_written_ >= 16) {
@@ -1004,7 +1004,7 @@ class SnappyIOVecWriter {
     return false;
   }
 
-  GOTV_INLINE bool AppendFromSelf(size_t offset, size_t len) {
+  NLC_INLINE bool AppendFromSelf(size_t offset, size_t len) {
     if (offset > total_written_ || offset == 0) {
       return false;
     }
@@ -1073,7 +1073,7 @@ class SnappyIOVecWriter {
     return true;
   }
 
-  GOTV_INLINE void Flush() {}
+  NLC_INLINE void Flush() {}
 };
 
 bool RawUncompressToIOVec(const char* compressed, size_t compressed_length,
@@ -1102,21 +1102,21 @@ class SnappyArrayWriter {
   char* op_limit_;
 
  public:
-  GOTV_INLINE explicit SnappyArrayWriter(char* dst)
+  NLC_INLINE explicit SnappyArrayWriter(char* dst)
       : base_(dst),
         op_(dst),
         op_limit_(dst) {
   }
 
-  GOTV_INLINE void SetExpectedLength(size_t len) {
+  NLC_INLINE void SetExpectedLength(size_t len) {
     op_limit_ = op_ + len;
   }
 
-  GOTV_INLINE bool CheckLength() const {
+  NLC_INLINE bool CheckLength() const {
     return op_ == op_limit_;
   }
 
-  GOTV_INLINE bool Append(const char* ip, size_t len) {
+  NLC_INLINE bool Append(const char* ip, size_t len) {
     char* op = op_;
     const size_t space_left = op_limit_ - op;
     if (space_left < len) {
@@ -1127,7 +1127,7 @@ class SnappyArrayWriter {
     return true;
   }
 
-  GOTV_INLINE bool TryFastAppend(const char* ip, size_t available, size_t len) {
+  NLC_INLINE bool TryFastAppend(const char* ip, size_t available, size_t len) {
     char* op = op_;
     const size_t space_left = op_limit_ - op;
     if (len <= 16 && available >= 16 + kMaximumTagLength && space_left >= 16) {
@@ -1140,7 +1140,7 @@ class SnappyArrayWriter {
     }
   }
 
-  GOTV_INLINE bool AppendFromSelf(size_t offset, size_t len) {
+  NLC_INLINE bool AppendFromSelf(size_t offset, size_t len) {
     char* const op_end = op_ + len;
 
     // Check if we try to append from before the start of the buffer.
@@ -1155,11 +1155,11 @@ class SnappyArrayWriter {
 
     return true;
   }
-  GOTV_INLINE size_t Produced() const {
+  NLC_INLINE size_t Produced() const {
     assert(op_ >= base_);
     return op_ - base_;
   }
-  GOTV_INLINE void Flush() {}
+  NLC_INLINE void Flush() {}
 };
 
 bool RawUncompress(const char* compressed, size_t n, char* uncompressed) {
@@ -1193,28 +1193,28 @@ class SnappyDecompressionValidator {
   size_t produced_;
 
  public:
-  GOTV_INLINE SnappyDecompressionValidator() : expected_(0), produced_(0) { }
-  GOTV_INLINE void SetExpectedLength(size_t len) {
+  NLC_INLINE SnappyDecompressionValidator() : expected_(0), produced_(0) { }
+  NLC_INLINE void SetExpectedLength(size_t len) {
     expected_ = len;
   }
-  GOTV_INLINE bool CheckLength() const {
+  NLC_INLINE bool CheckLength() const {
     return expected_ == produced_;
   }
-  GOTV_INLINE bool Append(const char* ip, size_t len) {
+  NLC_INLINE bool Append(const char* ip, size_t len) {
     produced_ += len;
     return produced_ <= expected_;
   }
-  GOTV_INLINE bool TryFastAppend(const char* ip, size_t available, size_t length) {
+  NLC_INLINE bool TryFastAppend(const char* ip, size_t available, size_t length) {
     return false;
   }
-  GOTV_INLINE bool AppendFromSelf(size_t offset, size_t len) {
+  NLC_INLINE bool AppendFromSelf(size_t offset, size_t len) {
     // See SnappyArrayWriter::AppendFromSelf for an explanation of
     // the "offset - 1u" trick.
     if (produced_ <= offset - 1u) return false;
     produced_ += len;
     return produced_ <= expected_;
   }
-  GOTV_INLINE void Flush() {}
+  NLC_INLINE void Flush() {}
 };
 
 bool IsValidCompressedBuffer(const char* compressed, size_t n) {
@@ -1276,7 +1276,7 @@ class SnappyScatteredWriter {
   char* op_ptr_;        // Pointer to next unfilled byte in block
   char* op_limit_;      // Pointer just past block
 
-  GOTV_INLINE size_t Size() const {
+  NLC_INLINE size_t Size() const {
     return full_size_ + (op_ptr_ - op_base_);
   }
 
@@ -1284,7 +1284,7 @@ class SnappyScatteredWriter {
   bool SlowAppendFromSelf(size_t offset, size_t len);
 
  public:
-  GOTV_INLINE explicit SnappyScatteredWriter(const Allocator& allocator)
+  NLC_INLINE explicit SnappyScatteredWriter(const Allocator& allocator)
       : allocator_(allocator),
         full_size_(0),
         op_base_(NULL),
@@ -1292,21 +1292,21 @@ class SnappyScatteredWriter {
         op_limit_(NULL) {
   }
 
-  GOTV_INLINE void SetExpectedLength(size_t len) {
+  NLC_INLINE void SetExpectedLength(size_t len) {
     assert(blocks_.empty());
     expected_ = len;
   }
 
-  GOTV_INLINE bool CheckLength() const {
+  NLC_INLINE bool CheckLength() const {
     return Size() == expected_;
   }
 
   // Return the number of bytes actually uncompressed so far
-  GOTV_INLINE size_t Produced() const {
+  NLC_INLINE size_t Produced() const {
     return Size();
   }
 
-  GOTV_INLINE bool Append(const char* ip, size_t len) {
+  NLC_INLINE bool Append(const char* ip, size_t len) {
     size_t avail = op_limit_ - op_ptr_;
     if (len <= avail) {
       // Fast path
@@ -1318,7 +1318,7 @@ class SnappyScatteredWriter {
     }
   }
 
-  GOTV_INLINE bool TryFastAppend(const char* ip, size_t available, size_t length) {
+  NLC_INLINE bool TryFastAppend(const char* ip, size_t available, size_t length) {
     char* op = op_ptr_;
     const int space_left = op_limit_ - op;
     if (length <= 16 && available >= 16 + kMaximumTagLength &&
@@ -1332,7 +1332,7 @@ class SnappyScatteredWriter {
     }
   }
 
-  GOTV_INLINE bool AppendFromSelf(size_t offset, size_t len) {
+  NLC_INLINE bool AppendFromSelf(size_t offset, size_t len) {
     char* const op_end = op_ptr_ + len;
     // See SnappyArrayWriter::AppendFromSelf for an explanation of
     // the "offset - 1u" trick.
@@ -1346,7 +1346,7 @@ class SnappyScatteredWriter {
 
   // Called at the end of the decompress. We ask the allocator
   // write all blocks to the sink.
-  GOTV_INLINE void Flush() { allocator_.Flush(Produced()); }
+  NLC_INLINE void Flush() { allocator_.Flush(Produced()); }
 };
 
 template<typename Allocator>

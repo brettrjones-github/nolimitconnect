@@ -555,7 +555,7 @@ vbi_teletext_composed_unicode(unsigned int a, unsigned int c)
 	return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 is_blank(vbi_char c)
 {
 	/* flash/conceal: undecided; underline: nope. */
@@ -568,7 +568,7 @@ is_blank(vbi_char c)
 			|| c.unicode == 0xEE20; /* blank, contiguous */
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 is_full(vbi_char c)
 {
 	/* flash/conceal: undecided. */

@@ -154,7 +154,7 @@ gcm_ghash(struct aes_gcm_ctx *ctx, const uint8_t * src, size_t src_size)
 	}
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 ctr_encrypt_last(struct aes_gcm_ctx *ctx, const uint8_t * src,
 		 uint8_t * dst, size_t pos, size_t length)
 {

@@ -326,5 +326,6 @@
         <file>Resources/video-chat.svg</file>
         <file>Resources/overlay-nlc.svg</file>
         <file>Resources/nlc-icon.svg</file>
+        <file>Resources/sound-settings.svg</file>
     </qresource>
 </RCC>

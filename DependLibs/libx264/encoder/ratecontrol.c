@@ -199,11 +199,11 @@ static void update_predictor( predictor_t *p, float q, float var, float bits );
  * qp = h.264's quantizer
  * qscale = linearized quantizer = Lagrange multiplier
  */
-static GOTV_INLINE float qp2qscale( float qp )
+static NLC_INLINE float qp2qscale( float qp )
 {
     return 0.85f * powf( 2.0f, ( qp - (12.0f + QP_BD_OFFSET) ) / 6.0f );
 }
-static GOTV_INLINE float qscale2qp( float qscale )
+static NLC_INLINE float qscale2qp( float qscale )
 {
     return (12.0f + QP_BD_OFFSET) + 6.0f * log2f( qscale/0.85f );
 }
@@ -212,7 +212,7 @@ static GOTV_INLINE float qscale2qp( float qscale )
  * probably due the the changing number of SKIP blocks.
  * MV bits level off at about qp<=12, because the lambda used
  * for motion estimation is constant there. */
-static GOTV_INLINE double qscale2bits( ratecontrol_entry_t *rce, double qscale )
+static NLC_INLINE double qscale2bits( ratecontrol_entry_t *rce, double qscale )
 {
     if( qscale<0.1 )
         qscale = 0.1;

@@ -20,7 +20,7 @@
 
 /**
  * @file
- * MIPS assembly defines from sys/asm.h but rewritten for use with C GOTV_INLINE
+ * MIPS assembly defines from sys/asm.h but rewritten for use with C NLC_INLINE
  * assembly (rather than from within .s files).
  */
 

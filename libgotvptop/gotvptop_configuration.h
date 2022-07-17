@@ -95,27 +95,27 @@ struct module_config_t
  * Prototypes - these methods are used to get, set or manipulate configuration
  * data.
  *****************************************************************************/
-GOTV_API int config_GetType(const char *) GOTV_USED;
-GOTV_API int64_t libgotvptop_config_GetInt(gotvptop_object_t *, const char *) GOTV_USED;
-GOTV_API void libgotvptop_config_PutInt(gotvptop_object_t *, const char *, int64_t);
-GOTV_API float libgotvptop_config_GetFloat(gotvptop_object_t *, const char *) GOTV_USED;
-GOTV_API void libgotvptop_config_PutFloat(gotvptop_object_t *, const char *, float);
-GOTV_API char * libgotvptop_config_GetPsz(gotvptop_object_t *, const char *) GOTV_USED GOTV_MALLOC;
-GOTV_API void libgotvptop_config_PutPsz(gotvptop_object_t *, const char *, const char *);
-GOTV_API ssize_t config_GetIntChoices(gotvptop_object_t *, const char *,
+NLC_API int config_GetType(const char *) GOTV_USED;
+NLC_API int64_t libgotvptop_config_GetInt(gotvptop_object_t *, const char *) GOTV_USED;
+NLC_API void libgotvptop_config_PutInt(gotvptop_object_t *, const char *, int64_t);
+NLC_API float libgotvptop_config_GetFloat(gotvptop_object_t *, const char *) GOTV_USED;
+NLC_API void libgotvptop_config_PutFloat(gotvptop_object_t *, const char *, float);
+NLC_API char * libgotvptop_config_GetPsz(gotvptop_object_t *, const char *) GOTV_USED GOTV_MALLOC;
+NLC_API void libgotvptop_config_PutPsz(gotvptop_object_t *, const char *, const char *);
+NLC_API ssize_t config_GetIntChoices(gotvptop_object_t *, const char *,
                                      int64_t **, char ***) GOTV_USED;
-GOTV_API ssize_t config_GetPszChoices(gotvptop_object_t *, const char *,
+NLC_API ssize_t config_GetPszChoices(gotvptop_object_t *, const char *,
                                      char ***, char ***) GOTV_USED;
 
-GOTV_API int libgotvptop_config_SaveConfigFile( gotvptop_object_t * );
+NLC_API int libgotvptop_config_SaveConfigFile( gotvptop_object_t * );
 #define config_SaveConfigFile(a) libgotvptop_config_SaveConfigFile(GOTV_OBJECT(a))
 
-GOTV_API void libgotvptop_config_ResetAll( gotvptop_object_t * );
+NLC_API void libgotvptop_config_ResetAll( gotvptop_object_t * );
 #define config_ResetAll(a) libgotvptop_config_ResetAll(GOTV_OBJECT(a))
 
-GOTV_API module_config_t * config_FindConfig(const char *) GOTV_USED;
-GOTV_API char * config_GetDataDir(void) GOTV_USED GOTV_MALLOC;
-GOTV_API char *config_GetLibDir(void) GOTV_USED;
+NLC_API module_config_t * config_FindConfig(const char *) GOTV_USED;
+NLC_API char * config_GetDataDir(void) GOTV_USED GOTV_MALLOC;
+NLC_API char *config_GetLibDir(void) GOTV_USED;
 
 typedef enum gotvptop_userdir
 {
@@ -134,11 +134,11 @@ typedef enum gotvptop_userdir
     GOTV_VIDEOS_DIR,
 } gotvptop_userdir_t;
 
-GOTV_API char * config_GetUserDir( gotvptop_userdir_t ) GOTV_USED GOTV_MALLOC;
+NLC_API char * config_GetUserDir( gotvptop_userdir_t ) GOTV_USED GOTV_MALLOC;
 
-GOTV_API void libgotvptop_config_AddIntf( gotvptop_object_t *, const char * );
-GOTV_API void libgotvptop_config_RemoveIntf( gotvptop_object_t *, const char * );
-GOTV_API bool libgotvptop_config_ExistIntf( gotvptop_object_t *, const char * ) GOTV_USED;
+NLC_API void libgotvptop_config_AddIntf( gotvptop_object_t *, const char * );
+NLC_API void libgotvptop_config_RemoveIntf( gotvptop_object_t *, const char * );
+NLC_API bool libgotvptop_config_ExistIntf( gotvptop_object_t *, const char * ) GOTV_USED;
 
 #define config_GetInt(a,b) libgotvptop_config_GetInt(GOTV_OBJECT(a),b)
 #define config_PutInt(a,b,c) libgotvptop_config_PutInt(GOTV_OBJECT(a),b,c)
@@ -169,7 +169,7 @@ struct config_chain_t
  *
  * The option names will be created by adding the psz_prefix prefix.
  */
-GOTV_API void libgotvptop_config_ChainParse( gotvptop_object_t *, const char *psz_prefix, const char *const *ppsz_options, config_chain_t * );
+NLC_API void libgotvptop_config_ChainParse( gotvptop_object_t *, const char *psz_prefix, const char *const *ppsz_options, config_chain_t * );
 #define config_ChainParse( a, b, c, d ) libgotvptop_config_ChainParse( GOTV_OBJECT(a), b, c, d )
 
 /**
@@ -182,7 +182,7 @@ GOTV_API void libgotvptop_config_ChainParse( gotvptop_object_t *, const char *ps
  *
  * The options values are unescaped using config_StringUnescape.
  */
-GOTV_API const char *config_ChainParseOptions( config_chain_t **pp_cfg, const char *ppsz_opts );
+NLC_API const char *config_ChainParseOptions( config_chain_t **pp_cfg, const char *ppsz_opts );
 
 /**
  * This function will parse a configuration string (psz_string) and
@@ -195,18 +195,18 @@ GOTV_API const char *config_ChainParseOptions( config_chain_t **pp_cfg, const ch
  *
  * The options values are unescaped using config_StringUnescape.
  */
-GOTV_API char *config_ChainCreate( char **ppsz_name, config_chain_t **pp_cfg, const char *psz_string ) GOTV_USED GOTV_MALLOC;
+NLC_API char *config_ChainCreate( char **ppsz_name, config_chain_t **pp_cfg, const char *psz_string ) GOTV_USED GOTV_MALLOC;
 
 /**
  * This function will release a linked list of config_chain_t
  * (Including the head)
  */
-GOTV_API void config_ChainDestroy( config_chain_t * );
+NLC_API void config_ChainDestroy( config_chain_t * );
 
 /**
  * This function will duplicate a linked list of config_chain_t
  */
-GOTV_API config_chain_t * config_ChainDuplicate( const config_chain_t * ) GOTV_USED GOTV_MALLOC;
+NLC_API config_chain_t * config_ChainDuplicate( const config_chain_t * ) GOTV_USED GOTV_MALLOC;
 
 /**
  * This function will unescape a string in place and will return a pointer on
@@ -217,7 +217,7 @@ GOTV_API config_chain_t * config_ChainDuplicate( const config_chain_t * ) GOTV_U
  * The following sequences will be unescaped (only one time):
  * \\ \' and \"
  */
-GOTV_API char * config_StringUnescape( char *psz_string );
+NLC_API char * config_StringUnescape( char *psz_string );
 
 /**
  * This function will escape a string that can be unescaped by
@@ -228,7 +228,7 @@ GOTV_API char * config_StringUnescape( char *psz_string );
  *
  * The escaped characters are ' " and \
  */
-GOTV_API char * config_StringEscape( const char *psz_string ) GOTV_USED GOTV_MALLOC;
+NLC_API char * config_StringEscape( const char *psz_string ) GOTV_USED GOTV_MALLOC;
 
 # ifdef __cplusplus
 }

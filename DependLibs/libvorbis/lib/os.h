@@ -90,7 +90,7 @@ void *_alloca(size_t size);
 
 typedef ogg_int16_t vorbis_fpu_control;
 
-static GOTV_INLINE void vorbis_fpu_setround(vorbis_fpu_control *fpu){
+static NLC_INLINE void vorbis_fpu_setround(vorbis_fpu_control *fpu){
   ogg_int16_t ret;
   ogg_int16_t temp;
   __asm__ __volatile__("fnstcw %0\n\t"
@@ -101,12 +101,12 @@ static GOTV_INLINE void vorbis_fpu_setround(vorbis_fpu_control *fpu){
   *fpu=ret;
 }
 
-static GOTV_INLINE void vorbis_fpu_restore(vorbis_fpu_control fpu){
+static NLC_INLINE void vorbis_fpu_restore(vorbis_fpu_control fpu){
   __asm__ __volatile__("fldcw %0":: "m"(fpu));
 }
 
 /* assumes the FPU is in round mode! */
-static GOTV_INLINE int vorbis_ftoi(double f){  /* yes, double!  Otherwise,
+static NLC_INLINE int vorbis_ftoi(double f){  /* yes, double!  Otherwise,
                                              we get extra fst/fld to
                                              truncate precision */
   int i;
@@ -116,7 +116,7 @@ static GOTV_INLINE int vorbis_ftoi(double f){  /* yes, double!  Otherwise,
 #endif /* Special i386 GCC implementation */
 
 
-/* MSVC GOTV_INLINE assembly. 32 bit only; GOTV_INLINE ASM isn't implemented in the
+/* MSVC NLC_INLINE assembly. 32 bit only; NLC_INLINE ASM isn't implemented in the
  * 64 bit compiler */
 #if defined(_MSC_VER) && !defined(_WIN64) && !defined(_WIN32_WCE)
 #  define VORBIS_FPU_CONTROL

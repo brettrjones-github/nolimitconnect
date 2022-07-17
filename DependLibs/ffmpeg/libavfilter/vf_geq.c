@@ -75,7 +75,7 @@ static const AVOption geq_options[] = {
 
 AVFILTER_DEFINE_CLASS(geq);
 
-static GOTV_INLINE double getpix(void *priv, double x, double y, int plane)
+static NLC_INLINE double getpix(void *priv, double x, double y, int plane)
 {
     int xi, yi;
     GEQContext *geq = priv;

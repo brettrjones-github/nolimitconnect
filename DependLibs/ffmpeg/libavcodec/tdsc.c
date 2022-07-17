@@ -311,7 +311,7 @@ static int tdsc_load_cursor(AVCodecContext *avctx)
 }
 
 /* Convert a single YUV pixel to RGB. */
-static GOTV_INLINE void tdsc_yuv2rgb(uint8_t *out, int Y, int U, int V)
+static NLC_INLINE void tdsc_yuv2rgb(uint8_t *out, int Y, int U, int V)
 {
     out[0] = av_clip_uint8(Y + (             91881 * V + 32768 >> 16));
     out[1] = av_clip_uint8(Y + (-22554 * U - 46802 * V + 32768 >> 16));

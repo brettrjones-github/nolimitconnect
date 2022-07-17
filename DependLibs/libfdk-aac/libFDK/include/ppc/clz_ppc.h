@@ -92,7 +92,7 @@ amm-info@iis.fraunhofer.de
 
 #define FUNCTION_fixnormz_D
 
-GOTV_INLINE int32_t fixnormz_D(int32_t value)
+NLC_INLINE int32_t fixnormz_D(int32_t value)
 {
   int32_t result;
   __asm__ ("cntlzw %0, %1" : "=r" (result) : "r" (value));

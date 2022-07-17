@@ -112,7 +112,7 @@ class izstream
  * (0 for end of file, -1 for error).
  */
 template <class T, class Items>
-GOTV_INLINE int read(izstream& zs, T* x, Items items) {
+NLC_INLINE int read(izstream& zs, T* x, Items items) {
     return ::gzread(zs.fp(), x, items*sizeof(T));
 }
 
@@ -120,13 +120,13 @@ GOTV_INLINE int read(izstream& zs, T* x, Items items) {
  * Binary input with the '>' operator.
  */
 template <class T>
-GOTV_INLINE izstream& operator>(izstream& zs, T& x) {
+NLC_INLINE izstream& operator>(izstream& zs, T& x) {
     ::gzread(zs.fp(), &x, sizeof(T));
     return zs;
 }
 
 
-GOTV_INLINE zstringlen::zstringlen(izstream& zs) {
+NLC_INLINE zstringlen::zstringlen(izstream& zs) {
     zs > val.byte;
     if (val.byte == 255) zs > val.word;
     else val.word = val.byte;
@@ -135,14 +135,14 @@ GOTV_INLINE zstringlen::zstringlen(izstream& zs) {
 /*
  * Read length of string + the string with the '>' operator.
  */
-GOTV_INLINE izstream& operator>(izstream& zs, char* x) {
+NLC_INLINE izstream& operator>(izstream& zs, char* x) {
     zstringlen len(zs);
     ::gzread(zs.fp(), x, len.value());
     x[len.value()] = '\0';
     return zs;
 }
 
-GOTV_INLINE char* read_string(izstream& zs) {
+NLC_INLINE char* read_string(izstream& zs) {
     zstringlen len(zs);
     char* x = new char[len.value()+1];
     ::gzread(zs.fp(), x, len.value());
@@ -261,7 +261,7 @@ class ozstream
  * (0 in case of error).
  */
 template <class T, class Items>
-GOTV_INLINE int write(ozstream& zs, const T* x, Items items) {
+NLC_INLINE int write(ozstream& zs, const T* x, Items items) {
     return ::gzwrite(zs.fp(), (voidp) x, items*sizeof(T));
 }
 
@@ -269,12 +269,12 @@ GOTV_INLINE int write(ozstream& zs, const T* x, Items items) {
  * Binary output with the '<' operator.
  */
 template <class T>
-GOTV_INLINE ozstream& operator<(ozstream& zs, const T& x) {
+NLC_INLINE ozstream& operator<(ozstream& zs, const T& x) {
     ::gzwrite(zs.fp(), (voidp) &x, sizeof(T));
     return zs;
 }
 
-GOTV_INLINE zstringlen::zstringlen(ozstream& zs, const char* x) {
+NLC_INLINE zstringlen::zstringlen(ozstream& zs, const char* x) {
     val.byte = 255;  val.word = ::strlen(x);
     if (val.word < 255) zs < (val.byte = val.word);
     else zs < val;
@@ -283,14 +283,14 @@ GOTV_INLINE zstringlen::zstringlen(ozstream& zs, const char* x) {
 /*
  * Write length of string + the string with the '<' operator.
  */
-GOTV_INLINE ozstream& operator<(ozstream& zs, const char* x) {
+NLC_INLINE ozstream& operator<(ozstream& zs, const char* x) {
     zstringlen len(zs, x);
     ::gzwrite(zs.fp(), (voidp) x, len.value());
     return zs;
 }
 
 #ifdef _MSC_VER
-GOTV_INLINE ozstream& operator<(ozstream& zs, char* const& x) {
+NLC_INLINE ozstream& operator<(ozstream& zs, char* const& x) {
     return zs < (const char*) x;
 }
 #endif
@@ -299,7 +299,7 @@ GOTV_INLINE ozstream& operator<(ozstream& zs, char* const& x) {
  * Ascii write with the << operator;
  */
 template <class T>
-GOTV_INLINE ostream& operator<<(ozstream& zs, const T& x) {
+NLC_INLINE ostream& operator<<(ozstream& zs, const T& x) {
     zs.os_flush();
     return zs.os() << x;
 }

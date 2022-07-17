@@ -48,27 +48,27 @@ public:
 	ADbg(int level = 0);
 	virtual ~ADbg();
 
-	/// \todo make an GOTV_INLINE function to test the level first and the process
+	/// \todo make an NLC_INLINE function to test the level first and the process
 	int OutPut(int level, const char * format,...) const;
 
 	int OutPut(const char * format,...) const;
 
-	GOTV_INLINE int setLevel(const int level) {
+	NLC_INLINE int setLevel(const int level) {
 		return my_level = level;
 	}
 
-	GOTV_INLINE bool setIncludeTime(const bool included = true) {
+	NLC_INLINE bool setIncludeTime(const bool included = true) {
 		return my_time_included = included;
 	}
 
 	bool setDebugFile(const char * NewFilename);
 	bool unsetDebugFile();
 
-	GOTV_INLINE bool setUseFile(const bool usefile = true) {
+	NLC_INLINE bool setUseFile(const bool usefile = true) {
 		return my_use_file = usefile;
 	}
 
-	GOTV_INLINE const char * setPrefix(const char * string) {
+	NLC_INLINE const char * setPrefix(const char * string) {
 		return strncpy(prefix, string, MAX_PREFIX_LENGTH);
 	}
 
@@ -95,35 +95,35 @@ public:
 	ADbg(int level = 0){}
 	virtual ~ADbg() {}
 
-	GOTV_INLINE int OutPut(int level, const char * format,...) const {
+	NLC_INLINE int OutPut(int level, const char * format,...) const {
 		return 0;
 	}
 
-	GOTV_INLINE int OutPut(const char * format,...) const {
+	NLC_INLINE int OutPut(const char * format,...) const {
 		return 0;
 	}
 
-	GOTV_INLINE int setLevel(const int level) {
+	NLC_INLINE int setLevel(const int level) {
 		return level;
 	}
 
-	GOTV_INLINE bool setIncludeTime(const bool included = true) {
+	NLC_INLINE bool setIncludeTime(const bool included = true) {
 		return true;
 	}
 
-	GOTV_INLINE bool setDebugFile(const char * NewFilename) {
+	NLC_INLINE bool setDebugFile(const char * NewFilename) {
 		return true;
 	}
 
-	GOTV_INLINE bool unsetDebugFile() {
+	NLC_INLINE bool unsetDebugFile() {
 		return true;
 	}
 
-	GOTV_INLINE bool setUseFile(const bool usefile = true) {
+	NLC_INLINE bool setUseFile(const bool usefile = true) {
 		return true;
 	}
 
-	GOTV_INLINE const char * setPrefix(const char * string) {
+	NLC_INLINE const char * setPrefix(const char * string) {
 		return string;
 	}
 };

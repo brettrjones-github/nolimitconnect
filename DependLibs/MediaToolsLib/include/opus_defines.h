@@ -108,7 +108,7 @@ extern "C" {
 #  define OPUS_INLINE
 # endif
 #else
-# define OPUS_INLINE GOTV_INLINE
+# define OPUS_INLINE NLC_INLINE
 #endif
 
 /**Warning attributes for opus functions

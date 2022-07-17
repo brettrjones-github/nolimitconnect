@@ -32,11 +32,11 @@
 
 #include <cairo.h>
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 gboolean    rsvg_handle_render_cairo     (RsvgHandle * handle, cairo_t * cr);
 gboolean    rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

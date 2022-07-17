@@ -402,7 +402,7 @@ struct SBinaryHeader
     uint32_t    cDepthStencilViews;
 
     uint32_t    cTotalShaders;
-    uint32_t    cInlineShaders; // of the aforementioned shaders, the number that are defined GOTV_INLINE within pass blocks
+    uint32_t    cInlineShaders; // of the aforementioned shaders, the number that are defined NLC_INLINE within pass blocks
 
     inline bool RequiresPool() const
     {

@@ -164,6 +164,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPersonOfferList:            return eMyIconPersonsOfferList;
     case eAppletPopupMenu:	                return eMyIconMenu;
 
+    case eAppletSoundSettings:	            return eMyIconSoundSettings;
+
     // case eAppletPlayerMusic:			return eMyIconMusic;
     // case eAppletPlayerPhoto:			return eMyIconGallery;
     // case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
@@ -188,6 +190,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletEditAvatarImage:		    return QObject::tr( "Edit My Avatar Image" );
     case eAppletEditStoryboard:		        return QObject::tr( "Edit My Story Board (Blog)" );
     case eAppletStoryboardClient:		    return QObject::tr( "View Story Board (Blog)" );
+    case eAppletSoundSettings:		        return QObject::tr( "Sound Settings" );
     case eAppletAboutMeClient:              return QObject::tr( "View About Me Page" );
     case eAppletHomePage:				    return QObject::tr( "Home" );
     case eAppletAboutNoLimitConnect:        return QObject::tr( "About No Limit Connect" );

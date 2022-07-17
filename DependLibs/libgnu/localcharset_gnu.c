@@ -257,7 +257,7 @@ get_charset_aliases (void)
 # if defined DARWIN7
       /* To avoid the trouble of installing a file that is shared by many
          GNU packages -- many packaging systems have problems with this --,
-         simply GOTV_INLINE the aliases here.  */
+         simply NLC_INLINE the aliases here.  */
       cp = "ISO8859-1" "\0" "ISO-8859-1" "\0"
            "ISO8859-2" "\0" "ISO-8859-2" "\0"
            "ISO8859-4" "\0" "ISO-8859-4" "\0"
@@ -289,7 +289,7 @@ get_charset_aliases (void)
 
 # if defined VMS
       /* To avoid the troubles of an extra file charset.alias_vms in the
-         sources of many GNU packages, simply GOTV_INLINE the aliases here.  */
+         sources of many GNU packages, simply NLC_INLINE the aliases here.  */
       /* The list of encodings is taken from the OpenVMS 7.3-1 documentation
          "Compaq C Run-Time Library Reference Manual for OpenVMS systems"
          section 10.7 "Handling Different Character Sets".  */
@@ -315,7 +315,7 @@ get_charset_aliases (void)
 # if defined TARGET_OS_WINDOWS || defined __CYGWIN__
       /* To avoid the troubles of installing a separate file in the same
          directory as the DLL and of retrieving the DLL's directory at
-         runtime, simply GOTV_INLINE the aliases here.  */
+         runtime, simply NLC_INLINE the aliases here.  */
 
       cp = "CP936" "\0" "GBK" "\0"
            "CP1361" "\0" "JOHAB" "\0"
@@ -344,7 +344,7 @@ get_charset_aliases (void)
 # if defined OS2
       /* To avoid the troubles of installing a separate file in the same
          directory as the DLL and of retrieving the DLL's directory at
-         runtime, simply GOTV_INLINE the aliases here.  */
+         runtime, simply NLC_INLINE the aliases here.  */
 
       /* The list of encodings is taken from "List of OS/2 Codepages"
          by Alex Taylor:

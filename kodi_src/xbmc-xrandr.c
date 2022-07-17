@@ -182,7 +182,7 @@ warning (const char *format, ...)
 }
 
 /* Because fmin requires C99 suppport */
-static GOTV_INLINE double dmin (double x, double y)
+static NLC_INLINE double dmin (double x, double y)
 {
     return x < y ? x : y;
 }

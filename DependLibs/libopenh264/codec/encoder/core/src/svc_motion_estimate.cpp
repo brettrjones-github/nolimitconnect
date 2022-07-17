@@ -57,13 +57,13 @@ const int32_t QStepx16ByQp[52] = {  /* save QStep<<4 for int32_t */
   2560, 2816, 3328, 3584     /* 48~51 */
 };
 
-static GOTV_INLINE void UpdateMeResults (const SMVUnitXY ksBestMv, const uint32_t kiBestSadCost, uint8_t* pRef,
+static NLC_INLINE void UpdateMeResults (const SMVUnitXY ksBestMv, const uint32_t kiBestSadCost, uint8_t* pRef,
                                     SWelsME* pMe) {
   pMe->sMv = ksBestMv;
   pMe->pRefMb = pRef;
   pMe->uiSadCost = kiBestSadCost;
 }
-static GOTV_INLINE void MeEndIntepelSearch (SWelsME* pMe) {
+static NLC_INLINE void MeEndIntepelSearch (SWelsME* pMe) {
   /* -> qpel mv */
   pMe->sMv.iMvX *= (1 << 2);
   pMe->sMv.iMvY *= (1 << 2);

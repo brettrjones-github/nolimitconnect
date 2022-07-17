@@ -54,7 +54,7 @@ vbi_page_table_contains_subpage	(const vbi_page_table *pt,
  * The function returns @c TRUE if any subpages of page @a pgno
  * have been added to the page table.
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_page_table_contains_page	(const vbi_page_table *pt,
 				 vbi_pgno		pgno)
 {
@@ -94,7 +94,7 @@ vbi_page_table_remove_subpages	(vbi_page_table *	pt,
  * @a returns
  * @c FALSE on failure (invalid page or subpage number or out of memory).
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_page_table_remove_subpage	(vbi_page_table *	pt,
 				 vbi_pgno		pgno,
 				 vbi_subno		subno)
@@ -123,7 +123,7 @@ vbi_page_table_add_subpages	(vbi_page_table *	pt,
  * @a returns
  * @c FALSE on failure (invalid page or subpage number or out of memory).
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_page_table_add_subpage	(vbi_page_table *	pt,
 				 vbi_pgno		pgno,
 				 vbi_subno		subno)
@@ -148,7 +148,7 @@ vbi_page_table_remove_pages	(vbi_page_table *	pt,
  * @a returns
  * @c FALSE on failure (invalid page number or out of memory).
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_page_table_remove_page	(vbi_page_table *	pt,
 				 vbi_pgno		pgno)
 {
@@ -182,7 +182,7 @@ vbi_page_table_add_pages	(vbi_page_table *	pt,
  * @a returns
  * @c FALSE on failure (invalid page number or out of memory).
  */
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_page_table_add_page		(vbi_page_table *	pt,
 				 vbi_pgno		pgno)
 {

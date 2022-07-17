@@ -34,7 +34,7 @@
 #include "cr-input.h"
 #include "cr-stylesheet.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 typedef struct _CRDocHandler CRDocHandler ;
@@ -293,6 +293,6 @@ gboolean cr_doc_handler_unref (CRDocHandler *a_this) ;
 
 void cr_doc_handler_destroy (CRDocHandler *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_DOC_HANDLER_H__*/

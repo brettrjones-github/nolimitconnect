@@ -27,7 +27,7 @@ NONSHARABLE_CLASS(TNodeBuffer)
                 static  TNode* New(TNode* aPrev,  const TDesC8& aData);
                 const TUint8* Ptr() const;
                 TInt Size() const;
-                GOTV_INLINE TNode* Succ();
+                NLC_INLINE TNode* Succ();
                 static void SetSucc(TNode*& aNode);
                 void Terminator(TNode* aNode);
             private:
@@ -35,7 +35,7 @@ NONSHARABLE_CLASS(TNodeBuffer)
             };
     };
 
-GOTV_INLINE TNodeBuffer::TNode* TNodeBuffer::TNode::Succ()
+NLC_INLINE TNodeBuffer::TNode* TNodeBuffer::TNode::Succ()
     {
     return iSucc;
     }

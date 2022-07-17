@@ -109,7 +109,7 @@ void pitch_xcorr(const spx_word16_t *_x, const spx_word16_t *_y, spx_word32_t *c
 }
 
 #define OVERRIDE_COMPUTE_PITCH_ERROR
-static GOTV_INLINE spx_word32_t compute_pitch_error(spx_word16_t *C, spx_word16_t *g, spx_word16_t pitch_control)
+static NLC_INLINE spx_word32_t compute_pitch_error(spx_word16_t *C, spx_word16_t *g, spx_word16_t pitch_control)
 {
    spx_word32_t sum;
    __asm__ __volatile__

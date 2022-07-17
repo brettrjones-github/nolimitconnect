@@ -113,7 +113,7 @@ void compute_band_energies_libcelt(const CELTMode *m, const libcelt_sig *X, libc
 }
 
 /* Normalise each band such that the energy is one. */
-void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * GOTV_RESTRICT freq, libcelt_norm * GOTV_RESTRICT X, const libcelt_ener *bank, int end, int _C, int M)
+void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * NLC_RESTRICT freq, libcelt_norm * NLC_RESTRICT X, const libcelt_ener *bank, int end, int _C, int M)
 {
    int i, c, N;
    const libcelt_int16 *eBands = m->eBands;
@@ -157,7 +157,7 @@ void compute_band_energies_libcelt(const CELTMode *m, const libcelt_sig *X, libc
 }
 
 /* Normalize each band such that the energy is one. */
-void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * GOTV_RESTRICT freq, libcelt_norm * GOTV_RESTRICT X, const libcelt_ener *bank, int end, int _C, int M)
+void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * NLC_RESTRICT freq, libcelt_norm * NLC_RESTRICT X, const libcelt_ener *bank, int end, int _C, int M)
 {
    int i, c, N;
    const libcelt_int16 *eBands = m->eBands;
@@ -177,7 +177,7 @@ void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * GOTV_RESTRIC
 #endif /* FIXED_POINT */
 
 /* De-normalize the energy to produce the synthesis from the unit-energy bands */
-void denormalise_bands_libcelt(const CELTMode *m, const libcelt_norm * GOTV_RESTRICT X, libcelt_sig * GOTV_RESTRICT freq, const libcelt_ener *bank, int end, int _C, int M)
+void denormalise_bands_libcelt(const CELTMode *m, const libcelt_norm * NLC_RESTRICT X, libcelt_sig * NLC_RESTRICT freq, const libcelt_ener *bank, int end, int _C, int M)
 {
    int i, c, N;
    const libcelt_int16 *eBands = m->eBands;
@@ -185,8 +185,8 @@ void denormalise_bands_libcelt(const CELTMode *m, const libcelt_norm * GOTV_REST
    N = M*m->shortMdctSize;
    libcelt_assert2(C<=2, "denormalise_bands() not implemented for >2 channels");
    c=0; do {
-      libcelt_sig * GOTV_RESTRICT f;
-      const libcelt_norm * GOTV_RESTRICT x;
+      libcelt_sig * NLC_RESTRICT f;
+      const libcelt_norm * NLC_RESTRICT x;
       f = freq+c*N;
       x = X+c*N;
       for (i=0;i<end;i++)
@@ -401,7 +401,7 @@ int spreading_decision_libcelt(const CELTMode *m, libcelt_norm *X, int *average,
    int i, c, N0;
    int sum = 0, nbBands=0;
    const int C = CHANNELS(_C);
-   const libcelt_int16 * GOTV_RESTRICT eBands = m->eBands;
+   const libcelt_int16 * NLC_RESTRICT eBands = m->eBands;
    int decision;
    int hf_sum=0;
    
@@ -414,7 +414,7 @@ int spreading_decision_libcelt(const CELTMode *m, libcelt_norm *X, int *average,
       {
          int j, N, tmp=0;
          int tcount[3] = {0};
-         libcelt_norm * GOTV_RESTRICT x = X+M*eBands[i]+c*N0;
+         libcelt_norm * NLC_RESTRICT x = X+M*eBands[i]+c*N0;
          N = M*(eBands[i+1]-eBands[i]);
          if (N<=8)
             continue;
@@ -1163,8 +1163,8 @@ void quant_all_bands_libcelt(int encode, const CELTMode *m, int start, int end,
 {
    int i;
    libcelt_int32 remaining_bits;
-   const libcelt_int16 * GOTV_RESTRICT eBands = m->eBands;
-   libcelt_norm * GOTV_RESTRICT norm, * GOTV_RESTRICT norm2;
+   const libcelt_int16 * NLC_RESTRICT eBands = m->eBands;
+   libcelt_norm * NLC_RESTRICT norm, * NLC_RESTRICT norm2;
    VARDECL(libcelt_norm, _norm);
    VARDECL(libcelt_norm, lowband_scratch);
    int B;
@@ -1189,7 +1189,7 @@ void quant_all_bands_libcelt(int encode, const CELTMode *m, int start, int end,
       int N;
       libcelt_int32 curr_balance;
       int effective_lowband=-1;
-      libcelt_norm * GOTV_RESTRICT X, * GOTV_RESTRICT Y;
+      libcelt_norm * NLC_RESTRICT X, * NLC_RESTRICT Y;
       int tf_change=0;
       unsigned x_cm;
       unsigned y_cm;

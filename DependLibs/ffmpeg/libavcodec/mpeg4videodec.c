@@ -119,7 +119,7 @@ void ff_mpeg4_pred_ac(MpegEncContext *s, int16_t *block, int n, int dir)
  * check if the next stuff is a resync marker or the end.
  * @return 0 if not
  */
-static GOTV_INLINE int mpeg4_is_resync(Mpeg4DecContext *ctx)
+static NLC_INLINE int mpeg4_is_resync(Mpeg4DecContext *ctx)
 {
     MpegEncContext *s = &ctx->m;
     int bits_count = get_bits_count(&s->gb);
@@ -585,7 +585,7 @@ int ff_mpeg4_decode_studio_slice_header(Mpeg4DecContext *ctx)
  * @param n either 0 for the x component or 1 for y
  * @return the average MV for a GMC MB
  */
-static GOTV_INLINE int get_amv(Mpeg4DecContext *ctx, int n)
+static NLC_INLINE int get_amv(Mpeg4DecContext *ctx, int n)
 {
     MpegEncContext *s = &ctx->m;
     int x, y, mb_v, sum, dx, dy, shift;
@@ -638,7 +638,7 @@ static GOTV_INLINE int get_amv(Mpeg4DecContext *ctx, int n)
  * @param dir_ptr the prediction direction will be stored here
  * @return the quantized dc
  */
-static GOTV_INLINE int mpeg4_decode_dc(MpegEncContext *s, int n, int *dir_ptr)
+static NLC_INLINE int mpeg4_decode_dc(MpegEncContext *s, int n, int *dir_ptr)
 {
     int level, code;
 
@@ -1037,7 +1037,7 @@ int ff_mpeg4_decode_partitions(Mpeg4DecContext *ctx)
  * Decode a block.
  * @return <0 if an error occurred
  */
-static GOTV_INLINE int mpeg4_decode_block(Mpeg4DecContext *ctx, int16_t *block,
+static NLC_INLINE int mpeg4_decode_block(Mpeg4DecContext *ctx, int16_t *block,
                                      int n, int coded, int intra, int rvlc)
 {
     MpegEncContext *s = &ctx->m;

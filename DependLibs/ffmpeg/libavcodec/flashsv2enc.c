@@ -406,12 +406,12 @@ static int encode_bgr(Block * b, const uint8_t * src, int stride)
     return b->enc_size;
 }
 
-static GOTV_INLINE unsigned pixel_color15(const uint8_t * src)
+static NLC_INLINE unsigned pixel_color15(const uint8_t * src)
 {
     return (src[0] >> 3) | ((src[1] & 0xf8) << 2) | ((src[2] & 0xf8) << 7);
 }
 
-static GOTV_INLINE unsigned int chroma_diff(unsigned int c1, unsigned int c2)
+static NLC_INLINE unsigned int chroma_diff(unsigned int c1, unsigned int c2)
 {
 #define ABSDIFF(a,b) (abs((int)(a)-(int)(b)))
 
@@ -423,7 +423,7 @@ static GOTV_INLINE unsigned int chroma_diff(unsigned int c1, unsigned int c2)
         ABSDIFF((c1 & 0x00ff0000) >> 16, (c2 & 0x00ff0000) >> 16);
 }
 
-static GOTV_INLINE int pixel_color7_fast(Palette * palette, unsigned c15)
+static NLC_INLINE int pixel_color7_fast(Palette * palette, unsigned c15)
 {
     return palette->index[c15];
 }
@@ -443,7 +443,7 @@ static int pixel_color7_slow(Palette * palette, unsigned color)
     return minc;
 }
 
-static GOTV_INLINE unsigned pixel_bgr(const uint8_t * src)
+static NLC_INLINE unsigned pixel_bgr(const uint8_t * src)
 {
     return (src[0]) | (src[1] << 8) | (src[2] << 16);
 }
@@ -524,7 +524,7 @@ static int generate_optimum_palette(Palette * palette, const uint8_t * image,
     return -1;
 }
 
-static GOTV_INLINE int encode_15_7_sl(Palette * palette, uint8_t * dest,
+static NLC_INLINE int encode_15_7_sl(Palette * palette, uint8_t * dest,
                                  const uint8_t * src, int width, int dist)
 {
     int len = 0, x;

@@ -276,7 +276,7 @@ DECLARE_ASM_CONST(8, uint64_t, round_tab)[3] = {
     0x0002000200020002ULL,
 };
 
-static GOTV_INLINE void sad8_1_mmx(uint8_t *blk1, uint8_t *blk2,
+static NLC_INLINE void sad8_1_mmx(uint8_t *blk1, uint8_t *blk2,
                               ptrdiff_t stride, int h)
 {
     x86_reg len = -stride * h;
@@ -312,7 +312,7 @@ static GOTV_INLINE void sad8_1_mmx(uint8_t *blk1, uint8_t *blk2,
         : "r" (blk1 - len), "r" (blk2 - len), "r" (stride));
 }
 
-static GOTV_INLINE void sad8_2_mmx(uint8_t *blk1a, uint8_t *blk1b, uint8_t *blk2,
+static NLC_INLINE void sad8_2_mmx(uint8_t *blk1a, uint8_t *blk1b, uint8_t *blk2,
                               ptrdiff_t stride, int h)
 {
     x86_reg len = -stride * h;
@@ -351,7 +351,7 @@ static GOTV_INLINE void sad8_2_mmx(uint8_t *blk1a, uint8_t *blk1b, uint8_t *blk2
           "r" (stride));
 }
 
-static GOTV_INLINE void sad8_4_mmx(uint8_t *blk1, uint8_t *blk2,
+static NLC_INLINE void sad8_4_mmx(uint8_t *blk1, uint8_t *blk2,
                               ptrdiff_t stride, int h)
 {
     x86_reg len = -stride * h;
@@ -405,7 +405,7 @@ static GOTV_INLINE void sad8_4_mmx(uint8_t *blk1, uint8_t *blk2,
           "r" (stride), "m" (round_tab[2]));
 }
 
-static GOTV_INLINE int sum_mmx(void)
+static NLC_INLINE int sum_mmx(void)
 {
     int ret;
     __asm__ volatile (
@@ -420,13 +420,13 @@ static GOTV_INLINE int sum_mmx(void)
     return ret & 0xFFFF;
 }
 
-static GOTV_INLINE void sad8_x2a_mmx(uint8_t *blk1, uint8_t *blk2,
+static NLC_INLINE void sad8_x2a_mmx(uint8_t *blk1, uint8_t *blk2,
                                 ptrdiff_t stride, int h)
 {
     sad8_2_mmx(blk1, blk1 + 1, blk2, stride, h);
 }
 
-static GOTV_INLINE void sad8_y2a_mmx(uint8_t *blk1, uint8_t *blk2,
+static NLC_INLINE void sad8_y2a_mmx(uint8_t *blk1, uint8_t *blk2,
                                 ptrdiff_t stride, int h)
 {
     sad8_2_mmx(blk1, blk1 + stride, blk2, stride, h);

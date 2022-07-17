@@ -73,7 +73,7 @@ void ff_rl_free(RLTable *rl);
     }\
 }
 
-static GOTV_INLINE int get_rl_index(const RLTable *rl, int last, int run, int level)
+static NLC_INLINE int get_rl_index(const RLTable *rl, int last, int run, int level)
 {
     int index;
     index = rl->index_run[last][run];

@@ -30,8 +30,8 @@
 
 ssize_t readlink (const char *name, char *buf, size_t bufsize )
 {
-	GOTV_UNUSED( buf );
-	GOTV_UNUSED( bufsize );
+	NLC_UNUSED( buf );
+	NLC_UNUSED( bufsize );
 
   struct stat statbuf;
 

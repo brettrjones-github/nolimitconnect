@@ -65,7 +65,7 @@ int _dtls_wait_and_retransmit(gnutls_session_t session);
 /* returns true or false depending on whether we need to
  * handle asynchronously handshake data.
  */
-GOTV_INLINE static int _dtls_is_async(gnutls_session_t session)
+NLC_INLINE static int _dtls_is_async(gnutls_session_t session)
 {
 	if ((session->security_parameters.entity == GNUTLS_SERVER
 	     && session->internals.resumed == RESUME_FALSE)
@@ -76,7 +76,7 @@ GOTV_INLINE static int _dtls_is_async(gnutls_session_t session)
 		return 0;
 }
 
-GOTV_INLINE static void _dtls_async_timer_init(gnutls_session_t session)
+NLC_INLINE static void _dtls_async_timer_init(gnutls_session_t session)
 {
 	if (_dtls_is_async(session)) {
 		_gnutls_dtls_log
@@ -96,7 +96,7 @@ void _dtls_async_timer_delete(gnutls_session_t session);
 
 /* Checks whether it is time to terminate the timer
  */
-GOTV_INLINE static void _dtls_async_timer_check(gnutls_session_t session)
+NLC_INLINE static void _dtls_async_timer_check(gnutls_session_t session)
 {
 	if (!IS_DTLS(session))
 		return;
@@ -112,7 +112,7 @@ GOTV_INLINE static void _dtls_async_timer_check(gnutls_session_t session)
 }
 
 /* Returns non-zero if the async timer is active */
-GOTV_INLINE static int _dtls_async_timer_active(gnutls_session_t session)
+NLC_INLINE static int _dtls_async_timer_active(gnutls_session_t session)
 {
 	if (!IS_DTLS(session))
 		return 0;
@@ -125,7 +125,7 @@ GOTV_INLINE static int _dtls_async_timer_active(gnutls_session_t session)
  * it transmits only once per few seconds. Otherwise
  * it is the same as _dtls_transmit().
  */
-GOTV_INLINE static int _dtls_retransmit(gnutls_session_t session)
+NLC_INLINE static int _dtls_retransmit(gnutls_session_t session)
 {
 	return _dtls_transmit(session);
 }

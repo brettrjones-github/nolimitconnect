@@ -43,7 +43,7 @@
 
 #define DEFAULT_INTER_INDEX 3
 
-static GOTV_INLINE int msmpeg4v1_pred_dc(MpegEncContext * s, int n,
+static NLC_INLINE int msmpeg4v1_pred_dc(MpegEncContext * s, int n,
                                     int32_t **dc_val_ptr)
 {
     int i;

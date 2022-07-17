@@ -35,7 +35,7 @@
 
 #define OVERRIDE_CHEB_POLY_EVA
 #ifdef OVERRIDE_CHEB_POLY_EVA
-static GOTV_INLINE spx_word32_t cheb_poly_eva(
+static NLC_INLINE spx_word32_t cheb_poly_eva(
   spx_word16_t *coef, /* P or Q coefs in Q13 format               */
   spx_word16_t     x, /* cos of freq (-1.0 to 1.0) in Q14 format  */
   int              m, /* LPC order/2                              */

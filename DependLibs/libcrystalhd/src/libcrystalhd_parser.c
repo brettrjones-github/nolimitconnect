@@ -1319,7 +1319,7 @@ BC_STATUS DtsSymbIntSiUe (HANDLE hDevice, ULONG* pCode)
     return BC_STS_SUCCESS;
 }
 
-GOTV_INLINE int DtsSymbIntNextBit ( HANDLE hDevice )
+NLC_INLINE int DtsSymbIntNextBit ( HANDLE hDevice )
 {
     int   nBit;
     DTS_LIB_CONTEXT *Ctx = NULL;

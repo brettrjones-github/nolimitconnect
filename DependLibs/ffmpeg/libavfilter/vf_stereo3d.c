@@ -304,7 +304,7 @@ static int query_formats(AVFilterContext *ctx)
     return ff_set_common_formats(ctx, fmts_list);
 }
 
-static GOTV_INLINE uint8_t ana_convert(const int *coeff, const uint8_t *left, const uint8_t *right)
+static NLC_INLINE uint8_t ana_convert(const int *coeff, const uint8_t *left, const uint8_t *right)
 {
     int sum;
 

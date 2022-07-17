@@ -42,7 +42,7 @@
  *  Some compilers use a special export keyword
  */
 #ifndef DECLSPEC
-# define DECLSPEC GOTV_API
+# define DECLSPEC NLC_API
 #endif // DECLSPEC
 
 
@@ -124,7 +124,7 @@
 #else
 #if !defined(__MRC__) && !defined(_SGI_SOURCE)
 #ifndef __inline__
-#define __inline__ GOTV_INLINE
+#define __inline__ NLC_INLINE
 #endif
 #define SDL_INLINE_OKAY
 #endif /* Not a funky compiler */

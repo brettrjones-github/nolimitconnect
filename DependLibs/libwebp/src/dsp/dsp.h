@@ -74,7 +74,7 @@ extern "C" {
 #endif
 
 // The intrinsics currently cause compiler errors with arm-nacl-gcc and the
-// GOTV_INLINE assembly would need to be modified for use with Native Client.
+// NLC_INLINE assembly would need to be modified for use with Native Client.
 #if (defined(__ARM_NEON__) || defined(WEBP_ANDROID_NEON) || \
      defined(__aarch64__) || defined(WEBP_HAVE_NEON)) && \
     !defined(__native_client__) && defined(__ARM_NEON)

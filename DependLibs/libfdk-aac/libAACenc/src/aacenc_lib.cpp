@@ -324,7 +324,7 @@ static AACENC_ERROR eldSbrConfigurator(
     return err;
 }
 
-static GOTV_INLINE int32_t isSbrActive(const HANDLE_AACENC_CONFIG hAacConfig)
+static NLC_INLINE int32_t isSbrActive(const HANDLE_AACENC_CONFIG hAacConfig)
 {
     int32_t sbrUsed = 0;
 
@@ -340,7 +340,7 @@ static GOTV_INLINE int32_t isSbrActive(const HANDLE_AACENC_CONFIG hAacConfig)
     return ( sbrUsed );
 }
 
-static GOTV_INLINE int32_t isPsActive(const AUDIO_OBJECT_TYPE audioObjectType)
+static NLC_INLINE int32_t isPsActive(const AUDIO_OBJECT_TYPE audioObjectType)
 {
     int32_t psUsed = 0;
 

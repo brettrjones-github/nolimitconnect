@@ -33,7 +33,7 @@
 
 #include <libgnu/gtypes.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GHashTable  GHashTable;
 
@@ -126,7 +126,7 @@ gboolean g_direct_equal (gconstpointer  v1,
 
 #endif
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_HASH_H__ */
 

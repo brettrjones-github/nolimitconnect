@@ -35,7 +35,7 @@
 
 #include <libtasn1.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #define ASN1_SMALL_VALUE_SIZE 16
 
@@ -175,6 +175,6 @@ unsigned int convert_old_type (unsigned int ntype);
 
 void *_asn1_realloc(void *ptr, size_t size);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 

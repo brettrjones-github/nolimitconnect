@@ -2,7 +2,7 @@
 #include <AppDependLibrariesConfig.h>
 //#define OC_FACTOR_INTO_H_AND_CC 1
 #define OC_NEW_STYLE_INCLUDES 1
-#define OC_INLINE GOTV_INLINE
+#define OC_INLINE NLC_INLINE
 
 #ifdef _MSC_VER
 # pragma warning( disable : 4812 ) // obsolete declaration style

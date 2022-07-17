@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#define KVZ_PUBLIC	GOTV_API
+#define KVZ_PUBLIC	NLC_API
 
 /**
  * Maximum length of a GoP structure.

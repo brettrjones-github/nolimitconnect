@@ -53,7 +53,7 @@ enum
     OSD_VERT_SLIDER,
 };
 
-GOTV_API int vout_OSDEpg( vout_thread_t *, input_item_t * );
+NLC_API int vout_OSDEpg( vout_thread_t *, input_item_t * );
 
 /**
  * \brief Write an informative message if the OSD option is enabled.
@@ -63,7 +63,7 @@ GOTV_API int vout_OSDEpg( vout_thread_t *, input_item_t * );
  * \param duration Duration of the text being displayed
  * \param text Text to be displayed
  */
-GOTV_API void vout_OSDText( vout_thread_t *vout, int channel, int position, mtime_t duration, const char *text );
+NLC_API void vout_OSDText( vout_thread_t *vout, int channel, int position, mtime_t duration, const char *text );
 
 /**
  * \brief Write an informative message at the default location,
@@ -74,7 +74,7 @@ GOTV_API void vout_OSDText( vout_thread_t *vout, int channel, int position, mtim
  *
  * Provided for convenience.
  */
-GOTV_API void vout_OSDMessage( vout_thread_t *, int, const char *, ... ) GOTV_FORMAT( 3, 4 );
+NLC_API void vout_OSDMessage( vout_thread_t *, int, const char *, ... ) GOTV_FORMAT( 3, 4 );
 
 /**
  * Display a slider on the video output.
@@ -83,7 +83,7 @@ GOTV_API void vout_OSDMessage( vout_thread_t *, int, const char *, ... ) GOTV_FO
  * \param i_postion Current position in the slider
  * \param i_type    Types are: OSD_HOR_SLIDER and OSD_VERT_SLIDER.
  */
-GOTV_API void vout_OSDSlider( vout_thread_t *, int, int , short );
+NLC_API void vout_OSDSlider( vout_thread_t *, int, int , short );
 
 /**
  * Display an Icon on the video output.
@@ -91,7 +91,7 @@ GOTV_API void vout_OSDSlider( vout_thread_t *, int, int , short );
  * \param i_channel Subpicture channel
  * \param i_type    Types are: OSD_PLAY_ICON, OSD_PAUSE_ICON, OSD_SPEAKER_ICON, OSD_MUTE_ICON
  */
-GOTV_API void vout_OSDIcon( vout_thread_t *, int, short );
+NLC_API void vout_OSDIcon( vout_thread_t *, int, short );
 
 /** @} */
 #ifdef __cplusplus

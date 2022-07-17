@@ -78,8 +78,8 @@ static const char *inet_ntop6 (const unsigned char *src, char *dst, unsigned siz
  *      Paul Vixie, 1996.
  */
 const char *
-inet_ntop (int af, const void *GOTV_RESTRICT src,
-           char *GOTV_RESTRICT dst, unsigned cnt)
+inet_ntop (int af, const void *NLC_RESTRICT src,
+           char *NLC_RESTRICT dst, unsigned cnt)
 {
   switch (af)
     {

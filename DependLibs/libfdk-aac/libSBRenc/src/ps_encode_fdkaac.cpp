@@ -106,7 +106,7 @@ amm-info@iis.fraunhofer.de
 
 #include "genericStds.h"
 
-GOTV_INLINE void FDKsbrEnc_addFIXP_DBL(const FIXP_DBL *X, const FIXP_DBL *Y, FIXP_DBL *Z, int32_t n)
+NLC_INLINE void FDKsbrEnc_addFIXP_DBL(const FIXP_DBL *X, const FIXP_DBL *Y, FIXP_DBL *Z, int32_t n)
 {
   for (int32_t i=0; i<n; i++)
     Z[i] = (X[i]>>1) + (Y[i]>>1);

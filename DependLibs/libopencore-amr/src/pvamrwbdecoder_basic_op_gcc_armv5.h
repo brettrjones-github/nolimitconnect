@@ -49,7 +49,7 @@ extern "C"
 #endif
 
 
-    static GOTV_INLINE int16 sub_int16(int16 var1, int16 var2)
+    static NLC_INLINE int16 sub_int16(int16 var1, int16 var2)
     {
         register int32 L_var_out;
         register int32 L_var_aux;
@@ -70,7 +70,7 @@ extern "C"
 
     }
 
-    static GOTV_INLINE int16 add_int16(int16 var1, int16 var2)
+    static NLC_INLINE int16 add_int16(int16 var1, int16 var2)
 {
         register int32 L_var_out;
         register int32 L_var_aux;
@@ -91,7 +91,7 @@ extern "C"
 
     }
 
-    static GOTV_INLINE  int32 mul_32by16(int16 hi, int16 lo, int16 n)
+    static NLC_INLINE  int32 mul_32by16(int16 hi, int16 lo, int16 n)
 {
         register int32 H_32;
         register int32 L_32;
@@ -115,7 +115,7 @@ extern "C"
     }
 
 
-    static GOTV_INLINE int32 sub_int32(int32 L_var1, int32 L_var2)
+    static NLC_INLINE int32 sub_int32(int32 L_var1, int32 L_var2)
 {
         register int32 L_var_out;
         register int32 ra = L_var1;
@@ -130,7 +130,7 @@ extern "C"
         return L_var_out;
     }
 
-    static GOTV_INLINE int32 add_int32(int32 L_var1, int32 L_var2)
+    static NLC_INLINE int32 add_int32(int32 L_var1, int32 L_var2)
 {
         register int32 L_var_out;
         register int32 ra = L_var1;
@@ -145,7 +145,7 @@ extern "C"
         return L_var_out;
     }
 
-    static GOTV_INLINE int32 msu_16by16_from_int32(int32 L_var3, int16 var1, int16 var2)
+    static NLC_INLINE int32 msu_16by16_from_int32(int32 L_var3, int16 var1, int16 var2)
 {
         register int32 L_var_out;
         register int32 ra = (int32)var1;
@@ -164,7 +164,7 @@ extern "C"
     }
 
 
-    static GOTV_INLINE int32 mac_16by16_to_int32(int32 L_var3, int16 var1, int16 var2)
+    static NLC_INLINE int32 mac_16by16_to_int32(int32 L_var3, int16 var1, int16 var2)
 {
         register int32 L_var_out;
         register int32 ra = (int32)var1;
@@ -183,7 +183,7 @@ extern "C"
     }
 
 
-    static GOTV_INLINE  int32 mul_16by16_to_int32(int16 var1, int16 var2)
+    static NLC_INLINE  int32 mul_16by16_to_int32(int16 var1, int16 var2)
 {
         register int32 L_var_out;
         register int32 ra = (int32)var1;
@@ -200,7 +200,7 @@ extern "C"
     }
 
 
-    static GOTV_INLINE int16 mult_int16(int16 var1, int16 var2)
+    static NLC_INLINE int16 mult_int16(int16 var1, int16 var2)
 {
         register int32 L_var_out;
         register int32 ra = (int32)var1;
@@ -216,7 +216,7 @@ extern "C"
         return (int16)L_var_out;
     }
 
-    static GOTV_INLINE int16 amr_wb_round(int32 L_var1)
+    static NLC_INLINE int16 amr_wb_round(int32 L_var1)
 {
         register int32 L_var_out;
         register int32 ra = (int32)L_var1;
@@ -231,7 +231,7 @@ extern "C"
         return (int16)L_var_out;
     }
 
-    static GOTV_INLINE int16 amr_wb_shl1_round(int32 L_var1)
+    static NLC_INLINE int16 amr_wb_shl1_round(int32 L_var1)
 {
         register int32 L_var_out;
         register int32 ra = (int32)L_var1;
@@ -248,7 +248,7 @@ extern "C"
     }
 
 
-    static GOTV_INLINE int32 fxp_mac_16by16(const int16 L_var1, const int16 L_var2, int32 L_add)
+    static NLC_INLINE int32 fxp_mac_16by16(const int16 L_var1, const int16 L_var2, int32 L_add)
 {
         register int32 tmp;
         register int32 ra = (int32)L_var1;
@@ -264,7 +264,7 @@ extern "C"
         return (tmp);
     }
 
-    static GOTV_INLINE int32 fxp_mul_16by16bb(int16 L_var1, const int16 L_var2)
+    static NLC_INLINE int32 fxp_mul_16by16bb(int16 L_var1, const int16 L_var2)
 {
         register int32 tmp;
         register int32 ra = (int32)L_var1;
@@ -282,7 +282,7 @@ extern "C"
 #define fxp_mul_16by16(a, b)  fxp_mul_16by16bb(  a, b)
 
 
-    static GOTV_INLINE int32 fxp_mul32_by_16(int32 L_var1, const int32 L_var2)
+    static NLC_INLINE int32 fxp_mul32_by_16(int32 L_var1, const int32 L_var2)
 {
         register int32 tmp;
         register int32 ra = (int32)L_var1;

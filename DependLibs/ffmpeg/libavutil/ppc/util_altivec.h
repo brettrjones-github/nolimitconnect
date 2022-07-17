@@ -129,14 +129,14 @@ do { \
 /** @brief loads unaligned vector @a *src with offset @a offset
     and returns it */
 #if HAVE_BIGENDIAN
-static GOTV_INLINE vec_u8 unaligned_load(int offset, const uint8_t *src)
+static NLC_INLINE vec_u8 unaligned_load(int offset, const uint8_t *src)
 {
     register vec_u8 first = vec_ld(offset, src);
     register vec_u8 second = vec_ld(offset + 15, src);
     register vec_u8 mask = vec_lvsl(offset, src);
     return vec_perm(first, second, mask);
 }
-static GOTV_INLINE vec_u8 load_with_perm_vec(int offset, const uint8_t *src, vec_u8 perm_vec)
+static NLC_INLINE vec_u8 load_with_perm_vec(int offset, const uint8_t *src, vec_u8 perm_vec)
 {
     vec_u8 a = vec_ld(offset, src);
     vec_u8 b = vec_ld(offset + 15, src);

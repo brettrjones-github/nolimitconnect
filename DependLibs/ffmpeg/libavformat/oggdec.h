@@ -136,7 +136,7 @@ int ff_vorbis_comment(AVFormatContext *ms, AVDictionary **m,
 int ff_vorbis_stream_comment(AVFormatContext *as, AVStream *st,
                              const uint8_t *buf, int size);
 
-static GOTV_INLINE int
+static NLC_INLINE int
 ogg_find_stream (struct ogg * ogg, int serial)
 {
     int i;
@@ -148,7 +148,7 @@ ogg_find_stream (struct ogg * ogg, int serial)
     return -1;
 }
 
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 ogg_gptopts (AVFormatContext * s, int i, uint64_t gp, int64_t *dts)
 {
     struct ogg *ogg = s->priv_data;

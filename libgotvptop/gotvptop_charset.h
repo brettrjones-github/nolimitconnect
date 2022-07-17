@@ -48,7 +48,7 @@
  * \retval 1 (non-null) ASCII character
  * \retval 2-4 non-ASCII character
  */
-GOTV_API size_t gotvptop_towc(const char *str, uint32_t *restrict pwc);
+NLC_API size_t gotvptop_towc(const char *str, uint32_t *restrict pwc);
 
 /**
  * Checks UTF-8 validity.
@@ -111,18 +111,18 @@ static inline char *EnsureUTF8(char *str)
 /* iconv wrappers (defined in src/extras/libc.c) */
 #define GOTV_ICONV_ERR ((size_t) -1)
 typedef void *gotvptop_iconv_t;
-GOTV_API gotvptop_iconv_t gotvptop_iconv_open( const char *, const char * ) GOTV_USED;
-GOTV_API size_t gotvptop_iconv( gotvptop_iconv_t, const char **, size_t *, char **, size_t * ) GOTV_USED;
-GOTV_API int gotvptop_iconv_close( gotvptop_iconv_t );
+NLC_API gotvptop_iconv_t gotvptop_iconv_open( const char *, const char * ) GOTV_USED;
+NLC_API size_t gotvptop_iconv( gotvptop_iconv_t, const char **, size_t *, char **, size_t * ) GOTV_USED;
+NLC_API int gotvptop_iconv_close( gotvptop_iconv_t );
 
 #include <stdarg.h>
 
-GOTV_API int utf8_vfprintf( FILE *stream, const char *fmt, va_list ap );
-GOTV_API int utf8_fprintf( FILE *, const char *, ... ) GOTV_FORMAT( 2, 3 );
-GOTV_API char * gotvptop_strcasestr(const char *, const char *) GOTV_USED;
+NLC_API int utf8_vfprintf( FILE *stream, const char *fmt, va_list ap );
+NLC_API int utf8_fprintf( FILE *, const char *, ... ) GOTV_FORMAT( 2, 3 );
+NLC_API char * gotvptop_strcasestr(const char *, const char *) GOTV_USED;
 
-GOTV_API char * FromCharset( const char *charset, const void *data, size_t data_size ) GOTV_USED;
-GOTV_API void * ToCharset( const char *charset, const char *in, size_t *outsize ) GOTV_USED;
+NLC_API char * FromCharset( const char *charset, const void *data, size_t data_size ) GOTV_USED;
+NLC_API void * ToCharset( const char *charset, const char *in, size_t *outsize ) GOTV_USED;
 
 #ifdef _WIN32
 GOTV_USED
@@ -282,10 +282,10 @@ static inline char *FromLatin1 (const char *latin)
 
 /** @} */
 
-GOTV_API double us_strtod( const char *, char ** ) GOTV_USED;
-GOTV_API float us_strtof( const char *, char ** ) GOTV_USED;
-GOTV_API double us_atof( const char * ) GOTV_USED;
-GOTV_API int us_vasprintf( char **, const char *, va_list );
-GOTV_API int us_asprintf( char **, const char *, ... ) GOTV_USED;
+NLC_API double us_strtod( const char *, char ** ) GOTV_USED;
+NLC_API float us_strtof( const char *, char ** ) GOTV_USED;
+NLC_API double us_atof( const char * ) GOTV_USED;
+NLC_API int us_vasprintf( char **, const char *, va_list );
+NLC_API int us_asprintf( char **, const char *, ... ) GOTV_USED;
 
 #endif

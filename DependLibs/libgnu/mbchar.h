@@ -162,8 +162,8 @@
  #error "Please include config.h first."
 #endif
 _GL_INLINE_HEADER_BEGIN
-#ifndef GOTV_INLINE
-# define GOTV_INLINE	GOTV_INLINE
+#ifndef NLC_INLINE
+# define NLC_INLINE	NLC_INLINE
 #endif
 
 #define MBCHAR_BUF_SIZE 24
@@ -245,7 +245,7 @@ typedef struct mbchar mbchar_t;
 /* Unprintable characters appear as a small box of width 1.  */
 #define MB_UNPRINTABLE_WIDTH 1
 
-GOTV_INLINE int
+NLC_INLINE int
 mb_width_aux (wint_t wc)
 {
   int w = wcwidth (wc);
@@ -266,7 +266,7 @@ mb_width_aux (wint_t wc)
    (mbc)->wc = (mbc)->buf[0] = (sc))
 
 /* Copying a character.  */
-GOTV_INLINE void
+NLC_INLINE void
 mb_copy (mbchar_t *new_mbc, const mbchar_t *old_mbc)
 {
   if (old_mbc->ptr == &old_mbc->buf[0])
@@ -314,7 +314,7 @@ mb_copy (mbchar_t *new_mbc, const mbchar_t *old_mbc)
 
 extern const unsigned int is_basic_table[];
 
-GOTV_INLINE bool
+NLC_INLINE bool
 is_basic (char c)
 {
   return (is_basic_table [(unsigned char) c >> 5] >> ((unsigned char) c & 31))
@@ -323,7 +323,7 @@ is_basic (char c)
 
 #else
 
-GOTV_INLINE bool
+NLC_INLINE bool
 is_basic (char c)
 {
   switch (c)

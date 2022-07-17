@@ -24,7 +24,7 @@
 /* Get bool. */
 # include <stdbool.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* This uses that the expression (n+(k-1))/k means the smallest
    integer >= n/k, i.e., the ceiling of n/k.  */
@@ -36,18 +36,18 @@ struct base64_decode_context
   char buf[4];
 };
 
-extern bool isbase64 (char ch) GOTV_ATTRIBUTE_CONST;
+extern bool isbase64 (char ch) NLC_ATTRIBUTE_CONST;
 
-extern void base64_encode (const char *GOTV_RESTRICT in, size_t inlen,
-                           char *GOTV_RESTRICT out, size_t outlen);
+extern void base64_encode (const char *NLC_RESTRICT in, size_t inlen,
+                           char *NLC_RESTRICT out, size_t outlen);
 
 extern size_t base64_encode_alloc (const char *in, size_t inlen, char **out);
 
 extern void base64_decode_ctx_init (struct base64_decode_context *ctx);
 
 extern bool base64_decode_ctx (struct base64_decode_context *ctx,
-                               const char *GOTV_RESTRICT in, size_t inlen,
-                               char *GOTV_RESTRICT out, size_t *outlen);
+                               const char *NLC_RESTRICT in, size_t inlen,
+                               char *NLC_RESTRICT out, size_t *outlen);
 
 extern bool base64_decode_alloc_ctx (struct base64_decode_context *ctx,
                                      const char *in, size_t inlen,
@@ -59,5 +59,5 @@ extern bool base64_decode_alloc_ctx (struct base64_decode_context *ctx,
 #define base64_decode_alloc(in, inlen, out, outlen) \
         base64_decode_alloc_ctx (NULL, in, inlen, out, outlen)
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 

@@ -61,7 +61,7 @@ DECLSPEC Uint32 SDLCALL SDL_GetTicks(void)
         hires_now *= 1000;
         hires_now /= hires_ticks_per_second;
 */
-        /* GOTV_INLINE asm to avoid runtime inclusion */
+        /* NLC_INLINE asm to avoid runtime inclusion */
         _asm {
            push edx
            push eax

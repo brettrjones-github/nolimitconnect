@@ -1,5 +1,5 @@
 /*
- * GOTV_INLINE assembly helper macros
+ * NLC_INLINE assembly helper macros
  *
  * This file is part of FFmpeg.
  *

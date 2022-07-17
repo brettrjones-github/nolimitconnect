@@ -37,7 +37,7 @@
 #include <xmmintrin.h>
 
 #define OVERRIDE_INNER_PRODUCT_SINGLE
-static GOTV_INLINE float inner_product_single(const float *a, const float *b, unsigned int len)
+static NLC_INLINE float inner_product_single(const float *a, const float *b, unsigned int len)
 {
    int i;
    float ret;
@@ -54,7 +54,7 @@ static GOTV_INLINE float inner_product_single(const float *a, const float *b, un
 }
 
 #define OVERRIDE_INTERPOLATE_PRODUCT_SINGLE
-static GOTV_INLINE float interpolate_product_single(const float *a, const float *b, unsigned int len, const spx_uint32_t oversample, float *frac) {
+static NLC_INLINE float interpolate_product_single(const float *a, const float *b, unsigned int len, const spx_uint32_t oversample, float *frac) {
   int i;
   float ret;
   __m128 sum = _mm_setzero_ps();
@@ -75,7 +75,7 @@ static GOTV_INLINE float interpolate_product_single(const float *a, const float 
 #include <emmintrin.h>
 #define OVERRIDE_INNER_PRODUCT_DOUBLE
 
-static GOTV_INLINE double inner_product_double(const float *a, const float *b, unsigned int len)
+static NLC_INLINE double inner_product_double(const float *a, const float *b, unsigned int len)
 {
    int i;
    double ret;
@@ -97,7 +97,7 @@ static GOTV_INLINE double inner_product_double(const float *a, const float *b, u
 }
 
 #define OVERRIDE_INTERPOLATE_PRODUCT_DOUBLE
-static GOTV_INLINE double interpolate_product_double(const float *a, const float *b, unsigned int len, const spx_uint32_t oversample, float *frac) {
+static NLC_INLINE double interpolate_product_double(const float *a, const float *b, unsigned int len, const spx_uint32_t oversample, float *frac) {
   int i;
   double ret;
   __m128d sum;

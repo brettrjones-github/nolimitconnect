@@ -26,12 +26,12 @@
 /****************
  * Rotate the 32 bit unsigned integer X by N bits left/right
  */
-static GOTV_INLINE uint32_t rol(uint32_t x, int n)
+static NLC_INLINE uint32_t rol(uint32_t x, int n)
 {
 	return ( (x << (n&(32-1))) | (x >> ((32-n)&(32-1))) );
 }
 
-static GOTV_INLINE uint32_t ror(uint32_t x, int n)
+static NLC_INLINE uint32_t ror(uint32_t x, int n)
 {
 	return ( (x >> (n&(32-1))) | (x << ((32-n)&(32-1))) );
 }
@@ -41,7 +41,7 @@ static GOTV_INLINE uint32_t ror(uint32_t x, int n)
 #ifdef HAVE_BUILTIN_BSWAP32
 # define _gcry_bswap32 __builtin_bswap32
 #else
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 _gcry_bswap32(uint32_t x)
 {
 	return ((rol(x, 8) & 0x00ff00ffL) | (ror(x, 8) & 0xff00ff00L));
@@ -52,7 +52,7 @@ _gcry_bswap32(uint32_t x)
 # ifdef HAVE_BUILTIN_BSWAP64
 #  define _gcry_bswap64 __builtin_bswap64
 # else
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 _gcry_bswap64(uint64_t x)
 {
 	return ((uint64_t)_gcry_bswap32(x) << 32) | (_gcry_bswap32(x >> 32));

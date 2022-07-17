@@ -543,17 +543,17 @@ protected:
 
 #define DISPATCH_CODES enum
 
-GOTV_INLINE size_t Dispatchable::AddRef()
+NLC_INLINE size_t Dispatchable::AddRef()
 {
 	return _call(Dispatchable::ADDREF, 0);
 }
 
-GOTV_INLINE size_t Dispatchable::Release()
+NLC_INLINE size_t Dispatchable::Release()
 {
 	return _call(Dispatchable::RELEASE, 0);
 }
 
-GOTV_INLINE int Dispatchable::QueryInterface(GUID interface_guid, void **object)
+NLC_INLINE int Dispatchable::QueryInterface(GUID interface_guid, void **object)
 {
 	return _call(Dispatchable::QUERYINTERFACE, 0, interface_guid, object);
 }

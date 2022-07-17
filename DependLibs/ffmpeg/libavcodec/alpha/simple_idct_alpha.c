@@ -43,7 +43,7 @@
 #define COL_SHIFT 20
 
 /* 0: all entries 0, 1: only first entry nonzero, 2: otherwise  */
-static GOTV_INLINE int idct_row(int16_t *row)
+static NLC_INLINE int idct_row(int16_t *row)
 {
     int a0, a1, a2, a3, b0, b1, b2, b3, t;
     uint64_t l, r, t2;
@@ -151,7 +151,7 @@ static GOTV_INLINE int idct_row(int16_t *row)
     return 2;
 }
 
-static GOTV_INLINE void idct_col(int16_t *col)
+static NLC_INLINE void idct_col(int16_t *col)
 {
     int a0, a1, a2, a3, b0, b1, b2, b3;
 
@@ -228,7 +228,7 @@ static GOTV_INLINE void idct_col(int16_t *col)
 
 /* If all rows but the first one are zero after row transformation,
    all rows will be identical after column transformation.  */
-static GOTV_INLINE void idct_col2(int16_t *col)
+static NLC_INLINE void idct_col2(int16_t *col)
 {
     int i;
     uint64_t l, r;

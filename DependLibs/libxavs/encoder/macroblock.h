@@ -36,12 +36,12 @@
 
 int xavs_macroblock_probe_skip (xavs_t * h, int b_bidir);
 
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_macroblock_probe_pskip (xavs_t * h)
 {
   return xavs_macroblock_probe_skip (h, 0);
 }
-static GOTV_INLINE int
+static NLC_INLINE int
 xavs_macroblock_probe_bskip (xavs_t * h)
 {
   return xavs_macroblock_probe_skip (h, 1);
@@ -58,7 +58,7 @@ void xavs_noise_reduction_update (xavs_t * h);
 void xavs_denoise_dct (xavs_t * h, int16_t * dct);
 void xavs_mb_encode_8x8_chroma (xavs_t * h, int b_inter, int i_qscale);
 
-static GOTV_INLINE int
+static NLC_INLINE int
 array_non_zero (int *v, int i_count)
 {
   int i;
@@ -68,7 +68,7 @@ array_non_zero (int *v, int i_count)
   return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 array_non_zero_count (int *v, int i_count)
 {
   int i;

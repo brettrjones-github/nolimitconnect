@@ -451,7 +451,7 @@ typedef struct TagWelsDecoderContext {
   CMemoryAlign*     pMemAlign;
 } SWelsDecoderContext, *PWelsDecoderContext;
 
-static GOTV_INLINE void ResetActiveSPSForEachLayer (PWelsDecoderContext pCtx) {
+static NLC_INLINE void ResetActiveSPSForEachLayer (PWelsDecoderContext pCtx) {
   if (pCtx->iTotalNumMbRec == 0) {
     for (int i = 0; i < MAX_LAYER_NUM; i++) {
       pCtx->pActiveLayerSps[i] = NULL;

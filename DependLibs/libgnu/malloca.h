@@ -35,7 +35,7 @@ extern "C" {
    or NULL.
    Use of safe_alloca should be avoided:
      - inside arguments of function calls - undefined behaviour,
-     - in GOTV_INLINE functions - the allocation may actually last until the
+     - in NLC_INLINE functions - the allocation may actually last until the
        calling function returns.
 */
 #if HAVE_ALLOCA

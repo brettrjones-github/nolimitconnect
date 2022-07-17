@@ -15,4 +15,4 @@
 #pragma once
 #include <libgnu/config_libgnu.h>
 
-#define _GL_UNUSED_PARAMETER GOTV_DECLARE_UNUSED
+#define _GL_UNUSED_PARAMETER NLC_DECLARE_UNUSED

@@ -129,7 +129,7 @@
 #define _GL_STDIO_STRINGIZE(token) #token
 #define _GL_STDIO_MACROEXPAND_AND_STRINGIZE(token) _GL_STDIO_STRINGIZE(token)
 
-/* When also using extern GOTV_INLINE, suppress the use of static GOTV_INLINE in
+/* When also using extern NLC_INLINE, suppress the use of static NLC_INLINE in
    standard headers of problematic Apple configurations, as Libc at
    least through Libc-825.26 (2013-04-09) mishandles it; see, e.g.,
    <http://lists.gnu.org/archive/html/bug-gnulib/2012-12/msg00023.html>.

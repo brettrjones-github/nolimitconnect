@@ -331,12 +331,12 @@ struct cache {
 #define CACHE_ALIGN 8
 #define CACHE_ITEM_SIZE ((sizeof(CacheItem) + (CACHE_ALIGN - 1)) & ~(CACHE_ALIGN - 1))
 
-static GOTV_INLINE size_t align_cache(size_t size)
+static NLC_INLINE size_t align_cache(size_t size)
 {
     return (size + (CACHE_ALIGN - 1)) & ~(CACHE_ALIGN - 1);
 }
 
-static GOTV_INLINE CacheItem *value_to_item(void *value)
+static NLC_INLINE CacheItem *value_to_item(void *value)
 {
     return (CacheItem *) ((char *) value - CACHE_ITEM_SIZE);
 }
@@ -441,7 +441,7 @@ void ass_cache_commit(void *value, size_t item_size)
     item->ref_count++;
 }
 
-static GOTV_INLINE void destroy_item(const CacheDesc *desc, CacheItem *item)
+static NLC_INLINE void destroy_item(const CacheDesc *desc, CacheItem *item)
 {
     assert(item->desc == desc);
     char *value = (char *) item + CACHE_ITEM_SIZE;

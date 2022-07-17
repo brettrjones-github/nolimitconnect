@@ -36,8 +36,8 @@
 /* Maps record size to numbers according to the
  * extensions draft.
  */
-GOTV_INLINE static int _gnutls_num2cert_type(int num);
-GOTV_INLINE static int _gnutls_cert_type2num(int record_size);
+NLC_INLINE static int _gnutls_num2cert_type(int num);
+NLC_INLINE static int _gnutls_cert_type2num(int record_size);
 static int _gnutls_cert_type_recv_params(gnutls_session_t session,
 					 const uint8_t * data,
 					 size_t data_size);
@@ -222,7 +222,7 @@ _gnutls_cert_type_send_params(gnutls_session_t session,
 /* Maps numbers to record sizes according to the
  * extensions draft.
  */
-GOTV_INLINE static int _gnutls_num2cert_type(int num)
+NLC_INLINE static int _gnutls_num2cert_type(int num)
 {
 	switch (num) {
 	case 0:
@@ -237,7 +237,7 @@ GOTV_INLINE static int _gnutls_num2cert_type(int num)
 /* Maps record size to numbers according to the
  * extensions draft.
  */
-GOTV_INLINE static int _gnutls_cert_type2num(int cert_type)
+NLC_INLINE static int _gnutls_cert_type2num(int cert_type)
 {
 	switch (cert_type) {
 	case GNUTLS_CRT_X509:

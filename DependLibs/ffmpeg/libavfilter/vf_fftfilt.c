@@ -92,7 +92,7 @@ static const AVOption fftfilt_options[] = {
 
 AVFILTER_DEFINE_CLASS(fftfilt);
 
-static GOTV_INLINE double lum(void *priv, double x, double y, int plane)
+static NLC_INLINE double lum(void *priv, double x, double y, int plane)
 {
     FFTFILTContext *s = priv;
     return s->rdft_vdata[plane][(int)x * s->rdft_vlen[plane] + (int)y];

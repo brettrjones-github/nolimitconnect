@@ -81,10 +81,10 @@ typedef uint16_t sum_t ;
  * SAD routines - altivec implementation
  **********************************************************************/
 template<int lx, int ly>
-void GOTV_INLINE sum_columns_altivec(vec_s32_t sumv, int* sum){}
+void NLC_INLINE sum_columns_altivec(vec_s32_t sumv, int* sum){}
 
 template<int lx, int ly>
-int GOTV_INLINE sad16_altivec(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad16_altivec(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     assert(lx <=16);
     LOAD_ZERO;
@@ -130,7 +130,7 @@ int sad_altivec(const int16_t* pix1, intptr_t stride_pix1, const int16_t* pix2, 
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 4>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 4>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -141,7 +141,7 @@ void GOTV_INLINE sum_columns_altivec<16, 4>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 8>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 8>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -152,7 +152,7 @@ void GOTV_INLINE sum_columns_altivec<16, 8>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 12>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 12>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -163,7 +163,7 @@ void GOTV_INLINE sum_columns_altivec<16, 12>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 16>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 16>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -174,7 +174,7 @@ void GOTV_INLINE sum_columns_altivec<16, 16>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 24>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 24>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -185,7 +185,7 @@ void GOTV_INLINE sum_columns_altivec<16, 24>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 32>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 32>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -196,7 +196,7 @@ void GOTV_INLINE sum_columns_altivec<16, 32>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 48>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 48>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -207,7 +207,7 @@ void GOTV_INLINE sum_columns_altivec<16, 48>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<16, 64>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<16, 64>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sums( sumv, zero_s32v );
@@ -219,7 +219,7 @@ void GOTV_INLINE sum_columns_altivec<16, 64>(vec_s32_t sumv, int* sum)
 
 
 template<>
-void GOTV_INLINE sum_columns_altivec<8, 4>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<8, 4>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sum2s( sumv, zero_s32v );
@@ -230,7 +230,7 @@ void GOTV_INLINE sum_columns_altivec<8, 4>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<8, 8>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<8, 8>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sum2s( sumv, zero_s32v );
@@ -241,7 +241,7 @@ void GOTV_INLINE sum_columns_altivec<8, 8>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<8, 16>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<8, 16>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sum2s( sumv, zero_s32v );
@@ -252,7 +252,7 @@ void GOTV_INLINE sum_columns_altivec<8, 16>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<8, 32>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<8, 32>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_sum2s( sumv, zero_s32v );
@@ -263,7 +263,7 @@ void GOTV_INLINE sum_columns_altivec<8, 32>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<4, 4>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<4, 4>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_splat( sumv, 0 );
@@ -272,7 +272,7 @@ void GOTV_INLINE sum_columns_altivec<4, 4>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<4, 8>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<4, 8>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_splat( sumv, 0 );
@@ -281,7 +281,7 @@ void GOTV_INLINE sum_columns_altivec<4, 8>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<4, 16>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<4, 16>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     sumv = vec_splat( sumv, 0 );
@@ -290,7 +290,7 @@ void GOTV_INLINE sum_columns_altivec<4, 16>(vec_s32_t sumv, int* sum)
 }
 
 template<>
-void GOTV_INLINE sum_columns_altivec<12, 16>(vec_s32_t sumv, int* sum)
+void NLC_INLINE sum_columns_altivec<12, 16>(vec_s32_t sumv, int* sum)
 {
     LOAD_ZERO;
     vec_s32_t sum1v= vec_splat( sumv, 3);
@@ -303,10 +303,10 @@ void GOTV_INLINE sum_columns_altivec<12, 16>(vec_s32_t sumv, int* sum)
 }
 
 template<int lx, int ly>
-int GOTV_INLINE sad_altivec(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2){ return 0; }
+int NLC_INLINE sad_altivec(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2){ return 0; }
 
 template<>
-int GOTV_INLINE sad_altivec<24, 32>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<24, 32>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 32>(pix1, stride_pix1, pix2, stride_pix2)
@@ -316,7 +316,7 @@ int GOTV_INLINE sad_altivec<24, 32>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<32, 8>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<32, 8>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 8>(pix1, stride_pix1, pix2, stride_pix2)
@@ -326,7 +326,7 @@ int GOTV_INLINE sad_altivec<32, 8>(const pixel* pix1, intptr_t stride_pix1, cons
 }
 
 template<>
-int GOTV_INLINE sad_altivec<32, 16>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<32, 16>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 16>(pix1, stride_pix1, pix2, stride_pix2)
@@ -336,7 +336,7 @@ int GOTV_INLINE sad_altivec<32, 16>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<32, 24>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<32, 24>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 24>(pix1, stride_pix1, pix2, stride_pix2)
@@ -346,7 +346,7 @@ int GOTV_INLINE sad_altivec<32, 24>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<32, 32>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<32, 32>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 32>(pix1, stride_pix1, pix2, stride_pix2)
@@ -356,7 +356,7 @@ int GOTV_INLINE sad_altivec<32, 32>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<32, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<32, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 64>(pix1, stride_pix1, pix2, stride_pix2)
@@ -366,7 +366,7 @@ int GOTV_INLINE sad_altivec<32, 64>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<48, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<48, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 64>(pix1, stride_pix1, pix2, stride_pix2)
@@ -377,7 +377,7 @@ int GOTV_INLINE sad_altivec<48, 64>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<64, 16>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<64, 16>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 16>(pix1, stride_pix1, pix2, stride_pix2)
@@ -389,7 +389,7 @@ int GOTV_INLINE sad_altivec<64, 16>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<64, 32>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<64, 32>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 32>(pix1, stride_pix1, pix2, stride_pix2)
@@ -401,7 +401,7 @@ int GOTV_INLINE sad_altivec<64, 32>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<64, 48>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<64, 48>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 48>(pix1, stride_pix1, pix2, stride_pix2)
@@ -413,7 +413,7 @@ int GOTV_INLINE sad_altivec<64, 48>(const pixel* pix1, intptr_t stride_pix1, con
 }
 
 template<>
-int GOTV_INLINE sad_altivec<64, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+int NLC_INLINE sad_altivec<64, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
     ALIGN_VAR_16(int, sum );
     sum = sad16_altivec<16, 64>(pix1, stride_pix1, pix2, stride_pix2)
@@ -428,7 +428,7 @@ int GOTV_INLINE sad_altivec<64, 64>(const pixel* pix1, intptr_t stride_pix1, con
  * SAD_X3 routines - altivec implementation
  **********************************************************************/
 template<int lx, int ly>
-void GOTV_INLINE sad16_x3_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad16_x3_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     res[0] = 0;
     res[1] = 0;
@@ -476,10 +476,10 @@ void GOTV_INLINE sad16_x3_altivec(const pixel* pix1, const pixel* pix2, const pi
 }
 
 template<int lx, int ly>
-void GOTV_INLINE sad_x3_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res){}
+void NLC_INLINE sad_x3_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res){}
 
 template<>
-void GOTV_INLINE sad_x3_altivec<24, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<24, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[3];	
     sad16_x3_altivec<16, 32>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -491,7 +491,7 @@ void GOTV_INLINE sad_x3_altivec<24, 32>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<32, 8>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<32, 8>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[3];
     sad16_x3_altivec<16, 8>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -503,7 +503,7 @@ void GOTV_INLINE sad_x3_altivec<32, 8>(const pixel* pix1, const pixel* pix2, con
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<32, 16>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<32, 16>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[3];
     sad16_x3_altivec<16, 16>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -515,7 +515,7 @@ void GOTV_INLINE sad_x3_altivec<32, 16>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<32, 24>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<32, 24>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[3];
     sad16_x3_altivec<16, 24>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -633,7 +633,7 @@ void sad_x3_altivec<32, 32>(const pixel* pix1, const pixel* pix2, const pixel* p
 } // end sad_x3_altivec
 
 template<>
-void GOTV_INLINE sad_x3_altivec<32, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<32, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[3];
     sad16_x3_altivec<16, 64>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -645,7 +645,7 @@ void GOTV_INLINE sad_x3_altivec<32, 64>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<48, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<48, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[6];
     sad16_x3_altivec<16, 64>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -658,7 +658,7 @@ void GOTV_INLINE sad_x3_altivec<48, 64>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<64, 16>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<64, 16>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[9];
     sad16_x3_altivec<16, 16>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -672,7 +672,7 @@ void GOTV_INLINE sad_x3_altivec<64, 16>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<64, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<64, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[9];
     sad16_x3_altivec<16, 32>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -686,7 +686,7 @@ void GOTV_INLINE sad_x3_altivec<64, 32>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<64, 48>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<64, 48>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[9];
     sad16_x3_altivec<16, 48>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -700,7 +700,7 @@ void GOTV_INLINE sad_x3_altivec<64, 48>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x3_altivec<64, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x3_altivec<64, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[9];
     sad16_x3_altivec<16, 64>(pix1, pix2, pix3, pix4, frefstride, sum);
@@ -717,7 +717,7 @@ void GOTV_INLINE sad_x3_altivec<64, 64>(const pixel* pix1, const pixel* pix2, co
  * SAD_X4 routines - altivec implementation
  **********************************************************************/
 template<int lx, int ly>
-void GOTV_INLINE sad16_x4_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad16_x4_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     res[0] = 0;
     res[1] = 0;
@@ -773,11 +773,11 @@ void GOTV_INLINE sad16_x4_altivec(const pixel* pix1, const pixel* pix2, const pi
 }
 
 template<int lx, int ly>
-void GOTV_INLINE sad_x4_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res){}
+void NLC_INLINE sad_x4_altivec(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res){}
 
 
 template<>
-void GOTV_INLINE sad_x4_altivec<24, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<24, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[4];	
     sad16_x4_altivec<16, 32>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -790,7 +790,7 @@ void GOTV_INLINE sad_x4_altivec<24, 32>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x4_altivec<32, 8>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<32, 8>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[4];
     sad16_x4_altivec<16, 8>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -929,7 +929,7 @@ void sad_x4_altivec<32,16>(const pixel* pix1, const pixel* pix2, const pixel* pi
 } // end sad_x4_altivec
 
 template<>
-void GOTV_INLINE sad_x4_altivec<32, 24>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<32, 24>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[4];
     sad16_x4_altivec<16, 24>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -1069,7 +1069,7 @@ void sad_x4_altivec<32,32>(const pixel* pix1, const pixel* pix2, const pixel* pi
 } // end sad_x4_altivec
 
 template<>
-void GOTV_INLINE sad_x4_altivec<32, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<32, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[4];
     sad16_x4_altivec<16, 64>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -1082,7 +1082,7 @@ void GOTV_INLINE sad_x4_altivec<32, 64>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x4_altivec<48, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<48, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[8];
     sad16_x4_altivec<16, 64>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -1096,7 +1096,7 @@ void GOTV_INLINE sad_x4_altivec<48, 64>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x4_altivec<64, 16>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<64, 16>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[12];
     sad16_x4_altivec<16, 16>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -1111,7 +1111,7 @@ void GOTV_INLINE sad_x4_altivec<64, 16>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x4_altivec<64, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<64, 32>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[12];
     sad16_x4_altivec<16, 32>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -1126,7 +1126,7 @@ void GOTV_INLINE sad_x4_altivec<64, 32>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x4_altivec<64, 48>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<64, 48>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[12];
     sad16_x4_altivec<16, 48>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -1141,7 +1141,7 @@ void GOTV_INLINE sad_x4_altivec<64, 48>(const pixel* pix1, const pixel* pix2, co
 }
 
 template<>
-void GOTV_INLINE sad_x4_altivec<64, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+void NLC_INLINE sad_x4_altivec<64, 64>(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
     int32_t sum[12];
     sad16_x4_altivec<16, 64>(pix1, pix2, pix3, pix4, pix5, frefstride, sum);
@@ -3553,7 +3553,7 @@ int satd_altivec<64, 64>(const pixel* pix1, intptr_t stride_pix1, const pixel* p
     sa8d7v = vec_sub(b6v, b7v);                           \
 }
 
-GOTV_INLINE int sa8d_8x8_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+NLC_INLINE int sa8d_8x8_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
     ALIGN_VAR_16(int, sum);
 
@@ -3664,7 +3664,7 @@ int sa8d_8x8_altivec(const int16_t* pix1, intptr_t i_pix1)
     return ((sum+2)>>2);
 }
 
-GOTV_INLINE int sa8d_8x16_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+NLC_INLINE int sa8d_8x16_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
     ALIGN_VAR_16(int, sum);
     ALIGN_VAR_16(int, sum1);
@@ -3850,7 +3850,7 @@ GOTV_INLINE int sa8d_8x16_altivec(const pixel* pix1, intptr_t i_pix1, const pixe
     return (sum);
 }
 
-GOTV_INLINE int sa8d_16x8_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+NLC_INLINE int sa8d_16x8_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
     ALIGN_VAR_16(int, sumh);
     ALIGN_VAR_16(int, suml);
@@ -3956,7 +3956,7 @@ GOTV_INLINE int sa8d_16x8_altivec(const pixel* pix1, intptr_t i_pix1, const pixe
     return (sumh+suml);
 }
 
-GOTV_INLINE int sa8d_16x16_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+NLC_INLINE int sa8d_16x16_altivec(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
     ALIGN_VAR_16(int, sumh0);
     ALIGN_VAR_16(int, suml0);

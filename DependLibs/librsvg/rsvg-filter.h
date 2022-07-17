@@ -29,7 +29,7 @@
 #include "rsvg.h"
 #include "rsvg-defs.h"
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 typedef struct  {
     int x0, y0, x1, y1;
@@ -92,6 +92,6 @@ RsvgNode    *rsvg_new_filter_primitive_specular_lighting    (const char *element
 G_GNUC_INTERNAL
 RsvgNode    *rsvg_new_filter_primitive_tile                 (const char *element_name);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

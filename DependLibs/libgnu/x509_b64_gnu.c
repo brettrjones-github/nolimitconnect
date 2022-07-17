@@ -199,7 +199,7 @@ gnutls_pem_base64_encode2(const char *msg,
 /* copies data to result but removes newlines and <CR>
  * returns the size of the data copied.
  */
-GOTV_INLINE static int
+NLC_INLINE static int
 cpydata(const uint8_t * data, int data_size, gnutls_datum_t * result)
 {
 	int i, j;

@@ -90,7 +90,7 @@
 #define SQR16_Q15(x) (MULT16_16_Q15((x),(x)))
 
 #ifdef FIXED_POINT
-static GOTV_INLINE spx_word16_t DIV32_16_Q8(spx_word32_t a, spx_word32_t b)
+static NLC_INLINE spx_word16_t DIV32_16_Q8(spx_word32_t a, spx_word32_t b)
 {
    if (SHR32(a,7) >= b)
    {
@@ -116,7 +116,7 @@ static GOTV_INLINE spx_word16_t DIV32_16_Q8(spx_word32_t a, spx_word32_t b)
    }
    
 }
-static GOTV_INLINE spx_word16_t DIV32_16_Q15(spx_word32_t a, spx_word32_t b)
+static NLC_INLINE spx_word16_t DIV32_16_Q15(spx_word32_t a, spx_word32_t b)
 {
    if (SHR32(a,15) >= b)
    {
@@ -290,7 +290,7 @@ static void conj_window(spx_word16_t *w, int len)
    in the loudness domain ( sqrt[amplitude] )
    Input in Q11 format, output in Q15
 */
-static GOTV_INLINE spx_word32_t hypergeom_gain(spx_word32_t xx)
+static NLC_INLINE spx_word32_t hypergeom_gain(spx_word32_t xx)
 {
    int ind;
    spx_word16_t frac;
@@ -308,7 +308,7 @@ static GOTV_INLINE spx_word32_t hypergeom_gain(spx_word32_t xx)
       return SHL32(DIV32_16(PSHR32(MULT16_16(Q15_ONE-frac,table[ind]) + MULT16_16(frac,table[ind+1]),7),(spx_sqrt(SHL32(xx,15)+6711))),7);
 }
 
-static GOTV_INLINE spx_word16_t qcurve(spx_word16_t x)
+static NLC_INLINE spx_word16_t qcurve(spx_word16_t x)
 {
    x = MAX16(x, 1);
    return DIV32_16(SHL32(EXTEND32(32767),9),ADD16(512,MULT16_16_Q15(QCONST16(.60f,15),DIV32_16(32767,x))));
@@ -349,7 +349,7 @@ static void compute_gain_floor(int noise_suppress, int effective_echo_suppress, 
    which multiplied by xi/(1+xi) is the optimal gain
    in the loudness domain ( sqrt[amplitude] )
 */
-static GOTV_INLINE spx_word32_t hypergeom_gain(spx_word32_t xx)
+static NLC_INLINE spx_word32_t hypergeom_gain(spx_word32_t xx)
 {
    int ind;
    float integer, frac;
@@ -369,7 +369,7 @@ static GOTV_INLINE spx_word32_t hypergeom_gain(spx_word32_t xx)
       return FRAC_SCALING*((1-frac)*table[ind] + frac*table[ind+1])/sqrt(x+.0001f);
 }
 
-static GOTV_INLINE spx_word16_t qcurve(spx_word16_t x)
+static NLC_INLINE spx_word16_t qcurve(spx_word16_t x)
 {
    return 1.f/(1.f+.15f/(SNR_SCALING_1*x));
 }

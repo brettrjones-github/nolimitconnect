@@ -72,7 +72,7 @@ class Config {
 
   Config() {}
   ~Config() {
-    // Note: this method is GOTV_INLINE so webrtc public API depends only
+    // Note: this method is NLC_INLINE so webrtc public API depends only
     // on the headers.
     for (OptionMap::iterator it = options_.begin();
          it != options_.end(); ++it) {

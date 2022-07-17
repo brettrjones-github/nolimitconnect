@@ -25,7 +25,7 @@
 
 #define AV_READ_TIME read_time
 
-static GOTV_INLINE uint64_t read_time(void)
+static NLC_INLINE uint64_t read_time(void)
 {
     union {
         struct {

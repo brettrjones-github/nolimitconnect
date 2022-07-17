@@ -29,10 +29,10 @@
 # endif
 #endif
 
-/* GOTV_INLINE attribute */
+/* NLC_INLINE attribute */
 #ifndef SWIGINLINE
 # if defined(__cplusplus) || (defined(__GNUC__) && !defined(__STRICT_ANSI__))
-#   define SWIGINLINE GOTV_INLINE
+#   define SWIGINLINE NLC_INLINE
 # else
 #   define SWIGINLINE
 # endif
@@ -72,7 +72,7 @@
 # define SWIGINTERN static SWIGUNUSED
 #endif
 
-/* internal GOTV_INLINE SWIG method */
+/* internal NLC_INLINE SWIG method */
 #ifndef SWIGINTERNINLINE
 # define SWIGINTERNINLINE SWIGINTERN SWIGINLINE
 #endif

@@ -112,7 +112,7 @@ struct FLAC__BitReader {
 	void *client_data;
 };
 
-static GOTV_INLINE void crc16_update_word_(FLAC__BitReader *br, brword word)
+static NLC_INLINE void crc16_update_word_(FLAC__BitReader *br, brword word)
 {
 	register unsigned crc = br->read_crc16;
 #if FLAC__BYTES_PER_WORD == 4
@@ -345,17 +345,17 @@ FLAC__uint16 FLAC__bitreader_get_read_crc16(FLAC__BitReader *br)
 	return br->read_crc16;
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitreader_is_consumed_byte_aligned(const FLAC__BitReader *br)
+NLC_INLINE FLAC__bool FLAC__bitreader_is_consumed_byte_aligned(const FLAC__BitReader *br)
 {
 	return ((br->consumed_bits & 7) == 0);
 }
 
-GOTV_INLINE unsigned FLAC__bitreader_bits_left_for_byte_alignment(const FLAC__BitReader *br)
+NLC_INLINE unsigned FLAC__bitreader_bits_left_for_byte_alignment(const FLAC__BitReader *br)
 {
 	return 8 - (br->consumed_bits & 7);
 }
 
-GOTV_INLINE unsigned FLAC__bitreader_get_input_bits_unconsumed(const FLAC__BitReader *br)
+NLC_INLINE unsigned FLAC__bitreader_get_input_bits_unconsumed(const FLAC__BitReader *br)
 {
 	return (br->words-br->consumed_words)*FLAC__BITS_PER_WORD + br->bytes*8 - br->consumed_bits;
 }
@@ -382,7 +382,7 @@ FLAC__bool FLAC__bitreader_read_raw_uint32(FLAC__BitReader *br, FLAC__uint32 *va
 			return false;
 	}
 	if(br->consumed_words < br->words) { /* if we've not consumed up to a partial tail word... */
-		/* OPT: taking out the consumed_bits==0 "else" case below might make things faster if less code allows the compiler to GOTV_INLINE this function */
+		/* OPT: taking out the consumed_bits==0 "else" case below might make things faster if less code allows the compiler to NLC_INLINE this function */
 		if(br->consumed_bits) {
 			/* this also works when consumed_bits==0, it's just a little slower than necessary for that case */
 			const unsigned n = FLAC__BITS_PER_WORD - br->consumed_bits;
@@ -424,7 +424,7 @@ FLAC__bool FLAC__bitreader_read_raw_uint32(FLAC__BitReader *br, FLAC__uint32 *va
 		 * the reader has guaranteed that we have at least 'bits' bits
 		 * available to read, which makes this case simpler.
 		 */
-		/* OPT: taking out the consumed_bits==0 "else" case below might make things faster if less code allows the compiler to GOTV_INLINE this function */
+		/* OPT: taking out the consumed_bits==0 "else" case below might make things faster if less code allows the compiler to NLC_INLINE this function */
 		if(br->consumed_bits) {
 			/* this also works when consumed_bits==0, it's just a little slower than necessary for that case */
 			FLAC__ASSERT(br->consumed_bits + bits <= br->bytes*8);
@@ -443,7 +443,7 @@ FLAC__bool FLAC__bitreader_read_raw_uint32(FLAC__BitReader *br, FLAC__uint32 *va
 FLAC__bool FLAC__bitreader_read_raw_int32(FLAC__BitReader *br, FLAC__int32 *val, unsigned bits)
 {
 	FLAC__uint32 uval, mask;
-	/* OPT: GOTV_INLINE raw uint32 code here, or make into a macro if possible in the .h file */
+	/* OPT: NLC_INLINE raw uint32 code here, or make into a macro if possible in the .h file */
 	if(!FLAC__bitreader_read_raw_uint32(br, &uval, bits))
 		return false;
 	/* sign-extend *val assuming it is currently bits wide. */
@@ -474,7 +474,7 @@ FLAC__bool FLAC__bitreader_read_raw_uint64(FLAC__BitReader *br, FLAC__uint64 *va
 	return true;
 }
 
-GOTV_INLINE FLAC__bool FLAC__bitreader_read_uint32_little_endian(FLAC__BitReader *br, FLAC__uint32 *val)
+NLC_INLINE FLAC__bool FLAC__bitreader_read_uint32_little_endian(FLAC__BitReader *br, FLAC__uint32 *val)
 {
 	FLAC__uint32 x8, x32 = 0;
 
@@ -1071,10 +1071,10 @@ FLAC__bool FLAC__bitreader_read_utf8_uint64(FLAC__BitReader *br, FLAC__uint64 *v
 	return true;
 }
 
-/* These functions are declared GOTV_INLINE in this file but are also callable as
+/* These functions are declared NLC_INLINE in this file but are also callable as
  * externs from elsewhere.
  * According to the C99 spec, section 6.7.4, simply providing a function
- * prototype in a header file without 'GOTV_INLINE' and making the function GOTV_INLINE
+ * prototype in a header file without 'NLC_INLINE' and making the function NLC_INLINE
  * in this file should be sufficient.
  * Unfortunately, the Microsoft VS compiler doesn't pick them up externally. To
  * fix that we add extern declarations here.

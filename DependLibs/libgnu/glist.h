@@ -35,7 +35,7 @@
 #include <libgnu/gmem.h>
 #endif
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GList GList;
 
@@ -130,7 +130,7 @@ void     g_list_pop_allocator           (void);
 
 #endif
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_LIST_H__ */
 

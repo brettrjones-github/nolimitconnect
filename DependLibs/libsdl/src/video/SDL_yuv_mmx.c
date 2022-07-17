@@ -424,5 +424,5 @@ void Color565DitherYV12MMX1X( int *colortab, Uint32 *rgb_2_pix,
 
 /* *INDENT-ON* */
 
-#endif /* GCC3 i386 GOTV_INLINE assembly */
+#endif /* GCC3 i386 NLC_INLINE assembly */
 

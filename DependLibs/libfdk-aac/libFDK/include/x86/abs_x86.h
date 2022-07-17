@@ -91,8 +91,8 @@ amm-info@iis.fraunhofer.de
 
   #if defined(__x86_64__)
 
-    GOTV_INLINE int32_t fixabs_D(int32_t x)      { return ((x) > (int32_t)(0))      ? (x) : -(x) ; }
-    GOTV_INLINE int32_t fixabs_S(int32_t x)      { return ((x) > (int32_t)(0))      ? (x) : -(x) ; }
+    NLC_INLINE int32_t fixabs_D(int32_t x)      { return ((x) > (int32_t)(0))      ? (x) : -(x) ; }
+    NLC_INLINE int32_t fixabs_S(int32_t x)      { return ((x) > (int32_t)(0))      ? (x) : -(x) ; }
 
     #define fixabs_I(x) fixabs_D(x)
 

@@ -27,14 +27,14 @@ extern "C" {
 
 
 /* Whether to output a test page.  */
-extern GOTV_DLL_VARIABLE bool color_test_mode;
+extern NLC_DLL_VARIABLE bool color_test_mode;
 
 /* Color option.  */
 enum color_option { color_no, color_tty, color_yes, color_html };
-extern GOTV_DLL_VARIABLE enum color_option color_mode;
+extern NLC_DLL_VARIABLE enum color_option color_mode;
 
 /* Style to use when coloring.  */
-extern GOTV_DLL_VARIABLE const char *style_file_name;
+extern NLC_DLL_VARIABLE const char *style_file_name;
 
 /* --color argument handling.  Return an error indicator.  */
 extern bool handle_color_option (const char *option);

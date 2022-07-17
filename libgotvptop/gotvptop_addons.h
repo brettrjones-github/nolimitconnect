@@ -149,34 +149,34 @@ struct addons_manager_t
 /**
  *  addon entry lifecycle
  */
-GOTV_API addon_entry_t *addon_entry_New( void );
-GOTV_API addon_entry_t *addon_entry_Hold(addon_entry_t *);
-GOTV_API void addon_entry_Release(addon_entry_t *);
+NLC_API addon_entry_t *addon_entry_New( void );
+NLC_API addon_entry_t *addon_entry_Hold(addon_entry_t *);
+NLC_API void addon_entry_Release(addon_entry_t *);
 
 /**
  * addons manager lifecycle
  */
-GOTV_API addons_manager_t *addons_manager_New( gotvptop_object_t *,
+NLC_API addons_manager_t *addons_manager_New( gotvptop_object_t *,
     const struct addons_manager_owner * );
-GOTV_API void addons_manager_Delete( addons_manager_t * );
+NLC_API void addons_manager_Delete( addons_manager_t * );
 
 /**
  * Charge currently installed, usable and manageable addons
  * (default "addons storage" module)
  */
-GOTV_API int addons_manager_LoadCatalog( addons_manager_t * );
+NLC_API int addons_manager_LoadCatalog( addons_manager_t * );
 
 /**
  * Gather addons info from repository (default "addons finder" module)
  * If psz_uri is not NULL, only gather info from the pointed package.
  */
-GOTV_API void addons_manager_Gather( addons_manager_t *, const char *psz_uri );
+NLC_API void addons_manager_Gather( addons_manager_t *, const char *psz_uri );
 
 /**
  * Install or Remove the addon identified by its uuid
  */
-GOTV_API int addons_manager_Install( addons_manager_t *p_manager, const addon_uuid_t uuid );
-GOTV_API int addons_manager_Remove( addons_manager_t *p_manager, const addon_uuid_t uuid );
+NLC_API int addons_manager_Install( addons_manager_t *p_manager, const addon_uuid_t uuid );
+NLC_API int addons_manager_Remove( addons_manager_t *p_manager, const addon_uuid_t uuid );
 
 /**
  * String uuid to binary uuid helpers

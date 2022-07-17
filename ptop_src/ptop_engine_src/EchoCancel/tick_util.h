@@ -106,84 +106,84 @@ class TickInterval {
   int64_t interval_;
 };
 
-GOTV_INLINE int64_t TickInterval::Milliseconds() const {
+NLC_INLINE int64_t TickInterval::Milliseconds() const {
   return TickTime::TicksToMilliseconds(interval_);
 }
 
-GOTV_INLINE int64_t TickInterval::Microseconds() const {
+NLC_INLINE int64_t TickInterval::Microseconds() const {
   return TickTime::TicksToMicroseconds(interval_);
 }
 
-GOTV_INLINE TickInterval operator+(const TickInterval& lhs,
+NLC_INLINE TickInterval operator+(const TickInterval& lhs,
                               const TickInterval& rhs) {
   return TickInterval(lhs.interval_ + rhs.interval_);
 }
 
-GOTV_INLINE TickInterval operator-(const TickInterval& lhs,
+NLC_INLINE TickInterval operator-(const TickInterval& lhs,
                               const TickInterval& rhs) {
   return TickInterval(lhs.interval_ - rhs.interval_);
 }
 
-GOTV_INLINE TickInterval operator-(const TickTime& lhs, const TickTime& rhs) {
+NLC_INLINE TickInterval operator-(const TickTime& lhs, const TickTime& rhs) {
   return TickInterval(lhs.ticks_ - rhs.ticks_);
 }
 
-GOTV_INLINE TickTime operator+(const TickTime lhs, const int64_t ticks) {
+NLC_INLINE TickTime operator+(const TickTime lhs, const int64_t ticks) {
   TickTime time = lhs;
   time.ticks_ += ticks;
   return time;
 }
 
-GOTV_INLINE bool operator>(const TickInterval& lhs, const TickInterval& rhs) {
+NLC_INLINE bool operator>(const TickInterval& lhs, const TickInterval& rhs) {
   return lhs.interval_ > rhs.interval_;
 }
 
-GOTV_INLINE bool operator<=(const TickInterval& lhs, const TickInterval& rhs) {
+NLC_INLINE bool operator<=(const TickInterval& lhs, const TickInterval& rhs) {
   return lhs.interval_ <= rhs.interval_;
 }
 
-GOTV_INLINE bool operator<(const TickInterval& lhs, const TickInterval& rhs) {
+NLC_INLINE bool operator<(const TickInterval& lhs, const TickInterval& rhs) {
   return lhs.interval_ <= rhs.interval_;
 }
 
-GOTV_INLINE bool operator>=(const TickInterval& lhs, const TickInterval& rhs) {
+NLC_INLINE bool operator>=(const TickInterval& lhs, const TickInterval& rhs) {
   return lhs.interval_ >= rhs.interval_;
 }
 
-GOTV_INLINE TickTime::TickTime()
+NLC_INLINE TickTime::TickTime()
     : ticks_(0) {
 }
 
-GOTV_INLINE TickTime::TickTime(int64_t ticks)
+NLC_INLINE TickTime::TickTime(int64_t ticks)
     : ticks_(ticks) {
 }
 
-GOTV_INLINE TickTime TickTime::Now() {
+NLC_INLINE TickTime TickTime::Now() {
   return TickTime(QueryOsForTicks());
 }
 
-GOTV_INLINE int64_t TickTime::Ticks() const {
+NLC_INLINE int64_t TickTime::Ticks() const {
   return ticks_;
 }
 
-GOTV_INLINE TickTime& TickTime::operator+=(const int64_t& ticks) {
+NLC_INLINE TickTime& TickTime::operator+=(const int64_t& ticks) {
   ticks_ += ticks;
   return *this;
 }
 
-GOTV_INLINE TickInterval::TickInterval() : interval_(0) {
+NLC_INLINE TickInterval::TickInterval() : interval_(0) {
 }
 
-GOTV_INLINE TickInterval::TickInterval(const int64_t interval)
+NLC_INLINE TickInterval::TickInterval(const int64_t interval)
   : interval_(interval) {
 }
 
-GOTV_INLINE TickInterval& TickInterval::operator+=(const TickInterval& rhs) {
+NLC_INLINE TickInterval& TickInterval::operator+=(const TickInterval& rhs) {
   interval_ += rhs.interval_;
   return *this;
 }
 
-GOTV_INLINE TickInterval& TickInterval::operator-=(const TickInterval& rhs) {
+NLC_INLINE TickInterval& TickInterval::operator-=(const TickInterval& rhs) {
   interval_ -= rhs.interval_;
   return *this;
 }

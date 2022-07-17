@@ -95,7 +95,7 @@ amm-info@iis.fraunhofer.de
 #include "ps_bitenc.h"
 
 static
-GOTV_INLINE uint8_t FDKsbrEnc_WriteBits_ps(HANDLE_FDK_BITSTREAM hBitStream, uint32_t value,
+NLC_INLINE uint8_t FDKsbrEnc_WriteBits_ps(HANDLE_FDK_BITSTREAM hBitStream, uint32_t value,
                                     const uint32_t numberOfBits)
 {
   /* hBitStream == NULL happens here intentionally */

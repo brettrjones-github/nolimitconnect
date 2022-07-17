@@ -69,7 +69,7 @@ static const AVOption aemphasis_options[] = {
 
 AVFILTER_DEFINE_CLASS(aemphasis);
 
-static GOTV_INLINE double biquad(BiquadD2 *bq, double in)
+static NLC_INLINE double biquad(BiquadD2 *bq, double in)
 {
     double n = in;
     double tmp = n - bq->w1 * bq->b1 - bq->w2 * bq->b2;
@@ -147,7 +147,7 @@ static int query_formats(AVFilterContext *ctx)
     return ff_set_common_samplerates(ctx, formats);
 }
 
-static GOTV_INLINE void set_highshelf_rbj(BiquadD2 *bq, double freq, double q, double peak, double sr)
+static NLC_INLINE void set_highshelf_rbj(BiquadD2 *bq, double freq, double q, double peak, double sr)
 {
     double A = sqrt(peak);
     double w0 = freq * 2 * M_PI / sr;
@@ -171,7 +171,7 @@ static GOTV_INLINE void set_highshelf_rbj(BiquadD2 *bq, double freq, double q, d
     bq->a2 *= ib0;
 }
 
-static GOTV_INLINE void set_lp_rbj(BiquadD2 *bq, double fc, double q, double sr, double gain)
+static NLC_INLINE void set_lp_rbj(BiquadD2 *bq, double fc, double q, double sr, double gain)
 {
     double omega = 2.0 * M_PI * fc / sr;
     double sn = sin(omega);

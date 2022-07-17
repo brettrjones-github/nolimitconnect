@@ -535,7 +535,7 @@ _gnutls_set_kx(gnutls_session_t session, gnutls_kx_algorithm_t algo)
 	return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 epoch_resolve(gnutls_session_t session,
 	      unsigned int epoch_rel, uint16_t * epoch_out)
 {
@@ -561,7 +561,7 @@ epoch_resolve(gnutls_session_t session,
 	}
 }
 
-static GOTV_INLINE record_parameters_st **epoch_get_slot(gnutls_session_t
+static NLC_INLINE record_parameters_st **epoch_get_slot(gnutls_session_t
 						    session,
 						    uint16_t epoch)
 {
@@ -638,7 +638,7 @@ _gnutls_epoch_alloc(gnutls_session_t session, uint16_t epoch,
 	return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 epoch_is_active(gnutls_session_t session, record_parameters_st * params)
 {
 	const security_parameters_st *sp = &session->security_parameters;
@@ -655,7 +655,7 @@ epoch_is_active(gnutls_session_t session, record_parameters_st * params)
 	return 0;
 }
 
-static GOTV_INLINE int
+static NLC_INLINE int
 epoch_alive(gnutls_session_t session, record_parameters_st * params)
 {
 	if (params->usage_cnt > 0)
@@ -712,7 +712,7 @@ void _gnutls_epoch_gc(gnutls_session_t session)
 	_gnutls_record_log("REC[%p]: End of epoch cleanup\n", session);
 }
 
-static GOTV_INLINE void free_record_state(record_state_st * state, int d)
+static NLC_INLINE void free_record_state(record_state_st * state, int d)
 {
 	_gnutls_free_datum(&state->mac_secret);
 	_gnutls_free_datum(&state->IV);

@@ -111,12 +111,12 @@ static const uint8_t bitSize[256] =
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
 };
 
-static GOTV_INLINE int bs_size_ue(unsigned int val)
+static NLC_INLINE int bs_size_ue(unsigned int val)
 {
     return bitSize[val + 1];
 }
 
-static GOTV_INLINE int bs_size_ue_big(unsigned int val)
+static NLC_INLINE int bs_size_ue_big(unsigned int val)
 {
     if (val < 255)
         return bitSize[val + 1];
@@ -124,7 +124,7 @@ static GOTV_INLINE int bs_size_ue_big(unsigned int val)
         return bitSize[(val + 1) >> 8] + 16;
 }
 
-static GOTV_INLINE int bs_size_se(int val)
+static NLC_INLINE int bs_size_se(int val)
 {
     int tmp = 1 - val * 2;
 
@@ -144,10 +144,10 @@ public:
     SyntaxElementWriter() : m_bitIf(NULL) {}
 
     /* silently discard the name of the syntax element */
-    GOTV_INLINE void WRITE_CODE(uint32_t code, uint32_t length, const char *) { writeCode(code, length); }
-    GOTV_INLINE void WRITE_UVLC(uint32_t code,                  const char *) { writeUvlc(code); }
-    GOTV_INLINE void WRITE_SVLC(int32_t  code,                  const char *) { writeSvlc(code); }
-    GOTV_INLINE void WRITE_FLAG(bool flag,                      const char *) { writeFlag(flag); }
+    NLC_INLINE void WRITE_CODE(uint32_t code, uint32_t length, const char *) { writeCode(code, length); }
+    NLC_INLINE void WRITE_UVLC(uint32_t code,                  const char *) { writeUvlc(code); }
+    NLC_INLINE void WRITE_SVLC(int32_t  code,                  const char *) { writeSvlc(code); }
+    NLC_INLINE void WRITE_FLAG(bool flag,                      const char *) { writeFlag(flag); }
 
     void writeCode(uint32_t code, uint32_t length) { m_bitIf->write(code, length); }
     void writeUvlc(uint32_t code);

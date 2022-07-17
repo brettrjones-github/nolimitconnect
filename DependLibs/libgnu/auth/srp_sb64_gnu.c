@@ -58,7 +58,7 @@ static const uint8_t asciitable[128] = {
 	0xff, 0xff
 };
 
-GOTV_INLINE static int encode(uint8_t * result, const uint8_t * rdata, unsigned left)
+NLC_INLINE static int encode(uint8_t * result, const uint8_t * rdata, unsigned left)
 {
 
 	int data_len;
@@ -191,7 +191,7 @@ _gnutls_sbase64_encode(uint8_t * data, size_t data_size, char **result)
  * result should be 3 bytes
  */
 #define TOASCII(c) (c < 127 ? asciitable[c] : 0xff)
-GOTV_INLINE static int decode(uint8_t * result, const uint8_t * data)
+NLC_INLINE static int decode(uint8_t * result, const uint8_t * data)
 {
 	uint8_t a1, a2;
 	int ret = 3;

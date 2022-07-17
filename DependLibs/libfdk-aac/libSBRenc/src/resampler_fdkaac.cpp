@@ -351,7 +351,7 @@ int32_t FDKaacEnc_InitDownsampler(DOWNSAMPLER *DownSampler, /*!< pointer to down
   \return  filtered value
 */
 
-static GOTV_INLINE INT_PCM AdvanceFilter(LP_FILTER *downFilter,  /*!< pointer to iir filter instance */
+static NLC_INLINE INT_PCM AdvanceFilter(LP_FILTER *downFilter,  /*!< pointer to iir filter instance */
                                      INT_PCM  *pInput,          /*!< input of filter                */
                                      int downRatio,
                                      int inStride)

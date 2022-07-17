@@ -42,8 +42,8 @@
 
 bool g_StreamActive = false;
 
-GOTV_BEGIN_CDECLARES
-GOTV_END_CDECLARES
+NLC_BEGIN_CDECLARES
+NLC_END_CDECLARES
 
 namespace
 {
@@ -197,14 +197,14 @@ bool IsLogEnabled( ELogModule logModule )
 }
 
 //============================================================================
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 void LogAppendLineFeed( char * buf, size_t sizeOfBuf );
 void                    default_log_output( void * userData, uint32_t u32MsgType, char * pLogMsg );
 void                    vx_error( unsigned long u32MsgType, const char* msg, ... );
 
 static LOG_FUNCTION		g_pfuncLogHandler = ExtendLogHandler;
 static bool             g_enableDefaultHandler = true;
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 //============================================================================
 void LogModule( ELogModule eLog, unsigned long u32MsgType, const char* msg, ... )
@@ -258,7 +258,7 @@ void VxGetLogMessages( unsigned long u32MsgTypes, std::vector<LogEntry>& retMsgs
 #endif // ENABLE_LOG_LIST
 }
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 //============================================================================
 
 //============================================================================
@@ -409,7 +409,7 @@ void vx_error( unsigned long u32MsgType, const char* msg, ...)
 /// default log handler
 void default_log_output( void * userData, uint32_t u32MsgType, char * pLogMsg )
 {
-    GOTV_UNUSED( userData );
+    NLC_UNUSED( userData );
 	u32MsgType = (u32MsgType & LOG_PRIORITY_MASK);
 	//if( u32MsgType > g_u32LogLevel )
 	//{
@@ -705,4 +705,4 @@ void DumpFloat( unsigned long u32MsgType, float* data, int dataLen, int instance
     }
 }
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES

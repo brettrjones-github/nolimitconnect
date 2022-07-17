@@ -51,7 +51,7 @@ extern void		vbi_draw_vt_page_region(vbi_page *pg, vbi_pixfmt fmt,
  * 
  * Draw a Teletext vbi_page. In this mode one character occupies 12 x 10 pixels.
  */
-//GOTV_INLINE void
+//NLC_INLINE void
 //vbi_draw_vt_page(vbi_page *pg, vbi_pixfmt fmt, void *canvas,
 //		 int reveal, int flash_on)
 //{
@@ -74,7 +74,7 @@ extern void		vbi_draw_cc_page_region(vbi_page *pg, vbi_pixfmt fmt,
  * Draw a Closed Caption vbi_page. In this mode one character occupies
  * 16 x 26 pixels.
  */
-//GOTV_INLINE void
+//NLC_INLINE void
 //vbi_draw_cc_page(vbi_page *pg, vbi_pixfmt fmt, void *canvas)
 //{
 //	vbi_draw_cc_page_region(pg, fmt, canvas, -1, 0, 0, pg->columns, pg->rows);

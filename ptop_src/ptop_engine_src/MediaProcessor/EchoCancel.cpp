@@ -25,22 +25,11 @@
 #include "EchoCancel.h"
 #include "AudioUtil.h"
 
+#include <CoreLib/VxGlobals.h>
+
 #include <ptop_src/ptop_engine_src/EchoCancel/aec_core.h>
 #include <ptop_src/ptop_engine_src/EchoCancel/aec_resampler.h>
 #include <ptop_src/ptop_engine_src/EchoCancel/signal_processing_library.h>
-
-namespace
-{
-
-	//const int 					g_SampleRateHz			= 8000;
-	//const int					g_NumberOfChannels		= 1;
-	//const int					g_MySamplesChannel		= 640;
-	//const int					g_EchoSamplesChannel	= 80;
-
-	//const int					g_KnownMsOffs			= 160;
-	//const int					g_EchoMsPerSamples		= (int)((1000.0f / g_SampleRateHz) * g_EchoSamplesChannel);
-	//const int					g_EchoChunksPerMyChunk	= g_MySamplesChannel / g_EchoSamplesChannel;
-}
 
 #if defined(WEBRTC_CHROMIUM_BUILD) && defined(WEBRTC_MAC)
 #define WEBRTC_UNTRUSTED_DELAY
@@ -101,24 +90,24 @@ void EchoCancel::startupEchoCancel( void )
 	m_MixerWriteIdx		= 0;
 	m_MixerReadIdx		= 0;
 	m_MixerReadOffset	= 0;
-	memset( m_MixerInBuf, 0, sizeof( m_MixerInBuf ) );
+	memset( m_MixerEchoProcessBuf, 0, sizeof( m_MixerEchoProcessBuf ) );
 	if( 0 != m_Aec )
 	{
-		LogMsg( LOG_ERROR, "ERROR EchoCancel::initEchoCancel already created\n" );
+		LogMsg( LOG_ERROR, "ERROR EchoCancel::initEchoCancel already created" );
 		return;
 	}
 
 	m_Aec = webrtc::WebRtcAec_CreateAec();
 	if( 0 == m_Aec )
 	{
-		LogMsg( LOG_ERROR, "ERROR EchoCancel::initEchoCancel null Aec created\n" );
+		LogMsg( LOG_ERROR, "ERROR EchoCancel::initEchoCancel null Aec created" );
 		return;
 	}
 
 	m_resampler = webrtc::WebRtcAec_CreateResampler();
 	if( !m_resampler) 
 	{
-		LogMsg( LOG_ERROR, "ERROR EchoCancel::initEchoCancel null resampler\n" );
+		LogMsg( LOG_ERROR, "ERROR EchoCancel::initEchoCancel null resampler" );
 		webrtc::WebRtcAec_FreeAec( m_Aec );
 		return;
 	}
@@ -248,7 +237,7 @@ void EchoCancel::sendMixerDataToEchoProcessor( int samplesToProcess, uint32_t to
 
 	for( int i = 0; i < chunksToSend; ++i )
 	{
-		float * mixChunkBuf	= &m_MixerInBuf[m_MixerReadIdx][m_MixerReadOffset];
+		float * mixChunkBuf	= &m_MixerEchoProcessBuf[m_MixerReadIdx][m_MixerReadOffset];
 		this->bufferFarend( (const float *)mixChunkBuf, samplesToProcess );
 		m_MixerReadOffset += samplesToProcess;
 		if( m_MixerReadOffset >= ECHO_MIXER_IN_BUF_SAMPLE_CNT )
@@ -315,7 +304,7 @@ void EchoCancel::processFromMicrophone( int16_t * pcmDataFromMic, uint32_t dataL
     */
 
     int processResult = 0;
-    // process in 8 chunks else echo canceler will error out
+    // process in 8 chunks else echo canceler will error out. each chunk is 10 ms of audio
     samplesToProcess = samplesToProcess / 8;
     for( int i = 0; i < 8; i++ )
     {
@@ -420,7 +409,8 @@ void EchoCancel::processFromMixer( int16_t * pcmDataFromMixer, uint32_t dataLenB
 
 	//LogMsg( LOG_INFO, "processFromMixer idx %d\n",m_MixerWriteIdx );
 	m_AecMutex.lock();
-	PcmS16ToFloats( pcmDataFromMixer, dataLenBytes, &m_MixerInBuf[m_MixerWriteIdx][0] );
+	m_MixerEchoProcessTimestamps[ m_MixerWriteIdx ] = GetGmtTimeMs();
+	PcmS16ToFloats( pcmDataFromMixer, dataLenBytes, &m_MixerEchoProcessBuf[m_MixerWriteIdx][0] );
 	m_MixerWriteIdx++;
 	if( m_MixerWriteIdx >= ECHO_MIXER_BUF_CNT )
 	{

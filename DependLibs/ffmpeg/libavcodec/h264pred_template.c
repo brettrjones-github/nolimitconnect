@@ -433,7 +433,7 @@ PRED16x16_X(127, (1<<(BIT_DEPTH-1))-1)
 PRED16x16_X(128, (1<<(BIT_DEPTH-1))+0)
 PRED16x16_X(129, (1<<(BIT_DEPTH-1))+1)
 
-static GOTV_INLINE void FUNCC(pred16x16_plane_compat)(uint8_t *_src,
+static NLC_INLINE void FUNCC(pred16x16_plane_compat)(uint8_t *_src,
                                                  ptrdiff_t _stride,
                                                  const int svq3,
                                                  const int rv40)

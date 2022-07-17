@@ -278,7 +278,7 @@ static av_cold void init_cplscales_table(COOKContext *q)
  * @param out       pointer to byte array of outdata
  * @param bytes     number of bytes
  */
-static GOTV_INLINE int decode_bytes(const uint8_t *inbuffer, uint8_t *out, int bytes)
+static NLC_INLINE int decode_bytes(const uint8_t *inbuffer, uint8_t *out, int bytes)
 {
     static const uint32_t tab[4] = {
         AV_BE2NE32C(0x37c511f2u), AV_BE2NE32C(0xf237c511u),
@@ -498,7 +498,7 @@ static void categorize(COOKContext *q, COOKSubpacket *p, const int *quant_index_
  * @param category              pointer to the category array
  * @param category_index        pointer to the category_index array
  */
-static GOTV_INLINE void expand_category(COOKContext *q, int *category,
+static NLC_INLINE void expand_category(COOKContext *q, int *category,
                                    int *category_index)
 {
     int i;
@@ -857,7 +857,7 @@ static int joint_decode(COOKContext *q, COOKSubpacket *p,
  * @param inbuffer          pointer to raw stream data
  * @param gains_ptr         array of current/prev gain pointers
  */
-static GOTV_INLINE void decode_bytes_and_gain(COOKContext *q, COOKSubpacket *p,
+static NLC_INLINE void decode_bytes_and_gain(COOKContext *q, COOKSubpacket *p,
                                          const uint8_t *inbuffer,
                                          cook_gains *gains_ptr)
 {
@@ -897,7 +897,7 @@ static void saturate_output_float(COOKContext *q, float *out)
  * @param previous_buffer   pointer to the previous buffer to be used for overlapping
  * @param out               pointer to the output buffer
  */
-static GOTV_INLINE void mlt_compensate_output(COOKContext *q, float *decode_buffer,
+static NLC_INLINE void mlt_compensate_output(COOKContext *q, float *decode_buffer,
                                          cook_gains *gains_ptr, float *previous_buffer,
                                          float *out)
 {

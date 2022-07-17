@@ -438,7 +438,7 @@ static inline bool vout_display_IsWindowed(vout_display_t *vd)
  *
  * This asssumes that the picture is already cropped.
  */
-GOTV_API void vout_display_GetDefaultDisplaySize(unsigned *width, unsigned *height, const video_format_t *source, const vout_display_cfg_t *);
+NLC_API void vout_display_GetDefaultDisplaySize(unsigned *width, unsigned *height, const video_format_t *source, const vout_display_cfg_t *);
 
 
 /**
@@ -461,7 +461,7 @@ typedef struct {
  * \param p_cfg Display configuration
  * \param b_clip If true, prevent the video to go outside the display (break zoom).
  */
-GOTV_API void vout_display_PlacePicture(vout_display_place_t *place, const video_format_t *source, const vout_display_cfg_t *cfg, bool do_clipping);
+NLC_API void vout_display_PlacePicture(vout_display_place_t *place, const video_format_t *source, const vout_display_cfg_t *cfg, bool do_clipping);
 
 
 /**
@@ -474,7 +474,7 @@ GOTV_API void vout_display_PlacePicture(vout_display_place_t *place, const video
  * \param m_y Mouse y position (relative to place, origin is top left).
  * \param place Place of the picture.
  */
-GOTV_API void vout_display_SendMouseMovedDisplayCoordinates(vout_display_t *vd, video_orientation_t orient_display, int m_x, int m_y,
+NLC_API void vout_display_SendMouseMovedDisplayCoordinates(vout_display_t *vd, video_orientation_t orient_display, int m_x, int m_y,
                                                            vout_display_place_t *place);
 
 /** @} */

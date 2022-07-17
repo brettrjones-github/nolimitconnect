@@ -165,14 +165,14 @@ typedef intptr_t ssize_t;
 #define MHD_CONTENT_READER_END_WITH_ERROR (((size_t) -1LL) - 1)
 #endif
 
-#ifndef GOTV_EXTERN
+#ifndef NLC_EXTERN
 #if defined(_WIN32) && defined(MHD_W32LIB)
-#define GOTV_EXTERN extern
+#define NLC_EXTERN extern
 #elif defined (_WIN32) && defined(MHD_W32DLL) && !defined(LIB_STATIC)
 /* Define MHD_W32DLL when using MHD as W32 .DLL to speed up linker a little */
-#define GOTV_EXTERN __declspec(dllimport)
+#define NLC_EXTERN __declspec(dllimport)
 #else
-#define GOTV_EXTERN extern
+#define NLC_EXTERN extern
 #endif
 #endif
 
@@ -227,7 +227,7 @@ typedef SOCKET MHD_socket;
 /* clang < 3.3, XCode's clang < 5.0, 3.0 <= GCC < 4.8 */
 #define _MHD_DEPR_MACRO(msg) _MHD_GCC_PRAG(message msg)
 #if (__clang_major__+0  > 2 || (__clang_major__+0 == 2 && __clang_minor__ >= 9)) /* FIXME: clang >= 2.9, earlier versions not tested */
-/* clang handles GOTV_INLINE pragmas better than GCC */
+/* clang handles NLC_INLINE pragmas better than GCC */
 #define _MHD_DEPR_IN_MACRO(msg) _MHD_DEPR_MACRO(msg)
 #endif /* clang >= 2.9 */
 #endif  /* older clang or GCC */
@@ -374,7 +374,7 @@ _MHD_DEPR_MACRO("Macro MHD_LONG_LONG_PRINTF is deprecated, use MHD_UNSIGNED_LONG
  * If we don't have a string for a status code, we give the first
  * message in that status code class.
  */
-GOTV_EXTERN const char *
+NLC_EXTERN const char *
 MHD_get_reason_phrase_for (unsigned int code);
 
 
@@ -1565,7 +1565,7 @@ typedef int
  * @return NULL on error, handle to daemon on success
  * @ingroup event
  */
-GOTV_EXTERN struct MHD_Daemon *
+NLC_EXTERN struct MHD_Daemon *
 MHD_start_daemon_va (unsigned int flags,
 		     uint16_t port,
 		     MHD_AcceptPolicyCallback apc, void *apc_cls,
@@ -1589,7 +1589,7 @@ MHD_start_daemon_va (unsigned int flags,
  * @return NULL on error, handle to daemon on success
  * @ingroup event
  */
-GOTV_EXTERN struct MHD_Daemon *
+NLC_EXTERN struct MHD_Daemon *
 MHD_start_daemon (unsigned int flags,
 		  uint16_t port,
 		  MHD_AcceptPolicyCallback apc, void *apc_cls,
@@ -1616,7 +1616,7 @@ MHD_start_daemon (unsigned int flags,
  *         the daemon was already not listening anymore
  * @ingroup specialized
  */
-GOTV_EXTERN MHD_socket
+NLC_EXTERN MHD_socket
 MHD_quiesce_daemon (struct MHD_Daemon *daemon);
 
 
@@ -1626,7 +1626,7 @@ MHD_quiesce_daemon (struct MHD_Daemon *daemon);
  * @param daemon daemon to stop
  * @ingroup event
  */
-GOTV_EXTERN void
+NLC_EXTERN void
 MHD_stop_daemon (struct MHD_Daemon *daemon);
 
 
@@ -1659,7 +1659,7 @@ MHD_stop_daemon (struct MHD_Daemon *daemon);
  *        set to indicate further details about the error.
  * @ingroup specialized
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_add_connection (struct MHD_Daemon *daemon,
 		    MHD_socket client_socket,
 		    const struct sockaddr *addr,
@@ -1685,7 +1685,7 @@ MHD_add_connection (struct MHD_Daemon *daemon,
  *         fit fd_set.
  * @ingroup event
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_get_fdset (struct MHD_Daemon *daemon,
                fd_set *read_fd_set,
                fd_set *write_fd_set,
@@ -1714,7 +1714,7 @@ MHD_get_fdset (struct MHD_Daemon *daemon,
  *         fit fd_set.
  * @ingroup event
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_get_fdset2 (struct MHD_Daemon *daemon,
                fd_set *read_fd_set,
                fd_set *write_fd_set,
@@ -1760,7 +1760,7 @@ MHD_get_fdset2 (struct MHD_Daemon *daemon,
  *        necessiate the use of a timeout right now).
  * @ingroup event
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_get_timeout (struct MHD_Daemon *daemon,
 		 MHD_UNSIGNED_LONG_LONG *timeout);
 
@@ -1784,7 +1784,7 @@ MHD_get_timeout (struct MHD_Daemon *daemon,
  *         options for this call.
  * @ingroup event
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_run (struct MHD_Daemon *daemon);
 
 
@@ -1807,7 +1807,7 @@ MHD_run (struct MHD_Daemon *daemon);
  * @return #MHD_NO on serious errors, #MHD_YES on success
  * @ingroup event
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_run_from_select (struct MHD_Daemon *daemon,
 		     const fd_set *read_fd_set,
 		     const fd_set *write_fd_set,
@@ -1829,7 +1829,7 @@ MHD_run_from_select (struct MHD_Daemon *daemon,
  * @return number of entries iterated over
  * @ingroup request
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_get_connection_values (struct MHD_Connection *connection,
                            enum MHD_ValueKind kind,
                            MHD_KeyValueIterator iterator,
@@ -1861,7 +1861,7 @@ MHD_get_connection_values (struct MHD_Connection *connection,
  *         #MHD_YES on success
  * @ingroup request
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_set_connection_value (struct MHD_Connection *connection,
                           enum MHD_ValueKind kind,
                           const char *key,
@@ -1884,7 +1884,7 @@ MHD_set_connection_value (struct MHD_Connection *connection,
  * @param cls passed to @a cb
  * @ingroup logging
  */
-GOTV_EXTERN void
+NLC_EXTERN void
 MHD_set_panic_func (MHD_PanicCallback cb, void *cls);
 
 
@@ -1897,7 +1897,7 @@ MHD_set_panic_func (MHD_PanicCallback cb, void *cls);
  * @return length of the resulting val (`strlen(val)` may be
  *  shorter afterwards due to elimination of escape sequences)
  */
-GOTV_EXTERN size_t
+NLC_EXTERN size_t
 MHD_http_unescape (char *val);
 
 
@@ -1911,7 +1911,7 @@ MHD_http_unescape (char *val);
  * @return NULL if no such item was found
  * @ingroup request
  */
-GOTV_EXTERN const char *
+NLC_EXTERN const char *
 MHD_lookup_connection_value (struct MHD_Connection *connection,
 			     enum MHD_ValueKind kind,
 			     const char *key);
@@ -1928,7 +1928,7 @@ MHD_lookup_connection_value (struct MHD_Connection *connection,
  *         #MHD_YES on success or if message has been queued
  * @ingroup response
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_queue_response (struct MHD_Connection *connection,
                     unsigned int status_code,
 		    struct MHD_Response *response);
@@ -1961,7 +1961,7 @@ MHD_queue_response (struct MHD_Connection *connection,
  *
  * @param connection the connection to suspend
  */
-GOTV_EXTERN void
+NLC_EXTERN void
 MHD_suspend_connection (struct MHD_Connection *connection);
 
 
@@ -1973,7 +1973,7 @@ MHD_suspend_connection (struct MHD_Connection *connection);
  *
  * @param connection the connection to resume
  */
-GOTV_EXTERN void
+NLC_EXTERN void
 MHD_resume_connection (struct MHD_Connection *connection);
 
 
@@ -2020,7 +2020,7 @@ enum MHD_ResponseOptions
  * @param ... #MHD_RO_END terminated list of options
  * @return #MHD_YES on success, #MHD_NO on error
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_set_response_options (struct MHD_Response *response,
                           enum MHD_ResponseFlags flags,
                           ...);
@@ -2042,7 +2042,7 @@ MHD_set_response_options (struct MHD_Response *response,
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_callback (uint64_t size,
 				   size_t block_size,
 				   MHD_ContentReaderCallback crc, void *crc_cls,
@@ -2064,7 +2064,7 @@ MHD_create_response_from_callback (uint64_t size,
  * @ingroup response
  */
 _MHD_DEPR_FUNC("MHD_create_response_from_data() is deprecated, use MHD_create_response_from_buffer()") \
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_data (size_t size,
 			       void *data,
 			       int must_free,
@@ -2117,7 +2117,7 @@ enum MHD_ResponseMemoryMode
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_buffer (size_t size,
 				 void *buffer,
 				 enum MHD_ResponseMemoryMode mode);
@@ -2134,7 +2134,7 @@ MHD_create_response_from_buffer (size_t size,
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_fd (size_t size,
                                int fd);
 
@@ -2152,7 +2152,7 @@ MHD_create_response_from_fd (size_t size,
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_fd64 (uint64_t size,
                                int fd);
 
@@ -2174,7 +2174,7 @@ MHD_create_response_from_fd64 (uint64_t size,
  * @ingroup response
  */
 _MHD_DEPR_FUNC("Function MHD_create_response_from_fd_at_offset() is deprecated, use MHD_create_response_from_fd_at_offset64()") \
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_fd_at_offset (size_t size,
                                        int fd,
                                        off_t offset);
@@ -2204,7 +2204,7 @@ MHD_create_response_from_fd_at_offset (size_t size,
  * @return NULL on error (i.e. invalid arguments, out of memory)
  * @ingroup response
  */
-GOTV_EXTERN struct MHD_Response *
+NLC_EXTERN struct MHD_Response *
 MHD_create_response_from_fd_at_offset64 (uint64_t size,
                                          int fd,
                                          uint64_t offset);
@@ -2356,7 +2356,7 @@ MHD_create_response_for_upgrade (MHD_UpgradeHandler upgrade_handler,
  * @param response response to destroy
  * @ingroup response
  */
-GOTV_EXTERN void
+NLC_EXTERN void
 MHD_destroy_response (struct MHD_Response *response);
 
 
@@ -2370,7 +2370,7 @@ MHD_destroy_response (struct MHD_Response *response);
  *         or out of memory
  * @ingroup response
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_add_response_header (struct MHD_Response *response,
                          const char *header,
 			 const char *content);
@@ -2385,7 +2385,7 @@ MHD_add_response_header (struct MHD_Response *response,
  * @return #MHD_NO on error (i.e. invalid footer or content format).
  * @ingroup response
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_add_response_footer (struct MHD_Response *response,
                          const char *footer,
 			 const char *content);
@@ -2400,7 +2400,7 @@ MHD_add_response_footer (struct MHD_Response *response,
  * @return #MHD_NO on error (no such header known)
  * @ingroup response
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_del_response_header (struct MHD_Response *response,
                          const char *header,
 			 const char *content);
@@ -2416,7 +2416,7 @@ MHD_del_response_header (struct MHD_Response *response,
  * @return number of entries iterated over
  * @ingroup response
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_get_response_headers (struct MHD_Response *response,
                           MHD_KeyValueIterator iterator, void *iterator_cls);
 
@@ -2429,7 +2429,7 @@ MHD_get_response_headers (struct MHD_Response *response,
  * @return NULL if header does not exist
  * @ingroup response
  */
-GOTV_EXTERN const char *
+NLC_EXTERN const char *
 MHD_get_response_header (struct MHD_Response *response,
 			 const char *key);
 
@@ -2461,7 +2461,7 @@ MHD_get_response_header (struct MHD_Response *response,
  *         otherwise a PP handle
  * @ingroup request
  */
-GOTV_EXTERN struct MHD_PostProcessor *
+NLC_EXTERN struct MHD_PostProcessor *
 MHD_create_post_processor (struct MHD_Connection *connection,
 			   size_t buffer_size,
 			   MHD_PostDataIterator iter, void *iter_cls);
@@ -2480,7 +2480,7 @@ MHD_create_post_processor (struct MHD_Connection *connection,
  *         (out-of-memory, iterator aborted, parse error)
  * @ingroup request
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_post_process (struct MHD_PostProcessor *pp,
                   const char *post_data, size_t post_data_len);
 
@@ -2495,7 +2495,7 @@ MHD_post_process (struct MHD_PostProcessor *pp,
  *                value of this function
  * @ingroup request
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_destroy_post_processor (struct MHD_PostProcessor *pp);
 
 
@@ -2518,7 +2518,7 @@ MHD_destroy_post_processor (struct MHD_PostProcessor *pp);
  * 			to the username if found
  * @ingroup authentication
  */
-GOTV_EXTERN char *
+NLC_EXTERN char *
 MHD_digest_auth_get_username (struct MHD_Connection *connection);
 
 
@@ -2535,7 +2535,7 @@ MHD_digest_auth_get_username (struct MHD_Connection *connection);
  * 			#MHD_INVALID_NONCE if nonce is invalid
  * @ingroup authentication
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_digest_auth_check (struct MHD_Connection *connection,
 		       const char *realm,
 		       const char *username,
@@ -2557,7 +2557,7 @@ MHD_digest_auth_check (struct MHD_Connection *connection,
  * @return #MHD_YES on success, #MHD_NO otherwise
  * @ingroup authentication
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_queue_auth_fail_response (struct MHD_Connection *connection,
 			      const char *realm,
 			      const char *opaque,
@@ -2574,7 +2574,7 @@ MHD_queue_auth_fail_response (struct MHD_Connection *connection,
  * 			to the username if found
  * @ingroup authentication
  */
-GOTV_EXTERN char *
+NLC_EXTERN char *
 MHD_basic_auth_get_username_password (struct MHD_Connection *connection,
 				      char** password);
 
@@ -2591,7 +2591,7 @@ MHD_basic_auth_get_username_password (struct MHD_Connection *connection,
  * @return #MHD_YES on success, #MHD_NO otherwise
  * @ingroup authentication
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_queue_basic_auth_fail_response (struct MHD_Connection *connection,
 				    const char *realm,
 				    struct MHD_Response *response);
@@ -2609,7 +2609,7 @@ MHD_queue_basic_auth_fail_response (struct MHD_Connection *connection,
  *         (or if the @a info_type is unknown)
  * @ingroup specialized
  */
-GOTV_EXTERN const union MHD_ConnectionInfo *
+NLC_EXTERN const union MHD_ConnectionInfo *
 MHD_get_connection_info (struct MHD_Connection *connection,
 			 enum MHD_ConnectionInfoType info_type,
 			 ...);
@@ -2641,7 +2641,7 @@ enum MHD_CONNECTION_OPTION
  * @return #MHD_YES on success, #MHD_NO if setting the option failed
  * @ingroup specialized
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_set_connection_option (struct MHD_Connection *connection,
 			   enum MHD_CONNECTION_OPTION option,
 			   ...);
@@ -2688,7 +2688,7 @@ union MHD_DaemonInfo
  *         (or if the @a info_type is unknown)
  * @ingroup specialized
  */
-GOTV_EXTERN const union MHD_DaemonInfo *
+NLC_EXTERN const union MHD_DaemonInfo *
 MHD_get_daemon_info (struct MHD_Daemon *daemon,
 		     enum MHD_DaemonInfoType info_type,
 		     ...);
@@ -2700,7 +2700,7 @@ MHD_get_daemon_info (struct MHD_Daemon *daemon,
  * @return static version string, e.g. "0.9.9"
  * @ingroup specialized
  */
-GOTV_EXTERN const char*
+NLC_EXTERN const char*
 MHD_get_version (void);
 
 
@@ -2831,7 +2831,7 @@ enum MHD_FEATURE
  * feature is not supported or feature is unknown.
  * @ingroup specialized
  */
-GOTV_EXTERN int
+NLC_EXTERN int
 MHD_is_feature_supported(enum MHD_FEATURE feature);
 
 

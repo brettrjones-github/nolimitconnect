@@ -63,7 +63,7 @@ int avpriv_mpa_decode_header2(uint32_t head, int *sample_rate, int *channels, in
 #endif
 
 /* fast header check for resync */
-static GOTV_INLINE int ff_mpa_check_header(uint32_t header){
+static NLC_INLINE int ff_mpa_check_header(uint32_t header){
     /* header */
     if ((header & 0xffe00000) != 0xffe00000)
         return -1;

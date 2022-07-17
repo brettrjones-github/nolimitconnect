@@ -45,7 +45,7 @@
     r3 = vec_mergel(r5, r7);  /*all set 3*/  \
 }
 
-static GOTV_INLINE void write16x4( uint8_t *dst, int dst_stride,
+static NLC_INLINE void write16x4( uint8_t *dst, int dst_stride,
                               register vec_u8_t r0, register vec_u8_t r1,
                               register vec_u8_t r2, register vec_u8_t r3 )
 {
@@ -138,7 +138,7 @@ static GOTV_INLINE void write16x4( uint8_t *dst, int dst_stride,
 }
 
 // out: o = |x-y| < a
-static GOTV_INLINE vec_u8_t diff_lt_altivec( register vec_u8_t x, register vec_u8_t y, register vec_u8_t a )
+static NLC_INLINE vec_u8_t diff_lt_altivec( register vec_u8_t x, register vec_u8_t y, register vec_u8_t a )
 {
     register vec_u8_t diff = vec_subs(x, y);
     register vec_u8_t diffneg = vec_subs(y, x);
@@ -147,7 +147,7 @@ static GOTV_INLINE vec_u8_t diff_lt_altivec( register vec_u8_t x, register vec_u
     return o;
 }
 
-static GOTV_INLINE vec_u8_t h264_deblock_mask( register vec_u8_t p0, register vec_u8_t p1, register vec_u8_t q0,
+static NLC_INLINE vec_u8_t h264_deblock_mask( register vec_u8_t p0, register vec_u8_t p1, register vec_u8_t q0,
                                           register vec_u8_t q1, register vec_u8_t alpha, register vec_u8_t beta )
 {
     register vec_u8_t mask;
@@ -163,7 +163,7 @@ static GOTV_INLINE vec_u8_t h264_deblock_mask( register vec_u8_t p0, register ve
 }
 
 // out: newp1 = clip((p2 + ((p0 + q0 + 1) >> 1)) >> 1, p1-tc0, p1+tc0)
-static GOTV_INLINE vec_u8_t h264_deblock_q1( register vec_u8_t p0, register vec_u8_t p1, register vec_u8_t p2,
+static NLC_INLINE vec_u8_t h264_deblock_q1( register vec_u8_t p0, register vec_u8_t p1, register vec_u8_t p2,
                                         register vec_u8_t q0, register vec_u8_t tc0 )
 {
 

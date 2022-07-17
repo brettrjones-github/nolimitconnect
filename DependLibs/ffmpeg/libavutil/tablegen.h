@@ -29,25 +29,25 @@
 
 // we lack some functions on all host platforms, and we don't care about
 // performance and/or strict ISO C semantics as it's performed at build time
-static GOTV_INLINE double ff_cbrt(double x)
+static NLC_INLINE double ff_cbrt(double x)
 {
     return x < 0 ? -pow(-x, 1.0 / 3.0) : pow(x, 1.0 / 3.0);
 }
 #define cbrt ff_cbrt
 
-static GOTV_INLINE double ff_rint(double x)
+static NLC_INLINE double ff_rint(double x)
 {
     return x >= 0 ? floor(x + 0.5) : ceil(x - 0.5);
 }
 #define rint ff_rint
 
-static GOTV_INLINE long long ff_llrint(double x)
+static NLC_INLINE long long ff_llrint(double x)
 {
     return rint(x);
 }
 #define llrint ff_llrint
 
-static GOTV_INLINE long ff_lrint(double x)
+static NLC_INLINE long ff_lrint(double x)
 {
     return rint(x);
 }

@@ -31,18 +31,18 @@
 
 namespace {
 
-GOTV_INLINE int32_t roundIBDI(int32_t num, int32_t den)
+NLC_INLINE int32_t roundIBDI(int32_t num, int32_t den)
 {
     return num >= 0 ? ((num * 2 + den) / (den * 2)) : -((-num * 2 + den) / (den * 2));
 }
 
 /* get the sign of input variable (TODO: this is a dup, make common) */
-GOTV_INLINE int8_t signOf(int x)
+NLC_INLINE int8_t signOf(int x)
 {
     return (x >> 31) | ((int)((((uint32_t)-x)) >> 31));
 }
 
-GOTV_INLINE int signOf2(const int a, const int b)
+NLC_INLINE int signOf2(const int a, const int b)
 {
     // NOTE: don't reorder below compare, both ICL, VC, GCC optimize strong depends on order!
     int r = 0;
@@ -53,7 +53,7 @@ GOTV_INLINE int signOf2(const int a, const int b)
     return r;
 }
 
-GOTV_INLINE int64_t estSaoDist(int32_t count, int32_t offset, int32_t offsetOrg)
+NLC_INLINE int64_t estSaoDist(int32_t count, int32_t offset, int32_t offsetOrg)
 {
     return (count * offset - offsetOrg * 2) * offset;
 }
@@ -1432,7 +1432,7 @@ void SAO::saoStatsInitialOffset(int addr, int planes)
     }
 }
 
-GOTV_INLINE int64_t SAO::calcSaoRdoCost(int64_t distortion, uint32_t bits, int64_t lambda)
+NLC_INLINE int64_t SAO::calcSaoRdoCost(int64_t distortion, uint32_t bits, int64_t lambda)
 {
 #if X265_DEPTH < 10
         X265_CHECK(bits <= (INT64_MAX - 128) / lambda,

@@ -51,7 +51,7 @@ static const uint64_t c2 = UINT64_C(0x4cf5ad432745937f);
 
 #define ROT(a, b) (((a) << (b)) | ((a) >> (64 - (b))))
 
-static uint64_t GOTV_INLINE get_k1(const uint8_t *src)
+static uint64_t NLC_INLINE get_k1(const uint8_t *src)
 {
     uint64_t k = AV_RL64(src);
     k *= c1;
@@ -60,7 +60,7 @@ static uint64_t GOTV_INLINE get_k1(const uint8_t *src)
     return k;
 }
 
-static uint64_t GOTV_INLINE get_k2(const uint8_t *src)
+static uint64_t NLC_INLINE get_k2(const uint8_t *src)
 {
     uint64_t k = AV_RL64(src + 8);
     k *= c2;
@@ -69,7 +69,7 @@ static uint64_t GOTV_INLINE get_k2(const uint8_t *src)
     return k;
 }
 
-static uint64_t GOTV_INLINE update_h1(uint64_t k, uint64_t h1, uint64_t h2)
+static uint64_t NLC_INLINE update_h1(uint64_t k, uint64_t h1, uint64_t h2)
 {
     k ^= h1;
     k = ROT(k, 27);
@@ -79,7 +79,7 @@ static uint64_t GOTV_INLINE update_h1(uint64_t k, uint64_t h1, uint64_t h2)
     return k;
 }
 
-static uint64_t GOTV_INLINE update_h2(uint64_t k, uint64_t h1, uint64_t h2)
+static uint64_t NLC_INLINE update_h2(uint64_t k, uint64_t h1, uint64_t h2)
 {
     k ^= h2;
     k = ROT(k, 31);
@@ -132,7 +132,7 @@ void av_murmur3_update(AVMurMur3 *c, const uint8_t *src, size_t len)
     }
 }
 
-static GOTV_INLINE uint64_t fmix(uint64_t k)
+static NLC_INLINE uint64_t fmix(uint64_t k)
 {
     k ^= k >> 33;
     k *= UINT64_C(0xff51afd7ed558ccd);

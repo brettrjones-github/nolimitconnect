@@ -163,6 +163,7 @@
 
 #define OBJNAME_APPLET_SHARE_OFFER_LIST			        "AppletShareOfferList"
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
+#define OBJNAME_APPLET_SOUND_SETTINGS			        "AppletSoundSettings"
 #define OBJNAME_APPLET_STORYBOARD_CLIENT				"AppletStoryboardClient"
 
 #define OBJNAME_APPLET_TEST_AND_DEBUG				    "AppletTestAndDebug"

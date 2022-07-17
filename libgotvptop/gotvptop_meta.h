@@ -72,30 +72,30 @@ typedef enum gotvptop_meta_type_t
  */
 struct gotvptop_meta_t;
 
-GOTV_API gotvptop_meta_t * gotvptop_meta_New( void ) GOTV_USED;
-GOTV_API void gotvptop_meta_Delete( gotvptop_meta_t *m );
-GOTV_API void gotvptop_meta_Set( gotvptop_meta_t *p_meta, gotvptop_meta_type_t meta_type, const char *psz_val );
-GOTV_API const char * gotvptop_meta_Get( const gotvptop_meta_t *p_meta, gotvptop_meta_type_t meta_type );
+NLC_API gotvptop_meta_t * gotvptop_meta_New( void ) GOTV_USED;
+NLC_API void gotvptop_meta_Delete( gotvptop_meta_t *m );
+NLC_API void gotvptop_meta_Set( gotvptop_meta_t *p_meta, gotvptop_meta_type_t meta_type, const char *psz_val );
+NLC_API const char * gotvptop_meta_Get( const gotvptop_meta_t *p_meta, gotvptop_meta_type_t meta_type );
 
-GOTV_API void gotvptop_meta_AddExtra( gotvptop_meta_t *m, const char *psz_name, const char *psz_value );
-GOTV_API const char * gotvptop_meta_GetExtra( const gotvptop_meta_t *m, const char *psz_name );
-GOTV_API unsigned gotvptop_meta_GetExtraCount( const gotvptop_meta_t *m );
+NLC_API void gotvptop_meta_AddExtra( gotvptop_meta_t *m, const char *psz_name, const char *psz_value );
+NLC_API const char * gotvptop_meta_GetExtra( const gotvptop_meta_t *m, const char *psz_name );
+NLC_API unsigned gotvptop_meta_GetExtraCount( const gotvptop_meta_t *m );
 
 /**
  * Allocate a copy of all extra meta names and a table with it.
  * Be sure to free both the returned pointers and its name.
  */
-GOTV_API char ** gotvptop_meta_CopyExtraNames( const gotvptop_meta_t *m ) GOTV_USED;
+NLC_API char ** gotvptop_meta_CopyExtraNames( const gotvptop_meta_t *m ) GOTV_USED;
 
-GOTV_API void gotvptop_meta_Merge( gotvptop_meta_t *dst, const gotvptop_meta_t *src );
+NLC_API void gotvptop_meta_Merge( gotvptop_meta_t *dst, const gotvptop_meta_t *src );
 
-GOTV_API int gotvptop_meta_GetStatus( gotvptop_meta_t *m );
-GOTV_API void gotvptop_meta_SetStatus( gotvptop_meta_t *m, int status );
+NLC_API int gotvptop_meta_GetStatus( gotvptop_meta_t *m );
+NLC_API void gotvptop_meta_SetStatus( gotvptop_meta_t *m, int status );
 
 /**
  * Returns a localizes string describing the meta
  */
-GOTV_API const char * gotvptop_meta_TypeToLocalizedString( gotvptop_meta_type_t meta_type );
+NLC_API const char * gotvptop_meta_TypeToLocalizedString( gotvptop_meta_type_t meta_type );
 
 typedef struct meta_export_t
 {
@@ -104,7 +104,7 @@ typedef struct meta_export_t
     const char *psz_file;
 } meta_export_t;
 
-GOTV_API int input_item_WriteMeta(gotvptop_object_t *, input_item_t *);
+NLC_API int input_item_WriteMeta(gotvptop_object_t *, input_item_t *);
 
 /* Setters for meta.
  * Warning: Make sure to use the input_item meta setters (defined in gotvptop_input_item.h)

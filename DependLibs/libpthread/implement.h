@@ -83,7 +83,7 @@ typedef VOID (APIENTRY *PAPCFUNC)(DWORD dwParam);
 #include "sched.h"
 
 #if defined(HAVE_C_INLINE) || defined(__cplusplus)
-# define INLINE GOTV_INLINE
+# define INLINE NLC_INLINE
 #else
 # define INLINE
 #endif

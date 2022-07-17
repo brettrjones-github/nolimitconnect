@@ -35,12 +35,12 @@
 #include "mathops.h"
 #include "mpeg12data.h"
 
-static GOTV_INLINE void asv2_put_bits(PutBitContext *pb, int n, int v)
+static NLC_INLINE void asv2_put_bits(PutBitContext *pb, int n, int v)
 {
     put_bits(pb, n, ff_reverse[v << (8 - n)]);
 }
 
-static GOTV_INLINE void asv1_put_level(PutBitContext *pb, int level)
+static NLC_INLINE void asv1_put_level(PutBitContext *pb, int level)
 {
     unsigned int index = level + 3;
 
@@ -52,7 +52,7 @@ static GOTV_INLINE void asv1_put_level(PutBitContext *pb, int level)
     }
 }
 
-static GOTV_INLINE void asv2_put_level(ASV1Context *a, PutBitContext *pb, int level)
+static NLC_INLINE void asv2_put_level(ASV1Context *a, PutBitContext *pb, int level)
 {
     unsigned int index = level + 31;
 
@@ -68,7 +68,7 @@ static GOTV_INLINE void asv2_put_level(ASV1Context *a, PutBitContext *pb, int le
     }
 }
 
-static GOTV_INLINE void asv1_encode_block(ASV1Context *a, int16_t block[64])
+static NLC_INLINE void asv1_encode_block(ASV1Context *a, int16_t block[64])
 {
     int i;
     int nc_count = 0;
@@ -114,7 +114,7 @@ static GOTV_INLINE void asv1_encode_block(ASV1Context *a, int16_t block[64])
     put_bits(&a->pb, ff_asv_ccp_tab[16][1], ff_asv_ccp_tab[16][0]);
 }
 
-static GOTV_INLINE void asv2_encode_block(ASV1Context *a, int16_t block[64])
+static NLC_INLINE void asv2_encode_block(ASV1Context *a, int16_t block[64])
 {
     int i;
     int count = 0;
@@ -169,7 +169,7 @@ static GOTV_INLINE void asv2_encode_block(ASV1Context *a, int16_t block[64])
 
 #define MAX_MB_SIZE (30 * 16 * 16 * 3 / 2 / 8)
 
-static GOTV_INLINE int encode_mb(ASV1Context *a, int16_t block[6][64])
+static NLC_INLINE int encode_mb(ASV1Context *a, int16_t block[6][64])
 {
     int i;
 
@@ -189,7 +189,7 @@ static GOTV_INLINE int encode_mb(ASV1Context *a, int16_t block[6][64])
     return 0;
 }
 
-static GOTV_INLINE void dct_get(ASV1Context *a, const AVFrame *frame,
+static NLC_INLINE void dct_get(ASV1Context *a, const AVFrame *frame,
                            int mb_x, int mb_y)
 {
     int16_t (*block)[64] = a->block;

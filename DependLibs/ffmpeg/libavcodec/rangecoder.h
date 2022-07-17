@@ -51,7 +51,7 @@ void ff_init_range_decoder(RangeCoder *c, const uint8_t *buf, int buf_size);
 int ff_rac_terminate(RangeCoder *c);
 void ff_build_rac_states(RangeCoder *c, int factor, int max_p);
 
-static GOTV_INLINE void renorm_encoder(RangeCoder *c)
+static NLC_INLINE void renorm_encoder(RangeCoder *c)
 {
     // FIXME: optimize
     while (c->range < 0x100) {
@@ -76,7 +76,7 @@ static GOTV_INLINE void renorm_encoder(RangeCoder *c)
     }
 }
 
-static GOTV_INLINE int get_rac_count(RangeCoder *c)
+static NLC_INLINE int get_rac_count(RangeCoder *c)
 {
     int x = c->bytestream - c->bytestream_start + c->outstanding_count;
     if (c->outstanding_byte >= 0)
@@ -84,7 +84,7 @@ static GOTV_INLINE int get_rac_count(RangeCoder *c)
     return 8 * x - av_log2(c->range);
 }
 
-static GOTV_INLINE void put_rac(RangeCoder *c, uint8_t *const state, int bit)
+static NLC_INLINE void put_rac(RangeCoder *c, uint8_t *const state, int bit)
 {
     int range1 = (c->range * (*state)) >> 8;
 
@@ -103,7 +103,7 @@ static GOTV_INLINE void put_rac(RangeCoder *c, uint8_t *const state, int bit)
     renorm_encoder(c);
 }
 
-static GOTV_INLINE void refill(RangeCoder *c)
+static NLC_INLINE void refill(RangeCoder *c)
 {
     if (c->range < 0x100) {
         c->range <<= 8;
@@ -116,7 +116,7 @@ static GOTV_INLINE void refill(RangeCoder *c)
     }
 }
 
-static GOTV_INLINE int get_rac(RangeCoder *c, uint8_t *const state)
+static NLC_INLINE int get_rac(RangeCoder *c, uint8_t *const state)
 {
     int range1 = (c->range * (*state)) >> 8;
 

@@ -68,19 +68,19 @@ typedef struct
  * \p i_start start in epoch time
  * \p i_duration event duration in seconds
  */
-GOTV_API gotvptop_epg_event_t * gotvptop_epg_event_New(uint16_t i_id,
+NLC_API gotvptop_epg_event_t * gotvptop_epg_event_New(uint16_t i_id,
                                             int64_t i_start, uint32_t i_duration);
 
 /**
  * Releases a gotvptop_epg_event_t*.
  */
-GOTV_API void gotvptop_epg_event_Delete(gotvptop_epg_event_t *p_event);
+NLC_API void gotvptop_epg_event_Delete(gotvptop_epg_event_t *p_event);
 
 /**
  * Returns a gotvptop_epg_event_t * duplicated from \p p_src.
  *
  */
-GOTV_API gotvptop_epg_event_t * gotvptop_epg_event_Duplicate(const gotvptop_epg_event_t *p_src);
+NLC_API gotvptop_epg_event_t * gotvptop_epg_event_Duplicate(const gotvptop_epg_event_t *p_src);
 
 /**
  * It creates a new gotvptop_epg_t*
@@ -90,12 +90,12 @@ GOTV_API gotvptop_epg_event_t * gotvptop_epg_event_Duplicate(const gotvptop_epg_
  * \p i_id is computed unique id depending on standard (table id, eit number)
  * \p i_source_id is the associated program number
  */
-GOTV_API gotvptop_epg_t * gotvptop_epg_New(uint32_t i_id, uint16_t i_source_id);
+NLC_API gotvptop_epg_t * gotvptop_epg_New(uint32_t i_id, uint16_t i_source_id);
 
 /**
  * It releases a gotvptop_epg_t*.
  */
-GOTV_API void gotvptop_epg_Delete(gotvptop_epg_t *p_epg);
+NLC_API void gotvptop_epg_Delete(gotvptop_epg_t *p_epg);
 
 /**
  * It appends a new gotvptop_epg_event_t to a gotvptop_epg_t.
@@ -103,18 +103,18 @@ GOTV_API void gotvptop_epg_Delete(gotvptop_epg_t *p_epg);
  *
  * \p p_evt a gotvptop_epg_event_t * created with gotvptop_epg_event_New.
  */
-GOTV_API bool gotvptop_epg_AddEvent(gotvptop_epg_t *p_epg, gotvptop_epg_event_t *p_evt);
+NLC_API bool gotvptop_epg_AddEvent(gotvptop_epg_t *p_epg, gotvptop_epg_event_t *p_evt);
 
 /**
  * It set the current event of a gotvptop_epg_t given a start time
  */
-GOTV_API void gotvptop_epg_SetCurrent(gotvptop_epg_t *p_epg, int64_t i_start);
+NLC_API void gotvptop_epg_SetCurrent(gotvptop_epg_t *p_epg, int64_t i_start);
 
 /**
  * Returns a duplicated \p p_src and its associated events.
  *
  */
-GOTV_API gotvptop_epg_t * gotvptop_epg_Duplicate(const gotvptop_epg_t *p_src);
+NLC_API gotvptop_epg_t * gotvptop_epg_Duplicate(const gotvptop_epg_t *p_src);
 
 #endif
 

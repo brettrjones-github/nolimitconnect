@@ -125,7 +125,7 @@ WRITE_2D_FUNC(uint8_t)
 WRITE_2D_FUNC(uint32_t)
 WRITE_2D_FUNC(float)
 
-static GOTV_INLINE void write_fileheader(void)
+static NLC_INLINE void write_fileheader(void)
 {
     printf("/* This file was automatically generated. */\n");
     printf("#include <stdint.h>\n");

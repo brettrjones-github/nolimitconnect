@@ -48,7 +48,7 @@ using namespace WelsCommon;
 
 namespace WelsEnc {
 
-static GOTV_INLINE int32_t WelsCheckLevelLimitation (const SWelsSPS* kpSps, const SLevelLimits* kpLevelLimit,
+static NLC_INLINE int32_t WelsCheckLevelLimitation (const SWelsSPS* kpSps, const SLevelLimits* kpLevelLimit,
     float fFrameRate, int32_t iTargetBitRate) {
   uint32_t uiPicWidthInMBs = kpSps->iMbWidth;
   uint32_t uiPicHeightInMBs = kpSps->iMbHeight;
@@ -184,7 +184,7 @@ int32_t WelsCheckRefFrameLimitationLevelIdcFirst (SLogContext* pLogCtx, SWelsSvc
   return ENC_RETURN_SUCCESS;
 }
 
-static GOTV_INLINE ELevelIdc WelsGetLevelIdc (const SWelsSPS* kpSps, float fFrameRate, int32_t iTargetBitRate) {
+static NLC_INLINE ELevelIdc WelsGetLevelIdc (const SWelsSPS* kpSps, float fFrameRate, int32_t iTargetBitRate) {
   int32_t iOrder;
   for (iOrder = 0; iOrder < LEVEL_NUMBER; iOrder++) {
     if (WelsCheckLevelLimitation (kpSps, & (g_ksLevelLimits[iOrder]), fFrameRate, iTargetBitRate)) {
@@ -462,7 +462,7 @@ int32_t WelsWritePpsSyntax (SWelsPPS* pPps, SBitStringAux* pBitStringAux,
   return 0;
 }
 
-static GOTV_INLINE bool WelsGetPaddingOffset (int32_t iActualWidth, int32_t iActualHeight,  int32_t iWidth,
+static NLC_INLINE bool WelsGetPaddingOffset (int32_t iActualWidth, int32_t iActualHeight,  int32_t iWidth,
     int32_t iHeight, SCropOffset& pOffset) {
   if ((iWidth < iActualWidth) || (iHeight < iActualHeight))
     return false;

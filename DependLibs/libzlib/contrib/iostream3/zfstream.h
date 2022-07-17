@@ -436,7 +436,7 @@ template<typename T1, typename T2>
 /*****************************************************************************/
 
 // Manipulator function thunks through to stream buffer
-GOTV_INLINE gzofstream&
+NLC_INLINE gzofstream&
 setcompression(gzofstream &gzs, int l, int s = Z_DEFAULT_STRATEGY)
 {
   (gzs.rdbuf())->setcompression(l, s);
@@ -445,7 +445,7 @@ setcompression(gzofstream &gzs, int l, int s = Z_DEFAULT_STRATEGY)
 
 // Manipulator constructor stores arguments
 template<typename T1, typename T2>
-  GOTV_INLINE
+  NLC_INLINE
   gzomanip2<T1,T2>::gzomanip2(gzofstream &(*f)(gzofstream &, T1, T2),
                               T1 v1,
                               T2 v2)
@@ -454,12 +454,12 @@ template<typename T1, typename T2>
 
 // Insertor applies underlying manipulator function to stream
 template<typename T1, typename T2>
-  GOTV_INLINE gzofstream&
+  NLC_INLINE gzofstream&
   operator<<(gzofstream& s, const gzomanip2<T1,T2>& m)
   { return (*m.func)(s, m.val1, m.val2); }
 
 // Insert this onto stream to simplify setting of compression level
-GOTV_INLINE gzomanip2<int,int>
+NLC_INLINE gzomanip2<int,int>
 setcompression(int l, int s = Z_DEFAULT_STRATEGY)
 { return gzomanip2<int,int>(&setcompression, l, s); }
 

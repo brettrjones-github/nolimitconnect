@@ -204,7 +204,7 @@ static void dct2x4dc( dctcoef dct[8], dctcoef dct4x4[8][16] )
     dct4x4[7][0] = 0;
 }
 
-static GOTV_INLINE void pixel_sub_wxh( dctcoef *diff, int i_size,
+static NLC_INLINE void pixel_sub_wxh( dctcoef *diff, int i_size,
                                   pixel *pix1, int i_pix1, pixel *pix2, int i_pix2 )
 {
     for( int y = 0; y < i_size; y++ )
@@ -501,7 +501,7 @@ static void add16x16_idct8( pixel *dst, dctcoef dct[4][64] )
     add8x8_idct8( &dst[8*FDEC_STRIDE+8], dct[3] );
 }
 
-static void GOTV_INLINE add4x4_idct_dc( pixel *p_dst, dctcoef dc )
+static void NLC_INLINE add4x4_idct_dc( pixel *p_dst, dctcoef dc )
 {
     dc = (dc + 32) >> 6;
     for( int i = 0; i < 4; i++, p_dst += FDEC_STRIDE )

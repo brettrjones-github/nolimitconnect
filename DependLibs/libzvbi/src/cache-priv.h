@@ -334,7 +334,7 @@ struct _vbi_cache {
 };
 
 /** @internal */
-GOTV_INLINE struct ttx_magazine *
+NLC_INLINE struct ttx_magazine *
 cache_network_magazine		(cache_network *	cn,
 				 vbi_pgno		pgno)
 {
@@ -343,7 +343,7 @@ cache_network_magazine		(cache_network *	cn,
 }
 
 /** @internal */
-GOTV_INLINE const struct ttx_magazine *
+NLC_INLINE const struct ttx_magazine *
 cache_network_const_magazine	(const cache_network *	cn,
 				 vbi_pgno		pgno)
 {
@@ -352,7 +352,7 @@ cache_network_const_magazine	(const cache_network *	cn,
 }
 
 /** @internal */
-GOTV_INLINE struct ttx_page_stat *
+NLC_INLINE struct ttx_page_stat *
 cache_network_page_stat		(cache_network *	cn,
 				 vbi_pgno		pgno)
 {
@@ -361,7 +361,7 @@ cache_network_page_stat		(cache_network *	cn,
 }
 
 /** @internal */
-GOTV_INLINE const struct ttx_page_stat *
+NLC_INLINE const struct ttx_page_stat *
 cache_network_const_page_stat	(const cache_network *	cn,
 				 vbi_pgno		pgno)
 {

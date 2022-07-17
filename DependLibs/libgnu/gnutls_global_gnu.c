@@ -59,7 +59,7 @@ int _gnutls_global_init_skip(void)
 	return 0;
 }
 #else
-GOTV_INLINE static int _gnutls_global_init_skip(void)
+NLC_INLINE static int _gnutls_global_init_skip(void)
 {
 	return 0;
 }

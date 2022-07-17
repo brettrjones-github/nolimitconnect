@@ -33,7 +33,7 @@
 
 #include "rsvg.h"
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 RsvgDefs    *rsvg_defs_new		(RsvgHandle *handle);
@@ -44,5 +44,5 @@ void	     rsvg_defs_free		(RsvgDefs * defs);
 G_GNUC_INTERNAL
 void	     rsvg_defs_register_node_by_id (RsvgDefs *defs, const char *id, RsvgNode *node);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 #endif

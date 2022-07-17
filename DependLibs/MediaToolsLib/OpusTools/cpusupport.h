@@ -39,7 +39,7 @@
 
 #if defined WIN32 || defined _WIN32
 #include <intrin.h>
-static GOTV_INLINE int query_cpu_support(void)
+static NLC_INLINE int query_cpu_support(void)
 {
    int buffer[4];
    __cpuid(buffer, 1);
@@ -51,7 +51,7 @@ static GOTV_INLINE int query_cpu_support(void)
 }
 #else
 #include <cpuid.h>
-static GOTV_INLINE int query_cpu_support(void)
+static NLC_INLINE int query_cpu_support(void)
 {
    unsigned int eax, ebx, ecx, edx=0;
    __get_cpuid(1, &eax, &ebx, &ecx, &edx);

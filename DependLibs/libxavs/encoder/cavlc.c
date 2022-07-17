@@ -82,7 +82,7 @@ static const uint8_t sub_mb_type_b_to_golomb[13] = {
 #define BLOCK_INDEX_CHROMA_DC   (-1)
 #define BLOCK_INDEX_LUMA_DC     (-2)
 
-static GOTV_INLINE void
+static NLC_INLINE void
 bs_write_vlc (bs_t * s, vlc_t v)
 {
   bs_write (s, v.i_size, v.i_bits);
@@ -613,7 +613,7 @@ cavlc_mb8x8_mvd (xavs_t * h, bs_t * s, int i_list, int i)
   }
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 xavs_macroblock_luma_write_cavlc (xavs_t * h, bs_t * s, int i8start, int i8end)
 {
   int i8, i4, i;

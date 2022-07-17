@@ -268,7 +268,7 @@ static inline libcelt_word16 SIG2WORD16(libcelt_sig x)
 #endif
 }
 
-static int transient_analysis(const libcelt_word32 * GOTV_RESTRICT in, int len, int C,
+static int transient_analysis(const libcelt_word32 * NLC_RESTRICT in, int len, int C,
                               int overlap)
 {
    int i;
@@ -357,7 +357,7 @@ static int transient_analysis(const libcelt_word32 * GOTV_RESTRICT in, int len, 
 
 /** Apply window and compute the MDCT for all sub-frames and 
     all channels in a frame */
-static void compute_mdcts(const CELTMode *mode, int shortBlocks, libcelt_sig * GOTV_RESTRICT in, libcelt_sig * GOTV_RESTRICT out, int _C, int LM)
+static void compute_mdcts(const CELTMode *mode, int shortBlocks, libcelt_sig * NLC_RESTRICT in, libcelt_sig * NLC_RESTRICT out, int _C, int LM)
 {
    const int C = CHANNELS(_C);
    if (C==1 && !shortBlocks)
@@ -395,8 +395,8 @@ static void compute_mdcts(const CELTMode *mode, int shortBlocks, libcelt_sig * G
 /** Compute the IMDCT and apply window for all sub-frames and 
     all channels in a frame */
 static void compute_inv_mdcts(const CELTMode *mode, int shortBlocks, libcelt_sig *X,
-      libcelt_sig * GOTV_RESTRICT out_mem[],
-      libcelt_sig * GOTV_RESTRICT overlap_mem[], int _C, int LM)
+      libcelt_sig * NLC_RESTRICT out_mem[],
+      libcelt_sig * NLC_RESTRICT overlap_mem[], int _C, int LM)
 {
    int c;
    const int C = CHANNELS(_C);
@@ -447,8 +447,8 @@ static void deemphasis(libcelt_sig *in[], libcelt_word16 *pcm, int N, int _C, in
    int count=0;
    c=0; do {
       int j;
-      libcelt_sig * GOTV_RESTRICT x;
-      libcelt_word16  * GOTV_RESTRICT y;
+      libcelt_sig * NLC_RESTRICT x;
+      libcelt_word16  * NLC_RESTRICT y;
       libcelt_sig m = mem[c];
       x =in[c];
       y = pcm+c;
@@ -858,11 +858,11 @@ static int stereo_analysis(const CELTMode *m, const libcelt_norm *X,
 
 #ifdef FIXED_POINT
 CELT_STATIC
-int libcelt_encode_with_ec(CELTEncoder * GOTV_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
+int libcelt_encode_with_ec(CELTEncoder * NLC_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
 {
 #else
 CELT_STATIC
-int libcelt_encode_with_ec_float(CELTEncoder * GOTV_RESTRICT st, const libcelt_sig * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
+int libcelt_encode_with_ec_float(CELTEncoder * NLC_RESTRICT st, const libcelt_sig * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
 {
 #endif
    int i, c, N;
@@ -1015,8 +1015,8 @@ int libcelt_encode_with_ec_float(CELTEncoder * GOTV_RESTRICT st, const libcelt_s
       silence = 1;
       c=0; do {
          int count = 0;
-         const libcelt_word16 * GOTV_RESTRICT pcmp = pcm+c;
-         libcelt_sig * GOTV_RESTRICT inp = in+c*(N+st->overlap)+st->overlap;
+         const libcelt_word16 * NLC_RESTRICT pcmp = pcm+c;
+         libcelt_sig * NLC_RESTRICT inp = in+c*(N+st->overlap)+st->overlap;
 
          for (i=0;i<N;i++)
          {
@@ -1611,7 +1611,7 @@ int libcelt_encode_with_ec_float(CELTEncoder * GOTV_RESTRICT st, const libcelt_s
 #ifdef FIXED_POINT
 #ifndef DISABLE_FLOAT_API
 CELT_STATIC
-int libcelt_encode_with_ec_float(CELTEncoder * GOTV_RESTRICT st, const float * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
+int libcelt_encode_with_ec_float(CELTEncoder * NLC_RESTRICT st, const float * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
 {
    int j, ret, C, N;
    VARDECL(libcelt_int16, in);
@@ -1640,7 +1640,7 @@ int libcelt_encode_with_ec_float(CELTEncoder * GOTV_RESTRICT st, const float * p
 #endif /*DISABLE_FLOAT_API*/
 #else
 CELT_STATIC
-int libcelt_encode_with_ec(CELTEncoder * GOTV_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
+int libcelt_encode_with_ec(CELTEncoder * NLC_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes, ec_enc *enc)
 {
    int j, ret, C, N;
    VARDECL(libcelt_sig, in);
@@ -1667,19 +1667,19 @@ int libcelt_encode_with_ec(CELTEncoder * GOTV_RESTRICT st, const libcelt_int16 *
 }
 #endif
 
-int libcelt_encode(CELTEncoder * GOTV_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes)
+int libcelt_encode(CELTEncoder * NLC_RESTRICT st, const libcelt_int16 * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes)
 {
    return libcelt_encode_with_ec(st, pcm, frame_size, compressed, nbCompressedBytes, NULL);
 }
 
 #ifndef DISABLE_FLOAT_API
-int libcelt_encode_float(CELTEncoder * GOTV_RESTRICT st, const float * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes)
+int libcelt_encode_float(CELTEncoder * NLC_RESTRICT st, const float * pcm, int frame_size, unsigned char *compressed, int nbCompressedBytes)
 {
    return libcelt_encode_with_ec_float(st, pcm, frame_size, compressed, nbCompressedBytes, NULL);
 }
 #endif /* DISABLE_FLOAT_API */
 
-int libcelt_encoder_ctl(CELTEncoder * GOTV_RESTRICT st, int request, ...)
+int libcelt_encoder_ctl(CELTEncoder * NLC_RESTRICT st, int request, ...)
 {
    va_list ap;
    
@@ -1917,7 +1917,7 @@ void libcelt_decoder_destroy(CELTDecoder *st)
    libcelt_free(st);
 }
 
-static void libcelt_decode_lost(CELTDecoder * GOTV_RESTRICT st, libcelt_word16 * GOTV_RESTRICT pcm, int N, int LM)
+static void libcelt_decode_lost(CELTDecoder * NLC_RESTRICT st, libcelt_word16 * NLC_RESTRICT pcm, int N, int LM)
 {
    int c;
    int pitch_index;
@@ -2144,11 +2144,11 @@ static void libcelt_decode_lost(CELTDecoder * GOTV_RESTRICT st, libcelt_word16 *
 
 #ifdef FIXED_POINT
 CELT_STATIC
-int libcelt_decode_with_ec(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * GOTV_RESTRICT pcm, int frame_size, ec_dec *dec)
+int libcelt_decode_with_ec(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * NLC_RESTRICT pcm, int frame_size, ec_dec *dec)
 {
 #else
 CELT_STATIC
-int libcelt_decode_with_ec_float(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, libcelt_sig * GOTV_RESTRICT pcm, int frame_size, ec_dec *dec)
+int libcelt_decode_with_ec_float(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, libcelt_sig * NLC_RESTRICT pcm, int frame_size, ec_dec *dec)
 {
 #endif
    int c, i, N;
@@ -2504,7 +2504,7 @@ int libcelt_decode_with_ec_float(CELTDecoder * GOTV_RESTRICT st, const unsigned 
 #ifdef FIXED_POINT
 #ifndef DISABLE_FLOAT_API
 CELT_STATIC
-int libcelt_decode_with_ec_float(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, float * GOTV_RESTRICT pcm, int frame_size, ec_dec *dec)
+int libcelt_decode_with_ec_float(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, float * NLC_RESTRICT pcm, int frame_size, ec_dec *dec)
 {
    int j, ret, C, N;
    VARDECL(libcelt_int16, out);
@@ -2529,7 +2529,7 @@ int libcelt_decode_with_ec_float(CELTDecoder * GOTV_RESTRICT st, const unsigned 
 #endif /*DISABLE_FLOAT_API*/
 #else
 CELT_STATIC
-int libcelt_decode_with_ec(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * GOTV_RESTRICT pcm, int frame_size, ec_dec *dec)
+int libcelt_decode_with_ec(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * NLC_RESTRICT pcm, int frame_size, ec_dec *dec)
 {
    int j, ret, C, N;
    VARDECL(libcelt_sig, out);
@@ -2554,19 +2554,19 @@ int libcelt_decode_with_ec(CELTDecoder * GOTV_RESTRICT st, const unsigned char *
 }
 #endif
 
-int libcelt_decode(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * GOTV_RESTRICT pcm, int frame_size)
+int libcelt_decode(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, libcelt_int16 * NLC_RESTRICT pcm, int frame_size)
 {
    return libcelt_decode_with_ec(st, data, len, pcm, frame_size, NULL);
 }
 
 #ifndef DISABLE_FLOAT_API
-int libcelt_decode_float(CELTDecoder * GOTV_RESTRICT st, const unsigned char *data, int len, float * GOTV_RESTRICT pcm, int frame_size)
+int libcelt_decode_float(CELTDecoder * NLC_RESTRICT st, const unsigned char *data, int len, float * NLC_RESTRICT pcm, int frame_size)
 {
    return libcelt_decode_with_ec_float(st, data, len, pcm, frame_size, NULL);
 }
 #endif /* DISABLE_FLOAT_API */
 
-int libcelt_decoder_ctl(CELTDecoder * GOTV_RESTRICT st, int request, ...)
+int libcelt_decoder_ctl(CELTDecoder * NLC_RESTRICT st, int request, ...)
 {
    va_list ap;
 

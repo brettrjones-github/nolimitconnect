@@ -409,7 +409,7 @@ const std::string GoTvUrl::GetFileNameWithoutPath() const
 	return URIUtils::GetFileName( file );
 }
 
-GOTV_INLINE
+NLC_INLINE
 void protectIPv6( std::string &hn )
 {
 	if( !hn.empty() && hn.find( ":" ) != hn.rfind( ":" )

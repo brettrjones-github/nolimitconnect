@@ -84,7 +84,7 @@ typedef struct gotvptop_tls_creds
  *
  * @return TLS credentials object, or NULL on error.
  **/
-GOTV_API gotvptop_tls_creds_t *gotvptop_tls_ClientCreate(gotvptop_object_t *);
+NLC_API gotvptop_tls_creds_t *gotvptop_tls_ClientCreate(gotvptop_object_t *);
 
 /**
  * Allocates server TLS credentials.
@@ -95,7 +95,7 @@ GOTV_API gotvptop_tls_creds_t *gotvptop_tls_ClientCreate(gotvptop_object_t *);
  *
  * @return TLS credentials object, or NULL on error.
  */
-GOTV_API gotvptop_tls_creds_t *gotvptop_tls_ServerCreate(gotvptop_object_t *, const char *cert,
+NLC_API gotvptop_tls_creds_t *gotvptop_tls_ServerCreate(gotvptop_object_t *, const char *cert,
                                               const char *key);
 
 static inline int gotvptop_tls_SessionHandshake (gotvptop_tls_creds_t *crd,
@@ -112,7 +112,7 @@ static inline int gotvptop_tls_SessionHandshake (gotvptop_tls_creds_t *crd,
  *
  * @param srv object to be destroyed (or NULL)
  */
-GOTV_API void gotvptop_tls_Delete(gotvptop_tls_creds_t *);
+NLC_API void gotvptop_tls_Delete(gotvptop_tls_creds_t *);
 
 /**
  * Initiates a client TLS session.
@@ -138,7 +138,7 @@ GOTV_API void gotvptop_tls_Delete(gotvptop_tls_creds_t *);
  *
  * @return TLS session, or NULL on error.
  **/
-GOTV_API gotvptop_tls_t *gotvptop_tls_ClientSessionCreate(gotvptop_tls_creds_t *creds,
+NLC_API gotvptop_tls_t *gotvptop_tls_ClientSessionCreate(gotvptop_tls_creds_t *creds,
                                                gotvptop_tls_t *sock,
                                                const char *host,
                                                const char *service,
@@ -164,7 +164,7 @@ GOTV_API gotvptop_tls_t *gotvptop_tls_ClientSessionCreate(gotvptop_tls_creds_t *
  *
  * @return TLS session, or NULL on error.
  */
-GOTV_API gotvptop_tls_t *gotvptop_tls_ServerSessionCreate(gotvptop_tls_creds_t *creds,
+NLC_API gotvptop_tls_t *gotvptop_tls_ServerSessionCreate(gotvptop_tls_creds_t *creds,
                                                gotvptop_tls_t *sock,
                                                const char *const *alpn);
 
@@ -182,7 +182,7 @@ GOTV_API gotvptop_tls_t *gotvptop_tls_ServerSessionCreate(gotvptop_tls_creds_t *
  *
  * This function is non-blocking and is not a cancellation point.
  */
-GOTV_API void gotvptop_tls_SessionDelete (gotvptop_tls_t *);
+NLC_API void gotvptop_tls_SessionDelete (gotvptop_tls_t *);
 
 static inline int gotvptop_tls_GetFD(gotvptop_tls_t *tls)
 {
@@ -204,7 +204,7 @@ static inline int gotvptop_tls_GetFD(gotvptop_tls_t *tls)
  *
  * @return the number of bytes actually dequeued, or -1 on error.
  */
-GOTV_API ssize_t gotvptop_tls_Read(gotvptop_tls_t *, void *buf, size_t len, bool waitall);
+NLC_API ssize_t gotvptop_tls_Read(gotvptop_tls_t *, void *buf, size_t len, bool waitall);
 
 /**
  * Receives a text line through a socket.
@@ -212,12 +212,12 @@ GOTV_API ssize_t gotvptop_tls_Read(gotvptop_tls_t *, void *buf, size_t len, bool
  * This dequeues one line of text from a transport layer socket.
  * @return a heap-allocated nul-terminated string, or NULL on error
  */
-GOTV_API char *gotvptop_tls_GetLine(gotvptop_tls_t *);
+NLC_API char *gotvptop_tls_GetLine(gotvptop_tls_t *);
 
 /**
  * Sends data through a socket.
  */
-GOTV_API ssize_t gotvptop_tls_Write(gotvptop_tls_t *, const void *buf, size_t len);
+NLC_API ssize_t gotvptop_tls_Write(gotvptop_tls_t *, const void *buf, size_t len);
 
 /**
  * Shuts a connection down.
@@ -278,12 +278,12 @@ static inline void gotvptop_tls_Close(gotvptop_tls_t *session)
  *
  * @deprecated This function is transitional. Do not use it directly.
  */
-GOTV_API gotvptop_tls_t *gotvptop_tls_SocketOpen(int fd);
+NLC_API gotvptop_tls_t *gotvptop_tls_SocketOpen(int fd);
 
 /**
  * Creates a connected pair of transport-layer sockets.
  */
-GOTV_API int gotvptop_tls_SocketPair(int family, int protocol, gotvptop_tls_t *[2]);
+NLC_API int gotvptop_tls_SocketPair(int family, int protocol, gotvptop_tls_t *[2]);
 
 struct addrinfo;
 
@@ -301,7 +301,7 @@ struct addrinfo;
  * @param ai a filled addrinfo structure (the ai_next member is ignored)
  * @param defer_connect whether to attempt a TCP Fast Open connection or not
  */
-GOTV_API gotvptop_tls_t *gotvptop_tls_SocketOpenAddrInfo(const struct addrinfo *ai,
+NLC_API gotvptop_tls_t *gotvptop_tls_SocketOpenAddrInfo(const struct addrinfo *ai,
                                               bool defer_connect);
 
 /**
@@ -315,7 +315,7 @@ GOTV_API gotvptop_tls_t *gotvptop_tls_SocketOpenAddrInfo(const struct addrinfo *
  *
  * @return a transport layer socket on success or NULL on error
  */
-GOTV_API gotvptop_tls_t *gotvptop_tls_SocketOpenTCP(gotvptop_object_t *obj,
+NLC_API gotvptop_tls_t *gotvptop_tls_SocketOpenTCP(gotvptop_object_t *obj,
                                          const char *hostname, unsigned port);
 
 /**
@@ -327,7 +327,7 @@ GOTV_API gotvptop_tls_t *gotvptop_tls_SocketOpenTCP(gotvptop_object_t *obj,
  *
  * See also gotvptop_tls_SocketOpenTCP() and gotvptop_tls_SessionCreate().
  */
-GOTV_API gotvptop_tls_t *gotvptop_tls_SocketOpenTLS(gotvptop_tls_creds_t *crd,
+NLC_API gotvptop_tls_t *gotvptop_tls_SocketOpenTLS(gotvptop_tls_creds_t *crd,
                                          const char *hostname, unsigned port,
                                          const char *service,
                                          const char *const *alpn, char **alp);

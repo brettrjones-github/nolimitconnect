@@ -226,8 +226,8 @@ _getopt_initialize (int argc,
                     char **argv, const char *optstring,
                     struct _getopt_data *d, int posixly_correct)
 {
-	GOTV_UNUSED( argc );
-	GOTV_UNUSED( argv );
+	NLC_UNUSED( argc );
+	NLC_UNUSED( argv );
 	/* Start processing options with ARGV-element 1 (since ARGV-element 0
      is the program name); the sequence of previously skipped
      non-option ARGV-elements is empty.  */

@@ -144,7 +144,7 @@ public:
     GuiOfferHostMgr&            getOfferHostMgr( void )                     { return m_OfferHostMgr; }
     VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
     RenderGlWidget *            getRenderConsumer( void );
-    MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
+    SoundMgr&					getSoundMgr( void )							{ return m_SoundMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
     GuiConnectIdListMgr&        getConnectIdListMgr( void )					{ return m_ConnectIdListMgr; }
     GuiFavoriteMgr&             getGuiFavoriteMgr( void )                   { return m_FavoriteMgr; }
@@ -885,7 +885,7 @@ protected:
 	VxTilePositioner&			m_TilePositioner;
     CamLogic                    m_CamLogic;
 
-	MySndMgr&					m_MySndMgr;
+	SoundMgr&					m_SoundMgr;
 	//OfferMgr&					m_OfferMgr;
 
 	HomeWindow					m_HomePage;

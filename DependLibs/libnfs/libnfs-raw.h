@@ -26,7 +26,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include <stdint.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 	struct rpc_data {
 		int size;
@@ -164,7 +164,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap2_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap2_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 
 	/*
@@ -181,7 +181,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap2_getport_async(struct rpc_context *rpc, int program, int version, int protocol, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap2_getport_async(struct rpc_context *rpc, int program, int version, int protocol, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER2/SET
@@ -197,7 +197,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap2_set_async(struct rpc_context *rpc, int program, int version, int protocol, int port, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap2_set_async(struct rpc_context *rpc, int program, int version, int protocol, int port, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER2/UNSET
@@ -213,7 +213,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap2_unset_async(struct rpc_context *rpc, int program, int version, int protocol, int port, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap2_unset_async(struct rpc_context *rpc, int program, int version, int protocol, int port, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER2/DUMP.
@@ -229,7 +229,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap2_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap2_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER2/CALLIT.
@@ -245,7 +245,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap2_callit_async(struct rpc_context *rpc, int program, int version, int procedure, char *data, int datalen, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap2_callit_async(struct rpc_context *rpc, int program, int version, int procedure, char *data, int datalen, rpc_cb cb, void *private_data);
 
 	/*
 	* PORTMAP v3 FUNCTIONS
@@ -265,7 +265,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/SET.
@@ -282,7 +282,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct pmap3_mapping;
-	GOTV_EXTERN int rpc_pmap3_set_async(struct rpc_context *rpc, struct pmap3_mapping *map, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_set_async(struct rpc_context *rpc, struct pmap3_mapping *map, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/UNSET.
@@ -298,7 +298,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_unset_async(struct rpc_context *rpc, struct pmap3_mapping *map, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_unset_async(struct rpc_context *rpc, struct pmap3_mapping *map, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/GETADDR.
@@ -314,7 +314,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_getaddr_async(struct rpc_context *rpc, struct pmap3_mapping *map, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_getaddr_async(struct rpc_context *rpc, struct pmap3_mapping *map, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/DUMP.
@@ -330,7 +330,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/CALLIT.
@@ -346,7 +346,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_callit_async(struct rpc_context *rpc, int program, int version, int procedure, char *data, int datalen, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_callit_async(struct rpc_context *rpc, int program, int version, int procedure, char *data, int datalen, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/GETTIME.
@@ -362,7 +362,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_gettime_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_gettime_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/UADDR2TADDR.
@@ -378,7 +378,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_pmap3_uaddr2taddr_async(struct rpc_context *rpc, char *uaddr, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_uaddr2taddr_async(struct rpc_context *rpc, char *uaddr, rpc_cb cb, void *private_data);
 
 	/*
 	* Call PORTMAPPER3/TADDR2UADDR.
@@ -395,7 +395,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct pmap3_netbuf;
-	GOTV_EXTERN int rpc_pmap3_taddr2uaddr_async(struct rpc_context *rpc, struct pmap3_netbuf *netbuf, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_pmap3_taddr2uaddr_async(struct rpc_context *rpc, struct pmap3_netbuf *netbuf, rpc_cb cb, void *private_data);
 
 	/*
 	* MOUNT v3 FUNCTIONS
@@ -417,8 +417,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount3_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
-	GOTV_EXTERN int rpc_mount_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount3_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call MOUNT3/MNT
@@ -434,8 +434,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount3_mnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
-	GOTV_EXTERN int rpc_mount_mnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
+	NLC_EXTERN int rpc_mount3_mnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
+	NLC_EXTERN int rpc_mount_mnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
 
 	/*
 	* Call MOUNT3/DUMP
@@ -451,8 +451,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount3_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
-	GOTV_EXTERN int rpc_mount_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount3_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call MOUNT3/UMNT
@@ -468,8 +468,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount3_umnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
-	GOTV_EXTERN int rpc_mount_umnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
+	NLC_EXTERN int rpc_mount3_umnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
+	NLC_EXTERN int rpc_mount_umnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
 
 	/*
 	* Call MOUNT3/UMNTALL
@@ -485,8 +485,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount3_umntall_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
-	GOTV_EXTERN int rpc_mount_umntall_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount3_umntall_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount_umntall_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call MOUNT3/EXPORT
@@ -506,8 +506,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount3_export_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
-	GOTV_EXTERN int rpc_mount_export_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount3_export_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount_export_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* MOUNT v1 FUNCTIONS (Used with NFSv2)
@@ -526,7 +526,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount1_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount1_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call MOUNT1/MNT
@@ -542,7 +542,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount1_mnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
+	NLC_EXTERN int rpc_mount1_mnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
 
 	/*
 	* Call MOUNT1/DUMP
@@ -558,7 +558,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount1_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount1_dump_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call MOUNT1/UMNT
@@ -574,7 +574,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount1_umnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
+	NLC_EXTERN int rpc_mount1_umnt_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, void *private_data);
 
 	/*
 	* Call MOUNT1/UMNTALL
@@ -590,7 +590,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount1_umntall_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount1_umntall_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call MOUNT1/EXPORT
@@ -610,7 +610,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_mount1_export_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_mount1_export_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 
 	/*
@@ -634,8 +634,8 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_nfs3_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
-	GOTV_EXTERN int rpc_nfs_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nfs3_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nfs_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call NFS3/GETATTR
@@ -652,8 +652,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct GETATTR3args;
-	GOTV_EXTERN int rpc_nfs3_getattr_async(struct rpc_context *rpc, rpc_cb cb, struct GETATTR3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_getattr_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
+	NLC_EXTERN int rpc_nfs3_getattr_async(struct rpc_context *rpc, rpc_cb cb, struct GETATTR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_getattr_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
 
 	/*
 	* Call NFS3/PATHCONF
@@ -670,8 +670,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct PATHCONF3args;
-	GOTV_EXTERN int rpc_nfs3_pathconf_async(struct rpc_context *rpc, rpc_cb cb, struct PATHCONF3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_pathconf_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
+	NLC_EXTERN int rpc_nfs3_pathconf_async(struct rpc_context *rpc, rpc_cb cb, struct PATHCONF3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_pathconf_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
 
 	/*
 	* Call NFS3/LOOKUP
@@ -688,8 +688,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct LOOKUP3args;
-	GOTV_EXTERN int rpc_nfs3_lookup_async(struct rpc_context *rpc, rpc_cb cb, struct LOOKUP3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_lookup_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *name, void *private_data);
+	NLC_EXTERN int rpc_nfs3_lookup_async(struct rpc_context *rpc, rpc_cb cb, struct LOOKUP3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_lookup_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *name, void *private_data);
 
 	/*
 	* Call NFS3/ACCESS
@@ -706,8 +706,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct ACCESS3args;
-	GOTV_EXTERN int rpc_nfs3_access_async(struct rpc_context *rpc, rpc_cb cb, struct ACCESS3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_access_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, int access, void *private_data);
+	NLC_EXTERN int rpc_nfs3_access_async(struct rpc_context *rpc, rpc_cb cb, struct ACCESS3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_access_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, int access, void *private_data);
 
 	/*
 	* Call NFS3/READ
@@ -724,8 +724,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READ3args;
-	GOTV_EXTERN int rpc_nfs3_read_async(struct rpc_context *rpc, rpc_cb cb, struct READ3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_read_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, uint64_t offset, uint64_t count, void *private_data);
+	NLC_EXTERN int rpc_nfs3_read_async(struct rpc_context *rpc, rpc_cb cb, struct READ3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_read_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, uint64_t offset, uint64_t count, void *private_data);
 
 	/*
 	* Call NFS3/WRITE
@@ -742,8 +742,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct WRITE3args;
-	GOTV_EXTERN int rpc_nfs3_write_async(struct rpc_context *rpc, rpc_cb cb, struct WRITE3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_write_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *buf, uint64_t offset, uint64_t count, int stable_how, void *private_data);
+	NLC_EXTERN int rpc_nfs3_write_async(struct rpc_context *rpc, rpc_cb cb, struct WRITE3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_write_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *buf, uint64_t offset, uint64_t count, int stable_how, void *private_data);
 
 	/*
 	* Call NFS3/COMMIT
@@ -760,8 +760,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct COMMIT3args;
-	GOTV_EXTERN int rpc_nfs3_commit_async(struct rpc_context *rpc, rpc_cb cb, struct COMMIT3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_commit_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
+	NLC_EXTERN int rpc_nfs3_commit_async(struct rpc_context *rpc, rpc_cb cb, struct COMMIT3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_commit_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
 
 	/*
 	* Call NFS3/SETATTR
@@ -778,8 +778,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct SETATTR3args;
-	GOTV_EXTERN int rpc_nfs3_setattr_async(struct rpc_context *rpc, rpc_cb cb, struct SETATTR3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_setattr_async(struct rpc_context *rpc, rpc_cb cb, struct SETATTR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs3_setattr_async(struct rpc_context *rpc, rpc_cb cb, struct SETATTR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_setattr_async(struct rpc_context *rpc, rpc_cb cb, struct SETATTR3args *args, void *private_data);
 
 	/*
 	* Call NFS3/MKDIR
@@ -796,8 +796,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct MKDIR3args;
-	GOTV_EXTERN int rpc_nfs3_mkdir_async(struct rpc_context *rpc, rpc_cb cb, struct MKDIR3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_mkdir_async(struct rpc_context *rpc, rpc_cb cb, struct MKDIR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs3_mkdir_async(struct rpc_context *rpc, rpc_cb cb, struct MKDIR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_mkdir_async(struct rpc_context *rpc, rpc_cb cb, struct MKDIR3args *args, void *private_data);
 
 	/*
 	* Call NFS3/RMDIR
@@ -814,8 +814,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct RMDIR3args;
-	GOTV_EXTERN int rpc_nfs3_rmdir_async(struct rpc_context *rpc, rpc_cb cb, struct RMDIR3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_rmdir_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *dir, void *private_data);
+	NLC_EXTERN int rpc_nfs3_rmdir_async(struct rpc_context *rpc, rpc_cb cb, struct RMDIR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_rmdir_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *dir, void *private_data);
 
 	/*
 	* Call NFS3/CREATE
@@ -832,8 +832,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct CREATE3args;
-	GOTV_EXTERN int rpc_nfs3_create_async(struct rpc_context *rpc, rpc_cb cb, struct CREATE3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_create_async(struct rpc_context *rpc, rpc_cb cb, struct CREATE3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs3_create_async(struct rpc_context *rpc, rpc_cb cb, struct CREATE3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_create_async(struct rpc_context *rpc, rpc_cb cb, struct CREATE3args *args, void *private_data);
 
 	/*
 	* Call NFS3/MKNOD
@@ -850,8 +850,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct MKNOD3args;
-	GOTV_EXTERN int rpc_nfs3_mknod_async(struct rpc_context *rpc, rpc_cb cb, struct MKNOD3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_mknod_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *file, int mode, int major, int minor, void *private_data);
+	NLC_EXTERN int rpc_nfs3_mknod_async(struct rpc_context *rpc, rpc_cb cb, struct MKNOD3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_mknod_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *file, int mode, int major, int minor, void *private_data);
 
 	/*
 	* Call NFS3/REMOVE
@@ -868,8 +868,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct REMOVE3args;
-	GOTV_EXTERN int rpc_nfs3_remove_async(struct rpc_context *rpc, rpc_cb cb, struct REMOVE3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_remove_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *name, void *private_data);
+	NLC_EXTERN int rpc_nfs3_remove_async(struct rpc_context *rpc, rpc_cb cb, struct REMOVE3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_remove_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, char *name, void *private_data);
 
 	/*
 	* Call NFS3/READDIR
@@ -886,8 +886,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READDIR3args;
-	GOTV_EXTERN int rpc_nfs3_readdir_async(struct rpc_context *rpc, rpc_cb cb, struct READDIR3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_readdir_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, uint64_t cookie, char *cookieverf, int count, void *private_data);
+	NLC_EXTERN int rpc_nfs3_readdir_async(struct rpc_context *rpc, rpc_cb cb, struct READDIR3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_readdir_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, uint64_t cookie, char *cookieverf, int count, void *private_data);
 
 	/*
 	* Call NFS3/READDIRPLUS
@@ -904,8 +904,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READDIRPLUS3args;
-	GOTV_EXTERN int rpc_nfs3_readdirplus_async(struct rpc_context *rpc, rpc_cb cb, struct READDIRPLUS3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_readdirplus_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, uint64_t cookie, char *cookieverf, int count, void *private_data);
+	NLC_EXTERN int rpc_nfs3_readdirplus_async(struct rpc_context *rpc, rpc_cb cb, struct READDIRPLUS3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_readdirplus_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, uint64_t cookie, char *cookieverf, int count, void *private_data);
 
 	/*
 	* Call NFS3/FSSTAT
@@ -922,8 +922,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct FSSTAT3args;
-	GOTV_EXTERN int rpc_nfs3_fsstat_async(struct rpc_context *rpc, rpc_cb cb, struct FSSTAT3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_fsstat_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
+	NLC_EXTERN int rpc_nfs3_fsstat_async(struct rpc_context *rpc, rpc_cb cb, struct FSSTAT3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_fsstat_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
 
 	/*
 	* Call NFS3/FSINFO
@@ -940,8 +940,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct FSINFO3args;
-	GOTV_EXTERN int rpc_nfs3_fsinfo_async(struct rpc_context *rpc, rpc_cb cb, struct FSINFO3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_fsinfo_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
+	NLC_EXTERN int rpc_nfs3_fsinfo_async(struct rpc_context *rpc, rpc_cb cb, struct FSINFO3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_fsinfo_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *fh, void *private_data);
 
 	/*
 	* Call NFS3/READLINK
@@ -958,8 +958,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READLINK3args;
-	GOTV_EXTERN int rpc_nfs3_readlink_async(struct rpc_context *rpc, rpc_cb cb, struct READLINK3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_readlink_async(struct rpc_context *rpc, rpc_cb cb, struct READLINK3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs3_readlink_async(struct rpc_context *rpc, rpc_cb cb, struct READLINK3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_readlink_async(struct rpc_context *rpc, rpc_cb cb, struct READLINK3args *args, void *private_data);
 
 	/*
 	* Call NFS3/SYMLINK
@@ -976,8 +976,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct SYMLINK3args;
-	GOTV_EXTERN int rpc_nfs3_symlink_async(struct rpc_context *rpc, rpc_cb cb, struct SYMLINK3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_symlink_async(struct rpc_context *rpc, rpc_cb cb, struct SYMLINK3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs3_symlink_async(struct rpc_context *rpc, rpc_cb cb, struct SYMLINK3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_symlink_async(struct rpc_context *rpc, rpc_cb cb, struct SYMLINK3args *args, void *private_data);
 
 	/*
 	* Call NFS3/RENAME
@@ -994,8 +994,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct RENAME3args;
-	GOTV_EXTERN int rpc_nfs3_rename_async(struct rpc_context *rpc, rpc_cb cb, struct RENAME3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_rename_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *olddir, char *oldname, struct nfs_fh3 *newdir, char *newname, void *private_data);
+	NLC_EXTERN int rpc_nfs3_rename_async(struct rpc_context *rpc, rpc_cb cb, struct RENAME3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_rename_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *olddir, char *oldname, struct nfs_fh3 *newdir, char *newname, void *private_data);
 
 	/*
 	* Call NFS3/LINK
@@ -1012,8 +1012,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct LINK3args;
-	GOTV_EXTERN int rpc_nfs3_link_async(struct rpc_context *rpc, rpc_cb cb, struct LINK3args *args, void *private_data);
-	GOTV_EXTERN int rpc_nfs_link_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *file, struct nfs_fh3 *newdir, char *newname, void *private_data);
+	NLC_EXTERN int rpc_nfs3_link_async(struct rpc_context *rpc, rpc_cb cb, struct LINK3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs_link_async(struct rpc_context *rpc, rpc_cb cb, struct nfs_fh3 *file, struct nfs_fh3 *newdir, char *newname, void *private_data);
 
 	/*
 	* NFS v2 FUNCTIONS
@@ -1033,7 +1033,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_nfs2_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nfs2_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call NFS2/GETATTR
@@ -1050,7 +1050,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct GETATTR2args;
-	GOTV_EXTERN int rpc_nfs2_getattr_async(struct rpc_context *rpc, rpc_cb cb, struct GETATTR2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_getattr_async(struct rpc_context *rpc, rpc_cb cb, struct GETATTR2args *args, void *private_data);
 
 	/*
 	* Call NFS2/SETATTR
@@ -1067,7 +1067,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct SETATTR2args;
-	GOTV_EXTERN int rpc_nfs2_setattr_async(struct rpc_context *rpc, rpc_cb cb, struct SETATTR2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_setattr_async(struct rpc_context *rpc, rpc_cb cb, struct SETATTR2args *args, void *private_data);
 
 	/*
 	* Call NFS2/LOOKUP
@@ -1084,7 +1084,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct LOOKUP2args;
-	GOTV_EXTERN int rpc_nfs2_lookup_async(struct rpc_context *rpc, rpc_cb cb, struct LOOKUP2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_lookup_async(struct rpc_context *rpc, rpc_cb cb, struct LOOKUP2args *args, void *private_data);
 
 	/*
 	* Call NFS2/READLINK
@@ -1101,7 +1101,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READLINK2args;
-	GOTV_EXTERN int rpc_nfs32_readlink_async(struct rpc_context *rpc, rpc_cb cb, struct READLINK2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs32_readlink_async(struct rpc_context *rpc, rpc_cb cb, struct READLINK2args *args, void *private_data);
 
 	/*
 	* Call NFS2/READ
@@ -1118,7 +1118,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READ2args;
-	GOTV_EXTERN int rpc_nfs2_read_async(struct rpc_context *rpc, rpc_cb cb, struct READ2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_read_async(struct rpc_context *rpc, rpc_cb cb, struct READ2args *args, void *private_data);
 
 	/*
 	* Call NFS2/WRITE
@@ -1135,7 +1135,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct WRITE2args;
-	GOTV_EXTERN int rpc_nfs2_write_async(struct rpc_context *rpc, rpc_cb cb, struct WRITE2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_write_async(struct rpc_context *rpc, rpc_cb cb, struct WRITE2args *args, void *private_data);
 
 	/*
 	* Call NFS2/CREATE
@@ -1152,7 +1152,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct CREATE2args;
-	GOTV_EXTERN int rpc_nfs2_create_async(struct rpc_context *rpc, rpc_cb cb, struct CREATE2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_create_async(struct rpc_context *rpc, rpc_cb cb, struct CREATE2args *args, void *private_data);
 
 	/*
 	* Call NFS2/REMOVE
@@ -1169,7 +1169,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct REMOVE2args;
-	GOTV_EXTERN int rpc_nfs2_remove_async(struct rpc_context *rpc, rpc_cb cb, struct REMOVE2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_remove_async(struct rpc_context *rpc, rpc_cb cb, struct REMOVE2args *args, void *private_data);
 
 	/*
 	* Call NFS2/RENAME
@@ -1186,7 +1186,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct RENAME2args;
-	GOTV_EXTERN int rpc_nfs2_rename_async(struct rpc_context *rpc, rpc_cb cb, struct RENAME2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_rename_async(struct rpc_context *rpc, rpc_cb cb, struct RENAME2args *args, void *private_data);
 
 	/*
 	* Call NFS2/LINK
@@ -1203,7 +1203,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct LINK2args;
-	GOTV_EXTERN int rpc_nfs2_link_async(struct rpc_context *rpc, rpc_cb cb, struct LINK2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_link_async(struct rpc_context *rpc, rpc_cb cb, struct LINK2args *args, void *private_data);
 
 	/*
 	* Call NFS2/SYMLINK
@@ -1220,7 +1220,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct SYMLINK2args;
-	GOTV_EXTERN int rpc_nfs2_symlink_async(struct rpc_context *rpc, rpc_cb cb, struct SYMLINK2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_symlink_async(struct rpc_context *rpc, rpc_cb cb, struct SYMLINK2args *args, void *private_data);
 
 	/*
 	* Call NFS2/MKDIR
@@ -1237,7 +1237,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct MKDIR2args;
-	GOTV_EXTERN int rpc_nfs2_mkdir_async(struct rpc_context *rpc, rpc_cb cb, struct MKDIR2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_mkdir_async(struct rpc_context *rpc, rpc_cb cb, struct MKDIR2args *args, void *private_data);
 
 	/*
 	* Call NFS2/RMDIR
@@ -1254,7 +1254,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct RMDIR2args;
-	GOTV_EXTERN int rpc_nfs2_rmdir_async(struct rpc_context *rpc, rpc_cb cb, struct RMDIR2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_rmdir_async(struct rpc_context *rpc, rpc_cb cb, struct RMDIR2args *args, void *private_data);
 
 	/*
 	* Call NFS2/READDIR
@@ -1271,7 +1271,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct READDIR2args;
-	GOTV_EXTERN int rpc_nfs2_readdir_async(struct rpc_context *rpc, rpc_cb cb, struct READDIR2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_readdir_async(struct rpc_context *rpc, rpc_cb cb, struct READDIR2args *args, void *private_data);
 
 	/*
 	* Call NFS2/STATFS
@@ -1288,7 +1288,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct STATFS2args;
-	GOTV_EXTERN int rpc_nfs2_statfs_async(struct rpc_context *rpc, rpc_cb cb, struct STATFS2args *args, void *private_data);
+	NLC_EXTERN int rpc_nfs2_statfs_async(struct rpc_context *rpc, rpc_cb cb, struct STATFS2args *args, void *private_data);
 
 	/*
 	* RQUOTA FUNCTIONS
@@ -1310,7 +1310,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_rquota1_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_rquota1_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call RQUOTA1/GETQUOTA
@@ -1326,7 +1326,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_rquota1_getquota_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, int uid, void *private_data);
+	NLC_EXTERN int rpc_rquota1_getquota_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, int uid, void *private_data);
 
 	/*
 	* Call RQUOTA1/GETACTIVEQUOTA
@@ -1342,7 +1342,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_rquota1_getactivequota_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, int uid, void *private_data);
+	NLC_EXTERN int rpc_rquota1_getactivequota_async(struct rpc_context *rpc, rpc_cb cb, char *exportname, int uid, void *private_data);
 
 
 
@@ -1420,7 +1420,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_nfsacl_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nfsacl_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call NFSACL/GETACL
@@ -1438,7 +1438,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct GETACL3args;
-	GOTV_EXTERN int rpc_nfsacl_getacl_async(struct rpc_context *rpc, rpc_cb cb, struct GETACL3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfsacl_getacl_async(struct rpc_context *rpc, rpc_cb cb, struct GETACL3args *args, void *private_data);
 
 
 
@@ -1458,7 +1458,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct SETACL3args;
-	GOTV_EXTERN int rpc_nfsacl_setacl_async(struct rpc_context *rpc, rpc_cb cb, struct SETACL3args *args, void *private_data);
+	NLC_EXTERN int rpc_nfsacl_setacl_async(struct rpc_context *rpc, rpc_cb cb, struct SETACL3args *args, void *private_data);
 
 
 
@@ -1484,7 +1484,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_nlm4_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nlm4_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call NLM/TEST
@@ -1503,7 +1503,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NLM4_TESTargs;
-	GOTV_EXTERN int rpc_nlm4_test_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_TESTargs *args, void *private_data);
+	NLC_EXTERN int rpc_nlm4_test_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_TESTargs *args, void *private_data);
 
 	/*
 	* Call NLM/LOCK
@@ -1522,7 +1522,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NLM4_LOCKargs;
-	GOTV_EXTERN int rpc_nlm4_lock_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_LOCKargs *args, void *private_data);
+	NLC_EXTERN int rpc_nlm4_lock_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_LOCKargs *args, void *private_data);
 
 	/*
 	* Call NLM/CANCEL
@@ -1541,7 +1541,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NLM4_CANCargs;
-	GOTV_EXTERN int rpc_nlm4_cancel_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_CANCargs *args, void *private_data);
+	NLC_EXTERN int rpc_nlm4_cancel_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_CANCargs *args, void *private_data);
 
 	/*
 	* Call NLM/UNLOCK
@@ -1560,7 +1560,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NLM4_UNLOCKargs;
-	GOTV_EXTERN int rpc_nlm4_unlock_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_UNLOCKargs *args, void *private_data);
+	NLC_EXTERN int rpc_nlm4_unlock_async(struct rpc_context *rpc, rpc_cb cb, struct NLM4_UNLOCKargs *args, void *private_data);
 
 	/*
 	* NSM functions
@@ -1583,7 +1583,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_nsm1_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nsm1_null_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call NSM/STAT
@@ -1602,7 +1602,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NSM1_STATargs;
-	GOTV_EXTERN int rpc_nsm1_stat_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_STATargs *args, void *private_data);
+	NLC_EXTERN int rpc_nsm1_stat_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_STATargs *args, void *private_data);
 
 	/*
 	* Call NSM/MON
@@ -1621,7 +1621,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NSM1_MONargs;
-	GOTV_EXTERN int rpc_nsm1_mon_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_MONargs *args, void *private_data);
+	NLC_EXTERN int rpc_nsm1_mon_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_MONargs *args, void *private_data);
 
 	/*
 	* Call NSM/UNMON
@@ -1640,7 +1640,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NSM1_UNMONargs;
-	GOTV_EXTERN int rpc_nsm1_unmon_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_UNMONargs *args, void *private_data);
+	NLC_EXTERN int rpc_nsm1_unmon_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_UNMONargs *args, void *private_data);
 
 	/*
 	* Call NSM/UNMONALL
@@ -1659,7 +1659,7 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NSM1_UNMONALLargs;
-	GOTV_EXTERN int rpc_nsm1_unmonall_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_UNMONALLargs *args, void *private_data);
+	NLC_EXTERN int rpc_nsm1_unmonall_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_UNMONALLargs *args, void *private_data);
 
 	/*
 	* Call NSM/SIMUCRASH
@@ -1677,7 +1677,7 @@ GOTV_BEGIN_CDECLARES
 	* RPC_STATUS_CANCEL : The connection attempt was aborted before it could complete.
 	*                     data is NULL.
 	*/
-	GOTV_EXTERN int rpc_nsm1_simucrash_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
+	NLC_EXTERN int rpc_nsm1_simucrash_async(struct rpc_context *rpc, rpc_cb cb, void *private_data);
 
 	/*
 	* Call NSM/NOTIFY
@@ -1696,8 +1696,8 @@ GOTV_BEGIN_CDECLARES
 	*                     data is NULL.
 	*/
 	struct NSM1_NOTIFYargs;
-	GOTV_EXTERN int rpc_nsm1_notify_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_NOTIFYargs *args, void *private_data);
+	NLC_EXTERN int rpc_nsm1_notify_async(struct rpc_context *rpc, rpc_cb cb, struct NSM1_NOTIFYargs *args, void *private_data);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

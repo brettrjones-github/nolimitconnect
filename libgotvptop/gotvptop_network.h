@@ -76,7 +76,7 @@
  * @param nonblock true to create a non-blocking socket
  * @return a new file descriptor or -1 on error
  */
-GOTV_API int gotvptop_socket(int pf, int type, int proto, bool nonblock) GOTV_USED;
+NLC_API int gotvptop_socket(int pf, int type, int proto, bool nonblock) GOTV_USED;
 
 /**
  * Creates a pair of socket file descriptors.
@@ -93,7 +93,7 @@ GOTV_API int gotvptop_socket(int pf, int type, int proto, bool nonblock) GOTV_US
  * @retval 0 on success
  * @retval -1 on failure
  */
-GOTV_API int gotvptop_socketpair(int pf, int type, int proto, int fds[2],
+NLC_API int gotvptop_socketpair(int pf, int type, int proto, int fds[2],
                            bool nonblock);
 
 struct sockaddr;
@@ -111,7 +111,7 @@ struct sockaddr;
  * @param nonblock whether to put the new socket in non-blocking mode
  * @return a new file descriptor or -1 on error
  */
-GOTV_API int gotvptop_accept(int lfd, struct sockaddr *addr, socklen_t *alen,
+NLC_API int gotvptop_accept(int lfd, struct sockaddr *addr, socklen_t *alen,
                        bool nonblock) GOTV_USED;
 
 # ifdef __cplusplus
@@ -121,10 +121,10 @@ extern "C" {
 /* Portable networking layer communication */
 int net_Socket (gotvptop_object_t *obj, int family, int socktype, int proto);
 
-GOTV_API int net_Connect(gotvptop_object_t *p_this, const char *psz_host, int i_port, int socktype, int protocol);
+NLC_API int net_Connect(gotvptop_object_t *p_this, const char *psz_host, int i_port, int socktype, int protocol);
 #define net_Connect(a, b, c, d, e) net_Connect(GOTV_OBJECT(a), b, c, d, e)
 
-GOTV_API int * net_Listen(gotvptop_object_t *p_this, const char *psz_host, int i_port, int socktype, int protocol);
+NLC_API int * net_Listen(gotvptop_object_t *p_this, const char *psz_host, int i_port, int socktype, int protocol);
 
 #define net_ListenTCP(a, b, c) net_Listen(GOTV_OBJECT(a), b, c, \
                                           SOCK_STREAM, IPPROTO_TCP)
@@ -135,13 +135,13 @@ static inline int net_ConnectTCP (gotvptop_object_t *obj, const char *host, int 
 }
 #define net_ConnectTCP(a, b, c) net_ConnectTCP(GOTV_OBJECT(a), b, c)
 
-GOTV_API int net_AcceptSingle(gotvptop_object_t *obj, int lfd);
+NLC_API int net_AcceptSingle(gotvptop_object_t *obj, int lfd);
 
-GOTV_API int net_Accept( gotvptop_object_t *, int * );
+NLC_API int net_Accept( gotvptop_object_t *, int * );
 #define net_Accept(a, b) \
         net_Accept(GOTV_OBJECT(a), b)
 
-GOTV_API int net_ConnectDgram( gotvptop_object_t *p_this, const char *psz_host, int i_port, int hlim, int proto );
+NLC_API int net_ConnectDgram( gotvptop_object_t *p_this, const char *psz_host, int i_port, int hlim, int proto );
 #define net_ConnectDgram(a, b, c, d, e ) \
         net_ConnectDgram(GOTV_OBJECT(a), b, c, d, e)
 
@@ -150,7 +150,7 @@ static inline int net_ConnectUDP (gotvptop_object_t *obj, const char *host, int 
     return net_ConnectDgram (obj, host, port, hlim, IPPROTO_UDP);
 }
 
-GOTV_API int net_OpenDgram( gotvptop_object_t *p_this, const char *psz_bind, int i_bind, const char *psz_server, int i_server, int proto );
+NLC_API int net_OpenDgram( gotvptop_object_t *p_this, const char *psz_bind, int i_bind, const char *psz_server, int i_server, int proto );
 #define net_OpenDgram( a, b, c, d, e, g ) \
         net_OpenDgram(GOTV_OBJECT(a), b, c, d, e, g)
 
@@ -159,27 +159,27 @@ static inline int net_ListenUDP1 (gotvptop_object_t *obj, const char *host, int 
     return net_OpenDgram (obj, host, port, NULL, 0, IPPROTO_UDP);
 }
 
-GOTV_API void net_ListenClose( int *fd );
+NLC_API void net_ListenClose( int *fd );
 
 int net_Subscribe (gotvptop_object_t *obj, int fd, const struct sockaddr *addr,
                    socklen_t addrlen);
 
-GOTV_API int net_SetCSCov( int fd, int sendcov, int recvcov );
+NLC_API int net_SetCSCov( int fd, int sendcov, int recvcov );
 
-GOTV_API ssize_t net_Read( gotvptop_object_t *p_this, int fd, void *p_data, size_t i_data );
+NLC_API ssize_t net_Read( gotvptop_object_t *p_this, int fd, void *p_data, size_t i_data );
 #define net_Read(a,b,c,d) net_Read(GOTV_OBJECT(a),b,c,d)
-GOTV_API ssize_t net_Write( gotvptop_object_t *p_this, int fd, const void *p_data, size_t i_data );
+NLC_API ssize_t net_Write( gotvptop_object_t *p_this, int fd, const void *p_data, size_t i_data );
 #define net_Write(a,b,c,d) net_Write(GOTV_OBJECT(a),b,c,d)
-GOTV_API char * net_Gets( gotvptop_object_t *p_this, int fd );
+NLC_API char * net_Gets( gotvptop_object_t *p_this, int fd );
 #define net_Gets(a,b) net_Gets(GOTV_OBJECT(a),b)
 
 
-GOTV_API ssize_t net_Printf( gotvptop_object_t *p_this, int fd, const char *psz_fmt, ... ) GOTV_FORMAT( 3, 4 );
+NLC_API ssize_t net_Printf( gotvptop_object_t *p_this, int fd, const char *psz_fmt, ... ) GOTV_FORMAT( 3, 4 );
 #define net_Printf(o,fd,...) net_Printf(GOTV_OBJECT(o),fd, __VA_ARGS__)
-GOTV_API ssize_t net_vaPrintf( gotvptop_object_t *p_this, int fd, const char *psz_fmt, va_list args );
+NLC_API ssize_t net_vaPrintf( gotvptop_object_t *p_this, int fd, const char *psz_fmt, va_list args );
 #define net_vaPrintf(a,b,c,d) net_vaPrintf(GOTV_OBJECT(a),b,c,d)
 
-GOTV_API int gotvptop_close(int);
+NLC_API int gotvptop_close(int);
 
 /** @} */
 
@@ -201,10 +201,10 @@ GOTV_API int gotvptop_close(int);
 # endif
 #endif
 
-GOTV_API int gotvptop_getnameinfo( const struct sockaddr *, int, char *, int, int *, int );
-GOTV_API int gotvptop_getaddrinfo (const char *, unsigned,
+NLC_API int gotvptop_getnameinfo( const struct sockaddr *, int, char *, int, int *, int );
+NLC_API int gotvptop_getaddrinfo (const char *, unsigned,
                              const struct addrinfo *, struct addrinfo **);
-GOTV_API int gotvptop_getaddrinfo_i11e(const char *, unsigned,
+NLC_API int gotvptop_getaddrinfo_i11e(const char *, unsigned,
                                  const struct addrinfo *, struct addrinfo **);
 
 static inline bool
@@ -288,7 +288,7 @@ static inline void net_SetPort (struct sockaddr *addr, uint16_t port)
     }
 }
 
-GOTV_API char *gotvptop_getProxyUrl(const char *);
+NLC_API char *gotvptop_getProxyUrl(const char *);
 
 # ifdef __cplusplus
 }

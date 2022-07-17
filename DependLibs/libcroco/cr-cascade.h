@@ -35,7 +35,7 @@
  *the declaration of the #CRCascade class.
  */
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 typedef struct _CRCascadePriv CRCascadePriv ;
@@ -69,6 +69,6 @@ void cr_cascade_unref (CRCascade *a_this) ;
 
 void cr_cascade_destroy (CRCascade *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_CASCADE_H__*/

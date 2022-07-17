@@ -63,13 +63,13 @@ vbi_sliced_filter_drop_ttx_pages
 				 vbi_pgno		first_pgno,
 				 vbi_pgno		last_pgno)
   _vbi_nonnull ((1));
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_sliced_filter_keep_ttx_page	(vbi_sliced_filter *	sf,
 				 vbi_pgno		pgno)
 {
 	return vbi_sliced_filter_keep_ttx_pages (sf, pgno, pgno);
 }
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_sliced_filter_drop_ttx_page	(vbi_sliced_filter *	sf,
 				 vbi_pgno		pgno)
 {
@@ -89,7 +89,7 @@ vbi_sliced_filter_drop_ttx_subpages
 				 vbi_subno		first_subno,
 				 vbi_subno		last_subno)
   _vbi_nonnull ((1));
-static GOTV_INLINE vbi_bool
+static NLC_INLINE vbi_bool
 vbi_sliced_filter_keep_ttx_subpage
 				(vbi_sliced_filter *	sf,
 				 vbi_pgno		pgno,
@@ -97,7 +97,7 @@ vbi_sliced_filter_keep_ttx_subpage
 {
 	return vbi_sliced_filter_keep_ttx_subpages (sf, pgno, subno, subno);
 }
-static GOTV_INLINE vbi_bool	vbi_sliced_filter_drop_ttx_subpage
+static NLC_INLINE vbi_bool	vbi_sliced_filter_drop_ttx_subpage
 				(vbi_sliced_filter *	sf,
 				 vbi_pgno		pgno,
 				 vbi_subno		subno)

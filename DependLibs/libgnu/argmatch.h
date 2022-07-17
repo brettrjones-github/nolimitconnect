@@ -53,7 +53,7 @@ ptrdiff_t argmatch (char const *arg, char const *const *arglist,
    return.  By default, this is a function that calls ARGMATCH_DIE which
    in turn defaults to 'exit (exit_failure)'.  */
 typedef void (*argmatch_exit_fn) (void);
-extern GOTV_DLL_VARIABLE argmatch_exit_fn argmatch_die;
+extern NLC_DLL_VARIABLE argmatch_exit_fn argmatch_die;
 
 /* Report on stderr why argmatch failed.  Report correct values. */
 

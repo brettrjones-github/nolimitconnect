@@ -97,7 +97,7 @@ static const AVClass libdc1394_class = {
 };
 
 
-static GOTV_INLINE int dc1394_read_common(AVFormatContext *c,
+static NLC_INLINE int dc1394_read_common(AVFormatContext *c,
                                      const struct dc1394_frame_format **select_fmt, const struct dc1394_frame_rate **select_fps)
 {
     dc1394_data* dc1394 = c->priv_data;

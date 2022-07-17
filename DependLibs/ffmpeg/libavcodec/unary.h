@@ -30,7 +30,7 @@
  * @param[in] len Maximum length
  * @return Unary length/index
  */
-static GOTV_INLINE int get_unary(GetBitContext *gb, int stop, int len)
+static NLC_INLINE int get_unary(GetBitContext *gb, int stop, int len)
 {
     int i;
 
@@ -43,12 +43,12 @@ static GOTV_INLINE int get_unary(GetBitContext *gb, int stop, int len)
  * @param gb GetBitContext
  * @return Unary length/index
  */
-static GOTV_INLINE int get_unary_0_33(GetBitContext *gb)
+static NLC_INLINE int get_unary_0_33(GetBitContext *gb)
 {
     return get_unary(gb, 0, 33);
 }
 
-static GOTV_INLINE int get_unary_0_9(GetBitContext *gb)
+static NLC_INLINE int get_unary_0_9(GetBitContext *gb)
 {
     return get_unary(gb, 0, 9);
 }

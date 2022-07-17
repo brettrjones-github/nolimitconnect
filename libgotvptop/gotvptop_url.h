@@ -43,7 +43,7 @@
  * @return a heap-allocated URI string on success
  * or NULL in case of error (errno will be set accordingly)
  */
-GOTV_API char *gotvptop_path2uri(const char *path, const char *scheme) GOTV_MALLOC;
+NLC_API char *gotvptop_path2uri(const char *path, const char *scheme) GOTV_MALLOC;
 
 /**
  * Converts a URI to a local path.
@@ -55,7 +55,7 @@ GOTV_API char *gotvptop_path2uri(const char *path, const char *scheme) GOTV_MALL
  * @return a heap-allocated string or success
  * or NULL on error
  */
-GOTV_API char *gotvptop_uri2path(const char *url) GOTV_MALLOC;
+NLC_API char *gotvptop_uri2path(const char *url) GOTV_MALLOC;
 
 /**
  * Decodes an URI component in place.
@@ -77,7 +77,7 @@ GOTV_API char *gotvptop_uri2path(const char *url) GOTV_MALLOC;
  * \param str null-terminated component
  * \return str is returned on success. NULL if str was not properly encoded.
  */
-GOTV_API char *gotvptop_uri_decode(char *str);
+NLC_API char *gotvptop_uri_decode(char *str);
 
 /**
  * Decodes an URI component.
@@ -86,7 +86,7 @@ GOTV_API char *gotvptop_uri_decode(char *str);
  *
  * \return a heap-allocated string on success or NULL on error.
  */
-GOTV_API char *gotvptop_uri_decode_duplicate(const char *str) GOTV_MALLOC;
+NLC_API char *gotvptop_uri_decode_duplicate(const char *str) GOTV_MALLOC;
 
 /**
  * Encodes a URI component.
@@ -98,7 +98,7 @@ GOTV_API char *gotvptop_uri_decode_duplicate(const char *str) GOTV_MALLOC;
  * @note Obviously, a URI containing nul bytes cannot be passed.
  * @return heap-allocated string, or NULL if out of memory.
  */
-GOTV_API char *gotvptop_uri_encode(const char *str) GOTV_MALLOC;
+NLC_API char *gotvptop_uri_encode(const char *str) GOTV_MALLOC;
 
 /**
  * Composes an URI.
@@ -112,7 +112,7 @@ GOTV_API char *gotvptop_uri_encode(const char *str) GOTV_MALLOC;
  *
  * \return a heap-allocated nul-terminated string or NULL if out of memory
  */
-GOTV_API char *gotvptop_uri_compose(const gotvptop_url_t *) GOTV_MALLOC;
+NLC_API char *gotvptop_uri_compose(const gotvptop_url_t *) GOTV_MALLOC;
 
 /**
  * Resolves an URI reference.
@@ -127,7 +127,7 @@ GOTV_API char *gotvptop_uri_compose(const gotvptop_url_t *) GOTV_MALLOC;
  * \return a heap-allocated nul-terminated string representing the resolved
  * absolute URI, or NULL if out of memory.
  */
-GOTV_API char *gotvptop_uri_resolve(const char *base, const char *ref) GOTV_MALLOC;
+NLC_API char *gotvptop_uri_resolve(const char *base, const char *ref) GOTV_MALLOC;
 
 /**
  * Fixes up a URI string.
@@ -140,7 +140,7 @@ GOTV_API char *gotvptop_uri_resolve(const char *base, const char *ref) GOTV_MALL
  *
  * @return a heap-allocated string, or NULL if on out of memory.
  */
-GOTV_API char *gotvptop_uri_fixup(const char *) GOTV_MALLOC;
+NLC_API char *gotvptop_uri_fixup(const char *) GOTV_MALLOC;
 
 struct gotvptop_url_t
 {
@@ -190,7 +190,7 @@ struct gotvptop_url_t
  * \retval 0 success
  * \retval -1 failure
  */
-GOTV_API int gotvptop_UrlParse(gotvptop_url_t *url, const char *str);
+NLC_API int gotvptop_UrlParse(gotvptop_url_t *url, const char *str);
 
 /**
  * Parses an URI or IRI and fix up the path part.
@@ -198,12 +198,12 @@ GOTV_API int gotvptop_UrlParse(gotvptop_url_t *url, const char *str);
  * \see gotvptop_UrlParse
  * \see gotvptop_uri_fixup
  */
-GOTV_API int gotvptop_UrlParseFixup(gotvptop_url_t *url, const char *str);
+NLC_API int gotvptop_UrlParseFixup(gotvptop_url_t *url, const char *str);
 
 /**
  * Releases resources allocated by gotvptop_UrlParse().
  */
-GOTV_API void gotvptop_UrlClean(gotvptop_url_t *);
+NLC_API void gotvptop_UrlClean(gotvptop_url_t *);
 
 /** @} */
 

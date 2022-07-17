@@ -23,13 +23,13 @@
 #include <libxml/xmlIO.h>
 #include <gio/gio.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 xmlParserInputBufferPtr _rsvg_xml_input_buffer_new_from_stream (GInputStream   *stream,
                                                                 GCancellable   *cancellable,
                                                                 xmlCharEncoding enc,
                                                                 GError        **error);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* !RSVG_XML_H */

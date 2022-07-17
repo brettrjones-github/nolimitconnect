@@ -555,12 +555,12 @@ typedef int ssize_t;
     #define _endthreadex_compat                 _endthreadex
 #endif
 
-// The C99 "GOTV_INLINE" keyword is not supported by Microsoft compilers, but they do support __inline so map it when needed.
+// The C99 "NLC_INLINE" keyword is not supported by Microsoft compilers, but they do support __inline so map it when needed.
 
 #if ( defined( _MSC_VER ) )
     #define inline_compat       __inline
 #else
-    #define inline_compat       GOTV_INLINE
+    #define inline_compat       NLC_INLINE
 #endif
 
 // Calling conventions

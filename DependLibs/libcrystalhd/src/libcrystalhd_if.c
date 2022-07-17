@@ -42,7 +42,7 @@
 #include "libcrystalhd_fwload_if.h"
 
 #if (!__STDC_WANT_SECURE_LIB__)
-GOTV_INLINE bool memcpy_s(void *dest, size_t sizeInBytes, void *src, size_t count)
+NLC_INLINE bool memcpy_s(void *dest, size_t sizeInBytes, void *src, size_t count)
 {
   bool status = false;
   if (count > sizeInBytes) {
@@ -54,7 +54,7 @@ GOTV_INLINE bool memcpy_s(void *dest, size_t sizeInBytes, void *src, size_t coun
   return status;
 }
 
-GOTV_INLINE bool memmove_s(void *dest, size_t sizeInBytes, void *src, size_t count)
+NLC_INLINE bool memmove_s(void *dest, size_t sizeInBytes, void *src, size_t count)
 {
   bool status = false;
   if (count > sizeInBytes) {

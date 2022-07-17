@@ -61,7 +61,7 @@ ADbg::~ADbg()
 	OutPut(-1,"ADbg Deletion (0x%08X)",this);
 }
 
-GOTV_INLINE int ADbg::_OutPut(const char * format,va_list params) const
+NLC_INLINE int ADbg::_OutPut(const char * format,va_list params) const
 {
 	int result;
 

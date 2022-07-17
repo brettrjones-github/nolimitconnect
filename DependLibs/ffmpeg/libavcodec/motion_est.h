@@ -98,7 +98,7 @@ typedef struct MotionEstContext {
                              int size, int h);
 } MotionEstContext;
 
-static GOTV_INLINE int ff_h263_round_chroma(int x)
+static NLC_INLINE int ff_h263_round_chroma(int x)
 {
     //FIXME static or not?
     static const uint8_t h263_chroma_roundtab[16] = {

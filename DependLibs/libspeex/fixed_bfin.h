@@ -37,7 +37,7 @@
 #define FIXED_BFIN_H
 
 #undef PDIV32_16
-static GOTV_INLINE spx_word16_t PDIV32_16(spx_word32_t a, spx_word16_t b)
+static NLC_INLINE spx_word16_t PDIV32_16(spx_word32_t a, spx_word16_t b)
 {
    spx_word32_t res, bb;
    bb = b;
@@ -62,7 +62,7 @@ static GOTV_INLINE spx_word16_t PDIV32_16(spx_word32_t a, spx_word16_t b)
 }
 
 #undef DIV32_16
-static GOTV_INLINE spx_word16_t DIV32_16(spx_word32_t a, spx_word16_t b)
+static NLC_INLINE spx_word16_t DIV32_16(spx_word32_t a, spx_word16_t b)
 {
    spx_word32_t res, bb;
    bb = b;
@@ -89,7 +89,7 @@ static GOTV_INLINE spx_word16_t DIV32_16(spx_word32_t a, spx_word16_t b)
 }
 
 #undef MAX16
-static GOTV_INLINE spx_word16_t MAX16(spx_word16_t a, spx_word16_t b)
+static NLC_INLINE spx_word16_t MAX16(spx_word16_t a, spx_word16_t b)
 {
    spx_word32_t res;
    __asm__  (
@@ -103,7 +103,7 @@ static GOTV_INLINE spx_word16_t MAX16(spx_word16_t a, spx_word16_t b)
 }
 
 #undef MULT16_32_Q15
-static GOTV_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t a, spx_word32_t b)
+static NLC_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t a, spx_word32_t b)
 {
    spx_word32_t res;
    __asm__
@@ -119,7 +119,7 @@ static GOTV_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t a, spx_word32_t b)
 }
 
 #undef MAC16_32_Q15
-static GOTV_INLINE spx_word32_t MAC16_32_Q15(spx_word32_t c, spx_word16_t a, spx_word32_t b)
+static NLC_INLINE spx_word32_t MAC16_32_Q15(spx_word32_t c, spx_word16_t a, spx_word32_t b)
 {
    spx_word32_t res;
    __asm__
@@ -136,7 +136,7 @@ static GOTV_INLINE spx_word32_t MAC16_32_Q15(spx_word32_t c, spx_word16_t a, spx
 }
 
 #undef MULT16_32_Q14
-static GOTV_INLINE spx_word32_t MULT16_32_Q14(spx_word16_t a, spx_word32_t b)
+static NLC_INLINE spx_word32_t MULT16_32_Q14(spx_word16_t a, spx_word32_t b)
 {
    spx_word32_t res;
    __asm__
@@ -153,7 +153,7 @@ static GOTV_INLINE spx_word32_t MULT16_32_Q14(spx_word16_t a, spx_word32_t b)
 }
 
 #undef MAC16_32_Q14
-static GOTV_INLINE spx_word32_t MAC16_32_Q14(spx_word32_t c, spx_word16_t a, spx_word32_t b)
+static NLC_INLINE spx_word32_t MAC16_32_Q14(spx_word32_t c, spx_word16_t a, spx_word32_t b)
 {
    spx_word32_t res;
    __asm__

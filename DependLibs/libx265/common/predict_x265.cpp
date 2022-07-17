@@ -49,7 +49,7 @@ PredictionUnit::PredictionUnit(const CUData& cu, const CUGeom& cuGeom, int puIdx
 
 namespace
 {
-GOTV_INLINE pixel weightBidir(int w0, int16_t P0, int w1, int16_t P1, int round, int shift, int offset)
+NLC_INLINE pixel weightBidir(int w0, int16_t P0, int w1, int16_t P1, int round, int shift, int offset)
 {
     return x265_clip((w0 * (P0 + IF_INTERNAL_OFFS) + w1 * (P1 + IF_INTERNAL_OFFS) + round + (offset * (1 << (shift - 1)))) >> shift);
 }

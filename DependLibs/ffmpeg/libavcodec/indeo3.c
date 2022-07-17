@@ -295,7 +295,7 @@ static int copy_cell(Indeo3DecodeContext *ctx, Plane *plane, Cell *cell)
  *  Replicate each even pixel as follows:
  *  ABCDEFGH -> AACCEEGG
  */
-static GOTV_INLINE uint64_t replicate64(uint64_t a) {
+static NLC_INLINE uint64_t replicate64(uint64_t a) {
 #if HAVE_BIGENDIAN
     a &= 0xFF00FF00FF00FF00ULL;
     a |= a >> 8;
@@ -306,7 +306,7 @@ static GOTV_INLINE uint64_t replicate64(uint64_t a) {
     return a;
 }
 
-static GOTV_INLINE uint32_t replicate32(uint32_t a) {
+static NLC_INLINE uint32_t replicate32(uint32_t a) {
 #if HAVE_BIGENDIAN
     a &= 0xFF00FF00UL;
     a |= a >> 8;
@@ -319,7 +319,7 @@ static GOTV_INLINE uint32_t replicate32(uint32_t a) {
 
 
 /* Fill n lines with 64-bit pixel value pix */
-static GOTV_INLINE void fill_64(uint8_t *dst, const uint64_t pix, int32_t n,
+static NLC_INLINE void fill_64(uint8_t *dst, const uint64_t pix, int32_t n,
                            int32_t row_offset)
 {
     for (; n > 0; dst += row_offset, n--)

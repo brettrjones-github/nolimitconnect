@@ -27,7 +27,7 @@
 /* Get locale_charset() declaration.  */
 #include "localcharset.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* Display width.  */
 
@@ -62,4 +62,4 @@ extern int
        _UC_ATTRIBUTE_PURE;
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES

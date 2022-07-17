@@ -103,10 +103,10 @@ namespace FLAC {
 			 */
 			class FLACPP_API State {
 			public:
-				GOTV_INLINE State(::FLAC__StreamDecoderState state): state_(state) { }
-				GOTV_INLINE operator ::FLAC__StreamDecoderState() const { return state_; }
-				GOTV_INLINE const char *as_cstring() const { return ::FLAC__StreamDecoderStateString[state_]; }
-				GOTV_INLINE const char *resolved_as_cstring(const Stream &decoder) const { return ::FLAC__stream_decoder_get_resolved_state_string(decoder.decoder_); }
+				NLC_INLINE State(::FLAC__StreamDecoderState state): state_(state) { }
+				NLC_INLINE operator ::FLAC__StreamDecoderState() const { return state_; }
+				NLC_INLINE const char *as_cstring() const { return ::FLAC__StreamDecoderStateString[state_]; }
+				NLC_INLINE const char *resolved_as_cstring(const Stream &decoder) const { return ::FLAC__stream_decoder_get_resolved_state_string(decoder.decoder_); }
 			protected:
 				::FLAC__StreamDecoderState state_;
 			};
@@ -119,7 +119,7 @@ namespace FLAC {
 			 *  successfully.  If not, use get_state() to find out why not.
 			 */
 			virtual bool is_valid() const;
-			GOTV_INLINE operator bool() const { return is_valid(); } ///< See is_valid()
+			NLC_INLINE operator bool() const { return is_valid(); } ///< See is_valid()
 			//@}
 
 			virtual bool set_ogg_serial_number(long value);                        ///< See FLAC__stream_decoder_set_ogg_serial_number()

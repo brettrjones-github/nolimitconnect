@@ -77,7 +77,7 @@ extern bool handle_filepos_comment_option (const char *option);
 
 
 /* Describes a PO file in .po syntax.  */
-extern GOTV_DLL_VARIABLE const struct catalog_output_format output_format_po;
+extern NLC_DLL_VARIABLE const struct catalog_output_format output_format_po;
 
 
 #ifdef __cplusplus

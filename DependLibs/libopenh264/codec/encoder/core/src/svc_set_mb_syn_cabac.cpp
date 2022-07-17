@@ -301,7 +301,7 @@ void WelsCabacMbRef (SCabacCtx* pCabacCtx, SMB* pCurMb, SMbCache* pMbCache, int1
   WelsCabacEncodeDecision (pCabacCtx, 54 + iCtx, 0);
 }
 
-GOTV_INLINE void WelsCabacMbMvdLx (SCabacCtx* pCabacCtx, int32_t sMvd, int32_t iCtx, int32_t iPredMvd) {
+NLC_INLINE void WelsCabacMbMvdLx (SCabacCtx* pCabacCtx, int32_t sMvd, int32_t iCtx, int32_t iPredMvd) {
   const int32_t iAbsMvd = WELS_ABS (sMvd);
   int32_t iCtxInc = 0;
   int32_t iPrefix = WELS_MIN (iAbsMvd, 9);

@@ -1573,9 +1573,9 @@ extern "C" {
 #if !defined(__lzo_inline)
 #if (LZO_CC_TURBOC && (__TURBOC__ <= 0x0295))
 #elif defined(__cplusplus)
-#  define __lzo_inline          GOTV_INLINE
+#  define __lzo_inline          NLC_INLINE
 #elif defined(__STDC_VERSION__) && (__STDC_VERSION__-0 >= 199901L)
-#  define __lzo_inline          GOTV_INLINE
+#  define __lzo_inline          NLC_INLINE
 #elif (LZO_CC_BORLANDC && (__BORLANDC__ >= 0x0550))
 #  define __lzo_inline          __inline
 #elif (LZO_CC_ARMCC_GNUC || LZO_CC_CILLY || LZO_CC_CLANG || LZO_CC_GNUC || LZO_CC_LLVM || LZO_CC_PATHSCALE || LZO_CC_PGI)

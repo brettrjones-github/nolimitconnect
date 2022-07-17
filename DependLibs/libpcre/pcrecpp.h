@@ -466,22 +466,22 @@ class RE_Options {
 };
 
 // These functions return some common RE_Options
-static GOTV_INLINE RE_Options UTF8() {
+static NLC_INLINE RE_Options UTF8() {
   return RE_Options().set_utf8(true);
 }
 
-static GOTV_INLINE RE_Options CASELESS() {
+static NLC_INLINE RE_Options CASELESS() {
   return RE_Options().set_caseless(true);
 }
-static GOTV_INLINE RE_Options MULTILINE() {
+static NLC_INLINE RE_Options MULTILINE() {
   return RE_Options().set_multiline(true);
 }
 
-static GOTV_INLINE RE_Options DOTALL() {
+static NLC_INLINE RE_Options DOTALL() {
   return RE_Options().set_dotall(true);
 }
 
-static GOTV_INLINE RE_Options EXTENDED() {
+static NLC_INLINE RE_Options EXTENDED() {
   return RE_Options().set_extended(true);
 }
 

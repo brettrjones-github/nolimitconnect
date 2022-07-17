@@ -69,7 +69,7 @@ static av_always_inline av_const uint32_t av_bswap32(uint32_t x)
 #endif
 
 #ifndef av_bswap64
-static GOTV_INLINE uint64_t av_const av_bswap64(uint64_t x)
+static NLC_INLINE uint64_t av_const av_bswap64(uint64_t x)
 {
     return (uint64_t)av_bswap32((uint32_t)x) << 32 | av_bswap32((uint32_t)(x >> 32));
 }

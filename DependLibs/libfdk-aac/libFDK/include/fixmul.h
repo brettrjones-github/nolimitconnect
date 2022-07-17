@@ -125,7 +125,7 @@ amm-info@iis.fraunhofer.de
 #else
 #warning Extremely slow implementation of fixmuldiv2_DD !!
 #endif
-GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 {
   return (int32_t) ((((int64_t)a) * b) >> 32) ;
 }
@@ -138,7 +138,7 @@ GOTV_INLINE int32_t fixmuldiv2_DD (const int32_t a, const int32_t b)
 #else
 #warning Extremely slow implementation of fixmuldiv2BitExact_DD !!
 #endif
-GOTV_INLINE int32_t fixmuldiv2BitExact_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2BitExact_DD (const int32_t a, const int32_t b)
 {
   return (int32_t) ((((int64_t)a) * b) >> 32) ;
 }
@@ -146,7 +146,7 @@ GOTV_INLINE int32_t fixmuldiv2BitExact_DD (const int32_t a, const int32_t b)
 
 #if !defined(FUNCTION_fixmul_DD)
 #define FUNCTION_fixmul_DD
-GOTV_INLINE int32_t fixmul_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmul_DD (const int32_t a, const int32_t b)
   { return fixmuldiv2_DD (a, b) << 1 ; }
 #endif
 
@@ -157,7 +157,7 @@ GOTV_INLINE int32_t fixmul_DD (const int32_t a, const int32_t b)
 #else
 #warning Extremely slow implementation of fixmulBitExact_DD !!
 #endif
-GOTV_INLINE int32_t fixmulBitExact_DD (const int32_t a, const int32_t b)
+NLC_INLINE int32_t fixmulBitExact_DD (const int32_t a, const int32_t b)
 {
   return ( (int32_t) ((((int64_t)a) * b) >> 32) ) << 1;
 }
@@ -165,19 +165,19 @@ GOTV_INLINE int32_t fixmulBitExact_DD (const int32_t a, const int32_t b)
 
 #if !defined(FUNCTION_fixmuldiv2_SS)
 #define FUNCTION_fixmuldiv2_SS
-GOTV_INLINE int32_t fixmuldiv2_SS (const int16_t a, const int16_t b)
+NLC_INLINE int32_t fixmuldiv2_SS (const int16_t a, const int16_t b)
   { return ((int32_t)a*b); }
 #endif
 
 #if !defined(FUNCTION_fixmul_SS)
 #define FUNCTION_fixmul_SS
-GOTV_INLINE int32_t fixmul_SS (const int16_t a, const int16_t b)
+NLC_INLINE int32_t fixmul_SS (const int16_t a, const int16_t b)
   { return (a*b) <<1; }
 #endif
 
 #if !defined(FUNCTION_fixmuldiv2_SD)
 #define FUNCTION_fixmuldiv2_SD
-GOTV_INLINE int32_t fixmuldiv2_SD (const int16_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2_SD (const int16_t a, const int32_t b)
 #ifdef FUNCTION_fixmuldiv2_DS
   { return fixmuldiv2_DS(b, a); }
 #else
@@ -187,7 +187,7 @@ GOTV_INLINE int32_t fixmuldiv2_SD (const int16_t a, const int32_t b)
 
 #if !defined(FUNCTION_fixmuldiv2_DS)
 #define FUNCTION_fixmuldiv2_DS
-GOTV_INLINE int32_t fixmuldiv2_DS (const int32_t a, const int16_t b)
+NLC_INLINE int32_t fixmuldiv2_DS (const int32_t a, const int16_t b)
 #ifdef FUNCTION_fixmuldiv2_SD
   { return fixmuldiv2_SD(b, a); }
 #else
@@ -197,7 +197,7 @@ GOTV_INLINE int32_t fixmuldiv2_DS (const int32_t a, const int16_t b)
 
 #if !defined(FUNCTION_fixmuldiv2BitExact_SD)
 #define FUNCTION_fixmuldiv2BitExact_SD
-GOTV_INLINE int32_t fixmuldiv2BitExact_SD (const int16_t a, const int32_t b)
+NLC_INLINE int32_t fixmuldiv2BitExact_SD (const int16_t a, const int32_t b)
 #ifdef FUNCTION_fixmuldiv2BitExact_DS
   { return fixmuldiv2BitExact_DS(b, a); }
 #else
@@ -207,7 +207,7 @@ GOTV_INLINE int32_t fixmuldiv2BitExact_SD (const int16_t a, const int32_t b)
 
 #if !defined(FUNCTION_fixmuldiv2BitExact_DS)
 #define FUNCTION_fixmuldiv2BitExact_DS
-GOTV_INLINE int32_t fixmuldiv2BitExact_DS (const int32_t a, const int16_t b)
+NLC_INLINE int32_t fixmuldiv2BitExact_DS (const int32_t a, const int16_t b)
 #ifdef FUNCTION_fixmuldiv2BitExact_SD
   { return fixmuldiv2BitExact_SD(b, a); }
 #else
@@ -217,7 +217,7 @@ GOTV_INLINE int32_t fixmuldiv2BitExact_DS (const int32_t a, const int16_t b)
 
 #if !defined(FUNCTION_fixmul_SD)
 #define FUNCTION_fixmul_SD
-GOTV_INLINE int32_t fixmul_SD (const int16_t a, const int32_t b) {
+NLC_INLINE int32_t fixmul_SD (const int16_t a, const int32_t b) {
 #ifdef FUNCTION_fixmul_DS
   return fixmul_SD(b, a);
 #else
@@ -228,7 +228,7 @@ GOTV_INLINE int32_t fixmul_SD (const int16_t a, const int32_t b) {
 
 #if !defined(FUNCTION_fixmul_DS)
 #define FUNCTION_fixmul_DS
-GOTV_INLINE int32_t fixmul_DS (const int32_t a, const int16_t b) {
+NLC_INLINE int32_t fixmul_DS (const int32_t a, const int16_t b) {
 #ifdef FUNCTION_fixmul_SD
   return fixmul_SD(b, a);
 #else
@@ -239,7 +239,7 @@ GOTV_INLINE int32_t fixmul_DS (const int32_t a, const int16_t b) {
 
 #if !defined(FUNCTION_fixmulBitExact_SD)
 #define FUNCTION_fixmulBitExact_SD
-GOTV_INLINE int32_t fixmulBitExact_SD (const int16_t a, const int32_t b)
+NLC_INLINE int32_t fixmulBitExact_SD (const int16_t a, const int32_t b)
 #ifdef FUNCTION_fixmulBitExact_DS
   { return fixmulBitExact_DS(b, a); }
 #else
@@ -249,7 +249,7 @@ GOTV_INLINE int32_t fixmulBitExact_SD (const int16_t a, const int32_t b)
 
 #if !defined(FUNCTION_fixmulBitExact_DS)
 #define FUNCTION_fixmulBitExact_DS
-GOTV_INLINE int32_t fixmulBitExact_DS (const int32_t a, const int16_t b)
+NLC_INLINE int32_t fixmulBitExact_DS (const int32_t a, const int16_t b)
 #ifdef FUNCTION_fixmulBitExact_SD
   { return fixmulBitExact_SD(b, a); }
 #else
@@ -263,7 +263,7 @@ GOTV_INLINE int32_t fixmulBitExact_DS (const int32_t a, const int16_t b)
 #error Fallback for fixpow2div2_D is not 16 bit safe !
 #endif
 #define FUNCTION_fixpow2div2_D
-GOTV_INLINE int32_t fixpow2div2_D (const int32_t a)
+NLC_INLINE int32_t fixpow2div2_D (const int32_t a)
   { return fixmuldiv2_DD(a, a); }
 #endif
 
@@ -272,19 +272,19 @@ GOTV_INLINE int32_t fixpow2div2_D (const int32_t a)
 #error Fallback for fixpow2_D is not 16 bit safe !
 #endif
 #define FUNCTION_fixpow2_D
-GOTV_INLINE int32_t fixpow2_D (const int32_t a)
+NLC_INLINE int32_t fixpow2_D (const int32_t a)
   { return fixpow2div2_D(a)<<1; }
 #endif
 
 #if !defined(FUNCTION_fixpow2div2_S)
 #define FUNCTION_fixpow2div2_S
-GOTV_INLINE int32_t fixpow2div2_S (const int16_t a)
+NLC_INLINE int32_t fixpow2div2_S (const int16_t a)
   { return fixmuldiv2_SS(a, a); }
 #endif
 
 #if !defined(FUNCTION_fixpow2_S)
 #define FUNCTION_fixpow2_S
-GOTV_INLINE int32_t fixpow2_S (const int16_t a)
+NLC_INLINE int32_t fixpow2_S (const int16_t a)
   { return fixpow2div2_S(a)<<1; }
 #endif
 

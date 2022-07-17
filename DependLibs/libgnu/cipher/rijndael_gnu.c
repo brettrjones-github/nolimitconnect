@@ -209,7 +209,7 @@ typedef struct
 
 /* Function prototypes.  */
 #if defined(__i386__) && defined(USE_AESNI)
-/* We don't want to GOTV_INLINE these functions on i386 to help gcc allocate enough
+/* We don't want to NLC_INLINE these functions on i386 to help gcc allocate enough
    registers.  */
 static void do_aesni_ctr (const RIJNDAEL_context *ctx, unsigned char *ctr,
                           unsigned char *b, const unsigned char *a)
@@ -965,7 +965,7 @@ do_padlock (const RIJNDAEL_context *ctx, int decrypt_flag,
    back.  If we decide to implement some block modes with parallelized
    AES instructions, it might indeed be better to use plain asm ala
    mpi/.  */
-static GOTV_INLINE void
+static NLC_INLINE void
 do_aesni_enc (const RIJNDAEL_context *ctx, unsigned char *b,
               const unsigned char *a)
 {
@@ -1025,7 +1025,7 @@ do_aesni_enc (const RIJNDAEL_context *ctx, unsigned char *b,
 }
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 do_aesni_dec (const RIJNDAEL_context *ctx, unsigned char *b,
               const unsigned char *a)
 {
@@ -2039,7 +2039,7 @@ do_decrypt (RIJNDAEL_context *ctx, byte *bx, const byte *ax)
 }
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 check_decryption_preparation (RIJNDAEL_context *ctx)
 {
   if (0)

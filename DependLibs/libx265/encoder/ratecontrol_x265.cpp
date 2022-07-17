@@ -67,7 +67,7 @@ namespace {
     }\
 }
 
-GOTV_INLINE int calcScale(uint32_t x)
+NLC_INLINE int calcScale(uint32_t x)
 {
     static uint8_t lut[16] = {4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0};
     int y, z = (((x & 0xffff) - 1) >> 27) & 16;
@@ -79,7 +79,7 @@ GOTV_INLINE int calcScale(uint32_t x)
     return z + lut[x&0xf];
 }
 
-GOTV_INLINE int calcLength(uint32_t x)
+NLC_INLINE int calcLength(uint32_t x)
 {
     static uint8_t lut[16] = {4, 3, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0};
     int y, z = (((x >> 16) - 1) >> 27) & 16;
@@ -91,7 +91,7 @@ GOTV_INLINE int calcLength(uint32_t x)
     return z + lut[x];
 }
 
-GOTV_INLINE char *strcatFilename(const char *input, const char *suffix)
+NLC_INLINE char *strcatFilename(const char *input, const char *suffix)
 {
     char *output = X265_MALLOC(char, strlen(input) + strlen(suffix) + 1);
     if (!output)
@@ -104,7 +104,7 @@ GOTV_INLINE char *strcatFilename(const char *input, const char *suffix)
     return output;
 }
 
-GOTV_INLINE double qScale2bits(RateControlEntry *rce, double qScale)
+NLC_INLINE double qScale2bits(RateControlEntry *rce, double qScale)
 {
     if (qScale < 0.1)
         qScale = 0.1;
@@ -113,7 +113,7 @@ GOTV_INLINE double qScale2bits(RateControlEntry *rce, double qScale)
            + rce->miscBits;
 }
 
-GOTV_INLINE void copyRceData(RateControlEntry* rce, RateControlEntry* rce2Pass)
+NLC_INLINE void copyRceData(RateControlEntry* rce, RateControlEntry* rce2Pass)
 {
     rce->coeffBits = rce2Pass->coeffBits;
     rce->mvBits = rce2Pass->mvBits;

@@ -55,7 +55,7 @@ namespace WelsEnc {
 /*
  *  Get size of unsigned exp golomb codes
  */
-static GOTV_INLINE uint32_t BsSizeUE (const uint32_t kiValue) {
+static NLC_INLINE uint32_t BsSizeUE (const uint32_t kiValue) {
 if (256 > kiValue) {
   return g_kuiGolombUELength[kiValue];
 } else {
@@ -81,7 +81,7 @@ if (256 > kiValue) {
 /*
  *  Get size of signed exp golomb codes
  */
-static GOTV_INLINE uint32_t BsSizeSE (const int32_t kiValue) {
+static NLC_INLINE uint32_t BsSizeSE (const int32_t kiValue) {
 uint32_t iTmpValue;
 if (0 == kiValue) {
   return 1;
@@ -97,7 +97,7 @@ if (0 == kiValue) {
 /*
  *  Write truncated exp golomb codes
  */
-static GOTV_INLINE void BsWriteTE (SBitStringAux* pBs, const int32_t kiX, const uint32_t kuiValue) {
+static NLC_INLINE void BsWriteTE (SBitStringAux* pBs, const int32_t kiX, const uint32_t kuiValue) {
 if (1 == kiX) {
   BsWriteOneBit (pBs, !kuiValue);
 } else {
@@ -105,11 +105,11 @@ if (1 == kiX) {
 }
 }
 
-static GOTV_INLINE int32_t BsGetBitsPos (SBitStringAux* pBs) {
+static NLC_INLINE int32_t BsGetBitsPos (SBitStringAux* pBs) {
 return (int32_t) (((pBs->pCurBuf - pBs->pStartBuf) << 3) + 32 - pBs->iLeftBits);
 }
 
-static GOTV_INLINE void BsAlign( SBitStringAux* pBs )
+static NLC_INLINE void BsAlign( SBitStringAux* pBs )
 {
    if( pBs->iLeftBits&7 )
    {

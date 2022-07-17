@@ -13,7 +13,7 @@
 
    PTRFASTCALL - Like PTRCALL, but for low number of arguments.
 
-   GOTV_INLINE      - Used for selected internal functions for which inlining
+   NLC_INLINE      - Used for selected internal functions for which inlining
                  may improve performance on some platforms.
 
    Note: Use of these macros is based on judgement, not hard rules,
@@ -57,18 +57,18 @@
 #endif
 
 #ifndef XML_MIN_SIZE
-#if !defined(__cplusplus) && !defined(GOTV_INLINE)
+#if !defined(__cplusplus) && !defined(NLC_INLINE)
 #ifdef __GNUC__
-#define GOTV_INLINE __inline
+#define NLC_INLINE __inline
 #endif /* __GNUC__ */
 #endif
 #endif /* XML_MIN_SIZE */
 
 #ifdef __cplusplus
-#define GOTV_INLINE GOTV_INLINE
+#define NLC_INLINE NLC_INLINE
 #else
-#ifndef GOTV_INLINE
-#define GOTV_INLINE
+#ifndef NLC_INLINE
+#define NLC_INLINE
 #endif
 #endif
 

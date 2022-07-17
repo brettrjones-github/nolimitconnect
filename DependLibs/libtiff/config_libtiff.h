@@ -204,7 +204,7 @@
 //#undef TIFF_SIZE_T
 
 /* Signed size type formatter */
-#define TIFF_SSIZE_FORMAT	GOTV_INT64_FORMAT
+#define TIFF_SSIZE_FORMAT	NLC_INT64_FORMAT
 
 /* Signed size type */
 //#undef TIFF_SSIZE_T
@@ -219,7 +219,7 @@
 //#undef TIFF_UINT32_T
 
 /* Unsigned 64-bit type formatter */
-#define TIFF_UINT64_FORMAT GOTV_UINT64_FORMAT
+#define TIFF_UINT64_FORMAT NLC_UINT64_FORMAT
 
 /* Unsigned 64-bit type */
 //#undef TIFF_UINT64_T

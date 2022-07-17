@@ -83,7 +83,7 @@ DECLARE_ALIGNED(8, static const int16_t, coeffs)[]= {
  C3, -C1,  C3, -C1
 };
 
-static GOTV_INLINE void idct(int16_t *block)
+static NLC_INLINE void idct(int16_t *block)
 {
         LOCAL_ALIGNED_8(int64_t, align_tmp, [16]);
         int16_t * const temp= (int16_t*)align_tmp;

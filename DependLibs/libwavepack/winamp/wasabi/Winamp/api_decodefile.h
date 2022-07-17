@@ -68,23 +68,23 @@ public:
 	};
 };
 
-GOTV_INLINE api_audiostream *api_decodefile::OpenAudio(const wchar_t *filename, AudioParameters *parameters)
+NLC_INLINE api_audiostream *api_decodefile::OpenAudio(const wchar_t *filename, AudioParameters *parameters)
 {
 	return _call(API_DECODEFILE_OPENAUDIO, (api_audiostream *)0, filename, parameters);
 }
 
-GOTV_INLINE api_audiostream *api_decodefile::OpenAudioBackground(const wchar_t *filename, AudioParameters *parameters)
+NLC_INLINE api_audiostream *api_decodefile::OpenAudioBackground(const wchar_t *filename, AudioParameters *parameters)
 {
 	return _call(API_DECODEFILE_OPENAUDIO2, (api_audiostream *)0, filename, parameters);
 }
 
 
-GOTV_INLINE void api_decodefile::CloseAudio(api_audiostream *audioStream)
+NLC_INLINE void api_decodefile::CloseAudio(api_audiostream *audioStream)
 {
 	_voidcall(API_DECODEFILE_CLOSEAUDIO, audioStream);
 }
 
-GOTV_INLINE bool api_decodefile::DecoderExists(const wchar_t *filename)
+NLC_INLINE bool api_decodefile::DecoderExists(const wchar_t *filename)
 {
 	return _call(API_DECODEFILE_DECODEREXISTS, (bool)true, filename); // we default to true so that an old implementation doesn't break completely
 }

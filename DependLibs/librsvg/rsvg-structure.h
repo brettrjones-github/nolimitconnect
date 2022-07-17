@@ -34,7 +34,7 @@
 #include "rsvg-defs.h"
 #include "rsvg-styles.h"
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 RsvgNode *rsvg_new_use (const char *element_name);
@@ -95,6 +95,6 @@ void _rsvg_node_init        (RsvgNode * self,
 G_GNUC_INTERNAL
 void _rsvg_node_svg_apply_atts  (RsvgNodeSvg * self, RsvgHandle * ctx);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif                          /* RSVG_STRUCTURE_H */

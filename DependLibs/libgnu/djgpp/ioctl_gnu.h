@@ -8,7 +8,7 @@
 #include <libgnu/config_libgnu.h>
 #ifdef TARGET_OS_WINDOWS
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 #ifndef __dj_ENFORCE_ANSI_FREESTANDING
@@ -360,7 +360,7 @@ GOTV_BEGIN_CDECLARES
 #endif /* !__dj_ENFORCE_FUNCTION_CALLS */
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 #endif // TARGET_OS_WINDOWS
 
 //#endif  /* !__dj_include_sys_ioctl_h_ */

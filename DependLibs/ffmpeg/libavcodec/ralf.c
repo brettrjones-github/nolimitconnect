@@ -210,7 +210,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
     return 0;
 }
 
-static GOTV_INLINE int extend_code(GetBitContext *gb, int val, int range, int bits)
+static NLC_INLINE int extend_code(GetBitContext *gb, int val, int range, int bits)
 {
     if (val == 0) {
         val = -range - get_ue_golomb(gb);

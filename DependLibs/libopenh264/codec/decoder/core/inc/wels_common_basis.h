@@ -130,7 +130,7 @@ static const uint8_t g_kuiIdx2CtxLastSignificantCoeffFlag8x8[64] = { // Table 9-
     7,  7,  7,  7,  8,  8,  8,  8,
 };
 
-static GOTV_INLINE void GetMbResProperty (int32_t* pMBproperty, int32_t* pResidualProperty, bool bCavlc) {
+static NLC_INLINE void GetMbResProperty (int32_t* pMBproperty, int32_t* pResidualProperty, bool bCavlc) {
   switch (*pResidualProperty) {
   case CHROMA_AC_U:
     *pMBproperty = 1;

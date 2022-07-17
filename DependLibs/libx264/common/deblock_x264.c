@@ -107,7 +107,7 @@ static ALWAYS_INLINE void deblock_edge_luma_c( pixel *pix, intptr_t xstride, int
         pix[ 0*xstride] = x264_clip_pixel( q0 - delta );    /* q0' */
     }
 }
-static GOTV_INLINE void deblock_luma_c( pixel *pix, intptr_t xstride, intptr_t ystride, int alpha, int beta, int8_t *tc0 )
+static NLC_INLINE void deblock_luma_c( pixel *pix, intptr_t xstride, intptr_t ystride, int alpha, int beta, int8_t *tc0 )
 {
     for( int i = 0; i < 4; i++ )
     {
@@ -219,7 +219,7 @@ static ALWAYS_INLINE void deblock_edge_luma_intra_c( pixel *pix, intptr_t xstrid
         }
     }
 }
-static GOTV_INLINE void deblock_luma_intra_c( pixel *pix, intptr_t xstride, intptr_t ystride, int alpha, int beta )
+static NLC_INLINE void deblock_luma_intra_c( pixel *pix, intptr_t xstride, intptr_t ystride, int alpha, int beta )
 {
     for( int d = 0; d < 16; d++, pix += ystride )
         deblock_edge_luma_intra_c( pix, xstride, alpha, beta );

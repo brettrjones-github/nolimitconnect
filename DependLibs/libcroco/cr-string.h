@@ -32,7 +32,7 @@
 #include "cr-utils.h"
 #include "cr-parsing-location.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _CRString CRString ;
 
@@ -71,6 +71,6 @@ const gchar *cr_string_peek_raw_str (CRString *a_this) ;
 gint cr_string_peek_raw_str_len (CRString *a_this) ;
 void cr_string_destroy (CRString *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif 

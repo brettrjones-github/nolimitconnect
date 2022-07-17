@@ -30,7 +30,7 @@
 #include "cr-additional-sel.h"
 #include "cr-parsing-location.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -124,7 +124,7 @@ enum CRStatus cr_simple_sel_compute_specificity (CRSimpleSel *a_this) ;
 
 void cr_simple_sel_destroy (CRSimpleSel *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 #endif /*__CR_SIMPLE_SEL_H__*/

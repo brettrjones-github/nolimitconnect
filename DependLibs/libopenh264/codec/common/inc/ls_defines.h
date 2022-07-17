@@ -82,9 +82,9 @@ STRUCTA (64, 8);
 #define ST64A4(a, b) STA(a, b, 64, 4)
 #define ST64A8(a, b) STA(a, b, 64, 8)
 //#else
-//GOTV_INLINE void __ST16(void *dst, uint16_t v) { memcpy(dst, &v, 2); }
-//GOTV_INLINE void __ST32(void *dst, uint32_t v) { memcpy(dst, &v, 4); }
-//GOTV_INLINE void __ST64(void *dst, uint64_t v) { memcpy(dst, &v, 8); }
+//NLC_INLINE void __ST16(void *dst, uint16_t v) { memcpy(dst, &v, 2); }
+//NLC_INLINE void __ST32(void *dst, uint32_t v) { memcpy(dst, &v, 4); }
+//NLC_INLINE void __ST64(void *dst, uint64_t v) { memcpy(dst, &v, 8); }
 //#endif
 
 #else

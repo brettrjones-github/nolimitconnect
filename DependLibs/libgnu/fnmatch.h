@@ -29,7 +29,7 @@
 
 #include <libgnu/config_libgnu.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #define FNM_NOMATCH      1     /* Match failed. */
 #define FNM_NOSYS        2     /* Function not supported (unused). */
@@ -45,6 +45,6 @@ GOTV_BEGIN_CDECLARES
 
 extern int  fnmatch(const char *pattern, const char *string, int flags);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 

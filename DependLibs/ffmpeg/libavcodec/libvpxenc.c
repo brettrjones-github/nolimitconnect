@@ -768,7 +768,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
     return 0;
 }
 
-static GOTV_INLINE void cx_pktcpy(struct FrameListData *dst,
+static NLC_INLINE void cx_pktcpy(struct FrameListData *dst,
                              const struct vpx_codec_cx_pkt *src,
                              const struct vpx_codec_cx_pkt *src_alpha,
                              VPxContext *ctx)

@@ -193,7 +193,7 @@ void gotvptop_event_send( gotvptop_event_manager_t * p_em, gotvptop_event_t * );
 /*
  * Add a callback for an event.
  */
-GOTV_API int gotvptop_event_attach( gotvptop_event_manager_t * p_event_manager,
+NLC_API int gotvptop_event_attach( gotvptop_event_manager_t * p_event_manager,
                               gotvptop_event_type_t event_type,
                               gotvptop_event_callback_t pf_callback,
                               void *p_user_data );
@@ -201,7 +201,7 @@ GOTV_API int gotvptop_event_attach( gotvptop_event_manager_t * p_event_manager,
 /*
  * Remove a callback for an event.
  */
-GOTV_API void gotvptop_event_detach( gotvptop_event_manager_t *p_event_manager,
+NLC_API void gotvptop_event_detach( gotvptop_event_manager_t *p_event_manager,
                                gotvptop_event_type_t event_type,
                                gotvptop_event_callback_t pf_callback,
                                void *p_user_data );

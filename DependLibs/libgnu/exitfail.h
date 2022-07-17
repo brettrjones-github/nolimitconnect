@@ -15,4 +15,4 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-extern GOTV_DLL_VARIABLE int volatile exit_failure;
+extern NLC_DLL_VARIABLE int volatile exit_failure;

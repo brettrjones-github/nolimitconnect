@@ -57,7 +57,7 @@
 #define FB_AUX_VGA_PLANES_VGA4	0
 #endif
 /*
-static GOTV_INLINE void outb (unsigned char value, unsigned short port)
+static NLC_INLINE void outb (unsigned char value, unsigned short port)
 {
   __asm__ __volatile__ ("outb %b0,%w1"::"a" (value), "Nd" (port));
 } 

@@ -291,7 +291,7 @@ static void init_mv(FourXContext *f, int linesize)
     }
 #endif
 
-static GOTV_INLINE void mcdc(uint16_t *dst, const uint16_t *src, int log2w,
+static NLC_INLINE void mcdc(uint16_t *dst, const uint16_t *src, int log2w,
                         int h, int stride, int scale, unsigned dc)
 {
     int i;

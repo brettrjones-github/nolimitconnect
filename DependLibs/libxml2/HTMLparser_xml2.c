@@ -555,7 +555,7 @@ htmlSkipBlankChars(xmlParserCtxtPtr ctxt) {
  *  DTD:       1 means that this element is valid only in the Loose DTD
  *             2 means that this element is valid only in the Frameset DTD
  *
- * Name,Start Tag,End Tag,Save End,Empty,Deprecated,DTD,GOTV_INLINE,Description
+ * Name,Start Tag,End Tag,Save End,Empty,Deprecated,DTD,NLC_INLINE,Description
 	, subElements , impliedsubelt , Attributes, userdata
  */
 
@@ -615,7 +615,7 @@ static const char* const core_attrs[] = { COREATTRS, NULL } ;
 static const char* const i18n_attrs[] = { I18N, NULL } ;
 
 
-/* Other declarations that should go GOTV_INLINE ... */
+/* Other declarations that should go NLC_INLINE ... */
 static const char* const a_attrs[] = { ATTRS, "charset", "type", "name",
 	"href", "hreflang", "rel", "rev", "accesskey", "shape", "coords",
 	"tabindex", "onfocus", "onblur", NULL } ;
@@ -848,7 +848,7 @@ html40ElementTable[] = {
 { "i",		0, 3, 0, 0, 0, 0, 1, "italic text style",
 	DECL html_inline, NULL, DECL html_attrs, NULL, NULL
 },
-{ "iframe",	0, 0, 0, 0, 0, 1, 2, "GOTV_INLINE subwindow ",
+{ "iframe",	0, 0, 0, 0, 0, 1, 2, "NLC_INLINE subwindow ",
 	DECL html_flow, NULL, NULL, DECL iframe_attrs, NULL
 },
 { "img",	0, 2, 2, 1, 0, 0, 1, "embedded image ",
@@ -914,7 +914,7 @@ html40ElementTable[] = {
 { "pre",	0, 0, 0, 0, 0, 0, 0, "preformatted text ",
 	DECL pre_content, NULL, DECL html_attrs, DECL width_attr, NULL
 },
-{ "q",		0, 0, 0, 0, 0, 0, 1, "short GOTV_INLINE quotation ",
+{ "q",		0, 0, 0, 0, 0, 0, 1, "short NLC_INLINE quotation ",
 	DECL html_inline, NULL, DECL quote_attrs, NULL, NULL
 },
 { "s",		0, 3, 0, 0, 1, 1, 1, "strike-through text style",

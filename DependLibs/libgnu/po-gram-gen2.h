@@ -39,7 +39,7 @@
 # define YYDEBUG 0
 #endif
 #if YYDEBUG
-extern GOTV_DLL_VARIABLE int po_gram_debug;
+extern NLC_DLL_VARIABLE int po_gram_debug;
 #endif
 
 /* Token type.  */
@@ -103,7 +103,7 @@ typedef union YYSTYPE YYSTYPE;
 #endif
 
 
-extern GOTV_DLL_VARIABLE YYSTYPE po_gram_lval;
+extern NLC_DLL_VARIABLE YYSTYPE po_gram_lval;
 
 int po_gram_parse (void);
 

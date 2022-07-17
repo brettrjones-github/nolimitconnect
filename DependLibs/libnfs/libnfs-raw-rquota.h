@@ -39,7 +39,7 @@ either expressed or implied, of the FreeBSD Project.
 
 
 #ifdef __cplusplus
-GOTV_EXTERN "C" {
+NLC_EXTERN "C" {
 #endif
 
 #define RQUOTAPATHLEN 1024
@@ -99,74 +99,74 @@ typedef struct GETQUOTA1res GETQUOTA1res;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define RQUOTA1_NULL 0
-GOTV_EXTERN  void * rquota1_null_1(void *, void *);
-GOTV_EXTERN  void * rquota1_null_1_svc(void *, struct svc_req *);
+NLC_EXTERN  void * rquota1_null_1(void *, void *);
+NLC_EXTERN  void * rquota1_null_1_svc(void *, struct svc_req *);
 #define RQUOTA1_GETQUOTA 1
-GOTV_EXTERN  GETQUOTA1res * rquota1_getquota_1(GETQUOTA1args *, void *);
-GOTV_EXTERN  GETQUOTA1res * rquota1_getquota_1_svc(GETQUOTA1args *, struct svc_req *);
+NLC_EXTERN  GETQUOTA1res * rquota1_getquota_1(GETQUOTA1args *, void *);
+NLC_EXTERN  GETQUOTA1res * rquota1_getquota_1_svc(GETQUOTA1args *, struct svc_req *);
 #define RQUOTA1_GETACTIVEQUOTA 2
-GOTV_EXTERN  GETQUOTA1res * rquota1_getactivequota_1(GETQUOTA1args *, void *);
-GOTV_EXTERN  GETQUOTA1res * rquota1_getactivequota_1_svc(GETQUOTA1args *, struct svc_req *);
-GOTV_EXTERN int rquota_program_1_freeresult (void *, zdrproc_t, caddr_t);
+NLC_EXTERN  GETQUOTA1res * rquota1_getactivequota_1(GETQUOTA1args *, void *);
+NLC_EXTERN  GETQUOTA1res * rquota1_getactivequota_1_svc(GETQUOTA1args *, struct svc_req *);
+NLC_EXTERN int rquota_program_1_freeresult (void *, zdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define RQUOTA1_NULL 0
-GOTV_EXTERN  void * rquota1_null_1();
-GOTV_EXTERN  void * rquota1_null_1_svc();
+NLC_EXTERN  void * rquota1_null_1();
+NLC_EXTERN  void * rquota1_null_1_svc();
 #define RQUOTA1_GETQUOTA 1
-GOTV_EXTERN  GETQUOTA1res * rquota1_getquota_1();
-GOTV_EXTERN  GETQUOTA1res * rquota1_getquota_1_svc();
+NLC_EXTERN  GETQUOTA1res * rquota1_getquota_1();
+NLC_EXTERN  GETQUOTA1res * rquota1_getquota_1_svc();
 #define RQUOTA1_GETACTIVEQUOTA 2
-GOTV_EXTERN  GETQUOTA1res * rquota1_getactivequota_1();
-GOTV_EXTERN  GETQUOTA1res * rquota1_getactivequota_1_svc();
-GOTV_EXTERN int rquota_program_1_freeresult ();
+NLC_EXTERN  GETQUOTA1res * rquota1_getactivequota_1();
+NLC_EXTERN  GETQUOTA1res * rquota1_getactivequota_1_svc();
+NLC_EXTERN int rquota_program_1_freeresult ();
 #endif /* K&R C */
 #define RQUOTA_V2 2
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define RQUOTA2_NULL 0
-GOTV_EXTERN  void * rquota2_null_2(void *, void *);
-GOTV_EXTERN  void * rquota2_null_2_svc(void *, struct svc_req *);
+NLC_EXTERN  void * rquota2_null_2(void *, void *);
+NLC_EXTERN  void * rquota2_null_2_svc(void *, struct svc_req *);
 #define RQUOTA2_GETQUOTA 1
-GOTV_EXTERN  GETQUOTA1res * rquota2_getquota_2(GETQUOTA2args *, void *);
-GOTV_EXTERN  GETQUOTA1res * rquota2_getquota_2_svc(GETQUOTA2args *, struct svc_req *);
+NLC_EXTERN  GETQUOTA1res * rquota2_getquota_2(GETQUOTA2args *, void *);
+NLC_EXTERN  GETQUOTA1res * rquota2_getquota_2_svc(GETQUOTA2args *, struct svc_req *);
 #define RQUOTA2_GETACTIVEQUOTA 2
-GOTV_EXTERN  GETQUOTA1res * rquota2_getactivequota_2(GETQUOTA2args *, void *);
-GOTV_EXTERN  GETQUOTA1res * rquota2_getactivequota_2_svc(GETQUOTA2args *, struct svc_req *);
-GOTV_EXTERN int rquota_program_2_freeresult (void *, zdrproc_t, caddr_t);
+NLC_EXTERN  GETQUOTA1res * rquota2_getactivequota_2(GETQUOTA2args *, void *);
+NLC_EXTERN  GETQUOTA1res * rquota2_getactivequota_2_svc(GETQUOTA2args *, struct svc_req *);
+NLC_EXTERN int rquota_program_2_freeresult (void *, zdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define RQUOTA2_NULL 0
-GOTV_EXTERN  void * rquota2_null_2();
-GOTV_EXTERN  void * rquota2_null_2_svc();
+NLC_EXTERN  void * rquota2_null_2();
+NLC_EXTERN  void * rquota2_null_2_svc();
 #define RQUOTA2_GETQUOTA 1
-GOTV_EXTERN  GETQUOTA1res * rquota2_getquota_2();
-GOTV_EXTERN  GETQUOTA1res * rquota2_getquota_2_svc();
+NLC_EXTERN  GETQUOTA1res * rquota2_getquota_2();
+NLC_EXTERN  GETQUOTA1res * rquota2_getquota_2_svc();
 #define RQUOTA2_GETACTIVEQUOTA 2
-GOTV_EXTERN  GETQUOTA1res * rquota2_getactivequota_2();
-GOTV_EXTERN  GETQUOTA1res * rquota2_getactivequota_2_svc();
-GOTV_EXTERN int rquota_program_2_freeresult ();
+NLC_EXTERN  GETQUOTA1res * rquota2_getactivequota_2();
+NLC_EXTERN  GETQUOTA1res * rquota2_getactivequota_2_svc();
+NLC_EXTERN int rquota_program_2_freeresult ();
 #endif /* K&R C */
 
 /* the zdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-GOTV_EXTERN  uint32_t zdr_rquotastat (ZDR *, rquotastat*);
-GOTV_EXTERN  uint32_t zdr_exportpath (ZDR *, exportpath*);
-GOTV_EXTERN  uint32_t zdr_GETQUOTA1args (ZDR *, GETQUOTA1args*);
-GOTV_EXTERN  uint32_t zdr_quotatype (ZDR *, quotatype*);
-GOTV_EXTERN  uint32_t zdr_GETQUOTA2args (ZDR *, GETQUOTA2args*);
-GOTV_EXTERN  uint32_t zdr_GETQUOTA1res_ok (ZDR *, GETQUOTA1res_ok*);
-GOTV_EXTERN  uint32_t zdr_GETQUOTA1res (ZDR *, GETQUOTA1res*);
+NLC_EXTERN  uint32_t zdr_rquotastat (ZDR *, rquotastat*);
+NLC_EXTERN  uint32_t zdr_exportpath (ZDR *, exportpath*);
+NLC_EXTERN  uint32_t zdr_GETQUOTA1args (ZDR *, GETQUOTA1args*);
+NLC_EXTERN  uint32_t zdr_quotatype (ZDR *, quotatype*);
+NLC_EXTERN  uint32_t zdr_GETQUOTA2args (ZDR *, GETQUOTA2args*);
+NLC_EXTERN  uint32_t zdr_GETQUOTA1res_ok (ZDR *, GETQUOTA1res_ok*);
+NLC_EXTERN  uint32_t zdr_GETQUOTA1res (ZDR *, GETQUOTA1res*);
 
 #else /* K&R C */
-GOTV_EXTERN uint32_t zdr_rquotastat ();
-GOTV_EXTERN uint32_t zdr_exportpath ();
-GOTV_EXTERN uint32_t zdr_GETQUOTA1args ();
-GOTV_EXTERN uint32_t zdr_quotatype ();
-GOTV_EXTERN uint32_t zdr_GETQUOTA2args ();
-GOTV_EXTERN uint32_t zdr_GETQUOTA1res_ok ();
-GOTV_EXTERN uint32_t zdr_GETQUOTA1res ();
+NLC_EXTERN uint32_t zdr_rquotastat ();
+NLC_EXTERN uint32_t zdr_exportpath ();
+NLC_EXTERN uint32_t zdr_GETQUOTA1args ();
+NLC_EXTERN uint32_t zdr_quotatype ();
+NLC_EXTERN uint32_t zdr_GETQUOTA2args ();
+NLC_EXTERN uint32_t zdr_GETQUOTA1res_ok ();
+NLC_EXTERN uint32_t zdr_GETQUOTA1res ();
 
 #endif /* K&R C */
 

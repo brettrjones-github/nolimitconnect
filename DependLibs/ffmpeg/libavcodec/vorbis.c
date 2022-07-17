@@ -143,7 +143,7 @@ int ff_vorbis_ready_floor1_list(AVCodecContext *avctx,
     return 0;
 }
 
-static GOTV_INLINE void render_line_unrolled(intptr_t x, int y, int x1,
+static NLC_INLINE void render_line_unrolled(intptr_t x, int y, int x1,
                                         intptr_t sy, int ady, int adx,
                                         float *buf)
 {

@@ -50,7 +50,7 @@
 */
 
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 #define GNUTLS_VERSION "3.4.14"
 
@@ -65,7 +65,7 @@ GOTV_BEGIN_CDECLARES
 #define GNUTLS_CIPHER_RIJNDAEL_CBC GNUTLS_CIPHER_AES_128_CBC
 #define GNUTLS_CIPHER_ARCFOUR GNUTLS_CIPHER_ARCFOUR_128
 
-# define _SYM_EXPORT GOTV_EXPORT
+# define _SYM_EXPORT NLC_EXPORT
 
 #define DEFAULT_MAX_VERIFY_DEPTH 16
 #define DEFAULT_MAX_VERIFY_BITS 16*1024
@@ -1719,7 +1719,7 @@ void _asnstr_append_name( char *name, size_t name_size, const char *part1,
 						  const char *part2 );
 
 /* Given a @c2 which it returns an allocated DER encoding of @whom in @out */
-GOTV_INLINE static int _gnutls_x509_get_raw_field( ASN1_TYPE c2, const char *whom, gnutls_datum_t *out )
+NLC_INLINE static int _gnutls_x509_get_raw_field( ASN1_TYPE c2, const char *whom, gnutls_datum_t *out )
 {
 	return _gnutls_x509_der_encode( c2, whom, out, 0 );
 }
@@ -1788,7 +1788,7 @@ gnutls_x509_crt_t *_gnutls_sort_clist( gnutls_x509_crt_t
 
 int _gnutls_check_if_sorted( gnutls_x509_crt_t * crt, int nr );
 
-GOTV_INLINE static int _asn1_strict_der_decode( asn1_node * element, const void *ider,
+NLC_INLINE static int _asn1_strict_der_decode( asn1_node * element, const void *ider,
 												int len, char *errorDescription )
 {
 	return asn1_der_decoding2( element, ider, &len, ASN1_DECODE_FLAG_STRICT_DER, errorDescription );
@@ -1805,7 +1805,7 @@ gnutls_tpm_privkey_generate( gnutls_pk_algorithm_t pk,
 							 gnutls_datum_t * privkey,
 							 gnutls_datum_t * pubkey, unsigned int flags );
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #include <libgnu/compat.h>
 

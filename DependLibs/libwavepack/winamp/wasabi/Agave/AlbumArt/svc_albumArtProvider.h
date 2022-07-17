@@ -45,27 +45,27 @@ public:
 
 };
 
-GOTV_INLINE bool svc_albumArtProvider::IsMine(const wchar_t *filename)
+NLC_INLINE bool svc_albumArtProvider::IsMine(const wchar_t *filename)
 {
 	return _call(SVC_ALBUMARTPROVIDER_ISMINE, false, filename);
 }
 
-GOTV_INLINE int svc_albumArtProvider::ProviderType()
+NLC_INLINE int svc_albumArtProvider::ProviderType()
 {
 	return _call(SVC_ALBUMARTPROVIDER_PROVIDERTYPE, (int)ALBUMARTPROVIDER_TYPE_EMBEDDED);
 }
 
-GOTV_INLINE int svc_albumArtProvider::GetAlbumArtData(const wchar_t *filename, const wchar_t *type, void **bits, size_t *len, wchar_t **mimeType)
+NLC_INLINE int svc_albumArtProvider::GetAlbumArtData(const wchar_t *filename, const wchar_t *type, void **bits, size_t *len, wchar_t **mimeType)
 {
 	return _call(SVC_ALBUMARTPROVIDER_GETALBUMARTDATA, (int)ALBUMARTPROVIDER_FAILURE, filename, type, bits, len, mimeType);
 }
 
-GOTV_INLINE int svc_albumArtProvider::SetAlbumArtData(const wchar_t *filename, const wchar_t *type, void *bits, size_t len, const wchar_t *mimeType)
+NLC_INLINE int svc_albumArtProvider::SetAlbumArtData(const wchar_t *filename, const wchar_t *type, void *bits, size_t len, const wchar_t *mimeType)
 {
 	return _call(SVC_ALBUMARTPROVIDER_SETALBUMARTDATA, (int)ALBUMARTPROVIDER_FAILURE, filename, type, bits, len, mimeType);
 }
 
-GOTV_INLINE int svc_albumArtProvider::DeleteAlbumArt(const wchar_t *filename, const wchar_t *type)
+NLC_INLINE int svc_albumArtProvider::DeleteAlbumArt(const wchar_t *filename, const wchar_t *type)
 {
 	return _call(SVC_ALBUMARTPROVIDER_DELETEALBUMART, (int)ALBUMARTPROVIDER_FAILURE, filename, type);
 }

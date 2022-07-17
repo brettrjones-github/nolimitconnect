@@ -33,7 +33,7 @@
 
 #include <libgnu/glist.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _GCache          GCache;
 
@@ -68,6 +68,6 @@ void     g_cache_value_foreach (GCache            *cache,
                                 GHFunc             func,
                                 gpointer           user_data);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_CACHE_H__ */

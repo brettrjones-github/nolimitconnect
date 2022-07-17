@@ -19,7 +19,7 @@
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
 #include "GuiParams.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 #include "MyIcons.h"
 
 #include "VxTilePositioner.h"
@@ -185,7 +185,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_TilePositioner( * new VxTilePositioner( *this ) )
 , m_CamLogic( *this )
 
-, m_MySndMgr( * new MySndMgr( *this ) )
+, m_SoundMgr( * new SoundMgr( *this ) )
 
 , m_HomePage( *this, m_AppTitle )
 
@@ -277,7 +277,7 @@ void AppCommon::loadWithoutThread( void )
 	}
 
     // load sounds to play and sound hardware
-    m_MySndMgr.sndMgrStartup();
+    m_SoundMgr.sndMgrStartup();
 
     uint64_t styleMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Setup Style %" PRId64 " ms alive ms %" PRId64 "", styleMs - iconsMs, styleMs );
@@ -357,7 +357,7 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 
 	getEngine().fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
 
-    m_MySndMgr.initAudioIoSystem();
+    m_SoundMgr.initAudioIoSystem();
 }
 
 //============================================================================
@@ -371,7 +371,7 @@ void AppCommon::shutdownAppCommon( void )
         m_IdleTimer->stop();
         fromGuiCloseEvent( eAppModuleAll );
         VxSleep( 2000 );
-        m_MySndMgr.sndMgrShutdown();
+        m_SoundMgr.sndMgrShutdown();
         QApplication::closeAllWindows();
         getEngine().fromGuiAppShutdown();
     }
@@ -732,13 +732,13 @@ void AppCommon::applySoundSettings( bool useDefaultsInsteadOfSettings )
 {
 	if( useDefaultsInsteadOfSettings )
 	{
-		m_MySndMgr.muteNotifySound( false );
-		m_MySndMgr.mutePhoneRing( false );
+		m_SoundMgr.muteNotifySound( false );
+		m_SoundMgr.mutePhoneRing( false );
 	}
 	else
 	{
-		m_MySndMgr.muteNotifySound( m_AppSettings.getMuteNotifySound() );
-		m_MySndMgr.mutePhoneRing( m_AppSettings.getMutePhoneRing() );
+		m_SoundMgr.muteNotifySound( m_AppSettings.getMuteNotifySound() );
+		m_SoundMgr.mutePhoneRing( m_AppSettings.getMutePhoneRing() );
 	}
 }
 

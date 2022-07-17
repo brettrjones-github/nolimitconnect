@@ -451,7 +451,7 @@ long double  report ( const korr_t* const k )
  * Comment: should be replaced latter with a better solution than this
  *          home-brewed hack (rbrito). The name should be better also.
  */
-GOTV_INLINE unsigned short be16_le(unsigned short n)
+NLC_INLINE unsigned short be16_le(unsigned short n)
 {
 #ifdef _WORDS_BIGENDIAN
      return (n << 8) | (n >> 8);

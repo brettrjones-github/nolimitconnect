@@ -81,7 +81,7 @@ private:
 |   PLT_MediaCache::GenerateKey
 +---------------------------------------------------------------------*/
 template <typename T, typename U>
-GOTV_INLINE
+NLC_INLINE
 NPT_String
 PLT_MediaCache<T,U>::GenerateKey(const char* root, const char* key)
 {
@@ -96,7 +96,7 @@ PLT_MediaCache<T,U>::GenerateKey(const char* root, const char* key)
 |   PLT_MediaCache::Put
 +---------------------------------------------------------------------*/
 template <typename T, typename U>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result
 PLT_MediaCache<T,U>::Put(const char* root,
                          const char* key, 
@@ -120,7 +120,7 @@ PLT_MediaCache<T,U>::Put(const char* root,
 |   PLT_MediaCache::Get
 +---------------------------------------------------------------------*/
 template <typename T, typename U>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result
 PLT_MediaCache<T,U>::Get(const char* root,
                          const char* key,
@@ -149,7 +149,7 @@ PLT_MediaCache<T,U>::Get(const char* root,
 |   PLT_MediaCache::Clear
 +---------------------------------------------------------------------*/
 template <typename T, typename U>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result 
 PLT_MediaCache<T,U>::Clear(const char* root, const char* key) 
 {
@@ -176,7 +176,7 @@ PLT_MediaCache<T,U>::Clear(const char* root, const char* key)
 |   PLT_MediaCache::Clear
 +---------------------------------------------------------------------*/
 template <typename T, typename U>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result
 PLT_MediaCache<T,U>::Clear(const char* root)
 {

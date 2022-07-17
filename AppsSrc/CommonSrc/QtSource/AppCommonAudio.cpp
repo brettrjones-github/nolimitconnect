@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppCommon.h"
-#include "MySndMgr.h"
+#include "SoundMgr.h"
 
 #include "ActivityScanWebCams.h"
 #include "ToGuiHardwareControlInterface.h"
@@ -41,9 +41,9 @@ void AppCommon::slotInternalWantMicrophoneRecording( EAppModule appModule, bool 
 		return;
 	}
 
-	bool wasMicAvailable = m_MySndMgr.isMicrophoneEnabled();
-	m_MySndMgr.toGuiWantMicrophoneRecording( appModule, wanteMicInput );
-	bool isMicAvailable = m_MySndMgr.isMicrophoneEnabled();
+	bool wasMicAvailable = m_SoundMgr.isMicrophoneEnabled();
+	m_SoundMgr.toGuiWantMicrophoneRecording( appModule, wanteMicInput );
+	bool isMicAvailable = m_SoundMgr.isMicrophoneEnabled();
 	if( wasMicAvailable != isMicAvailable )
 	{
 		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
@@ -77,9 +77,9 @@ void AppCommon::slotInternalWantSpeakerOutput( EAppModule appModule, bool enable
 		return;
 	}
 
-	bool wasSpeakerAvailable = m_MySndMgr.isSpeakerEnabled();
-	m_MySndMgr.toGuiWantSpeakerOutput( appModule, enableSpeakerOutput );
-	bool isSpeakerAvailable = m_MySndMgr.isSpeakerEnabled();
+	bool wasSpeakerAvailable = m_SoundMgr.isSpeakerEnabled();
+	m_SoundMgr.toGuiWantSpeakerOutput( appModule, enableSpeakerOutput );
+	bool isSpeakerAvailable = m_SoundMgr.isSpeakerEnabled();
 
 	if( wasSpeakerAvailable != isSpeakerAvailable )
 	{
@@ -100,7 +100,7 @@ int AppCommon::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int 
         return 0;
     }
 
-    return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
+    return m_SoundMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
 
 
@@ -115,7 +115,7 @@ int AppCommon::toGuiPlayAudio( EAppModule appModule, float* pu16PcmData, int pcm
 	}
 
 	//LogMsg( LOG_INFO, "slotPlayAudio %d len %d from %s\n", ePluginType, u16PcmDataLen, netIdent->getOnlineName());
-	return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
+	return m_SoundMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
 }
 #endif // ENABLE_KODI
 
@@ -128,7 +128,7 @@ double AppCommon::toGuiGetAudioDelaySeconds( EAppModule appModule )
         return 0;
     }
 
-    return m_MySndMgr.toGuiGetAudioDelaySeconds( appModule );
+    return m_SoundMgr.toGuiGetAudioDelaySeconds( appModule );
 }
 
 //============================================================================
@@ -139,7 +139,7 @@ double AppCommon::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
         return 0;
     }
 
-    return m_MySndMgr.toGuiGetAudioCacheTotalSeconds( appModule );
+    return m_SoundMgr.toGuiGetAudioCacheTotalSeconds( appModule );
 }
 
 //============================================================================
@@ -150,7 +150,7 @@ double AppCommon::toGuiGetAudioCacheTotalMs( void )
 		return 0;
 	}
 
-	return m_MySndMgr.toGuiGetAudioCacheTotalMs();
+	return m_SoundMgr.toGuiGetAudioCacheTotalMs();
 }
 
 //============================================================================
@@ -161,7 +161,7 @@ int AppCommon::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
         return 0;
     }
 
-    return m_MySndMgr.toGuiGetAudioCacheFreeSpace( appModule );
+    return m_SoundMgr.toGuiGetAudioCacheFreeSpace( appModule );
 }
 
 //============================================================================
@@ -175,7 +175,7 @@ void AppCommon::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLen
 /// Mute/Unmute microphone
 void AppCommon::fromGuiMuteMicrophone( bool muteMic )
 {
-	m_MySndMgr.fromGuiMuteMicrophone( muteMic );
+	m_SoundMgr.fromGuiMuteMicrophone( muteMic );
     getEngine().fromGuiMuteMicrophone( muteMic );
 
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
@@ -196,7 +196,7 @@ bool AppCommon::fromGuiIsMicrophoneMuted( void )
 /// Mute/Unmute speaker
 void AppCommon::fromGuiMuteSpeaker( bool muteSpeaker )
 {
-	m_MySndMgr.fromGuiMuteSpeaker( muteSpeaker );
+	m_SoundMgr.fromGuiMuteSpeaker( muteSpeaker );
     getEngine().fromGuiMuteSpeaker( muteSpeaker );
 
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )

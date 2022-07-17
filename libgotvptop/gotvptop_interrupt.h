@@ -60,7 +60,7 @@ struct msghdr;
  * @return EINTR if the semaphore was incremented due to an interruption,
  * otherwise zero.
  */
-GOTV_API int gotvptop_sem_wait_i11e(gotvptop_sem_t *);
+NLC_API int gotvptop_sem_wait_i11e(gotvptop_sem_t *);
 
 /**
  * Interruptible variant of mwait().
@@ -71,7 +71,7 @@ GOTV_API int gotvptop_sem_wait_i11e(gotvptop_sem_t *);
  * @return EINTR if an interruption occurred, otherwise 0 once the timestamp is
  * reached.
  */
-GOTV_API int gotvptop_mwait_i11e(mtime_t);
+NLC_API int gotvptop_mwait_i11e(mtime_t);
 
 /**
  * Interruptible variant of msleep().
@@ -108,19 +108,19 @@ static inline int gotvptop_msleep_i11e(mtime_t delay)
  * -1 is returned if a GOTV I/O interrupt occurs (and errno is set to EINTR)
  * or if an error occurs.
  */
-GOTV_API int gotvptop_poll_i11e(struct pollfd *, unsigned, int);
+NLC_API int gotvptop_poll_i11e(struct pollfd *, unsigned, int);
 
-GOTV_API ssize_t gotvptop_readv_i11e(int fd, struct iovec *, int);
-GOTV_API ssize_t gotvptop_writev_i11e(int fd, const struct iovec *, int);
-GOTV_API ssize_t gotvptop_read_i11e(int fd, void *, size_t);
-GOTV_API ssize_t gotvptop_write_i11e(int fd, const void *, size_t);
+NLC_API ssize_t gotvptop_readv_i11e(int fd, struct iovec *, int);
+NLC_API ssize_t gotvptop_writev_i11e(int fd, const struct iovec *, int);
+NLC_API ssize_t gotvptop_read_i11e(int fd, void *, size_t);
+NLC_API ssize_t gotvptop_write_i11e(int fd, const void *, size_t);
 
-GOTV_API ssize_t gotvptop_recvmsg_i11e(int fd, struct msghdr *, int flags);
-GOTV_API ssize_t gotvptop_sendmsg_i11e(int fd, const struct msghdr *, int flags);
+NLC_API ssize_t gotvptop_recvmsg_i11e(int fd, struct msghdr *, int flags);
+NLC_API ssize_t gotvptop_sendmsg_i11e(int fd, const struct msghdr *, int flags);
 
-GOTV_API ssize_t gotvptop_recvfrom_i11e(int fd, void *, size_t, int flags,
+NLC_API ssize_t gotvptop_recvfrom_i11e(int fd, void *, size_t, int flags,
                                 struct sockaddr *, socklen_t *);
-GOTV_API ssize_t gotvptop_sendto_i11e(int fd, const void *, size_t, int flags,
+NLC_API ssize_t gotvptop_sendto_i11e(int fd, const void *, size_t, int flags,
                               const struct sockaddr *, socklen_t);
 
 static inline ssize_t gotvptop_recv_i11e(int fd, void *buf, size_t len, int flags)
@@ -134,7 +134,7 @@ ssize_t gotvptop_send_i11e(int fd, const void *buf, size_t len, int flags)
     return gotvptop_sendto_i11e(fd, buf, len, flags, NULL, 0);
 }
 
-GOTV_API int gotvptop_accept_i11e(int fd, struct sockaddr *, socklen_t *, bool);
+NLC_API int gotvptop_accept_i11e(int fd, struct sockaddr *, socklen_t *, bool);
 
 /**
  * Registers a custom interrupt handler.
@@ -146,9 +146,9 @@ GOTV_API int gotvptop_accept_i11e(int fd, struct sockaddr *, socklen_t *, bool);
  * If the calling thread has no interruption context, this function has no
  * effects.
  */
-GOTV_API void gotvptop_interrupt_register(void (*cb)(void *), void *opaque);
+NLC_API void gotvptop_interrupt_register(void (*cb)(void *), void *opaque);
 
-GOTV_API int gotvptop_interrupt_unregister(void);
+NLC_API int gotvptop_interrupt_unregister(void);
 
 /**
  * @}
@@ -160,12 +160,12 @@ typedef struct gotvptop_interrupt gotvptop_interrupt_t;
 /**
  * Creates an interruption context.
  */
-GOTV_API gotvptop_interrupt_t *gotvptop_interrupt_create(void) GOTV_USED;
+NLC_API gotvptop_interrupt_t *gotvptop_interrupt_create(void) GOTV_USED;
 
 /**
  * Destroys an interrupt context.
  */
-GOTV_API void gotvptop_interrupt_destroy(gotvptop_interrupt_t *);
+NLC_API void gotvptop_interrupt_destroy(gotvptop_interrupt_t *);
 
 /**
  * Sets the interruption context for the calling thread.
@@ -175,7 +175,7 @@ GOTV_API void gotvptop_interrupt_destroy(gotvptop_interrupt_t *);
  * @note This function is not a cancellation point.
  * @warning A context can be attached to no more than one thread at a time.
  */
-GOTV_API gotvptop_interrupt_t *gotvptop_interrupt_set(gotvptop_interrupt_t *);
+NLC_API gotvptop_interrupt_t *gotvptop_interrupt_set(gotvptop_interrupt_t *);
 
 /**
  * Raises an interruption through a specified context.
@@ -186,14 +186,14 @@ GOTV_API gotvptop_interrupt_t *gotvptop_interrupt_set(gotvptop_interrupt_t *);
  * @note This function is thread-safe.
  * @note This function is not a cancellation point.
  */
-GOTV_API void gotvptop_interrupt_raise(gotvptop_interrupt_t *);
+NLC_API void gotvptop_interrupt_raise(gotvptop_interrupt_t *);
 
 /**
  * Marks the interruption context as "killed".
  *
  * This is not reversible.
  */
-GOTV_API void gotvptop_interrupt_kill(gotvptop_interrupt_t *);
+NLC_API void gotvptop_interrupt_kill(gotvptop_interrupt_t *);
 
 /**
  * Checks if the interruption context was "killed".
@@ -201,7 +201,7 @@ GOTV_API void gotvptop_interrupt_kill(gotvptop_interrupt_t *);
  * Indicates whether the interruption context of the calling thread (if any)
  * was killed with gotvptop_interrupt_kill().
  */
-GOTV_API bool gotvptop_killed(void) GOTV_USED;
+NLC_API bool gotvptop_killed(void) GOTV_USED;
 
 /**
  * Enables forwarding of interruption.
@@ -214,7 +214,7 @@ GOTV_API bool gotvptop_killed(void) GOTV_USED;
  *
  * @param to context to forward to
  */
-GOTV_API void gotvptop_interrupt_forward_start(gotvptop_interrupt_t *to,
+NLC_API void gotvptop_interrupt_forward_start(gotvptop_interrupt_t *to,
                                          void *data[2]);
 
 /**
@@ -232,7 +232,7 @@ GOTV_API void gotvptop_interrupt_forward_start(gotvptop_interrupt_t *to,
  *
  * @return 0 if no interrupt was raised, EINTR if an interrupt was raised
  */
-GOTV_API int gotvptop_interrupt_forward_stop(void *const data[2]);
+NLC_API int gotvptop_interrupt_forward_stop(void *const data[2]);
 
 /** @} @} */
 #endif

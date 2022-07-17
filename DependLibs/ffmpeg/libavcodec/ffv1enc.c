@@ -237,7 +237,7 @@ static av_noinline void put_symbol(RangeCoder *c, uint8_t *state,
 }
 
 
-static GOTV_INLINE void put_vlc_symbol(PutBitContext *pb, VlcState *const state,
+static NLC_INLINE void put_vlc_symbol(PutBitContext *pb, VlcState *const state,
                                   int v, int bits)
 {
     int i, k, code;

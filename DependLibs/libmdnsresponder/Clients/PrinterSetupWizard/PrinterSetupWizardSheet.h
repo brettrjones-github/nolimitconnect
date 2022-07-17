@@ -317,28 +317,28 @@ CPropertyPage                   *   m_lastPage;
 };
 
 
-GOTV_INLINE Printer*
+NLC_INLINE Printer*
 CPrinterSetupWizardSheet::GetSelectedPrinter()
 {
     return m_selectedPrinter;
 }
 
 
-GOTV_INLINE HCURSOR
+NLC_INLINE HCURSOR
 CPrinterSetupWizardSheet::GetCursor()
 {
     return m_active;
 }
 
 
-GOTV_INLINE CPropertyPage*
+NLC_INLINE CPropertyPage*
 CPrinterSetupWizardSheet::GetLastPage()
 {
     return m_lastPage;
 }
 
 
-GOTV_INLINE void
+NLC_INLINE void
 CPrinterSetupWizardSheet::SetLastPage(CPropertyPage * lastPage)
 {
     m_lastPage = lastPage;

@@ -58,8 +58,8 @@
    pixel format switch within time critical loops. Instead we
    compile bit slicer functions for different pixel formats.
 
-   I would use GOTV_INLINE functions for proper type checking, but
-   there's no guarantee the compiler really will GOTV_INLINE. */
+   I would use NLC_INLINE functions for proper type checking, but
+   there's no guarantee the compiler really will NLC_INLINE. */
 
 /* Read a green sample, e.g. rrrrrggg gggbbbbb. endian is const. */
 #define GREEN2(raw, endian)						\

@@ -30,7 +30,7 @@
 #include <glib.h>
 #include <cairo.h>
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 typedef struct _RsvgGradientStop RsvgGradientStop;
 typedef struct _RsvgGradientStops RsvgGradientStops;
@@ -199,6 +199,6 @@ G_GNUC_INTERNAL
 void rsvg_radial_gradient_fix_fallback	(RsvgDrawingCtx * ctx,
                                          RsvgRadialGradient * grad);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

@@ -45,7 +45,7 @@ typedef struct Float11 {
     uint8_t mant;   /**< 6 bits mantissa */
 } Float11;
 
-static GOTV_INLINE Float11* i2f(int i, Float11* f)
+static NLC_INLINE Float11* i2f(int i, Float11* f)
 {
     f->sign = (i < 0);
     if (f->sign)
@@ -55,7 +55,7 @@ static GOTV_INLINE Float11* i2f(int i, Float11* f)
     return f;
 }
 
-static GOTV_INLINE int16_t mult(Float11* f1, Float11* f2)
+static NLC_INLINE int16_t mult(Float11* f1, Float11* f2)
 {
         int res, exp;
 
@@ -65,7 +65,7 @@ static GOTV_INLINE int16_t mult(Float11* f1, Float11* f2)
         return (f1->sign ^ f2->sign) ? -res : res;
 }
 
-static GOTV_INLINE int sgn(int value)
+static NLC_INLINE int sgn(int value)
 {
     return (value < 0) ? -1 : 1;
 }
@@ -157,7 +157,7 @@ static const G726Tables G726Tables_pool[] =
 /**
  * Paragraph 4.2.2 page 18: Adaptive quantizer.
  */
-static GOTV_INLINE uint8_t quant(G726Context* c, int d)
+static NLC_INLINE uint8_t quant(G726Context* c, int d)
 {
     int sign, exp, i, dln;
 
@@ -183,7 +183,7 @@ static GOTV_INLINE uint8_t quant(G726Context* c, int d)
 /**
  * Paragraph 4.2.3 page 22: Inverse adaptive quantizer.
  */
-static GOTV_INLINE int16_t inverse_quant(G726Context* c, int i)
+static NLC_INLINE int16_t inverse_quant(G726Context* c, int i)
 {
     int dql, dex, dqt;
 

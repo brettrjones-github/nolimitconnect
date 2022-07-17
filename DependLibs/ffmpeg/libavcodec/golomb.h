@@ -50,7 +50,7 @@ extern const uint8_t ff_interleaved_dirac_golomb_vlc_code[256];
 /**
  * Read an unsigned Exp-Golomb code in the range 0 to 8190.
  */
-static GOTV_INLINE int get_ue_golomb(GetBitContext *gb)
+static NLC_INLINE int get_ue_golomb(GetBitContext *gb)
 {
     unsigned int buf;
 
@@ -82,7 +82,7 @@ static GOTV_INLINE int get_ue_golomb(GetBitContext *gb)
 /**
  * Read an unsigned Exp-Golomb code in the range 0 to UINT32_MAX-1.
  */
-static GOTV_INLINE unsigned get_ue_golomb_long(GetBitContext *gb)
+static NLC_INLINE unsigned get_ue_golomb_long(GetBitContext *gb)
 {
     unsigned buf, log;
 
@@ -97,7 +97,7 @@ static GOTV_INLINE unsigned get_ue_golomb_long(GetBitContext *gb)
  * read unsigned exp golomb code, constraint to a max of 31.
  * the return value is undefined if the stored value exceeds 31.
  */
-static GOTV_INLINE int get_ue_golomb_31(GetBitContext *gb)
+static NLC_INLINE int get_ue_golomb_31(GetBitContext *gb)
 {
     unsigned int buf;
 
@@ -112,7 +112,7 @@ static GOTV_INLINE int get_ue_golomb_31(GetBitContext *gb)
     return ff_ue_golomb_vlc_code[buf];
 }
 
-static GOTV_INLINE unsigned get_interleaved_ue_golomb(GetBitContext *gb)
+static NLC_INLINE unsigned get_interleaved_ue_golomb(GetBitContext *gb)
 {
     uint32_t buf;
 
@@ -152,7 +152,7 @@ static GOTV_INLINE unsigned get_interleaved_ue_golomb(GetBitContext *gb)
 /**
  * read unsigned truncated exp golomb code.
  */
-static GOTV_INLINE int get_te0_golomb(GetBitContext *gb, int range)
+static NLC_INLINE int get_te0_golomb(GetBitContext *gb, int range)
 {
     av_assert2(range >= 1);
 
@@ -167,7 +167,7 @@ static GOTV_INLINE int get_te0_golomb(GetBitContext *gb, int range)
 /**
  * read unsigned truncated exp golomb code.
  */
-static GOTV_INLINE int get_te_golomb(GetBitContext *gb, int range)
+static NLC_INLINE int get_te_golomb(GetBitContext *gb, int range)
 {
     av_assert2(range >= 1);
 
@@ -180,7 +180,7 @@ static GOTV_INLINE int get_te_golomb(GetBitContext *gb, int range)
 /**
  * read signed exp golomb code.
  */
-static GOTV_INLINE int get_se_golomb(GetBitContext *gb)
+static NLC_INLINE int get_se_golomb(GetBitContext *gb)
 {
     unsigned int buf;
 
@@ -212,14 +212,14 @@ static GOTV_INLINE int get_se_golomb(GetBitContext *gb)
     }
 }
 
-static GOTV_INLINE int get_se_golomb_long(GetBitContext *gb)
+static NLC_INLINE int get_se_golomb_long(GetBitContext *gb)
 {
     unsigned int buf = get_ue_golomb_long(gb);
     int sign = (buf & 1) - 1;
     return ((buf >> 1) ^ sign) + 1;
 }
 
-static GOTV_INLINE int get_interleaved_se_golomb(GetBitContext *gb)
+static NLC_INLINE int get_interleaved_se_golomb(GetBitContext *gb)
 {
     unsigned int buf;
 
@@ -252,7 +252,7 @@ static GOTV_INLINE int get_interleaved_se_golomb(GetBitContext *gb)
     }
 }
 
-static GOTV_INLINE int dirac_get_se_golomb(GetBitContext *gb)
+static NLC_INLINE int dirac_get_se_golomb(GetBitContext *gb)
 {
     uint32_t ret = get_interleaved_ue_golomb(gb);
 
@@ -267,7 +267,7 @@ static GOTV_INLINE int dirac_get_se_golomb(GetBitContext *gb)
 /**
  * read unsigned golomb rice code (ffv1).
  */
-static GOTV_INLINE int get_ur_golomb(GetBitContext *gb, int k, int limit,
+static NLC_INLINE int get_ur_golomb(GetBitContext *gb, int k, int limit,
                                 int esc_len)
 {
     unsigned int buf;
@@ -302,7 +302,7 @@ static GOTV_INLINE int get_ur_golomb(GetBitContext *gb, int k, int limit,
 /**
  * read unsigned golomb rice code (jpegls).
  */
-static GOTV_INLINE int get_ur_golomb_jpegls(GetBitContext *gb, int k, int limit,
+static NLC_INLINE int get_ur_golomb_jpegls(GetBitContext *gb, int k, int limit,
                                        int esc_len)
 {
     unsigned int buf;
@@ -369,7 +369,7 @@ static GOTV_INLINE int get_ur_golomb_jpegls(GetBitContext *gb, int k, int limit,
 /**
  * read signed golomb rice code (ffv1).
  */
-static GOTV_INLINE int get_sr_golomb(GetBitContext *gb, int k, int limit,
+static NLC_INLINE int get_sr_golomb(GetBitContext *gb, int k, int limit,
                                 int esc_len)
 {
     unsigned v = get_ur_golomb(gb, k, limit, esc_len);
@@ -379,7 +379,7 @@ static GOTV_INLINE int get_sr_golomb(GetBitContext *gb, int k, int limit,
 /**
  * read signed golomb rice code (flac).
  */
-static GOTV_INLINE int get_sr_golomb_flac(GetBitContext *gb, int k, int limit,
+static NLC_INLINE int get_sr_golomb_flac(GetBitContext *gb, int k, int limit,
                                      int esc_len)
 {
     unsigned v = get_ur_golomb_jpegls(gb, k, limit, esc_len);
@@ -389,7 +389,7 @@ static GOTV_INLINE int get_sr_golomb_flac(GetBitContext *gb, int k, int limit,
 /**
  * read unsigned golomb rice code (shorten).
  */
-static GOTV_INLINE unsigned int get_ur_golomb_shorten(GetBitContext *gb, int k)
+static NLC_INLINE unsigned int get_ur_golomb_shorten(GetBitContext *gb, int k)
 {
     return get_ur_golomb_jpegls(gb, k, INT_MAX, 0);
 }
@@ -397,7 +397,7 @@ static GOTV_INLINE unsigned int get_ur_golomb_shorten(GetBitContext *gb, int k)
 /**
  * read signed golomb rice code (shorten).
  */
-static GOTV_INLINE int get_sr_golomb_shorten(GetBitContext *gb, int k)
+static NLC_INLINE int get_sr_golomb_shorten(GetBitContext *gb, int k)
 {
     int uvar = get_ur_golomb_jpegls(gb, k + 1, INT_MAX, 0);
     return (uvar >> 1) ^ -(uvar & 1);
@@ -405,7 +405,7 @@ static GOTV_INLINE int get_sr_golomb_shorten(GetBitContext *gb, int k)
 
 #ifdef TRACE
 
-static GOTV_INLINE int get_ue(GetBitContext *s, const char *file, const char *func,
+static NLC_INLINE int get_ue(GetBitContext *s, const char *file, const char *func,
                          int line)
 {
     int show = show_bits(s, 24);
@@ -420,7 +420,7 @@ static GOTV_INLINE int get_ue(GetBitContext *s, const char *file, const char *fu
     return i;
 }
 
-static GOTV_INLINE int get_se(GetBitContext *s, const char *file, const char *func,
+static NLC_INLINE int get_se(GetBitContext *s, const char *file, const char *func,
                          int line)
 {
     int show = show_bits(s, 24);
@@ -435,7 +435,7 @@ static GOTV_INLINE int get_se(GetBitContext *s, const char *file, const char *fu
     return i;
 }
 
-static GOTV_INLINE int get_te(GetBitContext *s, int r, char *file, const char *func,
+static NLC_INLINE int get_te(GetBitContext *s, int r, char *file, const char *func,
                          int line)
 {
     int show = show_bits(s, 24);
@@ -460,7 +460,7 @@ static GOTV_INLINE int get_te(GetBitContext *s, int r, char *file, const char *f
 /**
  * write unsigned exp golomb code. 2^16 - 2 at most
  */
-static GOTV_INLINE void set_ue_golomb(PutBitContext *pb, int i)
+static NLC_INLINE void set_ue_golomb(PutBitContext *pb, int i)
 {
     av_assert2(i >= 0);
     av_assert2(i <= 0xFFFE);
@@ -491,7 +491,7 @@ static inline void set_ue_golomb_long(PutBitContext *pb, uint32_t i)
 /**
  * write truncated unsigned exp golomb code.
  */
-static GOTV_INLINE void set_te_golomb(PutBitContext *pb, int i, int range)
+static NLC_INLINE void set_te_golomb(PutBitContext *pb, int i, int range)
 {
     av_assert2(range >= 1);
     av_assert2(i <= range);
@@ -505,7 +505,7 @@ static GOTV_INLINE void set_te_golomb(PutBitContext *pb, int i, int range)
 /**
  * write signed exp golomb code. 16 bits at most.
  */
-static GOTV_INLINE void set_se_golomb(PutBitContext *pb, int i)
+static NLC_INLINE void set_se_golomb(PutBitContext *pb, int i)
 {
     i = 2 * i - 1;
     if (i < 0)
@@ -516,7 +516,7 @@ static GOTV_INLINE void set_se_golomb(PutBitContext *pb, int i)
 /**
  * write unsigned golomb rice code (ffv1).
  */
-static GOTV_INLINE void set_ur_golomb(PutBitContext *pb, int i, int k, int limit,
+static NLC_INLINE void set_ur_golomb(PutBitContext *pb, int i, int k, int limit,
                                  int esc_len)
 {
     int e;
@@ -533,7 +533,7 @@ static GOTV_INLINE void set_ur_golomb(PutBitContext *pb, int i, int k, int limit
 /**
  * write unsigned golomb rice code (jpegls).
  */
-static GOTV_INLINE void set_ur_golomb_jpegls(PutBitContext *pb, int i, int k,
+static NLC_INLINE void set_ur_golomb_jpegls(PutBitContext *pb, int i, int k,
                                         int limit, int esc_len)
 {
     int e;
@@ -562,7 +562,7 @@ static GOTV_INLINE void set_ur_golomb_jpegls(PutBitContext *pb, int i, int k,
 /**
  * write signed golomb rice code (ffv1).
  */
-static GOTV_INLINE void set_sr_golomb(PutBitContext *pb, int i, int k, int limit,
+static NLC_INLINE void set_sr_golomb(PutBitContext *pb, int i, int k, int limit,
                                  int esc_len)
 {
     int v;
@@ -576,7 +576,7 @@ static GOTV_INLINE void set_sr_golomb(PutBitContext *pb, int i, int k, int limit
 /**
  * write signed golomb rice code (flac).
  */
-static GOTV_INLINE void set_sr_golomb_flac(PutBitContext *pb, int i, int k,
+static NLC_INLINE void set_sr_golomb_flac(PutBitContext *pb, int i, int k,
                                       int limit, int esc_len)
 {
     int v;

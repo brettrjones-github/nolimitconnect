@@ -200,31 +200,31 @@ sha384_init (void *context, unsigned int flags)
 }
 
 
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 ROTR (uint64_t x, uint64_t n)
 {
   return ((x >> n) | (x << (64 - n)));
 }
 
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 Ch (uint64_t x, uint64_t y, uint64_t z)
 {
   return ((x & y) ^ ( ~x & z));
 }
 
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 Maj (uint64_t x, uint64_t y, uint64_t z)
 {
   return ((x & y) ^ (x & z) ^ (y & z));
 }
 
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 Sum0 (uint64_t x)
 {
   return (ROTR (x, 28) ^ ROTR (x, 34) ^ ROTR (x, 39));
 }
 
-static GOTV_INLINE uint64_t
+static NLC_INLINE uint64_t
 Sum1 (uint64_t x)
 {
   return (ROTR (x, 14) ^ ROTR (x, 18) ^ ROTR (x, 41));
@@ -311,7 +311,7 @@ __transform (SHA512_STATE *hd, const unsigned char *data)
 
          Not unrolled with macros:  440ms
          Unrolled with macros:      350ms
-         Unrolled with GOTV_INLINE:      330ms
+         Unrolled with NLC_INLINE:      330ms
       */
 #if 0 /* Not unrolled.  */
       t1 = h + Sum1 (e) + Ch (e, f, g) + k[t] + w[t%16];

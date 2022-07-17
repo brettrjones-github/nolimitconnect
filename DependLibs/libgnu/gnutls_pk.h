@@ -38,7 +38,7 @@ extern gnutls_crypto_pk_st _gnutls_pk_ops;
 #define _gnutls_pk_hash_algorithm( pk, sig, params, hash) _gnutls_pk_ops.hash_algorithm(pk, sig, params, hash)
 #define _gnutls_pk_curve_exists( curve) _gnutls_pk_ops.curve_exists(curve)
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_pk_fixup(gnutls_pk_algorithm_t algo, gnutls_direction_t direction,
 		 gnutls_pk_params_st * params)
 {

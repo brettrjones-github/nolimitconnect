@@ -30,7 +30,7 @@
 #include "cr-parsing-location.h"
 #include "cr-string.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 struct _CRAttrSel ;
@@ -69,6 +69,6 @@ void cr_attr_sel_dump (CRAttrSel *a_this, FILE *a_fp) ;
 
 void cr_attr_sel_destroy (CRAttrSel *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_ATTR_SEL_H__*/

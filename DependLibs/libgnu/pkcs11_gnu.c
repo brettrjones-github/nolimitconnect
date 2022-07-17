@@ -3939,7 +3939,7 @@ int gnutls_pkcs11_get_raw_issuer_by_subject_key_id (const char *url,
  * a trust PKCS #11 module.
  *
  * This function can be used with a @url of "pkcs11:", and in that case all modules
- * will be searched. To GOTV_RESTRICT the modules to the marked as trusted in p11-kit
+ * will be searched. To NLC_RESTRICT the modules to the marked as trusted in p11-kit
  * use the %GNUTLS_PKCS11_OBJ_FLAG_PRESENT_IN_TRUSTED_MODULE flag.
  *
  * Note that the flag %GNUTLS_PKCS11_OBJ_FLAG_RETRIEVE_DISTRUSTED is

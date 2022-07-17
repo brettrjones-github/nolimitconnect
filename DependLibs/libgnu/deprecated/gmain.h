@@ -33,7 +33,7 @@
 
 #include <libgnu/gmain.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* ============== Compat main loop stuff ================== */
 
@@ -133,6 +133,6 @@ GOTV_BEGIN_CDECLARES
 #define g_main_set_poll_func(func)  g_main_context_set_poll_func (NULL, func)
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_DEPRECATED_MAIN_H__ */

@@ -199,7 +199,7 @@ sse_t sse(const T1* pix1, intptr_t stride_pix1, const T2* pix2, intptr_t stride_
 
 // in: a pseudo-simd number of the form x+(y<<16)
 // return: abs(x)+(abs(y)<<16)
-GOTV_INLINE sum2_t abs2(sum2_t a)
+NLC_INLINE sum2_t abs2(sum2_t a)
 {
     sum2_t s = ((a >> (BITS_PER_SUM - 1)) & (((sum2_t)1 << BITS_PER_SUM) + 1)) * ((sum_t)-1);
 
@@ -287,7 +287,7 @@ int satd8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t s
     return satd;
 }
 
-GOTV_INLINE int _sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+NLC_INLINE int _sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
     sum2_t tmp[8][4];
     sum2_t a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3;
@@ -324,7 +324,7 @@ GOTV_INLINE int _sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2,
     return (int)sum;
 }
 
-GOTV_INLINE int sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+NLC_INLINE int sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
     return (int)((_sa8d_8x8(pix1, i_pix1, pix2, i_pix2) + 2) >> 2);
 }

@@ -134,7 +134,7 @@ static inline int vc1_get_TTFRM(const VC1Context *v)
 }
 
 /** Pack FFmpeg bitplanes into a VABitPlaneBuffer element */
-static GOTV_INLINE void vc1_pack_bitplanes(uint8_t *bitplane, int n, const uint8_t *ff_bp[3], int x, int y, int stride)
+static NLC_INLINE void vc1_pack_bitplanes(uint8_t *bitplane, int n, const uint8_t *ff_bp[3], int x, int y, int stride)
 {
     const int bitplane_index = n / 2;
     const int ff_bp_index = y * stride + x;

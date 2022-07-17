@@ -21,7 +21,7 @@
 
 #include <stdint.h>
 
-static GOTV_INLINE int dv_get_audio_sample_count(const uint8_t *buffer, int dsf)
+static NLC_INLINE int dv_get_audio_sample_count(const uint8_t *buffer, int dsf)
 {
     int samples = buffer[0] & 0x3f; /* samples in this frame - min samples */
 

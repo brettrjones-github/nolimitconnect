@@ -31,7 +31,7 @@
 #include "rsvg-private.h"
 #include <cairo.h>
 
-GOTV_BEGIN_CDECLARES typedef struct _RsvgCairoRender RsvgCairoRender;
+NLC_BEGIN_CDECLARES typedef struct _RsvgCairoRender RsvgCairoRender;
 
 struct _RsvgCairoRender {
     RsvgRender super;
@@ -59,6 +59,6 @@ void		rsvg_cairo_render_rsvg_handle	(cairo_t * cr, RsvgHandle * handle);
 G_GNUC_INTERNAL
 RsvgDrawingCtx *rsvg_cairo_new_drawing_ctx	(cairo_t * cr, RsvgHandle * handle);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

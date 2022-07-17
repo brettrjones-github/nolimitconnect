@@ -33,7 +33,7 @@
  *@file
  *The declaration of the #CRStyle class.
  */
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _CRStyle CRStyle ;
 
@@ -334,6 +334,6 @@ enum CRStatus cr_style_to_string (CRStyle *a_this,
                                   GString **a_str, 
                                   guint a_nb_indent) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_STYLE_H__*/

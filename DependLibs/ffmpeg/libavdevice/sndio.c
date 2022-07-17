@@ -29,7 +29,7 @@
 
 #include "libavdevice/sndio.h"
 
-static GOTV_INLINE void movecb(void *addr, int delta)
+static NLC_INLINE void movecb(void *addr, int delta)
 {
     SndioData *s = addr;
 

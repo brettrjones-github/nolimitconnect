@@ -36,39 +36,39 @@ typedef void (*gotvptop_deactivate_t)(void *func, va_list args);
  * Exported functions.
  *****************************************************************************/
 
-GOTV_API module_t * libgotvptop_gotvptop_module_load( gotvptop_object_t *obj, const char *cap, const char *name, bool strict, gotvptop_activate_t probe, ... ) GOTV_USED;
+NLC_API module_t * libgotvptop_gotvptop_module_load( gotvptop_object_t *obj, const char *cap, const char *name, bool strict, gotvptop_activate_t probe, ... ) GOTV_USED;
 #define gotvptop_module_load(o,c,n,s,...) \
         libgotvptop_gotvptop_module_load(GOTV_OBJECT(o),c,n,s,__VA_ARGS__)
-GOTV_API void libgotvptop_gotvptop_module_unload( gotvptop_object_t *obj, module_t *, gotvptop_deactivate_t deinit, ... );
+NLC_API void libgotvptop_gotvptop_module_unload( gotvptop_object_t *obj, module_t *, gotvptop_deactivate_t deinit, ... );
 #define gotvptop_module_unload(o,m,d,...) \
         libgotvptop_gotvptop_module_unload(GOTV_OBJECT(o),m,d,__VA_ARGS__)
 
-GOTV_API module_t * libgotvptop_module_need( gotvptop_object_t *, const char *, const char *, bool ) GOTV_USED;
+NLC_API module_t * libgotvptop_module_need( gotvptop_object_t *, const char *, const char *, bool ) GOTV_USED;
 #define gotvptop_module_need(a,b,c,d) libgotvptop_module_need(GOTV_OBJECT(a),b,c,d)
-GOTV_API void libgotvptop_module_unneed( gotvptop_object_t *, module_t * );
+NLC_API void libgotvptop_module_unneed( gotvptop_object_t *, module_t * );
 #define module_unneed(a,b) libgotvptop_module_unneed(GOTV_OBJECT(a),b)
-GOTV_API bool module_exists(const char *) GOTV_USED;
-GOTV_API module_t * module_find(const char *) GOTV_USED;
+NLC_API bool module_exists(const char *) GOTV_USED;
+NLC_API module_t * module_find(const char *) GOTV_USED;
 
 int libgotvptop_module_start(gotvptop_object_t *, const module_t *);
 #define module_start(o, m) libgotvptop_module_start(GOTV_OBJECT(o),m)
 void libgotvptop_module_stop(gotvptop_object_t *, const module_t *);
 #define module_stop(o, m) libgotvptop_module_stop(GOTV_OBJECT(o),m)
 
-GOTV_API module_config_t * module_config_get( const module_t *, unsigned * ) GOTV_USED;
-GOTV_API void module_config_free( module_config_t * );
+NLC_API module_config_t * module_config_get( const module_t *, unsigned * ) GOTV_USED;
+NLC_API void module_config_free( module_config_t * );
 
-GOTV_API void module_list_free(module_t **);
-GOTV_API module_t ** module_list_get(size_t *n) GOTV_USED;
+NLC_API void module_list_free(module_t **);
+NLC_API module_t ** module_list_get(size_t *n) GOTV_USED;
 
-GOTV_API bool module_provides( const module_t *m, const char *cap );
-GOTV_API const char * module_get_object( const module_t *m ) GOTV_USED;
-GOTV_API const char * module_get_name( const module_t *m, bool long_name ) GOTV_USED;
+NLC_API bool module_provides( const module_t *m, const char *cap );
+NLC_API const char * module_get_object( const module_t *m ) GOTV_USED;
+NLC_API const char * module_get_name( const module_t *m, bool long_name ) GOTV_USED;
 #define module_GetLongName( m ) module_get_name( m, true )
-GOTV_API const char * module_get_help( const module_t *m ) GOTV_USED;
-GOTV_API const char * module_get_capability( const module_t *m ) GOTV_USED;
-GOTV_API int module_get_score( const module_t *m ) GOTV_USED;
-GOTV_API const char * module_gettext( const module_t *, const char * ) GOTV_USED;
+NLC_API const char * module_get_help( const module_t *m ) GOTV_USED;
+NLC_API const char * module_get_capability( const module_t *m ) GOTV_USED;
+NLC_API int module_get_score( const module_t *m ) GOTV_USED;
+NLC_API const char * module_gettext( const module_t *, const char * ) GOTV_USED;
 
 GOTV_USED static inline module_t *module_get_main (void)
 {

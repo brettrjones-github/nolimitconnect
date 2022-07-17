@@ -333,7 +333,7 @@ void WelsDecoderDefaults (PWelsDecoderContext pCtx, SLogContext* pLogCtx) {
 /*
  *  get size of reference picture list in target layer incoming, = (iNumRefFrames
  */
-static GOTV_INLINE int32_t GetTargetRefListSize (PWelsDecoderContext pCtx) {
+static NLC_INLINE int32_t GetTargetRefListSize (PWelsDecoderContext pCtx) {
   int32_t iNumRefFrames = 0;
   // +2 for EC MV Copy buffer exchange
   if ((pCtx == NULL) || (pCtx->pSps == NULL)) {

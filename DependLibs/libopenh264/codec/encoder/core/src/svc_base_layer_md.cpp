@@ -961,7 +961,7 @@ void WelsMdIntraMb (sWelsEncCtx* pEncCtx, SWelsMD* pWelsMd, SMB* pCurMb, SMbCach
   WelsMdIntraSecondaryModesEnc (pEncCtx, pWelsMd, pCurMb, pMbCache);
 }
 
-static GOTV_INLINE void InitMe (const SWelsMD& sWelsMd, const int32_t iBlockSize, uint8_t* pEnc, uint8_t* pRef,
+static NLC_INLINE void InitMe (const SWelsMD& sWelsMd, const int32_t iBlockSize, uint8_t* pEnc, uint8_t* pRef,
                            SScreenBlockFeatureStorage* pRefFeatureStorage,
                            SWelsME& sWelsMe) {
   sWelsMe.iCurMeBlockPixX = sWelsMd.iMbPixX;
@@ -1338,7 +1338,7 @@ void WelsMdInterFinePartitionVaa (sWelsEncCtx* pEncCtx, SWelsMD* pWelsMd, SSlice
 }
 
 
-GOTV_INLINE void VaaBackgroundMbDataUpdate (SWelsFuncPtrList* pFunc, SVAAFrameInfo* pVaaInfo, SMB* pCurMb) {
+NLC_INLINE void VaaBackgroundMbDataUpdate (SWelsFuncPtrList* pFunc, SVAAFrameInfo* pVaaInfo, SMB* pCurMb) {
   const int32_t kiPicStride     = pVaaInfo->iPicStride;
   const int32_t kiPicStrideUV   = pVaaInfo->iPicStrideUV;
   const int32_t kiOffsetY       = (pCurMb->iMbY * kiPicStride + pCurMb->iMbX) << 4;

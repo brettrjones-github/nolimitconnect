@@ -26,7 +26,7 @@
 #ifndef GOTV_CPU_H
 # define GOTV_CPU_H 1
 
-GOTV_API unsigned gotvptop_CPU(void);
+NLC_API unsigned gotvptop_CPU(void);
 
 # if defined (__i386__) || defined (__x86_64__)
 #  define HAVE_FPU 1

@@ -132,7 +132,7 @@
  * with a character and tests to see if the character has one or more of those
  * properties.
  */
-static GOTV_INLINE int
+static NLC_INLINE int
 #ifdef __STDC__
 _ure_matches_properties(unsigned long props, ucs4_t c)
 #else

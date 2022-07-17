@@ -588,7 +588,7 @@ static int load_textfile(AVFilterContext *ctx)
     return 0;
 }
 
-static GOTV_INLINE int is_newline(uint32_t c)
+static NLC_INLINE int is_newline(uint32_t c)
 {
     return c == '\n' || c == '\r' || c == '\f' || c == '\v';
 }

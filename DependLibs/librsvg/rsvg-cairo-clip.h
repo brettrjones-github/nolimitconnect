@@ -32,11 +32,11 @@
 #include "rsvg-cairo-render.h"
 #include <cairo.h>
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 void rsvg_cairo_clip (RsvgDrawingCtx * ctx, RsvgClipPath * clip, RsvgBbox * bbox);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif

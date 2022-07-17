@@ -59,11 +59,11 @@ VBI_BEGIN_DECLS
 #if __GNUC__ >= 2
 #  define _vbi_unused __attribute__ ((__unused__))
 #  define _vbi_const __attribute__ ((__const__))
-//#  define GOTV_INLINE static GOTV_INLINE
+//#  define NLC_INLINE static NLC_INLINE
 #else
 #  define _vbi_unused
 #  define _vbi_const
-//#  define GOTV_INLINE static
+//#  define NLC_INLINE static
 #endif
 
 /**

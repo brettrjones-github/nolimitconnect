@@ -90,7 +90,7 @@ static int tqi_decode_mb(TqiContext *t, int16_t (*block)[64])
     return 0;
 }
 
-static GOTV_INLINE void tqi_idct_put(AVCodecContext *avctx, AVFrame *frame,
+static NLC_INLINE void tqi_idct_put(AVCodecContext *avctx, AVFrame *frame,
                                 int16_t (*block)[64])
 {
     TqiContext *t = avctx->priv_data;

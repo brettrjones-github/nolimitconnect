@@ -525,7 +525,7 @@ typedef struct TagQuarParams {
 }
 #define CALC_COST(me_buf, lm) ( pFunc->sSampleDealingFuncs.pfMeCost[kuiPixel](pEncMb, iStrideEnc, me_buf, ME_REFINE_BUF_STRIDE) + lm )
 
-GOTV_INLINE void MeRefineQuarPixel (SWelsFuncPtrList* pFunc, SWelsME* pMe, SMeRefinePointer* pMeRefine,
+NLC_INLINE void MeRefineQuarPixel (SWelsFuncPtrList* pFunc, SWelsME* pMe, SMeRefinePointer* pMeRefine,
                                const int32_t kiWidth, const int32_t kiHeight, SQuarRefineParams* pParams, int32_t iStrideEnc) {
   PWelsSampleAveragingFunc pSampleAvg   = pFunc->sMcFuncs.pfSampleAveraging;
   int32_t iCurCost;

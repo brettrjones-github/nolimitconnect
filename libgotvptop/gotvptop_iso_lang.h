@@ -38,9 +38,9 @@ struct iso639_lang_t
 #if defined( __cplusplus )
 extern "C" {
 #endif
-GOTV_API const iso639_lang_t * GetLang_1( const char * );
-GOTV_API const iso639_lang_t * GetLang_2T( const char * );
-GOTV_API const iso639_lang_t * GetLang_2B( const char * );
+NLC_API const iso639_lang_t * GetLang_1( const char * );
+NLC_API const iso639_lang_t * GetLang_2T( const char * );
+NLC_API const iso639_lang_t * GetLang_2B( const char * );
 #if defined( __cplusplus )
 }
 #endif

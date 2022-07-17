@@ -274,7 +274,7 @@ static int jpg_decode_block(JPGContext *c, GetBitContext *gb,
     return 0;
 }
 
-static GOTV_INLINE void yuv2rgb(uint8_t *out, int ridx, int Y, int U, int V)
+static NLC_INLINE void yuv2rgb(uint8_t *out, int ridx, int Y, int U, int V)
 {
     out[ridx]     = av_clip_uint8(Y +              (91881 * V + 32768 >> 16));
     out[1]        = av_clip_uint8(Y + (-22554 * U - 46802 * V + 32768 >> 16));
@@ -462,7 +462,7 @@ static int epic_add_pixel_to_cache(ePICPixHash *hash, uint32_t key, uint32_t pix
     return 0;
 }
 
-static GOTV_INLINE int epic_cache_entries_for_pixel(const ePICPixHash *hash,
+static NLC_INLINE int epic_cache_entries_for_pixel(const ePICPixHash *hash,
                                                uint32_t pix)
 {
     ePICPixHashElem *hash_elem = epic_hash_find(hash, pix);
@@ -492,7 +492,7 @@ static void epic_free_pixel_cache(ePICPixHash *hash)
     }
 }
 
-static GOTV_INLINE int is_pixel_on_stack(const ePICContext *dc, uint32_t pix)
+static NLC_INLINE int is_pixel_on_stack(const ePICContext *dc, uint32_t pix)
 {
     int i;
 
@@ -505,7 +505,7 @@ static GOTV_INLINE int is_pixel_on_stack(const ePICContext *dc, uint32_t pix)
 
 #define TOSIGNED(val) (((val) >> 1) ^ -((val) & 1))
 
-static GOTV_INLINE int epic_decode_component_pred(ePICContext *dc,
+static NLC_INLINE int epic_decode_component_pred(ePICContext *dc,
                                              int N, int W, int NW)
 {
     unsigned delta = ff_els_decode_unsigned(&dc->els_ctx, &dc->unsigned_rung);

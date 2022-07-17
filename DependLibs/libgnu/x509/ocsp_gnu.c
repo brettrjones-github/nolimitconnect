@@ -2000,7 +2000,7 @@ _ocsp_resp_verify_direct(gnutls_ocsp_resp_t resp,
 	return rc;
 }
 
-static GOTV_INLINE unsigned int vstatus_to_ocsp_status(unsigned int status)
+static NLC_INLINE unsigned int vstatus_to_ocsp_status(unsigned int status)
 {
 	unsigned int ostatus;
 

@@ -36,7 +36,7 @@
 #define FIXED_ARM5E_H
 
 #undef MULT16_16
-static GOTV_INLINE spx_word32_t MULT16_16(spx_word16_t x, spx_word16_t y) {
+static NLC_INLINE spx_word32_t MULT16_16(spx_word16_t x, spx_word16_t y) {
   int res;
   asm ("smulbb  %0,%1,%2;\n"
               : "=&r"(res)
@@ -45,7 +45,7 @@ static GOTV_INLINE spx_word32_t MULT16_16(spx_word16_t x, spx_word16_t y) {
 }
 
 #undef MAC16_16
-static GOTV_INLINE spx_word32_t MAC16_16(spx_word32_t a, spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MAC16_16(spx_word32_t a, spx_word16_t x, spx_word32_t y) {
   int res;
   asm ("smlabb  %0,%1,%2,%3;\n"
               : "=&r"(res)
@@ -54,7 +54,7 @@ static GOTV_INLINE spx_word32_t MAC16_16(spx_word32_t a, spx_word16_t x, spx_wor
 }
 
 #undef MULT16_32_Q15
-static GOTV_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
   int res;
   asm ("smulwb  %0,%1,%2;\n"
               : "=&r"(res)
@@ -63,7 +63,7 @@ static GOTV_INLINE spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
 }
 
 #undef MAC16_32_Q15
-static GOTV_INLINE spx_word32_t MAC16_32_Q15(spx_word32_t a, spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MAC16_32_Q15(spx_word32_t a, spx_word16_t x, spx_word32_t y) {
   int res;
   asm ("smlawb  %0,%1,%2,%3;\n"
               : "=&r"(res)
@@ -72,7 +72,7 @@ static GOTV_INLINE spx_word32_t MAC16_32_Q15(spx_word32_t a, spx_word16_t x, spx
 }
 
 #undef MULT16_32_Q11
-static GOTV_INLINE spx_word32_t MULT16_32_Q11(spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MULT16_32_Q11(spx_word16_t x, spx_word32_t y) {
   int res;
   asm ("smulwb  %0,%1,%2;\n"
               : "=&r"(res)
@@ -81,7 +81,7 @@ static GOTV_INLINE spx_word32_t MULT16_32_Q11(spx_word16_t x, spx_word32_t y) {
 }
 
 #undef MAC16_32_Q11
-static GOTV_INLINE spx_word32_t MAC16_32_Q11(spx_word32_t a, spx_word16_t x, spx_word32_t y) {
+static NLC_INLINE spx_word32_t MAC16_32_Q11(spx_word32_t a, spx_word16_t x, spx_word32_t y) {
   int res;
   asm ("smlawb  %0,%1,%2,%3;\n"
               : "=&r"(res)
@@ -90,7 +90,7 @@ static GOTV_INLINE spx_word32_t MAC16_32_Q11(spx_word32_t a, spx_word16_t x, spx
 }
 
 #undef DIV32_16
-static GOTV_INLINE short DIV32_16(int a, int b)
+static NLC_INLINE short DIV32_16(int a, int b)
 {
    int res=0;
    int dead1, dead2, dead3, dead4, dead5;

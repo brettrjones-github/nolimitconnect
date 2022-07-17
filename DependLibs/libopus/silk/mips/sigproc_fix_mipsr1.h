@@ -34,7 +34,7 @@ extern "C"
 #endif
 
 #undef silk_SAT16
-static GOTV_INLINE short int silk_SAT16(int a)
+static NLC_INLINE short int silk_SAT16(int a)
 {
     int c;
     c = __builtin_mips_shll_s_w(a, 16);
@@ -44,7 +44,7 @@ static GOTV_INLINE short int silk_SAT16(int a)
 }
 
 #undef silk_LSHIFT_SAT32
-static GOTV_INLINE int silk_LSHIFT_SAT32(int a, int shift)
+static NLC_INLINE int silk_LSHIFT_SAT32(int a, int shift)
 {
     int r;
 
@@ -54,7 +54,7 @@ static GOTV_INLINE int silk_LSHIFT_SAT32(int a, int shift)
 }
 
 #undef silk_RSHIFT_ROUND
-static GOTV_INLINE int silk_RSHIFT_ROUND(int a, int shift)
+static NLC_INLINE int silk_RSHIFT_ROUND(int a, int shift)
 {
     int r;
 

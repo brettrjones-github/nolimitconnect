@@ -142,7 +142,7 @@
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static const char *
@@ -161,7 +161,7 @@ pgettext_aux (const char *domain,
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static const char *
@@ -244,7 +244,7 @@ dcpgettext_expr (const char *domain,
 __inline
 #else
 #ifdef __cplusplus
-GOTV_INLINE
+NLC_INLINE
 #endif
 #endif
 static const char *

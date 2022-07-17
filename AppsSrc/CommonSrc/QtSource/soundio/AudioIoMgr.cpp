@@ -14,6 +14,8 @@
 
 #include "AudioIoMgr.h"
 #include "AudioUtils.h"
+#include "AppCommon.h"
+#include "AppSettings.h"
 
 #include <QSurface>
 #include <qmath.h>
@@ -22,8 +24,9 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
+AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget * parent )
 : QWidget( parent )
+, m_MyApp( app )
 , m_MediaDevices( new QMediaDevices( this ) )
 , m_AudioCallbacks( audioCallbacks )
 , m_AudioOutMixer( *this, audioCallbacks, this )
@@ -59,6 +62,12 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
         m_MicrophoneAvailable = false;
         LogMsg( LOG_DEBUG, "No Microphone available" );
     }
+}
+
+//============================================================================
+P2PEngine& AudioIoMgr::getEngine( void )
+{
+    return m_MyApp.getEngine();
 }
 
 //============================================================================
@@ -170,7 +179,6 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000,
 #endif // ENABLE_KODI
 
 //============================================================================
-// add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
 int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
     if( isSilence )
@@ -179,77 +187,8 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
         return pcmDataLenInBytes;
     }
 
-    // it seems Qt does not handle anything but pcm 16 bit signed samples correctly so convert to what Qt can handle
-    int wroteByteCnt = 0;
- 
-    // convert 8000hz mono to 48000hz 2 channel
-    float upResampleMultiplier = 48000 / 8000;
-    upResampleMultiplier *= 2; // 2 channels
-    int iDestIdx = 0;
- 
-    int outBufSize = (int)( pcmDataLenInBytes * upResampleMultiplier );
-    unsigned char * outAudioData = new unsigned char[ outBufSize ];
-    if( isSilence )
-    {
-        memset( outAudioData, 0, outBufSize );
-        m_MyLastAudioOutSample[ appModule ] = 0;
-        wroteByteCnt = m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
-        delete[] outAudioData;
-    }
-    else
-    {
-        int mySampleCnt = pcmDataLenInBytes >> 1;
-        int16_t * srcSamples = pu16PcmData;
-        int16_t * destSamples = (int16_t *)outAudioData;
-        int16_t firstSample = m_MyLastAudioOutSample[ appModule ];
-        int16_t secondSample = firstSample;
-        float sampleStep;
-        for( int i = 0; i < mySampleCnt; i++ )
-        {
-            firstSample = secondSample;
-            secondSample = srcSamples[ i ];
-            if( secondSample >= firstSample )
-            {
-                // ramp up
-                sampleStep = ( ( secondSample - firstSample ) / upResampleMultiplier );
-            }
-            else
-            {
-                // ramp down
-                sampleStep = -( ( firstSample - secondSample ) / upResampleMultiplier );
-            }
-
-            if( 0 == sampleStep )
-            {
-                for( int j = 0; j < upResampleMultiplier; ++j )
-                {
-                    destSamples[ iDestIdx ] = firstSample;
-                    iDestIdx++;
-                }
-            }
-            else
-            {
-                float sampleOffs = sampleStep;
-                int resampleCnt = (int)upResampleMultiplier;
-                for( int j = 0; j < resampleCnt; ++j )
-                {
-                    destSamples[ iDestIdx ] = (int16_t)( firstSample + sampleOffs );
-                    iDestIdx++;
-                    sampleOffs += sampleStep;
-                }
-            }
-
-            // save the last sample to be used as first sample reference in next frame
-            m_MyLastAudioOutSample[ appModule ] = srcSamples[ mySampleCnt - 1 ];
-        }
-
-        wroteByteCnt = m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, (int16_t *)outAudioData, outBufSize, isSilence );
-        delete[] outAudioData;
-    }
-
-    wroteByteCnt = (int)( wroteByteCnt / upResampleMultiplier );
-    return wroteByteCnt;
-}
+    return m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
+ }
 
 //============================================================================
 void AudioIoMgr::initAudioIoSystem()
@@ -469,4 +408,78 @@ int AudioIoMgr::getAudioInPeakAmplitude( void )
 int AudioIoMgr::getAudioOutPeakAmplitude( void )
 {
     return m_AudioOutMixer.getAudioOutPeakAmplitude();
+}
+
+//============================================================================
+bool AudioIoMgr::setSoundInDeviceIndex( int sndInDeviceIndex )
+{
+    bool wasSet = false;
+
+    m_MyApp.getAppSettings().setSoundInDeviceIndex( sndInDeviceIndex );
+    return wasSet;
+}
+
+//============================================================================
+bool AudioIoMgr::getSoundInDeviceIndex( int& retDeviceIndex )
+{
+    retDeviceIndex = m_MyApp.getAppSettings().getSoundInDeviceIndex();
+    return true;
+}
+
+//============================================================================
+bool AudioIoMgr::setSoundOutDeviceIndex( int sndOutDeviceIndex )
+{
+    bool wasSet = false;
+
+    m_MyApp.getAppSettings().setSoundOutDeviceIndex( sndOutDeviceIndex );
+    return wasSet;
+}
+
+//============================================================================
+bool AudioIoMgr::getSoundOutDeviceIndex( int& retDeviceIndex )
+{
+    retDeviceIndex = m_MyApp.getAppSettings().getSoundOutDeviceIndex();
+    return true;
+}
+
+//============================================================================
+void AudioIoMgr::getSoundInDevices( std::vector< std::pair<QString, QAudioDevice> >& retInDeviceList )
+{
+    retInDeviceList.clear();
+    const QAudioDevice& defaultInDeviceInfo = m_MediaDevices->defaultAudioInput();
+    retInDeviceList.push_back( std::make_pair( defaultInDeviceInfo.description(), defaultInDeviceInfo ) );
+    for( auto& deviceInfo : m_MediaDevices->audioInputs() )
+    {
+        if( deviceInfo != defaultInDeviceInfo )
+        {
+            retInDeviceList.push_back( std::make_pair( deviceInfo.description(), deviceInfo ) );
+        }
+    }
+}
+
+//============================================================================
+void AudioIoMgr::getSoundOutDevices( std::vector< std::pair<QString, QAudioDevice> >& retOutDeviceList )
+{
+    retOutDeviceList.clear();
+    const QAudioDevice& defaultOutDeviceInfo = m_MediaDevices->defaultAudioOutput();
+    retOutDeviceList.push_back( std::make_pair(defaultOutDeviceInfo.description(),  defaultOutDeviceInfo ) );
+    for( auto& deviceInfo : m_MediaDevices->audioOutputs() )
+    {
+        if( deviceInfo != defaultOutDeviceInfo )
+        {
+            retOutDeviceList.push_back( std::make_pair( deviceInfo.description(),  deviceInfo ) );
+        }
+    }
+}
+
+//============================================================================
+void AudioIoMgr::soundInDeviceChanged( int deviceIndex )
+{
+    m_AudioInIo.soundInDeviceChanged( deviceIndex );
+}
+
+//============================================================================
+void AudioIoMgr::soundOutDeviceChanged( int deviceIndex )
+{
+    m_AudioOutIo.soundOutDeviceChanged( deviceIndex );
 }

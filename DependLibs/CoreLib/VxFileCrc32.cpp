@@ -47,7 +47,7 @@ public:
 
 protected:
 //	static bool GetFileSizeQW( FILE * hFile, __int64 &qwSize);
-	static GOTV_INLINE void CalcCrc32(const unsigned char byte, unsigned long &dwCrc32);
+	static NLC_INLINE void CalcCrc32(const unsigned char byte, unsigned long &dwCrc32);
 
 	static unsigned long s_arrdwCrc32Table[256];
 };
@@ -146,7 +146,7 @@ CCrc32Static2::~CCrc32Static2()
 }
 
 //***********************************************
-GOTV_INLINE void CCrc32Static2::CalcCrc32(const unsigned char byte, unsigned long &dwCrc32)
+NLC_INLINE void CCrc32Static2::CalcCrc32(const unsigned char byte, unsigned long &dwCrc32)
 {
 	dwCrc32 = ((dwCrc32) >> 8) ^ s_arrdwCrc32Table[(byte) ^ ((dwCrc32) & 0x000000FF)];
 }

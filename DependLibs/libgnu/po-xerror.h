@@ -43,7 +43,7 @@ struct message_ty;
    multiple lines of text, each terminated with a newline, otherwise
    usually a single line).
    Must not return if SEVERITY is PO_SEVERITY_FATAL_ERROR.  */
-extern GOTV_DLL_VARIABLE
+extern NLC_DLL_VARIABLE
        void (*po_xerror) (int severity,
                           const struct message_ty *message,
                           const char *filename, size_t lineno, size_t column,
@@ -53,7 +53,7 @@ extern GOTV_DLL_VARIABLE
    Similar to two calls to po_xerror.
    If possible, a "..." can be appended to MESSAGE_TEXT1 and prepended to
    MESSAGE_TEXT2.  */
-extern GOTV_DLL_VARIABLE
+extern NLC_DLL_VARIABLE
        void (*po_xerror2) (int severity,
                            const struct message_ty *message1,
                            const char *filename1, size_t lineno1, size_t column1,

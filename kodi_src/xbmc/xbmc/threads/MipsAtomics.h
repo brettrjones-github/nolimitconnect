@@ -28,7 +28,7 @@
 
 extern pthread_mutex_t cmpxchg_mutex;
 
-static GOTV_INLINE long cmpxchg32(volatile long *m, long oldval, long newval)
+static NLC_INLINE long cmpxchg32(volatile long *m, long oldval, long newval)
 {
 	long retval;
 	__asm__ __volatile__(						\
@@ -55,7 +55,7 @@ static GOTV_INLINE long cmpxchg32(volatile long *m, long oldval, long newval)
 }
 
 
-static GOTV_INLINE long long cmpxchg64(volatile long long *ptr,
+static NLC_INLINE long long cmpxchg64(volatile long long *ptr,
 				      long long oldval, long long newval)
 {
 	long long prev;

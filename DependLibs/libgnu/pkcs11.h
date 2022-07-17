@@ -112,9 +112,9 @@ void gnutls_pkcs11_obj_set_pin_function(gnutls_pkcs11_obj_t obj,
  * @GNUTLS_PKCS11_OBJ_FLAG_MARK_ALWAYS_AUTH: Mark the key pair as requiring authentication (pin entry) before every operation (seek+store).
  * @GNUTLS_PKCS11_OBJ_FLAG_MARK_EXTRACTABLE: Mark the key pair as being extractable (store).
  * @GNUTLS_PKCS11_OBJ_FLAG_NEVER_EXTRACTABLE: If set, the object was never marked as extractable (store).
- * @GNUTLS_PKCS11_OBJ_FLAG_CRT: When searching, GOTV_RESTRICT to certificates only (seek).
- * @GNUTLS_PKCS11_OBJ_FLAG_PUBKEY: When searching, GOTV_RESTRICT to public key objects only (seek).
- * @GNUTLS_PKCS11_OBJ_FLAG_PRIVKEY: When searching, GOTV_RESTRICT to private key objects only (seek).
+ * @GNUTLS_PKCS11_OBJ_FLAG_CRT: When searching, NLC_RESTRICT to certificates only (seek).
+ * @GNUTLS_PKCS11_OBJ_FLAG_PUBKEY: When searching, NLC_RESTRICT to public key objects only (seek).
+ * @GNUTLS_PKCS11_OBJ_FLAG_PRIVKEY: When searching, NLC_RESTRICT to private key objects only (seek).
  * @GNUTLS_PKCS11_OBJ_FLAG_NO_STORE_PUBKEY: When generating a keypair don't store the public key (store).
  *
  * Enumeration of different PKCS #11 object flags. Some flags are used

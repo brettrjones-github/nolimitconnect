@@ -111,8 +111,8 @@
 #error "Please include config.h first."
 #endif
 _GL_INLINE_HEADER_BEGIN
-#ifndef GOTV_INLINE
-# define GOTV_INLINE _GL_INLINE
+#ifndef NLC_INLINE
+# define NLC_INLINE _GL_INLINE
 #endif
 
 struct mbuiter_multi
@@ -129,7 +129,7 @@ struct mbuiter_multi
 		  */
 };
 
-GOTV_INLINE void mbuiter_multi_next( struct mbuiter_multi *iter )
+NLC_INLINE void mbuiter_multi_next( struct mbuiter_multi *iter )
 {
 	if( iter->next_done )
 		return;
@@ -190,12 +190,12 @@ with_shift:
 	iter->next_done = true;
 }
 
-GOTV_INLINE void mbuiter_multi_reloc( struct mbuiter_multi *iter, ptrdiff_t ptrdiff )
+NLC_INLINE void mbuiter_multi_reloc( struct mbuiter_multi *iter, ptrdiff_t ptrdiff )
 {
 	iter->cur.ptr += ptrdiff;
 }
 
-GOTV_INLINE void mbuiter_multi_copy( struct mbuiter_multi *new_iter, const struct mbuiter_multi *old_iter )
+NLC_INLINE void mbuiter_multi_copy( struct mbuiter_multi *new_iter, const struct mbuiter_multi *old_iter )
 {
 	if( ( new_iter->in_shift = old_iter->in_shift ) )
 		memcpy( &new_iter->state, &old_iter->state, sizeof( mbstate_t ) );

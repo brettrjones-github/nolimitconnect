@@ -91,7 +91,7 @@ static void init_thres2(PP7Context *p)
     }
 }
 
-static GOTV_INLINE void dctA_c(int16_t *dst, uint8_t *src, int stride)
+static NLC_INLINE void dctA_c(int16_t *dst, uint8_t *src, int stride)
 {
     int i;
 

@@ -278,6 +278,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareOfferList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareServicesPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSnapshot.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestAndDebug.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestBase.cpp" />
@@ -395,7 +396,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\MessengerPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\MultiSessionState.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\MyIcons.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\MySndMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\NetAvailStatusWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\NetClientGuiLogic.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\NetHostGuiLogic.cpp" />
@@ -431,7 +431,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SessionWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ShareOfferListItem.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ShareOfferListWidget.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\SoundCtrlWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioInIo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioInThread.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioIoMgr.cpp" />
@@ -441,6 +440,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioTestGenerator.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\SoundMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\StoryWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\TextChatLogic.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ThumbnailChooseWidget.cpp" />
@@ -485,6 +485,11 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\AppCommonConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h" />
@@ -536,6 +541,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -621,6 +627,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\SoundMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\TodGameDefs.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\ToGuiActivityInterface.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\ToGuiFileXferInterface.h" />
@@ -666,7 +673,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ThumbnailChooseWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\TextChatLogic.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\StoryWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\SoundCtrlWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\SessionWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ServiceSettingsWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\SearchParamsWidget.h" />
@@ -685,7 +691,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\NetHostGuiLogic.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\NetClientGuiLogic.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\NetAvailStatusWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\MySndMgr.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\MultiSessionState.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\MessengerPage.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\MenuCam.h" />
@@ -959,6 +964,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSharedContent.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletShareOfferList.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSnapshot.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletSoundSettings.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletStoryBoardClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestAndDebug.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestHostClient.ui" />
@@ -1017,7 +1023,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\ServiceSettingsWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\SessionWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ShareOfferListItem.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\SoundCtrlWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\StoryWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ThumbnailChooseWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ThumbnailEditWidget.ui" />

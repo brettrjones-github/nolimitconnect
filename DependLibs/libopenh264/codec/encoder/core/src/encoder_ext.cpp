@@ -986,7 +986,7 @@ void  FreeRefList (SRefList*& pRefList, CMemoryAlign* pMa, const int iMaxNumRefF
  * \pParam  pCtx            sWelsEncCtx*
  * \return  0 - successful; otherwise failed
  */
-static GOTV_INLINE int32_t InitDqLayers (sWelsEncCtx** ppCtx, SExistingParasetList* pExistingParasetList) {
+static NLC_INLINE int32_t InitDqLayers (sWelsEncCtx** ppCtx, SExistingParasetList* pExistingParasetList) {
   SWelsSvcCodingParam* pParam   = NULL;
   SWelsSPS* pSps                = NULL;
   SSubsetSps* pSubsetSps        = NULL;
@@ -2594,13 +2594,13 @@ void WelsInitCurrentLayer (sWelsEncCtx* pCtx,
   }
 }
 
-static GOTV_INLINE void SetFastCodingFunc (SWelsFuncPtrList* pFuncList) {
+static NLC_INLINE void SetFastCodingFunc (SWelsFuncPtrList* pFuncList) {
   pFuncList->pfIntraFineMd = WelsMdIntraFinePartitionVaa;
   pFuncList->sSampleDealingFuncs.pfMdCost = pFuncList->sSampleDealingFuncs.pfSampleSad;
   pFuncList->sSampleDealingFuncs.pfIntra16x16Combined3 = pFuncList->sSampleDealingFuncs.pfIntra16x16Combined3Sad;
   pFuncList->sSampleDealingFuncs.pfIntra8x8Combined3 = pFuncList->sSampleDealingFuncs.pfIntra8x8Combined3Sad;
 }
-static GOTV_INLINE void SetNormalCodingFunc (SWelsFuncPtrList* pFuncList) {
+static NLC_INLINE void SetNormalCodingFunc (SWelsFuncPtrList* pFuncList) {
   pFuncList->pfIntraFineMd = WelsMdIntraFinePartition;
   pFuncList->sSampleDealingFuncs.pfMdCost = pFuncList->sSampleDealingFuncs.pfSampleSatd;
   pFuncList->sSampleDealingFuncs.pfIntra16x16Combined3 =
@@ -2770,7 +2770,7 @@ void PreprocessSliceCoding (sWelsEncCtx* pCtx) {
  * \brief   swap pDq layers between current pDq layer and reference pDq layer
  */
 
-static GOTV_INLINE void WelsSwapDqLayers (sWelsEncCtx* pCtx, const int32_t kiNextDqIdx) {
+static NLC_INLINE void WelsSwapDqLayers (sWelsEncCtx* pCtx, const int32_t kiNextDqIdx) {
   // swap and assign reference
   SDqLayer* pTmpLayer           = pCtx->ppDqLayerList[kiNextDqIdx];
   SDqLayer* pRefLayer           = pCtx->pCurDqLayer;
@@ -2781,7 +2781,7 @@ static GOTV_INLINE void WelsSwapDqLayers (sWelsEncCtx* pCtx, const int32_t kiNex
 /*!
  * \brief   prefetch reference picture after WelsBuildRefList
  */
-static GOTV_INLINE void PrefetchReferencePicture (sWelsEncCtx* pCtx, const EVideoFrameType keFrameType) {
+static NLC_INLINE void PrefetchReferencePicture (sWelsEncCtx* pCtx, const EVideoFrameType keFrameType) {
   const int32_t kiSliceCount = pCtx->pCurDqLayer->iMaxSliceNum;
   int32_t iIdx = 0;
   uint8_t uiRefIdx = -1;
@@ -2927,7 +2927,7 @@ int32_t WelsWriteParameterSets (sWelsEncCtx* pCtx, int32_t* pNalLen, int32_t* pN
   return ENC_RETURN_SUCCESS;
 }
 
-static GOTV_INLINE int32_t AddPrefixNal (sWelsEncCtx* pCtx,
+static NLC_INLINE int32_t AddPrefixNal (sWelsEncCtx* pCtx,
                                     SLayerBSInfo* pLayerBsInfo,
                                     int32_t* pNalLen,
                                     int32_t* pNalIdxInLayer,

@@ -10,13 +10,13 @@
 
 #include <glib-object.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 /* enumerations from "rsvg.h" */
 GType rsvg_error_get_type (void);
 #define RSVG_TYPE_ERROR (rsvg_error_get_type())
 GType rsvg_handle_flags_get_type (void);
 #define RSVG_TYPE_HANDLE_FLAGS (rsvg_handle_flags_get_type())
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __LIBRSVG_ENUM_TYPES_H__ */
 

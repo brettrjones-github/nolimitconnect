@@ -87,7 +87,7 @@ extern const uint8_t ff_dirac_next_ctx[DIRAC_CTX_COUNT];
 extern const uint16_t ff_dirac_prob[256];
 extern int16_t ff_dirac_prob_branchless[256][2];
 
-static GOTV_INLINE void renorm(DiracArith *c)
+static NLC_INLINE void renorm(DiracArith *c)
 {
 #if HAVE_FAST_CLZ
     int shift = 14 - av_log2_16bit(c->range-1) + ((c->range-1)>>15);
@@ -104,7 +104,7 @@ static GOTV_INLINE void renorm(DiracArith *c)
 #endif
 }
 
-static GOTV_INLINE void refill(DiracArith *c)
+static NLC_INLINE void refill(DiracArith *c)
 {
     int counter = c->counter;
 
@@ -126,7 +126,7 @@ static GOTV_INLINE void refill(DiracArith *c)
     c->counter = counter;
 }
 
-static GOTV_INLINE int dirac_get_arith_bit(DiracArith *c, int ctx)
+static NLC_INLINE int dirac_get_arith_bit(DiracArith *c, int ctx)
 {
     int prob_zero = c->contexts[ctx];
     int range_times_prob, bit;
@@ -167,7 +167,7 @@ static GOTV_INLINE int dirac_get_arith_bit(DiracArith *c, int ctx)
     return bit;
 }
 
-static GOTV_INLINE int dirac_get_arith_uint(DiracArith *c, int follow_ctx, int data_ctx)
+static NLC_INLINE int dirac_get_arith_uint(DiracArith *c, int follow_ctx, int data_ctx)
 {
     int ret = 1;
     while (!dirac_get_arith_bit(c, follow_ctx)) {
@@ -182,7 +182,7 @@ static GOTV_INLINE int dirac_get_arith_uint(DiracArith *c, int follow_ctx, int d
     return ret-1;
 }
 
-static GOTV_INLINE int dirac_get_arith_int(DiracArith *c, int follow_ctx, int data_ctx)
+static NLC_INLINE int dirac_get_arith_int(DiracArith *c, int follow_ctx, int data_ctx)
 {
     int ret = dirac_get_arith_uint(c, follow_ctx, data_ctx);
     if (ret && dirac_get_arith_bit(c, data_ctx+1))

@@ -91,7 +91,7 @@ struct _GCache
   GHashTable *value_table;
 };
 
-static GOTV_INLINE GCacheNode*
+static NLC_INLINE GCacheNode*
 g_cache_node_new (gpointer value)
 {
   GCacheNode *node = g_slice_new (GCacheNode);
@@ -100,7 +100,7 @@ g_cache_node_new (gpointer value)
   return node;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 g_cache_node_destroy (GCacheNode *node)
 {
   g_slice_free (GCacheNode, node);

@@ -34,7 +34,7 @@ void *_gnutls_calloc(size_t nmemb, size_t size);
 char *_gnutls_strdup(const char *);
 
 /* To avoid undefined behavior when s1 or s2 are null and n = 0 */
-GOTV_INLINE static
+NLC_INLINE static
 int safe_memcmp(const void *s1, const void *s2, size_t n)
 {
         if (n == 0)

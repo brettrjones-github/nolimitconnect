@@ -101,7 +101,7 @@ static void (* const xavs_pixel_avg_wtab1_mmxext[5])( uint8_t *, int, uint8_t *,
     xavs_pixel_7_w16_sse2
 };*/
 /*
-static GOTV_INLINE uint8_t xavs_clip_uint8( int x )
+static NLC_INLINE uint8_t xavs_clip_uint8( int x )
 {
     return x&(~255) ? (-x)>>31 : x;
 }
@@ -109,7 +109,7 @@ static GOTV_INLINE uint8_t xavs_clip_uint8( int x )
 
 
 extern void xavs_qpel1_filter_mmxext( uint8_t *dst,  int i_dst_stride,uint8_t *src1, int i_src1_stride,uint8_t *src2, int i_src2_stride,int i_width, int i_height,uint8_t *src3,uint8_t *src4);
-static GOTV_INLINE void pixel_avg( uint8_t *dst,  int i_dst_stride,
+static NLC_INLINE void pixel_avg( uint8_t *dst,  int i_dst_stride,
                               uint8_t *src1, int i_src1_stride,
                               uint8_t *src2, int i_src2_stride,
                               int i_width, int i_height,int qpel_idx,uint8_t *src3,uint8_t *src4)

@@ -201,7 +201,7 @@ public:
         // sort the right side
         right.Sort(function);
         
-        // merge the two back GOTV_INLINE
+        // merge the two back NLC_INLINE
         if (function(m_Tail->m_Data, right.m_Head->m_Data) > 0) {
             Merge(right, function);
         } else {
@@ -281,7 +281,7 @@ protected:
 |   NPT_List<T>::NPT_List
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_List<T>::NPT_List() : m_ItemCount(0), m_Head(0), m_Tail(0) 
 {
 }
@@ -290,7 +290,7 @@ NPT_List<T>::NPT_List() : m_ItemCount(0), m_Head(0), m_Tail(0)
 |   NPT_List<T>::NPT_List
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_List<T>::NPT_List(const NPT_List<T>& list) : m_ItemCount(0), m_Head(0), m_Tail(0) 
 {
     *this = list;
@@ -300,7 +300,7 @@ NPT_List<T>::NPT_List(const NPT_List<T>& list) : m_ItemCount(0), m_Head(0), m_Ta
 |   NPT_List<T>::~NPT_List<T>
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_List<T>::~NPT_List()
 {
     Clear();
@@ -350,7 +350,7 @@ NPT_List<T>::operator==(const NPT_List<T>& other) const
 |   NPT_List<T>::operator!=
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 bool
 NPT_List<T>::operator!=(const NPT_List<T>& other) const
 {
@@ -426,7 +426,7 @@ NPT_List<T>::Add(NPT_List<T>& list)
 |   NPT_List<T>::Add
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE
+NLC_INLINE
 NPT_Result
 NPT_List<T>::Add(const T& data)
 {
@@ -455,7 +455,7 @@ NPT_List<T>::GetItem(NPT_Ordinal n) const
 |   NPT_List<T>::Insert
 +---------------------------------------------------------------------*/
 template <typename T>
-GOTV_INLINE 
+NLC_INLINE 
 NPT_Result
 NPT_List<T>::Insert(Iterator where, const T&data)
 {

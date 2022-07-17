@@ -34,7 +34,7 @@
 
 #include <cairo.h>
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 RsvgNode *rsvg_new_image (const char *element_name);
@@ -54,6 +54,6 @@ void rsvg_preserve_aspect_ratio (unsigned int aspect_ratio, double width,
 G_GNUC_INTERNAL
 cairo_surface_t *rsvg_cairo_surface_new_from_href (RsvgHandle *handle, const char *href, GError ** error);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif                          /* RSVG_IMAGE_H */

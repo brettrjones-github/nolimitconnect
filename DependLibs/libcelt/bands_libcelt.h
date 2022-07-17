@@ -51,14 +51,14 @@ void compute_band_energies_libcelt(const CELTMode *m, const libcelt_sig *X, libc
  * @param X Spectrum (returned normalised)
  * @param bands Square root of the energy for each band
  */
-void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * GOTV_RESTRICT freq, libcelt_norm * GOTV_RESTRICT X, const libcelt_ener *bands, int end, int _C, int M);
+void normalise_bands_libcelt(const CELTMode *m, const libcelt_sig * NLC_RESTRICT freq, libcelt_norm * NLC_RESTRICT X, const libcelt_ener *bands, int end, int _C, int M);
 
 /** Denormalise each band of X to restore full amplitude
  * @param m Mode data 
  * @param X Spectrum (returned de-normalised)
  * @param bands Square root of the energy for each band
  */
-void denormalise_bands_libcelt(const CELTMode *m, const libcelt_norm * GOTV_RESTRICT X, libcelt_sig * GOTV_RESTRICT freq, const libcelt_ener *bands, int end, int _C, int M);
+void denormalise_bands_libcelt(const CELTMode *m, const libcelt_norm * NLC_RESTRICT X, libcelt_sig * NLC_RESTRICT freq, const libcelt_ener *bands, int end, int _C, int M);
 
 #define SPREAD_NONE       (0)
 #define SPREAD_LIGHT      (1)
@@ -87,7 +87,7 @@ void quant_all_bands_libcelt(int encode, const CELTMode *m, int start, int end,
       libcelt_int32 total_bits, libcelt_int32 balance, ec_ctx *ec, int M, int codedBands, ec_uint32 *seed);
 
 
-void stereo_decision(const CELTMode *m, libcelt_norm * GOTV_RESTRICT X, int *stereo_mode, int len, int M);
+void stereo_decision(const CELTMode *m, libcelt_norm * NLC_RESTRICT X, int *stereo_mode, int len, int M);
 
 void anti_collapse_libcelt(const CELTMode *m, libcelt_norm *_X, unsigned char *collapse_masks, int LM, int C, int CC, int size,
       int start, int end, libcelt_word16 *logE, libcelt_word16 *prev1logE,

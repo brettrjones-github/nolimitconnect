@@ -28,7 +28,7 @@
 
 #include <stdio.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -228,5 +228,5 @@ cr_utils_dup_glist_of_string (GList *a_list) ;
 GList *
 cr_utils_dup_glist_of_cr_string (GList * a_list_of_strings) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 

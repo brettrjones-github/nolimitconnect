@@ -26,7 +26,7 @@
 #if HAVE_NEON_INLINE
 
 #define VMUL2 VMUL2
-static GOTV_INLINE float *VMUL2(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL2(float *dst, const float *v, unsigned idx,
                            const float *scale)
 {
     unsigned v0, v1;
@@ -45,7 +45,7 @@ static GOTV_INLINE float *VMUL2(float *dst, const float *v, unsigned idx,
 }
 
 #define VMUL4 VMUL4
-static GOTV_INLINE float *VMUL4(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL4(float *dst, const float *v, unsigned idx,
                            const float *scale)
 {
     unsigned v0, v1, v2, v3;
@@ -70,7 +70,7 @@ static GOTV_INLINE float *VMUL4(float *dst, const float *v, unsigned idx,
 }
 
 #define VMUL2S VMUL2S
-static GOTV_INLINE float *VMUL2S(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL2S(float *dst, const float *v, unsigned idx,
                             unsigned sign, const float *scale)
 {
     unsigned v0, v1, v2, v3;
@@ -95,7 +95,7 @@ static GOTV_INLINE float *VMUL2S(float *dst, const float *v, unsigned idx,
 }
 
 #define VMUL4S VMUL4S
-static GOTV_INLINE float *VMUL4S(float *dst, const float *v, unsigned idx,
+static NLC_INLINE float *VMUL4S(float *dst, const float *v, unsigned idx,
                             unsigned sign, const float *scale)
 {
     unsigned v0, v1, v2, v3, nz;

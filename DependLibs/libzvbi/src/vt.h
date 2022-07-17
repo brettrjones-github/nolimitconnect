@@ -31,7 +31,7 @@
 #  define VBI_TTX_CHARSET_CODE_NONE ((vbi_ttx_charset_code) -1)
 typedef unsigned int vbi_ttx_charset_code;
 typedef struct vbi_font_descr vbi_ttx_charset;
-GOTV_INLINE const vbi_ttx_charset *
+NLC_INLINE const vbi_ttx_charset *
 vbi_ttx_charset_from_code	(vbi_ttx_charset_code	code)
 {
 	if (VALID_CHARACTER_SET (code))
@@ -129,7 +129,7 @@ enum ttx_page_function {
 	PAGE_FUNCTION_IEC_TRIGGER
 };
 
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 ttx_page_function_valid		(enum ttx_page_function	function)
 {
 	return ((unsigned int) function
@@ -173,7 +173,7 @@ enum ttx_page_coding {
 	PAGE_CODING_META84
 };
 
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 ttx_page_coding_valid		(enum ttx_page_coding	coding)
 {
 	return ((unsigned int) coding

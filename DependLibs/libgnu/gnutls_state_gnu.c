@@ -228,7 +228,7 @@ _gnutls_session_cert_type_supported(gnutls_session_t session,
 /* this function deinitializes all the internal parameters stored
  * in a session struct.
  */
-GOTV_INLINE static void deinit_internal_params(gnutls_session_t session)
+NLC_INLINE static void deinit_internal_params(gnutls_session_t session)
 {
 #if defined(ENABLE_DHE) || defined(ENABLE_ANON)
 	if (session->internals.params.free_dh_params)
@@ -775,7 +775,7 @@ gnutls_handshake_set_private_extensions(gnutls_session_t session,
 	session->internals.enable_private = allow;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 _gnutls_cal_PRF_A(const mac_entry_st * me,
 		  const void *secret, int secret_size,
 		  const void *seed, int seed_size, void *result)

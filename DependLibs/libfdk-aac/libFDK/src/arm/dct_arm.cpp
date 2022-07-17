@@ -87,7 +87,7 @@ amm-info@iis.fraunhofer.de
 
 /*
    Note: This assembler routine is here, because the ARM926 compiler does
-         not encode the GOTV_INLINE assembler with optimal speed.
+         not encode the NLC_INLINE assembler with optimal speed.
          With this version, we save 2 cycles per loop iteration.
 */
 
@@ -178,7 +178,7 @@ dct_IV_loop1_start
 
 #ifdef FUNCTION_dct_IV_func2
 
-GOTV_INLINE
+NLC_INLINE
 /* __attribute__((noinline)) */
 static void dct_IV_func2(
     int i,
@@ -347,7 +347,7 @@ dst_IV_loop1
 
 #ifdef FUNCTION_dst_IV_func2
 
-GOTV_INLINE
+NLC_INLINE
 /* __attribute__((noinline)) */
 static void dst_IV_func2(
     int i,

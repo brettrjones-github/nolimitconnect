@@ -33,7 +33,7 @@
 #include "cpluff.h"
 #include "defines.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 /* ------------------------------------------------------------------------
@@ -122,5 +122,5 @@ void cpi_process_free_ptr(cp_list_t *list, lnode_t *node, void *dummy);
 int cpi_vercmp(const char *v1, const char *v2) CP_GCC_PURE;
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 

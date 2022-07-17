@@ -94,7 +94,7 @@ amm-info@iis.fraunhofer.de
      function:     rvlcReadBitFromBitstream
 
      description:  This function returns a bit from the bitstream according to read direction.
-                   It is called very often, therefore it makes sense to GOTV_INLINE it (runtime).
+                   It is called very often, therefore it makes sense to NLC_INLINE it (runtime).
 -----------------------------------------------------------------------------------------------
         input:     - bitstream
                    - pPosition

@@ -236,7 +236,7 @@ g_hash_table_destroy (GHashTable *hash_table)
 
 #endif
 
-static GOTV_INLINE GHashNode**
+static NLC_INLINE GHashNode**
 g_hash_table_lookup_node (GHashTable	*hash_table,
 			  gconstpointer	 key)
 {

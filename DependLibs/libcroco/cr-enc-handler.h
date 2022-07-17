@@ -35,7 +35,7 @@
 
 #include "cr-utils.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 
 typedef struct _CREncHandler CREncHandler ;
@@ -89,6 +89,6 @@ cr_enc_handler_convert_input (CREncHandler *a_this,
                               guchar **a_out,
                               gulong *a_out_len) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_ENC_HANDLER_H__*/

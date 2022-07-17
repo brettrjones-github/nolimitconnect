@@ -393,7 +393,7 @@ struct EncoderPrimitives
 extern EncoderPrimitives primitives;
 
 /* Returns a LumaPU enum for the given size, always expected to return a valid enum */
-GOTV_INLINE int partitionFromSizes(int width, int height)
+NLC_INLINE int partitionFromSizes(int width, int height)
 {
     X265_CHECK(((width | height) & ~(4 | 8 | 16 | 32 | 64)) == 0, "Invalid block width/height\n");
     extern const uint8_t lumaPartitionMapTable[];
@@ -405,7 +405,7 @@ GOTV_INLINE int partitionFromSizes(int width, int height)
 }
 
 /* Computes the size of the LumaPU for a given LumaPU enum */
-GOTV_INLINE void sizesFromPartition(int part, int *width, int *height)
+NLC_INLINE void sizesFromPartition(int part, int *width, int *height)
 {
     X265_CHECK(part >= 0 && part <= 24, "Invalid part %d \n", part);
     extern const uint8_t lumaPartitionMapTable[];
@@ -420,7 +420,7 @@ GOTV_INLINE void sizesFromPartition(int part, int *width, int *height)
     *height = 4 * ((index % 16) + 1);
 }
 
-GOTV_INLINE int partitionFromLog2Size(int log2Size)
+NLC_INLINE int partitionFromLog2Size(int log2Size)
 {
     X265_CHECK(2 <= log2Size && log2Size <= 6, "Invalid block size\n");
     return log2Size - 2;

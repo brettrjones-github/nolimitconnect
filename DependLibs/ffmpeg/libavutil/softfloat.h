@@ -49,7 +49,7 @@ static const SoftFloat FLOAT_MIN        = { 0x20000000,   MIN_EXP};
 /**
  * Convert a SoftFloat to a double precision float.
  */
-static GOTV_INLINE av_const double av_sf2double(SoftFloat v) {
+static NLC_INLINE av_const double av_sf2double(SoftFloat v) {
     v.exp -= ONE_BITS +1;
     return ldexp(v.mant, v.exp);
 }
@@ -76,7 +76,7 @@ static av_const SoftFloat av_normalize_sf(SoftFloat a){
     return a;
 }
 
-static GOTV_INLINE av_const SoftFloat av_normalize1_sf(SoftFloat a){
+static NLC_INLINE av_const SoftFloat av_normalize1_sf(SoftFloat a){
 #if 1
     if((int32_t)(a.mant + 0x40000000U) <= 0){
         a.exp++;
@@ -99,7 +99,7 @@ static GOTV_INLINE av_const SoftFloat av_normalize1_sf(SoftFloat a){
  *         normalized, then the output will not be worse then the other input.
  *         If both are normalized, then the output will be normalized.
  */
-static GOTV_INLINE av_const SoftFloat av_mul_sf(SoftFloat a, SoftFloat b){
+static NLC_INLINE av_const SoftFloat av_mul_sf(SoftFloat a, SoftFloat b){
     a.exp += b.exp;
     av_assert2((int32_t)((a.mant * (int64_t)b.mant) >> ONE_BITS) == (a.mant * (int64_t)b.mant) >> ONE_BITS);
     a.mant = (a.mant * (int64_t)b.mant) >> ONE_BITS;
@@ -135,7 +135,7 @@ static inline av_const SoftFloat av_div_sf(SoftFloat a, SoftFloat b){
  *          > 0 if the first is greater
  *            0 if they are equal
  */
-static GOTV_INLINE av_const int av_cmp_sf(SoftFloat a, SoftFloat b){
+static NLC_INLINE av_const int av_cmp_sf(SoftFloat a, SoftFloat b){
     int t= a.exp - b.exp;
     if      (t <-31) return                  -  b.mant      ;
     else if (t <  0) return (a.mant >> (-t)) -  b.mant      ;
@@ -147,7 +147,7 @@ static GOTV_INLINE av_const int av_cmp_sf(SoftFloat a, SoftFloat b){
  * Compares two SoftFloats.
  * @returns 1 if a is greater than b, 0 otherwise
  */
-static GOTV_INLINE av_const int av_gt_sf(SoftFloat a, SoftFloat b)
+static NLC_INLINE av_const int av_gt_sf(SoftFloat a, SoftFloat b)
 {
     int t= a.exp - b.exp;
     if      (t <-31) return 0                >  b.mant      ;
@@ -159,7 +159,7 @@ static GOTV_INLINE av_const int av_gt_sf(SoftFloat a, SoftFloat b)
 /**
  * @returns the sum of 2 SoftFloats.
  */
-static GOTV_INLINE av_const SoftFloat av_add_sf(SoftFloat a, SoftFloat b){
+static NLC_INLINE av_const SoftFloat av_add_sf(SoftFloat a, SoftFloat b){
     int t= a.exp - b.exp;
     if      (t <-31) return b;
     else if (t <  0) return av_normalize_sf(av_normalize1_sf((SoftFloat){ b.mant + (a.mant >> (-t)), b.exp}));
@@ -170,7 +170,7 @@ static GOTV_INLINE av_const SoftFloat av_add_sf(SoftFloat a, SoftFloat b){
 /**
  * @returns the difference of 2 SoftFloats.
  */
-static GOTV_INLINE av_const SoftFloat av_sub_sf(SoftFloat a, SoftFloat b){
+static NLC_INLINE av_const SoftFloat av_sub_sf(SoftFloat a, SoftFloat b){
     return av_add_sf(a, (SoftFloat){ -b.mant, b.exp});
 }
 
@@ -182,7 +182,7 @@ static GOTV_INLINE av_const SoftFloat av_sub_sf(SoftFloat a, SoftFloat b){
  * SoftFloat.
  * @returns a SoftFloat with value v * 2^-frac_bits
  */
-static GOTV_INLINE av_const SoftFloat av_int2sf(int v, int frac_bits){
+static NLC_INLINE av_const SoftFloat av_int2sf(int v, int frac_bits){
     int exp_offset = 0;
     if(v <= INT_MIN + 1){
         exp_offset = 1;
@@ -195,7 +195,7 @@ static GOTV_INLINE av_const SoftFloat av_int2sf(int v, int frac_bits){
  * Converts a SoftFloat to an integer.
  * Rounding is to -inf.
  */
-static GOTV_INLINE av_const int av_sf2int(SoftFloat v, int frac_bits){
+static NLC_INLINE av_const int av_sf2int(SoftFloat v, int frac_bits){
     v.exp += frac_bits - (ONE_BITS + 1);
     if(v.exp >= 0) return v.mant <<  v.exp ;
     else           return v.mant >>(-v.exp);

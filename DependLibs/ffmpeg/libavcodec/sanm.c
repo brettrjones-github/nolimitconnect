@@ -603,7 +603,7 @@ static int old_codec1(SANMVideoContext *ctx, int top,
     return 0;
 }
 
-static GOTV_INLINE void codec37_mv(uint8_t *dst, const uint8_t *src,
+static NLC_INLINE void codec37_mv(uint8_t *dst, const uint8_t *src,
                               int height, int stride, int x, int y)
 {
     int pos, i, j;

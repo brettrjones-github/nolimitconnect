@@ -30,7 +30,7 @@
 
 #include "rsvg-private.h"
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 PangoContext    *rsvg_cairo_create_pango_context    (RsvgDrawingCtx *ctx);
@@ -58,6 +58,6 @@ G_GNUC_INTERNAL
 cairo_surface_t*rsvg_cairo_get_surface_of_node  (RsvgDrawingCtx *ctx, RsvgNode *drawable, 
                                                  double width, double height);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*RSVG_CAIRO_DRAW_H */

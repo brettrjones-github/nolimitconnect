@@ -175,7 +175,7 @@ typedef unsigned int uintptr_t;
 /* Disable screensaver */
 #define SDL_VIDEO_DISABLE_SCREENSAVER	1
 
-/* Enable assembly routines (Win64 doesn't have GOTV_INLINE asm) */
+/* Enable assembly routines (Win64 doesn't have NLC_INLINE asm) */
 #ifndef _WIN64
 #define SDL_ASSEMBLY_ROUTINES	1
 #endif

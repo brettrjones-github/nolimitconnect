@@ -71,7 +71,7 @@ static const int8_t top_modifier_c[7]  = {  4,  1, -1, -1,  4, 6, 6 };
  *
  ****************************************************************************/
 
-static GOTV_INLINE int get_bs(cavs_vector *mvP, cavs_vector *mvQ, int b)
+static NLC_INLINE int get_bs(cavs_vector *mvP, cavs_vector *mvQ, int b)
 {
     if ((mvP->ref == REF_INTRA) || (mvQ->ref == REF_INTRA))
         return 2;
@@ -351,7 +351,7 @@ static void intra_pred_lp_top(uint8_t *d, uint8_t *top, uint8_t *left, ptrdiff_t
 
 #undef LOWPASS
 
-static GOTV_INLINE void modify_pred(const int8_t *mod_table, int *mode)
+static NLC_INLINE void modify_pred(const int8_t *mod_table, int *mode)
 {
     *mode = mod_table[*mode];
     if (*mode < 0) {
@@ -387,7 +387,7 @@ void ff_cavs_modify_mb_i(AVSContext *h, int *pred_mode_uv)
  *
  ****************************************************************************/
 
-static GOTV_INLINE void mc_dir_part(AVSContext *h, AVFrame *pic, int chroma_height,
+static NLC_INLINE void mc_dir_part(AVSContext *h, AVFrame *pic, int chroma_height,
                                int delta, int list, uint8_t *dest_y,
                                uint8_t *dest_cb, uint8_t *dest_cr,
                                int src_x_offset, int src_y_offset,
@@ -453,7 +453,7 @@ static GOTV_INLINE void mc_dir_part(AVSContext *h, AVFrame *pic, int chroma_heig
     chroma_op(dest_cr, src_cr, h->c_stride, chroma_height, mx & 7, my & 7);
 }
 
-static GOTV_INLINE void mc_part_std(AVSContext *h, int chroma_height, int delta,
+static NLC_INLINE void mc_part_std(AVSContext *h, int chroma_height, int delta,
                                uint8_t *dest_y,
                                uint8_t *dest_cb,
                                uint8_t *dest_cr,
@@ -534,7 +534,7 @@ void ff_cavs_inter(AVSContext *h, enum cavs_mb mb_type)
  *
  ****************************************************************************/
 
-static GOTV_INLINE void scale_mv(AVSContext *h, int *d_x, int *d_y,
+static NLC_INLINE void scale_mv(AVSContext *h, int *d_x, int *d_y,
                             cavs_vector *src, int distp)
 {
     int64_t den = h->scale_den[FFMAX(src->ref, 0)];
@@ -542,7 +542,7 @@ static GOTV_INLINE void scale_mv(AVSContext *h, int *d_x, int *d_y,
     *d_y = (src->y * distp * den + 256 + FF_SIGNBIT(src->y)) >> 9;
 }
 
-static GOTV_INLINE void mv_pred_median(AVSContext *h,
+static NLC_INLINE void mv_pred_median(AVSContext *h,
                                   cavs_vector *mvP,
                                   cavs_vector *mvA,
                                   cavs_vector *mvB,

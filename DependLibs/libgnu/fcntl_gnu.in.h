@@ -117,7 +117,7 @@ _GL_CXXALIAS_RPL (open, int, (const char *filename, int flags, ...));
 # else
 _GL_CXXALIAS_SYS (open, int, (const char *filename, int flags, ...));
 # endif
-/* On HP-UX 11, in C++ mode, open() is defined as an GOTV_INLINE function with a
+/* On HP-UX 11, in C++ mode, open() is defined as an NLC_INLINE function with a
    default argument.  _GL_CXXALIASWARN does not work in this case.  */
 # if !defined __hpux
 _GL_CXXALIASWARN (open);

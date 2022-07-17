@@ -70,7 +70,7 @@ typedef struct RMDemuxContext {
 
 static int rm_read_close(AVFormatContext *s);
 
-static GOTV_INLINE void get_strl(AVIOContext *pb, char *buf, int buf_size, int len)
+static NLC_INLINE void get_strl(AVIOContext *pb, char *buf, int buf_size, int len)
 {
     int read = avio_get_str(pb, len, buf, buf_size);
 
@@ -855,7 +855,7 @@ static int rm_assemble_video_frame(AVFormatContext *s, AVIOContext *pb,
     return 1;
 }
 
-static GOTV_INLINE void
+static NLC_INLINE void
 rm_ac3_swap_bytes (AVStream *st, AVPacket *pkt)
 {
     uint8_t *ptr;

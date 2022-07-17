@@ -86,7 +86,7 @@ void xavs_sub16x16_dct8_sse2( int16_t dct[4][8][8],  uint8_t *pix1, uint8_t *pix
     xavs_sub8x8_dct8_sse2( dct[2],  &pix1[8*FENC_STRIDE+0], &pix2[8*FDEC_STRIDE+0],&tmp[2]);
     xavs_sub8x8_dct8_sse2( dct[3],  &pix1[8*FENC_STRIDE+8], &pix2[8*FDEC_STRIDE+8],&tmp[3]);
 }
-/*static GOTV_INLINE void pixel_sub_8x8( int16_t dct[8][8], uint8_t *pix1,  uint8_t *pix2 )
+/*static NLC_INLINE void pixel_sub_8x8( int16_t dct[8][8], uint8_t *pix1,  uint8_t *pix2 )
 {
     int y, x;
     for( y = 0; y < 8; y++ )
@@ -131,7 +131,7 @@ void x264_ydct8_mmx( int16_t dct[8][8] );
 void x264_yidct8_mmx( int16_t dct[8][8] );
 */
 //lsp060308
-//GOTV_INLINE 
+//NLC_INLINE 
 /*
 void x264_sub8x8_dct8_mmx( int16_t dct[8][8], uint8_t *pix1, uint8_t *pix2 )
 {
@@ -150,7 +150,7 @@ void x264_sub16x16_dct8_mmx( int16_t dct[4][8][8], uint8_t *pix1, uint8_t *pix2 
 }
 
 //lsp060308
-//GOTV_INLINE 
+//NLC_INLINE 
 void x264_add8x8_idct8_mmx( uint8_t *dst, int16_t dct[8][8] )
 {
     dct[0][0] += 32;

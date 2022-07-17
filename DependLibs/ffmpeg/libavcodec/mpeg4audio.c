@@ -68,7 +68,7 @@ const uint8_t ff_mpeg4audio_channels[8] = {
     0, 1, 2, 3, 4, 5, 6, 8
 };
 
-static GOTV_INLINE int get_object_type(GetBitContext *gb)
+static NLC_INLINE int get_object_type(GetBitContext *gb)
 {
     int object_type = get_bits(gb, 5);
     if (object_type == AOT_ESCAPE)
@@ -76,7 +76,7 @@ static GOTV_INLINE int get_object_type(GetBitContext *gb)
     return object_type;
 }
 
-static GOTV_INLINE int get_sample_rate(GetBitContext *gb, int *index)
+static NLC_INLINE int get_sample_rate(GetBitContext *gb, int *index)
 {
     *index = get_bits(gb, 4);
     return *index == 0x0f ? get_bits(gb, 24) :

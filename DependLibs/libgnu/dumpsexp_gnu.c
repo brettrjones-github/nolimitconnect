@@ -89,7 +89,7 @@ print_usage (void)
 
 /* Return true if P points to a byte containing a whitespace according
    to the S-expressions definition. */
-static GOTV_INLINE int
+static NLC_INLINE int
 whitespace_p (int c)
 {
   switch (c)

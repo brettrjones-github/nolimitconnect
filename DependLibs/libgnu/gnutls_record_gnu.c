@@ -329,14 +329,14 @@ int gnutls_bye(gnutls_session_t session, gnutls_close_request_t how)
 	return 0;
 }
 
-GOTV_INLINE static void session_unresumable(gnutls_session_t session)
+NLC_INLINE static void session_unresumable(gnutls_session_t session)
 {
 	session->internals.resumable = RESUME_FALSE;
 }
 
 /* returns 0 if session is valid
  */
-GOTV_INLINE static int session_is_valid(gnutls_session_t session)
+NLC_INLINE static int session_is_valid(gnutls_session_t session)
 {
 	if (session->internals.invalid_connection != 0)
 		return GNUTLS_E_INVALID_SESSION;
@@ -347,7 +347,7 @@ GOTV_INLINE static int session_is_valid(gnutls_session_t session)
 /* Copies the record version into the headers. The 
  * version must have 2 bytes at least.
  */
-GOTV_INLINE static void
+NLC_INLINE static void
 copy_record_version(gnutls_session_t session,
 		    gnutls_handshake_description_t htype,
 		    uint8_t version[2])
@@ -369,7 +369,7 @@ copy_record_version(gnutls_session_t session,
 
 /* Increments the sequence value
  */
-GOTV_INLINE static int
+NLC_INLINE static int
 sequence_increment(gnutls_session_t session, uint64 * value)
 {
 	if (IS_DTLS(session)) {
@@ -558,7 +558,7 @@ _gnutls_send_tlen_int(gnutls_session_t session, content_type_t type,
 	return retval;
 }
 
-GOTV_INLINE static int
+NLC_INLINE static int
 check_recv_type(gnutls_session_t session, content_type_t recv_type)
 {
 	switch (recv_type) {
@@ -642,7 +642,7 @@ check_packet_buffers(gnutls_session_t session, content_type_t type,
 /* Here we check if the advertized version is the one we
  * negotiated in the handshake.
  */
-GOTV_INLINE static int
+NLC_INLINE static int
 record_check_version(gnutls_session_t session,
 		     gnutls_handshake_description_t htype,
 		     uint8_t version[2])

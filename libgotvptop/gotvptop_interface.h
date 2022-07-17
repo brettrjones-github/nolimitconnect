@@ -86,9 +86,9 @@ struct intf_dialog_args_t
     struct interaction_dialog_t *p_dialog;
 };
 
-GOTV_API int intf_Create( playlist_t *, const char * );
+NLC_API int intf_Create( playlist_t *, const char * );
 
-GOTV_API void libgotvptop_Quit( libgotvptop_int_t * );
+NLC_API void libgotvptop_Quit( libgotvptop_int_t * );
 
 static inline playlist_t *pl_Get( struct intf_thread_t *intf )
 {
@@ -106,7 +106,7 @@ static inline playlist_t *pl_Get( struct intf_thread_t *intf )
  * @{
  */
 
-GOTV_API void gotvptop_LogSet(libgotvptop_int_t *, gotvptop_log_cb cb, void *data);
+NLC_API void gotvptop_LogSet(libgotvptop_int_t *, gotvptop_log_cb cb, void *data);
 
 /*@}*/
 

@@ -25,16 +25,16 @@
 
 ///////////////////////// 삭제 / DELETE / УДАЛИТЬ ///////////////////////
 //#if @HAVE_VISIBILITY@ && BUILDING_LIBICONV
-//#define GOTV_EXPORT __attribute__((__visibility__("default")))
+//#define NLC_EXPORT __attribute__((__visibility__("default")))
 //#else
-//#define GOTV_EXPORT
+//#define NLC_EXPORT
 //#endif
-//extern GOTV_EXPORT @GOTV_DLL_VARIABLE@ int _libiconv_version; /* Likewise */
+//extern NLC_EXPORT @NLC_DLL_VARIABLE@ int _libiconv_version; /* Likewise */
 ///////////////////////// 추가 / ADD / ДОВАВЛЯТЬ //////////////////////
 
 
 
-extern GOTV_EXPORT int _libiconv_version; /* Likewise */
+extern NLC_EXPORT int _libiconv_version; /* Likewise */
 ////////////////////////////////////////////////////////////////////////////////
 
 /* We would like to #include any system header file which could define
@@ -72,14 +72,14 @@ typedef void* iconv_t;
 #define EILSEQ 86
 #endif
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* Allocates descriptor for code conversion from encoding ‘fromcode’ to
    encoding ‘tocode’. */
 #ifndef LIBICONV_PLUG
 # define iconv_open libiconv_open
 #endif
-extern GOTV_EXPORT iconv_t iconv_open (const char* tocode, const char* fromcode);
+extern NLC_EXPORT iconv_t iconv_open (const char* tocode, const char* fromcode);
 
 /* Converts, using conversion descriptor ‘cd’, at most ‘*inbytesleft’ bytes
    starting at ‘*inbuf’, writing at most ‘*outbytesleft’ bytes starting at
@@ -91,19 +91,19 @@ extern GOTV_EXPORT iconv_t iconv_open (const char* tocode, const char* fromcode)
 #endif
 
 ///////////////////////// 삭제 / DELETE / УДАЛИТЬ ///////////////////////
-//extern GOTV_EXPORT size_t iconv (iconv_t cd, @ICONV_CONST@ char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
+//extern NLC_EXPORT size_t iconv (iconv_t cd, @ICONV_CONST@ char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
 ///////////////////////// 추가 / ADD / ДОВАВЛЯТЬ //////////////////////
-extern GOTV_EXPORT size_t iconv( iconv_t cd, const char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
+extern NLC_EXPORT size_t iconv( iconv_t cd, const char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
 ////////////////////////////////////////////////////////////////////////////////
 
 /* Frees resources allocated for conversion descriptor ‘cd’. */
 #ifndef LIBICONV_PLUG
 # define iconv_close libiconv_close
 #endif
-extern GOTV_EXPORT int iconv_close (iconv_t cd);
+extern NLC_EXPORT int iconv_close (iconv_t cd);
 
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 #ifndef LIBICONV_PLUG
@@ -152,12 +152,12 @@ typedef struct {
    encoding ‘tocode’ into preallocated memory. Returns an error indicator
    (0 or -1 with errno set). */
 #define iconv_open_into libiconv_open_into
-extern GOTV_EXPORT int iconv_open_into (const char* tocode, const char* fromcode,
+extern NLC_EXPORT int iconv_open_into (const char* tocode, const char* fromcode,
                             iconv_allocation_t* resultp);
 
 /* Control of attributes. */
 #define iconvctl libiconvctl
-extern GOTV_EXPORT int iconvctl (iconv_t cd, int request, void* argument);
+extern NLC_EXPORT int iconvctl (iconv_t cd, int request, void* argument);
 
 /* Hook performed after every successful conversion of a Unicode character. */
 typedef void (*iconv_unicode_char_hook) (unsigned int uc, void* data);
@@ -243,14 +243,14 @@ struct iconv_fallbacks {
 
 /* Listing of locale independent encodings. */
 #define iconvlist libiconvlist
-extern GOTV_EXPORT void iconvlist (int (*do_one) (unsigned int namescount,
+extern NLC_EXPORT void iconvlist (int (*do_one) (unsigned int namescount,
                                       const char * const * names,
                                       void* data),
                        void* data);
 
 /* Canonicalize an encoding name.
    The result is either a canonical encoding name, or name itself. */
-extern GOTV_EXPORT const char * iconv_canonicalize (const char * name);
+extern NLC_EXPORT const char * iconv_canonicalize (const char * name);
 
 /* Support for relocatable packages.  */
 
@@ -259,7 +259,7 @@ extern GOTV_EXPORT const char * iconv_canonicalize (const char * name);
    by the corresponding pathname with the current prefix instead.  Both
    prefixes should be directory names without trailing slash (i.e. use ""
    instead of "/").  */
-extern GOTV_EXPORT void libiconv_set_relocation_prefix (const char *orig_prefix,
+extern NLC_EXPORT void libiconv_set_relocation_prefix (const char *orig_prefix,
                                             const char *curr_prefix);
 
 #ifdef __cplusplus

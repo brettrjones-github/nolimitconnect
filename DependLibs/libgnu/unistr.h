@@ -148,7 +148,7 @@ extern int
 # else
 extern int
        u8_mbtouc_unsafe_aux (ucs4_t *puc, const uint8_t *s, size_t n);
-static GOTV_INLINE int
+static NLC_INLINE int
 u8_mbtouc_unsafe (ucs4_t *puc, const uint8_t *s, size_t n)
 {
   uint8_t c = *s;
@@ -171,7 +171,7 @@ extern int
 # else
 extern int
        u16_mbtouc_unsafe_aux (ucs4_t *puc, const uint16_t *s, size_t n);
-static GOTV_INLINE int
+static NLC_INLINE int
 u16_mbtouc_unsafe (ucs4_t *puc, const uint16_t *s, size_t n)
 {
   uint16_t c = *s;
@@ -192,7 +192,7 @@ u16_mbtouc_unsafe (ucs4_t *puc, const uint16_t *s, size_t n)
 extern int
        u32_mbtouc_unsafe (ucs4_t *puc, const uint32_t *s, size_t n);
 # else
-static GOTV_INLINE int
+static NLC_INLINE int
 u32_mbtouc_unsafe (ucs4_t *puc,
                    const uint32_t *s, size_t n _GL_UNUSED_PARAMETER)
 {
@@ -219,7 +219,7 @@ extern int
 # else
 extern int
        u8_mbtouc_aux (ucs4_t *puc, const uint8_t *s, size_t n);
-static GOTV_INLINE int
+static NLC_INLINE int
 u8_mbtouc (ucs4_t *puc, const uint8_t *s, size_t n)
 {
   uint8_t c = *s;
@@ -242,7 +242,7 @@ extern int
 # else
 extern int
        u16_mbtouc_aux (ucs4_t *puc, const uint16_t *s, size_t n);
-static GOTV_INLINE int
+static NLC_INLINE int
 u16_mbtouc (ucs4_t *puc, const uint16_t *s, size_t n)
 {
   uint16_t c = *s;
@@ -263,7 +263,7 @@ u16_mbtouc (ucs4_t *puc, const uint16_t *s, size_t n)
 extern int
        u32_mbtouc (ucs4_t *puc, const uint32_t *s, size_t n);
 # else
-static GOTV_INLINE int
+static NLC_INLINE int
 u32_mbtouc (ucs4_t *puc, const uint32_t *s, size_t n _GL_UNUSED_PARAMETER)
 {
   uint32_t c = *s;
@@ -315,7 +315,7 @@ extern int
 extern int
        u8_uctomb (uint8_t *s, ucs4_t uc, int n);
 # else
-static GOTV_INLINE int
+static NLC_INLINE int
 u8_uctomb (uint8_t *s, ucs4_t uc, int n)
 {
   if (uc < 0x80 && n > 0)
@@ -337,7 +337,7 @@ extern int
 extern int
        u16_uctomb (uint16_t *s, ucs4_t uc, int n);
 # else
-static GOTV_INLINE int
+static NLC_INLINE int
 u16_uctomb (uint16_t *s, ucs4_t uc, int n)
 {
   if (uc < 0xd800 && n > 0)
@@ -356,7 +356,7 @@ u16_uctomb (uint16_t *s, ucs4_t uc, int n)
 extern int
        u32_uctomb (uint32_t *s, ucs4_t uc, int n);
 # else
-static GOTV_INLINE int
+static NLC_INLINE int
 u32_uctomb (uint32_t *s, ucs4_t uc, int n)
 {
   if (uc < 0xd800 || (uc >= 0xe000 && uc < 0x110000))

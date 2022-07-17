@@ -827,6 +827,9 @@ QString MyIcons::getIconFile( enum EMyIcons eMyIcon )
 	case eMyIconRandomConnectInfo:
 		return ":/AppRes/Resources/random-connect-info.svg";
 
+	case eMyIconSoundSettings:
+		return ":/AppRes/Resources/sound-settings.svg";
+
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}

@@ -2016,7 +2016,7 @@ int x264_encoder_headers( x264_t *h, x264_nal_t **pp_nal, int *pi_nal )
 
 /* Check to see whether we have chosen a reference list ordering different
  * from the standard's default. */
-static GOTV_INLINE void x264_reference_check_reorder( x264_t *h )
+static NLC_INLINE void x264_reference_check_reorder( x264_t *h )
 {
     /* The reorder check doesn't check for missing frames, so just
      * force a reorder if one of the reference list is corrupt. */
@@ -2164,7 +2164,7 @@ static void x264_weighted_pred_init( x264_t *h )
     h->sh.weight[0][2].i_denom = h->sh.weight[0][1].i_denom;
 }
 
-static GOTV_INLINE int x264_reference_distance( x264_t *h, x264_frame_t *frame )
+static NLC_INLINE int x264_reference_distance( x264_t *h, x264_frame_t *frame )
 {
     if( h->param.i_frame_packing == 5 )
         return abs((h->fenc->i_frame&~1) - (frame->i_frame&~1)) +
@@ -2173,7 +2173,7 @@ static GOTV_INLINE int x264_reference_distance( x264_t *h, x264_frame_t *frame )
         return abs(h->fenc->i_frame - frame->i_frame);
 }
 
-static GOTV_INLINE void x264_reference_build_list( x264_t *h, int i_poc )
+static NLC_INLINE void x264_reference_build_list( x264_t *h, int i_poc )
 {
     int b_ok;
 
@@ -2411,7 +2411,7 @@ static void x264_fdec_filter_row( x264_t *h, int mb_y, int pass )
     }
 }
 
-static GOTV_INLINE int x264_reference_update( x264_t *h )
+static NLC_INLINE int x264_reference_update( x264_t *h )
 {
     if( !h->fdec->b_kept_as_ref )
     {
@@ -2441,7 +2441,7 @@ static GOTV_INLINE int x264_reference_update( x264_t *h )
     return 0;
 }
 
-static GOTV_INLINE void x264_reference_reset( x264_t *h )
+static NLC_INLINE void x264_reference_reset( x264_t *h )
 {
     while( h->frames.reference[0] )
         x264_frame_push_unused( h, x264_frame_pop( h->frames.reference ) );
@@ -2449,7 +2449,7 @@ static GOTV_INLINE void x264_reference_reset( x264_t *h )
     h->fenc->i_poc = 0;
 }
 
-static GOTV_INLINE void x264_reference_hierarchy_reset( x264_t *h )
+static NLC_INLINE void x264_reference_hierarchy_reset( x264_t *h )
 {
     int ref;
     int b_hasdelayframe = 0;
@@ -2486,7 +2486,7 @@ static GOTV_INLINE void x264_reference_hierarchy_reset( x264_t *h )
         h->sh.i_mmco_remove_from_end = X264_MAX( ref + 2 - h->frames.i_max_dpb, 0 );
 }
 
-static GOTV_INLINE void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
+static NLC_INLINE void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
 {
     /* ------------------------ Create slice header  ----------------------- */
     if( i_nal_type == NAL_SLICE_IDR )

@@ -43,7 +43,7 @@
  *class.
  */
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 typedef struct _CRSelEng CRSelEng ;
 typedef struct _CRSelEngPriv CRSelEngPriv ;
@@ -108,7 +108,7 @@ enum CRStatus cr_sel_eng_get_matched_style (CRSelEng *a_this,
 
 void cr_sel_eng_destroy (CRSelEng *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 
 #endif/*__CR_SEL_ENG_H__*/

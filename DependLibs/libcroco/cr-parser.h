@@ -30,7 +30,7 @@
 #include "cr-utils.h"
 #include "cr-doc-handler.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /**
  *@file
@@ -123,6 +123,6 @@ enum CRStatus cr_parser_parse_font_face (CRParser *a_this) ;
 
 void cr_parser_destroy (CRParser *a_this) ;
         
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_PARSER_H__*/

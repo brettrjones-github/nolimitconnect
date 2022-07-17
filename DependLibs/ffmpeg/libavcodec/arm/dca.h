@@ -29,7 +29,7 @@
 #if HAVE_ARMV6_INLINE && AV_GCC_VERSION_AT_LEAST(4,4) && !CONFIG_THUMB
 
 #define decode_blockcodes decode_blockcodes
-static GOTV_INLINE int decode_blockcodes(int code1, int code2, int levels,
+static NLC_INLINE int decode_blockcodes(int code1, int code2, int levels,
                                     int32_t *values)
 {
     int32_t v0, v1, v2, v3, v4, v5;

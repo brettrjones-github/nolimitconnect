@@ -108,7 +108,7 @@ do_fillM (unsigned char *h, uint64_t *M)
       }
 }
 
-static GOTV_INLINE unsigned int
+static NLC_INLINE unsigned int
 do_ghash (unsigned char *result, const unsigned char *buf, const uint64_t *gcmM)
 {
   uint64_t V[2];
@@ -217,7 +217,7 @@ do_fillM (unsigned char *h, uint32_t *M)
       }
 }
 
-static GOTV_INLINE unsigned int
+static NLC_INLINE unsigned int
 do_ghash (unsigned char *result, const unsigned char *buf, const uint32_t *gcmM)
 {
   byte V[16];
@@ -355,7 +355,7 @@ do_ghash (unsigned char *hsub, unsigned char *result, const unsigned char *buf)
   "Intel® Carry-Less Multiplication Instruction and its Usage for Computing the
    GCM Mode - Rev 2.01"; Shay Gueron, Michael E. Kounavis.
  */
-static GOTV_INLINE void gfmul_pclmul(void)
+static NLC_INLINE void gfmul_pclmul(void)
 {
   /* Input: XMM0 and XMM1, Output: XMM1. Input XMM0 stays unmodified.
      Input must be converted to little-endian.
@@ -430,7 +430,7 @@ static GOTV_INLINE void gfmul_pclmul(void)
 }
 
 #ifdef __x86_64__
-static GOTV_INLINE void gfmul_pclmul_aggr4(void)
+static NLC_INLINE void gfmul_pclmul_aggr4(void)
 {
   /* Input:
       H¹: XMM0		X_i            : XMM6
@@ -742,7 +742,7 @@ setupM (gcry_cipher_hd_t c, byte *h)
 }
 
 
-static GOTV_INLINE void
+static NLC_INLINE void
 gcm_bytecounter_add (uint32_t ctr[2], size_t add)
 {
   if (sizeof(add) > sizeof(uint32_t))
@@ -758,7 +758,7 @@ gcm_bytecounter_add (uint32_t ctr[2], size_t add)
 }
 
 
-static GOTV_INLINE uint32_t
+static NLC_INLINE uint32_t
 gcm_add32_be128 (byte *ctr, unsigned int add)
 {
   /* 'ctr' must be aligned to four bytes. */
@@ -773,7 +773,7 @@ gcm_add32_be128 (byte *ctr, unsigned int add)
 }
 
 
-static GOTV_INLINE int
+static NLC_INLINE int
 gcm_check_datalen (uint32_t ctr[2])
 {
   /* len(plaintext) <= 2^39-256 bits == 2^36-32 bytes == 2^32-2 blocks */
@@ -789,7 +789,7 @@ gcm_check_datalen (uint32_t ctr[2])
 }
 
 
-static GOTV_INLINE int
+static NLC_INLINE int
 gcm_check_aadlen_or_ivlen (uint32_t ctr[2])
 {
   /* len(aad/iv) <= 2^64-1 bits ~= 2^61-1 bytes */

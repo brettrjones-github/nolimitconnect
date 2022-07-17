@@ -120,7 +120,7 @@
 #define _GL_FUNCDECL_RPL(func,rettype,parameters_and_attributes) \
   _GL_FUNCDECL_RPL_1 (rpl_##func, rettype, parameters_and_attributes)
 #define _GL_FUNCDECL_RPL_1(rpl_func,rettype,parameters_and_attributes) \
-  GOTV_EXTERN_C rettype rpl_func parameters_and_attributes
+  NLC_EXTERN_C rettype rpl_func parameters_and_attributes
 
 /* _GL_FUNCDECL_SYS (func, rettype, parameters_and_attributes);
    declares the system function, named func, with the given prototype,
@@ -130,7 +130,7 @@
                                   _GL_ARG_NONNULL ((1)));
  */
 #define _GL_FUNCDECL_SYS(func,rettype,parameters_and_attributes) \
-  GOTV_EXTERN_C rettype func parameters_and_attributes
+  NLC_EXTERN_C rettype func parameters_and_attributes
 
 /* _GL_CXXALIAS_RPL (func, rettype, parameters);
    declares a C++ alias called GNULIB_NAMESPACE::func
@@ -146,10 +146,10 @@
     {                                                         \
       rettype (*const func) parameters = ::rpl_func;          \
     }                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_RPL_1(func,rpl_func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_RPL_CAST_1 (func, rpl_func, rettype, parameters);
@@ -164,10 +164,10 @@
       rettype (*const func) parameters =                           \
         reinterpret_cast<rettype(*)parameters>(::rpl_func);        \
     }                                                              \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_RPL_CAST_1(func,rpl_func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS (func, rettype, parameters);
@@ -189,10 +189,10 @@
     {                                              \
       static rettype (*func) parameters = ::func;  \
     }                                              \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST (func, rettype, parameters);
@@ -207,10 +207,10 @@
       static rettype (*func) parameters =               \
         reinterpret_cast<rettype(*)parameters>(::func); \
     }                                                   \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST2 (func, rettype, parameters, rettype2, parameters2);
@@ -232,10 +232,10 @@
         reinterpret_cast<rettype(*)parameters>(                               \
           (rettype2(*)parameters2)(::func));                                  \
     }                                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST2(func,rettype,parameters,rettype2,parameters2) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN (func);
@@ -259,11 +259,11 @@
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN_2(func,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN(func) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN1 (func, rettype, parameters_and_attributes);
@@ -287,11 +287,11 @@
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN1_2(func,rettype,parameters_and_attributes,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN1(func,rettype,parameters_and_attributes) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 #endif /* _GL_CXXDEFS_H */
@@ -451,19 +451,19 @@ _GL_CXXALIASWARN (mktime);
 #    undef localtime_r
 #    define localtime_r rpl_localtime_r
 #   endif
-_GL_FUNCDECL_RPL (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_RPL (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result)
                                             _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_RPL (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result));
 #  else
 #   if ! 1
-_GL_FUNCDECL_SYS (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_SYS (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result)
                                             _GL_ARG_NONNULL ((1, 2)));
 #   endif
-_GL_CXXALIAS_SYS (localtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                             struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_SYS (localtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                             struct tm *NLC_RESTRICT __result));
 #  endif
 #  if 1
 _GL_CXXALIASWARN (localtime_r);
@@ -473,19 +473,19 @@ _GL_CXXALIASWARN (localtime_r);
 #    undef gmtime_r
 #    define gmtime_r rpl_gmtime_r
 #   endif
-_GL_FUNCDECL_RPL (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_RPL (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result)
                                          _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_RPL (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result));
 #  else
 #   if ! 1
-_GL_FUNCDECL_SYS (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result)
+_GL_FUNCDECL_SYS (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result)
                                          _GL_ARG_NONNULL ((1, 2)));
 #   endif
-_GL_CXXALIAS_SYS (gmtime_r, struct tm *, (time_t const *GOTV_RESTRICT __timer,
-                                          struct tm *GOTV_RESTRICT __result));
+_GL_CXXALIAS_SYS (gmtime_r, struct tm *, (time_t const *NLC_RESTRICT __timer,
+                                          struct tm *NLC_RESTRICT __result));
 #  endif
 #  if 1
 _GL_CXXALIASWARN (gmtime_r);
@@ -530,14 +530,14 @@ _GL_CXXALIASWARN (gmtime);
    <http://www.opengroup.org/susv3xsh/strptime.html>.  */
 # if 0
 #  if ! 1
-_GL_FUNCDECL_SYS (strptime, char *, (char const *GOTV_RESTRICT __buf,
-                                     char const *GOTV_RESTRICT __format,
-                                     struct tm *GOTV_RESTRICT __tm)
+_GL_FUNCDECL_SYS (strptime, char *, (char const *NLC_RESTRICT __buf,
+                                     char const *NLC_RESTRICT __format,
+                                     struct tm *NLC_RESTRICT __tm)
                                     _GL_ARG_NONNULL ((1, 2, 3)));
 #  endif
-_GL_CXXALIAS_SYS (strptime, char *, (char const *GOTV_RESTRICT __buf,
-                                     char const *GOTV_RESTRICT __format,
-                                     struct tm *GOTV_RESTRICT __tm));
+_GL_CXXALIAS_SYS (strptime, char *, (char const *NLC_RESTRICT __buf,
+                                     char const *NLC_RESTRICT __format,
+                                     struct tm *NLC_RESTRICT __tm));
 _GL_CXXALIASWARN (strptime);
 # endif
 
@@ -548,16 +548,16 @@ _GL_CXXALIAS_SYS (tzalloc, timezone_t, (char const *__name));
 _GL_FUNCDECL_SYS (tzfree, void, (timezone_t __tz));
 _GL_CXXALIAS_SYS (tzfree, void, (timezone_t __tz));
 _GL_FUNCDECL_SYS (localtime_rz, struct tm *,
-                  (timezone_t __tz, time_t const *GOTV_RESTRICT __timer,
-                   struct tm *GOTV_RESTRICT __result) _GL_ARG_NONNULL ((2, 3)));
+                  (timezone_t __tz, time_t const *NLC_RESTRICT __timer,
+                   struct tm *NLC_RESTRICT __result) _GL_ARG_NONNULL ((2, 3)));
 _GL_CXXALIAS_SYS (localtime_rz, struct tm *,
-                  (timezone_t __tz, time_t const *GOTV_RESTRICT __timer,
-                   struct tm *GOTV_RESTRICT __result));
+                  (timezone_t __tz, time_t const *NLC_RESTRICT __timer,
+                   struct tm *NLC_RESTRICT __result));
 _GL_FUNCDECL_SYS (mktime_z, time_t,
-                  (timezone_t __tz, struct tm *GOTV_RESTRICT __result)
+                  (timezone_t __tz, struct tm *NLC_RESTRICT __result)
                   _GL_ARG_NONNULL ((2)));
 _GL_CXXALIAS_SYS (mktime_z, time_t,
-                  (timezone_t __tz, struct tm *GOTV_RESTRICT __result));
+                  (timezone_t __tz, struct tm *NLC_RESTRICT __result));
 # endif
 
 /* Convert TM to a time_t value, assuming UTC.  */

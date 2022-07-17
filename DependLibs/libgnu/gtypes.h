@@ -33,7 +33,7 @@
 
 #include <libgnu/config_libgnu.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* Provide type definitions for commonly used types.
  *  These are useful because a "gint8" can be adjusted
@@ -401,7 +401,7 @@ struct _GTimeVal
 
 #endif
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 /* We prefix variable declarations so they can
  * properly get exported in windows dlls.

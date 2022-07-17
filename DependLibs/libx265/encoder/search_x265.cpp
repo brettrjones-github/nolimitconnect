@@ -774,7 +774,7 @@ void Search::extractIntraResultQT(CUData& cu, Yuv& reconYuv, uint32_t tuDepth, u
     }
 }
 
-GOTV_INLINE void offsetCBFs(uint8_t subTUCBF[2])
+NLC_INLINE void offsetCBFs(uint8_t subTUCBF[2])
 {
     uint8_t combinedCBF = subTUCBF[0] | subTUCBF[1];
     subTUCBF[0] = subTUCBF[0] << 1 | combinedCBF;

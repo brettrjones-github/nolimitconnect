@@ -36,12 +36,12 @@ typedef struct gnutls_str_array_st {
 	struct gnutls_str_array_st *next;
 } *gnutls_str_array_t;
 
-GOTV_INLINE static void _gnutls_str_array_init(gnutls_str_array_t * head)
+NLC_INLINE static void _gnutls_str_array_init(gnutls_str_array_t * head)
 {
 	*head = NULL;
 }
 
-GOTV_INLINE static void _gnutls_str_array_clear(gnutls_str_array_t * head)
+NLC_INLINE static void _gnutls_str_array_clear(gnutls_str_array_t * head)
 {
 	gnutls_str_array_t prev, array = *head;
 
@@ -53,7 +53,7 @@ GOTV_INLINE static void _gnutls_str_array_clear(gnutls_str_array_t * head)
 	*head = NULL;
 }
 
-GOTV_INLINE static int _gnutls_str_array_match(gnutls_str_array_t head,
+NLC_INLINE static int _gnutls_str_array_match(gnutls_str_array_t head,
 					  const char *str)
 {
 	gnutls_str_array_t array = head;
@@ -67,7 +67,7 @@ GOTV_INLINE static int _gnutls_str_array_match(gnutls_str_array_t head,
 	return 0;
 }
 
-GOTV_INLINE static void append(gnutls_str_array_t array, const char *str,
+NLC_INLINE static void append(gnutls_str_array_t array, const char *str,
 			  int len)
 {
 	array->str = ((char *) array) + sizeof(struct gnutls_str_array_st);
@@ -77,7 +77,7 @@ GOTV_INLINE static void append(gnutls_str_array_t array, const char *str,
 	array->next = NULL;
 }
 
-GOTV_INLINE static int _gnutls_str_array_append(gnutls_str_array_t * head,
+NLC_INLINE static int _gnutls_str_array_append(gnutls_str_array_t * head,
 					   const char *str, int len)
 {
 	gnutls_str_array_t prev, array;

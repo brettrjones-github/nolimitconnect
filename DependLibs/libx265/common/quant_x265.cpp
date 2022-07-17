@@ -46,12 +46,12 @@ struct coeffGroupRDStats
     int64_t sigCost0;          /* cost of signaling sig coeff bit of coeff 0 */
 };
 
-GOTV_INLINE int fastMin(int x, int y)
+NLC_INLINE int fastMin(int x, int y)
 {
     return y + ((x - y) & ((x - y) >> (sizeof(int) * CHAR_BIT - 1))); // min(x, y)
 }
 
-GOTV_INLINE int getICRate(uint32_t absLevel, int32_t diffLevel, const int* greaterOneBits, const int* levelAbsBits, const uint32_t absGoRice, const uint32_t maxVlc, const uint32_t c1c2Rate)
+NLC_INLINE int getICRate(uint32_t absLevel, int32_t diffLevel, const int* greaterOneBits, const int* levelAbsBits, const uint32_t absGoRice, const uint32_t maxVlc, const uint32_t c1c2Rate)
 {
     X265_CHECK(absGoRice <= 4, "absGoRice check failure\n");
     if (!absLevel)
@@ -100,7 +100,7 @@ GOTV_INLINE int getICRate(uint32_t absLevel, int32_t diffLevel, const int* great
 }
 
 #if CHECKED_BUILD || _DEBUG
-GOTV_INLINE int getICRateNegDiff(uint32_t absLevel, const int* greaterOneBits, const int* levelAbsBits)
+NLC_INLINE int getICRateNegDiff(uint32_t absLevel, const int* greaterOneBits, const int* levelAbsBits)
 {
     X265_CHECK(absLevel <= 2, "absLevel check failure\n");
 
@@ -115,7 +115,7 @@ GOTV_INLINE int getICRateNegDiff(uint32_t absLevel, const int* greaterOneBits, c
 }
 #endif
 
-GOTV_INLINE int getICRateLessVlc(uint32_t absLevel, int32_t diffLevel, const uint32_t absGoRice)
+NLC_INLINE int getICRateLessVlc(uint32_t absLevel, int32_t diffLevel, const uint32_t absGoRice)
 {
     X265_CHECK(absGoRice <= 4, "absGoRice check failure\n");
     if (!absLevel)
@@ -135,7 +135,7 @@ GOTV_INLINE int getICRateLessVlc(uint32_t absLevel, int32_t diffLevel, const uin
 }
 
 /* Calculates the cost for specific absolute transform level */
-GOTV_INLINE uint32_t getICRateCost(uint32_t absLevel, int32_t diffLevel, const int* greaterOneBits, const int* levelAbsBits, uint32_t absGoRice, const uint32_t c1c2Rate)
+NLC_INLINE uint32_t getICRateCost(uint32_t absLevel, int32_t diffLevel, const int* greaterOneBits, const int* levelAbsBits, uint32_t absGoRice, const uint32_t c1c2Rate)
 {
     X265_CHECK(absLevel, "absLevel should not be zero\n");
 

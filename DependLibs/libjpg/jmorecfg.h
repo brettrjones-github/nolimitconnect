@@ -320,15 +320,15 @@ typedef int boolean;
 /* Definitions for speed-related optimizations. */
 
 
-/* If your compiler supports GOTV_INLINE functions, define INLINE
- * as the GOTV_INLINE keyword; otherwise define it as empty.
+/* If your compiler supports NLC_INLINE functions, define INLINE
+ * as the NLC_INLINE keyword; otherwise define it as empty.
  */
 #ifdef TARGET_OS_ANDROID
 #define INLINE __inline__
 #endif
 
 #ifndef INLINE
-#ifdef __GNUC__			/* for instance, GNU C knows about GOTV_INLINE */
+#ifdef __GNUC__			/* for instance, GNU C knows about NLC_INLINE */
 #define INLINE __inline__
 #endif
 #ifndef INLINE

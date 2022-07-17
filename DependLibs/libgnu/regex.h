@@ -608,20 +608,20 @@ extern int re_exec (const char *);
 #endif
 
 /* GCC 2.95 and later have "__restrict"; C99 compilers have
-   "GOTV_RESTRICT", and "configure" may have defined "GOTV_RESTRICT".
+   "NLC_RESTRICT", and "configure" may have defined "NLC_RESTRICT".
    Other compilers use __restrict, __restrict__, and _Restrict, and
-   'configure' might #define 'GOTV_RESTRICT' to those words, so pick a
+   'configure' might #define 'NLC_RESTRICT' to those words, so pick a
    different name.  */
 #ifndef _Restrict_
 # if 199901L <= __STDC_VERSION__
-#  define _Restrict_ GOTV_RESTRICT
+#  define _Restrict_ NLC_RESTRICT
 # elif 2 < __GNUC__ || (2 == __GNUC__ && 95 <= __GNUC_MINOR__)
 #  define _Restrict_ __restrict
 # else
 #  define _Restrict_
 # endif
 #endif
-/* gcc 3.1 and up support the [GOTV_RESTRICT] syntax.  Don't trust
+/* gcc 3.1 and up support the [NLC_RESTRICT] syntax.  Don't trust
    sys/cdefs.h's definition of __restrict_arr, though, as it
    mishandles gcc -ansi -pedantic.  */
 #ifndef _Restrict_arr_

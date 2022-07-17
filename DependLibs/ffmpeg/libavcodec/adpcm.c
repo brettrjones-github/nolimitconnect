@@ -177,7 +177,7 @@ static av_cold int adpcm_decode_init(AVCodecContext * avctx)
     return 0;
 }
 
-static GOTV_INLINE int16_t adpcm_ima_expand_nibble(ADPCMChannelStatus *c, int8_t nibble, int shift)
+static NLC_INLINE int16_t adpcm_ima_expand_nibble(ADPCMChannelStatus *c, int8_t nibble, int shift)
 {
     int step_index;
     int predictor;
@@ -203,7 +203,7 @@ static GOTV_INLINE int16_t adpcm_ima_expand_nibble(ADPCMChannelStatus *c, int8_t
     return (int16_t)c->predictor;
 }
 
-static GOTV_INLINE int16_t adpcm_ima_wav_expand_nibble(ADPCMChannelStatus *c, GetBitContext *gb, int bps)
+static NLC_INLINE int16_t adpcm_ima_wav_expand_nibble(ADPCMChannelStatus *c, GetBitContext *gb, int bps)
 {
     int nibble, step_index, predictor, sign, delta, diff, step, shift;
 
@@ -226,7 +226,7 @@ static GOTV_INLINE int16_t adpcm_ima_wav_expand_nibble(ADPCMChannelStatus *c, Ge
     return (int16_t)c->predictor;
 }
 
-static GOTV_INLINE int adpcm_ima_qt_expand_nibble(ADPCMChannelStatus *c, int nibble, int shift)
+static NLC_INLINE int adpcm_ima_qt_expand_nibble(ADPCMChannelStatus *c, int nibble, int shift)
 {
     int step_index;
     int predictor;
@@ -252,7 +252,7 @@ static GOTV_INLINE int adpcm_ima_qt_expand_nibble(ADPCMChannelStatus *c, int nib
     return c->predictor;
 }
 
-static GOTV_INLINE int16_t adpcm_ms_expand_nibble(ADPCMChannelStatus *c, int nibble)
+static NLC_INLINE int16_t adpcm_ms_expand_nibble(ADPCMChannelStatus *c, int nibble)
 {
     int predictor;
 
@@ -271,7 +271,7 @@ static GOTV_INLINE int16_t adpcm_ms_expand_nibble(ADPCMChannelStatus *c, int nib
     return c->sample1;
 }
 
-static GOTV_INLINE int16_t adpcm_ima_oki_expand_nibble(ADPCMChannelStatus *c, int nibble)
+static NLC_INLINE int16_t adpcm_ima_oki_expand_nibble(ADPCMChannelStatus *c, int nibble)
 {
     int step_index, predictor, sign, delta, diff, step;
 
@@ -292,7 +292,7 @@ static GOTV_INLINE int16_t adpcm_ima_oki_expand_nibble(ADPCMChannelStatus *c, in
     return c->predictor << 4;
 }
 
-static GOTV_INLINE int16_t adpcm_ct_expand_nibble(ADPCMChannelStatus *c, int8_t nibble)
+static NLC_INLINE int16_t adpcm_ct_expand_nibble(ADPCMChannelStatus *c, int8_t nibble)
 {
     int sign, delta, diff;
     int new_step;
@@ -313,7 +313,7 @@ static GOTV_INLINE int16_t adpcm_ct_expand_nibble(ADPCMChannelStatus *c, int8_t 
     return (int16_t)c->predictor;
 }
 
-static GOTV_INLINE int16_t adpcm_sbpro_expand_nibble(ADPCMChannelStatus *c, int8_t nibble, int size, int shift)
+static NLC_INLINE int16_t adpcm_sbpro_expand_nibble(ADPCMChannelStatus *c, int8_t nibble, int size, int shift)
 {
     int sign, delta, diff;
 
@@ -333,7 +333,7 @@ static GOTV_INLINE int16_t adpcm_sbpro_expand_nibble(ADPCMChannelStatus *c, int8
     return (int16_t) c->predictor;
 }
 
-static GOTV_INLINE int16_t adpcm_yamaha_expand_nibble(ADPCMChannelStatus *c, uint8_t nibble)
+static NLC_INLINE int16_t adpcm_yamaha_expand_nibble(ADPCMChannelStatus *c, uint8_t nibble)
 {
     if(!c->step) {
         c->predictor = 0;
@@ -347,7 +347,7 @@ static GOTV_INLINE int16_t adpcm_yamaha_expand_nibble(ADPCMChannelStatus *c, uin
     return c->predictor;
 }
 
-static GOTV_INLINE int16_t adpcm_mtaf_expand_nibble(ADPCMChannelStatus *c, uint8_t nibble)
+static NLC_INLINE int16_t adpcm_mtaf_expand_nibble(ADPCMChannelStatus *c, uint8_t nibble)
 {
     c->predictor += ff_adpcm_mtaf_stepsize[c->step][nibble];
     c->predictor = av_clip_int16(c->predictor);

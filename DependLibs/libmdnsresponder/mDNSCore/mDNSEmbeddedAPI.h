@@ -1057,7 +1057,7 @@ typedef struct
 // sizeofRDataHeader should be 4 bytes
 #define sizeofRDataHeader (sizeof(RData) - sizeof(RDataBody))
 
-// RData_small is a smaller version of the RData object, used for GOTV_INLINE data storage embedded in a CacheRecord_struct
+// RData_small is a smaller version of the RData object, used for NLC_INLINE data storage embedded in a CacheRecord_struct
 typedef struct
 {
     mDNSu16 MaxRDLength;    // Storage allocated for data (may be greater than InlineCacheRDSize if additional storage follows this object)
@@ -2569,10 +2569,10 @@ extern mDNSu8 NumUnreachableDNSServers;
 #if (defined(_MSC_VER))
     #define mDNSinline static __inline
 #elif ((__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 9)))
-    #define mDNSinline static GOTV_INLINE
+    #define mDNSinline static NLC_INLINE
 #endif
 
-// If we're not doing GOTV_INLINE functions, then this header needs to have the extern declarations
+// If we're not doing NLC_INLINE functions, then this header needs to have the extern declarations
 #if !defined(mDNSinline)
 extern mDNSs32      NonZeroTime(mDNSs32 t);
 extern mDNSu16      mDNSVal16(mDNSOpaque16 x);

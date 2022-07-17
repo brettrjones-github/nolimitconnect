@@ -223,7 +223,7 @@ _GL_INLINE_HEADER_BEGIN
 #define _GL_FUNCDECL_RPL(func,rettype,parameters_and_attributes) \
   _GL_FUNCDECL_RPL_1 (rpl_##func, rettype, parameters_and_attributes)
 #define _GL_FUNCDECL_RPL_1(rpl_func,rettype,parameters_and_attributes) \
-  GOTV_EXTERN_C rettype rpl_func parameters_and_attributes
+  NLC_EXTERN_C rettype rpl_func parameters_and_attributes
 
 /* _GL_FUNCDECL_SYS (func, rettype, parameters_and_attributes);
    declares the system function, named func, with the given prototype,
@@ -233,7 +233,7 @@ _GL_INLINE_HEADER_BEGIN
                                   _GL_ARG_NONNULL ((1)));
  */
 #define _GL_FUNCDECL_SYS(func,rettype,parameters_and_attributes) \
-  GOTV_EXTERN_C rettype func parameters_and_attributes
+  NLC_EXTERN_C rettype func parameters_and_attributes
 
 /* _GL_CXXALIAS_RPL (func, rettype, parameters);
    declares a C++ alias called GNULIB_NAMESPACE::func
@@ -249,10 +249,10 @@ _GL_INLINE_HEADER_BEGIN
     {                                                         \
       rettype (*const func) parameters = ::rpl_func;          \
     }                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_RPL_1(func,rpl_func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_RPL_CAST_1 (func, rpl_func, rettype, parameters);
@@ -267,10 +267,10 @@ _GL_INLINE_HEADER_BEGIN
       rettype (*const func) parameters =                           \
         reinterpret_cast<rettype(*)parameters>(::rpl_func);        \
     }                                                              \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_RPL_CAST_1(func,rpl_func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS (func, rettype, parameters);
@@ -292,10 +292,10 @@ _GL_INLINE_HEADER_BEGIN
     {                                              \
       static rettype (*func) parameters = ::func;  \
     }                                              \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST (func, rettype, parameters);
@@ -310,10 +310,10 @@ _GL_INLINE_HEADER_BEGIN
       static rettype (*func) parameters =               \
         reinterpret_cast<rettype(*)parameters>(::func); \
     }                                                   \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST(func,rettype,parameters) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIAS_SYS_CAST2 (func, rettype, parameters, rettype2, parameters2);
@@ -335,10 +335,10 @@ _GL_INLINE_HEADER_BEGIN
         reinterpret_cast<rettype(*)parameters>(                               \
           (rettype2(*)parameters2)(::func));                                  \
     }                                                                         \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #else
 # define _GL_CXXALIAS_SYS_CAST2(func,rettype,parameters,rettype2,parameters2) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN (func);
@@ -362,11 +362,11 @@ _GL_INLINE_HEADER_BEGIN
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN_2(func,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN(func) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 /* _GL_CXXALIASWARN1 (func, rettype, parameters_and_attributes);
@@ -390,11 +390,11 @@ _GL_INLINE_HEADER_BEGIN
      extern __typeof__ (func) func
 # else
 #  define _GL_CXXALIASWARN1_2(func,rettype,parameters_and_attributes,namespace) \
-     GOTV_EXTERN_C int _gl_cxxalias_dummy
+     NLC_EXTERN_C int _gl_cxxalias_dummy
 # endif
 #else
 # define _GL_CXXALIASWARN1(func,rettype,parameters_and_attributes) \
-    GOTV_EXTERN_C int _gl_cxxalias_dummy
+    NLC_EXTERN_C int _gl_cxxalias_dummy
 #endif
 
 #endif /* _GL_CXXDEFS_H */
@@ -800,11 +800,11 @@ _GL_WARN_ON_USE (faccessat, "faccessat is not portable - "
 _GL_FUNCDECL_SYS (fchdir, int, (int /*fd*/));
 
 /* Gnulib internal hooks needed to maintain the fchdir metadata.  */
-GOTV_EXTERN_C int _gl_register_fd (int fd, const char *filename)
+NLC_EXTERN_C int _gl_register_fd (int fd, const char *filename)
      _GL_ARG_NONNULL ((2));
-GOTV_EXTERN_C void _gl_unregister_fd (int fd);
-GOTV_EXTERN_C int _gl_register_dup (int oldfd, int newfd);
-GOTV_EXTERN_C const char *_gl_directory_name (int fd);
+NLC_EXTERN_C void _gl_unregister_fd (int fd);
+NLC_EXTERN_C int _gl_register_dup (int oldfd, int newfd);
+NLC_EXTERN_C const char *_gl_directory_name (int fd);
 
 # else
 #  if !1

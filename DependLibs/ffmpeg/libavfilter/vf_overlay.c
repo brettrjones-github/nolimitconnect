@@ -136,7 +136,7 @@ static av_cold void uninit(AVFilterContext *ctx)
     av_expr_free(s->y_pexpr); s->y_pexpr = NULL;
 }
 
-static GOTV_INLINE int normalize_xy(double d, int chroma_sub)
+static NLC_INLINE int normalize_xy(double d, int chroma_sub)
 {
     if (isnan(d))
         return INT_MAX;

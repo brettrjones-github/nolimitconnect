@@ -175,14 +175,14 @@ struct Model
 };
 
 
-GOTV_INLINE
+NLC_INLINE
 Printer::Printer()
     :
     isCUPSPrinter( false )
 {
 }
 
-GOTV_INLINE
+NLC_INLINE
 Printer::~Printer()
 {
     while ( services.size() > 0 )
@@ -193,7 +193,7 @@ Printer::~Printer()
     }
 }
 
-GOTV_INLINE Service*
+NLC_INLINE Service*
 Printer::LookupService
 (
     const std::string   &   type
@@ -214,14 +214,14 @@ Printer::LookupService
     return NULL;
 }
 
-GOTV_INLINE
+NLC_INLINE
 Service::Service()
     :
     qtotal(kDefaultQTotal)
 {
 }
 
-GOTV_INLINE
+NLC_INLINE
 Service::~Service()
 {
     check( serviceRef == NULL );
@@ -229,13 +229,13 @@ Service::~Service()
     EmptyQueues();
 }
 
-GOTV_INLINE Queue*
+NLC_INLINE Queue*
 Service::SelectedQueue()
 {
     return queues.front();
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 Service::EmptyQueues()
 {
     while ( queues.size() > 0 )
@@ -246,19 +246,19 @@ Service::EmptyQueues()
     }
 }
 
-GOTV_INLINE
+NLC_INLINE
 Queue::Queue()
     :
     priority(kDefaultPriority)
 {
 }
 
-GOTV_INLINE
+NLC_INLINE
 Queue::~Queue()
 {
 }
 
-GOTV_INLINE Model*
+NLC_INLINE Model*
 Manufacturer::find( const CString & name )
 {
     Models::iterator it;

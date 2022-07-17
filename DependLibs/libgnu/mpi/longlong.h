@@ -1363,7 +1363,7 @@ typedef unsigned int UTItype __attribute__ ((mode (TI)));
  "        rd	%%y,%1                                               \n" \
  "        bl,a 1f                                                    \n" \
  "        add	%1,%4,%1                                             \n" \
- "1:	! End of GOTV_INLINE udiv_qrnnd"                                     \
+ "1:	! End of NLC_INLINE udiv_qrnnd"                                     \
 	   : "=r" ((USItype)(q)),                                       \
 	     "=r" ((USItype)(r))                                        \
 	   : "r" ((USItype)(n1)),                                       \
@@ -1553,7 +1553,7 @@ extern USItype __udiv_qrnnd ();
     ((UDWtype) __hi << W_TYPE_SIZE) | __lo; })
 #endif
 
-/* If this machine has no GOTV_INLINE assembler, use C macros.  */
+/* If this machine has no NLC_INLINE assembler, use C macros.  */
 
 #if !defined (add_ssaaaa)
 #define add_ssaaaa(sh, sl, ah, al, bh, bl) \

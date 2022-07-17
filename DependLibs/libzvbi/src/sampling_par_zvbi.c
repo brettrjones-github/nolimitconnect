@@ -66,7 +66,7 @@ _vbi_videostd_set_from_scanning
 	return 0;
 }
 
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 range_check			(unsigned int		start,
 				 unsigned int		count,
 				 unsigned int		min,

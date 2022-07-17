@@ -83,7 +83,7 @@ static void comment_init(char **comments, int* length, const char *vendor_string
 static void comment_pad(char **comments, int* length, int amount);
 
 /*Write an Ogg page to a file pointer*/
-static GOTV_INLINE int oe_write_page(ogg_page *page, FILE *fp)
+static NLC_INLINE int oe_write_page(ogg_page *page, FILE *fp)
 {
    int written;
    written=fwrite(page->header,1,page->header_len, fp);
@@ -231,7 +231,7 @@ void usage(void)
   printf(" --ignorelength     Always ignore the datalength in Wave headers\n");
 }
 
-static GOTV_INLINE void print_time(double seconds)
+static NLC_INLINE void print_time(double seconds)
 {
   opus_int64 hours, minutes;
   hours=seconds/3600;

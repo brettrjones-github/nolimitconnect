@@ -24,17 +24,20 @@
 #include "AudioInIo.h"
 #include <GuiInterface/IAudioInterface.h>
 
+class AppCommon;
+
 class AudioIoMgr : public QWidget, public IAudioRequests
 {
     Q_OBJECT
 public:
-    explicit AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent );
+    explicit AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget * parent );
 
     ~AudioIoMgr() override = default;
 
     void                        initAudioIoSystem();
     void                        destroyAudioIoSystem();
 
+    P2PEngine&                  getEngine( void );
     QMediaDevices*              getMediaDevices( void )     { return m_MediaDevices; }
 
     virtual int				    getMicrophonePeakValue0To100( void );
@@ -64,12 +67,14 @@ public:
 
     bool                        isMicrophoneAvailable( void )           { return m_MicrophoneAvailable; }
     bool                        isMicrophoneEnabled( void )             { return m_WantMicrophone; }
+    bool                        isMicrophoneInputWanted( void )         { return m_WantMicrophone; }
 
     void                        fromGuiMuteMicrophone( bool mute );
     bool                        fromGuiIsMicrophoneMuted( void )        { return m_MicrophoneMuted; }
 
     bool                        isSpeakerAvailable( void )              { return m_SpeakerAvailable; }
     bool                        isSpeakerEnabled( void )                { return m_WantSpeakerOutput; }
+    bool                        isSpeakerOutputWanted( void )           { return m_WantSpeakerOutput; }
 
     void                        fromGuiMuteSpeaker( bool mute );
     bool                        fromGuiIsSpeakerMuted()                 { return m_SpeakersMuted; }
@@ -82,10 +87,8 @@ public:
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     // enable disable sound out
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
-    // add audio data to play.. assumes float 2 channel 48000 Hz so convert float to s16 pcm data before calling writeData
-    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
-    // add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
+    // add audio data to play.. assumes pcm mono 8000 Hz of mixer buffer length
+    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
     // delay of audio calculated from amount of data in queue
     virtual double				toGuiGetAudioDelayMs( EAppModule appModule );
     // delay of audio calculated from amount of data in queue
@@ -108,6 +111,18 @@ public:
     int                         getAudioInPeakAmplitude( void );
     int                         getAudioOutPeakAmplitude( void );
 
+    bool                        setSoundInDeviceIndex( int sndInDeviceIndex );
+    bool                        getSoundInDeviceIndex( int& retDeviceIndex );
+
+    bool                        setSoundOutDeviceIndex( int sndOutDeviceIndex );
+    bool                        getSoundOutDeviceIndex( int& retDeviceIndex );
+
+    void                        getSoundInDevices( std::vector< std::pair<QString, QAudioDevice> >& retInDeviceList );
+    void                        getSoundOutDevices( std::vector< std::pair<QString, QAudioDevice> >& retOutDeviceList );
+
+    void                        soundInDeviceChanged( int deviceIndex );
+    void                        soundOutDeviceChanged( int deviceIndex );
+
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
 
@@ -122,13 +137,12 @@ protected:
     int                         getCachedDataLength( EAppModule appModule );
 
     void                        aboutToDestroy();
-
     // update speakers to current mode and output
     void                        enableSpeakers( bool enable );
     // update microphone output
     void                        enableMicrophone( bool enable );
 
-private:
+    AppCommon&                  m_MyApp;
     QMediaDevices*              m_MediaDevices{ nullptr };
 
     IAudioCallbacks&            m_AudioCallbacks;

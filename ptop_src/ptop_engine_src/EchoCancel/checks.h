@@ -98,7 +98,7 @@ namespace rtc {
 
 // Build the error message string.  This is separate from the "Impl"
 // function template because it is not performance critical and so can
-// be out of line, while the "Impl" code should be GOTV_INLINE.  Caller
+// be out of line, while the "Impl" code should be NLC_INLINE.  Caller
 // takes ownership of the returned string.
 template<class t1, class t2>
 std::string* MakeCheckOpString(const t1& v1, const t2& v2, const char* names) {
@@ -134,14 +134,14 @@ std::string* MakeCheckOpString<std::string, std::string>(
 // unnamed enum type - see comment below.
 #define DEFINE_RTC_CHECK_OP_IMPL(name, op)                                   \
   template <class t1, class t2>                                              \
-  GOTV_INLINE std::string* Check##name##Impl(const t1& v1, const t2& v2,          \
+  NLC_INLINE std::string* Check##name##Impl(const t1& v1, const t2& v2,          \
                                         const char* names) {                 \
     if (v1 op v2)                                                            \
       return NULL;                                                           \
     else                                                                     \
       return rtc::MakeCheckOpString(v1, v2, names);                          \
   }                                                                          \
-  GOTV_INLINE std::string* Check##name##Impl(int v1, int v2, const char* names) { \
+  NLC_INLINE std::string* Check##name##Impl(int v1, int v2, const char* names) { \
     if (v1 op v2)                                                            \
       return NULL;                                                           \
     else                                                                     \
@@ -221,7 +221,7 @@ class FatalMessage {
 // Performs the integer division a/b and returns the result. CHECKs that the
 // remainder is zero.
 template <typename T>
-GOTV_INLINE T CheckedDivExact(T a, T b) {
+NLC_INLINE T CheckedDivExact(T a, T b) {
   RTC_CHECK_EQ(a % b, static_cast<T>(0));
   return a / b;
 }

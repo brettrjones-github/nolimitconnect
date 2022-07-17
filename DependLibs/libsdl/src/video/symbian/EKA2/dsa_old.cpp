@@ -593,7 +593,7 @@ void CDsa::SetCopyFunction()
 	Wipe();
 	}
 	
-GOTV_INLINE void Rotate(TRect& aRect)
+NLC_INLINE void Rotate(TRect& aRect)
 	{
 	const TInt dx = aRect.iBr.iX - aRect.iTl.iX;
 	const TInt dy = aRect.iBr.iY - aRect.iTl.iY;

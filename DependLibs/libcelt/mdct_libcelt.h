@@ -49,7 +49,7 @@ typedef struct {
    int n;
    int maxshift;
    const kiss_fft_state *kfft[4];
-   const kiss_twiddle_scalar * GOTV_RESTRICT trig;
+   const kiss_twiddle_scalar * NLC_RESTRICT trig;
 } mdct_lookup;
 
 void clt_mdct_init(mdct_lookup *l,int N, int maxshift);
@@ -60,6 +60,6 @@ void clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar
 
 /** Compute a backward MDCT (no scaling) and performs weighted overlap-add 
     (scales implicitly by 1/2) */
-void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar *out, const libcelt_word16 * GOTV_RESTRICT window, int overlap, int shift);
+void clt_mdct_backward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar *out, const libcelt_word16 * NLC_RESTRICT window, int overlap, int shift);
 
 #endif

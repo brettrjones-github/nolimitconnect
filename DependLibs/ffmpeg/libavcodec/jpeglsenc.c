@@ -44,7 +44,7 @@ typedef struct JPEGLSContext {
 /**
  * Encode error from regular symbol
  */
-static GOTV_INLINE void ls_encode_regular(JLSState *state, PutBitContext *pb, int Q,
+static NLC_INLINE void ls_encode_regular(JLSState *state, PutBitContext *pb, int Q,
                                      int err)
 {
     int k;
@@ -72,7 +72,7 @@ static GOTV_INLINE void ls_encode_regular(JLSState *state, PutBitContext *pb, in
 /**
  * Encode error from run termination
  */
-static GOTV_INLINE void ls_encode_runterm(JLSState *state, PutBitContext *pb,
+static NLC_INLINE void ls_encode_runterm(JLSState *state, PutBitContext *pb,
                                      int RItype, int err, int limit_add)
 {
     int k;
@@ -105,7 +105,7 @@ static GOTV_INLINE void ls_encode_runterm(JLSState *state, PutBitContext *pb,
 /**
  * Encode run value as specified by JPEG-LS standard
  */
-static GOTV_INLINE void ls_encode_run(JLSState *state, PutBitContext *pb, int run,
+static NLC_INLINE void ls_encode_run(JLSState *state, PutBitContext *pb, int run,
                                  int comp, int trail)
 {
     while (run >= (1 << ff_log2_run[state->run_index[comp]])) {
@@ -127,7 +127,7 @@ static GOTV_INLINE void ls_encode_run(JLSState *state, PutBitContext *pb, int ru
 /**
  * Encode one line of image
  */
-static GOTV_INLINE void ls_encode_line(JLSState *state, PutBitContext *pb,
+static NLC_INLINE void ls_encode_line(JLSState *state, PutBitContext *pb,
                                   void *last, void *cur, int last2, int w,
                                   int stride, int comp, int bits)
 {

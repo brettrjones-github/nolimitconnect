@@ -512,7 +512,7 @@ insert_sliced_data_units	(uint8_t **		packet,
 	return 0; /* success */
 }
 
-GOTV_INLINE vbi_bool
+NLC_INLINE vbi_bool
 fixed_length_format		(unsigned int		data_identifier)
 {
 	/* EN 301 775 section 4.4.2: If the data_identifier has a
@@ -1188,7 +1188,7 @@ samples_pointer			(const uint8_t **	samples,
 	return 0; /* success */
 }
 				 
-GOTV_INLINE void
+NLC_INLINE void
 encode_timestamp		(uint8_t *		p,
 				 int64_t		pts,
 				 unsigned int		mark)

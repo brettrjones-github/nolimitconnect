@@ -192,7 +192,7 @@ static void gmc_motion(MpegEncContext *s,
                 (s->h_edge_pos + 1) >> 1, (s->v_edge_pos + 1) >> 1);
 }
 
-static GOTV_INLINE int hpel_motion(MpegEncContext *s,
+static NLC_INLINE int hpel_motion(MpegEncContext *s,
                               uint8_t *dest, uint8_t *src,
                               int src_x, int src_y,
                               op_pixels_func *pix_op,
@@ -408,7 +408,7 @@ static void mpeg_motion_field(MpegEncContext *s, uint8_t *dest_y,
 }
 
 // FIXME: SIMDify, avg variant, 16x16 version
-static GOTV_INLINE void put_obmc(uint8_t *dst, uint8_t *src[5], int stride)
+static NLC_INLINE void put_obmc(uint8_t *dst, uint8_t *src[5], int stride)
 {
     int x;
     uint8_t *const top    = src[1];
@@ -461,7 +461,7 @@ static GOTV_INLINE void put_obmc(uint8_t *dst, uint8_t *src[5], int stride)
 }
 
 /* obmc for 1 8x8 luma block */
-static GOTV_INLINE void obmc_motion(MpegEncContext *s,
+static NLC_INLINE void obmc_motion(MpegEncContext *s,
                                uint8_t *dest, uint8_t *src,
                                int src_x, int src_y,
                                op_pixels_func *pix_op,
@@ -487,7 +487,7 @@ static GOTV_INLINE void obmc_motion(MpegEncContext *s,
     put_obmc(dest, ptr, s->linesize);
 }
 
-static GOTV_INLINE void qpel_motion(MpegEncContext *s,
+static NLC_INLINE void qpel_motion(MpegEncContext *s,
                                uint8_t *dest_y,
                                uint8_t *dest_cb,
                                uint8_t *dest_cr,
@@ -646,7 +646,7 @@ static void chroma_4mv_motion(MpegEncContext *s,
     pix_op[dxy](dest_cr, ptr, s->uvlinesize, 8);
 }
 
-static GOTV_INLINE void prefetch_motion(MpegEncContext *s, uint8_t **pix, int dir)
+static NLC_INLINE void prefetch_motion(MpegEncContext *s, uint8_t **pix, int dir)
 {
     /* fetch pixels for estimated mv 4 macroblocks ahead
      * optimized for 64byte cache lines */
@@ -660,7 +660,7 @@ static GOTV_INLINE void prefetch_motion(MpegEncContext *s, uint8_t **pix, int di
     s->vdsp.prefetch(pix[1] + off, pix[2] - pix[1], 2);
 }
 
-static GOTV_INLINE void apply_obmc(MpegEncContext *s,
+static NLC_INLINE void apply_obmc(MpegEncContext *s,
                               uint8_t *dest_y,
                               uint8_t *dest_cb,
                               uint8_t *dest_cr,
@@ -747,7 +747,7 @@ static GOTV_INLINE void apply_obmc(MpegEncContext *s,
                           mx, my);
 }
 
-static GOTV_INLINE void apply_8x8(MpegEncContext *s,
+static NLC_INLINE void apply_8x8(MpegEncContext *s,
                              uint8_t *dest_y,
                              uint8_t *dest_cb,
                              uint8_t *dest_cr,

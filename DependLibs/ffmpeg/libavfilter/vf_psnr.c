@@ -104,7 +104,7 @@ static uint64_t sse_line_16bit(const uint8_t *_main_line, const uint8_t *_ref_li
     return m2;
 }
 
-static GOTV_INLINE
+static NLC_INLINE
 void compute_images_mse(PSNRContext *s,
                         const uint8_t *main_data[4], const int main_linesizes[4],
                         const uint8_t *ref_data[4], const int ref_linesizes[4],

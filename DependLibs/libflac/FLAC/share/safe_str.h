@@ -38,7 +38,7 @@
 #ifndef FLAC__SHARE_SAFE_STR_H
 #define FLAC__SHARE_SAFE_STR_H
 
-static GOTV_INLINE char *
+static NLC_INLINE char *
 safe_strncat(char *dest, const char *src, size_t dest_size)
 {
 	char * ret;
@@ -52,7 +52,7 @@ safe_strncat(char *dest, const char *src, size_t dest_size)
 	return ret;
 }
 
-static GOTV_INLINE char *
+static NLC_INLINE char *
 safe_strncpy(char *dest, const char *src, size_t dest_size)
 {
 	char * ret;

@@ -86,7 +86,7 @@ private:
 /*----------------------------------------------------------------------
 |   operator+
 +---------------------------------------------------------------------*/
-GOTV_INLINE 
+NLC_INLINE 
 NPT_TimeStamp 
 operator+(const NPT_TimeStamp& t1, const NPT_TimeStamp& t2) 
 {
@@ -97,7 +97,7 @@ operator+(const NPT_TimeStamp& t1, const NPT_TimeStamp& t2)
 /*----------------------------------------------------------------------
 |   operator-
 +---------------------------------------------------------------------*/
-GOTV_INLINE 
+NLC_INLINE 
 NPT_TimeStamp 
 operator-(const NPT_TimeStamp& t1, const NPT_TimeStamp& t2) 
 {

@@ -28,7 +28,7 @@
 
 #define AV_READ_TIME read_time
 
-static GOTV_INLINE uint64_t read_time(void)
+static NLC_INLINE uint64_t read_time(void)
 {
     unsigned cc;
     __asm__ volatile ("mrc p15, 0, %0, c9, c13, 0" : "=r"(cc));

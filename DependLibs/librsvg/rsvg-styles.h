@@ -34,7 +34,7 @@
 #include <libxml/SAX.h>
 #include <pango/pango.h>
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 typedef int TextDecoration;
 
@@ -249,6 +249,6 @@ void rsvg_state_reinherit_top	(RsvgDrawingCtx * ctx, RsvgState * state, int domi
 G_GNUC_INTERNAL
 void rsvg_state_reconstruct	(RsvgState * state, RsvgNode * current);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif                          /* RSVG_STYLES_H */

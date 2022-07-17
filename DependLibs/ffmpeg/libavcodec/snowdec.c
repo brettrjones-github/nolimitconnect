@@ -114,7 +114,7 @@ static av_always_inline void predict_slice_buffered(SnowContext *s, slice_buffer
         }
 }
 
-static GOTV_INLINE void decode_subband_slice_buffered(SnowContext *s, SubBand *b, slice_buffer * sb, int start_y, int h, int save_state[1]){
+static NLC_INLINE void decode_subband_slice_buffered(SnowContext *s, SubBand *b, slice_buffer * sb, int start_y, int h, int save_state[1]){
     const int w= b->width;
     int y;
     const int qlog= av_clip(s->qlog + b->qlog, 0, QROOT*16);

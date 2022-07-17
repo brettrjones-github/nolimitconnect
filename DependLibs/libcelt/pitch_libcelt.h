@@ -37,10 +37,10 @@
 
 #include "modes_libcelt.h"
 
-void pitch_downsample(libcelt_sig * GOTV_RESTRICT x[], libcelt_word16 * GOTV_RESTRICT x_lp,
+void pitch_downsample(libcelt_sig * NLC_RESTRICT x[], libcelt_word16 * NLC_RESTRICT x_lp,
       int len, int _C);
 
-void pitch_search(const libcelt_word16 * GOTV_RESTRICT x_lp, libcelt_word16 * GOTV_RESTRICT y,
+void pitch_search(const libcelt_word16 * NLC_RESTRICT x_lp, libcelt_word16 * NLC_RESTRICT y,
                   int len, int max_pitch, int *pitch);
 
 libcelt_word16 remove_doubling(libcelt_word16 *x, int maxperiod, int minperiod,

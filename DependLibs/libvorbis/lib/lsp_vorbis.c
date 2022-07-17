@@ -60,7 +60,7 @@
 
 #ifdef FLOAT_LOOKUP
 #include "lookup.c" /* catch this in the build system; we #include for
-                       compilers (like gcc) that can't GOTV_INLINE across
+                       compilers (like gcc) that can't NLC_INLINE across
                        modules */
 
 /* side effect: changes *lsp to cosines of lsp */
@@ -118,7 +118,7 @@ void vorbis_lsp_to_curve(float *curve,int *map,int n,int ln,float *lsp,int m,
 
 #ifdef INT_LOOKUP
 #include "lookup.c" /* catch this in the build system; we #include for
-                       compilers (like gcc) that can't GOTV_INLINE across
+                       compilers (like gcc) that can't NLC_INLINE across
                        modules */
 
 static const int MLOOP_1[64]={

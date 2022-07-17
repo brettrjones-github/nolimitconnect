@@ -251,7 +251,7 @@ static const vector unsigned char
                   (vector unsigned short)                               \
                       vec_max(y, ((vector signed short) { 0 })))
 
-static GOTV_INLINE void cvtyuvtoRGB(SwsContext *c, vector signed short Y,
+static NLC_INLINE void cvtyuvtoRGB(SwsContext *c, vector signed short Y,
                                vector signed short U, vector signed short V,
                                vector signed short *R, vector signed short *G,
                                vector signed short *B)

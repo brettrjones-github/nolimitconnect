@@ -48,7 +48,7 @@ static const uint16_t opus_frame_duration[32] = {
 /**
  * Read a 1- or 2-byte frame length
  */
-static GOTV_INLINE int xiph_lacing_16bit(const uint8_t **ptr, const uint8_t *end)
+static NLC_INLINE int xiph_lacing_16bit(const uint8_t **ptr, const uint8_t *end)
 {
     int val;
 
@@ -66,7 +66,7 @@ static GOTV_INLINE int xiph_lacing_16bit(const uint8_t **ptr, const uint8_t *end
 /**
  * Read a multi-byte length (used for code 3 packet padding size)
  */
-static GOTV_INLINE int xiph_lacing_full(const uint8_t **ptr, const uint8_t *end)
+static NLC_INLINE int xiph_lacing_full(const uint8_t **ptr, const uint8_t *end)
 {
     int val = 0;
     int next;

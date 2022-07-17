@@ -48,7 +48,7 @@
  *
  ****************************************************************************/
 
-static GOTV_INLINE void cavs_idct8_1d(int16_t *block, uint64_t bias)
+static NLC_INLINE void cavs_idct8_1d(int16_t *block, uint64_t bias)
 {
     __asm__ volatile(
         "movq 112(%0), %%mm4  \n\t" /* mm4 = src7 */
@@ -382,15 +382,15 @@ static void OPNAME ## cavs_qpel8_h_ ## MMX(uint8_t *dst, const uint8_t *src, int
     );\
 }\
 \
-static GOTV_INLINE void OPNAME ## cavs_qpel8or16_v1_ ## MMX(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h){\
+static NLC_INLINE void OPNAME ## cavs_qpel8or16_v1_ ## MMX(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h){\
   QPEL_CAVSVNUM(QPEL_CAVSV1,OP,ff_pw_64,ff_pw_96,ff_pw_42)      \
 }\
 \
-static GOTV_INLINE void OPNAME ## cavs_qpel8or16_v2_ ## MMX(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h){\
+static NLC_INLINE void OPNAME ## cavs_qpel8or16_v2_ ## MMX(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h){\
   QPEL_CAVSVNUM(QPEL_CAVSV2,OP,ff_pw_4,ff_pw_5,ff_pw_42)        \
 }\
 \
-static GOTV_INLINE void OPNAME ## cavs_qpel8or16_v3_ ## MMX(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h){\
+static NLC_INLINE void OPNAME ## cavs_qpel8or16_v3_ ## MMX(uint8_t *dst, const uint8_t *src, int dstStride, int srcStride, int h){\
   QPEL_CAVSVNUM(QPEL_CAVSV3,OP,ff_pw_64,ff_pw_96,ff_pw_42)      \
 }\
 \

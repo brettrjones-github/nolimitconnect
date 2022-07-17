@@ -28,7 +28,7 @@
 
 #include "rsvg-structure.h"
 
-GOTV_BEGIN_CDECLARES 
+NLC_BEGIN_CDECLARES 
 
 G_GNUC_INTERNAL
 RsvgNode    *rsvg_new_marker	    (const char *element_name);
@@ -40,6 +40,6 @@ void	     rsvg_render_markers    (RsvgDrawingCtx *ctx, RsvgPathBuilder *builder)
 G_GNUC_INTERNAL
 void rsvg_marker_render (const char * marker_name, gdouble xpos, gdouble ypos, gdouble orient, gdouble linewidth, RsvgDrawingCtx * ctx);
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif                          /* RSVG_MARKER_H */

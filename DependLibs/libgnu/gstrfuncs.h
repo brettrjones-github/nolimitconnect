@@ -34,7 +34,7 @@
 #include <stdarg.h>
 #include <libgnu/gtypes.h>
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 /* Functions like the ones in <ctype.h> that are not affected by locale. */
 typedef enum {
@@ -264,6 +264,6 @@ G_CONST_RETURN gchar *g_strip_context  (const gchar *msgid,
 
 #endif
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /* __G_STRFUNCS_H__ */

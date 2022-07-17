@@ -496,7 +496,7 @@ void oc_enc_fdct8x8_mmx(ogg_int16_t _y[64],const ogg_int16_t _x[64]){
     "movq 0x50(%[x]),%%mm5\n\t"
     "paddw %%mm4,%%mm0\n\t"
     "movq 0x40(%[x]),%%mm4\n\t"
-    /*We GOTV_INLINE stage1 of the transform here so we can get better instruction
+    /*We NLC_INLINE stage1 of the transform here so we can get better instruction
        scheduling with the shifts.*/
     /*mm0=t7'=t0-t7*/
     "psllw $2,%%mm7\n\t"
@@ -543,7 +543,7 @@ void oc_enc_fdct8x8_mmx(ogg_int16_t _y[64],const ogg_int16_t _x[64]){
     "movq %%mm4,0x00(%[y])\n\t"
     "psllw $2,%%mm7\n\t"
     "movq 0x48(%[x]),%%mm4\n\t"
-    /*We GOTV_INLINE stage1 of the transform here so we can get better instruction
+    /*We NLC_INLINE stage1 of the transform here so we can get better instruction
        scheduling with the shifts.*/
     /*mm0=t7'=t0-t7*/
     "psubw %%mm7,%%mm0\n\t"

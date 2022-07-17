@@ -34,7 +34,7 @@
 
 typedef void *hnd_t;
 
-static GOTV_INLINE uint64_t gcd( uint64_t a, uint64_t b )
+static NLC_INLINE uint64_t gcd( uint64_t a, uint64_t b )
 {
     while( 1 )
     {
@@ -46,12 +46,12 @@ static GOTV_INLINE uint64_t gcd( uint64_t a, uint64_t b )
     }
 }
 
-static GOTV_INLINE uint64_t lcm( uint64_t a, uint64_t b )
+static NLC_INLINE uint64_t lcm( uint64_t a, uint64_t b )
 {
     return ( a / gcd( a, b ) ) * b;
 }
 
-static GOTV_INLINE char *get_filename_extension( char *filename )
+static NLC_INLINE char *get_filename_extension( char *filename )
 {
     char *ext = filename + strlen( filename );
     while( *ext != '.' && ext > filename )

@@ -131,7 +131,7 @@ static void x8_reset_vlc_tables(IntraX8Context *w)
     w->j_orient_vlc = NULL;
 }
 
-static GOTV_INLINE void x8_select_ac_table(IntraX8Context *const w, int mode)
+static NLC_INLINE void x8_select_ac_table(IntraX8Context *const w, int mode)
 {
     int table_index;
 
@@ -146,7 +146,7 @@ static GOTV_INLINE void x8_select_ac_table(IntraX8Context *const w, int mode)
     av_assert2(w->j_ac_vlc[mode]);
 }
 
-static GOTV_INLINE int x8_get_orient_vlc(IntraX8Context *w)
+static NLC_INLINE int x8_get_orient_vlc(IntraX8Context *w)
 {
     if (!w->j_orient_vlc) {
         int table_index = get_bits(w->gb, 1 + (w->quant < 13));

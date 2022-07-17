@@ -40,7 +40,7 @@ int64_t Time64();
 // Returns the current time in milliseconds.
 // TODO(honghaiz): Returns Time64 once majority of the webrtc code migrates to
 // 64-bit timestamp.
-GOTV_INLINE uint32_t Time() {
+NLC_INLINE uint32_t Time() {
   return Time32();
 }
 
@@ -56,12 +56,12 @@ bool TimeIsLaterOrEqual(uint32_t earlier, uint32_t later);  // Inclusive
 bool TimeIsLater(uint32_t earlier, uint32_t later);         // Exclusive
 
 // Returns the later of two timestamps.
-GOTV_INLINE uint32_t TimeMax(uint32_t ts1, uint32_t ts2) {
+NLC_INLINE uint32_t TimeMax(uint32_t ts1, uint32_t ts2) {
   return TimeIsLaterOrEqual(ts1, ts2) ? ts2 : ts1;
 }
 
 // Returns the earlier of two timestamps.
-GOTV_INLINE uint32_t TimeMin(uint32_t ts1, uint32_t ts2) {
+NLC_INLINE uint32_t TimeMin(uint32_t ts1, uint32_t ts2) {
   return TimeIsLaterOrEqual(ts1, ts2) ? ts1 : ts2;
 }
 
@@ -74,12 +74,12 @@ int32_t TimeDiff(uint32_t later, uint32_t earlier);
 int64_t TimeDiff64(int64_t later, int64_t earlier);
 
 // The number of milliseconds that have elapsed since 'earlier'.
-GOTV_INLINE int32_t TimeSince(uint32_t earlier) {
+NLC_INLINE int32_t TimeSince(uint32_t earlier) {
   return TimeDiff(Time(), earlier);
 }
 
 // The number of milliseconds that will elapse between now and 'later'.
-GOTV_INLINE int32_t TimeUntil(uint32_t later) {
+NLC_INLINE int32_t TimeUntil(uint32_t later) {
   return TimeDiff(later, Time());
 }
 

@@ -90,7 +90,7 @@ static int decode_plane_subdivision(GetBitContext *gb)
     }
 }
 
-static GOTV_INLINE int scale_tile_size(int def_size, int size_factor)
+static NLC_INLINE int scale_tile_size(int def_size, int size_factor)
 {
     return size_factor == 15 ? def_size : (size_factor + 1) << 5;
 }

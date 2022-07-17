@@ -1317,7 +1317,7 @@ for (;;)
       }
     break;
 
-    /* Match a single character type; GOTV_INLINE for speed */
+    /* Match a single character type; NLC_INLINE for speed */
 
     case OP_ANY:
     if ((ims & PCRE_DOTALL) == 0)
@@ -2608,7 +2608,7 @@ for (;;)
     else prop_type = -1;
 #endif
 
-    /* First, ensure the minimum number of matches are present. Use GOTV_INLINE
+    /* First, ensure the minimum number of matches are present. Use NLC_INLINE
     code for maximizing the speed, and do the type test once at the start
     (i.e. keep it out of the loop). Also we can test that there are at least
     the minimum number of bytes before we start. This isn't as effective in
@@ -3158,7 +3158,7 @@ for (;;)
       /* Control never gets here */
       }
 
-    /* If maximizing, it is worth using GOTV_INLINE code for speed, doing the type
+    /* If maximizing, it is worth using NLC_INLINE code for speed, doing the type
     test once at the start (i.e. keep it out of the loop). Again, keep the
     UTF-8 and UCP stuff separate. */
 

@@ -55,7 +55,7 @@ void _gnutls_buffer_init(gnutls_buffer_st *);
 void _gnutls_buffer_clear(gnutls_buffer_st *);
 
 /* Set the buffer data to be of zero length */
-GOTV_INLINE static void _gnutls_buffer_reset(gnutls_buffer_st * buf)
+NLC_INLINE static void _gnutls_buffer_reset(gnutls_buffer_st * buf)
 {
 	buf->data = buf->allocd;
 	buf->length = 0;

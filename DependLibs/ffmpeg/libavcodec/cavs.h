@@ -247,7 +247,7 @@ extern const uint8_t     ff_cavs_partition_flags[30];
 extern const cavs_vector ff_cavs_intra_mv;
 extern const cavs_vector ff_cavs_dir_mv;
 
-static GOTV_INLINE void set_mvs(cavs_vector *mv, enum cavs_block size) {
+static NLC_INLINE void set_mvs(cavs_vector *mv, enum cavs_block size) {
     switch(size) {
     case BLK_16X16:
         mv[MV_STRIDE  ] = mv[0];

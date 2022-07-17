@@ -21,6 +21,8 @@
 #include <GuiInterface/IAudioInterface.h>
 
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
+
 #include <algorithm>
 #include <memory.h>
 
@@ -84,6 +86,18 @@ int AudioMixer::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pcm
     }
 
     m_MixerMutex.lock();
+    static bool firstWrite = true;
+    if( firstWrite )
+    {
+        m_ModuleBufIndex[ appModule ] = m_MixerReadIdx + 1;
+        if( m_ModuleBufIndex[ appModule ] >= MAX_MIXER_FRAMES )
+        {
+            m_ModuleBufIndex[ appModule ] = 0;
+        }
+
+        firstWrite = false;
+    }
+
     AudioMixerFrame& mixerFrame = m_MixerFrames[ getModuleFrameIndex( appModule ) ];
     int written = mixerFrame.toMixerPcm8000HzMonoChannel( appModule, pcmData, isSilence );
     incrementModuleFrameIndex( appModule );
@@ -172,6 +186,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
 
     // read samples from mixer
     int mixerSampleCnt = readDataFromMixer( mixerReadBuf, upSamplesToRead + readAppendLerpSample, peekNextSample );
+    m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( mixerReadBuf, mixerSampleCnt );
 
     int samplesRead = upSamplesToRead + readAppendLerpSample;
 
@@ -233,36 +248,6 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
     //LogMsg( LOG_VERBOSE, "readDataFromMixer m_PrevLerpedSamplesCnt %d", m_PrevLerpedSamplesCnt );
 
     delete[] mixerReadBuf;
-    mixerWasReadByOutput( (int)maxlen, upSampleMult );
-    return maxlen;
-
-    // showing wave form causes to much delay and will hear some snapping in the sound.. use at your own risk
-    //m_AudioCallbacks.speakerAudioPlayed( getMixerFormat(), (void*)readReqPcmBuf, maxlen );
-
-    int16_t testSamp1 = readReqPcmBuf[ 0 ];
-    for( int i = 1; i < maxlen / 2; i++ )
-    {
-        int16_t testSamp2 = readReqPcmBuf[ i ];
-        if( std::abs( testSamp2 - testSamp1 ) > 4000 )
-        {
-            LogMsg( LOG_VERBOSE, "Read Glitch req %d index %d val1 %d val2 %d", readRequestCnt, i, testSamp1, testSamp2 );
-        }
-
-        testSamp1 = testSamp2;
-    }
-
-    if( lastSampleOutLastRead )
-    {
-        if( std::abs( lastSampleOutLastRead - readReqPcmBuf[ 0 ] ) > 4000 )
-        {
-            LogMsg( LOG_VERBOSE, "Betwen Req Glitch req %d last %d first %d", readRequestCnt, lastSampleOutLastRead, readReqPcmBuf[ 0 ] );
-        }
-    }
-
-    lastSampleOutLastRead = readReqPcmBuf[ reqSampleCnt - 1 ];
-
-    delete[] mixerReadBuf;
-    
     mixerWasReadByOutput( (int)maxlen, upSampleMult );
     return maxlen;
 }
@@ -371,7 +356,7 @@ int AudioMixer::audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked )
     }
 
     return audioUsedSpace;
-    }
+}
 
 //============================================================================
 // get length of data buffered and ready for speaker out
@@ -393,6 +378,23 @@ int AudioMixer::calcualateMixerBytesToMs( int bytesAudio8000Hz )
 {
     // 8000 Hz = 8000 samples per second = 8 samples per ms
     return ( bytesAudio8000Hz / 2 ) / 8;
+}
+
+//============================================================================
+int AudioMixer::calcualateAudioOutDelayMs( void )
+{
+    int elapsedMs = (int)(GetGmtTimeMs() - m_LastReadTimeStamp);
+    int msLeftInQtOut;
+    if( m_LastReadSamplesMs > elapsedMs )
+    {
+        msLeftInQtOut = m_LastReadSamplesMs - elapsedMs;
+    }
+    else
+    {
+        msLeftInQtOut = 0;
+    }
+
+    return getDataReadyForSpeakersMs() + msLeftInQtOut;
 }
 
 //============================================================================
@@ -489,11 +491,14 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
 
     m_MixerMutex.unlock();
 
-    if( samplesRead < samplesRequested )
+    if( samplesRead + samplesThatWillBeSilence < samplesRequested )
     {
         // not enough samples available
         memset( &pcmRetBuf[ samplesRead ], 0, (samplesRequested - samplesRead) * 2 );
     }
+
+    m_LastReadSamplesMs = AudioUtils::audioDurationMs( m_MixerFormat, samplesRequested * 2 );
+    m_LastReadTimeStamp = GetGmtTimeMs();
 
     return samplesRequested;
 }

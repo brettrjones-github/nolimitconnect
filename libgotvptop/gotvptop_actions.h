@@ -114,8 +114,8 @@ libgotvptop_InternalActionsClean(libgotvptop_int_t *p_libgotvptop);
 #define KEY_MOUSEWHEELLEFT   0x00F20000
 #define KEY_MOUSEWHEELRIGHT  0x00F30000
 
-GOTV_API char *gotvptop_keycode2str(uint_fast32_t i_key, bool locale) GOTV_USED;
-GOTV_API uint_fast32_t gotvptop_str2keycode(const char *str) GOTV_USED;
+NLC_API char *gotvptop_keycode2str(uint_fast32_t i_key, bool locale) GOTV_USED;
+NLC_API uint_fast32_t gotvptop_str2keycode(const char *str) GOTV_USED;
 
 typedef enum gotvptop_action_id {
     ACTIONID_NONE = 0,
@@ -251,7 +251,7 @@ typedef enum gotvptop_action_id {
  * Get the action ID from an action key name
  * \return the action ID or ACTIONID_NONE on error.
  */
-GOTV_API gotvptop_action_id_t
+NLC_API gotvptop_action_id_t
 gotvptop_actions_get_id(const char *psz_key_name);
 
 /**
@@ -259,7 +259,7 @@ gotvptop_actions_get_id(const char *psz_key_name);
  * \return The number of keycodes for this action, or 0 in case of an error.
  * The list needs to be released with free()
  */
-GOTV_API size_t
+NLC_API size_t
 gotvptop_actions_get_keycodes(gotvptop_object_t *p_obj, const char *psz_key_name,
                         bool b_global, uint_fast32_t **pp_keycodes );
 #define gotvptop_actions_get_keycodes(a, b, c, d) gotvptop_actions_get_keycodes(GOTV_OBJECT(a), b, c, d)
@@ -268,7 +268,7 @@ gotvptop_actions_get_keycodes(gotvptop_object_t *p_obj, const char *psz_key_name
  * Get a list a key names
  * \return A NULL terminated list of const char *
  */
-GOTV_API const char* const*
+NLC_API const char* const*
 gotvptop_actions_get_key_names(gotvptop_object_t *p_obj);
 #define gotvptop_actions_get_key_names(x) gotvptop_actions_get_key_names(GOTV_OBJECT(x))
 

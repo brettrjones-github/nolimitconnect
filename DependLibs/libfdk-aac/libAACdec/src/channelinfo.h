@@ -371,29 +371,29 @@ void CPns_SetCorrelation(CPnsData *pPnsData,
                          const int band,
                          const int outofphase);
 
-/****************** GOTV_INLINE functions ******************/
+/****************** NLC_INLINE functions ******************/
 
-GOTV_INLINE uint8_t IsValid(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t IsValid(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->Valid;
 }
 
-GOTV_INLINE uint8_t IsLongBlock(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t IsLongBlock(const CIcsInfo *pIcsInfo)
 {
   return (pIcsInfo->WindowSequence != EightShortSequence);
 }
 
-GOTV_INLINE uint8_t GetWindowShape(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t GetWindowShape(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->WindowShape;
 }
 
-GOTV_INLINE uint8_t GetWindowSequence(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t GetWindowSequence(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->WindowSequence;
 }
 
-GOTV_INLINE const int16_t *GetScaleFactorBandOffsets(const CIcsInfo *pIcsInfo, const SamplingRateInfo* samplingRateInfo)
+NLC_INLINE const int16_t *GetScaleFactorBandOffsets(const CIcsInfo *pIcsInfo, const SamplingRateInfo* samplingRateInfo)
 {
   if (IsLongBlock(pIcsInfo))
   {
@@ -405,43 +405,43 @@ GOTV_INLINE const int16_t *GetScaleFactorBandOffsets(const CIcsInfo *pIcsInfo, c
   }
 }
 
-GOTV_INLINE int GetWindowsPerFrame(const CIcsInfo *pIcsInfo)
+NLC_INLINE int GetWindowsPerFrame(const CIcsInfo *pIcsInfo)
 {
   return (pIcsInfo->WindowSequence == EightShortSequence) ? 8 : 1;
 }
 
-GOTV_INLINE uint8_t GetWindowGroups(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t GetWindowGroups(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->WindowGroups;
 }
 
-GOTV_INLINE uint8_t GetWindowGroupLength(const CIcsInfo *pIcsInfo, const int32_t index)
+NLC_INLINE uint8_t GetWindowGroupLength(const CIcsInfo *pIcsInfo, const int32_t index)
 {
   return pIcsInfo->WindowGroupLength[index];
 }
 
-GOTV_INLINE const uint8_t *GetWindowGroupLengthTable(const CIcsInfo *pIcsInfo)
+NLC_INLINE const uint8_t *GetWindowGroupLengthTable(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->WindowGroupLength;
 }
 
-GOTV_INLINE uint8_t GetScaleFactorBandsTransmitted(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t GetScaleFactorBandsTransmitted(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->MaxSfBands;
 }
 
-GOTV_INLINE uint8_t GetScaleMaxFactorBandsTransmitted(const CIcsInfo *pIcsInfo0, const CIcsInfo *pIcsInfo1)
+NLC_INLINE uint8_t GetScaleMaxFactorBandsTransmitted(const CIcsInfo *pIcsInfo0, const CIcsInfo *pIcsInfo1)
 {
   return fMax_FDK(pIcsInfo0->MaxSfBands, pIcsInfo1->MaxSfBands);
 }
 
-GOTV_INLINE uint8_t GetScaleFactorBandsTotal(const CIcsInfo *pIcsInfo)
+NLC_INLINE uint8_t GetScaleFactorBandsTotal(const CIcsInfo *pIcsInfo)
 {
   return pIcsInfo->TotalSfBands;
 }
 
 /* Note: This function applies to AAC-LC only ! */
-GOTV_INLINE uint8_t GetMaximumTnsBands(const CIcsInfo *pIcsInfo, const int samplingRateIndex)
+NLC_INLINE uint8_t GetMaximumTnsBands(const CIcsInfo *pIcsInfo, const int samplingRateIndex)
 {
   return tns_max_bands_tbl[samplingRateIndex][!IsLongBlock(pIcsInfo)];
 }

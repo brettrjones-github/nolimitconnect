@@ -28,7 +28,7 @@
 #include "cr-attr-sel.h"
 #include "cr-parsing-location.h"
 
-GOTV_BEGIN_CDECLARES
+NLC_BEGIN_CDECLARES
 
 enum CRPseudoType
 {
@@ -59,6 +59,6 @@ void cr_pseudo_dump (CRPseudo *a_this, FILE *a_fp) ;
 
 void cr_pseudo_destroy (CRPseudo *a_this) ;
 
-GOTV_END_CDECLARES
+NLC_END_CDECLARES
 
 #endif /*__CR_PSEUDO_H__*/

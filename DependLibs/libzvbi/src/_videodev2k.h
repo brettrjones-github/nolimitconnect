@@ -1263,65 +1263,65 @@ break;
 	}
 }
 
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYCAP (struct v4l2_capability *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUM_FMT (struct v4l2_fmtdesc *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_FMT (struct v4l2_format *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_FMT (struct v4l2_format *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_REQBUFS (struct v4l2_requestbuffers *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYBUF (struct v4l2_buffer *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_FBUF (struct v4l2_framebuffer *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_FBUF (const struct v4l2_framebuffer *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_OVERLAY (const int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QBUF (struct v4l2_buffer *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_DQBUF (struct v4l2_buffer *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_STREAMON (const int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_STREAMOFF (const int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_PARM (struct v4l2_streamparm *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_PARM (struct v4l2_streamparm *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_STD (v4l2_std_id *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_STD (const v4l2_std_id *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMSTD (struct v4l2_standard *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMINPUT (struct v4l2_input *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_CTRL (struct v4l2_control *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_CTRL (struct v4l2_control *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_TUNER (struct v4l2_tuner *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_TUNER (const struct v4l2_tuner *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_AUDIO (struct v4l2_audio *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_AUDIO (const struct v4l2_audio *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYCTRL (struct v4l2_queryctrl *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYMENU (struct v4l2_querymenu *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_INPUT (int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_INPUT (int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_OUTPUT (int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_OUTPUT (int *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMOUTPUT (struct v4l2_output *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_AUDOUT (struct v4l2_audioout *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_AUDOUT (const struct v4l2_audioout *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_MODULATOR (struct v4l2_modulator *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_MODULATOR (const struct v4l2_modulator *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_FREQUENCY (struct v4l2_frequency *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_FREQUENCY (const struct v4l2_frequency *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_CROPCAP (struct v4l2_cropcap *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_CROP (struct v4l2_crop *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_CROP (const struct v4l2_crop *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_JPEGCOMP (struct v4l2_jpegcompression *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_JPEGCOMP (const struct v4l2_jpegcompression *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYSTD (v4l2_std_id *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_TRY_FMT (struct v4l2_format *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMAUDIO (struct v4l2_audio *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMAUDOUT (struct v4l2_audioout *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_PRIORITY (enum v4l2_priority *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_PRIORITY (const enum v4l2_priority *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_SLICED_VBI_CAP (struct v4l2_sliced_vbi_cap *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_EXT_CTRLS (struct v4l2_ext_controls *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_EXT_CTRLS (struct v4l2_ext_controls *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_TRY_EXT_CTRLS (struct v4l2_ext_controls *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUM_FRAMESIZES (struct v4l2_frmsizeenum *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUM_FRAMEINTERVALS (struct v4l2_frmivalenum *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_ENC_INDEX (struct v4l2_enc_idx *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENCODER_CMD (struct v4l2_encoder_cmd *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_TRY_ENCODER_CMD (struct v4l2_encoder_cmd *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_DBG_S_REGISTER (const struct v4l2_register *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_DBG_G_REGISTER (struct v4l2_register *arg __attribute__ ((unused))) {}
-static GOTV_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_CHIP_IDENT (struct v4l2_chip_ident *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYCAP (struct v4l2_capability *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUM_FMT (struct v4l2_fmtdesc *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_FMT (struct v4l2_format *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_FMT (struct v4l2_format *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_REQBUFS (struct v4l2_requestbuffers *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYBUF (struct v4l2_buffer *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_FBUF (struct v4l2_framebuffer *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_FBUF (const struct v4l2_framebuffer *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_OVERLAY (const int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QBUF (struct v4l2_buffer *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_DQBUF (struct v4l2_buffer *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_STREAMON (const int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_STREAMOFF (const int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_PARM (struct v4l2_streamparm *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_PARM (struct v4l2_streamparm *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_STD (v4l2_std_id *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_STD (const v4l2_std_id *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMSTD (struct v4l2_standard *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMINPUT (struct v4l2_input *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_CTRL (struct v4l2_control *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_CTRL (struct v4l2_control *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_TUNER (struct v4l2_tuner *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_TUNER (const struct v4l2_tuner *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_AUDIO (struct v4l2_audio *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_AUDIO (const struct v4l2_audio *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYCTRL (struct v4l2_queryctrl *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYMENU (struct v4l2_querymenu *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_INPUT (int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_INPUT (int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_OUTPUT (int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_OUTPUT (int *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMOUTPUT (struct v4l2_output *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_AUDOUT (struct v4l2_audioout *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_AUDOUT (const struct v4l2_audioout *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_MODULATOR (struct v4l2_modulator *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_MODULATOR (const struct v4l2_modulator *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_FREQUENCY (struct v4l2_frequency *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_FREQUENCY (const struct v4l2_frequency *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_CROPCAP (struct v4l2_cropcap *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_CROP (struct v4l2_crop *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_CROP (const struct v4l2_crop *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_JPEGCOMP (struct v4l2_jpegcompression *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_JPEGCOMP (const struct v4l2_jpegcompression *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_QUERYSTD (v4l2_std_id *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_TRY_FMT (struct v4l2_format *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMAUDIO (struct v4l2_audio *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUMAUDOUT (struct v4l2_audioout *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_PRIORITY (enum v4l2_priority *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_PRIORITY (const enum v4l2_priority *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_SLICED_VBI_CAP (struct v4l2_sliced_vbi_cap *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_EXT_CTRLS (struct v4l2_ext_controls *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_S_EXT_CTRLS (struct v4l2_ext_controls *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_TRY_EXT_CTRLS (struct v4l2_ext_controls *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUM_FRAMESIZES (struct v4l2_frmsizeenum *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENUM_FRAMEINTERVALS (struct v4l2_frmivalenum *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_ENC_INDEX (struct v4l2_enc_idx *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_ENCODER_CMD (struct v4l2_encoder_cmd *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_TRY_ENCODER_CMD (struct v4l2_encoder_cmd *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_DBG_S_REGISTER (const struct v4l2_register *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_DBG_G_REGISTER (struct v4l2_register *arg __attribute__ ((unused))) {}
+static NLC_INLINE void IOCTL_ARG_TYPE_CHECK_VIDIOC_G_CHIP_IDENT (struct v4l2_chip_ident *arg __attribute__ ((unused))) {}
 

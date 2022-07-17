@@ -129,10 +129,10 @@ size_t transform(std::string& value, size_t maxlen, const std::string& source,
 std::string s_transform(const std::string& source, Transform t);
 
 // Convenience wrappers.
-GOTV_INLINE std::string s_url_encode(const std::string& source) {
+NLC_INLINE std::string s_url_encode(const std::string& source) {
   return s_transform(source, url_encode);
 }
-GOTV_INLINE std::string s_url_decode(const std::string& source) {
+NLC_INLINE std::string s_url_decode(const std::string& source) {
   return s_transform(source, url_decode);
 }
 
@@ -199,17 +199,17 @@ static bool FromString(const std::string& s, T* t) {
 // Inline versions of the string conversion routines.
 
 template<typename T>
-static GOTV_INLINE std::string ToString(const T& val) {
+static NLC_INLINE std::string ToString(const T& val) {
   std::string str; ToString(val, &str); return str;
 }
 
 template<typename T>
-static GOTV_INLINE T FromString(const std::string& str) {
+static NLC_INLINE T FromString(const std::string& str) {
   T val; FromString(str, &val); return val;
 }
 
 template<typename T>
-static GOTV_INLINE T FromString(const T& defaultValue, const std::string& str) {
+static NLC_INLINE T FromString(const T& defaultValue, const std::string& str) {
   T val(defaultValue); FromString(str, &val); return val;
 }
 

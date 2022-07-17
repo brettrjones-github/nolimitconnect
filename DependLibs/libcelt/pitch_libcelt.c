@@ -97,7 +97,7 @@ static void find_best_pitch(libcelt_word32 *xcorr, libcelt_word32 maxcorr, libce
 }
 
 #include "plc_libcelt.h"
-void pitch_downsample(libcelt_sig * GOTV_RESTRICT x[], libcelt_word16 * GOTV_RESTRICT x_lp,
+void pitch_downsample(libcelt_sig * NLC_RESTRICT x[], libcelt_word16 * NLC_RESTRICT x_lp,
       int len, int _C)
 {
    int i;
@@ -149,7 +149,7 @@ void pitch_downsample(libcelt_sig * GOTV_RESTRICT x[], libcelt_word16 * GOTV_RES
 
 }
 
-void pitch_search(const libcelt_word16 * GOTV_RESTRICT x_lp, libcelt_word16 * GOTV_RESTRICT y,
+void pitch_search(const libcelt_word16 * NLC_RESTRICT x_lp, libcelt_word16 * NLC_RESTRICT y,
                   int len, int max_pitch, int *pitch)
 {
    int i, j;

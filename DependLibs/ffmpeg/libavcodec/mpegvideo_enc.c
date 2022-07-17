@@ -171,7 +171,7 @@ void ff_convert_matrix(MpegEncContext *s, int (*qmat)[64],
     }
 }
 
-static GOTV_INLINE void update_qscale(MpegEncContext *s)
+static NLC_INLINE void update_qscale(MpegEncContext *s)
 {
     if (s->q_scale_type == 1 && 0) {
         int i;
@@ -2094,7 +2094,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
     return 0;
 }
 
-static GOTV_INLINE void dct_single_coeff_elimination(MpegEncContext *s,
+static NLC_INLINE void dct_single_coeff_elimination(MpegEncContext *s,
                                                 int n, int threshold)
 {
     static const char tab[64] = {
@@ -2150,7 +2150,7 @@ static GOTV_INLINE void dct_single_coeff_elimination(MpegEncContext *s,
         s->block_last_index[n] = -1;
 }
 
-static GOTV_INLINE void clip_coeffs(MpegEncContext *s, int16_t *block,
+static NLC_INLINE void clip_coeffs(MpegEncContext *s, int16_t *block,
                                int last_index)
 {
     int i;
@@ -2595,7 +2595,7 @@ static av_always_inline void encode_mb(MpegEncContext *s, int motion_x, int moti
     else encode_mb_internal(s, motion_x, motion_y, 16, 16, 12);
 }
 
-static GOTV_INLINE void copy_context_before_encode(MpegEncContext *d, MpegEncContext *s, int type){
+static NLC_INLINE void copy_context_before_encode(MpegEncContext *d, MpegEncContext *s, int type){
     int i;
 
     memcpy(d->last_mv, s->last_mv, 2*2*2*sizeof(int)); //FIXME is memcpy faster than a loop?
@@ -2623,7 +2623,7 @@ static GOTV_INLINE void copy_context_before_encode(MpegEncContext *d, MpegEncCon
     d->esc3_level_length= s->esc3_level_length;
 }
 
-static GOTV_INLINE void copy_context_after_encode(MpegEncContext *d, MpegEncContext *s, int type){
+static NLC_INLINE void copy_context_after_encode(MpegEncContext *d, MpegEncContext *s, int type){
     int i;
 
     memcpy(d->mv, s->mv, 2*4*2*sizeof(int));
@@ -2662,7 +2662,7 @@ static GOTV_INLINE void copy_context_after_encode(MpegEncContext *d, MpegEncCont
     d->esc3_level_length= s->esc3_level_length;
 }
 
-static GOTV_INLINE void encode_mb_hq(MpegEncContext *s, MpegEncContext *backup, MpegEncContext *best, int type,
+static NLC_INLINE void encode_mb_hq(MpegEncContext *s, MpegEncContext *backup, MpegEncContext *best, int type,
                            PutBitContext pb[2], PutBitContext pb2[2], PutBitContext tex_pb[2],
                            int *dmin, int *next_block, int motion_x, int motion_y)
 {

@@ -101,7 +101,7 @@ int bz_config_ok ( void )
 static
 void* default_bzalloc ( void* opaque, Int32 items, Int32 size )
 {
-    GOTV_DECLARE_UNUSED( opaque );
+    NLC_DECLARE_UNUSED( opaque );
    void* v = malloc ( items * size );
    return v;
 }
@@ -109,7 +109,7 @@ void* default_bzalloc ( void* opaque, Int32 items, Int32 size )
 static
 void default_bzfree ( void* opaque, void* addr )
 {
-    GOTV_DECLARE_UNUSED( opaque );
+    NLC_DECLARE_UNUSED( opaque );
    if (addr != NULL) free ( addr );
 }
 
@@ -1508,7 +1508,7 @@ int BZ_API(BZ2_bzwrite) (BZFILE* b, void* buf, int len )
 int BZ_API(BZ2_bzflush) (BZFILE *b)
 {
    /* do nothing now... */
-    GOTV_DECLARE_UNUSED( b );
+    NLC_DECLARE_UNUSED( b );
    return 0;
 }
 

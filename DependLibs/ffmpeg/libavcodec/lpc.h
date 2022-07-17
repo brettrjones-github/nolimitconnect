@@ -132,7 +132,7 @@ typedef float LPC_TYPE_U;
  * Schur recursion.
  * Produces reflection coefficients from autocorrelation data.
  */
-static GOTV_INLINE void compute_ref_coefs(const LPC_TYPE *autoc, int max_order,
+static NLC_INLINE void compute_ref_coefs(const LPC_TYPE *autoc, int max_order,
                                      LPC_TYPE *ref, LPC_TYPE *error)
 {
     int i, j;
@@ -163,7 +163,7 @@ static GOTV_INLINE void compute_ref_coefs(const LPC_TYPE *autoc, int max_order,
  * Levinson-Durbin recursion.
  * Produce LPC coefficients from autocorrelation data.
  */
-static GOTV_INLINE int AAC_RENAME(compute_lpc_coefs)(const LPC_TYPE *autoc, int max_order,
+static NLC_INLINE int AAC_RENAME(compute_lpc_coefs)(const LPC_TYPE *autoc, int max_order,
                                     LPC_TYPE *lpc, int lpc_stride, int fail,
                                     int normalize)
 {

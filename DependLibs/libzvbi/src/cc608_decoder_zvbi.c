@@ -422,7 +422,7 @@ enum {
 	VBI_FLASH	= (1 << 3)
 };
 
-GOTV_INLINE void
+NLC_INLINE void
 vbi_char_copy_attr		(struct vbi_char *	cp1,
 				 const struct vbi_char *cp2,
 				 unsigned int		attr)
@@ -435,7 +435,7 @@ vbi_char_copy_attr		(struct vbi_char *	cp1,
 		cp1->flash = cp2->flash;
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 vbi_char_clear_attr		(struct vbi_char *	cp,
 				 unsigned int		attr)
 {
@@ -447,7 +447,7 @@ vbi_char_clear_attr		(struct vbi_char *	cp,
 		cp->flash = 0;
 }
 
-GOTV_INLINE void
+NLC_INLINE void
 vbi_char_set_attr		(struct vbi_char *	cp,
 				 unsigned int		attr)
 {
@@ -459,7 +459,7 @@ vbi_char_set_attr		(struct vbi_char *	cp,
 		cp->flash = 1;
 }
 
-GOTV_INLINE unsigned int
+NLC_INLINE unsigned int
 vbi_char_has_attr		(const struct vbi_char *cp,
 				 unsigned int		attr)
 {
@@ -475,7 +475,7 @@ vbi_char_has_attr		(const struct vbi_char *cp,
 	return attr;
 }
 
-GOTV_INLINE unsigned int
+NLC_INLINE unsigned int
 vbi_char_xor_attr		(const struct vbi_char *cp1,
 				 const struct vbi_char *cp2,
 				 unsigned int		attr)

@@ -771,7 +771,7 @@ static void dc_129_32x32_c(uint8_t *_dst, ptrdiff_t stride,
 #if BIT_DEPTH == 8
 #define memset_bpc memset
 #else
-static GOTV_INLINE void memset_bpc(uint16_t *dst, int val, int len) {
+static NLC_INLINE void memset_bpc(uint16_t *dst, int val, int len) {
     int n;
     for (n = 0; n < len; n++) {
         dst[n] = val;
