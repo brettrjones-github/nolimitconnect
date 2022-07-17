@@ -24,34 +24,34 @@
 
 #include "SharedExportCore.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPVideoDelegate VideoDelegate.h core/VideoDelegate.h
+    \class NlcPtoPVideoDelegate VideoDelegate.h core/VideoDelegate.h
     \ingroup GOTVQtCore
     \brief Video delegate
 
     This is a helper class, to separate core from display.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPVideoDelegate
+class GOTVQT_CORE_EXPORT NlcPtoPVideoDelegate
 {
 public:
     /*!
-        \brief GoTvPtoPVideoDelegate constructor
+        \brief NlcPtoPVideoDelegate constructor
     */
-    GoTvPtoPVideoDelegate() {}
+    NlcPtoPVideoDelegate() {}
 
     /*!
-        \brief GoTvPtoPVideoDelegate destructor
+        \brief NlcPtoPVideoDelegate destructor
     */
-    virtual ~GoTvPtoPVideoDelegate() {}
+    virtual ~NlcPtoPVideoDelegate() {}
 
     /*!
         \brief Request new video frame.
 
         Request new video frame and its widget ID to set it in the instance.
         \return widget ID (WId)
-        \sa GoTvPtoPMediaPlayer::GoTvPtoPMediaPlayer()
+        \sa NlcPtoPMediaPlayer::NlcPtoPMediaPlayer()
     */
     virtual WId request() = 0;
 

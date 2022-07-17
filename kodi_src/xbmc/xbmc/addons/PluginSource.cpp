@@ -13,7 +13,7 @@
 #include "AddonManager.h"
 #include "ServiceBroker.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 namespace ADDON
 {
@@ -41,7 +41,7 @@ std::unique_ptr<CPluginSource> CPluginSource::FromExtension(CAddonInfo addonInfo
         path.erase(0, 1);
       if (path.compare(0, url.size(), url))
         path.insert(0, url);
-      p->m_mediaLibraryScanPaths[content].push_back(GoTvUrl(path).GetFileName());
+      p->m_mediaLibraryScanPaths[content].push_back(NlcUrl(path).GetFileName());
     }
   }
 

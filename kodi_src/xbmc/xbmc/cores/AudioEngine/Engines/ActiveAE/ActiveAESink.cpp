@@ -26,7 +26,7 @@
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxTime.h>
-#include "GoTvDebugConfig.h"
+#include "NlcDebugConfig.h"
 
 
 using namespace AE;

@@ -8,8 +8,8 @@
 
 #include "SpecialProtocol.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "windowing/GraphicContext.h"
 #include "profiles/ProfileManager.h"
 #include "settings/AdvancedSettings.h"
@@ -132,7 +132,7 @@ bool CSpecialProtocol::ComparePath( const std::string &path1, const std::string 
 
 std::string CSpecialProtocol::TranslatePath( const std::string &path )
 {
-    GoTvUrl url( path );
+    NlcUrl url( path );
     // check for special-protocol, if not, return
     if( !url.IsProtocol( "special" ) )
     {
@@ -141,7 +141,7 @@ std::string CSpecialProtocol::TranslatePath( const std::string &path )
     return TranslatePath( url );
 }
 
-std::string CSpecialProtocol::TranslatePath( const GoTvUrl &url )
+std::string CSpecialProtocol::TranslatePath( const NlcUrl &url )
 {
     // check for special-protocol, if not, return
     if( !url.IsProtocol( "special" ) )

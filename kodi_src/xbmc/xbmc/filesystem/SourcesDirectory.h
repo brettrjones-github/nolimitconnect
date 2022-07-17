@@ -22,9 +22,9 @@ namespace XFILE
   public:
     CSourcesDirectory(void);
     ~CSourcesDirectory(void) override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
     bool GetDirectory(const VECSOURCES &sources, CFileItemList &items);
-    bool Exists(const GoTvUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
     bool AllowAll() const override { return true; }
   };
 }

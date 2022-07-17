@@ -7,7 +7,7 @@
  */
 
 #include "GUIWindowVideoPlaylist.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "playlists/PlayListM3U.h"
 #include "Application.h"
 #include "PlayListPlayer.h"

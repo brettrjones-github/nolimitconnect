@@ -18,9 +18,9 @@
 #include "filesystem/SpecialProtocol.h"
 #include "filesystem/StackDirectory.h"
 #include "settings/MediaSourceSettings.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "storage/MediaManager.h"
@@ -101,7 +101,7 @@ bool CFileUtils::RemoteAccessAllowed(const std::string &strPath)
   // for rar:// and zip:// paths we need to extract the path to the archive
   // instead of using the VFS path
   while (URIUtils::IsInArchive(realPath))
-    realPath = GoTvUrl(realPath).GetHostName();
+    realPath = NlcUrl(realPath).GetHostName();
 
   if (StringUtils::StartsWithNoCase(realPath, "virtualpath://upnproot/"))
     return true;
@@ -175,7 +175,7 @@ CDateTime CFileUtils::GetModificationDate(const std::string& strFileNameAndPath,
       file = CStackDirectory::GetFirstStackedFile(strFileNameAndPath);
 
     if (URIUtils::IsInArchive(file))
-      file = GoTvUrl(file).GetHostName();
+      file = NlcUrl(file).GetHostName();
 
     // Let's try to get the modification datetime
     struct __stat64 buffer;
@@ -244,7 +244,7 @@ bool CFileUtils::CheckFileAccessAllowed(const std::string &filePath)
   // and can be embedded in a music or video file image://music@...
   // strip this off to get the real file path
   bool isImage = false;
-  std::string decodePath = GoTvUrl::Decode(filePath);
+  std::string decodePath = NlcUrl::Decode(filePath);
   size_t pos = decodePath.find("image://");
   if (pos != std::string::npos)
   {
@@ -291,7 +291,7 @@ bool CFileUtils::CheckFileAccessAllowed(const std::string &filePath)
     return CFileUtils::RemoteAccessAllowed(realPath);
   }
 #elif defined(TARGET_WINDOWS)
-  GoTvUrl url(decodePath);
+  NlcUrl url(decodePath);
   if (url.GetProtocol().empty())
   {
     std::wstring decodePathW;

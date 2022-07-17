@@ -12,8 +12,8 @@
 #include <vector>
 
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 
 #include "pictures/Picture.h"
 
@@ -48,7 +48,7 @@ using namespace Microsoft::WRL;
 #endif
 
 #if defined(HAVE_QT_GUI)
-# include "GuiInterface/IGoTv.h"
+# include "GuiInterface/INlc.h"
 #endif
 
 using namespace XFILE;
@@ -72,9 +72,9 @@ bool CScreenshotSurface::capture()
     CSingleLock lock( CServiceBroker::GetWinSystem()->GetGfxContext() );
     CServiceBroker::GetGUI()->GetWindowManager().Render();
 
-    GoTvRect viewPort;
-    IGoTv::getIGoTv().getViewPort( viewPort );
-    IGoTv::getIGoTv().captureScreen( this, viewPort );
+    NlcRect viewPort;
+    INlc::getINlc().getViewPort( viewPort );
+    INlc::getINlc().captureScreen( this, viewPort );
     if( !m_buffer )
         return false;
 
@@ -208,11 +208,11 @@ void CScreenShot::TakeScreenshot(const std::string &filename, bool sync)
   CScreenshotSurface surface;
   if (!surface.capture())
   {
-    CLog::Log(LOGERROR, "Screenshot %s failed", GoTvUrl::GetRedacted(filename).c_str());
+    CLog::Log(LOGERROR, "Screenshot %s failed", NlcUrl::GetRedacted(filename).c_str());
     return;
   }
 
-  CLog::Log(LOGDEBUG, "Saving screenshot %s", GoTvUrl::GetRedacted(filename).c_str());
+  CLog::Log(LOGDEBUG, "Saving screenshot %s", NlcUrl::GetRedacted(filename).c_str());
 
   //set alpha byte to 0xFF
   for (int y = 0; y < surface.m_height; y++)
@@ -226,7 +226,7 @@ void CScreenShot::TakeScreenshot(const std::string &filename, bool sync)
   if (sync)
   {
     if (!CPicture::CreateThumbnailFromSurface(surface.m_buffer, surface.m_width, surface.m_height, surface.m_stride, filename))
-      CLog::Log(LOGERROR, "Unable to write screenshot %s", GoTvUrl::GetRedacted(filename).c_str());
+      CLog::Log(LOGERROR, "Unable to write screenshot %s", NlcUrl::GetRedacted(filename).c_str());
 
     delete [] surface.m_buffer;
     surface.m_buffer = NULL;
@@ -238,7 +238,7 @@ void CScreenShot::TakeScreenshot(const std::string &filename, bool sync)
     if (file.OpenForWrite(filename))
       file.Close();
     else
-      CLog::Log(LOGERROR, "Unable to create file %s", GoTvUrl::GetRedacted(filename).c_str());
+      CLog::Log(LOGERROR, "Unable to create file %s", NlcUrl::GetRedacted(filename).c_str());
 
     //write .png file asynchronous with CThumbnailWriter, prevents stalling of the render thread
     //buffer is deleted from CThumbnailWriter

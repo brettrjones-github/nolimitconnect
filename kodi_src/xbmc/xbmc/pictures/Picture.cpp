@@ -9,7 +9,7 @@
 #include <algorithm>
 
 #include "Picture.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
@@ -57,7 +57,7 @@ bool CPicture::GetThumbnailFromSurface(const unsigned char* buffer, int width, i
 
 bool CPicture::CreateThumbnailFromSurface(const unsigned char *buffer, int width, int height, int stride, const std::string &thumbFile)
 {
-  CLog::Log(LOGDEBUG, "cached image '%s' size %dx%d", GoTvUrl::GetRedacted(thumbFile).c_str(), width, height);
+  CLog::Log(LOGDEBUG, "cached image '%s' size %dx%d", NlcUrl::GetRedacted(thumbFile).c_str(), width, height);
   if (URIUtils::HasExtension(thumbFile, ".jpg"))
   {
 #if defined(TARGET_RASPBERRY_PI)
@@ -71,7 +71,7 @@ bool CPicture::CreateThumbnailFromSurface(const unsigned char *buffer, int width
   IImage* pImage = ImageFactory::CreateLoader(thumbFile);
   if(pImage == NULL || !pImage->CreateThumbnailFromSurface(const_cast<unsigned char*>(buffer), width, height, XB_FMT_A8R8G8B8, stride, thumbFile.c_str(), thumb, thumbsize))
   {
-    CLog::Log(LOGERROR, "Failed to CreateThumbnailFromSurface for %s", GoTvUrl::GetRedacted(thumbFile).c_str());
+    CLog::Log(LOGERROR, "Failed to CreateThumbnailFromSurface for %s", NlcUrl::GetRedacted(thumbFile).c_str());
     delete pImage;
     return false;
   }
@@ -106,7 +106,7 @@ bool CThumbnailWriter::DoWork()
 
   if (!CPicture::CreateThumbnailFromSurface(m_buffer, m_width, m_height, m_stride, m_thumbFile))
   {
-    CLog::Log(LOGERROR, "CThumbnailWriter::DoWork unable to write %s", GoTvUrl::GetRedacted(m_thumbFile).c_str());
+    CLog::Log(LOGERROR, "CThumbnailWriter::DoWork unable to write %s", NlcUrl::GetRedacted(m_thumbFile).c_str());
     success = false;
   }
 

@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
-#include "GoTvDebugConfig.h"
+#include "NlcDebugConfig.h"
 
 namespace ADDON
 {

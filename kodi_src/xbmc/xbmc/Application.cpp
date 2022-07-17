@@ -20,8 +20,8 @@
 #include "utils/Variant.h"
 #include "LangInfoKodi.h"
 #include "utils/Screenshot.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/TextureManager.h"
 #include "cores/IPlayer.h"
@@ -202,7 +202,7 @@
 #include "utils/CharsetConverter.h"
 #include "pictures/GUIWindowSlideShow.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 CApplication& GetKodiInstance()
 {
@@ -281,7 +281,7 @@ void CApplication::HandlePortEvents()
             if( !m_bStop )
                 CApplicationMessenger::GetInstance().PostMsg( TMSG_QUIT );
 #ifdef HAVE_QT_GUI
-			IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateDeinitialized );
+			INlc::getINlc().toGuiModuleState( eAppModuleKodi, eModuleStateDeinitialized );
 #endif // HAVE_QT_GUI
             break;
 
@@ -419,7 +419,7 @@ bool CApplication::Create( const CAppParamParser &params )
     Preflight();
 
     // ffmpeg needs early start so can finish the loading threads before kodi is started
-    GetIGoTv().startupFfmpeg();
+    GetINlc().startupFfmpeg();
 
     // here we register all global classes for the CApplicationMessenger,
     // after that we can send messages to the corresponding modules
@@ -450,7 +450,7 @@ bool CApplication::Create( const CAppParamParser &params )
 #endif
 
     // only the InitDirectories* for the current platform should return true
-    //bool inited = GetIGoTv().initDirectories();
+    //bool inited = GetINlc().initDirectories();
 
     // copy required files
     CopyUserDataIfNeeded( "special://masterprofile/", "RssFeeds.xml" );
@@ -590,9 +590,9 @@ bool CApplication::Create( const CAppParamParser &params )
     CLog::Log( LOGINFO, "creating subdirectories" );
     const std::shared_ptr<CProfileManager> profileManager = m_pSettingsComponent->GetProfileManager();
     const std::shared_ptr<CSettings> settings = m_pSettingsComponent->GetSettings();
-    CLog::Log( LOGINFO, "userdata folder: %s", GoTvUrl::GetRedacted( profileManager->GetProfileUserDataFolder() ).c_str() );
-    CLog::Log( LOGINFO, "recording folder: %s", GoTvUrl::GetRedacted( settings->GetString( CSettings::SETTING_AUDIOCDS_RECORDINGPATH ) ).c_str() );
-    CLog::Log( LOGINFO, "screenshots folder: %s", GoTvUrl::GetRedacted( settings->GetString( CSettings::SETTING_DEBUG_SCREENSHOTPATH ) ).c_str() );
+    CLog::Log( LOGINFO, "userdata folder: %s", NlcUrl::GetRedacted( profileManager->GetProfileUserDataFolder() ).c_str() );
+    CLog::Log( LOGINFO, "recording folder: %s", NlcUrl::GetRedacted( settings->GetString( CSettings::SETTING_AUDIOCDS_RECORDINGPATH ) ).c_str() );
+    CLog::Log( LOGINFO, "screenshots folder: %s", NlcUrl::GetRedacted( settings->GetString( CSettings::SETTING_DEBUG_SCREENSHOTPATH ) ).c_str() );
     CDirectory::Create( profileManager->GetUserDataFolder() );
     CDirectory::Create( profileManager->GetProfileUserDataFolder() );
     profileManager->CreateProfileFolders();
@@ -621,7 +621,7 @@ bool CApplication::Create( const CAppParamParser &params )
     {
         LogMsg( LOG_ERROR, "FATAL: failed to init kodi stage 2" );
 #ifdef HAVE_QT_GUI
-        IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateInitError );
+        INlc::getINlc().toGuiModuleState( eAppModuleKodi, eModuleStateInitError );
 #endif // HAVE_QT_GUI
 
         return false;
@@ -1428,7 +1428,7 @@ bool CApplication::LoadSkin( const std::string& skinID )
     }
 
 #ifdef HAVE_QT_GUI
-    IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateInitialized );
+    INlc::getINlc().toGuiModuleState( eAppModuleKodi, eModuleStateInitialized );
 #endif // HAVE_QT_GUI
 
     return true;
@@ -2269,11 +2269,11 @@ void CApplication::OnApplicationMessage( ThreadMessage* pMsg )
         if( URIUtils::IsZIP( pMsg->strParam ) || URIUtils::IsRAR( pMsg->strParam ) ) // actually a cbz/cbr
         {
             CFileItemList items;
-            GoTvUrl pathToUrl;
+            NlcUrl pathToUrl;
             if( URIUtils::IsZIP( pMsg->strParam ) )
-                pathToUrl = URIUtils::CreateArchivePath( "zip", GoTvUrl( pMsg->strParam ), "" );
+                pathToUrl = URIUtils::CreateArchivePath( "zip", NlcUrl( pMsg->strParam ), "" );
             else
-                pathToUrl = URIUtils::CreateArchivePath( "rar", GoTvUrl( pMsg->strParam ), "" );
+                pathToUrl = URIUtils::CreateArchivePath( "rar", NlcUrl( pMsg->strParam ), "" );
 
             CUtil::GetRecursiveListing( pathToUrl.Get(), items, CServiceBroker::GetFileExtensionProvider().GetPictureExtensions(), XFILE::DIR_FLAG_NO_FILE_DIRS );
             if( items.Size() > 0 )
@@ -2785,7 +2785,7 @@ bool CApplication::PlayMedia( CFileItem& item, const std::string &player, int iP
         return CServiceBroker::GetPVRManager().GUIActions()->PlayMedia( CFileItemPtr( new CFileItem( item ) ) );
     }
 
-    GoTvUrl path( item.GetPath() );
+    NlcUrl path( item.GetPath() );
     if( path.GetProtocol() == "game" )
     {
         AddonPtr addon;
@@ -3368,7 +3368,7 @@ void CApplication::RequestVideoSettings( const CFileItem &fileItem )
     CVideoDatabase dbs;
     if( dbs.Open() )
     {
-        CLog::Log( LOGDEBUG, "Loading settings for %s", GoTvUrl::GetRedacted( fileItem.GetPath() ).c_str() );
+        CLog::Log( LOGDEBUG, "Loading settings for %s", NlcUrl::GetRedacted( fileItem.GetPath() ).c_str() );
 
         // Load stored settings if they exist, otherwise use default
         CVideoSettings vs;
@@ -3938,7 +3938,7 @@ bool CApplication::OnMessage( CGUIMessage& message )
         // ok, grab the next song
         CFileItem file( *playlist[ iNext ] );
         // handle plugin://
-        GoTvUrl url( file.GetDynPath() );
+        NlcUrl url( file.GetDynPath() );
         if( url.IsProtocol( "plugin" ) )
             XFILE::CPluginDirectory::GetPluginResult( url.Get(), file, false );
 

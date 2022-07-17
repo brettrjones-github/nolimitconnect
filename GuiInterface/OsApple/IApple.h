@@ -18,7 +18,7 @@
 class IWin32 : public OsInterface
 {
 public:
-    IWin32( IGoTv& gotv );
+    IWin32( INlc& gotv );
     virtual ~IWin32( ) = default;
 
     //=== stages of create ===//

@@ -10,7 +10,7 @@
 #include "CDDARipJob.h"
 #include "ServiceBroker.h"
 #include "utils/StringUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/CDDADirectory.h"
 #include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "utils/LabelFormatter.h"
@@ -93,7 +93,7 @@ bool CCDDARipper::RipCD()
     // get cd cdda contents
     CFileItemList vecItems;
     XFILE::CCDDADirectory directory;
-    directory.GetDirectory( GoTvUrl( "cdda://local/" ), vecItems );
+    directory.GetDirectory( NlcUrl( "cdda://local/" ), vecItems );
 
     // get cddb info
     for( int i = 0; i < vecItems.Size(); ++i )

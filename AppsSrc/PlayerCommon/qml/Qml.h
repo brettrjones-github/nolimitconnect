@@ -26,7 +26,7 @@
     \brief QML classes for controlling video and media playback
  */
 
-namespace GoTvPtoPQml
+namespace NlcPtoPQml
 {
     /*!
         \brief Register QML types as GOTVQt
@@ -36,7 +36,7 @@ namespace GoTvPtoPQml
         Include into QML file as
         import GOTVQt VERSION_MAJOR.VERSION_MINOR
 
-        Object names: GoTvPtoPPlayer, GoTvPtoPVideoObject
+        Object names: NlcPtoPPlayer, NlcPtoPVideoObject
 
         \since GOTV-Qt 1.1
      */

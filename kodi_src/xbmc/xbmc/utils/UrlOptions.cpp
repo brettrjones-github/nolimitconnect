@@ -7,7 +7,7 @@
  */
 
 #include "UrlOptions.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 
@@ -29,9 +29,9 @@ std::string CUrlOptions::GetOptionsString(bool withLeadingSeparator /* = false *
     if (!options.empty())
       options += "&";
 
-    options += GoTvUrl::Encode(opt.first);
+    options += NlcUrl::Encode(opt.first);
     if (!opt.second.empty())
-      options += "=" + GoTvUrl::Encode(opt.second.asString());
+      options += "=" + NlcUrl::Encode(opt.second.asString());
   }
 
   if (withLeadingSeparator && !options.empty())
@@ -121,9 +121,9 @@ void CUrlOptions::AddOptions(const std::string &options)
     std::string key, value;
 
     size_t pos = option.find('=');
-    key = GoTvUrl::Decode(option.substr(0, pos));
+    key = NlcUrl::Decode(option.substr(0, pos));
     if (pos != std::string::npos)
-      value = GoTvUrl::Decode(option.substr(pos + 1));
+      value = NlcUrl::Decode(option.substr(pos + 1));
 
     // the key cannot be empty
     if (!key.empty())

@@ -29,9 +29,9 @@ public:
   ~CShoutcastFile() override;
   int64_t GetPosition() override;
   int64_t GetLength() override;
-  bool Open(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override { return true;};
-  int Stat(const GoTvUrl& url, struct __stat64* buffer) override { errno = ENOENT; return -1; };
+  bool Open(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override { return true;};
+  int Stat(const NlcUrl& url, struct __stat64* buffer) override { errno = ENOENT; return -1; };
   int64_t Read(void* lpBuf, size_t uiBufSize) override;
   int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;
   void Close() override;

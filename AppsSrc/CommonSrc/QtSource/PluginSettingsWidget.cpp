@@ -28,9 +28,12 @@ PluginSettingsWidget::PluginSettingsWidget( QWidget * parent )
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );
     connect( ui.m_ThumbnailChooseWidget, SIGNAL( signalThumbnailAssetChanged( ThumbInfo * ) ), this, SLOT( slotThumbnailAssetChanged( ThumbInfo * ) ) );
+    connect( ui.m_RunOnStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotRunOnStartupCheckBoxChange(int)) );
+
     ui.m_DescriptionEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
     ui.m_GreetingEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
     ui.m_RejectEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
+    ui.m_RunOnStartupCheckBox->setVisible( false );
 }
 
 //============================================================================
@@ -61,6 +64,18 @@ void PluginSettingsWidget::setupSettingsWidget( EApplet applet, EPluginType plug
         ui.m_InfoWidget->setPluginType( pluginType );
     }
 
+    if( ePluginTypeCamServer == getPluginType() )
+    {
+        ui.m_RunOnStartupCheckBox->setVisible( true );
+        ui.m_RunOnStartupCheckBox->setChecked( m_MyApp.getAppSettings().getRunOnStartupCamServer() );
+    }
+
+    if( ePluginTypeFileShareServer == getPluginType() )
+    {
+        ui.m_RunOnStartupCheckBox->setVisible( true );
+        ui.m_RunOnStartupCheckBox->setChecked( m_MyApp.getAppSettings().getRunOnStartupFileShareServer() );
+    }
+
     connectServiceWidgets();
 }
 
@@ -87,6 +102,16 @@ void PluginSettingsWidget::savePluginSetting()
 {
     if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
     {
+        if( ePluginTypeCamServer == getPluginType() )
+        {
+            m_MyApp.getAppSettings().setRunOnStartupCamServer( ui.m_RunOnStartupCheckBox->isChecked() );
+        }
+
+        if( ePluginTypeFileShareServer == getPluginType() )
+        {
+            m_MyApp.getAppSettings().setRunOnStartupFileShareServer( ui.m_RunOnStartupCheckBox->isChecked() );
+        }
+
         saveUiToSetting();
         m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
     }
@@ -144,4 +169,10 @@ void PluginSettingsWidget::slotThumbnailAssetChanged( ThumbInfo* thumbAsset )
     LogMsg( LOG_DEBUG, "slotThumbnailAssetChanged %s", thumbGuid.toGUIDStandardFormatedString().c_str() );
     m_PluginSetting.setThumnailId( thumbGuid, ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
     ui.m_ThumbnailChooseWidget->getThumbnailViewWidget()->updateAssetImage( thumbAsset );
+}
+
+//============================================================================
+void PluginSettingsWidget::slotRunOnStartupCheckBoxChange( int runOnStartup )
+{
+
 }

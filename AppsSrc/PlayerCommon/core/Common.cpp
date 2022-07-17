@@ -18,11 +18,11 @@
 
 #include "core/Common.h"
 
-QStringList GoTvPtoPCommon::args()
+QStringList NlcPtoPCommon::args()
 {
     QStringList args_list;
 
-    QString args = qgetenv("GOTV_ARGS");
+    QString args = qgetenv("NLC_ARGS");
     if (!args.isEmpty())
         args_list << args.split(" ", QString::SkipEmptyParts);
     else {
@@ -41,10 +41,10 @@ QStringList GoTvPtoPCommon::args()
     return args_list;
 }
 
-bool GoTvPtoPCommon::setPluginPath(const QString &path)
+bool NlcPtoPCommon::setPluginPath(const QString &path)
 {
-    if (qgetenv("GOTV_PLUGIN_PATH").isEmpty()) {
-        return qputenv("GOTV_PLUGIN_PATH", path.toLocal8Bit());
+    if (qgetenv("NLC_PLUGIN_PATH").isEmpty()) {
+        return qputenv("NLC_PLUGIN_PATH", path.toLocal8Bit());
     }
 
     return false;

@@ -35,36 +35,36 @@
 
 #include <cstddef>
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 
 CGUITextureQt::CGUITextureQt( float posX, float posY, float width, float height, const CTextureInfo &texture )
     : CGUITextureBase( posX, posY, width, height, texture )
-    , m_IGoTv( IGoTv::getIGoTv() )
+    , m_INlc( INlc::getINlc() )
 {
     m_renderSystem = dynamic_cast< CRenderSystemQt* >( CServiceBroker::GetRenderSystem() );
 }
 
 void CGUITextureQt::Begin( UTILS::Color color )
 {
-    m_IGoTv.beginGuiTexture( this, (GoTvColor) color );
+    m_INlc.beginGuiTexture( this, (NlcColor) color );
 }
 
 void CGUITextureQt::End()
 {
-    m_IGoTv.endGuiTexture( this );
+    m_INlc.endGuiTexture( this );
 
     m_renderSystem->DisableGUIShader();
 }
 
 void CGUITextureQt::Draw( float *x, float *y, float *z, const CRect &texture, const CRect &diffuse, int orientation )
 {
-    m_IGoTv.drawGuiTexture( this, x, y, z, (const GoTvRect &)texture, (const GoTvRect &)diffuse, orientation );
+    m_INlc.drawGuiTexture( this, x, y, z, (const NlcRect &)texture, (const NlcRect &)diffuse, orientation );
 }
 
 void CGUITextureQt::DrawQuad( const CRect &rect, UTILS::Color color, CBaseTexture *texture, const CRect *texCoords )
 {
-    IGoTv::getIGoTv().drawQuad( ( const GoTvRect & )rect, ( GoTvColor )color, texture, ( const GoTvRect * )texCoords );
+    INlc::getINlc().drawQuad( ( const NlcRect & )rect, ( NlcColor )color, texture, ( const NlcRect * )texCoords );
 
     CRenderSystemQt *renderSystem = dynamic_cast< CRenderSystemQt* >( CServiceBroker::GetRenderSystem() );
     renderSystem->DisableGUIShader();

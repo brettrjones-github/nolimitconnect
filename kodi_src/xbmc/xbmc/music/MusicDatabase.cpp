@@ -47,8 +47,8 @@
 #include "storage/MediaManager.h"
 #include "TextureCache.h"
 #include "threads/SystemClock.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "utils/FileUtils.h"
 #include "utils/LegacyPathTranslation.h"
 #include "utils/log.h"
@@ -401,7 +401,7 @@ void CMusicDatabase::SplitPath(const std::string& strFileNameAndPath, std::strin
   // Keep protocol options as part of the path
   if (URIUtils::IsURL(strFileNameAndPath))
   {
-    GoTvUrl url(strFileNameAndPath);
+    NlcUrl url(strFileNameAndPath);
     if (!url.GetProtocolOptions().empty())
       strPath += "|" + url.GetProtocolOptions();
   }
@@ -2352,7 +2352,7 @@ CArtist CMusicDatabase::GetArtistFromDataset(const dbiplus::sql_record* const re
 bool CMusicDatabase::GetSongByFileName(const std::string& strFileNameAndPath, CSong& song, int64_t startOffset)
 {
   song.Clear();
-  GoTvUrl url(strFileNameAndPath);
+  NlcUrl url(strFileNameAndPath);
 
   if (url.IsProtocol("musicdb"))
   {
@@ -9228,7 +9228,7 @@ bool CMusicDatabase::SetSongVotes(const std::string &filePath, int votes)
 int CMusicDatabase::GetSongIDFromPath(const std::string &filePath)
 {
   // grab the where string to identify the song id
-  GoTvUrl url(filePath);
+  NlcUrl url(filePath);
   if (url.IsProtocol("musicdb"))
   {
     std::string strFile=URIUtils::GetFileName(filePath);
@@ -10758,7 +10758,7 @@ void CMusicDatabase::UpdateFileDateAdded(int songId, const std::string& strFileN
   }
   catch (...)
   {
-    CLog::Log(LOGERROR, "%s (%s, %s) failed", __FUNCTION__, GoTvUrl::GetRedacted(strFileNameAndPath).c_str(), dateAdded.GetAsDBDateTime().c_str());
+    CLog::Log(LOGERROR, "%s (%s, %s) failed", __FUNCTION__, NlcUrl::GetRedacted(strFileNameAndPath).c_str(), dateAdded.GetAsDBDateTime().c_str());
   }
 }
 

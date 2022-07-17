@@ -53,7 +53,7 @@
 #include "FileItem.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 #include <set>
 

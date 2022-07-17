@@ -21,7 +21,7 @@
 #include "GuiHelpers.h"
 #include "MyIcons.h"
 
-#include "GuiInterface/GoTvRenderFrame.h"
+#include "GuiInterface/NlcRenderFrame.h"
 #if ENABLE_KODI
 #include "guilib/TextureQt.h"
 #include "guilib/GUITextureQt.h"
@@ -341,7 +341,7 @@ void RenderGlWidget::bindToUnit( CQtTexture * texture, unsigned int unit )
 }
 
 //============================================================================
-void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color )
+void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, NlcColor color )
 {
     VerifyGLStateQt();
 #if ENABLE_KODI
@@ -412,7 +412,7 @@ void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor colo
 }
 
 //============================================================================
-void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const GoTvRect& textureRect, const GoTvRect& diffuse, int orientation )
+void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const NlcRect& textureRect, const NlcRect& diffuse, int orientation )
 {
     VerifyGLStateQt();
 #if ENABLE_KODI
@@ -549,7 +549,7 @@ void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
 }
 
 //============================================================================
-void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords )
+void RenderGlWidget::drawQuad( const NlcRect &rect, NlcColor color, CBaseTexture * texture, const NlcRect * texCoords )
 {
     VerifyGLStateQt();
 #if ENABLE_KODI
@@ -603,7 +603,7 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     if( texture )
     {
         // Setup texture coordinates
-        GoTvRect coords = texCoords ? *texCoords : GoTvRect( 0.0f, 0.0f, 1.0f, 1.0f );
+        NlcRect coords = texCoords ? *texCoords : NlcRect( 0.0f, 0.0f, 1.0f, 1.0f );
         tex[ 0 ][ 0 ] = tex[ 3 ][ 0 ] = coords.x1;
         tex[ 0 ][ 1 ] = tex[ 1 ][ 1 ] = coords.y1;
         tex[ 1 ][ 0 ] = tex[ 2 ][ 0 ] = coords.x2;

@@ -8,7 +8,7 @@
 
 #include "WinLibraryDirectory.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "platform/win10/AsyncHelpers.h"
 #include "platform/win32/CharsetConverter.h"
 #include "utils/StringUtils.h"
@@ -30,7 +30,7 @@ namespace winrt
 
 bool CWinLibraryDirectory::GetStoragePath(std::string library, std::string & path)
 {
-  GoTvUrl url;
+  NlcUrl url;
   url.SetProtocol("win-lib");
   url.SetHostName(library);
 
@@ -41,7 +41,7 @@ bool CWinLibraryDirectory::GetStoragePath(std::string library, std::string & pat
   return true;
 }
 
-StorageFolder CWinLibraryDirectory::GetRootFolder(const GoTvUrl& url)
+StorageFolder CWinLibraryDirectory::GetRootFolder(const NlcUrl& url)
 {
   if (!url.IsProtocol("win-lib"))
     return nullptr;
@@ -92,7 +92,7 @@ bool CWinLibraryDirectory::IsValid(const CURL & url)
 CWinLibraryDirectory::CWinLibraryDirectory() = default;
 CWinLibraryDirectory::~CWinLibraryDirectory(void) = default;
 
-bool CWinLibraryDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CWinLibraryDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   items.Clear();
 
@@ -139,7 +139,7 @@ bool CWinLibraryDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items
   return true;
 }
 
-bool CWinLibraryDirectory::Create(const GoTvUrl& url)
+bool CWinLibraryDirectory::Create(const NlcUrl& url)
 {
   auto folder = GetFolder(url);
   if (folder) // already exists
@@ -163,12 +163,12 @@ bool CWinLibraryDirectory::Create(const GoTvUrl& url)
   return true;
 }
 
-bool CWinLibraryDirectory::Exists(const GoTvUrl& url)
+bool CWinLibraryDirectory::Exists(const NlcUrl& url)
 {
   return GetFolder(url) != nullptr;
 }
 
-bool CWinLibraryDirectory::Remove(const GoTvUrl& url)
+bool CWinLibraryDirectory::Remove(const NlcUrl& url)
 {
   bool exists = false;
   auto folder = GetFolder(url);
@@ -189,7 +189,7 @@ bool CWinLibraryDirectory::Remove(const GoTvUrl& url)
   return exists;
 }
 
-StorageFolder CWinLibraryDirectory::GetFolder(const GoTvUrl& url)
+StorageFolder CWinLibraryDirectory::GetFolder(const NlcUrl& url)
 {
   StorageFolder rootFolder = GetRootFolder(url);
   if (!rootFolder)
@@ -221,7 +221,7 @@ StorageFolder CWinLibraryDirectory::GetFolder(const GoTvUrl& url)
   return rootFolder;
   }
 
-int CWinLibraryDirectory::StatDirectory(const GoTvUrl& url, struct __stat64* statData)
+int CWinLibraryDirectory::StatDirectory(const NlcUrl& url, struct __stat64* statData)
   {
   if (!statData)
     return -1;

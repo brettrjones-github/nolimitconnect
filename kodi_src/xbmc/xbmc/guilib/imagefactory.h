@@ -10,7 +10,7 @@
 
 #include "iimage.h"
 #include "threads/CriticalSection.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 class ImageFactory
 {
@@ -19,7 +19,7 @@ public:
   virtual ~ImageFactory() = default;
 
   static IImage* CreateLoader(const std::string& strFileName);
-  static IImage* CreateLoader(const GoTvUrl& url);
+  static IImage* CreateLoader(const NlcUrl& url);
   static IImage* CreateLoaderFromMimeType(const std::string& strMimeType);
 
 private:

@@ -21,9 +21,9 @@ class CUDFDirectory :
 public:
   CUDFDirectory(void);
   ~CUDFDirectory(void) override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-  bool Exists(const GoTvUrl& url) override;
-  bool ContainsFiles(const GoTvUrl& url) override { return true; }
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+  bool Exists(const NlcUrl& url) override;
+  bool ContainsFiles(const NlcUrl& url) override { return true; }
 };
 }
 

@@ -15,7 +15,7 @@
 
 #include "guilib/XBTFReader.h"
 
-class GoTvUrl;
+class NlcUrl;
 class CXBTFFile;
 
 namespace XFILE
@@ -27,12 +27,12 @@ public:
 
   static CXbtManager& GetInstance();
 
-  bool HasFiles(const GoTvUrl& path) const;
-  bool GetFiles(const GoTvUrl& path, std::vector<CXBTFFile>& files) const;
+  bool HasFiles(const NlcUrl& path) const;
+  bool GetFiles(const NlcUrl& path, std::vector<CXBTFFile>& files) const;
 
-  bool GetReader(const GoTvUrl& path, CXBTFReaderPtr& reader) const;
+  bool GetReader(const NlcUrl& path, CXBTFReaderPtr& reader) const;
 
-  void Release(const GoTvUrl& path);
+  void Release(const NlcUrl& path);
 
 private:
   CXbtManager();
@@ -46,12 +46,12 @@ private:
   };
   using XBTFReaders = std::map<std::string, XBTFReader>;
 
-  XBTFReaders::iterator GetReader(const GoTvUrl& path) const;
+  XBTFReaders::iterator GetReader(const NlcUrl& path) const;
   XBTFReaders::iterator GetReader(const std::string& path) const;
   void RemoveReader(XBTFReaders::iterator readerIterator) const;
-  XBTFReaders::const_iterator ProcessFile(const GoTvUrl& path) const;
+  XBTFReaders::const_iterator ProcessFile(const NlcUrl& path) const;
 
-  static std::string NormalizePath(const GoTvUrl& path);
+  static std::string NormalizePath(const NlcUrl& path);
 
   mutable XBTFReaders m_readers;
 };

@@ -10,7 +10,7 @@
 #include "music/MusicDatabase.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/SortUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"

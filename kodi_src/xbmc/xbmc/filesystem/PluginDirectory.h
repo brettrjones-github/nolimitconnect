@@ -21,7 +21,7 @@
 #include "threads/Event.h"
 #include "threads/Thread.h"
 
-class GoTvUrl;
+class NlcUrl;
 class CFileItem;
 class CFileItemList;
 
@@ -33,9 +33,9 @@ class CPluginDirectory : public IDirectory
 public:
   CPluginDirectory();
   ~CPluginDirectory(void) override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList& items) override;
   bool AllowAll() const override { return true; }
-  bool Exists(const GoTvUrl& url) override { return true; }
+  bool Exists(const NlcUrl& url) override { return true; }
   float GetProgress() const override;
   void CancelDirectory() override;
   static bool RunScriptWithParams(const std::string& strPath, bool resume);

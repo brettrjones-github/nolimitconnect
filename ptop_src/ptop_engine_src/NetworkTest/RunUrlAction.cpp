@@ -15,7 +15,7 @@
 
 #include "RunUrlAction.h"
 
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 #include <GuiInterface/IDefs.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>

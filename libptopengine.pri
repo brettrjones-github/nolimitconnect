@@ -21,7 +21,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GuiInterface/IDefs.h \
     $$PWD/GuiInterface/IFromGui.h \
-    $$PWD/GuiInterface/IGoTv.h \
+    $$PWD/GuiInterface/INlc.h \
     $$PWD/GuiInterface/ILog.h \
     $$PWD/GuiInterface/IScan.h \
     $$PWD/GuiInterface/IToGui.h \

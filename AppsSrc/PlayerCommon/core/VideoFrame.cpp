@@ -21,7 +21,7 @@
 
 #include "core/VideoFrame.h"
 
-GoTvPtoPVideoFrame::GoTvPtoPVideoFrame()
+NlcPtoPVideoFrame::NlcPtoPVideoFrame()
     : inited(false), width(0), height(0)
 {
     for (int i = 0; i < 4; ++i) {

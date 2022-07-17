@@ -12,7 +12,7 @@
 
 #include "guilib/XBTF.h"
 #include "guilib/XBTFReader.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 namespace XFILE
 {
@@ -27,12 +27,12 @@ CXbtManager& CXbtManager::GetInstance()
   return xbtManager;
 }
 
-bool CXbtManager::HasFiles(const GoTvUrl& path) const
+bool CXbtManager::HasFiles(const NlcUrl& path) const
 {
   return ProcessFile(path) != m_readers.end();
 }
 
-bool CXbtManager::GetFiles(const GoTvUrl& path, std::vector<CXBTFFile>& files) const
+bool CXbtManager::GetFiles(const NlcUrl& path, std::vector<CXBTFFile>& files) const
 {
   const auto& reader = ProcessFile(path);
   if (reader == m_readers.end())
@@ -42,7 +42,7 @@ bool CXbtManager::GetFiles(const GoTvUrl& path, std::vector<CXBTFFile>& files) c
   return true;
 }
 
-bool CXbtManager::GetReader(const GoTvUrl& path, CXBTFReaderPtr& reader) const
+bool CXbtManager::GetReader(const NlcUrl& path, CXBTFReaderPtr& reader) const
 {
   const auto& it = ProcessFile(path);
   if (it == m_readers.end())
@@ -52,7 +52,7 @@ bool CXbtManager::GetReader(const GoTvUrl& path, CXBTFReaderPtr& reader) const
   return true;
 }
 
-void CXbtManager::Release(const GoTvUrl& path)
+void CXbtManager::Release(const NlcUrl& path)
 {
   const auto& it = GetReader(path);
   if (it == m_readers.end())
@@ -61,7 +61,7 @@ void CXbtManager::Release(const GoTvUrl& path)
   RemoveReader(it);
 }
 
-CXbtManager::XBTFReaders::iterator CXbtManager::GetReader(const GoTvUrl& path) const
+CXbtManager::XBTFReaders::iterator CXbtManager::GetReader(const NlcUrl& path) const
 {
   return GetReader(NormalizePath(path));
 }
@@ -86,7 +86,7 @@ void CXbtManager::RemoveReader(XBTFReaders::iterator readerIterator) const
   m_readers.erase(readerIterator);
 }
 
-CXbtManager::XBTFReaders::const_iterator CXbtManager::ProcessFile(const GoTvUrl& path) const
+CXbtManager::XBTFReaders::const_iterator CXbtManager::ProcessFile(const NlcUrl& path) const
 {
   std::string filePath = NormalizePath(path);
 
@@ -116,7 +116,7 @@ CXbtManager::XBTFReaders::const_iterator CXbtManager::ProcessFile(const GoTvUrl&
   return result.first;
 }
 
-std::string CXbtManager::NormalizePath(const GoTvUrl& path)
+std::string CXbtManager::NormalizePath(const NlcUrl& path)
 {
   if (path.IsProtocol("xbt"))
     return path.GetHostName();

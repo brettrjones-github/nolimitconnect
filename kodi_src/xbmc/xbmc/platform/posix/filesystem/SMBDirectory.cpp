@@ -18,7 +18,7 @@
 */
 
 #include "SMBDirectory.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "guilib/LocalizeStrings.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
@@ -53,7 +53,7 @@ CSMBDirectory::~CSMBDirectory(void)
   smb.AddIdleConnection();
 }
 
-bool CSMBDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CSMBDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   // We accept smb://[[[domain;]user[:password@]]server[/share[/path[/file]]]]
 
@@ -203,7 +203,7 @@ bool CSMBDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-int CSMBDirectory::Open(const GoTvUrl& url)
+int CSMBDirectory::Open(const NlcUrl& url)
 {
   smb.Init();
   std::string strAuth;
@@ -213,7 +213,7 @@ int CSMBDirectory::Open(const GoTvUrl& url)
 /// \brief Checks authentication against SAMBA share and prompts for username and password if needed
 /// \param strAuth The SMB style path
 /// \return SMB file descriptor
-int CSMBDirectory::OpenDir(const GoTvUrl& url, std::string& strAuth)
+int CSMBDirectory::OpenDir(const NlcUrl& url, std::string& strAuth)
 {
   int fd = -1;
 
@@ -269,12 +269,12 @@ int CSMBDirectory::OpenDir(const GoTvUrl& url, std::string& strAuth)
   return fd;
 }
 
-bool CSMBDirectory::Create(const GoTvUrl& url2)
+bool CSMBDirectory::Create(const NlcUrl& url2)
 {
   CSingleLock lock(smb);
   smb.Init();
 
-  GoTvUrl url(url2);
+  NlcUrl url(url2);
   CPasswordManager::GetInstance().AuthenticateURL(url);
   std::string strFileName = smb.URLEncode(url);
 
@@ -286,12 +286,12 @@ bool CSMBDirectory::Create(const GoTvUrl& url2)
   return success;
 }
 
-bool CSMBDirectory::Remove(const GoTvUrl& url2)
+bool CSMBDirectory::Remove(const NlcUrl& url2)
 {
   CSingleLock lock(smb);
   smb.Init();
 
-  GoTvUrl url(url2);
+  NlcUrl url(url2);
   CPasswordManager::GetInstance().AuthenticateURL(url);
   std::string strFileName = smb.URLEncode(url);
 
@@ -306,12 +306,12 @@ bool CSMBDirectory::Remove(const GoTvUrl& url2)
   return true;
 }
 
-bool CSMBDirectory::Exists(const GoTvUrl& url2)
+bool CSMBDirectory::Exists(const NlcUrl& url2)
 {
   CSingleLock lock(smb);
   smb.Init();
 
-  GoTvUrl url(url2);
+  NlcUrl url(url2);
   CPasswordManager::GetInstance().AuthenticateURL(url);
   std::string strFileName = smb.URLEncode(url);
 

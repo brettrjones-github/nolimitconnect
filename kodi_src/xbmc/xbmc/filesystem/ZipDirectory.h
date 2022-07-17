@@ -17,8 +17,8 @@ namespace XFILE
   public:
     CZipDirectory();
     ~CZipDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override;
-    bool ContainsFiles(const GoTvUrl& url) override;
-    DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_ALWAYS; };
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items) override;
+    bool ContainsFiles(const NlcUrl& url) override;
+    DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_ALWAYS; };
   };
 }

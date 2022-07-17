@@ -29,18 +29,18 @@
 class QAction;
 class QTimer;
 
-class GoTvPtoPMediaPlayer;
-class GoTvPtoPVideo;
+class NlcPtoPMediaPlayer;
+class NlcPtoPVideo;
 
 /*!
-    \class GoTvPtoPControlVideo ControlVideo.h GOTVQtWidgets/ControlVideo.h
+    \class NlcPtoPControlVideo ControlVideo.h GOTVQtWidgets/ControlVideo.h
     \ingroup GOTVQtWidgets
     \brief Video control class
 
     This is one of GOTV-Qt control classes.
     It provides video and subtitle tracks management.
 */
-class GOTVQT_WIDGETS_EXPORT GoTvPtoPControlVideo : public QObject
+class GOTVQT_WIDGETS_EXPORT NlcPtoPControlVideo : public QObject
 {
     Q_OBJECT
 public:
@@ -50,14 +50,14 @@ public:
         \param language default subtitle language
         \param parent video controller's parent object
     */
-    explicit GoTvPtoPControlVideo(GoTvPtoPMediaPlayer *player,
+    explicit NlcPtoPControlVideo(NlcPtoPMediaPlayer *player,
                              const QString &language = 0,
                              QObject *parent = 0);
 
     /*!
         \brief VideoControl destructor
     */
-    ~GoTvPtoPControlVideo();
+    ~NlcPtoPControlVideo();
 
     /*!
         \brief Reset all settings and selected video and subtitle tracks
@@ -86,7 +86,7 @@ signals:
         \param type type of actions
     */
     void actions(QList<QAction *> actions,
-                 const GoTvPtoP::ActionsType type);
+                 const NlcPtoP::ActionsType type);
 
     /*!
         \brief Signal sending actions for changing subititle tracks
@@ -107,8 +107,8 @@ private slots:
     void updateVideo();
 
 private:
-    GoTvPtoPMediaPlayer *_gotvptopMediaPlayer;
-    GoTvPtoPVideo *_gotvptopVideo;
+    NlcPtoPMediaPlayer *_gotvptopMediaPlayer;
+    NlcPtoPVideo *_gotvptopVideo;
 
     QTimer *_timerSubtitles;
     QTimer *_timerVideo;

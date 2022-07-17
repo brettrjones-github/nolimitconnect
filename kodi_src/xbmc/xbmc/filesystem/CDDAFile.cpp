@@ -8,7 +8,7 @@
 
 #include "CDDAFile.h"
 #include <sys/stat.h>
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "storage/MediaManager.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
@@ -33,7 +33,7 @@ CFileCDDA::~CFileCDDA(void)
   Close();
 }
 
-bool CFileCDDA::Open(const GoTvUrl& url)
+bool CFileCDDA::Open(const NlcUrl& url)
 {
   std::string strURL = url.GetWithoutFilename();
 
@@ -68,7 +68,7 @@ bool CFileCDDA::Open(const GoTvUrl& url)
   return true;
 }
 
-bool CFileCDDA::Exists(const GoTvUrl& url)
+bool CFileCDDA::Exists(const NlcUrl& url)
 {
   if (!IsValidFile(url))
     return false;
@@ -85,7 +85,7 @@ bool CFileCDDA::Exists(const GoTvUrl& url)
   return (iTrack > 0 && iTrack <= iLastTrack);
 }
 
-int CFileCDDA::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CFileCDDA::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   if (Open(url))
   {
@@ -201,13 +201,13 @@ int64_t CFileCDDA::GetLength()
   return ((int64_t)(m_lsnEnd -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
 }
 
-bool CFileCDDA::IsValidFile(const GoTvUrl& url)
+bool CFileCDDA::IsValidFile(const NlcUrl& url)
 {
   // Only .cdda files are supported
   return URIUtils::HasExtension(url.Get(), ".cdda");
 }
 
-int CFileCDDA::GetTrackNum(const GoTvUrl& url)
+int CFileCDDA::GetTrackNum(const NlcUrl& url)
 {
   std::string strFileName = url.Get();
 

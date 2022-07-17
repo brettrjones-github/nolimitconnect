@@ -273,7 +273,7 @@ bool CJpegParse::Process (const char *picFileName)
 
 /*    // Get file name...
   CStdString tmp, urlFName, path;
-  GoTvUrl url(picFileName);
+  NlcUrl url(picFileName);
   url.GetURLWithoutUserDetails(urlFName);
   CUtil::Split(urlFName, path, tmp);
   m_JpegInfo[SLIDESHOW_FILE_NAME] = tmp;

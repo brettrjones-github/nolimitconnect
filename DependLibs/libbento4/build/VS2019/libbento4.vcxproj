@@ -143,7 +143,7 @@
     <ClCompile Include="..\..\Crypto\Ap4KeyWrap.cpp" />
     <ClCompile Include="..\..\Crypto\Ap4StreamCipher.cpp" />
     <ClCompile Include="..\..\MetaData\Ap4MetaData.cpp" />
-    <ClCompile Include="..\..\System\GoTv\Ap4GoTvFileByteStream.cpp" />
+    <ClCompile Include="..\..\System\Nlc\Ap4NlcFileByteStream.cpp" />
     <ClCompile Include="..\..\System\Posix\Ap4PosixRandom.cpp" />
     <ClCompile Include="..\..\System\StdC\Ap4StdCFileByteStream.cpp" />
     <ClCompile Include="..\..\System\Win32\Ap4Win32Random.cpp" />

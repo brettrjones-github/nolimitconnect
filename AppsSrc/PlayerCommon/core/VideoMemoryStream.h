@@ -31,7 +31,7 @@
 #endif
 /* MSVC + MinGW support fix */
 #if defined (_WIN32)
-#   define LIBGOTV_USE_PTHREAD_CANCEL 1
+#   define LIBNLC_USE_PTHREAD_CANCEL 1
 #endif
 #include <gotvptop_common.h>
 #include <gotvptop_fourcc.h>
@@ -39,23 +39,23 @@
 struct gotvptop_chroma_description_t;
 #endif
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPVideoMemoryStream VideoMemoryStream.h core/VideoMemoryStream.h
+    \class NlcPtoPVideoMemoryStream VideoMemoryStream.h core/VideoMemoryStream.h
     \ingroup GOTVQtCore
     \brief Video memory stream (deprecated)
 
-    GoTvPtoPVideoMemoryStream is a template class for creating own video rendering engines.
+    NlcPtoPVideoMemoryStream is a template class for creating own video rendering engines.
 
-    \see GoTvPtoPAbstractVideoStream
+    \see NlcPtoPAbstractVideoStream
     \deprecated Deprecated since GOTV-Qt 1.1, will be removed in 2.0
  */
-class Q_DECL_DEPRECATED GOTVQT_CORE_EXPORT GoTvPtoPVideoMemoryStream
+class Q_DECL_DEPRECATED GOTVQT_CORE_EXPORT NlcPtoPVideoMemoryStream
 {
 public:
-    explicit GoTvPtoPVideoMemoryStream();
-    virtual ~GoTvPtoPVideoMemoryStream();
+    explicit NlcPtoPVideoMemoryStream();
+    virtual ~NlcPtoPVideoMemoryStream();
     
     /*!
         \brief Set required information for rendering video
@@ -71,16 +71,16 @@ public:
                                      unsigned *visibleLines = 0);
 
     /*!
-        \brief Set GoTvPtoPMediaPlayer callbacks
-        \param player media player (GoTvPtoPMediaPlayer *)
+        \brief Set NlcPtoPMediaPlayer callbacks
+        \param player media player (NlcPtoPMediaPlayer *)
      */
-    void setCallbacks(GoTvPtoPMediaPlayer *player);
+    void setCallbacks(NlcPtoPMediaPlayer *player);
 
     /*!
-        \brief Unset GoTvPtoPMediaPlayer callbacks
-        \param player media player (GoTvPtoPMediaPlayer *)
+        \brief Unset NlcPtoPMediaPlayer callbacks
+        \param player media player (NlcPtoPMediaPlayer *)
      */
-    void unsetCallbacks(GoTvPtoPMediaPlayer *player);
+    void unsetCallbacks(NlcPtoPMediaPlayer *player);
 
 protected:
     /*!

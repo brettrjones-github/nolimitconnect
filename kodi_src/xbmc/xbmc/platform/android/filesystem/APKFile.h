@@ -9,7 +9,7 @@
 #pragma once
 
 #include "filesystem/IFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 struct zip;
 struct zip_file;
@@ -21,19 +21,19 @@ namespace XFILE
   public:
     CAPKFile();
     virtual ~CAPKFile();
-    virtual bool Open(const GoTvUrl& url);
+    virtual bool Open(const NlcUrl& url);
     virtual void Close();
-    virtual bool Exists(const GoTvUrl& url);
+    virtual bool Exists(const NlcUrl& url);
 
     virtual int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET);
     virtual ssize_t Read(void* lpBuf, size_t uiBufSize);
     virtual int Stat(struct __stat64* buffer);
-    virtual int Stat(const GoTvUrl& url, struct __stat64* buffer);
+    virtual int Stat(const NlcUrl& url, struct __stat64* buffer);
     virtual int64_t GetLength();
     virtual int64_t GetPosition();
     virtual int GetChunkSize();
   protected:
-    GoTvUrl             m_url;
+    NlcUrl             m_url;
     int                 m_zip_index;
     int64_t             m_file_pos;
     int64_t             m_file_size;

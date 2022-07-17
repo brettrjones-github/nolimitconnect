@@ -32,12 +32,12 @@
 
 #include "SharedExportQml.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 class GlslPainter;
 
 /*!
-    \class GoTvPtoPQmlVideoObject QmlVideoObject.h GOTVQtQml/QmlVideoObject.h
+    \class NlcPtoPQmlVideoObject QmlVideoObject.h GOTVQtQml/QmlVideoObject.h
     \ingroup GOTVQtQml
     \brief QML video object (deprecated)
 
@@ -45,65 +45,65 @@ class GlslPainter;
 
     \deprecated Deprecated since GOTV-Qt 1.1, will be removed in 2.0
  */
-class Q_DECL_DEPRECATED GOTVQT_QML_EXPORT GoTvPtoPQmlVideoObject : public QQuickPaintedItem,
-                                           public GoTvPtoPVideoMemoryStream
+class Q_DECL_DEPRECATED GOTVQT_QML_EXPORT NlcPtoPQmlVideoObject : public QQuickPaintedItem,
+                                           public NlcPtoPVideoMemoryStream
 {
 Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPQmlVideoObject constructor.
+        \brief NlcPtoPQmlVideoObject constructor.
         \param parent parent item
      */
-    explicit GoTvPtoPQmlVideoObject(QQuickItem *parent = 0);
+    explicit NlcPtoPQmlVideoObject(QQuickItem *parent = 0);
 
     /*!
-        GoTvPtoPMediaPlayer destructor
+        NlcPtoPMediaPlayer destructor
      */
-    virtual ~GoTvPtoPQmlVideoObject();
+    virtual ~NlcPtoPQmlVideoObject();
 
 
     /*!
         \brief Connect to media player
         \param player media player
      */
-    void connectToMediaPlayer(GoTvPtoPMediaPlayer *player);
+    void connectToMediaPlayer(NlcPtoPMediaPlayer *player);
 
     /*!
         \brief Disconnect from media player
         \param player media player
      */
-    void disconnectFromMediaPlayer(GoTvPtoPMediaPlayer *player);
+    void disconnectFromMediaPlayer(NlcPtoPMediaPlayer *player);
 
 
     /*!
         \brief Get current aspect ratio
         \return aspect ratio
      */
-    GoTvPtoP::Ratio aspectRatio() const;
+    NlcPtoP::Ratio aspectRatio() const;
 
     /*!
         \brief Set aspect ratio
         \param aspectRatio new aspect ratio
      */
-    void setAspectRatio(const GoTvPtoP::Ratio &aspectRatio);
+    void setAspectRatio(const NlcPtoP::Ratio &aspectRatio);
 
     /*!
         \brief Get current crop ratio
         \return crop ratio
      */
-    GoTvPtoP::Ratio cropRatio() const;
+    NlcPtoP::Ratio cropRatio() const;
 
     /*!
         \brief Set crop ratio
         \param cropRatio new crop ratio
      */
-    void setCropRatio(const GoTvPtoP::Ratio &cropRatio);
+    void setCropRatio(const NlcPtoP::Ratio &cropRatio);
 
 protected:
     /*!
         \brief Core media player
      */
-    GoTvPtoPMediaPlayer *_player;
+    NlcPtoPMediaPlayer *_player;
 
 private slots:
     void frameReady();
@@ -135,7 +135,7 @@ private:
     void updateCropRatio();
 
     QMutex _mutex;
-    GoTvPtoPVideoFrame _frame;
+    NlcPtoPVideoFrame _frame;
 
     QRectF _geometry;
     QRectF _boundingRect;
@@ -146,8 +146,8 @@ private:
     bool _paintedOnce;
     bool _gotSize;
 
-    GoTvPtoP::Ratio _aspectRatio;
-    GoTvPtoP::Ratio _cropRatio;
+    NlcPtoP::Ratio _aspectRatio;
+    NlcPtoP::Ratio _cropRatio;
 };
 
 #endif // GOTVQT_QMLVIDEOOBJECT_H_

@@ -22,7 +22,7 @@
 #include "threads/IRunnable.h"
 #include "utils/log.h"
 #include "video/VideoInfoTag.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/Variant.h"
 
 namespace
@@ -64,7 +64,7 @@ bool CGUIDialogSimpleMenu::ShowPlaySelection(CFileItem& item)
     URIUtils::RemoveSlashAtEnd(root);
     if (URIUtils::GetFileName(root) == "BDMV")
     {
-      GoTvUrl url("bluray://");
+      NlcUrl url("bluray://");
       url.SetHostName(URIUtils::GetParentPath(root));
       url.SetFileName("root");
       return ShowPlaySelection(item, url.Get());
@@ -73,14 +73,14 @@ bool CGUIDialogSimpleMenu::ShowPlaySelection(CFileItem& item)
 
   if (item.IsDiscImage())
   {
-    GoTvUrl url2("udf://");
+    NlcUrl url2("udf://");
     url2.SetHostName(item.GetPath());
     url2.SetFileName("BDMV/index.bdmv");
     if (XFILE::CFile::Exists(url2.Get()))
     {
       url2.SetFileName("");
 
-      GoTvUrl url("bluray://");
+      NlcUrl url("bluray://");
       url.SetHostName(url2.Get());
       url.SetFileName("root");
       return ShowPlaySelection(item, url.Get());

@@ -37,7 +37,7 @@
 #include "rendering/qt/RenderSystemQt.h"
  //#include "rendering/MatrixGL.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 
 // stuff for freetype
@@ -51,7 +51,7 @@
 
 CGUIFontTTFQt::CGUIFontTTFQt( const std::string& strFileName )
     : CGUIFontTTFBase( strFileName )
-    , m_IGoTv( IGoTv::getIGoTv() )
+    , m_INlc( INlc::getINlc() )
 {
     m_updateY1 = 0;
     m_updateY2 = 0;
@@ -69,7 +69,7 @@ CGUIFontTTFQt::~CGUIFontTTFQt( void )
 
 bool CGUIFontTTFQt::FirstBegin()
 {
-    m_IGoTv.firstBegin( this );
+    m_INlc.firstBegin( this );
     /*
 #if defined(HAS_GL)
   GLenum pixformat = GL_RED;
@@ -183,7 +183,7 @@ void CGUIFontTTFQt::LastEnd()
     CRenderSystemQt* renderSystem = dynamic_cast< CRenderSystemQt* >( CServiceBroker::GetRenderSystem() );
     renderSystem->EnableGUIShader( SM_FONTS );
 
-    m_IGoTv.lastEnd( this );
+    m_INlc.lastEnd( this );
 
 
     /*
@@ -300,7 +300,7 @@ void CGUIFontTTFQt::LastEnd()
 
 CVertexBuffer CGUIFontTTFQt::CreateVertexBuffer( const std::vector<SVertex> &vertices ) const
 {
-    return m_IGoTv.createVertexBuffer( const_cast<CGUIFontTTFQt*>(this), vertices );
+    return m_INlc.createVertexBuffer( const_cast<CGUIFontTTFQt*>(this), vertices );
 
     //// Generate a unique buffer object name and put it in bufferHandle
     //GLuint bufferHandle;
@@ -319,7 +319,7 @@ CVertexBuffer CGUIFontTTFQt::CreateVertexBuffer( const std::vector<SVertex> &ver
 
 void CGUIFontTTFQt::DestroyVertexBuffer( CVertexBuffer &buffer ) const
 {
-    return m_IGoTv.destroyVertexBuffer( const_cast<CGUIFontTTFQt*>(this), buffer );
+    return m_INlc.destroyVertexBuffer( const_cast<CGUIFontTTFQt*>(this), buffer );
 
     //if( buffer.bufferHandle != 0 )
     //{
@@ -419,7 +419,7 @@ bool CGUIFontTTFQt::CopyCharToTexture( FT_BitmapGlyph bitGlyph, unsigned int x1,
 
 void CGUIFontTTFQt::DeleteHardwareTexture()
 {
-    m_IGoTv.deleteHardwareTexture( const_cast< CGUIFontTTFQt* >( this ) );
+    m_INlc.deleteHardwareTexture( const_cast< CGUIFontTTFQt* >( this ) );
 
     //if( m_textureStatus != TEXTURE_VOID )
     //{
@@ -437,7 +437,7 @@ void CGUIFontTTFQt::CreateStaticVertexBuffers( void )
         return;
 
     CGUIFontTTFQt fontQt( "" );
-    IGoTv::getIGoTv().createStaticVertexBuffers( &fontQt );
+    INlc::getINlc().createStaticVertexBuffers( &fontQt );
 }
 //    // Bind a new buffer to the OpenGL context's GL_ELEMENT_ARRAY_BUFFER binding point
 //    glGenBuffers( 1, &m_elementArrayHandle );
@@ -464,7 +464,7 @@ void CGUIFontTTFQt::DestroyStaticVertexBuffers( void )
         return;
 
     CGUIFontTTFQt fontQt( "" );
-    IGoTv::getIGoTv().destroyStaticVertexBuffers( &fontQt );
+    INlc::getINlc().destroyStaticVertexBuffers( &fontQt );
 
 //    glDeleteBuffers( 1, &m_elementArrayHandle );
 //    m_staticVertexBufferCreated = false;

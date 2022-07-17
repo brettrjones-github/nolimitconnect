@@ -23,7 +23,7 @@
 #include "utils/auto_buffer.h"
 #include "IFileTypes.h"
 #include "PlatformDefs.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 class BitstreamStats;
 
@@ -63,13 +63,13 @@ namespace XFILE
         * except if flag READ_REOPEN is set and the underlying
         * file has an implementation of ReOpen().
         */
-        bool Open( const GoTvUrl& file, const unsigned int flags = 0 );
+        bool Open( const NlcUrl& file, const unsigned int flags = 0 );
         bool Open( const std::string& strFileName, const unsigned int flags = 0 );
 
-        bool OpenForWrite( const GoTvUrl& file, bool bOverWrite = false );
+        bool OpenForWrite( const NlcUrl& file, bool bOverWrite = false );
         bool OpenForWrite( const std::string& strFileName, bool bOverWrite = false );
 
-        ssize_t LoadFile( const GoTvUrl &file, auto_buffer& outputBuffer );
+        ssize_t LoadFile( const NlcUrl &file, auto_buffer& outputBuffer );
 
         /**
          * Attempt to read bufSize bytes from currently opened file into buffer bufPtr.
@@ -118,9 +118,9 @@ namespace XFILE
 
         IFile *GetImplementation() const { return m_pFile; }
 
-        // GoTvUrl interface
-        static bool Exists( const GoTvUrl& file, bool bUseCache = true );
-        static bool Delete( const GoTvUrl& file );
+        // NlcUrl interface
+        static bool Exists( const NlcUrl& file, bool bUseCache = true );
+        static bool Delete( const NlcUrl& file );
         /**
         * Fills struct __stat64 with information about file specified by filename
         * For st_mode function will set correctly _S_IFDIR (directory) flag and may set
@@ -133,10 +133,10 @@ namespace XFILE
         * @param buffer      pointer to __stat64 buffer to receive information about file
         * @return zero of success, -1 otherwise.
         */
-        static int  Stat( const GoTvUrl& file, struct __stat64* buffer );
-        static bool Rename( const GoTvUrl& file, const GoTvUrl& urlNew );
-        static bool Copy( const GoTvUrl& file, const GoTvUrl& dest, XFILE::IFileCallback* pCallback = NULL, void* pContext = NULL );
-        static bool SetHidden( const GoTvUrl& file, bool hidden );
+        static int  Stat( const NlcUrl& file, struct __stat64* buffer );
+        static bool Rename( const NlcUrl& file, const NlcUrl& urlNew );
+        static bool Copy( const NlcUrl& file, const NlcUrl& dest, XFILE::IFileCallback* pCallback = NULL, void* pContext = NULL );
+        static bool SetHidden( const NlcUrl& file, bool hidden );
 
         // string interface
         static bool Exists( const std::string& strFileName, bool bUseCache = true );
@@ -173,7 +173,7 @@ namespace XFILE
 
     private:
         unsigned int        m_flags;
-        GoTvUrl                m_curl;
+        NlcUrl                m_curl;
         IFile*              m_pFile;
         CFileStreamBuffer*  m_pBuffer;
         BitstreamStats*     m_bitStreamStats;
@@ -211,7 +211,7 @@ namespace XFILE
         ~CFileStream() override;
 
         bool Open( const std::string& filename );
-        bool Open( const GoTvUrl& filename );
+        bool Open( const NlcUrl& filename );
         void Close();
 
         int64_t GetLength();

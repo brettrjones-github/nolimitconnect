@@ -597,7 +597,7 @@ static void ConvertToYUVA(const uint32_t* const src, int width, int y_pos,
   // Lastly, store alpha if needed.
   if (buf->a != NULL) {
     uint8_t* const a = buf->a + y_pos * buf->a_stride;
-#if defined(GOTV_ARCH_BIGENDIAN)
+#if defined(NLC_ARCH_BIGENDIAN)
     WebPExtractAlpha((uint8_t*)src + 0, 0, width, 1, a, 0);
 #else
     WebPExtractAlpha((uint8_t*)src + 3, 0, width, 1, a, 0);
@@ -830,7 +830,7 @@ static void ExtractPalettedAlphaRows(VP8LDecoder* const dec, int last_row) {
 
 // cyclic rotation of pattern word
 static WEBP_INLINE uint32_t Rotate8b(uint32_t V) {
-#if defined(GOTV_ARCH_BIGENDIAN)
+#if defined(NLC_ARCH_BIGENDIAN)
   return ((V & 0xff000000u) >> 24) | (V << 8);
 #else
   return ((V & 0xffu) << 24) | (V >> 8);

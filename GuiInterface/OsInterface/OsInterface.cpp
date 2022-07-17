@@ -1,7 +1,7 @@
 #include <CommonHdr.h>
 #include "OsInterface.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
@@ -43,7 +43,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "platform/win32/WIN32Util.h"
 
 #include "ServiceBroker.h"
@@ -224,8 +224,8 @@ bool CopyIfRequiredAssetDirectory( std::string assetFileDir, std::string destDir
 #endif // ENABLE_KODI
 
 //============================================================================
-OsInterface::OsInterface( IGoTv& gotv )
-    : m_IGoTv( gotv )
+OsInterface::OsInterface( INlc& gotv )
+    : m_INlc( gotv )
     , m_RunResultCode( 0 )
 {
 }
@@ -242,9 +242,9 @@ bool OsInterface::initRun( const CAppParamParser& cmdLineParams )
 bool OsInterface::doRun( EAppModule appModule )
 {
     LogModule(eLogStartup, LOG_VERBOSE, "OsInterface::doRun");
-    if( !m_IGoTv.getIsAppModuleRunning( appModule ) )
+    if( !m_INlc.getIsAppModuleRunning( appModule ) )
     {
-        m_IGoTv.setIsAppModuleRunning( appModule, true );
+        m_INlc.setIsAppModuleRunning( appModule, true );
 #if ENABLE_KODI
         if( eAppModuleKodi == appModule )
         {
@@ -653,10 +653,10 @@ bool OsInterface::initUserPaths()
 
     // initialize all the directories we can without the user specific directory that can only be set after log in
     // For PtoP
-    std::string nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExeGoTvAssets ).c_str() );
+    std::string nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExeNlcAssets ).c_str() );
     CSpecialProtocol::SetAppAssetsPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitassets" ) );	// /exe/assets/nolimit/
 
-    nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirAppGoTvData ).c_str() );
+    nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirAppNlcData ).c_str() );
     CSpecialProtocol::SetAppDataPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitdata" ) );		// /storage/NoLimitConnect/nolimit/
 
     // Python
@@ -696,7 +696,7 @@ bool OsInterface::initDirectories()
 	//=== relative to executable paths ===//
     // do not call this until user logs on so that eAppDirUserSpecific is set
 
-    //F:/GoTvCode/bin-OS/assets/kodi or for android storage/apk/assets/kodi
+    //F:/NlcCode/bin-OS/assets/kodi or for android storage/apk/assets/kodi
     std::string xbmcAssetsPath = CUtil::GetHomePath();
 #if !defined(TARGET_OS_ANDROID)
     CEnvironment::setenv( CCompileInfo::GetHomeEnvName(), xbmcAssetsPath );
@@ -716,16 +716,16 @@ bool OsInterface::initDirectories()
 
 
     std::string nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserSpecific ).c_str() );
-	CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitaccount" ) );	// /storage/GoTvPtoP/hashnum/accounts/userId/
+	CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitaccount" ) );	// /storage/NlcPtoP/hashnum/accounts/userId/
 
 	nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirSettings ).c_str() );
-	CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitsettings" ) ); // /storage/GoTvPtoP/hashnum/accounts/userId/settings
+	CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitsettings" ) ); // /storage/NlcPtoP/hashnum/accounts/userId/settings
    
-	nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserXfer ).c_str() ); // Documents Directory/GoTvPtoP/hashnum/userId/   where transfer directories are
+	nolimitDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserXfer ).c_str() ); // Documents Directory/NlcPtoP/hashnum/userId/   where transfer directories are
 	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitxfer" ) );
 #endif // ENABLE_KODI  
 
-    m_IGoTv.createUserDirs();
+    m_INlc.createUserDirs();
 
     return true;
 }

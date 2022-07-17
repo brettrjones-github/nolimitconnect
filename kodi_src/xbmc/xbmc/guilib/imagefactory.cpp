@@ -22,11 +22,11 @@ using namespace ADDON;
 
 IImage* ImageFactory::CreateLoader(const std::string& strFileName)
 {
-  GoTvUrl url(strFileName);
+  NlcUrl url(strFileName);
   return CreateLoader(url);
 }
 
-IImage* ImageFactory::CreateLoader(const GoTvUrl& url)
+IImage* ImageFactory::CreateLoader(const NlcUrl& url)
 {
   if(!url.GetFileType().empty())
     return CreateLoaderFromMimeType("image/"+url.GetFileType());

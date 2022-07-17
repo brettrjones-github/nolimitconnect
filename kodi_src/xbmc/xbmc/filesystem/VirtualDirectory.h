@@ -26,9 +26,9 @@ namespace XFILE
   public:
     CVirtualDirectory(void);
     ~CVirtualDirectory(void) override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
     void CancelDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items, bool bUseFileDirectories, bool keepImpl);
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items, bool bUseFileDirectories, bool keepImpl);
     void SetSources(const VECSOURCES& vecSources);
     inline unsigned int GetNumberOfSources() 
     {

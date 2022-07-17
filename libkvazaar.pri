@@ -1,9 +1,9 @@
 HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
-	$$PWD/../../../../GoTvCompilerIntTypes.h \
-	$$PWD/../../../../GoTvConfig.h \
+	$$PWD/../../../../NlcCompilerIntTypes.h \
+	$$PWD/../../../../NlcConfig.h \
 	$$PWD/../../../../AppCpuArchDefines.h \
 	$$PWD/../../../../AppDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
+	$$PWD/../../../../NlcFeaturesConfig.h \
 	$$PWD/../../../../AppTargetOsConfig.h \
 	$$PWD/../../src/bitstream.h \
 	$$PWD/../../src/cabac.h \

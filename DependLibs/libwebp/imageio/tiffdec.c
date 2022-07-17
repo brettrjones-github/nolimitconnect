@@ -212,7 +212,7 @@ int ReadTIFF(const uint8_t* const data, size_t data_size,
       pic->width = width;
       pic->height = height;
       // TIFF data is ABGR
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
       TIFFSwabArrayOfLong(raster, width * height);
 #endif
       // if we have an alpha channel, we must un-multiply from rgbA to RGBA

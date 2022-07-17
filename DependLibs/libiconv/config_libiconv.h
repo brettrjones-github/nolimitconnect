@@ -36,9 +36,9 @@ iconv_open, iconv, iconv_close functions. */
 #define HAVE_WORKING_O_NOFOLLOW 0
 
 /* Define if the machine's byte ordering is little endian. */
-#if GOTV_ARCH_LITTLE_ENDIAN
+#if NLC_ARCH_LITTLE_ENDIAN
 # define WORDS_LITTLEENDIAN  1
 #else
 # define WORDS_LITTLEENDIAN  0
-#endif // GOTV_ARCH_LITTLE_ENDIAN
+#endif // NLC_ARCH_LITTLE_ENDIAN
 

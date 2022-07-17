@@ -7,7 +7,7 @@
  */
 
 #include "HTTPImageHandler.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/ImageFile.h"
 #include "network/WebServer.h"
 #include "utils/FileUtils.h"
@@ -25,7 +25,7 @@ CHTTPImageHandler::CHTTPImageHandler(const HTTPRequest &request)
     file = m_request.pathUrl.substr(7);
 
     XFILE::CImageFile imageFile;
-    const GoTvUrl pathToUrl(file);
+    const NlcUrl pathToUrl(file);
     if (imageFile.Exists(pathToUrl) && CFileUtils::CheckFileAccessAllowed(file))
     {
       responseStatus = MHD_HTTP_OK;

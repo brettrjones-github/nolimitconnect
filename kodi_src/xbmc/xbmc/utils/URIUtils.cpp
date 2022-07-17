@@ -14,7 +14,7 @@
 #include "filesystem/StackDirectory.h"
 #include "network/DNSNameCache.h"
 #include "settings/AdvancedSettings.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/FileExtensionProvider.h"
 #include "ServiceBroker.h"
 #include "StringUtils.h"
@@ -45,7 +45,7 @@ void URIUtils::UnregisterAdvancedSettings()
 }
 
 /* returns filename extension including period of filename */
-std::string URIUtils::GetExtension(const GoTvUrl& url)
+std::string URIUtils::GetExtension(const NlcUrl& url)
 {
   return URIUtils::GetExtension(url.GetFileName());
 }
@@ -54,7 +54,7 @@ std::string URIUtils::GetExtension(const std::string& strFileName)
 {
   if (IsURL(strFileName))
   {
-    GoTvUrl url(strFileName);
+    NlcUrl url(strFileName);
     return GetExtension(url.GetFileName());
   }
 
@@ -69,7 +69,7 @@ bool URIUtils::HasExtension(const std::string& strFileName)
 {
   if (IsURL(strFileName))
   {
-    GoTvUrl url(strFileName);
+    NlcUrl url(strFileName);
     return HasExtension(url.GetFileName());
   }
 
@@ -77,7 +77,7 @@ bool URIUtils::HasExtension(const std::string& strFileName)
   return iPeriod != std::string::npos && strFileName[iPeriod] == '.';
 }
 
-bool URIUtils::HasExtension(const GoTvUrl& url, const std::string& strExtensions)
+bool URIUtils::HasExtension(const NlcUrl& url, const std::string& strExtensions)
 {
   return HasExtension(url.GetFileName(), strExtensions);
 }
@@ -86,7 +86,7 @@ bool URIUtils::HasExtension(const std::string& strFileName, const std::string& s
 {
   if (IsURL(strFileName))
   {
-    GoTvUrl url(strFileName);
+    NlcUrl url(strFileName);
     return HasExtension(url.GetFileName(), strExtensions);
   }
 
@@ -119,7 +119,7 @@ void URIUtils::RemoveExtension(std::string& strFileName)
 {
   if(IsURL(strFileName))
   {
-    GoTvUrl url(strFileName);
+    NlcUrl url(strFileName);
     strFileName = url.GetFileName();
     RemoveExtension(strFileName);
     url.SetFileName(strFileName);
@@ -156,7 +156,7 @@ std::string URIUtils::ReplaceExtension(const std::string& strFile,
 {
   if(IsURL(strFile))
   {
-    GoTvUrl url(strFile);
+    NlcUrl url(strFile);
     url.SetFileName(ReplaceExtension(url.GetFileName(), strNewExtension));
     return url.Get();
   }
@@ -176,7 +176,7 @@ std::string URIUtils::ReplaceExtension(const std::string& strFile,
   return strChangedFile;
 }
 
-std::string URIUtils::GetFileName(const GoTvUrl& url)
+std::string URIUtils::GetFileName(const NlcUrl& url)
 {
   return GetFileName(url.GetFileName());
 }
@@ -187,7 +187,7 @@ std::string URIUtils::GetFileName(const std::string& strFileNameAndPath)
 {
   if(IsURL(strFileNameAndPath))
   {
-    GoTvUrl url(strFileNameAndPath);
+    NlcUrl url(strFileNameAndPath);
     return GetFileName(url.GetFileName());
   }
 
@@ -237,7 +237,7 @@ void URIUtils::Split(const std::string& strFileNameAndPath,
 
 std::vector<std::string> URIUtils::SplitPath(const std::string& strPath)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
 
   // silly std::string can't take a char in the constructor
   std::string sep(1, url.GetDirectorySeparator());
@@ -273,7 +273,7 @@ void URIUtils::GetCommonPath(std::string& strParent, const std::string& strPath)
   }
 }
 
-bool URIUtils::HasParentInHostname(const GoTvUrl& url)
+bool URIUtils::HasParentInHostname(const NlcUrl& url)
 {
   return url.IsProtocol("zip")
       || url.IsProtocol("apk")
@@ -284,20 +284,20 @@ bool URIUtils::HasParentInHostname(const GoTvUrl& url)
           CServiceBroker::GetFileExtensionProvider().EncodedHostName(url.GetProtocol()));
 }
 
-bool URIUtils::HasEncodedHostname(const GoTvUrl& url)
+bool URIUtils::HasEncodedHostname(const NlcUrl& url)
 {
   return HasParentInHostname(url)
       || url.IsProtocol("musicsearch")
       || url.IsProtocol( "image");
 }
 
-bool URIUtils::HasEncodedFilename(const GoTvUrl& url)
+bool URIUtils::HasEncodedFilename(const NlcUrl& url)
 {
   const std::string prot2 = url.GetTranslatedProtocol();
 
   // For now assume only (quasi) http internet streams use URL encoding
-  return GoTvUrl::IsProtocolEqual(prot2, "http")  ||
-         GoTvUrl::IsProtocolEqual(prot2, "https");
+  return NlcUrl::IsProtocolEqual(prot2, "http")  ||
+         NlcUrl::IsProtocolEqual(prot2, "https");
 }
 
 std::string URIUtils::GetParentPath(const std::string& strPath)
@@ -311,7 +311,7 @@ bool URIUtils::GetParentPath(const std::string& strPath, std::string& strParent)
 {
   strParent.clear();
 
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   std::string strFile = url.GetFileName();
   if ( URIUtils::HasParentInHostname(url) && strFile.empty())
   {
@@ -447,7 +447,7 @@ std::string URLEncodePath(const std::string& strPath)
 {
   std::vector<std::string> segments = StringUtils::Split(strPath, "/");
   for (std::vector<std::string>::iterator i = segments.begin(); i != segments.end(); ++i)
-    *i = GoTvUrl::Encode(*i);
+    *i = NlcUrl::Encode(*i);
 
   return StringUtils::Join(segments, "/");
 }
@@ -456,7 +456,7 @@ std::string URLDecodePath(const std::string& strPath)
 {
   std::vector<std::string> segments = StringUtils::Split(strPath, "/");
   for (std::vector<std::string>::iterator i = segments.begin(); i != segments.end(); ++i)
-    *i = GoTvUrl::Decode(*i);
+    *i = NlcUrl::Decode(*i);
 
   return StringUtils::Join(segments, "/");
 }
@@ -470,13 +470,13 @@ std::string URIUtils::ChangeBasePath(const std::string &fromPath, const std::str
     StringUtils::Replace(toFile, "\\", "/");
 
   // Handle difference in URL encoded vs. not encoded
-  if ( HasEncodedFilename(GoTvUrl(fromPath))
-   && !HasEncodedFilename(GoTvUrl(toPath)) )
+  if ( HasEncodedFilename(NlcUrl(fromPath))
+   && !HasEncodedFilename(NlcUrl(toPath)) )
   {
     toFile = URLDecodePath(toFile); // Decode path
   }
-  else if (!HasEncodedFilename(GoTvUrl(fromPath))
-         && HasEncodedFilename(GoTvUrl(toPath)) )
+  else if (!HasEncodedFilename(NlcUrl(fromPath))
+         && HasEncodedFilename(NlcUrl(toPath)) )
   {
     toFile = URLEncodePath(toFile); // Encode path
   }
@@ -491,10 +491,10 @@ std::string URIUtils::ChangeBasePath(const std::string &fromPath, const std::str
   return toFile;
 }
 
-GoTvUrl URIUtils::SubstitutePath(const GoTvUrl& url, bool reverse /* = false */)
+NlcUrl URIUtils::SubstitutePath(const NlcUrl& url, bool reverse /* = false */)
 {
   const std::string pathToUrl = url.Get();
-  return GoTvUrl(SubstitutePath(pathToUrl, reverse));
+  return NlcUrl(SubstitutePath(pathToUrl, reverse));
 }
 
 std::string URIUtils::SubstitutePath(const std::string& strPath, bool reverse /* = false */)
@@ -582,8 +582,8 @@ bool URIUtils::PathEquals(std::string path1, std::string path2, bool ignoreTrail
 {
   if (ignoreURLOptions)
   {
-    path1 = GoTvUrl(path1).GetWithoutOptions();
-    path2 = GoTvUrl(path2).GetWithoutOptions();
+    path1 = NlcUrl(path1).GetWithoutOptions();
+    path2 = NlcUrl(path2).GetWithoutOptions();
   }
 
   if (ignoreTrailingSlash)
@@ -617,7 +617,7 @@ bool URIUtils::IsRemote(const std::string& strFile)
     return false;
   }
 
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   if(HasParentInHostname(url))
     return IsRemote(url.GetHostName());
 
@@ -686,7 +686,7 @@ bool URIUtils::IsOnLAN(const std::string& strPath)
   if(IsUPnP(strPath))
     return true;
 
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   if (HasParentInHostname(url))
     return IsOnLAN(url.GetHostName());
 
@@ -752,7 +752,7 @@ bool URIUtils::IsMultiPath(const std::string& strPath)
 
 bool URIUtils::IsHD(const std::string& strFileName)
 {
-  GoTvUrl url(strFileName);
+  NlcUrl url(strFileName);
 
   if (IsStack(strFileName))
     return IsHD(CStackDirectory::GetFirstStackedFile(strFileName));
@@ -815,7 +815,7 @@ bool URIUtils::IsRAR(const std::string& strFile)
 
 bool URIUtils::IsInArchive(const std::string &strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
 
   bool archiveProto = url.IsProtocol("archive") && !url.GetFileName().empty();
   return archiveProto || IsInZIP(strFile) || IsInRAR(strFile) || IsInAPK(strFile);
@@ -823,14 +823,14 @@ bool URIUtils::IsInArchive(const std::string &strFile)
 
 bool URIUtils::IsInAPK(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
 
   return url.IsProtocol("apk") && !url.GetFileName().empty();
 }
 
 bool URIUtils::IsInZIP(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
 
   if (url.GetFileName().empty())
     return false;
@@ -843,7 +843,7 @@ bool URIUtils::IsInZIP(const std::string& strFile)
 
 bool URIUtils::IsInRAR(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
 
   if (url.GetFileName().empty())
     return false;
@@ -879,25 +879,25 @@ bool URIUtils::IsSpecial(const std::string& strFile)
 
 bool URIUtils::IsPlugin(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   return url.IsProtocol("plugin");
 }
 
 bool URIUtils::IsScript(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   return url.IsProtocol("script");
 }
 
 bool URIUtils::IsAddonsPath(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   return url.IsProtocol("addons");
 }
 
 bool URIUtils::IsSourcesPath(const std::string& strPath)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   return url.IsProtocol("sources");
 }
 
@@ -919,7 +919,7 @@ bool URIUtils::IsSmb(const std::string& strFile)
   if (IsSpecial(strFile))
     return IsSmb(CSpecialProtocol::TranslatePath(strFile));
 
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   if (HasParentInHostname(url))
     return IsSmb(url.GetHostName());
 
@@ -939,7 +939,7 @@ bool URIUtils::IsFTP(const std::string& strFile)
   if (IsSpecial(strFile))
     return IsFTP(CSpecialProtocol::TranslatePath(strFile));
 
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   if (HasParentInHostname(url))
     return IsFTP(url.GetHostName());
 
@@ -955,7 +955,7 @@ bool URIUtils::IsHTTP(const std::string& strFile)
   if (IsSpecial(strFile))
     return IsHTTP(CSpecialProtocol::TranslatePath(strFile));
 
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   if (HasParentInHostname(url))
     return IsHTTP(url.GetHostName());
 
@@ -1003,7 +1003,7 @@ bool URIUtils::IsDAV(const std::string& strFile)
   if (IsSpecial(strFile))
     return IsDAV(CSpecialProtocol::TranslatePath(strFile));
 
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   if (HasParentInHostname(url))
     return IsDAV(url.GetHostName());
 
@@ -1013,11 +1013,11 @@ bool URIUtils::IsDAV(const std::string& strFile)
 
 bool URIUtils::IsInternetStream(const std::string &path, bool bStrictCheck /* = false */)
 {
-  const GoTvUrl pathToUrl(path);
+  const NlcUrl pathToUrl(path);
   return IsInternetStream(pathToUrl, bStrictCheck);
 }
 
-bool URIUtils::IsInternetStream(const GoTvUrl& url, bool bStrictCheck /* = false */)
+bool URIUtils::IsInternetStream(const NlcUrl& url, bool bStrictCheck /* = false */)
 {
   if (url.GetProtocol().empty())
     return false;
@@ -1034,14 +1034,14 @@ bool URIUtils::IsInternetStream(const GoTvUrl& url, bool bStrictCheck /* = false
     return bStrictCheck;
 
   std::string protocol = url.GetTranslatedProtocol();
-  if (GoTvUrl::IsProtocolEqual(protocol, "http")  || GoTvUrl::IsProtocolEqual(protocol, "https")  ||
-      GoTvUrl::IsProtocolEqual(protocol, "tcp")   || GoTvUrl::IsProtocolEqual(protocol, "udp")    ||
-      GoTvUrl::IsProtocolEqual(protocol, "rtp")   || GoTvUrl::IsProtocolEqual(protocol, "sdp")    ||
-      GoTvUrl::IsProtocolEqual(protocol, "mms")   || GoTvUrl::IsProtocolEqual(protocol, "mmst")   ||
-      GoTvUrl::IsProtocolEqual(protocol, "mmsh")  || GoTvUrl::IsProtocolEqual(protocol, "rtsp")   ||
-      GoTvUrl::IsProtocolEqual(protocol, "rtmp")  || GoTvUrl::IsProtocolEqual(protocol, "rtmpt")  ||
-      GoTvUrl::IsProtocolEqual(protocol, "rtmpe") || GoTvUrl::IsProtocolEqual(protocol, "rtmpte") ||
-      GoTvUrl::IsProtocolEqual(protocol, "rtmps"))
+  if (NlcUrl::IsProtocolEqual(protocol, "http")  || NlcUrl::IsProtocolEqual(protocol, "https")  ||
+      NlcUrl::IsProtocolEqual(protocol, "tcp")   || NlcUrl::IsProtocolEqual(protocol, "udp")    ||
+      NlcUrl::IsProtocolEqual(protocol, "rtp")   || NlcUrl::IsProtocolEqual(protocol, "sdp")    ||
+      NlcUrl::IsProtocolEqual(protocol, "mms")   || NlcUrl::IsProtocolEqual(protocol, "mmst")   ||
+      NlcUrl::IsProtocolEqual(protocol, "mmsh")  || NlcUrl::IsProtocolEqual(protocol, "rtsp")   ||
+      NlcUrl::IsProtocolEqual(protocol, "rtmp")  || NlcUrl::IsProtocolEqual(protocol, "rtmpt")  ||
+      NlcUrl::IsProtocolEqual(protocol, "rtmpe") || NlcUrl::IsProtocolEqual(protocol, "rtmpte") ||
+      NlcUrl::IsProtocolEqual(protocol, "rtmps"))
     return true;
 
   return false;
@@ -1085,7 +1085,7 @@ bool URIUtils::IsNfs(const std::string& strFile)
   if (IsSpecial(strFile))
     return IsNfs(CSpecialProtocol::TranslatePath(strFile));
 
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   if (HasParentInHostname(url))
     return IsNfs(url.GetHostName());
 
@@ -1109,7 +1109,7 @@ bool URIUtils::IsAndroidApp(const std::string &path)
 
 bool URIUtils::IsLibraryFolder(const std::string& strFile)
 {
-  GoTvUrl url(strFile);
+  NlcUrl url(strFile);
   return url.IsProtocol("library");
 }
 
@@ -1143,7 +1143,7 @@ void URIUtils::AddSlashAtEnd(std::string& strFolder)
 {
   if (IsURL(strFolder))
   {
-    GoTvUrl url(strFolder);
+    NlcUrl url(strFolder);
     std::string file = url.GetFileName();
     if(!file.empty() && file != strFolder)
     {
@@ -1168,7 +1168,7 @@ bool URIUtils::HasSlashAtEnd(const std::string& strFile, bool checkURL /* = fals
   if (strFile.empty()) return false;
   if (checkURL && IsURL(strFile))
   {
-    GoTvUrl url(strFile);
+    NlcUrl url(strFile);
     std::string file = url.GetFileName();
     return file.empty() || HasSlashAtEnd(file, false);
   }
@@ -1188,7 +1188,7 @@ void URIUtils::RemoveSlashAtEnd(std::string& strFolder)
 
   if (IsURL(strFolder))
   {
-    GoTvUrl url(strFolder);
+    NlcUrl url(strFolder);
     std::string file = url.GetFileName();
     if (!file.empty() && file != strFolder)
     {
@@ -1282,7 +1282,7 @@ std::string URIUtils::AddFileToFolder(const std::string& strFolder,
 {
   if (IsURL(strFolder))
   {
-    GoTvUrl url(strFolder);
+    NlcUrl url(strFolder);
     if (url.GetFileName() != strFolder)
     {
       url.SetFileName(AddFileToFolder(url.GetFileName(), strFile));
@@ -1325,12 +1325,12 @@ std::string URIUtils::GetDirectory(const std::string &strFilePath)
   return strFilePath.substr(0, iPosSlash + 1) + strFilePath.substr(iPosBar); // Path + options
 }
 
-GoTvUrl URIUtils::CreateArchivePath(const std::string& type,
-                                 const GoTvUrl& archiveUrl,
+NlcUrl URIUtils::CreateArchivePath(const std::string& type,
+                                 const NlcUrl& archiveUrl,
                                  const std::string& pathInArchive,
                                  const std::string& password)
 {
-  GoTvUrl url;
+  NlcUrl url;
   url.SetProtocol(type);
   if (!password.empty())
     url.SetUserName(password);
@@ -1353,7 +1353,7 @@ std::string URIUtils::GetRealPath(const std::string &path)
   if (path.empty())
     return path;
 
-  GoTvUrl url(path);
+  NlcUrl url(path);
   url.SetHostName(GetRealPath(url.GetHostName()));
   url.SetFileName(resolvePath(url.GetFileName()));
 
@@ -1410,7 +1410,7 @@ bool URIUtils::UpdateUrlEncoding(std::string &strFilename)
   if (strFilename.empty())
     return false;
 
-  GoTvUrl url(strFilename);
+  NlcUrl url(strFilename);
   // if this is a stack:// URL we need to work with its filename
   if (URIUtils::IsStack(strFilename))
   {

@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -24,24 +24,24 @@
 
 #include "core/VideoStream.h"
 
-class GoTvPtoPQmlVideoOutput;
+class NlcPtoPQmlVideoOutput;
 
-class GoTvPtoPQmlVideoStream : public GoTvPtoPVideoStream
+class NlcPtoPQmlVideoStream : public NlcPtoPVideoStream
 {
     Q_OBJECT
 public:
-    explicit GoTvPtoPQmlVideoStream(QObject *parent = 0);
-    ~GoTvPtoPQmlVideoStream();
+    explicit NlcPtoPQmlVideoStream(QObject *parent = 0);
+    ~NlcPtoPQmlVideoStream();
 
-    void registerVideoOutput(GoTvPtoPQmlVideoOutput *output);
-    void deregisterVideoOutput(GoTvPtoPQmlVideoOutput *output);
+    void registerVideoOutput(NlcPtoPQmlVideoOutput *output);
+    void deregisterVideoOutput(NlcPtoPQmlVideoOutput *output);
 
-    QList<GoTvPtoPQmlVideoOutput *> attachedOutputs() const { return _attachedOutputs; }
+    QList<NlcPtoPQmlVideoOutput *> attachedOutputs() const { return _attachedOutputs; }
 
 private:
     Q_INVOKABLE virtual void frameUpdated();
 
-    QList<GoTvPtoPQmlVideoOutput *> _attachedOutputs;
+    QList<NlcPtoPQmlVideoOutput *> _attachedOutputs;
 };
 
 #endif // GOTVQT_QMLRENDERING_QMLVIDEOSTREAM_H_

@@ -117,7 +117,7 @@ bool CAutorun::PlayDisc(const std::string& path, bool bypassSettings, bool start
   if (mediaPath.empty() || mediaPath == "iso9660://")
     mediaPath = g_mediaManager.GetDiscPath();
 
-  const GoTvUrl pathToUrl(mediaPath);
+  const NlcUrl pathToUrl(mediaPath);
   std::unique_ptr<IDirectory> pDir ( CDirectoryFactory::Create( pathToUrl ));
   bool bPlaying = RunDisc(pDir.get(), mediaPath, nAddedToPlaylist, true, bypassSettings, startFromBeginning);
 
@@ -141,7 +141,7 @@ bool CAutorun::RunDisc(IDirectory* pDir, const std::string& strDrive, int& nAdde
   bool bPlaying(false);
   CFileItemList vecItems;
 
-  const GoTvUrl pathToUrl(strDrive);
+  const NlcUrl pathToUrl(strDrive);
   if ( !pDir->GetDirectory( pathToUrl, vecItems ) )
   {
     return false;

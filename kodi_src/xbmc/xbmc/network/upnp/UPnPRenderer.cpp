@@ -26,7 +26,7 @@
 #include "PlayListPlayer.h"
 #include "TextureDatabase.h"
 #include "ThumbLoader.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "utils/StringUtils.h"
@@ -204,7 +204,7 @@ CUPnPRenderer::ProcessHttpGetRequest(NPT_HttpRequest&              request,
             }
 
             // open the file
-            std::string path (GoTvUrl::Decode((const char*) filepath));
+            std::string path (NlcUrl::Decode((const char*) filepath));
             NPT_File file(path.c_str());
             NPT_Result result = file.Open(NPT_FILE_OPEN_MODE_READ);
             if (NPT_FAILED(result)) {

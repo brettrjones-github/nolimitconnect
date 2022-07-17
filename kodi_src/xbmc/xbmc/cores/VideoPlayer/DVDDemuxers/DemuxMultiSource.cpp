@@ -12,7 +12,7 @@
 #include "DVDFactoryDemuxer.h"
 #include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 #include "utils/log.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 
 CDemuxMultiSource::CDemuxMultiSource() = default;
@@ -184,7 +184,7 @@ DemuxPacket* CDemuxMultiSource::Read()
       if (input->second->IsEOF())
       {
         CLog::Log(LOGDEBUG, "%s - Demuxer for file %s is at eof, removed it from the queue",
-          __FUNCTION__, GoTvUrl::GetRedacted(currentDemuxer->GetFileName()).c_str());
+          __FUNCTION__, NlcUrl::GetRedacted(currentDemuxer->GetFileName()).c_str());
       }
       else    //maybe add an error counter?
         m_demuxerQueue.push(std::make_pair(-1.0, currentDemuxer));

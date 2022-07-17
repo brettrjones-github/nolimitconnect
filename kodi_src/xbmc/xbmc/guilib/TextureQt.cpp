@@ -36,7 +36,7 @@
 #include "platform/linux/XMemUtils.h"
 #endif
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 
  /************************************************************************/
@@ -44,7 +44,7 @@
  /************************************************************************/
 CQtTexture::CQtTexture( unsigned int width, unsigned int height, unsigned int format )
     : CBaseTexture( width, height, format )
-    , m_IGoTv( IGoTv::getIGoTv() )
+    , m_INlc( INlc::getINlc() )
 {
     unsigned int major, minor;
     CServiceBroker::GetRenderSystem()->GetRenderVersion( major, minor );
@@ -59,25 +59,25 @@ CQtTexture::~CQtTexture()
 
 void CQtTexture::CreateTextureObject()
 {
-    m_IGoTv.createTextureObject( this );
+    m_INlc.createTextureObject( this );
     //glGenTextures( 1, ( GLuint* )&m_texture );
 }
 
 void CQtTexture::DestroyTextureObject()
 {
-    m_IGoTv.destroyTextureObject( this );
+    m_INlc.destroyTextureObject( this );
     if( m_texture )
         CServiceBroker::GetGUI()->GetTextureManager().ReleaseHwTexture( m_texture );
 }
 
 void CQtTexture::LoadToGPU()
 {
-    m_IGoTv.loadToGPU( this );
+    m_INlc.loadToGPU( this );
 }
 
 void CQtTexture::BindToUnit( unsigned int unit )
 {
-   m_IGoTv.bindToUnit( this, unit );
+   m_INlc.bindToUnit( this, unit );
 }
 
 #endif // HAS_GL

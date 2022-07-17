@@ -19,10 +19,10 @@ public:
   CVideoDatabaseFile(void);
   ~CVideoDatabaseFile(void) override;
 
-  static CVideoInfoTag GetVideoTag(const GoTvUrl& url);
+  static CVideoInfoTag GetVideoTag(const NlcUrl& url);
   
 protected:
-  std::string TranslatePath(const GoTvUrl& url) override;
-  static VIDEODB_CONTENT_TYPE GetType(const GoTvUrl& url);
+  std::string TranslatePath(const NlcUrl& url) override;
+  static VIDEODB_CONTENT_TYPE GetType(const NlcUrl& url);
 };
 }

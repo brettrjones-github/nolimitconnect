@@ -8,7 +8,7 @@
 
 #include "FTPDirectory.h"
 #include "FTPParse.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/URIUtils.h"
 #include "CurlFile.h"
 #include "FileItem.h"
@@ -21,11 +21,11 @@ using namespace XFILE;
 CFTPDirectory::CFTPDirectory(void) = default;
 CFTPDirectory::~CFTPDirectory(void) = default;
 
-bool CFTPDirectory::GetDirectory(const GoTvUrl& url2, CFileItemList &items)
+bool CFTPDirectory::GetDirectory(const NlcUrl& url2, CFileItemList &items)
 {
   CCurlFile reader;
 
-  GoTvUrl url(url2);
+  NlcUrl url(url2);
 
   std::string path = url.GetFileName();
   if( !path.empty() && !StringUtils::EndsWith(path, "/") )
@@ -98,7 +98,7 @@ bool CFTPDirectory::GetDirectory(const GoTvUrl& url2, CFileItemList &items)
   return true;
 }
 
-bool CFTPDirectory::Exists(const GoTvUrl& url)
+bool CFTPDirectory::Exists(const NlcUrl& url)
 {
   // make sure ftp dir ends with slash,
   // curl need to known it's a dir to check ftp directory existence.
@@ -106,6 +106,6 @@ bool CFTPDirectory::Exists(const GoTvUrl& url)
   URIUtils::AddSlashAtEnd(file);
 
   CCurlFile ftp;
-  GoTvUrl url2(file);
+  NlcUrl url2(file);
   return ftp.Exists(url2);
 }

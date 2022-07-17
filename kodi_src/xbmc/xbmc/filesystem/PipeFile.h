@@ -35,9 +35,9 @@ public:
   int64_t GetPosition() override;
   int64_t GetLength() override;
   virtual void SetLength(int64_t len);
-  bool Open(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override;
-  int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+  bool Open(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
+  int Stat(const NlcUrl& url, struct __stat64* buffer) override;
   int Stat(struct __stat64* buffer) override;
   ssize_t Read(void* lpBuf, size_t uiBufSize) override;
   ssize_t Write(const void* lpBuf, size_t uiBufSize) override;
@@ -46,10 +46,10 @@ public:
   void Flush() override;
   virtual int64_t GetAvailableRead();
 
-  bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) override;
+  bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) override;
 
-  bool Delete(const GoTvUrl& url) override;
-  bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) override;
+  bool Delete(const NlcUrl& url) override;
+  bool Rename(const NlcUrl& url, const NlcUrl& urlnew) override;
   int IoControl(EIoControl request, void* param) override;
   
   std::string GetName() const;

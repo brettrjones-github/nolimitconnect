@@ -64,7 +64,7 @@ class ConnectRequest;
 class FileShareSettings;
 class HostJoinMgr;
 class IToGui;
-class IGoTv;
+class INlc;
 class IsPortOpenTest;
 class PluginMgr;
 class RcConnectInfo;

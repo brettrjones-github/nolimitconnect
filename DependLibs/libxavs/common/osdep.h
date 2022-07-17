@@ -182,7 +182,7 @@ xavs_pthread_create (xavs_pthread_t * t, void *a, LPVOID f, void *d)
 #endif
 #endif
 
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
 #define endian_fix(x) (x)
 #define endian_fix64(x) (x)
 #define endian_fix32(x) (x)

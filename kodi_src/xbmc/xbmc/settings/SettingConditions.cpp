@@ -9,7 +9,7 @@
 #include "SettingConditions.h"
 #include "Application.h"
 #include "LockType.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "addons/AddonManager.h"
 #include "addons/binary-addons/BinaryAddonManager.h"
 #include "addons/Skin.h"

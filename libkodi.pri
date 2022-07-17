@@ -18,13 +18,13 @@ INCLUDEPATH += $$PWD/DependLibs/libpthread
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
 
 #$(ProjectDir)..\..\..\sysheaders;$(ProjectDir)..\..\..\DependLibs\libpthread\;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\DependLibs;
-#$(ProjectDir)..\..\..\DependLibs\Python-2.7.14\Include;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\platform\win32;$(ProjectDir)..\..\addons\library.kodi.guilib;$(ProjectDir)..\..\addons\library.xbmc.addon;$(ProjectDir)..\..\addons\library.xbmc.pvr;$(ProjectDir)..\..\addons\library.GoTv.adsp;$(ProjectDir)..\..\addons\library.xbmc.codec;$(ProjectDir)..\..\xbmc\lib;$(ProjectDir)..\..\xbmc\lib\gtest\include;$(ProjectDir)..\..\xbmc\xbmc\platform\win32;$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer;$(ProjectDir)..\..\build;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\mingwlibs\win32\include;$(ProjectDir)..\..\build\libdvd\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\lzo;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\python;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\xbmc\lib\libUPnP;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\xbmc\lib\libUPnP\Neptune\Source\System\Posix;$(ProjectDir)..\..\xbmc\lib\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\build\guilib;$(ProjectDir)..\..\xbmc\lib\win32\Effects11\inc;%(AdditionalIncludeDirectories)
+#$(ProjectDir)..\..\..\DependLibs\Python-2.7.14\Include;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\platform\win32;$(ProjectDir)..\..\addons\library.kodi.guilib;$(ProjectDir)..\..\addons\library.xbmc.addon;$(ProjectDir)..\..\addons\library.xbmc.pvr;$(ProjectDir)..\..\addons\library.Nlc.adsp;$(ProjectDir)..\..\addons\library.xbmc.codec;$(ProjectDir)..\..\xbmc\lib;$(ProjectDir)..\..\xbmc\lib\gtest\include;$(ProjectDir)..\..\xbmc\xbmc\platform\win32;$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer;$(ProjectDir)..\..\build;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\mingwlibs\win32\include;$(ProjectDir)..\..\build\libdvd\include;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\lzo;$(ProjectDir)..\..\xbmc\project\BuildDependencies\win32\include\python;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\xbmc\lib\libUPnP;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\xbmc\lib\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\xbmc\lib\libUPnP\Neptune\Source\System\Posix;$(ProjectDir)..\..\xbmc\lib\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\build\guilib;$(ProjectDir)..\..\xbmc\lib\win32\Effects11\inc;%(AdditionalIncludeDirectories)
 
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc/platform/qt
 
 HEADERS += 	$$PWD/AppCpuArchDefines.h \
     $$PWD/AppCompilerConfig.h \
-    $$PWD/GoTvDebugConfig.h \
+    $$PWD/NlcDebugConfig.h \
     $$PWD/AppDependLibrariesConfig.h \
     $$PWD/kodi_src/xbmc/xbmc/config_kodi.h \
     $$PWD/kodi_src/xbmc/xbmc/AppParamParser.h \
@@ -1215,8 +1215,8 @@ HEADERS += 	$$PWD/AppCpuArchDefines.h \
     $$PWD/kodi_src/xbmc/xbmc/windows/GUIWindowSystemInfo.h \
     $$PWD/kodi_src/xbmc/xbmc/AppInboundProtocol.h \
     $$PWD/kodi_src/xbmc/xbmc/CompileInfo.h \
-    $$PWD/kodi_src/xbmc/xbmc/GoTvCoreUtil.h \
-    $$PWD/kodi_src/xbmc/xbmc/GoTvUrl.h \
+    $$PWD/kodi_src/xbmc/xbmc/NlcCoreUtil.h \
+    $$PWD/kodi_src/xbmc/xbmc/NlcUrl.h \
     $$PWD/kodi_src/xbmc/xbmc/ServiceDescription.h \
     $$PWD/kodi_src/xbmc/xbmc/StaticDll.h \
     $$PWD/kodi_src/xbmc/xbmc/addons/PVRClientMenuHooks.h \
@@ -2500,8 +2500,8 @@ SOURCES += 	$$PWD/kodi_src/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/kodi_src/xbmc/xbmc/AppInboundProtocol.cpp \
     $$PWD/kodi_src/xbmc/xbmc/ApplicationEvents.cpp \
     $$PWD/kodi_src/xbmc/xbmc/CompileInfo.cpp \
-    $$PWD/kodi_src/xbmc/xbmc/GoTvCoreUtil.cpp \
-    $$PWD/kodi_src/xbmc/xbmc/GoTvUrl.cpp \
+    $$PWD/kodi_src/xbmc/xbmc/NlcCoreUtil.cpp \
+    $$PWD/kodi_src/xbmc/xbmc/NlcUrl.cpp \
     $$PWD/kodi_src/xbmc/xbmc/StaticDll.cpp \
     $$PWD/kodi_src/xbmc/xbmc/addons/DllLibCPluff.cpp \
     $$PWD/kodi_src/xbmc/xbmc/addons/PVRClientMenuHooks.cpp \

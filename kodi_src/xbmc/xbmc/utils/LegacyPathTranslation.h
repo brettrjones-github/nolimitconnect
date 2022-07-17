@@ -12,7 +12,7 @@
 
 typedef struct Translator Translator;
 
-class GoTvUrl;
+class NlcUrl;
 
 /*!
  \brief Translates old internal paths into new ones
@@ -30,7 +30,7 @@ public:
    \param legacyPath Path in the old videodb:// format using numbers
    \return Path in the new videodb:// format using descriptive strings
    */
-  static std::string TranslateVideoDbPath(const GoTvUrl &legacyPath);
+  static std::string TranslateVideoDbPath(const NlcUrl &legacyPath);
   static std::string TranslateVideoDbPath(const std::string &legacyPath);
 
   /*!
@@ -39,7 +39,7 @@ public:
    \param legacyPath Path in the old musicdb:// format using numbers
    \return Path in the new musicdb:// format using descriptive strings
    */
-  static std::string TranslateMusicDbPath(const GoTvUrl &legacyPath);
+  static std::string TranslateMusicDbPath(const NlcUrl &legacyPath);
   static std::string TranslateMusicDbPath(const std::string &legacyPath);
 
 private:

@@ -40,7 +40,7 @@ class CProfileManager;
                              OS X:  ~/
                              Win32: ~/Application Data/XBMC/cache
 */
-class GoTvUrl;
+class NlcUrl;
 class CSpecialProtocol
 {
 public:
@@ -72,7 +72,7 @@ public:
   static void LogPaths();
 
   static std::string TranslatePath(const std::string &path);
-  static std::string TranslatePath(const GoTvUrl &url);
+  static std::string TranslatePath(const NlcUrl &url);
   static std::string TranslatePathConvertCase(const std::string& path);
 
   static std::string GetPath( const std::string &key );

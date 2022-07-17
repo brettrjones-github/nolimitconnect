@@ -12,7 +12,7 @@
 
 #include "FileItem.h"
 #include "filesystem/Directory.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "settings/lib/Setting.h"
 #include "utils/log.h"
 #include "utils/XBMCTinyXML.h"
@@ -43,7 +43,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
   }
 
   CFileItemList layouts;
-  if (!XFILE::CDirectory::GetDirectory(GoTvUrl(layoutDirectory), layouts, ".xml", XFILE::DIR_FLAG_DEFAULTS) || layouts.IsEmpty())
+  if (!XFILE::CDirectory::GetDirectory(NlcUrl(layoutDirectory), layouts, ".xml", XFILE::DIR_FLAG_DEFAULTS) || layouts.IsEmpty())
   {
     CLog::Log(LOGWARNING, "CKeyboardLayoutManager: no keyboard layouts found in %s", layoutDirectory.c_str());
     return false;

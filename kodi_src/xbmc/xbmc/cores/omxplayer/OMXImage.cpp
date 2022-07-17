@@ -9,7 +9,7 @@
 #include "OMXImage.h"
 
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "platform/linux/XMemUtils.h"
 
@@ -109,7 +109,7 @@ COMXImageFile *COMXImage::LoadJpeg(const std::string& texturePath)
   COMXImageFile *file = new COMXImageFile();
   if (!file->ReadFile(texturePath))
   {
-    CLog::Log(LOGNOTICE, "%s: unable to load %s", __func__, GoTvUrl::GetRedacted(texturePath).c_str());
+    CLog::Log(LOGNOTICE, "%s: unable to load %s", __func__, NlcUrl::GetRedacted(texturePath).c_str());
     delete file;
     file = NULL;
   }
@@ -869,7 +869,7 @@ OMX_IMAGE_CODINGTYPE COMXImageFile::GetCodingType(unsigned int &width, unsigned 
 bool COMXImageFile::ReadFile(const std::string& inputFile, int orientation)
 {
   XFILE::CFile      m_pFile;
-  m_filename = GoTvUrl::GetRedacted(inputFile);
+  m_filename = NlcUrl::GetRedacted(inputFile);
   if(!m_pFile.Open(inputFile, 0))
   {
     CLog::Log(LOGERROR, "%s::%s %s not found\n", CLASSNAME, __func__, GetFilename());

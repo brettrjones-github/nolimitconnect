@@ -24,7 +24,7 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include "guilib/guiinfo/GUIInfo.h"
 #include "guilib/guiinfo/GUIInfoHelper.h"
@@ -158,7 +158,7 @@ bool CPlayerGUIInfo::InitCurrentItem(CFileItem *item)
 {
   if (item && g_application.GetAppPlayer().IsPlaying())
   {
-    CLog::Log(LOGDEBUG,"CPlayerGUIInfo::InitCurrentItem(%s)", GoTvUrl::GetRedacted(item->GetPath()).c_str());
+    CLog::Log(LOGDEBUG,"CPlayerGUIInfo::InitCurrentItem(%s)", NlcUrl::GetRedacted(item->GetPath()).c_str());
     m_currentItem.reset(new CFileItem(*item));
   }
   else

@@ -8,7 +8,7 @@
 
 #include "GUIDialogFileBrowser.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "network/GUIDialogNetworkSetup.h"
@@ -33,7 +33,7 @@
 #include "input/Key.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/Variant.h"
 #include "utils/FileExtensionProvider.h"
 #include "messaging/helpers/DialogOKHelper.h"
@@ -330,7 +330,7 @@ void CGUIDialogFileBrowser::OnSort()
 
 void CGUIDialogFileBrowser::Update(const std::string &strDirectory)
 {
-  const GoTvUrl pathToUrl(strDirectory);
+  const NlcUrl pathToUrl(strDirectory);
 
   if (m_browsingForImages && m_thumbLoader.IsLoading())
     m_thumbLoader.StopThread();
@@ -483,7 +483,7 @@ void CGUIDialogFileBrowser::FrameMove()
     else
     {
       // Update the current path label
-      GoTvUrl url(m_selectedPath);
+      NlcUrl url(m_selectedPath);
       std::string safePath = url.GetWithoutUserDetails();
       SET_CONTROL_LABEL(CONTROL_LABEL_PATH, safePath);
     }
@@ -891,7 +891,7 @@ void CGUIDialogFileBrowser::OnAddNetworkLocation()
     { // add the network location to the shares list
       CMediaSource share;
       share.strPath = path; //setPath(path);
-      GoTvUrl url(path);
+      NlcUrl url(path);
       share.strName = url.GetWithoutUserDetails();
       URIUtils::RemoveSlashAtEnd(share.strName);
       m_shares.push_back(share);
@@ -937,7 +937,7 @@ bool CGUIDialogFileBrowser::OnPopupMenu(int iItem)
       if (CGUIDialogNetworkSetup::ShowAndGetNetworkAddress(newPath))
       {
         g_mediaManager.SetLocationPath(strOldPath,newPath);
-        GoTvUrl url(newPath);
+        NlcUrl url(newPath);
         for (unsigned int i=0;i<shares.size();++i)
         {
           if (URIUtils::CompareWithoutSlashAtEnd(shares[i].strPath, strOldPath))//getPath().Equals(strOldPath))

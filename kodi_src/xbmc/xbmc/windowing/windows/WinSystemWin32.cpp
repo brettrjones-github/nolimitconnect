@@ -33,7 +33,7 @@
 #include "VideoSyncD3D.h"
 #include "windowing/GraphicContext.h"
 #include "WinEventsWin32.h"
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 
 #include <algorithm>
 #include <tpcshrd.h>
@@ -65,7 +65,7 @@ CWinSystemWin32::CWinSystemWin32()
     cacert = CSpecialProtocol::TranslatePath("special://xbmc/system/certs/cacert.pem");
     if (XFILE::CFile::Exists(cacert))
       CEnvironment::setenv("SSL_CERT_FILE", cacert.c_str(), 1);
-    IGoTv::getIGoTv().setSslCertFile( cacert );
+    INlc::getINlc().setSslCertFile( cacert );
   }
 
   m_winEvents.reset(new CWinEventsWin32());

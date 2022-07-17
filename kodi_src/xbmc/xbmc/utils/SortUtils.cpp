@@ -8,8 +8,8 @@
 
 #include "SortUtils.h"
 #include "LangInfoKodi.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "XBDateTime.h"
 #include "utils/CharsetConverter.h"
 #include "utils/StringUtils.h"
@@ -53,7 +53,7 @@ std::string ByLabel(SortAttribute attributes, const SortItem &values)
 
 std::string ByFile(SortAttribute attributes, const SortItem &values)
 {
-  GoTvUrl url(values.at(FieldPath).asString());
+  NlcUrl url(values.at(FieldPath).asString());
 
   return StringUtils::Format("%s %" PRId64, url.GetFileNameWithoutPath().c_str(), values.at(FieldStartOffset).asInteger());
 }

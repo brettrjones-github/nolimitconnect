@@ -18,15 +18,15 @@ namespace XFILE
   public:
     CLibraryDirectory();
     ~CLibraryDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    bool Exists(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    bool Exists(const NlcUrl& url) override;
     bool AllowAll() const override { return true; }
   private:
     /*! \brief parse the given path and return the node corresponding to this path
      \param path the library:// path to parse
      \return path to the XML file or directory corresponding to this path
      */
-    std::string GetNode(const GoTvUrl& path);
+    std::string GetNode(const NlcUrl& path);
 
     /*! \brief load the XML file and return a pointer to the <node> root element.
      Checks visible attribute and only returns non-NULL for valid nodes that should be visible.

@@ -57,7 +57,7 @@ class GlPainter
 public:
     virtual ~GlPainter();
 
-    void setFrame(const GoTvPtoPVideoFrame *frame) { _frame = frame; }
+    void setFrame(const NlcPtoPVideoFrame *frame) { _frame = frame; }
     bool inited() const { return _inited; }
 
     void setContext(QOpenGLContext *context);
@@ -69,7 +69,7 @@ public:
 protected:
     GlPainter();
 
-    const GoTvPtoPVideoFrame *_frame;
+    const NlcPtoPVideoFrame *_frame;
     bool _inited;
 
     QOpenGLContext *_context;

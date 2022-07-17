@@ -23,19 +23,19 @@
 #include "core/Error.h"
 #include "core/MediaPlayer.h"
 
-GoTvPtoPEqualizer::GoTvPtoPEqualizer(GoTvPtoPMediaPlayer *gotvptopMediaPlayer)
+NlcPtoPEqualizer::NlcPtoPEqualizer(NlcPtoPMediaPlayer *gotvptopMediaPlayer)
     : QObject(gotvptopMediaPlayer),
       _gotvptopMediaPlayer(gotvptopMediaPlayer),
       _gotvptopEqualizer(libgotvptop_audio_equalizer_new()) {}
 
-GoTvPtoPEqualizer::~GoTvPtoPEqualizer()
+NlcPtoPEqualizer::~NlcPtoPEqualizer()
 {
     if (_gotvptopEqualizer) {
         libgotvptop_audio_equalizer_release(_gotvptopEqualizer);
     }
 }
 
-float GoTvPtoPEqualizer::amplificationForBandAt(uint bandIndex) const
+float NlcPtoPEqualizer::amplificationForBandAt(uint bandIndex) const
 {
     if (_gotvptopEqualizer) {
         float ret = libgotvptop_audio_equalizer_get_amp_at_index(_gotvptopEqualizer, bandIndex);
@@ -46,7 +46,7 @@ float GoTvPtoPEqualizer::amplificationForBandAt(uint bandIndex) const
     return -1.0;
 }
 
-uint GoTvPtoPEqualizer::bandCount() const
+uint NlcPtoPEqualizer::bandCount() const
 {
     if (_gotvptopEqualizer) {
         return libgotvptop_audio_equalizer_get_band_count();
@@ -55,7 +55,7 @@ uint GoTvPtoPEqualizer::bandCount() const
     }
 }
 
-float GoTvPtoPEqualizer::bandFrequency(uint bandIndex) const
+float NlcPtoPEqualizer::bandFrequency(uint bandIndex) const
 {
     if (_gotvptopEqualizer) {
         return libgotvptop_audio_equalizer_get_band_frequency(bandIndex);
@@ -64,7 +64,7 @@ float GoTvPtoPEqualizer::bandFrequency(uint bandIndex) const
     }
 }
 
-float GoTvPtoPEqualizer::preamplification() const
+float NlcPtoPEqualizer::preamplification() const
 {
     if (_gotvptopEqualizer) {
         return libgotvptop_audio_equalizer_get_preamp(_gotvptopEqualizer);
@@ -73,12 +73,12 @@ float GoTvPtoPEqualizer::preamplification() const
     }
 }
 
-uint GoTvPtoPEqualizer::presetCount() const
+uint NlcPtoPEqualizer::presetCount() const
 {
     return libgotvptop_audio_equalizer_get_preset_count();
 }
 
-QString GoTvPtoPEqualizer::presetNameAt(uint index) const
+QString NlcPtoPEqualizer::presetNameAt(uint index) const
 {
     const char *name = libgotvptop_audio_equalizer_get_preset_name(index);
     if (name == NULL) {
@@ -88,29 +88,29 @@ QString GoTvPtoPEqualizer::presetNameAt(uint index) const
     }
 }
 
-void GoTvPtoPEqualizer::loadFromPreset(uint index)
+void NlcPtoPEqualizer::loadFromPreset(uint index)
 {
     if (_gotvptopEqualizer) {
         libgotvptop_audio_equalizer_release(_gotvptopEqualizer);
     }
     _gotvptopEqualizer = libgotvptop_audio_equalizer_new_from_preset(index);
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
     if (_gotvptopEqualizer) {
         emit presetLoaded();
     }
 }
 
-void GoTvPtoPEqualizer::setAmplificationForBandAt(float amp, uint bandIndex)
+void NlcPtoPEqualizer::setAmplificationForBandAt(float amp, uint bandIndex)
 {
     if (!_gotvptopEqualizer) {
         return;
     }
     libgotvptop_audio_equalizer_set_amp_at_index(_gotvptopEqualizer, amp, bandIndex);
     libgotvptop_media_player_set_equalizer(_gotvptopMediaPlayer->core(), _gotvptopEqualizer);
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPEqualizer::setEnabled(bool enabled)
+void NlcPtoPEqualizer::setEnabled(bool enabled)
 {
     if (enabled && _gotvptopEqualizer != NULL) {
         libgotvptop_media_player_set_equalizer(_gotvptopMediaPlayer->core(), _gotvptopEqualizer);
@@ -119,12 +119,12 @@ void GoTvPtoPEqualizer::setEnabled(bool enabled)
     }
 }
 
-void GoTvPtoPEqualizer::setPreamplification(float value)
+void NlcPtoPEqualizer::setPreamplification(float value)
 {
     if (!_gotvptopEqualizer) {
         return;
     }
     libgotvptop_audio_equalizer_set_preamp(_gotvptopEqualizer, value);
     libgotvptop_media_player_set_equalizer(_gotvptopMediaPlayer->core(), _gotvptopEqualizer);
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }

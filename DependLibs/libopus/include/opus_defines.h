@@ -77,7 +77,7 @@ extern "C" {
 //# endif
 //#endif
 
-#define OPUS_EXPORT // GoTv Static
+#define OPUS_EXPORT // Nlc Static
 
 # if !defined(OPUS_GNUC_PREREQ)
 #  if defined(__GNUC__)&&defined(__GNUC_MINOR__)
@@ -92,7 +92,7 @@ extern "C" {
 #define OPUS_INLINE					NLC_INLINE
 #define OPUS_INLINE					NLC_INLINE
 #define OPUS_WARN_UNUSED_RESULT		NLC_WARN_UNUSED_RESULT
-#define OPUS_ARG_NONNULL			GOTV_ARG_NONNULL
+#define OPUS_ARG_NONNULL			NLC_ARG_NONNULL
 
 
 /** These are the actual Encoder CTL ID numbers.

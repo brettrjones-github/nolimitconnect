@@ -32,8 +32,8 @@ SOURCES += 	$$PWD/DependLibs/androidNdk/android/cpufeatures/cpu-features_ndk.c
 }
 
 
-### build seperately #include(../../GoTvCore/build/Qt/libptopengine.pri)
-### build seperately #include(../../GoTvCore/build/Qt/libxbmc.pri)
+### build seperately #include(../../NlcCore/build/Qt/libptopengine.pri)
+### build seperately #include(../../NlcCore/build/Qt/libxbmc.pri)
 
 ### build seperately include(../../DependLibs/CoreLib/build/Qt/CoreLib.pri)
 

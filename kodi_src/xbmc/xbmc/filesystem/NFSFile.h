@@ -11,7 +11,7 @@
 // FileNFS.h: interface for the CNFSFile class.
 
 #include "IFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "threads/CriticalSection.h"
 #include <list>
 #include <map>
@@ -57,20 +57,20 @@ public:
   
   CNfsConnection();
   ~CNfsConnection();
-  bool Connect(const GoTvUrl &url, std::string &relativePath);
+  bool Connect(const NlcUrl &url, std::string &relativePath);
   struct nfs_context *GetNfsContext() {return m_pNfsContext;}
   uint64_t GetMaxReadChunkSize() {return m_readChunkSize;}
   uint64_t GetMaxWriteChunkSize() {return m_writeChunkSize;} 
   DllLibNfs *GetImpl() {return m_pLibNfs;}
-  std::list<std::string> GetExportList(const GoTvUrl &url);
+  std::list<std::string> GetExportList(const NlcUrl &url);
   //this functions splits the url into the exportpath (feed to mount) and the rest of the path
   //relative to the mounted export
-  bool splitUrlIntoExportAndPath(const GoTvUrl& url, std::string &exportPath, std::string &relativePath, std::list<std::string> &exportList);
-  bool splitUrlIntoExportAndPath(const GoTvUrl& url, std::string &exportPath, std::string &relativePath);
+  bool splitUrlIntoExportAndPath(const NlcUrl& url, std::string &exportPath, std::string &relativePath, std::list<std::string> &exportList);
+  bool splitUrlIntoExportAndPath(const NlcUrl& url, std::string &exportPath, std::string &relativePath);
   
   //special stat which uses its own context
   //needed for getting intervolume symlinks to work
-  int stat(const GoTvUrl &url, NFSSTAT *statbuff);
+  int stat(const NlcUrl &url, NFSSTAT *statbuff);
 
   void AddActiveConnection();
   void AddIdleConnection();
@@ -109,7 +109,7 @@ private:
   int getContextForExport(const std::string &exportname);//get context for given export and add to open contexts map - sets m_pNfsContext (my return a already mounted cached context)
   void destroyOpenContexts();
   void destroyContext(const std::string &exportName);
-  void resolveHost(const GoTvUrl &url);//resolve hostname by dnslookup
+  void resolveHost(const NlcUrl &url);//resolve hostname by dnslookup
   void keepAlive(std::string _exportPath, struct nfsfh  *_pFileHandle);
 };
 
@@ -125,9 +125,9 @@ namespace XFILE
     void Close() override;
     int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;
     int64_t Read(void* lpBuf, size_t uiBufSize) override;
-    bool Open(const GoTvUrl& url) override;
-    bool Exists(const GoTvUrl& url) override;
-    int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+    bool Open(const NlcUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
+    int Stat(const NlcUrl& url, struct __stat64* buffer) override;
     int Stat(struct __stat64* buffer) override;
     int64_t GetLength() override;
     int64_t GetPosition() override;
@@ -139,11 +139,11 @@ namespace XFILE
     int IoControl(EIoControl request, void* param) override{ return request == IOCTRL_SEEK_POSSIBLE ? 1 : -1; };    
     int GetChunkSize() override {return static_cast<int>(gNfsConnection.GetMaxReadChunkSize());}
     
-    bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) override;
-    bool Delete(const GoTvUrl& url) override;
-    bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) override;    
+    bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) override;
+    bool Delete(const NlcUrl& url) override;
+    bool Rename(const NlcUrl& url, const NlcUrl& urlnew) override;    
   protected:
-    GoTvUrl m_url;
+    NlcUrl m_url;
     bool IsValidFile(const std::string& strFileName);
     int64_t m_fileSize;
     struct nfsfh *m_pFileHandle;

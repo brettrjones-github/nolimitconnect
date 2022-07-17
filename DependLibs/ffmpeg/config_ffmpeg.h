@@ -274,7 +274,7 @@
 #define HAVE_X86_ASM 0 // link errors when 1.. maybe FIXME later
 //#define HAVE_ARM_ASM 0 // link errors when 1.. maybe FIXME later
 #ifndef HAVE_BIGENDIAN
-# define HAVE_BIGENDIAN		GOTV_ARCH_BIG_ENDIAN
+# define HAVE_BIGENDIAN		NLC_ARCH_BIG_ENDIAN
 #endif // HAVE_BIGENDIAN
 
 
@@ -282,8 +282,8 @@
 #define HAVE_FAST_UNALIGNED 1
 
 #define HAVE_ALTIVEC_H 0
-//#define HAVE_ARPA_INET_H 0 // defined in GoTvCompileConfig.h
-//#define HAVE_ASM_TYPES_H 0 // defined in GoTvCompileConfig.h
+//#define HAVE_ARPA_INET_H 0 // defined in NlcCompileConfig.h
+//#define HAVE_ASM_TYPES_H 0 // defined in NlcCompileConfig.h
 #define HAVE_CDIO_PARANOIA_H 0
 #define HAVE_CDIO_PARANOIA_PARANOIA_H 0
 #define HAVE_CUDA_H 0
@@ -2938,7 +2938,7 @@
 
 
 // replacement for libavutil/avconfig.h
-#define AV_HAVE_BIGENDIAN GOTV_ARCH_BIGENDIAN
+#define AV_HAVE_BIGENDIAN NLC_ARCH_BIGENDIAN
 #define AV_HAVE_FAST_UNALIGNED 1
 #define AV_HAVE_INCOMPATIBLE_LIBAV_ABI 0
 

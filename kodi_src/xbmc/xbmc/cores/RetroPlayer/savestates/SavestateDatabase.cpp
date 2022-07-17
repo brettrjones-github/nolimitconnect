@@ -11,7 +11,7 @@
 #include "SavestateUtils.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace KODI;
 using namespace RETRO;
@@ -33,7 +33,7 @@ bool CSavestateDatabase::AddSavestate(const std::string &gamePath, const ISavest
 
   const std::string savestatePath = CSavestateUtils::MakePath(gamePath);
 
-  CLog::Log(LOGDEBUG, "Saving savestate to %s", GoTvUrl::GetRedacted(savestatePath).c_str());
+  CLog::Log(LOGDEBUG, "Saving savestate to %s", NlcUrl::GetRedacted(savestatePath).c_str());
 
   const uint8_t *data = nullptr;
   size_t size = 0;
@@ -62,7 +62,7 @@ bool CSavestateDatabase::GetSavestate(const std::string& gamePath, ISavestate& s
 
   const std::string savestatePath = CSavestateUtils::MakePath(gamePath);
 
-  CLog::Log(LOGDEBUG, "Loading savestate from %s", GoTvUrl::GetRedacted(savestatePath).c_str());
+  CLog::Log(LOGDEBUG, "Loading savestate from %s", NlcUrl::GetRedacted(savestatePath).c_str());
 
   std::vector<uint8_t> savestateData;
 
@@ -78,16 +78,16 @@ bool CSavestateDatabase::GetSavestate(const std::string& gamePath, ISavestate& s
       if (readLength != static_cast<ssize_t>(savestateData.size()))
       {
         CLog::Log(LOGERROR, "Failed to read savestate %s of size %d bytes",
-          GoTvUrl::GetRedacted(savestatePath).c_str(),
+          NlcUrl::GetRedacted(savestatePath).c_str(),
           size);
         savestateData.clear();
       }
     }
     else
-      CLog::Log(LOGERROR, "Failed to get savestate length: %s", GoTvUrl::GetRedacted(savestatePath).c_str());
+      CLog::Log(LOGERROR, "Failed to get savestate length: %s", NlcUrl::GetRedacted(savestatePath).c_str());
   }
   else
-    CLog::Log(LOGERROR, "Failed to open savestate file %s", GoTvUrl::GetRedacted(savestatePath).c_str());
+    CLog::Log(LOGERROR, "Failed to open savestate file %s", NlcUrl::GetRedacted(savestatePath).c_str());
 
   if (!savestateData.empty())
     bSuccess = save.Deserialize(std::move(savestateData));

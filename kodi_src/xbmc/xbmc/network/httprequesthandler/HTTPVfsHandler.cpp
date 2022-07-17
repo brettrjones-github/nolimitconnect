@@ -8,7 +8,7 @@
 
 #include "HTTPVfsHandler.h"
 #include "MediaSource.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "network/WebServer.h"
 #include "settings/MediaSourceSettings.h"
@@ -37,7 +37,7 @@ CHTTPVfsHandler::CHTTPVfsHandler(const HTTPRequest &request)
         std::string realPath = URIUtils::GetRealPath(file);
         // for rar:// and zip:// paths we need to extract the path to the archive instead of using the VFS path
         while (URIUtils::IsInArchive(realPath))
-          realPath = GoTvUrl(realPath).GetHostName();
+          realPath = NlcUrl(realPath).GetHostName();
 
         VECSOURCES *sources = NULL;
         for (unsigned int index = 0; index < size && !accessible; index++)

@@ -12,7 +12,7 @@
 #include "cores/AudioEngine/Utils/AEUtil.h"
 #include "cores/AudioEngine/AEResampleFactory.h"
 #include "utils/log.h"
-#include "GoTvDebugConfig.h"
+#include "NlcDebugConfig.h"
 
 using namespace ActiveAE;
 

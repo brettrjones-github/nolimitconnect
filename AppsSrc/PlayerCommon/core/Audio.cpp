@@ -22,7 +22,7 @@
 #endif
 /* MSVC + MinGW support fix */
 #if defined(_WIN32)
-#define LIBGOTV_USE_PTHREAD_CANCEL 1
+#define LIBNLC_USE_PTHREAD_CANCEL 1
 #endif
 
 #include <gotvptop/gotvptop.h>
@@ -36,7 +36,7 @@
 /*!
     \private
 */
-class GoTvPtoPAudioCallbackHelper
+class NlcPtoPAudioCallbackHelper
 {
 public:
     static int volumeCallback(gotvptop_object_t *obj,
@@ -49,11 +49,11 @@ public:
         Q_UNUSED(name)
         Q_UNUSED(oldVal)
 
-        GoTvPtoPAudio *core = static_cast<GoTvPtoPAudio *>(data);
+        NlcPtoPAudio *core = static_cast<NlcPtoPAudio *>(data);
         emit core->volumeChangedF(newVal.f_float);
         int vol = newVal.f_float < 0 ? -1 : qRound(newVal.f_float * 100.f);
         emit core->volumeChanged(vol);
-        return GOTV_SUCCESS;
+        return NLC_SUCCESS;
     }
 
     static int muteCallback(gotvptop_object_t *obj,
@@ -66,104 +66,104 @@ public:
         Q_UNUSED(name);
         Q_UNUSED(oldVal);
 
-        GoTvPtoPAudio *core = static_cast<GoTvPtoPAudio *>(data);
+        NlcPtoPAudio *core = static_cast<NlcPtoPAudio *>(data);
         emit core->muteChanged(newVal.b_bool);
-        return GOTV_SUCCESS;
+        return NLC_SUCCESS;
     }
 };
 
-GoTvPtoPAudio::GoTvPtoPAudio(GoTvPtoPMediaPlayer *player)
+NlcPtoPAudio::NlcPtoPAudio(NlcPtoPMediaPlayer *player)
     : QObject(player),
       _gotvptopMediaPlayer(player->core())
 {
-    var_AddCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "volume", GoTvPtoPAudioCallbackHelper::volumeCallback, this);
-    var_AddCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "mute", GoTvPtoPAudioCallbackHelper::muteCallback, this);
+    var_AddCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "volume", NlcPtoPAudioCallbackHelper::volumeCallback, this);
+    var_AddCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "mute", NlcPtoPAudioCallbackHelper::muteCallback, this);
 }
 
-GoTvPtoPAudio::~GoTvPtoPAudio()
+NlcPtoPAudio::~NlcPtoPAudio()
 {
-    var_DelCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "volume", GoTvPtoPAudioCallbackHelper::volumeCallback, this);
-    var_DelCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "mute", GoTvPtoPAudioCallbackHelper::muteCallback, this);
+    var_DelCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "volume", NlcPtoPAudioCallbackHelper::volumeCallback, this);
+    var_DelCallback((gotvptop_object_t *)_gotvptopMediaPlayer, "mute", NlcPtoPAudioCallbackHelper::muteCallback, this);
 }
 
-bool GoTvPtoPAudio::getMute() const
+bool NlcPtoPAudio::getMute() const
 {
     bool mute = false;
     if (_gotvptopMediaPlayer) {
         mute = libgotvptop_audio_get_mute(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return mute;
 }
 
-void GoTvPtoPAudio::setVolume(int volume)
+void NlcPtoPAudio::setVolume(int volume)
 {
     if (_gotvptopMediaPlayer) {
         // Don't change if volume is the same
-        if (volume != GoTvPtoPAudio::volume()) {
+        if (volume != NlcPtoPAudio::volume()) {
             libgotvptop_audio_set_volume(_gotvptopMediaPlayer, volume);
-            GoTvPtoPError::showErrmsg();
+            NlcPtoPError::showErrmsg();
         }
     }
 }
 
-void GoTvPtoPAudio::setTrack(int track)
+void NlcPtoPAudio::setTrack(int track)
 {
     if (_gotvptopMediaPlayer) {
         libgotvptop_audio_set_track(_gotvptopMediaPlayer, track);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-bool GoTvPtoPAudio::toggleMute() const
+bool NlcPtoPAudio::toggleMute() const
 {
     if (_gotvptopMediaPlayer) {
         libgotvptop_audio_toggle_mute(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return getMute();
 }
 
-void GoTvPtoPAudio::setMute(bool mute) const
+void NlcPtoPAudio::setMute(bool mute) const
 {
     if (_gotvptopMediaPlayer && mute != getMute()) {
         libgotvptop_audio_set_mute(_gotvptopMediaPlayer, mute);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-int GoTvPtoPAudio::track() const
+int NlcPtoPAudio::track() const
 {
     int track = -1;
     if (_gotvptopMediaPlayer) {
         track = libgotvptop_audio_get_track(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return track;
 }
 
-int GoTvPtoPAudio::trackCount() const
+int NlcPtoPAudio::trackCount() const
 {
     int count = -1;
     if (_gotvptopMediaPlayer) {
         count = libgotvptop_audio_get_track_count(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return count;
 }
 
-QStringList GoTvPtoPAudio::trackDescription() const
+QStringList NlcPtoPAudio::trackDescription() const
 {
     QStringList descriptions;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc;
         desc = libgotvptop_audio_get_track_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         descriptions << QString().fromUtf8(desc->psz_name);
         if (trackCount() > 1) {
@@ -177,14 +177,14 @@ QStringList GoTvPtoPAudio::trackDescription() const
     return descriptions;
 }
 
-QList<int> GoTvPtoPAudio::trackIds() const
+QList<int> NlcPtoPAudio::trackIds() const
 {
     QList<int> ids;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc;
         desc = libgotvptop_audio_get_track_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         ids << desc->i_id;
         if (trackCount() > 1) {
@@ -198,14 +198,14 @@ QList<int> GoTvPtoPAudio::trackIds() const
     return ids;
 }
 
-QMap<int, QString> GoTvPtoPAudio::tracks() const
+QMap<int, QString> NlcPtoPAudio::tracks() const
 {
     QMap<int, QString> tracks;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc, *first;
         first = desc = libgotvptop_audio_get_track_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         if (desc != NULL) {
             tracks.insert(desc->i_id, QString().fromUtf8(desc->psz_name));
@@ -222,35 +222,35 @@ QMap<int, QString> GoTvPtoPAudio::tracks() const
     return tracks;
 }
 
-int GoTvPtoPAudio::volume() const
+int NlcPtoPAudio::volume() const
 {
     int volume = -1;
     if (_gotvptopMediaPlayer) {
         volume = libgotvptop_audio_get_volume(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return volume;
 }
 
-GoTvPtoP::AudioChannel GoTvPtoPAudio::channel() const
+NlcPtoP::AudioChannel NlcPtoPAudio::channel() const
 {
-    GoTvPtoP::AudioChannel channel = GoTvPtoP::AudioChannelError;
+    NlcPtoP::AudioChannel channel = NlcPtoP::AudioChannelError;
     if (_gotvptopMediaPlayer) {
-        channel = GoTvPtoP::AudioChannel(libgotvptop_audio_get_channel(_gotvptopMediaPlayer));
-        GoTvPtoPError::showErrmsg();
+        channel = NlcPtoP::AudioChannel(libgotvptop_audio_get_channel(_gotvptopMediaPlayer));
+        NlcPtoPError::showErrmsg();
     }
 
     return channel;
 }
 
-void GoTvPtoPAudio::setChannel(GoTvPtoP::AudioChannel channel)
+void NlcPtoPAudio::setChannel(NlcPtoP::AudioChannel channel)
 {
     if (_gotvptopMediaPlayer) {
         // Don't change if channel is the same
-        if (channel != GoTvPtoPAudio::channel()) {
+        if (channel != NlcPtoPAudio::channel()) {
             libgotvptop_audio_set_channel(_gotvptopMediaPlayer, channel);
-            GoTvPtoPError::showErrmsg();
+            NlcPtoPError::showErrmsg();
         }
     }
 }

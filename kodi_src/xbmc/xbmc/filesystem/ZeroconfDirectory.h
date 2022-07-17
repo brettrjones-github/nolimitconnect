@@ -21,8 +21,8 @@ namespace XFILE
     public:
       CZeroconfDirectory(void);
       ~CZeroconfDirectory(void) override;
-      bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-      DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_NEVER; };
+      bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+      DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_NEVER; };
   };
 }
 

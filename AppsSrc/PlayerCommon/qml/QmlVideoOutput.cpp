@@ -21,25 +21,25 @@
 #include "qml/QmlVideoOutput.h"
 #include "qml/rendering/VideoNode.h"
 
-GoTvPtoPQmlVideoOutput::GoTvPtoPQmlVideoOutput()
-    : _fillMode(GoTvPtoP::PreserveAspectFit),
+NlcPtoPQmlVideoOutput::NlcPtoPQmlVideoOutput()
+    : _fillMode(NlcPtoP::PreserveAspectFit),
       _source(0),
       _frameUpdated(false)
 {
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-GoTvPtoPQmlVideoOutput::~GoTvPtoPQmlVideoOutput()
+NlcPtoPQmlVideoOutput::~NlcPtoPQmlVideoOutput()
 {
     setSource(0);
 }
 
-GoTvPtoPQmlSource *GoTvPtoPQmlVideoOutput::source() const
+NlcPtoPQmlSource *NlcPtoPQmlVideoOutput::source() const
 {
     return _source;
 }
 
-void GoTvPtoPQmlVideoOutput::setSource(GoTvPtoPQmlSource *source)
+void NlcPtoPQmlVideoOutput::setSource(NlcPtoPQmlSource *source)
 {
     if (source == _source)
         return;
@@ -55,58 +55,58 @@ void GoTvPtoPQmlVideoOutput::setSource(GoTvPtoPQmlSource *source)
     emit sourceChanged();
 }
 
-int GoTvPtoPQmlVideoOutput::fillMode() const
+int NlcPtoPQmlVideoOutput::fillMode() const
 {
     return _fillMode;
 }
 
-void GoTvPtoPQmlVideoOutput::setFillMode(int mode)
+void NlcPtoPQmlVideoOutput::setFillMode(int mode)
 {
     if (_fillMode == mode)
         return;
 
-    _fillMode = GoTvPtoP::FillMode(mode);
+    _fillMode = NlcPtoP::FillMode(mode);
 
     update();
 
     emit fillModeChanged();
 }
 
-int GoTvPtoPQmlVideoOutput::aspectRatio() const
+int NlcPtoPQmlVideoOutput::aspectRatio() const
 {
     return _aspectRatio;
 }
 
-void GoTvPtoPQmlVideoOutput::setAspectRatio(int aspectRatio)
+void NlcPtoPQmlVideoOutput::setAspectRatio(int aspectRatio)
 {
     if (_aspectRatio == aspectRatio)
         return;
 
-    _aspectRatio = GoTvPtoP::Ratio(aspectRatio);
+    _aspectRatio = NlcPtoP::Ratio(aspectRatio);
 
     update();
 
     emit aspectRatioChanged();
 }
 
-int GoTvPtoPQmlVideoOutput::cropRatio() const
+int NlcPtoPQmlVideoOutput::cropRatio() const
 {
     return _cropRatio;
 }
 
-void GoTvPtoPQmlVideoOutput::setCropRatio(int cropRatio)
+void NlcPtoPQmlVideoOutput::setCropRatio(int cropRatio)
 {
     if (_cropRatio == cropRatio)
         return;
 
-    _cropRatio = GoTvPtoP::Ratio(cropRatio);
+    _cropRatio = NlcPtoP::Ratio(cropRatio);
 
     update();
 
     emit cropRatioChanged();
 }
 
-QSGNode *GoTvPtoPQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
+QSGNode *NlcPtoPQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
                                             UpdatePaintNodeData *data)
 {
     Q_UNUSED(data)
@@ -123,16 +123,16 @@ QSGNode *GoTvPtoPQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
     QRectF outRect(0, 0, width(), height());
     QRectF srcRect(0, 0, 1., 1.);
 
-    if (fillMode() != GoTvPtoP::Stretch) {
+    if (fillMode() != NlcPtoP::Stretch) {
         const uint16_t fw = _frame->width;
         const uint16_t fh = _frame->height;
 
         qreal frameAspectTmp = qreal(fw) / fh;
-        QSizeF aspectRatioSize = GoTvPtoP::ratioSize(_aspectRatio);
+        QSizeF aspectRatioSize = NlcPtoP::ratioSize(_aspectRatio);
         if (aspectRatioSize.width() != 0 && aspectRatioSize.height() != 0) {
             frameAspectTmp = aspectRatioSize.width() / aspectRatioSize.height();
         }
-        QSizeF cropRatioSize = GoTvPtoP::ratioSize(_cropRatio);
+        QSizeF cropRatioSize = NlcPtoP::ratioSize(_cropRatio);
         if (cropRatioSize.width() != 0 && cropRatioSize.height() != 0) {
             const qreal cropAspect = cropRatioSize.width() / cropRatioSize.height();
 
@@ -149,7 +149,7 @@ QSGNode *GoTvPtoPQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
         const qreal itemAspect = width() / height();
         const qreal frameAspect = frameAspectTmp;
 
-        if (fillMode() == GoTvPtoP::PreserveAspectFit) {
+        if (fillMode() == NlcPtoP::PreserveAspectFit) {
             qreal outWidth = width();
             qreal outHeight = height();
             if (frameAspect > itemAspect)
@@ -159,7 +159,7 @@ QSGNode *GoTvPtoPQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
 
             outRect = QRectF((width() - outWidth) / 2, (height() - outHeight) / 2,
                              outWidth, outHeight);
-        } else if (fillMode() == GoTvPtoP::PreserveAspectCrop) {
+        } else if (fillMode() == NlcPtoP::PreserveAspectCrop) {
             if (frameAspect > itemAspect) {
                 srcRect.setX((1. - itemAspect / frameAspect) / 2);
                 srcRect.setWidth(1. - srcRect.x() - srcRect.x());
@@ -179,7 +179,7 @@ QSGNode *GoTvPtoPQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
     return node;
 }
 
-void GoTvPtoPQmlVideoOutput::presentFrame(const std::shared_ptr<const GoTvPtoPYUVVideoFrame> &frame)
+void NlcPtoPQmlVideoOutput::presentFrame(const std::shared_ptr<const NlcPtoPYUVVideoFrame> &frame)
 {
     _frame = frame;
     _frameUpdated = true;

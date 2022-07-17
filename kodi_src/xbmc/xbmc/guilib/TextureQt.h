@@ -22,7 +22,7 @@
 
 #include "Texture.h"
 
-class IGoTv;
+class INlc;
 
 /************************************************************************/
 /*    CQtTexture                                                       */
@@ -42,6 +42,6 @@ public:
     bool                        m_isOglVersion3orNewer = false;
 
 protected:
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
 };
 

@@ -12,7 +12,7 @@
 #include "platform/win32/CharsetConverter.h"
 #include "utils/SystemInfo.h"
 #include "utils/CharsetConverter.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "PasswordManager.h"
 #include "utils/auto_buffer.h"
@@ -51,7 +51,7 @@ static bool localGetNetworkResources(struct _NETRESOURCEW* basePathToScanPtr, co
 static bool localGetShares(const std::wstring& serverNameToScan, const std::string& urlPrefixForItems, CFileItemList& items);
 
 // check for empty string, remove trailing slash if any, convert to win32 form
-inline static std::wstring prepareWin32SMBDirectoryName(const GoTvUrl& url)
+inline static std::wstring prepareWin32SMBDirectoryName(const NlcUrl& url)
 {
   assert(url.IsProtocol("smb"));
 
@@ -71,7 +71,7 @@ CWin32SMBDirectory::CWin32SMBDirectory(void)
 CWin32SMBDirectory::~CWin32SMBDirectory(void)
 {}
 
-bool CWin32SMBDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CWin32SMBDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   assert(url.IsProtocol("smb"));
   items.Clear();
@@ -82,7 +82,7 @@ bool CWin32SMBDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
       return true;
     
     // try to connect and authenticate
-    GoTvUrl authConnUrl(url);
+    NlcUrl authConnUrl(url);
     if (!ConnectAndAuthenticate(authConnUrl, (m_flags & DIR_FLAG_ALLOW_PROMPT) != 0))
       return false;
     items.Clear();
@@ -105,7 +105,7 @@ bool CWin32SMBDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
 
   HANDLE hSearch;
   WIN32_FIND_DATAW findData = {};
-  GoTvUrl authUrl(url); // ConnectAndAuthenticate may update url with username and password
+  NlcUrl authUrl(url); // ConnectAndAuthenticate may update url with username and password
 
   hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, NULL, FIND_FIRST_EX_LARGE_FETCH);
 
@@ -184,12 +184,12 @@ bool CWin32SMBDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CWin32SMBDirectory::Create(const GoTvUrl& url)
+bool CWin32SMBDirectory::Create(const NlcUrl& url)
 {
   return RealCreate(url, true);
 }
 
-bool CWin32SMBDirectory::RealCreate(const GoTvUrl& url, bool tryToConnect)
+bool CWin32SMBDirectory::RealCreate(const NlcUrl& url, bool tryToConnect)
 {
   assert(url.IsProtocol("smb"));
   if (url.GetHostName().empty() || url.GetShareName().empty() || url.GetFileName() == url.GetShareName())
@@ -207,7 +207,7 @@ bool CWin32SMBDirectory::RealCreate(const GoTvUrl& url, bool tryToConnect)
     {
       if (tryToConnect && worthTryToConnect(GetLastError()))
       {
-        GoTvUrl authUrl(url);
+        NlcUrl authUrl(url);
         if (ConnectAndAuthenticate(authUrl))
           return RealCreate(authUrl, false);
       }
@@ -227,7 +227,7 @@ bool CWin32SMBDirectory::RealCreate(const GoTvUrl& url, bool tryToConnect)
   return true;
 }
 
-bool CWin32SMBDirectory::Exists(const GoTvUrl& url)
+bool CWin32SMBDirectory::Exists(const NlcUrl& url)
 {
   return RealExists(url, true);
 }
@@ -236,7 +236,7 @@ bool CWin32SMBDirectory::Exists(const GoTvUrl& url)
 // * presence of directory on remove share (smb://server/share/dir)
 // * presence of remote share on server (smb://server/share)
 // * presence of smb server in network (smb://server)
-bool CWin32SMBDirectory::RealExists(const GoTvUrl& url, bool tryToConnect)
+bool CWin32SMBDirectory::RealExists(const NlcUrl& url, bool tryToConnect)
 {
   assert(url.IsProtocol("smb"));
 
@@ -263,7 +263,7 @@ bool CWin32SMBDirectory::RealExists(const GoTvUrl& url, bool tryToConnect)
       // fallback to slow check
     }
     CFileItemList entries;
-    GoTvUrl baseUrl(url);
+    NlcUrl baseUrl(url);
     if (url.GetShareName().empty())
       baseUrl.SetHostName(""); // scan network for servers
     else
@@ -277,7 +277,7 @@ bool CWin32SMBDirectory::RealExists(const GoTvUrl& url, bool tryToConnect)
     {
       if (tryToConnect && !url.GetShareName().empty())
       {
-        GoTvUrl authUrl(url);
+        NlcUrl authUrl(url);
         if (ConnectAndAuthenticate(authUrl))
           return RealExists(authUrl, false);
       }
@@ -304,7 +304,7 @@ bool CWin32SMBDirectory::RealExists(const GoTvUrl& url, bool tryToConnect)
 
   if (tryToConnect && worthTryToConnect(GetLastError()))
   {
-    GoTvUrl authUrl(url);
+    NlcUrl authUrl(url);
     if (ConnectAndAuthenticate(authUrl))
       return RealExists(authUrl, false);
   }
@@ -312,7 +312,7 @@ bool CWin32SMBDirectory::RealExists(const GoTvUrl& url, bool tryToConnect)
   return false;
 }
 
-bool CWin32SMBDirectory::Remove(const GoTvUrl& url)
+bool CWin32SMBDirectory::Remove(const NlcUrl& url)
 {
   assert(url.IsProtocol("smb"));
   std::wstring nameW(prepareWin32SMBDirectoryName(url));
@@ -325,14 +325,14 @@ bool CWin32SMBDirectory::Remove(const GoTvUrl& url)
   if (!worthTryToConnect(GetLastError()))
     return false;
 
-  GoTvUrl authUrl(url);
+  NlcUrl authUrl(url);
   if (ConnectAndAuthenticate(authUrl) && RemoveDirectoryW(nameW.c_str()))
     return true;
 
   return !RealExists(url, false);
 }
 
-bool CWin32SMBDirectory::GetNetworkResources(const GoTvUrl& basePath, CFileItemList& items)
+bool CWin32SMBDirectory::GetNetworkResources(const NlcUrl& basePath, CFileItemList& items)
 {
   assert(basePath.GetShareName().empty()); // this function returns only servers or shares
 
@@ -611,7 +611,7 @@ static bool localGetShares(const std::wstring& serverNameToScan, const std::stri
   return true;
 }
 
-bool CWin32SMBDirectory::ConnectAndAuthenticate(GoTvUrl& url, bool allowPromptForCredential /*= false*/)
+bool CWin32SMBDirectory::ConnectAndAuthenticate(NlcUrl& url, bool allowPromptForCredential /*= false*/)
 {
   assert(url.IsProtocol("smb"));
   if (url.GetHostName().empty())

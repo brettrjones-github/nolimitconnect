@@ -140,7 +140,7 @@ void HomeWindow::initializeHomePage()
 {
     restoreHomeWindowGeometry();
 
-	initializeGoTvDynamicLayout();
+	initializeNlcDynamicLayout();
 	connect( &m_AppDisplay, SIGNAL( signalDeviceOrientationChanged( int ) ), this, SLOT( slotDeviceOrientationChanged( int ) ) );
     connect( this, SIGNAL( signalMainWindowResized() ), &m_MyApp, SLOT( slotMainWindowResized() ) );
     connect( this, SIGNAL( signalMainWindowMoved() ), &m_MyApp, SLOT( slotMainWindowMoved() ) );
@@ -192,7 +192,7 @@ void HomeWindow::saveHomeWindowGeometry()
 }
 
 //============================================================================
-void HomeWindow::initializeGoTvDynamicLayout( void )
+void HomeWindow::initializeNlcDynamicLayout( void )
 {
     const char* NLC_FRAME = "NlcFram";
 #if !defined(TARGET_OS_ANDROID)
@@ -256,7 +256,7 @@ void HomeWindow::switchWindowFocus(  QWidget * appIconButton )
 	{
 		if( true == appIconButton->property( "FocusNext" ) )
 		{
-			//LogMsg( LOG_DEBUG, "GoTv Button %d focus next true\n", appIconButton );
+			//LogMsg( LOG_DEBUG, "Nlc Button %d focus next true\n", appIconButton );
 			appIconButton->setProperty( "FocusNext", false );
 			appIconButton->nextInFocusChain();
 			appIconButton->clearFocus();

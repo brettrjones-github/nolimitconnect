@@ -15,7 +15,7 @@
 
 class CFileItemList;
 class CProfileManager;
-class GoTvUrl;
+class NlcUrl;
 
 namespace XFILE
 {
@@ -63,7 +63,7 @@ public:
    \return Returns \e true, if successful.
    \sa CDirectoryFactory
    */
-  virtual bool GetDirectory(const GoTvUrl& url, CFileItemList &items) = 0;
+  virtual bool GetDirectory(const NlcUrl& url, CFileItemList &items) = 0;
   /*!
    \brief Retrieve the progress of the current directory fetch (if possible).
    \return the progress as a float in the range 0..100.
@@ -81,34 +81,34 @@ public:
   \return Returns \e true, if directory is created or if it already exists
   \sa CDirectoryFactory
   */
-  virtual bool Create(const GoTvUrl& url) { return false; }
+  virtual bool Create(const NlcUrl& url) { return false; }
   /*!
   \brief Check for directory existence
   \param url Directory to check.
   \return Returns \e true, if directory exists
   \sa CDirectoryFactory
   */
-  virtual bool Exists(const GoTvUrl& url) { return false; }
+  virtual bool Exists(const NlcUrl& url) { return false; }
   /*!
   \brief Removes the directory
   \param url Directory to remove.
   \return Returns \e false if not successful
   */
-  virtual bool Remove(const GoTvUrl& url) { return false; }
+  virtual bool Remove(const NlcUrl& url) { return false; }
 
   /*!
   \brief Recursively removes the directory
   \param url Directory to remove.
   \return Returns \e false if not succesful
   */
-  virtual bool RemoveRecursive(const GoTvUrl& url) { return false; }
+  virtual bool RemoveRecursive(const NlcUrl& url) { return false; }
 
   /*!
   \brief Whether this file should be listed
   \param url File to test.
   \return Returns \e true if the file should be listed
   */
-  virtual bool IsAllowed(const GoTvUrl& url) const;
+  virtual bool IsAllowed(const NlcUrl& url) const;
 
   /*! \brief Whether to allow all files/folders to be listed.
    \return Returns \e true if all files/folder should be listed.
@@ -120,7 +120,7 @@ public:
   \param url Directory at hand.
   \return Returns the cache type.
   */
-  virtual DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const { return DIR_CACHE_ONCE; };
+  virtual DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const { return DIR_CACHE_ONCE; };
 
   void SetMask(const std::string& strMask);
   void SetFlags(int flags);
@@ -163,7 +163,7 @@ protected:
    \param url the URL to authenticate.
    \sa ProcessRequirements
    */
-  void RequireAuthentication(const GoTvUrl& url);
+  void RequireAuthentication(const NlcUrl& url);
 
   static const CProfileManager *m_profileManager;
 

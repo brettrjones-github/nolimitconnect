@@ -35,7 +35,7 @@
 #include "utils/Geometry.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "settings/lib/Setting.h"

@@ -36,7 +36,7 @@
 	| ((x & 0xff0000) >> 8) | ((x & 0xff000000) >> 24))
 #define SWAP16(x) (((x & 0xff) << 8) | ((x & 0xff00) >> 8))
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 # define UINT32(x) SWAP32(x)
 # define UINT16(x) SWAP16(x)
 #else
@@ -303,7 +303,7 @@ size_t wav_read_float32(pcmfile_t *sndf, float *buf, size_t num, int *map)
         break;
 
       case 2:
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
         if (!sndf->bigendian)
 #else
         if (sndf->bigendian)
@@ -346,7 +346,7 @@ size_t wav_read_float32(pcmfile_t *sndf, float *buf, size_t num, int *map)
         break;
 
       case 4:
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
         if (!sndf->bigendian)
 #else
         if (sndf->bigendian)
@@ -399,7 +399,7 @@ size_t wav_read_int24(pcmfile_t *sndf, int32_t *buf, size_t num, int *map)
     break;
 
   case 2:
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
     if (!sndf->bigendian)
 #else
     if (sndf->bigendian)
@@ -457,7 +457,7 @@ size_t wav_read_int24(pcmfile_t *sndf, int32_t *buf, size_t num, int *map)
     break;
 
   case 4:
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
     if (!sndf->bigendian)
 #else
     if (sndf->bigendian)

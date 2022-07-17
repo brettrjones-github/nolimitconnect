@@ -2,17 +2,17 @@
 #define RENDERGLSHADERS_H
 
 #include "RenderShaderQt.h"
-//#include "EventsQtToGoTv.h"
-//#include "GuiInterface/IGoTvRender.h"
-//#include "GuiInterface/IGoTvEvents.h"
+//#include "EventsQtToNlc.h"
+//#include "GuiInterface/INlcRender.h"
+//#include "GuiInterface/INlcEvents.h"
 
 #include <QtGui/qopenglshaderprogram.h>
 #include <QtGui/qopenglfunctions.h>
 
-typedef uint32_t GoTvColor;
+typedef uint32_t NlcColor;
 
-template <typename T> class GoTvRectGen;
-typedef GoTvRectGen<float>  GoTvRect;
+template <typename T> class NlcRectGen;
+typedef NlcRectGen<float>  NlcRect;
 
 class CQtTexture;
 class CGUITextureQt;
@@ -20,7 +20,7 @@ class CBaseTexture;
 class CGUIFontTTFQt;
 class CScreenshotSurface;
 
-class IGoTvRender
+class INlcRender
 {
 public:
     //=== textures ===//
@@ -31,11 +31,11 @@ public:
 //    virtual bool                loadToGPU( CQtTexture * texture ) = 0;
 //    virtual void                bindToUnit(  CQtTexture * texture, unsigned int unit ) = 0;
 
-//    virtual void                beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color ) = 0;
-//    virtual void                drawGuiTexture( CGUITextureQt * textrue, float * x, float * y, float * z, const GoTvRect& texture, const GoTvRect& diffuse, int orientation ) = 0;
+//    virtual void                beginGuiTexture( CGUITextureQt * guiTexture, NlcColor color ) = 0;
+//    virtual void                drawGuiTexture( CGUITextureQt * textrue, float * x, float * y, float * z, const NlcRect& texture, const NlcRect& diffuse, int orientation ) = 0;
 //    virtual void                endGuiTexture( CGUITextureQt * guiTexture ) = 0;
 
-//    virtual void                drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords ) = 0;
+//    virtual void                drawQuad( const NlcRect &rect, NlcColor color, CBaseTexture * texture, const NlcRect * texCoords ) = 0;
 
 //    virtual bool                firstBegin( CGUIFontTTFQt * font ) = 0;
 //    virtual void                lastEnd( CGUIFontTTFQt * font ) = 0;
@@ -47,7 +47,7 @@ public:
 //    virtual void                destroyStaticVertexBuffers( CGUIFontTTFQt * font ) = 0;
 
     //=== remder ===//
-//    virtual void                captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& captureArea ) = 0;
+//    virtual void                captureScreen( CScreenshotSurface * screenCaptrue, NlcRect& captureArea ) = 0;
 
 //    virtual bool                initRenderSystem() = 0;
 //    virtual bool                destroyRenderSystem() = 0;
@@ -58,24 +58,24 @@ public:
 //    virtual bool                beginRender() = 0;
 //    virtual bool                endRender() = 0;
 //    virtual void                presentRender( bool rendered, bool videoLayer ) = 0;
-//    virtual bool                clearBuffers( GoTvColor color ) = 0;
+//    virtual bool                clearBuffers( NlcColor color ) = 0;
 //    virtual bool                isExtSupported( const char* extension ) = 0;
 
 //    virtual void                setVSync( bool vsync ) {}
 //    virtual void                resetVSync() {}
 
-//    virtual void                setViewPort( const GoTvRect& viewPort ) = 0;
-//    virtual void                getViewPort( GoTvRect& viewPort ) = 0;
+//    virtual void                setViewPort( const NlcRect& viewPort ) = 0;
+//    virtual void                getViewPort( NlcRect& viewPort ) = 0;
 
 //    virtual bool                scissorsCanEffectClipping() = 0;
-//    virtual GoTvRect            clipRectToScissorRect( const GoTvRect &rect ) = 0;
-//    virtual void                setScissors( const GoTvRect& rect ) = 0;
+//    virtual NlcRect            clipRectToScissorRect( const NlcRect &rect ) = 0;
+//    virtual void                setScissors( const NlcRect& rect ) = 0;
 //    virtual void                resetScissors() = 0;
 
 //    virtual void                captureStateBlock() = 0;
 //    virtual void                applyStateBlock() = 0;
 
-//    virtual void                setCameraPosition( const GoTvPoint &camera, int screenWidth, int screenHeight, float stereoFactor = 0.0f ) = 0;
+//    virtual void                setCameraPosition( const NlcPoint &camera, int screenWidth, int screenHeight, float stereoFactor = 0.0f ) = 0;
 
 //    virtual void                applyHardwareTransform( const TransformMatrix &matrix ) = 0;
 //    virtual void                restoreHardwareTransform() = 0;
@@ -152,7 +152,7 @@ class RenderGlWidget;
 class RenderGlLogic;
 
 
-class RenderGlShaders : public IGoTvRender
+class RenderGlShaders : public INlcRender
 {
 public:
 

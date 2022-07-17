@@ -9,7 +9,7 @@
 #include "FavouritesService.h"
 #include "ServiceBroker.h"
 #include "filesystem/File.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "FileItem.h"
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
@@ -19,7 +19,7 @@
 #include "settings/SettingsComponent.h"
 #include "video/VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 
 static bool LoadFromFile(const std::string& strPath, CFileItemList& items)
@@ -48,9 +48,9 @@ static bool LoadFromFile(const std::string& strPath, CFileItemList& items)
     const char *thumb = favourite->Attribute("thumb");
     if (name && favourite->FirstChild())
     {
-      GoTvUrl url;
+      NlcUrl url;
       url.SetProtocol("favourites");
-      url.SetHostName(GoTvUrl::Encode(favourite->FirstChild()->Value()));
+      url.SetHostName(NlcUrl::Encode(favourite->FirstChild()->Value()));
       const std::string favURL(url.Get());
       if (!items.Contains(favURL))
       {
@@ -105,8 +105,8 @@ bool CFavouritesService::Persist()
     if (item->HasArt("thumb"))
       favNode.SetAttribute("thumb", item->GetArt("thumb").c_str());
 
-    const GoTvUrl url(item->GetPath());
-    TiXmlText execute(GoTvUrl::Decode(url.GetHostName()));
+    const NlcUrl url(item->GetPath());
+    TiXmlText execute(NlcUrl::Decode(url.GetHostName()));
     favNode.InsertEndChild(execute);
     rootNode->InsertEndChild(favNode);
   }
@@ -134,9 +134,9 @@ void CFavouritesService::OnUpdated()
 
 std::string CFavouritesService::GetFavouritesUrl(const CFileItem& item, int contextWindow) const
 {
-  GoTvUrl url;
+  NlcUrl url;
   url.SetProtocol("favourites");
-  url.SetHostName(GoTvUrl::Encode(GetExecutePath(item, contextWindow)));
+  url.SetHostName(NlcUrl::Encode(GetExecutePath(item, contextWindow)));
   return url.Get();
 }
 
@@ -181,8 +181,8 @@ std::string CFavouritesService::GetExecutePath(const CFileItem &item, const std:
   std::string execute;
   if (URIUtils::IsProtocol(item.GetPath(), "favourites"))
   {
-    const GoTvUrl url(item.GetPath());
-    execute = GoTvUrl::Decode(url.GetHostName());
+    const NlcUrl url(item.GetPath());
+    execute = NlcUrl::Decode(url.GetHostName());
   }
   else if (item.m_bIsFolder && (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_playlistAsFolders ||
                                 !(item.IsSmartPlayList() || item.IsPlayList())))
@@ -195,7 +195,7 @@ std::string CFavouritesService::GetExecutePath(const CFileItem &item, const std:
     execute = StringUtils::Format("RunScript(%s)", StringUtils::Paramify(item.GetPath().substr(9)).c_str());
   else if (item.IsAddonsPath() && item.GetPath().size() > 9) // addons://<foo>
   {
-    GoTvUrl url(item.GetPath());
+    NlcUrl url(item.GetPath());
     if (url.GetHostName() == "install")
       execute = "installfromzip";
     else

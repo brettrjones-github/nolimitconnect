@@ -23,12 +23,12 @@
 #include "XTimeUtils.h"
 #endif
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 //============================================================================
 CRenderSystemQt::CRenderSystemQt()
     : CRenderSystemBase()
-    , m_IGoTv( IGoTv::getIGoTv() )
+    , m_INlc( INlc::getINlc() )
 {
 }
 
@@ -49,7 +49,7 @@ bool CRenderSystemQt::InitRenderSystem()
 
     //LogGraphicsInfo();
 
-    m_IGoTv.initRenderSystem();
+    m_INlc.initRenderSystem();
     m_bRenderCreated = true;
 
     return true;
@@ -58,13 +58,13 @@ bool CRenderSystemQt::InitRenderSystem()
 //============================================================================
 bool CRenderSystemQt::ResetRenderSystem( int width, int height )
 {
-    int maxTextureSize = m_IGoTv.getMaxTextureSize( );
+    int maxTextureSize = m_INlc.getMaxTextureSize( );
     if( maxTextureSize )
     {
         m_maxTextureSize = maxTextureSize;
     }
 
-    return m_IGoTv.resetRenderSystem(  width, height );
+    return m_INlc.resetRenderSystem(  width, height );
 }
 
 //============================================================================
@@ -79,7 +79,7 @@ bool CRenderSystemQt::DestroyRenderSystem()
     PresentRenderImpl( true );
 
     m_bRenderCreated = false;
-    m_IGoTv.destroyRenderSystem( );
+    m_INlc.destroyRenderSystem( );
 
     return true;
 }
@@ -94,7 +94,7 @@ bool CRenderSystemQt::BeginRender()
 
 
     m_limitedColorRange = useLimited;
-    m_IGoTv.beginRender( );
+    m_INlc.beginRender( );
     return true;
 }
 
@@ -103,20 +103,20 @@ bool CRenderSystemQt::EndRender()
 {
     if( !m_bRenderCreated )
         return false;
-    m_IGoTv.endRender( );
+    m_INlc.endRender( );
     return true;
 }
 
 //============================================================================
 bool CRenderSystemQt::ClearBuffers( UTILS::Color color )
 {
-    return m_IGoTv.clearBuffers( (GoTvColor)color );
+    return m_INlc.clearBuffers( (NlcColor)color );
 }
 
 //============================================================================
 bool CRenderSystemQt::IsExtSupported( const char* extension ) const
 {
-    return m_IGoTv.isExtSupported( extension );
+    return m_INlc.isExtSupported( extension );
 }
 
 //============================================================================
@@ -129,7 +129,7 @@ void CRenderSystemQt::PresentRender( bool rendered, bool videoLayer )
 
     PresentRenderImpl( rendered );
 
-     m_IGoTv.presentRender(  rendered, videoLayer );
+     m_INlc.presentRender(  rendered, videoLayer );
     // if video is rendered to a separate layer, we should not block this thread
     if( !rendered && !videoLayer )
         Sleep( 40 );
@@ -154,9 +154,9 @@ void CRenderSystemQt::SetVSync( bool enable )
     m_bVSync = enable;
     m_bVsyncInit = true;
 
-    m_IGoTv.verifyGlState( "SetVSync Begin" );
+    m_INlc.verifyGlState( "SetVSync Begin" );
     SetVSyncImpl( enable );
-    m_IGoTv.verifyGlState( "SetVSync End" );
+    m_INlc.verifyGlState( "SetVSync End" );
 
     if( !enable )
         return;
@@ -172,7 +172,7 @@ void CRenderSystemQt::CaptureStateBlock()
 {
     if( !m_bRenderCreated )
         return;
-    m_IGoTv.captureStateBlock( );
+    m_INlc.captureStateBlock( );
 }
 
 //============================================================================
@@ -180,7 +180,7 @@ void CRenderSystemQt::ApplyStateBlock()
 {
     if( !m_bRenderCreated )
         return;
-    m_IGoTv.applyStateBlock( );
+    m_INlc.applyStateBlock( );
 }
 
 //============================================================================
@@ -189,79 +189,79 @@ void CRenderSystemQt::SetCameraPosition( const CPoint &camera, int screenWidth, 
     if( !m_bRenderCreated )
         return;
 
-    m_IGoTv.setCameraPosition( (const GoTvPoint &)camera, screenWidth, screenHeight, stereoFactor );
+    m_INlc.setCameraPosition( (const NlcPoint &)camera, screenWidth, screenHeight, stereoFactor );
 }
 
 //============================================================================
 void CRenderSystemQt::Project( float &x, float &y, float &z )
 {
-    m_IGoTv.project( x, y, z );
+    m_INlc.project( x, y, z );
 }
 
 //============================================================================
 bool CRenderSystemQt::TestRender()
 {
-    return  m_IGoTv.testRender( );
+    return  m_INlc.testRender( );
 }
 
 //============================================================================
 void CRenderSystemQt::InitialiseShaders()
 {
-    m_IGoTv.initialiseShaders( );
+    m_INlc.initialiseShaders( );
 }
 
 //============================================================================
 void CRenderSystemQt::ReleaseShaders()
 {
-    m_IGoTv.releaseShaders();
+    m_INlc.releaseShaders();
 }
 
 //============================================================================
 void CRenderSystemQt::EnableGUIShader( ESHADERMETHOD method )
 {
-    m_IGoTv.enableShader( method );
+    m_INlc.enableShader( method );
 }
 
 //============================================================================
 void CRenderSystemQt::DisableGUIShader()
 {
-    return  m_IGoTv.disableGUIShader();
+    return  m_INlc.disableGUIShader();
 }
 
 //============================================================================
 int CRenderSystemQt::GUIShaderGetPos()
 {
-    return  m_IGoTv.shaderGetPos();
+    return  m_INlc.shaderGetPos();
 }
 
 //============================================================================
 int CRenderSystemQt::GUIShaderGetCol()
 {
-    return  m_IGoTv.shaderGetCol();
+    return  m_INlc.shaderGetCol();
 }
 
 //============================================================================
 int CRenderSystemQt::GUIShaderGetModel()
 {
-    return  m_IGoTv.shaderGetModel();
+    return  m_INlc.shaderGetModel();
 }
 
 //============================================================================
 int CRenderSystemQt::GUIShaderGetCoord0()
 {
-    return  m_IGoTv.shaderGetCoord0();
+    return  m_INlc.shaderGetCoord0();
 }
 
 //============================================================================
 int CRenderSystemQt::GUIShaderGetCoord1()
 {
-    return  m_IGoTv.shaderGetCoord1();
+    return  m_INlc.shaderGetCoord1();
 }
 
 //============================================================================
 int CRenderSystemQt::GUIShaderGetUniCol()
 {
-    return  m_IGoTv.shaderGetUniCol();
+    return  m_INlc.shaderGetUniCol();
 }
 
 //============================================================================
@@ -277,7 +277,7 @@ void CRenderSystemQt::GetViewPort( CRect& viewPort )
     if( !m_bRenderCreated )
         return;
 
-    return  m_IGoTv.getViewPort( (GoTvRect&) viewPort );
+    return  m_INlc.getViewPort( (NlcRect&) viewPort );
 }
 
 //============================================================================
@@ -286,7 +286,7 @@ void CRenderSystemQt::SetViewPort( const CRect& viewPort )
     if( !m_bRenderCreated )
         return;
 
-    m_IGoTv.setViewPort( ( GoTvRect& )viewPort );
+    m_INlc.setViewPort( ( NlcRect& )viewPort );
 }
 
 //============================================================================

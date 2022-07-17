@@ -12,7 +12,7 @@
 #if defined(TARGET_OS_WINDOWS)
 #include <vector>
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/Geometry.h"
 
 #define BONJOUR_EVENT             ( WM_USER + 0x100 )	// Message sent to the Window when a Bonjour event occurs.
@@ -39,7 +39,7 @@ public:
   static bool AddExtraLongPathPrefix(std::wstring& path);
   static bool RemoveExtraLongPathPrefix(std::wstring& path);
   static std::wstring ConvertPathToWin32Form(const std::string& pathUtf8);
-  static std::wstring ConvertPathToWin32Form(const GoTvUrl& url);
+  static std::wstring ConvertPathToWin32Form(const NlcUrl& url);
   static inline __time64_t fileTimeToTimeT(const __int64 ftimei64)
   {
     // FILETIME is 100-nanoseconds from 00:00:00 UTC 01 Jan 1601

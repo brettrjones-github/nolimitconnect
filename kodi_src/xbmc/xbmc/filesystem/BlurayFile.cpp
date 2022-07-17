@@ -7,7 +7,7 @@
  */
 
 #include "BlurayFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include <assert.h>
 
 namespace XFILE
@@ -19,7 +19,7 @@ namespace XFILE
 
   CBlurayFile::~CBlurayFile(void) = default;
 
-  std::string CBlurayFile::TranslatePath(const GoTvUrl& url)
+  std::string CBlurayFile::TranslatePath(const NlcUrl& url)
   {
     assert(url.IsProtocol("bluray"));
 

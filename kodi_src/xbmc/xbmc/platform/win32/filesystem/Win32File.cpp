@@ -50,7 +50,7 @@ CWin32File::~CWin32File()
     CloseHandle(m_hFile);
 }
 
-bool CWin32File::Open(const GoTvUrl& url)
+bool CWin32File::Open(const NlcUrl& url)
 {
   assert((!m_smbFile && url.GetProtocol().empty()) || (m_smbFile && url.IsProtocol("smb"))); // function suitable only for local or SMB files
   if (m_smbFile)
@@ -82,7 +82,7 @@ bool CWin32File::Open(const GoTvUrl& url)
   return m_hFile != INVALID_HANDLE_VALUE;
 }
 
-bool CWin32File::OpenForWrite(const GoTvUrl& url, bool bOverWrite /*= false*/)
+bool CWin32File::OpenForWrite(const NlcUrl& url, bool bOverWrite /*= false*/)
 {
   assert((!m_smbFile && url.GetProtocol().empty()) || (m_smbFile && url.IsProtocol("smb"))); // function suitable only for local or SMB files
   if (m_smbFile)
@@ -368,7 +368,7 @@ void CWin32File::Flush()
   FlushFileBuffers(m_hFile);
 }
 
-bool CWin32File::Delete(const GoTvUrl& url)
+bool CWin32File::Delete(const NlcUrl& url)
 {
   assert((!m_smbFile && url.GetProtocol().empty()) || (m_smbFile && url.IsProtocol("smb"))); // function suitable only for local or SMB files
   if (m_smbFile)
@@ -385,7 +385,7 @@ bool CWin32File::Delete(const GoTvUrl& url)
   return result;
 }
 
-bool CWin32File::Rename(const GoTvUrl& urlCurrentName, const GoTvUrl& urlNewName)
+bool CWin32File::Rename(const NlcUrl& urlCurrentName, const NlcUrl& urlNewName)
 {
   assert((!m_smbFile && urlCurrentName.GetProtocol().empty()) || (m_smbFile && urlCurrentName.IsProtocol("smb"))); // function suitable only for local or SMB files
   assert((!m_smbFile && urlNewName.GetProtocol().empty()) || (m_smbFile && urlNewName.IsProtocol("smb"))); // function suitable only for local or SMB files
@@ -408,7 +408,7 @@ bool CWin32File::Rename(const GoTvUrl& urlCurrentName, const GoTvUrl& urlNewName
   return result;
 }
 
-bool CWin32File::SetHidden(const GoTvUrl& url, bool hidden)
+bool CWin32File::SetHidden(const NlcUrl& url, bool hidden)
 {
   assert((!m_smbFile && url.GetProtocol().empty()) || (m_smbFile && url.IsProtocol("smb"))); // function suitable only for local or SMB files
   if (m_smbFile)
@@ -437,7 +437,7 @@ bool CWin32File::SetHidden(const GoTvUrl& url, bool hidden)
   return result;
 }
 
-bool CWin32File::Exists(const GoTvUrl& url)
+bool CWin32File::Exists(const NlcUrl& url)
 {
   assert((!m_smbFile && url.GetProtocol().empty()) || (m_smbFile && url.IsProtocol("smb"))); // function suitable only for local or SMB files
   if (m_smbFile)
@@ -454,7 +454,7 @@ bool CWin32File::Exists(const GoTvUrl& url)
   return attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY) == 0;
 }
 
-int CWin32File::Stat(const GoTvUrl& url, struct __stat64* statData)
+int CWin32File::Stat(const NlcUrl& url, struct __stat64* statData)
 {
   assert((!m_smbFile && url.GetProtocol().empty()) || (m_smbFile && url.IsProtocol("smb"))); // function suitable only for local or SMB files
   if (m_smbFile)

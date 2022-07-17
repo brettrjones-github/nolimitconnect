@@ -9,7 +9,7 @@
 #include <algorithm>
 
 #include "HttpRangeUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #ifdef HAS_WEB_SERVER
 #include "network/httprequesthandler/IHTTPRequestHandler.h"
 #endif // HAS_WEB_SERVER

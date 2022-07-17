@@ -28,46 +28,46 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 struct libgotvptop_media_player_t;
 
 /*!
-    \class GoTvPtoPVideo Video.h core/Video.h
+    \class NlcPtoPVideo Video.h core/Video.h
     \ingroup GOTVQtCore
     \brief Video controls
 
     A group of video controls functions.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPVideo : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPVideo : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPVideo constructor.
+        \brief NlcPtoPVideo constructor.
 
         This constructor creates a new video manager.
 
-        \param player media player (GoTvPtoPMediaPlayer *)
+        \param player media player (NlcPtoPMediaPlayer *)
     */
-    explicit GoTvPtoPVideo(GoTvPtoPMediaPlayer *player);
+    explicit NlcPtoPVideo(NlcPtoPMediaPlayer *player);
 
     /*!
-        \brief GoTvPtoPVideo destructor
+        \brief NlcPtoPVideo destructor
     */
-    ~GoTvPtoPVideo();
+    ~NlcPtoPVideo();
 
     /*!
         \brief Get current video aspect ratio.
-        \return current video aspect-ratio or NULL if not specified (const GoTvPtoP::Ratio)
+        \return current video aspect-ratio or NULL if not specified (const NlcPtoP::Ratio)
     */
-    GoTvPtoP::Ratio aspectRatio() const;
+    NlcPtoP::Ratio aspectRatio() const;
 
     /*!
         \brief Get current crop filter geometry.
-        \return current crop filter geometry or NULL if not specified (const GoTvPtoP::Ratio)
+        \return current crop filter geometry or NULL if not specified (const NlcPtoP::Ratio)
     */
-    GoTvPtoP::Ratio cropGeometry() const;
+    NlcPtoP::Ratio cropGeometry() const;
 
     /*!
         \brief Hide logo.
@@ -81,33 +81,33 @@ public:
 
     /*!
         \brief Get current scale ratio.
-        \return current scale ratio or NULL if not specified (const GoTvPtoP::Scale)
+        \return current scale ratio or NULL if not specified (const NlcPtoP::Scale)
     */
-    GoTvPtoP::Scale scale() const;
+    NlcPtoP::Scale scale() const;
 
     /*!
         \brief Set new video aspect ratio.
-        \param ratio new video aspect-ratio or NULL to reset to default (GoTvPtoP::Ratio)
+        \param ratio new video aspect-ratio or NULL to reset to default (NlcPtoP::Ratio)
     */
-    void setAspectRatio(const GoTvPtoP::Ratio &ratio);
+    void setAspectRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Set new crop filter geometry.
-        \param ratio new crop filter geometry or NULL to reset to default (GoTvPtoP::Ratio)
+        \param ratio new crop filter geometry or NULL to reset to default (NlcPtoP::Ratio)
     */
-    void setCropGeometry(const GoTvPtoP::Ratio &ratio);
+    void setCropGeometry(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Enable or disable deinterlace filter.
-        \param filter type of deinterlace filter or NULL to reset to default (GoTvPtoP::Deinterlacing)
+        \param filter type of deinterlace filter or NULL to reset to default (NlcPtoP::Deinterlacing)
     */
-    void setDeinterlace(const GoTvPtoP::Deinterlacing &filter);
+    void setDeinterlace(const NlcPtoP::Deinterlacing &filter);
 
     /*!
         \brief Set new scale ratio.
-        \param scale scale ratio or NULL to reset to default (GoTvPtoP::Scale)
+        \param scale scale ratio or NULL to reset to default (NlcPtoP::Scale)
     */
-    void setScale(const GoTvPtoP::Scale &scale);
+    void setScale(const NlcPtoP::Scale &scale);
 
     /*!
         \brief Set current video subtitle.

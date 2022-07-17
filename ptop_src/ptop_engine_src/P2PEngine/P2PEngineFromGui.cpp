@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "P2PEngine.h"
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 #include "P2PConnectList.h"
 #include "../NetServices/NetServicesMgr.h"
@@ -549,7 +549,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
                 }
                 else
                 {
-                    IToGui::getToGui().playGoTvMedia( assetInfo );
+                    IToGui::getToGui().playNlcMedia( assetInfo );
                 }
             }
             else if( eAssetTypeAudio == assetInfo->getAssetType() )
@@ -560,7 +560,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
                 }
                 else
                 {
-                    IToGui::getToGui().playGoTvMedia( assetInfo );
+                    IToGui::getToGui().playNlcMedia( assetInfo );
                 }
             }
         }
@@ -1123,11 +1123,11 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
 
         if( origSettings.getTcpPort() != netHostSetting.getTcpPort() )
         {
-            IGoTv::getIGoTv().getPeerMgr().stopListening();
+            INlc::getINlc().getPeerMgr().stopListening();
             getMyPktAnnounce().setMyOnlinePort( netHostSetting.getTcpPort() );
             setPktAnnLastModTime( GetTimeStampMs() );
             getNetStatusAccum().setIpPort( netHostSetting.getTcpPort() );
-            IGoTv::getIGoTv().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
+            INlc::getINlc().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
         }
 
 		if( haveFixedIp )

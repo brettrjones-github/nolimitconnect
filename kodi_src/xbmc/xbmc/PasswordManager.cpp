@@ -9,7 +9,7 @@
 #include "PasswordManager.h"
 #include "profiles/ProfileManager.h"
 #include "profiles/dialogs/GUIDialogLockSettings.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/XMLUtils.h"
 #include "settings/SettingsComponent.h"
 #include "threads/SingleLock.h"
@@ -28,7 +28,7 @@ CPasswordManager::CPasswordManager()
   m_loaded = false;
 }
 
-bool CPasswordManager::AuthenticateURL(GoTvUrl &url)
+bool CPasswordManager::AuthenticateURL(NlcUrl &url)
 {
   CSingleLock lock(m_critSection);
 
@@ -42,7 +42,7 @@ bool CPasswordManager::AuthenticateURL(GoTvUrl &url)
   }
   if (it != m_temporaryCache.end())
   {
-    GoTvUrl auth(it->second);
+    NlcUrl auth(it->second);
     url.SetDomain(auth.GetDomain());
     url.SetPassword(auth.GetPassWord());
     url.SetUserName(auth.GetUserName());
@@ -51,7 +51,7 @@ bool CPasswordManager::AuthenticateURL(GoTvUrl &url)
   return false;
 }
 
-bool CPasswordManager::PromptToAuthenticateURL(GoTvUrl &url)
+bool CPasswordManager::PromptToAuthenticateURL(NlcUrl &url)
 {
   CSingleLock lock(m_critSection);
 
@@ -88,7 +88,7 @@ bool CPasswordManager::PromptToAuthenticateURL(GoTvUrl &url)
   return true;
 }
 
-void CPasswordManager::SaveAuthenticatedURL(const GoTvUrl &url, bool saveToProfile)
+void CPasswordManager::SaveAuthenticatedURL(const NlcUrl &url, bool saveToProfile)
 {
   // don't store/save authenticated url if it doesn't contain username
   if (url.GetUserName().empty())
@@ -113,7 +113,7 @@ void CPasswordManager::SaveAuthenticatedURL(const GoTvUrl &url, bool saveToProfi
   m_temporaryCache[GetServerLookup(path)] = authenticatedPath;
 }
 
-bool CPasswordManager::IsURLSupported(const GoTvUrl &url)
+bool CPasswordManager::IsURLSupported(const NlcUrl &url)
 {
   if ( url.IsProtocol("smb")
     || url.IsProtocol("nfs")
@@ -190,7 +190,7 @@ void CPasswordManager::Save() const
   doc.SaveFile(profileManager->GetUserDataItem("passwords.xml"));
 }
 
-std::string CPasswordManager::GetLookupPath(const GoTvUrl &url) const
+std::string CPasswordManager::GetLookupPath(const NlcUrl &url) const
 {
   if (url.IsProtocol("sftp"))
     return GetServerLookup(url.Get());
@@ -200,6 +200,6 @@ std::string CPasswordManager::GetLookupPath(const GoTvUrl &url) const
 
 std::string CPasswordManager::GetServerLookup(const std::string &path) const
 {
-  GoTvUrl url(path);
+  NlcUrl url(path);
   return url.GetProtocol() + "://" + url.GetHostName() + "/";
 }

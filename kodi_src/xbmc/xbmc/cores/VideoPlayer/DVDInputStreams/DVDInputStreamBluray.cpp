@@ -22,7 +22,7 @@
 #include "utils/URIUtils.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/Geometry.h"
 #include "guilib/LocalizeStrings.h"
 #include "settings/DiscSettings.h"
@@ -142,13 +142,13 @@ BD_DIR_H* DllLibbluray::dir_open(void *handle, const char* rel_path)
   if (URIUtils::HasSlashAtEnd(strDirname))
     URIUtils::RemoveSlashAtEnd(strDirname);
 
-  CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Opening dir %s\n", GoTvUrl::GetRedacted(strDirname).c_str());
+  CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Opening dir %s\n", NlcUrl::GetRedacted(strDirname).c_str());
 
   SDirState *st = new SDirState();
   if (!CDirectory::GetDirectory(strDirname, st->list, "", DIR_FLAG_DEFAULTS))
   {
     if (!CFile::Exists(strDirname))
-      CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Error opening dir! (%s)\n", GoTvUrl::GetRedacted(strDirname).c_str());
+      CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Error opening dir! (%s)\n", NlcUrl::GetRedacted(strDirname).c_str());
     delete st;
     return NULL;
   }
@@ -189,7 +189,7 @@ BD_FILE_H * DllLibbluray::file_open(void *handle, const char *rel_path)
     return file;
   }
 
-  CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Error opening file! (%s)", GoTvUrl::GetRedacted(strFilename).c_str());
+  CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Error opening file! (%s)", NlcUrl::GetRedacted(strFilename).c_str());
 
   delete fp;
   delete file;
@@ -282,7 +282,7 @@ BLURAY_TITLE_INFO* CDVDInputStreamBluray::GetTitleFile(const std::string& filena
   unsigned int playlist;
   if(sscanf(filename.c_str(), "%05u.mpls", &playlist) != 1)
   {
-    CLog::Log(LOGERROR, "get_playlist_title - unsupported playlist file selected %s", GoTvUrl::GetRedacted(filename).c_str());
+    CLog::Log(LOGERROR, "get_playlist_title - unsupported playlist file selected %s", NlcUrl::GetRedacted(filename).c_str());
     return nullptr;
   }
 
@@ -304,7 +304,7 @@ bool CDVDInputStreamBluray::Open()
   // The item was selected via the simple menu
   if (URIUtils::IsProtocol(strPath, "bluray"))
   {
-    GoTvUrl url(strPath);
+    NlcUrl url(strPath);
     root = url.GetHostName();
     filename = URIUtils::GetFileName(url.GetFileName());
 
@@ -312,9 +312,9 @@ bool CDVDInputStreamBluray::Open()
     if (StringUtils::EqualsNoCase(filename, "menu"))
     {
       //get rid of the udf:// protocol
-      GoTvUrl url2(root);
+      NlcUrl url2(root);
       std::string root2 = url2.GetHostName();
-      GoTvUrl url(root2);
+      NlcUrl url(root2);
       CFileItem item(url, false);
       if (item.IsDiscImage())
       {
@@ -371,13 +371,13 @@ bool CDVDInputStreamBluray::Open()
 
   SetupPlayerSettings();
 
-  CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - opening %s", GoTvUrl::GetRedacted(root).c_str());
+  CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - opening %s", NlcUrl::GetRedacted(root).c_str());
 
   if (openStream)
   {
     if (!m_dll->bd_open_stream(m_bd, m_pstream.get(), read_blocks))
     {
-      CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - failed to open %s in stream mode", GoTvUrl::GetRedacted(root).c_str());
+      CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - failed to open %s in stream mode", NlcUrl::GetRedacted(root).c_str());
       return false;
     }
   }
@@ -386,7 +386,7 @@ bool CDVDInputStreamBluray::Open()
     m_rootPath = root;
     if (!m_dll->bd_open_files(m_bd, &m_rootPath, CBlurayCallback::dir_open, CBlurayCallback::file_open))
     {
-      CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - failed to open %s", GoTvUrl::GetRedacted(root).c_str());
+      CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - failed to open %s", NlcUrl::GetRedacted(root).c_str());
       return false;
     }
   }
@@ -477,7 +477,7 @@ bool CDVDInputStreamBluray::Open()
 
     if(m_dll->bd_play(m_bd) <= 0)
     {
-      CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - failed play disk %s", GoTvUrl::GetRedacted(strPath).c_str());
+      CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - failed play disk %s", NlcUrl::GetRedacted(strPath).c_str());
       return false;
     }
     m_hold = HOLD_DATA;
@@ -1327,7 +1327,7 @@ bool CDVDInputStreamBluray::OpenStream(CFileItem &item)
 
   if (!m_pstream->Open())
   {
-    CLog::Log(LOGERROR, "Error opening image file %s", GoTvUrl::GetRedacted(item.GetPath()).c_str());
+    CLog::Log(LOGERROR, "Error opening image file %s", NlcUrl::GetRedacted(item.GetPath()).c_str());
     Close();
     return false;
   }

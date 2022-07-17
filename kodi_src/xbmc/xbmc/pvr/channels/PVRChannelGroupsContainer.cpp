@@ -8,7 +8,7 @@
 
 #include "PVRChannelGroupsContainer.h"
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -136,7 +136,7 @@ bool CPVRChannelGroupsContainer::GetDirectory(const std::string& strPath, CFileI
   URIUtils::RemoveSlashAtEnd(strBase);
 
   /* get the filename from curl */
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   std::string fileName = url.GetFileName();
   URIUtils::RemoveSlashAtEnd(fileName);
 
@@ -220,7 +220,7 @@ bool CPVRChannelGroupsContainer::GetDirectory(const std::string& strPath, CFileI
   return false;
 }
 
-bool CPVRChannelGroupsContainer::FilterDirectory(const GoTvUrl &url, CFileItemList &results) const
+bool CPVRChannelGroupsContainer::FilterDirectory(const NlcUrl &url, CFileItemList &results) const
 {
   if (!results.IsEmpty())
   {

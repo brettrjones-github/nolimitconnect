@@ -25,7 +25,7 @@
 #include <array>
 #include <set>
 #include <utility>
-#include "GoTvDebugConfig.h"
+#include "NlcDebugConfig.h"
 #include <CoreLib/VxDebug.h>
 
 using namespace XFILE;

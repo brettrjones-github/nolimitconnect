@@ -24,31 +24,31 @@
 
 #include "SharedExportCore.h"
 
-class GoTvPtoPMedia;
+class NlcPtoPMedia;
 
 /*!
-    \class GoTvPtoPMetaManager MetaManager.h core/MetaManager.h
+    \class NlcPtoPMetaManager MetaManager.h core/MetaManager.h
     \ingroup GOTVQtCore
     \brief Media meta information manager
 
     A manager and editor of media's meta information.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPMetaManager
+class GOTVQT_CORE_EXPORT NlcPtoPMetaManager
 {
 public:
     /*!
-        \brief GoTvPtoPMetaManager constructor.
+        \brief NlcPtoPMetaManager constructor.
 
         This constructor creates a new media instance from a media location.
 
-        \param media selected media for meta information (GoTvPtoPMedia *)
+        \param media selected media for meta information (NlcPtoPMedia *)
     */
-    explicit GoTvPtoPMetaManager(GoTvPtoPMedia *media);
+    explicit NlcPtoPMetaManager(NlcPtoPMedia *media);
 
     /*!
-        \brief GoTvPtoPMetaManager destructor
+        \brief NlcPtoPMetaManager destructor
     */
-    ~GoTvPtoPMetaManager();
+    ~NlcPtoPMetaManager();
 
     /*!
         \brief Get current track title.
@@ -219,7 +219,7 @@ public:
     bool saveMeta() const;
 
 private:
-    GoTvPtoPMedia *_media;
+    NlcPtoPMedia *_media;
 };
 
 #endif // GOTVQT_METAMANAGER_H_

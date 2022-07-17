@@ -70,7 +70,7 @@ HEADERS += \
         $$PWD/QtSoundTest/AudioUtils.h \
         $$PWD/QtSoundTest/AudioTestGenerator.h \
         $$PWD/QtSoundTest/IAudioInterface.h \
-        $$PWD/QtSoundTest/IGoTvDefs.h \
+        $$PWD/QtSoundTest/INlcDefs.h \
         $$PWD/QtSoundTest/LogWidget.h \
         $$PWD/QtSoundTest/SoundTestLogic.h \
         $$PWD/QtSoundTest/SoundTestThread.h \

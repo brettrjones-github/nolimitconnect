@@ -497,7 +497,7 @@ static void CopyOrSwap(const uint32_t* src, int num_pixels, uint8_t* dst,
     while (src < src_end) {
       const uint32_t argb = *src++;
 
-#if !defined(GOTV_ARCH_BIGENDIAN)
+#if !defined(NLC_ARCH_BIGENDIAN)
 #if !defined(WEBP_REFERENCE_IMPLEMENTATION)
       WebPUint32ToMem(dst, BSwap32(argb));
 #else  // WEBP_REFERENCE_IMPLEMENTATION
@@ -506,7 +506,7 @@ static void CopyOrSwap(const uint32_t* src, int num_pixels, uint8_t* dst,
       dst[2] = (argb >>  8) & 0xff;
       dst[3] = (argb >>  0) & 0xff;
 #endif
-#else  // GOTV_ARCH_BIGENDIAN
+#else  // NLC_ARCH_BIGENDIAN
       dst[0] = (argb >>  0) & 0xff;
       dst[1] = (argb >>  8) & 0xff;
       dst[2] = (argb >> 16) & 0xff;

@@ -32,7 +32,7 @@
 #include "rendering/dx/RenderContext.h"
 #endif // HAS_DX
 #ifdef HAVE_QT_GUI
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 #endif // HAVE_QT_GUI
 
 typedef struct
@@ -839,7 +839,7 @@ void CWinRenderer::RenderPS( CD3DTexture* target )
     m_colorShader->SetColParams( buf.color_space, buf.bits, !buf.full_range, buf.texBits );
 
 #ifdef HAVE_QT_GUI
-    IGoTv::getIGoTv().toGuiRenderVideoFrame( 0, &buf );
+    INlc::getINlc().toGuiRenderVideoFrame( 0, &buf );
 #endif // HAVE_QT_GUI
 
     // render video frame

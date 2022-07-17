@@ -23,7 +23,7 @@
 #include "RenderKodiThread.h"
 
 
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxGlobals.h>
@@ -125,8 +125,8 @@ void AppletKodi::onAppletStop( void )
 //void AppletKodi::startKodiModule( void )
 //{
 //    // call of doRun of kodi never returns from function until kodi is shutdown so use thread
-//    IGoTv& iGoTv =  getMyApp().getGoTv();
-//    if( !iGoTv.getIsAppModuleRunning( eAppModuleKodi ) && !VxIsAppShuttingDown() && !IsKodiThreadRunning() )
+//    INlc& iNlc =  getMyApp().getNlc();
+//    if( !iNlc.getIsAppModuleRunning( eAppModuleKodi ) && !VxIsAppShuttingDown() && !IsKodiThreadRunning() )
 //    {
 //        CleanupOldKodiThread();
 //        g_RunKodi = new KodiRun( getMyApp(), nullptr );
@@ -143,19 +143,19 @@ void AppletKodi::onAppletStop( void )
 //============================================================================
 void AppletKodi::onResizeBegin( QSize& newSize )
 {
-	//getMyApp().getGoTv().fromGuiResizeBegin( newSize.width(), newSize.height() );
+	//getMyApp().getNlc().fromGuiResizeBegin( newSize.width(), newSize.height() );
 }
 
 //============================================================================
 void AppletKodi::onResizeEvent( QSize& newSize )
 {
-	//getMyApp().getGoTv().fromGuiResizeEvent( newSize.width(), newSize.height() );
+	//getMyApp().getNlc().fromGuiResizeEvent( newSize.width(), newSize.height() );
 }
 
 //============================================================================
 void AppletKodi::onResizeEnd( QSize& newSize )
 {
-	//getMyApp().getGoTv().fromGuiResizeEnd( newSize.width(), newSize.height() );
+	//getMyApp().getNlc().fromGuiResizeEnd( newSize.width(), newSize.height() );
 }
 
 //============================================================================

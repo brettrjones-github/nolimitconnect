@@ -68,13 +68,13 @@ CNfsConnection::~CNfsConnection()
   delete m_pLibNfs;
 }
 
-void CNfsConnection::resolveHost(const GoTvUrl &url)
+void CNfsConnection::resolveHost(const NlcUrl &url)
 { 
   //resolve if hostname has changed
   CDNSNameCache::Lookup(url.GetHostName(), m_resolvedHostName);
 }
 
-std::list<std::string> CNfsConnection::GetExportList(const GoTvUrl &url)
+std::list<std::string> CNfsConnection::GetExportList(const NlcUrl &url)
 {
     std::list<std::string> retList;
 
@@ -220,7 +220,7 @@ int CNfsConnection::getContextForExport(const std::string &exportname)
   return ret;
 }
 
-bool CNfsConnection::splitUrlIntoExportAndPath(const GoTvUrl& url, std::string &exportPath, std::string &relativePath)
+bool CNfsConnection::splitUrlIntoExportAndPath(const NlcUrl& url, std::string &exportPath, std::string &relativePath)
 {
   //refresh exportlist if empty or hostname change
   if(m_exportList.empty() || !StringUtils::EqualsNoCase(url.GetHostName(), m_hostName))
@@ -231,7 +231,7 @@ bool CNfsConnection::splitUrlIntoExportAndPath(const GoTvUrl& url, std::string &
   return splitUrlIntoExportAndPath(url, exportPath, relativePath, m_exportList);
 }
 
-bool CNfsConnection::splitUrlIntoExportAndPath(const GoTvUrl& url,std::string &exportPath, std::string &relativePath, std::list<std::string> &exportList)
+bool CNfsConnection::splitUrlIntoExportAndPath(const NlcUrl& url,std::string &exportPath, std::string &relativePath, std::list<std::string> &exportList)
 {
     bool ret = false;
   
@@ -283,7 +283,7 @@ bool CNfsConnection::splitUrlIntoExportAndPath(const GoTvUrl& url,std::string &e
     return ret;
 }
 
-bool CNfsConnection::Connect(const GoTvUrl& url, std::string &relativePath)
+bool CNfsConnection::Connect(const NlcUrl& url, std::string &relativePath)
 {
   CSingleLock lock(*this);
   int nfsRet = 0;
@@ -435,7 +435,7 @@ void CNfsConnection::keepAlive(std::string _exportPath, struct nfsfh  *_pFileHan
   m_pLibNfs->nfs_lseek(pContext, _pFileHandle, offset, SEEK_SET, &offset);
 }
 
-int CNfsConnection::stat(const GoTvUrl &url, NFSSTAT *statbuff)
+int CNfsConnection::stat(const NlcUrl &url, NFSSTAT *statbuff)
 {
   CSingleLock lock(*this);
   int nfsRet = 0;
@@ -532,7 +532,7 @@ int64_t CNFSFile::GetLength()
   return m_fileSize;
 }
 
-bool CNFSFile::Open(const GoTvUrl& url)
+bool CNFSFile::Open(const NlcUrl& url)
 {
   int ret = 0;
   Close();
@@ -582,7 +582,7 @@ bool CNFSFile::Open(const GoTvUrl& url)
 }
 
 
-bool CNFSFile::Exists(const GoTvUrl& url)
+bool CNFSFile::Exists(const NlcUrl& url)
 {
   return Stat(url,NULL) == 0;
 }
@@ -593,7 +593,7 @@ int CNFSFile::Stat(struct __stat64* buffer)
 }
 
 
-int CNFSFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CNFSFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   int ret = 0;
   CSingleLock lock(gNfsConnection);
@@ -768,7 +768,7 @@ int64_t CNFSFile::Write(const void* lpBuf, size_t uiBufSize)
   return numberOfBytesWritten;
 }
 
-bool CNFSFile::Delete(const GoTvUrl& url)
+bool CNFSFile::Delete(const NlcUrl& url)
 {
   int ret = 0;
   CSingleLock lock(gNfsConnection);
@@ -787,7 +787,7 @@ bool CNFSFile::Delete(const GoTvUrl& url)
   return (ret == 0);
 }
 
-bool CNFSFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
+bool CNFSFile::Rename(const NlcUrl& url, const NlcUrl& urlnew)
 {
   int ret = 0;
   CSingleLock lock(gNfsConnection);
@@ -809,7 +809,7 @@ bool CNFSFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
   return (ret == 0);
 }
 
-bool CNFSFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+bool CNFSFile::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 { 
   int ret = 0;
   // we can't open files like nfs://file.f or nfs://server/file.f

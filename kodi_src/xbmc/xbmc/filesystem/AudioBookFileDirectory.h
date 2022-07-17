@@ -18,10 +18,10 @@ namespace XFILE
   {
     public:
       ~CAudioBookFileDirectory(void) override;
-      bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-      bool Exists(const GoTvUrl& url) override;
-      bool ContainsFiles(const GoTvUrl& url) override;
-      bool IsAllowed(const GoTvUrl& url) const override { return true; };
+      bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+      bool Exists(const NlcUrl& url) override;
+      bool ContainsFiles(const NlcUrl& url) override;
+      bool IsAllowed(const NlcUrl& url) const override { return true; };
     protected:
       AVIOContext* m_ioctx = nullptr;
       AVFormatContext* m_fctx = nullptr;

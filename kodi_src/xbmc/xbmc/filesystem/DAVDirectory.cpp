@@ -10,7 +10,7 @@
 
 #include "DAVCommon.h"
 #include "DAVFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "CurlFile.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
@@ -71,7 +71,7 @@ void CDAVDirectory::ParseResponse(const TiXmlElement *pElement, CFileItem &item)
               else
               if (CDAVCommon::ValueWithoutNamespace(pPropChild, "displayname") && !pPropChild->NoChildren())
               {
-                item.SetLabel(GoTvUrl::Decode(pPropChild->FirstChild()->ValueStr()));
+                item.SetLabel(NlcUrl::Decode(pPropChild->FirstChild()->ValueStr()));
               }
               else
               if (!item.m_dateTime.IsValid() && CDAVCommon::ValueWithoutNamespace(pPropChild, "creationdate") && !pPropChild->NoChildren())
@@ -96,7 +96,7 @@ void CDAVDirectory::ParseResponse(const TiXmlElement *pElement, CFileItem &item)
   }
 }
 
-bool CDAVDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CDAVDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   CCurlFile dav;
   std::string strRequest = "PROPFIND";
@@ -144,8 +144,8 @@ bool CDAVDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
     {
       CFileItem item;
       ParseResponse(pChild->ToElement(), item);
-      GoTvUrl url2(url);
-      GoTvUrl url3(item.GetPath());
+      NlcUrl url2(url);
+      NlcUrl url3(item.GetPath());
 
       std::string itemPath(URIUtils::AddFileToFolder(url2.GetWithoutFilename(), url3.GetFileName()));
 
@@ -153,7 +153,7 @@ bool CDAVDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
       {
         std::string name(itemPath);
         URIUtils::RemoveSlashAtEnd(name);
-        item.SetLabel(GoTvUrl::Decode(URIUtils::GetFileName(name)));
+        item.SetLabel(NlcUrl::Decode(URIUtils::GetFileName(name)));
       }
 
       if (item.m_bIsFolder)
@@ -177,7 +177,7 @@ bool CDAVDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CDAVDirectory::Create(const GoTvUrl& url)
+bool CDAVDirectory::Create(const NlcUrl& url)
 {
   CDAVFile dav;
   std::string strRequest = "MKCOL";
@@ -195,7 +195,7 @@ bool CDAVDirectory::Create(const GoTvUrl& url)
   return true;
 }
 
-bool CDAVDirectory::Exists(const GoTvUrl& url)
+bool CDAVDirectory::Exists(const NlcUrl& url)
 {
   CCurlFile dav;
 
@@ -208,7 +208,7 @@ bool CDAVDirectory::Exists(const GoTvUrl& url)
   return dav.Exists(url);
 }
 
-bool CDAVDirectory::Remove(const GoTvUrl& url)
+bool CDAVDirectory::Remove(const NlcUrl& url)
 {
   CDAVFile dav;
   std::string strRequest = "DELETE";

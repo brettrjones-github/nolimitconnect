@@ -499,16 +499,16 @@ void AppSettings::setupAppModeSettings( EDefaultAppMode appDefaultMode )
 	//// enable app mode specific features
 	//switch( appDefaultMode )
 	//{
- //   case eAppModeGoTvViewer:
+ //   case eAppModeNlcViewer:
 	//	// setFeatureEnable( eAppFeatureViewer, true );
 	//	break;
- //   case eAppModeGoTvProvider:
+ //   case eAppModeNlcProvider:
 	//	// setFeatureEnable( eAppFeatureProvider, true );
 	//	break;
- //   case eAppModeGoTvStation:
+ //   case eAppModeNlcStation:
 	//	// setFeatureEnable( eAppFeatureStation, true );
 	//	break;
- //   case eAppModeGoTvNetworkHost:
+ //   case eAppModeNlcNetworkHost:
 	//	// setFeatureEnable( eAppFeatureNetworkHost, true );
 	//	break;
  //   default:
@@ -571,4 +571,32 @@ int32_t AppSettings::getSoundOutDeviceIndex( void )
 	int32_t deviceIndex = 0;
 	getIniValue( getAppShortName(), "SoundOutDeviceIndex", deviceIndex, 0 );
 	return deviceIndex;
+}
+
+//============================================================================
+bool AppSettings::getRunOnStartupCamServer( void )
+{
+	bool runOnStartup = false;
+	getIniValue( getAppShortName(), "RunOnStartupCamServer", runOnStartup, false );
+	return runOnStartup;
+}
+
+//============================================================================
+void AppSettings::setRunOnStartupCamServer( bool runOnStartup )
+{
+	setIniValue( getAppShortName(), "RunOnStartupCamServer", runOnStartup );
+}
+
+//============================================================================
+bool AppSettings::getRunOnStartupFileShareServer( void )
+{
+	bool runOnStartup = false;
+	getIniValue( getAppShortName(), "RunOnStartupFileShareServer", runOnStartup, false );
+	return runOnStartup;
+}
+
+//============================================================================
+void AppSettings::setRunOnStartupFileShareServer( bool runOnStartup )
+{
+	setIniValue( getAppShortName(), "RunOnStartupFileShareServer", runOnStartup );
 }

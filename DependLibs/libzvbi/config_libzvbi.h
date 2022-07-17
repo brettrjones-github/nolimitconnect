@@ -141,15 +141,15 @@
 /* Version number of package */
 #define VERSION "0.2.36"
 
-/* Define GOTV_ARCH_BIGENDIAN to 1 if your processor stores words with the most
+/* Define NLC_ARCH_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */
 #if defined AC_APPLE_UNIVERSAL_BUILD
 # if defined __BIG_ENDIAN__
-#  define GOTV_ARCH_BIGENDIAN 1
+#  define NLC_ARCH_BIGENDIAN 1
 # endif
 #else
-# ifndef GOTV_ARCH_BIGENDIAN
-/* #  undef GOTV_ARCH_BIGENDIAN */
+# ifndef NLC_ARCH_BIGENDIAN
+/* #  undef NLC_ARCH_BIGENDIAN */
 # endif
 #endif
 

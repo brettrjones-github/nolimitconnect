@@ -11,7 +11,7 @@
 #include "threads/Thread.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 CBackgroundInfoLoader::CBackgroundInfoLoader() : m_thread (NULL)
 {
@@ -51,7 +51,7 @@ void CBackgroundInfoLoader::Run()
         }
         catch (...)
         {
-          CLog::Log(LOGERROR, "CBackgroundInfoLoader::LoadItemCached - Unhandled exception for item %s", GoTvUrl::GetRedacted(pItem->GetPath()).c_str());
+          CLog::Log(LOGERROR, "CBackgroundInfoLoader::LoadItemCached - Unhandled exception for item %s", NlcUrl::GetRedacted(pItem->GetPath()).c_str());
         }
       }
 
@@ -71,7 +71,7 @@ void CBackgroundInfoLoader::Run()
         }
         catch (...)
         {
-          CLog::Log(LOGERROR, "CBackgroundInfoLoader::LoadItemLookup - Unhandled exception for item %s", GoTvUrl::GetRedacted(pItem->GetPath()).c_str());
+          CLog::Log(LOGERROR, "CBackgroundInfoLoader::LoadItemLookup - Unhandled exception for item %s", NlcUrl::GetRedacted(pItem->GetPath()).c_str());
         }
       }
     }

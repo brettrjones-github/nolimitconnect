@@ -26,12 +26,12 @@
 #include "core/MediaListPlayer.h"
 #include "core/MediaPlayer.h"
 
-GoTvPtoPMediaListPlayer::GoTvPtoPMediaListPlayer(GoTvPtoPInstance *instance)
+NlcPtoPMediaListPlayer::NlcPtoPMediaListPlayer(NlcPtoPInstance *instance)
     : QObject(instance),
       _list(0),
-      _mode(GoTvPtoP::DefaultPlayback)
+      _mode(NlcPtoP::DefaultPlayback)
 {
-    _player = new GoTvPtoPMediaPlayer(instance);
+    _player = new NlcPtoPMediaPlayer(instance);
 
     _gotvptopMediaListPlayer = libgotvptop_media_list_player_new(instance->core());
     _gotvptopEvents = libgotvptop_media_list_player_event_manager(_gotvptopMediaListPlayer);
@@ -39,14 +39,14 @@ GoTvPtoPMediaListPlayer::GoTvPtoPMediaListPlayer(GoTvPtoPInstance *instance)
 
     createCoreConnections();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoPMediaListPlayer::GoTvPtoPMediaListPlayer(GoTvPtoPMediaPlayer *player,
-                                       GoTvPtoPInstance *instance)
+NlcPtoPMediaListPlayer::NlcPtoPMediaListPlayer(NlcPtoPMediaPlayer *player,
+                                       NlcPtoPInstance *instance)
     : QObject(instance),
       _list(0),
-      _mode(GoTvPtoP::DefaultPlayback)
+      _mode(NlcPtoP::DefaultPlayback)
 {
     _player = player;
 
@@ -56,34 +56,34 @@ GoTvPtoPMediaListPlayer::GoTvPtoPMediaListPlayer(GoTvPtoPMediaPlayer *player,
 
     createCoreConnections();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoPMediaListPlayer::~GoTvPtoPMediaListPlayer()
+NlcPtoPMediaListPlayer::~NlcPtoPMediaListPlayer()
 {
     removeCoreConnections();
 
     libgotvptop_media_list_player_release(_gotvptopMediaListPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-libgotvptop_media_list_player_t *GoTvPtoPMediaListPlayer::core()
+libgotvptop_media_list_player_t *NlcPtoPMediaListPlayer::core()
 {
     return _gotvptopMediaListPlayer;
 }
 
-GoTvPtoPMediaList *GoTvPtoPMediaListPlayer::currentMediaList()
+NlcPtoPMediaList *NlcPtoPMediaListPlayer::currentMediaList()
 {
     return _list;
 }
 
-GoTvPtoPMediaPlayer *GoTvPtoPMediaListPlayer::mediaPlayer()
+NlcPtoPMediaPlayer *NlcPtoPMediaListPlayer::mediaPlayer()
 {
     return _player;
 }
 
-void GoTvPtoPMediaListPlayer::createCoreConnections()
+void NlcPtoPMediaListPlayer::createCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaListPlayerPlayed
@@ -95,7 +95,7 @@ void GoTvPtoPMediaListPlayer::createCoreConnections()
     }
 }
 
-void GoTvPtoPMediaListPlayer::removeCoreConnections()
+void NlcPtoPMediaListPlayer::removeCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaListPlayerPlayed
@@ -107,64 +107,64 @@ void GoTvPtoPMediaListPlayer::removeCoreConnections()
     }
 }
 
-void GoTvPtoPMediaListPlayer::itemAt(int index)
+void NlcPtoPMediaListPlayer::itemAt(int index)
 {
     libgotvptop_media_list_player_play_item_at_index(_gotvptopMediaListPlayer, index);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaListPlayer::next()
+void NlcPtoPMediaListPlayer::next()
 {
     libgotvptop_media_list_player_next(_gotvptopMediaListPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaListPlayer::play()
+void NlcPtoPMediaListPlayer::play()
 {
     libgotvptop_media_list_player_play(_gotvptopMediaListPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoP::PlaybackMode GoTvPtoPMediaListPlayer::playbackMode() const
+NlcPtoP::PlaybackMode NlcPtoPMediaListPlayer::playbackMode() const
 {
     return _mode;
 }
 
-void GoTvPtoPMediaListPlayer::previous()
+void NlcPtoPMediaListPlayer::previous()
 {
     libgotvptop_media_list_player_previous(_gotvptopMediaListPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaListPlayer::stop()
+void NlcPtoPMediaListPlayer::stop()
 {
     libgotvptop_media_list_player_stop(_gotvptopMediaListPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaListPlayer::setMediaList(GoTvPtoPMediaList *list)
+void NlcPtoPMediaListPlayer::setMediaList(NlcPtoPMediaList *list)
 {
     _list = list;
     libgotvptop_media_list_player_set_media_list(_gotvptopMediaListPlayer, list->core());
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaListPlayer::setPlaybackMode(const GoTvPtoP::PlaybackMode &mode)
+void NlcPtoPMediaListPlayer::setPlaybackMode(const NlcPtoP::PlaybackMode &mode)
 {
     _mode = mode;
     libgotvptop_media_list_player_set_playback_mode(_gotvptopMediaListPlayer, libgotvptop_playback_mode_t(mode));
 }
 
-void GoTvPtoPMediaListPlayer::libgotvptop_callback(const libgotvptop_event_t *event,
+void NlcPtoPMediaListPlayer::libgotvptop_callback(const libgotvptop_event_t *event,
                                          void *data)
 {
-    GoTvPtoPMediaListPlayer *core = static_cast<GoTvPtoPMediaListPlayer *>(data);
+    NlcPtoPMediaListPlayer *core = static_cast<NlcPtoPMediaListPlayer *>(data);
 
     switch (event->type) {
     case libgotvptop_MediaListPlayerPlayed:

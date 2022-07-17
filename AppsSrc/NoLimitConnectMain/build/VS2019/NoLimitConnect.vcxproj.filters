@@ -1312,9 +1312,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\DialogConfirmRemoveMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\EventsQtToGoTv.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileActionBarWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1638,30 +1635,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.cpp">
       <Filter>Source Files\soundio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\GoTvRenderFrame.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\IDefs.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTv.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvFromGui.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvRender.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvToGui.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\ILog.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp">
-      <Filter>Source Files\GuiInterface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp">
       <Filter>Source Files\GuiInterface\OsInterface</Filter>
@@ -2014,6 +1987,33 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SoundMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IDefs.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\ILog.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\INlc.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\INlcFromGui.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\INlcRender.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\INlcToGui.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\NlcRenderFrame.cpp">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\EventsQtToNlc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2038,9 +2038,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\CommonHdr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\EventsQtToGoTv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FileItemInfo.h">
@@ -2142,42 +2139,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.h">
       <Filter>Source Files\soundio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTv.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvEvents.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvGeometry.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvRender.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\ILog.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IScan.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h">
-      <Filter>Source Files\GuiInterface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh">
       <Filter>Source Files\GuiInterface\OsInterface</Filter>
     </ClInclude>
@@ -2273,6 +2234,45 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\AppTargetOsConfig.h">
       <Filter>CompilerConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\ILog.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\INlc.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\INlcEvents.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\INlcGeometry.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\INlcRender.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IScan.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\NlcRenderFrame.h">
+      <Filter>Source Files\GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\EventsQtToNlc.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@
 #include <interface/mmal/util/mmal_default_components.h>
 #include <interface/mmal/util/mmal_util_params.h>
 
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "MMALRenderer.h"
 #include "ServiceBroker.h"
 #include "cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"

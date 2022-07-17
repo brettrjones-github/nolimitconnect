@@ -23,7 +23,7 @@
 #include "core/Media.h"
 #include "core/MediaList.h"
 
-GoTvPtoPMediaList::GoTvPtoPMediaList(GoTvPtoPInstance *instance)
+NlcPtoPMediaList::NlcPtoPMediaList(NlcPtoPInstance *instance)
     : QObject(instance)
 {
     _gotvptopMediaList = libgotvptop_media_list_new(instance->core());
@@ -31,27 +31,27 @@ GoTvPtoPMediaList::GoTvPtoPMediaList(GoTvPtoPInstance *instance)
 
     createCoreConnections();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoPMediaList::~GoTvPtoPMediaList()
+NlcPtoPMediaList::~NlcPtoPMediaList()
 {
-    foreach (GoTvPtoPMedia *m, _list)
+    foreach (NlcPtoPMedia *m, _list)
         delete m;
 
     removeCoreConnections();
 
     libgotvptop_media_list_release(_gotvptopMediaList);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-libgotvptop_media_list_t *GoTvPtoPMediaList::core()
+libgotvptop_media_list_t *NlcPtoPMediaList::core()
 {
     return _gotvptopMediaList;
 }
 
-void GoTvPtoPMediaList::createCoreConnections()
+void NlcPtoPMediaList::createCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaListItemAdded
@@ -64,7 +64,7 @@ void GoTvPtoPMediaList::createCoreConnections()
     }
 }
 
-void GoTvPtoPMediaList::removeCoreConnections()
+void NlcPtoPMediaList::removeCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaListItemAdded
@@ -77,50 +77,50 @@ void GoTvPtoPMediaList::removeCoreConnections()
     }
 }
 
-void GoTvPtoPMediaList::addMedia(GoTvPtoPMedia *media)
+void NlcPtoPMediaList::addMedia(NlcPtoPMedia *media)
 {
     lock();
     libgotvptop_media_list_add_media(_gotvptopMediaList, media->core());
     _list.append(media);
     unlock();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoPMedia *GoTvPtoPMediaList::at(int index)
+NlcPtoPMedia *NlcPtoPMediaList::at(int index)
 {
     return _list[index];
 }
 
-int GoTvPtoPMediaList::count()
+int NlcPtoPMediaList::count()
 {
     lock();
     int count = libgotvptop_media_list_count(_gotvptopMediaList);
     unlock();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return count;
 }
 
-int GoTvPtoPMediaList::indexOf(GoTvPtoPMedia *media)
+int NlcPtoPMediaList::indexOf(NlcPtoPMedia *media)
 {
     return _list.indexOf(media);
 }
 
-int GoTvPtoPMediaList::indexOf(libgotvptop_media_t *media)
+int NlcPtoPMediaList::indexOf(libgotvptop_media_t *media)
 {
     int index;
     lock();
     index = libgotvptop_media_list_index_of_item(_gotvptopMediaList, media);
     unlock();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return index;
 }
 
-void GoTvPtoPMediaList::insertMedia(GoTvPtoPMedia *media,
+void NlcPtoPMediaList::insertMedia(NlcPtoPMedia *media,
                                int index)
 {
     lock();
@@ -128,10 +128,10 @@ void GoTvPtoPMediaList::insertMedia(GoTvPtoPMedia *media,
     _list.insert(index, media);
     unlock();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaList::removeMedia(int index)
+void NlcPtoPMediaList::removeMedia(int index)
 {
     lock();
     libgotvptop_media_list_remove_index(_gotvptopMediaList, index);
@@ -139,23 +139,23 @@ void GoTvPtoPMediaList::removeMedia(int index)
     _list.removeAt(index);
     unlock();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaList::lock()
+void NlcPtoPMediaList::lock()
 {
     libgotvptop_media_list_lock(_gotvptopMediaList);
 }
 
-void GoTvPtoPMediaList::unlock()
+void NlcPtoPMediaList::unlock()
 {
     libgotvptop_media_list_unlock(_gotvptopMediaList);
 }
 
-void GoTvPtoPMediaList::libgotvptop_callback(const libgotvptop_event_t *event,
+void NlcPtoPMediaList::libgotvptop_callback(const libgotvptop_event_t *event,
                                    void *data)
 {
-    GoTvPtoPMediaList *core = static_cast<GoTvPtoPMediaList *>(data);
+    NlcPtoPMediaList *core = static_cast<NlcPtoPMediaList *>(data);
 
     switch (event->type) {
     case libgotvptop_MediaListItemAdded:

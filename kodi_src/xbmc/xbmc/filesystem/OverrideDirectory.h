@@ -18,11 +18,11 @@ public:
   COverrideDirectory();
   ~COverrideDirectory() override;
 
-  bool Create(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override;
-  bool Remove(const GoTvUrl& url) override;
+  bool Create(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
+  bool Remove(const NlcUrl& url) override;
 
 protected:
-  virtual std::string TranslatePath(const GoTvUrl &url) = 0;
+  virtual std::string TranslatePath(const NlcUrl &url) = 0;
 };
 }

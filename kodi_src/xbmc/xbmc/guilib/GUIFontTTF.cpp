@@ -17,7 +17,7 @@
 #include "utils/log.h"
 #include "rendering/RenderSystem.h"
 #include "windowing/WinSystem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "threads/SystemClock.h"
 
@@ -80,7 +80,7 @@ public:
         FT_Face face;
 
         // ok, now load the font face
-        GoTvUrl realFile( CSpecialProtocol::TranslatePath( filename ) );
+        NlcUrl realFile( CSpecialProtocol::TranslatePath( filename ) );
         if( realFile.GetFileName().empty() )
             return NULL;
 

@@ -18,10 +18,10 @@
 
 #include "core/Enums.h"
 
-GoTvPtoP::GoTvPtoP(QObject *parent)
+NlcPtoP::NlcPtoP(QObject *parent)
     : QObject(parent) {}
 
-QStringList GoTvPtoP::logLevel()
+QStringList NlcPtoP::logLevel()
 {
     QStringList list;
     list << "debug"
@@ -34,7 +34,7 @@ QStringList GoTvPtoP::logLevel()
     return list;
 }
 
-QStringList GoTvPtoP::audioCodec()
+QStringList NlcPtoP::audioCodec()
 {
     QStringList list;
     list << "none"
@@ -47,7 +47,7 @@ QStringList GoTvPtoP::audioCodec()
     return list;
 }
 
-QStringList GoTvPtoP::audioOutput()
+QStringList NlcPtoP::audioOutput()
 {
     QStringList list;
     list << "default";
@@ -55,7 +55,7 @@ QStringList GoTvPtoP::audioOutput()
     return list;
 }
 
-QStringList GoTvPtoP::audioOutputHuman()
+QStringList NlcPtoP::audioOutputHuman()
 {
     QStringList list;
     list << "default";
@@ -63,7 +63,7 @@ QStringList GoTvPtoP::audioOutputHuman()
     return list;
 }
 
-QStringList GoTvPtoP::deinterlacing()
+QStringList NlcPtoP::deinterlacing()
 {
     QStringList list;
     list << ""
@@ -81,7 +81,7 @@ QStringList GoTvPtoP::deinterlacing()
     return list;
 }
 
-QStringList GoTvPtoP::mux()
+QStringList NlcPtoP::mux()
 {
     QStringList list;
     list << "ts"
@@ -93,7 +93,7 @@ QStringList GoTvPtoP::mux()
     return list;
 }
 
-QStringList GoTvPtoP::ratio()
+QStringList NlcPtoP::ratio()
 {
     QStringList list;
     list << ""
@@ -112,7 +112,7 @@ QStringList GoTvPtoP::ratio()
     return list;
 }
 
-QStringList GoTvPtoP::ratioHuman()
+QStringList NlcPtoP::ratioHuman()
 {
     QStringList list;
     list << ""
@@ -131,41 +131,41 @@ QStringList GoTvPtoP::ratioHuman()
     return list;
 }
 
-QSizeF GoTvPtoP::ratioSize(const GoTvPtoP::Ratio &ratio)
+QSizeF NlcPtoP::ratioSize(const NlcPtoP::Ratio &ratio)
 {
     switch (ratio) {
-    case GoTvPtoP::R_16_9:
+    case NlcPtoP::R_16_9:
         return QSizeF(16, 9);
         break;
-    case GoTvPtoP::R_16_10:
+    case NlcPtoP::R_16_10:
         return QSizeF(16, 10);
         break;
-    case GoTvPtoP::R_185_100:
+    case NlcPtoP::R_185_100:
         return QSizeF(185, 100);
         break;
-    case GoTvPtoP::R_221_100:
+    case NlcPtoP::R_221_100:
         return QSizeF(221, 100);
         break;
-    case GoTvPtoP::R_235_100:
+    case NlcPtoP::R_235_100:
         return QSizeF(235, 100);
         break;
-    case GoTvPtoP::R_239_100:
+    case NlcPtoP::R_239_100:
         return QSizeF(239, 100);
         break;
-    case GoTvPtoP::R_4_3:
+    case NlcPtoP::R_4_3:
         return QSizeF(4, 3);
         break;
-    case GoTvPtoP::R_5_4:
+    case NlcPtoP::R_5_4:
         return QSizeF(5, 4);
         break;
-    case GoTvPtoP::R_5_3:
+    case NlcPtoP::R_5_3:
         return QSizeF(5, 3);
         break;
-    case GoTvPtoP::R_1_1:
+    case NlcPtoP::R_1_1:
         return QSizeF(1, 1);
         break;
-    case GoTvPtoP::Original:
-    case GoTvPtoP::Ignore:
+    case NlcPtoP::Original:
+    case NlcPtoP::Ignore:
     default:
         return QSizeF(0, 0);
         break;
@@ -174,7 +174,7 @@ QSizeF GoTvPtoP::ratioSize(const GoTvPtoP::Ratio &ratio)
     return QSizeF(0, 0);
 }
 
-QList<float> GoTvPtoP::scale()
+QList<float> NlcPtoP::scale()
 {
     QList<float> list;
     list << (float)0
@@ -193,7 +193,7 @@ QList<float> GoTvPtoP::scale()
     return list;
 }
 
-QStringList GoTvPtoP::videoCodec()
+QStringList NlcPtoP::videoCodec()
 {
     QStringList list;
     list << "none"
@@ -205,7 +205,7 @@ QStringList GoTvPtoP::videoCodec()
     return list;
 }
 
-QStringList GoTvPtoP::videoOutput()
+QStringList NlcPtoP::videoOutput()
 {
     QStringList list;
     list << "default";
@@ -223,7 +223,7 @@ QStringList GoTvPtoP::videoOutput()
     return list;
 }
 
-QStringList GoTvPtoP::videoOutputHuman()
+QStringList NlcPtoP::videoOutputHuman()
 {
     QStringList list;
     list << "default";

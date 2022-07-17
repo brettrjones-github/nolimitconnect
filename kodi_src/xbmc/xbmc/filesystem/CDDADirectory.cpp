@@ -22,7 +22,7 @@ CCDDADirectory::CCDDADirectory(void) = default;
 CCDDADirectory::~CCDDADirectory(void) = default;
 
 
-bool CCDDADirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CCDDADirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
 #ifndef HAS_DVD_DRIVE
     return false;

@@ -444,7 +444,7 @@ CWakeOnAccess &CWakeOnAccess::GetInstance()
   return sWakeOnAccess;
 }
 
-bool CWakeOnAccess::WakeUpHost(const GoTvUrl& url)
+bool CWakeOnAccess::WakeUpHost(const NlcUrl& url)
 {
   std::string hostName = url.GetHostName();
 
@@ -649,7 +649,7 @@ static void AddHostsFromMediaSource(const CMediaSource& source, std::vector<std:
 {
   for (std::vector<std::string>::const_iterator it = source.vecPaths.begin() ; it != source.vecPaths.end(); ++it)
   {
-    GoTvUrl url(*it);
+    NlcUrl url(*it);
 
     std::string host_name = url.GetHostName();
 
@@ -696,7 +696,7 @@ void CWakeOnAccess::QueueMACDiscoveryForAllRemotes()
   // add from path substitutions ..
   for (const auto& pathPair : advancedSettings->m_pathSubstitutions)
   {
-    GoTvUrl url(pathPair.second);
+    NlcUrl url(pathPair.second);
     AddHost (url.GetHostName(), hosts);
   }
 

@@ -24,7 +24,7 @@
 #include "GuiHelpers.h"
 #include "AccountMgr.h"
 
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
@@ -251,7 +251,7 @@ void AppCommon::setupAccountResources( VxNetIdent& userAccountIdent )
     std::string strUserName = userAccountIdent.getOnlineName();
     getEngine().fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
     // gotv (kodi) also needs the directory
-    getGoTv().fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
+    getNlc().fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
 
     // get port to listen on 
     uint16_t tcpPort = getEngine().getEngineSettings().getTcpIpPort();
@@ -302,7 +302,7 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     getEngine().fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
     std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
     // gotv (kodi) also needs the directory
-    getGoTv().fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
+    getNlc().fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
 
     copyAssetsToFoldersIfRequired();
 

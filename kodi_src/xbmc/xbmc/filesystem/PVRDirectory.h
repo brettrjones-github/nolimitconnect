@@ -21,10 +21,10 @@ public:
   CPVRDirectory();
   ~CPVRDirectory() override;
 
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
   bool AllowAll() const override { return true; }
-  DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_NEVER; };
-  bool Exists(const GoTvUrl& url) override;
+  DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_NEVER; };
+  bool Exists(const NlcUrl& url) override;
 
   static bool SupportsWriteFileOperations(const std::string& strPath);
   static bool IsLiveTV(const std::string& strPath);

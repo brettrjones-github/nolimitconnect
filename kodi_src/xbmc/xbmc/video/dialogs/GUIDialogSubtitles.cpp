@@ -30,8 +30,8 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "video/VideoDatabase.h"
 #include "filesystem/Directory.h"
 
@@ -51,7 +51,7 @@ using namespace XFILE;
 class CSubtitlesJob: public CJob
 {
 public:
-  CSubtitlesJob(const GoTvUrl &url, const std::string &language) : m_url(url), m_language(language)
+  CSubtitlesJob(const NlcUrl &url, const std::string &language) : m_url(url), m_language(language)
   {
     m_items = new CFileItemList;
   }
@@ -78,10 +78,10 @@ public:
     return false;
   }
   const CFileItemList *GetItems() const { return m_items; }
-  const GoTvUrl &GetURL() const { return m_url; }
+  const NlcUrl &GetURL() const { return m_url; }
   const std::string &GetLanguage() const { return m_language; }
 private:
-  GoTvUrl           m_url;
+  NlcUrl           m_url;
   CFileItemList *m_items;
   std::string    m_language;
 };
@@ -307,7 +307,7 @@ void CGUIDialogSubtitles::Search(const std::string &search/*=""*/)
   UpdateStatus(SEARCHING);
   ClearSubtitles();
 
-  GoTvUrl url("plugin://" + m_currentService + "/");
+  NlcUrl url("plugin://" + m_currentService + "/");
   if (!search.empty())
   {
     url.SetOption("action", "manualsearch");
@@ -349,7 +349,7 @@ void CGUIDialogSubtitles::Search(const std::string &search/*=""*/)
 
 void CGUIDialogSubtitles::OnJobComplete(unsigned int jobID, bool success, CJob *job)
 {
-  const GoTvUrl &url             = static_cast<CSubtitlesJob*>(job)->GetURL();
+  const NlcUrl &url             = static_cast<CSubtitlesJob*>(job)->GetURL();
   const CFileItemList *items  = static_cast<CSubtitlesJob*>(job)->GetItems();
   const std::string &language = static_cast<CSubtitlesJob*>(job)->GetLanguage();
   if (url.GetOption("action") == "search" || url.GetOption("action") == "manualsearch")
@@ -415,7 +415,7 @@ void CGUIDialogSubtitles::Download(const CFileItem &subtitle)
 
   // subtitle URL should be of the form plugin://<addonid>/?param=foo&param=bar
   // we just append (if not already present) the action=download parameter.
-  GoTvUrl url(subtitle.GetURL());
+  NlcUrl url(subtitle.GetURL());
   if (url.GetOption("action").empty())
     url.SetOption("action", "download");
 
@@ -459,7 +459,7 @@ void CGUIDialogSubtitles::OnDownloadComplete(const CFileItemList *items, const s
      * for rar/zip (perhaps modify GetDirectory?)
      */
     if (URIUtils::IsInRAR(strCurrentFile) || URIUtils::IsInZIP(strCurrentFile))
-      strCurrentFilePath = URIUtils::GetDirectory(GoTvUrl(strCurrentFile).GetHostName());
+      strCurrentFilePath = URIUtils::GetDirectory(NlcUrl(strCurrentFile).GetHostName());
     else
       strCurrentFilePath = URIUtils::GetDirectory(strCurrentFile);
 

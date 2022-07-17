@@ -32,7 +32,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "guilib/TextureManager.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "cores/AudioEngine/Interfaces/AE.h"
 #include "input/WindowTranslator.h"
 #include "storage/MediaManager.h"

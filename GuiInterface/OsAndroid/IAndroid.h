@@ -19,7 +19,7 @@
 class IAndroid : public OsInterface
 {
 public:
-    IAndroid( IGoTv& gotv );
+    IAndroid( INlc& gotv );
     virtual ~IAndroid( ) = default;
 
     //=== stages of create ===//

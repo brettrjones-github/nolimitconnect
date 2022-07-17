@@ -28,18 +28,18 @@
 #include "qml/QmlVideoOutput.h"
 #include "qml/QmlVideoPlayer.h"
 
-void GoTvPtoPQml::registerTypes()
+void NlcPtoPQml::registerTypes()
 {
     QByteArray module(LIBGOTVQT_QML_MODULE);
     const char *m = module.data();
 
-    qmlRegisterUncreatableType<GoTvPtoP>(m, 1, 1, "GoTvPtoP", QStringLiteral("GoTvPtoP cannot be instantiated directly"));
-    qmlRegisterUncreatableType<GoTvPtoPQmlSource>(m, 1, 1, "GoTvPtoPSource", QStringLiteral("GoTvPtoPQmlSource cannot be instantiated directly"));
-    qmlRegisterUncreatableType<GoTvPtoPTrackModel>(m, 1, 1, "GoTvPtoPTrackModel", QStringLiteral("GoTvPtoPTrackModel cannot be instantiated directly"));
+    qmlRegisterUncreatableType<NlcPtoP>(m, 1, 1, "NlcPtoP", QStringLiteral("NlcPtoP cannot be instantiated directly"));
+    qmlRegisterUncreatableType<NlcPtoPQmlSource>(m, 1, 1, "NlcPtoPSource", QStringLiteral("NlcPtoPQmlSource cannot be instantiated directly"));
+    qmlRegisterUncreatableType<NlcPtoPTrackModel>(m, 1, 1, "NlcPtoPTrackModel", QStringLiteral("NlcPtoPTrackModel cannot be instantiated directly"));
 
-    qmlRegisterType<GoTvPtoPQmlPlayer>(m, 1, 1, "GoTvPtoPPlayer");
-    qmlRegisterType<GoTvPtoPQmlVideoOutput>(m, 1, 1, "GoTvPtoPVideoOutput");
+    qmlRegisterType<NlcPtoPQmlPlayer>(m, 1, 1, "NlcPtoPPlayer");
+    qmlRegisterType<NlcPtoPQmlVideoOutput>(m, 1, 1, "NlcPtoPVideoOutput");
 
     // Deprecated
-    qmlRegisterType<GoTvPtoPQmlVideoPlayer>(m, 1, 0, "GoTvPtoPVideoPlayer");
+    qmlRegisterType<NlcPtoPQmlVideoPlayer>(m, 1, 0, "NlcPtoPVideoPlayer");
 }

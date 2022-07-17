@@ -10,14 +10,14 @@
 
 #include "AppTargetOsConfig.h"
 
-#define GOTV_FLOATING_POINT        1 // use floats and don't support fixed point
-//#define GOTV_FIXED_POINT        1 // support fixed point
+#define NLC_FLOATING_POINT        1 // use floats and don't support fixed point
+//#define NLC_FIXED_POINT        1 // support fixed point
 
 //============================================================================
 // determine CPU type and number of bits and endianess
 #ifdef TARGET_OS_WINDOWS
-# define GOTV_ARCH_LITTLE_ENDIAN	    1
-# define GOTV_ARCH_BIG_ENDIAN			0
+# define NLC_ARCH_LITTLE_ENDIAN	    1
+# define NLC_ARCH_BIG_ENDIAN			0
 
 # define ARCH_ALPHA		                0
 # define ARCH_ARM                       0
@@ -74,8 +74,8 @@
 
 
 #elif defined(TARGET_OS_ANDROID)
-# define GOTV_ARCH_LITTLE_ENDIAN		1
-# define GOTV_ARCH_BIG_ENDIAN			0
+# define NLC_ARCH_LITTLE_ENDIAN		1
+# define NLC_ARCH_BIG_ENDIAN			0
 
 # if defined(TARGET_CPU_ARM)
 #  define TARGET_CPU_ARM				1  // general cpu type
@@ -120,8 +120,8 @@
 
 #elif defined(TARGET_OS_LINUX)
 
-# define GOTV_ARCH_LITTLE_ENDIAN		1
-# define GOTV_ARCH_BIG_ENDIAN			0
+# define NLC_ARCH_LITTLE_ENDIAN		1
+# define NLC_ARCH_BIG_ENDIAN			0
 // only 64bit x86 linux is supported
 # define TARGET_CPU_X86_64			    1  // general cpu type
 
@@ -152,8 +152,8 @@
 
 #elif defined(TARGET_OS_APPLE)
 echo error apple and ppc processors not supported
-# define GOTV_ARCH_LITTLE_ENDIAN		0
-# define GOTV_ARCH_BIG_ENDIAN			1
+# define NLC_ARCH_LITTLE_ENDIAN		0
+# define NLC_ARCH_BIG_ENDIAN			1
 # define TARGET_CPU_PPC					1 // general cpu type
 
 # define ARCH_ALPHA		                0
@@ -174,21 +174,21 @@ echo error apple and ppc processors not supported
 // not supported.. try to give reasonable error
 #if defined(__MIPSEL__)
 echo error mips processors not supported
-# define GOTV_ARCH_LITTLE_ENDIAN			1
-# define GOTV_ARCH_BIG_ENDIAN				0
+# define NLC_ARCH_LITTLE_ENDIAN			1
+# define NLC_ARCH_BIG_ENDIAN				0
 # define TARGET_CPU_MIPS					1
 # define ARCH_64_BITS						1
 # define ARCH_MIPS                          0
 
 #elif defined(TARGET_OS_APPLE) || ARCH_PPC
 echo error ppc processors not supported
-# define GOTV_ARCH_LITTLE_ENDIAN			0
-# define GOTV_ARCH_BIG_ENDIAN				1
+# define NLC_ARCH_LITTLE_ENDIAN			0
+# define NLC_ARCH_BIG_ENDIAN				1
 
 #elif defined(__aarch64__)
 echo error aarch64 processors not supported
-# define GOTV_ARCH_LITTLE_ENDIAN			1
-# define GOTV_ARCH_BIG_ENDIAN				0
+# define NLC_ARCH_LITTLE_ENDIAN			1
+# define NLC_ARCH_BIG_ENDIAN				0
 # define TARGET_CPU_AARCH					1
 # define ARCH_64_BITS						1
 #else
@@ -198,25 +198,25 @@ echo unknown processor types are not supported
 #endif // determine CPU type and number of bits and endianess
 
 // another way to determine endianess.. keep around in case is a better way
-///* Define GOTV_ARCH_BIGENDIAN to 1 if your processor stores words with the most
+///* Define NLC_ARCH_BIGENDIAN to 1 if your processor stores words with the most
 //significant byte first (like Motorola and SPARC, unlike Intel). */
 //#if defined AC_APPLE_UNIVERSAL_BUILD
 //# if defined __BIG_ENDIAN__
-//#  define GOTV_ARCH_BIGENDIAN 1
+//#  define NLC_ARCH_BIGENDIAN 1
 //# endif
 //#else
-//# ifndef GOTV_ARCH_BIGENDIAN
-///* #  undef GOTV_ARCH_BIGENDIAN */
+//# ifndef NLC_ARCH_BIGENDIAN
+///* #  undef NLC_ARCH_BIGENDIAN */
 //# endif
 //#endif
 
 
-#define HAVE_BIGENDIAN					GOTV_ARCH_BIG_ENDIAN
-#define GOTV_ARCH_BIGENDIAN				GOTV_ARCH_BIG_ENDIAN
+#define HAVE_BIGENDIAN					NLC_ARCH_BIG_ENDIAN
+#define NLC_ARCH_BIGENDIAN				NLC_ARCH_BIG_ENDIAN
 
 #if !ARCH_X86 && !ARCH_ARM
 # define HAVE_BIGENDIAN		1
-echo GoTv CPU Arch Defines error no cpu target defined
+echo Nlc CPU Arch Defines error no cpu target defined
 //#define ARCH_AARCH		1
 //#define ARCH_ALPHA		1
 //#define ARCH_AVR32		1
@@ -299,7 +299,7 @@ echo GoTv CPU Arch Defines error no cpu target defined
 //==== PPC architectures ===//
 #elif ARCH_PPC
 // For PPC only
-echo GoTv CPU Config error ppc processors not supported
+echo Nlc CPU Config error ppc processors not supported
 //#define HAVE_POWER8				1
 //#define HAVE_PPC4XX				1
 
@@ -307,7 +307,7 @@ echo GoTv CPU Config error ppc processors not supported
 //==== MIPS architectures ===//
 #elif ARCH_MIPS
 // For mips only
-echo GoTv CPU Config error mips processors not supported
+echo Nlc CPU Config error mips processors not supported
 //#define HAVE_MIPSDSP				1
 //#define HAVE_MIPSDSPR2			1
 //#define HAVE_MIPSFPU				1
@@ -318,7 +318,7 @@ echo GoTv CPU Config error mips processors not supported
 //#define HAVE_MIPS64R6				1
 
 #else
-echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
+echo Nlc CPU Config error no cpu arc defined.. unknown processors not supported
 // don't know what these are
 
 //#define HAVE_VFP				1

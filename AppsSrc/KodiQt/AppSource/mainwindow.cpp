@@ -38,11 +38,11 @@
 **
 ****************************************************************************/
 
-#include "GoTvAppConfig.h"
-#if !defined(BUILD_KODIQT_APP)  && !defined(BUILD_GOTV_APP) 
-echo you must define BUILD_KODIQT_APP 1 in GoTvAppConfig.h to build KodiQt
-echo you must define BUILD_GOTV_APP 0 in GoTvAppConfig.h to build KodiQt
-echo you must define BUILD_KODIP2P_APP 0 in GoTvAppConfig.h to build KodiQt
+#include "NlcAppConfig.h"
+#if !defined(BUILD_KODIQT_APP)  && !defined(BUILD_NLC_APP) 
+echo you must define BUILD_KODIQT_APP 1 in NlcAppConfig.h to build KodiQt
+echo you must define BUILD_NLC_APP 0 in NlcAppConfig.h to build KodiQt
+echo you must define BUILD_KODIP2P_APP 0 in NlcAppConfig.h to build KodiQt
 #endif // !BUILD_KODI_APP
 
 #ifdef BUILD_KODIQT_APP
@@ -221,4 +221,4 @@ void MainWindow::exportImage()
     }
 }
 
-#endif // BUILD_GOTV_APP
+#endif // BUILD_NLC_APP

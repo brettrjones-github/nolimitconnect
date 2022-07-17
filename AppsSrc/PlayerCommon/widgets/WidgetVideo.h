@@ -32,7 +32,7 @@
 
 #include "SharedExportWidgets.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 /*!
     \defgroup GOTVQtWidgets GOTV-Qt Widgets (GOTVQtWidgets)
@@ -40,144 +40,144 @@ class GoTvPtoPMediaPlayer;
  */
 
 /*!
-    \class GoTvPtoPWidgetVideo WidgetVideo.h GOTVQtWidgets/WidgetVideo.h
+    \class NlcPtoPWidgetVideo WidgetVideo.h GOTVQtWidgets/WidgetVideo.h
     \ingroup GOTVQtWidgets
     \brief Video widget
 
     This is one of GOTV-Qt GUI classes.
     It provides video display and mouse control.
 */
-class GOTVQT_WIDGETS_EXPORT GoTvPtoPWidgetVideo : public QFrame, public GoTvPtoPVideoDelegate
+class GOTVQT_WIDGETS_EXPORT NlcPtoPWidgetVideo : public QFrame, public NlcPtoPVideoDelegate
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPWidgetVideo constructor
+        \brief NlcPtoPWidgetVideo constructor
         \param player media player
         \param parent video widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetVideo(GoTvPtoPMediaPlayer *player,
+    explicit NlcPtoPWidgetVideo(NlcPtoPMediaPlayer *player,
                             QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetVideo constructor
+        \brief NlcPtoPWidgetVideo constructor
         \param parent video widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetVideo(QWidget *parent = 0);
+    explicit NlcPtoPWidgetVideo(QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetVideo destructor
+        \brief NlcPtoPWidgetVideo destructor
     */
-    ~GoTvPtoPWidgetVideo();
+    ~NlcPtoPWidgetVideo();
 
     /*!
         \brief Get current aspect ratio setting
         \return current aspect ratio
     */
-    inline GoTvPtoP::Ratio currentAspectRatio() const { return _currentAspectRatio; }
+    inline NlcPtoP::Ratio currentAspectRatio() const { return _currentAspectRatio; }
 
     /*!
         \brief Get default aspect ratio setting
         \return default aspect ratio
     */
-    inline GoTvPtoP::Ratio defaultAspectRatio() const { return _defaultAspectRatio; }
+    inline NlcPtoP::Ratio defaultAspectRatio() const { return _defaultAspectRatio; }
 
     /*!
         \brief Set current aspect ratio setting
         \param ratio current aspect ratio
     */
-    void setCurrentAspectRatio(const GoTvPtoP::Ratio &ratio);
+    void setCurrentAspectRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Set default aspect ratio setting
         \param ratio default aspect ratio
     */
-    void setDefaultAspectRatio(const GoTvPtoP::Ratio &ratio);
+    void setDefaultAspectRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Get current crop ratio setting
         \return current crop ratio
     */
-    inline GoTvPtoP::Ratio currentCropRatio() const { return _currentCropRatio; }
+    inline NlcPtoP::Ratio currentCropRatio() const { return _currentCropRatio; }
 
     /*!
         \brief Get default crop ratio setting
         \return default crop ratio
     */
-    inline GoTvPtoP::Ratio defaultCropRatio() const { return _defaultCropRatio; }
+    inline NlcPtoP::Ratio defaultCropRatio() const { return _defaultCropRatio; }
 
     /*!
         \brief Set current crop ratio setting
         \param ratio current crop ratio
     */
-    void setCurrentCropRatio(const GoTvPtoP::Ratio &ratio);
+    void setCurrentCropRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Set default crop ratio setting
         \param ratio default crop ratio
     */
-    void setDefaultCropRatio(const GoTvPtoP::Ratio &ratio);
+    void setDefaultCropRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Get current deinterlacing filter setting
         \return current deinterlacing filter
     */
-    inline GoTvPtoP::Deinterlacing currentDeinterlacing() const { return _currentDeinterlacing; }
+    inline NlcPtoP::Deinterlacing currentDeinterlacing() const { return _currentDeinterlacing; }
 
     /*!
         \brief Get default deinterlacing filter setting
         \return current deinterlacing filter
     */
-    inline GoTvPtoP::Deinterlacing defaultDeinterlacing() const { return _defaultDeinterlacing; }
+    inline NlcPtoP::Deinterlacing defaultDeinterlacing() const { return _defaultDeinterlacing; }
 
     /*!
         \brief Set current deinterlacing filter setting
         \param deinterlacing current deinterlacing filter
     */
-    void setCurrentDeinterlacing(const GoTvPtoP::Deinterlacing &deinterlacing);
+    void setCurrentDeinterlacing(const NlcPtoP::Deinterlacing &deinterlacing);
 
     /*!
         \brief Set default deinterlacing filter setting
         \param deinterlacing default deinterlacing filter
     */
-    void setDefaultDeinterlacing(const GoTvPtoP::Deinterlacing &deinterlacing);
+    void setDefaultDeinterlacing(const NlcPtoP::Deinterlacing &deinterlacing);
 
     /*!
         \brief Get current scale ratio setting
         \return current scale ratio
     */
-    inline GoTvPtoP::Scale currentScale() const { return _currentScale; }
+    inline NlcPtoP::Scale currentScale() const { return _currentScale; }
 
     /*!
         \brief Get default scale ratio setting
         \return default scale ratio
     */
-    inline GoTvPtoP::Scale defaultScale() const { return _defaultScale; }
+    inline NlcPtoP::Scale defaultScale() const { return _defaultScale; }
 
     /*!
         \brief Set current scale ratio setting
         \param scale current scale ratio
     */
-    void setCurrentScale(const GoTvPtoP::Scale &scale);
+    void setCurrentScale(const NlcPtoP::Scale &scale);
 
     /*!
         \brief Set default scale ratio setting
         \param scale default scale ratio
     */
-    void setDefaultScale(const GoTvPtoP::Scale &scale);
+    void setDefaultScale(const NlcPtoP::Scale &scale);
 
     /*!
         \brief Set media player if initialised without it
         \param player media player
     */
-    void setMediaPlayer(GoTvPtoPMediaPlayer *player);
+    void setMediaPlayer(NlcPtoPMediaPlayer *player);
 
     /*!
         \brief Request new video frame.
 
         Request new video frame and its widget ID to set it in the instance.
         \return widget ID
-        \sa GoTvPtoPMediaPlayer::GoTvPtoPMediaPlayer()
+        \sa NlcPtoPMediaPlayer::NlcPtoPMediaPlayer()
     */
     WId request();
 
@@ -212,25 +212,25 @@ public slots:
         \brief Set aspect ratio
         \param ratio aspect ratio
     */
-    void setAspectRatio(const GoTvPtoP::Ratio &ratio);
+    void setAspectRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Set crop ratio
         \param ratio crop ratio
     */
-    void setCropRatio(const GoTvPtoP::Ratio &ratio);
+    void setCropRatio(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Set deinterlace filter
         \param deinterlacing deinterlacing filter
     */
-    void setDeinterlacing(const GoTvPtoP::Deinterlacing &deinterlacing);
+    void setDeinterlacing(const NlcPtoP::Deinterlacing &deinterlacing);
 
     /*!
         \brief Set scale ratio
         \param scale scale ratio
     */
-    void setScale(const GoTvPtoP::Scale &scale);
+    void setScale(const NlcPtoP::Scale &scale);
 
 private slots:
     void applyPreviousSettings();
@@ -239,22 +239,22 @@ private:
     void initWidgetVideo();
     void sync();
 
-    GoTvPtoPMediaPlayer *_gotvptopMediaPlayer;
+    NlcPtoPMediaPlayer *_gotvptopMediaPlayer;
 
     QWidget *_video;
     QLayout *_layout;
 
     bool _enableSettings;
 
-    GoTvPtoP::Ratio _defaultAspectRatio;
-    GoTvPtoP::Ratio _defaultCropRatio;
-    GoTvPtoP::Deinterlacing _defaultDeinterlacing;
-    GoTvPtoP::Scale _defaultScale;
+    NlcPtoP::Ratio _defaultAspectRatio;
+    NlcPtoP::Ratio _defaultCropRatio;
+    NlcPtoP::Deinterlacing _defaultDeinterlacing;
+    NlcPtoP::Scale _defaultScale;
 
-    GoTvPtoP::Ratio _currentAspectRatio;
-    GoTvPtoP::Ratio _currentCropRatio;
-    GoTvPtoP::Deinterlacing _currentDeinterlacing;
-    GoTvPtoP::Scale _currentScale;
+    NlcPtoP::Ratio _currentAspectRatio;
+    NlcPtoP::Ratio _currentCropRatio;
+    NlcPtoP::Deinterlacing _currentDeinterlacing;
+    NlcPtoP::Scale _currentScale;
 };
 
 #endif // GOTVQ_WIDGETVIDEO_H_

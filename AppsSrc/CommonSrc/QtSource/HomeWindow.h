@@ -68,7 +68,7 @@ protected:
     void						moveEvent( QMoveEvent * ) override;
     void						closeEvent( QCloseEvent * ) override;
 
-	void						initializeGoTvDynamicLayout( void );
+	void						initializeNlcDynamicLayout( void );
 	void						createAppletLaunchPage( void );
 	void						createMessengerPage( void );
     void                        updateAndroidGeomety();

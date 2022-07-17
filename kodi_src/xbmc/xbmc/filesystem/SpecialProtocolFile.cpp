@@ -7,7 +7,7 @@
  */
 
 #include "SpecialProtocolFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/SpecialProtocol.h"
 
 using namespace XFILE;
@@ -18,7 +18,7 @@ CSpecialProtocolFile::CSpecialProtocolFile(void)
 
 CSpecialProtocolFile::~CSpecialProtocolFile(void) = default;
 
-std::string CSpecialProtocolFile::TranslatePath(const GoTvUrl& url)
+std::string CSpecialProtocolFile::TranslatePath(const NlcUrl& url)
 {
   return CSpecialProtocol::TranslatePath(url);
 }

@@ -298,9 +298,9 @@ int ssh_is_ipaddr(const char *str) {
 
 #ifndef HAVE_NTOHLL
 uint64_t ntohll(uint64_t a) {
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
   return a;
-#else /* GOTV_ARCH_BIGENDIAN */
+#else /* NLC_ARCH_BIGENDIAN */
   return (((uint64_t)(a) << 56) | \
          (((uint64_t)(a) << 40) & 0xff000000000000ULL) | \
          (((uint64_t)(a) << 24) & 0xff0000000000ULL) | \
@@ -309,7 +309,7 @@ uint64_t ntohll(uint64_t a) {
          (((uint64_t)(a) >> 24) & 0xff0000ULL) | \
          (((uint64_t)(a) >> 40) & 0xff00ULL) | \
          ((uint64_t)(a)  >> 56));
-#endif /* GOTV_ARCH_BIGENDIAN */
+#endif /* NLC_ARCH_BIGENDIAN */
 }
 #endif /* HAVE_NTOHLL */
 

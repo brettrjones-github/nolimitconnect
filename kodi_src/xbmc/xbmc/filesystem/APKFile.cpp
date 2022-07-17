@@ -45,7 +45,7 @@ CAPKFile::~CAPKFile()
 {
 }
 
-bool CAPKFile::Open(const GoTvUrl& url)
+bool CAPKFile::Open(const NlcUrl& url)
 {
   Close();
 
@@ -103,7 +103,7 @@ bool CAPKFile::Open(const GoTvUrl& url)
   return true;
 }
 
-bool CAPKFile::Exists(const GoTvUrl& url)
+bool CAPKFile::Exists(const NlcUrl& url)
 {
   struct __stat64 buffer;
   return (Stat(url, &buffer) == 0);
@@ -201,7 +201,7 @@ int CAPKFile::Stat(struct __stat64* buffer)
   return Stat(m_url, buffer);
 }
 
-int CAPKFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CAPKFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   memset(buffer, 0, sizeof(struct __stat64));
 

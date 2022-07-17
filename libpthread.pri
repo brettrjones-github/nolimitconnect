@@ -1,8 +1,8 @@
 HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
+	$$PWD/../../../../NlcConfig.h \
 	$$PWD/../../../../AppCpuArchDefines.h \
 	$$PWD/../../../../AppDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
+	$$PWD/../../../../NlcFeaturesConfig.h \
 	$$PWD/../../../../AppTargetOsConfig.h \
 	$$PWD/../../config_pthread.h \
 	$$PWD/../../implement.h \

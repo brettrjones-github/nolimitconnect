@@ -12,7 +12,7 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "utils/XBMCTinyXML.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace PLAYLIST;
 
@@ -82,7 +82,7 @@ bool CPlayListXSPF::Load(const std::string& strFileName)
 
       CFileItemPtr newItem(new CFileItem(label));
 
-      GoTvUrl uri(location);
+      NlcUrl uri(location);
 
       // at the time of writing CURL doesn't handle file:// URI scheme the way
       // it's presented in this format, parse to local path instead
@@ -94,11 +94,11 @@ bool CPlayListXSPF::Load(const std::string& strFileName)
         localpath = "/";
 #endif
         // Path starts after "file:///"
-        localpath += GoTvUrl::Decode(location.substr(8));
+        localpath += NlcUrl::Decode(location.substr(8));
       }
       else if (uri.GetProtocol().empty())
       {
-        localpath = URIUtils::AppendSlash(m_strBasePath) + GoTvUrl::Decode(location);
+        localpath = URIUtils::AppendSlash(m_strBasePath) + NlcUrl::Decode(location);
       }
 
       if (!localpath.empty())

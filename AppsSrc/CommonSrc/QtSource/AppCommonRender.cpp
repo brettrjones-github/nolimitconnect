@@ -161,7 +161,7 @@ void AppCommon::bindToUnit( CQtTexture * texture, unsigned int unit )
 }
 
 //============================================================================
-void AppCommon::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color )
+void AppCommon::beginGuiTexture( CGUITextureQt * guiTexture, NlcColor color )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -172,7 +172,7 @@ void AppCommon::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color )
 }
 
 //============================================================================
-void AppCommon::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const GoTvRect& textureRect, const GoTvRect& diffuse, int orientation )
+void AppCommon::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const NlcRect& textureRect, const NlcRect& diffuse, int orientation )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -194,7 +194,7 @@ void AppCommon::endGuiTexture( CGUITextureQt * guiTexture )
 }
 
 //============================================================================
-void AppCommon::drawQuad( const GoTvRect& rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords )
+void AppCommon::drawQuad( const NlcRect& rect, NlcColor color, CBaseTexture * texture, const NlcRect * texCoords )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -295,7 +295,7 @@ void AppCommon::destroyStaticVertexBuffers( CGUIFontTTFQt * font )
 //============================================================================
 
 //============================================================================
-void AppCommon::captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& captureArea )
+void AppCommon::captureScreen( CScreenshotSurface * screenCaptrue, NlcRect& captureArea )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -447,7 +447,7 @@ void AppCommon::presentRender( bool rendered, bool videoLayer )
 }
 
 //============================================================================
-bool AppCommon::clearBuffers( GoTvColor color )
+bool AppCommon::clearBuffers( NlcColor color )
 {
     bool result = false;
     RenderGlWidget * glWidget = getRenderConsumer();
@@ -494,7 +494,7 @@ void AppCommon::setVSync( bool vsync )
 }
 
 //============================================================================
-void AppCommon::setViewPort( const GoTvRect& viewPort )
+void AppCommon::setViewPort( const NlcRect& viewPort )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -505,7 +505,7 @@ void AppCommon::setViewPort( const GoTvRect& viewPort )
 }
 
 //============================================================================
-void AppCommon::getViewPort( GoTvRect& viewPort )
+void AppCommon::getViewPort( NlcRect& viewPort )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -530,9 +530,9 @@ bool AppCommon::scissorsCanEffectClipping()
 }
 
 //============================================================================
-GoTvRect AppCommon::clipRectToScissorRect( const GoTvRect &rect )
+NlcRect AppCommon::clipRectToScissorRect( const NlcRect &rect )
 {
-    GoTvRect result;
+    NlcRect result;
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
     {
@@ -544,7 +544,7 @@ GoTvRect AppCommon::clipRectToScissorRect( const GoTvRect &rect )
 }
 
 //============================================================================
-void AppCommon::setScissors( const GoTvRect& rect )
+void AppCommon::setScissors( const NlcRect& rect )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
@@ -588,7 +588,7 @@ void AppCommon::applyStateBlock()
 }
 
 //============================================================================
-void AppCommon::setCameraPosition( const GoTvPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
+void AppCommon::setCameraPosition( const NlcPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )

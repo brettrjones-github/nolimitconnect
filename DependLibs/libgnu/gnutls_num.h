@@ -65,7 +65,7 @@ NLC_INLINE static uint32_t _gnutls_read_uint24(const uint8_t * data)
 	num.pint[2] = data[2];
 
 	res = _gnutls_uint24touint32(num);
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	res = bswap_32(res);
 #endif
 	return res;
@@ -73,7 +73,7 @@ NLC_INLINE static uint32_t _gnutls_read_uint24(const uint8_t * data)
 
 NLC_INLINE static void _gnutls_write_uint64(uint64_t num, uint8_t * data)
 {
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	num = bswap_64(num);
 #endif
 	memcpy(data, &num, 8);
@@ -83,7 +83,7 @@ NLC_INLINE static void _gnutls_write_uint24(uint32_t num, uint8_t * data)
 {
 	uint24 tmp;
 
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	num = bswap_32(num);
 #endif
 	tmp = _gnutls_uint32touint24(num);
@@ -98,7 +98,7 @@ NLC_INLINE static uint32_t _gnutls_read_uint32(const uint8_t * data)
 	uint32_t res;
 
 	memcpy(&res, data, sizeof(uint32_t));
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	res = bswap_32(res);
 #endif
 	return res;
@@ -107,7 +107,7 @@ NLC_INLINE static uint32_t _gnutls_read_uint32(const uint8_t * data)
 NLC_INLINE static void _gnutls_write_uint32(uint32_t num, uint8_t * data)
 {
 
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	num = bswap_32(num);
 #endif
 	memcpy(data, &num, sizeof(uint32_t));
@@ -117,7 +117,7 @@ NLC_INLINE static uint16_t _gnutls_read_uint16(const uint8_t * data)
 {
 	uint16_t res;
 	memcpy(&res, data, sizeof(uint16_t));
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	res = bswap_16(res);
 #endif
 	return res;
@@ -126,7 +126,7 @@ NLC_INLINE static uint16_t _gnutls_read_uint16(const uint8_t * data)
 NLC_INLINE static void _gnutls_write_uint16(uint16_t num, uint8_t * data)
 {
 
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	num = bswap_16(num);
 #endif
 	memcpy(data, &num, sizeof(uint16_t));
@@ -134,7 +134,7 @@ NLC_INLINE static void _gnutls_write_uint16(uint16_t num, uint8_t * data)
 
 NLC_INLINE static uint32_t _gnutls_conv_uint32(uint32_t data)
 {
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	return bswap_32(data);
 #else
 	return data;
@@ -143,7 +143,7 @@ NLC_INLINE static uint32_t _gnutls_conv_uint32(uint32_t data)
 
 NLC_INLINE static uint16_t _gnutls_conv_uint16(uint16_t data)
 {
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	return bswap_16(data);
 #else
 	return data;
@@ -155,7 +155,7 @@ NLC_INLINE static uint32_t _gnutls_uint64touint32(const uint64 * num)
 	uint32_t ret;
 
 	memcpy(&ret, &num->i[4], 4);
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
 	ret = bswap_32(ret);
 #endif
 

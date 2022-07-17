@@ -8,7 +8,7 @@
 
 #include "GUIWindowVideoBase.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "video/VideoInfoDownloader.h"
 #include "video/VideoInfoScanner.h"
 #include "video/VideoLibraryQueue.h"
@@ -50,7 +50,7 @@
 #include "GUIUserMessages.h"
 #include "storage/MediaManager.h"
 #include "Autorun.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/GroupUtils.h"
 #include "TextureDatabase.h"
 
@@ -1102,7 +1102,7 @@ bool CGUIWindowVideoBase::OnPlayMedia(int iItem, const std::string &player)
     item.SetPath(pItem->GetVideoInfoTag()->m_strFileNameAndPath);
     item.SetProperty("original_listitem_url", pItem->GetPath());
   }
-  CLog::Log(LOGDEBUG, "%s %s", __FUNCTION__, GoTvUrl::GetRedacted(item.GetPath()).c_str());
+  CLog::Log(LOGDEBUG, "%s %s", __FUNCTION__, NlcUrl::GetRedacted(item.GetPath()).c_str());
 
   PlayMovie(&item, player);
 
@@ -1299,7 +1299,7 @@ bool CGUIWindowVideoBase::GetDirectory(const std::string &strDirectory, CFileIte
 
 bool CGUIWindowVideoBase::StackingAvailable(const CFileItemList &items)
 {
-  GoTvUrl url(items.GetPath());
+  NlcUrl url(items.GetPath());
   return !(items.IsPlugin() || items.IsAddonsPath()  ||
            items.IsRSS() || items.IsInternetStream() ||
            items.IsVideoDb() || url.IsProtocol("playlistvideo"));
@@ -1498,7 +1498,7 @@ void CGUIWindowVideoBase::OnSearchItemFound(const CFileItem* pSelItem)
       SetHistoryForPath(strParentPath);
 
     strPath = pSelItem->GetPath();
-    GoTvUrl url(strPath);
+    NlcUrl url(strPath);
     if (pSelItem->IsSmb() && !URIUtils::HasSlashAtEnd(strPath))
       strPath += "/";
 
@@ -1526,7 +1526,7 @@ void CGUIWindowVideoBase::OnSearchItemFound(const CFileItem* pSelItem)
     for (int i = 0; i < (int)m_vecItems->Size(); i++)
     {
       CFileItemPtr pItem = m_vecItems->Get(i);
-      GoTvUrl url(pItem->GetPath());
+      NlcUrl url(pItem->GetPath());
       if (pSelItem->IsVideoDb())
         url.SetOptions("");
       if (url.Get() == pSelItem->GetPath())

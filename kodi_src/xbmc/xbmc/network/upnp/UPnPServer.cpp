@@ -33,7 +33,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "music/MusicDatabase.h"
 #include "video/VideoDatabase.h"
 #include "guilib/GUIWindowManager.h"
@@ -224,7 +224,7 @@ NPT_String CUPnPServer::BuildSafeResourceUri(const NPT_HttpUrl &rooturi,
                                              const char* host,
                                              const char* file_path)
 {
-    GoTvUrl url(file_path);
+    NlcUrl url(file_path);
     std::string md5;
     std::string mapped_file_path(file_path);
 
@@ -239,7 +239,7 @@ NPT_String CUPnPServer::BuildSafeResourceUri(const NPT_HttpUrl &rooturi,
     else
       filename = URIUtils::GetFileName(mapped_file_path);
 
-    filename = GoTvUrl::Encode(filename);
+    filename = NlcUrl::Encode(filename);
     md5 = CDigest::Calculate(CDigest::Type::MD5, mapped_file_path);
     md5 += "/" + filename;
     { NPT_AutoLock lock(m_FileMutex);
@@ -1009,7 +1009,7 @@ CUPnPServer::OnUpdateObject(PLT_ActionReference&             action,
                             NPT_Map<NPT_String,NPT_String>&  new_vals,
                             const PLT_HttpRequestContext&    context)
 {
-    std::string path(GoTvUrl::Decode(object_id));
+    std::string path(NlcUrl::Decode(object_id));
     CFileItem updated;
     updated.SetPath(path);
     CLog::Log(LOGINFO, "UPnP: OnUpdateObject: %s from %s", path.c_str(),
@@ -1191,7 +1191,7 @@ CUPnPServer::ServeFile(const NPT_HttpRequest&              request,
 
     if (URIUtils::IsURL(static_cast<const char*>(file_path)))
     {
-      GoTvUrl url(CTextureUtils::UnwrapImageURL(static_cast<const char*>(file_path)));
+      NlcUrl url(CTextureUtils::UnwrapImageURL(static_cast<const char*>(file_path)));
       std::string disp = "inline; filename=\"" + URIUtils::GetFileName(url) + "\"";
       response.GetHeaders().SetHeader("Content-Disposition", disp.c_str());
     }

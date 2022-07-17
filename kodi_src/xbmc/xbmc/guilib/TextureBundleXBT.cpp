@@ -62,7 +62,7 @@ void CTextureBundleXBT::CloseBundle()
 {
     if( m_XBTFReader != nullptr && m_XBTFReader->IsOpen() )
     {
-        XFILE::CXbtManager::GetInstance().Release(GoTvUrl(m_path));
+        XFILE::CXbtManager::GetInstance().Release(NlcUrl(m_path));
         CLog::Log( LOGDEBUG, "%s - Closed %sbundle", __FUNCTION__, m_themeBundle ? "theme " : "" );
     }
 }
@@ -102,7 +102,7 @@ bool CTextureBundleXBT::OpenBundle()
     m_path = CSpecialProtocol::TranslatePathConvertCase( m_path );
 
     // Load the texture file
-    if (!XFILE::CXbtManager::GetInstance().GetReader(GoTvUrl(m_path), m_XBTFReader))
+    if (!XFILE::CXbtManager::GetInstance().GetReader(NlcUrl(m_path), m_XBTFReader))
     {
         return false;
     }

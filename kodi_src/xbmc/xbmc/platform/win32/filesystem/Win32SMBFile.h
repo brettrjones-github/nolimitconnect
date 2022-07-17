@@ -17,16 +17,16 @@ namespace XFILE
   public:
     CWin32SMBFile();
     virtual ~CWin32SMBFile();
-    virtual bool Open(const GoTvUrl& url);
-    virtual bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false);
+    virtual bool Open(const NlcUrl& url);
+    virtual bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false);
 
-    virtual bool Delete(const GoTvUrl& url);
-    virtual bool Rename(const GoTvUrl& urlCurrentName, const GoTvUrl& urlNewName);
-    virtual bool SetHidden(const GoTvUrl& url, bool hidden);
-    virtual bool Exists(const GoTvUrl& url);
-    virtual int Stat(const GoTvUrl& url, struct __stat64* statData);
+    virtual bool Delete(const NlcUrl& url);
+    virtual bool Rename(const NlcUrl& urlCurrentName, const NlcUrl& urlNewName);
+    virtual bool SetHidden(const NlcUrl& url, bool hidden);
+    virtual bool Exists(const NlcUrl& url);
+    virtual int Stat(const NlcUrl& url, struct __stat64* statData);
   private:
-    static bool ConnectAndAuthenticate(const GoTvUrl& url);
+    static bool ConnectAndAuthenticate(const NlcUrl& url);
   };
 
 }

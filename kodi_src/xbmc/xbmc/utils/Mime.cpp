@@ -13,7 +13,7 @@
 #include "URIUtils.h"
 #include "music/tags/MusicInfoTag.h"
 #include "video/VideoInfoTag.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "filesystem/CurlFile.h"
 
@@ -524,7 +524,7 @@ std::string CMime::GetMimeType(const CFileItem &item)
   return GetMimeType(URIUtils::GetExtension(path));
 }
 
-std::string CMime::GetMimeType(const GoTvUrl &url, bool lookup)
+std::string CMime::GetMimeType(const NlcUrl &url, bool lookup)
 {
 
   std::string strMimeType;

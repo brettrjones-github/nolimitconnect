@@ -18,8 +18,8 @@ namespace XFILE
   public:
     ~CPosixFile() override;
     
-    bool Open(const GoTvUrl& url) override;
-    bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) override;
+    bool Open(const NlcUrl& url) override;
+    bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) override;
     void Close() override;
     
     ssize_t Read(void* lpBuf, size_t uiBufSize) override;
@@ -31,10 +31,10 @@ namespace XFILE
     void Flush() override;
     int IoControl(EIoControl request, void* param) override;
     
-    bool Delete(const GoTvUrl& url) override;
-    bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) override;
-    bool Exists(const GoTvUrl& url) override;
-    int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+    bool Delete(const NlcUrl& url) override;
+    bool Rename(const NlcUrl& url, const NlcUrl& urlnew) override;
+    bool Exists(const NlcUrl& url) override;
+    int Stat(const NlcUrl& url, struct __stat64* buffer) override;
     int Stat(struct __stat64* buffer) override;
 
   protected:

@@ -23,7 +23,7 @@
 #include "IWin32.h"
 #ifdef TARGET_OS_WINDOWS
 
-#include "GuiInterface/IGoTv.h" 
+#include "GuiInterface/INlc.h" 
 
 #include <dbghelp.h>
 #include <mmsystem.h>
@@ -46,7 +46,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "platform/win32/WIN32Util.h"
 
 #include "ServiceBroker.h"
@@ -69,7 +69,7 @@ LONG WINAPI CreateMiniDump( EXCEPTION_POINTERS* pEp )
 #endif // ENABLE_KODI
 
 //============================================================================
-IWin32::IWin32( IGoTv& gotv )
+IWin32::IWin32( INlc& gotv )
     : OsInterface( gotv )
     , m_AppRunningMutex( 0 )
 {

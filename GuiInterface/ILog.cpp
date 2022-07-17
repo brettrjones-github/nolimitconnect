@@ -1,7 +1,7 @@
 #include <QPushButton>
 
 #include "ILog.h"
-#include "IGoTv.h"
+#include "INlc.h"
 #include <CoreLib/VxDebug.h>
 
 //============================================================================

@@ -23,8 +23,8 @@
 #include "settings/MediaSourceSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
@@ -145,7 +145,7 @@ bool CGUIWindowGames::OnClick(int iItem, const std::string &player /* = "" */)
 
       // If zip file contains no games, assume it is a game
       CFileItemList items;
-      if (m_rootDir.GetDirectory(GoTvUrl(item->GetPath()), items))
+      if (m_rootDir.GetDirectory(NlcUrl(item->GetPath()), items))
       {
         if (items.Size() == 0)
           bIsGame = true;

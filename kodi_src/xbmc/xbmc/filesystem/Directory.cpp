@@ -22,7 +22,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogBusy.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "PasswordManager.h"
 
 using namespace XFILE;
@@ -35,11 +35,11 @@ private:
 
   struct CResult
   {
-    CResult(const GoTvUrl& dir, const GoTvUrl& listDir) : m_event(true), m_dir(dir), m_listDir(listDir), m_result(false) {}
+    CResult(const NlcUrl& dir, const NlcUrl& listDir) : m_event(true), m_dir(dir), m_listDir(listDir), m_result(false) {}
     CEvent        m_event;
     CFileItemList m_list;
-    GoTvUrl          m_dir;
-    GoTvUrl          m_listDir;
+    NlcUrl          m_dir;
+    NlcUrl          m_listDir;
     bool          m_result;
   };
 
@@ -66,7 +66,7 @@ private:
 
 public:
 
-  CGetDirectory(std::shared_ptr<IDirectory>& imp, const GoTvUrl& dir, const GoTvUrl& listDir)
+  CGetDirectory(std::shared_ptr<IDirectory>& imp, const NlcUrl& dir, const NlcUrl& listDir)
     : m_result(new CResult(dir, listDir))
   {
     m_id = CJobManager::GetInstance().AddJob(new CGetJob(imp, m_result)
@@ -119,7 +119,7 @@ bool CDirectory::GetDirectory(const std::string& strPath, CFileItemList &items, 
   CHints hints;
   hints.flags = flags;
   hints.mask = strMask;
-  const GoTvUrl pathToUrl(strPath);
+  const NlcUrl pathToUrl(strPath);
   return GetDirectory(pathToUrl, items, hints);
 }
 
@@ -129,17 +129,17 @@ bool CDirectory::GetDirectory(const std::string& strPath, std::shared_ptr<IDirec
   CHints hints;
   hints.flags = flags;
   hints.mask = strMask;
-  const GoTvUrl pathToUrl(strPath);
+  const NlcUrl pathToUrl(strPath);
   return GetDirectory(pathToUrl, pDirectory, items, hints);
 }
 
 bool CDirectory::GetDirectory(const std::string& strPath, CFileItemList &items, const CHints &hints)
 {
-  const GoTvUrl pathToUrl(strPath);
+  const NlcUrl pathToUrl(strPath);
   return GetDirectory(pathToUrl, items, hints);
 }
 
-bool CDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items, const std::string &strMask, int flags)
+bool CDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items, const std::string &strMask, int flags)
 {
   CHints hints;
   hints.flags = flags;
@@ -147,19 +147,19 @@ bool CDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items, const st
   return GetDirectory(url, items, hints);
 }
 
-bool CDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items, const CHints &hints)
+bool CDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items, const CHints &hints)
 {
-  GoTvUrl realURL = URIUtils::SubstitutePath(url);
+  NlcUrl realURL = URIUtils::SubstitutePath(url);
   std::shared_ptr<IDirectory> pDirectory(CDirectoryFactory::Create(realURL));
   return CDirectory::GetDirectory(url, pDirectory, items, hints);
 }
 
-bool CDirectory::GetDirectory(const GoTvUrl& url, std::shared_ptr<IDirectory> pDirectory,
+bool CDirectory::GetDirectory(const NlcUrl& url, std::shared_ptr<IDirectory> pDirectory,
                               CFileItemList &items, const CHints &hints)
 {
   try
   {
-    GoTvUrl realURL = URIUtils::SubstitutePath(url);
+    NlcUrl realURL = URIUtils::SubstitutePath(url);
     if (!pDirectory.get())
       return false;
 
@@ -176,7 +176,7 @@ bool CDirectory::GetDirectory(const GoTvUrl& url, std::shared_ptr<IDirectory> pD
       pDirectory->SetFlags(hints.flags);
 
       bool result = false, cancel = false;
-      GoTvUrl authUrl = GoTvUrl(realURL);
+      NlcUrl authUrl = NlcUrl(realURL);
 
       while (!result && !cancel)
       {
@@ -236,7 +236,7 @@ bool CDirectory::GetDirectory(const GoTvUrl& url, std::shared_ptr<IDirectory> pD
           for (int i = 0; i < items.Size(); ++i)
           {
             CFileItemPtr item = items[i];
-            GoTvUrl itemUrl = item->GetURL();
+            NlcUrl itemUrl = item->GetURL();
             itemUrl.SetDomain("");
             itemUrl.SetUserName("");
             itemUrl.SetPassword("");
@@ -308,13 +308,13 @@ bool CDirectory::GetDirectory(const GoTvUrl& url, std::shared_ptr<IDirectory> pD
 
 bool CDirectory::Create(const std::string& strPath)
 {
-  const GoTvUrl pathToUrl(strPath);
+  const NlcUrl pathToUrl(strPath);
   return Create(pathToUrl);
 }
 
-bool CDirectory::Create(const GoTvUrl& url)
+bool CDirectory::Create(const NlcUrl& url)
 {
-    GoTvUrl realURL;
+    NlcUrl realURL;
     try
     {
         realURL = URIUtils::SubstitutePath(url);
@@ -339,15 +339,15 @@ bool CDirectory::Create(const GoTvUrl& url)
 
 bool CDirectory::Exists(const std::string& strPath, bool bUseCache /* = true */)
 {
-  const GoTvUrl pathToUrl(strPath);
+  const NlcUrl pathToUrl(strPath);
   return Exists(pathToUrl, bUseCache);
 }
 
-bool CDirectory::Exists(const GoTvUrl& url, bool bUseCache /* = true */)
+bool CDirectory::Exists(const NlcUrl& url, bool bUseCache /* = true */)
 {
   try
   {
-    GoTvUrl realURL = URIUtils::SubstitutePath(url);
+    NlcUrl realURL = URIUtils::SubstitutePath(url);
     if (bUseCache)
     {
       bool bPathInCache;
@@ -377,21 +377,21 @@ bool CDirectory::Exists(const GoTvUrl& url, bool bUseCache /* = true */)
 
 bool CDirectory::Remove(const std::string& strPath)
 {
-  const GoTvUrl pathToUrl(strPath);
+  const NlcUrl pathToUrl(strPath);
   return Remove(pathToUrl);
 }
 
 bool CDirectory::RemoveRecursive(const std::string& strPath)
 {
-  return RemoveRecursive(GoTvUrl{ strPath });
+  return RemoveRecursive(NlcUrl{ strPath });
 }
 
-bool CDirectory::Remove(const GoTvUrl& url)
+bool CDirectory::Remove(const NlcUrl& url)
 {
   try
   {
-    GoTvUrl realURL = URIUtils::SubstitutePath(url);
-    GoTvUrl authUrl = realURL;
+    NlcUrl realURL = URIUtils::SubstitutePath(url);
+    NlcUrl authUrl = realURL;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -412,12 +412,12 @@ bool CDirectory::Remove(const GoTvUrl& url)
   return false;
 }
 
-bool CDirectory::RemoveRecursive(const GoTvUrl& url)
+bool CDirectory::RemoveRecursive(const NlcUrl& url)
 {
   try
   {
-    GoTvUrl realURL = URIUtils::SubstitutePath(url);
-    GoTvUrl authUrl = realURL;
+    NlcUrl realURL = URIUtils::SubstitutePath(url);
+    NlcUrl authUrl = realURL;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 

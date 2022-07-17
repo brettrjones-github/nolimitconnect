@@ -13,7 +13,7 @@
 #include "platform/win32/WIN32Util.h"
 #include "utils/SystemInfo.h"
 #include "utils/CharsetConverter.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 
 #include <Windows.h>
@@ -43,7 +43,7 @@ CWin32Directory::CWin32Directory(void)
 CWin32Directory::~CWin32Directory(void)
 {}
 
-bool CWin32Directory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CWin32Directory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   items.Clear();
 
@@ -110,7 +110,7 @@ bool CWin32Directory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CWin32Directory::Create(const GoTvUrl& url)
+bool CWin32Directory::Create(const NlcUrl& url)
 {
   auto nameW(prepareWin32DirectoryName(url.Get()));
   if (nameW.empty())
@@ -122,7 +122,7 @@ bool CWin32Directory::Create(const GoTvUrl& url)
   return true;
 }
 
-bool CWin32Directory::Exists(const GoTvUrl& url)
+bool CWin32Directory::Exists(const NlcUrl& url)
 {
   std::wstring nameW(prepareWin32DirectoryName(url.Get()));
   if (nameW.empty())
@@ -135,7 +135,7 @@ bool CWin32Directory::Exists(const GoTvUrl& url)
   return true;
 }
 
-bool CWin32Directory::Remove(const GoTvUrl& url)
+bool CWin32Directory::Remove(const NlcUrl& url)
 {
   std::wstring nameW(prepareWin32DirectoryName(url.Get()));
   if (nameW.empty())
@@ -147,7 +147,7 @@ bool CWin32Directory::Remove(const GoTvUrl& url)
   return !Exists(url);
 }
 
-bool CWin32Directory::RemoveRecursive(const GoTvUrl& url)
+bool CWin32Directory::RemoveRecursive(const NlcUrl& url)
 {
   std::string pathWithSlash(url.Get());
   if (!pathWithSlash.empty() && pathWithSlash.back() != '\\')
@@ -187,7 +187,7 @@ bool CWin32Directory::RemoveRecursive(const GoTvUrl& url)
         continue;
       }
 
-      if (!RemoveRecursive(GoTvUrl{ path }))
+      if (!RemoveRecursive(NlcUrl{ path }))
       {
         success = false;
         break;

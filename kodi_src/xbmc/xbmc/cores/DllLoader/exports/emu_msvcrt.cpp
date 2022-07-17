@@ -46,9 +46,9 @@
 #include "XTimeUtils.h"
 #endif
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/SpecialProtocol.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -799,7 +799,7 @@ extern "C"
     {
         char str[ 1024 ];
         int size = sizeof( str );
-        GoTvUrl url( CSpecialProtocol::TranslatePath( file ) );
+        NlcUrl url( CSpecialProtocol::TranslatePath( file ) );
         if( url.IsLocal() )
         {
             // move to CFile classes
@@ -958,7 +958,7 @@ extern "C"
 
     DIR *dll_opendir( const char *file )
     {
-        GoTvUrl url( CSpecialProtocol::TranslatePath( file ) );
+        NlcUrl url( CSpecialProtocol::TranslatePath( file ) );
         if( url.IsLocal() )
         { // Make sure the slashes are correct & translate the path
             return opendir( CUtil::ValidatePath( url.Get().c_str() ).c_str() );

@@ -14,7 +14,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "RegExp.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "video/VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "pictures/PictureInfoTag.h"

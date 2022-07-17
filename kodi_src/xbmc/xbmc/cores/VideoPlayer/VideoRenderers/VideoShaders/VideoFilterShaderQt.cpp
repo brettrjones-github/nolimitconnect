@@ -32,7 +32,7 @@
 #include "utils/GLUtils.h"
 #include "ConvolutionKernels.h"
 #include "rendering/qt/RenderSystemQt.h"
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 using namespace Shaders;
 
@@ -40,8 +40,8 @@ using namespace Shaders;
 // BaseVideoFilterShaderQt - base class for video filter shaders
 //////////////////////////////////////////////////////////////////////
 
-BaseVideoFilterShaderQt::BaseVideoFilterShaderQt( IGoTv& gotv )
-: m_IGoTv( gotv )
+BaseVideoFilterShaderQt::BaseVideoFilterShaderQt( INlc& gotv )
+: m_INlc( gotv )
 {
     m_ShaderMethod = SM_VID_FILTER_DEFAULT;
 #ifdef GL_RGBA16F_EXT
@@ -85,47 +85,47 @@ BaseVideoFilterShaderQt::BaseVideoFilterShaderQt( IGoTv& gotv )
 //============================================================================
 void BaseVideoFilterShaderQt::SetSourceTexture( GLint ytex ) //         { m_sourceTexUnit = ytex; }
 {
-    m_IGoTv.shaderSourceTexture( getShaderMethod(), ytex );
+    m_INlc.shaderSourceTexture( getShaderMethod(), ytex );
 }
 
 //============================================================================
 void BaseVideoFilterShaderQt::SetWidth( int w )//                      { m_width = w; m_stepX = w > 0 ? 1.0f / w : 0; }
 {
-    m_IGoTv.shaderSetWidth( getShaderMethod(), w );
+    m_INlc.shaderSetWidth( getShaderMethod(), w );
     float stepX = w > 0 ? 1.0f / w : 0;
-    m_IGoTv.shaderSetStepX( getShaderMethod(), stepX );
+    m_INlc.shaderSetStepX( getShaderMethod(), stepX );
 }
 
 //============================================================================
 void BaseVideoFilterShaderQt::SetHeight( int h )//                     { m_height = h; m_stepY = h > 0 ? 1.0f / h : 0; }
 {
-    m_IGoTv.shaderSetHeight( getShaderMethod(), h );
+    m_INlc.shaderSetHeight( getShaderMethod(), h );
     float stepY = h > 0 ? 1.0f / h : 0;
-    m_IGoTv.shaderSetStepY( getShaderMethod(), stepY );
+    m_INlc.shaderSetStepY( getShaderMethod(), stepY );
 }
 
 //============================================================================
 GLint BaseVideoFilterShaderQt::GetVertexLoc()//                        { return m_hVertex; }
 {
-    return m_IGoTv.shaderGetVertexLoc( getShaderMethod() );
+    return m_INlc.shaderGetVertexLoc( getShaderMethod() );
 }
 
 //============================================================================
 GLint BaseVideoFilterShaderQt::GetcoordLoc()//                         { return m_hcoord; }
 {
-    return m_IGoTv.shaderGetcoordLoc( getShaderMethod() );
+    return m_INlc.shaderGetcoordLoc( getShaderMethod() );
 }
 
 //============================================================================
 void BaseVideoFilterShaderQt::SetMatrices( const GLfloat *p, const GLfloat *m )// { m_proj = p; m_model = m; }
 {
-    m_IGoTv.shaderSetMatrices( getShaderMethod(), p, m );
+    m_INlc.shaderSetMatrices( getShaderMethod(), p, m );
 }
 
 //============================================================================
 void BaseVideoFilterShaderQt::SetAlpha( GLfloat alpha )//              { m_alpha = alpha; }
 {
-    m_IGoTv.shaderSetAlpha( getShaderMethod(), alpha );
+    m_INlc.shaderSetAlpha( getShaderMethod(), alpha );
 }
 
 void BaseVideoFilterShaderQt::OnCompiledAndLinked()
@@ -145,7 +145,7 @@ bool BaseVideoFilterShaderQt::OnEnabled()
     return true;
 }
 
-ConvolutionFilterShaderQt::ConvolutionFilterShaderQt( IGoTv& gotv, ESCALINGMETHOD method )
+ConvolutionFilterShaderQt::ConvolutionFilterShaderQt( INlc& gotv, ESCALINGMETHOD method )
 : BaseVideoFilterShaderQt( gotv )
 {
     m_method = method;

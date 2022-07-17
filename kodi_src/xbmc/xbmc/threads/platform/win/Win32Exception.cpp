@@ -12,7 +12,7 @@
 #include "Win32Exception.h"
 #include <dbghelp.h>
 #include <VersionHelpers.h>
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "WIN32Util.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"

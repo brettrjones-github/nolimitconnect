@@ -179,8 +179,8 @@
 
 /*************************** ENDIAN *****************************/
 
-/* Define GOTV_ARCH_BIGENDIAN to 1 if your processor stores words with the most
+/* Define NLC_ARCH_BIGENDIAN to 1 if your processor stores words with the most
 significant byte first (like Motorola and SPARC, unlike Intel). */
-//#define GOTV_ARCH_BIGENDIAN 1
+//#define NLC_ARCH_BIGENDIAN 1
 
 #endif // LIBSSL_CONFIG_WINDOWS_H

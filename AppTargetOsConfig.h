@@ -11,7 +11,7 @@
 # elif defined(__ANDROID__) || defined(_M_ARM)
 #  define TARGET_OS_ANDROID
 # elif defined( TARGET_OS_APPLE )
-echo GoTv Target OS Config error - apple not supported
+echo Nlc Target OS Config error - apple not supported
 # endif // defined(WIN32) || defined(_WIN32) || defined(_WINDOWS)  || defined(_M_X64) || defined(__x86_64__) || defined(_M_IX86) || defined(__i386__)
 #endif // #if !define(TARGET_OS_WINDOWS) && !define(TARGET_OS_ANDROID) && !define(TARGET_OS_LINUX)
 

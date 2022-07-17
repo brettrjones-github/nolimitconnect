@@ -36,7 +36,7 @@ void logCallback(void *data,
 {
     Q_UNUSED(ctx)
 
-    GoTvPtoPInstance *instance = static_cast<GoTvPtoPInstance *>(data);
+    NlcPtoPInstance *instance = static_cast<NlcPtoPInstance *>(data);
     if (instance->logLevel() > level) {
         return;
     }
@@ -52,26 +52,26 @@ void logCallback(void *data,
     message.prepend("libgotvptop: ");
 
     switch (level) {
-    case GoTvPtoP::ErrorLevel:
+    case NlcPtoP::ErrorLevel:
         qCritical(message.toUtf8().data(), NULL);
         break;
-    case GoTvPtoP::WarningLevel:
+    case NlcPtoP::WarningLevel:
         qWarning(message.toUtf8().data(), NULL);
         break;
-    case GoTvPtoP::NoticeLevel:
-    case GoTvPtoP::DebugLevel:
+    case NlcPtoP::NoticeLevel:
+    case NlcPtoP::DebugLevel:
     default:
         qDebug(message.toUtf8().data(), NULL);
         break;
     }
 }
 
-GoTvPtoPInstance::GoTvPtoPInstance(const QStringList &args,
+NlcPtoPInstance::NlcPtoPInstance(const QStringList &args,
                          QObject *parent)
     : QObject(parent),
       _gotvptopInstance(0),
       _status(false),
-      _logLevel(GoTvPtoP::ErrorLevel)
+      _logLevel(NlcPtoP::ErrorLevel)
 {
 // Convert arguments to required format
 #if defined(Q_OS_WIN32) // Will be removed on Windows if confirmed working
@@ -87,10 +87,10 @@ GoTvPtoPInstance::GoTvPtoPInstance(const QStringList &args,
     // Create new libgotvptop instance
     _gotvptopInstance = libgotvptop_new(args.count(), argv);
 
-    qRegisterMetaType<GoTvPtoP::Meta>("GoTvPtoP::Meta");
-    qRegisterMetaType<GoTvPtoP::State>("GoTvPtoP::State");
+    qRegisterMetaType<NlcPtoP::Meta>("NlcPtoP::Meta");
+    qRegisterMetaType<NlcPtoP::State>("NlcPtoP::State");
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     // Check if instance is running
     if (_gotvptopInstance) {
@@ -104,34 +104,34 @@ GoTvPtoPInstance::GoTvPtoPInstance(const QStringList &args,
     }
 }
 
-GoTvPtoPInstance::~GoTvPtoPInstance()
+NlcPtoPInstance::~NlcPtoPInstance()
 {
     if (_status && _gotvptopInstance) {
         libgotvptop_release(_gotvptopInstance);
     }
 }
 
-libgotvptop_instance_t *GoTvPtoPInstance::core()
+libgotvptop_instance_t *NlcPtoPInstance::core()
 {
     return _gotvptopInstance;
 }
 
-bool GoTvPtoPInstance::status() const
+bool NlcPtoPInstance::status() const
 {
     return _status;
 }
 
-GoTvPtoP::LogLevel GoTvPtoPInstance::logLevel() const
+NlcPtoP::LogLevel NlcPtoPInstance::logLevel() const
 {
     return _logLevel;
 }
 
-void GoTvPtoPInstance::setLogLevel(GoTvPtoP::LogLevel level)
+void NlcPtoPInstance::setLogLevel(NlcPtoP::LogLevel level)
 {
     _logLevel = level;
 }
 
-QString GoTvPtoPInstance::libVersion()
+QString NlcPtoPInstance::libVersion()
 {
     QString version;
 #if defined(LIBGOTVQT_VERSION)
@@ -149,7 +149,7 @@ QString GoTvPtoPInstance::libVersion()
     return version;
 }
 
-int GoTvPtoPInstance::libVersionMajor()
+int NlcPtoPInstance::libVersionMajor()
 {
     int version = -1;
 #if defined(LIBGOTVQT_VERSION_MAJOR)
@@ -159,7 +159,7 @@ int GoTvPtoPInstance::libVersionMajor()
     return version;
 }
 
-int GoTvPtoPInstance::libVersionMinor()
+int NlcPtoPInstance::libVersionMinor()
 {
     int version = -1;
 #if defined(LIBGOTVQT_VERSION_MINOR)
@@ -169,25 +169,25 @@ int GoTvPtoPInstance::libVersionMinor()
     return version;
 }
 
-QString GoTvPtoPInstance::changeset()
+QString NlcPtoPInstance::changeset()
 {
     // Returns libgotvptop changeset
     return QString(libgotvptop_get_changeset());
 }
 
-QString GoTvPtoPInstance::compiler()
+QString NlcPtoPInstance::compiler()
 {
     // Returns libgotvptop compiler version
     return QString(libgotvptop_get_compiler());
 }
 
-QString GoTvPtoPInstance::version()
+QString NlcPtoPInstance::version()
 {
     // Returns libgotvptop version
     return QString(libgotvptop_get_version());
 }
 
-void GoTvPtoPInstance::setUserAgent(const QString &application,
+void NlcPtoPInstance::setUserAgent(const QString &application,
                                const QString &version)
 {
     QString applicationOutput = application + " " + version;
@@ -195,24 +195,24 @@ void GoTvPtoPInstance::setUserAgent(const QString &application,
     libgotvptop_set_user_agent(_gotvptopInstance, applicationOutput.toUtf8().data(), httpOutput.toUtf8().data());
 }
 
-void GoTvPtoPInstance::setAppId(const QString &id,
+void NlcPtoPInstance::setAppId(const QString &id,
                            const QString &version,
                            const QString &icon)
 {
     libgotvptop_set_app_id(_gotvptopInstance, id.toUtf8().data(), version.toUtf8().data(), icon.toUtf8().data());
 }
 
-QList<GoTvPtoPModuleDescription *> GoTvPtoPInstance::audioFilterList() const
+QList<NlcPtoPModuleDescription *> NlcPtoPInstance::audioFilterList() const
 {
     libgotvptop_module_description_t *original = libgotvptop_audio_filter_list_get(_gotvptopInstance);
     if (original == NULL) {
-        return QList<GoTvPtoPModuleDescription *>(); // LCOV_EXCL_LINE
+        return QList<NlcPtoPModuleDescription *>(); // LCOV_EXCL_LINE
     }
 
     libgotvptop_module_description_t *list = original;
-    QList<GoTvPtoPModuleDescription *> audioFilters;
+    QList<NlcPtoPModuleDescription *> audioFilters;
     do {
-        GoTvPtoPModuleDescription *module = new GoTvPtoPModuleDescription(GoTvPtoPModuleDescription::AudioFilter, list->psz_name);
+        NlcPtoPModuleDescription *module = new NlcPtoPModuleDescription(NlcPtoPModuleDescription::AudioFilter, list->psz_name);
         module->setLongName(list->psz_longname);
         module->setShortName(list->psz_shortname);
         module->setHelp(list->psz_help);
@@ -226,17 +226,17 @@ QList<GoTvPtoPModuleDescription *> GoTvPtoPInstance::audioFilterList() const
     return audioFilters;
 }
 
-QList<GoTvPtoPModuleDescription *> GoTvPtoPInstance::videoFilterList() const
+QList<NlcPtoPModuleDescription *> NlcPtoPInstance::videoFilterList() const
 {
     libgotvptop_module_description_t *original = libgotvptop_video_filter_list_get(_gotvptopInstance);
     if (original == NULL) {
-        return QList<GoTvPtoPModuleDescription *>(); // LCOV_EXCL_LINE
+        return QList<NlcPtoPModuleDescription *>(); // LCOV_EXCL_LINE
     }
 
     libgotvptop_module_description_t *list = original;
-    QList<GoTvPtoPModuleDescription *> videoFilters;
+    QList<NlcPtoPModuleDescription *> videoFilters;
     do {
-        GoTvPtoPModuleDescription *module = new GoTvPtoPModuleDescription(GoTvPtoPModuleDescription::VideoFilter, list->psz_name);
+        NlcPtoPModuleDescription *module = new NlcPtoPModuleDescription(NlcPtoPModuleDescription::VideoFilter, list->psz_name);
         module->setLongName(list->psz_longname);
         module->setShortName(list->psz_shortname);
         module->setHelp(list->psz_help);

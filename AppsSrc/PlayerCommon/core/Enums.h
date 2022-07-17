@@ -26,11 +26,11 @@
 #include "SharedExportCore.h"
 
 /*!
-    \class GoTvPtoP Enums.h core/Enums.h
+    \class NlcPtoP Enums.h core/Enums.h
     \ingroup GOTVQtCore
     \brief Common enumerations
 */
-class GOTVQT_CORE_EXPORT GoTvPtoP : public QObject // LCOV_EXCL_LINE
+class GOTVQT_CORE_EXPORT NlcPtoP : public QObject // LCOV_EXCL_LINE
 {
     Q_OBJECT
 
@@ -58,7 +58,7 @@ public:
 
         \param parent object parent (QObject *)
     */
-    explicit GoTvPtoP(QObject *parent = 0);
+    explicit NlcPtoP(QObject *parent = 0);
 
     // Enums
     /*!
@@ -335,10 +335,10 @@ public:
 
     /*!
         \brief Aspect and crop ratios converter to QSizeF
-        \param ratio aspect or crop ratio (GoTvPtoP::Ratio)
+        \param ratio aspect or crop ratio (NlcPtoP::Ratio)
         \return two-dimensional object using floating point precision (QSizeF)
     */
-    static QSizeF ratioSize(const GoTvPtoP::Ratio &ratio);
+    static QSizeF ratioSize(const NlcPtoP::Ratio &ratio);
 
     /*!
         \brief Scale floats

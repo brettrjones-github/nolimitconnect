@@ -57,7 +57,7 @@
 #include "XbtDirectory.h"
 #include "ZipDirectory.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "RSSDirectory.h"
 #ifdef HAS_ZEROCONF
 #include "ZeroconfDirectory.h"
@@ -88,7 +88,7 @@ using namespace XFILE;
  \return IDirectory object to access the directories on the share.
  \sa IDirectory
  */
-IDirectory* CDirectoryFactory::Create(const GoTvUrl& url)
+IDirectory* CDirectoryFactory::Create(const NlcUrl& url)
 {
   if (!CWakeOnAccess::GetInstance().WakeUpHost(url))
     return NULL;

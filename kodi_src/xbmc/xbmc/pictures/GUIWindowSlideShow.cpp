@@ -12,7 +12,7 @@
 #include "ServiceBroker.h"
 #include "messaging/ApplicationMessenger.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/TextureManager.h"
 #include "guilib/GUILabelControl.h"
@@ -1127,7 +1127,7 @@ void CGUIWindowSlideShow::OnLoadPic(int iPic, int iSlideNumber, const std::strin
     m_Image[iPic].m_bIsComic = false;
     if (URIUtils::IsInRAR(m_slides.at(m_iCurrentSlide)->GetPath()) || URIUtils::IsInZIP(m_slides.at(m_iCurrentSlide)->GetPath())) // move to top for cbr/cbz
     {
-      GoTvUrl url(m_slides.at(m_iCurrentSlide)->GetPath());
+      NlcUrl url(m_slides.at(m_iCurrentSlide)->GetPath());
       std::string strHostName = url.GetHostName();
       if (URIUtils::HasExtension(strHostName, ".cbr|.cbz"))
       {

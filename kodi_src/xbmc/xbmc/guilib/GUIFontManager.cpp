@@ -24,7 +24,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 
 #ifdef TARGET_POSIX
@@ -101,7 +101,7 @@ CGUIFont* GUIFontManager::LoadTTF(const std::string& strFontName, const std::str
 
   // First try to load the font from the skin
   std::string strPath;
-  if (!GoTvUrl::IsFullPath(strFilename))
+  if (!NlcUrl::IsFullPath(strFilename))
   {
     strPath = URIUtils::AddFileToFolder(CServiceBroker::GetWinSystem()->GetGfxContext().GetMediaDir(), "fonts", strFilename);
   }

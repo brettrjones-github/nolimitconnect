@@ -17,7 +17,7 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 #ifdef HAVE_QT_GUI
-# include "GuiInterface/IGoTv.h"
+# include "GuiInterface/INlc.h"
 #endif // HAVE_QT_GUI
 
  //////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ bool CFrameBufferObject::Initialize()
 
     Cleanup();
 #ifdef HAVE_QT_GUI
-    IGoTv::getIGoTv().frameBufferGen( 1, &m_fbo );
+    INlc::getINlc().frameBufferGen( 1, &m_fbo );
 #else
     glGenFramebuffers( 1, &m_fbo );
 #endif // HAVE_QT_GUI
@@ -71,7 +71,7 @@ void CFrameBufferObject::Cleanup()
     if( m_fbo )
     {
 #ifdef HAVE_QT_GUI
-        IGoTv::getIGoTv().frameBufferDelete( 1, &m_fbo );
+        INlc::getINlc().frameBufferDelete( 1, &m_fbo );
 #else
         glDeleteFramebuffers( 1, &m_fbo );
 #endif // HAVE_QT_GUI
@@ -92,7 +92,7 @@ bool CFrameBufferObject::CreateAndBindToTexture( GLenum target, int width, int h
     if( !IsValid() )
         return false;
 
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
     if( m_texid )
         gotv.glFuncDeleteTextures( 1, &m_texid );
@@ -160,7 +160,7 @@ bool CFrameBufferObject::CreateAndBindToTexture( GLenum target, int width, int h
 
 void CFrameBufferObject::SetFiltering( GLenum target, GLenum mode )
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
     gotv.glFuncBindTexture( target, m_texid );
     gotv.glFuncTexParameteri( target, GL_TEXTURE_MAG_FILTER, mode );
     gotv.glFuncTexParameteri( target, GL_TEXTURE_MIN_FILTER, mode );
@@ -172,7 +172,7 @@ bool CFrameBufferObject::BeginRender()
     if( IsValid() && IsBound() )
     {
 #ifdef HAVE_QT_GUI
-        IGoTv::getIGoTv().frameBufferBind( m_fbo );
+        INlc::getINlc().frameBufferBind( m_fbo );
 #else
        glBindFramebuffer( GL_FRAMEBUFFER, m_fbo );
 #endif // HAVE_QT_GUI
@@ -187,7 +187,7 @@ void CFrameBufferObject::EndRender() const
     if( IsValid() )
     {
 #ifdef HAVE_QT_GUI
-        IGoTv::getIGoTv().frameBufferBind( 0 );
+        INlc::getINlc().frameBufferBind( 0 );
 #else
         glBindFramebuffer( GL_FRAMEBUFFER, 0 );
 #endif // HAVE_QT_GUI

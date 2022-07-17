@@ -1,2 +1,2 @@
 #pragma once
-#include <GoTvDependLibraries.h>
+#include <NlcDependLibraries.h>

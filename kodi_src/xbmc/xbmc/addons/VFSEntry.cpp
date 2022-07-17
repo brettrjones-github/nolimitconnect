@@ -6,7 +6,7 @@
  */
 
 #include "VFSEntry.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "addons/binary-addons/BinaryAddonBase.h"
 #include "addons/binary-addons/BinaryAddonManager.h"
 #include "ServiceBroker.h"
@@ -104,7 +104,7 @@ void CVFSAddonCache::Update()
 class CVFSURLWrapper
 {
   public:
-    explicit CVFSURLWrapper(const GoTvUrl& url2)
+    explicit CVFSURLWrapper(const NlcUrl& url2)
     {
       m_strings.push_back(url2.Get());
       m_strings.push_back(url2.GetDomain());
@@ -170,7 +170,7 @@ CVFSEntry::~CVFSEntry()
   DestroyInstance();
 }
 
-void* CVFSEntry::Open(const GoTvUrl& url)
+void* CVFSEntry::Open(const NlcUrl& url)
 {
   if (!m_struct.toAddon.open)
     return nullptr;
@@ -179,7 +179,7 @@ void* CVFSEntry::Open(const GoTvUrl& url)
   return m_struct.toAddon.open(&m_struct, &url2.url);
 }
 
-void* CVFSEntry::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+void* CVFSEntry::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 {
   if (!m_struct.toAddon.open_for_write)
     return nullptr;
@@ -188,7 +188,7 @@ void* CVFSEntry::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
   return m_struct.toAddon.open_for_write(&m_struct, &url2.url, bOverWrite);
 }
 
-bool CVFSEntry::Exists(const GoTvUrl& url)
+bool CVFSEntry::Exists(const NlcUrl& url)
 {
   if (!m_struct.toAddon.exists)
     return false;
@@ -197,7 +197,7 @@ bool CVFSEntry::Exists(const GoTvUrl& url)
   return m_struct.toAddon.exists(&m_struct, &url2.url);
 }
 
-int CVFSEntry::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CVFSEntry::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   if (!m_struct.toAddon.stat)
     return -1;
@@ -276,7 +276,7 @@ int CVFSEntry::IoControl(void* ctx, XFILE::EIoControl request, void* param)
   return m_struct.toAddon.io_control(&m_struct, ctx, request, param);
 }
 
-bool CVFSEntry::Delete(const GoTvUrl& url)
+bool CVFSEntry::Delete(const NlcUrl& url)
 {
   if (!m_struct.toAddon.delete_it)
     return false;
@@ -285,7 +285,7 @@ bool CVFSEntry::Delete(const GoTvUrl& url)
   return m_struct.toAddon.delete_it(&m_struct, &url2.url);
 }
 
-bool CVFSEntry::Rename(const GoTvUrl& url, const GoTvUrl& url2)
+bool CVFSEntry::Rename(const NlcUrl& url, const NlcUrl& url2)
 {
   if (!m_struct.toAddon.rename)
     return false;
@@ -307,7 +307,7 @@ void CVFSEntry::DisconnectAll()
     m_struct.toAddon.disconnect_all(&m_struct);
 }
 
-bool CVFSEntry::DirectoryExists(const GoTvUrl& url)
+bool CVFSEntry::DirectoryExists(const NlcUrl& url)
 {
   if (!m_struct.toAddon.directory_exists)
     return false;
@@ -316,7 +316,7 @@ bool CVFSEntry::DirectoryExists(const GoTvUrl& url)
   return m_struct.toAddon.directory_exists(&m_struct, &url2.url);
 }
 
-bool CVFSEntry::RemoveDirectory(const GoTvUrl& url)
+bool CVFSEntry::RemoveDirectory(const NlcUrl& url)
 {
   if (!m_struct.toAddon.remove_directory)
     return false;
@@ -325,7 +325,7 @@ bool CVFSEntry::RemoveDirectory(const GoTvUrl& url)
   return m_struct.toAddon.remove_directory(&m_struct, &url2.url);
 }
 
-bool CVFSEntry::CreateDirectory(const GoTvUrl& url)
+bool CVFSEntry::CreateDirectory(const NlcUrl& url)
 {
   if (!m_struct.toAddon.create_directory)
     return false;
@@ -364,7 +364,7 @@ static void VFSDirEntriesToCFileItemList(int num_entries,
   }
 }
 
-bool CVFSEntry::GetDirectory(const GoTvUrl& url, CFileItemList& items,
+bool CVFSEntry::GetDirectory(const NlcUrl& url, CFileItemList& items,
                              void* ctx)
 {
   if (!m_struct.toAddon.get_directory || !m_struct.toAddon.free_directory)
@@ -389,7 +389,7 @@ bool CVFSEntry::GetDirectory(const GoTvUrl& url, CFileItemList& items,
   return ret;
 }
 
-bool CVFSEntry::ContainsFiles(const GoTvUrl& url, CFileItemList& items)
+bool CVFSEntry::ContainsFiles(const NlcUrl& url, CFileItemList& items)
 {
   if (!m_struct.toAddon.contains_files || !m_struct.toAddon.free_directory)
     return false;
@@ -422,24 +422,24 @@ CVFSEntryIFileWrapper::~CVFSEntryIFileWrapper()
   Close();
 }
 
-bool CVFSEntryIFileWrapper::Open(const GoTvUrl& url)
+bool CVFSEntryIFileWrapper::Open(const NlcUrl& url)
 {
   m_context = m_addon->Open(url);
   return m_context != NULL;
 }
 
-bool CVFSEntryIFileWrapper::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+bool CVFSEntryIFileWrapper::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 {
   m_context = m_addon->OpenForWrite(url, bOverWrite);
   return m_context != NULL;
 }
 
-bool CVFSEntryIFileWrapper::Exists(const GoTvUrl& url)
+bool CVFSEntryIFileWrapper::Exists(const NlcUrl& url)
 {
   return m_addon->Exists(url);
 }
 
-int CVFSEntryIFileWrapper::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CVFSEntryIFileWrapper::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   return m_addon->Stat(url, buffer);
 }
@@ -514,12 +514,12 @@ int CVFSEntryIFileWrapper::IoControl(XFILE::EIoControl request, void* param)
   return m_addon->IoControl(m_context, request, param);
 }
 
-bool CVFSEntryIFileWrapper::Delete(const GoTvUrl& url)
+bool CVFSEntryIFileWrapper::Delete(const NlcUrl& url)
 {
   return m_addon->Delete(url);
 }
 
-bool CVFSEntryIFileWrapper::Rename(const GoTvUrl& url, const GoTvUrl& url2)
+bool CVFSEntryIFileWrapper::Rename(const NlcUrl& url, const NlcUrl& url2)
 {
   return m_addon->Rename(url, url2);
 }
@@ -529,22 +529,22 @@ CVFSEntryIDirectoryWrapper::CVFSEntryIDirectoryWrapper(VFSEntryPtr ptr) :
 {
 }
 
-bool CVFSEntryIDirectoryWrapper::Exists(const GoTvUrl& url)
+bool CVFSEntryIDirectoryWrapper::Exists(const NlcUrl& url)
 {
   return m_addon->DirectoryExists(url);
 }
 
-bool CVFSEntryIDirectoryWrapper::Remove(const GoTvUrl& url)
+bool CVFSEntryIDirectoryWrapper::Remove(const NlcUrl& url)
 {
   return m_addon->RemoveDirectory(url);
 }
 
-bool CVFSEntryIDirectoryWrapper::Create(const GoTvUrl& url)
+bool CVFSEntryIDirectoryWrapper::Create(const NlcUrl& url)
 {
   return m_addon->CreateDirectory(url);
 }
 
-bool CVFSEntryIDirectoryWrapper::GetDirectory(const GoTvUrl& url,
+bool CVFSEntryIDirectoryWrapper::GetDirectory(const NlcUrl& url,
                                               CFileItemList& items)
 {
   return m_addon->GetDirectory(url, items, this);
@@ -597,10 +597,10 @@ void CVFSEntryIDirectoryWrapper::SetErrorDialog2(const char* heading,
 void CVFSEntryIDirectoryWrapper::DoRequireAuthentication(void* ctx,
                                                          const char* url)
 {
-  static_cast<CVFSEntryIDirectoryWrapper*>(ctx)->RequireAuthentication2(GoTvUrl(url));
+  static_cast<CVFSEntryIDirectoryWrapper*>(ctx)->RequireAuthentication2(NlcUrl(url));
 }
 
-void CVFSEntryIDirectoryWrapper::RequireAuthentication2(const GoTvUrl& url)
+void CVFSEntryIDirectoryWrapper::RequireAuthentication2(const NlcUrl& url)
 {
   if (m_flags & XFILE::DIR_FLAG_ALLOW_PROMPT)
     RequireAuthentication(url);

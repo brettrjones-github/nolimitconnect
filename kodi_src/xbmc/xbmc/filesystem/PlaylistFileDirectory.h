@@ -17,9 +17,9 @@ namespace XFILE
   public:
     CPlaylistFileDirectory();
     ~CPlaylistFileDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override;
-    bool ContainsFiles(const GoTvUrl& url) override;
-    bool Remove(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items) override;
+    bool ContainsFiles(const NlcUrl& url) override;
+    bool Remove(const NlcUrl& url) override;
     bool AllowAll() const override { return true; }
   };
 }

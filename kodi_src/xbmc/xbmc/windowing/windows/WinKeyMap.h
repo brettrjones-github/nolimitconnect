@@ -13,7 +13,7 @@
 #include "ServiceBroker.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 namespace KODI
 {

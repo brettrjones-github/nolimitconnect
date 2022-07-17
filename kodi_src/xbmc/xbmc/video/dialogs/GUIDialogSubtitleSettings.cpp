@@ -32,7 +32,7 @@
 #include "settings/MediaSourceSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/LangCodeExpander.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
@@ -115,7 +115,7 @@ std::string CGUIDialogSubtitleSettings::BrowseForSubtitle()
 
   std::string strPath;
   if (URIUtils::IsInRAR(g_application.CurrentFileItem().GetPath()) || URIUtils::IsInZIP(g_application.CurrentFileItem().GetPath()))
-    strPath = GoTvUrl(g_application.CurrentFileItem().GetPath()).GetHostName();
+    strPath = NlcUrl(g_application.CurrentFileItem().GetPath()).GetHostName();
   else
     strPath = g_application.CurrentFileItem().GetPath();
 

@@ -14,7 +14,7 @@
 #include "music/dialogs/GUIDialogInfoProviderSettings.h"
 #include "music/dialogs/GUIDialogMusicInfo.h"
 #include "playlists/PlayListFactory.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "playlists/PlayListM3U.h"
 #include "Application.h"
 #include "PlayListPlayer.h"
@@ -50,7 +50,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "music/infoscanner/MusicInfoScanner.h"
 #include "guilib/guiinfo/GUIInfoLabels.h"
 #include "cores/IPlayer.h"
@@ -897,7 +897,7 @@ void CGUIWindowMusicBase::OnRetrieveMusicInfo(CFileItemList& items)
 
       if (!bProgressVisible && elapsed>1500 && m_dlgProgress)
       { // tag loading takes more then 1.5 secs, show a progress dialog
-        GoTvUrl url(items.GetPath());
+        NlcUrl url(items.GetPath());
         m_dlgProgress->SetHeading(CVariant{189});
         m_dlgProgress->SetLine(0, CVariant{505});
         m_dlgProgress->SetLine(1, CVariant{""});

@@ -24,37 +24,37 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPModuleDescription;
+class NlcPtoPModuleDescription;
 
 struct libgotvptop_instance_t;
 
 /*!
-    \class GoTvPtoPInstance Instance.h core/Instance.h
+    \class NlcPtoPInstance Instance.h core/Instance.h
     \ingroup GOTVQtCore
     \brief Main instance
 
     A basic Instance manager for GOTV-Qt library.
     It provides main instance controls.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPInstance : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPInstance : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPInstance constructor.
+        \brief NlcPtoPInstance constructor.
 
         This is mandatory for using GOTV-Qt and all its other classes.
 
         \param args libgotvptop arguments (QStringList)
         \param parent Instance's parent object (QObject *)
     */
-    explicit GoTvPtoPInstance(const QStringList &args,
+    explicit NlcPtoPInstance(const QStringList &args,
                          QObject *parent = NULL);
 
     /*!
-        GoTvPtoPInstance destructor
+        NlcPtoPInstance destructor
     */
-    ~GoTvPtoPInstance();
+    ~NlcPtoPInstance();
 
     /*!
         \brief Returns libgotvptop instance object.
@@ -69,19 +69,19 @@ public:
     bool status() const;
 
     /*!
-        \brief Returns current log level (default GoTvPtoP::ErrorLevel)
+        \brief Returns current log level (default NlcPtoP::ErrorLevel)
         \return log level
         \since GOTV-Qt 1.1
     */
-    GoTvPtoP::LogLevel logLevel() const;
+    NlcPtoP::LogLevel logLevel() const;
 
     /*!
         \brief Set current log level
         \param level desired log level
-        \see GoTvPtoP::LogLevel
+        \see NlcPtoP::LogLevel
         \since GOTV-Qt 1.1
     */
-    void setLogLevel(GoTvPtoP::LogLevel level);
+    void setLogLevel(NlcPtoP::LogLevel level);
 
     /*!
         \brief GOTV-Qt version info
@@ -150,18 +150,18 @@ public:
         \brief List audio filter modules
         \return audio filter module description list
     */
-    QList<GoTvPtoPModuleDescription *> audioFilterList() const;
+    QList<NlcPtoPModuleDescription *> audioFilterList() const;
 
     /*!
         \brief List video filter modules
         \return video filter module description list
     */
-    QList<GoTvPtoPModuleDescription *> videoFilterList() const;
+    QList<NlcPtoPModuleDescription *> videoFilterList() const;
 
 private:
     libgotvptop_instance_t *_gotvptopInstance;
     bool _status;
-    GoTvPtoP::LogLevel _logLevel;
+    NlcPtoP::LogLevel _logLevel;
 };
 
 #endif // GOTVQT_GOTVINSTANCE_H_

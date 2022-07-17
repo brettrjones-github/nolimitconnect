@@ -12,7 +12,7 @@
 #include "GUIInfoManager.h"
 #include "InputOperations.h"
 #include "LangInfoKodi.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "input/Key.h"
 #include "messaging/ApplicationMessenger.h"
 #include "utils/log.h"

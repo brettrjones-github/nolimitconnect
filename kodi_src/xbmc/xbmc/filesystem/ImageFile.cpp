@@ -7,7 +7,7 @@
  */
 
 #include "ImageFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "TextureCache.h"
 
 using namespace XFILE;
@@ -19,7 +19,7 @@ CImageFile::~CImageFile(void)
   Close();
 }
 
-bool CImageFile::Open(const GoTvUrl& url)
+bool CImageFile::Open(const NlcUrl& url)
 {
   std::string file = url.Get();
   bool needsRecaching = false;
@@ -36,7 +36,7 @@ bool CImageFile::Open(const GoTvUrl& url)
   return false;
 }
 
-bool CImageFile::Exists(const GoTvUrl& url)
+bool CImageFile::Exists(const NlcUrl& url)
 {
   bool needsRecaching = false;
   std::string cachedFile = CTextureCache::GetInstance().CheckCachedImage(url.Get(), needsRecaching);
@@ -50,7 +50,7 @@ bool CImageFile::Exists(const GoTvUrl& url)
   return CFile::Exists(url.GetHostName());
 }
 
-int CImageFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CImageFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   bool needsRecaching = false;
   std::string cachedFile = CTextureCache::GetInstance().CheckCachedImage(url.Get(), needsRecaching);

@@ -29,12 +29,12 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPAudio;
-class GoTvPtoPEqualizer;
-class GoTvPtoPInstance;
-class GoTvPtoPMedia;
-class GoTvPtoPVideo;
-class GoTvPtoPVideoDelegate;
+class NlcPtoPAudio;
+class NlcPtoPEqualizer;
+class NlcPtoPInstance;
+class NlcPtoPMedia;
+class NlcPtoPVideo;
+class NlcPtoPVideoDelegate;
 
 struct libgotvptop_event_t;
 struct libgotvptop_event_manager_t;
@@ -42,30 +42,30 @@ struct libgotvptop_media_t;
 struct libgotvptop_media_player_t;
 
 /*!
-    \class GoTvPtoPMediaPlayer MediaPlayer.h core/MediaPlayer.h
+    \class NlcPtoPMediaPlayer MediaPlayer.h core/MediaPlayer.h
     \ingroup GOTVQtCore
     \brief Media Player
 
     A basic MediaPlayer manager for GOTV-Qt library.
     It provides main playback controls.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPMediaPlayer : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPMediaPlayer : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPMediaPlayer constructor.
+        \brief NlcPtoPMediaPlayer constructor.
 
         This is mandatory to use libgotvptop playback functions.
 
-        \param instance instance object (GoTvPtoPInstance *)
+        \param instance instance object (NlcPtoPInstance *)
     */
-    explicit GoTvPtoPMediaPlayer(GoTvPtoPInstance *instance);
+    explicit NlcPtoPMediaPlayer(NlcPtoPInstance *instance);
 
     /*!
-        GoTvPtoPMediaPlayer destructor
+        NlcPtoPMediaPlayer destructor
     */
-    ~GoTvPtoPMediaPlayer();
+    ~NlcPtoPMediaPlayer();
 
     /*!
         \brief Returns libgotvptop media player object.
@@ -75,22 +75,22 @@ public:
 
     /*!
         \brief Returns audio manager object.
-        \return audio manager (GoTvPtoPAudio *)
+        \return audio manager (NlcPtoPAudio *)
     */
-    GoTvPtoPAudio *audio() const;
+    NlcPtoPAudio *audio() const;
 
     /*!
         \brief Returns video manager object.
-        \return video manager (GoTvPtoPVideo *)
+        \return video manager (NlcPtoPVideo *)
     */
-    GoTvPtoPVideo *video() const;
+    NlcPtoPVideo *video() const;
 
 #if LIBNO_LIMIT_VERSION >= 0x020200
     /*!
         \brief Returns equalizer object.
-        \return equalizer (GoTvPtoPEqualizer *)
+        \return equalizer (NlcPtoPEqualizer *)
     */
-    GoTvPtoPEqualizer *equalizer() const;
+    NlcPtoPEqualizer *equalizer() const;
 #endif
 
     /*!
@@ -101,9 +101,9 @@ public:
 
     /*!
         \brief Get current media object
-        \return media object (GoTvPtoPMedia *)
+        \return media object (NlcPtoPMedia *)
     */
-    GoTvPtoPMedia *currentMedia() const;
+    NlcPtoPMedia *currentMedia() const;
 
     /*!
         \brief Get current media core object
@@ -113,15 +113,15 @@ public:
 
     /*!
         \brief Open media file or stream. Any media should be playable and opened.
-        \param media object (GoTvPtoPMedia *)
+        \param media object (NlcPtoPMedia *)
     */
-    void open(GoTvPtoPMedia *media);
+    void open(NlcPtoPMedia *media);
 
     /*!
         \brief Just opens the media file or stream, do not starts playing the media.
-        \param media object (GoTvPtoPMedia *)
+        \param media object (NlcPtoPMedia *)
     */
-    void openOnly(GoTvPtoPMedia *media);
+    void openOnly(NlcPtoPMedia *media);
 
 public slots:
     /*! \brief Set the movie time (in ms).
@@ -143,9 +143,9 @@ public:
 
         Set video widget to be able to play video inside Qt interface.
 
-        \param widget video widget (GoTvPtoPVideoDelegate *)
+        \param widget video widget (NlcPtoPVideoDelegate *)
     */
-    void setVideoWidget(GoTvPtoPVideoDelegate *widget);
+    void setVideoWidget(NlcPtoPVideoDelegate *widget);
 
     /*!
         \brief Get video output status
@@ -162,15 +162,15 @@ public:
 
     /*!
         \brief Get current player state.
-        \return current player state (const GoTvPtoP::State)
+        \return current player state (const NlcPtoP::State)
     */
-    GoTvPtoP::State state() const;
+    NlcPtoP::State state() const;
 
     /*!
         \brief Get current video widget.
-        \return current video widget (GoTvPtoPVideoWidget *)
+        \return current video widget (NlcPtoPVideoWidget *)
     */
-    GoTvPtoPVideoDelegate *videoWidget() const;
+    NlcPtoPVideoDelegate *videoWidget() const;
 
     /*!
         \brief Get media content position.
@@ -357,15 +357,15 @@ private:
     libgotvptop_media_player_t *_gotvptopMediaPlayer;
     libgotvptop_event_manager_t *_gotvptopEvents;
 
-    GoTvPtoPMedia *_media;
+    NlcPtoPMedia *_media;
 
-    GoTvPtoPAudio *_gotvptopAudio;
-    GoTvPtoPVideo *_gotvptopVideo;
+    NlcPtoPAudio *_gotvptopAudio;
+    NlcPtoPVideo *_gotvptopVideo;
 #if LIBNO_LIMIT_VERSION >= 0x020200
-    GoTvPtoPEqualizer *_gotvptopEqualizer;
+    NlcPtoPEqualizer *_gotvptopEqualizer;
 #endif
 
-    GoTvPtoPVideoDelegate *_videoWidget;
+    NlcPtoPVideoDelegate *_videoWidget;
     WId _currentWId;
 };
 

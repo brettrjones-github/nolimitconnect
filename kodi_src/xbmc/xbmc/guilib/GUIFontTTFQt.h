@@ -26,7 +26,7 @@
 
 #include "GUIFontTTF.h"
 
-class IGoTv;
+class INlc;
 
 class CGUIFontTTFQt : public CGUIFontTTFBase
 {
@@ -63,6 +63,6 @@ protected:
     void DeleteHardwareTexture() override;
 
 private:
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
 };
 

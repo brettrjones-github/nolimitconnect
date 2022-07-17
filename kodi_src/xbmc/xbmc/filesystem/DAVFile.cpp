@@ -9,7 +9,7 @@
 #include "DAVFile.h"
 
 #include "DAVCommon.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "DllLibCurl.h"
 #include "utils/XBMCTinyXML.h"
@@ -25,9 +25,9 @@ CDAVFile::CDAVFile(void)
 
 CDAVFile::~CDAVFile(void) = default;
 
-bool CDAVFile::Execute(const GoTvUrl& url)
+bool CDAVFile::Execute(const NlcUrl& url)
 {
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   ParseAndCorrectUrl(url2);
 
   CLog::Log(LOGDEBUG, "CDAVFile::Execute(%p) %s", (void*)this, m_url.c_str());
@@ -61,7 +61,7 @@ bool CDAVFile::Execute(const GoTvUrl& url)
 
     if (!davResponse.Parse(strResponse))
     {
-      CLog::Log(LOGERROR, "CDAVFile::Execute - Unable to process dav response (%s)", GoTvUrl(m_url).GetRedacted().c_str());
+      CLog::Log(LOGERROR, "CDAVFile::Execute - Unable to process dav response (%s)", NlcUrl(m_url).GetRedacted().c_str());
       Close();
       return false;
     }
@@ -92,7 +92,7 @@ bool CDAVFile::Execute(const GoTvUrl& url)
   return true;
 }
 
-bool CDAVFile::Delete(const GoTvUrl& url)
+bool CDAVFile::Delete(const NlcUrl& url)
 {
   if (m_opened)
     return false;
@@ -114,14 +114,14 @@ bool CDAVFile::Delete(const GoTvUrl& url)
   return true;
 }
 
-bool CDAVFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
+bool CDAVFile::Rename(const NlcUrl& url, const NlcUrl& urlnew)
 {
   if (m_opened)
     return false;
 
   CDAVFile dav;
 
-  GoTvUrl url2(urlnew);
+  NlcUrl url2(urlnew);
   std::string strProtocol = url2.GetTranslatedProtocol();
   url2.SetProtocol(strProtocol);
 

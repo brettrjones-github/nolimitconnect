@@ -47,8 +47,8 @@
 #include "storage/MediaManager.h"
 #include "TextureCache.h"
 #include "threads/SystemClock.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "utils/FileUtils.h"
 #include "utils/GroupUtils.h"
 #include "utils/LabelFormatter.h"
@@ -967,7 +967,7 @@ void CVideoDatabase::UpdateFileDateAdded(int idFile, const std::string& strFileN
   }
   catch (...)
   {
-    CLog::Log(LOGERROR, "%s (%s, %s) failed", __FUNCTION__, GoTvUrl::GetRedacted(strFileNameAndPath).c_str(), finalDateAdded.GetAsDBDateTime().c_str());
+    CLog::Log(LOGERROR, "%s (%s, %s) failed", __FUNCTION__, NlcUrl::GetRedacted(strFileNameAndPath).c_str(), finalDateAdded.GetAsDBDateTime().c_str());
   }
 }
 
@@ -1150,7 +1150,7 @@ int CVideoDatabase::GetMovieId(const std::string& strFilenameAndPath)
     else
       strSQL=PrepareSQL("select idMovie from movie where idFile=%i", idFile);
 
-    CLog::Log(LOGDEBUG, LOGDATABASE, "%s (%s), query = %s", __FUNCTION__, GoTvUrl::GetRedacted(strFilenameAndPath).c_str(), strSQL.c_str());
+    CLog::Log(LOGDEBUG, LOGDATABASE, "%s (%s), query = %s", __FUNCTION__, NlcUrl::GetRedacted(strFilenameAndPath).c_str(), strSQL.c_str());
     m_pDS->query(strSQL);
     if (m_pDS->num_rows() > 0)
       idMovie = m_pDS->fv("idMovie").get_asInt();
@@ -1232,7 +1232,7 @@ int CVideoDatabase::GetEpisodeId(const std::string& strFilenameAndPath, int idEp
 
     std::string strSQL=PrepareSQL("select idEpisode from episode where idFile=%i", idFile);
 
-    CLog::Log(LOGDEBUG, LOGDATABASE, "%s (%s), query = %s", __FUNCTION__, GoTvUrl::GetRedacted(strFilenameAndPath).c_str(), strSQL.c_str());
+    CLog::Log(LOGDEBUG, LOGDATABASE, "%s (%s), query = %s", __FUNCTION__, NlcUrl::GetRedacted(strFilenameAndPath).c_str(), strSQL.c_str());
     pDS->query(strSQL);
     if (pDS->num_rows() > 0)
     {
@@ -1283,7 +1283,7 @@ int CVideoDatabase::GetMusicVideoId(const std::string& strFilenameAndPath)
 
     std::string strSQL=PrepareSQL("select idMVideo from musicvideo where idFile=%i", idFile);
 
-    CLog::Log(LOGDEBUG, LOGDATABASE, "%s (%s), query = %s", __FUNCTION__, GoTvUrl::GetRedacted(strFilenameAndPath).c_str(), strSQL.c_str());
+    CLog::Log(LOGDEBUG, LOGDATABASE, "%s (%s), query = %s", __FUNCTION__, NlcUrl::GetRedacted(strFilenameAndPath).c_str(), strSQL.c_str());
     m_pDS->query(strSQL);
     int idMVideo=-1;
     if (m_pDS->num_rows() > 0)
@@ -3063,7 +3063,7 @@ void CVideoDatabase::GetBookMarksForFile(const std::string& strFilenameAndPath, 
     {
       CStackDirectory dir;
       CFileItemList fileList;
-      const GoTvUrl pathToUrl(strFilenameAndPath);
+      const NlcUrl pathToUrl(strFilenameAndPath);
       dir.GetDirectory(pathToUrl, fileList);
       if (!bAppend)
         bookmarks.clear();
@@ -3861,7 +3861,7 @@ bool CVideoDatabase::GetResumePoint(CVideoInfoTag& tag)
     {
       CStackDirectory dir;
       CFileItemList fileList;
-      const GoTvUrl pathToUrl(tag.m_strFileNameAndPath);
+      const NlcUrl pathToUrl(tag.m_strFileNameAndPath);
       dir.GetDirectory(pathToUrl, fileList);
       tag.SetResumePoint(CBookmark());
       for (int i = fileList.Size() - 1; i >= 0; i--)
@@ -8710,7 +8710,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle, const st
 
       // get the actual archive path
       if (URIUtils::IsInArchive(fullPath))
-        fullPath = GoTvUrl(fullPath).GetHostName();
+        fullPath = NlcUrl(fullPath).GetHostName();
 
       bool del = true;
       if (URIUtils::IsPlugin(fullPath))
@@ -9075,7 +9075,7 @@ std::vector<int> CVideoDatabase::CleanMediaType(const std::string &mediaType, co
             CGUIDialogYesNo* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogYesNo>(WINDOW_DIALOG_YES_NO);
             if (pDialog != NULL)
             {
-              GoTvUrl sourceUrl(sourcePath);
+              NlcUrl sourceUrl(sourcePath);
               pDialog->SetHeading(CVariant{15012});
               pDialog->SetText(CVariant{StringUtils::Format(g_localizeStrings.Get(15013).c_str(), sourceUrl.GetWithoutUserDetails().c_str())});
               pDialog->SetChoice(0, CVariant{15015});
@@ -9891,7 +9891,7 @@ void CVideoDatabase::SplitPath(const std::string& strFileNameAndPath, std::strin
   }
   else if (URIUtils::IsPlugin(strFileNameAndPath))
   {
-    GoTvUrl url(strFileNameAndPath);
+    NlcUrl url(strFileNameAndPath);
     strPath = url.GetOptions().empty() ? url.GetWithoutFilename() : url.GetWithoutOptions();
     strFileName = strFileNameAndPath;
   }
@@ -9901,7 +9901,7 @@ void CVideoDatabase::SplitPath(const std::string& strFileNameAndPath, std::strin
     // Keep protocol options as part of the path
     if (URIUtils::IsURL(strFileNameAndPath))
     {
-      GoTvUrl url(strFileNameAndPath);
+      NlcUrl url(strFileNameAndPath);
       if (!url.GetProtocolOptions().empty())
         strPath += "|" + url.GetProtocolOptions();
     }
@@ -9921,7 +9921,7 @@ void CVideoDatabase::InvalidatePathHash(const std::string& strPath)
     if (info->Content() == CONTENT_TVSHOWS || settings.parent_name_root)
     {
       std::string strParent;
-      if (URIUtils::GetParentPath(strPath, strParent) && (!URIUtils::IsPlugin(strPath) || !GoTvUrl(strParent).GetHostName().empty()))
+      if (URIUtils::GetParentPath(strPath, strParent) && (!URIUtils::IsPlugin(strPath) || !NlcUrl(strParent).GetHostName().empty()))
       SetPathHash(strParent,"");
     }
   }

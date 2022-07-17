@@ -897,7 +897,7 @@ void CGUIDialogMusicInfo::OnGetArt()
     std::string thumb(item->GetArt("thumb"));
     if (thumb.empty())
       continue;
-    GoTvUrl url(CTextureUtils::UnwrapImageURL(thumb));
+    NlcUrl url(CTextureUtils::UnwrapImageURL(thumb));
     // Skip images from remote sources (current thumb could be remote)
     if (url.IsProtocol("http") || url.IsProtocol("https"))
       continue;

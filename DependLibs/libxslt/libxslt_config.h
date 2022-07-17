@@ -70,7 +70,7 @@
 #define DEBUG_MEMORY_LOCATION
 #endif
 
-#define LIBXSLT_STATIC 1 // GoTv uses static libs wherever possible
+#define LIBXSLT_STATIC 1 // Nlc uses static libs wherever possible
 #if !defined LIBXSLT_PUBLIC
 #if (defined (__CYGWIN__) || defined _MSC_VER) && !defined IN_LIBXSLT && !defined LIBXSLT_STATIC && !defined(LIB_STATIC)
 #define LIBXSLT_PUBLIC __declspec(dllimport)

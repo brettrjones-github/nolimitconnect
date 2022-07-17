@@ -7,8 +7,8 @@
  */
 
 #include "ResourceFile.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "ServiceBroker.h"
 #include "addons/AddonManager.h"
 #include "addons/Resource.h"
@@ -24,10 +24,10 @@ CResourceFile::~CResourceFile() = default;
 
 bool CResourceFile::TranslatePath(const std::string &path, std::string &translatedPath)
 {
-  return TranslatePath(GoTvUrl(path), translatedPath);
+  return TranslatePath(NlcUrl(path), translatedPath);
 }
 
-bool CResourceFile::TranslatePath(const GoTvUrl &url, std::string &translatedPath)
+bool CResourceFile::TranslatePath(const NlcUrl &url, std::string &translatedPath)
 {
   translatedPath = url.Get();
 
@@ -59,7 +59,7 @@ bool CResourceFile::TranslatePath(const GoTvUrl &url, std::string &translatedPat
   return true;
 }
 
-std::string CResourceFile::TranslatePath(const GoTvUrl &url)
+std::string CResourceFile::TranslatePath(const NlcUrl &url)
 {
   std::string translatedPath;
   if (!TranslatePath(url, translatedPath))

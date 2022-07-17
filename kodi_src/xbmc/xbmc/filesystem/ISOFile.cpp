@@ -9,7 +9,7 @@
  */
 
 #include "ISOFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "iso9660.h"
 
 #include <algorithm>
@@ -35,7 +35,7 @@ CISOFile::~CISOFile()
   }
 }
 //*********************************************************************************************
-bool CISOFile::Open(const GoTvUrl& url)
+bool CISOFile::Open(const NlcUrl& url)
 {
   std::string strFName = "\\";
   strFName += url.GetFileName();
@@ -125,7 +125,7 @@ int64_t CISOFile::GetPosition()
   return m_isoReader.GetFilePosition(m_hFile);
 }
 
-bool CISOFile::Exists(const GoTvUrl& url)
+bool CISOFile::Exists(const NlcUrl& url)
 {
   std::string strFName = "\\";
   strFName += url.GetFileName();
@@ -141,7 +141,7 @@ bool CISOFile::Exists(const GoTvUrl& url)
   return true;
 }
 
-int CISOFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CISOFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   std::string strFName = "\\";
   strFName += url.GetFileName();

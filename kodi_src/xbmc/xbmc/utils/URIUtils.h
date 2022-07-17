@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-class GoTvUrl;
+class NlcUrl;
 class CAdvancedSettings;
 
 class URIUtils
@@ -22,10 +22,10 @@ public:
 
   static std::string GetDirectory(const std::string &strFilePath);
 
-  static std::string GetFileName(const GoTvUrl& url);
+  static std::string GetFileName(const NlcUrl& url);
   static std::string GetFileName(const std::string& strFileNameAndPath);
 
-  static std::string GetExtension(const GoTvUrl& url);
+  static std::string GetExtension(const NlcUrl& url);
   static std::string GetExtension(const std::string& strFileName);
 
   /*!
@@ -48,7 +48,7 @@ public:
    \sa GetExtension
    */
   static bool HasExtension(const std::string& strFileName, const std::string& strExtensions);
-  static bool HasExtension(const GoTvUrl& url, const std::string& strExtensions);
+  static bool HasExtension(const NlcUrl& url, const std::string& strExtensions);
 
   static void RemoveExtension(std::string& strFileName);
   static std::string ReplaceExtension(const std::string& strFile,
@@ -76,7 +76,7 @@ public:
    */
   static std::string ChangeBasePath(const std::string &fromPath, const std::string &fromFile, const std::string &toPath, const bool &bAddPath = true);
 
-  static GoTvUrl SubstitutePath(const GoTvUrl& url, bool reverse = false);
+  static NlcUrl SubstitutePath(const NlcUrl& url, bool reverse = false);
   static std::string SubstitutePath(const std::string& strPath, bool reverse = false);
 
   /*! \brief Check whether a URL is a given URL scheme.
@@ -123,7 +123,7 @@ public:
   static bool IsInArchive(const std::string& strFile);
   static bool IsInRAR(const std::string& strFile);
   static bool IsInternetStream(const std::string& path, bool bStrictCheck = false);
-  static bool IsInternetStream(const GoTvUrl& url, bool bStrictCheck = false);
+  static bool IsInternetStream(const NlcUrl& url, bool bStrictCheck = false);
   static bool IsInAPK(const std::string& strFile);
   static bool IsInZIP(const std::string& strFile);
   static bool IsISO9660(const std::string& strFile);
@@ -175,8 +175,8 @@ public:
    */
   static std::string CanonicalizePath(const std::string& path, const char slashCharacter = '\\');
 
-  static GoTvUrl CreateArchivePath(const std::string& type,
-                                const GoTvUrl& archiveUrl,
+  static NlcUrl CreateArchivePath(const std::string& type,
+                                const NlcUrl& archiveUrl,
                                 const std::string& pathInArchive = "",
                                 const std::string& password = "");
 
@@ -188,9 +188,9 @@ public:
     return AddFileToFolder(newPath, args...);
   }
 
-  static bool HasParentInHostname(const GoTvUrl& url);
-  static bool HasEncodedHostname(const GoTvUrl& url);
-  static bool HasEncodedFilename(const GoTvUrl& url);
+  static bool HasParentInHostname(const NlcUrl& url);
+  static bool HasEncodedHostname(const NlcUrl& url);
+  static bool HasEncodedFilename(const NlcUrl& url);
 
   /*!
    \brief Cleans up the given path by resolving "." and ".."

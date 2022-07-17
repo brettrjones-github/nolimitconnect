@@ -13,7 +13,7 @@
 #include <algorithm>
 
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/Directory.h"
 #include "guilib/LocalizeStrings.h"
 #include "settings/AdvancedSettings.h"

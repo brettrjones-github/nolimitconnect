@@ -22,7 +22,7 @@
 #ifdef TARGET_OS_WINDOWS
 
 #include "WMIInterface.h"
-#include "../kodi_src/xbmc/xbmc/GoTvCoreUtil.h"
+#include "../kodi_src/xbmc/xbmc/NlcCoreUtil.h"
 #include <platform/win32/CharsetConverter.h>
 
 #include <comutil.h>

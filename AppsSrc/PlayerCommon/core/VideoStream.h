@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -33,45 +33,45 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPVideoStream VideoStream.h core/VideoStream.h
+    \class NlcPtoPVideoStream VideoStream.h core/VideoStream.h
     \ingroup GOTVQtCore
     \brief Video memory stream
 
-    GoTvPtoPVideoStream sets proper callbacks to get YUV frames from libGOTV.
+    NlcPtoPVideoStream sets proper callbacks to get YUV frames from libGOTV.
     This class should be subclassed and implement frameUpdated to specify what to do with the frame.
 
-    \see GoTvPtoPQmlVideoStream
-    \see GoTvPtoPAbstractVideoFrame
+    \see NlcPtoPQmlVideoStream
+    \see NlcPtoPAbstractVideoFrame
     \since GOTV-Qt 1.1
  */
-class GOTVQT_CORE_EXPORT GoTvPtoPVideoStream : public QObject,
-                                         public GoTvPtoPAbstractVideoStream
+class GOTVQT_CORE_EXPORT NlcPtoPVideoStream : public QObject,
+                                         public NlcPtoPAbstractVideoStream
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPVideoStream constructor
+        \brief NlcPtoPVideoStream constructor
         \param format rendering format
         \param parent parent object
      */
-    explicit GoTvPtoPVideoStream(GoTvPtoP::RenderFormat format,
+    explicit NlcPtoPVideoStream(NlcPtoP::RenderFormat format,
                             QObject *parent = 0);
-    ~GoTvPtoPVideoStream();
+    ~NlcPtoPVideoStream();
 
     /*!
         \brief Rendering format
         \return current rendering format
      */
-    GoTvPtoP::RenderFormat format() const { return _format; } // LCOV_EXCL_LINE
+    NlcPtoP::RenderFormat format() const { return _format; } // LCOV_EXCL_LINE
 
     /*!
         \brief Initialise video memory stream with player
         \param player media player
      */
-    void init(GoTvPtoPMediaPlayer *player);
+    void init(NlcPtoPMediaPlayer *player);
 
     /*!
         \brief Prepare video memory stream for deletion
@@ -82,7 +82,7 @@ public:
         \brief Get current frame
         \return current frame
      */
-    std::shared_ptr<const GoTvPtoPAbstractVideoFrame> renderFrame() const { return _renderFrame; } // LCOV_EXCL_LINE
+    std::shared_ptr<const NlcPtoPAbstractVideoFrame> renderFrame() const { return _renderFrame; } // LCOV_EXCL_LINE
 
 private:
     Q_INVOKABLE virtual void frameUpdated() = 0;
@@ -99,14 +99,14 @@ private:
                         void *const *planes);
     void displayCallback(void *picture);
 
-    std::shared_ptr<GoTvPtoPAbstractVideoFrame> cloneFrame(std::shared_ptr<GoTvPtoPAbstractVideoFrame> frame);
+    std::shared_ptr<NlcPtoPAbstractVideoFrame> cloneFrame(std::shared_ptr<NlcPtoPAbstractVideoFrame> frame);
 
-    GoTvPtoP::RenderFormat _format;
-    GoTvPtoPMediaPlayer *_player;
+    NlcPtoP::RenderFormat _format;
+    NlcPtoPMediaPlayer *_player;
 
-    std::deque<std::shared_ptr<GoTvPtoPAbstractVideoFrame>> _frames;
-    std::list<std::shared_ptr<GoTvPtoPAbstractVideoFrame>> _lockedFrames;
-    std::shared_ptr<GoTvPtoPAbstractVideoFrame> _renderFrame;
+    std::deque<std::shared_ptr<NlcPtoPAbstractVideoFrame>> _frames;
+    std::list<std::shared_ptr<NlcPtoPAbstractVideoFrame>> _lockedFrames;
+    std::shared_ptr<NlcPtoPAbstractVideoFrame> _renderFrame;
 };
 
 #endif // GOTVQT_VIDEOSTREAM_H_

@@ -17,7 +17,7 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 
 using namespace XFILE;
@@ -53,7 +53,7 @@ bool CTextureCache::IsCachedImage(const std::string &url) const
   if (url.empty())
     return false;
 
-  if (!GoTvUrl::IsFullPath(url))
+  if (!NlcUrl::IsFullPath(url))
     return true;
 
   const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();
@@ -93,7 +93,7 @@ std::string CTextureCache::GetCachedImage(const std::string &image, CTextureDeta
   return "";
 }
 
-bool CTextureCache::CanCacheImageURL(const GoTvUrl &url)
+bool CTextureCache::CanCacheImageURL(const NlcUrl &url)
 {
   return url.GetUserName().empty() || url.GetUserName() == "music" ||
           StringUtils::StartsWith(url.GetUserName(), "video_");

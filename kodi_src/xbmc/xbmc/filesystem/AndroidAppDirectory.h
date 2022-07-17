@@ -31,10 +31,10 @@ class CAndroidAppDirectory :
 public:
   CAndroidAppDirectory(void);
   virtual ~CAndroidAppDirectory(void);
-  virtual bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-  virtual bool Exists(const GoTvUrl& url) override { return true; };
+  virtual bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+  virtual bool Exists(const NlcUrl& url) override { return true; };
   virtual bool AllowAll() const override { return true; };
-  virtual DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_NEVER; }
+  virtual DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_NEVER; }
 };
 }
 #endif

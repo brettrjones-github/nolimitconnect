@@ -22,13 +22,13 @@ class CMultiPathDirectory :
 public:
   CMultiPathDirectory(void);
   ~CMultiPathDirectory(void) override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-  bool Exists(const GoTvUrl& url) override;
-  bool Remove(const GoTvUrl& url) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+  bool Exists(const NlcUrl& url) override;
+  bool Remove(const NlcUrl& url) override;
 
   static std::string GetFirstPath(const std::string &strPath);
   static bool SupportsWriteFileOperations(const std::string &strPath);
-  static bool GetPaths(const GoTvUrl& url, std::vector<std::string>& vecPaths);
+  static bool GetPaths(const NlcUrl& url, std::vector<std::string>& vecPaths);
   static bool GetPaths(const std::string& path, std::vector<std::string>& paths);
   static bool HasPath(const std::string& strPath, const std::string& strPathToFind);
   static std::string ConstructMultiPath(const std::vector<std::string> &vecPaths);

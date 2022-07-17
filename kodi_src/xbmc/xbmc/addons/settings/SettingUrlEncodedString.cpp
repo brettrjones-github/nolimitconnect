@@ -7,7 +7,7 @@
  */
 
 #include "SettingUrlEncodedString.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "settings/lib/SettingsManager.h"
 
 namespace ADDON
@@ -27,12 +27,12 @@ CSettingUrlEncodedString::CSettingUrlEncodedString(const std::string &id, const 
 
 std::string CSettingUrlEncodedString::GetDecodedValue() const
 {
-  return GoTvUrl::Decode(CSettingString::GetValue());
+  return NlcUrl::Decode(CSettingString::GetValue());
 }
 
 bool CSettingUrlEncodedString::SetDecodedValue(const std::string &decodedValue)
 {
-  return CSettingString::SetValue(GoTvUrl::Encode(decodedValue));
+  return CSettingString::SetValue(NlcUrl::Encode(decodedValue));
 }
 
 } /* namespace ADDON */

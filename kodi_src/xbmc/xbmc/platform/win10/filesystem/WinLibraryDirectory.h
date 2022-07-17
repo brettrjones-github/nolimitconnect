@@ -19,19 +19,19 @@ namespace XFILE
   public:
     CWinLibraryDirectory();
     virtual ~CWinLibraryDirectory(void);
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_ONCE; };
-    bool Create(const GoTvUrl& url) override;
-    bool Exists(const GoTvUrl& url) override;
-    bool Remove(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_ONCE; };
+    bool Create(const NlcUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
+    bool Remove(const NlcUrl& url) override;
 
     static bool GetStoragePath(std::string library, std::string& path);
-    static bool IsValid(const GoTvUrl& url);
+    static bool IsValid(const NlcUrl& url);
 
   private:
     friend CWinLibraryFile;
-    static winrt::Windows::Storage::StorageFolder GetRootFolder(const GoTvUrl& url);
-    static winrt::Windows::Storage::StorageFolder GetFolder(const GoTvUrl& url);
-    static int StatDirectory(const GoTvUrl& url, struct __stat64* statData);
+    static winrt::Windows::Storage::StorageFolder GetRootFolder(const NlcUrl& url);
+    static winrt::Windows::Storage::StorageFolder GetFolder(const NlcUrl& url);
+    static int StatDirectory(const NlcUrl& url, struct __stat64* statData);
   };
 }

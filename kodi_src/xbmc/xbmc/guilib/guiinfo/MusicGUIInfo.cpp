@@ -12,8 +12,8 @@
 #include "FileItem.h"
 #include "PartyModeManager.h"
 #include "PlayListPlayer.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "guilib/LocalizeStrings.h"
 #include "music/MusicInfoLoader.h"
 #include "music/MusicThumbLoader.h"
@@ -299,7 +299,7 @@ bool CMusicGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
         else
           URIUtils::GetParentPath(item->GetPath(), value);
 
-        value = GoTvUrl(value).GetWithoutUserDetails();
+        value = NlcUrl(value).GetWithoutUserDetails();
 
         if (info.m_info == LISTITEM_FOLDERNAME)
         {
@@ -315,7 +315,7 @@ bool CMusicGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
         else
           value = item->GetPath();
 
-        value = GoTvUrl(value).GetWithoutUserDetails();
+        value = NlcUrl(value).GetWithoutUserDetails();
         return true;
     }
   }

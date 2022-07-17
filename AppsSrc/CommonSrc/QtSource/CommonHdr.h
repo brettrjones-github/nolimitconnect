@@ -14,8 +14,8 @@
 #include "ToGuiHardwareControlInterface.h"
 
 #include "GuiInterface/IToGui.h"
-#include "GuiInterface/IGoTvRender.h"
-#include "GuiInterface/IGoTvEvents.h"
+#include "GuiInterface/INlcRender.h"
+#include "GuiInterface/INlcEvents.h"
 #include "GuiInterface/IAudioInterface.h"
 
 #include "HomeWindow.h"

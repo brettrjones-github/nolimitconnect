@@ -25,10 +25,10 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPInstance;
-class GoTvPtoPMediaList;
-class GoTvPtoPMediaPlayer;
-class GoTvPtoPMedia;
+class NlcPtoPInstance;
+class NlcPtoPMediaList;
+class NlcPtoPMediaPlayer;
+class NlcPtoPMedia;
 
 struct libgotvptop_event_t;
 struct libgotvptop_event_manager_t;
@@ -36,42 +36,42 @@ struct libgotvptop_media_t;
 struct libgotvptop_media_list_player_t;
 
 /*!
-    \class GoTvPtoPMediaListPlayer MediaListPlayer.h core/MediaListPlayer.h
+    \class NlcPtoPMediaListPlayer MediaListPlayer.h core/MediaListPlayer.h
     \ingroup GOTVQtCore
     \brief Media List Player
 
     A basic MediaListPlayer manager for GOTV-Qt library.
     It provides internal playlist support.
-    Requires a valid GoTvPtoPMediaPlayer.
+    Requires a valid NlcPtoPMediaPlayer.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPMediaListPlayer : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPMediaListPlayer : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPMediaListPlayer constructor.
+        \brief NlcPtoPMediaListPlayer constructor.
 
-        Create GoTvPtoPMediaListPlayer without new core.
+        Create NlcPtoPMediaListPlayer without new core.
 
         \param instance instance object
     */
-    explicit GoTvPtoPMediaListPlayer(GoTvPtoPInstance *instance);
+    explicit NlcPtoPMediaListPlayer(NlcPtoPInstance *instance);
 
     /*!
-        \brief GoTvPtoPMediaListPlayer constructor.
+        \brief NlcPtoPMediaListPlayer constructor.
 
-        Create GoTvPtoPMediaListPlayer with specific GoTvPtoPMediaPlayer core.
+        Create NlcPtoPMediaListPlayer with specific NlcPtoPMediaPlayer core.
 
         \param player player object
         \param instance instance object
     */
-    explicit GoTvPtoPMediaListPlayer(GoTvPtoPMediaPlayer *player,
-                                GoTvPtoPInstance *instance);
+    explicit NlcPtoPMediaListPlayer(NlcPtoPMediaPlayer *player,
+                                NlcPtoPInstance *instance);
 
     /*!
-        GoTvPtoPMediaListPlayer destructor
+        NlcPtoPMediaListPlayer destructor
     */
-    ~GoTvPtoPMediaListPlayer();
+    ~NlcPtoPMediaListPlayer();
 
     /*!
         \brief Returns libgotvptop media list player object.
@@ -81,33 +81,33 @@ public:
 
     /*!
         \brief Get current media list
-        \return current media list (GoTvPtoPMediaList *)
+        \return current media list (NlcPtoPMediaList *)
     */
-    GoTvPtoPMediaList *currentMediaList();
+    NlcPtoPMediaList *currentMediaList();
 
     /*!
         \brief Get media player core
-        \return media player core (GoTvPtoPMediaPlayer *)
+        \return media player core (NlcPtoPMediaPlayer *)
     */
-    GoTvPtoPMediaPlayer *mediaPlayer();
+    NlcPtoPMediaPlayer *mediaPlayer();
 
     /*!
         \brief Get playback mode
         \return playback mode
     */
-    GoTvPtoP::PlaybackMode playbackMode() const;
+    NlcPtoP::PlaybackMode playbackMode() const;
 
     /*!
         \brief Set media list to play
-        \param list media list object (GoTvPtoPMediaList *)
+        \param list media list object (NlcPtoPMediaList *)
     */
-    void setMediaList(GoTvPtoPMediaList *list);
+    void setMediaList(NlcPtoPMediaList *list);
 
     /*!
         \brief Set playback mode
         \param mode playback mode
     */
-    void setPlaybackMode(const GoTvPtoP::PlaybackMode &mode);
+    void setPlaybackMode(const NlcPtoP::PlaybackMode &mode);
 
 public slots:
     /*!
@@ -147,7 +147,7 @@ signals:
         \param media next media item
         \since GOTV-Qt 1.1
     */
-    void nextItemSet(GoTvPtoPMedia *media);
+    void nextItemSet(NlcPtoPMedia *media);
 
     /*!
         \brief Signal sent on next item set
@@ -170,10 +170,10 @@ private:
     libgotvptop_media_list_player_t *_gotvptopMediaListPlayer;
     libgotvptop_event_manager_t *_gotvptopEvents;
 
-    GoTvPtoPMediaList *_list;
-    GoTvPtoPMediaPlayer *_player;
+    NlcPtoPMediaList *_list;
+    NlcPtoPMediaPlayer *_player;
 
-    GoTvPtoP::PlaybackMode _mode;
+    NlcPtoP::PlaybackMode _mode;
 };
 
 #endif // GOTVQT_MEDIALISTPLAYER_H_

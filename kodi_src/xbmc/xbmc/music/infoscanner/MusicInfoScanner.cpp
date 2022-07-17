@@ -45,7 +45,7 @@
 #include "settings/SettingsComponent.h"
 #include "TextureCache.h"
 #include "threads/SystemClock.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/Digest.h"
 #include "utils/FileExtensionProvider.h"
 #include "utils/log.h"
@@ -324,7 +324,7 @@ void CMusicInfoScanner::FetchAlbumInfo(const std::string& strDirectory,
   }
   else
   {
-    GoTvUrl pathToUrl(strDirectory);
+    NlcUrl pathToUrl(strDirectory);
 
     if (pathToUrl.IsProtocol("musicdb"))
     {
@@ -385,7 +385,7 @@ void CMusicInfoScanner::FetchArtistInfo(const std::string& strDirectory,
   }
   else
   {
-    GoTvUrl pathToUrl(strDirectory);
+    NlcUrl pathToUrl(strDirectory);
 
     if (pathToUrl.IsProtocol("musicdb"))
     {
@@ -448,9 +448,9 @@ static void OnDirectoryScanned(const std::string& strDirectory)
 
 static std::string Prettify(const std::string& strDirectory)
 {
-  GoTvUrl url(strDirectory);
+  NlcUrl url(strDirectory);
 
-  return GoTvUrl::Decode(url.GetWithoutUserDetails());
+  return NlcUrl::Decode(url.GetWithoutUserDetails());
 }
 
 bool CMusicInfoScanner::DoScan(const std::string& strDirectory)
@@ -492,9 +492,9 @@ bool CMusicInfoScanner::DoScan(const std::string& strDirectory)
   if ((m_flags & SCAN_RESCAN) || !m_musicDatabase.GetPathHash(strDirectory, dbHash) || !StringUtils::EqualsNoCase(dbHash, hash))
   { // path has changed - rescan
     if (dbHash.empty())
-      CLog::Log(LOGDEBUG, "%s Scanning dir '%s' as not in the database", __FUNCTION__, GoTvUrl::GetRedacted(strDirectory).c_str());
+      CLog::Log(LOGDEBUG, "%s Scanning dir '%s' as not in the database", __FUNCTION__, NlcUrl::GetRedacted(strDirectory).c_str());
     else
-      CLog::Log(LOGDEBUG, "%s Rescanning dir '%s' due to change", __FUNCTION__, GoTvUrl::GetRedacted(strDirectory).c_str());
+      CLog::Log(LOGDEBUG, "%s Rescanning dir '%s' due to change", __FUNCTION__, NlcUrl::GetRedacted(strDirectory).c_str());
 
     if (m_handle)
       m_handle->SetTitle(g_localizeStrings.Get(505)); //"Loading media information from files..."
@@ -515,7 +515,7 @@ bool CMusicInfoScanner::DoScan(const std::string& strDirectory)
   }
   else
   { // path is the same - no need to rescan
-    CLog::Log(LOGDEBUG, "%s Skipping dir '%s' due to no change", __FUNCTION__, GoTvUrl::GetRedacted(strDirectory).c_str());
+    CLog::Log(LOGDEBUG, "%s Skipping dir '%s' due to no change", __FUNCTION__, NlcUrl::GetRedacted(strDirectory).c_str());
     m_currentItem += CountFiles(items, false);  // false for non-recursive
 
     // updated the dialog with our progress
@@ -1286,7 +1286,7 @@ CMusicInfoScanner::UpdateDatabaseAlbumInfo(CAlbum& album,
       CServiceBroker::GetEventLog().Add(EventPtr(new CMediaLibraryEvent(
         MediaTypeAlbum, album.strPath, 24146,
         StringUtils::Format(g_localizeStrings.Get(24147).c_str(), MediaTypeAlbum, album.strAlbum.c_str()),
-          CScraperUrl::GetThumbURL(album.thumbURL.GetFirstThumb()), GoTvUrl::GetRedacted(album.strPath), EventLevel::Warning)));
+          CScraperUrl::GetThumbURL(album.thumbURL.GetFirstThumb()), NlcUrl::GetRedacted(album.strPath), EventLevel::Warning)));
     }
   }
   }
@@ -1354,7 +1354,7 @@ CMusicInfoScanner::UpdateDatabaseArtistInfo(CArtist& artist,
       CServiceBroker::GetEventLog().Add(EventPtr(new CMediaLibraryEvent(
         MediaTypeArtist, artist.strPath, 24146,
         StringUtils::Format(g_localizeStrings.Get(24147).c_str(), MediaTypeArtist, artist.strArtist.c_str()),
-          CScraperUrl::GetThumbURL(artist.thumbURL.GetFirstThumb()), GoTvUrl::GetRedacted(artist.strPath), EventLevel::Warning)));
+          CScraperUrl::GetThumbURL(artist.thumbURL.GetFirstThumb()), NlcUrl::GetRedacted(artist.strPath), EventLevel::Warning)));
     }
   }
   }
@@ -1448,7 +1448,7 @@ CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album,
   CNfoFile nfoReader;
   if (XFILE::CFile::Exists(strNfo))
   {
-    CLog::Log(LOGDEBUG,"Found matching nfo file: %s", GoTvUrl::GetRedacted(strNfo).c_str());
+    CLog::Log(LOGDEBUG,"Found matching nfo file: %s", NlcUrl::GetRedacted(strNfo).c_str());
     result = nfoReader.Create(strNfo, info);
     if (result == CInfoScanner::FULL_NFO)
     {
@@ -1729,7 +1729,7 @@ CMusicInfoScanner::DownloadArtistInfo(const CArtist& artist,
 
   if (existsNFO)
   {
-    CLog::Log(LOGDEBUG, "Found matching nfo file: %s", GoTvUrl::GetRedacted(strNfo).c_str());
+    CLog::Log(LOGDEBUG, "Found matching nfo file: %s", NlcUrl::GetRedacted(strNfo).c_str());
     result = nfoReader.Create(strNfo, info);
     if (result == CInfoScanner::FULL_NFO)
     {

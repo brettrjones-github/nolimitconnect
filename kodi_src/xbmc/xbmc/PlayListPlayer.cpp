@@ -24,7 +24,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "interfaces/AnnouncementManager.h"
 #include "input/Key.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "messaging/ApplicationMessenger.h"
 #include "filesystem/VideoDatabaseFile.h"
 #include "messaging/helpers/DialogOKHelper.h"
@@ -298,7 +298,7 @@ bool CPlayListPlayer::Play(int iSong, std::string player, bool bAutoPlay /* = fa
   m_iCurrentSong = iSong;
   CFileItemPtr item = playlist[m_iCurrentSong];
   if (item->IsVideoDb() && !item->HasVideoInfoTag())
-    *(item->GetVideoInfoTag()) = XFILE::CVideoDatabaseFile::GetVideoTag(GoTvUrl(item->GetPath()));
+    *(item->GetVideoInfoTag()) = XFILE::CVideoDatabaseFile::GetVideoTag(NlcUrl(item->GetPath()));
 
   playlist.SetPlayed(true);
 
@@ -308,7 +308,7 @@ bool CPlayListPlayer::Play(int iSong, std::string player, bool bAutoPlay /* = fa
   bool ret = g_application.PlayFile(*item, player, bAutoPlay);
   if (ret == false)
   {
-    CLog::Log(LOGERROR,"Playlist Player: skipping unplayable item: %i, path [%s]", m_iCurrentSong, GoTvUrl::GetRedacted(item->GetPath()).c_str());
+    CLog::Log(LOGERROR,"Playlist Player: skipping unplayable item: %i, path [%s]", m_iCurrentSong, NlcUrl::GetRedacted(item->GetPath()).c_str());
     playlist.SetUnPlayable(m_iCurrentSong);
 
     // abort on 100 failed CONSECTUTIVE songs

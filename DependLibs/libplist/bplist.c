@@ -128,7 +128,7 @@ union plist_uint_ptr
 #endif
 
 #ifndef be16toh
-#ifdef GOTV_ARCH_BIG_ENDIAN
+#ifdef NLC_ARCH_BIG_ENDIAN
 #define be16toh(x) (x)
 #else
 #define be16toh(x) bswap16(x)
@@ -136,7 +136,7 @@ union plist_uint_ptr
 #endif
 
 #ifndef be32toh
-#ifdef GOTV_ARCH_BIG_ENDIAN
+#ifdef NLC_ARCH_BIG_ENDIAN
 #define be32toh(x) (x)
 #else
 #define be32toh(x) bswap32(x)
@@ -144,14 +144,14 @@ union plist_uint_ptr
 #endif
 
 #ifndef be64toh
-#ifdef GOTV_ARCH_BIG_ENDIAN
+#ifdef NLC_ARCH_BIG_ENDIAN
 #define be64toh(x) (x)
 #else
 #define be64toh(x) bswap64(x)
 #endif
 #endif
 
-#ifdef GOTV_ARCH_BIG_ENDIAN
+#ifdef NLC_ARCH_BIG_ENDIAN
 #define beNtoh(x,n) (x >> ((8-n) << 3))
 #else
 #define beNtoh(x,n) be64toh(x << ((8-n) << 3))

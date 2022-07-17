@@ -9,7 +9,7 @@
 #include "GUIWindowVideoNav.h"
 #include "ServiceBroker.h"
 #include "utils/FileUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "GUIPassword.h"
 #include "filesystem/MultiPathDirectory.h"
 #include "filesystem/VideoDatabaseDirectory.h"
@@ -121,7 +121,7 @@ bool CGUIWindowVideoNav::OnMessage(CGUIMessage& message)
 
       if (message.GetStringParam(0) != "")
       {
-        GoTvUrl url(message.GetStringParam(0));
+        NlcUrl url(message.GetStringParam(0));
 
         int i = 0;
         for (; i < m_vecItems->Size(); i++)
@@ -155,7 +155,7 @@ bool CGUIWindowVideoNav::OnMessage(CGUIMessage& message)
             CFileItem item(path, URIUtils::HasSlashAtEnd(path));
             if (item.IsVideoDb())
             {
-              *(item.GetVideoInfoTag()) = XFILE::CVideoDatabaseFile::GetVideoTag(GoTvUrl(item.GetPath()));
+              *(item.GetVideoInfoTag()) = XFILE::CVideoDatabaseFile::GetVideoTag(NlcUrl(item.GetPath()));
               if (!item.GetVideoInfoTag()->IsEmpty())
               {
                 item.SetPath(item.GetVideoInfoTag()->m_strFileNameAndPath);

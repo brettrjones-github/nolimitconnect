@@ -21,7 +21,7 @@
 #include "settings/lib/Setting.h"
 #include "settings/lib/SettingSection.h"
 #include "settings/windows/GUIControlSettings.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 
@@ -212,7 +212,7 @@ void CGUIDialogLockSettings::SetupView()
   
   // set the title
   if (m_getUser)
-    SetHeading(StringUtils::Format(g_localizeStrings.Get(20152).c_str(), GoTvUrl::Decode(m_url).c_str()));
+    SetHeading(StringUtils::Format(g_localizeStrings.Get(20152).c_str(), NlcUrl::Decode(m_url).c_str()));
   else
   {
     SetHeading(20066);

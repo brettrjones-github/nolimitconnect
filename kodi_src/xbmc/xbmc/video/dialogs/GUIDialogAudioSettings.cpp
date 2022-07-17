@@ -27,7 +27,7 @@
 #include "settings/MediaSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/LangCodeExpander.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"

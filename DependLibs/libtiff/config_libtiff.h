@@ -241,11 +241,11 @@
 
 /* Native cpu byte order: 1 if big-endian (Motorola) or 0 if little-endian
 (Intel) */
-#define HOST_BIGENDIAN GOTV_ARCH_BIGENDIAN
+#define HOST_BIGENDIAN NLC_ARCH_BIGENDIAN
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */
-#define WORDS_BIGENDIAN GOTV_ARCH_BIGENDIAN
+#define WORDS_BIGENDIAN NLC_ARCH_BIGENDIAN
 
 /* Define to 1 if the X Window System is missing or not being used. */
 //#undef X_DISPLAY_MISSING

@@ -21,12 +21,12 @@ enum EDefaultAppMode
 {
 	eAppModeUnknown,
 	eAppModeDefault,
-	eAppModeGoTvViewer,
-	eAppModeGoTvProvider,
-	eAppModeGoTvStation,
-	eAppModeGoTvNetworkHost,
+	eAppModeNlcViewer,
+	eAppModeNlcProvider,
+	eAppModeNlcStation,
+	eAppModeNlcNetworkHost,
 
-	eMaxAppModeGoTv
+	eMaxAppModeNlc
 };
 
 enum EAppFeatures
@@ -182,8 +182,8 @@ enum EApplet
     eAppletSettingsVoicePhone,
 
 	ePluginAppletCamProvider,
-	ePluginAppletGoTvStation,
-	ePluginAppletGoTvNetworkHost,
+	ePluginAppletNlcStation,
+	ePluginAppletNlcNetworkHost,
 
     eAppletTestHostClient,
     eAppletTestHostService,

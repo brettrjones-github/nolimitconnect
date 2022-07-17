@@ -168,7 +168,7 @@
 
 /* Define to 1 if your processor stores words with the most significant byte
    first (like Motorola and SPARC, unlike Intel and VAX). */
-#define WORDS_BIGENDIAN		GOTV_ARCH_BIG_ENDIAN
+#define WORDS_BIGENDIAN		NLC_ARCH_BIG_ENDIAN
 
 /* Define to empty if `const' does not conform to ANSI C. */
 //#undef const

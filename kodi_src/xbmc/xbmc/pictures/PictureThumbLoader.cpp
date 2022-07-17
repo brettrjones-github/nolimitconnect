@@ -23,7 +23,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "video/VideoThumbLoader.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 
@@ -146,7 +146,7 @@ void CPictureThumbLoader::ProcessFoldersAndArchives(CFileItem *pItem)
   {
     // first check for a folder.jpg
     std::string thumb = "folder.jpg";
-    GoTvUrl pathToUrl = pItem->GetURL();
+    NlcUrl pathToUrl = pItem->GetURL();
     if (pItem->IsCBR())
     {
       pathToUrl = URIUtils::CreateArchivePath("rar",pItem->GetURL(),"");
@@ -158,7 +158,7 @@ void CPictureThumbLoader::ProcessFoldersAndArchives(CFileItem *pItem)
       thumb = "cover.jpg";
     }
     if (pItem->IsMultiPath())
-      pathToUrl = GoTvUrl(CMultiPathDirectory::GetFirstPath(pItem->GetPath()));
+      pathToUrl = NlcUrl(CMultiPathDirectory::GetFirstPath(pItem->GetPath()));
     thumb = URIUtils::AddFileToFolder(pathToUrl.Get(), thumb);
     if (CFile::Exists(thumb))
     {

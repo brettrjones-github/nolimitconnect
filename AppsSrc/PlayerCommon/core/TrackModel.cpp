@@ -18,27 +18,27 @@
 
 #include "core/TrackModel.h"
 
-GoTvPtoPTrackModel::GoTvPtoPTrackModel(QObject *parent)
+NlcPtoPTrackModel::NlcPtoPTrackModel(QObject *parent)
     : QAbstractListModel(parent) {}
 
-GoTvPtoPTrackModel::GoTvPtoPTrackModel(const QMap<int, QString> &tracks,
+NlcPtoPTrackModel::NlcPtoPTrackModel(const QMap<int, QString> &tracks,
                              QObject *parent)
     : QAbstractListModel(parent),
       _tracks(tracks) {}
 
-GoTvPtoPTrackModel::GoTvPtoPTrackModel(const GoTvPtoPTrackModel &other)
+NlcPtoPTrackModel::NlcPtoPTrackModel(const NlcPtoPTrackModel &other)
 {
     _tracks = other._tracks;
 }
 
-int GoTvPtoPTrackModel::rowCount(const QModelIndex &parent) const
+int NlcPtoPTrackModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
 
     return _tracks.count();
 }
 
-QHash<int, QByteArray> GoTvPtoPTrackModel::roleNames() const
+QHash<int, QByteArray> NlcPtoPTrackModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
     roles.insert(IdRole, "id");
@@ -46,7 +46,7 @@ QHash<int, QByteArray> GoTvPtoPTrackModel::roleNames() const
     return roles;
 }
 
-QVariant GoTvPtoPTrackModel::data(const QModelIndex &index,
+QVariant NlcPtoPTrackModel::data(const QModelIndex &index,
                              int role) const
 {
     if (!index.isValid())
@@ -55,7 +55,7 @@ QVariant GoTvPtoPTrackModel::data(const QModelIndex &index,
     return data(index.row(), role);
 }
 
-QVariant GoTvPtoPTrackModel::data(const int row,
+QVariant NlcPtoPTrackModel::data(const int row,
                              int role) const
 {
     if (row > (_tracks.count() - 1))
@@ -73,7 +73,7 @@ QVariant GoTvPtoPTrackModel::data(const int row,
     }
 }
 
-void GoTvPtoPTrackModel::clear()
+void NlcPtoPTrackModel::clear()
 {
     if (!_tracks.count())
         return;
@@ -84,7 +84,7 @@ void GoTvPtoPTrackModel::clear()
     emit countChanged();
 }
 
-void GoTvPtoPTrackModel::load(const QMap<int, QString> &data)
+void NlcPtoPTrackModel::load(const QMap<int, QString> &data)
 {
     QMapIterator<int, QString> i(data);
     while (i.hasNext()) {
@@ -93,7 +93,7 @@ void GoTvPtoPTrackModel::load(const QMap<int, QString> &data)
     }
 }
 
-void GoTvPtoPTrackModel::insert(const int id,
+void NlcPtoPTrackModel::insert(const int id,
                            const QString &title)
 {
     beginInsertRows(QModelIndex(), _tracks.size(), _tracks.size());
@@ -102,7 +102,7 @@ void GoTvPtoPTrackModel::insert(const int id,
     emit countChanged();
 }
 
-int GoTvPtoPTrackModel::count() const
+int NlcPtoPTrackModel::count() const
 {
     return rowCount(QModelIndex());
 }

@@ -42,7 +42,7 @@ union wordbuf
   byte b[4];
 };
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 #define b0  b[3]
 #define b1  b[2]
 #define b2  b[1]

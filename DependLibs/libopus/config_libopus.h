@@ -27,7 +27,7 @@
 /* Ambisonics Support */
 //#define   ENABLE_EXPERIMENTAL_AMBISONICS 0
 
-#ifdef GOTV_FLOATING_POINT
+#ifdef NLC_FLOATING_POINT
 # define OPUS_FLOATING_POINT    1
 /* Float approximations */
 # define FLOAT_APPROX			1
@@ -203,7 +203,7 @@ implies SSE4.1) */
 //#define   ENABLE_EXPERIMENTAL_AMBISONICS 0
 
 
-#ifdef GOTV_FLOATING_POINT
+#ifdef NLC_FLOATING_POINT
 /* Float approximations */
 # define  FLOAT_APPROX	1
 

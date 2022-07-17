@@ -64,10 +64,10 @@ namespace ADDON
     ~CVFSEntry() override;
 
     // Things that MUST be supplied by the child classes
-    void* Open(const GoTvUrl& url);
-    void* OpenForWrite(const GoTvUrl& url, bool bOverWrite);
-    bool Exists(const GoTvUrl& url);
-    int Stat(const GoTvUrl& url, struct __stat64* buffer);
+    void* Open(const NlcUrl& url);
+    void* OpenForWrite(const NlcUrl& url, bool bOverWrite);
+    bool Exists(const NlcUrl& url);
+    int Stat(const NlcUrl& url, struct __stat64* buffer);
     ssize_t Read(void* ctx, void* lpBuf, size_t uiBufSize);
     ssize_t Write(void* ctx, const void* lpBuf, size_t uiBufSize);
     int64_t Seek(void* ctx, int64_t iFilePosition, int iWhence = SEEK_SET);
@@ -77,17 +77,17 @@ namespace ADDON
     int64_t GetLength(void* ctx);
     int GetChunkSize(void* ctx);
     int IoControl(void* ctx, XFILE::EIoControl request, void* param);
-    bool Delete(const GoTvUrl& url);
-    bool Rename(const GoTvUrl& url, const GoTvUrl& url2);
+    bool Delete(const NlcUrl& url);
+    bool Rename(const NlcUrl& url, const NlcUrl& url2);
 
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items, void* ctx);
-    bool DirectoryExists(const GoTvUrl& url);
-    bool RemoveDirectory(const GoTvUrl& url);
-    bool CreateDirectory(const GoTvUrl& url);
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items, void* ctx);
+    bool DirectoryExists(const NlcUrl& url);
+    bool RemoveDirectory(const NlcUrl& url);
+    bool CreateDirectory(const NlcUrl& url);
     void ClearOutIdle();
     void DisconnectAll();
 
-    bool ContainsFiles(const GoTvUrl& path, CFileItemList& items);
+    bool ContainsFiles(const NlcUrl& path, CFileItemList& items);
 
     const std::string& GetProtocols() const { return m_protocols; }
     const std::string& GetExtensions() const { return m_extensions; }
@@ -123,23 +123,23 @@ namespace ADDON
     //! \brief Open a file.
     //! \param[in] url URL to open.
     //! \returns True if file was opened, false otherwise.
-    bool Open(const GoTvUrl& url) override;
+    bool Open(const NlcUrl& url) override;
 
     //! \brief Open a file for writing.
     //! \param[in] url URL to open.
     //! \param[in] bOverWrite If true, overwrite an existing file.
     //! \returns True if file was opened, false otherwise.
-    bool OpenForWrite(const GoTvUrl& url, bool bOverWrite) override;
+    bool OpenForWrite(const NlcUrl& url, bool bOverWrite) override;
 
     //! \brief Check for file existence.
     //! \param[in] url URL of file.
-    bool Exists(const GoTvUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
 
     //! \brief Stat a file.
     //! \param[in] url URL of file.
     //! \param[out] buffer The stat info.
     //! \details Returns 0 on success, non-zero otherwise (see fstat() return values).
-    int  Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+    int  Stat(const NlcUrl& url, struct __stat64* buffer) override;
 
     //! \brief Read data from file:
     //! \param lpBuf Buffer to read data into.
@@ -180,12 +180,12 @@ namespace ADDON
 
     //! \brief Delete a file.
     //! \param[in] url URL of file to delete.
-    bool Delete(const GoTvUrl& url) override;
+    bool Delete(const NlcUrl& url) override;
 
     //! \brief Rename a file.
     //! \param[in] url URL of file to rename.
     //! \param[in] url2 New URL of file.
-    bool Rename(const GoTvUrl& url, const GoTvUrl& url2) override;
+    bool Rename(const NlcUrl& url, const NlcUrl& url2) override;
   protected:
     void* m_context; //!< Opaque add-on specific context for opened file.
     VFSEntryPtr m_addon; //!< Pointer to wrapped CVFSEntry.
@@ -208,19 +208,19 @@ namespace ADDON
     //! \param[in] url URL to file to list.
     //! \param items List of items in file.
     //! \return True if listing succeeded, false otherwise.
-    bool GetDirectory(const GoTvUrl& strPath, CFileItemList& items) override;
+    bool GetDirectory(const NlcUrl& strPath, CFileItemList& items) override;
 
     //! \brief Check if directory exists.
     //! \param[in] url URL to check.
-    bool Exists(const GoTvUrl& strPath) override;
+    bool Exists(const NlcUrl& strPath) override;
 
     //! \brief Delete directory.
     //! \param[in] url URL to delete.
-    bool Remove(const GoTvUrl& strPath) override;
+    bool Remove(const NlcUrl& strPath) override;
 
     //! \brief Create directory.
     //! \param[in] url URL to delete.
-    bool Create(const GoTvUrl& strPath) override;
+    bool Create(const NlcUrl& strPath) override;
 
     //! \brief Static helper for doing a keyboard callback.
     static bool DoGetKeyboardInput(void* context, const char* heading,
@@ -242,7 +242,7 @@ namespace ADDON
     static void DoRequireAuthentication(void* ctx, const char* url);
 
     //! \brief Require authentication.
-    void RequireAuthentication2(const GoTvUrl& url);
+    void RequireAuthentication2(const NlcUrl& url);
   protected:
     VFSEntryPtr m_addon; //!< Pointer to wrapper CVFSEntry.
   };
@@ -263,7 +263,7 @@ namespace ADDON
 
     //! \brief Check if the given file should be treated as a directory.
     //! \param[in] URL URL for file to probe.
-    bool ContainsFiles(const GoTvUrl& url) override
+    bool ContainsFiles(const NlcUrl& url) override
     {
       return m_addon->ContainsFiles(url, m_items);
     }
@@ -272,28 +272,28 @@ namespace ADDON
     //! \param[in] url URL to file to list.
     //! \param items List of items in file.
     //! \return True if listing succeeded, false otherwise.
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items) override
     {
       return CVFSEntryIDirectoryWrapper::GetDirectory(url, items);
     }
 
     //! \brief Check if directory exists.
     //! \param[in] url URL to check.
-    bool Exists(const GoTvUrl& url) override
+    bool Exists(const NlcUrl& url) override
     {
       return CVFSEntryIDirectoryWrapper::Exists(url);
     }
 
     //! \brief Delete directory.
     //! \param[in] url URL to delete.
-    bool Remove(const GoTvUrl& url) override
+    bool Remove(const NlcUrl& url) override
     {
       return CVFSEntryIDirectoryWrapper::Remove(url);
     }
 
     //! \brief Create directory.
     //! \param[in] url URL to delete.
-    bool Create(const GoTvUrl& url) override
+    bool Create(const NlcUrl& url) override
     {
       return CVFSEntryIDirectoryWrapper::Create(url);
     }

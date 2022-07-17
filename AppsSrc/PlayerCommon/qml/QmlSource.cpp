@@ -19,31 +19,31 @@
 #include "qml/QmlSource.h"
 #include "qml/rendering/QmlVideoStream.h"
 
-GoTvPtoPQmlSource::GoTvPtoPQmlSource(QObject *parent)
+NlcPtoPQmlSource::NlcPtoPQmlSource(QObject *parent)
     : QObject(parent),
-      _videoStream(new GoTvPtoPQmlVideoStream(parent)) {}
+      _videoStream(new NlcPtoPQmlVideoStream(parent)) {}
 
-GoTvPtoPQmlSource::~GoTvPtoPQmlSource()
+NlcPtoPQmlSource::~NlcPtoPQmlSource()
 {
     delete _videoStream;
 }
 
-void GoTvPtoPQmlSource::setPlayer(GoTvPtoPMediaPlayer *player)
+void NlcPtoPQmlSource::setPlayer(NlcPtoPMediaPlayer *player)
 {
     _videoStream->init(player);
 }
 
-void GoTvPtoPQmlSource::removePlayer()
+void NlcPtoPQmlSource::removePlayer()
 {
     _videoStream->deinit();
 }
 
-void GoTvPtoPQmlSource::registerVideoOutput(GoTvPtoPQmlVideoOutput *output)
+void NlcPtoPQmlSource::registerVideoOutput(NlcPtoPQmlVideoOutput *output)
 {
     _videoStream->registerVideoOutput(output);
 }
 
-void GoTvPtoPQmlSource::deregisterVideoOutput(GoTvPtoPQmlVideoOutput *output)
+void NlcPtoPQmlSource::deregisterVideoOutput(NlcPtoPQmlVideoOutput *output)
 {
     _videoStream->deregisterVideoOutput(output);
 }

@@ -26,63 +26,63 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPInstance;
-struct GoTvPtoPStats;
+class NlcPtoPInstance;
+struct NlcPtoPStats;
 
 struct libgotvptop_event_t;
 struct libgotvptop_event_manager_t;
 struct libgotvptop_media_t;
 
 /*!
-    \class GoTvPtoPMedia Media.h core/Media.h
+    \class NlcPtoPMedia Media.h core/Media.h
     \ingroup GOTVQtCore
     \brief Media item
 
     An abstract representation of a playable media.
     It consists of a media location and various optional meta data.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPMedia : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPMedia : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPMedia constructor.
+        \brief NlcPtoPMedia constructor.
 
         This constructor creates a new media instance from a media location.
 
         \param location location of the media (QString)
         \param localFile true, if media is local file (bool)
-        \param instance main libgotvptop instance (GoTvPtoPInstance *)
+        \param instance main libgotvptop instance (NlcPtoPInstance *)
     */
-    explicit GoTvPtoPMedia(const QString &location,
+    explicit NlcPtoPMedia(const QString &location,
                       bool localFile,
-                      GoTvPtoPInstance *instance);
+                      NlcPtoPInstance *instance);
 
     /*!
-        \brief GoTvPtoPMedia constructor.
+        \brief NlcPtoPMedia constructor.
 
         This constructor creates a new media instance from a remote media location.
         Provided for convenience.
 
         \param location remote location of the media (QString)
-        \param instance main libgotvptop instance (GoTvPtoPInstance *)
+        \param instance main libgotvptop instance (NlcPtoPInstance *)
     */
-    explicit GoTvPtoPMedia(const QString &location,
-                      GoTvPtoPInstance *instance);
+    explicit NlcPtoPMedia(const QString &location,
+                      NlcPtoPInstance *instance);
 
     /*!
-        \brief GoTvPtoPMedia constructor.
+        \brief NlcPtoPMedia constructor.
 
         This constructor creates a new media instance from an existing one.
 
         \param media libgotvptop media item (libgotvptop_media_t *)
     */
-    GoTvPtoPMedia(libgotvptop_media_t *media);
+    NlcPtoPMedia(libgotvptop_media_t *media);
 
     /*!
-        \brief GoTvPtoPMedia destructor
+        \brief NlcPtoPMedia destructor
     */
-    ~GoTvPtoPMedia();
+    ~NlcPtoPMedia();
 
     /*!
         \brief libgotvptop media item
@@ -121,16 +121,16 @@ public:
     /*!
         \brief Get media stats
 
-        \return GoTvPtoPStats media stats object
+        \return NlcPtoPStats media stats object
     */
-    GoTvPtoPStats *getStats();
+    NlcPtoPStats *getStats();
 
     /*!
         \brief Get media state
         \return current media state
         \since GOTV-Qt 1.1
     */
-    GoTvPtoP::State state() const;
+    NlcPtoP::State state() const;
 
     /*!
         \brief Get media duration
@@ -146,13 +146,13 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
+        \param mux output mux (NlcPtoP::Mux)
         \return QString output file
         \sa record()
     */
     QString duplicate(const QString &name,
                       const QString &path,
-                      const GoTvPtoP::Mux &mux);
+                      const NlcPtoP::Mux &mux);
 
     /*!
         \brief Duplicate (provided for convenience)
@@ -161,17 +161,17 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
-        \param audioCodec audio codec (GoTvPtoP::AudioCodec)
-        \param videoCodec video codec (GoTvPtoP::VideoCodec)
+        \param mux output mux (NlcPtoP::Mux)
+        \param audioCodec audio codec (NlcPtoP::AudioCodec)
+        \param videoCodec video codec (NlcPtoP::VideoCodec)
         \return QString output file
         \sa record()
     */
     QString duplicate(const QString &name,
                       const QString &path,
-                      const GoTvPtoP::Mux &mux,
-                      const GoTvPtoP::AudioCodec &audioCodec,
-                      const GoTvPtoP::VideoCodec &videoCodec);
+                      const NlcPtoP::Mux &mux,
+                      const NlcPtoP::AudioCodec &audioCodec,
+                      const NlcPtoP::VideoCodec &videoCodec);
 
     /*!
         \brief Duplicate (provided for convenience)
@@ -181,9 +181,9 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
-        \param audioCodec audio codec (GoTvPtoP::AudioCodec)
-        \param videoCodec video codec (GoTvPtoP::VideoCodec)
+        \param mux output mux (NlcPtoP::Mux)
+        \param audioCodec audio codec (NlcPtoP::AudioCodec)
+        \param videoCodec video codec (NlcPtoP::VideoCodec)
         \param bitrate video bitrate (int)
         \param fps frames per second (int)
         \param scale video scale (int)
@@ -192,9 +192,9 @@ public:
     */
     QString duplicate(const QString &name,
                       const QString &path,
-                      const GoTvPtoP::Mux &mux,
-                      const GoTvPtoP::AudioCodec &audioCodec,
-                      const GoTvPtoP::VideoCodec &videoCodec,
+                      const NlcPtoP::Mux &mux,
+                      const NlcPtoP::AudioCodec &audioCodec,
+                      const NlcPtoP::VideoCodec &videoCodec,
                       int bitrate,
                       int fps,
                       int scale);
@@ -206,12 +206,12 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
+        \param mux output mux (NlcPtoP::Mux)
         \return QString output file
     */
     QString merge(const QString &name,
                   const QString &path,
-                  const GoTvPtoP::Mux &mux);
+                  const NlcPtoP::Mux &mux);
 
     /*!
         \brief Record
@@ -220,13 +220,13 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
+        \param mux output mux (NlcPtoP::Mux)
         \param duplicate also duplicate on screen (bool)
         \return QString output file
     */
     QString record(const QString &name,
                    const QString &path,
-                   const GoTvPtoP::Mux &mux,
+                   const NlcPtoP::Mux &mux,
                    bool duplicate = false);
 
     /*!
@@ -236,17 +236,17 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
-        \param audioCodec audio codec (GoTvPtoP::AudioCodec)
-        \param videoCodec video codec (GoTvPtoP::VideoCodec)
+        \param mux output mux (NlcPtoP::Mux)
+        \param audioCodec audio codec (NlcPtoP::AudioCodec)
+        \param videoCodec video codec (NlcPtoP::VideoCodec)
         \param duplicate also duplicate on screen (bool)
         \return QString output file
     */
     QString record(const QString &name,
                    const QString &path,
-                   const GoTvPtoP::Mux &mux,
-                   const GoTvPtoP::AudioCodec &audioCodec,
-                   const GoTvPtoP::VideoCodec &videoCodec,
+                   const NlcPtoP::Mux &mux,
+                   const NlcPtoP::AudioCodec &audioCodec,
+                   const NlcPtoP::VideoCodec &videoCodec,
                    bool duplicate = false);
 
     /*!
@@ -257,9 +257,9 @@ public:
 
         \param name output file name (QString)
         \param path output path (QString)
-        \param mux output mux (GoTvPtoP::Mux)
-        \param audioCodec audio codec (GoTvPtoP::AudioCodec)
-        \param videoCodec video codec (GoTvPtoP::VideoCodec)
+        \param mux output mux (NlcPtoP::Mux)
+        \param audioCodec audio codec (NlcPtoP::AudioCodec)
+        \param videoCodec video codec (NlcPtoP::VideoCodec)
         \param bitrate video bitrate (int)
         \param fps frames per second (int)
         \param scale video scale (int)
@@ -268,9 +268,9 @@ public:
     */
     QString record(const QString &name,
                    const QString &path,
-                   const GoTvPtoP::Mux &mux,
-                   const GoTvPtoP::AudioCodec &audioCodec,
-                   const GoTvPtoP::VideoCodec &videoCodec,
+                   const NlcPtoP::Mux &mux,
+                   const NlcPtoP::AudioCodec &audioCodec,
+                   const NlcPtoP::VideoCodec &videoCodec,
                    int bitrate,
                    int fps,
                    int scale,
@@ -299,7 +299,7 @@ signals:
         \brief Signal sent on meta change
         \param meta new meta
     */
-    void metaChanged(const GoTvPtoP::Meta &meta);
+    void metaChanged(const NlcPtoP::Meta &meta);
 
     /*!
         \brief Signal sent on subitem added
@@ -336,12 +336,12 @@ signals:
         \brief Signal sent on state change
         \param state new state
     */
-    void stateChanged(const GoTvPtoP::State &state);
+    void stateChanged(const NlcPtoP::State &state);
 
 private:
     void initMedia(const QString &location,
                    bool localFile,
-                   GoTvPtoPInstance *instance);
+                   NlcPtoPInstance *instance);
 
     static void libgotvptop_callback(const libgotvptop_event_t *event,
                                 void *data);

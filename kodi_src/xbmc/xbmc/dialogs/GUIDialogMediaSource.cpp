@@ -16,7 +16,7 @@
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "input/Key.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
@@ -29,7 +29,7 @@
 #include "settings/SettingsComponent.h"
 #include "guilib/LocalizeStrings.h"
 #include "PasswordManager.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "pvr/recordings/PVRRecordingsPath.h"
 
 #if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
@@ -410,7 +410,7 @@ void CGUIDialogMediaSource::OnPathBrowse(int item)
       m_paths->Get(item)->SetPath(path);
     if (!m_bNameChanged || m_name.empty())
     {
-      GoTvUrl url(path);
+      NlcUrl url(path);
       m_name = url.GetWithoutUserDetails();
       URIUtils::RemoveSlashAtEnd(m_name);
       m_name = CUtil::GetTitleFromPath(m_name);
@@ -432,7 +432,7 @@ void CGUIDialogMediaSource::OnPath(int item)
 
   if (!m_bNameChanged || m_name.empty())
   {
-    GoTvUrl url(m_paths->Get(item)->GetPath());
+    NlcUrl url(m_paths->Get(item)->GetPath());
     m_name = url.GetWithoutUserDetails();
     URIUtils::RemoveSlashAtEnd(m_name);
     m_name = CUtil::GetTitleFromPath(m_name);
@@ -483,7 +483,7 @@ void CGUIDialogMediaSource::UpdateButtons()
   {
     CFileItemPtr item = m_paths->Get(i);
     std::string path;
-    GoTvUrl url(item->GetPath());
+    NlcUrl url(item->GetPath());
     path = url.GetWithoutUserDetails();
     if (path.empty()) path = "<" + g_localizeStrings.Get(231) + ">"; // <None>
     item->SetLabel(path);
@@ -600,7 +600,7 @@ std::vector<std::string> CGUIDialogMediaSource::GetPaths() const
     { // strip off the user and password for supported paths (anything that the password manager can auth)
       // and add the user/pass to the password manager - note, we haven't confirmed that it works
       // at this point, but if it doesn't, the user will get prompted anyway in implementation.
-      GoTvUrl url(m_paths->Get(i)->GetPath());
+      NlcUrl url(m_paths->Get(i)->GetPath());
       if (CPasswordManager::GetInstance().IsURLSupported(url) && !url.GetUserName().empty())
       {
         CPasswordManager::GetInstance().SaveAuthenticatedURL(url);

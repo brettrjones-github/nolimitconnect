@@ -352,7 +352,7 @@ static void x264_plane_copy_deinterleave_rgb_c( pixel *dsta, intptr_t i_dsta,
     }
 }
 
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
 static ALWAYS_INLINE uint32_t v210_endian_fix32( uint32_t x )
 {
     return (x<<24) + ((x<<8)&0xff0000) + ((x>>8)&0xff00) + (x>>24);

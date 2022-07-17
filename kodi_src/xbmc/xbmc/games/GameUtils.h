@@ -16,7 +16,7 @@
 #include <string>
 
 class CFileItem;
-class GoTvUrl;
+class NlcUrl;
 
 namespace KODI
 {
@@ -63,7 +63,7 @@ namespace GAME
 
   private:
     static void GetGameClients(const CFileItem& file, GameClientVector& candidates, GameClientVector& installable, bool& bHasVfsGameClient);
-    static void GetGameClients(const ADDON::VECADDONS& addons, const GoTvUrl& translatedUrl, GameClientVector& candidates, bool& bHasVfsGameClient);
+    static void GetGameClients(const ADDON::VECADDONS& addons, const NlcUrl& translatedUrl, GameClientVector& candidates, bool& bHasVfsGameClient);
   };
 } // namespace GAME
 }

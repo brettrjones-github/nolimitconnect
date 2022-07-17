@@ -13,7 +13,7 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "climits"
 
 #include <algorithm>
@@ -58,7 +58,7 @@ bool CDirectoryCache::GetDirectory(const std::string& strPath, CFileItemList &it
   CSingleLock lock (m_cs);
 
   // Get rid of any URL options, else the compare may be wrong
-  std::string storedPath = GoTvUrl(strPath).GetWithoutOptions();
+  std::string storedPath = NlcUrl(strPath).GetWithoutOptions();
   URIUtils::RemoveSlashAtEnd(storedPath);
 
   ciCache i = m_cache.find(storedPath);
@@ -98,7 +98,7 @@ void CDirectoryCache::SetDirectory(const std::string& strPath, const CFileItemLi
   CSingleLock lock (m_cs);
 
   // Get rid of any URL options, else the compare may be wrong
-  std::string storedPath = GoTvUrl(strPath).GetWithoutOptions();
+  std::string storedPath = NlcUrl(strPath).GetWithoutOptions();
   URIUtils::RemoveSlashAtEnd(storedPath);
 
   ClearDirectory(storedPath);
@@ -114,7 +114,7 @@ void CDirectoryCache::SetDirectory(const std::string& strPath, const CFileItemLi
 void CDirectoryCache::ClearFile(const std::string& strFile)
 {
   // Get rid of any URL options, else the compare may be wrong
-  std::string strFile2 = GoTvUrl(strFile).GetWithoutOptions();
+  std::string strFile2 = NlcUrl(strFile).GetWithoutOptions();
 
   ClearDirectory(URIUtils::GetDirectory(strFile2));
 }
@@ -124,7 +124,7 @@ void CDirectoryCache::ClearDirectory(const std::string& strPath)
   CSingleLock lock (m_cs);
 
   // Get rid of any URL options, else the compare may be wrong
-  std::string storedPath = GoTvUrl(strPath).GetWithoutOptions();
+  std::string storedPath = NlcUrl(strPath).GetWithoutOptions();
   URIUtils::RemoveSlashAtEnd(storedPath);
 
   iCache i = m_cache.find(storedPath);
@@ -137,7 +137,7 @@ void CDirectoryCache::ClearSubPaths(const std::string& strPath)
   CSingleLock lock (m_cs);
 
   // Get rid of any URL options, else the compare may be wrong
-  std::string storedPath = GoTvUrl(strPath).GetWithoutOptions();
+  std::string storedPath = NlcUrl(strPath).GetWithoutOptions();
 
   iCache i = m_cache.begin();
   while (i != m_cache.end())
@@ -154,7 +154,7 @@ void CDirectoryCache::AddFile(const std::string& strFile)
   CSingleLock lock (m_cs);
 
   // Get rid of any URL options, else the compare may be wrong
-  std::string strPath = URIUtils::GetDirectory(GoTvUrl(strFile).GetWithoutOptions());
+  std::string strPath = URIUtils::GetDirectory(NlcUrl(strFile).GetWithoutOptions());
   URIUtils::RemoveSlashAtEnd(strPath);
 
   ciCache i = m_cache.find(strPath);
@@ -173,7 +173,7 @@ bool CDirectoryCache::FileExists(const std::string& strFile, bool& bInCache)
   bInCache = false;
 
   // Get rid of any URL options, else the compare may be wrong
-  std::string strPath = GoTvUrl(strFile).GetWithoutOptions();
+  std::string strPath = NlcUrl(strFile).GetWithoutOptions();
   URIUtils::RemoveSlashAtEnd(strPath);
   std::string storedPath = URIUtils::GetDirectory(strPath);
   URIUtils::RemoveSlashAtEnd(storedPath);

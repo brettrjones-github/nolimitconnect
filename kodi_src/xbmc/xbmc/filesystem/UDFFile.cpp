@@ -9,7 +9,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "UDFFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <sys/stat.h>
 #include <errno.h>
@@ -35,7 +35,7 @@ CUDFFile::~CUDFFile()
   }
 }
 //*********************************************************************************************
-bool CUDFFile::Open(const GoTvUrl& url)
+bool CUDFFile::Open(const NlcUrl& url)
 {
   if(!m_udfIsoReaderLocal.Open(url.GetHostName().c_str()) || url.GetFileName().empty())
      return false;
@@ -96,7 +96,7 @@ int64_t CUDFFile::GetPosition()
   return m_udfIsoReaderLocal.GetFilePosition(m_hFile);
 }
 
-bool CUDFFile::Exists(const GoTvUrl& url)
+bool CUDFFile::Exists(const NlcUrl& url)
 {
   if(!m_udfIsoReaderLocal.Open(url.GetHostName().c_str()))
      return false;
@@ -110,7 +110,7 @@ bool CUDFFile::Exists(const GoTvUrl& url)
   return true;
 }
 
-int CUDFFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CUDFFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   if(!m_udfIsoReaderLocal.Open(url.GetHostName().c_str()))
      return -1;

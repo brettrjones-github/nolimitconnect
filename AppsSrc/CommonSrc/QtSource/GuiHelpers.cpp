@@ -862,8 +862,8 @@ bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
         || strUserName.contains( "No Limit Connect" )
         || strUserName.contains( "no limit connect" )
         || strUserName.contains( "NoLimitConnectWeb" )
-        || strUserName.contains( "GoTvPtoP" )
-        || strUserName.contains( "GoTv PtoP Web" )
+        || strUserName.contains( "NlcPtoP" )
+        || strUserName.contains( "Nlc PtoP Web" )
         || strUserName.contains( "gotv ptop web" ) )
     {
         QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have NoLimitConnect in name." ) );

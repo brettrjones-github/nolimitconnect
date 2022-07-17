@@ -23,7 +23,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "settings/lib/Setting.h"
 #include "settings/windows/GUIControlSettings.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -224,7 +224,7 @@ void CGUIDialogNetworkSetup::OnServerBrowse()
     basePath = tempPath;
   share.strPath = basePath;
   // don't include the user details in the share name
-  GoTvUrl url(share.strPath);
+  NlcUrl url(share.strPath);
   share.strName = url.GetWithoutUserDetails();
   shares.push_back(share);
   if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, g_localizeStrings.Get(1015), path))
@@ -346,7 +346,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 
 std::string CGUIDialogNetworkSetup::ConstructPath() const
 {
-  GoTvUrl url;
+  NlcUrl url;
   url.SetProtocol(m_protocols[m_protocol].type);
 
   if (!m_username.empty())
@@ -391,7 +391,7 @@ bool CGUIDialogNetworkSetup::SetPath(const std::string &path)
     Reset();
     return true;
   }
-  GoTvUrl url(path);
+  NlcUrl url(path);
   m_protocol = -1;
   for (size_t i = 0; i < m_protocols.size(); ++i)
   {

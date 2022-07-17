@@ -10,7 +10,7 @@
 
 #include "SmartPlaylistFileItemListModifier.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "playlists/SmartPlayList.h"
 #include "utils/StringUtils.h"
 
@@ -48,6 +48,6 @@ std::string CSmartPlaylistFileItemListModifier::GetUrlOption(const std::string &
   if (path.empty() || option.empty())
     return StringUtils::Empty;
 
-  GoTvUrl url(path);
+  NlcUrl url(path);
   return url.GetOption(option);
 }

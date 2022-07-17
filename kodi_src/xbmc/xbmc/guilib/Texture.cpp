@@ -20,7 +20,7 @@
 #include "platform/darwin/DarwinUtils.h"
 #endif
 #if defined(TARGET_ANDROID)
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/AndroidAppFile.h"
 #endif
 #ifdef TARGET_POSIX
@@ -181,7 +181,7 @@ void CBaseTexture::ClampToEdge()
 CBaseTexture *CBaseTexture::LoadFromFile(const std::string& texturePath, unsigned int idealWidth, unsigned int idealHeight, bool requirePixels, const std::string& strMimeType)
 {
 #if defined(TARGET_ANDROID)
-  GoTvUrl url(texturePath);
+  NlcUrl url(texturePath);
   if (url.IsProtocol("androidapp"))
   {
     XFILE::CFileAndroidApp file;
@@ -243,7 +243,7 @@ bool CBaseTexture::LoadFromFileInternal(const std::string& texturePath, unsigned
   if (file.LoadFile(texturePath, buf) <= 0)
     return false;
 
-  GoTvUrl url(texturePath);
+  NlcUrl url(texturePath);
   // make sure resource:// paths are properly resolved
   if (url.IsProtocol("resource"))
   {
@@ -272,7 +272,7 @@ bool CBaseTexture::LoadFromFileInternal(const std::string& texturePath, unsigned
 
   if (!LoadIImage(pImage, (unsigned char *)buf.get(), buf.size(), width, height))
   {
-    CLog::Log(LOGDEBUG, "%s - Load of %s failed.", __FUNCTION__, GoTvUrl::GetRedacted(texturePath).c_str());
+    CLog::Log(LOGDEBUG, "%s - Load of %s failed.", __FUNCTION__, NlcUrl::GetRedacted(texturePath).c_str());
     delete pImage;
     return false;
   }

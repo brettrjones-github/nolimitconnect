@@ -16,7 +16,7 @@
 #include "IDirectory.h"
 
 class CFileItem;
-class GoTvUrl;
+class NlcUrl;
 
 namespace XFILE
 {
@@ -27,11 +27,11 @@ public:
     ~CUPnPDirectory(void) override = default;
 
     // IDirectory methods
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
     bool AllowAll() const override { return true; }
 
     // class methods
-    static const char* GetFriendlyName(const GoTvUrl& url);
-    static bool        GetResource(const GoTvUrl &path, CFileItem& item);
+    static const char* GetFriendlyName(const NlcUrl& url);
+    static bool        GetResource(const NlcUrl &path, CFileItem& item);
 };
 }

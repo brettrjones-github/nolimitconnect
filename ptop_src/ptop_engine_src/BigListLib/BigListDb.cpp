@@ -17,7 +17,7 @@
 #include "BigListInfo.h"
 #include "BigListMgr.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 
 #include <CoreLib/sqlite3.h>
 #include <CoreLib/VxMacros.h>

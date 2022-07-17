@@ -69,7 +69,7 @@ bool CInputStreamAddon::Supports(BinaryAddonBasePtr& addonBase, const CFileItem 
     return (addon.asString() == addonBase->ID());
 
   // check protocols
-  std::string protocol = GoTvUrl(fileitem.GetDynPath()).GetProtocol();
+  std::string protocol = NlcUrl(fileitem.GetDynPath()).GetProtocol();
   if (!protocol.empty())
   {
     std::string protocols = addonBase->Type(ADDON_INPUTSTREAM)->GetValue("@protocols").asString();

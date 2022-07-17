@@ -24,7 +24,7 @@
 #include "IApple.h"
 #ifdef TARGET_OS_APPLE
 
-#include "GuiInterface/IGoTv.h" 
+#include "GuiInterface/INlc.h" 
 
 
 #include "CompileInfo.h"
@@ -42,7 +42,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "platform/win32/WIN32Util.h"
 
 
@@ -51,7 +51,7 @@ using namespace XFILE;
 
 
 
-IApple::IApple( IGoTv& gotv )
+IApple::IApple( INlc& gotv )
     : OsInterface( gotv )
 {
 }

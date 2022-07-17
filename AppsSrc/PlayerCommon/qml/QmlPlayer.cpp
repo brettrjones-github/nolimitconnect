@@ -27,32 +27,32 @@
 #include "qml/QmlPlayer.h"
 #include "qml/QmlSource.h"
 
-GoTvPtoPQmlPlayer::GoTvPtoPQmlPlayer(QObject *parent)
-    : GoTvPtoPQmlSource(parent),
+NlcPtoPQmlPlayer::NlcPtoPQmlPlayer(QObject *parent)
+    : NlcPtoPQmlSource(parent),
       _media(0),
       _autoplay(true),
-      _deinterlacing(GoTvPtoP::Disabled),
+      _deinterlacing(NlcPtoP::Disabled),
       _audioPreferredLanguages(QStringList()),
       _subtitlePreferredLanguages(QStringList())
 {
-    _instance = new GoTvPtoPInstance(GoTvPtoPCommon::args(), this);
-    _player = new GoTvPtoPMediaPlayer(_instance);
+    _instance = new NlcPtoPInstance(NlcPtoPCommon::args(), this);
+    _player = new NlcPtoPMediaPlayer(_instance);
 
-    _audioTrackModel = new GoTvPtoPTrackModel(this);
-    _subtitleTrackModel = new GoTvPtoPTrackModel(this);
-    _videoTrackModel = new GoTvPtoPTrackModel(this);
+    _audioTrackModel = new NlcPtoPTrackModel(this);
+    _subtitleTrackModel = new NlcPtoPTrackModel(this);
+    _videoTrackModel = new NlcPtoPTrackModel(this);
 
-    connect(_player, &GoTvPtoPMediaPlayer::lengthChanged, this, &GoTvPtoPQmlPlayer::lengthChanged);
-    connect(_player, &GoTvPtoPMediaPlayer::positionChanged, this, &GoTvPtoPQmlPlayer::positionChanged);
-    connect(_player, &GoTvPtoPMediaPlayer::seekableChanged, this, &GoTvPtoPQmlPlayer::seekableChanged);
-    connect(_player, &GoTvPtoPMediaPlayer::stateChanged, this, &GoTvPtoPQmlPlayer::stateChanged);
-    connect(_player, &GoTvPtoPMediaPlayer::timeChanged, this, &GoTvPtoPQmlPlayer::timeChanged);
-    connect(_player, &GoTvPtoPMediaPlayer::vout, this, &GoTvPtoPQmlPlayer::mediaPlayerVout);
+    connect(_player, &NlcPtoPMediaPlayer::lengthChanged, this, &NlcPtoPQmlPlayer::lengthChanged);
+    connect(_player, &NlcPtoPMediaPlayer::positionChanged, this, &NlcPtoPQmlPlayer::positionChanged);
+    connect(_player, &NlcPtoPMediaPlayer::seekableChanged, this, &NlcPtoPQmlPlayer::seekableChanged);
+    connect(_player, &NlcPtoPMediaPlayer::stateChanged, this, &NlcPtoPQmlPlayer::stateChanged);
+    connect(_player, &NlcPtoPMediaPlayer::timeChanged, this, &NlcPtoPQmlPlayer::timeChanged);
+    connect(_player, &NlcPtoPMediaPlayer::vout, this, &NlcPtoPQmlPlayer::mediaPlayerVout);
 
     setPlayer(_player);
 }
 
-GoTvPtoPQmlPlayer::~GoTvPtoPQmlPlayer()
+NlcPtoPQmlPlayer::~NlcPtoPQmlPlayer()
 {
     _player->stop();
     removePlayer();
@@ -64,27 +64,27 @@ GoTvPtoPQmlPlayer::~GoTvPtoPQmlPlayer()
     delete _instance;
 }
 
-void GoTvPtoPQmlPlayer::pause()
+void NlcPtoPQmlPlayer::pause()
 {
     _player->pause();
 }
 
-void GoTvPtoPQmlPlayer::play()
+void NlcPtoPQmlPlayer::play()
 {
     _player->play();
 }
 
-void GoTvPtoPQmlPlayer::stop()
+void NlcPtoPQmlPlayer::stop()
 {
     _player->stop();
 }
 
-bool GoTvPtoPQmlPlayer::autoplay() const
+bool NlcPtoPQmlPlayer::autoplay() const
 {
     return _autoplay;
 }
 
-void GoTvPtoPQmlPlayer::setAutoplay(bool autoplay)
+void NlcPtoPQmlPlayer::setAutoplay(bool autoplay)
 {
     if (_autoplay == autoplay)
         return;
@@ -93,71 +93,71 @@ void GoTvPtoPQmlPlayer::setAutoplay(bool autoplay)
     emit autoplayChanged();
 }
 
-int GoTvPtoPQmlPlayer::deinterlacing() const
+int NlcPtoPQmlPlayer::deinterlacing() const
 {
     return _deinterlacing;
 }
 
-void GoTvPtoPQmlPlayer::setDeinterlacing(int deinterlacing)
+void NlcPtoPQmlPlayer::setDeinterlacing(int deinterlacing)
 {
     if (_deinterlacing == deinterlacing)
         return;
 
-    _deinterlacing = GoTvPtoP::Deinterlacing(deinterlacing);
+    _deinterlacing = NlcPtoP::Deinterlacing(deinterlacing);
     _player->video()->setDeinterlace(_deinterlacing);
     emit deinterlacingChanged();
 }
 
-qint64 GoTvPtoPQmlPlayer::length() const
+qint64 NlcPtoPQmlPlayer::length() const
 {
     return _player->length();
 }
 
-int GoTvPtoPQmlPlayer::logLevel() const
+int NlcPtoPQmlPlayer::logLevel() const
 {
     return _instance->logLevel();
 }
 
-void GoTvPtoPQmlPlayer::setLogLevel(int level)
+void NlcPtoPQmlPlayer::setLogLevel(int level)
 {
     if (level == logLevel())
         return;
 
-    _instance->setLogLevel(GoTvPtoP::LogLevel(level));
+    _instance->setLogLevel(NlcPtoP::LogLevel(level));
     emit logLevelChanged();
 }
 
-bool GoTvPtoPQmlPlayer::seekable() const
+bool NlcPtoPQmlPlayer::seekable() const
 {
     return _player->seekable();
 }
 
-int GoTvPtoPQmlPlayer::state() const
+int NlcPtoPQmlPlayer::state() const
 {
     return _player->state();
 }
 
-float GoTvPtoPQmlPlayer::position() const
+float NlcPtoPQmlPlayer::position() const
 {
     return _player->position();
 }
 
-void GoTvPtoPQmlPlayer::setPosition(float position)
+void NlcPtoPQmlPlayer::setPosition(float position)
 {
     _player->setPosition(position);
 }
 
-qint64 GoTvPtoPQmlPlayer::time() const
+qint64 NlcPtoPQmlPlayer::time() const
 {
     return _player->time();
 }
 
-void GoTvPtoPQmlPlayer::setTime(qint64 time)
+void NlcPtoPQmlPlayer::setTime(qint64 time)
 {
     _player->setTime(time);
 }
 
-QUrl GoTvPtoPQmlPlayer::url() const
+QUrl NlcPtoPQmlPlayer::url() const
 {
     if (_media)
         return QUrl(_media->currentLocation());
@@ -165,9 +165,9 @@ QUrl GoTvPtoPQmlPlayer::url() const
         return QUrl();
 }
 
-void GoTvPtoPQmlPlayer::setUrl(const QUrl &url)
+void NlcPtoPQmlPlayer::setUrl(const QUrl &url)
 {
-    if (url == GoTvPtoPQmlPlayer::url())
+    if (url == NlcPtoPQmlPlayer::url())
         return;
 
     _player->stop();
@@ -176,57 +176,57 @@ void GoTvPtoPQmlPlayer::setUrl(const QUrl &url)
         _media->deleteLater();
 
     if (url.isLocalFile()) {
-        _media = new GoTvPtoPMedia(url.toLocalFile(), true, _instance);
+        _media = new NlcPtoPMedia(url.toLocalFile(), true, _instance);
     } else {
-        _media = new GoTvPtoPMedia(url.toString(QUrl::FullyEncoded), false, _instance);
+        _media = new NlcPtoPMedia(url.toString(QUrl::FullyEncoded), false, _instance);
     }
 
-    connect(_media, static_cast<void (GoTvPtoPMedia::*)(bool)>(&GoTvPtoPMedia::parsedChanged), this, &GoTvPtoPQmlPlayer::mediaParsed);
+    connect(_media, static_cast<void (NlcPtoPMedia::*)(bool)>(&NlcPtoPMedia::parsedChanged), this, &NlcPtoPQmlPlayer::mediaParsed);
 
     openInternal();
 
     emit urlChanged();
 }
 
-int GoTvPtoPQmlPlayer::volume() const
+int NlcPtoPQmlPlayer::volume() const
 {
     return _player->audio()->volume();
 }
 
-void GoTvPtoPQmlPlayer::setVolume(int volume)
+void NlcPtoPQmlPlayer::setVolume(int volume)
 {
-    if (volume == GoTvPtoPQmlPlayer::volume())
+    if (volume == NlcPtoPQmlPlayer::volume())
         return;
 
     _player->audio()->setVolume(volume);
     emit volumeChanged();
 }
 
-GoTvPtoPTrackModel *GoTvPtoPQmlPlayer::audioTrackModel() const
+NlcPtoPTrackModel *NlcPtoPQmlPlayer::audioTrackModel() const
 {
     return _audioTrackModel;
 }
 
-int GoTvPtoPQmlPlayer::audioTrack() const
+int NlcPtoPQmlPlayer::audioTrack() const
 {
     return _player->audio()->track();
 }
 
-void GoTvPtoPQmlPlayer::setAudioTrack(int audioTrack)
+void NlcPtoPQmlPlayer::setAudioTrack(int audioTrack)
 {
-    if (audioTrack == GoTvPtoPQmlPlayer::audioTrack())
+    if (audioTrack == NlcPtoPQmlPlayer::audioTrack())
         return;
 
     _player->audio()->setTrack(audioTrack);
     emit audioTrackChanged();
 }
 
-QStringList GoTvPtoPQmlPlayer::audioPreferredLanguages() const
+QStringList NlcPtoPQmlPlayer::audioPreferredLanguages() const
 {
     return _audioPreferredLanguages;
 }
 
-void GoTvPtoPQmlPlayer::setAudioPreferredLanguages(const QStringList &audioPreferredLanguages)
+void NlcPtoPQmlPlayer::setAudioPreferredLanguages(const QStringList &audioPreferredLanguages)
 {
     if (_audioPreferredLanguages == audioPreferredLanguages)
         return;
@@ -235,31 +235,31 @@ void GoTvPtoPQmlPlayer::setAudioPreferredLanguages(const QStringList &audioPrefe
     emit audioPreferredLanguagesChanged();
 }
 
-GoTvPtoPTrackModel *GoTvPtoPQmlPlayer::subtitleTrackModel() const
+NlcPtoPTrackModel *NlcPtoPQmlPlayer::subtitleTrackModel() const
 {
     return _subtitleTrackModel;
 }
 
-int GoTvPtoPQmlPlayer::subtitleTrack() const
+int NlcPtoPQmlPlayer::subtitleTrack() const
 {
     return _player->video()->subtitle();
 }
 
-void GoTvPtoPQmlPlayer::setSubtitleTrack(int subtitleTrack)
+void NlcPtoPQmlPlayer::setSubtitleTrack(int subtitleTrack)
 {
-    if (subtitleTrack == GoTvPtoPQmlPlayer::subtitleTrack())
+    if (subtitleTrack == NlcPtoPQmlPlayer::subtitleTrack())
         return;
 
     _player->video()->setSubtitle(subtitleTrack);
     emit subtitleTrackChanged();
 }
 
-QStringList GoTvPtoPQmlPlayer::subtitlePreferredLanguages() const
+QStringList NlcPtoPQmlPlayer::subtitlePreferredLanguages() const
 {
     return _subtitlePreferredLanguages;
 }
 
-void GoTvPtoPQmlPlayer::setSubtitlePreferredLanguages(const QStringList &subtitlePreferredLanguages)
+void NlcPtoPQmlPlayer::setSubtitlePreferredLanguages(const QStringList &subtitlePreferredLanguages)
 {
     if (_subtitlePreferredLanguages == subtitlePreferredLanguages)
         return;
@@ -268,26 +268,26 @@ void GoTvPtoPQmlPlayer::setSubtitlePreferredLanguages(const QStringList &subtitl
     emit subtitlePreferredLanguagesChanged();
 }
 
-GoTvPtoPTrackModel *GoTvPtoPQmlPlayer::videoTrackModel() const
+NlcPtoPTrackModel *NlcPtoPQmlPlayer::videoTrackModel() const
 {
     return _videoTrackModel;
 }
 
-int GoTvPtoPQmlPlayer::videoTrack() const
+int NlcPtoPQmlPlayer::videoTrack() const
 {
     return _player->video()->track();
 }
 
-void GoTvPtoPQmlPlayer::setVideoTrack(int videoTrack)
+void NlcPtoPQmlPlayer::setVideoTrack(int videoTrack)
 {
-    if (videoTrack == GoTvPtoPQmlPlayer::videoTrack())
+    if (videoTrack == NlcPtoPQmlPlayer::videoTrack())
         return;
 
     _player->video()->setTrack(videoTrack);
     emit videoTrackChanged();
 }
 
-void GoTvPtoPQmlPlayer::mediaParsed(bool parsed)
+void NlcPtoPQmlPlayer::mediaParsed(bool parsed)
 {
     if (parsed) {
         _audioTrackModel->clear();
@@ -297,7 +297,7 @@ void GoTvPtoPQmlPlayer::mediaParsed(bool parsed)
     }
 }
 
-void GoTvPtoPQmlPlayer::mediaPlayerVout(int)
+void NlcPtoPQmlPlayer::mediaPlayerVout(int)
 {
     _subtitleTrackModel->clear();
     _subtitleTrackModel->load(_player->video()->subtitles());
@@ -310,7 +310,7 @@ void GoTvPtoPQmlPlayer::mediaPlayerVout(int)
     setVideoTrack(_player->video()->track());
 }
 
-void GoTvPtoPQmlPlayer::openInternal()
+void NlcPtoPQmlPlayer::openInternal()
 {
     if (_autoplay)
         _player->open(_media);
@@ -318,16 +318,16 @@ void GoTvPtoPQmlPlayer::openInternal()
         _player->openOnly(_media);
 }
 
-int GoTvPtoPQmlPlayer::preferredAudioTrackId()
+int NlcPtoPQmlPlayer::preferredAudioTrackId()
 {
     int currentTrackId = _player->audio()->track();
     if (_audioTrackModel->count() && _audioPreferredLanguages.count()) {
         bool found = false;
         for (int j = 0; !found && j < _audioPreferredLanguages.count(); j++) {
             for (int i = 0; !found && i < _audioTrackModel->count(); i++) {
-                QString trackTitle = _audioTrackModel->data(i, GoTvPtoPTrackModel::TitleRole).toString();
+                QString trackTitle = _audioTrackModel->data(i, NlcPtoPTrackModel::TitleRole).toString();
                 if (trackTitle.contains(_audioPreferredLanguages.at(j))) {
-                    currentTrackId = _audioTrackModel->data(i, GoTvPtoPTrackModel::IdRole).toInt();
+                    currentTrackId = _audioTrackModel->data(i, NlcPtoPTrackModel::IdRole).toInt();
                     found = true;
                 }
             }
@@ -337,16 +337,16 @@ int GoTvPtoPQmlPlayer::preferredAudioTrackId()
     return currentTrackId;
 }
 
-int GoTvPtoPQmlPlayer::preferredSubtitleTrackId()
+int NlcPtoPQmlPlayer::preferredSubtitleTrackId()
 {
     int currentTrackId = _player->video()->subtitle();
     if (_subtitleTrackModel->count()) {
         bool found = false;
         for (int j = 0; !found && j < _subtitlePreferredLanguages.count(); j++) {
             for (int i = 0; !found && i < _subtitleTrackModel->count(); i++) {
-                QString trackTitle = _subtitleTrackModel->data(i, GoTvPtoPTrackModel::TitleRole).toString();
+                QString trackTitle = _subtitleTrackModel->data(i, NlcPtoPTrackModel::TitleRole).toString();
                 if (trackTitle.contains(_subtitlePreferredLanguages.at(j))) {
-                    currentTrackId = _subtitleTrackModel->data(i, GoTvPtoPTrackModel::IdRole).toInt();
+                    currentTrackId = _subtitleTrackModel->data(i, NlcPtoPTrackModel::IdRole).toInt();
                     found = true;
                 }
             }

@@ -273,7 +273,7 @@
    that the values passed as arguments n, ..., m must be non-NULL pointers.
    n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 #ifndef _GL_ARG_NONNULL
-# define _GL_ARG_NONNULL GOTV_ARG_NONNULL
+# define _GL_ARG_NONNULL NLC_ARG_NONNULL
 #endif
 
 /* The definition of _GL_WARN_ON_USE is copied here.  */

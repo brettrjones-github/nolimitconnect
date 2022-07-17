@@ -18,7 +18,7 @@
 #include "guilib/TextureManager.h"
 #include "FileItem.h"
 #include "File.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "GUIInfoManager.h"
 #include "utils/log.h"
 
@@ -28,7 +28,7 @@ CLibraryDirectory::CLibraryDirectory(void) = default;
 
 CLibraryDirectory::~CLibraryDirectory(void) = default;
 
-bool CLibraryDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CLibraryDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string libNode = GetNode(url);
   if (libNode.empty())
@@ -147,12 +147,12 @@ TiXmlElement *CLibraryDirectory::LoadXML(const std::string &xmlFile)
   return nullptr;
 }
 
-bool CLibraryDirectory::Exists(const GoTvUrl& url)
+bool CLibraryDirectory::Exists(const NlcUrl& url)
 {
   return !GetNode(url).empty();
 }
 
-std::string CLibraryDirectory::GetNode(const GoTvUrl& url)
+std::string CLibraryDirectory::GetNode(const NlcUrl& url)
 {
   std::string libDir = URIUtils::AddFileToFolder(m_profileManager->GetLibraryFolder(), url.GetHostName() + "/");
   if (!CDirectory::Exists(libDir))

@@ -17,9 +17,9 @@ namespace XFILE
     public:
       CHTTPDirectory(void);
       ~CHTTPDirectory(void) override;
-      bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-      bool Exists(const GoTvUrl& url) override;
-      DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_ONCE; };
+      bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+      bool Exists(const NlcUrl& url) override;
+      DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_ONCE; };
     private:
   };
 }

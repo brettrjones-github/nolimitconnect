@@ -25,9 +25,9 @@
 //=== Apple Specific ===//
 //============================================================================
 #elif defined(TARGET_OS_APPLE)
-echo GoTv Compiler Config error apple not supported
+echo Nlc Compiler Config error apple not supported
 #else 
-echo GoTv Compiler Config error no os defined
+echo Nlc Compiler Config error no os defined
 #endif
 
 //============================================================================
@@ -225,7 +225,7 @@ extern "C" {
 #define LIBDIR					".libs/"
 #define LOCALEDIR				".libs/"
 #define BISON_LOCALEDIR			".bison/"
-#define GOTV_DEFAULT_DATA_DIR   ".ptopdata/"
+#define NLC_DEFAULT_DATA_DIR   ".ptopdata/"
 
 /* Use C99 variable - size arrays */
 // to many issues with the define.. instead define USE_VAR_ARRAYS then let each library define VAR_ARRAYS based on USE_VAR_ARRAYS
@@ -313,7 +313,7 @@ extern "C" {
 #  define HAVE_LIBGLESV2 1 // apple phones support gles.. not sure if this is right define though
 # endif // HAS_GLES
 
-echo GoTv Compiler Config error apple not supported
+echo Nlc Compiler Config error apple not supported
 #else 
-echo GoTv Compiler Config error no os defined
+echo Nlc Compiler Config error no os defined
 #endif // TARGET_OS_WINDOWS

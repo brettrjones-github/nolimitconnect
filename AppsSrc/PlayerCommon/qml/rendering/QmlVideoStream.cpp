@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -27,25 +27,25 @@
 #include "qml/QmlVideoOutput.h"
 #include "qml/rendering/QmlVideoStream.h"
 
-GoTvPtoPQmlVideoStream::GoTvPtoPQmlVideoStream(QObject *parent)
-    : GoTvPtoPVideoStream(GoTvPtoP::YUVFormat, parent) {}
+NlcPtoPQmlVideoStream::NlcPtoPQmlVideoStream(QObject *parent)
+    : NlcPtoPVideoStream(NlcPtoP::YUVFormat, parent) {}
 
-GoTvPtoPQmlVideoStream::~GoTvPtoPQmlVideoStream() {}
+NlcPtoPQmlVideoStream::~NlcPtoPQmlVideoStream() {}
 
-void GoTvPtoPQmlVideoStream::frameUpdated()
+void NlcPtoPQmlVideoStream::frameUpdated()
 {
     // convert to shared pointer to const frame to avoid crash
-    std::shared_ptr<const GoTvPtoPYUVVideoFrame> frame = std::dynamic_pointer_cast<const GoTvPtoPYUVVideoFrame>(renderFrame());
+    std::shared_ptr<const NlcPtoPYUVVideoFrame> frame = std::dynamic_pointer_cast<const NlcPtoPYUVVideoFrame>(renderFrame());
 
     if (!frame) {
         return; // LCOV_EXCL_LINE
     }
 
     std::for_each(_attachedOutputs.begin(), _attachedOutputs.end(),
-                  std::bind2nd(std::mem_fun(&GoTvPtoPQmlVideoOutput::presentFrame), frame));
+                  std::bind2nd(std::mem_fun(&NlcPtoPQmlVideoOutput::presentFrame), frame));
 }
 
-void GoTvPtoPQmlVideoStream::registerVideoOutput(GoTvPtoPQmlVideoOutput *output)
+void NlcPtoPQmlVideoStream::registerVideoOutput(NlcPtoPQmlVideoOutput *output)
 {
     Q_ASSERT(_attachedOutputs.count(output) <= 1);
 
@@ -55,7 +55,7 @@ void GoTvPtoPQmlVideoStream::registerVideoOutput(GoTvPtoPQmlVideoOutput *output)
     _attachedOutputs.append(output);
 }
 
-void GoTvPtoPQmlVideoStream::deregisterVideoOutput(GoTvPtoPQmlVideoOutput *output)
+void NlcPtoPQmlVideoStream::deregisterVideoOutput(NlcPtoPQmlVideoOutput *output)
 {
     Q_ASSERT(_attachedOutputs.count(output) <= 1);
 

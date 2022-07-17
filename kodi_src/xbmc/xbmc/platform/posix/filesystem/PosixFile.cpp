@@ -10,7 +10,7 @@
 
 #include "PosixFile.h"
 #include "utils/AliasShortcutUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "filesystem/File.h"
 #include <sys/stat.h>
@@ -32,7 +32,7 @@ CPosixFile::~CPosixFile()
 }
 
 // local helper
-static std::string getFilename(const GoTvUrl& url)
+static std::string getFilename(const NlcUrl& url)
 {
   std::string filename(url.GetFileName());
   if (IsAliasShortcut(filename, false))
@@ -42,7 +42,7 @@ static std::string getFilename(const GoTvUrl& url)
 }
 
 
-bool CPosixFile::Open(const GoTvUrl& url)
+bool CPosixFile::Open(const NlcUrl& url)
 {
   if (m_fd >= 0)
     return false;
@@ -57,7 +57,7 @@ bool CPosixFile::Open(const GoTvUrl& url)
   return m_fd != -1;
 }
 
-bool CPosixFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite /* = false*/ )
+bool CPosixFile::OpenForWrite(const NlcUrl& url, bool bOverWrite /* = false*/ )
 {
   if (m_fd >= 0)
     return false;
@@ -267,7 +267,7 @@ int CPosixFile::IoControl(EIoControl request, void* param)
 }
 
 
-bool CPosixFile::Delete(const GoTvUrl& url)
+bool CPosixFile::Delete(const NlcUrl& url)
 {
   const std::string filename(getFilename(url));
   if (filename.empty())
@@ -282,7 +282,7 @@ bool CPosixFile::Delete(const GoTvUrl& url)
   return false;
 }
 
-bool CPosixFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
+bool CPosixFile::Rename(const NlcUrl& url, const NlcUrl& urlnew)
 {
   const std::string name(getFilename(url)), newName(getFilename(urlnew));
   if (name.empty() || newName.empty())
@@ -313,7 +313,7 @@ bool CPosixFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
   return false;
 }
 
-bool CPosixFile::Exists(const GoTvUrl& url)
+bool CPosixFile::Exists(const NlcUrl& url)
 {
   const std::string filename(getFilename(url));
   if (filename.empty())
@@ -323,7 +323,7 @@ bool CPosixFile::Exists(const GoTvUrl& url)
   return stat64(filename.c_str(), &st) == 0 && !S_ISDIR(st.st_mode);
 }
 
-int CPosixFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CPosixFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   assert(buffer != NULL);
   const std::string filename(getFilename(url));

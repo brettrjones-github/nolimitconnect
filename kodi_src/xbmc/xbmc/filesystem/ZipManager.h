@@ -22,7 +22,7 @@
 #include <vector>
 #include <map>
 
-class GoTvUrl;
+class NlcUrl;
 
 static const std::string PATH_TRAVERSAL(R"_((^|\/|\\)\.{2}($|\/|\\))_");
 
@@ -56,10 +56,10 @@ public:
   CZipManager();
   ~CZipManager();
 
-  bool GetZipList(const GoTvUrl& url, std::vector<SZipEntry>& items);
-  bool GetZipEntry(const GoTvUrl& url, SZipEntry& item);
+  bool GetZipList(const NlcUrl& url, std::vector<SZipEntry>& items);
+  bool GetZipEntry(const NlcUrl& url, SZipEntry& item);
   bool ExtractArchive(const std::string& strArchive, const std::string& strPath);
-  bool ExtractArchive(const GoTvUrl& archive, const std::string& strPath);
+  bool ExtractArchive(const NlcUrl& archive, const std::string& strPath);
   void release(const std::string& strPath); // release resources used by list zip
   static void readHeader(const char* buffer, SZipEntry& info);
   static void readCHeader(const char* buffer, SZipEntry& info);

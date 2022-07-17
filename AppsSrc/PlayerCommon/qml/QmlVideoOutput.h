@@ -30,11 +30,11 @@
 
 #include "SharedExportQml.h"
 
-struct GoTvPtoPYUVVideoFrame;
-class GoTvPtoPQmlSource;
+struct NlcPtoPYUVVideoFrame;
+class NlcPtoPQmlSource;
 
 /*!
-    \class GoTvPtoPQmlVideoOutput QmlVideoOutput.h GOTVQtQml/QmlVideoOutput.h
+    \class NlcPtoPQmlVideoOutput QmlVideoOutput.h GOTVQtQml/QmlVideoOutput.h
     \ingroup GOTVQtQml
     \brief QML video output
 
@@ -42,7 +42,7 @@ class GoTvPtoPQmlSource;
 
     \since GOTV-Qt 1.1
  */
-class GOTVQT_QML_EXPORT GoTvPtoPQmlVideoOutput : public QQuickItem
+class GOTVQT_QML_EXPORT NlcPtoPQmlVideoOutput : public QQuickItem
 {
     Q_OBJECT
 
@@ -52,7 +52,7 @@ class GOTVQT_QML_EXPORT GoTvPtoPQmlVideoOutput : public QQuickItem
         \see setSource
         \see sourceChanged
      */
-    Q_PROPERTY(GoTvPtoPQmlSource *source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(NlcPtoPQmlSource *source READ source WRITE setSource NOTIFY sourceChanged)
 
     /*!
         \brief Current fill mode
@@ -79,8 +79,8 @@ class GOTVQT_QML_EXPORT GoTvPtoPQmlVideoOutput : public QQuickItem
     Q_PROPERTY(int cropRatio READ cropRatio WRITE setCropRatio NOTIFY cropRatioChanged)
 
 public:
-    GoTvPtoPQmlVideoOutput();
-    ~GoTvPtoPQmlVideoOutput();
+    NlcPtoPQmlVideoOutput();
+    ~NlcPtoPQmlVideoOutput();
 
     /*!
         \brief Current video source
@@ -88,7 +88,7 @@ public:
 
         Used as property in QML.
      */
-    GoTvPtoPQmlSource *source() const;
+    NlcPtoPQmlSource *source() const;
 
     /*!
         \brief Set video source
@@ -96,7 +96,7 @@ public:
 
         Used as property in QML.
      */
-    void setSource(GoTvPtoPQmlSource *source);
+    void setSource(NlcPtoPQmlSource *source);
 
     /*!
         \brief Current fill mode
@@ -126,7 +126,7 @@ public:
         \brief Set aspect ratio
         \param aspectRatio new aspect ratio
 
-        No effect when fillMode equals GoTvPtoP::Stretch.
+        No effect when fillMode equals NlcPtoP::Stretch.
         Used as property in QML.
      */
     void setAspectRatio(int aspectRatio);
@@ -143,7 +143,7 @@ public:
         \brief Set crop ratio
         \param cropRatio new crop ratio
 
-        No effect when fillMode equals GoTvPtoP::Stretch.
+        No effect when fillMode equals NlcPtoP::Stretch.
         Used as property in QML.
      */
     void setCropRatio(int cropRatio);
@@ -153,7 +153,7 @@ public slots:
         \brief Set frame which will be rendered in the output.
         \param frame
      */
-    void presentFrame(const std::shared_ptr<const GoTvPtoPYUVVideoFrame> &frame);
+    void presentFrame(const std::shared_ptr<const NlcPtoPYUVVideoFrame> &frame);
 
 signals:
     /*!
@@ -180,14 +180,14 @@ private:
     virtual QSGNode *updatePaintNode(QSGNode *oldNode,
                                      UpdatePaintNodeData *data);
 
-    GoTvPtoP::FillMode _fillMode;
-    GoTvPtoP::Ratio _aspectRatio;
-    GoTvPtoP::Ratio _cropRatio;
+    NlcPtoP::FillMode _fillMode;
+    NlcPtoP::Ratio _aspectRatio;
+    NlcPtoP::Ratio _cropRatio;
 
-    QPointer<GoTvPtoPQmlSource> _source;
+    QPointer<NlcPtoPQmlSource> _source;
 
     bool _frameUpdated;
-    std::shared_ptr<const GoTvPtoPYUVVideoFrame> _frame;
+    std::shared_ptr<const NlcPtoPYUVVideoFrame> _frame;
 };
 
 #endif // GOTVQT_QMLVIDEOOUTPUT_H_

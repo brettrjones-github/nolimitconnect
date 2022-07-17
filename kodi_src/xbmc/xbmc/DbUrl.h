@@ -9,7 +9,7 @@
 #pragma once
 
 #include "utils/UrlOptions.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <string>
 
@@ -47,7 +47,7 @@ protected:
   virtual bool parse() = 0;
   virtual bool validateOption(const std::string &key, const CVariant &value);
   
-  GoTvUrl m_url;
+  NlcUrl m_url;
   std::string m_type;
 
 private:

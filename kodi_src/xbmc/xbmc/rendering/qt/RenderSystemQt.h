@@ -13,11 +13,11 @@
 #include "system_gl.h"
 #include "rendering/RenderSystem.h"
 #include "utils/Color.h"
-#include "GuiInterface/IGoTvRender.h"
+#include "GuiInterface/INlcRender.h"
 
 #include <array>
 
-class IGoTv;
+class INlc;
 
 class CRenderSystemQt : public CRenderSystemBase
 {
@@ -79,7 +79,7 @@ protected:
     virtual void                PresentRenderImpl( bool rendered ) = 0;
     void                        CalculateMaxTexturesize();
 
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
     int                         m_iVSyncMode;
     int                         m_iVSyncErrors;
     bool                        m_bVsyncInit;

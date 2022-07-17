@@ -197,7 +197,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/CamLogic.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ChatEntryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/DialogConfirmRemoveMessage.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/EventsQtToGoTv.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/EventsQtToNlc.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileItemInfo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendListDelegate.h \
@@ -379,13 +379,13 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppDependLibrariesConfig.h \
     $$PWD/AppTargetOsConfig.h \
     $$PWD/GuiInterface/config_libgotvptop.h \
-    $$PWD/GuiInterface/GoTvRenderFrame.h \
+    $$PWD/GuiInterface/NlcRenderFrame.h \
     $$PWD/GuiInterface/IAudioInterface.h \
     $$PWD/GuiInterface/IDefs.h \
     $$PWD/GuiInterface/IFromGui.h \
-    $$PWD/GuiInterface/IGoTv.h \
+    $$PWD/GuiInterface/INlc.h \
     $$PWD/GuiInterface/IDefs.h \
-    $$PWD/GuiInterface/IGoTvRender.h \
+    $$PWD/GuiInterface/INlcRender.h \
     $$PWD/GuiInterface/ILog.h \
     $$PWD/GuiInterface/IScan.h \
     $$PWD/GuiInterface/IToGui.h \
@@ -573,7 +573,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ChatRoomWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ChatEntryWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/DialogConfirmRemoveMessage.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/EventsQtToGoTv.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/EventsQtToNlc.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileActionBarWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileActionMenu.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileItemInfo.cpp \
@@ -736,12 +736,12 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAppTheme.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAppDisplay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxPlainTextEdit.cpp \
-    $$PWD/GuiInterface/GoTvRenderFrame.cpp \
+    $$PWD/GuiInterface/NlcRenderFrame.cpp \
 	$$PWD/GuiInterface/IDefs.cpp \
-    $$PWD/GuiInterface/IGoTv.cpp \
-    $$PWD/GuiInterface/IGoTvFromGui.cpp \
-    $$PWD/GuiInterface/IGoTvRender.cpp \
-    $$PWD/GuiInterface/IGoTvToGui.cpp \
+    $$PWD/GuiInterface/INlc.cpp \
+    $$PWD/GuiInterface/INlcFromGui.cpp \
+    $$PWD/GuiInterface/INlcRender.cpp \
+    $$PWD/GuiInterface/INlcToGui.cpp \
     $$PWD/GuiInterface/ILog.cpp \
     $$PWD/GuiInterface/IToGui.cpp \
     $$PWD/GuiInterface/OsInterface/OsInterface.cpp \
@@ -800,7 +800,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGalleryEmoticon.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGalleryThumb.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGetStarted.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletGoTvPtoPNetworkHost.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletGroupJoin.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGroupJoinSearch.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGroupListClient.ui \

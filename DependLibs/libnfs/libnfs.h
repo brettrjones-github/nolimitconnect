@@ -83,7 +83,7 @@ struct utimbuf {
 #endif
 
 /*
- * Used for interfacing the async version of the api into an GOTV_EXTERNal eventsystem
+ * Used for interfacing the async version of the api into an NLC_EXTERNal eventsystem
  */
 NLC_EXTERN int nfs_get_fd(struct nfs_context *nfs);
 NLC_EXTERN int nfs_which_events(struct nfs_context *nfs);

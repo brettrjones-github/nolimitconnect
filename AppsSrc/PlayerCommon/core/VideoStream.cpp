@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -24,49 +24,49 @@
 #include "core/VideoStream.h"
 #include "core/YUVVideoFrame.h"
 
-GoTvPtoPVideoStream::GoTvPtoPVideoStream(GoTvPtoP::RenderFormat format,
+NlcPtoPVideoStream::NlcPtoPVideoStream(NlcPtoP::RenderFormat format,
                                QObject *parent)
     : QObject(parent),
       _format(format) {}
 
-GoTvPtoPVideoStream::~GoTvPtoPVideoStream()
+NlcPtoPVideoStream::~NlcPtoPVideoStream()
 {
     if (_player) {
         unsetCallbacks(_player);
     }
 }
 
-void GoTvPtoPVideoStream::init(GoTvPtoPMediaPlayer *player)
+void NlcPtoPVideoStream::init(NlcPtoPMediaPlayer *player)
 {
     _player = player;
 
     setCallbacks(_player);
 }
 
-void GoTvPtoPVideoStream::deinit()
+void NlcPtoPVideoStream::deinit()
 {
     unsetCallbacks(_player);
 
     _player = 0;
 }
 
-unsigned GoTvPtoPVideoStream::formatCallback(char *chroma,
+unsigned NlcPtoPVideoStream::formatCallback(char *chroma,
                                         unsigned *width,
                                         unsigned *height,
                                         unsigned *pitches,
                                         unsigned *lines)
 {
     switch (_format) {
-    case GoTvPtoP::YUVFormat:
+    case NlcPtoP::YUVFormat:
         qstrcpy(chroma, "I420");
-        _frames.emplace(_frames.end(), new GoTvPtoPYUVVideoFrame(width, height, pitches, lines));
+        _frames.emplace(_frames.end(), new NlcPtoPYUVVideoFrame(width, height, pitches, lines));
         return 3;
     }
 
     return -1; // LCOV_EXCL_LINE
 }
 
-void GoTvPtoPVideoStream::formatCleanUpCallback()
+void NlcPtoPVideoStream::formatCleanUpCallback()
 {
     _renderFrame.reset();
     _lockedFrames.clear();
@@ -75,7 +75,7 @@ void GoTvPtoPVideoStream::formatCleanUpCallback()
     QMetaObject::invokeMethod(this, "frameUpdated");
 }
 
-void *GoTvPtoPVideoStream::lockCallback(void **planes)
+void *NlcPtoPVideoStream::lockCallback(void **planes)
 {
     auto frameIt = _frames.begin();
     for (; frameIt != _frames.end() && frameIt->use_count() > 1; ++frameIt)
@@ -84,7 +84,7 @@ void *GoTvPtoPVideoStream::lockCallback(void **planes)
     if (frameIt == _frames.end())
         frameIt = _frames.emplace(_frames.end(), cloneFrame(_frames.front()));
 
-    std::shared_ptr<GoTvPtoPAbstractVideoFrame> &frame = *frameIt;
+    std::shared_ptr<NlcPtoPAbstractVideoFrame> &frame = *frameIt;
     for (size_t i = 0; i < frame->planes.size(); i++) {
         planes[i] = frame->planes[i];
     }
@@ -94,7 +94,7 @@ void *GoTvPtoPVideoStream::lockCallback(void **planes)
     return reinterpret_cast<void *>(frameIt - _frames.begin());
 }
 
-void GoTvPtoPVideoStream::unlockCallback(void *picture, void *const *planes)
+void NlcPtoPVideoStream::unlockCallback(void *picture, void *const *planes)
 {
     Q_UNUSED(planes)
 
@@ -103,12 +103,12 @@ void GoTvPtoPVideoStream::unlockCallback(void *picture, void *const *planes)
         return; // LCOV_EXCL_LINE
     }
 
-    std::shared_ptr<GoTvPtoPAbstractVideoFrame> &frame = _frames[frameNo];
+    std::shared_ptr<NlcPtoPAbstractVideoFrame> &frame = _frames[frameNo];
 
     _lockedFrames.erase(std::find(_lockedFrames.begin(), _lockedFrames.end(), frame));
 }
 
-void GoTvPtoPVideoStream::displayCallback(void *picture)
+void NlcPtoPVideoStream::displayCallback(void *picture)
 {
     auto frameNo = reinterpret_cast<decltype(_frames)::size_type>(picture);
     if (frameNo >= _frames.size()) {
@@ -116,20 +116,20 @@ void GoTvPtoPVideoStream::displayCallback(void *picture)
         return; // LCOV_EXCL_LINE
     }
 
-    std::shared_ptr<GoTvPtoPAbstractVideoFrame> &frame = _frames[frameNo];
+    std::shared_ptr<NlcPtoPAbstractVideoFrame> &frame = _frames[frameNo];
 
     _renderFrame = frame;
 
     QMetaObject::invokeMethod(this, "frameUpdated");
 }
 
-std::shared_ptr<GoTvPtoPAbstractVideoFrame> GoTvPtoPVideoStream::cloneFrame(std::shared_ptr<GoTvPtoPAbstractVideoFrame> frame)
+std::shared_ptr<NlcPtoPAbstractVideoFrame> NlcPtoPVideoStream::cloneFrame(std::shared_ptr<NlcPtoPAbstractVideoFrame> frame)
 {
     switch (_format) {
-    case GoTvPtoP::YUVFormat:
-        std::shared_ptr<GoTvPtoPYUVVideoFrame> from = std::dynamic_pointer_cast<GoTvPtoPYUVVideoFrame>(frame);
+    case NlcPtoP::YUVFormat:
+        std::shared_ptr<NlcPtoPYUVVideoFrame> from = std::dynamic_pointer_cast<NlcPtoPYUVVideoFrame>(frame);
         if (from) {
-            return std::make_shared<GoTvPtoPYUVVideoFrame>(from);
+            return std::make_shared<NlcPtoPYUVVideoFrame>(from);
         }
     }
 

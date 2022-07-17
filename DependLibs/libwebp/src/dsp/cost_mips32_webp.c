@@ -111,7 +111,7 @@ static void SetResidualCoeffs(const int16_t* const coeffs,
   "0:                                                   \n\t"
     "ulw      %[temp0],      0(%[p_coeffs])             \n\t"
     "beqz     %[temp0],      1f                         \n\t"
-#if defined(GOTV_ARCH_BIGENDIAN)
+#if defined(NLC_ARCH_BIGENDIAN)
     " sll     %[temp1],      %[temp0],       16         \n\t"
 #else
     " srl     %[temp1],      %[temp0],       16         \n\t"

@@ -13,7 +13,7 @@
 #include "CompileInfo.h"
 #include "ServiceBroker.h"
 #include "Settings.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/Directory.h"
 #include "filesystem/SpecialProtocol.h"
 #ifdef TARGET_DARWIN_IOS
@@ -197,14 +197,14 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
 #if defined(TARGET_POSIX) && !defined(TARGET_DARWIN)
     std::string appPath;
     std::string appName = CCompileInfo::GetAppName();
-#ifdef BUILD_GOTV_APP
+#ifdef BUILD_NLC_APP
     // $(HOME)/.local/share/gotvptop
     appName = "gotvptop";
     std::string dotLowerAppName = ".local/share/gotvptop";
 #else
     // $(HOME)/.kodi
     std::string dotLowerAppName = "." + appName;
-#endif // BUILD_GOTV_APP
+#endif // BUILD_NLC_APP
     StringUtils::ToLower( dotLowerAppName );
     const char* envAppHome = "KODI_HOME";
     const char* envAppBinHome = "   KODI_BIN_HOME";

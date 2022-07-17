@@ -28,7 +28,7 @@
 #include "settings/SettingsComponent.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace KODI;
 using namespace ADDON;
@@ -169,7 +169,7 @@ static bool IsOrphaned(const AddonPtr& addon, const VECADDONS& all)
 }
 
 // Creates categories from addon types, if we have any addons with that type.
-static void GenerateTypeListing(const GoTvUrl& path, const std::set<TYPE>& types,
+static void GenerateTypeListing(const NlcUrl& path, const std::set<TYPE>& types,
     const VECADDONS& addons, CFileItemList& items)
 {
   for (const auto& type : types)
@@ -179,7 +179,7 @@ static void GenerateTypeListing(const GoTvUrl& path, const std::set<TYPE>& types
       if (addon->IsType(type))
       {
         CFileItemPtr item(new CFileItem(CAddonInfo::TranslateType(type, true)));
-        GoTvUrl itemPath = path;
+        NlcUrl itemPath = path;
         itemPath.SetFileName(CAddonInfo::TranslateType(type, false));
         item->SetPath(itemPath.Get());
         item->m_bIsFolder = true;
@@ -194,7 +194,7 @@ static void GenerateTypeListing(const GoTvUrl& path, const std::set<TYPE>& types
 }
 
 // Creates categories for game add-ons, if we have any game add-ons
-static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CFileItemList& items)
+static void GenerateGameListing(const NlcUrl& path, const VECADDONS& addons, CFileItemList& items)
 {
   // Game controllers
   for (const auto& addon : addons)
@@ -202,7 +202,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
     if (addon->Type() == ADDON_GAME_CONTROLLER)
     {
       CFileItemPtr item(new CFileItem(CAddonInfo::TranslateType(ADDON_GAME_CONTROLLER, true)));
-      GoTvUrl itemPath = path;
+      NlcUrl itemPath = path;
       itemPath.SetFileName(CAddonInfo::TranslateType(ADDON_GAME_CONTROLLER, false));
       item->SetPath(itemPath.Get());
       item->m_bIsFolder = true;
@@ -219,7 +219,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
     if (IsEmulator(addon))
     {
       CFileItemPtr item(new CFileItem(g_localizeStrings.Get(35207))); // Emulators
-      GoTvUrl itemPath = path;
+      NlcUrl itemPath = path;
       itemPath.SetFileName(CATEGORY_EMULATORS);
       item->SetPath(itemPath.Get());
       item->m_bIsFolder = true;
@@ -236,7 +236,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
     if (IsStandaloneGame(addon))
     {
       CFileItemPtr item(new CFileItem(g_localizeStrings.Get(35208))); // Standalone games
-      GoTvUrl itemPath = path;
+      NlcUrl itemPath = path;
       itemPath.SetFileName(CATEGORY_STANDALONE_GAMES);
       item->SetPath(itemPath.Get());
       item->m_bIsFolder = true;
@@ -253,7 +253,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
     if (IsGameProvider(addon))
     {
       CFileItemPtr item(new CFileItem(g_localizeStrings.Get(35220))); // Game providers
-      GoTvUrl itemPath = path;
+      NlcUrl itemPath = path;
       itemPath.SetFileName(CATEGORY_GAME_PROVIDERS);
       item->SetPath(itemPath.Get());
       item->m_bIsFolder = true;
@@ -270,7 +270,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
     if (IsGameResource(addon))
     {
       CFileItemPtr item(new CFileItem(g_localizeStrings.Get(35209))); // Game resources
-      GoTvUrl itemPath = path;
+      NlcUrl itemPath = path;
       itemPath.SetFileName(CATEGORY_GAME_RESOURCES);
       item->SetPath(itemPath.Get());
       item->m_bIsFolder = true;
@@ -287,7 +287,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
     if (IsGameSupportAddon(addon))
     {
       CFileItemPtr item(new CFileItem(g_localizeStrings.Get(35216))); // Support add-ons
-      GoTvUrl itemPath = path;
+      NlcUrl itemPath = path;
       itemPath.SetFileName(CATEGORY_GAME_SUPPORT_ADDONS);
       item->SetPath(itemPath.Get());
       item->m_bIsFolder = true;
@@ -301,7 +301,7 @@ static void GenerateGameListing(const GoTvUrl& path, const VECADDONS& addons, CF
 }
 
 //Creates the top-level category list
-static void GenerateMainCategoryListing(const GoTvUrl& path, const VECADDONS& addons,
+static void GenerateMainCategoryListing(const NlcUrl& path, const VECADDONS& addons,
     CFileItemList& items)
 {
   if (std::any_of(addons.begin(), addons.end(), IsInfoProviderTypeAddon))
@@ -346,7 +346,7 @@ static void GenerateMainCategoryListing(const GoTvUrl& path, const VECADDONS& ad
 }
 
 //Creates sub-categories or addon list for a category
-static void GenerateCategoryListing(const GoTvUrl& path, VECADDONS& addons,
+static void GenerateCategoryListing(const NlcUrl& path, VECADDONS& addons,
     CFileItemList& items)
 {
   const std::string category = path.GetFileName();
@@ -413,7 +413,7 @@ static void GenerateCategoryListing(const GoTvUrl& path, VECADDONS& addons,
   }
 }
 
-bool CAddonsDirectory::GetSearchResults(const GoTvUrl& path, CFileItemList &items)
+bool CAddonsDirectory::GetSearchResults(const NlcUrl& path, CFileItemList &items)
 {
   std::string search(path.GetFileName());
   if (search.empty() && !GetKeyboardInput(16017, search))
@@ -425,13 +425,13 @@ bool CAddonsDirectory::GetSearchResults(const GoTvUrl& path, CFileItemList &item
   VECADDONS addons;
   database.Search(search, addons);
   CAddonsDirectory::GenerateAddonListing(path, addons, items, g_localizeStrings.Get(283));
-  GoTvUrl searchPath(path);
+  NlcUrl searchPath(path);
   searchPath.SetFileName(search);
   items.SetPath(searchPath.Get());
   return true;
 }
 
-static void UserInstalledAddons(const GoTvUrl& path, CFileItemList &items)
+static void UserInstalledAddons(const NlcUrl& path, CFileItemList &items)
 {
   items.ClearItems();
   items.SetLabel(g_localizeStrings.Get(24998));
@@ -451,7 +451,7 @@ static void UserInstalledAddons(const GoTvUrl& path, CFileItemList &items)
     //"All" node
     CFileItemPtr item(new CFileItem());
     item->m_bIsFolder = true;
-    GoTvUrl itemPath = path;
+    NlcUrl itemPath = path;
     itemPath.SetFileName("all");
     item->SetPath(itemPath.Get());
     item->SetLabel(g_localizeStrings.Get(593));
@@ -464,7 +464,7 @@ static void UserInstalledAddons(const GoTvUrl& path, CFileItemList &items)
     GenerateCategoryListing(path, addons, items);
 }
 
-static void DependencyAddons(const GoTvUrl& path, CFileItemList &items)
+static void DependencyAddons(const NlcUrl& path, CFileItemList &items)
 {
   VECADDONS all;
   CServiceBroker::GetAddonMgr().GetInstalledAddons(all);
@@ -493,7 +493,7 @@ static void DependencyAddons(const GoTvUrl& path, CFileItemList &items)
   }
 }
 
-static void OutdatedAddons(const GoTvUrl& path, CFileItemList &items)
+static void OutdatedAddons(const NlcUrl& path, CFileItemList &items)
 {
   VECADDONS addons = CServiceBroker::GetAddonMgr().GetAvailableUpdates();
   CAddonsDirectory::GenerateAddonListing(path, addons, items, g_localizeStrings.Get(24043));
@@ -507,7 +507,7 @@ static void OutdatedAddons(const GoTvUrl& path, CFileItemList &items)
   }
 }
 
-static void RunningAddons(const GoTvUrl& path, CFileItemList &items)
+static void RunningAddons(const NlcUrl& path, CFileItemList &items)
 {
   VECADDONS addons;
   CServiceBroker::GetAddonMgr().GetAddons(addons, ADDON_SERVICE);
@@ -517,7 +517,7 @@ static void RunningAddons(const GoTvUrl& path, CFileItemList &items)
   CAddonsDirectory::GenerateAddonListing(path, addons, items, g_localizeStrings.Get(24994));
 }
 
-static bool Browse(const GoTvUrl& path, CFileItemList &items)
+static bool Browse(const NlcUrl& path, CFileItemList &items)
 {
   const std::string repo = path.GetHostName();
 
@@ -581,7 +581,7 @@ static bool HasRecentlyUpdatedAddons()
   return GetRecentlyUpdatedAddons(addons) && !addons.empty();
 }
 
-static bool Repos(const GoTvUrl& path, CFileItemList &items)
+static bool Repos(const NlcUrl& path, CFileItemList &items)
 {
   items.SetLabel(g_localizeStrings.Get(24033));
 
@@ -590,7 +590,7 @@ static bool Repos(const GoTvUrl& path, CFileItemList &items)
   if (addons.empty())
     return true;
   else if (addons.size() == 1)
-    return Browse(GoTvUrl("addons://" + addons[0]->ID()), items);
+    return Browse(NlcUrl("addons://" + addons[0]->ID()), items);
   CFileItemPtr item(new CFileItem("addons://all/", true));
   item->SetLabel(g_localizeStrings.Get(24087));
   item->SetSpecialSort(SortSpecialOnTop);
@@ -656,11 +656,11 @@ static void RootDirectory(CFileItemList& items)
   }
 }
 
-bool CAddonsDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CAddonsDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string tmp(url.Get());
   URIUtils::RemoveSlashAtEnd(tmp);
-  GoTvUrl path(tmp);
+  NlcUrl path(tmp);
   const std::string endpoint = path.GetHostName();
   items.ClearItems();
   items.ClearProperties();
@@ -744,9 +744,9 @@ bool CAddonsDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   {
     std::string type = path.GetFileName();
     if (type == "video" || type == "audio" || type == "image" || type == "executable")
-      return Browse(GoTvUrl("addons://all/xbmc.addon." + type), items);
+      return Browse(NlcUrl("addons://all/xbmc.addon." + type), items);
     else if (type == "game")
-      return Browse(GoTvUrl("addons://all/category.gameaddons"), items);
+      return Browse(NlcUrl("addons://all/category.gameaddons"), items);
     return false;
   }
   else
@@ -755,7 +755,7 @@ bool CAddonsDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   }
 }
 
-bool CAddonsDirectory::IsRepoDirectory(const GoTvUrl& url)
+bool CAddonsDirectory::IsRepoDirectory(const NlcUrl& url)
 {
   if (url.GetHostName().empty() || !url.IsProtocol("addons"))
     return false;
@@ -767,7 +767,7 @@ bool CAddonsDirectory::IsRepoDirectory(const GoTvUrl& url)
       || CServiceBroker::GetAddonMgr().GetAddon(url.GetHostName(), tmp, ADDON_REPOSITORY);
 }
 
-void CAddonsDirectory::GenerateAddonListing(const GoTvUrl &path,
+void CAddonsDirectory::GenerateAddonListing(const NlcUrl &path,
     const VECADDONS& addons, CFileItemList &items, const std::string label)
 {
   std::set<std::string> outdated;
@@ -779,7 +779,7 @@ void CAddonsDirectory::GenerateAddonListing(const GoTvUrl &path,
   items.SetLabel(label);
   for (const auto& addon : addons)
   {
-    GoTvUrl itemPath = path;
+    NlcUrl itemPath = path;
     itemPath.SetFileName(addon->ID());
     CFileItemPtr pItem = FileItemFromAddon(addon, itemPath.Get(), false);
 
@@ -816,7 +816,7 @@ CFileItemPtr CAddonsDirectory::FileItemFromAddon(const AddonPtr &addon,
   item->SetPath(path);
 
   std::string strLabel(addon->Name());
-  if (GoTvUrl(path).GetHostName() == "search")
+  if (NlcUrl(path).GetHostName() == "search")
     strLabel = StringUtils::Format("%s - %s", CAddonInfo::TranslateType(addon->Type(), true).c_str(), addon->Name().c_str());
   item->SetLabel(strLabel);
   item->SetArt(addon->Art());
@@ -889,7 +889,7 @@ bool CAddonsDirectory::GetScriptsAndPlugins(const std::string &content, CFileIte
         PluginPtr plugin = std::dynamic_pointer_cast<CPluginSource>(addon);
         if (plugin && plugin->ProvidesSeveral())
         {
-          GoTvUrl url(path);
+          NlcUrl url(path);
           std::string opt = StringUtils::Format("?content_type=%s", content.c_str());
           url.SetOptions(opt);
           path = url.Get();

@@ -33,7 +33,7 @@
 #include "settings/SettingsComponent.h"
 #include "settings/windows/GUIControlSettings.h"
 #include "storage/MediaManager.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 

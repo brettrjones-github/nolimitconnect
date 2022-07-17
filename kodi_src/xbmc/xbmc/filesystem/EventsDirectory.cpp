@@ -8,14 +8,14 @@
 
 
 #include "EventsDirectory.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "events/EventLog.h"
 #include "utils/StringUtils.h"
 #include "ServiceBroker.h"
 
 using namespace XFILE;
 
-bool CEventsDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CEventsDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   items.ClearProperties();
   items.SetContent("events");

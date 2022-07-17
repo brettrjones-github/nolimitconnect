@@ -13,7 +13,7 @@
 #include "utils/log.h"
 #include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <algorithm>
 
@@ -125,7 +125,7 @@ bool CController::LoadLayout(void)
   {
     std::string strLayoutXmlPath = LibPath();
 
-    CLog::Log(LOGINFO, "Loading controller layout: %s", GoTvUrl::GetRedacted(strLayoutXmlPath).c_str());
+    CLog::Log(LOGINFO, "Loading controller layout: %s", NlcUrl::GetRedacted(strLayoutXmlPath).c_str());
 
     CXBMCTinyXML xmlDoc;
     if (!xmlDoc.LoadFile(strLayoutXmlPath))

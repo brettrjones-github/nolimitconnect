@@ -10,7 +10,7 @@
 #include "UPnPDirectory.h"
 #include "FileFactory.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 
@@ -18,14 +18,14 @@ CUPnPFile::CUPnPFile() = default;
 
 CUPnPFile::~CUPnPFile() = default;
 
-bool CUPnPFile::Open(const GoTvUrl& url)
+bool CUPnPFile::Open(const NlcUrl& url)
 {
   CFileItem item_new;
   if (CUPnPDirectory::GetResource(url, item_new))
   {
     //CLog::Log(LOGDEBUG,"FileUPnP - file redirect to %s.", item_new.GetPath().c_str());
     IFile *pNewImp = CFileFactory::CreateLoader(item_new.GetPath());    
-    GoTvUrl *pNewUrl = new GoTvUrl(item_new.GetPath());    
+    NlcUrl *pNewUrl = new NlcUrl(item_new.GetPath());    
     if (pNewImp)
     {
       throw new CRedirectException(pNewImp, pNewUrl);
@@ -35,14 +35,14 @@ bool CUPnPFile::Open(const GoTvUrl& url)
   return false;
 }
 
-int CUPnPFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CUPnPFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   CFileItem item_new;
   if (CUPnPDirectory::GetResource(url, item_new))
   {
     //CLog::Log(LOGDEBUG,"FileUPnP - file redirect to %s.", item_new.GetPath().c_str());
     IFile *pNewImp = CFileFactory::CreateLoader(item_new.GetPath());
-    GoTvUrl *pNewUrl = new GoTvUrl(item_new.GetPath());
+    NlcUrl *pNewUrl = new NlcUrl(item_new.GetPath());
     if (pNewImp)
     {
       throw new CRedirectException(pNewImp, pNewUrl);
@@ -52,14 +52,14 @@ int CUPnPFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
   return -1;
 }
 
-bool CUPnPFile::Exists(const GoTvUrl& url)
+bool CUPnPFile::Exists(const NlcUrl& url)
 {
   CFileItem item_new;
   if (CUPnPDirectory::GetResource(url, item_new))
   {
     //CLog::Log(LOGDEBUG,"FileUPnP - file redirect to %s.", item_new.GetPath().c_str());
     IFile *pNewImp = CFileFactory::CreateLoader(item_new.GetPath());
-    GoTvUrl *pNewUrl = new GoTvUrl(item_new.GetPath());
+    NlcUrl *pNewUrl = new NlcUrl(item_new.GetPath());
     if (pNewImp)
     {
       throw new CRedirectException(pNewImp, pNewUrl);

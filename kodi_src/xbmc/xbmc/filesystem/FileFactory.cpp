@@ -56,7 +56,7 @@
 #include "UDFFile.h"
 #include "ImageFile.h"
 #include "ResourceFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "network/WakeOnAccess.h"
 #include "utils/StringUtils.h"
@@ -72,11 +72,11 @@ CFileFactory::~CFileFactory() = default;
 
 IFile* CFileFactory::CreateLoader(const std::string& strFileName)
 {
-  GoTvUrl url(strFileName);
+  NlcUrl url(strFileName);
   return CreateLoader(url);
 }
 
-IFile* CFileFactory::CreateLoader(const GoTvUrl& url)
+IFile* CFileFactory::CreateLoader(const NlcUrl& url)
 {
   if (!CWakeOnAccess::GetInstance().WakeUpHost(url))
     return NULL;

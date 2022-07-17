@@ -86,28 +86,28 @@ const char* CCompileInfo::GetClass()
 
 const char* CCompileInfo::GetAppName()
 {
-//#if BUILD_GOTV_APP
-//    return "GoTvPtoP";
+//#if BUILD_NLC_APP
+//    return "NlcPtoP";
 //#elif BUILD_KODIQT_APP
 //    return "KodiQt";
 //#elif BUILD_KODIP2P_APP
 //    return "KodiP2P";
 //#else
-//    echo you must define your application information in GoTvAppConfig.h
+//    echo you must define your application information in NlcAppConfig.h
 //#endif
     return "Kodi";
 }
 
 const char* CCompileInfo::GetAppNameLowerCase()
 {
-//#if BUILD_GOTV_APP
+//#if BUILD_NLC_APP
 //    return "gotvptop";
 //#elif BUILD_KODIQT_APP
 //    return "kodiqt";
 //#elif BUILD_KODIP2P_APP
 //    return "kodiptop";
 //#else
-//    echo you must define your application information in GoTvAppConfig.h
+//    echo you must define your application information in NlcAppConfig.h
 //#endif
     return "gotvptop";
 }
@@ -141,14 +141,14 @@ std::string  CCompileInfo::GetBuildDate()
 
 const char* CCompileInfo::GetHomeEnvName()
 {
-#if BUILD_GOTV_APP
+#if BUILD_NLC_APP
     return "GOTVPTOP_HOME";
 #elif BUILD_KODIQT_APP
     return "KODIQT_HOME";
 #elif BUILD_KODIP2P_APP
     return "KODIP2P_HOME";
 #else
-    echo you must define your application information in GoTvAppConfig.h
+    echo you must define your application information in NlcAppConfig.h
 #endif
 
 }
@@ -156,56 +156,56 @@ const char* CCompileInfo::GetHomeEnvName()
 
 const char* CCompileInfo::GetBinHomeEnvName()
 {
-#if BUILD_GOTV_APP
+#if BUILD_NLC_APP
     return "GOTVPTOP_BIN_HOME";
 #elif BUILD_KODIQT_APP
     return "KODIQT_BIN_HOME";
 #elif BUILD_KODIP2P_APP
     return "KODIP2P_BIN_HOME";
 #else
-    echo you must define your application information in GoTvAppConfig.h
+    echo you must define your application information in NlcAppConfig.h
 #endif
 
 }
 
 const char* CCompileInfo::GetBinAddonEnvName()
 {
-#if BUILD_GOTV_APP
+#if BUILD_NLC_APP
     return "GOTVPTOP_BINADDON_PATH";
 #elif BUILD_KODIQT_APP
     return "KODIQT_BINADDON_PATH";
 #elif BUILD_KODIP2P_APP
     return "KODIP2P_BINADDON_PATH";
 #else
-    echo you must define your application information in GoTvAppConfig.h
+    echo you must define your application information in NlcAppConfig.h
 #endif
 
 }
 
 const char* CCompileInfo::GetTempEnvName()
 {
-#if BUILD_GOTV_APP
+#if BUILD_NLC_APP
     return "GOTVPTOP_TEMP";
 #elif BUILD_KODIQT_APP
     return "KODIQT_TEMP";
 #elif BUILD_KODIP2P_APP
     return "KODIP2P_TEMP";
 #else
-    echo you must define your application information in GoTvAppConfig.h
+    echo you must define your application information in NlcAppConfig.h
 #endif
 
 }
 
 const char* CCompileInfo::GetUserProfileEnvName()
 {
-#if BUILD_GOTV_APP
+#if BUILD_NLC_APP
     return "KODI_PROFILE_USERDATA";
 #elif BUILD_KODIQT_APP
     return "KODIQT_PROFILE_USERDATA";
 #elif BUILD_KODIP2P_APP
     return "KODIP2P_PROFILE_USERDATA";
 #else
-    echo you must define your application information in GoTvAppConfig.h
+    echo you must define your application information in NlcAppConfig.h
 #endif
 
 }

@@ -19,9 +19,9 @@ namespace XFILE
   public:
     CMusicDatabaseDirectory(void);
     ~CMusicDatabaseDirectory(void) override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
     bool AllowAll() const override { return true; }
-    bool Exists(const GoTvUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
     static MUSICDATABASEDIRECTORY::NODE_TYPE GetDirectoryChildType(const std::string& strPath);
     static MUSICDATABASEDIRECTORY::NODE_TYPE GetDirectoryType(const std::string& strPath);
     static MUSICDATABASEDIRECTORY::NODE_TYPE GetDirectoryParentType(const std::string& strPath);

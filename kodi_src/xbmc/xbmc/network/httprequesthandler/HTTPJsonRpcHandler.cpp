@@ -7,7 +7,7 @@
  */
 
 #include "HTTPJsonRpcHandler.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "interfaces/json-rpc/JSONRPC.h"
 #include "interfaces/json-rpc/JSONServiceDescription.h"
@@ -144,7 +144,7 @@ bool CHTTPJsonRpcHandler::CHTTPTransportLayer::PrepareDownload(const char *path,
     url = "image/";
   else
     url = "vfs/";
-  url += GoTvUrl::Encode(strPath);
+  url += NlcUrl::Encode(strPath);
   details["path"] = url;
 
   return true;

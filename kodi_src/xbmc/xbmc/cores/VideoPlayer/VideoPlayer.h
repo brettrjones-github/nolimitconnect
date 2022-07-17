@@ -35,7 +35,7 @@
 #include "platform/linux/RBP.h"
 #else
 
-class IGoTv;
+class INlc;
 
 // dummy class to avoid ifdefs where calls are made
 class OMXClock
@@ -283,7 +283,7 @@ public:
   explicit CVideoPlayer(IPlayerCallback& callback);
   ~CVideoPlayer() override;
 
-  IGoTv& getIGoTv() { return m_GoTv; }
+  INlc& getINlc() { return m_Nlc; }
 
   bool OpenFile(const CFileItem& file, const CPlayerOptions &options) override;
   bool CloseFile(bool reopen = false) override;
@@ -485,7 +485,7 @@ protected:
 
   void UpdateFileItemStreamDetails(CFileItem& item);
 
-  IGoTv& m_GoTv;
+  INlc& m_Nlc;
 
   bool m_players_created;
 

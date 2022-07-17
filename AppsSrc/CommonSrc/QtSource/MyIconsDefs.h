@@ -314,7 +314,7 @@ enum EMyIcons
 
     // built in plugin options
     eMyIconCamStreamProvider,
-    eMyIconGoTvStation,
+    eMyIconNlcStation,
 
     eMyIconShareServices,
 

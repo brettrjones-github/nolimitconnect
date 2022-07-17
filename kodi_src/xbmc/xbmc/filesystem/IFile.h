@@ -37,7 +37,7 @@
 
 #include "IFileTypes.h"
 
-class GoTvUrl;
+class NlcUrl;
 
 namespace XFILE
 {
@@ -48,10 +48,10 @@ public:
   IFile();
   virtual ~IFile();
 
-  virtual bool Open(const GoTvUrl& url) = 0;
-  virtual bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) { return false; };
-  virtual bool ReOpen(const GoTvUrl& url) { return false; };
-  virtual bool Exists(const GoTvUrl& url) = 0;
+  virtual bool Open(const NlcUrl& url) = 0;
+  virtual bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) { return false; };
+  virtual bool ReOpen(const NlcUrl& url) { return false; };
+  virtual bool Exists(const NlcUrl& url) = 0;
   /**
    * Fills struct __stat64 with information about file specified by url.
    * For st_mode function will set correctly _S_IFDIR (directory) flag and may set
@@ -64,7 +64,7 @@ public:
    * @param buffer      pointer to __stat64 buffer to receive information about file
    * @return zero of success, -1 otherwise.
    */
-  virtual int Stat(const GoTvUrl& url, struct __stat64* buffer) = 0;
+  virtual int Stat(const NlcUrl& url, struct __stat64* buffer) = 0;
   /**
    * Fills struct __stat64 with information about currently open file
    * For st_mode function will set correctly _S_IFDIR (directory) flag and may set
@@ -112,9 +112,9 @@ public:
   virtual int  GetChunkSize() {return 0;}
   virtual double GetDownloadSpeed(){ return 0.0f; };
 
-  virtual bool Delete(const GoTvUrl& url) { return false; }
-  virtual bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) { return false; }
-  virtual bool SetHidden(const GoTvUrl& url, bool hidden) { return false; }
+  virtual bool Delete(const NlcUrl& url) { return false; }
+  virtual bool Rename(const NlcUrl& url, const NlcUrl& urlnew) { return false; }
+  virtual bool SetHidden(const NlcUrl& url, bool hidden) { return false; }
 
   virtual int IoControl(EIoControl request, void* param) { return -1; }
 
@@ -139,11 +139,11 @@ class CRedirectException
 {
 public:
   IFile *m_pNewFileImp;
-  GoTvUrl  *m_pNewUrl;
+  NlcUrl  *m_pNewUrl;
 
   CRedirectException();
   
-  CRedirectException(IFile *pNewFileImp, GoTvUrl *pNewUrl=NULL);
+  CRedirectException(IFile *pNewFileImp, NlcUrl *pNewUrl=NULL);
 };
 
 }

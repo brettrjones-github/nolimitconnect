@@ -7,7 +7,7 @@
  */
 
 #include "GUIWindowPrograms.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "GUIPassword.h"
 #include "addons/GUIDialogAddonInfo.h"
 #include "Autorun.h"

@@ -10,7 +10,7 @@
 
 #include "XbtDirectory.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/Directorization.h"
 #include "filesystem/XbtManager.h"
 #include "guilib/XBTF.h"
@@ -31,15 +31,15 @@ CXbtDirectory::CXbtDirectory() = default;
 
 CXbtDirectory::~CXbtDirectory() = default;
 
-bool CXbtDirectory::GetDirectory(const GoTvUrl& urlOrig, CFileItemList& items)
+bool CXbtDirectory::GetDirectory(const NlcUrl& urlOrig, CFileItemList& items)
 {
-  GoTvUrl urlXbt(urlOrig);
+  NlcUrl urlXbt(urlOrig);
 
   // if this isn't a proper xbt:// path, assume it's the path to a xbt file
   if (!urlOrig.IsProtocol("xbt"))
     urlXbt = URIUtils::CreateArchivePath("xbt", urlOrig);
 
-  GoTvUrl url(urlXbt);
+  NlcUrl url(urlXbt);
   url.SetOptions(""); // delete options to have a clean path to add stuff too
   url.SetFileName(""); // delete filename too as our names later will contain it
 
@@ -58,7 +58,7 @@ bool CXbtDirectory::GetDirectory(const GoTvUrl& urlOrig, CFileItemList& items)
   return true;
 }
 
-bool CXbtDirectory::ContainsFiles(const GoTvUrl& url)
+bool CXbtDirectory::ContainsFiles(const NlcUrl& url)
 {
   return CXbtManager::GetInstance().HasFiles(url);
 }

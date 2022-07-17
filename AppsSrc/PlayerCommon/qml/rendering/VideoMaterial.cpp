@@ -4,7 +4,7 @@
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 * Copyright (C) 2011 Harald Sitter <sitter@kde.org>
 *
-* This file is based on QmlGoTvPtoP and Phonon multimedia library
+* This file is based on QmlNlcPtoP and Phonon multimedia library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -75,7 +75,7 @@ int VideoMaterial::compare(const QSGMaterial *other) const
     return 0;
 }
 
-void VideoMaterial::setFrame(const std::shared_ptr<const GoTvPtoPYUVVideoFrame> &frame)
+void VideoMaterial::setFrame(const std::shared_ptr<const NlcPtoPYUVVideoFrame> &frame)
 {
     _frame = frame;
 }
@@ -85,7 +85,7 @@ void VideoMaterial::bindPlanes()
     if (_planeTexIds[0] == 0 && _planeTexIds[1] == 0 && _planeTexIds[2] == 0)
         _glF->glGenTextures(3, _planeTexIds);
 
-    std::shared_ptr<const GoTvPtoPYUVVideoFrame> tmpFrame;
+    std::shared_ptr<const NlcPtoPYUVVideoFrame> tmpFrame;
     _frame.swap(tmpFrame);
 
     if (tmpFrame) {

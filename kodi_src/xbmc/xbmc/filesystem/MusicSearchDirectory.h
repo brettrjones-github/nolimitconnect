@@ -17,8 +17,8 @@ namespace XFILE
   public:
     CMusicSearchDirectory(void);
     ~CMusicSearchDirectory(void) override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    bool Exists(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    bool Exists(const NlcUrl& url) override;
     bool AllowAll() const override { return true; }
   };
 }

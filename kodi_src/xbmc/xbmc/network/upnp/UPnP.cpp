@@ -23,7 +23,7 @@
 #include "messaging/ApplicationMessenger.h"
 #include "network/Network.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "profiles/ProfileManager.h"
 #include "settings/Settings.h"
@@ -34,7 +34,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "utils/TimeUtils.h"
 #include "video/VideoInfoTag.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/SystemInfo.h"
 
 using namespace UPNP;
@@ -191,7 +191,7 @@ public:
     {
         NPT_String path = "upnp://"+device->GetUUID()+"/";
         if (!NPT_StringsEqual(item_id, "0")) {
-            std::string id(GoTvUrl::Encode(item_id));
+            std::string id(NlcUrl::Encode(item_id));
             URIUtils::AddSlashAtEnd(id);
             path += id.c_str();
         }
@@ -252,7 +252,7 @@ public:
 
     bool InvokeUpdateObject(const char* id, const char* curr_value, const char* new_value)
     {
-        GoTvUrl url(id);
+        NlcUrl url(id);
         PLT_DeviceDataReference device;
         PLT_Service* cds;
         PLT_ActionReference action;

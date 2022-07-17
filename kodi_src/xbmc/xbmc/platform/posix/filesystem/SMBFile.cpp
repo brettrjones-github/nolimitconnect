@@ -21,7 +21,7 @@
 #include "settings/SettingsComponent.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/TimeUtils.h"
@@ -226,7 +226,7 @@ void CSMB::Init()
   m_IdleTimeout = 180;
 }
 
-std::string CSMB::URLEncode(const GoTvUrl& url)
+std::string CSMB::URLEncode(const NlcUrl& url)
 {
   /* due to smb wanting encoded urls we have to build it manually */
 
@@ -353,7 +353,7 @@ int64_t CSMBFile::GetLength()
   return m_fileSize;
 }
 
-bool CSMBFile::Open(const GoTvUrl& url)
+bool CSMBFile::Open(const NlcUrl& url)
 {
   Close();
 
@@ -429,7 +429,7 @@ int CSMBFile::OpenFile(std::string& strAuth)
 }
 */
 
-int CSMBFile::OpenFile(const GoTvUrl& url, std::string& strAuth)
+int CSMBFile::OpenFile(const NlcUrl& url, std::string& strAuth)
 {
   int fd = -1;
   smb.Init();
@@ -448,7 +448,7 @@ int CSMBFile::OpenFile(const GoTvUrl& url, std::string& strAuth)
   return fd;
 }
 
-bool CSMBFile::Exists(const GoTvUrl& url)
+bool CSMBFile::Exists(const NlcUrl& url)
 {
   // we can't open files like smb://file.f or smb://server/file.f
   // if a file matches the if below return false, it can't exist on a samba share.
@@ -479,7 +479,7 @@ int CSMBFile::Stat(struct __stat64* buffer)
   return iResult;
 }
 
-int CSMBFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CSMBFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   smb.Init();
   std::string strFileName = GetAuthenticatedPath(url);
@@ -581,7 +581,7 @@ ssize_t CSMBFile::Write(const void* lpBuf, size_t uiBufSize)
   return  smbc_write(m_fd, (void*)lpBuf, uiBufSize);
 }
 
-bool CSMBFile::Delete(const GoTvUrl& url)
+bool CSMBFile::Delete(const NlcUrl& url)
 {
   smb.Init();
   std::string strFile = GetAuthenticatedPath(url);
@@ -596,7 +596,7 @@ bool CSMBFile::Delete(const GoTvUrl& url)
   return (result == 0);
 }
 
-bool CSMBFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
+bool CSMBFile::Rename(const NlcUrl& url, const NlcUrl& urlnew)
 {
   smb.Init();
   std::string strFile = GetAuthenticatedPath(url);
@@ -611,7 +611,7 @@ bool CSMBFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
   return (result == 0);
 }
 
-bool CSMBFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+bool CSMBFile::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 {
   m_fileSize = 0;
 
@@ -653,7 +653,7 @@ bool CSMBFile::IsValidFile(const std::string& strFileName)
   return true;
 }
 
-std::string CSMBFile::GetAuthenticatedPath(const GoTvUrl& url)
+std::string CSMBFile::GetAuthenticatedPath(const NlcUrl& url)
 {
   CURL authURL(url);
   CPasswordManager::GetInstance().AuthenticateURL(authURL);

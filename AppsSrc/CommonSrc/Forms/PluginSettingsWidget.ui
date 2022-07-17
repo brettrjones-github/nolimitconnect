@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>490</height>
+    <width>426</width>
+    <height>503</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -80,6 +80,13 @@
    </item>
    <item>
     <widget class="PermissionWidget" name="m_PermissionWidget" native="true"/>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_RunOnStartupCheckBox">
+     <property name="text">
+      <string>Run service when application is started.</string>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">

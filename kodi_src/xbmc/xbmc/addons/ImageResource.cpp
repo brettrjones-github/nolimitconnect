@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
 */
 #include "ImageResource.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 #include "addons/AddonManager.h"
 #include "filesystem/File.h"
@@ -30,7 +30,7 @@ CImageResource::CImageResource(CAddonInfo addonInfo, std::string type)
 
 void CImageResource::OnPreUnInstall()
 {
-  GoTvUrl xbtUrl;
+  NlcUrl xbtUrl;
   if (!HasXbt(xbtUrl))
     return;
 
@@ -53,7 +53,7 @@ bool CImageResource::IsAllowed(const std::string &file) const
 std::string CImageResource::GetFullPath(const std::string &filePath) const
 {
   // check if there's an XBT file which might contain the file. if not just return the usual full path
-  GoTvUrl xbtUrl;
+  NlcUrl xbtUrl;
   if (!HasXbt(xbtUrl))
     return CResource::GetFullPath(filePath);
 
@@ -61,7 +61,7 @@ std::string CImageResource::GetFullPath(const std::string &filePath) const
   return URIUtils::AddFileToFolder(xbtUrl.Get(), filePath);
 }
 
-bool CImageResource::HasXbt(GoTvUrl& xbtUrl) const
+bool CImageResource::HasXbt(NlcUrl& xbtUrl) const
 {
   std::string resourcePath = GetResourcePath();
   std::string xbtPath = URIUtils::AddFileToFolder(resourcePath, "Textures.xbt");
@@ -69,7 +69,7 @@ bool CImageResource::HasXbt(GoTvUrl& xbtUrl) const
     return false;
 
   // translate it into a xbt:// URL
-  xbtUrl = URIUtils::CreateArchivePath("xbt", GoTvUrl(xbtPath));
+  xbtUrl = URIUtils::CreateArchivePath("xbt", NlcUrl(xbtPath));
 
   return true;
 }

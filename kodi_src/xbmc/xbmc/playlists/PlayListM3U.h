@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "PlayList.h"
 
 namespace PLAYLIST

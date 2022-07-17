@@ -29,35 +29,35 @@
 class QAction;
 class QTimer;
 
-class GoTvPtoPAudio;
-class GoTvPtoPMediaPlayer;
+class NlcPtoPAudio;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPControlAudio ControlAudio.h GOTVQtWidgets/ControlAudio.h
+    \class NlcPtoPControlAudio ControlAudio.h GOTVQtWidgets/ControlAudio.h
     \ingroup GOTVQtWidgets
     \brief Audio control class
 
     This is one of GOTV-Qt control classes.
     It provides audio tracks management.
 */
-class GOTVQT_WIDGETS_EXPORT GoTvPtoPControlAudio : public QObject
+class GOTVQT_WIDGETS_EXPORT NlcPtoPControlAudio : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPControlAudio constructor
+        \brief NlcPtoPControlAudio constructor
         \param player media player
         \param language default audio language
         \param parent audio controller's parent object
     */
-    explicit GoTvPtoPControlAudio(GoTvPtoPMediaPlayer *player,
+    explicit NlcPtoPControlAudio(NlcPtoPMediaPlayer *player,
                              const QString &language = 0,
                              QObject *parent = 0);
 
     /*!
         \brief AudioControl destructor
     */
-    ~GoTvPtoPControlAudio();
+    ~NlcPtoPControlAudio();
 
     /*!
         \brief Reset all settings and selected audio tracks.
@@ -79,7 +79,7 @@ signals:
         \param type type of actions
     */
     void actions(QList<QAction *> actions,
-                 const GoTvPtoP::ActionsType type);
+                 const NlcPtoP::ActionsType type);
 
     /*!
         \brief Signal sending actions for changing audio tracks
@@ -93,8 +93,8 @@ private slots:
     void updateActions();
 
 private:
-    GoTvPtoPAudio *_gotvptopAudio;
-    GoTvPtoPMediaPlayer *_gotvptopMediaPlayer;
+    NlcPtoPAudio *_gotvptopAudio;
+    NlcPtoPMediaPlayer *_gotvptopMediaPlayer;
 
     QTimer *_timer;
 

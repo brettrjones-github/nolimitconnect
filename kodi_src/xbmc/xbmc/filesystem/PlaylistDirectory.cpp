@@ -8,7 +8,7 @@
 
 #include "PlaylistDirectory.h"
 #include "PlayListPlayer.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "playlists/PlayList.h"
 
 using namespace PLAYLIST;
@@ -18,7 +18,7 @@ CPlaylistDirectory::CPlaylistDirectory() = default;
 
 CPlaylistDirectory::~CPlaylistDirectory() = default;
 
-bool CPlaylistDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CPlaylistDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   int playlistTyp=PLAYLIST_NONE;
   if (url.IsProtocol("playlistmusic"))

@@ -12,7 +12,7 @@
 #include <cstring>
 
 #if defined(TARGET_DARWIN_OSX) || defined(TARGET_FREEBSD)
-  #include "GoTvCoreUtil.h"
+  #include "NlcCoreUtil.h"
   // SDL redefines main as SDL_main 
   #ifdef HAS_SDL
     #include <SDL/SDL.h>

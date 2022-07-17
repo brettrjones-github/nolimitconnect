@@ -36,8 +36,8 @@
 #include "settings/SettingsComponent.h"
 #include "TextureCache.h"
 #include "threads/SystemClock.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "utils/Digest.h"
 #include "utils/FileExtensionProvider.h"
 #include "utils/log.h"
@@ -133,7 +133,7 @@ namespace VIDEO
            * doesn't exist rather than a NAS being switched off.  A manual clean from settings
            * will still pick up and remove it though.
            */
-          CLog::Log(LOGWARNING, "%s directory '%s' does not exist - skipping scan%s.", __FUNCTION__, GoTvUrl::GetRedacted(directory).c_str(), m_bClean ? " and clean" : "");
+          CLog::Log(LOGWARNING, "%s directory '%s' does not exist - skipping scan%s.", __FUNCTION__, NlcUrl::GetRedacted(directory).c_str(), m_bClean ? " and clean" : "");
           m_pathsToScan.erase(m_pathsToScan.begin());
         }
         else if (!DoScan(directory))
@@ -264,7 +264,7 @@ namespace VIDEO
 
     if (URIUtils::IsPlugin(strDirectory) && !CPluginDirectory::IsMediaLibraryScanningAllowed(TranslateContent(content), strDirectory))
     {
-      CLog::Log(LOGNOTICE, "VideoInfoScanner: Plugin '%s' does not support media library scanning for '%s' content", GoTvUrl::GetRedacted(strDirectory).c_str(), TranslateContent(content));
+      CLog::Log(LOGNOTICE, "VideoInfoScanner: Plugin '%s' does not support media library scanning for '%s' content", NlcUrl::GetRedacted(strDirectory).c_str(), TranslateContent(content));
       return true;
     }
 
@@ -300,23 +300,23 @@ namespace VIDEO
 
       if (StringUtils::EqualsNoCase(hash, dbHash))
       { // hash matches - skipping
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Skipping dir '%s' due to no change%s", GoTvUrl::GetRedacted(strDirectory).c_str(), !fastHash.empty() ? " (fasthash)" : "");
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Skipping dir '%s' due to no change%s", NlcUrl::GetRedacted(strDirectory).c_str(), !fastHash.empty() ? " (fasthash)" : "");
         bSkip = true;
       }
       else if (hash.empty())
       { // directory empty or non-existent - add to clean list and skip
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Skipping dir '%s' as it's empty or doesn't exist - adding to clean list", GoTvUrl::GetRedacted(strDirectory).c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Skipping dir '%s' as it's empty or doesn't exist - adding to clean list", NlcUrl::GetRedacted(strDirectory).c_str());
         if (m_bClean)
           m_pathsToClean.insert(m_database.GetPathId(strDirectory));
         bSkip = true;
       }
       else if (dbHash.empty())
       { // new folder - scan
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Scanning dir '%s' as not in the database", GoTvUrl::GetRedacted(strDirectory).c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Scanning dir '%s' as not in the database", NlcUrl::GetRedacted(strDirectory).c_str());
       }
       else
       { // hash changed - rescan
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Rescanning dir '%s' due to change (%s != %s)", GoTvUrl::GetRedacted(strDirectory).c_str(), dbHash.c_str(), hash.c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Rescanning dir '%s' due to change (%s != %s)", NlcUrl::GetRedacted(strDirectory).c_str(), dbHash.c_str(), hash.c_str());
       }
     }
     else if (content == CONTENT_TVSHOWS)
@@ -355,14 +355,14 @@ namespace VIDEO
           m_database.SetPathHash(strDirectory, hash);
           if (m_bClean)
             m_pathsToClean.insert(m_database.GetPathId(strDirectory));
-          CLog::Log(LOGDEBUG, "VideoInfoScanner: Finished adding information from dir %s", GoTvUrl::GetRedacted(strDirectory).c_str());
+          CLog::Log(LOGDEBUG, "VideoInfoScanner: Finished adding information from dir %s", NlcUrl::GetRedacted(strDirectory).c_str());
         }
       }
       else
       {
         if (m_bClean)
           m_pathsToClean.insert(m_database.GetPathId(strDirectory));
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: No (new) information was found in dir %s", GoTvUrl::GetRedacted(strDirectory).c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: No (new) information was found in dir %s", NlcUrl::GetRedacted(strDirectory).c_str());
       }
     }
     else if (!StringUtils::EqualsNoCase(hash, dbHash) && (content == CONTENT_MOVIES || content == CONTENT_MUSICVIDEOS))
@@ -448,7 +448,7 @@ namespace VIDEO
         ret = RetrieveInfoForMusicVideo(pItem.get(), bDirNames, info2, useLocal, pURL, pDlgProgress);
       else
       {
-        CLog::Log(LOGERROR, "VideoInfoScanner: Unknown content type %d (%s)", info2->Content(), GoTvUrl::GetRedacted(pItem->GetPath()).c_str());
+        CLog::Log(LOGERROR, "VideoInfoScanner: Unknown content type %d (%s)", info2->Content(), NlcUrl::GetRedacted(pItem->GetPath()).c_str());
         FoundSomeInfo = false;
         break;
       }
@@ -457,7 +457,7 @@ namespace VIDEO
         CLog::Log(LOGWARNING,
                   "VideoInfoScanner: Error %u occurred while retrieving"
                   "information for %s.", ret,
-                  GoTvUrl::GetRedacted(pItem->GetPath()).c_str());
+                  NlcUrl::GetRedacted(pItem->GetPath()).c_str());
         FoundSomeInfo = false;
         break;
       }
@@ -465,7 +465,7 @@ namespace VIDEO
         FoundSomeInfo = true;
       else if (ret == INFO_NOT_FOUND)
       {
-        CLog::Log(LOGWARNING, "No information found for item '%s', it won't be added to the library.", GoTvUrl::GetRedacted(pItem->GetPath()).c_str());
+        CLog::Log(LOGWARNING, "No information found for item '%s', it won't be added to the library.", NlcUrl::GetRedacted(pItem->GetPath()).c_str());
 
         MediaType mediaType = MediaTypeMovie;
         if (info2->Content() == CONTENT_TVSHOWS)
@@ -475,7 +475,7 @@ namespace VIDEO
         CServiceBroker::GetEventLog().Add(EventPtr(new CMediaLibraryEvent(
           mediaType, pItem->GetPath(), 24145,
           StringUtils::Format(g_localizeStrings.Get(24147).c_str(), mediaType.c_str(), URIUtils::GetFileName(pItem->GetPath()).c_str()),
-          pItem->GetArt("thumb"), GoTvUrl::GetRedacted(pItem->GetPath()), EventLevel::Warning)));
+          pItem->GetArt("thumb"), NlcUrl::GetRedacted(pItem->GetPath()), EventLevel::Warning)));
       }
 
       pURL = NULL;
@@ -887,7 +887,7 @@ namespace VIDEO
 
       if (bSkip)
       {
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Skipping dir '%s' due to no change", GoTvUrl::GetRedacted(item->GetPath()).c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Skipping dir '%s' due to no change", NlcUrl::GetRedacted(item->GetPath()).c_str());
         // update our dialog with our progress
         if (m_handle)
           OnDirectoryScanned(item->GetPath());
@@ -895,9 +895,9 @@ namespace VIDEO
       }
 
       if (dbHash.empty())
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Scanning dir '%s' as not in the database", GoTvUrl::GetRedacted(item->GetPath()).c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Scanning dir '%s' as not in the database", NlcUrl::GetRedacted(item->GetPath()).c_str());
       else
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Rescanning dir '%s' due to change (%s != %s)", GoTvUrl::GetRedacted(item->GetPath()).c_str(), dbHash.c_str(), hash.c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Rescanning dir '%s' due to change (%s != %s)", NlcUrl::GetRedacted(item->GetPath()).c_str(), dbHash.c_str(), hash.c_str());
 
       if (m_bClean)
       {
@@ -985,7 +985,7 @@ namespace VIDEO
         continue;
 
       if (!EnumerateEpisodeItem(items[i].get(), episodeList))
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Could not enumerate file %s", GoTvUrl::GetRedacted(GoTvUrl::Decode(items[i]->GetPath())).c_str());
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Could not enumerate file %s", NlcUrl::GetRedacted(NlcUrl::Decode(items[i]->GetPath())).c_str());
     }
     return true;
   }
@@ -1020,7 +1020,7 @@ namespace VIDEO
         episode.item = std::make_shared<CFileItem>(*item);
       episodeList.push_back(episode);
       CLog::Log(LOGDEBUG, "%s - found match for: %s. Season %d, Episode %d", __FUNCTION__,
-                GoTvUrl::GetRedacted(episode.strPath).c_str(), episode.iSeason, episode.iEpisode);
+                NlcUrl::GetRedacted(episode.strPath).c_str(), episode.iSeason, episode.iEpisode);
       return true;
     }
 
@@ -1045,7 +1045,7 @@ namespace VIDEO
       episode.cDate = item->GetVideoInfoTag()->m_firstAired;
       episodeList.push_back(episode);
       CLog::Log(LOGDEBUG, "%s - found match for: '%s', firstAired: '%s' = '%s', title: '%s'",
-        __FUNCTION__, GoTvUrl::GetRedacted(episode.strPath).c_str(), tag->m_firstAired.GetAsDBDateTime().c_str(),
+        __FUNCTION__, NlcUrl::GetRedacted(episode.strPath).c_str(), tag->m_firstAired.GetAsDBDateTime().c_str(),
                 episode.cDate.GetAsLocalizedDate().c_str(), episode.strTitle.c_str());
       return true;
     }
@@ -1067,7 +1067,7 @@ namespace VIDEO
       episode.iEpisode = -1;
       episodeList.push_back(episode);
       CLog::Log(LOGDEBUG,"%s - found match for: '%s', title: '%s'", __FUNCTION__,
-                GoTvUrl::GetRedacted(episode.strPath).c_str(), episode.strTitle.c_str());
+                NlcUrl::GetRedacted(episode.strPath).c_str(), episode.strTitle.c_str());
       return true;
     }
 
@@ -1079,7 +1079,7 @@ namespace VIDEO
     if (tag->m_iSeason == 0 && tag->m_iEpisode == 0)
     {
       CLog::Log(LOGDEBUG,"%s - found exclusion match for: %s. Both Season and Episode are 0. Item will be ignored for scanning.",
-                __FUNCTION__, GoTvUrl::GetRedacted(item->GetPath()).c_str());
+                __FUNCTION__, NlcUrl::GetRedacted(item->GetPath()).c_str());
       return true;
     }
 
@@ -1102,7 +1102,7 @@ namespace VIDEO
       strLabel = item->GetPath();
 
     // URLDecode in case an episode is on a http/https/dav/davs:// source and URL-encoded like foo%201x01%20bar.avi
-    strLabel = GoTvUrl::Decode(strLabel);
+    strLabel = NlcUrl::Decode(strLabel);
 
     for (unsigned int i=0;i<expression.size();++i)
     {
@@ -1130,7 +1130,7 @@ namespace VIDEO
         if (!GetAirDateFromRegExp(reg, episode))
           continue;
 
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Found date based match %s (%s) [%s]", GoTvUrl::GetRedacted(episode.strPath).c_str(),
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Found date based match %s (%s) [%s]", NlcUrl::GetRedacted(episode.strPath).c_str(),
                   episode.cDate.GetAsLocalizedDate().c_str(), expression[i].regexp.c_str());
       }
       else
@@ -1138,7 +1138,7 @@ namespace VIDEO
         if (!GetEpisodeAndSeasonFromRegExp(reg, episode, defaultSeason))
           continue;
 
-        CLog::Log(LOGDEBUG, "VideoInfoScanner: Found episode match %s (s%ie%i) [%s]", GoTvUrl::GetRedacted(episode.strPath).c_str(),
+        CLog::Log(LOGDEBUG, "VideoInfoScanner: Found episode match %s (s%ie%i) [%s]", NlcUrl::GetRedacted(episode.strPath).c_str(),
                   episode.iSeason, episode.iEpisode, expression[i].regexp.c_str());
       }
 
@@ -1308,7 +1308,7 @@ namespace VIDEO
       strTitle = StringUtils::Format("%s - %ix%i - %s", showInfo->m_strTitle.c_str(), movieDetails.m_iSeason, movieDetails.m_iEpisode, strTitle.c_str());
     }
 
-    std::string redactPath(GoTvUrl::GetRedacted(GoTvUrl::Decode(pItem->GetPath())));
+    std::string redactPath(NlcUrl::GetRedacted(NlcUrl::Decode(pItem->GetPath())));
 
     CLog::Log(LOGDEBUG, "VideoInfoScanner: Adding new item to %s:%s", TranslateContent(content).c_str(), redactPath.c_str());
     long lResult = -1;
@@ -1657,7 +1657,7 @@ namespace VIDEO
       {
         CLog::Log(LOGERROR, "VideoInfoScanner: Asked to lookup episode %s"
                             " online, but we have no episode guide. Check your tvshow.nfo and make"
-                            " sure the <episodeguide> tag is in place.", GoTvUrl::GetRedacted(file->strPath).c_str());
+                            " sure the <episodeguide> tag is in place.", NlcUrl::GetRedacted(file->strPath).c_str());
         continue;
       }
 

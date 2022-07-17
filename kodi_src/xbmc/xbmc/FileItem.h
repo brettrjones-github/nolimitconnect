@@ -47,7 +47,7 @@ class CArtist;
 class CSong;
 class CGenre;
 
-class GoTvUrl;
+class NlcUrl;
 class CVariant;
 
 class CFileItemList;
@@ -90,11 +90,11 @@ public:
   explicit CFileItem(const CGUIListItem& item);
   explicit CFileItem(const std::string& strLabel);
   explicit CFileItem(const char* strLabel);
-  CFileItem(const GoTvUrl& path, bool bIsFolder);
+  CFileItem(const NlcUrl& path, bool bIsFolder);
   CFileItem(const std::string& strPath, bool bIsFolder);
   explicit CFileItem(const CSong& song);
   CFileItem(const CSong& song, const MUSIC_INFO::CMusicInfoTag& music);
-  CFileItem(const GoTvUrl &path, const CAlbum& album);
+  CFileItem(const NlcUrl &path, const CAlbum& album);
   CFileItem(const std::string &path, const CAlbum& album);
   explicit CFileItem(const CArtist& artist);
   explicit CFileItem(const CGenre& genre);
@@ -111,15 +111,15 @@ public:
   ~CFileItem(void) override;
   CGUIListItem *Clone() const override { return new CFileItem(*this); };
 
-  const GoTvUrl GetURL() const;
-  void SetURL(const GoTvUrl& url);
-  bool IsURL(const GoTvUrl& url) const;
+  const NlcUrl GetURL() const;
+  void SetURL(const NlcUrl& url);
+  bool IsURL(const NlcUrl& url) const;
   const std::string &GetPath() const { return m_strPath; };
   void SetPath(const std::string &path) { m_strPath = path; };
   bool IsPath(const std::string& path, bool ignoreURLOptions = false) const;
 
-  const GoTvUrl GetDynURL() const;
-  void SetDynURL(const GoTvUrl& url);
+  const NlcUrl GetDynURL() const;
+  void SetDynURL(const NlcUrl& url);
   const std::string &GetDynPath() const;
   void SetDynPath(const std::string &path);
 

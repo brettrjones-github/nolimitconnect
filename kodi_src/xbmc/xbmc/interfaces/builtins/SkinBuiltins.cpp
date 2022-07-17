@@ -25,8 +25,8 @@
 #include "storage/MediaManager.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 
 using namespace ADDON;
 
@@ -227,7 +227,7 @@ static int SetFile(const std::vector<std::string>& params)
   ADDON::TYPE type;
   if ((type = CAddonInfo::TranslateType(strMask)) != ADDON_UNKNOWN)
   {
-    GoTvUrl url;
+    NlcUrl url;
     url.SetProtocol("addons");
     url.SetHostName("enabled");
     url.SetFileName(strMask+"/");

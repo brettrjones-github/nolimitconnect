@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "IFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "guilib/XBTF.h"
 #include "guilib/XBTFReader.h"
 
@@ -23,15 +23,15 @@ public:
   CXbtFile();
   ~CXbtFile() override;
 
-  bool Open(const GoTvUrl& url) override;
+  bool Open(const NlcUrl& url) override;
   void Close() override;
-  bool Exists(const GoTvUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
 
   int64_t GetPosition() override;
   int64_t GetLength() override;
 
   int Stat(struct __stat64* buffer) override;
-  int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+  int Stat(const NlcUrl& url, struct __stat64* buffer) override;
 
   ssize_t Read(void* lpBuf, size_t uiBufSize) override;
   int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;
@@ -44,11 +44,11 @@ public:
 private:
   bool GetFirstFrame(CXBTFFrame& frame) const;
 
-  static bool GetReader(const GoTvUrl& url, CXBTFReaderPtr& reader);
-  static bool GetReaderAndFile(const GoTvUrl& url, CXBTFReaderPtr& reader, CXBTFFile& file);
-  static bool GetFile(const GoTvUrl& url, CXBTFFile& file);
+  static bool GetReader(const NlcUrl& url, CXBTFReaderPtr& reader);
+  static bool GetReaderAndFile(const NlcUrl& url, CXBTFReaderPtr& reader, CXBTFFile& file);
+  static bool GetFile(const NlcUrl& url, CXBTFFile& file);
 
-  GoTvUrl m_url;
+  NlcUrl m_url;
   bool m_open = false;
   CXBTFReaderPtr m_xbtfReader;
   CXBTFFile m_xbtfFile;

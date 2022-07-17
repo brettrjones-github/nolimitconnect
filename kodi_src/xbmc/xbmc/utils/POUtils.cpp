@@ -7,7 +7,7 @@
  */
 
 #include "utils/POUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
 #include <stdlib.h>
@@ -25,7 +25,7 @@ CPODocument::~CPODocument() = default;
 
 bool CPODocument::LoadFile(const std::string &pofilename)
 {
-  GoTvUrl poFileUrl(pofilename);
+  NlcUrl poFileUrl(pofilename);
   if (!XFILE::CFile::Exists(poFileUrl))
     return false;
 

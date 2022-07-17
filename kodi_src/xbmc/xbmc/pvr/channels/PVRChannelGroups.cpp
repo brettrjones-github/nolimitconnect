@@ -12,7 +12,7 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "utils/StringUtils.h"

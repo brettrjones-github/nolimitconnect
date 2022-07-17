@@ -220,7 +220,7 @@ NLC_INLINE void UNALIGNED_STORE64(void *p, uint64 v) {
 #endif
 
 // The following guarantees declaration of the byte swap functions.
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 
 #ifdef HAVE_SYS_BYTEORDER_H
 #include <sys/byteorder.h>
@@ -277,7 +277,7 @@ NLC_INLINE uint64 bswap_64(uint64 x) {
 
 #endif
 
-#endif  // GOTV_ARCH_BIGENDIAN
+#endif  // NLC_ARCH_BIGENDIAN
 
 // Convert to little-endian storage, opposite of network format.
 // Convert x from host to little endian: x = LittleEndian.FromHost(x);
@@ -291,7 +291,7 @@ NLC_INLINE uint64 bswap_64(uint64 x) {
 class LittleEndian {
  public:
   // Conversion functions.
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 
   static uint16 FromHost16(uint16 x) { return bswap_16(x); }
   static uint16 ToHost16(uint16 x) { return bswap_16(x); }
@@ -301,7 +301,7 @@ class LittleEndian {
 
   static bool IsLittleEndian() { return false; }
 
-#else  // !defined(GOTV_ARCH_BIGENDIAN)
+#else  // !defined(NLC_ARCH_BIGENDIAN)
 
   static uint16 FromHost16(uint16 x) { return x; }
   static uint16 ToHost16(uint16 x) { return x; }
@@ -311,7 +311,7 @@ class LittleEndian {
 
   static bool IsLittleEndian() { return true; }
 
-#endif  // !defined(GOTV_ARCH_BIGENDIAN)
+#endif  // !defined(NLC_ARCH_BIGENDIAN)
 
   // Functions to do unaligned loads and stores in little-endian order.
   static uint16 Load16(const void *p) {

@@ -27,7 +27,7 @@
 #include "settings/SettingsComponent.h"
 #include "storage/MediaManager.h"
 #include "TextureCache.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 using namespace XFILE;
 

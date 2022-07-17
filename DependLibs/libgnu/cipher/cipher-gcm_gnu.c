@@ -304,7 +304,7 @@ do_ghash (unsigned char *hsub, unsigned char *result, const unsigned char *buf)
   int i, j;
   byte *p;
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
   p = result;
 #else
   unsigned long T[4];
@@ -330,7 +330,7 @@ do_ghash (unsigned char *hsub, unsigned char *result, const unsigned char *buf)
             V[0] ^= 0xe1000000;
         }
     }
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
   for (i = 0, p = (byte *) T; i < 16; i += 4, p += 4)
     {
       result[i + 0] = p[3];

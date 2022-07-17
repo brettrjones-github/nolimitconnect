@@ -11,7 +11,7 @@
 #include "Directory.h"
 #include "utils/URIUtils.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 
@@ -19,7 +19,7 @@ CSpecialProtocolDirectory::CSpecialProtocolDirectory(void) = default;
 
 CSpecialProtocolDirectory::~CSpecialProtocolDirectory(void) = default;
 
-bool CSpecialProtocolDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CSpecialProtocolDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   const std::string pathToUrl(url.Get());
   std::string translatedPath = CSpecialProtocol::TranslatePath(url);
@@ -37,7 +37,7 @@ bool CSpecialProtocolDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &
   return false;
 }
 
-std::string CSpecialProtocolDirectory::TranslatePath(const GoTvUrl &url)
+std::string CSpecialProtocolDirectory::TranslatePath(const NlcUrl &url)
 {
   return CSpecialProtocol::TranslatePath(url);
 }

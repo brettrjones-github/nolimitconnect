@@ -11,7 +11,7 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "libbluray/DllLibbluray.h"
 #include "FileItem.h"
 #include "LangInfoKodi.h"
@@ -118,7 +118,7 @@ CFileItemPtr CBlurayDirectory::GetTitle(const BLURAY_TITLE_INFO* title, const st
   std::string buf;
   std::string chap;
   CFileItemPtr item(new CFileItem("", false));
-  GoTvUrl path(m_url);
+  NlcUrl path(m_url);
   buf = StringUtils::Format("BDMV/PLAYLIST/%05d.mpls", title->playlist);
   path.SetFileName(buf);
   item->SetPath(path.Get());
@@ -184,7 +184,7 @@ void CBlurayDirectory::GetRoot(CFileItemList &items)
 {
     GetTitles(true, items);
 
-    GoTvUrl path(m_url);
+    NlcUrl path(m_url);
     CFileItemPtr item;
 
     path.SetFileName(URIUtils::AddFileToFolder(m_url.GetFileName(), "titles"));
@@ -211,7 +211,7 @@ void CBlurayDirectory::GetRoot(CFileItemList &items)
     items.Add(item);
 }
 
-bool CBlurayDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CBlurayDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   Dispose();
   m_url = url;
@@ -229,7 +229,7 @@ bool CBlurayDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
     GetTitles(false, items);
   else
   {
-    GoTvUrl url2 = GetUnderlyingCURL(url);
+    NlcUrl url2 = GetUnderlyingCURL(url);
     CDirectory::CHints hints;
     hints.flags = m_flags;
     if (!CDirectory::GetDirectory(url2, items, hints))
@@ -242,12 +242,12 @@ bool CBlurayDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-GoTvUrl CBlurayDirectory::GetUnderlyingCURL(const GoTvUrl& url)
+NlcUrl CBlurayDirectory::GetUnderlyingCURL(const NlcUrl& url)
 {
   assert(url.IsProtocol("bluray"));
   std::string host = url.GetHostName();
   std::string filename = url.GetFileName();
-  return GoTvUrl(host.append(filename));
+  return NlcUrl(host.append(filename));
 }
 
 bool CBlurayDirectory::InitializeBluray(const std::string &root)
@@ -276,7 +276,7 @@ bool CBlurayDirectory::InitializeBluray(const std::string &root)
   
   if (!m_dll->bd_open_files(m_bd, const_cast<std::string*>(&root), DllLibbluray::dir_open, DllLibbluray::file_open))
   {
-    CLog::Log(LOGERROR, "CBlurayDirectory::InitializeBluray - failed to open %s", GoTvUrl::GetRedacted(root).c_str());
+    CLog::Log(LOGERROR, "CBlurayDirectory::InitializeBluray - failed to open %s", NlcUrl::GetRedacted(root).c_str());
     return false;
   }
   m_blurayInitialized = true;

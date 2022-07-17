@@ -31,7 +31,7 @@
 #include "utils/log.h"
 #include "utils/GLUtils.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 #include <string>
 #include <sstream>
@@ -65,78 +65,78 @@ static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
 //============================================================================
 void BaseYUV2RGBShader::SetField( int field )
 {
-    m_IGoTv.shaderSetField( getShaderMethod(), field );
+    m_INlc.shaderSetField( getShaderMethod(), field );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetWidth( int width )
 {
-    m_IGoTv.shaderSetWidth( getShaderMethod(), width );
+    m_INlc.shaderSetWidth( getShaderMethod(), width );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetHeight( int width )
 {
-    m_IGoTv.shaderSetHeight( getShaderMethod(), width );
+    m_INlc.shaderSetHeight( getShaderMethod(), width );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetBlack( float black )
 {
-    m_IGoTv.shaderSetBlack( getShaderMethod(), black );
+    m_INlc.shaderSetBlack( getShaderMethod(), black );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetContrast( float contrast )
 {
-    m_IGoTv.shaderSetContrast( getShaderMethod(), contrast );
+    m_INlc.shaderSetContrast( getShaderMethod(), contrast );
 }
 
 //============================================================================
 int BaseYUV2RGBShader::GetVertexLoc( )
 {
-    return m_IGoTv.shaderGetVertexLoc( getShaderMethod() );
+    return m_INlc.shaderGetVertexLoc( getShaderMethod() );
 }
 
 //============================================================================
 int BaseYUV2RGBShader::GetYcoordLoc()
 {
-    return m_IGoTv.shaderGetYcoordLoc( getShaderMethod() );
+    return m_INlc.shaderGetYcoordLoc( getShaderMethod() );
 }
 
 //============================================================================
 int BaseYUV2RGBShader::GetUcoordLoc()
 {
-    return m_IGoTv.shaderGetUcoordLoc( getShaderMethod() );
+    return m_INlc.shaderGetUcoordLoc( getShaderMethod() );
 }
 
 //============================================================================
 int BaseYUV2RGBShader::GetVcoordLoc()
 {
-    return m_IGoTv.shaderGetVcoordLoc( getShaderMethod() );
+    return m_INlc.shaderGetVcoordLoc( getShaderMethod() );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetMatrices( const GLfloat *p, const GLfloat *m ) 
 {
-    m_IGoTv.shaderSetMatrices( getShaderMethod(), p, m );
+    m_INlc.shaderSetMatrices( getShaderMethod(), p, m );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetAlpha( GLfloat alpha )
 {
-    m_IGoTv.shaderSetAlpha( getShaderMethod(), alpha );
+    m_INlc.shaderSetAlpha( getShaderMethod(), alpha );
 }
 
 //============================================================================
 void BaseYUV2RGBShader::SetConvertFullColorRange( bool convertFullRange )
 {
-    m_IGoTv.shaderSetConvertFullColorRange( getShaderMethod(), convertFullRange );
+    m_INlc.shaderSetConvertFullColorRange( getShaderMethod(), convertFullRange );
 }
 
 //============================================================================
 //============================================================================
-BaseYUV2RGBShaderQt::BaseYUV2RGBShaderQt(  IGoTv& gotv, unsigned flags, EShaderFormat format )
+BaseYUV2RGBShaderQt::BaseYUV2RGBShaderQt(  INlc& gotv, unsigned flags, EShaderFormat format )
 : BaseYUV2RGBShader( gotv )
 {
     m_ShaderMethod = SM_SHADER_NONE;
@@ -170,7 +170,7 @@ BaseYUV2RGBShaderQt::BaseYUV2RGBShaderQt(  IGoTv& gotv, unsigned flags, EShaderF
          m_Valid = false;
     }
 
-     m_IGoTv.shaderSetFormat( getShaderMethod(), format );
+     m_INlc.shaderSetFormat( getShaderMethod(), format );
 }
 
 //============================================================================
@@ -205,13 +205,13 @@ void BaseYUV2RGBShaderQt::Free()
 // Use for weave deinterlacing / progressive
 //////////////////////////////////////////////////////////////////////
 //============================================================================
-YUV2RGBProgressiveShaderQt::YUV2RGBProgressiveShaderQt( IGoTv& gotv, unsigned flags, EShaderFormat format )
+YUV2RGBProgressiveShaderQt::YUV2RGBProgressiveShaderQt( INlc& gotv, unsigned flags, EShaderFormat format )
     : BaseYUV2RGBShaderQt( gotv, flags, format )
 {
     //PixelShader()->LoadSource( "gles_yuv2rgb_basic.frag", m_defines );
     if( m_Valid )
     {
-        m_IGoTv.shaderSetFlags( getShaderMethod(), flags );
+        m_INlc.shaderSetFlags( getShaderMethod(), flags );
     }
 }
 
@@ -219,7 +219,7 @@ YUV2RGBProgressiveShaderQt::YUV2RGBProgressiveShaderQt( IGoTv& gotv, unsigned fl
 // YUV2RGBBobShader - YUV2RGB with Bob deinterlacing
 //////////////////////////////////////////////////////////////////////
 //============================================================================
-YUV2RGBBobShaderQt::YUV2RGBBobShaderQt( IGoTv& gotv, unsigned flags, EShaderFormat format )
+YUV2RGBBobShaderQt::YUV2RGBBobShaderQt( INlc& gotv, unsigned flags, EShaderFormat format )
     : BaseYUV2RGBShaderQt( gotv, flags, format )
 {
     //m_hStepX = -1;
@@ -254,8 +254,8 @@ YUV2RGBBobShaderQt::YUV2RGBBobShaderQt( IGoTv& gotv, unsigned flags, EShaderForm
 
     if( m_Valid )
     {
-        m_IGoTv.shaderSetFlags( getShaderMethod(), flags );
-        m_IGoTv.shaderSetFormat( getShaderMethod(), m_format );
+        m_INlc.shaderSetFlags( getShaderMethod(), flags );
+        m_INlc.shaderSetFormat( getShaderMethod(), m_format );
     }
 }
 

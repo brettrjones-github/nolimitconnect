@@ -32,7 +32,7 @@
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "SeekHandler.h"
 #include "utils/Variant.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 using namespace JSONRPC;
 using namespace PLAYLIST;

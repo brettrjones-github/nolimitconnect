@@ -18,10 +18,10 @@ namespace XFILE
     CDAVFile(void);
     ~CDAVFile(void) override;
 
-    virtual bool Execute(const GoTvUrl& url);
+    virtual bool Execute(const NlcUrl& url);
 
-    bool Delete(const GoTvUrl& url) override;
-    bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) override;
+    bool Delete(const NlcUrl& url) override;
+    bool Rename(const NlcUrl& url, const NlcUrl& urlnew) override;
 
     virtual int GetLastResponseCode() { return m_lastResponseCode; }
 

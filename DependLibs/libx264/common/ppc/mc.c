@@ -394,7 +394,7 @@ static void mc_chroma_2xh( uint8_t *dstu, uint8_t *dstv, intptr_t i_dst_stride,
     }
  }
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 #define VSLD(a,b,n) vec_sld(a,b,n)
 #else
 #define VSLD(a,b,n) vec_sld(b,a,16-n)
@@ -423,7 +423,7 @@ static void mc_chroma_4xh_altivec( uint8_t *dstu, uint8_t *dstv, intptr_t i_dst_
     vec_u16_t   src0v_16, src1v_16, src2v_16, src3v_16, dstv16;
     vec_u16_t   shiftv, k32v;
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
     static const vec_u8_t perm0v = CV(1,5,9,13,1,5,9,13,1,5,9,13,1,5,9,13);
     static const vec_u8_t perm1v = CV(3,7,11,15,3,7,11,15,3,7,11,15,3,7,11,15);
 #else
@@ -525,7 +525,7 @@ static void mc_chroma_8xh_altivec( uint8_t *dstu, uint8_t *dstv, intptr_t i_dst_
     k32v    = vec_sl( vec_splat_u16( 1 ), vec_splat_u16( 5 ) );
     shiftv  = vec_splat_u16( 6 );
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
     static const vec_u8_t perm0v = CV(1,5,9,13,17,21,25,29,0,0,0,0,0,0,0,0);
     static const vec_u8_t perm1v = CV(3,7,11,15,19,23,27,31,0,0,0,0,0,0,0,0);
 #else
@@ -875,7 +875,7 @@ static void frame_init_lowres_core_altivec( uint8_t *src0, uint8_t *dst0, uint8_
     vec_u8_t lv, hv, src1p1v;
     vec_u8_t avg0v, avg1v, avghv, avghp1v, avgleftv, avgrightv;
     static const vec_u8_t inverse_bridge_shuffle = CV(0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0E, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1A, 0x1C, 0x1E );
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
     static const vec_u8_t inverse_bridge_shuffle_1 = CV(0x01, 0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x11, 0x13, 0x15, 0x17, 0x19, 0x1B, 0x1D, 0x1F );
 #endif
 
@@ -906,7 +906,7 @@ static void frame_init_lowres_core_altivec( uint8_t *src0, uint8_t *dst0, uint8_
             avgrightv = vec_avg(VSLD(avghv, avghp1v, 1), avghv);
 
             vec_st(vec_perm(avgleftv, avgrightv, inverse_bridge_shuffle), 16*x, dst0);
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
             vec_st((vec_u8_t)vec_pack((vec_u16_t)avgleftv,(vec_u16_t)avgrightv), 16*x, dsth);
 #else
             vec_st(vec_perm(avgleftv, avgrightv, inverse_bridge_shuffle_1), 16*x, dsth);
@@ -924,7 +924,7 @@ static void frame_init_lowres_core_altivec( uint8_t *src0, uint8_t *dst0, uint8_
             avgrightv = vec_avg(VSLD(avghv, avghp1v, 1), avghv);
 
             vec_st(vec_perm(avgleftv, avgrightv, inverse_bridge_shuffle), 16*x, dstv);
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
             vec_st((vec_u8_t)vec_pack((vec_u16_t)avgleftv,(vec_u16_t)avgrightv), 16*x, dstc);
 #else
             vec_st(vec_perm(avgleftv, avgrightv, inverse_bridge_shuffle_1), 16*x, dstc);
@@ -946,7 +946,7 @@ static void frame_init_lowres_core_altivec( uint8_t *src0, uint8_t *dst0, uint8_
             avgrightv = vec_avg(VSLD(avg1v, avghp1v, 1), avg1v);
 
             lv = vec_perm(avgleftv, avgrightv, inverse_bridge_shuffle);
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
             hv = (vec_u8_t)vec_pack((vec_u16_t)avgleftv,(vec_u16_t)avgrightv);
 #else
             hv = vec_perm(avgleftv, avgrightv, inverse_bridge_shuffle_1);
@@ -1312,7 +1312,7 @@ void x264_plane_copy_deinterleave_v210_altivec( uint16_t *dsty, intptr_t i_dsty,
                                                 uint16_t *dstc, intptr_t i_dstc,
                                                 uint32_t *src, intptr_t i_src, int w, int h )
 {
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
     const vec_u8_t masky[3] = {
         { 0x02, 0x01, 0x05, 0x04, 0x07, 0x06, 0x0A, 0x09, 0x0D, 0x0C, 0x0F, 0x0E, 0x12, 0x11, 0x15, 0x14 },
         { 0x07, 0x06, 0x0A, 0x09, 0x0D, 0x0C, 0x0F, 0x0E, 0x12, 0x11, 0x15, 0x14, 0x17, 0x16, 0x1A, 0x19 },

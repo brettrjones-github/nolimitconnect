@@ -10,7 +10,7 @@
 #ifdef TARGET_OS_WINDOWS
 
 #include "WIN32Util.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "storage/cdioSupport.h"
 #include "PowrProf.h"
@@ -447,7 +447,7 @@ std::wstring CWIN32Util::ConvertPathToWin32Form(const std::string& pathUtf8)
   return result;
 }
 
-std::wstring CWIN32Util::ConvertPathToWin32Form(const GoTvUrl& url)
+std::wstring CWIN32Util::ConvertPathToWin32Form(const NlcUrl& url)
 {
   assert(url.GetProtocol().empty() || url.IsProtocol("smb"));
 

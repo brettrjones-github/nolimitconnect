@@ -26,46 +26,46 @@
 #include "core/Media.h"
 #include "core/Stats.h"
 
-GoTvPtoPMedia::GoTvPtoPMedia(const QString &location,
+NlcPtoPMedia::NlcPtoPMedia(const QString &location,
                    bool localFile,
-                   GoTvPtoPInstance *instance)
+                   NlcPtoPInstance *instance)
     : QObject(instance)
 {
     initMedia(location, localFile, instance);
 }
 
-GoTvPtoPMedia::GoTvPtoPMedia(const QString &location,
-                   GoTvPtoPInstance *instance)
+NlcPtoPMedia::NlcPtoPMedia(const QString &location,
+                   NlcPtoPInstance *instance)
     : QObject(instance)
 {
     initMedia(location, false, instance);
 }
 
-GoTvPtoPMedia::GoTvPtoPMedia(libgotvptop_media_t *media)
+NlcPtoPMedia::NlcPtoPMedia(libgotvptop_media_t *media)
 {
     // Create a new libgotvptop media descriptor from existing one
     _gotvptopMedia = libgotvptop_media_duplicate(media);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoPMedia::~GoTvPtoPMedia()
+NlcPtoPMedia::~NlcPtoPMedia()
 {
     removeCoreConnections();
 
     libgotvptop_media_release(_gotvptopMedia);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-libgotvptop_media_t *GoTvPtoPMedia::core()
+libgotvptop_media_t *NlcPtoPMedia::core()
 {
     return _gotvptopMedia;
 }
 
-void GoTvPtoPMedia::initMedia(const QString &location,
+void NlcPtoPMedia::initMedia(const QString &location,
                          bool localFile,
-                         GoTvPtoPInstance *instance)
+                         NlcPtoPInstance *instance)
 {
     _currentLocation = location;
     QString l = location;
@@ -82,10 +82,10 @@ void GoTvPtoPMedia::initMedia(const QString &location,
 
     createCoreConnections();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMedia::createCoreConnections()
+void NlcPtoPMedia::createCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaMetaChanged
@@ -100,7 +100,7 @@ void GoTvPtoPMedia::createCoreConnections()
     }
 }
 
-void GoTvPtoPMedia::removeCoreConnections()
+void NlcPtoPMedia::removeCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaMetaChanged
@@ -115,32 +115,32 @@ void GoTvPtoPMedia::removeCoreConnections()
     }
 }
 
-bool GoTvPtoPMedia::parsed() const
+bool NlcPtoPMedia::parsed() const
 {
     int parsed = libgotvptop_media_is_parsed(_gotvptopMedia);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return parsed;
 }
 
-void GoTvPtoPMedia::parse()
+void NlcPtoPMedia::parse()
 {
     libgotvptop_media_parse_async(_gotvptopMedia);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-QString GoTvPtoPMedia::currentLocation() const
+QString NlcPtoPMedia::currentLocation() const
 {
     return _currentLocation;
 }
 
-GoTvPtoPStats *GoTvPtoPMedia::getStats()
+NlcPtoPStats *NlcPtoPMedia::getStats()
 {
     libgotvptop_media_stats_t *coreStats = new libgotvptop_media_stats_t;
 
-    GoTvPtoPStats *stats = new GoTvPtoPStats;
+    NlcPtoPStats *stats = new NlcPtoPStats;
     stats->valid = libgotvptop_media_get_stats(_gotvptopMedia, coreStats);
 
     stats->read_bytes = coreStats->i_read_bytes;
@@ -162,46 +162,46 @@ GoTvPtoPStats *GoTvPtoPMedia::getStats()
     return stats;
 }
 
-GoTvPtoP::State GoTvPtoPMedia::state() const
+NlcPtoP::State NlcPtoPMedia::state() const
 {
     libgotvptop_state_t state;
     state = libgotvptop_media_get_state(_gotvptopMedia);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    return GoTvPtoP::State(state);
+    return NlcPtoP::State(state);
 }
 
-qint64 GoTvPtoPMedia::duration() const
+qint64 NlcPtoPMedia::duration() const
 {
     libgotvptop_time_t duration = libgotvptop_media_get_duration(_gotvptopMedia);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return duration;
 }
 
-QString GoTvPtoPMedia::duplicate(const QString &name,
+QString NlcPtoPMedia::duplicate(const QString &name,
                             const QString &path,
-                            const GoTvPtoP::Mux &mux)
+                            const NlcPtoP::Mux &mux)
 {
     return record(name, path, mux, true);
 }
 
-QString GoTvPtoPMedia::duplicate(const QString &name,
+QString NlcPtoPMedia::duplicate(const QString &name,
                             const QString &path,
-                            const GoTvPtoP::Mux &mux,
-                            const GoTvPtoP::AudioCodec &audioCodec,
-                            const GoTvPtoP::VideoCodec &videoCodec)
+                            const NlcPtoP::Mux &mux,
+                            const NlcPtoP::AudioCodec &audioCodec,
+                            const NlcPtoP::VideoCodec &videoCodec)
 {
     return record(name, path, mux, audioCodec, videoCodec, true);
 }
 
-QString GoTvPtoPMedia::duplicate(const QString &name,
+QString NlcPtoPMedia::duplicate(const QString &name,
                             const QString &path,
-                            const GoTvPtoP::Mux &mux,
-                            const GoTvPtoP::AudioCodec &audioCodec,
-                            const GoTvPtoP::VideoCodec &videoCodec,
+                            const NlcPtoP::Mux &mux,
+                            const NlcPtoP::AudioCodec &audioCodec,
+                            const NlcPtoP::VideoCodec &videoCodec,
                             int bitrate,
                             int fps,
                             int scale)
@@ -209,15 +209,15 @@ QString GoTvPtoPMedia::duplicate(const QString &name,
     return record(name, path, mux, audioCodec, videoCodec, bitrate, fps, scale, true);
 }
 
-QString GoTvPtoPMedia::merge(const QString &name,
+QString NlcPtoPMedia::merge(const QString &name,
                         const QString &path,
-                        const GoTvPtoP::Mux &mux)
+                        const NlcPtoP::Mux &mux)
 {
     QString option1, option2, parameters;
     QString l = QDir::toNativeSeparators(path + "/" + name);
 
     parameters = "gather:std{access=file,mux=%1,dst='%2'}";
-    parameters = parameters.arg(GoTvPtoP::mux()[mux], l + "." + GoTvPtoP::mux()[mux]);
+    parameters = parameters.arg(NlcPtoP::mux()[mux], l + "." + NlcPtoP::mux()[mux]);
 
     option1 = ":sout-keep";
     option2 = ":sout=#%1";
@@ -226,21 +226,21 @@ QString GoTvPtoPMedia::merge(const QString &name,
     setOption(option1);
     setOption(option2);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    return l + "." + GoTvPtoP::mux()[mux];
+    return l + "." + NlcPtoP::mux()[mux];
 }
 
-QString GoTvPtoPMedia::record(const QString &name,
+QString NlcPtoPMedia::record(const QString &name,
                          const QString &path,
-                         const GoTvPtoP::Mux &mux,
+                         const NlcPtoP::Mux &mux,
                          bool duplicate)
 {
     QString option1, option2, parameters;
     QString l = QDir::toNativeSeparators(path + "/" + name);
 
     parameters = "std{access=file,mux=%1,dst='%2'}";
-    parameters = parameters.arg(GoTvPtoP::mux()[mux], l + "." + GoTvPtoP::mux()[mux]);
+    parameters = parameters.arg(NlcPtoP::mux()[mux], l + "." + NlcPtoP::mux()[mux]);
 
     if (duplicate) {
         option2 = ":sout=#duplicate{dst=display,dst=\"%1\"}";
@@ -254,23 +254,23 @@ QString GoTvPtoPMedia::record(const QString &name,
     setOption(option1);
     setOption(option2);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    return l + "." + GoTvPtoP::mux()[mux];
+    return l + "." + NlcPtoP::mux()[mux];
 }
 
-QString GoTvPtoPMedia::record(const QString &name,
+QString NlcPtoPMedia::record(const QString &name,
                          const QString &path,
-                         const GoTvPtoP::Mux &mux,
-                         const GoTvPtoP::AudioCodec &audioCodec,
-                         const GoTvPtoP::VideoCodec &videoCodec,
+                         const NlcPtoP::Mux &mux,
+                         const NlcPtoP::AudioCodec &audioCodec,
+                         const NlcPtoP::VideoCodec &videoCodec,
                          bool duplicate)
 {
     QString option1, option2, parameters;
     QString l = QDir::toNativeSeparators(path + "/" + name);
 
     parameters = "transcode{vcodec=%1,acodec=%2}:std{access=file,mux=%3,dst='%4'}";
-    parameters = parameters.arg(GoTvPtoP::videoCodec()[videoCodec], GoTvPtoP::audioCodec()[audioCodec], GoTvPtoP::mux()[mux], l + "." + GoTvPtoP::mux()[mux]);
+    parameters = parameters.arg(NlcPtoP::videoCodec()[videoCodec], NlcPtoP::audioCodec()[audioCodec], NlcPtoP::mux()[mux], l + "." + NlcPtoP::mux()[mux]);
 
     if (duplicate) {
         option2 = ":sout=#duplicate{dst=display,dst=\"%1\"}";
@@ -284,16 +284,16 @@ QString GoTvPtoPMedia::record(const QString &name,
     setOption(option1);
     setOption(option2);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    return l + "." + GoTvPtoP::mux()[mux];
+    return l + "." + NlcPtoP::mux()[mux];
 }
 
-QString GoTvPtoPMedia::record(const QString &name,
+QString NlcPtoPMedia::record(const QString &name,
                          const QString &path,
-                         const GoTvPtoP::Mux &mux,
-                         const GoTvPtoP::AudioCodec &audioCodec,
-                         const GoTvPtoP::VideoCodec &videoCodec,
+                         const NlcPtoP::Mux &mux,
+                         const NlcPtoP::AudioCodec &audioCodec,
+                         const NlcPtoP::VideoCodec &videoCodec,
                          int bitrate,
                          int fps,
                          int scale,
@@ -303,7 +303,7 @@ QString GoTvPtoPMedia::record(const QString &name,
     QString l = QDir::toNativeSeparators(path + "/" + name);
 
     parameters = "transcode{vcodec=%1,vb=%2,fps=%3,scale=%4,acodec=%5}:std{access=file,mux=%6,dst='%7'}";
-    parameters = parameters.arg(GoTvPtoP::videoCodec()[videoCodec], QString::number(bitrate), QString::number(fps), QString::number(scale), GoTvPtoP::audioCodec()[audioCodec], GoTvPtoP::mux()[mux], l + "." + GoTvPtoP::mux()[mux]);
+    parameters = parameters.arg(NlcPtoP::videoCodec()[videoCodec], QString::number(bitrate), QString::number(fps), QString::number(scale), NlcPtoP::audioCodec()[audioCodec], NlcPtoP::mux()[mux], l + "." + NlcPtoP::mux()[mux]);
 
     if (duplicate) {
         option2 = ":sout=#duplicate{dst=display,dst=\"%1\"}";
@@ -317,41 +317,41 @@ QString GoTvPtoPMedia::record(const QString &name,
     setOption(option1);
     setOption(option2);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    return l + "." + GoTvPtoP::mux()[mux];
+    return l + "." + NlcPtoP::mux()[mux];
 }
 
-void GoTvPtoPMedia::setProgram(int program)
+void NlcPtoPMedia::setProgram(int program)
 {
     QString option = "program=%1";
     setOption(option.arg(program));
 }
 
-void GoTvPtoPMedia::setOption(const QString &option)
+void NlcPtoPMedia::setOption(const QString &option)
 {
     libgotvptop_media_add_option(_gotvptopMedia, option.toUtf8().data());
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMedia::setOptions(const QStringList &options)
+void NlcPtoPMedia::setOptions(const QStringList &options)
 {
     foreach (const QString &option, options) {
         libgotvptop_media_add_option(_gotvptopMedia, option.toUtf8().data());
     }
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMedia::libgotvptop_callback(const libgotvptop_event_t *event,
+void NlcPtoPMedia::libgotvptop_callback(const libgotvptop_event_t *event,
                                void *data)
 {
-    GoTvPtoPMedia *core = static_cast<GoTvPtoPMedia *>(data);
+    NlcPtoPMedia *core = static_cast<NlcPtoPMedia *>(data);
 
     switch (event->type) {
     case libgotvptop_MediaMetaChanged:
-        emit core->metaChanged(GoTvPtoP::Meta(event->u.media_meta_changed.meta_type));
+        emit core->metaChanged(NlcPtoP::Meta(event->u.media_meta_changed.meta_type));
         break;
     case libgotvptop_MediaSubItemAdded:
         emit core->subitemAdded(event->u.media_subitem_added.new_child);
@@ -367,7 +367,7 @@ void GoTvPtoPMedia::libgotvptop_callback(const libgotvptop_event_t *event,
         emit core->freed(event->u.media_freed.md);
         break;
     case libgotvptop_MediaStateChanged:
-        emit core->stateChanged(GoTvPtoP::State(event->u.media_state_changed.new_state));
+        emit core->stateChanged(NlcPtoP::State(event->u.media_state_changed.new_state));
         break;
     default:
         break;

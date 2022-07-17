@@ -8,7 +8,7 @@
 
 #include "ResourceDirectory.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/Directory.h"
 #include "filesystem/ResourceFile.h"
 #include "utils/URIUtils.h"
@@ -19,7 +19,7 @@ CResourceDirectory::CResourceDirectory() = default;
 
 CResourceDirectory::~CResourceDirectory() = default;
 
-bool CResourceDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CResourceDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   const std::string pathToUrl(url.Get());
   std::string translatedPath;
@@ -42,7 +42,7 @@ bool CResourceDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return false;
 }
 
-std::string CResourceDirectory::TranslatePath(const GoTvUrl &url)
+std::string CResourceDirectory::TranslatePath(const NlcUrl &url)
 {
   std::string translatedPath;
   if (!CResourceFile::TranslatePath(url, translatedPath))

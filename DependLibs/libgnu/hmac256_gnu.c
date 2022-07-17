@@ -33,7 +33,7 @@
 
     Constants:
 
-     GOTV_ARCH_BIGENDIAN       Defined to 1 on big endian systems.
+     NLC_ARCH_BIGENDIAN       Defined to 1 on big endian systems.
      NLC_INLINE                If defined, it should yield the keyword used
                            to NLC_INLINE a function.
      HAVE_U32_TYPEDEF      Defined if the uint32_t type is available.
@@ -177,9 +177,9 @@ transform (hmac256_context_t hd, const void *data_arg)
   g = hd->h6;
   h = hd->h7;
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
   memcpy (x, data, 64);
-#else /*!GOTV_ARCH_BIGENDIAN*/
+#else /*!NLC_ARCH_BIGENDIAN*/
   {
     unsigned char *p2;
 
@@ -191,7 +191,7 @@ transform (hmac256_context_t hd, const void *data_arg)
         p2[0] = *data++;
       }
   }
-#endif /*!GOTV_ARCH_BIGENDIAN*/
+#endif /*!NLC_ARCH_BIGENDIAN*/
 
   for (i=0; i < 16; i++)
     w[i] = x[i];

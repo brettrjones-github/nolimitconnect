@@ -30,7 +30,7 @@
 
 #include "widgets/ControlVideo.h"
 
-GoTvPtoPControlVideo::GoTvPtoPControlVideo(GoTvPtoPMediaPlayer *player,
+NlcPtoPControlVideo::NlcPtoPControlVideo(NlcPtoPMediaPlayer *player,
                                  const QString &language,
                                  QObject *parent)
     : QObject(parent),
@@ -56,21 +56,21 @@ GoTvPtoPControlVideo::GoTvPtoPControlVideo(GoTvPtoPMediaPlayer *player,
     _timerVideo->start(1000);
 }
 
-GoTvPtoPControlVideo::~GoTvPtoPControlVideo()
+NlcPtoPControlVideo::~NlcPtoPControlVideo()
 {
     delete _timerSubtitles;
     delete _timerVideo;
 }
 
-void GoTvPtoPControlVideo::updateSubtitleActions()
+void NlcPtoPControlVideo::updateSubtitleActions()
 {
     qDeleteAll(_actionSubList);
     _actionSubList.clear();
     _descSub.clear();
     _idSub.clear();
 
-    if (!(_gotvptopMediaPlayer->state() == GoTvPtoP::Playing || _gotvptopMediaPlayer->state() == GoTvPtoP::Paused)) {
-        emit actions(_actionSubList, GoTvPtoP::Subtitles);
+    if (!(_gotvptopMediaPlayer->state() == NlcPtoP::Playing || _gotvptopMediaPlayer->state() == NlcPtoP::Paused)) {
+        emit actions(_actionSubList, NlcPtoP::Subtitles);
         emit subtitleTracks(_actionSubList);
         return;
     }
@@ -84,7 +84,7 @@ void GoTvPtoPControlVideo::updateSubtitleActions()
             _actionSubList << new QAction(desc[i], this);
         }
     } else {
-        emit actions(_actionSubList, GoTvPtoP::Subtitles);
+        emit actions(_actionSubList, NlcPtoP::Subtitles);
         emit subtitleTracks(_actionSubList);
         _timerSubtitles->start(1000);
         return;
@@ -106,13 +106,13 @@ void GoTvPtoPControlVideo::updateSubtitleActions()
 
     _actionSubList[_idSub[_gotvptopVideo->subtitle()]]->setChecked(true);
 
-    emit actions(_actionSubList, GoTvPtoP::Subtitles);
+    emit actions(_actionSubList, NlcPtoP::Subtitles);
     emit subtitleTracks(_actionSubList);
 
     _timerSubtitles->start(60000);
 }
 
-void GoTvPtoPControlVideo::updateSubtitles()
+void NlcPtoPControlVideo::updateSubtitles()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (!action)
@@ -123,7 +123,7 @@ void GoTvPtoPControlVideo::updateSubtitles()
     _gotvptopVideo->setSubtitle(id);
 }
 
-void GoTvPtoPControlVideo::loadSubtitle(const QString &subtitle)
+void NlcPtoPControlVideo::loadSubtitle(const QString &subtitle)
 {
     if (subtitle.isEmpty())
         return;
@@ -133,15 +133,15 @@ void GoTvPtoPControlVideo::loadSubtitle(const QString &subtitle)
     _timerSubtitles->start(1000);
 }
 
-void GoTvPtoPControlVideo::updateVideoActions()
+void NlcPtoPControlVideo::updateVideoActions()
 {
     qDeleteAll(_actionVideoList);
     _actionVideoList.clear();
     _descVideo.clear();
     _idVideo.clear();
 
-    if (!(_gotvptopMediaPlayer->state() == GoTvPtoP::Playing || _gotvptopMediaPlayer->state() == GoTvPtoP::Paused)) {
-        emit actions(_actionVideoList, GoTvPtoP::VideoTrack);
+    if (!(_gotvptopMediaPlayer->state() == NlcPtoP::Playing || _gotvptopMediaPlayer->state() == NlcPtoP::Paused)) {
+        emit actions(_actionVideoList, NlcPtoP::VideoTrack);
         emit videoTracks(_actionVideoList);
         return;
     }
@@ -155,7 +155,7 @@ void GoTvPtoPControlVideo::updateVideoActions()
             _actionVideoList << new QAction(desc[i], this);
         }
     } else {
-        emit actions(_actionVideoList, GoTvPtoP::VideoTrack);
+        emit actions(_actionVideoList, NlcPtoP::VideoTrack);
         emit videoTracks(_actionVideoList);
         _timerVideo->start(1000);
         return;
@@ -168,13 +168,13 @@ void GoTvPtoPControlVideo::updateVideoActions()
 
     _actionVideoList[_idVideo[_gotvptopVideo->track()]]->setChecked(true);
 
-    emit actions(_actionVideoList, GoTvPtoP::VideoTrack);
+    emit actions(_actionVideoList, NlcPtoP::VideoTrack);
     emit videoTracks(_actionVideoList);
 
     _timerVideo->start(60000);
 }
 
-void GoTvPtoPControlVideo::updateVideo()
+void NlcPtoPControlVideo::updateVideo()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (!action)
@@ -185,14 +185,14 @@ void GoTvPtoPControlVideo::updateVideo()
     _gotvptopVideo->setTrack(id);
 }
 
-void GoTvPtoPControlVideo::reset()
+void NlcPtoPControlVideo::reset()
 {
     _timerSubtitles->start(1000);
     _timerVideo->start(1000);
     _manualLanguage = false;
 }
 
-void GoTvPtoPControlVideo::setDefaultSubtitleLanguage(const QString &language)
+void NlcPtoPControlVideo::setDefaultSubtitleLanguage(const QString &language)
 {
     _preferedLanguage = language.split(" / ");
 }

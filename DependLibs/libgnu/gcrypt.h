@@ -36,7 +36,7 @@
 //#if defined TARGET_OS_WINDOWS
 
 # ifndef __GNUC__
- // defined in GoTvDependLi
+ // defined in NlcDependLi
  //# if !defined( _MSC_FULL_VER )
  // typedef long ssize_t; // defined in AppCompilerConfig
  //# endif //_MSC_FULL_VER

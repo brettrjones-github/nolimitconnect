@@ -14,7 +14,7 @@
 #include "GUIUserMessages.h"
 #include "GUIPassword.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "settings/MediaSourceSettings.h"
 #include "settings/Settings.h"
@@ -30,7 +30,7 @@
 #include "filesystem/File.h"
 #include "guilib/LocalizeStrings.h"
 #include "TextureCache.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 #include "addons/Scraper.h"
@@ -232,7 +232,7 @@ void CGUIDialogContextMenu::GetContextButtons(const std::string &type, const CFi
       //! @todo might be smart to also combine editing source & plugin settings into one concept/dialog
       // Note. Temporarily disabled ability to remove plugin sources until installer is operational
 
-      GoTvUrl url(share->strPath);
+      NlcUrl url(share->strPath);
       bool isAddon = ADDON::TranslateContent(url.GetProtocol()) != CONTENT_NONE;
       if (!share->m_ignore && !isAddon)
         buttons.Add(CONTEXT_BUTTON_EDIT_SOURCE, 1027); // Edit Source

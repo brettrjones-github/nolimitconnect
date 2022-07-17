@@ -1537,7 +1537,7 @@ static int pixel_sa8d_16x16_altivec( uint8_t *pix1, intptr_t i_pix1,
     d3 = vec_sub(t1, t3);                           \
 }
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 #define vec_perm_extend_s16(val, perm) (vec_s16_t)vec_perm(val, zero_u8v, perm)
 #else
 #define vec_perm_extend_s16(val, perm) (vec_s16_t)vec_perm(zero_u8v, val, perm)

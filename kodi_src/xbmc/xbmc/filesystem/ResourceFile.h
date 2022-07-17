@@ -19,9 +19,9 @@ public:
   ~CResourceFile() override;
 
   static bool TranslatePath(const std::string &path, std::string &translatedPath);
-  static bool TranslatePath(const GoTvUrl &url, std::string &translatedPath);
+  static bool TranslatePath(const NlcUrl &url, std::string &translatedPath);
 
 protected:
-  std::string TranslatePath(const GoTvUrl &url) override;
+  std::string TranslatePath(const NlcUrl &url) override;
 };
 }

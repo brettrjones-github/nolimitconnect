@@ -28,7 +28,7 @@ CVideoDatabaseDirectory::CVideoDatabaseDirectory(void) = default;
 
 CVideoDatabaseDirectory::~CVideoDatabaseDirectory(void) = default;
 
-bool CVideoDatabaseDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CVideoDatabaseDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string path = CLegacyPathTranslation::TranslateVideoDbPath(url);
   items.SetPath(path);
@@ -293,7 +293,7 @@ bool CVideoDatabaseDirectory::ContainsMovies(const std::string &path)
   return false;
 }
 
-bool CVideoDatabaseDirectory::Exists(const GoTvUrl& url)
+bool CVideoDatabaseDirectory::Exists(const NlcUrl& url)
 {
   std::string path = CLegacyPathTranslation::TranslateVideoDbPath(url);
   std::unique_ptr<CDirectoryNode> pNode(CDirectoryNode::ParseURL(path));

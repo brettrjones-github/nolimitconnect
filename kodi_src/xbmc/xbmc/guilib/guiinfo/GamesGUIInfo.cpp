@@ -9,7 +9,7 @@
 #include "guilib/guiinfo/GamesGUIInfo.h"
 
 #include "FileItem.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "cores/RetroPlayer/RetroPlayerUtils.h"
 #include "games/tags/GameInfoTag.h"
 #include "settings/MediaSettings.h"

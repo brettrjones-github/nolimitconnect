@@ -24,42 +24,42 @@
 
 #include "SharedExportQml.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
-class GoTvPtoPQmlVideoOutput;
-class GoTvPtoPQmlVideoStream;
+class NlcPtoPQmlVideoOutput;
+class NlcPtoPQmlVideoStream;
 
 /*!
-    \class GoTvPtoPQmlSource QmlSource.h GOTVQtQml/QmlSource.h
+    \class NlcPtoPQmlSource QmlSource.h GOTVQtQml/QmlSource.h
     \ingroup GOTVQtQml
     \brief QML video source
 
     A special class which represents video source.
-    GoTvPtoPQmlVideoOutput can connect to any class that subclasses this one.
+    NlcPtoPQmlVideoOutput can connect to any class that subclasses this one.
 
-    \see GoTvPtoPQmlPlayer
-    \see GoTvPtoPQmlVideoOutput
+    \see NlcPtoPQmlPlayer
+    \see NlcPtoPQmlVideoOutput
 
     \since GOTV-Qt 1.1
  */
-class GOTVQT_QML_EXPORT GoTvPtoPQmlSource : public QObject,
+class GOTVQT_QML_EXPORT NlcPtoPQmlSource : public QObject,
                                       public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
 public:
     /*!
-        \brief GoTvPtoPQmlSource constructor
+        \brief NlcPtoPQmlSource constructor
         \param parent parent object
      */
-    GoTvPtoPQmlSource(QObject *parent);
-    ~GoTvPtoPQmlSource();
+    NlcPtoPQmlSource(QObject *parent);
+    ~NlcPtoPQmlSource();
 
     /*!
         \brief Set media player to use
         \param player media player
      */
-    void setPlayer(GoTvPtoPMediaPlayer *player);
+    void setPlayer(NlcPtoPMediaPlayer *player);
 
     /*!
         \brief Remove player from source
@@ -70,13 +70,13 @@ public:
         \brief Register video output
         \param output QML video output
      */
-    virtual void registerVideoOutput(GoTvPtoPQmlVideoOutput *output);
+    virtual void registerVideoOutput(NlcPtoPQmlVideoOutput *output);
 
     /*!
         \brief Deregister video output
         \param output QML video output
      */
-    virtual void deregisterVideoOutput(GoTvPtoPQmlVideoOutput *output);
+    virtual void deregisterVideoOutput(NlcPtoPQmlVideoOutput *output);
 
 private:
     // LCOV_EXCL_START
@@ -84,7 +84,7 @@ private:
     void componentComplete() override {}
     // LCOV_EXCL_END
 
-    GoTvPtoPQmlVideoStream *_videoStream;
+    NlcPtoPQmlVideoStream *_videoStream;
 };
 
 #endif // GOTVQT_QMLSOURCE_H_

@@ -20,7 +20,7 @@ extern "C" {
 }
 
 class CDVDDemuxFFmpeg;
-class GoTvUrl;
+class NlcUrl;
 
 class CDemuxStreamVideoFFmpeg : public CDemuxStreamVideo
 {

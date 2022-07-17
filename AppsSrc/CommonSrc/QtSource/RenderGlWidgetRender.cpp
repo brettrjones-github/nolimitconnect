@@ -22,7 +22,7 @@
 #include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
 
-#include "GuiInterface/GoTvRenderFrame.h"
+#include "GuiInterface/NlcRenderFrame.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>
@@ -71,7 +71,7 @@ bool RenderGlWidget::destroyRenderSystem()
 
 
 //============================================================================
-void RenderGlWidget::captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& captureArea )
+void RenderGlWidget::captureScreen( CScreenshotSurface * screenCaptrue, NlcRect& captureArea )
 {
 
 }
@@ -87,7 +87,7 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
     m_SrcWidth = width;
     m_SrcHeight = height;
 
-    GoTvRect rect( 0, 0, width, height );
+    NlcRect rect( 0, 0, width, height );
     setViewPort( rect );
 
     //getGlFunctions()->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -122,7 +122,7 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
 }
 
 //============================================================================
-bool RenderGlWidget::clearBuffers( GoTvColor color )
+bool RenderGlWidget::clearBuffers( NlcColor color )
 {
 	if( !isRenderReady() )
 	{
@@ -173,7 +173,7 @@ void RenderGlWidget::setVSync( bool vsync )
 }
 
 //============================================================================
-void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
+void RenderGlWidget::setViewPort( const NlcRect& viewPort )
 {
     getGlFunctions()->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     getGlFunctions()->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
@@ -195,7 +195,7 @@ void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 }
 
 //============================================================================
-void RenderGlWidget::getViewPort( GoTvRect& viewPort )
+void RenderGlWidget::getViewPort( NlcRect& viewPort )
 {
     viewPort.x1 = m_viewPort[ 0 ];
     viewPort.y1 = m_viewPort[ 1 ];
@@ -210,13 +210,13 @@ bool RenderGlWidget::scissorsCanEffectClipping()
 }
 
 //============================================================================
-GoTvRect RenderGlWidget::clipRectToScissorRect( const GoTvRect &rect )
+NlcRect RenderGlWidget::clipRectToScissorRect( const NlcRect &rect )
 {
     return rect;
 }
 
 //============================================================================
-void RenderGlWidget::setScissors( const GoTvRect& rect )
+void RenderGlWidget::setScissors( const NlcRect& rect )
 {
 }
 
@@ -249,14 +249,14 @@ void RenderGlWidget::applyStateBlock()
 }
 
 //============================================================================
-void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
+void RenderGlWidget::setCameraPosition( const NlcPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
 {
 	if( !isRenderReady() )
 	{
 		return;
 	}
 
-    GoTvPoint offset = camera - GoTvPoint( screenWidth*0.5f, screenHeight*0.5f );
+    NlcPoint offset = camera - NlcPoint( screenWidth*0.5f, screenHeight*0.5f );
 
     float w = ( float )m_viewPort[ 2 ] * 0.5f;
     float h = ( float )m_viewPort[ 3 ] * 0.5f;

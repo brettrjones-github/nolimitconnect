@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -31,18 +31,18 @@
 #include "SharedExportCore.h"
 
 /*!
-    \struct GoTvPtoPAbstractVideoFrame AbstractVideoFrame.h core/AbstractVideoFrame.h
+    \struct NlcPtoPAbstractVideoFrame AbstractVideoFrame.h core/AbstractVideoFrame.h
     \ingroup GOTVQtCore
     \brief Abstract video frame data container
     \since GOTV-Qt 1.1
 */
-struct GOTVQT_CORE_EXPORT GoTvPtoPAbstractVideoFrame {
+struct GOTVQT_CORE_EXPORT NlcPtoPAbstractVideoFrame {
     /*!
-        \brief GoTvPtoPVideoFrame constructor.
+        \brief NlcPtoPVideoFrame constructor.
         \param planeCount
     */
-    GoTvPtoPAbstractVideoFrame(int planeCount);
-    virtual ~GoTvPtoPAbstractVideoFrame() = 0;
+    NlcPtoPAbstractVideoFrame(int planeCount);
+    virtual ~NlcPtoPAbstractVideoFrame() = 0;
 
     /*!
         \brief Reset frame to default values
@@ -67,7 +67,7 @@ struct GOTVQT_CORE_EXPORT GoTvPtoPAbstractVideoFrame {
         \brief Set pitches and lines helper
         \param frame frame to copy from
      */
-    void setPitchesAndLines(const std::shared_ptr<GoTvPtoPAbstractVideoFrame> &frame);
+    void setPitchesAndLines(const std::shared_ptr<NlcPtoPAbstractVideoFrame> &frame);
 
     QByteArray frameBuffer; /*!< frame buffer */
 

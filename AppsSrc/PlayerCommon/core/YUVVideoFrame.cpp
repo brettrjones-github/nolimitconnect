@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -21,11 +21,11 @@
 
 #include "core/YUVVideoFrame.h"
 
-GoTvPtoPYUVVideoFrame::GoTvPtoPYUVVideoFrame(unsigned *width,
+NlcPtoPYUVVideoFrame::NlcPtoPYUVVideoFrame(unsigned *width,
                                    unsigned *height,
                                    unsigned *pitches,
                                    unsigned *lines)
-    : GoTvPtoPAbstractVideoFrame(3)
+    : NlcPtoPAbstractVideoFrame(3)
 {
     uint16_t evenWidth = *width + (*width & 1 ? 1 : 0);
     uint16_t evenHeight = *height + (*height & 1 ? 1 : 0);
@@ -50,10 +50,10 @@ GoTvPtoPYUVVideoFrame::GoTvPtoPYUVVideoFrame(unsigned *width,
     setPitchesAndLines(pitches, lines);
 }
 
-GoTvPtoPYUVVideoFrame::~GoTvPtoPYUVVideoFrame() {}
+NlcPtoPYUVVideoFrame::~NlcPtoPYUVVideoFrame() {}
 
-GoTvPtoPYUVVideoFrame::GoTvPtoPYUVVideoFrame(const std::shared_ptr<GoTvPtoPYUVVideoFrame> &frame)
-    : GoTvPtoPAbstractVideoFrame(3)
+NlcPtoPYUVVideoFrame::NlcPtoPYUVVideoFrame(const std::shared_ptr<NlcPtoPYUVVideoFrame> &frame)
+    : NlcPtoPAbstractVideoFrame(3)
 {
     frameBuffer.resize(frame->frameBuffer.size());
 

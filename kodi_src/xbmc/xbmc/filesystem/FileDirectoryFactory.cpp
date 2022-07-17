@@ -22,7 +22,7 @@
 #include "Directory.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 #include "addons/AudioDecoder.h"
 #include "addons/VFSEntry.h"
@@ -38,7 +38,7 @@ CFileDirectoryFactory::CFileDirectoryFactory(void) = default;
 CFileDirectoryFactory::~CFileDirectoryFactory(void) = default;
 
 // return NULL + set pItem->m_bIsFolder to remove it completely from list.
-IFileDirectory* CFileDirectoryFactory::Create(const GoTvUrl& url, CFileItem* pItem, const std::string& strMask)
+IFileDirectory* CFileDirectoryFactory::Create(const NlcUrl& url, CFileItem* pItem, const std::string& strMask)
 {
   if (url.IsProtocol("stack")) // disqualify stack as we need to work with each of the parts instead
     return NULL;
@@ -104,7 +104,7 @@ IFileDirectory* CFileDirectoryFactory::Create(const GoTvUrl& url, CFileItem* pIt
 #if defined(TARGET_ANDROID)
   if (url.IsFileType("apk"))
   {
-    GoTvUrl zipURL = URIUtils::CreateArchivePath("apk", url);
+    NlcUrl zipURL = URIUtils::CreateArchivePath("apk", url);
 
     CFileItemList items;
     CDirectory::GetDirectory(zipURL, items, strMask, DIR_FLAG_DEFAULTS);
@@ -125,7 +125,7 @@ IFileDirectory* CFileDirectoryFactory::Create(const GoTvUrl& url, CFileItem* pIt
 #endif
   if (url.IsFileType("zip"))
   {
-    GoTvUrl zipURL = URIUtils::CreateArchivePath("zip", url);
+    NlcUrl zipURL = URIUtils::CreateArchivePath("zip", url);
 
     CFileItemList items;
     CDirectory::GetDirectory(zipURL, items, strMask, DIR_FLAG_DEFAULTS);
@@ -145,7 +145,7 @@ IFileDirectory* CFileDirectoryFactory::Create(const GoTvUrl& url, CFileItem* pIt
   }
   if (url.IsFileType("xbt"))
   {
-    GoTvUrl xbtUrl = URIUtils::CreateArchivePath("xbt", url);
+    NlcUrl xbtUrl = URIUtils::CreateArchivePath("xbt", url);
     pItem->SetURL(xbtUrl);
 
     return new CXbtDirectory();

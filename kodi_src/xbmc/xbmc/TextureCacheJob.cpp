@@ -18,7 +18,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "video/VideoThumbLoader.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #include "music/MusicThumbLoader.h"
 #include "music/tags/MusicInfoTag.h"
@@ -87,7 +87,7 @@ bool CTextureCacheJob::CacheTexture(CBaseTexture **out_texture)
     if (out_texture)
       *out_texture = LoadImage(CTextureCache::GetCachedPath(m_details.file), width, height, "" /* already flipped */);
     CLog::Log(LOGDEBUG, "Fast %s image '%s' to '%s': %p",
-              m_oldHash.empty() ? "Caching" : "Recaching", GoTvUrl::GetRedacted(image),
+              m_oldHash.empty() ? "Caching" : "Recaching", NlcUrl::GetRedacted(image),
               m_details.file, static_cast<void*>(out_texture));
     return true;
   }
@@ -100,7 +100,7 @@ bool CTextureCacheJob::CacheTexture(CBaseTexture **out_texture)
     else
       m_details.file = m_cachePath + ".jpg";
 
-    CLog::Log(LOGDEBUG, "%s image '%s' to '%s':", m_oldHash.empty() ? "Caching" : "Recaching", GoTvUrl::GetRedacted(image).c_str(), m_details.file.c_str());
+    CLog::Log(LOGDEBUG, "%s image '%s' to '%s':", m_oldHash.empty() ? "Caching" : "Recaching", NlcUrl::GetRedacted(image).c_str(), m_details.file.c_str());
 
     if (CPicture::CacheTexture(texture, width, height, CTextureCache::GetCachedPath(m_details.file), scalingAlgorithm))
     {
@@ -153,7 +153,7 @@ std::string CTextureCacheJob::DecodeImageURL(const std::string &url, unsigned in
   if (StringUtils::StartsWith(url, "image://"))
   {
     // format is image://[type@]<url_encoded_path>?options
-    GoTvUrl thumbURL(url);
+    NlcUrl thumbURL(url);
 
     if (!CTextureCache::CanCacheImageURL(thumbURL))
       return "";
@@ -247,7 +247,7 @@ std::string CTextureCacheJob::GetImageHash(const std::string &url)
     // so set an obviously bad hash
     return "BADHASH";
   }
-  CLog::Log(LOGDEBUG, "%s - unable to stat url %s", __FUNCTION__, GoTvUrl::GetRedacted(url).c_str());
+  CLog::Log(LOGDEBUG, "%s - unable to stat url %s", __FUNCTION__, NlcUrl::GetRedacted(url).c_str());
   return "";
 }
 

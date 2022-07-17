@@ -20,7 +20,7 @@
 class ILinux : public OsInterface
 {
 public:
-    ILinux( IGoTv& gotv );
+    ILinux( INlc& gotv );
     virtual ~ILinux( ) = default;
 
     //=== stages of create ===//

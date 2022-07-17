@@ -38,14 +38,14 @@ namespace XFILE
     public:
       CCurlFile();
       ~CCurlFile() override;
-      bool Open(const GoTvUrl& url) override;
-      bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) override;
-      bool ReOpen(const GoTvUrl& url) override;
-      bool Exists(const GoTvUrl& url) override;
+      bool Open(const NlcUrl& url) override;
+      bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) override;
+      bool ReOpen(const NlcUrl& url) override;
+      bool Exists(const NlcUrl& url) override;
       int64_t Seek(int64_t iFilePosition, int iWhence=SEEK_SET) override;
       int64_t GetPosition() override;
       int64_t GetLength() override;
-      int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+      int Stat(const NlcUrl& url, struct __stat64* buffer) override;
       void Close() override;
       bool ReadString(char *szLine, int iLineLength) override { return m_state->ReadString(szLine, iLineLength); }
       int64_t Read(void* lpBuf, size_t uiBufSize) override { return m_state->Read(lpBuf, uiBufSize); }
@@ -85,12 +85,12 @@ namespace XFILE
       std::string GetRedirectURL();
 
       /* static function that will get content type of a file */
-      static bool GetHttpHeader(const GoTvUrl &url, CHttpHeader &headers);
-      static bool GetMimeType(const GoTvUrl &url, std::string &content, const std::string &useragent="");
-      static bool GetContentType(const GoTvUrl &url, std::string &content, const std::string &useragent = "");
+      static bool GetHttpHeader(const NlcUrl &url, CHttpHeader &headers);
+      static bool GetMimeType(const NlcUrl &url, std::string &content, const std::string &useragent="");
+      static bool GetContentType(const NlcUrl &url, std::string &content, const std::string &useragent = "");
 
-      /* static function that will get cookies stored by GoTvUrl in RFC 2109 format */
-      static bool GetCookies(const GoTvUrl &url, std::string &cookies);
+      /* static function that will get cookies stored by NlcUrl in RFC 2109 format */
+      static bool GetCookies(const NlcUrl &url, std::string &cookies);
 
       class CReadState
       {
@@ -140,7 +140,7 @@ namespace XFILE
       };
 
     protected:
-      void ParseAndCorrectUrl(GoTvUrl &url);
+      void ParseAndCorrectUrl(NlcUrl &url);
       void SetCommonOptions(CReadState* state, bool failOnError = true);
       void SetRequestHeaders(CReadState* state);
       void SetCorrectHeaders(CReadState* state);

@@ -2,13 +2,13 @@
 #include "KodiQtSettings.h"
 
 //============================================================================
-GoTvPlayerSettings::GoTvPlayerSettings()
+NlcPlayerSettings::NlcPlayerSettings()
 {
 
 }
 
 //============================================================================
-GoTvPlayerSettings::~GoTvPlayerSettings()
+NlcPlayerSettings::~NlcPlayerSettings()
 {
 
 }

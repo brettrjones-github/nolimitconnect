@@ -19,7 +19,7 @@
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
 #include "filesystem/AddonsDirectory.h"
@@ -242,7 +242,7 @@ void CGUIWindowAddonBrowser::UpdateButtons()
   CONTROL_ENABLE(CONTROL_CHECK_FOR_UPDATES);
   CONTROL_ENABLE(CONTROL_SETTINGS);
 
-  bool allowFilter = CAddonsDirectory::IsRepoDirectory(GoTvUrl(m_vecItems->GetPath()));
+  bool allowFilter = CAddonsDirectory::IsRepoDirectory(NlcUrl(m_vecItems->GetPath()));
   CONTROL_ENABLE_ON_CONDITION(CONTROL_FOREIGNFILTER, allowFilter);
   CONTROL_ENABLE_ON_CONDITION(CONTROL_BROKENFILTER, allowFilter);
 
@@ -272,7 +272,7 @@ bool CGUIWindowAddonBrowser::GetDirectory(const std::string& strDirectory, CFile
 {
   bool result = CGUIMediaWindow::GetDirectory(strDirectory, items);
 
-  if (result && CAddonsDirectory::IsRepoDirectory(GoTvUrl(strDirectory)))
+  if (result && CAddonsDirectory::IsRepoDirectory(NlcUrl(strDirectory)))
   {
     const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
     if (settings->GetBool(CSettings::SETTING_GENERAL_ADDONFOREIGNFILTER))

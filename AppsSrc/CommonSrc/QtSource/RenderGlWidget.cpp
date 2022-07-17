@@ -21,7 +21,7 @@
 #include "MyIcons.h"
 #include "RenderGlOffScreenSurface.h"
 
-#include "GuiInterface/GoTvRenderFrame.h"
+#include "GuiInterface/NlcRenderFrame.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>

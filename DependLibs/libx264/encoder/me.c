@@ -718,7 +718,7 @@ void x264_me_search_ref( x264_t *h, x264_me_t *m, int16_t (*mvc)[2], int i_mvc, 
                         if( WORD_SIZE == 8 && sizeof(mvsad_t) == 8 )
                         {
                             uint64_t mvsad = M64( &mvsads[i] ) = M64( &mvsads[j] );
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
                             mvsad >>= 32;
 #endif
                             sad = mvsad;

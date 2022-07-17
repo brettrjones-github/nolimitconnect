@@ -9,7 +9,7 @@
 #include "PlaylistFileDirectory.h"
 #include "playlists/PlayListFactory.h"
 #include "File.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "playlists/PlayList.h"
 
 using namespace PLAYLIST;
@@ -20,7 +20,7 @@ namespace XFILE
 
   CPlaylistFileDirectory::~CPlaylistFileDirectory() = default;
 
-  bool CPlaylistFileDirectory::GetDirectory(const GoTvUrl& url, CFileItemList& items)
+  bool CPlaylistFileDirectory::GetDirectory(const NlcUrl& url, CFileItemList& items)
   {
     const std::string pathToUrl = url.Get();
     std::unique_ptr<CPlayList> pPlayList (CPlayListFactory::Create(pathToUrl));
@@ -42,7 +42,7 @@ namespace XFILE
     return true;
   }
 
-  bool CPlaylistFileDirectory::ContainsFiles(const GoTvUrl& url)
+  bool CPlaylistFileDirectory::ContainsFiles(const NlcUrl& url)
   {
     const std::string pathToUrl = url.Get();
     std::unique_ptr<CPlayList> pPlayList (CPlayListFactory::Create(pathToUrl));
@@ -57,7 +57,7 @@ namespace XFILE
     return false;
   }
 
-  bool CPlaylistFileDirectory::Remove(const GoTvUrl& url)
+  bool CPlaylistFileDirectory::Remove(const NlcUrl& url)
   {
     return XFILE::CFile::Delete(url);
   }

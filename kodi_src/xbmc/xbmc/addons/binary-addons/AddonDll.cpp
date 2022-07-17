@@ -27,7 +27,7 @@
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 // Global addon callback handle classes
 #include "addons/interfaces/Filesystem.h"

@@ -19,6 +19,6 @@ class CCDDADirectory :
 public:
   CCDDADirectory(void);
   ~CCDDADirectory(void) override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
 };
 }

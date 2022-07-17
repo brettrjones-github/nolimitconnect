@@ -113,7 +113,7 @@ int CAudioDecoder::GetTrackCount(const std::string& strPath)
         return 0;
     }
     else
-      XFILE::CMusicFileDirectory::m_tag.SetTitle(GoTvUrl(strPath).GetFileNameWithoutPath());
+      XFILE::CMusicFileDirectory::m_tag.SetTitle(NlcUrl(strPath).GetFileNameWithoutPath());
     XFILE::CMusicFileDirectory::m_tag.SetLoaded(true);
   }
 

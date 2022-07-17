@@ -7,8 +7,8 @@
  */
 
 #include "FileOperationJob.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "dialogs/GUIDialogExtendedProgressBar.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/LocalizeStrings.h"
@@ -243,7 +243,7 @@ bool CFileOperationJob::CFileOperation::ExecuteOperation(CFileOperationJob *base
 {
   bool bResult = true;
 
-  base->m_currentFile = GoTvUrl(m_strFileA).GetFileNameWithoutPath();
+  base->m_currentFile = NlcUrl(m_strFileA).GetFileNameWithoutPath();
   base->m_currentOperation = GetActionString(m_action);
 
   if (base->ShouldCancel((unsigned int)current, 100))
@@ -301,7 +301,7 @@ inline bool CFileOperationJob::CanBeRenamed(const std::string &strFileA, const s
   if (URIUtils::IsHD(strFileA) && URIUtils::IsHD(strFileB))
     return true;
   else if (URIUtils::IsSmb(strFileA) && URIUtils::IsSmb(strFileB)) {
-    GoTvUrl smbFileA(strFileA), smbFileB(strFileB);
+    NlcUrl smbFileA(strFileA), smbFileB(strFileB);
     return smbFileA.GetHostName() == smbFileB.GetHostName() &&
            smbFileA.GetShareName() == smbFileB.GetShareName();
   }

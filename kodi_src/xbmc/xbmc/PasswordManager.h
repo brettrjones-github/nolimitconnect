@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include "threads/CriticalSection.h"
 
-class GoTvUrl;
+class NlcUrl;
 
 /*!
  \ingroup filesystem
@@ -36,11 +36,11 @@ public:
    \brief Authenticate a URL by looking the URL up in the temporary and permanent caches
    First looks up based on host and share name.  If that fails, it will try a match purely
    on the host name (eg different shares on the same host with the same credentials)
-   \param url a GoTvUrl to authenticate
+   \param url a NlcUrl to authenticate
    \return true if we have details in the cache, false otherwise.
-   \sa GoTvUrl
+   \sa NlcUrl
    */
-  bool AuthenticateURL(GoTvUrl &url);
+  bool AuthenticateURL(NlcUrl &url);
 
   /*!
    \brief Prompt for a username and password for the particular URL.
@@ -52,9 +52,9 @@ public:
    
    \param url the URL to authenticate.
    \return true if the user entered details, false if the user cancelled the dialog.
-   \sa GoTvUrl, SaveAuthenticatedURL
+   \sa NlcUrl, SaveAuthenticatedURL
    */
-  bool PromptToAuthenticateURL(GoTvUrl &url);
+  bool PromptToAuthenticateURL(NlcUrl &url);
 
   /*!
    \brief Save an authenticated URL.
@@ -64,9 +64,9 @@ public:
 
    \param url the URL to authenticate.
    \param saveToProfile whether to save in the users profile, defaults to true.
-   \sa GoTvUrl, PromptToAuthenticateURL
+   \sa NlcUrl, PromptToAuthenticateURL
    */
-  void SaveAuthenticatedURL(const GoTvUrl &url, bool saveToProfile = true);
+  void SaveAuthenticatedURL(const NlcUrl &url, bool saveToProfile = true);
 
   /*!
    \brief Is an URL is supported (by the manager)
@@ -77,7 +77,7 @@ public:
    \return true if the URL is supported
    \sa CURL, IsURLSupported
    */
-  bool IsURLSupported(const GoTvUrl &url);
+  bool IsURLSupported(const NlcUrl &url);
 
   /*!
    \brief Clear any previously cached passwords
@@ -93,7 +93,7 @@ private:
 
   void Load();
   void Save() const;
-  std::string GetLookupPath(const GoTvUrl &url) const;
+  std::string GetLookupPath(const NlcUrl &url) const;
   std::string GetServerLookup(const std::string &path) const;
 
   std::map<std::string, std::string>  m_temporaryCache;

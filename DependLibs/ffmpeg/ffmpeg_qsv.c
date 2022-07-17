@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-//BRJ dont compile.. not supported in GoTv
+//BRJ dont compile.. not supported in Nlc
 #include <libmfx/mfx/mfxvideo.h>
 #include <stdlib.h>
 

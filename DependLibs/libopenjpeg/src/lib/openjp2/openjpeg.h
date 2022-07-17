@@ -57,7 +57,7 @@ Most compilers implement their own version of this keyword ...
 # define INLINE					NLC_FORCE_INLINE
 #endif /* INLINE */
 
-#define OPJ_DEPRECATED			GOTV_DEPRECATED
+#define OPJ_DEPRECATED			NLC_DEPRECATED
 #define OPJ_API					NLC_API
 #define OPJ_LOCAL				NLC_LOCAL
 #define OPJ_CALLCONV			NLC_CALLCONV

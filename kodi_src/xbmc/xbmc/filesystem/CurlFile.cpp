@@ -9,8 +9,8 @@
 #include "CurlFile.h"
 #include "ServiceBroker.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -37,8 +37,8 @@
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include <GuiInterface/IGoTv.h>
-#include "GoTvDebugConfig.h"
+#include <GuiInterface/INlc.h>
+#include "NlcDebugConfig.h"
 
 using namespace XFILE;
 using namespace XCURL;
@@ -477,7 +477,7 @@ void CCurlFile::SetCommonOptions(CReadState* state, bool failOnError /* = true *
     g_curlInterface.easy_setopt(h, CURLOPT_VERBOSE, CURL_OFF);
 
 
-  std::string certFile = IGoTv::getIGoTv().getSslCertFile();
+  std::string certFile = INlc::getINlc().getSslCertFile();
   if( !certFile.empty() )
   {
 
@@ -723,7 +723,7 @@ void CCurlFile::SetCorrectHeaders(CReadState* state)
   }
 }
 
-void CCurlFile::ParseAndCorrectUrl(GoTvUrl &url2)
+void CCurlFile::ParseAndCorrectUrl(NlcUrl &url2)
 {
   std::string strProtocol = url2.GetTranslatedProtocol();
   url2.SetProtocol(strProtocol);
@@ -760,7 +760,7 @@ void CCurlFile::ParseAndCorrectUrl(GoTvUrl &url2)
       if(it != array.begin())
         filename += "/";
 
-      filename += GoTvUrl::Encode(*it);
+      filename += NlcUrl::Encode(*it);
     }
 
     /* make sure we keep slashes */
@@ -921,7 +921,7 @@ bool CCurlFile::Get(const std::string& strURL, std::string& strHTML)
 
 bool CCurlFile::Service(const std::string& strURL, std::string& strHTML)
 {
-  const GoTvUrl pathToUrl(strURL);
+  const NlcUrl pathToUrl(strURL);
   if (Open(pathToUrl))
   {
     if (ReadData(strHTML))
@@ -979,7 +979,7 @@ bool CCurlFile::Download(const std::string& strURL, const std::string& strFileNa
 // Detect whether we are "online" or not! Very simple and dirty!
 bool CCurlFile::IsInternet()
 {
-  GoTvUrl url("http://www.msftncsi.com/ncsi.txt");
+  NlcUrl url("http://www.msftncsi.com/ncsi.txt");
   bool found = Exists(url);
   if (!found)
   {
@@ -1027,15 +1027,15 @@ void CCurlFile::SetProxy(const std::string &type, const std::string &host,
   m_proxypassword = password;
 }
 
-bool CCurlFile::Open(const GoTvUrl& url)
+bool CCurlFile::Open(const NlcUrl& url)
 {
   m_opened = true;
   m_seekable = true;
 
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   ParseAndCorrectUrl(url2);
 
-  std::string redactPath = GoTvUrl::GetRedacted(m_url);
+  std::string redactPath = NlcUrl::GetRedacted(m_url);
   CLog::Log(LOGDEBUG, "CurlFile::Open(%p) %s", (void*)this, redactPath.c_str());
 
   assert(!(!m_state->m_easyHandle ^ !m_state->m_multiHandle));
@@ -1117,7 +1117,7 @@ bool CCurlFile::Open(const GoTvUrl& url)
   {
     if (m_url != efurl)
     {
-      std::string redactEfpath = GoTvUrl::GetRedacted(efurl);
+      std::string redactEfpath = NlcUrl::GetRedacted(efurl);
       CLog::Log(LOGDEBUG,"CCurlFile::Open - effective URL: <%s>", redactEfpath.c_str());
     }
     m_url = efurl;
@@ -1126,7 +1126,7 @@ bool CCurlFile::Open(const GoTvUrl& url)
   return true;
 }
 
-bool CCurlFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+bool CCurlFile::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 {
   if(m_opened)
     return false;
@@ -1134,10 +1134,10 @@ bool CCurlFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
   if (Exists(url) && !bOverWrite)
     return false;
 
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   ParseAndCorrectUrl(url2);
 
-  CLog::Log(LOGDEBUG, "CCurlFile::OpenForWrite(%p) %s", (void*)this, GoTvUrl::GetRedacted(m_url).c_str());
+  CLog::Log(LOGDEBUG, "CCurlFile::OpenForWrite(%p) %s", (void*)this, NlcUrl::GetRedacted(m_url).c_str());
 
   assert(m_state->m_easyHandle == NULL);
   g_curlInterface.easy_acquire(url2.GetProtocol().c_str(),
@@ -1195,7 +1195,7 @@ int64_t CCurlFile::Write(const void* lpBuf, size_t uiBufSize)
     {
       long code;
       if(g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_RESPONSE_CODE, &code) == CURLE_OK )
-        CLog::Log(LOGERROR, "%s - Unable to write curl resource (%s) - %ld", __FUNCTION__, GoTvUrl::GetRedacted(m_url).c_str(), code);
+        CLog::Log(LOGERROR, "%s - Unable to write curl resource (%s) - %ld", __FUNCTION__, NlcUrl::GetRedacted(m_url).c_str(), code);
       m_inError = true;
       return -1;
     }
@@ -1237,13 +1237,13 @@ bool CCurlFile::CReadState::ReadString(char *szLine, int iLineLength)
   return (bool)((pLine - szLine) > 0);
 }
 
-bool CCurlFile::ReOpen(const GoTvUrl& url)
+bool CCurlFile::ReOpen(const NlcUrl& url)
 {
   Close();
   return Open(url);
 }
 
-bool CCurlFile::Exists(const GoTvUrl& url)
+bool CCurlFile::Exists(const NlcUrl& url)
 {
   // if file is already running, get info from it
   if( m_opened )
@@ -1252,7 +1252,7 @@ bool CCurlFile::Exists(const GoTvUrl& url)
     return true;
   }
 
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   ParseAndCorrectUrl(url2);
 
   assert(m_state->m_easyHandle == NULL);
@@ -1366,7 +1366,7 @@ int64_t CCurlFile::Seek(int64_t iFilePosition, int iWhence)
   {
     if (!m_oldState)
     {
-      GoTvUrl url(m_url);
+      NlcUrl url(m_url);
       m_oldState          = m_state;
       m_state             = new CReadState();
       m_state->m_fileSize = m_oldState->m_fileSize;
@@ -1440,7 +1440,7 @@ int64_t CCurlFile::GetPosition()
   return m_state->m_filePos;
 }
 
-int CCurlFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CCurlFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   // if file is already running, get info from it
   if( m_opened )
@@ -1455,7 +1455,7 @@ int CCurlFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
     return 0;
   }
 
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   ParseAndCorrectUrl(url2);
 
   assert(m_state->m_easyHandle == NULL);
@@ -1876,7 +1876,7 @@ std::string CCurlFile::GetInfoString(int infoType)
 }
 
 /* STATIC FUNCTIONS */
-bool CCurlFile::GetHttpHeader(const GoTvUrl &url, CHttpHeader &headers)
+bool CCurlFile::GetHttpHeader(const NlcUrl &url, CHttpHeader &headers)
 {
   try
   {
@@ -1895,7 +1895,7 @@ bool CCurlFile::GetHttpHeader(const GoTvUrl &url, CHttpHeader &headers)
   }
 }
 
-bool CCurlFile::GetMimeType(const GoTvUrl &url, std::string &content, const std::string &useragent)
+bool CCurlFile::GetMimeType(const NlcUrl &url, std::string &content, const std::string &useragent)
 {
   CCurlFile file;
   if (!useragent.empty())
@@ -1917,7 +1917,7 @@ bool CCurlFile::GetMimeType(const GoTvUrl &url, std::string &content, const std:
   return false;
 }
 
-bool CCurlFile::GetContentType(const GoTvUrl &url, std::string &content, const std::string &useragent)
+bool CCurlFile::GetContentType(const NlcUrl &url, std::string &content, const std::string &useragent)
 {
   CCurlFile file;
   if (!useragent.empty())
@@ -1939,7 +1939,7 @@ bool CCurlFile::GetContentType(const GoTvUrl &url, std::string &content, const s
   return false;
 }
 
-bool CCurlFile::GetCookies(const GoTvUrl &url, std::string &cookies)
+bool CCurlFile::GetCookies(const NlcUrl &url, std::string &cookies)
 {
   std::string cookiesStr;
   struct curl_slist*     curlCookies;
@@ -1956,7 +1956,7 @@ bool CCurlFile::GetCookies(const GoTvUrl &url, std::string &cookies)
     struct curl_slist* curlCookieIter = curlCookies;
     while(curlCookieIter)
     {
-      // tokenize the GoTvUrl cookie string
+      // tokenize the NlcUrl cookie string
       std::vector<std::string> valuesVec;
       StringUtils::Tokenize(curlCookieIter->data, valuesVec, "\t");
 

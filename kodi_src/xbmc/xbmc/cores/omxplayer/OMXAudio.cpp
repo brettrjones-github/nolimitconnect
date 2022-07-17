@@ -25,7 +25,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "cores/AudioEngine/Interfaces/AE.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include <algorithm>
 #include <cassert>
 

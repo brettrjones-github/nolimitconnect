@@ -21,14 +21,14 @@
 #include "DVDInputStreamStack.h"
 #include "FileItem.h"
 #include "storage/MediaManager.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/File.h"
 #include "filesystem/IFileTypes.h"
 #include "utils/URIUtils.h"
 #include "ServiceBroker.h"
 #include "addons/binary-addons/BinaryAddonManager.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 
 std::shared_ptr<CDVDInputStream> CDVDFactoryInputStream::CreateInputStream(IVideoPlayer* pPlayer, const CFileItem &fileitem, bool scanforextaudio)
@@ -60,7 +60,7 @@ std::shared_ptr<CDVDInputStream> CDVDFactoryInputStream::CreateInputStream(IVide
   if (fileitem.IsDiscImage())
   {
 #ifdef HAVE_LIBBLURAY
-    GoTvUrl url("udf://");
+    NlcUrl url("udf://");
     url.SetHostName(file);
     url.SetFileName("BDMV/index.bdmv");
     if(XFILE::CFile::Exists(url.Get()))
@@ -118,14 +118,14 @@ std::shared_ptr<CDVDInputStream> CDVDFactoryInputStream::CreateInputStream(IVide
   {
     if (finalFileitem.ContentLookup())
     {
-      GoTvUrl origUrl(finalFileitem.GetDynURL());
+      NlcUrl origUrl(finalFileitem.GetDynURL());
       XFILE::CCurlFile curlFile;
       // try opening the url to resolve all redirects if any
       try
       {
         if (curlFile.Open(finalFileitem.GetDynURL()))
         {
-          GoTvUrl finalUrl(curlFile.GetURL());
+          NlcUrl finalUrl(curlFile.GetURL());
           finalUrl.SetProtocolOptions(origUrl.GetProtocolOptions());
           finalUrl.SetUserName(origUrl.GetUserName());
           finalUrl.SetPassword(origUrl.GetPassWord());

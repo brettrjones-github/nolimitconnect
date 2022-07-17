@@ -17,9 +17,6 @@
     <Filter Include="Source Files\System">
       <UniqueIdentifier>{bad09026-a236-4b17-8adc-6385fdf43cff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\System\GoTv">
-      <UniqueIdentifier>{884dd883-3ed0-4dea-932f-62c3314833a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\System\Posix">
       <UniqueIdentifier>{a4d3253d-48cc-4c0b-aa19-d3ca08c5fdd3}</UniqueIdentifier>
     </Filter>
@@ -29,11 +26,11 @@
     <Filter Include="Source Files\System\Win32">
       <UniqueIdentifier>{fd15c5cf-4b11-41a9-a512-03081fcdbf79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\System\Nlc">
+      <UniqueIdentifier>{884dd883-3ed0-4dea-932f-62c3314833a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\System\GoTv\Ap4GoTvFileByteStream.cpp">
-      <Filter>Source Files\System\GoTv</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\System\Win32\Ap4Win32Random.cpp">
       <Filter>Source Files\System\Win32</Filter>
     </ClCompile>
@@ -414,6 +411,9 @@
     </ClCompile>
     <ClCompile Include="..\..\MetaData\Ap4MetaData.cpp">
       <Filter>Source Files\MetaData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\System\Nlc\Ap4NlcFileByteStream.cpp">
+      <Filter>Source Files\System\Nlc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

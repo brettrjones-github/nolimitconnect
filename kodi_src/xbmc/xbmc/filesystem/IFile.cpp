@@ -9,7 +9,7 @@
  */
 
 #include "IFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include <cstring>
 #include <errno.h>
 
@@ -81,7 +81,7 @@ CRedirectException::CRedirectException() :
 {
 }
 
-CRedirectException::CRedirectException(IFile *pNewFileImp, GoTvUrl *pNewUrl) :
+CRedirectException::CRedirectException(IFile *pNewFileImp, NlcUrl *pNewUrl) :
   m_pNewFileImp(pNewFileImp), m_pNewUrl(pNewUrl) 
 {
 }

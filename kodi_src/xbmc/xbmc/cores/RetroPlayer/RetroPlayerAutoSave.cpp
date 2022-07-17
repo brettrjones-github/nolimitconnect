@@ -9,7 +9,7 @@
 #include "RetroPlayerAutoSave.h"
 #include "games/GameSettings.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace KODI;
 using namespace RETRO;
@@ -52,7 +52,7 @@ void CRetroPlayerAutoSave::Process()
     {
       std::string savePath = m_callback.CreateSavestate();
       if (!savePath.empty())
-        CLog::Log(LOGDEBUG, "RetroPlayer[SAVE]: Saved state to %s", GoTvUrl::GetRedacted(savePath).c_str());
+        CLog::Log(LOGDEBUG, "RetroPlayer[SAVE]: Saved state to %s", NlcUrl::GetRedacted(savePath).c_str());
     }
   }
 

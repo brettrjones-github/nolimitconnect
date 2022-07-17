@@ -20,7 +20,7 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "utils/BitstreamStats.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 
 #include "commons/Exception.h"
@@ -59,12 +59,12 @@ CFile::~CFile()
 
 bool CFile::Copy( const std::string& strFileName, const std::string& strDest, XFILE::IFileCallback* pCallback, void* pContext )
 {
-    const GoTvUrl pathToUrl( strFileName );
-    const GoTvUrl pathToUrlDest( strDest );
+    const NlcUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrlDest( strDest );
     return Copy( pathToUrl, pathToUrlDest, pCallback, pContext );
 }
 
-bool CFile::Copy( const GoTvUrl& url2, const GoTvUrl& dest, XFILE::IFileCallback* pCallback, void* pContext )
+bool CFile::Copy( const NlcUrl& url2, const NlcUrl& dest, XFILE::IFileCallback* pCallback, void* pContext )
 {
     CFile file;
 
@@ -73,7 +73,7 @@ bool CFile::Copy( const GoTvUrl& url2, const GoTvUrl& dest, XFILE::IFileCallback
         return false;
 
     // special case for zips - ignore caching
-    GoTvUrl url( url2 );
+    NlcUrl url( url2 );
     if( URIUtils::IsInZIP( url.Get() ) || URIUtils::IsInAPK( url.Get() ) )
         url.SetOptions( "?cache=no" );
     if( file.Open( url.Get(), READ_TRUNCATED | READ_CHUNKED ) )
@@ -87,7 +87,7 @@ bool CFile::Copy( const GoTvUrl& url2, const GoTvUrl& dest, XFILE::IFileCallback
             URIUtils::RemoveSlashAtEnd( strDirectory );  // for the test below
             if( !( strDirectory.size() == 2 && strDirectory[ 1 ] == ':' ) )
             {
-                GoTvUrl url( strDirectory );
+                NlcUrl url( strDirectory );
                 std::string pathsep;
 #ifndef TARGET_POSIX
                 pathsep = "\\";
@@ -246,11 +246,11 @@ bool CFile::CURLOpen( unsigned int flags )
 
 bool CFile::Open( const std::string& strFileName, const unsigned int flags )
 {
-    const GoTvUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrl( strFileName );
     return Open( pathToUrl, flags );
 }
 
-bool CFile::Open( const GoTvUrl& file, const unsigned int flags )
+bool CFile::Open( const NlcUrl& file, const unsigned int flags )
 {
     if( m_pFile )
     {
@@ -270,7 +270,7 @@ bool CFile::Open( const GoTvUrl& file, const unsigned int flags )
     {
         bool bPathInCache;
 
-        GoTvUrl url( URIUtils::SubstitutePath( file ) ), url2( url );
+        NlcUrl url( URIUtils::SubstitutePath( file ) ), url2( url );
 
         if( url2.IsProtocol( "apk" ) || url2.IsProtocol( "zip" ) )
             url2.SetOptions( "" );
@@ -303,7 +303,7 @@ bool CFile::Open( const GoTvUrl& file, const unsigned int flags )
         if( !m_pFile )
             return false;
 
-    GoTvUrl authUrl(url);
+    NlcUrl authUrl(url);
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -323,13 +323,13 @@ bool CFile::Open( const GoTvUrl& file, const unsigned int flags )
             SAFE_DELETE( m_pFile );
             if( pRedirectEx && pRedirectEx->m_pNewFileImp )
             {
-                std::unique_ptr<GoTvUrl> pNewUrl( pRedirectEx->m_pNewUrl );
+                std::unique_ptr<NlcUrl> pNewUrl( pRedirectEx->m_pNewUrl );
                 m_pFile = pRedirectEx->m_pNewFileImp;
                 delete pRedirectEx;
 
                 if( pNewUrl.get() )
                 {
-          GoTvUrl newAuthUrl(*pNewUrl);
+          NlcUrl newAuthUrl(*pNewUrl);
           if (CPasswordManager::GetInstance().IsURLSupported(newAuthUrl) && newAuthUrl.GetUserName().empty())
             CPasswordManager::GetInstance().AuthenticateURL(newAuthUrl);
 
@@ -381,16 +381,16 @@ bool CFile::Open( const GoTvUrl& file, const unsigned int flags )
 
 bool CFile::OpenForWrite( const std::string& strFileName, bool bOverWrite )
 {
-    const GoTvUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrl( strFileName );
     return OpenForWrite( pathToUrl, bOverWrite );
 }
 
-bool CFile::OpenForWrite( const GoTvUrl& file, bool bOverWrite )
+bool CFile::OpenForWrite( const NlcUrl& file, bool bOverWrite )
 {
     try
     {
-    GoTvUrl url = URIUtils::SubstitutePath(file);
-    GoTvUrl authUrl = url;
+    NlcUrl url = URIUtils::SubstitutePath(file);
+    NlcUrl authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -415,14 +415,14 @@ bool CFile::OpenForWrite( const GoTvUrl& file, bool bOverWrite )
 
 bool CFile::Exists( const std::string& strFileName, bool bUseCache /* = true */ )
 {
-    const GoTvUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrl( strFileName );
     return Exists( pathToUrl, bUseCache );
 }
 
-bool CFile::Exists( const GoTvUrl& file, bool bUseCache /* = true */ )
+bool CFile::Exists( const NlcUrl& file, bool bUseCache /* = true */ )
 {
-  GoTvUrl url(URIUtils::SubstitutePath(file));
-  GoTvUrl authUrl = url;
+  NlcUrl url(URIUtils::SubstitutePath(file));
+  NlcUrl authUrl = url;
   if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
     CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -452,7 +452,7 @@ bool CFile::Exists( const GoTvUrl& file, bool bUseCache /* = true */ )
         if( pRedirectEx && pRedirectEx->m_pNewFileImp )
         {
             std::unique_ptr<IFile> pImp( pRedirectEx->m_pNewFileImp );
-            std::unique_ptr<GoTvUrl> pNewUrl( pRedirectEx->m_pNewUrl );
+            std::unique_ptr<NlcUrl> pNewUrl( pRedirectEx->m_pNewUrl );
             delete pRedirectEx;
 
             if( pImp.get() )
@@ -467,7 +467,7 @@ bool CFile::Exists( const GoTvUrl& file, bool bUseCache /* = true */ )
                         if( bPathInCache )
                             return false;
                     }
-          GoTvUrl newAuthUrl = *pNewUrl;
+          NlcUrl newAuthUrl = *pNewUrl;
           if (CPasswordManager::GetInstance().IsURLSupported(newAuthUrl) && newAuthUrl.GetUserName().empty())
             CPasswordManager::GetInstance().AuthenticateURL(newAuthUrl);
 
@@ -505,17 +505,17 @@ int CFile::Stat( struct __stat64 *buffer )
 
 int CFile::Stat( const std::string& strFileName, struct __stat64* buffer )
 {
-    const GoTvUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrl( strFileName );
     return Stat( pathToUrl, buffer );
 }
 
-int CFile::Stat( const GoTvUrl& file, struct __stat64* buffer )
+int CFile::Stat( const NlcUrl& file, struct __stat64* buffer )
 {
     if( !buffer )
         return -1;
 
-  GoTvUrl url(URIUtils::SubstitutePath(file));
-  GoTvUrl authUrl = url;
+  NlcUrl url(URIUtils::SubstitutePath(file));
+  NlcUrl authUrl = url;
   if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
     CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -535,14 +535,14 @@ int CFile::Stat( const GoTvUrl& file, struct __stat64* buffer )
         if( pRedirectEx && pRedirectEx->m_pNewFileImp )
         {
             std::unique_ptr<IFile> pImp( pRedirectEx->m_pNewFileImp );
-            std::unique_ptr<GoTvUrl> pNewUrl( pRedirectEx->m_pNewUrl );
+            std::unique_ptr<NlcUrl> pNewUrl( pRedirectEx->m_pNewUrl );
             delete pRedirectEx;
 
             if( pNewUrl.get() )
             {
         if (pImp.get())
         {
-          GoTvUrl newAuthUrl = *pNewUrl;
+          NlcUrl newAuthUrl = *pNewUrl;
           if (CPasswordManager::GetInstance().IsURLSupported(newAuthUrl) && newAuthUrl.GetUserName().empty())
             CPasswordManager::GetInstance().AuthenticateURL(newAuthUrl);
 
@@ -856,16 +856,16 @@ ssize_t CFile::Write( const void* lpBuf, size_t uiBufSize )
 
 bool CFile::Delete( const std::string& strFileName )
 {
-    const GoTvUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrl( strFileName );
     return Delete( pathToUrl );
 }
 
-bool CFile::Delete( const GoTvUrl& file )
+bool CFile::Delete( const NlcUrl& file )
 {
     try
     {
-    GoTvUrl url(URIUtils::SubstitutePath(file));
-    GoTvUrl authUrl = url;
+    NlcUrl url(URIUtils::SubstitutePath(file));
+    NlcUrl authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -891,22 +891,22 @@ bool CFile::Delete( const GoTvUrl& file )
 
 bool CFile::Rename( const std::string& strFileName, const std::string& strNewFileName )
 {
-    const GoTvUrl pathToUrl( strFileName );
-    const GoTvUrl pathToUrlNew( strNewFileName );
+    const NlcUrl pathToUrl( strFileName );
+    const NlcUrl pathToUrlNew( strNewFileName );
     return Rename( pathToUrl, pathToUrlNew );
 }
 
-bool CFile::Rename( const GoTvUrl& file, const GoTvUrl& newFile )
+bool CFile::Rename( const NlcUrl& file, const NlcUrl& newFile )
 {
     try
     {
-    GoTvUrl url(URIUtils::SubstitutePath(file));
-    GoTvUrl urlnew(URIUtils::SubstitutePath(newFile));
+    NlcUrl url(URIUtils::SubstitutePath(file));
+    NlcUrl urlnew(URIUtils::SubstitutePath(newFile));
 
-    GoTvUrl authUrl = url;
+    NlcUrl authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
-    GoTvUrl authUrlNew = urlnew;
+    NlcUrl authUrlNew = urlnew;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrlNew) && authUrlNew.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrlNew);
 
@@ -932,16 +932,16 @@ bool CFile::Rename( const GoTvUrl& file, const GoTvUrl& newFile )
 
 bool CFile::SetHidden( const std::string& fileName, bool hidden )
 {
-    const GoTvUrl pathToUrl( fileName );
+    const NlcUrl pathToUrl( fileName );
     return SetHidden( pathToUrl, hidden );
 }
 
-bool CFile::SetHidden( const GoTvUrl& file, bool hidden )
+bool CFile::SetHidden( const NlcUrl& file, bool hidden )
 {
     try
     {
-    GoTvUrl url(URIUtils::SubstitutePath(file));
-    GoTvUrl authUrl = url;
+    NlcUrl url(URIUtils::SubstitutePath(file));
+    NlcUrl authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
       CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -1001,11 +1001,11 @@ const std::vector<std::string> CFile::GetPropertyValues( XFILE::FileProperty typ
 
 ssize_t CFile::LoadFile( const std::string &filename, auto_buffer& outputBuffer )
 {
-    const GoTvUrl pathToUrl( filename );
+    const NlcUrl pathToUrl( filename );
     return LoadFile( pathToUrl, outputBuffer );
 }
 
-ssize_t CFile::LoadFile( const GoTvUrl& file, auto_buffer& outputBuffer )
+ssize_t CFile::LoadFile( const NlcUrl& file, auto_buffer& outputBuffer )
 {
     static const size_t max_file_size = 0x7FFFFFFF;
     static const size_t min_chunk_size = 64 * 1024U;
@@ -1216,14 +1216,14 @@ CFileStream::~CFileStream()
 }
 
 
-bool CFileStream::Open( const GoTvUrl& filename )
+bool CFileStream::Open( const NlcUrl& filename )
 {
     Close();
 
-    GoTvUrl url( URIUtils::SubstitutePath( filename ) );
+    NlcUrl url( URIUtils::SubstitutePath( filename ) );
     m_file = CFileFactory::CreateLoader( url );
 
-  GoTvUrl authUrl = url;
+  NlcUrl authUrl = url;
   if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
     CPasswordManager::GetInstance().AuthenticateURL(authUrl);
 
@@ -1253,6 +1253,6 @@ void CFileStream::Close()
 
 bool CFileStream::Open( const std::string& filename )
 {
-    const GoTvUrl pathToUrl( filename );
+    const NlcUrl pathToUrl( filename );
     return Open( pathToUrl );
 }

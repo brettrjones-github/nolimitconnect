@@ -28,7 +28,7 @@
 #include "DirectoryNodeYearAlbum.h"
 #include "DirectoryNodeYearSong.h"
 #include "DirectoryNodeSingles.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
 
@@ -50,7 +50,7 @@ CDirectoryNode::~CDirectoryNode()
 //  Parses a given path and returns the current node of the path
 CDirectoryNode* CDirectoryNode::ParseURL(const std::string& strPath)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
 
   std::string strDirectory=url.GetFileName();
   URIUtils::RemoveSlashAtEnd(strDirectory);

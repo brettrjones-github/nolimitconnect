@@ -19,15 +19,15 @@ class CSMBDirectory : public IDirectory
 public:
   CSMBDirectory(void);
   ~CSMBDirectory(void) override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-  DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_ONCE; };
-  bool Create(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override;
-  bool Remove(const GoTvUrl& url) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+  DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_ONCE; };
+  bool Create(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
+  bool Remove(const NlcUrl& url) override;
 
-  int Open(const GoTvUrl& url);
+  int Open(const NlcUrl& url);
 
 private:
-  int OpenDir(const GoTvUrl& url, std::string& strAuth);
+  int OpenDir(const NlcUrl& url, std::string& strAuth);
 };
 }

@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <cassert>
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "network/ZeroconfBrowser.h"
@@ -61,7 +61,7 @@ namespace
   }
 }
 
-bool GetDirectoryFromTxtRecords(const CZeroconfBrowser::ZeroconfService& zeroconf_service, GoTvUrl& url, CFileItemList &items)
+bool GetDirectoryFromTxtRecords(const CZeroconfBrowser::ZeroconfService& zeroconf_service, NlcUrl& url, CFileItemList &items)
 {
   bool ret = false;
 
@@ -144,7 +144,7 @@ bool GetDirectoryFromTxtRecords(const CZeroconfBrowser::ZeroconfService& zerocon
   return ret;
 }
 
-bool CZeroconfDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CZeroconfDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   assert(url.IsProtocol("zeroconf"));
   std::string strPath = url.Get();
@@ -160,9 +160,9 @@ bool CZeroconfDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
       if(GetXBMCProtocol(it->GetType(), tmp))
       {
         CFileItemPtr item(new CFileItem("", true));
-        GoTvUrl url;
+        NlcUrl url;
         url.SetProtocol("zeroconf");
-        std::string service_path(GoTvUrl::Encode(CZeroconfBrowser::ZeroconfService::toPath(*it)));
+        std::string service_path(NlcUrl::Encode(CZeroconfBrowser::ZeroconfService::toPath(*it)));
         url.SetFileName(service_path);
         item->SetPath(url.Get());
 
@@ -180,7 +180,7 @@ bool CZeroconfDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   else
   {
     //decode the path first
-    std::string decoded(GoTvUrl::Decode(path));
+    std::string decoded(NlcUrl::Decode(path));
     try
     {
       CZeroconfBrowser::ZeroconfService zeroconf_service = CZeroconfBrowser::ZeroconfService::fromPath(decoded);
@@ -193,7 +193,7 @@ bool CZeroconfDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
       else
       {
         assert(!zeroconf_service.GetIP().empty());
-        GoTvUrl service;
+        NlcUrl service;
         service.SetPort(zeroconf_service.GetPort());
         service.SetHostName(zeroconf_service.GetIP());
         //do protocol conversion (_smb._tcp -> smb)

@@ -25,7 +25,7 @@
 
 #include "threads/CriticalSection.h"
 
-class IGoTv;
+class INlc;
 
 class CAESinkQt : public IAESink
 {
@@ -53,7 +53,7 @@ public:
     void                        Drain() override;
 
 private:
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
 
     std::string                 m_device;
     AEAudioFormat               m_DesiredFormat;

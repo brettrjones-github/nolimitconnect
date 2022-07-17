@@ -17,7 +17,7 @@
 #include <vector>
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "CompileInfo.h"
 
 using namespace XFILE;
@@ -30,7 +30,7 @@ CAndroidAppDirectory::~CAndroidAppDirectory(void)
 {
 }
 
-bool CAndroidAppDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CAndroidAppDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string dirname = url.GetFileName();
   URIUtils::RemoveSlashAtEnd(dirname);

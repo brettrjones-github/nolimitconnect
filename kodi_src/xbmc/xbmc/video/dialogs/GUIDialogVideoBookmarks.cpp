@@ -27,7 +27,7 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "video/VideoThumbLoader.h"
 #include "filesystem/File.h"
 #include "TextureCache.h"

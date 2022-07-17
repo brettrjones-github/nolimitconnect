@@ -33,52 +33,52 @@ class QLabel;
 class QProgressBar;
 class QTimer;
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPWidgetSeek WidgetSeek.h GOTVQtWidgets/WidgetSeek.h
+    \class NlcPtoPWidgetSeek WidgetSeek.h GOTVQtWidgets/WidgetSeek.h
     \ingroup GOTVQtWidgets
     \brief Seek widget
 
     This is one of GOTV-Qt GUI classes.
     It provides a display of elapsed time and full time of the media.
 */
-class GOTVQT_WIDGETS_EXPORT GoTvPtoPWidgetSeek : public QWidget
+class GOTVQT_WIDGETS_EXPORT NlcPtoPWidgetSeek : public QWidget
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPWidgetSeek constructor
+        \brief NlcPtoPWidgetSeek constructor
         \param player media player
         \param slider widget to be used as slider
         \param connectSlider connect the slider to relevant sigals, set to false if you want to handle everything yourself
         \param parent seek widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetSeek(GoTvPtoPMediaPlayer *player,
+    explicit NlcPtoPWidgetSeek(NlcPtoPMediaPlayer *player,
                            QWidget *slider = 0,
                            bool connectSlider = true,
                            QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetSeek constructor
+        \brief NlcPtoPWidgetSeek constructor
         \param slider widget to be used as slider
         \param connectSlider connect the slider to relevant sigals, set to false if you want to handle everything yourself
         \param parent seek widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetSeek(QWidget *slider,
+    explicit NlcPtoPWidgetSeek(QWidget *slider,
                            bool connectSlider,
                            QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetSeek constructor
+        \brief NlcPtoPWidgetSeek constructor
         \param parent seek widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetSeek(QWidget *parent = 0);
+    explicit NlcPtoPWidgetSeek(QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetSeek destructor
+        \brief NlcPtoPWidgetSeek destructor
     */
-    ~GoTvPtoPWidgetSeek();
+    ~NlcPtoPWidgetSeek();
 
     /*!
         \brief Get auto-hide option.
@@ -99,7 +99,7 @@ public:
         \brief Set media player if initialised without it
         \param player media player
     */
-    virtual void setMediaPlayer(GoTvPtoPMediaPlayer *player);
+    virtual void setMediaPlayer(NlcPtoPMediaPlayer *player);
 
     /*!
         \brief Set slider widget
@@ -126,7 +126,7 @@ protected:
     /*!
      * \brief Media player
      */
-    GoTvPtoPMediaPlayer *_gotvptopMediaPlayer;
+    NlcPtoPMediaPlayer *_gotvptopMediaPlayer;
 
     /*!
      * \brief Progress bar

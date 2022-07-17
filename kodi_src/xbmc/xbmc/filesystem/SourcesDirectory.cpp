@@ -9,8 +9,8 @@
 #include "ServiceBroker.h"
 #include "SourcesDirectory.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "FileItem.h"
 #include "File.h"
 #include "profiles/ProfileManager.h"
@@ -24,7 +24,7 @@ CSourcesDirectory::CSourcesDirectory(void) = default;
 
 CSourcesDirectory::~CSourcesDirectory(void) = default;
 
-bool CSourcesDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CSourcesDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   // break up our path
   // format is:  sources://<type>/
@@ -97,7 +97,7 @@ bool CSourcesDirectory::GetDirectory(const VECSOURCES &sources, CFileItemList &i
   return true;
 }
 
-bool CSourcesDirectory::Exists(const GoTvUrl& url)
+bool CSourcesDirectory::Exists(const NlcUrl& url)
 {
   return true;
 }

@@ -46,7 +46,7 @@
 #include "ApplicationPlayer.h"
 #include "FileItem.h"
 
-#include <GuiInterface/IGoTvEvents.h>
+#include <GuiInterface/INlcEvents.h>
 
 class CAction;
 class CFileItem;
@@ -124,7 +124,7 @@ enum StartupAction
 
 class CApplication : public CXBApplicationEx, public IPlayerCallback, public IMsgTargetCallback,
     public ISettingCallback, public ISettingsHandler, public ISubSettings,
-    public KODI::MESSAGING::IMessageTarget, public IGoTvEvents
+    public KODI::MESSAGING::IMessageTarget, public INlcEvents
 {
     friend class CAppInboundProtocol;
 

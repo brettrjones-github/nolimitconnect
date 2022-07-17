@@ -23,10 +23,10 @@ namespace XFILE
 
     int64_t GetPosition() override;
     int64_t GetLength() override;
-    bool Open(const GoTvUrl& url) override;
-    bool Exists(const GoTvUrl& url) override;
+    bool Open(const NlcUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
     int Stat(struct __stat64* buffer) override;
-    int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+    int Stat(const NlcUrl& url, struct __stat64* buffer) override;
     ssize_t Read(void* lpBuf, size_t uiBufSize) override;
     //virtual bool ReadString(char *szLine, int iLineLength);
     int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;

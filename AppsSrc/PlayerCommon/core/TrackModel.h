@@ -16,15 +16,15 @@
 * along with this library. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef GOTV_TRACK_MODEL_H
-#define GOTV_TRACK_MODEL_H
+#ifndef NLC_TRACK_MODEL_H
+#define NLC_TRACK_MODEL_H
 
 #include <QAbstractListModel>
 
 #include "SharedExportCore.h"
 
 /*!
-    \class GoTvPtoPTrackModel TrackModel.h core/TrackModel.h
+    \class NlcPtoPTrackModel TrackModel.h core/TrackModel.h
     \ingroup GOTVQtCore
     \brief Track model
 
@@ -32,7 +32,7 @@
 
     \since GOTV-Qt 1.1
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPTrackModel : public QAbstractListModel // LCOV_EXCL_LINE
+class GOTVQT_CORE_EXPORT NlcPtoPTrackModel : public QAbstractListModel // LCOV_EXCL_LINE
 {
     Q_OBJECT
     /*!
@@ -52,24 +52,24 @@ public:
     };
 
     /*!
-        \brief GoTvPtoPTrackModel constructor.
+        \brief NlcPtoPTrackModel constructor.
         \param parent parent object
     */
-    explicit GoTvPtoPTrackModel(QObject *parent = 0);
+    explicit NlcPtoPTrackModel(QObject *parent = 0);
 
     /*!
-        \brief GoTvPtoPTrackModel constructor.
+        \brief NlcPtoPTrackModel constructor.
         \param tracks tracks map
         \param parent parent object
     */
-    explicit GoTvPtoPTrackModel(const QMap<int, QString> &tracks,
+    explicit NlcPtoPTrackModel(const QMap<int, QString> &tracks,
                            QObject *parent = 0);
 
     /*!
-        \brief GoTvPtoPTrackModel constructor.
-        \param other another GoTvPtoPTrackModel instance
+        \brief NlcPtoPTrackModel constructor.
+        \param other another NlcPtoPTrackModel instance
     */
-    explicit GoTvPtoPTrackModel(const GoTvPtoPTrackModel &other);
+    explicit NlcPtoPTrackModel(const NlcPtoPTrackModel &other);
 
     /*!
         \brief Get row count
@@ -132,6 +132,6 @@ private:
     QMap<int, QString> _tracks;
 };
 
-Q_DECLARE_METATYPE(GoTvPtoPTrackModel)
+Q_DECLARE_METATYPE(NlcPtoPTrackModel)
 
-#endif //GOTV_TRACK_MODEL_H
+#endif //NLC_TRACK_MODEL_H

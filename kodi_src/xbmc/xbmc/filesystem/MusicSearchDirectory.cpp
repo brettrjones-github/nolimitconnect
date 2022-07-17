@@ -9,7 +9,7 @@
 #include "threads/SystemClock.h"
 #include "MusicSearchDirectory.h"
 #include "music/MusicDatabase.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #include "utils/log.h"
 #include "guilib/LocalizeStrings.h"
@@ -20,7 +20,7 @@ CMusicSearchDirectory::CMusicSearchDirectory(void) = default;
 
 CMusicSearchDirectory::~CMusicSearchDirectory(void) = default;
 
-bool CMusicSearchDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CMusicSearchDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   // break up our path
   // format is:  musicsearch://<url encoded search string>
@@ -42,7 +42,7 @@ bool CMusicSearchDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &item
   return true;
 }
 
-bool CMusicSearchDirectory::Exists(const GoTvUrl& url)
+bool CMusicSearchDirectory::Exists(const NlcUrl& url)
 {
   return true;
 }

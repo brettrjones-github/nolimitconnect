@@ -7,7 +7,7 @@
  */
 
 #include "XMLUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "StringUtils.h"
 #ifdef TARGET_WINDOWS
 #include "PlatformDefs.h" //for strcasecmp
@@ -122,7 +122,7 @@ bool XMLUtils::GetString(const TiXmlNode* pRootNode, const char* strTag, std::st
   {
     strStringValue = pNode->ValueStr();
     if (encoded && strcasecmp(encoded,"yes") == 0)
-      strStringValue = GoTvUrl::Decode(strStringValue);
+      strStringValue = NlcUrl::Decode(strStringValue);
     return true;
   }
   strStringValue.clear();
@@ -221,7 +221,7 @@ bool XMLUtils::GetPath(const TiXmlNode* pRootNode, const char* strTag, std::stri
   {
     strStringValue = pNode->Value();
     if (encoded && strcasecmp(encoded,"yes") == 0)
-      strStringValue = GoTvUrl::Decode(strStringValue);
+      strStringValue = NlcUrl::Decode(strStringValue);
     return true;
   }
   strStringValue.clear();

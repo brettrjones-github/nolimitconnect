@@ -8,7 +8,7 @@
 
 #include "LegacyPathTranslation.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 typedef struct Translator {
   const char *legacyPath;
@@ -68,12 +68,12 @@ static Translator s_musicDbTranslator[] = {
 
 #define MusicDbTranslatorSize sizeof(s_musicDbTranslator) / sizeof(Translator)
 
-std::string CLegacyPathTranslation::TranslateVideoDbPath(const GoTvUrl &legacyPath)
+std::string CLegacyPathTranslation::TranslateVideoDbPath(const NlcUrl &legacyPath)
 {
   return TranslatePath(legacyPath.Get(), s_videoDbTranslator, VideoDbTranslatorSize);
 }
 
-std::string CLegacyPathTranslation::TranslateMusicDbPath(const GoTvUrl &legacyPath)
+std::string CLegacyPathTranslation::TranslateMusicDbPath(const NlcUrl &legacyPath)
 {
   return TranslatePath(legacyPath.Get(), s_musicDbTranslator, MusicDbTranslatorSize);
 }

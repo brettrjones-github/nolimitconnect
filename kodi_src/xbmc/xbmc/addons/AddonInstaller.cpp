@@ -15,7 +15,7 @@
 #include "utils/FileUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "GUIPassword.h"
 #include "guilib/LocalizeStrings.h"
 #include "filesystem/Directory.h"
@@ -34,7 +34,7 @@
 #include "GUIUserMessages.h"              // for callback
 #include "utils/StringUtils.h"
 #include "dialogs/GUIDialogExtendedProgressBar.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #ifdef TARGET_POSIX
 #include "platform/linux/XTimeUtils.h"
 #endif
@@ -254,13 +254,13 @@ bool CAddonInstaller::InstallFromZip(const std::string &path)
   if (!g_passwordManager.CheckMenuLock(WINDOW_ADDON_BROWSER))
     return false;
 
-  CLog::Log(LOGDEBUG, "CAddonInstaller: installing from zip '%s'", GoTvUrl::GetRedacted(path).c_str());
+  CLog::Log(LOGDEBUG, "CAddonInstaller: installing from zip '%s'", NlcUrl::GetRedacted(path).c_str());
 
   // grab the descriptive XML document from the zip, and read it in
   CFileItemList items;
   //! @bug some zip files return a single item (root folder) that we think is stored, so we don't use the zip:// protocol
-  GoTvUrl pathToUrl(path);
-  GoTvUrl zipDir = URIUtils::CreateArchivePath("zip", pathToUrl, "");
+  NlcUrl pathToUrl(path);
+  NlcUrl zipDir = URIUtils::CreateArchivePath("zip", pathToUrl, "");
   if (!CDirectory::GetDirectory(zipDir, items, "", DIR_FLAG_DEFAULTS) ||
       items.Size() != 1 || !items[0]->m_bIsFolder)
   {
@@ -596,7 +596,7 @@ bool CAddonInstallJob::DoWork()
       }
 
       // check if the archive is valid
-      GoTvUrl archive = URIUtils::CreateArchivePath("zip", GoTvUrl(package), "");
+      NlcUrl archive = URIUtils::CreateArchivePath("zip", NlcUrl(package), "");
 
       CFileItemList archivedFiles;
       AddonPtr temp;

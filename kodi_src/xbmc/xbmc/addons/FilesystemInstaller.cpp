@@ -82,7 +82,7 @@ bool CFilesystemInstaller::UnInstallFromFilesystem(const std::string& addonFolde
 bool CFilesystemInstaller::UnpackArchive(std::string path, const std::string& dest)
 {
   if (!URIUtils::IsProtocol(path, "zip"))
-    path = URIUtils::CreateArchivePath("zip", GoTvUrl(path), "").Get();
+    path = URIUtils::CreateArchivePath("zip", NlcUrl(path), "").Get();
 
   CFileItemList files;
   if (!CDirectory::GetDirectory(path, files, "", DIR_FLAG_DEFAULTS))

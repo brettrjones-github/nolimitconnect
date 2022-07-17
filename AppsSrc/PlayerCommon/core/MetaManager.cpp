@@ -21,166 +21,166 @@
 #include "core/Media.h"
 #include "core/MetaManager.h"
 
-GoTvPtoPMetaManager::GoTvPtoPMetaManager(GoTvPtoPMedia *media)
+NlcPtoPMetaManager::NlcPtoPMetaManager(NlcPtoPMedia *media)
     : _media(media)
 {
     libgotvptop_media_parse(media->core());
 }
 
-GoTvPtoPMetaManager::~GoTvPtoPMetaManager() {}
+NlcPtoPMetaManager::~NlcPtoPMetaManager() {}
 
-QString GoTvPtoPMetaManager::title() const
+QString NlcPtoPMetaManager::title() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Title));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setTitle(const QString &title)
+void NlcPtoPMetaManager::setTitle(const QString &title)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Title, title.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::artist() const
+QString NlcPtoPMetaManager::artist() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Artist));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setArtist(const QString &artist)
+void NlcPtoPMetaManager::setArtist(const QString &artist)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Artist, artist.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::genre() const
+QString NlcPtoPMetaManager::genre() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Genre));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setGenre(const QString &genre)
+void NlcPtoPMetaManager::setGenre(const QString &genre)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Genre, genre.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::copyright() const
+QString NlcPtoPMetaManager::copyright() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Copyright));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setCopyright(const QString &copyright)
+void NlcPtoPMetaManager::setCopyright(const QString &copyright)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Copyright, copyright.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::album() const
+QString NlcPtoPMetaManager::album() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Album));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setAlbum(const QString &album)
+void NlcPtoPMetaManager::setAlbum(const QString &album)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Album, album.toUtf8().data());
 }
 
-int GoTvPtoPMetaManager::number() const
+int NlcPtoPMetaManager::number() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_TrackNumber));
     return meta.toInt();
 }
 
-void GoTvPtoPMetaManager::setNumber(int number)
+void NlcPtoPMetaManager::setNumber(int number)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_TrackNumber, QString().number(number).toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::description() const
+QString NlcPtoPMetaManager::description() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Description));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setDescription(const QString &description)
+void NlcPtoPMetaManager::setDescription(const QString &description)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Description, description.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::rating() const
+QString NlcPtoPMetaManager::rating() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Rating));
     return meta;
 }
 
-int GoTvPtoPMetaManager::year() const
+int NlcPtoPMetaManager::year() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Date));
     return meta.toInt();
 }
 
-void GoTvPtoPMetaManager::setYear(int year)
+void NlcPtoPMetaManager::setYear(int year)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Date, QString().number(year).toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::setting() const
+QString NlcPtoPMetaManager::setting() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Setting));
     return meta;
 }
 
-QString GoTvPtoPMetaManager::url() const
+QString NlcPtoPMetaManager::url() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_URL));
     return meta;
 }
 
-QString GoTvPtoPMetaManager::language() const
+QString NlcPtoPMetaManager::language() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Language));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setLanguage(const QString &language)
+void NlcPtoPMetaManager::setLanguage(const QString &language)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Language, language.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::publisher() const
+QString NlcPtoPMetaManager::publisher() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_Publisher));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setPublisher(const QString &publisher)
+void NlcPtoPMetaManager::setPublisher(const QString &publisher)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_Publisher, publisher.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::encoder() const
+QString NlcPtoPMetaManager::encoder() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_EncodedBy));
     return meta;
 }
 
-void GoTvPtoPMetaManager::setEncoder(const QString &encoder)
+void NlcPtoPMetaManager::setEncoder(const QString &encoder)
 {
     libgotvptop_media_set_meta(_media->core(), libgotvptop_meta_EncodedBy, encoder.toUtf8().data());
 }
 
-QString GoTvPtoPMetaManager::artwork() const
+QString NlcPtoPMetaManager::artwork() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_ArtworkURL));
     return meta;
 }
 
-QString GoTvPtoPMetaManager::id() const
+QString NlcPtoPMetaManager::id() const
 {
     QString meta(libgotvptop_media_get_meta(_media->core(), libgotvptop_meta_TrackID));
     return meta;
 }
 
-bool GoTvPtoPMetaManager::saveMeta() const
+bool NlcPtoPMetaManager::saveMeta() const
 {
     return libgotvptop_media_save_meta(_media->core());
 }

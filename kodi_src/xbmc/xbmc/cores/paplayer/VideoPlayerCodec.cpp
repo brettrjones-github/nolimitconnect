@@ -18,7 +18,7 @@
 #include "cores/VideoPlayer/DVDCodecs/DVDFactoryCodec.h"
 #include "music/tags/TagLoaderTagLib.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "ServiceBroker.h"
 #include <CoreLib/VxDebug.h>
@@ -87,7 +87,7 @@ bool VideoPlayerCodec::Init( const CFileItem &file, unsigned int filecache )
 
     std::string strFileToOpen = strFile;
 
-    GoTvUrl urlFile( strFile );
+    NlcUrl urlFile( strFile );
     if( urlFile.IsProtocol( "shout" ) )
         strFileToOpen.replace( 0, 8, "http://" );
 

@@ -43,8 +43,8 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "storage/MediaManager.h"
 
 using namespace XFILE;
@@ -96,7 +96,7 @@ bool CGUIWindowMusicNav::OnMessage(CGUIMessage& message)
 
       if (message.GetStringParam(0) != "")
       {
-        GoTvUrl url(message.GetStringParam(0));
+        NlcUrl url(message.GetStringParam(0));
 
         int i = 0;
         for (; i < m_vecItems->Size(); i++)
@@ -303,7 +303,7 @@ bool CGUIWindowMusicNav::ManageInfoProvider(const CFileItemPtr item)
           URIUtils::AddSlashAtEnd(strPath);
           // Items on view could be limited by navigation criteria, smart playlist rules or a filter.
           // Get these options, except ID, from item path
-          GoTvUrl musicUrl(item->GetPath());  //Use GoTvUrl, as CMusicDbUrl removes "filter" option
+          NlcUrl musicUrl(item->GetPath());  //Use NlcUrl, as CMusicDbUrl removes "filter" option
           if (content == CONTENT_ARTISTS)
             musicUrl.RemoveOption("artistid");
           else
@@ -859,7 +859,7 @@ bool CGUIWindowMusicNav::GetSongsFromPlayList(const std::string& strPlayList, CF
 
 void CGUIWindowMusicNav::OnSearchUpdate()
 {
-  std::string search(GoTvUrl::Encode(GetProperty("search").asString()));
+  std::string search(NlcUrl::Encode(GetProperty("search").asString()));
   if (!search.empty())
   {
     std::string path = "musicsearch://" + search + "/";

@@ -11,7 +11,7 @@
 #include "cores/FFmpeg.h"
 #include "cores/VideoPlayer/Process/ProcessInfo.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 
 extern "C" {

@@ -12,7 +12,7 @@
 
 #include "filesystem/File.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/Color.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"

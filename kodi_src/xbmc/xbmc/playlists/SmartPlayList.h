@@ -17,7 +17,7 @@
 #include "utils/SortUtils.h"
 #include "utils/XBMCTinyXML.h"
 
-class GoTvUrl;
+class NlcUrl;
 class CVariant;
 
 class CSmartPlaylistRule : public CDatabaseQueryRule
@@ -90,7 +90,7 @@ public:
   CSmartPlaylist();
   virtual ~CSmartPlaylist() = default;
 
-  bool Load(const GoTvUrl& url);
+  bool Load(const NlcUrl& url);
   bool Load(const std::string &path);
   bool Load(const CVariant &obj);
   bool LoadFromXml(const std::string &xml);
@@ -99,7 +99,7 @@ public:
   bool Save(CVariant &obj, bool full = true) const;
   bool SaveAsJson(std::string &json, bool full = true) const;
 
-  bool OpenAndReadName(const GoTvUrl &url);
+  bool OpenAndReadName(const NlcUrl &url);
   bool LoadFromXML(const TiXmlNode *root, const std::string &encoding = "UTF-8");
 
   void Reset();
@@ -159,7 +159,7 @@ private:
   friend class CGUIDialogMediaFilter;
 
   const TiXmlNode* readName(const TiXmlNode *root);
-  const TiXmlNode* readNameFromPath(const GoTvUrl &url);
+  const TiXmlNode* readNameFromPath(const NlcUrl &url);
   const TiXmlNode* readNameFromXml(const std::string &xml);
   bool load(const TiXmlNode *root);
 

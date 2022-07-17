@@ -44,7 +44,7 @@
 #include "utils/StringUtils.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "windowing/WinSystem.h"
 
 using namespace KODI;
@@ -123,7 +123,7 @@ bool CRetroPlayer::OpenFile(const CFileItem& file, const CPlayerOptions& options
 
       if (!bStandalone)
       {
-        std::string redactedPath = GoTvUrl::GetRedacted(fileCopy.GetPath());
+        std::string redactedPath = NlcUrl::GetRedacted(fileCopy.GetPath());
         CLog::Log(LOGINFO, "RetroPlayer[PLAYER]: Opening: %s", redactedPath.c_str());
         bSuccess = m_gameClient->OpenFile(fileCopy, *m_streamManager, m_input.get());
       }
@@ -210,7 +210,7 @@ bool CRetroPlayer::CloseFile(bool reopen /* = false */)
   {
     std::string savePath = m_playback->CreateSavestate();
     if (!savePath.empty())
-      CLog::Log(LOGDEBUG, "RetroPlayer[SAVE]: Saved state to %s", GoTvUrl::GetRedacted(savePath).c_str());
+      CLog::Log(LOGDEBUG, "RetroPlayer[SAVE]: Saved state to %s", NlcUrl::GetRedacted(savePath).c_str());
     else
       CLog::Log(LOGDEBUG, "RetroPlayer[SAVE]: Failed to save state at close");
   }

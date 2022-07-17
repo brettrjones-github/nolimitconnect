@@ -23,7 +23,7 @@
 #include "filesystem/ZipFile.h"
 #include "messaging/helpers/DialogHelper.h"
 #include "TextureDatabase.h"
-#include <GoTvUrl.h>
+#include <NlcUrl.h>
 #include "utils/Base64.h"
 #include "utils/Digest.h"
 #include "utils/log.h"
@@ -61,7 +61,7 @@ CRepository::ResolveResult CRepository::ResolvePathAndHash( const AddonPtr& addo
     }
 
     // Do not follow mirror redirect, we want the headers of the redirect response
-    GoTvUrl url{ path };
+    NlcUrl url{ path };
     url.SetProtocolOption( "redirect-limit", "0" );
     CCurlFile file;
     if( !file.Open( url ) )
@@ -167,7 +167,7 @@ CRepository::CRepository( CAddonInfo addonInfo, DirList dirs )
 {
     for( auto const& dir : m_dirs )
     {
-        GoTvUrl datadir( dir.datadir );
+        NlcUrl datadir( dir.datadir );
         if( datadir.IsProtocol( "http" ) )
         {
             CLog::Log( LOGWARNING, "Repository add-on {} uses plain HTTP for add-on downloads in path {} - this is insecure and will make your Kodi installation vulnerable to attacks if enabled!", ID(), datadir.GetRedacted() );

@@ -23,25 +23,25 @@
 
 #include <core/Enums.h>
 
-class GoTvPtoPInstance;
-class GoTvPtoPMedia;
-class GoTvPtoPMediaPlayer;
-class GoTvPtoPTrackModel;
+class NlcPtoPInstance;
+class NlcPtoPMedia;
+class NlcPtoPMediaPlayer;
+class NlcPtoPTrackModel;
 
 #include "QmlSource.h"
 
 /*!
-    \class GoTvPtoPQmlPlayer QmlPlayer.h GOTVQtQml/QmlPlayer.h
+    \class NlcPtoPQmlPlayer QmlPlayer.h GOTVQtQml/QmlPlayer.h
     \ingroup GOTVQtQml
     \brief QML player
 
     A QML media player that can play multimedia files inside QML interface.
-    You need GoTvPtoPQmlVideoOutput to display video.
+    You need NlcPtoPQmlVideoOutput to display video.
 
-    \see GoTvPtoPQmlVideoOutput
+    \see NlcPtoPQmlVideoOutput
     \since GOTV-Qt 1.1
  */
-class GoTvPtoPQmlPlayer : public GoTvPtoPQmlSource
+class NlcPtoPQmlPlayer : public NlcPtoPQmlSource
 {
     Q_OBJECT
 
@@ -126,7 +126,7 @@ class GoTvPtoPQmlPlayer : public GoTvPtoPQmlSource
         \brief Audio track model
         \see audioTrackModel
      */
-    Q_PROPERTY(GoTvPtoPTrackModel *audioTrackModel READ audioTrackModel CONSTANT)
+    Q_PROPERTY(NlcPtoPTrackModel *audioTrackModel READ audioTrackModel CONSTANT)
 
     /*!
         \brief Current audio track
@@ -148,7 +148,7 @@ class GoTvPtoPQmlPlayer : public GoTvPtoPQmlSource
         \brief Subtitle track model
         \see subtitleTrackModel
      */
-    Q_PROPERTY(GoTvPtoPTrackModel *subtitleTrackModel READ subtitleTrackModel CONSTANT)
+    Q_PROPERTY(NlcPtoPTrackModel *subtitleTrackModel READ subtitleTrackModel CONSTANT)
 
     /*!
         \brief Current subtitle track
@@ -170,7 +170,7 @@ class GoTvPtoPQmlPlayer : public GoTvPtoPQmlSource
         \brief Video track model
         \see videoTrackModel
      */
-    Q_PROPERTY(GoTvPtoPTrackModel *videoTrackModel READ videoTrackModel CONSTANT)
+    Q_PROPERTY(NlcPtoPTrackModel *videoTrackModel READ videoTrackModel CONSTANT)
 
     /*!
         \brief Current video track
@@ -182,11 +182,11 @@ class GoTvPtoPQmlPlayer : public GoTvPtoPQmlSource
 
 public:
     /*!
-        \brief GoTvPtoPQmlPlayer constructor
+        \brief NlcPtoPQmlPlayer constructor
         \param parent parent object
      */
-    explicit GoTvPtoPQmlPlayer(QObject *parent = 0);
-    ~GoTvPtoPQmlPlayer();
+    explicit NlcPtoPQmlPlayer(QObject *parent = 0);
+    ~NlcPtoPQmlPlayer();
 
     /*!
         \brief Pause current playback
@@ -351,7 +351,7 @@ public:
 
         Used as property in QML.
      */
-    GoTvPtoPTrackModel *audioTrackModel() const;
+    NlcPtoPTrackModel *audioTrackModel() const;
 
     /*!
         \brief Get current audio track
@@ -391,7 +391,7 @@ public:
 
         Used as property in QML.
      */
-    GoTvPtoPTrackModel *subtitleTrackModel() const;
+    NlcPtoPTrackModel *subtitleTrackModel() const;
 
     /*!
         \brief Get current subtitle track
@@ -431,7 +431,7 @@ public:
 
         Used as property in QML.
      */
-    GoTvPtoPTrackModel *videoTrackModel() const;
+    NlcPtoPTrackModel *videoTrackModel() const;
 
     /*!
         \brief Get current video track
@@ -534,16 +534,16 @@ private:
     int preferredAudioTrackId();
     int preferredSubtitleTrackId();
 
-    GoTvPtoPInstance *_instance;
-    GoTvPtoPMedia *_media;
-    GoTvPtoPMediaPlayer *_player;
+    NlcPtoPInstance *_instance;
+    NlcPtoPMedia *_media;
+    NlcPtoPMediaPlayer *_player;
 
     bool _autoplay;
-    GoTvPtoP::Deinterlacing _deinterlacing;
+    NlcPtoP::Deinterlacing _deinterlacing;
 
-    GoTvPtoPTrackModel *_audioTrackModel;
-    GoTvPtoPTrackModel *_subtitleTrackModel;
-    GoTvPtoPTrackModel *_videoTrackModel;
+    NlcPtoPTrackModel *_audioTrackModel;
+    NlcPtoPTrackModel *_subtitleTrackModel;
+    NlcPtoPTrackModel *_videoTrackModel;
 
     QStringList _audioPreferredLanguages;
     QStringList _subtitlePreferredLanguages;

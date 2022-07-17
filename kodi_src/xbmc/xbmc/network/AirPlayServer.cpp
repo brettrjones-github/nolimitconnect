@@ -30,7 +30,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "input/Key.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "cores/IPlayer.h"
 #include "interfaces/AnnouncementManager.h"
 #ifdef HAS_ZEROCONF
@@ -963,7 +963,7 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
 
     if (status != AIRPLAY_STATUS_NEED_AUTH)
     {
-      std::string userAgent(GoTvUrl::Encode("AppleCoreMedia/1.0.0.8F455 (AppleTV; U; CPU OS 4_3 like Mac OS X; de_de)"));
+      std::string userAgent(NlcUrl::Encode("AppleCoreMedia/1.0.0.8F455 (AppleTV; U; CPU OS 4_3 like Mac OS X; de_de)"));
       location += "|User-Agent=" + userAgent;
 
       CFileItem fileToPlay(location, false);

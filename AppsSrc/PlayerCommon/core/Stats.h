@@ -22,13 +22,13 @@
 #include "SharedExportCore.h"
 
 /*!
-    \struct GoTvPtoPStats Stats.h core/Stats.h
+    \struct NlcPtoPStats Stats.h core/Stats.h
     \ingroup GOTVQtCore
     \brief Statistics container
 
     A direct copy of libgotvptop stats object to remove dependency to libgotvptop.
 */
-struct GOTVQT_CORE_EXPORT GoTvPtoPStats {
+struct GOTVQT_CORE_EXPORT NlcPtoPStats {
     bool valid;              /*!< GOTV stats success status */
     int read_bytes;          /*!< libGOTV stats */
     float input_bitrate;     /*!< libGOTV stats */

@@ -15,7 +15,7 @@
 #include "TextureDatabase.h"
 #include "threads/Event.h"
 
-class GoTvUrl;
+class NlcUrl;
 class CBaseTexture;
 
 /*!
@@ -125,7 +125,7 @@ public:
    \param url the URL to the image
    \return true if the given URL may be cached, false otherwise
    */
-  static bool CanCacheImageURL(const GoTvUrl &url);
+  static bool CanCacheImageURL(const NlcUrl &url);
 
   /*! \brief Add this image to the database
    Thread-safe wrapper of CTextureDatabase::AddCachedTexture

@@ -61,7 +61,7 @@ _gcry_bswap64(uint64_t x)
 #endif
 
 /* Endian dependent byte swap operations.  */
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 # define le_bswap32(x) _gcry_bswap32(x)
 # define be_bswap32(x) ((uint32_t)(x))
 # ifdef HAVE_U64_TYPEDEF

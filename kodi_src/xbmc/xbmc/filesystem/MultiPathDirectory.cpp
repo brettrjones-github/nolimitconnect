@@ -10,8 +10,8 @@
 #include "MultiPathDirectory.h"
 #include "Directory.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogProgress.h"
@@ -34,7 +34,7 @@ CMultiPathDirectory::CMultiPathDirectory() = default;
 
 CMultiPathDirectory::~CMultiPathDirectory() = default;
 
-bool CMultiPathDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CMultiPathDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   CLog::Log(LOGDEBUG,"CMultiPathDirectory::GetDirectory(%s)", url.GetRedacted().c_str());
 
@@ -66,7 +66,7 @@ bool CMultiPathDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
     }
     if (dlgProgress)
     {
-      GoTvUrl url(vecPaths[i]);
+      NlcUrl url(vecPaths[i]);
       dlgProgress->SetLine(1, CVariant{url.GetWithoutUserDetails()});
       dlgProgress->SetProgressAdvance();
       dlgProgress->Progress();
@@ -101,7 +101,7 @@ bool CMultiPathDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CMultiPathDirectory::Exists(const GoTvUrl& url)
+bool CMultiPathDirectory::Exists(const NlcUrl& url)
 {
   CLog::Log(LOGDEBUG,"Testing Existence (%s)", url.GetRedacted().c_str());
 
@@ -118,7 +118,7 @@ bool CMultiPathDirectory::Exists(const GoTvUrl& url)
   return false;
 }
 
-bool CMultiPathDirectory::Remove(const GoTvUrl& url)
+bool CMultiPathDirectory::Remove(const NlcUrl& url)
 {
   std::vector<std::string> vecPaths;
   if (!GetPaths(url, vecPaths))
@@ -137,11 +137,11 @@ std::string CMultiPathDirectory::GetFirstPath(const std::string &strPath)
 {
   size_t pos = strPath.find("/", 12);
   if (pos != std::string::npos)
-    return GoTvUrl::Decode(strPath.substr(12, pos - 12));
+    return NlcUrl::Decode(strPath.substr(12, pos - 12));
   return "";
 }
 
-bool CMultiPathDirectory::GetPaths(const GoTvUrl& url, std::vector<std::string>& vecPaths)
+bool CMultiPathDirectory::GetPaths(const NlcUrl& url, std::vector<std::string>& vecPaths)
 {
   const std::string pathToUrl(url.Get());
   return GetPaths(pathToUrl, vecPaths);
@@ -162,7 +162,7 @@ bool CMultiPathDirectory::GetPaths(const std::string& path, std::vector<std::str
 
   // URL decode each item
   paths.resize(temp.size());
-  std::transform(temp.begin(), temp.end(), paths.begin(), GoTvUrl::Decode);
+  std::transform(temp.begin(), temp.end(), paths.begin(), NlcUrl::Decode);
   return true;
 }
 
@@ -180,7 +180,7 @@ bool CMultiPathDirectory::HasPath(const std::string& strPath, const std::string&
   // check each item
   for (unsigned int i = 0; i < vecTemp.size(); i++)
   {
-    if (GoTvUrl::Decode(vecTemp[i]) == strPathToFind)
+    if (NlcUrl::Decode(vecTemp[i]) == strPathToFind)
       return true;
   }
   return false;
@@ -204,7 +204,7 @@ void CMultiPathDirectory::AddToMultiPath(std::string& strMultiPath, const std::s
 {
   URIUtils::AddSlashAtEnd(strMultiPath);
   //CLog::Log(LOGDEBUG, "-- adding path: %s", strPath.c_str());
-  strMultiPath += GoTvUrl::Encode(strPath);
+  strMultiPath += NlcUrl::Encode(strPath);
   strMultiPath += "/";
 }
 

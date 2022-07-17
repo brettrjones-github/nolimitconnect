@@ -8,7 +8,7 @@
 
 #include "AddonInfo.h"
 
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "guilib/LocalizeStrings.h"
 
 namespace ADDON

@@ -42,7 +42,7 @@
 #endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 
 
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include <utils/log.h>
 #include <utils/RegExp.h>
 #include <utils/StringUtils.h>

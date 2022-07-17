@@ -21,8 +21,8 @@ namespace XFILE
     CWin32File();
     virtual ~CWin32File();
 
-    virtual bool Open(const GoTvUrl& url);
-    virtual bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false);
+    virtual bool Open(const NlcUrl& url);
+    virtual bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false);
     virtual void Close();
 
     virtual ssize_t Read(void* lpBuf, size_t uiBufSize);
@@ -33,11 +33,11 @@ namespace XFILE
     virtual int64_t GetLength();
     virtual void Flush();
 
-    virtual bool Delete(const GoTvUrl& url);
-    virtual bool Rename(const GoTvUrl& urlCurrentName, const GoTvUrl& urlNewName);
-    virtual bool SetHidden(const GoTvUrl& url, bool hidden);
-    virtual bool Exists(const GoTvUrl& url);
-    virtual int Stat(const GoTvUrl& url, struct __stat64* statData);
+    virtual bool Delete(const NlcUrl& url);
+    virtual bool Rename(const NlcUrl& urlCurrentName, const NlcUrl& urlNewName);
+    virtual bool SetHidden(const NlcUrl& url, bool hidden);
+    virtual bool Exists(const NlcUrl& url);
+    virtual int Stat(const NlcUrl& url, struct __stat64* statData);
     virtual int Stat(struct __stat64* statData);
 
   protected:

@@ -8,7 +8,7 @@
 
 #include "PVRRecordingsPath.h"
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/RegExp.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -86,7 +86,7 @@ CPVRRecordingsPath::CPVRRecordingsPath(bool bDeleted, bool bRadio,
     strDirectoryN = StringUtils::Format("%s/", strDirectoryN.c_str());
 
   std::string strTitleN(strTitle);
-  strTitleN = GoTvUrl::Encode(strTitleN);
+  strTitleN = NlcUrl::Encode(strTitleN);
 
   std::string strSeasonEpisodeN;
   if ((iSeason > -1 && iEpisode > -1 && (iSeason > 0 || iEpisode > 0)))
@@ -100,14 +100,14 @@ CPVRRecordingsPath::CPVRRecordingsPath(bool bDeleted, bool bRadio,
   if (!strSubtitle.empty())
   {
     strSubtitleN = StringUtils::Format(" %s", strSubtitle.c_str());
-    strSubtitleN = GoTvUrl::Encode(strSubtitleN);
+    strSubtitleN = NlcUrl::Encode(strSubtitleN);
   }
 
   std::string strChannelNameN;
   if (!strChannelName.empty())
   {
     strChannelNameN = StringUtils::Format(" (%s)", strChannelName.c_str());
-    strChannelNameN = GoTvUrl::Encode(strChannelNameN);
+    strChannelNameN = NlcUrl::Encode(strChannelNameN);
   }
 
   m_directoryPath = StringUtils::Format("%s%s%s%s%s",
@@ -119,7 +119,7 @@ CPVRRecordingsPath::CPVRRecordingsPath(bool bDeleted, bool bRadio,
 
 std::string CPVRRecordingsPath::GetUnescapedDirectoryPath() const
 {
-  return GoTvUrl::Decode(m_directoryPath);
+  return NlcUrl::Decode(m_directoryPath);
 }
 
 std::string CPVRRecordingsPath::GetUnescapedSubDirectoryPath(const std::string &strPath) const
@@ -170,7 +170,7 @@ void CPVRRecordingsPath::AppendSegment(const std::string &strSegment)
     return;
 
   std::string strVarSegment(TrimSlashes(strSegment));
-  strVarSegment = GoTvUrl::Encode(strVarSegment);
+  strVarSegment = NlcUrl::Encode(strVarSegment);
 
   if (!m_directoryPath.empty() && m_directoryPath.back() != '/')
     m_directoryPath.push_back('/');

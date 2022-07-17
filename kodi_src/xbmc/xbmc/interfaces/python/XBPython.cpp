@@ -18,7 +18,7 @@
 #include "utils/JSONVariantWriter.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "platform/Environment.h"
 #include "utils/SystemInfo.h"
 

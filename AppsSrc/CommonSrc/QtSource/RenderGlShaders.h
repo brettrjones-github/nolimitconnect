@@ -15,9 +15,9 @@
 //============================================================================
 
 #include "RenderShaderQt.h"
-#include "EventsQtToGoTv.h"
-#include "GuiInterface/IGoTvRender.h"
-#include "GuiInterface/IGoTvEvents.h"
+#include "EventsQtToNlc.h"
+#include "GuiInterface/INlcRender.h"
+#include "GuiInterface/INlcEvents.h"
 
 #include <QtGui/qopenglfunctions.h>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)

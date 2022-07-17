@@ -9,7 +9,7 @@
 #include "MultiPathFile.h"
 #include "MultiPathDirectory.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 
@@ -19,7 +19,7 @@ CMultiPathFile::CMultiPathFile(void)
 
 CMultiPathFile::~CMultiPathFile(void) = default;
 
-bool CMultiPathFile::Open(const GoTvUrl& url)
+bool CMultiPathFile::Open(const NlcUrl& url)
 {
   // grab the filename off the url
   std::string path, fileName;
@@ -38,7 +38,7 @@ bool CMultiPathFile::Open(const GoTvUrl& url)
   return false;
 }
 
-bool CMultiPathFile::Exists(const GoTvUrl& url)
+bool CMultiPathFile::Exists(const NlcUrl& url)
 {
   // grab the filename off the url
   std::string path, fileName;
@@ -57,7 +57,7 @@ bool CMultiPathFile::Exists(const GoTvUrl& url)
   return false;
 }
 
-int CMultiPathFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CMultiPathFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   // grab the filename off the url
   std::string path, fileName;
@@ -77,7 +77,7 @@ int CMultiPathFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
   return -1;
 }
 
-std::string CMultiPathFile::TranslatePath(const GoTvUrl& url)
+std::string CMultiPathFile::TranslatePath(const NlcUrl& url)
 {
   return url.Get();
 }

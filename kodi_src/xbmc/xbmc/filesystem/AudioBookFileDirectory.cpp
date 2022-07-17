@@ -12,8 +12,8 @@
 #include "music/tags/MusicInfoTag.h"
 #include "TextureDatabase.h"
 #include "guilib/LocalizeStrings.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 
 using namespace XFILE;
 
@@ -43,7 +43,7 @@ CAudioBookFileDirectory::~CAudioBookFileDirectory(void)
   }
 }
 
-bool CAudioBookFileDirectory::GetDirectory(const GoTvUrl& url,
+bool CAudioBookFileDirectory::GetDirectory(const NlcUrl& url,
                                            CFileItemList &items)
 {
   if (!m_fctx && !ContainsFiles(url))
@@ -122,12 +122,12 @@ bool CAudioBookFileDirectory::GetDirectory(const GoTvUrl& url,
   return true;
 }
 
-bool CAudioBookFileDirectory::Exists(const GoTvUrl& url)
+bool CAudioBookFileDirectory::Exists(const NlcUrl& url)
 {
   return CFile::Exists(url) && ContainsFiles(url);
 }
 
-bool CAudioBookFileDirectory::ContainsFiles(const GoTvUrl& url)
+bool CAudioBookFileDirectory::ContainsFiles(const NlcUrl& url)
 {
   CFile file;
   if (!file.Open(url))

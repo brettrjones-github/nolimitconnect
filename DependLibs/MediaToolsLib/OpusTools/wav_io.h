@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <opus_types.h>
 
-#if !defined(__LITTLE_ENDIAN__) && ( defined(GOTV_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
+#if !defined(__LITTLE_ENDIAN__) && ( defined(NLC_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
 #define le_short(s) ((short) ((unsigned short) (s) << 8) | ((unsigned short) (s) >> 8))
 #define be_short(s) ((short) (s))
 #else
@@ -42,7 +42,7 @@
 /** Convert little endian */
 static NLC_INLINE opus_int32 le_int(opus_int32 i)
 {
-#if !defined(__LITTLE_ENDIAN__) && ( defined(GOTV_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
+#if !defined(__LITTLE_ENDIAN__) && ( defined(NLC_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
    opus_uint32 ui, ret;
    ui = i;
    ret =  ui>>24;

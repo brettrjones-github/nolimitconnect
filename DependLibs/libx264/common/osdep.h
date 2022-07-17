@@ -273,7 +273,7 @@ static ALWAYS_INLINE int x264_pthread_fetch_and_add( int *val, int add, x264_pth
 
 #define asm __asm__
 
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
 #define endian_fix(x) (x)
 #define endian_fix64(x) (x)
 #define endian_fix32(x) (x)

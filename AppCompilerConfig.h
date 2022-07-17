@@ -31,10 +31,10 @@
 // Compiler directives
 //============================================================================
 #if defined(_MSC_VER)
-# define NLC_EXPORT			// GoTv uses Static libs so no more import/export crap
+# define NLC_EXPORT			// Nlc uses Static libs so no more import/export crap
 # define NLC_IMPORT extern
 # define NLC_HIDDEN
-# define NLC_DLL_VARIABLE		// GoTv uses Static libs so no more import/export crap
+# define NLC_DLL_VARIABLE		// Nlc uses Static libs so no more import/export crap
 #elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 3))
 # define  NLC_EXPORT
 # define  NLC_IMPORT extern
@@ -97,16 +97,16 @@ NLC_END_CDECLARES
 # define __ROUTINE__                 ""
 #endif
 
-#define GOTV_ROUTINE		__ROUTINE__
+#define NLC_ROUTINE		__ROUTINE__
 
 /* _GL_ARG_NONNULL((n,...,m)) tells the compiler and static analyzer tools
 that the values passed as arguments n, ..., m must be non-NULL pointers.
 n = 1 stands for the first argument, n = 2 for the second argument etc.  */
-#ifndef GOTV_ARG_NONNULL
+#ifndef NLC_ARG_NONNULL
 //# if (__GNUC__ == 3 && __GNUC_MINOR__ >= 3) || __GNUC__ > 3
-//#  define GOTV_ARG_NONNULL(params) __attribute__ ((__nonnull__ params))
+//#  define NLC_ARG_NONNULL(params) __attribute__ ((__nonnull__ params))
 //# else
-#  define GOTV_ARG_NONNULL(params)
+#  define NLC_ARG_NONNULL(params)
 //# endif
 #endif
 

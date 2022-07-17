@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/CharsetConverter.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -46,7 +46,7 @@ namespace XFILE
    * \param items Resulting item list
    */
   template<class TEntry>
-  static void Directorize(const GoTvUrl& url, const DirectorizeEntries<TEntry>& entries, DirectorizeEntryToFileItemFunction<TEntry> converter, CFileItemList& items)
+  static void Directorize(const NlcUrl& url, const DirectorizeEntries<TEntry>& entries, DirectorizeEntryToFileItemFunction<TEntry> converter, CFileItemList& items)
   {
     if (url.Get().empty() || entries.empty())
       return;
@@ -54,7 +54,7 @@ namespace XFILE
     std::string options = url.GetOptions();
     std::string filePath = url.GetFileName();
 
-    GoTvUrl baseUrl(url);
+    NlcUrl baseUrl(url);
     baseUrl.SetOptions(""); // delete options to have a clean path to add stuff too
     baseUrl.SetFileName(""); // delete filename too as our names later will contain it
 

@@ -23,7 +23,7 @@
 #include "utils/CharsetConverter.h" // Required to initialize converters before usage
 
 #include "AppParamParser.h" 
-#include "GuiInterface/IGoTv.h" 
+#include "GuiInterface/INlc.h" 
 
 
 
@@ -70,7 +70,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR commandLine, INT )
 
   // check if Kodi is already running
   std::string appName = CCompileInfo::GetAppName();
-  HANDLE appRunningMutex = CreateMutex(nullptr, FALSE, ToW(appName + " GoTvPtoP").c_str());
+  HANDLE appRunningMutex = CreateMutex(nullptr, FALSE, ToW(appName + " NlcPtoP").c_str());
   if (GetLastError() == ERROR_ALREADY_EXISTS)
   {
     auto appNameW = ToW(appName);
@@ -95,9 +95,9 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR commandLine, INT )
   //Initialize COM
   CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 
-    GetIGoTv().doPreStartup();
+    GetINlc().doPreStartup();
 
-    // NOTE GetIGoTv().doStartup() will be called by XBMC_Run
+    // NOTE GetINlc().doStartup() will be called by XBMC_Run
 
     int argc;
     LPWSTR* argvW = CommandLineToArgvW( GetCommandLineW(), &argc );
@@ -130,17 +130,17 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR commandLine, INT )
     {
         static CAppParamParser appParamParser;
         appParamParser.Parse( argv, argc );
-        GetIGoTv().initRun( appParamParser );
+        GetINlc().initRun( appParamParser );
         // Create and run the app
-        GetIGoTv().doRun( );
+        GetINlc().doRun( );
     }
 
     for( int i = 0; i < argc; ++i )
         delete[] argv[ i ];
     delete[] argv;
 
-    GetIGoTv().doPreShutdown();
-    GetIGoTv().doShutdown();
+    GetINlc().doPreShutdown();
+    GetINlc().doShutdown();
 
   ReleaseMutex(appRunningMutex);
     return GetOsInterface().getRunResultCode();

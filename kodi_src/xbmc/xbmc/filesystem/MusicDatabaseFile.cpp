@@ -8,7 +8,7 @@
 
 #include "MusicDatabaseFile.h"
 #include "music/MusicDatabase.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
@@ -21,7 +21,7 @@ CMusicDatabaseFile::~CMusicDatabaseFile(void)
   Close();
 }
 
-std::string CMusicDatabaseFile::TranslateUrl(const GoTvUrl& url)
+std::string CMusicDatabaseFile::TranslateUrl(const NlcUrl& url)
 {
   CMusicDatabase musicDatabase;
   if (!musicDatabase.Open())
@@ -47,17 +47,17 @@ std::string CMusicDatabaseFile::TranslateUrl(const GoTvUrl& url)
   return song.strFileName;
 }
 
-bool CMusicDatabaseFile::Open(const GoTvUrl& url)
+bool CMusicDatabaseFile::Open(const NlcUrl& url)
 {
   return m_file.Open(TranslateUrl(url));
 }
 
-bool CMusicDatabaseFile::Exists(const GoTvUrl& url)
+bool CMusicDatabaseFile::Exists(const NlcUrl& url)
 {
   return !TranslateUrl(url).empty();
 }
 
-int CMusicDatabaseFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CMusicDatabaseFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   return m_file.Stat(TranslateUrl(url), buffer);
 }

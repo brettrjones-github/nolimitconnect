@@ -9,8 +9,8 @@
 #include "ZipDirectory.h"
 #include "utils/CharsetConverter.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "ZipManager.h"
 #include "FileItem.h"
 #include "filesystem/Directorization.h"
@@ -37,9 +37,9 @@ namespace XFILE
 
   CZipDirectory::~CZipDirectory() = default;
 
-  bool CZipDirectory::GetDirectory(const GoTvUrl& urlOrig, CFileItemList& items)
+  bool CZipDirectory::GetDirectory(const NlcUrl& urlOrig, CFileItemList& items)
   {
-    GoTvUrl urlZip(urlOrig);
+    NlcUrl urlZip(urlOrig);
 
     /* if this isn't a proper archive path, assume it's the path to a archive file */
     if (!urlOrig.IsProtocol("zip"))
@@ -61,7 +61,7 @@ namespace XFILE
     return true;
   }
 
-  bool CZipDirectory::ContainsFiles(const GoTvUrl& url)
+  bool CZipDirectory::ContainsFiles(const NlcUrl& url)
   {
     std::vector<SZipEntry> items;
     g_ZipManager.GetZipList(url, items);

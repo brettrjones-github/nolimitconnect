@@ -9,7 +9,7 @@
 #include "VideoLibrary.h"
 #include "messaging/ApplicationMessenger.h"
 #include "TextureDatabase.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/SortUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"

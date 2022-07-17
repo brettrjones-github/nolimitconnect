@@ -6,7 +6,7 @@ CONFIG += no_docs_target
 # build the project sequentially as listed in SUBDIRS !
 CONFIG += ordered
 # python must be build seperately and before this project
-#SUBDIRS += $$PWD/GoTvPythonLib.pro
+#SUBDIRS += $$PWD/NlcPythonLib.pro
 
 SUBDIRS += $$PWD/libavdevice.pro
 SUBDIRS += $$PWD/libpostproc.pro

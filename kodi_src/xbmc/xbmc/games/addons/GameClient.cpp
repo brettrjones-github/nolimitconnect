@@ -33,7 +33,7 @@
 #include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <algorithm>
 #include <cstring>
@@ -233,7 +233,7 @@ bool CGameClient::OpenFile(const CFileItem& file, RETRO::IStreamManager& streamM
   }
 
   // Resolve special:// URLs
-  GoTvUrl translatedUrl(CSpecialProtocol::TranslatePath(file.GetPath()));
+  NlcUrl translatedUrl(CSpecialProtocol::TranslatePath(file.GetPath()));
 
   // Remove file:// from URLs if add-on doesn't support VFS
   if (!m_bSupportsVFS)
@@ -243,7 +243,7 @@ bool CGameClient::OpenFile(const CFileItem& file, RETRO::IStreamManager& streamM
   }
 
   std::string path = translatedUrl.Get();
-  CLog::Log(LOGDEBUG, "GameClient: Loading %s", GoTvUrl::GetRedacted(path).c_str());
+  CLog::Log(LOGDEBUG, "GameClient: Loading %s", NlcUrl::GetRedacted(path).c_str());
 
   CSingleLock lock(m_critSection);
 

@@ -20,6 +20,6 @@ namespace XFILE
     ~CBlurayFile() override;
 
   protected:
-    std::string TranslatePath(const GoTvUrl& url) override;
+    std::string TranslatePath(const NlcUrl& url) override;
   };
 }

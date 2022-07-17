@@ -1,5 +1,5 @@
 #include "rar.hpp"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 ComprDataIO::ComprDataIO()
 {

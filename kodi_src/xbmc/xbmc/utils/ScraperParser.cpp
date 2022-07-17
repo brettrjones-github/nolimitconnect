@@ -13,7 +13,7 @@
 #include "RegExp.h"
 #include "HTMLUtil.h"
 #include "addons/Scraper.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "log.h"
 #include "CharsetConverter.h"
@@ -533,7 +533,7 @@ void CScraperParser::Clean(std::string& strDirty)
     size_t i2;
     if ((i2 = strDirty.find("!!!ENCODE!!!",i+12)) != std::string::npos)
     {
-      strBuffer = GoTvUrl::Encode(strDirty.substr(i + 12, i2 - i - 12));
+      strBuffer = NlcUrl::Encode(strDirty.substr(i + 12, i2 - i - 12));
       strDirty.replace(i, i2-i+12, strBuffer);
       i += strBuffer.size();
     }

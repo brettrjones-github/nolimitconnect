@@ -8,7 +8,7 @@
 
 #include "GUIWindowMusicPlaylistEditor.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
@@ -346,7 +346,7 @@ void CGUIWindowMusicPlaylistEditor::OnLoadPlaylist()
 
 void CGUIWindowMusicPlaylistEditor::LoadPlaylist(const std::string &playlist)
 {
-  const GoTvUrl pathToUrl(playlist);
+  const NlcUrl pathToUrl(playlist);
   if (pathToUrl.IsProtocol("newplaylist"))
   {
     ClearPlaylist();

@@ -19,11 +19,11 @@ namespace XFILE
     public:
       CDAVDirectory(void);
       ~CDAVDirectory(void) override;
-      bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-      bool Create(const GoTvUrl& url) override;
-      bool Exists(const GoTvUrl& url) override;
-      bool Remove(const GoTvUrl& url) override;
-      DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_ONCE; };
+      bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+      bool Create(const NlcUrl& url) override;
+      bool Exists(const NlcUrl& url) override;
+      bool Remove(const NlcUrl& url) override;
+      DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_ONCE; };
     private:
       void ParseResponse(const TiXmlElement *pElement, CFileItem &item);
   };

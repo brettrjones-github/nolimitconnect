@@ -40,7 +40,7 @@
 #include "filesystem/File.h"
 #include "cores/FFmpeg.h"
 #include "TextureCache.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/LangCodeExpander.h"
 
 #include <cstdlib>
@@ -93,7 +93,7 @@ bool CDVDFileInfo::ExtractThumb(const CFileItem& fileItem,
                                 CStreamDetails *pStreamDetails,
                                 int64_t pos)
 {
-  const std::string redactPath = GoTvUrl::GetRedacted(fileItem.GetPath());
+  const std::string redactPath = NlcUrl::GetRedacted(fileItem.GetPath());
   unsigned int nTime = XbmcThreads::SystemClockMillis();
 
   CFileItem item(fileItem);
@@ -370,7 +370,7 @@ bool CDVDFileInfo::DemuxerToStreamDetails(std::shared_ptr<CDVDInputStream> pInpu
   bool retVal = false;
   details.Reset();
 
-  const GoTvUrl pathToUrl(path);
+  const NlcUrl pathToUrl(path);
   for (CDemuxStream* stream : pDemux->GetStreams())
   {
     if (stream->type == STREAM_VIDEO && !(stream->flags & AV_DISPOSITION_ATTACHED_PIC))

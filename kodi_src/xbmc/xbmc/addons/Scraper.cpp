@@ -10,8 +10,8 @@
 #include "AddonManager.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/Directory.h"
 #include "filesystem/File.h"
@@ -431,7 +431,7 @@ CScraperUrl CScraper::NfoUrl(const std::string &sNfoContent)
   {
     std::stringstream str;
     str << "plugin://" << ID() << "?action=NfoUrl&nfo="
-      << GoTvUrl::Encode(sNfoContent);
+      << NlcUrl::Encode(sNfoContent);
     CFileItemList items;
     if (!XFILE::CDirectory::GetDirectory(str.str(), items, "", DIR_FLAG_DEFAULTS))
       return scurlRet;
@@ -513,7 +513,7 @@ CScraperUrl CScraper::ResolveIDToUrl(const std::string &externalID)
   if (m_isPython)
   {
     std::stringstream str;
-    str << "plugin://" << ID() << "?action=resolveid&key=" << GoTvUrl::Encode(externalID);
+    str << "plugin://" << ID() << "?action=resolveid&key=" << NlcUrl::Encode(externalID);
 
     CFileItem item("resolve me", false);
 
@@ -661,7 +661,7 @@ static std::vector<T> PythonFind(const std::string &ID,
   std::stringstream str;
   str << "plugin://" << ID << "?action=find";
   for (const auto &it : additionals)
-    str << "&" << it.first << "=" << GoTvUrl::Encode(it.second);
+    str << "&" << it.first << "=" << NlcUrl::Encode(it.second);
 
   if (XFILE::CDirectory::GetDirectory(str.str(), items, "", DIR_FLAG_DEFAULTS))
   {
@@ -813,7 +813,7 @@ static bool PythonDetails(const std::string &ID,
                           T &result)
 {
   std::stringstream str;
-  str << "plugin://" << ID << "?action=" << action << "&" << key << "=" << GoTvUrl::Encode(url);
+  str << "plugin://" << ID << "?action=" << action << "&" << key << "=" << NlcUrl::Encode(url);
 
   CFileItem item(url, false);
 
@@ -866,7 +866,7 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl,
 
   std::vector<std::string> vcsIn(1);
   g_charsetConverter.utf8To(SearchStringEncoding(), sTitle, vcsIn[0]);
-  vcsIn[0] = GoTvUrl::Encode(vcsIn[0]);
+  vcsIn[0] = NlcUrl::Encode(vcsIn[0]);
   if (fFirst && !sYear.empty())
     vcsIn.push_back(sYear);
 
@@ -998,8 +998,8 @@ std::vector<CMusicAlbumInfo> CScraper::FindAlbum(CCurlFile &fcurl,
   std::vector<std::string> extras(2);
   g_charsetConverter.utf8To(SearchStringEncoding(), sAlbum, extras[0]);
   g_charsetConverter.utf8To(SearchStringEncoding(), sArtist, extras[1]);
-  extras[0] = GoTvUrl::Encode(extras[0]);
-  extras[1] = GoTvUrl::Encode(extras[1]);
+  extras[0] = NlcUrl::Encode(extras[0]);
+  extras[1] = NlcUrl::Encode(extras[1]);
   CScraperUrl scurl;
   std::vector<std::string> vcsOut = RunNoThrow("CreateAlbumSearchUrl", scurl, fcurl, &extras);
   if (vcsOut.size() > 1)
@@ -1097,7 +1097,7 @@ std::vector<CMusicArtistInfo> CScraper::FindArtist(CCurlFile &fcurl, const std::
   // returns an XML <url> element parseable by CScraperUrl
   std::vector<std::string> extras(1);
   g_charsetConverter.utf8To(SearchStringEncoding(), sArtist, extras[0]);
-  extras[0] = GoTvUrl::Encode(extras[0]);
+  extras[0] = NlcUrl::Encode(extras[0]);
   CScraperUrl scurl;
   std::vector<std::string> vcsOut = RunNoThrow("CreateArtistSearchUrl", scurl, fcurl, &extras);
 
@@ -1178,7 +1178,7 @@ EPISODELIST CScraper::GetEpisodeList(XFILE::CCurlFile &fcurl, const CScraperUrl 
   {
     std::stringstream str;
     str << "plugin://" << ID()
-        << "?action=getepisodelist&url=" << GoTvUrl::Encode(scurl.m_url.front().m_url);
+        << "?action=getepisodelist&url=" << NlcUrl::Encode(scurl.m_url.front().m_url);
     CFileItemList items;
     if (!XFILE::CDirectory::GetDirectory(str.str(), items, "", DIR_FLAG_DEFAULTS))
       return vcep;
@@ -1358,7 +1358,7 @@ bool CScraper::GetArtistDetails(CCurlFile &fcurl,
   // pass in the original search string for chaining to search other sites
   std::vector<std::string> vcIn;
   vcIn.push_back(sSearch);
-  vcIn[0] = GoTvUrl::Encode(vcIn[0]);
+  vcIn[0] = NlcUrl::Encode(vcIn[0]);
 
   std::vector<std::string> vcsOut = RunNoThrow("GetArtistDetails", scurl, fcurl, &vcIn);
 

@@ -134,7 +134,7 @@ static NLC_INLINE void bs_write( bs_t *s, int i_count, uint32_t i_bits )
         s->i_left -= i_count;
         if( s->i_left <= 32 )
         {
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
             M32( s->p ) = s->cur_bits >> (32 - s->i_left);
 #else
             M32( s->p ) = endian_fix( s->cur_bits << s->i_left );

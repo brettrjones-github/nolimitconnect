@@ -26,7 +26,7 @@ public:
   CFileFactory();
   virtual ~CFileFactory();
   static IFile* CreateLoader(const std::string& strFileName);
-  static IFile* CreateLoader(const GoTvUrl& url);
+  static IFile* CreateLoader(const NlcUrl& url);
 };
 }
 #endif // !defined(AFX_FILEFACTORY1_H__068E3138_B7CB_4BEE_B5CE_8AA8CADAB233__INCLUDED_)

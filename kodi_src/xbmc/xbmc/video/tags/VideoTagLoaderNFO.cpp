@@ -77,9 +77,9 @@ CInfoScanner::INFO_TYPE CVideoTagLoaderNFO::Load(CVideoInfoTag& tag,
       type = "malformed";
   }
   if (result != CInfoScanner::NO_NFO)
-    CLog::Log(LOGDEBUG, "VideoInfoScanner: Found matching %s NFO file: %s", type.c_str(), GoTvUrl::GetRedacted(m_path).c_str());
+    CLog::Log(LOGDEBUG, "VideoInfoScanner: Found matching %s NFO file: %s", type.c_str(), NlcUrl::GetRedacted(m_path).c_str());
   else
-    CLog::Log(LOGDEBUG, "VideoInfoScanner: No NFO file found. Using title search for '%s'", GoTvUrl::GetRedacted(m_item.GetPath()).c_str());
+    CLog::Log(LOGDEBUG, "VideoInfoScanner: No NFO file found. Using title search for '%s'", NlcUrl::GetRedacted(m_item.GetPath()).c_str());
 
   return result;
 }
@@ -94,7 +94,7 @@ std::string CVideoTagLoaderNFO::FindNFO(const CFileItem& item,
     if (URIUtils::IsInRAR(item.GetPath())) // we have a rarred item - we want to check outside the rars
     {
       CFileItem item2(item);
-      GoTvUrl url(m_item.GetPath());
+      NlcUrl url(m_item.GetPath());
       std::string strPath = URIUtils::GetDirectory(url.GetHostName());
       item2.SetPath(URIUtils::AddFileToFolder(strPath,
                                             URIUtils::GetFileName(item.GetPath())));

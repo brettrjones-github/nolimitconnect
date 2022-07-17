@@ -26,8 +26,8 @@
 #include "Enums.h"
 #include "SharedExportCore.h"
 
-class GoTvPtoPInstance;
-class GoTvPtoPMedia;
+class NlcPtoPInstance;
+class NlcPtoPMedia;
 
 struct libgotvptop_event_t;
 struct libgotvptop_event_manager_t;
@@ -35,29 +35,29 @@ struct libgotvptop_media_t;
 struct libgotvptop_media_list_t;
 
 /*!
-    \class GoTvPtoPMediaList MediaList.h core/MediaList.h
+    \class NlcPtoPMediaList MediaList.h core/MediaList.h
     \ingroup GOTVQtCore
     \brief Media list item
 
-    GoTvPtoPMediaList holds multiple GoTvPtoPMedia items to play in sequence.
+    NlcPtoPMediaList holds multiple NlcPtoPMedia items to play in sequence.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPMediaList : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPMediaList : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPMediaList constructor.
+        \brief NlcPtoPMediaList constructor.
 
         This constructor creates a new media list instance.
 
         \param instance main libgotvptop instance
     */
-    explicit GoTvPtoPMediaList(GoTvPtoPInstance *instance);
+    explicit NlcPtoPMediaList(NlcPtoPInstance *instance);
 
     /*!
-        \brief GoTvPtoPMediaList destructor
+        \brief NlcPtoPMediaList destructor
     */
-    ~GoTvPtoPMediaList();
+    ~NlcPtoPMediaList();
 
     /*!
         \brief libgotvptop media list item
@@ -69,14 +69,14 @@ public:
         \brief Add media item to the list
         \param media media item
     */
-    void addMedia(GoTvPtoPMedia *media);
+    void addMedia(NlcPtoPMedia *media);
 
     /*!
         \brief Get media item at selected index
         \param index item position
-        \return media item (GoTvPtoPMedia)
+        \return media item (NlcPtoPMedia)
     */
-    GoTvPtoPMedia *at(int index);
+    NlcPtoPMedia *at(int index);
 
     /*!
         \brief libgotvptop media list item
@@ -89,7 +89,7 @@ public:
         \param media media item
         \return media item index (int)
     */
-    int indexOf(GoTvPtoPMedia *media);
+    int indexOf(NlcPtoPMedia *media);
 
     /*!
         \brief Index of media item (core)
@@ -103,7 +103,7 @@ public:
         \param media media item
         \param index item position
     */
-    void insertMedia(GoTvPtoPMedia *media,
+    void insertMedia(NlcPtoPMedia *media,
                      int index);
 
     /*!
@@ -158,7 +158,7 @@ private:
     libgotvptop_media_list_t *_gotvptopMediaList;
     libgotvptop_event_manager_t *_gotvptopEvents;
 
-    QList<GoTvPtoPMedia *> _list;
+    QList<NlcPtoPMedia *> _list;
 };
 
 #endif // GOTVQT_MEDIALIST_H_

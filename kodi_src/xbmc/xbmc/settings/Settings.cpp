@@ -10,7 +10,7 @@
 #include "Application.h"
 #include "Autorun.h"
 #include "LangInfoKodi.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "addons/AddonSystemSettings.h"
 #include "addons/Skin.h"
 #include "cores/VideoPlayer/VideoRenderers/BaseRenderer.h"

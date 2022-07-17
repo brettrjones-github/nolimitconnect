@@ -24,7 +24,7 @@ using namespace XFILE;
 // Basically the same format as zip.
 // We might want to refactor CZipDirectory someday...
 //////////////////////////////////////////////////////////////////////
-bool CAPKDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CAPKDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   // uses a <fully qualified path>/filename.apk/...
   std::string path = url.GetFileName();
@@ -84,18 +84,18 @@ bool CAPKDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CAPKDirectory::ContainsFiles(const GoTvUrl& url)
+bool CAPKDirectory::ContainsFiles(const NlcUrl& url)
 {
   //! @todo why might we need this ?
   return false;
 }
 
-DIR_CACHE_TYPE CAPKDirectory::GetCacheType(const GoTvUrl& url) const
+DIR_CACHE_TYPE CAPKDirectory::GetCacheType(const NlcUrl& url) const
 {
   return DIR_CACHE_ALWAYS;
 }
 
-bool CAPKDirectory::Exists(const GoTvUrl& url)
+bool CAPKDirectory::Exists(const NlcUrl& url)
 {
   // uses a <fully qualified path>/filename.apk/...
   CAPKFile apk;

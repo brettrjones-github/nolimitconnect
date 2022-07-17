@@ -9,7 +9,7 @@
 #include "FileBrowser.h"
 #include "addons/kodi-addon-dev-kit/include/kodi/gui/dialogs/FileBrowser.h"
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "addons/binary-addons/AddonDll.h"
 #include "dialogs/GUIDialogFileBrowser.h"
 #include "settings/MediaSourceSettings.h"
@@ -348,7 +348,7 @@ void Interface_GUIDialogFileBrowser::GetVECShares(VECSOURCES& vecShares, const s
       basePath = tempPath;
     share.strPath = basePath;
     // don't include the user details in the share name
-    GoTvUrl url(share.strPath);
+    NlcUrl url(share.strPath);
     share.strName = url.GetWithoutUserDetails();
     vecShares.push_back(share);
   }

@@ -37,7 +37,7 @@
 #include "settings/SettingPath.h"
 #include "settings/SettingUtils.h"
 #include "storage/MediaManager.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 

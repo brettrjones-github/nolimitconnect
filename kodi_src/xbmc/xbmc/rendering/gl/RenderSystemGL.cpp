@@ -786,7 +786,7 @@ std::string CRenderSystemGL::GetShaderPath(const std::string &filename)
   if (m_glslMajor >= 4)
   {
     std::string file = "special://xbmc/system/shaders/GL/4.0/" + filename;
-    const GoTvUrl pathToUrl(file);
+    const NlcUrl pathToUrl(file);
     if (XFILE::CFile::Exists(pathToUrl))
       return "GL/4.0/";
   }

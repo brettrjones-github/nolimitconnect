@@ -11,7 +11,7 @@
 #include "IDirectory.h"
 #include "addons/AddonManager.h"
 
-class GoTvUrl;
+class NlcUrl;
 typedef std::shared_ptr<CFileItem> CFileItemPtr;
 
 namespace XFILE 
@@ -26,9 +26,9 @@ namespace XFILE
   public:
     CAddonsDirectory(void);
     ~CAddonsDirectory(void) override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    bool Create(const GoTvUrl& url) override { return true; }
-    bool Exists(const GoTvUrl& url) override { return true; }
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    bool Create(const NlcUrl& url) override { return true; }
+    bool Exists(const NlcUrl& url) override { return true; }
     bool AllowAll() const override { return true; }
 
     /*! \brief Fetch script and plugin addons of a given content type
@@ -45,13 +45,13 @@ namespace XFILE
      */
     static bool GetScriptsAndPlugins(const std::string &content, CFileItemList &items);
 
-    static void GenerateAddonListing(const GoTvUrl &path, const ADDON::VECADDONS& addons, CFileItemList &items, const std::string label);
+    static void GenerateAddonListing(const NlcUrl &path, const ADDON::VECADDONS& addons, CFileItemList &items, const std::string label);
     static CFileItemPtr FileItemFromAddon(const ADDON::AddonPtr &addon, const std::string& path, bool folder = false);
   
     /*! \brief Returns true if `path` is a path or subpath of the repository directory, otherwise false */
-    static bool IsRepoDirectory(const GoTvUrl& path);
+    static bool IsRepoDirectory(const NlcUrl& path);
 
   private:
-    bool GetSearchResults(const GoTvUrl& path, CFileItemList &items);
+    bool GetSearchResults(const NlcUrl& path, CFileItemList &items);
   };
 }

@@ -19,7 +19,7 @@
 #include "games/windows/GUIViewStateWindowGames.h"
 #include "PlayListPlayer.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "GUIPassword.h"
 #include "ViewDatabase.h"
 #include "AutoSwitch.h"
@@ -63,7 +63,7 @@ CGUIViewState* CGUIViewState::GetViewState(int windowId, const CFileItemList& it
   if (windowId == 0)
     return GetViewState(CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow(),items);
 
-  const GoTvUrl url=items.GetURL();
+  const NlcUrl url=items.GetURL();
 
   if (items.IsAddonsPath())
     return new CGUIViewStateAddonBrowser(items);
@@ -588,7 +588,7 @@ CGUIViewStateFromItems::CGUIViewStateFromItems(const CFileItemList &items) : CGU
 
   if (items.IsPlugin())
   {
-    GoTvUrl url(items.GetPath());
+    NlcUrl url(items.GetPath());
     AddonPtr addon;
     if (CServiceBroker::GetAddonMgr().GetAddon(url.GetHostName(), addon, ADDON_PLUGIN))
     {

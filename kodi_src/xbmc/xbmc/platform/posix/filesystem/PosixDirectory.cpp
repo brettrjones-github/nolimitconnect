@@ -15,7 +15,7 @@
 #include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "platform/linux/XTimeUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <dirent.h>
 #include <sys/stat.h>
@@ -26,7 +26,7 @@ CPosixDirectory::CPosixDirectory(void) = default;
 
 CPosixDirectory::~CPosixDirectory(void) = default;
 
-bool CPosixDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CPosixDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string root = url.Get();
 
@@ -95,7 +95,7 @@ bool CPosixDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CPosixDirectory::Create(const GoTvUrl& url)
+bool CPosixDirectory::Create(const NlcUrl& url)
 {
   if (!Create(url.Get()))
     return Exists(url);
@@ -122,7 +122,7 @@ bool CPosixDirectory::Create(std::string path)
   return true;
 }
 
-bool CPosixDirectory::Remove(const GoTvUrl& url)
+bool CPosixDirectory::Remove(const NlcUrl& url)
 {
   if (rmdir(url.Get().c_str()) == 0)
     return true;
@@ -130,7 +130,7 @@ bool CPosixDirectory::Remove(const GoTvUrl& url)
   return !Exists(url);
 }
 
-bool CPosixDirectory::RemoveRecursive(const GoTvUrl& url)
+bool CPosixDirectory::RemoveRecursive(const NlcUrl& url)
 {
   std::string root = url.Get();
 
@@ -167,7 +167,7 @@ bool CPosixDirectory::RemoveRecursive(const GoTvUrl& url)
 
     if (entry->d_type == DT_DIR || (bStat && S_ISDIR(buffer.st_mode)))
     {
-      if (!RemoveRecursive(GoTvUrl{ itemPath }))
+      if (!RemoveRecursive(NlcUrl{ itemPath }))
       {
         success = false;
         break;
@@ -194,7 +194,7 @@ bool CPosixDirectory::RemoveRecursive(const GoTvUrl& url)
   return success;
 }
 
-bool CPosixDirectory::Exists(const GoTvUrl& url)
+bool CPosixDirectory::Exists(const NlcUrl& url)
 {
   std::string path = url.Get();
 

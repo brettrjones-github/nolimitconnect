@@ -7,7 +7,7 @@
  */
 
 #include "VideoDatabaseFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
@@ -19,7 +19,7 @@ CVideoDatabaseFile::CVideoDatabaseFile(void)
 
 CVideoDatabaseFile::~CVideoDatabaseFile(void) = default;
 
-CVideoInfoTag CVideoDatabaseFile::GetVideoTag(const GoTvUrl& url)
+CVideoInfoTag CVideoDatabaseFile::GetVideoTag(const NlcUrl& url)
 {
   CVideoInfoTag tag;
   
@@ -45,7 +45,7 @@ CVideoInfoTag CVideoDatabaseFile::GetVideoTag(const GoTvUrl& url)
   return tag;
 }
 
-VIDEODB_CONTENT_TYPE CVideoDatabaseFile::GetType(const GoTvUrl& url)
+VIDEODB_CONTENT_TYPE CVideoDatabaseFile::GetType(const NlcUrl& url)
 {
   std::string strPath = URIUtils::GetDirectory(url.Get());
   if (strPath.empty())
@@ -70,7 +70,7 @@ VIDEODB_CONTENT_TYPE CVideoDatabaseFile::GetType(const GoTvUrl& url)
 }
 
 
-std::string CVideoDatabaseFile::TranslatePath(const GoTvUrl& url)
+std::string CVideoDatabaseFile::TranslatePath(const NlcUrl& url)
 {
   std::string strFileName = URIUtils::GetFileName(url.Get());
   if (strFileName.empty())

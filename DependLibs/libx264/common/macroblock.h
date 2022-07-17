@@ -350,7 +350,7 @@ void x264_mb_mc_8x8( x264_t *h, int i8 );
 
 static ALWAYS_INLINE uint32_t pack16to32( uint32_t a, uint32_t b )
 {
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
    return b + (a<<16);
 #else
    return a + (b<<16);
@@ -358,7 +358,7 @@ static ALWAYS_INLINE uint32_t pack16to32( uint32_t a, uint32_t b )
 }
 static ALWAYS_INLINE uint32_t pack8to16( uint32_t a, uint32_t b )
 {
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
    return b + (a<<8);
 #else
    return a + (b<<8);
@@ -366,7 +366,7 @@ static ALWAYS_INLINE uint32_t pack8to16( uint32_t a, uint32_t b )
 }
 static ALWAYS_INLINE uint32_t pack8to32( uint32_t a, uint32_t b, uint32_t c, uint32_t d )
 {
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
    return d + (c<<8) + (b<<16) + (a<<24);
 #else
    return a + (b<<8) + (c<<16) + (d<<24);
@@ -374,7 +374,7 @@ static ALWAYS_INLINE uint32_t pack8to32( uint32_t a, uint32_t b, uint32_t c, uin
 }
 static ALWAYS_INLINE uint32_t pack16to32_mask( int a, int b )
 {
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
    return (b&0xFFFF) + (a<<16);
 #else
    return (a&0xFFFF) + (b<<16);
@@ -382,7 +382,7 @@ static ALWAYS_INLINE uint32_t pack16to32_mask( int a, int b )
 }
 static ALWAYS_INLINE uint64_t pack32to64( uint32_t a, uint32_t b )
 {
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
    return b + ((uint64_t)a<<32);
 #else
    return a + ((uint64_t)b<<32);

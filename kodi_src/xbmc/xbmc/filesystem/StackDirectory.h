@@ -20,7 +20,7 @@ namespace XFILE
   public:
     CStackDirectory();
     ~CStackDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items) override;
     bool AllowAll() const override { return true; }
     static std::string GetStackedTitlePath(const std::string &strPath);
     static std::string GetStackedTitlePath(const std::string &strPath, VECCREGEXP& RegExps);

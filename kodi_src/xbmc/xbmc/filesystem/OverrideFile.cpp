@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 
 #include "OverrideFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 
@@ -24,14 +24,14 @@ COverrideFile::~COverrideFile()
   Close();
 }
 
-bool COverrideFile::Open(const GoTvUrl& url)
+bool COverrideFile::Open(const NlcUrl& url)
 {
   std::string strFileName = TranslatePath(url);
 
   return m_file.Open(strFileName);
 }
 
-bool COverrideFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite /* = false */)
+bool COverrideFile::OpenForWrite(const NlcUrl& url, bool bOverWrite /* = false */)
 {
   if (!m_writable)
     return false;
@@ -41,7 +41,7 @@ bool COverrideFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite /* = false 
   return m_file.OpenForWrite(strFileName, bOverWrite);
 }
 
-bool COverrideFile::Delete(const GoTvUrl& url)
+bool COverrideFile::Delete(const NlcUrl& url)
 {
   if (!m_writable)
     return false;
@@ -51,21 +51,21 @@ bool COverrideFile::Delete(const GoTvUrl& url)
   return m_file.Delete(strFileName);
 }
 
-bool COverrideFile::Exists(const GoTvUrl& url)
+bool COverrideFile::Exists(const NlcUrl& url)
 {
   std::string strFileName = TranslatePath(url);
 
   return m_file.Exists(strFileName);
 }
 
-int COverrideFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int COverrideFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   std::string strFileName = TranslatePath(url);
 
   return m_file.Stat(strFileName, buffer);
 }
 
-bool COverrideFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
+bool COverrideFile::Rename(const NlcUrl& url, const NlcUrl& urlnew)
 {
   if (!m_writable)
     return false;

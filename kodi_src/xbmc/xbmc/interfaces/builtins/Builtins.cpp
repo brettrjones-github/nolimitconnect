@@ -28,7 +28,7 @@
 #include "powermanagement/PowerTypes.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 

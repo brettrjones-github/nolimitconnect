@@ -30,7 +30,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "Ap4Config.h"
-#ifndef NLC_EXTERN // if not compiling GoTv 
+#ifndef NLC_EXTERN // if not compiling Nlc 
 
 #define _LARGEFILE_SOURCE
 #define _FILE_OFFSET_BITS 64
@@ -354,5 +354,5 @@ AP4_FileByteStream::AP4_FileByteStream(const char*              name,
 
 #endif
 
-#endif // #ifndef NLC_EXTERN // if not compiling GoTv 
+#endif // #ifndef NLC_EXTERN // if not compiling Nlc 
 

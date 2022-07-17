@@ -10,7 +10,7 @@
 
 #include "HTTPImageTransformationHandler.h"
 #include "TextureCacheJob.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/ImageFile.h"
 #include "network/WebServer.h"
 #include "network/httprequesthandler/HTTPRequestHandlerUtils.h"
@@ -47,7 +47,7 @@ CHTTPImageTransformationHandler::CHTTPImageTransformationHandler(const HTTPReque
   }
 
   XFILE::CImageFile imageFile;
-  const GoTvUrl pathToUrl(m_url);
+  const NlcUrl pathToUrl(m_url);
   if (!imageFile.Exists(pathToUrl))
   {
     m_response.status = MHD_HTTP_NOT_FOUND;

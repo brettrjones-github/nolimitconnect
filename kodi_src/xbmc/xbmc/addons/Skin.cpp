@@ -9,7 +9,7 @@
 #include "Skin.h"
 #include "AddonManager.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "dialogs/GUIDialogKaiToast.h"
 // fallback for new skin resolution code
 #include "filesystem/Directory.h"

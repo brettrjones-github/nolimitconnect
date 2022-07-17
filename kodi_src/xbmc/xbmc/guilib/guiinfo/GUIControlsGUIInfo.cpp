@@ -10,7 +10,7 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "dialogs/GUIDialogKeyboardGeneric.h"
 #include "dialogs/GUIDialogNumeric.h"
 #include "dialogs/GUIDialogProgress.h"
@@ -71,7 +71,7 @@ bool CGUIControlsGUIInfo::GetLabel(std::string& value, const CFileItem *item, in
         if (info.m_info == CONTAINER_FOLDERNAME)
           value = window->CurrentDirectory().GetLabel();
         else
-          value = GoTvUrl(window->CurrentDirectory().GetPath()).GetWithoutUserDetails();
+          value = NlcUrl(window->CurrentDirectory().GetPath()).GetWithoutUserDetails();
         return true;
       }
       break;
@@ -81,7 +81,7 @@ bool CGUIControlsGUIInfo::GetLabel(std::string& value, const CFileItem *item, in
       CGUIMediaWindow* window = GUIINFO::GetMediaWindow(contextWindow);
       if (window)
       {
-        const GoTvUrl url(window->CurrentDirectory().GetPath());
+        const NlcUrl url(window->CurrentDirectory().GetPath());
         if (url.IsProtocol("plugin"))
         {
           value = URIUtils::GetFileName(url.GetHostName());

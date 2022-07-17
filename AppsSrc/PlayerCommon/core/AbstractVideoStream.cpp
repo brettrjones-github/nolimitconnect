@@ -24,17 +24,17 @@
 #include "core/AbstractVideoStream.h"
 #include "core/MediaPlayer.h"
 
-static inline GoTvPtoPAbstractVideoStream *p_this(void *opaque) { return static_cast<GoTvPtoPAbstractVideoStream *>(opaque); }
-static inline GoTvPtoPAbstractVideoStream *p_this(void **opaque) { return static_cast<GoTvPtoPAbstractVideoStream *>(*opaque); }
+static inline NlcPtoPAbstractVideoStream *p_this(void *opaque) { return static_cast<NlcPtoPAbstractVideoStream *>(opaque); }
+static inline NlcPtoPAbstractVideoStream *p_this(void **opaque) { return static_cast<NlcPtoPAbstractVideoStream *>(*opaque); }
 #define P_THIS p_this(opaque)
 
-GoTvPtoPAbstractVideoStream::GoTvPtoPAbstractVideoStream()
+NlcPtoPAbstractVideoStream::NlcPtoPAbstractVideoStream()
 {
 }
 
-GoTvPtoPAbstractVideoStream::~GoTvPtoPAbstractVideoStream() {}
+NlcPtoPAbstractVideoStream::~NlcPtoPAbstractVideoStream() {}
 
-void GoTvPtoPAbstractVideoStream::setCallbacks(GoTvPtoPMediaPlayer *player)
+void NlcPtoPAbstractVideoStream::setCallbacks(NlcPtoPMediaPlayer *player)
 {
     libgotvptop_video_set_callbacks(player->core(),
                                lockCallbackInternal,
@@ -46,7 +46,7 @@ void GoTvPtoPAbstractVideoStream::setCallbacks(GoTvPtoPMediaPlayer *player)
                                       formatCleanUpCallbackInternal);
 }
 
-void GoTvPtoPAbstractVideoStream::unsetCallbacks(GoTvPtoPMediaPlayer *player)
+void NlcPtoPAbstractVideoStream::unsetCallbacks(NlcPtoPMediaPlayer *player)
 {
     if (player) {
         libgotvptop_video_set_callbacks(player->core(), 0, 0, 0, 0);
@@ -54,26 +54,26 @@ void GoTvPtoPAbstractVideoStream::unsetCallbacks(GoTvPtoPMediaPlayer *player)
     }
 }
 
-void *GoTvPtoPAbstractVideoStream::lockCallbackInternal(void *opaque,
+void *NlcPtoPAbstractVideoStream::lockCallbackInternal(void *opaque,
                                                    void **planes)
 {
     return P_THIS->lockCallback(planes);
 }
 
-void GoTvPtoPAbstractVideoStream::unlockCallbackInternal(void *opaque,
+void NlcPtoPAbstractVideoStream::unlockCallbackInternal(void *opaque,
                                                     void *picture,
                                                     void *const *planes)
 {
     P_THIS->unlockCallback(picture, planes);
 }
 
-void GoTvPtoPAbstractVideoStream::displayCallbackInternal(void *opaque,
+void NlcPtoPAbstractVideoStream::displayCallbackInternal(void *opaque,
                                                      void *picture)
 {
     P_THIS->displayCallback(picture);
 }
 
-unsigned GoTvPtoPAbstractVideoStream::formatCallbackInternal(void **opaque,
+unsigned NlcPtoPAbstractVideoStream::formatCallbackInternal(void **opaque,
                                                         char *chroma,
                                                         unsigned *width,
                                                         unsigned *height,
@@ -83,7 +83,7 @@ unsigned GoTvPtoPAbstractVideoStream::formatCallbackInternal(void **opaque,
     return P_THIS->formatCallback(chroma, width, height, pitches, lines);
 }
 
-void GoTvPtoPAbstractVideoStream::formatCleanUpCallbackInternal(void *opaque)
+void NlcPtoPAbstractVideoStream::formatCleanUpCallbackInternal(void *opaque)
 {
     P_THIS->formatCleanUpCallback();
 }

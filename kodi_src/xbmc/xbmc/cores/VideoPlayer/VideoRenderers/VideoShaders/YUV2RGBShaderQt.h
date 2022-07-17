@@ -22,7 +22,7 @@
 
 #include "utils/TransformMatrix.h"
 #include "ShaderFormats.h"
-#include "GuiInterface/IGoTvRender.h"
+#include "GuiInterface/INlcRender.h"
 
 
 void CalculateYUVMatrixGLES( TransformMatrix&  matrix
@@ -34,14 +34,14 @@ void CalculateYUVMatrixGLES( TransformMatrix&  matrix
 
 #include "guilib/Shader.h"
 
-class IGoTv;
+class INlc;
 
 namespace Shaders {
 
     class BaseYUV2RGBShader
     {
     public:
-        BaseYUV2RGBShader( IGoTv& gotv ) : m_IGoTv( gotv ) {};
+        BaseYUV2RGBShader( INlc& gotv ) : m_INlc( gotv ) {};
         virtual ~BaseYUV2RGBShader() = default;
 
         virtual void            setShaderMethod( ESHADERMETHOD shaderMethod )   { m_ShaderMethod = shaderMethod; };
@@ -64,7 +64,7 @@ namespace Shaders {
 
         virtual void            SetConvertFullColorRange( bool convertFullRange );
 
-        IGoTv&                  m_IGoTv;
+        INlc&                  m_INlc;
         ESHADERMETHOD           m_ShaderMethod;
     };
 
@@ -73,7 +73,7 @@ namespace Shaders {
         : public BaseYUV2RGBShader
     {
     public:
-        BaseYUV2RGBShaderQt(  IGoTv& gotv, unsigned flags, EShaderFormat format );
+        BaseYUV2RGBShaderQt(  INlc& gotv, unsigned flags, EShaderFormat format );
         ~BaseYUV2RGBShaderQt();
         void                    SetField( int field )   { BaseYUV2RGBShader::SetField( field ); }
         void                    SetWidth( int w )       { BaseYUV2RGBShader::SetWidth( w );  }
@@ -137,14 +137,14 @@ namespace Shaders {
     class YUV2RGBProgressiveShaderQt : public BaseYUV2RGBShaderQt
     {
     public:
-        YUV2RGBProgressiveShaderQt(  IGoTv& gotv, unsigned flags = 0,
+        YUV2RGBProgressiveShaderQt(  INlc& gotv, unsigned flags = 0,
                                   EShaderFormat format = SHADER_NONE );
     };
 
     class YUV2RGBBobShaderQt : public BaseYUV2RGBShaderQt
     {
     public:
-        YUV2RGBBobShaderQt( IGoTv& gotv, unsigned flags = 0, EShaderFormat format = SHADER_NONE );
+        YUV2RGBBobShaderQt( INlc& gotv, unsigned flags = 0, EShaderFormat format = SHADER_NONE );
         void                    OnCompiledAndLinked();
         bool                    OnEnabled();
         /*

@@ -51,13 +51,13 @@ BD_DIR_H* CBlurayCallback::dir_open(void *handle, const char* rel_path)
   if (URIUtils::HasSlashAtEnd(strDirname))
     URIUtils::RemoveSlashAtEnd(strDirname);
 
-  CLog::Log(LOGDEBUG, "CBlurayCallback - Opening dir %s\n", GoTvUrl::GetRedacted(strDirname).c_str());
+  CLog::Log(LOGDEBUG, "CBlurayCallback - Opening dir %s\n", NlcUrl::GetRedacted(strDirname).c_str());
 
   SDirState *st = new SDirState();
   if (!CDirectory::GetDirectory(strDirname, st->list, "", DIR_FLAG_DEFAULTS))
   {
     if (!CFile::Exists(strDirname))
-      CLog::Log(LOGDEBUG, "CBlurayCallback - Error opening dir! (%s)\n", GoTvUrl::GetRedacted(strDirname).c_str());
+      CLog::Log(LOGDEBUG, "CBlurayCallback - Error opening dir! (%s)\n", NlcUrl::GetRedacted(strDirname).c_str());
     delete st;
     return nullptr;
   }
@@ -129,7 +129,7 @@ BD_FILE_H * CBlurayCallback::file_open(void *handle, const char *rel_path)
     return file;
   }
 
-  CLog::Log(LOGDEBUG, "CBlurayCallback - Error opening file! (%s)", GoTvUrl::GetRedacted(strFilename).c_str());
+  CLog::Log(LOGDEBUG, "CBlurayCallback - Error opening file! (%s)", NlcUrl::GetRedacted(strFilename).c_str());
 
   delete fp;
   delete file;

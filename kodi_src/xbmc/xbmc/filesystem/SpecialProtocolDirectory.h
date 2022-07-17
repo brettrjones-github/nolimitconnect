@@ -17,9 +17,9 @@ namespace XFILE
   public:
     CSpecialProtocolDirectory(void);
     ~CSpecialProtocolDirectory(void) override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
 
   protected:
-    std::string TranslatePath(const GoTvUrl &url) override;
+    std::string TranslatePath(const NlcUrl &url) override;
   };
 }

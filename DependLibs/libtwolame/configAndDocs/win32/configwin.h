@@ -66,7 +66,7 @@
 
 /* Define to 1 if your processor stores words with the most significant byte
    first (like Motorola and SPARC, unlike Intel and VAX). */
-#undef GOTV_ARCH_BIGENDIAN
+#undef NLC_ARCH_BIGENDIAN
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'NLC_INLINE' is not supported under any name.  */

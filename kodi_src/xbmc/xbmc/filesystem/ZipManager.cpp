@@ -12,7 +12,7 @@
 #include <utility>
 
 #include "File.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "platform/linux/PlatformDefs.h"
 #include "utils/CharsetConverter.h"
 #include "utils/EndianSwap.h"
@@ -28,7 +28,7 @@ CZipManager::CZipManager() = default;
 
 CZipManager::~CZipManager() = default;
 
-bool CZipManager::GetZipList(const GoTvUrl& url, std::vector<SZipEntry>& items)
+bool CZipManager::GetZipList(const NlcUrl& url, std::vector<SZipEntry>& items)
 {
   struct __stat64 m_StatData = {};
 
@@ -216,7 +216,7 @@ bool CZipManager::GetZipList(const GoTvUrl& url, std::vector<SZipEntry>& items)
   return true;
 }
 
-bool CZipManager::GetZipEntry(const GoTvUrl& url, SZipEntry& item)
+bool CZipManager::GetZipEntry(const NlcUrl& url, SZipEntry& item)
 {
   std::string strFile = url.GetHostName();
 
@@ -245,14 +245,14 @@ bool CZipManager::GetZipEntry(const GoTvUrl& url, SZipEntry& item)
 
 bool CZipManager::ExtractArchive(const std::string& strArchive, const std::string& strPath)
 {
-  const GoTvUrl pathToUrl(strArchive);
+  const NlcUrl pathToUrl(strArchive);
   return ExtractArchive(pathToUrl, strPath);
 }
 
-bool CZipManager::ExtractArchive(const GoTvUrl& archive, const std::string& strPath)
+bool CZipManager::ExtractArchive(const NlcUrl& archive, const std::string& strPath)
 {
   std::vector<SZipEntry> entry;
-  GoTvUrl url = URIUtils::CreateArchivePath("zip", archive);
+  NlcUrl url = URIUtils::CreateArchivePath("zip", archive);
   GetZipList(url, entry);
   for (std::vector<SZipEntry>::iterator it=entry.begin();it != entry.end();++it)
   {
@@ -260,8 +260,8 @@ bool CZipManager::ExtractArchive(const GoTvUrl& archive, const std::string& strP
       continue;
     std::string strFilePath(it->name);
 
-    GoTvUrl zipPath = URIUtils::CreateArchivePath("zip", archive, strFilePath);
-    const GoTvUrl pathToUrl(strPath + strFilePath);
+    NlcUrl zipPath = URIUtils::CreateArchivePath("zip", archive, strFilePath);
+    const NlcUrl pathToUrl(strPath + strFilePath);
     if (!CFile::Copy(zipPath, pathToUrl))
       return false;
   }
@@ -307,7 +307,7 @@ void CZipManager::readCHeader(const char* buffer, SZipEntry& info)
 
 void CZipManager::release(const std::string& strPath)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   std::map<std::string, std::vector<SZipEntry> >::iterator it= mZipMap.find(url.GetHostName());
   if (it != mZipMap.end())
   {

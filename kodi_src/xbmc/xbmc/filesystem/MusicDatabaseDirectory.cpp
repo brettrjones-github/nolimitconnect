@@ -26,7 +26,7 @@ CMusicDatabaseDirectory::CMusicDatabaseDirectory(void) = default;
 
 CMusicDatabaseDirectory::~CMusicDatabaseDirectory(void) = default;
 
-bool CMusicDatabaseDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CMusicDatabaseDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string path = CLegacyPathTranslation::TranslateMusicDbPath(url);
   items.SetPath(path);
@@ -111,7 +111,7 @@ void CMusicDatabaseDirectory::ClearDirectoryCache(const std::string& strDirector
 bool CMusicDatabaseDirectory::IsAllItem(const std::string& strDirectory)
 {
   //Last query parameter, ignoring any appended options, is -1
-  GoTvUrl url(strDirectory);
+  NlcUrl url(strDirectory);
   if (StringUtils::EndsWith(url.GetWithoutOptions(), "/-1/"))
     return true;
   return false;
@@ -231,7 +231,7 @@ bool CMusicDatabaseDirectory::ContainsSongs(const std::string &path)
   return false;
 }
 
-bool CMusicDatabaseDirectory::Exists(const GoTvUrl& url)
+bool CMusicDatabaseDirectory::Exists(const NlcUrl& url)
 {
   std::string path = CLegacyPathTranslation::TranslateMusicDbPath(url);
   std::unique_ptr<CDirectoryNode> pNode(CDirectoryNode::ParseURL(path));

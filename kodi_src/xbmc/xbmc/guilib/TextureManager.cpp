@@ -17,7 +17,7 @@
 #include "Texture.h"
 #include "threads/SingleLock.h"
 #include "threads/SystemClock.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -233,7 +233,7 @@ bool CGUITextureManager::CanLoad( const std::string &texturePath )
     if( texturePath.empty() )
         return false;
 
-    if( !GoTvUrl::IsFullPath( texturePath ) )
+    if( !NlcUrl::IsFullPath( texturePath ) )
         return true;  // assume we have it
 
       // we can't (or shouldn't) be loading from remote paths, so check these
@@ -383,7 +383,7 @@ const CTextureArray& CGUITextureManager::Load( const std::string& strTextureName
         if( file.LoadFile( strPath, buf ) <= 0 ||
             !anim.Initialize( ( uint8_t* )buf.get(), buf.size() ) )
         {
-            CLog::Log( LOGERROR, "Texture manager unable to load file: %s", GoTvUrl::GetRedacted( strPath ).c_str() );
+            CLog::Log( LOGERROR, "Texture manager unable to load file: %s", NlcUrl::GetRedacted( strPath ).c_str() );
             file.Close();
             return emptyTexture;
         }
@@ -411,7 +411,7 @@ const CTextureArray& CGUITextureManager::Load( const std::string& strTextureName
             }
             else
             {
-                CLog::Log( LOGDEBUG, "Memory limit (%" PRIu64 " bytes) exceeded, %i frames extracted from file : %s", ( maxMemoryUsage / 11 ) * 12, pMap->GetTexture().size(), GoTvUrl::GetRedacted( strPath ).c_str() );
+                CLog::Log( LOGDEBUG, "Memory limit (%" PRIu64 " bytes) exceeded, %i frames extracted from file : %s", ( maxMemoryUsage / 11 ) * 12, pMap->GetTexture().size(), NlcUrl::GetRedacted( strPath ).c_str() );
                 break;
             }
         }
@@ -618,7 +618,7 @@ void CGUITextureManager::RemoveTexturePath( const std::string &texturePath )
 
 std::string CGUITextureManager::GetTexturePath( const std::string &textureName, bool directory /* = false */ )
 {
-    if( GoTvUrl::IsFullPath( textureName ) )
+    if( NlcUrl::IsFullPath( textureName ) )
         return textureName;
     else
     { // texture doesn't include the full path, so check all fallbacks

@@ -17,7 +17,7 @@
 # define CP_FNAMESEP_STR "/"
 #endif // TARGET_OS_WINDOWS
 
-#define CP_DATADIR GOTV_DEFAULT_DATA_DIR
+#define CP_DATADIR NLC_DEFAULT_DATA_DIR
 
 /* Define to use GNU Libtool libltdl */
 /* #undef DLOPEN_LIBTOOL */

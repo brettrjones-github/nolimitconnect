@@ -22,128 +22,128 @@
 #include "core/MediaPlayer.h"
 #include "core/Video.h"
 
-GoTvPtoPVideo::GoTvPtoPVideo(GoTvPtoPMediaPlayer *player)
+NlcPtoPVideo::NlcPtoPVideo(NlcPtoPMediaPlayer *player)
     : QObject(player),
       _gotvptopMediaPlayer(player->core()) {}
 
-GoTvPtoPVideo::~GoTvPtoPVideo() {}
+NlcPtoPVideo::~NlcPtoPVideo() {}
 
-GoTvPtoP::Ratio GoTvPtoPVideo::aspectRatio() const
+NlcPtoP::Ratio NlcPtoPVideo::aspectRatio() const
 {
     QString ratio = "";
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         ratio = libgotvptop_video_get_aspect_ratio(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
-    return GoTvPtoP::Ratio(GoTvPtoP::ratio().indexOf(ratio));
+    return NlcPtoP::Ratio(NlcPtoP::ratio().indexOf(ratio));
 }
 
-GoTvPtoP::Ratio GoTvPtoPVideo::cropGeometry() const
+NlcPtoP::Ratio NlcPtoPVideo::cropGeometry() const
 {
     QString crop = "";
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         crop = libgotvptop_video_get_crop_geometry(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
-    return GoTvPtoP::Ratio(GoTvPtoP::ratio().indexOf(crop));
+    return NlcPtoP::Ratio(NlcPtoP::ratio().indexOf(crop));
 }
 
-void GoTvPtoPVideo::hideLogo()
+void NlcPtoPVideo::hideLogo()
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_video_set_logo_int(_gotvptopMediaPlayer, libgotvptop_logo_enable, 0);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::hideMarquee()
+void NlcPtoPVideo::hideMarquee()
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_video_set_marquee_int(_gotvptopMediaPlayer, libgotvptop_marquee_Enable, 0);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-GoTvPtoP::Scale GoTvPtoPVideo::scale() const
+NlcPtoP::Scale NlcPtoPVideo::scale() const
 {
     float scale = 0;
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         scale = libgotvptop_video_get_scale(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
-    return GoTvPtoP::Scale(GoTvPtoP::scale().indexOf(scale));
+    return NlcPtoP::Scale(NlcPtoP::scale().indexOf(scale));
 }
 
-void GoTvPtoPVideo::setAspectRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPVideo::setAspectRatio(const NlcPtoP::Ratio &ratio)
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
-        QString ratioOut = ratio == GoTvPtoP::Ignore ? "" : GoTvPtoP::ratio()[ratio];
+        QString ratioOut = ratio == NlcPtoP::Ignore ? "" : NlcPtoP::ratio()[ratio];
         libgotvptop_video_set_aspect_ratio(_gotvptopMediaPlayer, ratioOut.toUtf8().data());
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setCropGeometry(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPVideo::setCropGeometry(const NlcPtoP::Ratio &ratio)
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
-        QString ratioOut = ratio == GoTvPtoP::Ignore ? "" : GoTvPtoP::ratio()[ratio];
+        QString ratioOut = ratio == NlcPtoP::Ignore ? "" : NlcPtoP::ratio()[ratio];
         libgotvptop_video_set_crop_geometry(_gotvptopMediaPlayer, ratioOut.toUtf8().data());
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setDeinterlace(const GoTvPtoP::Deinterlacing &filter)
+void NlcPtoPVideo::setDeinterlace(const NlcPtoP::Deinterlacing &filter)
 {
     if (_gotvptopMediaPlayer) {
-        libgotvptop_video_set_deinterlace(_gotvptopMediaPlayer, GoTvPtoP::deinterlacing()[filter].toUtf8().data());
-        GoTvPtoPError::showErrmsg();
+        libgotvptop_video_set_deinterlace(_gotvptopMediaPlayer, NlcPtoP::deinterlacing()[filter].toUtf8().data());
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setScale(const GoTvPtoP::Scale &scale)
+void NlcPtoPVideo::setScale(const NlcPtoP::Scale &scale)
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
-        libgotvptop_video_set_scale(_gotvptopMediaPlayer, GoTvPtoP::scale()[scale]);
-        GoTvPtoPError::showErrmsg();
+        libgotvptop_video_set_scale(_gotvptopMediaPlayer, NlcPtoP::scale()[scale]);
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setSubtitle(int subtitle)
+void NlcPtoPVideo::setSubtitle(int subtitle)
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_video_set_spu(_gotvptopMediaPlayer, subtitle);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setSubtitleFile(const QString &subtitle)
+void NlcPtoPVideo::setSubtitleFile(const QString &subtitle)
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_video_set_subtitle_file(_gotvptopMediaPlayer, subtitle.toUtf8().data());
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setTeletextPage(int page)
+void NlcPtoPVideo::setTeletextPage(int page)
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_video_set_teletext(_gotvptopMediaPlayer, page);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::setTrack(int track)
+void NlcPtoPVideo::setTrack(int track)
 {
     if (_gotvptopMediaPlayer) {
         libgotvptop_video_set_track(_gotvptopMediaPlayer, track);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-void GoTvPtoPVideo::showLogo(const QString &file,
+void NlcPtoPVideo::showLogo(const QString &file,
                         int x,
                         int y,
                         int opacity)
@@ -158,7 +158,7 @@ void GoTvPtoPVideo::showLogo(const QString &file,
     }
 }
 
-void GoTvPtoPVideo::showMarquee(const QString &text,
+void NlcPtoPVideo::showMarquee(const QString &text,
                            int x,
                            int y,
                            int timeout,
@@ -181,49 +181,49 @@ void GoTvPtoPVideo::showMarquee(const QString &text,
     }
 }
 
-QSize GoTvPtoPVideo::size() const
+QSize NlcPtoPVideo::size() const
 {
     unsigned x = 640;
     unsigned y = 480;
 
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_video_get_size(_gotvptopMediaPlayer, 0, &x, &y);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return QSize(x, y);
 }
 
-int GoTvPtoPVideo::subtitle() const
+int NlcPtoPVideo::subtitle() const
 {
     int subtitle = -1;
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         subtitle = libgotvptop_video_get_spu(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return subtitle;
 }
 
-int GoTvPtoPVideo::subtitleCount() const
+int NlcPtoPVideo::subtitleCount() const
 {
     int count = -1;
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         count = libgotvptop_video_get_spu_count(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return count;
 }
 
-QStringList GoTvPtoPVideo::subtitleDescription() const
+QStringList NlcPtoPVideo::subtitleDescription() const
 {
     QStringList descriptions;
 
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_track_description_t *desc;
         desc = libgotvptop_video_get_spu_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         descriptions << QString().fromUtf8(desc->psz_name);
         if (subtitleCount() > 1) {
@@ -237,14 +237,14 @@ QStringList GoTvPtoPVideo::subtitleDescription() const
     return descriptions;
 }
 
-QList<int> GoTvPtoPVideo::subtitleIds() const
+QList<int> NlcPtoPVideo::subtitleIds() const
 {
     QList<int> ids;
 
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_track_description_t *desc;
         desc = libgotvptop_video_get_spu_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         ids << desc->i_id;
         if (subtitleCount() > 1) {
@@ -258,14 +258,14 @@ QList<int> GoTvPtoPVideo::subtitleIds() const
     return ids;
 }
 
-QMap<int, QString> GoTvPtoPVideo::subtitles() const
+QMap<int, QString> NlcPtoPVideo::subtitles() const
 {
     QMap<int, QString> tracks;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc, *first;
         first = desc = libgotvptop_video_get_spu_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         if (desc != NULL) {
             tracks.insert(desc->i_id, QString().fromUtf8(desc->psz_name));
@@ -282,66 +282,66 @@ QMap<int, QString> GoTvPtoPVideo::subtitles() const
     return tracks;
 }
 
-bool GoTvPtoPVideo::takeSnapshot(const QString &path) const
+bool NlcPtoPVideo::takeSnapshot(const QString &path) const
 {
     bool success = false;
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         success = libgotvptop_video_take_snapshot(_gotvptopMediaPlayer, 0, path.toUtf8().data(), 0, 0) + 1;
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return success;
 }
 
-int GoTvPtoPVideo::teletextPage() const
+int NlcPtoPVideo::teletextPage() const
 {
     int page = -1;
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         page = libgotvptop_video_get_teletext(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return page;
 }
 
-void GoTvPtoPVideo::toggleTeletextTransparency()
+void NlcPtoPVideo::toggleTeletextTransparency()
 {
     if (_gotvptopMediaPlayer && libgotvptop_media_player_has_vout(_gotvptopMediaPlayer)) {
         libgotvptop_toggle_teletext(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 }
 
-int GoTvPtoPVideo::track() const
+int NlcPtoPVideo::track() const
 {
     int track = -1;
     if (_gotvptopMediaPlayer) {
         track = libgotvptop_video_get_track(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return track;
 }
 
-int GoTvPtoPVideo::trackCount() const
+int NlcPtoPVideo::trackCount() const
 {
     int count = -1;
     if (_gotvptopMediaPlayer) {
         count = libgotvptop_video_get_track_count(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
     }
 
     return count;
 }
 
-QStringList GoTvPtoPVideo::trackDescription() const
+QStringList NlcPtoPVideo::trackDescription() const
 {
     QStringList descriptions;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc;
         desc = libgotvptop_video_get_track_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         descriptions << QString().fromUtf8(desc->psz_name);
         if (trackCount() > 1) {
@@ -355,14 +355,14 @@ QStringList GoTvPtoPVideo::trackDescription() const
     return descriptions;
 }
 
-QList<int> GoTvPtoPVideo::trackIds() const
+QList<int> NlcPtoPVideo::trackIds() const
 {
     QList<int> ids;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc;
         desc = libgotvptop_video_get_track_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         ids << desc->i_id;
         if (trackCount() > 1) {
@@ -376,14 +376,14 @@ QList<int> GoTvPtoPVideo::trackIds() const
     return ids;
 }
 
-QMap<int, QString> GoTvPtoPVideo::tracks() const
+QMap<int, QString> NlcPtoPVideo::tracks() const
 {
     QMap<int, QString> tracks;
 
     if (_gotvptopMediaPlayer) {
         libgotvptop_track_description_t *desc, *first;
         first = desc = libgotvptop_video_get_track_description(_gotvptopMediaPlayer);
-        GoTvPtoPError::showErrmsg();
+        NlcPtoPError::showErrmsg();
 
         if (desc != NULL) {
             tracks.insert(desc->i_id, QString().fromUtf8(desc->psz_name));

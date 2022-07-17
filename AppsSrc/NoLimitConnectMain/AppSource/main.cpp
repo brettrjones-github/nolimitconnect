@@ -4,7 +4,7 @@
 #include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
 #include "AppCommonConfig.h"
-#ifdef BUILD_GOTV_APP
+#ifdef BUILD_NLC_APP
 
 #include <AppsSrc/CommonSrc/QtSource/AppCommon.h>
 #include <AppsSrc/CommonSrc/QtSource/HomeWindow.h>
@@ -33,7 +33,7 @@
 #include <CoreLib/VxFileUtil.h>
 #include "AccountMgr.h"
 #include <NetLib/VxPeerMgr.h>
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 
 namespace{
     void setupRootStorageDirectory()
@@ -157,7 +157,7 @@ int main(int argc, char **argv)
     // TODO allow user to change where the data is stored
     setupRootStorageDirectory();
 
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
     gotv.doPreStartup();
 
     GetPtoPEngine(); // engine first.. there is some interdependencies
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
     // send command line parameters to Kodi
 	static CAppParamParser appParamParser;
     appParamParser.Parse( argv, argc );
-    IGoTv::getIGoTv().initRun( appParamParser );
+    INlc::getINlc().initRun( appParamParser );
 #endif // ENABLE_KODI
 
 	int result = 0;
@@ -187,4 +187,4 @@ int main(int argc, char **argv)
 	return result;
 }
 
-#endif // BUILD_GOTV_APP
+#endif // BUILD_NLC_APP

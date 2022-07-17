@@ -13,7 +13,7 @@
 
 #include "ShoutcastFile.h"
 #include "guilib/GUIWindowManager.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/RegExp.h"
 #include "utils/HTMLUtil.h"
 #include "utils/CharsetConverter.h"
@@ -53,9 +53,9 @@ int64_t CShoutcastFile::GetLength()
   return 0;
 }
 
-bool CShoutcastFile::Open(const GoTvUrl& url)
+bool CShoutcastFile::Open(const NlcUrl& url)
 {
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   url2.SetProtocolOptions(url2.GetProtocolOptions()+"&noshout=true&Icy-MetaData=1");
   url2.SetProtocol("http");
 

@@ -17,7 +17,7 @@
 #include "Application.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "cores/DataCacheCore.h"
 #include "filesystem/File.h"
@@ -31,7 +31,7 @@
 #include "settings/SkinSettings.h"
 #include "utils/CharsetConverter.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 
 using namespace KODI::GUILIB;
@@ -9698,13 +9698,13 @@ std::string CGUIInfoManager::GetMultiInfoItemLabel(const CFileItem *item, int co
   case LISTITEM_THUMB:
     return item->GetArt("thumb");
   case LISTITEM_FOLDERPATH:
-        return GoTvUrl(item->GetPath()).GetWithoutUserDetails();
+        return NlcUrl(item->GetPath()).GetWithoutUserDetails();
   case LISTITEM_FOLDERNAME:
   case LISTITEM_PATH:
     {
       std::string path;
         URIUtils::GetParentPath(item->GetPath(), path);
-        path = GoTvUrl(path).GetWithoutUserDetails();
+        path = NlcUrl(path).GetWithoutUserDetails();
         if (info.m_info == LISTITEM_FOLDERNAME)
       {
         URIUtils::RemoveSlashAtEnd(path);
@@ -9715,7 +9715,7 @@ std::string CGUIInfoManager::GetMultiInfoItemLabel(const CFileItem *item, int co
   case LISTITEM_FILENAME_AND_PATH:
     {
         std::string path = item->GetPath();
-        path = GoTvUrl(path).GetWithoutUserDetails();
+        path = NlcUrl(path).GetWithoutUserDetails();
       return path;
     }
   case LISTITEM_SORT_LETTER:

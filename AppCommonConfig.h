@@ -12,7 +12,7 @@
 // define one of the following for which type of application
 //#define BUILD_KODIP2P_APP 1
 //#define BUILD_KODIQT_APP 1
-#define BUILD_GOTV_APP 1
+#define BUILD_NLC_APP 1
 
 //#define ENABLE_ASSERTIONS	0		/* Assertions */
 
@@ -20,7 +20,7 @@
 #define BUILD_REVISION			"1.0"
 
 
-#if defined( BUILD_GOTV_APP )
+#if defined( BUILD_NLC_APP )
 
 # define HAVE_QT_GUI            1 // define if have qt application interface and rendering
 
@@ -46,7 +46,7 @@
 
 #else
 echo you must define your application information
-#endif // BUILD_GOTV_APP
+#endif // BUILD_NLC_APP
 
 
 /* Define to the address where bug reports for this package should be sent. */

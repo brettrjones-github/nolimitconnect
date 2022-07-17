@@ -625,7 +625,7 @@
 #define HAVE_WCWIDTH 1
 
 /* Define if you have the 'wint_t' type. */
-//#define HAVE_WINT_T 1 defined in GoTvCompileConfig.h
+//#define HAVE_WINT_T 1 defined in NlcCompileConfig.h
 
 /* Define to 1 if O_NOATIME works. */
 #define HAVE_WORKING_O_NOATIME 0
@@ -4747,11 +4747,11 @@ STACK_DIRECTION = 0 => direction of growth unknown */
 #define G_STMT_START
 #define G_STMT_END
 
-#if GOTV_ARCH_BIG_ENDIAN
+#if NLC_ARCH_BIG_ENDIAN
 # define G_BYTE_ORDER 4321 // for little endian us 1234 and for big endian use 4321
 #else
 # define G_BYTE_ORDER 1234 // for little endian us 1234 and for big endian use 4321
-#endif // GOTV_ARCH_BIG_ENDIAN
+#endif // NLC_ARCH_BIG_ENDIAN
 
 #ifdef TARGET_OS_WINDOWS
 #define G_OS_WIN32 1

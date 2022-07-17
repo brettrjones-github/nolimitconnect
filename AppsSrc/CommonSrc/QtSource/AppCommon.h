@@ -45,8 +45,8 @@
 #include "ToGuiThumbUpdateInterface.h"
 
 #include "GuiInterface/IToGui.h"
-#include "GuiInterface/IGoTvRender.h"
-#include "GuiInterface/IGoTvEvents.h"
+#include "GuiInterface/INlcRender.h"
+#include "GuiInterface/INlcEvents.h"
 #include "GuiInterface/IAudioInterface.h"
 
 #include <QComboBox>
@@ -78,7 +78,7 @@ class FriendListEntryWidget;
 class FileListReplySession;
 class GuiFileXferSession;
 class GuiOfferSession;
-class IGoTv;
+class INlc;
 class IVxVidCap;
 class KodiThread;
 class PopupMenu;
@@ -91,7 +91,7 @@ class VxTilePositioner;
 // media
 class CRenderBuffer;
 
-class AppCommon : public QWidget, public IToGui, public IGoTvRender, public IGoTvEvents, public IAudioRequests, public IAudioCallbacks
+class AppCommon : public QWidget, public IToGui, public INlcRender, public INlcEvents, public IAudioRequests, public IAudioCallbacks
 {
 	Q_OBJECT
 
@@ -100,7 +100,7 @@ public:
 				EDefaultAppMode appDefaultMode,
 				AppSettings&    appSettings,
 				AccountMgr&     myDataHelper,
-				IGoTv&		    gotv );
+				INlc&		    gotv );
     AppCommon( const AppCommon& rhs ) = delete;
 	virtual ~AppCommon() override = default;
 
@@ -131,7 +131,7 @@ public:
     QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
     P2PEngine&                  getEngine( void );
     IFromGui&					getFromGuiInterface( void );
-    IGoTv&				        getGoTv( void )						        { return m_GoTv; }
+    INlc&				        getNlc( void )						        { return m_Nlc; }
     HomeWindow&					getHomePage( void )							{ return m_HomePage; }
     bool						getIsVidCaptureEnabled( void )				{ return m_VidCaptureEnabled; }
     bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
@@ -278,10 +278,10 @@ public:
     bool                        loadToGPU( CQtTexture * texture ) override;
     void                        bindToUnit( CQtTexture * texture, unsigned int unit ) override;
 
-    void                        beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color ) override;
-    void                        drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const GoTvRect& texture, const GoTvRect& diffuse, int orientation ) override;
+    void                        beginGuiTexture( CGUITextureQt * guiTexture, NlcColor color ) override;
+    void                        drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const NlcRect& texture, const NlcRect& diffuse, int orientation ) override;
     void                        endGuiTexture( CGUITextureQt * guiTexture ) override;
-    void                        drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords ) override;
+    void                        drawQuad( const NlcRect &rect, NlcColor color, CBaseTexture * texture, const NlcRect * texCoords ) override;
 
     bool                        firstBegin( CGUIFontTTFQt * font )  override;
     void                        lastEnd( CGUIFontTTFQt * font ) override;
@@ -295,7 +295,7 @@ public:
     virtual void                destroyStaticVertexBuffers( CGUIFontTTFQt * font )  override;
 
     //=== render ===//
-    void                        captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& captureArea ) override;
+    void                        captureScreen( CScreenshotSurface * screenCaptrue, NlcRect& captureArea ) override;
 
     void                        toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* videoBuffer );
     bool                        initRenderSystem() override;
@@ -307,24 +307,24 @@ public:
     bool                        beginRender() override;
     bool                        endRender() override;
     void                        presentRender( bool rendered, bool videoLayer ) override;
-    bool                        clearBuffers( GoTvColor color ) override;
+    bool                        clearBuffers( NlcColor color ) override;
     bool                        isExtSupported( const char* extension ) override;
 
     void                        setVSync( bool vsync ) override;
     void                        resetVSync() override {  }
 
-    void                        setViewPort( const GoTvRect& viewPort ) override;
-    void                        getViewPort( GoTvRect& viewPort ) override;
+    void                        setViewPort( const NlcRect& viewPort ) override;
+    void                        getViewPort( NlcRect& viewPort ) override;
 
     bool                        scissorsCanEffectClipping() override;
-    GoTvRect                    clipRectToScissorRect( const GoTvRect &rect ) override;
-    void                        setScissors( const GoTvRect& rect ) override;
+    NlcRect                    clipRectToScissorRect( const NlcRect &rect ) override;
+    void                        setScissors( const NlcRect& rect ) override;
     void                        resetScissors() override;
 
     void                        captureStateBlock() override;
     void                        applyStateBlock() override;
 
-    void                        setCameraPosition( const GoTvPoint &camera, int screenWidth, int screenHeight, float stereoFactor = 0.0f ) override;
+    void                        setCameraPosition( const NlcPoint &camera, int screenWidth, int screenHeight, float stereoFactor = 0.0f ) override;
 
     void                        applyHardwareTransform( const TransformMatrix &matrix ) override;
     void                        restoreHardwareTransform() override;
@@ -863,7 +863,7 @@ protected:
     QString						m_AppShortName;
     QString						m_AppTitle;
     AccountMgr&				    m_AccountMgr;
-    IGoTv&                      m_GoTv;
+    INlc&                      m_Nlc;
 	VxPeerMgr&					m_VxPeerMgr;
     GuiConnectIdListMgr			m_ConnectIdListMgr;
     GuiFavoriteMgr			    m_FavoriteMgr;
@@ -939,7 +939,7 @@ protected:
 //    KodiThread *                m_KodiThread;
 };
 
-AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp );
+AppCommon& CreateAppInstance( INlc& gotv, QApplication* myApp );
 
 AppCommon& GetAppInstance( void );
 

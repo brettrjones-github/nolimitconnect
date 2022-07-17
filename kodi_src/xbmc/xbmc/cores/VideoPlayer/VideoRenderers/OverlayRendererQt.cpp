@@ -42,7 +42,7 @@
 #include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "utils/GLUtils.h"
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 #if HAS_GLES >= 2
  // GLES2.0 cant do CLAMP, but can do CLAMP_TO_EDGE.
@@ -64,7 +64,7 @@ static void LoadTexture( GLenum target
     int height2 = height;
     char *pixelVector = nullptr;
     const GLvoid *pixelData = pixels;
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
 #ifdef HAS_GLES
     /** OpenGL ES does not support BGR so use RGB and swap later **/
@@ -163,7 +163,7 @@ static void LoadTexture( GLenum target
 
 COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
     m_texture = 0;
 
@@ -237,7 +237,7 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
 
 COverlayTextureQt::COverlayTextureQt( CDVDOverlaySpu* o )
 {
-    //IGoTv& gotv = IGoTv::getIGoTv();
+    //INlc& gotv = INlc::getINlc();
     m_texture = 0;
 
     int min_x, max_x, min_y, max_y;
@@ -281,7 +281,7 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlaySpu* o )
 
 COverlayGlyphQt::COverlayGlyphQt( ASS_Image* images, int width, int height )
 {
-    //IGoTv& gotv = IGoTv::getIGoTv();
+    //INlc& gotv = INlc::getINlc();
 
     m_vertex = nullptr;
     m_width = 1.0;
@@ -365,7 +365,7 @@ COverlayGlyphQt::COverlayGlyphQt( ASS_Image* images, int width, int height )
 
 COverlayGlyphQt::~COverlayGlyphQt()
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
     gotv.glFuncDeleteTextures( 1, &m_texture );
     free( m_vertex );
@@ -373,7 +373,7 @@ COverlayGlyphQt::~COverlayGlyphQt()
 
 void COverlayGlyphQt::Render( SRenderState& state )
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
     if( ( m_texture == 0 ) || ( m_count == 0 ) )
         return;
@@ -529,14 +529,14 @@ void COverlayGlyphQt::Render( SRenderState& state )
 
 COverlayTextureQt::~COverlayTextureQt()
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
     gotv.glFuncDeleteTextures( 1, &m_texture );
 }
 
 void COverlayTextureQt::Render( SRenderState& state )
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
 
     gotv.glFuncEnable( GL_BLEND );
 

@@ -26,7 +26,7 @@
 #include "TextureDatabase.h"
 #include "video/VideoThumbLoader.h"
 #include "music/MusicThumbLoader.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "pvr/channels/PVRChannel.h"
 #include "pvr/epg/Epg.h"
 #include "pvr/recordings/PVRRecording.h"

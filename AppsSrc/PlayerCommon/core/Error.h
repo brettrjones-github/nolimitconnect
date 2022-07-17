@@ -22,13 +22,13 @@
 #include "SharedExportCore.h"
 
 /*!
-    \class GoTvPtoPError Error.h core/Error.h
+    \class NlcPtoPError Error.h core/Error.h
     \ingroup GOTVQtCore
 	\brief Error handler
 
 	A basic error handler for GOTV-Qt library.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPError
+class GOTVQT_CORE_EXPORT NlcPtoPError
 {
 public:
     /*!

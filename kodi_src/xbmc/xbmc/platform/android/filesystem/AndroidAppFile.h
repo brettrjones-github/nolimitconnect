@@ -10,7 +10,7 @@
 
 #if defined(TARGET_OS_ANDROID)
 #include "filesystem/IFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "string.h"
 
 namespace XFILE
@@ -21,9 +21,9 @@ public:
   /*! \brief Currently only used for retrieving App Icons. */
   CFileAndroidApp(void);
   virtual ~CFileAndroidApp(void);
-  virtual bool Open(const GoTvUrl& url);
-  virtual bool Exists(const GoTvUrl& url);
-  virtual int Stat(const GoTvUrl& url, struct __stat64* buffer);
+  virtual bool Open(const NlcUrl& url);
+  virtual bool Exists(const NlcUrl& url);
+  virtual int Stat(const NlcUrl& url, struct __stat64* buffer);
 
   /*! \brief Return 32bit rgba raw bitmap. */
   virtual ssize_t Read(void* lpBuf, size_t uiBufSize) {return 0;}
@@ -37,10 +37,10 @@ public:
   virtual unsigned int ReadIcon(unsigned char **lpBuf, unsigned int* width, unsigned int* height);
 
 protected:
-  bool IsValidFile(const GoTvUrl& url);
+  bool IsValidFile(const NlcUrl& url);
 
 private:
-  GoTvUrl           m_url;
+  NlcUrl           m_url;
   std::string       m_packageName;
   std::string       m_packageLabel;
   int               m_icon;

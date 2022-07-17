@@ -34,7 +34,7 @@
 #include "core/MediaPlayer.h"
 #include "widgets/WidgetVolumeSlider.h"
 
-GoTvPtoPWidgetVolumeSlider::GoTvPtoPWidgetVolumeSlider(GoTvPtoPMediaPlayer *player,
+NlcPtoPWidgetVolumeSlider::NlcPtoPWidgetVolumeSlider(NlcPtoPMediaPlayer *player,
                                              QWidget *parent)
     : QSlider(parent),
       _gotvptopAudio(player->audio()),
@@ -43,7 +43,7 @@ GoTvPtoPWidgetVolumeSlider::GoTvPtoPWidgetVolumeSlider(GoTvPtoPMediaPlayer *play
     initWidgetVolumeSlider();
 }
 
-GoTvPtoPWidgetVolumeSlider::GoTvPtoPWidgetVolumeSlider(QWidget *parent)
+NlcPtoPWidgetVolumeSlider::NlcPtoPWidgetVolumeSlider(QWidget *parent)
     : QSlider(parent),
       _gotvptopAudio(0),
       _gotvptopMediaPlayer(0)
@@ -51,12 +51,12 @@ GoTvPtoPWidgetVolumeSlider::GoTvPtoPWidgetVolumeSlider(QWidget *parent)
     initWidgetVolumeSlider();
 }
 
-GoTvPtoPWidgetVolumeSlider::~GoTvPtoPWidgetVolumeSlider()
+NlcPtoPWidgetVolumeSlider::~NlcPtoPWidgetVolumeSlider()
 {
     delete _timer;
 }
 
-void GoTvPtoPWidgetVolumeSlider::initWidgetVolumeSlider()
+void NlcPtoPWidgetVolumeSlider::initWidgetVolumeSlider()
 {
     _lock = false;
 
@@ -66,21 +66,21 @@ void GoTvPtoPWidgetVolumeSlider::initWidgetVolumeSlider()
     connect(this, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
 }
 
-void GoTvPtoPWidgetVolumeSlider::mousePressEvent(QMouseEvent *event)
+void NlcPtoPWidgetVolumeSlider::mousePressEvent(QMouseEvent *event)
 {
     event->ignore();
 
     lock();
 }
 
-void GoTvPtoPWidgetVolumeSlider::mouseReleaseEvent(QMouseEvent *event)
+void NlcPtoPWidgetVolumeSlider::mouseReleaseEvent(QMouseEvent *event)
 {
     event->ignore();
 
     unlock();
 }
 
-void GoTvPtoPWidgetVolumeSlider::setMediaPlayer(GoTvPtoPMediaPlayer *player)
+void NlcPtoPWidgetVolumeSlider::setMediaPlayer(NlcPtoPMediaPlayer *player)
 {
     _gotvptopAudio = player->audio();
     _gotvptopMediaPlayer = player;
@@ -88,21 +88,21 @@ void GoTvPtoPWidgetVolumeSlider::setMediaPlayer(GoTvPtoPMediaPlayer *player)
     _timer->start(100);
 }
 
-bool GoTvPtoPWidgetVolumeSlider::mute() const
+bool NlcPtoPWidgetVolumeSlider::mute() const
 {
-    if (!(_gotvptopMediaPlayer->state() == GoTvPtoP::Buffering
-          || _gotvptopMediaPlayer->state() == GoTvPtoP::Playing
-          || _gotvptopMediaPlayer->state() == GoTvPtoP::Paused))
+    if (!(_gotvptopMediaPlayer->state() == NlcPtoP::Buffering
+          || _gotvptopMediaPlayer->state() == NlcPtoP::Playing
+          || _gotvptopMediaPlayer->state() == NlcPtoP::Paused))
         return false;
     else
         return _gotvptopAudio->getMute();
 }
 
-void GoTvPtoPWidgetVolumeSlider::setMute(bool enabled)
+void NlcPtoPWidgetVolumeSlider::setMute(bool enabled)
 {
-    if (!(_gotvptopMediaPlayer->state() == GoTvPtoP::Buffering
-          || _gotvptopMediaPlayer->state() == GoTvPtoP::Playing
-          || _gotvptopMediaPlayer->state() == GoTvPtoP::Paused))
+    if (!(_gotvptopMediaPlayer->state() == NlcPtoP::Buffering
+          || _gotvptopMediaPlayer->state() == NlcPtoP::Playing
+          || _gotvptopMediaPlayer->state() == NlcPtoP::Paused))
         return;
 
     if (!enabled) {
@@ -116,7 +116,7 @@ void GoTvPtoPWidgetVolumeSlider::setMute(bool enabled)
     _gotvptopAudio->toggleMute();
 }
 
-void GoTvPtoPWidgetVolumeSlider::setVolume(int volume)
+void NlcPtoPWidgetVolumeSlider::setVolume(int volume)
 {
     if (_currentVolume == volume)
         return;
@@ -131,7 +131,7 @@ void GoTvPtoPWidgetVolumeSlider::setVolume(int volume)
     unlock();
 }
 
-void GoTvPtoPWidgetVolumeSlider::updateVolume()
+void NlcPtoPWidgetVolumeSlider::updateVolume()
 {
     if (_lock)
         return;
@@ -139,18 +139,18 @@ void GoTvPtoPWidgetVolumeSlider::updateVolume()
     if (!_gotvptopMediaPlayer)
         return;
 
-    if (_gotvptopMediaPlayer->state() == GoTvPtoP::Buffering
-        || _gotvptopMediaPlayer->state() == GoTvPtoP::Playing
-        || _gotvptopMediaPlayer->state() == GoTvPtoP::Paused)
+    if (_gotvptopMediaPlayer->state() == NlcPtoP::Buffering
+        || _gotvptopMediaPlayer->state() == NlcPtoP::Playing
+        || _gotvptopMediaPlayer->state() == NlcPtoP::Paused)
         _gotvptopAudio->setVolume(_currentVolume);
 }
 
-int GoTvPtoPWidgetVolumeSlider::volume() const
+int NlcPtoPWidgetVolumeSlider::volume() const
 {
     return _currentVolume;
 }
 
-void GoTvPtoPWidgetVolumeSlider::volumeControl(bool up)
+void NlcPtoPWidgetVolumeSlider::volumeControl(bool up)
 {
     if (up) {
         if (_currentVolume != 200) {
@@ -163,12 +163,12 @@ void GoTvPtoPWidgetVolumeSlider::volumeControl(bool up)
     }
 }
 
-void GoTvPtoPWidgetVolumeSlider::lock()
+void NlcPtoPWidgetVolumeSlider::lock()
 {
     _lock = true;
 }
 
-void GoTvPtoPWidgetVolumeSlider::unlock()
+void NlcPtoPWidgetVolumeSlider::unlock()
 {
     _lock = false;
 }

@@ -20,6 +20,6 @@ class CFileDirectoryFactory
 public:
   CFileDirectoryFactory(void);
   virtual ~CFileDirectoryFactory(void);
-  static IFileDirectory* Create(const GoTvUrl& url, CFileItem* pItem, const std::string& strMask="");
+  static IFileDirectory* Create(const NlcUrl& url, CFileItem* pItem, const std::string& strMask="");
 };
 }

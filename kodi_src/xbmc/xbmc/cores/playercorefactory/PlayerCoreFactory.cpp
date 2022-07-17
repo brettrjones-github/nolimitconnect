@@ -11,7 +11,7 @@
 #include "cores/paplayer/PAPlayer.h"
 #include "cores/IPlayerCallback.h"
 #include "dialogs/GUIDialogContextMenu.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #include "profiles/ProfileManager.h"
 #include "settings/lib/SettingsManager.h"
@@ -96,9 +96,9 @@ void CPlayerCoreFactory::GetPlayers(std::vector<std::string>&players, const bool
 
 void CPlayerCoreFactory::GetPlayers(const CFileItem& item, std::vector<std::string>&players) const
 {
-  GoTvUrl url(item.GetPath());
+  NlcUrl url(item.GetPath());
 
-  CLog::Log(LOGDEBUG, "CPlayerCoreFactory::GetPlayers(%s)", GoTvUrl::GetRedacted(item.GetDynPath()).c_str());
+  CLog::Log(LOGDEBUG, "CPlayerCoreFactory::GetPlayers(%s)", NlcUrl::GetRedacted(item.GetDynPath()).c_str());
 
   std::vector<std::string>validPlayers;
   GetPlayers(validPlayers);

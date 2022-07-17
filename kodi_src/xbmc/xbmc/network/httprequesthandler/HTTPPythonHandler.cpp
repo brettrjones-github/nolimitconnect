@@ -7,7 +7,7 @@
  */
 
 #include "HTTPPythonHandler.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "addons/Webinterface.h"
 #include "interfaces/generic/ScriptInvocationManager.h"
 #include "interfaces/python/XBPython.h"
@@ -77,7 +77,7 @@ CHTTPPythonHandler::CHTTPPythonHandler(const HTTPRequest &request)
     return;
 
   // determine the last modified date
-  const GoTvUrl pathToUrl(m_scriptPath);
+  const NlcUrl pathToUrl(m_scriptPath);
   struct __stat64 statBuffer;
   if (XFILE::CFile::Stat(pathToUrl, &statBuffer) != 0)
     return;

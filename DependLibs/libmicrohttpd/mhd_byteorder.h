@@ -141,7 +141,7 @@
 #elif defined(_WIN32)
 /* W32 is always little endian on all platforms */
 #define _MHD_BYTE_ORDER _MHD_LITTLE_ENDIAN
-#elif defined(GOTV_ARCH_BIGENDIAN)
+#elif defined(NLC_ARCH_BIGENDIAN)
 /* Use byte order detected by configure */
 #define _MHD_BYTE_ORDER _MHD_BIG_ENDIAN
 #endif /* _WIN32 */
@@ -150,11 +150,11 @@
 
 #ifdef _MHD_BYTE_ORDER
 /* Some safety checks */
-#if GOTV_ARCH_BIGENDIAN && _MHD_BYTE_ORDER != _MHD_BIG_ENDIAN
+#if NLC_ARCH_BIGENDIAN && _MHD_BYTE_ORDER != _MHD_BIG_ENDIAN
 #error Configure detected big endian byte order but headers specify different byte order
-#elif !GOTV_ARCH_BIGENDIAN && _MHD_BYTE_ORDER == _MHD_BIG_ENDIAN
+#elif !NLC_ARCH_BIGENDIAN && _MHD_BYTE_ORDER == _MHD_BIG_ENDIAN
 #error Configure did not detect big endian byte order but headers specify big endian byte order
-#endif /* !GOTV_ARCH_BIGENDIAN && _MHD_BYTE_ORDER == _MHD_BIG_ENDIAN */
+#endif /* !NLC_ARCH_BIGENDIAN && _MHD_BYTE_ORDER == _MHD_BIG_ENDIAN */
 #endif /* _MHD_BYTE_ORDER */
 
 #endif /* !MHD_BYTEORDER_H */

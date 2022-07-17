@@ -10,7 +10,7 @@
 
 #include "Directory.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 class  DllLibbluray;
 typedef struct bluray BLURAY;
@@ -24,7 +24,7 @@ class CBlurayDirectory: public XFILE::IDirectory
 public:
   CBlurayDirectory();
   ~CBlurayDirectory() override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
 
   bool InitializeBluray(const std::string &root);
   std::string GetBlurayTitle();
@@ -43,9 +43,9 @@ private:
   void         GetTitles(bool main, CFileItemList &items);
   std::vector<BLURAY_TITLE_INFO*> GetUserPlaylists();
   CFileItemPtr GetTitle(const BLURAY_TITLE_INFO* title, const std::string& label);
-  GoTvUrl         GetUnderlyingCURL(const GoTvUrl& url);
+  NlcUrl         GetUnderlyingCURL(const NlcUrl& url);
   std::string  HexToString(const uint8_t * buf, int count);
-  GoTvUrl          m_url;
+  NlcUrl          m_url;
   DllLibbluray* m_dll = nullptr;
   BLURAY*       m_bd = nullptr;
   bool          m_blurayInitialized = false;

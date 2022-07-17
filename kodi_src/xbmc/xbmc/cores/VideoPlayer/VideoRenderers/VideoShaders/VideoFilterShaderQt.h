@@ -24,16 +24,16 @@
 
 #include "guilib/Shader.h"
 #include "cores/VideoSettings.h"
-#include "GuiInterface/IGoTvRender.h"
+#include "GuiInterface/INlcRender.h"
 
-class IGoTv;
+class INlc;
 
 namespace Shaders {
 
     class BaseVideoFilterShaderQt
     {
     public:
-        BaseVideoFilterShaderQt( IGoTv& gotv );
+        BaseVideoFilterShaderQt( INlc& gotv );
 
         virtual void            setShaderMethod( ESHADERMETHOD shaderMethod ) { m_ShaderMethod = shaderMethod; };
         virtual ESHADERMETHOD   getShaderMethod() { return m_ShaderMethod; };
@@ -55,7 +55,7 @@ namespace Shaders {
         virtual void Free( )                                { }
 
     protected:
-        IGoTv&                  m_IGoTv;
+        INlc&                  m_INlc;
         ESHADERMETHOD           m_ShaderMethod;
         bool                    m_floattex; //if float textures are supported
 
@@ -85,7 +85,7 @@ namespace Shaders {
     class ConvolutionFilterShaderQt : public BaseVideoFilterShaderQt
     {
     public:
-        ConvolutionFilterShaderQt( IGoTv& gotv, ESCALINGMETHOD method );
+        ConvolutionFilterShaderQt( INlc& gotv, ESCALINGMETHOD method );
         ~ConvolutionFilterShaderQt();
         void OnCompiledAndLinked();
         bool OnEnabled() ;
@@ -109,7 +109,7 @@ namespace Shaders {
     class DefaultFilterShaderQt : public BaseVideoFilterShaderQt
     {
     public:
-        DefaultFilterShaderQt( IGoTv& gotv ) : BaseVideoFilterShaderQt( gotv ) {}
+        DefaultFilterShaderQt( INlc& gotv ) : BaseVideoFilterShaderQt( gotv ) {}
         void OnCompiledAndLinked();
         bool OnEnabled();
     };

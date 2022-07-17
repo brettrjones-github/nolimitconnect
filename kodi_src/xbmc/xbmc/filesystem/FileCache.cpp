@@ -10,7 +10,7 @@
 #include "FileCache.h"
 #include "threads/Thread.h"
 #include "File.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 
 #include "CircularCache.h"
@@ -145,7 +145,7 @@ IFile *CFileCache::GetFileImp()
   return m_source.GetImplementation();
 }
 
-bool CFileCache::Open(const GoTvUrl& url)
+bool CFileCache::Open(const NlcUrl& url)
 {
   Close();
 
@@ -453,12 +453,12 @@ void CFileCache::OnExit()
   m_seekEnded.Set();
 }
 
-bool CFileCache::Exists(const GoTvUrl& url)
+bool CFileCache::Exists(const NlcUrl& url)
 {
   return CFile::Exists(url.Get());
 }
 
-int CFileCache::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CFileCache::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   return CFile::Stat(url.Get(), buffer);
 }

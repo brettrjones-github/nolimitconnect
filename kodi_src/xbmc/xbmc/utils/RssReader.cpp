@@ -12,7 +12,7 @@
 #include "ServiceBroker.h"
 #include "utils/HTMLUtil.h"
 #include "CharsetConverter.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "filesystem/CurlFile.h"
 #if defined(TARGET_DARWIN)
@@ -130,7 +130,7 @@ void CRssReader::Process()
     lock.Leave();
 
     int nRetries = 3;
-    GoTvUrl url(strUrl);
+    NlcUrl url(strUrl);
     std::string fileCharset;
 
     // we wait for the network to come up

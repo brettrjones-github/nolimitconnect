@@ -13,7 +13,7 @@
 
 #include "PlayListPLS.h"
 #include "PlayListFactory.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 #include "filesystem/File.h"
 #include "video/VideoInfoTag.h"

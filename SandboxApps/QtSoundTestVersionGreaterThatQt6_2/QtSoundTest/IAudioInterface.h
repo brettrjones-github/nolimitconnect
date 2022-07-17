@@ -14,7 +14,7 @@
 #pragma once
 
 
-#include "IGoTvDefs.h"
+#include "INlcDefs.h"
 #include "AudioDefs.h"
 
 #include <QAudioFormat>

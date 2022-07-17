@@ -159,7 +159,7 @@ protected:
   virtual void OnDeleteItem(int iItem);
   void OnRenameItem(int iItem);
   bool WaitForNetwork() const;
-  bool GetDirectoryItems( GoTvUrl& url, CFileItemList &items, bool useDir);
+  bool GetDirectoryItems( NlcUrl& url, CFileItemList &items, bool useDir);
   bool WaitGetDirectoryItems(CGetDirectoryItems &items);
   void CancelUpdateItems();
 

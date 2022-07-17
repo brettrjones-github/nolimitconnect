@@ -29,7 +29,7 @@
 
 #include "widgets/ControlAudio.h"
 
-GoTvPtoPControlAudio::GoTvPtoPControlAudio(GoTvPtoPMediaPlayer *player,
+NlcPtoPControlAudio::NlcPtoPControlAudio(NlcPtoPMediaPlayer *player,
                                  const QString &language,
                                  QObject *parent)
     : QObject(parent),
@@ -49,12 +49,12 @@ GoTvPtoPControlAudio::GoTvPtoPControlAudio(GoTvPtoPMediaPlayer *player,
     _timer->start(1000);
 }
 
-GoTvPtoPControlAudio::~GoTvPtoPControlAudio()
+NlcPtoPControlAudio::~NlcPtoPControlAudio()
 {
     delete _timer;
 }
 
-void GoTvPtoPControlAudio::clean()
+void NlcPtoPControlAudio::clean()
 {
     qDeleteAll(_actionList);
     _actionList.clear();
@@ -62,12 +62,12 @@ void GoTvPtoPControlAudio::clean()
     _id.clear();
 }
 
-void GoTvPtoPControlAudio::reset()
+void NlcPtoPControlAudio::reset()
 {
     _timer->start(1000);
 }
 
-void GoTvPtoPControlAudio::update()
+void NlcPtoPControlAudio::update()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (!action)
@@ -78,12 +78,12 @@ void GoTvPtoPControlAudio::update()
     _gotvptopAudio->setTrack(id);
 }
 
-void GoTvPtoPControlAudio::updateActions()
+void NlcPtoPControlAudio::updateActions()
 {
     clean();
 
-    if (!(_gotvptopMediaPlayer->state() == GoTvPtoP::Playing || _gotvptopMediaPlayer->state() == GoTvPtoP::Paused)) {
-        emit actions(_actionList, GoTvPtoP::AudioTrack);
+    if (!(_gotvptopMediaPlayer->state() == NlcPtoP::Playing || _gotvptopMediaPlayer->state() == NlcPtoP::Paused)) {
+        emit actions(_actionList, NlcPtoP::AudioTrack);
         emit audioTracks(_actionList);
         return;
     }
@@ -97,7 +97,7 @@ void GoTvPtoPControlAudio::updateActions()
             _actionList << new QAction(desc[i], this);
         }
     } else {
-        emit actions(_actionList, GoTvPtoP::AudioTrack);
+        emit actions(_actionList, NlcPtoP::AudioTrack);
         emit audioTracks(_actionList);
         _timer->start(1000);
         return;
@@ -119,13 +119,13 @@ void GoTvPtoPControlAudio::updateActions()
 
     _actionList[_id[_gotvptopAudio->track()]]->setChecked(true);
 
-    emit actions(_actionList, GoTvPtoP::AudioTrack);
+    emit actions(_actionList, NlcPtoP::AudioTrack);
     emit audioTracks(_actionList);
 
     _timer->start(60000);
 }
 
-void GoTvPtoPControlAudio::setDefaultAudioLanguage(const QString &language)
+void NlcPtoPControlAudio::setDefaultAudioLanguage(const QString &language)
 {
     _preferedLanguage = language.split(" / ");
 }

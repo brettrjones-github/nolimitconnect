@@ -25,8 +25,8 @@
 
 #include "AndroidAppFile.h"
 #include "platform/android/activity/XBMCApp.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 using namespace XFILE;
@@ -42,7 +42,7 @@ CFileAndroidApp::~CFileAndroidApp(void)
   Close();
 }
 
-bool CFileAndroidApp::Open(const GoTvUrl& url)
+bool CFileAndroidApp::Open(const NlcUrl& url)
 {
   m_url = url;
   m_packageName =  URIUtils::GetFileName(url.Get());
@@ -62,7 +62,7 @@ bool CFileAndroidApp::Open(const GoTvUrl& url)
   return false;
 }
 
-bool CFileAndroidApp::Exists(const GoTvUrl& url)
+bool CFileAndroidApp::Exists(const NlcUrl& url)
 {
   std::string appname =  URIUtils::GetFileName(url.Get());
   appname = appname.substr(0, appname.size() - 4);
@@ -159,7 +159,7 @@ int CFileAndroidApp::GetChunkSize()
 {
   return 0;
 }
-int CFileAndroidApp::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CFileAndroidApp::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   return 0;
 }

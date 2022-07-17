@@ -35,7 +35,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/EndianSwap.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
@@ -355,7 +355,7 @@ char session[]="Kodi-AirTunes";
 void* CAirTunesServer::AudioOutputFunctions::audio_init(void *cls, int bits, int channels, int samplerate)
 {
   XFILE::CPipeFile *pipe=(XFILE::CPipeFile *)cls;
-  const GoTvUrl pathToUrl(XFILE::PipesManager::GetInstance().GetUniquePipeName());
+  const NlcUrl pathToUrl(XFILE::PipesManager::GetInstance().GetUniquePipeName());
   pipe->OpenForWrite(pathToUrl);
   pipe->SetOpenThreshold(300);
 

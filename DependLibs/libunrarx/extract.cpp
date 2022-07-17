@@ -1,5 +1,5 @@
 #include "rar.hpp"
-#include <kodi_src/xbmc/xbmc/GoTvCoreUtil.h>
+#include <kodi_src/xbmc/xbmc/NlcCoreUtil.h>
 
 // a cautious wrapper around strncpy
 char *strncpy_null_terminated(char *dest, const char *src, size_t n)

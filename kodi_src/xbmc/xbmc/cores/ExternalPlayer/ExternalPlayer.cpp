@@ -19,7 +19,7 @@
 #include "utils/RegExp.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/XMLUtils.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
@@ -133,7 +133,7 @@ void CExternalPlayer::Process()
   if (m_args.find("{0}") == std::string::npos)
   {
     // Unwind archive names
-    GoTvUrl url(m_launchFilename);
+    NlcUrl url(m_launchFilename);
     if (url.IsProtocol("zip") || url.IsProtocol("rar") /* || url.IsProtocol("iso9660") ??*/ || url.IsProtocol("udf"))
     {
       mainFile = url.GetHostName();
@@ -143,7 +143,7 @@ void CExternalPlayer::Process()
       mainFile = CMusicDatabaseFile::TranslateUrl(url);
     if (url.IsProtocol("bluray"))
     {
-      GoTvUrl base(url.GetHostName());
+      NlcUrl base(url.GetHostName());
       if (base.IsProtocol("udf"))
       {
         mainFile = base.GetHostName(); /* image file */

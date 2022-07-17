@@ -16,7 +16,7 @@
 
 
 #include "filesystem/IFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "threads/CriticalSection.h"
 
 #define NT_STATUS_CONNECTION_REFUSED long(0xC0000000 | 0x0236)
@@ -40,7 +40,7 @@ public:
   void AddActiveConnection();
   void AddIdleConnection();
   std::string URLEncode(const std::string &value);
-  std::string URLEncode(const GoTvUrl& url);
+  std::string URLEncode(const NlcUrl& url);
 
   DWORD ConvertUnixToNT(int error);
 private:
@@ -60,30 +60,30 @@ class CSMBFile : public IFile
 {
 public:
   CSMBFile();
-  int OpenFile(const GoTvUrl& url, std::string& strAuth);
+  int OpenFile(const NlcUrl& url, std::string& strAuth);
   ~CSMBFile() override;
   void Close() override;
   int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;
   ssize_t Read(void* lpBuf, size_t uiBufSize) override;
-  bool Open(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override;
-  int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+  bool Open(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
+  int Stat(const NlcUrl& url, struct __stat64* buffer) override;
   int Stat(struct __stat64* buffer) override;
   int Truncate(int64_t size) override;
   int64_t GetLength() override;
   int64_t GetPosition() override;
   ssize_t Write(const void* lpBuf, size_t uiBufSize) override;
 
-  bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) override;
-  bool Delete(const GoTvUrl& url) override;
-  bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) override;
+  bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) override;
+  bool Delete(const NlcUrl& url) override;
+  bool Rename(const NlcUrl& url, const NlcUrl& urlnew) override;
   int GetChunkSize() override { return 2048*1024; }
   int IoControl(EIoControl request, void* param) override;
 
 protected:
   CURL m_url;
   bool IsValidFile(const std::string& strFileName);
-  std::string GetAuthenticatedPath(const GoTvUrl& url);
+  std::string GetAuthenticatedPath(const NlcUrl& url);
   int64_t m_fileSize;
   int m_fd;
   bool m_allowRetry;

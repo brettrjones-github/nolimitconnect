@@ -80,7 +80,7 @@ void VP8LoadNewBytes(VP8BitReader* const br) {
     memcpy(&in_bits, br->buf_, sizeof(in_bits));
 #endif
     br->buf_ += BITS >> 3;
-#if !defined(GOTV_ARCH_BIGENDIAN)
+#if !defined(NLC_ARCH_BIGENDIAN)
 #if (BITS > 32)
     bits = BSwap64(in_bits);
     bits >>= 64 - BITS;
@@ -92,7 +92,7 @@ void VP8LoadNewBytes(VP8BitReader* const br) {
 #else   // BITS == 8
     bits = (bit_t)in_bits;
 #endif  // BITS > 32
-#else    // GOTV_ARCH_BIGENDIAN
+#else    // NLC_ARCH_BIGENDIAN
     bits = (bit_t)in_bits;
     if (BITS != 8 * sizeof(bit_t)) bits >>= (8 * sizeof(bit_t) - BITS);
 #endif

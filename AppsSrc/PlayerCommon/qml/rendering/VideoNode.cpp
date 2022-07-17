@@ -4,7 +4,7 @@
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 * Copyright (C) 2011 Harald Sitter <sitter@kde.org>
 *
-* This file is based on QmlGoTvPtoP and Phonon multimedia library
+* This file is based on QmlNlcPtoP and Phonon multimedia library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -29,7 +29,7 @@ VideoNode::VideoNode()
     setMaterial(&_material);
 }
 
-void VideoNode::setFrame(const std::shared_ptr<const GoTvPtoPYUVVideoFrame> &frame)
+void VideoNode::setFrame(const std::shared_ptr<const NlcPtoPYUVVideoFrame> &frame)
 {
     _material.setFrame(frame);
     markDirty(QSGNode::DirtyMaterial);

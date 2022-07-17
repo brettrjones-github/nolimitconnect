@@ -30,11 +30,11 @@
  */
 
 /*!
-    \namespace GoTvPtoPCommon Common.h core/Common.h
+    \namespace NlcPtoPCommon Common.h core/Common.h
     \ingroup GOTVQtCore
 	\brief Common functions
 */
-namespace GoTvPtoPCommon
+namespace NlcPtoPCommon
 {
     /*!
 		\brief Common libgotvptop arguments

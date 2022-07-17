@@ -10,8 +10,8 @@
  */
 #include "UDFDirectory.h"
 #include "udf25.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #include "utils/URIUtils.h"
 
@@ -21,11 +21,11 @@ CUDFDirectory::CUDFDirectory(void) = default;
 
 CUDFDirectory::~CUDFDirectory(void) = default;
 
-bool CUDFDirectory::GetDirectory(const GoTvUrl& url,
+bool CUDFDirectory::GetDirectory(const NlcUrl& url,
                                  CFileItemList &items)
 {
   std::string strRoot, strSub;
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   if (!url2.IsProtocol("udf"))
   { // path to an image
     url2.Reset();
@@ -80,7 +80,7 @@ bool CUDFDirectory::GetDirectory(const GoTvUrl& url,
   return true;
 }
 
-bool CUDFDirectory::Exists(const GoTvUrl& url)
+bool CUDFDirectory::Exists(const NlcUrl& url)
 {
   CFileItemList items;
   if (GetDirectory(url, items))

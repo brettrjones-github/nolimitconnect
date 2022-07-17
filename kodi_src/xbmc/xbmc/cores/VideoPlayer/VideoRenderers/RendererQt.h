@@ -37,7 +37,7 @@ class CRenderCapture;
 class CRenderSystemQt;
 
 class CBaseTexture;
-class IGoTv;
+class INlc;
 
 namespace Shaders { class BaseYUV2RGBShaderQt; }
 namespace Shaders { class BaseVideoFilterShaderQt; }
@@ -175,7 +175,7 @@ protected:
         float width, height;
     } m_fbo;
 
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
     int                         m_iYV12RenderBuffer;
     int                         m_NumYV12Buffers;
 

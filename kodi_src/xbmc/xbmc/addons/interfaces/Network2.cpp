@@ -11,7 +11,7 @@
 #include "addons/kodi-addon-dev-kit/include/kodi/Network.h"
 
 #include "PasswordManager.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "addons/binary-addons/AddonDll.h"
 #include "network/DNSNameCache.h"
 #include "network/Network.h"
@@ -105,7 +105,7 @@ char* Interface_Network::url_encode(void* kodiBase, const char* url)
     return nullptr;
   }
 
-  std::string string = GoTvUrl::Encode(url);
+  std::string string = NlcUrl::Encode(url);
   char* buffer = nullptr;
   if (!string.empty())
     buffer = strdup(string.c_str());

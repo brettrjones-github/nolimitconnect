@@ -605,7 +605,7 @@ int get_win_urls(const CERT_CONTEXT *cert, char **cert_url, char **key_url,
 	char name[MAX_CN*2];
 	char hex[MAX_WID_SIZE*2+1];
 	gnutls_buffer_st str;
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 	const unsigned bigendian = 1;
 #else
 	const unsigned bigendian = 0;

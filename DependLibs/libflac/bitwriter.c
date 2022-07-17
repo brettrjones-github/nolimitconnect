@@ -52,7 +52,7 @@ typedef FLAC__uint32 bwword;
 #define FLAC__BYTES_PER_WORD 4		/* sizeof bwword */
 #define FLAC__BITS_PER_WORD 32
 /* SWAP_BE_WORD_TO_HOST swaps bytes in a bwword (which is always big-endian) if necessary to match host byte order */
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
 #define SWAP_BE_WORD_TO_HOST(x) (x)
 #else
 #define SWAP_BE_WORD_TO_HOST(x) ENDSWAP_32(x)
@@ -64,7 +64,7 @@ typedef FLAC__uint64 bwword;
 #define FLAC__BYTES_PER_WORD 8		/* sizeof bwword */
 #define FLAC__BITS_PER_WORD 64
 /* SWAP_BE_WORD_TO_HOST swaps bytes in a bwword (which is always big-endian) if necessary to match host byte order */
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
 #define SWAP_BE_WORD_TO_HOST(x) (x)
 #else
 #define SWAP_BE_WORD_TO_HOST(x) ENDSWAP_64(x)

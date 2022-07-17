@@ -111,6 +111,12 @@ public:
 	void						setSoundOutDeviceIndex( int32_t deviceIndex );
 	int32_t						getSoundOutDeviceIndex( void );
 
+	bool						getRunOnStartupCamServer( void );
+	void						setRunOnStartupCamServer( bool runOnStartup );
+
+	bool						getRunOnStartupFileShareServer( void );
+	void						setRunOnStartupFileShareServer( bool runOnStartup );
+
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );

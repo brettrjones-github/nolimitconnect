@@ -11,7 +11,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace MUSIC_INFO;
 using namespace XFILE;
@@ -20,7 +20,7 @@ CMusicFileDirectory::CMusicFileDirectory(void) = default;
 
 CMusicFileDirectory::~CMusicFileDirectory(void) = default;
 
-bool CMusicFileDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CMusicFileDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string strPath=url.Get();
 
@@ -49,12 +49,12 @@ bool CMusicFileDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CMusicFileDirectory::Exists(const GoTvUrl& url)
+bool CMusicFileDirectory::Exists(const NlcUrl& url)
 {
   return true;
 }
 
-bool CMusicFileDirectory::ContainsFiles(const GoTvUrl &url)
+bool CMusicFileDirectory::ContainsFiles(const NlcUrl &url)
 {
   const std::string pathToUrl(url.Get());
   if (GetTrackCount(pathToUrl) > 1)

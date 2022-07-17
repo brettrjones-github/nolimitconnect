@@ -24,35 +24,35 @@
 class QProgressBar;
 
 /*!
-    \class GoTvPtoPWidgetSeekProgress WidgetSeekProgress.h GOTVQtWidgets/WidgetSeekProgress.h
+    \class NlcPtoPWidgetSeekProgress WidgetSeekProgress.h GOTVQtWidgets/WidgetSeekProgress.h
     \ingroup GOTVQtWidgets
     \brief Seek widget
 
     This is one of GOTV-Qt GUI classes.
     It provides a display of elapsed time and full time of the media using a progress bar.
 */
-class GoTvPtoPWidgetSeekProgress : public GoTvPtoPWidgetSeek
+class NlcPtoPWidgetSeekProgress : public NlcPtoPWidgetSeek
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPWidgetSeekProgress constructor
+        \brief NlcPtoPWidgetSeekProgress constructor
         \param player media player
         \param parent seek widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetSeekProgress(GoTvPtoPMediaPlayer *player,
+    explicit NlcPtoPWidgetSeekProgress(NlcPtoPMediaPlayer *player,
                                    QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetSeekProgress constructor
+        \brief NlcPtoPWidgetSeekProgress constructor
         \param parent seek widget's parent GUI widget
     */
-    explicit GoTvPtoPWidgetSeekProgress(QWidget *parent = 0);
+    explicit NlcPtoPWidgetSeekProgress(QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetSeekProgress destructor
+        \brief NlcPtoPWidgetSeekProgress destructor
     */
-    ~GoTvPtoPWidgetSeekProgress();
+    ~NlcPtoPWidgetSeekProgress();
 
 protected:
     /*!

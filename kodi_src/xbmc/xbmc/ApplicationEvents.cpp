@@ -31,8 +31,8 @@
 #include "utils/Variant.h"
 #include "LangInfoKodi.h"
 #include "utils/Screenshot.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/TextureManager.h"
 #include "cores/IPlayer.h"
@@ -219,7 +219,7 @@
 #include "utils/CharsetConverter.h"
 #include "pictures/GUIWindowSlideShow.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 #include "windowing/qt/WinSystemQt.h"
 

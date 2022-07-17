@@ -8,7 +8,7 @@
 
 #include "HTTPDirectory.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "CurlFile.h"
 #include "FileItem.h"
 #include "utils/RegExp.h"
@@ -26,7 +26,7 @@ using namespace XFILE;
 CHTTPDirectory::CHTTPDirectory(void) = default;
 CHTTPDirectory::~CHTTPDirectory(void) = default;
 
-bool CHTTPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CHTTPDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   CCurlFile http;
 
@@ -106,7 +106,7 @@ bool CHTTPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
       std::string strLinkTemp = strLinkBase;
 
       URIUtils::RemoveSlashAtEnd(strLinkTemp);
-      strLinkTemp = GoTvUrl::Decode(strLinkTemp);
+      strLinkTemp = NlcUrl::Decode(strLinkTemp);
       if (fileCharset.empty())
         g_charsetConverter.unknownToUTF8(strLinkTemp);
       g_charsetConverter.utf8ToW(strLinkTemp, wLink, false);
@@ -123,7 +123,7 @@ bool CHTTPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
       {
         CFileItemPtr pItem(new CFileItem(strNameTemp));
         pItem->SetProperty("IsHTTPDirectory", true);
-        GoTvUrl url2(url);
+        NlcUrl url2(url);
 
         /* NOTE: Force any &...; encoding (e.g. &amp;) into % encoding else CURL objects interpret them incorrectly
          * due to the ; also being allowed as URL option separator
@@ -235,7 +235,7 @@ bool CHTTPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CHTTPDirectory::Exists(const GoTvUrl &url)
+bool CHTTPDirectory::Exists(const NlcUrl &url)
 {
   CCurlFile http;
   struct __stat64 buffer;

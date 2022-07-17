@@ -18,9 +18,9 @@ class CFileCDDA : public IFile
 public:
   CFileCDDA(void);
   ~CFileCDDA(void) override;
-  bool Open(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override;
-  int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+  bool Open(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
+  int Stat(const NlcUrl& url, struct __stat64* buffer) override;
 
   ssize_t Read(void* lpBuf, size_t uiBufSize) override;
   int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;
@@ -30,8 +30,8 @@ public:
   int GetChunkSize() override;
 
 protected:
-  bool IsValidFile(const GoTvUrl& url);
-  int GetTrackNum(const GoTvUrl& url);
+  bool IsValidFile(const NlcUrl& url);
+  int GetTrackNum(const NlcUrl& url);
 
 protected:
   CdIo_t* m_pCdIo;

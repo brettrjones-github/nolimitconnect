@@ -18,7 +18,7 @@ class CISO9660Directory :
 public:
   CISO9660Directory(void);
   ~CISO9660Directory(void) override;
-  bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-  bool Exists(const GoTvUrl& url) override;
+  bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+  bool Exists(const NlcUrl& url) override;
 };
 }

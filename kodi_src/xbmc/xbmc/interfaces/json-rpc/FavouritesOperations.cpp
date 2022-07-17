@@ -9,9 +9,9 @@
 #include "FavouritesOperations.h"
 #include "favourites/FavouritesService.h"
 #include "input/WindowTranslator.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "guilib/WindowIDs.h"
@@ -44,8 +44,8 @@ JSONRPC_STATUS CFavouritesOperations::GetFavourites(const std::string &method, I
     std::vector<std::string> parameters;
 
     //FIXME: this path is internal to the favourites system and should not be parsed and exposed
-    GoTvUrl url(item->GetPath());
-    std::string internalPath = GoTvUrl::Decode(url.GetHostName());
+    NlcUrl url(item->GetPath());
+    std::string internalPath = NlcUrl::Decode(url.GetHostName());
 
     CUtil::SplitExecFunction(internalPath, function, parameters);
     if (parameters.empty())

@@ -14,7 +14,7 @@
 #define HAVE_UNISTD_H 1
 
 /* whether byteorder is bigendian */
-#define GOTV_ARCH_BIGENDIAN
+#define NLC_ARCH_BIGENDIAN
 
 /* Define to specify how much context to retain around the current parse
    point. */

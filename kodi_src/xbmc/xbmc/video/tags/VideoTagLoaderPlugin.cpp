@@ -8,7 +8,7 @@
 
 #include "VideoTagLoaderPlugin.h"
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/PluginDirectory.h"
 
 using namespace XFILE;
@@ -38,7 +38,7 @@ CInfoScanner::INFO_TYPE CVideoTagLoaderPlugin::Load(CVideoInfoTag& tag, bool, st
     // In case of force refresh call our plugin with option "kodi_action=refresh_info"
     // Plugin must do all refreshing work at specified path and return directory containing one ListItem with video tag and art
     // We cannot obtain all info from setResolvedUrl, because CPluginDirectory::GetPluginResult doesn't copy full art
-    GoTvUrl url(m_item.GetPath());
+    NlcUrl url(m_item.GetPath());
     url.SetOption("kodi_action", "refresh_info");
     CPluginDirectory plugin;
     CFileItemList items;

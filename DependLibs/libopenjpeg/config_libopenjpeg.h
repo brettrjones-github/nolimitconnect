@@ -36,7 +36,7 @@
 #endif
 #endif
 
-#define OPJ_BIG_ENDIAN  GOTV_ARCH_BIG_ENDIAN
+#define OPJ_BIG_ENDIAN  NLC_ARCH_BIG_ENDIAN
 
 /*--------------------------------------------------------------------------*/
 /* OpenJPEG Versioning                                                      */

@@ -105,8 +105,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletTheme:					    return eMyIconTheme;
 
 	case ePluginAppletCamProvider:		    return eMyIconCamStreamProvider;
-	case ePluginAppletGoTvStation:		    return eMyIconGoTvStation;
-	case ePluginAppletGoTvNetworkHost:	    return eMyIconServiceHostNetwork;
+	case ePluginAppletNlcStation:		    return eMyIconNlcStation;
+	case ePluginAppletNlcNetworkHost:	    return eMyIconServiceHostNetwork;
     case eAppletUserIdentity:			    return eMyIconUserIdentity;
 
     case eAppletShareServicesPage:          return eMyIconShareServices;
@@ -301,8 +301,8 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsVoicePhone:         return QObject::tr( "Voice Only Phone Call Settings" );
 
 	case ePluginAppletCamProvider:		    return QObject::tr( "Provide Cam Stream" );
-	case ePluginAppletGoTvStation:		    return QObject::tr( "Manage Station" );
-	case ePluginAppletGoTvNetworkHost:	    return QObject::tr( "Manage Station Network Host" );
+	case ePluginAppletNlcStation:		    return QObject::tr( "Manage Station" );
+	case ePluginAppletNlcNetworkHost:	    return QObject::tr( "Manage Station Network Host" );
 
     case eAppletPeerChangeFriendship:	    return QObject::tr( "Change Friendship" );
     case eAppletPeerReplyOfferFile:         return QObject::tr( "Reply Offer File" );

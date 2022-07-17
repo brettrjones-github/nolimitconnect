@@ -116,7 +116,7 @@ std::string CDVDInputStreamFFmpeg::GetProxyPassword() const
 
 std::string CDVDInputStreamFFmpeg::GetFileName()
 {
-  GoTvUrl url = GetURL();
+  NlcUrl url = GetURL();
   // rtmp options
   if (url.IsProtocol("rtmp")  || url.IsProtocol("rtmpt")  ||
       url.IsProtocol("rtmpe") || url.IsProtocol("rtmpte") ||

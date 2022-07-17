@@ -13,10 +13,10 @@
 #include "PlatformDefs.h"
 #include "ConvUtils.h"
 #endif
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/log.h"
 #include "SpecialProtocol.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #if defined(TARGET_POSIX)
 #include "platform/posix/filesystem/PosixFile.h"
 #define CacheLocalFile CPosixFile
@@ -74,7 +74,7 @@ int CSimpleFileCache::Open()
     return CACHE_RC_ERROR;
   }
 
-  GoTvUrl fileURL(m_filename);
+  NlcUrl fileURL(m_filename);
 
   if (!m_cacheFileWrite->OpenForWrite(fileURL, false))
   {
@@ -103,7 +103,7 @@ void CSimpleFileCache::Close()
   m_cacheFileWrite->Close();
   m_cacheFileRead->Close();
 
-  if (!m_filename.empty() && !m_cacheFileRead->Delete(GoTvUrl(m_filename)))
+  if (!m_filename.empty() && !m_cacheFileRead->Delete(NlcUrl(m_filename)))
     CLog::LogF(LOGWARNING, "failed to delete temporary file \"%s\"", m_filename.c_str());
 
   m_filename.clear();

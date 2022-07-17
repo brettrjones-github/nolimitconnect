@@ -30,7 +30,7 @@
 #include "core/Equalizer.h"
 #endif
 
-GoTvPtoPMediaPlayer::GoTvPtoPMediaPlayer(GoTvPtoPInstance *instance)
+NlcPtoPMediaPlayer::NlcPtoPMediaPlayer(NlcPtoPInstance *instance)
     : QObject(instance)
 {
     _gotvptopMediaPlayer = libgotvptop_media_player_new(instance->core());
@@ -40,12 +40,12 @@ GoTvPtoPMediaPlayer::GoTvPtoPMediaPlayer(GoTvPtoPInstance *instance)
     libgotvptop_video_set_key_input(_gotvptopMediaPlayer, false);
     libgotvptop_video_set_mouse_input(_gotvptopMediaPlayer, false);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    _gotvptopAudio = new GoTvPtoPAudio(this);
-    _gotvptopVideo = new GoTvPtoPVideo(this);
+    _gotvptopAudio = new NlcPtoPAudio(this);
+    _gotvptopVideo = new NlcPtoPVideo(this);
 #if LIBNO_LIMIT_VERSION >= 0x020200
-    _gotvptopEqualizer = new GoTvPtoPEqualizer(this);
+    _gotvptopEqualizer = new NlcPtoPEqualizer(this);
 #endif
 
     _videoWidget = 0;
@@ -53,10 +53,10 @@ GoTvPtoPMediaPlayer::GoTvPtoPMediaPlayer(GoTvPtoPInstance *instance)
 
     createCoreConnections();
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-GoTvPtoPMediaPlayer::~GoTvPtoPMediaPlayer()
+NlcPtoPMediaPlayer::~NlcPtoPMediaPlayer()
 {
     removeCoreConnections();
 
@@ -68,32 +68,32 @@ GoTvPtoPMediaPlayer::~GoTvPtoPMediaPlayer()
 
     libgotvptop_media_player_release(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-libgotvptop_media_player_t *GoTvPtoPMediaPlayer::core() const
+libgotvptop_media_player_t *NlcPtoPMediaPlayer::core() const
 {
     return _gotvptopMediaPlayer;
 }
 
-GoTvPtoPAudio *GoTvPtoPMediaPlayer::audio() const
+NlcPtoPAudio *NlcPtoPMediaPlayer::audio() const
 {
     return _gotvptopAudio;
 }
 
-GoTvPtoPVideo *GoTvPtoPMediaPlayer::video() const
+NlcPtoPVideo *NlcPtoPMediaPlayer::video() const
 {
     return _gotvptopVideo;
 }
 
 #if LIBNO_LIMIT_VERSION >= 0x020200
-GoTvPtoPEqualizer *GoTvPtoPMediaPlayer::equalizer() const
+NlcPtoPEqualizer *NlcPtoPMediaPlayer::equalizer() const
 {
     return _gotvptopEqualizer;
 }
 #endif
 
-void GoTvPtoPMediaPlayer::createCoreConnections()
+void NlcPtoPMediaPlayer::createCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaPlayerMediaChanged
@@ -121,7 +121,7 @@ void GoTvPtoPMediaPlayer::createCoreConnections()
     }
 }
 
-void GoTvPtoPMediaPlayer::removeCoreConnections()
+void NlcPtoPMediaPlayer::removeCoreConnections()
 {
     QList<libgotvptop_event_e> list;
     list << libgotvptop_MediaPlayerMediaChanged
@@ -149,7 +149,7 @@ void GoTvPtoPMediaPlayer::removeCoreConnections()
     }
 }
 
-bool GoTvPtoPMediaPlayer::hasVout() const
+bool NlcPtoPMediaPlayer::hasVout() const
 {
     bool status = false;
     if (_gotvptopMediaPlayer) {
@@ -159,48 +159,48 @@ bool GoTvPtoPMediaPlayer::hasVout() const
     return status;
 }
 
-int GoTvPtoPMediaPlayer::length() const
+int NlcPtoPMediaPlayer::length() const
 {
     libgotvptop_time_t length = libgotvptop_media_player_get_length(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return length;
 }
 
-GoTvPtoPMedia *GoTvPtoPMediaPlayer::currentMedia() const
+NlcPtoPMedia *NlcPtoPMediaPlayer::currentMedia() const
 {
     return _media;
 }
 
-libgotvptop_media_t *GoTvPtoPMediaPlayer::currentMediaCore()
+libgotvptop_media_t *NlcPtoPMediaPlayer::currentMediaCore()
 {
     libgotvptop_media_t *media = libgotvptop_media_player_get_media(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return media;
 }
 
-void GoTvPtoPMediaPlayer::open(GoTvPtoPMedia *media)
+void NlcPtoPMediaPlayer::open(NlcPtoPMedia *media)
 {
     _media = media;
     libgotvptop_media_player_set_media(_gotvptopMediaPlayer, media->core());
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     play();
 }
 
-void GoTvPtoPMediaPlayer::openOnly(GoTvPtoPMedia *media)
+void NlcPtoPMediaPlayer::openOnly(NlcPtoPMedia *media)
 {
     _media = media;
     libgotvptop_media_player_set_media(_gotvptopMediaPlayer, media->core());
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::play()
+void NlcPtoPMediaPlayer::play()
 {
     if (!_gotvptopMediaPlayer)
         return;
@@ -224,10 +224,10 @@ void GoTvPtoPMediaPlayer::play()
 
     libgotvptop_media_player_play(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::pause()
+void NlcPtoPMediaPlayer::pause()
 {
     if (!_gotvptopMediaPlayer)
         return;
@@ -235,10 +235,10 @@ void GoTvPtoPMediaPlayer::pause()
     if (libgotvptop_media_player_can_pause(_gotvptopMediaPlayer))
         libgotvptop_media_player_set_pause(_gotvptopMediaPlayer, true);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::togglePause()
+void NlcPtoPMediaPlayer::togglePause()
 {
     if (!_gotvptopMediaPlayer)
         return;
@@ -246,10 +246,10 @@ void GoTvPtoPMediaPlayer::togglePause()
     if (libgotvptop_media_player_can_pause(_gotvptopMediaPlayer))
         libgotvptop_media_player_pause(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::resume()
+void NlcPtoPMediaPlayer::resume()
 {
     if (!_gotvptopMediaPlayer)
         return;
@@ -257,57 +257,57 @@ void GoTvPtoPMediaPlayer::resume()
     if (libgotvptop_media_player_can_pause(_gotvptopMediaPlayer))
         libgotvptop_media_player_set_pause(_gotvptopMediaPlayer, false);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::setTime(int time)
+void NlcPtoPMediaPlayer::setTime(int time)
 {
-    if (!(state() == GoTvPtoP::Buffering
-          || state() == GoTvPtoP::Playing
-          || state() == GoTvPtoP::Paused))
+    if (!(state() == NlcPtoP::Buffering
+          || state() == NlcPtoP::Playing
+          || state() == NlcPtoP::Paused))
         return;
 
     libgotvptop_media_player_set_time(_gotvptopMediaPlayer, time);
 
-    if (state() == GoTvPtoP::Paused)
+    if (state() == NlcPtoP::Paused)
         emit timeChanged(time);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::setVideoWidget(GoTvPtoPVideoDelegate *widget)
+void NlcPtoPMediaPlayer::setVideoWidget(NlcPtoPVideoDelegate *widget)
 {
     _videoWidget = widget;
 }
 
-bool GoTvPtoPMediaPlayer::seekable() const
+bool NlcPtoPMediaPlayer::seekable() const
 {
     if (!libgotvptop_media_player_get_media(_gotvptopMediaPlayer))
         return false;
 
     bool seekable = libgotvptop_media_player_is_seekable(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return seekable;
 }
 
-GoTvPtoP::State GoTvPtoPMediaPlayer::state() const
+NlcPtoP::State NlcPtoPMediaPlayer::state() const
 {
     // It's possible that the gotvptop doesn't play anything
     // so check before
     if (!libgotvptop_media_player_get_media(_gotvptopMediaPlayer))
-        return GoTvPtoP::Idle;
+        return NlcPtoP::Idle;
 
     libgotvptop_state_t state;
     state = libgotvptop_media_player_get_state(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
-    return GoTvPtoP::State(state);
+    return NlcPtoP::State(state);
 }
 
-void GoTvPtoPMediaPlayer::stop()
+void NlcPtoPMediaPlayer::stop()
 {
     if (!_gotvptopMediaPlayer)
         return;
@@ -318,27 +318,27 @@ void GoTvPtoPMediaPlayer::stop()
 
     libgotvptop_media_player_stop(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-int GoTvPtoPMediaPlayer::time() const
+int NlcPtoPMediaPlayer::time() const
 {
     libgotvptop_time_t time = libgotvptop_media_player_get_time(_gotvptopMediaPlayer);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 
     return time;
 }
 
-GoTvPtoPVideoDelegate *GoTvPtoPMediaPlayer::videoWidget() const
+NlcPtoPVideoDelegate *NlcPtoPMediaPlayer::videoWidget() const
 {
     return _videoWidget;
 }
 
-void GoTvPtoPMediaPlayer::libgotvptop_callback(const libgotvptop_event_t *event,
+void NlcPtoPMediaPlayer::libgotvptop_callback(const libgotvptop_event_t *event,
                                      void *data)
 {
-    GoTvPtoPMediaPlayer *core = static_cast<GoTvPtoPMediaPlayer *>(data);
+    NlcPtoPMediaPlayer *core = static_cast<NlcPtoPMediaPlayer *>(data);
 
     switch (event->type) {
     case libgotvptop_MediaPlayerMediaChanged:
@@ -409,7 +409,7 @@ void GoTvPtoPMediaPlayer::libgotvptop_callback(const libgotvptop_event_t *event,
     }
 }
 
-float GoTvPtoPMediaPlayer::position()
+float NlcPtoPMediaPlayer::position()
 {
     if (!_gotvptopMediaPlayer)
         return -1;
@@ -417,7 +417,7 @@ float GoTvPtoPMediaPlayer::position()
     return libgotvptop_media_player_get_position(_gotvptopMediaPlayer);
 }
 
-float GoTvPtoPMediaPlayer::sampleAspectRatio()
+float NlcPtoPMediaPlayer::sampleAspectRatio()
 {
     if (!_gotvptopMediaPlayer)
         return 0.0;
@@ -445,21 +445,21 @@ float GoTvPtoPMediaPlayer::sampleAspectRatio()
 #endif // LIBNO_LIMIT_VERSION >= 0x020100
 }
 
-void GoTvPtoPMediaPlayer::setPosition(float pos)
+void NlcPtoPMediaPlayer::setPosition(float pos)
 {
     libgotvptop_media_player_set_position(_gotvptopMediaPlayer, pos);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-void GoTvPtoPMediaPlayer::setPlaybackRate(float rate)
+void NlcPtoPMediaPlayer::setPlaybackRate(float rate)
 {
     libgotvptop_media_player_set_rate(_gotvptopMediaPlayer, rate);
 
-    GoTvPtoPError::showErrmsg();
+    NlcPtoPError::showErrmsg();
 }
 
-float GoTvPtoPMediaPlayer::playbackRate()
+float NlcPtoPMediaPlayer::playbackRate()
 {
     if (!_gotvptopMediaPlayer)
         return -1;

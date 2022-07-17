@@ -17,7 +17,7 @@
 #include "platform/win32/WIN32Util.h"
 #include "rendering/dx/RenderContext.h"
 #include "rendering/dx/DeviceResources.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/log.h"
 
 #include <DirectXPackedVector.h>

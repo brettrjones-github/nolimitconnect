@@ -12,7 +12,7 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/Directory.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -256,7 +256,7 @@ bool CPVRRecordings::GetDirectory(const std::string& strPath, CFileItemList &ite
   CSingleLock lock(m_critSection);
 
   bool bGrouped = false;
-  const GoTvUrl url(strPath);
+  const NlcUrl url(strPath);
   if (url.HasOption("view"))
   {
     const std::string view(url.GetOption("view"));

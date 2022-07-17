@@ -14,7 +14,7 @@
 #include <libUPnP/Platinum/Source/Devices/MediaServer/PltSyncMediaBrowser.h>
 
 #include "UPnPDirectory.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "network/upnp/UPnP.h"
 #include "network/upnp/UPnPInternal.h"
 #include "FileItem.h"
@@ -101,7 +101,7 @@ static bool FindDeviceWait(CUPnP* upnp, const char* uuid, PLT_DeviceDataReferenc
 |   CUPnPDirectory::GetFriendlyName
 +---------------------------------------------------------------------*/
 const char*
-CUPnPDirectory::GetFriendlyName(const GoTvUrl& url)
+CUPnPDirectory::GetFriendlyName(const NlcUrl& url)
 {
     NPT_String path = url.Get().c_str();
     if (!path.EndsWith("/")) path += "/";
@@ -131,7 +131,7 @@ CUPnPDirectory::GetFriendlyName(const GoTvUrl& url)
 /*----------------------------------------------------------------------
 |   CUPnPDirectory::GetDirectory
 +---------------------------------------------------------------------*/
-bool CUPnPDirectory::GetResource(const GoTvUrl& path, CFileItem &item)
+bool CUPnPDirectory::GetResource(const NlcUrl& path, CFileItem &item)
 {
     if (!CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_SERVICES_UPNP))
       return false;
@@ -146,7 +146,7 @@ bool CUPnPDirectory::GetResource(const GoTvUrl& path, CFileItem &item)
     std::string uuid   = path.GetHostName();
     std::string object = path.GetFileName();
     StringUtils::TrimRight(object, "/");
-    object = GoTvUrl::Decode(object);
+    object = NlcUrl::Decode(object);
 
     PLT_DeviceDataReference device;
     if(!FindDeviceWait(upnp, uuid.c_str(), device)) {
@@ -177,7 +177,7 @@ bool CUPnPDirectory::GetResource(const GoTvUrl& path, CFileItem &item)
 |   CUPnPDirectory::GetDirectory
 +---------------------------------------------------------------------*/
 bool
-CUPnPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+CUPnPDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
     if (!CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_SERVICES_UPNP))
       return false;
@@ -222,7 +222,7 @@ CUPnPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
         NPT_String object_id = (next_slash==-1)?"":path.SubString(next_slash+1);
         object_id.TrimRight("/");
         if (object_id.GetLength()) {
-            object_id = GoTvUrl::Decode((char*)object_id).c_str();
+            object_id = NlcUrl::Decode((char*)object_id).c_str();
         }
 
         // try to find the device with wait on startup
@@ -328,7 +328,7 @@ CUPnPDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
             else
                 id = (const char*) (*entry)->m_ReferenceID;
 
-            id = GoTvUrl::Encode(id);
+            id = NlcUrl::Encode(id);
             URIUtils::AddSlashAtEnd(id);
             pItem->SetPath(std::string((const char*) "upnp://" + uuid + "/" + id.c_str()));
 

@@ -27,7 +27,7 @@
 
 #define ILOG_LEVEL_RELEASE ILOG_LEVEL_ERROR // change this to change what default log level is when building release
 
-class IGoTv;
+class INlc;
 
 class ILog
 {

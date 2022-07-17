@@ -15,7 +15,7 @@
 #include "ServiceBroker.h"
 #include "StereoscopicsManager.h"
 #include "TextureManager.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "dialogs/GUIDialogYesNo.h"
 
 CGUIComponent::CGUIComponent()
@@ -95,7 +95,7 @@ bool CGUIComponent::ConfirmDelete(std::string path)
   {
     pDialog->SetHeading(CVariant{122});
     pDialog->SetLine(0, CVariant{125});
-    pDialog->SetLine(1, CVariant{GoTvUrl(path).GetWithoutUserDetails()});
+    pDialog->SetLine(1, CVariant{NlcUrl(path).GetWithoutUserDetails()});
     pDialog->SetLine(2, CVariant{""});
     pDialog->Open();
     if (pDialog->IsConfirmed())

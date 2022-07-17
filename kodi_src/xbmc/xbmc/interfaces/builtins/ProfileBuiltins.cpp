@@ -19,7 +19,7 @@
 #include "profiles/ProfileManager.h"
 #include "ServiceBroker.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 
 using namespace KODI::MESSAGING;

@@ -38,7 +38,7 @@
 
 #include "widgets/WidgetSeek.h"
 
-GoTvPtoPWidgetSeek::GoTvPtoPWidgetSeek(GoTvPtoPMediaPlayer *player,
+NlcPtoPWidgetSeek::NlcPtoPWidgetSeek(NlcPtoPMediaPlayer *player,
                              QWidget *slider,
                              bool connectSlider,
                              QWidget *parent)
@@ -53,7 +53,7 @@ GoTvPtoPWidgetSeek::GoTvPtoPWidgetSeek(GoTvPtoPMediaPlayer *player,
     initWidgetSeek(slider);
 }
 
-GoTvPtoPWidgetSeek::GoTvPtoPWidgetSeek(QWidget *slider,
+NlcPtoPWidgetSeek::NlcPtoPWidgetSeek(QWidget *slider,
                              bool connectSlider,
                              QWidget *parent)
     : QWidget(parent),
@@ -67,7 +67,7 @@ GoTvPtoPWidgetSeek::GoTvPtoPWidgetSeek(QWidget *slider,
     initWidgetSeek(slider);
 }
 
-GoTvPtoPWidgetSeek::GoTvPtoPWidgetSeek(QWidget *parent)
+NlcPtoPWidgetSeek::NlcPtoPWidgetSeek(QWidget *parent)
     : QWidget(parent),
       _gotvptopMediaPlayer(0),
       _progress(0),
@@ -79,9 +79,9 @@ GoTvPtoPWidgetSeek::GoTvPtoPWidgetSeek(QWidget *parent)
     initWidgetSeek(0);
 }
 
-GoTvPtoPWidgetSeek::~GoTvPtoPWidgetSeek() {}
+NlcPtoPWidgetSeek::~NlcPtoPWidgetSeek() {}
 
-void GoTvPtoPWidgetSeek::initWidgetSeek(QWidget *slider)
+void NlcPtoPWidgetSeek::initWidgetSeek(QWidget *slider)
 {
     _autoHide = false;
 
@@ -122,14 +122,14 @@ void GoTvPtoPWidgetSeek::initWidgetSeek(QWidget *slider)
     setLayout(layout);
 }
 
-void GoTvPtoPWidgetSeek::setAutoHide(bool autoHide)
+void NlcPtoPWidgetSeek::setAutoHide(bool autoHide)
 {
     _autoHide = autoHide;
 
     setVisible(!_autoHide);
 }
 
-void GoTvPtoPWidgetSeek::setMediaPlayer(GoTvPtoPMediaPlayer *player)
+void NlcPtoPWidgetSeek::setMediaPlayer(NlcPtoPMediaPlayer *player)
 {
     if (_gotvptopMediaPlayer) {
         disconnect(_gotvptopMediaPlayer, SIGNAL(lengthChanged(int)), this, SLOT(updateFullTime(int)));
@@ -162,7 +162,7 @@ void GoTvPtoPWidgetSeek::setMediaPlayer(GoTvPtoPMediaPlayer *player)
     }
 }
 
-void GoTvPtoPWidgetSeek::setSliderWidget(QWidget *slider,
+void NlcPtoPWidgetSeek::setSliderWidget(QWidget *slider,
                                     bool updateSlider)
 {
     _connectSlider = updateSlider;
@@ -175,7 +175,7 @@ void GoTvPtoPWidgetSeek::setSliderWidget(QWidget *slider,
     initWidgetSeek(slider);
 }
 
-void GoTvPtoPWidgetSeek::end()
+void NlcPtoPWidgetSeek::end()
 {
     _labelElapsed->setText("--:--");
     _labelFull->setText("--:--");
@@ -188,7 +188,7 @@ void GoTvPtoPWidgetSeek::end()
     }
 }
 
-void GoTvPtoPWidgetSeek::updateCurrentTime(int time)
+void NlcPtoPWidgetSeek::updateCurrentTime(int time)
 {
     QTime currentTime = QTime(0, 0);
     currentTime = currentTime.addMSecs(time);
@@ -207,7 +207,7 @@ void GoTvPtoPWidgetSeek::updateCurrentTime(int time)
     }
 }
 
-void GoTvPtoPWidgetSeek::updateFullTime(int time)
+void NlcPtoPWidgetSeek::updateFullTime(int time)
 {
     if (time == 0) {
         _labelFull->setText("--:--");

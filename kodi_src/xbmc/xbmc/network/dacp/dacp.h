@@ -9,7 +9,7 @@
 #pragma once
 
 #include <string>
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 class CDACP
 {
@@ -33,5 +33,5 @@ class CDACP
   private:
     void SendCmd(const std::string &cmd);
 
-    GoTvUrl m_dacpUrl;
+    NlcUrl m_dacpUrl;
 };

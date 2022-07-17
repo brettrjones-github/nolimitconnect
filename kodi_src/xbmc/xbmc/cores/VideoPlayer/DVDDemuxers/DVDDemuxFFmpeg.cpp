@@ -26,7 +26,7 @@
 #include "settings/SettingsComponent.h"
 #include "threads/SystemClock.h"
 #include "threads/SingleLock.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -254,7 +254,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
         // allows internal ffmpeg protocols to be used
         AVDictionary *options = GetFFMpegOptionsFromInput();
 
-        GoTvUrl url = m_pInput->GetURL();
+        NlcUrl url = m_pInput->GetURL();
 
         int result = -1;
         if( url.IsProtocol( "mms" ) )
@@ -271,7 +271,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
         }
         if( result < 0 && avformat_open_input( &m_pFormatContext, strFile.c_str(), iformat, &options ) < 0 )
         {
-            CLog::Log( LOGDEBUG, "Error, could not open file %s", GoTvUrl::GetRedacted( strFile ).c_str() );
+            CLog::Log( LOGDEBUG, "Error, could not open file %s", NlcUrl::GetRedacted( strFile ).c_str() );
             Dispose();
             av_dict_free( &options );
             return false;
@@ -339,7 +339,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
                 pd.buf_size = avio_read( m_ioContext, pd.buf, probeBufferSize );
                 if( pd.buf_size <= 0 )
                 {
-                    CLog::Log( LOGERROR, "%s - error reading from input stream, %s", __FUNCTION__, GoTvUrl::GetRedacted( strFile ).c_str() );
+                    CLog::Log( LOGERROR, "%s - error reading from input stream, %s", __FUNCTION__, NlcUrl::GetRedacted( strFile ).c_str() );
                     return false;
                 }
                 memset( pd.buf + pd.buf_size, 0, AVPROBE_PADDING_SIZE );
@@ -402,7 +402,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
 
             if( !iformat )
             {
-                CLog::Log( LOGERROR, "%s - error probing input format, %s", __FUNCTION__, GoTvUrl::GetRedacted( strFile ).c_str() );
+                CLog::Log( LOGERROR, "%s - error probing input format, %s", __FUNCTION__, NlcUrl::GetRedacted( strFile ).c_str() );
                 return false;
             }
             else
@@ -435,7 +435,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
 
         if( avformat_open_input( &m_pFormatContext, strFile.c_str(), iformat, &options ) < 0 )
         {
-            CLog::Log( LOGERROR, "%s - Error, could not open file %s", __FUNCTION__, GoTvUrl::GetRedacted( strFile ).c_str() );
+            CLog::Log( LOGERROR, "%s - Error, could not open file %s", __FUNCTION__, NlcUrl::GetRedacted( strFile ).c_str() );
             Dispose();
             av_dict_free( &options );
             return false;
@@ -486,7 +486,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
         int iErr = avformat_find_stream_info( m_pFormatContext, NULL );
         if( iErr < 0 )
         {
-            CLog::Log( LOGWARNING, "could not find codec parameters for %s", GoTvUrl::GetRedacted( strFile ).c_str() );
+            CLog::Log( LOGWARNING, "could not find codec parameters for %s", NlcUrl::GetRedacted( strFile ).c_str() );
             if( m_pInput->IsStreamType( DVDSTREAM_TYPE_DVD ) ||
                 m_pInput->IsStreamType( DVDSTREAM_TYPE_BLURAY ) ||
                 ( m_pFormatContext->nb_streams == 1 &&
@@ -523,7 +523,7 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
     m_pFormatContext->flags |= AVFMT_FLAG_NONBLOCK;
 
     // print some extra information
-    av_dump_format( m_pFormatContext, 0, GoTvUrl::GetRedacted( strFile ).c_str(), 0 );
+    av_dump_format( m_pFormatContext, 0, NlcUrl::GetRedacted( strFile ).c_str(), 0 );
 
     // deprecated, will be always set in future versions
     m_pFormatContext->flags |= AVFMT_FLAG_KEEP_SIDE_DATA;
@@ -701,7 +701,7 @@ AVDictionary *CDVDDemuxFFmpeg::GetFFMpegOptionsFromInput()
     const std::shared_ptr<CDVDInputStreamFFmpeg> input =
         std::dynamic_pointer_cast< CDVDInputStreamFFmpeg >( m_pInput );
 
-    GoTvUrl url = m_pInput->GetURL();
+    NlcUrl url = m_pInput->GetURL();
     AVDictionary *options = nullptr;
 
     if( url.IsProtocol( "http" ) || url.IsProtocol( "https" ) )
@@ -840,7 +840,7 @@ AVDictionary *CDVDDemuxFFmpeg::GetFFMpegOptionsFromInput()
                 }
             }
 
-            GoTvUrl tmpUrl = url;
+            NlcUrl tmpUrl = url;
             std::vector<std::string> opts = StringUtils::Split( tmpUrl.Get(), " " );
             if( opts.size() > 1 ) // inline rtmp options
             {
@@ -863,7 +863,7 @@ AVDictionary *CDVDDemuxFFmpeg::GetFFMpegOptionsFromInput()
                     if( swfvfy )
                         av_dict_set( &options, "rtmp_swfverify", swfurl.c_str(), 0 );
                 }
-                tmpUrl = GoTvUrl( opts.front() );
+                tmpUrl = NlcUrl( opts.front() );
             }
         }
     }

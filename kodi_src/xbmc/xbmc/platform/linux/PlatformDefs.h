@@ -94,7 +94,7 @@ typedef long          __off_t;
 #endif
 
 //#ifndef PRIdS
-//#define PRIdS "zd" // Defined in GoTvCompilerConfig.
+//#define PRIdS "zd" // Defined in NlcCompilerConfig.
 //#endif
 
 #ifdef TARGET_POSIX

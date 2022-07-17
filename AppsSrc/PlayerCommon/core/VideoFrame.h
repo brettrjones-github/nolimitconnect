@@ -27,20 +27,20 @@
 #include "SharedExportCore.h"
 
 /*!
-    \struct GoTvPtoPVideoFrame VideoFrame.h core/VideoFrame.h
+    \struct NlcPtoPVideoFrame VideoFrame.h core/VideoFrame.h
     \ingroup GOTVQtCore
     \brief Video frame data container (deprecated)
-    \see GoTvPtoPAbstractVideoFrame
+    \see NlcPtoPAbstractVideoFrame
     \deprecated Deprecated since GOTV-Qt 1.1, will be removed in 2.0
 */
-struct Q_DECL_DEPRECATED GOTVQT_CORE_EXPORT GoTvPtoPVideoFrame // LCOV_EXCL_LINE
+struct Q_DECL_DEPRECATED GOTVQT_CORE_EXPORT NlcPtoPVideoFrame // LCOV_EXCL_LINE
 {
     /*!
-        \brief GoTvPtoPVideoFrame constructor.
+        \brief NlcPtoPVideoFrame constructor.
 
         This construction ensures default data is set.
     */
-    GoTvPtoPVideoFrame();
+    NlcPtoPVideoFrame();
 
     bool inited; /*!< initialisation status */
 

@@ -17,11 +17,11 @@ namespace XFILE
   public:
     CMultiPathFile(void);
     ~CMultiPathFile(void) override;
-    bool Open(const GoTvUrl& url) override;
-    bool Exists(const GoTvUrl& url) override;
-    int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+    bool Open(const NlcUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
+    int Stat(const NlcUrl& url, struct __stat64* buffer) override;
 
   protected:
-    std::string TranslatePath(const GoTvUrl &url) override;
+    std::string TranslatePath(const NlcUrl &url) override;
   };
 }

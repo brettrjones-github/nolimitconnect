@@ -41,7 +41,7 @@
 
 #include "widgets/WidgetVideo.h"
 
-GoTvPtoPWidgetVideo::GoTvPtoPWidgetVideo(GoTvPtoPMediaPlayer *player,
+NlcPtoPWidgetVideo::NlcPtoPWidgetVideo(NlcPtoPMediaPlayer *player,
                                QWidget *parent)
     : QFrame(parent)
 {
@@ -52,29 +52,29 @@ GoTvPtoPWidgetVideo::GoTvPtoPWidgetVideo(GoTvPtoPMediaPlayer *player,
     initWidgetVideo();
 }
 
-GoTvPtoPWidgetVideo::GoTvPtoPWidgetVideo(QWidget *parent)
+NlcPtoPWidgetVideo::NlcPtoPWidgetVideo(QWidget *parent)
     : QFrame(parent),
       _gotvptopMediaPlayer(0)
 {
     initWidgetVideo();
 }
 
-GoTvPtoPWidgetVideo::~GoTvPtoPWidgetVideo()
+NlcPtoPWidgetVideo::~NlcPtoPWidgetVideo()
 {
     release();
 }
 
-void GoTvPtoPWidgetVideo::initWidgetVideo()
+void NlcPtoPWidgetVideo::initWidgetVideo()
 {
     _enableSettings = false;
-    _defaultAspectRatio = GoTvPtoP::Original;
-    _defaultCropRatio = GoTvPtoP::Original;
-    _defaultDeinterlacing = GoTvPtoP::Disabled;
-    _defaultScale = GoTvPtoP::NoScale;
-    _currentAspectRatio = GoTvPtoP::Original;
-    _currentCropRatio = GoTvPtoP::Original;
-    _currentDeinterlacing = GoTvPtoP::Disabled;
-    _currentScale = GoTvPtoP::NoScale;
+    _defaultAspectRatio = NlcPtoP::Original;
+    _defaultCropRatio = NlcPtoP::Original;
+    _defaultDeinterlacing = NlcPtoP::Disabled;
+    _defaultScale = NlcPtoP::NoScale;
+    _currentAspectRatio = NlcPtoP::Original;
+    _currentCropRatio = NlcPtoP::Original;
+    _currentDeinterlacing = NlcPtoP::Disabled;
+    _currentScale = NlcPtoP::NoScale;
 
     _layout = new QHBoxLayout(this);
     _layout->setContentsMargins(0, 0, 0, 0);
@@ -85,66 +85,66 @@ void GoTvPtoPWidgetVideo::initWidgetVideo()
     setPalette(plt);
 }
 
-void GoTvPtoPWidgetVideo::setMediaPlayer(GoTvPtoPMediaPlayer *player)
+void NlcPtoPWidgetVideo::setMediaPlayer(NlcPtoPMediaPlayer *player)
 {
     _gotvptopMediaPlayer = player;
 
     connect(_gotvptopMediaPlayer, SIGNAL(vout(int)), this, SLOT(applyPreviousSettings()));
 }
 
-void GoTvPtoPWidgetVideo::setCurrentAspectRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPWidgetVideo::setCurrentAspectRatio(const NlcPtoP::Ratio &ratio)
 {
     _currentAspectRatio = ratio;
 }
 
-void GoTvPtoPWidgetVideo::setCurrentCropRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPWidgetVideo::setCurrentCropRatio(const NlcPtoP::Ratio &ratio)
 {
     _currentCropRatio = ratio;
 }
 
-void GoTvPtoPWidgetVideo::setCurrentDeinterlacing(const GoTvPtoP::Deinterlacing &deinterlacing)
+void NlcPtoPWidgetVideo::setCurrentDeinterlacing(const NlcPtoP::Deinterlacing &deinterlacing)
 {
     _currentDeinterlacing = deinterlacing;
 }
 
-void GoTvPtoPWidgetVideo::setCurrentScale(const GoTvPtoP::Scale &scale)
+void NlcPtoPWidgetVideo::setCurrentScale(const NlcPtoP::Scale &scale)
 {
     _currentScale = scale;
 }
 
-void GoTvPtoPWidgetVideo::setDefaultAspectRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPWidgetVideo::setDefaultAspectRatio(const NlcPtoP::Ratio &ratio)
 {
     _defaultAspectRatio = ratio;
 }
 
-void GoTvPtoPWidgetVideo::setDefaultCropRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPWidgetVideo::setDefaultCropRatio(const NlcPtoP::Ratio &ratio)
 {
     _defaultCropRatio = ratio;
 }
 
-void GoTvPtoPWidgetVideo::setDefaultDeinterlacing(const GoTvPtoP::Deinterlacing &deinterlacing)
+void NlcPtoPWidgetVideo::setDefaultDeinterlacing(const NlcPtoP::Deinterlacing &deinterlacing)
 {
     _defaultDeinterlacing = deinterlacing;
 }
 
-void GoTvPtoPWidgetVideo::setDefaultScale(const GoTvPtoP::Scale &scale)
+void NlcPtoPWidgetVideo::setDefaultScale(const NlcPtoP::Scale &scale)
 {
     _defaultScale = scale;
 }
 
-void GoTvPtoPWidgetVideo::enableDefaultSettings()
+void NlcPtoPWidgetVideo::enableDefaultSettings()
 {
     initDefaultSettings();
 
     enablePreviousSettings();
 }
 
-void GoTvPtoPWidgetVideo::enablePreviousSettings()
+void NlcPtoPWidgetVideo::enablePreviousSettings()
 {
     _enableSettings = true;
 }
 
-void GoTvPtoPWidgetVideo::initDefaultSettings()
+void NlcPtoPWidgetVideo::initDefaultSettings()
 {
     _currentAspectRatio = defaultAspectRatio();
     _currentCropRatio = defaultCropRatio();
@@ -152,7 +152,7 @@ void GoTvPtoPWidgetVideo::initDefaultSettings()
     _currentScale = defaultScale();
 }
 
-void GoTvPtoPWidgetVideo::applyPreviousSettings()
+void NlcPtoPWidgetVideo::applyPreviousSettings()
 {
     if (!_enableSettings)
         return;
@@ -168,7 +168,7 @@ void GoTvPtoPWidgetVideo::applyPreviousSettings()
     _enableSettings = false;
 }
 
-void GoTvPtoPWidgetVideo::setAspectRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPWidgetVideo::setAspectRatio(const NlcPtoP::Ratio &ratio)
 {
     if (_gotvptopMediaPlayer) {
         _currentAspectRatio = ratio;
@@ -176,7 +176,7 @@ void GoTvPtoPWidgetVideo::setAspectRatio(const GoTvPtoP::Ratio &ratio)
     }
 }
 
-void GoTvPtoPWidgetVideo::setCropRatio(const GoTvPtoP::Ratio &ratio)
+void NlcPtoPWidgetVideo::setCropRatio(const NlcPtoP::Ratio &ratio)
 {
     if (_gotvptopMediaPlayer) {
         _currentCropRatio = ratio;
@@ -184,7 +184,7 @@ void GoTvPtoPWidgetVideo::setCropRatio(const GoTvPtoP::Ratio &ratio)
     }
 }
 
-void GoTvPtoPWidgetVideo::setDeinterlacing(const GoTvPtoP::Deinterlacing &deinterlacing)
+void NlcPtoPWidgetVideo::setDeinterlacing(const NlcPtoP::Deinterlacing &deinterlacing)
 {
     if (_gotvptopMediaPlayer) {
         _currentDeinterlacing = deinterlacing;
@@ -192,7 +192,7 @@ void GoTvPtoPWidgetVideo::setDeinterlacing(const GoTvPtoP::Deinterlacing &deinte
     }
 }
 
-void GoTvPtoPWidgetVideo::setScale(const GoTvPtoP::Scale &scale)
+void NlcPtoPWidgetVideo::setScale(const NlcPtoP::Scale &scale)
 {
     if (_gotvptopMediaPlayer) {
         _currentScale = scale;
@@ -200,7 +200,7 @@ void GoTvPtoPWidgetVideo::setScale(const GoTvPtoP::Scale &scale)
     }
 }
 
-void GoTvPtoPWidgetVideo::sync()
+void NlcPtoPWidgetVideo::sync()
 {
 #if defined(Q_WS_X11)
     /* Make sure the X server has processed all requests.
@@ -210,7 +210,7 @@ void GoTvPtoPWidgetVideo::sync()
 #endif
 }
 
-WId GoTvPtoPWidgetVideo::request()
+WId NlcPtoPWidgetVideo::request()
 {
     if (_video)
         return 0;
@@ -236,7 +236,7 @@ WId GoTvPtoPWidgetVideo::request()
     return _video->winId();
 }
 
-void GoTvPtoPWidgetVideo::release()
+void NlcPtoPWidgetVideo::release()
 {
     if (_video) {
         _layout->removeWidget(_video);

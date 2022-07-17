@@ -296,7 +296,7 @@ int i;
 		break;
 		
 	case 2:
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 		if (!bigendian)
 #else
 			if (bigendian)
@@ -354,7 +354,7 @@ int i;
 		break;
 		
 	case 4:		
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 		if (!bigendian)
 #else
 			if (bigendian)

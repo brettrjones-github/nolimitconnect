@@ -26,14 +26,14 @@
 
 #include <core/TrackModel.h>
 
-class GoTvPtoPAudio;
-class GoTvPtoPInstance;
-class GoTvPtoPMedia;
-class GoTvPtoPMediaPlayer;
-class GoTvPtoPVideo;
+class NlcPtoPAudio;
+class NlcPtoPInstance;
+class NlcPtoPMedia;
+class NlcPtoPMediaPlayer;
+class NlcPtoPVideo;
 
 /*!
-    \class GoTvPtoPQmlVideoPlayer QmlVideoPlayer.h GOTVQtQml/QmlVideoPlayer.h
+    \class NlcPtoPQmlVideoPlayer QmlVideoPlayer.h GOTVQtQml/QmlVideoPlayer.h
     \ingroup GOTVQtQml
     \brief QML video player (deprecated)
 
@@ -41,7 +41,7 @@ class GoTvPtoPVideo;
 
     \deprecated Deprecated since GOTV-Qt 1.1, will be removed in 2.0
  */
-class Q_DECL_DEPRECATED GOTVQT_QML_EXPORT GoTvPtoPQmlVideoPlayer : public GoTvPtoPQmlVideoObject
+class Q_DECL_DEPRECATED GOTVQT_QML_EXPORT NlcPtoPQmlVideoPlayer : public NlcPtoPQmlVideoObject
 {
 Q_OBJECT
 public:
@@ -132,7 +132,7 @@ public:
         \see audioTrackModel
         \since GOTV-Qt 1.1
      */
-    Q_PROPERTY(GoTvPtoPTrackModel *audioTrackModel READ audioTrackModel CONSTANT)
+    Q_PROPERTY(NlcPtoPTrackModel *audioTrackModel READ audioTrackModel CONSTANT)
 
     /*!
         \brief Current audio preferred languages
@@ -157,7 +157,7 @@ public:
         \see subtitleTrackModel
         \since GOTV-Qt 1.1
      */
-    Q_PROPERTY(GoTvPtoPTrackModel *subtitleTrackModel READ subtitleTrackModel CONSTANT)
+    Q_PROPERTY(NlcPtoPTrackModel *subtitleTrackModel READ subtitleTrackModel CONSTANT)
 
     /*!
         \brief Current subtitle preferred languages
@@ -182,27 +182,27 @@ public:
         \see videoTrackModel
         \since GOTV-Qt 1.1
      */
-    Q_PROPERTY(GoTvPtoPTrackModel *videoTrackModel READ videoTrackModel CONSTANT)
+    Q_PROPERTY(NlcPtoPTrackModel *videoTrackModel READ videoTrackModel CONSTANT)
 
     /*!
-        \brief GoTvPtoPQmlVideoPlayer constructor.
+        \brief NlcPtoPQmlVideoPlayer constructor.
         \param parent parent item (QQuickItem *)
      */
-    explicit GoTvPtoPQmlVideoPlayer(QQuickItem *parent = 0);
+    explicit NlcPtoPQmlVideoPlayer(QQuickItem *parent = 0);
 
     /*!
-        GoTvPtoPMediaPlayer destructor
+        NlcPtoPMediaPlayer destructor
      */
-    ~GoTvPtoPQmlVideoPlayer();
+    ~NlcPtoPQmlVideoPlayer();
 
 
     /*!
-        \brief Register QML plugin as GOTVQt.GoTvPtoPVideoPlayer
+        \brief Register QML plugin as GOTVQt.NlcPtoPVideoPlayer
 
         Include into QML file as
         import GOTVQt VERSION_MAJOR.VERSION_MINOR
 
-        Object name: GoTvPtoPVideoPlayer
+        Object name: NlcPtoPVideoPlayer
      */
     static void registerPlugin();
 
@@ -408,7 +408,7 @@ public:
 
         \since GOTV-Qt 1.1
      */
-    GoTvPtoPTrackModel *audioTrackModel() const;
+    NlcPtoPTrackModel *audioTrackModel() const;
 
     /*!
         \brief Get preferred audio languages
@@ -458,7 +458,7 @@ public:
 
         \since GOTV-Qt 1.1
      */
-    GoTvPtoPTrackModel *subtitleTrackModel() const;
+    NlcPtoPTrackModel *subtitleTrackModel() const;
 
     /*!
         \brief Get preferred subtitle languages
@@ -508,7 +508,7 @@ public:
 
         \since GOTV-Qt 1.1
      */
-    GoTvPtoPTrackModel *videoTrackModel() const;
+    NlcPtoPTrackModel *videoTrackModel() const;
 
 signals:
     /*!
@@ -598,21 +598,21 @@ private:
     int preferredAudioTrackId();
     int preferredSubtitleTrackId();
 
-    GoTvPtoPInstance *_instance;
-    GoTvPtoPMedia *_media;
+    NlcPtoPInstance *_instance;
+    NlcPtoPMedia *_media;
 
-    GoTvPtoPAudio *_audioManager;
-    GoTvPtoPVideo *_videoManager;
+    NlcPtoPAudio *_audioManager;
+    NlcPtoPVideo *_videoManager;
 
-    GoTvPtoP::Deinterlacing _deinterlacing;
+    NlcPtoP::Deinterlacing _deinterlacing;
 
     bool _hasMedia;
     bool _autoplay;
     bool _seekable;
 
-    GoTvPtoPTrackModel *_audioTrackModel;
-    GoTvPtoPTrackModel *_subtitleTrackModel;
-    GoTvPtoPTrackModel *_videoTrackModel;
+    NlcPtoPTrackModel *_audioTrackModel;
+    NlcPtoPTrackModel *_subtitleTrackModel;
+    NlcPtoPTrackModel *_videoTrackModel;
 
     QStringList _audioPreferredLanguages;
     QStringList _subtitlePreferredLanguages;

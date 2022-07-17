@@ -48,13 +48,13 @@
 |   byte order
 +---------------------------------------------------------------------*/
 // define AP4_PLATFORM_BYTE_ORDER to one of these two choices
-#if GOTV_ARCH_LITTLE_ENDIAN
+#if NLC_ARCH_LITTLE_ENDIAN
 # define AP4_PLATFORM_BYTE_ORDER_BIG_ENDIAN    0
 # define AP4_PLATFORM_BYTE_ORDER_LITTLE_ENDIAN 1
 # define AP4_PLATFORM_BYTE_ORDER 1
 #endif
 
-#if GOTV_ARCH_BIG_ENDIAN
+#if NLC_ARCH_BIG_ENDIAN
 # define AP4_PLATFORM_BYTE_ORDER_BIG_ENDIAN    1
 # define AP4_PLATFORM_BYTE_ORDER_LITTLE_ENDIAN 0
 # define AP4_PLATFORM_BYTE_ORDER 0

@@ -24,11 +24,11 @@
 #include "SharedExportCore.h"
 
 /*!
-    \class GoTvPtoPModuleDescription ModuleDescription.h core/ModuleDescription.h
+    \class NlcPtoPModuleDescription ModuleDescription.h core/ModuleDescription.h
     \ingroup GOTVQtCore
     \brief GOTV module description
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPModuleDescription
+class GOTVQT_CORE_EXPORT NlcPtoPModuleDescription
 {
 public:
     /*!
@@ -45,13 +45,13 @@ public:
         \param type module type
         \param name module name
     */
-    explicit GoTvPtoPModuleDescription(Type type,
+    explicit NlcPtoPModuleDescription(Type type,
                                   const QString &name);
 
     /*!
-        \brief GoTvPtoPModuleDescription destructor
+        \brief NlcPtoPModuleDescription destructor
     */
-    ~GoTvPtoPModuleDescription();
+    ~NlcPtoPModuleDescription();
 
     /*!
         \brief Get module type

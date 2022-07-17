@@ -12,7 +12,7 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "pictures/GUIWindowSlideShow.h"
@@ -154,7 +154,7 @@ bool CPicturesGUIInfo::GetLabel(std::string& value, const CFileItem *item, int c
       case SLIDESHOW_FILE_PATH:
       {
         const std::string path = URIUtils::GetDirectory(m_currentSlide->GetPath());
-        value = GoTvUrl(path).GetWithoutUserDetails();
+        value = NlcUrl(path).GetWithoutUserDetails();
         return true;
       }
       case SLIDESHOW_FILE_SIZE:

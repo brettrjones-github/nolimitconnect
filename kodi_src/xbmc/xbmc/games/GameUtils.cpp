@@ -19,7 +19,7 @@
 #include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <algorithm>
 
@@ -78,7 +78,7 @@ void CGameUtils::GetGameClients(const CFileItem& file, GameClientVector& candida
   bHasVfsGameClient = false;
 
   // Try to resolve path to a local file, as not all game clients support VFS
-  GoTvUrl translatedUrl(CSpecialProtocol::TranslatePath(file.GetPath()));
+  NlcUrl translatedUrl(CSpecialProtocol::TranslatePath(file.GetPath()));
 
   // Get local candidates
   VECADDONS localAddons;
@@ -114,7 +114,7 @@ void CGameUtils::GetGameClients(const CFileItem& file, GameClientVector& candida
   std::sort(installable.begin(), installable.end(), SortByName);
 }
 
-void CGameUtils::GetGameClients(const ADDON::VECADDONS& addons, const GoTvUrl& translatedUrl, GameClientVector& candidates, bool& bHasVfsGameClient)
+void CGameUtils::GetGameClients(const ADDON::VECADDONS& addons, const NlcUrl& translatedUrl, GameClientVector& candidates, bool& bHasVfsGameClient)
 {
   bHasVfsGameClient = false;
 
@@ -146,12 +146,12 @@ bool CGameUtils::HasGameExtension(const std::string &path)
 {
   using namespace ADDON;
 
-  // Get filename from GoTvUrl so that top-level zip directories will become
+  // Get filename from NlcUrl so that top-level zip directories will become
   // normal paths:
   //
   //   zip://%2Fpath_to_zip_file.zip/  ->  /path_to_zip_file.zip
   //
-  std::string filename = GoTvUrl(path).GetFileNameWithoutPath();
+  std::string filename = NlcUrl(path).GetFileNameWithoutPath();
 
   // Get the file extension
   std::string extension = URIUtils::GetExtension(filename);

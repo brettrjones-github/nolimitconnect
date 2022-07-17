@@ -33,10 +33,10 @@ namespace XFILE
     void StopThread(bool bWait = true) override;
 
     // IFIle methods
-    bool Open(const GoTvUrl& url) override;
+    bool Open(const NlcUrl& url) override;
     void Close() override;
-    bool Exists(const GoTvUrl& url) override;
-    int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+    bool Exists(const NlcUrl& url) override;
+    int Stat(const NlcUrl& url, struct __stat64* buffer) override;
 
     ssize_t Read(void* lpBuf, size_t uiBufSize) override;
 

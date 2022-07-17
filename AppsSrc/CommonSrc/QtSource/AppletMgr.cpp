@@ -407,10 +407,10 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 //	case ePluginAppletCamProvider:
 //		m_MyApp.errMessageBox( appletMissingTitle, "Cam Provider Not Implemented" );
 //		return;
-//	case ePluginAppletGoTvStation:
+//	case ePluginAppletNlcStation:
 //		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
 //		return;
-//	case ePluginAppletGoTvNetworkHost:
+//	case ePluginAppletNlcNetworkHost:
 //		m_MyApp.errMessageBox( appletMissingTitle, "Network Host Not Implemented" );
 //		return;
 	default:

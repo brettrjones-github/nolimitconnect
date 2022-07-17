@@ -7,7 +7,7 @@
  */
 
 #include "DVDInputStream.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 CDVDInputStream::CDVDInputStream(DVDStreamType streamType, const CFileItem& fileitem)
 {
@@ -33,13 +33,13 @@ void CDVDInputStream::Close()
 
 std::string CDVDInputStream::GetFileName()
 {
-  GoTvUrl url(m_item.GetDynPath());
+  NlcUrl url(m_item.GetDynPath());
 
   url.SetProtocolOptions("");
   return url.Get();
 }
 
-GoTvUrl CDVDInputStream::GetURL()
+NlcUrl CDVDInputStream::GetURL()
 {
   return m_item.GetDynURL();
 }

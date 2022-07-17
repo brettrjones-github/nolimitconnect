@@ -129,7 +129,7 @@ bool CPlayListFactory::IsPlaylist(const CFileItem& item)
   return IsPlaylist(item.GetDynPath());
 }
 
-bool CPlayListFactory::IsPlaylist(const GoTvUrl& url)
+bool CPlayListFactory::IsPlaylist(const NlcUrl& url)
 {
   return URIUtils::HasExtension(url,
                                 ".m3u|.b4s|.pls|.strm|.wpl|.asx|.ram|.url|.pxml|.xspf");

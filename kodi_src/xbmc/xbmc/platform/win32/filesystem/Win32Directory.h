@@ -18,11 +18,11 @@ namespace XFILE
   public:
     CWin32Directory();
     virtual ~CWin32Directory();
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    bool Create(const GoTvUrl& url) override;
-    bool Exists(const GoTvUrl& url) override;
-    bool Remove(const GoTvUrl& url) override;
-    bool RemoveRecursive(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    bool Create(const NlcUrl& url) override;
+    bool Exists(const NlcUrl& url) override;
+    bool Remove(const NlcUrl& url) override;
+    bool RemoveRecursive(const NlcUrl& url) override;
 
   private:
     bool Create(std::wstring path) const;

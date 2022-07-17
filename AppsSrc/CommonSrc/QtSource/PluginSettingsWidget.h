@@ -54,6 +54,7 @@ public:
     virtual InformationWidget * getInformationWidget()      { return ui.m_InfoWidget; }
 
     virtual ThumbnailChooseWidget * getThumbnailChooseWidget()  { return ui.m_ThumbnailChooseWidget; }
+    virtual QCheckBox*          getRunOnAppStartCheckbox()  { return ui.m_RunOnStartupCheckBox; }
 
 signals:
     void                        signalPluginSettingsApplied();
@@ -61,6 +62,7 @@ signals:
 protected slots:
     virtual void                slotApplyServiceSettings();
     virtual void                slotThumbnailAssetChanged( ThumbInfo* thumbAsset );
+    void                        slotRunOnStartupCheckBoxChange( int runOnStartup );
 
 protected:
     EPluginType                 getPluginType() { return m_PluginType; }

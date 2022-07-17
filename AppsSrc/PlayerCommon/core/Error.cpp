@@ -21,7 +21,7 @@
 
 #include "core/Error.h"
 
-QString GoTvPtoPError::errmsg()
+QString NlcPtoPError::errmsg()
 {
     QString error;
     if (libgotvptop_errmsg()) {
@@ -32,7 +32,7 @@ QString GoTvPtoPError::errmsg()
     return error;
 }
 
-void GoTvPtoPError::showErrmsg()
+void NlcPtoPError::showErrmsg()
 {
     // Outputs libgotvptop error message if there is any
     QString error = errmsg();
@@ -42,4 +42,4 @@ void GoTvPtoPError::showErrmsg()
     }
 }
 
-void GoTvPtoPError::clearerr() {}
+void NlcPtoPError::clearerr() {}

@@ -16,8 +16,8 @@
 #include "GUIUserMessages.h"
 #include "PartyModeManager.h"
 #include "PlayListPlayer.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "addons/AddonManager.h"
 #include "addons/PluginSource.h"
 #if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
@@ -86,7 +86,7 @@ namespace
 class CGetDirectoryItems : public IRunnable
 {
 public:
-  CGetDirectoryItems(XFILE::CVirtualDirectory &dir, GoTvUrl& url, CFileItemList &items, bool useDir)
+  CGetDirectoryItems(XFILE::CVirtualDirectory &dir, NlcUrl& url, CFileItemList &items, bool useDir)
   : m_dir(dir), m_url(url), m_items(items), m_useDir(useDir)
   {
   }
@@ -105,7 +105,7 @@ public:
 
 protected:
   XFILE::CVirtualDirectory &m_dir;
-  GoTvUrl m_url;
+  NlcUrl m_url;
   CFileItemList &m_items;
   bool m_useDir;
 };
@@ -234,7 +234,7 @@ bool CGUIMediaWindow::OnBack(int actionID)
 {
   CancelUpdateItems();
 
-  GoTvUrl filterUrl(m_strFilterPath);
+  NlcUrl filterUrl(m_strFilterPath);
   if (actionID == ACTION_NAV_BACK &&
       !m_vecItems->IsVirtualDirectoryRoot() &&
       !URIUtils::PathEquals(m_vecItems->GetPath(), GetRootPath(), true) &&
@@ -714,13 +714,13 @@ void CGUIMediaWindow::FormatAndSort(CFileItemList &items)
  */
 bool CGUIMediaWindow::GetDirectory(const std::string &strDirectory, CFileItemList &items)
 {
-  GoTvUrl pathToUrl(strDirectory);
+  NlcUrl pathToUrl(strDirectory);
 
   std::string strParentPath = m_history.GetParentPath();
 
   CLog::Log(LOGDEBUG,"CGUIMediaWindow::GetDirectory (%s)",
-            GoTvUrl::GetRedacted(strDirectory).c_str());
-  CLog::Log(LOGDEBUG,"  ParentPath = [%s]", GoTvUrl::GetRedacted(strParentPath).c_str());
+            NlcUrl::GetRedacted(strDirectory).c_str());
+  CLog::Log(LOGDEBUG,"  ParentPath = [%s]", NlcUrl::GetRedacted(strParentPath).c_str());
 
   if (pathToUrl.IsProtocol("plugin") && !pathToUrl.GetHostName().empty())
     CServiceBroker::GetAddonMgr().UpdateLastUsed(pathToUrl.GetHostName());
@@ -820,12 +820,12 @@ bool CGUIMediaWindow::Update(const std::string &strDirectory, bool updateFilterP
   // check if the path contains a filter and temporarily remove it
   // so that the retrieved list of items is unfiltered
   std::string pathNoFilter = path;
-  if (CanContainFilter(pathNoFilter) && GoTvUrl(pathNoFilter).HasOption("filter"))
+  if (CanContainFilter(pathNoFilter) && NlcUrl(pathNoFilter).HasOption("filter"))
     pathNoFilter = RemoveParameterFromPath(pathNoFilter, "filter");
 
   if (!GetDirectory(pathNoFilter, *m_vecItems))
   {
-    CLog::Log(LOGERROR,"CGUIMediaWindow::GetDirectory(%s) failed", GoTvUrl(path).GetRedacted().c_str());
+    CLog::Log(LOGERROR,"CGUIMediaWindow::GetDirectory(%s) failed", NlcUrl(path).GetRedacted().c_str());
 
     if (URIUtils::PathEquals(path, GetRootPath()))
       return false; // Nothing to fallback to
@@ -1037,7 +1037,7 @@ bool CGUIMediaWindow::OnClick(int iItem, const std::string &player)
   if (pItem->IsScript())
   {
     // execute the script
-    GoTvUrl url(pItem->GetPath());
+    NlcUrl url(pItem->GetPath());
     AddonPtr addon;
     if (CServiceBroker::GetAddonMgr().GetAddon(url.GetHostName(), addon, ADDON_SCRIPT))
     {
@@ -1140,7 +1140,7 @@ bool CGUIMediaWindow::OnClick(int iItem, const std::string &player)
 
     if (m_vecItems->IsPlugin())
     {
-      GoTvUrl url(m_vecItems->GetPath());
+      NlcUrl url(m_vecItems->GetPath());
       AddonPtr addon;
       if (CServiceBroker::GetAddonMgr().GetAddon(url.GetHostName(),addon))
       {
@@ -1210,7 +1210,7 @@ void CGUIMediaWindow::ShowShareErrorMessage(CFileItem* pItem) const
     return;
 
   int idMessageText = 0;
-  GoTvUrl url(pItem->GetPath());
+  NlcUrl url(pItem->GetPath());
 
   if (url.IsProtocol("smb") && url.GetHostName().empty()) //  smb workgroup
     idMessageText = 15303; // Workgroup not found
@@ -1250,10 +1250,10 @@ bool CGUIMediaWindow::GoParentFolder()
 
   // remove the current filter but only if the parent
   // item doesn't have a filter as well
-  GoTvUrl filterUrl(m_strFilterPath);
+  NlcUrl filterUrl(m_strFilterPath);
   if (filterUrl.HasOption("filter"))
   {
-    GoTvUrl parentUrl(m_history.GetParentPath(true));
+    NlcUrl parentUrl(m_history.GetParentPath(true));
     if (!parentUrl.HasOption("filter"))
     {
       // we need to overwrite m_strFilterPath because
@@ -1400,7 +1400,7 @@ void CGUIMediaWindow::SetHistoryForPath(const std::string& strDirectory)
     URIUtils::RemoveSlashAtEnd(strPath);
 
     CFileItemList items;
-    GoTvUrl url;
+    NlcUrl url;
     GetDirectoryItems(url, items, UseFileDirectories());
 
     m_history.ClearPathHistory();
@@ -1429,7 +1429,7 @@ void CGUIMediaWindow::SetHistoryForPath(const std::string& strDirectory)
 
       if (URIUtils::IsVideoDb(strPath))
       {
-        GoTvUrl url(strParentPath);
+        NlcUrl url(strParentPath);
         url.SetOptions(""); // clear any URL options from recreated parent path
         strParentPath = url.Get();
       }
@@ -1469,7 +1469,7 @@ bool CGUIMediaWindow::OnPlayMedia(int iItem, const std::string &player)
   CServiceBroker::GetPlaylistPlayer().SetCurrentPlaylist(PLAYLIST_NONE);
   CFileItemPtr pItem=m_vecItems->Get(iItem);
 
-  CLog::Log(LOGDEBUG, "%s %s", __FUNCTION__, GoTvUrl::GetRedacted(pItem->GetPath()).c_str());
+  CLog::Log(LOGDEBUG, "%s %s", __FUNCTION__, NlcUrl::GetRedacted(pItem->GetPath()).c_str());
 
   bool bResult = false;
   if (pItem->IsInternetStream() || pItem->IsPlayList())
@@ -1847,7 +1847,7 @@ bool CGUIMediaWindow::WaitForNetwork() const
   if (!progress)
     return true;
 
-  GoTvUrl url(m_vecItems->GetPath());
+  NlcUrl url(m_vecItems->GetPath());
   progress->SetHeading(CVariant{1040}); // Loading Directory
   progress->SetLine(1, CVariant{url.GetWithoutUserDetails()});
   progress->ShowProgressBar(false);
@@ -1870,7 +1870,7 @@ void CGUIMediaWindow::UpdateFilterPath(const std::string &strDirectory, const CF
   bool canfilter = CanContainFilter(strDirectory);
 
   std::string filter;
-  GoTvUrl url(strDirectory);
+  NlcUrl url(strDirectory);
   if (canfilter && url.HasOption("filter"))
     filter = url.GetOption("filter");
 
@@ -1889,7 +1889,7 @@ void CGUIMediaWindow::UpdateFilterPath(const std::string &strDirectory, const CF
     canfilter = true;
 
   // check if the filter path contains a filter
-  GoTvUrl filterPathUrl(m_strFilterPath);
+  NlcUrl filterPathUrl(m_strFilterPath);
   if (canfilter && filter.empty())
   {
     if (filterPathUrl.HasOption("filter"))
@@ -1955,7 +1955,7 @@ void CGUIMediaWindow::OnFilterItems(const std::string &filter)
 
   // get the "filter" option
   std::string filterOption;
-  GoTvUrl filterUrl(m_strFilterPath);
+  NlcUrl filterUrl(m_strFilterPath);
   if (filterUrl.HasOption("filter"))
     filterOption = filterUrl.GetOption("filter");
 
@@ -1968,7 +1968,7 @@ void CGUIMediaWindow::OnFilterItems(const std::string &filter)
     // the filtered item to be able to keep the applied filters
     if (pItem->m_bIsFolder)
     {
-      GoTvUrl itemUrl(pItem->GetPath());
+      NlcUrl itemUrl(pItem->GetPath());
       if (!filterOption.empty())
         itemUrl.SetOption("filter", filterOption);
       else
@@ -1985,7 +1985,7 @@ void CGUIMediaWindow::OnFilterItems(const std::string &filter)
     // but that's only necessary for folder items
     if (currentItem.get() && currentItem->m_bIsFolder)
     {
-      GoTvUrl curUrl(currentItemPath), newUrl(m_strFilterPath);
+      NlcUrl curUrl(currentItemPath), newUrl(m_strFilterPath);
       if (newUrl.HasOption("filter"))
         curUrl.SetOption("filter", newUrl.GetOption("filter"));
       else if (curUrl.HasOption("filter"))
@@ -2067,7 +2067,7 @@ bool CGUIMediaWindow::GetAdvanceFilteredItems(CFileItemList &items)
   // don't run the advanced filter if the filter is empty
   // and there hasn't been a filter applied before which
   // would have to be removed
-  GoTvUrl url(m_strFilterPath);
+  NlcUrl url(m_strFilterPath);
   if (m_filter.IsEmpty() && !url.HasOption("filter"))
     return false;
 
@@ -2078,7 +2078,7 @@ bool CGUIMediaWindow::GetAdvanceFilteredItems(CFileItemList &items)
   std::map<std::string, CFileItemPtr> lookup;
   for (int j = 0; j < resultItems.Size(); j++)
   {
-    std::string itemPath = GoTvUrl(resultItems[j]->GetPath()).GetWithoutOptions();
+    std::string itemPath = NlcUrl(resultItems[j]->GetPath()).GetWithoutOptions();
     StringUtils::ToLower(itemPath);
 
     lookup[itemPath] = resultItems[j];
@@ -2099,7 +2099,7 @@ bool CGUIMediaWindow::GetAdvanceFilteredItems(CFileItemList &items)
     // check if the item is part of the resultItems list
     // by comparing their paths (but ignoring any special
     // options because they differ from filter to filter)
-    std::string path = GoTvUrl(item->GetPath()).GetWithoutOptions();
+    std::string path = NlcUrl(item->GetPath()).GetWithoutOptions();
     StringUtils::ToLower(path);
 
     std::map<std::string, CFileItemPtr>::iterator itItem = lookup.find(path);
@@ -2181,7 +2181,7 @@ std::string CGUIMediaWindow::GetStartFolder(const std::string &dir)
 
 std::string CGUIMediaWindow::RemoveParameterFromPath(const std::string &strDirectory, const std::string &strParameter)
 {
-  GoTvUrl url(strDirectory);
+  NlcUrl url(strDirectory);
   if (url.HasOption(strParameter))
   {
     url.RemoveOption(strParameter);
@@ -2196,7 +2196,7 @@ bool CGUIMediaWindow::ProcessRenderLoop(bool renderOnly)
   return CServiceBroker::GetGUI()->GetWindowManager().ProcessRenderLoop(renderOnly);
 }
 
-bool CGUIMediaWindow::GetDirectoryItems(GoTvUrl& url, CFileItemList &items, bool useDir)
+bool CGUIMediaWindow::GetDirectoryItems(NlcUrl& url, CFileItemList &items, bool useDir)
 {
   if (m_backgroundLoad)
   {

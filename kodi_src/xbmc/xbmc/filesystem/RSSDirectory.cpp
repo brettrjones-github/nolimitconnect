@@ -18,7 +18,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "threads/SingleLock.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/FileExtensionProvider.h"
 #include "utils/HTMLUtil.h"
 #include "utils/log.h"
@@ -57,7 +57,7 @@ CRSSDirectory::CRSSDirectory() = default;
 
 CRSSDirectory::~CRSSDirectory() = default;
 
-bool CRSSDirectory::ContainsFiles(const GoTvUrl& url)
+bool CRSSDirectory::ContainsFiles(const NlcUrl& url)
 {
   CFileItemList items;
   if(!GetDirectory(url, items))
@@ -378,7 +378,7 @@ static void ParseItemSVT(CFileItem* item, SResources& resources, TiXmlElement* e
   }
   else if (name == "broadcasts")
   {
-    GoTvUrl url(path);
+    NlcUrl url(path);
     if(StringUtils::StartsWith(url.GetFileName(), "v1/"))
     {
       SResource res;
@@ -540,7 +540,7 @@ static void ParseItem(CFileItem* item, TiXmlElement* root, const std::string& pa
   }
 }
 
-bool CRSSDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CRSSDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   const std::string pathToUrl(url.Get());
   std::string strPath(pathToUrl);
@@ -616,7 +616,7 @@ bool CRSSDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CRSSDirectory::Exists(const GoTvUrl& url)
+bool CRSSDirectory::Exists(const NlcUrl& url)
 {
   CCurlFile rss;
   return rss.Exists(url);

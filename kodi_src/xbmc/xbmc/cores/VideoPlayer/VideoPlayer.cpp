@@ -60,9 +60,9 @@
 #include "utils/StringUtils.h"
 #include "video/Bookmark.h"
 #include "video/VideoInfoTag.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "LangInfoKodi.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #ifdef TARGET_RASPBERRY_PI
 #include "cores/omxplayer/OMXPlayerAudio.h"
@@ -75,8 +75,8 @@
 
 #include <iterator>
 
-#include "GuiInterface/IGoTv.h"
-#include "GoTvDebugConfig.h"
+#include "GuiInterface/INlc.h"
+#include "NlcDebugConfig.h"
 
 using namespace KODI::MESSAGING;
 
@@ -617,7 +617,7 @@ void CVideoPlayer::DestroyPlayers()
 }
 
 CVideoPlayer::CVideoPlayer(IPlayerCallback& callback)
-    : m_GoTv( IGoTv::getIGoTv() )
+    : m_Nlc( INlc::getINlc() )
     , IPlayer(callback)
     , CThread("VideoPlayer"),
       m_CurrentAudio(STREAM_AUDIO, VideoPlayer_AUDIO),
@@ -694,7 +694,7 @@ CVideoPlayer::~CVideoPlayer()
 
 bool CVideoPlayer::OpenFile(const CFileItem& file, const CPlayerOptions &options)
 {
-  CLog::Log(LOGNOTICE, "VideoPlayer::OpenFile: %s", GoTvUrl::GetRedacted(file.GetPath()).c_str());
+  CLog::Log(LOGNOTICE, "VideoPlayer::OpenFile: %s", NlcUrl::GetRedacted(file.GetPath()).c_str());
 
   if (m_omxplayer_mode && IsRunning())
     CloseFile();
@@ -801,13 +801,13 @@ bool CVideoPlayer::OpenInputStream()
   m_pInputStream = CDVDFactoryInputStream::CreateInputStream(this, m_item, true);
   if (m_pInputStream == nullptr)
   {
-    CLog::Log(LOGERROR, "CVideoPlayer::OpenInputStream - unable to create input stream for [%s]", GoTvUrl::GetRedacted(m_item.GetPath()).c_str());
+    CLog::Log(LOGERROR, "CVideoPlayer::OpenInputStream - unable to create input stream for [%s]", NlcUrl::GetRedacted(m_item.GetPath()).c_str());
     return false;
   }
 
   if (!m_pInputStream->Open())
   {
-    CLog::Log(LOGERROR, "CVideoPlayer::OpenInputStream - error opening [%s]", GoTvUrl::GetRedacted(m_item.GetPath()).c_str());
+    CLog::Log(LOGERROR, "CVideoPlayer::OpenInputStream - error opening [%s]", NlcUrl::GetRedacted(m_item.GetPath()).c_str());
     return false;
   }
 
@@ -1229,9 +1229,9 @@ void CVideoPlayer::CheckBetterStream(CCurrentStream& current, CDemuxStream* stre
 void CVideoPlayer::Prepare()
 {
 #ifdef DEBUG_FFMPEG_ENABLE_LOGGING
-  m_GoTv.getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
+  m_Nlc.getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
 #else
-  m_GoTv.getILog().setFfmpegLogLevel( LOG_LEVEL_NORMAL );
+  m_Nlc.getILog().setFfmpegLogLevel( LOG_LEVEL_NORMAL );
 #endif
   SetPlaySpeed(DVD_PLAYSPEED_NORMAL);
   m_processInfo->SetSpeed(1.0);
@@ -2549,7 +2549,7 @@ void CVideoPlayer::OnExit()
     m_OmxPlayerState.av_clock.OMXDeinitialize();
   }
 
-  m_GoTv.getILog().clearFfmpegLogLevel();
+  m_Nlc.getILog().clearFfmpegLogLevel();
   m_bStop = true;
 
   bool error = m_error;
@@ -3545,13 +3545,13 @@ bool CVideoPlayer::OpenStream(CCurrentStream& current, int64_t demuxerId, int iS
       return false;
     const SelectionStream& st = m_SelectionStreams.Get(current.type, index);
 
-    CLog::Log(LOGNOTICE, "Opening Subtitle file: %s", GoTvUrl::GetRedacted(st.filename).c_str());
+    CLog::Log(LOGNOTICE, "Opening Subtitle file: %s", NlcUrl::GetRedacted(st.filename).c_str());
     m_pSubtitleDemuxer.reset();
     const auto demux = m_subtitleDemuxerMap.find(demuxerId);
     if (demux == m_subtitleDemuxerMap.end())
     {
       CLog::Log(LOGNOTICE, "No demuxer found for file %s",
-                GoTvUrl::GetRedacted(st.filename).c_str());
+                NlcUrl::GetRedacted(st.filename).c_str());
         return false;
     }
 

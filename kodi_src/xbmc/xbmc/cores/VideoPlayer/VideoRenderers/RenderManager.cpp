@@ -35,7 +35,7 @@
 #include "cores/VideoPlayer/DVDClock.h"
 #include "cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 
 using namespace KODI::MESSAGING;
@@ -177,14 +177,14 @@ bool CRenderManager::Configure()
     CSingleLock lock2( m_presentlock );
     CSingleLock lock3( m_datalock );
 
-    IGoTv::getIGoTv().verifyGlState();
+    INlc::getINlc().verifyGlState();
 
     if( m_pRenderer )
     {
         DeleteRenderer();
     }
 
-    IGoTv::getIGoTv().verifyGlState();
+    INlc::getINlc().verifyGlState();
 
     if( !m_pRenderer )
     {
@@ -193,7 +193,7 @@ bool CRenderManager::Configure()
             return false;
     }
 
-    IGoTv::getIGoTv().verifyGlState();
+    INlc::getINlc().verifyGlState();
 
     m_pRenderer->SetVideoSettings( m_playerPort->GetVideoSettings() );
     bool result = m_pRenderer->Configure( *m_pConfigPicture, m_fps, m_orientation );
@@ -363,7 +363,7 @@ void CRenderManager::PreInit()
             return;
     }
 
-    IGoTv::getIGoTv().verifyGlState();
+    INlc::getINlc().verifyGlState();
 
     if( !g_application.IsCurrentThread() )
     {
@@ -475,7 +475,7 @@ bool CRenderManager::Flush(bool wait, bool saveBuffers)
 
 void CRenderManager::CreateRenderer()
 {
-    IGoTv::getIGoTv().verifyGlState();
+    INlc::getINlc().verifyGlState();
     if( !m_pRenderer )
     {
         CVideoBuffer *buffer = nullptr;
@@ -487,7 +487,7 @@ void CRenderManager::CreateRenderer()
         {
             if( id == "default" )
                 continue;
-            IGoTv::getIGoTv().verifyGlState();
+            INlc::getINlc().verifyGlState();
 
             m_pRenderer = VIDEOPLAYER::CRendererFactory::CreateRenderer( id, buffer );
             if( m_pRenderer )
@@ -496,7 +496,7 @@ void CRenderManager::CreateRenderer()
             }
         }
 
-        IGoTv::getIGoTv().verifyGlState();
+        INlc::getINlc().verifyGlState();
 
         m_pRenderer = VIDEOPLAYER::CRendererFactory::CreateRenderer( "default", buffer );
     }

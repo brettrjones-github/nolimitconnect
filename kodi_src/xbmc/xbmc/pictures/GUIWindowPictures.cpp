@@ -9,8 +9,8 @@
 #include "threads/SystemClock.h"
 #include "GUIWindowPictures.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "Application.h"
 #include "GUIPassword.h"
 #include "GUIDialogPictureInfo.h"
@@ -213,7 +213,7 @@ void CGUIWindowPictures::OnPrepareFileItems(CFileItemList& items)
 
       if (!bProgressVisible && elapsed>1500 && m_dlgProgress)
       { // tag loading takes more then 1.5 secs, show a progress dialog
-        GoTvUrl url(items.GetPath());
+        NlcUrl url(items.GetPath());
 
         m_dlgProgress->SetHeading(CVariant{189});
         m_dlgProgress->SetLine(0, CVariant{505});
@@ -262,7 +262,7 @@ bool CGUIWindowPictures::OnClick(int iItem, const std::string &player)
 
   if (pItem->IsCBZ() || pItem->IsCBR())
   {
-    GoTvUrl pathToUrl;
+    NlcUrl pathToUrl;
     if (pItem->IsCBZ())
       pathToUrl = URIUtils::CreateArchivePath("zip", pItem->GetURL(), "");
     else

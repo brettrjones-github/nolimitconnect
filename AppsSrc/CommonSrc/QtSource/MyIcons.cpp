@@ -649,7 +649,7 @@ QString MyIcons::getIconFile( enum EMyIcons eMyIcon )
 	// built in plugin options
 	case eMyIconCamStreamProvider:
 		return ":/AppRes/Resources/webcam-server.svg";
-	case eMyIconGoTvStation:
+	case eMyIconNlcStation:
 		return ":/AppRes/Resources/radio-tower.svg";
 
     case eMyIconShareServices:

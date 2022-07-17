@@ -24,7 +24,7 @@
 #include "qml/QmlVideoObject.h"
 #include "qml/painter/GlslPainter.h"
 
-GoTvPtoPQmlVideoObject::GoTvPtoPQmlVideoObject(QQuickItem *parent)
+NlcPtoPQmlVideoObject::NlcPtoPQmlVideoObject(QQuickItem *parent)
     : QQuickPaintedItem(parent),
       _player(0),
       _geometry(0, 0, 640, 480),
@@ -33,32 +33,32 @@ GoTvPtoPQmlVideoObject::GoTvPtoPQmlVideoObject(QQuickItem *parent)
       _graphicsPainter(0),
       _paintedOnce(false),
       _gotSize(false),
-      _aspectRatio(GoTvPtoP::Original),
-      _cropRatio(GoTvPtoP::Original)
+      _aspectRatio(NlcPtoP::Original),
+      _cropRatio(NlcPtoP::Original)
 {
     setRenderTarget(InvertedYFramebufferObject);
     setFlag(ItemHasContents, true);
 }
 
-GoTvPtoPQmlVideoObject::~GoTvPtoPQmlVideoObject()
+NlcPtoPQmlVideoObject::~NlcPtoPQmlVideoObject()
 {
     if (_graphicsPainter)
         delete _graphicsPainter;
 }
 
-QRectF GoTvPtoPQmlVideoObject::boundingRect() const
+QRectF NlcPtoPQmlVideoObject::boundingRect() const
 {
     return _boundingRect;
 }
 
-void GoTvPtoPQmlVideoObject::updateBoundingRect()
+void NlcPtoPQmlVideoObject::updateBoundingRect()
 {
     _boundingRect = QRectF(0, 0, _frameSize.width(), _frameSize.height());
 
     updateAspectRatio();
 
     QSizeF scaledFrameSize = _boundingRect.size();
-    if (_aspectRatio == GoTvPtoP::Ignore) {
+    if (_aspectRatio == NlcPtoP::Ignore) {
         scaledFrameSize.scale(_geometry.size(), Qt::IgnoreAspectRatio);
     } else {
         scaledFrameSize.scale(_geometry.size(), Qt::KeepAspectRatio);
@@ -70,9 +70,9 @@ void GoTvPtoPQmlVideoObject::updateBoundingRect()
     _boundingRect.moveCenter(_geometry.center());
 }
 
-void GoTvPtoPQmlVideoObject::updateAspectRatio()
+void NlcPtoPQmlVideoObject::updateAspectRatio()
 {
-    QSizeF ar = GoTvPtoP::ratioSize( _aspectRatio );
+    QSizeF ar = NlcPtoP::ratioSize( _aspectRatio );
 
     if( ar.width() != 0 && ar.height() != 0)
     {
@@ -82,9 +82,9 @@ void GoTvPtoPQmlVideoObject::updateAspectRatio()
     }
 }
 
-void GoTvPtoPQmlVideoObject::updateCropRatio()
+void NlcPtoPQmlVideoObject::updateCropRatio()
 {
-    QSizeF ar = GoTvPtoP::ratioSize( _cropRatio );
+    QSizeF ar = NlcPtoP::ratioSize( _cropRatio );
 
     if( ar.width() != 0 && ar.height() != 0)
     {
@@ -102,29 +102,29 @@ void GoTvPtoPQmlVideoObject::updateCropRatio()
     }
 }
 
-GoTvPtoP::Ratio GoTvPtoPQmlVideoObject::cropRatio() const
+NlcPtoP::Ratio NlcPtoPQmlVideoObject::cropRatio() const
 {
     return _cropRatio;
 }
 
-void GoTvPtoPQmlVideoObject::setCropRatio(const GoTvPtoP::Ratio &cropRatio)
+void NlcPtoPQmlVideoObject::setCropRatio(const NlcPtoP::Ratio &cropRatio)
 {
     _cropRatio = cropRatio;
     updateBoundingRect();
 }
 
-GoTvPtoP::Ratio GoTvPtoPQmlVideoObject::aspectRatio() const
+NlcPtoP::Ratio NlcPtoPQmlVideoObject::aspectRatio() const
 {
     return _aspectRatio;
 }
 
-void GoTvPtoPQmlVideoObject::setAspectRatio(const GoTvPtoP::Ratio &aspectRatio)
+void NlcPtoPQmlVideoObject::setAspectRatio(const NlcPtoP::Ratio &aspectRatio)
 {
     _aspectRatio = aspectRatio;
     updateBoundingRect();
 }
 
-void GoTvPtoPQmlVideoObject::paint(QPainter *painter)
+void NlcPtoPQmlVideoObject::paint(QPainter *painter)
 {
     lock();
     if( _frame.inited )
@@ -156,7 +156,7 @@ void GoTvPtoPQmlVideoObject::paint(QPainter *painter)
     unlock();
 }
 
-void GoTvPtoPQmlVideoObject::geometryChanged(const QRectF &newGeometry,
+void NlcPtoPQmlVideoObject::geometryChanged(const QRectF &newGeometry,
                                           const QRectF &oldGeometry)
 {
     _geometry = newGeometry;
@@ -165,12 +165,12 @@ void GoTvPtoPQmlVideoObject::geometryChanged(const QRectF &newGeometry,
     QQuickPaintedItem::geometryChanged(newGeometry, oldGeometry);
 }
 
-void GoTvPtoPQmlVideoObject::frameReady()
+void NlcPtoPQmlVideoObject::frameReady()
 {
     update();
 }
 
-void GoTvPtoPQmlVideoObject::reset()
+void NlcPtoPQmlVideoObject::reset()
 {
     // Do not reset the spyFormats as they will not change.
     _paintedOnce = false;
@@ -184,12 +184,12 @@ void GoTvPtoPQmlVideoObject::reset()
     }
 }
 
-void GoTvPtoPQmlVideoObject::connectToMediaPlayer(GoTvPtoPMediaPlayer *player)
+void NlcPtoPQmlVideoObject::connectToMediaPlayer(NlcPtoPMediaPlayer *player)
 {
     setCallbacks(player);
 }
 
-void GoTvPtoPQmlVideoObject::disconnectFromMediaPlayer(GoTvPtoPMediaPlayer *player)
+void NlcPtoPQmlVideoObject::disconnectFromMediaPlayer(NlcPtoPMediaPlayer *player)
 {
     // Try to prevent callbacks called after this object is being deleted
     if (player) {
@@ -199,22 +199,22 @@ void GoTvPtoPQmlVideoObject::disconnectFromMediaPlayer(GoTvPtoPMediaPlayer *play
     unsetCallbacks(player);
 }
 
-void GoTvPtoPQmlVideoObject::lock()
+void NlcPtoPQmlVideoObject::lock()
 {
     _mutex.lock();
 }
 
-bool GoTvPtoPQmlVideoObject::tryLock()
+bool NlcPtoPQmlVideoObject::tryLock()
 {
     return _mutex.tryLock();
 }
 
-void GoTvPtoPQmlVideoObject::unlock()
+void NlcPtoPQmlVideoObject::unlock()
 {
     _mutex.unlock();
 }
 
-void *GoTvPtoPQmlVideoObject::lockCallback(void **planes)
+void *NlcPtoPQmlVideoObject::lockCallback(void **planes)
 {
     lock();
 
@@ -225,7 +225,7 @@ void *GoTvPtoPQmlVideoObject::lockCallback(void **planes)
     return 0; // There is only one buffer, so no need to identify it.
 }
 
-void GoTvPtoPQmlVideoObject::unlockCallback(void *picture, void *const*planes)
+void NlcPtoPQmlVideoObject::unlockCallback(void *picture, void *const*planes)
 {
     Q_UNUSED(picture);
     Q_UNUSED(planes);
@@ -235,7 +235,7 @@ void GoTvPtoPQmlVideoObject::unlockCallback(void *picture, void *const*planes)
     QMetaObject::invokeMethod(this, "frameReady", Qt::QueuedConnection);
 }
 
-void GoTvPtoPQmlVideoObject::displayCallback(void *picture)
+void NlcPtoPQmlVideoObject::displayCallback(void *picture)
 {
     if( !_frame.inited )
     {
@@ -249,7 +249,7 @@ void GoTvPtoPQmlVideoObject::displayCallback(void *picture)
     Q_UNUSED(picture); // There is only one buffer.
 }
 
-unsigned int GoTvPtoPQmlVideoObject::formatCallback(char *chroma,
+unsigned int NlcPtoPQmlVideoObject::formatCallback(char *chroma,
                                                  unsigned *width, unsigned *height,
                                                  unsigned *pitches, unsigned *lines)
 {
@@ -264,7 +264,7 @@ unsigned int GoTvPtoPQmlVideoObject::formatCallback(char *chroma,
         _graphicsPainter = new GlslPainter;
 
     qstrcpy(chroma, "YV12");
-    const gotvptop_chroma_description_t *chromaDesc = gotvptop_fourcc_GetChromaDescription(GOTV_CODEC_YV12);
+    const gotvptop_chroma_description_t *chromaDesc = gotvptop_fourcc_GetChromaDescription(NLC_CODEC_YV12);
 
     Q_ASSERT(chromaDesc);
 
@@ -287,7 +287,7 @@ unsigned int GoTvPtoPQmlVideoObject::formatCallback(char *chroma,
     return bufferSize;
 }
 
-void GoTvPtoPQmlVideoObject::formatCleanUpCallback()
+void NlcPtoPQmlVideoObject::formatCleanUpCallback()
 {
     _frame.inited = false;
     // To avoid thread polution do not call reset directly but via the event loop.

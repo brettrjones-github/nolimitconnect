@@ -10,7 +10,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "PVRDirectory.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -27,7 +27,7 @@ CPVRDirectory::CPVRDirectory() = default;
 
 CPVRDirectory::~CPVRDirectory() = default;
 
-bool CPVRDirectory::Exists(const GoTvUrl& url)
+bool CPVRDirectory::Exists(const NlcUrl& url)
 {
   if (!CServiceBroker::GetPVRManager().IsStarted())
     return false;
@@ -35,7 +35,7 @@ bool CPVRDirectory::Exists(const GoTvUrl& url)
   return (url.IsProtocol("pvr") && StringUtils::StartsWith(url.GetFileName(), "recordings"));
 }
 
-bool CPVRDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CPVRDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   std::string base(url.Get());
   URIUtils::RemoveSlashAtEnd(base);
@@ -104,7 +104,7 @@ bool CPVRDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
 
 bool CPVRDirectory::SupportsWriteFileOperations(const std::string& strPath)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   std::string filename = url.GetFileName();
 
   return URIUtils::IsPVRRecording(filename);
@@ -112,7 +112,7 @@ bool CPVRDirectory::SupportsWriteFileOperations(const std::string& strPath)
 
 bool CPVRDirectory::IsLiveTV(const std::string& strPath)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   std::string filename = url.GetFileName();
 
   return URIUtils::IsLiveTV(filename);

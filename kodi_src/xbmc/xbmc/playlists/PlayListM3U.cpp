@@ -8,8 +8,8 @@
 
 #include "PlayListM3U.h"
 #include "filesystem/File.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"

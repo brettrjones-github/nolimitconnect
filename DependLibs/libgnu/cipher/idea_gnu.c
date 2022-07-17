@@ -185,7 +185,7 @@ cipher( byte *outbuf, const byte *inbuf, uint16_t *key )
 	} while(0)
 
     memcpy (in, inbuf, sizeof in);
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
     x1 = (x1>>8) | (x1<<8);
     x2 = (x2>>8) | (x2<<8);
     x3 = (x3>>8) | (x3<<8);
@@ -217,7 +217,7 @@ cipher( byte *outbuf, const byte *inbuf, uint16_t *key )
     x2 += *key++;
     MUL(x4, *key);
 
-#ifndef GOTV_ARCH_BIGENDIAN
+#ifndef NLC_ARCH_BIGENDIAN
     x1 = (x1>>8) | (x1<<8);
     x2 = (x2>>8) | (x2<<8);
     x3 = (x3>>8) | (x3<<8);

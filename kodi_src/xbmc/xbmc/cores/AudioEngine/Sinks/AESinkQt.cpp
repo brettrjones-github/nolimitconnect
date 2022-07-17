@@ -37,7 +37,7 @@
 
 #include <sys/ioctl.h>
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 #include <CoreLib/VxDebug.h>
 
 #define OSS_FRAMES 256
@@ -50,7 +50,7 @@
 
 //============================================================================
 CAESinkQt::CAESinkQt()
-: m_IGoTv( IGoTv::getIGoTv() )
+: m_INlc( INlc::getINlc() )
 {
 }
 
@@ -163,14 +163,14 @@ void CAESinkQt::Stop()
 void CAESinkQt::GetDelay( AEDelayStatus& status )
 {
     // return current cached data duration in seconds 
-    status.SetDelay( m_IGoTv.toGuiGetAudioDelaySeconds( eAppModuleKodi ) );
+    status.SetDelay( m_INlc.toGuiGetAudioDelaySeconds( eAppModuleKodi ) );
 }
 
 //============================================================================
 double CAESinkQt::GetCacheTotal( )
 {
     // return total possible cached data duration in seconds 
-    return  m_IGoTv.toGuiGetAudioCacheTotalSeconds( eAppModuleKodi );
+    return  m_INlc.toGuiGetAudioCacheTotalSeconds( eAppModuleKodi );
 }
 
 extern bool movieStarted;
@@ -196,9 +196,9 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
     //}
 
 	int retryCnt = 0;
-    while( ( m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi ) < totalBytes ) && ( retryCnt < 50 ) )
+    while( ( m_INlc.toGuiGetAudioCacheFreeSpace( eAppModuleKodi ) < totalBytes ) && ( retryCnt < 50 ) )
     {
-        int requiredSpace = totalBytes - m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi );
+        int requiredSpace = totalBytes - m_INlc.toGuiGetAudioCacheFreeSpace( eAppModuleKodi );
         if( requiredSpace > 0 )
         {
             VxSleep( 10 );
@@ -213,7 +213,7 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
 //#ifdef DEBUG_KODI_AUDIO
 	if( retryCnt >= 50 )
 	{
-		LogMsg( LOG_DEBUG, "CAESinkQt::AddPackets timeout snd buf needs %d free space but has %d \n", totalBytes, m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi )  );
+		LogMsg( LOG_DEBUG, "CAESinkQt::AddPackets timeout snd buf needs %d free space but has %d \n", totalBytes, m_INlc.toGuiGetAudioCacheFreeSpace( eAppModuleKodi )  );
 	}
 //#endif // DEBUG_KODI_AUDIO
 
@@ -278,7 +278,7 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
         }
     }
 
-    int wrote = m_IGoTv.toGuiPlayAudio( eAppModuleKodi, (float *)audioBuffer, totalBytes );
+    int wrote = m_INlc.toGuiPlayAudio( eAppModuleKodi, (float *)audioBuffer, totalBytes );
     if( wrote < 0 )
     {
         CLog::Log( LOGERROR, "CAESinkQt::AddPackets - Failed to write" );

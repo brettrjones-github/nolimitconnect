@@ -14,7 +14,7 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #include <string>
 #include <robuffer.h>
@@ -71,12 +71,12 @@ bool CWinLibraryFile::IsValid(const CURL & url)
     && !url.GetFileName().empty();
 }
 
-bool CWinLibraryFile::Open(const GoTvUrl& url)
+bool CWinLibraryFile::Open(const NlcUrl& url)
 {
   return OpenIntenal(url, FileAccessMode::Read);
 }
 
-bool CWinLibraryFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+bool CWinLibraryFile::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 {
   return OpenIntenal(url, FileAccessMode::ReadWrite);
 }
@@ -229,17 +229,17 @@ bool CWinLibraryFile::Rename(const CURL & urlCurrentName, const CURL & urlNewNam
   return false;
 }
 
-bool CWinLibraryFile::SetHidden(const GoTvUrl& url, bool hidden)
+bool CWinLibraryFile::SetHidden(const NlcUrl& url, bool hidden)
 {
   return false;
 }
 
-bool CWinLibraryFile::Exists(const GoTvUrl& url)
+bool CWinLibraryFile::Exists(const NlcUrl& url)
 {
   return GetFile(url) != nullptr;
 }
 
-int CWinLibraryFile::Stat(const GoTvUrl& url, struct __stat64* statData)
+int CWinLibraryFile::Stat(const NlcUrl& url, struct __stat64* statData)
 {
   if (URIUtils::HasSlashAtEnd(url.GetFileName(), false))
   {
@@ -258,7 +258,7 @@ int CWinLibraryFile::Stat(struct __stat64* statData)
   return Stat(m_sFile, statData);
 }
 
-bool CWinLibraryFile::IsInAccessList(const GoTvUrl& url)
+bool CWinLibraryFile::IsInAccessList(const NlcUrl& url)
 {
   using KODI::PLATFORM::WINDOWS::FromW;
   static std::string localPath;
@@ -288,7 +288,7 @@ bool CWinLibraryFile::IsInAccessList(const GoTvUrl& url)
   return false;
 }
 
-bool CWinLibraryFile::OpenIntenal(const GoTvUrl& url, FileAccessMode mode)
+bool CWinLibraryFile::OpenIntenal(const NlcUrl& url, FileAccessMode mode)
 {
   // cannot open directories
   if (URIUtils::HasSlashAtEnd(url.GetFileName(), false))
@@ -329,7 +329,7 @@ bool CWinLibraryFile::OpenIntenal(const GoTvUrl& url, FileAccessMode mode)
   return m_fileStream != nullptr;
 }
 
-StorageFile CWinLibraryFile::GetFile(const GoTvUrl& url)
+StorageFile CWinLibraryFile::GetFile(const NlcUrl& url)
 {
   // check that url is library url
   if (CWinLibraryDirectory::IsValid(url))
@@ -375,13 +375,13 @@ StorageFile CWinLibraryFile::GetFile(const GoTvUrl& url)
   return nullptr;
 }
 
-bool CWinLibraryFile::IsInList(const GoTvUrl& url, const IStorageItemAccessList& list)
+bool CWinLibraryFile::IsInList(const NlcUrl& url, const IStorageItemAccessList& list)
 {
   auto token = GetTokenFromList(url, list);
   return !token.empty();
 }
 
-winrt::hstring CWinLibraryFile::GetTokenFromList(const GoTvUrl& url, const IStorageItemAccessList& list)
+winrt::hstring CWinLibraryFile::GetTokenFromList(const NlcUrl& url, const IStorageItemAccessList& list)
 {
   AccessListEntryView listview = list.Entries();
   if (listview.Size() == 0)

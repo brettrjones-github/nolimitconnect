@@ -132,7 +132,7 @@ static void FLAC__MD5Transform(FLAC__uint32 buf[4], FLAC__uint32 const in[16])
 	buf[3] += d;
 }
 
-#if GOTV_ARCH_BIGENDIAN
+#if NLC_ARCH_BIGENDIAN
 //@@@@@@ OPT: use bswap/intrinsics
 static void byteSwap(FLAC__uint32 *buf, unsigned words)
 {

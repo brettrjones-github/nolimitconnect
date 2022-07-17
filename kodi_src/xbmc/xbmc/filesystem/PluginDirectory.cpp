@@ -28,7 +28,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "messaging/ApplicationMessenger.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 using namespace ADDON;
@@ -110,7 +110,7 @@ CPluginDirectory *CPluginDirectory::dirFromHandle(int handle)
 
 bool CPluginDirectory::StartScript(const std::string& strPath, bool retrievingDir, bool resume)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
 
   // try the plugin type first, and if not found, try an unknown type
   if (!CServiceBroker::GetAddonMgr().GetAddon(url.GetHostName(), m_addon, ADDON_PLUGIN) &&
@@ -182,7 +182,7 @@ bool CPluginDirectory::StartScript(const std::string& strPath, bool retrievingDi
 
 bool CPluginDirectory::GetPluginResult(const std::string& strPath, CFileItem &resultItem, bool resume)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   CPluginDirectory newDir;
 
   bool success = newDir.StartScript(strPath, false, resume);
@@ -437,7 +437,7 @@ void CPluginDirectory::AddSortMethod(int handle, SORT_METHOD sortMethod, const s
   }
 }
 
-bool CPluginDirectory::GetDirectory(const GoTvUrl& url, CFileItemList& items)
+bool CPluginDirectory::GetDirectory(const NlcUrl& url, CFileItemList& items)
 {
   const std::string pathToUrl(url.Get());
   bool success = StartScript(pathToUrl, true, false);
@@ -450,7 +450,7 @@ bool CPluginDirectory::GetDirectory(const GoTvUrl& url, CFileItemList& items)
 
 bool CPluginDirectory::RunScriptWithParams(const std::string& strPath, bool resume)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   if (url.GetHostName().empty()) // called with no script - should never happen
     return false;
 
@@ -613,7 +613,7 @@ bool CPluginDirectory::IsMediaLibraryScanningAllowed(const std::string& content,
   if (content.empty())
     return false;
 
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   if (url.GetHostName().empty())
     return false;
   AddonPtr addon;
@@ -645,7 +645,7 @@ bool CPluginDirectory::CheckExists(const std::string& content, const std::string
     return false;
   // call the plugin at specified path with option "kodi_action=check_exists"
   // url exists if the plugin returns any fileitem with setResolvedUrl
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   url.SetOption("kodi_action", "check_exists");
   CFileItem item;
   return CPluginDirectory::GetPluginResult(url.Get(), item, false);

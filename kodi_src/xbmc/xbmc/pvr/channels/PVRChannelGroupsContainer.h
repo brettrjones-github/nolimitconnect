@@ -12,7 +12,7 @@
 
 #include "pvr/channels/PVRChannelGroups.h"
 
-class GoTvUrl;
+class NlcUrl;
 
 namespace PVR
 {
@@ -199,7 +199,7 @@ namespace PVR
     CPVRChannelGroupsContainer& operator=(const CPVRChannelGroupsContainer&) = delete;
     CPVRChannelGroupsContainer(const CPVRChannelGroupsContainer&) = delete;
 
-    bool FilterDirectory(const GoTvUrl &url, CFileItemList &results) const;
+    bool FilterDirectory(const NlcUrl &url, CFileItemList &results) const;
 
     bool m_bLoaded = false;
   };

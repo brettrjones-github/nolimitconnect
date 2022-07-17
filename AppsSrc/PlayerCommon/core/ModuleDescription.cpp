@@ -18,28 +18,28 @@
 
 #include "ModuleDescription.h"
 
-GoTvPtoPModuleDescription::GoTvPtoPModuleDescription(Type type,
+NlcPtoPModuleDescription::NlcPtoPModuleDescription(Type type,
                                            const QString &name)
     : _type(type),
       _name(name) {}
 
-GoTvPtoPModuleDescription::~GoTvPtoPModuleDescription() {} // LCOV_EXCL_LINE
+NlcPtoPModuleDescription::~NlcPtoPModuleDescription() {} // LCOV_EXCL_LINE
 
-void GoTvPtoPModuleDescription::setShortName(const QString &name)
+void NlcPtoPModuleDescription::setShortName(const QString &name)
 {
     if (_shortName != name) {
         _shortName = name;
     }
 }
 
-void GoTvPtoPModuleDescription::setLongName(const QString &name)
+void NlcPtoPModuleDescription::setLongName(const QString &name)
 {
     if (_longName != name) {
         _longName = name;
     }
 }
 
-void GoTvPtoPModuleDescription::setHelp(const QString &help)
+void NlcPtoPModuleDescription::setHelp(const QString &help)
 {
     if (_help != help) {
         _help = help;

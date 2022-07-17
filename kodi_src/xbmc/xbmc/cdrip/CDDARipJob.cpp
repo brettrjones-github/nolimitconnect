@@ -13,7 +13,7 @@
 #include "ServiceBroker.h"
 #include "utils/log.h"
 #include "utils/SystemInfo.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "dialogs/GUIDialogExtendedProgressBar.h"
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"

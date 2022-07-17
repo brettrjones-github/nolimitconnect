@@ -64,7 +64,7 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGUID.h>
 
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 
 #include <NetLib/VxPeerMgr.h>
 
@@ -87,13 +87,13 @@ namespace
 		{
 		case eAppModeDefault:
 			return QObject::tr( "No Limit Connect" );
-		case eAppModeGoTvViewer:
+		case eAppModeNlcViewer:
 			return QObject::tr( "NoLimitConnect Player" );
-		case eAppModeGoTvProvider:
+		case eAppModeNlcProvider:
 			return QObject::tr( "NoLimitConnect Provider" );
-		case eAppModeGoTvStation:
+		case eAppModeNlcStation:
 			return QObject::tr( "NoLimitConnect Station" );
-		case eAppModeGoTvNetworkHost:
+		case eAppModeNlcNetworkHost:
 			return QObject::tr( "NoLimitConnect Network Host" );
 		case eAppModeUnknown:
 		default:
@@ -109,13 +109,13 @@ namespace
 		{
 		case eAppModeDefault:
 			return appShortName;
-		case eAppModeGoTvViewer:
+		case eAppModeNlcViewer:
 			return "NoLimitPlayer";
-		case eAppModeGoTvProvider:
+		case eAppModeNlcProvider:
 			return "NoLimitProvider";
-		case eAppModeGoTvStation:
+		case eAppModeNlcStation:
 			return "NoLimitStation";
-		case eAppModeGoTvNetworkHost:
+		case eAppModeNlcNetworkHost:
 			return "NoLimitNetHost";
 		case eAppModeUnknown:
 		default:
@@ -125,7 +125,7 @@ namespace
 }
 
 //============================================================================
-AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp )
+AppCommon& CreateAppInstance( INlc& gotv, QApplication* myApp )
 {
 static AppSettings appSettings;
 static AccountMgr accountMgr;
@@ -156,7 +156,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 						EDefaultAppMode appDefaultMode,
 						AppSettings&	appSettings, 
                         AccountMgr&	    accountMgr,
-						IGoTv&		    gotv )
+						INlc&		    gotv )
 : QWidget()
 , m_QApp( myQApp )
 , m_AppDefaultMode( appDefaultMode )
@@ -165,7 +165,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppShortName( GetAppShortName( appDefaultMode ) )
 , m_AppTitle( GetAppTitle( appDefaultMode ) )
 , m_AccountMgr( accountMgr )
-, m_GoTv( gotv )
+, m_Nlc( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
 , m_ConnectIdListMgr( *this )
 , m_ThumbMgr( *this )

@@ -11,7 +11,7 @@
 #include <string>
 
 class CFileItem;
-class GoTvUrl;
+class NlcUrl;
 
 namespace PLAYLIST
 {
@@ -22,7 +22,7 @@ namespace PLAYLIST
   public:
     static CPlayList* Create(const std::string& filename);
     static CPlayList* Create(const CFileItem& item);
-    static bool IsPlaylist(const GoTvUrl& url);
+    static bool IsPlaylist(const NlcUrl& url);
     static bool IsPlaylist(const std::string& filename);
     static bool IsPlaylist(const CFileItem& item);
   };

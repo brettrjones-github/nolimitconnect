@@ -17,7 +17,7 @@
 #include "GUIPassword.h"
 #include "PasswordManager.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "addons/Skin.h"
 #include "dialogs/GUIDialogKaiToast.h"
 #include "dialogs/GUIDialogYesNo.h"

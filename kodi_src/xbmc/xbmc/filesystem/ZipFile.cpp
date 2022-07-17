@@ -7,7 +7,7 @@
  */
 
 #include "ZipFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/URIUtils.h"
 #include "utils/auto_buffer.h"
 #include "utils/log.h"
@@ -41,10 +41,10 @@ CZipFile::~CZipFile()
   Close();
 }
 
-bool CZipFile::Open(const GoTvUrl&url)
+bool CZipFile::Open(const NlcUrl&url)
 {
   std::string strOpts = url.GetOptions();
-  GoTvUrl url2(url);
+  NlcUrl url2(url);
   url2.SetOptions("");
   if (!g_ZipManager.GetZipEntry(url2,mZipItem))
     return false;
@@ -66,7 +66,7 @@ bool CZipFile::Open(const GoTvUrl&url)
     if (!CFile::Exists("special://temp/" + URIUtils::GetFileName(url2)))
     {
       url2.SetOptions("?cache=no");
-      const GoTvUrl pathToUrl("special://temp/" + URIUtils::GetFileName(url2));
+      const NlcUrl pathToUrl("special://temp/" + URIUtils::GetFileName(url2));
       if (!CFile::Copy(url2, pathToUrl))
         return false;
     }
@@ -233,7 +233,7 @@ int64_t CZipFile::Seek(int64_t iFilePosition, int iWhence)
   return -1;
 }
 
-bool CZipFile::Exists(const GoTvUrl& url)
+bool CZipFile::Exists(const NlcUrl& url)
 {
   SZipEntry item;
   if (g_ZipManager.GetZipEntry(url,item))
@@ -261,7 +261,7 @@ int CZipFile::Stat(struct __stat64 *buffer)
   return ret;
 }
 
-int CZipFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CZipFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   if (!g_ZipManager.GetZipEntry(url, mZipItem))
   {

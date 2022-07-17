@@ -24,7 +24,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "platform/android/activity/XBMCApp.h"
 
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/log.h"
 #include "utils/RegExp.h"
 #include "utils/StringUtils.h"

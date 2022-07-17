@@ -29,7 +29,7 @@
 #include "settings/SettingsComponent.h"
 #include "cores/VideoSettings.h"
 #include "TextureCache.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/log.h"
 #include "utils/EmbeddedArt.h"
 #include "utils/StringUtils.h"
@@ -103,7 +103,7 @@ bool CThumbExtractor::DoWork()
   bool result=false;
   if (m_thumb)
   {
-    CLog::Log(LOGDEBUG,"%s - trying to extract thumb from video file %s", __FUNCTION__, GoTvUrl::GetRedacted(m_item.GetPath()).c_str());
+    CLog::Log(LOGDEBUG,"%s - trying to extract thumb from video file %s", __FUNCTION__, NlcUrl::GetRedacted(m_item.GetPath()).c_str());
     // construct the thumb cache file
     CTextureDetails details;
     details.file = CTextureCache::GetCacheFile(m_target) + ".jpg";
@@ -132,7 +132,7 @@ bool CThumbExtractor::DoWork()
            !m_item.GetVideoInfoTag()->HasStreamDetails()))
   {
     // No tag or no details set, so extract them
-    CLog::Log(LOGDEBUG,"%s - trying to extract filestream details from video file %s", __FUNCTION__, GoTvUrl::GetRedacted(m_item.GetPath()).c_str());
+    CLog::Log(LOGDEBUG,"%s - trying to extract filestream details from video file %s", __FUNCTION__, NlcUrl::GetRedacted(m_item.GetPath()).c_str());
     result = CDVDFileInfo::GetFileStreamDetails(&m_item);
   }
 
@@ -205,7 +205,7 @@ static void SetupRarOptions(CFileItem& item, const std::string& path)
   std::string path2(path);
   if (item.IsVideoDb() && item.HasVideoInfoTag())
     path2 = item.GetVideoInfoTag()->m_strFileNameAndPath;
-  GoTvUrl url(path2);
+  NlcUrl url(path2);
   std::string opts = url.GetOptions();
   if (opts.find("flags") != std::string::npos)
     return;

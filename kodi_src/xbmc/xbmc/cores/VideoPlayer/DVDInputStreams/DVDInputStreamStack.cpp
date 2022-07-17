@@ -41,7 +41,7 @@ bool CDVDInputStreamStack::Open()
   CStackDirectory dir;
   CFileItemList   items;
 
-  const GoTvUrl pathToUrl(m_item.GetDynPath());
+  const NlcUrl pathToUrl(m_item.GetDynPath());
   if(!dir.GetDirectory(pathToUrl, items))
   {
     CLog::Log(LOGERROR, "CDVDInputStreamStack::Open - failed to get list of stacked items");

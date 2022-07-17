@@ -15,16 +15,16 @@
 
 #include "RenderGlLogic.h"
 #include "RenderShaderQt.h"
-#include "EventsQtToGoTv.h"
-#include "GuiInterface/IGoTvRender.h"
-#include "GuiInterface/IGoTvEvents.h"
+#include "EventsQtToNlc.h"
+#include "GuiInterface/INlcRender.h"
+#include "GuiInterface/INlcEvents.h"
 
-class GoTvRenderFrame;
+class NlcRenderFrame;
 class CRenderBuffer;
 class QKeyEvent;
 class QMouseEvent;
 
-class RenderGlWidget : public RenderGlLogic, public IGoTvRender
+class RenderGlWidget : public RenderGlLogic, public INlcRender
 {
 	Q_OBJECT
 public:
@@ -124,10 +124,10 @@ public:
     bool                        loadToGPU( CQtTexture * texture ) override;
     void                        bindToUnit( CQtTexture * texture, unsigned int unit ) override;
 
-    void                        beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color ) override;
-    void                        drawGuiTexture( CGUITextureQt * textrue, float * x, float * y, float * z, const GoTvRect& texture, const GoTvRect& diffuse, int orientation ) override;
+    void                        beginGuiTexture( CGUITextureQt * guiTexture, NlcColor color ) override;
+    void                        drawGuiTexture( CGUITextureQt * textrue, float * x, float * y, float * z, const NlcRect& texture, const NlcRect& diffuse, int orientation ) override;
     void                        endGuiTexture( CGUITextureQt * guiTexture ) override;
-    void                        drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords ) override;
+    void                        drawQuad( const NlcRect &rect, NlcColor color, CBaseTexture * texture, const NlcRect * texCoords ) override;
 
     bool                        firstBegin( CGUIFontTTFQt * font )  override;
     void                        lastEnd( CGUIFontTTFQt * font ) override;
@@ -141,7 +141,7 @@ public:
     virtual void                destroyStaticVertexBuffers( CGUIFontTTFQt * font )  override;
 
     //=== remder ===//
-    void                        captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& captureArea ) override;
+    void                        captureScreen( CScreenshotSurface * screenCaptrue, NlcRect& captureArea ) override;
 
     void                        toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* videoBuffer );
     bool                        initRenderSystem() override;
@@ -154,24 +154,24 @@ public:
     bool                        endRender() override{ return RenderGlLogic::endRenderGl(); }
     void                        presentRender( bool rendered, bool videoLayer ) override{ RenderGlLogic::presentRenderGl( rendered, videoLayer ); }
 
-    bool                        clearBuffers( GoTvColor color ) override;
+    bool                        clearBuffers( NlcColor color ) override;
     bool                        isExtSupported( const char* extension ) override;
 
     void                        setVSync( bool vsync ) override;
     void                        resetVSync() override {  }
 
-    void                        setViewPort( const GoTvRect& viewPort ) override;
-    void                        getViewPort( GoTvRect& viewPort ) override;
+    void                        setViewPort( const NlcRect& viewPort ) override;
+    void                        getViewPort( NlcRect& viewPort ) override;
 
     bool                        scissorsCanEffectClipping() override;
-    GoTvRect                    clipRectToScissorRect( const GoTvRect &rect ) override;
-    void                        setScissors( const GoTvRect& rect ) override;
+    NlcRect                    clipRectToScissorRect( const NlcRect &rect ) override;
+    void                        setScissors( const NlcRect& rect ) override;
     void                        resetScissors() override;
 
     void                        captureStateBlock() override;
     void                        applyStateBlock() override;
 
-    void                        setCameraPosition( const GoTvPoint &camera, int screenWidth, int screenHeight, float stereoFactor = 0.0f ) override;
+    void                        setCameraPosition( const NlcPoint &camera, int screenWidth, int screenHeight, float stereoFactor = 0.0f ) override;
 
     void                        applyHardwareTransform( const TransformMatrix &matrix ) override;
     void                        restoreHardwareTransform() override;
@@ -245,7 +245,7 @@ protected:
  
     //=== vars ===//
     AppCommon&				    m_MyApp;
-    EventsQtToGoTv              m_QtToKodi;
+    EventsQtToNlc              m_QtToKodi;
 
     GLuint                      m_TextureIds[ MAX_RENDER_PLANES ];
     GlTextureSize               m_TexSize[ MAX_RENDER_PLANES ];
@@ -253,7 +253,7 @@ protected:
     GlTextureDescriptor         m_TexDescriptor;
     int                         m_MaxTextureSize = 2048;
 
-    GoTvRenderFrame *            m_Frame = nullptr;
+    NlcRenderFrame *            m_Frame = nullptr;
 
     // render
     int                         m_SrcWidth = 320;

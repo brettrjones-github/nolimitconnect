@@ -19,13 +19,13 @@ public:
   explicit COverrideFile(bool writable);
   ~COverrideFile() override;
 
-  bool Open(const GoTvUrl& url) override;
-  bool Exists(const GoTvUrl& url) override;
-  int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+  bool Open(const NlcUrl& url) override;
+  bool Exists(const NlcUrl& url) override;
+  int Stat(const NlcUrl& url, struct __stat64* buffer) override;
   int Stat(struct __stat64* buffer) override;
-  bool OpenForWrite(const GoTvUrl& url, bool bOverWrite = false) override;
-  bool Delete(const GoTvUrl& url) override;
-  bool Rename(const GoTvUrl& url, const GoTvUrl& urlnew) override;
+  bool OpenForWrite(const NlcUrl& url, bool bOverWrite = false) override;
+  bool Delete(const NlcUrl& url) override;
+  bool Rename(const NlcUrl& url, const NlcUrl& urlnew) override;
 
   ssize_t Read(void* lpBuf, size_t uiBufSize) override;
   ssize_t Write(const void* lpBuf, size_t uiBufSize) override;
@@ -35,7 +35,7 @@ public:
   int64_t GetLength() override;
 
 protected:
-  virtual std::string TranslatePath(const GoTvUrl &url) = 0;
+  virtual std::string TranslatePath(const NlcUrl &url) = 0;
 
   CFile m_file;
   bool m_writable;

@@ -11,7 +11,7 @@
 #include <string>
 #include <map>
 
-class GoTvUrl;
+class NlcUrl;
 
 class CFileItem;
 
@@ -20,7 +20,7 @@ class CMime
 public:
   static std::string GetMimeType(const std::string &extension);
   static std::string GetMimeType(const CFileItem &item);
-  static std::string GetMimeType(const GoTvUrl &url, bool lookup = true);
+  static std::string GetMimeType(const NlcUrl &url, bool lookup = true);
 
   enum EFileType
   {

@@ -20,7 +20,7 @@
 #include "utils/SystemInfo.h"
 #include "Application.h"
 #include "ServiceBroker.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 #include <cassert>
 #include <map>

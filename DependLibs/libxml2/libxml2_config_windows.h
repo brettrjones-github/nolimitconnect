@@ -19,7 +19,7 @@
 /* #undef HAVE_ANSIDECL_H */
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
-//#define HAVE_ARPA_INET_H 1 // defined in GoTvCompileConfig.h
+//#define HAVE_ARPA_INET_H 1 // defined in NlcCompileConfig.h
 
 /* Define to 1 if you have the <arpa/nameser.h> header file. */
 //#define HAVE_ARPA_NAMESER_H 1

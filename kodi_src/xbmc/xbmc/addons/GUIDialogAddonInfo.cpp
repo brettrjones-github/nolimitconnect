@@ -35,7 +35,7 @@
 #include "utils/log.h"
 #include "utils/Variant.h"
 #include "GUIPassword.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "interfaces/builtins/Builtins.h"
 
 #include <functional>

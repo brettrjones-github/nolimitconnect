@@ -45,7 +45,7 @@
 #include "cores/IPlayer.h"
 #include "windowing/WinSystem.h"
 
-#include "GuiInterface/IGoTv.h"
+#include "GuiInterface/INlc.h"
 
 
 #if defined(__ARM_NEON__) && !defined(__LP64__)
@@ -72,7 +72,7 @@ CRendererQt::YUVBUFFER::YUVBUFFER()
 
 //============================================================================
 CRendererQt::CRendererQt()
-: m_IGoTv( IGoTv::getIGoTv() )
+: m_INlc( INlc::getINlc() )
 {
     CLog::Log( LOGINFO, "Constructing CRendererQt" );
 
@@ -148,20 +148,20 @@ bool CRendererQt::ValidateRenderTarget()
 
         // function pointer for texture might change in
         // call to LoadShaders
-        m_IGoTv.verifyGlState();
-        m_IGoTv.glFuncFinish();
+        m_INlc.verifyGlState();
+        m_INlc.glFuncFinish();
 
         for( int i = 0; i < NUM_BUFFERS; i++ )
         {
             DeleteTexture( i );
         }
 
-        m_IGoTv.verifyGlState();
+        m_INlc.verifyGlState();
         // create the yuv textures
         UpdateVideoFilter();
-        m_IGoTv.verifyGlState();
+        m_INlc.verifyGlState();
         LoadShaders();
-        m_IGoTv.verifyGlState();
+        m_INlc.verifyGlState();
         if( m_renderMethod < 0 )
             return false;
 
@@ -170,7 +170,7 @@ bool CRendererQt::ValidateRenderTarget()
             CreateTexture( i );
         }
 
-        m_IGoTv.verifyGlState();
+        m_INlc.verifyGlState();
         m_bValidated = true;
         return true;
     }
@@ -520,7 +520,7 @@ void CRendererQt::UpdateVideoFilter()
             }
         }
 
-        m_pVideoFilterShader = new Shaders::ConvolutionFilterShaderQt( m_IGoTv, m_scalingMethod );
+        m_pVideoFilterShader = new Shaders::ConvolutionFilterShaderQt( m_INlc, m_scalingMethod );
         if( !m_pVideoFilterShader->CompileAndLink() )
         {
             CLog::Log( LOGERROR, "GL: Error compiling and linking video filter shader" );
@@ -572,22 +572,22 @@ void CRendererQt::LoadShaders( int field )
         {
             // create regular scan shader
             CLog::Log( LOGNOTICE, "GL: Selecting Single Pass YUV 2 RGB shader" );
-            m_IGoTv.verifyGlState();
+            m_INlc.verifyGlState();
             EShaderFormat shaderFormat = GetShaderFormat();
-            m_pYUVProgShader = new Shaders::YUV2RGBProgressiveShaderQt( m_IGoTv, m_iFlags, shaderFormat );
-            m_IGoTv.verifyGlState();
+            m_pYUVProgShader = new Shaders::YUV2RGBProgressiveShaderQt( m_INlc, m_iFlags, shaderFormat );
+            m_INlc.verifyGlState();
             m_pYUVProgShader->SetConvertFullColorRange( m_fullRange );
-            m_IGoTv.verifyGlState();
+            m_INlc.verifyGlState();
 #ifdef ENABLE_GLES_SHADERS
-            m_pYUVBobShader = new Shaders::YUV2RGBBobShaderQt( m_IGoTv, m_iFlags, shaderFormat );
-            m_IGoTv.verifyGlState();
+            m_pYUVBobShader = new Shaders::YUV2RGBBobShaderQt( m_INlc, m_iFlags, shaderFormat );
+            m_INlc.verifyGlState();
             m_pYUVBobShader->SetConvertFullColorRange( m_fullRange );
-            m_IGoTv.verifyGlState();
+            m_INlc.verifyGlState();
 #endif // ENABLE_GLES_SHADERS
 
-            if( ( m_pYUVProgShader && m_IGoTv.isShaderValid( m_pYUVProgShader->getShaderMethod() ) )
+            if( ( m_pYUVProgShader && m_INlc.isShaderValid( m_pYUVProgShader->getShaderMethod() ) )
 #ifdef ENABLE_GLES_SHADERS
-                  && ( m_pYUVBobShader && m_IGoTv.isShaderValid( m_pYUVBobShader->getShaderMethod() ) ) 
+                  && ( m_pYUVBobShader && m_INlc.isShaderValid( m_pYUVBobShader->getShaderMethod() ) ) 
 #endif // ENABLE_GLES_SHADERS
                 )
             {
@@ -776,21 +776,21 @@ void CRendererQt::RenderSinglePass( int index, int field )
 
     // Y
     //glActiveTexture( m_textureTarget, GL_TEXTURE0 );
-    m_IGoTv.setActiveGlTexture( 0 );
+    m_INlc.setActiveGlTexture( 0 );
     glBindTexture( m_textureTarget, planes[ 0 ].id );
 
     // U
-    m_IGoTv.setActiveGlTexture( 1 );
+    m_INlc.setActiveGlTexture( 1 );
     glBindTexture( m_textureTarget, planes[ 1 ].id );
 
     // V
     //glActiveTexture( GL_TEXTURE2 );
-    m_IGoTv.setActiveGlTexture( 2 );
+    m_INlc.setActiveGlTexture( 2 );
     glBindTexture( m_textureTarget, planes[ 2 ].id );
 
     //glActiveTexture( GL_TEXTURE0 );
     //VerifyGLState();
-    m_IGoTv.setActiveGlTexture( 0 );
+    m_INlc.setActiveGlTexture( 0 );
 
     Shaders::BaseYUV2RGBShader *pYUVShader;
     if( field != FIELD_FULL )
@@ -809,7 +809,7 @@ void CRendererQt::RenderSinglePass( int index, int field )
 
     pYUVShader->SetMatrices( glMatrixProject.Get(), glMatrixModview.Get() );
     //pYUVShader->Enable();
-    m_IGoTv.enableShader( pYUVShader->getShaderMethod() );
+    m_INlc.enableShader( pYUVShader->getShaderMethod() );
 
 
     GLubyte idx[ 4 ] = { 0, 1, 3, 2 };        //determines order of triangle strip
@@ -821,15 +821,15 @@ void CRendererQt::RenderSinglePass( int index, int field )
     GLint Uloc = pYUVShader->GetUcoordLoc();
     GLint Vloc = pYUVShader->GetVcoordLoc();
 
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), vertLoc, 3, GL_FLOAT, 0, 0, m_vert );
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Yloc, 2, GL_FLOAT, 0, 0, m_tex[ 0 ] );
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Uloc, 2, GL_FLOAT, 0, 0, m_tex[ 1 ] );
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Vloc, 2, GL_FLOAT, 0, 0, m_tex[ 2 ] );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), vertLoc, 3, GL_FLOAT, 0, 0, m_vert );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Yloc, 2, GL_FLOAT, 0, 0, m_tex[ 0 ] );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Uloc, 2, GL_FLOAT, 0, 0, m_tex[ 1 ] );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Vloc, 2, GL_FLOAT, 0, 0, m_tex[ 2 ] );
 
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
 
     // Setup vertex position values
     for( int i = 0; i < 4; i++ )
@@ -848,17 +848,17 @@ void CRendererQt::RenderSinglePass( int index, int field )
         m_tex[ i ][ 2 ][ 1 ] = m_tex[ i ][ 3 ][ 1 ] = planes[ i ].rect.y2;
     }
 
-    m_IGoTv.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    m_INlc.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
     VerifyGLState();
 
-    m_IGoTv.disableShader( pYUVShader->getShaderMethod() );
+    m_INlc.disableShader( pYUVShader->getShaderMethod() );
     //VerifyGLState();
 
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
 
     VerifyGLState();
 }
@@ -888,38 +888,38 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
         }
     }
 
-    m_IGoTv.glFuncDisable( GL_DEPTH_TEST );
+    m_INlc.glFuncDisable( GL_DEPTH_TEST );
     glDisable( GL_DEPTH_TEST );
 
     // Y
     //glActiveTexture( GL_TEXTURE0 );
-    m_IGoTv.setActiveGlTexture( 0 );
-    m_IGoTv.glFuncBindTexture( m_textureTarget, planes[ 0 ].id );
+    m_INlc.setActiveGlTexture( 0 );
+    m_INlc.glFuncBindTexture( m_textureTarget, planes[ 0 ].id );
     //glBindTexture( m_textureTarget, planes[ 0 ].id );
     //VerifyGLState();
 
     // U
     //glActiveTexture( GL_TEXTURE1 );
-    m_IGoTv.setActiveGlTexture( 1 );
+    m_INlc.setActiveGlTexture( 1 );
     //glBindTexture( m_textureTarget, planes[ 1 ].id );
-    m_IGoTv.glFuncBindTexture( m_textureTarget, planes[ 1 ].id );
+    m_INlc.glFuncBindTexture( m_textureTarget, planes[ 1 ].id );
     //VerifyGLState();
 
     // V
     //glActiveTexture( GL_TEXTURE2 );
-    m_IGoTv.setActiveGlTexture( 2 );
+    m_INlc.setActiveGlTexture( 2 );
     //glBindTexture( m_textureTarget, planes[ 2 ].id );
-    m_IGoTv.glFuncBindTexture( m_textureTarget, planes[ 2 ].id );
+    m_INlc.glFuncBindTexture( m_textureTarget, planes[ 2 ].id );
     //VerifyGLState();
 
     //glActiveTexture( GL_TEXTURE0 );
-    m_IGoTv.setActiveGlTexture( 0 );
+    m_INlc.setActiveGlTexture( 0 );
 
     //VerifyGLState();
 
     Shaders::BaseYUV2RGBShader *pYUVShader = m_pYUVProgShader;
     // make sure the yuv shader is loaded and ready to go
-    if( !pYUVShader || ( !m_IGoTv.isShaderValid( pYUVShader->getShaderMethod() ) ) )
+    if( !pYUVShader || ( !m_INlc.isShaderValid( pYUVShader->getShaderMethod() ) ) )
     {
         CLog::Log( LOGERROR, "GL: YUV shader not active, cannot do multipass render" );
         return;
@@ -953,11 +953,11 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
     CRect viewport;
     m_renderSystem->GetViewPort( viewport );
     glViewport( 0, 0, m_sourceWidth, m_sourceHeight );
-    m_IGoTv.glFuncViewport( 0, 0, m_sourceWidth, m_sourceHeight );
+    m_INlc.glFuncViewport( 0, 0, m_sourceWidth, m_sourceHeight );
     glScissor( 0, 0, m_sourceWidth, m_sourceHeight );
-    m_IGoTv.glFuncScissor( 0, 0, m_sourceWidth, m_sourceHeight );
+    m_INlc.glFuncScissor( 0, 0, m_sourceWidth, m_sourceHeight );
 
-    if( !m_IGoTv.enableShader( pYUVShader->getShaderMethod() ) )
+    if( !m_INlc.enableShader( pYUVShader->getShaderMethod() ) )
     {
         CLog::Log( LOGERROR, "GL: Error enabling YUV shader" );
     }
@@ -995,15 +995,15 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
     //glEnableVertexAttribArray( Vloc );
 
 
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), vertLoc, 3, GL_FLOAT, 0, 0, vert );
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Yloc, 2, GL_FLOAT, 0, 0, tex[ 0 ] );
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Uloc, 2, GL_FLOAT, 0, 0, tex[ 1 ] );
-    m_IGoTv.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Vloc, 2, GL_FLOAT, 0, 0, tex[ 2 ] );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), vertLoc, 3, GL_FLOAT, 0, 0, vert );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Yloc, 2, GL_FLOAT, 0, 0, tex[ 0 ] );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Uloc, 2, GL_FLOAT, 0, 0, tex[ 1 ] );
+    m_INlc.shaderVertexAttribPointer( pYUVShader->getShaderMethod(), Vloc, 2, GL_FLOAT, 0, 0, tex[ 2 ] );
 
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
-    m_IGoTv.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
+    m_INlc.shaderEnableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
 
 
 
@@ -1029,7 +1029,7 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
 
     VerifyGLState();
 
-    m_IGoTv.disableShader( pYUVShader->getShaderMethod() );
+    m_INlc.disableShader( pYUVShader->getShaderMethod() );
 
     glMatrixModview.PopLoad();
     glMatrixProject.PopLoad();
@@ -1041,10 +1041,10 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
     //glDisableVertexAttribArray( Uloc );
     //glDisableVertexAttribArray( Vloc );
 
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
-    m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), vertLoc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Yloc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
+    m_INlc.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
 
     m_renderSystem->SetViewPort( viewport );
 
@@ -1057,9 +1057,9 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
 void CRendererQt::RenderFromFBO()
 {
     //glActiveTexture( GL_TEXTURE0 );
-    m_IGoTv.setActiveGlTexture( 0 );
+    m_INlc.setActiveGlTexture( 0 );
 
-    m_IGoTv.glFuncBindTexture( GL_TEXTURE_2D, m_fbo.fbo.Texture() );
+    m_INlc.glFuncBindTexture( GL_TEXTURE_2D, m_fbo.fbo.Texture() );
     VerifyGLState();
 
     // Use regular normalized texture coordinates
@@ -1078,7 +1078,7 @@ void CRendererQt::RenderFromFBO()
         m_pVideoFilterShader->SetHeight( m_sourceHeight );
         m_pVideoFilterShader->SetAlpha( 1.0f );
         m_pVideoFilterShader->SetMatrices( glMatrixProject.Get(), glMatrixModview.Get() );
-        m_IGoTv.enableShader( m_pVideoFilterShader->getShaderMethod() );
+        m_INlc.enableShader( m_pVideoFilterShader->getShaderMethod() );
     }
     else
     {
@@ -1100,13 +1100,13 @@ void CRendererQt::RenderFromFBO()
 
     //glVertexAttribPointer( vertLoc, 3, GL_FLOAT, 0, 0, vert );
     //glVertexAttribPointer( loc, 2, GL_FLOAT, 0, 0, tex );
-    m_IGoTv.shaderVertexAttribPointer( m_pVideoFilterShader->getShaderMethod(), vertLoc, 3, GL_FLOAT, 0, 0, vert );
-    m_IGoTv.shaderVertexAttribPointer( m_pVideoFilterShader->getShaderMethod(), loc, 2, GL_FLOAT, 0, 0, tex );
+    m_INlc.shaderVertexAttribPointer( m_pVideoFilterShader->getShaderMethod(), vertLoc, 3, GL_FLOAT, 0, 0, vert );
+    m_INlc.shaderVertexAttribPointer( m_pVideoFilterShader->getShaderMethod(), loc, 2, GL_FLOAT, 0, 0, tex );
 
     //glEnableVertexAttribArray( vertLoc );
     //glEnableVertexAttribArray( loc );
-    m_IGoTv.shaderEnableVertexAttribArray( m_pVideoFilterShader->getShaderMethod(), vertLoc );
-    m_IGoTv.shaderEnableVertexAttribArray( m_pVideoFilterShader->getShaderMethod(), loc );
+    m_INlc.shaderEnableVertexAttribArray( m_pVideoFilterShader->getShaderMethod(), vertLoc );
+    m_INlc.shaderEnableVertexAttribArray( m_pVideoFilterShader->getShaderMethod(), loc );
 
     // Setup vertex position values
     for( int i = 0; i < 4; i++ )
@@ -1122,18 +1122,18 @@ void CRendererQt::RenderFromFBO()
     tex[ 1 ][ 0 ] = tex[ 2 ][ 0 ] = imgwidth;
     tex[ 2 ][ 1 ] = tex[ 3 ][ 1 ] = imgheight;
 
-    m_IGoTv.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    m_INlc.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
     VerifyGLState();
 
     if( m_pVideoFilterShader )
     {
-        m_IGoTv.disableShader( m_pVideoFilterShader->getShaderMethod() );
+        m_INlc.disableShader( m_pVideoFilterShader->getShaderMethod() );
     }
 
     VerifyGLState();
 
-    m_IGoTv.glFuncBindTexture( GL_TEXTURE_2D, 0 );
+    m_INlc.glFuncBindTexture( GL_TEXTURE_2D, 0 );
     VerifyGLState();
 }
 
@@ -1152,7 +1152,7 @@ bool CRendererQt::RenderCapture( CRenderCapture* capture )
     MarkDirty();
     syncDestRectToRotatedPoints();//syncs the changed destRect to m_rotatedDestCoords
     // clear framebuffer and invert Y axis to get non-inverted image
-    m_IGoTv.glFuncDisable( GL_BLEND );
+    m_INlc.glFuncDisable( GL_BLEND );
 
     glMatrixModview.Push();
     // fixme - we know that cvref  & eglimg are already flipped in y direction
@@ -1170,7 +1170,7 @@ bool CRendererQt::RenderCapture( CRenderCapture* capture )
 
     Render( RENDER_FLAG_NOOSD, m_iYV12RenderBuffer );
     // read pixels
-    m_IGoTv.glFuncReadPixels( 0, CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() - capture->GetHeight(), capture->GetWidth(), capture->GetHeight(),
+    m_INlc.glFuncReadPixels( 0, CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() - capture->GetHeight(), capture->GetWidth(), capture->GetHeight(),
                   GL_RGBA, GL_UNSIGNED_BYTE, capture->GetRenderBuffer() );
 
     // OpenGLES returns in RGBA order but CRenderCapture needs BGRA order
@@ -1203,7 +1203,7 @@ bool CRendererQt::UploadYV12Texture( int source )
 
     VerifyGLState();
 
-    m_IGoTv.glFuncPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+    m_INlc.glFuncPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 
     //Load Y plane
     LoadPlane( buf.fields[ FIELD_FULL ][ 0 ], GL_LUMINANCE,

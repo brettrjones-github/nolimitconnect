@@ -9,7 +9,7 @@
 #pragma once
 
 #include "FileItem.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 class CApplicationStackHelper
 {

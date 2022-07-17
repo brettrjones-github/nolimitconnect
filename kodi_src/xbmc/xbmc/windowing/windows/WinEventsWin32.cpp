@@ -37,7 +37,7 @@
 #include "peripherals/Peripherals.h"
 #include "ServiceBroker.h"
 #include "storage/MediaManager.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/JobManager.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"

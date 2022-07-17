@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "SmartPlayList.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "dbwrappers/Database.h"
 #include "filesystem/File.h"
 #include "filesystem/SmartPlaylistDirectory.h"
@@ -1069,7 +1069,7 @@ CSmartPlaylist::CSmartPlaylist()
   Reset();
 }
 
-bool CSmartPlaylist::OpenAndReadName(const GoTvUrl &url)
+bool CSmartPlaylist::OpenAndReadName(const NlcUrl &url)
 {
   if (readNameFromPath(url) == NULL)
     return false;
@@ -1108,7 +1108,7 @@ const TiXmlNode* CSmartPlaylist::readName(const TiXmlNode *root)
   return root;
 }
 
-const TiXmlNode* CSmartPlaylist::readNameFromPath(const GoTvUrl &url)
+const TiXmlNode* CSmartPlaylist::readNameFromPath(const NlcUrl &url)
 {
   CFileStream file;
   if (!file.Open(url))
@@ -1159,14 +1159,14 @@ bool CSmartPlaylist::load(const TiXmlNode *root)
   return LoadFromXML(root);
 }
 
-bool CSmartPlaylist::Load(const GoTvUrl &url)
+bool CSmartPlaylist::Load(const NlcUrl &url)
 {
   return load(readNameFromPath(url));
 }
 
 bool CSmartPlaylist::Load(const std::string &path)
 {
-  const GoTvUrl pathToUrl(path);
+  const NlcUrl pathToUrl(path);
   return load(readNameFromPath(pathToUrl));
 }
 

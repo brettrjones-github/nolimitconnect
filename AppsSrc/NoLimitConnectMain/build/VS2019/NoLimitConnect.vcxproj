@@ -116,14 +116,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\GuiInterface\GoTvRenderFrame.cpp" />
     <ClCompile Include="..\..\..\..\GuiInterface\IDefs.cpp" />
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTv.cpp" />
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvFromGui.cpp" />
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvRender.cpp" />
-    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvToGui.cpp" />
     <ClCompile Include="..\..\..\..\GuiInterface\ILog.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\INlc.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\INlcFromGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\INlcRender.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\INlcToGui.cpp" />
     <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\NlcRenderFrame.cpp" />
     <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp" />
     <ClCompile Include="..\..\..\..\GuiInterface\OsWin32\IWin32.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp" />
@@ -306,7 +306,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ChatEntryWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ChatRoomWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\DialogConfirmRemoveMessage.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\EventsQtToGoTv.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\EventsQtToNlc.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileActionBarWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileActionMenu.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileItemInfo.cpp" />
@@ -491,17 +491,17 @@
     <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\AppTargetOsConfig.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h" />
-    <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h" />
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTv.h" />
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvEvents.h" />
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvGeometry.h" />
-    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvRender.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\ILog.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\INlc.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\INlcEvents.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\INlcGeometry.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\INlcRender.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IScan.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\NlcRenderFrame.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh" />
     <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.h" />
     <ClInclude Include="..\..\..\..\GuiInterface\OsWin32\IWin32.h" />
@@ -548,7 +548,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AudioBuffer.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AudioDefs.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\CommonHdr.h" />
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\EventsQtToGoTv.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\EventsQtToNlc.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FileItemInfo.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FriendList.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FriendListDelegate.h" />

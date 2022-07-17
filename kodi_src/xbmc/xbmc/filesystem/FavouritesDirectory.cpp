@@ -10,7 +10,7 @@
 #include "favourites/FavouritesService.h"
 #include "File.h"
 #include "Directory.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "profiles/ProfileManager.h"
 #include "ServiceBroker.h"
 #include "utils/URIUtils.h"
@@ -18,14 +18,14 @@
 namespace XFILE
 {
 
-bool CFavouritesDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CFavouritesDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   items.Clear();
   CServiceBroker::GetFavouritesService().GetAll(items);
   return true;
 }
 
-bool CFavouritesDirectory::Exists(const GoTvUrl& url)
+bool CFavouritesDirectory::Exists(const NlcUrl& url)
 {
   if (url.IsProtocol("favourites"))
   {

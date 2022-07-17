@@ -10,7 +10,7 @@
 #include <string>
 
 #include "PlayListWPL.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/XBMCTinyXML.h"
 #include "filesystem/File.h"
 #include "utils/log.h"

@@ -24,35 +24,35 @@
 
 #include "SharedExportCore.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPAbstractVideoStream AbstractVideoStream.h core/AbstractVideoStream.h
+    \class NlcPtoPAbstractVideoStream AbstractVideoStream.h core/AbstractVideoStream.h
     \ingroup GOTVQtCore
     \brief Abstract video memory stream
 
-    GoTvPtoPAbstractVideoStream is a template class for creating own video rendering engines.
+    NlcPtoPAbstractVideoStream is a template class for creating own video rendering engines.
     Subclass it and implement necessary calbacks.
 
     \since GOTV-Qt 1.1
  */
-class GOTVQT_CORE_EXPORT GoTvPtoPAbstractVideoStream
+class GOTVQT_CORE_EXPORT NlcPtoPAbstractVideoStream
 {
 public:
-    explicit GoTvPtoPAbstractVideoStream();
-    virtual ~GoTvPtoPAbstractVideoStream();
+    explicit NlcPtoPAbstractVideoStream();
+    virtual ~NlcPtoPAbstractVideoStream();
 
     /*!
-        \brief Set GoTvPtoPMediaPlayer callbacks
+        \brief Set NlcPtoPMediaPlayer callbacks
         \param player media player
      */
-    void setCallbacks(GoTvPtoPMediaPlayer *player);
+    void setCallbacks(NlcPtoPMediaPlayer *player);
 
     /*!
-        \brief Unset GoTvPtoPMediaPlayer callbacks
+        \brief Unset NlcPtoPMediaPlayer callbacks
         \param player media player
      */
-    void unsetCallbacks(GoTvPtoPMediaPlayer *player);
+    void unsetCallbacks(NlcPtoPMediaPlayer *player);
 
 protected:
     /*!

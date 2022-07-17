@@ -10,7 +10,7 @@
 #include "Application.h"
 #include "ServiceBroker.h"
 #include "messaging/ApplicationMessenger.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/Directory.h"
 #include "filesystem/ZipManager.h"
 #include "filesystem/FileDirectoryFactory.h"
@@ -49,7 +49,7 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "Autorun.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "platform/Filesystem.h"
 #ifdef TARGET_POSIX
 #include "platform/linux/XFileUtils.h"
@@ -87,7 +87,7 @@ namespace
 class CGetDirectoryItems : public IRunnable
 {
 public:
-  CGetDirectoryItems(XFILE::CVirtualDirectory &dir, GoTvUrl& url, CFileItemList &items)
+  CGetDirectoryItems(XFILE::CVirtualDirectory &dir, NlcUrl& url, CFileItemList &items)
   : m_result(false), m_dir(dir), m_url(url), m_items(items)
   {
   }
@@ -102,7 +102,7 @@ public:
   bool m_result;
 protected:
   XFILE::CVirtualDirectory &m_dir;
-  GoTvUrl m_url;
+  NlcUrl m_url;
   CFileItemList &m_items;
 };
 }
@@ -390,7 +390,7 @@ void CGUIWindowFileManager::ClearFileItems(int iList)
 void CGUIWindowFileManager::UpdateButtons()
 {
   // update our current directory labels
-  std::string strDir = GoTvUrl(m_Directory[0]->GetPath()).GetWithoutUserDetails();
+  std::string strDir = NlcUrl(m_Directory[0]->GetPath()).GetWithoutUserDetails();
   if (strDir.empty())
   {
     SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_LEFT,g_localizeStrings.Get(20108));
@@ -399,7 +399,7 @@ void CGUIWindowFileManager::UpdateButtons()
   {
     SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_LEFT, strDir);
   }
-  strDir = GoTvUrl(m_Directory[1]->GetPath()).GetWithoutUserDetails();
+  strDir = NlcUrl(m_Directory[1]->GetPath()).GetWithoutUserDetails();
   if (strDir.empty())
   {
     SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_RIGHT,g_localizeStrings.Get(20108));
@@ -610,12 +610,12 @@ void CGUIWindowFileManager::OnClick(int iList, int iItem)
   }
   else if (pItem->IsZIP() || pItem->IsCBZ()) // mount zip archive
   {
-    GoTvUrl pathToUrl = URIUtils::CreateArchivePath("zip", pItem->GetURL(), "");
+    NlcUrl pathToUrl = URIUtils::CreateArchivePath("zip", pItem->GetURL(), "");
     Update(iList, pathToUrl.Get());
   }
   else if (pItem->IsRAR() || pItem->IsCBR())
   {
-    GoTvUrl pathToUrl = URIUtils::CreateArchivePath("rar", pItem->GetURL(), "");
+    NlcUrl pathToUrl = URIUtils::CreateArchivePath("rar", pItem->GetURL(), "");
     Update(iList, pathToUrl.Get());
   }
   else
@@ -861,7 +861,7 @@ int CGUIWindowFileManager::GetSelectedItem(int iControl)
 
 void CGUIWindowFileManager::GoParentFolder(int iList)
 {
-  GoTvUrl url(m_Directory[iList]->GetPath());
+  NlcUrl url(m_Directory[iList]->GetPath());
   if (url.IsProtocol("rar") || url.IsProtocol("zip"))
   {
     // check for step-below, if, unmount rar
@@ -920,7 +920,7 @@ void CGUIWindowFileManager::GetDirectoryHistoryString(const CFileItem* pItem, st
 
 bool CGUIWindowFileManager::GetDirectory(int iList, const std::string &strDirectory, CFileItemList &items)
 {
-  GoTvUrl pathToUrl(strDirectory);
+  NlcUrl pathToUrl(strDirectory);
 
   CGetDirectoryItems getItems(m_rootDir, pathToUrl, items);
   if (!CGUIDialogBusy::Wait(&getItems, 100, true))
@@ -1170,7 +1170,7 @@ bool CGUIWindowFileManager::SelectItem(int list, int &item)
 // recursively calculates the selected folder size
 int64_t CGUIWindowFileManager::CalculateFolderSize(const std::string &strDirectory, CGUIDialogProgress *pProgress)
 {
-  const GoTvUrl pathToUrl(strDirectory);
+  const NlcUrl pathToUrl(strDirectory);
   if (pProgress)
   { // update our progress control
     pProgress->Progress();
@@ -1219,7 +1219,7 @@ void CGUIWindowFileManager::OnJobComplete(unsigned int jobID, bool success, CJob
 void CGUIWindowFileManager::ShowShareErrorMessage(CFileItem* pItem)
 {
   int idMessageText = 0;
-  GoTvUrl url(pItem->GetPath());
+  NlcUrl url(pItem->GetPath());
 
   if (url.IsProtocol("smb") && url.GetHostName().empty()) //  smb workgroup
     idMessageText = 15303; // Workgroup not found

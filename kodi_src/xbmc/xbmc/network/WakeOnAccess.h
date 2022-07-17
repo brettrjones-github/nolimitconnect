@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "XBDateTime.h"
 #include "settings/lib/ISettingCallback.h"
 #include "settings/lib/ISettingsHandler.h"
@@ -23,7 +23,7 @@ class CWakeOnAccess : private IJobCallback, public ISettingCallback, public ISet
 public:
   static CWakeOnAccess &GetInstance();
 
-  bool WakeUpHost (const GoTvUrl& fileUrl);
+  bool WakeUpHost (const NlcUrl& fileUrl);
   bool WakeUpHost (const std::string& hostName, const std::string& customMessage);
 
   void QueueMACDiscoveryForAllRemotes();

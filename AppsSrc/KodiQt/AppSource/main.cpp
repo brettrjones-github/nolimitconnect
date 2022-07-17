@@ -38,8 +38,8 @@
 **
 ****************************************************************************/
 
-#include "GoTvAppConfig.h"
-#ifdef BUILD_GOTV_APP
+#include "NlcAppConfig.h"
+#ifdef BUILD_NLC_APP
 
 #include "KodiQtSettings.h"
 #include <CommonSrc/QtSource/AppCommon.h>
@@ -57,17 +57,17 @@
 #include <CoreLib/VxGlobals.h>
 #include "VxDataHelper.h"
 #include <NetLib/VxPeerMgr.h>
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 
 
 int main(int argc, char **argv)
 {
 	// for some reason QApplication must be newed or does not initialize 
 	QApplication* myApp = new QApplication( argc, argv );
-    IGoTv& gotv = IGoTv::getIGoTv();
+    INlc& gotv = INlc::getINlc();
     gotv.doPreStartup();
 
-    static GoTvPlayerSettings playerSettings;
+    static NlcPlayerSettings playerSettings;
     AppCommon& appCommon = CreateAppInstance( gotv, myApp, playerSettings );
 
 
@@ -148,4 +148,4 @@ int main(int argc, char **argv)
     return app.exec();*/
 }
 
-#endif // BUILD_GOTV_APP
+#endif // BUILD_NLC_APP

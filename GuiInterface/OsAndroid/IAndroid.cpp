@@ -24,7 +24,7 @@
 #include "IAndroid.h"
 #ifdef TARGET_OS_ANDROID
 
-#include "GuiInterface/IGoTv.h" 
+#include "GuiInterface/INlc.h" 
 #include <CoreLib/VxDebug.h>
 
 #if ENABLE_KODI
@@ -40,13 +40,13 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 using namespace XFILE;
 #endif // ENABLE_KODI
 
 
-IAndroid::IAndroid( IGoTv& gotv )
+IAndroid::IAndroid( INlc& gotv )
     : OsInterface( gotv )
 {
 }

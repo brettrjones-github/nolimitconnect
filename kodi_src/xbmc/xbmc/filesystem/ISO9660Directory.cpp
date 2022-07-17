@@ -8,10 +8,10 @@
 
 #include "ISO9660Directory.h"
 #include "iso9660.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "FileItem.h"
 #ifdef TARGET_POSIX
 #include "platform/linux/XTimeUtils.h"
@@ -26,7 +26,7 @@ CISO9660Directory::CISO9660Directory( void ) = default;
 
 CISO9660Directory::~CISO9660Directory( void ) = default;
 
-bool CISO9660Directory::GetDirectory( const GoTvUrl& url, CFileItemList &items )
+bool CISO9660Directory::GetDirectory( const NlcUrl& url, CFileItemList &items )
 {
     std::string strRoot = url.Get();
     URIUtils::AddSlashAtEnd( strRoot );
@@ -107,7 +107,7 @@ bool CISO9660Directory::GetDirectory( const GoTvUrl& url, CFileItemList &items )
     return true;
 }
 
-bool CISO9660Directory::Exists( const GoTvUrl& url )
+bool CISO9660Directory::Exists( const NlcUrl& url )
 {
     CFileItemList items;
     if( GetDirectory( url, items ) )

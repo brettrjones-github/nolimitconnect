@@ -32,7 +32,7 @@
 #include "CharsetConverter.h"
 #include "LangInfoKodi.h"
 #include <utils/fstrcmp.h>
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include <functional>
 #include <array>
 #include <iomanip>

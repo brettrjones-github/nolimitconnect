@@ -14,7 +14,7 @@
 #include "filesystem/IFileTypes.h"
 
 #include "FileItem.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/Geometry.h"
 
 enum DVDStreamType
@@ -151,7 +151,7 @@ public:
   virtual int64_t GetLength() = 0;
   virtual std::string& GetContent() { return m_content; };
   virtual std::string GetFileName();
-  virtual GoTvUrl GetURL();
+  virtual NlcUrl GetURL();
   virtual ENextStream NextStream() { return NEXTSTREAM_NONE; }
   virtual void Abort() {}
   virtual int GetBlockSize() { return 0; }

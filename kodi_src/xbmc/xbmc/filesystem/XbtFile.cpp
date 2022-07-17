@@ -33,7 +33,7 @@
 #include <liblzo/lzo1x.h>
 
 #include "XbtFile.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/File.h"
 #include "filesystem/XbtManager.h"
 #include "guilib/TextureBundleXBT.h"
@@ -61,14 +61,14 @@ CXbtFile::~CXbtFile()
   Close();
 }
 
-bool CXbtFile::Open(const GoTvUrl& url)
+bool CXbtFile::Open(const NlcUrl& url)
 {
   if (m_open)
     return false;
 
   std::string options = url.GetOptions();
 
-  GoTvUrl xbtUrl(url);
+  NlcUrl xbtUrl(url);
   xbtUrl.SetOptions("");
 
   if (!GetReaderAndFile(url, m_xbtfReader, m_xbtfFile))
@@ -108,7 +108,7 @@ void CXbtFile::Close()
   m_open = false;
 }
 
-bool CXbtFile::Exists(const GoTvUrl& url)
+bool CXbtFile::Exists(const NlcUrl& url)
 {
   CXBTFFile dummy;
   return GetFile(url, dummy);
@@ -138,7 +138,7 @@ int CXbtFile::Stat(struct __stat64 *buffer)
   return Stat(m_url, buffer);
 }
 
-int CXbtFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CXbtFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   memset(buffer, 0, sizeof(struct __stat64));
 
@@ -359,20 +359,20 @@ bool CXbtFile::GetFirstFrame(CXBTFFrame& frame) const
   return true;
 }
 
-bool CXbtFile::GetReader(const GoTvUrl& url, CXBTFReaderPtr& reader)
+bool CXbtFile::GetReader(const NlcUrl& url, CXBTFReaderPtr& reader)
 {
-  GoTvUrl xbtUrl(url);
+  NlcUrl xbtUrl(url);
   xbtUrl.SetOptions("");
 
   return CXbtManager::GetInstance().GetReader(xbtUrl, reader);
 }
 
-bool CXbtFile::GetReaderAndFile(const GoTvUrl& url, CXBTFReaderPtr& reader, CXBTFFile& file)
+bool CXbtFile::GetReaderAndFile(const NlcUrl& url, CXBTFReaderPtr& reader, CXBTFFile& file)
 {
   if (!GetReader(url, reader))
     return false;
 
-  GoTvUrl xbtUrl(url);
+  NlcUrl xbtUrl(url);
   xbtUrl.SetOptions("");
 
   // CXBTFReader stores all filenames in lower case
@@ -382,7 +382,7 @@ bool CXbtFile::GetReaderAndFile(const GoTvUrl& url, CXBTFReaderPtr& reader, CXBT
   return reader->Get(fileName, file);
 }
 
-bool CXbtFile::GetFile(const GoTvUrl& url, CXBTFFile& file)
+bool CXbtFile::GetFile(const NlcUrl& url, CXBTFFile& file)
 {
   CXBTFReaderPtr reader;
   return GetReaderAndFile(url, reader, file);

@@ -1,21 +1,21 @@
 #pragma once
 
 #include "GuiInterface/IDefs.h"
-#include "GuiInterface/IGoTvEvents.h"
+#include "GuiInterface/INlcEvents.h"
 #if ENABLE_KODI
 #include "AppParamParser.h"
 #endif // ENABLE_KODI
 
-class IGoTv;
+class INlc;
 class CAppParamParser;
 
 class OsInterface
 {
 public:
-    OsInterface( IGoTv& gotv );
+    OsInterface( INlc& gotv );
     virtual ~OsInterface() = default;
 
-    IGoTv&                      getIGoTv() { return m_IGoTv; }
+    INlc&                      getINlc() { return m_INlc; }
 
     // exit of application error code
     virtual void                setRunResultCode( int exitCode )    { m_RunResultCode = exitCode; }
@@ -39,7 +39,7 @@ public:
 
 
 protected:
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
     const CAppParamParser*      m_CmdLineParams = nullptr;
     int                         m_RunResultCode = 0;
 };

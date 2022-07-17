@@ -2,11 +2,11 @@
 
 #include <CommonSrc/QtSource/AppSettings.h>
 
-class GoTvPlayerSettings : public AppSettings
+class NlcPlayerSettings : public AppSettings
 {
 public:
-	GoTvPlayerSettings();
-	virtual ~GoTvPlayerSettings();
+	NlcPlayerSettings();
+	virtual ~NlcPlayerSettings();
 
 	bool						playerSettingsStartup( const char * dbSettingsFile );
 };

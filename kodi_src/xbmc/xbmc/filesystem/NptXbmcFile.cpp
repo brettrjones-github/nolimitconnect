@@ -22,8 +22,8 @@
 
 #include "File.h"
 #include "FileFactory.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 
 #ifdef TARGET_WINDOWS
 # ifndef S_IWUSR
@@ -302,7 +302,7 @@ NPT_XbmcFile::Open(NPT_File::OpenMode mode)
         }
 
         bool result;
-        GoTvUrl* url = new GoTvUrl(name);
+        NlcUrl* url = new NlcUrl(name);
 
         // compute mode
         if (mode & NPT_FILE_OPEN_MODE_WRITE) {

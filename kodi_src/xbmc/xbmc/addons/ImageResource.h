@@ -12,7 +12,7 @@
 
 #include "addons/Resource.h"
 
-class GoTvUrl;
+class NlcUrl;
 
 namespace ADDON
 {
@@ -35,7 +35,7 @@ public:
   const std::string& GetType() const { return m_type; }
 
 private:
-  bool HasXbt(GoTvUrl& xbtUrl) const;
+  bool HasXbt(NlcUrl& xbtUrl) const;
 
   std::string m_type; //!< Type of images
 };

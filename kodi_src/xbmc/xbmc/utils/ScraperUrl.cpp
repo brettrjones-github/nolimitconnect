@@ -14,7 +14,7 @@
 #include "CharsetConverter.h"
 #include "utils/CharsetDetection.h"
 #include "utils/StringUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/ZipFile.h"
 #include "URIUtils.h"
@@ -181,7 +181,7 @@ unsigned int CScraperUrl::GetMaxSeasonThumb() const
 
 bool CScraperUrl::Get(const SUrlEntry& scrURL, std::string& strHTML, XFILE::CCurlFile& http, const std::string& cacheContext)
 {
-  GoTvUrl url(scrURL.m_url);
+  NlcUrl url(scrURL.m_url);
   http.SetReferer(scrURL.m_spoof);
   std::string strCachePath;
 
@@ -370,7 +370,7 @@ std::string CScraperUrl::GetThumbURL(const CScraperUrl::SUrlEntry &entry)
   if (entry.m_spoof.empty())
     return entry.m_url;
 
-  return entry.m_url + "|Referer=" + GoTvUrl::Encode(entry.m_spoof);
+  return entry.m_url + "|Referer=" + NlcUrl::Encode(entry.m_spoof);
 }
 
 void CScraperUrl::GetThumbURLs(std::vector<std::string> &thumbs, const std::string &type, int season, bool unique) const

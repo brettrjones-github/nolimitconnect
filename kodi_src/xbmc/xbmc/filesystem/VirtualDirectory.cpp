@@ -8,8 +8,8 @@
 
 #include "VirtualDirectory.h"
 #include "DirectoryFactory.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "Directory.h"
@@ -49,12 +49,12 @@ void CVirtualDirectory::SetSources(const VECSOURCES& vecSources)
     and icons have to be set manually.
  */
 
-bool CVirtualDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CVirtualDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   return GetDirectory(url, items, true, false);
 }
 
-bool CVirtualDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items, bool bUseFileDirectories, bool keepImpl)
+bool CVirtualDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items, bool bUseFileDirectories, bool keepImpl)
 {
   std::string strPath = url.Get();
   int flags = m_flags;
@@ -62,7 +62,7 @@ bool CVirtualDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items, b
     flags |= DIR_FLAG_NO_FILE_DIRS;
   if (!strPath.empty() && strPath != "files://")
   {
-    GoTvUrl realURL = URIUtils::SubstitutePath(url);
+    NlcUrl realURL = URIUtils::SubstitutePath(url);
     if (!m_pDir)
       m_pDir.reset(CDirectoryFactory::Create(realURL));
     bool ret = CDirectory::GetDirectory(strPath, m_pDir, items, m_strFileMask, flags);

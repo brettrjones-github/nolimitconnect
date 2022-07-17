@@ -4,7 +4,7 @@
 
 #include <kodi_src/xbmc/xbmc/filesystem/Directory.h>
 #include <kodi_src/xbmc/xbmc/filesystem/File.h>
-#include <kodi_src/xbmc/xbmc/GoTvCoreUtil.h>
+#include <kodi_src/xbmc/xbmc/NlcCoreUtil.h>
 #include <utils/URIUtils.h>
 
 //static File *CreatedFiles[32];

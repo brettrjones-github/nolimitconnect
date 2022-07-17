@@ -24,9 +24,9 @@ namespace XFILE
     ~CEventsDirectory() override = default;
 
     // implementations of IDirectory
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override;
-    bool Create(const GoTvUrl& url) override { return true; }
-    bool Exists(const GoTvUrl& url) override { return true; }
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items) override;
+    bool Create(const NlcUrl& url) override { return true; }
+    bool Exists(const NlcUrl& url) override { return true; }
     bool AllowAll() const override { return true; }
 
     static CFileItemPtr EventToFileItem(const EventPtr& activity);

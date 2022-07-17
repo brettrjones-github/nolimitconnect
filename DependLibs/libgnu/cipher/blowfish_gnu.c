@@ -378,7 +378,7 @@ function_F( BLOWFISH_context *bc, uint32_t x )
 {
     uint16_t a, b, c, d;
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
     a = ((byte*)&x)[0];
     b = ((byte*)&x)[1];
     c = ((byte*)&x)[2];
@@ -394,7 +394,7 @@ function_F( BLOWFISH_context *bc, uint32_t x )
 }
 #endif
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 #define F(x) ((( s0[((byte*)&x)[0]] + s1[((byte*)&x)[1]])	 \
 		   ^ s2[((byte*)&x)[2]]) + s3[((byte*)&x)[3]] )
 #else

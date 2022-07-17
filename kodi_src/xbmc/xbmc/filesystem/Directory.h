@@ -31,24 +31,24 @@ public:
     int flags = DIR_FLAG_DEFAULTS;
   };
 
-  static bool GetDirectory(const GoTvUrl& url
+  static bool GetDirectory(const NlcUrl& url
                            , CFileItemList &items
                            , const std::string &strMask
                            , int flags);
 
-  static bool GetDirectory(const GoTvUrl& url,
+  static bool GetDirectory(const NlcUrl& url,
                            std::shared_ptr<IDirectory> pDirectory,
                            CFileItemList &items,
                            const CHints &hints);
 
-  static bool GetDirectory(const GoTvUrl& url
+  static bool GetDirectory(const NlcUrl& url
                            , CFileItemList &items
                            , const CHints &hints);
 
-  static bool Create(const GoTvUrl& url);
-  static bool Exists(const GoTvUrl& url, bool bUseCache = true);
-  static bool Remove(const GoTvUrl& url);
-  static bool RemoveRecursive(const GoTvUrl& url);
+  static bool Create(const NlcUrl& url);
+  static bool Exists(const NlcUrl& url, bool bUseCache = true);
+  static bool Remove(const NlcUrl& url);
+  static bool RemoveRecursive(const NlcUrl& url);
 
   static bool GetDirectory(const std::string& strPath
                            , CFileItemList &items

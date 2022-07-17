@@ -17,9 +17,9 @@ namespace XFILE
     public:
       CUPnPFile();
       ~CUPnPFile() override;
-      bool Open(const GoTvUrl& url) override;      
-      bool Exists(const GoTvUrl& url) override;
-      int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
+      bool Open(const NlcUrl& url) override;      
+      bool Exists(const NlcUrl& url) override;
+      int Stat(const NlcUrl& url, struct __stat64* buffer) override;
       
       ssize_t Read(void* lpBuf, size_t uiBufSize) override {return -1;}
       int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override {return -1;}

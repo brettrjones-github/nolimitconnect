@@ -14,7 +14,7 @@
 #include "utils/StringUtils.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "ServiceBroker.h"
 
 namespace XFILE
@@ -23,7 +23,7 @@ namespace XFILE
 
   CStackDirectory::~CStackDirectory() = default;
 
-  bool CStackDirectory::GetDirectory(const GoTvUrl& url, CFileItemList& items)
+  bool CStackDirectory::GetDirectory(const NlcUrl& url, CFileItemList& items)
   {
     items.Clear();
     std::vector<std::string> files;
@@ -67,7 +67,7 @@ namespace XFILE
     std::string      strStackTitlePath,
                     strCommonDir        = URIUtils::GetParentPath(strPath);
 
-    const GoTvUrl pathToUrl(strPath);
+    const NlcUrl pathToUrl(strPath);
     stack.GetDirectory(pathToUrl, files);
 
     if (files.Size() > 1)
@@ -77,10 +77,10 @@ namespace XFILE
       std::string File1 = URIUtils::GetFileName(files[0]->GetPath());
       std::string File2 = URIUtils::GetFileName(files[1]->GetPath());
       // Check if source path uses URL encoding
-      if (URIUtils::HasEncodedFilename(GoTvUrl(strCommonDir)))
+      if (URIUtils::HasEncodedFilename(NlcUrl(strCommonDir)))
       {
-        File1 = GoTvUrl::Decode(File1);
-        File2 = GoTvUrl::Decode(File2);
+        File1 = NlcUrl::Decode(File1);
+        File2 = NlcUrl::Decode(File2);
       }
 
       std::vector<CRegExp>::iterator itRegExp = RegExps.begin();
@@ -114,8 +114,8 @@ namespace XFILE
                   // got it
                   strStackTitle = Title1 + Ignore1 + Extension1;
                   // Check if source path uses URL encoding
-                  if (URIUtils::HasEncodedFilename(GoTvUrl(strCommonDir)))
-                    strStackTitle = GoTvUrl::Encode(strStackTitle);
+                  if (URIUtils::HasEncodedFilename(NlcUrl(strCommonDir)))
+                    strStackTitle = NlcUrl::Encode(strStackTitle);
 
                   itRegExp = RegExps.end();
                   break;

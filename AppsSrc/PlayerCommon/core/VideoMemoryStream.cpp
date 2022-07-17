@@ -24,20 +24,20 @@
 #include "core/MediaPlayer.h"
 #include "core/VideoMemoryStream.h"
 
-static inline GoTvPtoPVideoMemoryStream *p_this(void *opaque) { return static_cast<GoTvPtoPVideoMemoryStream *>(opaque); }
-static inline GoTvPtoPVideoMemoryStream *p_this(void **opaque) { return static_cast<GoTvPtoPVideoMemoryStream *>(*opaque); }
+static inline NlcPtoPVideoMemoryStream *p_this(void *opaque) { return static_cast<NlcPtoPVideoMemoryStream *>(opaque); }
+static inline NlcPtoPVideoMemoryStream *p_this(void **opaque) { return static_cast<NlcPtoPVideoMemoryStream *>(*opaque); }
 #define P_THIS p_this(opaque)
 
-GoTvPtoPVideoMemoryStream::GoTvPtoPVideoMemoryStream() { }
+NlcPtoPVideoMemoryStream::NlcPtoPVideoMemoryStream() { }
 
-GoTvPtoPVideoMemoryStream::~GoTvPtoPVideoMemoryStream() { }
+NlcPtoPVideoMemoryStream::~NlcPtoPVideoMemoryStream() { }
 
 static int lcm(int a, int b)
 {
     return a * b / GCD( a, b );
 }
 
-unsigned GoTvPtoPVideoMemoryStream::setPitchAndLines(const gotvptop_chroma_description_t *desc,
+unsigned NlcPtoPVideoMemoryStream::setPitchAndLines(const gotvptop_chroma_description_t *desc,
                                                 unsigned width,
                                                 unsigned height,
                                                 unsigned *pitches,
@@ -81,7 +81,7 @@ unsigned GoTvPtoPVideoMemoryStream::setPitchAndLines(const gotvptop_chroma_descr
     return bufferSize;
 }
 
-void GoTvPtoPVideoMemoryStream::setCallbacks(GoTvPtoPMediaPlayer *player)
+void NlcPtoPVideoMemoryStream::setCallbacks(NlcPtoPMediaPlayer *player)
 {
     libgotvptop_video_set_callbacks(player->core(),
                                lockCallbackInternal,
@@ -93,33 +93,33 @@ void GoTvPtoPVideoMemoryStream::setCallbacks(GoTvPtoPMediaPlayer *player)
                                       formatCleanUpCallbackInternal);
 }
 
-void GoTvPtoPVideoMemoryStream::unsetCallbacks(GoTvPtoPMediaPlayer *player)
+void NlcPtoPVideoMemoryStream::unsetCallbacks(NlcPtoPMediaPlayer *player)
 {
     libgotvptop_video_set_callbacks(player->core(), 0, 0, 0, 0);
     libgotvptop_video_set_format_callbacks(player->core(), 0, 0);
 }
 
 
-void *GoTvPtoPVideoMemoryStream::lockCallbackInternal(void *opaque,
+void *NlcPtoPVideoMemoryStream::lockCallbackInternal(void *opaque,
                                               void **planes)
 {
     return P_THIS->lockCallback(planes);
 }
 
-void GoTvPtoPVideoMemoryStream::unlockCallbackInternal(void *opaque,
+void NlcPtoPVideoMemoryStream::unlockCallbackInternal(void *opaque,
                                                void *picture,
                                                void *const*planes)
 {
     P_THIS->unlockCallback(picture, planes);
 }
 
-void GoTvPtoPVideoMemoryStream::displayCallbackInternal(void *opaque,
+void NlcPtoPVideoMemoryStream::displayCallbackInternal(void *opaque,
                                                 void *picture)
 {
     P_THIS->displayCallback(picture);
 }
 
-unsigned GoTvPtoPVideoMemoryStream::formatCallbackInternal(void **opaque,
+unsigned NlcPtoPVideoMemoryStream::formatCallbackInternal(void **opaque,
                                                    char *chroma,
                                                    unsigned *width,
                                                    unsigned *height,
@@ -129,7 +129,7 @@ unsigned GoTvPtoPVideoMemoryStream::formatCallbackInternal(void **opaque,
     return P_THIS->formatCallback(chroma, width, height, pitches, lines);
 }
 
-void GoTvPtoPVideoMemoryStream::formatCleanUpCallbackInternal(void *opaque)
+void NlcPtoPVideoMemoryStream::formatCleanUpCallbackInternal(void *opaque)
 {
     P_THIS->formatCleanUpCallback();
 }

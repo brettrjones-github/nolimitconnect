@@ -49,7 +49,7 @@ CNFSDirectory::~CNFSDirectory(void)
 
 bool CNFSDirectory::GetDirectoryFromExportList(const std::string& strPath, CFileItemList &items)
 {
-  GoTvUrl url(strPath);
+  NlcUrl url(strPath);
   std::string nonConstStrPath(strPath);
   std::list<std::string> exportList=gNfsConnection.GetExportList(url);
   std::list<std::string>::iterator it;
@@ -104,7 +104,7 @@ bool CNFSDirectory::GetServerList(CFileItemList &items)
   return ret;
 }
 
-bool CNFSDirectory::ResolveSymlink( const std::string &dirName, struct nfsdirent *dirent, GoTvUrl &resolvedUrl)
+bool CNFSDirectory::ResolveSymlink( const std::string &dirName, struct nfsdirent *dirent, NlcUrl &resolvedUrl)
 {
   CSingleLock lock(gNfsConnection); 
   int ret = 0;  
@@ -179,7 +179,7 @@ bool CNFSDirectory::ResolveSymlink( const std::string &dirName, struct nfsdirent
   return retVal;
 }
 
-bool CNFSDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
+bool CNFSDirectory::GetDirectory(const NlcUrl& url, CFileItemList &items)
 {
   // We accept nfs://server/path[/file]]]]
   int ret = 0;
@@ -233,7 +233,7 @@ bool CNFSDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
     //reslove symlinks
     if(tmpDirent.type == NF3LNK)
     {
-      GoTvUrl linkUrl;
+      NlcUrl linkUrl;
       //resolve symlink changes tmpDirent and strName
       if(!ResolveSymlink(strDirName,&tmpDirent,linkUrl))
       { 
@@ -291,7 +291,7 @@ bool CNFSDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items)
   return true;
 }
 
-bool CNFSDirectory::Create(const GoTvUrl& url2)
+bool CNFSDirectory::Create(const NlcUrl& url2)
 {
   int ret = 0;
   bool success=true;
@@ -299,7 +299,7 @@ bool CNFSDirectory::Create(const GoTvUrl& url2)
   CSingleLock lock(gNfsConnection);
   std::string folderName(url2.Get());
   URIUtils::RemoveSlashAtEnd(folderName);//mkdir fails if a slash is at the end!!! 
-  GoTvUrl url(folderName); 
+  NlcUrl url(folderName); 
   folderName = "";
   
   if(!gNfsConnection.Connect(url,folderName))
@@ -313,14 +313,14 @@ bool CNFSDirectory::Create(const GoTvUrl& url2)
   return success;
 }
 
-bool CNFSDirectory::Remove(const GoTvUrl& url2)
+bool CNFSDirectory::Remove(const NlcUrl& url2)
 {
   int ret = 0;
 
   CSingleLock lock(gNfsConnection);
   std::string folderName(url2.Get());
   URIUtils::RemoveSlashAtEnd(folderName);//rmdir fails if a slash is at the end!!!   
-  GoTvUrl url(folderName);
+  NlcUrl url(folderName);
   folderName = "";
   
   if(!gNfsConnection.Connect(url,folderName))
@@ -336,14 +336,14 @@ bool CNFSDirectory::Remove(const GoTvUrl& url2)
   return true;
 }
 
-bool CNFSDirectory::Exists(const GoTvUrl& url2)
+bool CNFSDirectory::Exists(const NlcUrl& url2)
 {
   int ret = 0;
 
   CSingleLock lock(gNfsConnection); 
   std::string folderName(url2.Get());
   URIUtils::RemoveSlashAtEnd(folderName);//remove slash at end or URIUtils::GetFileName won't return what we want...
-  GoTvUrl url(folderName);
+  NlcUrl url(folderName);
   folderName = "";
   
   if(!gNfsConnection.Connect(url,folderName))

@@ -13,8 +13,8 @@
 #include "Application.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "cores/DataCacheCore.h"
 #include "cores/VideoPlayer/VideoRenderers/BaseRenderer.h"
 #include "guilib/GUIComponent.h"
@@ -56,7 +56,7 @@ bool CVideoGUIInfo::InitCurrentItem(CFileItem *item)
     if (item->IsInternetStream() && g_application.GetAppPlayer().IsPlayingAudio())
       return false;
 
-    CLog::Log(LOGDEBUG,"CVideoGUIInfo::InitCurrentItem(%s)", GoTvUrl::GetRedacted(item->GetPath()).c_str());
+    CLog::Log(LOGDEBUG,"CVideoGUIInfo::InitCurrentItem(%s)", NlcUrl::GetRedacted(item->GetPath()).c_str());
 
     // Find a thumb for this file.
     if (!item->HasArt("thumb"))
@@ -458,7 +458,7 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
         else
           URIUtils::GetParentPath(item->GetPath(), value);
 
-        value = GoTvUrl(value).GetWithoutUserDetails();
+        value = NlcUrl(value).GetWithoutUserDetails();
 
         if (info.m_info == LISTITEM_FOLDERNAME)
         {
@@ -474,7 +474,7 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
         else
           value = item->GetPath();
 
-        value = GoTvUrl(value).GetWithoutUserDetails();
+        value = NlcUrl(value).GetWithoutUserDetails();
         return true;
     }
   }

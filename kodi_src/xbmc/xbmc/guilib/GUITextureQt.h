@@ -37,7 +37,7 @@ struct PackedVertex
 typedef std::vector<PackedVertex> PackedVertices;
 
 class CRenderSystemQt;
-class IGoTv;
+class INlc;
 
 class CGUITextureQt : public CGUITextureBase
 {
@@ -56,6 +56,6 @@ protected:
     void                        Draw( float *x, float *y, float *z, const CRect &texture, const CRect &diffuse, int orientation );
     void                        End();
 
-    IGoTv&                      m_IGoTv;
+    INlc&                      m_INlc;
 };
 

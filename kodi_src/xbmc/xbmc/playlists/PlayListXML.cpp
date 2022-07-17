@@ -8,7 +8,7 @@
 
 #include "PlayListXML.h"
 #include "filesystem/File.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"

@@ -51,7 +51,7 @@ static NLC_INLINE unsigned int fast_rand(void) {
 # define fmaxf(_x,_y) ((_x)>(_y)?(_x):(_y))
 #endif
 
-#if !defined(__LITTLE_ENDIAN__) && ( defined(GOTV_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
+#if !defined(__LITTLE_ENDIAN__) && ( defined(NLC_ARCH_BIGENDIAN) || defined(__BIG_ENDIAN__) )
 #define le_short(s) ((short) ((unsigned short) (s) << 8) | ((unsigned short) (s) >> 8))
 #define be_short(s) ((short) (s))
 #else

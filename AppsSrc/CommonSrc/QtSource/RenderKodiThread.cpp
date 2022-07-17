@@ -1,7 +1,7 @@
 
 #include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
-#include <GuiInterface/IGoTv.h>
+#include <GuiInterface/INlc.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxDebug.h>
@@ -51,9 +51,9 @@ void RenderKodiThread::run()
         m_RenderLogic.destroyRenderGlSystem();
         qDebug() << "worker thread done " << VxGetCurrentThreadId();
 #else
-        IGoTv& iGoTv = IGoTv::getIGoTv();
+        INlc& iNlc = INlc::getINlc();
         // will not return from doRun until kodi is shutdown
-        iGoTv.doRun( eAppModuleKodi );
+        iNlc.doRun( eAppModuleKodi );
         // BRJ FIXME
         // BRJ for no reason I can see g_RunKodi->deleteLater() will let memory allocated by Qt to be overwritten by normal malloc calls in kodi
         //    g_RunKodi->deleteLater();

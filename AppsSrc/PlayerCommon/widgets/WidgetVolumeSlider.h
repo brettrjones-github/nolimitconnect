@@ -26,46 +26,46 @@
 
 class QTimer;
 
-class GoTvPtoPAudio;
-class GoTvPtoPMediaPlayer;
+class NlcPtoPAudio;
+class NlcPtoPMediaPlayer;
 
 /*!
-    \class GoTvPtoPWidgetVolumeSlider WidgetVolumeSlider.h GOTVQtWidgets/WidgetVolumeSlider.h
+    \class NlcPtoPWidgetVolumeSlider WidgetVolumeSlider.h GOTVQtWidgets/WidgetVolumeSlider.h
     \ingroup GOTVQtWidgets
     \brief Volume slider widget
 
     This is one of GOTV-Qt GUI classes.
     It provides graphical volume control and also visual display of current volume.
 */
-class GOTVQT_WIDGETS_EXPORT GoTvPtoPWidgetVolumeSlider : public QSlider
+class GOTVQT_WIDGETS_EXPORT NlcPtoPWidgetVolumeSlider : public QSlider
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPWidgetVolumeSlider constructor
+        \brief NlcPtoPWidgetVolumeSlider constructor
 
         \param player media player
         \param parent volume slider's parent GUI widget
     */
-    explicit GoTvPtoPWidgetVolumeSlider(GoTvPtoPMediaPlayer *player,
+    explicit NlcPtoPWidgetVolumeSlider(NlcPtoPMediaPlayer *player,
                                    QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetVolumeSlider constructor
+        \brief NlcPtoPWidgetVolumeSlider constructor
         \param parent volume slider's parent GUI widget
     */
-    explicit GoTvPtoPWidgetVolumeSlider(QWidget *parent = 0);
+    explicit NlcPtoPWidgetVolumeSlider(QWidget *parent = 0);
 
     /*!
-        \brief GoTvPtoPWidgetVolumeSlider destructor
+        \brief NlcPtoPWidgetVolumeSlider destructor
     */
-    ~GoTvPtoPWidgetVolumeSlider();
+    ~NlcPtoPWidgetVolumeSlider();
 
     /*!
         \brief Set media player if initialised without it
         \param player media player
     */
-    void setMediaPlayer(GoTvPtoPMediaPlayer *player);
+    void setMediaPlayer(NlcPtoPMediaPlayer *player);
 
 public slots:
     /*!
@@ -150,8 +150,8 @@ private:
     void lock();
     void unlock();
 
-    GoTvPtoPAudio *_gotvptopAudio;
-    GoTvPtoPMediaPlayer *_gotvptopMediaPlayer;
+    NlcPtoPAudio *_gotvptopAudio;
+    NlcPtoPMediaPlayer *_gotvptopMediaPlayer;
 
     int _currentVolume;
 

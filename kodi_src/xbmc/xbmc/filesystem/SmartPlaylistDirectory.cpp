@@ -35,7 +35,7 @@ namespace XFILE
 
   CSmartPlaylistDirectory::~CSmartPlaylistDirectory() = default;
 
-  bool CSmartPlaylistDirectory::GetDirectory(const GoTvUrl& url, CFileItemList& items)
+  bool CSmartPlaylistDirectory::GetDirectory(const NlcUrl& url, CFileItemList& items)
   {
     // Load in the SmartPlaylist and get the WHERE query
     CSmartPlaylist playlist;
@@ -295,7 +295,7 @@ namespace XFILE
       return success;
   }
 
-  bool CSmartPlaylistDirectory::ContainsFiles(const GoTvUrl& url)
+  bool CSmartPlaylistDirectory::ContainsFiles(const NlcUrl& url)
   {
     // smart playlists always have files??
     return true;
@@ -333,7 +333,7 @@ namespace XFILE
     return "";
   }
 
-  bool CSmartPlaylistDirectory::Remove(const GoTvUrl& url)
+  bool CSmartPlaylistDirectory::Remove(const NlcUrl& url)
   {
     return XFILE::CFile::Delete(url);
   }

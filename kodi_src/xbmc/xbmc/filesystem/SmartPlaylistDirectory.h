@@ -20,10 +20,10 @@ namespace XFILE
   public:
     CSmartPlaylistDirectory();
     ~CSmartPlaylistDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList& items) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList& items) override;
     bool AllowAll() const override { return true; }
-    bool ContainsFiles(const GoTvUrl& url) override;
-    bool Remove(const GoTvUrl& url) override;
+    bool ContainsFiles(const NlcUrl& url) override;
+    bool Remove(const NlcUrl& url) override;
 
     static bool GetDirectory(const CSmartPlaylist &playlist, CFileItemList& items, const std::string &strBaseDir = "", bool filter = false);
 

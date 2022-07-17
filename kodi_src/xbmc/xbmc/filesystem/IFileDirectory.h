@@ -16,7 +16,7 @@ class IFileDirectory : public IDirectory
 {
 public:
   ~IFileDirectory(void) override = default;
-  virtual bool ContainsFiles(const GoTvUrl& url)=0;
+  virtual bool ContainsFiles(const NlcUrl& url)=0;
 };
 
 }

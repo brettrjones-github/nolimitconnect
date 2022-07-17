@@ -28,9 +28,9 @@ namespace XFILE
     public:
     CAPKDirectory() {};
     virtual ~CAPKDirectory() {};
-    virtual bool GetDirectory(const GoTvUrl& url, CFileItemList &items);
-    virtual bool ContainsFiles(const GoTvUrl& url);
-    virtual DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const;
-    virtual bool Exists(const GoTvUrl& url);
+    virtual bool GetDirectory(const NlcUrl& url, CFileItemList &items);
+    virtual bool ContainsFiles(const NlcUrl& url);
+    virtual DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const;
+    virtual bool Exists(const NlcUrl& url);
   };
 }

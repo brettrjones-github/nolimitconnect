@@ -10,8 +10,8 @@
 #include <string>
 
 #include "MediaSourceSettings.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 #include "filesystem/File.h"
 #include "profiles/ProfileManager.h"
 #include "settings/SettingsComponent.h"
@@ -363,7 +363,7 @@ bool CMediaSourceSettings::GetSource(const std::string &category, const TiXmlNod
     // validate the paths
     for (std::vector<std::string>::const_iterator path = vecPaths.begin(); path != vecPaths.end(); ++path)
     {
-      GoTvUrl url(*path);
+      NlcUrl url(*path);
       bool bIsInvalid = false;
 
       // for my programs

@@ -7,8 +7,8 @@
  */
 
 #include "MediaSource.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "filesystem/MultiPathDirectory.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
@@ -62,12 +62,12 @@ void CMediaSource::FromNameAndPaths(const std::string &category, const std::stri
     m_iDriveType = SOURCE_TYPE_UNKNOWN;
   // check - convert to url and back again to make sure strPath is accurate
   // in terms of what we expect
-  strPath = GoTvUrl(strPath).Get();
+  strPath = NlcUrl(strPath).Get();
 }
 
 bool CMediaSource::operator==(const CMediaSource &share) const
 {
-  // NOTE: we may wish to filter this through GoTvUrl to enable better "fuzzy" matching
+  // NOTE: we may wish to filter this through NlcUrl to enable better "fuzzy" matching
   if (strPath != share.strPath)
     return false;
   if (strName != share.strName)

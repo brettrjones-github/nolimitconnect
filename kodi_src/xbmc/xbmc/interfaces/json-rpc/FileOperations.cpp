@@ -17,8 +17,8 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/MediaSourceSettings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCoreUtil.h"
-#include "GoTvUrl.h"
+#include "NlcCoreUtil.h"
+#include "NlcUrl.h"
 #include "utils/FileExtensionProvider.h"
 #include "utils/URIUtils.h"
 #include "utils/FileUtils.h"
@@ -50,7 +50,7 @@ JSONRPC_STATUS CFileOperations::GetRootDirectory(const std::string &method, ITra
     {
       if (items[i]->IsSmb())
       {
-        GoTvUrl url(items[i]->GetPath());
+        NlcUrl url(items[i]->GetPath());
         items[i]->SetPath(url.GetWithoutUserDetails());
       }
     }
@@ -112,7 +112,7 @@ JSONRPC_STATUS CFileOperations::GetDirectory(const std::string &method, ITranspo
 
       if (items[i]->IsSmb())
       {
-        GoTvUrl url(items[i]->GetPath());
+        NlcUrl url(items[i]->GetPath());
         items[i]->SetPath(url.GetWithoutUserDetails());
       }
 

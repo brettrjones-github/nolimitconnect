@@ -16,7 +16,7 @@
 
 #include "utils/log.h"
 #include "network/WakeOnAccess.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "utils/StringUtils.h"
 
 #include "mysqldataset.h"

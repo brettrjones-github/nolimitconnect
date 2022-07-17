@@ -30,24 +30,24 @@
 
 #include "widgets/WidgetSeekProgress.h"
 
-GoTvPtoPWidgetSeekProgress::GoTvPtoPWidgetSeekProgress(GoTvPtoPMediaPlayer *player,
+NlcPtoPWidgetSeekProgress::NlcPtoPWidgetSeekProgress(NlcPtoPMediaPlayer *player,
                                              QWidget *parent)
-    : GoTvPtoPWidgetSeek(player, new QProgressBar(), true, parent),
+    : NlcPtoPWidgetSeek(player, new QProgressBar(), true, parent),
       _lock(false)
 {
     _progress->setMaximumHeight(15);
 }
 
-GoTvPtoPWidgetSeekProgress::GoTvPtoPWidgetSeekProgress(QWidget *parent)
-    : GoTvPtoPWidgetSeek(new QProgressBar(), true, parent),
+NlcPtoPWidgetSeekProgress::NlcPtoPWidgetSeekProgress(QWidget *parent)
+    : NlcPtoPWidgetSeek(new QProgressBar(), true, parent),
       _lock(false)
 {
     _progress->setMaximumHeight(15);
 }
 
-GoTvPtoPWidgetSeekProgress::~GoTvPtoPWidgetSeekProgress() {}
+NlcPtoPWidgetSeekProgress::~NlcPtoPWidgetSeekProgress() {}
 
-void GoTvPtoPWidgetSeekProgress::mouseMoveEvent(QMouseEvent *event)
+void NlcPtoPWidgetSeekProgress::mouseMoveEvent(QMouseEvent *event)
 {
     event->ignore();
 
@@ -57,14 +57,14 @@ void GoTvPtoPWidgetSeekProgress::mouseMoveEvent(QMouseEvent *event)
     updateEvent(event->pos());
 }
 
-void GoTvPtoPWidgetSeekProgress::mousePressEvent(QMouseEvent *event)
+void NlcPtoPWidgetSeekProgress::mousePressEvent(QMouseEvent *event)
 {
     event->ignore();
 
     lock();
 }
 
-void GoTvPtoPWidgetSeekProgress::mouseReleaseEvent(QMouseEvent *event)
+void NlcPtoPWidgetSeekProgress::mouseReleaseEvent(QMouseEvent *event)
 {
     event->ignore();
 
@@ -73,7 +73,7 @@ void GoTvPtoPWidgetSeekProgress::mouseReleaseEvent(QMouseEvent *event)
     unlock();
 }
 
-void GoTvPtoPWidgetSeekProgress::wheelEvent(QWheelEvent *event)
+void NlcPtoPWidgetSeekProgress::wheelEvent(QWheelEvent *event)
 {
     event->ignore();
 
@@ -86,7 +86,7 @@ void GoTvPtoPWidgetSeekProgress::wheelEvent(QWheelEvent *event)
         _gotvptopMediaPlayer->setTime(_gotvptopMediaPlayer->time() - _gotvptopMediaPlayer->length() * 0.01);
 }
 
-void GoTvPtoPWidgetSeekProgress::setSliderWidget(QWidget *slider,
+void NlcPtoPWidgetSeekProgress::setSliderWidget(QWidget *slider,
                                             bool updateSlider)
 {
     Q_UNUSED(slider)
@@ -95,10 +95,10 @@ void GoTvPtoPWidgetSeekProgress::setSliderWidget(QWidget *slider,
 #if QT_VERSION >= 0x050000
     Q_UNIMPLEMENTED();
 #endif
-    Q_ASSERT(!"GoTvPtoPWidgetSeekProgress::setSliderWidget() - Changing the slider widget is not allowed.");
+    Q_ASSERT(!"NlcPtoPWidgetSeekProgress::setSliderWidget() - Changing the slider widget is not allowed.");
 }
 
-void GoTvPtoPWidgetSeekProgress::updateEvent(const QPoint &pos)
+void NlcPtoPWidgetSeekProgress::updateEvent(const QPoint &pos)
 {
     if (!_gotvptopMediaPlayer)
         return;
@@ -114,28 +114,28 @@ void GoTvPtoPWidgetSeekProgress::updateEvent(const QPoint &pos)
     _progress->setValue(newValue);
 }
 
-void GoTvPtoPWidgetSeekProgress::updateCurrentTime(int time)
+void NlcPtoPWidgetSeekProgress::updateCurrentTime(int time)
 {
     if (_lock)
         return;
 
-    GoTvPtoPWidgetSeek::updateCurrentTime(time);
+    NlcPtoPWidgetSeek::updateCurrentTime(time);
 }
 
-void GoTvPtoPWidgetSeekProgress::updateFullTime(int time)
+void NlcPtoPWidgetSeekProgress::updateFullTime(int time)
 {
     if (_lock)
         return;
 
-    GoTvPtoPWidgetSeek::updateFullTime(time);
+    NlcPtoPWidgetSeek::updateFullTime(time);
 }
 
-void GoTvPtoPWidgetSeekProgress::lock()
+void NlcPtoPWidgetSeekProgress::lock()
 {
     _lock = true;
 }
 
-void GoTvPtoPWidgetSeekProgress::unlock()
+void NlcPtoPWidgetSeekProgress::unlock()
 {
     _lock = false;
 }

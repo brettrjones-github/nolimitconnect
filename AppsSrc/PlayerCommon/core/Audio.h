@@ -27,36 +27,36 @@
 
 #include "SharedExportCore.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 struct libgotvptop_media_player_t;
 
 /*!
-    \class GoTvPtoPAudio Audio.h core/Audio.h
+    \class NlcPtoPAudio Audio.h core/Audio.h
     \ingroup GOTVQtCore
     \brief Audio controls
 
     A group of audio controls functions.
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPAudio : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPAudio : public QObject
 {
     Q_OBJECT
-    friend class GoTvPtoPAudioCallbackHelper;
+    friend class NlcPtoPAudioCallbackHelper;
 
 public:
     /*!
-        \brief GoTvPtoPAudio constructor.
+        \brief NlcPtoPAudio constructor.
 
         This constructor creates a new audio manager.
 
-        \param player media player (GoTvPtoPMediaPlayer *)
+        \param player media player (NlcPtoPMediaPlayer *)
     */
-    explicit GoTvPtoPAudio(GoTvPtoPMediaPlayer *player);
+    explicit NlcPtoPAudio(NlcPtoPMediaPlayer *player);
 
     /*!
-        \brief GoTvPtoPAudio destructor
+        \brief NlcPtoPAudio destructor
     */
-    ~GoTvPtoPAudio();
+    ~NlcPtoPAudio();
 
     /*!
         \brief Get current mute state.
@@ -87,7 +87,7 @@ public slots:
         \brief Set audio channel.
         \param channel new audio channel
     */
-    void setChannel(GoTvPtoP::AudioChannel channel);
+    void setChannel(NlcPtoP::AudioChannel channel);
 
     /*!
         \brief Set mute state.
@@ -137,7 +137,7 @@ public:
         \brief Get audio channel.
         \return current audio channel, -1 if error
     */
-    GoTvPtoP::AudioChannel channel() const;
+    NlcPtoP::AudioChannel channel() const;
 
 signals:
     /*!

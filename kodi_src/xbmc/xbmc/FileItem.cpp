@@ -14,7 +14,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Archive.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "playlists/PlayListFactory.h"
 #include "utils/Crc32.h"
 #include "filesystem/Directory.h"
@@ -44,7 +44,7 @@
 #include "pictures/PictureInfoTag.h"
 #include "music/Artist.h"
 #include "music/Album.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -78,7 +78,7 @@ CFileItem::CFileItem( const CSong& song, const CMusicInfoTag& music )
     *GetMusicInfoTag() = music;
 }
 
-CFileItem::CFileItem( const GoTvUrl &url, const CAlbum& album )
+CFileItem::CFileItem( const NlcUrl &url, const CAlbum& album )
 {
     Initialize();
 
@@ -283,7 +283,7 @@ CFileItem::CFileItem( const char* strLabel )
     SetLabel( std::string( strLabel ) );
 }
 
-CFileItem::CFileItem( const GoTvUrl& path, bool bIsFolder )
+CFileItem::CFileItem( const NlcUrl& path, bool bIsFolder )
 {
     Initialize();
     m_strPath = path.Get();
@@ -1716,18 +1716,18 @@ std::string CFileItem::GetOpticalMediaPath() const
 * construction, and also allowing CFileItemList to have its own (public)
 * SetURL() function, so for now we give direct access.
 */
-void CFileItem::SetURL( const GoTvUrl& url )
+void CFileItem::SetURL( const NlcUrl& url )
 {
     m_strPath = url.Get();
 }
 
-const GoTvUrl CFileItem::GetURL() const
+const NlcUrl CFileItem::GetURL() const
 {
-    GoTvUrl url( m_strPath );
+    NlcUrl url( m_strPath );
     return url;
 }
 
-bool CFileItem::IsURL( const GoTvUrl& url ) const
+bool CFileItem::IsURL( const NlcUrl& url ) const
 {
     return IsPath( url.Get() );
 }
@@ -1737,21 +1737,21 @@ bool CFileItem::IsPath( const std::string& path, bool ignoreURLOptions /* = fals
     return URIUtils::PathEquals( m_strPath, path, false, ignoreURLOptions );
 }
 
-void CFileItem::SetDynURL( const GoTvUrl& url )
+void CFileItem::SetDynURL( const NlcUrl& url )
 {
     m_strDynPath = url.Get();
 }
 
-const GoTvUrl CFileItem::GetDynURL() const
+const NlcUrl CFileItem::GetDynURL() const
 {
     if( !m_strDynPath.empty() )
     {
-        GoTvUrl url( m_strDynPath );
+        NlcUrl url( m_strDynPath );
         return url;
     }
     else
     {
-        GoTvUrl url( m_strPath );
+        NlcUrl url( m_strPath );
         return url;
     }
 }
@@ -1928,7 +1928,7 @@ void CFileItemList::SetFastLookup( bool fastLookup )
         for( unsigned int i = 0; i < m_items.size(); i++ )
         {
             CFileItemPtr pItem = m_items[ i ];
-            m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? GoTvUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath(), pItem ) );
+            m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? NlcUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath(), pItem ) );
         }
     }
     if( !fastLookup && m_fastLookup )
@@ -1941,13 +1941,13 @@ bool CFileItemList::Contains( const std::string& fileName ) const
     CSingleLock lock( m_lock );
 
     if( m_fastLookup )
-        return m_map.find( m_ignoreURLOptions ? GoTvUrl( fileName ).GetWithoutOptions() : fileName ) != m_map.end();
+        return m_map.find( m_ignoreURLOptions ? NlcUrl( fileName ).GetWithoutOptions() : fileName ) != m_map.end();
 
     // slow method...
     for( unsigned int i = 0; i < m_items.size(); i++ )
     {
         const CFileItemPtr pItem = m_items[ i ];
-        if( pItem->IsPath( m_ignoreURLOptions ? GoTvUrl( fileName ).GetWithoutOptions() : fileName ) )
+        if( pItem->IsPath( m_ignoreURLOptions ? NlcUrl( fileName ).GetWithoutOptions() : fileName ) )
             return true;
     }
     return false;
@@ -1986,7 +1986,7 @@ void CFileItemList::Add( CFileItemPtr pItem )
 {
     CSingleLock lock( m_lock );
     if( m_fastLookup )
-        m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? GoTvUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath(), pItem ) );
+        m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? NlcUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath(), pItem ) );
     m_items.emplace_back( std::move( pItem ) );
 }
 
@@ -1995,7 +1995,7 @@ void CFileItemList::Add( CFileItem&& item )
     CSingleLock lock( m_lock );
     auto ptr = std::make_shared<CFileItem>( std::move( item ) );
     if( m_fastLookup )
-        m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? GoTvUrl( ptr->GetPath() ).GetWithoutOptions() : ptr->GetPath(), ptr ) );
+        m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? NlcUrl( ptr->GetPath() ).GetWithoutOptions() : ptr->GetPath(), ptr ) );
     m_items.emplace_back( std::move( ptr ) );
 }
 
@@ -2013,7 +2013,7 @@ void CFileItemList::AddFront( const CFileItemPtr &pItem, int itemPosition )
     }
     if( m_fastLookup )
     {
-        m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? GoTvUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath(), pItem ) );
+        m_map.insert( MAPFILEITEMSPAIR( m_ignoreURLOptions ? NlcUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath(), pItem ) );
     }
 }
 
@@ -2028,7 +2028,7 @@ void CFileItemList::Remove( CFileItem* pItem )
             m_items.erase( it );
             if( m_fastLookup )
             {
-                m_map.erase( m_ignoreURLOptions ? GoTvUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath() );
+                m_map.erase( m_ignoreURLOptions ? NlcUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath() );
             }
             break;
         }
@@ -2044,7 +2044,7 @@ void CFileItemList::Remove( int iItem )
         CFileItemPtr pItem = *( m_items.begin() + iItem );
         if( m_fastLookup )
         {
-            m_map.erase( m_ignoreURLOptions ? GoTvUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath() );
+            m_map.erase( m_ignoreURLOptions ? NlcUrl( pItem->GetPath() ).GetWithoutOptions() : pItem->GetPath() );
         }
         m_items.erase( m_items.begin() + iItem );
     }
@@ -2127,7 +2127,7 @@ CFileItemPtr CFileItemList::Get( const std::string& strPath )
 
     if( m_fastLookup )
     {
-        IMAPFILEITEMS it = m_map.find( m_ignoreURLOptions ? GoTvUrl( strPath ).GetWithoutOptions() : strPath );
+        IMAPFILEITEMS it = m_map.find( m_ignoreURLOptions ? NlcUrl( strPath ).GetWithoutOptions() : strPath );
         if( it != m_map.end() )
             return it->second;
 
@@ -2137,7 +2137,7 @@ CFileItemPtr CFileItemList::Get( const std::string& strPath )
     for( unsigned int i = 0; i < m_items.size(); i++ )
     {
         CFileItemPtr pItem = m_items[ i ];
-        if( pItem->IsPath( m_ignoreURLOptions ? GoTvUrl( strPath ).GetWithoutOptions() : strPath ) )
+        if( pItem->IsPath( m_ignoreURLOptions ? NlcUrl( strPath ).GetWithoutOptions() : strPath ) )
             return pItem;
     }
 
@@ -2150,7 +2150,7 @@ const CFileItemPtr CFileItemList::Get( const std::string& strPath ) const
 
     if( m_fastLookup )
     {
-        std::map<std::string, CFileItemPtr>::const_iterator it = m_map.find( m_ignoreURLOptions ? GoTvUrl( strPath ).GetWithoutOptions() : strPath );
+        std::map<std::string, CFileItemPtr>::const_iterator it = m_map.find( m_ignoreURLOptions ? NlcUrl( strPath ).GetWithoutOptions() : strPath );
         if( it != m_map.end() )
             return it->second;
 
@@ -2160,7 +2160,7 @@ const CFileItemPtr CFileItemList::Get( const std::string& strPath ) const
     for( unsigned int i = 0; i < m_items.size(); i++ )
     {
         CFileItemPtr pItem = m_items[ i ];
-        if( pItem->IsPath( m_ignoreURLOptions ? GoTvUrl( strPath ).GetWithoutOptions() : strPath ) )
+        if( pItem->IsPath( m_ignoreURLOptions ? NlcUrl( strPath ).GetWithoutOptions() : strPath ) )
             return pItem;
     }
 
@@ -2719,8 +2719,8 @@ void CFileItemList::StackFiles()
         VECCREGEXP::iterator  expr = stackRegExps.begin();
 
         URIUtils::Split( item1->GetPath(), filePath, file1 );
-        if( URIUtils::HasEncodedFilename( GoTvUrl( filePath ) ) )
-            file1 = GoTvUrl::Decode( file1 );
+        if( URIUtils::HasEncodedFilename( NlcUrl( filePath ) ) )
+            file1 = NlcUrl::Decode( file1 );
 
         int j;
         while( expr != stackRegExps.end() )
@@ -2752,8 +2752,8 @@ void CFileItemList::StackFiles()
 
                     std::string file2, filePath2;
                     URIUtils::Split( item2->GetPath(), filePath2, file2 );
-                    if( URIUtils::HasEncodedFilename( GoTvUrl( filePath2 ) ) )
-                        file2 = GoTvUrl::Decode( file2 );
+                    if( URIUtils::HasEncodedFilename( NlcUrl( filePath2 ) ) )
+                        file2 = NlcUrl::Decode( file2 );
 
                     if( expr->RegFind( file2, offset ) != -1 )
                     {
@@ -2862,7 +2862,7 @@ bool CFileItemList::Load( int windowID )
         {
             CArchive ar( &file, CArchive::load );
             ar >> *this;
-            CLog::Log( LOGDEBUG, "Loading items: %i, directory: %s sort method: %i, ascending: %s", Size(), GoTvUrl::GetRedacted( GetPath() ).c_str(), m_sortDescription.sortBy,
+            CLog::Log( LOGDEBUG, "Loading items: %i, directory: %s sort method: %i, ascending: %s", Size(), NlcUrl::GetRedacted( GetPath() ).c_str(), m_sortDescription.sortBy,
                        m_sortDescription.sortOrder == SortOrderAscending ? "true" : "false" );
             ar.Close();
             file.Close();
@@ -2871,7 +2871,7 @@ bool CFileItemList::Load( int windowID )
     }
   catch(const std::out_of_range&)
     {
-        CLog::Log( LOGERROR, "Corrupt archive: %s", GoTvUrl::GetRedacted( path ).c_str() );
+        CLog::Log( LOGERROR, "Corrupt archive: %s", NlcUrl::GetRedacted( path ).c_str() );
     }
 
     return false;
@@ -2883,7 +2883,7 @@ bool CFileItemList::Save( int windowID )
     if( iSize <= 0 )
         return false;
 
-    CLog::Log( LOGDEBUG, "Saving fileitems [%s]", GoTvUrl::GetRedacted( GetPath() ).c_str() );
+    CLog::Log( LOGDEBUG, "Saving fileitems [%s]", NlcUrl::GetRedacted( GetPath() ).c_str() );
 
     CFile file;
     if( file.OpenForWrite( GetDiscFileCache( windowID ), true ) ) // overwrite always
@@ -2904,7 +2904,7 @@ void CFileItemList::RemoveDiscCache( int windowID ) const
     std::string cacheFile( GetDiscFileCache( windowID ) );
     if( CFile::Exists( cacheFile ) )
     {
-        CLog::Log( LOGDEBUG, "Clearing cached fileitems [%s]", GoTvUrl::GetRedacted( GetPath() ).c_str() );
+        CLog::Log( LOGDEBUG, "Clearing cached fileitems [%s]", NlcUrl::GetRedacted( GetPath() ).c_str() );
         CFile::Delete( cacheFile );
     }
 }
@@ -3021,7 +3021,7 @@ std::string CFileItem::GetTBNFile() const
         strFile = URIUtils::AddFileToFolder( strParent, URIUtils::GetFileName( m_strPath ) );
     }
 
-    GoTvUrl url( strFile );
+    NlcUrl url( strFile );
     strFile = url.GetFileName();
 
     if( m_bIsFolder && !IsFileFolder() )
@@ -3177,7 +3177,7 @@ std::string CFileItem::GetMovieName( bool bUseFolderNames /* = false */ ) const
 
     URIUtils::RemoveSlashAtEnd( strMovieName );
 
-    return GoTvUrl::Decode( URIUtils::GetFileName( strMovieName ) );
+    return NlcUrl::Decode( URIUtils::GetFileName( strMovieName ) );
 }
 
 std::string CFileItem::GetBaseMoviePath( bool bUseFolderNames ) const

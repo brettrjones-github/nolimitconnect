@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -21,7 +21,7 @@
 
 #include "core/AbstractVideoFrame.h"
 
-GoTvPtoPAbstractVideoFrame::GoTvPtoPAbstractVideoFrame(int planeCount)
+NlcPtoPAbstractVideoFrame::NlcPtoPAbstractVideoFrame(int planeCount)
     : width(0),
       height(0)
 {
@@ -29,9 +29,9 @@ GoTvPtoPAbstractVideoFrame::GoTvPtoPAbstractVideoFrame(int planeCount)
     planeSizes.resize(planeCount);
 }
 
-GoTvPtoPAbstractVideoFrame::~GoTvPtoPAbstractVideoFrame() {}
+NlcPtoPAbstractVideoFrame::~NlcPtoPAbstractVideoFrame() {}
 
-void GoTvPtoPAbstractVideoFrame::clear()
+void NlcPtoPAbstractVideoFrame::clear()
 {
     width = height = 0;
 
@@ -43,12 +43,12 @@ void GoTvPtoPAbstractVideoFrame::clear()
     planeSizes.resize(planeCount);
 }
 
-bool GoTvPtoPAbstractVideoFrame::isValid()
+bool NlcPtoPAbstractVideoFrame::isValid()
 {
     return width > 0 && height > 0;
 }
 
-void GoTvPtoPAbstractVideoFrame::setPitchesAndLines(unsigned *pitches,
+void NlcPtoPAbstractVideoFrame::setPitchesAndLines(unsigned *pitches,
                                                unsigned *lines)
 {
     for (size_t i = 0; i < planes.size(); i++) {
@@ -61,7 +61,7 @@ void GoTvPtoPAbstractVideoFrame::setPitchesAndLines(unsigned *pitches,
     }
 }
 
-void GoTvPtoPAbstractVideoFrame::setPitchesAndLines(const std::shared_ptr<GoTvPtoPAbstractVideoFrame> &frame)
+void NlcPtoPAbstractVideoFrame::setPitchesAndLines(const std::shared_ptr<NlcPtoPAbstractVideoFrame> &frame)
 {
     for (size_t i = 0; i < planes.size(); i++) {
         if (i > 0)

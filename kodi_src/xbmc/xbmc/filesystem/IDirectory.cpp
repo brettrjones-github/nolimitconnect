@@ -9,7 +9,7 @@
 #include "IDirectory.h"
 #include "guilib/GUIKeyboardFactory.h"
 #include "messaging/helpers/DialogOKHelper.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "PasswordManager.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
@@ -44,7 +44,7 @@ IDirectory::~IDirectory(void) = default;
        "vts_##_0.ifo". If extension is ".dat", filename format must be
        "AVSEQ##(#).DAT", "ITEM###(#).DAT" or "MUSIC##(#).DAT".
  */
-bool IDirectory::IsAllowed(const GoTvUrl& url) const
+bool IDirectory::IsAllowed(const NlcUrl& url) const
 {
   if (m_strFileMask.empty())
     return true;
@@ -129,7 +129,7 @@ bool IDirectory::ProcessRequirements()
   }
   else if (type == "authenticate")
   {
-    GoTvUrl url(m_requirements["url"].asString());
+    NlcUrl url(m_requirements["url"].asString());
     if (CPasswordManager::GetInstance().PromptToAuthenticateURL(url))
     {
       m_requirements.clear();
@@ -168,7 +168,7 @@ void IDirectory::SetErrorDialog(const CVariant &heading, const CVariant &line1, 
   m_requirements["line3"] = line3;
 }
 
-void IDirectory::RequireAuthentication(const GoTvUrl &url)
+void IDirectory::RequireAuthentication(const NlcUrl &url)
 {
   m_requirements.clear();
   m_requirements["type"] = "authenticate";

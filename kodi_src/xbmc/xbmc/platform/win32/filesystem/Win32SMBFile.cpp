@@ -9,7 +9,7 @@
 #ifdef TARGET_WINDOWS
 #include "Win32SMBFile.h"
 #include "Win32SMBDirectory.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "platform/win32/WIN32Util.h"
 
 #include <Windows.h>
@@ -28,7 +28,7 @@ static bool worthTryToConnect(const DWORD lastErr)
 }
 
 
-bool CWin32SMBFile::ConnectAndAuthenticate(const GoTvUrl& url)
+bool CWin32SMBFile::ConnectAndAuthenticate(const NlcUrl& url)
 {
   CURL authUrl(url);
   CWin32SMBDirectory smbDir;
@@ -41,7 +41,7 @@ CWin32SMBFile::CWin32SMBFile() : CWin32File(true)
 CWin32SMBFile::~CWin32SMBFile()
 { /* cleanup by CWin32File destructor */ }
 
-bool CWin32SMBFile::Open(const GoTvUrl& url)
+bool CWin32SMBFile::Open(const NlcUrl& url)
 {
   assert(url.IsProtocol("smb")); // function suitable only for SMB files
   if (CWin32File::Open(url))
@@ -50,7 +50,7 @@ bool CWin32SMBFile::Open(const GoTvUrl& url)
   return worthTryToConnect(m_lastSMBFileErr) && ConnectAndAuthenticate(url) && CWin32File::Open(url);
 }
 
-bool CWin32SMBFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite /*= false*/)
+bool CWin32SMBFile::OpenForWrite(const NlcUrl& url, bool bOverWrite /*= false*/)
 {
   assert(url.IsProtocol("smb")); // function suitable only for SMB files
   if (CWin32File::OpenForWrite(url, bOverWrite))
@@ -59,7 +59,7 @@ bool CWin32SMBFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite /*= false*/
   return worthTryToConnect(m_lastSMBFileErr) && ConnectAndAuthenticate(url) && CWin32File::OpenForWrite(url, bOverWrite);
 }
 
-bool CWin32SMBFile::Delete(const GoTvUrl& url)
+bool CWin32SMBFile::Delete(const NlcUrl& url)
 {
   assert(url.IsProtocol("smb")); // function suitable only for SMB files
 
@@ -69,7 +69,7 @@ bool CWin32SMBFile::Delete(const GoTvUrl& url)
   return worthTryToConnect(m_lastSMBFileErr) && ConnectAndAuthenticate(url) && CWin32File::Delete(url);
 }
 
-bool CWin32SMBFile::Rename(const GoTvUrl& urlCurrentName, const GoTvUrl& urlNewName)
+bool CWin32SMBFile::Rename(const NlcUrl& urlCurrentName, const NlcUrl& urlNewName)
 {
   assert(urlCurrentName.IsProtocol("smb")); // function suitable only for SMB files
   assert(urlNewName.IsProtocol("smb")); // function suitable only for SMB files
@@ -81,7 +81,7 @@ bool CWin32SMBFile::Rename(const GoTvUrl& urlCurrentName, const GoTvUrl& urlNewN
     CWin32File::Rename(urlCurrentName, urlNewName);
 }
 
-bool CWin32SMBFile::SetHidden(const GoTvUrl& url, bool hidden)
+bool CWin32SMBFile::SetHidden(const NlcUrl& url, bool hidden)
 {
   assert(url.IsProtocol("smb")); // function suitable only for SMB files
 
@@ -111,7 +111,7 @@ bool CWin32SMBFile::SetHidden(const GoTvUrl& url, bool hidden)
   return SetFileAttributesW(pathnameW.c_str(), attrs & ~FILE_ATTRIBUTE_HIDDEN) != 0;
 }
 
-bool CWin32SMBFile::Exists(const GoTvUrl& url)
+bool CWin32SMBFile::Exists(const NlcUrl& url)
 {
   assert(url.IsProtocol("smb")); // function suitable only for SMB files
   std::wstring pathnameW(CWIN32Util::ConvertPathToWin32Form(url));
@@ -130,7 +130,7 @@ bool CWin32SMBFile::Exists(const GoTvUrl& url)
   return (attrs & FILE_ATTRIBUTE_DIRECTORY) == 0;
 }
 
-int CWin32SMBFile::Stat(const GoTvUrl& url, struct __stat64* statData)
+int CWin32SMBFile::Stat(const NlcUrl& url, struct __stat64* statData)
 {
   assert(url.IsProtocol("smb")); // function suitable only for SMB files
 

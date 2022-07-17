@@ -3,7 +3,7 @@
 * Copyright (C) 2016 Tadej Novak <tadej@tano.si>
 * Copyright (C) 2014-2015, Sergey Radionov <rsatom_gmail.com>
 *
-* This file is based on QmlGoTvPtoP library
+* This file is based on QmlNlcPtoP library
 *
 * This library is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -26,33 +26,33 @@
 #include "SharedExportCore.h"
 
 /*!
-    \struct GoTvPtoPYUVVideoFrame YUVVideoFrame.h core/YUVVideoFrame.h
+    \struct NlcPtoPYUVVideoFrame YUVVideoFrame.h core/YUVVideoFrame.h
     \ingroup GOTVQtCore
     \brief Video YUV frame data container
     \since GOTV-Qt 1.1
 */
-struct GOTVQT_CORE_EXPORT GoTvPtoPYUVVideoFrame : GoTvPtoPAbstractVideoFrame {
+struct GOTVQT_CORE_EXPORT NlcPtoPYUVVideoFrame : NlcPtoPAbstractVideoFrame {
     /*!
-        \brief GoTvPtoPVideoFrame constructor.
+        \brief NlcPtoPVideoFrame constructor.
         This construction ensures data is set and containers prepared.
         \param width
         \param height
         \param pitches
         \param lines
     */
-    GoTvPtoPYUVVideoFrame(unsigned *width,
+    NlcPtoPYUVVideoFrame(unsigned *width,
                      unsigned *height,
                      unsigned *pitches,
                      unsigned *lines);
 
     /*!
-        \brief GoTvPtoPVideoFrame constructor.
+        \brief NlcPtoPVideoFrame constructor.
         This construction copies an existing frame into a new one.
         \param frame existing shared pointer to a frame
     */
-    GoTvPtoPYUVVideoFrame(const std::shared_ptr<GoTvPtoPYUVVideoFrame> &frame);
+    NlcPtoPYUVVideoFrame(const std::shared_ptr<NlcPtoPYUVVideoFrame> &frame);
 
-    ~GoTvPtoPYUVVideoFrame();
+    ~NlcPtoPYUVVideoFrame();
 };
 
 #endif // GOTVQT_YUVVIDEOFRAME_H_

@@ -9,7 +9,7 @@
 #include "GUIWindowMusicPlaylist.h"
 #include "dialogs/GUIDialogSmartPlaylistEditor.h"
 #include "view/GUIViewState.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "playlists/PlayListM3U.h"
 #include "Application.h"
 #include "PlayListPlayer.h"

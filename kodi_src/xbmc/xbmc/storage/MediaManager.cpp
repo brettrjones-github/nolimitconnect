@@ -10,7 +10,7 @@
 #include "ServiceBroker.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/LocalizeStrings.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/URIUtils.h"
 #ifdef TARGET_WINDOWS
 #include "platform/win32/WIN32Util.h"
@@ -172,7 +172,7 @@ void CMediaManager::GetNetworkLocations(VECSOURCES &locations, bool autolocation
   {
     CMediaSource share;
     share.strPath = m_locations[i].path;
-    GoTvUrl url(share.strPath);
+    NlcUrl url(share.strPath);
     share.strName = url.GetWithoutUserDetails();
     locations.push_back(share);
   }

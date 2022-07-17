@@ -9,7 +9,7 @@
 #include "PipeFile.h"
 #include "threads/SingleLock.h"
 #include "PipesManager.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 using namespace XFILE;
 
@@ -37,7 +37,7 @@ void CPipeFile::SetLength(int64_t len)
   m_length = len;
 }
 
-bool CPipeFile::Open(const GoTvUrl& url)
+bool CPipeFile::Open(const NlcUrl& url)
 {
   std::string name = url.Get();
   m_pipe = PipesManager::GetInstance().OpenPipe(name);
@@ -46,13 +46,13 @@ bool CPipeFile::Open(const GoTvUrl& url)
   return (m_pipe != NULL);
 }
 
-bool CPipeFile::Exists(const GoTvUrl& url)
+bool CPipeFile::Exists(const NlcUrl& url)
 {
   std::string name = url.Get();
   return PipesManager::GetInstance().Exists(name);
 }
 
-int CPipeFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
+int CPipeFile::Stat(const NlcUrl& url, struct __stat64* buffer)
 {
   return -1;
 }
@@ -131,7 +131,7 @@ void CPipeFile::Flush()
     m_pipe->Flush();
 }
 
-bool CPipeFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
+bool CPipeFile::OpenForWrite(const NlcUrl& url, bool bOverWrite)
 {
   std::string name = url.Get();
 
@@ -141,12 +141,12 @@ bool CPipeFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
   return (m_pipe != NULL);
 }
 
-bool CPipeFile::Delete(const GoTvUrl& url)
+bool CPipeFile::Delete(const NlcUrl& url)
 {
   return false;
 }
 
-bool CPipeFile::Rename(const GoTvUrl& url, const GoTvUrl& urlnew)
+bool CPipeFile::Rename(const NlcUrl& url, const NlcUrl& urlnew)
 {
   return false;
 }

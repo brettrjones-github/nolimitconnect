@@ -12,8 +12,8 @@
 #include "filesystem/Directory.h"
 #include "utils/FileUtils.h"
 #include "utils/URIUtils.h"
-#include "GoTvUrl.h"
-#include "GoTvCoreUtil.h"
+#include "NlcUrl.h"
+#include "NlcCoreUtil.h"
 
 namespace XBMCAddon
 {
@@ -95,7 +95,7 @@ namespace XBMCAddon
           std::string strFileName = URIUtils::GetFileName(itemPath);
           if (strFileName.empty())
           {
-            GoTvUrl url(itemPath);
+            NlcUrl url(itemPath);
             strFileName = url.GetHostName();
           }
           ret.first().push_back(strFileName);

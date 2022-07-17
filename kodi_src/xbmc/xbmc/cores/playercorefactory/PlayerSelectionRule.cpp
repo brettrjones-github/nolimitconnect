@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "PlayerSelectionRule.h"
 #include "ServiceBroker.h"
 #include "video/VideoInfoTag.h"
@@ -158,7 +158,7 @@ void CPlayerSelectionRule::GetPlayers(const CFileItem& item, std::vector<std::st
       return;
   }
 
-  GoTvUrl url(item.GetPath());
+  NlcUrl url(item.GetPath());
 
   if (CompileRegExp(m_fileTypes, regExp) && !MatchesRegExp(url.GetFileType(), regExp))
     return;

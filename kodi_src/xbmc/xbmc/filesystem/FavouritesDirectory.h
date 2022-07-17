@@ -21,8 +21,8 @@ namespace XFILE
   public:
     CFavouritesDirectory() = default;
 
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    bool Exists(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    bool Exists(const NlcUrl& url) override;
   };
   
 }

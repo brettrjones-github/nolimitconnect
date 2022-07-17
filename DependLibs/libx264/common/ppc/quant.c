@@ -251,7 +251,7 @@ int x264_quant_8x8_altivec( int16_t dct[64], uint16_t mf[64], uint16_t bias[64] 
     vec_st(dctv, 8*y, dct);                                          \
 }
 
-#ifdef GOTV_ARCH_BIGENDIAN
+#ifdef NLC_ARCH_BIGENDIAN
 #define VEC_MULE vec_mule
 #define VEC_MULO vec_mulo
 #else

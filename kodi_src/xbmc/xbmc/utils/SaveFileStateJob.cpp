@@ -11,11 +11,11 @@
 #include "StringUtils.h"
 #include "utils/Variant.h"
 #include "URIUtils.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "log.h"
 #include "video/VideoDatabase.h"
 #include "interfaces/AnnouncementManager.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIMessage.h"
 #include "guilib/GUIWindowManager.h"
@@ -57,7 +57,7 @@ void CSaveFileState::DoWork(CFileItem& item,
 #endif
     if (item.IsVideo())
     {
-      std::string redactPath = GoTvUrl::GetRedacted(progressTrackingFile);
+      std::string redactPath = NlcUrl::GetRedacted(progressTrackingFile);
       CLog::Log(LOGDEBUG, "%s - Saving file state for video item %s", __FUNCTION__, redactPath.c_str());
 
       CVideoDatabase videodatabase;
@@ -169,7 +169,7 @@ void CSaveFileState::DoWork(CFileItem& item,
 
     if (item.IsAudio())
     {
-      std::string redactPath = GoTvUrl::GetRedacted(progressTrackingFile);
+      std::string redactPath = NlcUrl::GetRedacted(progressTrackingFile);
       CLog::Log(LOGDEBUG, "%s - Saving file state for audio item %s", __FUNCTION__, redactPath.c_str());
 
       CMusicDatabase musicdatabase;

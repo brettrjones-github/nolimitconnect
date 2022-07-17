@@ -23,7 +23,7 @@
 
 #include "ILinux.h"
 #ifdef TARGET_OS_LINUX
-#include "GuiInterface/IGoTv.h" 
+#include "GuiInterface/INlc.h" 
 
 #if ENABLE_KODI
 #include "CompileInfo.h"
@@ -38,7 +38,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 
 using namespace XFILE;
 
@@ -47,7 +47,7 @@ using namespace XFILE;
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-ILinux::ILinux( IGoTv& gotv )
+ILinux::ILinux( INlc& gotv )
     : OsInterface( gotv )
 {
 }

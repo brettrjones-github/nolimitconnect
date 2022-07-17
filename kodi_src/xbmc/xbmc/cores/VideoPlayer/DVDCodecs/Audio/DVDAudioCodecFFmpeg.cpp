@@ -15,7 +15,7 @@
 #include "settings/SettingsComponent.h"
 #include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
 #include "cores/AudioEngine/Utils/AEUtil.h"
-#include "GoTvDebugConfig.h"
+#include "NlcDebugConfig.h"
 
 extern "C" {
 #include "libavutil/opt.h"

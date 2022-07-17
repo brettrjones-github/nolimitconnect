@@ -20,14 +20,14 @@ namespace XFILE
   public:
     CWin32SMBDirectory(void);
     virtual ~CWin32SMBDirectory(void);
-    virtual bool GetDirectory(const GoTvUrl& url, CFileItemList& items);
-    virtual bool Create(const GoTvUrl& url);
-    virtual bool Exists(const GoTvUrl& url);
-    virtual bool Remove(const GoTvUrl& url);
+    virtual bool GetDirectory(const NlcUrl& url, CFileItemList& items);
+    virtual bool Create(const NlcUrl& url);
+    virtual bool Exists(const NlcUrl& url);
+    virtual bool Remove(const NlcUrl& url);
   protected:
-    bool RealCreate(const GoTvUrl& url, bool tryToConnect);
-    bool RealExists(const GoTvUrl& url, bool tryToConnect);
-    static bool GetNetworkResources(const GoTvUrl& basePath, CFileItemList& items);
-    bool ConnectAndAuthenticate(GoTvUrl& url, bool allowPromptForCredential = false);
+    bool RealCreate(const NlcUrl& url, bool tryToConnect);
+    bool RealExists(const NlcUrl& url, bool tryToConnect);
+    static bool GetNetworkResources(const NlcUrl& basePath, CFileItemList& items);
+    bool ConnectAndAuthenticate(NlcUrl& url, bool allowPromptForCredential = false);
   };
 }

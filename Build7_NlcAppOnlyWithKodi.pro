@@ -8,7 +8,7 @@ CONFIG += no_docs_target
 CONFIG += ordered
 
 
-#SUBDIRS += $$PWD/GoTvOpenSslLib.pro
+#SUBDIRS += $$PWD/NlcOpenSslLib.pro
 
 SUBDIRS += $$PWD/NoLimit_AppWithKodi.pro
 

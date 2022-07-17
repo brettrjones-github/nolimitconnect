@@ -23,30 +23,30 @@
 
 #include "SharedExportCore.h"
 
-class GoTvPtoPMediaPlayer;
+class NlcPtoPMediaPlayer;
 
 struct libgotvptop_equalizer_t;
 
 /*!
-    \class GoTvPtoPEqualizer Equalizer.h core/Equalizer.h
+    \class NlcPtoPEqualizer Equalizer.h core/Equalizer.h
     \ingroup GOTVQtCore
     \brief Audio equalizer
 
     \since libGOTV 2.2
 */
-class GOTVQT_CORE_EXPORT GoTvPtoPEqualizer : public QObject
+class GOTVQT_CORE_EXPORT NlcPtoPEqualizer : public QObject
 {
     Q_OBJECT
 public:
     /*!
-        \brief GoTvPtoPEqualizer constructor
+        \brief NlcPtoPEqualizer constructor
     */
-    explicit GoTvPtoPEqualizer(GoTvPtoPMediaPlayer *gotvptopMediaPlayer);
+    explicit NlcPtoPEqualizer(NlcPtoPMediaPlayer *gotvptopMediaPlayer);
 
     /*!
-        \brief GoTvPtoPEqualizer destructor
+        \brief NlcPtoPEqualizer destructor
     */
-    ~GoTvPtoPEqualizer();
+    ~NlcPtoPEqualizer();
 
     /*!
         \brief Get the amplification value for a particular equalizer frequency band.
@@ -134,7 +134,7 @@ signals:
     void presetLoaded();
 
 private:
-    GoTvPtoPMediaPlayer *_gotvptopMediaPlayer;
+    NlcPtoPMediaPlayer *_gotvptopMediaPlayer;
     libgotvptop_equalizer_t *_gotvptopEqualizer;
 };
 

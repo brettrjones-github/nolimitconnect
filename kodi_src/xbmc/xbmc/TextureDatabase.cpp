@@ -10,7 +10,7 @@
 #include "utils/log.h"
 #include "XBDateTime.h"
 #include "dbwrappers/dataset.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 #include "utils/DatabaseUtils.h"
@@ -112,7 +112,7 @@ std::string CTextureUtils::GetWrappedImageURL(const std::string &image, const st
   if (StringUtils::StartsWith(image, "image://"))
     return image; // already wrapped
 
-  GoTvUrl url;
+  NlcUrl url;
   url.SetProtocol("image");
   url.SetUserName(type);
   url.SetHostName(image);
@@ -133,7 +133,7 @@ std::string CTextureUtils::UnwrapImageURL(const std::string &image)
 {
   if (StringUtils::StartsWith(image, "image://"))
   {
-    GoTvUrl url(image);
+    NlcUrl url(image);
     if (url.GetUserName().empty() && url.GetOptions().empty())
       return url.GetHostName();
   }
@@ -182,7 +182,7 @@ void CTextureDatabase::UpdateTables(int version)
     while (!m_pDS->eof())
     {
       unsigned int id = m_pDS->fv(0).get_asInt();
-      GoTvUrl url(m_pDS->fv(1).get_asString());
+      NlcUrl url(m_pDS->fv(1).get_asString());
       m_pDS2->exec(PrepareSQL("update path set texture='image://%s?size=thumb' where id=%u", url.GetHostName().c_str(), id));
       m_pDS->next();
     }
@@ -190,7 +190,7 @@ void CTextureDatabase::UpdateTables(int version)
     while (!m_pDS->eof())
     {
       unsigned int id = m_pDS->fv(0).get_asInt();
-      GoTvUrl url(m_pDS->fv(1).get_asString());
+      NlcUrl url(m_pDS->fv(1).get_asString());
       m_pDS2->exec(PrepareSQL("update texture set url='image://%s?size=thumb', urlhash=0 where id=%u", url.GetHostName().c_str(), id));
       m_pDS->next();
     }

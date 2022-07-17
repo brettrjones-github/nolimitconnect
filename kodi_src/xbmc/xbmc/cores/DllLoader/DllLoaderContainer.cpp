@@ -19,7 +19,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"
-#include "GoTvUrl.h"
+#include "NlcUrl.h"
 
 #if defined(TARGET_WINDOWS)
 #define ENV_PARTIAL_PATH \
@@ -129,14 +129,14 @@ LibraryLoader* DllLoaderContainer::FindModule(const char* sName, const char* sCu
 {
   if (URIUtils::IsInArchive(sName))
   {
-    GoTvUrl url(sName);
+    NlcUrl url(sName);
     std::string newName = "special://temp/";
     newName += url.GetFileName();
     CFile::Copy(sName, newName);
     return FindModule(newName.c_str(), sCurrentDir, bLoadSymbols);
   }
 
-  if (GoTvUrl::IsFullPath(sName))
+  if (NlcUrl::IsFullPath(sName))
   { //  Has a path, just try to load
     return LoadDll(sName, bLoadSymbols);
   }

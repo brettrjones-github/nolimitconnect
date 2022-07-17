@@ -18,11 +18,11 @@ namespace XFILE
   public:
     CRSSDirectory();
     ~CRSSDirectory() override;
-    bool GetDirectory(const GoTvUrl& url, CFileItemList &items) override;
-    bool Exists(const GoTvUrl& url) override;
+    bool GetDirectory(const NlcUrl& url, CFileItemList &items) override;
+    bool Exists(const NlcUrl& url) override;
     bool AllowAll() const override { return true; }
-    bool ContainsFiles(const GoTvUrl& url) override;
-    DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const override { return DIR_CACHE_ONCE; };
+    bool ContainsFiles(const NlcUrl& url) override;
+    DIR_CACHE_TYPE GetCacheType(const NlcUrl& url) const override { return DIR_CACHE_ONCE; };
   protected:
     // key is path, value is cache invalidation date
     static std::map<std::string,CDateTime> m_cache;

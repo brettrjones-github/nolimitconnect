@@ -12,7 +12,7 @@
 #include "GUIPassword.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindow.h"
-#include "GoTvCoreUtil.h"
+#include "NlcCoreUtil.h"
 #include "guilib/GUIImage.h"
 #include "utils/SortUtils.h"
 #include "utils/StringUtils.h"
