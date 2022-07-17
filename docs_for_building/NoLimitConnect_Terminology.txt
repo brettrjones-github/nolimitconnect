@@ -1,50 +1,64 @@
 A general explanation of terms and design
 
+Applet - A small applet or application built into No Limit Connect.
 Kodi Applet - Kodi built into application as a "Applet". For more info visit https://kodi.wiki/view/Main_Page
-Offer - a offer to video chat or be a friend etc.
-VideoChat - built in plugin for Video Chat between users
+    NOTE: Kodi is not currently enabled as a feature.
+
+Offer - a offer from a user to video chat or be a friend etc.
+Video Chat - built in plugin for Video Chat between users
 Messenger - built in plugin for Text messages, Pictures, Video etc. between users ( similar to phones text messaging )
 File Share - built in plugin to serve files to self or users with sufficient permission level
-CamServer - built in plugin to serve streaming video from camera. Has built in motion detection and recording security cam features
+Cam Server - built in plugin to serve streaming video from camera. Has built in motion detection and recording security cam features
 Truth Or Dare - built in game plugin to play video chat truth or dare game
-Library - manager of local media that a user may play/share/delete etc
 Relay Service - Foreword or "Relay" packets from one user to another for users that cannot connect directly to each other
-	Relay Service is provided by any Host Service except Network Host
+    Relay Service is provided by any Host Service except Network Host
+Voice Phone - built in plugin for voice communication (VOIP) between users.
+Push To Talk - built in pugin for walkie talkie style one button press voice transmit to another user.
+
+Library - Applet that manages local media that a user may play/share/delete etc.
+Personal Notes - Applet for taking text, voice, or video notes for personal use.
+
+
 
 User - end user. may or may not have joined goup(s)
-        1.) User level permissions to allow/disallow offers and or users media access via "Friendship Level"
+    1.) User level permissions allow/disallow offers and/or users media access via "Friendship Level"
 
-GroupUser - User that has joined a hosted goup(s)
+Group User - A user that has joined a Group, Chat Room or Random Connect Host.
 
 Friendship Level - although named differently for "Users" and "Group Host" etc. the permission level 
-   uses the same mechanisim of permission ( per plugin or per group user )
-    1.) None - resource is completely disabled and no access is allowed at all
+   uses the same mechanisim of permission ( per plugin or per user )
+    1.) None - resource is completely disabled and no access is allowed at all or if is user then user is added to ignore list
     2.) Anonymous - allow resource access to anyone
     3.) Guest - allow access to user granted "Guest" permission to group or user resources with 
         Permission Level Guest or Annonymous
+        NOTE: When you join a group or host then the other users that joined that group or host
+        are temporarily elevated from anonymous to guest if they are currently anonymouse.
     4.) Friend - allow access to user granted "Friend" permission to group or user resources with
          Permission Level Friend or Guest or Annonymous 
     5.) Admin - allow access to user granted "Admin" permission to group or user resources with
          Permission Level Admin or Friend or Guest or Annonymous  
 
-NoLimitConnect - This application including Kodi as a "Applet" and "Person to Person" sharing of video chat, media, etc
+NoLimitConnect - This application 
 
-Group Host - services for a group of users.
+Host - Group, Chat Room or Random Connect services for a group of users.
     1.) Admin of permissions to join hosted group or remove user from group
-    2.) Store and forward of user messages
-    3.) Relay of data services for when users cannot connect directly
-    4.) Search Service to search for people or resources within hosted group 
-    5.) Help setup direct connections between users
-    6.) Provide Open Port Connection Test
+    2.) Relay of data services for when users cannot connect directly
+    3.) Search Service to search for people or resources within hosted group 
+    4.) Help setup direct connections between users
+    5.) Can provide Open Port Connection Test if admin desires.
            
-
 Network Host
     1.) Allow search for Group Hosts, Chat Hosts and Random Connect Hosts for end users to find "Groups" with similar interests    
-    2.) Connection information for Group Hosts, Chat Hosts and Random Connect Hosts
-    3.) Provide Open Port Connection Test  
-    4.) Does NOT provide relay services
+    2.) Provides connection information for Group, Chat Room and Random Connect hosts.
+    3.) Provides Open Port Connection Test service.  
+    4.) Does NOT provide relay services.
 
+Network Key
+    Used as part of data traffic encryption. All users/hosts/network hosts have to use the same key or cannot connect to each other.
 
-
+Listen Port
+    TCP protocal port that application listens for incomming connections. 
+    If port is blocked then relay services of host will be required in most cases.
+    Network Host, Group, Chat Room and Random Connect hosts all require an open listen port.
 
           

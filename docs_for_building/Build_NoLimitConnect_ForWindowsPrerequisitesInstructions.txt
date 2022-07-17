@@ -1,0 +1,76 @@
+=== NoLimitConnect Build Prerequisites ====
+External Prerequisites to build/install No Limit Connect or KodiP2P
+<Qt Version> = qt version.. for this document 6.3.1
+<Java Version> = Java Version.. for this document JDK 11
+
+These instructions are not up to date
+In general you should be able to just
+1.) Install Visual Studio 2019 ( Community edition is fine )
+2.) Install Qt Sdk and <Qt Version> sdk component
+3.) Open <No Limit Source Code Root>/build/VS2019/NoLimitConnectAll.sln
+4.) Select either x64 Debug or x64 Release build configuration
+5.) Select NoLimitConnect as startup project
+6.) Build and run
+
+=== For reference here is my install paths. ====
+should not be required but if is then Python - C:/Python27
+YASM - default install
+Visual Studio 2015 Community Edition - default install location
+<Qt Version>- F:/Qt/<Qt Version>
+Java jre - F:/android/jre1.8.0_131
+Java jdk - F:/android/jdk1.8.0_131
+Android NDK - F:\android\android-ndk-windows-x86_64\android-ndk-r18b
+Android SDK - F:\android\android-sdk
+Android Studio F:/android/AndroidStudio
+
+=== my enviroment variables ===
+ANDROID_NDK_ROOT F:\android\android-ndk-windows-x86_64\android-ndk-r18b
+JAVA_HOME  F:\android\jdk1.8.0_131
+JRE_HOME F:\android\jre1.8.0_131
+QTDIR F:\Qt\Qt5.12\5.12.3\msvc2017_64
+
+// Should not be required.. Python is build into project
+// PythonPath C:\Python27\Lib;C:\Python27\DLLs;C:\Python27\Lib\lib-tk
+
+
+=== NoLimitConnect For Windows Prerequisites ====
+1.) NASM from https://www.nasm.us/ 
+2.) YASM from https://yasm.tortall.net/Download.html
+    If YASM does not install the extract yasm.exe and copy to the NASM install folder
+3.) Visual Studio 2019 ( Community edition is fine )
+	a.) Follow the instructions of visual studio install for kodi at https://github.com/xbmc/xbmc/blob/master/docs/README.md
+	b.) if you see "failed to locate a 64-bit linker on %PATH%" then must manually add it to front of PATH enviroment variable ( bug in VS2019 )
+		my path to linker was "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+    c.) If after install nasm is not found when run from command line then add the nasm directory
+        to the PATH enviroment variable
+4.) Qt <Qt Version> ( Tested with Qt <Qt Version> but other versions may work )
+5.) Java Oracle JDK/JRE 1.8.0_131 
+6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
+
+=== check enviroment ===
+from command line run nasm
+if nasm is not found then will need to add to path. Mine was 
+C:\Program Files (x86)\NASM
+from command line run yasm
+if nasm is not found then will need to add to path. Mine was 
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin
+
+
+
+=== NoLimitConnect Android GoTvP2P custom build ====
+After many frustrating days attempting to work within qt android frame work I did the following
+
+1.) Install AndroidStudio to F:/android/AndroidStudio
+2.) add gradle to enviroment variables 
+	edit path enviroment variable and add F:\Qt\Qt5.12.3\Tools\QtCreator\bin 
+	and F:\android\AndroidStudio\gradle\gradle-4.10.1\bin
+	and F:\android\android-sdk\platform-tools
+	
+3.) build a qt example then copy and modify the relevant parts to F:/gotvptop/androidsimpleapp
+
+	
+=== Test your build enviroment ====
+Build QtSimpleTestStaticLib, QtSimpleTestSharedLib and QtSimpleTestApp
+make sure QtSimpleTestApp runs and you can debug it
+
+

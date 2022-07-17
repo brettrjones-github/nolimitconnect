@@ -128,7 +128,6 @@ enum EApplet
 
     eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
 
-    eAppletServiceAvatarImage,
     eAppletServiceAboutMe,
     eAppletServiceStoryboard,
     eAppletServiceShareWebCam,
@@ -224,6 +223,8 @@ enum EApplet
 
     eAppletAboutMeClient,
     eAppletStoryboardClient,
+
+    eAppletServiceAvatarImage, // TODO: this service can probably be removed
 
     eAppletIgnoredHosts,
 

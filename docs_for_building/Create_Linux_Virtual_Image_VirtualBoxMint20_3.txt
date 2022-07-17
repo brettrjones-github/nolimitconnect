@@ -1,9 +1,9 @@
 Instructions to create a virtual box Linux Mint 20.3 Image for NoLimitConnect developement
 <Virtual Box Version> = oracal virtual box version.. for this document 6.1
 <Mint Version> = linux mint version.. for this document 20.3
-<Qt Version> = qt version.. for this document 6.3.0
-<Java Version> = qt version.. for this document 6.3.0
-
+<Qt Version> = qt version.. for this document 6.3.1
+<Java Version> = Java Version.. for this document JDK 11
+This document assumes the logged in user name is nolimit. 
 
 === KNOWN ISSUES ===
 1.) The issue of turning on 3D acceleration in VBox causes Qt Creator to crash seems to have been fixed in in the Mint <Mint Version> and latest Qt tools
@@ -78,9 +78,7 @@ for qt <Qt Version> install JDK 11 (later versions of java are not supported)
 ==== optional vpn ====
 Without a vpn you will probably not be able to connect from the virtual box image to the host computer
 In general a vpn with P2P support is recommended for developers and users
-1.) ProtonVPN has a free version VPN with no limit on data
-		follow install instruction for installation at
-		https://protonvpn.com/support/official-linux-vpn-mint/
+1.) Optional but recommended. Setup a vpn with an open incomming port through the vpn. See VPN_Setup_For_NoLimitConnect.txt for information
 		
 ==== some usefull tools for developers ======
 1.) Meld - File Difference comparison tool

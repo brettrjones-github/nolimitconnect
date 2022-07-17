@@ -68,7 +68,7 @@ AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app,
 
     if( eFriendStateIgnore == m_Engine.getPluginPermission( ePluginTypeHostNetwork ) )
     {
-        okMessageBox( QObject::tr( "Service Unavailable" ), QObject::tr( "Network Host Service Not Enabled. You view groups announced to this device because the service is not enabled" ) );
+        okMessageBox( QObject::tr( "Service Unavailable" ), QObject::tr( "Network Host Service Is Not Enabled. You can not view groups announced to this device because the service is not enabled" ) );
         connect( m_CloseAppletTimer, SIGNAL(timeout()), this, SLOT(onCancelButClick()) );
         m_CloseAppletTimer->setSingleShot( true );
         m_CloseAppletTimer->start( 1000 );

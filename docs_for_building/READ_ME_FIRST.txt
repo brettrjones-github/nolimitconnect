@@ -34,9 +34,9 @@ If building with Qt for Linux
 		
 Builds may take a long time so be patient
 
-on windows if you get error "make (e=87): The parameter is incorrect"
-then the command line limit of 32k is exceeded
-you may need to shorten your obj path
+On windows if you get error "make (e=87): The parameter is incorrect"
+then the command line limit of 32k is exceeded.
+You may need to shorten your obj path.
 
 Some Words Of Advice
 If you live in USA you should be paranoid about privacy.
@@ -48,13 +48,7 @@ NoLimitConnect and Kodi allow 3rd Party plugins, be paranoid that they might cau
 In the USA copywrite infringement penalties can be over a $30,000.00 fine per work infringed and up to 5 years in jail
 
 Use a VPN if possible. NordVPN and ExpressVPN can be used but do not allow port forwarding.
-Port forwarding is required if hosting a network or group and recommended for fastest speed and reliability of connections.
+Port forwarding is required if hosting a network or group or chat room or random connect and is recommended for fastest speed and reliability of connections.
+See VPN_Setup_For_NoLimitConnect.txt for more information about VPNs.
 
-PureVPN with the port fowarding addon seems to work well on all OS's I tested ( Windows, Linux, Android )
-
-PrivateVPN has port forwarding and worked well on windows but does not seem to support port forwarding on Android and 
-I could not get PrivateVPN to work with my Linux Mint 19.2 Virtual Box Image.
-
-For Information about my personal setup read
-NoLimitDocs/NoLimitConnetAuthorsDocs/NoLimitConnectPrivacyAndAuthorsPersonalSetup.txt
  
