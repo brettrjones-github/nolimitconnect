@@ -233,12 +233,12 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend, bool inGroup )
 
 	if( m_SelectedFriend->isIgnored() )
 	{
-		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Unblock" ) );
+		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Unblock User" ) );
 		return;
 	}
 	else
 	{
-		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconIgnored ), QObject::tr( "Block" ) );
+		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconIgnored ), QObject::tr( "Block User" ) );
 		addMenuItem( (int)eMaxPluginType + 3, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Change Friendship" ) );
 	}
 
@@ -646,11 +646,19 @@ void AppletPopupMenu::onPersonActionSelected( int iMenuId )
 		break;
 
 	case 2: // favorite
-		m_MyApp.getGuiFavoriteMgr().toggleIsFavorite( m_SelectedFriend->getMyOnlineId() );
+		if( m_SelectedFriend )
+		{
+			m_MyApp.getGuiFavoriteMgr().toggleIsFavorite( m_SelectedFriend->getMyOnlineId() );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onPersonActionSelected value %d null selected friend", iMenuId );
+		}
+		
 		break;
 
 	default:
-		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
+		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onPersonActionSelected value %d", iMenuId );
 	}
 }
 
@@ -665,6 +673,10 @@ void AppletPopupMenu::showUserSessionMenu( EApplet appletType, GuiUserSessionBas
 
 	m_AppletType = appletType;
 	m_UserSession = userSession;
+	m_SelectedFriend = userSession->getUserIdent();
+
+	/* TODO expand menu for session specific menu
+	
 	setMenuType( EPopupMenuType::ePopupMenuUserSession );
 	setTitle( QObject::tr( "Offer Friendship" ) );
 	addMenuItem( 0, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Friendship" ) );
@@ -677,6 +689,9 @@ void AppletPopupMenu::showUserSessionMenu( EApplet appletType, GuiUserSessionBas
 	{
 		addMenuItem( 2, getMyIcons().getIcon( eMyIconApp ), QObject::tr( "Set Perferred" ) );
 	}
+	 */
+
+	showFriendMenu( m_SelectedFriend );
 }
 
 //============================================================================

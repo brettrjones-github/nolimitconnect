@@ -564,7 +564,6 @@ void AppSettings::setSoundOutDeviceIndex( int32_t deviceIndex )
 	setIniValue( getAppShortName(), "SoundOutDeviceIndex", deviceIndex );
 }
 
-
 //============================================================================
 int32_t AppSettings::getSoundOutDeviceIndex( void )
 {

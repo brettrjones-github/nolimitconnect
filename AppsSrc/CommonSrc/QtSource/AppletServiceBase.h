@@ -50,6 +50,8 @@ public:
 
     virtual ThumbnailEditWidget *   getThumbEditWidget() { return ui.m_ThumbnailEditWidget; }
 
+    virtual QCheckBox*          getRunOnAppStartCheckbox() { return ui.m_RunOnStartupCheckBox; }
+
 protected slots:
     virtual void                slotApplyServiceSettings();
 

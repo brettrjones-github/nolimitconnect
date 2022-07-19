@@ -546,7 +546,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
             || ( m_NotifyOfferIcon != m_LastNotifyJoinIcon ) )
         {
             m_NotifyIconJoinImage = getMyIcons().getIconPixmap( m_NotifyJoinIcon, drawRect.size(), iconColor );
-            if( ! m_IconImage.isNull() )
+            if( !m_NotifyIconJoinImage.isNull() )
             {
                 m_LastNotifyJoinIcon = m_NotifyJoinIcon;
                 m_NotifyLastIconJoinColor = iconColor;
@@ -571,7 +571,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 			|| ( m_NotifyOnlineIcon != m_LastNotifyOnlineIcon ) )
 		{
             m_NotifyIconOnlineImage = getMyIcons().getIconPixmap( m_NotifyOnlineIcon, drawRect.size(), iconColor );
-			if( ! m_IconImage.isNull() )
+			if( !m_NotifyIconOnlineImage.isNull() )
 			{
                 m_LastNotifyOnlineIcon = m_NotifyOnlineIcon;
                 m_NotifyLastIconOnlineColor = iconColor;
@@ -596,7 +596,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
             || (m_NotifyDirectConnectIcon != m_LastNotifyDirectConnectIcon) )
         {
             m_NotifyIconDirectConnectImage = getMyIcons().getIconPixmap( m_NotifyDirectConnectIcon, drawRect.size(), iconColor );
-            if( !m_IconImage.isNull() )
+            if( !m_NotifyIconDirectConnectImage.isNull() )
             {
                 m_LastNotifyDirectConnectIcon = m_NotifyDirectConnectIcon;
                 m_NotifyLastIconDirectConnectColor = iconColor;
@@ -621,7 +621,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
             || (m_NotifyInGroupIcon != m_LastNotifyInGroupIcon) )
         {
             m_NotifyIconInGroupImage = getMyIcons().getIconPixmap( m_NotifyInGroupIcon, drawRect.size(), iconColor );
-            if( !m_IconImage.isNull() )
+            if( !m_NotifyIconInGroupImage.isNull() )
             {
                 m_LastNotifyInGroupIcon = m_NotifyInGroupIcon;
                 m_NotifyLastIconInGroupColor = iconColor;
@@ -646,7 +646,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
             || ( m_NotifyOfferIcon != m_LastNotifyOfferIcon ) )
         {
             m_NotifyIconOfferImage = getMyIcons().getIconPixmap( m_NotifyOfferIcon, drawRect.size(), iconColor );
-            if( ! m_IconImage.isNull() )
+            if( !m_NotifyIconOfferImage.isNull() )
             {
                 m_LastNotifyOfferIcon = m_NotifyOfferIcon;
                 m_NotifyLastIconOfferColor = iconColor;
@@ -671,7 +671,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
             || ( m_NotifyForbiddenIcon != m_LastNotifyForbiddenIcon ) )
         {
             m_NotifyIconForbiddenImage = getMyIcons().getIconPixmap( m_NotifyForbiddenIcon, drawRect.size(), iconColor );
-            if( ! m_IconImage.isNull() )
+            if( !m_NotifyIconForbiddenImage.isNull() )
             {
                 m_LastNotifyForbiddenIcon = m_NotifyForbiddenIcon;
                 m_NotifyLastIconForbiddenColor = iconColor;
@@ -694,8 +694,8 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
             || ( drawRect.size() != m_LastIconNlcFavoriteSize)
             || (m_NlcFavoriteIcon != m_LastNlcFavoriteIcon) )
         {
-            m_NlcFavoriteImage = getMyIcons().getIconPixmap( m_LastNlcFavoriteIcon, drawRect.size() );
-            if( ! m_IconImage.isNull() )
+            m_NlcFavoriteImage = getMyIcons().getIconPixmap( m_NlcFavoriteIcon, drawRect.size() );
+            if( !m_NlcFavoriteImage.isNull() )
             {
                 m_LastNlcFavoriteIcon = m_NlcFavoriteIcon;
                 m_LastIconNlcFavoriteSize = drawRect.size();

@@ -36,6 +36,8 @@ void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType plug
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
+    ui.m_RunOnStartupCheckBox->setVisible( false );
+    
     getServiceUrlLabel()->setVisible( false );
     getServiceUrlEdit()->setVisible( false );
     getStartButton()->setVisible( false );
@@ -64,12 +66,19 @@ void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType plug
     }
 
     connectServiceWidgets();
+
+    if( getPluginType() == ePluginTypeCamServer )
+    {
+        ui.m_RunOnStartupCheckBox->setVisible( true );
+        ui.m_RunOnStartupCheckBox->setChecked( m_MyApp.getAppSettings().getRunOnStartupCamServer() );
+    }
 }
 
 //============================================================================
 void AppletServiceBase::connectServiceWidgets()
 {
     connect( ui.m_ApplyButton, SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );
+    connect( ui.m_RunOnStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotRunOnStartupCheckBoxChange(int)) );
 }
 
 //============================================================================
@@ -138,5 +147,18 @@ void AppletServiceBase::slotApplyServiceSettings()
 {
     saveUiToSetting();
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+    m_MyApp.getMyIdentity()->setPluginPermission( getPluginType(), getPermissionWidget()->getPermissionLevel() );
+    if( getPluginType() == ePluginTypeCamServer )
+    {
+        if( getPermissionWidget()->getPermissionLevel() != eFriendStateIgnore )
+        {
+            getFromGuiInterface().fromGuiStartPluginSession( ePluginTypeCamServer, m_MyApp.getMyIdentity()->getMyOnlineId(), 0, m_MyApp.getMyIdentity()->getMyOnlineId() );
+        }
+        else
+        {
+            getFromGuiInterface().fromGuiStopPluginSession( ePluginTypeCamServer, m_MyApp.getMyIdentity()->getMyOnlineId(), 0, m_MyApp.getMyIdentity()->getMyOnlineId() );
+        }     
+    }
+   
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
 }

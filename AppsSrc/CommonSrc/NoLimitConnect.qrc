@@ -327,5 +327,6 @@
         <file>Resources/overlay-nlc.svg</file>
         <file>Resources/nlc-icon.svg</file>
         <file>Resources/sound-settings.svg</file>
+        <file>Resources/edit-hyperlink.svg</file>
     </qresource>
 </RCC>

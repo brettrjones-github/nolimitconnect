@@ -171,21 +171,8 @@ void AppCommon::completeLogin( void )
 
     // get settings from engine
     m_eLastSelectedWhichContactsToView = getEngine().getEngineSettings().getWhichContactsToView();
-    //ui.m_ListViewTypeComboBox->setCurrentIndex( m_eLastSelectedWhichContactsToView );
-    //connect( ui.m_ListViewTypeComboBox, SIGNAL(currentIndexChanged(int)),	this,	SLOT(slotListViewTypeChanged(int)) );
+
     slotListViewTypeChanged( m_eLastSelectedWhichContactsToView );
-
-
-    //if( netIdent->requiresRelay() && (false == netIdent->hasValidRelay()) )
-    //{	
-    //	netIdent->setHasRelay( false );
-    //	emit signalStatusMsg( "User must select a relay" );
-    //	getEngine().fromGuiSendContactList( eFriendViewAllProxies, 500 );
-    //}
-    //else
-    //{
-    //	getEngine().fromGuiSendContactList( m_eLastSelectedWhichContactsToView, 500 );
-    //}
 
     EApplet lastLaunchedApplet = getAppSettings().getLastAppletLaunched();
     if( eAppletKodi == lastLaunchedApplet )
@@ -194,6 +181,18 @@ void AppCommon::completeLogin( void )
     }
 
     onUserLoggedOn();
+
+    if( netIdent->getPluginPermission( ePluginTypeCamServer ) != eFriendStateIgnore &&
+        m_AppSettings.getRunOnStartupCamServer() )
+    {
+        getFromGuiInterface().fromGuiStartPluginSession( ePluginTypeCamServer, netIdent->getMyOnlineId(), 0, netIdent->getMyOnlineId() );
+    }
+
+    if( netIdent->getPluginPermission( ePluginTypeFileShareServer ) != eFriendStateIgnore &&
+        m_AppSettings.getRunOnStartupFileShareServer() )
+    {
+        getFromGuiInterface().fromGuiStartPluginSession( ePluginTypeFileShareServer, netIdent->getMyOnlineId(), 0, netIdent->getMyOnlineId() );
+    }
 }
 
 //============================================================================

@@ -2425,9 +2425,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGalleryThumb.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletGoTvPtoPNetworkHost.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupJoin.ui">
       <Filter>Form Files</Filter>
     </QtUic>

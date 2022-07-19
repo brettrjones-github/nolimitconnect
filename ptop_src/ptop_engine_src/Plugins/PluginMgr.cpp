@@ -965,25 +965,21 @@ void PluginMgr::fromGuiStartPluginSession( EPluginType ePluginType,  VxGUID& oOn
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
-		if( poInfo )
+		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( oOnlineId );
+		if( netIdent )
 		{
-			plugin->fromGuiStartPluginSession( poInfo, pvUserData, lclSessionId );	
-		}
-		else if( oOnlineId == m_PktAnn.getMyOnlineId() )
-		{
-			plugin->fromGuiStartPluginSession( &m_PktAnn, pvUserData, lclSessionId );	
+			plugin->fromGuiStartPluginSession( netIdent, pvUserData, lclSessionId );
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "PluginMgr::fromGuiStartPluginSession: id not found NOT FOUND %s my id %s\n", 
+			LogMsg( LOG_ERROR, "PluginMgr::fromGuiStartPluginSession: id not found NOT FOUND %s my id %s", 
 				oOnlineId.describeVxGUID().c_str(), 
 				m_PktAnn.getMyOnlineId().describeVxGUID().c_str() );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStartPluginSession: invalid plugin type %d\n", ePluginType );
+		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStartPluginSession: invalid plugin type %d", ePluginType );
 	}	
 }
 

@@ -100,7 +100,6 @@ protected slots:
 
 	void						slotIdentPushToTalkButtonPressed( void );
 	void						slotIdentPushToTalkButtonReleased( void );
-	void						slotIdentPushToTalkButtonDoubleClicked( void );
 
 protected:
 	AppCommon&					m_MyApp;

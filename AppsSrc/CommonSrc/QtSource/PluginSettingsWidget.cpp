@@ -64,13 +64,13 @@ void PluginSettingsWidget::setupSettingsWidget( EApplet applet, EPluginType plug
         ui.m_InfoWidget->setPluginType( pluginType );
     }
 
-    if( ePluginTypeCamServer == getPluginType() )
+    if( ePluginTypeCamServer == m_PluginType )
     {
         ui.m_RunOnStartupCheckBox->setVisible( true );
         ui.m_RunOnStartupCheckBox->setChecked( m_MyApp.getAppSettings().getRunOnStartupCamServer() );
     }
 
-    if( ePluginTypeFileShareServer == getPluginType() )
+    if( ePluginTypeFileShareServer == m_PluginType )
     {
         ui.m_RunOnStartupCheckBox->setVisible( true );
         ui.m_RunOnStartupCheckBox->setChecked( m_MyApp.getAppSettings().getRunOnStartupFileShareServer() );
@@ -159,6 +159,18 @@ void PluginSettingsWidget::slotApplyServiceSettings()
 {
     saveUiToSetting();
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+    if( getPluginType() == ePluginTypeCamServer )
+    {
+        if( getPermissionWidget()->getPermissionLevel() != eFriendStateIgnore )
+        {
+            m_MyApp.getFromGuiInterface().fromGuiStartPluginSession( ePluginTypeCamServer, m_MyApp.getMyIdentity()->getMyOnlineId(), 0, m_MyApp.getMyIdentity()->getMyOnlineId() );
+        }
+        else
+        {
+            m_MyApp.getFromGuiInterface().fromGuiStopPluginSession( ePluginTypeCamServer, m_MyApp.getMyIdentity()->getMyOnlineId(), 0, m_MyApp.getMyIdentity()->getMyOnlineId() );
+        }
+    }
+
     emit signalPluginSettingsApplied();
 }
 

@@ -34,8 +34,7 @@ namespace
 }
 
 //============================================================================
-AppletNearbyListClient::AppletNearbyListClient(	AppCommon&		    app, 
-												QWidget *			parent )
+AppletNearbyListClient::AppletNearbyListClient(	AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_NEARBY_LIST_CLIENT, app, parent )
 {
     setAppletType( eAppletNearbyListClient );
@@ -47,11 +46,15 @@ AppletNearbyListClient::AppletNearbyListClient(	AppCommon&		    app,
     ui.m_FriendsButton->setIcon( eMyIconFriend );
     ui.m_FriendsInfoButton->setFixedSize( eButtonSizeSmall );
     ui.m_FriendsInfoButton->setIcon( eMyIconInformation );
+    ui.m_FriendsButton->setVisible( false );
+    ui.m_FriendsInfoButton->setVisible( false );
 
     ui.m_IgnoredButton->setFixedSize( eButtonSizeSmall );
     ui.m_IgnoredButton->setIcon( eMyIconIgnored );
     ui.m_IgnoredInfoButton->setFixedSize( eButtonSizeSmall );
     ui.m_IgnoredInfoButton->setIcon( eMyIconInformation );
+    ui.m_IgnoredButton->setVisible( false );
+    ui.m_IgnoredInfoButton->setVisible( false );
 
     ui.m_NearbyButton->setFixedSize( eButtonSizeSmall );
     ui.m_NearbyButton->setIcon( eMyIconFriendBroadcast );
@@ -84,6 +87,9 @@ AppletNearbyListClient::AppletNearbyListClient(	AppCommon&		    app,
         m_FriendListType = eUserViewTypeNearby;
         onShowFriendTypeChanged();
     }
+
+    m_MyApp.wantToGuiActivityCallbacks( this, true );
+    setStatusLabel( QObject::tr( "Nearby List (Users connected to same Wireless Router or LAN)" ) );
 }
 
 //============================================================================

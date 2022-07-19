@@ -43,7 +43,6 @@ void IdentLogicInterface::setupIdentLogic( void ) // call after derived class ui
 		getIdentPushToTalkButton()->setVisible( false );
 		connect( getIdentPushToTalkButton(), SIGNAL(pressed()), this, SLOT(slotIdentPushToTalkButtonPressed()) );
 		connect( getIdentPushToTalkButton(), SIGNAL(released()), this, SLOT(slotIdentPushToTalkButtonReleased()) );
-		connect( getIdentPushToTalkButton(), SIGNAL(doubleClicked()), this, SLOT(slotIdentPushToTalkButtonDoubleClicked()) );
 	}
 
 	connect( getIdentAvatarButton(), SIGNAL(clicked()), this, SLOT(slotIdentAvatarButtonClicked()) );
@@ -388,12 +387,6 @@ void IdentLogicInterface::slotIdentPushToTalkButtonReleased( void )
 {
 	onIdentPushToTalkButtonReleased();
 	emit signalIdentPushToTalkButtonReleased();
-}
-
-//============================================================================
-void IdentLogicInterface::slotIdentPushToTalkButtonDoubleClicked( void )
-{
-	toggleIdentPushToTalk();
 }
 
 //============================================================================

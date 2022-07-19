@@ -43,20 +43,20 @@ void MyIcons::myIconsStartup( void )
 		QFileInfo fileInfo( strFileName );
 		if( false == fileInfo.exists())
 		{
-			LogMsg( LOG_ERROR, "MyIcons::myIconsStartup missing icon file %s\n", strFileName.toUtf8().constData() );
+			LogMsg( LOG_ERROR, "MyIcons::myIconsStartup missing icon file %s", strFileName.toUtf8().constData() );
 			continue;
 		}
 
 		QIcon oIcon( strFileName );
 		if( oIcon.isNull())
 		{
-			LogMsg( LOG_ERROR, "MyIcons::myIconsStartup could not get icon %d\n", i);
+			LogMsg( LOG_ERROR, "MyIcons::myIconsStartup could not get icon %d", i);
 		}
 
 		m_aoIcons.push_back( oIcon );
 	}
 
-	LogMsg( LOG_INFO, "MyIcons took %3.3f ms to load\n", timer.elapsedMs() );
+	LogMsg( LOG_INFO, "MyIcons took %3.3f ms to load", timer.elapsedMs() );
 }
 
 //============================================================================
@@ -760,6 +760,8 @@ QString MyIcons::getIconFile( enum EMyIcons eMyIcon )
         return ":/AppRes/Resources/edit-text.svg";
     case eMyIconEditUnderline:
         return ":/AppRes/Resources/edit-underline.svg";
+	case eMyIconEditHyperLink:
+		return ":/AppRes/Resources/edit-hyperlink.svg";
 
     case eMyIconFileOpen:
         return ":/AppRes/Resources/file-open.svg";
@@ -934,7 +936,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( enum EPluginType ePluginType )
 		return eMyIconSettingsPushToTalk;
 
     default:
-        LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d\n", ePluginType );
+        LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d", ePluginType );
     }
 
     return eMyIconUnknown;

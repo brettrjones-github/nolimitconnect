@@ -385,11 +385,6 @@ EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType,
 			{
 				accessState = ePluginAccessRequiresOnline;
 			}
-
-			if( requiresRelay() )
-			{
-				accessState = ePluginAccessRequiresDirectConnect;
-			}
 		}
 		else if( ePluginTypeMessenger != ePluginType )
 		{

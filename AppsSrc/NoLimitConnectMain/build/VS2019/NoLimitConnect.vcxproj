@@ -915,7 +915,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGalleryImage.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGalleryThumb.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGetStarted.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletGoTvPtoPNetworkHost.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupJoin.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupJoinSearch.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupListClient.ui" />
