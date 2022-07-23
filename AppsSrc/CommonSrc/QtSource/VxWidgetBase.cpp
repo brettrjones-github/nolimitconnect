@@ -31,12 +31,6 @@ VxWidgetBase::VxWidgetBase( const char * objName, QWidget *parent, Qt::WindowFla
 }
 
 //============================================================================
-VxWidgetBase::~VxWidgetBase()
-{
-}
-
-
-//============================================================================
 void VxWidgetBase::mousePressEvent( QMouseEvent * event )
 {
 	QWidget::mousePressEvent( event );

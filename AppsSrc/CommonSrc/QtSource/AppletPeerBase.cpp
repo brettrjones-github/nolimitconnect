@@ -189,14 +189,11 @@ void AppletPeerBase::toGuiPluginSessionEnded( GuiOfferSession * offer )
 }; 
 
 //============================================================================
-void AppletPeerBase::toGuiClientPlayVideoFrame(	VxGUID&			onlineId, 
-												uint8_t *		pu8Jpg, 
-												uint32_t		u32JpgDataLen,
-												int				motion0To100000 )
+void AppletPeerBase::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 	if( m_VidCamWidget && m_VidCamWidget->isVisible() )
 	{
-		m_VidCamWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+		m_VidCamWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 	}
 }
 

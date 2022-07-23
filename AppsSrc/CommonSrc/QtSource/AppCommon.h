@@ -32,6 +32,7 @@
 #include "GuiUserJoinMgr.h"
 #include "GuiUserMgr.h"
 #include "GuiThumbMgr.h"
+#include "GuiPlayerMgr.h"
 #include "GuiWebPageMgr.h"
 #include "MyIcons.h"
 #include "VxAppTheme.h"
@@ -156,6 +157,7 @@ public:
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
     GuiMembershipAvailableMgr&  getMembershipAvailableMgr( void )           { return m_MembershipAvailableMgr; }
+    GuiPlayerMgr&               getPlayerMgr( void )                         { return m_PlayerMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
 
 	void						setCamCaptureRotation( uint32_t rot );
@@ -317,7 +319,7 @@ public:
     void                        getViewPort( NlcRect& viewPort ) override;
 
     bool                        scissorsCanEffectClipping() override;
-    NlcRect                    clipRectToScissorRect( const NlcRect &rect ) override;
+    NlcRect                     clipRectToScissorRect( const NlcRect &rect ) override;
     void                        setScissors( const NlcRect& rect ) override;
     void                        resetScissors() override;
 
@@ -610,6 +612,8 @@ public:
 	/// a module has changed state
 	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
+    virtual void				toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort )  override;
+
     //============================================================================
     //=== implementation ===//
     //============================================================================
@@ -741,6 +745,8 @@ signals:
 
     void                        signalInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus pushToTalkStatus );
 
+    void                        signalInternalNetworkIsTested( bool requiresRelay, QString ipAddr, uint16_t ipPort );
+
 private slots:
     void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
     void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
@@ -800,6 +806,8 @@ private slots:
     void						slotInternalWantVideoCapture( EAppModule appModule, bool enableCapture );
 
     void                        slotInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus pushToTalkStatus );
+
+    void                        slotInternalNetworkIsTested( bool requiresRelay, QString ipAddr, uint16_t ipPort );
 
 protected slots:
     void						slotMainWindowResized( void );
@@ -863,7 +871,7 @@ protected:
     QString						m_AppShortName;
     QString						m_AppTitle;
     AccountMgr&				    m_AccountMgr;
-    INlc&                      m_Nlc;
+    INlc&                       m_Nlc;
 	VxPeerMgr&					m_VxPeerMgr;
     GuiConnectIdListMgr			m_ConnectIdListMgr;
     GuiFavoriteMgr			    m_FavoriteMgr;
@@ -876,6 +884,7 @@ protected:
     GuiHostedListMgr			m_HostedListMgr;
     GuiHostJoinMgr				m_HostJoinMgr;
     GuiUserJoinMgr				m_UserJoinMgr;
+    GuiPlayerMgr                 m_PlayerMgr;
     GuiWebPageMgr               m_WebPageMgr;
 
 	MyIcons					    m_MyIcons;

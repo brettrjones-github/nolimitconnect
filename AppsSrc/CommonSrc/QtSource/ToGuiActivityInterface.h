@@ -59,9 +59,6 @@ public:
     virtual void				toGuiContactLastSessionTimeChange( GuiUser * netIdent ){}; 
     virtual void				toGuiUpdateMyIdent(GuiUser * netIdent ){}; 
 
-
-    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) {};
-    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) { return 0;};
 	virtual void				toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
 
 	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ){};

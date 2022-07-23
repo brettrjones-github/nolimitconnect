@@ -1727,8 +1727,8 @@ void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, 
 
 	int64_t timeNow = GetGmtTimeMs();
 	// first downsample into a input frame at 8000Hz mono
-	int divRemainder{ 0 };
-	int rawSamplesRemaing = sampleCnt;
+    // int divRemainder{ 0 };
+    // int rawSamplesRemaing = sampleCnt;
 	int dnSamplesRemaining = sampleCnt / divideDnSample;
 	int samplesIndex = 0;
 
@@ -1753,8 +1753,9 @@ void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, 
 
 		while( dnSamplesRemaining )
 		{
-			int frameSamplesSpace = inFrame.audioSamplesFreeSpace();
-			int16_t* frameBuf = inFrame.getFrameBufferAtFreeIndex();
+			AudioInputFrame* audioFrame = &m_InputFrames[ m_InputFrameIndex ];
+			int frameSamplesSpace = audioFrame->audioSamplesFreeSpace();
+			int16_t* frameBuf = audioFrame->getFrameBufferAtFreeIndex();
 			int samplesThisFrame = std::min( frameSamplesSpace, dnSamplesRemaining );
 			if( divideDnSample > 1 )
 			{
@@ -1770,14 +1771,14 @@ void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, 
 			}
 
 
-			inFrame.m_LenWrote += samplesThisFrame;
+			audioFrame->m_LenWrote += samplesThisFrame;
 			dnSamplesRemaining -= samplesThisFrame;
 
-			if( inFrame.isFull() )
+			if( audioFrame->isFull() )
 			{
-				inFrame.m_WriteDelayMs = outDelayMs;
-				processAudioInFrame( inFrame );
-				inFrame.resetFrame();
+				audioFrame->m_WriteDelayMs = MIXER_CHUNK_LEN_MS + outDelayMs + ECHO_DELAY_MIC_FUDGE_FACTOR_MS;
+				processAudioInFrame( *audioFrame );
+				audioFrame->resetFrame();
 
 				m_InputFrameIndex++;
 				if( m_InputFrameIndex >= MAX_INPUT_FRAMES )
@@ -1785,7 +1786,7 @@ void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, 
 					m_InputFrameIndex = 0;
 				}
 
-				inFrame = m_InputFrames[ m_InputFrameIndex ];
+				audioFrame = &m_InputFrames[ m_InputFrameIndex ];
 			}
 		}
 	}
@@ -1806,9 +1807,9 @@ void MediaProcessor::processAudioInFrame( AudioInputFrame& inFrame )
 #if 1
 		if( fromGuiIsEchoCancelEnabled() )
 		{
-			LogMsg( LOG_VERBOSE, "Write Delay %d", inFrame.m_WriteDelayMs );
 			// for windows on my machine the delay is somewhere between 170 and 300
-			m_EchoCancel.processFromMicrophone( pcmData, frameLen, &m_EchoOutBuf[ m_EchoOutBufIdx ], 55 + inFrame.m_WriteDelayMs, inFrame.m_ClockDrift );
+			m_EchoCancel.processFromMicrophone( pcmData, frameLen, &m_EchoOutBuf[ m_EchoOutBufIdx ], inFrame.m_WriteDelayMs, inFrame.m_ClockDrift );
+			// LogMsg( LOG_VERBOSE, "Mic Write Delay %d", inFrame.m_WriteDelayMs );
 		}
 		else
 #endif

@@ -64,11 +64,11 @@ void ChatRoomWidget::setAppModule( EAppModule appModule )
 }
 
 //============================================================================
-void ChatRoomWidget::playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
+void ChatRoomWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 	if( m_IsInitialized )
 	{
-        getSessionChatEntry()->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
+        getSessionChatEntry()->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 	}
 }
 

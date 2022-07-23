@@ -4,6 +4,7 @@
 void  AppCommon::registerMetaData( void )
 {
 	qRegisterMetaType<uint8_t>( "uint8_t" );
+	qRegisterMetaType<uint8_t>( "uint16_t" );
 	qRegisterMetaType<int32_t>( "int32_t" );
 	qRegisterMetaType<uint32_t>( "uint32_t" );
 	qRegisterMetaType<uint64_t>( "uint64_t" );
@@ -139,4 +140,6 @@ void AppCommon::connectSignals( void )
     connect( this, SIGNAL( signalInternalToGuiSearchResultError(EScanType,VxNetIdent,int) ), this, SLOT( slotInternalToGuiSearchResultError(EScanType,VxNetIdent,int) ), Qt::QueuedConnection );
 
 	connect( this, SIGNAL( signalInternalPushToTalkStatus(VxGUID,EPushToTalkStatus) ), this, SLOT( slotInternalPushToTalkStatus(VxGUID,EPushToTalkStatus) ), Qt::QueuedConnection );
+
+	connect( this, SIGNAL( signalInternalNetworkIsTested(bool,QString,uint16_t) ), this, SLOT( signalInternalNetworkIsTested(bool,QString,uint16_t) ), Qt::QueuedConnection );
 }

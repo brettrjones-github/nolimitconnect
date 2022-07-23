@@ -36,7 +36,7 @@ public:
 	void						setAppModule( EAppModule appModule );
 	EAppModule					getAppModule( void ) { return  m_AppModule; }
 
-	void						playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
+	void						callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 );
 
 signals:
 	void						signalUserInputButtonClicked( void );

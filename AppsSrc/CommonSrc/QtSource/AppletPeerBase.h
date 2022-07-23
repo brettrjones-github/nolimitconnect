@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "AppletBase.h"
+#include "GuiPlayerCallback.h"
 
 class GuiOfferSession;
 class GuiUser;
@@ -22,7 +23,7 @@ class VidWidget;
 class VxLabel;
 class VxPushButton;
 
-class AppletPeerBase : public AppletBase
+class AppletPeerBase : public AppletBase, public GuiPlayerCallback
 {
 	Q_OBJECT
 public:
@@ -57,10 +58,7 @@ protected:
     virtual void				toGuiRxedPluginOffer( GuiOfferSession * offer );
     virtual void				toGuiRxedOfferReply( GuiOfferSession * offerReply );
     virtual void				toGuiPluginSessionEnded( GuiOfferSession * offer ) override;
-	virtual void				toGuiClientPlayVideoFrame(	VxGUID&			onlineId, 
-                                                            uint8_t *		pu8Jpg,
-                                                            uint32_t		u32JpgDataLen,
-                                                            int				motion0To100000 ) override;
+	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 ) override;
 
     virtual void				toGuiSetGameValueVar(	EPluginType     ePluginType,
                                                         VxGUID&         onlineId,

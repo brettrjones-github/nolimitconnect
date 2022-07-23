@@ -30,8 +30,9 @@ public:
 	void						setResourceImage( QString resourceUrl, bool scaleToLabelSize = true );
 	void						setImageFromFile( QString fileName );
 
-	void						playVideoFrame( unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
-    int                         playVideoFrame( uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+	void						playMotionVideoFrame( QImage& vidFrame, int motion0To100000 );
+    void                        playVideoFrame( QImage& vidFrame );
+	void						playRotatedVideoFrame( QImage& vidFrame, int iRotate );
 
 	void						setVidImageRotation( int imageRotation )		{ m_VidImageRotation = imageRotation; }
 	int							getVidImageRotation( void )						{ return m_VidImageRotation; }
@@ -41,12 +42,6 @@ public:
 
 signals:
 	void						clicked();
-	// Qt 6.2.2 passing QImage through queued signal/slot makes the image white.. must use QPixmap instead
-	void						signalPlayVideoFrame( QPixmap picBitmap, int iRotate );
-
-protected slots:
-	// Qt 6.2.2 passing QImage through queued signal/slot makes the image white.. must use QPixmap instead
-	void						slotPlayVideoFrame( QPixmap picBitmap, int iRotate );
 
 protected:
 	void						resizeBitmapToFitScreen( QImage& picBitmap );
@@ -56,7 +51,6 @@ protected:
 	virtual void				resizeEvent( QResizeEvent * ev ) override;
 
 	//=== vars ===//
-    std::atomic_char32_t        m_behindFrameCnt;
 	QString						m_ImageFileName;
 	QString						m_OrigText;
 	int							m_MaxLines;

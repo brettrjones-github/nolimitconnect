@@ -17,7 +17,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
-#include "AppCommon.h"
+#include "GuiPlayerMgr.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
@@ -32,11 +32,6 @@ AppletPlayerVideo::AppletPlayerVideo( AppCommon& app, QWidget * parent )
 , m_SliderIsPressed( false )
 {
 	initAppletPlayerVideo();
-}
-
-//============================================================================
-AppletPlayerVideo::~AppletPlayerVideo()
-{
 }
 
 //============================================================================
@@ -164,6 +159,7 @@ void AppletPlayerVideo::showEvent( QShowEvent * showEvent )
 		&& !m_IsPlaying )
 	{
         m_MyApp.wantToGuiActivityCallbacks( this, true );
+		m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
 		setReadyForCallbacks( true );
         if( m_AssetInfo.isValid() )
         {
@@ -171,10 +167,10 @@ void AppletPlayerVideo::showEvent( QShowEvent * showEvent )
         }
 	}
 
-    static bool g_firstShow = false;
-    if( !g_firstShow )
+    static bool g_firstShow = true;
+    if( g_firstShow )
     {
-        g_firstShow = true;
+        g_firstShow = false;
         //QString videoFile = "F:/TestMedia/video_test/test_Tarzan2016_01_18_01-22-44.avi";
         QString videoFile = "F:/TestMedia/video_test/Agents.of.S.H.I.E.L.D.S05E09/Marvels.Agents.of.S.H.I.E.L.D.S05E09.WEBRip.x264-ION10.mp4";
         //QString videoFile = "F:/TestMedia/video_test/Test.avi";
@@ -188,6 +184,7 @@ void AppletPlayerVideo::hideEvent( QHideEvent * hideEvent )
 {
     AppletPlayerBase::hideEvent( hideEvent );
     setReadyForCallbacks( false );
+	m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, false );
     m_MyApp.wantToGuiActivityCallbacks( this, false );
  }
 
@@ -329,18 +326,6 @@ void AppletPlayerVideo::slotShredAsset( void )
 }
 
 //============================================================================
-void AppletPlayerVideo::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
-{
-	ui.m_VidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
-}
-
-//============================================================================
-int AppletPlayerVideo::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
-{
-    return ui.m_VidWidget->playVideoFrame( onlineId, picBuf, picBufLen, picWidth, picHeight );
-}
-
-//============================================================================
 void AppletPlayerVideo::slotPlayProgress( int pos0to100000 )
 {
 	if( m_IsPlaying && ( false == m_SliderIsPressed ) )
@@ -392,4 +377,16 @@ void AppletPlayerVideo::setXferProgress( int xferProgress )
 	//{
 	//	ui.m_RightAvatarBar->setXferProgress( xferProgress );
 	//}
+}
+
+//============================================================================
+void AppletPlayerVideo::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
+{
+
+}
+
+//============================================================================
+void AppletPlayerVideo::callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame )
+{
+
 }

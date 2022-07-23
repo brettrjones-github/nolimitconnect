@@ -22,22 +22,14 @@
 //============================================================================
 VxLabel::VxLabel(QWidget *parent, Qt::WindowFlags f) 
 : QLabel(parent,f) 
-, m_MaxLines( 1 )
-, m_VidImageRotation( 0 )
 {
     setObjectName( "VxLabel" );
-    m_behindFrameCnt = 0;
-	connect( this, SIGNAL(signalPlayVideoFrame( QPixmap, int )), this, SLOT(slotPlayVideoFrame( QPixmap, int )),  Qt::QueuedConnection );
 }
 
 //============================================================================
 VxLabel::VxLabel(const QString &text, QWidget *parent, Qt::WindowFlags f) 
 : QLabel(text,parent,f) 
-, m_MaxLines( 1 )
-, m_VidImageRotation( 0 )
 {
-    m_behindFrameCnt = 0;
-	connect( this, SIGNAL(signalPlayVideoFrame( QPixmap, int )), this, SLOT(slotPlayVideoFrame( QPixmap, int )),  Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -200,11 +192,10 @@ void VxLabel::setImageFromFile( QString fileName )
 //============================================================================
 void VxLabel::loadImageFromFile( QString fileName )
 {
-	QPixmap	picBitmap;
+	QImage	picBitmap;
 	if( picBitmap.load( fileName ) )
 	{
-        m_behindFrameCnt++;
-		slotPlayVideoFrame( picBitmap, 0 );
+		playMotionVideoFrame( picBitmap, 0 );
 	}
     else
     {
@@ -213,105 +204,60 @@ void VxLabel::loadImageFromFile( QString fileName )
 }
 
 //============================================================================
-void VxLabel::playVideoFrame( unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
+void VxLabel::playMotionVideoFrame( QImage& vidFrame, int motion0To100000 )
 {
-    QPixmap	oPicBitmap;
-	if( oPicBitmap.loadFromData( pu8Jpg, u32JpgLen, "JPG" ) )
-	{
-        m_behindFrameCnt++;
-		emit signalPlayVideoFrame( oPicBitmap, m_VidImageRotation );
-	}
+	playRotatedVideoFrame( vidFrame, m_VidImageRotation );
 }
 
 //============================================================================
-int VxLabel::playVideoFrame( uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
+void VxLabel::playVideoFrame( QImage& vidFrame )
 {
-    if( picBuf 
-        && ( picWidth > 10 )
-        && ( picHeight > 10 )
-        && ( picBufLen = picWidth * picHeight * 4 ) )
-    {
-        QImage::Format imageFormat =  QImage::Format_ARGB32;
-        //if( picBufLen = ( picWidth * picHeight * 4) )
-        //{
-        //    //imageFormat =  QImage::Format_ARGB32;
-        //    imageFormat =  QImage::Format_ARGB32_Premultiplied;
-        //}
-
-        QImage	picBitmap( picBuf,  picWidth, picHeight, imageFormat );
-        if( ! picBitmap.isNull() )
-        {
-            LogMsg( LOG_INFO, " VxLabel::playVideoFrame len %d behind %d", picBufLen, m_behindFrameCnt.load() );
-            m_behindFrameCnt++;
-            emit signalPlayVideoFrame( QPixmap::fromImage( picBitmap ), m_VidImageRotation );
-        }
-        else
-        {
-            LogMsg( LOG_ERROR, " VxLabel::playVideoFrame invalid image data" );
-        }
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, " VxLabel::playVideoFrame invalid data params" );
-    }
-
-    return m_behindFrameCnt;
+	playRotatedVideoFrame( vidFrame, m_VidImageRotation );
 }
 
 //============================================================================
-void VxLabel::slotPlayVideoFrame( QPixmap picBitmap, int iRotate )
+void VxLabel::playRotatedVideoFrame( QImage& vidFrame, int iRotate )
 {
-    if( !picBitmap.isNull() )
+    if( !vidFrame.isNull() && isVisible() )
     {
-        if( m_behindFrameCnt > 0 )
-            m_behindFrameCnt--;
-        if( m_behindFrameCnt < 3 && this->width() > 10 && this->height() > 10 && isVisible() )
+		m_PreResizeImage = vidFrame;  // for camera snapshot
+
+        QSize screenSize( this->width(), this->height() );
+        QImage resizedPicmap = m_PreResizeImage.scaled( screenSize, Qt::KeepAspectRatio );
+        if( iRotate )
         {
-            m_PreResizeImage = picBitmap.toImage(); // for camera snapshot
-            QSize screenSize( this->width(), this->height() );
-            QImage resizedPicmap = m_PreResizeImage.scaled( screenSize, Qt::KeepAspectRatio );
-            if( iRotate )
+            #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QTransform rm;
+            #else
+                QMatrix rm; 
+            #endif
+            rm.rotate( iRotate );
+            QPixmap pixmap = QPixmap::fromImage( resizedPicmap ).transformed( rm );
+            if( !pixmap.isNull() )
             {
-                #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                    QTransform rm;
-                #else
-                    QMatrix rm; 
-                #endif
-                rm.rotate( iRotate );
-                QPixmap pixmap = QPixmap::fromImage( resizedPicmap ).transformed( rm );
-                if( !pixmap.isNull() )
-                {
-                    setPixmap( pixmap );
-                    update();
-                }
-                else
-                {
-                    LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame NULL pixmap" );
-                }
+                setPixmap( pixmap );
+                update();
             }
             else
             {
-                QPixmap pixmap = QPixmap::fromImage( resizedPicmap );
-                if( !pixmap.isNull() )
-                {
-                    setPixmap( pixmap );
-                    update();
-                }
-                else
-                {
-                    LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame NULL pixmap" );
-                }
+                LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame NULL pixmap" );
             }
         }
         else
         {
-            if( m_behindFrameCnt )
+            QPixmap pixmap = QPixmap::fromImage( resizedPicmap );
+            if( !pixmap.isNull() )
             {
-                LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame behind by %d frames", m_behindFrameCnt.load() );
+                setPixmap( pixmap );
+                update();
+            }
+            else
+            {
+                LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame NULL pixmap" );
             }
         }
     }
-    else
+    else if( vidFrame.isNull() )
     {
         LogMsg( LOG_ERROR, " VxLabel::slotPlayVideoFrame NULL picBitmap" );
     }

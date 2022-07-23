@@ -239,8 +239,13 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiOfferClientMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiOfferHostMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiOfferSession.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiParams.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUser.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiParams.h \  
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiPlayerCallback.h \ 
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiPlayerMgr.h \ 
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.h \
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.h \
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUser.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserBase.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListItem.h \
@@ -253,10 +258,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinMgr.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserUpdateCallback.h \   
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserUpdateCallback.h \ 
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiWebPageCallback.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiWebPageMgr.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/HelpBrowser.h \
@@ -360,7 +362,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxMenuButton.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxMenuButtonBottom.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxMenuButtonTop.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/VxProgressBar.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxResourceToRealFile.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxScrollArea.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxShredderButton.h \
@@ -610,6 +611,10 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiOfferHostMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiOfferSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiParams.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiPlayerMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.cpp \
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.cpp \
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUser.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserBase.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoin.cpp \
@@ -620,11 +625,8 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListWidget.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserMgr.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.cpp \ 
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiWebPageMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostedPluginWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListItem.cpp \
@@ -717,7 +719,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxMenuButtonBottom.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxMenuButtonTop.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxPushButton.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/VxProgressBar.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxComboBoxFileFilter.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxFlatButton.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxLabel.cpp \

@@ -223,12 +223,6 @@ void AppletCamSettings::resizeBitmapToFitScreen( QLabel * VideoScreen, QImage& o
 }
 
 //============================================================================
-void AppletCamSettings::playVideoFrame( VxGUID& feedId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
-{
-    ui.m_CamVidWidget->playVideoFrame( feedId, pu8Jpg, u32JpgLen, motion0To100000 );
-}
-
-//============================================================================
 void AppletCamSettings::webCamSourceOffline()
 {
     if( m_CamFeedIdent )
@@ -291,6 +285,7 @@ void AppletCamSettings::onCloseEvent( void )
     AppletBase::onCloseEvent();
 }
 
+/*
 //============================================================================
 void AppletCamSettings::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
 {
@@ -305,7 +300,8 @@ void AppletCamSettings::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedI
 }
 
 //============================================================================
-void AppletCamSettings::toGuiClientPlayVideoFrame( VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
+void AppletCamSettings::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0to100000 )
 {
     callbackVideoJpgSmall( nullptr, vidFeedId, jpgData, jpgDataLen, motion0to100000 );
 }
+*/

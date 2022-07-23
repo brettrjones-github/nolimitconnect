@@ -33,7 +33,7 @@ public:
 	PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginChatRoomClient() = default;
 
-    virtual EAppModule			getAppModule( void ) { return eAppModuleChatRoomClient; }
+    virtual EAppModule			getAppModule( void ) override { return eAppModuleChatRoomClient; }
 
     //=== hosting ===//
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl ) override;

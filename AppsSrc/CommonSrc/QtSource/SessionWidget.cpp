@@ -76,11 +76,11 @@ void SessionWidget::setAppModule( EAppModule appModule )
 }
 
 //============================================================================
-void SessionWidget::playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
+void SessionWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 	if( m_IsInitialized )
 	{
-		ui.m_ChatEntry->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
+		ui.m_ChatEntry->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 	}
 }
 

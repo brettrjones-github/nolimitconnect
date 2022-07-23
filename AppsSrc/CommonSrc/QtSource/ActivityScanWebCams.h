@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "ActivityBase.h"
+#include "GuiPlayerCallback.h"
 
 #include "ui_ActivityScanWebCams.h"
 
@@ -28,7 +29,7 @@
 class VxNetIdent;
 class VxGUID;
 
-class ActivityScanWebCams : public ActivityBase
+class ActivityScanWebCams : public ActivityBase, public GuiPlayerCallback
 {
 	Q_OBJECT
 public:
@@ -45,19 +46,16 @@ public:
 
     virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
     virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ) override;
-    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 ) override;
+    virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );
 
 signals:
 	void						signalNewWebCamSession( GuiUser * netIdent );
-	void						signalPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
 public slots:
 	void						slotNewWebCamSession( GuiUser * netIdent );
-	void						slotPlayVideoFrame( QImage oPicBitmap, int iRotate );
-	void						slotPlayAudio(  unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
     void						slotHomeButtonClicked( void ) override;
 
@@ -71,6 +69,8 @@ public slots:
 protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
+
+	void						playVideoFrameRotated( QImage oPicBitmap, int iRotate );
 
 	void						setScanStatusText( QString strMsg );
 	void						setupIdentWidget( GuiUser * netIdent );

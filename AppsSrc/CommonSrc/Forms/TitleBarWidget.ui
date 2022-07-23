@@ -336,7 +336,7 @@
        </widget>
       </item>
       <item>
-       <widget class="VxProgressBar" name="m_MicVolPeakBar">
+       <widget class="QProgressBar" name="m_MicVolPeakBar">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -699,11 +699,6 @@
    <extends>QWidget</extends>
    <header>NetAvailStatusWidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>VxProgressBar</class>
-   <extends>QProgressBar</extends>
-   <header>VxProgressBar.h</header>
   </customwidget>
   <customwidget>
    <class>CamTitleBarPreview</class>

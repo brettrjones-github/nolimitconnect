@@ -97,26 +97,19 @@ void AppletSnapshot::callbackVideoJpgSmall( void* userData, VxGUID& vidFeedId, u
 {
     if( jpgData && jpgDataLen && ( vidFeedId == m_MyApp.getMyOnlineId() ) )
     {
+        QImage capBitmap;
+        capBitmap.loadFromData( jpgData, jpgDataLen, "JPG" );
+
         VxLabel* camScreen = ui.m_ImageScreen;
         if( camScreen )
         {
-            camScreen->playVideoFrame( jpgData, jpgDataLen, motion0to100000 );
+            camScreen->playMotionVideoFrame( capBitmap, motion0to100000 );
         }
 
         if( m_SnapShotPending )
         {
-            QImage capBitmap;
-            if( capBitmap.loadFromData( jpgData, jpgDataLen, "JPG" ) )
-            {
-                VxLabel* camScreen = ui.m_SnapshotScreen;
-                if( camScreen )
-                {
-                    camScreen->playVideoFrame( jpgData, jpgDataLen, motion0to100000 );
-                }
-
-                m_ImageBitmap = capBitmap;
-                emit signalSnapshotImage( m_ImageBitmap );
-            }
+            m_ImageBitmap = capBitmap;
+            emit signalSnapshotImage( m_ImageBitmap );
 
             m_SnapShotPending = false;
         }

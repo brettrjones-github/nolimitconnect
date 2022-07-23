@@ -442,6 +442,8 @@ public:
 
     virtual void				toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
 
+    virtual void				toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort )  override;
+
     //============================================================================
     //=== from gui ===//
     //============================================================================

@@ -24,11 +24,7 @@ public:
 	AppletPersonalRecorder( AppCommon& app, QWidget * parent );
 	virtual ~AppletPersonalRecorder();
 
-
-    virtual void				toGuiClientPlayVideoFrame( VxGUID&          onlineId,
-                                                           uint8_t *		pu8Jpg,
-                                                           uint32_t		    u32JpgDataLen,
-                                                           int				motion0To100000 ) override;
+    void                        callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 );
 
 protected:
     void						setupMultiSessionActivity( void );

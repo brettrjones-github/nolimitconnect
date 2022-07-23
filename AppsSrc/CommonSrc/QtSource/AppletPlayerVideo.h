@@ -15,19 +15,20 @@
 
 #include "AppletPlayerBase.h"
 
+#include "GuiPlayerCallback.h"
 #include "ui_AppletPlayerVideo.h"
 
-class AppletPlayerVideo : public AppletPlayerBase
+class AppletPlayerVideo : public AppletPlayerBase, public GuiPlayerCallback
 {
 	Q_OBJECT
 public:
 	AppletPlayerVideo( AppCommon& app, QWidget * parent );
-	virtual ~AppletPlayerVideo();
+	virtual ~AppletPlayerVideo() = default;
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
 
-    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
-    virtual int	    			toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
+    virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 ) override;
+	virtual void				callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame ) override;
 
 	virtual void				showShredder( bool show );
 	virtual void				showXferProgress( bool show );

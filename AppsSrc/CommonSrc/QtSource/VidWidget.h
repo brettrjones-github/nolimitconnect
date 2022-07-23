@@ -15,18 +15,22 @@
 //============================================================================
 
 #include "ui_VidWidget.h"
+
+#include "GuiPlayerCallback.h"
+
 #include <CoreLib/VxGUID.h>
 
 class AppCommon;
 class AppSettings;
 class P2PEngine;
 
-class VidWidget : public QWidget
+class VidWidget : public QWidget, public GuiPlayerCallback
 {
 	Q_OBJECT
 
 public:
-	VidWidget(QWidget *parent=0);
+	VidWidget( QWidget* parent = nullptr );
+	virtual ~VidWidget();
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
@@ -64,8 +68,9 @@ public:
 	void						enableCamSourceControls( bool enable );
 	void						enableCamFeedControls( bool enable );
 
-	void						playVideoFrame( VxGUID&	feedOnlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
-    int                         playVideoFrame( VxGUID& feedOnlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& onlineId, QImage& vidFrame, int motion0To100000 ) override;
+	virtual void				callbackGuiPlayVideoFrame( VxGUID& onlineId, QImage& vidFrame ) override;
+	void						updateVidFeedMotion( int motion0To100000 );
 
     void                        setAspectRatio( float aspectRatio );
 
@@ -75,7 +80,6 @@ signals:
 	void						recordEnd();
 	void						playBegin();
 	void						playEnd();
-	void						signalVidFeedMotion( int motion0To100000 );
 
 protected slots:
 	void						slotStatusMsg( QString userMsg );
@@ -90,7 +94,6 @@ protected slots:
 	void						slotMotionAlarmButtonClicked( void );
 	void						slotRecMotionButtonClicked( void );
 	void						slotRecNormalButtonClicked( void );
-	void						slotVidFeedMotion( int motion0To100000 );
 
 	void						slotIconToggleTimeout( void );
 	void						slotMotionAlarmTimeout( void );
@@ -101,10 +104,8 @@ protected:
     virtual void				hideEvent( QHideEvent * ev ) override;
 	void						updatePreviewVisibility( void );
 	void						updateVidFeedImageRotation( void );
-	void						updateCamRotation( void );
 	void						playMotionAlarm( void );
 	void						updateMotionBarColor( void );
-	void						showMotion( int motion0To100000 );
 	void						enableVidFilesButton( bool enable );
 
 	//=== vars ===//

@@ -99,15 +99,15 @@ void ChatEntryWidget::setCanSend( bool canSend )
 }
 
 //============================================================================
-void ChatEntryWidget::playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
+void ChatEntryWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 	switch( m_InputMode )
 	{
 	case eAssetTypeVideo:
-		ui.m_InputVideoWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
+		ui.m_InputVideoWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 		break;
 	case eAssetTypePhoto:
-		ui.m_InputPhotoWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
+		ui.m_InputPhotoWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 		break;
 	default:
 		break;

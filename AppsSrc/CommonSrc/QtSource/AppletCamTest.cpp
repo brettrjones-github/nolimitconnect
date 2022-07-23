@@ -48,6 +48,9 @@ AppletCamTest::AppletCamTest( AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
+    connect( ui.m_MicToSpeakerCheckBox, SIGNAL( stateChanged(int) ), this, SLOT( slotMicToSpeakerStateChanged(int) ) );
+    ui.m_MicToSpeakerCheckBox->setVisible( false );
+
     m_MyApp.getCamLogic().updateCamAvailable();
     if( !m_MyApp.getCamLogic().isCamAvailable() )
     {
@@ -96,22 +99,18 @@ void AppletCamTest::setupCamFeed( VxNetIdent* feedNetIdent )
         setMuteSpeakerVisibility( false );
         setMuteMicrophoneVisibility( true );
         setCameraButtonVisibility( true );
-        ui.m_CamVidWidget->setRecordFilePath( VxGetPersonalRecordDirectory().c_str() );
-        ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
-        ui.m_CamVidWidget->showAllControls( true );
-        ui.m_CamVidWidget->enableCamFeedControls( false );
     }
     else
     {
         setMuteSpeakerVisibility( true );
         setMuteMicrophoneVisibility( false );
         setCameraButtonVisibility( false ); 
-        ui.m_CamVidWidget->showAllControls( true );
-        ui.m_CamVidWidget->enableCamSourceControls( false );
-        ui.m_CamVidWidget->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
-        ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
     }
 
+    ui.m_CamVidWidget->showAllControls( true );
+    ui.m_CamVidWidget->enableCamSourceControls( false );
+    ui.m_CamVidWidget->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
+    ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
     ui.m_CamVidWidget->setVideoFeedId( m_CamFeedId, eAppModuleCamClient );
 }
 
@@ -125,14 +124,6 @@ void AppletCamTest::startCamFeed( void )
             if( ePluginTypeInvalid != m_ePluginType )
             {
                 m_FromGui.fromGuiStartPluginSession( m_ePluginType, m_CamFeedIdent->getMyOnlineId() );
-            }
-
-            //m_Engine.fromGuiWantMediaInput( m_CamFeedIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, true );
-            //m_Engine.fromGuiWantMediaInput( eMediaInputVideoJpgSmall, this, this, true );
-
-            if( isMyself() )
-            {
-
             }
 
             setIsCamFeedStarted( true );
@@ -224,12 +215,6 @@ void AppletCamTest::resizeBitmapToFitScreen( QLabel * VideoScreen, QImage& oPicB
 }
 
 //============================================================================
-void AppletCamTest::playVideoFrame( VxGUID& feedId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
-{
-    ui.m_CamVidWidget->playVideoFrame( feedId, pu8Jpg, u32JpgLen, motion0To100000 );
-}
-
-//============================================================================
 void AppletCamTest::webCamSourceOffline()
 {
     if( m_CamFeedIdent )
@@ -278,35 +263,14 @@ void AppletCamTest::slotToGuiContactOffline( VxNetIdent * friendIdent )
     }
 }
 
-//============================================================================
-//! Implement the OnClickListener callback    
+//============================================================================  
 void AppletCamTest::onCancelButClick( void )
 {
     onBackButtonClicked();
 }
 
-//============================================================================
-void AppletCamTest::onCloseEvent( void )
+//============================================================================  
+void AppletCamTest::slotMicToSpeakerStateChanged( int checkBoxState )
 {
-    stopCamFeed();
-    AppletBase::onCloseEvent();
-}
 
-//============================================================================
-void AppletCamTest::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
-{
-    if( jpgData && jpgDataLen && ( vidFeedId == m_CamFeedId ) )
-    {
-        VidWidget* camScreen = ui.m_CamVidWidget;
-        if( camScreen )
-        {
-            camScreen->playVideoFrame( vidFeedId, jpgData, jpgDataLen, motion0to100000 );
-        }
-    }
-}
-
-//============================================================================
-void AppletCamTest::toGuiClientPlayVideoFrame( VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
-{
-    callbackVideoJpgSmall( nullptr, vidFeedId, jpgData, jpgDataLen, motion0to100000 );
 }

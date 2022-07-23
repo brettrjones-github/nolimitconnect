@@ -250,6 +250,8 @@ public:
 																const char *	pFileName,
 																VxGUID          assetId ) = 0;
 
+	virtual void				toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort ) = 0;
+
     //virtual void				toGuiOfferAction( EOfferAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
 
     //virtual void				toGuiOfferClientAdded( OfferClientInfo * offerClent ) = 0;

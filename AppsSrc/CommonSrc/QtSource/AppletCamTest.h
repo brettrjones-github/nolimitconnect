@@ -29,8 +29,6 @@ public:
 	AppletCamTest( AppCommon& app, QWidget * parent = NULL );
 	virtual ~AppletCamTest() override;
 
-    void						playVideoFrame( VxGUID& feedId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
-
     void						webCamSourceOffline();
     void                        startCamFeed( void );
     void                        stopCamFeed( void );
@@ -39,13 +37,16 @@ public:
     bool                        isMyself( void )                        { return m_IsMyself; }
 
 signals:
-    void						signalPlayVideoFrame( QPixmap oPicBitmap, int iRotate );
-    void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
+    void						signalSnapshotImage( QImage snapshotImage );
 
 protected slots:
     void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
     void						slotToGuiSessionEnded( GuiOfferSession * offerSession );
     void						slotToGuiContactOffline( VxNetIdent * hisIdent );
+
+    void						slotMicToSpeakerStateChanged( int checkBoxState );
+
+    void						onCancelButClick( void );
 
 protected:
     virtual void				showEvent( QShowEvent * ev ) override;
@@ -57,18 +58,6 @@ protected:
     void						setMuteSpeakerVisibility( bool visible );
     void						setMuteMicrophoneVisibility( bool visible );
     void						setCameraButtonVisibility( bool visible );
-
-signals:
-    void						signalSnapshotImage( QImage snapshotImage );
-
-public slots:
-    //void						onSnapShotButClick( void );
-    void						onCancelButClick( void );
-
-protected:
-    virtual void				callbackVideoJpgSmall( void* userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 ) override;
-    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
-    virtual void                onCloseEvent( void ) override;
 
     //=== vars ===//
     Ui::AppletCamTestUi	    ui;

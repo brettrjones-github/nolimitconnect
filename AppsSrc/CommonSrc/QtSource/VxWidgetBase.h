@@ -23,7 +23,7 @@ class VxWidgetBase : public QWidget, public ObjectCommon
 public:
     VxWidgetBase( QWidget * parent = 0, Qt::WindowFlags f = Qt::Widget );
 	VxWidgetBase( const char * objName, QWidget * parent = 0, Qt::WindowFlags f = Qt::Widget);
-	virtual ~VxWidgetBase();
+	virtual ~VxWidgetBase() = default;
 
 signals:
 	void						clicked();

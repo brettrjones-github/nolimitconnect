@@ -37,7 +37,7 @@ public:
 
 	void						setAppModule( EAppModule appModule );
 
-	void						playVideoFrame( VxGUID& onlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
+	void						callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 );
 
 	void						onActivityStop( void );
 

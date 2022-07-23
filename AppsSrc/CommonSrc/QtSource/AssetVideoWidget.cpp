@@ -259,18 +259,6 @@ void AssetVideoWidget::slotShredAsset( void )
 }
 
 //============================================================================
-void AssetVideoWidget::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
-{
-	ui.m_VidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
-}
-
-//============================================================================
-int AssetVideoWidget::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
-{
-    return ui.m_VidWidget->playVideoFrame( onlineId, picBuf, picBufLen, picWidth, picHeight );
-}
-
-//============================================================================
 void AssetVideoWidget::slotPlayProgress( int pos0to100000 )
 {
 	if( m_IsPlaying && ( false == m_SliderIsPressed ) )

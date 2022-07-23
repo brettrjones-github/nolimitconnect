@@ -25,6 +25,8 @@ class AudioInputFrame
 {
 public:
 	AudioInputFrame() = default;
+	AudioInputFrame( const AudioInputFrame& ) = delete; // don't allow copy constructor
+	AudioInputFrame& operator=( const AudioInputFrame& rhs ) = delete;// don't allow copy operation
 
 	void						resetFrame( void );
 	int16_t*					getFrameBufferAtFreeIndex( void )		{ return (int16_t *)(&m_AudioBuf[ m_LenWrote ]); }

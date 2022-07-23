@@ -350,6 +350,8 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
                 m_Engine.getPluginMgr().onMyOnlineUrlIsValid( true );
             }
         }
+
+        m_Engine.getToGui().toGuiNetworkIsTested( requiresRelay, m_IpAddr, m_IpPort );
     }
 }
 

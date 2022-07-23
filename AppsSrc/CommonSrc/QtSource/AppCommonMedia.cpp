@@ -80,6 +80,28 @@ void AppCommon::slotInternalWantVideoCapture( EAppModule appModule, bool enableV
 }
 
 //============================================================================
+void AppCommon::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	m_PlayerMgr.toGuiPlayVideoFrame( feedOnlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+}
+
+//============================================================================
+int AppCommon::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return 0;
+	}
+
+	return m_PlayerMgr.toGuiPlayVideoFrame( feedOnlineId, picBuf, picBufLen, picWidth, picHeight );
+}
+
+//============================================================================
 //! time to send out new video frame
 void AppCommon::onVidCapTimer( void )
 {
@@ -109,45 +131,3 @@ void AppCommon::onVidCapTimer( void )
 	}
 #endif // TARGET_OS_WINDOWS
 }
-
-//============================================================================
-//! show jpeg for video playback
-void AppCommon::toGuiPlayVideoFrame(  VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 )
-{
-	if( false == VxIsAppShuttingDown() )
-	{
-		//LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d", ePluginType, u32JpgDataLen );
-
-		for( ToGuiActivityInterface* toGuiClient : m_ToGuiActivityInterfaceList )
-		{
-			toGuiClient->toGuiClientPlayVideoFrame(	onlineId,
-													pu8Jpg,
-													u32JpgDataLen,
-	     											motion0To100000 );
-		}
-	}
-}
-
-//============================================================================
-//! show jpeg for video playback
-int AppCommon::toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
-{
-    int behindFrameCnt = 0;
-    if( false == VxIsAppShuttingDown() )
-    {
-        //LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d\n", ePluginType, u32JpgDataLen );
-
-        for( auto client : m_ToGuiActivityInterfaceList )
-        {
-            behindFrameCnt += client->toGuiClientPlayVideoFrame( onlineId,
-																		picBuf,
-																		picBufLen,
-																		picWidth,
-																		picHeight );
-        }
-    }
-
-    return behindFrameCnt;
-}
-
-

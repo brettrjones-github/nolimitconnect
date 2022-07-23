@@ -35,6 +35,9 @@ AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
     fillExampleCombo();
     ui.m_PlainTextEdit->appendPlainText( QObject::tr( "Some Text To Edit" ) );
 	ui.horizontalSlider->setSingleStep( 1 );
+	ui.horizontalSlider->setRange( 0, 100000 );
+	ui.m_ExampleProgressBar->setRange( 0, 100000 );
+	ui.m_VertProgressBar->setRange( 0, 100000 );
 
 	connect( ui.m_AcceptCancelFrame, SIGNAL( signalAccepted() ), this, SLOT(slotThemeAccepted()) );
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(slotThemeCanceled()) );

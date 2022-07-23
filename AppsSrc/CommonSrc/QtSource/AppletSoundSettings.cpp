@@ -106,6 +106,8 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
 
     connect( m_PeakTimer, SIGNAL( timeout() ), this, SLOT( slotPeakTimerTimeout() ) );
     m_PeakTimer->start();
+
+    ui.m_PauseVoipCheckBox->setVisible( false );
 }
 
 //============================================================================

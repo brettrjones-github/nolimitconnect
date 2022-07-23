@@ -81,9 +81,9 @@ VidWidget::VidWidget(QWidget *parent)
 	ui.m_NormalRecordButton->setIcon( eMyIconRecordMovieNormal );
 	ui.m_MotionAlarmButton->setIcon( eMyIconMotionAlarmWhite );
 
-	ui.m_MotionBar->setMaximum( 100000 );
-	ui.m_MotionBar->setTextVisible(false);
-	ui.m_MotionSensitivitySlider->setMaximum( 100000 );
+	ui.m_MotionBar->setTextVisible( false );
+	ui.m_MotionBar->setRange( 0, 100000 );
+	ui.m_MotionSensitivitySlider->setRange( 0, 100000 );
 
 	connect( &m_MyApp,					SIGNAL(signalUserMsg(QString)),			this, SLOT(slotStatusMsg(QString)) );
 
@@ -92,7 +92,6 @@ VidWidget::VidWidget(QWidget *parent)
 	connect( ui.m_MotionAlarmButton,	SIGNAL(clicked()),						this, SLOT(slotMotionAlarmButtonClicked()) );
 	connect( ui.m_MotionRecordButton,	SIGNAL(clicked()),						this, SLOT(slotRecMotionButtonClicked()) );
 	connect( ui.m_NormalRecordButton,	SIGNAL(clicked()),						this, SLOT(slotRecNormalButtonClicked()) );
-	connect( this,						SIGNAL(signalVidFeedMotion(int)),		this, SLOT(slotVidFeedMotion(int)) );
 
 	connect( m_IconToggleTimer,			SIGNAL(timeout()),			this, SLOT(slotIconToggleTimeout()) );
 	connect( m_MotionAlarmExpireTimer,	SIGNAL(timeout()),			this, SLOT(slotMotionAlarmTimeout()) );
@@ -110,6 +109,12 @@ VidWidget::VidWidget(QWidget *parent)
 
 	// BRJ temp for testing
 	ui.m_VidFilesButton->setEnabled( true );
+}
+
+//============================================================================
+VidWidget::~VidWidget()
+{
+	m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, false );
 }
 
 //============================================================================
@@ -149,6 +154,7 @@ void VidWidget::setVideoFeedId( VxGUID& feedOnlineId, EAppModule appModule )
 
 		if( m_VideoFeedId.isVxGUIDValid() )
 		{
+			m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
 			m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, appModule, true );
 		}
 		else
@@ -372,34 +378,28 @@ void VidWidget::setImageFromFile( QString fileName )
 }
 
 //============================================================================
-void VidWidget::playVideoFrame( VxGUID&	feedOnlineId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
+void VidWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 	if( feedOnlineId == m_VideoFeedId )
 	{
-		ui.m_VideoScreen->playVideoFrame( pu8Jpg, u32JpgLen, motion0To100000 );
+		ui.m_VideoScreen->playMotionVideoFrame( vidFrame, motion0To100000 );
 		if( ui.m_RecordSensitivityFrame->isVisible() )
 		{
-			emit signalVidFeedMotion( motion0To100000 );
+			updateVidFeedMotion( motion0To100000 );
 		}
 	}
 	else if( !m_DisablePreview
 			&& m_ThumbnailPreview->isVisible() 
-			&& ( feedOnlineId == m_MyOnlineId ) )
+			&& (feedOnlineId == m_MyOnlineId ) )
 	{
-		m_ThumbnailPreview->playVideoFrame( pu8Jpg, u32JpgLen, motion0To100000 );
+		m_ThumbnailPreview->playMotionVideoFrame( vidFrame, motion0To100000 );
 	}
 }
 
 //============================================================================
-int VidWidget::playVideoFrame( VxGUID& feedOnlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
+void VidWidget::callbackGuiPlayVideoFrame( VxGUID& onlineId, QImage& vidFrame )
 {
-    int behindFrameCnt = 0;
-//    if( feedOnlineId == m_VideoFeedId )
-    {
-        behindFrameCnt = ui.m_VideoScreen->playVideoFrame( picBuf, picBufLen, picWidth, picHeight );
-    }
-
-    return behindFrameCnt;
+	 ui.m_VideoScreen->playVideoFrame( vidFrame );
 }
 
 //============================================================================
@@ -457,10 +457,11 @@ void VidWidget::slotMotionRecordTimeout( void )
 }
 
 //============================================================================
-void VidWidget::slotVidFeedMotion( int motion0To100000 )
+void VidWidget::updateVidFeedMotion( int motion0To100000 )
 {
-	//qDebug() << "motion " << motion0To100000;
+	// qDebug() << "motion " << motion0To100000;
 	ui.m_MotionBar->setValue( motion0To100000 );
+	ui.m_MotionBar->update();
 	if( motion0To100000 >= ui.m_MotionSensitivitySlider->value() )
 	{
 		if( m_MotionRecordOn )

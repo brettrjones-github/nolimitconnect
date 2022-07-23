@@ -15,9 +15,11 @@
 //============================================================================
 
 #include "ui_AppletMultiMessenger.h"
+
 #include "AppletPeerBase.h"
 #include "MultiSessionState.h"
 #include "TodGameLogic.h"
+
 
 class P2PEngine;
 class GuiOfferSession;
@@ -33,10 +35,7 @@ public:
 
 	virtual ~AppletMultiMessenger();
 
-	virtual void				toGuiClientPlayVideoFrame(	VxGUID&			onlineId, 
-                                                            uint8_t *		pu8Jpg,
-                                                            uint32_t		u32JpgDataLen,
-                                                            int				motion0To100000 ) override;
+	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )  override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 	virtual void				toGuiPluginSessionEnded( GuiOfferSession* offerSession ) override;
 

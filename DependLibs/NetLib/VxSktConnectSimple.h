@@ -25,7 +25,7 @@ public:
 	virtual ~VxSktConnectSimple();
 
 	uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
-	const char *				getRemoteIpAddress( void )                      { return m_RmtIp.toStdString().c_str(); }
+    std::string				    getRemoteIpAddress( void )                      { return m_RmtIp.toStdString(); }
 	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
     void				        setLocalIpAddress( const char * lclIp )			{ m_LclIp.setIp( lclIp ); }
 	std::string					getLocalIpAddress( void );

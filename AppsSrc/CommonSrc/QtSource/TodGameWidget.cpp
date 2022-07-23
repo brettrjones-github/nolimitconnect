@@ -27,9 +27,9 @@ TodGameWidget::TodGameWidget(QWidget *parent)
 }
 
 //============================================================================
-void TodGameWidget::playVideoFrame( VxGUID& feedId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 )
+void TodGameWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
-	ui.TruthOrDareWidget->playVideoFrame( feedId, pu8Jpg, u32JpgLen, motion0To100000 );
+	ui.TruthOrDareWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 }
 
 //============================================================================

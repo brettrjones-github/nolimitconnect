@@ -317,7 +317,7 @@ void P2PEngine::onBigListInfoRestored( BigListInfo * poInfo )
 {
 	updateIdentLists( poInfo, poInfo->getLastSessionTimeMs() );
 
-	if( isP2POnline() && poInfo->isFriend() || poInfo->isAdministrator() )
+    if( isP2POnline() && ( poInfo->isFriend() || poInfo->isAdministrator() ) )
 	{
 		m_NetConnector.addConnectRequestToQue( poInfo->getConnectInfo() );
 	}

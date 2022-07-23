@@ -48,7 +48,6 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
 
     connect( this, SIGNAL(signalNewWebCamSession( GuiUser * )), this, SLOT(slotNewWebCamSession( GuiUser * )));
     connect( this, SIGNAL(signalPlayVideoFrame( QImage, int )), this, SLOT(slotPlayVideoFrame( QImage, int )));
-    connect( this, SIGNAL(signalPlayAudio(unsigned short *, unsigned short)), this, SLOT(signalPlayAudio(unsigned short *, unsigned short)));
 
     connect(m_CountdownTimer, SIGNAL(timeout()), this, SLOT(onCountdownTimer()));
     connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()));
@@ -179,16 +178,24 @@ void ActivityScanWebCams::updateCountdownGui()
 //============================================================================
 void ActivityScanWebCams::doCamConnect( GuiUser * netIdent )
 {
-	if( 0 != m_HisIdent )
+
+	if( m_HisIdent )
 	{
+		// stop the old session
 		startWebCamSession( m_HisIdent->getMyOnlineId(), false );
         m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), 0 );
 		VxGUID nullGuid;
 		ui.m_CamVidWidget->setVideoFeedId( nullGuid, eAppModuleCamClient );
 	}
 
-	ui.FriendIdentWidget->setVisible( true );
+	if( !netIdent )
+	{
+		LogMsg( LOG_ERROR, "ActivityScanWebCams::doCamConnec netIdent is null" );
+		return;
+	}
+
 	m_HisIdent = netIdent;
+	ui.FriendIdentWidget->setVisible( true );
 	if( 0 != m_HisIdent )
 	{
 		setupIdentWidget( m_HisIdent );
@@ -212,9 +219,11 @@ void ActivityScanWebCams::startWebCamSession( VxGUID& onlineId, bool startSessio
 		m_LclSessionId.initializeWithNewVxGUID();
 		m_Engine.fromGuiWantMediaInput( onlineId, eMediaInputVideoJpgSmall, eAppModuleCamClient, true );
         m_FromGui.fromGuiStartPluginSession( m_ePluginType, onlineId, 0, m_LclSessionId );
+		m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
 	}
 	else
 	{
+		m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, false );
 		m_FromGui.fromGuiStopPluginSession( m_ePluginType, onlineId, 0, m_LclSessionId );
 		m_Engine.fromGuiWantMediaInput( onlineId, eMediaInputVideoJpgSmall, eAppModuleCamClient, false );
 		setCamViewToOfflineImage();			
@@ -241,30 +250,19 @@ void ActivityScanWebCams::slotHomeButtonClicked( void )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 )
+void ActivityScanWebCams::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
-	ui.m_CamVidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+	ui.m_CamVidWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 }
 
 //============================================================================
-void ActivityScanWebCams::slotPlayVideoFrame( QImage oPicBitmap, int iRotate )
+void ActivityScanWebCams::playVideoFrameRotated( QImage oPicBitmap, int iRotate )
 {
 	if( false == oPicBitmap.isNull() )
 	{
 		ui.m_CamVidWidget->getVideoScreen()->setPixmap( QPixmap::fromImage( oPicBitmap ) );
 		ui.m_CamVidWidget->getVideoScreen()->repaint();
 	}
-}
-
-//============================================================================
-void ActivityScanWebCams::playAudio(  uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId )
-{
-	//emit signalPlayAudio(pu16PcmData, u16PcmDataLen);
-}
-
-//============================================================================
-void ActivityScanWebCams::slotPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen )
-{
 }
 
 //============================================================================

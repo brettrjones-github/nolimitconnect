@@ -78,6 +78,9 @@
     <Filter Include="CompilerConfig">
       <UniqueIdentifier>{4f792643-1bde-4a8d-87dd-372327a009dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GuiPlayerMgr">
+      <UniqueIdentifier>{163287ce-ab16-429f-8c1a-bee4fb842cc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -692,9 +695,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxPlainTextEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\VxProgressBar.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxPushButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -934,6 +934,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\SoundMgr.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiPlayerMgr.h">
+      <Filter>Source Files\GuiPlayerMgr</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1585,9 +1588,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxPlainTextEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\VxProgressBar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxPushButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -2014,6 +2014,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\EventsQtToNlc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiPlayerMgr.cpp">
+      <Filter>Source Files\GuiPlayerMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2273,6 +2276,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\EventsQtToNlc.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiPlayerCallback.h">
+      <Filter>Source Files\GuiPlayerMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

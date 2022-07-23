@@ -20,6 +20,21 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="m_SelectThemeGroupBox">
      <property name="sizePolicy">
@@ -75,7 +90,7 @@
       <item>
        <widget class="QPushButton" name="m_ExampleButton">
         <property name="text">
-         <string>Push Button</string>
+         <string>Push Button Example</string>
         </property>
        </widget>
       </item>
@@ -100,19 +115,37 @@
       <string>Theme Appearence</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>2</number>
+        </property>
         <item>
          <widget class="QLabel" name="m_StatusLabel">
           <property name="text">
-           <string notr="true">Some Status Message For QLable</string>
+           <string notr="true">Example Status Message For QLabel</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton">
           <property name="text">
-           <string>Radio Button 1</string>
+           <string>Radio Button 1 Example</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -122,14 +155,14 @@
         <item>
          <widget class="QRadioButton" name="radioButton_2">
           <property name="text">
-           <string>Radio Button 2</string>
+           <string>Radio Button 2 Example</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Scroll Bar</string>
+           <string>Scroll Bar Example</string>
           </property>
          </widget>
         </item>
@@ -141,23 +174,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Progress Bar</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QProgressBar" name="m_ExampleProgressBar">
-          <property name="value">
-           <number>24</number>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>Slider</string>
+           <string>Slider Example</string>
           </property>
          </widget>
         </item>
@@ -169,9 +188,23 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Progress Bar Example</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="m_ExampleProgressBar">
+          <property name="value">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Combo Box</string>
+           <string>Combo Box Example</string>
           </property>
          </widget>
         </item>
@@ -181,19 +214,12 @@
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Spin Box</string>
+           <string>Spin Box Example</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSpinBox" name="spinBox"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Check Box</string>
-          </property>
-         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="m_ExampleCheckBox">
@@ -204,7 +230,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Check Box 1</string>
+           <string>Check Box Example</string>
           </property>
          </widget>
         </item>
@@ -308,7 +334,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
        <number>5</number>

@@ -394,19 +394,15 @@ void AppletMultiMessenger::toGuiMultiSessionAction(  EMSessionAction mSessionAct
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiClientPlayVideoFrame(	
-														VxGUID&			onlineId, 
-														uint8_t *		pu8Jpg, 
-														uint32_t		u32JpgDataLen,
-														int				motion0To100000 )
+void AppletMultiMessenger::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 	if( m_IsInitialized )
 	{
-		ui.m_SessionWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
-		m_TodGameWidget->ui.TruthOrDareWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+		ui.m_SessionWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
+		m_TodGameWidget->ui.TruthOrDareWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 		if( m_VidChatWidget && m_VidChatWidget->isVisible() )
 		{
-			m_VidChatWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+			m_VidChatWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 		}
 	}
 }

@@ -633,3 +633,9 @@ void INlc::toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalk
 {
     getAppCommon().toGuiPushToTalkStatus( onlineId, pushToTalkStatus );
 }
+
+//============================================================================
+void INlc::toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort )
+{
+    getAppCommon().toGuiNetworkIsTested( requiresRelay, ipAddr, ipPort );
+}

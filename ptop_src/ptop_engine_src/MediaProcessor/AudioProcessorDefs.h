@@ -18,3 +18,5 @@
 #define MIXER_CHUNK_LEN_SAMPLES		640
 #define MIXER_CHUNK_LEN_MS			80 // PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
 #define MAX_INPUT_FRAMES			4
+
+#define ECHO_DELAY_MIC_FUDGE_FACTOR_MS	10 // a guess at average delay inside microphone device to recieve audio

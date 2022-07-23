@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>305</width>
+    <width>392</width>
     <height>444</height>
    </rect>
   </property>
@@ -39,6 +39,13 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_MicToSpeakerCheckBox">
+     <property name="text">
+      <string>Send microphone input to speakers</string>
      </property>
     </widget>
    </item>

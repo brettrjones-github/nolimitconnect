@@ -50,15 +50,10 @@ void AppletPersonalRecorder::setupMultiSessionActivity( void )
 }
 
 //============================================================================
-void AppletPersonalRecorder::toGuiClientPlayVideoFrame( 
-                                                        VxGUID&			onlineId,
-                                                        uint8_t *		pu8Jpg,
-                                                        uint32_t		u32JpgDataLen,
-                                                        int				motion0To100000 )
+void AppletPersonalRecorder::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
-    ui.m_SessionWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+    ui.m_SessionWidget->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 }
-
 
 //============================================================================
 void AppletPersonalRecorder::showEvent( QShowEvent* showEvent )

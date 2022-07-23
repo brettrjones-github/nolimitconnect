@@ -29,7 +29,7 @@ public:
 
 //	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
 //
-//	virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
+//	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 );
 //    virtual int	    			toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
 //
 //	virtual void				showShredder( bool show );

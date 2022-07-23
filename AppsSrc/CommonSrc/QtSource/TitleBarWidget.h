@@ -17,6 +17,7 @@
 #include "ToGuiOfferInterface.h"
 #include "ToGuiActivityInterface.h"
 #include "ToGuiHardwareControlInterface.h"
+#include "GuiPlayerCallback.h"
 #include "MyIconsDefs.h"
 
 #include "ui_TitleBarWidget.h"
@@ -32,7 +33,7 @@ class GuiUser;
 class MyIcons;
 class QLabel;
 
-class TitleBarWidget : public QWidget, public ToGuiActivityInterface, public ToGuiHardwareControlInterface
+class TitleBarWidget : public QWidget, public ToGuiActivityInterface, public ToGuiHardwareControlInterface, public GuiPlayerCallback
 {
 	Q_OBJECT
 
@@ -105,7 +106,6 @@ signals:
 	void						signalShareButtonClicked( void );
 	void						signalMenuTopButtonClicked( void );
 	void						signalBackButtonClicked( void );
-    void                        signalCamPlaying( bool isPlaying );
 
 public slots:
 	virtual void				updateTitleBar( void );
@@ -128,7 +128,6 @@ public slots:
 	virtual void				slotTitleStatusBarMsg( QString msg );
 	virtual void				slotToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
     virtual void				slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus );
-    virtual void                slotCamPlaying( bool isPlaying );
     virtual void				slotCamTimeout( void );
     virtual void				slotSignalHelpClick( void );
 
@@ -149,10 +148,6 @@ protected:
     void						hideEvent( QHideEvent * ev ) override;
 	void						resizeEvent( QResizeEvent* ev ) override;
 
-    virtual void				toGuiClientPlayVideoFrame( VxGUID&          onlineId,
-                                                           uint8_t *		pu8Jpg,
-                                                           uint32_t		    u32JpgDataLen,
-                                                           int				motion0To100000 ) override;
 	void						checkTitleBarIconsFit( void );
 
 	virtual void 				callbackToGuiWantMicrophoneRecording( bool wantMicInput ) override;
@@ -160,6 +155,9 @@ protected:
 	virtual void				callbackToGuiWantVideoCapture( bool wantVideoCapture ) override;
 	virtual void				callbackToGuiMicrophoneMuted( bool isMuted ) override;
 	virtual void				callbackToGuiSpeakerMuted( bool isMuted ) override;
+
+	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 ) override;
+	virtual void				callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame ) override;
 
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;

@@ -34,9 +34,6 @@ public:
 	virtual void				updateAssetInfo( void );
     virtual void				onActivityStop( void ) override;
 
-    virtual void				toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
-    virtual int				    toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
-
     virtual void				showSendFail( bool show, bool permissionErr = false ) override;
     virtual void				showResendButton( bool show ) override;
     virtual void				showShredder( bool show ) override;

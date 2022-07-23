@@ -177,6 +177,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_HostedListMgr( *this )
 , m_HostJoinMgr( *this )
 , m_UserJoinMgr( *this )
+, m_PlayerMgr( *this )
 , m_WebPageMgr( *this )
 , m_MyIcons( *this )
 , m_AppTheme( *this )
@@ -278,6 +279,7 @@ void AppCommon::loadWithoutThread( void )
 
     // load sounds to play and sound hardware
     m_SoundMgr.sndMgrStartup();
+	m_PlayerMgr.playerMgrStartup();
 
     uint64_t styleMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Setup Style %" PRId64 " ms alive ms %" PRId64 "", styleMs - iconsMs, styleMs );
@@ -1725,6 +1727,36 @@ void AppCommon::slotInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus
 	}
 
 	m_UserMgr.toGuiPushToTalkStatus( onlineId, pushToTalkStatus );
+}
+
+//============================================================================
+void AppCommon::toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalInternalNetworkIsTested( requiresRelay, ipAddr.c_str(), ipPort );
+}
+
+//============================================================================
+void AppCommon::slotInternalNetworkIsTested( bool requiresRelay, QString ipAddr, uint16_t ipPort )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	static bool firstTime = true;
+	if( firstTime )
+	{
+		firstTime = false;
+		if( m_AppSettings.getRunOnStartupCamServer() && eFriendStateIgnore != getMyIdentity()->getPluginPermission( ePluginTypeCamServer ) )
+		{
+			getEngine().fromGuiStartPluginSession( ePluginTypeCamServer, getMyIdentity()->getMyOnlineId(), 0, getMyIdentity()->getMyOnlineId() );
+		}
+	}
 }
 
 //============================================================================

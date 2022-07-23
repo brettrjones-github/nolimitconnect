@@ -119,7 +119,6 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( &m_MyApp,                      SIGNAL(signalNetAvailStatus(ENetAvailStatus)), this, SLOT(slotToGuiNetAvailStatus(ENetAvailStatus)) );
 
     connect( m_CamTimer,                    SIGNAL(timeout()),                          this, SLOT(slotCamTimeout()) );
-    connect( this,                          SIGNAL(signalCamPlaying(bool) ),            this, SLOT(slotCamPlaying(bool)) );
 
     connect( m_MicrophonePeekTimer,         SIGNAL(timeout()),                          this, SLOT(slotMicrophonePeekTimeout()) );
 
@@ -175,28 +174,6 @@ void TitleBarWidget::slotSignalHelpClick( void )
 }
 
 //============================================================================
-void TitleBarWidget::toGuiClientPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
-{
-    if( !m_MyOnlineId.isVxGUIDValid() )
-    {
-        m_MyOnlineId = m_MyApp.getMyOnlineId();
-    }
-
-    if( m_MyOnlineId == onlineId )
-    {
-        m_LastCamFrameTimeMs = GetApplicationAliveMs();
-        if( !m_CamPlaying )
-        {
-            m_CamPlaying = true;
-            // callback is from thread so use signals and slots
-            emit signalCamPlaying( true );
-        }
-
-        ui.m_CamPreviewScreen->playVideoFrame( pu8Jpg, u32JpgLen, motion0To100000 );
-    }
-}
-
-//============================================================================
 void TitleBarWidget::showEvent( QShowEvent * showEvent )
 {
     QWidget::showEvent( showEvent );
@@ -206,6 +183,7 @@ void TitleBarWidget::showEvent( QShowEvent * showEvent )
         m_CallbacksRequested = true;
         m_MyApp.wantToGuiActivityCallbacks( this, true );
         m_MyApp.wantToGuiHardwareCtrlCallbacks( this, true );
+        m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
         updateTitleBar();
     }
 }
@@ -215,6 +193,7 @@ void TitleBarWidget::hideEvent( QHideEvent * ev )
 {
     if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
     {
+        m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, false );
         m_MyApp.wantToGuiHardwareCtrlCallbacks( this, false );
         m_MyApp.wantToGuiActivityCallbacks( this, false );
         m_CallbacksRequested = false;
@@ -231,18 +210,11 @@ void TitleBarWidget::resizeEvent( QResizeEvent* ev )
 }
 
 //============================================================================
-void TitleBarWidget::slotCamPlaying( bool isPlaying )
-{
-
-}
-
-//============================================================================
 void TitleBarWidget::slotCamTimeout()
 {
     if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 3000 )
     {
         m_CamTimer->stop();
-        emit signalCamPlaying( false );
     }
 }
 
@@ -762,22 +734,19 @@ void TitleBarWidget::callbackToGuiWantSpeakerOutput( bool wantSpeakerOutput )
 //============================================================================
 void TitleBarWidget::callbackToGuiWantVideoCapture( bool wantVideoCapture )
 {
-    if( m_CamPlaying != wantVideoCapture )
+    m_CamPlaying = wantVideoCapture;
+    enableVideoControls( wantVideoCapture );
+    if( wantVideoCapture )
     {
-        m_CamPlaying = wantVideoCapture;
-        enableVideoControls( wantVideoCapture );
-        if( wantVideoCapture )
-        {
-            m_CamTimer->start( 1500 );
-        }
-        else
-        {
-            m_CamTimer->stop();
-            ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
-        }
-
-        checkTitleBarIconsFit();
+        m_CamTimer->start( 1500 );
     }
+    else
+    {
+        m_CamTimer->stop();
+        ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+    }
+
+    checkTitleBarIconsFit();
 }
 
 //============================================================================
@@ -792,4 +761,33 @@ void TitleBarWidget::callbackToGuiSpeakerMuted( bool isMuted )
 {
     m_MuteSpeaker = isMuted;
     setSpeakerIcon( m_MuteSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
+}
+
+//============================================================================
+void TitleBarWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
+{
+    if( !m_MyOnlineId.isVxGUIDValid() )
+    {
+        m_MyOnlineId = m_MyApp.getMyOnlineId();
+    }
+
+    if( m_MyOnlineId == feedOnlineId )
+    {
+        m_LastCamFrameTimeMs = GetApplicationAliveMs();
+        if( !m_CamPlaying )
+        {
+            m_CamPlaying = true;
+        }
+
+        if( ui.m_CamPreviewScreen->isVisible() )
+        {
+            ui.m_CamPreviewScreen->playMotionVideoFrame( vidFrame, motion0To100000 );
+        }       
+    }
+}
+
+//============================================================================
+void TitleBarWidget::callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame )
+{
+    callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, 0 );
 }
