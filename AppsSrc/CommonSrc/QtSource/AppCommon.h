@@ -259,10 +259,6 @@ public:
     virtual void				fromGuiMuteSpeaker( bool muteSpeaker ) override;
     /// Returns true if speaker is muted
     virtual bool				fromGuiIsSpeakerMuted( void ) override;
-    /// Enable/Disable echo cancellation
-    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) override;
-    /// Returns true if echo cancellation is enabled
-    virtual bool				fromGuiIsEchoCancelEnabled( void ) override;
     /// Called when need more sound for speaker output
     virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
 

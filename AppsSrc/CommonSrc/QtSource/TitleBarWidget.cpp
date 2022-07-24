@@ -150,7 +150,6 @@ void TitleBarWidget::updateTitleBar( void )
     bool isCamEnabled = GetAppInstance().getCamLogic().isCamCaptureRunning();
     callbackToGuiWantVideoCapture( isCamEnabled );
 
-    m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
     checkTitleBarIconsFit();
 
     ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );

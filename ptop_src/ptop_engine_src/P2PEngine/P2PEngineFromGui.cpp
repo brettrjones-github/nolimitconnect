@@ -938,18 +938,6 @@ bool P2PEngine::fromGuiIsSpeakerMuted( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiEchoCancelEnable( bool enableEchoCancel )
-{
-	m_MediaProcessor.fromGuiEchoCancelEnable( enableEchoCancel );
-}
-
-//============================================================================
-bool P2PEngine::fromGuiIsEchoCancelEnabled( void )
-{
-	return m_MediaProcessor.fromGuiIsEchoCancelEnabled();
-}
-
-//============================================================================
 void P2PEngine::fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, EAppModule appModule, bool wantInput )
 {
 	if( false == VxIsAppShuttingDown() )
@@ -1271,7 +1259,7 @@ bool P2PEngine::fromGuiTestCmd(	ETestParam1		eTestParam1,
 
 	case eTestParamSoundDelayTest:
 		{
-			m_MediaProcessor.fromGuiSoundDelayTest();
+			// m_MediaProcessor.fromGuiSoundDelayTest();
 		}
 		break;
 

@@ -161,26 +161,6 @@ public:
 	/// Not currently used ( for opengl games )
 	virtual void				fromGuiNativeGlDestroy( void ) = 0;
 
-	///// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound ) 
-	//virtual void				fromGuiMicrophoneData( int16_t* pu16PcmData, uint16_t pcmDataLenBytes ) = 0;
-	///// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound ) 
-	//virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift ) = 0;
-	///// Mute/Unmute microphone
-	//virtual void				fromGuiMuteMicrophone( bool muteMic ) = 0; 
-	///// Returns true if microphone is muted
-	//virtual bool				fromGuiIsMicrophoneMuted( void ) = 0; 
-	///// Mute/Unmute speaker
-	//virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) = 0; 
-	///// Returns true if speaker is muted
-	//virtual bool				fromGuiIsSpeakerMuted( void ) = 0; 
-	///// Enable/Disable echo cancellation
-	//virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) = 0; 
-	///// Returns true if echo cancellation is enabled
-	//virtual bool				fromGuiIsEchoCancelEnabled( void ) = 0; 
-
-	///// Called when need more sound for speaker output
-	//virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) = 0;
-
 	/// Record audio control
 	virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName ) = 0;
 	/// Record video control

@@ -74,7 +74,7 @@
 
 
 #elif defined(TARGET_OS_ANDROID)
-# define NLC_ARCH_LITTLE_ENDIAN		1
+# define NLC_ARCH_LITTLE_ENDIAN			1
 # define NLC_ARCH_BIG_ENDIAN			0
 
 # if defined(TARGET_CPU_ARM)
@@ -91,10 +91,10 @@
 #   define ARCH_64_BITS					1
 #  else
 #   if !defined(ARCH_32_BITS)
-#    define ARCH_32_BITS					1
+#    define ARCH_32_BITS				1
 #   endif // defined(ARCH_32_BITS)
 #   if !defined(ARCH_32_BITS)
-#    define ARCH_64_BITS					0
+#    define ARCH_64_BITS				0
 #   endif // defined(ARCH_32_BITS)
 #  endif
 /* Defined if ARM architecture is v6 or newer */
@@ -120,7 +120,7 @@
 
 #elif defined(TARGET_OS_LINUX)
 
-# define NLC_ARCH_LITTLE_ENDIAN		1
+# define NLC_ARCH_LITTLE_ENDIAN			1
 # define NLC_ARCH_BIG_ENDIAN			0
 // only 64bit x86 linux is supported
 # define TARGET_CPU_X86_64			    1  // general cpu type
@@ -152,7 +152,7 @@
 
 #elif defined(TARGET_OS_APPLE)
 echo error apple and ppc processors not supported
-# define NLC_ARCH_LITTLE_ENDIAN		0
+# define NLC_ARCH_LITTLE_ENDIAN			0
 # define NLC_ARCH_BIG_ENDIAN			1
 # define TARGET_CPU_PPC					1 // general cpu type
 
@@ -174,7 +174,7 @@ echo error apple and ppc processors not supported
 // not supported.. try to give reasonable error
 #if defined(__MIPSEL__)
 echo error mips processors not supported
-# define NLC_ARCH_LITTLE_ENDIAN			1
+# define NLC_ARCH_LITTLE_ENDIAN				1
 # define NLC_ARCH_BIG_ENDIAN				0
 # define TARGET_CPU_MIPS					1
 # define ARCH_64_BITS						1
@@ -182,12 +182,12 @@ echo error mips processors not supported
 
 #elif defined(TARGET_OS_APPLE) || ARCH_PPC
 echo error ppc processors not supported
-# define NLC_ARCH_LITTLE_ENDIAN			0
+# define NLC_ARCH_LITTLE_ENDIAN				0
 # define NLC_ARCH_BIG_ENDIAN				1
 
 #elif defined(__aarch64__)
 echo error aarch64 processors not supported
-# define NLC_ARCH_LITTLE_ENDIAN			1
+# define NLC_ARCH_LITTLE_ENDIAN				1
 # define NLC_ARCH_BIG_ENDIAN				0
 # define TARGET_CPU_AARCH					1
 # define ARCH_64_BITS						1
@@ -269,15 +269,15 @@ echo Nlc CPU Arch Defines error no cpu target defined
 //# define  OPUS_X86_PRESUME_SSE2	1
 
 # define HAVE_I686					1
-//# define HAVE_AMD3DNOW				1
+//# define HAVE_AMD3DNOW			1
 //# define HAVE_AMD3DNOWEXT			1
 //# define HAVE_MMX					1
 # define HAVE_MMX					1
-# define HAVE_MMXEXT				    1
+# define HAVE_MMXEXT				1
 # define HAVE_SSE					1
 # define HAVE_SSE2					1
-//# define HAVE_SSE3					1
-//# define HAVE_SSE4					1
+//# define HAVE_SSE3				1
+//# define HAVE_SSE4				1
 //# define HAVE_SSE42				1
 //# define HAVE_SSSE3				1
 //# define HAVE_XOP					1

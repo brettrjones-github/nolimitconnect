@@ -21,10 +21,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <QDebug>
-//#include <QSound>
 #include <QMessageBox>
-
-#undef USE_ECHO_CANCEL
 
 //============================================================================
 SoundMgr& GetSndMgrInstance( void )

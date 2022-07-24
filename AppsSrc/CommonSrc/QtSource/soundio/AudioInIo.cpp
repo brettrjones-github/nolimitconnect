@@ -211,15 +211,9 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
         // do not attempt anythig while being destroyed
         return 0;
     }
+    
+    m_Engine.getMediaProcesser().fromGuiMicrophoneSamples( (int16_t*)data, (int)len >> 1, m_PeakAmplitude, m_DivideCnt, m_AudioIoMgr.getAudioOutMixer().calcualateAudioOutDelayMs() );
 
-    /*
-    m_AudioBufMutex.lock();
-    m_AudioBuffer.append( data, len );
-    updateAtomicBufferSize();
-    m_AudioBufMutex.unlock();
-
-    m_AudioInThread.releaseAudioInThread();
-    */
     if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
     {
         m_PeakAmplitude = 0;
@@ -228,8 +222,7 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     {
         m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( (int16_t*)data, len );
     }
-    
-    m_Engine.getMediaProcesser().fromGuiMicrophoneSamples( (int16_t*)data, (int)len >> 1, m_PeakAmplitude, m_DivideCnt, m_AudioIoMgr.getAudioOutMixer().calcualateAudioOutDelayMs() );
+
     return len;
 }
 

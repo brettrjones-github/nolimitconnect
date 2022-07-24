@@ -242,8 +242,6 @@ public:
     virtual bool				fromGuiIsMicrophoneMuted( void ) override;
     virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) override;
     virtual bool				fromGuiIsSpeakerMuted( void ) override;
-    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) override;
-    virtual bool				fromGuiIsEchoCancelEnabled( void ) override;
 
     virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
 

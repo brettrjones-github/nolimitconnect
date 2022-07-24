@@ -485,10 +485,8 @@ public:
     virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
     virtual void				fromGuiMuteMicrophone( bool mute );
     virtual void				fromGuiMuteSpeaker( bool mute );
-    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel );
     virtual bool				fromGuiIsMicrophoneMuted( void );
     virtual bool				fromGuiIsSpeakerMuted( void );
-    virtual bool				fromGuiIsEchoCancelEnabled( void );
 
     virtual void				fromGuiWantMediaInput( VxGUID& id, EMediaInputType eMediaType, EAppModule appModule, bool wantInput );
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation );

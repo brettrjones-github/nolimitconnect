@@ -104,7 +104,6 @@ MediaProcessor::MediaProcessor( P2PEngine& engine )
 , m_VidCaptureEnabled( false )
 , m_MicCaptureEnabled( false )
 , m_SpeakerOutputEnabled( false )
-, m_EchoOutDataProcessedLen( 0 )
 , m_VidPktListContainsMyId( false )
 {
 	memset( m_QuietAudioBuf, 0, sizeof( m_QuietAudioBuf ) );
@@ -120,10 +119,6 @@ MediaProcessor::MediaProcessor( P2PEngine& engine )
 	{
 		m_VidChunkList.push_back( new PktVideoFeedPicChunk() );
 	}
-
-	#ifdef USE_ECHO_CANCEL
-		m_EchoCancel.startupEchoCancel();
-	#endif // USE_ECHO_CANCEL
 
 	m_ProcessAudioThread.startThread( (VX_THREAD_FUNCTION_T)AudioProcessThreadFunc, this, "AudioProcessor" );
 	m_ProcessVideoThread.startThread( (VX_THREAD_FUNCTION_T)VideoProcessThreadFunc, this, "VideoProcessor" );
@@ -148,9 +143,6 @@ void MediaProcessor::shutdownMediaProcessor( void )
 	m_AudioSemaphore.signal();
 	m_ProcessVideoThread.abortThreadRun( true );
 	m_VideoSemaphore.signal();
-	#ifdef USE_ECHO_CANCEL
-		m_EchoCancel.shutdownEchoCancel();
-	#endif // USE_ECHO_CANCEL
 }
 
 //============================================================================
@@ -183,14 +175,10 @@ void MediaProcessor::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 	m_MixerBufferMutex.lock();
 	if( !m_MixerBufUsed || m_MuteSpeaker )
 	{
-        m_EchoCancel.processFromMixer((int16_t *)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES );
-
         IToGui::getAudioRequests().toGuiPlayAudio( eAppModulePtoP, (int16_t *)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES, true );
 	}
 	else
 	{
-        m_EchoCancel.processFromMixer(  (int16_t *)m_MixerBuf, MIXER_CHUNK_LEN_BYTES );
-
         IToGui::getAudioRequests().toGuiPlayAudio( eAppModulePtoP, (int16_t *)m_MixerBuf, MIXER_CHUNK_LEN_BYTES, false );
 	}
 
@@ -1634,90 +1622,33 @@ int MediaProcessor::myIdInVidPktListCount( void )
 }
 
 //============================================================================
-void MediaProcessor::fromGuiSoundDelayTest( void )
-{
-#ifdef USE_ECHO_CANCEL
-    m_EchoCancel.fromGuiSoundDelayTest();
-#endif // USE_ECHO_CANCEL
-}
-
-//============================================================================
-void MediaProcessor::fromGuiEchoCancelEnable( bool enableEchoCancel )
-{
-#ifdef USE_ECHO_CANCEL
-	m_EchoCancel.fromGuiEchoCancelEnable( enableEchoCancel );
-#endif //USE_ECHO_CANCEL
-}
-
-//============================================================================
-bool MediaProcessor::fromGuiIsEchoCancelEnabled( void )
-{
-#ifdef USE_ECHO_CANCEL
-	return m_EchoCancel.fromGuiIsEchoCancelEnabled();
-#else
-	return false;
-#endif //USE_ECHO_CANCEL
-}
-
-//============================================================================
 void MediaProcessor::fromGuiMicrophoneDataWithInfo( int16_t* pcmData, int pcmDataLenBytes, bool /*isSilence*/, int totalDelayTimeMs, int clockDrift )
 {
-	int sampleCnt = (pcmDataLenBytes >> 1);
-	int freeSpace = MIXER_CHUNK_LEN_SAMPLES - m_EchoOutBufIdx;
-	if( freeSpace >= sampleCnt )
+
+	if( false == m_MicCaptureEnabled )
 	{
-#ifdef USE_ECHO_CANCEL
-		if( fromGuiIsEchoCancelEnabled() )
+		//LogMsg( LOG_INFO, "WARNING MediaProcessor::fromGuiMicrophoneDataWithInfo dropping because no clients\n" );
+		m_AudioSemaphore.signal();
+		return;
+	}
+
+	if( m_ProcessAudioQue.size() < 5 )
+	{
+		RawAudio* rawAudio = 0;
+		if( m_MuteMicrophone )
 		{
-			m_EchoCancel.processFromMicrophone( pcmData, pcmDataLenBytes, &m_EchoOutBuf[ m_EchoOutBufIdx ], totalDelayTimeMs, clockDrift );
+			rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, true );
 		}
 		else
 		{
-			memcpy( &m_EchoOutBuf[ m_EchoOutBufIdx ], pcmData, pcmDataLenBytes );
+			rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, false );
 		}
-#else
-		memcpy( &m_EchoOutBuf[ m_EchoOutBufIdx ], pcmData, pcmDataLenBytes );
-#endif // USE_ECHO_CANCEL
-		m_EchoOutBufIdx += sampleCnt;
-		if( m_EchoOutBufIdx >= MIXER_CHUNK_LEN_SAMPLES )
-		{
-			m_EchoOutBufIdx = 0;
-			if( false == m_MicCaptureEnabled )
-			{
-				//LogMsg( LOG_INFO, "WARNING MediaProcessor::fromGuiMicrophoneDataWithInfo dropping because no clients\n" );
-				m_AudioSemaphore.signal();
-				return;
-			}
 
-			if( m_ProcessAudioQue.size() < 5 )
-			{
-				RawAudio* rawAudio = 0;
-				if( m_MuteMicrophone )
-				{
-					rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, true );
-				}
-				else
-				{
-					rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, false );
-					int16_t* echoCanceledOut = (int16_t*)rawAudio->getDataBuf();
-					memcpy( echoCanceledOut, m_EchoOutBuf, MIXER_CHUNK_LEN_BYTES );
-				}
-
-				m_AudioQueInMutex.lock();
-				m_ProcessAudioQue.push_back( rawAudio );
-				m_AudioQueInMutex.unlock();
-				m_AudioSemaphore.signal();
-			}
-		}
+		m_AudioQueInMutex.lock();
+		m_ProcessAudioQue.push_back( rawAudio );
+		m_AudioQueInMutex.unlock();
+		m_AudioSemaphore.signal();
 	}
-
-	//static int showDelayCntDown = 1000;
-	//showDelayCntDown--;
-	//if( showDelayCntDown <= 0 )
-	//{
-	//	showDelayCntDown = 1000;
-	//	LogMsg( LOG_INFO, "Audio Delay %d skew %d\n", totalDelayTimeMs, clockDrift );
-	//}
 }
 
 //============================================================================
@@ -1799,50 +1730,20 @@ void MediaProcessor::processAudioInFrame( AudioInputFrame& inFrame )
 	int frameLen = frameSamples * 2;
 	int16_t* pcmData = inFrame.m_AudioBuf;
 
-
-	int freeSpace = MIXER_CHUNK_LEN_SAMPLES - m_EchoOutBufIdx;
-	if( freeSpace >= frameSamples )
+	if( false == m_MicCaptureEnabled )
 	{
-#ifdef USE_ECHO_CANCEL
-#if 1
-		if( fromGuiIsEchoCancelEnabled() )
-		{
-			// for windows on my machine the delay is somewhere between 170 and 300
-			m_EchoCancel.processFromMicrophone( pcmData, frameLen, &m_EchoOutBuf[ m_EchoOutBufIdx ], inFrame.m_WriteDelayMs, inFrame.m_ClockDrift );
-			// LogMsg( LOG_VERBOSE, "Mic Write Delay %d", inFrame.m_WriteDelayMs );
-		}
-		else
-#endif
-		{
-			memcpy( &m_EchoOutBuf[ m_EchoOutBufIdx ], pcmData, frameLen );
-		}
-#else
-		memcpy( &m_EchoOutBuf[ m_EchoOutBufIdx ], pcmData, pcmDataLenBytes );
-#endif // USE_ECHO_CANCEL
-		m_EchoOutBufIdx += frameSamples;
-		if( m_EchoOutBufIdx >= MIXER_CHUNK_LEN_SAMPLES )
-		{
-			m_EchoOutBufIdx = 0;
-			if( false == m_MicCaptureEnabled )
-			{
-				//LogMsg( LOG_INFO, "WARNING MediaProcessor::fromGuiMicrophoneDataWithInfo dropping because no clients\n" );
-				m_AudioSemaphore.signal();
-				return;
-			}
-
-			if( m_ProcessAudioQue.size() < 5 )
-			{
-				RawAudio* rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, m_MuteMicrophone );
-				if( !m_MuteMicrophone )
-				{
-					memcpy( rawAudio->m_PcmData, &m_EchoOutBuf[ m_EchoOutBufIdx ], MIXER_CHUNK_LEN_BYTES );
-				}
-
-				m_AudioQueInMutex.lock();
-				m_ProcessAudioQue.push_back( rawAudio );
-				m_AudioQueInMutex.unlock();
-				m_AudioSemaphore.signal();
-			}
-		}
+		//LogMsg( LOG_INFO, "WARNING MediaProcessor::fromGuiMicrophoneDataWithInfo dropping because no clients\n" );
+		m_AudioSemaphore.signal();
+		return;
 	}
+
+	if( m_ProcessAudioQue.size() < 5 )
+	{
+		RawAudio* rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, m_MuteMicrophone );
+
+		m_AudioQueInMutex.lock();
+		m_ProcessAudioQue.push_back( rawAudio );
+		m_AudioQueInMutex.unlock();
+		m_AudioSemaphore.signal();
+	}	
 }

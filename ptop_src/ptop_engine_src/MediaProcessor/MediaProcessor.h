@@ -160,8 +160,6 @@ public:
 	virtual void				fromGuiMicrophoneSamples( int16_t* pcmData, int pcmSampleCnt, int peakValue0to100, int divideDnSample, int outDelayMs );
 	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
 
-	virtual void				fromGuiSoundDelayTest( void );
-
 	void						increasePcmSampleVolume( int16_t * pcmData, uint16_t pcmDataLen, float volumePercent0To100 );
 	void						playAudio( int16_t * pcmData, int dataLenInBytes );
 
@@ -169,8 +167,6 @@ public:
 	bool						isSpeakerMuted( void )									{ return m_MuteSpeaker; }
 	void						muteMicrophone( bool muteMic )							{ m_MuteMicrophone = muteMic; }
 	bool						isMicrophoneMuted( void )								{ return m_MuteMicrophone; }
-	void						fromGuiEchoCancelEnable( bool enableEchoCancel );
-	bool						fromGuiIsEchoCancelEnabled( void );
 
 	void						processFriendVideoFeed(	VxGUID&			onlineId, 
 														uint8_t *		jpgData, 
@@ -279,12 +275,7 @@ protected:
 	bool						m_VidCaptureEnabled;
 	bool						m_MicCaptureEnabled;
 	bool						m_SpeakerOutputEnabled;
-#ifdef USE_ECHO_CANCEL
-	EchoCancel					m_EchoCancel;
-#endif //USE_ECHO_CANCEL
-	int16_t						m_EchoOutBuf[ MIXER_CHUNK_LEN_SAMPLES ];
-	int							m_EchoOutBufIdx{ 0 };
-	int							m_EchoOutDataProcessedLen;
+
 	bool						m_VidPktListContainsMyId;
 
 	AudioInputFrame				m_InputFrames[ MAX_INPUT_FRAMES ];

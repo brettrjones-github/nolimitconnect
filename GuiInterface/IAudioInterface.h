@@ -33,10 +33,6 @@ public:
     virtual void				fromGuiMuteSpeaker( bool muteSpeaker ) = 0;
     /// Returns true if speaker is muted
     virtual bool				fromGuiIsSpeakerMuted( void ) = 0;
-    /// Enable/Disable echo cancellation
-    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) = 0;
-    /// Returns true if echo cancellation is enabled
-    virtual bool				fromGuiIsEchoCancelEnabled( void ) = 0;
     /// Called when need more sound for speaker output
     virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) = 0;
 };

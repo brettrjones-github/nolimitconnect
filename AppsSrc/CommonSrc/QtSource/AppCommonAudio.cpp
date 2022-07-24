@@ -214,20 +214,6 @@ bool AppCommon::fromGuiIsSpeakerMuted( void )
 }
 
 //============================================================================
-/// Enable/Disable echo cancellation
-void AppCommon::fromGuiEchoCancelEnable( bool enableEchoCancel )
-{
-    getEngine().fromGuiEchoCancelEnable( enableEchoCancel );
-}
-
-//============================================================================
-/// Returns true if echo cancellation is enabled
-bool AppCommon::fromGuiIsEchoCancelEnabled( void )
-{
-    return getEngine().fromGuiIsEchoCancelEnabled();
-}
-
-//============================================================================
 /// Called when need more sound for speaker output
 void AppCommon::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 {

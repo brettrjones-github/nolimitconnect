@@ -255,12 +255,6 @@ void INlc::fromGuiMuteSpeaker( bool mute )
 }
 
 //============================================================================
-void INlc::fromGuiEchoCancelEnable( bool enableEchoCancel )
-{
-    getPtoP().fromGuiEchoCancelEnable( enableEchoCancel );
-}
-
-//============================================================================
 bool INlc::fromGuiIsMicrophoneMuted( void )
 {
     return getPtoP().fromGuiIsMicrophoneMuted();
@@ -270,12 +264,6 @@ bool INlc::fromGuiIsMicrophoneMuted( void )
 bool INlc::fromGuiIsSpeakerMuted( void )
 {
     return getPtoP().fromGuiIsSpeakerMuted();
-}
-
-//============================================================================
-bool INlc::fromGuiIsEchoCancelEnabled( void )
-{
-    return getPtoP().fromGuiIsEchoCancelEnabled();
 }
 
 //============================================================================
