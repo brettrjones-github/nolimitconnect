@@ -208,20 +208,63 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
 {
     if( VxIsAppShuttingDown() )
     {
-        // do not attempt anythig while being destroyed
+        // do not attempt anything while being destroyed
         return 0;
     }
-    
-    m_Engine.getMediaProcesser().fromGuiMicrophoneSamples( (int16_t*)data, (int)len >> 1, m_PeakAmplitude, m_DivideCnt, m_AudioIoMgr.getAudioOutMixer().calcualateAudioOutDelayMs() );
+
+    int inSampleCnt = (int)len >> 1;
+    int16_t* sampleInData = (int16_t*)data;
+    if( m_AudioTestState != eAudioTestStateNone )
+    {
+        if( m_AudioTestState == eAudioTestStateStart && !m_AudioTestDetectTimeMs )
+        {
+            audioTestDetectTestSound( sampleInData, inSampleCnt );
+        }
+
+        return len;
+    }
+
+
+    // Qt no longer supports 8000 hz on all devices so everthing in is 48000 hz pcm data
+    // webrtc says it support 8000 hz echo cancel but seems to have issues so use 16000 hz for echo cancel
+    // ptop engine uses 8000 hz only
+
+    int outSampleCnt = inSampleCnt / m_DivideCnt;
+    int16_t* sampleOutData = new int16_t[ outSampleCnt ];
+
+    bool echoCancelEnabled = m_AudioIoMgr.geAudioEchoCancel().isEchoCancelEnabled();
+    if( echoCancelEnabled )
+    {
+        int echoSampleCnt = outSampleCnt * 2;
+        int16_t* echoMicData = new int16_t[ echoSampleCnt ];
+        int16_t* echoCanceledData = new int16_t[ echoSampleCnt ];
+        AudioUtils::dnsamplePcmAudio( sampleInData, echoSampleCnt, m_DivideCnt / 2, echoMicData );
+        bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().microphoneWroteSamples( echoMicData, echoSampleCnt, echoCanceledData );
+        AudioUtils::dnsamplePcmAudio( echoCanceledData, outSampleCnt, 2, sampleOutData );
+        delete[] echoMicData;
+        if( !echoHasBufferOwnership )
+        {
+            delete[] echoCanceledData;
+        }   
+    }
+    else
+    {
+        AudioUtils::dnsamplePcmAudio( sampleInData, outSampleCnt, m_DivideCnt, sampleOutData );
+    }
 
     if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
     {
         m_PeakAmplitude = 0;
+        memset( sampleOutData, 0, outSampleCnt * 2 );
     }
     else
     {
-        m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( (int16_t*)data, len );
+        m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( sampleOutData, outSampleCnt * 2 );
     }
+
+    m_Engine.getMediaProcesser().fromGuiMicrophoneSamples( sampleOutData, outSampleCnt, m_PeakAmplitude, m_DivideCnt, 0 );
+
+    delete[] sampleOutData;
 
     return len;
 }
@@ -232,7 +275,7 @@ int AudioInIo::calculateMicrophonDelayMs()
 {
     if( VxIsAppShuttingDown() )
     {
-        // do not attempt anythig while being destroyed
+        // do not attempt anything while being destroyed
         return 0;
     }
 
@@ -245,7 +288,7 @@ int AudioInIo::audioQueFreeSpace()
 {
     if( VxIsAppShuttingDown() )
     {
-        // do not attempt anythig while being destroyed
+        // do not attempt anything while being destroyed
         return 0;
     }
 
@@ -272,7 +315,7 @@ qint64 AudioInIo::bytesAvailable() const
 {
     if( VxIsAppShuttingDown() )
     {
-        // do not attempt anythig while being destroyed
+        // do not attempt anything while being destroyed
         return 0;
     }
 
@@ -288,7 +331,7 @@ void AudioInIo::onAudioDeviceStateChanged( QAudio::State state )
 {
     if( VxIsAppShuttingDown() )
     {
-        // do not attempt anythig while being destroyed
+        // do not attempt anything while being destroyed
         return;
     }
 
@@ -305,7 +348,7 @@ void AudioInIo::slotCheckForBufferUnderun()
 {
     if( VxIsAppShuttingDown() )
     {
-        // do not attempt anythig while being destroyed
+        // do not attempt anything while being destroyed
         return;
     }
 
@@ -369,6 +412,7 @@ void AudioInIo::slotCheckForBufferUnderun()
 //============================================================================
 void AudioInIo::wantMicrophoneInput( bool enableInput )
 {
+    m_MicInputEnabled = enableInput;
     m_AudioInputDevice->stop();
     if( !m_AudioInDeviceIsStarted )
     {
@@ -410,4 +454,66 @@ void AudioInIo::wantMicrophoneInput( bool enableInput )
             // no-op
         }
 	}
+}
+
+//============================================================================
+void AudioInIo::setAudioTestState( EAudioTestState audioTestState )
+{
+    switch( audioTestState )
+    {
+    case eAudioTestStateInit:
+        m_AudioTestDetectTimeMs = 0;
+        break;
+    case eAudioTestStateStart:
+        break;
+    case  eAudioTestStateDone:
+        break;
+    case eAudioTestStateNone:
+    default:
+        break;
+    }
+
+    m_AudioTestState = audioTestState;
+}
+
+//============================================================================
+void AudioInIo::audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt )
+{
+    if( m_AudioTestDetectTimeMs )
+    {
+        return;
+    }
+
+    // hopefully there is not too much noise but we also need to detect at low mic input so use 1/4 max volume
+    int16_t sampPosVal = 32767 / 4;
+    int16_t sampNegVal = -32768 / 4;
+    int sampStartIdx = 0;
+    int sampPosCnt = 0;
+    int sampNegCnt = 0;
+
+    for( int i = 0; i < inSampleCnt; i++ )
+    {
+        if( sampleInData[ i ] > sampPosVal )
+        {
+            sampPosCnt++;
+            if( !sampStartIdx && sampNegCnt )
+            {
+                sampStartIdx = i;
+            }
+        }
+
+        if( sampleInData[ i ] < sampNegVal )
+        {
+            sampNegCnt++;
+            if( !sampStartIdx && sampPosCnt )
+            {
+                sampStartIdx = i;
+            }
+        }
+    }
+
+    if( sampPosCnt > 2 && sampNegCnt > 2 )
+    {
+        m_AudioTestDetectTimeMs = GetGmtTimeMs() + AudioUtils::audioDurationMs( m_AudioFormat, sampStartIdx * 2 );
+    }
 }

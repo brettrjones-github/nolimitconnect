@@ -1,4 +1,5 @@
 #include "AppCommon.h"
+#include <soundio/AudioDefs.h>
 
 //============================================================================
 void  AppCommon::registerMetaData( void )
@@ -15,6 +16,8 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<EAssetAction>( "EAssetAction" );
 	qRegisterMetaType<EAssetSendState>( "EAssetSendState" );
 	qRegisterMetaType<EAssetType>( "EAssetType" );
+	
+	qRegisterMetaType<EAudioTestState>( "EAudioTestState" );
 
 	qRegisterMetaType<EConnectReason>( "EConnectReason" );
 	qRegisterMetaType<EConnectStatus>( "EConnectStatus" );

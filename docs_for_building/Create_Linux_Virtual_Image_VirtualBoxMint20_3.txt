@@ -129,7 +129,7 @@ In general a vpn with P2P support is recommended for developers and users
 	
 ===== Qt Creator Editor settings to match no limit connect code style =====
 1.) Set Tab Size to 4
-	a.0 QCreator->tools->options->Text Editor change Tab Size to 4
+	In QCreator->tools->options->Text Editor change Tab Size to 4
 		
 	
 ===== compile nolimitconnect =====

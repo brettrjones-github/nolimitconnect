@@ -26,6 +26,8 @@
 
 # include <QAudioSink>
 
+#include "AudioDefs.h"
+
 class AudioIoMgr;
 class QTimer;
 
@@ -45,6 +47,7 @@ public:
     QAudio::Error               getError()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
     void                        wantSpeakerOutput( bool enableOutput );
+    bool                        isSpeakerOutputWanted( void )               { return m_SpeakerOutputEnabled; }
 
     void                        fromGuiCheckSpeakerOutForUnderrun(); 
 
@@ -62,6 +65,9 @@ public:
     int                         getUpsampleMultiplier( void )               { return m_UpsampleMutiplier; }
 
     void                        setSpeakerVolume( int volume0to100 );
+
+    void                        setAudioTestState( EAudioTestState audioTestState );
+    int64_t                     getAudioTestSentTime( void )                { return m_AudioTestSentTimeMs; }
  
 signals:
     void						signalCheckForBufferUnderun();
@@ -81,7 +87,9 @@ private:
     AudioIoMgr&                 m_AudioIoMgr;
     QMutex&                     m_AudioBufMutex;
 
-    bool                        m_initialized = 0;
+    bool                        m_initialized{ false };
+    bool                        m_SpeakerOutputEnabled{ false };
+
     QAudioFormat                m_AudioFormat;
     
     qint64                      m_ProccessedMs = 0;
@@ -95,4 +103,10 @@ private:
 
     int16_t                     m_PrevLastsample{ 0 };
     int                         m_PrevLerpedSamplesCnt{ 0 };
+
+    EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
+    int16_t                     m_AudioTestSentTimeMs{ 0 };
+    int16_t*                    m_AudioTestSoundOutBuf{ nullptr };
+    int                         m_AudioTestBufLen{ 0 };
+    int                         m_AudioTestBufIdx{ 0 };
 };

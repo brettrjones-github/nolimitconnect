@@ -15,12 +15,12 @@
 
 #include "AppletSoundSettings.h"
 #include "ActivityInformation.h"
+#include "ActivityMessageBox.h"
 
 #include "AppCommon.h"
 #include "AppGlobals.h"
 #include "AppSettings.h"
 
-#include "ActivityMessageBox.h"
 #include "GuiHostSession.h"
 #include "GuiParams.h"
 #include "GuiHelpers.h"
@@ -51,8 +51,8 @@ namespace
 //============================================================================
 AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
 : AppletClientBase( OBJNAME_APPLET_SOUND_SETTINGS, app, parent )
-, m_devices( new QMediaDevices( this ) )
 , m_PeakTimer( new QTimer( this ) )
+, m_devices( new QMediaDevices( this ) )
 {
     setAppletType( eAppletSoundSettings );
     ui.setupUi( getContentItemsFrame() );
@@ -63,8 +63,15 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
     ui.m_PauseMicrophoneCheckBox->setChecked( false );
     ui.m_PauseVoipCheckBox->setChecked( true );
     m_PeakTimer->setInterval( 200 );
+    ui.m_EchoCancelEnableCheckBox->setChecked( m_MyApp.getSoundMgr().fromGuiIsEchoCancelEnabled() );
+
+    connect( ui.m_EchoCancelEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotEchoCancelEnableChange(int)) );
 
     connectBarWidgets();
+
+    connect( ui.m_TestSoundDelayButton, SIGNAL( clicked() ), this, SLOT( slotStartTestSoundDelay() ) );
+    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalTestedSoundDelay(int)), this, SLOT(slotTestedSoundDelayResult(int)) );
+    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestState(EAudioTestState)), this, SLOT(slotAudioTestState(EAudioTestState)) );
 
     QAudioFormat mixerFormat;
     mixerFormat.setSampleRate( 8000 );
@@ -163,6 +170,20 @@ void AppletSoundSettings::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
+void AppletSoundSettings::statusMsg( const char* errMsg, ... )
+{
+    char as8Buf[ MAX_INFO_MSG_SIZE ];
+    va_list argList;
+    va_start( argList, errMsg );
+    vsnprintf( as8Buf, sizeof( as8Buf ), errMsg, argList );
+    as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
+    va_end( argList );
+
+    setStatusLabel( as8Buf );
+}
+
+
+//============================================================================
 void AppletSoundSettings::inDeviceChanged( int index )
 {
     //m_generator->stop();
@@ -259,4 +280,52 @@ void AppletSoundSettings::slotPeakTimerTimeout( void )
 {
     ui.m_AudioInPeakProgressBar->setValue( m_MyApp.getSoundMgr().getAudioInPeakAmplitude() );
     ui.m_AudioOutPeakProgressBar->setValue( m_MyApp.getSoundMgr().getAudioOutPeakAmplitude() );
+}
+
+//============================================================================
+void AppletSoundSettings::slotStartTestSoundDelay( void )
+{
+    m_MyApp.getSoundMgr().runAudioDelayTest();
+}
+
+//============================================================================
+void AppletSoundSettings::slotAudioTestState( EAudioTestState audioTestState )
+{
+    switch( audioTestState )
+    {
+    case eAudioTestStateInit:
+        statusMsg( "Sound Delay Test Inititialize" );
+        break;
+
+    case eAudioTestStateStart:
+        statusMsg( "Sound Delay Test Started" );
+        break;
+
+    case  eAudioTestStateDone:
+
+        break;
+
+    case eAudioTestStateNone:
+    default:
+        break;
+    }
+}
+
+//============================================================================
+void AppletSoundSettings::slotTestedSoundDelayResult( int echoDelayMs )
+{
+    if( echoDelayMs )
+    {
+        statusMsg( "Sound Delay Test %d ms", echoDelayMs );
+    }
+    else
+    {
+        statusMsg( "Sound Delay Test Failed to detect delay. Check microphone and speaker are on" );
+    }
+}
+
+//============================================================================
+void AppletSoundSettings::slotEchoCancelEnableChange( int checkState )
+{
+    m_MyApp.getSoundMgr().fromGuiEchoCancelEnable( checkState );
 }

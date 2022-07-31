@@ -1,12 +1,13 @@
 === Build No Limit Connect For Linux in Virtual Box Image ===
-NOTE: Qt 6.2.1 does not yet have libQt6Multimedia so Linux is not yet supported
 1.) Follow the instructions in
-        Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint20_2.txt
+        Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint20_3.txt
 2.) Open console
 3.) cd ~/nolimitdev/nolimitconnect
 4.) git pull (to update if desired)
 5.) Open Qt Creator
-6.) Rebuild by build number
-7.) Open BuildX_XXX and build it in the order of the build number (Skip Build_1 to Build_4 if not building with KODI)
-8.) if you get mv/copy errors you may have to build Build1_PythonDepends.pro and Build2_PythonLib many times so the libraries copy to correct folder. This is copy lib bug in the build for Build2_PythonLib.pro
+6.) Rebuild by build number BuildNlc1_NlcDependLibs, BuildNlc2_NlcCore and BuildNlc3_NlcAppOnly
+7.) If building for Ubuntu you may need additional library(s)
+    apt-get install libxext-dev
+
+
 

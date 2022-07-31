@@ -14,11 +14,9 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "EchoCancel.h"
+#include <GuiInterface/IFromGui.h>
 
 #include "AudioInputFrame.h"
-
-#include <GuiInterface/IFromGui.h>
 
 #include <PktLib/PktVoiceReq.h>
 

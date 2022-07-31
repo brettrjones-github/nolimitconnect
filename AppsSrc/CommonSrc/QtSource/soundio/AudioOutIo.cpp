@@ -17,6 +17,7 @@
 
 #include "AudioOutIo.h"
 #include "AudioIoMgr.h"
+#include "AudioUtils.h"
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
@@ -111,6 +112,7 @@ bool AudioOutIo::soundOutDeviceChanged( int deviceIndex )
 //============================================================================
 void AudioOutIo::wantSpeakerOutput( bool enableOutput ) 
 {
+    m_SpeakerOutputEnabled = enableOutput;
     m_AudioOutputDevice->stop();
     if( !m_AudioOutDeviceIsStarted )
 	{
@@ -239,10 +241,52 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         return maxlen;
     }
 
+    if( m_AudioTestState != eAudioTestStateNone )
+    {
+        memset( data, 0, maxlen );
+        if( m_AudioTestState == eAudioTestStateStart && !m_AudioTestSentTimeMs )
+        {
+            int16_t* sampleBuf = (int16_t*)data;
+            // create a 480 hz square wave tone for 10 ms
+            int maxSamplesToSet = AudioUtils::audioSamplesRequiredForGivenMs( m_AudioFormat, 10 );
+            int samplesCycle = 10;
+            bool sampleIsMax{ true };
+            for( int i = 0; i < maxSamplesToSet; i += samplesCycle )
+            {
+                int16_t sampVal = sampleIsMax ? 32767 : -32768;
+                for( int j = 0; j < samplesCycle; j++ )
+                {
+                    sampleBuf[ i + j ] = sampVal;
+                }
+
+                sampleIsMax = !sampleIsMax;
+            }
+
+            m_AudioTestSentTimeMs = GetGmtTimeMs();
+        }
+
+        return maxlen;
+    }
+
     qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier() );
     if( readAmount != maxlen )
     {
         LogMsg( LOG_DEBUG, "readData mismatch with maxlen %d and read %d", maxlen, readAmount );
+    }
+
+    bool echoCancelEnabled = m_AudioIoMgr.geAudioEchoCancel().isEchoCancelEnabled();
+    if( echoCancelEnabled )
+    {
+        // echo cancel runs at 16000 hz. audio out device runs at 48000 hz
+        int echoSampleDivide = getUpsampleMultiplier() / 2;
+        int echoSampleCnt = maxlen / (echoSampleDivide * 2);
+        int16_t* echoSpeakerdData = new int16_t[ echoSampleCnt ];
+        AudioUtils::dnsamplePcmAudio( (int16_t*)data, echoSampleCnt, echoSampleDivide, echoSpeakerdData );
+        bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().speakerReadSamples( echoSpeakerdData, echoSampleCnt );
+        if( !echoHasBufferOwnership )
+        {
+            delete[] echoSpeakerdData;
+        }
     }
 
     return maxlen;
@@ -396,4 +440,24 @@ void AudioOutIo::setSpeakerVolume( int volume0to100 )
         QAudio::LinearVolumeScale );
 
     m_AudioOutputDevice->setVolume( linearVolume );
+}
+
+//============================================================================
+void AudioOutIo::setAudioTestState( EAudioTestState audioTestState )
+{
+    switch( audioTestState )
+    {
+    case eAudioTestStateInit:
+        m_AudioTestSentTimeMs = 0;
+        break;
+    case eAudioTestStateStart:
+        break;
+    case  eAudioTestStateDone:
+        break;
+    case eAudioTestStateNone:
+    default:
+        break;
+    }
+
+    m_AudioTestState = audioTestState;
 }

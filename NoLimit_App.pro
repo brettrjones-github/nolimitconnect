@@ -218,6 +218,8 @@ include(config_link.pri)
     # static ssl lib version
     LIBS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX}
 
+    LIBS +=  $${STATIC_LIB_PREFIX}echocancel$${STATIC_LIB_SUFFIX}
+
     LIBS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}png$${STATIC_LIB_SUFFIX}
@@ -230,6 +232,7 @@ include(config_link.pri)
 
     LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+
 
 unix:!android{
 

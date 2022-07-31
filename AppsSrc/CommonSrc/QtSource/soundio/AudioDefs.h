@@ -33,3 +33,12 @@ static const int AUDIO_OUT_CACHE_USABLE_SIZE = ( AUDIO_OUT_CACHE_USABLE_BUF_COUN
 static const int AUDIO_OUT_CACHE_TOTAL_BUF_COUNT = AUDIO_OUT_CACHE_USABLE_BUF_COUNT + 1;
 static const int AUDIO_OUT_CACHE_TOTAL_SIZE = ( AUDIO_OUT_CACHE_TOTAL_BUF_COUNT * AUDIO_BUF_SIZE_48000_1_S16 );
 
+enum EAudioTestState
+{
+	eAudioTestStateNone,
+	eAudioTestStateInit,
+	eAudioTestStateStart,
+	eAudioTestStateDone,
+
+	eMaxAudioTestState
+};

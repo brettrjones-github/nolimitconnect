@@ -13,6 +13,7 @@ namespace AudioUtils
     qint64                      audioDurationUs(const QAudioFormat &format, qint64 bytes);
     int                         audioDurationMs( const QAudioFormat& format, int bytes );
     qint64                      audioLength(const QAudioFormat &format, qint64 microSeconds);
+    int                         audioSamplesRequiredForGivenMs( const QAudioFormat& format, qint64 milliSeconds );
 
     QString                     formatToString(const QAudioFormat &format);
 

@@ -8,6 +8,8 @@ CONFIG += ordered
 # python must be build seperately and before this project
 #SUBDIRS += $$PWD/NlcPythonLib.pro
 
+SUBDIRS += $$PWD/libechocancel.pro
+
 SUBDIRS += $$PWD/libavdevice.pro
 SUBDIRS += $$PWD/libpostproc.pro
 SUBDIRS += $$PWD/libavformat.pro

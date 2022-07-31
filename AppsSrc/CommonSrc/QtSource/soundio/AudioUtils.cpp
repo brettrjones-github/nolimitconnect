@@ -31,6 +31,12 @@ qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 }
 
 //=============================================================================
+int AudioUtils::audioSamplesRequiredForGivenMs( const QAudioFormat& format, qint64 milliSeconds )
+{
+    return (int)((format.sampleRate() * format.channelCount()) * milliSeconds / 1000);
+}
+
+//=============================================================================
 qreal AudioUtils::nyquistFrequency(const QAudioFormat &format)
 {
     return format.sampleRate() / 2;
@@ -273,10 +279,16 @@ void AudioUtils::upsamplePcmAudioLerpNext( int16_t* srcSamples, int srcSampleCnt
 //=============================================================================
 void AudioUtils::dnsamplePcmAudio( int16_t* srcSamples, int resampledCnt, int dnResampleDivider, int16_t* destSamples )
 {
-    int16_t* pcmData = (int16_t*)srcSamples;
-    for( int i = 0; i < resampledCnt; i++ )
+    if( dnResampleDivider > 1 )
     {
-        destSamples[ i ] = pcmData[ i * dnResampleDivider ];
+        for( int i = 0; i < resampledCnt; i++ )
+        {
+            destSamples[ i ] = srcSamples[ i * dnResampleDivider ];
+        }
+    }
+    else
+    {
+        memcpy( destSamples, srcSamples, resampledCnt * 2 );
     }
 }
 

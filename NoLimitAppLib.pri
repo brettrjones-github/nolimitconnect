@@ -32,6 +32,7 @@ INCLUDEPATH += $$PWD/AppsSrc/CommonSrc/QtSource
 INCLUDEPATH += $$PWD/AppsSrc
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
+INCLUDEPATH += $$PWD/DependLibs/libechocancel
 
 HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AccountMgr.h \
@@ -321,6 +322,9 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/StoryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioDefs.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoBuf.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancel.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancelImpl.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInIo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInThread.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioIoMgr.h \
@@ -690,6 +694,9 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoBuf.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancel.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancelImpl.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInIo.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInThread.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioIoMgr.cpp \

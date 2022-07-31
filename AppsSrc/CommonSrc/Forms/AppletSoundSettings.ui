@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>562</width>
+    <width>507</width>
     <height>682</height>
    </rect>
   </property>
@@ -54,6 +54,20 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="m_TestSoundDelayButton">
+     <property name="text">
+      <string>Test Sound Delay For Echo Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_EchoCancelEnableCheckBox">
+     <property name="text">
+      <string> Enable Echo Cancel</string>
      </property>
     </widget>
    </item>

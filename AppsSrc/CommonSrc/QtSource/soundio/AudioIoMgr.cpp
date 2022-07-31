@@ -24,15 +24,20 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget * parent )
-: QWidget( parent )
-, m_MyApp( app )
-, m_MediaDevices( new QMediaDevices( this ) )
-, m_AudioCallbacks( audioCallbacks )
-, m_AudioOutMixer( *this, audioCallbacks, this )
-, m_AudioOutIo( *this, m_AudioOutMutex, this )
-, m_AudioInIo( *this, m_AudioInMutex, this )
+AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget* parent )
+    : QWidget( parent )
+    , m_MyApp( app )
+    , m_MediaDevices( new QMediaDevices( this ) )
+    , m_AudioCallbacks( audioCallbacks )
+    , m_AudioOutMixer( *this, audioCallbacks, this )
+    , m_AudioOutIo( *this, m_AudioOutMutex, this )
+    , m_AudioInIo( *this, m_AudioInMutex, this )
+    , m_AudioEchoCancel( app, *this, this )
+    , m_AudioTestTimer( new QTimer( this ) )
 {
+    m_AudioTestTimer->setInterval( 800 );
+    connect( m_AudioTestTimer, SIGNAL(timeout()), this, SLOT(slotAudioTestTimer()) );
+
     memset( m_MyLastAudioOutSample, 0, sizeof( m_MyLastAudioOutSample ) );
     memset( m_MicrophoneEnable, 0, sizeof( m_MicrophoneEnable ) );
     memset( m_SpeakerEnable, 0, sizeof( m_SpeakerEnable ) );
@@ -482,4 +487,75 @@ void AudioIoMgr::soundInDeviceChanged( int deviceIndex )
 void AudioIoMgr::soundOutDeviceChanged( int deviceIndex )
 {
     m_AudioOutIo.soundOutDeviceChanged( deviceIndex );
+}
+
+//============================================================================
+void AudioIoMgr::runAudioDelayTest( void )
+{
+    if( m_AudioTestState != eAudioTestStateNone )
+    {
+        LogMsg( LOG_ERROR, "AudioIoMgr::runAudioTest already running" );
+    }
+
+    m_AudioTestState = eAudioTestStateInit;
+    m_AudioTestMicEnable = m_AudioInIo.isMicrophoneInputWanted();
+    m_AudioTestSpeakerEnable = m_AudioOutIo.isSpeakerOutputWanted();
+
+    m_AudioInIo.setAudioTestState( m_AudioTestState );
+    m_AudioOutIo.setAudioTestState( m_AudioTestState );
+
+    m_AudioInIo.wantMicrophoneInput( true );
+    m_AudioOutIo.wantSpeakerOutput( true );
+
+    
+    m_AudioTestTimer->start();
+}
+
+//============================================================================
+void AudioIoMgr::slotAudioTestTimer( void )
+{
+    switch( m_AudioTestState )
+    {
+    case eAudioTestStateInit:
+        setAudioTestState( eAudioTestStateStart );
+        m_AudioTestState = eAudioTestStateStart;
+        m_AudioInIo.setAudioTestState( m_AudioTestState );
+        m_AudioOutIo.setAudioTestState( m_AudioTestState );
+        break;
+
+    case eAudioTestStateStart:
+        setAudioTestState( eAudioTestStateDone );
+        m_AudioTestState = eAudioTestStateDone;
+        m_AudioInIo.setAudioTestState( m_AudioTestState );
+        m_AudioOutIo.setAudioTestState( m_AudioTestState );
+        break;
+
+    case  eAudioTestStateDone:
+        m_AudioTestTimer->stop();
+        handleAudioTestResult( m_AudioOutIo.getAudioTestSentTime(), m_AudioInIo.getAudioTestDetectTime() );
+        setAudioTestState( eAudioTestStateNone );
+
+        m_AudioInIo.wantMicrophoneInput( m_AudioTestMicEnable );
+        m_AudioOutIo.wantSpeakerOutput( m_AudioTestSpeakerEnable );
+        break;
+
+    case eAudioTestStateNone:
+    default:
+        break;
+    }
+}
+
+//============================================================================
+void AudioIoMgr::setAudioTestState( EAudioTestState audioTestState )
+{
+    m_AudioTestState = eAudioTestStateNone;
+    m_AudioInIo.setAudioTestState( m_AudioTestState );
+    m_AudioOutIo.setAudioTestState( m_AudioTestState );
+    emit signalAudioTestState( audioTestState );
+}
+
+//============================================================================
+void AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs )
+{
+
 }

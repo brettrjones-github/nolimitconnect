@@ -44,13 +44,14 @@ public:
     void                        startAudio();
 
     void                        wantMicrophoneInput( bool enableInput );
+    bool                        isMicrophoneInputWanted( void )     { return m_MicInputEnabled; }
 
     void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
 
-    int                         getAudioInPeakAmplitude( void ) { return m_PeakAmplitude; }
+    int                         getAudioInPeakAmplitude( void )     { return m_PeakAmplitude; }
 
-    void                        lockAudioIn( void )             { m_AudioBufMutex.lock(); }
-    void                        unlockAudioIn( void )           { m_AudioBufMutex.unlock(); }
+    void                        lockAudioIn( void )                 { m_AudioBufMutex.lock(); }
+    void                        unlockAudioIn( void )               { m_AudioBufMutex.unlock(); }
  
     void                        setMicrophoneVolume( int volume0to100 );
 
@@ -80,6 +81,9 @@ public:
 
     void                        setDivideSamplesCount( int cnt ) { m_DivideCnt = cnt; m_AudioInThread.setDivideSamplesCount( cnt ); }
 
+    void                        setAudioTestState( EAudioTestState audioTestState );
+    int64_t                     getAudioTestDetectTime( void )  { return m_AudioTestDetectTimeMs; }
+
 signals:
     void						signalCheckForBufferUnderun();
 
@@ -93,11 +97,15 @@ protected:
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
 
+    void                        audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt );
+
     AudioIoMgr&                 m_AudioIoMgr;
     P2PEngine&                  m_Engine;
     QMutex&                     m_AudioBufMutex;
 
     bool                        m_initialized{ false };
+    bool                        m_MicInputEnabled{ false };
+
     bool                        m_AudioInDeviceIsStarted{ false };
     QAudioFormat                m_AudioFormat;
 
@@ -112,4 +120,7 @@ protected:
 
     QMediaDevices*              m_MediaDevices = nullptr;
     QScopedPointer<QAudioSource> m_AudioInputDevice;
+
+    EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
+    int16_t                     m_AudioTestDetectTimeMs{ 0 };
 };

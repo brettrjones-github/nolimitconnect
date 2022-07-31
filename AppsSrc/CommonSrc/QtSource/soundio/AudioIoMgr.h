@@ -19,6 +19,7 @@
 #include <QElapsedTimer>
 #include <QWidget>
 
+#include "AudioEchoCancel.h"
 #include "AudioMixer.h"
 #include "AudioOutIo.h"
 #include "AudioInIo.h"
@@ -39,6 +40,7 @@ public:
 
     P2PEngine&                  getEngine( void );
     QMediaDevices*              getMediaDevices( void )     { return m_MediaDevices; }
+    AudioEchoCancel&            geAudioEchoCancel( void )   { return m_AudioEchoCancel; }
 
     virtual int				    getMicrophonePeakValue0To100( void );
 
@@ -123,12 +125,18 @@ public:
     void                        soundInDeviceChanged( int deviceIndex );
     void                        soundOutDeviceChanged( int deviceIndex );
 
+    void                        runAudioDelayTest( void );
+
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
+    void                        signalAudioTestState( EAudioTestState audioTestState );
+    void                        signalTestedSoundDelay( int echoDelayMs );
 
 public slots:
     void                        speakerStateChanged( QAudio::State state );
     void                        microphoneStateChanged( QAudio::State state );
+
+    void                        slotAudioTestTimer( void );
 
 protected:
     void						stopAudioOut( );
@@ -141,6 +149,9 @@ protected:
     void                        enableSpeakers( bool enable );
     // update microphone output
     void                        enableMicrophone( bool enable );
+
+    void                        setAudioTestState( EAudioTestState audioTestState );
+    void                        handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs );
 
     AppCommon&                  m_MyApp;
     QMediaDevices*              m_MediaDevices{ nullptr };
@@ -181,4 +192,11 @@ protected:
     bool                        m_WantMicrophone = false;
     bool                        m_WantSpeakerOutput = false;
     float                       m_MicrophoneVolume{ 100.0f };
+
+    AudioEchoCancel             m_AudioEchoCancel;
+
+    QTimer*                     m_AudioTestTimer{ nullptr };
+    EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
+    bool                        m_AudioTestMicEnable{ false };
+    bool                        m_AudioTestSpeakerEnable{ false };
 };

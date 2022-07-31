@@ -938,6 +938,12 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiPlayerMgr.h">
       <Filter>Source Files\GuiPlayerMgr</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancel.h">
+      <Filter>Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.h">
+      <Filter>Source Files\soundio</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp">
@@ -2017,6 +2023,15 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiPlayerMgr.cpp">
       <Filter>Source Files\GuiPlayerMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancel.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImp.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoBuf.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2279,6 +2294,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiPlayerCallback.h">
       <Filter>Source Files\GuiPlayerMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoBuf.h">
+      <Filter>Source Files\soundio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

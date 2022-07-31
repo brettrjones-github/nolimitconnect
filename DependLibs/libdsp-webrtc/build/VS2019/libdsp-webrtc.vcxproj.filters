@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common_audio">
+      <UniqueIdentifier>{7150419d-89d7-421a-9e9a-87ae2845d222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="abseil">
+      <UniqueIdentifier>{98bc3da1-ed91-4a3a-a7e5-8e60887f8dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="abseil\absl">
+      <UniqueIdentifier>{b073e2a8-5d97-46aa-8624-727f262ae369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="abseil\absl\meta">
+      <UniqueIdentifier>{d5c32e51-8f1c-48b2-b862-9489b1d6b60c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="abseil\absl\base">
+      <UniqueIdentifier>{a70156c6-cc17-4a72-93d6-60625b9ad5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules">
+      <UniqueIdentifier>{7958bfc3-f0fd-4e3b-bfc9-52e1e0351668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\async_audio_processing">
+      <UniqueIdentifier>{b999d513-bffd-43b2-87ec-2eacb7e6204c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\audio_processing">
+      <UniqueIdentifier>{c7990ada-0c3b-4475-9f1a-0e27941e0a9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\audio_processing\aec3">
+      <UniqueIdentifier>{50ad6138-4d3c-432b-8d76-7e111db52823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="api">
+      <UniqueIdentifier>{1706625a-4c55-4946-9f35-28f85fbe8bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="api\audio">
+      <UniqueIdentifier>{25933317-8d19-49c1-b345-4d739975410a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\common_audio\audio_converter.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\audio_util.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\channel_buffer.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\fir_filter_avx2.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\fir_filter_c.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\fir_filter_factory.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\fir_filter_neon.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\fir_filter_sse.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\real_fourier.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\real_fourier_ooura.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\ring_buffer.c">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\smoothing_filter.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\wav_file.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\wav_header.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common_audio\window_generator.cc">
+      <Filter>common_audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\async_audio_processing\async_audio_processing.cc">
+      <Filter>modules\async_audio_processing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\audio_buffer.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\audio_processing_builder_impl.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\audio_processing_impl.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\echo_control_mobile_impl.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\gain_control_impl.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\gain_controller2.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\high_pass_filter.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\optionally_built_submodule_creators.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\residual_echo_detector.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\rms_level.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\splitting_filter.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\audio_processing\three_band_filter_bank.cc">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\api\audio\audio_frame.cc">
+      <Filter>api\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\api\audio\channel_layout.cc">
+      <Filter>api\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\api\audio\echo_canceller3_config.cc">
+      <Filter>api\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\api\audio\echo_canceller3_factory.cc">
+      <Filter>api\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\api\audio\echo_detector_creator.cc">
+      <Filter>api\audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common_audio\audio_converter.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\channel_buffer.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\fir_filter.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\fir_filter_avx2.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\fir_filter_c.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\fir_filter_factory.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\fir_filter_neon.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\fir_filter_sse.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\real_fourier.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\real_fourier_ooura.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\ring_buffer.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\smoothing_filter.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\wav_file.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\wav_header.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_audio\window_generator.h">
+      <Filter>common_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\abseil\absl\meta\type_traits.h">
+      <Filter>abseil\absl\meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\async_audio_processing\async_audio_processing.h">
+      <Filter>modules\async_audio_processing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\audio_buffer.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\audio_processing_impl.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\echo_control_mobile_impl.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\gain_control_impl.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\gain_controller2.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\high_pass_filter.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\optionally_built_submodule_creators.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\residual_echo_detector.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\rms_level.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\splitting_filter.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\audio_processing\three_band_filter_bank.h">
+      <Filter>modules\audio_processing\aec3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\config_libdsp-webrtc.h" />
+    <ClInclude Include="..\..\api\audio\audio_frame.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\audio_frame_processor.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\audio_mixer.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\channel_layout.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\echo_canceller3_config.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\echo_canceller3_factory.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\echo_control.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\audio\echo_detector_creator.h">
+      <Filter>api\audio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\common_audio\DEPS">
+      <Filter>common_audio</Filter>
+    </None>
+    <None Include="..\..\common_audio\OWNERS">
+      <Filter>common_audio</Filter>
+    </None>
+    <None Include="..\..\abseil\absl\abseil.podspec.gen.py">
+      <Filter>abseil\absl</Filter>
+    </None>
+    <None Include="..\..\abseil\absl\BUILD.bazel">
+      <Filter>abseil\absl</Filter>
+    </None>
+    <None Include="..\..\abseil\absl\meta\BUILD.bazel">
+      <Filter>abseil\absl\meta</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\abseil\absl\CMakeLists.txt">
+      <Filter>abseil\absl</Filter>
+    </Text>
+    <Text Include="..\..\abseil\absl\meta\CMakeLists.txt">
+      <Filter>abseil\absl\meta</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

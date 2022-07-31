@@ -76,82 +76,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/ConnectMgr/ConnectInfo.h \
     $$PWD/ptop_src/ptop_engine_src/ConnectMgr/ConnectInfoDb.h \
     $$PWD/ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/WebRtcTypeDefs.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_common.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_core.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_core_internal.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_logging.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_logging_file_handling.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_rdft.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_resampler.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/array_view.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/arraysize.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/atomic32.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/atomicops.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device_buffer.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device_config.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device_defines.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device_generic.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_processing.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_util.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/base64.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/basictypes.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/block_mean_calculator.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/byteorder.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/checks.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/common_types.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/constructormagic.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/cpu_features_wrapper.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/critical_section_wrapper.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/criticalsection.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/delay_estimator.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/delay_estimator_internal.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/delay_estimator_wrapper.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/echo_cancellation.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/echo_cancellation_internal.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/echo_common.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event_timer_posix.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event_timer_win.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event_wrapper.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/fake_audio_device.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/fileutils.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/fine_audio_buffer.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/format_macros.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/logging.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/module.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/module_common_types.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/pathutils.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/platform_file.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/platform_thread.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/platform_thread_types.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/random.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/real_fft.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/ring_buffer.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/safe_conversions.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/safe_conversions_impl.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/scoped_ptr.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/scoped_ref_ptr.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/scopedptrcollection.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/sec_buffer.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/signal_processing_library.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/spl_inl.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/spl_inl_armv7.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/spl_inl_mips.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/stringencode.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/stringutils.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/template_util.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/thread_annotations.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/thread_checker.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/thread_checker_impl.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/tick_util.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/timeutils.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/urlencode.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/wav_file.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/wav_header.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32.h \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32filesystem.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinCallbackInterface.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h \
     $$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinedLastDb.h \
@@ -178,7 +102,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioInputFrame.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioProcessorDefs.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
-    $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaClient.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/RawAudio.h \
@@ -419,55 +342,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/ConnectMgr/ConnectInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/ConnectMgr/ConnectInfoDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_core.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_core_mips.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_core_neon.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_core_sse2.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_logging_file_handling.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_rdft.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_rdft_mips.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_rdft_neon.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_rdft_sse2.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/aec_resampler.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/atomic32_posix.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/atomic32_win.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device_buffer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_device_generic.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/audio_util.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/base64.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/block_mean_calculator.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/checks.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/common_types.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/cpu_features.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/cpu_features_android.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/cpu_features_linux.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/criticalsection.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/delay_estimator.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/delay_estimator_wrapper.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/echo_cancellation.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event_timer_posix.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event_timer_win.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/event_wrapper.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/fileutils.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/fine_audio_buffer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/logging.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/pathutils.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/platform_file.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/platform_thread.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/random.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/randomization_functions.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/ring_buffer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/stringencode.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/stringutils.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/thread_checker_impl.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/tick_util.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/timeutils.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/urlencode.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/wav_file.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/wav_header.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32.cpp \
-    $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32filesystem.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinedLastDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.cpp \
@@ -489,7 +363,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioInputFrame.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
-    $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.cpp \
     $$PWD/ptop_src/ptop_engine_src/Membership/Membership.cpp \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.cpp \

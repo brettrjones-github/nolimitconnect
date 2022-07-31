@@ -16,6 +16,7 @@
 
 #include "AppletClientBase.h"
 #include "GuiUserUpdateCallback.h"
+#include "soundio/AudioDefs.h"
 #include "soundio/AudioTestGenerator.h"
 
 #include <GuiInterface/IDefs.h>
@@ -42,12 +43,13 @@ public:
     void                        infoMsg( const char * infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
+    void                        statusMsg( const char* errMsg, ... );
     void						setStatusLabel( QString strMsg );
 
 signals:
     void                        signalInfoMsg( QString& infoStr );
 
-private slots:
+protected slots:
     void                        inDeviceChanged( int index );
     void                        updateInAudioDevices( void );
 
@@ -58,9 +60,14 @@ private slots:
     void                        slotApplyOutDeviceChange( void );
     void                        slotPeakTimerTimeout( void );
 
+    void                        slotStartTestSoundDelay( void );
+    void                        slotTestedSoundDelayResult( int echoDelayMs );
+    void                        slotEchoCancelEnableChange( int checkState );
+    void                        slotAudioTestState( EAudioTestState audioTestState );
+
 protected:
-    void                        showEvent( QShowEvent* ev );
-    void                        hideEvent( QHideEvent* ev );
+    void                        showEvent( QShowEvent* ev ) override;
+    void                        hideEvent( QHideEvent* ev ) override;
 
     //=== vars ===//
     Ui::AppletSoundSettingsUi   ui;

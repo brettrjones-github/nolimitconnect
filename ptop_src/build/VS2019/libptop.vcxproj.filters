@@ -40,9 +40,6 @@
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp">
       <Filter>Source Files\MediaProcessor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp">
-      <Filter>Source Files\MediaProcessor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp">
       <Filter>Source Files\MediaProcessor</Filter>
     </ClCompile>
@@ -844,9 +841,6 @@
       <Filter>Source Files\BigListLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h">
-      <Filter>Source Files\MediaProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h">
       <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaClient.h">
