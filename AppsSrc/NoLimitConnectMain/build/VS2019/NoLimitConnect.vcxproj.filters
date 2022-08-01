@@ -2026,10 +2026,10 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancel.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImp.cpp">
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoBuf.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoBuf.cpp">
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
   </ItemGroup>
