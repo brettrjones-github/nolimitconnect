@@ -41,6 +41,7 @@ ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QW
 	ui.setupUi(this);
     connectBarWidgets();
 	ui.m_UpDirectoryButton->setIcon( eMyIconUpOneDirectory );
+	ui.m_UpDirectoryButton->setFixedSize( eButtonSizeLarge );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 
     connect(ui.ExitDialogButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()) );

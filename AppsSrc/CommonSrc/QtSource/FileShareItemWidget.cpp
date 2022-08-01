@@ -26,6 +26,9 @@ FileShareItemWidget::FileShareItemWidget(QWidget *parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi(this);
+
+	ui.m_FileIconButton->setFixedSize( eButtonSizeMedium );
+
 	connect( ui.m_FileIconButton,		SIGNAL(clicked()),						this, SLOT(slotFileIconButtonClicked()) );
 	connect( ui.m_FileActionBar,		SIGNAL(signalPlayButtonClicked()),		this, SLOT(slotPlayButtonClicked()) );
 	connect( ui.m_FileActionBar,		SIGNAL(signalLibraryButtonClicked()),	this, SLOT(slotLibraryButtonClicked()) );

@@ -27,7 +27,7 @@ class FileActionBarWidget : public QFrame
 
 public:
 	FileActionBarWidget(QWidget *parent=0);
-	virtual ~FileActionBarWidget();
+	virtual ~FileActionBarWidget() = default;
 
 	void						setIsInLibrary( bool isInLibrary );
 	void						setIsShared( bool isShared );
