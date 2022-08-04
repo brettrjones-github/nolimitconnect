@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "AppletLibrary.h"
+#include "AppletSharedFiles.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -39,8 +39,8 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, QString launchParam )
-    : AppletBase( OBJNAME_APPLET_LIBRARY, app, parent )
+AppletSharedFiles::AppletSharedFiles( AppCommon& app, QWidget * parent, QString launchParam )
+    : AppletBase( OBJNAME_APPLET_SHARED_FILES_LIST, app, parent )
     , m_ePluginType( ePluginTypeInvalid )
     , m_IsSelectAFileMode( !launchParam.isEmpty() ? true : false )
     , m_FileWasSelected( false )
@@ -48,13 +48,13 @@ AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, QString launchPa
     , m_SelectedFileName( "" )
     , m_SelectedFileLen( 0 )
     , m_SelectedFileIsShared( false )
-    , m_SelectedFileIsInLibrary( false )
+    , m_SelectedFileIsInSharedFiles( false )
     , m_eFileFilterType( eFileFilterAll )
     , m_FileFilterMask( VXFILE_TYPE_ALLNOTEXE )
 {
     m_eFileFilterType = GuiParams::fileFilterToEnum( launchParam );
 
-    setAppletType( eAppletLibrary );
+    setAppletType( eAppletSharedFiles );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
@@ -68,7 +68,7 @@ AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, QString launchPa
 
     setFileFilter( m_eFileFilterType );
     connect( ui.m_FileFilterComboBox, SIGNAL( signalApplyFileFilter( unsigned char ) ), this, SLOT( slotApplyFileFilter( unsigned char ) ) );
-    statusMsg( "Requesting Library File List " );
+    statusMsg( "Requesting SharedFiles File List " );
     m_MyApp.wantToGuiFileXferCallbacks( this, true );
     slotApplyFileFilter( ui.m_FileFilterComboBox->getCurrentFileFilterMask() );
     connectBarWidgets();
@@ -77,51 +77,49 @@ AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, QString launchPa
 }
 
 //============================================================================
-AppletLibrary::~AppletLibrary()
+AppletSharedFiles::~AppletSharedFiles()
 {
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletLibrary::statusMsg( QString strMsg )
+void AppletSharedFiles::statusMsg( QString strMsg )
 {
     //LogMsg( LOG_INFO, strMsg.toStdString().c_str() );
     ui.m_StatusMsgLabel->setText( strMsg );
 }
 
 //============================================================================
-void AppletLibrary::showEvent( QShowEvent * ev )
+void AppletSharedFiles::showEvent( QShowEvent * ev )
 {
     AppletBase::showEvent( ev );
-    m_MyApp.setIsLibraryActivityActive( true );
     m_MyApp.wantToGuiFileXferCallbacks( this, true );
     slotRequestFileList();
 }
 
 //============================================================================
-void AppletLibrary::hideEvent( QHideEvent * ev )
+void AppletSharedFiles::hideEvent( QHideEvent * ev )
 {
     m_MyApp.wantToGuiFileXferCallbacks( this, false );
     AppletBase::hideEvent( ev );
-    m_MyApp.setIsLibraryActivityActive( false );
 }
 
 //============================================================================
-void AppletLibrary::toGuiFileList( VxMyFileInfo& fileInfo )
+void AppletSharedFiles::toGuiFileList( VxMyFileInfo& fileInfo )
 {
     if( fileInfo.getFullFileName().isEmpty() )
     {
         //setActionEnable( true );
         statusMsg( "List Get Completed" );
     }
-    else
+    else if( fileInfo.getIsShared() )
     {
         addFile( fileInfo, fileInfo.getIsShared(), fileInfo.getIsInLibrary() );
     }
 }
 
 //============================================================================
-void AppletLibrary::setFileFilter( EFileFilterType eFileFilter )
+void AppletSharedFiles::setFileFilter( EFileFilterType eFileFilter )
 {
     m_eFileFilterType = eFileFilter;
     m_FileFilterMask = ui.m_FileFilterComboBox->getMaskFromFileFilterType( m_eFileFilterType );
@@ -129,26 +127,26 @@ void AppletLibrary::setFileFilter( EFileFilterType eFileFilter )
 }
 
 //============================================================================
-void AppletLibrary::slotApplyFileFilter( unsigned char fileTypeMask )
+void AppletSharedFiles::slotApplyFileFilter( unsigned char fileTypeMask )
 {
     m_FileFilterMask = fileTypeMask;
     slotRequestFileList();
 }
 
 //============================================================================
-void AppletLibrary::slotRequestFileList( void )
+void AppletSharedFiles::slotRequestFileList( void )
 {
     clearFileList();
     m_FromGui.fromGuiGetFileLibraryList( m_FileFilterMask );
 }
 
 //============================================================================
-FileShareItemWidget * AppletLibrary::fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
+FileShareItemWidget * AppletSharedFiles::fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInSharedFiles )
 {
     FileShareItemWidget * item = new FileShareItemWidget( ui.m_FileItemList );
     item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
 
-    FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
+    FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInSharedFiles );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( ( quint64 )poItemInfo ) );
     connect( item, SIGNAL( signalFileShareItemClicked( QListWidgetItem* ) ), this, SLOT( slotItemClicked( QListWidgetItem* ) ) );
 
@@ -187,13 +185,13 @@ FileShareItemWidget * AppletLibrary::fileToWidget( VxMyFileInfo& fileInfo, bool 
 }
 
 //============================================================================
-void AppletLibrary::slotListFileIconClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListFileIconClicked( QListWidgetItem * item )
 {
     slotListItemClicked( item );
 }
 
 //============================================================================
-void AppletLibrary::slotListShareFileIconClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListShareFileIconClicked( QListWidgetItem * item )
 {
     FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
@@ -212,7 +210,7 @@ void AppletLibrary::slotListShareFileIconClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletLibrary::slotListLibraryIconClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListLibraryIconClicked( QListWidgetItem * item )
 {
     FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
@@ -233,7 +231,7 @@ void AppletLibrary::slotListLibraryIconClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListPlayIconClicked( QListWidgetItem * item )
 {
     FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
@@ -266,7 +264,7 @@ void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletLibrary::slotListShredIconClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListShredIconClicked( QListWidgetItem * item )
 {
     FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
@@ -288,7 +286,7 @@ void AppletLibrary::slotListShredIconClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-bool AppletLibrary::confirmDeleteFile( QString fileName, bool shredFile )
+bool AppletSharedFiles::confirmDeleteFile( QString fileName, bool shredFile )
 {
     bool acceptAction = true;
     bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();
@@ -323,13 +321,13 @@ bool AppletLibrary::confirmDeleteFile( QString fileName, bool shredFile )
 
 //============================================================================
 //!	get friend from QListWidgetItem data
-FileItemInfo * AppletLibrary::widgetToFileItemInfo( FileShareItemWidget * item )
+FileItemInfo * AppletSharedFiles::widgetToFileItemInfo( FileShareItemWidget * item )
 {
     return ( FileItemInfo * )item->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-FileShareItemWidget * AppletLibrary::findListEntryWidget( VxMyFileInfo& fileInfo )
+FileShareItemWidget * AppletSharedFiles::findListEntryWidget( VxMyFileInfo& fileInfo )
 {
     int iIdx = 0;
     FileShareItemWidget * poWidget;
@@ -348,21 +346,21 @@ FileShareItemWidget * AppletLibrary::findListEntryWidget( VxMyFileInfo& fileInfo
         iIdx++;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 //============================================================================
-void AppletLibrary::slotAddFilesButtonClicked( void )
+void AppletSharedFiles::slotAddFilesButtonClicked( void )
 {
     ActivityBrowseFiles dlg( m_MyApp, eFileFilterAll, this );
     dlg.exec();
     clearFileList();
-    statusMsg( "Requesting Library File List " );
+    statusMsg( "Requesting SharedFiles File List " );
     m_FromGui.fromGuiGetFileLibraryList( m_FileFilterMask );
 }
 
 //============================================================================
-void AppletLibrary::addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
+void AppletSharedFiles::addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
 {
     FileShareItemWidget* existingItem = findItemByFileName( fileInfo.getFullFileName() );
     if( existingItem )
@@ -381,22 +379,23 @@ void AppletLibrary::addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLib
         FileShareItemWidget* item = fileToWidget( fileInfo, isShared, isInLibrary );
         if( item )
         {
-            //LogMsg( LOG_INFO, "AppletLibrary::addFile: adding widget\n");
+            //LogMsg( LOG_INFO, "AppletSharedFiles::addFile: adding widget\n");
             ui.m_FileItemList->addItem( item );
             ui.m_FileItemList->setItemWidget( item, item );
         }
     }
+
 }
 
 //============================================================================
-void AppletLibrary::slotHomeButtonClicked( void )
+void AppletSharedFiles::slotHomeButtonClicked( void )
 {
     closeApplet();
 }
 
 //============================================================================
 //! user selected menu item
-void AppletLibrary::slotListItemClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListItemClicked( QListWidgetItem * item )
 {
     FileItemInfo * poInfo = ( FileItemInfo * )item->data( Qt::UserRole + 1 ).toLongLong();
     if( poInfo )
@@ -409,7 +408,7 @@ void AppletLibrary::slotListItemClicked( QListWidgetItem * item )
             m_SelectedFileName = fileInfo.getFullFileName().toUtf8().constData();
             m_SelectedFileLen = fileInfo.getFileLength();
             m_SelectedFileIsShared = poInfo->getIsShared();
-            m_SelectedFileIsInLibrary = poInfo->getIsInLibrary();
+            m_SelectedFileIsInSharedFiles = poInfo->getIsInLibrary();
             accept();
         }
         else
@@ -427,19 +426,19 @@ void AppletLibrary::slotListItemClicked( QListWidgetItem * item )
 
 //============================================================================
 //! user double clicked menu item
-void AppletLibrary::slotListItemDoubleClicked( QListWidgetItem * item )
+void AppletSharedFiles::slotListItemDoubleClicked( QListWidgetItem * item )
 {
     slotListItemClicked( item );
 }
 
 //============================================================================
-void AppletLibrary::clearFileList( void )
+void AppletSharedFiles::clearFileList( void )
 {
     ui.m_FileItemList->clear();
 }
 
 //============================================================================
-FileShareItemWidget* AppletLibrary::findItemByFileName( QString& fileName )
+FileShareItemWidget* AppletSharedFiles::findItemByFileName( QString& fileName )
 {
     int iIdx = 0;
     FileShareItemWidget* poWidget;

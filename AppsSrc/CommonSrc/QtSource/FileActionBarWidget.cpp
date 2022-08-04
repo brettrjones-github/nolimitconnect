@@ -100,10 +100,10 @@ void FileActionBarWidget::setIsShared( bool isShared )
 {
 	if( isShared )
 	{
-		ui.m_FileShareButton->setIcons( eMyIconShareFilesNormal );
+		ui.m_FileShareButton->setIcons( eMyIconServiceShareFiles );
 	}
 	else
 	{
-		ui.m_FileShareButton->setIcons( eMyIconShareFilesCancel );
+		ui.m_FileShareButton->setIcons( eMyIconShareFilesDisabled );
 	}
 }

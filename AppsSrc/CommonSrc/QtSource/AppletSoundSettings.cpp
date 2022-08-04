@@ -72,6 +72,7 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
     connect( ui.m_TestSoundDelayButton, SIGNAL( clicked() ), this, SLOT( slotStartTestSoundDelay() ) );
     connect( &m_MyApp.getSoundMgr(), SIGNAL(signalTestedSoundDelay(int)), this, SLOT(slotTestedSoundDelayResult(int)) );
     connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestState(EAudioTestState)), this, SLOT(slotAudioTestState(EAudioTestState)) );
+    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestMsg(QString)), this, SLOT(slotAudioTestMsg(QString)) );
 
     QAudioFormat mixerFormat;
     mixerFormat.setSampleRate( 8000 );
@@ -323,6 +324,14 @@ void AppletSoundSettings::slotTestedSoundDelayResult( int echoDelayMs )
         statusMsg( "Sound Delay Test Failed to detect delay. Check microphone and speaker are on" );
     }
 }
+
+
+//============================================================================
+void AppletSoundSettings::slotAudioTestMsg( QString audioTestMsg )
+{
+    setStatusLabel( audioTestMsg );
+}
+
 
 //============================================================================
 void AppletSoundSettings::slotEchoCancelEnableChange( int checkState )

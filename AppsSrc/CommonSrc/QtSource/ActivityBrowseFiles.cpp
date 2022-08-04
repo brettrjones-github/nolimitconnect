@@ -298,12 +298,12 @@ void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 		{
 			if( 0 == ui.FileItemList->count() )
 			{
-				LogMsg( LOG_INFO, "add directory %s\n", fileInfo.getJustFileName().toUtf8().constData() );
+				LogMsg( LOG_INFO, "add directory %s", fileInfo.getJustFileName().toUtf8().constData() );
 				ui.FileItemList->addItem( item );
 			}
 			else
 			{
-				LogMsg( LOG_INFO, "insert 0 directory %s\n", fileInfo.getJustFileName().toUtf8().constData() );
+				LogMsg( LOG_INFO, "insert 0 directory %s", fileInfo.getJustFileName().toUtf8().constData() );
 				ui.FileItemList->insertItem( 0, (QListWidgetItem *)item );
 			}
 		}
@@ -323,7 +323,7 @@ void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 				if( poInfo->getJustFileName() > justFileName )
 				{
 					itemInserted = true;
-					LogMsg( LOG_INFO, "insert %d file %s\n", i, fileInfo.getJustFileName().toUtf8().constData() );
+					LogMsg( LOG_INFO, "inserted %d file %s", i, fileInfo.getJustFileName().toUtf8().constData() );
 					ui.FileItemList->insertItem( i, (QListWidgetItem *)item );
 					break;
 				}
@@ -332,7 +332,7 @@ void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 
 			if( false == itemInserted )
 			{
-				LogMsg( LOG_INFO, "add file %s\n", fileInfo.getJustFileName().toUtf8().constData() );
+				LogMsg( LOG_INFO, "add file %s", fileInfo.getJustFileName().toUtf8().constData() );
 				ui.FileItemList->addItem( item );
 			}
 		}
@@ -632,7 +632,7 @@ void ActivityBrowseFiles::setActionEnable( bool enable )
 {
 	m_bFetchInProgress = enable ? false : true;
 
-	LogMsg( LOG_INFO, "Fetch In Progress %d\n", m_bFetchInProgress );
+	LogMsg( LOG_INFO, "Fetch In Progress %d", m_bFetchInProgress );
 	ui.m_UpDirectoryButton->setEnabled( enable );
 }
 

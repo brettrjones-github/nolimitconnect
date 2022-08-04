@@ -70,6 +70,8 @@ protected slots:
 
     void                        slotNewUrlSelected( int comboBoxIdx );
 
+    void                        slotLoopBackAllowStateChange( int checkBoxState );
+
 protected:
     void						setupApplet( void );
     void						updateDlgFromSettings( void );

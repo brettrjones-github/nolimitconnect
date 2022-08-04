@@ -204,7 +204,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendListDelegate.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileActionBarWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileActionMenu.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/FileItemWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileListReplySession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileShareItemWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileXferWidget.h \
@@ -582,7 +581,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileActionBarWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileActionMenu.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileItemInfo.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/FileItemWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileListReplySession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileShareItemWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileXferWidget.cpp \
@@ -876,7 +874,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileActionBarWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileActionMenu.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileDisplayWidget.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/FileItemWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileShareItemWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileXferWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FriendListDlg.ui \

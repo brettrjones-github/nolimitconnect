@@ -101,6 +101,12 @@ QSize GuiParams::getButtonSize( EButtonSize buttonSize )
 }
 
 //============================================================================
+int GuiParams::getFileListEntryHeight( void )
+{
+    return getButtonSize( eButtonSizeLarge ).height() + 4;
+}
+
+//============================================================================
 QSize GuiParams::getThumbnailSize( void )
 {
     return QSize( 240, 240 ); 

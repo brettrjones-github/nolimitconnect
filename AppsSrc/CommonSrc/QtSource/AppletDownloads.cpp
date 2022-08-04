@@ -102,8 +102,7 @@ void AppletDownloads::onBackButtonClicked( void )
 FileXferWidget * AppletDownloads::sessionToWidget( GuiFileXferSession * poSession )
 {
 	FileXferWidget * item = new FileXferWidget(ui.m_FileItemList);
-    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
+	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
 
     item->setFileItemInfo( poSession );
 

@@ -128,12 +128,14 @@ AppletTestAndDebug::AppletTestAndDebug( AppCommon& app, QWidget * parent )
     connect( ui.m_PingRemoteUrlButton, SIGNAL( clicked() ), this, SLOT( slotPingRemoteUrlButtonClicked() ) );
     connect( ui.m_TempTestButton, SIGNAL( clicked() ), this, SLOT( slotTempTestButtonClicked() ) );
 
-    connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
-    connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+    connect( this, SIGNAL( signalLogMsg(const QString&) ), this, SLOT( slotInfoMsg(const QString&) ) );
+    connect( this, SIGNAL( signalInfoMsg(const QString&) ), this, SLOT( slotInfoMsg(const QString&) ) );
 
     connect( ui.m_TestUrlsComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotNewUrlSelected( int ) ) );
     connect( &m_MyApp, SIGNAL( signalRunTestStatus( QString, ERunTestStatus, QString ) ),
         this, SLOT( slotRunTestStatus( QString, ERunTestStatus, QString ) ) );
+
+    connect( ui.m_AllowLoopbackCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotLoopBackAllowStateChange(int)) );
 
     updateDlgFromSettings();
 
@@ -537,4 +539,10 @@ void AppletTestAndDebug::slotTempTestButtonClicked( void )
 {
     VxGUID assetId;
     m_MyApp.launchApplet( eAppletAboutMeClient, getContentFrameOfOppositePageFrame(), QString("F:/AboutMeTestPage/story_board.htm"), assetId );
+}
+
+//============================================================================
+void AppletTestAndDebug::slotLoopBackAllowStateChange( int checkBoxState )
+{
+    m_MyApp.setLoopbackTestAllowed( checkBoxState );
 }

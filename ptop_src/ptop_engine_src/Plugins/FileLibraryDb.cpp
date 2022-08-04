@@ -92,7 +92,7 @@ void FileLibraryDb::addFile( const char * fileName, int64_t fileLen, uint8_t fil
 	bindList.add( (void *)fileHashId, 20 );
 	bindList.add( fileTime );
 
-	RCODE rc  = sqlExec( "INSERT INTO library_files (file_name,file_length,file_type,asset_id,file_hash) values(?,?,?,?,?,?)",
+	RCODE rc  = sqlExec( "INSERT INTO library_files (file_name,file_length,file_type,asset_id,file_hash,file_time) values(?,?,?,?,?,?)",
 		bindList );
 	if( rc )
 	{

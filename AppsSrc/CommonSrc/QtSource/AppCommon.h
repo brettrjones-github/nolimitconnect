@@ -118,6 +118,9 @@ public:
     void                        setIsAppInitialized( bool initialized )     { m_AppInitialized = initialized; }
     bool                        getIsAppInitialized( void )                 { return m_AppInitialized; }
 
+    void                        setLoopbackTestAllowed( bool allow )        { m_LoopbackTestAllowed = allow; }
+    bool                        getLoopbackTestAllowed( void )              { return m_LoopbackTestAllowed; }
+
     AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
     AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
@@ -940,6 +943,7 @@ protected:
     bool                        m_IsMessengerReady{ false };
     bool                        m_IsLoggedOn{ false };
     bool                        m_IsSystemReady{ false };
+    bool                        m_LoopbackTestAllowed{ false };
 
 //    KodiThread *                m_KodiThread;
 };

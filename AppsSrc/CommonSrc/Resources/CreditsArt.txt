@@ -89,6 +89,8 @@ image-rotate.svg (modified)
 invite.svg
 key-disabled.svg
 key-enabled.svg
+library.svg
+library-removed.svg (modified)
 linked.svg
 mediatype-audio.svg
 mediatype-video.svg

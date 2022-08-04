@@ -98,6 +98,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletScanSharedFiles:	        return eMyIconSearchFolder;
     case eAppletScanWebCam:	                return eMyIconSearchWebCam;
 
+    case eAppletSharedFiles:				return eMyIconShareFilesNormal;
+
     case eAppletTestAndDebug:	            return eMyIconDebug;
     case eAppletTestHostClient:	            return eMyIconDebug;
     case eAppletTestHostService:	        return eMyIconDebug;
@@ -316,6 +318,8 @@ QString DescribeApplet( EApplet applet )
 
     case eAppletDownloads:                  return QObject::tr( "Downloads" );
     case eAppletUploads:                    return QObject::tr( "Uploads" );
+
+    case eAppletSharedFiles:				return QObject::tr( "Shared Files List" );
 
     case eAppletPopupMenu:                  return QObject::tr( "Menu" );
 

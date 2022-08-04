@@ -106,8 +106,7 @@ void ActivityViewMySharedFiles::setTitle( QString strTitle )
 FileShareItemWidget * ActivityViewMySharedFiles::fileToWidget( VxMyFileInfo&	fileInfo, bool isShared )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
-    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
+	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
 
 	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo );
 	bool isInLibrary = m_Engine.fromGuiGetIsFileInLibrary( fileInfo.getFullFileName().toUtf8().constData() );

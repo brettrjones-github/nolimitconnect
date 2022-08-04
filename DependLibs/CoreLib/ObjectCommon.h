@@ -161,6 +161,8 @@
 #define OBJNAME_APPLET_SETTINGS_VIDEO_PHONE			    "AppletSettingsVideoPhone"
 #define OBJNAME_APPLET_SETTINGS_VOICE_PHONE			    "AppletSettingsVoicePhone"
 
+#define OBJNAME_APPLET_SHARED_FILES_LIST				"AppletSharedFiles"
+
 #define OBJNAME_APPLET_SHARE_OFFER_LIST			        "AppletShareOfferList"
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
 #define OBJNAME_APPLET_SOUND_SETTINGS			        "AppletSoundSettings"

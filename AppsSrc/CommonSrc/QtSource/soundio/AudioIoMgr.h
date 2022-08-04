@@ -131,6 +131,7 @@ signals:
     void                        signalNeedMoreAudioData( int requiredLen );
     void                        signalAudioTestState( EAudioTestState audioTestState );
     void                        signalTestedSoundDelay( int echoDelayMs );
+    void                        signalAudioTestMsg(QString audioTestMsg);
 
 public slots:
     void                        speakerStateChanged( QAudio::State state );

@@ -328,5 +328,6 @@
         <file>Resources/nlc-icon.svg</file>
         <file>Resources/sound-settings.svg</file>
         <file>Resources/edit-hyperlink.svg</file>
+        <file>Resources/library-removed.svg</file>
     </qresource>
 </RCC>

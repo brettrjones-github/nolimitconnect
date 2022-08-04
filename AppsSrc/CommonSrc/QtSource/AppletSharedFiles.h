@@ -28,21 +28,21 @@ class FileItemInfo;
 class FileListReplySession;
 class VxMyFileInfo;
 
-class AppletLibrary : public AppletBase, public ToGuiFileXferInterface
+class AppletSharedFiles : public AppletBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
-	AppletLibrary( AppCommon& app, QWidget * parent, QString launchParam = "" );
-	virtual ~AppletLibrary();
+	AppletSharedFiles( AppCommon& app, QWidget * parent, QString launchParam = "" );
+	virtual ~AppletSharedFiles();
 
-    void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
+    void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInSharedFiles );
     void						setFileFilter( EFileFilterType eFileFilter );
     bool						getWasFileSelected( void )						{ return m_FileWasSelected; }
     uint8_t						getSelectedFileType( void )						{ return m_SelectedFileType; }
     QString						getSelectedFileName( void )						{ return m_SelectedFileName; }
     uint64_t					getSelectedFileLen( void )						{ return m_SelectedFileLen; }
     bool						getSelectedFileIsShared( void )					{ return m_SelectedFileIsShared; }
-    bool						getSelectedFileIsInLibrary( void )				{ return m_SelectedFileIsInLibrary; }
+    bool						getSelectedFileIsInSharedFiles( void )		    { return m_SelectedFileIsInSharedFiles; }
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
@@ -65,7 +65,7 @@ protected:
     virtual void				hideEvent( QHideEvent * ev ) override;
     virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
-    FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
+    FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInSharedFiles );
     FileItemInfo *				widgetToFileItemInfo( FileShareItemWidget * item );
 
     FileShareItemWidget *		findListEntryWidget( VxMyFileInfo& fileInfo );
@@ -83,7 +83,7 @@ protected:
     QString						m_SelectedFileName;
     uint64_t					m_SelectedFileLen;
     bool						m_SelectedFileIsShared;
-    bool						m_SelectedFileIsInLibrary;
+    bool						m_SelectedFileIsInSharedFiles;
     EFileFilterType				m_eFileFilterType;
     uint8_t						m_FileFilterMask;
 };

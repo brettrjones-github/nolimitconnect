@@ -557,5 +557,28 @@ void AudioIoMgr::setAudioTestState( EAudioTestState audioTestState )
 //============================================================================
 void AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs )
 {
+    QString resultMsg;
+    int64_t timeDif = soundDetectTimeMs - soundOutTimeMs;
+    if(!soundOutTimeMs || !soundDetectTimeMs)
+    {
+        timeDif = 0;
+        resultMsg = QObject::tr("Sound Delay Not Detected ");
+    }
+    else if( timeDif < 50 )
+    {
+        resultMsg = QObject::tr("Sound Delay too short.. probably noise ");
+    }
+    else if( timeDif > 500 )
+    {
+        resultMsg = QObject::tr("Sound Delay too long.. probably mic level low ");
+    }
+    else
+    {
+        resultMsg = QObject::tr("Sound Delay is ");
+    }
 
+    resultMsg += QString::number((int)timeDif);
+
+
+    emit signalAudioTestMsg(resultMsg);
 }

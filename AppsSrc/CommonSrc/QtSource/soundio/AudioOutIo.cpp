@@ -249,7 +249,8 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
             int16_t* sampleBuf = (int16_t*)data;
             // create a 480 hz square wave tone for 10 ms
             int maxSamplesToSet = AudioUtils::audioSamplesRequiredForGivenMs( m_AudioFormat, 10 );
-            int samplesCycle = 10;
+            maxSamplesToSet = std::min( maxSamplesToSet, (int)maxlen / 2 );
+            int samplesCycle = (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) ;
             bool sampleIsMax{ true };
             for( int i = 0; i < maxSamplesToSet; i += samplesCycle )
             {

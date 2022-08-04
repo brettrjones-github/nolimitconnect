@@ -134,8 +134,7 @@ void ActivityViewLibraryFiles::slotRequestFileList( void )
 FileShareItemWidget * ActivityViewLibraryFiles::fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.m_FileItemList);
-    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
+    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ), GuiParams::getFileListEntryHeight() ) );
 
 	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poItemInfo) );

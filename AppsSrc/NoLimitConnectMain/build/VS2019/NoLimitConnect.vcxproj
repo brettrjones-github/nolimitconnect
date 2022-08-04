@@ -275,6 +275,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsTruthOrDare.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsVideoPhone.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsVoicePhone.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareOfferList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareServicesPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSnapshot.cpp" />
@@ -310,7 +311,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileActionBarWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileActionMenu.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileItemInfo.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\FileItemWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileListReplySession.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileShareItemWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileXferWidget.cpp" />
@@ -545,6 +545,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -733,7 +734,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileXferWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileShareItemWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileListReplySession.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\FileItemWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileActionMenu.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileActionBarWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\DialogConfirmRemoveMessage.h" />
@@ -993,7 +993,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\FileActionBarWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FileActionMenu.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FileDisplayWidget.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\FileItemWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FileShareItemWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FileXferWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FriendListDlg.ui" />
@@ -1052,6 +1051,9 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\..\..\bin-Android\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\CommonSrc\Resources\CreditsArt.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

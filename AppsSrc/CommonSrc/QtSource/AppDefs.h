@@ -73,6 +73,7 @@ enum EApplet
     eAppletUserIdentity,
     eAppletPersonalRecorder,
     eAppletLibrary,
+    eAppletSharedFiles,
     eAppletShareServicesPage,       // page to setup share with others services
     eAppletDownloads,
     eAppletUploads,

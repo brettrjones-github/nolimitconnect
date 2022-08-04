@@ -554,7 +554,7 @@ QString MyIcons::getIconFile( enum EMyIcons eMyIcon )
 	case eMyIconLibraryNormal:
 		return ":/AppRes/Resources/library.svg";
 	case eMyIconLibraryCancel:
-		return ":/AppRes/Resources/library.svg";
+		return ":/AppRes/Resources/library-removed.svg";
 
 	case eMyIconEchoCancelNormal:
 		return ":/AppRes/Resources/speakers-on.svg";

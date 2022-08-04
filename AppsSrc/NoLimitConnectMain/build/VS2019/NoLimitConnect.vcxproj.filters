@@ -470,9 +470,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileActionMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\FileItemWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FileListReplySession.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -944,6 +941,9 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp">
@@ -1328,9 +1328,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileItemInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\FileItemWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FileListReplySession.cpp">
@@ -2032,6 +2029,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2608,9 +2608,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\FileDisplayWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\FileItemWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\FileShareItemWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2844,5 +2841,10 @@
     <Xml Include="..\..\..\..\bin-Android\AndroidManifest.xml">
       <Filter>Android Files</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\CommonSrc\Resources\CreditsArt.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

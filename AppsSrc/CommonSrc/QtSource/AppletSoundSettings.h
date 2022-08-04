@@ -64,6 +64,7 @@ protected slots:
     void                        slotTestedSoundDelayResult( int echoDelayMs );
     void                        slotEchoCancelEnableChange( int checkState );
     void                        slotAudioTestState( EAudioTestState audioTestState );
+    void                        slotAudioTestMsg( QString audioTestMsg );
 
 protected:
     void                        showEvent( QShowEvent* ev ) override;

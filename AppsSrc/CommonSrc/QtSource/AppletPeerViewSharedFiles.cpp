@@ -183,8 +183,7 @@ void AppletPeerViewSharedFiles::slotApplyFileFilter( unsigned char fileTypeMask 
 FileXferWidget * AppletPeerViewSharedFiles::fileToWidget( GuiUser * netIdent, VxMyFileInfo& fileInfo )
 {
 	FileXferWidget * item = new FileXferWidget(ui.FileItemList);
-    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
+	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
     VxGUID lclSessionId;
     lclSessionId.initializeWithNewVxGUID();
 	GuiFileXferSession * xferSession = new GuiFileXferSession(	ePluginTypeFileShareServer, 

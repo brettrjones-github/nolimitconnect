@@ -119,6 +119,7 @@
 
 #include "AppletSettingsPage.h"
 #include "AppletSearchPage.h"
+#include "AppletSharedFiles.h"
 #include "AppletShareOfferList.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSnapshot.h"
@@ -284,6 +285,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletScanStoryboard:             appletDialog = new ActivityScanStoryBoards( m_MyApp, launchFrame ); break;
     case eAppletScanSharedFiles:            appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
     case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
+
+    case eAppletSharedFiles:                appletDialog = new AppletSharedFiles( m_MyApp, parent, launchParam ); break;
 
     case eAppletCamClipPlayer:              appletDialog = new AppletCamClipPlayer( m_MyApp, parent, assetId ); break;
     case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
