@@ -261,8 +261,8 @@ void StoryWidget::setupTextActions()
 		this, SLOT(textFamily(QString)));
 
 	ui.m_FontSizeComboBox->setEditable(true);
-	QFontDatabase db;
-	foreach(int size, db.standardSizes())
+    //QFontDatabase db;
+    foreach(int size, QFontDatabase::standardSizes())
 		ui.m_FontSizeComboBox->addItem(QString::number(size));
 
 	connect(ui.m_FontSizeComboBox, SIGNAL(activated(QString)),
@@ -551,8 +551,10 @@ void StoryWidget::textItalic()
 //============================================================================
 void StoryWidget::textFamily(const QString &f)
 {
+    QStringList fontList;
+    fontList.push_back(f);
     QTextCharFormat fmt;
-    fmt.setFontFamily( f );
+    fmt.setFontFamilies( fontList );
     mergeFormatOnWordOrSelection( fmt );
 }
 

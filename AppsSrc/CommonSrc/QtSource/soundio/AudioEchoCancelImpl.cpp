@@ -237,7 +237,7 @@ bool AudioEchoCancelImpl::speakerReadSamples( int16_t* speakerReadBuf, int sampl
 //============================================================================
 bool AudioEchoCancelImpl::processEchoCancel( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData )
 {
-	int64_t micTimeMs = micWriteTimeEstimation( GetGmtTimeMs() );
+    // int64_t micTimeMs = micWriteTimeEstimation( GetGmtTimeMs() );
 	bool micIsMuted = m_AudioIoMgr.fromGuiIsMicrophoneMuted();
 	bool speakerMuted = m_AudioIoMgr.fromGuiIsSpeakerMuted();
 	if( !m_EchoCancelEnable || micIsMuted || speakerMuted )
@@ -246,7 +246,7 @@ bool AudioEchoCancelImpl::processEchoCancel( int16_t* micWriteBuf, int sampleCnt
 	}
 
 	bool wasEchoCanceled{ false };
-	int samplesProcessed{ 0 };
+    // int samplesProcessed{ 0 };
 	bool echoProcessing = true;
 
 	while( echoProcessing && m_SpeakerBufs.size() )

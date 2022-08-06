@@ -282,7 +282,7 @@ void CamLogic::selectVideoFormat( const QCameraDevice& cameraDevice )
             }
 
             int formatNum = 0;
-            int defaultFormatNum = 0;
+
             for( const auto& format : formats ) 
             {
                 formatNum++;
@@ -299,8 +299,7 @@ void CamLogic::selectVideoFormat( const QCameraDevice& cameraDevice )
                         if( defaultFormat.resolution().width() >= targetSize.width() && defaultFormat.resolution().height() >= targetSize.height() )
                         {
                             defaultFormatInvalid = false;
-                            defaultFormatNum = formatNum;
-                        }
+                       }
                     }
                 }
             }

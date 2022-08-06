@@ -698,7 +698,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             {
                 const QVariant readOnly = widget->property( "readOnly" );
 
-                if( ( readOnly.type() == QVariant::Bool ) && ( readOnly == true ) )
+                if( ( readOnly.typeId() == QVariant::Bool ) && ( readOnly == true ) )
                 {
                     drawArrow = false;
                 }

@@ -236,7 +236,7 @@ void RenderGlWidget::keyReleaseEvent( QKeyEvent * ev )
 void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
 {
     takeSnapshot();
-    if( !m_QtToKodi.fromGuiMousePressEvent( ev->x(), ev->y(), ev->button() ) )
+    if( !m_QtToKodi.fromGuiMousePressEvent( ev->position().x(), ev->position().y(), ev->button() ) )
     {
         QWidget::mousePressEvent( ev );
     }
@@ -245,7 +245,7 @@ void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
 //============================================================================
 void RenderGlWidget::mouseReleaseEvent( QMouseEvent * ev )
 {
-    if( !m_QtToKodi.fromGuiMouseReleaseEvent( ev->x(), ev->y(), ev->button() ) )
+    if( !m_QtToKodi.fromGuiMouseReleaseEvent( ev->position().x(), ev->position().y(), ev->button() ) )
     {
         QWidget::mouseReleaseEvent( ev );
     }
@@ -254,7 +254,7 @@ void RenderGlWidget::mouseReleaseEvent( QMouseEvent * ev )
 //============================================================================
 void RenderGlWidget::mouseMoveEvent( QMouseEvent * ev )
 {
-    if( !m_QtToKodi.fromGuiMouseMoveEvent( ev->x(), ev->y() ) )
+    if( !m_QtToKodi.fromGuiMouseMoveEvent( ev->position().x(), ev->position().y() ) )
     {
         QWidget::mouseMoveEvent( ev );
     }

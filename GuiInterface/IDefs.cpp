@@ -185,7 +185,7 @@ namespace
 
         "Host UnJoin Sending Request ",
         "Host UnJoin Send Request Failed ",
-        "Host UnJoin Success "
+        "Host UnJoin Success ",
         "Host UnJoin Failed ",
 
         "Max Host Join Status ",
@@ -1440,8 +1440,10 @@ EPluginType HostPluginToClientPluginType( EPluginType pluginType )
         return ePluginTypeClientConnectTest;
 
     case ePluginTypeInvalid:
-        LogMsg( LOG_ERROR, "HostPluginToClientPluginType unknown plugin type %d", pluginType );
+        LogMsg( LOG_ERROR, "HostPluginToClientPluginType invalid plugin type %d", pluginType );
+        return pluginType;
     default:
+        LogMsg( LOG_ERROR, "HostPluginToClientPluginType unknown plugin type %d", pluginType );
         return pluginType;
     }
 }
@@ -1471,8 +1473,10 @@ EPluginType ClientPluginToHostPluginType( EPluginType pluginType )
         return ePluginTypeHostConnectTest;
 
     case ePluginTypeInvalid:
-        LogMsg( LOG_ERROR, "ClientPluginToHostPluginType unknown plugin type %d", pluginType );
+        LogMsg( LOG_ERROR, "ClientPluginToHostPluginType invalid plugin type %d", pluginType );
+        return pluginType;
     default:
+        LogMsg( LOG_ERROR, "ClientPluginToHostPluginType unknown plugin type %d", pluginType );
         return pluginType;
     }
 }
