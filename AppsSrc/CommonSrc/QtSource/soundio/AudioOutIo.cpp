@@ -278,15 +278,31 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     bool echoCancelEnabled = m_AudioIoMgr.geAudioEchoCancel().isEchoCancelEnabled();
     if( echoCancelEnabled )
     {
-        // echo cancel runs at 16000 hz. audio out device runs at 48000 hz
-        int echoSampleDivide = getUpsampleMultiplier() / 2;
-        int echoSampleCnt = maxlen / (echoSampleDivide * 2);
-        int16_t* echoSpeakerdData = new int16_t[ echoSampleCnt ];
-        AudioUtils::dnsamplePcmAudio( (int16_t*)data, echoSampleCnt, echoSampleDivide, echoSpeakerdData );
-        bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().speakerReadSamples( echoSpeakerdData, echoSampleCnt );
-        if( !echoHasBufferOwnership )
+        if( ECHO_SAMPLE_RATE == 8000 )
         {
-            delete[] echoSpeakerdData;
+            // echo cancel runs at 8000 hz. audio out device runs at 48000 hz
+            int echoSampleDivide = getUpsampleMultiplier();
+            int echoSampleCnt = maxlen / echoSampleDivide;
+            int16_t* echoSpeakerdData = new int16_t[ echoSampleCnt ];
+            AudioUtils::dnsamplePcmAudio( (int16_t*)data, echoSampleCnt, echoSampleDivide, echoSpeakerdData );
+            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().speakerReadSamples( echoSpeakerdData, echoSampleCnt );
+            if( !echoHasBufferOwnership )
+            {
+                delete[] echoSpeakerdData;
+            }
+        }
+        else if( ECHO_SAMPLE_RATE == 16000 )
+        {
+            // echo cancel runs at 16000 hz. audio out device runs at 48000 hz
+            int echoSampleDivide = getUpsampleMultiplier() / 2;
+            int echoSampleCnt = maxlen / (echoSampleDivide * 2);
+            int16_t* echoSpeakerdData = new int16_t[ echoSampleCnt ];
+            AudioUtils::dnsamplePcmAudio( (int16_t*)data, echoSampleCnt, echoSampleDivide, echoSpeakerdData );
+            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().speakerReadSamples( echoSpeakerdData, echoSampleCnt );
+            if( !echoHasBufferOwnership )
+            {
+                delete[] echoSpeakerdData;
+            }
         }
     }
 

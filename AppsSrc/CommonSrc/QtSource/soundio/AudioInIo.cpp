@@ -226,7 +226,7 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
 
 
     // Qt no longer supports 8000 hz on all devices so everthing in is 48000 hz pcm data
-    // webrtc says it support 8000 hz echo cancel but seems to have issues so use 16000 hz for echo cancel
+    // webrtc says it support 8000 hz echo cancel but seems to have issues so use 16000 hz for echo cancel fpr webrtc
     // ptop engine uses 8000 hz only
 
     int outSampleCnt = inSampleCnt / m_DivideCnt;
@@ -235,17 +235,28 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     bool echoCancelEnabled = m_AudioIoMgr.geAudioEchoCancel().isEchoCancelEnabled();
     if( echoCancelEnabled )
     {
-        int echoSampleCnt = outSampleCnt * 2;
-        int16_t* echoMicData = new int16_t[ echoSampleCnt ];
-        int16_t* echoCanceledData = new int16_t[ echoSampleCnt ];
-        AudioUtils::dnsamplePcmAudio( sampleInData, echoSampleCnt, m_DivideCnt / 2, echoMicData );
-        bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().microphoneWroteSamples( echoMicData, echoSampleCnt, echoCanceledData );
-        AudioUtils::dnsamplePcmAudio( echoCanceledData, outSampleCnt, 2, sampleOutData );
-        delete[] echoMicData;
-        if( !echoHasBufferOwnership )
+        if( ECHO_SAMPLE_RATE == 8000 )
         {
-            delete[] echoCanceledData;
-        }   
+            int echoSampleCnt = outSampleCnt;
+            int16_t* echoMicData = new int16_t[ echoSampleCnt ];
+            AudioUtils::dnsamplePcmAudio( sampleInData, echoSampleCnt, m_DivideCnt, echoMicData );
+            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().microphoneWroteSamples( echoMicData, echoSampleCnt, sampleOutData );
+            delete[] echoMicData;
+        }
+        else if( ECHO_SAMPLE_RATE == 16000 )
+        {
+            int echoSampleCnt = outSampleCnt * 2;
+            int16_t* echoMicData = new int16_t[ echoSampleCnt ];
+            int16_t* echoCanceledData = new int16_t[ echoSampleCnt ];
+            AudioUtils::dnsamplePcmAudio( sampleInData, echoSampleCnt, m_DivideCnt / 2, echoMicData );
+            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().microphoneWroteSamples( echoMicData, echoSampleCnt, echoCanceledData );
+            AudioUtils::dnsamplePcmAudio( echoCanceledData, outSampleCnt, 2, sampleOutData );
+            delete[] echoMicData;
+            if( !echoHasBufferOwnership )
+            {
+                delete[] echoCanceledData;
+            }
+        }
     }
     else
     {

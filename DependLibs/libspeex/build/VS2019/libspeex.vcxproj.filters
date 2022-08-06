@@ -9,7 +9,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
-    <Filter Include="GoTvConfig">
+    <Filter Include="Config">
       <UniqueIdentifier>{29e20279-28de-4b27-ae0a-c35aa2722bf8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -198,31 +198,13 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\AppCompilerConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvCompilerIntTypes.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvConfigAndroid.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvConfigLinux.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvConfigWindows.h">
-      <Filter>GoTvConfig</Filter>
+      <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\AppCpuArchDefines.h">
-      <Filter>GoTvConfig</Filter>
+      <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h">
-      <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
-      <Filter>GoTvConfig</Filter>
+      <Filter>Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -361,14 +361,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\AppCompilerConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvCompilerIntTypes.h" />
-    <ClInclude Include="..\..\..\..\GoTvConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvConfigAndroid.h" />
-    <ClInclude Include="..\..\..\..\GoTvConfigLinux.h" />
-    <ClInclude Include="..\..\..\..\GoTvConfigWindows.h" />
     <ClInclude Include="..\..\..\..\AppCpuArchDefines.h" />
     <ClInclude Include="..\..\..\..\AppDependLibrariesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
     <ClInclude Include="..\..\arch.h" />
     <ClInclude Include="..\..\cb_search.h" />
     <ClInclude Include="..\..\cb_search_arm4.h" />

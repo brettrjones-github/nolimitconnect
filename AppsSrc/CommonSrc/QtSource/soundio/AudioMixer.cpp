@@ -267,7 +267,7 @@ void AudioMixer::mixerWasReadByOutput( int readLen, int upSampleMult )
 
 //============================================================================
 /// space available to que audio data into buffer
-int AudioMixer::audioQueFreeSpace( EAppModule appModule, bool mixerIsLocked)
+int AudioMixer::audioQueFreeSpace( EAppModule appModule, bool mixerIsLocked )
 {
     int freeSpace = MAX_MIXER_FRAMES * getMixerFrameSize() - audioQueUsedSpace( appModule, mixerIsLocked );
     if( freeSpace < 0 )
