@@ -32,7 +32,6 @@ public:
 
 	void						playMotionVideoFrame( QImage& vidFrame, int motion0To100000 );
     void                        playVideoFrame( QImage& vidFrame );
-	void						playRotatedVideoFrame( QImage& vidFrame, int iRotate );
 
 	void						setVidImageRotation( int imageRotation )		{ m_VidImageRotation = imageRotation; }
 	int							getVidImageRotation( void )						{ return m_VidImageRotation; }
@@ -42,6 +41,9 @@ public:
 
 signals:
 	void						clicked();
+
+protected slots:
+    void						playRotatedVideoFrame( QImage& vidFrame, int iRotate );
 
 protected:
 	void						resizeBitmapToFitScreen( QImage& picBitmap );

@@ -48,7 +48,7 @@ public:
 
 signals:
 	void						signalWebCamClientDlgClosed( VxNetIdent * netIdent );
-	void						signalPlayVideoFrame( QPixmap oPicBitmap, int iRotate );
+    void						signalPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
 public slots:

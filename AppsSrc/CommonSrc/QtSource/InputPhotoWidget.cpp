@@ -53,7 +53,7 @@ InputPhotoWidget::InputPhotoWidget( QWidget * parent )
 	connect( ui.m_RotateCamButton,				SIGNAL(clicked()),							this, SLOT(slotRotateCamButtonClicked()) );
 	connect( ui.m_SelectCamButton,				SIGNAL(clicked()),							this, SLOT(slotSelectCamButtonClicked()) );
 	connect( ui.m_CancelPhotoButton,			SIGNAL(clicked()),							this, SLOT(slotCancelPhotoButtonClicked()) );
-	connect( ui.m_VidWidget->getVideoScreen(),	SIGNAL(signalPlayVideoFrame( QPixmap,int)),	this, SLOT(slotVideoFrameBitmap( QPixmap,int)) );
+    connect( ui.m_VidWidget->getVideoScreen(),	SIGNAL(signalPlayVideoFrame( QImage,int)),	this, SLOT(slotVideoFrameBitmap( QImage,int)) );
     connect( ui.m_BackButton, SIGNAL( clicked() ), this, SLOT( slotExitPhotoWidget() ) );
 }
 
@@ -151,9 +151,9 @@ void InputPhotoWidget::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QI
 }
 
 //============================================================================
-void InputPhotoWidget::slotVideoFrameBitmap( QPixmap picBitmap, int iRotate )
+void InputPhotoWidget::slotVideoFrameBitmap( QImage picBitmap, int iRotate )
 {
-	m_PicImage = picBitmap;
+    m_PicImage = m_PicImage.fromImage(picBitmap);
 }
 
 //============================================================================

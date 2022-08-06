@@ -27,7 +27,7 @@ VxLabel::VxLabel(QWidget *parent, Qt::WindowFlags f)
 {
     setObjectName( "VxLabel" );
     m_behindFrameCnt = 0;
-    connect( this, SIGNAL( signalPlayVideoFrame( QImage, int ) ), this, SLOT( slotPlayVideoFrame( QImage, int ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalPlayVideoFrame( QImage, int ) ), this, SLOT( playRotatedVideoFrame( QImage, int ) ), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -37,7 +37,7 @@ VxLabel::VxLabel(const QString &text, QWidget *parent, Qt::WindowFlags f)
 , m_VidImageRotation( 0 )
 {
     m_behindFrameCnt = 0;
-    connect( this, SIGNAL( signalPlayVideoFrame( QImage, int ) ), this, SLOT( slotPlayVideoFrame( QImage, int ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalPlayVideoFrame( QImage, int ) ), this, SLOT( playRotatedVideoFrame( QImage, int ) ), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -219,7 +219,7 @@ void VxLabel::playVideoFrame( unsigned char * pu8Jpg, unsigned long u32JpgLen, i
 	if( oPicBitmap.loadFromData( pu8Jpg, u32JpgLen, "JPG" ) )
 	{
         m_behindFrameCnt++;
-		emit signalPlayVideoFrame( QPixmap::fromImage( oPicBitmap ), m_VidImageRotation );
+        emit signalPlayVideoFrame( oPicBitmap, m_VidImageRotation );
 	}
 }
 
@@ -245,7 +245,7 @@ int VxLabel::playVideoFrame( uint8_t * picBuf, uint32_t picBufLen, int picWidth,
             LogMsg( LOG_INFO, " VxLabel::playVideoFrame len %d behind %d", picBufLen, m_behindFrameCnt.load() );
             m_behindFrameCnt++;
             // setPixmap( QPixmap::fromImage( picBitmap ) );
-            emit signalPlayVideoFrame( QPixmap::fromImage( picBitmap ), m_VidImageRotation );
+            emit signalPlayVideoFrame( picBitmap, m_VidImageRotation );
         }
         else
         {
