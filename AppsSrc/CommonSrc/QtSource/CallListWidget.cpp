@@ -246,7 +246,7 @@ void CallListWidget::onMenuButtonClicked( CallListItem* userItem )
 //============================================================================
 void CallListWidget::slotMyIdentUpdated( GuiOfferSession* user )
 {
-    if( getShowMyself() )
+    if( m_MyApp.getLoopbackMyselfTestAllowed() )
     {
         updateCall( user );
     }

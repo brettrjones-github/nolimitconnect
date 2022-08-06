@@ -81,6 +81,15 @@ void GuiUserListItem::onIdentAvatarButtonClicked()
     LogMsg( LOG_DEBUG, "GuiUserListItem::onIdentAvatarButtonClicked" );
     emit signalAvatarButtonClicked( this );
 }
+
+// Allow default behavior
+//============================================================================
+//void GuiUserListItem::onIdentFriendshipButtonClicked()
+//{
+//    LogMsg( LOG_DEBUG, "GuiUserListItem::onIdentFrienshipButtonClicked" );
+//    emit signalFriendshipButtonClicked( this );
+//}
+
 //============================================================================
 void GuiUserListItem::onIdentOfferButtonClicked()
 {

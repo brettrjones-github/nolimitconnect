@@ -39,9 +39,6 @@ public:
 
     void                        clearUserList( void );
 
-    void                        setShowMyself( bool showMe )            { m_ShowMyself = showMe; }
-    bool                        getShowMyself( void )                   { return m_ShowMyself; }
-
     void                        addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* userIdent );
     GuiUserListItem*            addOrUpdateSession( GuiUserSessionBase* userSession );
 
@@ -59,6 +56,7 @@ public:
 signals:
     void                        signalUserListItemClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
     void                        signalAvatarButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    void                        signalFriendshipButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
     void                        signalOfferButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
     void                        signalPushToTalkButtonPressed( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
     void                        signalPushToTalkButtonReleased( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
@@ -75,6 +73,7 @@ protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotUserListItemClicked( GuiUserListItem* userItem );
     void                        slotAvatarButtonClicked( GuiUserListItem* userItem );
+    void                        slotFriendshipButtonClicked( GuiUserListItem* userItem );
     void                        slotOfferButtonClicked( GuiUserListItem* userItem );
     void                        slotPushToTalkButtonPressed( GuiUserListItem* userItem );
     void                        slotPushToTalkButtonReleased( GuiUserListItem* userItem );
@@ -94,6 +93,7 @@ protected:
 
     virtual void                onUserListItemClicked( GuiUserListItem* userItem );
     virtual void                onAvatarButtonClicked( GuiUserListItem* userItem );
+    virtual void                onFriendshipButtonClicked( GuiUserListItem* userItem );
     virtual void                onOfferButtonClicked( GuiUserListItem* userItem );
     virtual void                onPushToTalkButtonPressed( GuiUserListItem* userItem );
     virtual void                onPushToTalkButtonReleased( GuiUserListItem* userItem );
@@ -110,7 +110,8 @@ protected:
 	//=== vars ===//
     EApplet						m_AppletType{ eAppletUnknown };
     EUserViewType               m_ViewType{ eUserViewTypeNone };
-    bool                        m_ShowMyself{ false };
+    bool                        m_IsSignalsConnected{ false };
+
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;
 };
 

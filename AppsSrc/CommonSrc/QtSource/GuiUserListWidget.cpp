@@ -42,9 +42,9 @@ GuiUserListWidget::GuiUserListWidget( QWidget * parent )
     connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser*)),	                this, SLOT(slotUserUpdated(GuiUser*)) );
     connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser*)),	            this, SLOT(slotUserOnlineStatus(GuiUser*)) );
 
-    connect( &m_ThumbMgr, SIGNAL( signalThumbAdded(GuiThumb*) ),                this, SLOT( slotThumbAdded(GuiThumb*) ) );
-    connect( &m_ThumbMgr, SIGNAL( signalThumbUpdated(GuiThumb*) ),              this, SLOT( slotThumbUpdated(GuiThumb*) ) );
-    connect( &m_ThumbMgr, SIGNAL( signalThumbRemoved(VxGUID) ),                 this, SLOT( slotThumbRemoved(VxGUID) ) );
+    connect( &m_ThumbMgr, SIGNAL(signalThumbAdded(GuiThumb*)),                  this, SLOT(slotThumbAdded(GuiThumb*)) );
+    connect( &m_ThumbMgr, SIGNAL(signalThumbUpdated(GuiThumb*)),                this, SLOT(slotThumbUpdated(GuiThumb*)) );
+    connect( &m_ThumbMgr, SIGNAL(signalThumbRemoved(VxGUID)),                   this, SLOT(slotThumbRemoved(VxGUID)) );
 
     GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
 }
@@ -58,7 +58,7 @@ GuiUserListWidget::~GuiUserListWidget()
 //============================================================================
 void GuiUserListWidget::slotMyIdentUpdated( GuiUser* user )
 {
-    if( getShowMyself() && user )
+    if( m_MyApp.getLoopbackMyselfTestAllowed() && user )
     {
         slotUserUpdated( user );
     }
@@ -92,9 +92,10 @@ void GuiUserListWidget::refreshUserList( void )
         {
             updateUserList.push_back( iter->second );
         }
+    
     }
 
-    if( getShowMyself() )
+    if( m_MyApp.getLoopbackMyselfTestAllowed() )
     {
         if( m_UserMgr.getMyIdent() )
         {
@@ -131,12 +132,13 @@ GuiUserListItem* GuiUserListWidget::sessionToWidget( GuiUserSessionBase* userSes
 
     userItem->setUserSession( userSession );
 
-    connect( userItem, SIGNAL(signalGuiUserListItemClicked(GuiUserListItem*)),	    this, SLOT(slotUserListItemClicked(GuiUserListItem*)) );
-    connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserListItem*)),	        this, SLOT(slotAvatarButtonClicked(GuiUserListItem*)) );
-    connect( userItem, SIGNAL(signalOfferButtonClicked(GuiUserListItem*)),          this, SLOT(slotOfferButtonClicked(GuiUserListItem*)) );
-    connect( userItem, SIGNAL(signalPushToTalkButtonPressed(GuiUserListItem*)),     this, SLOT(slotPushToTalkButtonPressed(GuiUserListItem*)) );
-    connect( userItem, SIGNAL(signalPushToTalkButtonReleased(GuiUserListItem*)),    this, SLOT(slotPushToTalkButtonReleased(GuiUserListItem*)) );
-    connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserListItem*)),	        this, SLOT(slotMenuButtonClicked(GuiUserListItem*)) );
+    //connect( userItem, SIGNAL( signalGuiUserListItemClicked(GuiUserListItem*) ), this, SLOT( slotUserListItemClicked(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalAvatarButtonClicked(GuiUserListItem*) ), this, SLOT( slotAvatarButtonClicked(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalFriendshipButtonClicked(GuiUserListItem*) ), this, SLOT( slotFriendshipButtonClicked(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalOfferButtonClicked(GuiUserListItem*) ), this, SLOT( slotOfferButtonClicked(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalPushToTalkButtonPressed(GuiUserListItem*) ), this, SLOT( slotPushToTalkButtonPressed(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalPushToTalkButtonReleased(GuiUserListItem*) ), this, SLOT( slotPushToTalkButtonReleased(GuiUserListItem*) ) );
+    connect( userItem, SIGNAL( signalMenuButtonClicked(GuiUserListItem*) ), this, SLOT( slotMenuButtonClicked(GuiUserListItem*) ) );
 
     userItem->updateWidgetFromInfo();
 
@@ -343,6 +345,18 @@ void GuiUserListWidget::slotAvatarButtonClicked( GuiUserListItem* userItem )
 }
 
 //============================================================================
+void GuiUserListWidget::slotFriendshipButtonClicked( GuiUserListItem* userItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onFriendshipButtonClicked( userItem );
+}
+
+//============================================================================
 void GuiUserListWidget::slotOfferButtonClicked( GuiUserListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
@@ -508,6 +522,20 @@ void GuiUserListWidget::onAvatarButtonClicked( GuiUserListItem* userItem )
 }
 
 //============================================================================
+void GuiUserListWidget::onFriendshipButtonClicked( GuiUserListItem* userItem )
+{
+    LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
+    if( userItem )
+    {
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalFriendshipButtonClicked( userSession, userItem );
+        }
+    }
+}
+
+//============================================================================
 void GuiUserListWidget::onOfferButtonClicked( GuiUserListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onOfferButtonClicked" );
@@ -581,7 +609,7 @@ bool GuiUserListWidget::isListViewMatch( GuiUser* user )
     {
         if( user->isMyself() )
         {
-            return getShowMyself();
+            return m_MyApp.getLoopbackMyselfTestAllowed();
         }
         else if( eUserViewTypeEverybody == getUserViewType() )
         {

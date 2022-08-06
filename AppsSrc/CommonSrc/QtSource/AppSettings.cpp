@@ -573,6 +573,12 @@ int32_t AppSettings::getSoundOutDeviceIndex( void )
 }
 
 //============================================================================
+void AppSettings::setRunOnStartupCamServer( bool runOnStartup )
+{
+	setIniValue( getAppShortName(), "RunOnStartupCamServer", runOnStartup );
+}
+
+//============================================================================
 bool AppSettings::getRunOnStartupCamServer( void )
 {
 	bool runOnStartup = false;
@@ -581,9 +587,9 @@ bool AppSettings::getRunOnStartupCamServer( void )
 }
 
 //============================================================================
-void AppSettings::setRunOnStartupCamServer( bool runOnStartup )
+void AppSettings::setRunOnStartupFileShareServer( bool runOnStartup )
 {
-	setIniValue( getAppShortName(), "RunOnStartupCamServer", runOnStartup );
+	setIniValue( getAppShortName(), "RunOnStartupFileShareServer", runOnStartup );
 }
 
 //============================================================================
@@ -595,7 +601,15 @@ bool AppSettings::getRunOnStartupFileShareServer( void )
 }
 
 //============================================================================
-void AppSettings::setRunOnStartupFileShareServer( bool runOnStartup )
+void AppSettings::setAllowLoopBackOfMyself( bool allowLoopback )
 {
-	setIniValue( getAppShortName(), "RunOnStartupFileShareServer", runOnStartup );
+	setIniValue( getAppShortName(), "AllowLoopbackMyself", allowLoopback );
+}
+
+//============================================================================
+bool AppSettings::getAllowLoopBackOfMyself( void )
+{
+	bool allowLoopback = false;
+	getIniValue( getAppShortName(), "AllowLoopbackMyself", allowLoopback, false );
+	return allowLoopback;
 }

@@ -107,7 +107,7 @@ static bool lastReadSuccess = true;
 	else if( lastReadSuccess )
 	{
 		lastReadSuccess = false;
-		LogMsg( LOG_INFO, "AudioJitterBuffer::getBufToRead underflow\n" );
+		// LogMsg( LOG_INFO, "AudioJitterBuffer::getBufToRead underflow" );
 	}
 
 	return retBuf;

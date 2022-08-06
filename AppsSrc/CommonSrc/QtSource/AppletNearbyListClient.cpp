@@ -18,6 +18,7 @@
 
 #include "AppCommon.h"
 #include "AppGlobals.h"
+#include "AppSettings.h"
 
 #include "ActivityMessageBox.h"
 #include "GuiHostSession.h"
@@ -194,6 +195,14 @@ void AppletNearbyListClient::onShowNearbyList( void )
     nearbyMgr.lockList();
     nearbyList = nearbyMgr.getIdentList();
     nearbyMgr.unlockList();
+
+    /*
+    if( m_MyApp.getLoopbackMyselfTestAllowed() )
+    {
+        m_MyApp.getUserMgr().getMyIdent()->setNearbyStatus( GetGmtTimeMs() );
+        nearbyList.push_back( std::make_pair( m_MyApp.getUserMgr().getMyOnlineId(), GetGmtTimeMs() ) );
+    }
+    */
 
     updateFriendList( eUserViewTypeNearby, nearbyList );
 }

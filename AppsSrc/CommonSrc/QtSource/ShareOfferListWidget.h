@@ -52,9 +52,6 @@ public:
     void                        updateOffer( GuiOfferSession * user );
     void                        removeOffer( VxGUID& onlineId );
 
-    void                        setShowMyself( bool show )                  { m_ShowMyself = show; }
-    bool                        getShowMyself( void )                       { return m_ShowMyself; }
-
     void                        setOfferViewType( EOfferViewType viewType );
     EOfferViewType              getOfferViewType( void )                     { return m_OfferViewType; }
 
@@ -93,7 +90,7 @@ protected:
 
 	//=== vars ===//
     GuiOfferClientMgr&          m_OfferClientMgr;
-    bool                        m_ShowMyself{ true };
+
     EOfferViewType              m_OfferViewType{ eOfferViewTypeNone };
 
     std::map<VxGUID, GuiOfferSession*> m_CallCache;

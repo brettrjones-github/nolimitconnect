@@ -310,6 +310,8 @@ void AppCommon::loadWithoutThread( void )
 	m_ConnectIdListMgr.onAppCommonCreated();
 	m_GroupieListMgr.onAppCommonCreated();
 
+    setLoopbackMyselfTestAllowed( getAppSettings().getAllowLoopBackOfMyself() );
+
     m_HomePage.initializeHomePage();
     connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT( slotMainWindowResized() ) );
     m_HomePage.show();

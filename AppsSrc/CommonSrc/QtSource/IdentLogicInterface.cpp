@@ -32,22 +32,27 @@ IdentLogicInterface::IdentLogicInterface( QWidget* parent )
 //============================================================================
 void IdentLogicInterface::setupIdentLogic( void ) // call after derived class ui is called
 {
-	if( getIdentOfferButton() )
+	if( !m_IsSignalsConnected )
 	{
-		getIdentOfferButton()->setVisible( false );
-		connect( getIdentOfferButton(), SIGNAL( clicked() ), this, SLOT( slotIdentOfferButtonClicked() ) );
-	}
+		m_IsSignalsConnected = true;
+		if( getIdentOfferButton() )
+		{
+			getIdentOfferButton()->setVisible( false );
+			connect( getIdentOfferButton(), SIGNAL( clicked() ), this, SLOT( slotIdentOfferButtonClicked() ) );
+		}
 
-	if( getIdentPushToTalkButton() )
-	{
-		getIdentPushToTalkButton()->setVisible( false );
-		connect( getIdentPushToTalkButton(), SIGNAL(pressed()), this, SLOT(slotIdentPushToTalkButtonPressed()) );
-		connect( getIdentPushToTalkButton(), SIGNAL(released()), this, SLOT(slotIdentPushToTalkButtonReleased()) );
-	}
+		if( getIdentPushToTalkButton() )
+		{
+			getIdentPushToTalkButton()->setVisible( false );
+			connect( getIdentPushToTalkButton(), SIGNAL( pressed() ), this, SLOT( slotIdentPushToTalkButtonPressed() ) );
+			connect( getIdentPushToTalkButton(), SIGNAL( released() ), this, SLOT( slotIdentPushToTalkButtonReleased() ) );
+		}
 
-	connect( getIdentAvatarButton(), SIGNAL(clicked()), this, SLOT(slotIdentAvatarButtonClicked()) );
-	connect( getIdentFriendshipButton(), SIGNAL(clicked()), this, SLOT(slotIdentFrienshipButtonClicked()) );
-	connect( getIdentMenuButton(), SIGNAL(clicked()), this, SLOT(slotIdentMenuButtonClicked()) );
+		connect( getIdentAvatarButton(), SIGNAL( clicked() ), this, SLOT( slotIdentAvatarButtonClicked() ) );
+		connect( getIdentFriendshipButton(), SIGNAL( clicked() ), this, SLOT( slotIdentFrienshipButtonClicked() ) );
+		connect( getIdentMenuButton(), SIGNAL( clicked() ), this, SLOT( slotIdentMenuButtonClicked() ) );
+	}
+	
 	onIdentLogicIsSetup();
 }
 
@@ -313,6 +318,7 @@ void IdentLogicInterface::slotIdentAvatarButtonClicked( void )
 //============================================================================
 void IdentLogicInterface::slotIdentFrienshipButtonClicked( void )
 {
+	emit signalIdentFriendshipButtonClicked();
 	onIdentFriendshipButtonClicked();
 }
 

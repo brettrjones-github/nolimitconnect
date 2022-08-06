@@ -384,7 +384,6 @@ void AppletSharedFiles::addFile( VxMyFileInfo& fileInfo, bool isShared, bool isI
             ui.m_FileItemList->setItemWidget( item, item );
         }
     }
-
 }
 
 //============================================================================

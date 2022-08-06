@@ -41,6 +41,7 @@ public:
     VxPushButton*               getMenuButton( void )                   { return getIdentMenuButton(); }
 
     void						onIdentAvatarButtonClicked( void ) override;
+    //void                        onIdentFriendshipButtonClicked( void ) override; // commented out to allow default behavior
     void						onIdentOfferButtonClicked( void ) override;
     void						onIdentPushToTalkButtonPressed( void ) override;
     void						onIdentPushToTalkButtonReleased( void ) override;
@@ -59,6 +60,7 @@ public:
 signals:
     void						signalGuiUserListItemClicked( GuiUserListItem * poItemWidget );
 	void						signalAvatarButtonClicked( GuiUserListItem* listEntryWidget );
+    void						signalFriendshipButtonClicked( GuiUserListItem* listEntryWidget );
     void						signalOfferButtonClicked( GuiUserListItem* listEntryWidget );
     void						signalPushToTalkButtonPressed( GuiUserListItem* listEntryWidget );
     void						signalPushToTalkButtonReleased( GuiUserListItem* listEntryWidget );

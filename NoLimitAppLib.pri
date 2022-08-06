@@ -172,6 +172,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsTruthOrDare.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsVideoPhone.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsVoicePhone.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSharedFiles.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareOfferList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.h \
@@ -551,6 +552,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsTruthOrDare.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsVideoPhone.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsVoicePhone.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSharedFiles.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareOfferList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.cpp \

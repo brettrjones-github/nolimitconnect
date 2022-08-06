@@ -69,9 +69,6 @@ public:
     void                        updateUserJoin( GuiUserJoin* guiUserJoin );
     void                        removeUserJoin( GroupieId& groupieId );
 
-    void                        setShowMyself( bool show )                      { m_ShowMyself = show; }
-    bool                        getShowMyself( void )                           { return m_ShowMyself; }
-
     void                        setUserJoinViewType( EUserJoinViewType viewType );
     EUserJoinViewType           getUserJoinViewType( void )                     { return m_UserJoinViewType; }
 
@@ -118,7 +115,7 @@ protected:
     GuiThumbMgr&				m_ThumbMgr;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     std::map<GroupieId, GuiUserJoinSession*> m_UserJoinCache;
-    bool                        m_ShowMyself{ true };
+
     EUserJoinViewType           m_UserJoinViewType{ eUserJoinViewTypeNone };
 };
 

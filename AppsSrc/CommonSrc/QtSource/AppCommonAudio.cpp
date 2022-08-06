@@ -217,5 +217,6 @@ bool AppCommon::fromGuiIsSpeakerMuted( void )
 /// Called when need more sound for speaker output
 void AppCommon::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 {
+	return; // BRJ fix me
     getEngine().fromGuiAudioOutSpaceAvail( freeSpaceLen );
 }

@@ -87,6 +87,7 @@ public:
 
 signals:
 	void						signalIdentAvatarButtonClicked( void );
+	void						signalIdentFriendshipButtonClicked( void );
 	void						signalIdentOfferButtonClicked( void );
 	void						signalIdentMenuButtonClicked( void );
 	void						signalIdentPushToTalkButtonPressed( void );
@@ -104,5 +105,6 @@ protected slots:
 protected:
 	AppCommon&					m_MyApp;
 	GuiUser*					m_GuiUser{ nullptr };
+	bool						m_IsSignalsConnected{ false };
 	bool						m_DisableFriendshipChange{ false };
 };

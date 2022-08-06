@@ -111,11 +111,14 @@ public:
 	void						setSoundOutDeviceIndex( int32_t deviceIndex );
 	int32_t						getSoundOutDeviceIndex( void );
 
-	bool						getRunOnStartupCamServer( void );
 	void						setRunOnStartupCamServer( bool runOnStartup );
+	bool						getRunOnStartupCamServer( void );
 
-	bool						getRunOnStartupFileShareServer( void );
 	void						setRunOnStartupFileShareServer( bool runOnStartup );
+	bool						getRunOnStartupFileShareServer( void );
+
+	void						setAllowLoopBackOfMyself( bool allowLoopback );
+	bool						getAllowLoopBackOfMyself( void );
 
 protected:
 	bool						appModeSettingsAreInitialize( void );

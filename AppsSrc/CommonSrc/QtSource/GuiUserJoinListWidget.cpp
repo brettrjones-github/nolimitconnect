@@ -262,7 +262,7 @@ void GuiUserJoinListWidget::onMenuButtonClicked( GuiUserJoinListItem* userItem )
 //============================================================================
 void GuiUserJoinListWidget::slotMyIdentUpdated( GuiUserJoin* guiUserJoin )
 {
-    if( getShowMyself() )
+    if( m_MyApp.getLoopbackMyselfTestAllowed() )
     {
         updateUserJoin( guiUserJoin );
     }
@@ -369,7 +369,7 @@ bool GuiUserJoinListWidget::isListViewMatch( GuiUser* user )
     {
         if( user->isMyself() )
         { 
-            return getShowMyself();
+            return m_MyApp.getLoopbackMyselfTestAllowed();
         }
         else if( eUserJoinViewTypeEverybody == getUserJoinViewType() )
         {

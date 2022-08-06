@@ -382,7 +382,7 @@ bool ShareOfferListWidget::isListViewMatch( GuiOfferSession * user )
     {
         if( user->isMyself() )
         { 
-            return getShowMyself();
+            return m_MyApp.getLoopbackMyselfTestAllowed();
         }
         else if( eOfferViewTypeEverybody == getOfferViewType() )
         {
