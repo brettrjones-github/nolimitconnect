@@ -39,30 +39,30 @@ public:
     void                        destroyAudioIoSystem();
 
     P2PEngine&                  getEngine( void );
-    QMediaDevices*              getMediaDevices( void )     { return m_MediaDevices; }
-    AudioEchoCancel&            geAudioEchoCancel( void )   { return m_AudioEchoCancel; }
+    QMediaDevices*              getMediaDevices( void )                 { return m_MediaDevices; }
+    AudioEchoCancel&            geAudioEchoCancel( void )               { return m_AudioEchoCancel; }
 
     virtual int				    getMicrophonePeakValue0To100( void );
 
     virtual int				    fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence );
     virtual void				fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace );
 
-    void                        setMicrophoneVolume( float volume ) { m_MicrophoneVolume = volume; }
+    void                        setMicrophoneVolume( float volume )     { m_MicrophoneVolume = volume; }
 
-    bool                        isAudioInitialized()       { return m_AudioIoInitialized;  }
-    IAudioCallbacks&            getAudioCallbacks()        { return m_AudioCallbacks; }
-    QAudioFormat&               getAudioOutFormat()        { return m_AudioOutFormat; }
-    QAudioFormat&               getAudioInFormat()         { return m_AudioInFormat; }
+    bool                        isAudioInitialized( void )              { return m_AudioIoInitialized;  }
+    IAudioCallbacks&            getAudioCallbacks( void )               { return m_AudioCallbacks; }
+    QAudioFormat&               getAudioOutFormat( void )               { return m_AudioOutFormat; }
+    QAudioFormat&               getAudioInFormat( void )                { return m_AudioInFormat; }
 
-    AudioMixer&                 getAudioOutMixer()         { return m_AudioOutMixer; }
-    AudioInIo&                  getAudioInIo()              { return m_AudioInIo; }
-    AudioOutIo&                 getAudioOutIo()             { return m_AudioOutIo; }
+    AudioMixer&                 getAudioOutMixer( void )                { return m_AudioOutMixer; }
+    AudioInIo&                  getAudioInIo( void )                    { return m_AudioInIo; }
+    AudioOutIo&                 getAudioOutIo( void )                   { return m_AudioOutIo; }
 
     const char *                describeAudioState( QAudio::State state );
     const char *                describeAudioError( QAudio::Error err );
 
-    void                        lockAudioIn() { m_AudioInMutex.lock(); }
-    void                        unlockAudioIn() { m_AudioInMutex.unlock(); }
+    void                        lockAudioIn()                           { m_AudioInMutex.lock(); }
+    void                        unlockAudioIn()                         { m_AudioInMutex.unlock(); }
 
     // volume is from 0.0 to 1.0
     void						setSpeakerVolume( float volume0to1 );
@@ -125,7 +125,9 @@ public:
     void                        soundInDeviceChanged( int deviceIndex );
     void                        soundOutDeviceChanged( int deviceIndex );
 
-    void                        runAudioDelayTest( void );
+    bool                        runAudioDelayTest( void );
+
+    void                        setEchoDelayMsParam( int delayMs )      { m_AudioEchoCancel.setEchoDelayMsParam( delayMs ); }
 
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
@@ -152,7 +154,7 @@ protected:
     void                        enableMicrophone( bool enable );
 
     void                        setAudioTestState( EAudioTestState audioTestState );
-    void                        handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs );
+    bool                        handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs );
 
     AppCommon&                  m_MyApp;
     QMediaDevices*              m_MediaDevices{ nullptr };
@@ -200,4 +202,7 @@ protected:
     EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
     bool                        m_AudioTestMicEnable{ false };
     bool                        m_AudioTestSpeakerEnable{ false };
+    int                         m_EchoDelayTestMaxInterations{ 3 };
+    int                         m_EchoDelayCurrentInteration{ 0 };
+    std::vector<int>            m_EchoDelayResultList;
 };

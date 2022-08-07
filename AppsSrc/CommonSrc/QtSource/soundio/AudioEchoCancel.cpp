@@ -15,6 +15,8 @@
 
 #include "AudioEchoCancel.h"
 #include "AudioEchoCancelImpl.h"
+#include "AppCommon.h"
+#include "AppSettings.h"
 
 //============================================================================
 AudioEchoCancel::AudioEchoCancel( AppCommon& appCommon, AudioIoMgr& audioIoMgr, QObject* parent )
@@ -22,12 +24,13 @@ AudioEchoCancel::AudioEchoCancel( AppCommon& appCommon, AudioIoMgr& audioIoMgr, 
 	, m_MyApp( appCommon )
 	, m_AudioIoMgr( audioIoMgr )
 	, m_AudioEchoCancelImpl( *new AudioEchoCancelImpl(appCommon, audioIoMgr, this ))
-{
+{	
 }
 
 //============================================================================
 void AudioEchoCancel::echoCancelStartup( void )
 {
+	m_AudioEchoCancelImpl.setEchoDelayMsConstant( m_MyApp.getAppSettings().getEchoDelayParam() );
 	m_AudioEchoCancelImpl.echoCancelStartup();
 }
 
@@ -41,6 +44,12 @@ void AudioEchoCancel::enableEchoCancel( bool enable )
 bool AudioEchoCancel::isEchoCancelEnabled( void )
 {
 	return m_AudioEchoCancelImpl.isEchoCancelEnabled();
+}
+
+//============================================================================
+void AudioEchoCancel::setEchoDelayMsParam( int delayMs )
+{
+	m_AudioEchoCancelImpl.setEchoDelayMsConstant( delayMs );
 }
 
 //============================================================================

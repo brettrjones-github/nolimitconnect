@@ -120,6 +120,12 @@ public:
 	void						setAllowLoopBackOfMyself( bool allowLoopback );
 	bool						getAllowLoopBackOfMyself( void );
 
+	void						setEchoDelayParam( int delayMs );
+	int							getEchoDelayParam( void );
+
+	void						setEchoCancelEnable( bool enable );
+	bool						getEchoCancelEnable( void );
+
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );

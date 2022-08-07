@@ -61,6 +61,7 @@ protected slots:
     void                        slotPeakTimerTimeout( void );
 
     void                        slotStartTestSoundDelay( void );
+    void                        slotEchoDelaySaveButtonClicked( void );
     void                        slotTestedSoundDelayResult( int echoDelayMs );
     void                        slotEchoCancelEnableChange( int checkState );
     void                        slotAudioTestState( EAudioTestState audioTestState );
@@ -70,10 +71,14 @@ protected:
     void                        showEvent( QShowEvent* ev ) override;
     void                        hideEvent( QHideEvent* ev ) override;
 
+    void                        showEchoDelayTestResults( void );
+
     //=== vars ===//
     Ui::AppletSoundSettingsUi   ui;
     QTimer*                     m_PeakTimer{ nullptr };
 
     QMediaDevices*              m_devices = nullptr;
     QScopedPointer<AudioTestGenerator>   m_Test8000HzMono200HzToneGenerator;
+    EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
+    std::vector<int>            m_EchoDelayResultList;
 };

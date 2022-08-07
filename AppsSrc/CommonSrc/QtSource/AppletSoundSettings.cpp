@@ -63,16 +63,23 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
     ui.m_PauseMicrophoneCheckBox->setChecked( false );
     ui.m_PauseVoipCheckBox->setChecked( true );
     m_PeakTimer->setInterval( 200 );
-    ui.m_EchoCancelEnableCheckBox->setChecked( m_MyApp.getSoundMgr().fromGuiIsEchoCancelEnabled() );
+
+    int echoDelayMs = m_MyApp.getAppSettings().getEchoDelayParam();
+    ui.m_EchoDelayLineEdit->setText( QString::number( echoDelayMs ) );
+    ui.m_TestDelayResultLineEdit->setText( QString::number( 0 ) );
+
+    bool echoCancelEnable = m_MyApp.getAppSettings().getEchoCancelEnable();
+    ui.m_EchoCancelEnableCheckBox->setChecked( echoCancelEnable );
 
     connect( ui.m_EchoCancelEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotEchoCancelEnableChange(int)) );
 
     connectBarWidgets();
 
-    connect( ui.m_TestSoundDelayButton, SIGNAL( clicked() ), this, SLOT( slotStartTestSoundDelay() ) );
-    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalTestedSoundDelay(int)), this, SLOT(slotTestedSoundDelayResult(int)) );
-    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestState(EAudioTestState)), this, SLOT(slotAudioTestState(EAudioTestState)) );
-    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestMsg(QString)), this, SLOT(slotAudioTestMsg(QString)) );
+    connect( ui.m_TestSoundDelayButton, SIGNAL(clicked()), this, SLOT( slotStartTestSoundDelay() ) );
+    connect( ui.m_EchoDelaySaveButton, SIGNAL(clicked()), this, SLOT( slotEchoDelaySaveButtonClicked() ) );
+    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalTestedSoundDelay(int)), this, SLOT(slotTestedSoundDelayResult(int)), Qt::QueuedConnection );
+    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestState(EAudioTestState)), this, SLOT(slotAudioTestState(EAudioTestState)), Qt::QueuedConnection );
+    connect( &m_MyApp.getSoundMgr(), SIGNAL(signalAudioTestMsg(QString)), this, SLOT(slotAudioTestMsg(QString)), Qt::QueuedConnection );
 
     QAudioFormat mixerFormat;
     mixerFormat.setSampleRate( 8000 );
@@ -286,7 +293,31 @@ void AppletSoundSettings::slotPeakTimerTimeout( void )
 //============================================================================
 void AppletSoundSettings::slotStartTestSoundDelay( void )
 {
-    m_MyApp.getSoundMgr().runAudioDelayTest();
+    if( eAudioTestStateNone == m_AudioTestState )
+    {
+        m_EchoDelayResultList.clear();
+        m_MyApp.getSoundMgr().runAudioDelayTest();
+    }
+    else
+    {
+        QMessageBox::information( this, QObject::tr( "Echo delay test is running" ), QObject::tr( "Echo delay test can not be run until the previous test finishes" ), QMessageBox::Ok );
+    }
+}
+
+//============================================================================
+void AppletSoundSettings::slotEchoDelaySaveButtonClicked( void )
+{
+    int delayMs = ui.m_EchoDelayLineEdit->text().toInt();
+    if( delayMs < 40 || delayMs > 500 )
+    {
+        QMessageBox::information( this, QObject::tr( "Echo Delay Value Invalid" ), QObject::tr( "Echo Delay value must be between 40 and 500 milliseconds" ), QMessageBox::Ok );
+    }
+    else
+    {
+        m_MyApp.getAppSettings().setEchoDelayParam( delayMs );
+        m_MyApp.getSoundMgr().setEchoDelayMsParam( delayMs );
+        QMessageBox::information( this, QObject::tr( "Echo Delay Value Save" ), QObject::tr( "Echo Delay value has been saved for use by Echo Cancelation" ), QMessageBox::Ok );
+    }
 }
 
 //============================================================================
@@ -295,15 +326,13 @@ void AppletSoundSettings::slotAudioTestState( EAudioTestState audioTestState )
     switch( audioTestState )
     {
     case eAudioTestStateInit:
-        statusMsg( "Sound Delay Test Inititialize" );
         break;
 
-    case eAudioTestStateStart:
-        statusMsg( "Sound Delay Test Started" );
+    case eAudioTestStateRun:
         break;
 
-    case  eAudioTestStateDone:
-
+    case eAudioTestStateDone:
+        showEchoDelayTestResults();
         break;
 
     case eAudioTestStateNone:
@@ -315,16 +344,8 @@ void AppletSoundSettings::slotAudioTestState( EAudioTestState audioTestState )
 //============================================================================
 void AppletSoundSettings::slotTestedSoundDelayResult( int echoDelayMs )
 {
-    if( echoDelayMs )
-    {
-        statusMsg( "Sound Delay Test %d ms", echoDelayMs );
-    }
-    else
-    {
-        statusMsg( "Sound Delay Test Failed to detect delay. Check microphone and speaker are on" );
-    }
+    m_EchoDelayResultList.push_back( echoDelayMs );
 }
-
 
 //============================================================================
 void AppletSoundSettings::slotAudioTestMsg( QString audioTestMsg )
@@ -332,9 +353,60 @@ void AppletSoundSettings::slotAudioTestMsg( QString audioTestMsg )
     setStatusLabel( audioTestMsg );
 }
 
-
 //============================================================================
 void AppletSoundSettings::slotEchoCancelEnableChange( int checkState )
 {
-    m_MyApp.getSoundMgr().fromGuiEchoCancelEnable( checkState );
+    m_MyApp.getAppSettings().setEchoCancelEnable( checkState ? true : false );
+    m_MyApp.getSoundMgr().fromGuiEchoCancelEnable( checkState ? true : false );
+}
+
+//============================================================================
+void AppletSoundSettings::showEchoDelayTestResults( void )
+{
+    if( !m_EchoDelayResultList.empty() )
+    {
+        bool resultsValid{ true };
+
+        QString resultMsg( QObject::tr( "Echo Delays " ) );
+        bool firstResult{ true };
+        int averageDelay = 0;
+        for( auto delayMs : m_EchoDelayResultList )
+        {
+            if( delayMs < 40 || delayMs > 500 )
+            {
+                resultsValid = false;
+            }
+
+            averageDelay += delayMs;
+            if( !firstResult )
+            {
+                resultMsg += QObject::tr( ", ");
+            }
+            else
+            {
+                firstResult = false;
+            }
+
+            resultMsg += QString::number( delayMs );
+        }
+
+        averageDelay = averageDelay / m_EchoDelayResultList.size();
+        setStatusLabel( resultMsg );
+
+        resultMsg += resultsValid ? QObject::tr( "\nDelay Test Is Valid\n" ) : QObject::tr( "\nDelay Test Is Invalid\n" );
+        if( resultsValid )
+        {
+            ui.m_TestDelayResultLineEdit->setText( QString::number( averageDelay ) );
+            QString msg( QObject::tr( "If you are having echo issues you may want to enter value " ) );
+            msg += QString::number( averageDelay );
+            msg += QObject::tr( " into  Echo delay ms field and click Save Echo Delay To Echo Canceller button\n" );
+            msg += resultMsg;
+            QMessageBox::information( this, QObject::tr( "Echo Delay Test Is Valid" ), msg, QMessageBox::Ok );
+        }
+        else
+        {
+            ui.m_TestDelayResultLineEdit->setText( QString::number( averageDelay ) );
+            QMessageBox::information( this, QObject::tr( "Echo Delay Test Is Invalid. Check microphone and speaker. Try turning up the volume or placing microphone closer to speaker" ), resultMsg, QMessageBox::Ok );
+        }
+    }  
 }

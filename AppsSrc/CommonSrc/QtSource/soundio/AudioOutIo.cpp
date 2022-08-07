@@ -244,18 +244,18 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     if( m_AudioTestState != eAudioTestStateNone )
     {
         memset( data, 0, maxlen );
-        if( m_AudioTestState == eAudioTestStateStart && !m_AudioTestSentTimeMs )
+        if( m_AudioTestState == eAudioTestStateRun && !m_AudioTestSentTimeMs )
         {
             int16_t* sampleBuf = (int16_t*)data;
             // create a 480 hz square wave tone for 10 ms
             int maxSamplesToSet = AudioUtils::audioSamplesRequiredForGivenMs( m_AudioFormat, 10 );
             maxSamplesToSet = std::min( maxSamplesToSet, (int)maxlen / 2 );
-            int samplesCycle = (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) ;
+            int samplesCycle = (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) / (480 * 2) ;
             bool sampleIsMax{ true };
             for( int i = 0; i < maxSamplesToSet; i += samplesCycle )
             {
                 int16_t sampVal = sampleIsMax ? 32767 : -32768;
-                for( int j = 0; j < samplesCycle; j++ )
+                for( int j = 0; j < samplesCycle && ((j + i) < maxSamplesToSet); j++ )
                 {
                     sampleBuf[ i + j ] = sampVal;
                 }
@@ -467,9 +467,11 @@ void AudioOutIo::setAudioTestState( EAudioTestState audioTestState )
     case eAudioTestStateInit:
         m_AudioTestSentTimeMs = 0;
         break;
-    case eAudioTestStateStart:
+    case eAudioTestStateRun:
         break;
-    case  eAudioTestStateDone:
+    case eAudioTestStateResult:
+        break;
+    case eAudioTestStateDone:
         break;
     case eAudioTestStateNone:
     default:

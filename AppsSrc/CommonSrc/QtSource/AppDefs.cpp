@@ -271,7 +271,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletNetHostingPage:             return QObject::tr( "Hosting Services" );
     case eAppletPermissionList:             return QObject::tr( "Share Permission List" );
 
-    case eAppletShareServicesPage:          return QObject::tr( "Share With Others Sevices" );
+    case eAppletShareServicesPage:          return QObject::tr( "Share With Others Services" );
     case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
     case eAppletServiceAvatarImage:         return QObject::tr( "Share Your Avatar Image For Contact List" );
     case eAppletServiceConnectionTest:      return QObject::tr( "Service Connection Test" );

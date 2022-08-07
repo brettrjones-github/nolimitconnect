@@ -56,7 +56,8 @@ enum EAudioTestState
 {
 	eAudioTestStateNone,
 	eAudioTestStateInit,
-	eAudioTestStateStart,
+	eAudioTestStateRun,
+	eAudioTestStateResult,
 	eAudioTestStateDone,
 
 	eMaxAudioTestState

@@ -613,3 +613,40 @@ bool AppSettings::getAllowLoopBackOfMyself( void )
 	getIniValue( getAppShortName(), "AllowLoopbackMyself", allowLoopback, false );
 	return allowLoopback;
 }
+
+//============================================================================
+void AppSettings::setEchoDelayParam( int delayMs )
+{
+	setIniValue( getAppShortName(), "EchoDelayParam", delayMs );
+}
+
+//============================================================================
+int AppSettings::getEchoDelayParam( void )
+{
+	uint32_t defaultParamVal = 100;
+#if defined(TARGET_OS_ANDROID)
+	defaultParamVal = 200;
+#elif defined(TARGET_OS_WINDOWS) 
+	defaultParamVal = 110;
+#elif defined(TARGET_OS_LINUX) 
+	defaultParamVal = 100;
+#endif // defined(TARGET_OS_ANDROID)
+
+	uint32_t paramVal;
+	getIniValue( getAppShortName(), "EchoDelayParam", paramVal, defaultParamVal );
+	return (int)paramVal;
+}
+
+//============================================================================
+void AppSettings::setEchoCancelEnable( bool enable )
+{
+	setIniValue( getAppShortName(), "EchoCancelEnable", enable );
+}
+
+//============================================================================
+bool AppSettings::getEchoCancelEnable( void )
+{
+	bool echoCancelEnable = true;
+	getIniValue( getAppShortName(), "EchoCancelEnable", echoCancelEnable, true );
+	return echoCancelEnable;
+}

@@ -33,6 +33,8 @@ public:
 	void						enableEchoCancel( bool enable );
 	bool						isEchoCancelEnabled( void );
 
+	void                        setEchoDelayMsParam( int delayMs );
+
 	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer
 	bool						speakerReadSamples( int16_t* mono8000ReadBuf, int sampleCnt);
 	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer

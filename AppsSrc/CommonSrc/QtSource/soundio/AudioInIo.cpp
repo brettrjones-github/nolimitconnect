@@ -216,7 +216,7 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     int16_t* sampleInData = (int16_t*)data;
     if( m_AudioTestState != eAudioTestStateNone )
     {
-        if( m_AudioTestState == eAudioTestStateStart && !m_AudioTestDetectTimeMs )
+        if( m_AudioTestState == eAudioTestStateRun && !m_AudioTestDetectTimeMs )
         {
             audioTestDetectTestSound( sampleInData, inSampleCnt );
         }
@@ -475,7 +475,9 @@ void AudioInIo::setAudioTestState( EAudioTestState audioTestState )
     case eAudioTestStateInit:
         m_AudioTestDetectTimeMs = 0;
         break;
-    case eAudioTestStateStart:
+    case eAudioTestStateRun:
+        break;
+    case eAudioTestStateResult:
         break;
     case  eAudioTestStateDone:
         break;

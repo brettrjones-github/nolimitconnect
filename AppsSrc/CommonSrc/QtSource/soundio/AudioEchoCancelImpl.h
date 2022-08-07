@@ -54,9 +54,10 @@ public:
 	void						echoCancelShutdown( void );
 
 	void						enableEchoCancel( bool enable );
-	bool						isEchoCancelEnabled( void )			{ return m_EchoCancelEnable; };
+	bool						isEchoCancelEnabled( void )				{ return m_EchoCancelEnable; };
 
-	int							getEchoDelayMsConstant( void )		{ return m_EchoDelayMsConstant; }
+	void						setEchoDelayMsConstant( int delayMs )	{ m_EchoDelayMsConstant = delayMs; }
+	int							getEchoDelayMsConstant( void )			{ return m_EchoDelayMsConstant; }
 
 	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer
 	bool						microphoneWroteSamples( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData );

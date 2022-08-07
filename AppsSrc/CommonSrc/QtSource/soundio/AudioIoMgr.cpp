@@ -35,7 +35,7 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
     , m_AudioEchoCancel( app, *this, this )
     , m_AudioTestTimer( new QTimer( this ) )
 {
-    m_AudioTestTimer->setInterval( 800 );
+    m_AudioTestTimer->setInterval( 600 );
     connect( m_AudioTestTimer, SIGNAL(timeout()), this, SLOT(slotAudioTestTimer()) );
 
     memset( m_MyLastAudioOutSample, 0, sizeof( m_MyLastAudioOutSample ) );
@@ -138,10 +138,10 @@ void AudioIoMgr::enableSpeakers( bool enable )
 int AudioIoMgr::fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
     // this microphone data is already downsampled if needed to Mono channel 8000 Hz PCM audio
-    if( m_MicrophoneVolume != 100.0f )
-    {
-        AudioUtils::applyPcmVolume( m_MicrophoneVolume, (uchar*)pu16PcmData, pcmDataLenInBytes );
-}
+    //if( m_MicrophoneVolume != 100.0f )
+    //{
+    //    AudioUtils::applyPcmVolume( m_MicrophoneVolume, (uchar*)pu16PcmData, pcmDataLenInBytes );
+    //}
 
     return m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
@@ -490,25 +490,34 @@ void AudioIoMgr::soundOutDeviceChanged( int deviceIndex )
 }
 
 //============================================================================
-void AudioIoMgr::runAudioDelayTest( void )
+bool AudioIoMgr::runAudioDelayTest( void )
 {
     if( m_AudioTestState != eAudioTestStateNone )
     {
         LogMsg( LOG_ERROR, "AudioIoMgr::runAudioTest already running" );
+        return false;
     }
 
-    m_AudioTestState = eAudioTestStateInit;
+    m_EchoDelayCurrentInteration = 0;
+    m_EchoDelayResultList.clear();
+
     m_AudioTestMicEnable = m_AudioInIo.isMicrophoneInputWanted();
     m_AudioTestSpeakerEnable = m_AudioOutIo.isSpeakerOutputWanted();
 
-    m_AudioInIo.setAudioTestState( m_AudioTestState );
-    m_AudioOutIo.setAudioTestState( m_AudioTestState );
-
-    m_AudioInIo.wantMicrophoneInput( true );
-    m_AudioOutIo.wantSpeakerOutput( true );
-
+    if( !m_AudioTestMicEnable )
+    {
+        m_AudioInIo.wantMicrophoneInput( true );
+    }
     
+    if( !m_AudioTestSpeakerEnable )
+    {
+        m_AudioOutIo.wantSpeakerOutput( true );
+    }
+
+    setAudioTestState( eAudioTestStateInit );
+
     m_AudioTestTimer->start();
+    return true;
 }
 
 //============================================================================
@@ -517,26 +526,59 @@ void AudioIoMgr::slotAudioTestTimer( void )
     switch( m_AudioTestState )
     {
     case eAudioTestStateInit:
-        setAudioTestState( eAudioTestStateStart );
-        m_AudioTestState = eAudioTestStateStart;
-        m_AudioInIo.setAudioTestState( m_AudioTestState );
-        m_AudioOutIo.setAudioTestState( m_AudioTestState );
+        // waited for sound to be quiet
+        LogMsg( LOG_VERBOSE, "Echo Delay Test Init" );
+        setAudioTestState( eAudioTestStateRun );
         break;
 
-    case eAudioTestStateStart:
-        setAudioTestState( eAudioTestStateDone );
-        m_AudioTestState = eAudioTestStateDone;
-        m_AudioInIo.setAudioTestState( m_AudioTestState );
-        m_AudioOutIo.setAudioTestState( m_AudioTestState );
+    case eAudioTestStateRun:
+        // send sound test cherp
+        LogMsg( LOG_VERBOSE, "Echo Delay Test Run" );
+        setAudioTestState( eAudioTestStateResult );
         break;
 
-    case  eAudioTestStateDone:
+    case eAudioTestStateResult:
+        // get the delay time result
+        LogMsg( LOG_VERBOSE, "Echo Delay Test Result" );
+        if( !handleAudioTestResult( m_AudioOutIo.getAudioTestSentTime(), m_AudioInIo.getAudioTestDetectTime() ) )
+        {
+            LogMsg( LOG_WARNING, "Echo Delay Test Faled" );
+            
+            setAudioTestState( eAudioTestStateDone );
+            break;
+        }
+
+        m_EchoDelayCurrentInteration++;
+        if( m_EchoDelayCurrentInteration < m_EchoDelayTestMaxInterations )
+        {
+            // start test again
+            LogMsg( LOG_VERBOSE, "Echo Delay Test Run Again" );
+            setAudioTestState( eAudioTestStateInit );
+        }
+        else
+        {
+            LogMsg( LOG_VERBOSE, "Echo Delay Test Done" );
+            setAudioTestState( eAudioTestStateDone );
+        }
+
+        break;
+
+
+    case eAudioTestStateDone:
+        LogMsg( LOG_VERBOSE, "Echo Delay Test Restore Mic/Speaker states and finish" );
         m_AudioTestTimer->stop();
-        handleAudioTestResult( m_AudioOutIo.getAudioTestSentTime(), m_AudioInIo.getAudioTestDetectTime() );
         setAudioTestState( eAudioTestStateNone );
 
-        m_AudioInIo.wantMicrophoneInput( m_AudioTestMicEnable );
-        m_AudioOutIo.wantSpeakerOutput( m_AudioTestSpeakerEnable );
+        if( !m_AudioTestMicEnable )
+        {
+            m_AudioInIo.wantMicrophoneInput( m_AudioTestMicEnable );
+        }
+
+        if( !m_AudioTestSpeakerEnable )
+        {
+            m_AudioOutIo.wantSpeakerOutput( m_AudioTestSpeakerEnable );
+        }
+
         break;
 
     case eAudioTestStateNone:
@@ -548,21 +590,22 @@ void AudioIoMgr::slotAudioTestTimer( void )
 //============================================================================
 void AudioIoMgr::setAudioTestState( EAudioTestState audioTestState )
 {
-    m_AudioTestState = eAudioTestStateNone;
+    m_AudioTestState = audioTestState;
     m_AudioInIo.setAudioTestState( m_AudioTestState );
     m_AudioOutIo.setAudioTestState( m_AudioTestState );
     emit signalAudioTestState( audioTestState );
 }
 
 //============================================================================
-void AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs )
+bool AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs )
 {
+    bool isValid{ false };
     QString resultMsg;
     int64_t timeDif = soundDetectTimeMs - soundOutTimeMs;
     if(!soundOutTimeMs || !soundDetectTimeMs)
     {
         timeDif = 0;
-        resultMsg = QObject::tr("Sound Delay Not Detected ");
+        resultMsg = QObject::tr("Sound Delay Not Detected. Check speaker volume and that microphone is on ");
     }
     else if( timeDif < 50 )
     {
@@ -575,10 +618,16 @@ void AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDet
     else
     {
         resultMsg = QObject::tr("Sound Delay is ");
+        isValid = true;
     }
 
     resultMsg += QString::number((int)timeDif);
 
+    LogMsg( LOG_VERBOSE, "AudioIoMgr::handleAudioTestResult %s", resultMsg.toUtf8().constData() );
 
-    emit signalAudioTestMsg(resultMsg);
+    m_EchoDelayResultList.push_back( (int)timeDif );
+    // to avoid to much sound thread cpu time used Qt::QueuedConnection when connecting to these signals
+    emit signalAudioTestMsg( resultMsg );
+    emit signalTestedSoundDelay( (int)timeDif );
+    return isValid;
 }
