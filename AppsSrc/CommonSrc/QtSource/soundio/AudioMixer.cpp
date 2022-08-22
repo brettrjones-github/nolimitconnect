@@ -14,6 +14,7 @@
 
 #include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
+#include "Appcommon.h"
 #include "AudioMixer.h"
 #include "AudioIoMgr.h"
 #include "AudioUtils.h"
@@ -29,7 +30,8 @@
 //============================================================================
 AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent )
 : QWidget( parent )
-, m_AudioIoMgr( audioIoMgr  )
+, m_AudioIoMgr( audioIoMgr )
+, m_MyApp( audioIoMgr.getMyApp() )
 , m_AudioCallbacks( audioCallbacks )
 , m_MixerThread( audioIoMgr )
 , m_MixerFormat()
@@ -111,13 +113,14 @@ int AudioMixer::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pcm
 
 //============================================================================
 // read audio data from mixer.
-qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSampleMult )
+qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSampleMult, AudioSampleBuf& echoFarBuf )
 {
     // because the read size cannot be controled with Qt's QAudioSink->setBufferSize the audio read request may not be a multiple of upSampleMult
     // this means we may need to finish lerp of previous read and predictively lerp some samples at end of the request using a peak at the 
     // value that will be the first sample of the next read. Also handle cases where partial lerped samples at end of last read need 
     // prepended to next
 
+    /*
     if( maxlen <= 0 )
     {
          // LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
@@ -186,6 +189,11 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
 
     // read samples from mixer
     int mixerSampleCnt = readDataFromMixer( mixerReadBuf, upSamplesToRead + readAppendLerpSample, peekNextSample );
+
+    // put the 8000Hz data into the echo buffer for processing
+    std::vector<int16_t> inPcmData( &mixerReadBuf[ 0 ], &mixerReadBuf[ upSamplesToRead + readAppendLerpSample - 1 ] );
+    echoFarBuf.insert( echoFarBuf.end(), inPcmData.begin(), inPcmData.end() );
+
     m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( mixerReadBuf, mixerSampleCnt );
 
     int samplesRead = upSamplesToRead + readAppendLerpSample;
@@ -250,19 +258,22 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
     delete[] mixerReadBuf;
     mixerWasReadByOutput( (int)maxlen, upSampleMult );
     return maxlen;
+    */
+    return maxlen;
 }
 
 //============================================================================
 void AudioMixer::mixerWasReadByOutput( int readLen, int upSampleMult )
 {
     // to keep everything in mixer block size we say how many blocks would be read this time if available and keep track of the partial frame part to add to the next call
-    m_AudioOutRead += readLen;
-    int mixerFramesRead = m_AudioOutRead / (getMixerFrameSize() * upSampleMult);
-    int announceAvailableSpace = mixerFramesRead * getMixerFrameSize();
-    m_AudioOutRead -= announceAvailableSpace * upSampleMult;
+    //m_AudioOutRead += readLen;
+    //int mixerFramesRead = m_AudioOutRead / (getMixerFrameSize() * upSampleMult);
+    //int announceAvailableSpace = mixerFramesRead * getMixerFrameSize();
+    //m_AudioOutRead -= announceAvailableSpace * upSampleMult;
 
-    m_MixerThread.setMixerSpaceAvailable( announceAvailableSpace );
-    m_MixerThread.releaseAudioMixerThread();
+    // BRJ mixer thread will go away with the new design of having a timer event AudioMasterClock determine when to call fromGuiAudioOutSpaceAvail
+    // m_MixerThread.setMixerSpaceAvailable( announceAvailableSpace );
+    // m_MixerThread.releaseAudioMixerThread();
 }
 
 //============================================================================
@@ -383,7 +394,7 @@ int AudioMixer::calcualateMixerBytesToMs( int bytesAudio8000Hz )
 //============================================================================
 int AudioMixer::calcualateAudioOutDelayMs( void )
 {
-    int elapsedMs = (int)(GetGmtTimeMs() - m_LastReadTimeStamp);
+    int elapsedMs = (int)(m_MyApp.elapsedMilliseconds() - m_LastReadTimeStamp);
     int msLeftInQtOut;
     if( m_LastReadSamplesMs > elapsedMs )
     {
@@ -416,8 +427,8 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
         samplesThatWillBeSilence = sampleCnt - samplesAvailable;
         if( m_WasReset )
         {
-            // after reset do not read from mixer until the mixer has enough to satisfy at least on read request size
-            memset( pcmRetBuf, 0, sampleCnt * 2 );
+            // after reset do not read from mixer until the mixer has enough to satisfy at least one read request size
+            // memset( pcmRetBuf, 0, sampleCnt * 2 ); // not required.. will get set below
             sampleCnt = 0;
             samplesThatWillBeSilence = 0;
         }
@@ -430,7 +441,7 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
     int samplesRead = 0;
     int samplesToRead = std::min( samplesAvailable, sampleCnt );
     if( samplesToRead )
-                {
+    {
         int frameIndex = m_MixerReadIdx;
         for( int i = 0; i < MAX_MIXER_FRAMES; ++i )
         {
@@ -498,7 +509,7 @@ int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int
     }
 
     m_LastReadSamplesMs = AudioUtils::audioDurationMs( m_MixerFormat, samplesRequested * 2 );
-    m_LastReadTimeStamp = GetGmtTimeMs();
+    m_LastReadTimeStamp = m_MyApp.elapsedMilliseconds();
 
     return samplesRequested;
 }

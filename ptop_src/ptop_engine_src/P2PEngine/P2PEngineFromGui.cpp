@@ -276,29 +276,6 @@ void P2PEngine::fromGuiAppResume( void )
 }
 
 //============================================================================
-//! idle
-void P2PEngine::fromGuiAppIdle( void )
-{
-	//static int64_t lclSysTime = 0;
-	//int64_t curMs = GetGmtTimeMs( );
-	//if( false == m_IsUserSpecificDirSet )
-	//{
-	//	// wait until some things are started
-	//	return;	
-	//}
-
-	//if( lclSysTime / 1000 != curMs / 1000 )
-	//{
-	//	lclSysTime = curMs;
-	//	onOncePerSecond();
-	//}
-	//else // NOTE: currently have no plugins use fromGuiAppIdle
-	//{
-	//	m_PluginMgr.fromGuiAppIdle();
-	//}
-}
-
-//============================================================================
 void P2PEngine::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiNetworkAvailable" );
@@ -389,17 +366,6 @@ void P2PEngine::fromGuiNativeGlResumeRender( void )
 //! called when game window is being destroyed
 void P2PEngine::fromGuiNativeGlDestroy( void )
 {
-}
-
-//============================================================================
-void P2PEngine::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmSampleCnt, bool isSilence, int totalDelayTimeMs, int clockDrift )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-	m_MediaProcessor.fromGuiMicrophoneDataWithInfo( pcmData, pcmSampleCnt, isSilence, totalDelayTimeMs, clockDrift );
 }
 
 //============================================================================

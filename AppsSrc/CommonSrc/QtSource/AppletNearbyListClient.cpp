@@ -199,8 +199,8 @@ void AppletNearbyListClient::onShowNearbyList( void )
     /*
     if( m_MyApp.getLoopbackMyselfTestAllowed() )
     {
-        m_MyApp.getUserMgr().getMyIdent()->setNearbyStatus( GetGmtTimeMs() );
-        nearbyList.push_back( std::make_pair( m_MyApp.getUserMgr().getMyOnlineId(), GetGmtTimeMs() ) );
+        m_MyApp.getUserMgr().getMyIdent()->setNearbyStatus( m_MyApp.elapsedMilliseconds() );
+        nearbyList.push_back( std::make_pair( m_MyApp.getUserMgr().getMyOnlineId(), m_MyApp.elapsedMilliseconds() ) );
     }
     */
 

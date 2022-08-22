@@ -53,13 +53,25 @@ void AudioEchoCancel::setEchoDelayMsParam( int delayMs )
 }
 
 //============================================================================
-bool AudioEchoCancel::microphoneWroteSamples( int16_t* mono8000WriteBuf, int mono8000WriteSampleCnt, int16_t* echoCanceledData )
+void AudioEchoCancel::speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs )
 {
-	return m_AudioEchoCancelImpl.microphoneWroteSamples( mono8000WriteBuf, mono8000WriteSampleCnt, echoCanceledData );
+	m_AudioEchoCancelImpl.speakerReadSamples( speakerReadData, sampleCnt, speakerReadTailTimeMs );
 }
 
 //============================================================================
-bool AudioEchoCancel::speakerReadSamples( int16_t* mono8000ReadBuf, int mono8000ReadSampleCnt )
+void AudioEchoCancel::micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs )
 {
-	return m_AudioEchoCancelImpl.speakerReadSamples( mono8000ReadBuf, mono8000ReadSampleCnt );
+	m_AudioEchoCancelImpl.micWriteSamples( micWritedData, sampleCnt, micWriteTailTimeMs );
+}
+
+//============================================================================
+void AudioEchoCancel::frame80msElapsed( void )
+{
+	m_AudioEchoCancelImpl.frame80msElapsed();
+}
+
+//============================================================================
+void AudioEchoCancel::setEchoCancelerNeedsReset( bool needReset )
+{
+	m_AudioEchoCancelImpl.setEchoCancelerNeedsReset( needReset );
 }

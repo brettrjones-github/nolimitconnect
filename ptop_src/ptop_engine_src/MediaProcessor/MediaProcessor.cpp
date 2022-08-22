@@ -17,6 +17,7 @@
 #include "MediaClient.h"
 #include "RawAudio.h"
 #include "RawVideo.h"
+#include "AudioUtil.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IToGui.h>
@@ -56,7 +57,6 @@ void testJpgSpeed( void );
 namespace
 {
 	const int VIDEO_DATA_BYTE_CNT					    = (320*240*3);
-	//const int VIDEO_TOTAL_CHANGE_RANGE				= (320*240*3*128);
 	const int VIDEO_SENSITIVITY_DIVISOR				    = (320*240*3*64);
 	const int VIDEO_MAX_MOTION_VALUE				    = 100000;
 	const int32_t MAX_DATA_PAYLOAD_PIC_PKT				= MAX_PKT_LEN - ( sizeof(PktVideoFeedPic) + 16 );
@@ -64,14 +64,14 @@ namespace
 	const int32_t MAX_PIC_CHUNK_PKTS_REQUIRED			= MAX_TOTAL_PIC_CHUNKS_PAYLOAD / MAX_PIC_CHUNK_LEN + (MAX_TOTAL_PIC_CHUNKS_PAYLOAD % MAX_PIC_CHUNK_LEN) ? 1 : 0;
 
 	//============================================================================
-    static void * AudioProcessThreadFunc( void * pvContext )
+    static void * AudioInProcessThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
         if( processor )
         {
-            processor->processAudioIn();
+            processor->processAudioInThreaded();
         }
 
 		poThread->threadAboutToExit();
@@ -120,7 +120,7 @@ MediaProcessor::MediaProcessor( P2PEngine& engine )
 		m_VidChunkList.push_back( new PktVideoFeedPicChunk() );
 	}
 
-	m_ProcessAudioThread.startThread( (VX_THREAD_FUNCTION_T)AudioProcessThreadFunc, this, "AudioProcessor" );
+	m_ProcessAudioInThread.startThread( (VX_THREAD_FUNCTION_T)AudioInProcessThreadFunc, this, "AudioInProcessor" );
 	m_ProcessVideoThread.startThread( (VX_THREAD_FUNCTION_T)VideoProcessThreadFunc, this, "VideoProcessor" );
 }
 
@@ -139,8 +139,8 @@ MediaProcessor::~MediaProcessor()
 //============================================================================
 void MediaProcessor::shutdownMediaProcessor( void )
 {
-	m_ProcessAudioThread.abortThreadRun( true );
-	m_AudioSemaphore.signal();
+	m_ProcessAudioInThread.abortThreadRun( true );
+	m_AudioInSemaphore.signal();
 	m_ProcessVideoThread.abortThreadRun( true );
 	m_VideoSemaphore.signal();
 }
@@ -202,6 +202,7 @@ void MediaProcessor::playAudio( int16_t * pcmData, int dataLenInBytes )
 		if( m_MixerBufUsed )
 		{
 			// data already exists in buffer.. do mixing
+#if 0
 			int samples = dataLenInBytes >> 1;
 			int pcmVal;
 			int pcmMinVal = S16_MINVAL;
@@ -219,6 +220,9 @@ void MediaProcessor::playAudio( int16_t * pcmData, int dataLenInBytes )
 					m_MixerBuf[i] = S16_MAXVAL;
 				}
 			}
+#else
+			AudioUtil::mixPcmAudio( pcmData, m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES );
+#endif// 0
 		}
 		else
 		{
@@ -238,12 +242,12 @@ void MediaProcessor::playAudio( int16_t * pcmData, int dataLenInBytes )
 }
 
 //============================================================================
-void MediaProcessor::processAudioIn( void )
+void MediaProcessor::processAudioInThreaded( void )
 {
-	while( false == m_ProcessAudioThread.isAborted() )
+	while( false == m_ProcessAudioInThread.isAborted() )
 	{
-		m_AudioSemaphore.wait();
-		if( m_ProcessAudioThread.isAborted() )
+		m_AudioInSemaphore.wait();
+		if( m_ProcessAudioInThread.isAborted() )
 		{
 			LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting1" );
 			break;
@@ -259,14 +263,14 @@ void MediaProcessor::processAudioIn( void )
 			processRawAudioIn( rawAudio );
 			delete rawAudio;
 
-			if( m_ProcessAudioThread.isAborted() )
+			if( m_ProcessAudioInThread.isAborted() )
 			{
 				LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting2" );
 				break;
 			}
 		}
 
-		if( m_ProcessAudioThread.isAborted() )
+		if( m_ProcessAudioInThread.isAborted() )
 		{
 			LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting3" );
 			break;
@@ -284,6 +288,12 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 	// PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
 	// it seams that microphone volume is a bit low.. especially on android so increase volume before processing
     // TODO microphone boost
+
+	if( m_LoopbackMicToSpeakers && pcmDataLen == MIXER_CHUNK_LEN_BYTES )
+	{
+		playAudio( pcmData, pcmDataLen );
+		return;
+	}
 
 	if( m_AudioPcmList.size() )
 	{
@@ -1622,128 +1632,32 @@ int MediaProcessor::myIdInVidPktListCount( void )
 }
 
 //============================================================================
-void MediaProcessor::fromGuiMicrophoneDataWithInfo( int16_t* pcmData, int pcmDataLenBytes, bool /*isSilence*/, int totalDelayTimeMs, int clockDrift )
+void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, int64_t samplesHeadTimeMs )
 {
-
-	if( false == m_MicCaptureEnabled )
+	vx_assert( sampleCnt == MIXER_CHUNK_LEN_SAMPLES );
+	if( false == m_MicCaptureEnabled || !pcmData || sampleCnt < 100 )
 	{
-		//LogMsg( LOG_INFO, "WARNING MediaProcessor::fromGuiMicrophoneDataWithInfo dropping because no clients\n" );
-		m_AudioSemaphore.signal();
+		// invalid params or microphone not in capture mode
+		m_AudioInSemaphore.signal();
 		return;
 	}
 
+	//if( samplesHeadTimeMs - m_MicInputLastSampleTime > 200 )
+	//{
+	//	// microphone was paused or changed or something.. throw out previous samples
+	//	m_MicInputSamples.clear();
+	//}
+
+	m_MicInputLastSampleTime = samplesHeadTimeMs;
+
 	if( m_ProcessAudioQue.size() < 5 )
 	{
-		RawAudio* rawAudio = 0;
-		if( m_MuteMicrophone )
-		{
-			rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, true );
-		}
-		else
-		{
-			rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, false );
-		}
+		RawAudio* rawAudio = new RawAudio( pcmData, MIXER_CHUNK_LEN_BYTES, eAppModuleMicrophone );
 
 		m_AudioQueInMutex.lock();
 		m_ProcessAudioQue.push_back( rawAudio );
 		m_AudioQueInMutex.unlock();
-		m_AudioSemaphore.signal();
-	}
-}
-
-//============================================================================
-void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, int peakValue0to100, int divideDnSample, int outDelayMs )
-{
-	vx_assert( divideDnSample >= 1 );
-
-	int64_t timeNow = GetGmtTimeMs();
-	// first downsample into a input frame at 8000Hz mono
-    // int divRemainder{ 0 };
-    // int rawSamplesRemaing = sampleCnt;
-	int dnSamplesRemaining = sampleCnt / divideDnSample;
-	int samplesIndex = 0;
-
-	AudioInputFrame& inFrame = m_InputFrames[ m_InputFrameIndex ];
-	if( !inFrame.m_WriteTimestamp )
-	{
-		inFrame.m_WriteTimestamp = timeNow;
 	}
 
-	if( peakValue0to100 > inFrame.m_PeakAmplitude0to100 )
-	{
-		inFrame.m_PeakAmplitude0to100 = peakValue0to100;
-	}
-
-	if( dnSamplesRemaining )
-	{
-		if( divideDnSample > 1 )
-		{
-			samplesIndex = divideDnSample - 1;
-			// TODO work out the math if there is sampleCnt is not evenly divisible by divideDnSample
-		}
-
-		while( dnSamplesRemaining )
-		{
-			AudioInputFrame* audioFrame = &m_InputFrames[ m_InputFrameIndex ];
-			int frameSamplesSpace = audioFrame->audioSamplesFreeSpace();
-			int16_t* frameBuf = audioFrame->getFrameBufferAtFreeIndex();
-			int samplesThisFrame = std::min( frameSamplesSpace, dnSamplesRemaining );
-			if( divideDnSample > 1 )
-			{
-				for( int i = 0; i < samplesThisFrame; ++i )
-				{
-					frameBuf[ i ] = pcmData[ samplesIndex ];
-					samplesIndex += divideDnSample;
-				}
-			}
-			else
-			{
-				memcpy( frameBuf, &pcmData[ samplesIndex ], samplesThisFrame * 2 );
-			}
-
-
-			audioFrame->m_LenWrote += samplesThisFrame;
-			dnSamplesRemaining -= samplesThisFrame;
-
-			if( audioFrame->isFull() )
-			{
-				audioFrame->m_WriteDelayMs = MIXER_CHUNK_LEN_MS + outDelayMs + ECHO_DELAY_MIC_FUDGE_FACTOR_MS;
-				processAudioInFrame( *audioFrame );
-				audioFrame->resetFrame();
-
-				m_InputFrameIndex++;
-				if( m_InputFrameIndex >= MAX_INPUT_FRAMES )
-				{
-					m_InputFrameIndex = 0;
-				}
-
-				audioFrame = &m_InputFrames[ m_InputFrameIndex ];
-			}
-		}
-	}
-}
-
-//============================================================================
-void MediaProcessor::processAudioInFrame( AudioInputFrame& inFrame )
-{
-	int frameSamples = inFrame.audioSamplesInUse();
-	int frameLen = frameSamples * 2;
-	int16_t* pcmData = inFrame.m_AudioBuf;
-
-	if( false == m_MicCaptureEnabled )
-	{
-		//LogMsg( LOG_INFO, "WARNING MediaProcessor::fromGuiMicrophoneDataWithInfo dropping because no clients\n" );
-		m_AudioSemaphore.signal();
-		return;
-	}
-
-	if( m_ProcessAudioQue.size() < 5 )
-	{
-		RawAudio* rawAudio = new RawAudio( MIXER_CHUNK_LEN_BYTES, m_MuteMicrophone );
-
-		m_AudioQueInMutex.lock();
-		m_ProcessAudioQue.push_back( rawAudio );
-		m_AudioQueInMutex.unlock();
-		m_AudioSemaphore.signal();
-	}	
+	m_AudioInSemaphore.signal();
 }

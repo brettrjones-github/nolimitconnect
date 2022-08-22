@@ -461,7 +461,6 @@ bool GroupieListMgr::fromGuiQueryMyGroupieInfo( EHostType hostType, std::vector<
 //============================================================================
 bool GroupieListMgr::fromGuiQueryGroupieInfoList( EHostType hostType, std::vector<GroupieInfo>& groupieInfoList, VxGUID& hostIdIfNullThenAll )
 {
-    bool result{ false };
     groupieInfoList.clear();
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )

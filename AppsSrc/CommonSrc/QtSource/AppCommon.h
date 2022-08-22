@@ -54,6 +54,7 @@
 #include <QMessageBox>
 #include <QDialog>
 #include <QElapsedTimer>
+#include <QMutex>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobInfo.h>
@@ -80,7 +81,6 @@ class FileListReplySession;
 class GuiFileXferSession;
 class GuiOfferSession;
 class INlc;
-class IVxVidCap;
 class KodiThread;
 class PopupMenu;
 class RenderGlWidget;
@@ -94,19 +94,21 @@ class CRenderBuffer;
 
 class AppCommon : public QWidget, public IToGui, public INlcRender, public INlcEvents, public IAudioRequests, public IAudioCallbacks
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	AppCommon(	QApplication&   myQApp,
-				EDefaultAppMode appDefaultMode,
-				AppSettings&    appSettings,
-				AccountMgr&     myDataHelper,
-				INlc&		    gotv );
+    AppCommon( QApplication& myQApp,
+        EDefaultAppMode appDefaultMode,
+        AppSettings& appSettings,
+        AccountMgr& myDataHelper,
+        INlc& gotv );
     AppCommon( const AppCommon& rhs ) = delete;
-	virtual ~AppCommon() override = default;
+    virtual ~AppCommon() override = default;
 
-    int64_t                     elapsedMilliseconds( void )                 { return static_cast<int64_t>(m_ElapsedTimer.elapsed()); }
-    int64_t                     elapsedSeconds( void )                      { return static_cast<int64_t>(m_ElapsedTimer.elapsed()) / 1000; }
+    // elapsed high resolution timer (GetGmtTimeMs in CoreLib resolution is only 16 ms on windows)
+    int64_t                     elapsedMilliseconds( void )                 { m_ElapsedMutex.lock(); int64_t elapseMs = static_cast<int64_t>(m_ElapsedTimer.elapsed()); m_ElapsedMutex.unlock(); return elapseMs; }
+
+    int64_t                     elapsedSeconds( void )                      { return elapsedMilliseconds() / 1000; }
 
     // load profile and icons etc without using thread to avoid linux crash
     void                        loadWithoutThread( void );
@@ -250,10 +252,6 @@ public:
     //=== from gui audio callbacks ===//
     //============================================================================
 
-    /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
-   // virtual void				fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence );
-    /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     /// Mute/Unmute microphone
     virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
     /// Returns true if microphone is muted
@@ -831,8 +829,6 @@ protected slots:
 	void						onMenuSearchSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 	void						onMenuServerSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 
-	void						onVidCapTimer( void );
-	void						onIdleTimer( void );
 	void						onOncePerSecond( void );
 
 	void						onUpdateMyIdent( VxNetIdent * poMyIdent );
@@ -907,9 +903,6 @@ protected:
 
 	std::string					m_strAccountUserName;
 
-	IVxVidCap *					m_VidCap;
-	QTimer *					m_VidCapTimer;
-	QTimer *					m_IdleTimer;
 	QTimer *					m_OncePerSecondTimer;
 	EFriendViewType				m_eLastSelectedWhichContactsToView; // last selection of which friends to view
 
@@ -940,6 +933,7 @@ protected:
     QTimer *                    m_CheckSetupTimer = nullptr;
     ActivityAppSetup *          m_AppSetupDlg = nullptr;
     QElapsedTimer               m_ElapsedTimer;
+    QMutex                      m_ElapsedMutex;
     bool                        m_IsMessengerReady{ false };
     bool                        m_IsLoggedOn{ false };
     bool                        m_IsSystemReady{ false };

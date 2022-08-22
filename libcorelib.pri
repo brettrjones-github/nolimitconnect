@@ -28,6 +28,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/Sha1Info.h \
     $$PWD/DependLibs/CoreLib/StdOutRedirect.h \
 	$$PWD/DependLibs/CoreLib/StringListBinary.h \
+	$$PWD/DependLibs/CoreLib/TimeIntervalEstimator.h \
     $$PWD/DependLibs/CoreLib/VarToString.h \
     $$PWD/DependLibs/CoreLib/VxAppInfo.h \
     $$PWD/DependLibs/CoreLib/VxBuffer.h \
@@ -102,6 +103,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/sqlitedataset_corelib.cpp \
     $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp \
 	$$PWD/DependLibs/CoreLib/StringListBinary.cpp \
+    $$PWD/DependLibs/CoreLib/TimeIntervalEstimator.h \
     $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
     $$PWD/DependLibs/CoreLib/Invite.cpp \
     $$PWD/DependLibs/CoreLib/VxBuffer.cpp \

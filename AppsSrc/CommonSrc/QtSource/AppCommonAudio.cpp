@@ -165,13 +165,6 @@ int AppCommon::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 }
 
 //============================================================================
-/// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
-void AppCommon::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift )
-{
-    getEngine().fromGuiMicrophoneDataWithInfo( pcmData, pcmDataLenBytes, isSilence, totalDelayTimeMs, clockDrift );
-}
-
-//============================================================================
 /// Mute/Unmute microphone
 void AppCommon::fromGuiMuteMicrophone( bool muteMic )
 {
@@ -217,6 +210,5 @@ bool AppCommon::fromGuiIsSpeakerMuted( void )
 /// Called when need more sound for speaker output
 void AppCommon::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 {
-	return; // BRJ fix me
     getEngine().fromGuiAudioOutSpaceAvail( freeSpaceLen );
 }

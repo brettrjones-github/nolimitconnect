@@ -14,9 +14,12 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#define MIXER_CHUNK_LEN_BYTES		1280
-#define MIXER_CHUNK_LEN_SAMPLES		640
-#define MIXER_CHUNK_LEN_MS			80 // PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
-#define MAX_INPUT_FRAMES			4
+#define MONO_8000HZ_SAMPLES_PER_10MS	80 //  (8000 HZ / 1000) * 10ms
 
-#define ECHO_DELAY_MIC_FUDGE_FACTOR_MS	10 // a guess at average delay inside microphone device to recieve audio
+#define MIXER_CHUNK_LEN_BYTES			1280
+#define MIXER_CHUNK_LEN_SAMPLES			640
+#define MIXER_CHUNK_LEN_MS				80 // PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
+
+#define SPEAKER_CHUNK_LEN_BYTES			(MIXER_CHUNK_LEN_SAMPLES * 6 * 2 * 2) // upsampled to 48000 2 channels length * 2 bytes per frame
+#define SPEAKER_CHUNK_LEN_SAMPLES		(MIXER_CHUNK_LEN_SAMPLES * 6 * 2) // upsampled to 48000 2 channelssamples
+#define MIXER_TO_SPEAKER_MULTIPLIER		12 // 48000 * 2 channels / 8000

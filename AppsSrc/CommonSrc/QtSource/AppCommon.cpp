@@ -190,9 +190,6 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 
 , m_HomePage( *this, m_AppTitle )
 
-, m_VidCap( NULL )
-, m_VidCapTimer( NULL )
-, m_IdleTimer( new QTimer( this ) )
 , m_OncePerSecondTimer( new QTimer( this ) )
 , m_eLastSelectedWhichContactsToView( eFriendViewEverybody )
 , m_bUserCanceledCreateProfile( false )
@@ -348,10 +345,6 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 
 	connectSignals();
 
-	m_IdleTimer->setInterval( 300 ); // we want about 20 frames per second 1000/20 = 50ms
-	connect( m_IdleTimer, SIGNAL(timeout()), this, SLOT( onIdleTimer() ) );
-	m_IdleTimer->start();
-
 	m_OncePerSecondTimer->setInterval( 1000 ); 
 	connect( m_OncePerSecondTimer, SIGNAL(timeout()), this, SLOT( onOncePerSecond() ) );
 	m_OncePerSecondTimer->start();
@@ -361,7 +354,7 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 
 	getEngine().fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
 
-    m_SoundMgr.initAudioIoSystem();
+    m_SoundMgr.audioIoSystemStartup();
 }
 
 //============================================================================
@@ -372,10 +365,12 @@ void AppCommon::shutdownAppCommon( void )
     {
         hasBeenShutdown = true;
         VxSetAppIsShuttingDown( true );
-        m_IdleTimer->stop();
         fromGuiCloseEvent( eAppModuleAll );
-        VxSleep( 2000 );
-        m_SoundMgr.sndMgrShutdown();
+
+		VxSleep( 1000 );
+		m_SoundMgr.sndMgrShutdown();
+        VxSleep( 1000 );
+
         QApplication::closeAllWindows();
         getEngine().fromGuiAppShutdown();
     }
@@ -1292,18 +1287,6 @@ bool AppCommon::confirmAppShutdown( QWidget * parentWindow )
 bool AppCommon::userCanceled( void )
 {
 	return m_bUserCanceledCreateProfile;
-}
-
-//============================================================================
-//! idle timer 20 frames per second
-void AppCommon::onIdleTimer()
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
-
-	getEngine().fromGuiAppIdle();
 }
 
 //============================================================================

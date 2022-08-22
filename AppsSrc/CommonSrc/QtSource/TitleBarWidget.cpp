@@ -141,7 +141,7 @@ void TitleBarWidget::updateTitleBar( void )
     bool isMicEnabled = GetAppInstance().getSoundMgr().isMicrophoneEnabled();
     callbackToGuiWantMicrophoneRecording( isMicEnabled );
 
-    m_MuteMic = GetAppInstance().getSoundMgr().fromGuiIsMicrophoneMuted();
+    m_MuteMic = GetAppInstance().getSoundMgr().getIsMicrophoneMuted();
     callbackToGuiMicrophoneMuted( m_MuteMic );
 
     m_MuteSpeaker = GetAppInstance().getSoundMgr().fromGuiIsSpeakerMuted();

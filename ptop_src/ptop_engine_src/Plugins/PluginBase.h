@@ -151,7 +151,6 @@ public:
 
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ) {}; 
 
-	virtual void				fromGuiAppIdle( void );
 	virtual void				onAppStartup( void );
 	virtual void				onAppShutdown( void );
 	virtual void				fromGuiAppPause( void );

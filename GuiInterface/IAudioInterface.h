@@ -21,10 +21,6 @@
 class IAudioCallbacks
 {
 public:
-    /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
-    //virtual void				fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence ) = 0;
-    /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) = 0;
     /// Mute/Unmute microphone
     virtual void				fromGuiMuteMicrophone( bool muteMic ) = 0;
     /// Returns true if microphone is muted

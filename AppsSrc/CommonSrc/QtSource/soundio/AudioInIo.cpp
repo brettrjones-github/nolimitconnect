@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
+#include "Appcommon.h"
 #include "AudioInIo.h"
 #include "AudioIoMgr.h"
 #include "AudioMixer.h"
@@ -33,9 +34,9 @@
 AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 : QIODevice( parent )
 , m_AudioIoMgr( mgr )
+, m_MyApp( mgr.getMyApp() )
 , m_Engine( mgr.getEngine() )
 , m_AudioBufMutex( audioOutMutex )
-, m_AudioInThread( mgr, *this )
 , m_MediaDevices( new QMediaDevices( this ) )
 {
     memset( m_MicSilence, 0, sizeof( m_MicSilence ) );
@@ -45,8 +46,6 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 //============================================================================
 AudioInIo::~AudioInIo()
 {
-    m_AudioInThread.setThreadShouldRun( false );
-    m_AudioInThread.stopAudioInThread();
 }
 
 //============================================================================
@@ -110,9 +109,6 @@ bool AudioInIo::soundInDeviceChanged( int deviceIndex )
     connect( m_AudioInputDevice.data(), SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
     LogMsg( LOG_VERBOSE, "AudioInIo Format supported rate %d channels %d size %d", format.sampleRate(), format.channelCount(), format.bytesPerSample() );
 
-    m_AudioBuffer.clear();
-    updateAtomicBufferSize();
-
     this->open( QIODevice::WriteOnly );
 
     if( m_AudioIoMgr.isMicrophoneInputWanted() )
@@ -129,8 +125,8 @@ void AudioInIo::startAudio()
 {
     if( m_initialized )
     {
-        m_AudioInThread.setThreadShouldRun(true);
-        m_AudioInThread.startAudioInThread();
+        // m_AudioInThread.setThreadShouldRun(true);
+        // m_AudioInThread.startAudioInThread();
 
         m_AudioInputDevice->start(this);
         m_AudioInputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
@@ -170,9 +166,6 @@ void AudioInIo::stopAudio()
 {
     if (m_initialized)
     {
-        m_AudioInThread.setThreadShouldRun(false);
-        m_AudioInThread.stopAudioInThread();
-
         if (m_AudioInputDevice && m_AudioInputDevice->state() != QAudio::StoppedState)
         {
             // Stop audio output
@@ -212,113 +205,142 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
         return 0;
     }
 
+    if( !m_AudioIoMgr.isAudioInitialized() )
+    {
+        return len;
+    }
+
+    if( !len )
+    {
+        LogMsg( LOG_ERROR, "AudioInIo::writeData has 0 maxlen. Probably doing too much cpu processing in AudioInIo::writeData" );
+        return len;
+    }
+
+    // Qt no longer supports 8000 hz on all devices so everthing in is 48000 hz pcm data
+    // ptop engine uses 8000 hz only
+
+    // NOTE: so far Qt has used microphone write lengths evenly divisible down to 8000Hz. If this changes will need to add remainder handling
+
     int inSampleCnt = (int)len >> 1;
     int16_t* sampleInData = (int16_t*)data;
+
+    int outSampleCnt = inSampleCnt / m_DivideCnt;
+
+    static int16_t* sampleOutData = nullptr;
+    static qint64 lastMicWriteLen = 0;
+    if( len != lastMicWriteLen )
+    {
+        // first time or device changed or read buffer len changed
+        // unfortunately Qt sometimes changes the microphone write len so also need to handle that
+        m_MicWriteDurationUs = (int)AudioUtils::audioDurationUs( m_AudioFormat, len );
+        m_MicWriteTimeEstimator.setIntervalUs( m_MicWriteDurationUs );
+        if( 0 != lastMicWriteLen )
+        {
+            LogMsg( LOG_VERBOSE, "AudioInIo::writeData len changed from %d to %d ", lastMicWriteLen, len );
+        }
+
+        lastMicWriteLen = len;
+
+        delete[] sampleOutData;
+        sampleOutData = new int16_t[ (inSampleCnt / getDivideSamplesCount()) + 1 ]; // plus one for remainder sample if needed
+
+        m_AudioIoMgr.setEchoCancelerNeedsReset( true ); // tell echo canceler parameters have changed and need to restart
+    }
+
+    int64_t timeNow = m_MyApp.elapsedMilliseconds();
+    bool timeIntervalTooLong;
+    int64_t micWriteTime = m_MicWriteTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
+    if( std::abs( timeNow - micWriteTime ) > 40 )
+    {
+        LogMsg( LOG_VERBOSE, "AudioInIo::writeData time estimate excessive time dif %d too long ? %d", (int)std::abs( timeNow - micWriteTime ), timeIntervalTooLong );
+    }
+
     if( m_AudioTestState != eAudioTestStateNone )
     {
         if( m_AudioTestState == eAudioTestStateRun && !m_AudioTestDetectTimeMs )
         {
-            audioTestDetectTestSound( sampleInData, inSampleCnt );
+            audioTestDetectTestSound( sampleInData, inSampleCnt, micWriteTime );
         }
 
         return len;
     }
 
-
-    // Qt no longer supports 8000 hz on all devices so everthing in is 48000 hz pcm data
-    // webrtc says it support 8000 hz echo cancel but seems to have issues so use 16000 hz for echo cancel fpr webrtc
-    // ptop engine uses 8000 hz only
-
-    int outSampleCnt = inSampleCnt / m_DivideCnt;
-    int16_t* sampleOutData = new int16_t[ outSampleCnt ];
-
-    bool echoCancelEnabled = m_AudioIoMgr.geAudioEchoCancel().isEchoCancelEnabled();
-    if( echoCancelEnabled )
+    AudioUtils::dnsamplePcmAudio( sampleInData, outSampleCnt, m_DivideCnt, sampleOutData );
+    if( m_AudioIoMgr.getAudioTimingEnable() )
     {
-        if( ECHO_SAMPLE_RATE == 8000 )
+        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
+        if( elapsedInFunction > 2 )
         {
-            int echoSampleCnt = outSampleCnt;
-            int16_t* echoMicData = new int16_t[ echoSampleCnt ];
-            AudioUtils::dnsamplePcmAudio( sampleInData, echoSampleCnt, m_DivideCnt, echoMicData );
-            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().microphoneWroteSamples( echoMicData, echoSampleCnt, sampleOutData );
-            delete[] echoMicData;
+            LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING spent %d ms in dnsamplePcmAudio", elapsedInFunction );
         }
-        else if( ECHO_SAMPLE_RATE == 16000 )
+
+        timeNow = m_MyApp.elapsedMilliseconds();
+    }
+
+    if( m_AudioIoMgr.getAudioTimingEnable() )
+    {
+        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
+        if( elapsedInFunction > 2 )
         {
-            int echoSampleCnt = outSampleCnt * 2;
-            int16_t* echoMicData = new int16_t[ echoSampleCnt ];
-            int16_t* echoCanceledData = new int16_t[ echoSampleCnt ];
-            AudioUtils::dnsamplePcmAudio( sampleInData, echoSampleCnt, m_DivideCnt / 2, echoMicData );
-            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().microphoneWroteSamples( echoMicData, echoSampleCnt, echoCanceledData );
-            AudioUtils::dnsamplePcmAudio( echoCanceledData, outSampleCnt, 2, sampleOutData );
-            delete[] echoMicData;
-            if( !echoHasBufferOwnership )
-            {
-                delete[] echoCanceledData;
-            }
+            LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING spent %d ms in getPeakPcmAmplitude0to100", elapsedInFunction );
         }
+
+        timeNow = m_MyApp.elapsedMilliseconds();
+    }
+
+    int64_t micTailTimeMs = micWriteTime + (m_MicWriteDurationUs / 1000);
+    if( m_AudioIoMgr.fromGuiIsEchoCancelEnabled() )
+    {
+        m_AudioIoMgr.getAudioEchoCancel().micWriteSamples( sampleOutData, outSampleCnt, micTailTimeMs );
     }
     else
     {
-        AudioUtils::dnsamplePcmAudio( sampleInData, outSampleCnt, m_DivideCnt, sampleOutData );
+        LogMsg( LOG_ERROR, " AudioInIo::writeData ERROR must use echo canceler.. direct write of samples not implemented" );
+
+        //if( m_AudioIoMgr.getAudioLoopbackEnable() )
+        //{
+        //    m_AudioIoMgr.getAudioLoopback().fromGuiMicrophoneSamples( sampleOutData, outSampleCnt, micWriteTime );
+        //}
+        //else
+        //{
+        //    m_Engine.getMediaProcessor().fromGuiMicrophoneSamples( sampleOutData, outSampleCnt, micWriteTime );
+        //}
     }
 
-    if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
+    bool micIsMuted = m_AudioIoMgr.getIsMicrophoneMuted();
+    if( micIsMuted )
     {
         m_PeakAmplitude = 0;
-        memset( sampleOutData, 0, outSampleCnt * 2 );
     }
     else
     {
         m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( sampleOutData, outSampleCnt * 2 );
     }
 
-    m_Engine.getMediaProcesser().fromGuiMicrophoneSamples( sampleOutData, outSampleCnt, m_PeakAmplitude, m_DivideCnt, 0 );
+    if( m_AudioIoMgr.getAudioTimingEnable() )
+    {
+        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
+        if( elapsedInFunction > 2 )
+        {
+            LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING spent %d ms in .getAudioEchoCancel().micWriteSamples", elapsedInFunction );
+        }
+    }
 
-    delete[] sampleOutData;
+    //if( m_AudioIoMgr.getAudioTimingEnable() )
+    //{
+    //    static int64_t lastMicWriteTime{ 0 };
+    //    static int funcCallCnt{ 0 };
+    //    funcCallCnt++;
+    //    if( lastMicWriteTime )
+    //    {
+    //        int64_t timeInterval = micWriteTime - lastMicWriteTime;
+    //        LogMsg( LOG_VERBOSE, "AudioInIo::writeData %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs() );
+    //    }
+
+    //    lastMicWriteTime = micWriteTime;
+    //}
 
     return len;
-}
-
-//============================================================================
-/// best guess at delay time
-int AudioInIo::calculateMicrophonDelayMs()
-{
-    if( VxIsAppShuttingDown() )
-    {
-        // do not attempt anything while being destroyed
-        return 0;
-    }
-
-    return (int)( AudioUtils::audioDurationUs( m_AudioFormat, getAtomicBufferSize() ) / 1000 + m_AudioIoMgr.toGuiGetAudioCacheTotalMs() );
-}
-
-//============================================================================
-/// space available to que audio data into buffer
-int AudioInIo::audioQueFreeSpace()
-{
-    if( VxIsAppShuttingDown() )
-    {
-        // do not attempt anything while being destroyed
-        return 0;
-    }
-
-	int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - m_AtomicBufferSize;
-	if( freeSpace < 0 )
-	{
-		freeSpace = 0;
-	}
-
-	return freeSpace;
-}
-
-//============================================================================
-/// space used in audio que buffer
-int AudioInIo::audioQueUsedSpace()
-{
-	emit signalCheckForBufferUnderun();
-
-	return m_AudioBuffer.size();
 }
 
 //============================================================================
@@ -330,11 +352,7 @@ qint64 AudioInIo::bytesAvailable() const
         return 0;
     }
 
-	//m_AudioBufMutex.lock();
-	qint64 audioBytesAvailableToRead = m_AudioBuffer.size() + QIODevice::bytesAvailable();
-	//m_AudioBufMutex.unlock();
-
-    return audioBytesAvailableToRead;
+    return m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16;
 }
 
 //============================================================================
@@ -357,67 +375,6 @@ void AudioInIo::onAudioDeviceStateChanged( QAudio::State state )
 // resume qt audio if needed
 void AudioInIo::slotCheckForBufferUnderun()
 {
-    if( VxIsAppShuttingDown() )
-    {
-        // do not attempt anything while being destroyed
-        return;
-    }
-
-	int bufferedAudioData = m_AtomicBufferSize;
-
-    if( bufferedAudioData && m_AudioInputDevice )
-	{
-        QAudio::State audioState = m_AudioInputDevice->state();
-		//qWarning() << "checkForBufferUnderun audioState = " << audioState;
-        QAudio::Error audioError = m_AudioInputDevice->error();
-		//qWarning() << "checkForBufferUnderun audioError = " << audioError;
-//		qWarning() << "checkForBufferUnderun bufferSize = " << m_AudioInputDevice->bufferSize();
-		//qWarning() << "checkForBufferUnderun bytesAvail = " << bufferedAudioData;
-
-		switch( audioState )
-		{
-		case QAudio::ActiveState:
-			break;
-		case QAudio::IdleState:
-			if( audioError == QAudio::UnderrunError )
-			{
-                LogMsg( LOG_DEBUG, "microphone suspending due to underrun" );
- //               m_AudioInputDevice->suspend();
-			}
-			else if( bufferedAudioData )
-			{
-                LogMsg( LOG_DEBUG, "microphone starting due to idle and have data" );
-//				this->startAudio();
-                //m_AudioInputDevice->start( this );
-			}
-			else
-			{
-				// already stopped
-                //m_AudioInputDevice->stop();
-			}
-			break;
-
-		case QAudio::SuspendedState:
-			if( bufferedAudioData )
-			{ 
-                LogMsg( LOG_DEBUG, "microphone restarting due to suspended and have data" );
- //               m_AudioInputDevice->start( this );
-			}
-			break;
-
-		case QAudio::StoppedState: 
-			if( bufferedAudioData )
-			{
-                LogMsg( LOG_DEBUG, "microphone starting due to stopped and have data" );
- //               m_AudioInputDevice->start( this );
-			}
-			break;
-
-        default:
-            LogMsg(LOG_DEBUG, "Unknown AudioIn State");
-            break;
-		};
-	}
 }
 
 //============================================================================
@@ -447,8 +404,6 @@ void AudioInIo::wantMicrophoneInput( bool enableInput )
 
         // start in pull mode.. qt will call writeData as needed for microphone input
         m_AudioInputDevice->start( this );
-        m_AudioInThread.setThreadShouldRun( true );
-        m_AudioInThread.startAudioInThread();
     }
     else
     {
@@ -490,7 +445,7 @@ void AudioInIo::setAudioTestState( EAudioTestState audioTestState )
 }
 
 //============================================================================
-void AudioInIo::audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt )
+void AudioInIo::audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt, int64_t& micWriteTime )
 {
     if( m_AudioTestDetectTimeMs )
     {
@@ -527,6 +482,6 @@ void AudioInIo::audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt
 
     if( sampPosCnt > 2 && sampNegCnt > 2 )
     {
-        m_AudioTestDetectTimeMs = GetGmtTimeMs() + AudioUtils::audioDurationMs( m_AudioFormat, sampStartIdx * 2 );
+        m_AudioTestDetectTimeMs = micWriteTime + AudioUtils::audioDurationMs( m_AudioFormat, sampStartIdx * 2 );
     }
 }

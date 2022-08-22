@@ -77,7 +77,7 @@ void AppletSettingsHostGroup::savePluginSetting()
     if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
     {
         saveUiToSetting();
-        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting, GetGmtTimeMs() );
+        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting, m_MyApp.elapsedMilliseconds() );
     }
 }
 

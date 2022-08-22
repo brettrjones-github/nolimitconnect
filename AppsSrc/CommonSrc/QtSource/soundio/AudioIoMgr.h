@@ -20,6 +20,8 @@
 #include <QWidget>
 
 #include "AudioEchoCancel.h"
+#include "AudioLoopback.h"
+#include "AudioMasterClock.h"
 #include "AudioMixer.h"
 #include "AudioOutIo.h"
 #include "AudioInIo.h"
@@ -35,12 +37,13 @@ public:
 
     ~AudioIoMgr() override = default;
 
-    void                        initAudioIoSystem();
-    void                        destroyAudioIoSystem();
+    void                        audioIoSystemStartup();
+    void                        audioIoSystemShutdown();
 
+    AppCommon&                  getMyApp( void )                        { return m_MyApp; }
     P2PEngine&                  getEngine( void );
     QMediaDevices*              getMediaDevices( void )                 { return m_MediaDevices; }
-    AudioEchoCancel&            geAudioEchoCancel( void )               { return m_AudioEchoCancel; }
+    AudioEchoCancel&            getAudioEchoCancel( void )              { return m_AudioEchoCancel; }
 
     virtual int				    getMicrophonePeakValue0To100( void );
 
@@ -58,6 +61,9 @@ public:
     AudioInIo&                  getAudioInIo( void )                    { return m_AudioInIo; }
     AudioOutIo&                 getAudioOutIo( void )                   { return m_AudioOutIo; }
 
+    AudioMasterClock&           getAudioMasterClock( void )             { return m_AudioMasterClock; }
+    AudioLoopback&              getAudioLoopback( void )                { return m_AudioLoopback; }
+
     const char *                describeAudioState( QAudio::State state );
     const char *                describeAudioError( QAudio::Error err );
 
@@ -72,7 +78,7 @@ public:
     bool                        isMicrophoneInputWanted( void )         { return m_WantMicrophone; }
 
     void                        fromGuiMuteMicrophone( bool mute );
-    bool                        fromGuiIsMicrophoneMuted( void )        { return m_MicrophoneMuted; }
+    bool                        getIsMicrophoneMuted( void )            { return m_MicrophoneMuted; }
 
     bool                        isSpeakerAvailable( void )              { return m_SpeakerAvailable; }
     bool                        isSpeakerEnabled( void )                { return m_WantSpeakerOutput; }
@@ -81,8 +87,16 @@ public:
     void                        fromGuiMuteSpeaker( bool mute );
     bool                        fromGuiIsSpeakerMuted()                 { return m_SpeakersMuted; }
 
-    void                        fromGuiEchoCancelEnable( bool enable )  { m_EchoCancelEnabled = enable; }
-    bool                        fromGuiIsEchoCancelEnabled()            { return m_EchoCancelEnabled; }
+    void                        fromGuiEchoCancelEnable( bool enable );
+    bool                        fromGuiIsEchoCancelEnabled( void )      { return m_EchoCancelEnabled; }
+
+    void                        setAudioLoopbackEnable( bool enable )   { m_AudioLoopbackEnabled = enable; }
+    bool                        getAudioLoopbackEnable( void )          { return m_AudioLoopbackEnabled; }
+
+    void                        setAudioTimingEnable( bool enable ) { m_AudioLoopbackEnabled = enable; }
+    bool                        getAudioTimingEnable( void ) { return m_AudioLoopbackEnabled; }
+
+    void                        setEchoCancelerNeedsReset( bool needReset );
 
     //=== IAudioRequests ===//
     // enable disable microphone data callback
@@ -128,6 +142,10 @@ public:
     bool                        runAudioDelayTest( void );
 
     void                        setEchoDelayMsParam( int delayMs )      { m_AudioEchoCancel.setEchoDelayMsParam( delayMs ); }
+
+    void                        frame80msElapsed( void );
+
+    void                        processAudioOutThreaded( void );
 
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
@@ -205,4 +223,10 @@ protected:
     int                         m_EchoDelayTestMaxInterations{ 3 };
     int                         m_EchoDelayCurrentInteration{ 0 };
     std::vector<int>            m_EchoDelayResultList;
+
+    AudioMasterClock            m_AudioMasterClock;
+
+    bool                        m_AudioTimingEnabled{ false };
+    bool                        m_AudioLoopbackEnabled{ false };
+    AudioLoopback               m_AudioLoopback;
 };

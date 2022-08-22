@@ -17,7 +17,12 @@
 
 #include "AudioDefs.h"
 
-#include "AudioEchoBuf.h"
+#include "AudioSampleBuf.h"
+
+#include <CoreLib/TimeIntervalEstimator.h>
+#include <CoreLib/VxMutex.h>
+#include <CoreLib/VxThread.h>
+#include <CoreLib/VxSemaphore.h>
 
 #if defined(USE_SPEEX_ECHO_CANCEL)
 # include <libspeex/speex/speex_echo.h>
@@ -43,10 +48,6 @@ class AudioEchoCancelImpl : public QObject
 
 public:
 
-	static const int			MIN_TIME_ESTIMATE_COUNT = 3; // minimun number of system times to estimate what the next time read/write samples time should be
-	static const int			MAX_TIME_ESTIMATE_COUNT = 8; // dont grow the number of sample times past this or takes to much cpu time for little gain in accuracy
-
-
 	AudioEchoCancelImpl( AppCommon& appCommon, AudioIoMgr& audioIoMgr, QObject* parent );
 	virtual ~AudioEchoCancelImpl();
 
@@ -59,60 +60,84 @@ public:
 	void						setEchoDelayMsConstant( int delayMs )	{ m_EchoDelayMsConstant = delayMs; }
 	int							getEchoDelayMsConstant( void )			{ return m_EchoDelayMsConstant; }
 
-	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer
-	bool						microphoneWroteSamples( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData );
+	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs );
 
-	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer
-	bool						speakerReadSamples( int16_t* speakerReadBuf, int sampleCnt );
+	void						micWriteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs );
 
-	static int64_t				calculateEchoSamplesUs( int sampleCnt ) { return (sampleCnt * 1000000) / ECHO_SAMPLE_RATE; }
-	static int64_t				calculateEchoSamplesMs( int sampleCnt ) { return (sampleCnt * 1000) / ECHO_SAMPLE_RATE; }
+	void						frame80msElapsed( void ); // called from master clock
+
+	void                        setEchoCancelerNeedsReset( bool needReset )		{ m_EchoCancelNeedsReset = needReset; }
+
+	static int64_t				calculateEchoSamplesUs( int sampleCnt )			{ return (sampleCnt * 1000000) / ECHO_SAMPLE_RATE; }
+	static int64_t				calculateEchoSamplesMs( int sampleCnt )			{ return (sampleCnt * 1000) / ECHO_SAMPLE_RATE; }
+
+	void						processEchoRunThreaded( void );
 
 protected:
+	void						processEchoCancelThreaded( void );
+
+	void						checkFor80msFrameElapsed( void );
+
+	bool						attemptEchoSync( void );
 
 	void						resetEchoCancel( void );
-
-	void						resetMicWriteTimeEstimator( void );
-	int16_t						micWriteTimeEstimation( int16_t systemTimeMs );
-
-	void						resetSpeakerReadTimeEstimator( void );
-	int16_t						speakerReadTimeEstimation( int16_t systemTimeMs );
-
-	int64_t						estimateTime( int16_t& systemTimeMs, std::vector<int64_t>& timesMsList, int64_t& timeIntervalUs );
-
-	bool						fetchdSpeakerEchoSamples( int16_t* sampleBuf, int sampleCnt, int64_t timeEstimate );
 
 	bool						processWebRtcEchoCancel( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData );
 
 #if defined(USE_SPEEX_ECHO_CANCEL)
 	void						startupSpeex( int sampleCnt );
+	void						resetSpeex( int sampleCnt );
 	void						shutdownSpeex( void );
-	void						processSpeexEchoCancel( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData );
 #endif // defined(USE_SPEEX_ECHO_CANCEL)
 	
 	//=== vars ===//
 	AppCommon&					m_MyApp;
 	AudioIoMgr&					m_AudioIoMgr;
-	bool						m_EchoCancelEnable{ false };
 	bool						m_DbgLogEnable{ false };
+
+	bool						m_EchoCancelEnable{ false };
+	bool						m_EchoCancelNeedsReset{ false };
 
 	int							m_EchoDelayMsConstant{ 100 };
 
 	int							m_MicSamplesPerWrite{ 0 };
 	int64_t						m_MicWriteSamplesUs{ 0 };
-	std::vector<int64_t>		m_MicWriteTimes;
-	std::vector<AudioEchoBuf>	m_MicBufs;
 
 	int							m_SpeakerSamplesPerRead{ 0 };
 	int64_t						m_SpeakerReadSamplesUs{ 0 };
-	std::vector<int64_t>		m_SpeakerReadTimes;
-	std::vector<AudioEchoBuf>	m_SpeakerBufs;
+
+	bool						m_EchoCancelInSync{ false };
+
+	bool						m_Frame80msElapsed{ false };
+
+	VxMutex						m_SpeakerSamplesMutex;
+	AudioSampleBuf				m_SpeakerSamples;
+	int64_t						m_TailSpeakerSamplesMs{ 0 };
+	int64_t						m_HeadSpeakerSamplesMs{ 0 };
+
+	VxMutex						m_MicSamplesMutex;
+	AudioSampleBuf				m_MicSamples;
+	int64_t						m_TailMicSamplesMs{ 0 };
+	int64_t						m_HeadMicSamplesMs{ 0 };
+
+	VxMutex						m_EchoCanceledSamplesMutex;
+	AudioSampleBuf				m_EchoCanceledSamples;
+	int64_t						m_TailEchoCanceledSamplesMs{ 0 };
+	int64_t						m_HeadEchoCanceledSamplesMs{ 0 };
+
+	VxSemaphore					m_ProcessEchoSemaphore;
+	VxThread					m_ProcessEchoThread;
+
+	AudioSampleBuf				m_ProcessSpeakerSamples;
+	AudioSampleBuf				m_ProcessMicSamples;
+
+	int16_t						m_QuietSamplesBuf[ MIXER_CHUNK_LEN_SAMPLES ];
 
 #if defined(USE_SPEEX_ECHO_CANCEL)
 	SpeexEchoState*				m_SpeexState{ nullptr };
 	SpeexPreprocessState*		m_SpeexPreprocess{ nullptr };
 	bool						m_SpeexInitialized{ false };
-	int16_t*					m_SpeexProcessBuf{ nullptr };
+
 #elif defined(USE_WEB_RTC_ECHO_CANCEL_1)
 	EchoCancel					m_EchoCancel;
 #elif defined(USE_WEB_RTC_ECHO_CANCEL_3)
@@ -130,9 +155,11 @@ protected:
 
 #if defined(USE_WEB_RTC_ECHO_CANCEL_1) || defined(USE_WEB_RTC_ECHO_CANCEL_3)
 	int							m_SamplesPer10ms{ 0 };
-	int16_t*					m_MicEchoBuf10ms{ nullptr };
-	int16_t*					m_MicRemainderBuf{ nullptr };
+	int16_t* m_MicEchoBuf10ms{ nullptr };
+	int16_t* m_MicRemainderBuf{ nullptr };
 	int							m_MicRemainderSampleCnt{ 0 };
-	int16_t*					m_SpeakerBuf10ms{ nullptr };
+	int16_t* m_SpeakerBuf10ms{ nullptr };
 #endif //#if defined(USE_WEB_RTC_ECHO_CANCEL_1) || defined(USE_WEB_RTC_ECHO_CANCEL_3)
+
+
 };

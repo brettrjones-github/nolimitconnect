@@ -106,7 +106,7 @@ bool SoundMgr::sndMgrStartup( void )
 bool SoundMgr::sndMgrShutdown( void )
 {
 	m_MyApp.wantToGuiHardwareCtrlCallbacks( this, false );
-    destroyAudioIoSystem();
+	audioIoSystemShutdown();
 	return true;
 }
 

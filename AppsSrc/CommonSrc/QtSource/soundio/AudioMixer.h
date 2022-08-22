@@ -21,8 +21,10 @@
 #include <QElapsedTimer>
 #include <QAudioFormat>
 
+class AppCommon;
 class AudioIoMgr;
 class IAudioCallbacks;
+class AudioSampleBuf;
 
 class AudioMixer : public QWidget
 {
@@ -41,8 +43,8 @@ public:
 
     QAudioFormat&               getMixerFormat( void )                  { return m_MixerFormat; }
 
-    void                        lockMixer() { m_MixerMutex.lock(); }
-    void                        unlockMixer() { m_MixerMutex.unlock(); }
+    void                        lockMixer( void )                       { m_MixerMutex.lock(); }
+    void                        unlockMixer( void )                     { m_MixerMutex.unlock(); }
 
     void                        shutdownAudioMixer( void );
 
@@ -53,7 +55,7 @@ public:
     virtual int				    toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence );
 
     // read audio data from mixer.. assumes upSampleMult is multiplier to upsample pcm 1 channel 8000 Hz
-    qint64                      readRequestFromSpeaker( char *data, qint64 maxlen, int upSampleMult );
+    qint64                      readRequestFromSpeaker( char *data, qint64 maxlen, int upSampleMult, AudioSampleBuf& echoFarBuf );
 
     // read mono 8000Hz pcm audio data from mixer.. fill silence for underrun of data. return number of silenced samples
     int                         readDataFromMixer( int16_t* pcmRetBuf, int sampleCnt, int16_t& peekAtNextSample );
@@ -81,9 +83,10 @@ public:
 protected:
     int                         getModuleFrameIndex( EAppModule appModule )         { return m_ModuleBufIndex[ appModule ]; }
     void                        incrementModuleFrameIndex( EAppModule appModule )   { m_ModuleBufIndex[ appModule ]++; if( m_ModuleBufIndex[ appModule ] >= MAX_MIXER_FRAMES ) m_ModuleBufIndex[ appModule ] = 0; }
-    int                         incrementMixerReadIndex( void ) { m_MixerReadIdx++; if( m_MixerReadIdx >= MAX_MIXER_FRAMES ) m_MixerReadIdx = 0; return m_MixerReadIdx;  }
+    int                         incrementMixerReadIndex( void )                     { m_MixerReadIdx++; if( m_MixerReadIdx >= MAX_MIXER_FRAMES ) m_MixerReadIdx = 0; return m_MixerReadIdx; }
 
     AudioIoMgr&                 m_AudioIoMgr;
+    AppCommon&                  m_MyApp;
     IAudioCallbacks&            m_AudioCallbacks;
     QMutex                      m_AudioCallbackMutex;
 

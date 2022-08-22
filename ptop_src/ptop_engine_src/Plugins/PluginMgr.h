@@ -117,7 +117,6 @@ public:
 	VxNetIdent *				pluginApiOnlineIdToIdentity( VxGUID& oOnlineId );
 
 	virtual void				onAppStateChange( EAppState eAppState );
-	virtual void				fromGuiAppIdle( void );
 	virtual void				onAppStartup( void );
 	virtual void				onAppShutdown( void );
 

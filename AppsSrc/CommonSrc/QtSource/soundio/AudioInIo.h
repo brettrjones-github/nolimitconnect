@@ -15,19 +15,22 @@
 //============================================================================
 
 #include "AudioDefs.h"
-#include "AudioInThread.h"
+
+#include <CoreLib/TimeIntervalEstimator.h>
 
 #include <QObject>
 #include <QIODevice>
 #include <QByteArray>
 #include <QAudioFormat>
 #include <QAudioInput>
+#include <QElapsedTimer>
 #include <QIODevice>
 #include <QMutex>
 #include <QAudioSource>
 #include <QMediaDevices>
 
 class AudioIoMgr;
+class AppCommon;
 class P2PEngine;
 
 class AudioInIo : public QIODevice
@@ -57,32 +60,23 @@ public:
 
     void                        flush();
 
-    QByteArray&					getAudioBuffer()    { return m_AudioBuffer; }
-    char *                      getMicSilence()     { return m_MicSilence; }
+    char *                      getMicSilence()                     { return m_MicSilence; }
 
-    int                         getAtomicBufferSize() { return m_AtomicBufferSize; }
-    void                        updateAtomicBufferSize() { m_AtomicBufferSize = m_AudioBuffer.size(); }
+    void                        suspend()                           { if (m_AudioInputDevice.data() ) m_AudioInputDevice->suspend(); }
+    void                        resume()                            { if (m_AudioInputDevice.data() ) m_AudioInputDevice->resume(); }
 
-	/// space available to que audio data into buffer
-	int							audioQueFreeSpace();
+    QAudio::State               getState()                          { return (m_AudioInputDevice.data() ? m_AudioInputDevice->state() : QAudio::StoppedState); }
+    QAudio::Error               getError()                          { return (m_AudioInputDevice.data() ? m_AudioInputDevice->error() : QAudio::NoError); }
 
-	/// space used in audio que buffer
-	int							audioQueUsedSpace();
+    QAudioSource*               getAudioIn()                        { return m_AudioInputDevice.data(); }
 
-    int                         calculateMicrophonDelayMs();
+    void                        setDivideSamplesCount( int cnt )    { m_DivideCnt = cnt; }
+    int                         getDivideSamplesCount( void )       { return m_DivideCnt; }
 
-    void                        suspend()                       { if (m_AudioInputDevice.data() ) m_AudioInputDevice->suspend(); }
-    void                        resume()                        { if (m_AudioInputDevice.data() ) m_AudioInputDevice->resume(); }
-
-    QAudio::State               getState()                      { return (m_AudioInputDevice.data() ? m_AudioInputDevice->state() : QAudio::StoppedState); }
-    QAudio::Error               getError()                      { return (m_AudioInputDevice.data() ? m_AudioInputDevice->error() : QAudio::NoError); }
-
-    QAudioSource*               getAudioIn()                    { return m_AudioInputDevice.data(); }
-
-    void                        setDivideSamplesCount( int cnt ) { m_DivideCnt = cnt; m_AudioInThread.setDivideSamplesCount( cnt ); }
+    int                         getMicWriteDurationUs( void )       { return m_MicWriteDurationUs; }
 
     void                        setAudioTestState( EAudioTestState audioTestState );
-    int64_t                     getAudioTestDetectTime( void )  { return m_AudioTestDetectTimeMs; }
+    int64_t                     getAudioTestDetectTime( void )      { return m_AudioTestDetectTimeMs; }
 
 signals:
     void						signalCheckForBufferUnderun();
@@ -97,9 +91,10 @@ protected:
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
 
-    void                        audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt );
+    void                        audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt, int64_t& micWriteTime );
 
     AudioIoMgr&                 m_AudioIoMgr;
+    AppCommon&                  m_MyApp;
     P2PEngine&                  m_Engine;
     QMutex&                     m_AudioBufMutex;
 
@@ -109,11 +104,8 @@ protected:
     bool                        m_AudioInDeviceIsStarted{ false };
     QAudioFormat                m_AudioFormat;
 
-    QByteArray					m_AudioBuffer;
     QAudio::State               m_AudioInState = QAudio::State::StoppedState;
     char                        m_MicSilence[ AUDIO_BUF_SIZE_8000_1_S16 ];
-    AudioInThread               m_AudioInThread;
-    QAtomicInt                  m_AtomicBufferSize;
     int                         m_DivideCnt{ 1 };
     int                         m_PeakAmplitude{ 0 };
     float                       m_MicrophoneVolume{ 0.0f };
@@ -123,4 +115,7 @@ protected:
 
     EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
     int16_t                     m_AudioTestDetectTimeMs{ 0 };
+
+    TimeIntervalEstimator       m_MicWriteTimeEstimator;
+    int                         m_MicWriteDurationUs{ 0 };
 };

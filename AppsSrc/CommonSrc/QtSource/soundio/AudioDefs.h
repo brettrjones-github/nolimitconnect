@@ -7,12 +7,14 @@
 
 #if defined( USE_SPEEX_ECHO_CANCEL )
 static const int ECHO_SAMPLE_RATE = 8000;    
-static const int ECHO_BYTES_PER_SAMPLE = 4;
-static const int ECHO_BUFFER_COUNT = 8;
+static const int ECHO_BYTES_PER_SAMPLE = 2;
+
 #elif defined( USE_WEB_RTC_ECHO_CANCEL_1 )
 static const int ECHO_SAMPLE_RATE = 16000;
+
 #elif defined( USE_WEB_RTC_ECHO_CANCEL_3 )
 static const int ECHO_SAMPLE_RATE = 16000;
+
 #endif // defined( USE_SPEEX_ECHO_CANCEL )
 
 static const int ECHO_SAMPLES_PER_10MS = ECHO_SAMPLE_RATE / 100; // ( ECHO_SAMPLE_RATE * 1 channels ) * 0.01 = 10 ms of audio data

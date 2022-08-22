@@ -333,7 +333,7 @@ void OpusFileDecoder::moveOpusFramesToOutput( uint8_t * outBuffer )
 		{
 			char * frame1 =  m_DecodedFrames[0];
 			// in many android devices seem low volume. do a boost in volume
-			m_Engine.getMediaProcesser().increasePcmSampleVolume( (int16_t *)frame1, 640, 20 );
+			m_Engine.getMediaProcessor().increasePcmSampleVolume( (int16_t *)frame1, 640, 20 );
 			memcpy( outBuffer, frame1, 640 );
 			m_DecodedFrames.erase( m_DecodedFrames.begin() );
 			m_ConsumedSndFrames++;

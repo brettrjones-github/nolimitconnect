@@ -47,7 +47,7 @@ GuiGroupie::GuiGroupie( AppCommon& app, GuiUser* guiUser, GroupieId& groupieId, 
     , m_GroupieId( groupieId )
     , m_SessionId( sessionId )
 {
-    setGroupieInfoTimestamp( GetGmtTimeMs() );
+    setGroupieInfoTimestamp( m_MyApp.elapsedMilliseconds() );
     setGroupieUrl( guiUser->getNetIdent().getMyOnlineUrl() );
     setGroupieTitle( guiUser->getOnlineName() );
     setGroupieDescription( guiUser->getOnlineDescription() );

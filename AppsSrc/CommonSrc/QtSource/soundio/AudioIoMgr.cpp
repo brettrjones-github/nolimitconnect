@@ -23,6 +23,25 @@
 
 #include <CoreLib/VxDebug.h>
 
+namespace
+{
+    //============================================================================
+    static void* AudioOutProcessThreadFunc( void* pvContext )
+    {
+        VxThread* poThread = (VxThread*)pvContext;
+        poThread->setIsThreadRunning( true );
+        AudioIoMgr* processor = (AudioIoMgr*)poThread->getThreadUserParam();
+        if( processor )
+        {
+            processor->processAudioOutThreaded();
+        }
+
+        poThread->threadAboutToExit();
+        return nullptr;
+    }
+}
+
+
 //============================================================================
 AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget* parent )
     : QWidget( parent )
@@ -34,6 +53,8 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
     , m_AudioInIo( *this, m_AudioInMutex, this )
     , m_AudioEchoCancel( app, *this, this )
     , m_AudioTestTimer( new QTimer( this ) )
+    , m_AudioMasterClock( *this, this )
+    , m_AudioLoopback( *this )
 {
     m_AudioTestTimer->setInterval( 600 );
     connect( m_AudioTestTimer, SIGNAL(timeout()), this, SLOT(slotAudioTestTimer()) );
@@ -67,6 +88,10 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
         m_MicrophoneAvailable = false;
         LogMsg( LOG_DEBUG, "No Microphone available" );
     }
+
+    // BRJ temp for testing
+    setAudioLoopbackEnable( true );
+    setAudioTimingEnable( true );
 }
 
 //============================================================================
@@ -196,11 +221,13 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
  }
 
 //============================================================================
-void AudioIoMgr::initAudioIoSystem()
+void AudioIoMgr::audioIoSystemStartup()
 {
-
     if( !m_AudioIoInitialized )
     {
+        m_EchoCancelEnabled = m_MyApp.getAppSettings().getEchoCancelEnable();
+        m_AudioEchoCancel.enableEchoCancel( m_EchoCancelEnabled );
+
         m_AudioOutIo.initAudioOut( m_AudioOutFormat, m_MediaDevices->defaultAudioOutput() );
 
         connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( speakerStateChanged( QAudio::State ) ) );
@@ -212,13 +239,16 @@ void AudioIoMgr::initAudioIoSystem()
             connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
         }
 
+        m_AudioMasterClock.audioMasterClockStartup();
         m_AudioIoInitialized = true;
     }
 }
 
 //============================================================================
-void AudioIoMgr::destroyAudioIoSystem()
+void AudioIoMgr::audioIoSystemShutdown()
 {
+    m_AudioLoopback.audioLoopbackShutdown();
+    m_AudioMasterClock.audioMasterClockShutdown();
     m_AudioIoInitialized = false;
     stopAudioOut();
     stopAudioIn();
@@ -399,8 +429,6 @@ const char * AudioIoMgr::describeAudioError( QAudio::Error err )
 //============================================================================
 void AudioIoMgr::fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace )
 {
-    IAudioCallbacks& audioCallbacks = getAudioCallbacks();
-    audioCallbacks.fromGuiAudioOutSpaceAvail( pcmMixerAvailableSpace );
 }
     
 //============================================================================
@@ -630,4 +658,51 @@ bool AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDet
     emit signalAudioTestMsg( resultMsg );
     emit signalTestedSoundDelay( (int)timeDif );
     return isValid;
+}
+
+//============================================================================
+void AudioIoMgr::fromGuiEchoCancelEnable( bool enable ) 
+{ 
+    m_EchoCancelEnabled = enable; 
+    m_AudioEchoCancel.enableEchoCancel( m_EchoCancelEnabled );
+    m_MyApp.getAppSettings().setEchoCancelEnable( m_EchoCancelEnabled );
+}
+
+//============================================================================
+void AudioIoMgr::frame80msElapsed( void )
+{
+    if( getAudioLoopbackEnable() )
+    {
+        m_AudioLoopback.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+    }
+    else
+    {
+        IAudioCallbacks& audioCallbacks = getAudioCallbacks();
+        audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+    }
+
+    if( m_EchoCancelEnabled )
+    {
+        m_AudioEchoCancel.frame80msElapsed();
+    }
+}
+
+//============================================================================
+void AudioIoMgr::processAudioOutThreaded( void )
+{
+    if( getAudioLoopbackEnable() )
+    {
+        m_AudioLoopback.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+    }
+    else
+    {
+        IAudioCallbacks& audioCallbacks = getAudioCallbacks();
+        audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+    }
+}
+
+//============================================================================
+void AudioIoMgr::setEchoCancelerNeedsReset( bool needReset )
+{
+    m_AudioEchoCancel.setEchoCancelerNeedsReset( needReset );
 }

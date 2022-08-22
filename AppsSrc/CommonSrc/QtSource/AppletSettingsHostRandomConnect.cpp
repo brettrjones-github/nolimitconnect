@@ -80,7 +80,7 @@ void AppletSettingsHostRandomConnect::savePluginSetting()
     if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
     {
         saveUiToSetting();
-        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting, GetGmtTimeMs() );
+        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting, m_MyApp.elapsedMilliseconds() );
     }
 }
 
@@ -88,7 +88,7 @@ void AppletSettingsHostRandomConnect::savePluginSetting()
 void AppletSettingsHostRandomConnect::slotApplyServiceSettings()
 {
     saveUiToSetting();
-    m_PluginSetting.setLastUpdateTimestamp( GetGmtTimeMs() );
+    m_PluginSetting.setLastUpdateTimestamp( m_MyApp.elapsedMilliseconds() );
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
     EFriendState newPermissionLevel = getPluginSettingsWidget()->getPermissionWidget()->getPermissionLevel();
     // EFriendState newGroupListPermission = getGroupListingWidget()->getPermissionLevel();

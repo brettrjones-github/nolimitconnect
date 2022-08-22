@@ -100,34 +100,3 @@ int AppCommon::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* picBuf, uint3
 
 	return m_PlayerMgr.toGuiPlayVideoFrame( feedOnlineId, picBuf, picBufLen, picWidth, picHeight );
 }
-
-//============================================================================
-//! time to send out new video frame
-void AppCommon::onVidCapTimer( void )
-{
-#ifdef TARGET_OS_WINDOWS
-	uint32_t u32ImageLen = 0;
-	uint32_t u32Format = 0;
-	uint8_t * pu8VidBmp  = m_VidCap->takeSnapShot( 0, u32ImageLen, u32Format );
-	if( pu8VidBmp )
-	{
-		BITMAPINFO * poBitmap = (BITMAPINFO *)pu8VidBmp;
-		if( (0 == u32Format) &&
-			(0 != poBitmap->bmiHeader.biSizeImage ) &&
-			(poBitmap->bmiHeader.biSizeImage == (poBitmap->bmiHeader.biWidth * poBitmap->bmiHeader.biHeight * 3)))
-		{
-			// some cams do not place format in bitmap even though data is valid ie (Microsoft LifeCam VX-3000)
-			u32Format = FOURCC_RGB;
-		}
-
-		// send out video frame as bitmap
-		getEngine().fromGuiVideoData(	u32Format, // format
-									(uint8_t *)&pu8VidBmp[poBitmap->bmiHeader.biSize], 
-									poBitmap->bmiHeader.biWidth,
-									poBitmap->bmiHeader.biHeight,
-									poBitmap->bmiHeader.biSizeImage,
-									m_CamCaptureRotation );
-		delete pu8VidBmp;
-	}
-#endif // TARGET_OS_WINDOWS
-}

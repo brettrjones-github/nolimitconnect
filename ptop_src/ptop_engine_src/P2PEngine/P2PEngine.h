@@ -129,7 +129,7 @@ public:
     NetworkStateMachine&		getNetworkStateMachine( void )					{ return m_NetworkStateMachine; }
 	NetworkMonitor&				getNetworkMonitor( void )						{ return m_NetworkMonitor; } 
 	NetServicesMgr&				getNetServicesMgr( void )						{ return m_NetServicesMgr; }
-	MediaProcessor&				getMediaProcesser( void )						{ return m_MediaProcessor; }
+	MediaProcessor&				getMediaProcessor( void )						{ return m_MediaProcessor; }
 	VxPeerMgr&					getPeerMgr( void )								{ return m_PeerMgr; }
     P2PConnectList&				getConnectList( void )							{ return m_ConnectionList; }
     PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
@@ -210,7 +210,6 @@ public:
     virtual uint64_t			fromGuiGetDiskFreeSpace( void  ) override;
     virtual uint64_t			fromGuiClearCache( ECacheType cacheType ) override;
     virtual void				fromGuiAppShutdown( void  ) override;
-    virtual void				fromGuiAppIdle( void  ) override;
     virtual void				fromGuiAppPause( void ) override;
     virtual void				fromGuiAppResume( void ) override;
 
@@ -237,7 +236,6 @@ public:
     virtual void				fromGuiNativeGlResumeRender( void ) override;
     virtual void				fromGuiNativeGlDestroy( void ) override;
 
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
     virtual bool				fromGuiIsMicrophoneMuted( void ) override;
     virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) override;

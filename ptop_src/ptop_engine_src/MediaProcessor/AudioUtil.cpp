@@ -16,7 +16,7 @@
 #include "AudioUtil.h"
 
 //============================================================================
-void PcmS16ToFloats( int16_t * pcmData, uint32_t pcmLenInBytes, float * retFloatBuf )
+void AudioUtil::PcmS16ToFloats( int16_t * pcmData, uint32_t pcmLenInBytes, float * retFloatBuf )
 {
 	int numSamples = pcmLenInBytes >> 1;
 	for( int i = 0; i < numSamples; i++ )
@@ -26,7 +26,7 @@ void PcmS16ToFloats( int16_t * pcmData, uint32_t pcmLenInBytes, float * retFloat
 }
 
 //============================================================================
-void FloatsToPcmS16( float * floatBuf, int16_t * pcmRetData, uint32_t pcmLenInBytes )
+void AudioUtil::FloatsToPcmS16( float * floatBuf, int16_t * pcmRetData, uint32_t pcmLenInBytes )
 {
 	int numSamples = pcmLenInBytes >> 1;
 	for( int i = 0; i < numSamples; i++ )
@@ -34,3 +34,56 @@ void FloatsToPcmS16( float * floatBuf, int16_t * pcmRetData, uint32_t pcmLenInBy
 		pcmRetData[i] = FloatToPcmS16( floatBuf[i] );
 	}
 }
+
+//=============================================================================
+static int16_t MixPcmSample( int a, int b ) // int16_t sample1, int16_t sample2 ) 
+{
+    // from stack overflow
+
+#if 0
+    // averaging algorithum
+    const int32_t result( (static_cast<int32_t>(sample1) + static_cast<int32_t>(sample2)) / 2 );
+    typedef std::numeric_limits<int16_t> Range;
+    if( Range::max() < result )
+        return Range::max();
+    else if( Range::min() > result )
+        return Range::min();
+    else
+        return result;
+#else
+    int m; // mixed result will go here
+    // Make both samples unsigned (0..65535)
+    a += 32768;
+    b += 32768;
+
+    // Pick the equation
+    if( (a < 32768) || (b < 32768) ) {
+        // Viktor's first equation when both sources are "quiet"
+        // (i.e. less than middle of the dynamic range)
+        m = a * b / 32768;
+    }
+    else {
+        // Viktor's second equation when one or both sources are loud
+        m = 2 * (a + b) - (a * b) / 32768 - 65536;
+    }
+
+    // Output is unsigned (0..65536) so convert back to signed (-32768..32767)
+    if( m == 65536 ) m = 65535;
+    m -= 32768;
+
+    return (int16_t)m;
+#endif // 0
+}
+
+//=============================================================================
+void AudioUtil::mixPcmAudio( int16_t* pcmData, int16_t* outData, int toMixSampleCnt )
+{
+    if( toMixSampleCnt )
+    {
+        for( int i = 0; i < toMixSampleCnt; i++ )
+        {
+            outData[ i ] = MixPcmSample( pcmData[ i ], outData[ i ] );
+        }
+    }
+}
+

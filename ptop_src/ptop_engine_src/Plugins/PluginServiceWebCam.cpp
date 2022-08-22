@@ -542,7 +542,7 @@ void PluginServiceWebCam::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pkt
 	if( poPktCastPic->getTotalDataLen() == poPktCastPic->getThisDataLen() )
 	{
 		PluginBase::AutoPluginLock pluginMutexLock( this );
-		m_Engine.getMediaProcesser().processFriendVideoFeed( netIdent->getMyOnlineId(), poPktCastPic->getDataPayload(), poPktCastPic->getTotalDataLen(), poPktCastPic->getMotionDetect() );
+		m_Engine.getMediaProcessor().processFriendVideoFeed( netIdent->getMyOnlineId(), poPktCastPic->getDataPayload(), poPktCastPic->getTotalDataLen(), poPktCastPic->getMotionDetect() );
 		RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		if( poSession )
 		{

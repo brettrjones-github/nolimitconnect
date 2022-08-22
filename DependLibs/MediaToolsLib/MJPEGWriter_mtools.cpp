@@ -165,8 +165,8 @@ bool MJPEGWriter::startAviWrite( const char * fileName, uint32_t timeBetweenFram
 
 	setIsRecordingPaused( beginInPausedState );
 	setIsRecording( true );
-	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaWriter, true );
-	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaWriter, true );
+    m_Engine.getMediaProcessor().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaWriter, true );
+    m_Engine.getMediaProcessor().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaWriter, true );
 	return true;
 }
 
@@ -176,8 +176,8 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 	if( getIsRecording() )
 	{
 		setIsRecordingPaused( true );
-		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaReader, false );
-		m_Engine.getMediaProcesser().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaReader, false );
+        m_Engine.getMediaProcessor().wantMediaInput( eMediaInputAudioPcm, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaReader, false );
+        m_Engine.getMediaProcessor().wantMediaInput( eMediaInputVideoJpgSmall, this, (void *)ePluginTypeMJPEGWriter, eAppModuleMediaReader, false );
 
 		if( deleteFile )
 		{

@@ -27,6 +27,7 @@
 #include "SoundMgr.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
 #include <CoreLib/VxGlobals.h>
 
@@ -70,8 +71,10 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
 
     bool echoCancelEnable = m_MyApp.getAppSettings().getEchoCancelEnable();
     ui.m_EchoCancelEnableCheckBox->setChecked( echoCancelEnable );
+    ui.m_EchoCancelEnableCheckBox->setVisible( false );
 
     connect( ui.m_EchoCancelEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotEchoCancelEnableChange(int)) );
+    connect( ui.m_SendMicToSpeakerCheckBox, SIGNAL( stateChanged( int ) ), this, SLOT( slotSendMicToSpeakesChange( int ) ) );
 
     connectBarWidgets();
 
@@ -361,6 +364,12 @@ void AppletSoundSettings::slotEchoCancelEnableChange( int checkState )
 }
 
 //============================================================================
+void AppletSoundSettings::slotSendMicToSpeakesChange( int checkState )
+{
+    m_MyApp.getEngine().getMediaProcessor().fromGuiLoopbackMicToSpeakers( checkState ? true : false );
+}
+
+//============================================================================
 void AppletSoundSettings::showEchoDelayTestResults( void )
 {
     if( !m_EchoDelayResultList.empty() )
@@ -393,19 +402,19 @@ void AppletSoundSettings::showEchoDelayTestResults( void )
         averageDelay = averageDelay / m_EchoDelayResultList.size();
         setStatusLabel( resultMsg );
 
+        ui.m_TestDelayResultLineEdit->setText( QString::number( averageDelay - 5 ) );
         resultMsg += resultsValid ? QObject::tr( "\nDelay Test Is Valid\n" ) : QObject::tr( "\nDelay Test Is Invalid\n" );
+
         if( resultsValid )
         {
-            ui.m_TestDelayResultLineEdit->setText( QString::number( averageDelay ) );
             QString msg( QObject::tr( "If you are having echo issues you may want to enter value " ) );
-            msg += QString::number( averageDelay );
+            msg += QString::number( averageDelay - 5 );
             msg += QObject::tr( " into  Echo delay ms field and click Save Echo Delay To Echo Canceller button\n" );
             msg += resultMsg;
             QMessageBox::information( this, QObject::tr( "Echo Delay Test Is Valid" ), msg, QMessageBox::Ok );
         }
         else
-        {
-            ui.m_TestDelayResultLineEdit->setText( QString::number( averageDelay ) );
+        {   
             QMessageBox::information( this, QObject::tr( "Echo Delay Test Is Invalid. Check microphone and speaker. Try turning up the volume or placing microphone closer to speaker" ), resultMsg, QMessageBox::Ok );
         }
     }  

@@ -18,6 +18,7 @@
 #include <QThread>
 #include <QSemaphore>
 
+class AppCommon;
 class AudioIoMgr;
 
 class AudioMixerThread : public QThread
@@ -38,6 +39,7 @@ protected:
     virtual void                run() override;
 
     AudioIoMgr&                 m_AudioIoMgr;
+    AppCommon&                  m_MyApp;
     QSemaphore                  m_AudioSemaphore;
 
 	bool						m_ShouldRun = true;

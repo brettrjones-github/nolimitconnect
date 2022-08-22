@@ -778,7 +778,7 @@ void VxPushButton::mousePressEvent( QMouseEvent * event )
     {
         // detect 3 quick clicks then 1 second gap then 2 quick clicks
         m_AppClickCount++;
-        int64_t timeNow = GetGmtTimeMs();
+        int64_t timeNow = m_MyApp.elapsedMilliseconds();
         int64_t elapsedMs = TimeElapsedMs( m_AppClickTime, timeNow );
         if( elapsedMs > APP_CLICK_MAX_MS_BETWEEN_SEQUENCE_CLICKS )
         {

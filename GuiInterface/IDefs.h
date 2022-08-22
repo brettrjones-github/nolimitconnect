@@ -57,6 +57,7 @@ enum EAppModule
     eAppModuleSnapshot,
     eAppModuleMediaPlayer,
     eAppModuleTest,
+    eAppModuleMicrophone,
 
     eMaxAppModule // must be last
 };

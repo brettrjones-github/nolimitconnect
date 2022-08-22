@@ -667,16 +667,6 @@ void PluginMgr::onAppStateChange( EAppState eAppState )
 }
 
 //============================================================================
-void PluginMgr::fromGuiAppIdle( void )
-{
-	std::vector<PluginBase * >::iterator iter;
-	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
-	{
-		(*iter)->fromGuiAppIdle();
-	}
-}
-
-//============================================================================
 void PluginMgr::onAppStartup( void )
 {
 	std::vector<PluginBase * >::iterator iter;
@@ -945,7 +935,7 @@ void PluginMgr::pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8V
 //============================================================================
 void PluginMgr::pluginApiWantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 {
-	m_Engine.getMediaProcesser().wantAppIdle( ePluginType, bWantAppIdle );
+	m_Engine.getMediaProcessor().wantAppIdle( ePluginType, bWantAppIdle );
 }
 
 //============================================================================
@@ -954,7 +944,7 @@ void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputTyp
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		m_Engine.getMediaProcesser().wantMediaInput( mediaType, plugin, userData, appModule, wantInput );
+		m_Engine.getMediaProcessor().wantMediaInput( mediaType, plugin, userData, appModule, wantInput );
 	}
 }
 

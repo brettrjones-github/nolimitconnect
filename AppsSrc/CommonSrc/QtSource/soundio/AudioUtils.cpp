@@ -21,6 +21,19 @@ int AudioUtils::audioDurationMs( const QAudioFormat& format, int bytes )
         (format.sampleRate() * format.channelCount() * format.bytesPerSample());
 }
 
+
+//=============================================================================
+int AudioUtils::audioDurationMs( int sampleRate, int sampleCnt )
+{
+    return (sampleCnt * 1000) / sampleRate;
+}
+
+//=============================================================================
+int64_t AudioUtils::audioDurationUs( int sampleRate, int sampleCnt )
+{
+    return (sampleCnt * 1000000) / sampleRate;
+}
+
 //=============================================================================
 qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 {
@@ -34,6 +47,12 @@ qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 int AudioUtils::audioSamplesRequiredForGivenMs( const QAudioFormat& format, qint64 milliSeconds )
 {
     return (int)((format.sampleRate() * format.channelCount()) * milliSeconds / 1000);
+}
+
+//=============================================================================
+int AudioUtils::audioSamplesRequiredForGivenMs( int sampleRate, int milliSeconds )
+{
+    return sampleRate * milliSeconds / 1000;
 }
 
 //=============================================================================
@@ -133,7 +152,7 @@ int16_t AudioUtils::floatToPcm( float val )
 }
 
 //=============================================================================
-int16_t MixPcmSample( int a, int b ) // int16_t sample1, int16_t sample2 ) 
+static int16_t MixPcmSample( int a, int b ) // int16_t sample1, int16_t sample2 ) 
 {
     // from stack overflow
 

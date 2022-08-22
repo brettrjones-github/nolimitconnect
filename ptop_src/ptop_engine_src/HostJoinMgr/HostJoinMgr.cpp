@@ -312,7 +312,6 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
 //============================================================================
 void HostJoinMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
-    bool wasAdded = false;
     GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
     lockHostJoinInfoList();
     HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
@@ -347,7 +346,6 @@ void HostJoinMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
 //============================================================================
 void HostJoinMgr::onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
-    bool wasAdded = false;
     GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
     lockHostJoinInfoList();
     HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
@@ -384,7 +382,6 @@ void HostJoinMgr::onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent
 //============================================================================
 HostJoinInfo* HostJoinMgr::findUserJoinInfo( GroupieId& groupieId )
 {
-    HostJoinInfo* joinFoundInfo = nullptr;
     auto iter = m_HostJoinInfoList.find( groupieId );
 
     if( iter != m_HostJoinInfoList.end() )

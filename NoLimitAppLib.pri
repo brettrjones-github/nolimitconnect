@@ -322,16 +322,18 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/StoryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioDefs.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoBuf.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancel.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancelImpl.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInIo.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInThread.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioIoMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioLoopback.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioLoopbackFrame.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMasterClock.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixer.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerFrame.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSampleBuf.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/SoundDefs.h \
@@ -694,16 +696,18 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoBuf.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancel.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancelImpl.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInIo.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInThread.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioIoMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioLoopback.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioLoopbackFrame.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMasterClock.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixer.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerFrame.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSampleBuf.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/SoundMgr.cpp \

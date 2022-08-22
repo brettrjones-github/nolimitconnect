@@ -15,6 +15,7 @@
 
 #include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
+#include "Appcommon.h"
 #include "AudioOutIo.h"
 #include "AudioIoMgr.h"
 #include "AudioUtils.h"
@@ -33,6 +34,7 @@
 AudioOutIo::AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 : QIODevice( parent )
 , m_AudioIoMgr( mgr )
+, m_MyApp( mgr.getMyApp() )
 , m_AudioBufMutex( audioOutMutex )
 , m_AudioOutState( QAudio::StoppedState )
 {
@@ -235,10 +237,40 @@ void AudioOutIo::flush()
 //============================================================================
 qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anything while being destroyed
+        return 0;
+    }
+
     if( !m_AudioIoMgr.isAudioInitialized() )
     {
         memset( data, 0, maxlen );
         return maxlen;
+    }
+
+    if( !maxlen )
+    {
+        LogMsg( LOG_ERROR, "AudioOutIo::readData has 0 maxlen. Probably doing too much cpu processing in AudioOutIo::readData or AudioInIo::writeData" );
+        return maxlen;
+    }
+
+    static qint64 lastSpeakerReadLen = 0;
+    static int audioReadDurationUs = 0;
+    if( maxlen != lastSpeakerReadLen )
+    {
+        // first time or device changed or read buffer len changed
+        audioReadDurationUs = (int)AudioUtils::audioDurationUs( m_AudioFormat, maxlen );
+        m_SpeakerReadTimeEstimator.setIntervalUs( audioReadDurationUs );
+        lastSpeakerReadLen = maxlen;
+    }
+
+    int64_t timeNow = m_MyApp.elapsedMilliseconds();
+    bool timeIntervalTooLong;
+    int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
+    if( std::abs( timeNow - speakerReadTimeMs ) > 40 )
+    {
+        LogMsg( LOG_VERBOSE, "AudioOutIo::readData time estimate excessive time dif %d too long ? %d", (int)std::abs( timeNow - speakerReadTimeMs ), timeIntervalTooLong );
     }
 
     if( m_AudioTestState != eAudioTestStateNone )
@@ -247,7 +279,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         if( m_AudioTestState == eAudioTestStateRun && !m_AudioTestSentTimeMs )
         {
             int16_t* sampleBuf = (int16_t*)data;
-            // create a 480 hz square wave tone for 10 ms
+            // create a 480 hz square wave tone for 10 ms as a sound to be detected by microphone for delay timing test
             int maxSamplesToSet = AudioUtils::audioSamplesRequiredForGivenMs( m_AudioFormat, 10 );
             maxSamplesToSet = std::min( maxSamplesToSet, (int)maxlen / 2 );
             int samplesCycle = (m_AudioFormat.sampleRate() * m_AudioFormat.channelCount()) / (480 * 2) ;
@@ -263,49 +295,84 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
                 sampleIsMax = !sampleIsMax;
             }
 
-            m_AudioTestSentTimeMs = GetGmtTimeMs();
+            m_AudioTestSentTimeMs = speakerReadTimeMs;
         }
 
         return maxlen;
     }
 
-    qint64 readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier() );
+    qint64 readAmount;
+    if( m_AudioIoMgr.getAudioLoopbackEnable() )
+    {
+        readAmount = m_AudioIoMgr.getAudioLoopback().readRequestFromSpeaker( data, maxlen, m_EchoFarBuffer, m_PeakAudioOutValue );
+    }
+    else
+    {
+        readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier(), m_EchoFarBuffer );
+    }
+   
     if( readAmount != maxlen )
     {
-        LogMsg( LOG_DEBUG, "readData mismatch with maxlen %d and read %d", maxlen, readAmount );
+        LogMsg( LOG_DEBUG, "AudioOutIo::readData mismatch with maxlen %d and read %d", maxlen, readAmount );
     }
 
-    bool echoCancelEnabled = m_AudioIoMgr.geAudioEchoCancel().isEchoCancelEnabled();
-    if( echoCancelEnabled )
+    if( m_AudioIoMgr.getAudioTimingEnable() )
     {
-        if( ECHO_SAMPLE_RATE == 8000 )
+        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
+        if( elapsedInFunction > 2 )
         {
-            // echo cancel runs at 8000 hz. audio out device runs at 48000 hz
-            int echoSampleDivide = getUpsampleMultiplier();
-            int echoSampleCnt = maxlen / echoSampleDivide;
-            int16_t* echoSpeakerdData = new int16_t[ echoSampleCnt ];
-            AudioUtils::dnsamplePcmAudio( (int16_t*)data, echoSampleCnt, echoSampleDivide, echoSpeakerdData );
-            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().speakerReadSamples( echoSpeakerdData, echoSampleCnt );
-            if( !echoHasBufferOwnership )
-            {
-                delete[] echoSpeakerdData;
-            }
+            LogMsg( LOG_DEBUG, "AudioOutIo::readData WARNING spent %d ms in readRequestFromSpeaker", elapsedInFunction );
         }
-        else if( ECHO_SAMPLE_RATE == 16000 )
+
+        timeNow = m_MyApp.elapsedMilliseconds();
+    }
+
+    if( m_AudioIoMgr.fromGuiIsEchoCancelEnabled() )
+    {
+        m_AudioIoMgr.getAudioEchoCancel().speakerReadSamples( m_EchoFarBuffer.getSampleBuffer(), m_EchoFarBuffer.getSampleCnt(), 
+            speakerReadTimeMs + (audioReadDurationUs / 1000) );
+    }
+
+    m_EchoFarBuffer.clear();
+
+    if( m_AudioIoMgr.getAudioTimingEnable() )
+    {
+        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
+        if( elapsedInFunction > 2 )
         {
-            // echo cancel runs at 16000 hz. audio out device runs at 48000 hz
-            int echoSampleDivide = getUpsampleMultiplier() / 2;
-            int echoSampleCnt = maxlen / (echoSampleDivide * 2);
-            int16_t* echoSpeakerdData = new int16_t[ echoSampleCnt ];
-            AudioUtils::dnsamplePcmAudio( (int16_t*)data, echoSampleCnt, echoSampleDivide, echoSpeakerdData );
-            bool echoHasBufferOwnership = m_AudioIoMgr.geAudioEchoCancel().speakerReadSamples( echoSpeakerdData, echoSampleCnt );
-            if( !echoHasBufferOwnership )
-            {
-                delete[] echoSpeakerdData;
-            }
+            LogMsg( LOG_DEBUG, "AudioOutIo::readData WARNING spent %d ms in getAudioEchoCancel().speakerReadSample", elapsedInFunction );
+        }
+
+        timeNow = m_MyApp.elapsedMilliseconds();
+    }
+  
+    // master clock is based on speaker read event/length
+    m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadUs( audioReadDurationUs, false );
+
+    if( m_AudioIoMgr.getAudioTimingEnable() )
+    {
+        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
+        if( elapsedInFunction > 2 )
+        {
+            LogMsg( LOG_DEBUG, "AudioOutIo::readData WARNING spent %d ms in audioSpeakerReadUs", elapsedInFunction );
         }
     }
 
+    //if( m_AudioIoMgr.getAudioTimingEnable() )
+    //{
+    //    static int64_t lastSpeakerReadTime{ 0 };
+    //    static int funcCallCnt{ 0 };
+    //    funcCallCnt++;
+    //    if( lastSpeakerReadTime )
+    //    {
+    //        int64_t timeInterval = speakerReadTimeMs - lastSpeakerReadTime;
+    //        LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d elapsed %d ms echo samples %d app time %d",
+    //            funcCallCnt, (int)timeInterval, m_EchoFarBuffer.getSampleCnt(), (int)GetApplicationAliveMs() );
+    //    }
+
+    //    lastSpeakerReadTime = speakerReadTimeMs;
+    //}
+ 
     return maxlen;
 }
 

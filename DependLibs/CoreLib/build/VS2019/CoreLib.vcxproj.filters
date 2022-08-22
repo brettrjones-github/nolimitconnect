@@ -343,6 +343,9 @@
     <ClInclude Include="..\..\Sha1GeneratorMgr.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\TimeIntervalEstimator.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp">
@@ -544,6 +547,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Sha1GeneratorMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TimeIntervalEstimator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

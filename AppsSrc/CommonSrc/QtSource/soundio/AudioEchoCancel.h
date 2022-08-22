@@ -35,10 +35,13 @@ public:
 
 	void                        setEchoDelayMsParam( int delayMs );
 
-	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer
-	bool						speakerReadSamples( int16_t* mono8000ReadBuf, int sampleCnt);
-	// return false if echo cancel does not take ownership of buffer. if true caller should not delete buffer
-	bool						microphoneWroteSamples( int16_t* mono8000WriteBuf, int sampleCnt, int16_t* echoCanceledData );
+	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs );
+
+	void						micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs );
+
+	void						frame80msElapsed( void );
+
+	void						setEchoCancelerNeedsReset( bool needReset );
 
 	AppCommon&					m_MyApp;
 	AudioIoMgr&					m_AudioIoMgr;

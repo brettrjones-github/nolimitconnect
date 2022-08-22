@@ -114,7 +114,7 @@ void MJPEGReader::resetVariables( void )
 void MJPEGReader::setIsVidThreadRunning( bool isRunning )
 {
 	// LogMsg( LOG_INFO, "MJPEGReader::stopVideoRead wantMediaInput start %d", isRunning );
-	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputMixer, this, (void *)ePluginTypeMJPEGReader, eAppModuleMediaReader, isRunning );
+    m_Engine.getMediaProcessor().wantMediaInput( eMediaInputMixer, this, (void *)ePluginTypeMJPEGReader, eAppModuleMediaReader, isRunning );
 	// LogMsg( LOG_INFO, "MJPEGReader::stopVideoRead wantMediaInput end" );
 	m_IsVidThreadRunning = isRunning; 
 }
@@ -1183,7 +1183,7 @@ void MJPEGReader::callbackAudioOutSpaceAvail( int freeSpaceLen )
 	{
 		//LogMsg( LOG_INFO, "MJPEGReader callbackAudioOutSpaceAvail start\n" );
 		// in many android devices seem low volume. do a boost in volume
-		m_Engine.getMediaProcesser().increasePcmSampleVolume( (int16_t *)(&aviChunk->m_DataPtr[8]), (uint16_t)aviChunk->m_ChunkLen, 20 );
+        m_Engine.getMediaProcessor().increasePcmSampleVolume( (int16_t *)(&aviChunk->m_DataPtr[8]), (uint16_t)aviChunk->m_ChunkLen, 20 );
 		m_MediaProcessor.playAudio( (int16_t *)(&aviChunk->m_DataPtr[8]), aviChunk->m_ChunkLen );
 		//LogMsg( LOG_INFO, "MJPEGReader callbackAudioOutSpaceAvail done\n" );
 		m_AudioChunksInMemory--;

@@ -272,7 +272,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 
 	if( picTotalLen == poPktCastPic->getThisDataLen() )
 	{
-		m_Plugin.getEngine().getMediaProcesser().processFriendVideoFeed(	netIdent->getMyOnlineId(),
+		m_Plugin.getEngine().getMediaProcessor().processFriendVideoFeed(	netIdent->getMyOnlineId(),
 																			poPktCastPic->getDataPayload(), 
 																			poPktCastPic->getTotalDataLen(),
 																			poPktCastPic->getMotionDetect() );
@@ -352,7 +352,7 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHd
 			if( poPktCastPic->getThisDataLen() >= poPktCastPic->getTotalDataLen() )
 			{
 				// all of picture arrived
-				m_Plugin.getEngine().getMediaProcesser().processFriendVideoFeed(	netIdent->getMyOnlineId(),
+				m_Plugin.getEngine().getMediaProcessor().processFriendVideoFeed(	netIdent->getMyOnlineId(),
 																					poPktCastPic->getDataPayload(), 
 																					poPktCastPic->getTotalDataLen(),
 																					poPktCastPic->getMotionDetect() );

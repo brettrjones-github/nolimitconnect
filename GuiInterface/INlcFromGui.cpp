@@ -122,12 +122,6 @@ void INlc::fromGuiAppShutdown( void )
 }
 
 //============================================================================
-void INlc::fromGuiAppIdle( void )
-{
-    getPtoP().fromGuiAppIdle();
-}
-
-//============================================================================
 void INlc::fromGuiAppPauseOrResume( bool isPaused )
 {
     if( isPaused )
@@ -234,12 +228,6 @@ void INlc::fromGuiNativeGlDestroy( void )
 void INlc::fromGuiNeedMorePlayData( int16_t * retAudioSamples, int deviceReqDataLen )
 {
 //    getPtoP().fromGuiNeedMorePlayData( retAudioSamples, deviceReqDataLen );
-}
-
-//============================================================================
-void INlc::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift )
-{
-    getPtoP().fromGuiMicrophoneDataWithInfo( pcmData, pcmDataLenBytes, isSilence, totalDelayTimeMs, clockDrift );
 }
 
 //============================================================================

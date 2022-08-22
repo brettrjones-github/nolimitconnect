@@ -79,7 +79,7 @@ bool GuiUserBase::setNearbyStatus( int64_t nearbyTimeOrZeroIfNotd ) // return fa
 //============================================================================
 bool GuiUserBase::isNearby( void )
 {
-    return m_NearbyTimeOrZero && GetGmtTimeMs() - m_NearbyTimeOrZero < NEARBY_TIMEOUT_MS;
+    return m_NearbyTimeOrZero && m_MyApp.elapsedMilliseconds() - m_NearbyTimeOrZero < NEARBY_TIMEOUT_MS;
 }
 
 //============================================================================

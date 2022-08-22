@@ -16,7 +16,7 @@
 
 #include <GuiInterface/IFromGui.h>
 
-#include "AudioInputFrame.h"
+#include "AudioProcessorDefs.h"
 
 #include <PktLib/PktVoiceReq.h>
 
@@ -154,9 +154,11 @@ public:
 														int yRowStride, int uRowStride, int vRowStride,
 														int yPixStride, int uPixStride, int vPixStride,
 														int imageWidth, int imageHeight, int imageRotate );
-	virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
-	virtual void				fromGuiMicrophoneSamples( int16_t* pcmData, int pcmSampleCnt, int peakValue0to100, int divideDnSample, int outDelayMs );
+
+	virtual void				fromGuiMicrophoneSamples( int16_t* pcmData, int pcmSampleCnt, int64_t samplesHeadTimeMs );
 	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
+
+	void						fromGuiLoopbackMicToSpeakers( bool allowLoopback ) { m_LoopbackMicToSpeakers = allowLoopback; }
 
 	void						increasePcmSampleVolume( int16_t * pcmData, uint16_t pcmDataLen, float volumePercent0To100 );
 	void						playAudio( int16_t * pcmData, int dataLenInBytes );
@@ -173,8 +175,7 @@ public:
 
 	void						processFriendAudioFeed(	VxGUID&	onlineId, int16_t * pcmData, uint16_t pcmDataLen, bool dontLock = false );
 
-	void						processAudioIn( void );
-	void						processAudioInFrame( AudioInputFrame& inFrame );
+	void						processAudioInThreaded( void );
 	void						processVideoIn( void );
 
 
@@ -238,8 +239,8 @@ protected:
 
 	std::vector<RawAudio *>		m_ProcessAudioQue;
 	VxMutex						m_AudioQueInMutex;
-	VxThread					m_ProcessAudioThread;
-	VxSemaphore					m_AudioSemaphore;
+	VxThread					m_ProcessAudioInThread;
+	VxSemaphore					m_AudioInSemaphore;
 	PktVoiceReq					m_PktVoiceReq;
 
 	std::vector<MediaClient>	m_VideoJpgBigList;	
@@ -268,6 +269,7 @@ protected:
 	int16_t						m_QuietAudioBuf[ MIXER_CHUNK_LEN_SAMPLES ];
 	int16_t						m_MixerBuf[ MIXER_CHUNK_LEN_SAMPLES ];
 	bool						m_MixerBufUsed;
+
 	bool						m_MuteSpeaker;
 	bool						m_MuteMicrophone;
 	bool						m_VidCaptureEnabled;
@@ -276,7 +278,9 @@ protected:
 
 	bool						m_VidPktListContainsMyId;
 
-	AudioInputFrame				m_InputFrames[ MAX_INPUT_FRAMES ];
-	int							m_InputFrameIndex{ 0 };
-	int							m_InputDownSampleRemainder{ 0 };
+	int64_t						m_MicInputLastSampleTime{ 0 };
+	bool						m_LoopbackMicToSpeakers{ false };
+
+	VxThread					m_ProcessAudioOutThread;
+	VxSemaphore					m_AudioOutSemaphore;
 };

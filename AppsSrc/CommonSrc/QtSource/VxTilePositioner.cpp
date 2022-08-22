@@ -64,7 +64,7 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 	if( ( ( padding * 2 + 8 ) > windowSize.width() )
 		|| ( ( padding * 2 + 8 ) > windowSize.height() ) )
 	{
-		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid Window size %d %d\n", windowSize.width(),  windowSize.height()  );
+		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid Window size %d %d", windowSize.width(),  windowSize.height()  );
 		return;
 	}
 
@@ -74,7 +74,7 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 	int optimumTileSize = (int)optimal_size( windowSize.width()-(padding * 2), windowSize.height()-(padding * 2), totalTiles );
 	if( optimumTileSize <= 0 )
 	{
-		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid tile size %d\n", optimumTileSize );
+		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid tile size %d", optimumTileSize );
 		return;
 	}
 
@@ -88,7 +88,7 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 
 	if( columnCnt * rowCnt < totalTiles )
 	{
-		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid tile size %d\n", optimumTileSize );
+		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid tile size %d", optimumTileSize );
 	}
 
 	//LogMsg( LOG_DEBUG, "repositionTiles total width %d height %d tile width %d\n", 

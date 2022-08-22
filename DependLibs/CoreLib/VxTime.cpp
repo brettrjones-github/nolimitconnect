@@ -3,6 +3,7 @@
 //============================================================================
 #include "config_corelib.h"
 #include "VxTime.h"
+#include "VxTimer.h"
 #include "VxTimeUtil.h"
 #include "VxDebug.h"
 
@@ -124,7 +125,7 @@ int64_t	GetTimeStampMs( void )			      // milli seconds since January 1, 1970 GM
 
 //============================================================================
 // milliseconds since application initialize
-int64_t	GetApplicationAliveMs( void )
+int	GetApplicationAliveMs( void )
 {
     InitializeTimeIfNeeded();
     int64_t tickCnt = (int64_t)GetTickCount64() - g_tickCountWhenAppInitialized;
@@ -135,7 +136,7 @@ int64_t	GetApplicationAliveMs( void )
     }
 
     lastTime = tickCnt;
-    return tickCnt;
+    return (int)tickCnt;
 }
 
 //============================================================================
@@ -185,7 +186,6 @@ static void InitializeTimeIfNeeded( )
         return;
     }
 
-    g_isTimeInitialized = true;
     g_tickCountWhenAppInitialized = GetTickCount64();
 
     // get gmt time in milliseconds since since January 1, 1970 GMT time
@@ -202,6 +202,7 @@ static void InitializeTimeIfNeeded( )
     g_localTimezoneDifferenceMs = gmtTimeMs - localTimeMs;
     g_tickCountOffsetMsFromGmtTime = gmtTimeMs - g_tickCountWhenAppInitialized;
     g_tickCountOffsetMsFromLocalTime = localTimeMs - g_tickCountWhenAppInitialized;
+    g_isTimeInitialized = true;
 }
 
 // this class forces the time variables to be initialized as soon as possible

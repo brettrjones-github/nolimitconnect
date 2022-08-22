@@ -465,7 +465,6 @@ public:
     virtual uint64_t			fromGuiClearCache( ECacheType cacheType );
     virtual void				fromGuiAppShutdown( void );
 
-    virtual void				fromGuiAppIdle( void );
     virtual void				fromGuiAppPauseOrResume( bool isPaused );
 
     virtual bool				fromGuiOrientationEvent( float f32RotX, float f32RotY, float f32RotZ );
@@ -482,7 +481,7 @@ public:
 
     virtual void				fromGuiNeedMorePlayData( int16_t * retAudioSamples,
                                                          int deviceReqDataLen );
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
+
     virtual void				fromGuiMuteMicrophone( bool mute );
     virtual void				fromGuiMuteSpeaker( bool mute );
     virtual bool				fromGuiIsMicrophoneMuted( void );

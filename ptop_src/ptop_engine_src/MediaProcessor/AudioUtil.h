@@ -16,6 +16,8 @@
 
 #include <CoreLib/VxDefs.h>
 
+namespace AudioUtil
+{
 static NLC_INLINE int16_t FloatToPcmS16( float v ) 
 {
 	if (v > 0)
@@ -34,3 +36,6 @@ static NLC_INLINE float PcmS16ToFloat( int16_t v )
 
 void PcmS16ToFloats( int16_t * pcmData, uint32_t pcmLenInBytes, float * retFloatBuf ); 
 void FloatsToPcmS16( float * floatBuf, int16_t * pcmRetData, uint32_t pcmLenInBytes );
+
+void mixPcmAudio( int16_t* pcmData, int16_t* outData, int toMixSampleCnt );
+}

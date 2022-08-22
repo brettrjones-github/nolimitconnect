@@ -121,6 +121,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="m_SendMicToSpeakerCheckBox">
+        <property name="text">
+         <string>Send Microphone Input To Speakers</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Microphone Input Peak Level</string>

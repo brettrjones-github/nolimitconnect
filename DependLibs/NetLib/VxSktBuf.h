@@ -34,7 +34,7 @@ public:
 	virtual int					sktBufAmountRead( int iAmountRead );
 	//! Get the size of the socket buffer
 	virtual int					getSktBufSize( void )		{ return m_iSktBufSize; }
-	virtual uint32_t					getRxDecryptedLen( void )	{ return m_u32RxDecryptedLen; }	// amount of receive data decrypted
+	virtual uint32_t			getRxDecryptedLen( void )	{ return m_u32RxDecryptedLen; }	// amount of receive data decrypted
 	
 	//=== write to buf functions called by socket threads ===//
 	//! get amount of space available
@@ -52,7 +52,7 @@ protected:
 	virtual void				doLock( void )		{ m_Mutex.lock();}
 	virtual void				doUnlock( void )	{ m_Mutex.unlock();}
 
-	uint32_t							m_u32RxDecryptedLen;	// amount of receive data decrypted
+	uint32_t					m_u32RxDecryptedLen;	// amount of receive data decrypted
 	unsigned char *				m_pau8SktBuf;			// socket buffer
 	int							m_iSktBufSize;			// total size of buffer
 

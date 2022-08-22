@@ -131,9 +131,6 @@ public:
 	/// deletes cached files and returns amount of disk space deleted
 	virtual uint64_t			fromGuiClearCache( ECacheType cacheType ) = 0;
 
-	/// Periodic call to engine for game and application updates
-	virtual void				fromGuiAppIdle( void  ) = 0;  
-
 	/// Call to engine when application is paused
 	virtual void				fromGuiAppPause( void  ) = 0;
 	/// Call to engine when application is resumed

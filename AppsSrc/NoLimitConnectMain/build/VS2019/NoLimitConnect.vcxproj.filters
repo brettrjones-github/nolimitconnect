@@ -716,9 +716,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioInIo.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioInThread.h">
-      <Filter>Source Files\soundio</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioIoMgr.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
@@ -943,6 +940,12 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMasterClock.h">
+      <Filter>Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioLoopback.h">
+      <Filter>Source Files\soundio</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1621,9 +1624,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioInIo.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioInThread.cpp">
-      <Filter>Source Files\soundio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioIoMgr.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
@@ -2023,14 +2023,23 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancel.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoBuf.cpp">
-      <Filter>Source Files\soundio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMasterClock.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioLoopback.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioLoopbackFrame.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.cpp">
+      <Filter>Source Files\soundio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2295,7 +2304,10 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiPlayerCallback.h">
       <Filter>Source Files\GuiPlayerMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoBuf.h">
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioLoopbackFrame.h">
+      <Filter>Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.h">
       <Filter>Source Files\soundio</Filter>
     </ClInclude>
   </ItemGroup>

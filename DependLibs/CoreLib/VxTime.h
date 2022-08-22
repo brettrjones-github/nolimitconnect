@@ -16,14 +16,18 @@
 extern "C" {
 #endif
 
+//============================================================================
+// NOTE: !!!!! resolution of time is 16 ms on windows because that is the resolution of windows GetTickCount64 function !!!!
+//============================================================================
+
 // set time format to military 24hr or AM/PM
 void                        SetUseMillitaryTime( bool useMilitaryTime );
 bool                        GetUseMillitaryTime( void );
 
 int64_t				        GetTimeStampMs( void );			            // milli seconds since January 1, 1970 GMT time ( Same as GetGmtTimeMs )
 
-int64_t				        GetApplicationAliveMs( void );              // milliseconds since application initialize
-inline uint32_t				GetApplicationAliveSec( void )              { return ( uint32_t) (GetApplicationAliveMs() / 1000); }
+int				            GetApplicationAliveMs( void );              // milliseconds since application initialize
+inline uint32_t				GetApplicationAliveSec( void )              {  return ( uint32_t) (GetApplicationAliveMs() / 1000); }
 
 int64_t				        GetGmtTimeMs( void );			            // milli seconds since January 1, 1970 GMT time
 inline int64_t				GetGmtTimeSec( void )                       { return GetGmtTimeMs() / 1000; }

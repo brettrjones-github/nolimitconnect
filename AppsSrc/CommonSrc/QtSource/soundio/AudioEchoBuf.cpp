@@ -103,4 +103,6 @@ bool AudioEchoBuf::isInTimeRange( int64_t& timeEst )
 		// past the end of buffer time
 		return false;
 	}
+
+    return true;
 }

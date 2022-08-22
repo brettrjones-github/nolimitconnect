@@ -453,11 +453,6 @@ void AppCommon::slotInternalToGuiUpdateMyIdent( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiUpdateMyIdent %s", netIdent.getOnlineName());
     getUserMgr().toGuiUpdateMyIdent( &netIdent );
-    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
-    {
-        ToGuiUserUpdateInterface* client = *iter;
-        client->toGuiUpdateMyIdent( &netIdent );
-    }
 }
 
 //============================================================================

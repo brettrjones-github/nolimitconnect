@@ -443,7 +443,7 @@ bool GuiConnectIdListMgr::isRelayed( VxGUID& onlineId )
 bool GuiConnectIdListMgr::isNearby( VxGUID& onlineId )
 {
     int64_t lastNearbyTime = isNearbyTime( onlineId );
-    return lastNearbyTime && GetGmtTimeMs() - lastNearbyTime < GuiUserBase::NEARBY_TIMEOUT_MS;
+    return lastNearbyTime && m_MyApp.elapsedMilliseconds() - lastNearbyTime < GuiUserBase::NEARBY_TIMEOUT_MS;
 }
 
 //============================================================================

@@ -23,6 +23,7 @@
 AudioMixerThread::AudioMixerThread( AudioIoMgr& audioIoMgr )
 : QThread()
 , m_AudioIoMgr( audioIoMgr )
+, m_MyApp( audioIoMgr.getMyApp() )
 {
 }
 
@@ -56,6 +57,13 @@ void AudioMixerThread::run()
             {
                 m_AudioIoMgr.getAudioCallbacks().fromGuiAudioOutSpaceAvail( MIXER_BUF_SIZE_8000_1_S16 );
                 m_MixerSpaceAvail -= MIXER_BUF_SIZE_8000_1_S16;
+                if( m_MixerSpaceAvail >= MIXER_BUF_SIZE_8000_1_S16 )
+                {
+                    // because Qt reads of sound are sometimes larger than 80ms at a time we sometimes have multiple callback but 
+                    // we reley on them to be approx 80ms appart so that buffers do not overrun/underrun
+                    // sleep a bit and catch up later
+                    VxSleep( 70 );
+                }
             }   
         }
     }

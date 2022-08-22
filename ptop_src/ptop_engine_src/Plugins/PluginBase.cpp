@@ -316,11 +316,6 @@ TxSession *	PluginBase::createTxSession( VxGUID& lclSessionId, VxSktBase * sktBa
 }
 
 //============================================================================ 
-void PluginBase::fromGuiAppIdle( void )
-{
-}
-
-//============================================================================ 
 void PluginBase::onAppStartup( void )
 {
 }

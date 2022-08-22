@@ -277,6 +277,7 @@
     <ClInclude Include="..\..\StdMinMaxForWindows.h" />
     <ClInclude Include="..\..\StdOutRedirect.h" />
     <ClInclude Include="..\..\StringListBinary.h" />
+    <ClInclude Include="..\..\TimeIntervalEstimator.h" />
     <ClInclude Include="..\..\VarToString.h" />
     <ClInclude Include="..\..\VxAppInfo.h" />
     <ClInclude Include="..\..\VxBuffer.h" />
@@ -352,6 +353,7 @@
     <ClCompile Include="..\..\sqlitedataset_corelib.cpp" />
     <ClCompile Include="..\..\StdOutRedirect_corelib.cpp" />
     <ClCompile Include="..\..\StringListBinary.cpp" />
+    <ClCompile Include="..\..\TimeIntervalEstimator.cpp" />
     <ClCompile Include="..\..\VxAppInfo.cpp" />
     <ClCompile Include="..\..\VxBuffer.cpp" />
     <ClCompile Include="..\..\VxChop.cpp" />

@@ -617,7 +617,8 @@ bool AppSettings::getAllowLoopBackOfMyself( void )
 //============================================================================
 void AppSettings::setEchoDelayParam( int delayMs )
 {
-	setIniValue( getAppShortName(), "EchoDelayParam", delayMs );
+	uint32_t delayVal = (uint32_t)delayMs;
+	setIniValue( getAppShortName(), "EchoDelayParam", delayVal );
 }
 
 //============================================================================
@@ -627,7 +628,7 @@ int AppSettings::getEchoDelayParam( void )
 #if defined(TARGET_OS_ANDROID)
 	defaultParamVal = 200;
 #elif defined(TARGET_OS_WINDOWS) 
-	defaultParamVal = 110;
+	defaultParamVal = 100;
 #elif defined(TARGET_OS_LINUX) 
 	defaultParamVal = 100;
 #endif // defined(TARGET_OS_ANDROID)

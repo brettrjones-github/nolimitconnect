@@ -26,8 +26,12 @@
 
 # include <QAudioSink>
 
+#include "AudioSampleBuf.h"
 #include "AudioDefs.h"
 
+#include <CoreLib/TimeIntervalEstimator.h>
+
+class AppCommon;
 class AudioIoMgr;
 class QTimer;
 
@@ -68,6 +72,8 @@ public:
 
     void                        setAudioTestState( EAudioTestState audioTestState );
     int64_t                     getAudioTestSentTime( void )                { return m_AudioTestSentTimeMs; }
+
+    AudioSampleBuf&             getSpeakerEchoSamples( int64_t& tailOfSpeakerSamplestimeMs ) { tailOfSpeakerSamplestimeMs = m_EndOfEchoBufferTimestamp; return m_EchoFarBuffer; }
  
 signals:
     void						signalCheckForBufferUnderun();
@@ -85,6 +91,7 @@ protected:
 
 private:
     AudioIoMgr&                 m_AudioIoMgr;
+    AppCommon&                  m_MyApp;
     QMutex&                     m_AudioBufMutex;
 
     bool                        m_initialized{ false };
@@ -109,4 +116,11 @@ private:
     int16_t*                    m_AudioTestSoundOutBuf{ nullptr };
     int                         m_AudioTestBufLen{ 0 };
     int                         m_AudioTestBufIdx{ 0 };
+
+    TimeIntervalEstimator       m_SpeakerReadTimeEstimator;
+
+    int64_t                     m_EndOfEchoBufferTimestamp{ 0 };
+    AudioSampleBuf              m_EchoFarBuffer;
+
+    int                         m_PeakAudioOutValue{ 0 };
 };
