@@ -138,7 +138,7 @@ static void InitializeTimeIfNeeded( )
         return;
     }
 
-    g_tickCountWhenAppInitialized = GetTickCount64();
+    g_tickCountWhenAppInitialized = GetHighResolutionTimeMs();
 
     // get gmt time in milliseconds since since January 1, 1970 GMT time
     
