@@ -105,8 +105,8 @@ public:
     AppCommon( const AppCommon& rhs ) = delete;
     virtual ~AppCommon() override = default;
 
-    // elapsed high resolution timer (GetGmtTimeMs in CoreLib resolution is only 16 ms on windows)
-    int64_t                     elapsedMilliseconds( void )                 { m_ElapsedMutex.lock(); int64_t elapseMs = static_cast<int64_t>(m_ElapsedTimer.elapsed()); m_ElapsedMutex.unlock(); return elapseMs; }
+    // elapsed high resolution timer 
+    int64_t                     elapsedMilliseconds( void );
 
     int64_t                     elapsedSeconds( void )                      { return elapsedMilliseconds() / 1000; }
 
@@ -932,8 +932,6 @@ protected:
     bool                        m_AppInitialized = false;
     QTimer *                    m_CheckSetupTimer = nullptr;
     ActivityAppSetup *          m_AppSetupDlg = nullptr;
-    QElapsedTimer               m_ElapsedTimer;
-    QMutex                      m_ElapsedMutex;
     bool                        m_IsMessengerReady{ false };
     bool                        m_IsLoggedOn{ false };
     bool                        m_IsSystemReady{ false };

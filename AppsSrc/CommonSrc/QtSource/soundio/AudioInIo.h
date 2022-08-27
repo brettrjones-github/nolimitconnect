@@ -38,7 +38,7 @@ class AudioInIo : public QIODevice
     Q_OBJECT
 public:
     explicit AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
-    ~AudioInIo() override;
+    ~AudioInIo() override = default;
 
     bool                        initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
     bool                        soundInDeviceChanged( int deviceIndex );

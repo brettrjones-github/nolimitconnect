@@ -61,3 +61,5 @@ private:
 };
 
 
+int64_t GetHighResolutionTimeUs( void ); //  time in usec
+int64_t GetHighResolutionTimeMs( void ); //  time in millisec

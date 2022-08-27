@@ -68,10 +68,10 @@ protected:
 	int							getDataReadyForSpeakersLen( bool mixerIsLocked );
 
 	int                         incrementMixerWriteIndex( void )					{ m_MixerWriteIdx++; if( m_MixerWriteIdx >= MAX_MIXER_FRAMES ) m_MixerWriteIdx = 0; return m_MixerWriteIdx; }
-	AudioLoopbackFrame&			getInputFrame( void )								{ return m_MixerFrames[ m_MixerWriteIdx ];  };
+	AudioLoopbackFrame&			getAudioWriteFrame( void )							{ return m_MixerFrames[ m_MixerWriteIdx ];  };
 	
 	int                         incrementMixerReadIndex( void )						{ m_MixerReadIdx++; if( m_MixerReadIdx >= MAX_MIXER_FRAMES ) m_MixerReadIdx = 0; return m_MixerReadIdx; }
-	AudioLoopbackFrame&			getOutputFrame( void )								{ return m_MixerFrames[ m_MixerReadIdx ]; };
+	AudioLoopbackFrame&			getAudioReadFrame( void )							{ return m_MixerFrames[ m_MixerReadIdx ]; };
 
 	void						processOutSpaceAvailable( void ) {};
 

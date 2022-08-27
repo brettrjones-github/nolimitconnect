@@ -20,6 +20,7 @@
 #include <vector>
 #include <algorithm>
 
+class AppCommon;
 class AudioIoMgr;
 class IAudioCallbacks;
 class AudioSampleBuf;
@@ -29,9 +30,14 @@ class AudioLoopbackFrame
 public:
 	AudioLoopbackFrame();
 
-	void						clearFrame( void );
+	void						setAudioIoMgr( AudioIoMgr* audioIoMgr )		{ m_AudioIoMgr = audioIoMgr; }
 
+	void						clearFrame( void );
 	bool						isEmpty( void )								{ return m_InputIds.empty(); }
+
+	void						setFrameIndex( int frameIndex )				{ m_FrameIndex = frameIndex; }
+	int							getFrameIndex( void )						{ return m_FrameIndex; }
+
 	bool						hasModuleAudio( EAppModule appModule )		{ return std::find( m_InputIds.begin(), m_InputIds.end(), appModule ) != m_InputIds.end(); }
 	bool						hasAnyAudio( void )							{ return !m_InputIds.empty(); }
 
@@ -48,12 +54,14 @@ public:
 	int							audioSamplesInUse()							{ return audioLenInUse() / 2; }
 	int							audioLenFreeSpace( void ); // how many bytes is available to write into frame
 
-	void						processFrameForSpeakerOutput( int16_t prevFrameSample );
+	void						processFrameForSpeakerOutputThreaded( int16_t prevFrameSample );
 
 	int16_t						getLastEchoSample( void );
 
 	void						speakerSamplesWereRead( int samplesRead )	{ m_SpeakerSamplesRead += samplesRead;  }
 	void						echoSamplesWereRead( int samplesRead )		{ m_MixerLenRead += samplesRead; }
+
+	AudioIoMgr*					m_AudioIoMgr{ nullptr };
 
 	int16_t						m_MixerBuf[ MIXER_CHUNK_LEN_SAMPLES ];
 	int							m_MixerLenRead{ 0 };
@@ -68,4 +76,5 @@ public:
 	bool						m_IsSilentSamples{ true };
 
 	int							m_PeakValue0to100{ 0 };
+	int							m_FrameIndex{ 0 };
 };

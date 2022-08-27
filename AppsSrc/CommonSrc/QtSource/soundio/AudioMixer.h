@@ -32,7 +32,7 @@ class AudioMixer : public QWidget
 public:
     explicit AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent );
 
-    IAudioCallbacks&            getAudioCallbacks() { return m_AudioCallbacks; }
+    IAudioCallbacks&            getAudioCallbacks()                     { return m_AudioCallbacks; }
     void                        lockAudioCallbacks()                    { m_AudioCallbackMutex.lock(); }
     void                        unlockAudioCallbacks()                  { m_AudioCallbackMutex.unlock(); }
 
@@ -54,7 +54,7 @@ public:
     // add audio data to mixer.. assumes pcm signed short mono channel 8000 Hz.. return total written to buffer
     virtual int				    toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence );
 
-    // read audio data from mixer.. assumes upSampleMult is multiplier to upsample pcm 1 channel 8000 Hz
+    // read audio data from mixer.. assumes upSampleMult is multiplier to upsample pcm 1 channel 8000 Hz to 2 channel 48000 Hz
     qint64                      readRequestFromSpeaker( char *data, qint64 maxlen, int upSampleMult, AudioSampleBuf& echoFarBuf );
 
     // read mono 8000Hz pcm audio data from mixer.. fill silence for underrun of data. return number of silenced samples

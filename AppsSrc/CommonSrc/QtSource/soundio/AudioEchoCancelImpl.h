@@ -60,6 +60,8 @@ public:
 	void						setEchoDelayMsConstant( int delayMs )	{ m_EchoDelayMsConstant = delayMs; }
 	int							getEchoDelayMsConstant( void )			{ return m_EchoDelayMsConstant; }
 
+	bool						getIsInSync( void )						{ return m_EchoCancelInSync; }
+
 	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs );
 
 	void						micWriteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs );
@@ -76,7 +78,7 @@ public:
 protected:
 	void						processEchoCancelThreaded( void );
 
-	void						checkFor80msFrameElapsed( void );
+	void						checkFor80msFrameElapsedThreaded( void );
 
 	bool						attemptEchoSync( void );
 

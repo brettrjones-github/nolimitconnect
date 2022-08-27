@@ -12,54 +12,6 @@
 #include <cstdlib>
 #include <algorithm>
 
-#if !defined(TARGET_OS_WINDOWS)
-#include <time.h>
-#include <sys/time.h>
-
-uint64_t GetTickCount64()
-{
-    // if the posix os has CLOCK_MONOTONIC defined then is better to use clock_gettime
-    // clock_gettime will not jump if user changes the current time. going backwards in time could cause issues
-#if defined(CLOCK_MONOTONIC)
-    // even if does not highlight in qt this is active for android
-    struct timespec tspec;
-    tspec.tv_sec = tspec.tv_nsec = 0;
-    clock_gettime( CLOCK_MONOTONIC, &tspec );
-# if defined(TARGET_OS_ANDROID) || defined(TARGET_OS_LINUX)
-    int64_t timeNow = ( (int64_t)tspec.tv_sec * 1000LL ) + ( (int64_t)tspec.tv_nsec / 1000000L );
-# else
-    int64_t timeNow = ( (int64_t)tspec.tv_sec * 1000LL ) + ( (int64_t)tspec.tv_usec / 1000L );
-# endif // defined(TARGET_OS_ANDROID)
-    static int64_t lastTime = 0;
-    if( timeNow < lastTime )
-    {
-        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetTickCount64() Went backwards from %" PRId64 " to %" PRId64 "", lastTime, timeNow);
-    }
-
-    lastTime = timeNow;
-    return timeNow;
-#else
-    struct timeval tv;
-    if( gettimeofday( &tv, NULL ) != 0 )
-    {
-        LogMsg(LOG_ERROR, "GetTickCount64() Failed gettimeofday");
-        return 0;
-    }
-
-    int64_t timeNow = ( (int64_t)tv.tv_sec * 1000LL ) + ( (int64_t)tv.tv_usec / 1000L );
-    static int64_t lastTime = 0;
-    if( timeNow < lastTime )
-    {
-        LogMsg(LOG_ERROR, "ERROR GetTickCount64() Went backwards from %" PRId64 " to %" PRId64 "", lastTime, timeNow);
-        lastTime = timeNow;
-    }
-
-    return timeNow;
-#endif // CLOCK_MONOTONIC
-}
-#endif // TARGET_OS_WINDOWS
-
-
 #if defined( TARGET_OS_ANDROID )
 #include "VxDefs.h"
 
@@ -128,7 +80,7 @@ int64_t	GetTimeStampMs( void )			      // milli seconds since January 1, 1970 GM
 int	GetApplicationAliveMs( void )
 {
     InitializeTimeIfNeeded();
-    int64_t tickCnt = (int64_t)GetTickCount64() - g_tickCountWhenAppInitialized;
+    int64_t tickCnt = (int64_t)GetHighResolutionTimeMs() - g_tickCountWhenAppInitialized;
     static int64_t lastTime = 0;
     if( tickCnt < lastTime )
     {
@@ -144,7 +96,7 @@ int	GetApplicationAliveMs( void )
 int64_t	GetGmtTimeMs( void )
 {
     InitializeTimeIfNeeded();
-    int64_t tickCnt = (int64_t)GetTickCount64() + g_tickCountOffsetMsFromGmtTime;
+    int64_t tickCnt = (int64_t)GetHighResolutionTimeMs() + g_tickCountOffsetMsFromGmtTime;
     static int64_t lastTime = 0;
     if( tickCnt < lastTime )
     {
@@ -160,7 +112,7 @@ int64_t	GetGmtTimeMs( void )
 int64_t	GetLocalTimeMs( void )
 {
     InitializeTimeIfNeeded();
-    return GetTickCount64() + g_tickCountOffsetMsFromLocalTime;
+    return GetHighResolutionTimeMs() + g_tickCountOffsetMsFromLocalTime;
 }
 
 //============================================================================

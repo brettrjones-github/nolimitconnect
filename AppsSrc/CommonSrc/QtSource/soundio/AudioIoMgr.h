@@ -93,8 +93,11 @@ public:
     void                        setAudioLoopbackEnable( bool enable )   { m_AudioLoopbackEnabled = enable; }
     bool                        getAudioLoopbackEnable( void )          { return m_AudioLoopbackEnabled; }
 
-    void                        setAudioTimingEnable( bool enable ) { m_AudioLoopbackEnabled = enable; }
-    bool                        getAudioTimingEnable( void ) { return m_AudioLoopbackEnabled; }
+    void                        setAudioTimingEnable( bool enable )     { m_AudioTimingEnabled = enable; }
+    bool                        getAudioTimingEnable( void )            { return m_AudioTimingEnabled; }
+
+    void                        setFrameTimingEnable( bool enable )     { m_FrameTimingEnabled = enable; }
+    bool                        getFrameTimingEnable( void );
 
     void                        setEchoCancelerNeedsReset( bool needReset );
 
@@ -226,7 +229,8 @@ protected:
 
     AudioMasterClock            m_AudioMasterClock;
 
-    bool                        m_AudioTimingEnabled{ false };
-    bool                        m_AudioLoopbackEnabled{ false };
     AudioLoopback               m_AudioLoopback;
+    bool                        m_AudioLoopbackEnabled{ false };
+    bool                        m_AudioTimingEnabled{ false };
+    bool                        m_FrameTimingEnabled{ false };
 };

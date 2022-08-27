@@ -75,3 +75,9 @@ void AudioEchoCancel::setEchoCancelerNeedsReset( bool needReset )
 {
 	m_AudioEchoCancelImpl.setEchoCancelerNeedsReset( needReset );
 }
+
+//============================================================================
+bool AudioEchoCancel::getIsInSync( void )
+{
+	return m_AudioEchoCancelImpl.getIsInSync();
+}

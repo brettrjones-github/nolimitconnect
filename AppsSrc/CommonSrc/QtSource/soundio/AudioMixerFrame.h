@@ -28,6 +28,9 @@ public:
 
 	void						clearFrame( void );
 
+	void						setFrameIndex( int frameIndex )			{ m_FrameIndex = frameIndex; }
+	bool						getFrameIndex( void )					{ return m_FrameIndex; }
+
 	bool						isSilence( void )						{ return m_InputIds.empty(); }
 	bool						hasModuleAudio( EAppModule appModule )	{ return std::find( m_InputIds.begin(), m_InputIds.end(), appModule ) != m_InputIds.end(); }
 	bool						hasAnyAudio( void )						{ return !m_InputIds.empty(); }
@@ -49,4 +52,5 @@ public:
 	int							m_LenRead{ 0 };
 	int							m_LenWrote{ 0 };
 	std::vector<EAppModule>		m_InputIds;
+	int							m_FrameIndex{ 0 };
 };

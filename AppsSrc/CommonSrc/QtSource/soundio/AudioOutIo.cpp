@@ -266,6 +266,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     }
 
     int64_t timeNow = m_MyApp.elapsedMilliseconds();
+    int64_t timeStart = timeNow;
     bool timeIntervalTooLong;
     int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
     if( std::abs( timeNow - speakerReadTimeMs ) > 40 )
@@ -316,6 +317,21 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         LogMsg( LOG_DEBUG, "AudioOutIo::readData mismatch with maxlen %d and read %d", maxlen, readAmount );
     }
 
+    if( m_AudioIoMgr.getFrameTimingEnable() )
+    {
+        int64_t timeNow = m_MyApp.elapsedMilliseconds();
+        static int64_t lastMixerPcmTime{ 0 };
+        static int funcCallCnt{ 0 };
+        funcCallCnt++;
+        if( lastMixerPcmTime )
+        {
+            int64_t timeInterval = timeNow - lastMixerPcmTime;
+            LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d peak amplitude", funcCallCnt, m_PeakAudioOutValue );
+        }
+
+        lastMixerPcmTime = timeNow;
+    }
+
     if( m_AudioIoMgr.getAudioTimingEnable() )
     {
         int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
@@ -327,35 +343,24 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         timeNow = m_MyApp.elapsedMilliseconds();
     }
 
+    /*
     if( m_AudioIoMgr.fromGuiIsEchoCancelEnabled() )
     {
         m_AudioIoMgr.getAudioEchoCancel().speakerReadSamples( m_EchoFarBuffer.getSampleBuffer(), m_EchoFarBuffer.getSampleCnt(), 
             speakerReadTimeMs + (audioReadDurationUs / 1000) );
     }
+    */
 
     m_EchoFarBuffer.clear();
-
-    if( m_AudioIoMgr.getAudioTimingEnable() )
-    {
-        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
-        if( elapsedInFunction > 2 )
-        {
-            LogMsg( LOG_DEBUG, "AudioOutIo::readData WARNING spent %d ms in getAudioEchoCancel().speakerReadSample", elapsedInFunction );
-        }
-
-        timeNow = m_MyApp.elapsedMilliseconds();
-    }
   
     // master clock is based on speaker read event/length
     m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadUs( audioReadDurationUs, false );
 
-    if( m_AudioIoMgr.getAudioTimingEnable() )
+    int64_t timeEnd = m_MyApp.elapsedMilliseconds();
+    int elapsedInReadDataFunctionMs = (timeEnd - timeStart);
+    if( elapsedInReadDataFunctionMs > 2 )
     {
-        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
-        if( elapsedInFunction > 2 )
-        {
-            LogMsg( LOG_DEBUG, "AudioOutIo::readData WARNING spent %d ms in audioSpeakerReadUs", elapsedInFunction );
-        }
+        LogMsg( LOG_DEBUG, " AudioOutIo::readData WARNING elapsed time in function %d ms", elapsedInReadDataFunctionMs );
     }
 
     //if( m_AudioIoMgr.getAudioTimingEnable() )

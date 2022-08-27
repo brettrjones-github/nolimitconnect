@@ -689,6 +689,8 @@ const char * DescribeAppModule( EAppModule eAppModule )
         return "eAppModuleMediaPlayer";
     case eAppModuleTest:
         return "eAppModuleTest";
+    case eAppModuleMicrophone:
+        return "eAppModuleMicrophone";
     default:
         return "UNKNOWN EAppModule";
     }

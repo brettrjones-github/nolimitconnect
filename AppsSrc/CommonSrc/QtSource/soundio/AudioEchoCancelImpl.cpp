@@ -187,7 +187,7 @@ void AudioEchoCancelImpl::processEchoRunThreaded()
 //============================================================================
 void AudioEchoCancelImpl::processEchoCancelThreaded()
 {
-	checkFor80msFrameElapsed();
+	checkFor80msFrameElapsedThreaded();
 
 	m_EchoCancelInSync = attemptEchoSync();
 	if( !m_EchoCancelInSync )
@@ -289,20 +289,23 @@ void AudioEchoCancelImpl::processEchoCancelThreaded()
 }
 
 //============================================================================
-void AudioEchoCancelImpl::checkFor80msFrameElapsed( void )
+void AudioEchoCancelImpl::checkFor80msFrameElapsedThreaded( void )
 {
 	if( m_Frame80msElapsed )
 	{
 		m_Frame80msElapsed = false;
+		bool echoCanceledFrameWasWritten{ false };
+		bool micMuted = m_AudioIoMgr.getIsMicrophoneMuted();
+
 		int64_t startMs = m_MyApp.elapsedMilliseconds();
 		m_EchoCanceledSamplesMutex.lock();
 		if( m_EchoCanceledSamples.getSampleCnt() >= MIXER_CHUNK_LEN_SAMPLES )
 		{
-			int16_t* sampleOutData = m_AudioIoMgr.getIsMicrophoneMuted() ? m_QuietSamplesBuf : m_EchoCanceledSamples.getSampleBuffer();
+			int16_t* sampleOutData = micMuted ? m_QuietSamplesBuf : m_EchoCanceledSamples.getSampleBuffer();
 
 			if( m_AudioIoMgr.getAudioLoopbackEnable() )
 			{
-				m_AudioIoMgr.getAudioLoopback().fromGuiEchoCanceledSamplesThreaded( sampleOutData, MIXER_CHUNK_LEN_SAMPLES, m_HeadEchoCanceledSamplesMs, m_AudioIoMgr.getIsMicrophoneMuted() );
+				m_AudioIoMgr.getAudioLoopback().fromGuiEchoCanceledSamplesThreaded( sampleOutData, MIXER_CHUNK_LEN_SAMPLES, m_HeadEchoCanceledSamplesMs, micMuted );
 			}
 			else
 			{
@@ -311,6 +314,7 @@ void AudioEchoCancelImpl::checkFor80msFrameElapsed( void )
 
 			m_HeadEchoCanceledSamplesMs += MIXER_CHUNK_LEN_MS;
 			m_EchoCanceledSamples.samplesWereRead( MIXER_CHUNK_LEN_SAMPLES );
+			echoCanceledFrameWasWritten = true;
 		}
 
 		m_EchoCanceledSamplesMutex.unlock();
@@ -322,12 +326,32 @@ void AudioEchoCancelImpl::checkFor80msFrameElapsed( void )
 				LogMsg( LOG_VERBOSE, "AudioEchoCancelImpl::checkFor80msFrameElapsed took %d ms", (int)(endtMs - startMs) );
 			}
 		}
+
+		if( m_AudioIoMgr.getFrameTimingEnable() )
+		{
+			static int64_t lastFrameTime{ 0 };
+			static int funcCallCnt{ 0 };
+			funcCallCnt++;
+			if( lastFrameTime )
+			{
+			    int64_t timeInterval = startMs - lastFrameTime;
+			    LogMsg( LOG_VERBOSE, "checkFor80msFrameElapsed %d elapsed %d ms app %d ms frame sent %d", funcCallCnt, (int)timeInterval, (int)startMs, echoCanceledFrameWasWritten );
+			}
+
+			lastFrameTime = startMs;
+		}
 	}
 }
 
 //============================================================================
 bool AudioEchoCancelImpl::attemptEchoSync( void )
 {
+	if( !m_SpeakerSamples.getSampleCnt() || !m_MicSamples.getSampleCnt() )
+	{
+		// nothing to attempt sync with
+		return false;
+	}
+
 	bool inSync{ m_EchoCancelInSync };
 	// timing issues
 	// 1.) micWriteTime and startOfSpeakerSamplesTimeMs may be off by 30ms or so
@@ -335,6 +359,8 @@ bool AudioEchoCancelImpl::attemptEchoSync( void )
 	//     from what I have found nobody has solved this issue unless have access to hardware to calculate the clock drift of input and output devices
 	// 3.) Echo canceler will attempt to determine what output samples correspond to the mic input sample but they must be close ( probably must be within 10ms )
 	//     once the canceler is in sync the input and ouput samples must stay in sync or echo canceler gets confused
+	// 4.) Qt will not allow hardly any cpu processing or delay (approx > 2ms) in audio read and write. it indicates too much processing by doing a read of 0 length and popping noise
+	//     practical\y all processing of all audio must be done in threads
 
 	// to attempt to fix these issues
 	// 1.) When echo cancel is out of sync return same samples without doing echo cancel and mark echo canceler for reset
@@ -366,7 +392,6 @@ bool AudioEchoCancelImpl::attemptEchoSync( void )
 	if( !inSync )
 	{
 		// out of sync.. see if can achive resync
-		// if attempting resync limit the mic samples to 80m (one mixer frame)
 
 		m_HeadMicSamplesMs = m_TailMicSamplesMs - m_MicSamples.getAudioDurationMs();
 		targetSpeakerTimeMs = m_HeadMicSamplesMs + m_EchoDelayMsConstant;
@@ -381,7 +406,7 @@ bool AudioEchoCancelImpl::attemptEchoSync( void )
 				samplesToStrip, m_SpeakerSamples.getAudioDurationMs(), (int)(targetSpeakerTimeMs - m_HeadSpeakerSamplesMs) );
 			inSync = true;
 		}
-		else if( m_AudioIoMgr.getAudioTimingEnable() )
+		else
 		{
 			LogMsg( LOG_VERBOSE, "processSpeexEchoCancel out of sync mic samples  %d ms speaker samples %d ms target time dif %d",
 				m_MicSamples.getAudioDurationMs(), m_SpeakerSamples.getAudioDurationMs(), 

@@ -43,6 +43,8 @@ public:
 
 	void						setEchoCancelerNeedsReset( bool needReset );
 
+	bool						getIsInSync( void );
+
 	AppCommon&					m_MyApp;
 	AudioIoMgr&					m_AudioIoMgr;
 	AudioEchoCancelImpl&		m_AudioEchoCancelImpl;

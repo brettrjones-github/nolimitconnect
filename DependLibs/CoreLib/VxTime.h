@@ -16,10 +16,6 @@
 extern "C" {
 #endif
 
-//============================================================================
-// NOTE: !!!!! resolution of time is 16 ms on windows because that is the resolution of windows GetTickCount64 function !!!!
-//============================================================================
-
 // set time format to military 24hr or AM/PM
 void                        SetUseMillitaryTime( bool useMilitaryTime );
 bool                        GetUseMillitaryTime( void );

@@ -67,6 +67,12 @@ AudioLoopback::AudioLoopback( AudioIoMgr& audioIoMgr, QObject* parent )
 	memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_SAMPLES * 2 );
 	memset( m_QuietEchoBuf, 0, MIXER_CHUNK_LEN_SAMPLES * 4 * 2 );
 
+	for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+	{
+		m_MixerFrames[ i ].setFrameIndex( i );
+		m_MixerFrames[ i ].setAudioIoMgr( &audioIoMgr );
+	}
+
 	m_ProcessAudioInThread.startThread( (VX_THREAD_FUNCTION_T)AudioInProcessThreadFunc, this, "AudioInProcessor" );
 	m_ProcessAudioOutThread.startThread( (VX_THREAD_FUNCTION_T)AudioOutProcessThreadFunc, this, "AudioOutProcessor" );
 }
@@ -86,7 +92,7 @@ qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen, AudioSa
 	peakValue0to100 = 0;
 	if( maxlen <= 0 )
 	{
-		// LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
+		LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
 		return 0;
 	}
 
@@ -119,9 +125,8 @@ qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen, AudioSa
 	//return maxlen;
 
 	int samplesAvailable = 0;
-	//LogMsg( LOG_VERBOSE, "readRequestFromSpeaker lockMixer thread %d", VxGetCurrentThreadTid() );
+
 	lockMixer();
-	//LogMsg( LOG_VERBOSE, "readRequestFromSpeaker lockMixer thread %d run read index", VxGetCurrentThreadTid(), m_MixerReadIdx );
 	int readIndex = m_MixerReadIdx;
 	for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
 	{
@@ -201,7 +206,7 @@ qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen, AudioSa
 	{
 		underrunCnt++;
 
-		// LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker underrun %d", underrunCnt );
+		LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker underrun %d", underrunCnt );
 		memset( data, 0, maxlen );
 		echoFarBuf.writeSamples( m_QuietEchoBuf, reqEchoSampleCnt );
 	}
@@ -242,7 +247,7 @@ void AudioLoopback::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sa
 		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d", VxGetCurrentThreadTid() );
 	lockMixer();
 	//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d run write idx %", VxGetCurrentThreadTid(), m_MixerWriteIdx );
-	AudioLoopbackFrame& audioFrame = getInputFrame();
+	AudioLoopbackFrame& audioFrame = getAudioWriteFrame();
 	audioFrame.toMixerPcm8000HzMonoChannel( eAppModuleMicrophone, pcmData, isSilence );
 	//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded unlockMixer thread %d", VxGetCurrentThreadTid() );
 	unlockMixer();
@@ -325,22 +330,24 @@ void AudioLoopback::processAudioOutSpaceAvailableThreaded( void )
 			if( lastSpaceAvailableTime )
 			{
 				int64_t timeInterval = timeNow - lastSpaceAvailableTime;
-				//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs() );
+				//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
 			}
 
 			lastSpaceAvailableTime = timeNow;
 		}
 
 		static int16_t prevFrameSample = 0;
-		// this thread is triggered by fromGuiAudioOutSpaceAvail
-		//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded lockMixer thread %d", VxGetCurrentThreadTid() );
+
+		// make current frame ready for read by speakers
 		lockMixer();
-		//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded lockMixer thread %d run write idx %d", VxGetCurrentThreadTid(), m_MixerWriteIdx );
-		AudioLoopbackFrame& audioFrame = getInputFrame();
-		audioFrame.processFrameForSpeakerOutput( prevFrameSample );
+		AudioLoopbackFrame& audioFrame = getAudioWriteFrame();
+		audioFrame.processFrameForSpeakerOutputThreaded( prevFrameSample );
 		prevFrameSample = audioFrame.getLastEchoSample();
+
+		// move to next frame and clear it so is ready to write to
 		incrementMixerWriteIndex();
-		//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded unlockMixer thread %d", VxGetCurrentThreadTid() );
+		AudioLoopbackFrame& nextAudioFrame = getAudioWriteFrame();
+		nextAudioFrame.clearFrame();
 		unlockMixer();
 
 		// do output space available processing
@@ -367,7 +374,7 @@ void AudioLoopback::processRawAudioInThreaded( RawAudio* rawAudio )
 		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d", VxGetCurrentThreadTid() );
 		lockMixer();
 		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d run write idx %", VxGetCurrentThreadTid(), m_MixerWriteIdx );
-		AudioLoopbackFrame& audioFrame = getInputFrame();
+		AudioLoopbackFrame& audioFrame = getAudioWriteFrame();
 		audioFrame.toMixerPcm8000HzMonoChannel( rawAudio->getAppModule(), pcmData, rawAudio->getIsSilence() );
 		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded unlockMixer thread %d", VxGetCurrentThreadTid() );
 		unlockMixer();

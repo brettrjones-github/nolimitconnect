@@ -91,7 +91,8 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
 
     // BRJ temp for testing
     setAudioLoopbackEnable( true );
-    setAudioTimingEnable( true );
+    // setAudioTimingEnable( true );
+    setFrameTimingEnable( true );
 }
 
 //============================================================================
@@ -705,4 +706,10 @@ void AudioIoMgr::processAudioOutThreaded( void )
 void AudioIoMgr::setEchoCancelerNeedsReset( bool needReset )
 {
     m_AudioEchoCancel.setEchoCancelerNeedsReset( needReset );
+}
+
+//============================================================================
+bool AudioIoMgr::getFrameTimingEnable( void )
+{
+    return m_FrameTimingEnabled && m_AudioEchoCancel.getIsInSync();
 }

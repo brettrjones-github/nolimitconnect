@@ -103,7 +103,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/sqlitedataset_corelib.cpp \
     $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp \
 	$$PWD/DependLibs/CoreLib/StringListBinary.cpp \
-    $$PWD/DependLibs/CoreLib/TimeIntervalEstimator.h \
+    $$PWD/DependLibs/CoreLib/TimeIntervalEstimator.cpp \
     $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
     $$PWD/DependLibs/CoreLib/Invite.cpp \
     $$PWD/DependLibs/CoreLib/VxBuffer.cpp \

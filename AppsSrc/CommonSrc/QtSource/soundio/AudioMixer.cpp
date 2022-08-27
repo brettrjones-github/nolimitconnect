@@ -41,6 +41,11 @@ AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks,
      m_MixerFormat.setSampleFormat( QAudioFormat::Int16 );
      memset( m_ModuleBufIndex, 0, sizeof( m_ModuleBufIndex ) );
 
+     for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+     {
+         m_MixerFrames[ i ].setFrameIndex( i );
+     }
+
      m_MixerThread.setThreadShouldRun( true );
      m_MixerThread.startAudioMixerThread();
 

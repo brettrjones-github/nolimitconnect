@@ -44,11 +44,6 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 }
 
 //============================================================================
-AudioInIo::~AudioInIo()
-{
-}
-
-//============================================================================
 bool AudioInIo::initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo )
 {
     if( !m_initialized )
@@ -248,6 +243,7 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     }
 
     int64_t timeNow = m_MyApp.elapsedMilliseconds();
+    int64_t timeStart = timeNow;
     bool timeIntervalTooLong;
     int64_t micWriteTime = m_MicWriteTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
     if( std::abs( timeNow - micWriteTime ) > 40 )
@@ -316,14 +312,12 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     {
         m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( sampleOutData, outSampleCnt * 2 );
     }
-
-    if( m_AudioIoMgr.getAudioTimingEnable() )
+  
+    int64_t timeEnd = m_MyApp.elapsedMilliseconds();
+    int elapsedInWriteDataFunctionMs = (timeEnd - timeStart);
+    if( elapsedInWriteDataFunctionMs > 2 )
     {
-        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
-        if( elapsedInFunction > 2 )
-        {
-            LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING spent %d ms in .getAudioEchoCancel().micWriteSamples", elapsedInFunction );
-        }
+        LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING elapsed time in function %d ms", elapsedInWriteDataFunctionMs );
     }
 
     //if( m_AudioIoMgr.getAudioTimingEnable() )

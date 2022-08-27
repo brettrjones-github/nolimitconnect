@@ -199,12 +199,16 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppletMgr( *( new AppletMgr( *this, this) ) )
 , m_CheckSetupTimer( new QTimer( this ) )
 {
-    g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
-
-    m_ElapsedTimer.start();
+    g_AppCommon = this; // need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
 
     connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OfferClientMgr, SLOT( slotOncePerSecond() ) );
     connect( m_CheckSetupTimer, SIGNAL( timeout() ), this, SLOT( slotCheckSetupTimer() ) );
+}
+
+//============================================================================
+int64_t AppCommon::elapsedMilliseconds( void )
+{
+	return GetApplicationAliveMs();
 }
 
 //============================================================================
