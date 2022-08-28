@@ -30,7 +30,7 @@ AudioLoopbackFrame::AudioLoopbackFrame()
 }
 
 //============================================================================
-void AudioLoopbackFrame::clearFrame( void )
+void AudioLoopbackFrame::clearFrame( bool fillSilence )
 {
 	m_MixerSamplesWrote = 0;
 	m_MixerSamplesRead = 0;
@@ -41,6 +41,15 @@ void AudioLoopbackFrame::clearFrame( void )
 
 	m_IsSilentSamples = true;
 	m_IsProcessed = false;
+
+	if( fillSilence )
+	{
+		memset( m_MixerBuf, 0, sizeof( m_MixerBuf ) );
+		m_MixerSamplesWrote = MIXER_CHUNK_LEN_SAMPLES;
+		memset( m_SpeakerBuf, 0, sizeof( m_SpeakerBuf ) );
+		m_SpeakerSamplesWrote = SPEAKER_CHUNK_LEN_SAMPLES;
+		m_IsProcessed = true;
+	}
 }
 
 //============================================================================
@@ -58,9 +67,34 @@ int AudioLoopbackFrame::audioLenFreeSpace( void )
 //============================================================================
 int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t* pcmData, bool isSilenceIn )
 {
+	static int64_t timeNow = 0;
+	static int64_t lastMixerPcmTime{ 0 };
+	if( m_AudioIoMgr->getFrameTimingEnable() )
+	{
+		lastMixerPcmTime = timeNow;
+		timeNow = GetHighResolutionTimeMs();
+	}
+
 	if( hasModuleAudio( appModule ) )
 	{
-		LogMsg( LOG_WARNING, "AudioLoopbackFrame::toMixerPcm8000HzMonoChannel frame %d module %s overrun", getFrameIndex(), DescribeAppModule( appModule ) );
+		if( m_AudioIoMgr->getFrameTimingEnable() )
+		{		
+			static int funcCallCnt{ 0 };
+			funcCallCnt++;
+			if( lastMixerPcmTime )
+			{
+				int timeInterval = (int)(timeNow - lastMixerPcmTime);
+				LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d toMixerPcm8000HzMonoChannel module %s elapsed %d ms overrrun ", getFrameIndex(), funcCallCnt,
+					DescribeAppModule( appModule ), (int)timeInterval );
+			}
+
+			lastMixerPcmTime = timeNow;
+		}
+		else
+		{
+			LogMsg( LOG_WARNING, "W Frame %d AudioLoopbackFrame::toMixerPcm8000HzMonoChannel module %s overrun", getFrameIndex(), DescribeAppModule( appModule ) );
+		}
+		
 		return 0;
 	}
 
@@ -89,15 +123,15 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 
 	if( m_AudioIoMgr->getFrameTimingEnable() )
 	{
-		int64_t timeNow = m_AudioIoMgr->getMyApp().elapsedMilliseconds();
+		int64_t timeNow = GetHighResolutionTimeMs();
 		static int64_t lastMixerPcmTime{ 0 };
 		static int funcCallCnt{ 0 };
 		funcCallCnt++;
 		if( lastMixerPcmTime )
 		{
-			int64_t timeInterval = timeNow - lastMixerPcmTime;
-			LogMsg( LOG_VERBOSE, "toMixerPcm8000HzMonoChannel %d module %s frame %d elapsed %d ms peak %d", funcCallCnt,
-				DescribeAppModule( appModule ), getFrameIndex(), (int)timeInterval, AudioUtils::peakPcmAmplitude0to100( m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES ) );
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d toMixerPcm8000HzMonoChannel module %s elapsed %d ms", getFrameIndex(), funcCallCnt,
+				DescribeAppModule( appModule ), timeInterval );
 		}
 
 		lastMixerPcmTime = timeNow;
@@ -109,6 +143,19 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 //============================================================================
 void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrameSample )
 {
+	if( m_AudioIoMgr->getFrameTimingEnable() || m_AudioIoMgr->getFrameIndexDebugEnable() )
+	{
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "P Frame %d processFrameForSpeakerOutputThreaded processing  elapsed %d ms", getFrameIndex(), timeInterval );
+		}	
+	}
+
 	m_SpeakerSamplesRead = 0;
 	m_SpeakerSamplesWrote = SPEAKER_CHUNK_LEN_SAMPLES;
 
@@ -121,7 +168,7 @@ void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrame
 	{
 		if( m_AudioIoMgr->getFrameTimingEnable() && m_AudioIoMgr->isSpeakerOutputWanted() )
 		{
-			LogMsg( LOG_WARNING, "processFrameForSpeakerOutputThreaded attempted to process empty frame %d", getFrameIndex() );
+			LogMsg( LOG_WARNING, "P Frame %d processFrameForSpeakerOutputThreaded attempted to process empty frame", getFrameIndex() );
 		}
 
 		memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_BYTES );
@@ -132,7 +179,7 @@ void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrame
 
 	if( m_IsSilentSamples )
 	{
-		LogMsg( LOG_WARNING, "processFrameForSpeakerOutputThreaded silent frame %d", getFrameIndex() );
+		LogMsg( LOG_WARNING, "P Frame %d processFrameForSpeakerOutputThreaded silent frame", getFrameIndex() );
 		memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_BYTES );
 		memset( m_SpeakerBuf, 0, SPEAKER_CHUNK_LEN_BYTES );
 		m_PeakValue0to100 = 0;
@@ -145,15 +192,15 @@ void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrame
 
 	if( m_AudioIoMgr->getFrameTimingEnable() )
 	{
-		int64_t timeNow = m_AudioIoMgr->getMyApp().elapsedMilliseconds();
+		int64_t timeNow = GetHighResolutionTimeMs();
 		static int64_t lastMixerPcmTime{ 0 };
 		static int funcCallCnt{ 0 };
 		funcCallCnt++;
 		if( lastMixerPcmTime )
 		{
-			int64_t timeInterval = timeNow - lastMixerPcmTime;
-			LogMsg( LOG_VERBOSE, "processFrameForSpeakerOutputThreaded %d frame %d elapsed %d ms app %d ms id cnt %d peak value %d", funcCallCnt,
-				getFrameIndex(), (int)timeInterval, (int)timeNow, m_InputIds.size(), m_PeakValue0to100 );
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "P Frame %d call cnt %d processFrameForSpeakerOutputThreaded elapsed %d ms app %d ms id cnt %d peak value %d", getFrameIndex(), funcCallCnt,
+				timeInterval, (int)timeNow, m_InputIds.size(), m_PeakValue0to100 );
 		}
 
 		lastMixerPcmTime = timeNow;
@@ -185,20 +232,25 @@ int AudioLoopbackFrame::readSpeakerData( int16_t* pcmReadData, int speakerSample
 	retEchoSamplesRead += echoSamplesToRead;
 	echoSamplesWereRead( echoSamplesToRead );
 
-	if( m_AudioIoMgr->getFrameTimingEnable() )
+	if( m_AudioIoMgr->getFrameTimingEnable() && !speakerSamplesAvailable() )
 	{
-		int64_t timeNow = m_AudioIoMgr->getMyApp().elapsedMilliseconds();
+		int64_t timeNow = GetHighResolutionTimeMs();
 		static int64_t lastMixerPcmTime{ 0 };
 		static int funcCallCnt{ 0 };
 		funcCallCnt++;
 		if( lastMixerPcmTime )
 		{
-			int64_t timeInterval = timeNow - lastMixerPcmTime;
-			LogMsg( LOG_VERBOSE, "readSpeakerData %d frame %d elapsed %d ms samples echo %d speaker %d left to read %d peak %d", funcCallCnt,
-				getFrameIndex(), (int)timeInterval, echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable(), m_PeakValue0to100 );
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "R Frame %d call cnt %d readSpeakerData elapsed %d ms samples echo %d speaker %d left to read echo %d speaker %d", getFrameIndex(), funcCallCnt,
+				 timeInterval, echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable(), speakerSamplesAvailable() );
 		}
 
 		lastMixerPcmTime = timeNow;
+	}
+	else if( m_AudioIoMgr->getFrameTimingEnable() )
+	{
+		LogMsg( LOG_VERBOSE, "R Frame %d partial readSpeakerData samples echo %d speaker %d left to read echo %d speaker %d", getFrameIndex(), 
+			echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable(), speakerSamplesAvailable() );
 	}
 
 	return speakerSamplesToRead;

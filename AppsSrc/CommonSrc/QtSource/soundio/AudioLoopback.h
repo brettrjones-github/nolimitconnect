@@ -49,15 +49,14 @@ public:
 	
 	void						fromGuiAudioOutSpaceAvail( int spaceInBytes );
 
-	void                        lockMixer( void )			{ m_MixerMutex.lock(); }
-	void                        unlockMixer( void )			{ m_MixerMutex.unlock(); }
+	void                        lockMixer( void )									{ m_MixerMutex.lock(); }
+	void                        unlockMixer( void )									{ m_MixerMutex.unlock(); }
 
-	void						processAudioInThreaded( void );
 	void						processAudioOutSpaceAvailableThreaded( void );
 
-protected:
-	void						processRawAudioInThreaded( RawAudio* rawAudio );
+	void						echoCancelSyncState( bool inSync );
 
+protected:
 	int                         getMixerFrameSize( void )							{ return MIXER_CHUNK_LEN_BYTES; }
 	int                         getMixerSamplesPerFrame( void )						{ return MIXER_CHUNK_LEN_SAMPLES; }
 
@@ -67,14 +66,13 @@ protected:
 	int							audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked );
 	int							getDataReadyForSpeakersLen( bool mixerIsLocked );
 
-	int                         incrementMixerWriteIndex( void )					{ m_MixerWriteIdx++; if( m_MixerWriteIdx >= MAX_MIXER_FRAMES ) m_MixerWriteIdx = 0; return m_MixerWriteIdx; }
+	int                         incrementMixerWriteIndex( void );
 	AudioLoopbackFrame&			getAudioWriteFrame( void )							{ return m_MixerFrames[ m_MixerWriteIdx ];  };
 	
-	int                         incrementMixerReadIndex( void )						{ m_MixerReadIdx++; if( m_MixerReadIdx >= MAX_MIXER_FRAMES ) m_MixerReadIdx = 0; return m_MixerReadIdx; }
+	int                         incrementMixerReadIndex( void );
 	AudioLoopbackFrame&			getAudioReadFrame( void )							{ return m_MixerFrames[ m_MixerReadIdx ]; };
 
 	void						processOutSpaceAvailable( void ) {};
-
 
 	//=== vars ===//
 	AudioIoMgr&					m_AudioIoMgr;
@@ -82,12 +80,6 @@ protected:
 
 	AudioSampleBuf				m_MicSampleBuf;
 	int64_t						m_MicInputLastSampleTime{ 0 };
-
-	std::vector<RawAudio*>		m_ProcessAudioQue;
-	VxMutex						m_AudioQueInMutex;
-
-	VxThread					m_ProcessAudioInThread;
-	VxSemaphore					m_AudioInSemaphore;
 
 	VxThread					m_ProcessAudioOutThread;
 	VxSemaphore					m_AudioOutSemaphore;

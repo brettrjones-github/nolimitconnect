@@ -99,10 +99,15 @@ public:
     void                        setFrameTimingEnable( bool enable )     { m_FrameTimingEnabled = enable; }
     bool                        getFrameTimingEnable( void );
 
+    void                        setFrameIndexDebugEnable( bool enable ) { m_FrameIndexDebugEnabled = enable; }
+    bool                        getFrameIndexDebugEnable( void )        { return m_FrameIndexDebugEnabled; }
+
     void                        setPeakAmplitudeDebugEnable( bool enable );
     bool                        getPeakAmplitudeDebugEnable( void )         { return m_PeakAmplitudeDebug; }
 
     void                        setEchoCancelerNeedsReset( bool needReset );
+
+    void                        echoCancelSyncState( bool inSync );
 
     //=== IAudioRequests ===//
     // enable disable microphone data callback
@@ -236,5 +241,6 @@ protected:
     bool                        m_AudioLoopbackEnabled{ false };
     bool                        m_AudioTimingEnabled{ false };
     bool                        m_FrameTimingEnabled{ false };
+    bool                        m_FrameIndexDebugEnabled{ false };
     bool                        m_PeakAmplitudeDebug{ false };
 };

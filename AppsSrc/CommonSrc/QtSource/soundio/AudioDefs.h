@@ -26,7 +26,7 @@ static const int AUDIO_BUF_SIZE_8000_1_S16 = 1280;      // ( 8000 * 2 bytes per 
 // mixer
 static const int MIXER_BUF_SIZE_8000_1_S16 = 1280;      // ( 8000 * 2 bytes per sample * 1 channels ) * 0.08 = 80 ms of audio data
 static const int MIXER_BUF_MILLISECONDS_8000_1_S16 = 80;              // 80 ms = 0.08 sec of audio data
-static const int MAX_MIXER_FRAMES = 4;      
+static const int MAX_MIXER_FRAMES = 5;      
 
 // input from microphone
 static const int AUDIO_CHANNEL_BYTES_MICROPHONE = 2;    // 2 bytes per sample (sizeof int16)

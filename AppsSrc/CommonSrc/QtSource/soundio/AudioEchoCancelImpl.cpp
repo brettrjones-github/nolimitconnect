@@ -191,106 +191,105 @@ void AudioEchoCancelImpl::processEchoRunThreaded()
 //============================================================================
 void AudioEchoCancelImpl::processEchoCancelThreaded()
 {
-	checkFor80msFrameElapsedThreaded();
-
-	if( m_SpeakerSamples.getSampleCnt() < MONO_8000HZ_SAMPLES_PER_10MS || m_MicSamples.getSampleCnt() < MONO_8000HZ_SAMPLES_PER_10MS )
+	if( m_SpeakerSamples.getSampleCnt() >= MONO_8000HZ_SAMPLES_PER_10MS && m_MicSamples.getSampleCnt() >= MONO_8000HZ_SAMPLES_PER_10MS )
 	{
-		// nothing to attempt sync with
-		//if( getSyncDebugEnabled() && ( m_SpeakerSamples.getSampleCnt() || m_MicSamples.getSampleCnt() ) )
-		//{
-		//	LogMsg( LOG_VERBOSE, "attemptEchoSync insufficent mic samples ms %d speaker samples ms %d",
-		//		m_MicSamples.getAudioDurationMs(), m_SpeakerSamples.getAudioDurationMs() );
-		//}
-
-		return;
-	}
-
-	m_EchoCancelInSync = attemptEchoSync();
-	if( !m_EchoCancelInSync )
-	{
-		return;
-	}
-
-	if( m_EchoCancelNeedsReset )
-	{
-		m_EchoCanceledSamplesMutex.lock();
-		m_EchoCanceledSamples.clear();
-		m_EchoCanceledSamplesMutex.unlock();
-
-		// for now always use 10ms frames of samples. webRtc requires it and speex will work with it
-		resetSpeex( MONO_8000HZ_SAMPLES_PER_10MS );
-	}
-
-	static int64_t startMs = 0;
-	if( m_AudioIoMgr.getAudioTimingEnable() )
-	{
-		startMs = GetHighResolutionTimeMs();
-	}
-
-	m_SpeakerSamplesMutex.lock();
-	m_MicSamplesMutex.lock();
-	m_EchoCanceledSamplesMutex.lock();
-
-	int framesToProcess = std::min( m_MicSamples.getSampleCnt() / MONO_8000HZ_SAMPLES_PER_10MS, m_SpeakerSamples.getSampleCnt() / MONO_8000HZ_SAMPLES_PER_10MS );
-	framesToProcess = std::min( framesToProcess, m_EchoCanceledSamples.freeSpaceSampleCount() / MONO_8000HZ_SAMPLES_PER_10MS );
-	if( framesToProcess )
-	{
-		// on a fast windows machine the echo processing takes about 4ms. this seems acceptable but keeping the buffers locked delays mic write to long
-		// unfortunately the only solution seems to be to make copies to work on and release the buffers immediately
-
-		int samplesToProcess = framesToProcess * MONO_8000HZ_SAMPLES_PER_10MS;
-		m_ProcessSpeakerSamples.writeSamples( m_SpeakerSamples.getSampleBuffer(), samplesToProcess );
-		m_ProcessMicSamples.writeSamples( m_MicSamples.getSampleBuffer(), samplesToProcess );
-		m_SpeakerSamples.samplesWereRead( samplesToProcess );
-		m_MicSamples.samplesWereRead( samplesToProcess );
-
-		int64_t preProceesMicTimeMs = m_HeadMicSamplesMs;
-		int samplesProcessedMs = AudioUtils::audioDurationMs( 8000, samplesToProcess );
-		m_HeadMicSamplesMs += samplesProcessedMs;
-		m_HeadSpeakerSamplesMs += samplesProcessedMs;
-
-		m_SpeakerSamplesMutex.unlock();
-		m_MicSamplesMutex.unlock();
-
-		int16_t* micBuf = m_ProcessMicSamples.getSampleBuffer();
-		int16_t* speakerBuf = m_ProcessSpeakerSamples.getSampleBuffer();
-		int16_t* echoCanceledBuf = m_EchoCanceledSamples.getSampleBuffer();
-		echoCanceledBuf = &echoCanceledBuf[ m_EchoCanceledSamples.getSampleCnt() ];
-
-		for( int i = 0; i < framesToProcess; i++ )
+		m_EchoCancelInSync = attemptEchoSync();
+		if( m_EchoCancelInSync )
 		{
-			processEchoCancelFrame( micBuf, speakerBuf, echoCanceledBuf );
 
-			micBuf += MONO_8000HZ_SAMPLES_PER_10MS;
-			speakerBuf += MONO_8000HZ_SAMPLES_PER_10MS;
-			echoCanceledBuf += MONO_8000HZ_SAMPLES_PER_10MS;
+			if( m_EchoCancelNeedsReset )
+			{
+				m_EchoCanceledSamplesMutex.lock();
+				m_EchoCanceledSamples.clear();
+				m_EchoCanceledSamplesMutex.unlock();
+
+				// for now always use 10ms frames of samples. webRtc requires it and speex will work with it
+				resetSpeex( MONO_8000HZ_SAMPLES_PER_10MS );
+			}
+
+			static int64_t startMs = 0;
+			if( m_AudioIoMgr.getAudioTimingEnable() )
+			{
+				startMs = GetHighResolutionTimeMs();
+			}
+
+			m_SpeakerSamplesMutex.lock();
+			m_MicSamplesMutex.lock();
+			m_EchoCanceledSamplesMutex.lock();
+
+			int framesToProcess = std::min( m_MicSamples.getSampleCnt() / MONO_8000HZ_SAMPLES_PER_10MS, m_SpeakerSamples.getSampleCnt() / MONO_8000HZ_SAMPLES_PER_10MS );
+			framesToProcess = std::min( framesToProcess, m_EchoCanceledSamples.freeSpaceSampleCount() / MONO_8000HZ_SAMPLES_PER_10MS );
+			if( framesToProcess )
+			{
+				// on a fast windows machine the echo processing takes about 4ms. this seems acceptable but keeping the buffers locked delays mic write to long
+				// unfortunately the only solution seems to be to make copies to work on and release the buffers immediately
+
+				int samplesToProcess = framesToProcess * MONO_8000HZ_SAMPLES_PER_10MS;
+				m_ProcessSpeakerSamples.writeSamples( m_SpeakerSamples.getSampleBuffer(), samplesToProcess );
+				m_ProcessMicSamples.writeSamples( m_MicSamples.getSampleBuffer(), samplesToProcess );
+				m_SpeakerSamples.samplesWereRead( samplesToProcess );
+				m_MicSamples.samplesWereRead( samplesToProcess );
+
+				int64_t preProceesMicTimeMs = m_HeadMicSamplesMs;
+				int samplesProcessedMs = AudioUtils::audioDurationMs( 8000, samplesToProcess );
+				m_HeadMicSamplesMs += samplesProcessedMs;
+				m_HeadSpeakerSamplesMs += samplesProcessedMs;
+
+				m_SpeakerSamplesMutex.unlock();
+				m_MicSamplesMutex.unlock();
+
+				int16_t* micBuf = m_ProcessMicSamples.getSampleBuffer();
+				int16_t* speakerBuf = m_ProcessSpeakerSamples.getSampleBuffer();
+				int16_t* echoCanceledBuf = m_EchoCanceledSamples.getSampleBuffer();
+				echoCanceledBuf = &echoCanceledBuf[ m_EchoCanceledSamples.getSampleCnt() ];
+
+				for( int i = 0; i < framesToProcess; i++ )
+				{
+					processEchoCancelFrame( micBuf, speakerBuf, echoCanceledBuf );
+
+					micBuf += MONO_8000HZ_SAMPLES_PER_10MS;
+					speakerBuf += MONO_8000HZ_SAMPLES_PER_10MS;
+					echoCanceledBuf += MONO_8000HZ_SAMPLES_PER_10MS;
+				}
+
+				m_ProcessMicSamples.clear();
+				m_ProcessSpeakerSamples.clear();
+
+				int existingEchoMs = m_EchoCanceledSamples.getAudioDurationMs();
+				m_EchoCanceledSamples.setSampleCnt( m_EchoCanceledSamples.getSampleCnt() + samplesToProcess );
+
+				m_HeadEchoCanceledSamplesMs = preProceesMicTimeMs - existingEchoMs;
+
+				// LogMsg( LOG_VERBOSE, "processSpeexEchoCancel echo canceled seqNum %d cnt %d left %d of %d", echoCancelSequenceCnt, sampleCnt, echoSamples.getSampleCnt(), echoSampleCnt );		
+			}
+			else
+			{
+				m_SpeakerSamplesMutex.unlock();
+				m_MicSamplesMutex.unlock();
+			}
+
+			m_EchoCanceledSamplesMutex.unlock();
+			if( m_AudioIoMgr.getAudioTimingEnable() )
+			{
+				int64_t endtMs = GetHighResolutionTimeMs();
+				if( endtMs - startMs > 10 )
+				{
+					LogMsg( LOG_VERBOSE, "AudioEchoCancelImpl::processEchoCancelThreaded took %d ms", (int)(endtMs - startMs) );
+				}
+			}
+		}
+		else
+		{
+			// not in sync
 		}
 
-		m_ProcessMicSamples.clear();
-		m_ProcessSpeakerSamples.clear();
-
-		int existingEchoMs = m_EchoCanceledSamples.getAudioDurationMs();
-		m_EchoCanceledSamples.setSampleCnt( m_EchoCanceledSamples.getSampleCnt() + samplesToProcess );	
-
-		m_HeadEchoCanceledSamplesMs = preProceesMicTimeMs - existingEchoMs;
-
-		// LogMsg( LOG_VERBOSE, "processSpeexEchoCancel echo canceled seqNum %d cnt %d left %d of %d", echoCancelSequenceCnt, sampleCnt, echoSamples.getSampleCnt(), echoSampleCnt );		
+		checkFor80msFrameElapsedThreaded();
 	}
 	else
 	{
-		m_SpeakerSamplesMutex.unlock();
-		m_MicSamplesMutex.unlock();
+		// not enough samples to do echo cancel
 	}
 
-	m_EchoCanceledSamplesMutex.unlock();
-	if( m_AudioIoMgr.getAudioTimingEnable() )
-	{
-		int64_t endtMs = GetHighResolutionTimeMs();
-		if( endtMs - startMs > 10 )
-		{
-			LogMsg( LOG_VERBOSE, "AudioEchoCancelImpl::processEchoCancelThreaded took %d ms", (int)(endtMs - startMs) );
-		}
-	}
 
 	//if( m_AudioIoMgr.getAudioTimingEnable() )
 	//{
@@ -351,7 +350,7 @@ void AudioEchoCancelImpl::checkFor80msFrameElapsedThreaded( void )
 			}
 		}
 
-		if( m_AudioIoMgr.getFrameTimingEnable() )
+		if( m_AudioIoMgr.getFrameTimingEnable() && echoCanceledFrameWasWritten )
 		{
 			static int64_t lastFrameTime{ 0 };
 			static int funcCallCnt{ 0 };
@@ -359,7 +358,7 @@ void AudioEchoCancelImpl::checkFor80msFrameElapsedThreaded( void )
 			if( lastFrameTime )
 			{
 			    int64_t timeInterval = startMs - lastFrameTime;
-			    LogMsg( LOG_VERBOSE, "checkFor80msFrameElapsed %d elapsed %d ms app %d ms frame sent %d", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs(), echoCanceledFrameWasWritten );
+			    LogMsg( LOG_VERBOSE, "call cnt %d checkFor80msFrameElapsed elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs() );
 			}
 
 			lastFrameTime = startMs;
@@ -399,6 +398,7 @@ bool AudioEchoCancelImpl::attemptEchoSync( void )
 				m_MicSamples.getAudioDurationMs(), m_SpeakerSamples.getAudioDurationMs() );
 			inSync = false;
 			m_EchoCancelNeedsReset = true;
+			m_AudioIoMgr.echoCancelSyncState( false );
 		}
 		else if( getSyncDebugEnabled() )
 		{
@@ -423,6 +423,7 @@ bool AudioEchoCancelImpl::attemptEchoSync( void )
 			LogMsg( LOG_VERBOSE, "processSpeexEchoCancel stripping speaker sample cnt %d to get sync samples left %d ms time diff %d ms",
 				samplesToStrip, m_SpeakerSamples.getAudioDurationMs(), (int)(targetSpeakerTimeMs - m_HeadSpeakerSamplesMs) );
 			inSync = true;
+			m_AudioIoMgr.echoCancelSyncState( true );
 		}
 		else if( getSyncDebugEnabled() )
 		{

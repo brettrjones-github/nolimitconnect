@@ -318,9 +318,8 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         LogMsg( LOG_DEBUG, "AudioOutIo::readData mismatch with maxlen %d and read %d", maxlen, readAmount );
     }
 
-    if( m_AudioIoMgr.getFrameTimingEnable() )
+    if( m_AudioIoMgr.getPeakAmplitudeDebugEnable() )
     {
-        int64_t timeNow = m_MyApp.elapsedMilliseconds();
         static int64_t lastMixerPcmTime{ 0 };
         static int funcCallCnt{ 0 };
         funcCallCnt++;
@@ -330,7 +329,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
             LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d peak amplitude %d", funcCallCnt, m_PeakAudioOutAmplitude );
         }
 
-        lastMixerPcmTime = timeNow;
+        lastMixerPcmTime = timeStart;
     }
 
     if( m_AudioIoMgr.getIsEchoCancelEnabled() )

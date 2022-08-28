@@ -32,7 +32,7 @@ public:
 
 	void						setAudioIoMgr( AudioIoMgr* audioIoMgr )		{ m_AudioIoMgr = audioIoMgr; }
 
-	void						clearFrame( void );
+	void						clearFrame( bool fillSilence );
 	bool						isEmpty( void )								{ return m_InputIds.empty(); }
 
 	void						setFrameIndex( int frameIndex )				{ m_FrameIndex = frameIndex; }

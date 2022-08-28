@@ -95,6 +95,7 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
     setAudioLoopbackEnable( true );
     // setAudioTimingEnable( true ); // log audio timing
     // setFrameTimingEnable( true ); // log audio frames and timing
+    setFrameIndexDebugEnable( true ); // log audio frame indexes and when incremented
 }
 
 //============================================================================
@@ -741,4 +742,19 @@ void AudioIoMgr::setPeakAmplitudeDebugEnable( bool enable )
 { 
     m_PeakAmplitudeDebug = enable; 
     m_AudioEchoCancel.setPeakAmplitudeDebugEnable( enable );
+}
+
+//============================================================================
+void AudioIoMgr::echoCancelSyncState( bool inSync )
+{
+    if( getAudioLoopbackEnable() )
+    {
+        m_AudioLoopback.echoCancelSyncState( inSync );
+    }
+    else
+    {
+        // BRJ may need to implement this
+        // IAudioCallbacks& audioCallbacks = getAudioCallbacks();
+        // audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+    }
 }

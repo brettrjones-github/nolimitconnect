@@ -27,21 +27,6 @@ const int FRAME_INTERVAL_US = 80000;
 namespace
 {
 	//============================================================================
-	static void* AudioInProcessThreadFunc( void* pvContext )
-	{
-		VxThread* poThread = (VxThread*)pvContext;
-		poThread->setIsThreadRunning( true );
-		AudioLoopback* processor = (AudioLoopback*)poThread->getThreadUserParam();
-		if( processor )
-		{
-			processor->processAudioInThreaded();
-		}
-
-		poThread->threadAboutToExit();
-		return nullptr;
-	}
-
-	//============================================================================
 	static void* AudioOutProcessThreadFunc( void* pvContext )
 	{
 		VxThread* poThread = (VxThread*)pvContext;
@@ -73,16 +58,13 @@ AudioLoopback::AudioLoopback( AudioIoMgr& audioIoMgr, QObject* parent )
 		m_MixerFrames[ i ].setAudioIoMgr( &audioIoMgr );
 	}
 
-	m_ProcessAudioInThread.startThread( (VX_THREAD_FUNCTION_T)AudioInProcessThreadFunc, this, "AudioInProcessor" );
 	m_ProcessAudioOutThread.startThread( (VX_THREAD_FUNCTION_T)AudioOutProcessThreadFunc, this, "AudioOutProcessor" );
 }
 
 //============================================================================
 void AudioLoopback::audioLoopbackShutdown( void )
 {
-	m_ProcessAudioInThread.abortThreadRun( true );
 	m_ProcessAudioOutThread.abortThreadRun( true );
-	m_AudioInSemaphore.signal();
 	m_AudioOutSemaphore.signal();
 }
 
@@ -180,7 +162,7 @@ qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen, AudioSa
 				echoFarBuf, reqEchoSampleCnt - echoSamplesRead, echoSamplesThisFrame, peakValue0to100 );
 			if( speakerSamplesThisFrame && 0 == audioFrame.speakerSamplesAvailable() )
 			{
-				audioFrame.clearFrame();
+				audioFrame.clearFrame(false);
 				incrementMixerReadIndex();
 			}
 
@@ -260,56 +242,6 @@ void AudioLoopback::fromGuiAudioOutSpaceAvail( int spaceInBytes )
 }
 
 //============================================================================
-void AudioLoopback::processAudioInThreaded( void )
-{
-	while( false == m_ProcessAudioInThread.isAborted() )
-	{
-		m_AudioInSemaphore.wait();
-		if( m_ProcessAudioInThread.isAborted() )
-		{
-			LogMsg( LOG_INFO, "AudioLoopback::processAudioIn aborting1" );
-			break;
-		}
-
-		while( m_ProcessAudioQue.size() )
-		{
-			m_AudioQueInMutex.lock();
-			RawAudio* rawAudio = m_ProcessAudioQue[ 0 ];
-			m_ProcessAudioQue.erase( m_ProcessAudioQue.begin() );
-			m_AudioQueInMutex.unlock();
-
-			if( m_AudioIoMgr.getAudioTimingEnable() )
-			{
-				int64_t timeNow = m_MyApp.elapsedMilliseconds();
-				static int64_t lastProceesRawAudioTime{ 0 };
-				static int funcCallCnt{ 0 };
-				funcCallCnt++;
-				int64_t timeInterval = timeNow - lastProceesRawAudioTime;
-				//LogMsg( LOG_VERBOSE, "processAudioInThreaded process raw audio %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs() );
-				lastProceesRawAudioTime = timeNow;
-			}
-
-			processRawAudioInThreaded( rawAudio );
-			delete rawAudio;
-
-			if( m_ProcessAudioInThread.isAborted() )
-			{
-				LogMsg( LOG_INFO, "AudioLoopback::processAudioIn aborting2" );
-				break;
-			}
-		}
-
-		if( m_ProcessAudioInThread.isAborted() )
-		{
-			LogMsg( LOG_INFO, "AudioLoopback::processAudioIn aborting3" );
-			break;
-		}
-	}
-
-	LogMsg( LOG_INFO, "AudioLoopback::processAudioIn leaving function" );
-}
-
-//============================================================================
 void AudioLoopback::processAudioOutSpaceAvailableThreaded( void )
 {
 	while( false == m_ProcessAudioOutThread.isAborted() )
@@ -347,7 +279,7 @@ void AudioLoopback::processAudioOutSpaceAvailableThreaded( void )
 		// move to next frame and clear it so is ready to write to
 		incrementMixerWriteIndex();
 		AudioLoopbackFrame& nextAudioFrame = getAudioWriteFrame();
-		nextAudioFrame.clearFrame();
+		nextAudioFrame.clearFrame(false);
 		unlockMixer();
 
 		// do output space available processing
@@ -361,24 +293,6 @@ void AudioLoopback::processAudioOutSpaceAvailableThreaded( void )
 	}
 
 	LogMsg( LOG_INFO, "AudioLoopback::processAudioOut leaving function" );
-}
-
-//============================================================================
-void AudioLoopback::processRawAudioInThreaded( RawAudio* rawAudio )
-{
-	int16_t* pcmData = rawAudio->m_PcmData;
-	uint16_t  pcmDataLen = rawAudio->m_PcmDataLen;
-
-	if( pcmDataLen == MIXER_CHUNK_LEN_BYTES )
-	{
-		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d", VxGetCurrentThreadTid() );
-		lockMixer();
-		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d run write idx %", VxGetCurrentThreadTid(), m_MixerWriteIdx );
-		AudioLoopbackFrame& audioFrame = getAudioWriteFrame();
-		audioFrame.toMixerPcm8000HzMonoChannel( rawAudio->getAppModule(), pcmData, rawAudio->getIsSilence() );
-		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded unlockMixer thread %d", VxGetCurrentThreadTid() );
-		unlockMixer();
-	}
 }
 
 //============================================================================
@@ -467,3 +381,76 @@ int AudioLoopback::getDataReadyForSpeakersLen( bool mixerIsLocked )
 	return audioQueUsedSpace( eAppModuleAll, mixerIsLocked );
 }
 
+//============================================================================
+int AudioLoopback::incrementMixerWriteIndex( void ) 
+{ 
+	m_MixerWriteIdx++; 
+	if( m_MixerWriteIdx >= MAX_MIXER_FRAMES )
+	{
+		m_MixerWriteIdx = 0;
+	}
+		
+	if( m_AudioIoMgr.getFrameIndexDebugEnable() )
+	{
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d incrementMixerWriteIndex elapsed %d ms", m_MixerWriteIdx, funcCallCnt, timeInterval );
+		}
+
+		lastMixerPcmTime = timeNow;
+	}
+
+	return m_MixerWriteIdx; 
+}
+
+//============================================================================
+int AudioLoopback::incrementMixerReadIndex( void )
+{
+	m_MixerReadIdx++;
+	if( m_MixerReadIdx >= MAX_MIXER_FRAMES )
+	{
+		m_MixerReadIdx = 0;
+	}
+
+	if( m_AudioIoMgr.getFrameIndexDebugEnable() )
+	{
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "R Frame %d call cnt %d incrementMixerReadIndex elapsed %d ms", m_MixerReadIdx, funcCallCnt, timeInterval );
+		}
+
+		lastMixerPcmTime = timeNow;
+	}
+
+	return m_MixerReadIdx;
+}
+
+//============================================================================
+void AudioLoopback::echoCancelSyncState( bool inSync )
+{
+	if( inSync )
+	{
+		// the read timing fluctuates widely
+		// fill with silence and set indexes so write should not catch up with read
+		lockMixer();
+		for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+		{
+			m_MixerFrames[ i ].clearFrame( true );
+		}
+
+		m_MixerWriteIdx = 3;
+		m_MixerReadIdx = 0;
+
+		unlockMixer();
+	}
+}
