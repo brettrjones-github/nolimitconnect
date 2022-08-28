@@ -162,9 +162,8 @@ protected:
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
     GuiOfferClientMgr&          m_OfferClientMgr;
-	bool						m_MuteMic{ false };
-	bool						m_MuteSpeaker{ false };
-	bool						m_EchoCancelEnabled{ false };
+	bool						m_MutedMic{ false };
+	bool						m_MutedSpeaker{ false };
     VxGUID                      m_MyOnlineId;
 	bool                        m_CallbacksRequested{ false };
 

@@ -75,8 +75,8 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
 	setPowerButtonIcon();
 	setHomeButtonIcon();
-	setMicrophoneIcon( m_MuteMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );
-    setSpeakerIcon( m_MuteSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
+	setMicrophoneIcon( m_MutedMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );
+    setSpeakerIcon( m_MutedSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
     setCameraIcon();
     setTrashButtonIcon();
     setShareButtonIcon();
@@ -141,11 +141,11 @@ void TitleBarWidget::updateTitleBar( void )
     bool isMicEnabled = GetAppInstance().getSoundMgr().isMicrophoneEnabled();
     callbackToGuiWantMicrophoneRecording( isMicEnabled );
 
-    m_MuteMic = GetAppInstance().getSoundMgr().getIsMicrophoneMuted();
-    callbackToGuiMicrophoneMuted( m_MuteMic );
+    m_MutedMic = GetAppInstance().getSoundMgr().getIsMicrophoneMuted();
+    callbackToGuiMicrophoneMuted( m_MutedMic );
 
-    m_MuteSpeaker = GetAppInstance().getSoundMgr().fromGuiIsSpeakerMuted();
-    callbackToGuiSpeakerMuted( m_MuteSpeaker );
+    m_MutedSpeaker = GetAppInstance().getSoundMgr().getIsSpeakerMuted();
+    callbackToGuiSpeakerMuted( m_MutedSpeaker );
 
     bool isCamEnabled = GetAppInstance().getCamLogic().isCamCaptureRunning();
     callbackToGuiWantVideoCapture( isCamEnabled );
@@ -281,7 +281,7 @@ void TitleBarWidget::enableVideoControls( bool enable )
 void TitleBarWidget::enableAudioControls( bool enable )
 {
 	ui.m_MuteMicButton->setVisible( enable );
-    ui.m_MicVolPeakBar->setVisible( !m_MuteMic );
+    ui.m_MicVolPeakBar->setVisible( !m_MutedMic );
     ui.m_MicVolPeakBar->setValue( 0 );
 	ui.m_MuteSpeakerButton->setVisible( enable );
 }
@@ -301,15 +301,15 @@ void TitleBarWidget::slotHomeButtonClicked( void )
 //============================================================================
 void TitleBarWidget::slotMuteMicButtonClicked( void )
 {
-	m_MuteMic = !m_MuteMic;
-    m_MyApp.fromGuiMuteMicrophone( m_MuteMic );
+	m_MutedMic = !m_MutedMic;
+    m_MyApp.fromGuiMuteMicrophone( m_MutedMic );
 }
 
 //============================================================================
 void TitleBarWidget::slotMuteSpeakerButtonClicked( void )
 {
-	m_MuteSpeaker = !m_MuteSpeaker;
-    m_MyApp.fromGuiMuteSpeaker( m_MuteSpeaker );
+	m_MutedSpeaker = !m_MutedSpeaker;
+    m_MyApp.fromGuiMuteSpeaker( m_MutedSpeaker );
 }
 
 //============================================================================
@@ -751,15 +751,15 @@ void TitleBarWidget::callbackToGuiWantVideoCapture( bool wantVideoCapture )
 //============================================================================
 void TitleBarWidget::callbackToGuiMicrophoneMuted( bool isMuted )
 {
-    m_MuteMic = isMuted;
-    setMicrophoneIcon( m_MuteMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );
+    m_MutedMic = isMuted;
+    setMicrophoneIcon( m_MutedMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );
 }
 
 //============================================================================
 void TitleBarWidget::callbackToGuiSpeakerMuted( bool isMuted )
 {
-    m_MuteSpeaker = isMuted;
-    setSpeakerIcon( m_MuteSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
+    m_MutedSpeaker = isMuted;
+    setSpeakerIcon( m_MutedSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
 }
 
 //============================================================================

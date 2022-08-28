@@ -32,8 +32,8 @@ AudioLoopbackFrame::AudioLoopbackFrame()
 //============================================================================
 void AudioLoopbackFrame::clearFrame( void )
 {
-	m_MixerLenWrote = 0;
-	m_MixerLenRead = 0;
+	m_MixerSamplesWrote = 0;
+	m_MixerSamplesRead = 0;
 	m_SpeakerSamplesRead = 0;
 	m_SpeakerSamplesWrote = 0;
 
@@ -46,13 +46,13 @@ void AudioLoopbackFrame::clearFrame( void )
 //============================================================================
 int AudioLoopbackFrame::audioLenInUse( void )
 {
-	return m_MixerLenWrote - m_MixerLenRead; // how many bytes is written and not read by audio out
+	return m_MixerSamplesWrote - m_MixerSamplesRead; // how many bytes is written and not read by audio out
 }
 
 //============================================================================
 int AudioLoopbackFrame::audioLenFreeSpace( void )
 {
-	return MIXER_CHUNK_LEN_BYTES - (m_MixerLenWrote - m_MixerLenRead); // how many bytes is available to write into frame
+	return MIXER_CHUNK_LEN_BYTES - (m_MixerSamplesWrote - m_MixerSamplesRead); // how many bytes is available to write into frame
 }
 
 //============================================================================
@@ -82,7 +82,7 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 	if( m_InputIds.empty() )
 	{
 		// first write after has been read.. reset partial read counters
-		m_MixerLenWrote = MIXER_CHUNK_LEN_BYTES;
+		m_MixerSamplesWrote = MIXER_CHUNK_LEN_SAMPLES;
 	}
 	
 	m_InputIds.push_back( appModule );
@@ -96,8 +96,8 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 		if( lastMixerPcmTime )
 		{
 			int64_t timeInterval = timeNow - lastMixerPcmTime;
-			LogMsg( LOG_VERBOSE, "toMixerPcm8000HzMonoChannel %d module %s frame %d elapsed %d ms silence %d %d", funcCallCnt,
-				DescribeAppModule( appModule ), getFrameIndex(), (int)timeInterval, isSilenceIn, m_IsSilentSamples );
+			LogMsg( LOG_VERBOSE, "toMixerPcm8000HzMonoChannel %d module %s frame %d elapsed %d ms peak %d", funcCallCnt,
+				DescribeAppModule( appModule ), getFrameIndex(), (int)timeInterval, AudioUtils::peakPcmAmplitude0to100( m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES ) );
 		}
 
 		lastMixerPcmTime = timeNow;
@@ -112,8 +112,8 @@ void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrame
 	m_SpeakerSamplesRead = 0;
 	m_SpeakerSamplesWrote = SPEAKER_CHUNK_LEN_SAMPLES;
 
-	m_MixerLenRead = 0;
-	m_MixerLenWrote = MIXER_CHUNK_LEN_SAMPLES;
+	m_MixerSamplesRead = 0;
+	m_MixerSamplesWrote = MIXER_CHUNK_LEN_SAMPLES;
 
 	m_IsProcessed = true;
 
@@ -140,7 +140,7 @@ void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrame
 	else
 	{
 		AudioUtils::upsamplePcmAudioLerpPrev( m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES, MIXER_TO_SPEAKER_MULTIPLIER, prevFrameSample, m_SpeakerBuf );
-		m_PeakValue0to100 = AudioUtils::getPeakPcmAmplitude0to100( m_MixerBuf, MIXER_CHUNK_LEN_BYTES );
+		m_PeakValue0to100 = AudioUtils::peakPcmAmplitude0to100( m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES );
 	}	
 
 	if( m_AudioIoMgr->getFrameTimingEnable() )
@@ -181,7 +181,7 @@ int AudioLoopbackFrame::readSpeakerData( int16_t* pcmReadData, int speakerSample
 	speakerSamplesWereRead( speakerSamplesToRead );
 
 	int echoSamplesToRead = std::min( echoSamplesAvailable(), echoSamplesRequested );
-	echoFarBuf.writeSamples( &m_MixerBuf[ m_MixerLenRead ], echoSamplesToRead );
+	echoFarBuf.writeSamples( &m_MixerBuf[ m_MixerSamplesRead ], echoSamplesToRead );
 	retEchoSamplesRead += echoSamplesToRead;
 	echoSamplesWereRead( echoSamplesToRead );
 
@@ -194,8 +194,8 @@ int AudioLoopbackFrame::readSpeakerData( int16_t* pcmReadData, int speakerSample
 		if( lastMixerPcmTime )
 		{
 			int64_t timeInterval = timeNow - lastMixerPcmTime;
-			LogMsg( LOG_VERBOSE, "readSpeakerData %d frame %d elapsed %d ms samples echo %d speaker %d left to read %d", funcCallCnt,
-				getFrameIndex(), (int)timeInterval, echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable() );
+			LogMsg( LOG_VERBOSE, "readSpeakerData %d frame %d elapsed %d ms samples echo %d speaker %d left to read %d peak %d", funcCallCnt,
+				getFrameIndex(), (int)timeInterval, echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable(), m_PeakValue0to100 );
 		}
 
 		lastMixerPcmTime = timeNow;

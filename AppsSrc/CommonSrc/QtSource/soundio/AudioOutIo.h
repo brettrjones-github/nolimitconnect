@@ -50,6 +50,8 @@ public:
     QAudio::State               getState()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutState : QAudio::StoppedState); }
     QAudio::Error               getError()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
+    int                         getAudioOutPeakAmplitude( void )            { return m_PeakAudioOutAmplitude; }
+
     void                        wantSpeakerOutput( bool enableOutput );
     bool                        isSpeakerOutputWanted( void )               { return m_SpeakerOutputEnabled; }
 
@@ -122,5 +124,5 @@ private:
     int64_t                     m_EndOfEchoBufferTimestamp{ 0 };
     AudioSampleBuf              m_EchoFarBuffer;
 
-    int                         m_PeakAudioOutValue{ 0 };
+    int                         m_PeakAudioOutAmplitude{ 0 };
 };

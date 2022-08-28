@@ -84,7 +84,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 				pSktBuf[ iDataLen ] = 0;
 				sktBase->sktBufAmountRead( 0 ); // release mutex
                 LogMsg( LOG_VERBOSE, "Rxed ascii %s", pSktBuf );
-				// BRJ we no longer handle http. web pages will be replaced with more secure file xfer
+				// we no longer handle http. web page ascii is replaced with more secure file xfer
 				// if( m_PluginMgr.handleFirstWebPageConnection( sktBase ) )
 				// {
 					// was either profile or storyboard web page

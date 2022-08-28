@@ -55,16 +55,22 @@ public:
 	void						echoCancelShutdown( void );
 
 	void						enableEchoCancel( bool enable );
-	bool						isEchoCancelEnabled( void )				{ return m_EchoCancelEnable; };
+	bool						isEchoCancelEnabled( void )						{ return m_EchoCancelEnable; };
 
-	void						setEchoDelayMsConstant( int delayMs )	{ m_EchoDelayMsConstant = delayMs; }
-	int							getEchoDelayMsConstant( void )			{ return m_EchoDelayMsConstant; }
+	void						setEchoDelayMsConstant( int delayMs )			{ m_EchoDelayMsConstant = delayMs; }
+	int							getEchoDelayMsConstant( void )					{ return m_EchoDelayMsConstant; }
 
-	bool						getIsInSync( void )						{ return m_EchoCancelInSync; }
+	void						setPeakAmplitudeDebugEnable( bool enableDebug ) { m_PeakAmplitudeDebug = enableDebug; }
+	bool						getPeakAmplitudeDebugEnable( void )				{ return m_PeakAmplitudeDebug; }
 
-	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs );
+	void						setSyncDebugEnabled( bool enableSyncDebug )		{ m_SyncDebugEnabled = enableSyncDebug; }
+	bool						getSyncDebugEnabled( void )						{ return m_SyncDebugEnabled; }
 
-	void						micWriteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs );
+	bool						getIsInSync( void ) { return m_EchoCancelInSync; }
+
+	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs, bool stableTimestamp );
+
+	void						micWriteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
 
 	void						frame80msElapsed( void ); // called from master clock
 
@@ -83,6 +89,8 @@ protected:
 	bool						attemptEchoSync( void );
 
 	void						resetEchoCancel( void );
+
+	void						processEchoCancelFrame( int16_t* micBuf, int16_t* speakerBuf, int16_t* echoCanceledBuf );
 
 	bool						processWebRtcEchoCancel( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData );
 
@@ -109,6 +117,8 @@ protected:
 	int64_t						m_SpeakerReadSamplesUs{ 0 };
 
 	bool						m_EchoCancelInSync{ false };
+	bool						m_SyncDebugEnabled{ false };
+	bool						m_PeakAmplitudeDebug{ false };
 
 	bool						m_Frame80msElapsed{ false };
 
@@ -116,11 +126,13 @@ protected:
 	AudioSampleBuf				m_SpeakerSamples;
 	int64_t						m_TailSpeakerSamplesMs{ 0 };
 	int64_t						m_HeadSpeakerSamplesMs{ 0 };
+	bool						m_StableSpeakerTimestamp{ false };
 
 	VxMutex						m_MicSamplesMutex;
 	AudioSampleBuf				m_MicSamples;
 	int64_t						m_TailMicSamplesMs{ 0 };
 	int64_t						m_HeadMicSamplesMs{ 0 };
+	bool						m_StableMicTimestamp{ false };
 
 	VxMutex						m_EchoCanceledSamplesMutex;
 	AudioSampleBuf				m_EchoCanceledSamples;
@@ -162,6 +174,5 @@ protected:
 	int							m_MicRemainderSampleCnt{ 0 };
 	int16_t* m_SpeakerBuf10ms{ nullptr };
 #endif //#if defined(USE_WEB_RTC_ECHO_CANCEL_1) || defined(USE_WEB_RTC_ECHO_CANCEL_3)
-
 
 };

@@ -43,7 +43,7 @@ public:
 
 	bool						isProcessed( void )							{ return m_IsProcessed; }
 	int							speakerSamplesAvailable( void )				{ return m_SpeakerSamplesWrote - m_SpeakerSamplesRead; }
-	int							echoSamplesAvailable( void )				{ return m_MixerLenWrote - m_MixerLenRead; }
+	int							echoSamplesAvailable( void )				{ return m_MixerSamplesWrote - m_MixerSamplesRead; }
 	int							readSpeakerData( int16_t* pcmReadData, int speakerSamplesRequested, int& retSpeakerSamplesRead,
 												 AudioSampleBuf& echoFarBuf, int echoSamplesRequested, int& retEchoSamplesRead, int& retPeakValue0to100 );
 
@@ -59,13 +59,13 @@ public:
 	int16_t						getLastEchoSample( void );
 
 	void						speakerSamplesWereRead( int samplesRead )	{ m_SpeakerSamplesRead += samplesRead;  }
-	void						echoSamplesWereRead( int samplesRead )		{ m_MixerLenRead += samplesRead; }
+	void						echoSamplesWereRead( int samplesRead )		{ m_MixerSamplesRead += samplesRead; }
 
 	AudioIoMgr*					m_AudioIoMgr{ nullptr };
 
 	int16_t						m_MixerBuf[ MIXER_CHUNK_LEN_SAMPLES ];
-	int							m_MixerLenRead{ 0 };
-	int							m_MixerLenWrote{ 0 };
+	int							m_MixerSamplesRead{ 0 };
+	int							m_MixerSamplesWrote{ 0 };
 	std::vector<EAppModule>		m_InputIds;
 
 	// after processed to prepare for speakerRead

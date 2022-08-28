@@ -199,7 +199,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSamp
     std::vector<int16_t> inPcmData( &mixerReadBuf[ 0 ], &mixerReadBuf[ upSamplesToRead + readAppendLerpSample - 1 ] );
     echoFarBuf.insert( echoFarBuf.end(), inPcmData.begin(), inPcmData.end() );
 
-    m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( mixerReadBuf, mixerSampleCnt );
+    m_PeakAmplitude = AudioUtils::peakPcmAmplitude0to100( mixerReadBuf, mixerSampleCnt );
 
     int samplesRead = upSamplesToRead + readAppendLerpSample;
 

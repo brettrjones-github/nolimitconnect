@@ -32,9 +32,11 @@
 //============================================================================
 int64_t GetHighResolutionTimeUs( void ) //  time in usec
 {
-	/* Returns a time counter in microsec   */
-	/* the resolution is platform dependent */
-	/* but is typically 1.62 us resolution  */
+	// do not use GetTickCount64.. its resolution is 16ms
+	
+	// Returns a time counter in microsec   
+	// the resolution is platform dependent 
+	// but is typically 1.62 us resolution  
 	LARGE_INTEGER lpPerformanceCount;
 	LARGE_INTEGER lpFrequency;
 	QueryPerformanceCounter( &lpPerformanceCount );
@@ -93,9 +95,11 @@ int64_t GetHighResolutionTimeUs( void ) /* O  time in usec*/
 //============================================================================
 int64_t GetHighResolutionTimeMs( void ) //  time in millisec
 {
-	/* Returns a time counter in millisec   */
-	/* the resolution is platform dependent */
-	/* but is typically 1.62 us resolution  */
+	// do not use GetTickCount64.. its resolution is 16ms
+
+	// Returns a time counter in millisec   
+	// the resolution is platform dependent 
+	// but is typically 1.62 us resolution  
 	LARGE_INTEGER lpPerformanceCount;
 	LARGE_INTEGER lpFrequency;
 	QueryPerformanceCounter( &lpPerformanceCount );

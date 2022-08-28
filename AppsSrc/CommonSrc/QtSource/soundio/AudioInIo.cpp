@@ -242,14 +242,15 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
         m_AudioIoMgr.setEchoCancelerNeedsReset( true ); // tell echo canceler parameters have changed and need to restart
     }
 
-    int64_t timeNow = m_MyApp.elapsedMilliseconds();
+    int64_t timeNow = GetHighResolutionTimeMs();
     int64_t timeStart = timeNow;
     bool timeIntervalTooLong;
     int64_t micWriteTime = m_MicWriteTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
-    if( std::abs( timeNow - micWriteTime ) > 40 )
+    if( timeIntervalTooLong )
     {
-        LogMsg( LOG_VERBOSE, "AudioInIo::writeData time estimate excessive time dif %d too long ? %d", (int)std::abs( timeNow - micWriteTime ), timeIntervalTooLong );
+        LogMsg( LOG_VERBOSE, "AudioInIo::writeData time estimate excessive time diff %d ", (int)( timeNow - micWriteTime ), timeIntervalTooLong );
     }
+
 
     if( m_AudioTestState != eAudioTestStateNone )
     {
@@ -262,45 +263,15 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     }
 
     AudioUtils::dnsamplePcmAudio( sampleInData, outSampleCnt, m_DivideCnt, sampleOutData );
-    if( m_AudioIoMgr.getAudioTimingEnable() )
-    {
-        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
-        if( elapsedInFunction > 2 )
-        {
-            LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING spent %d ms in dnsamplePcmAudio", elapsedInFunction );
-        }
-
-        timeNow = m_MyApp.elapsedMilliseconds();
-    }
-
-    if( m_AudioIoMgr.getAudioTimingEnable() )
-    {
-        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
-        if( elapsedInFunction > 2 )
-        {
-            LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING spent %d ms in getPeakPcmAmplitude0to100", elapsedInFunction );
-        }
-
-        timeNow = m_MyApp.elapsedMilliseconds();
-    }
 
     int64_t micTailTimeMs = micWriteTime + (m_MicWriteDurationUs / 1000);
-    if( m_AudioIoMgr.fromGuiIsEchoCancelEnabled() )
+    if( m_AudioIoMgr.getIsEchoCancelEnabled() )
     {
-        m_AudioIoMgr.getAudioEchoCancel().micWriteSamples( sampleOutData, outSampleCnt, micTailTimeMs );
+        m_AudioIoMgr.getAudioEchoCancel().micWriteSamples( sampleOutData, outSampleCnt, micTailTimeMs, m_MicWriteTimeEstimator.getHasMaxTimestamps() );
     }
     else
     {
         LogMsg( LOG_ERROR, " AudioInIo::writeData ERROR must use echo canceler.. direct write of samples not implemented" );
-
-        //if( m_AudioIoMgr.getAudioLoopbackEnable() )
-        //{
-        //    m_AudioIoMgr.getAudioLoopback().fromGuiMicrophoneSamples( sampleOutData, outSampleCnt, micWriteTime );
-        //}
-        //else
-        //{
-        //    m_Engine.getMediaProcessor().fromGuiMicrophoneSamples( sampleOutData, outSampleCnt, micWriteTime );
-        //}
     }
 
     bool micIsMuted = m_AudioIoMgr.getIsMicrophoneMuted();
@@ -310,10 +281,10 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     }
     else
     {
-        m_PeakAmplitude = AudioUtils::getPeakPcmAmplitude0to100( sampleOutData, outSampleCnt * 2 );
+        m_PeakAmplitude = AudioUtils::peakPcmAmplitude0to100( sampleOutData, outSampleCnt );
     }
   
-    int64_t timeEnd = m_MyApp.elapsedMilliseconds();
+    int64_t timeEnd = GetHighResolutionTimeMs();
     int elapsedInWriteDataFunctionMs = (timeEnd - timeStart);
     if( elapsedInWriteDataFunctionMs > 2 )
     {

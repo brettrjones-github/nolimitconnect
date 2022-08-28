@@ -35,15 +35,18 @@ public:
 
 	void                        setEchoDelayMsParam( int delayMs );
 
-	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs );
+	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs, bool stableTimestamp );
 
-	void						micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs );
+	void						micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
 
 	void						frame80msElapsed( void );
 
 	void						setEchoCancelerNeedsReset( bool needReset );
 
 	bool						getIsInSync( void );
+
+	void						setPeakAmplitudeDebugEnable( bool enableDebug );
+	bool						getPeakAmplitudeDebugEnable( void );
 
 	AppCommon&					m_MyApp;
 	AudioIoMgr&					m_AudioIoMgr;

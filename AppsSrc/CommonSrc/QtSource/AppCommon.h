@@ -123,6 +123,10 @@ public:
     void                        setLoopbackMyselfTestAllowed( bool allow )  { m_LoopbackMyselfTestAllowed = allow; }
     bool                        getLoopbackMyselfTestAllowed( void )        { return m_LoopbackMyselfTestAllowed; }
 
+    // diagnose to much cpu usage in gui thread
+    void                        setGuiCpuTimeEnable( bool enable )          { m_GuiCpuTimeEnable = enable; }
+    bool                        getGuiCpuTimeEnable( void )                 { return m_GuiCpuTimeEnable; }
+
     AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
     AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
@@ -936,6 +940,7 @@ protected:
     bool                        m_IsLoggedOn{ false };
     bool                        m_IsSystemReady{ false };
     bool                        m_LoopbackMyselfTestAllowed{ false };
+    bool                        m_GuiCpuTimeEnable{ false };
 
 //    KodiThread *                m_KodiThread;
 };

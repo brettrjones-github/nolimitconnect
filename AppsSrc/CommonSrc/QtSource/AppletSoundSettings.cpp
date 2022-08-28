@@ -360,7 +360,7 @@ void AppletSoundSettings::slotAudioTestMsg( QString audioTestMsg )
 void AppletSoundSettings::slotEchoCancelEnableChange( int checkState )
 {
     m_MyApp.getAppSettings().setEchoCancelEnable( checkState ? true : false );
-    m_MyApp.getSoundMgr().fromGuiEchoCancelEnable( checkState ? true : false );
+    //m_MyApp.getSoundMgr().setEchoCancelEnable( checkState ? true : false );
 }
 
 //============================================================================

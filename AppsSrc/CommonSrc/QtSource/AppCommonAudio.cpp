@@ -168,7 +168,7 @@ int AppCommon::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 /// Mute/Unmute microphone
 void AppCommon::fromGuiMuteMicrophone( bool muteMic )
 {
-	m_SoundMgr.fromGuiMuteMicrophone( muteMic );
+	m_SoundMgr.setMuteMicrophone( muteMic );
     getEngine().fromGuiMuteMicrophone( muteMic );
 
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
@@ -189,7 +189,7 @@ bool AppCommon::fromGuiIsMicrophoneMuted( void )
 /// Mute/Unmute speaker
 void AppCommon::fromGuiMuteSpeaker( bool muteSpeaker )
 {
-	m_SoundMgr.fromGuiMuteSpeaker( muteSpeaker );
+	m_SoundMgr.setMuteSpeaker( muteSpeaker );
     getEngine().fromGuiMuteSpeaker( muteSpeaker );
 
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )

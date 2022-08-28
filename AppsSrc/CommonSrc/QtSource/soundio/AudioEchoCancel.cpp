@@ -53,15 +53,15 @@ void AudioEchoCancel::setEchoDelayMsParam( int delayMs )
 }
 
 //============================================================================
-void AudioEchoCancel::speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs )
+void AudioEchoCancel::speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs, bool stableTimestamp )
 {
-	m_AudioEchoCancelImpl.speakerReadSamples( speakerReadData, sampleCnt, speakerReadTailTimeMs );
+	m_AudioEchoCancelImpl.speakerReadSamples( speakerReadData, sampleCnt, speakerReadTailTimeMs, stableTimestamp );
 }
 
 //============================================================================
-void AudioEchoCancel::micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs )
+void AudioEchoCancel::micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp )
 {
-	m_AudioEchoCancelImpl.micWriteSamples( micWritedData, sampleCnt, micWriteTailTimeMs );
+	m_AudioEchoCancelImpl.micWriteSamples( micWritedData, sampleCnt, micWriteTailTimeMs, stableTimestamp );
 }
 
 //============================================================================
@@ -80,4 +80,16 @@ void AudioEchoCancel::setEchoCancelerNeedsReset( bool needReset )
 bool AudioEchoCancel::getIsInSync( void )
 {
 	return m_AudioEchoCancelImpl.getIsInSync();
+}
+
+//============================================================================
+void AudioEchoCancel::setPeakAmplitudeDebugEnable( bool enableDebug ) 
+{ 
+	m_AudioEchoCancelImpl.setPeakAmplitudeDebugEnable( enableDebug );
+}
+
+//============================================================================
+bool AudioEchoCancel::getPeakAmplitudeDebugEnable( void ) 
+{ 
+	return m_AudioEchoCancelImpl.getPeakAmplitudeDebugEnable();
 }

@@ -77,18 +77,18 @@ public:
     bool                        isMicrophoneEnabled( void )             { return m_WantMicrophone; }
     bool                        isMicrophoneInputWanted( void )         { return m_WantMicrophone; }
 
-    void                        fromGuiMuteMicrophone( bool mute );
+    void                        setMuteMicrophone( bool mute );
     bool                        getIsMicrophoneMuted( void )            { return m_MicrophoneMuted; }
 
     bool                        isSpeakerAvailable( void )              { return m_SpeakerAvailable; }
     bool                        isSpeakerEnabled( void )                { return m_WantSpeakerOutput; }
     bool                        isSpeakerOutputWanted( void )           { return m_WantSpeakerOutput; }
 
-    void                        fromGuiMuteSpeaker( bool mute );
-    bool                        fromGuiIsSpeakerMuted()                 { return m_SpeakersMuted; }
+    void                        setMuteSpeaker( bool mute );
+    bool                        getIsSpeakerMuted()                     { return m_SpeakersMuted; }
 
-    void                        fromGuiEchoCancelEnable( bool enable );
-    bool                        fromGuiIsEchoCancelEnabled( void )      { return m_EchoCancelEnabled; }
+    void                        setEchoCancelEnable( bool enable );
+    bool                        getIsEchoCancelEnabled( void )          { return m_EchoCancelEnabled; }
 
     void                        setAudioLoopbackEnable( bool enable )   { m_AudioLoopbackEnabled = enable; }
     bool                        getAudioLoopbackEnable( void )          { return m_AudioLoopbackEnabled; }
@@ -98,6 +98,9 @@ public:
 
     void                        setFrameTimingEnable( bool enable )     { m_FrameTimingEnabled = enable; }
     bool                        getFrameTimingEnable( void );
+
+    void                        setPeakAmplitudeDebugEnable( bool enable );
+    bool                        getPeakAmplitudeDebugEnable( void )         { return m_PeakAmplitudeDebug; }
 
     void                        setEchoCancelerNeedsReset( bool needReset );
 
@@ -233,4 +236,5 @@ protected:
     bool                        m_AudioLoopbackEnabled{ false };
     bool                        m_AudioTimingEnabled{ false };
     bool                        m_FrameTimingEnabled{ false };
+    bool                        m_PeakAmplitudeDebug{ false };
 };

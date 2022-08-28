@@ -359,6 +359,9 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 	getEngine().fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
 
     m_SoundMgr.audioIoSystemStartup();
+
+	// diagnose to much cpu usage in gui thread
+	// setGuiCpuTimeEnable( true ); 
 }
 
 //============================================================================
@@ -1296,6 +1299,12 @@ bool AppCommon::userCanceled( void )
 //============================================================================
 void AppCommon::onOncePerSecond( void )
 {
+	static int64_t startTime = 0;
+	if( getGuiCpuTimeEnable() )
+	{
+		startTime = GetHighResolutionTimeMs();
+	}
+
     // the wait is probably no longer needed since not running seperate threads for loading
     // but it does give other things a chance to run a bit
     static int waitCnt = 0;
@@ -1315,8 +1324,19 @@ void AppCommon::onOncePerSecond( void )
     else
     {
         waitCnt++;
-        LogMsg( LOG_DEBUG, "Wait to login seconds %d alive ms %" PRId64 "", waitCnt, GetApplicationAliveMs() );
+        LogMsg( LOG_VERBOSE, "Wait to login seconds %d alive ms %" PRId64 "", waitCnt, GetApplicationAliveMs() );
     }
+
+	static int64_t endTime = 0;
+	if( getGuiCpuTimeEnable() )
+	{
+		endTime = GetHighResolutionTimeMs();
+		int elapsedTime = (int)(endTime - startTime);
+		if( elapsedTime > 2 )
+		{
+			LogMsg( LOG_VERBOSE, "AppCommon::onOncePerSecond %d ms in function", elapsedTime );
+		}
+	}
 }
 
 //============================================================================

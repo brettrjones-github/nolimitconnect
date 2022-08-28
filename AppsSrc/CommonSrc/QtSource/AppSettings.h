@@ -34,6 +34,8 @@ public:
 	RCODE						appSettingStartup( const char * dbSettingsFile, EDefaultAppMode appDefaultMode );
 	void						appSettingShutdown( void );
 
+	bool						getIsAppSettingInitialized( void )			{ return m_AppSettingsInitialized; }
+
 	void						setIsMessengerFullScreen( bool isFullScreen );
 	bool						getIsMessengerFullScreen( void );
 
@@ -135,5 +137,6 @@ protected:
 	// caching of feature settings
 	bool						m_AppFeatureIsCached[ eMaxAppFeatures ];
 	bool						m_AppFeatureValue[eMaxAppFeatures];
+	bool						m_AppSettingsInitialized{ false };
 };
 

@@ -518,6 +518,7 @@ void AppSettings::setupAppModeSettings( EDefaultAppMode appDefaultMode )
 	// mark database as intialized with app mode settings
 	uint32_t u32Value = 1;
 	setIniValue( getAppShortName(), "AppDefaultInited", u32Value );
+	m_AppSettingsInitialized = true;
 }
 
 //============================================================================
@@ -647,7 +648,8 @@ void AppSettings::setEchoCancelEnable( bool enable )
 //============================================================================
 bool AppSettings::getEchoCancelEnable( void )
 {
-	bool echoCancelEnable = true;
-	getIniValue( getAppShortName(), "EchoCancelEnable", echoCancelEnable, true );
-	return echoCancelEnable;
+	//bool echoCancelEnable = true;
+	//getIniValue( getAppShortName(), "EchoCancelEnable", echoCancelEnable, true );
+	//return echoCancelEnable;
+	return true; // currently alwasy senabled
 }

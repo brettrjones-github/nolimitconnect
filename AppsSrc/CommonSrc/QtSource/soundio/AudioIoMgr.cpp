@@ -89,10 +89,12 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
         LogMsg( LOG_DEBUG, "No Microphone available" );
     }
 
+    setEchoCancelEnable( true ); // for now always enabled
+
     // BRJ temp for testing
     setAudioLoopbackEnable( true );
-    // setAudioTimingEnable( true );
-    setFrameTimingEnable( true );
+    // setAudioTimingEnable( true ); // log audio timing
+    // setFrameTimingEnable( true ); // log audio frames and timing
 }
 
 //============================================================================
@@ -371,7 +373,7 @@ int AudioIoMgr::getDataReadyForSpeakersMs()
 }
 
 //============================================================================
-void AudioIoMgr::fromGuiMuteMicrophone( bool mute )      
+void AudioIoMgr::setMuteMicrophone( bool mute )      
 { 
     if( m_MicrophoneMuted != mute )
     {
@@ -380,7 +382,7 @@ void AudioIoMgr::fromGuiMuteMicrophone( bool mute )
 }
 
 //============================================================================
-void AudioIoMgr::fromGuiMuteSpeaker( bool mute )         
+void AudioIoMgr::setMuteSpeaker( bool mute )         
 { 
     if( m_SpeakersMuted != mute )
     {
@@ -441,7 +443,7 @@ int AudioIoMgr::getAudioInPeakAmplitude( void )
 //============================================================================
 int AudioIoMgr::getAudioOutPeakAmplitude( void )
 {
-    return m_AudioOutMixer.getAudioOutPeakAmplitude();
+    return m_AudioOutIo.getAudioOutPeakAmplitude();
 }
 
 //============================================================================
@@ -662,16 +664,25 @@ bool AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDet
 }
 
 //============================================================================
-void AudioIoMgr::fromGuiEchoCancelEnable( bool enable ) 
+void AudioIoMgr::setEchoCancelEnable( bool enable ) 
 { 
     m_EchoCancelEnabled = enable; 
     m_AudioEchoCancel.enableEchoCancel( m_EchoCancelEnabled );
-    m_MyApp.getAppSettings().setEchoCancelEnable( m_EchoCancelEnabled );
+    if( m_MyApp.getAppSettings().getIsAppSettingInitialized() )
+    {
+        m_MyApp.getAppSettings().setEchoCancelEnable( m_EchoCancelEnabled );
+    }
 }
 
 //============================================================================
 void AudioIoMgr::frame80msElapsed( void )
 {
+    static int64_t startTime = 0;
+    if( m_MyApp.getGuiCpuTimeEnable() )
+    {
+        startTime = GetHighResolutionTimeMs();
+    }
+
     if( getAudioLoopbackEnable() )
     {
         m_AudioLoopback.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
@@ -685,6 +696,17 @@ void AudioIoMgr::frame80msElapsed( void )
     if( m_EchoCancelEnabled )
     {
         m_AudioEchoCancel.frame80msElapsed();
+    }
+
+    static int64_t endTime = 0;
+    if( m_MyApp.getGuiCpuTimeEnable() )
+    {
+        endTime = GetHighResolutionTimeMs();
+        int elapsedTime = (int)(endTime - startTime);
+        if( elapsedTime > 2 )
+        {
+            LogMsg( LOG_VERBOSE, "AudioIoMgr::frame80msElapsed %d ms in function", elapsedTime );
+        }
     }
 }
 
@@ -712,4 +734,11 @@ void AudioIoMgr::setEchoCancelerNeedsReset( bool needReset )
 bool AudioIoMgr::getFrameTimingEnable( void )
 {
     return m_FrameTimingEnabled && m_AudioEchoCancel.getIsInSync();
+}
+
+//============================================================================
+void AudioIoMgr::setPeakAmplitudeDebugEnable( bool enable ) 
+{ 
+    m_PeakAmplitudeDebug = enable; 
+    m_AudioEchoCancel.setPeakAmplitudeDebugEnable( enable );
 }

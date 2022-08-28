@@ -251,7 +251,8 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 
     if( !maxlen )
     {
-        LogMsg( LOG_ERROR, "AudioOutIo::readData has 0 maxlen. Probably doing too much cpu processing in AudioOutIo::readData or AudioInIo::writeData" );
+        // on windows it seems to be normal to get 0 as maxlen sometimes. so do nothing
+        // LogMsg( LOG_ERROR, "AudioOutIo::readData has 0 maxlen. Probably doing too much cpu processing in AudioOutIo::readData or AudioInIo::writeData" );
         return maxlen;
     }
 
@@ -265,13 +266,13 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         lastSpeakerReadLen = maxlen;
     }
 
-    int64_t timeNow = m_MyApp.elapsedMilliseconds();
+    int64_t timeNow = GetHighResolutionTimeMs();
     int64_t timeStart = timeNow;
     bool timeIntervalTooLong;
     int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
-    if( std::abs( timeNow - speakerReadTimeMs ) > 40 )
+    if( timeIntervalTooLong )
     {
-        LogMsg( LOG_VERBOSE, "AudioOutIo::readData time estimate excessive time dif %d too long ? %d", (int)std::abs( timeNow - speakerReadTimeMs ), timeIntervalTooLong );
+        LogMsg( LOG_VERBOSE, "AudioOutIo::readData time estimate excessive time diff %d", (int)( timeNow - speakerReadTimeMs ) );
     }
 
     if( m_AudioTestState != eAudioTestStateNone )
@@ -305,7 +306,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     qint64 readAmount;
     if( m_AudioIoMgr.getAudioLoopbackEnable() )
     {
-        readAmount = m_AudioIoMgr.getAudioLoopback().readRequestFromSpeaker( data, maxlen, m_EchoFarBuffer, m_PeakAudioOutValue );
+        readAmount = m_AudioIoMgr.getAudioLoopback().readRequestFromSpeaker( data, maxlen, m_EchoFarBuffer, m_PeakAudioOutAmplitude );
     }
     else
     {
@@ -326,37 +327,24 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         if( lastMixerPcmTime )
         {
             int64_t timeInterval = timeNow - lastMixerPcmTime;
-            LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d peak amplitude", funcCallCnt, m_PeakAudioOutValue );
+            LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d peak amplitude %d", funcCallCnt, m_PeakAudioOutAmplitude );
         }
 
         lastMixerPcmTime = timeNow;
     }
 
-    if( m_AudioIoMgr.getAudioTimingEnable() )
-    {
-        int elapsedInFunction = (m_MyApp.elapsedMilliseconds() - timeNow);
-        if( elapsedInFunction > 2 )
-        {
-            LogMsg( LOG_DEBUG, "AudioOutIo::readData WARNING spent %d ms in readRequestFromSpeaker", elapsedInFunction );
-        }
-
-        timeNow = m_MyApp.elapsedMilliseconds();
-    }
-
-    /*
-    if( m_AudioIoMgr.fromGuiIsEchoCancelEnabled() )
+    if( m_AudioIoMgr.getIsEchoCancelEnabled() )
     {
         m_AudioIoMgr.getAudioEchoCancel().speakerReadSamples( m_EchoFarBuffer.getSampleBuffer(), m_EchoFarBuffer.getSampleCnt(), 
-            speakerReadTimeMs + (audioReadDurationUs / 1000) );
+            speakerReadTimeMs + (audioReadDurationUs / 1000), m_SpeakerReadTimeEstimator.getHasMaxTimestamps() );
     }
-    */
 
     m_EchoFarBuffer.clear();
   
     // master clock is based on speaker read event/length
     m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadUs( audioReadDurationUs, false );
 
-    int64_t timeEnd = m_MyApp.elapsedMilliseconds();
+    int64_t timeEnd = GetHighResolutionTimeMs();
     int elapsedInReadDataFunctionMs = (timeEnd - timeStart);
     if( elapsedInReadDataFunctionMs > 2 )
     {
