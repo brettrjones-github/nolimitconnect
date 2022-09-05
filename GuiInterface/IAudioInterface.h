@@ -31,6 +31,8 @@ public:
     virtual bool				fromGuiIsSpeakerMuted( void ) = 0;
     /// Called when need more sound for speaker output
     virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) = 0;
+    /// called when echo canceled microphine input is available
+    virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence ) = 0;
 };
 
 class IAudioRequests

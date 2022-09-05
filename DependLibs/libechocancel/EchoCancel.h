@@ -64,7 +64,7 @@ typedef struct {
 class EchoCancel
 {
 public:
-	static const int			ECHO_SAMPLE_RATE_HZ = 16000;						// both input and output
+	static const int			ECHO_SAMPLE_RATE_HZ = 8000;						// both input and output
 	static const int			ECHO_SAMPLE_CHANNELS = 1;							// both input and output
 	static const int			ECHO_SAMPLES_PER_10MS = ECHO_SAMPLE_RATE_HZ / 100;	// all processing must be done in buffers containing this exact numbe of sample
 

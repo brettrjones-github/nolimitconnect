@@ -43,53 +43,54 @@ public:
     explicit AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
      ~AudioOutIo() override = default;
 
+     void						audioOutShutdown( void )                        { stopAudioOut(); }
+
     bool                        initAudioOut( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
     bool                        soundOutDeviceChanged( int deviceIndex );
 
-    QAudioSink*                 getAudioOut()                               { return m_AudioOutputDevice.data(); }
-    QAudio::State               getState()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutState : QAudio::StoppedState); }
-    QAudio::Error               getError()                                  { return (m_AudioOutputDevice.data() ? m_AudioOutputDevice->error() : QAudio::NoError); }
+    QAudioSink*                 getAudioOut( void )                             { return m_AudioOutputDevice.data(); }
+    QAudio::State               getState( void )                                { return (m_AudioOutputDevice.data() ? m_AudioOutState : QAudio::StoppedState); }
+    QAudio::Error               getError( void )                                { return (m_AudioOutputDevice.data() ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
-    int                         getAudioOutPeakAmplitude( void )            { return m_PeakAudioOutAmplitude; }
+    int                         getAudioOutPeakAmplitude( void )                { return m_PeakAudioOutAmplitude; }
 
     void                        wantSpeakerOutput( bool enableOutput );
-    bool                        isSpeakerOutputWanted( void )               { return m_SpeakerOutputEnabled; }
+    bool                        isSpeakerOutputWanted( void )                   { return m_SpeakerOutputEnabled; }
 
     void                        fromGuiCheckSpeakerOutForUnderrun(); 
 
-    void                        flush();
+    void                        flush( void );
 
-    void                        suspend()                                   { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->suspend(); }
-    void                        resume()                                    { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->resume(); }
+    void                        suspend( void )                                 { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->suspend(); }
+    void                        resume( void )                                  { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->resume(); }
 
-    void                        stopAudioOut();
-    void                        startAudioOut();
-
-    void                        toggleSuspendResume();
-
-    void                        setUpsampleMultiplier( int upSampleMult )   { m_UpsampleMutiplier = upSampleMult; }
-    int                         getUpsampleMultiplier( void )               { return m_UpsampleMutiplier; }
+    void                        setUpsampleMultiplier( int upSampleMult )       { m_UpsampleMutiplier = upSampleMult; }
+    int                         getUpsampleMultiplier( void )                   { return m_UpsampleMutiplier; }
 
     void                        setSpeakerVolume( int volume0to100 );
 
     void                        setAudioTestState( EAudioTestState audioTestState );
-    int64_t                     getAudioTestSentTime( void )                { return m_AudioTestSentTimeMs; }
+    int64_t                     getAudioTestSentTime( void )                    { return m_AudioTestSentTimeMs; }
 
     AudioSampleBuf&             getSpeakerEchoSamples( int64_t& tailOfSpeakerSamplestimeMs ) { tailOfSpeakerSamplestimeMs = m_EndOfEchoBufferTimestamp; return m_EchoFarBuffer; }
+
+    void						echoCancelSyncStateThreaded( bool inSync );
  
 signals:
-    void						signalCheckForBufferUnderun();
+    void						signalCheckForBufferUnderun( void );
 
 protected slots:
-    void						slotCheckForBufferUnderun();
+    void						slotCheckForBufferUnderun( void );
     void                        onAudioDeviceStateChanged( QAudio::State state );
 
 protected:
+    void                        startAudioOut( void );
+    void                        stopAudioOut( void );
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
-    qint64                      bytesAvailable() const override;
-    qint64                      size() const override;
+    qint64                      bytesAvailable( void ) const override;
+    qint64                      size( void ) const override;
 
 private:
     AudioIoMgr&                 m_AudioIoMgr;
@@ -125,4 +126,5 @@ private:
     AudioSampleBuf              m_EchoFarBuffer;
 
     int                         m_PeakAudioOutAmplitude{ 0 };
+    QElapsedTimer               m_ElapsedOutTimer;
 };

@@ -432,6 +432,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SessionWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ShareOfferListItem.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ShareOfferListWidget.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioBitrate.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancel.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioInIo.cpp" />
@@ -444,6 +445,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSpeakerBuf.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioTestGenerator.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\SoundMgr.cpp" />
@@ -625,6 +627,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ShareOfferListWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\RichTextWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\SoundDefs.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioBitrate.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioDefs.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioInIo.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioIoMgr.h" />
@@ -639,6 +642,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSpeakerBuf.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\SoundMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\TodGameDefs.h" />

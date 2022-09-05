@@ -19,9 +19,12 @@
 
 #include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/MediaProcessor/AudioProcessorDefs.h>
+
+#include "AudioBitrate.h"
 #include "AudioDefs.h"
 #include "AudioLoopbackFrame.h"
 #include "AudioSampleBuf.h"
+#include "AudioSpeakerBuf.h"
 
 #include <QTimer>
 #include <QElapsedTimer>
@@ -43,18 +46,21 @@ public:
 
 	void						audioLoopbackShutdown( void );
 
-	qint64						readRequestFromSpeaker( char* data, qint64 maxlen, AudioSampleBuf& echoFarBuf, int& peakValue0to100 );
+	void                        microphoneDeviceEnabled( bool isEnabled );
+	void                        speakerDeviceEnabled( bool isEnabled );
 
-	void						fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, int64_t samplesHeadTimeMs, bool isSilence );
+	qint64						readRequestFromSpeaker( char* data, qint64 maxlen );
+
+	void						fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnts, bool isSilence );
 	
-	void						fromGuiAudioOutSpaceAvail( int spaceInBytes );
+	void						frame80msElapsed( void );
 
 	void                        lockMixer( void )									{ m_MixerMutex.lock(); }
 	void                        unlockMixer( void )									{ m_MixerMutex.unlock(); }
 
-	void						processAudioOutSpaceAvailableThreaded( void );
+	void						processAudioOutThreaded( void );
 
-	void						echoCancelSyncState( bool inSync );
+	void						echoCancelSyncStateThreaded( bool inSync );
 
 protected:
 	int                         getMixerFrameSize( void )							{ return MIXER_CHUNK_LEN_BYTES; }
@@ -106,4 +112,13 @@ protected:
 
 	int64_t                     m_MicQueueSystemTime{ 0 };
 	int64_t                     m_MicWriteTime{ 0 };
+
+	AudioSpeakerBuf				m_SpeakerProcessedBuf;
+	AudioSampleBuf				m_EchoProcessedBuf;
+	QMutex                      m_ProcessedBufMutex;
+
+	AudioBitrate                m_EchoCanceledBitrate;
+	AudioBitrate                m_ProcessFrameBitrate;
+	AudioBitrate                m_ProcessSpeakerBitrate;
+	AudioBitrate                m_SpeakerReadBitrate;
 };

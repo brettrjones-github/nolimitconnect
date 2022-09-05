@@ -65,7 +65,7 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
 
     m_SpeakerAvailable = true;
     m_AudioOutFormat.setSampleRate( 48000 );
-    m_AudioOutFormat.setChannelCount( 2 );
+    m_AudioOutFormat.setChannelCount( m_UseFixedAudioOutBufferSize ? 2 : 1 ); // use 1 channel unless using setBufferSize then use 2 to speed up processing
     m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
 
     const QAudioDevice& defaultOutDeviceInfo = m_MediaDevices->defaultAudioOutput();
@@ -95,7 +95,9 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
     setAudioLoopbackEnable( true );
     // setAudioTimingEnable( true ); // log audio timing
     // setFrameTimingEnable( true ); // log audio frames and timing
-    setFrameIndexDebugEnable( true ); // log audio frame indexes and when incremented
+    // setFrameIndexDebugEnable( true ); // log audio frame indexes and when incremented
+    setBitrateDebugEnable( true ); // log audio bit rates that are way out of what should be the rate
+    // setSampleCntDebugEnable( true ); // log audio sample counts
 }
 
 //============================================================================
@@ -243,7 +245,6 @@ void AudioIoMgr::audioIoSystemStartup()
             connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
         }
 
-        m_AudioMasterClock.audioMasterClockStartup();
         m_AudioIoInitialized = true;
     }
 }
@@ -252,22 +253,10 @@ void AudioIoMgr::audioIoSystemStartup()
 void AudioIoMgr::audioIoSystemShutdown()
 {
     m_AudioLoopback.audioLoopbackShutdown();
-    m_AudioMasterClock.audioMasterClockShutdown();
+    m_AudioMasterClock.masterClockShutdown();
     m_AudioIoInitialized = false;
-    stopAudioOut();
-    stopAudioIn();
-}
-
-//============================================================================
-void AudioIoMgr::stopAudioOut()
-{
-    m_AudioOutIo.stopAudioOut();
-}
-
-//============================================================================
-void AudioIoMgr::stopAudioIn()
-{
-    m_AudioInIo.stopAudio();
+    m_AudioInIo.audioInShutdown();
+    m_AudioOutIo.audioOutShutdown();
 }
 
 //============================================================================
@@ -678,15 +667,16 @@ void AudioIoMgr::setEchoCancelEnable( bool enable )
 //============================================================================
 void AudioIoMgr::frame80msElapsed( void )
 {
-    static int64_t startTime = 0;
-    if( m_MyApp.getGuiCpuTimeEnable() )
-    {
-        startTime = GetHighResolutionTimeMs();
-    }
+    static int64_t lastTime = 0;
+    int64_t timeNow = GetHighResolutionTimeMs();
+    int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+    lastTime = timeNow;
+
+   // LogMsg( LOG_VERBOSE, "AudioIoMgr::frame80msElapsed %d ms", timeElapsed );
 
     if( getAudioLoopbackEnable() )
     {
-        m_AudioLoopback.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+        m_AudioLoopback.frame80msElapsed();
     }
     else
     {
@@ -694,16 +684,11 @@ void AudioIoMgr::frame80msElapsed( void )
         audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
     }
 
-    if( m_EchoCancelEnabled )
-    {
-        m_AudioEchoCancel.frame80msElapsed();
-    }
-
     static int64_t endTime = 0;
     if( m_MyApp.getGuiCpuTimeEnable() )
     {
         endTime = GetHighResolutionTimeMs();
-        int elapsedTime = (int)(endTime - startTime);
+        int elapsedTime = (int)(endTime - timeNow);
         if( elapsedTime > 2 )
         {
             LogMsg( LOG_VERBOSE, "AudioIoMgr::frame80msElapsed %d ms in function", elapsedTime );
@@ -716,7 +701,7 @@ void AudioIoMgr::processAudioOutThreaded( void )
 {
     if( getAudioLoopbackEnable() )
     {
-        m_AudioLoopback.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+        m_AudioLoopback.frame80msElapsed();
     }
     else
     {
@@ -745,16 +730,61 @@ void AudioIoMgr::setPeakAmplitudeDebugEnable( bool enable )
 }
 
 //============================================================================
-void AudioIoMgr::echoCancelSyncState( bool inSync )
+void AudioIoMgr::echoCancelSyncStateThreaded( bool inSync )
 {
+    m_IsEchoCancelInSync = inSync;
+    m_AudioInIo.echoCancelSyncStateThreaded( inSync );
+    m_AudioOutIo.echoCancelSyncStateThreaded( inSync );
     if( getAudioLoopbackEnable() )
     {
-        m_AudioLoopback.echoCancelSyncState( inSync );
+        m_AudioLoopback.echoCancelSyncStateThreaded( inSync );
     }
     else
     {
         // BRJ may need to implement this
         // IAudioCallbacks& audioCallbacks = getAudioCallbacks();
         // audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+    }
+}
+
+//============================================================================
+bool AudioIoMgr::isEchoCancelInSync( void )
+{
+    return m_IsEchoCancelInSync;
+}
+
+//============================================================================
+void AudioIoMgr::microphoneDeviceEnabled( bool isEnabled )
+{
+    if( getAudioLoopbackEnable() )
+    {
+        m_AudioLoopback.microphoneDeviceEnabled( isEnabled );
+    }
+
+    m_AudioMasterClock.microphoneDeviceEnabled( isEnabled );
+}
+
+//============================================================================
+void AudioIoMgr::speakerDeviceEnabled( bool isEnabled )
+{
+    if( getAudioLoopbackEnable() )
+    {
+        m_AudioLoopback.speakerDeviceEnabled( isEnabled );
+    }
+
+    m_AudioMasterClock.speakerDeviceEnabled( isEnabled );
+}
+
+//============================================================================
+void AudioIoMgr::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
+{
+    if( getAudioLoopbackEnable() )
+    {
+        m_AudioLoopback.fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
+    }
+    else
+    {
+        IAudioCallbacks& audioCallbacks = getAudioCallbacks();
+        audioCallbacks.fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
     }
 }

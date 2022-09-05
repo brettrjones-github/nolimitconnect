@@ -1661,3 +1661,32 @@ void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, 
 
 	m_AudioInSemaphore.signal();
 }
+
+//============================================================================
+void MediaProcessor::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
+{
+	vx_assert( sampleCnt == MIXER_CHUNK_LEN_SAMPLES );
+	if( false == m_MicCaptureEnabled || !pcmData || sampleCnt < 100 )
+	{
+		// invalid params or microphone not in capture mode
+		m_AudioInSemaphore.signal();
+		return;
+	}
+
+	//if( samplesHeadTimeMs - m_MicInputLastSampleTime > 200 )
+	//{
+	//	// microphone was paused or changed or something.. throw out previous samples
+	//	m_MicInputSamples.clear();
+	//}
+
+	if( m_ProcessAudioQue.size() < 5 )
+	{
+		RawAudio* rawAudio = new RawAudio( pcmData, MIXER_CHUNK_LEN_BYTES, eAppModuleMicrophone );
+
+		m_AudioQueInMutex.lock();
+		m_ProcessAudioQue.push_back( rawAudio );
+		m_AudioQueInMutex.unlock();
+	}
+
+	m_AudioInSemaphore.signal();
+}

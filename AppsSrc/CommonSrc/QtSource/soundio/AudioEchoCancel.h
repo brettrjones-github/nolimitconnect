@@ -17,8 +17,11 @@
 
 class AppCommon;
 class AudioIoMgr;
-class QAudioFormat;
 class AudioEchoCancelImpl;
+class AudioSampleBuf;
+
+class QAudioFormat;
+class QMutex;
 
 class AudioEchoCancel : public QObject
 {
@@ -37,9 +40,9 @@ public:
 
 	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs, bool stableTimestamp );
 
-	void						micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
+	void						micWroteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
 
-	void						frame80msElapsed( void );
+	void						processEchoCancelThreaded( AudioSampleBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex );
 
 	void						setEchoCancelerNeedsReset( bool needReset );
 

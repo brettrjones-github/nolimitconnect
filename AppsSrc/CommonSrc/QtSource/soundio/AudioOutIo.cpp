@@ -95,7 +95,17 @@ bool AudioOutIo::soundOutDeviceChanged( int deviceIndex )
     }
 
     m_AudioOutputDevice.reset( new QAudioSink( deviceInfo, m_AudioFormat ) );
-    m_AudioOutputDevice->setBufferSize( format.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+
+    // do not call setBufferSize. Qt does do read sizes of fixed size (on windows 16384) but qt does not call read with consistent time.. mostly 85 ms with size 16384
+    // but occasionally 160 ms with size of 0
+    // where as if not setBufferSize called the length of read periodically changes from  24000  to  24960  and back but the read interval is consistent at elapsed appox 251 ms
+    // of the 2 options the second option is better because there is no remainder when upsampling from 8000Hz to 48000Hz and the time is consistent
+    // when using option 2 use only 1 channel because using 2 channels just doubles the buffer size of read requests without affecting timing
+    if( m_AudioIoMgr.useFixedAudioOutBufferSize() )
+    {
+        m_AudioOutputDevice->setBufferSize( format.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+    }
+    
     m_initialized = true;
 
     connect( m_AudioOutputDevice.data(), SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
@@ -136,9 +146,7 @@ void AudioOutIo::wantSpeakerOutput( bool enableOutput )
             // no-op
         }
 
-        // start in pull mode.. qt will call readData as needed for sound output
-        m_AudioOutputDevice->start( this );
-        m_AudioOutputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+        startAudioOut();
     }
     else
     {
@@ -148,7 +156,7 @@ void AudioOutIo::wantSpeakerOutput( bool enableOutput )
         }
         else if (m_AudioOutputDevice->state() == QAudio::ActiveState)
         {
-            m_AudioOutputDevice->suspend();
+            stopAudioOut();
         }
         else if (m_AudioOutputDevice->state() == QAudio::IdleState)
         {
@@ -158,31 +166,25 @@ void AudioOutIo::wantSpeakerOutput( bool enableOutput )
 }
 
 //============================================================================
-void AudioOutIo::toggleSuspendResume()
+void AudioOutIo::startAudioOut( void )
 {
-    if( m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState )
+    // start in pull mode.. qt will call readData as needed for sound output
+    m_AudioOutputDevice->start( this );
+    if( m_AudioIoMgr.useFixedAudioOutBufferSize() )
     {
-        m_AudioOutputDevice->resume();
-        //m_suspendResumeButton->setText( tr( "Suspend playback" ) );
+        m_AudioOutputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
     }
-    else if( m_AudioOutputDevice->state() == QAudio::ActiveState ) {
-        m_AudioOutputDevice->suspend();
-        //m_suspendResumeButton->setText( tr( "Resume playback" ) );
-    }
-    else if( m_AudioOutputDevice->state() == QAudio::IdleState ) {
-        // no-op
-    }
+
+    m_AudioOutDeviceIsStarted = true;
+    m_AudioIoMgr.speakerDeviceEnabled( true );
 }
 
 //============================================================================
-void AudioOutIo::startAudioOut()
+void AudioOutIo::stopAudioOut( void )
 {
-	// Reinitialize audio output
-    m_AudioOutDeviceIsStarted = true;
-    m_ProccessedMs = 0;
-
-    // start in pull mode.. qt will call readData as needed for sound output
-    m_AudioOutputDevice->start( this );
+    m_AudioOutputDevice->suspend();
+    m_AudioOutDeviceIsStarted = false;
+    m_AudioIoMgr.speakerDeviceEnabled( false );
 }
 
 //============================================================================
@@ -197,21 +199,6 @@ qint64 AudioOutIo::bytesAvailable() const
 qint64 AudioOutIo::size() const
 {
     return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
-}
-
-//============================================================================
-void AudioOutIo::stopAudioOut()
-{
-    if( m_AudioOutDeviceIsStarted )
-    {
-        m_AudioOutDeviceIsStarted = false;
-        if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
-        {
-            // Stop audio output
-		    m_AudioOutputDevice->stop();
-            //this->close();
-        }
-    }
 }
 
 //============================================================================
@@ -231,7 +218,7 @@ void AudioOutIo::flush()
 		m_AudioOutputDevice->reset();
 	}
 
-    this->startAudioOut();
+    startAudioOut();
 }
 
 //============================================================================
@@ -252,9 +239,14 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     if( !maxlen )
     {
         // on windows it seems to be normal to get 0 as maxlen sometimes. so do nothing
-        // LogMsg( LOG_ERROR, "AudioOutIo::readData has 0 maxlen. Probably doing too much cpu processing in AudioOutIo::readData or AudioInIo::writeData" );
+        LogMsg( LOG_ERROR, "AudioOutIo::readData has 0 maxlen. Consider not calling setBufferSize " );
         return maxlen;
     }
+
+    static int64_t lastTime = 0;
+    int64_t timeNow = GetHighResolutionTimeMs();
+    int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+    lastTime = timeNow;
 
     static qint64 lastSpeakerReadLen = 0;
     static int audioReadDurationUs = 0;
@@ -266,13 +258,11 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         lastSpeakerReadLen = maxlen;
     }
 
-    int64_t timeNow = GetHighResolutionTimeMs();
-    int64_t timeStart = timeNow;
-    bool timeIntervalTooLong;
-    int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
-    if( timeIntervalTooLong )
+    int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow );
+    int speakerReqSampleCnt = maxlen / 2;
+    if( speakerReqSampleCnt % getUpsampleMultiplier() || getUpsampleMultiplier() != 6 )
     {
-        LogMsg( LOG_VERBOSE, "AudioOutIo::readData time estimate excessive time diff %d", (int)( timeNow - speakerReadTimeMs ) );
+        LogMsg( LOG_VERBOSE, "AudioOutIo::readData samples have a upsample remainder %d of sample cnt %d ", speakerReqSampleCnt % getUpsampleMultiplier(), speakerReqSampleCnt );
     }
 
     if( m_AudioTestState != eAudioTestStateNone )
@@ -300,13 +290,15 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
             m_AudioTestSentTimeMs = speakerReadTimeMs;
         }
 
+        m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadDurationTime( audioReadDurationUs / 1000 );
+        m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( speakerReqSampleCnt );
         return maxlen;
     }
 
     qint64 readAmount;
     if( m_AudioIoMgr.getAudioLoopbackEnable() )
     {
-        readAmount = m_AudioIoMgr.getAudioLoopback().readRequestFromSpeaker( data, maxlen, m_EchoFarBuffer, m_PeakAudioOutAmplitude );
+        readAmount = m_AudioIoMgr.getAudioLoopback().readRequestFromSpeaker( data, maxlen );
     }
     else
     {
@@ -317,6 +309,8 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     {
         LogMsg( LOG_DEBUG, "AudioOutIo::readData mismatch with maxlen %d and read %d", maxlen, readAmount );
     }
+
+    m_PeakAudioOutAmplitude = AudioUtils::peakPcmAmplitude0to100( (int16_t*)data, maxlen / 2 );
 
     if( m_AudioIoMgr.getPeakAmplitudeDebugEnable() )
     {
@@ -329,7 +323,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
             LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d peak amplitude %d", funcCallCnt, m_PeakAudioOutAmplitude );
         }
 
-        lastMixerPcmTime = timeStart;
+        lastMixerPcmTime = timeNow;
     }
 
     if( m_AudioIoMgr.getIsEchoCancelEnabled() )
@@ -341,30 +335,13 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     m_EchoFarBuffer.clear();
   
     // master clock is based on speaker read event/length
-    m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadUs( audioReadDurationUs, false );
+    // using audioReadDurationUs if using fixed buffer size  has rounding errors.. have to use elapsed time us
+    //m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadUs( thisCallTimeUs - lastCallTimeUs, false );
+    //lastCallTimeUs = thisCallTimeUs;
 
-    int64_t timeEnd = GetHighResolutionTimeMs();
-    int elapsedInReadDataFunctionMs = (timeEnd - timeStart);
-    if( elapsedInReadDataFunctionMs > 2 )
-    {
-        LogMsg( LOG_DEBUG, " AudioOutIo::readData WARNING elapsed time in function %d ms", elapsedInReadDataFunctionMs );
-    }
+    m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadDurationTime( audioReadDurationUs / 1000 );
+    //m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( speakerReqSampleCnt / getUpsampleMultiplier() );
 
-    //if( m_AudioIoMgr.getAudioTimingEnable() )
-    //{
-    //    static int64_t lastSpeakerReadTime{ 0 };
-    //    static int funcCallCnt{ 0 };
-    //    funcCallCnt++;
-    //    if( lastSpeakerReadTime )
-    //    {
-    //        int64_t timeInterval = speakerReadTimeMs - lastSpeakerReadTime;
-    //        LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d elapsed %d ms echo samples %d app time %d",
-    //            funcCallCnt, (int)timeInterval, m_EchoFarBuffer.getSampleCnt(), (int)GetApplicationAliveMs() );
-    //    }
-
-    //    lastSpeakerReadTime = speakerReadTimeMs;
-    //}
- 
     return maxlen;
 }
 
@@ -538,4 +515,10 @@ void AudioOutIo::setAudioTestState( EAudioTestState audioTestState )
     }
 
     m_AudioTestState = audioTestState;
+}
+
+//============================================================================
+void AudioOutIo::echoCancelSyncStateThreaded( bool inSync )
+{
+
 }

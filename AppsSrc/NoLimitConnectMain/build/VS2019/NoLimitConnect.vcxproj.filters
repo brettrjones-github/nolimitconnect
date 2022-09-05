@@ -2041,6 +2041,12 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSpeakerBuf.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioBitrate.cpp">
+      <Filter>Source Files\soundio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2308,6 +2314,12 @@
       <Filter>Source Files\soundio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.h">
+      <Filter>Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSpeakerBuf.h">
+      <Filter>Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioBitrate.h">
       <Filter>Source Files\soundio</Filter>
     </ClInclude>
   </ItemGroup>

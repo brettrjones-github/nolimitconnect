@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "AudioDefs.h"
+#include "AudioBitrate.h"
 
 #include <CoreLib/TimeIntervalEstimator.h>
 
@@ -39,6 +40,8 @@ class AudioInIo : public QIODevice
 public:
     explicit AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
     ~AudioInIo() override = default;
+
+    void						audioInShutdown( void )             { stopAudioIn(); }
 
     bool                        initAudioIn( QAudioFormat& audioFormat, const QAudioDevice& defaultDeviceInfo );
     bool                        soundInDeviceChanged( int deviceIndex );
@@ -78,6 +81,8 @@ public:
     void                        setAudioTestState( EAudioTestState audioTestState );
     int64_t                     getAudioTestDetectTime( void )      { return m_AudioTestDetectTimeMs; }
 
+    void						echoCancelSyncStateThreaded( bool inSync );
+
 signals:
     void						signalCheckForBufferUnderun();
 
@@ -86,6 +91,9 @@ protected slots:
     void                        onAudioDeviceStateChanged( QAudio::State state );
 
 protected:
+    void                        startAudioIn( void );
+    void                        stopAudioIn( void );
+
 	qint64                      bytesAvailable() const override;
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
@@ -118,4 +126,8 @@ protected:
 
     TimeIntervalEstimator       m_MicWriteTimeEstimator;
     int                         m_MicWriteDurationUs{ 0 };
+
+    AudioBitrate                m_MicInBitrate;
+    AudioBitrate                m_MicOutBitrate;
+    bool                        m_EchoCancelInSync{ false };
 };

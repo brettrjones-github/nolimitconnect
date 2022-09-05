@@ -266,6 +266,8 @@ public:
     virtual bool				fromGuiIsSpeakerMuted( void ) override;
     /// Called when need more sound for speaker output
     virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
+    /// called when echo canceled microphine input is available
+    virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence ) override;
 
     //============================================================================
     //=== to gui media/render ===//

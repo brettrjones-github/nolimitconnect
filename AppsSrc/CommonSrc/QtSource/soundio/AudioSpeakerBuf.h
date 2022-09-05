@@ -18,16 +18,16 @@
 
 #include <inttypes.h>
 
-class AudioSampleBuf
+class AudioSpeakerBuf
 {
 public:
-	static const int MAX_SAMPLES_BUFFER_SIZE = MIXER_CHUNK_LEN_SAMPLES * 8; // max samples before truncates beginning to make room at end of buffer
+	static const int MAX_SPEAKER_BUFFER_SIZE = SPEAKER_CHUNK_LEN_SAMPLES * 8; // this is 480 ms of samples
 
-	AudioSampleBuf() = default;
-	AudioSampleBuf( const AudioSampleBuf& rhs ) = delete;
-	~AudioSampleBuf() = default;
+	AudioSpeakerBuf() = default;
+	AudioSpeakerBuf( const AudioSpeakerBuf& rhs ) = delete;
+	~AudioSpeakerBuf() = default;
 
-	AudioSampleBuf& operator = ( const AudioSampleBuf& rhs ) = delete;
+	AudioSpeakerBuf& operator = ( const AudioSpeakerBuf& rhs ) = delete;
 
 	void						clear( void )							{ m_SampleCnt = 0; }
 	bool						empty( void )							{ return 0 == m_SampleCnt; }
@@ -52,8 +52,8 @@ public:
 
 	void						truncateSamples( int sampleCnt ); // if contins more samples than this then limit to sampleCnt
 
-	int16_t					    m_PcmData[ MAX_SAMPLES_BUFFER_SIZE ];
+	int16_t					    m_PcmData[ MAX_SPEAKER_BUFFER_SIZE ];
 
-	int							m_MaxSamples{ MAX_SAMPLES_BUFFER_SIZE };
+	int							m_MaxSamples{ MAX_SPEAKER_BUFFER_SIZE };
 	int							m_SampleCnt{ 0 };
 };

@@ -157,6 +157,7 @@ public:
 
 	virtual void				fromGuiMicrophoneSamples( int16_t* pcmData, int pcmSampleCnt, int64_t samplesHeadTimeMs );
 	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
+	virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence );
 
 	void						fromGuiLoopbackMicToSpeakers( bool allowLoopback ) { m_LoopbackMicToSpeakers = allowLoopback; }
 

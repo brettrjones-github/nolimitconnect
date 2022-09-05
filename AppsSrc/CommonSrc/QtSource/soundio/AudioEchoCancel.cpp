@@ -59,15 +59,15 @@ void AudioEchoCancel::speakerReadSamples( int16_t* speakerReadData, int sampleCn
 }
 
 //============================================================================
-void AudioEchoCancel::micWriteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp )
+void AudioEchoCancel::micWroteSamples( int16_t* micWritedData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp )
 {
-	m_AudioEchoCancelImpl.micWriteSamples( micWritedData, sampleCnt, micWriteTailTimeMs, stableTimestamp );
+	m_AudioEchoCancelImpl.micWroteSamples( micWritedData, sampleCnt, micWriteTailTimeMs, stableTimestamp );
 }
 
 //============================================================================
-void AudioEchoCancel::frame80msElapsed( void )
+void AudioEchoCancel::processEchoCancelThreaded( AudioSampleBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex )
 {
-	m_AudioEchoCancelImpl.frame80msElapsed();
+	m_AudioEchoCancelImpl.processEchoCancelThreaded( speakerProcessed8000Buf, speakerProcessedMutex );
 }
 
 //============================================================================

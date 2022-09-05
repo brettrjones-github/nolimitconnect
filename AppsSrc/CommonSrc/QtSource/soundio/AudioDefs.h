@@ -1,8 +1,8 @@
 #pragma once
 // only one of these echo cancelers may be defined at time
 // uncomment the define of the echo canceler desired to use
-#define USE_SPEEX_ECHO_CANCEL
-// #define USE_WEB_RTC_ECHO_CANCEL_1
+# define USE_SPEEX_ECHO_CANCEL
+// # define USE_WEB_RTC_ECHO_CANCEL_1
 // #define USE_WEB_RTC_ECHO_CANCEL_3
 
 #if defined( USE_SPEEX_ECHO_CANCEL )
@@ -10,10 +10,10 @@ static const int ECHO_SAMPLE_RATE = 8000;
 static const int ECHO_BYTES_PER_SAMPLE = 2;
 
 #elif defined( USE_WEB_RTC_ECHO_CANCEL_1 )
-static const int ECHO_SAMPLE_RATE = 16000;
+static const int ECHO_SAMPLE_RATE = 8000;
 
 #elif defined( USE_WEB_RTC_ECHO_CANCEL_3 )
-static const int ECHO_SAMPLE_RATE = 16000;
+static const int ECHO_SAMPLE_RATE = 8000;
 
 #endif // defined( USE_SPEEX_ECHO_CANCEL )
 

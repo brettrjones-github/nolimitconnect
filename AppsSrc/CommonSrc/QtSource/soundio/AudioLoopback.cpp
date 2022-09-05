@@ -34,7 +34,7 @@ namespace
 		AudioLoopback* processor = (AudioLoopback*)poThread->getThreadUserParam();
 		if( processor )
 		{
-			processor->processAudioOutSpaceAvailableThreaded();
+			processor->processAudioOutThreaded();
 		}
 
 		poThread->threadAboutToExit();
@@ -58,6 +58,11 @@ AudioLoopback::AudioLoopback( AudioIoMgr& audioIoMgr, QObject* parent )
 		m_MixerFrames[ i ].setAudioIoMgr( &audioIoMgr );
 	}
 
+	m_EchoCanceledBitrate.setLogMessagePrefix( "Echo Canceled " );
+	m_ProcessFrameBitrate.setLogMessagePrefix( "Process Frame " );
+	m_ProcessSpeakerBitrate.setLogMessagePrefix( "Process Speaker " );
+	m_SpeakerReadBitrate.setLogMessagePrefix( "Speaker Read " );
+
 	m_ProcessAudioOutThread.startThread( (VX_THREAD_FUNCTION_T)AudioOutProcessThreadFunc, this, "AudioOutProcessor" );
 }
 
@@ -69,12 +74,11 @@ void AudioLoopback::audioLoopbackShutdown( void )
 }
 
 //============================================================================
-qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen, AudioSampleBuf& echoFarBuf, int& peakValue0to100 )
+qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen )
 {
-	peakValue0to100 = 0;
 	if( maxlen <= 0 )
 	{
-		LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
+		LogMsg( LOG_DEBUG, "readDataFromMixer 0 maxlen " );
 		return 0;
 	}
 
@@ -82,186 +86,115 @@ qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen, AudioSa
 	int16_t* readReqPcmBuf = (int16_t*)data;
 	int reqSpeakerSampleCnt = maxlen / 2;
 
-	int beforeEchoSampleCnt = echoFarBuf.getSampleCnt();
+	int64_t timeNow = GetHighResolutionTimeMs();
+	static int64_t lastCallTime = 0;
+	int callTimeElapsed = lastCallTime ? (int)(timeNow - lastCallTime) : 0;
+	lastCallTime = timeNow;
+
+	m_SpeakerReadBitrate.addSamplesAndInterval( reqSpeakerSampleCnt, callTimeElapsed );
+
 	static int readRemainder = 0;
 	int reqEchoSampleCnt = reqSpeakerSampleCnt / MIXER_TO_SPEAKER_MULTIPLIER;
-	readRemainder += reqSpeakerSampleCnt % MIXER_TO_SPEAKER_MULTIPLIER;
-	if( readRemainder >= MIXER_TO_SPEAKER_MULTIPLIER )
+	int tmpReadRemainder = reqSpeakerSampleCnt % MIXER_TO_SPEAKER_MULTIPLIER;
+	if( tmpReadRemainder >= MIXER_TO_SPEAKER_MULTIPLIER )
 	{
-		readRemainder -= MIXER_TO_SPEAKER_MULTIPLIER;
 		reqEchoSampleCnt++;
 	}
 
-	if( !m_AudioIoMgr.isAudioInitialized() || m_MixerWriteIdx == m_MixerReadIdx )
+	m_ProcessedBufMutex.lock();
+	if( reqSpeakerSampleCnt > m_SpeakerProcessedBuf.getSampleCnt() )
 	{
-		LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker overrun" );
-		memset( data, 0, maxlen );
-		echoFarBuf.writeSamples( m_QuietEchoBuf, reqEchoSampleCnt );
-		return maxlen;
-	}
+		static int64_t lastTime = 0;
+		int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+		lastTime = timeNow;
 
-	// for test if speaker output is working without mixer involved
-	//m_AudioIoMgr.getAudioCallbacks().readGenerated4800HzMono100HzToneData( data, maxlen );
-	//m_AudioCallbacks.speakerAudioPlayed( getMixerFormat(), (void*)data, maxlen ); // causes audio popping artifacts so comment out if want pure tone
-	//mixerWasReadByOutput( (int)maxlen, upSampleMult );
-	//return maxlen;
+		LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker underrun speaker requested %d available %d elapsed %d ms",
+			reqSpeakerSampleCnt, m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
 
-	int samplesAvailable = 0;
-
-	lockMixer();
-	int readIndex = m_MixerReadIdx;
-	for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
-	{
-		if( readIndex == m_MixerWriteIdx )
-		{
-			// would overrun frame currently being processed
-			break;
-		}
-
-		AudioLoopbackFrame& audioFrame = m_MixerFrames[ readIndex ];
-		if( !audioFrame.isProcessed() )
-		{
-			break;
-		}
-
-		int samplesThisFrame = audioFrame.speakerSamplesAvailable();
-		if( !samplesThisFrame )
-		{
-			break;
-		}
-
-		samplesAvailable += samplesThisFrame;
-
-		if( samplesAvailable >= reqSpeakerSampleCnt )
-		{
-			break;
-		}
-
-		readIndex++;
-		if( readIndex >= MAX_MIXER_FRAMES )
-		{
-			readIndex = 0;
-		}
-	}
-
-	static int underrunCnt = 0;
-	
-	if( samplesAvailable >= reqSpeakerSampleCnt )
-	{
-		underrunCnt = 0;
-		readRemainder = 0;
-		int speakerSamplesRead = 0;
-		int echoSamplesRead = 0;
-		for( int i = 0; i < MAX_MIXER_FRAMES, speakerSamplesRead < reqSpeakerSampleCnt; i++ )
-		{
-			AudioLoopbackFrame& audioFrame = m_MixerFrames[ m_MixerReadIdx ];
-
-			int speakerSamplesThisFrame = 0;
-			int echoSamplesThisFrame = 0;
-			audioFrame.readSpeakerData( &readReqPcmBuf[ speakerSamplesRead ], reqSpeakerSampleCnt - speakerSamplesRead, speakerSamplesThisFrame,
-				echoFarBuf, reqEchoSampleCnt - echoSamplesRead, echoSamplesThisFrame, peakValue0to100 );
-			if( speakerSamplesThisFrame && 0 == audioFrame.speakerSamplesAvailable() )
-			{
-				audioFrame.clearFrame(false);
-				incrementMixerReadIndex();
-			}
-
-			if( !speakerSamplesThisFrame )
-			{
-				LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker few samples ERROR" );
-				break;
-			}
-
-			speakerSamplesRead += speakerSamplesThisFrame;
-			echoSamplesRead += echoSamplesThisFrame;
-		}
-
-		if( echoSamplesRead == reqEchoSampleCnt - 1 )
-		{
-			// this can sometimes happen when going from silence to frame reads and have a remainder of up multiplied samples
-			// should be a better way but for now just fulfill the request count
-			int16_t lastSample = echoFarBuf.getLastSample();
-			echoFarBuf.writeSamples( &lastSample, 1 );
-		}
+		memset( readReqPcmBuf, 0, reqSpeakerSampleCnt * 2 );
+		m_ProcessedBufMutex.unlock();
+		return 0;
 	}
 	else
 	{
-		underrunCnt++;
+		static int64_t lastTime = 0;
+		int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+		lastTime = timeNow;
 
-		LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker underrun %d", underrunCnt );
-		memset( data, 0, maxlen );
-		echoFarBuf.writeSamples( m_QuietEchoBuf, reqEchoSampleCnt );
+		memcpy( readReqPcmBuf, m_SpeakerProcessedBuf.getSampleBuffer(), reqSpeakerSampleCnt * 2 );
+		m_SpeakerProcessedBuf.samplesWereRead( reqSpeakerSampleCnt );
+
+		if( timeElapsed > 300 )
+		{
+			LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker delayed success speaker samples left %d elapsed %d ms",
+				m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
+		}
 	}
 
-	int afterEchoSampleCnt = echoFarBuf.getSampleCnt();
-	if( afterEchoSampleCnt - beforeEchoSampleCnt != reqEchoSampleCnt )
+	m_ProcessedBufMutex.unlock();
+
+	if( tmpReadRemainder >= MIXER_TO_SPEAKER_MULTIPLIER )
 	{
-		LogMsg( LOG_DEBUG, "AudioLoopback::readRequestFromSpeaker echo samples underrun" );
+		readRemainder -= MIXER_TO_SPEAKER_MULTIPLIER;
 	}
 
-	//LogMsg( LOG_VERBOSE, "readRequestFromSpeaker unlockMixer thread %d", VxGetCurrentThreadTid() );
-	unlockMixer();
 	return maxlen;
 }
 
 //============================================================================
-void AudioLoopback::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, int64_t samplesHeadTimeMs, bool isSilence )
+void AudioLoopback::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
 {
 	vx_assert( MIXER_CHUNK_LEN_SAMPLES == sampleCnt );
 
+	static int64_t lastTime = 0;
+	int64_t timeNow = GetHighResolutionTimeMs();
+	int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+	lastTime = timeNow;
 
-	//if( m_AudioIoMgr.getAudioTimingEnable() )
-	//{
-	//	static int64_t lastQueueMixerTime{ 0 };
-	//	static int funcCallCnt{ 0 };
-	//	funcCallCnt++;
-	//	if( lastQueueMixerTime )
-	//	{
-	//		int64_t timeInterval = micWriteTime - lastQueueMixerTime;
-	//		LogMsg( LOG_VERBOSE, "fromGuiMicrophoneSamples queing mixer %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs() );
-	//	}
+	m_EchoCanceledBitrate.addSamplesAndInterval( sampleCnt, timeElapsed );
 
-	//	lastQueueMixerTime = micWriteTime;
-	//	m_MicQueueSystemTime = m_MyApp.elapsedMilliseconds();
-	//	m_MicWriteTime = micWriteTime;
-	//}
+	if( m_AudioIoMgr.getSampleCntDebugEnable() )
+	{
+		LogMsg( LOG_VERBOSE, "fromGuiEchoCanceledSamplesThreaded samples %d elapsed %d ms", sampleCnt, timeElapsed );
+	}
 
-		//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d", VxGetCurrentThreadTid() );
 	lockMixer();
-	//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded lockMixer thread %d run write idx %", VxGetCurrentThreadTid(), m_MixerWriteIdx );
 	AudioLoopbackFrame& audioFrame = getAudioWriteFrame();
 	audioFrame.toMixerPcm8000HzMonoChannel( eAppModuleMicrophone, pcmData, isSilence );
-	//LogMsg( LOG_VERBOSE, "processRawAudioInThreaded unlockMixer thread %d", VxGetCurrentThreadTid() );
 	unlockMixer();
 }
 
 //============================================================================
-void AudioLoopback::fromGuiAudioOutSpaceAvail( int spaceInBytes )
+void AudioLoopback::frame80msElapsed( void )
 {
 	m_AudioOutSemaphore.signal();
 }
 
 //============================================================================
-void AudioLoopback::processAudioOutSpaceAvailableThreaded( void )
+void AudioLoopback::processAudioOutThreaded( void )
 {
 	while( false == m_ProcessAudioOutThread.isAborted() )
 	{
 		m_AudioOutSemaphore.wait();
 		if( m_ProcessAudioOutThread.isAborted() )
 		{
-			LogMsg( LOG_VERBOSE, "AudioLoopback::processAudioOut aborting1" );
+			LogMsg( LOG_VERBOSE, "AudioLoopback::processAudioOutThreaded aborting1" );
 			break;
 		}
 
+		static int64_t lastTime = 0;
+		int64_t timeNow = GetHighResolutionTimeMs();
+		int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+		lastTime = timeNow;
+
 		if( m_AudioIoMgr.getAudioTimingEnable() )
 		{
-			int64_t timeNow = m_MyApp.elapsedMilliseconds();
 			static int64_t lastSpaceAvailableTime{ 0 };
 			static int funcCallCnt{ 0 };
 			funcCallCnt++;
 			if( lastSpaceAvailableTime )
 			{
-				int64_t timeInterval = timeNow - lastSpaceAvailableTime;
+				int timeInterval = (int)(timeNow - lastSpaceAvailableTime);
 				//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
 			}
 
@@ -276,23 +209,57 @@ void AudioLoopback::processAudioOutSpaceAvailableThreaded( void )
 		audioFrame.processFrameForSpeakerOutputThreaded( prevFrameSample );
 		prevFrameSample = audioFrame.getLastEchoSample();
 
+		m_ProcessedBufMutex.lock();
+
+		if( audioFrame.echoSamplesAvailable() != MIXER_CHUNK_LEN_SAMPLES )
+		{
+			LogMsg( LOG_ERROR, "P Frame %d AudioLoopback::processAudioOutThreaded incorrect buffer processing should have %d samples but has %d samples elapsed %d ms",
+				audioFrame.getFrameIndex(), MIXER_CHUNK_LEN_SAMPLES, audioFrame.echoSamplesAvailable(), timeElapsed );
+		}
+
+		if( audioFrame.echoSamplesAvailable() * 6 != audioFrame.speakerSamplesAvailable() )
+		{
+			LogMsg( LOG_ERROR, "P Frame %d AudioLoopback::processAudioOutThreaded incorrect upsampling should be %d samples is %d samples elapsed %d ms", 
+				audioFrame.getFrameIndex(), audioFrame.echoSamplesAvailable() * 6, audioFrame.speakerSamplesAvailable(), timeElapsed );
+		}
+
+		m_ProcessFrameBitrate.addSamplesAndInterval( audioFrame.echoSamplesAvailable(), timeElapsed );
+		m_ProcessSpeakerBitrate.addSamplesAndInterval( audioFrame.speakerSamplesAvailable(), timeElapsed );
+
+		m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( audioFrame.speakerSamplesAvailable() );
+
+		m_SpeakerProcessedBuf.writeSamples( audioFrame.getSpeakerSampleBuf(), audioFrame.speakerSamplesAvailable() );
+		m_EchoProcessedBuf.writeSamples( audioFrame.getEchoSampleBuf(), audioFrame.echoSamplesAvailable() );
+
+		if( m_AudioIoMgr.getSampleCntDebugEnable() )
+		{
+			LogMsg( LOG_ERROR, "P Frame %d AudioLoopback::processAudioOutThreaded processed samples available echo %d speaker %d elapsed %d ms",
+				audioFrame.getFrameIndex(), m_EchoProcessedBuf.getSampleCnt(), m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
+		}
+
 		// move to next frame and clear it so is ready to write to
 		incrementMixerWriteIndex();
 		AudioLoopbackFrame& nextAudioFrame = getAudioWriteFrame();
 		nextAudioFrame.clearFrame(false);
+		incrementMixerReadIndex();
 		unlockMixer();
+
+		// let the echo canceler unlock the processed speaker samples as soon as possible to avoid
+		// stalling the qt audio device read or write call
+		m_AudioIoMgr.getAudioEchoCancel().processEchoCancelThreaded( m_EchoProcessedBuf, m_ProcessedBufMutex );
+		// m_ProcessedBufMutex.unlock();
 
 		// do output space available processing
 		processOutSpaceAvailable();
 
 		if( m_ProcessAudioOutThread.isAborted() )
 		{
-			LogMsg( LOG_INFO, "AudioLoopback::processAudioOut aborting3" );
+			LogMsg( LOG_VERBOSE, "AudioLoopback::processAudioOutThreaded aborting3" );
 			break;
 		}
 	}
 
-	LogMsg( LOG_INFO, "AudioLoopback::processAudioOut leaving function" );
+	LogMsg( LOG_VERBOSE, "AudioLoopback::processAudioOutThreaded leaving function" );
 }
 
 //============================================================================
@@ -399,7 +366,23 @@ int AudioLoopback::incrementMixerWriteIndex( void )
 		if( lastMixerPcmTime )
 		{
 			int timeInterval = (int)(timeNow - lastMixerPcmTime);
-			LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d incrementMixerWriteIndex elapsed %d ms", m_MixerWriteIdx, funcCallCnt, timeInterval );
+			int avgTimeInterval = timeInterval;
+			static std::vector<int> intervalList;
+			intervalList.push_back( timeInterval );
+			if( intervalList.size() > 20 )
+			{
+				int totalTime = 0;
+				intervalList.erase( intervalList.begin() );
+				for( auto interval : intervalList )
+				{
+					totalTime += interval;
+				}
+
+				avgTimeInterval = totalTime / 20;
+			}
+
+
+			LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d incrementMixerWriteIndex elapsed %d ms avg elapsed %d", m_MixerWriteIdx, funcCallCnt, timeInterval, avgTimeInterval );
 		}
 
 		lastMixerPcmTime = timeNow;
@@ -436,21 +419,48 @@ int AudioLoopback::incrementMixerReadIndex( void )
 }
 
 //============================================================================
-void AudioLoopback::echoCancelSyncState( bool inSync )
+void AudioLoopback::echoCancelSyncStateThreaded( bool inSync )
 {
 	if( inSync )
 	{
 		// the read timing fluctuates widely
 		// fill with silence and set indexes so write should not catch up with read
 		lockMixer();
+		/*
 		for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
 		{
 			m_MixerFrames[ i ].clearFrame( true );
 		}
 
-		m_MixerWriteIdx = 3;
+		m_MixerWriteIdx = 0;
 		m_MixerReadIdx = 0;
+		*/
+
+		m_EchoCanceledBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+		m_ProcessFrameBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+		m_ProcessSpeakerBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+		m_SpeakerReadBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
 
 		unlockMixer();
+	}
+}
+
+//============================================================================
+void AudioLoopback::microphoneDeviceEnabled( bool isEnabled )
+{
+	if( isEnabled )
+	{
+		m_EchoCanceledBitrate.reset();
+	}
+}
+
+//============================================================================
+void AudioLoopback::speakerDeviceEnabled( bool isEnabled )
+{
+	if( isEnabled )
+	{	
+		m_ProcessFrameBitrate.reset();
+		m_ProcessSpeakerBitrate.reset();
+		m_SpeakerReadBitrate.reset();
 	}
 }

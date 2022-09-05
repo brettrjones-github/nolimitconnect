@@ -69,11 +69,9 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 {
 	static int64_t timeNow = 0;
 	static int64_t lastMixerPcmTime{ 0 };
-	if( m_AudioIoMgr->getFrameTimingEnable() )
-	{
-		lastMixerPcmTime = timeNow;
-		timeNow = GetHighResolutionTimeMs();
-	}
+
+	lastMixerPcmTime = timeNow;
+	timeNow = GetHighResolutionTimeMs();
 
 	if( hasModuleAudio( appModule ) )
 	{
@@ -85,14 +83,13 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 			{
 				int timeInterval = (int)(timeNow - lastMixerPcmTime);
 				LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d toMixerPcm8000HzMonoChannel module %s elapsed %d ms overrrun ", getFrameIndex(), funcCallCnt,
-					DescribeAppModule( appModule ), (int)timeInterval );
+					DescribeAppModule( appModule ), timeInterval );
 			}
-
-			lastMixerPcmTime = timeNow;
 		}
 		else
 		{
-			LogMsg( LOG_WARNING, "W Frame %d AudioLoopbackFrame::toMixerPcm8000HzMonoChannel module %s overrun", getFrameIndex(), DescribeAppModule( appModule ) );
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_WARNING, "W Frame %d AudioLoopbackFrame::toMixerPcm8000HzMonoChannel module %s elapsed %d ms overrun", getFrameIndex(), DescribeAppModule( appModule ), timeInterval );
 		}
 		
 		return 0;
@@ -143,7 +140,7 @@ int AudioLoopbackFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16
 //============================================================================
 void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrameSample )
 {
-	if( m_AudioIoMgr->getFrameTimingEnable() || m_AudioIoMgr->getFrameIndexDebugEnable() )
+	if( (m_AudioIoMgr->getFrameTimingEnable() || m_AudioIoMgr->getFrameIndexDebugEnable()) && m_AudioIoMgr->getIsEchoCancelInSync() )
 	{
 		int64_t timeNow = GetHighResolutionTimeMs();
 		static int64_t lastMixerPcmTime{ 0 };
@@ -166,9 +163,9 @@ void AudioLoopbackFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrame
 
 	if( m_InputIds.empty() )
 	{
-		if( m_AudioIoMgr->getFrameTimingEnable() && m_AudioIoMgr->isSpeakerOutputWanted() )
+		if( m_AudioIoMgr->getIsEchoCancelInSync() )
 		{
-			LogMsg( LOG_WARNING, "P Frame %d processFrameForSpeakerOutputThreaded attempted to process empty frame", getFrameIndex() );
+			LogMsg( LOG_WARNING, "P Frame %d processFrameForSpeakerOutputThreaded processing empty frame", getFrameIndex() );
 		}
 
 		memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_BYTES );

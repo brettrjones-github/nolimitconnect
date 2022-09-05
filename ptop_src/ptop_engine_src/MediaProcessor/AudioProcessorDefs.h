@@ -20,6 +20,6 @@
 #define MIXER_CHUNK_LEN_SAMPLES			640
 #define MIXER_CHUNK_LEN_MS				80 // PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
 
-#define SPEAKER_CHUNK_LEN_BYTES			(MIXER_CHUNK_LEN_SAMPLES * 6 * 2 * 2) // upsampled to 48000 2 channels length * 2 bytes per frame
-#define SPEAKER_CHUNK_LEN_SAMPLES		(MIXER_CHUNK_LEN_SAMPLES * 6 * 2) // upsampled to 48000 2 channelssamples
-#define MIXER_TO_SPEAKER_MULTIPLIER		12 // 48000 * 2 channels / 8000
+#define SPEAKER_CHUNK_LEN_BYTES			(MIXER_CHUNK_LEN_SAMPLES * 6 * 2) // upsampled to 48000 1 channels length * 2 bytes per frame
+#define SPEAKER_CHUNK_LEN_SAMPLES		(MIXER_CHUNK_LEN_SAMPLES * 6) // upsampled to 48000 1 channels samples
+#define MIXER_TO_SPEAKER_MULTIPLIER		6 // 48000 * 1 channels / 8000

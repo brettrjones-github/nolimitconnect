@@ -404,6 +404,9 @@ public:
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
 
+    /// called when echo canceled microphine input is available
+    virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence ) override;
+
 	//========================================================================
 	// to gui
 	//========================================================================

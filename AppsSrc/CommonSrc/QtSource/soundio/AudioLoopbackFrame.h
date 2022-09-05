@@ -42,8 +42,13 @@ public:
 	bool						hasAnyAudio( void )							{ return !m_InputIds.empty(); }
 
 	bool						isProcessed( void )							{ return m_IsProcessed; }
+
 	int							speakerSamplesAvailable( void )				{ return m_SpeakerSamplesWrote - m_SpeakerSamplesRead; }
 	int							echoSamplesAvailable( void )				{ return m_MixerSamplesWrote - m_MixerSamplesRead; }
+
+	int16_t*					getSpeakerSampleBuf( void )					{ return m_SpeakerBuf; }
+	int16_t*					getEchoSampleBuf( void )					{ return m_MixerBuf; }
+
 	int							readSpeakerData( int16_t* pcmReadData, int speakerSamplesRequested, int& retSpeakerSamplesRead,
 												 AudioSampleBuf& echoFarBuf, int echoSamplesRequested, int& retEchoSamplesRead, int& retPeakValue0to100 );
 

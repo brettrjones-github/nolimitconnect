@@ -321,6 +321,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListItem.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/StoryWidget.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioBitrate.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioDefs.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancel.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancelImpl.h \
@@ -334,6 +335,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSampleBuf.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSpeakerBuf.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/SoundDefs.h \
@@ -696,6 +698,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ShareOfferListWidget.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioBitrate.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancel.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioEchoCancelImpl.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioInIo.cpp \
@@ -708,6 +711,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSampleBuf.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSpeakerBuf.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioTestGenerator.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioUtils.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/SoundMgr.cpp \

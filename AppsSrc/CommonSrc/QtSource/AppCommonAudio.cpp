@@ -212,3 +212,10 @@ void AppCommon::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 {
     getEngine().fromGuiAudioOutSpaceAvail( freeSpaceLen );
 }
+
+//============================================================================
+/// Called when need more sound for speaker output
+void AppCommon::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
+{
+	getEngine().fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
+}

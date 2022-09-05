@@ -40,7 +40,9 @@
 
 class AppCommon;
 class AudioIoMgr;
+class AudioSpeakerBuf;
 class QAudioFormat;
+class QMutex;
 
 class AudioEchoCancelImpl : public QObject
 {
@@ -70,29 +72,24 @@ public:
 
 	void						speakerReadSamples( int16_t* speakerReadData, int sampleCnt, int64_t speakerReadTailTimeMs, bool stableTimestamp );
 
-	void						micWriteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
+	void						micWroteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
 
-	void						frame80msElapsed( void ); // called from master clock
+	void						processEchoCancelThreaded( AudioSampleBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex );
 
 	void                        setEchoCancelerNeedsReset( bool needReset )		{ m_EchoCancelNeedsReset = needReset; }
 
 	static int64_t				calculateEchoSamplesUs( int sampleCnt )			{ return (sampleCnt * 1000000) / ECHO_SAMPLE_RATE; }
 	static int64_t				calculateEchoSamplesMs( int sampleCnt )			{ return (sampleCnt * 1000) / ECHO_SAMPLE_RATE; }
 
-	void						processEchoRunThreaded( void );
-
 protected:
-	void						processEchoCancelThreaded( void );
+	bool						attemptEchoSyncThreaded( void );
 
-	void						checkFor80msFrameElapsedThreaded( void );
+	void						resetEchoCanceler( int samplesPerEchoFrame );
 
-	bool						attemptEchoSync( void );
+	void						processEchoCancelFrame( int16_t* micBuf, int16_t* speakerBuf, int samplesPerFrame, int16_t* echoCanceledBuf );
 
-	void						resetEchoCancel( void );
-
-	void						processEchoCancelFrame( int16_t* micBuf, int16_t* speakerBuf, int16_t* echoCanceledBuf );
-
-	bool						processWebRtcEchoCancel( int16_t* micWriteBuf, int sampleCnt, int16_t* echoCanceledData );
+	void						processWebRtc1EchoCancel( int16_t* micWriteBuf, int16_t* speakerBuf, int sampleCnt, int16_t* echoCanceledData );
+	void						processWebRtc3EchoCancel( int16_t* micWriteBuf, int16_t* speakerBuf, int sampleCnt, int16_t* echoCanceledData );
 
 #if defined(USE_SPEEX_ECHO_CANCEL)
 	void						startupSpeex( int sampleCnt );
@@ -120,27 +117,24 @@ protected:
 	bool						m_SyncDebugEnabled{ false };
 	bool						m_PeakAmplitudeDebug{ false };
 
-	bool						m_Frame80msElapsed{ false };
-
 	VxMutex						m_SpeakerSamplesMutex;
 	AudioSampleBuf				m_SpeakerSamples;
 	int64_t						m_TailSpeakerSamplesMs{ 0 };
 	int64_t						m_HeadSpeakerSamplesMs{ 0 };
 	bool						m_StableSpeakerTimestamp{ false };
+	int64_t						m_SpeakerLastCallTimestamp{ 0 };
 
 	VxMutex						m_MicSamplesMutex;
 	AudioSampleBuf				m_MicSamples;
 	int64_t						m_TailMicSamplesMs{ 0 };
 	int64_t						m_HeadMicSamplesMs{ 0 };
 	bool						m_StableMicTimestamp{ false };
+	int64_t						m_MicLastCallTimestamp{ 0 };
 
 	VxMutex						m_EchoCanceledSamplesMutex;
 	AudioSampleBuf				m_EchoCanceledSamples;
 	int64_t						m_TailEchoCanceledSamplesMs{ 0 };
 	int64_t						m_HeadEchoCanceledSamplesMs{ 0 };
-
-	VxSemaphore					m_ProcessEchoSemaphore;
-	VxThread					m_ProcessEchoThread;
 
 	AudioSampleBuf				m_ProcessSpeakerSamples;
 	AudioSampleBuf				m_ProcessMicSamples;
@@ -166,13 +160,5 @@ protected:
 	std::unique_ptr<webrtc::AudioBuffer>	m_SpeakerAudioBuf;
 	webrtc::AudioFrame						m_SpeakerFrame;
 #endif // USE_SPEEX_ECHO_CANCEL
-
-#if defined(USE_WEB_RTC_ECHO_CANCEL_1) || defined(USE_WEB_RTC_ECHO_CANCEL_3)
-	int							m_SamplesPer10ms{ 0 };
-	int16_t* m_MicEchoBuf10ms{ nullptr };
-	int16_t* m_MicRemainderBuf{ nullptr };
-	int							m_MicRemainderSampleCnt{ 0 };
-	int16_t* m_SpeakerBuf10ms{ nullptr };
-#endif //#if defined(USE_WEB_RTC_ECHO_CANCEL_1) || defined(USE_WEB_RTC_ECHO_CANCEL_3)
 
 };

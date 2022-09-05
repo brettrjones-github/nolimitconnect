@@ -40,6 +40,10 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 , m_MediaDevices( new QMediaDevices( this ) )
 {
     memset( m_MicSilence, 0, sizeof( m_MicSilence ) );
+
+    m_MicInBitrate.setLogMessagePrefix( "Mic in " );
+    m_MicOutBitrate.setLogMessagePrefix( "Mic out " );
+
     connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
 }
 
@@ -120,11 +124,22 @@ void AudioInIo::startAudio()
 {
     if( m_initialized )
     {
-        // m_AudioInThread.setThreadShouldRun(true);
-        // m_AudioInThread.startAudioInThread();
-
         m_AudioInputDevice->start(this);
         m_AudioInputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+    }
+}
+
+//============================================================================
+void AudioInIo::stopAudio()
+{
+    if( m_initialized )
+    {
+        if( m_AudioInputDevice && m_AudioInputDevice->state() != QAudio::StoppedState )
+        {
+            // Stop audio output
+            m_AudioInputDevice->stop();
+            this->close();
+        }
     }
 }
 
@@ -153,20 +168,6 @@ void AudioInIo::flush()
         }
 
         this->startAudio();
-    }
-}
-
-//============================================================================
-void AudioInIo::stopAudio()
-{
-    if (m_initialized)
-    {
-        if (m_AudioInputDevice && m_AudioInputDevice->state() != QAudio::StoppedState)
-        {
-            // Stop audio output
-            m_AudioInputDevice->stop();
-            this->close();
-        }
     }
 }
 
@@ -216,10 +217,24 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
 
     // NOTE: so far Qt has used microphone write lengths evenly divisible down to 8000Hz. If this changes will need to add remainder handling
 
-    int inSampleCnt = (int)len >> 1;
+    static int64_t lastTime = 0;
+    int64_t timeNow = GetHighResolutionTimeMs();
+    int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+    lastTime = timeNow;
+
+    int inSampleCnt = (int)len / 2;
     int16_t* sampleInData = (int16_t*)data;
 
+    if( timeElapsed )
+    {
+        m_MicInBitrate.addSamplesAndInterval( inSampleCnt, timeElapsed );
+    }
+
     int outSampleCnt = inSampleCnt / m_DivideCnt;
+    if( inSampleCnt % m_DivideCnt || m_DivideCnt != 6)
+    {
+        LogMsg( LOG_VERBOSE, "AudioInIo::writeData samples have a downsample remainder %d of sample cnt %d ", inSampleCnt % m_DivideCnt, inSampleCnt );
+    }
 
     static int16_t* sampleOutData = nullptr;
     static qint64 lastMicWriteLen = 0;
@@ -242,15 +257,7 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
         m_AudioIoMgr.setEchoCancelerNeedsReset( true ); // tell echo canceler parameters have changed and need to restart
     }
 
-    int64_t timeNow = GetHighResolutionTimeMs();
-    int64_t timeStart = timeNow;
-    bool timeIntervalTooLong;
-    int64_t micWriteTime = m_MicWriteTimeEstimator.estimateTime( timeNow, &timeIntervalTooLong );
-    if( timeIntervalTooLong )
-    {
-        LogMsg( LOG_VERBOSE, "AudioInIo::writeData time estimate excessive time diff %d ", (int)( timeNow - micWriteTime ), timeIntervalTooLong );
-    }
-
+    int64_t micWriteTime = m_MicWriteTimeEstimator.estimateTime( timeNow );
 
     if( m_AudioTestState != eAudioTestStateNone )
     {
@@ -259,15 +266,21 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
             audioTestDetectTestSound( sampleInData, inSampleCnt, micWriteTime );
         }
 
+        m_AudioIoMgr.getAudioMasterClock().audioMicWriteDurationTime( m_MicWriteDurationUs / 1000 );
+        m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( inSampleCnt );
         return len;
     }
 
     AudioUtils::dnsamplePcmAudio( sampleInData, outSampleCnt, m_DivideCnt, sampleOutData );
+    if( timeElapsed )
+    {
+        m_MicOutBitrate.addSamplesAndInterval( outSampleCnt, timeElapsed );
+    }
 
     int64_t micTailTimeMs = micWriteTime + (m_MicWriteDurationUs / 1000);
     if( m_AudioIoMgr.getIsEchoCancelEnabled() )
     {
-        m_AudioIoMgr.getAudioEchoCancel().micWriteSamples( sampleOutData, outSampleCnt, micTailTimeMs, m_MicWriteTimeEstimator.getHasMaxTimestamps() );
+        m_AudioIoMgr.getAudioEchoCancel().micWroteSamples( sampleOutData, outSampleCnt, micTailTimeMs, m_MicWriteTimeEstimator.getHasMaxTimestamps() );
     }
     else
     {
@@ -283,28 +296,9 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
     {
         m_PeakAmplitude = AudioUtils::peakPcmAmplitude0to100( sampleOutData, outSampleCnt );
     }
-  
-    int64_t timeEnd = GetHighResolutionTimeMs();
-    int elapsedInWriteDataFunctionMs = (timeEnd - timeStart);
-    if( elapsedInWriteDataFunctionMs > 2 )
-    {
-        LogMsg( LOG_DEBUG, " AudioInIo::writeData WARNING elapsed time in function %d ms", elapsedInWriteDataFunctionMs );
-    }
 
-    //if( m_AudioIoMgr.getAudioTimingEnable() )
-    //{
-    //    static int64_t lastMicWriteTime{ 0 };
-    //    static int funcCallCnt{ 0 };
-    //    funcCallCnt++;
-    //    if( lastMicWriteTime )
-    //    {
-    //        int64_t timeInterval = micWriteTime - lastMicWriteTime;
-    //        LogMsg( LOG_VERBOSE, "AudioInIo::writeData %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)GetApplicationAliveMs() );
-    //    }
-
-    //    lastMicWriteTime = micWriteTime;
-    //}
-
+    m_AudioIoMgr.getAudioMasterClock().audioMicWriteDurationTime( m_MicWriteDurationUs / 1000 );
+    m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( inSampleCnt );
     return len;
 }
 
@@ -368,7 +362,7 @@ void AudioInIo::wantMicrophoneInput( bool enableInput )
         }
 
         // start in pull mode.. qt will call writeData as needed for microphone input
-        m_AudioInputDevice->start( this );
+        startAudioIn();
     }
     else
     {
@@ -378,13 +372,33 @@ void AudioInIo::wantMicrophoneInput( bool enableInput )
         }
         else if( m_AudioInputDevice->state() == QAudio::ActiveState )
         {
-            m_AudioInputDevice->suspend();
+            stopAudioIn();
         }
         else if( m_AudioInputDevice->state() == QAudio::IdleState )
         {
             // no-op
         }
 	}
+}
+
+//============================================================================
+void AudioInIo::startAudioIn( void )
+{
+    // start in pull mode.. qt will call readData as needed for sound output
+    m_AudioInputDevice->start( this );
+    // unlike speaker we always use fixed buffer size so the microphone writes are faster
+    m_AudioInputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
+
+    m_AudioInDeviceIsStarted = true;
+    m_AudioIoMgr.microphoneDeviceEnabled( true );
+}
+
+//============================================================================
+void AudioInIo::stopAudioIn( void )
+{
+    m_AudioInputDevice->suspend();
+    m_AudioInDeviceIsStarted = false;
+    m_AudioIoMgr.microphoneDeviceEnabled( false );
 }
 
 //============================================================================
@@ -449,4 +463,13 @@ void AudioInIo::audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt
     {
         m_AudioTestDetectTimeMs = micWriteTime + AudioUtils::audioDurationMs( m_AudioFormat, sampStartIdx * 2 );
     }
+}
+
+//============================================================================
+void AudioInIo::echoCancelSyncStateThreaded( bool inSync )
+{
+    m_EchoCancelInSync = inSync;
+    // mic write 48000 is eratic timing.. commented out to not clutter the log
+    // m_MicInBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+    m_MicOutBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
 }

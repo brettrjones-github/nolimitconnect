@@ -40,74 +40,85 @@ public:
     void                        audioIoSystemStartup();
     void                        audioIoSystemShutdown();
 
-    AppCommon&                  getMyApp( void )                        { return m_MyApp; }
+    AppCommon&                  getMyApp( void )                            { return m_MyApp; }
     P2PEngine&                  getEngine( void );
-    QMediaDevices*              getMediaDevices( void )                 { return m_MediaDevices; }
-    AudioEchoCancel&            getAudioEchoCancel( void )              { return m_AudioEchoCancel; }
+    QMediaDevices*              getMediaDevices( void )                     { return m_MediaDevices; }
+    AudioEchoCancel&            getAudioEchoCancel( void )                  { return m_AudioEchoCancel; }
 
     virtual int				    getMicrophonePeakValue0To100( void );
 
     virtual int				    fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence );
     virtual void				fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace );
 
-    void                        setMicrophoneVolume( float volume )     { m_MicrophoneVolume = volume; }
+    void                        setMicrophoneVolume( float volume )         { m_MicrophoneVolume = volume; }
 
-    bool                        isAudioInitialized( void )              { return m_AudioIoInitialized;  }
-    IAudioCallbacks&            getAudioCallbacks( void )               { return m_AudioCallbacks; }
-    QAudioFormat&               getAudioOutFormat( void )               { return m_AudioOutFormat; }
-    QAudioFormat&               getAudioInFormat( void )                { return m_AudioInFormat; }
+    bool                        isAudioInitialized( void )                  { return m_AudioIoInitialized;  }
+    IAudioCallbacks&            getAudioCallbacks( void )                   { return m_AudioCallbacks; }
+    QAudioFormat&               getAudioOutFormat( void )                   { return m_AudioOutFormat; }
+    QAudioFormat&               getAudioInFormat( void )                    { return m_AudioInFormat; }
 
-    AudioMixer&                 getAudioOutMixer( void )                { return m_AudioOutMixer; }
-    AudioInIo&                  getAudioInIo( void )                    { return m_AudioInIo; }
-    AudioOutIo&                 getAudioOutIo( void )                   { return m_AudioOutIo; }
+    AudioMixer&                 getAudioOutMixer( void )                    { return m_AudioOutMixer; }
+    AudioInIo&                  getAudioInIo( void )                        { return m_AudioInIo; }
+    AudioOutIo&                 getAudioOutIo( void )                       { return m_AudioOutIo; }
 
-    AudioMasterClock&           getAudioMasterClock( void )             { return m_AudioMasterClock; }
-    AudioLoopback&              getAudioLoopback( void )                { return m_AudioLoopback; }
+    AudioMasterClock&           getAudioMasterClock( void )                 { return m_AudioMasterClock; }
+    AudioLoopback&              getAudioLoopback( void )                    { return m_AudioLoopback; }
 
     const char *                describeAudioState( QAudio::State state );
     const char *                describeAudioError( QAudio::Error err );
 
-    void                        lockAudioIn()                           { m_AudioInMutex.lock(); }
-    void                        unlockAudioIn()                         { m_AudioInMutex.unlock(); }
+    void                        lockAudioIn()                               { m_AudioInMutex.lock(); }
+    void                        unlockAudioIn()                             { m_AudioInMutex.unlock(); }
 
     // volume is from 0.0 to 1.0
     void						setSpeakerVolume( float volume0to1 );
 
-    bool                        isMicrophoneAvailable( void )           { return m_MicrophoneAvailable; }
-    bool                        isMicrophoneEnabled( void )             { return m_WantMicrophone; }
-    bool                        isMicrophoneInputWanted( void )         { return m_WantMicrophone; }
+    void                        microphoneDeviceEnabled( bool isEnabled );
+
+    bool                        isMicrophoneAvailable( void )               { return m_MicrophoneAvailable; }
+    bool                        isMicrophoneEnabled( void )                 { return m_WantMicrophone; }
+    bool                        isMicrophoneInputWanted( void )             { return m_WantMicrophone; }
 
     void                        setMuteMicrophone( bool mute );
-    bool                        getIsMicrophoneMuted( void )            { return m_MicrophoneMuted; }
+    bool                        getIsMicrophoneMuted( void )                { return m_MicrophoneMuted; }
 
-    bool                        isSpeakerAvailable( void )              { return m_SpeakerAvailable; }
-    bool                        isSpeakerEnabled( void )                { return m_WantSpeakerOutput; }
-    bool                        isSpeakerOutputWanted( void )           { return m_WantSpeakerOutput; }
+    void                        speakerDeviceEnabled( bool isEnabled );
+
+    bool                        isSpeakerAvailable( void )                  { return m_SpeakerAvailable; }
+    bool                        isSpeakerEnabled( void )                    { return m_WantSpeakerOutput; }
+    bool                        isSpeakerOutputWanted( void )               { return m_WantSpeakerOutput; }
 
     void                        setMuteSpeaker( bool mute );
-    bool                        getIsSpeakerMuted()                     { return m_SpeakersMuted; }
+    bool                        getIsSpeakerMuted()                         { return m_SpeakersMuted; }
 
     void                        setEchoCancelEnable( bool enable );
-    bool                        getIsEchoCancelEnabled( void )          { return m_EchoCancelEnabled; }
+    bool                        getIsEchoCancelEnabled( void )              { return m_EchoCancelEnabled; }
 
-    void                        setAudioLoopbackEnable( bool enable )   { m_AudioLoopbackEnabled = enable; }
-    bool                        getAudioLoopbackEnable( void )          { return m_AudioLoopbackEnabled; }
+    void                        setAudioLoopbackEnable( bool enable )       { m_AudioLoopbackEnabled = enable; }
+    bool                        getAudioLoopbackEnable( void )              { return m_AudioLoopbackEnabled; }
 
-    void                        setAudioTimingEnable( bool enable )     { m_AudioTimingEnabled = enable; }
-    bool                        getAudioTimingEnable( void )            { return m_AudioTimingEnabled; }
+    void                        setAudioTimingEnable( bool enable )         { m_AudioTimingEnabled = enable; }
+    bool                        getAudioTimingEnable( void )                { return m_AudioTimingEnabled; }
 
-    void                        setFrameTimingEnable( bool enable )     { m_FrameTimingEnabled = enable; }
+    void                        setFrameTimingEnable( bool enable )         { m_FrameTimingEnabled = enable; }
     bool                        getFrameTimingEnable( void );
 
-    void                        setFrameIndexDebugEnable( bool enable ) { m_FrameIndexDebugEnabled = enable; }
-    bool                        getFrameIndexDebugEnable( void )        { return m_FrameIndexDebugEnabled; }
+    void                        setFrameIndexDebugEnable( bool enable )     { m_FrameIndexDebugEnabled = enable; }
+    bool                        getFrameIndexDebugEnable( void )            { return m_FrameIndexDebugEnabled; }
+
+    void                        setBitrateDebugEnable( bool enable )        { m_BitrateDebugEnabled = enable; }
+    bool                        getBitrateDebugEnable( void )               { return m_BitrateDebugEnabled; }
+
+    void                        setSampleCntDebugEnable( bool enable )      { m_SampleCntDebugEnabled = enable; }
+    bool                        getSampleCntDebugEnable( void )             { return m_SampleCntDebugEnabled; }
 
     void                        setPeakAmplitudeDebugEnable( bool enable );
     bool                        getPeakAmplitudeDebugEnable( void )         { return m_PeakAmplitudeDebug; }
 
     void                        setEchoCancelerNeedsReset( bool needReset );
 
-    void                        echoCancelSyncState( bool inSync );
+    void                        echoCancelSyncStateThreaded( bool inSync );
+    bool                        isEchoCancelInSync( void );
 
     //=== IAudioRequests ===//
     // enable disable microphone data callback
@@ -126,6 +137,8 @@ public:
     virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     // amount of free queue space in bytes
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
+
+    void						fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnts, bool isSilence );
 
     // get length of data ready for write to speakers
     int                         getDataReadyForSpeakersLen();
@@ -153,10 +166,13 @@ public:
     bool                        runAudioDelayTest( void );
 
     void                        setEchoDelayMsParam( int delayMs )      { m_AudioEchoCancel.setEchoDelayMsParam( delayMs ); }
+    bool                        getIsEchoCancelInSync( void )           { return m_IsEchoCancelInSync; }
 
     void                        frame80msElapsed( void );
 
     void                        processAudioOutThreaded( void );
+
+    bool                        useFixedAudioOutBufferSize( void )      { return m_UseFixedAudioOutBufferSize; }
 
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
@@ -171,9 +187,6 @@ public slots:
     void                        slotAudioTestTimer( void );
 
 protected:
-    void						stopAudioOut( );
-    void                        stopAudioIn();
- 
     int                         getCachedDataLength( EAppModule appModule );
 
     void                        aboutToDestroy();
@@ -242,5 +255,10 @@ protected:
     bool                        m_AudioTimingEnabled{ false };
     bool                        m_FrameTimingEnabled{ false };
     bool                        m_FrameIndexDebugEnabled{ false };
+    bool                        m_BitrateDebugEnabled{ false };
     bool                        m_PeakAmplitudeDebug{ false };
+    bool                        m_IsEchoCancelInSync{ false };
+    bool                        m_SampleCntDebugEnabled{ false };
+
+    bool                        m_UseFixedAudioOutBufferSize{ false };
 };
