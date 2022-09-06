@@ -108,7 +108,7 @@ void AudioMasterClock::audioSpeakerReadDurationTime( int64_t readSizeTime )
 	int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
 	lastTime = timeNow;
 
-	if( timeElapsed && ( timeElapsed < 200 || timeElapsed > 500 ) )
+	if( timeElapsed && ( timeElapsed < 100 || timeElapsed > 500 ) )
 	{
 		LogMsg( LOG_VERBOSE, "AudioMasterClock::audioSpeakerReadDurationTime invalid elapsed %d ms", timeElapsed );
 	}
@@ -148,7 +148,7 @@ void AudioMasterClock::slotAudioTimerTimeout( void )
 				if( frameCnt > 10 )
 				{
 					frameCnt = 0;
-					if( m_AudioIoMgr.getAudioTimingEnable() )
+                    if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 					{
 						LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout mic now %d ms consumed totals mic %lld speaker %lld diff %lld", (int)m_MicConsumedTime, m_MicConsumedTotal, m_SpeakerConsumedTotal, std::abs( m_SpeakerConsumedTotal - m_MicConsumedTotal ) );
 					}
@@ -166,13 +166,13 @@ void AudioMasterClock::slotAudioTimerTimeout( void )
 				{
 					// either GetHighResolutionTimeMs is not accurate or microphone sample rate > 48000hz .. try to catch up
 					m_NextFrameTimeMs--;
-					if( m_AudioIoMgr.getAudioTimingEnable() )
+                    if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 					{
 						LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout mic consumed %d to large elapsed %d ms diff %d ", (int)m_MicConsumedTime, timeElapsed, (int)(timeNow - m_NextFrameTimeMs) );
 					}
 				}
 			}
-			else
+            else if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 			{
 				LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout skipping mic elapsed %d ms diff %d mic consumed %d", timeElapsed, (int)(timeNow - m_NextFrameTimeMs), (int)m_MicConsumedTime );
 			}

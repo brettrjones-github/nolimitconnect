@@ -1170,6 +1170,15 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 		}
 
 		m_MixerRemoveMutex.unlock();
+
+		bool stopSpeakerOutput = (m_SpeakerOutputEnabled) && (1 == m_MixerList.size());
+		// set capture stated before unlocking mutex
+		if( stopSpeakerOutput )
+		{
+			m_SpeakerOutputEnabled = false;
+			IToGui::getAudioRequests().toGuiWantSpeakerOutput( appModule, false );
+			IToGui::getAudioRequests().toGuiWantMicrophoneRecording( appModule, false );
+		}
 		return;
 	}
 	else

@@ -56,7 +56,7 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
     , m_AudioMasterClock( *this, this )
     , m_AudioLoopback( *this )
 {
-    m_AudioTestTimer->setInterval( 600 );
+    m_AudioTestTimer->setInterval( 1200 );
     connect( m_AudioTestTimer, SIGNAL(timeout()), this, SLOT(slotAudioTestTimer()) );
 
     memset( m_MyLastAudioOutSample, 0, sizeof( m_MyLastAudioOutSample ) );
@@ -96,7 +96,7 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
     // setAudioTimingEnable( true ); // log audio timing
     // setFrameTimingEnable( true ); // log audio frames and timing
     // setFrameIndexDebugEnable( true ); // log audio frame indexes and when incremented
-    setBitrateDebugEnable( true ); // log audio bit rates that are way out of what should be the rate
+    // setBitrateDebugEnable( true ); // log audio bit rates that are way out of what should be the rate
     // setSampleCntDebugEnable( true ); // log audio sample counts
 }
 
@@ -632,7 +632,7 @@ bool AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDet
     {
         resultMsg = QObject::tr("Sound Delay too short.. probably noise ");
     }
-    else if( timeDif > 500 )
+    else if( timeDif > 900 )
     {
         resultMsg = QObject::tr("Sound Delay too long.. probably mic level low ");
     }

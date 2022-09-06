@@ -172,7 +172,7 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSampleBuf& speakerProc
 			}
 
 			static int64_t startMs = 0;
-			if( m_AudioIoMgr.getAudioTimingEnable() )
+            if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 			{
 				startMs = timeNow;
 			}
@@ -186,7 +186,6 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSampleBuf& speakerProc
 			{
 				int samplesToProcess = framesToProcess * MONO_8000HZ_SAMPLES_PER_10MS;
 
-				int64_t preProceesMicTimeMs = m_HeadMicSamplesMs;
 				int samplesProcessedMs = AudioUtils::audioDurationMs( 8000, samplesToProcess );
 				m_HeadMicSamplesMs += samplesProcessedMs;
 				m_HeadSpeakerSamplesMs += samplesProcessedMs;
@@ -220,7 +219,7 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSampleBuf& speakerProc
 				}
 			}
 
-			if( m_AudioIoMgr.getAudioTimingEnable() )
+            if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 			{
 				int64_t endtMs = GetHighResolutionTimeMs();
 				if( endtMs - startMs > 10 )
@@ -272,7 +271,14 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSampleBuf& speakerProc
 bool AudioEchoCancelImpl::attemptEchoSyncThreaded( void )
 {
 	bool inSync{ m_EchoCancelInSync };
-	return true; // BRJ for testing just say in sync
+    // sign echo cancelling with qt seem close to impossible
+    // timing of audio read / write varies by up to 120 ms
+    // delay from speaker to microphone on is over 700ms on some android devices
+    // cannot get to work with webrtc but speex seems to have enogh noise cancelation etc
+    // that the echo is attenuated and can have speaker on but must be low and will not have the feedback noise
+    // so for now use speex only and no need to attempt sync.. sync of microphone to speaker must
+    // be within 10ms to work properly with webrtc
+    return true;
 
 	// timing issues
 	// 1.) micWriteTime and startOfSpeakerSamplesTimeMs may be off by 30ms or so

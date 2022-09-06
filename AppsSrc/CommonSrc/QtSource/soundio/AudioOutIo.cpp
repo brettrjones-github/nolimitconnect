@@ -15,7 +15,7 @@
 
 #include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
-#include "Appcommon.h"
+#include "AppCommon.h"
 #include "AudioOutIo.h"
 #include "AudioIoMgr.h"
 #include "AudioUtils.h"
@@ -72,7 +72,7 @@ bool AudioOutIo::soundOutDeviceChanged( int deviceIndex )
         return false;
     }
 
-    if( deviceIndex >= outDeviceList.size() )
+    if( deviceIndex >= (int)outDeviceList.size() )
     {
         QMessageBox::information( nullptr, QObject::tr( "Sound Out Device" ), QObject::tr( "Sound Output Device Index Out Of Range. Will Use Default Device" ), QMessageBox::Ok );
         deviceIndex = 0;
@@ -260,10 +260,12 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 
     int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow );
     int speakerReqSampleCnt = maxlen / 2;
-    if( speakerReqSampleCnt % getUpsampleMultiplier() || getUpsampleMultiplier() != 6 )
-    {
-        LogMsg( LOG_VERBOSE, "AudioOutIo::readData samples have a upsample remainder %d of sample cnt %d ", speakerReqSampleCnt % getUpsampleMultiplier(), speakerReqSampleCnt );
-    }
+
+    // with the new system we no longer have to worry about remainder for upsampler multiplier
+    //if( speakerReqSampleCnt % getUpsampleMultiplier() || getUpsampleMultiplier() != 6 )
+    //{
+    //    LogMsg( LOG_VERBOSE, "AudioOutIo::readData samples have a upsample remainder %d of sample cnt %d ", speakerReqSampleCnt % getUpsampleMultiplier(), speakerReqSampleCnt );
+    //}
 
     if( m_AudioTestState != eAudioTestStateNone )
     {
@@ -319,7 +321,6 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         funcCallCnt++;
         if( lastMixerPcmTime )
         {
-            int64_t timeInterval = timeNow - lastMixerPcmTime;
             LogMsg( LOG_VERBOSE, "AudioOutIo::readData %d peak amplitude %d", funcCallCnt, m_PeakAudioOutAmplitude );
         }
 

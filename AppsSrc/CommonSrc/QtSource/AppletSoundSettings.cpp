@@ -131,9 +131,10 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
 //============================================================================
 AppletSoundSettings::~AppletSoundSettings()
 {
+    m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_MyApp.getMyOnlineId(), false );
+
     m_PeakTimer->stop();
     m_MyApp.activityStateChange( this, false );
-    m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_MyApp.getMyOnlineId(), false );
 }
 
 //============================================================================

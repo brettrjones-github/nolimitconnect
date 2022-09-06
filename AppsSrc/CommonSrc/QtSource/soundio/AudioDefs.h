@@ -33,7 +33,7 @@ static const int AUDIO_CHANNEL_BYTES_MICROPHONE = 2;    // 2 bytes per sample (s
 static const int AUDIO_SAMPLE_BYTES_MICROPHONE = 2;     // 2 bytes per sample * 1 channels
 static const double BYTES_TO_MS_MULTIPLIER_MICROPHONE = ( (double)AUDIO_MS_MICROPHONE / (double)AUDIO_BUF_SIZE_8000_1_S16 );
 
-// output to speakers
+// output to speaker6
 static const int AUDIO_CHANNEL_BYTES_SPEAKERS = 2;      // 2 bytes per sample (sizeof int16)
 static const int AUDIO_SAMPLE_BYTES_SPEAKERS = 2;       // 2 bytes per sample * 1 channels
 static const int AUDIO_MS_SPEAKERS = 80;                // 80 ms = 0.08 sec of audio data

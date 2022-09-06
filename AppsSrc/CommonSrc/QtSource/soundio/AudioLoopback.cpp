@@ -187,7 +187,7 @@ void AudioLoopback::processAudioOutThreaded( void )
 		int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
 		lastTime = timeNow;
 
-		if( m_AudioIoMgr.getAudioTimingEnable() )
+		if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 		{
 			static int64_t lastSpaceAvailableTime{ 0 };
 			static int funcCallCnt{ 0 };
