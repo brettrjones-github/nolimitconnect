@@ -196,7 +196,7 @@ protected:
     void                        enableMicrophone( bool enable );
 
     void                        setAudioTestState( EAudioTestState audioTestState );
-    bool                        handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs );
+    bool                        handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs, int peakVal0to100 );
 
     AppCommon&                  m_MyApp;
     QMediaDevices*              m_MediaDevices{ nullptr };

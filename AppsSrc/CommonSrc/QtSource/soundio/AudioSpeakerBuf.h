@@ -18,10 +18,11 @@
 
 #include <inttypes.h>
 
+// extra lart buffer to handle large echo delays
 class AudioSpeakerBuf
 {
 public:
-	static const int MAX_SPEAKER_BUFFER_SIZE = SPEAKER_CHUNK_LEN_SAMPLES * 8; // this is 480 ms of samples
+	static const int MAX_SPEAKER_BUFFER_SIZE = SPEAKER_CHUNK_LEN_SAMPLES * 8;
 
 	AudioSpeakerBuf() = default;
 	AudioSpeakerBuf( const AudioSpeakerBuf& rhs ) = delete;
@@ -33,7 +34,7 @@ public:
 	bool						empty( void )							{ return 0 == m_SampleCnt; }
 	int							freeSpaceSampleCount( void )			{ return m_MaxSamples - m_SampleCnt; }
 
-	void						setMaxSamples( int maxSamples )			{ m_MaxSamples = maxSamples; } // cannot be more than 4 * MIXER_CHUNK_LEN_SAMPLES
+	void						setMaxSamples( int maxSamples )			{ m_MaxSamples = maxSamples; } 
 	int							getMaxSamples( void )					{ return m_MaxSamples; }
 
 	void						setSampleCnt( int sampleCnt )			{ m_SampleCnt = sampleCnt; }
@@ -48,7 +49,7 @@ public:
 
 	int16_t						getLastSample( void );
 
-	int							getAudioDurationMs( void ); // get the samples duration in ms
+	int							getAudioDurationMs( int sampleRate = 48000 ); // get the samples duration in ms
 
 	void						truncateSamples( int sampleCnt ); // if contins more samples than this then limit to sampleCnt
 

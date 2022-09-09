@@ -48,7 +48,7 @@ public:
 
 	int16_t						getLastSample( void );
 
-	int							getAudioDurationMs( void ); // get the samples duration in ms
+	int							getAudioDurationMs( int sampleRate = 8000 ); // get the samples duration in ms
 
 	void						truncateSamples( int sampleCnt ); // if contins more samples than this then limit to sampleCnt
 

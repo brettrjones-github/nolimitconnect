@@ -14,7 +14,7 @@
 
 #include "AudioLoopback.h"
 
-#include "Appcommon.h"
+#include "AppCommon.h"
 #include "AudioIoMgr.h"
 #include "AudioUtils.h"
 
@@ -223,10 +223,16 @@ void AudioLoopback::processAudioOutThreaded( void )
 				audioFrame.getFrameIndex(), audioFrame.echoSamplesAvailable() * 6, audioFrame.speakerSamplesAvailable(), timeElapsed );
 		}
 
-		m_ProcessFrameBitrate.addSamplesAndInterval( audioFrame.echoSamplesAvailable(), timeElapsed );
-		m_ProcessSpeakerBitrate.addSamplesAndInterval( audioFrame.speakerSamplesAvailable(), timeElapsed );
+		if( m_AudioIoMgr.getBitrateDebugEnable() )
+		{
+			m_ProcessFrameBitrate.addSamplesAndInterval( audioFrame.echoSamplesAvailable(), timeElapsed );
+			m_ProcessSpeakerBitrate.addSamplesAndInterval( audioFrame.speakerSamplesAvailable(), timeElapsed );
+		}
 
-		m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( audioFrame.speakerSamplesAvailable() );
+		if( m_AudioIoMgr.getSampleCntDebugEnable() )
+		{
+			m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( audioFrame.speakerSamplesAvailable() );
+		}
 
 		m_SpeakerProcessedBuf.writeSamples( audioFrame.getSpeakerSampleBuf(), audioFrame.speakerSamplesAvailable() );
 		m_EchoProcessedBuf.writeSamples( audioFrame.getEchoSampleBuf(), audioFrame.echoSamplesAvailable() );

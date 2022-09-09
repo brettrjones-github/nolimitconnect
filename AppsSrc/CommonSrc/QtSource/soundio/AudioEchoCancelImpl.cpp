@@ -135,7 +135,7 @@ void AudioEchoCancelImpl::micWroteSamples( int16_t* micWriteData, int sampleCnt,
 }
 
 //============================================================================
-void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSampleBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex )
+void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSpeakerBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex )
 {
 	// release speaker samples as soon as possible to avoid stalling the device speaker read call
 	m_SpeakerSamplesMutex.lock();

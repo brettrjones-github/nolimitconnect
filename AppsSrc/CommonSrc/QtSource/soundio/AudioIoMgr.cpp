@@ -91,8 +91,7 @@ AudioIoMgr::AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget
 
     setEchoCancelEnable( true ); // for now always enabled
 
-    // BRJ temp for testing
-    setAudioLoopbackEnable( true );
+    // debug testing flages
     // setAudioTimingEnable( true ); // log audio timing
     // setFrameTimingEnable( true ); // log audio frames and timing
     // setFrameIndexDebugEnable( true ); // log audio frame indexes and when incremented
@@ -544,6 +543,8 @@ bool AudioIoMgr::runAudioDelayTest( void )
 //============================================================================
 void AudioIoMgr::slotAudioTestTimer( void )
 {
+    int audioPeakValue{ 0 };
+    int64_t audioDetectTimeMs{ 0 };
     switch( m_AudioTestState )
     {
     case eAudioTestStateInit:
@@ -561,7 +562,8 @@ void AudioIoMgr::slotAudioTestTimer( void )
     case eAudioTestStateResult:
         // get the delay time result
         LogMsg( LOG_VERBOSE, "Echo Delay Test Result" );
-        if( !handleAudioTestResult( m_AudioOutIo.getAudioTestSentTime(), m_AudioInIo.getAudioTestDetectTime() ) )
+        audioDetectTimeMs = m_AudioInIo.getAudioTestDetectTime( audioPeakValue );
+        if( !handleAudioTestResult( m_AudioOutIo.getAudioTestSentTime(), audioDetectTimeMs, audioPeakValue ) )
         {
             LogMsg( LOG_WARNING, "Echo Delay Test Faled" );
             
@@ -618,7 +620,7 @@ void AudioIoMgr::setAudioTestState( EAudioTestState audioTestState )
 }
 
 //============================================================================
-bool AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs )
+bool AudioIoMgr::handleAudioTestResult( int64_t soundOutTimeMs, int64_t soundDetectTimeMs, int peakVal0to100 )
 {
     bool isValid{ false };
     QString resultMsg;

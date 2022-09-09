@@ -74,7 +74,7 @@ public:
 
 	void						micWroteSamples( int16_t* micWriteData, int sampleCnt, int64_t micWriteTailTimeMs, bool stableTimestamp );
 
-	void						processEchoCancelThreaded( AudioSampleBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex );
+	void						processEchoCancelThreaded( AudioSpeakerBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex );
 
 	void                        setEchoCancelerNeedsReset( bool needReset )		{ m_EchoCancelNeedsReset = needReset; }
 

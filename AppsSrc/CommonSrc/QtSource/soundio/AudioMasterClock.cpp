@@ -17,7 +17,6 @@
 #include "AppCommon.h"
 #include "AudioIoMgr.h"
 
-const int FRAME_INTERVAL_US = 80000;
 const int FRAME_INTERVAL_MS = 80;
 
 //============================================================================
@@ -62,8 +61,11 @@ void AudioMasterClock::resetMasterClock( void )
 }
 
 //============================================================================
-void AudioMasterClock::audioMicWriteDurationTime( int64_t writeDurationMs )
+void AudioMasterClock::audioMicWriteDurationTime( int64_t writeDurationMs, int64_t micWriteTimeMs )
 {
+	m_MicWriteDurationMs = writeDurationMs;
+	m_MicWriteTimeMs = micWriteTimeMs;
+
 	m_MicConsumedTime += writeDurationMs;
 	m_MicConsumedTotal += writeDurationMs;
 	
@@ -92,10 +94,13 @@ void AudioMasterClock::audioMicWriteSampleCnt(int64_t writeSampleCnt )
 }
 
 //============================================================================
-void AudioMasterClock::audioSpeakerReadDurationTime( int64_t readSizeTime )
+void AudioMasterClock::audioSpeakerReadDurationTime( int64_t readDurationMs, int64_t speakerReadTimeMs )
 {
-	m_SpeakerConsumedTime += readSizeTime;
-	m_SpeakerConsumedTotal += readSizeTime;
+	m_SpeakerReadDurationMs = readDurationMs;
+	m_SpeakerReadTimeMs = speakerReadTimeMs;
+
+	m_SpeakerConsumedTime += readDurationMs;
+	m_SpeakerConsumedTotal += readDurationMs;
 	if( m_ResetOnFirstSpeakerWrite )
 	{
 		m_ResetOnFirstSpeakerWrite = false;

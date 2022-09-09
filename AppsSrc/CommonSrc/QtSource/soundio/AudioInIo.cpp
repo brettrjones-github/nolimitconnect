@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "Appcommon.h"
+#include "AppCommon.h"
 #include "AudioInIo.h"
 #include "AudioIoMgr.h"
 #include "AudioMixer.h"
@@ -28,6 +28,7 @@
 #include <QDebug>
 #include <QtEndian>
 #include <QMessageBox>
+
 #include <math.h>
 
 //============================================================================
@@ -79,7 +80,7 @@ bool AudioInIo::soundInDeviceChanged( int deviceIndex )
         return false;
     }
 
-    if( deviceIndex >= inDeviceList.size() )
+    if( deviceIndex >= (int)inDeviceList.size() )
     {
         QMessageBox::information( nullptr, QObject::tr( "Sound In Device" ), QObject::tr( "Sound Input Device Index Out Of Range. Will Use Default Device" ), QMessageBox::Ok );
         deviceIndex = 0;
@@ -261,13 +262,17 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
 
     if( m_AudioTestState != eAudioTestStateNone )
     {
-        if( m_AudioTestState == eAudioTestStateRun && !m_AudioTestDetectTimeMs )
+        m_AudioIoMgr.getAudioMasterClock().audioMicWriteDurationTime( m_MicWriteDurationUs / 1000, micWriteTime );
+        if( m_AudioIoMgr.getSampleCntDebugEnable() )
+        {
+            m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( inSampleCnt );
+        }
+
+        if( m_AudioTestState == eAudioTestStateRun )
         {
             audioTestDetectTestSound( sampleInData, inSampleCnt, micWriteTime );
         }
 
-        m_AudioIoMgr.getAudioMasterClock().audioMicWriteDurationTime( m_MicWriteDurationUs / 1000 );
-        m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( inSampleCnt );
         return len;
     }
 
@@ -297,8 +302,12 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
         m_PeakAmplitude = AudioUtils::peakPcmAmplitude0to100( sampleOutData, outSampleCnt );
     }
 
-    m_AudioIoMgr.getAudioMasterClock().audioMicWriteDurationTime( m_MicWriteDurationUs / 1000 );
-    m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( inSampleCnt );
+    m_AudioIoMgr.getAudioMasterClock().audioMicWriteDurationTime( m_MicWriteDurationUs / 1000, micWriteTime );
+    if( m_AudioIoMgr.getSampleCntDebugEnable() )
+    {
+        m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( inSampleCnt );
+    }
+
     return len;
 }
 
@@ -407,9 +416,10 @@ void AudioInIo::setAudioTestState( EAudioTestState audioTestState )
     switch( audioTestState )
     {
     case eAudioTestStateInit:
-        m_AudioTestDetectTimeMs = 0;
+        m_DelayTestDetectList.clear();
         break;
     case eAudioTestStateRun:
+        m_DelayTestDetectList.clear();
         break;
     case eAudioTestStateResult:
         break;
@@ -426,43 +436,43 @@ void AudioInIo::setAudioTestState( EAudioTestState audioTestState )
 //============================================================================
 void AudioInIo::audioTestDetectTestSound( int16_t* sampleInData, int inSampleCnt, int64_t& micWriteTime )
 {
-    if( m_AudioTestDetectTimeMs )
-    {
-        return;
-    }
+    // find peak value and time
+    int samplePosVal = 0;
+    int64_t sampleTimeMs = 0;
 
-    // hopefully there is not too much noise but we also need to detect at low mic input so use 1/4 max volume
-    int16_t sampPosVal = 32767 / 4;
-    int16_t sampNegVal = -32768 / 4;
-    int sampStartIdx = 0;
-    int sampPosCnt = 0;
-    int sampNegCnt = 0;
+    int16_t sampCompareValue = 32768 / 10;
 
     for( int i = 0; i < inSampleCnt; i++ )
     {
-        if( sampleInData[ i ] > sampPosVal )
+        if( sampleInData[ i ] > samplePosVal && sampleInData[ i ] > sampCompareValue )
         {
-            sampPosCnt++;
-            if( !sampStartIdx && sampNegCnt )
-            {
-                sampStartIdx = i;
-            }
-        }
-
-        if( sampleInData[ i ] < sampNegVal )
-        {
-            sampNegCnt++;
-            if( !sampStartIdx && sampPosCnt )
-            {
-                sampStartIdx = i;
-            }
+            samplePosVal = sampleInData[ i ];
+            sampleTimeMs = micWriteTime + AudioUtils::audioDurationMs( m_AudioFormat, i * 2 );
         }
     }
 
-    if( sampPosCnt > 2 && sampNegCnt > 2 )
+    if( samplePosVal && sampleTimeMs )
     {
-        m_AudioTestDetectTimeMs = micWriteTime + AudioUtils::audioDurationMs( m_AudioFormat, sampStartIdx * 2 );
+        m_DelayTestDetectList.push_back( std::make_pair( sampleTimeMs, samplePosVal) );
     }
+}
+
+//============================================================================
+int64_t AudioInIo::getAudioTestDetectTime( int& peakValue )
+{
+    int64_t detectTime = 0;
+    peakValue = 0;
+
+    for( auto& pair : m_DelayTestDetectList )
+    {
+        if( pair.second > peakValue )
+        {
+            peakValue = pair.second;
+            detectTime = pair.first;
+        }
+    }
+
+    return detectTime;
 }
 
 //============================================================================

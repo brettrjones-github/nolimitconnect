@@ -47,7 +47,7 @@ void AudioSampleBuf::samplesWereRead( int samplesRead )
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "AudioSampleBuf::sampleWereRead ERROR samplesRead %d m_SampleCnt %d", samplesRead, m_SampleCnt );
+		LogMsg( LOG_ERROR, "AudioSampleBuf::sampleWereRead ERROR samplesRead %d m_SampleCnt %d", samplesRead, m_SampleCnt );
 	}
 }
 
@@ -57,7 +57,7 @@ int AudioSampleBuf::writeSamples( int16_t* srcSamplesBuf, int sampleCnt )
 	int writtenSamples = 0;
 	if( sampleCnt > m_MaxSamples )
 	{
-		LogMsg( LOG_VERBOSE, "AudioSampleBuf::sampleWereRead ERROR samplesToWrite %d greater than max samples %d", sampleCnt, m_MaxSamples );
+		LogMsg( LOG_ERROR, "AudioSampleBuf::sampleWereRead ERROR samplesToWrite %d greater than max samples %d", sampleCnt, m_MaxSamples );
 		return 0;
 	}
 	else if( sampleCnt <= ( m_MaxSamples - m_SampleCnt ) )
@@ -71,6 +71,7 @@ int AudioSampleBuf::writeSamples( int16_t* srcSamplesBuf, int sampleCnt )
 	{
 		// make room for samples
 		int samplesToRemove = std::abs( m_MaxSamples - ( m_SampleCnt + sampleCnt ) );
+		LogMsg( LOG_WARNING, "AudioSampleBuf::sampleWereRead removing %d samples to fit %d samples", samplesToRemove, sampleCnt );
 		samplesWereRead( samplesToRemove );
 		memcpy( &m_PcmData[ m_SampleCnt ], srcSamplesBuf, sampleCnt * 2 );
 		m_SampleCnt += sampleCnt;
@@ -92,9 +93,9 @@ int16_t AudioSampleBuf::getLastSample( void )
 }
 
 //============================================================================
-int AudioSampleBuf::getAudioDurationMs( void )
+int AudioSampleBuf::getAudioDurationMs( int sampleRate )
 {
-	return AudioUtils::audioDurationMs( 8000, m_SampleCnt );
+	return AudioUtils::audioDurationMs( sampleRate, m_SampleCnt );
 }
 
 //============================================================================

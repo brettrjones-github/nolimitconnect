@@ -30,6 +30,9 @@
 #include <QAudioSource>
 #include <QMediaDevices>
 
+#include <vector>
+#include <algorithm>
+
 class AudioIoMgr;
 class AppCommon;
 class P2PEngine;
@@ -79,7 +82,7 @@ public:
     int                         getMicWriteDurationUs( void )       { return m_MicWriteDurationUs; }
 
     void                        setAudioTestState( EAudioTestState audioTestState );
-    int64_t                     getAudioTestDetectTime( void )      { return m_AudioTestDetectTimeMs; }
+    int64_t                     getAudioTestDetectTime( int& peakValue );
 
     void						echoCancelSyncStateThreaded( bool inSync );
 
@@ -122,7 +125,7 @@ protected:
     QScopedPointer<QAudioSource> m_AudioInputDevice;
 
     EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
-    int16_t                     m_AudioTestDetectTimeMs{ 0 };
+    std::vector<std::pair<int64_t,int>> m_DelayTestDetectList; // pairs of time and peak value
 
     TimeIntervalEstimator       m_MicWriteTimeEstimator;
     int                         m_MicWriteDurationUs{ 0 };
@@ -130,4 +133,6 @@ protected:
     AudioBitrate                m_MicInBitrate;
     AudioBitrate                m_MicOutBitrate;
     bool                        m_EchoCancelInSync{ false };
+
+    
 };

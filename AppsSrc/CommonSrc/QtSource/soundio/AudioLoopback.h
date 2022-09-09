@@ -114,7 +114,7 @@ protected:
 	int64_t                     m_MicWriteTime{ 0 };
 
 	AudioSpeakerBuf				m_SpeakerProcessedBuf;
-	AudioSampleBuf				m_EchoProcessedBuf;
+	AudioSpeakerBuf				m_EchoProcessedBuf;
 	QMutex                      m_ProcessedBufMutex;
 
 	AudioBitrate                m_EchoCanceledBitrate;

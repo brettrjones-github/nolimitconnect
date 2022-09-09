@@ -65,7 +65,7 @@ void AudioEchoCancel::micWroteSamples( int16_t* micWritedData, int sampleCnt, in
 }
 
 //============================================================================
-void AudioEchoCancel::processEchoCancelThreaded( AudioSampleBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex )
+void AudioEchoCancel::processEchoCancelThreaded( AudioSpeakerBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex )
 {
 	m_AudioEchoCancelImpl.processEchoCancelThreaded( speakerProcessed8000Buf, speakerProcessedMutex );
 }

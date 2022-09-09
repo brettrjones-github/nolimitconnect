@@ -29,16 +29,24 @@ class AudioMasterClock : public QObject
 public:
 	AudioMasterClock( AudioIoMgr& audioIoMgr, QObject* parent = nullptr);
 
-	void						masterClockShutdown( void )					{ m_AudioTimer->stop(); }
+	void						masterClockShutdown( void )						{ m_AudioTimer->stop(); }
 
 	void                        microphoneDeviceEnabled( bool isEnabled );
 	void                        speakerDeviceEnabled( bool isEnabled );
 
-	void						audioMicWriteDurationTime( int64_t writeDurationMs );
 	void						audioMicWriteSampleCnt( int64_t writeSampleCnt );
+	void						audioMicWriteDurationTime( int64_t writeDurationMs, int64_t micWriteTimeMs );
 
-	void						audioSpeakerReadDurationTime( int64_t readSizeTime );
+	int64_t						getMicWriteDurationMs( void )					{ return m_MicWriteDurationMs; }
+	int64_t						getSMicWriteConsumedMs( void )					{ return m_MicConsumedTime; }
+	int64_t						getMicWriteTimeMs( void )						{ return m_MicWriteTimeMs; }
+
 	void						audioSpeakerReadSampleCnt( int64_t readSampleCnt );
+	void						audioSpeakerReadDurationTime( int64_t readSizeTime, int64_t speakerReadTimeMs );
+
+	int64_t						getSpeakerReadDurationMs( void )				{ return m_SpeakerReadDurationMs; }
+	int64_t						getSpeakerReadConsumedMs( void )				{ return m_SpeakerConsumedTime; }
+	int64_t						getSpeakerReadTimeMs( void )					{ return m_SpeakerReadTimeMs; }
 
 protected slots:
 	void						slotAudioTimerTimeout( void );
@@ -59,8 +67,13 @@ protected:
 	bool						m_SpeakerDeviceEnabled{ false };
 	bool						m_ResetOnFirstSpeakerWrite{ false };
 
+	int64_t						m_MicWriteDurationMs{ 0 };
 	int64_t						m_MicConsumedTime{ 0 };
+	int64_t						m_MicWriteTimeMs{ 0 };
+
+	int64_t						m_SpeakerReadDurationMs{ 0 };
 	int64_t						m_SpeakerConsumedTime{ 0 };
+	int64_t						m_SpeakerReadTimeMs{ 0 };
 
 	int64_t						m_NextFrameTimeMs{ 0 };
 

@@ -126,6 +126,7 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
     m_PeakTimer->start();
 
     ui.m_PauseVoipCheckBox->setVisible( false );
+    m_MyApp.getSoundMgr().setAudioLoopbackEnable( true );
 }
 
 //============================================================================
@@ -134,6 +135,7 @@ AppletSoundSettings::~AppletSoundSettings()
     m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_MyApp.getMyOnlineId(), false );
 
     m_PeakTimer->stop();
+    m_MyApp.getSoundMgr().setAudioLoopbackEnable( false );
     m_MyApp.activityStateChange( this, false );
 }
 

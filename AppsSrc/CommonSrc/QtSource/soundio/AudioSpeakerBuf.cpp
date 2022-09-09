@@ -71,6 +71,7 @@ int AudioSpeakerBuf::writeSamples( int16_t* srcSamplesBuf, int sampleCnt )
 	{
 		// make room for samples
 		int samplesToRemove = std::abs( m_MaxSamples - ( m_SampleCnt + sampleCnt ) );
+		LogMsg( LOG_WARNING, "AudioSampleBuf::sampleWereRead removing %d samples to fit %d samples", samplesToRemove, sampleCnt );
 		samplesWereRead( samplesToRemove );
 		memcpy( &m_PcmData[ m_SampleCnt ], srcSamplesBuf, sampleCnt * 2 );
 		m_SampleCnt += sampleCnt;
@@ -92,9 +93,9 @@ int16_t AudioSpeakerBuf::getLastSample( void )
 }
 
 //============================================================================
-int AudioSpeakerBuf::getAudioDurationMs( void )
+int AudioSpeakerBuf::getAudioDurationMs( int sampleRate )
 {
-	return AudioUtils::audioDurationMs( 48000 * 2, m_SampleCnt );
+	return AudioUtils::audioDurationMs( sampleRate, m_SampleCnt );
 }
 
 //============================================================================

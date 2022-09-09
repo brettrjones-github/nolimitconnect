@@ -292,8 +292,12 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
             m_AudioTestSentTimeMs = speakerReadTimeMs;
         }
 
-        m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadDurationTime( audioReadDurationUs / 1000 );
-        m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( speakerReqSampleCnt );
+        m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadDurationTime( audioReadDurationUs / 1000, speakerReadTimeMs );
+        if( m_AudioIoMgr.getSampleCntDebugEnable() )
+        {
+            m_AudioIoMgr.getAudioMasterClock().audioMicWriteSampleCnt( speakerReqSampleCnt );
+        }
+
         return maxlen;
     }
 
@@ -340,8 +344,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     //m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadUs( thisCallTimeUs - lastCallTimeUs, false );
     //lastCallTimeUs = thisCallTimeUs;
 
-    m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadDurationTime( audioReadDurationUs / 1000 );
-    //m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( speakerReqSampleCnt / getUpsampleMultiplier() );
+    m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadDurationTime( audioReadDurationUs / 1000, speakerReadTimeMs );
 
     return maxlen;
 }
@@ -380,7 +383,6 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
         return;
     }
 
-
     if( m_AudioOutputDevice )
 	{
 		// Start buffering again in case of underrun...
@@ -395,7 +397,6 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 			return;
 		}      
 	}
-//#endif
 }
 
 //============================================================================

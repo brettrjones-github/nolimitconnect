@@ -115,7 +115,7 @@ private:
     int                         m_PrevLerpedSamplesCnt{ 0 };
 
     EAudioTestState             m_AudioTestState{ eAudioTestStateNone };
-    int16_t                     m_AudioTestSentTimeMs{ 0 };
+    int64_t                     m_AudioTestSentTimeMs{ 0 };
     int16_t*                    m_AudioTestSoundOutBuf{ nullptr };
     int                         m_AudioTestBufLen{ 0 };
     int                         m_AudioTestBufIdx{ 0 };
