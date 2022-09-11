@@ -16,6 +16,7 @@
 
 #include "VxTilePositioner.h"
 #include "VxWidgetBase.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -64,13 +65,13 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 	if( ( ( padding * 2 + 8 ) > windowSize.width() )
 		|| ( ( padding * 2 + 8 ) > windowSize.height() ) )
 	{
-		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid Window size %d %d", windowSize.width(),  windowSize.height()  );
+		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid Window size %d %d", windowSize.width(),  windowSize.height() );
 		return;
 	}
 
 
 	int totalTiles = widgetList.size();
-	// need plus totalTiles + 1 to account for rounding issues
+
 	int optimumTileSize = (int)optimal_size( windowSize.width()-(padding * 2), windowSize.height()-(padding * 2), totalTiles );
 	if( optimumTileSize <= 0 )
 	{
@@ -83,18 +84,23 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 
 	if( columnCnt * rowCnt < totalTiles )
 	{
+		// need plus totalTiles + 1 to account for rounding issues
 		optimumTileSize = ( int )optimal_size( windowSize.width(), windowSize.height(), totalTiles + 1 );
 	}
 
+	// limit tile size to a reasonable large size
+	if( optimumTileSize > GuiParams::getMaxTiledIconSize() )
+	{
+		optimumTileSize = GuiParams::getMaxTiledIconSize();
+	}
+
+	columnCnt = windowSize.width() / optimumTileSize;
+	rowCnt = windowSize.height() / optimumTileSize;
 	if( columnCnt * rowCnt < totalTiles )
 	{
 		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid tile size %d", optimumTileSize );
+		return;
 	}
-
-	//LogMsg( LOG_DEBUG, "repositionTiles total width %d height %d tile width %d\n", 
-	//		windowSize.width(),
-	//		windowSize.height(), 
-	//		totalTiles );
 	 
 	int tileRowOffs = padding;
 	int tileWidthAfterPadding =  optimumTileSize - ( padding * 2 );

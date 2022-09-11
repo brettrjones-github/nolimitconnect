@@ -60,6 +60,8 @@ public:
 
     /// @brief get scaling required to make icons etc. usable on high dpi screens
     static QSize                getButtonSize( EButtonSize buttonSize = eButtonSizeSmall );
+    /// @brief get maximum tiled icon size
+    static int                  getMaxTiledIconSize( void );
 
     /// @brief get height scaling required to list file entries
     static int                  getFileListEntryHeight( void );

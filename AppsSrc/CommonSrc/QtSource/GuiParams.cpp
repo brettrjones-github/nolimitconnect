@@ -101,6 +101,12 @@ QSize GuiParams::getButtonSize( EButtonSize buttonSize )
 }
 
 //============================================================================
+int GuiParams::getMaxTiledIconSize( void )
+{
+    return getButtonSize( eButtonSizeLarge ).width() * 2;
+}
+
+//============================================================================
 int GuiParams::getFileListEntryHeight( void )
 {
     return getButtonSize( eButtonSizeLarge ).height() + 4;
