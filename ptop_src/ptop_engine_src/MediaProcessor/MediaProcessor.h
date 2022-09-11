@@ -227,7 +227,6 @@ protected:
 	MediaTools&					m_MediaTools;
 	VxMutex						m_AudioMutex;
 	VxMutex						m_VideoMutex;
-	VxGUID						m_MyOnlineId;
 
 	std::vector<PluginBase *>	m_aoWantAppIdle;				// list of plugins that want called on app idle
 

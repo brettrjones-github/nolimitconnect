@@ -980,10 +980,10 @@ void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlin
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
-		if( poInfo )
+		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
+		if( netIdent )
 		{
-			plugin->fromGuiStopPluginSession( poInfo, pvUserData, lclSessionId );	
+			plugin->fromGuiStopPluginSession( netIdent, pvUserData, lclSessionId );
 		}
 		else if( onlineId == m_PktAnn.getMyOnlineId() )
 		{
@@ -991,12 +991,12 @@ void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlin
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "PluginMgr::fromGuiStopPluginSession: id not found NOT FOUND\n");
+			LogMsg( LOG_ERROR, "PluginMgr::fromGuiStopPluginSession: id not found NOT FOUND");
 		}
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStopPluginSession: invalid plugin type %d\n", ePluginType );
+		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStopPluginSession: invalid plugin type %d", ePluginType );
 	}
 }
 

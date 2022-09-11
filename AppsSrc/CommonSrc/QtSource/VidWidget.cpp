@@ -114,6 +114,12 @@ VidWidget::VidWidget(QWidget *parent)
 //============================================================================
 VidWidget::~VidWidget()
 {
+	if( m_VideoFeedId.isVxGUIDValid() && eAppModuleInvalid != m_AppModule)
+	{
+		// stop previous feed
+		m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, m_AppModule, false );
+	}
+
 	m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, false );
 }
 
@@ -138,6 +144,7 @@ void VidWidget::setAspectRatio( float aspectRatio )
 //============================================================================
 void VidWidget::setVideoFeedId( VxGUID& feedOnlineId, EAppModule appModule )
 { 
+	m_AppModule = appModule;
 	if( feedOnlineId != m_VideoFeedId )
 	{
 		if( m_VideoFeedId.isVxGUIDValid() )

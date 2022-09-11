@@ -256,7 +256,7 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		for( auto& client : m_AudioPcmList )
 		{
-			client.m_Callback->callbackPcm( client.m_UserData, m_MyOnlineId, pcmData, pcmDataLen );
+			client.m_Callback->callbackPcm( client.m_UserData, m_Engine.getMyOnlineId(), pcmData, pcmDataLen );
 		}
 
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
@@ -791,7 +791,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 		for( iter = m_VideoJpgBigList.begin(); iter != m_VideoJpgBigList.end(); ++iter )
 		{
 			MediaClient& client = (*iter);
-			client.m_Callback->callbackVideoJpgBig( client.m_UserData, m_MyOnlineId, pu8JpgData, s32JpgDataLen );
+			client.m_Callback->callbackVideoJpgBig( client.m_UserData, m_Engine.getMyOnlineId(), pu8JpgData, s32JpgDataLen );
 		}
 
 		delete[] pu8JpgData;
@@ -875,7 +875,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 			for( iter = m_VideoJpgBigList.begin(); iter != m_VideoJpgBigList.end(); ++iter )
 			{
 				MediaClient& client = (*iter);
-				client.m_Callback->callbackVideoJpgBig( client.m_UserData, m_MyOnlineId, m_PktVideoFeedPic->getDataPayload(), s32JpgDataLen );
+				client.m_Callback->callbackVideoJpgBig( client.m_UserData, m_Engine.getMyOnlineId(), m_PktVideoFeedPic->getDataPayload(), s32JpgDataLen );
 			}
 		}
 
@@ -894,7 +894,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 			for( iter = m_VideoJpgSmallList.begin(); iter != m_VideoJpgSmallList.end(); ++iter )
 			{
 				MediaClient& client = (*iter);
-				client.m_Callback->callbackVideoJpgSmall( client.m_UserData, m_MyOnlineId, m_PktVideoFeedPic->getDataPayload(), s32JpgDataLen, motion0To100000 );
+				client.m_Callback->callbackVideoJpgSmall( client.m_UserData, m_Engine.getMyOnlineId(), m_PktVideoFeedPic->getDataPayload(), s32JpgDataLen, motion0To100000 );
 			}
 
 			#ifdef DEBUG_PROCESSOR_LOCK
@@ -924,7 +924,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 			for( iter = m_VideoPktsList.begin(); iter != m_VideoPktsList.end(); ++iter )
 			{
 				MediaClient& client = (*iter);
-				client.m_Callback->callbackVideoPktPic( client.m_UserData, m_MyOnlineId, m_PktVideoFeedPic, 1 + chunkPktsRequired, 1  );
+				client.m_Callback->callbackVideoPktPic( client.m_UserData, m_Engine.getMyOnlineId(), m_PktVideoFeedPic, 1 + chunkPktsRequired, 1  );
 			}
 
 			if( chunkPktsRequired )
@@ -943,7 +943,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 					for( iter = m_VideoPktsList.begin(); iter != m_VideoPktsList.end(); ++iter )
 					{
 						MediaClient& client = (*iter);
-						client.m_Callback->callbackVideoPktPicChunk( client.m_UserData, m_MyOnlineId, pktChunk, chunkPktsRequired + 1, 2 + i );
+						client.m_Callback->callbackVideoPktPicChunk( client.m_UserData, m_Engine.getMyOnlineId(), pktChunk, chunkPktsRequired + 1, 2 + i );
 					}
 
 					curDataIdx += dataThisChunk;
@@ -1107,7 +1107,6 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 											EAppModule					appModule,
 											bool						wantInput )
 {
-	m_MyOnlineId = m_Engine.getMyOnlineId();
 	if(  false == wantInput )
 	{
 		// user wants to be removed but is probably being called from a callback function.
@@ -1256,8 +1255,6 @@ void MediaProcessor::wantAudioMediaInput(	EMediaInputType				mediaType,
 											EAppModule					appModule,
 											bool						wantInput )
 {
-
-	m_MyOnlineId = m_Engine.getMyOnlineId();
 	if( false == wantInput )
 	{
 		// user wants to be removed but is probably being called from a callback function.
@@ -1418,7 +1415,6 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 											EAppModule					appModule,
 											bool						wantInput )
 {
-	m_MyOnlineId = m_Engine.getMyOnlineId();
 	if( false == wantInput )
 	{
 		// user wants to be removed but is probably being called from a callback function.
