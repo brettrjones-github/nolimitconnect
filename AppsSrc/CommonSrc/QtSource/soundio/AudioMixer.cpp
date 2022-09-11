@@ -21,11 +21,31 @@
 
 #include <GuiInterface/IAudioInterface.h>
 
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
+
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
 
 #include <algorithm>
 #include <memory.h>
+
+namespace
+{
+    //============================================================================
+    static void* AudioMixerProcessThreadFunc( void* pvContext )
+    {
+        VxThread* poThread = (VxThread*)pvContext;
+        poThread->setIsThreadRunning( true );
+        AudioMixer* processor = (AudioMixer*)poThread->getThreadUserParam();
+        if( processor )
+        {
+            processor->processAudioMixerThreaded();
+        }
+
+        poThread->threadAboutToExit();
+        return nullptr;
+    }
+}
 
 //============================================================================
 AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent )
@@ -33,29 +53,34 @@ AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks,
 , m_AudioIoMgr( audioIoMgr )
 , m_MyApp( audioIoMgr.getMyApp() )
 , m_AudioCallbacks( audioCallbacks )
-, m_MixerThread( audioIoMgr )
 , m_MixerFormat()
  {
      m_MixerFormat.setSampleRate( 8000 );
      m_MixerFormat.setChannelCount( 1 );
      m_MixerFormat.setSampleFormat( QAudioFormat::Int16 );
-     memset( m_ModuleBufIndex, 0, sizeof( m_ModuleBufIndex ) );
 
-     for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+     memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_SAMPLES * 2 );
+     memset( m_QuietEchoBuf, 0, MIXER_CHUNK_LEN_SAMPLES * 8 * 2 );
+
+     for( int i = 0; i < MAX_GUI_MIXER_FRAMES; i++ )
      {
          m_MixerFrames[ i ].setFrameIndex( i );
+         m_MixerFrames[ i ].setAudioIoMgr( &audioIoMgr );
      }
 
-     m_MixerThread.setThreadShouldRun( true );
-     m_MixerThread.startAudioMixerThread();
+     m_EchoCanceledBitrate.setLogMessagePrefix( "Echo Canceled " );
+     m_ProcessFrameBitrate.setLogMessagePrefix( "Process Frame " );
+     m_ProcessSpeakerBitrate.setLogMessagePrefix( "Process Speaker " );
+     m_SpeakerReadBitrate.setLogMessagePrefix( "Speaker Read " );
 
-     m_ElapsedTimer.restart();
+     m_ProcessAudioMixerThread.startThread( (VX_THREAD_FUNCTION_T)AudioMixerProcessThreadFunc, this, "AudioMixerGuiProcessor" );
  }
 
 //============================================================================
 void AudioMixer::shutdownAudioMixer( void )
 {
-    m_MixerThread.stopAudioMixerThread();
+    m_ProcessAudioMixerThread.abortThreadRun( true );
+    m_AudioMixerSemaphore.signal();
 }
 
 //============================================================================
@@ -63,458 +88,324 @@ void AudioMixer::wantSpeakerOutput( bool enableOutput )
 {
     if( enableOutput )
     {
-        // reset everthing to initial start positions
-        m_MixerMutex.lock();   
-        for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
-        {
-            m_MixerFrames[ i ].clearFrame();
-        }
-
-        memset( m_ModuleBufIndex, 0, sizeof( m_ModuleBufIndex ) );
-        m_MixerReadIdx = 0;
-        m_WasReset = true;
-        m_AudioOutRead = 0;
-        m_PrevLerpedSamplesCnt = 0;
-        m_PrevLerpedSampleValue = 0;
-        m_MixerMutex.unlock();
-
-        m_ElapsedTimer.restart();
+        resetMixer();
     }
 }
 
 //============================================================================
-int AudioMixer::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t * pcmData, int pcmDataLenInBytes, bool isSilence )
+void AudioMixer::resetMixer( void )
 {
-    // add audio data to mixer.. assumes pcm signed short mono channel 8000 Hz. Mix into any existing audio if required return total written to buffer
-    if( pcmDataLenInBytes != getMixerFrameSize() )
-    {
-        LogMsg( LOG_ERROR, "AudioMixer::toMixerPcm8000HzMonoChannel audio pcm data length must be %d", getMixerFrameSize() );
-        return pcmDataLenInBytes;
-    }
-
+    // reset everthing to initial start positions
     m_MixerMutex.lock();
-    static bool firstWrite = true;
-    if( firstWrite )
+    for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
     {
-        m_ModuleBufIndex[ appModule ] = m_MixerReadIdx + 1;
-        if( m_ModuleBufIndex[ appModule ] >= MAX_MIXER_FRAMES )
-        {
-            m_ModuleBufIndex[ appModule ] = 0;
-        }
-
-        firstWrite = false;
+        m_MixerFrames[ i ].clearFrame( true );
     }
 
-    AudioMixerFrame& mixerFrame = m_MixerFrames[ getModuleFrameIndex( appModule ) ];
-    int written = mixerFrame.toMixerPcm8000HzMonoChannel( appModule, pcmData, isSilence );
-    incrementModuleFrameIndex( appModule );
+    m_MixerReadIdx = 0;
+    m_WasReset = true;
+    m_PrevLerpedSamplesCnt = 0;
+    m_PrevLerpedSampleValue = 0;
     m_MixerMutex.unlock();
-    // m_AudioCallbacks.speakerAudioPlayed( getMixerFormat(), (void*)pcmData, written );
-    // LogMsg( LOG_VERBOSE, "AudioMixer::toMixerPcm8000HzMonoChannel module %d len %d audio pcm data peak %d silence %d", appModule, pcmDataLenInBytes,
-    //    AudioUtils::getPeakPcmAmplitude( pcmData, pcmDataLenInBytes ), AudioUtils::hasSomeSilence( pcmData, pcmDataLenInBytes ) );
-
-    return written;
 }
 
 //============================================================================
-// read audio data from mixer.
-qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen, int upSampleMult, AudioSampleBuf& echoFarBuf )
+qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen )
 {
-    // because the read size cannot be controled with Qt's QAudioSink->setBufferSize the audio read request may not be a multiple of upSampleMult
-    // this means we may need to finish lerp of previous read and predictively lerp some samples at end of the request using a peak at the 
-    // value that will be the first sample of the next read. Also handle cases where partial lerped samples at end of last read need 
-    // prepended to next
-
-    /*
     if( maxlen <= 0 )
     {
-         // LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
-         return 0;
+        LogMsg( LOG_DEBUG, "readDataFromMixer 0 maxlen " );
+        return 0;
     }
-
-    if( !m_AudioIoMgr.isAudioInitialized() )
-    {
-        memset( data, 0, maxlen );
-        return maxlen;
-    }
-
-    // for test if speaker output is working without mixer involved
-    //m_AudioIoMgr.getAudioCallbacks().readGenerated4800HzMono100HzToneData( data, maxlen );
-    //m_AudioCallbacks.speakerAudioPlayed( getMixerFormat(), (void*)data, maxlen ); // causes audio popping artifacts so comment out if want pure tone
-    //mixerWasReadByOutput( (int)maxlen, upSampleMult );
-    //return maxlen;
-
-    static int readRequestCnt = 0;
-    readRequestCnt++;
-    static int16_t lastSampleOutLastRead = 0;
 
     // convert request buffer to pcm 2 byte samples
     int16_t* readReqPcmBuf = (int16_t*)data;
-    int reqSampleCnt = maxlen / 2;
+    int reqSpeakerSampleCnt = maxlen / 2;
 
-    // all data in mixer in 8000 Hz mono pcm (Int16).. use upSampleMult to convert to sample rate required by audio out
-    // you would think you could just read what bytes are availible but no. It is all or nothing else you will get missing sound and qt wigs out
-    int upSamplesToRead = reqSampleCnt / upSampleMult; // how many samples can be up sampled fully
-    int remainderSamples = reqSampleCnt % upSampleMult; // how many samples have to be partially lerped
+    int64_t timeNow = GetHighResolutionTimeMs();
+    static int64_t lastCallTime = 0;
+    int callTimeElapsed = lastCallTime ? (int)(timeNow - lastCallTime) : 0;
+    lastCallTime = timeNow;
 
-    // calculate how many lerp samples should be prepended and appended to read
-    int prependLerpCnt{ 0 };
-    int appendLerpCnt{ 0 };
+    m_SpeakerReadBitrate.addSamplesAndInterval( reqSpeakerSampleCnt, callTimeElapsed );
 
-    if( remainderSamples )
+    m_ProcessedBufMutex.lock();
+    if( reqSpeakerSampleCnt > m_SpeakerProcessedBuf.getSampleCnt() )
     {
-        if( m_PrevLerpedSamplesCnt )
-        {
-            // finish lerping the last read into beginning of this read
-            prependLerpCnt = upSampleMult - m_PrevLerpedSamplesCnt;
-            if( prependLerpCnt > remainderSamples )
-            {
-                // will need a partial read so decrement the fully upsample count
-                upSamplesToRead--;
-            }
-        }
+        static int64_t lastTime = 0;
+        int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+        lastTime = timeNow;
 
-        appendLerpCnt = reqSampleCnt - ((upSamplesToRead * upSampleMult) + prependLerpCnt);
-    }
+        LogMsg( LOG_DEBUG, "AudioMixer::readRequestFromSpeaker underrun speaker requested %d available %d elapsed %d ms",
+            reqSpeakerSampleCnt, m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
 
-    int readAppendLerpSample = 0;
-    if( appendLerpCnt )
-    {
-        readAppendLerpSample = 1;
-    }
-
-    int16_t* mixerReadBuf = new int16_t[ upSamplesToRead + readAppendLerpSample ];
-
-    int16_t peekNextSample;
-
-    // for test without mixer read involve
-    //int samplesRead = m_AudioIoMgr.getAudioCallbacks().readGenerated8000HzMono160HzToneData( (char*)mixerReadBuf, (upSamplesToRead + readAppendLerpSample) * 2, peekNextSample );
-    //int lenRead = samplesRead;
-    //samplesRead = samplesRead >> 1;
-
-    // read samples from mixer
-    int mixerSampleCnt = readDataFromMixer( mixerReadBuf, upSamplesToRead + readAppendLerpSample, peekNextSample );
-
-    // put the 8000Hz data into the echo buffer for processing
-    std::vector<int16_t> inPcmData( &mixerReadBuf[ 0 ], &mixerReadBuf[ upSamplesToRead + readAppendLerpSample - 1 ] );
-    echoFarBuf.insert( echoFarBuf.end(), inPcmData.begin(), inPcmData.end() );
-
-    m_PeakAmplitude = AudioUtils::peakPcmAmplitude0to100( mixerReadBuf, mixerSampleCnt );
-
-    int samplesRead = upSamplesToRead + readAppendLerpSample;
-
-    samplesRead -= readAppendLerpSample; // only count fully upsampleable samples.. the appended partial lerp sample will be handled seperately
-
-    int16_t appendLerpSampleValue = readAppendLerpSample ? mixerReadBuf[ samplesRead ] : mixerReadBuf[ samplesRead - 1 ];
-    int16_t nextUpSampleValue = readAppendLerpSample ? appendLerpSampleValue : peekNextSample;
-
-    //LogMsg( LOG_VERBOSE, "readDataFromMixer prev lerp cnat %d prev samp %d first %d last %d nextUpVal %d append lerp value %d  peek %d", 
-    //       m_PrevLerpedSamplesCnt, m_PrevLerpedSampleValue, mixerReadBuf[0], mixerReadBuf[ samplesRead - 1 ], nextUpSampleValue, appendLerpSampleValue, peekNextSample );
-
-    int calcSampleCnt = (samplesRead * upSampleMult) + appendLerpCnt + prependLerpCnt;
-    if( calcSampleCnt != reqSampleCnt )
-    {
-        LogMsg( LOG_VERBOSE, "readDataFromMixer incorrect sample count requested %d to read %d", reqSampleCnt, calcSampleCnt );
-    }
-
-    // fill prepended lerps
-    if( prependLerpCnt && samplesRead )
-    {
-        for( int i = 0; i < prependLerpCnt; ++i )
-        {
-            readReqPcmBuf[ i ] = AudioUtils::lerpPcm( m_PrevLerpedSampleValue, mixerReadBuf[ 0 ], upSampleMult, m_PrevLerpedSamplesCnt + i );
-        }
-    }
-
-    // fill upsamples of mixer read
-    if( 1 == upSampleMult )
-    {
-        memcpy( &readReqPcmBuf[ prependLerpCnt ], mixerReadBuf, samplesRead * 2 );
+        memset( readReqPcmBuf, 0, reqSpeakerSampleCnt * 2 );
+        m_ProcessedBufMutex.unlock();
+        return 0;
     }
     else
     {
-        AudioUtils::upsamplePcmAudioLerpNext( mixerReadBuf, samplesRead, upSampleMult, nextUpSampleValue, &readReqPcmBuf[ 0 ] );
-    }
+        static int64_t lastTime = 0;
+        int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+        lastTime = timeNow;
 
-    // fill apended lerps
-    if( appendLerpCnt && samplesRead )
-    {
-        // LogMsg( LOG_VERBOSE, "readDataFromMixer appending cnt %d from %d to %d", appendLerpCnt, appendLerpSampleValue, peekNextSample );
-        for( int i = 0; i < appendLerpCnt; ++i )
+        memcpy( readReqPcmBuf, m_SpeakerProcessedBuf.getSampleBuffer(), reqSpeakerSampleCnt * 2 );
+        m_SpeakerProcessedBuf.samplesWereRead( reqSpeakerSampleCnt );
+
+        if( timeElapsed > 300 )
         {
-            int reqBufIndex = i + prependLerpCnt + (samplesRead * upSampleMult);
-            if( reqBufIndex >= reqSampleCnt )
-            {
-                LogMsg( LOG_VERBOSE, "append lerp index %d is past end of request buffer size %d", reqBufIndex, reqSampleCnt );
-            }
-
-            readReqPcmBuf[ i + prependLerpCnt + (samplesRead * upSampleMult) ] = AudioUtils::lerpPcm( appendLerpSampleValue, peekNextSample, (float)upSampleMult, i );
+            LogMsg( LOG_DEBUG, "AudioMixer::readRequestFromSpeaker delayed success speaker samples left %d elapsed %d ms",
+                m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
         }
     }
 
-//    LogMsg( LOG_VERBOSE, "readDataFromMixer reqlen %d prepend lerp %d len %d full samples %d len %d append lerp %d len %d read append lerp sample %d", 
-//        maxlen, prependLerpCnt, prependLerpCnt * 2, samplesRead, samplesRead * upSampleMult * 2, appendLerpCnt, appendLerpCnt * 2 , readAppendLerpSample );
+    m_ProcessedBufMutex.unlock();
 
-    // determine last sample for next read
-    m_PrevLerpedSampleValue = appendLerpSampleValue;
-    m_PrevLerpedSamplesCnt = appendLerpCnt;
-    //LogMsg( LOG_VERBOSE, "readDataFromMixer m_PrevLerpedSamplesCnt %d", m_PrevLerpedSamplesCnt );
-
-    delete[] mixerReadBuf;
-    mixerWasReadByOutput( (int)maxlen, upSampleMult );
-    return maxlen;
-    */
     return maxlen;
 }
 
 //============================================================================
-void AudioMixer::mixerWasReadByOutput( int readLen, int upSampleMult )
+int AudioMixer::toGuiAudioFrameThreaded( EAppModule appModule, int16_t* pcmData, bool isSilenceIn )
 {
-    // to keep everything in mixer block size we say how many blocks would be read this time if available and keep track of the partial frame part to add to the next call
-    //m_AudioOutRead += readLen;
-    //int mixerFramesRead = m_AudioOutRead / (getMixerFrameSize() * upSampleMult);
-    //int announceAvailableSpace = mixerFramesRead * getMixerFrameSize();
-    //m_AudioOutRead -= announceAvailableSpace * upSampleMult;
-
-    // BRJ mixer thread will go away with the new design of having a timer event AudioMasterClock determine when to call fromGuiAudioOutSpaceAvail
-    // m_MixerThread.setMixerSpaceAvailable( announceAvailableSpace );
-    // m_MixerThread.releaseAudioMixerThread();
+    lockMixer();
+    AudioMixerFrame& audioFrame = getAudioWriteFrame();
+    int result = audioFrame.toMixerPcm8000HzMonoChannel( eAppModuleMicrophone, pcmData, isSilenceIn );
+    unlockMixer();
+    return result;
 }
 
 //============================================================================
-/// space available to que audio data into buffer
-int AudioMixer::audioQueFreeSpace( EAppModule appModule, bool mixerIsLocked )
+void AudioMixer::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
 {
-    int freeSpace = MAX_MIXER_FRAMES * getMixerFrameSize() - audioQueUsedSpace( appModule, mixerIsLocked );
-    if( freeSpace < 0 )
+    vx_assert( MIXER_CHUNK_LEN_SAMPLES == sampleCnt );
+
+    static int64_t lastTime = 0;
+    int64_t timeNow = GetHighResolutionTimeMs();
+    int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+    lastTime = timeNow;
+
+    m_EchoCanceledBitrate.addSamplesAndInterval( sampleCnt, timeElapsed );
+
+    if( m_AudioIoMgr.getSampleCntDebugEnable() )
     {
-        freeSpace = 0;
+        LogMsg( LOG_VERBOSE, "fromGuiEchoCanceledSamplesThreaded samples %d elapsed %d ms", sampleCnt, timeElapsed );
     }
 
-    return freeSpace;
+    toGuiAudioFrameThreaded( eAppModuleMicrophone, pcmData, isSilence );
 }
 
 //============================================================================
-/// space available to que audio data into mixer
-int AudioMixer::getAudioMixerFreeSpace( bool mixerIsLocked )
+void AudioMixer::frame80msElapsed( void )
 {
-    return MAX_MIXER_FRAMES * getMixerFrameSize() - audioQueUsedSpace( eAppModuleAll, mixerIsLocked );
+    m_AudioMixerSemaphore.signal();
 }
 
 //============================================================================
-/// space used in audio que buffer
-int AudioMixer::audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked )
+void AudioMixer::processAudioMixerThreaded( void )
 {
-    int audioUsedSpace = 0;
-    if( ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
+    while( false == m_ProcessAudioMixerThread.isAborted() )
     {
-        if( !mixerIsLocked )
+        m_AudioMixerSemaphore.wait();
+        if( m_ProcessAudioMixerThread.isAborted() )
         {
-            lockMixer();
+            LogMsg( LOG_VERBOSE, "AudioMixer::processAudioMixerThreaded aborting1" );
+            break;
         }
 
-        int frameIndex = getModuleFrameIndex( appModule );
-        for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
+        static int64_t lastTime = 0;
+        int64_t timeNow = GetHighResolutionTimeMs();
+        int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+        lastTime = timeNow;
+
+        if( m_AudioIoMgr.getAudioTimingDebugEnable() )
         {
-            if( m_MixerFrames[ frameIndex ].hasModuleAudio( appModule ) )
+            static int64_t lastSpaceAvailableTime{ 0 };
+            static int funcCallCnt{ 0 };
+            funcCallCnt++;
+            if( lastSpaceAvailableTime )
             {
-                audioUsedSpace += m_MixerFrames[ frameIndex ].audioLenInUse();
-            }
-            else
-            {
-                // ran out of audio filled by this module
-                break;
+                int timeInterval = (int)(timeNow - lastSpaceAvailableTime);
+                //LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
             }
 
-            frameIndex++;
-            if( frameIndex >= MAX_MIXER_FRAMES )
-            {
-                frameIndex = 0;
-            }
+            lastSpaceAvailableTime = timeNow;
         }
 
-        if( !mixerIsLocked )
+        static int16_t prevFrameSample = 0;
+
+        // make current frame ready for read by speakers
+        lockMixer();
+        AudioMixerFrame& audioFrame = getAudioWriteFrame();
+        audioFrame.processFrameForSpeakerOutputThreaded( prevFrameSample );
+        prevFrameSample = audioFrame.getLastEchoSample();
+
+        m_ProcessedBufMutex.lock();
+
+        if( audioFrame.echoSamplesAvailable() != MIXER_CHUNK_LEN_SAMPLES )
         {
-            unlockMixer();
-        }     
+            LogMsg( LOG_ERROR, "P Frame %d AudioMixer::processAudioMixerThreaded incorrect buffer processing should have %d samples but has %d samples elapsed %d ms",
+                audioFrame.getFrameIndex(), MIXER_CHUNK_LEN_SAMPLES, audioFrame.echoSamplesAvailable(), timeElapsed );
+        }
+
+        if( audioFrame.echoSamplesAvailable() * 6 != audioFrame.speakerSamplesAvailable() )
+        {
+            LogMsg( LOG_ERROR, "P Frame %d AudioMixer::processAudioMixerThreaded incorrect upsampling should be %d samples is %d samples elapsed %d ms",
+                audioFrame.getFrameIndex(), audioFrame.echoSamplesAvailable() * 6, audioFrame.speakerSamplesAvailable(), timeElapsed );
+        }
+
+        if( m_AudioIoMgr.getBitrateDebugEnable() )
+        {
+            m_ProcessFrameBitrate.addSamplesAndInterval( audioFrame.echoSamplesAvailable(), timeElapsed );
+            m_ProcessSpeakerBitrate.addSamplesAndInterval( audioFrame.speakerSamplesAvailable(), timeElapsed );
+        }
+
+        if( m_AudioIoMgr.getSampleCntDebugEnable() )
+        {
+            m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( audioFrame.speakerSamplesAvailable() );
+        }
+
+        m_SpeakerProcessedBuf.writeSamples( audioFrame.getSpeakerSampleBuf(), audioFrame.speakerSamplesAvailable() );
+        m_EchoProcessedBuf.writeSamples( audioFrame.getEchoSampleBuf(), audioFrame.echoSamplesAvailable() );
+
+        if( m_AudioIoMgr.getSampleCntDebugEnable() )
+        {
+            LogMsg( LOG_ERROR, "P Frame %d AudioMixer::processAudioMixerThreaded processed samples available echo %d speaker %d elapsed %d ms",
+                audioFrame.getFrameIndex(), m_EchoProcessedBuf.getSampleCnt(), m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
+        }
+
+        // move to next frame and clear it so is ready to write to
+        incrementMixerWriteIndex();
+        AudioMixerFrame& nextAudioFrame = getAudioWriteFrame();
+        nextAudioFrame.clearFrame( false );
+        incrementMixerReadIndex();
+        unlockMixer();
+
+        // let the echo canceler unlock the processed speaker samples as soon as possible to avoid
+        // stalling the qt audio device read or write call
+        m_AudioIoMgr.getAudioEchoCancel().processEchoCancelThreaded( m_EchoProcessedBuf, m_ProcessedBufMutex );
+        // m_ProcessedBufMutex.unlock();
+
+        // do output space available processing
+        processOutSpaceAvailableThreaded();
+
+        if( m_ProcessAudioMixerThread.isAborted() )
+        {
+            LogMsg( LOG_VERBOSE, "AudioMixer::processAudioMixerThreaded aborting3" );
+            break;
+        }
     }
-    else if( eAppModuleAll == appModule )
-    {
-        if( !mixerIsLocked )
-        {
-            lockMixer();
-        }
 
-        int frameIndex = m_MixerReadIdx;
-        for( int i = 0; i < MAX_MIXER_FRAMES; i++ )
-        {
-            if( m_MixerFrames[ frameIndex ].hasAnyAudio() )
-            {
-                audioUsedSpace += m_MixerFrames[ frameIndex ].audioLenInUse();
-            }
-            else
-            {
-                // ran out of audio filled by any module
-                break;
-            }
-
-            frameIndex++;
-            if( frameIndex >= MAX_MIXER_FRAMES )
-            {
-                frameIndex = 0;
-            }
-        }
-
-        if( !mixerIsLocked )
-        {
-            unlockMixer();
-        }
-    }
-
-    return audioUsedSpace;
+    LogMsg( LOG_VERBOSE, "AudioMixer::processAudioMixerThreaded leaving function" );
 }
 
 //============================================================================
-// get length of data buffered and ready for speaker out
-int AudioMixer::getDataReadyForSpeakersLen( bool mixerIsLocked )
+int AudioMixer::incrementMixerWriteIndex( void )
 {
-    return audioQueUsedSpace( eAppModuleAll, mixerIsLocked );
-}
-
-//============================================================================
-// get length of data buffered and ready for speaker total milliseconds in duration
-int AudioMixer::getDataReadyForSpeakersMs( bool mixerIsLocked )
-{
-    int bytesAudio = getDataReadyForSpeakersLen( mixerIsLocked );
-    return calcualateMixerBytesToMs( bytesAudio );
-}
-    
-//============================================================================
-int AudioMixer::calcualateMixerBytesToMs( int bytesAudio8000Hz )
-{
-    // 8000 Hz = 8000 samples per second = 8 samples per ms
-    return ( bytesAudio8000Hz / 2 ) / 8;
-}
-
-//============================================================================
-int AudioMixer::calcualateAudioOutDelayMs( void )
-{
-    int elapsedMs = (int)(m_MyApp.elapsedMilliseconds() - m_LastReadTimeStamp);
-    int msLeftInQtOut;
-    if( m_LastReadSamplesMs > elapsedMs )
+    m_MixerWriteIdx++;
+    if( m_MixerWriteIdx >= MAX_GUI_MIXER_FRAMES )
     {
-        msLeftInQtOut = m_LastReadSamplesMs - elapsedMs;
-    }
-    else
-    {
-        msLeftInQtOut = 0;
+        m_MixerWriteIdx = 0;
     }
 
-    return getDataReadyForSpeakersMs() + msLeftInQtOut;
-}
-
-//============================================================================
-// read mono 8000Hz pcm audio data from mixer.. fill silence for underrun of data. return number of silenced samples
-int AudioMixer::readDataFromMixer( int16_t* pcmRetBuf, int samplesRequested, int16_t& peekAtNextSample )
-{
-    // if want to just fill with tone generated data
-    //m_AudioIoMgr.getAudioCallbacks().readGenerated8000HzMono160HzToneData( (char*)pcmRetBuf, sampleCnt * 2, peekAtNextSample );
-    //return 0;
-
-    int sampleCnt = samplesRequested;
-
-    m_MixerMutex.lock();
-    int samplesAvailable = getDataReadyForSpeakersLen( true ) / 2;
-    int samplesThatWillBeSilence = 0;
-    if( samplesAvailable < sampleCnt )
+    if( m_AudioIoMgr.getFrameIndexDebugEnable() )
     {
-        // we do not have enough audio to satisfiy the audio out requirements
-        samplesThatWillBeSilence = sampleCnt - samplesAvailable;
-        if( m_WasReset )
+        int64_t timeNow = GetHighResolutionTimeMs();
+        static int64_t lastMixerPcmTime{ 0 };
+        static int funcCallCnt{ 0 };
+        funcCallCnt++;
+        if( lastMixerPcmTime )
         {
-            // after reset do not read from mixer until the mixer has enough to satisfy at least one read request size
-            // memset( pcmRetBuf, 0, sampleCnt * 2 ); // not required.. will get set below
-            sampleCnt = 0;
-            samplesThatWillBeSilence = 0;
+            int timeInterval = (int)(timeNow - lastMixerPcmTime);
+            int avgTimeInterval = timeInterval;
+            static std::vector<int> intervalList;
+            intervalList.push_back( timeInterval );
+            if( intervalList.size() > 20 )
+            {
+                int totalTime = 0;
+                intervalList.erase( intervalList.begin() );
+                for( auto interval : intervalList )
+                {
+                    totalTime += interval;
+                }
+
+                avgTimeInterval = totalTime / 20;
+            }
+
+
+            LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d incrementMixerWriteIndex elapsed %d ms avg elapsed %d", m_MixerWriteIdx, funcCallCnt, timeInterval, avgTimeInterval );
         }
-        else
+
+        lastMixerPcmTime = timeNow;
+    }
+
+    return m_MixerWriteIdx;
+}
+
+//============================================================================
+int AudioMixer::incrementMixerReadIndex( void )
+{
+    m_MixerReadIdx++;
+    if( m_MixerReadIdx >= MAX_GUI_MIXER_FRAMES )
+    {
+        m_MixerReadIdx = 0;
+    }
+
+    if( m_AudioIoMgr.getFrameIndexDebugEnable() )
+    {
+        int64_t timeNow = GetHighResolutionTimeMs();
+        static int64_t lastMixerPcmTime{ 0 };
+        static int funcCallCnt{ 0 };
+        funcCallCnt++;
+        if( lastMixerPcmTime )
         {
-            LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer will read %d samples past end of mixer data", samplesThatWillBeSilence );
+            int timeInterval = (int)(timeNow - lastMixerPcmTime);
+            LogMsg( LOG_VERBOSE, "R Frame %d call cnt %d incrementMixerReadIndex elapsed %d ms", m_MixerReadIdx, funcCallCnt, timeInterval );
         }
+
+        lastMixerPcmTime = timeNow;
     }
 
-    int samplesRead = 0;
-    int samplesToRead = std::min( samplesAvailable, sampleCnt );
-    if( samplesToRead )
+    return m_MixerReadIdx;
+}
+
+//============================================================================
+void AudioMixer::echoCancelSyncStateThreaded( bool inSync )
+{
+    if( inSync )
     {
-        int frameIndex = m_MixerReadIdx;
-        for( int i = 0; i < MAX_MIXER_FRAMES; ++i )
-        {
-            int samplesLeftToRead = samplesToRead - samplesRead;
-            if( !samplesLeftToRead )
-            {
-                break;
-            }
+        lockMixer();
 
-            AudioMixerFrame& mixerFrame = m_MixerFrames[ frameIndex ];
-            if( !mixerFrame.audioLenInUse() )
-            {
-                LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer Mixer Frame %d is empty", frameIndex );
-                break;
-            }
+        m_EchoCanceledBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+        m_ProcessFrameBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+        m_ProcessSpeakerBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
+        m_SpeakerReadBitrate.setIsBitrateLogEnabled( inSync && m_AudioIoMgr.getBitrateDebugEnable() );
 
-            int maxSamplesThisRead = std::min( samplesLeftToRead, getMixerSamplesPerFrame() );
-
-            int samplesThisRead = mixerFrame.readMixerFrame( &pcmRetBuf[ samplesRead ], m_SpeakersMuted, maxSamplesThisRead );
-            if( !samplesThisRead )
-            {
-                // ran out of samples
-                LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer failed to read %d samples", samplesThisRead );
-                break;
-            }
-
-            if( !mixerFrame.audioLenInUse() )
-            {
-                frameIndex = incrementMixerReadIndex();
-            }
-
-            if( samplesThisRead < 0 )
-            {
-                // programmer error
-                LogMsg( LOG_WARN, "AudioMixer::readDataFromMixer negative samplesThisRead %d", samplesThisRead );
-                break;
-            }
-
-            if( samplesThisRead > maxSamplesThisRead )
-            {
-                // programmer error
-                LogMsg( LOG_ERROR, "AudioMixer::readDataFromMixer read more samples then should samplesThisRead %d", samplesThisRead );
-                break;
-            }
-
-            samplesRead += samplesThisRead;
-        }
+        unlockMixer();
     }
+}
 
-    if( m_WasReset && samplesRead )
+//============================================================================
+void AudioMixer::microphoneDeviceEnabled( bool isEnabled )
+{
+    if( isEnabled )
     {
-        // started reading from mixer.. if do not have enough next read it will be a underrun condition
-        m_WasReset = false;
+        m_EchoCanceledBitrate.reset();
     }
+}
 
-    AudioMixerFrame& peekMixerFrame = m_MixerFrames[ m_MixerReadIdx ];
-    peekAtNextSample = peekMixerFrame.peekAtNextSampleToRead();
-
-    m_MixerMutex.unlock();
-
-    if( samplesRead + samplesThatWillBeSilence < samplesRequested )
+//============================================================================
+void AudioMixer::speakerDeviceEnabled( bool isEnabled )
+{
+    if( isEnabled )
     {
-        // not enough samples available
-        memset( &pcmRetBuf[ samplesRead ], 0, (samplesRequested - samplesRead) * 2 );
+        m_ProcessFrameBitrate.reset();
+        m_ProcessSpeakerBitrate.reset();
+        m_SpeakerReadBitrate.reset();
     }
+}
 
-    m_LastReadSamplesMs = AudioUtils::audioDurationMs( m_MixerFormat, samplesRequested * 2 );
-    m_LastReadTimeStamp = m_MyApp.elapsedMilliseconds();
-
-    return samplesRequested;
+//============================================================================
+void AudioMixer::processOutSpaceAvailableThreaded( void )
+{
+    m_MyApp.getEngine().getMediaProcessor().fromGuiAudioOutSpaceAvaiThreaded( MIXER_CHUNK_LEN_BYTES );
 }

@@ -155,11 +155,8 @@ public:
 														int yPixStride, int uPixStride, int vPixStride,
 														int imageWidth, int imageHeight, int imageRotate );
 
-	virtual void				fromGuiMicrophoneSamples( int16_t* pcmData, int pcmSampleCnt, int64_t samplesHeadTimeMs );
-	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
 	virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence );
-
-	void						fromGuiLoopbackMicToSpeakers( bool allowLoopback ) { m_LoopbackMicToSpeakers = allowLoopback; }
+	virtual void				fromGuiAudioOutSpaceAvaiThreaded( int freeSpaceLen );
 
 	void						increasePcmSampleVolume( int16_t * pcmData, uint16_t pcmDataLen, float volumePercent0To100 );
 	void						playAudio( int16_t * pcmData, int dataLenInBytes );
@@ -278,10 +275,4 @@ protected:
 	bool						m_SpeakerOutputEnabled;
 
 	bool						m_VidPktListContainsMyId;
-
-	int64_t						m_MicInputLastSampleTime{ 0 };
-	bool						m_LoopbackMicToSpeakers{ false };
-
-	VxThread					m_ProcessAudioOutThread;
-	VxSemaphore					m_AudioOutSemaphore;
 };

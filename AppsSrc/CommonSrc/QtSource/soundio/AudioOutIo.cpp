@@ -308,7 +308,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
     }
     else
     {
-        readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen, getUpsampleMultiplier(), m_EchoFarBuffer );
+        readAmount = m_AudioIoMgr.getAudioOutMixer().readRequestFromSpeaker( data, maxlen );
     }
    
     if( readAmount != maxlen )

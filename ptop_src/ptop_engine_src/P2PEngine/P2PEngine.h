@@ -241,8 +241,6 @@ public:
     virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) override;
     virtual bool				fromGuiIsSpeakerMuted( void ) override;
 
-    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
-
     virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
     virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
     virtual bool				fromGuiPlayLocalMedia( const char * fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 = 0 ) override;
@@ -403,9 +401,6 @@ public:
     virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
-
-    /// called when echo canceled microphine input is available
-    virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence ) override;
 
 	//========================================================================
 	// to gui

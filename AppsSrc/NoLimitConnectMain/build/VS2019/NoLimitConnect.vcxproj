@@ -442,7 +442,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMasterClock.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixer.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioOutIo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioSpeakerBuf.cpp" />
@@ -640,7 +639,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioLoopback.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioLoopbackFrame.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerInterface.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSampleBuf.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioSpeakerBuf.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioUtils.h" />

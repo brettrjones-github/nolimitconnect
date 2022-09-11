@@ -104,6 +104,8 @@ QMAKE_CXXFLAGS_WARN_ON += -Wno-missing-field-initializers
 android{
 QMAKE_CFLAGS_WARN_OFF -= -Wunused-private-field
 QMAKE_CFLAGS_WARN_ON += -Wno-unused-private-field
+QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-private-field
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
 }
 
 unix:!android{

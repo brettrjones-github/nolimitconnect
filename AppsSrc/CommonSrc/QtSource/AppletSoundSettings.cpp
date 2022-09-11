@@ -73,8 +73,8 @@ AppletSoundSettings::AppletSoundSettings( AppCommon& app, QWidget*	parent )
     ui.m_EchoCancelEnableCheckBox->setChecked( echoCancelEnable );
     ui.m_EchoCancelEnableCheckBox->setVisible( false );
 
-    connect( ui.m_EchoCancelEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotEchoCancelEnableChange(int)) );
-    connect( ui.m_SendMicToSpeakerCheckBox, SIGNAL( stateChanged( int ) ), this, SLOT( slotSendMicToSpeakesChange( int ) ) );
+    // connect( ui.m_EchoCancelEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotEchoCancelEnableChange(int)) );
+    // connect( ui.m_SendMicToSpeakerCheckBox, SIGNAL( stateChanged( int ) ), this, SLOT( slotSendMicToSpeakesChange( int ) ) );
 
     connectBarWidgets();
 
@@ -357,19 +357,6 @@ void AppletSoundSettings::slotTestedSoundDelayResult( int echoDelayMs )
 void AppletSoundSettings::slotAudioTestMsg( QString audioTestMsg )
 {
     setStatusLabel( audioTestMsg );
-}
-
-//============================================================================
-void AppletSoundSettings::slotEchoCancelEnableChange( int checkState )
-{
-    m_MyApp.getAppSettings().setEchoCancelEnable( checkState ? true : false );
-    //m_MyApp.getSoundMgr().setEchoCancelEnable( checkState ? true : false );
-}
-
-//============================================================================
-void AppletSoundSettings::slotSendMicToSpeakesChange( int checkState )
-{
-    m_MyApp.getEngine().getMediaProcessor().fromGuiLoopbackMicToSpeakers( checkState ? true : false );
 }
 
 //============================================================================

@@ -23,3 +23,5 @@
 #define SPEAKER_CHUNK_LEN_BYTES			(MIXER_CHUNK_LEN_SAMPLES * 6 * 2) // upsampled to 48000 1 channels length * 2 bytes per frame
 #define SPEAKER_CHUNK_LEN_SAMPLES		(MIXER_CHUNK_LEN_SAMPLES * 6) // upsampled to 48000 1 channels samples = 80 ms of 48000hz sound or 480 ms of 8000hz sound
 #define MIXER_TO_SPEAKER_MULTIPLIER		6 // 48000 * 1 channels / 8000
+
+#define MAX_GUI_MIXER_FRAMES			2

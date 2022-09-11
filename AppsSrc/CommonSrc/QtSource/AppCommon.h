@@ -264,10 +264,6 @@ public:
     virtual void				fromGuiMuteSpeaker( bool muteSpeaker ) override;
     /// Returns true if speaker is muted
     virtual bool				fromGuiIsSpeakerMuted( void ) override;
-    /// Called when need more sound for speaker output
-    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
-    /// called when echo canceled microphine input is available
-    virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence ) override;
 
     //============================================================================
     //=== to gui media/render ===//
@@ -464,16 +460,10 @@ public:
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
-
+    virtual int				    toGuiPlayAudioFrame( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
 #if ENABLE_KODI
-    virtual int				    toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes ) override;
+    virtual int				    toGuiPlayAudioFrame( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes ) override;
 #endif // ENABLE_KODI
-
-    virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
-    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
-    virtual double				toGuiGetAudioCacheTotalMs( void ) override;
-    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
 
     virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;

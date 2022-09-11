@@ -63,8 +63,7 @@ protected slots:
     void                        slotStartTestSoundDelay( void );
     void                        slotEchoDelaySaveButtonClicked( void );
     void                        slotTestedSoundDelayResult( int echoDelayMs );
-    void                        slotEchoCancelEnableChange( int checkState );
-    void                        slotSendMicToSpeakesChange( int checkState );
+    // void                        slotEchoCancelEnableChange( int checkState );
     void                        slotAudioTestState( EAudioTestState audioTestState );
     void                        slotAudioTestMsg( QString audioTestMsg );
 

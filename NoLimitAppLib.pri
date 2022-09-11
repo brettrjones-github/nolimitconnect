@@ -332,7 +332,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMasterClock.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixer.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerFrame.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerInterface.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSampleBuf.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSpeakerBuf.h \
@@ -708,7 +708,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMasterClock.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixer.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerFrame.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioMixerThread.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioOutIo.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSampleBuf.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/soundio/AudioSpeakerBuf.cpp \

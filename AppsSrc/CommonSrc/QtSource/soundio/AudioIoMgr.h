@@ -47,7 +47,6 @@ public:
 
     virtual int				    getMicrophonePeakValue0To100( void );
 
-    virtual int				    fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence );
     virtual void				fromMixerAvailablbleMixerSpace( int pcmMixerAvailableSpace );
 
     void                        setMicrophoneVolume( float volume )         { m_MicrophoneVolume = volume; }
@@ -126,27 +125,9 @@ public:
     // enable disable sound out
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
     // add audio data to play.. assumes pcm mono 8000 Hz of mixer buffer length
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
-    // delay of audio calculated from amount of data in queue
-    virtual double				toGuiGetAudioDelayMs( EAppModule appModule );
-    // delay of audio calculated from amount of data in queue
-    virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
-    // maximum queue cache size in seconds
-    virtual double				toGuiGetAudioCacheTotalMs( void ) override;
-    // maximum queue cache size in seconds
-    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
-    // amount of free queue space in bytes
-    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
+    virtual int				    toGuiPlayAudioFrame( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
 
     void						fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnts, bool isSilence );
-
-    // get length of data ready for write to speakers
-    int                         getDataReadyForSpeakersLen();
-    // get length in milliseconds of data ready for write to speakers
-    int                         getDataReadyForSpeakersMs();
-
-    int                         getAudioOutCachedMaxLength() { return AUDIO_OUT_CACHE_USABLE_SIZE; }
-    void                        resetLastSample( EAppModule appModule ) { m_MyLastAudioOutSample[ appModule ] = 0; }
 
     int                         getAudioInPeakAmplitude( void );
     int                         getAudioOutPeakAmplitude( void );
@@ -170,8 +151,6 @@ public:
 
     void                        frame80msElapsed( void );
 
-    void                        processAudioOutThreaded( void );
-
     bool                        useFixedAudioOutBufferSize( void )      { return m_UseFixedAudioOutBufferSize; }
 
 signals:
@@ -187,7 +166,6 @@ public slots:
     void                        slotAudioTestTimer( void );
 
 protected:
-    int                         getCachedDataLength( EAppModule appModule );
 
     void                        aboutToDestroy();
     // update speakers to current mode and output

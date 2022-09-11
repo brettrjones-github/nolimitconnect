@@ -26,7 +26,7 @@ AudioMasterClock::AudioMasterClock( AudioIoMgr& audioIoMgr, QObject* parent )
 	, m_MyApp( audioIoMgr.getMyApp() )
 	, m_AudioTimer(new QTimer(this))
 {
-	m_AudioTimer->setInterval( 10 );
+	m_AudioTimer->setInterval( 8 );
 	connect( m_AudioTimer, SIGNAL(timeout()), this, SLOT(slotAudioTimerTimeout()) );
 }
 
@@ -35,9 +35,7 @@ void AudioMasterClock::enableMasterClock( bool enable )
 {
 	if( enable )
 	{
-		m_NextFrameTimeMs = GetHighResolutionTimeMs() + FRAME_INTERVAL_MS;
-		m_SpeakerConsumedTime = 0;
-		m_MicConsumedTime = 0;
+		resetMasterClock();
 		m_MicConsumedTotal = 0;
 		m_SpeakerConsumedTotal = 0;
 		m_AudioTimer->start();
@@ -45,8 +43,6 @@ void AudioMasterClock::enableMasterClock( bool enable )
 	else
 	{
 		m_AudioTimer->stop();
-		m_SpeakerConsumedTime = 0;
-		m_MicConsumedTime = 0;
 	}
 }
 
@@ -54,7 +50,7 @@ void AudioMasterClock::enableMasterClock( bool enable )
 void AudioMasterClock::resetMasterClock( void )
 {
 	int64_t timeNow = GetHighResolutionTimeMs();
-	LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout reset timer now %d next %d mic consumed %d consumed %d", (int)timeNow, (int)m_NextFrameTimeMs, (int)m_MicConsumedTime, (int)m_SpeakerConsumedTime );
+	LogMsg( LOG_VERBOSE, "AudioMasterClock::resetMasterClock reset timer now %d next %d mic consumed %d consumed %d", (int)timeNow, (int)m_NextFrameTimeMs, (int)m_MicConsumedTime, (int)m_SpeakerConsumedTime );
 	m_NextFrameTimeMs = timeNow + FRAME_INTERVAL_MS;
 	m_MicConsumedTime = 0;
 	m_SpeakerConsumedTime = 0;
@@ -76,14 +72,17 @@ void AudioMasterClock::audioMicWriteDurationTime( int64_t writeDurationMs, int64
 		m_MicConsumedTime = 0;
 	}
 
-	int64_t timeNow = GetHighResolutionTimeMs();
-	static int64_t lastTime = 0;
-	int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
-	lastTime = timeNow;
-
-	if( timeElapsed && (timeElapsed < 10 || timeElapsed > 20) )
+	if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 	{
-		// LogMsg( LOG_VERBOSE, "AudioMasterClock::audioMicWriteDurationTime invalid elapsed %d ms", timeElapsed );
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastTime = 0;
+		int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
+		lastTime = timeNow;
+
+		if( timeElapsed && (timeElapsed < 10 || timeElapsed > 100) )
+		{
+			LogMsg( LOG_VERBOSE, "AudioMasterClock::audioMicWriteDurationTime invalid elapsed %d ms", timeElapsed );
+		}
 	}
 }
 

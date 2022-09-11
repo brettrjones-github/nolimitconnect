@@ -93,21 +93,21 @@ void AppCommon::slotInternalWantSpeakerOutput( EAppModule appModule, bool enable
 
 //============================================================================
 //! playback audio
-int AppCommon::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
+int AppCommon::toGuiPlayAudioFrame( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
     if( VxIsAppShuttingDown() )
     {
         return 0;
     }
 
-    return m_SoundMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
+    return m_SoundMgr.toGuiPlayAudioFrame( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
 
 
 #if ENABLE_KODI
 //============================================================================
 //! playback audio
-int AppCommon::toGuiPlayAudio( EAppModule appModule, float* pu16PcmData, int pcmDataLenInBytes )
+int AppCommon::toGuiPlayAudioFrame( EAppModule appModule, float* pu16PcmData, int pcmDataLenInBytes )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -115,54 +115,9 @@ int AppCommon::toGuiPlayAudio( EAppModule appModule, float* pu16PcmData, int pcm
 	}
 
 	//LogMsg( LOG_INFO, "slotPlayAudio %d len %d from %s\n", ePluginType, u16PcmDataLen, netIdent->getOnlineName());
-	return m_SoundMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
+	return m_SoundMgr.toGuiPlayAudioFrame( appModule, pu16PcmData, pcmDataLenInBytes );
 }
 #endif // ENABLE_KODI
-
-//============================================================================
-//! playback audio
-double AppCommon::toGuiGetAudioDelaySeconds( EAppModule appModule )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return 0;
-    }
-
-    return m_SoundMgr.toGuiGetAudioDelaySeconds( appModule );
-}
-
-//============================================================================
-double AppCommon::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return 0;
-    }
-
-    return m_SoundMgr.toGuiGetAudioCacheTotalSeconds( appModule );
-}
-
-//============================================================================
-double AppCommon::toGuiGetAudioCacheTotalMs( void )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return 0;
-	}
-
-	return m_SoundMgr.toGuiGetAudioCacheTotalMs();
-}
-
-//============================================================================
-int AppCommon::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return 0;
-    }
-
-    return m_SoundMgr.toGuiGetAudioCacheFreeSpace( appModule );
-}
 
 //============================================================================
 /// Mute/Unmute microphone
@@ -204,18 +159,4 @@ void AppCommon::fromGuiMuteSpeaker( bool muteSpeaker )
 bool AppCommon::fromGuiIsSpeakerMuted( void )
 {
     return getEngine().fromGuiIsSpeakerMuted();
-}
-
-//============================================================================
-/// Called when need more sound for speaker output
-void AppCommon::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
-{
-    getEngine().fromGuiAudioOutSpaceAvail( freeSpaceLen );
-}
-
-//============================================================================
-/// Called when need more sound for speaker output
-void AppCommon::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
-{
-	getEngine().fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
 }

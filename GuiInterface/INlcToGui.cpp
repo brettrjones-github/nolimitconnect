@@ -72,42 +72,18 @@ void INlc::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput 
 }
 
 //============================================================================
-int INlc::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
+int INlc::toGuiPlayAudioFrame( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
-    return getAppCommon().toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
+    return getAppCommon().toGuiPlayAudioFrame( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
 
 #if ENABLE_KODI
 //============================================================================
-int INlc::toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes )
+int INlc::toGuiPlayAudioFrame( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes )
 {
-    return getAppCommon().toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
+    return getAppCommon().toGuiPlayAudioFrame( appModule, pu16PcmData, pcmDataLenInBytes );
 }
 #endif // ENABLE_KODI
-
-//============================================================================
-double INlc::toGuiGetAudioDelaySeconds( EAppModule appModule )
-{
-    return getAppCommon().toGuiGetAudioDelaySeconds( appModule );
-}
-
-//============================================================================
-double INlc::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
-{
-    return getAppCommon().toGuiGetAudioCacheTotalSeconds( appModule  );
-}
-
-//============================================================================
-double INlc::toGuiGetAudioCacheTotalMs( void )
-{
-    return getAppCommon().toGuiGetAudioCacheTotalMs();
-}
-
-//============================================================================
-int INlc::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
-{
-    return getAppCommon().toGuiGetAudioCacheFreeSpace( appModule );
-}
 
 //============================================================================
 void INlc::toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture )

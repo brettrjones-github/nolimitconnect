@@ -146,51 +146,6 @@ void MediaProcessor::shutdownMediaProcessor( void )
 }
 
 //============================================================================
-void MediaProcessor::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
-{
-	std::vector<MediaClient>::iterator iter;
-	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock start" );
-	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-	m_MixerClientsMutex.lock();
-	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock done" );
-	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-	doMixerClientRemovals( m_MixerClientRemoveList );
-
-	for( iter = m_MixerList.begin(); iter != m_MixerList.end(); ++iter )
-	{
-		MediaClient& client = (*iter);
-		//LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail callbackAudioOutSpaceAvail %d", iClientIdx );
-		client.m_Callback->callbackAudioOutSpaceAvail( MIXER_CHUNK_LEN_BYTES );
-	}
-
-	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.unlock" );
-	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-	m_MixerClientsMutex.unlock();
-	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.lock()" );
-	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-	m_MixerBufferMutex.lock();
-	if( !m_MixerBufUsed || m_MuteSpeaker )
-	{
-        IToGui::getAudioRequests().toGuiPlayAudio( eAppModulePtoP, (int16_t *)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES, true );
-	}
-	else
-	{
-        IToGui::getAudioRequests().toGuiPlayAudio( eAppModulePtoP, (int16_t *)m_MixerBuf, MIXER_CHUNK_LEN_BYTES, false );
-	}
-
-	m_MixerBufUsed = false;
-
-	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.unlock()" );
-	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
-	m_MixerBufferMutex.unlock();
-}
-
-//============================================================================
 void MediaProcessor::playAudio( int16_t * pcmData, int dataLenInBytes )
 {
 	if( MIXER_CHUNK_LEN_BYTES == dataLenInBytes )
@@ -288,12 +243,6 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 	// PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
 	// it seams that microphone volume is a bit low.. especially on android so increase volume before processing
     // TODO microphone boost
-
-	if( m_LoopbackMicToSpeakers && pcmDataLen == MIXER_CHUNK_LEN_BYTES )
-	{
-		playAudio( pcmData, pcmDataLen );
-		return;
-	}
 
 	if( m_AudioPcmList.size() )
 	{
@@ -1641,37 +1590,6 @@ int MediaProcessor::myIdInVidPktListCount( void )
 }
 
 //============================================================================
-void MediaProcessor::fromGuiMicrophoneSamples( int16_t* pcmData, int sampleCnt, int64_t samplesHeadTimeMs )
-{
-	vx_assert( sampleCnt == MIXER_CHUNK_LEN_SAMPLES );
-	if( false == m_MicCaptureEnabled || !pcmData || sampleCnt < 100 )
-	{
-		// invalid params or microphone not in capture mode
-		m_AudioInSemaphore.signal();
-		return;
-	}
-
-	//if( samplesHeadTimeMs - m_MicInputLastSampleTime > 200 )
-	//{
-	//	// microphone was paused or changed or something.. throw out previous samples
-	//	m_MicInputSamples.clear();
-	//}
-
-	m_MicInputLastSampleTime = samplesHeadTimeMs;
-
-	if( m_ProcessAudioQue.size() < 5 )
-	{
-		RawAudio* rawAudio = new RawAudio( pcmData, MIXER_CHUNK_LEN_BYTES, eAppModuleMicrophone );
-
-		m_AudioQueInMutex.lock();
-		m_ProcessAudioQue.push_back( rawAudio );
-		m_AudioQueInMutex.unlock();
-	}
-
-	m_AudioInSemaphore.signal();
-}
-
-//============================================================================
 void MediaProcessor::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
 {
 	vx_assert( sampleCnt == MIXER_CHUNK_LEN_SAMPLES );
@@ -1698,4 +1616,49 @@ void MediaProcessor::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int s
 	}
 
 	m_AudioInSemaphore.signal();
+}
+
+//============================================================================
+void MediaProcessor::fromGuiAudioOutSpaceAvaiThreaded( int freeSpaceLen )
+{
+	std::vector<MediaClient>::iterator iter;
+	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock start" );
+	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
+	m_MixerClientsMutex.lock();
+	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock done" );
+	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
+	doMixerClientRemovals( m_MixerClientRemoveList );
+
+	for( iter = m_MixerList.begin(); iter != m_MixerList.end(); ++iter )
+	{
+		MediaClient& client = (*iter);
+		//LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail callbackAudioOutSpaceAvail %d", iClientIdx );
+		client.m_Callback->callbackAudioOutSpaceAvail( MIXER_CHUNK_LEN_BYTES );
+	}
+
+	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.unlock" );
+	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
+	m_MixerClientsMutex.unlock();
+	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.lock()" );
+	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
+	m_MixerBufferMutex.lock();
+	if( !m_MixerBufUsed || m_MuteSpeaker )
+	{
+		IToGui::getAudioRequests().toGuiPlayAudioFrame( eAppModulePtoP, (int16_t*)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES, true );
+	}
+	else
+	{
+		IToGui::getAudioRequests().toGuiPlayAudioFrame( eAppModulePtoP, (int16_t*)m_MixerBuf, MIXER_CHUNK_LEN_BYTES, false );
+	}
+
+	m_MixerBufUsed = false;
+
+	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.unlock()" );
+	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
+	m_MixerBufferMutex.unlock();
 }

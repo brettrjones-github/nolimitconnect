@@ -369,18 +369,6 @@ void P2PEngine::fromGuiNativeGlDestroy( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
-{
-	m_MediaProcessor.fromGuiAudioOutSpaceAvail( freeSpaceLen );
-}
-
-//============================================================================
-void P2PEngine::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence )
-{
-	m_MediaProcessor.fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
-}
-
-//============================================================================
 void P2PEngine::fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation )
 {
 	m_MediaProcessor.fromGuiVideoData( u32FourCc, pu8VidDataIn, iWidth, iHeight, u32VidDataLen, iRotation );

@@ -917,9 +917,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.h">
       <Filter>Source Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.h">
-      <Filter>Source Files\soundio</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h">
       <Filter>Source Files\GuiUser</Filter>
     </QtMoc>
@@ -1978,9 +1975,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerFrame.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerThread.cpp">
-      <Filter>Source Files\soundio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFavoriteMgr.cpp">
       <Filter>Source Files\GuiFavorite</Filter>
     </ClCompile>
@@ -2320,6 +2314,9 @@
       <Filter>Source Files\soundio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioBitrate.h">
+      <Filter>Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerInterface.h">
       <Filter>Source Files\soundio</Filter>
     </ClInclude>
   </ItemGroup>

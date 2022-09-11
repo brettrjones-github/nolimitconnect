@@ -17,7 +17,7 @@
 // because all the sound packets assume everbodys sound in in sync
 // this class will attempt to call space available every 80 ms in sync with sound consumption by speaker output
 
-#include <GuiInterface/IDefs.h>
+#include "AudioMixerInterface.h"
 #include <ptop_src/ptop_engine_src/MediaProcessor/AudioProcessorDefs.h>
 
 #include "AudioBitrate.h"
@@ -38,7 +38,7 @@ class AppCommon;
 class AudioIoMgr;
 class RawAudio;
 
-class AudioLoopback : public QObject
+class AudioLoopback : public QObject, public AudioMixerInterface
 {
 	Q_OBJECT
 public:
@@ -46,37 +46,33 @@ public:
 
 	void						audioLoopbackShutdown( void );
 
-	void                        microphoneDeviceEnabled( bool isEnabled );
-	void                        speakerDeviceEnabled( bool isEnabled );
-
-	qint64						readRequestFromSpeaker( char* data, qint64 maxlen );
-
-	void						fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnts, bool isSilence );
-	
-	void						frame80msElapsed( void );
-
 	void                        lockMixer( void )									{ m_MixerMutex.lock(); }
 	void                        unlockMixer( void )									{ m_MixerMutex.unlock(); }
 
-	void						processAudioOutThreaded( void );
+	virtual void                microphoneDeviceEnabled( bool isEnabled ) override;
+	virtual void                speakerDeviceEnabled( bool isEnabled ) override;
 
-	void						echoCancelSyncStateThreaded( bool inSync );
+	virtual qint64				readRequestFromSpeaker( char* data, qint64 maxlen ) override;
+
+	virtual void				echoCancelSyncStateThreaded( bool inSync ) override;
+
+	virtual void				frame80msElapsed( void ) override;
+	// assumes 80 ms of pcm 8000hz mono audio
+	virtual int					toGuiAudioFrameThreaded( EAppModule appModule, int16_t* pcmData, bool isSilenceIn ) override;
+
+	virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnts, bool isSilence ) override;
+
+	void						processAudioLoopbackThreaded( void );
 
 protected:
-	int                         getMixerFrameSize( void )							{ return MIXER_CHUNK_LEN_BYTES; }
-	int                         getMixerSamplesPerFrame( void )						{ return MIXER_CHUNK_LEN_SAMPLES; }
-
-	int                         getModuleFrameIndex( EAppModule appModule )			{ return m_ModuleBufIndex[ appModule ]; }
-	void                        incrementModuleFrameIndex( EAppModule appModule )	{ m_ModuleBufIndex[ appModule ]++; if( m_ModuleBufIndex[ appModule ] >= MAX_MIXER_FRAMES ) m_ModuleBufIndex[ appModule ] = 0; }
-
-	int							audioQueUsedSpace( EAppModule appModule, bool mixerIsLocked );
-	int							getDataReadyForSpeakersLen( bool mixerIsLocked );
-
 	int                         incrementMixerWriteIndex( void );
-	AudioLoopbackFrame&			getAudioWriteFrame( void )							{ return m_MixerFrames[ m_MixerWriteIdx ];  };
-	
+	AudioLoopbackFrame&			getAudioWriteFrame( void )							{ return m_MixerFrames[ m_MixerWriteIdx ]; };
+
 	int                         incrementMixerReadIndex( void );
 	AudioLoopbackFrame&			getAudioReadFrame( void )							{ return m_MixerFrames[ m_MixerReadIdx ]; };
+
+	int                         getMixerFrameSize( void )							{ return MIXER_CHUNK_LEN_BYTES; }
+	int                         getMixerSamplesPerFrame( void )						{ return MIXER_CHUNK_LEN_SAMPLES; }
 
 	void						processOutSpaceAvailable( void ) {};
 
@@ -84,35 +80,21 @@ protected:
 	AudioIoMgr&					m_AudioIoMgr;
 	AppCommon&					m_MyApp;
 
-	AudioSampleBuf				m_MicSampleBuf;
-	int64_t						m_MicInputLastSampleTime{ 0 };
+	VxThread					m_ProcessAudioLoopbackThread;
+	VxSemaphore					m_AudioLoopbackSemaphore;
 
-	VxThread					m_ProcessAudioOutThread;
-	VxSemaphore					m_AudioOutSemaphore;
-
-	int16_t						m_QuietAudioBuf[ MIXER_CHUNK_LEN_SAMPLES ];
 	int16_t						m_MixerBuf[ MIXER_CHUNK_LEN_SAMPLES ];
-	int16_t						m_QuietEchoBuf[ MIXER_CHUNK_LEN_SAMPLES * 4 ];
-	bool						m_MixerBufUsed;
+	int16_t						m_QuietEchoBuf[ MIXER_CHUNK_LEN_SAMPLES * 8 ];
 
 	QMutex                      m_MixerMutex;
-	AudioLoopbackFrame          m_MixerFrames[ MAX_MIXER_FRAMES ];
+	AudioLoopbackFrame          m_MixerFrames[ MAX_GUI_MIXER_FRAMES ];
 	int                         m_MixerWriteIdx{ 0 };
 	int                         m_MixerReadIdx{ 0 };
-	int                         m_ModuleBufIndex[ eMaxAppModule ];
-
-	int                         m_PeakAmplitude{ 0 };
 
 	int                         m_PrevLerpedSamplesCnt{ 0 };
 	int16_t                     m_PrevLerpedSampleValue{ 0 };
 
-	bool                        m_WasReset{ true };
-	int64_t                     m_LastReadTimeStamp{ 0 };
-	int                         m_LastReadSamplesMs{ 0 };
-
-	int64_t                     m_MicQueueSystemTime{ 0 };
-	int64_t                     m_MicWriteTime{ 0 };
-
+	AudioSampleBuf				m_MicSampleBuf;
 	AudioSpeakerBuf				m_SpeakerProcessedBuf;
 	AudioSpeakerBuf				m_EchoProcessedBuf;
 	QMutex                      m_ProcessedBufMutex;

@@ -17,29 +17,13 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
+
 #include <QSurface>
 #include <qmath.h>
 #include <QTimer>
 
 #include <CoreLib/VxDebug.h>
-
-namespace
-{
-    //============================================================================
-    static void* AudioOutProcessThreadFunc( void* pvContext )
-    {
-        VxThread* poThread = (VxThread*)pvContext;
-        poThread->setIsThreadRunning( true );
-        AudioIoMgr* processor = (AudioIoMgr*)poThread->getThreadUserParam();
-        if( processor )
-        {
-            processor->processAudioOutThreaded();
-        }
-
-        poThread->threadAboutToExit();
-        return nullptr;
-    }
-}
 
 
 //============================================================================
@@ -164,22 +148,10 @@ void AudioIoMgr::enableSpeakers( bool enable )
     m_AudioOutIo.wantSpeakerOutput( enable );
 }
 
-//============================================================================
-int AudioIoMgr::fromGuiMicrophoneData( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence )
-{
-    // this microphone data is already downsampled if needed to Mono channel 8000 Hz PCM audio
-    //if( m_MicrophoneVolume != 100.0f )
-    //{
-    //    AudioUtils::applyPcmVolume( m_MicrophoneVolume, (uchar*)pu16PcmData, pcmDataLenInBytes );
-    //}
-
-    return m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
-}
-
 #if ENABLE_KODI
 //============================================================================
 // add audio data to play.. assumes float 2 channel 48000 Hz so convert float to s16 pcm data before calling writeData
-int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes )
+int AudioIoMgr::toGuiPlayAudioFrame( EAppModule appModule, float * audioSamples48000, int dataLenInBytes )
 {
     // it seems Qt does not handle anything but pcm 16 bit signed samples correctly so convert to what Qt can handle
     int wroteByteCnt = 0;
@@ -202,7 +174,7 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000,
     wroteByteCnt = m_AudioOutMixer.enqueueAudioData( appModule, outAudioData, desiredWriteByteCnt, false );
     if( desiredWriteByteCnt != wroteByteCnt )
     {
-        LogMsg( LOG_DEBUG, "toGuiPlayAudio desired write len %d wrote %d ", desiredWriteByteCnt, wroteByteCnt );
+        LogMsg( LOG_DEBUG, "toGuiPlayAudioFrame desired write len %d wrote %d ", desiredWriteByteCnt, wroteByteCnt );
     }
 
     wroteByteCnt *= sizeof( float ) / sizeof( int16_t ); // amount written needs int16 to float size as far as kodi is concerned
@@ -214,15 +186,11 @@ int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, float * audioSamples48000,
 #endif // ENABLE_KODI
 
 //============================================================================
-int AudioIoMgr::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
+int AudioIoMgr::toGuiPlayAudioFrame( EAppModule appModule, int16_t* pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
-    if( isSilence )
-    {
-        m_MyLastAudioOutSample[ appModule ] = 0;
-        return pcmDataLenInBytes;
-    }
-
-    return m_AudioOutMixer.toMixerPcm8000HzMonoChannel( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
+    // assumes must be 80 ms of pcm 8000hz mono
+    vx_assert( pcmDataLenInBytes == MIXER_CHUNK_LEN_BYTES)
+    return m_AudioOutMixer.toGuiAudioFrameThreaded( appModule, pu16PcmData, isSilence );
  }
 
 //============================================================================
@@ -272,56 +240,6 @@ int AudioIoMgr::getMicrophonePeakValue0To100( void )
 }
 
 //============================================================================
-double AudioIoMgr::toGuiGetAudioDelayMs( EAppModule appModule )
-{
-    return (double)m_AudioOutMixer.calcualateMixerBytesToMs( getCachedDataLength( appModule ) );
-}
-
-//============================================================================
-double AudioIoMgr::toGuiGetAudioDelaySeconds( EAppModule appModule )
-{
-    return toGuiGetAudioDelayMs( appModule ) * 1000;
-}
-
-//============================================================================
-double AudioIoMgr::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
-{
-    return m_AudioOutMixer.getDataReadyForSpeakersMs() * 1000;
-}
-
-//============================================================================
-double AudioIoMgr::toGuiGetAudioCacheTotalMs( void )
-{
-    return m_AudioOutMixer.getDataReadyForSpeakersMs();
-}
-
-//============================================================================
-int AudioIoMgr::getCachedDataLength( EAppModule appModule )
-{
-    return m_AudioOutMixer.audioQueUsedSpace( appModule );
-}
-
-//============================================================================
-int AudioIoMgr::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
-{
-    int freeSpace = m_AudioOutMixer.audioQueFreeSpace( appModule ) - getCachedDataLength( appModule );
-    if( freeSpace < 0 ) // can happen because getCachedDataLength is all awaiting read including what is in the device
-    {
-        freeSpace = 0;
-    }
-
-    //LogMsg( LOG_DEBUG, "snd buffer free space %d", freeSpace );
-
-    if( eAppModuleKodi == appModule )
-    {
-        // for kodi the sound goes through a float to 16 bit pcm conversion so report what kodi wants
-        freeSpace *= sizeof( float ) / sizeof( uint16_t );
-    }
-
-    return freeSpace;
-}
-
-//============================================================================
 uint16_t SwapEndian16( uint16_t src )
 {
     return ( ( src & 0xFF00 ) >> 8 ) | ( ( src & 0x00FF ) << 8 );
@@ -346,19 +264,6 @@ void AudioIoMgr::microphoneStateChanged( QAudio::State newState )
 //============================================================================
 void AudioIoMgr::aboutToDestroy()
 {
-}
-
-//============================================================================
-// get length of data ready for write to speakers
-int AudioIoMgr::getDataReadyForSpeakersLen()
-{
-    return m_AudioOutMixer.getDataReadyForSpeakersLen();
-}
-
-//============================================================================
-int AudioIoMgr::getDataReadyForSpeakersMs()
-{
-    return m_AudioOutMixer.getDataReadyForSpeakersMs();
 }
 
 //============================================================================
@@ -586,7 +491,6 @@ void AudioIoMgr::slotAudioTestTimer( void )
 
         break;
 
-
     case eAudioTestStateDone:
         LogMsg( LOG_VERBOSE, "Echo Delay Test Restore Mic/Speaker states and finish" );
         m_AudioTestTimer->stop();
@@ -682,8 +586,7 @@ void AudioIoMgr::frame80msElapsed( void )
     }
     else
     {
-        IAudioCallbacks& audioCallbacks = getAudioCallbacks();
-        audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
+        m_AudioOutMixer.frame80msElapsed();
     }
 
     static int64_t endTime = 0;
@@ -695,20 +598,6 @@ void AudioIoMgr::frame80msElapsed( void )
         {
             LogMsg( LOG_VERBOSE, "AudioIoMgr::frame80msElapsed %d ms in function", elapsedTime );
         }
-    }
-}
-
-//============================================================================
-void AudioIoMgr::processAudioOutThreaded( void )
-{
-    if( getAudioLoopbackEnable() )
-    {
-        m_AudioLoopback.frame80msElapsed();
-    }
-    else
-    {
-        IAudioCallbacks& audioCallbacks = getAudioCallbacks();
-        audioCallbacks.fromGuiAudioOutSpaceAvail( AUDIO_BUF_SIZE_8000_1_S16 );
     }
 }
 
@@ -786,7 +675,6 @@ void AudioIoMgr::fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampl
     }
     else
     {
-        IAudioCallbacks& audioCallbacks = getAudioCallbacks();
-        audioCallbacks.fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
+        m_MyApp.getEngine().getMediaProcessor().fromGuiEchoCanceledSamplesThreaded( pcmData, sampleCnt, isSilence );
     }
 }

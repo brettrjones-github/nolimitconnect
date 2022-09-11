@@ -265,14 +265,11 @@ public:
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
-    virtual double  			toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
-    virtual double  			toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
-    virtual double				toGuiGetAudioCacheTotalMs( void ) override;
-    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
-    // add audio data to play.. assumes float 2 channel 48000 Hz
-    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
     // add audio data to play.. assumes pcm mono 8000 Hz
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
+    virtual int				    toGuiPlayAudioFrame( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
+#if ENABLE_KODI
+    virtual int				    toGuiPlayAudioFrame( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
+#endif // ENABLE_KODI
 
     virtual void				toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;

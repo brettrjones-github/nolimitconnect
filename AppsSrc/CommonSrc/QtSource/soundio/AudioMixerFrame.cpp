@@ -13,179 +13,242 @@
 //============================================================================
 
 #include "AudioMixerFrame.h"
+
+#include "AppCommon.h"
+#include "AudioIoMgr.h"
 #include "AudioUtils.h"
+#include "AudioSampleBuf.h"
+#include "SoundMgr.h"
 
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-void AudioMixerFrame::clearFrame( void )
+AudioMixerFrame::AudioMixerFrame()
 {
-	m_LenWrote = 0;
-	m_LenRead = 0;
+	memset( m_MixerBuf, 0, sizeof( m_MixerBuf ) );
+	memset( m_SpeakerBuf, 0, sizeof( m_SpeakerBuf ) );
+}
+
+//============================================================================
+void AudioMixerFrame::clearFrame( bool fillSilence )
+{
+	m_MixerSamplesWrote = 0;
+	m_MixerSamplesRead = 0;
+	m_SpeakerSamplesRead = 0;
+	m_SpeakerSamplesWrote = 0;
+
 	m_InputIds.clear();
+
+	m_IsSilentSamples = true;
+	m_IsProcessed = false;
+
+	if( fillSilence )
+	{
+		memset( m_MixerBuf, 0, sizeof( m_MixerBuf ) );
+		m_MixerSamplesWrote = MIXER_CHUNK_LEN_SAMPLES;
+		memset( m_SpeakerBuf, 0, sizeof( m_SpeakerBuf ) );
+		m_SpeakerSamplesWrote = SPEAKER_CHUNK_LEN_SAMPLES;
+		m_IsProcessed = true;
+	}
 }
 
 //============================================================================
 int AudioMixerFrame::audioLenInUse( void )
 {
-	return m_LenWrote - m_LenRead; // how many bytes is written and not read by audio out
+	return m_MixerSamplesWrote - m_MixerSamplesRead; // how many bytes is written and not read by audio out
 }
 
 //============================================================================
 int AudioMixerFrame::audioLenFreeSpace( void )
 {
-	return MIXER_BUF_SIZE_8000_1_S16 - ( m_LenWrote - m_LenRead ); // how many bytes is available to write into frame
+	return MIXER_CHUNK_LEN_BYTES - (m_MixerSamplesWrote - m_MixerSamplesRead); // how many bytes is available to write into frame
 }
 
 //============================================================================
-int AudioMixerFrame::readMixerFrame( int16_t* readBuf, bool speakerMuted, int samplesDesired )
+int AudioMixerFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t* pcmData, bool isSilenceIn )
 {
-	if( samplesDesired > MIXER_BUF_SIZE_8000_1_S16 / 2 )
+	static int64_t timeNow = 0;
+	static int64_t lastMixerPcmTime{ 0 };
+
+	lastMixerPcmTime = timeNow;
+	timeNow = GetHighResolutionTimeMs();
+
+	if( hasModuleAudio( appModule ) )
 	{
-		LogMsg( LOG_ERROR, "AudioMixerFrame::toMixerPcm8000HzMonoChannel bad param samplesToRead %d", samplesDesired );
+		if( m_AudioIoMgr->getFrameTimingEnable() )
+		{		
+			static int funcCallCnt{ 0 };
+			funcCallCnt++;
+			if( lastMixerPcmTime )
+			{
+				int timeInterval = (int)(timeNow - lastMixerPcmTime);
+				LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d toMixerPcm8000HzMonoChannel module %s elapsed %d ms overrrun ", getFrameIndex(), funcCallCnt,
+					DescribeAppModule( appModule ), timeInterval );
+			}
+		}
+		else
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_WARNING, "W Frame %d AudioMixerFrame::toMixerPcm8000HzMonoChannel module %s elapsed %d ms overrun", getFrameIndex(), DescribeAppModule( appModule ), timeInterval );
+		}
+		
 		return 0;
 	}
 
-	int samplesAvailable = audioSamplesInUse();
-	if( !samplesAvailable )
+	if( m_IsSilentSamples && isSilenceIn )
 	{
-		LogMsg( LOG_WARN, "AudioMixerFrame::toMixerPcm8000HzMonoChannel frame read underrun %d", samplesDesired );
+		memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_BYTES );
 	}
-
-	int samplesRead = 0;
-	int samplesToRead = std::min( samplesDesired, samplesAvailable );
-	if( samplesToRead )
+	else if( m_IsSilentSamples && !isSilenceIn )
 	{
-		samplesRead = samplesToRead;
-		if( speakerMuted )
-		{
-			memset( readBuf, 0, samplesToRead * 2 );
-		}
-		else
-		{
-				memcpy( readBuf, &m_MixerBuf[ m_LenRead ], samplesToRead * 2 );				
-		}
+		memcpy( m_MixerBuf, pcmData, MIXER_CHUNK_LEN_BYTES );
+		m_IsSilentSamples = false;
 	}
-
-	m_LenRead += samplesRead * 2;
-	if( m_LenRead >= MIXER_BUF_SIZE_8000_1_S16 )
+	else if( !m_IsSilentSamples && !isSilenceIn )
 	{
-		// frame has been completely read
-		m_LenWrote = 0;
-		m_LenRead = 0;
-		m_InputIds.clear();
-	}
-
-	return samplesRead;
-}
-
-//============================================================================
-void AudioMixerFrame::writeMixerFrame( EAppModule appModule, char* writeBuf, int dnDivide )
-{
-	if( hasModuleAudio( appModule ) )
-	{
-		// LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
-		return;
-	}
-
-	if( isSilence() )
-	{
-		if( 1 == dnDivide )
-		{
-			memcpy( m_MixerBuf, writeBuf, MIXER_BUF_SIZE_8000_1_S16 );
-		}
-		else
-		{
-			AudioUtils::dnsamplePcmAudio( (int16_t*)writeBuf, MIXER_BUF_SIZE_8000_1_S16 / 2, dnDivide, (int16_t*)m_MixerBuf );
-		}
-	}
-	else
-	{
-		if( 1 == dnDivide )
-		{
-			AudioUtils::mixPcmAudio( (int16_t *)writeBuf, (int16_t*)m_MixerBuf, MIXER_BUF_SIZE_8000_1_S16 );
-		}
-		else
-		{
-			char tempBuf[ MIXER_BUF_SIZE_8000_1_S16 ];
-			AudioUtils::dnsamplePcmAudio( (int16_t*)writeBuf, MIXER_BUF_SIZE_8000_1_S16 / 2, dnDivide, (int16_t*)tempBuf );
-
-			AudioUtils::mixPcmAudio( (int16_t*)tempBuf, (int16_t*)m_MixerBuf, MIXER_BUF_SIZE_8000_1_S16 );
-		}
+		AudioUtils::mixPcmAudio( (int16_t*)pcmData, (int16_t*)m_MixerBuf, MIXER_CHUNK_LEN_BYTES );
+		m_IsSilentSamples = false;
 	}
 
 	if( m_InputIds.empty() )
 	{
 		// first write after has been read.. reset partial read counters
-		m_LenWrote = MIXER_BUF_SIZE_8000_1_S16;
+		m_MixerSamplesWrote = MIXER_CHUNK_LEN_SAMPLES;
 	}
 	
 	m_InputIds.push_back( appModule );
+
+	if( m_AudioIoMgr->getFrameTimingEnable() )
+	{
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "W Frame %d call cnt %d toMixerPcm8000HzMonoChannel module %s elapsed %d ms", getFrameIndex(), funcCallCnt,
+				DescribeAppModule( appModule ), timeInterval );
+		}
+
+		lastMixerPcmTime = timeNow;
+	}
+
+	return MIXER_CHUNK_LEN_BYTES;
 }
 
 //============================================================================
-int AudioMixerFrame::toMixerPcm8000HzMonoChannel( EAppModule appModule, int16_t* pu16PcmData, bool isSilenceIn )
+void AudioMixerFrame::processFrameForSpeakerOutputThreaded( int16_t prevFrameSample )
 {
-	/*
-	if( hasModuleAudio( appModule ) )
+	if( (m_AudioIoMgr->getFrameTimingEnable() || m_AudioIoMgr->getFrameIndexDebugEnable()) && m_AudioIoMgr->getIsEchoCancelInSync() )
 	{
-		// LogMsg( LOG_WARNING, "AudioMixerFrame::toMixerPcm8000HzMonoChannel module %d overrun", appModule );
-		return 0;
-	}
-
-	int16_t* pcmData = (int16_t*)pu16PcmData;
-	int16_t lastVal = pcmData[ 0 ];
-	for( int i = 0; i < 100; i++ )
-	{
-		if( std::abs(  std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) > 11000 )
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
 		{
-			LogMsg( LOG_VERBOSE, "readDataFromMixer ix %d val %d lastVal %d dif %d", i, pcmData[ i ], lastVal,
-				std::abs( std::abs( lastVal ) - std::abs( pcmData[ i ] ) ) );
-		}
-
-		lastVal = pcmData[ i ];
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "P Frame %d processFrameForSpeakerOutputThreaded processing  elapsed %d ms", getFrameIndex(), timeInterval );
+		}	
 	}
 
-	if( isSilenceIn )
-	{
-		if( isSilence() )
-		{
-			// mixer frames are not cleared between reads. clear it because we are not setting it with data but are marking it as containing audio
-			memset( m_MixerBuf, 0, MIXER_BUF_SIZE_8000_1_S16 );
-		}
-	}
-	else
-	{
-		writeMixerFrame( appModule, (char*)pu16PcmData, 1 );
-	}
+	m_SpeakerSamplesRead = 0;
+	m_SpeakerSamplesWrote = SPEAKER_CHUNK_LEN_SAMPLES;
 
+	m_MixerSamplesRead = 0;
+	m_MixerSamplesWrote = MIXER_CHUNK_LEN_SAMPLES;
+
+	m_IsProcessed = true;
 
 	if( m_InputIds.empty() )
 	{
-		// first write after has been read.. reset partial read counters
-		m_LenWrote = MIXER_BUF_SIZE_8000_1_S16;
+		if( m_AudioIoMgr->getIsEchoCancelInSync() )
+		{
+			LogMsg( LOG_WARNING, "P Frame %d processFrameForSpeakerOutputThreaded processing empty frame", getFrameIndex() );
+		}
+
+		memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_BYTES );
+		memset( m_SpeakerBuf, 0, SPEAKER_CHUNK_LEN_BYTES );
+		m_PeakValue0to100 = 0;
+		return;
 	}
-	*/
 
-	memcpy( m_MixerBuf, pu16PcmData, MIXER_BUF_SIZE_8000_1_S16 );
-	m_LenWrote = MIXER_BUF_SIZE_8000_1_S16;
-	m_LenRead = 0;
-
-	if( !hasModuleAudio( appModule ) )
+	if( m_IsSilentSamples )
 	{
-		m_InputIds.push_back( appModule );
+		LogMsg( LOG_WARNING, "P Frame %d processFrameForSpeakerOutputThreaded silent frame", getFrameIndex() );
+		memset( m_MixerBuf, 0, MIXER_CHUNK_LEN_BYTES );
+		memset( m_SpeakerBuf, 0, SPEAKER_CHUNK_LEN_BYTES );
+		m_PeakValue0to100 = 0;
 	}
+	else
+	{
+		AudioUtils::upsamplePcmAudioLerpPrev( m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES, MIXER_TO_SPEAKER_MULTIPLIER, prevFrameSample, m_SpeakerBuf );
+		m_PeakValue0to100 = AudioUtils::peakPcmAmplitude0to100( m_MixerBuf, MIXER_CHUNK_LEN_SAMPLES );
+	}	
 
-	return MIXER_BUF_SIZE_8000_1_S16;
+	if( m_AudioIoMgr->getFrameTimingEnable() )
+	{
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "P Frame %d call cnt %d processFrameForSpeakerOutputThreaded elapsed %d ms app %d ms id cnt %d peak value %d", getFrameIndex(), funcCallCnt,
+				timeInterval, (int)timeNow, m_InputIds.size(), m_PeakValue0to100 );
+		}
+
+		lastMixerPcmTime = timeNow;
+	}
 }
 
 //============================================================================
-int16_t	AudioMixerFrame::peekAtNextSampleToRead( void )
+int16_t AudioMixerFrame::getLastEchoSample( void )
 {
-	if( m_InputIds.empty() || m_LenWrote - m_LenRead < 2 )
+	return m_MixerBuf[ MIXER_CHUNK_LEN_SAMPLES - 1 ];
+}
+
+//============================================================================
+int AudioMixerFrame::readSpeakerData( int16_t* pcmReadData, int speakerSamplesRequested, int& retSpeakerSamplesRead, 
+									AudioSampleBuf& echoFarBuf, int echoSamplesRequested, int& retEchoSamplesRead, int& peakValue0to100 )
+{
+	if( m_PeakValue0to100 > peakValue0to100 )
 	{
-		return 0;
+		peakValue0to100 = m_PeakValue0to100;
 	}
 
-	return *((int16_t*)(&m_MixerBuf[ m_LenRead ]));
+	int speakerSamplesToRead = std::min( speakerSamplesAvailable(), speakerSamplesRequested );
+	memcpy( pcmReadData, &m_SpeakerBuf[ m_SpeakerSamplesRead ], speakerSamplesToRead * 2 );
+	retSpeakerSamplesRead += speakerSamplesToRead;
+	speakerSamplesWereRead( speakerSamplesToRead );
+
+	int echoSamplesToRead = std::min( echoSamplesAvailable(), echoSamplesRequested );
+	echoFarBuf.writeSamples( &m_MixerBuf[ m_MixerSamplesRead ], echoSamplesToRead );
+	retEchoSamplesRead += echoSamplesToRead;
+	echoSamplesWereRead( echoSamplesToRead );
+
+	if( m_AudioIoMgr->getFrameTimingEnable() && !speakerSamplesAvailable() )
+	{
+		int64_t timeNow = GetHighResolutionTimeMs();
+		static int64_t lastMixerPcmTime{ 0 };
+		static int funcCallCnt{ 0 };
+		funcCallCnt++;
+		if( lastMixerPcmTime )
+		{
+			int timeInterval = (int)(timeNow - lastMixerPcmTime);
+			LogMsg( LOG_VERBOSE, "R Frame %d call cnt %d readSpeakerData elapsed %d ms samples echo %d speaker %d left to read echo %d speaker %d", getFrameIndex(), funcCallCnt,
+				 timeInterval, echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable(), speakerSamplesAvailable() );
+		}
+
+		lastMixerPcmTime = timeNow;
+	}
+	else if( m_AudioIoMgr->getFrameTimingEnable() )
+	{
+		LogMsg( LOG_VERBOSE, "R Frame %d partial readSpeakerData samples echo %d speaker %d left to read echo %d speaker %d", getFrameIndex(), 
+			echoSamplesToRead, speakerSamplesToRead, echoSamplesAvailable(), speakerSamplesAvailable() );
+	}
+
+	return speakerSamplesToRead;
 }

@@ -29,10 +29,6 @@ public:
     virtual void				fromGuiMuteSpeaker( bool muteSpeaker ) = 0;
     /// Returns true if speaker is muted
     virtual bool				fromGuiIsSpeakerMuted( void ) = 0;
-    /// Called when need more sound for speaker output
-    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) = 0;
-    /// called when echo canceled microphine input is available
-    virtual void				fromGuiEchoCanceledSamplesThreaded( int16_t* pcmData, int sampleCnt, bool isSilence ) = 0;
 };
 
 class IAudioRequests
@@ -42,21 +38,11 @@ public:
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) = 0;
     // enable disable speaker sound out
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) = 0;
+    // add audio data to play.. assumes pcm mono 8000 Hz
+    virtual int				    toGuiPlayAudioFrame( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) = 0;
 
 #if ENABLE_KODI
     // add audio data to play.. assumes float 2 channel 48000 Hz
-    //virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) = 0;
+    //virtual int				    toGuiPlayAudioFrame( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) = 0;
 #endif // ENABLE_KODI
-
-    // add audio data to play.. assumes pcm mono 8000 Hz
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) = 0;
-    // delay of audio calculated from amount of data in queue
-    virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) = 0;
-    // maximum queue cache size in seconds
-    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) = 0;
-    // maximum queue cache size in seconds
-    virtual double				toGuiGetAudioCacheTotalMs( void ) = 0;
-    // amount of free queue space in bytes
-    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) = 0;
-
 };
