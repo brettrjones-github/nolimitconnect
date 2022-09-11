@@ -87,7 +87,7 @@ enum EApplet
     eAppletNetworkSettings,
     eAppletPermissionList,          // list of all users plugin permission levels
     eAppletSoundSettings,
-    eAppletCamTest,
+    eAppletCamSettings,
 
     eAppletTestAndDebug,
 
@@ -141,7 +141,6 @@ enum EApplet
     eAppletApplicationInfo,
     eActivityAppSetup,	            // application initialize
     eAppletBrowseFiles,             // file directory browser
-    eAppletCamSettings,  
 
     eAppletPlayerVideo,
 

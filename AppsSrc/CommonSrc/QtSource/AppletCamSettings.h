@@ -38,6 +38,7 @@ public:
 
 signals:
     void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
+    void						signalSnapshotImage( QImage snapshotImage );
 
 protected slots:
     void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
@@ -54,16 +55,6 @@ protected:
     void						setMuteSpeakerVisibility( bool visible );
     void						setMuteMicrophoneVisibility( bool visible );
     void						setCameraButtonVisibility( bool visible );
-
-signals:
-    void						signalSnapshotImage( QImage snapshotImage );
-
-public slots:
-    void						onCancelButClick( void );
-
-protected:
-
-    virtual void                onCloseEvent( void ) override;
 
     //=== vars ===//
     Ui::AppletCamSettingsUi	    ui;

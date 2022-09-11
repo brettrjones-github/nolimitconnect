@@ -178,7 +178,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletBrowseFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamClipPlayer.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamSettings.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamTest.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletChatRoomClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletChatRoomJoin.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletChatRoomJoinSearch.cpp" />
@@ -518,7 +517,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletInviteCreate.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletInviteAccept.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamTest.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamClipPlayer.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAssetPlayerBase.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostNetworkStatus.h" />
@@ -914,7 +912,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletBrowseFiles.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamClipPlayer.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamSettings.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamTest.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletChatRoomClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletChatRoomJoin.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletChatRoomJoinSearch.ui" />

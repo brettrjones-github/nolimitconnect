@@ -48,7 +48,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletAboutNoLimitConnect:	    return eMyIconApp;
     case eAppletApplicationInfo:	        return eMyIconUnknown;
     case eAppletBrowseFiles:	            return eMyIconFileOpen;
-    case eAppletCamTest:	                return eMyIconCameraNormal;
     case eAppletCamClipPlayer:	            return eMyIconVideo;
     case eAppletChatRoomJoinSearch:	        return eMyIconSearchJoinChatRoom;
     case eAppletChatRoomJoin:	            return eMyIconClientChatRoom;
@@ -166,6 +165,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPersonOfferList:            return eMyIconPersonsOfferList;
     case eAppletPopupMenu:	                return eMyIconMenu;
 
+    case eAppletCamSettings:	            return eMyIconCamSetupNormal;
     case eAppletSoundSettings:	            return eMyIconSoundSettings;
 
     // case eAppletPlayerMusic:			return eMyIconMusic;
@@ -201,7 +201,6 @@ QString DescribeApplet( EApplet applet )
     case eAppletShareOfferList:             return QObject::tr( "Share Offer List" );
     case eAppletCamClipPlayer:              return QObject::tr( "Cam Video Player" );
     case eAppletCamSettings:                return QObject::tr( "Cam Settings" );
-    case eAppletCamTest:                    return QObject::tr( "Camera Test" );
     case eAppletChatRoomJoin:               return QObject::tr( "Join Chat Room" );
     case eAppletChatRoomJoinSearch:			return QObject::tr( "Search For Chat Room To Join" );
     case eAppletChooseThumbnail:		    return QObject::tr( "Choose Thumbnail" );

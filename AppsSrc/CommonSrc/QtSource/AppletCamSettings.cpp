@@ -45,6 +45,7 @@ AppletCamSettings::AppletCamSettings( AppCommon& app, QWidget * parent )
 , m_CloseAppletTimer( new QTimer( this ) )
 {
     setAppletType( eAppletCamSettings );
+    setPluginType( ePluginTypeCamServer );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
@@ -57,7 +58,7 @@ AppletCamSettings::AppletCamSettings( AppCommon& app, QWidget * parent )
         return;
     }
 
-    if( m_HisIdent  )
+    if( m_HisIdent )
     {
         setupCamFeed( &m_HisIdent->getNetIdent() );
     }
@@ -95,22 +96,18 @@ void AppletCamSettings::setupCamFeed( VxNetIdent* feedNetIdent )
         setMuteSpeakerVisibility( false );
         setMuteMicrophoneVisibility( true );
         setCameraButtonVisibility( true );
-        ui.m_CamVidWidget->setRecordFilePath( VxGetPersonalRecordDirectory().c_str() );
-        ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
-        ui.m_CamVidWidget->showAllControls( true );
-        ui.m_CamVidWidget->enableCamFeedControls( false );
     }
     else
     {
         setMuteSpeakerVisibility( true );
         setMuteMicrophoneVisibility( false );
         setCameraButtonVisibility( false ); 
-        ui.m_CamVidWidget->showAllControls( true );
-        ui.m_CamVidWidget->enableCamSourceControls( false );
-        ui.m_CamVidWidget->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
-        ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
     }
 
+    ui.m_CamVidWidget->showAllControls( true );
+    ui.m_CamVidWidget->enableCamSourceControls( false );
+    ui.m_CamVidWidget->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
+    ui.m_CamVidWidget->setRecordFriendName( m_CamFeedIdent->getOnlineName() );
     ui.m_CamVidWidget->setVideoFeedId( m_CamFeedId, eAppModuleCamClient );
 }
 
@@ -124,14 +121,6 @@ void AppletCamSettings::startCamFeed( void )
             if( ePluginTypeInvalid != m_ePluginType )
             {
                 m_FromGui.fromGuiStartPluginSession( m_ePluginType, m_CamFeedIdent->getMyOnlineId() );
-            }
-
-            //m_Engine.fromGuiWantMediaInput( m_CamFeedIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, true );
-            //m_Engine.fromGuiWantMediaInput( eMediaInputVideoJpgSmall, this, this, true );
-
-            if( isMyself() )
-            {
-
             }
 
             setIsCamFeedStarted( true );
@@ -152,7 +141,6 @@ void AppletCamSettings::stopCamFeed( void )
         setIsCamFeedStarted( false );
         if( m_CamFeedIdent )
         {
-            //m_Engine.fromGuiWantMediaInput( m_CamFeedIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, false );
             if( ePluginTypeInvalid != m_ePluginType )
             {
                 m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_CamFeedIdent->getMyOnlineId() );
@@ -180,18 +168,12 @@ void AppletCamSettings::hideEvent( QHideEvent * ev )
     // don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     AppletBase::hideEvent( ev );
-    //m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, false );
 }
 
 //============================================================================
 void AppletCamSettings::closeEvent( QCloseEvent * ev )
 {
     // don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
-    //m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), 0 );
-    //if( m_bIsMyself )
-    //{
-    //    m_MyApp.getAppGlobals().getUserIdent()->setHasSharedWebCam( false );
-    //}
 
     stopCamFeed();
     AppletBase::closeEvent( ev );
@@ -270,38 +252,3 @@ void AppletCamSettings::slotToGuiContactOffline( VxNetIdent * friendIdent )
         webCamSourceOffline();
     }
 }
-
-//============================================================================
-//! Implement the OnClickListener callback    
-void AppletCamSettings::onCancelButClick( void )
-{
-    onBackButtonClicked();
-}
-
-//============================================================================
-void AppletCamSettings::onCloseEvent( void )
-{
-    stopCamFeed();
-    AppletBase::onCloseEvent();
-}
-
-/*
-//============================================================================
-void AppletCamSettings::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
-{
-    if( jpgData && jpgDataLen && ( vidFeedId == m_CamFeedId ) )
-    {
-        VidWidget* camScreen = ui.m_CamVidWidget;
-        if( camScreen )
-        {
-            camScreen->playVideoFrame( vidFeedId, jpgData, jpgDataLen, motion0to100000 );
-        }
-    }
-}
-
-//============================================================================
-void AppletCamSettings::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0to100000 )
-{
-    callbackVideoJpgSmall( nullptr, vidFeedId, jpgData, jpgDataLen, motion0to100000 );
-}
-*/

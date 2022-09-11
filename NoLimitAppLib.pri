@@ -75,7 +75,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletBrowseFiles.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletCamClipPlayer.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletCamSettings.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletCamTest.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomJoin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomJoinSearch.h \
@@ -459,7 +458,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletBrowseFiles.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletCamClipPlayer.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletCamSettings.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletCamTest.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomJoin.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomJoinSearch.cpp \
@@ -800,7 +798,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletBrowseFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletCamClipPlayer.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletCamSettings.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletCamTest.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletChatRoomClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletChatRoomJoin.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletChatRoomJoinSearch.ui \
