@@ -349,8 +349,7 @@ void AudioInIo::slotCheckForBufferUnderun()
 void AudioInIo::wantMicrophoneInput( bool enableInput )
 {
     m_MicInputEnabled = enableInput;
-    m_AudioInputDevice->stop();
-    if( !m_AudioInDeviceIsStarted )
+    if( !m_AudioInDeviceIsStarted && enableInput )
     {
         m_AudioInDeviceIsStarted = true;
     }
