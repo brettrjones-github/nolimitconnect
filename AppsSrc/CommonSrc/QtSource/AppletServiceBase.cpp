@@ -72,6 +72,8 @@ void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType plug
         ui.m_RunOnStartupCheckBox->setVisible( true );
         ui.m_RunOnStartupCheckBox->setChecked( m_MyApp.getAppSettings().getRunOnStartupCamServer() );
     }
+
+    loadPluginSetting();
 }
 
 //============================================================================

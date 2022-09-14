@@ -276,7 +276,7 @@ void ThumbnailEditWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbnai
 bool ThumbnailEditWidget::loadThumbnail( VxGUID& assetId )
 {
     bool result = false;
-    if( false == assetId.isVxGUIDValid() )
+    if( assetId.isVxGUIDValid() )
     {
         ThumbInfo * thumbAsset = dynamic_cast<ThumbInfo*>(m_ThumbMgr.findAsset( assetId ));
         if( thumbAsset )
@@ -285,6 +285,10 @@ bool ThumbnailEditWidget::loadThumbnail( VxGUID& assetId )
             {
                 setAssetId( assetId );
                 result = true;
+            }
+            else
+            {
+                LogMsg( LOG_VERBOSE, "ThumbnailEditWidget::loadThumbnail failed to load thumb %s", assetId.toOnlineIdString().c_str() );
             }
         }
     }
