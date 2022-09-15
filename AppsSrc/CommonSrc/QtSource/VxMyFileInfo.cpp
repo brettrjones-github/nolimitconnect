@@ -13,9 +13,11 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-
 #include "VxMyFileInfo.h"
+
+#include "AppCommon.h"
 #include "GuiHelpers.h"
+#include "GuiPlayerMgr.h"
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxParse.h>
@@ -226,7 +228,7 @@ QString VxMyFileInfo::describeFileType( void )
 //============================================================================
 void VxMyFileInfo::playFile( AppCommon& myApp )
 {
-    GuiHelpers::playFile( myApp, getFullFileName(), 0 );
+    GetAppInstance().getPlayerMgr().playFile( getFullFileName(), 0 );
 }
 
 //============================================================================

@@ -47,9 +47,11 @@ void AppletLaunchWidget::slotAppletIconPressed( void )
         || ( eAppletNetHostingPage == m_AppletType )
         || ( eAppletShareServicesPage == m_AppletType )
         || ( eAppletTheme == m_AppletType )
-        //        || ( eAppletPlayerVideo == m_AppletType )
+        || ( eAppletPlayerCamClip == m_AppletType )
+        || ( eAppletPlayerPhoto == m_AppletType )
+        || ( eAppletPlayerVideo == m_AppletType )
 //        || ( eAppletPlayerMusic == m_AppletType )
-//        || ( eAppletPlayerPhoto == m_AppletType )
+//        
         )
     {
         m_MyApp.launchApplet( m_AppletType, m_MyApp.getAppletFrame( m_AppletType ) );

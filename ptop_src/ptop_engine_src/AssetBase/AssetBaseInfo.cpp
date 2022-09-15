@@ -388,3 +388,10 @@ void AssetBaseInfo::print( void ) const
 	LogMsg( LOG_VERBOSE, "m_PlayPosition0to100000=(%d)", m_PlayPosition0to100000 );
 	LogMsg( LOG_VERBOSE, "*End AssetBaseInfo" );
 }
+
+//============================================================================
+void AssetBaseInfo::updateAssetLength( int64_t assetLength )
+{
+	// TODO regenerate hash id
+	m_s64AssetLen = assetLength;
+}

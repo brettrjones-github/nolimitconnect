@@ -16,6 +16,7 @@
 
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "GuiPlayerMgr.h"
 
 #include "ActivityScanWebCams.h"
 #include "ToGuiActivityInterface.h"
@@ -28,9 +29,27 @@
 #include <QMessageBox>
 
 //============================================================================
+void AppCommon::toGuiPlayNlcMedia( AssetBaseInfo* assetInfo )
+{
+	LogMsg( LOG_INFO, "#### AppCommon::toGuiPlayNlcMedia %s", assetInfo->getAssetName().c_str() );
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalInternalPlayNlcMedia( *assetInfo );
+}
+
+//============================================================================
+void AppCommon::slotInternalPlayNlcMedia( AssetBaseInfo assetInfo )
+{
+	m_PlayerMgr.playMedia( assetInfo );
+}
+
+//============================================================================
 void AppCommon::toGuiWantVideoCapture( EAppModule appModule, bool wantVidCapture )
 {
-	LogMsg( LOG_INFO, "#### AppCommon::slotEnableVideoCapture %d", wantVidCapture );
+	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantVideoCapture %d", wantVidCapture );
 	if( VxIsAppShuttingDown() )
 	{
 		return;

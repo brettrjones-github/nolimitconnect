@@ -429,6 +429,7 @@ public:
     //=== to gui ===//
     //============================================================================
 
+    virtual void				toGuiPlayNlcMedia( AssetBaseInfo* assetInfo ) override;
     virtual void				toGuiLog( int logFlags, const char * pMsg ) override;
     virtual void				toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) override;
     virtual void				toGuiStatusMessage( const char * errMsg ) override;
@@ -740,6 +741,8 @@ signals:
 
     void                        signalInternalNetworkIsTested( bool requiresRelay, QString ipAddr, uint16_t ipPort );
 
+    void                        signalInternalPlayNlcMedia( AssetBaseInfo assetInfo );
+
 private slots:
     void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
     void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
@@ -801,6 +804,8 @@ private slots:
     void                        slotInternalPushToTalkStatus( VxGUID onlineId, EPushToTalkStatus pushToTalkStatus );
 
     void                        slotInternalNetworkIsTested( bool requiresRelay, QString ipAddr, uint16_t ipPort );
+
+    void                        slotInternalPlayNlcMedia( AssetBaseInfo assetInfo );
 
 protected slots:
     void						slotMainWindowResized( void );
@@ -875,7 +880,7 @@ protected:
     GuiHostedListMgr			m_HostedListMgr;
     GuiHostJoinMgr				m_HostJoinMgr;
     GuiUserJoinMgr				m_UserJoinMgr;
-    GuiPlayerMgr                 m_PlayerMgr;
+    GuiPlayerMgr                m_PlayerMgr;
     GuiWebPageMgr               m_WebPageMgr;
 
 	MyIcons					    m_MyIcons;

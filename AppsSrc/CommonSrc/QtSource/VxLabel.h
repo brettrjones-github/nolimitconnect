@@ -28,7 +28,7 @@ public:
 	virtual void				setTextBreakAnywhere( QString text, int maxLines = 2 );
 
 	void						setResourceImage( QString resourceUrl, bool scaleToLabelSize = true );
-	void						setImageFromFile( QString fileName );
+	bool						setImageFromFile( QString fileName );
 
 	void						playMotionVideoFrame( QImage& vidFrame, int motion0To100000 );
 	void                        playVideoFrame( QImage& vidFrame );
@@ -45,7 +45,7 @@ signals:
 
 protected:
 	void						resizeBitmapToFitScreen( QImage& picBitmap );
-	void						loadImageFromFile( QString fileName );
+	bool						loadImageFromFile( QString fileName );
 
 	virtual void				mousePressEvent( QMouseEvent * ev ) override;
 	virtual void				resizeEvent( QResizeEvent * ev ) override;

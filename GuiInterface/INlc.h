@@ -41,7 +41,7 @@ public:
     INlc();
     virtual  ~INlc();
 
-    static INlc&               getINlc();
+    static INlc&                getINlc();
     ILog&                       getILog()               { return m_ILog; }
     OsInterface&                getOsInterface()        { return m_OsInterface; }
     VxPeerMgr&                  getPeerMgr()            { return m_VxPeerMgr; }
@@ -74,7 +74,7 @@ public:
     bool                        getIsAppModuleRunning( EAppModule appModule )                   { return m_IsRunning[appModule]; }
 
     //=== interface ===//
-    void 				        playNlcMedia( AssetBaseInfo * assetInfo ) override;
+    void 				        toGuiPlayNlcMedia( AssetBaseInfo * assetInfo ) override;
 
     //============================================================================
     //=== to gotv events ===//

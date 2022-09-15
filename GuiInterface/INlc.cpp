@@ -249,11 +249,6 @@ void INlc::createUserDirs() const
 #endif // ENABLE_KODI
 }
 
-//============================================================================
-void INlc::playNlcMedia( AssetBaseInfo * assetInfo )
-{ 
-};
-
 //=== ffmpeg ===//
 //============================================================================
 void INlc::startupFfmpeg()

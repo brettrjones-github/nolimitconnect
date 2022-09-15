@@ -16,6 +16,7 @@
 #include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
 #include <GuiInterface/IDefs.h>
+#include <CoreLib/AssetDefs.h>
 #include <CoreLib/VxFileTypeMasks.h>
 
 #include <QColor>
@@ -124,6 +125,9 @@ public:
     static QString              describeCamStatus(QCamera::Status camStatus);
     static QString              describeCamState(QCamera::State camState);
     #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
+    static uint8_t              assetTypeToFileType( EAssetType assetType );
+    static EAssetType           fileTypeToAssetType( uint8_t fileTypeFlags );
 
 protected:
 

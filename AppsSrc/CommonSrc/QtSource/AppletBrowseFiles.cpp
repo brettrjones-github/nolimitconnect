@@ -638,7 +638,7 @@ void AppletBrowseFiles::setActionEnable( bool enable )
 {
 	m_bFetchInProgress = enable ? false : true;
 
-	LogMsg( LOG_INFO, "Fetch In Progress %d\n", m_bFetchInProgress );
+	LogMsg( LOG_INFO, "Fetch In Progress %d", m_bFetchInProgress );
 	ui.m_UpDirectoryButton->setEnabled( enable );
 }
 

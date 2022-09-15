@@ -52,7 +52,7 @@ public:
 	int							getVidImageRotation( void );
 
 	void						showOfflineImage( void );
-	void						setImageFromFile( QString fileName );
+	bool						setImageFromFile( QString fileName );
 	VxLabel *					getVideoScreen( void );
 
     void                        showUserMsgLabel( bool showCtrls );

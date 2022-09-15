@@ -4,6 +4,12 @@
 #include "AppsSrc/CommonSrc/QtSource/AppCommon.h"
 
 //============================================================================
+void INlc::toGuiPlayNlcMedia( AssetBaseInfo* assetInfo )
+{
+    getAppCommon().toGuiPlayNlcMedia( assetInfo );
+}
+
+//============================================================================
 void INlc::toGuiLog( int logLevel, const char * msg )
 {
     getAppCommon().toGuiLog( logLevel, msg );

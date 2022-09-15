@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "AppletPlayerVideo.h"
+#include "AppletPlayerPhoto.h"
 #include "ActivityBrowseFiles.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -25,23 +25,24 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletPlayerVideo::AppletPlayerVideo( AppCommon& app, QWidget * parent )
+AppletPlayerPhoto::AppletPlayerPhoto( AppCommon& app, QWidget * parent )
 : AppletPlayerBase( OBJNAME_APPLET_PLAYER_PHOTO, app, parent )
 , m_ActivityCallbacksEnabled( false )
 , m_IsPlaying( false )
 , m_SliderIsPressed( false )
 {
-	setAppletType( eAppletPlayerVideo );
-	initAppletPlayerVideo();
+	initAppletPlayerPhoto();
 }
 
 //============================================================================
-void AppletPlayerVideo::initAppletPlayerVideo( void )
+void AppletPlayerPhoto::initAppletPlayerPhoto( void )
 {
+	setAppletType( eAppletPlayerPhoto );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 
 	ui.setupUi( getContentItemsFrame() );
+	ui.m_PlayPosSlider->setVisible( false );
     setMenuBottomVisibility( true );
 
     BottomBarWidget * bottomBar = getBottomBarWidget();
@@ -67,7 +68,7 @@ void AppletPlayerVideo::initAppletPlayerVideo( void )
 }
 
 //============================================================================
-void AppletPlayerVideo::setupBottomMenu( VxMenuButton * menuButton )
+void AppletPlayerPhoto::setupBottomMenu( VxMenuButton * menuButton )
 {
     if( menuButton )
     {
@@ -83,19 +84,41 @@ void AppletPlayerVideo::setupBottomMenu( VxMenuButton * menuButton )
 }
 
 //============================================================================
-void AppletPlayerVideo::slotMenuItemSelected( int menuId, EMenuItemType menuItemType )
+bool AppletPlayerPhoto::playMedia( AssetBaseInfo& assetInfo, int pos0to100000 )
+{
+	std::string fullFileName = assetInfo.getAssetName();
+
+	QPixmap pixmap;
+	pixmap.load( fullFileName.c_str() );
+	if( pixmap.isNull() )
+	{
+		close();
+		return false;
+	}
+
+	if( ui.m_VidWidget->setImageFromFile( fullFileName.c_str() ) )
+	{
+		return true;
+	}
+	
+	close();
+	return false;
+}
+
+//============================================================================
+void AppletPlayerPhoto::slotMenuItemSelected( int menuId, EMenuItemType menuItemType )
 {
     ActivityBrowseFiles * dlgBrowse;
     switch( menuItemType )
     {
     case eMenuItemBrowse:
-        dlgBrowse = new ActivityBrowseFiles( m_MyApp, eFileFilterVideoOnly, this, true );
+        dlgBrowse = new ActivityBrowseFiles( m_MyApp, eFileFilterPhotoOnly, this, true );
         dlgBrowse->setAppletType( getAppletType() );
         dlgBrowse->exec();
         if( dlgBrowse->getWasFileSelected() )
         {
             QString fileName = dlgBrowse->getSelectedFileName();
-            playFile( fileName );
+            playFile( VXFILE_TYPE_PHOTO, fileName, VxGUID::nullVxGUID() );
          }
 
         break;
@@ -106,7 +129,7 @@ void AppletPlayerVideo::slotMenuItemSelected( int menuId, EMenuItemType menuItem
 }
 
 //============================================================================
-void AppletPlayerVideo::setAssetInfo( AssetInfo& assetInfo )
+void AppletPlayerPhoto::setAssetInfo( AssetInfo& assetInfo )
 {
 	AppletPlayerBase::setAssetInfo( assetInfo );
 	//ui.m_FileNameLabel->setText( getAssetInfo().getRemoteAssetName().c_str() );
@@ -152,46 +175,22 @@ void AppletPlayerVideo::setAssetInfo( AssetInfo& assetInfo )
 }
 
 //============================================================================
-void AppletPlayerVideo::showEvent( QShowEvent * showEvent )
+void AppletPlayerPhoto::showEvent( QShowEvent * showEvent )
 {
 	AppletPlayerBase::showEvent( showEvent );
-	if( ( false == VxIsAppShuttingDown() )
-		&& !m_IsPlaying )
-	{
-        m_MyApp.wantToGuiActivityCallbacks( this, true );
-		m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
-		setReadyForCallbacks( true );
-        if( m_AssetInfo.isValid() )
-        {
-            m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
-        }
-	}
-
-    static bool g_firstShow = true;
-    if( g_firstShow )
-    {
-        g_firstShow = false;
-        //QString videoFile = "F:/TestMedia/video_test/test_Tarzan2016_01_18_01-22-44.avi";
-        QString videoFile = "F:/TestMedia/video_test/Agents.of.S.H.I.E.L.D.S05E09/Marvels.Agents.of.S.H.I.E.L.D.S05E09.WEBRip.x264-ION10.mp4";
-        //QString videoFile = "F:/TestMedia/video_test/Test.avi";
-        //QString videoFile = "F:/TestMedia/video_test/PleaseStandByAC3-EVO.avi";
-        playFile( videoFile );
-    }
 }
 
 //============================================================================
-void AppletPlayerVideo::hideEvent( QHideEvent * hideEvent )
+void AppletPlayerPhoto::hideEvent( QHideEvent * hideEvent )
 {
     AppletPlayerBase::hideEvent( hideEvent );
-    setReadyForCallbacks( false );
-	m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, false );
-    m_MyApp.wantToGuiActivityCallbacks( this, false );
  }
 
 //============================================================================
-void AppletPlayerVideo::resizeEvent( QResizeEvent * ev )
+void AppletPlayerPhoto::resizeEvent( QResizeEvent * ev )
 {
 	AppletPlayerBase::resizeEvent( ev );
+	/*
 	if( ( false == VxIsAppShuttingDown() )
 		&& m_AssetInfo.isValid()
 		&& !m_IsPlaying
@@ -200,10 +199,11 @@ void AppletPlayerVideo::resizeEvent( QResizeEvent * ev )
 		setReadyForCallbacks( true );
 		m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
 	}
+	*/
 }
 
 //============================================================================
-void AppletPlayerVideo::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
+void AppletPlayerPhoto::toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
 	AppletPlayerBase::toGuiClientAssetAction( assetAction, assetId, pos0to100000 );
 	switch( assetAction )
@@ -231,13 +231,13 @@ void AppletPlayerVideo::toGuiClientAssetAction( EAssetAction assetAction, VxGUID
 }
 
 //============================================================================
-void AppletPlayerVideo::slotSliderPressed( void )
+void AppletPlayerPhoto::slotSliderPressed( void )
 {
 	m_SliderIsPressed = true;
 }
 
 //============================================================================
-void AppletPlayerVideo::slotSliderReleased( void )
+void AppletPlayerPhoto::slotSliderReleased( void )
 {
 	m_SliderIsPressed = false;
 	int posVal = ui.m_PlayPosSlider->value();
@@ -245,7 +245,7 @@ void AppletPlayerVideo::slotSliderReleased( void )
 }
 
 //============================================================================
-void AppletPlayerVideo::slotPlayButtonClicked( void )
+void AppletPlayerPhoto::slotPlayButtonClicked( void )
 {
 	if( m_IsPlaying )
 	{
@@ -258,7 +258,7 @@ void AppletPlayerVideo::slotPlayButtonClicked( void )
 }
 
 //========================================================================
-void AppletPlayerVideo::startMediaPlay( int startPos )
+void AppletPlayerPhoto::startMediaPlay( int startPos )
 {
 	bool playStarted = m_Engine.fromGuiAssetAction( eAssetActionPlayBegin, m_AssetInfo, startPos );
 	updateGuiPlayControls( playStarted );
@@ -269,7 +269,7 @@ void AppletPlayerVideo::startMediaPlay( int startPos )
 }
 
 //========================================================================
-void AppletPlayerVideo::updateGuiPlayControls( bool isPlaying )
+void AppletPlayerPhoto::updateGuiPlayControls( bool isPlaying )
 {
 	if( m_IsPlaying != isPlaying )
 	{
@@ -290,14 +290,14 @@ void AppletPlayerVideo::updateGuiPlayControls( bool isPlaying )
 }
 
 //============================================================================
-void AppletPlayerVideo::onAppletStop( void )
+void AppletPlayerPhoto::onAppletStop( void )
 {
 	setReadyForCallbacks( false );
 	stopMediaIfPlaying();
 }
 
 //============================================================================
-void AppletPlayerVideo::stopMediaIfPlaying( void )
+void AppletPlayerPhoto::stopMediaIfPlaying( void )
 {
 	if( m_IsPlaying )
 	{
@@ -309,7 +309,7 @@ void AppletPlayerVideo::stopMediaIfPlaying( void )
 }
 
 //============================================================================
-void AppletPlayerVideo::setReadyForCallbacks( bool isReady )
+void AppletPlayerPhoto::setReadyForCallbacks( bool isReady )
 {
 	if( m_ActivityCallbacksEnabled != isReady )
 	{
@@ -319,14 +319,14 @@ void AppletPlayerVideo::setReadyForCallbacks( bool isReady )
 }
 
 //============================================================================
-void AppletPlayerVideo::slotShredAsset( void )
+void AppletPlayerPhoto::slotShredAsset( void )
 {
 	onAppletStop();
 	//emit signalShreddingAsset( this );
 }
 
 //============================================================================
-void AppletPlayerVideo::slotPlayProgress( int pos0to100000 )
+void AppletPlayerPhoto::slotPlayProgress( int pos0to100000 )
 {
 	if( m_IsPlaying && ( false == m_SliderIsPressed ) )
 	{
@@ -335,13 +335,13 @@ void AppletPlayerVideo::slotPlayProgress( int pos0to100000 )
 }
 
 //============================================================================
-void AppletPlayerVideo::slotPlayEnd( void )
+void AppletPlayerPhoto::slotPlayEnd( void )
 {
 	//updateGuiPlayControls( false );
 }
 
 //============================================================================
-void AppletPlayerVideo::showShredder( bool show )
+void AppletPlayerPhoto::showShredder( bool show )
 {
 	//if( m_AssetInfo.isMine() )
 	//{
@@ -354,7 +354,7 @@ void AppletPlayerVideo::showShredder( bool show )
 }
 
 //============================================================================
-void AppletPlayerVideo::showXferProgress( bool show )
+void AppletPlayerPhoto::showXferProgress( bool show )
 {
 	//if( m_AssetInfo.isMine() )
 	//{
@@ -367,7 +367,7 @@ void AppletPlayerVideo::showXferProgress( bool show )
 }
 
 //============================================================================
-void AppletPlayerVideo::setXferProgress( int xferProgress )
+void AppletPlayerPhoto::setXferProgress( int xferProgress )
 {
 	//if( m_AssetInfo.isMine() )
 	//{
@@ -380,13 +380,13 @@ void AppletPlayerVideo::setXferProgress( int xferProgress )
 }
 
 //============================================================================
-void AppletPlayerVideo::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
+void AppletPlayerPhoto::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 )
 {
 
 }
 
 //============================================================================
-void AppletPlayerVideo::callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame )
+void AppletPlayerPhoto::callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame )
 {
 
 }

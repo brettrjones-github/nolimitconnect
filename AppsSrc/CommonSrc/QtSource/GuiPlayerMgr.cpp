@@ -13,9 +13,16 @@
 //============================================================================
 
 #include "GuiPlayerMgr.h"
+
+#include "ActivityBase.h"
+#include "AppCommon.h"
+#include "GuiHelpers.h"
+#include "GuiParams.h"
 #include "GuiPlayerCallback.h"
 
-#include "AppCommon.h"
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
+
+#include <CoreLib/VxFileUtil.h>
 
 //============================================================================
 GuiPlayerMgr::GuiPlayerMgr( AppCommon& app )
@@ -128,4 +135,59 @@ void GuiPlayerMgr::slotInternalPlayVideoFrame( VxGUID feedOnlineId, QImage vidFr
 	{
 		guiVidCallback->callbackGuiPlayVideoFrame( feedOnlineId, vidFrame );
 	}
+}
+
+//============================================================================
+bool GuiPlayerMgr::playFile( QString fullFileName, int pos0to100000 )
+{
+	if( fullFileName.isEmpty() )
+	{
+		LogMsg( LOG_WARNING, "GuiPlayerMgr::playFile Empty File Name" );
+		return false;
+	}
+
+	uint8_t fileType;
+	uint64_t fileLen;
+	if( !VxFileUtil::getFileTypeAndLength( fullFileName.toUtf8().constData(), fileLen, fileType ) )
+	{
+		LogMsg( LOG_WARNING, "File no longer available %s", fullFileName.toUtf8().constData() );
+		return false;
+	}
+
+	AssetInfo newAsset( GuiParams::fileTypeToAssetType( fileType ), fullFileName.toUtf8().constData(), fileLen );
+	return playMedia( newAsset );
+}
+
+//============================================================================
+bool GuiPlayerMgr::playMedia( AssetBaseInfo& assetInfo, int pos0to100000 )
+{
+	if( eAssetTypeExe == assetInfo.getAssetType() )
+	{
+		QMessageBox::warning( m_MyApp.getCentralWidget(), QObject::tr( "Attempted to play an executable which is not allowed" ), QString(assetInfo.getAssetName().c_str()) );
+		return false;
+	}
+
+	if( eAssetTypeArchives == assetInfo.getAssetType() )
+	{
+		QMessageBox::warning( m_MyApp.getCentralWidget(), QObject::tr( "Attempted to open an archive file which is not allowed" ), QString( assetInfo.getAssetName().c_str() ) );
+		return false;
+	}
+
+	EApplet appletType = GuiHelpers::getAppletThatPlaysFile( m_MyApp, assetInfo );
+	if( appletType != eAppletUnknown )
+	{
+		// launch the applet that plays this file
+		ActivityBase* applet = m_MyApp.launchApplet( appletType, m_MyApp.getCentralWidget(), "", assetInfo.getAssetUniqueId() );
+		if( applet && applet->playMedia( assetInfo, pos0to100000 ) )
+		{
+			return true;
+		}
+	}
+
+#ifdef TARGET_OS_WINDOWS
+	ShellExecuteA( 0, 0, assetInfo.getAssetName().c_str(), 0, 0, SW_SHOW );
+#else
+	QDesktopServices::openUrl( QUrl::fromLocalFile( fullFileName ) );
+#endif // TARGET_OS_WINDOWS
+	return true;
 }

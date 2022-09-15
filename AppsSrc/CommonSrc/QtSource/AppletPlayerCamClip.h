@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppletAssetPlayerBase.h"
-#include "ui_AppletCamClipPlayer.h"
+#include "ui_AppletPlayerCamClip.h"
 
 #include <CoreLib/MediaCallbackInterface.h>
 
@@ -22,12 +22,12 @@ class ThumbnailViewWidget;
 class AssetMgr;
 class IVxVidCap;
 
-class AppletCamClipPlayer : public AppletAssetPlayerBase, public MediaCallbackInterface
+class AppletPlayerCamClip : public AppletAssetPlayerBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
-	AppletCamClipPlayer( AppCommon& app, QWidget * parent = NULL, VxGUID assetId = VxGUID::nullVxGUID() );
-	virtual ~AppletCamClipPlayer() override;
+	AppletPlayerCamClip( AppCommon& app, QWidget * parent = NULL, VxGUID assetId = VxGUID::nullVxGUID() );
+	virtual ~AppletPlayerCamClip() override;
 
 	virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;

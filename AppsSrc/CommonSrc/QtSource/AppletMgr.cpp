@@ -30,7 +30,7 @@
 
 #include "AppletBrowseFiles.h"
 
-#include "AppletCamClipPlayer.h"
+#include "AppletPlayerCamClip.h"
 #include "AppletCamSettings.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletChooseThumbnail.h"
@@ -83,6 +83,7 @@
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPersonOfferList.h"
+#include "AppletPlayerPhoto.h"
 #include "AppletPlayerVideo.h"
 #include "AppletPopupMenu.h"
 #include "AppletRandomConnectJoin.h"
@@ -213,9 +214,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 	if( appletDialog )
 	{
 		bringAppletToFront( appletDialog );
-        if( applet == eAppletCamClipPlayer )
+        if( applet == eAppletPlayerCamClip )
         {
-            AppletCamClipPlayer* player = dynamic_cast<AppletCamClipPlayer*>(appletDialog);
+            AppletPlayerCamClip* player = dynamic_cast<AppletPlayerCamClip*>(appletDialog);
             if( player )
             {
                 player->setPlayerAssetId( assetId );
@@ -287,7 +288,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 
     case eAppletSharedFiles:                appletDialog = new AppletSharedFiles( m_MyApp, parent, launchParam ); break;
 
-    case eAppletCamClipPlayer:              appletDialog = new AppletCamClipPlayer( m_MyApp, parent, assetId ); break;
+    case eAppletPlayerCamClip:              appletDialog = new AppletPlayerCamClip( m_MyApp, parent, assetId ); break;
     case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
     case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
     case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
@@ -379,10 +380,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 
     case eAppletIgnoredHosts:              appletDialog = new AppletIgnoredHosts( m_MyApp, parent ); break;
 
-
-//	case eAppletPlayerVideo:
-//		appletDialog = new AppletPlayerVideo( m_MyApp, parent );
-//		break;
+    case eAppletPlayerPhoto:                appletDialog = new AppletPlayerPhoto( m_MyApp, parent ); break;
+    case eAppletPlayerVideo:                appletDialog = new AppletPlayerVideo( m_MyApp, parent ); break;
 //	case eAppletPlayerMusic:
 //		m_MyApp.errMessageBox( appletMissingTitle, "MusicPlayer Not Implemented" );
 //		return;

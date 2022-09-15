@@ -99,6 +99,7 @@ public:
 
     virtual void				setAssetLength( int64_t assetLength )           { m_s64AssetLen = assetLength; }
     virtual int64_t				getAssetLength( void )                          { return m_s64AssetLen; }
+    virtual void				updateAssetLength( int64_t assetLength );
 
     virtual void				setAssetHashId( VxSha1Hash& id )                { m_AssetHash = id; }
     virtual void				setAssetHashId( uint8_t * id )                  { m_AssetHash.setHashData( id ); }

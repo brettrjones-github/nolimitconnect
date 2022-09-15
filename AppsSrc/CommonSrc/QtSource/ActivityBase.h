@@ -29,6 +29,7 @@
 #include <QDialog>
 
 class AppCommon;
+class AssetBaseInfo;
 class IFromGui;
 class GuiUserMgr;
 class GuiOfferSession;
@@ -101,6 +102,9 @@ public:
     virtual void				setHisIdent( GuiUser * hisIdent )				    { m_HisIdent = hisIdent; }
     virtual GuiUser *		    getHisIdent( void )									{ return m_HisIdent; }
 
+	// override playMedia if is applet that plays media
+	virtual bool				playMedia( AssetBaseInfo& assetInfo, int pos0to100000 = 0 ) { return false; };
+
 	virtual void				okMessageBox( QString title, QString msg );
 	virtual void				okMessageBox2( QString title, const char * msg, ... );
 	virtual bool				yesNoMessageBox( QString title, QString msg );
@@ -128,9 +132,6 @@ public:
 	void						setTitleBarText( QString titleText );
 	void						setTitleStatusBarMsg( QString statusMsg );
 	QLabel *					getTitleStatusBarLabel( void );
-
-	void						enableAudioControls( bool enable );
-	void						enableVideoControls( bool enable );
 
 	//=== bottom bar functions ====//
 	virtual void				setPlayProgressPlayedTime( int timeSec );
@@ -214,6 +215,8 @@ public:
 	virtual void				setMenuBottomButtonColor( QColor iconColor );
 	virtual void				setExpandWindowButtonColor( QColor iconColor );
 
+	virtual bool				playFile( uint8_t fileType, QString& fullFileName, VxGUID& assetId ) { return false; }
+
 signals:
 	//=== title bar signals ====//
 	void						signalPowerButtonClicked( void );
@@ -293,8 +296,7 @@ protected:
     virtual void                updateExpandWindowIcon( void );
 	virtual void				repositionToParent( void );
 	void						playSound( ESndDef sndDef );
-	bool						playFile( QString fileName, int pos0to100000 = 0 );
-	bool						playFile( QString fileName, VxGUID& assetId, int pos0to100000 = 0 );
+	virtual bool				playFile( QString fileName, int pos0to100000 = 0 );
 	bool						confirmDeleteFile( QString fileName, bool shredFile );
     void                        fillMyNodeUrl( QLabel * myUrlLabel );
 

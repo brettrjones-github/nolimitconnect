@@ -150,46 +150,45 @@ FileShareItemWidget * AppletLibrary::fileToWidget( VxMyFileInfo& fileInfo, bool 
 
     FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( ( quint64 )poItemInfo ) );
-    connect( item, SIGNAL( signalFileShareItemClicked( QListWidgetItem* ) ), this, SLOT( slotItemClicked( QListWidgetItem* ) ) );
+    connect( item, SIGNAL( signalFileShareItemClicked(QListWidgetItem*) ), this, SLOT( slotItemClicked(QListWidgetItem*) ) );
 
     connect( item,
-             SIGNAL( signalFileShareItemClicked( QListWidgetItem* ) ),
+             SIGNAL( signalFileShareItemClicked(QListWidgetItem*) ),
              this,
-             SLOT( slotListItemClicked( QListWidgetItem* ) ) );
+             SLOT( slotListItemClicked(QListWidgetItem*) ) );
 
     connect( item,
-             SIGNAL( signalFileIconClicked( QListWidgetItem* ) ),
+             SIGNAL( signalFileIconClicked(QListWidgetItem*) ),
              this,
-             SLOT( slotListFileIconClicked( QListWidgetItem* ) ) );
+             SLOT( slotListFileIconClicked(QListWidgetItem*) ) );
 
     connect( item,
-             SIGNAL( signalPlayButtonClicked( QListWidgetItem* ) ),
+             SIGNAL( signalPlayButtonClicked(QListWidgetItem*) ),
              this,
-             SLOT( slotListPlayIconClicked( QListWidgetItem* ) ) );
+             SLOT( slotListPlayIconClicked(QListWidgetItem*) ) );
 
     connect( item,
-             SIGNAL( signalLibraryButtonClicked( QListWidgetItem* ) ),
+             SIGNAL( signalLibraryButtonClicked(QListWidgetItem*) ),
              this,
-             SLOT( slotListLibraryIconClicked( QListWidgetItem* ) ) );
+             SLOT( slotListLibraryIconClicked(QListWidgetItem*) ) );
 
     connect( item,
-             SIGNAL( signalFileShareButtonClicked( QListWidgetItem* ) ),
+             SIGNAL( signalFileShareButtonClicked(QListWidgetItem*) ),
              this,
-             SLOT( slotListShareFileIconClicked( QListWidgetItem* ) ) );
+             SLOT( slotListShareFileIconClicked(QListWidgetItem*) ) );
 
     connect( item,
-             SIGNAL( signalShredButtonClicked( QListWidgetItem* ) ),
+             SIGNAL( signalShredButtonClicked(QListWidgetItem*) ),
              this,
-             SLOT( slotListShredIconClicked( QListWidgetItem* ) ) );
+             SLOT( slotListShredIconClicked(QListWidgetItem*) ) );
 
     item->updateWidgetFromInfo();
     return item;
 }
-
 //============================================================================
 void AppletLibrary::slotListFileIconClicked( QListWidgetItem * item )
 {
-    slotListItemClicked( item );
+    slotListPlayIconClicked( item );
 }
 
 //============================================================================
@@ -246,21 +245,39 @@ void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
             // determine asset id for this file.. may be different than the one given
             VxGUID assetId = poInfo->getAssetId();
             std::string assetFileName = poInfo->getFullFileName().toUtf8().constData();
-            AssetBaseInfo* assetInfo = m_MyApp.getEngine().getAssetMgr().findAsset( assetFileName );
-            if( assetInfo && assetInfo->getAssetUniqueId().isVxGUIDValid() )
+            int64_t fileLen = VxFileUtil::fileExists( assetFileName.c_str() );
+            if( fileLen )
             {
-                assetId = assetInfo->getAssetUniqueId();
-                poInfo->setAssetId( assetId );
-            }
+                AssetBaseInfo* assetInfo = m_MyApp.getEngine().getAssetMgr().findAsset( assetFileName );
+                if( assetInfo && assetInfo->getAssetUniqueId().isVxGUIDValid() )
+                {
+                    assetId = assetInfo->getAssetUniqueId();
+                    poInfo->setAssetId( assetId );
 
-            EApplet appletType = GuiHelpers::getAppletThatPlaysFile( m_MyApp, poInfo->getFileType(), poInfo->getFullFileName(), assetId );
-            if( appletType != eAppletUnknown && assetId.isVxGUIDValid() )
+                    if( fileLen != assetInfo->getAssetLength() )
+                    {
+                        assetInfo->updateAssetLength( fileLen );
+                    }
+
+                    m_MyApp.getPlayerMgr().playMedia( *assetInfo );
+                }
+                else
+                {
+                    if( !assetId.isVxGUIDValid() )
+                    {
+                        assetId.initializeWithNewVxGUID();
+                    }
+
+                    AssetInfo newAsset( GuiParams::fileTypeToAssetType( poInfo->getFileType() ), assetFileName.c_str(), fileLen, assetId );
+                    newAsset.setLocationFlags( ASSET_LOC_FLAG_LIBRARY );
+                    m_MyApp.getEngine().fromGuiAssetAction( eAssetActionAddToAssetMgr, newAsset );
+                    m_MyApp.getPlayerMgr().playMedia( newAsset );
+                }
+            }
+            else
             {
-                // launch the applet that plays this file
-                m_MyApp.launchApplet( appletType, m_MyApp.getCentralWidget(), "", assetId);
+                QMessageBox::information( this, QObject::tr( "File Not Found" ), assetFileName.c_str(), QMessageBox::Ok );
             }
-
-            this->playFile( poInfo->getFullFileName(), assetId );
         }
     }
 }

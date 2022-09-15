@@ -17,8 +17,9 @@
 
 #include <CoreLib/VxGUID.h>
 
-class GuiPlayerCallback;
 class AppCommon;
+class AssetBaseInfo;
+class GuiPlayerCallback;
 
 class GuiPlayerMgr : public QObject
 {
@@ -30,6 +31,9 @@ public:
 	virtual ~GuiPlayerMgr() = default;
 
 	void						playerMgrStartup( void );
+
+	bool						playFile( QString fullFileName, int pos0to100000 = 0 );
+	bool						playMedia( AssetBaseInfo& assetInfo, int pos0to100000 = 0 );
 
 	void                        wantPlayVideoCallbacks( GuiPlayerCallback* client, bool enable );
 

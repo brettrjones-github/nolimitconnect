@@ -142,6 +142,8 @@ enum EApplet
     eActivityAppSetup,	            // application initialize
     eAppletBrowseFiles,             // file directory browser
 
+    eAppletPlayerCamClip,
+    eAppletPlayerPhoto,
     eAppletPlayerVideo,
 
     eAppletClientAvatarImage,	    // get users avatar imaage from other user
@@ -214,7 +216,6 @@ enum EApplet
     eAppletShareOfferList,
     eAppletPersonOfferList,	
 
-    eAppletCamClipPlayer,
     eAppletPopupMenu,
     eAppletHelpNetSignalBars,
 

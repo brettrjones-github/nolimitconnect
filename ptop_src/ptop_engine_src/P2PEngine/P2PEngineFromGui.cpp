@@ -509,7 +509,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
                 }
                 else
                 {
-                    IToGui::getToGui().playNlcMedia( assetInfo );
+                    IToGui::getToGui().toGuiPlayNlcMedia( assetInfo );
                 }
             }
             else if( eAssetTypeAudio == assetInfo->getAssetType() )
@@ -520,9 +520,13 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
                 }
                 else
                 {
-                    IToGui::getToGui().playNlcMedia( assetInfo );
+                    IToGui::getToGui().toGuiPlayNlcMedia( assetInfo );
                 }
             }
+			else if( eAssetTypePhoto == assetInfo->getAssetType() )
+			{
+				IToGui::getToGui().toGuiPlayNlcMedia( assetInfo );
+			}
         }
     }
     else

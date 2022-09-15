@@ -379,9 +379,9 @@ void VidWidget::disablePreview( bool disable )
 }
 
 //============================================================================
-void VidWidget::setImageFromFile( QString fileName )
+bool VidWidget::setImageFromFile( QString fileName )
 {
-	ui.m_VideoScreen->setImageFromFile( fileName );
+	return ui.m_VideoScreen->setImageFromFile( fileName );
 }
 
 //============================================================================

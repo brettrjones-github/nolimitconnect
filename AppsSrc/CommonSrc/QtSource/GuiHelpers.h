@@ -29,6 +29,7 @@
 class ActivityBase;
 class AppCommon;
 class AppletBase;
+class AssetBaseInfo;
 class PluginSetting;
 class PluginSettingsWidget;
 class VxNetIdent;
@@ -51,9 +52,8 @@ public:
     static bool					copyResourceToOnDiskFile( QString resourcePath, QString fileNameAndPath );
 
     static EApplet              getAppletThatPlaysFile( AppCommon& myApp, uint8_t fileType, QString fullFileName, VxGUID& assetId );
+    static EApplet              getAppletThatPlaysFile( AppCommon& myApp, AssetBaseInfo& assetInfo );
 
-	static bool				    playFile( AppCommon& myApp, QString fullFileName, int pos0to100000 );
-    static bool				    playFile( AppCommon& myApp, QString fullFileName, VxGUID& assetId, int pos0to100000 );
     static void					splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath );
 
     static bool                 isAppletAService( EApplet applet );
@@ -135,7 +135,6 @@ public:
     static bool                 makeCircleImage( QPixmap& targetPixmap );
     static uint64_t             saveToPngFile( QImage& image, QString& fileName ); // returns file length
     static uint64_t             saveToPngFile( QPixmap& pixmap, QString& fileName ); // returns file length
-
     static bool                 checkUserPermission( QString permissionName ); // returns false if user denies permission to use android hardware
 
     static void                 fillHostType( QComboBox* comboBox, bool excludePeerHost = true );

@@ -183,23 +183,25 @@ void VxLabel::setResourceImage( QString resourceUrl, bool scaleToLabelSize )
 }
 
 //============================================================================
-void VxLabel::setImageFromFile( QString fileName )
+bool VxLabel::setImageFromFile( QString fileName )
 {
 	m_ImageFileName = fileName;
-	loadImageFromFile( m_ImageFileName );
+	return loadImageFromFile( m_ImageFileName );
 }
 
 //============================================================================
-void VxLabel::loadImageFromFile( QString fileName )
+bool VxLabel::loadImageFromFile( QString fileName )
 {
 	QImage	picBitmap;
-	if( picBitmap.load( fileName ) )
+	if( picBitmap.load( fileName ) && !picBitmap.isNull() )
 	{
 		playMotionVideoFrame( picBitmap, 0 );
+		return true;
 	}
     else
     {
         LogMsg( LOG_DEBUG, "ERROR VxLabel::loadImageFromFile failed %s", fileName.toUtf8().constData() );
+		return false;
     }
 }
 

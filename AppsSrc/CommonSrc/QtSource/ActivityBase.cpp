@@ -357,13 +357,7 @@ void ActivityBase::slotShowShouldExitMsgBox( QString exitReason )
 //============================================================================
 bool ActivityBase::playFile( QString fileName, int pos0to100000 )
 {
-	return GuiHelpers::playFile( m_MyApp, fileName, pos0to100000 );
-}
-
-//============================================================================
-bool ActivityBase::playFile( QString fileName, VxGUID& assetId, int pos0to100000 )
-{
-	return GuiHelpers::playFile( m_MyApp, fileName, assetId, pos0to100000 );
+	return m_MyApp.getPlayerMgr().playFile( fileName, pos0to100000 );
 }
 
 //============================================================================

@@ -139,14 +139,14 @@ bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 	FILE * fileHandle = VxFileUtil::fileOpen( fileName, "rb" );
 	if( 0 == fileHandle )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::fromGuiIsMyP2PWebVideoFile could not open file %s\n", fileName );
+		LogMsg( LOG_ERROR, "MJPEGReader::fromGuiIsMyP2PWebVideoFile could not open file %s", fileName );
 		return false;
 	}
 
 	if( 0 != VxFileUtil::fileSeek( fileHandle, AVI_FILEPOS_MYJUNK ) )
 	{
 		fclose( fileHandle );
-		LogMsg( LOG_ERROR, "MJPEGReader::fromGuiIsMyP2PWebVideoFile could not seek file %s\n", fileName );
+		LogMsg( LOG_ERROR, "MJPEGReader::fromGuiIsMyP2PWebVideoFile could not seek file %s", fileName );
 		return false;
 	}
 
@@ -154,14 +154,14 @@ bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 	if( 32 != fread( junkBuf, 1, 32, fileHandle ) )
 	{
 		fclose( fileHandle );
-		LogMsg( LOG_ERROR, "MJPEGReader::fromGuiIsMyP2PWebVideoFile could not read file %s\n", fileName );
+		LogMsg( LOG_ERROR, "MJPEGReader::fromGuiIsMyP2PWebVideoFile could not read file %s", fileName );
 		return false;
 	}
 	
 	fclose( fileHandle );
 	if( 0 != strncmp( junkBuf, "Created by My P2P Web", 21 ) )
 	{
-		LogMsg( LOG_INFO, "MJPEGReader::fromGuiIsMyP2PWebVideoFile is not My P2P Video File %s\n", fileName );
+		LogMsg( LOG_INFO, "MJPEGReader::fromGuiIsMyP2PWebVideoFile is not My P2P Video File %s", fileName );
 		return false;
 	}
 

@@ -244,21 +244,39 @@ void AppletSharedFiles::slotListPlayIconClicked( QListWidgetItem * item )
             // determine asset id for this file.. may be different than the one given
             VxGUID assetId = poInfo->getAssetId();
             std::string assetFileName = poInfo->getFullFileName().toUtf8().constData();
-            AssetBaseInfo* assetInfo = m_MyApp.getEngine().getAssetMgr().findAsset( assetFileName );
-            if( assetInfo && assetInfo->getAssetUniqueId().isVxGUIDValid() )
+            int64_t fileLen = VxFileUtil::fileExists( assetFileName.c_str() );
+            if( fileLen )
             {
-                assetId = assetInfo->getAssetUniqueId();
-                poInfo->setAssetId( assetId );
-            }
+                AssetBaseInfo* assetInfo = m_MyApp.getEngine().getAssetMgr().findAsset( assetFileName );
+                if( assetInfo && assetInfo->getAssetUniqueId().isVxGUIDValid() )
+                {
+                    assetId = assetInfo->getAssetUniqueId();
+                    poInfo->setAssetId( assetId );
 
-            EApplet appletType = GuiHelpers::getAppletThatPlaysFile( m_MyApp, poInfo->getFileType(), poInfo->getFullFileName(), assetId );
-            if( appletType != eAppletUnknown && assetId.isVxGUIDValid() )
+                    if( fileLen != assetInfo->getAssetLength() )
+                    {
+                        assetInfo->updateAssetLength( fileLen );
+                    }
+
+                    m_MyApp.getPlayerMgr().playMedia( *assetInfo );
+                }
+                else
+                {
+                    if( !assetId.isVxGUIDValid() )
+                    {
+                        assetId.initializeWithNewVxGUID();
+                    }
+
+                    AssetInfo newAsset( GuiParams::fileTypeToAssetType( poInfo->getFileType() ), assetFileName.c_str(), fileLen, assetId );
+                    newAsset.setLocationFlags( ASSET_LOC_FLAG_SHARED_FILE );
+                    m_MyApp.getEngine().fromGuiAssetAction( eAssetActionAddToAssetMgr, newAsset );
+                    m_MyApp.getPlayerMgr().playMedia( newAsset );
+                }
+            }
+            else
             {
-                // launch the applet that plays this file
-                m_MyApp.launchApplet( appletType, m_MyApp.getCentralWidget(), "", assetId);
+                QMessageBox::information( this, QObject::tr( "File Not Found" ), assetFileName.c_str(), QMessageBox::Ok );
             }
-
-            this->playFile( poInfo->getFullFileName(), assetId );
         }
     }
 }

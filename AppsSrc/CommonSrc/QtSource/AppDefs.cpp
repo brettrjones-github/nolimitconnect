@@ -48,7 +48,10 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletAboutNoLimitConnect:	    return eMyIconApp;
     case eAppletApplicationInfo:	        return eMyIconUnknown;
     case eAppletBrowseFiles:	            return eMyIconFileOpen;
-    case eAppletCamClipPlayer:	            return eMyIconVideo;
+    case eAppletPlayerCamClip:	            return eMyIconVideo;
+    case eAppletPlayerPhoto:	            return eMyIconPhoto;
+    case eAppletPlayerVideo:			    return eMyIconVideo;
+
     case eAppletChatRoomJoinSearch:	        return eMyIconSearchJoinChatRoom;
     case eAppletChatRoomJoin:	            return eMyIconClientChatRoom;
     case eAppletClientAvatarImage:          return eMyIconAvatarImage;
@@ -83,7 +86,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletNearbyListClient:	        return eMyIconFriendBroadcast;
     case eAppletNetHostingPage:             return eMyIconServiceHostNetwork;
     case eAppletNetworkSettings:	        return eMyIconNetworkSettings;
-    case eAppletPlayerVideo:			    return eMyIconVideoPhoneNormal;
     case eAppletPersonalRecorder:		    return eMyIconNotepadNormal;
     case eAppletRandomConnectJoin:	        return eMyIconClientRandomConnect;
     case eAppletSettingsPage:		        return eMyIconSettingsGear;
@@ -199,7 +201,8 @@ QString DescribeApplet( EApplet applet )
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );
     case eAppletBrowseFiles:			    return QObject::tr( "Browse Files" );
     case eAppletShareOfferList:             return QObject::tr( "Share Offer List" );
-    case eAppletCamClipPlayer:              return QObject::tr( "Cam Video Player" );
+    case eAppletPlayerCamClip:              return QObject::tr( "Cam Video Player" );
+    case eAppletPlayerPhoto:                return QObject::tr( "Photo Viewer" );
     case eAppletCamSettings:                return QObject::tr( "Cam Settings" );
     case eAppletChatRoomJoin:               return QObject::tr( "Join Chat Room" );
     case eAppletChatRoomJoinSearch:			return QObject::tr( "Search For Chat Room To Join" );
@@ -248,7 +251,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletHostJoinRequestList:        return QObject::tr( "Join Host Requests" );
     case eAppletHostSelect:                 return QObject::tr( "Select A Host" );
     case eAppletPersonOfferList:            return QObject::tr( "Persons Offers" );
-	case eAppletPlayerVideo:			    return QObject::tr( "Video Player" );
+	case eAppletPlayerVideo:			    return QObject::tr( "Movie Video Player" );
     case eAppletPersonalRecorder:		    return QObject::tr( "Personal Notes And Records" );
 
     case eAppletTestAndDebug:			    return QObject::tr( "Test And Debug" );

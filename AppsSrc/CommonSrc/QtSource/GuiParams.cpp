@@ -1860,3 +1860,65 @@ EFileFilterType GuiParams::fileFilterToEnum( QString fileFilterName )
 
     return fileFilterType;
 }
+
+//============================================================================
+uint8_t GuiParams::assetTypeToFileType( EAssetType assetType )
+{
+    switch( assetType )
+    {
+    case eAssetTypePhoto:
+        return VXFILE_TYPE_PHOTO;
+    case eAssetTypeAudio:
+        return VXFILE_TYPE_AUDIO;
+    case eAssetTypeVideo:
+        return VXFILE_TYPE_VIDEO;
+    case eAssetTypeDocument:
+        return VXFILE_TYPE_DOC;
+    case eAssetTypeArchives:
+        return VXFILE_TYPE_ARCHIVE_OR_CDIMAGE;
+    case eAssetTypeExe:
+        return VXFILE_TYPE_EXECUTABLE;
+    case eAssetTypeDirectory:
+        return VXFILE_TYPE_DIRECTORY;
+    default:
+        return VXFILE_TYPE_OTHER;
+    }
+}
+
+//============================================================================
+EAssetType GuiParams::fileTypeToAssetType( uint8_t fileTypeFlags )
+{
+    if( fileTypeFlags & VXFILE_TYPE_PHOTO )
+    {
+        return eAssetTypePhoto;
+    }
+    else if( fileTypeFlags & VXFILE_TYPE_AUDIO )
+    {
+        return eAssetTypeAudio;
+    }
+    else if( fileTypeFlags & VXFILE_TYPE_VIDEO )
+    {
+        return eAssetTypeVideo;
+    }
+    else if( fileTypeFlags & VXFILE_TYPE_DOC )
+    {
+        return eAssetTypeDocument;
+    }
+    else if( fileTypeFlags & VXFILE_TYPE_ARCHIVE_OR_CDIMAGE )
+    {
+        return eAssetTypeArchives;
+    }
+    else if( fileTypeFlags & VXFILE_TYPE_EXECUTABLE )
+    {
+        return eAssetTypeExe;
+    }
+    else if( fileTypeFlags & VXFILE_TYPE_DIRECTORY )
+    {
+        return eAssetTypeDirectory;
+    }
+    else
+    {
+        return eAssetTypeOtherFiles;
+    }
+}
+

@@ -27,7 +27,7 @@ enum EAssetType
 	eAssetTypeExe					= 0x20,
 	eAssetTypeOtherFiles			= 0x40,
 	eAssetTypeDirectory				= 0x80,
-	// these are specific to my p2p web
+	// these are specific to ptop web
     eAssetTypeThumbnail             = 0x1000,
     eAssetTypeChatText				= 0x2000,
     eAssetTypeChatFace				= 0x4000,

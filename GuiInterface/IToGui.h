@@ -39,7 +39,7 @@ public:
     static IToGui&              getToGui();
     static IAudioRequests&      getAudioRequests();
 
-    virtual void				playNlcMedia( AssetBaseInfo * assetInfo ) {};
+    virtual void				toGuiPlayNlcMedia( AssetBaseInfo * assetInfo ) = 0;
 
 	/// Send log message to GUI
 	virtual void				toGuiLog( int logFlags, const char * pMsg ) = 0;
