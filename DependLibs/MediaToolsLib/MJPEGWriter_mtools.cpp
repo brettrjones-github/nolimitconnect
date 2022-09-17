@@ -181,10 +181,11 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 
 		if( deleteFile )
 		{
-			// no need to finish updating file.. just close it and delete it
-			fclose( m_FileHandle );
+			// no need to finish updating file.. just close it and delete it		
 			setIsRecording( false );
-			LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite shredding file %s\n", m_FileName.c_str() );
+			fclose( m_FileHandle );
+			m_FileHandle = nullptr;
+			LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite shredding file %s", m_FileName.c_str() );
 			GetVxFileShredder().shredFile( m_FileName );
 			return;
 		}
@@ -508,7 +509,7 @@ void MJPEGWriter::closeAviFile( void )
 	if( 0 != m_FileHandle )
 	{
 		fclose( m_FileHandle );
-		m_FileHandle = 0;
+		m_FileHandle = nullptr;
 	}
 
 	m_AviFileAccessMutex.unlock();

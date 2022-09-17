@@ -108,8 +108,6 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 , m_BlinkTimer( new QTimer( this ) )
 , m_BlinkState( 0 )
 {
-    m_NotifyIconOnlineColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
-    m_NotifyIconnDirectConnectColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
 	initQButtonPro();
 }
 
@@ -123,6 +121,8 @@ MyIcons&  VxPushButton::getMyIcons( void )
 void VxPushButton::initQButtonPro( void )
 {
     setObjectName( "VxPushButton" );
+    m_NotifyIconOnlineColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
+    m_NotifyIconnDirectConnectColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
 
 	m_BlinkTimer->setInterval( 800 );
 	connect( m_BlinkTimer, SIGNAL(timeout()), this, SLOT(slotBlinkTimeout()) );

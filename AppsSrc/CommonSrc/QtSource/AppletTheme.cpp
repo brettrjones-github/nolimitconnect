@@ -44,6 +44,8 @@ AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
 	connect( ui.m_AcceptCancelFrame, SIGNAL( signalCanceled() ), this, SLOT(slotThemeCanceled()) );
     connect( ui.m_ExampleCheckBox, SIGNAL(stateChanged(int) ), this, SLOT(slotCheckBoxClicked(int)) );
 	connect( ui.horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotSliderValueChanged(int)) );
+	connect( ui.m_ThemeExampleButton, SIGNAL(clicked()), this, SLOT(slotExampleButtonClicked()) );
+	
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -138,4 +140,11 @@ void AppletTheme::applyTheme( EThemeType themeType )
 void AppletTheme::restoreSavedTheme( void )
 {
 	getMyApp().getAppTheme().selectTheme( m_SavedTheme );
+}
+
+//============================================================================
+void AppletTheme::slotExampleButtonClicked( void )
+{
+	m_ExampleButtonNotifyEnabled = !m_ExampleButtonNotifyEnabled;
+	ui.m_ThemeExampleButton->setNotifyOnlineEnabled( m_ExampleButtonNotifyEnabled );
 }

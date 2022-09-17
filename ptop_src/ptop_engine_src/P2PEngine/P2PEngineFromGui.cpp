@@ -1451,26 +1451,47 @@ bool P2PEngine::fromGuiIsMyP2PWebAudioFile( const char * fileName )
 }
 
 //============================================================================
-int P2PEngine::fromGuiDeleteFile( const char * fileName, bool shredFile )
+int P2PEngine::fromGuiDeleteFile( const char * fileNameIn, bool shredFile )
 {
-	int result = 0;
-	FILE * fileHandle = fopen( fileName, "rb+" );
-	if( fileHandle )
+	int result = -1;
+	std::string fileName = fileNameIn;
+	if( !fileName.empty() )
 	{
-		fclose( fileHandle );
+		FILE* fileHandle = fopen( fileName.c_str(), "rb" );
+		if( fileHandle )
+		{
+			fclose( fileHandle );
+			result = 0;
+
+			// tell plugins we are removing file
+			m_PluginMgr.fromGuiDeleteFile( fileName.c_str(), shredFile );
+
+			// if exists as asset then announce asset removal
+			AssetBaseInfo* assetInfo = getAssetMgr().findAsset( fileName );
+			if( assetInfo )
+			{
+				getAssetMgr().removeAsset( assetInfo->getAssetUniqueId() );
+			}
+
+			// remove from library and shared files then delete the file
+			getPluginServiceFileShare().deleteFile( fileName.c_str(), shredFile );
+		}
+		else
+		{
+			result = VxGetLastError();
+			if( 0 == result )
+			{
+				result = -1;
+			}
+
+			LogMsg( LOG_WARNING, "P2PEngine::fromGuiDeleteFile  file cannot be opened err %d file name %s", result, fileName.c_str() );
+		}
 	}
 	else
 	{
-		result = VxGetLastError();
-		if( 0 == result )
-		{
-			result = -1;
-		}
+		LogMsg( LOG_ERROR, "P2PEngine::fromGuiDeleteFile bad fileName param" );
 	}
 
-	m_PluginMgr.fromGuiDeleteFile( fileName, shredFile );
-
-	getPluginServiceFileShare().deleteFile( fileName, shredFile );	
 
 	return result;
 }

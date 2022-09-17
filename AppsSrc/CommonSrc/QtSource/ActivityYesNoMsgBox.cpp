@@ -31,7 +31,9 @@ ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app,
 {
 	ui.setupUi(this);
     connectBarWidgets();
+	ui.m_AcceptButton->setIconOverrideColor( QColor( COLOR_GREEN ) );
 	ui.m_AcceptButton->setIcon( eMyIconAcceptNormal );
+	ui.m_CancelButton->setIconOverrideColor( QColor( COLOR_RED ) );
 	ui.m_CancelButton->setIcon( eMyIconCancelNormal );
 	setTitle( title );
 	ui.m_BodyTextLabel->setText( bodyText );

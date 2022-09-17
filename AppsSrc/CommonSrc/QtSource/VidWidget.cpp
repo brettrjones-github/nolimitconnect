@@ -598,11 +598,13 @@ void VidWidget::slotRecMotionButtonClicked( void )
 		if( !m_RecFilePath.isEmpty() )
 		{
 			ui.m_MotionRecordButton->setNotifyOnlineEnabled( false );
+
 			if( m_MotionRecordOn )
 			{
 				ui.m_MotionRecordButton->setIcon( eMyIconRecordMotionNormal );
 				m_MotionRecordOn = false;
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStopRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
+
 				uint64_t fileLen = VxFileUtil::getFileLen( m_RecFileName.toUtf8().constData() );
 				if( 5000 > fileLen )
 				{
@@ -666,6 +668,7 @@ void VidWidget::slotRecNormalButtonClicked( void )
 				m_InNormalRecord = false;
 
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStopRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
+
 				uint64_t fileLen = VxFileUtil::getFileLen( m_RecFileName.toUtf8().constData() );
 				if( 5000 > fileLen )
 				{
@@ -673,11 +676,13 @@ void VidWidget::slotRecNormalButtonClicked( void )
 					VxFileUtil::deleteFile( m_RecFileName.toUtf8().constData() );
 					LogMsg( LOG_ERROR, "VidWidget::videoRecord file %s has to short len %" PRId64 "", m_RecFileName.toUtf8().constData(), fileLen );
 					m_MyApp.toGuiUserMessage( "ERROR: Video record file was too short" );
+					QMessageBox::information( this, QObject::tr( "ERROR: Video record file was too short" ), m_RecFileName.toUtf8().constData() );
 				}
 				else
 				{
 					m_MyApp.getEngine().fromGuiAddFileToLibrary( m_RecFileName.toUtf8().constData(), true );
-					m_MyApp.toGuiUserMessage( "Added Video Recording to library %s", m_RecFileName.toUtf8().constData() );
+					m_MyApp.toGuiUserMessage( "Added video recording to library %s", m_RecFileName.toUtf8().constData() );
+					QMessageBox::information( this, QObject::tr( "Added video recording to library" ), m_RecFileName.toUtf8().constData() );
 					enableVidFilesButton( true );
 				}
 			}

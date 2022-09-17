@@ -57,6 +57,7 @@ AppletPlayerCamClip::AppletPlayerCamClip( AppCommon& app, QWidget * parent, VxGU
 AppletPlayerCamClip::~AppletPlayerCamClip()
 {
     m_MyApp.activityStateChange( this, false );
+	m_Engine.fromGuiAssetAction( eAssetActionPlayEnd, m_AssetInfo, 0 ); // so closes file
 }
 
 //============================================================================
@@ -241,14 +242,17 @@ void AppletPlayerCamClip::slotPlayButtonClicked( void )
 }
 
 //========================================================================
-void AppletPlayerCamClip::startMediaPlay( int startPos )
+bool AppletPlayerCamClip::startMediaPlay( int startPos )
 {
 	bool playStarted = m_Engine.fromGuiAssetAction( eAssetActionPlayBegin, m_AssetInfo, startPos );
 	updateGuiPlayControls( playStarted );
 	if( false == playStarted )
 	{
 		m_MyApp.toGuiStatusMessage( "Video Play FAILED TO Begin" );
+		QMessageBox::information( this, QObject::tr( "Video file could not be played" ), m_AssetInfo.getAssetName().c_str() );
 	}
+
+	return playStarted;
 }
 
 //========================================================================
@@ -266,6 +270,7 @@ void AppletPlayerCamClip::updateGuiPlayControls( bool isPlaying )
 		else
 		{
 			// stop playing
+			m_Engine.fromGuiAssetAction( eAssetActionPlayEnd, m_AssetInfo, 0 );
 			ui.m_PlayPauseButton->setIcons( eMyIconPlayNormal );
 			ui.m_PlayPosSlider->setValue( 0 );
 		}
@@ -286,6 +291,7 @@ void AppletPlayerCamClip::stopMediaIfPlaying( void )
 	{
 		m_MyApp.toGuiStatusMessage( "" );
 		m_Engine.fromGuiAssetAction( eAssetActionPlayEnd, m_AssetInfo, 0 );
+		m_IsPlaying = false;
 	}
 
 	updateGuiPlayControls( false );
@@ -304,8 +310,13 @@ void AppletPlayerCamClip::setReadyForCallbacks( bool isReady )
 //============================================================================
 void AppletPlayerCamClip::slotShredAsset( void )
 {
-	onActivityStop();
-	emit signalShreddingAsset( this );
+	if( confirmDeleteFile( m_AssetInfo ) )
+	{
+		m_MyApp.wantToGuiActivityCallbacks( this, false );
+		stopMediaIfPlaying();
+		m_Engine.fromGuiDeleteFile( m_AssetInfo.getAssetName().c_str(), true );
+		close();
+	}
 }
 
 //============================================================================
@@ -388,4 +399,11 @@ void AppletPlayerCamClip::setXferProgress( int xferProgress )
 	{
 		ui.m_RightAvatarBar->setXferProgress( xferProgress );
 	}
+}
+
+//============================================================================
+bool AppletPlayerCamClip::playMedia( AssetBaseInfo& assetInfo, int pos0to100000 )
+{
+	setAssetInfo( assetInfo );
+	return startMediaPlay( pos0to100000 );
 }

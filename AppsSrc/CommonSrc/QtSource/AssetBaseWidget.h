@@ -81,4 +81,5 @@ protected:
 	bool						m_ProgressBarShouldBeVisible{ false };
 	bool						m_ProgressBarIsVisible{ false };
 	EAppModule					m_AppModule{ eAppModuleInvalid };
+	bool						m_HasBeenShown{ false };
 };

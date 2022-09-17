@@ -22,6 +22,8 @@
 #define FILE_STATUS_UPLOADING			0x0002
 
 class VxNetIdent;
+class AppCommon;
+class AssetBaseInfo;
 
 class FileItemInfo
 {
@@ -56,9 +58,10 @@ public:
     QString						describeFileLength();
 
 	VxMyFileInfo&				getMyFileInfo( void )					{ return m_FileInfo; }
+	bool						toAsssetInfo( AppCommon& myApp, AssetBaseInfo& assetInfo, bool* retIsNewAsset = nullptr );
 
+protected:
 	//=== vars ===//
-private:
     VxMyFileInfo				m_FileInfo;
     QWidget *					m_Widget{nullptr};
     bool						m_IsShared{false};

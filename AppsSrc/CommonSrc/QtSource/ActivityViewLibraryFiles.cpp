@@ -252,8 +252,8 @@ void ActivityViewLibraryFiles::slotListShredIconClicked( QListWidgetItem * item 
 			QString fileName = poInfo->getFullFileName();
 			if( confirmDeleteFile( fileName, true ) )
 			{
-				ui.m_FileItemList->removeItemWidget( item );
 				m_Engine.fromGuiDeleteFile( fileName.toUtf8().constData(), true );
+				ui.m_FileItemList->removeItemWidget( item );
 			}
 		}
 	}	

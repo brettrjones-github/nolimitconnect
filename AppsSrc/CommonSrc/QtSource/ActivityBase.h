@@ -216,6 +216,8 @@ public:
 	virtual void				setExpandWindowButtonColor( QColor iconColor );
 
 	virtual bool				playFile( uint8_t fileType, QString& fullFileName, VxGUID& assetId ) { return false; }
+	bool						confirmDeleteFile( QString fileName, bool shredFile );
+	bool						confirmDeleteFile( AssetBaseInfo& assetInfo, bool shredFile = false );
 
 signals:
 	//=== title bar signals ====//
@@ -297,7 +299,7 @@ protected:
 	virtual void				repositionToParent( void );
 	void						playSound( ESndDef sndDef );
 	virtual bool				playFile( QString fileName, int pos0to100000 = 0 );
-	bool						confirmDeleteFile( QString fileName, bool shredFile );
+
     void                        fillMyNodeUrl( QLabel * myUrlLabel );
 
     virtual void                onAppIconSpecialClick( ActivityBase * activityBase );

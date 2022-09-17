@@ -32,6 +32,7 @@
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
+#include <CoreLib/VxFileShredder.h>
 
 #include <algorithm>
 #include <time.h>
@@ -668,12 +669,13 @@ bool AssetBaseMgr::removeAsset( VxGUID& assetUniqueId, bool deleteFile )
 		if( assetUniqueId == ( *iter )->getAssetUniqueId() )
 		{
 			AssetBaseInfo * assetInfo = *iter;
+			std::string fileName = assetInfo->getAssetName();
 			m_AssetBaseInfoList.erase( iter );
 			m_AssetBaseInfoDb.removeAsset( assetInfo );
 			announceAssetRemoved( assetInfo );
             if( deleteFile && ( assetInfo->isThumbAsset() || assetInfo->isFileAsset() ) )
 			{
-				VxFileUtil::deleteFile( assetInfo->getAssetName().c_str() );
+				GetVxFileShredder().shredFile( fileName );
 			}
 
 			delete assetInfo;
@@ -688,8 +690,7 @@ bool AssetBaseMgr::removeAsset( VxGUID& assetUniqueId, bool deleteFile )
 //============================================================================
 void AssetBaseMgr::clearAssetInfoList( void )
 {
-	std::vector<AssetBaseInfo*>::iterator iter;
-	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
+	for( auto iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
 	{
 		delete (*iter);
 	}
@@ -700,7 +701,7 @@ void AssetBaseMgr::clearAssetInfoList( void )
 //============================================================================
 void AssetBaseMgr::updateAssetListFromDb( VxThread * startupThread )
 {
-	std::vector<AssetBaseInfo*>::iterator iter;
+	std::vector<AssetBaseInfo*> toDeleteList;
 	lockResources();
 	clearAssetInfoList();
 	m_AssetBaseInfoDb.getAllAssets( m_AssetBaseInfoList );
@@ -710,9 +711,16 @@ void AssetBaseMgr::updateAssetListFromDb( VxThread * startupThread )
 	{
 		// there should not be any without valid hash but if is then generate it
 		movedToGenerateHash = false;
-		for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
+		for( auto iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
 		{
 			AssetBaseInfo* assetInfo = (*iter);
+			if( !assetInfo->validateAssetExist() )
+			{
+				// add to list to remove from database and delete
+				toDeleteList.push_back( assetInfo );
+				continue;
+			}
+
 			EAssetSendState sendState = assetInfo->getAssetSendState();
 			if( eAssetSendStateTxProgress == sendState ) 
 			{
@@ -733,6 +741,15 @@ void AssetBaseMgr::updateAssetListFromDb( VxThread * startupThread )
 				movedToGenerateHash = true;
 				break;
 			}
+		}
+	}
+
+	for( auto assetInfo : toDeleteList )
+	{
+		m_AssetBaseInfoDb.removeAsset( assetInfo );
+		if( assetInfo->isThumbAsset() || assetInfo->isFileAsset() )
+		{
+			GetVxFileShredder().shredFile( assetInfo->getAssetName() );
 		}
 	}
 

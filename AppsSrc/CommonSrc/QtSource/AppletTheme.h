@@ -36,6 +36,7 @@ protected slots:
 	void						slotThemeCanceled( void );
     void				        slotCheckBoxClicked( int checkedState );
 	void						slotSliderValueChanged( int sliderVal );
+	void						slotExampleButtonClicked( void );
 
 protected:
 	void						fillThemeCombo( void );
@@ -48,6 +49,7 @@ protected:
 	Ui::ThemeWidgetClass		ui;
 	EThemeType					m_SavedTheme;
 	EThemeType					m_CurTheme;
+	bool						m_ExampleButtonNotifyEnabled{ false };
 };
 
 

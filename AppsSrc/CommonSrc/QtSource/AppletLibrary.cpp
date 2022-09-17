@@ -33,6 +33,8 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
+
 #include <PktLib/VxSearchDefs.h>
 #include <NetLib/VxFileXferInfo.h>
 #include <CoreLib/VxFileInfo.h>
@@ -242,41 +244,22 @@ void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
         }
         else
         {
-            // determine asset id for this file.. may be different than the one given
-            VxGUID assetId = poInfo->getAssetId();
-            std::string assetFileName = poInfo->getFullFileName().toUtf8().constData();
-            int64_t fileLen = VxFileUtil::fileExists( assetFileName.c_str() );
-            if( fileLen )
+            bool newAsset{ false };
+            AssetInfo assetInfo;
+            if( poInfo->toAsssetInfo( m_MyApp, assetInfo, &newAsset ) )
             {
-                AssetBaseInfo* assetInfo = m_MyApp.getEngine().getAssetMgr().findAsset( assetFileName );
-                if( assetInfo && assetInfo->getAssetUniqueId().isVxGUIDValid() )
+                if( newAsset )
                 {
-                    assetId = assetInfo->getAssetUniqueId();
-                    poInfo->setAssetId( assetId );
-
-                    if( fileLen != assetInfo->getAssetLength() )
-                    {
-                        assetInfo->updateAssetLength( fileLen );
-                    }
-
-                    m_MyApp.getPlayerMgr().playMedia( *assetInfo );
+                    assetInfo.setLocationFlags( ASSET_LOC_FLAG_LIBRARY );
+                    m_MyApp.getEngine().fromGuiAssetAction( eAssetActionAddToAssetMgr, assetInfo );
                 }
-                else
-                {
-                    if( !assetId.isVxGUIDValid() )
-                    {
-                        assetId.initializeWithNewVxGUID();
-                    }
 
-                    AssetInfo newAsset( GuiParams::fileTypeToAssetType( poInfo->getFileType() ), assetFileName.c_str(), fileLen, assetId );
-                    newAsset.setLocationFlags( ASSET_LOC_FLAG_LIBRARY );
-                    m_MyApp.getEngine().fromGuiAssetAction( eAssetActionAddToAssetMgr, newAsset );
-                    m_MyApp.getPlayerMgr().playMedia( newAsset );
-                }
+                m_MyApp.getPlayerMgr().playMedia( assetInfo );
             }
             else
             {
-                QMessageBox::information( this, QObject::tr( "File Not Found" ), assetFileName.c_str(), QMessageBox::Ok );
+                QMessageBox::information( this, QObject::tr( "File Not Found" ), poInfo->getFullFileName().toUtf8().constData(), QMessageBox::Ok );
+                ui.m_FileItemList->removeItemWidget( item );
             }
         }
     }
@@ -294,48 +277,17 @@ void AppletLibrary::slotListShredIconClicked( QListWidgetItem * item )
         else
         {
             // shred file
-            QString fileName = poInfo->getFullFileName();
-            if( confirmDeleteFile( fileName, true ) )
+            AssetInfo assetInfo;
+            if( poInfo->toAsssetInfo( m_MyApp, assetInfo ) )
             {
-                ui.m_FileItemList->removeItemWidget( item );
-                m_Engine.fromGuiDeleteFile( fileName.toUtf8().constData(), true );
+                if( confirmDeleteFile( assetInfo, true ) )
+                {
+                    ui.m_FileItemList->removeItemWidget( item );
+                    m_Engine.fromGuiDeleteFile( assetInfo.getAssetName().c_str(), true );
+                }
             }
         }
     }
-}
-
-//============================================================================
-bool AppletLibrary::confirmDeleteFile( QString fileName, bool shredFile )
-{
-    bool acceptAction = true;
-    bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();
-    if( false == isConfirmDisabled )
-    {
-        QString title = shredFile ? "Confirm Shred File" : "Confirm Delete File";
-        QString bodyText = "";
-        if( shredFile )
-        {
-            bodyText = "Are You Sure You Want To Write Random Data Into The File Then Delete From The Device?";
-        }
-        else
-        {
-            bodyText = "Are You Sure To Delete The File From The Device?";
-        }
-
-        ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
-        dlg.makeNeverShowAgainVisible( true );
-        if( false == ( QDialog::Accepted == dlg.exec() ) )
-        {
-            acceptAction = false;
-        }
-
-        if( dlg.wasNeverShowAgainChecked() )
-        {
-            m_MyApp.getAppSettings().setIsConfirmDeleteDisabled( true );
-        }
-    }
-
-    return acceptAction;
 }
 
 //============================================================================

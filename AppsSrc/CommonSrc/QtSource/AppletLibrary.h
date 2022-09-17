@@ -70,7 +70,6 @@ protected:
 
     FileShareItemWidget *		findListEntryWidget( VxMyFileInfo& fileInfo );
     void						clearFileList( void );
-    bool						confirmDeleteFile( QString fileName, bool shredFile );
 
     FileShareItemWidget*        findItemByFileName( QString& fileName );
 

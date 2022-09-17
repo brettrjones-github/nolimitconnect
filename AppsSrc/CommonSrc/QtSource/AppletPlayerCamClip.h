@@ -29,6 +29,9 @@ public:
 	AppletPlayerCamClip( AppCommon& app, QWidget * parent = NULL, VxGUID assetId = VxGUID::nullVxGUID() );
 	virtual ~AppletPlayerCamClip() override;
 
+	// override playMedia if is applet that plays media
+	virtual bool				playMedia( AssetBaseInfo& assetInfo, int pos0to100000 = 0 ) override;
+
 	virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
 	virtual void				updateAssetInfo( void );
@@ -62,7 +65,7 @@ protected:
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );
-	void						startMediaPlay( int startPos );
+	bool						startMediaPlay( int startPos );
 	void						stopMediaIfPlaying( void );
 
 	//=== vars ===//

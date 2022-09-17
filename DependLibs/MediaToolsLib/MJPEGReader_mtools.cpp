@@ -183,6 +183,13 @@ bool MJPEGReader::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction ass
 			stopVideoRead();
 			result = true;
 		}
+
+		if( m_FileHandle )
+		{
+			fclose( m_FileHandle );
+			m_FileHandle = nullptr;
+		}
+
 		break;
 
 	case eAssetActionPlayBegin:
@@ -239,14 +246,14 @@ bool MJPEGReader::startVideoRead( const char * fileName, VxGUID& assetId, int po
 	m_FileLen = (uint32_t)VxFileUtil::getFileLen( m_FileName.c_str() );
 	if( 3000 > m_FileLen )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead to short len %" PRId64 " file %s\n", m_FileLen, m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead to short len %" PRId64 " file %s", m_FileLen, m_FileName.c_str() );
 		return false;
 	}
 
 	m_FileHandle = VxFileUtil::fileOpen( m_FileName.c_str(), "rb" );
 	if( 0 == m_FileHandle )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead could not open file %s\n", m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead could not open file %s", m_FileName.c_str() );
 		return false;
 	}
 
@@ -266,7 +273,7 @@ bool MJPEGReader::startVideoRead( const char * fileName, VxGUID& assetId, int po
 
 	if( 0 != VxFileUtil::fileSeek( m_FileHandle, m_StreamsBeginOffs ) )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead could not seek to stream %d file %s\n", m_StreamsBeginOffs, m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead could not seek to stream %d file %s", m_StreamsBeginOffs, m_FileName.c_str() );
 		fclose( m_FileHandle );
 		m_FileHandle = 0;
 		return false;

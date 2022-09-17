@@ -189,9 +189,9 @@ EApplet GuiHelpers::getAppletThatPlaysFile( AppCommon& myApp, uint8_t fileType, 
         }
         else
         {
-            applet = eAppletPlayerVideo;
+            // BRJ video player not ready yet.. launch external app instead
+            // applet = eAppletPlayerVideo;
         }
- 
     }
     else if( fileType & VXFILE_TYPE_PHOTO )
     {

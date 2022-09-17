@@ -226,12 +226,7 @@
             </sizepolicy>
            </property>
            <property name="styleSheet">
-            <string notr="true">QFrame#m_VideoPlaybackControl
-{   
-background-color: #FBFED6;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+            <string notr="true"/>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <property name="spacing">

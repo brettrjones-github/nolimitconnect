@@ -1457,6 +1457,15 @@ void AppCommon::slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo )
 {
 	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
 	// check if client is in list each time to avoid out of range vector interation crash
+
+	int clientIdx = 0;
+	while( clientIdx < m_ToGuiActivityInterfaceList.size() )
+	{
+		m_ToGuiActivityInterfaceList[ clientIdx ]->toGuiAssetAdded( assetInfo );
+		clientIdx++;
+	}
+
+	/*
 	std::vector<ToGuiActivityInterface*> clientList;
 	getToGuiActivityInterfaceList( clientList );
 	for( auto client : clientList )
@@ -1466,6 +1475,7 @@ void AppCommon::slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo )
 			client->toGuiAssetAdded( assetInfo );
 		}
 	}
+	*/
 }
 
 //============================================================================
@@ -1484,6 +1494,15 @@ void AppCommon::slotInternalToGuiAssetUpdated( AssetBaseInfo assetInfo )
 {
 	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
 // check if client is in list each time to avoid out of range vector interation crash
+
+	int clientIdx = 0;
+	while( clientIdx < m_ToGuiActivityInterfaceList.size() )
+	{
+		m_ToGuiActivityInterfaceList[ clientIdx ]->toGuiAssetUpdated( assetInfo );
+		clientIdx++;
+	}
+
+	/*
 	std::vector<ToGuiActivityInterface*> clientList;
 	getToGuiActivityInterfaceList( clientList );
 	for( auto client : clientList )
@@ -1492,7 +1511,7 @@ void AppCommon::slotInternalToGuiAssetUpdated( AssetBaseInfo assetInfo )
 		{
 			client->toGuiAssetUpdated( assetInfo );
 		}
-	}
+	}*/
 }
 
 //============================================================================
@@ -1511,6 +1530,15 @@ void AppCommon::slotInternalToGuiAssetRemoved( AssetBaseInfo assetInfo )
 {
 	// when assets are removed they might call wantToGuiActivityCallbacks and change the clientList
 // check if client is in list each time to avoid out of range vector interation crash
+
+	int clientIdx = 0;
+	while( clientIdx < m_ToGuiActivityInterfaceList.size() )
+	{
+		m_ToGuiActivityInterfaceList[ clientIdx ]->toGuiAssetRemoved( assetInfo );
+		clientIdx++;
+	}
+
+	/*
 	std::vector<ToGuiActivityInterface*> clientList;
 	getToGuiActivityInterfaceList( clientList );
 	for( auto client : clientList )
@@ -1520,6 +1548,7 @@ void AppCommon::slotInternalToGuiAssetRemoved( AssetBaseInfo assetInfo )
 			client->toGuiAssetRemoved( assetInfo );
 		}
 	}
+	*/
 }
 
 //============================================================================
@@ -1565,15 +1594,11 @@ void AppCommon::slotInternalToGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 
 	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
 	// check if client is in list each time to avoid out of range vector interation crash
-	std::vector<ToGuiActivityInterface*> clientList;
-	getToGuiActivityInterfaceList( clientList );
-
-	for( auto client : clientList )
+	int listIdx = 0;
+	while( listIdx < m_ToGuiActivityInterfaceList.size() )
 	{
-		if( clientStillWantsToGuiActivityCallback( client ) )
-		{
-			client->toGuiAssetSessionHistory( *assetInfo );
-		}	
+		m_ToGuiActivityInterfaceList[listIdx]->toGuiAssetSessionHistory( *assetInfo );
+		listIdx++;
 	}
 
 	delete assetInfo;

@@ -855,9 +855,9 @@ protected:
     void						registerMetaData();
     void						doAccountStartup( void );
 
-    void                        getToGuiActivityInterfaceList( std::vector<ToGuiActivityInterface*>& clientList ) { clientList = m_ToGuiActivityInterfaceList; }
-    bool                        clientStillWantsToGuiActivityCallback( ToGuiActivityInterface* client ) 
-                                    { return std::find( m_ToGuiActivityInterfaceList.begin(), m_ToGuiActivityInterfaceList.end(), client ) != m_ToGuiActivityInterfaceList.end(); }
+ //   void                        getToGuiActivityInterfaceList( std::vector<ToGuiActivityInterface*>& clientList ) { clientList = m_ToGuiActivityInterfaceList; }
+//    bool                        clientStillWantsToGuiActivityCallback( ToGuiActivityInterface* client ) 
+//                                    { return std::find( m_ToGuiActivityInterfaceList.begin(), m_ToGuiActivityInterfaceList.end(), client ) != m_ToGuiActivityInterfaceList.end(); }
 
 	//=== vars ===//
 	QApplication&				m_QApp;

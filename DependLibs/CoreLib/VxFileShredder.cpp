@@ -111,16 +111,17 @@ void VxFileShredder::startThreadIfNotStarted( void )
 //============================================================================
 void VxFileShredder::shredFiles( void )
 {
+	static int fileIndex = 0;
 	while( false == m_ShredThread.isAborted() )
 	{
-		std::string fileName ;
-		if( 0 != m_ShredList.size() )
+		m_ShredListMutex.lock();
+		if( m_ShredList.size() > fileIndex )
 		{
-			m_ShredListMutex.lock();
-			fileName = m_ShredList[0];
-			m_ShredList.erase( m_ShredList.begin() );
+			auto iter = m_ShredList.begin() + fileIndex;
+			std::string fileName = *(iter);
 			m_ShredListMutex.unlock();	
 
+			bool fileDeleted{ false };
 			uint64_t len = VxFileUtil::fileExists( fileName.c_str() );
 			if( len )
 			{
@@ -145,6 +146,7 @@ void VxFileShredder::shredFiles( void )
 						if( m_ShredThread.isAborted() )
 						{
 							fclose( fileHandle );
+							fileIndex = 0;
 							m_ShredThread.threadAboutToExit();
 							return;
 						}
@@ -154,34 +156,55 @@ void VxFileShredder::shredFiles( void )
 					}
 
 					fclose( fileHandle );
-					VxFileUtil::deleteFile( fileName.c_str() );
+					if( VxFileUtil::deleteFile( fileName.c_str() ) )
+					{
+						LogMsg( LOG_ERROR, "FileShredder::shredFiles could not delete file %s err %d", fileName.c_str(), VxGetLastError() );
+					}
+					else
+					{
+						fileDeleted = true;
+					}
 				}
 				else
 				{
 					LogMsg( LOG_ERROR, "FileShredder::shredFiles could not open file %s", fileName.c_str() );
-					VxFileUtil::deleteFile( fileName.c_str() );
+					if( 0 == VxFileUtil::deleteFile( fileName.c_str() ) )
+					{
+						fileDeleted = true;
+					}
 				}
 			}
 			else
 			{
 				LogMsg( LOG_ERROR, "FileShredder::shredFiles 0 len file %s", fileName.c_str() );
 				VxFileUtil::deleteFile( fileName.c_str() );
+				// if 0 len then it may not exist so remove it anyway
+				fileDeleted = true;
 			}
 
-			m_ShredListMutex.lock();
-			m_ShredderDb.removeFileToShred( fileName );
-			m_ShredListMutex.unlock();	
-		}
+			if( fileDeleted )
+			{
+				m_ShredListMutex.lock();
+				if( m_ShredList.size() > fileIndex )
+				{
+					m_ShredList.erase( m_ShredList.begin() + fileIndex );
+				}
 
-		m_ShredListMutex.lock();	
-		if( 0 == m_ShredList.size() )
-		{
-			m_ShredListMutex.unlock();	
-			break;
+				m_ShredderDb.removeFileToShred( fileName );
+				m_ShredListMutex.unlock();
+			}
+			else
+			{
+				// file may be in use or locked.. skip and try again later
+				fileIndex++;
+			}
 		}
 		else
 		{
-			m_ShredListMutex.unlock();	
+			m_ShredListMutex.unlock();
+			break;
 		}
 	}
+
+	fileIndex = 0;
 }
