@@ -32,16 +32,19 @@ AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget 
 	ui.m_CancelButton->setFixedSize( eButtonSizeLarge );
 
 	ui.m_MakeFriendButton->setIcon( getMyIcons().getFriendshipIcon( eFriendStateFriend ) );
-	ui.m_MakeFriendButton->setFixedSize(eButtonSizeLarge );
+	ui.m_MakeFriendButton->setFixedSize( eButtonSizeMedium );
 
 	ui.m_IgnoreButton->setIcon( getMyIcons().getFriendshipIcon( eFriendStateIgnore ) );
-	ui.m_IgnoreButton->setFixedSize( eButtonSizeLarge );
+	ui.m_IgnoreButton->setFixedSize( eButtonSizeMedium );
 
-	ui.m_HisPermissionButton->setFixedSize( eButtonSizeLarge );
-	ui.m_MyPermissionButton->setFixedSize( eButtonSizeLarge );
+	ui.m_HisPermissionButton->setFixedSize( eButtonSizeMedium );
+	ui.m_MyPermissionButton->setFixedSize( eButtonSizeMedium );
 
 	ui.m_IdentWidget->setDisableFriendshipChange( true );
-	ui.m_IdentWidget->setIdentWidgetSize( eButtonSizeLarge );
+	ui.m_IdentWidget->setIdentWidgetSize( eButtonSizeMedium );
+
+	ui.m_PreferredButton->setFixedSize( eButtonSizeMedium );
+	ui.m_PreferredButton->setAppIcon( eMyIconApp, this ); // use setAppIcon so has color
 
 	connect( ui.ToAdministratorButton, SIGNAL( clicked() ), this, SLOT( onPermissionClick() ) );
 	connect( ui.ToFriendButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
@@ -50,8 +53,9 @@ AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget 
 	connect( ui.ToIgnoreButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.m_OkButton,			SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	connect( ui.m_CancelButton,		SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
-	connect( ui.m_MakeFriendButton, SIGNAL( clicked() ), this, SLOT( onMakeFriendButClick() ) );
-	connect( ui.m_IgnoreButton,		SIGNAL( clicked() ), this, SLOT( onIgnoreButClick() ) );
+	connect( ui.m_MakeFriendButton, SIGNAL(clicked()), this, SLOT(onMakeFriendButClick()) );
+	connect( ui.m_IgnoreButton,		SIGNAL(clicked()), this, SLOT(onIgnoreButClick()) );
+	connect( ui.m_PreferredButton,	SIGNAL(clicked()), this, SLOT(onPreferredButClick()) );
 }
 
 //============================================================================
@@ -70,6 +74,8 @@ void AppletPeerChangeFriendship::setFriend( GuiUser * poFriend )
 	ui.m_ContentTextLabel->setText( GuiParams::describeContentRating( ( EContentRating)m_Friend->getNetIdent().getPreferredContent() ) );
 	ui.m_GenderTextLabel->setText( GuiParams::describeGender( ( EGenderType )m_Friend->getNetIdent().getGender() ) );
 	ui.m_LanguageTextLabel->setText( GuiParams::describeLanguage( ( ELanguageType )m_Friend->getNetIdent().getPrimaryLanguage() ) );
+	m_PreferredUser = m_MyApp.getGuiFavoriteMgr().getIsFavorite( poFriend->getMyOnlineId() );
+	updatePreferredText();
 }
 
 //============================================================================
@@ -131,6 +137,11 @@ void AppletPeerChangeFriendship::onOkButClick( void )
 		m_Friend->setMyFriendshipToHim(getPermissionSelection());
 		m_Engine.fromGuiChangeMyFriendshipToHim( m_Friend->getMyOnlineId(), m_Friend->getMyFriendshipToHim(), m_Friend->getHisFriendshipToMe() );
 		m_MyApp.refreshFriend( m_Friend->getMyOnlineId() );
+	}
+
+	if( m_MyApp.getGuiFavoriteMgr().getIsFavorite( m_Friend->getMyOnlineId() ) != m_PreferredUser )
+	{
+		m_MyApp.getGuiFavoriteMgr().setIsFavorite( m_Friend->getMyOnlineId(), m_PreferredUser );
 	}
 
 	accept();
@@ -215,4 +226,24 @@ void AppletPeerChangeFriendship::onMakeFriendButClick( void )
 void AppletPeerChangeFriendship::onIgnoreButClick( void )
 {
 	setCheckedPermission( eFriendStateIgnore );
+}
+
+//============================================================================   
+void AppletPeerChangeFriendship::onPreferredButClick( void )
+{
+	m_PreferredUser = !m_PreferredUser;
+	updatePreferredText();
+}
+
+//============================================================================   
+void AppletPeerChangeFriendship::updatePreferredText( void )
+{
+	if( m_PreferredUser )
+	{
+		ui.m_PreferredLabel->setText( QObject::tr( "Not Preferred (No priority given to user)" ) );
+	}
+	else
+	{
+		ui.m_PreferredLabel->setText( QObject::tr( "Is Preferred (High priority given to user)" ) );
+	}
 }

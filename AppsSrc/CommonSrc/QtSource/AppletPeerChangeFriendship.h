@@ -44,12 +44,15 @@ public slots:
 	void						onPermissionClick( void );
 	void						onMakeFriendButClick( void );
 	void						onIgnoreButClick( void );
+	void						onPreferredButClick( void );
 
 protected:
 	void						setHisPermissionToMe( EFriendState hisFriendshipToMe );
 	void						setMyPermissionToHim( EFriendState myFriendshipToHim );
+	void						updatePreferredText( void );
 
 	//=== vars ===//
 	Ui::AppletPeerChangeFriendshipUi	ui;
-    GuiUser *				    m_Friend;					
+	GuiUser*					m_Friend{ nullptr };
+	bool						m_PreferredUser{ false };
 };

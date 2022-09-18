@@ -186,7 +186,7 @@ void AudioLoopback::processAudioLoopbackThreaded( void )
 			if( lastSpaceAvailableTime )
 			{
 				int timeInterval = (int)(timeNow - lastSpaceAvailableTime);
-				//LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
+                LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
 			}
 
 			lastSpaceAvailableTime = timeNow;

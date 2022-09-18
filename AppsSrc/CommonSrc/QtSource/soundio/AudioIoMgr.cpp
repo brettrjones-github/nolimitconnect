@@ -573,13 +573,6 @@ void AudioIoMgr::setEchoCancelEnable( bool enable )
 //============================================================================
 void AudioIoMgr::frame80msElapsed( void )
 {
-    static int64_t lastTime = 0;
-    int64_t timeNow = GetHighResolutionTimeMs();
-    int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
-    lastTime = timeNow;
-
-   // LogMsg( LOG_VERBOSE, "AudioIoMgr::frame80msElapsed %d ms", timeElapsed );
-
     if( getAudioLoopbackEnable() )
     {
         m_AudioLoopback.frame80msElapsed();
@@ -587,17 +580,6 @@ void AudioIoMgr::frame80msElapsed( void )
     else
     {
         m_AudioOutMixer.frame80msElapsed();
-    }
-
-    static int64_t endTime = 0;
-    if( m_MyApp.getGuiCpuTimeEnable() )
-    {
-        endTime = GetHighResolutionTimeMs();
-        int elapsedTime = (int)(endTime - timeNow);
-        if( elapsedTime > 2 )
-        {
-            LogMsg( LOG_VERBOSE, "AudioIoMgr::frame80msElapsed %d ms in function", elapsedTime );
-        }
     }
 }
 

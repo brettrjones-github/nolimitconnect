@@ -222,7 +222,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
     case eAppletGroupListClient:	        return QObject::tr( "Group List" );
-    case eAppletGroupListLocalView:			return QObject::tr( "View Groups Announced To This Network Host" );
+    case eAppletGroupListLocalView:			return QObject::tr( "View Groups On This Network Host" );
 
     case eAppletHelpNetSignalBars:			return QObject::tr( "Network Signal Bars" );
 

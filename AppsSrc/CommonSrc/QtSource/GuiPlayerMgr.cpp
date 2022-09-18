@@ -198,7 +198,7 @@ bool GuiPlayerMgr::playMedia( AssetBaseInfo& assetInfo, int pos0to100000 )
 #ifdef TARGET_OS_WINDOWS
 	ShellExecuteA( 0, 0, assetInfo.getAssetName().c_str(), 0, 0, SW_SHOW );
 #else
-	QDesktopServices::openUrl( QUrl::fromLocalFile( fullFileName ) );
+    QDesktopServices::openUrl( QUrl::fromLocalFile( assetInfo.getAssetName().c_str() ) );
 #endif // TARGET_OS_WINDOWS
 	return true;
 }

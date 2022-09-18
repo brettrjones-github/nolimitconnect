@@ -628,7 +628,7 @@ void AppletPopupMenu::showPersonOfferMenu( GuiUser* poSelectedFriend )
 	}
 	else
 	{
-		addMenuItem( 2, getMyIcons().getIcon( eMyIconApp ), QObject::tr( "Set Perferred" ) );
+		addMenuItem( 2, getMyIcons().getIcon( eMyIconApp ), QObject::tr( "Set Preferred" ) );
 	}
 }
 
