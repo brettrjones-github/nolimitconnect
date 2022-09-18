@@ -48,18 +48,20 @@ protected slots:
 	void						slotPlayProgress( int pos0to100000 );
 	void						slotPlayEnd( void );
 
+	void						slotFeedRotationChanged( int feedRotation );
+	void						slotCamRotationChanged( int camRotation );
 
 protected:
 	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos ) override;
 	void						initAssetVideoWidget( void );
 
-    void						showEvent( QShowEvent * ev ) override;
     void						resizeEvent( QResizeEvent * ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );
 	void						startMediaPlay( int startPos );
 	void						stopMediaIfPlaying( void );
+	void						onAssetWidgetVisibleAndReady( bool isVisible, bool isReady ) override;
 
 	//=== vars ===//
 	bool						m_ActivityCallbacksEnabled{ false };

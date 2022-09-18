@@ -57,12 +57,15 @@ public:
 
 	virtual void				onActivityStop( void ) {};
 
+	virtual void				onAssetWidgetVisibleAndReady( bool isVisible, bool isReady );
+
 signals:
 	void						signalShreddingAsset( AssetBaseWidget * assetWidget );
 
 protected slots:
 	virtual void				slotShredAsset( void );
 	virtual void				slotResendAsset( void );
+	virtual void				slotAssetReadyForCallbacksTimeout( void );
 
 protected:
 	void						showEvent( QShowEvent * ev );
@@ -77,9 +80,11 @@ protected:
     AssetBaseInfo				m_AssetInfo;
 	int							m_AssetSendProgress{ 0 };
 	bool						m_CallbacksRequested{ false };
-	QProgressBar *				m_XferProgressBar{ nullptr };
+	QProgressBar*				m_XferProgressBar{ nullptr };
 	bool						m_ProgressBarShouldBeVisible{ false };
 	bool						m_ProgressBarIsVisible{ false };
 	EAppModule					m_AppModule{ eAppModuleInvalid };
 	bool						m_HasBeenShown{ false };
+	QTimer*						m_AssetWidgetReadyTimer{ nullptr };
+	bool						m_AssetReadyForCallbacks{ false };
 };

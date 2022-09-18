@@ -90,11 +90,14 @@ void AppCommon::slotInternalWantVideoCapture( EAppModule appModule, bool enableV
             LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture" );
         }
 
+		m_ToGuiHardwareCtrlBusy = true;
 		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 		{
 			ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
 			toGuiClient->callbackToGuiWantVideoCapture( enableVidCapture );
 		}
+
+		m_ToGuiHardwareCtrlBusy = false;
     }
 }
 

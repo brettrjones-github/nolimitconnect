@@ -41,6 +41,11 @@ void GuiPlayerMgr::playerMgrStartup( void )
 //============================================================================
 void GuiPlayerMgr::wantPlayVideoCallbacks( GuiPlayerCallback* client, bool enable )
 {
+	if( m_VideoPlayClientsBusy )
+	{
+		LogMsg( LOG_ERROR, "GuiPlayerMgr::wantPlayVideoCallbacks do NOT call while busy" );
+	}
+
 	for( auto iter = m_VideoPlayClients.begin(); iter != m_VideoPlayClients.end(); ++iter )
 	{
 		if( *iter == client )
@@ -76,10 +81,13 @@ void GuiPlayerMgr::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* pu8Jpg, u
 void GuiPlayerMgr::slotInternalPlayMotionVideoFrame( VxGUID feedOnlineId, QImage vidFrame, int motion0To100000 )
 {
 	m_BehindFrameCnt--;
+	m_VideoPlayClientsBusy = true;
 	for( auto guiVidCallback : m_VideoPlayClients )
 	{
 		guiVidCallback->callbackGuiPlayMotionVideoFrame( feedOnlineId, vidFrame, motion0To100000 );
 	}
+
+	m_VideoPlayClientsBusy = false;
 }
 
 //============================================================================
@@ -131,10 +139,13 @@ int GuiPlayerMgr::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* picBuf, ui
 void GuiPlayerMgr::slotInternalPlayVideoFrame( VxGUID feedOnlineId, QImage vidFrame )
 {
 	m_BehindFrameCnt--;
+	m_VideoPlayClientsBusy = true;
 	for( auto guiVidCallback : m_VideoPlayClients )
 	{
 		guiVidCallback->callbackGuiPlayVideoFrame( feedOnlineId, vidFrame );
 	}
+
+	m_VideoPlayClientsBusy = false;
 }
 
 //============================================================================

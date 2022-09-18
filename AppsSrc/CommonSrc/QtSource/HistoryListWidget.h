@@ -39,6 +39,7 @@ public:
 
 public slots:
 	void						slotShreddingAsset( AssetBaseWidget * assetWidget );
+	void						slotStartupTimeout( void );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;
@@ -58,4 +59,6 @@ protected:
 	GuiUser*					m_MyIdent{ nullptr };
     GuiUser*				    m_HisIdent{ nullptr };
 	bool						m_CallbacksRequested{ false };
+	QTimer*						m_StartupTimer{ nullptr };
+	bool						m_QueryHistoryCalled{ false };
 };

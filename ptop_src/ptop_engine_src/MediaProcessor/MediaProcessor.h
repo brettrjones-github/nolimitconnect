@@ -206,7 +206,11 @@ protected:
 	bool						clientExistsInList(	std::vector<MediaClient>&		clientList, 
 													EMediaInputType					mediaType, 
 													MediaCallbackInterface *		callback,
-													void *							userData );
+													void*							userData );
+	bool						removeClientFromListist( std::vector<MediaClient>& clientList,
+													EMediaInputType					mediaType,
+													MediaCallbackInterface*			callback,
+													void*							userData );
 
 	bool						clientToRemoveExistsInList(	std::vector<ClientToRemove>&	clientRemoveList, 
 															EMediaInputType					mediaType, 

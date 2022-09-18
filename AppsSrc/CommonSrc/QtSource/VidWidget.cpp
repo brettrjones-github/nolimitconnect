@@ -162,7 +162,7 @@ void VidWidget::setVideoFeedId( VxGUID& feedOnlineId, EAppModule appModule )
 		if( m_VideoFeedId.isVxGUIDValid() )
 		{
 			m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
-			m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, appModule, true );
+			// m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, appModule, true );
 		}
 		else
 		{
@@ -337,6 +337,7 @@ void VidWidget::slotFeedRotateButtonClicked( void )
 	m_AppSettings.setVidFeedRotation( feedRotation );
 	updateVidFeedImageRotation();
 	m_MyApp.toGuiUserMessage( "Contact Feed Rotation %d", feedRotation );
+	emit signalFeedRotationChanged( feedRotation );
 }
 
 //============================================================================
@@ -360,6 +361,7 @@ void VidWidget::slotCamRotateButtonClicked( void )
 	m_AppSettings.setCamRotation( camId, camRotation );
 	m_MyApp.setCamCaptureRotation( camRotation );
 	m_MyApp.toGuiUserMessage( "My Cam Rotation %d", camRotation );
+	emit signalCamRotationChanged( camRotation );
 }
 
 //============================================================================

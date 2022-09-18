@@ -26,7 +26,10 @@ AssetBaseWidget::AssetBaseWidget( AppCommon& appCommon, QWidget *parent)
 , m_MyApp( appCommon )
 , m_Engine( appCommon.getEngine() )
 , m_AssetInfo()
+, m_AssetWidgetReadyTimer( new QTimer( this ) )
 {
+	m_AssetWidgetReadyTimer->setInterval( 200 );
+	connect( m_AssetWidgetReadyTimer, SIGNAL(timeout()), this, SLOT(slotAssetReadyForCallbacksTimeout()) );
 }
 
 //============================================================================
@@ -60,26 +63,21 @@ void AssetBaseWidget::setXferBar( QProgressBar * xferProgressBar )
 void AssetBaseWidget::showEvent(QShowEvent * showEvent)
 {
 	QWidget::showEvent(showEvent);
-	if( ( false == VxIsAppShuttingDown() )
-		&& m_AssetInfo.isValid()
-		&& ( false == m_CallbacksRequested ) )
+	if( !m_AssetReadyForCallbacks )
 	{
-		m_CallbacksRequested = true;
-		m_MyApp.wantToGuiActivityCallbacks( this, true );
+		// avoid calling want callbacks while being created by a calllback
+		m_AssetWidgetReadyTimer->start();
 	}
-
-	updateProgressBarVisibility();
+	else
+	{
+		onAssetWidgetVisibleAndReady( true, true );
+	}
 }
 
 //============================================================================
 void AssetBaseWidget::hideEvent( QHideEvent * ev )
 {
-	if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
-	{
-		m_MyApp.wantToGuiActivityCallbacks( this, false );
-		m_CallbacksRequested = false;
-	}
-
+	onAssetWidgetVisibleAndReady( false, true );
 	QWidget::hideEvent( ev );
 }
 
@@ -252,7 +250,6 @@ void AssetBaseWidget::doSetProgress(  int xferProgress )
 	setXferProgress( xferProgress );
 }
 
-
 //============================================================================
 void AssetBaseWidget::updateFromAssetInfo( void )
 {
@@ -311,5 +308,41 @@ void AssetBaseWidget::updateFromAssetInfo( void )
 		showShredder( true );
 		break;
 
+	}
+}
+
+//============================================================================
+void AssetBaseWidget::slotAssetReadyForCallbacksTimeout( void )
+{
+	m_AssetWidgetReadyTimer->stop();
+	onAssetWidgetVisibleAndReady( isVisible(), true );
+}
+
+//============================================================================
+void AssetBaseWidget::onAssetWidgetVisibleAndReady( bool isVisible, bool isReady )
+{
+	if( isReady )
+	{
+		m_AssetReadyForCallbacks = true;
+		if( isVisible )
+		{
+			if( (false == VxIsAppShuttingDown())
+				&& m_AssetInfo.isValid()
+				&& (false == m_CallbacksRequested) )
+			{
+				m_CallbacksRequested = true;
+				m_MyApp.wantToGuiActivityCallbacks( this, true );
+			}
+
+			updateProgressBarVisibility();
+		}
+		else
+		{
+			if( m_CallbacksRequested && (false == VxIsAppShuttingDown()) )
+			{
+				m_MyApp.wantToGuiActivityCallbacks( this, false );
+				m_CallbacksRequested = false;
+			}
+		}
 	}
 }

@@ -35,7 +35,10 @@ HistoryListWidget::HistoryListWidget(QWidget *parent)
 , m_MyIdent( 0 )
 , m_HisIdent( 0 )
 , m_CallbacksRequested( false )
+, m_StartupTimer( new QTimer( this ) )
 {
+	m_StartupTimer->setInterval( 200 );
+	connect( m_StartupTimer, SIGNAL(timeout()), this, SLOT(slotStartupTimeout()) );
 }
 
 //============================================================================
@@ -57,6 +60,11 @@ void HistoryListWidget::showEvent(QShowEvent * showEvent)
 	{
 		m_CallbacksRequested = true;
 		m_MyApp.wantToGuiActivityCallbacks( this, true );
+	}
+
+	if( !m_QueryHistoryCalled )
+	{
+		m_StartupTimer->start();
 	}
 }
 
@@ -94,8 +102,9 @@ void HistoryListWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 //============================================================================
 void HistoryListWidget::initializeHistory( void )
 {
-	if( m_HisIdent )
+	if( !m_QueryHistoryCalled && m_HisIdent )
 	{
+		m_QueryHistoryCalled = true;
 		m_Engine.fromGuiQuerySessionHistory( m_HisIdent->getMyOnlineId() );
 	}
 }
@@ -230,7 +239,6 @@ AssetBaseWidget * HistoryListWidget::createAssetWidget( AssetBaseInfo * assetInf
 	return assetWidget;
 }
 
-
 //============================================================================
 void HistoryListWidget::clearHistoryList( void )
 {
@@ -241,4 +249,15 @@ void HistoryListWidget::clearHistoryList( void )
 	}
 
 	this->clear();
+}
+
+//============================================================================
+void HistoryListWidget::slotStartupTimeout( void )
+{
+	m_StartupTimer->stop();
+	if( !m_QueryHistoryCalled && m_HisIdent )
+	{
+		m_QueryHistoryCalled = true;
+		m_Engine.fromGuiQuerySessionHistory( m_HisIdent->getMyOnlineId() );
+	}
 }

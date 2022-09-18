@@ -46,12 +46,14 @@ void AppCommon::slotInternalWantMicrophoneRecording( EAppModule appModule, bool 
 	bool isMicAvailable = m_SoundMgr.isMicrophoneEnabled();
 	if( wasMicAvailable != isMicAvailable )
 	{
+		m_ToGuiHardwareCtrlBusy = true;
 		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 		{
 			ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
 			toGuiClient->callbackToGuiWantMicrophoneRecording( isMicAvailable );
 		}
 
+		m_ToGuiHardwareCtrlBusy = false;
 		LogMsg( LOG_INFO, "#### AppCommon::slotEnableMicrophoneRecording %d done", isMicAvailable );
 	}
 }
@@ -83,11 +85,14 @@ void AppCommon::slotInternalWantSpeakerOutput( EAppModule appModule, bool enable
 
 	if( wasSpeakerAvailable != isSpeakerAvailable )
 	{
+		m_ToGuiHardwareCtrlBusy = true;
 		for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 		{
 			ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
 			toGuiClient->callbackToGuiWantSpeakerOutput( isSpeakerAvailable );
 		}
+
+		m_ToGuiHardwareCtrlBusy = false;
 	}
 }
 
@@ -126,11 +131,14 @@ void AppCommon::fromGuiMuteMicrophone( bool muteMic )
 	m_SoundMgr.setMuteMicrophone( muteMic );
     getEngine().fromGuiMuteMicrophone( muteMic );
 
+	m_ToGuiHardwareCtrlBusy = true;
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
 		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
 		toGuiClient->callbackToGuiMicrophoneMuted( muteMic );
 	}
+
+	m_ToGuiHardwareCtrlBusy = false;
 }
 
 //============================================================================
@@ -147,11 +155,14 @@ void AppCommon::fromGuiMuteSpeaker( bool muteSpeaker )
 	m_SoundMgr.setMuteSpeaker( muteSpeaker );
     getEngine().fromGuiMuteSpeaker( muteSpeaker );
 
+	m_ToGuiHardwareCtrlBusy = true;
 	for( auto hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
 		ToGuiHardwareControlInterface* toGuiClient = *hardwareIter;
 		toGuiClient->callbackToGuiSpeakerMuted( muteSpeaker );
 	}
+
+	m_ToGuiHardwareCtrlBusy = false;
 }
 
 //============================================================================

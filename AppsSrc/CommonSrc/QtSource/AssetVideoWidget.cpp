@@ -59,7 +59,9 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 	connect( this,					SIGNAL(signalPlayProgress(int)),		this, SLOT(slotPlayProgress(int)) );
 	connect( this,					SIGNAL(signalPlayEnd()),				this, SLOT(slotPlayEnd()) );
 	connect( ui.m_LeftAvatarBar,	SIGNAL(signalResendAsset()),			this, SLOT(slotResendAsset()) );
-    ui.m_VidWidget->setVidImageRotation( 0 );
+
+	connect( ui.m_VidWidget,		SIGNAL(signalFeedRotationChanged(int)), this, SLOT(slotFeedRotationChanged(int)) );
+	connect( ui.m_VidWidget,		SIGNAL(signalCamRotationChanged(int)),  this, SLOT(slotCamRotationChanged(int)) );
 }
 
 //============================================================================
@@ -106,19 +108,6 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 	}
 
 	updateFromAssetInfo();
-}
-
-//============================================================================
-void AssetVideoWidget::showEvent(QShowEvent * showEvent)
-{
-	AssetBaseWidget::showEvent(showEvent);
-	if( ( false == VxIsAppShuttingDown() )
-		&& m_AssetInfo.isValid()
-		&& !m_IsPlaying )
-	{
-		setReadyForCallbacks( true );
-		m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
-	}
 }
 
 //============================================================================
@@ -337,5 +326,33 @@ void AssetVideoWidget::setXferProgress( int xferProgress )
 	else
 	{
 		ui.m_RightAvatarBar->setXferProgress( xferProgress );
+	}
+}
+
+//============================================================================
+void AssetVideoWidget::slotFeedRotationChanged( int feedRotation )
+{
+}
+
+//============================================================================
+void AssetVideoWidget::slotCamRotationChanged( int camRotation )
+{
+	m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
+}
+
+//============================================================================
+void AssetVideoWidget::onAssetWidgetVisibleAndReady( bool isVisible, bool isReady )
+{
+	AssetBaseWidget::onAssetWidgetVisibleAndReady( isVisible, isReady );
+	setReadyForCallbacks( isVisible );
+	if( isReady && isVisible )
+	{
+		if( (false == VxIsAppShuttingDown())
+			&& m_AssetInfo.isValid()
+			&& !m_IsPlaying )
+		{
+			setReadyForCallbacks( true );
+			m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
+		}
 	}
 }

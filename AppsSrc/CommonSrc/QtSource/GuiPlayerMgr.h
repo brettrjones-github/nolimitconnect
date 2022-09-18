@@ -51,6 +51,7 @@ protected slots:
 protected:
 	AppCommon&					m_MyApp;
 
+	bool						m_VideoPlayClientsBusy{ false };
 	std::vector<GuiPlayerCallback*>  m_VideoPlayClients;
 	QAtomicInt					m_BehindFrameCnt;
 };

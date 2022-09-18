@@ -59,9 +59,9 @@ void AppletPersonalRecorder::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnline
 void AppletPersonalRecorder::showEvent( QShowEvent* showEvent )
 {
     AppletBase::showEvent( showEvent );
-    if( !m_HistoryQueried )
-    {
-        m_HistoryQueried = true;
-        ui.m_SessionWidget->initializeHistory();
-    }
+    //if( !m_HistoryQueried )
+    //{
+    //    m_HistoryQueried = true;
+    //    ui.m_SessionWidget->initializeHistory();
+    //}
 }

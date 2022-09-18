@@ -37,7 +37,6 @@ void AssetPhotoWidget::initAssetPhotoWidget( void )
 {
 	ui.setupUi( this );
 	setXferBar( ui.m_XferProgressBar );
-	ui.m_ShredButton->setIcon( eMyIconShredderNormal );
 
 	ui.m_SendButton->setVisible( false );
 	ui.m_ButtonFrame->setVisible( false );
@@ -45,6 +44,8 @@ void AssetPhotoWidget::initAssetPhotoWidget( void )
 	ui.m_VidWidget->disablePreview( true );
 	ui.m_VidWidget->disableRecordControls( true );
 	
+	ui.m_ShredButton->setIcon( eMyIconShredderNormal );
+
 	connect( ui.m_VidWidget,		SIGNAL(clicked()),				this, SLOT(slotAssetWasClicked()) );
 	connect( ui.m_ShredButton,		SIGNAL(clicked()),				this, SLOT(slotShredAsset()) );
 	connect( ui.m_LeftAvatarBar,	SIGNAL(signalShredAsset()),		this, SLOT(slotShredAsset()) );

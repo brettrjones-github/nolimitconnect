@@ -1058,6 +1058,29 @@ bool MediaProcessor::clientExistsInList(	std::vector<MediaClient>&		clientList,
 }
 
 //============================================================================
+bool MediaProcessor::removeClientFromListist( std::vector<MediaClient>& clientList,
+												EMediaInputType					mediaType,
+												MediaCallbackInterface* callback,
+												void* userData )
+{
+	std::vector<MediaClient>::iterator iter;
+	for( iter = clientList.begin(); iter != clientList.end(); ++iter )
+	{
+		MediaClient& client = *iter;
+		if( (client.m_Callback == callback)
+			&& (client.m_UserData == userData)
+			&& (client.m_MediaInputType == mediaType) )
+		{
+			clientList.erase( iter );
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+//============================================================================
 bool MediaProcessor::clientToRemoveExistsInList(	std::vector<ClientToRemove>&	clientRemoveList, 
 													EMediaInputType					mediaType, 
 													MediaCallbackInterface *		callback,
@@ -1084,6 +1107,7 @@ bool MediaProcessor::clientToRemoveRemoveFromList(	std::vector<ClientToRemove>&	
 													MediaCallbackInterface *		callback,
 													void *							userData )
 {
+	bool removed = false;
 	std::vector<ClientToRemove>::iterator iter;
 	for( iter = clientRemoveList.begin(); iter != clientRemoveList.end(); ++iter )
 	{
@@ -1093,11 +1117,12 @@ bool MediaProcessor::clientToRemoveRemoveFromList(	std::vector<ClientToRemove>&	
 			&& ( client.m_MediaType == mediaType ) )
 		{
 			clientRemoveList.erase( iter );
-			return true;
+			removed = true;
+			break;
 		}
 	}
 
-	return false;
+	return removed;
 }
 
 //============================================================================
@@ -1124,6 +1149,7 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 		if( stopSpeakerOutput )
 		{
 			m_SpeakerOutputEnabled = false;
+			LogMsg( LOG_VERBOSE, "MediaProcessor::wantMixerMediaInput stoping speaker output module %s", DescribeAppModule( appModule ) );
 			IToGui::getAudioRequests().toGuiWantSpeakerOutput( appModule, false );
 			IToGui::getAudioRequests().toGuiWantMicrophoneRecording( appModule, false );
 		}
@@ -1133,8 +1159,14 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 	{
 		// if been commanded to remove and now adding remove the previous command
 		m_MixerRemoveMutex.lock();
-		clientToRemoveRemoveFromList( m_MixerClientRemoveList, mediaType, callback, userData );
+		bool wasRemoved = clientToRemoveRemoveFromList( m_MixerClientRemoveList, mediaType, callback, userData );
 		m_MixerRemoveMutex.unlock();
+		if( wasRemoved )
+		{
+			m_MixerClientsMutex.lock();
+			removeClientFromListist( m_MixerList, mediaType, callback, userData );
+			m_MixerClientsMutex.unlock();
+		}
 	}
 
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
@@ -1173,7 +1205,7 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 
 	if( startSpeakerOutput )
 	{
-		LogMsg( LOG_INFO, "starting speaker output" );
+		LogMsg( LOG_VERBOSE, "MediaProcessor::wantMixerMediaInput starting speaker output module %s", DescribeAppModule( appModule ) );
 		IToGui::getAudioRequests().toGuiWantSpeakerOutput( appModule, true );	
 	}
 }
@@ -1239,7 +1271,7 @@ void MediaProcessor::doMixerClientRemovals( std::vector<ClientToRemove>& clientR
 		if( stopSpeakerOutput )
 		{
 			m_SpeakerOutputEnabled = false;
-			LogMsg( LOG_INFO, "stopping speaker output" );
+			LogMsg( LOG_VERBOSE, "MediaProcessor::doMixerClientRemovals stopping speaker output module %s", DescribeAppModule( appModule ) );
 			IToGui::getAudioRequests().toGuiWantSpeakerOutput( appModule, false );
 		}
 	}

@@ -37,8 +37,10 @@ AudioOutIo::AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent 
 , m_MyApp( mgr.getMyApp() )
 , m_AudioBufMutex( audioOutMutex )
 , m_AudioOutState( QAudio::StoppedState )
+, m_SpeakerOutputEnableTimer( new QTimer( this ) )
 {
-    connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
+    m_SpeakerOutputEnableTimer->setInterval( 200 );
+    connect( m_SpeakerOutputEnableTimer, SIGNAL(timeout()), this, SLOT(slotUpdateSpeakerOutputEnable()) );
 }
 
 //============================================================================
@@ -122,18 +124,21 @@ bool AudioOutIo::soundOutDeviceChanged( int deviceIndex )
 }
 
 //============================================================================
-void AudioOutIo::wantSpeakerOutput( bool enableOutput ) 
+void AudioOutIo::wantSpeakerOutput( bool enableOutput )
 {
     m_SpeakerOutputEnabled = enableOutput;
-    m_AudioOutputDevice->stop();
-    if( !m_AudioOutDeviceIsStarted )
-	{
-        m_AudioOutDeviceIsStarted = true;
-    }
+    // if we start stop start to fast windows crashes with Exception thrown at 0x00007FFC0C4C4FD9 (KernelBase.dll) in NoLimitConnectD.exe: WinRT originate error - 0xC00D36B3 : 'The stream number provided was invalid.'.
+    // so fire a timer
+    m_SpeakerOutputEnableTimer->start();
+}
 
-    if( enableOutput )
+//============================================================================
+void AudioOutIo::slotUpdateSpeakerOutputEnable( void )
+{
+    m_SpeakerOutputEnableTimer->stop();
+    if( m_SpeakerOutputEnabled )
     {
-        if (m_AudioOutputDevice->state() == QAudio::SuspendedState || m_AudioOutputDevice->state() == QAudio::StoppedState)
+        if (m_AudioOutputDevice->state() == QAudio::SuspendedState)
         {
             m_AudioOutputDevice->resume();
         }
@@ -145,8 +150,10 @@ void AudioOutIo::wantSpeakerOutput( bool enableOutput )
         {
             // no-op
         }
-
-        startAudioOut();
+        else if( m_AudioOutputDevice->state() == QAudio::StoppedState )
+        {
+            startAudioOut();
+        }
     }
     else
     {
@@ -175,15 +182,13 @@ void AudioOutIo::startAudioOut( void )
         m_AudioOutputDevice->setBufferSize( m_AudioFormat.channelCount() == 1 ? AUDIO_BUF_SIZE_48000_1_S16 : AUDIO_BUF_SIZE_48000_2_S16 );
     }
 
-    m_AudioOutDeviceIsStarted = true;
     m_AudioIoMgr.speakerDeviceEnabled( true );
 }
 
 //============================================================================
 void AudioOutIo::stopAudioOut( void )
 {
-    m_AudioOutputDevice->suspend();
-    m_AudioOutDeviceIsStarted = false;
+    m_AudioOutputDevice->stop();
     m_AudioIoMgr.speakerDeviceEnabled( false );
 }
 
@@ -199,12 +204,6 @@ qint64 AudioOutIo::bytesAvailable() const
 qint64 AudioOutIo::size() const
 {
     return m_AudioIoMgr.getAudioOutMixer().getMixerFrameSize();
-}
-
-//============================================================================
-void AudioOutIo::fromGuiCheckSpeakerOutForUnderrun()
-{
-    emit signalCheckForBufferUnderun();
 }
 
 //============================================================================
@@ -260,12 +259,6 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 
     int64_t speakerReadTimeMs = m_SpeakerReadTimeEstimator.estimateTime( timeNow );
     int speakerReqSampleCnt = maxlen / 2;
-
-    // with the new system we no longer have to worry about remainder for upsampler multiplier
-    //if( speakerReqSampleCnt % getUpsampleMultiplier() || getUpsampleMultiplier() != 6 )
-    //{
-    //    LogMsg( LOG_VERBOSE, "AudioOutIo::readData samples have a upsample remainder %d of sample cnt %d ", speakerReqSampleCnt % getUpsampleMultiplier(), speakerReqSampleCnt );
-    //}
 
     if( m_AudioTestState != eAudioTestStateNone )
     {
@@ -397,94 +390,6 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 			return;
 		}      
 	}
-}
-
-//============================================================================
-// resume qt audio if needed
-void AudioOutIo::slotCheckForBufferUnderun()
-{
-    if( VxIsAppShuttingDown() )
-    {
-        // do not attempt anythig while being destroyed
-        return;
-    }
-
-    /*
-    int bufferedAudioData = m_AudioIoMgr.getDataReadyForSpeakersLen();
-    
-	if( m_AudioOutputDevice )
-	{
-        m_AudioOutPreviousState = m_AudioOutState;
-		m_AudioOutState = m_AudioOutputDevice->state();
-		//qWarning() << "checkForBufferUnderun audioState = " << audioState;
-		QAudio::Error audioError = m_AudioOutputDevice->error();
-        if( audioError != QAudio::NoError )
-        {
-            LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker Error %s", m_AudioIoMgr.describeAudioError( audioError ) );
-        }
-		//qWarning() << "checkForBufferUnderun audioError = " << audioError;
-//		qWarning() << "checkForBufferUnderun bufferSize = " << m_AudioOutputDevice->bufferSize();
-		//qWarning() << "checkForBufferUnderun bytesAvail = " << bufferedAudioData;
-
-		switch( m_AudioOutState )
-		{
-		case QAudio::ActiveState:
-            if( QAudio::UnderrunError == m_AudioOutPreviousError )
-            {
-                 m_AudioOutPreviousError = QAudio::NoError;
-            }
-			break;
-		case QAudio::IdleState:
-            if( !bufferedAudioData && audioError == QAudio::UnderrunError )
-			{
-                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker idle due to underrun" );
-                m_AudioOutputDevice->suspend();
-
-			}
-            else if( bufferedAudioData >= m_AudioOutputDevice->bufferSize() )
-			{
-                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker resuming due to idle and have data" );
-
-
-                m_AudioOutputDevice->suspend();
-
-                m_AudioOutputDevice->resume();
-
-            }
-			else
-			{
-				// already stopped and have no data
-			}
-			break;
-
-		case QAudio::SuspendedState:
-            if( bufferedAudioData >= AUDIO_BUF_SIZE_8000_1_S16 )
-			{ 
-                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun speaker out resuming due to suspended and have data" );
-                m_AudioOutputDevice->resume();
-
-            }
-			break;
-
-		case QAudio::StoppedState: 
-            if( bufferedAudioData >= m_AudioOutBufferSize )
-			{
-                LogMsg( LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun restarting due to stopped and have data" );
-                m_AudioOutputDevice->start( this );
-			}
-			break;
-
-        default:
-            LogMsg(LOG_DEBUG, "AudioOutIo::slotCheckForBufferUnderun Unknown AudioOut State");
-            break;
-		};
-
-        if( QAudio::NoError != audioError )
-        {
-            m_AudioOutPreviousError = audioError;
-	}
-	}
-    */
 }
 
 //============================================================================

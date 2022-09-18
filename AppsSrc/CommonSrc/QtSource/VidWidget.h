@@ -80,6 +80,8 @@ signals:
 	void						recordEnd();
 	void						playBegin();
 	void						playEnd();
+	void						signalFeedRotationChanged( int feedRotation );
+	void						signalCamRotationChanged( int feedRotation );
 
 protected slots:
 	void						slotStatusMsg( QString userMsg );

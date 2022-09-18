@@ -35,10 +35,13 @@ void AppCommon::toGuiScanSearchComplete( EScanType eScanType )
 //============================================================================
 void AppCommon::slotInternalToGuiScanSearchComplete( EScanType eScanType )
 {
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiClientScanSearchComplete( eScanType );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -57,10 +60,13 @@ void AppCommon::slotInternalToGuiScanResultSuccess( EScanType eScanType, VxNetId
 {
     GuiUser * guiUser = m_UserMgr.getUser( netIdent.getMyOnlineId() );
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiScanResultSuccess( eScanType, guiUser );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -79,10 +85,13 @@ void AppCommon::slotInternalToGuiSearchResultError( EScanType eScanType, VxNetId
 {
     GuiUser * netIdent = m_UserMgr.getUser( netIdentIn.getMyOnlineId() );
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiSearchResultError( eScanType, netIdent, errCode );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -97,10 +106,13 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdentIn,
 
     GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiSearchResultProfilePic( netIdent, pu8JpgData, u32JpgDataLen );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -118,9 +130,12 @@ void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn,
 
     GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiSearchResultFileSearch( netIdent, lclSessionId, u8FileType, u64FileLen, pFileName, assetId );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 

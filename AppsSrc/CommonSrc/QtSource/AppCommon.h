@@ -680,7 +680,6 @@ signals:
     void						signalInternalWantVideoCapture( EAppModule appModule, bool enableCapture );
 
 	void						signalSetRelayHelpButtonVisibility( bool isVisible );
-	void						signalMultiSessionAction( VxGUID idPro, EMSessionAction mSessionAction, int pos0to100000 );
 
 	void						signalToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
     void                        signalSystemReady( bool isReady );
@@ -855,10 +854,6 @@ protected:
     void						registerMetaData();
     void						doAccountStartup( void );
 
- //   void                        getToGuiActivityInterfaceList( std::vector<ToGuiActivityInterface*>& clientList ) { clientList = m_ToGuiActivityInterfaceList; }
-//    bool                        clientStillWantsToGuiActivityCallback( ToGuiActivityInterface* client ) 
-//                                    { return std::find( m_ToGuiActivityInterfaceList.begin(), m_ToGuiActivityInterfaceList.end(), client ) != m_ToGuiActivityInterfaceList.end(); }
-
 	//=== vars ===//
 	QApplication&				m_QApp;
 	EDefaultAppMode				m_AppDefaultMode;
@@ -915,6 +910,11 @@ protected:
 
 	uint32_t					m_CamSourceId;
 	uint32_t					m_CamCaptureRotation;
+
+    bool	                    m_ToGuiActivityInterfaceBusy{ false };
+    bool	                    m_ToGuiFileXferInterfaceBusy{ false };
+    bool                        m_ToGuiHardwareCtrlBusy{ false };
+    bool                        m_ToGuiUserUpdateClientBusy{ false };
 
 	std::vector<ToGuiActivityInterface*>	    m_ToGuiActivityInterfaceList;
 	std::vector<ToGuiFileXferInterface*>	    m_ToGuiFileXferInterfaceList;

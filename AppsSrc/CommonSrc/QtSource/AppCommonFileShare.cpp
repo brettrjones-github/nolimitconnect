@@ -40,12 +40,14 @@ void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent,
 	FileListReplySession * replySession = new FileListReplySession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), 
 																	u8FileType, u64FileLen, pFileName, assetId, fileHashData );
 
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiFileListReply( replySession );
 	}
 
+	m_ToGuiFileXferInterfaceBusy = false;
 	replySession->deleteLater();
 }
 
@@ -72,12 +74,14 @@ void AppCommon::slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePlug
 {
 	GuiFileXferSession * fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ), lclSessionId,
 																	fileType, fileLen, fileName.toUtf8().constData(), assetId, fileHashId );
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiStartUpload( fileXferSession );
 	}
 
+	m_ToGuiFileXferInterfaceBusy = false;
 	fileXferSession->deleteLater();
 }
 
@@ -104,12 +108,14 @@ void AppCommon::slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePl
 {
 	GuiFileXferSession * fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ),
 		lclSessionId, fileType, fileLen, fileName.toUtf8().constData(), assetId, fileHashId );
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiStartDownload( fileXferSession );
 	}
 
+	m_ToGuiFileXferInterfaceBusy = false;
 	fileXferSession->deleteLater();
 }
 
@@ -127,11 +133,14 @@ void AppCommon::toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId
 //============================================================================
 void AppCommon::slotInternalToGuiFileXferState( EPluginType pluginType, VxGUID lclSessionId, EXferState eXferState, int param1, int param2 )
 {
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiFileXferState( pluginType, lclSessionId, eXferState, param1, param2 );
 	}
+
+	m_ToGuiFileXferInterfaceBusy = false;
 }
 
 //============================================================================
@@ -148,11 +157,14 @@ void AppCommon::toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSe
 //============================================================================
 void AppCommon::slotInternalToGuiFileDownloadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError )
 {
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiFileDownloadComplete( pluginType, lclSessionId, fileName, xferError );
 	}
+
+	m_ToGuiFileXferInterfaceBusy = false;
 }
 
 //============================================================================
@@ -170,11 +182,14 @@ void AppCommon::toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSess
 //============================================================================
 void AppCommon::slotInternalToGuiFileUploadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError )
 {
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiFileUploadComplete( pluginType, lclSessionId, xferError );
 	}
+
+	m_ToGuiFileXferInterfaceBusy = false;
 }
 
 //============================================================================
@@ -195,9 +210,12 @@ void AppCommon::toGuiFileList(	const char *	fileName,
 	fileInfo.setIsInLibrary( isInLibrary );
 	fileInfo.setIsShared( isShared );
 
+	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
 		client->toGuiFileList( fileInfo );
 	}
+
+	m_ToGuiFileXferInterfaceBusy = false;
 }

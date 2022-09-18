@@ -57,8 +57,6 @@ public:
     void                        wantSpeakerOutput( bool enableOutput );
     bool                        isSpeakerOutputWanted( void )                   { return m_SpeakerOutputEnabled; }
 
-    void                        fromGuiCheckSpeakerOutForUnderrun(); 
-
     void                        flush( void );
 
     void                        suspend( void )                                 { if (m_AudioOutputDevice.data() ) m_AudioOutputDevice->suspend(); }
@@ -75,12 +73,9 @@ public:
     AudioSampleBuf&             getSpeakerEchoSamples( int64_t& tailOfSpeakerSamplestimeMs ) { tailOfSpeakerSamplestimeMs = m_EndOfEchoBufferTimestamp; return m_EchoFarBuffer; }
 
     void						echoCancelSyncStateThreaded( bool inSync );
- 
-signals:
-    void						signalCheckForBufferUnderun( void );
 
 protected slots:
-    void						slotCheckForBufferUnderun( void );
+    void                        slotUpdateSpeakerOutputEnable( void );
     void                        onAudioDeviceStateChanged( QAudio::State state );
 
 protected:
@@ -108,7 +103,6 @@ private:
     QAudio::Error               m_AudioOutPreviousError{ QAudio::UnderrunError };
     QScopedPointer<QAudioSink>  m_AudioOutputDevice;
 
-    bool                        m_AudioOutDeviceIsStarted{ false };
     int                         m_UpsampleMutiplier{ 0 };
 
     int16_t                     m_PrevLastsample{ 0 };
@@ -127,4 +121,5 @@ private:
 
     int                         m_PeakAudioOutAmplitude{ 0 };
     QElapsedTimer               m_ElapsedOutTimer;
+    QTimer*                     m_SpeakerOutputEnableTimer{ nullptr };
 };

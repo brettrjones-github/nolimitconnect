@@ -41,12 +41,14 @@ void AppCommon::toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId,
 void AppCommon::slotInternalToGuiIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp )
 {
     LogMsg( LOG_INFO, "AppCommon::toGuiIndentListUpdate %d", listType );
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiIndentListUpdate( listType, onlineId, timestamp );
     }
 
+    m_ToGuiUserUpdateClientBusy = false;
     getUserMgr().toGuiIndentListUpdate( listType, onlineId, timestamp );
 }
 
@@ -70,12 +72,14 @@ void AppCommon::slotInternalToGuiIndentListRemove( EUserViewType listType, VxGUI
         return;
     }
 
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiIndentListRemove( listType, onlineId);
     }
 
+    m_ToGuiUserUpdateClientBusy = false;
     getUserMgr().toGuiIndentListRemove( listType, onlineId );
 }
 
@@ -100,10 +104,13 @@ void AppCommon::toGuiContactAdded( VxNetIdent* netIdent )
 void AppCommon::slotInternalToGuiContactAdded( VxNetIdent netIdent )
 {
     getUserMgr().toGuiContactAdded( &netIdent );
+    m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiContactAdded( &netIdent );
     }
+
+    m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -120,11 +127,13 @@ void AppCommon::toGuiContactRemoved( VxGUID& onlineId )
 //============================================================================
 void AppCommon::slotInternalToGuiContactRemoved( VxGUID onlineId )
 {
+    m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiContactRemoved( onlineId );
     }
 
+    m_ToGuiActivityInterfaceBusy = false;
     getUserMgr().toGuiContactRemoved( onlineId );
 }
 
@@ -152,10 +161,13 @@ void AppCommon::slotInternalToGuiContactOffline( VxGUID onlineId )
     if( user )
     {
         LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOffline user %s", user->getOnlineName().c_str() );
+        m_ToGuiActivityInterfaceBusy = true;
 	    for( auto client : m_ToGuiActivityInterfaceList )
 	    {
 		    client->toGuiContactOffline( user );
 	    }
+
+        m_ToGuiActivityInterfaceBusy = false;
     }
     else
     {
@@ -192,10 +204,13 @@ void AppCommon::slotInternalToGuiContactOnline( VxNetIdent netIdent )
 
     LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOnline user %s", netIdent.getOnlineName() );
     getUserMgr().toGuiContactOnline( &netIdent );
+    m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiContactOnline( &netIdent );
     }
+
+    m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -220,11 +235,14 @@ void AppCommon::slotInternalToGuiContactNameChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactNameChange %s", netIdent.getOnlineName());
     getUserMgr().toGuiContactNameChange( &netIdent );
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactNameChange( &netIdent );
     }
+
+    m_ToGuiUserUpdateClientBusy = false;
 }
 
 //============================================================================
@@ -281,11 +299,14 @@ void AppCommon::slotInternalToGuiContactMyFriendshipChange( VxNetIdent netIdent 
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactMyFriendshipChange %s", netIdent.getOnlineName());
     getUserMgr().toGuiContactMyFriendshipChange( &netIdent );
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactMyFriendshipChange( &netIdent );
     }
+
+    m_ToGuiUserUpdateClientBusy = false;
 }
 
 //============================================================================
@@ -311,11 +332,14 @@ void AppCommon::slotInternalToGuiContactHisFriendshipChange( VxNetIdent netIdent
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactHisFriendshipChange %s", netIdent.getOnlineName());
     getUserMgr().toGuiContactHisFriendshipChange( &netIdent );
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactHisFriendshipChange( &netIdent );
     }
+
+    m_ToGuiUserUpdateClientBusy = false;
 }
 
 //============================================================================
@@ -341,11 +365,14 @@ void AppCommon::slotInternalToGuiPluginPermissionChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiPluginPermissionChange %s", netIdent.getOnlineName());
     getUserMgr().toGuiPluginPermissionChange( &netIdent );
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiPluginPermissionChange( &netIdent );
     }
+
+    m_ToGuiUserUpdateClientBusy = false;
 }
 
 //============================================================================
@@ -371,11 +398,14 @@ void AppCommon::slotInternalToGuiContactSearchFlagsChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactSearchFlagsChange %s", netIdent.getOnlineName()); 
     getUserMgr().toGuiContactSearchFlagsChange( &netIdent );
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactSearchFlagsChange( &netIdent );
     }    
+
+    m_ToGuiUserUpdateClientBusy = false;
 }
 
 //============================================================================
@@ -424,11 +454,14 @@ void AppCommon::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 void AppCommon::slotInternalToGuiContactLastSessionTimeChange( VxNetIdent netIdent )
 {
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactLastSessionTimeChange %s", netIdent.getOnlineName());
+    m_ToGuiUserUpdateClientBusy = true;
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
         ToGuiUserUpdateInterface* client = *iter;
         client->toGuiContactLastSessionTimeChange( &netIdent );
     }
+
+    m_ToGuiUserUpdateClientBusy = false;
 }
 
 //============================================================================

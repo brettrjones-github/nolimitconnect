@@ -908,20 +908,26 @@ void AppCommon::toGuiPluginCommError( EPluginType pluginType, VxGUID& onlineId, 
 //============================================================================
 void AppCommon::slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue )
 {
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiPluginMsg( pluginType, onlineId, msgType, paramValue );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
 void AppCommon::slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError )
 {
 	QString commErrDescription = GuiParams::describeCommError( commError );
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiPluginMsg( pluginType, onlineId, msgType, commErrDescription );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1394,10 +1400,13 @@ void AppCommon::slotInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUI
 		return;
 	}
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiSetGameValueVar( ePluginType, onlineId, s32VarId, s32VarValue );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1422,10 +1431,13 @@ void AppCommon::slotInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGU
 		return;
 	}
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiSetGameActionVar( ePluginType, onlineId, s32VarId, s32VarValue );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1458,12 +1470,13 @@ void AppCommon::slotInternalToGuiAssetAdded( AssetBaseInfo assetInfo )
 	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
 	// check if client is in list each time to avoid out of range vector interation crash
 
-	int clientIdx = 0;
-	while( clientIdx < m_ToGuiActivityInterfaceList.size() )
+	m_ToGuiActivityInterfaceBusy = true;
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		m_ToGuiActivityInterfaceList[ clientIdx ]->toGuiAssetAdded( assetInfo );
-		clientIdx++;
+		client->toGuiAssetAdded( assetInfo );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 
 	/*
 	std::vector<ToGuiActivityInterface*> clientList;
@@ -1495,12 +1508,13 @@ void AppCommon::slotInternalToGuiAssetUpdated( AssetBaseInfo assetInfo )
 	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
 // check if client is in list each time to avoid out of range vector interation crash
 
-	int clientIdx = 0;
-	while( clientIdx < m_ToGuiActivityInterfaceList.size() )
+	m_ToGuiActivityInterfaceBusy = true;
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		m_ToGuiActivityInterfaceList[ clientIdx ]->toGuiAssetUpdated( assetInfo );
-		clientIdx++;
+		client->toGuiAssetUpdated( assetInfo );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 
 	/*
 	std::vector<ToGuiActivityInterface*> clientList;
@@ -1531,12 +1545,13 @@ void AppCommon::slotInternalToGuiAssetRemoved( AssetBaseInfo assetInfo )
 	// when assets are removed they might call wantToGuiActivityCallbacks and change the clientList
 // check if client is in list each time to avoid out of range vector interation crash
 
-	int clientIdx = 0;
-	while( clientIdx < m_ToGuiActivityInterfaceList.size() )
+	m_ToGuiActivityInterfaceBusy = true;
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		m_ToGuiActivityInterfaceList[ clientIdx ]->toGuiAssetRemoved( assetInfo );
-		clientIdx++;
+		client->toGuiAssetUpdated( assetInfo );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 
 	/*
 	std::vector<ToGuiActivityInterface*> clientList;
@@ -1565,10 +1580,13 @@ void AppCommon::toGuiAssetXferState( VxGUID& assetUniqueId, EAssetSendState asse
 //============================================================================
 void AppCommon::slotInternalToGuiAssetXferState( VxGUID assetUniqueId, EAssetSendState assetSendState, int param )
 {
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiAssetXferState( assetUniqueId, assetSendState, param );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1592,15 +1610,13 @@ void AppCommon::slotInternalToGuiAssetSessionHistory( AssetBaseInfo* assetInfo )
 		return;
 	}
 
-	// when assets are added they might call wantToGuiActivityCallbacks and change the clientList
-	// check if client is in list each time to avoid out of range vector interation crash
-	int listIdx = 0;
-	while( listIdx < m_ToGuiActivityInterfaceList.size() )
+	m_ToGuiActivityInterfaceBusy = true;
+	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		m_ToGuiActivityInterfaceList[listIdx]->toGuiAssetSessionHistory( *assetInfo );
-		listIdx++;
+		client->toGuiAssetSessionHistory( *assetInfo );
 	}
 
+	m_ToGuiActivityInterfaceBusy = false;
 	delete assetInfo;
 }
 
@@ -1625,10 +1641,13 @@ void AppCommon::slotInternalToGuiAssetAction( EAssetAction assetAction, VxGUID a
         return;
     }
 
+	m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiClientAssetAction( assetAction, assetId, pos0to100000 );
     }
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1650,12 +1669,13 @@ void AppCommon::slotInternalMultiSessionAction( VxGUID onlineId, EMSessionAction
 		return;
 	}
 
-	emit signalMultiSessionAction( onlineId, mSessionAction, pos0to100000 );
-
+	m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiMultiSessionAction(  mSessionAction, onlineId, pos0to100000 );
     }
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1684,10 +1704,13 @@ void AppCommon::slotInternalBlobAction( EAssetAction assetAction, VxGUID assetId
 		return;
 	}
 
+	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
 		client->toGuiClientBlobAction( assetAction, assetId, pos0to100000 );
 	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1709,10 +1732,13 @@ void AppCommon::slotInternalBlobAdded( BlobInfo blobInfo )
 		return;
 	}
 
+	m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiBlobAdded( blobInfo );
     }
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1735,10 +1761,13 @@ void AppCommon::slotInternalBlobSessionHistory( BlobInfo blobInfo )
 		return;
 	}
 
+	m_ToGuiActivityInterfaceBusy = true;
     for( auto client : m_ToGuiActivityInterfaceList )
     {
         client->toGuiBlobSessionHistory( blobInfo );
     }
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
@@ -1869,9 +1898,14 @@ static bool actCallbackShutdownComplete = false;
 		return;
 	}
 
+	if( m_ToGuiActivityInterfaceBusy )
+	{
+		LogMsg( LOG_ERROR, "AppCommon::wantToGuiActivityCallbacks do NOT call while busy" );
+	}
+
 	if( wantCallback )
 	{
-		for( ToGuiActivityInterface* client : m_ToGuiActivityInterfaceList )
+		for( auto client : m_ToGuiActivityInterfaceList )
 		{
 			if( client == callback )
 			{
@@ -1925,13 +1959,18 @@ void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface*	    callback
 		return;
 	}
 
+	if( m_ToGuiFileXferInterfaceBusy )
+	{
+		LogMsg( LOG_ERROR, "AppCommon::wantToGuiFileXferCallbacks do NOT call while busy" );
+	}
+
 	if( wantCallback )
 	{
 		for( ToGuiFileXferInterface* client : m_ToGuiFileXferInterfaceList )
 		{
 			if( client == callback )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New m_ToGuiActivityInterface.h because already in list" );
+				LogMsg( LOG_VERBOSE, "WARNING. Ignoring New m_ToGuiActivityInterface.h because already in list" );
 				return;
 			}
 		}
@@ -1969,6 +2008,11 @@ static bool actCallbackShutdownComplete = false;
 		actCallbackShutdownComplete = true;
 		clearHardwareCtrlList();
 		return;
+	}
+
+	if( m_ToGuiHardwareCtrlBusy )
+	{
+		LogMsg( LOG_ERROR, "AppCommon::wantToGuiHardwareCtrlCallbacks do NOT call while busy" );
 	}
 
 	if( wantCallback )
@@ -2025,6 +2069,11 @@ void AppCommon::wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callbac
         clearUserUpdateClientList();
         return;
     }
+
+	if( m_ToGuiUserUpdateClientBusy )
+	{
+		LogMsg( LOG_INFO, "AppCommon::wantToGuiUserUpdateCallbacks do NOT call while busy" );
+	}
 
     if( wantCallback )
     {
