@@ -106,8 +106,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent, EAppM
 	// kind of a strange way of handling the problem of which video to enable
 	// if there are any myIdents in requests for eMediaInputVideoPkts then vid capture will be enabled but others
 	// in that list allow processing of incoming packets without enabling video capture for the case of cam server client which does not require video capture
-	VxNetIdent * myIdent = &m_PluginMgr.getEngine().getMyPktAnnounce();
-	bool isMyself = ( netIdent->getMyOnlineId() == myIdent->getMyOnlineId() ); 
+	bool isMyself = ( netIdent->getMyOnlineId() == m_Engine.getMyOnlineId() ); 
 	if( enable )
 	{
 		if( m_GuidList.addGuidIfDoesntExist( netIdent->getMyOnlineId() ) )
@@ -121,7 +120,14 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent, EAppM
 					if( !m_VideoPktsRequested )
 					{
 						m_VideoPktsRequested = true;
-						m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, true, myIdent );
+						m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, true, netIdent );
+					}
+
+					// always show ourself if web cam server is enabled
+					if( !m_VideoJpgRequesed )
+					{
+						m_VideoJpgRequesed = true;
+						m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoJpgSmall, appModule, true, (void*)m_Plugin.getPluginType() );
 					}
 				}
 				else
@@ -132,14 +138,6 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent, EAppM
 						m_VideoPktsRequested = true;
 						m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, true, (void *)m_Plugin.getPluginType() );
 					}
-
-					// dont need the jpgs because dont need to see ourself
-					//if( !m_VideoJpgRequesed )
-					//{
-					//	m_VideoJpgRequesed = true;
-					//	m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoJpgSmall, true );
-					//}
-
 				}
 			}
 			else
@@ -153,7 +151,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent, EAppM
 				if( !m_VideoPktsRequested )
 				{
 					m_VideoPktsRequested = true;
-					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, true, (void *)myIdent );
+					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, true, (void *)netIdent );
 				}
 			}
 		}
@@ -209,7 +207,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent, EAppM
 					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoJpgSmall, appModule, false, (void *)m_Plugin.getPluginType() );
 					m_VideoJpgRequesed = false;
 					//LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture eMediaInputVideoPkts false %s\n", netIdent->getOnlineName() );
-					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, false, (void *)myIdent );
+					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoPkts, appModule, false, (void *)&m_Engine.getMyPktAnnounce() );
 					m_VideoPktsRequested = false;
 					//LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture eMediaInputVideoPkts false done %s\n", netIdent->getOnlineName() );
 				}

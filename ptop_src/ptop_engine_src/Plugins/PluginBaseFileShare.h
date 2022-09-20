@@ -106,12 +106,13 @@ protected:
 	virtual void				onPktFileListReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktFileShareErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
+	virtual void				updateSharedFilesInfo( void );
+
 private:
 	bool						isFileShared( std::string& fileName );
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
 	virtual void				onConnectionLost( VxSktBase * sktBase );
-
 
 	//=== vars ===//
 	PluginSessionMgr			m_PluginSessionMgr;

@@ -14,9 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-
 #include "PluginBaseFileShare.h"
-
 
 class PluginServiceFileShare : public PluginBaseFileShare
 {
@@ -24,14 +22,7 @@ public:
 	PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginServiceFileShare() = default;
 
-protected:
-
-
-private:
-
-
-	//=== vars ===//
-
+	virtual void onNetworkConnectionReady( bool requiresRelay ) override;
 };
 
 

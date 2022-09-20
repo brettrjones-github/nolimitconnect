@@ -39,3 +39,12 @@ PluginServiceFileShare::PluginServiceFileShare( P2PEngine& engine, PluginMgr& pl
 : PluginBaseFileShare( engine, pluginMgr, myIdent, pluginType, "FileLibrary.db3", "FileShareService.db3" )
 {
 }
+
+//============================================================================
+void PluginServiceFileShare::onNetworkConnectionReady( bool requiresRelay )
+{
+	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
+	{
+		updateSharedFilesInfo();
+	}
+}

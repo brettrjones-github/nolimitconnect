@@ -152,6 +152,8 @@ public:
 
 	void						leavePreviousHost( GroupieId& groupieId );
 
+	void						onNetworkConnectionReady( bool requiresRelay );
+
 protected:
 	bool						isValidPluginNum( uint8_t u8PluginNum );
     PluginBase*                 hostClientToPlugin( EHostType hostType );

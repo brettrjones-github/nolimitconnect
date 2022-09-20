@@ -21,6 +21,8 @@ public:
 	PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginAboutMePageServer() = default;
 
+	void						onNetworkConnectionReady( bool requiresRelay );
+
 protected:
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 	virtual void				onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
@@ -31,6 +33,8 @@ protected:
 
 	void						checkIsWebPageServerReady( void );
 	void						onWebPageServerReady( bool isReady );
+
+	void						updateHasProfilePictureChanged( void );
 
 	std::string					m_RootFileFolder{""};
 	bool						m_WebPageServerReady{ false };

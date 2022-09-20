@@ -249,11 +249,10 @@ void SharedFilesMgr::updateFileTypes( void )
 	lockFileListPackets();
 	lockSharedFiles();
 
-	std::vector<SharedFileInfo*>::iterator iter;
-	for( iter = m_SharedList.begin(); iter != m_SharedList.end(); ++iter )
+	for( auto sharedFileInfo : m_SharedList )
 	{
-		m_u16FileTypes		|= (*iter)->getFileType();
-		m_s64TotalByteCnt	+= (*iter)->getFileLength();
+		m_u16FileTypes		|= sharedFileInfo->getFileType();
+		m_s64TotalByteCnt	+= sharedFileInfo->getFileLength();
 	}
 	
 	unlockSharedFiles();

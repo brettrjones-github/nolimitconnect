@@ -217,3 +217,9 @@ void PluginBaseWebClient::onContactWentOffline( VxNetIdent * netIdent, VxSktBase
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }
+
+//============================================================================
+void PluginBaseWebClient::onNetworkConnectionReady( bool requiresRelay )
+{
+
+}

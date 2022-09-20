@@ -82,6 +82,8 @@ protected:
 													bool				bWaitForSuccess = false );
 	void						setIsPluginInSession( bool isInSession );
 
+	virtual	void				onNetworkConnectionReady( bool requiresRelay ) override;
+
 	//=== vars ===//
 	PluginSessionMgr			m_PluginSessionMgr;					
 	VoiceFeedMgr				m_VoiceFeedMgr;

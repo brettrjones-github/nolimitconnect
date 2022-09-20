@@ -63,19 +63,19 @@ bool VxSearchFlags::hasSearchFlags( void )
 
 //============================================================================
 //! return true if has any shared files
-bool	VxSearchFlags::hasSharedFiles( void )					
+bool VxSearchFlags::hasSharedFiles( void )					
 { 
 	return ( VXFILE_TYPE_ALLNOTEXE & m_u8FileTypeFlags ) ? true : false; 
 }
 
 //============================================================================
-bool	VxSearchFlags::hasPhotoFiles( void )					
+bool VxSearchFlags::hasPhotoFiles( void )					
 { 
 	return (VXFILE_TYPE_PHOTO & getSharedFileTypes()) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasPhotoFiles( bool bHasFiles )				
+void VxSearchFlags::setHasPhotoFiles( bool bHasFiles )				
 {
 	if( bHasFiles )
 		setSharedFileTypes( getSharedFileTypes() | VXFILE_TYPE_PHOTO );
@@ -84,13 +84,13 @@ void	VxSearchFlags::setHasPhotoFiles( bool bHasFiles )
 }
 
 //============================================================================
-bool	VxSearchFlags::hasAudioFiles( void )					
+bool VxSearchFlags::hasAudioFiles( void )					
 { 
 	return (VXFILE_TYPE_AUDIO & getSharedFileTypes()) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasAudioFiles( bool bHasFiles )				
+void VxSearchFlags::setHasAudioFiles( bool bHasFiles )
 {
 	if( bHasFiles )
 		setSharedFileTypes( getSharedFileTypes() | VXFILE_TYPE_AUDIO );
@@ -99,13 +99,13 @@ void	VxSearchFlags::setHasAudioFiles( bool bHasFiles )
 }
 
 //============================================================================
-bool	VxSearchFlags::hasVideoFiles( void )					
+bool VxSearchFlags::hasVideoFiles( void )					
 { 
 	return (VXFILE_TYPE_VIDEO & getSharedFileTypes()) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasVideoFiles( bool bHasFiles )				
+void VxSearchFlags::setHasVideoFiles( bool bHasFiles )
 {
 	if( bHasFiles )
 		setSharedFileTypes( getSharedFileTypes() | VXFILE_TYPE_VIDEO );
@@ -114,13 +114,13 @@ void	VxSearchFlags::setHasVideoFiles( bool bHasFiles )
 }
 
 //============================================================================
-bool	VxSearchFlags::hasDocFiles( void )					
+bool VxSearchFlags::hasDocFiles( void )					
 { 
 	return (VXFILE_TYPE_DOC & getSharedFileTypes()) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasDocFiles( bool bHasFiles )				
+void VxSearchFlags::setHasDocFiles( bool bHasFiles )
 {
 	if( bHasFiles )
 		setSharedFileTypes( getSharedFileTypes() | VXFILE_TYPE_DOC );
@@ -129,13 +129,13 @@ void	VxSearchFlags::setHasDocFiles( bool bHasFiles )
 }
 
 //============================================================================
-bool	VxSearchFlags::hasArcOrCdFiles( void )					
+bool VxSearchFlags::hasArcOrCdFiles( void )					
 { 
 	return (VXFILE_TYPE_ARCHIVE_OR_CDIMAGE & getSharedFileTypes()) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasArcOrCdImageFiles( bool bHasFiles )				
+void VxSearchFlags::setHasArcOrCdImageFiles( bool bHasFiles )
 {
 	if( bHasFiles )
 		setSharedFileTypes( getSharedFileTypes() | VXFILE_TYPE_ARCHIVE_OR_CDIMAGE );
@@ -145,14 +145,14 @@ void	VxSearchFlags::setHasArcOrCdImageFiles( bool bHasFiles )
 
 //============================================================================
 //! return true if has Other files
-bool	VxSearchFlags::hasOtherFiles( void )					
+bool VxSearchFlags::hasOtherFiles( void )					
 { 
 	return (VXFILE_TYPE_OTHER & getSharedFileTypes()) ? true : false; 
 }
 
 //============================================================================
 //! set has audio files
-void	VxSearchFlags::setHasOtherFiles( bool bHasFiles )				
+void VxSearchFlags::setHasOtherFiles( bool bHasFiles )
 {
 	if( bHasFiles )
 		setSearchFlags( getSharedFileTypes() | VXFILE_TYPE_OTHER );
@@ -162,14 +162,14 @@ void	VxSearchFlags::setHasOtherFiles( bool bHasFiles )
 
 //============================================================================
 //! return true if user has set profile picture
-bool	VxSearchFlags::hasProfilePicture( void )					
+bool VxSearchFlags::hasProfilePicture( void )					
 { 
 	return (RC_FLAG_HAS_PROFILE_PIC & getSearchFlags()) ? true : false; 
 }
 
 //============================================================================
 //! set has profile picture
-void	VxSearchFlags::setHasProfilePicture( bool bHasPicture )				
+void VxSearchFlags::setHasProfilePicture( bool bHasPicture )
 {
 	if( bHasPicture )
 		setSearchFlags( getSearchFlags() | RC_FLAG_HAS_PROFILE_PIC );
@@ -178,13 +178,13 @@ void	VxSearchFlags::setHasProfilePicture( bool bHasPicture )
 }
 
 //============================================================================
-bool	VxSearchFlags::hasSharedWebCam( void )					
+bool VxSearchFlags::hasSharedWebCam( void )					
 { 
 	return (RC_FLAG_HAS_SHARED_WEBCAM & getSearchFlags() ) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasSharedWebCam( bool bHasWebCam )				
+void VxSearchFlags::setHasSharedWebCam( bool bHasWebCam )
 {
 	if( bHasWebCam )
 		setSearchFlags( getSearchFlags() | RC_FLAG_HAS_SHARED_WEBCAM );
@@ -193,13 +193,13 @@ void	VxSearchFlags::setHasSharedWebCam( bool bHasWebCam )
 }
 
 //============================================================================
-bool	VxSearchFlags::hasModifiedStoryboard( void )					
+bool VxSearchFlags::hasModifiedStoryboard( void )					
 { 
 	return ( RC_FLAG_HAS_STORY_BOARD & getSearchFlags() ) ? true : false; 
 }
 
 //============================================================================
-void	VxSearchFlags::setHasModifiedStoryboard( bool bHasStoryBoard )				
+void VxSearchFlags::setHasModifiedStoryboard( bool bHasStoryBoard )
 {
 	if( bHasStoryBoard )
 		setSearchFlags( getSearchFlags() | RC_FLAG_HAS_STORY_BOARD );

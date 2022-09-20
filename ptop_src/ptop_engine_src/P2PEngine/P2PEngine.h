@@ -693,6 +693,8 @@ public:
 
     void                        executeAfterLogOnThreadFunctions( void );
 
+    void                        onNetworkConnectionReady( bool requiresRelay, std::string& ipAddr, uint16_t ipPort );
+
 protected:
     //========================================================================
     //========================================================================
@@ -782,6 +784,7 @@ protected:
     bool                        m_EngineInitialized{ false };
     bool                        m_IsEngineCreated{ false };
     bool                        m_IsEngineReady{ false };
+    bool                        m_NetworkConnectionReady{ false };
 
 	PktImAliveReq				m_PktImAliveReq;
 

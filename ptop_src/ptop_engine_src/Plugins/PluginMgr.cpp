@@ -1109,11 +1109,9 @@ VxNetIdent * PluginMgr::pluginApiOnlineIdToIdentity( VxGUID& oOnlineId )
 //============================================================================
 void PluginMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
-	std::vector<PluginBase *>::iterator iter;
-	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
+	for( auto pluginBase : m_aoPlugins )
 	{
-		PluginBase * poPlugin = *(iter);
-		poPlugin->replaceConnection( netIdent, poOldSkt, poNewSkt );
+		pluginBase->replaceConnection( netIdent, poOldSkt, poNewSkt );
 	}
 }
 
@@ -1127,4 +1125,13 @@ void PluginMgr::leavePreviousHost( GroupieId& groupieId )
 	}
 
 	m_Engine.getConnectIdListMgr().disconnectIfIsOnlyUser( groupieId );
+}
+
+//============================================================================
+void PluginMgr::onNetworkConnectionReady( bool requiresRelay )
+{
+	for( auto pluginBase : m_aoPlugins )
+	{
+		pluginBase->onNetworkConnectionReady( requiresRelay );
+	}
 }

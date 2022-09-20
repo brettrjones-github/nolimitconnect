@@ -397,3 +397,9 @@ void PluginBaseFileShare::onContactWentOffline( VxNetIdent * netIdent, VxSktBase
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }
+
+//============================================================================
+void PluginBaseFileShare::updateSharedFilesInfo( void )
+{
+	m_SharedFilesMgr.updateFileTypes();
+}

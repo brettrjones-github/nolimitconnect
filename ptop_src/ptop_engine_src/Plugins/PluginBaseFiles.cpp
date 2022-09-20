@@ -264,7 +264,7 @@ bool PluginBaseFiles::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 												int				pvUserData,
 												const char *	pOfferMsg,		
 												const char *	pFileName,
-												uint8_t *			fileHashId,
+												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )		
 {
 	return m_FileInfoXferMgr.fromGuiMakePluginOffer(	netIdent,		
@@ -279,9 +279,9 @@ bool PluginBaseFiles::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 int PluginBaseFiles::fromGuiPluginControl(	VxNetIdent *	netIdent,
 											const char *	pControl, 
 											const char *	pAction,
-											uint32_t				u32ActionData,
+											uint32_t		u32ActionData,
 											VxGUID&			lclSessionId,
-											uint8_t *			fileHashId )
+											uint8_t *		fileHashId )
 {
 	return m_FileInfoXferMgr.fromGuiPluginControl(		netIdent,		
 														pControl, 

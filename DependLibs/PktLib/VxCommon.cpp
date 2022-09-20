@@ -440,6 +440,7 @@ EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 	{
 		return ePluginAccessLocked;
 	}
+
 	if( (ePluginTypeFileShareServer == ePluginType) && 
 		(false == hasSharedFiles()) )
 	{

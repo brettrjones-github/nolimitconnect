@@ -52,8 +52,6 @@ public:
 	virtual bool				fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId = 0 );
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
 
-	void						onSharedFilesUpdated( void );
-
 	void						updateFileTypes( void );
 	void						updateFileListPackets( void );
 

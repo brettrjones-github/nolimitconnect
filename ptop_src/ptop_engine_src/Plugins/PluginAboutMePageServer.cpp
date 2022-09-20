@@ -75,3 +75,26 @@ void PluginAboutMePageServer::onWebPageServerReady( bool isReady )
 	m_WebPageServerReady = isReady;
 	// do stuff
 }
+
+//============================================================================
+void PluginAboutMePageServer::onNetworkConnectionReady( bool requiresRelay )
+{
+	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
+	{
+		updateHasProfilePictureChanged();
+	}
+}
+
+//============================================================================
+void PluginAboutMePageServer::updateHasProfilePictureChanged( void )
+{
+	std::string profilePicFile = VxGetAppDirectory( eAppDirAboutMePageServer );
+	profilePicFile += "me.png";
+	uint64_t fileSize = VxFileUtil::fileExists( profilePicFile.c_str() );
+
+	// TODO.. DO NOT HARDCODE DEFAULT PROFILE PIC SIZE
+	if( fileSize && 2500 != fileSize )
+	{
+		m_MyIdent->setHasProfilePicture( true );
+	}
+}

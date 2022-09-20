@@ -46,13 +46,13 @@ public:
 
 	virtual bool				connectToWebsite( 	const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-													std::string&		strFile,		// return file name.. images/me.jpg
+													std::string&		strFile,		// return file name.. images/me.png
 													uint16_t&			u16Port,
 													int					iConnectTimeoutMs = WEBSITE_CONNECT_TIMEOUT );
 
 	virtual bool				connectToWebsite(	const char* pWebsiteUrl,
 													std::string& strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-													std::string& strFile,		// return file name.. images/me.jpg
+													std::string& strFile,		// return file name.. images/me.png
 													uint16_t& u16Port,
 													std::string& strResolveIpAddr,
 													int					iConnectTimeoutMs = WEBSITE_CONNECT_TIMEOUT );

@@ -16,7 +16,7 @@
 #include "P2PEngine.h"
 #include "P2PConnectList.h"
 #include <GuiInterface/IToGui.h>
-//#include "Application.h"
+
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 
 #include <ptop_src/ptop_engine_src/Network/NetworkMgr.h>
@@ -29,7 +29,7 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
 
 #include <ptop_src/ptop_engine_src/Search/RcScan.h>
-//#include <ptop_src/ptop_engine_src/WebRelay/RcWebRelaysMgr.h>
+
 #include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
 #include <ptop_src/ptop_engine_src/NetworkTest/IsPortOpenTest.h>
@@ -586,4 +586,19 @@ void P2PEngine::onFirstPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, Big
 			getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
 		}	
 	}
+}
+
+//============================================================================
+void P2PEngine::onNetworkConnectionReady( bool requiresRelay, std::string& ipAddr, uint16_t ipPort )
+{
+	// called after network connection test
+	if( !m_NetworkConnectionReady )
+	{
+		m_NetworkConnectionReady = true;
+		// fire up web cam, file share and other hosted services
+		getPluginMgr().onNetworkConnectionReady( requiresRelay );
+		doPktAnnHasChanged( false );
+	}
+
+	getToGui().toGuiNetworkIsTested( requiresRelay, ipAddr, ipPort );
 }

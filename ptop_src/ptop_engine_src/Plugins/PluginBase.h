@@ -302,6 +302,8 @@ public:
 	virtual void                onGroupDirectUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
 	virtual void                onGroupRelayedUserAnnounce( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent ) {};
 
+	virtual	void				onNetworkConnectionReady( bool requiresRelay ) {};
+
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
 

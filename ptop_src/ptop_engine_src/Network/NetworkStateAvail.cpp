@@ -357,17 +357,11 @@ void NetworkStateAvail::runNetworkState( void )
 
     m_NetworkStateMachine.getNetworkMgr().getNearbyMgr().onPktAnnUpdated();
 
-    /*
     if( !testConnectHadError )
     {
         //LogModule( eLogNetworkState,  LOG_INFO, "111 NetworkStateAvail::runNetworkState done  %3.3f\n", availTimer.elapsedSec() );
-        // setup our hosting services
-        //m_Engine.getMyHostSrvMgr().enableHostedServices( true, canDirectConnect );
 
-        // setup connect to other hosting services
-        m_Engine.getOtherHostSrvMgr().enableHostedServices( true, canDirectConnect );
-
+        // m_Engine.enableHostedServices( true, canDirectConnect );
     }
-    */
 }
 

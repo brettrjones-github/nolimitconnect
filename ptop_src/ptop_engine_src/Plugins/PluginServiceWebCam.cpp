@@ -138,7 +138,7 @@ void PluginServiceWebCam::callbackVideoPktPicChunk( void * /*userData*/, VxGUID&
 
 //============================================================================
 //! called to start service or session with remote friend
-void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	if( netIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() )
 	{
@@ -335,8 +335,7 @@ bool PluginServiceWebCam::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// ide
 }
 
 //============================================================================
-bool PluginServiceWebCam::requestCamSession(	RxSession *			rxSession,
-											bool				bWaitForSuccess )
+bool PluginServiceWebCam::requestCamSession( RxSession* rxSession, bool	bWaitForSuccess )
 {
 	PktSessionStartReq oPkt;
 	oPkt.setLclSessionId( rxSession->getLclSessionId() );
@@ -359,9 +358,9 @@ bool PluginServiceWebCam::requestCamSession(	RxSession *			rxSession,
 	
 	return bSuccess;
 }
+
 //============================================================================
-bool PluginServiceWebCam::stopCamSession(	VxNetIdent *		netIdent,	
-										VxSktBase *			sktBase )
+bool PluginServiceWebCam::stopCamSession( VxNetIdent* netIdent,	VxSktBase* sktBase )
 {
 	LogMsg( LOG_ERROR, "PluginServiceWebCam::stopCamSession");
 	PktSessionStopReq oPkt;
@@ -373,7 +372,6 @@ bool PluginServiceWebCam::stopCamSession(	VxNetIdent *		netIdent,
 
 	return bSuccess;
 }
-
 
 //============================================================================
 //! packet with remote users offer
@@ -679,3 +677,12 @@ void PluginServiceWebCam::onContactWentOffline( VxNetIdent * netIdent, VxSktBase
 	}
 }
 
+//============================================================================
+void PluginServiceWebCam::onNetworkConnectionReady( bool requiresRelay )
+{
+	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
+	{
+		// automatically start web cam on startup if enabled
+		fromGuiStartPluginSession( m_MyIdent, 0, m_MyIdent->getMyOnlineId() );
+	}
+}

@@ -48,9 +48,9 @@ bool                            VxIsIpValid( std::string& ipAddr );
 std::string						VxGetRemoteIpAddress( SOCKET skt );
 std::string						VxGetRmtHostName( SOCKET& skt );
 //! split host name from website file path
-bool							VxSplitHostAndFile( const char * pFullUrl,			// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.jpg
+bool							VxSplitHostAndFile( const char * pFullUrl,			// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.png
 													std::string& strRetHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-													std::string& strRetFileName,	// return file name.. images/me.jpg
+													std::string& strRetFileName,	// return file name.. images/me.png
 													uint16_t& u16RetPort );				// return port if specified else return 80 as default	
 void							VxIpInNetOrderToString( uint32_t u32IpAddr, std::string& retIp );
 uint32_t						VxStringToIpInNetOrder( std::string ip );
@@ -74,7 +74,7 @@ SOCKET							VxConnectToWebsite( InetAddrAndPort&	oLclIp,			// ip of adapter to 
 													InetAddrAndPort&	oRmtIp,			// return ip and port url resolves to
 													const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-													std::string&		strFile,		// return file name.. images/me.jpg
+													std::string&		strFile,		// return file name.. images/me.png
                                                     uint16_t&			u16Port,		// return port
 													int					iConnectTimeoutMs );
 

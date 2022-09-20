@@ -220,14 +220,14 @@ void VxSktConnectSimple::closeSkt( int iInstance )
 //============================================================================
 bool VxSktConnectSimple::connectToWebsite(	const char*			pWebsiteUrl,
 											std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-											std::string&		strFile,		// return file name.. images/me.jpg
+											std::string&		strFile,		// return file name.. images/me.png
 											uint16_t& u16Port,
 											int					iConnectTimeoutMs )
 {
 	std::string strResolveIpAddr;
 	return connectToWebsite( pWebsiteUrl,
 							strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-							strFile,		// return file name.. images/me.jpg
+							strFile,		// return file name.. images/me.png
 							u16Port,
 							strResolveIpAddr,
 							iConnectTimeoutMs );
@@ -237,7 +237,7 @@ bool VxSktConnectSimple::connectToWebsite(	const char*			pWebsiteUrl,
 //============================================================================
 bool VxSktConnectSimple::connectToWebsite( const char*			pWebsiteUrl,
 											std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-											std::string&		strFile,		// return file name.. images/me.jpg
+											std::string&		strFile,		// return file name.. images/me.png
 											uint16_t&			u16Port,
 											std::string&		strResolveIpAddr,
 											int					iConnectTimeoutMs )

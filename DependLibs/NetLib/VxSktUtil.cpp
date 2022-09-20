@@ -538,9 +538,9 @@ bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp, bool useBind )
 
 //============================================================================
 //! split host name from website file path
-bool VxSplitHostAndFile(	const char * pFullUrl,		// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.jpg
+bool VxSplitHostAndFile(	const char * pFullUrl,		// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.png
 							std::string& strRetHost,	// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-							std::string& strRetFileName,	// return file name.. images/me.jpg
+							std::string& strRetFileName,	// return file name.. images/me.png
 							uint16_t& u16RetPort )			// return port if specified else return 80 as default				
 {
 	char * pTemp;
@@ -1247,14 +1247,14 @@ SOCKET VxConnectToWebsite(	InetAddrAndPort&	lclIp,			// ip of adapter to use
 							InetAddrAndPort&	rmtIp,			// return ip and port url resolves to
 							const char *		pWebsiteUrl,
 							std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-							std::string&		strFile,		// return file name.. images/me.jpg
+							std::string&		strFile,		// return file name.. images/me.png
 							uint16_t&			u16Port,		// return port
 							int					iConnectTimeoutMs )
 {
 	// split host name from file path
-	bool bSplitOk = VxSplitHostAndFile(	pWebsiteUrl,	// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.jpg
+	bool bSplitOk = VxSplitHostAndFile(	pWebsiteUrl,	// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.png
 										strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
-										strFile,		// return file name.. images/me.jpg
+										strFile,		// return file name.. images/me.png
 										u16Port );		// return port if specified else return 80 as default
 	if( false == bSplitOk )
 	{

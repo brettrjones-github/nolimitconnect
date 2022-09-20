@@ -44,6 +44,8 @@ public:
     virtual void				fromGuiCancelDownload( VxGUID& lclSessionId ) override;
     virtual void				fromGuiCancelUpload( VxGUID& lclSessionId ) override;
 
+    virtual	void				onNetworkConnectionReady( bool requiresRelay ) override;
+
 protected:
     virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;

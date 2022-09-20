@@ -351,7 +351,7 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
             }
         }
 
-        m_Engine.getToGui().toGuiNetworkIsTested( requiresRelay, m_IpAddr, m_IpPort );
+        m_Engine.onNetworkConnectionReady( requiresRelay, m_IpAddr, m_IpPort );
     }
 }
 
@@ -360,7 +360,6 @@ void NetStatusAccum::setQueryHostOnlineId( bool noError, VxGUID& onlineId )
 {
     if( noError )
     {
-
     }
 }
 
