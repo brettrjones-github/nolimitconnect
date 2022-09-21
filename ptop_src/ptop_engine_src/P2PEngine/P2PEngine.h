@@ -400,7 +400,9 @@ public:
     virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
     virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
-    virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
+    virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent ) override;
+
+    virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission ) override;
 
 	//========================================================================
 	// to gui
@@ -777,7 +779,6 @@ protected:
     EFriendViewType				m_eFriendView{ eFriendViewEverybody };
 	unsigned int				m_iCurPreferredRelayConnectIdx{ 0 };
 	VxGUID						m_NextFileInstance;
-   // int64_t						m_LastTimeAnnounceFromContactListCalled{ 0 };
     bool						m_AppStartupCalled{ false };
 	bool						m_AppIsPaused{ false };
 	bool						m_IsUserSpecificDirSet{ false };

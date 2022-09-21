@@ -26,21 +26,25 @@ public:
 	virtual ~PluginServiceWebCam();
 
 
-	virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = NULL,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	//! user wants to send offer to friend.. return false if cannot connect
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				// identity of friend
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent*		netIdent,				// identity of friend
 														int				pvUserData,
-														const char *	pOfferMsg,				// offer message
-														const char *	pFileName = NULL,
-														uint8_t *			fileHashId = 0,
+														const char*		pOfferMsg,				// offer message
+														const char*		pFileName = nullptr,
+														uint8_t*		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );	
 
-	bool						stopCamSession(	VxNetIdent *		netIdent,	
-												VxSktBase *			sktBase );
+	virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission );
+
+	bool						stopCamSession(	VxNetIdent* netIdent, VxSktBase* sktBase );
+
 	void						sendVidPkt( VxPktHdr * vidPkt, bool requiresAck );
+
+	void						stopAllSessions( EPluginType pluginType );
 
 protected:
     virtual EPluginAccess       canAcceptNewSession     ( VxNetIdent * netIdent );
@@ -83,6 +87,8 @@ protected:
 	void						setIsPluginInSession( bool isInSession );
 
 	virtual	void				onNetworkConnectionReady( bool requiresRelay ) override;
+
+	void						stopAllSessions( void );
 
 	//=== vars ===//
 	PluginSessionMgr			m_PluginSessionMgr;					

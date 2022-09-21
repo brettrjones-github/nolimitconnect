@@ -686,3 +686,35 @@ void PluginServiceWebCam::onNetworkConnectionReady( bool requiresRelay )
 		fromGuiStartPluginSession( m_MyIdent, 0, m_MyIdent->getMyOnlineId() );
 	}
 }
+
+//============================================================================
+void PluginServiceWebCam::fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission )
+{
+	if( pluginType == getPluginType() )
+	{
+		if( eFriendStateIgnore == pluginPermission )
+		{
+			setIsPluginInSession( false );
+			// request video capture
+			m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleCamServer, m_MyIdent );
+			m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleCamServer, m_MyIdent );
+			m_Engine.setHasSharedWebCam( false );
+			stopAllSessions();
+		}
+		else
+		{
+			m_Engine.setHasSharedWebCam( true );
+			setIsPluginInSession( true );
+			// request video capture
+			m_VideoFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, m_MyIdent );
+			m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, m_MyIdent );
+		}
+	}
+}
+
+//============================================================================
+void PluginServiceWebCam::stopAllSessions( void )
+{
+	m_VideoFeedMgr.stopAllSessions( eAppModuleCamServer, getPluginType() );
+	m_VoiceFeedMgr.stopAllSessions( eAppModuleCamServer, getPluginType() );
+}

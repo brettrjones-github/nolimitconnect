@@ -295,3 +295,22 @@ void VoiceFeedMgr::callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio 
     LogModule( eLogMediaStream, LOG_INFO, "VoiceFeedMgr::callbackOpusPkt PluginBase::AutoPluginLock autoLock destroy" );
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 }
+
+//============================================================================
+void VoiceFeedMgr::stopAllSessions( EAppModule appModule, EPluginType pluginType )
+{
+	if( pluginType == m_Plugin.getPluginType() )
+	{
+		PluginBase::AutoPluginLock autoLock( &m_Plugin );
+		for( auto onlineId : m_GuidList.getGuidList() )
+		{
+			VxNetIdent* netIdent = m_Engine.getBigListMgr().findNetIdent( onlineId );
+			if( netIdent )
+			{
+				fromGuiStopPluginSession( true, appModule, netIdent );
+			}
+		}
+
+		m_GuidList.clearList();
+	}
+}

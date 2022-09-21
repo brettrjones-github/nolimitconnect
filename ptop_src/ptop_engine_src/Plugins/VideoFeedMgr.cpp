@@ -100,7 +100,7 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule app
 }
 
 //============================================================================
-void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent, EAppModule appModule )
+void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule )
 {
 	//LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture %d start %s\n", enable, netIdent->getOnlineName() );
 	// kind of a strange way of handling the problem of which video to enable
@@ -502,4 +502,23 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 #ifdef DEBUG_AUTOPLUGIN_LOCK
     LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock destroy" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
+}
+
+//============================================================================
+void VideoFeedMgr::stopAllSessions( EAppModule appModule, EPluginType pluginType )
+{
+	if( pluginType == m_Plugin.getPluginType() )
+	{
+		PluginBase::AutoPluginLock autoLock( &m_Plugin );
+		for( auto onlineId : m_GuidList.getGuidList() )
+		{
+			VxNetIdent* netIdent = m_Engine.getBigListMgr().findNetIdent( onlineId );
+			if( netIdent )
+			{
+				fromGuiStopPluginSession( true, appModule, netIdent );
+			}
+		}
+
+		m_GuidList.clearList();
+	}
 }

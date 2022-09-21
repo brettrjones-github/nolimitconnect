@@ -455,9 +455,7 @@ void P2PEngine::setPluginPermission( EPluginType ePluginType, int iPluginPermiss
 		if( ( iPluginPermission != m_PluginMgr.getPluginPermission( ePluginType ) )
 			|| ( iPluginPermission != m_PktAnn.getPluginPermission( ePluginType ) ) )
 		{
-			m_PluginMgr.setPluginPermission( ePluginType, (EFriendState)iPluginPermission );
-			m_PktAnn.setPluginPermission( ePluginType, (EFriendState)iPluginPermission );
-			doPktAnnHasChanged( false );
+			fromGuiUpdatePluginPermission( ePluginType, (EFriendState)iPluginPermission );
 		}
 	}
 }

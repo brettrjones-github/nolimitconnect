@@ -129,7 +129,7 @@ public:
 														int				pvUserData,
 														const char *	pOfferMsg,				// offer message
 														const char *	pFileName = NULL,
-														uint8_t *			fileHashId = 0,
+														uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
 	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
 													int				pvUserdata,				
@@ -149,7 +149,9 @@ public:
 	virtual bool				fromGuiSetGameValueVar(	VxNetIdent * netIdent, int32_t varId, int32_t varValue )		{ return false; };
 	virtual bool				fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t	actionId, int32_t actionValue )	{ return false; };
 
-	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ) {}; 
+	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )				{};
+
+	virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission )	{};
 
 	virtual void				onAppStartup( void );
 	virtual void				onAppShutdown( void );
@@ -175,7 +177,6 @@ public:
 
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
-
 
 	virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
 														EPluginType		ePluginType,			// plugin type

@@ -1739,3 +1739,13 @@ bool P2PEngine::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId
 
 	return result;
 }
+
+//============================================================================
+void P2PEngine::fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission )
+{
+	m_AnnouncePktMutex.lock(); 
+	m_PktAnn.setPluginPermission( pluginType, pluginPermission );
+	m_AnnouncePktMutex.unlock();
+	getPluginMgr().fromGuiUpdatePluginPermission( pluginType, pluginPermission );
+	doPktAnnHasChanged( false );
+}

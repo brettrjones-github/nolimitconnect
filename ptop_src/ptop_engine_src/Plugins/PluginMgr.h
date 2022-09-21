@@ -135,6 +135,8 @@ public:
 	virtual void				fromGuiSendAsset( AssetBaseInfo& assetInfo );
 	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
+	virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission );
+
 	virtual EPluginAccess		canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );
 
 	//! return true if access ok

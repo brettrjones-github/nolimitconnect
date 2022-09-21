@@ -43,6 +43,8 @@ public:
 	virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
 
+	void						stopAllSessions( EAppModule appModule, EPluginType pluginType );
+
 protected:
 	void						enableAudioCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule );
 

@@ -1135,3 +1135,13 @@ void PluginMgr::onNetworkConnectionReady( bool requiresRelay )
 		pluginBase->onNetworkConnectionReady( requiresRelay );
 	}
 }
+
+//============================================================================
+void PluginMgr::fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission )
+{
+	PluginBase* pluginBase = findPlugin( pluginType );
+	if( pluginBase )
+	{
+		pluginBase->fromGuiUpdatePluginPermission( pluginType, pluginPermission );
+	}
+}

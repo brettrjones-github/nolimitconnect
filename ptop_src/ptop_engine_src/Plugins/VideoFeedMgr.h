@@ -48,6 +48,8 @@ public:
 	virtual void				callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum );
 	virtual void				callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum );
 
+	void						stopAllSessions( EAppModule appModule, EPluginType pluginType );
+
 protected:
 	void						enableVideoCapture( bool bStart, VxNetIdent * netIdent, EAppModule appModule );
 
