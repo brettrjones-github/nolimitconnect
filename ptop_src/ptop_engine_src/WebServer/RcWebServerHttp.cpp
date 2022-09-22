@@ -183,7 +183,6 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 	std::string	 strPwd;
 	EHttpReqType eHttpReqType	= eHttpReqUnknown;
 	bCloseConnection			= false;
-	int iContentLen				= 0;
 	retFileLen					= 0;
 	iFileOffset					= 0;
 
@@ -197,7 +196,6 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 	int				iTokenLen		= 0;
 	std::string		csFileName;
 	RCODE			rc				= 0;
-	int				iBytesUsed		= 0;
 	char			as8Buf[512];
 
 	char * pCurParse = pDataBuf;
@@ -207,7 +205,6 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 		pNextParse += 4;
 
 		int iParseableLen = (int)(pNextParse - pCurParse);
-		iBytesUsed += iParseableLen;
 
 		// Don't let requests include ".." characters
 		// in requests
@@ -265,7 +262,6 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 						continue;
 					}
 					pHeader += iLen;
-					iContentLen = atoi(as8Buf) - iFileOffset + 1;
 				}
 
 				break;

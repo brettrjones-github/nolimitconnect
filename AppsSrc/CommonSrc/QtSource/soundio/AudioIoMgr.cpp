@@ -203,13 +203,13 @@ void AudioIoMgr::audioIoSystemStartup()
 
         m_AudioOutIo.initAudioOut( m_AudioOutFormat, m_MediaDevices->defaultAudioOutput() );
 
-        connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( speakerStateChanged( QAudio::State ) ) );
+        connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged(QAudio::State) ), this, SLOT( speakerStateChanged( QAudio::State ) ) );
 
         if( isMicrophoneAvailable() )
         {
             m_AudioInIo.initAudioIn( m_AudioInFormat, m_MediaDevices->defaultAudioInput() );
 
-            connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
+            connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged(QAudio::State) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
         }
 
         m_AudioIoInitialized = true;

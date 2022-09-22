@@ -212,7 +212,6 @@ bool UrlMgr::fillUrlInfo( std::string& hostUrl, UrlInfo& urlInfo )
     bool result = VxSplitHostAndFile( hostUrl.c_str(), strHost, strFile, tcpPort );
     if( result )
     {
-        bool resolvedUrlIp{ false };
         InetAddress inetAddr;
         urlInfo.m_Port = tcpPort;
         if( VxIsIPv4Address( strHost.c_str() ) || VxIsIPv6Address( strHost.c_str() ) )
@@ -222,7 +221,6 @@ bool UrlMgr::fillUrlInfo( std::string& hostUrl, UrlInfo& urlInfo )
         else if( VxResolveUrl( strHost.c_str(), tcpPort, inetAddr ) )
         {
             urlInfo.m_IpAddr = inetAddr.toStdString();
-            resolvedUrlIp = true;
         }
         else
         {

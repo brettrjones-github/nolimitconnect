@@ -189,19 +189,15 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
     else
     {
         EConnectReason connectReason = eConnectReasonUnknown;
-        bool isJoinSearch = false;
         switch( searchParams.getSearchType() )
         {
         case eSearchChatRoomHost:	        //!< Search for Chat Room to Join
-            isJoinSearch = true;
             connectReason = eConnectReasonChatRoomSearch;
             break;
         case eSearchGroupHost:	            //!< Search for Group to Join
-            isJoinSearch = true;
             connectReason = eConnectReasonGroupSearch;
             break;
         case eSearchRandomConnectHost:	    //!< Search for Random Connect Server to Join
-            isJoinSearch = true;
             connectReason = eConnectReasonRandomConnectSearch;
             break;
 

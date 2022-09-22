@@ -74,9 +74,9 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t 
 	, m_FullFileName( fullFileName )
 	, m_s64FileLen( fileLen )
 	, m_u8FileType( fileType )
-	, m_IsDirty( true )
-	, m_AssetId( assetId )
 	, m_FileHash( sha1Hash )
+    , m_IsDirty( true )
+    , m_AssetId( assetId )
 {
 	determineShortName();
 }
