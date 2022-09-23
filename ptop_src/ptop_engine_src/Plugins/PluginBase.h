@@ -66,7 +66,7 @@ public:
 		VxMutex&						m_Mutex;
 	};
 
-	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* netIdent, EPluginType pluginType );
 	virtual ~PluginBase() override = default;
 
     virtual void				pluginStartup( void );
@@ -77,7 +77,8 @@ public:
 
 	virtual void				onMyOnlineUrlIsValid( bool isValidUrl ) {};
 
-	virtual bool				isAccessAllowed( VxNetIdent * hisIdent );
+	virtual bool				isAccessAllowed( VxNetIdent* netIdent, bool logAccessError = true, const char* accessReason = nullptr );
+
 	virtual bool				isAppPaused( void )										{ return m_AppIsPaused; }
 	virtual void				setIsPluginInSession( bool inSession )					{ m_bPluginIsInSession = inSession; }
 	virtual bool				getIsPluginInSession( void )							{ return m_bPluginIsInSession; }

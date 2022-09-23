@@ -114,7 +114,7 @@ void AppletPeerBase::showEvent( QShowEvent * ev )
 	AppletBase::showEvent( ev );
     if( ePluginTypeInvalid == m_ePluginType )
     {
-        m_MyApp.setPluginVisible( m_ePluginType, true );
+        m_MyApp.getPluginMgr().setPluginVisible( m_ePluginType, true );
         m_MyApp.wantToGuiActivityCallbacks( this, true );
     }
 }
@@ -124,7 +124,7 @@ void AppletPeerBase::hideEvent( QHideEvent * ev )
 {
     if( ePluginTypeInvalid == m_ePluginType )
     {
-        m_MyApp.setPluginVisible( m_ePluginType, false );
+        m_MyApp.getPluginMgr().setPluginVisible( m_ePluginType, false );
         m_MyApp.wantToGuiActivityCallbacks( this, false );
     }
 

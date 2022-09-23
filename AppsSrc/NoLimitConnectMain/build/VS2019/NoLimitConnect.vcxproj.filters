@@ -81,6 +81,9 @@
     <Filter Include="Source Files\GuiPlayerMgr">
       <UniqueIdentifier>{163287ce-ab16-429f-8c1a-bee4fb842cc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GuiPluginMgr">
+      <UniqueIdentifier>{c556a647-5103-4d79-b058-9aca6f55f45e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -942,6 +945,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPlayerCamClip.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiPluginMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -2040,6 +2046,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPlayerPhoto.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiPluginMgr.cpp">
+      <Filter>Source Files\GuiPluginMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

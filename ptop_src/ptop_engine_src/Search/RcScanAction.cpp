@@ -147,7 +147,7 @@ void RcScanAction::addMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktB
 			PluginBaseWebServer * poPlugin = (PluginBaseWebServer *)m_Engine.getPluginMgr().getPlugin( ePluginTypeWebServer );
 			if( false == poPlugin->searchActionProfilePic( netIdent, sktBase ) )
 			{
-				LogMsg( LOG_ERROR, "RcScanAction::fetchProfilePic failed pic for user %s\n", netIdent->getOnlineName() );
+				LogMsg( LOG_ERROR, "RcScanAction::fetchProfilePic failed pic for user %s", netIdent->getOnlineName() );
 				matchedConn->setActionHadError( true );
 				m_SearchActionMutex.unlock();
 				removeIdent( netIdent );
@@ -155,7 +155,7 @@ void RcScanAction::addMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktB
 			}
 			else
 			{
-				LogMsg( LOG_INFO, "RcScanAction::fetchProfilePic success searchActionProfilePic user %s\n", netIdent->getOnlineName() );
+				LogMsg( LOG_INFO, "RcScanAction::fetchProfilePic success searchActionProfilePic user %s", netIdent->getOnlineName() );
 			}
 		}
 

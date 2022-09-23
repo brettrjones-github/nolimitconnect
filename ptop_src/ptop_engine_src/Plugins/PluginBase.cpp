@@ -151,14 +151,31 @@ void PluginBase::setPluginPermission( EFriendState eFriendState )
 };
 
 //============================================================================
-bool PluginBase::isAccessAllowed( VxNetIdent * hisIdent )
+bool PluginBase::isAccessAllowed( VxNetIdent* netIdent, bool logAccessError, const char* accessReason )
 {
 	EFriendState curPermission = m_Engine.getMyPktAnnounce().getPluginPermission( m_ePluginType ); 
-	if( ( eFriendStateIgnore != curPermission )
-		&& ( ( eFriendStateAnonymous == curPermission ) || ( hisIdent->getMyFriendshipToHim() >= curPermission ) ) )
-	{
-		return true;
-	}
+    if( eFriendStateIgnore != curPermission && eFriendStateIgnore != netIdent->getMyFriendshipToHim() )
+    {
+        if( netIdent->getMyFriendshipToHim() >= curPermission || netIdent->getMyOnlineId() == m_Engine.getMyOnlineId() )
+        {
+            return true;
+        }
+    }
+
+    if( logAccessError )
+    {
+        if( accessReason )
+        {
+            LogMsg( LOG_WARN, "%s %s Access Not Allowed to %s %s %s", DescribePluginType( getPluginType() ), accessReason,
+                netIdent->getMyOnlineId().describeVxGUID().c_str(), DescribeFriendState( netIdent->getMyFriendshipToHim() ), netIdent->getOnlineName() );
+
+        }
+        else
+        {
+            LogMsg( LOG_WARN, "%s Access Not Allowed to %s %s %s", DescribePluginType( getPluginType() ),
+                netIdent->getMyOnlineId().describeVxGUID().c_str(), DescribeFriendState( netIdent->getMyFriendshipToHim() ), netIdent->getOnlineName() );
+        }
+    }
 
 	return false;
 }

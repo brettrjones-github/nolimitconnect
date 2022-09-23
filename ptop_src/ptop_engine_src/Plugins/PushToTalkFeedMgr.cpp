@@ -61,6 +61,7 @@ bool PushToTalkFeedMgr::enableAudioCapture( bool enable, VxNetIdent* netIdent, E
 					//LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::enableCapture eMediaInputAudioPkts %d\n", enable );
 					m_AudioPktsRequested = true;
 					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputAudioPkts, appModule, true );
+					m_Engine.getToGui().getAudioRequests().toGuiWantSpeakerOutput( eAppModulePushToTalk, true );
 				}
 
 				updatePushToTalkStatus( netIdent->getMyOnlineId() );
@@ -293,6 +294,7 @@ void PushToTalkFeedMgr::removePushToTalkUser( VxGUID& onlineId, bool txOnly )
 			m_AudioPktsRequested = false;
 			m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputMixer, eAppModulePushToTalk, false );
 			m_MixerInputRequesed = false;
+			m_Engine.getToGui().getAudioRequests().toGuiWantSpeakerOutput( eAppModulePushToTalk, false );
 			LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::removePushToTalkUser false done" );
 		}
 	}
@@ -307,6 +309,7 @@ void PushToTalkFeedMgr::removePushToTalkUser( VxGUID& onlineId, bool txOnly )
 			m_AudioPktsRequested = false;
 			m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputMixer, eAppModulePushToTalk, false );
 			m_MixerInputRequesed = false;
+			m_Engine.getToGui().getAudioRequests().toGuiWantSpeakerOutput( eAppModulePushToTalk, false );
 			LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::removePushToTalkUser false done" );
 		}
 	}

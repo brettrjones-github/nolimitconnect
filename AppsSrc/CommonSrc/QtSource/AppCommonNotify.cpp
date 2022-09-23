@@ -168,11 +168,27 @@ void AppCommon::toGuiPluginSessionEnded(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void AppCommon::toGuiPluginStatus(	EPluginType		ePluginType,
-										int				statusType,
-										int				statusValue )
+void AppCommon::toGuiPluginStatus( EPluginType pluginType, int statusType, int statusValue )
 {
-	emit signalToGuiPluginStatus( ePluginType, statusType, statusValue );
+	emit signalInternalToGuiPluginStatus( pluginType, statusType, statusValue );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiPluginStatus( EPluginType pluginType, int statusType, int statusValue )
+{
+	if( pluginType == ePluginTypeCamServer )
+	{
+		getPluginMgr().setIsCamServerEnabled( statusType ? true : false );
+		getPluginMgr().setCamServerClientCount( statusValue );
+	}
+
+	m_ToGuiActivityInterfaceBusy = true;
+	for( auto client : m_ToGuiActivityInterfaceList )
+	{
+		client->toGuiPluginStatus( pluginType, statusType, statusValue );
+	}
+
+	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================

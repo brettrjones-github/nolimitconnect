@@ -29,10 +29,11 @@
 #include "GuiGroupieListMgr.h"
 #include "GuiHostedListMgr.h"
 #include "GuiHostJoinMgr.h"
+#include "GuiPlayerMgr.h"
+#include "GuiPluginMgr.h"
 #include "GuiUserJoinMgr.h"
 #include "GuiUserMgr.h"
 #include "GuiThumbMgr.h"
-#include "GuiPlayerMgr.h"
 #include "GuiWebPageMgr.h"
 #include "MyIcons.h"
 #include "VxAppTheme.h"
@@ -166,7 +167,8 @@ public:
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
     GuiMembershipAvailableMgr&  getMembershipAvailableMgr( void )           { return m_MembershipAvailableMgr; }
-    GuiPlayerMgr&               getPlayerMgr( void )                         { return m_PlayerMgr; }
+    GuiPlayerMgr&               getPlayerMgr( void )                        { return m_PlayerMgr; }
+    GuiPluginMgr&               getPluginMgr( void )                        { return m_PluginMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
 
 	void						setCamCaptureRotation( uint32_t rot );
@@ -230,10 +232,6 @@ public:
 	void						wantToGuiFileXferCallbacks( ToGuiFileXferInterface* callback, bool wantCallback );
 	void						wantToGuiHardwareCtrlCallbacks( ToGuiHardwareControlInterface* callback, bool wantCallback );
     void						wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface* callback, bool	wantCallback );
-
-	bool						getIsPluginVisible( EPluginType ePluginType );
-	void						setPluginVisible( EPluginType ePluginType, bool isVisible );
-
 
     //============================================================================
     //=== to gotv lib events ===//
@@ -681,8 +679,9 @@ signals:
 
 	void						signalSetRelayHelpButtonVisibility( bool isVisible );
 
-	void						signalToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
     void                        signalSystemReady( bool isReady );
+
+    void						signalInternalToGuiPluginStatus( EPluginType pluginType, int statusType, int statusValue );
 
     void                        signalInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
     void                        signalInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
@@ -743,6 +742,8 @@ signals:
     void                        signalInternalPlayNlcMedia( AssetBaseInfo assetInfo );
 
 private slots:
+    void						slotInternalToGuiPluginStatus( EPluginType pluginType, int statusType, int statusValue );
+
     void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
     void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
     void                        slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError );
@@ -876,6 +877,7 @@ protected:
     GuiHostJoinMgr				m_HostJoinMgr;
     GuiUserJoinMgr				m_UserJoinMgr;
     GuiPlayerMgr                m_PlayerMgr;
+    GuiPluginMgr                m_PluginMgr;
     GuiWebPageMgr               m_WebPageMgr;
 
 	MyIcons					    m_MyIcons;
@@ -925,7 +927,6 @@ protected:
 	bool						m_VidCaptureEnabled = false;
 	bool						m_MicrophoneHardwareEnabled = false;
 	bool						m_SpeakerHardwareEnabled = false;
-	QVector<EPluginType>		m_VisiblePluginsList;
 	AppletMgr&					m_AppletMgr;
     bool                        m_AppCommonInitialized = false;
     bool                        m_LoginBegin = false;

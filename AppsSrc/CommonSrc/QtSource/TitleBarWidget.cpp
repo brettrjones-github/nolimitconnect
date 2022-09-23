@@ -115,7 +115,6 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( ui.m_CameraStartStopButton,    SIGNAL(clicked()), this, SLOT(slotCameraSnapshotButtonClicked()) );
     connect( ui.m_CamPreviewScreen,         SIGNAL(clicked()), this, SLOT(slotCamPreviewClicked()) );
     connect( &m_MyApp,                      SIGNAL(signalStatusMsg(QString)), this, SLOT(slotTitleStatusBarMsg(QString)) );
-    connect( &m_MyApp,                      SIGNAL(signalToGuiPluginStatus(EPluginType,int,int)), this, SLOT(slotToGuiPluginStatus(EPluginType,int,int)) );
     connect( &m_MyApp,                      SIGNAL(signalNetAvailStatus(ENetAvailStatus)), this, SLOT(slotToGuiNetAvailStatus(ENetAvailStatus)) );
 
     connect( m_CamTimer,                    SIGNAL(timeout()),                          this, SLOT(slotCamTimeout()) );
@@ -153,6 +152,8 @@ void TitleBarWidget::updateTitleBar( void )
     checkTitleBarIconsFit();
 
     ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+
+    updateWebServerClientCount();
 
     update();
 }
@@ -214,6 +215,7 @@ void TitleBarWidget::slotCamTimeout()
     if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 3000 )
     {
         m_CamTimer->stop();
+        ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
     }
 }
 
@@ -254,20 +256,35 @@ void TitleBarWidget::slotTitleStatusBarMsg( QString msg )
 }
 
 //============================================================================
-void TitleBarWidget::slotToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue )
+void TitleBarWidget::toGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue )
 {
-	if( ( ePluginTypeCamServer == ePluginType )
-		&& ( 1 == statusType ) )
-	{
-		if( statusValue < 0 )
-		{
-			ui.m_CamClientCountLabel->setText("");
-		}
-		else
-		{
-			ui.m_CamClientCountLabel->setText( QString("%1").arg(statusValue) );
-		}
-	}
+    if( ePluginTypeCamServer == ePluginType )
+    {
+        updateWebServerClientCount();
+    }
+}
+
+//============================================================================
+void TitleBarWidget::updateWebServerClientCount( void )
+{
+    if( m_MyApp.getPluginMgr().getIsCamServerEnabled() )
+    {
+        ui.m_CamClientCountLabel->setVisible( true );
+        int webCamClientCount = m_MyApp.getPluginMgr().getCamServerClientCount();
+        if( webCamClientCount < 0 )
+        {
+            ui.m_CamClientCountLabel->setText( "" );
+        }
+        else
+        {
+            ui.m_CamClientCountLabel->setText( QString( "%1" ).arg( webCamClientCount ) );
+        }
+    }
+    else
+    {
+        ui.m_CamClientCountLabel->setVisible( false );
+    }
+
 }
 
 //============================================================================
@@ -737,7 +754,7 @@ void TitleBarWidget::callbackToGuiWantVideoCapture( bool wantVideoCapture )
     enableVideoControls( wantVideoCapture );
     if( wantVideoCapture )
     {
-        m_CamTimer->start( 1500 );
+        m_CamTimer->start( 2000 );
     }
     else
     {

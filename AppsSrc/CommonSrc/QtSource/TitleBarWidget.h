@@ -126,7 +126,7 @@ public slots:
 	virtual void				slotBackButtonClicked( void );
 
 	virtual void				slotTitleStatusBarMsg( QString msg );
-	virtual void				slotToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
+
     virtual void				slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus );
     virtual void				slotCamTimeout( void );
     virtual void				slotSignalHelpClick( void );
@@ -158,6 +158,10 @@ protected:
 
 	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 ) override;
 	virtual void				callbackGuiPlayVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame ) override;
+
+	virtual void				toGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue ) override;
+
+	virtual void				updateWebServerClientCount( void );
 
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;

@@ -23,8 +23,7 @@ class PluginServiceWebCam : public PluginBase
 {
 public:
 	PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginServiceWebCam();
-
+	virtual ~PluginServiceWebCam() = default;
 
 	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
@@ -47,28 +46,28 @@ public:
 	void						stopAllSessions( EPluginType pluginType );
 
 protected:
-    virtual EPluginAccess       canAcceptNewSession     ( VxNetIdent * netIdent );
+    virtual EPluginAccess       canAcceptNewSession			( VxNetIdent* netIdent );
 
-    virtual void				replaceConnection       ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-    virtual void				onConnectionLost        ( VxSktBase * sktBase );
-    virtual void				onContactWentOffline    ( VxNetIdent * netIdent, VxSktBase * sktBase );
+    virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+    virtual void				onConnectionLost			( VxSktBase* sktBase );
+    virtual void				onContactWentOffline		( VxNetIdent* netIdent, VxSktBase * sktBase );
 
-    virtual void				onPktPluginOfferReq     ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktPluginOfferReply   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				onPktSessionStartReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSessionStartReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSessionStopReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSessionStopReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktSessionStartReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktSessionStartReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktSessionStopReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				onPktVideoFeedReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedStatus		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedPic			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedPicChunk		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedPicAck		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktVideoFeedReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVideoFeedStatus		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVideoFeedPic			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVideoFeedPicChunk		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVideoFeedPicAck		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktVoiceReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVoiceReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
 	virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
@@ -90,10 +89,14 @@ protected:
 
 	void						stopAllSessions( void );
 
+	void						enableCamServerService( bool enable );
+
 	//=== vars ===//
 	PluginSessionMgr			m_PluginSessionMgr;					
 	VoiceFeedMgr				m_VoiceFeedMgr;
 	VideoFeedMgr				m_VideoFeedMgr;
+
+	bool						m_IsCamServiceEnabled{ false };
 };
 
 

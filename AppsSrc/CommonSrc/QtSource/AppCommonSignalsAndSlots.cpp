@@ -147,4 +147,6 @@ void AppCommon::connectSignals( void )
     connect( this, SIGNAL( signalInternalNetworkIsTested(bool,QString,uint16_t) ), this, SLOT( slotInternalNetworkIsTested(bool,QString,uint16_t) ), Qt::QueuedConnection );
 
 	connect( this, SIGNAL( signalInternalPlayNlcMedia(AssetBaseInfo) ), this, SLOT( slotInternalPlayNlcMedia(AssetBaseInfo) ), Qt::QueuedConnection );
+
+	connect( this, SIGNAL( signalInternalToGuiPluginStatus(EPluginType,int,int) ), this, SLOT( slotInternalToGuiPluginStatus(EPluginType,int,int) ), Qt::QueuedConnection );
 }

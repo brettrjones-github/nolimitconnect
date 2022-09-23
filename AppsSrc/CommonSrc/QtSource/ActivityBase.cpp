@@ -667,7 +667,7 @@ void ActivityBase::setCamPreviewVisibility( bool visible )
 //============================================================================
 void ActivityBase::setCamViewerCountVisibility( bool visible )
 {
-	ui.m_TitleBarWidget->setPowerButtonVisibility( visible );
+	ui.m_TitleBarWidget->setCamViewerCountVisibility( visible );
 }
 
 //============================================================================

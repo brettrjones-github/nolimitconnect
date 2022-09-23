@@ -331,7 +331,7 @@ void AppletMultiMessenger::hideEvent( QHideEvent * ev )
 	m_MyApp.wantToGuiActivityCallbacks( this, false );
     if( ePluginTypeInvalid != m_ePluginType )
     {
-        m_MyApp.setPluginVisible( m_ePluginType, false );
+        m_MyApp.getPluginMgr().setPluginVisible( m_ePluginType, false );
     }
 
     AppletPeerBase::hideEvent( ev );

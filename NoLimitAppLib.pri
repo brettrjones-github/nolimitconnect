@@ -243,6 +243,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiParams.h \  
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiPlayerCallback.h \ 
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiPlayerMgr.h \ 
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiPluginMgr.h \ 
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.h \
@@ -620,6 +621,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiOfferSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiParams.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiPlayerMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiPluginMgr.cpp \ 
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.cpp \

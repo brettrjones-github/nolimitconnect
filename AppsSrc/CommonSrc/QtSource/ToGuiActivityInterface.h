@@ -92,5 +92,7 @@ public:
     virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ){};
     virtual void				toGuiThumbUpdated( ThumbInfo * assetInfo ){};
     virtual void				toGuiThumbRemoved( VxGUID& thumbId ){};
+
+    virtual void				toGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue ) {};
 };
 

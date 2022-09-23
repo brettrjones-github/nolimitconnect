@@ -46,15 +46,10 @@ PluginServiceWebCam::PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMg
 }
 
 //============================================================================
-PluginServiceWebCam::~PluginServiceWebCam()
-{
-}
-
-//============================================================================
 void PluginServiceWebCam::setIsPluginInSession( bool isInSession )
 {
 	setIsServerInSession( isInSession );
-	IToGui::getToGui().toGuiPluginStatus( m_ePluginType, 1, isInSession ? 0 : -1 );
+	IToGui::getToGui().toGuiPluginStatus( m_ePluginType, isInSession ? 1 : 0, isInSession ? m_PluginSessionMgr.getSessionCount() : -1 );
 }
 
 //============================================================================
@@ -140,17 +135,10 @@ void PluginServiceWebCam::callbackVideoPktPicChunk( void * /*userData*/, VxGUID&
 //! called to start service or session with remote friend
 void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	if( netIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() )
+	if( netIdent->getMyOnlineId() == m_Engine.getMyOnlineId() )
 	{
 		LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStartPluginSession is ME" );
-		if( false == fromGuiIsPluginInSession() )
-		{
-			m_Engine.setHasSharedWebCam(true);
-			setIsPluginInSession(true);
-			// request video capture
-			m_VideoFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, netIdent );
-			m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, netIdent );
-		}
+		enableCamServerService( true );
 	}
 	else
 	{
@@ -183,6 +171,7 @@ void PluginServiceWebCam::fromGuiStartPluginSession( VxNetIdent* netIdent, int p
 
 			m_VideoFeedMgr.fromGuiStartPluginSession( true, eAppModuleCamServer, netIdent );
 			m_VoiceFeedMgr.fromGuiStartPluginSession( true, eAppModuleCamServer, netIdent );
+			setIsPluginInSession( true );
 		}
 		else
 		{
@@ -197,11 +186,10 @@ void PluginServiceWebCam::fromGuiStopPluginSession( VxNetIdent * netIdent, int p
 {
 	LogMsg( LOG_INFO, "PluginServiceWebCam::fromGuiStopPluginSession" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	bool isServerSession = ( netIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() );
-	if( isServerSession )
+	bool isMyself = ( netIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() );
+	if( isMyself )
 	{
 		m_Engine.setHasSharedWebCam(false);
-		setIsPluginInSession( false );
 		m_VoiceFeedMgr.fromGuiStopPluginSession( true, eAppModuleCamServer, netIdent );
 		// don't want video capture anymore
 		m_VideoFeedMgr.fromGuiStopPluginSession( true, eAppModuleCamServer, netIdent );
@@ -377,6 +365,11 @@ bool PluginServiceWebCam::stopCamSession( VxNetIdent* netIdent,	VxSktBase* sktBa
 //! packet with remote users offer
 void PluginServiceWebCam::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+	if( !isAccessAllowed( netIdent, true, "onPktPluginOfferReq" ) )
+	{
+		return;
+	}
+
 	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktPluginOfferReq" );
 	PktPluginOfferReq * pktOfferReq = ( PktPluginOfferReq * )pktHdr;
 	PktPluginOfferReply pktReply;
@@ -428,6 +421,11 @@ void PluginServiceWebCam::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr *
 //============================================================================
 void PluginServiceWebCam::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+	if( !isAccessAllowed( netIdent, true, "onPktSessionStartReq" ) )
+	{
+		return;
+	}
+
 	LogMsg( LOG_INFO, "PluginServiceWebCam::onPktSessionStartReq" );
 	PktSessionStartReply oPkt;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -581,7 +579,7 @@ void PluginServiceWebCam::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void PluginServiceWebCam::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginServiceWebCam::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktVideoFeedPicChunk * poPktPicChunk = ( PktVideoFeedPicChunk * )pktHdr;
 
@@ -683,7 +681,7 @@ void PluginServiceWebCam::onNetworkConnectionReady( bool requiresRelay )
 	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
 	{
 		// automatically start web cam on startup if enabled
-		fromGuiStartPluginSession( m_MyIdent, 0, m_MyIdent->getMyOnlineId() );
+		enableCamServerService( true );
 	}
 }
 
@@ -692,29 +690,83 @@ void PluginServiceWebCam::fromGuiUpdatePluginPermission( EPluginType pluginType,
 {
 	if( pluginType == getPluginType() )
 	{
-		if( eFriendStateIgnore == pluginPermission )
-		{
-			setIsPluginInSession( false );
-			// request video capture
-			m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleCamServer, m_MyIdent );
-			m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleCamServer, m_MyIdent );
-			m_Engine.setHasSharedWebCam( false );
-			stopAllSessions();
-		}
-		else
-		{
-			m_Engine.setHasSharedWebCam( true );
-			setIsPluginInSession( true );
-			// request video capture
-			m_VideoFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, m_MyIdent );
-			m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, m_MyIdent );
-		}
+		enableCamServerService( eFriendStateIgnore != pluginPermission );
 	}
 }
 
 //============================================================================
 void PluginServiceWebCam::stopAllSessions( void )
 {
+	if( true == fromGuiIsPluginInSession() )
+	{
+		setIsPluginInSession( false );
+
+		// tell everyone we are no longer online
+		PktVideoFeedStatus oPkt;
+		oPkt.setFeedStatus( eFeedStatusOffline );
+
+		PluginSessionMgr::SessionIter iter;
+		std::map<VxGUID, PluginSessionBase*>& sessionList = m_PluginSessionMgr.getSessions();
+		bool bErased = true;
+		while( bErased )
+		{
+			bErased = false;
+			iter = sessionList.begin();
+			while( iter != sessionList.end() )
+			{
+				PluginSessionBase* sessionBase = iter->second;
+				if( sessionBase->isTxSession() )
+				{
+					TxSession* poSession = (TxSession*)sessionBase;
+					if( poSession->getSkt() )
+					{
+						oPkt.setLclSessionId( poSession->getLclSessionId() );
+						oPkt.setRmtSessionId( poSession->getRmtSessionId() );
+						m_PluginMgr.pluginApiTxPacket( m_ePluginType, poSession->getIdent()->getMyOnlineId(), poSession->getSkt(), &oPkt );
+						delete poSession;
+						sessionList.erase( iter );
+						bErased = true;
+						break;
+					}
+					else
+					{
+						++iter;
+					}
+				}
+			}
+		}
+	}
+
 	m_VideoFeedMgr.stopAllSessions( eAppModuleCamServer, getPluginType() );
 	m_VoiceFeedMgr.stopAllSessions( eAppModuleCamServer, getPluginType() );
+}
+
+//============================================================================
+void PluginServiceWebCam::enableCamServerService( bool enable )
+{
+	if( m_IsCamServiceEnabled == enable )
+	{
+		return;
+	}
+
+	m_IsCamServiceEnabled = enable;
+
+	if( m_IsCamServiceEnabled )
+	{
+		m_Engine.setHasSharedWebCam( true );
+		// request video capture
+		m_VideoFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, m_MyIdent );
+		m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleCamServer, m_MyIdent );
+		setIsPluginInSession( true );
+
+	}
+	else
+	{
+		// stop video capture
+		m_VideoFeedMgr.fromGuiStopPluginSession( false, eAppModuleCamServer, m_MyIdent );
+		m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleCamServer, m_MyIdent );
+		m_Engine.setHasSharedWebCam( false );
+		stopAllSessions();
+		setIsPluginInSession( false );
+	}
 }

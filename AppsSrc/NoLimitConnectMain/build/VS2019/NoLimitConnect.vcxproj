@@ -350,6 +350,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiOfferSession.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiParams.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiPlayerMgr.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiPluginMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiThumb.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiThumbList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiThumbMgr.cpp" />
@@ -590,6 +591,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiParams.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiPlayerCallback.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiPlayerMgr.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiPluginMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiThumb.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiThumbList.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUser.h" />

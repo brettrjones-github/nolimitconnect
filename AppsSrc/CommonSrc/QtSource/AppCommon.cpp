@@ -178,6 +178,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_HostJoinMgr( *this )
 , m_UserJoinMgr( *this )
 , m_PlayerMgr( *this )
+, m_PluginMgr( *this )
 , m_WebPageMgr( *this )
 , m_MyIcons( *this )
 , m_AppTheme( *this )
@@ -447,54 +448,6 @@ void AppCommon::launchLibraryActivity( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool AppCommon::getIsPluginVisible( EPluginType ePluginType )
-{
-	QVector<EPluginType>::iterator iter;
-	for( iter = m_VisiblePluginsList.begin(); iter != m_VisiblePluginsList.end(); ++iter )
-	{
-		if( ePluginType == *iter )
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-//============================================================================
-void AppCommon::setPluginVisible( EPluginType ePluginType, bool isVisible )
-{
-    if( ePluginType == ePluginTypeInvalid )
-    {
-        return;
-    }
-
-	QVector<EPluginType>::iterator iter;
-	for( iter = m_VisiblePluginsList.begin(); iter != m_VisiblePluginsList.end(); ++iter )
-	{
-		if( ePluginType == *iter )
-		{
-			if( isVisible )
-			{
-				// already in list
-				return;
-			}
-			else
-			{
-				// remove from list
-				m_VisiblePluginsList.erase( iter );
-				return;
-			}
-		}
-	}
-
-	if( isVisible )
-	{
-		m_VisiblePluginsList.push_back( ePluginType );
-	}
-}
-
-//============================================================================
 QFrame * AppCommon::getAppletFrame( EApplet applet )
 {
 	return getHomePage().getAppletFrame( applet );
@@ -660,7 +613,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 
 	case ePluginTypeVoicePhone:
 		{
-			if( false == getIsPluginVisible( ePluginTypeVoicePhone ) )
+			if( false == getPluginMgr().getIsPluginVisible( ePluginTypeVoicePhone ) )
 			{
                 /*
 				ActivityToFriendVoicePhone * poDlg = new ActivityToFriendVoicePhone( *this, offer, parent );
@@ -673,7 +626,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 
 	case ePluginTypeVideoPhone:
 		{
-			if( false == getIsPluginVisible( ePluginTypeVideoPhone ) )
+			if( false == getPluginMgr().getIsPluginVisible( ePluginTypeVideoPhone ) )
 			{
                 /*
 				ActivityToFriendVideoPhone * poDlg = new ActivityToFriendVideoPhone( *this, offer, parent );
@@ -686,7 +639,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 
 	case ePluginTypeTruthOrDare:
 		{
-			if( false == getIsPluginVisible( ePluginTypeTruthOrDare ) )
+			if( false == getPluginMgr().getIsPluginVisible( ePluginTypeTruthOrDare ) )
 			{
                 /*
 				ActivityToFriendTodGame * poDlg = new ActivityToFriendTodGame( *this, offer, parent );
