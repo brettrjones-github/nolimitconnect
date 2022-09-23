@@ -244,7 +244,6 @@ void AudioLoopback::processAudioLoopbackThreaded( void )
 		// let the echo canceler unlock the processed speaker samples as soon as possible to avoid
 		// stalling the qt audio device read or write call
 		m_AudioIoMgr.getAudioEchoCancel().processEchoCancelThreaded( m_EchoProcessedBuf, m_ProcessedBufMutex );
-		// m_ProcessedBufMutex.unlock();
 
 		// do output space available processing
 		processOutSpaceAvailable();

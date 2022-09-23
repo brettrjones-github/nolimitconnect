@@ -57,7 +57,7 @@ int AudioSpeakerBuf::writeSamples( int16_t* srcSamplesBuf, int sampleCnt )
 	int writtenSamples = 0;
 	if( sampleCnt > m_MaxSamples )
 	{
-		LogMsg( LOG_VERBOSE, "AudioSpeakerBuf::sampleWereRead ERROR samplesToWrite %d greater than max samples %d", sampleCnt, m_MaxSamples );
+		LogMsg( LOG_VERBOSE, "AudioSpeakerBuf::writeSamples ERROR samplesToWrite %d greater than max samples %d", sampleCnt, m_MaxSamples );
 		return 0;
 	}
 	else if( sampleCnt <= ( m_MaxSamples - m_SampleCnt ) )
@@ -71,7 +71,7 @@ int AudioSpeakerBuf::writeSamples( int16_t* srcSamplesBuf, int sampleCnt )
 	{
 		// make room for samples
 		int samplesToRemove = std::abs( m_MaxSamples - ( m_SampleCnt + sampleCnt ) );
-		LogMsg( LOG_WARNING, "AudioSampleBuf::sampleWereRead removing %d samples to fit %d samples", samplesToRemove, sampleCnt );
+		LogMsg( LOG_WARNING, "AudioSpeakerBuf::writeSamples removing %d samples to fit %d samples", samplesToRemove, sampleCnt );
 		samplesWereRead( samplesToRemove );
 		memcpy( &m_PcmData[ m_SampleCnt ], srcSamplesBuf, sampleCnt * 2 );
 		m_SampleCnt += sampleCnt;

@@ -212,6 +212,13 @@ void AudioMixer::processAudioMixerThreaded( void )
             break;
         }
 
+        if( !m_AudioIoMgr.isSpeakerOutputWanted() )
+        {
+            // no speaker output but probably have microphone input
+            m_AudioIoMgr.getAudioEchoCancel().processEchoCancelThreaded( m_EchoProcessedBuf, m_ProcessedBufMutex );
+            continue;
+        }
+
         static int64_t lastTime = 0;
         int64_t timeNow = GetHighResolutionTimeMs();
         int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
@@ -224,8 +231,8 @@ void AudioMixer::processAudioMixerThreaded( void )
             funcCallCnt++;
             if( lastSpaceAvailableTime )
             {
-                //int timeInterval = (int)(timeNow - lastSpaceAvailableTime);
-                //LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
+                int timeInterval = (int)(timeNow - lastSpaceAvailableTime);
+                LogMsg( LOG_VERBOSE, "processAudioOutSpaceAvailableThreaded %d elapsed %d ms app %d ms", funcCallCnt, (int)timeInterval, (int)m_MyApp.elapsedMilliseconds() );
             }
 
             lastSpaceAvailableTime = timeNow;
@@ -283,7 +290,6 @@ void AudioMixer::processAudioMixerThreaded( void )
         // let the echo canceler unlock the processed speaker samples as soon as possible to avoid
         // stalling the qt audio device read or write call
         m_AudioIoMgr.getAudioEchoCancel().processEchoCancelThreaded( m_EchoProcessedBuf, m_ProcessedBufMutex );
-        // m_ProcessedBufMutex.unlock();
 
         // do output space available processing
         processOutSpaceAvailableThreaded();

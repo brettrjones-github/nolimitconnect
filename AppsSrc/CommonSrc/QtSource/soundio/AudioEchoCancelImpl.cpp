@@ -137,19 +137,49 @@ void AudioEchoCancelImpl::micWroteSamples( int16_t* micWriteData, int sampleCnt,
 //============================================================================
 void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSpeakerBuf& speakerProcessed8000Buf, QMutex& speakerProcessedMutex )
 {
-	// release speaker samples as soon as possible to avoid stalling the device speaker read call
-	m_SpeakerSamplesMutex.lock();
-	m_ProcessSpeakerSamples.writeSamples( speakerProcessed8000Buf.getSampleBuffer(), speakerProcessed8000Buf.getSampleCnt() );
-	m_SpeakerSamplesMutex.unlock();
-
-	speakerProcessed8000Buf.clear();
-	speakerProcessedMutex.unlock();
-
 	// release mic samples as soon as possible to avoid stalling the device microphone write call
 	m_MicSamplesMutex.lock();
 	m_ProcessMicSamples.writeSamples( m_MicSamples.getSampleBuffer(), m_MicSamples.getSampleCnt() );
 	m_MicSamples.clear();
 	m_MicSamplesMutex.unlock();
+
+	if( !m_AudioIoMgr.isSpeakerOutputWanted() )
+	{
+		speakerProcessedMutex.lock();
+		speakerProcessed8000Buf.clear();
+		speakerProcessedMutex.unlock();
+
+		// we have microphone input but no speaker output so echo cancel is not possible
+		while( m_ProcessMicSamples.getSampleCnt() >= MIXER_CHUNK_LEN_SAMPLES )
+		{
+			m_MicSamplesMutex.lock();
+			if( m_AudioIoMgr.getIsMicrophoneMuted() )
+			{
+				m_AudioIoMgr.fromGuiEchoCanceledSamplesThreaded( m_QuietSamplesBuf, MIXER_CHUNK_LEN_SAMPLES, true );
+			}
+			else
+			{
+				m_AudioIoMgr.fromGuiEchoCanceledSamplesThreaded( m_ProcessMicSamples.getSampleBuffer(), MIXER_CHUNK_LEN_SAMPLES, false );
+			}
+
+			m_ProcessMicSamples.samplesWereRead( MIXER_CHUNK_LEN_SAMPLES );
+			m_MicSamplesMutex.unlock();
+		}
+
+		
+		return;
+	}
+
+	// release speaker samples as soon as possible to avoid stalling the device speaker read call
+
+	m_SpeakerSamplesMutex.lock();
+
+	speakerProcessedMutex.lock();
+	m_ProcessSpeakerSamples.writeSamples( speakerProcessed8000Buf.getSampleBuffer(), speakerProcessed8000Buf.getSampleCnt() );
+	speakerProcessed8000Buf.clear();
+	speakerProcessedMutex.unlock();
+
+	m_SpeakerSamplesMutex.unlock();
 
 	static int64_t lastTime = 0;
 	int64_t timeNow = GetHighResolutionTimeMs();
