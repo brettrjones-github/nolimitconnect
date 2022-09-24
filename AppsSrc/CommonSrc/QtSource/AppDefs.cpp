@@ -57,7 +57,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletClientAvatarImage:          return eMyIconAvatarImage;
     case eAppletClientChatRoom:             return eMyIconClientChatRoom;
     case eAppletClientRandomConnect:	    return eMyIconSearchRandomConnect;
-    case eAppletClientStoryboard:           return eMyIconStoryBoardNormal;
     case eAppletCreateAccount:			    return eMyIconUserIdentity;
     case eAppletFriendListClient:	        return eMyIconFriendJoined;
     case eAppletGetStarted:                 return eMyIconInformation;
@@ -167,6 +166,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPersonOfferList:            return eMyIconPersonsOfferList;
     case eAppletPopupMenu:	                return eMyIconMenu;
 
+    case eAppletCamClient:	                return eMyIconClientWebCam;
     case eAppletCamSettings:	            return eMyIconCamSetupNormal;
     case eAppletSoundSettings:	            return eMyIconSoundSettings;
 
@@ -203,6 +203,8 @@ QString DescribeApplet( EApplet applet )
     case eAppletShareOfferList:             return QObject::tr( "Share Offer List" );
     case eAppletPlayerCamClip:              return QObject::tr( "Cam Video Player" );
     case eAppletPlayerPhoto:                return QObject::tr( "Photo Viewer" );
+
+    case eAppletCamClient:                  return QObject::tr( "View Shared Web Cam" );
     case eAppletCamSettings:                return QObject::tr( "Cam Settings" );
     case eAppletChatRoomJoin:               return QObject::tr( "Join Chat Room" );
     case eAppletChatRoomJoinSearch:			return QObject::tr( "Search For Chat Room To Join" );
@@ -210,7 +212,6 @@ QString DescribeApplet( EApplet applet )
     case eAppletClientChatRoom:		        return QObject::tr( "Chat with others in Chat room" );
     case eAppletClientRandomConnect:		return QObject::tr( "Connect With Random Person" );
     case eAppletClientAvatarImage:          return QObject::tr( "Get Persons Avatar Image For Contact List" );
-    case eAppletClientStoryboard:           return QObject::tr( "Share story (Blog)" );
     case eAppletCreateAccount:			    return QObject::tr( "Create Account" );
     case eAppletFriendListClient:	        return QObject::tr( "Friend List" );
     case eAppletGalleryEmoticon:			return QObject::tr( "Emoticon Gallery" );

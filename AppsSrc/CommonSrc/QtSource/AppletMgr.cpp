@@ -31,6 +31,7 @@
 #include "AppletBrowseFiles.h"
 
 #include "AppletPlayerCamClip.h"
+#include "AppletCamClient.h"
 #include "AppletCamSettings.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletChooseThumbnail.h"
@@ -38,7 +39,6 @@
 #include "AppletChatRoomJoin.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletClientRandomConnect.h"
-#include "AppletClientStoryboard.h"
 #include "AppletDownloads.h"
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
@@ -246,6 +246,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
     case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
     case eAppletBrowseFiles:                appletDialog = new AppletBrowseFiles (m_MyApp, parent); break;
+    case eAppletCamClient:                  appletDialog = new AppletCamClient( m_MyApp, parent ); break;
     case eAppletChatRoomJoin:               appletDialog = new AppletChatRoomJoin( m_MyApp, parent ); break;
     case eAppletChatRoomJoinSearch:         appletDialog = new AppletChatRoomJoinSearch( m_MyApp, parent ); break;
     case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
@@ -292,7 +293,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
     case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
     case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
-    case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
 
     case eAppletFriendListClient:           appletDialog = new AppletFriendListClient( m_MyApp, parent ); break;
     case eAppletNearbyListClient: 

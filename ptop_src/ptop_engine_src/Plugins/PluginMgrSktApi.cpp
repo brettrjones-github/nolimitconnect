@@ -65,6 +65,12 @@ bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
     EPluginType hostClientType = ePluginTypeInvalid;
     switch( ePluginType )
     {
+    case ePluginTypeCamServer:
+        hostClientType = ePluginTypeCamClient;
+        break;
+    case ePluginTypeCamClient:
+        hostClientType = ePluginTypeCamServer;
+        break;
     case ePluginTypeClientChatRoom:
         hostClientType = ePluginTypeHostChatRoom;
         break;

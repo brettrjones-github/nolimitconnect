@@ -21,7 +21,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IToGui.h>
 
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginCamServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 
@@ -353,23 +353,20 @@ void RcScanAction::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktB
 //! called when connection is lost
 void RcScanAction::onConnectionLost( VxSktBase * sktBase )
 {
-	std::vector<RcScanMatchedConnection>::iterator iter;
 	m_SearchActionMutex.lock();
-	bool bErased = true;
-	while( bErased ) 
+ 
+	for( auto iter = m_MatchedConnectionsList.begin(); iter != m_MatchedConnectionsList.end(); ) 
 	{
-		bErased = false;	 
-		for( iter = m_MatchedConnectionsList.begin(); iter != m_MatchedConnectionsList.end(); ++iter ) 
+		if( (*iter).m_Skt == sktBase )
 		{
-
-			if( (*iter).m_Skt == sktBase )
-			{
-				m_MatchedConnectionsList.erase(iter);
-				bErased = true;
-				break;
-			}
-		}	
-	}
+			iter = m_MatchedConnectionsList.erase(iter);
+			break;
+		}
+		else
+		{
+			++iter;
+		}
+	}	
 
 	m_SearchActionMutex.unlock();
 }

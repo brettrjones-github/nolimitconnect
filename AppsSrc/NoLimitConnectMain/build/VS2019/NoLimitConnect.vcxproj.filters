@@ -302,12 +302,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletDownloads.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientStoryboard.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientShareWebCam.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientShareFiles.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -950,6 +944,9 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiPluginMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamClient.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp">
@@ -1070,12 +1067,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientShareFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientShareWebCam.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientStoryboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletDownloads.cpp">
@@ -2050,6 +2041,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiPluginMgr.cpp">
       <Filter>Source Files\GuiPluginMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2426,9 +2420,6 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewMySharedFiles.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\ActivityWebCamClient.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityYesNo.ui">
@@ -2834,6 +2825,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPlayerPhoto.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamClient.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

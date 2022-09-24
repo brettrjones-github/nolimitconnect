@@ -74,7 +74,7 @@ public:
 	TxSession *					findOrCreateTxSessionWithSessionId( VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked );
 	TxSession *					findOrCreateTxSessionWithOnlineId( VxGUID& onlineId, VxSktBase * sktBase, VxNetIdent * netIdent, 
 																		bool pluginIsLocked, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	int							getTxSessionCount( void );
+	int							getTxSessionCount( bool pluginIsLocked = false );
 
 	RxSession *					findRxSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked );
 	RxSession *					findRxSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked );

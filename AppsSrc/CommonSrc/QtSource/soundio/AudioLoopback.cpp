@@ -90,6 +90,7 @@ qint64 AudioLoopback::readRequestFromSpeaker( char* data, qint64 maxlen )
 
 	m_SpeakerReadBitrate.addSamplesAndInterval( reqSpeakerSampleCnt, callTimeElapsed );
 
+	// LogMsg( LOG_VERBOSE, " AudioLoopback::readRequestFromSpeaker speaker buf lock" );
 	m_ProcessedBufMutex.lock();
 	if( reqSpeakerSampleCnt > m_SpeakerProcessedBuf.getSampleCnt() )
 	{
@@ -200,6 +201,7 @@ void AudioLoopback::processAudioLoopbackThreaded( void )
 		audioFrame.processFrameForSpeakerOutputThreaded( prevFrameSample );
 		prevFrameSample = audioFrame.getLastEchoSample();
 
+		LogMsg( LOG_VERBOSE, " AudioLoopback::processAudioLoopbackThreaded speaker buf lock" );
 		m_ProcessedBufMutex.lock();
 
 		if( audioFrame.echoSamplesAvailable() != MIXER_CHUNK_LEN_SAMPLES )
@@ -226,6 +228,7 @@ void AudioLoopback::processAudioLoopbackThreaded( void )
 		}
 
 		m_SpeakerProcessedBuf.writeSamples( audioFrame.getSpeakerSampleBuf(), audioFrame.speakerSamplesAvailable() );
+		LogMsg( LOG_VERBOSE, " AudioLoopback::processAudioLoopbackThreaded speaker buf unlock" );
 		m_EchoProcessedBuf.writeSamples( audioFrame.getEchoSampleBuf(), audioFrame.echoSamplesAvailable() );
 
 		if( m_AudioIoMgr.getSampleCntDebugEnable() )

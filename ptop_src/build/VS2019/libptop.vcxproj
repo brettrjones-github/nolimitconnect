@@ -675,6 +675,8 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerFiles.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerPktHandlers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginCamClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginCamServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginChatRoomHost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestClient.cpp" />
@@ -695,7 +697,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.cpp" />
@@ -957,6 +958,8 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseService.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginCamClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginCamServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomHost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestClient.h" />
@@ -976,7 +979,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.h" />

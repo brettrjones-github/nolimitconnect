@@ -295,9 +295,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseService.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -793,6 +790,12 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoredHostInfo.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginCamClient.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginCamServer.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
@@ -1111,9 +1114,6 @@
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h">
@@ -1652,6 +1652,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioProcessorDefs.h">
       <Filter>Source Files\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginCamClient.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginCamServer.h">
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

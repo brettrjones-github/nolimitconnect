@@ -98,7 +98,7 @@ public:
     void		                setHasTextOffers( bool hasOffers )	    { m_NetIdent.setHasTextOffers( hasOffers ); }
     bool		                getHasTextOffers( void )				{ return m_NetIdent.getHasTextOffers(); }
 
-    bool                        isMyAccessAllowedFromHim( enum EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.isMyAccessAllowedFromHim( pluginType, inGroup ); }
+    bool                        isMyAccessAllowedFromHim( enum EPluginType pluginType, bool inGroup = false );
     bool						isHisAccessAllowedFromMe( enum EPluginType pluginType, bool inGroup = false ) { return m_NetIdent.isHisAccessAllowedFromMe( pluginType, inGroup ); }
 
     void                        setLastUpdateTime( uint64_t updateTimeMs ) { m_LastUpdateTime = updateTimeMs; }

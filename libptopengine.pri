@@ -242,7 +242,8 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h \
@@ -510,7 +511,8 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.cpp \

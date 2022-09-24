@@ -771,6 +771,7 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeAboutMePageClient,	// about me web page plugin client
     ePluginTypeStoryboardClient,	// storyboard web page plugin client
     ePluginTypeFileShareClient,     // shared files client
+    ePluginTypeCamClient,           // cam server plugin client
 
     eMaxPluginType	
 };

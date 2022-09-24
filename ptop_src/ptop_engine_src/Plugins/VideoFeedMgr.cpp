@@ -49,15 +49,15 @@ VideoFeedMgr::VideoFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSession
 }
 
 //============================================================================
-void VideoFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent )
+void VideoFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent, bool wantCamCapture )
 {
-	enableVideoCapture( true, netIdent, appModule );
+	enableVideoCapture( true, netIdent, appModule, wantCamCapture );
 }
 
 //============================================================================
-void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent )
+void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent, bool wantCamCapture )
 {
-	enableVideoCapture( false, netIdent, appModule );
+	enableVideoCapture( false, netIdent, appModule, wantCamCapture );
 	//LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession\n" );
 
 	PktVideoFeedStatus oPkt;
@@ -100,7 +100,7 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule app
 }
 
 //============================================================================
-void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule )
+void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule, bool wantCamCapture )
 {
 	//LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture %d start %s\n", enable, netIdent->getOnlineName() );
 	// kind of a strange way of handling the problem of which video to enable
@@ -124,7 +124,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent* netIdent, EAppMo
 					}
 
 					// always show ourself if web cam server is enabled
-					if( !m_VideoJpgRequesed )
+					if( wantCamCapture && !m_VideoJpgRequesed )
 					{
 						m_VideoJpgRequesed = true;
 						m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoJpgSmall, appModule, true, (void*)m_Plugin.getPluginType() );
@@ -142,7 +142,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent* netIdent, EAppMo
 			}
 			else
 			{
-				if( !m_VideoJpgRequesed )
+				if( wantCamCapture && !m_VideoJpgRequesed )
 				{
 					m_VideoJpgRequesed = true;
 					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoJpgSmall, appModule, true, (void *)m_Plugin.getPluginType() );

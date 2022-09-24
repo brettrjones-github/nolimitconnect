@@ -21,7 +21,7 @@
 #include <ptop_src/ptop_engine_src/Network/NetConnector.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginCamServer.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
 #include <CoreLib/VxParse.h>

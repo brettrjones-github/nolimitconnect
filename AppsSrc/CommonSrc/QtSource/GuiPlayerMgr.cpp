@@ -64,8 +64,15 @@ void GuiPlayerMgr::wantPlayVideoCallbacks( GuiPlayerCallback* client, bool enabl
 //============================================================================
 void GuiPlayerMgr::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 )
 {
+	// there seems to be an issue where a QImage may get replaced if there is already one in a queued signal/slot 
+	// only allow 1 at a time
+	int behindFramCnt = m_BehindFrameCnt;
+	if( behindFramCnt )
+	{
+		return;
+	}
+
 	QImage vidFrame;
-    int behindFramCnt = m_BehindFrameCnt;
 	if( behindFramCnt < 4 && vidFrame.loadFromData( pu8Jpg, u32JpgDataLen, "JPG" ) )
 	{
 		m_BehindFrameCnt++;
@@ -93,8 +100,15 @@ void GuiPlayerMgr::slotInternalPlayMotionVideoFrame( VxGUID feedOnlineId, QImage
 //============================================================================
 int GuiPlayerMgr::toGuiPlayVideoFrame( VxGUID& feedOnlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight )
 {
-	QImage frameImage;
+	// there seems to be an issue where a QImage may get replaced if there is already one in a queued signal/slot 
+// only allow 1 at a time
 	int behindFramCnt = m_BehindFrameCnt;
+	if( behindFramCnt )
+	{
+		return behindFramCnt;
+	}
+
+	QImage frameImage;
 	if( behindFramCnt < 4 && m_VideoPlayClients.size() )
 	{
 		if( picBuf

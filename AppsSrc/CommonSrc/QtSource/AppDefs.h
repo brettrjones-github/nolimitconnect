@@ -156,8 +156,7 @@ enum EApplet
     eAppletClientRandomConnectRelay, // connect to random person relay service for users without a open port
     eAppletClientRelay,             // network relay service for users without a open port
     eAppletClientShareFiles,
-    eAppletClientShareWebCam,
-    eAppletClientStoryboard,
+    eAppletCamClient,
 
     eAppletChooseThumbnail,
     eAppletGalleryEmoticon,

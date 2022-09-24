@@ -18,7 +18,7 @@
 #include "PluginMgr.h"
 #include "PluginSessionMgr.h"
 #include "P2PSession.h"
-#include "PluginServiceWebCam.h"
+#include "PluginCamServer.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
@@ -30,7 +30,7 @@
 
 #include <memory.h>
 
-//#define DEBUG_AUTOPLUGIN_LOCK 1
+#define DEBUG_AUTOPLUGIN_LOCK 1
 
 //============================================================================
 VoiceFeedMgr::VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr )
@@ -46,19 +46,19 @@ VoiceFeedMgr::VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSession
 }
 
 //============================================================================
-void VoiceFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent )
+void VoiceFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent, bool wantAudioCapture )
 {
-	enableAudioCapture( true, netIdent, appModule );
+	enableAudioCapture( true, netIdent, appModule, wantAudioCapture );
 }
 
 //============================================================================
-void VoiceFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent )
+void VoiceFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent, bool wantAudioCapture )
 {
-	enableAudioCapture( false, netIdent, appModule );
+	enableAudioCapture( false, netIdent, appModule, wantAudioCapture );
 }
 
 //============================================================================
-void VoiceFeedMgr::enableAudioCapture( bool enable, VxNetIdent * netIdent, EAppModule appModule )
+void VoiceFeedMgr::enableAudioCapture( bool enable, VxNetIdent * netIdent, EAppModule appModule, bool wantAudioCapture )
 {
 	if( enable != m_Enabled )
 	{
@@ -91,7 +91,7 @@ void VoiceFeedMgr::enableAudioCapture( bool enable, VxNetIdent * netIdent, EAppM
 				}
 				else
 				{
-					if( !m_AudioPktsRequested )
+					if( wantAudioCapture && !m_AudioPktsRequested )
 					{
 						//LogModule( eLogMediaStream, LOG_INFO, "VoiceFeedMgr::enableCapture eMediaInputAudioPkts %d\n", enable );
 						m_AudioPktsRequested = true;
@@ -266,7 +266,7 @@ void VoiceFeedMgr::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 }
 
 //============================================================================
-void VoiceFeedMgr::callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio )
+void VoiceFeedMgr::callbackOpusPkt( void * userData, PktVoiceReq* pktOpusAudio )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
     LogModule( eLogMediaStream, LOG_INFO, "VoiceFeedMgr::callbackOpusPkt PluginBase::AutoPluginLock autoLock start" );
@@ -276,9 +276,8 @@ void VoiceFeedMgr::callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio 
     LogModule( eLogMediaStream, LOG_INFO, "VoiceFeedMgr::callbackOpusPkt PluginBase::AutoPluginLock autoLock done" );
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 
-	PluginSessionMgr::SessionIter iter;
 	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_SessionMgr.getSessions();
-	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
+	for( auto iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
 		PluginSessionBase * poSession = iter->second;
 		if( false == poSession->isRxSession() )

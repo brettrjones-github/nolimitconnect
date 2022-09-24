@@ -19,6 +19,7 @@
 #include "AppletPopupMenu.h"
 #include "AppletPeerChangeFriendship.h"
 #include "AppletAboutMeClient.h"
+#include "AppletCamClient.h"
 #include "AppletStoryboardClient.h"
 
 #include "FileShareItemWidget.h"
@@ -345,10 +346,21 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 
 		break;
 
+	case ePluginTypeCamServer:
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeCamServer, m_InGroup ) )
+		{
+			AppletCamClient* applet = dynamic_cast<AppletCamClient*>(m_MyApp.launchApplet( eAppletCamClient, getParentPageFrame() ));
+			if( applet )
+			{
+				applet->setupCamFeed( m_SelectedFriend );
+			}
+		}
+
+		break;
+
 	case ePluginTypeVideoPhone:
 	case ePluginTypeVoicePhone:
 	case ePluginTypeTruthOrDare:
-	case ePluginTypeCamServer:
 	case ePluginTypeMessenger:
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( (EPluginType)iMenuId, m_InGroup ) )
 		{

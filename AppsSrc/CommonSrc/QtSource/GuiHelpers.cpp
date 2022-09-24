@@ -243,8 +243,8 @@ bool GuiHelpers::isAppletAClient( EApplet applet )
              || ( eAppletClientRandomConnect == applet )
              || ( eAppletClientRandomConnectRelay == applet )
              || ( eAppletClientShareFiles == applet )
-             || ( eAppletClientShareWebCam == applet )
-             || ( eAppletClientStoryboard == applet )
+             || ( eAppletCamClient == applet )
+             || ( eAppletStoryboardClient == applet )
              );
 }
 
@@ -255,6 +255,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     switch( applet )
     {
     case eAppletAboutMeClient:              return ePluginTypeAboutMePageClient;
+    case eAppletCamClient:                  return ePluginTypeCamServer;
     case eAppletClientAvatarImage:          return ePluginTypeClientPeerUser;
     case eAppletClientConnectionTest:       return ePluginTypeClientConnectTest;
     case eAppletClientHostGroup:            return ePluginTypeHostGroup;
@@ -263,8 +264,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientRandomConnect:        return ePluginTypeClientRandomConnect;
     case eAppletClientRandomConnectRelay:   return ePluginTypeHostRandomConnect;
     case eAppletClientShareFiles:           return ePluginTypeFileShareServer;
-    case eAppletClientShareWebCam:          return ePluginTypeCamServer;
-    case eAppletClientStoryboard:           return ePluginTypeStoryboardClient;
+
     case eAppletPeerViewSharedFiles:        return ePluginTypeFileShareClient;
 
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePageServer;
@@ -476,6 +476,7 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
     case ePluginTypeAboutMePageClient:
     case ePluginTypeStoryboardClient:
     case ePluginTypeFileShareClient:
+    case ePluginTypeCamClient:   
 		isSingleSessionPlugin = true;
 		break;
 	case ePluginTypeAboutMePageServer:

@@ -991,6 +991,23 @@ EMyIcons MyIcons::getPluginIcon( enum EPluginType ePluginType, EPluginAccess ePl
 		return eMyIconProfile;
 		break;
 
+	case ePluginTypeCamClient:
+		switch( ePluginAccess )
+		{
+		case ePluginAccessOk:
+		case ePluginAccessDisabled:
+		case ePluginAccessInactive:
+		case ePluginAccessRequiresDirectConnect:
+		case ePluginAccessRequiresOnline:
+		case ePluginAccessNotSet:
+		case eMaxPluginAccessState:
+		case ePluginAccessLocked:
+		case ePluginAccessIgnored:
+		case ePluginAccessBusy:
+			return eMyIconClientWebCam;
+		}
+		break;
+
     case ePluginTypeClientChatRoom:
         switch( ePluginAccess )
         {
@@ -1466,6 +1483,8 @@ EMyIcons MyIcons::getDisabledPluginIcon( enum EPluginType ePluginType )
 		return eMyIconShareFilesDisabled;
 	case 	ePluginTypeCamServer:	// web cam broadcast plugin
 		return eMyIconWebCamServerDisabled;
+	case 	ePluginTypeCamClient:	// web cam broadcast plugin
+		return eMyIconWebCamServerDisabled;
 	case 	ePluginTypeVoicePhone:	// VOIP p2p plugin
 		return eMyIconVoicePhoneDisabled;
 	case 	ePluginTypeVideoPhone:	// Video phone p2p plugin
@@ -1498,6 +1517,8 @@ EMyIcons MyIcons::getLockedPluginIcon( enum EPluginType ePluginType )
 	case 	ePluginTypeFileShareServer:	// file share plugin
 		return eMyIconShareFilesCancel;
 	case 	ePluginTypeCamServer:	// web cam broadcast plugin
+		return eMyIconWebCamServerLocked;
+	case 	ePluginTypeCamClient:	// web cam client plugin
 		return eMyIconWebCamServerLocked;
 	case 	ePluginTypeVoicePhone:	// VOIP p2p plugin
 		return eMyIconVoicePhoneLocked;

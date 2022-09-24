@@ -78,6 +78,8 @@ public:
 class MediaProcessor : public MediaCallbackInterface
 {
 public:
+	const int JPG_CONVERT_QUALITY = 75; // there is very little picture quality improvement above 75 
+
 	class AudioProcessorLock
 	{
 	public:

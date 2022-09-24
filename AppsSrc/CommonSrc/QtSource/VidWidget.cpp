@@ -162,7 +162,6 @@ void VidWidget::setVideoFeedId( VxGUID& feedOnlineId, EAppModule appModule )
 		if( m_VideoFeedId.isVxGUIDValid() )
 		{
 			m_MyApp.getPlayerMgr().wantPlayVideoCallbacks( this, true );
-			// m_Engine.fromGuiWantMediaInput( m_VideoFeedId, eMediaInputVideoJpgSmall, appModule, true );
 		}
 		else
 		{

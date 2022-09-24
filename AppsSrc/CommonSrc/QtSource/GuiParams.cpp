@@ -1049,12 +1049,16 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Host Connect Test");
         break;
 
-    case  ePluginTypeNetworkSearchList:	//!< group and chat room list for network search
+    case ePluginTypeNetworkSearchList:	//!< group and chat room list for network search
         strPluginType = QObject::tr("Network Search");
         break;
 
-    case  ePluginTypeFileShareClient:
+    case ePluginTypeFileShareClient:
         strPluginType = QObject::tr( "Shared Files Client" );
+        break;
+
+    case ePluginTypeCamClient:
+        strPluginType = QObject::tr( "Web Cam Client" );
         break;
 
     default:
@@ -1077,11 +1081,11 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         break;
 
     case ePluginTypeAboutMePageClient:
-            strPluginDesc = QObject::tr( "View About Me Page" ).toUtf8().constData();
+        strPluginDesc = QObject::tr( "View About Me Page" ).toUtf8().constData();
         break;
 
     case ePluginTypeAboutMePageServer:
-            strPluginDesc = QObject::tr( "About Me Page Service" ).toUtf8().constData();
+        strPluginDesc = QObject::tr( "About Me Page Service" ).toUtf8().constData();
         break;
 
     case ePluginTypeClientPeerUser:
@@ -1233,6 +1237,10 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Download Shared Files" ).toUtf8().constData();
         break;
 
+    case ePluginTypeCamClient:
+        strPluginDesc = QObject::tr( "View Shared Web Cam" ).toUtf8().constData();
+        break;
+
     default:
         strPluginDesc = QObject::tr( "UNKNOWN PLUGIN" ).toUtf8().constData();
     }
@@ -1263,10 +1271,6 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         strPluginOffer = QObject::tr(" View Shared Files " );
         break;
 
-    case ePluginTypeCamServer:	// web cam broadcast plugin
-        strPluginOffer = QObject::tr(" View Shared Web Cam ");
-        break;
-
     case ePluginTypeMessenger:	// multi session chat plugin
         strPluginOffer = QObject::tr(" Join Chat Session " );
         break;
@@ -1293,6 +1297,13 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
 
     case ePluginTypeFileShareClient:
         strPluginOffer = QObject::tr( " Shared Files Client " );
+        break;
+
+    case ePluginTypeCamServer:	// web cam broadcast plugin
+        strPluginOffer = QObject::tr( " Web Cam Server Service" );
+        break;
+    case ePluginTypeCamClient:	// web cam viewer plugin
+        strPluginOffer = QObject::tr( " View Shared Web Cam " );
         break;
 
     default:

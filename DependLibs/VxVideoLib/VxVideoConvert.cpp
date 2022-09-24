@@ -37,7 +37,7 @@ uint8_t * VxConvertToJpg(	uint32_t	u32FourCcIn,		// FOURCC of format to convert
 	uint8_t * pu8VidData = pu8DataIn;
 	uint8_t * pu8DataToDelete = 0;
 
-	LogMsg( LOG_DEBUG, "VxConvertToJpg fourcc 0x%x\n", u32FourCcIn );
+	LogMsg( LOG_DEBUG, "VxConvertToJpg fourcc 0x%X", u32FourCcIn );
 	bool bConvert =  (FOURCC_RGB != u32FourCcIn);
 	if( bConvert )
 	{
@@ -82,13 +82,13 @@ uint8_t * VxConvertToJpg(	uint32_t	u32FourCcIn,		// FOURCC of format to convert
 	delete pu8DataToDelete;
 	if( 0 != rc )
 	{
-		LogMsg( LOG_ERROR, "VxConvertToJpg: JPEG Conversion error %d\n", rc );
+		LogMsg( LOG_ERROR, "VxConvertToJpg: JPEG Conversion error %d", rc );
 		u32RetDataLen = 0;
 	}
 	else
 	{
 		u32RetDataLen = s32JpgDataLen;
-		LogMsg( LOG_INFO, "VxConvertToJpg: width %d height %d len %d.. compressed to %d\n", iImageWidthIn, iImageHeightIn, iDataLen, s32JpgDataLen  );
+		LogMsg( LOG_INFO, "VxConvertToJpg: width %d height %d len %d.. compressed to %d", iImageWidthIn, iImageHeightIn, iDataLen, s32JpgDataLen  );
 	}
 	// return jpg data
 	return pu8JpgData;

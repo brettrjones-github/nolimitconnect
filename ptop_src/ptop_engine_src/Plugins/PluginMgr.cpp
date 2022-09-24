@@ -21,13 +21,18 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.h>
 
+#include <ptop_src/ptop_engine_src/Plugins/PluginCamClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginCamServer.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginInvalid.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMessenger.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
@@ -39,9 +44,10 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.h>
@@ -170,7 +176,11 @@ void PluginMgr::pluginMgrStartup( void )
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create cam server plugin" );
-	poPlugin = new PluginServiceWebCam( m_Engine, *this, &this->m_PktAnn, ePluginTypeCamServer );
+	poPlugin = new PluginCamServer( m_Engine, *this, &this->m_PktAnn, ePluginTypeCamServer );
+	m_aoPlugins.push_back( poPlugin );
+
+	LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create cam client plugin" );
+	poPlugin = new PluginCamClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeCamClient );
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create voice phone plugin" );
@@ -911,9 +921,9 @@ bool PluginMgr::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUI
 
 //============================================================================
 //! return true if access ok
-bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent )
+bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent* netIdent )
 {
-	LogMsg( LOG_INFO, "PluginMgr::canAccessPlugin\n" );
+	LogMsg( LOG_VERBOSE, "PluginMgr::canAccessPlugin" );
 	EFriendState eHisFriendshipToMe = netIdent->getHisFriendshipToMe();
 	EFriendState ePluginPermission = netIdent->getPluginPermission(ePluginType);
 	if( ( ePluginPermission != eFriendStateIgnore ) &&

@@ -69,13 +69,16 @@ public:
 	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* netIdent, EPluginType pluginType );
 	virtual ~PluginBase() override = default;
 
+	virtual void				lockPlugin( void )										{ m_PluginMutex.lock(); }
+	virtual void				unlockPlugin( void )									{ m_PluginMutex.unlock(); }
+
     virtual void				pluginStartup( void );
-    virtual void				pluginShutdown( void ){}
+    virtual void				pluginShutdown( void )									{}
 	virtual bool				isPluginEnabled( void );
 	virtual EFriendState		getPluginPermission( void );
 	virtual void				setPluginPermission( EFriendState eFriendState );
 
-	virtual void				onMyOnlineUrlIsValid( bool isValidUrl ) {};
+	virtual void				onMyOnlineUrlIsValid( bool isValidUrl )					{};
 
 	virtual bool				isAccessAllowed( VxNetIdent* netIdent, bool logAccessError = true, const char* accessReason = nullptr );
 

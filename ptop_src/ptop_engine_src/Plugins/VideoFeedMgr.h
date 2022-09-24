@@ -35,8 +35,8 @@ public:
 	VideoFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 	virtual ~VideoFeedMgr() = default;
 
-	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
+	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = nullptr, bool wantCamCapture = true );
+	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = nullptr, bool wantCamCapture = true );
 
 	virtual void				onPktVideoFeedReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktVideoFeedStatus		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -51,7 +51,7 @@ public:
 	void						stopAllSessions( EAppModule appModule, EPluginType pluginType );
 
 protected:
-	void						enableVideoCapture( bool bStart, VxNetIdent * netIdent, EAppModule appModule );
+	void						enableVideoCapture( bool bStart, VxNetIdent * netIdent, EAppModule appModule, bool wantCamCapture = true );
 
     P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;

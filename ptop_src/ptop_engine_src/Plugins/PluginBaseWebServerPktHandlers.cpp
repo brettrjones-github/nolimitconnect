@@ -45,57 +45,43 @@ void PluginBaseWebServer::replaceConnection( VxNetIdent * netIdent, VxSktBase * 
 }
 
 //============================================================================
-void PluginBaseWebServer::onContactWentOffline(  VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginBaseWebServer::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	AutoPluginLock( this );
-	bool bErased = true;
 	bool sktIsDisconnected = !sktBase->isConnected();
-	while( bErased ) 
+	for( auto iter = m_WebTxSessions.begin(); iter != m_WebTxSessions.end(); )
 	{
-		bErased = false;
-		WebTxIter iter = m_WebTxSessions.begin();
-		while( iter != m_WebTxSessions.end() )
+		WebTxSession * poSession = iter->second;
+		if( ( sktIsDisconnected && ( poSession->getSkt() == sktBase ) ) 
+			|| ( poSession->getIdent()->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 		{
-			WebTxSession * poSession = iter->second;
-			if( ( sktIsDisconnected && ( poSession->getSkt() == sktBase ) ) 
-				|| ( poSession->getIdent()->getMyOnlineId() == netIdent->getMyOnlineId() ) )
-			{
-				delete poSession;
-				m_WebTxSessions.erase( iter );
-				bErased = true;
-				break;
-			}
-			else
-			{
-				++iter;
-			}
+			iter = m_WebTxSessions.erase( iter );
+			delete poSession;
+			break;
+		}
+		else
+		{
+			++iter;
 		}
 	}
 }
 
 //============================================================================
-void PluginBaseWebServer::onConnectionLost( VxSktBase * sktBase )
+void PluginBaseWebServer::onConnectionLost( VxSktBase* sktBase )
 {
 	AutoPluginLock( this );
-	bool bErased = true;
-	while( bErased ) 
+	for( auto iter = m_WebTxSessions.begin(); iter != m_WebTxSessions.end(); )
 	{
-		bErased = false;
-		WebTxIter iter = m_WebTxSessions.begin();
-		while( iter != m_WebTxSessions.end() )
+		WebTxSession* poSession = iter->second;
+		if( poSession->getSkt() == sktBase )
 		{
-			WebTxSession * poSession = iter->second;
-			if( poSession->getSkt() == sktBase )
-			{
-				delete poSession;
-				m_WebTxSessions.erase( iter );
-				bErased = true;
-				break;
-			}
-			else
-			{
-				++iter;
-			}
+			iter = m_WebTxSessions.erase( iter );
+			delete poSession;
+			break;
+		}
+		else
+		{
+			++iter;
 		}
 	}
 }

@@ -34,8 +34,8 @@ class VoiceFeedMgr
 public:
 	VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 
-	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = NULL );
+	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = nullptr, bool wantAudioCapture = true );
+	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent = nullptr, bool wantAudioCapture = true );
 
 	virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -46,7 +46,7 @@ public:
 	void						stopAllSessions( EAppModule appModule, EPluginType pluginType );
 
 protected:
-	void						enableAudioCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule );
+	void						enableAudioCapture( bool enable, VxNetIdent* netIdent, EAppModule appModule, bool wantAudioCapture = true );
 
     P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;

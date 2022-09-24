@@ -53,15 +53,14 @@ using namespace std;
 void testJpgSpeed( void );
 #endif // TEST_JPG_SPEED
 //#define DEBUG_AUDIO_PROCESSOR_LOCK
+//#define LOG_JPG_SIZE 1
 
 namespace
 {
 	const int VIDEO_DATA_BYTE_CNT					    = (320*240*3);
 	const int VIDEO_SENSITIVITY_DIVISOR				    = (320*240*3*64);
 	const int VIDEO_MAX_MOTION_VALUE				    = 100000;
-	const int32_t MAX_DATA_PAYLOAD_PIC_PKT				= MAX_PKT_LEN - ( sizeof(PktVideoFeedPic) + 16 );
-	const int32_t MAX_TOTAL_PIC_CHUNKS_PAYLOAD			= VIDEO_DATA_BYTE_CNT - MAX_DATA_PAYLOAD_PIC_PKT;
-	const int32_t MAX_PIC_CHUNK_PKTS_REQUIRED			= MAX_TOTAL_PIC_CHUNKS_PAYLOAD / MAX_PIC_CHUNK_LEN + (MAX_TOTAL_PIC_CHUNKS_PAYLOAD % MAX_PIC_CHUNK_LEN) ? 1 : 0;
+	const int MAX_PIC_PKT_DATA_PAYLOAD					= MAX_PKT_LEN - ( sizeof(PktVideoFeedPic) + 16 );
 
 	//============================================================================
     static void * AudioInProcessThreadFunc( void * pvContext )
@@ -115,7 +114,11 @@ MediaProcessor::MediaProcessor( P2PEngine& engine )
 	m_PktVideoFeedPic->setBitsPerPixel( 24 );
 	m_PktVideoFeedPic->setPicType( 1 );
 
-	for( int i = 0; i < MAX_PIC_CHUNK_PKTS_REQUIRED; i++ )
+	int maxJpgSize = VIDEO_DATA_BYTE_CNT + 1024; // JPG header should only be less that 32 bytes but just in case because is variable and compression may be poor
+	int maxChunkPayloadNeeded = maxJpgSize - MAX_PIC_PKT_DATA_PAYLOAD;
+	int maxPicChunkPayload = MAX_PIC_CHUNK_LEN;
+	int maxPicChuncsRequired = maxChunkPayloadNeeded / maxPicChunkPayload + ((maxChunkPayloadNeeded % maxPicChunkPayload) ? 1 : 0);
+	for( int i = 0; i < maxPicChuncsRequired; i++ )
 	{
 		m_VidChunkList.push_back( new PktVideoFeedPicChunk() );
 	}
@@ -619,10 +622,11 @@ void testJpgSpeed( void )
 			pu8VidData,					// bits of bmp to convert
 			320,						// width of image in pixels
 			240,						// height of image in pixels
-			75,							// quality of image
+			75,		// quality of image
 			iMaxJpgSize,				// maximum length of pu8RetJpg
 			jpgData,					// buffer to return Jpeg image
 			&s32JpgDataLen );			// return length of jpeg image
+
 		if( 0 != rc )
 		{
 			LogMsg( LOG_INFO, "VxBmp2Jpg ERROR %d", rc );
@@ -777,18 +781,23 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 					pu8VidData,				// bits of bmp to convert
 					iWidth,					// width of image in pixels
 					iHeight,				// height of image in pixels
-					75,					    // quality of image
+					JPG_CONVERT_QUALITY,	// quality of image
 					iMaxJpgSize,			// maximum length of pu8RetJpg
 					pu8JpgData,				// buffer to return Jpeg image
 					&s32JpgDataLen );		// return length of jpeg image
 
-		std::vector<MediaClient>::iterator iter;
+		#if defined( LOG_JPG_SIZE )
+				{
+					LogMsg( LOG_VERBOSE, "VxBmp2Jpg processRawVideoIn size %d", s32JpgDataLen );
+				}
+		#endif // defined( LOG_JPG_SIZE )
+
 		#ifdef DEBUG_PROCESSOR_LOCK
 		LogMsg( LOG_INFO, "VxBmp2Jpg AutoProcessorLock" );
 		#endif // DEBUG_PROCESSOR_LOCK
 		VideoProcessorLock mgrMutexLock( this );
 		doVideoClientRemovals( m_VideoClientRemoveList );
-		for( iter = m_VideoJpgBigList.begin(); iter != m_VideoJpgBigList.end(); ++iter )
+		for( auto iter = m_VideoJpgBigList.begin(); iter != m_VideoJpgBigList.end(); ++iter )
 		{
 			MediaClient& client = (*iter);
 			client.m_Callback->callbackVideoJpgBig( client.m_UserData, m_Engine.getMyOnlineId(), pu8JpgData, s32JpgDataLen );
@@ -853,10 +862,14 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 						     pu8VidData,					// bits of bmp to convert
 						     iWidth,						// width of image in pixels
 						     iHeight,						// height of image in pixels
-						     m_VideoJpgBigList.size() ? 100 : 75,							// quality of image
+						     m_VideoJpgBigList.size() ? 100 : JPG_CONVERT_QUALITY,							// quality of image
 						     iMaxJpgSize,					// maximum length of pu8RetJpg
 						     m_PktVideoFeedPic->getDataPayload(),	// buffer to return Jpeg image
 						     &s32JpgDataLen );				// return length of jpeg image
+	#if defined( LOG_JPG_SIZE )
+		LogMsg( LOG_VERBOSE, "VxBmp2Jpg processRawVideoIn size %d", s32JpgDataLen );
+	#endif //defined( LOG_JPG_SIZE )
+
 	delete[] pu8VidData;
 	if( 0 == rc )
 	{
@@ -904,8 +917,8 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 
 		if( m_VidPktListContainsMyId && m_VideoPktsList.size() )
 		{
-			int32_t picPktDataLen		= s32JpgDataLen > MAX_DATA_PAYLOAD_PIC_PKT ? MAX_DATA_PAYLOAD_PIC_PKT : s32JpgDataLen;
-			int32_t dataOverflow		= s32JpgDataLen > MAX_DATA_PAYLOAD_PIC_PKT ? s32JpgDataLen - MAX_DATA_PAYLOAD_PIC_PKT : 0;
+			int32_t picPktDataLen		= s32JpgDataLen > MAX_PIC_PKT_DATA_PAYLOAD ? MAX_PIC_PKT_DATA_PAYLOAD : s32JpgDataLen;
+			int32_t dataOverflow		= s32JpgDataLen > MAX_PIC_PKT_DATA_PAYLOAD ? s32JpgDataLen - MAX_PIC_PKT_DATA_PAYLOAD : 0;
 			int32_t chunkPktsRequired	= dataOverflow / MAX_PIC_CHUNK_LEN + ((dataOverflow % MAX_PIC_CHUNK_LEN)?1:0);
 			m_PktVideoFeedPic->setThisDataLen( picPktDataLen );
 			m_PktVideoFeedPic->setTotalDataLen( s32JpgDataLen );
@@ -929,7 +942,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 
 			if( chunkPktsRequired )
 			{
-				int curDataIdx = MAX_DATA_PAYLOAD_PIC_PKT;
+				int curDataIdx = MAX_PIC_PKT_DATA_PAYLOAD;
 				int dataLeftToSend = dataOverflow;
 				for( int i = 0; i < chunkPktsRequired; i++ )
 				{

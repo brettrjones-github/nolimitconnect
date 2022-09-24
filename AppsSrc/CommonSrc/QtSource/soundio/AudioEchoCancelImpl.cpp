@@ -145,8 +145,10 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSpeakerBuf& speakerPro
 
 	if( !m_AudioIoMgr.isSpeakerOutputWanted() )
 	{
+		// LogMsg( LOG_VERBOSE, "processEchoCancelThreaded speaker buf lock" );
 		speakerProcessedMutex.lock();
 		speakerProcessed8000Buf.clear();
+		// LogMsg( LOG_VERBOSE, "processEchoCancelThreaded speaker buf unlock" );
 		speakerProcessedMutex.unlock();
 
 		// we have microphone input but no speaker output so echo cancel is not possible
@@ -165,8 +167,7 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSpeakerBuf& speakerPro
 			m_ProcessMicSamples.samplesWereRead( MIXER_CHUNK_LEN_SAMPLES );
 			m_MicSamplesMutex.unlock();
 		}
-
-		
+	
 		return;
 	}
 
@@ -174,9 +175,11 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSpeakerBuf& speakerPro
 
 	m_SpeakerSamplesMutex.lock();
 
+	// LogMsg( LOG_VERBOSE, "processEchoCancelThreaded speaker buf lock" );
 	speakerProcessedMutex.lock();
 	m_ProcessSpeakerSamples.writeSamples( speakerProcessed8000Buf.getSampleBuffer(), speakerProcessed8000Buf.getSampleCnt() );
 	speakerProcessed8000Buf.clear();
+	// LogMsg( LOG_VERBOSE, "processEchoCancelThreaded speaker buf unlock" );
 	speakerProcessedMutex.unlock();
 
 	m_SpeakerSamplesMutex.unlock();

@@ -19,11 +19,11 @@
 #include "VoiceFeedMgr.h"
 #include "VideoFeedMgr.h"
 
-class PluginServiceWebCam : public PluginBase
+class PluginCamClient : public PluginBase
 {
 public:
-	PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginServiceWebCam() = default;
+	PluginCamClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	virtual ~PluginCamClient() = default;
 
 	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );

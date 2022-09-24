@@ -510,6 +510,7 @@ EMembershipState HostJoinMgr::fromGuiQueryMembership( EHostType hostType, VxNetI
             return eMembershipStateJoined;
 
         case eJoinStateJoinDenied:
+        default:
             return eMembershipStateJoinDenied;
         }
     }

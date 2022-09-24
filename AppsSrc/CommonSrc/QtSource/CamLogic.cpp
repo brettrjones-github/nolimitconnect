@@ -286,15 +286,15 @@ void CamLogic::selectVideoFormat( const QCameraDevice& cameraDevice )
             for( const auto& format : formats ) 
             {
                 formatNum++;
-                LogMsg( LOG_VERBOSE, "Format %d camera resolution w %d h %d min fps %3.1f max fps %3.1f", formatNum, format.resolution().width(),
-                    format.resolution().height(), format.minFrameRate(), format.maxFrameRate() );
+                //LogMsg( LOG_VERBOSE, "Format %d camera resolution w %d h %d min fps %3.1f max fps %3.1f", formatNum, format.resolution().width(),
+                //    format.resolution().height(), format.minFrameRate(), format.maxFrameRate() );
                 if( format.resolution().width() >= targetSize.width() && format.resolution().height() >= targetSize.height() )
                 {
                     if( defaultFormatInvalid || ( format.resolution().width() - targetSize.width() < defaultFormat.resolution().width() - targetSize.width() )
                         || ( format.resolution().height() - targetSize.height() < defaultFormat.resolution().height() - targetSize.height() ) )
                     {
-                        LogMsg( LOG_VERBOSE, "Found better camera resolution %d w %d h %d min fps %3.1f max fps %3.1f", formatNum, format.resolution().width(),
-                            format.resolution().height(), format.minFrameRate(), format.maxFrameRate() );
+                        //LogMsg( LOG_VERBOSE, "Found better camera resolution %d w %d h %d min fps %3.1f max fps %3.1f", formatNum, format.resolution().width(),
+                        //    format.resolution().height(), format.minFrameRate(), format.maxFrameRate() );
                         defaultFormat = format;
                         if( defaultFormat.resolution().width() >= targetSize.width() && defaultFormat.resolution().height() >= targetSize.height() )
                         {

@@ -74,6 +74,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletBase.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletBrowseFiles.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletPlayerCamClip.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletCamClient.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletCamSettings.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomJoin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomClient.h \
@@ -83,8 +84,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientBase.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientRandomConnect.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientShareFiles.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientShareWebCam.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientStoryboard.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletDownloads.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletEditAboutMe.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletEditAvatarImage.h \
@@ -459,6 +458,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletBase.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletBrowseFiles.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletPlayerCamClip.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletCamClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletCamSettings.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletChatRoomJoin.cpp \
@@ -468,8 +468,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientRandomConnect.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientShareFiles.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientShareWebCam.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletClientStoryboard.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletDownloads.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletEditAboutMe.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletEditAvatarImage.cpp \
@@ -792,7 +790,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityVideoOptions.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityViewLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityViewMySharedFiles.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/ActivityWebCamClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityYesNo.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityBase.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AcceptCancelWidget.ui \
@@ -800,7 +797,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletAboutMeClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletApplicationInfo.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletBrowseFiles.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletPlayerCamClip.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletCamClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletCamSettings.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletChatRoomClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletChatRoomJoin.ui \
@@ -848,6 +845,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletPeerVoicePhone.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletPermissionList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletPersonalRecorder.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletPlayerCamClip.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletPlayerPhoto.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletPlayerVideo.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletPopupMenu.ui \

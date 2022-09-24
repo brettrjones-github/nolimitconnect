@@ -62,11 +62,11 @@ PluginSessionBase *	 PluginSessionMgr::findPluginSessionByOnlineId( VxGUID& onli
 	if( false == pluginIsLocked )
 	{
 		#ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_INFO, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.lock start\n" );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.lock start\n" );
 		#endif //DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 		#ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.lock done\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.lock done\n" );
 		#endif //DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -78,7 +78,7 @@ PluginSessionBase *	 PluginSessionMgr::findPluginSessionByOnlineId( VxGUID& onli
 			if( false == pluginIsLocked )
 			{
 				#ifdef DEBUG_AUTOPLUGIN_LOCK
-								LogMsg( LOG_INFO, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.unlock\n" );
+								LogMsg( LOG_VERBOSE, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.unlock\n" );
 				#endif //DEBUG_AUTOPLUGIN_LOCK
 				pluginMutex.unlock();
 			}
@@ -90,7 +90,7 @@ PluginSessionBase *	 PluginSessionMgr::findPluginSessionByOnlineId( VxGUID& onli
 	if( false == pluginIsLocked )
 	{
 		#ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::findPluginSessionByOnlineId pluginMutex.unlock\n" );
 		#endif //DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 	}
@@ -103,11 +103,11 @@ void PluginSessionMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poO
 {
 	SessionIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::replaceConnection autoLock start\n" );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::replaceConnection autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::replaceConnection autoLock done\n" );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::replaceConnection autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
@@ -119,13 +119,13 @@ void PluginSessionMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poO
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::replaceConnection autoLock destroy\n" );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::replaceConnection autoLock destroy\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
 //============================================================================
 //! called when connection is lost
-void PluginSessionMgr::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginSessionMgr::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -136,33 +136,32 @@ void PluginSessionMgr::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * 
 	// deadlock occurs here if use continuous lock so get the session to erase but dont end session until lock is remove 
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	bool bErased = true;
-	SessionIter iter;
 	while( bErased ) 
 	{
 		bErased = false;
-		PluginSessionBase * sessionBase = 0;
+		PluginSessionBase* sessionBase = nullptr;
 		#ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::onContactWentOffline pluginMutex.lock start\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::onContactWentOffline pluginMutex.lock start\n" );
 		#endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::onContactWentOffline pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::onContactWentOffline pluginMutex.lock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
-		for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+		for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 		{
 			sessionBase = ((*iter).second);
 			if( ( netIdent == sessionBase->getIdent() )
 				|| ( sktIsDisconnected && ( sessionBase->getSkt() == sktBase ) ) )
 			{
-				LogMsg( LOG_INFO, "PluginSessionMgr::onContactWentOffline erasing session for %s\n", sessionBase->getIdent()->getOnlineName() );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::onContactWentOffline erasing session for %s", sessionBase->getIdent()->getOnlineName() );
 				bErased = true;
 				break;
 			}
 		}
 
 		#ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::onContactWentOffline pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::onContactWentOffline pluginMutex.unlock" );
 		#endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 		if( bErased )
@@ -183,32 +182,32 @@ void PluginSessionMgr::onConnectionLost( VxSktBase * sktBase )
 
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	bool bErased = true;
-	SessionIter iter;
+
 	while( bErased ) 
 	{
 		bErased = false;
-		PluginSessionBase * sessionBase = 0;
+		PluginSessionBase * sessionBase = nullptr;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::onConnectionLost pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::onConnectionLost pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::onConnectionLost pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::onConnectionLost pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
-		for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+		for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 		{
 			sessionBase = ((*iter).second);
 			if( sktBase == sessionBase->getSkt() )
 			{
-				LogMsg( LOG_INFO, "PluginSessionMgr::onConnectionLost erasing session for %s\n", sessionBase->getIdent()->getOnlineName() );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::onConnectionLost erasing session for %s", sessionBase->getIdent()->getOnlineName() );
 				bErased = true;
 				break;
 			}
 		}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::onConnectionLost pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::onConnectionLost pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 		if( bErased )
@@ -228,32 +227,32 @@ void PluginSessionMgr::cancelSessionByOnlineId( VxGUID& onlineId )
 
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	bool bErased = true;
-	SessionIter iter;
+
 	while( bErased ) 
 	{
 		bErased = false;
 		PluginSessionBase * sessionBase = 0;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::cancelSessionByOnlineId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::cancelSessionByOnlineId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::cancelSessionByOnlineId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::cancelSessionByOnlineId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
-		for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+		for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 		{
 			sessionBase = ((*iter).second);
 			if( sessionBase->getIdent()->getMyOnlineId() == onlineId )
 			{
-				LogMsg( LOG_INFO, "PluginSessionMgr::cancelSessionByOnlineId erasing session for %s\n", sessionBase->getIdent()->getOnlineName() );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::cancelSessionByOnlineId erasing session for %s", sessionBase->getIdent()->getOnlineName() );
 				bErased = true;
 				break;
 			}
 		}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::cancelSessionByOnlineId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::cancelSessionByOnlineId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 		if( bErased )
@@ -264,23 +263,23 @@ void PluginSessionMgr::cancelSessionByOnlineId( VxGUID& onlineId )
 }
 
 //============================================================================
-void PluginSessionMgr::doEndAndEraseSession( PluginSessionBase * sessionBase, EOfferResponse eOfferResponse, bool pluginIsLocked )
+void PluginSessionMgr::doEndAndEraseSession( PluginSessionBase* sessionBase, EOfferResponse eOfferResponse, bool pluginIsLocked )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	m_Plugin.onSessionEnded( sessionBase, pluginIsLocked, eOfferResponseUserOffline );
-	SessionIter iter;
+
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::doEndAndEraseSession pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::doEndAndEraseSession pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::doEndAndEraseSession pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::doEndAndEraseSession pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		if( sessionBase == ((*iter).second) )
 		{
@@ -293,38 +292,37 @@ void PluginSessionMgr::doEndAndEraseSession( PluginSessionBase * sessionBase, EO
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::doEndAndEraseSession pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::doEndAndEraseSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 	}
 }
 
 //============================================================================
-bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	bool isInSesion = false;
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::fromGuiIsPluginInSession pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::fromGuiIsPluginInSession pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::fromGuiIsPluginInSession pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::fromGuiIsPluginInSession pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
 	if( lclSessionId.isVxGUIDValid() )
 	{
-		SessionIter iter;
-		iter = m_aoSessions.find( lclSessionId );
+		auto iter = m_aoSessions.find( lclSessionId );
 		if( iter != m_aoSessions.end() )
 		{
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::doEndAndEraseSession pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::doEndAndEraseSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 				pluginMutex.unlock();
 			}
@@ -334,8 +332,7 @@ bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent
 	}
 
 	VxGUID& onlineId = netIdent->getMyOnlineId();
-	SessionIter iter;
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		PluginSessionBase * session = (*iter).second;
 		if( session->getOnlineId() == onlineId )
@@ -348,7 +345,7 @@ bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::doEndAndEraseSession pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::doEndAndEraseSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 	}
@@ -586,11 +583,11 @@ P2PSession * PluginSessionMgr::findP2PSessionBySessionId( VxGUID& sessionId, boo
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.lock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.lock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -605,7 +602,7 @@ P2PSession * PluginSessionMgr::findP2PSessionBySessionId( VxGUID& sessionId, boo
 				if( false == pluginIsLocked )
 				{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-					LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.unlock\n" );
+					LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 					pluginMutex.unlock();
 				}
@@ -618,7 +615,7 @@ P2PSession * PluginSessionMgr::findP2PSessionBySessionId( VxGUID& sessionId, boo
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionBySessionId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 	}
@@ -634,11 +631,11 @@ P2PSession * PluginSessionMgr::findP2PSessionByOnlineId( VxGUID& onlineId, bool 
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.lock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.lock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -651,7 +648,7 @@ P2PSession * PluginSessionMgr::findP2PSessionByOnlineId( VxGUID& onlineId, bool 
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 				pluginMutex.unlock();
 			}
@@ -663,7 +660,7 @@ P2PSession * PluginSessionMgr::findP2PSessionByOnlineId( VxGUID& onlineId, bool 
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findP2PSessionByOnlineId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 	}
@@ -738,11 +735,11 @@ TxSession * PluginSessionMgr::findTxSessionBySessionId( bool pluginIsLocked, VxG
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.lock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.lock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -756,7 +753,7 @@ TxSession * PluginSessionMgr::findTxSessionBySessionId( bool pluginIsLocked, VxG
 				if( false == pluginIsLocked )
 				{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-					LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.unlock\n" );
+					LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK	
 					pluginMutex.unlock();
 				}
@@ -769,7 +766,7 @@ TxSession * PluginSessionMgr::findTxSessionBySessionId( bool pluginIsLocked, VxG
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionBySessionId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK					
 		pluginMutex.unlock();
 	}
@@ -785,11 +782,11 @@ TxSession * PluginSessionMgr::findTxSessionByOnlineId( bool pluginIsLocked, VxGU
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.lock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.lock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -802,7 +799,7 @@ TxSession * PluginSessionMgr::findTxSessionByOnlineId( bool pluginIsLocked, VxGU
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK					
 				pluginMutex.unlock();
 			}
@@ -814,7 +811,7 @@ TxSession * PluginSessionMgr::findTxSessionByOnlineId( bool pluginIsLocked, VxGU
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findTxSessionByOnlineId pluginMutex.unlock\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK					
 		pluginMutex.unlock();
 	}
@@ -865,15 +862,18 @@ TxSession * PluginSessionMgr::findOrCreateTxSessionWithOnlineId( VxGUID& onlineI
 }
 
 //============================================================================
-int PluginSessionMgr::getTxSessionCount( void )
+int PluginSessionMgr::getTxSessionCount( bool pluginIsLocked )
 {
 	int txSessionCnt = 0;
+	if( !pluginIsLocked )
+	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::getTxSessionCount autoLock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::getTxSessionCount lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	SessionIter iter;
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+		m_Plugin.lockPlugin();
+	}
+
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		PluginSessionBase * session = (*iter).second;
 		if( session->isTxSession() )
@@ -881,9 +881,14 @@ int PluginSessionMgr::getTxSessionCount( void )
 			txSessionCnt++;
 		}
 	}
+
+	if( !pluginIsLocked )
+	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::getTxSessionCount autoLock destroy\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::getTxSessionCount lock end" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
+		m_Plugin.unlockPlugin();
+	}
 
 	return txSessionCnt;
 }
@@ -891,32 +896,30 @@ int PluginSessionMgr::getTxSessionCount( void )
 //============================================================================
 RxSession * PluginSessionMgr::findRxSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked  )
 {
-	SessionIter iter;
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		if( sessionId == (*iter).first )
 		{
-			PluginSessionBase * session = (*iter).second;
+			PluginSessionBase* session = (*iter).second;
 			if( session->isRxSession() )
 			{
 				if( false == pluginIsLocked )
 				{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-					LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.unlock\n" );
+					LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-					pluginMutex.unlock();
+					m_Plugin.unlockPlugin();
 				}
 
 				return (RxSession *)session;
@@ -927,9 +930,9 @@ RxSession * PluginSessionMgr::findRxSessionBySessionId( VxGUID& sessionId, bool 
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionBySessionId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 
 	return NULL;
@@ -943,11 +946,11 @@ RxSession * PluginSessionMgr::findRxSessionByOnlineId( VxGUID& onlineId, bool pl
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -960,7 +963,7 @@ RxSession * PluginSessionMgr::findRxSessionByOnlineId( VxGUID& onlineId, bool pl
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 				pluginMutex.unlock();
 			}
@@ -972,7 +975,7 @@ RxSession * PluginSessionMgr::findRxSessionByOnlineId( VxGUID& onlineId, bool pl
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::findRxSessionByOnlineId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock();
 	}
@@ -1032,7 +1035,7 @@ void PluginSessionMgr::addSession( VxGUID& sessionId, PluginSessionBase * sessio
 
 	if( sessionId != session->getLclSessionId() )
 	{
-		LogMsg( LOG_INFO, "WARNING SESSION IDS DONT MATCH PluginSessionMgr::addSession %s session id %s connect info %s\n", session->getOnlineName(), sessionId.toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+		LogMsg( LOG_VERBOSE, "WARNING SESSION IDS DONT MATCH PluginSessionMgr::addSession %s session id %s connect info %s", session->getOnlineName(), sessionId.toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 	}
 
 	if( false == sessionId.isVxGUIDValid() )
@@ -1040,7 +1043,7 @@ void PluginSessionMgr::addSession( VxGUID& sessionId, PluginSessionBase * sessio
 		sessionId = session->getLclSessionId();
 	}
 
-	LogMsg( LOG_INFO, "PluginSessionMgr::addSession %s session id %s connect info %s\n", session->getOnlineName(), sessionId.toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::addSession %s session id %s connect info %s", session->getOnlineName(), sessionId.toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 	if( pluginIsLocked )
 	{
 		m_aoSessions.insert(  std::make_pair( sessionId, session ) );
@@ -1048,15 +1051,15 @@ void PluginSessionMgr::addSession( VxGUID& sessionId, PluginSessionBase * sessio
 	else
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::addSession autoLock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::addSession autoLock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::addSession autoLock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::addSession autoLock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		m_aoSessions.insert(  std::make_pair( sessionId, session ) );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::addSession autoLock destroy\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::addSession autoLock destroy" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 }
@@ -1064,24 +1067,22 @@ void PluginSessionMgr::addSession( VxGUID& sessionId, PluginSessionBase * sessio
 //============================================================================ 
 void PluginSessionMgr::endPluginSession( PluginSessionBase * session, bool pluginIsLocked )
 {
-	SessionIter iter;
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		if( session == (*iter).second )
 		{
-			LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession %s session id %s connect info %s", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			delete (*iter).second;
 			m_aoSessions.erase(iter);
 			break;
@@ -1091,24 +1092,23 @@ void PluginSessionMgr::endPluginSession( PluginSessionBase * session, bool plugi
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 }
 
 //============================================================================ 
 void PluginSessionMgr::endPluginSession( VxGUID& sessionId, bool pluginIsLocked )
 {
-VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -1116,7 +1116,7 @@ VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( iter != m_aoSessions.end() )
 	{
 		PluginSessionBase * session = (*iter).second;
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession %s session id %s connect info %s", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 		m_aoSessions.erase(iter);
 		delete session;
 	}
@@ -1124,29 +1124,27 @@ VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::endPluginSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 }
 
 //============================================================================ 
 void PluginSessionMgr::removeTxSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked )
 {
-	SessionIter iter;
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionBySessionId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionBySessionId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionBySessionId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionBySessionId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		if( (sessionId == (*iter).first) )
 		{
@@ -1163,35 +1161,33 @@ void PluginSessionMgr::removeTxSessionBySessionId( VxGUID& sessionId, bool plugi
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionBySessionId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionBySessionId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 }
 
 //============================================================================ 
 void PluginSessionMgr::removeTxSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked )
 {
-	SessionIter iter;
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionByOnlineId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionByOnlineId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionByOnlineId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionByOnlineId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		PluginSessionBase * session = (*iter).second;
 		if( session->isTxSession()
 			&& ( session->getOnlineId() == onlineId ) )
 		{
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionByOnlineId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionByOnlineId %s session id %s connect info %s", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			delete session;
 			m_aoSessions.erase(iter);	
 			break;
@@ -1201,36 +1197,34 @@ void PluginSessionMgr::removeTxSessionByOnlineId( VxGUID& onlineId, bool pluginI
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionByOnlineId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeTxSessionByOnlineId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 }
 
 //============================================================================ 
 void PluginSessionMgr::removeRxSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked )
 {
-	SessionIter iter;
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionBySessionId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionBySessionId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionBySessionId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionBySessionId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		if( (sessionId == (*iter).first) )
 		{
 			PluginSessionBase * session = (*iter).second;
 			if( session->isRxSession() )
 			{
-				LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionBySessionId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionBySessionId %s session id %s connect info %s", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 				delete session;
 				m_aoSessions.erase(iter);	
 				break;
@@ -1241,35 +1235,34 @@ void PluginSessionMgr::removeRxSessionBySessionId( VxGUID& sessionId, bool plugi
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionBySessionId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionBySessionId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 }
 
 //============================================================================ 
 void PluginSessionMgr::removeRxSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked )
 {
-	SessionIter iter;
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionByOnlineId pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionByOnlineId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionByOnlineId pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionByOnlineId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		PluginSessionBase * session = (*iter).second;
 		if( session->isRxSession()
 			&& ( session->getOnlineId() == onlineId ) )
 		{
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionByOnlineId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionByOnlineId %s session id %s connect info %s", 
+				session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			delete session;
 			m_aoSessions.erase(iter);	
 			break;
@@ -1279,9 +1272,9 @@ void PluginSessionMgr::removeRxSessionByOnlineId( VxGUID& onlineId, bool pluginI
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionByOnlineId pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionByOnlineId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 }
 
@@ -1292,29 +1285,27 @@ bool PluginSessionMgr::removeSessionBySessionId( bool pluginIsLocked, VxGUID& se
 	bool wasRemoved = false;
 	if( sessionId.isVxGUIDValid() )
 	{
-		VxMutex& pluginMutex = m_Plugin.getPluginMutex();
-		SessionIter iter;
 		if( false == pluginIsLocked )
 		{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeSessionBySessionId pluginMutex.lock start\n" );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSessionBySessionId pluginMutex.lock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-			pluginMutex.lock();
+			m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeSessionBySessionId pluginMutex.lock done\n" );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSessionBySessionId pluginMutex.lock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		}
 
-		iter = m_aoSessions.find( sessionId );
+		auto iter = m_aoSessions.find( sessionId );
 		if( iter != m_aoSessions.end() )
 		{
 			PluginSessionBase * session = (*iter).second;
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::removeSessionBySessionId pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSessionBySessionId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-				pluginMutex.unlock();
+				m_Plugin.unlockPlugin();
 			}
 
 			doEndAndEraseSession( session, eOfferResponse, pluginIsLocked );
@@ -1325,9 +1316,9 @@ bool PluginSessionMgr::removeSessionBySessionId( bool pluginIsLocked, VxGUID& se
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::removeSessionBySessionId pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSessionBySessionId pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-				pluginMutex.unlock();
+				m_Plugin.unlockPlugin();
 			}
 		}
 	}
@@ -1344,20 +1335,19 @@ bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent * netIdent
 	}
 
 	VxGUID& onlineId = netIdent->getMyOnlineId();
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
-	SessionIter iter;
+
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeSession pluginMutex.lock start\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSession pluginMutex.lock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.lock();
+		m_Plugin.lockPlugin();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeSession pluginMutex.lock done\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSession pluginMutex.lock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		PluginSessionBase * session = (*iter).second;
 		if( session->getOnlineId() == onlineId )
@@ -1367,13 +1357,14 @@ bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent * netIdent
 				// notify gui session removed ??
 			}
 			
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSession %s session id %s connect info %s", 
+				session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-				LogMsg( LOG_INFO, "PluginSessionMgr::removeSession pluginMutex.unlock\n" );
+				LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-				pluginMutex.unlock();
+				m_Plugin.unlockPlugin();
 			}
 
 			doEndAndEraseSession( session, eOfferResponse, pluginIsLocked );
@@ -1384,9 +1375,9 @@ bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent * netIdent
 	if(  false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "PluginSessionMgr::removeSession pluginMutex.unlock\n" );
+		LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeSession pluginMutex.unlock" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		pluginMutex.unlock();
+		m_Plugin.unlockPlugin();
 	}
 
 	return false;
@@ -1395,15 +1386,14 @@ bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent * netIdent
 //============================================================================ 
 void PluginSessionMgr::removeAllSessions( bool testSessionsOnly )
 {
-	SessionIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::removeAllSessions autoLock start\n" );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeAllSessions autoLock start" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::removeAllSessions autoLock done\n" );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeAllSessions autoLock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	for( iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
+	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
 		PluginSessionBase * session = (*iter).second;
 
@@ -1420,6 +1410,6 @@ void PluginSessionMgr::removeAllSessions( bool testSessionsOnly )
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginSessionMgr::removeAllSessions autoLock destroy\n" );
+	LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeAllSessions autoLock destroy" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }

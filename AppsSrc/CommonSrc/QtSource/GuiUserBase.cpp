@@ -127,7 +127,23 @@ bool GuiUserBase::updateIsRelayed( void )
 EPluginAccess GuiUserBase::getMyAccessPermissionFromHim( EPluginType pluginType, bool inGroup )
 { 
     updateIsOnline();
+    if( m_MyApp.getMyOnlineId() == m_NetIdent.getMyOnlineId() )
+    {
+        return ePluginAccessOk;
+    }
+
     return m_NetIdent.getMyAccessPermissionFromHim( pluginType, inGroup ); 
+}
+
+//============================================================================
+bool GuiUserBase::isMyAccessAllowedFromHim( enum EPluginType pluginType, bool inGroup )
+{ 
+    if( m_MyApp.getMyOnlineId() == m_NetIdent.getMyOnlineId() && eFriendStateIgnore != m_NetIdent.getPluginPermission( pluginType ) )
+    {
+        return true;
+    }
+
+    return m_NetIdent.isMyAccessAllowedFromHim( pluginType, inGroup ); 
 }
 
 //============================================================================

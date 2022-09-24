@@ -129,6 +129,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen )
 
     m_SpeakerReadBitrate.addSamplesAndInterval( reqSpeakerSampleCnt, callTimeElapsed );
 
+    // LogMsg( LOG_VERBOSE, "readRequestFromSpeaker speaker buf lock" );
     m_ProcessedBufMutex.lock();
     if( reqSpeakerSampleCnt > m_SpeakerProcessedBuf.getSampleCnt() )
     {
@@ -140,6 +141,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen )
             reqSpeakerSampleCnt, m_SpeakerProcessedBuf.getSampleCnt(), timeElapsed );
 
         memset( readReqPcmBuf, 0, reqSpeakerSampleCnt * 2 );
+        // LogMsg( LOG_VERBOSE, "readRequestFromSpeaker speaker buf unlock" );
         m_ProcessedBufMutex.unlock();
         return 0;
     }
@@ -159,6 +161,7 @@ qint64 AudioMixer::readRequestFromSpeaker( char* data, qint64 maxlen )
         }
     }
 
+    // LogMsg( LOG_VERBOSE, "readRequestFromSpeaker speaker buf unlock" );
     m_ProcessedBufMutex.unlock();
 
     return maxlen;
@@ -246,8 +249,6 @@ void AudioMixer::processAudioMixerThreaded( void )
         audioFrame.processFrameForSpeakerOutputThreaded( prevFrameSample );
         prevFrameSample = audioFrame.getLastEchoSample();
 
-        m_ProcessedBufMutex.lock();
-
         if( audioFrame.echoSamplesAvailable() != MIXER_CHUNK_LEN_SAMPLES )
         {
             LogMsg( LOG_ERROR, "P Frame %d AudioMixer::processAudioMixerThreaded incorrect buffer processing should have %d samples but has %d samples elapsed %d ms",
@@ -271,8 +272,10 @@ void AudioMixer::processAudioMixerThreaded( void )
             m_AudioIoMgr.getAudioMasterClock().audioSpeakerReadSampleCnt( audioFrame.speakerSamplesAvailable() );
         }
 
+        m_ProcessedBufMutex.lock();
         m_SpeakerProcessedBuf.writeSamples( audioFrame.getSpeakerSampleBuf(), audioFrame.speakerSamplesAvailable() );
         m_EchoProcessedBuf.writeSamples( audioFrame.getEchoSampleBuf(), audioFrame.echoSamplesAvailable() );
+        m_ProcessedBufMutex.unlock();
 
         if( m_AudioIoMgr.getSampleCntDebugEnable() )
         {

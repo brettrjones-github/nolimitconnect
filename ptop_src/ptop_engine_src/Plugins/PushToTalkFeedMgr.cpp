@@ -18,7 +18,7 @@
 #include "PluginMgr.h"
 #include "PluginSessionMgr.h"
 #include "P2PSession.h"
-#include "PluginServiceWebCam.h"
+#include "PluginCamServer.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
