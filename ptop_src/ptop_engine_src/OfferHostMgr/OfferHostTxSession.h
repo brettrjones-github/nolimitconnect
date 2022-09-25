@@ -21,6 +21,6 @@ class OfferHostTxSession : public OfferHostXferSession
 {
 public:
 	OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr );
-	OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent );
-	OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 };

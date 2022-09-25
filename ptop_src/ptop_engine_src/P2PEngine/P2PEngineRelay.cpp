@@ -30,7 +30,7 @@
 #include <CoreLib/VxParse.h>
 
 //============================================================================
-void P2PEngine::onPktRelayUserDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktRelayUserDisconnect( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogMsg( LOG_VERBOSE, "P2PEngine::onPktRelayUserDisconnect not used" );
 }

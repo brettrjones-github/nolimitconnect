@@ -19,9 +19,9 @@
 #include <PktLib/VxCommon.h>
 
 //============================================================================
-void P2PEngine::onPktScanReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktScanReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-	VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+	VxNetIdent* netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent )
 	{
 		m_RcScan.onPktScanReq( netIdent, sktBase, (PktScanReq *)pktHdr );
@@ -36,9 +36,9 @@ void P2PEngine::onPktScanReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktScanReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktScanReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-	VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+	VxNetIdent* netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent )
 	{
 		m_RcScan.onPktScanReply( netIdent, sktBase, (PktScanReply *)pktHdr );
@@ -53,9 +53,9 @@ void P2PEngine::onPktScanReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFindFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFindFileReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-	VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+	VxNetIdent* netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent )
 	{
 		m_RcScan.onPktFindFileReq( netIdent, sktBase, (PktFindFileReq *)pktHdr );
@@ -69,9 +69,9 @@ void P2PEngine::onPktFindFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFindFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFindFileReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-	VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+	VxNetIdent* netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent )
 	{
 		//m_RcScan.onPktFindFileReply( netIdent, sktBase, (PktFindFileReply *)pktHdr );

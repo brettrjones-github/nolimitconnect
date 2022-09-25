@@ -53,7 +53,7 @@ public:
 
 	//! User must Set Receive Callback
 	virtual void				setReceiveCallback( VX_SKT_CALLBACK pfnReceive, void * pvUserData = NULL );
-	virtual void				handleSktCloseEvent( VxSktBase * sktBase );
+	virtual void				handleSktCloseEvent( VxSktBase* sktBase );
 	
 	//! Send to all connections.. if crypto is set send encrypted else send raw
 	virtual void				sendToAll(	char * pvData,			// data to send
@@ -69,22 +69,22 @@ public:
 
 	//=== functions that should only be called by derived classes ===//
 	//! handle callbacks from sockets
-	virtual	void				doReceiveCallback( VxSktBase * sktBase );
+	virtual	void				doReceiveCallback( VxSktBase* sktBase );
 	//! handle transmit callbacks from sockets
-	virtual	void				doTransmitCallback( VxSktBase * sktBase );
+	virtual	void				doTransmitCallback( VxSktBase* sktBase );
 	//! lock access from other threads
 	virtual void				sktBaseMgrLock( void );
 	//! unlock access from other threads
 	virtual void				sktBaseMgrUnlock( void );
 	//! add a new socket to manage
-	virtual void				addSkt( VxSktBase * sktBase );
+	virtual void				addSkt( VxSktBase* sktBase );
 	//! remove a socket from management
 	virtual RCODE				removeSkt(	VxSktBase *	sktBase,				// skt to remove
 											bool		bDelete = true );	    // if true delete the skt
-	virtual bool				isSktActive( VxSktBase * sktBase );
+	virtual bool				isSktActive( VxSktBase* sktBase );
 
     //! move to erase/delete when safe to do so
-    virtual void				moveToEraseList( VxSktBase * sktBase );
+    virtual void				moveToEraseList( VxSktBase* sktBase );
 
 	virtual void				lockSktList( void )								{ m_SktListMutex.lock(); }
     virtual void				unlockSktList( void )							{ m_SktListMutex.unlock(); }

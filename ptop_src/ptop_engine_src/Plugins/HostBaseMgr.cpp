@@ -37,7 +37,7 @@
 #endif //_MSC_VER
 
 //============================================================================
-HostBaseMgr::HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
+HostBaseMgr::HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase )
 : m_Engine( engine )
 , m_PluginMgr( pluginMgr )
 , m_MyIdent( myIdent )
@@ -59,7 +59,7 @@ EHostType HostBaseMgr::getHostType( void )
 }
 
 //============================================================================
-EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent * netIdent )
+EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent* netIdent )
 {
     EPluginAccess pluginAccess = ePluginAccessNotSet;
 
@@ -762,7 +762,7 @@ void HostBaseMgr::sendUnJoinRequest( GroupieId& groupieId, VxGUID& sessionId, Vx
 }
 
 //============================================================================
-bool HostBaseMgr::addContact( VxSktBase * sktBase, VxNetIdent * netIdent )
+bool HostBaseMgr::addContact( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     bool wasAdded = m_ContactList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
     if( wasAdded )
@@ -813,7 +813,7 @@ void HostBaseMgr::removeSearchSession( VxGUID& sessionId )
 }
 
 //============================================================================
-void HostBaseMgr::onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg )
+void HostBaseMgr::onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char * msg )
 {
     // TODO proper invalid packet handling
     LogMsg( LOG_INFO, "HostBaseMgr::onInvalidRxedPacket " );

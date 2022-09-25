@@ -151,5 +151,5 @@ private:
 ///						uint32_t					u32HackLevel,			// 1=severe 2=medium 3=suspicious
 ///						uint32_t					u32IpAddr,				// ip address if identity not known
 ///						const char *		pDescription, ... );	// description of hack attempt
-RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, VxSktBase * sktBase, const char * pDescription, ... );
+RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, VxSktBase* sktBase, const char * pDescription, ... );
 RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, SOCKET skt, const char * ipAddr, const char * pDescription, ... );

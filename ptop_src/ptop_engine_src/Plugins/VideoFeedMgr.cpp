@@ -49,13 +49,13 @@ VideoFeedMgr::VideoFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSession
 }
 
 //============================================================================
-void VideoFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent, bool wantCamCapture )
+void VideoFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent* netIdent, bool wantCamCapture )
 {
 	enableVideoCapture( true, netIdent, appModule, wantCamCapture );
 }
 
 //============================================================================
-void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent * netIdent, bool wantCamCapture )
+void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule appModule, VxNetIdent* netIdent, bool wantCamCapture )
 {
 	enableVideoCapture( false, netIdent, appModule, wantCamCapture );
 	//LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession\n" );
@@ -227,17 +227,17 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent* netIdent, EAppMo
 }
 
 //============================================================================
-void VideoFeedMgr::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void VideoFeedMgr::onPktVideoFeedReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 
 //============================================================================
-void VideoFeedMgr::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void VideoFeedMgr::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 
 //============================================================================
-void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void VideoFeedMgr::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktVideoFeedPicAck oPkt;
 	m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
@@ -319,7 +319,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 }
 
 //============================================================================
-void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktVideoFeedPicAck oPkt;
 	m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
@@ -377,7 +377,7 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void VideoFeedMgr::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void VideoFeedMgr::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
     LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock start" );

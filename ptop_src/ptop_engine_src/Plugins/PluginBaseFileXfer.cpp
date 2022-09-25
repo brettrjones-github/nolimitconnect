@@ -27,7 +27,7 @@
 #endif
 
 //============================================================================
-PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_FileXferMgr( engine, *this, m_PluginSessionMgr )
@@ -35,7 +35,7 @@ PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr,
 }
 
 //============================================================================ 
-P2PSession * PluginBaseFileXfer::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+P2PSession * PluginBaseFileXfer::createP2PSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     P2PSession * pSession = new FileXferPluginSession( lclSessionId, sktBase, netIdent, m_ePluginType );
 	pSession->setPluginType( m_ePluginType );
@@ -165,14 +165,14 @@ void PluginBaseFileXfer::cancelXferSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-void PluginBaseFileXfer::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileXfer::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktPluginOfferReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 //! packet with remote users reply to offer
-void PluginBaseFileXfer::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileXfer::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktPluginOfferReply( sktBase, pktHdr, netIdent );
 }
@@ -201,19 +201,19 @@ void PluginBaseFileXfer::onSessionStart( PluginSessionBase * session, bool plugi
 }
 
 //============================================================================
-void PluginBaseFileXfer::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseFileXfer::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginBaseFileXfer::onConnectionLost( VxSktBase * sktBase )
+void PluginBaseFileXfer::onConnectionLost( VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onConnectionLost( sktBase );
 }
 
 //============================================================================
-void PluginBaseFileXfer::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginBaseFileXfer::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }

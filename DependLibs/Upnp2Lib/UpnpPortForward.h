@@ -47,12 +47,12 @@ public:
 	bool						shouldAbort( void );
 	void						runPortForward( void );
 
-	void						doSearchResponseCallback( VxSktBase * sktBase );
+	void						doSearchResponseCallback( VxSktBase* sktBase );
 	void						deviceAddPortMapSuccessFailCallback( bool bResult );
 protected:
 	void						onSearchResponseReceived( UpnpParser * upnpParser );
 	void						sendUpnpDeviceSearchBroadcast( void );
-	UpnpParser *				createUpnpParser( VxSktBase * sktBase, const char * pData );
+	UpnpParser *				createUpnpParser( VxSktBase* sktBase, const char * pData );
 	bool						haveAlreadyRequestedDeviceInfo( std::string& deviceUrl );
 	void						removeAllRootDevices( void );
 

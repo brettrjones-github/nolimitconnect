@@ -593,7 +593,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 };
 
 //============================================================================
-RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktBase * sktBase, const char * pDescription, ... )	
+RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktBase* sktBase, const char * pDescription, ... )	
 {
 	char as8Buf[ 2048 ];
 	va_list argList;

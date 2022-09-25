@@ -19,8 +19,8 @@
 class P2PSession : public PluginSessionBase
 {
 public:
-	P2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	P2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	P2PSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
+	P2PSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
 	virtual ~P2PSession();
 
 	void						setOutstandingAckCnt( int cnt )				{ m_iOutstandingAckCnt = cnt; }
@@ -31,7 +31,7 @@ public:
 	void						setIsSendingPkts( bool isSending )			{ m_bSendingPkts = isSending; }
 	int							getIsSendingPkts( void )					{ return m_bSendingPkts; }
 
-	void						setVideoCastPkt( VxPktHdr * pktHdr )		{ m_VideoCastPkt = pktHdr; }
+	void						setVideoCastPkt( VxPktHdr* pktHdr )		{ m_VideoCastPkt = pktHdr; }
 	VxPktHdr *					getVideoCastPkt( void )						{ return m_VideoCastPkt; }
 
 protected:

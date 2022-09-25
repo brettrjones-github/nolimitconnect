@@ -31,7 +31,7 @@ OfferBaseTxSession::OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMg
 }
 
 //============================================================================
-OfferBaseTxSession::OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferBaseTxSession::OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent )
 : OfferBaseXferSession( engine, offerMgr, sktBase, netIdent )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )
@@ -42,7 +42,7 @@ OfferBaseTxSession::OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMg
 }
 
 //============================================================================
-OfferBaseTxSession::OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferBaseTxSession::OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : OfferBaseXferSession( engine, offerMgr, lclSessionId, sktBase, netIdent )
 , m_iOutstandingAckCnt(0)
 , m_bSendingPkts(false)

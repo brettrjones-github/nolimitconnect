@@ -19,7 +19,7 @@ class PluginFileXfer : public PluginBaseFileXfer
 {
 public:
 
-    PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginFileXfer() override = default;
 
 

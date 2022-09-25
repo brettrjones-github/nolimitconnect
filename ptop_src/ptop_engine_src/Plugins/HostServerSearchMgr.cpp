@@ -31,7 +31,7 @@
 #endif //_MSC_VER
 
 //============================================================================
-HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
+HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase )
 : HostBaseMgr(engine, pluginMgr, myIdent, pluginBase)
 {
 }

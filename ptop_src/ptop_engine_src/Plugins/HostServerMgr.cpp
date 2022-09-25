@@ -26,13 +26,13 @@
 #include <PktLib/VxCommon.h>
 
 //============================================================================
-HostServerMgr::HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
+HostServerMgr::HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase )
     : HostServerSearchMgr( engine, pluginMgr, myIdent, pluginBase )
 {
 }
 
 //============================================================================
-void HostServerMgr::onClientJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
+void HostServerMgr::onClientJoined( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     m_ServerMutex.lock();
     addClient( sktBase, netIdent );
@@ -146,7 +146,7 @@ bool HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
 }
 
 //============================================================================
-bool HostServerMgr::addClient( VxSktBase * sktBase, VxNetIdent * netIdent )
+bool HostServerMgr::addClient( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     bool wasAdded = m_ContactList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
     if( wasAdded )

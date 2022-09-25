@@ -18,7 +18,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-PluginStoryboardServer::PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginStoryboardServer::PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 	: PluginBaseFilesServer( engine, pluginMgr, myIdent, pluginType, "StoryboardFilesServer.db3" )
 {
 	setPluginType( ePluginTypeStoryboardServer );

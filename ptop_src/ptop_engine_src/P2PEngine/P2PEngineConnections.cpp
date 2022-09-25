@@ -34,7 +34,7 @@
 #include <CoreLib/VxParse.h>
 
 //============================================================================
-void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void P2PEngine::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::replaceConnection: old skt %d new skt %d handle %d",
 				poOldSkt->m_SktNumber,
@@ -47,7 +47,7 @@ void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, 
 
 //============================================================================
 //! socket became disconnected
-void P2PEngine::onConnectionLost( VxSktBase * sktBase )								
+void P2PEngine::onConnectionLost( VxSktBase* sktBase )								
 {
 	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectionLost: skt %d", sktBase->m_SktNumber );
 	getConnectIdListMgr().onConnectionLost( sktBase->getSocketId() );

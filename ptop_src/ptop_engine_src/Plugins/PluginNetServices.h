@@ -21,21 +21,21 @@
 class PluginNetServices : public PluginBaseService
 {
 public:
-	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginNetServices() = default;
     PluginNetServices() = delete; // don't allow default constructor
     PluginNetServices( const PluginNetServices& ) = delete; // don't allow copy constructor
 
-	virtual RCODE				handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	virtual RCODE				handlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
 
 	void						testIsMyPortOpen( void );
 
 protected:
-	RCODE						internalHandlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						internalHandlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )	{};
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
-	virtual void				onConnectionLost( VxSktBase * sktBase )	{};
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )	{};
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )	{};
+	virtual void				onConnectionLost( VxSktBase* sktBase )	{};
 
 	//=== vars ===//
 	NetServicesMgr&				m_NetServicesMgr;

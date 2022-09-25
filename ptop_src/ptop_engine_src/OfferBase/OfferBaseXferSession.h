@@ -30,8 +30,8 @@ class OfferBaseXferSession
 {
 public:
 	OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr );
-	OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent );
-	OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~OfferBaseXferSession() = default;
 
 	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }

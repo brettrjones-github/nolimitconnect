@@ -28,7 +28,7 @@ class VxPktHdr;
 class HostClientSearchMgr : public HostBaseMgr
 {
 public:
-    HostClientSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
+    HostClientSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase );
 	virtual ~HostClientSearchMgr() = default;
 
     virtual void                onPktHostSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};

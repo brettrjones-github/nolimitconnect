@@ -32,7 +32,7 @@ User::User( P2PEngine& engine )
 }
 
 //============================================================================
-User::User( P2PEngine& engine, VxNetIdent * netIdent )
+User::User( P2PEngine& engine, VxNetIdent* netIdent )
     : m_Engine( engine )
     , m_NetIdent( netIdent )
 {
@@ -43,7 +43,7 @@ User::User( P2PEngine& engine, VxNetIdent * netIdent )
 }
 
 //============================================================================
-User::User( P2PEngine& engine, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+User::User( P2PEngine& engine, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
     : m_Engine( engine )
     , m_NetIdent( netIdent )
 {
@@ -78,7 +78,7 @@ User& User::operator=( const User& rhs )
 }
 
 //============================================================================
-void User::setNetIdent( VxNetIdent * netIdent )   
+void User::setNetIdent( VxNetIdent* netIdent )   
 { 
     m_NetIdent = netIdent; 
     if( m_NetIdent )

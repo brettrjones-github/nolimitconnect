@@ -191,7 +191,7 @@ void BigListInfo::CopyTo( BigListInfo & oInfo )
 	iCnt = this->m_aoInQue.size();
 	for( size_t i = 0; i < iCnt; i++ )
 	{
-		VxPktHdr * pktHdr = this->m_aoInQue[i]->makeCopy();
+		VxPktHdr* pktHdr = this->m_aoInQue[i]->makeCopy();
 		oInfo.m_aoInQue.push_back( pktHdr );
 	}
 
@@ -207,7 +207,7 @@ void BigListInfo::CopyTo( BigListInfo & oInfo )
 	iCnt = this->m_aoOutQue.size();
 	for( size_t i = 0; i < iCnt; i++ )
 	{
-		VxPktHdr * pktHdr = this->m_aoOutQue[i]->makeCopy();
+		VxPktHdr* pktHdr = this->m_aoOutQue[i]->makeCopy();
 		 oInfo.m_aoOutQue.push_back( pktHdr );
 	}
 

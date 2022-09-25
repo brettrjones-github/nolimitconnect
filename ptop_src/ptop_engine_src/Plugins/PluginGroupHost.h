@@ -23,7 +23,7 @@
 class PluginGroupHost : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
-    PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
     virtual ~PluginGroupHost() override = default;
 
     virtual void				pluginStartup( void ) override;

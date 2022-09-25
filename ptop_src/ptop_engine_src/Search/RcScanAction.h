@@ -48,15 +48,15 @@ public:
 
 
 	// handle case where BigListInfo is about to be deleted
-	void						onIdentDelete( VxNetIdent * netIdent );
+	void						onIdentDelete( VxNetIdent* netIdent );
 
-	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onConnectionLost( VxSktBase * sktBase );	
+	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual void				onConnectionLost( VxSktBase* sktBase );	
 	//! called when new better connection from user
-	void						replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	void						replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
-	void						addMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktBase );
+	void						addMatchedConnection( VxNetIdent* netIdent, VxSktBase* sktBase );
 
 	void						doSearchResultActions( void );
 
@@ -73,9 +73,9 @@ protected:
 	void						startSearchActionThread( void );
 	void						stopSearchActionThread( void );
 
-	void						searchActionPeopleSearch( VxNetIdent * netIdent, VxSktBase * sktBase );
-	void						searchActionMoodMsgSearch( VxNetIdent * netIdent, VxSktBase * sktBase );
-	void						searchActionFileSearch( VxNetIdent * netIdent, VxSktBase * sktBase );
+	void						searchActionPeopleSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
+	void						searchActionMoodMsgSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
+	void						searchActionFileSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
 
 	bool						getNextActionConnection( VxNetIdent ** netIdent, VxSktBase ** sktBase );
 	
@@ -85,8 +85,8 @@ protected:
 	void						nextCamServerToGui();
 	void						nextPicToGui( void );
 	void						cleanupScanResources( void );
-	RcScanMatchedConnection *	findMatchedConnection( VxNetIdent * netIdent );
-	void						removeIdent( VxNetIdent * netIdent );
+	RcScanMatchedConnection *	findMatchedConnection( VxNetIdent* netIdent );
+	void						removeIdent( VxNetIdent* netIdent );
 
 	//=== vars ===//
 	VxThread					m_SearchActionThread;

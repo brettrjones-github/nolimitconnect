@@ -31,8 +31,8 @@ class ThumbXferSession : public AssetBaseXferSession
 {
 public:
 	ThumbXferSession( P2PEngine& engine );
-	ThumbXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	ThumbXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	ThumbXferSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ThumbXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~ThumbXferSession();
 
 	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }

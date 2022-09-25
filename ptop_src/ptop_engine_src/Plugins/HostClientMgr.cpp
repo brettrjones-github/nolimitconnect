@@ -26,13 +26,13 @@
 #include <PktLib/PluginIdList.h>
 
 //============================================================================
-HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
+HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase )
     : HostClientSearchMgr( engine, pluginMgr, myIdent, pluginBase )
 {
 }
 
 //============================================================================
-void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void HostClientMgr::onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     PktHostJoinReply* hostReply = ( PktHostJoinReply* )pktHdr;
     if( hostReply->isValidPkt() )
@@ -128,7 +128,7 @@ void HostClientMgr::onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, 
 }
 
 //============================================================================
-void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void HostClientMgr::onPktHostSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     PktHostSearchReply* hostReply = ( PktHostSearchReply* )pktHdr;
     ECommErr commErr = hostReply->getCommError();
@@ -164,7 +164,7 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void HostClientMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+void HostClientMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     m_ServerListMutex.lock();
     m_ServerList.insert( groupieId );
@@ -319,7 +319,7 @@ bool HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
 }
 
 //============================================================================
-void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent )
+void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
     EHostType hostType = hostReply->getHostType();
     VxGUID sessionId = hostReply->getSearchSessionId();
@@ -378,7 +378,7 @@ void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSkt
 }
 
 //============================================================================
-bool HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId )
+bool HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId )
 {
     m_Engine.getToGui().toGuiHostSearchStatus( hostType, onlineId, eHostSearchCompleted );
     m_Engine.getToGui().toGuiHostSearchComplete( hostType, onlineId );

@@ -33,7 +33,7 @@ PluginSessionBase::PluginSessionBase()
 }
 
 //============================================================================
-PluginSessionBase::PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+PluginSessionBase::PluginSessionBase( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : m_ePluginType( pluginType )
 , m_Ident( netIdent )
 , m_Skt( sktBase )
@@ -51,7 +51,7 @@ PluginSessionBase::PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent
 }
 
 //============================================================================
-PluginSessionBase::PluginSessionBase( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+PluginSessionBase::PluginSessionBase( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : m_ePluginType( pluginType )
 , m_Ident( netIdent )
 , m_Skt( sktBase )
@@ -121,7 +121,7 @@ VxGUID& PluginSessionBase::getOnlineId( void )
 }
 
 //============================================================================
-void PluginSessionBase::setSkt( VxSktBase * sktBase )		
+void PluginSessionBase::setSkt( VxSktBase* sktBase )		
 { 
 	m_Skt = sktBase; 
 }

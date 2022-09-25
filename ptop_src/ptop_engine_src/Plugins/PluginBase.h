@@ -119,9 +119,9 @@ public:
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
 	virtual void				fromGuiStartPluginSession( PluginSessionBase * poOffer )	{};
-    virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
-    virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
-    virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{ return true; }
+    virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
+    virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
+    virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{ return true; }
 
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
@@ -147,11 +147,11 @@ public:
 														VxGUID&			fileId,
 														uint8_t *		fileHashId );
 
-	virtual bool				fromGuiInstMsg(	VxNetIdent * netIdent, const char *	pMsg );
+	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char *	pMsg );
 	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
 
-	virtual bool				fromGuiSetGameValueVar(	VxNetIdent * netIdent, int32_t varId, int32_t varValue )		{ return false; };
-	virtual bool				fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t	actionId, int32_t actionValue )	{ return false; };
+	virtual bool				fromGuiSetGameValueVar(	VxNetIdent* netIdent, int32_t varId, int32_t varValue )		{ return false; };
+	virtual bool				fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_t	actionId, int32_t actionValue )	{ return false; };
 
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )				{};
 
@@ -221,13 +221,13 @@ public:
 	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) {};
 
     //=== connections ===//
-	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) = 0;
-	virtual void				onConnectionLost( VxSktBase * sktBase ) = 0;
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
+	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )	{};
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) = 0;
+	virtual void				onConnectionLost( VxSktBase* sktBase ) = 0;
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
 
-    bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false ) override;
-    bool						txPacket( const VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
+    bool						txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false ) override;
+    bool						txPacket( const VxGUID& onlineId, VxSktBase* sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
 
     //=== maintenence ===//
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )									{};
@@ -237,39 +237,39 @@ public:
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )   {};
 
     //=== packet handlers ===//
-    virtual void				onPktUserConnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktUserDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktUserConnect			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktUserDisconnect			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-    virtual void				onPktSessionStartReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktSessionStartReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktSessionStopReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktSessionStopReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktSessionStartReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktSessionStartReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktSessionStopReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-    virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktWebServerPicChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktWebServerPicChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktWebServerGetChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktWebServerGetChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktMyPicSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktMyPicSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktWebServerPicChunkTx	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktWebServerPicChunkAck	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktWebServerGetChunkTx	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktWebServerGetChunkAck	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktWebServerPutChunkTx	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktWebServerPutChunkAck	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-    virtual void				onPktThumbGetReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbGetReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbGetCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbGetCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbGetReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbGetReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbSendReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbSendReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbChunkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbChunkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbGetCompleteReq    ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbGetCompleteReply  ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbSendCompleteReq   ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbSendCompleteReply ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktThumbXferErr           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
     // error handling for invalid packet
-    virtual void				onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg = "" );
+    virtual void				onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char * msg = "" );
 
     //=== sessions ===//
     virtual void				onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked );
@@ -277,19 +277,19 @@ public:
                                                 bool pluginIsLocked,
                                                 EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
 
-    virtual EPluginAccess	    canAcceptNewSession( VxNetIdent * netIdent );
+    virtual EPluginAccess	    canAcceptNewSession( VxNetIdent* netIdent );
 
-    virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-    virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
-    virtual RxSession *			createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-    virtual RxSession *			createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
-    virtual TxSession *			createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-    virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+    virtual P2PSession *		createP2PSession( VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual RxSession *			createRxSession( VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual RxSession *			createRxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual TxSession *			createTxSession( VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
     //=== http ===//
-	virtual void				handlePluginSpecificSkt( VxSktBase * sktBase ) {};
-	virtual RCODE				handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
-	virtual RCODE				handlePtopConnection( VxSktBase * sktBase, VxNetIdent * netIdent )				{ return -1; }
+	virtual void				handlePluginSpecificSkt( VxSktBase* sktBase ) {};
+	virtual RCODE				handlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
+	virtual RCODE				handlePtopConnection( VxSktBase* sktBase, VxNetIdent* netIdent )				{ return -1; }
 
     virtual EPluginType         getDestinationPluginOverride( EHostType hostType );
 

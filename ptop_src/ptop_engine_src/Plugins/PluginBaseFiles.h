@@ -37,20 +37,20 @@ class VxFileShredder;
 class PluginBaseFiles : public PluginBase
 {
 public:
-	PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType, std::string fileInfoDbName );
+	PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName );
 	virtual ~PluginBaseFiles() = default;
 
 	FileInfoMgr&				getFileInfoMgr( void )			{ return m_FileInfoMgr; }
 
-	PluginSessionBase *			createPluginSession( VxSktBase * sktBase, VxNetIdent * netIdent );
+	PluginSessionBase *			createPluginSession( VxSktBase* sktBase, VxNetIdent* netIdent );
 	bool						isFileInLibrary( std::string& fileName );
 
     //virtual void				fromGuiUserLoggedOn( void ) override;
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 
-    virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
-    virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
-    virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
     void						fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings ) override;
     void						fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) override;
@@ -129,9 +129,9 @@ protected:
 	virtual void                fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr ) {};
 
     bool						isFileShared( std::string& fileName );
-    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
-    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
-    virtual void				onConnectionLost( VxSktBase * sktBase ) override;	
+    virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+    virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
+    virtual void				onConnectionLost( VxSktBase* sktBase ) override;	
 
 	//=== vars ===//
 	VxFileShredder&				m_FileShredder;

@@ -43,20 +43,20 @@ public:
     virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) override;
     virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) override;
 
-    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override; 
+    virtual void				toGuiContactAdded( VxNetIdent* netIdent ) override; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override; 
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override; 
+    virtual void				toGuiContactOnline( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiContactOffline( VxNetIdent* netIdent ) override; 
     virtual void				toGuiContactOffline( VxGUID& onlineId );
-    virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactHisFriendshipChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) override; 
+    virtual void				toGuiContactNameChange( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiContactDescChange( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiContactMyFriendshipChange( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiContactHisFriendshipChange( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiPluginPermissionChange( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiContactSearchFlagsChange( VxNetIdent* netIdent ) override; 
+    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent* netIdent ) override; 
     virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
-    virtual void				toGuiSaveMyIdent( VxNetIdent * netIdent ) override; 
+    virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) override; 
 
     virtual void				toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline );
 

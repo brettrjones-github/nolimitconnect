@@ -308,7 +308,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 	}
 
 	std::string strDirectConnectIp;
-	VxSktBase * sktBase = NULL;
+	VxSktBase* sktBase = NULL;
 	bool requiresRelay = connectInfo.requiresRelay();
 
 	if( ( connectInfo.getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() // uses same external ip
@@ -582,7 +582,7 @@ void NetConnector::doStayConnectedThread( void )
 	int iSize;
 	BigListInfo * poInfo;
 
-	VxSktBase * sktBase;
+	VxSktBase* sktBase;
 	while( ( false == m_StayConnectedThread.isAborted() )
 			&& ( false == VxIsAppShuttingDown() ) )
 	{
@@ -732,7 +732,7 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 }
 
 //============================================================================
-void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * sktBase, bool isNewConnection, EConnectReason connectReason )
+void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase* sktBase, bool isNewConnection, EConnectReason connectReason )
 {
 	if( bigListInfo )
 	{

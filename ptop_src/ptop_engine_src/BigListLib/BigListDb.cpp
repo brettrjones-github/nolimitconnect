@@ -436,7 +436,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 {
 	int i;
 	int iCnt;
-	VxPktHdr * pktHdr;
+	VxPktHdr* pktHdr;
 	RCODE rc = 0;
 	uint16_t u16PktLen = 0;
 	// NOTE: don't bother with encryption. maybe later will use user login key for encryption and separate Info databases
@@ -534,7 +534,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 //! make big list info into blob
 RCODE BigListDb::saveBigListInfoIntoBlob( BigListInfo * poInfo, uint8_t * * ppu8RetBlob, int * piRetBlobLen )
 {
-	VxPktHdr * pktHdr;
+	VxPktHdr* pktHdr;
 
     //uint32_t u32Mask = 0xffffffff; //FLAG_USE_TRACKER_SERVICE | FLAG_IS_PERM_CONTACT;
 	uint8_t * pu8Data;

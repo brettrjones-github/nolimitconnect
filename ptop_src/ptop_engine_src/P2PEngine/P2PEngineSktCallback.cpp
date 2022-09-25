@@ -29,7 +29,7 @@
 #include <string.h>
 
 //============================================================================
-void P2PEngine::handleTcpData( VxSktBase * sktBase )
+void P2PEngine::handleTcpData( VxSktBase* sktBase )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -58,7 +58,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 	// app should get the buffer ( this also locks it from being modified by threads )
 	// then read the data then call Amount read
     uint8_t * pSktBuf = (uint8_t *)sktBase->getSktReadBuf();
-	VxPktHdr * pktHdr = (VxPktHdr *)pSktBuf;
+	VxPktHdr* pktHdr = (VxPktHdr *)pSktBuf;
 	if( sktBase->isFirstRxPacket() )
 	{
 		if( false == sktBase->isRxEncryptionKeySet() )
@@ -250,7 +250,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 }
 
 //============================================================================
-void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::handleIncommingRelayData( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	getRelayMgr().handleRelayPkt( sktBase, pktHdr );
 	/*
@@ -301,7 +301,7 @@ void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::handleMulticastData( VxSktBase * sktBase )
+void P2PEngine::handleMulticastData( VxSktBase* sktBase )
 {
 	if( VxIsAppShuttingDown() )
 	{

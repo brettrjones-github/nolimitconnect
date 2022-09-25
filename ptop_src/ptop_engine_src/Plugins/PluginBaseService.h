@@ -19,7 +19,7 @@
 class PluginBaseService : public PluginBase
 {
 public:
-    PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginBaseService() override = default;
 
     EHostType                   getHostType( void ) override        { return m_HostType; }

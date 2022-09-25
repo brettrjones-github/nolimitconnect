@@ -33,7 +33,7 @@ AssetXferSession::AssetXferSession( P2PEngine& engine )
 }
 
 //============================================================================
-AssetXferSession::AssetXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+AssetXferSession::AssetXferSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : m_Engine( engine )
 , m_FileXferInfo()
 , m_iPercentComplete(0)
@@ -45,7 +45,7 @@ AssetXferSession::AssetXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNe
 }
 
 //============================================================================
-AssetXferSession::AssetXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+AssetXferSession::AssetXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : m_Engine( engine )
 , m_FileXferInfo( lclSessionId )
 , m_iPercentComplete(0)

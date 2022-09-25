@@ -18,7 +18,7 @@
 class PluginAboutMePageServer : public PluginBaseFilesServer
 {
 public:
-	PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginAboutMePageServer() = default;
 
 	void						onNetworkConnectionReady( bool requiresRelay );

@@ -20,7 +20,7 @@
 #include <NetLib/VxSktBase.h>
 
 //============================================================================
-PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBaseService( engine, pluginMgr, myIdent, pluginType )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 {
@@ -34,7 +34,7 @@ void PluginNetServices::testIsMyPortOpen( void )
 }
 
 //============================================================================
-RCODE PluginNetServices::handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginNetServices::handlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
 	//if( false == m_NetServiceUtil.isAllHttpContentArrived( sktBase ) )
 	//{
@@ -55,7 +55,7 @@ RCODE PluginNetServices::handlePtopConnection( VxSktBase * sktBase, NetServiceHd
 }
 
 //============================================================================
-RCODE PluginNetServices::internalHandlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginNetServices::internalHandlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
 	switch( netServiceHdr.m_NetCmdType )
 	{

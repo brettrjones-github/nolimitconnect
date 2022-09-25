@@ -49,7 +49,7 @@ public:
     void                        clearStatus( void );
 
 signals:
-    void						signalSearchResult( VxNetIdent * netIdent );
+    void						signalSearchResult( VxNetIdent* netIdent );
     void						signalSearchComplete( void );
     void                        signalLogMsg( const QString& logMsg );
     void                        signalInfoMsg( const QString& logMsg );

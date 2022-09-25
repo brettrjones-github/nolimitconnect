@@ -38,7 +38,7 @@ public:
 protected:
 	EXferError					setupFileDownload( VxFileXferInfo& xferInfo );
 	bool						makeIncompleteFileName( std::string& strRemoteFileName, std::string& strRetIncompleteFileName );
-	EXferError					sendNextFileChunk( VxFileXferInfo& xxferInfo, VxNetIdent * netIdent, VxSktBase * skt );
+	EXferError					sendNextFileChunk( VxFileXferInfo& xxferInfo, VxNetIdent* netIdent, VxSktBase * skt );
 
 	//=== vars ====//
     P2PEngine&					m_Engine;	

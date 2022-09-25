@@ -30,8 +30,8 @@ class AssetBaseXferSession
 {
 public:
 	AssetBaseXferSession( P2PEngine& engine );
-	AssetBaseXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	AssetBaseXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	AssetBaseXferSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	AssetBaseXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~AssetBaseXferSession();
 
 	void						setIdent( VxNetIdent * ident )				    { m_Ident = ident; }

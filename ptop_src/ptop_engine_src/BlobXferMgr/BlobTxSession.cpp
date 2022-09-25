@@ -32,7 +32,7 @@ BlobTxSession::BlobTxSession( P2PEngine& engine )
 }
 
 //============================================================================
-BlobTxSession::BlobTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+BlobTxSession::BlobTxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : BlobXferSession( engine, sktBase, netIdent )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )
@@ -43,7 +43,7 @@ BlobTxSession::BlobTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent
 }
 
 //============================================================================
-BlobTxSession::BlobTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+BlobTxSession::BlobTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : BlobXferSession( engine, lclSessionId, sktBase, netIdent )
 , m_iOutstandingAckCnt(0)
 , m_bSendingPkts(false)

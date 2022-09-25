@@ -66,20 +66,20 @@ void ActivityScanStoryBoards::setTitle( QString strTitle )
 }
 
 //============================================================================
-void ActivityScanStoryBoards::setupIdentWidget( VxNetIdent * netIdent )
+void ActivityScanStoryBoards::setupIdentWidget( VxNetIdent* netIdent )
 {
 	ui.FriendIdentWidget->updateIdentity( netIdent );
 }
 
 //============================================================================
-void ActivityScanStoryBoards::newStoryBoardSession( VxNetIdent * netIdent, const char * pStory )
+void ActivityScanStoryBoards::newStoryBoardSession( VxNetIdent* netIdent, const char * pStory )
 {
 	QString strStory = pStory;
 	emit signalScanStoryBoard( netIdent, pStory );
 }
 
 //============================================================================
-void ActivityScanStoryBoards::slotScanStoryBoard( VxNetIdent * netIdent, QString strStory )
+void ActivityScanStoryBoards::slotScanStoryBoard( VxNetIdent* netIdent, QString strStory )
 {
 	ui.FriendIdentWidget->setVisible( true );
 	setupIdentWidget( netIdent );

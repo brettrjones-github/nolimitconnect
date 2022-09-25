@@ -33,7 +33,7 @@ BlobXferSession::BlobXferSession( P2PEngine& engine )
 }
 
 //============================================================================
-BlobXferSession::BlobXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+BlobXferSession::BlobXferSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : m_Engine( engine )
 , m_FileXferInfo()
 , m_iPercentComplete(0)
@@ -45,7 +45,7 @@ BlobXferSession::BlobXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNetI
 }
 
 //============================================================================
-BlobXferSession::BlobXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+BlobXferSession::BlobXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : m_Engine( engine )
 , m_FileXferInfo( lclSessionId )
 , m_iPercentComplete(0)

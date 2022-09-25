@@ -20,8 +20,8 @@ class FileTxSession : public FileShareXferSession
 {
 public:
 	FileTxSession();
-	FileTxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	FileTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	FileTxSession( VxSktBase* sktBase, VxNetIdent* netIdent );
+	FileTxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	void						reset( void );
 	void						cancelUpload( VxGUID& fileInstance );

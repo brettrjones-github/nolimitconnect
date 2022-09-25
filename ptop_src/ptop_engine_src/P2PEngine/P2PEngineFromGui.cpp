@@ -30,7 +30,7 @@
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 
@@ -222,7 +222,7 @@ void P2PEngine::fromGuiSetUserHasProfilePicture( bool haveProfilePick )
 }
 
 //============================================================================
-void P2PEngine::fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly )
+void P2PEngine::fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly )
 {
 	if( permissionAndStatsOnly )
 	{
@@ -628,7 +628,7 @@ void P2PEngine::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID oOnlin
 }
 
 //============================================================================
-bool P2PEngine::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool P2PEngine::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiIsPluginInSession" );
 	if( ( false == m_IsUserSpecificDirSet ) || VxIsAppShuttingDown() )
@@ -1392,50 +1392,50 @@ void P2PEngine::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, cons
 //============================================================================
 bool P2PEngine::fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
 {
-	return getPluginServiceFileShare().fromGuiBrowseFiles(	dir, lookupShareStatus, fileFilterMask );
+	return getPluginFileShareServer().fromGuiBrowseFiles(	dir, lookupShareStatus, fileFilterMask );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 {
-	return getPluginServiceFileShare().fromGuiGetSharedFiles( fileTypeFilter );
+	return getPluginFileShareServer().fromGuiGetSharedFiles( fileTypeFilter );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId )
 {
-	return getPluginServiceFileShare().fromGuiSetFileIsShared(	fileName, isShared, fileHashId );
+	return getPluginFileShareServer().fromGuiSetFileIsShared(	fileName, isShared, fileHashId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetIsFileShared( const char * fileName )
 {
-	return getPluginServiceFileShare().fromGuiGetIsFileShared(	fileName );
+	return getPluginFileShareServer().fromGuiGetIsFileShared(	fileName );
 }
 
 //============================================================================
 // returns -1 if unknown else percent downloaded
 int P2PEngine::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 {
-	return getPluginServiceFileShare().fromGuiGetFileDownloadState( fileHashId );
+	return getPluginFileShareServer().fromGuiGetFileDownloadState( fileHashId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
 {
-	return getPluginServiceFileShare().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+	return getPluginFileShareServer().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
 }
 
 //============================================================================
 void P2PEngine::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 {
-	getPluginServiceFileShare().fromGuiGetFileLibraryList(	fileTypeFilter );
+	getPluginFileShareServer().fromGuiGetFileLibraryList(	fileTypeFilter );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetIsFileInLibrary( const char * fileName )
 {
-	return getPluginServiceFileShare().fromGuiGetIsFileInLibrary( fileName );
+	return getPluginFileShareServer().fromGuiGetIsFileInLibrary( fileName );
 }
 
 //============================================================================
@@ -1474,7 +1474,7 @@ int P2PEngine::fromGuiDeleteFile( const char * fileNameIn, bool shredFile )
 			}
 
 			// remove from library and shared files then delete the file
-			getPluginServiceFileShare().deleteFile( fileName.c_str(), shredFile );
+			getPluginFileShareServer().deleteFile( fileName.c_str(), shredFile );
 		}
 		else
 		{

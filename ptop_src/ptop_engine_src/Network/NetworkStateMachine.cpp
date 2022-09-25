@@ -517,7 +517,7 @@ void NetworkStateMachine::fromGuiUseRelay( VxConnectInfo& connectInfo, bool useR
 }
 
 //============================================================================
-void NetworkStateMachine::onPktRelayServiceReply( VxSktBase * sktBase, PktRelayServiceReply * poPkt )
+void NetworkStateMachine::onPktRelayServiceReply( VxSktBase* sktBase, PktRelayServiceReply * poPkt )
 {
 	m_CurNetworkState->onPktRelayServiceReply( sktBase, poPkt );
 }

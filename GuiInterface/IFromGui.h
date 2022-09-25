@@ -180,7 +180,7 @@ public:
 	virtual void				fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, EAppModule appModule, bool wantInput ) = 0;
 
 	/// Called with identity of user that logged on
-	virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent ) = 0;
+	virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent ) = 0;
 	/// Called when user changes his/her online name
 	virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) = 0;
 	/// Called when user changes his/her mood message
@@ -191,7 +191,7 @@ public:
 	/// Called when user changes his/her About Me web page picture.. sets flag that user has About Me Picture for scanning
 	virtual void				fromGuiSetUserHasProfilePicture( bool haveAboutMePicture ) = 0;
 	/// Called when user changes permission level of plugin
-	virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly = false ) = 0;
+	virtual void				fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly = false ) = 0;
 	/// Can be called to get users identity from engine.. usually for current node url or network info
 	virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent ) = 0;
 	/// Can tell engine to set has offers flag to be restored if application is restarted
@@ -254,7 +254,7 @@ public:
 	/// Stop plugin session or server
 	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) = 0;
 	/// Return true if plugin is in session
-	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	/// Send offer of file or session to a contact
 	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 														VxGUID&			onlineId,

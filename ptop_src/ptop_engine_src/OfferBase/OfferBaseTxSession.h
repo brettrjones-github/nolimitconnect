@@ -21,8 +21,8 @@ class OfferBaseTxSession : public OfferBaseXferSession
 {
 public:
 	OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr );
-	OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent );
-	OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	OfferBaseTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	void						reset( void );
 	void						cancelUpload( VxGUID& fileInstance );

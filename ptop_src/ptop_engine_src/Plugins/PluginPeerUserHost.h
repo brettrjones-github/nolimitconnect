@@ -23,7 +23,7 @@
 class PluginPeerUserHost : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
-    PluginPeerUserHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginPeerUserHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
     virtual ~PluginPeerUserHost() override = default;
 
     virtual void				pluginStartup( void ) override;

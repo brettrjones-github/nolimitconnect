@@ -18,7 +18,7 @@
 
 #include <CoreLib/VxDebug.h>
 
-void DumpPkt( VxPktHdr * pktHdr )
+void DumpPkt( VxPktHdr* pktHdr )
 {
 	LogMsg( LOG_INFO, "PktDump len %d type %d ver %d\n",
 			pktHdr->getPktLength(),

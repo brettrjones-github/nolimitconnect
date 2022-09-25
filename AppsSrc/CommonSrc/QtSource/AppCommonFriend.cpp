@@ -138,7 +138,7 @@ void AppCommon::slotInternalToGuiContactRemoved( VxGUID onlineId )
 }
 
 //============================================================================
-void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
+void AppCommon::toGuiContactOffline( VxNetIdent* netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -377,7 +377,7 @@ void AppCommon::slotInternalToGuiPluginPermissionChange( VxNetIdent netIdent )
 
 //============================================================================
 //! called when search flags changes
-void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
+void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent* netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -410,7 +410,7 @@ void AppCommon::slotInternalToGuiContactSearchFlagsChange( VxNetIdent netIdent )
 
 //============================================================================
 //! called when connection info changes
-void AppCommon::toGuiContactConnectionChange( VxNetIdent * netIdent )
+void AppCommon::toGuiContactConnectionChange( VxNetIdent* netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -434,7 +434,7 @@ void AppCommon::toGuiContactAnythingChange( VxNetIdent* netIdent )
 
 //============================================================================
 //! called when any contact info changes ( including any of the above )
-void AppCommon::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
+void AppCommon::toGuiContactLastSessionTimeChange( VxNetIdent* netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -465,7 +465,7 @@ void AppCommon::slotInternalToGuiContactLastSessionTimeChange( VxNetIdent netIde
 }
 
 //============================================================================
-void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
+void AppCommon::toGuiUpdateMyIdent( VxNetIdent* netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -513,7 +513,7 @@ void AppCommon::slotInternalToGuiSaveMyIdent( VxNetIdent netIdent )
 
 //============================================================================
 //! called when my identity changes
-void AppCommon::onUpdateMyIdent( VxNetIdent * netIdent )
+void AppCommon::onUpdateMyIdent( VxNetIdent* netIdent )
 {
     if( netIdent )
     {

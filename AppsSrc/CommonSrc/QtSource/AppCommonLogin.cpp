@@ -52,7 +52,7 @@ static uint64_t getQuuidHiPart( QUuid& uuid )
 
 //============================================================================
 // updates my ident in database and engine and global ident
-void AppCommon::updateMyIdent( VxNetIdent * myIdent, bool permissionAndStateOnly )
+void AppCommon::updateMyIdent( VxNetIdent* myIdent, bool permissionAndStateOnly )
 {
     if( myIdent )
     {
@@ -163,7 +163,7 @@ void AppCommon::doAccountStartup( void )
 //============================================================================
 void AppCommon::completeLogin( void )
 {
-    VxNetIdent * netIdent = getAppGlobals().getUserIdent();
+    VxNetIdent* netIdent = getAppGlobals().getUserIdent();
     getEngine().fromGuiUserLoggedOn( netIdent );
     setLoginCompleted( true );
 

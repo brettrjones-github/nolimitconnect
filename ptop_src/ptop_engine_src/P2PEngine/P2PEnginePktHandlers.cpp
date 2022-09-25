@@ -43,19 +43,19 @@ void P2PEngine::handlePkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktUnhandled( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktUnhandled( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogMsg( LOG_ERROR, "onPktUnhandled pkt type %d", pktHdr->getPktType() );
 }
 
 //============================================================================
-void P2PEngine::onPktInvalid( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktInvalid( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogMsg( LOG_ERROR, "onPktInvalid pkt type %d", pktHdr->getPktType() );
 }
 
 //============================================================================
-void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAnnounce( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	PktAnnounce* pkt = (PktAnnounce *)pktHdr;
 	VxGUID contactOnlineId = pkt->getMyOnlineId();
@@ -234,7 +234,7 @@ void P2PEngine::onPktAnnList( VxSktBase* sktBase, VxPktHdr* pktHdr )
 }
 	
 //============================================================================
-void P2PEngine::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPluginOfferReq" );
 
@@ -242,7 +242,7 @@ void P2PEngine::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPluginOfferReply" );
 
@@ -250,7 +250,7 @@ void P2PEngine::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktChatReq" );
 
@@ -258,7 +258,7 @@ void P2PEngine::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktChatReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktChatReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktChatReply" );
 
@@ -266,7 +266,7 @@ void P2PEngine::onPktChatReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVoiceReq" );
 
@@ -274,7 +274,7 @@ void P2PEngine::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVoiceReply" );
 
@@ -282,7 +282,7 @@ void P2PEngine::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVideoFeedReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedReq" );
 
@@ -290,7 +290,7 @@ void P2PEngine::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedStatus" );
 
@@ -298,7 +298,7 @@ void P2PEngine::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedPic" );
 
@@ -306,7 +306,7 @@ void P2PEngine::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedPicChunk" );
 
@@ -314,7 +314,7 @@ void P2PEngine::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedPicAck" );
 
@@ -322,7 +322,7 @@ void P2PEngine::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetReq" );
 
@@ -330,7 +330,7 @@ void P2PEngine::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetReply" );
 
@@ -338,7 +338,7 @@ void P2PEngine::onPktFileGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendReq" );
 
@@ -346,7 +346,7 @@ void P2PEngine::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendReply" );
 
@@ -354,7 +354,7 @@ void P2PEngine::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileListReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileListReq" );
 
@@ -362,7 +362,7 @@ void P2PEngine::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileListReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileListReply" );
 
@@ -370,7 +370,7 @@ void P2PEngine::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileInfoReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoReq" );
 
@@ -378,7 +378,7 @@ void P2PEngine::onPktFileInfoReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileChunkReq" );
 
@@ -386,7 +386,7 @@ void P2PEngine::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileChunkReply" );
 
@@ -394,7 +394,7 @@ void P2PEngine::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendCompleteReq" );
 
@@ -402,7 +402,7 @@ void P2PEngine::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendCompleteReply" );
 
@@ -410,7 +410,7 @@ void P2PEngine::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void P2PEngine::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetCompleteReq" );
 
@@ -418,7 +418,7 @@ void P2PEngine::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr 
 }
 
 //============================================================================
-void P2PEngine::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetCompleteReply" );
 
@@ -426,7 +426,7 @@ void P2PEngine::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFileShareErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileShareErr" );
 
@@ -434,7 +434,7 @@ void P2PEngine::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetReq" );
 
@@ -442,7 +442,7 @@ void P2PEngine::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetReply" );
 
@@ -450,7 +450,7 @@ void P2PEngine::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendReq" );
 
@@ -458,7 +458,7 @@ void P2PEngine::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendReply" );
 
@@ -466,7 +466,7 @@ void P2PEngine::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetChunkReq" );
 
@@ -474,7 +474,7 @@ void P2PEngine::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetChunkReply" );
 
@@ -482,7 +482,7 @@ void P2PEngine::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetCompleteReq" );
 
@@ -490,7 +490,7 @@ void P2PEngine::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetCompleteReply" );
 
@@ -498,7 +498,7 @@ void P2PEngine::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void P2PEngine::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendCompleteReq" );
 
@@ -506,7 +506,7 @@ void P2PEngine::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendCompleteReply" );
 
@@ -514,7 +514,7 @@ void P2PEngine::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void P2PEngine::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktAssetXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetXferErr" );
 
@@ -522,7 +522,7 @@ void P2PEngine::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktMultiSessionReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMultiSessionReq" );
 
@@ -530,7 +530,7 @@ void P2PEngine::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktMultiSessionReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMultiSessionReply" );
 
@@ -538,7 +538,7 @@ void P2PEngine::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStartReq" );
 
@@ -546,7 +546,7 @@ void P2PEngine::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktSessionStartReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStartReply" );
 
@@ -554,7 +554,7 @@ void P2PEngine::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStopReq" );
 
@@ -562,7 +562,7 @@ void P2PEngine::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktSessionStopReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStopReply" );
 
@@ -570,7 +570,7 @@ void P2PEngine::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktMyPicSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMyPicSendReq" );
 
@@ -578,7 +578,7 @@ void P2PEngine::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktMyPicSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMyPicSendReply" );
 
@@ -586,7 +586,7 @@ void P2PEngine::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktWebServerPicChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPicChunkTx" );
 
@@ -594,7 +594,7 @@ void P2PEngine::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktWebServerPicChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPicChunkAck" );
 
@@ -602,7 +602,7 @@ void P2PEngine::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktWebServerGetChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerGetChunkTx" );
 
@@ -610,7 +610,7 @@ void P2PEngine::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktWebServerGetChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerGetChunkAck" );
 
@@ -618,7 +618,7 @@ void P2PEngine::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktWebServerPutChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPutChunkTx" );
 
@@ -626,7 +626,7 @@ void P2PEngine::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktWebServerPutChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPutChunkAck" );
 
@@ -634,7 +634,7 @@ void P2PEngine::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktTodGameStats( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTodGameStats" );
 
@@ -642,7 +642,7 @@ void P2PEngine::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktTodGameAction( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTodGameAction" );
 
@@ -650,7 +650,7 @@ void P2PEngine::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktTodGameValue( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTodGameValue" );
 
@@ -658,7 +658,7 @@ void P2PEngine::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktTcpPunch( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktTcpPunch( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTcpPunch" );
 
@@ -684,7 +684,7 @@ void P2PEngine::onPktTcpPunch( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktPingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktPingReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPingReq" );
 
@@ -696,7 +696,7 @@ void P2PEngine::onPktPingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktPingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktPingReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPingReply" );
 
@@ -721,7 +721,7 @@ void P2PEngine::onPktPingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 
 //============================================================================
-void P2PEngine::onPktImAliveReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktImAliveReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktImAliveReq" );
 
@@ -734,7 +734,7 @@ void P2PEngine::onPktImAliveReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktImAliveReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktImAliveReply" );
 
@@ -742,7 +742,7 @@ void P2PEngine::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendReq" );
 
@@ -750,7 +750,7 @@ void P2PEngine::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendReply" );
 
@@ -758,7 +758,7 @@ void P2PEngine::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobChunkReq" );
 
@@ -766,7 +766,7 @@ void P2PEngine::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobChunkReply" );
 
@@ -774,7 +774,7 @@ void P2PEngine::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendCompleteReq" );
 
@@ -782,7 +782,7 @@ void P2PEngine::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendCompleteReply" );
 
@@ -790,7 +790,7 @@ void P2PEngine::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void P2PEngine::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobXferErr" );
 
@@ -798,14 +798,14 @@ void P2PEngine::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostJoinReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostJoinReq" );
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostJoinReply" );
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
@@ -840,7 +840,7 @@ void P2PEngine::onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostSearchReq" );
 
@@ -848,7 +848,7 @@ void P2PEngine::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostSearchReply" );
 
@@ -856,7 +856,7 @@ void P2PEngine::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostOfferReq" );
 
@@ -864,7 +864,7 @@ void P2PEngine::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostOfferReply" );
 
@@ -872,7 +872,7 @@ void P2PEngine::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFriendOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFriendOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFriendOfferReq" );
 
@@ -880,7 +880,7 @@ void P2PEngine::onPktFriendOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktFriendOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFriendOfferReply" );
 
@@ -888,7 +888,7 @@ void P2PEngine::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetReq" );
 
@@ -896,7 +896,7 @@ void P2PEngine::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetReply" );
 
@@ -904,7 +904,7 @@ void P2PEngine::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendReq" );
 
@@ -912,7 +912,7 @@ void P2PEngine::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendReply" );
 
@@ -920,7 +920,7 @@ void P2PEngine::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbChunkReq" );
 
@@ -928,7 +928,7 @@ void P2PEngine::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbChunkReply" );
 
@@ -936,7 +936,7 @@ void P2PEngine::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetCompleteReq" );
 
@@ -944,7 +944,7 @@ void P2PEngine::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void P2PEngine::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetCompleteReply" );
 
@@ -952,7 +952,7 @@ void P2PEngine::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void P2PEngine::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendCompleteReq" );
 
@@ -960,7 +960,7 @@ void P2PEngine::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendCompleteReply" );
 
@@ -968,7 +968,7 @@ void P2PEngine::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void P2PEngine::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktThumbXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbXferErr" );
 
@@ -977,7 +977,7 @@ void P2PEngine::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 // offers
 //============================================================================
-void P2PEngine::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendReq" );
 
@@ -985,7 +985,7 @@ void P2PEngine::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendReply" );
 
@@ -993,7 +993,7 @@ void P2PEngine::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferChunkReq" );
 
@@ -1001,7 +1001,7 @@ void P2PEngine::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferChunkReply" );
 
@@ -1009,7 +1009,7 @@ void P2PEngine::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendCompleteReq" );
 
@@ -1017,7 +1017,7 @@ void P2PEngine::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void P2PEngine::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendCompleteReply" );
 
@@ -1025,7 +1025,7 @@ void P2PEngine::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void P2PEngine::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktOfferXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferXferErr" );
 

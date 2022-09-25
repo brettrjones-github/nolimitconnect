@@ -43,7 +43,7 @@ PingResponseServer::~PingResponseServer()
 }
 
 //============================================================================
-void PingResponseServer::handleTcpSktCallback( VxSktBase * sktBase )
+void PingResponseServer::handleTcpSktCallback( VxSktBase* sktBase )
 {
 	switch( sktBase->getCallbackReason() )
 	{

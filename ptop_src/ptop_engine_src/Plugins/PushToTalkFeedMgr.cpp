@@ -102,10 +102,8 @@ void PushToTalkFeedMgr::callbackAudioOutSpaceAvail( int freeSpaceLen )
     LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::callbackAudioOutSpaceAvail PluginBase::AutoPluginLock autoLock done" );
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 
-    //int sessionIdx = 0;
-	PluginSessionMgr::SessionIter iter;
 	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_SessionMgr.getSessions();
-	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
+	for( auto iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
 		AudioJitterBuffer& jitterBuf = ((PluginSessionBase *)iter->second)->getJitterBuffer();
 		//LogMsg( LOG_INFO, "PushToTalkFeedMgr::callbackAudioOutSpaceAvail jitterBuf.lockResource sessionIdx %d\n", sessionIdx );
@@ -164,7 +162,7 @@ void PushToTalkFeedMgr::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 }
 
 //============================================================================
-void PushToTalkFeedMgr::onPktPushToTalkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PushToTalkFeedMgr::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 

@@ -295,9 +295,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseService.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -311,15 +308,6 @@
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMessenger.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerFiles.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerPktHandlers.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkMonitor\NetStatusAccum.cpp">
@@ -733,9 +721,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -794,6 +779,12 @@
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginCamServer.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileShareClient.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileShareServer.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1104,9 +1095,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseService.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -1117,9 +1105,6 @@
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkMonitor\NetStatusAccum.h">
@@ -1590,9 +1575,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -1657,6 +1639,12 @@
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginCamServer.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileShareClient.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileShareServer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>

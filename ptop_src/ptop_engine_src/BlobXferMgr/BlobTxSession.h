@@ -22,8 +22,8 @@ class BlobTxSession : public BlobXferSession
 {
 public:
 	BlobTxSession( P2PEngine& engine );
-	BlobTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	BlobTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	BlobTxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	BlobTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	void						reset( void );
 	void						cancelUpload( VxGUID& fileInstance );

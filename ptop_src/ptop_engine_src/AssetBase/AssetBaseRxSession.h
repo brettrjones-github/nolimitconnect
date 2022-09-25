@@ -22,8 +22,8 @@ class AssetBaseRxSession : public AssetBaseXferSession
 {
 public:
 	AssetBaseRxSession( P2PEngine& engine );
-	AssetBaseRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	AssetBaseRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	AssetBaseRxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	AssetBaseRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~AssetBaseRxSession();
 
 	void cancelDownload( VxGUID& lclSessionId );

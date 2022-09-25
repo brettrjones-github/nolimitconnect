@@ -82,7 +82,7 @@ void TodGameLogic::setChallengeStatus( QString statusIcon, QString statusText )
 //============================================================================
 void TodGameLogic::loadMyGameStats( void )
 {
-	VxNetIdent * myIdent = m_MyApp.getMyIdentity();
+	VxNetIdent* myIdent = m_MyApp.getMyIdentity();
 	//int32_t val;
 	//m_MySettings.getIniValue( GAME_SETTINGS_KEY, "eTodGameVarIdDareChallengeCnt", val );
 	m_TodGameStats.m_MyPlayerStats.setVar( eTodGameVarIdDareChallengeCnt, myIdent->getDareCount() + myIdent->getRejectedDareCount() );
@@ -101,7 +101,7 @@ void TodGameLogic::loadMyGameStats( void )
 //============================================================================
 void TodGameLogic::saveMyGameStats( void )
 {
-	VxNetIdent * myIdent = m_MyApp.getAppGlobals().getUserIdent();
+	VxNetIdent* myIdent = m_MyApp.getAppGlobals().getUserIdent();
 
 	//int32_t val = m_TodGameStats.m_MyPlayerStats.getVar( eTodGameVarIdDareChallengeCnt);
 	//m_MySettings.setIniValue( GAME_SETTINGS_KEY, "eTodGameVarIdDareChallengeCnt", val );

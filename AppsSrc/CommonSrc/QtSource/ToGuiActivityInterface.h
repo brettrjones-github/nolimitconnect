@@ -45,10 +45,10 @@ public:
     virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
     virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) {};
 
-    virtual void				toGuiContactAdded( VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactAdded( VxNetIdent* netIdent ){}; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) {}; 
 
-	virtual void				toGuiContactOnline( VxNetIdent * netIdent ){}; 
+	virtual void				toGuiContactOnline( VxNetIdent* netIdent ){}; 
 	virtual void				toGuiContactOffline( GuiUser * netIdent ){}; 
     virtual void				toGuiContactNameChange( GuiUser * netIdent ){}; 
     virtual void				toGuiContactDescChange( GuiUser * netIdent ){}; 

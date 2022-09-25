@@ -34,7 +34,7 @@ class SearchParams;
 class HostBaseMgr : public IConnectRequestCallback
 {
 public:
-    HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
+    HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase );
 	virtual ~HostBaseMgr() = default;
 
     EPluginType                 getPluginType( void );
@@ -47,7 +47,7 @@ public:
     virtual void				fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
 
-    virtual EPluginAccess	    getPluginAccessState( VxNetIdent * netIdent );
+    virtual EPluginAccess	    getPluginAccessState( VxNetIdent* netIdent );
     virtual EJoinState	        getJoinState( VxNetIdent* netIdent, EHostType hostType );
     virtual EMembershipState	getMembershipState( VxNetIdent* netIdent, EHostType hostType );
     virtual EConnectReason      getSearchConnectReason( EHostType hostType );
@@ -57,7 +57,7 @@ public:
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) {};
 
     // error handling for invalid packet
-    virtual void				onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg = "" );
+    virtual void				onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char * msg = "" );
 
 protected:
     virtual bool                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
@@ -89,10 +89,10 @@ protected:
     virtual void                onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
     virtual void                onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
     virtual void                onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
-    virtual void                onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
-    virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
+    virtual void                onPktPluginSettingReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
+    virtual void                onPktHostSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
 
-    virtual bool                addContact( VxSktBase * sktBase, VxNetIdent * netIdent );
+    virtual bool                addContact( VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual bool                removeContact( VxGUID& onlineId );
     EHostType                   connectReasonToHostType( EConnectReason connectReason );
 

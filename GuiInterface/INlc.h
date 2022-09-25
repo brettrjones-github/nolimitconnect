@@ -299,26 +299,26 @@ public:
     virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) override;
     virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) override;
 
-    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactAdded( VxNetIdent* netIdent ) override;
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
 
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactOnline( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactOffline( VxNetIdent* netIdent ) override;
 
     //! called when contact changes
-    virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactHisFriendshipChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactConnectionChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactAnythingChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactNameChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactDescChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactMyFriendshipChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactHisFriendshipChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactSearchFlagsChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactConnectionChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactAnythingChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent* netIdent ) override;
 
-    virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiPluginPermissionChange( VxNetIdent* netIdent ) override;
 
     //! called from engine when need to update identity
-    virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) override;
+    virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
     //! called from engine when identity changes need saved for next bootup
     virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) override;
 
@@ -391,7 +391,7 @@ public:
     //=== scan ===//
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
     virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent *	netIdent ) override;
-    virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) override;
+    virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode ) override;
 
     virtual void				toGuiSearchResultProfilePic( VxNetIdent *	netIdent,
                                                              uint8_t *      pu8JpgData,
@@ -488,13 +488,13 @@ public:
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation );
     virtual bool				fromGuiMovieDone( void );
 
-    virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent );
+    virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent );
     virtual void				fromGuiOnlineNameChanged( const char * newOnlineName );
     virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage );
     virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent );
 
     virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick );
-    virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly );
+    virtual void				fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly );
     virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent );
 
     virtual void				fromGuiApplyNetHostSettings( NetHostSetting& netSettings );

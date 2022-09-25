@@ -109,7 +109,7 @@ public:
 
 	//=== overrides ===//
 	//! handle callbacks from sockets
-	void						doReceiveCallback( VxSktBase * sktBase );
+	void						doReceiveCallback( VxSktBase* sktBase );
 
 	//=== methods ===//
 	// shutdown web server
@@ -119,7 +119,7 @@ public:
 	bool						isWebServerAvailable( void );
 
 	//! accept connection from skt manager
-	RCODE						acceptRawLocalHttpConnection( VxSktBase * sktBase, VxNetIdent * netIdent, RcWebSkt ** ppoRetWebSkt );
+	RCODE						acceptRawLocalHttpConnection( VxSktBase* sktBase, VxNetIdent* netIdent, RcWebSkt ** ppoRetWebSkt );
 
 	//! start skt threads for accepted web skt
 	void						startWebSktThreads( RcWebSkt * poWebSkt );

@@ -89,37 +89,37 @@ public:
 	virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) = 0;
 
     /// contact added to engine
-    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0;
+    virtual void				toGuiContactAdded( VxNetIdent* netIdent ) = 0;
     /// contact removed from engine
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) = 0;
 
 	/// Update contact to online state GUI
-	virtual void				toGuiContactOnline( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactOnline( VxNetIdent* netIdent ) = 0;
 	/// Update contact to offline state GUI
-	virtual void				toGuiContactOffline( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactOffline( VxNetIdent* netIdent ) = 0;
 
 	/// Notify GUI that contact changed his/her online name
-	virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactNameChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that contact changed his/her mood message
-	virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactDescChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that permission level given by you to contact has changed
-	virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactMyFriendshipChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that contact changed his/her permission level given to you
-	virtual void				toGuiContactHisFriendshipChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactHisFriendshipChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that contacts search flags changed
-	virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactSearchFlagsChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that contact is connected via different connection
-	virtual void				toGuiContactConnectionChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactConnectionChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that contact changed one or more of his/her plugins permission level required to access his/her plugin
-	virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiPluginPermissionChange( VxNetIdent* netIdent ) = 0;
 	/// Notify GUI that contact info of any type changed
-	virtual void				toGuiContactAnythingChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactAnythingChange( VxNetIdent* netIdent ) = 0;
 
 	/// Notify GUI that the last time contact was in session with you changed
-	virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiContactLastSessionTimeChange( VxNetIdent* netIdent ) = 0;
 
 	//! Called from engine when need to update my online identity
-	virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) = 0;
 	//! called from engine when identity changes need saved for next bootup
 	virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) = 0;
 
@@ -233,9 +233,9 @@ public:
 	///============================================================================
 
 	/// Search found an contact matching and accessible from this node resource
-	virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent* netIdent ) = 0;
 	/// Search had error scanning this user
-	virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) = 0;
+	virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode ) = 0;
 	/// Search had completed or has no more contact nodes to search
 	virtual void				toGuiScanSearchComplete( EScanType eScanType ) = 0;	
 	/// Search has found and received a About Me picture from contact

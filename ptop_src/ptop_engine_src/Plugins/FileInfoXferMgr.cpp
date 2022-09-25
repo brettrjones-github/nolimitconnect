@@ -121,7 +121,7 @@ int FileInfoXferMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-void FileInfoXferMgr::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void FileInfoXferMgr::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	if( false == m_bIsInSession )
 	{
@@ -130,7 +130,7 @@ void FileInfoXferMgr::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUs
 }
 
 //============================================================================
-void FileInfoXferMgr::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void FileInfoXferMgr::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	if( true == m_bIsInSession )
 	{
@@ -139,7 +139,7 @@ void FileInfoXferMgr::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUse
 }
 
 //============================================================================
-bool FileInfoXferMgr::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool FileInfoXferMgr::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return m_bIsInSession;
 }
@@ -230,7 +230,7 @@ bool FileInfoXferMgr::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identit
 												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	
 {
-	VxSktBase * sktBase = NULL;
+	VxSktBase* sktBase = NULL;
 	if( true == m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), netIdent, pvUserData, &sktBase ) )
 	{
 		PktPluginOfferReq oPkt;
@@ -316,7 +316,7 @@ int FileInfoXferMgr::fromGuiPluginControl(	VxNetIdent *		netIdent,
 		//	return eXferErrorAlreadyDownloaded;
 		//}	
 
-		VxSktBase * sktBase = NULL;
+		VxSktBase* sktBase = NULL;
 		if( true == m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), netIdent, 0, &sktBase ) )
 		{
 			FileRxSession *	xferSession = findOrCreateRxSession( sessionId, netIdent, sktBase );
@@ -335,7 +335,7 @@ int FileInfoXferMgr::fromGuiPluginControl(	VxNetIdent *		netIdent,
 }
 
 //============================================================================
-void FileInfoXferMgr::onConnectionLost( VxSktBase * sktBase )
+void FileInfoXferMgr::onConnectionLost( VxSktBase* sktBase )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 
@@ -377,7 +377,7 @@ void FileInfoXferMgr::onConnectionLost( VxSktBase * sktBase )
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	//PktPluginOfferReq * poPkt = (PktPluginOfferReq *)pktHdr;
@@ -388,7 +388,7 @@ void FileInfoXferMgr::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHd
 
 //============================================================================
 //! packet with remote users reply to offer
-void FileInfoXferMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
@@ -426,7 +426,7 @@ void FileInfoXferMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	PktFileGetReq * poPkt = (PktFileGetReq *)pktHdr;
@@ -497,7 +497,7 @@ void FileInfoXferMgr::onPktFileGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileSendReq %s %p rxing %d", DescribePluginType( getPluginType() ), this, m_RxSessions.size() );
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
@@ -531,7 +531,7 @@ void FileInfoXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileSendReply %s %p txing %d", DescribePluginType( getPluginType() ), this, m_TxSessions.size() );
@@ -548,7 +548,7 @@ void FileInfoXferMgr::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	PktFileChunkReq * poPkt = (PktFileChunkReq *)pktHdr;
@@ -574,7 +574,7 @@ void FileInfoXferMgr::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr,
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 static int cnt = 0;
@@ -596,7 +596,7 @@ static int cnt = 0;
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileGetCompleteReq");
@@ -609,13 +609,13 @@ void FileInfoXferMgr::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileGetCompleteReply");
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileSendCompleteReq");
@@ -629,25 +629,25 @@ void FileInfoXferMgr::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileSendCompleteReply");
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFindFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFindFileReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFindFileReq");
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFindFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFindFileReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFindFileReply");
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileListReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	/*
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
@@ -679,7 +679,7 @@ void FileInfoXferMgr::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileListReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	/*
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
@@ -726,19 +726,19 @@ void FileInfoXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileInfoReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileInfoReq");
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileInfoReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileInfoReply");
 }
 
 //============================================================================
-void FileInfoXferMgr::onPktFileInfoErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void FileInfoXferMgr::onPktFileInfoErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoXferMgr::onPktFileInfoErr");
 }
@@ -826,7 +826,7 @@ void FileInfoXferMgr::endFileXferSession( FileTxSession * poSessionIn )
 }
 
 //============================================================================
-FileRxSession * FileInfoXferMgr::findRxSession( VxNetIdent * netIdent )
+FileRxSession * FileInfoXferMgr::findRxSession( VxNetIdent* netIdent )
 {
 	FileRxIter iter;
 	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
@@ -854,7 +854,7 @@ FileRxSession * FileInfoXferMgr::findRxSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	FileRxSession * xferSession = findRxSession( netIdent );
 	if( !xferSession )
@@ -871,7 +871,7 @@ FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxNetIdent * netIdent, V
 }
 
 //============================================================================
-FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	FileRxSession * xferSession = findRxSession( lclSessionId );
 	if( ( xferSession ) && ( lclSessionId.isVxGUIDValid() ) )
@@ -900,7 +900,7 @@ FileRxSession *	FileInfoXferMgr::findOrCreateRxSession( VxGUID& lclSessionId, Vx
 }
 
 //============================================================================
-FileTxSession * FileInfoXferMgr::findTxSession( VxNetIdent * netIdent )
+FileTxSession * FileInfoXferMgr::findTxSession( VxNetIdent* netIdent )
 {
 	FileTxIter iter;
 	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
@@ -932,13 +932,13 @@ FileTxSession * FileInfoXferMgr::findTxSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-FileTxSession *	FileInfoXferMgr::createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+FileTxSession *	FileInfoXferMgr::createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	return new FileTxSession( sktBase, netIdent );
 }
 
 //============================================================================
-FileTxSession *	FileInfoXferMgr::findOrCreateTxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+FileTxSession *	FileInfoXferMgr::findOrCreateTxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	FileTxSession * xferSession = findTxSession( netIdent );
 	if( NULL == xferSession )
@@ -955,7 +955,7 @@ FileTxSession *	FileInfoXferMgr::findOrCreateTxSession( VxNetIdent * netIdent, V
 }
 
 //============================================================================
-FileTxSession *	 FileInfoXferMgr::findOrCreateTxSession(  VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+FileTxSession *	 FileInfoXferMgr::findOrCreateTxSession(  VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	FileTxSession * xferSession = 0;
 	if( lclSessionId.isVxGUIDValid() )
@@ -1435,7 +1435,7 @@ bool FileInfoXferMgr::isFileInDownloadFolder( const char * pPartialFileName )
 }
 
 //============================================================================
-void FileInfoXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void FileInfoXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	FileTxIter iter;
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
@@ -1490,7 +1490,7 @@ EXferError FileInfoXferMgr::beginFileGet( FileRxSession * xferSession )
 }
 
 //============================================================================
-EXferError FileInfoXferMgr::canTxFile( VxNetIdent * netIdent, VxGUID& assetId, VxSha1Hash& fileHashId  )
+EXferError FileInfoXferMgr::canTxFile( VxNetIdent* netIdent, VxGUID& assetId, VxSha1Hash& fileHashId  )
 {
 	EXferError xferErr = eXferErrorFileNotFound;
 	//#define FILE_XFER_ERR_BUSY						0x0010

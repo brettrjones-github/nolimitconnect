@@ -170,7 +170,7 @@ void NetworkMgr::onOncePerSecond( void )
 }
 
 //============================================================================
-void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
+void NetworkMgr::handleTcpSktCallback( VxSktBase* sktBase )
 {
 	if( VxIsAppShuttingDown() )
 	{

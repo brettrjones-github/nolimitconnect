@@ -279,7 +279,7 @@ void AssetBaseXferMgr::fileAboutToBeDeleted( std::string& fileName )
 }
 
 //============================================================================
-void AssetBaseXferMgr::onConnectionLost( VxSktBase * sktBase )
+void AssetBaseXferMgr::onConnectionLost( VxSktBase* sktBase )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onConnectionLost AutoPluginLock start\n");
@@ -344,7 +344,7 @@ bool AssetBaseXferMgr::requireFileXfer( EAssetType assetType )
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     EXferError xferErr = eXferErrorNone;
     PktBaseGetReq * pktGetReq = (PktBaseGetReq *)pktHdr;
@@ -490,7 +490,7 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     PktBaseGetReply * pktGetReply = (PktBaseGetReply *)pktHdr;
     if( !pktGetReply->isValidPkt() )
@@ -597,7 +597,7 @@ void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq AutoPluginLock start");
@@ -702,7 +702,7 @@ void AssetBaseXferMgr::assetSendComplete( AssetBaseTxSession * xferSession )
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReply AutoPluginLock start");
@@ -777,7 +777,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendReply( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	AssetBaseRxSession * xferSession = 0;
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReq");
@@ -835,7 +835,7 @@ void AssetBaseXferMgr::onPktAssetBaseChunkReq( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktBaseChunkReply * poPkt = (PktBaseChunkReply *)pktHdr;
 	AssetBaseTxSession * xferSession = 0;
@@ -874,17 +874,17 @@ static int cnt = 0;
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReq");
     VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
@@ -902,7 +902,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( VxSktBase * sktBase, VxPkt
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
     pluginMutex.lock();
@@ -929,7 +929,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( VxSktBase * sktBase, VxP
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetBaseXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetBaseXferErr");
 	// TODO handle error
@@ -1041,7 +1041,7 @@ void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseTxSession * poSessionIn
 }
 
 //============================================================================
-AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent * netIdent )
+AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent* netIdent )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1125,7 +1125,7 @@ AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 }
 
 //============================================================================
-AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase )
+AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1162,7 +1162,7 @@ AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 }
 
 //============================================================================
-AssetBaseRxSession* AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+AssetBaseRxSession* AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1204,7 +1204,7 @@ AssetBaseRxSession* AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked
 }
 
 //============================================================================
-AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxNetIdent * netIdent )
+AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxNetIdent* netIdent )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1290,14 +1290,14 @@ AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxGUI
 }
 
 //============================================================================
-AssetBaseTxSession* AssetBaseXferMgr::createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+AssetBaseTxSession* AssetBaseXferMgr::createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	AssetBaseTxSession * txSession = new AssetBaseTxSession( m_Engine, sktBase, netIdent );
 	return txSession;
 }
 
 //============================================================================
-AssetBaseTxSession* AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase )
+AssetBaseTxSession* AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1339,7 +1339,7 @@ AssetBaseTxSession* AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked
 }
 
 //============================================================================
-AssetBaseTxSession* AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+AssetBaseTxSession* AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1397,7 +1397,7 @@ bool AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
 	if( hisInfo )
 	{
 		// first try to connect and send.. if that fails then que and will send when next connected
-		VxSktBase * sktBase = 0;
+		VxSktBase* sktBase = 0;
 		m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), hisInfo, 0, &sktBase );
 		if( 0 != sktBase )
 		{
@@ -1438,7 +1438,7 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( AssetBaseInfo& assetInfo, VxSktB
 }
 
 //============================================================================
-bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxSktBase* sktBaseIn )
+bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent* netIdent, AssetBaseInfo& assetInfo, VxSktBase* sktBaseIn )
 {
     if( !netIdent || !assetInfo.getAssetUniqueId().isVxGUIDValid() )
     {
@@ -1500,7 +1500,7 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 }
 
 //============================================================================
-void AssetBaseXferMgr::onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxGUID& sktConnectId, bool pluginIsLocked )
+void AssetBaseXferMgr::onRequestAssetFailed( VxNetIdent* netIdent, AssetBaseInfo& assetInfo, VxGUID& sktConnectId, bool pluginIsLocked )
 {
 	m_AssetRequestedListMutex.lock();
 	m_AssetRequestedList.removeGuid( assetInfo.getAssetUniqueId(), sktConnectId );
@@ -1551,7 +1551,7 @@ void AssetBaseXferMgr::queAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase )
+EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1652,7 +1652,7 @@ EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, A
 }
 
 //============================================================================
-EXferError AssetBaseXferMgr::createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase )
+EXferError AssetBaseXferMgr::createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase )
 {
     EXferError xferErr = eXferErrorNone;
     PktBaseGetReq* pktReq = createPktBaseGetReq();
@@ -2294,7 +2294,7 @@ void AssetBaseXferMgr::onAssetBaseSent( VxNetIdent*netIdent, VxSktBase* sktBase,
 }
 
 //============================================================================
-void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase * sktBase )
+void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase )
 {
 	// check que and start next xfer
 	VxGUID& hisOnlineId = hisIdent->getMyOnlineId();
@@ -2321,7 +2321,7 @@ void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetId
 }
 
 //============================================================================
-void AssetBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void AssetBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::replaceConnection AutoPluginLock start");
@@ -2354,7 +2354,7 @@ void AssetBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poO
 }
 
 //============================================================================
-void AssetBaseXferMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void AssetBaseXferMgr::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	checkQueForMoreAssetsToSend( false, netIdent, sktBase );
 }

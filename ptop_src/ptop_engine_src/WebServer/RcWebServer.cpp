@@ -61,7 +61,7 @@ std::string& RcWebServer::getWebSiteDir(  void )
 //=== overrides ===//
 //============================================================================
 //! handle callbacks from sockets
-void RcWebServer::doReceiveCallback( VxSktBase * sktBase )
+void RcWebServer::doReceiveCallback( VxSktBase* sktBase )
 {
 	this->HandleWebData( (RcWebSkt *) sktBase );
 }
@@ -103,7 +103,7 @@ void RcWebServer::setWebServerEnable( bool bEnable )
 
 //============================================================================
 // accept connection
-RCODE RcWebServer::acceptRawLocalHttpConnection( VxSktBase * poSktIn, VxNetIdent * netIdent, RcWebSkt ** ppoRetWebSkt )
+RCODE RcWebServer::acceptRawLocalHttpConnection( VxSktBase * poSktIn, VxNetIdent* netIdent, RcWebSkt ** ppoRetWebSkt )
 {
 	* ppoRetWebSkt = NULL;
 	if( false == isWebServerAvailable() )
@@ -177,7 +177,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
 {
 	VxThread * poThread = (VxThread *)pvContext;
 	poThread->setIsThreadRunning( true );
-	VxSktBase * sktBase = (VxSktBase *)poThread->getThreadUserParam();
+	VxSktBase* sktBase = (VxSktBase *)poThread->getThreadUserParam();
     if( sktBase && false == poThread->isAborted() )
     {
         if(	( poThread->isAborted() )

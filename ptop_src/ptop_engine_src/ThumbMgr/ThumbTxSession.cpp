@@ -32,7 +32,7 @@ ThumbTxSession::ThumbTxSession( P2PEngine& engine )
 }
 
 //============================================================================
-ThumbTxSession::ThumbTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+ThumbTxSession::ThumbTxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : ThumbXferSession( engine, sktBase, netIdent )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )
@@ -43,7 +43,7 @@ ThumbTxSession::ThumbTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIde
 }
 
 //============================================================================
-ThumbTxSession::ThumbTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+ThumbTxSession::ThumbTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : ThumbXferSession( engine, lclSessionId, sktBase, netIdent )
 , m_iOutstandingAckCnt(0)
 , m_bSendingPkts(false)

@@ -28,8 +28,8 @@ class AssetBaseInfo;
 class FileItemInfo
 {
 public:
-    FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent * netIdent = 0, uint8_t * fileHashId = 0 );
-	FileItemInfo( VxMyFileInfo& fileInfo, VxNetIdent * netIdent = 0, bool isShared = false, bool isInLibrary = false );
+    FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent* netIdent = 0, uint8_t * fileHashId = 0 );
+	FileItemInfo( VxMyFileInfo& fileInfo, VxNetIdent* netIdent = 0, bool isShared = false, bool isInLibrary = false );
 
 	void						setIsShared( bool isShared )			{ m_IsShared = isShared; }
 	bool						getIsShared( void )						{ return m_IsShared; }

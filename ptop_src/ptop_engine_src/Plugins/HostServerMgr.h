@@ -22,7 +22,7 @@
 class HostServerMgr : public HostServerSearchMgr
 {
 public:
-    HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
+    HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, PluginBase& pluginBase );
 	virtual ~HostServerMgr() = default;
 
     virtual void				fromGuiListAction( EListAction listAction ) override;
@@ -52,7 +52,7 @@ protected:
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     virtual void                onClientJoined( VxSktBase* sktBase, VxNetIdent* netIdent );
-    virtual bool                addClient( VxSktBase * sktBase, VxNetIdent * netIdent );
+    virtual bool                addClient( VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual bool                removeClient( VxGUID& onlineId );
 
     virtual void                addAnnounceSession( VxGUID& sessionId, PktHostInviteAnnounceReq* hostAnn );

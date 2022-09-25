@@ -99,7 +99,7 @@ PluginSessionBase *	 PluginSessionMgr::findPluginSessionByOnlineId( VxGUID& onli
 }
 
 //============================================================================
-void PluginSessionMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginSessionMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	SessionIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -173,7 +173,7 @@ void PluginSessionMgr::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sk
 
 //============================================================================
 //! called when connection is lost
-void PluginSessionMgr::onConnectionLost( VxSktBase * sktBase )
+void PluginSessionMgr::onConnectionLost( VxSktBase* sktBase )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -452,13 +452,13 @@ bool PluginSessionMgr::fromGuiOfferReply(	bool			pluginIsLocked,
 }
 
 //============================================================================
-void PluginSessionMgr::fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginSessionMgr::fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	removeSession( pluginIsLocked, netIdent, lclSessionId, eOfferResponseEndSession );
 }
 
 //============================================================================
-void PluginSessionMgr::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginSessionMgr::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 
@@ -511,7 +511,7 @@ void PluginSessionMgr::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void PluginSessionMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginSessionMgr::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 
@@ -570,7 +570,7 @@ void PluginSessionMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PluginSessionMgr::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginSessionMgr::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktSessionStopReq * pkt = (PktSessionStopReq *)pktHdr;
 	removeSession( false, netIdent, pkt->getRmtSessionId(), eOfferResponseEndSession );
@@ -668,7 +668,7 @@ P2PSession * PluginSessionMgr::findP2PSessionByOnlineId( VxGUID& onlineId, bool 
 	return NULL;
 }
 //============================================================================
-P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithSessionId( VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked )
+P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithSessionId( VxGUID& sessionId, VxSktBase* sktBase, VxNetIdent* netIdent, bool pluginIsLocked )
 {
 	P2PSession * session = findP2PSessionBySessionId( sessionId, pluginIsLocked );
 	if( NULL == session )
@@ -693,7 +693,7 @@ P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithSessionId( VxGUID& sess
 }
 
 //============================================================================
-P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithOnlineId( VxGUID& onlineId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked, VxGUID lclSessionId )
+P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithOnlineId( VxGUID& onlineId, VxSktBase* sktBase, VxNetIdent* netIdent, bool pluginIsLocked, VxGUID lclSessionId )
 {
 	P2PSession * session = findP2PSessionByOnlineId( onlineId, pluginIsLocked );
 	if( NULL == session )
@@ -820,7 +820,7 @@ TxSession * PluginSessionMgr::findTxSessionByOnlineId( bool pluginIsLocked, VxGU
 }
 
 //============================================================================
-TxSession * PluginSessionMgr::findOrCreateTxSessionWithSessionId( VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked )
+TxSession * PluginSessionMgr::findOrCreateTxSessionWithSessionId( VxGUID& sessionId, VxSktBase* sktBase, VxNetIdent* netIdent, bool pluginIsLocked )
 {
 	TxSession * session = findTxSessionBySessionId( pluginIsLocked, sessionId );
 	if( NULL == session )
@@ -837,7 +837,7 @@ TxSession * PluginSessionMgr::findOrCreateTxSessionWithSessionId( VxGUID& sessio
 }
 
 //============================================================================
-TxSession * PluginSessionMgr::findOrCreateTxSessionWithOnlineId( VxGUID& onlineId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked, VxGUID lclSessionId )
+TxSession * PluginSessionMgr::findOrCreateTxSessionWithOnlineId( VxGUID& onlineId, VxSktBase* sktBase, VxNetIdent* netIdent, bool pluginIsLocked, VxGUID lclSessionId )
 {
 	TxSession * session = findTxSessionByOnlineId( pluginIsLocked, onlineId );
 	if( NULL == session )
@@ -984,7 +984,7 @@ RxSession * PluginSessionMgr::findRxSessionByOnlineId( VxGUID& onlineId, bool pl
 }
 
 //============================================================================
-RxSession * PluginSessionMgr::findOrCreateRxSessionWithSessionId( VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked )
+RxSession * PluginSessionMgr::findOrCreateRxSessionWithSessionId( VxGUID& sessionId, VxSktBase* sktBase, VxNetIdent* netIdent, bool pluginIsLocked )
 {
 	RxSession * session = findRxSessionBySessionId( sessionId, pluginIsLocked );
 	if( NULL == session )
@@ -997,7 +997,7 @@ RxSession * PluginSessionMgr::findOrCreateRxSessionWithSessionId( VxGUID& sessio
 }
 
 //============================================================================
-RxSession * PluginSessionMgr::findOrCreateRxSessionWithOnlineId( VxGUID& onlineId, VxSktBase * sktBase, VxNetIdent * netIdent, bool pluginIsLocked, VxGUID lclSessionId )
+RxSession * PluginSessionMgr::findOrCreateRxSessionWithOnlineId( VxGUID& onlineId, VxSktBase* sktBase, VxNetIdent* netIdent, bool pluginIsLocked, VxGUID lclSessionId )
 {
 	RxSession * session = findRxSessionByOnlineId( onlineId, pluginIsLocked );
 	if( NULL == session )
@@ -1327,7 +1327,7 @@ bool PluginSessionMgr::removeSessionBySessionId( bool pluginIsLocked, VxGUID& se
 }
 
 //============================================================================
-bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent * netIdent, VxGUID& sessionId, EOfferResponse eOfferResponse, bool fromGui )
+bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent* netIdent, VxGUID& sessionId, EOfferResponse eOfferResponse, bool fromGui )
 {
 	if( removeSessionBySessionId( pluginIsLocked, sessionId, eOfferResponse ) )
 	{

@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2022 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,7 +12,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "PluginAboutMePageClient.h"
+#include "PluginFileShareClient.h"
 #include "PluginMgr.h"
 
 #include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
@@ -22,36 +21,36 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-PluginAboutMePageClient::PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
-	: PluginBaseFilesClient( engine, pluginMgr, myIdent, pluginType, "AboutMePageFilesClient.db3" )
+PluginFileShareClient::PluginFileShareClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
+: PluginBaseFilesClient( engine, pluginMgr, myIdent, pluginType, "FileShareClient.db3" )
 {
-	setPluginType( ePluginTypeAboutMePageClient );
+	setPluginType( ePluginTypeFileShareClient );
 }
 
 //============================================================================
-void PluginAboutMePageClient::onAfterUserLogOnThreaded( void )
+void PluginFileShareClient::onAfterUserLogOnThreaded( void )
 {
-	m_RootFileFolder = VxGetAppDirectory( eAppDirAboutMePageClient );
+	m_RootFileFolder = VxGetAppDirectory( eAppDirStoryBoardPageClient );
 	getFileInfoMgr().setRootFolder( m_RootFileFolder );
 
 	getFileInfoMgr().onAfterUserLogOnThreaded();
 }
 
 //============================================================================
-void PluginAboutMePageClient::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
+void PluginFileShareClient::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::onLoadedFilesReady" );
+	LogMsg( LOG_VERBOSE, "PluginFileShareClient::onLoadedFilesReady" );
 	checkIsWebPageClientReady();
 }
 
 //============================================================================
-void PluginAboutMePageClient::onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
+void PluginFileShareClient::onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
 	checkIsWebPageClientReady();
 }
 
 //============================================================================
-bool PluginAboutMePageClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
+bool PluginFileShareClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
 {
 	bool result = netIdent && sktBase && lclSessionId.isVxGUIDValid() && !fileName.empty() && assetId.isVxGUIDValid() && sha11Hash.isHashValid();
 	if( result )
@@ -126,13 +125,13 @@ bool PluginAboutMePageClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSk
 }
 
 //============================================================================
-void PluginAboutMePageClient::checkIsWebPageClientReady( void )
+void PluginFileShareClient::checkIsWebPageClientReady( void )
 {
 	setIsWebPageClientReady( getFileInfoMgr().getIsInitialized() );
 }
 
 //============================================================================
-void PluginAboutMePageClient::setIsWebPageClientReady( bool isReady )
+void PluginFileShareClient::setIsWebPageClientReady( bool isReady )
 {
 	if( m_WebPageClientReady != isReady )
 	{
@@ -142,13 +141,13 @@ void PluginAboutMePageClient::setIsWebPageClientReady( bool isReady )
 }
 
 //============================================================================
-void PluginAboutMePageClient::onWebPageClientReady( bool isReady )
+void PluginFileShareClient::onWebPageClientReady( bool isReady )
 {
 
 }
 
 //============================================================================
-std::string	 PluginAboutMePageClient::getIncompleteFileXferDirectory( VxGUID& onlineId )
+std::string	PluginFileShareClient::getIncompleteFileXferDirectory( VxGUID& onlineId )
 {
 	std::string incompleteDir{ "" };
 	if( onlineId.isVxGUIDValid() )
@@ -174,10 +173,10 @@ std::string	 PluginAboutMePageClient::getIncompleteFileXferDirectory( VxGUID& on
 }
 
 //============================================================================
-bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
+bool PluginFileShareClient::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
 	bool result{ false };
-	if( eWebPageTypeAboutMe == webPageType && onlineId.isVxGUIDValid() )
+	if( (eWebPageTypeAboutMe == webPageType || eWebPageTypeStoryboard == webPageType ) && onlineId.isVxGUIDValid() )
 	{
 		m_HisOnlineId = onlineId;
 		m_DownloadFileFolder = getIncompleteFileXferDirectory( onlineId );
@@ -205,14 +204,14 @@ bool PluginAboutMePageClient::fromGuiDownloadWebPage( EWebPageType webPageType, 
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::fromGuiDownloadWebPage invalid EWebPageType" );
+		LogMsg( LOG_VERBOSE, "PluginFileShareClient::fromGuiDownloadWebPage invalid EWebPageType" );
 	}
 
 	return result;
 }
 
 //============================================================================
-bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
+bool PluginFileShareClient::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
 	bool result{ false };
 	if( eWebPageTypeAboutMe == webPageType )
@@ -223,7 +222,7 @@ bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, Vx
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::fromGuiCancelWebPage invalid EWebPageType" );
+		LogMsg( LOG_VERBOSE, "PluginFileShareClient::fromGuiCancelWebPage invalid EWebPageType" );
 	}
 
 	return result;
@@ -231,7 +230,7 @@ bool PluginAboutMePageClient::fromGuiCancelWebPage( EWebPageType webPageType, Vx
 
 
 //============================================================================
-bool PluginAboutMePageClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo )
+bool PluginFileShareClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo )
 {
 	bool result{ false };
 	if( fileInfo.determineFullFileName( m_DownloadFileFolder ) )
@@ -249,11 +248,11 @@ bool PluginAboutMePageClient::fileInfoSearchResult( VxGUID& searchSessionId, VxS
 }
 
 //============================================================================
-void PluginAboutMePageClient::fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
+void PluginFileShareClient::fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
 {
 	if( commErr == eCommErrNone )
 	{
-		LogMsg( LOG_VERBOSE, "FileInfoListMgr::hostSearchCompleted with no errors" );	
+		LogMsg( LOG_VERBOSE, "PluginFileShareClient::fileInfoSearchCompleted with no errors" );
 		bool webIndexFileFound{ false };
 		for( auto& fileInfo : m_SearchFileInfoList )
 		{
@@ -282,13 +281,13 @@ void PluginAboutMePageClient::fileInfoSearchCompleted( VxGUID& searchSessionId, 
 	else
 	{
 		cancelDownload();
-		LogMsg( LOG_ERROR, "FileInfoListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+		LogMsg( LOG_ERROR, "PluginFileShareClient::fileInfoSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
 		m_Engine.getToGui().toGuiPluginCommError( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoFailed, commErr );
 	}
 }
 
 //============================================================================
-void PluginAboutMePageClient::cancelDownload( void )
+void PluginFileShareClient::cancelDownload( void )
 {
 	lockSearchFileList();
 	for( auto& fileInfo : m_SearchFileInfoList )
@@ -322,7 +321,7 @@ void PluginAboutMePageClient::cancelDownload( void )
 }
 
 //============================================================================
-bool PluginAboutMePageClient::startDownload( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
+bool PluginFileShareClient::startDownload( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	bool result{ false };
 	lockSearchFileList();

@@ -17,7 +17,7 @@
 #include <PktLib/VxPktHdr.h>
 
 //============================================================================
-P2PSession::P2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+P2PSession::P2PSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : PluginSessionBase( sktBase, netIdent, pluginType )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )
@@ -27,7 +27,7 @@ P2PSession::P2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType 
 }
 
 //============================================================================
-P2PSession::P2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+P2PSession::P2PSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : PluginSessionBase( lclSessionId, sktBase, netIdent, pluginType )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )

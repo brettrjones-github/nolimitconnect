@@ -44,7 +44,7 @@ public:
     void                        addConnectReason( HandshakeInfo& shakeInfo );
     bool                        removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason, VxSktBase** retSktBaseIfDisconnected );
 
-    void                        onSktDisconnected( VxSktBase * sktBase );
+    void                        onSktDisconnected( VxSktBase* sktBase );
     void                        aboutToDelete( void );
 
 protected:

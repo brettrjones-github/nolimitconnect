@@ -28,14 +28,14 @@ AssetBaseRxSession::AssetBaseRxSession( P2PEngine& engine )
 }
 
 //============================================================================
-AssetBaseRxSession::AssetBaseRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+AssetBaseRxSession::AssetBaseRxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : AssetBaseXferSession( engine, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-AssetBaseRxSession::AssetBaseRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+AssetBaseRxSession::AssetBaseRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : AssetBaseXferSession( engine, lclSessionId, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );

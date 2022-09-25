@@ -72,12 +72,12 @@ public:
 	void						setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION pfuncPortOpenCallbackHandler, void * userData );
     void						setQueryHostOnlineIdResultCallback( QUERY_HOST_ID_CALLBACK_FUNCTION pfuncQueryHostIdCallbackHandler, void * userData );
 
-	RCODE						handleNetCmdPing( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-    RCODE						handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-    RCODE						handleNetCmdQueryHostIdReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdPing( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdPong( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdIsMyPortOpenReq( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdIsMyPortOpenReply( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
+    RCODE						handleNetCmdQueryHostIdReq( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
+    RCODE						handleNetCmdQueryHostIdReply( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
 
 	void						runNetActions( void );
 
@@ -107,7 +107,7 @@ public:
 protected:
 	void						addNetActionCommand( NetActionBase * netActionBase );
 	bool						isActionQued( ENetActionType eNetActionType );
-	RCODE						sendPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						sendPong( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
 
 	//=== vars ===//
 #ifdef TARGET_OS_WINDOWS

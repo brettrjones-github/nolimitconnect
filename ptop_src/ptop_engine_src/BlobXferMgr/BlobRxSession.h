@@ -22,8 +22,8 @@ class BlobRxSession : public BlobXferSession
 {
 public:
 	BlobRxSession( P2PEngine& engine );
-	BlobRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	BlobRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	BlobRxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	BlobRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~BlobRxSession();
 
 	void cancelDownload( VxGUID& lclSessionId );

@@ -194,7 +194,7 @@ void UserOnlineMgr::announceUserSessionState( User* user, bool isInSession )
 }
 
 //============================================================================
-void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+void UserOnlineMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     updateUserSession( sktBase, netIdent, sessionInfo );
 }
@@ -229,7 +229,7 @@ void UserOnlineMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* n
 }
 
 //============================================================================
-void UserOnlineMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+void UserOnlineMgr::onHostJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     updateUserSession( sktBase, netIdent, sessionInfo );
 }
@@ -241,7 +241,7 @@ void UserOnlineMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, 
 }
 
 //============================================================================
-void UserOnlineMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+void UserOnlineMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     updateUserSession( sktBase, netIdent, sessionInfo );
 }
@@ -280,7 +280,7 @@ void UserOnlineMgr::updateUserSession( VxSktBase* sktBase, VxNetIdent* netIdent,
 }
 
 //============================================================================
-void UserOnlineMgr::updateUserSession( GroupieId& groupieId, VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo, bool leftHost )
+void UserOnlineMgr::updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo, bool leftHost )
 {
     bool wasAdded = false;
     bool wasInSession = false;

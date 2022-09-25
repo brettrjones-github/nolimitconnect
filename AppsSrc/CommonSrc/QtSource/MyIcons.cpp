@@ -1172,26 +1172,6 @@ EMyIcons MyIcons::getPluginIcon( enum EPluginType ePluginType, EPluginAccess ePl
 		return eMyIconStoryBoardNormal;
 		break;
 
-	case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-		switch( ePluginAccess )
-		{
-		case ePluginAccessOk:
-			return eMyIconProfile;
-		case ePluginAccessDisabled:
-		case ePluginAccessInactive:
-		case ePluginAccessRequiresDirectConnect:
-		case ePluginAccessRequiresOnline:
-        case ePluginAccessNotSet:
-        case eMaxPluginAccessState:
-			return eMyIconProfileDisabled;
-		case ePluginAccessLocked:
-			return eMyIconProfileLocked;
-		case ePluginAccessIgnored:
-        case ePluginAccessBusy:
-			return eMyIconProfileIgnored;
-		}
-		break;
-
 	case ePluginTypePersonFileXfer:	// file offer plugin
 		switch( ePluginAccess )
 		{

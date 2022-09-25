@@ -36,7 +36,7 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginCamServer::PluginCamServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginCamServer::PluginCamServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
@@ -54,14 +54,14 @@ void PluginCamServer::setIsPluginInSession( bool isInSession )
 
 //============================================================================
 // override this by plugin to create inherited RxSession
-RxSession * PluginCamServer::createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+RxSession * PluginCamServer::createRxSession( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	return new RxSession( sktBase, netIdent, getPluginType() );
 }
 
 //============================================================================
 // override this by plugin to create inherited TxSession
-TxSession * PluginCamServer::createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+TxSession * PluginCamServer::createTxSession( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	return new TxSession( sktBase, netIdent, getPluginType() );
 }
@@ -147,7 +147,7 @@ void PluginCamServer::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUse
 		RxSession * rxSession = m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		if( !rxSession )
 		{
-			VxSktBase * sktBase = nullptr;
+			VxSktBase* sktBase = nullptr;
 			m_PluginMgr.pluginApiSktConnectTo( ePluginTypeCamServer, netIdent, 0, &sktBase );
 			if( 0 != sktBase )
 			{
@@ -181,7 +181,7 @@ void PluginCamServer::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUse
 
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginCamServer::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginCamServer::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	LogMsg( LOG_INFO, "PluginCamServer::fromGuiStopPluginSession" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -249,14 +249,14 @@ void PluginCamServer::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUse
 }
 
 //============================================================================
-bool PluginCamServer::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginCamServer::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	// for cam server we really want to know if server is running
 	return getIsServerInSession();
 }
 
 //============================================================================
-EPluginAccess PluginCamServer::canAcceptNewSession( VxNetIdent * netIdent )
+EPluginAccess PluginCamServer::canAcceptNewSession( VxNetIdent* netIdent )
 {
 	EFriendState eHisPermissionToMe = netIdent->getHisFriendshipToMe();
 	EFriendState eMyPermissionToHim = netIdent->getMyFriendshipToHim();
@@ -288,7 +288,7 @@ bool PluginCamServer::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identit
 													uint8_t *		fileHashId,
 													VxGUID			lclSessionId )		// filename if any
 {
-	VxSktBase * sktBase = NULL;
+	VxSktBase* sktBase = NULL;
 	LogMsg( LOG_INFO, " PluginCamServer::fromGuiMakePluginOffer %s", netIdent->getOnlineName());
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( true == m_PluginMgr.pluginApiSktConnectTo( m_ePluginType, netIdent, pvUserData, &sktBase ) )
@@ -362,7 +362,7 @@ bool PluginCamServer::stopCamSession( VxNetIdent* netIdent,	VxSktBase* sktBase )
 
 //============================================================================
 //! packet with remote users offer
-void PluginCamServer::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	if( !isAccessAllowed( netIdent, true, "onPktPluginOfferReq" ) )
 	{
@@ -395,7 +395,7 @@ void PluginCamServer::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHd
 
 //============================================================================
 //! packet with remote users reply to offer
-void PluginCamServer::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
 	EOfferResponse eResponse = poPkt->getOfferResponse();
@@ -418,7 +418,7 @@ void PluginCamServer::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void PluginCamServer::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	if( !isAccessAllowed( netIdent, true, "onPktSessionStartReq" ) )
 	{
@@ -454,7 +454,7 @@ void PluginCamServer::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void PluginCamServer::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktSessionStartReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktSessionStartReply * poPkt = (PktSessionStartReply *)pktHdr;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -476,7 +476,7 @@ void PluginCamServer::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PluginCamServer::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.removeTxSessionByOnlineId( netIdent->getMyOnlineId(), false );
 	if( getIsServerInSession() )
@@ -486,18 +486,18 @@ void PluginCamServer::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void PluginCamServer::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktSessionStopReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_ERROR, "PluginCamServer::onPktSessionStopReply" );
 }
 
 //============================================================================
-void PluginCamServer::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktVideoFeedReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 
 //============================================================================
-void PluginCamServer::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktVideoFeedStatus * pktVideoStatus = ( PktVideoFeedStatus * )pktHdr;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -527,7 +527,7 @@ void PluginCamServer::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void PluginCamServer::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	//LogMsg( LOG_INFO, "PluginCamServer::onPktCastPic\n" );
 	PktVideoFeedPicAck oPkt;
@@ -623,7 +623,7 @@ void PluginCamServer::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktH
 }
 
 //============================================================================
-void PluginCamServer::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 
@@ -638,25 +638,25 @@ void PluginCamServer::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void PluginCamServer::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VoiceFeedMgr.onPktVoiceReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginCamServer::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginCamServer::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VoiceFeedMgr.onPktVoiceReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginCamServer::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginCamServer::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginCamServer::onConnectionLost( VxSktBase * sktBase )
+void PluginCamServer::onConnectionLost( VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onConnectionLost( sktBase );
 	if( getIsServerInSession() )
@@ -666,7 +666,7 @@ void PluginCamServer::onConnectionLost( VxSktBase * sktBase )
 }
 
 //============================================================================
-void PluginCamServer::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginCamServer::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 	if( getIsServerInSession() )

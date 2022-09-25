@@ -23,7 +23,7 @@ public:
 	uint8_t *				m_u8JpgData;
 	uint32_t					m_u32JpgDataLen;
 
-	RcScanPic( VxNetIdent * netIdent, VxSktBase * sktBase, uint8_t * u8JpgData, uint32_t u32JpgDataLen )
+	RcScanPic( VxNetIdent* netIdent, VxSktBase* sktBase, uint8_t * u8JpgData, uint32_t u32JpgDataLen )
 		: m_Ident(netIdent)
 		, m_Skt(sktBase)
 		, m_u8JpgData(u8JpgData)

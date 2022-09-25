@@ -215,13 +215,13 @@ void NetServicesMgr::runNetActions( void )
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdPing( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdPing( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
 	return  sendPong( sktBase, netServiceHdr );
 }
 
 //============================================================================
-RCODE NetServicesMgr::sendPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::sendPong( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "Got ping from %s thread 0x%x", sktBase->getRemoteIp().c_str(), VxGetCurrentThreadId() );
 	std::string content;
@@ -230,14 +230,14 @@ RCODE NetServicesMgr::sendPong( VxSktBase * sktBase, NetServiceHdr& netServiceHd
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdPong( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "Got PONG from %s thread 0x%x", sktBase->getRemoteIp().c_str(), VxGetCurrentThreadId() );
 	return 0;
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
 	InetAddrAndPort rmtAddr;
     VxGetRmtAddress( sktBase->m_Socket, rmtAddr );
@@ -879,7 +879,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTim
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReply( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     RCODE rc = -1;
     // not called here.. handled in NetAction
@@ -887,7 +887,7 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetSer
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdQueryHostIdReq( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     std::string toClientContent = "0"; // assume fail
 
@@ -1028,7 +1028,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdQueryHostIdReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdQueryHostIdReply( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     RCODE rc = -1;
     // not called here.. handled in NetAction

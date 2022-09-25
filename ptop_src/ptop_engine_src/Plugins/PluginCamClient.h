@@ -22,7 +22,7 @@
 class PluginCamClient : public PluginBase
 {
 public:
-	PluginCamClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	PluginCamClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginCamClient() = default;
 
 	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
@@ -50,7 +50,7 @@ protected:
 
     virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
     virtual void				onConnectionLost			( VxSktBase* sktBase );
-    virtual void				onContactWentOffline		( VxNetIdent* netIdent, VxSktBase * sktBase );
+    virtual void				onContactWentOffline		( VxNetIdent* netIdent, VxSktBase* sktBase );
 
     virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
     virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
@@ -77,9 +77,9 @@ protected:
 	virtual void				callbackVideoPktPicChunk( void * userData, VxGUID& feedId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum );
 
 	// override this by plugin to create inherited RxSession
-	RxSession *					createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
+	RxSession *					createRxSession( VxSktBase* sktBase, VxNetIdent* netIdent );
 	// override this by plugin to create inherited TxSession
-	TxSession *					createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
+	TxSession *					createTxSession( VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	bool						requestCamSession(	RxSession *			rxSession,
 													bool				bWaitForSuccess = false );

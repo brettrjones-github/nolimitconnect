@@ -30,7 +30,7 @@
 #define MAX_OUTSTANDING_PIC_CHUNK_PACKETS 3
 
 //============================================================================
-void PluginBaseWebServer::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseWebServer::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	WebTxIter iter;
 	AutoPluginLock( this );
@@ -342,39 +342,39 @@ RCODE PluginBaseWebServer::queWebsiteFile(		RcWebSkt *		poWebSkt,			//
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_ERROR, "PluginBaseWebServer::onPktSessionStartReq" );
 }
 //============================================================================
-void PluginBaseWebServer::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktSessionStartReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_ERROR, "PluginBaseWebServer::onPktSessionStartReply" );
 }
 //============================================================================
-void PluginBaseWebServer::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_ERROR, "PluginBaseWebServer::onPktSessionStopReq" );
 }
 //============================================================================
-void PluginBaseWebServer::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktSessionStopReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_ERROR, "PluginBaseWebServer::onPktSessionStopReply" );
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktMyPicSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	WebTxSession * txSession = 0;
 
@@ -447,7 +447,7 @@ void PluginBaseWebServer::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pkt
 }
 
 //============================================================================
-void PluginBaseWebServer::sendNextPicChunk( VxSktBase * sktBase, VxNetIdent * netIdent, WebTxSession * poSession )
+void PluginBaseWebServer::sendNextPicChunk( VxSktBase* sktBase, VxNetIdent* netIdent, WebTxSession * poSession )
 {
 	if( poSession && poSession->m_hMyPicFile )
 	{
@@ -483,7 +483,7 @@ void PluginBaseWebServer::sendNextPicChunk( VxSktBase * sktBase, VxNetIdent * ne
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktMyPicSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktMyPicSendReply * poPkt = (PktMyPicSendReply *)pktHdr;
 	if( 0 == poPkt->getError() )
@@ -503,7 +503,7 @@ void PluginBaseWebServer::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktWebServerPicChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {	
 	PktWebServerPicChunkTx * poPktPicChunk = ( PktWebServerPicChunkTx * )pktHdr;
 	if( poPktPicChunk->getThisDataLen() == poPktPicChunk->getTotalDataLen() )
@@ -554,7 +554,7 @@ void PluginBaseWebServer::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHd
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktWebServerPicChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	WebTxIter iter = m_WebTxSessions.find(netIdent);
 	if( iter != m_WebTxSessions.end() )
@@ -573,7 +573,7 @@ void PluginBaseWebServer::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktH
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktWebServerGetChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {	
 	//PktWebServerGetChunkTx * poPktGetChunk = ( PktWebServerGetChunkTx * )pktHdr;
 
@@ -605,7 +605,7 @@ void PluginBaseWebServer::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHd
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktWebServerGetChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	WebTxIter iter = m_WebTxSessions.find(netIdent);
 	if( iter != m_WebTxSessions.end() )
@@ -619,7 +619,7 @@ void PluginBaseWebServer::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktH
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktWebServerPutChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {	
 	//WebProxySession * poProxySession = findWebProxySession( netIdent );
 	//if( poProxySession )
@@ -633,7 +633,7 @@ void PluginBaseWebServer::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHd
 }
 
 //============================================================================
-void PluginBaseWebServer::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseWebServer::onPktWebServerPutChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	WebTxIter iter = m_WebTxSessions.find(netIdent);
 	if( iter != m_WebTxSessions.end() )

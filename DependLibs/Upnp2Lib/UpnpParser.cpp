@@ -199,7 +199,7 @@ UpnpParser::UpnpParser()
 }
 
 //============================================================================
-void UpnpParser::setParserData(  VxSktBase * sktBase, const char * pDataBuf )
+void UpnpParser::setParserData(  VxSktBase* sktBase, const char * pDataBuf )
 {
 	if( pDataBuf )
 	{

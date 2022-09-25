@@ -1229,10 +1229,6 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Audio Recorder" ).toUtf8().constData();
         break;
 
-    case ePluginTypeWebServer:
-        strPluginDesc = QObject::tr( "Unused Server for About Me And Story Pages" ).toUtf8().constData();
-        break;
-
     case ePluginTypeFileShareClient:
         strPluginDesc = QObject::tr( "Download Shared Files" ).toUtf8().constData();
         break;

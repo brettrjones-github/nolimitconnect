@@ -25,23 +25,30 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginCamServer.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginInvalid.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginMessenger.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h>
 
-#include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginFileShareClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginGroupClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginGroupHost.h>
+
+#include <ptop_src/ptop_engine_src/Plugins/PluginMessenger.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetworkSearchList.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetworkHost.h>
+
+#include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h>
 
@@ -137,7 +144,7 @@ void PluginMgr::pluginMgrStartup( void )
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create file share plugin" );
-    m_aoPlugins.push_back( &m_Engine.getPluginServiceFileShare() );
+    m_aoPlugins.push_back( &m_Engine.getPluginFileShareServer() );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create chat room client plugin" );
     poPlugin = new PluginChatRoomClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeClientChatRoom );
@@ -342,7 +349,7 @@ void PluginMgr::pluginApiLog( EPluginType ePluginType, const char * pMsg, ... )
 }
 
 //============================================================================
-bool PluginMgr::handleFirstWebPageConnection( VxSktBase * sktBase )
+bool PluginMgr::handleFirstWebPageConnection( VxSktBase* sktBase )
 {
 	char *	pSktBuf = (char *)sktBase->getSktReadBuf();
 	int	iDataLen =	sktBase->getSktBufDataLen();
@@ -373,7 +380,7 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase * sktBase )
 		return false;
 	}
 
-	VxNetIdent * netIdent = NULL;
+	VxNetIdent* netIdent = NULL;
 	VxGUID onlineId;
 	if( false == onlineId.fromVxGUIDHexString( &pSktBuf[ parseOffset ] ) )
 	{
@@ -417,7 +424,7 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase * sktBase )
 }
 
 //============================================================================
-void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
+void PluginMgr::handleFirstNetServiceConnection( VxSktBase* sktBase )
 {
 	int iSktDataLen = sktBase->getSktBufDataLen();
 	if( iSktDataLen < NET_SERVICE_HDR_LEN )
@@ -522,7 +529,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	if( ePluginTypeInvalid != pluginType )
 	{
-		VxNetIdent * netIdent = NULL;
+		VxNetIdent* netIdent = NULL;
 		if( netServiceHdr.m_OnlineId == m_Engine.getMyPktAnnounce().getMyOnlineId() )
 		{
 			netIdent = &m_Engine.getMyPktAnnounce();
@@ -568,14 +575,14 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 //============================================================================
 //! this is called for all valid packets that are not sys packets
-void PluginMgr::handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PluginMgr::handleNonSystemPackets( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	//LogMsg( LOG_INFO, "PluginMgr::handleNonSystemPackets" );
 	uint8_t u8PluginNum = pktHdr->getPluginNum();
 	if( isValidPluginNum( u8PluginNum ) )
 	{
 		PluginBase * plugin = getPlugin( (EPluginType)u8PluginNum );
-		VxNetIdent * netIdent = m_BigListMgr.findNetIdent( pktHdr->getSrcOnlineId() );
+		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( pktHdr->getSrcOnlineId() );
 		if( netIdent && plugin )
 		{
 			plugin->handlePkt( sktBase, pktHdr, netIdent );
@@ -601,7 +608,7 @@ bool PluginMgr::isValidPluginNum( uint8_t u8PluginNum )
 
 //============================================================================
 //! get permission/access state for remote user
-EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent )
+EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent* netIdent )
 {
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
@@ -786,7 +793,7 @@ void PluginMgr::onAfterUserLogOnThreaded( void )
 }
 
 //============================================================================
-void PluginMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginMgr::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	std::vector<PluginBase * >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
@@ -796,7 +803,7 @@ void PluginMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase 
 }
 
 //============================================================================
-void PluginMgr::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginMgr::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	std::vector<PluginBase * >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
@@ -806,7 +813,7 @@ void PluginMgr::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase
 }
 
 //============================================================================
-void PluginMgr::onConnectionLost( VxSktBase * sktBase )
+void PluginMgr::onConnectionLost( VxSktBase* sktBase )
 {
 	std::vector<PluginBase * >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
@@ -936,7 +943,7 @@ bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent* netIdent )
 }
 
 //============================================================================
-void PluginMgr::pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent * netIdent, int motion0to100000 )
+void PluginMgr::pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent* netIdent, int motion0to100000 )
 {
 	//LogMsg( LOG_INFO, "PluginMgr::pluginApiPlayVideoFrame\n" );
 	IToGui::getToGui().toGuiPlayVideoFrame( netIdent->getMyOnlineId(), pu8VidData, u32VidDataLen, motion0to100000 );
@@ -1012,7 +1019,7 @@ void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlin
 
 //============================================================================
 //! return true if is plugin session
-bool PluginMgr::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginMgr::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	bool inSession = false;
 	PluginBase * plugin = getPlugin( ePluginType );
@@ -1091,7 +1098,7 @@ int PluginMgr::fromGuiDeleteFile( const char * fileName, bool shredFile )
 }
 
 //============================================================================
-EPluginAccess PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent )
+EPluginAccess PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIdent* netIdent )
 {
 	EPluginAccess canAcceptSession = ePluginAccessDisabled;
 	PluginBase * plugin = getPlugin( ePluginType );
@@ -1117,7 +1124,7 @@ VxNetIdent * PluginMgr::pluginApiOnlineIdToIdentity( VxGUID& oOnlineId )
 }
 
 //============================================================================
-void PluginMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	for( auto pluginBase : m_aoPlugins )
 	{

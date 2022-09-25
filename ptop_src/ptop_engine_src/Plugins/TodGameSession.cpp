@@ -15,7 +15,7 @@
 
 #include "TodGameSession.h"
 
-TodGameSession::TodGameSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+TodGameSession::TodGameSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : P2PSession( sktBase, netIdent, pluginType )
 {
 

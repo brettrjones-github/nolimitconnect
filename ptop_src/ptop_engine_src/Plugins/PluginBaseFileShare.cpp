@@ -35,7 +35,7 @@
 #endif
 
 //============================================================================
-PluginBaseFileShare::PluginBaseFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType, std::string fileLibraryDbName, std::string fileShareDbName )
+PluginBaseFileShare::PluginBaseFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileLibraryDbName, std::string fileShareDbName )
 : PluginBase( engine, pluginMgr, myIdent, pluginType ) 
 , m_PluginSessionMgr( engine, *this, pluginMgr)
 , m_SharedFilesMgr( engine, *this, fileShareDbName )
@@ -55,19 +55,19 @@ void PluginBaseFileShare::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-void PluginBaseFileShare::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginBaseFileShare::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return m_FileShareXferMgr.fromGuiStartPluginSession( netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
-void PluginBaseFileShare::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId)
+void PluginBaseFileShare::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId)
 {
 	return m_FileShareXferMgr.fromGuiStopPluginSession( netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
-bool PluginBaseFileShare::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginBaseFileShare::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return m_FileShareXferMgr.fromGuiIsPluginInSession( netIdent, pvUserData, lclSessionId );
 }
@@ -285,115 +285,115 @@ int PluginBaseFileShare::fromGuiPluginControl(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktPluginOfferReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileGetReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileGetReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileSendReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileSendReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileChunkReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileChunkReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileGetCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileGetCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileGetCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileGetCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFindFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFindFileReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFindFileReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFindFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFindFileReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFindFileReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileListReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileListReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileListReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_FileShareXferMgr.onPktFileListReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseFileShare::onPktFileShareErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	//m_FileShareXferMgr.onPktFileShareErr( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseFileShare::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseFileShare::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginBaseFileShare::onConnectionLost( VxSktBase * sktBase )
+void PluginBaseFileShare::onConnectionLost( VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onConnectionLost( sktBase );
 }
 
 //============================================================================
-void PluginBaseFileShare::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginBaseFileShare::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }

@@ -214,7 +214,7 @@ void INlc::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 }
 
 //============================================================================
-void INlc::toGuiContactAdded( VxNetIdent * netIdent )
+void INlc::toGuiContactAdded( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactAdded( netIdent );
 }
@@ -226,73 +226,73 @@ void INlc::toGuiContactRemoved( VxGUID& onlineId )
 }
 
 //============================================================================
-void INlc::toGuiContactOnline( VxNetIdent * netIdent )
+void INlc::toGuiContactOnline( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactOnline( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactOffline( VxNetIdent * netIdent )
+void INlc::toGuiContactOffline( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactOffline( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactNameChange( VxNetIdent * netIdent )
+void INlc::toGuiContactNameChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactNameChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactDescChange( VxNetIdent * netIdent )
+void INlc::toGuiContactDescChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactDescChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
+void INlc::toGuiContactMyFriendshipChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactMyFriendshipChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
+void INlc::toGuiContactHisFriendshipChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactHisFriendshipChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
+void INlc::toGuiContactSearchFlagsChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactSearchFlagsChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactConnectionChange( VxNetIdent * netIdent )
+void INlc::toGuiContactConnectionChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactConnectionChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
+void INlc::toGuiContactLastSessionTimeChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactLastSessionTimeChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiContactAnythingChange( VxNetIdent * netIdent )
+void INlc::toGuiContactAnythingChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiContactAnythingChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiPluginPermissionChange( VxNetIdent * netIdent )
+void INlc::toGuiPluginPermissionChange( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiPluginPermissionChange( netIdent );
 }
 
 //============================================================================
-void INlc::toGuiUpdateMyIdent( VxNetIdent * netIdent )
+void INlc::toGuiUpdateMyIdent( VxNetIdent* netIdent )
 {
     getAppCommon().toGuiUpdateMyIdent( netIdent );
 }
@@ -484,7 +484,7 @@ void INlc::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent *	netIdent )
 }
 
 //============================================================================
-void INlc::toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode )
+void INlc::toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode )
 {
     getAppCommon().toGuiSearchResultError( eScanType, netIdent, errCode );
 }

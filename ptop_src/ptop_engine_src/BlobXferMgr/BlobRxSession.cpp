@@ -28,14 +28,14 @@ BlobRxSession::BlobRxSession( P2PEngine& engine )
 }
 
 //============================================================================
-BlobRxSession::BlobRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+BlobRxSession::BlobRxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : BlobXferSession( engine, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-BlobRxSession::BlobRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+BlobRxSession::BlobRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : BlobXferSession( engine, lclSessionId, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );

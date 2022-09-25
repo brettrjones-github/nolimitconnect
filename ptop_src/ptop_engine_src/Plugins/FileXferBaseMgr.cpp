@@ -170,7 +170,7 @@ bool FileXferBaseMgr::makeIncompleteFileName( std::string& strRemoteFileName, st
 }
 
 //============================================================================
-EXferError FileXferBaseMgr::sendNextFileChunk( VxFileXferInfo& xferInfo, VxNetIdent * netIdent, VxSktBase * skt )
+EXferError FileXferBaseMgr::sendNextFileChunk( VxFileXferInfo& xferInfo, VxNetIdent* netIdent, VxSktBase * skt )
 {
 	EXferError xferErr = eXferErrorNone;
 	PktFileChunkReq oPkt;

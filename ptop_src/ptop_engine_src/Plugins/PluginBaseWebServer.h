@@ -26,7 +26,7 @@ class VxSktBase;
 class WebRxSession
 {
 public:
-	WebRxSession( VxNetIdent * netIdent, VxSktBase *	sktBase )
+	WebRxSession( VxNetIdent* netIdent, VxSktBase *	sktBase )
         : m_u32PicTotalDataLen(0)
 		, m_u32PicDataIdx(0)
 		, m_paPicData(0)
@@ -52,7 +52,7 @@ protected:
 class WebTxSession
 {
 public:
-	WebTxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+	WebTxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
         : m_iOutstandingAckCnt(0)
 		, m_hMyPicFile(NULL)
 		, m_u32MyPicLen(0)
@@ -82,7 +82,7 @@ protected:
 class WebProxySession
 {
 public:
-	WebProxySession( VxNetIdent * netIdent, VxSktBase * sktBase, RcWebSkt * poWebSkt )
+	WebProxySession( VxNetIdent* netIdent, VxSktBase* sktBase, RcWebSkt * poWebSkt )
         : m_WebSkt(poWebSkt)
 		, m_iOutstandingAckCnt(0)
         , m_Ident(netIdent)
@@ -108,7 +108,7 @@ protected:
 class PluginBaseWebServer : public PluginBase, public RcWebServer
 {
 public:
-	PluginBaseWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	PluginBaseWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginBaseWebServer();
 
 	virtual void				pluginShutdown( void );
@@ -117,26 +117,26 @@ public:
 
 
 	VxSktBase *					makeNewSkt( void ) { return NULL; }
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	void						onConnectionLost( VxSktBase * sktBase );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	void						onConnectionLost( VxSktBase* sktBase );
 
-	void						onPktPluginOfferReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktPluginOfferReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	void						onPktPluginOfferReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktPluginOfferReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	void						onPktSessionStartReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktSessionStartReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktSessionStopReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktSessionStopReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	void						onPktSessionStartReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktSessionStartReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktSessionStopReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktSessionStopReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	void						onPktMyPicSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktMyPicSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktWebServerPicChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktWebServerPicChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktWebServerGetChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktWebServerGetChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktWebServerPutChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	void						onPktWebServerPutChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	void						onPktMyPicSendReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktMyPicSendReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktWebServerPicChunkTx		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktWebServerPicChunkAck		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktWebServerGetChunkTx		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktWebServerGetChunkAck		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktWebServerPutChunkTx		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	void						onPktWebServerPutChunkAck		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
 
 	RCODE						handleDataFromLocalBrowser( RcWebSkt * sktBase );
@@ -171,19 +171,19 @@ public:
 											int				iFileOffset,
 											bool			bCloseAfterSend );
 
-	RCODE						handlePtopConnection( VxSktBase * sktBase, VxNetIdent * netIdent );
-	bool						searchActionProfilePic( VxNetIdent * netIdent, VxSktBase * sktBase );
+	RCODE						handlePtopConnection( VxSktBase* sktBase, VxNetIdent* netIdent );
+	bool						searchActionProfilePic( VxNetIdent* netIdent, VxSktBase* sktBase );
 
 protected:
-	WebRxSession *				findRxSession( VxNetIdent * netIdent );
-	WebRxSession *				findOrCreateRxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
-	WebTxSession *				findTxSession( VxNetIdent * netIdent );
-	WebTxSession *				findOrCreateTxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
+	WebRxSession *				findRxSession( VxNetIdent* netIdent );
+	WebRxSession *				findOrCreateRxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	WebTxSession *				findTxSession( VxNetIdent* netIdent );
+	WebTxSession *				findOrCreateTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	WebProxySession *			findWebProxySession( VxNetIdent * netIdent );
+	WebProxySession *			findWebProxySession( VxNetIdent* netIdent );
 
 	void						getMyPicFileName( std::string& strRetFileName );
-	void						sendNextPicChunk( VxSktBase * sktBase, VxNetIdent * netIdent, WebTxSession * poSession );
+	void						sendNextPicChunk( VxSktBase* sktBase, VxNetIdent* netIdent, WebTxSession * poSession );
 
 	//=== constants ===//
 	typedef std::map<VxNetIdent *, WebRxSession *>::iterator WebRxIter;

@@ -125,7 +125,7 @@ bool ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallb
 }
 
 //============================================================================
-void ConnectedInfo::onSktDisconnected( VxSktBase * sktBase )
+void ConnectedInfo::onSktDisconnected( VxSktBase* sktBase )
 {
     // this connected info is about to be erased in ConnectedListAll::onSktDisconnected
 }

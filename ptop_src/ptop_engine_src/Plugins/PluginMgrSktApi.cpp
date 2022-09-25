@@ -26,7 +26,7 @@ bool PluginMgr::pluginApiSktConnectTo(		EPluginType			ePluginType,	// plugin id
 											VxSktBase **		ppoRetSkt, 		// returned Socket
 											EConnectReason		connectReason )
 {
-	VxSktBase * sktBase = nullptr;
+	VxSktBase* sktBase = nullptr;
 	* ppoRetSkt = nullptr;
 	bool newConnection = false;
 	if( true == m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, newConnection, connectReason ) )
@@ -40,14 +40,14 @@ bool PluginMgr::pluginApiSktConnectTo(		EPluginType			ePluginType,	// plugin id
 
 //============================================================================
 //! close socket connection
-void PluginMgr::pluginApiSktClose( ESktCloseReason closeReason, VxSktBase * sktBase )
+void PluginMgr::pluginApiSktClose( ESktCloseReason closeReason, VxSktBase* sktBase )
 {
 	sktBase->closeSkt(closeReason);
 }
 
 //============================================================================
 //! close socket immediate.. don't bother to flush buffer
-void PluginMgr::pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase * sktBase )
+void PluginMgr::pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase* sktBase )
 {
 	sktBase->closeSkt(closeReason,  false);
 }

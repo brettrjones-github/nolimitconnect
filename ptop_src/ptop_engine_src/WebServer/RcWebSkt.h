@@ -95,7 +95,7 @@ public:
 	void						setWebServerPlugin( PluginBaseWebServer * poPlugin );
     PluginBaseWebServer *		getWebServerPlugin( void );
 
-	void						setIdentity( VxNetIdent * netIdent )		{ m_Ident = netIdent; }
+	void						setIdentity( VxNetIdent* netIdent )		{ m_Ident = netIdent; }
 	VxNetIdent *				getIdentity( void )							{ return m_Ident; }
 
 	RCODE						queWebsiteFile( const char *	pFileName,		// file name or password

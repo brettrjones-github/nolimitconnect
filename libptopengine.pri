@@ -220,12 +220,14 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareClient.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupClient.h \	
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkHost.h \
@@ -233,14 +235,12 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.h \
@@ -288,12 +288,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineCallbackInterface.h \
 	$$PWD/ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h \
     $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageCallbackInterface.h \
-    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageBuilder.h \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageSettings.h \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebServer.h \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebServerLib.h \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebSkt.h
+    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.h 
 
 
 SOURCES += \
@@ -487,14 +482,13 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBasePktHandlers.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServerFiles.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServerPktHandlers.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareClient.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupClient.cpp \
@@ -509,7 +503,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.cpp \
@@ -553,10 +546,6 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageBuilder.cpp \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebPageSettings.cpp \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebServer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebServerHttp.cpp \
-    $$PWD/ptop_src/ptop_engine_src/WebServer/RcWebSkt.cpp
+    $$PWD/ptop_src/ptop_engine_src/WebPageMgr/WebPageMgr.cpp 
+
 

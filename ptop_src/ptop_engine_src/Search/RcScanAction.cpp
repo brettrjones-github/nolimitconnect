@@ -134,8 +134,9 @@ void RcScanAction::searchConnectionsTimedOut( void )
 }
 
 //============================================================================
-void RcScanAction::addMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScanAction::addMatchedConnection( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
+	/* TODO reimplement scan
 	m_SearchActionMutex.lock();
 	m_MatchedConnectionsList.push_back( RcScanMatchedConnection( netIdent, sktBase ) );
 	if( eScanTypeProfilePic == m_eScanType )
@@ -166,6 +167,7 @@ void RcScanAction::addMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktB
 		m_SearchActionMutex.unlock();
 		m_SearchActionSemaphore.signal();
 	}
+	*/
 }
 
 //============================================================================
@@ -226,8 +228,8 @@ void RcScanAction::nextCamServerToGui()
 {
 	if( getShouldSendNext() )
 	{
-		VxNetIdent * netIdent;
-		VxSktBase * sktBase;
+		VxNetIdent* netIdent;
+		VxSktBase* sktBase;
 		while( getNextActionConnection( &netIdent, &sktBase ) )
 		{
 			//if( searchActionWebCamServer( netIdent, sktBase) )
@@ -241,13 +243,13 @@ void RcScanAction::nextCamServerToGui()
 
 
 //============================================================================
-void RcScanAction::searchActionPeopleSearch( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScanAction::searchActionPeopleSearch( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	// send this person to gui
 }
 
 //============================================================================
-void RcScanAction::searchActionFileSearch( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScanAction::searchActionFileSearch( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 
 }
@@ -267,7 +269,7 @@ void RcScanAction::cleanupScanResources( void )
 }
 
 //============================================================================
-RcScanMatchedConnection *  RcScanAction::findMatchedConnection( VxNetIdent * netIdent )
+RcScanMatchedConnection *  RcScanAction::findMatchedConnection( VxNetIdent* netIdent )
 {
 	std::vector<RcScanMatchedConnection>::iterator iter;
 	for( iter = m_MatchedConnectionsList.begin(); iter != m_MatchedConnectionsList.end(); ++iter ) 
@@ -302,13 +304,13 @@ void RcScanAction::onScanResultProfilePic(	VxNetIdent *	netIdent,
 
 //============================================================================
 // handle case where BigListInfo is about to be deleted
-void RcScanAction::onIdentDelete( VxNetIdent * netIdent )
+void RcScanAction::onIdentDelete( VxNetIdent* netIdent )
 {
 	removeIdent( netIdent );
 }
 
 //============================================================================
-void RcScanAction::removeIdent( VxNetIdent * netIdent )
+void RcScanAction::removeIdent( VxNetIdent* netIdent )
 {
 	std::vector<RcScanMatchedConnection>::iterator iter;
 	m_SearchActionMutex.lock();
@@ -327,12 +329,12 @@ void RcScanAction::removeIdent( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void RcScanAction::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScanAction::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 }
 
 //============================================================================
-void RcScanAction::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScanAction::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	std::vector<RcScanMatchedConnection>::iterator iter;
 	m_SearchActionMutex.lock();
@@ -351,7 +353,7 @@ void RcScanAction::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktB
 
 //============================================================================
 //! called when connection is lost
-void RcScanAction::onConnectionLost( VxSktBase * sktBase )
+void RcScanAction::onConnectionLost( VxSktBase* sktBase )
 {
 	m_SearchActionMutex.lock();
  
@@ -373,7 +375,7 @@ void RcScanAction::onConnectionLost( VxSktBase * sktBase )
 
 //============================================================================
 //! called when new better connection from user
-void RcScanAction::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void RcScanAction::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	std::vector<RcScanMatchedConnection>::iterator iter;
 	m_SearchActionMutex.lock();

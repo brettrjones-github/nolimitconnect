@@ -27,14 +27,14 @@ OfferBaseRxSession::OfferBaseRxSession( P2PEngine& engine, OfferBaseMgr& offerMg
 }
 
 //============================================================================
-OfferBaseRxSession::OfferBaseRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferBaseRxSession::OfferBaseRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent )
 : OfferBaseXferSession( engine, offerMgr, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-OfferBaseRxSession::OfferBaseRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferBaseRxSession::OfferBaseRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : OfferBaseXferSession( engine, offerMgr, lclSessionId, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );

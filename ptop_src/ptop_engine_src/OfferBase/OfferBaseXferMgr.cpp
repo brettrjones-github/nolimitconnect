@@ -289,7 +289,7 @@ void OfferBaseXferMgr::fileAboutToBeDeleted( std::string& fileName )
 }
 
 //============================================================================
-void OfferBaseXferMgr::onConnectionLost( VxSktBase * sktBase )
+void OfferBaseXferMgr::onConnectionLost( VxSktBase* sktBase )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock start\n");
@@ -355,7 +355,7 @@ bool OfferBaseXferMgr::requireFileXfer( EOfferType assetType )
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock start\n");
@@ -441,7 +441,7 @@ void OfferBaseXferMgr::assetSendComplete( OfferBaseTxSession * xferSession )
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock start\n");
@@ -516,7 +516,7 @@ void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	OfferBaseRxSession * xferSession = 0;
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq\n");
@@ -569,7 +569,7 @@ void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktOfferChunkReply * poPkt = (PktOfferChunkReply *)pktHdr;
 	OfferBaseTxSession * xferSession = 0;
@@ -611,7 +611,7 @@ static int cnt = 0;
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock start\n");
@@ -635,7 +635,7 @@ void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr 
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock start\n");
@@ -666,7 +666,7 @@ void OfferBaseXferMgr::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHd
 }
 
 //============================================================================
-void OfferBaseXferMgr::onPktOfferBaseXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void OfferBaseXferMgr::onPktOfferBaseXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseXferErr\n");
 	// TODO handle error
@@ -778,7 +778,7 @@ void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseTxSession * poSessionIn
 }
 
 //============================================================================
-OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent * netIdent )
+OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent* netIdent )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -863,7 +863,7 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 }
 
 //============================================================================
-OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase )
+OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -900,7 +900,7 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 }
 
 //============================================================================
-OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -942,7 +942,7 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 }
 
 //============================================================================
-OfferBaseTxSession * OfferBaseXferMgr::findTxSession( bool pluginIsLocked, VxNetIdent * netIdent )
+OfferBaseTxSession * OfferBaseXferMgr::findTxSession( bool pluginIsLocked, VxNetIdent* netIdent )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -1030,14 +1030,14 @@ OfferBaseTxSession * OfferBaseXferMgr::findTxSession( bool pluginIsLocked, VxGUI
 }
 
 //============================================================================
-OfferBaseTxSession * OfferBaseXferMgr::createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+OfferBaseTxSession * OfferBaseXferMgr::createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	OfferBaseTxSession * txSession = new OfferBaseTxSession( m_Engine, m_OfferMgr, sktBase, netIdent );
 	return txSession;
 }
 
 //============================================================================
-OfferBaseTxSession * OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase )
+OfferBaseTxSession * OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -1079,7 +1079,7 @@ OfferBaseTxSession * OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLocke
 }
 
 //============================================================================
-OfferBaseTxSession *	 OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+OfferBaseTxSession *	 OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -1137,7 +1137,7 @@ void OfferBaseXferMgr::fromGuiSendOfferBase( OfferBaseInfo& assetInfo )
 	if( hisInfo )
 	{
 		// first try to connect and send.. if that fails then que and will send when next connected
-		VxSktBase * sktBase = 0;
+		VxSktBase* sktBase = 0;
 		m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), hisInfo, 0, &sktBase );
 		if( 0 != sktBase )
 		{
@@ -1205,7 +1205,7 @@ void OfferBaseXferMgr::queOffer( OfferBaseInfo& assetInfo )
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase )
+EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -1792,7 +1792,7 @@ void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession * xferSession, Of
 void OfferBaseXferMgr::onOfferBaseSent( OfferBaseTxSession * xferSession, OfferBaseInfo& assetInfo, EXferError error, bool pluginIsLocked )
 {
 	//m_PluginMgr.getToGui().toGuiOfferBaseUploadComplete( xferSession->getRmtSessionId(), error );
-	VxSktBase * sktBase		= xferSession->getSkt();
+	VxSktBase* sktBase		= xferSession->getSkt();
 	VxNetIdent * hisIdent	= xferSession->getIdent();
 	if( eXferErrorNone != error )
 	{
@@ -1813,7 +1813,7 @@ void OfferBaseXferMgr::onOfferBaseSent( OfferBaseTxSession * xferSession, OfferB
 }
 
 //============================================================================
-void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase * sktBase )
+void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase )
 {
 	// check que and start next xfer
 	VxGUID& hisOnlineId = hisIdent->getMyOnlineId();
@@ -1840,7 +1840,7 @@ void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetId
 }
 
 //============================================================================
-void OfferBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void OfferBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	OfferBaseTxIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -1875,7 +1875,7 @@ void OfferBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poO
 }
 
 //============================================================================
-void OfferBaseXferMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void OfferBaseXferMgr::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	checkQueForMoreOffersToSend( false, netIdent, sktBase );
 }

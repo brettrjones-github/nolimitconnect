@@ -22,7 +22,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-PluginBaseWebServer::PluginBaseWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginBaseWebServer::PluginBaseWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_File(NULL)
 {
@@ -69,7 +69,7 @@ void PluginBaseWebServer::pluginShutdown( void )
 
 //============================================================================
 //! this is called if incoming http connection (NOTE: only used by WebServer)
-RCODE PluginBaseWebServer::handlePtopConnection( VxSktBase * sktBase, VxNetIdent * netIdent )
+RCODE PluginBaseWebServer::handlePtopConnection( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	RCODE rc = 0;
 	RcWebSkt * poWebSkt = NULL;
@@ -127,7 +127,7 @@ void PluginBaseWebServer::getMyPicFileName( std::string& strRetFileName )
 }
 
 //============================================================================
-WebRxSession * PluginBaseWebServer::findRxSession( VxNetIdent * netIdent )
+WebRxSession * PluginBaseWebServer::findRxSession( VxNetIdent* netIdent )
 {
 	WebRxIter oMapIter = m_WebRxSessions.find( netIdent );
 	if( oMapIter != m_WebRxSessions.end() )
@@ -138,7 +138,7 @@ WebRxSession * PluginBaseWebServer::findRxSession( VxNetIdent * netIdent )
 }
 
 //============================================================================
-WebRxSession * PluginBaseWebServer::findOrCreateRxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+WebRxSession * PluginBaseWebServer::findOrCreateRxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	WebRxSession * poSession = findRxSession( netIdent );
 	if( NULL == poSession )
@@ -156,7 +156,7 @@ WebRxSession * PluginBaseWebServer::findOrCreateRxSession( VxNetIdent * netIdent
 }
 
 //============================================================================
-WebTxSession * PluginBaseWebServer::findTxSession( VxNetIdent * netIdent )
+WebTxSession * PluginBaseWebServer::findTxSession( VxNetIdent* netIdent )
 {
 	WebTxIter oMapIter = m_WebTxSessions.find( netIdent );
 	if( oMapIter != m_WebTxSessions.end() )
@@ -167,7 +167,7 @@ WebTxSession * PluginBaseWebServer::findTxSession( VxNetIdent * netIdent )
 }
 
 //============================================================================
-WebTxSession * PluginBaseWebServer::findOrCreateTxSession( VxNetIdent * netIdent, VxSktBase * sktBase )
+WebTxSession * PluginBaseWebServer::findOrCreateTxSession( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	WebTxSession * poSession = findTxSession( netIdent );
 	if( NULL == poSession )
@@ -185,7 +185,7 @@ WebTxSession * PluginBaseWebServer::findOrCreateTxSession( VxNetIdent * netIdent
 }
 
 //============================================================================
-WebProxySession * PluginBaseWebServer::findWebProxySession( VxNetIdent * netIdent )
+WebProxySession * PluginBaseWebServer::findWebProxySession( VxNetIdent* netIdent )
 {
 	WebProxyIter oMapIter = m_WebProxySessions.find( netIdent );
 	if( oMapIter != m_WebProxySessions.end() )
@@ -196,7 +196,7 @@ WebProxySession * PluginBaseWebServer::findWebProxySession( VxNetIdent * netIden
 }
 
 //============================================================================
-bool PluginBaseWebServer::searchActionProfilePic( VxNetIdent * netIdent, VxSktBase * sktBase )
+bool PluginBaseWebServer::searchActionProfilePic( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	PktMyPicSendReq oPkt;
 	return txPacket( netIdent, sktBase, &oPkt );

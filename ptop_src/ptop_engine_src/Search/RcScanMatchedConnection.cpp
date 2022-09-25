@@ -19,7 +19,7 @@
 
 
 //============================================================================
-RcScanMatchedConnection::RcScanMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktBase )
+RcScanMatchedConnection::RcScanMatchedConnection( VxNetIdent* netIdent, VxSktBase* sktBase )
 : m_Ident( netIdent )
 , m_Skt( sktBase )
 , m_ActionStartTimeMs( 0 )

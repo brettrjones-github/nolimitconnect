@@ -72,7 +72,7 @@ public:
 
 	virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual bool				fromGuiSetGameValueVar( EPluginType	    ePluginType, 
 														VxGUID&		    oOnlineId,
@@ -92,11 +92,11 @@ public:
                                                     bool				bDisconnectAfterSend = false,
                                                     EPluginType         overridePlugin = ePluginTypeInvalid );
 	void						pluginApiLog( EPluginType ePluginType, const char * pMsg, ... );
-	virtual EPluginAccess	    pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent );
+	virtual EPluginAccess	    pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent* netIdent );
 	virtual VxNetIdent *		pluginApiGetMyIdentity( void );
 	virtual VxNetIdent *		pluginApiFindUser( const char * pUserName );
 
-	virtual void				pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent * netIdent, int iRotation );
+	virtual void				pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent* netIdent, int iRotation );
 
 	virtual void				pluginApiWantAppIdle( EPluginType ePluginType, bool bWantAppIdle );
 
@@ -107,8 +107,8 @@ public:
 														int					pvUserData,			// plugin defined data
 														VxSktBase * *		ppoRetSkt, 			// returned Socket
 														EConnectReason		connectReason = eConnectReasonPlugin );	
-	virtual void				pluginApiSktClose( ESktCloseReason closeReason, VxSktBase * sktBase );
-	virtual void				pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase * sktBase );
+	virtual void				pluginApiSktClose( ESktCloseReason closeReason, VxSktBase* sktBase );
+	virtual void				pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase* sktBase );
 	void						pluginApiToGuiSessionEnded(	EPluginType		ePluginType,		// plugin
 															VxNetIdent *	netIdent,			// identity of friend
 															int				pvUserData,			// plugin defined data
@@ -128,25 +128,25 @@ public:
     virtual void				onThreadOncePer15Minutes( void );
 	virtual void				onAfterUserLogOnThreaded( void );
 
-	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onConnectionLost( VxSktBase * sktBase );	
+	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual void				onConnectionLost( VxSktBase* sktBase );	
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ); 
 	virtual void				fromGuiSendAsset( AssetBaseInfo& assetInfo );
 	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission );
 
-	virtual EPluginAccess		canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );
+	virtual EPluginAccess		canAcceptNewSession( EPluginType ePluginType, VxNetIdent* netIdent );
 
 	//! return true if access ok
-	bool						canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent );
+	bool						canAccessPlugin( EPluginType ePluginType, VxNetIdent* netIdent );
 
-	void						replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	void						replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
-	void						handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	void						handleFirstNetServiceConnection( VxSktBase * sktBase );
-	bool						handleFirstWebPageConnection( VxSktBase * sktBase );
+	void						handleNonSystemPackets( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	void						handleFirstNetServiceConnection( VxSktBase* sktBase );
+	bool						handleFirstWebPageConnection( VxSktBase* sktBase );
 
 	PluginBase*				    findPlugin( EPluginType ePluginType );
     PluginBase*				    findHostClientPlugin( EHostType hostType );

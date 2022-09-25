@@ -65,7 +65,7 @@ public:
 	virtual void				onPktAnnUpdated( void );
 	virtual void				onOncePerSecond( void );
 
-	virtual	void				handleTcpSktCallback( VxSktBase * sktBase );
+	virtual	void				handleTcpSktCallback( VxSktBase* sktBase );
 
 protected:
 	P2PEngine&					m_Engine;

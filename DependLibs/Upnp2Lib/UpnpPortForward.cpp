@@ -239,7 +239,7 @@ void UpnpPortForward::sendUpnpDeviceSearchBroadcast( void )
 }
 
 //============================================================================
-void UpnpPortForward::doSearchResponseCallback( VxSktBase * sktBase )
+void UpnpPortForward::doSearchResponseCallback( VxSktBase* sktBase )
 {
 	if( shouldAbort() )
 	{

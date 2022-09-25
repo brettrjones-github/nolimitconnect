@@ -37,7 +37,7 @@ public:
 	{
 	}
 
-	RcConnectInfo( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bIsRelayClient = false, bool bIsRelayServer = false  )
+	RcConnectInfo( VxSktBase* sktBase, BigListInfo * poBigListInfo, bool bIsRelayClient = false, bool bIsRelayServer = false  )
 		: m_SktBase(sktBase)
 		, m_BigListInfo(poBigListInfo)
 		, m_bIsRelayClient(bIsRelayClient)
@@ -76,14 +76,14 @@ public:
 																EFriendState	eMyFriendshipToHim,
 																EFriendState	eHisFriendshipToMe );
 
-	void						onConnectionLost( VxSktBase * sktBase );
+	void						onConnectionLost( VxSktBase* sktBase );
 
     bool						isContactConnected( const VxGUID&	onlineId );
 	bool						isRelayRequired( void )								{ return m_bRequireRelayService; }
 	void						setIsRelayRequired( bool bRequireRelayService )		{ m_bRequireRelayService = bRequireRelayService; }
 	bool						isMyRelayAvailable( void )							{ return m_RelayServiceConnection?1:0; }
 
-	RcConnectInfo *				addConnection( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bNewContact = false );
+	RcConnectInfo *				addConnection( VxSktBase* sktBase, BigListInfo * poBigListInfo, bool bNewContact = false );
     RcConnectInfo *				addConnection( const VxGUID& oOnlineId, RcConnectInfo * poInfo, bool bNewContact = false );
     RcConnectInfo *				findConnection( const VxGUID& oOnlineId, bool listIsLocked );
     void						removeConnection( const VxGUID& oOnlineId );

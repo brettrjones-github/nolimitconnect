@@ -28,8 +28,8 @@ class User
 public:
     User();
     User( P2PEngine& engine );
-    User( P2PEngine& engine, VxNetIdent * netIdent );
-    User( P2PEngine& engine,  VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    User( P2PEngine& engine, VxNetIdent* netIdent );
+    User( P2PEngine& engine,  VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     User(const User& rhs );
 	virtual ~User() = default;
 
@@ -39,7 +39,7 @@ public:
     void						lockUser( void )						{ m_UserMutex.lock(); }
     void						unlockUser( void )						{ m_UserMutex.unlock(); }
 
-    void                        setNetIdent( VxNetIdent * netIdent );
+    void                        setNetIdent( VxNetIdent* netIdent );
     VxNetIdent *                getNetIdent( void )                     { return m_NetIdent; }
     VxGUID&                     getMyOnlineId( void )                   { return m_MyOnlineId; }
 

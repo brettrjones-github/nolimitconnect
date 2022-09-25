@@ -31,7 +31,7 @@ FileTxSession::FileTxSession()
 }
 
 //============================================================================
-FileTxSession::FileTxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+FileTxSession::FileTxSession( VxSktBase* sktBase, VxNetIdent* netIdent )
 : FileShareXferSession( sktBase, netIdent )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )
@@ -42,7 +42,7 @@ FileTxSession::FileTxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
 }
 
 //============================================================================
-FileTxSession::FileTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+FileTxSession::FileTxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : FileShareXferSession( lclSessionId, sktBase, netIdent )
 , m_iOutstandingAckCnt(0)
 , m_bSendingPkts(false)

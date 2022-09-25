@@ -48,9 +48,9 @@ public:
 
 	bool						isPluginSingleSession( void );
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) = 0;
-	virtual void				onConnectionLost( VxSktBase * sktBase ) = 0;
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
+	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) = 0;
+	virtual void				onConnectionLost( VxSktBase* sktBase ) = 0;
 
 
 protected:

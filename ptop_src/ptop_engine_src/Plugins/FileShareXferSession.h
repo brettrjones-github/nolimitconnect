@@ -27,8 +27,8 @@ class FileShareXferSession
 {
 public:
 	FileShareXferSession();
-	FileShareXferSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	FileShareXferSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	FileShareXferSession( VxSktBase* sktBase, VxNetIdent* netIdent );
+	FileShareXferSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
 	VxNetIdent *				getIdent( void )							{ return m_Ident; }

@@ -25,7 +25,7 @@
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h>
 #include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
 
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
 
 #include <ptop_src/ptop_engine_src/Search/RcScan.h>
@@ -109,7 +109,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_NetworkStateMachine( *new NetworkStateMachine( *this, m_NetworkMgr ) )
 	, m_PluginMgr( *new PluginMgr( *this ) )
 	, m_PluginSettingMgr( *this )
-	, m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn, ePluginTypeFileShareServer ) )
+	, m_PluginFileShareServer( new PluginFileShareServer( *this, m_PluginMgr, &m_PktAnn, ePluginTypeFileShareServer ) )
 	, m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn, ePluginTypeNetServices ) )
 	, m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
 	, m_RelayMgr( *this )
@@ -228,7 +228,7 @@ void P2PEngine::shutdownEngine( void )
 	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: waiting threads exit" );
 	//delete (IsPortOpenTest *)&m_IsPortOpenTest;
 	//delete (PluginNetServices *)&m_PluginNetServices;
-	//delete (PluginServiceFileShare *)&m_PluginServiceFileShare;
+	//delete (PluginFileShareServer *)&m_PluginFileShareServer;
 	//delete &m_PluginServiceRelay;
 	//delete &m_MediaProcessor;
 	//delete &m_PluginMgr;
@@ -252,7 +252,7 @@ void P2PEngine::shutdownEngine( void )
 		VxSleep( 1000 );
 	}
 	
-	m_PluginServiceFileShare		= 0;
+	m_PluginFileShareServer		= 0;
 	m_PluginNetServices		= 0;
 	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: done" );
 }
@@ -264,7 +264,7 @@ void P2PEngine::fromGuiKickWatchdog( void )
 }
 
 //============================================================================
-void P2PEngine::onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent )
+void P2PEngine::onSessionStart( EPluginType ePluginType, VxNetIdent* netIdent )
 {
 	bool shouldUpdateLastSessionTime = false;
 	switch( ePluginType )

@@ -198,7 +198,7 @@ PktHandlerBase::PktHandlerBase()
 
 //============================================================================
 //! Handle Incoming packet.. use function jump table for speed
-void PktHandlerBase::handlePkt( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::handlePkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     if( VxIsAppShuttingDown() || !sktBase->isConnected() )
     {
@@ -216,462 +216,462 @@ void PktHandlerBase::handlePkt( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 //=== packet handlers ===//
 //============================================================================
-void PktHandlerBase::onPktUnhandled( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktUnhandled( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 }
 
 //============================================================================
-void PktHandlerBase::onPktInvalid( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktInvalid( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogMsg( LOG_ERROR, "PktHandlerBase::onPktInvalid type 0x%x len 0x%x\n", pktHdr->getPktType(), pktHdr->getPktLength() );
 }
 
 //============================================================================
-void PktHandlerBase::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktChatReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktChatReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVideoFeedReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFindFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFindFileReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFindFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFindFileReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileListReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileListReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileInfoReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFileShareErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAssetXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktMultiSessionReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktMultiSessionReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktSessionStartReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktSessionStopReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAnnounce( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktAnnList( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktAnnList( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktHostUnJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktHostUnJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktScanReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktScanReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktScanReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktScanReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktMyPicSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktMyPicSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktWebServerPicChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktWebServerPicChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktWebServerGetChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktWebServerGetChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktWebServerPutChunkTx( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktWebServerPutChunkAck( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktTodGameStats( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktTodGameAction( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktTodGameValue( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktTcpPunch( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktTcpPunch( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktPingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktPingReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktPingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktPingReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktImAliveReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktImAliveReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktImAliveReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostJoinReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
@@ -689,103 +689,103 @@ void PktHandlerBase::onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFriendOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFriendOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktFriendOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktThumbXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
@@ -793,43 +793,43 @@ void PktHandlerBase::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 // offers
 
 //============================================================================
-void PktHandlerBase::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktOfferXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }

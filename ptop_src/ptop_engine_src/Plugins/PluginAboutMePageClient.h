@@ -19,7 +19,7 @@
 class PluginAboutMePageClient : public PluginBaseFilesClient
 {
 public:
-    PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginAboutMePageClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginAboutMePageClient() = default;
 
 	bool						getIsInitialized( void )			{ return m_WebPageClientReady; }

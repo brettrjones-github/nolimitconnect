@@ -16,7 +16,7 @@
 #include "RxSession.h"
 
 //============================================================================
-RxSession::RxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+RxSession::RxSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : PluginSessionBase( sktBase, netIdent, pluginType )
 , m_PktVideoFeedPic( 0 )
 {
@@ -25,7 +25,7 @@ RxSession::RxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pl
 }
 
 //============================================================================
-RxSession::RxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+RxSession::RxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : PluginSessionBase( lclSessionId, sktBase, netIdent, pluginType )
 , m_PktVideoFeedPic( 0 )
 {

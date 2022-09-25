@@ -26,13 +26,13 @@ OfferHostTxSession::OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMg
 }
 
 //============================================================================
-OfferHostTxSession::OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferHostTxSession::OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent )
 : OfferHostXferSession( engine, offerMgr, sktBase, netIdent )
 {
 }
 
 //============================================================================
-OfferHostTxSession::OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferHostTxSession::OfferHostTxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : OfferHostXferSession( engine, offerMgr, lclSessionId, sktBase, netIdent )
 {
 }

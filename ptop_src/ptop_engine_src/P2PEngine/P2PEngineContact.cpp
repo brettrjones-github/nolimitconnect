@@ -27,7 +27,7 @@
 
 //============================================================================
 //! return true if user is viewing this kind of friend
-bool P2PEngine::shouldNotifyGui( VxNetIdent * netIdent )
+bool P2PEngine::shouldNotifyGui( VxNetIdent* netIdent )
 {
 	EFriendState eFriendship = netIdent->getMyFriendshipToHim();
 	switch( m_eFriendView )

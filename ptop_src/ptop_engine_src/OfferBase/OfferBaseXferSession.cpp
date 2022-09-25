@@ -33,7 +33,7 @@ OfferBaseXferSession::OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& off
 }
 
 //============================================================================
-OfferBaseXferSession::OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferBaseXferSession::OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent )
 : m_Engine( engine )
 , m_OfferMgr( offerMgr )
 , m_FileXferInfo()
@@ -44,7 +44,7 @@ OfferBaseXferSession::OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& off
 }
 
 //============================================================================
-OfferBaseXferSession::OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+OfferBaseXferSession::OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : m_Engine( engine )
 , m_OfferMgr( offerMgr )
 , m_FileXferInfo( lclSessionId )

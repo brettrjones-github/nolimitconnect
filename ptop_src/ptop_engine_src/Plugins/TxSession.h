@@ -19,8 +19,8 @@
 class TxSession : public PluginSessionBase
 {
 public:
-	TxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	TxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	TxSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
+	TxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
 	virtual ~TxSession();
 
 	void						setOutstandingAckCnt( int cnt )				{ m_iOutstandingAckCnt = cnt; }

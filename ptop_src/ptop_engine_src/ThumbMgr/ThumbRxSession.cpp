@@ -28,14 +28,14 @@ ThumbRxSession::ThumbRxSession( P2PEngine& engine )
 }
 
 //============================================================================
-ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : ThumbXferSession( engine, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : ThumbXferSession( engine, lclSessionId, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );

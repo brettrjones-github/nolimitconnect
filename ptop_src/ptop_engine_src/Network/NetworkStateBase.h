@@ -41,14 +41,14 @@ public:
 	virtual void				runNetworkState( void )										{};
 	virtual void				exitNetworkState( void )									{};
 
-	virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent )				{};
+	virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent )				{};
 	virtual void				fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork = false ){};
 	virtual void				fromGuiNetworkLost( void )									{};
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) { return eNetLayerStateUndefined; }
 
 	virtual void				fromGuiUseRelay( VxConnectInfo& connectInfo, bool useRelay ) {}; // so if searching for relay can try immediately 
 
-	virtual void				onPktRelayServiceReply( VxSktBase * sktBase, PktRelayServiceReply * pkt ) {};
+	virtual void				onPktRelayServiceReply( VxSktBase* sktBase, PktRelayServiceReply * pkt ) {};
 
 	virtual void				checkAndHandleNetworkEvents( void );
 

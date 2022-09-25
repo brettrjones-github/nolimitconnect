@@ -21,7 +21,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-PluginStoryboardClient::PluginStoryboardClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginStoryboardClient::PluginStoryboardClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBaseFilesClient( engine, pluginMgr, myIdent, pluginType, "StoryboardFilesClient.db3" )
 {
 	setPluginType( ePluginTypeStoryboardClient );
@@ -39,7 +39,7 @@ void PluginStoryboardClient::onAfterUserLogOnThreaded( void )
 //============================================================================
 void PluginStoryboardClient::onLoadedFilesReady( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
 {
-	LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::onLoadedFilesReady" );
+	LogMsg( LOG_VERBOSE, "PluginStoryboardClient::onLoadedFilesReady" );
 	checkIsWebPageClientReady();
 }
 
@@ -204,7 +204,7 @@ bool PluginStoryboardClient::fromGuiDownloadWebPage( EWebPageType webPageType, V
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::fromGuiDownloadWebPage invalid EWebPageType" );
+		LogMsg( LOG_VERBOSE, "PluginStoryboardClient::fromGuiDownloadWebPage invalid EWebPageType" );
 	}
 
 	return result;
@@ -222,7 +222,7 @@ bool PluginStoryboardClient::fromGuiCancelWebPage( EWebPageType webPageType, VxG
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "PluginAboutMePageClient::fromGuiCancelWebPage invalid EWebPageType" );
+		LogMsg( LOG_VERBOSE, "PluginStoryboardClient::fromGuiCancelWebPage invalid EWebPageType" );
 	}
 
 	return result;
@@ -252,7 +252,7 @@ void PluginStoryboardClient::fileInfoSearchCompleted( VxGUID& searchSessionId, V
 {
 	if( commErr == eCommErrNone )
 	{
-		LogMsg( LOG_VERBOSE, "FileInfoListMgr::hostSearchCompleted with no errors" );
+		LogMsg( LOG_VERBOSE, "PluginStoryboardClient::fileInfoSearchCompleted with no errors" );
 		bool webIndexFileFound{ false };
 		for( auto& fileInfo : m_SearchFileInfoList )
 		{
@@ -281,7 +281,7 @@ void PluginStoryboardClient::fileInfoSearchCompleted( VxGUID& searchSessionId, V
 	else
 	{
 		cancelDownload();
-		LogMsg( LOG_ERROR, "FileInfoListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+		LogMsg( LOG_ERROR, "PluginStoryboardClient::fileInfoSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
 		m_Engine.getToGui().toGuiPluginCommError( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoFailed, commErr );
 	}
 }

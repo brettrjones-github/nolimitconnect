@@ -22,8 +22,8 @@ class AssetTxSession : public AssetXferSession
 {
 public:
 	AssetTxSession( P2PEngine& engine );
-	AssetTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	AssetTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	AssetTxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	AssetTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	void						reset( void );
 	void						cancelUpload( VxGUID& fileInstance );

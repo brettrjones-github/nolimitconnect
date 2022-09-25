@@ -32,7 +32,7 @@ AssetBaseTxSession::AssetBaseTxSession( P2PEngine& engine )
 }
 
 //============================================================================
-AssetBaseTxSession::AssetBaseTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+AssetBaseTxSession::AssetBaseTxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : AssetBaseXferSession( engine, sktBase, netIdent )
 , m_iOutstandingAckCnt( 0 )
 , m_bSendingPkts( false )
@@ -43,7 +43,7 @@ AssetBaseTxSession::AssetBaseTxSession( P2PEngine& engine, VxSktBase * sktBase, 
 }
 
 //============================================================================
-AssetBaseTxSession::AssetBaseTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+AssetBaseTxSession::AssetBaseTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : AssetBaseXferSession( engine, lclSessionId, sktBase, netIdent )
 , m_iOutstandingAckCnt(0)
 , m_bSendingPkts(false)

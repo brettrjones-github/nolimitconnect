@@ -28,7 +28,7 @@ class PluginBaseHostClient : public PluginBase, public IConnectRequestCallback
 {
 public:
 
-    PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginBaseHostClient() override = default;
 
     //=== hosting ===//
@@ -71,10 +71,10 @@ protected:
     virtual void				sendUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );
 
 
-    virtual void				onContactWentOnline         ( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};
-    virtual void				onContactWentOffline        ( VxNetIdent *	netIdent, VxSktBase * sktBase ) override {};
-    virtual void				replaceConnection           ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
-    virtual void				onConnectionLost            ( VxSktBase * sktBase ) override {};
+    virtual void				onContactWentOnline         ( VxNetIdent* netIdent, VxSktBase* sktBase ) override {};
+    virtual void				onContactWentOffline        ( VxNetIdent *	netIdent, VxSktBase* sktBase ) override {};
+    virtual void				replaceConnection           ( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
+    virtual void				onConnectionLost            ( VxSktBase* sktBase ) override {};
 
     virtual void				onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 

@@ -29,7 +29,7 @@ VxSktWaitReason::VxSktWaitReason()
 }
 
 //============================================================================
-VxSktWaitReason::VxSktWaitReason( VxSktBase * sktBase, uint32_t u32WaitReason, uint64_t u32TimeExpiresSysTimeMs, VxPktHdr * poPkt, void * pvWaitReason )
+VxSktWaitReason::VxSktWaitReason( VxSktBase* sktBase, uint32_t u32WaitReason, uint64_t u32TimeExpiresSysTimeMs, VxPktHdr * poPkt, void * pvWaitReason )
 : m_Skt(sktBase)
 , m_Pkt(0)
 , m_u64TimeExpires( u32TimeExpiresSysTimeMs )
@@ -145,7 +145,7 @@ void VxSktWaitingList::onOncePerSecond( void )
 }
 
 //============================================================================
-void VxSktWaitingList::onConnectionLost( VxSktBase * sktBase )
+void VxSktWaitingList::onConnectionLost( VxSktBase* sktBase )
 {
 	if( m_SktWaitList.size() )
 	{
@@ -204,7 +204,7 @@ void VxSktWaitingList::addWaiting(	VxSktBase *		sktBase,
 }
 
 //============================================================================
-void VxSktWaitingList::removeWaiting( VxSktBase * sktBase, uint32_t u32WaitReason, void * pvWaitInstance )
+void VxSktWaitingList::removeWaiting( VxSktBase* sktBase, uint32_t u32WaitReason, void * pvWaitInstance )
 {
 	if( m_SktWaitList.size() )
 	{

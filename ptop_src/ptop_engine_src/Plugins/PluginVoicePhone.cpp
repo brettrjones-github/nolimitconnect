@@ -31,7 +31,7 @@
 #endif
 
 //============================================================================
-PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
@@ -79,21 +79,21 @@ bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginVoicePhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginVoicePhone::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
 //! called to start service or session with remote friend
-void PluginVoicePhone::fromGuiStartPluginSession( VxNetIdent * netIdent,int, VxGUID )
+void PluginVoicePhone::fromGuiStartPluginSession( VxNetIdent* netIdent,int, VxGUID )
 {
 	m_VoiceFeedMgr.fromGuiStartPluginSession( false, eAppModuleVoicePhone, netIdent );
 }
 
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginVoicePhone::fromGuiStopPluginSession( VxNetIdent * netIdent, int, VxGUID )
+void PluginVoicePhone::fromGuiStopPluginSession( VxNetIdent* netIdent, int, VxGUID )
 {
 	m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleVoicePhone, netIdent );
 	m_PluginSessionMgr.fromGuiStopPluginSession( false, netIdent );
@@ -141,37 +141,37 @@ void PluginVoicePhone::callbackAudioOutSpaceAvail( int freeSpaceLen )
 }
 
 //============================================================================
-void PluginVoicePhone::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginVoicePhone::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktPluginOfferReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginVoicePhone::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginVoicePhone::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktPluginOfferReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginVoicePhone::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginVoicePhone::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktSessionStopReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginVoicePhone::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginVoicePhone::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VoiceFeedMgr.onPktVoiceReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginVoicePhone::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginVoicePhone::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VoiceFeedMgr.onPktVoiceReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginVoicePhone::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginVoicePhone::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktChatReq * poPkt = (PktChatReq *)pktHdr;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -196,19 +196,19 @@ void PluginVoicePhone::onSessionEnded( PluginSessionBase * session, bool pluginI
 }
 
 //============================================================================
-void PluginVoicePhone::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginVoicePhone::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginVoicePhone::onConnectionLost( VxSktBase * sktBase )
+void PluginVoicePhone::onConnectionLost( VxSktBase* sktBase )
 {
 	m_PluginSessionMgr.onConnectionLost( sktBase );
 }
 
 //============================================================================
-void PluginVoicePhone::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginVoicePhone::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	m_VoiceFeedMgr.fromGuiStopPluginSession( false, eAppModuleVoicePhone, netIdent );
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );

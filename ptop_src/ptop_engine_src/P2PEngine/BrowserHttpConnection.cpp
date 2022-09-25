@@ -58,7 +58,7 @@ void RcHttpConnection::handlePtopConnection( RcSktBase * sktBase )
 	if( true == parseOnlineId( sktBase, &oOnlineId ) )
 	{
 		std::string strOnlineIdDesc = oOnlineId.describeVxGUID();
-		VxNetIdent * netIdent = NULL;
+		VxNetIdent* netIdent = NULL;
 		if( oOnlineId == m_Engine->getMyPktAnn()->getMyOnlineId() )
 		{
 			netIdent = m_Engine->getMyPktAnn();

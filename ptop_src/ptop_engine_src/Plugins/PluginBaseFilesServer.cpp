@@ -16,7 +16,7 @@
 #include <PktLib/PktsFileInfo.h>
 
 //============================================================================
-PluginBaseFilesServer::PluginBaseFilesServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType, std::string fileInfoDbName )
+PluginBaseFilesServer::PluginBaseFilesServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName )
 : PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, fileInfoDbName )
 {
 }

@@ -95,7 +95,7 @@ void AppletPeerTodGame::onInSession( bool isInSession )
 	{
 		//setStatusText( tr( "In Truth Or Dare Session" ) );
 		m_TodGameLogic.beginGame( ! m_OfferSessionLogic.isRmtInitiated() );
-		//m_Engine.fromGuiStartPluginSession( VxNetIdent * netIdent, void * pvUserData )
+		//m_Engine.fromGuiStartPluginSession( VxNetIdent* netIdent, void * pvUserData )
 	}
 	//else
 	//{

@@ -135,7 +135,7 @@ void INlc::fromGuiAppPauseOrResume( bool isPaused )
 }
 
 //============================================================================
-void INlc::fromGuiUserLoggedOn( VxNetIdent * netIdent )
+void INlc::fromGuiUserLoggedOn( VxNetIdent* netIdent )
 {
     getPtoP().fromGuiUserLoggedOn( netIdent );
 }
@@ -572,7 +572,7 @@ InetAddress INlc::fromGuiGetMyIPv6Address( void )
 }
 
 //============================================================================
-void INlc::fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly )
+void INlc::fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly )
 {
     getPtoP().fromGuiUpdateMyIdent( netIdent, permissionAndStatsOnly );
 }

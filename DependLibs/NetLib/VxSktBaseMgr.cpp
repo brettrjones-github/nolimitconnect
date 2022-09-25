@@ -26,7 +26,7 @@
 namespace
 {
 	//============================================================================
-	void VxSktBaseMgrReceiveFunction(  VxSktBase * sktBase, void * pvUserData )
+	void VxSktBaseMgrReceiveFunction(  VxSktBase* sktBase, void * pvUserData )
 	{
 		vx_assert( sktBase );
 		vx_assert( sktBase->m_SktMgr );
@@ -34,7 +34,7 @@ namespace
 	}
 
 	////============================================================================
-	//void VxSktBaseMgrTransmitFunction(  VxSktBase * sktBase, void * pvUserData )
+	//void VxSktBaseMgrTransmitFunction(  VxSktBase* sktBase, void * pvUserData )
 	//{
 	//	vx_assert( sktBase );
 	//	vx_assert( sktBase->m_SktMgr );
@@ -123,7 +123,7 @@ void VxSktBaseMgr::sktBaseMgrUnlock( void )
 
 //============================================================================
 //! add a new socket to manage
-void VxSktBaseMgr::addSkt( VxSktBase * sktBase )
+void VxSktBaseMgr::addSkt( VxSktBase* sktBase )
 {
 	//LogMsg( LOG_INFO, "Adding %s to VxSktBaseMgr skt list\n", sktBase->describeSktType().c_str() );
 	sktBaseMgrLock();
@@ -161,7 +161,7 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 }
 
 //============================================================================
-bool VxSktBaseMgr::isSktActive( VxSktBase * sktBase )
+bool VxSktBaseMgr::isSktActive( VxSktBase* sktBase )
 {
     if( !sktBase )
     {
@@ -265,13 +265,13 @@ VxSktBase * VxSktBaseMgr::makeNewAcceptSkt( void )
 
 //============================================================================
 //! handle transmit callbacks from sockets
-void VxSktBaseMgr::doTransmitCallback( VxSktBase * sktBase )
+void VxSktBaseMgr::doTransmitCallback( VxSktBase* sktBase )
 {
 	TxedPkt( sktBase->m_iLastTxLen );
 }
 
 //============================================================================
-void VxSktBaseMgr::doReceiveCallback( VxSktBase * sktBase )
+void VxSktBaseMgr::doReceiveCallback( VxSktBase* sktBase )
 {
 	ESktCallbackReason eCallbackReason = sktBase->getCallbackReason();
 	m_pfnUserReceive( sktBase, m_pvRxCallbackUserData );
@@ -282,7 +282,7 @@ void VxSktBaseMgr::doReceiveCallback( VxSktBase * sktBase )
 }
 
 //============================================================================
-void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
+void VxSktBaseMgr::handleSktCloseEvent( VxSktBase* sktBase )
 {
 	//LogMsg( LOG_INFO, "VxSktBaseMgr::handleSktCloseEvent: for skt %d 0x%x \n", sktBase->m_SktNumber, sktBase );
     sktBaseMgrLock();
@@ -369,7 +369,7 @@ void VxSktBaseMgr::doSktDeleteCleanup()
 
 //============================================================================
 //! move to erase/delete when safe to do so
-void VxSktBaseMgr::moveToEraseList( VxSktBase * sktBase )
+void VxSktBaseMgr::moveToEraseList( VxSktBase* sktBase )
 {
     m_SktMgrMutex.lock( __FILE__, __LINE__ ); // dont let other threads mess with array while we remove the socket
     for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )

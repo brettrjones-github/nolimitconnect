@@ -23,12 +23,12 @@ class PluginConnectionTestHost : public PluginBaseHostService
 {
 public:
 
-    PluginConnectionTestHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    PluginConnectionTestHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginConnectionTestHost() override = default;
 
     void                        testIsMyPortOpen( void );
-    RCODE                       handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr ) override;
-    RCODE                       internalHandlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+    RCODE                       handlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr ) override;
+    RCODE                       internalHandlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
 
 protected:
     NetServicesMgr&				m_NetServicesMgr;

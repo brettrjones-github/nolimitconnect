@@ -203,7 +203,7 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 //============================================================================
 void P2PEngine::attemptConnectionToRelayService( BigListInfo * poInfo )
 {
-	VxSktBase * sktBase = nullptr;
+	VxSktBase* sktBase = nullptr;
 	m_NetConnector.directConnectTo( poInfo->getConnectInfo(), &sktBase, eConnectReasonRelayService );
 }
 

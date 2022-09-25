@@ -72,7 +72,7 @@ void P2PConnectList::fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 }
 
 //============================================================================
-RcConnectInfo * P2PConnectList::addConnection( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bNewContact )
+RcConnectInfo * P2PConnectList::addConnection( VxSktBase* sktBase, BigListInfo * poBigListInfo, bool bNewContact )
 {
 	if( NULL != poBigListInfo )
 	{
@@ -269,7 +269,7 @@ void P2PConnectList::removeSocket( VxSktBase* sktBase, bool isLocked )
 }
 
 //============================================================================
-void P2PConnectList::onConnectionLost( VxSktBase * sktBase )
+void P2PConnectList::onConnectionLost( VxSktBase* sktBase )
 {
 	removeSocket( sktBase, false );
 }        

@@ -22,8 +22,8 @@ class ThumbTxSession : public ThumbXferSession
 {
 public:
 	ThumbTxSession( P2PEngine& engine );
-	ThumbTxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	ThumbTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	ThumbTxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ThumbTxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	void						reset( void );
 	void						cancelUpload( VxGUID& fileInstance );

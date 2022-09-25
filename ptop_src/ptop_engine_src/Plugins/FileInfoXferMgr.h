@@ -75,9 +75,9 @@ public:
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
 
-	virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = NULL,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = NULL,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	void						fromGuiCancelDownload( VxGUID& fileInstance );
 	void						fromGuiCancelUpload( VxGUID& fileInstance );
@@ -99,30 +99,30 @@ public:
 
 	virtual bool				startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
-	virtual void				onConnectionLost( VxSktBase * sktBase );
+	virtual void				onConnectionLost( VxSktBase* sktBase );
 
-	virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				onPktFileGetReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileChunkReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileGetCompleteReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFindFileReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFindFileReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileListReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileListReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileInfoReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileInfoReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktFileInfoErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktFileGetReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileGetReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileChunkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileChunkReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileGetCompleteReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileGetCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileSendCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileSendCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFindFileReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFindFileReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileListReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileListReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoErr			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
 protected:
 	virtual void				onFileReceived( FileRxSession * xferSession, const char * pFileName, EXferError error );
@@ -131,15 +131,15 @@ protected:
 	bool						isFileDownloading( VxSha1Hash& fileHashId );
 	bool						isFileInDownloadFolder( const char * pPartialFileName );
 
-	virtual FileRxSession *		findRxSession( VxNetIdent * netIdent );
+	virtual FileRxSession *		findRxSession( VxNetIdent* netIdent );
 	virtual FileRxSession *		findRxSession( VxGUID& lclSessionId );
-	virtual FileRxSession *		findOrCreateRxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual FileRxSession *		findOrCreateRxSession( VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual FileTxSession *		findTxSession( VxNetIdent * netIdent );
+	virtual FileRxSession *		findOrCreateRxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileRxSession *		findOrCreateRxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileTxSession *		findTxSession( VxNetIdent* netIdent );
 	virtual FileTxSession *		findTxSession( VxGUID& lclSessionId );
-	virtual FileTxSession *		createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual FileTxSession *		findOrCreateTxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual FileTxSession *		findOrCreateTxSession( VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual FileTxSession *		createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileTxSession *		findOrCreateTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileTxSession *		findOrCreateTxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
 	virtual EXferError			beginFileReceive( FileRxSession * xferSession, PktFileSendReq * poPkt );
 	virtual EXferError			beginFileSend( FileTxSession * xferSession );
@@ -160,7 +160,7 @@ protected:
 														const char *	pMsg, ...);	// error message
 
 	EXferError					beginFileGet( FileRxSession * xferSession );
-	EXferError					canTxFile( VxNetIdent * netIdent, VxGUID& assetId, VxSha1Hash& fileHashId );
+	EXferError					canTxFile( VxNetIdent* netIdent, VxGUID& assetId, VxSha1Hash& fileHashId );
 	bool						isViewFileListMatch( FileTxSession * xferSession, SharedFileInfo& fileInfo );
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );

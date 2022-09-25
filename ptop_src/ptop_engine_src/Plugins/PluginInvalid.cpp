@@ -14,7 +14,7 @@
 //============================================================================
 #include "PluginInvalid.h"
 
-PluginInvalid::PluginInvalid( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginInvalid::PluginInvalid( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
 	m_ePluginType = ePluginTypeInvalid;
@@ -57,25 +57,25 @@ void PluginInvalid::onAppStateChange( EAppState eAppState )
 //============================================================================
 //============================================================================
 //! called to start service or session with remote friend
-void PluginInvalid::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginInvalid::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 
 }
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginInvalid::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginInvalid::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 
 }
 //============================================================================
 //! return true if is plugin session
-bool PluginInvalid::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginInvalid::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return true;
 }
 
 //============================================================================
-EPluginAccess PluginInvalid::canAcceptNewSession( VxNetIdent * netIdent )
+EPluginAccess PluginInvalid::canAcceptNewSession( VxNetIdent* netIdent )
 {
 	return ePluginAccessDisabled;
 }

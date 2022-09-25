@@ -24,7 +24,7 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginBaseService::PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginBaseService::PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_HostType( PluginTypeToHostType( pluginType ) )
 , m_HostedId( myIdent->getMyOnlineId(), m_HostType )

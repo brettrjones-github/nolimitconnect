@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "PluginServiceFileShare.h"
+#include "PluginFileShareServer.h"
 #include "PluginMgr.h"
 #include "SharedFileInfo.h"
 
@@ -35,13 +35,14 @@
 #endif
 
 //============================================================================
-PluginServiceFileShare::PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginFileShareServer::PluginFileShareServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBaseFileShare( engine, pluginMgr, myIdent, pluginType, "FileLibrary.db3", "FileShareService.db3" )
 {
+	setPluginType( ePluginTypeFileShareServer );
 }
 
 //============================================================================
-void PluginServiceFileShare::onNetworkConnectionReady( bool requiresRelay )
+void PluginFileShareServer::onNetworkConnectionReady( bool requiresRelay )
 {
 	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
 	{

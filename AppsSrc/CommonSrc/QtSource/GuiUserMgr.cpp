@@ -100,7 +100,7 @@ void GuiUserMgr::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactAdded( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactAdded( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -118,7 +118,7 @@ void GuiUserMgr::toGuiContactRemoved( VxGUID& onlineId )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactOnline( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactOnline( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -130,7 +130,7 @@ void GuiUserMgr::toGuiContactOnline( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactOffline( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactOffline( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -148,7 +148,7 @@ void GuiUserMgr::toGuiContactOffline( VxGUID& onlineId )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactNameChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactNameChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -160,7 +160,7 @@ void GuiUserMgr::toGuiContactNameChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactDescChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactDescChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -172,7 +172,7 @@ void GuiUserMgr::toGuiContactDescChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactMyFriendshipChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -184,7 +184,7 @@ void GuiUserMgr::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactHisFriendshipChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -196,7 +196,7 @@ void GuiUserMgr::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiPluginPermissionChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiPluginPermissionChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -208,7 +208,7 @@ void GuiUserMgr::toGuiPluginPermissionChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactSearchFlagsChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -220,7 +220,7 @@ void GuiUserMgr::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactLastSessionTimeChange( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {
@@ -239,7 +239,7 @@ void GuiUserMgr::toGuiUpdateMyIdent( VxNetIdent* netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiSaveMyIdent( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiSaveMyIdent( VxNetIdent* netIdent )
 {
     if( !netIdent || !netIdent->isValidNetIdent() )
     {

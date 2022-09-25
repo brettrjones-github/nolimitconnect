@@ -15,4 +15,4 @@
 
 class VxPktHdr;
 
-void DumpPkt( VxPktHdr * pktHdr );
+void DumpPkt( VxPktHdr* pktHdr );

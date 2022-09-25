@@ -38,7 +38,7 @@ public:
 
 	void				handlePtopConnection( RcSktBase * sktBase );
 
-	RCODE				sendHttpErr( VxNetIdent * netIdent, RcSktBase * sktBase, int iError ); 
+	RCODE				sendHttpErr( VxNetIdent* netIdent, RcSktBase * sktBase, int iError ); 
 
 	RCODE				sendWebServerData(	bool			bIsGetData,				// if true use PktWebServerGetChunkTx else use PktWebServerPutChunkTx
 											VxNetIdent *	netIdent, 

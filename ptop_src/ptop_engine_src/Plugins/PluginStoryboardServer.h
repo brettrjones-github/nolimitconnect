@@ -18,7 +18,7 @@
 class PluginStoryboardServer : public PluginBaseFilesServer
 {
 public:
-	PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	PluginStoryboardServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginStoryboardServer() = default;
 
 protected:

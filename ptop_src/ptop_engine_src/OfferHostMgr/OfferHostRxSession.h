@@ -21,8 +21,8 @@ class OfferHostRxSession : public OfferHostXferSession
 {
 public:
 	OfferHostRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr );
-	OfferHostRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase * sktBase, VxNetIdent * netIdent );
-	OfferHostRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	OfferHostRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	OfferHostRxSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~OfferHostRxSession();
 
 	void cancelDownload( VxGUID& lclSessionId );

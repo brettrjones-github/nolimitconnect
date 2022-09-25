@@ -21,14 +21,14 @@
 #include <stdio.h>
 
 //============================================================================
-FileXferPluginSession::FileXferPluginSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+FileXferPluginSession::FileXferPluginSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : P2PSession( sktBase, netIdent, pluginType )
 , m_Error( 0 )
 {
 }
 
 //============================================================================
-FileXferPluginSession::FileXferPluginSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+FileXferPluginSession::FileXferPluginSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 : P2PSession( lclSessionId, sktBase, netIdent, pluginType )
 , m_Error( 0 )
 {

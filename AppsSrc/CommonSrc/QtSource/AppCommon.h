@@ -472,23 +472,23 @@ public:
     virtual void				toGuiIndentListUpdate( EUserViewType listType,  VxGUID& onlineId, uint64_t timestamp ) override;
     virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) override;
 
-    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactAdded( VxNetIdent* netIdent ) override;
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
 
-    virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactOffline( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactOnline( VxNetIdent* netIdent ) override;
 
-    virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactHisFriendshipChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactConnectionChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactAnythingChange( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactNameChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactDescChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactMyFriendshipChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactHisFriendshipChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiPluginPermissionChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactSearchFlagsChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactConnectionChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactAnythingChange( VxNetIdent* netIdent ) override;
+    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent* netIdent ) override;
 
-    virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) override;
+    virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
     virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) override;
 
 	virtual void				toGuiRxedPluginOffer(	VxNetIdent *	netIdent,				// identity of friend
@@ -573,11 +573,11 @@ public:
                                                 VxGUID          assetId,
                                                 uint8_t *		fileHashId = 0 ) override;
 	//=== to gui search ===//
-    virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) override;
-    virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent* netIdent ) override;
+    virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode ) override;
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
 
-    virtual void				toGuiSearchResultProfilePic( VxNetIdent * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
+    virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
 	virtual void				toGuiSearchResultFileSearch(	VxNetIdent *	netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
@@ -625,7 +625,7 @@ public:
                                                         EAgeType age, int primaryLanguage, int contentType );
     void                        setupAccountResources( VxNetIdent& userAccountIdent );
     // updates my ident in database and engine and global ident
-    void                        updateMyIdent( VxNetIdent * myIdent, bool permissionAndStateOnly = false );
+    void                        updateMyIdent( VxNetIdent* myIdent, bool permissionAndStateOnly = false );
 
 	std::string					getUserXferDirectoryFromAccountUserName( const char * userName );
 	std::string 				getUserSpecificDataDirectoryFromAccountUserName( const char * userName );

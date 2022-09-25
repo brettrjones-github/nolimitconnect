@@ -16,11 +16,11 @@
 
 #include "PluginBaseFileShare.h"
 
-class PluginServiceFileShare : public PluginBaseFileShare
+class PluginFileShareServer : public PluginBaseFileShare
 {
 public:
-	PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginServiceFileShare() = default;
+	PluginFileShareServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* netIdent, EPluginType pluginType );
+	virtual ~PluginFileShareServer() = default;
 
 	virtual void onNetworkConnectionReady( bool requiresRelay ) override;
 };

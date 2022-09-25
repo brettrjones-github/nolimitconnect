@@ -15,11 +15,11 @@
 
 #include "PluginBaseFilesClient.h"
 
-class PluginStoryboardClient : public PluginBaseFilesClient
+class PluginFileShareClient : public PluginBaseFilesClient
 {
 public:
-	PluginStoryboardClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
-	virtual ~PluginStoryboardClient() = default;
+	PluginFileShareClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
+	virtual ~PluginFileShareClient() = default;
 
 	bool						getIsInitialized( void ) { return m_WebPageClientReady; }
 

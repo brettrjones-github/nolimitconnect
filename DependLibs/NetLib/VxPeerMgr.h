@@ -42,7 +42,7 @@ public:
 
     virtual VxSktBase *			makeNewSkt( void ) override;
 
-	virtual	void				handleSktCallback( VxSktBase * sktBase );
+	virtual	void				handleSktCallback( VxSktBase* sktBase );
 
 	//! Connect to ip or URL and return socket.. if cannot connect return NULL
 	virtual VxSktConnect *		connectTo(	const char *	pIpOrUrl,						// remote ip or url 

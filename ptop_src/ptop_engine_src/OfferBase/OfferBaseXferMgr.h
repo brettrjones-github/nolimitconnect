@@ -62,20 +62,20 @@ public:
 	virtual void				fromGuiCancelUpload( VxGUID& lclSessionId );
 
 	void						fileAboutToBeDeleted( std::string& fileName );
-	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onConnectionLost( VxSktBase * sktBase );
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual void				onConnectionLost( VxSktBase* sktBase );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
-	virtual void				onPktOfferSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktOfferSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktOfferChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktOfferChunkReply		    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktOfferSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktOfferSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktOfferBaseXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktOfferSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktOfferSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktOfferChunkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktOfferChunkReply		    ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktOfferSendCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktOfferSendCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktOfferBaseXferErr			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	//virtual void				onPktMultiSessionReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	//virtual void				onPktMultiSessionReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	//virtual void				onPktMultiSessionReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	//virtual void				onPktMultiSessionReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
 	void						assetXferThreadWork( VxThread * workThread );
 protected:
@@ -85,15 +85,15 @@ protected:
 	virtual void				onTxSuccess( VxGUID& assetOfferId, bool pluginIsLocked );
 	virtual void				updateOfferMgrSendState( VxGUID& assetOfferId, EOfferSendState sendState, int param );
 
-	virtual OfferBaseRxSession *	    findRxSession( bool pluginIsLocked, VxNetIdent * netIdent );
+	virtual OfferBaseRxSession *	    findRxSession( bool pluginIsLocked, VxNetIdent* netIdent );
 	virtual OfferBaseRxSession *	    findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual OfferBaseRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual OfferBaseRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual OfferBaseTxSession *	    findTxSession( bool pluginIsLocked, VxNetIdent * netIdent );
+	virtual OfferBaseRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual OfferBaseRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual OfferBaseTxSession *	    findTxSession( bool pluginIsLocked, VxNetIdent* netIdent );
 	virtual OfferBaseTxSession *	    findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual OfferBaseTxSession *	    createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual OfferBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual OfferBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual OfferBaseTxSession *	    createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual OfferBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual OfferBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
 	virtual EXferError			beginOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendReq * poPkt, PktOfferSendReply& pktReply );
 	virtual EXferError			beginOfferBaseSend( OfferBaseTxSession * xferSession );
@@ -108,11 +108,11 @@ protected:
 
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );
-	void						checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase * sktBase );
+	void						checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase );
 
 	void						assetSendComplete( OfferBaseTxSession * xferSession );
 	void						queOffer( OfferBaseInfo& assetInfo );
-	EXferError					createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase );
+	EXferError					createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase );
 	bool						requireFileXfer( EOfferType assetType );
 
 	//=== vars ===//

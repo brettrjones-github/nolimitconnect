@@ -1035,7 +1035,7 @@ void VxSktBase::setLastSktError( RCODE rc )
 void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 {
 	VxThread * poVxThread = (VxThread *)pvContext;
-    VxSktBase * sktBase = nullptr;
+    VxSktBase* sktBase = nullptr;
     if( !poVxThread->isAborted() )
     {
         poVxThread->setIsThreadRunning( true );

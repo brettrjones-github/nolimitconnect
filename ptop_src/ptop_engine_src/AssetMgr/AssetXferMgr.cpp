@@ -48,67 +48,67 @@ AssetXferMgr::AssetXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferI
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseChunkReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseChunkReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void AssetXferMgr::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetXferMgr::onPktAssetXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     LogMsg( LOG_INFO, "AssetXferMgr::onPktAssetXferErr");
     AssetBaseXferMgr::onPktAssetBaseXferErr( sktBase, pktHdr, netIdent );

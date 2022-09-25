@@ -55,7 +55,7 @@ private slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotStartSearchClicked();
 	void						slotStopSearchClicked();
-	//void						slotFriendClicked( VxNetIdent * netIdent );
+	//void						slotFriendClicked( VxNetIdent* netIdent );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;

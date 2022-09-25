@@ -30,7 +30,7 @@
 #endif
 
 //============================================================================
-PluginPushToTalk::PluginPushToTalk( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginPushToTalk::PluginPushToTalk( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_PushToTalkFeedMgr( engine, *this, m_PluginSessionMgr )
@@ -78,21 +78,21 @@ bool PluginPushToTalk::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginPushToTalk::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginPushToTalk::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
 //! called to start service or session with remote friend
-void PluginPushToTalk::fromGuiStartPluginSession( VxNetIdent * netIdent,int, VxGUID )
+void PluginPushToTalk::fromGuiStartPluginSession( VxNetIdent* netIdent,int, VxGUID )
 {
 	//m_PushToTalkFeedMgr.fromGuiStartPluginSession( false, netIdent );
 }
 
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginPushToTalk::fromGuiStopPluginSession( VxNetIdent * netIdent, int, VxGUID )
+void PluginPushToTalk::fromGuiStopPluginSession( VxNetIdent* netIdent, int, VxGUID )
 {
 	//m_PushToTalkFeedMgr.fromGuiStopPluginSession( false, netIdent );
 	//m_PluginSessionMgr.fromGuiStopPluginSession( false, netIdent );
@@ -180,31 +180,31 @@ void PluginPushToTalk::callbackAudioOutSpaceAvail( int freeSpaceLen )
 }
 
 //============================================================================
-void PluginPushToTalk::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPushToTalk::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktPluginOfferReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginPushToTalk::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPushToTalk::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktPluginOfferReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginPushToTalk::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPushToTalk::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PluginSessionMgr.onPktSessionStopReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginPushToTalk::onPktPushToTalkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPushToTalk::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PushToTalkFeedMgr.onPktPushToTalkReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginPushToTalk::onPktPushToTalkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPushToTalk::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_PushToTalkFeedMgr.onPktPushToTalkReply( sktBase, pktHdr, netIdent );
 }
@@ -234,7 +234,7 @@ void PluginPushToTalk::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, Vx
 }
 
 //============================================================================
-void PluginPushToTalk::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPushToTalk::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktChatReq * poPkt = (PktChatReq *)pktHdr;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -259,7 +259,7 @@ void PluginPushToTalk::onSessionEnded( PluginSessionBase * session, bool pluginI
 }
 
 //============================================================================
-void PluginPushToTalk::replaceConnection( VxNetIdent * netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
+void PluginPushToTalk::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	//m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

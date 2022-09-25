@@ -75,7 +75,7 @@ class NetConnector;
 class NetworkMonitor;
 class NetServicesMgr;
 class PluginNetServices;
-class PluginServiceFileShare;
+class PluginFileShareServer;
 class PluginSetting;
 class PluginSettingMgr;
 class RunUrlAction;
@@ -181,8 +181,9 @@ public:
     virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
     virtual EFriendState		getPluginPermission( int iPluginType );
 
-	PluginServiceFileShare&		getPluginServiceFileShare( void )				{ return * m_PluginServiceFileShare; }
-	PluginNetServices&			getPluginNetServices( void )					{ return * m_PluginNetServices; }
+	PluginFileShareServer&		getPluginFileShareServer( void )				{ return *m_PluginFileShareServer; }
+
+	PluginNetServices&			getPluginNetServices( void )					{ return *m_PluginNetServices; }
 
 	virtual void				setHasPicture( int bHasPicture );
 	virtual void				setHasSharedWebCam( int bHasShaeredWebCam );
@@ -213,14 +214,14 @@ public:
     virtual void				fromGuiAppPause( void ) override;
     virtual void				fromGuiAppResume( void ) override;
 
-    virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent ) override;
+    virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent ) override;
     void                        updateFromEngineSettings( EngineSettings& engineSettings ); 
     virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) override;
     virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) override;
     virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent ) override;
 
     virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick ) override;
-    virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly = false ) override;
+    virtual void				fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly = false ) override;
     virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent ) override;
     virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers ) override;
 
@@ -295,7 +296,7 @@ public:
 
     virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
     virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) override;
-    virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 														VxGUID&			onlineId,
@@ -469,7 +470,7 @@ public:
 	virtual	void				onContactDisconnected	( RcConnectInfo * poInfo, bool connectionListLocked );
 
 	void						onConnectionLost( VxSktBase* sktBase );
-	void						onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent );
+	void						onSessionStart( EPluginType ePluginType, VxNetIdent* netIdent );
 	//========================================================================
 	//========================================================================
 
@@ -496,7 +497,7 @@ public:
 	virtual bool				txImAlivePkt(	VxGUID&				destOnlineId, 
 												VxSktBase*			sktBase );
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 	bool						connectToContact(	VxConnectInfo&		connectInfo, 
 													VxSktBase**		ppoRetSkt,
@@ -709,7 +710,7 @@ protected:
 												bool				bDisconnectAfterSend );
 
 	virtual void				doAppStateChange( EAppState eAppState );
-	virtual bool				shouldNotifyGui( VxNetIdent * netIdent );
+	virtual bool				shouldNotifyGui( VxNetIdent* netIdent );
 
 	// pkt ann has changed and needs to be re announced
 	void						doPktAnnConnectionInfoChanged( bool connectionListIsLocked );
@@ -761,7 +762,7 @@ protected:
 	PluginMgr&					m_PluginMgr;
     PluginSettingMgr			m_PluginSettingMgr;
 
-	PluginServiceFileShare *	m_PluginServiceFileShare;
+	PluginFileShareServer *	m_PluginFileShareServer;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
     RelayMgr                    m_RelayMgr;

@@ -27,7 +27,7 @@
 #include <PktLib/PktsGroupie.h>
 
 //============================================================================
-PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
     : PluginNetServices( engine, pluginMgr, myIdent, pluginType )
     , m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
@@ -174,26 +174,26 @@ void PluginBaseHostService::sendHostAnnounce( void )
 }
 
 //============================================================================
-void PluginBaseHostService::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseHostService::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 //    m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginBaseHostService::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginBaseHostService::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 //    m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 //    m_FriendGuidList.removeGuid( netIdent->getMyOnlineId() );
 }
 
 //============================================================================
-void PluginBaseHostService::onConnectionLost( VxSktBase * sktBase )
+void PluginBaseHostService::onConnectionLost( VxSktBase* sktBase )
 {
 //    m_PluginSessionMgr.onConnectionLost( sktBase );
 }
 
 //============================================================================
-void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseHostService::onPktHostJoinReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     LogModule( eLogHosts, LOG_VERBOSE, "PluginBaseHostService PktHostJoinReq %s got PktHostJoinReq from %s", DescribeHostType( getHostType() ), netIdent->getOnlineName() );
     PktHostJoinReq * joinReq = (PktHostJoinReq *)pktHdr;
@@ -419,7 +419,7 @@ void PluginBaseHostService::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pk
 }
 
 //============================================================================
-void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseHostService::onPktHostSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginBaseHostService onPktHostSearchReq" );
     PktHostSearchReply searchReply;
@@ -473,7 +473,7 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseHostService::onPktHostOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
     PktHostOfferReply offerReply;
@@ -485,7 +485,7 @@ void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void PluginBaseHostService::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseHostService::onPktHostOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginBaseHostService got host offer reply" );
 }

@@ -27,14 +27,14 @@ FileRxSession::FileRxSession()
 }
 
 //============================================================================
-FileRxSession::FileRxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+FileRxSession::FileRxSession( VxSktBase* sktBase, VxNetIdent* netIdent )
 : FileShareXferSession( sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-FileRxSession::FileRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+FileRxSession::FileRxSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : FileShareXferSession( lclSessionId, sktBase, netIdent )
 {
 	getXferInfo().setXferDirection( eXferDirectionRx );

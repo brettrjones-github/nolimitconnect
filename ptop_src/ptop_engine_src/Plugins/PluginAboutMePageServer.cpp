@@ -20,7 +20,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-PluginAboutMePageServer::PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginAboutMePageServer::PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBaseFilesServer( engine, pluginMgr, myIdent, pluginType, "AboutMePageFilesServer.db3")
 {
 	setPluginType( ePluginTypeAboutMePageServer );

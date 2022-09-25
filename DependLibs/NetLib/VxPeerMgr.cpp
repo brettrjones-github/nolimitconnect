@@ -159,7 +159,7 @@ VxSktConnect * VxPeerMgr::createConnectionUsingSocket( SOCKET skt, const char * 
 }
 
 //============================================================================
-void VxPeerMgr::handleSktCallback( VxSktBase * sktBase )
+void VxPeerMgr::handleSktCallback( VxSktBase* sktBase )
 {
 }
 

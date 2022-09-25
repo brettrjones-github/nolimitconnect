@@ -48,67 +48,67 @@ ThumbXferMgr::ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferI
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbGetReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbGetReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseChunkReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseChunkReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbGetCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbGetCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void ThumbXferMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void ThumbXferMgr::onPktThumbXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_INFO, "ThumbXferMgr::onPktThumbXferErr");
     AssetBaseXferMgr::onPktAssetBaseXferErr( sktBase, pktHdr, netIdent );

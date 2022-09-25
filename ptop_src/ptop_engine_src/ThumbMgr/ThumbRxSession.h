@@ -22,8 +22,8 @@ class ThumbRxSession : public ThumbXferSession
 {
 public:
 	ThumbRxSession( P2PEngine& engine );
-	ThumbRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent );
-	ThumbRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	ThumbRxSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ThumbRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~ThumbRxSession() = default;
 
 	void						cancelDownload( VxGUID& lclSessionId );

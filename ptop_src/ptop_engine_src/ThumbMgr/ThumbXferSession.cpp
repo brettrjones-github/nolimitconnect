@@ -28,14 +28,14 @@ ThumbXferSession::ThumbXferSession( P2PEngine& engine )
 }
 
 //============================================================================
-ThumbXferSession::ThumbXferSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+ThumbXferSession::ThumbXferSession( P2PEngine& engine, VxSktBase* sktBase, VxNetIdent* netIdent )
 : AssetBaseXferSession( engine, sktBase, netIdent )
 {
 	initLclSessionId();
 }
 
 //============================================================================
-ThumbXferSession::ThumbXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+ThumbXferSession::ThumbXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 : AssetBaseXferSession( engine )
 {
 	initLclSessionId();

@@ -26,7 +26,7 @@
 
 
 //============================================================================
-PluginConnectionTestClient::PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginConnectionTestClient::PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBaseHostClient( engine, pluginMgr, myIdent, pluginType )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 {
@@ -40,7 +40,7 @@ void PluginConnectionTestClient::testIsMyPortOpen( void )
 }
 
 //============================================================================
-RCODE PluginConnectionTestClient::handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginConnectionTestClient::handlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     //if( false == m_NetServiceUtil.isAllHttpContentArrived( sktBase ) )
     //{
@@ -61,7 +61,7 @@ RCODE PluginConnectionTestClient::handlePtopConnection( VxSktBase * sktBase, Net
 }
 
 //============================================================================
-RCODE PluginConnectionTestClient::internalHandlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginConnectionTestClient::internalHandlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )
 {
     switch( netServiceHdr.m_NetCmdType )
     {

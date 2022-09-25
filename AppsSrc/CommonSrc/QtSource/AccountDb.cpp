@@ -192,7 +192,7 @@ bool AccountDb::getAccountByName(const char * name, VxNetIdent& oUserAccount )
 		if( cursor->getNextRow() )
 		{
 			int iBlobLen = 0;
-			VxNetIdent * netIdent = (VxNetIdent *)cursor->getBlob(0, &iBlobLen );
+			VxNetIdent* netIdent = (VxNetIdent *)cursor->getBlob(0, &iBlobLen );
 			if( iBlobLen == sizeof( VxNetIdent ) )
 			{
 				memcpy( &oUserAccount, netIdent, sizeof( VxNetIdent ));
@@ -365,7 +365,7 @@ void AccountDb::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>& a
 		while( cursor->getNextRow() ) 
 		{
 			int iBlobLen = 0;
-			VxNetIdent * netIdent = (VxNetIdent *)cursor->getBlob(0, &iBlobLen );
+			VxNetIdent* netIdent = (VxNetIdent *)cursor->getBlob(0, &iBlobLen );
 			vx_assert( iBlobLen == sizeof( VxNetIdent ));
 			memcpy( &oIdent, netIdent, sizeof( VxNetIdent ));
 			aoIdent.push_back(oIdent); 
@@ -540,7 +540,7 @@ bool AccountDb::getAllAccounts( std::vector<VxNetIdent>& accountList )
         while( cursor->getNextRow() )
         {
             int iBlobLen = 0;
-            VxNetIdent * netIdent = ( VxNetIdent * )cursor->getBlob( 2, &iBlobLen );
+            VxNetIdent* netIdent = ( VxNetIdent * )cursor->getBlob( 2, &iBlobLen );
             if( iBlobLen == (int)sizeof( VxNetIdent ) )
             {
                 accountList.push_back( *netIdent );

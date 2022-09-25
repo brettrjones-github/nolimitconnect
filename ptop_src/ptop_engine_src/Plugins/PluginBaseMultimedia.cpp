@@ -32,7 +32,7 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginBaseMultimedia::PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginBaseMultimedia::PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
@@ -101,7 +101,7 @@ bool PluginBaseMultimedia::fromGuiOfferReply(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktSessionStopReq start\n" );
 	m_PluginSessionMgr.onPktSessionStopReq( sktBase, pktHdr, netIdent );
@@ -117,20 +117,20 @@ bool PluginBaseMultimedia::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginBaseMultimedia::fromGuiIsPluginInSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
 //! called to start service or session with remote friend
-void PluginBaseMultimedia::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginBaseMultimedia::fromGuiStartPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 }
 
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginBaseMultimedia::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
+void PluginBaseMultimedia::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiStopPluginSession start\n" );
 	m_VoiceFeedMgr.fromGuiStopPluginSession( true, getAppModule(), netIdent );
@@ -141,7 +141,7 @@ void PluginBaseMultimedia::fromGuiStopPluginSession( VxNetIdent * netIdent, int 
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiMultiSessionAction( VxNetIdent * netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId )
+bool PluginBaseMultimedia::fromGuiMultiSessionAction( VxNetIdent* netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId )
 {
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiMultiSessionAction action %d \n", mSessionAction );
 	bool sendSucces = false;
@@ -214,7 +214,7 @@ bool PluginBaseMultimedia::fromGuiMultiSessionAction( VxNetIdent * netIdent, EMS
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiSetGameValueVar( VxNetIdent * netIdent, int32_t varId, int32_t varValue )
+bool PluginBaseMultimedia::fromGuiSetGameValueVar( VxNetIdent* netIdent, int32_t varId, int32_t varValue )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiSetGameValueVar autoLock start" );
@@ -239,7 +239,7 @@ bool PluginBaseMultimedia::fromGuiSetGameValueVar( VxNetIdent * netIdent, int32_
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t actionId, int32_t actionValue )
+bool PluginBaseMultimedia::fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_t actionId, int32_t actionValue )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiSetGameActionVar autoLock start" );
@@ -285,7 +285,7 @@ void PluginBaseMultimedia::callbackVideoPktPicChunk( void * /*userData*/, VxGUID
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktPluginOfferReq start\n" );
 	m_PluginSessionMgr.onPktPluginOfferReq( sktBase, pktHdr, netIdent );
@@ -293,7 +293,7 @@ void PluginBaseMultimedia::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktPluginOfferReply start\n" );
 	m_PluginSessionMgr.onPktPluginOfferReply( sktBase, pktHdr, netIdent );
@@ -301,49 +301,49 @@ void PluginBaseMultimedia::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr 
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVideoFeedReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VideoFeedMgr.onPktVideoFeedReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VideoFeedMgr.onPktVideoFeedStatus( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VideoFeedMgr.onPktVideoFeedPic( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VideoFeedMgr.onPktVideoFeedPicChunk( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VideoFeedMgr.onPktVideoFeedPicAck( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VoiceFeedMgr.onPktVoiceReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	m_VoiceFeedMgr.onPktVoiceReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetSendReq start" );
@@ -355,7 +355,7 @@ void PluginBaseMultimedia::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetSendReply start" );
@@ -367,7 +367,7 @@ void PluginBaseMultimedia::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetChunkReq start" );
@@ -379,7 +379,7 @@ void PluginBaseMultimedia::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetChunkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetChunkReply start" );
@@ -391,7 +391,7 @@ void PluginBaseMultimedia::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr *
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetSendCompleteReq start" );
@@ -403,7 +403,7 @@ void PluginBaseMultimedia::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPkt
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetSendCompleteReply start" );
@@ -415,7 +415,7 @@ void PluginBaseMultimedia::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxP
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktAssetXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_SEND_ASSET
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktAssetXferErr start" );
@@ -427,7 +427,7 @@ void PluginBaseMultimedia::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktMultiSessionReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktMultiSessionReq * pktReq			= (PktMultiSessionReq *)pktHdr;
 	EMSessionAction eMSessionAction		= ( EMSessionAction )pktReq->getMSessionAction();
@@ -495,7 +495,7 @@ void PluginBaseMultimedia::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr *
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktMultiSessionReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktMultiSessionReply start" );
 	PktMultiSessionReply * pktReply = (PktMultiSessionReply *)pktHdr;
@@ -505,7 +505,7 @@ void PluginBaseMultimedia::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktTodGameStats( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktTodGameStats * poPkt = (PktTodGameStats *)pktHdr;
 	for( int i = 0; i < eMaxTodGameStatId; ++i )
@@ -517,14 +517,14 @@ void PluginBaseMultimedia::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktTodGameAction( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktTodGameAction * poPkt = (PktTodGameAction *)pktHdr;
 	IToGui::getToGui().toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getActionVarId(), poPkt->getActionVarValue() );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginBaseMultimedia::onPktTodGameValue( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktTodGameValue * poPkt = (PktTodGameValue *)pktHdr;
 	IToGui::getToGui().toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getValueVarId(), poPkt->getValueVar() );
@@ -550,7 +550,7 @@ void PluginBaseMultimedia::onSessionEnded( PluginSessionBase * session, bool plu
 }
 
 //============================================================================
-void PluginBaseMultimedia::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseMultimedia::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 #ifdef DEBUG_SKT_CONNECTIONS
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::replaceConnection start" );
@@ -563,7 +563,7 @@ void PluginBaseMultimedia::replaceConnection( VxNetIdent * netIdent, VxSktBase *
 }
 
 //============================================================================
-void PluginBaseMultimedia::onConnectionLost( VxSktBase * sktBase )
+void PluginBaseMultimedia::onConnectionLost( VxSktBase* sktBase )
 {
 #ifdef DEBUG_SKT_CONNECTIONS
     LogMsg( LOG_INFO, "PluginBaseMultimedia::onConnectionLost start" );
@@ -576,13 +576,13 @@ void PluginBaseMultimedia::onConnectionLost( VxSktBase * sktBase )
 }
 
 //============================================================================
-void PluginBaseMultimedia::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginBaseMultimedia::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	m_AssetXferMgr.onContactWentOnline( netIdent, sktBase );
 }
 
 //============================================================================
-void PluginBaseMultimedia::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginBaseMultimedia::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	LogModule( eLogPlugins, LOG_INFO, "PluginBaseMultimedia::onContactWentOffline start" );
 	m_VoiceFeedMgr.fromGuiStopPluginSession( true, getAppModule(), netIdent );

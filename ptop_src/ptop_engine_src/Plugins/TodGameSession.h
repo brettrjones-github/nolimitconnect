@@ -21,7 +21,7 @@
 class TodGameSession : public P2PSession
 {
 public:
-	TodGameSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	TodGameSession( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
 
 	PktTodGameStats		m_PktGameStats;
 };

@@ -1154,7 +1154,7 @@ void ConnectionMgr::doStayConnectedThread( void )
     int iSize;
     BigListInfo * poInfo;
 
-    VxSktBase * sktBase;
+    VxSktBase* sktBase;
     while( ( false == m_StayConnectedThread.isAborted() )
         && ( false == VxIsAppShuttingDown() ) )
     {

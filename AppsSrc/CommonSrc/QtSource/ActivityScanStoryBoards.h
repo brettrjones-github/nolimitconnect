@@ -38,20 +38,20 @@ public:
 
 public:
 	void						setTitle( QString strTitle );
-	void						newStoryBoardSession( VxNetIdent * netIdent, const char * pStory );
+	void						newStoryBoardSession( VxNetIdent* netIdent, const char * pStory );
 
 signals:
-	void						signalScanStoryBoard( VxNetIdent * netIdent, QString strStory );
+	void						signalScanStoryBoard( VxNetIdent* netIdent, QString strStory );
 
 public slots:
-	void						slotScanStoryBoard( VxNetIdent * netIdent, QString strStory );
+	void						slotScanStoryBoard( VxNetIdent* netIdent, QString strStory );
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
 	void						onNextButtonClicked( void );
 
 protected:
-	void						setupIdentWidget( VxNetIdent * netIdent );
+	void						setupIdentWidget( VxNetIdent* netIdent );
 
 	//=== vars ===//
 	Ui::ScanStoryBoardsDialog	ui;

@@ -79,7 +79,7 @@ public:
 	void						fromGuiUseRelay( VxConnectInfo& connectInfo, bool useRelay ); // so if searching for relay can try immediately 
 
 	void						onOncePerHour( void );
-	void						onPktRelayServiceReply( VxSktBase * sktBase, PktRelayServiceReply * pkt );
+	void						onPktRelayServiceReply( VxSktBase* sktBase, PktRelayServiceReply * pkt );
 
 	bool						checkForAbortOrShutdown( void );
 	void						changeNetworkState( ENetworkStateType eNetworkStateType );

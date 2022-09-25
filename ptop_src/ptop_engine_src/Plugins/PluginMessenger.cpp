@@ -31,7 +31,7 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginMessenger::PluginMessenger( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginMessenger::PluginMessenger( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
 : PluginBaseMultimedia( engine, pluginMgr, myIdent, pluginType )
 {
 	setPluginType( ePluginTypeMessenger );

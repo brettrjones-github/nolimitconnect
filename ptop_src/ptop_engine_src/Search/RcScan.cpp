@@ -80,13 +80,13 @@ void RcScan::actionThreadRunning( bool isRunning )
 
 //============================================================================
 // handle case where BigListInfo is about to be deleted
-void RcScan::onIdentDelete( VxNetIdent * netIdent )
+void RcScan::onIdentDelete( VxNetIdent* netIdent )
 {
 	m_ScanAction.onIdentDelete( netIdent );
 }
 
 //============================================================================
-void RcScan::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScan::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	if( m_bIsScanning 
 		&& m_IdentsSentSearchPktList.addGuidIfDoesntExist( netIdent->getMyOnlineId() ) )
@@ -97,20 +97,20 @@ void RcScan::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
 }
 
 //============================================================================
-void RcScan::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void RcScan::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	m_ScanAction.onContactWentOffline( netIdent, sktBase );
 }
 
 //============================================================================
-void RcScan::onConnectionLost( VxSktBase * sktBase )
+void RcScan::onConnectionLost( VxSktBase* sktBase )
 {
 	m_ScanAction.onConnectionLost( sktBase );
 }
 
 //============================================================================
 //! called when new better connection from user
-void RcScan::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void RcScan::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	m_ScanAction.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
@@ -190,7 +190,7 @@ void RcScan::fromGuiStopScan( EScanType eScanType )
 }
 
 //============================================================================
-void RcScan::onPktScanReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktScanReq * poPkt )
+void RcScan::onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq * poPkt )
 {
 	unsigned int iMatchesFound = 0;
 	unsigned int iNotMatchesFound = 0;
@@ -273,7 +273,7 @@ void RcScan::onPktScanReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktScanRe
 }
 
 //============================================================================
-void RcScan::onPktScanReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktScanReply * poPkt )
+void RcScan::onPktScanReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReply * poPkt )
 {
 	if( m_bIsScanning )
 	{
@@ -310,25 +310,25 @@ void RcScan::onPktScanReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktScan
 }
 
 //============================================================================
-void RcScan::onPktFindFileReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktFindFileReq * poPkt )
+void RcScan::onPktFindFileReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReq * poPkt )
 {
 
 }
 
 //============================================================================
-void RcScan::onPktFindFileReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktFindFileReply * poPkt )
+void RcScan::onPktFindFileReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReply * poPkt )
 {
 
 }
 
 //============================================================================
-void RcScan::onScanResultError( EScanType eScanType, VxNetIdent * netIdent, VxSktBase * sktBase,  uint32_t errCode )
+void RcScan::onScanResultError( EScanType eScanType, VxNetIdent* netIdent, VxSktBase* sktBase,  uint32_t errCode )
 {
 	m_ScanAction.onScanResultError( eScanType, netIdent, sktBase, errCode );
 }
 
 //============================================================================
-void RcScan::onScanResultProfilePic( VxNetIdent * netIdent, VxSktBase * sktBase, uint8_t * pu8JpgData, uint32_t u32JpgDataLen )
+void RcScan::onScanResultProfilePic( VxNetIdent* netIdent, VxSktBase* sktBase, uint8_t * pu8JpgData, uint32_t u32JpgDataLen )
 {
 	m_ScanAction.onScanResultProfilePic( netIdent, sktBase, pu8JpgData, u32JpgDataLen );
 }
@@ -341,7 +341,7 @@ void RcScan::scanComplete( void )
 }
 
 //============================================================================
-bool RcScan::isLocalSearchMatch( VxNetIdent * netIdent )
+bool RcScan::isLocalSearchMatch( VxNetIdent* netIdent )
 {
 	bool bIsMatch = false;
 	switch( m_eScanType )
@@ -417,7 +417,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent * netIdent )
 }
 
 //============================================================================
-bool RcScan::isRemoteSearchMatch( VxNetIdent * netIdent, PktScanReq * poPkt )
+bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq * poPkt )
 {
 	bool bIsMatch = false;
 	switch( poPkt->getSearchType() )
