@@ -25,7 +25,7 @@ AppletPeerVoicePhone::AppletPeerVoicePhone(	AppCommon& app, QWidget * parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_TO_FRIEND_VOICE_PHONE, app, parent )
 {
     setPluginType( ePluginTypeVoicePhone );
-    setAppletType( eAppletPeerViewSharedFiles );
+    setAppletType( eAppletFileShareClientView );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 

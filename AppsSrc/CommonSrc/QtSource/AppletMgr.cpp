@@ -119,7 +119,7 @@
 
 #include "AppletSettingsPage.h"
 #include "AppletSearchPage.h"
-#include "AppletSharedFiles.h"
+
 #include "AppletShareOfferList.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSnapshot.h"
@@ -139,8 +139,13 @@
 #include "AppletPeerReplyFileOffer.h"
 #include "AppletPeerTodGame.h"
 #include "AppletPeerVideoPhone.h"
-#include "AppletPeerViewSharedFiles.h"
+#include "AppletFileShareClientView.h"
 #include "AppletPeerVoicePhone.h"
+
+#include "AppletAboutMeServerViewMine.h"
+#include "AppletCamServerViewMine.h"
+#include "AppletFileShareServerViewMine.h"
+#include "AppletStoryboardServerViewMine.h"
 
 #include "HomeWindow.h"
 
@@ -241,6 +246,56 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )
 	{
+    case eAppletAboutMeServerViewMine:
+        if( viewMyServerAllowed( eAppletAboutMeServerViewMine ) )
+        {
+            AppletAboutMeServerViewMine* myViewDlg = new AppletAboutMeServerViewMine( m_MyApp, parent );
+            if( myViewDlg )
+            {
+                myViewDlg->setIdentity( m_MyApp.getUserMgr().getMyIdent() );
+                appletDialog = myViewDlg;
+            }
+        }
+        break;
+
+    case eAppletCamServerViewMine:
+        if( viewMyServerAllowed( eAppletCamServerViewMine ) )
+        {
+            AppletCamServerViewMine* myViewDlg = new AppletCamServerViewMine( m_MyApp, parent );
+            if( myViewDlg )
+            {
+                myViewDlg->setupCamFeed( m_MyApp.getUserMgr().getMyIdent() );
+                appletDialog = myViewDlg;
+            }
+        }
+        break;
+
+    case eAppletStoryboardServerViewMine:
+        if( viewMyServerAllowed( eAppletStoryboardServerViewMine ) )
+        {
+            AppletStoryboardServerViewMine* myViewDlg = new AppletStoryboardServerViewMine( m_MyApp, parent );
+            if( myViewDlg )
+            {
+                myViewDlg->setIdentity( m_MyApp.getUserMgr().getMyIdent() );
+                appletDialog = myViewDlg;
+            }
+        }
+        break;
+
+    case eAppletFileShareServerViewMine:
+        if( viewMyServerAllowed( eAppletFileShareServerViewMine ) )
+        {
+            AppletFileShareClientView* myViewDlg = new AppletFileShareClientView( m_MyApp, parent );
+            if( myViewDlg )
+            {
+                myViewDlg->setIdentity( m_MyApp.getUserMgr().getMyIdent() );
+                appletDialog = myViewDlg;
+            }
+        }
+        break;
+
+    case eAppletFileShareClientView:        appletDialog = new AppletFileShareClientView( m_MyApp, parent ); break;
+
     case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
     case eAppletAboutMeClient:              appletDialog = new AppletAboutMeClient( m_MyApp, parent ); break;
     case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
@@ -286,8 +341,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletScanStoryboard:             appletDialog = new ActivityScanStoryBoards( m_MyApp, launchFrame ); break;
     case eAppletScanSharedFiles:            appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
     case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
-
-    case eAppletSharedFiles:                appletDialog = new AppletSharedFiles( m_MyApp, parent, launchParam ); break;
 
     case eAppletPlayerCamClip:              appletDialog = new AppletPlayerCamClip( m_MyApp, parent, assetId ); break;
     case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
@@ -372,7 +425,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletPeerReplyOfferFile:         appletDialog = new AppletPeerReplyFileOffer( m_MyApp, parent ); break;
     case eAppletPeerTodGame:                appletDialog = new AppletPeerTodGame( m_MyApp, parent ); break;
     case eAppletPeerVideoPhone:             appletDialog = new AppletPeerVideoPhone( m_MyApp, parent ); break;
-    case eAppletPeerViewSharedFiles:        appletDialog = new AppletPeerViewSharedFiles( m_MyApp, parent ); break;
     case eAppletPeerVoicePhone:             appletDialog = new AppletPeerVoicePhone( m_MyApp, parent ); break;
 
     case eAppletPeerSelectFileToSend:       appletDialog = new AppletPeerSelectFileToSend( m_MyApp, parent ); break;
@@ -540,4 +592,44 @@ void AppletMgr::removeApplet( ActivityBase * activity )
 void AppletMgr::makeMessengerFullSized( void )
 {
     m_MyApp.getHomePage().setIsMaxScreenSize( true, true );
+}
+
+//============================================================================
+bool AppletMgr::viewMyServerAllowed( EApplet applet )
+{
+    EPluginType pluginType{ ePluginTypeInvalid };
+    switch( applet )
+    {
+    case eAppletAboutMeServerViewMine:
+        pluginType = ePluginTypeAboutMePageServer;
+        break;
+    case eAppletCamServerViewMine:
+        pluginType = ePluginTypeCamServer;
+        break;
+    case eAppletFileShareServerViewMine:
+        pluginType = ePluginTypeFileShareServer;
+        break;
+    case eAppletStoryboardServerViewMine:
+        pluginType = ePluginTypeStoryboardServer;
+        break;
+    default:
+        break;
+    }
+
+    if( ePluginTypeInvalid == pluginType )
+    {
+        QMessageBox::information( this, QObject::tr( "Cannot View Disabled Service" ), 
+            QObject::tr( "Unknown Plugin Service" ), QMessageBox::Ok );
+        return false;
+    }
+
+    bool isEnabled = m_MyApp.getUserMgr().getMyIdent()->getPluginPermission( pluginType ) != eFriendStateIgnore;
+    if( !isEnabled )
+    {
+        QMessageBox::information( this, QObject::tr( "Cannot View Disabled Service" ),
+            GuiParams::describePluginType( pluginType ) + QObject::tr( " Cannot be viewed when permission is disable" ), QMessageBox::Ok );
+        return false;
+    }
+
+    return true;
 }

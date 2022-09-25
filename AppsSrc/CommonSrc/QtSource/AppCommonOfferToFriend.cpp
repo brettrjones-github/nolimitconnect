@@ -20,7 +20,7 @@
 #include "GuiOfferHostMgr.h"
 
 #include "AppletPeerChangeFriendship.h"
-#include "AppletPeerViewSharedFiles.h"
+#include "AppletFileShareClientView.h"
 #include "AppletPeerSelectFileToSend.h"
 #include "ActivityMessageBox.h"
 #include "MyIcons.h"
@@ -53,7 +53,7 @@ bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePlu
 // view shared files
 void AppCommon::offerToFriendViewSharedFiles( GuiUser * poFriend, bool inGroup, QWidget* parent )
 {
-	//AppletPeerViewSharedFiles oDlg( *this, poFriend, this  );
+	//AppletFileShareClientView oDlg( *this, poFriend, this  );
 	//oDlg.exec();
 }
 

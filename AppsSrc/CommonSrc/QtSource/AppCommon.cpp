@@ -32,7 +32,6 @@
 #include "ActivitySoundOptions.h"
 #include "ActivityShowHelp.h"
 #include "ActivityTimedMessage.h"
-#include "ActivityViewLibraryFiles.h"
 
 #include "AppletDownloads.h"
 #include "AppletMultiMessenger.h"
@@ -407,44 +406,6 @@ bool AppCommon::getIsMaxScreenSize( bool isMessagerFrame )
 void AppCommon::switchWindowFocus( QWidget * appIconButton )
 {
 	m_HomePage.switchWindowFocus( appIconButton );
-}
-
-//============================================================================
-void AppCommon::launchLibraryActivity( uint8_t fileTypeFilter )
-{
-	if( false == getIsLibraryActivityActive() )
-	{
-		ActivityViewLibraryFiles * dlg = new ActivityViewLibraryFiles( *this, this, true );
-		if( fileTypeFilter )
-		{
-			EFileFilterType eFilterType = eFileFilterAll;
-			switch( fileTypeFilter )
-			{
-			case VXFILE_TYPE_PHOTO:
-				eFilterType = eFileFilterPhoto;
-				break;
-			case VXFILE_TYPE_AUDIO:
-				eFilterType = eFileFilterAudio;
-				break;
-			case VXFILE_TYPE_VIDEO:
-				eFilterType = eFileFilterVideo;
-				break;
-			case VXFILE_TYPE_DOC:
-				eFilterType = eFileFilterDocuments;
-				break;
-			case VXFILE_TYPE_ARCHIVE_OR_CDIMAGE:
-				eFilterType = eFileFilterArchive;
-				break;
-			case VXFILE_TYPE_OTHER:
-				eFilterType = eFileFilterOther;
-				break;
-			}
-
-			dlg->setFileFilter( eFilterType );
-		}
-
-		dlg->show();
-	}
 }
 
 //============================================================================

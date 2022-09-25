@@ -832,6 +832,15 @@ QString MyIcons::getIconFile( enum EMyIcons eMyIcon )
 	case eMyIconSoundSettings:
 		return ":/AppRes/Resources/sound-settings.svg";
 
+	case eMyIconShareAboutMeEye:
+		return ":/AppRes/Resources/share-about-me-eye.svg";
+	case eMyIconShareFilesEye:
+		return ":/AppRes/Resources/share-files-eye.svg";
+	case eMyIconShareStoryboardEye:
+		return ":/AppRes/Resources/share-storyboard-eye.svg";
+	case eMyIconShareWebCamEye:
+		return ":/AppRes/Resources/share-webcam-eye.svg";
+
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}

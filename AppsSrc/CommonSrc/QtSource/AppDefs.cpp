@@ -98,8 +98,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletScanSharedFiles:	        return eMyIconSearchFolder;
     case eAppletScanWebCam:	                return eMyIconSearchWebCam;
 
-    case eAppletSharedFiles:				return eMyIconShareFilesNormal;
-
     case eAppletTestAndDebug:	            return eMyIconDebug;
     case eAppletTestHostClient:	            return eMyIconDebug;
     case eAppletTestHostService:	        return eMyIconDebug;
@@ -152,7 +150,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPeerReplyOfferFile:         return eMyIconDebug;
     case eAppletPeerTodGame:                return eMyIconDebug;
     case eAppletPeerVideoPhone:             return eMyIconDebug;
-    case eAppletPeerViewSharedFiles:        return eMyIconDebug;
+    case eAppletFileShareClientView:        return eMyIconDebug;
     case eAppletPeerVoicePhone:             return eMyIconDebug;
 
     case eAppletPeerSelectFileToSend:       return eMyIconDebug;
@@ -170,8 +168,13 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletCamSettings:	            return eMyIconCamSetupNormal;
     case eAppletSoundSettings:	            return eMyIconSoundSettings;
 
-    // case eAppletPlayerMusic:			return eMyIconMusic;
-    // case eAppletPlayerPhoto:			return eMyIconGallery;
+    case eAppletClientShareFiles:		    return eMyIconFileServer;
+
+    case eAppletAboutMeServerViewMine:		return eMyIconShareAboutMeEye;
+    case eAppletCamServerViewMine:		    return eMyIconShareWebCamEye;
+    case eAppletFileShareServerViewMine:    return eMyIconShareFilesEye;
+    case eAppletStoryboardServerViewMine:   return eMyIconShareStoryboardEye;
+
     // case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
     // case eAppletStreamViewerCam:		return eMyIconCamStreamViewer;
     // case eAppletStreamViewerMusic:		return eMyIconMusicStreamPlayer;
@@ -194,8 +197,11 @@ QString DescribeApplet( EApplet applet )
     case eAppletEditAvatarImage:		    return QObject::tr( "Edit My Avatar Image" );
     case eAppletEditStoryboard:		        return QObject::tr( "Edit My Story Board (Blog)" );
     case eAppletStoryboardClient:		    return QObject::tr( "View Story Board (Blog)" );
+    case eAppletStoryboardServerViewMine:   return QObject::tr( "View My Story Board (Blog)" );
     case eAppletSoundSettings:		        return QObject::tr( "Sound Settings" );
     case eAppletAboutMeClient:              return QObject::tr( "View About Me Page" );
+    case eAppletAboutMeServerViewMine:      return QObject::tr( "View My About Me Page" );
+
     case eAppletHomePage:				    return QObject::tr( "Home" );
     case eAppletAboutNoLimitConnect:        return QObject::tr( "About No Limit Connect" );
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );
@@ -205,6 +211,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletPlayerPhoto:                return QObject::tr( "Photo Viewer" );
 
     case eAppletCamClient:                  return QObject::tr( "View Shared Web Cam" );
+    case eAppletCamServerViewMine:          return QObject::tr( "View My Shared Web Cam" );
     case eAppletCamSettings:                return QObject::tr( "Cam Settings" );
     case eAppletChatRoomJoin:               return QObject::tr( "Join Chat Room" );
     case eAppletChatRoomJoinSearch:			return QObject::tr( "Search For Chat Room To Join" );
@@ -313,7 +320,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletPeerReplyOfferFile:         return QObject::tr( "Reply Offer File" );
     case eAppletPeerTodGame:                return QObject::tr( "Truth Or Dare Game" );
     case eAppletPeerVideoPhone:             return QObject::tr( "Video Chat" );
-    case eAppletPeerViewSharedFiles:        return QObject::tr( "View Shared Files" );
+    case eAppletFileShareClientView:        return QObject::tr( "View Shared Files" );
     case eAppletPeerVoicePhone:             return QObject::tr( "Voice Phone (VOIP)" );
 
     case eAppletPeerSelectFileToSend:       return QObject::tr( "Select File To Send" );
@@ -322,7 +329,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletDownloads:                  return QObject::tr( "Downloads" );
     case eAppletUploads:                    return QObject::tr( "Uploads" );
 
-    case eAppletSharedFiles:				return QObject::tr( "Shared Files List" );
+    case eAppletFileShareServerViewMine:				return QObject::tr( "View My Shared Files" );
 
     case eAppletPopupMenu:                  return QObject::tr( "Menu" );
 

@@ -265,7 +265,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientRandomConnectRelay:   return ePluginTypeHostRandomConnect;
     case eAppletClientShareFiles:           return ePluginTypeFileShareServer;
 
-    case eAppletPeerViewSharedFiles:        return ePluginTypeFileShareClient;
+    case eAppletFileShareClientView:        return ePluginTypeFileShareClient;
 
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePageServer;
     case eAppletServiceAvatarImage:          return ePluginTypeHostPeerUser;

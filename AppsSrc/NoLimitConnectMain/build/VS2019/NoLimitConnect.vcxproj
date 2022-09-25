@@ -151,7 +151,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivitySoundOptions.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityTimedMessage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewMySharedFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityYesNoMsgBox.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommon.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonAudio.cpp" />
@@ -172,11 +171,13 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppGlobals.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAboutApp.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAboutMeServerViewMine.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletApplicationInfo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAssetPlayerBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletBrowseFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamClient.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamServerViewMine.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamSettings.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletChatRoomClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletChatRoomJoin.cpp" />
@@ -185,11 +186,12 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientAvatarImage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientRandomConnect.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientShareFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletDownloads.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletEditAboutMe.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletEditAvatarImage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletEditStoryboard.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletFileShareClientView.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletFileShareServerViewMine.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletFriendListClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletGalleryEmoticon.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletGalleryImage.cpp" />
@@ -232,7 +234,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerSessionFileOffer.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerTodGame.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerVideoPhone.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerViewSharedFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerVoicePhone.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPermissionList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPersonalRecorder.cpp" />
@@ -274,12 +275,12 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsTruthOrDare.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsVideoPhone.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsVoicePhone.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareOfferList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareServicesPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSnapshot.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletStoryboardServerViewMine.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestAndDebug.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestHostClient.cpp" />
@@ -514,6 +515,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AccountDb.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AccountMgr.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityCreateAccount.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletInviteCreate.h" />
@@ -546,10 +548,14 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletIgnoredHosts.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSoundSettings.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPlayerCamClip.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPlayerPhoto.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamClient.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeServerViewMine.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletStoryboardServerViewMine.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamServerViewMine.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletFileShareServerViewMine.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletFileShareClientView.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -804,7 +810,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPersonalRecorder.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPermissionList.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerVoicePhone.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerViewSharedFiles.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerVideoPhone.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerTodGame.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerSessionFileOffer.h" />
@@ -832,7 +837,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletEditAvatarImage.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletEditAboutMe.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletDownloads.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientShareFiles.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientRandomConnect.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientBase.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientAvatarImage.h" />
@@ -847,8 +851,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutApp.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppCommon.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityYesNoMsgBox.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewMySharedFiles.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityTimedMessage.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivitySoundOptions.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityShowHelp.h" />
@@ -905,7 +907,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityTimedMessage.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityVideoOptions.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewLibraryFiles.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewMySharedFiles.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityYesNo.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletAboutApp.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletAboutMeClient.ui" />
@@ -922,6 +923,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletEditAboutMe.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletEditAvatarImage.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletEditStoryBoard.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletFileShareClientView.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletFriendListClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGalleryEmoticon.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGalleryImage.ui" />
@@ -954,7 +956,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerSessionFileOffer.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerTodGame.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerVideoPhone.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerViewSharedFiles.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerVoicePhone.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPermissionList.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPersonalRecorder.ui" />

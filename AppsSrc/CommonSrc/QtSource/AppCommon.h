@@ -224,7 +224,6 @@ public:
 	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget * parent = 0 );
 	void						executeActivity( GuiOfferSession * offer, QWidget * parent );
 
-	void						launchLibraryActivity( uint8_t fileTypeFilter = 0 );
 	void						setIsLibraryActivityActive( bool isActive )						{ m_LibraryActivityActive = isActive; }
 	bool						getIsLibraryActivityActive( void )								{ return m_LibraryActivityActive; }
 

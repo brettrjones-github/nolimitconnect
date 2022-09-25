@@ -73,7 +73,6 @@ enum EApplet
     eAppletUserIdentity,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletSharedFiles,
     eAppletShareServicesPage,       // page to setup share with others services
     eAppletDownloads,
     eAppletUploads,
@@ -130,9 +129,13 @@ enum EApplet
     eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
 
     eAppletServiceAboutMe,
+    eAppletAboutMeServerViewMine,
     eAppletServiceStoryboard,
+    eAppletStoryboardServerViewMine,
     eAppletServiceShareWebCam,
+    eAppletCamServerViewMine,
     eAppletServiceShareFiles,
+    eAppletFileShareServerViewMine,
 
     eMaxSharedServicesApplets,      // marker.. end of user share services applets.. start of not launched by user page icon
 
@@ -204,7 +207,6 @@ enum EApplet
     eAppletPeerReplyOfferFile,
     eAppletPeerTodGame,
     eAppletPeerVideoPhone,
-    eAppletPeerViewSharedFiles,
     eAppletPeerVoicePhone,
 
     eAppletPeerSelectFileToSend,
@@ -222,6 +224,7 @@ enum EApplet
     eAppletInviteCreate,
 
     eAppletAboutMeClient,
+    eAppletFileShareClientView,
     eAppletStoryboardClient,
 
     eAppletServiceAvatarImage, // TODO: this service can probably be removed

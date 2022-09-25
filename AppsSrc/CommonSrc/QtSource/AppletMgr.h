@@ -50,8 +50,9 @@ protected:
 
     void                        makeMessengerFullSized( void );
 
-
 	QWidget *					getActiveWindow( void );
+
+	bool						viewMyServerAllowed( EApplet applet );
 
 	AppCommon&					m_MyApp;
     QVector<AppletLaunchWidget *>		m_AppletList;

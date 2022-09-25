@@ -45,8 +45,6 @@ protected slots:
 	void						slotShredButtonClicked( void );
 
 protected:
-	virtual	void				resizeEvent( QResizeEvent * ev );
-
 	Ui::FileActionBarWidgetClass	ui;
     AppCommon&					m_MyApp;
 };

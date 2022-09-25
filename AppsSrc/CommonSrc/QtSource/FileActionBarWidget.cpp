@@ -42,23 +42,6 @@ FileActionBarWidget::FileActionBarWidget(QWidget *parent)
 }
 
 //============================================================================
-void FileActionBarWidget::resizeEvent( QResizeEvent * ev )
-{
-	QFrame::resizeEvent( ev );
-    //int buttonHeight = geometry().height() - 4;
-	//QSize buttonSize( buttonHeight, buttonHeight );
-	//ui.m_PlayFileButton->setFixedSizeAbsolute( buttonSize );
-	//ui.m_FileInLibraryButton->setFixedSizeAbsolute( buttonSize );
-	//ui.m_FileShareButton->setFixedSizeAbsolute( buttonSize );
-	//ui.m_ShredFileButton->setFixedSizeAbsolute( buttonSize );
-
-	//ui.m_PlayFileButton->setIconSize( buttonSize );
-	//ui.m_FileInLibraryButton->setIconSize( buttonSize );
-	//ui.m_FileShareButton->setIconSize( buttonSize );
-	//ui.m_ShredFileButton->setIconSize( buttonSize );
-}
-
-//============================================================================
 void FileActionBarWidget::slotPlayButtonClicked( void )
 {
 	emit signalPlayButtonClicked();
@@ -85,25 +68,11 @@ void FileActionBarWidget::slotShredButtonClicked( void )
 //============================================================================
 void FileActionBarWidget::setIsInLibrary( bool isInLibrary )
 {
-	if( isInLibrary )
-	{
-		ui.m_FileInLibraryButton->setIcons( eMyIconLibraryNormal );
-	}
-	else
-	{
-		ui.m_FileInLibraryButton->setIcons( eMyIconLibraryCancel );
-	}
+	ui.m_FileInLibraryButton->setNotifyOnlineEnabled( isInLibrary );
 }
 
 //============================================================================
 void FileActionBarWidget::setIsShared( bool isShared )
 {
-	if( isShared )
-	{
-		ui.m_FileShareButton->setIcons( eMyIconServiceShareFiles );
-	}
-	else
-	{
-		ui.m_FileShareButton->setIcons( eMyIconShareFilesDisabled );
-	}
+	ui.m_FileShareButton->setNotifyOnlineEnabled( isShared );
 }

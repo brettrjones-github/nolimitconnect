@@ -31,8 +31,7 @@ namespace
 }
 
 //============================================================================
-ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app, 
-											QWidget *		parent )
+ActivityScanProfiles::ActivityScanProfiles(	AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_SCAN_PROFILES, app, parent, eAppletScanAboutMe, true )
 , m_Ident( NULL )
 , m_iCountdownCnt( 0 )
@@ -192,7 +191,6 @@ void ActivityScanProfiles::showMatchedPair( GuiUser * netIdent, QImage& oPicBitm
 	setupIdentWidget( netIdent );
 	QPixmap oPicPixmap = QPixmap::fromImage(oPicBitmap);
 	ui.ProfileFrame->setPixmap( oPicPixmap );
-	//ui.ProfileFrame->repaint();
 }
 
 //============================================================================

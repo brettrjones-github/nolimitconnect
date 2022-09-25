@@ -12,26 +12,21 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "AppletClientShareFiles.h"
-#include "AppCommon.h"
-#include "AppSettings.h"
-#include "MyIcons.h"
-
-#include <CoreLib/VxDebug.h>
+#include "AppletFileShareServerViewMine.h"
 
 //============================================================================
-AppletClientShareFiles::AppletClientShareFiles( AppCommon& app, QWidget * parent )
-: AppletClientBase( OBJNAME_APPLET_CLIENT_SHARE_FILES, app, parent )
+AppletFileShareServerViewMine::AppletFileShareServerViewMine( AppCommon& app, QWidget * parent, QString launchParam )
+    : AppletFileShareClientView( app, parent )
 {
-	setAppletType( eAppletClientShareFiles );
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
-
-	m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletClientShareFiles::~AppletClientShareFiles()
+AppletFileShareServerViewMine::~AppletFileShareServerViewMine()
 {
-    m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletFileShareServerViewMine::setAppletType( EApplet applet )
+{
+    AppletFileShareClientView::setAppletType( applet );
 }

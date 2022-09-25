@@ -22,8 +22,7 @@
 #include "AppletUploads.h"
 #include "AppletDownloads.h"
 #include "ActivityBrowseFiles.h"
-#include "ActivityViewMySharedFiles.h"
-#include "ActivityViewLibraryFiles.h"
+
 #include "AppletPersonalRecorder.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h>
@@ -68,48 +67,6 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 			dlg.exec();
 			break;
 		}
-
-	case 3: // My Library
-		{
-			ActivityViewLibraryFiles dlg( *this, this );
-			dlg.exec();
-			break;
-		}
-
-	case 4: // View My Shared Files
-		{
-			ActivityViewMySharedFiles dlg( *this, this );
-			dlg.exec();
-			break;
-		}
-
-
-		//case 3: //Start/Stop File Share Server
-		//	switch( m_Engine.fromGuiGetPluginServerState( ePluginTypeFileShareServer ) )
-		//	{
-		//	case ePluginServerStateStarted:	
-		//		m_Engine.enableFileShare(false);
-		//		m_Engine.fromGuiStopPluginSession( ePluginTypeFileShareServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
-		//		okMessageBox( tr("File Share Server"), tr("File sharing has been stopped") );
-		//		break;
-
-		//	case ePluginServerStateStopped:
-		//		m_Engine.fromGuiStartPluginSession( ePluginTypeFileShareServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
-		//		m_Engine.enableFileShare(true);
-		//		okMessageBox( tr("File Share Server"), tr("File sharing has been started") );
-		//		break;
-
-		//	case ePluginServerStateDisabled:	// disabled by permissions
-		//		{
-		//			okMessageBox( tr("File Share Server"), tr("File sharing is disabled by permissions") );
-		//			ActivityPermissions * poDlg = new ActivityPermissions( *this, getCentralWidget() );
-		//			poDlg->setPluginType(ePluginTypeFileShareServer);
-		//			poDlg->exec();
-		//		}
-
-		//		break;
-		//	}
-		//	break;
 
 	case 5: // View Downloading Files
         if( getAppletDownloads() )

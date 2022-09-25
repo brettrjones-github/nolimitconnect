@@ -95,7 +95,6 @@
 
 #define OBJNAME_APPLET_CLIENT_AVATAR_IMAGE				"AppletClientAvatarImage"
 #define OBJNAME_APPLET_CLIENT_CHAT_ROOM				    "AppletClientChatRoom"
-#define OBJNAME_APPLET_CLIENT_SHARE_FILES				"AppletClientShareFiles"
 #define OBJNAME_APPLET_CLIENT_RANDOM_PERSON			    "AppletClientRandomConnect"
 #define OBJNAME_APPLET_CLIENT_RANDOM_PERSON_RELAY		"AppletClientRandomConnectRelay"
 
@@ -159,7 +158,7 @@
 #define OBJNAME_APPLET_SETTINGS_VIDEO_PHONE			    "AppletSettingsVideoPhone"
 #define OBJNAME_APPLET_SETTINGS_VOICE_PHONE			    "AppletSettingsVoicePhone"
 
-#define OBJNAME_APPLET_SHARED_FILES_LIST				"AppletSharedFiles"
+#define OBJNAME_APPLET_SHARED_FILES_LIST				"AppletSharedFilesViewMine"
 
 #define OBJNAME_APPLET_SHARE_OFFER_LIST			        "AppletShareOfferList"
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"

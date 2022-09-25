@@ -15,7 +15,7 @@
 
 
 
-#include "AppletPeerViewSharedFiles.h"
+#include "AppletFileShareClientView.h"
 #include "FileListReplySession.h"
 #include "AppCommon.h"
 #include "GuiFileXferSession.h"

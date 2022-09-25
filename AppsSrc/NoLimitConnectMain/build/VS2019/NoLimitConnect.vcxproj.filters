@@ -218,9 +218,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerVoicePhone.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerViewSharedFiles.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletPeerVideoPhone.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -302,9 +299,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletDownloads.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientShareFiles.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletClientRandomConnect.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -345,12 +339,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityYesNoMsgBox.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewMySharedFiles.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityTimedMessage.h">
@@ -923,9 +911,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\soundio\AudioMasterClock.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
@@ -946,6 +931,24 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamClient.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeServerViewMine.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletStoryboardServerViewMine.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamServerViewMine.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletFileShareServerViewMine.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletFileShareClientView.h">
+      <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1018,9 +1021,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityTimedMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewMySharedFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityYesNoMsgBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1064,9 +1064,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientRandomConnect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletClientShareFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletDownloads.cpp">
@@ -1148,9 +1145,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerVideoPhone.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerViewSharedFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerVoicePhone.cpp">
@@ -1639,9 +1633,6 @@
     <ClCompile Include="..\..\..\..\GuiInterface\OsWin32\IWin32.cpp">
       <Filter>Source Files\GuiInterface\OsWin32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAssetPlayerBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -2011,9 +2002,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioEchoCancelImpl.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSharedFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\soundio\AudioMasterClock.cpp">
       <Filter>Source Files\soundio</Filter>
     </ClCompile>
@@ -2042,6 +2030,24 @@
       <Filter>Source Files\GuiPluginMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\ActivityViewLibraryFiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAboutMeServerViewMine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletStoryboardServerViewMine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletCamServerViewMine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletFileShareServerViewMine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletFileShareClientView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2416,12 +2422,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityVideoOptions.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewLibraryFiles.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewMySharedFiles.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityYesNo.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2519,9 +2519,6 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerVideoPhone.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerViewSharedFiles.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerVoicePhone.ui">
@@ -2828,6 +2825,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamClient.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\CommonSrc\Forms\ActivityViewLibraryFiles.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletFileShareClientView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

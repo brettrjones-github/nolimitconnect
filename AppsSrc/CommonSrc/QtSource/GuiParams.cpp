@@ -103,7 +103,7 @@ QSize GuiParams::getButtonSize( EButtonSize buttonSize )
 //============================================================================
 int GuiParams::getMaxTiledIconSize( void )
 {
-    return getButtonSize( eButtonSizeLarge ).width() * 2;
+    return (int)((float)getButtonSize( eButtonSizeLarge ).width() * 2.5f);
 }
 
 //============================================================================

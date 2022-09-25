@@ -328,5 +328,9 @@
         <file>Resources/sound-settings.svg</file>
         <file>Resources/edit-hyperlink.svg</file>
         <file>Resources/library-removed.svg</file>
+        <file>Resources/share-about-me-eye.svg</file>
+        <file>Resources/share-files-eye.svg</file>
+        <file>Resources/share-storyboard-eye.svg</file>
+        <file>Resources/share-webcam-eye.svg</file>
     </qresource>
 </RCC>
