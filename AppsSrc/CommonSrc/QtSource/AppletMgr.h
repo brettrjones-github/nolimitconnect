@@ -16,6 +16,8 @@
 #include <QWidget> // must be declared first or linux Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
 #include "AppDefs.h"
+
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxGUID.h>
 
 class ActivityBase;
@@ -53,6 +55,8 @@ protected:
 	QWidget *					getActiveWindow( void );
 
 	bool						viewMyServerAllowed( EApplet applet );
+	bool						launchAppletAllowed( EApplet applet );
+	bool						isServiceEnabled( EPluginType pluginType );
 
 	AppCommon&					m_MyApp;
     QVector<AppletLaunchWidget *>		m_AppletList;

@@ -14,8 +14,10 @@
 
 #include "AppletFileShareServerViewMine.h"
 
+#include "AppCommon.h"
+
 //============================================================================
-AppletFileShareServerViewMine::AppletFileShareServerViewMine( AppCommon& app, QWidget * parent, QString launchParam )
+AppletFileShareServerViewMine::AppletFileShareServerViewMine( AppCommon& app, QWidget * parent )
     : AppletFileShareClientView( app, parent )
 {
 }
@@ -23,6 +25,9 @@ AppletFileShareServerViewMine::AppletFileShareServerViewMine( AppCommon& app, QW
 //============================================================================
 AppletFileShareServerViewMine::~AppletFileShareServerViewMine()
 {
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
+	m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================

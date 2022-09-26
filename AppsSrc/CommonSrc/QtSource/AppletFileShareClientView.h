@@ -35,7 +35,7 @@ class AppletFileShareClientView : public AppletPeerBase, public ToGuiFileXferInt
 	Q_OBJECT
 public:
 	AppletFileShareClientView( AppCommon& myApp, QWidget * parent = nullptr );
-	virtual ~AppletFileShareClientView() override = default;
+	virtual ~AppletFileShareClientView();
 
 	void                        setIdentity( GuiUser* guiUser );
 

@@ -332,5 +332,7 @@
         <file>Resources/share-files-eye.svg</file>
         <file>Resources/share-storyboard-eye.svg</file>
         <file>Resources/share-webcam-eye.svg</file>
+        <file>Resources/about-me-edit.svg</file>
+        <file>Resources/storyboard-edit.svg</file>
     </qresource>
 </RCC>

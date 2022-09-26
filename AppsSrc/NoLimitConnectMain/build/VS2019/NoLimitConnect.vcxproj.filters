@@ -1894,9 +1894,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonSearch.cpp">
       <Filter>Source Files\AppCommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonServers.cpp">
-      <Filter>Source Files\AppCommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonSignalsAndSlots.cpp">
       <Filter>Source Files\AppCommon</Filter>
     </ClCompile>

@@ -32,7 +32,10 @@ public:
 	void						masterClockShutdown( void )						{ m_AudioTimer->stop(); }
 
 	void                        microphoneDeviceEnabled( bool isEnabled );
+	bool						isMicrophoneDeviceEnabled( void )				{ return m_MicDeviceEnabled; }
+
 	void                        speakerDeviceEnabled( bool isEnabled );
+	bool						isSpeakerDeviceEnabled( void )					{ return m_SpeakerDeviceEnabled; }
 
 	void						audioMicWriteSampleCnt( int64_t writeSampleCnt );
 	void						audioMicWriteDurationTime( int64_t writeDurationMs, int64_t micWriteTimeMs );

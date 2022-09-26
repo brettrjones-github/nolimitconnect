@@ -501,27 +501,38 @@ void PluginCamServer::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr
 {
 	PktVideoFeedStatus * pktVideoStatus = ( PktVideoFeedStatus * )pktHdr;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
-	if( poSession )
+	TxSession * txSession = (TxSession *)m_PluginSessionMgr.findTxSessionByOnlineId( true, netIdent->getMyOnlineId() );
+	if( txSession )
 	{
 		LogMsg( LOG_INFO, "PluginCamServer::onPktVideoFeedStatus %d", pktVideoStatus->getFeedStatus() );
 		if( eFeedStatusOnline != pktVideoStatus->getFeedStatus() )
 		{
-			IToGui::getToGui().toGuiRxedOfferReply(	netIdent,			
-											m_ePluginType,		
-											0,				// plugin defined data
-											( eFeedStatusBusy == pktVideoStatus->getFeedStatus() ) ? eOfferResponseBusy : eOfferResponseEndSession,
-											0,
-											0,
-											pktVideoStatus->getRmtSessionId(),
-											pktVideoStatus->getLclSessionId() );
-
 			m_PluginSessionMgr.endPluginSession( netIdent->getMyOnlineId(), true );
 			m_PluginSessionMgr.removeTxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 			if( getIsServerInSession() )
 			{
-				IToGui::getToGui().toGuiPluginStatus( m_ePluginType, 1, m_PluginSessionMgr.getTxSessionCount() );
+				IToGui::getToGui().toGuiPluginStatus( m_ePluginType, 1, m_PluginSessionMgr.getTxSessionCount( true ) );
 			}
+		}
+	}
+
+	RxSession* rxSession = (RxSession*)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	if( rxSession )
+	{
+		LogMsg( LOG_INFO, "PluginCamServer::onPktVideoFeedStatus %d", pktVideoStatus->getFeedStatus() );
+		if( eFeedStatusOnline != pktVideoStatus->getFeedStatus() )
+		{
+			IToGui::getToGui().toGuiRxedOfferReply( netIdent,
+				m_ePluginType,
+				0,				// plugin defined data
+				(eFeedStatusBusy == pktVideoStatus->getFeedStatus()) ? eOfferResponseBusy : eOfferResponseEndSession,
+				0,
+				0,
+				pktVideoStatus->getRmtSessionId(),
+				pktVideoStatus->getLclSessionId() );
+
+			m_PluginSessionMgr.endPluginSession( netIdent->getMyOnlineId(), true );
+			m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		}
 	}
 }

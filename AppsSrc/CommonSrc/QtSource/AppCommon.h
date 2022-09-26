@@ -827,7 +827,6 @@ protected slots:
 
 	void						onMenuFileSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 	void						onMenuSearchSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
-	void						onMenuServerSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 
 	void						onOncePerSecond( void );
 

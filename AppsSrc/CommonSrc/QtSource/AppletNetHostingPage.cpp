@@ -44,11 +44,6 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
         // create launchers for the hosting applets
         for( int i = int( eMaxSearchApplets + 1 ); i < eMaxHostApplets; i++ )
         {
-            if( i == eAppletGroupListLocalView )
-            {
-                // will be added last
-                continue;
-            }
 
             // do not include hidden or secondary service hosting plugins
             if( ( eAppletServiceHostNetwork != i ) &&

@@ -54,7 +54,8 @@ AppletFileShareClientView::AppletFileShareClientView( AppCommon& app, QWidget *	
     connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)),			this,  SLOT(slotApplyFileFilter(unsigned char)) );
 
-
+	m_MyApp.activityStateChange( this, true );
+	m_MyApp.wantToGuiActivityCallbacks( this, true );
 	m_MyApp.wantToGuiFileXferCallbacks( this, true );
 
     /*
@@ -69,6 +70,14 @@ AppletFileShareClientView::AppletFileShareClientView( AppCommon& app, QWidget *	
 	//"ViewDirectory"
 	//"DownloadFile"
 	checkDiskSpace();
+}
+
+//============================================================================
+AppletFileShareClientView::~AppletFileShareClientView()
+{
+	m_MyApp.wantToGuiFileXferCallbacks( this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
+	m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================

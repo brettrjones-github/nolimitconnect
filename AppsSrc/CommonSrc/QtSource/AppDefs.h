@@ -57,9 +57,7 @@ enum EApplet
 {
 	eAppletUnknown = 0,             // do not setup base class ui in the case of unknown
     eAppletActivityDialog,          // place dialog over home window.. do not setup base class ui in the case of dialog
-    eAppletEditAboutMe,
     eAppletEditAvatarImage,
-    eAppletEditStoryboard,
     eAppletHomePage,
     // start of home page applets.. shown in order of enumeration
     eAppletGetStarted,
@@ -73,9 +71,9 @@ enum EApplet
     eAppletUserIdentity,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletShareServicesPage,       // page to setup share with others services
     eAppletDownloads,
     eAppletUploads,
+    eAppletShareServicesPage,       // page to setup share with others services
     eAppletNetHostingPage,	        // page to setup network/group hosts and services
     eAppletSettingsPage,            // page of setting applets
     eAppletAboutNoLimitConnect,
@@ -121,16 +119,17 @@ enum EApplet
     eAppletServiceHostNetwork,      // network host service for a nolimitconnect network.. requires fixed ip address, group list hosts announce to network host
     eAppletSettingsHostNetwork,
     eAppletHostNetworkStatus,
+    eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
 
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
 
     eMaxHostApplets,                // marker.. end of hosting applets.. start of other services
 
-    eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
-
     eAppletServiceAboutMe,
+    eAppletEditAboutMe,
     eAppletAboutMeServerViewMine,
     eAppletServiceStoryboard,
+    eAppletEditStoryboard,
     eAppletStoryboardServerViewMine,
     eAppletServiceShareWebCam,
     eAppletCamServerViewMine,

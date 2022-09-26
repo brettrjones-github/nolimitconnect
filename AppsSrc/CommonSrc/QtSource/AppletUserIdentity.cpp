@@ -45,9 +45,11 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
     setAppletType( eAppletUserIdentity );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-    ui.m_EditAboutMeButton->setIcon( eMyIconServiceShareAboutMe );
     ui.m_EditAvatarImageButton->setIcon( eMyIconServiceAvatarImage );
-    ui.m_EditStoryboardButton->setIcon( eMyIconServiceShareStoryboard );
+    ui.m_EditAboutMeButton->setIcon( eMyIconAboutMeEdit );
+    ui.m_ViewAboutMeButton->setIcon( eMyIconServiceShareAboutMe );
+    ui.m_EditStoryboardButton->setIcon( eMyIconStoryboardEdit );
+    ui.m_ViewStoryboardButton->setIcon( eMyIconServiceShareStoryboard );
 
     GuiHelpers::fillGender( ui.m_GenderComboBox );
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
@@ -75,9 +77,11 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
     connect( ui.m_ApplyGenderButton, SIGNAL( clicked() ), this, SLOT( onApplyGenderClick() ) );
 
     connect( ui.m_EditAboutMeButton, SIGNAL( clicked() ), this, SLOT( slotEditAboutMeButClick() ) );
+    connect( ui.m_ViewAboutMeButton, SIGNAL( clicked() ), this, SLOT( slotViewAboutMeButClick() ) );
     connect( ui.m_EditAvatarImageButton, SIGNAL( clicked() ), this, SLOT( slotEditAvatarButClick() ) );
     connect( ui.m_AvatarImageButton, SIGNAL( clicked() ), this, SLOT( slotEditAvatarButClick() ) );
     connect( ui.m_EditStoryboardButton, SIGNAL( clicked() ), this, SLOT( slotEditStoryboardButClick() ) );
+    connect( ui.m_ViewStoryboardButton, SIGNAL( clicked() ), this, SLOT( slotViewStoryboardButClick() ) );
 
     connect( ui.m_CreateNewAccountButton, SIGNAL( clicked() ), this, SLOT( slotCreateNewAccount() ) );
     connect( ui.m_DeleteAccountButton, SIGNAL( clicked() ), this, SLOT( slotDeleteAccount() ) );
@@ -262,26 +266,38 @@ void AppletUserIdentity::onApplyGenderClick( void )
 }
 
 //============================================================================
+void AppletUserIdentity::slotEditAvatarButClick( void )
+{
+    AppletEditAvatarImage* editAvatarImage = dynamic_cast<AppletEditAvatarImage*>(m_MyApp.getAppletMgr().launchApplet( eAppletEditAvatarImage, this ));
+    if( editAvatarImage )
+    {
+        connect( editAvatarImage, SIGNAL( signalAvatarImageChanged( ThumbInfo* ) ), this, SLOT( slotAvatarImageChanged( ThumbInfo* ) ) );
+        connect( editAvatarImage, SIGNAL( signalAvatarImageRemoved() ), this, SLOT( slotAvatarImageRemoved() ) );
+    }
+}
+
+//============================================================================
 void AppletUserIdentity::slotEditAboutMeButClick( void )
 {
     m_MyApp.getAppletMgr().launchApplet( eAppletEditAboutMe, this );
 }
 
 //============================================================================
-void AppletUserIdentity::slotEditAvatarButClick( void )
+void AppletUserIdentity::slotViewAboutMeButClick( void )
 {
-    AppletEditAvatarImage * editAvatarImage = dynamic_cast< AppletEditAvatarImage * >( m_MyApp.getAppletMgr().launchApplet( eAppletEditAvatarImage, this ) );
-    if( editAvatarImage )
-    {
-        connect( editAvatarImage, SIGNAL( signalAvatarImageChanged( ThumbInfo * ) ), this, SLOT( slotAvatarImageChanged( ThumbInfo * ) ) );
-        connect( editAvatarImage, SIGNAL( signalAvatarImageRemoved() ), this, SLOT( slotAvatarImageRemoved() ) );
-    }
+    m_MyApp.getAppletMgr().launchApplet( eAppletAboutMeServerViewMine, this );
 }
 
 //============================================================================
 void AppletUserIdentity::slotEditStoryboardButClick( void )
 {
     m_MyApp.getAppletMgr().launchApplet( eAppletEditStoryboard, this );
+}
+
+//============================================================================
+void AppletUserIdentity::slotViewStoryboardButClick( void )
+{
+    m_MyApp.getAppletMgr().launchApplet( eAppletStoryboardServerViewMine, this );
 }
 
 //============================================================================

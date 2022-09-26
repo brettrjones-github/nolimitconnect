@@ -444,7 +444,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonRender.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonScan.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonSearch.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonServers.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppCommonSignalsAndSlots.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppDefs.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppGlobals.cpp \

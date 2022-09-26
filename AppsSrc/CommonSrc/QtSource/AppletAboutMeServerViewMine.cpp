@@ -14,6 +14,8 @@
 
 #include "AppletAboutMeServerViewMine.h"
 
+#include "AppCommon.h"
+
 //============================================================================
 AppletAboutMeServerViewMine::AppletAboutMeServerViewMine( AppCommon& app, QWidget * parent )
 : AppletAboutMeClient( app, parent )
@@ -23,6 +25,8 @@ AppletAboutMeServerViewMine::AppletAboutMeServerViewMine( AppCommon& app, QWidge
 //============================================================================
 AppletAboutMeServerViewMine::~AppletAboutMeServerViewMine()
 {
+	m_MyApp.activityStateChange( this, false );
+	m_MyApp.wantToGuiActivityCallbacks( this, false );
 }
 
 //============================================================================

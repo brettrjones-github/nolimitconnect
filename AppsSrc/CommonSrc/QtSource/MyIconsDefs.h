@@ -417,5 +417,8 @@ enum EMyIcons
 	eMyIconShareStoryboardEye,
 	eMyIconShareWebCamEye,
 
+	eMyIconAboutMeEdit,
+	eMyIconStoryboardEdit,
+
 	eMaxMyIcon	// must be last
 };

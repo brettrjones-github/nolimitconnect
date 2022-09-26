@@ -83,22 +83,31 @@ void VxSktLoopback::enableSktLoopbackThread( bool enable )
 //============================================================================
 void VxSktLoopback::executeSktLoopbackRxThreadFunc( void )
 {
-    while( !m_SktLoopbackThread.isAborted() && !VxIsAppShuttingDown() && !m_PktList.empty() )
+    int64_t lastTimePktProcessed = GetHighResolutionTimeMs();
+    while( !m_SktLoopbackThread.isAborted() && !VxIsAppShuttingDown() && (!m_PktList.empty() || GetHighResolutionTimeMs() - lastTimePktProcessed  < 10000))
     {
-        VxPktHdr* pktHdr{ nullptr };
-        lockPktList();
-        auto iter = m_PktList.begin();
-        if( iter != m_PktList.end() )
+        if( !m_PktList.empty() )
         {
-            pktHdr = *iter;
-            m_PktList.erase( iter );
+            VxPktHdr* pktHdr{ nullptr };
+            lockPktList();
+            auto iter = m_PktList.begin();
+            if( iter != m_PktList.end() )
+            {
+                pktHdr = *iter;
+                m_PktList.erase( iter );
+            }
+
+            unlockPktList();
+            if( pktHdr )
+            {
+                lastTimePktProcessed = GetHighResolutionTimeMs();
+                m_Engine.handlePkt( this, pktHdr );
+                delete pktHdr;
+            }
         }
-        
-        unlockPktList();
-        if( pktHdr )
+        else
         {
-            m_Engine.handlePkt( this, pktHdr );
-            delete pktHdr;
+            VxSleep( 400 );
         }
     }
 }

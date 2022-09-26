@@ -19,7 +19,7 @@ class AppletFileShareServerViewMine : public AppletFileShareClientView
 {
 	Q_OBJECT
 public:
-	AppletFileShareServerViewMine( AppCommon& app, QWidget * parent, QString launchParam = "" );
+	AppletFileShareServerViewMine( AppCommon& app, QWidget * parent );
 	virtual ~AppletFileShareServerViewMine();
 
 	virtual void				setAppletType( EApplet applet ) override;

@@ -50,10 +50,18 @@ void AudioMasterClock::enableMasterClock( bool enable )
 void AudioMasterClock::resetMasterClock( void )
 {
 	int64_t timeNow = GetHighResolutionTimeMs();
-	LogMsg( LOG_VERBOSE, "AudioMasterClock::resetMasterClock reset timer now %d next %d mic consumed %d consumed %d", (int)timeNow, (int)m_NextFrameTimeMs, (int)m_MicConsumedTime, (int)m_SpeakerConsumedTime );
-	m_NextFrameTimeMs = timeNow + FRAME_INTERVAL_MS;
-	m_MicConsumedTime = 0;
-	m_SpeakerConsumedTime = 0;
+	if( m_MicDeviceEnabled )
+	{
+		m_MicConsumedTime = 0;
+		LogMsg( LOG_VERBOSE, "AudioMasterClock::resetMasterClock reset mic timer now %lld dif next %lld mic consumed %lld", timeNow, timeNow - m_MicWriteTimeMs, m_MicConsumedTime );
+	}
+	else if( m_SpeakerDeviceEnabled )
+	{
+		m_SpeakerConsumedTime = 0;
+		LogMsg( LOG_VERBOSE, "AudioMasterClock::resetMasterClock reset speaker timer now %lld dif next %lld speaker consumed %lld", timeNow, timeNow - m_SpeakerReadTimeMs, m_SpeakerConsumedTime );
+	}
+	
+	m_NextFrameTimeMs = timeNow + FRAME_INTERVAL_MS;	
 }
 
 //============================================================================
@@ -129,7 +137,7 @@ void AudioMasterClock::slotAudioTimerTimeout( void )
 {
 	int64_t timeNow = GetHighResolutionTimeMs();
 
-	if( !m_NextFrameTimeMs || timeNow > m_NextFrameTimeMs + 300 )
+	if( !m_NextFrameTimeMs || timeNow > m_NextFrameTimeMs + 500 )
 	{
 		// audio was paused or something
 		resetMasterClock();
@@ -154,7 +162,7 @@ void AudioMasterClock::slotAudioTimerTimeout( void )
 					frameCnt = 0;
                     if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 					{
-						LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout mic now %d ms consumed totals mic %lld speaker %lld diff %lld", (int)m_MicConsumedTime, m_MicConsumedTotal, m_SpeakerConsumedTotal, std::abs( m_SpeakerConsumedTotal - m_MicConsumedTotal ) );
+						LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout mic now %lld ms consumed totals mic %lld speaker %lld diff %lld", m_MicConsumedTime, m_MicConsumedTotal, m_SpeakerConsumedTotal, std::abs( m_SpeakerConsumedTotal - m_MicConsumedTotal ) );
 					}
 
 					if( m_AudioIoMgr.getSampleCntDebugEnable() )
@@ -172,7 +180,7 @@ void AudioMasterClock::slotAudioTimerTimeout( void )
 					m_NextFrameTimeMs--;
                     if( m_AudioIoMgr.getAudioTimingDebugEnable() )
 					{
-						LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout mic consumed %d to large elapsed %d ms diff %d ", (int)m_MicConsumedTime, timeElapsed, (int)(timeNow - m_NextFrameTimeMs) );
+						LogMsg( LOG_VERBOSE, "AudioMasterClock::slotAudioTimerTimeout mic consumed %lld to large elapsed %d ms diff %d ", m_MicConsumedTime, timeElapsed, (int)(timeNow - m_NextFrameTimeMs) );
 					}
 				}
 			}

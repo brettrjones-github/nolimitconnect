@@ -37,6 +37,7 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 
  
 https://iconmonstr.com/
+about-me-edit.svg ( modified )
 avatar.svg
 call-list.svg (modified)
 cam-rotate.svg (modified)
@@ -113,6 +114,7 @@ overlay-friend.svg (modified)
 overlay-globe.svg (modified)
 overlay-minus.svg (modified)
 overlay-plus.svg (modified)
+pencil.svg
 person.svg (modified) 
 person-round.svg (modified) 
 person-solid.svg
@@ -134,12 +136,14 @@ service-group-chat.svg
 service-group-chat-settings.svg ( modified )
 settings-gear.svg
 share-about-me.svg ( modified )
+share-about-me-eye.svg ( modified )
 share-avatar.svg ( modified )
 share-files.svg ( modified )
 share-hand.svg ( modified )
 share-relay.svg ( modified )
 share-services.svg
 share-storyboard.svg ( modified )
+share-storyboard-eye.svg ( modified )
 share-webcam.svg ( modified )
 share-with-person.svg ( modified )
 smile-emoticon.svg
@@ -149,6 +153,7 @@ star-empty.svg
 star-full.svg
 star-half-full.svg
 storyboard.svg
+storyboard-edit.svg ( modified )
 thumbs-up.svg
 thumbs-down.svg (modified)
 unknown-person.svg (modified) 

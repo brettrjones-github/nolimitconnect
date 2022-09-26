@@ -1257,14 +1257,14 @@ void PluginSessionMgr::removeRxSessionByOnlineId( VxGUID& onlineId, bool pluginI
 
 	for( auto iter = m_aoSessions.begin(); iter != m_aoSessions.end(); ++iter )
 	{
-		PluginSessionBase * session = (*iter).second;
+		PluginSessionBase* session = (*iter).second;
 		if( session->isRxSession()
 			&& ( session->getOnlineId() == onlineId ) )
 		{
 			LogMsg( LOG_VERBOSE, "PluginSessionMgr::removeRxSessionByOnlineId %s session id %s connect info %s", 
 				session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			m_aoSessions.erase( iter );
 			delete session;
-			m_aoSessions.erase(iter);	
 			break;
 		}
 	}

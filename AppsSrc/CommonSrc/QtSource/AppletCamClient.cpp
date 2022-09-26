@@ -37,6 +37,7 @@ AppletCamClient::AppletCamClient( AppCommon& app, QWidget * parent )
 //============================================================================
 AppletCamClient::~AppletCamClient()
 {
+    stopCamFeed();
     m_MyApp.activityStateChange( this, false );
 	m_MyApp.wantToGuiActivityCallbacks( this, false );
 }

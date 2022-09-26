@@ -14,6 +14,8 @@
 
 #include "AppletStoryboardServerViewMine.h"
 
+#include "AppCommon.h"
+
 //============================================================================
 AppletStoryboardServerViewMine::AppletStoryboardServerViewMine( AppCommon& app, QWidget* parent )
     : AppletStoryboardClient( app, parent )
@@ -23,10 +25,12 @@ AppletStoryboardServerViewMine::AppletStoryboardServerViewMine( AppCommon& app, 
 //============================================================================
 AppletStoryboardServerViewMine::~AppletStoryboardServerViewMine()
 {
+    m_MyApp.activityStateChange( this, false );
+    m_MyApp.wantToGuiActivityCallbacks( this, false );
 }
 
 //============================================================================
 void AppletStoryboardServerViewMine::setAppletType( EApplet applet )
 {
-    AppletStoryboardClient::setAppletType( applet );
+    AppletStoryboardClient::setAppletType( eAppletStoryboardServerViewMine );
 }

@@ -27,10 +27,7 @@ public:
 	AppletLaunchWidget( AppCommon& myApp, EApplet appletType,  AppletLaunchPage * parent = 0 );
 	virtual ~AppletLaunchWidget() override = default;
 
-	VxPushButton *				getButton( void );
-
-signals:
-	void						signalAppletLaunchClicked( EApplet appletType );
+	VxPushButton*				getButton( void );
 
 public slots:
 	void						slotAppletIconPressed( void );
@@ -40,7 +37,6 @@ public:
 	Ui::LaunchWidgetClass		ui;
 	AppCommon&					m_MyApp;
 	EApplet						m_AppletType;
-	AppletLaunchPage *			m_AppletLaunchPage;
-
+	AppletLaunchPage*			m_AppletLaunchPage;
 };
 

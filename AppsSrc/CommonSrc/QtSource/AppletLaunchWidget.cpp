@@ -55,7 +55,6 @@ void AppletLaunchWidget::slotAppletIconPressed( void )
         )
     {
         m_MyApp.launchApplet( m_AppletType, m_MyApp.getAppletFrame( m_AppletType ) );
-        emit signalAppletLaunchClicked( m_AppletType );
     }
     else
     {

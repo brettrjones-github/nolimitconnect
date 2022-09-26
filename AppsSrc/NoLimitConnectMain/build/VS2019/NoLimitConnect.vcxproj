@@ -165,7 +165,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonRender.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonScan.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonSearch.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonServers.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommonSignalsAndSlots.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppDefs.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppGlobals.cpp" />

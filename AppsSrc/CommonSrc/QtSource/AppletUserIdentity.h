@@ -32,9 +32,12 @@ public slots:
     void						onApplyContentClick( void );
     void						onApplyGenderClick( void );
 
-    void						slotEditAboutMeButClick( void );
     void						slotEditAvatarButClick( void );
+    void						slotEditAboutMeButClick( void );
+    void						slotViewAboutMeButClick( void );
     void                        slotEditStoryboardButClick( void );
+    void                        slotViewStoryboardButClick( void );
+
     void						slotCreateNewAccount( void );
     void						slotDeleteAccount( void );
 

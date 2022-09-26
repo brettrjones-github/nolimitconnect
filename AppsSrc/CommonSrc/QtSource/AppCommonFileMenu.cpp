@@ -101,7 +101,7 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 		}
 
 	default: 
-		LogMsg( LOG_ERROR, "onMenuServerSelected: ERROR unknown menu id %d\n", iMenuId );
+		LogMsg( LOG_ERROR, "onMenuFileSelected: ERROR unknown menu id %d", iMenuId );
 		break;
 	}
 }

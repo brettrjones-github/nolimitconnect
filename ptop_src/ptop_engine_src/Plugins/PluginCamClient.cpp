@@ -218,6 +218,30 @@ void PluginCamClient::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUser
 						++iter;
 					}
 				}
+				else if( sessionBase->isRxSession() )
+				{
+					RxSession* rxSession = (RxSession*)sessionBase;
+					if( rxSession && netIdent && rxSession->getIdent()->getMyOnlineId() == netIdent->getMyOnlineId() )
+					{
+						if( rxSession->getSkt() )
+						{
+							oPkt.setLclSessionId( rxSession->getLclSessionId() );
+							oPkt.setRmtSessionId( rxSession->getRmtSessionId() );
+							m_PluginMgr.pluginApiTxPacket( m_ePluginType, rxSession->getIdent()->getMyOnlineId(), rxSession->getSkt(), &oPkt );
+							iter = sessionList.erase( iter );
+							delete rxSession;
+							break;
+						}
+
+						iter = sessionList.erase( iter );
+						delete rxSession;
+						break;
+					}
+					else
+					{
+						++iter;
+					}
+				}
 				else
 				{
 					++iter;
@@ -435,10 +459,6 @@ void PluginCamClient::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr
             LogMsg( LOG_ERROR, "PluginCamClient::onPktSessionStartReq failed to create or find session" );
             oPkt.setOfferResponse( eOfferResponseReject );
         }
-		else
-		{
-			IToGui::getToGui().toGuiPluginStatus( m_ePluginType, 1, m_PluginSessionMgr.getTxSessionCount() );
-		}
 	}
 	else
 	{
@@ -511,28 +531,24 @@ void PluginCamClient::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedStatus lock" );
 #endif defined(DEBUG_PLUGIN_LOCK)
-	PluginBase::AutoPluginLock pluginMutexLock( this );
-	RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
-	if( poSession )
+
+	RxSession* rxSession = (RxSession*)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	if( rxSession )
 	{
-		LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedStatus %d", pktVideoStatus->getFeedStatus() );
+		LogMsg( LOG_INFO, "PluginCamServer::onPktVideoFeedStatus %d", pktVideoStatus->getFeedStatus() );
 		if( eFeedStatusOnline != pktVideoStatus->getFeedStatus() )
 		{
-			IToGui::getToGui().toGuiRxedOfferReply(	netIdent,			
-											m_ePluginType,		
-											0,				// plugin defined data
-											( eFeedStatusBusy == pktVideoStatus->getFeedStatus() ) ? eOfferResponseBusy : eOfferResponseEndSession,
-											0,
-											0,
-											pktVideoStatus->getRmtSessionId(),
-											pktVideoStatus->getLclSessionId() );
+			IToGui::getToGui().toGuiRxedOfferReply( netIdent,
+				m_ePluginType,
+				0,				// plugin defined data
+				(eFeedStatusBusy == pktVideoStatus->getFeedStatus()) ? eOfferResponseBusy : eOfferResponseEndSession,
+				0,
+				0,
+				pktVideoStatus->getRmtSessionId(),
+				pktVideoStatus->getLclSessionId() );
 
 			m_PluginSessionMgr.endPluginSession( netIdent->getMyOnlineId(), true );
-			m_PluginSessionMgr.removeTxSessionByOnlineId( netIdent->getMyOnlineId(), true );
-			if( getIsServerInSession() )
-			{
-				IToGui::getToGui().toGuiPluginStatus( m_ePluginType, 1, m_PluginSessionMgr.getTxSessionCount() );
-			}
+			m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		}
 	}
 

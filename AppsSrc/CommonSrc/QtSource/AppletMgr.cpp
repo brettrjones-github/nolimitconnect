@@ -210,8 +210,15 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     }
     else  if( eAppletUploads == applet )
     {
-        bringAppletToFront( m_MyApp.getAppletUploads() );
-        return m_MyApp.getAppletUploads();
+        if( launchAppletAllowed( eAppletDownloads ) )
+        {
+            bringAppletToFront( m_MyApp.getAppletUploads() );
+                return m_MyApp.getAppletUploads();
+        }
+        else
+        {
+            return nullptr;
+        }
     }
 
     // other applets
@@ -285,7 +292,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
     case eAppletFileShareServerViewMine:
         if( viewMyServerAllowed( eAppletFileShareServerViewMine ) )
         {
-            AppletFileShareClientView* myViewDlg = new AppletFileShareClientView( m_MyApp, parent );
+            AppletFileShareServerViewMine* myViewDlg = new AppletFileShareServerViewMine( m_MyApp, parent );
             if( myViewDlg )
             {
                 myViewDlg->setIdentity( m_MyApp.getUserMgr().getMyIdent() );
@@ -294,60 +301,61 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
         }
         break;
 
-    case eAppletFileShareClientView:        appletDialog = new AppletFileShareClientView( m_MyApp, parent ); break;
+    case eAppletFileShareClientView:        if( launchAppletAllowed( eAppletFileShareClientView ) ) appletDialog = new AppletFileShareClientView( m_MyApp, parent ); break;
 
-    case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
-    case eAppletAboutMeClient:              appletDialog = new AppletAboutMeClient( m_MyApp, parent ); break;
-    case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
-    case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
-    case eAppletBrowseFiles:                appletDialog = new AppletBrowseFiles (m_MyApp, parent); break;
-    case eAppletCamClient:                  appletDialog = new AppletCamClient( m_MyApp, parent ); break;
-    case eAppletChatRoomJoin:               appletDialog = new AppletChatRoomJoin( m_MyApp, parent ); break;
-    case eAppletChatRoomJoinSearch:         appletDialog = new AppletChatRoomJoinSearch( m_MyApp, parent ); break;
-    case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
-    case eAppletEditAboutMe:                appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
-    case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
-    case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
-    case eAppletGalleryEmoticon:            appletDialog = new AppletGalleryEmoticon( m_MyApp, parent ); break;
-    case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
-    case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
-    case eAppletGetStarted:                 appletDialog = new AppletGetStarted( m_MyApp, parent ); break;
-    case eAppletGroupJoin:                  appletDialog = new AppletGroupJoin( m_MyApp, parent ); break;
-    case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
-    case eAppletGroupListLocalView:         appletDialog = new AppletGroupListLocalView( m_MyApp, parent ); break;
-    case eAppletHelpNetSignalBars:          appletDialog = new AppletHelpNetSignalBars( m_MyApp, parent ); break;
-    case eAppletRandomConnectJoin:          appletDialog = new AppletRandomConnectJoin( m_MyApp, parent ); break;
-    case eAppletRandomConnectJoinSearch:    appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
-    case eAppletSoundSettings:              appletDialog = new AppletSoundSettings( m_MyApp, parent ); break;
-    case eAppletStoryboardClient:           appletDialog = new AppletStoryboardClient( m_MyApp, parent ); break;
-    case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
+    case eActivityAppSetup:                 if( launchAppletAllowed( eActivityAppSetup ) ) appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
+    case eAppletAboutMeClient:              if( launchAppletAllowed( eAppletAboutMeClient ) ) appletDialog = new AppletAboutMeClient( m_MyApp, parent ); break;
+    case eAppletAboutNoLimitConnect:        if( launchAppletAllowed( eAppletAboutNoLimitConnect ) ) appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
+    case eAppletApplicationInfo:            if( launchAppletAllowed( eAppletApplicationInfo ) ) appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
+    case eAppletBrowseFiles:                if( launchAppletAllowed( eAppletBrowseFiles ) ) appletDialog = new AppletBrowseFiles (m_MyApp, parent); break;
+    case eAppletCamClient:                  if( launchAppletAllowed( eAppletCamClient ) ) appletDialog = new AppletCamClient( m_MyApp, parent ); break;
+    case eAppletChatRoomJoin:               if( launchAppletAllowed( eAppletChatRoomJoin ) ) appletDialog = new AppletChatRoomJoin( m_MyApp, parent ); break;
+    case eAppletChatRoomJoinSearch:         if( launchAppletAllowed( eAppletChatRoomJoinSearch ) ) appletDialog = new AppletChatRoomJoinSearch( m_MyApp, parent ); break;
+    case eAppletChooseThumbnail:            if( launchAppletAllowed( eAppletChooseThumbnail ) ) appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
+    case eAppletEditAboutMe:                if( launchAppletAllowed( eAppletEditAboutMe ) ) appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
+    case eAppletEditAvatarImage:            if( launchAppletAllowed( eAppletEditAvatarImage ) ) appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
+    case eAppletEditStoryboard:             if( launchAppletAllowed( eAppletEditStoryboard ) ) appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
+    case eAppletGalleryEmoticon:            if( launchAppletAllowed( eAppletGalleryEmoticon ) ) appletDialog = new AppletGalleryEmoticon( m_MyApp, parent ); break;
+    case eAppletGalleryImage:               if( launchAppletAllowed( eAppletGalleryImage ) ) appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
+    case eAppletGalleryThumb:               if( launchAppletAllowed( eAppletGalleryThumb ) ) appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
+    case eAppletGetStarted:                 if( launchAppletAllowed( eAppletGetStarted ) ) appletDialog = new AppletGetStarted( m_MyApp, parent ); break;
+    case eAppletGroupJoin:                  if( launchAppletAllowed( eAppletGroupJoin ) ) appletDialog = new AppletGroupJoin( m_MyApp, parent ); break;
+    case eAppletGroupJoinSearch:            if( launchAppletAllowed( eAppletGroupJoinSearch ) ) appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
+    case eAppletGroupListLocalView:         if( launchAppletAllowed( eAppletGroupListLocalView ) ) appletDialog = new AppletGroupListLocalView( m_MyApp, parent ); break;
+    case eAppletHelpNetSignalBars:          if( launchAppletAllowed( eAppletHelpNetSignalBars ) ) appletDialog = new AppletHelpNetSignalBars( m_MyApp, parent ); break;
+    case eAppletRandomConnectJoin:          if( launchAppletAllowed( eAppletRandomConnectJoin ) ) appletDialog = new AppletRandomConnectJoin( m_MyApp, parent ); break;
+    case eAppletRandomConnectJoinSearch:    if( launchAppletAllowed( eAppletRandomConnectJoinSearch ) ) appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
+    case eAppletSoundSettings:              if( launchAppletAllowed( eAppletSoundSettings ) ) appletDialog = new AppletSoundSettings( m_MyApp, parent ); break;
+    case eAppletStoryboardClient:           if( launchAppletAllowed( eAppletStoryboardClient ) ) appletDialog = new AppletStoryboardClient( m_MyApp, parent ); break;
+    case eAppletLog:                        if( launchAppletAllowed( eAppletLog ) ) appletDialog = new AppletLog( m_MyApp, parent ); break;
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
 
-    case eAppletKodi:                       appletDialog = new AppletKodi( m_MyApp, parent ); break;
-    case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent, launchParam ); break;
-    case eAppletLogSettings:                appletDialog = new AppletLogSettings( m_MyApp, parent ); break;
-    case eAppletLogView:                    appletDialog = new AppletLogView( m_MyApp, parent ); break;
+    case eAppletKodi:                       if( launchAppletAllowed( eAppletKodi ) ) appletDialog = new AppletKodi( m_MyApp, parent ); break;
+    case eAppletLibrary:                    if( launchAppletAllowed( eAppletLibrary ) ) appletDialog = new AppletLibrary( m_MyApp, parent, launchParam ); break;
+    case eAppletLogSettings:                if( launchAppletAllowed( eAppletLogSettings ) ) appletDialog = new AppletLogSettings( m_MyApp, parent ); break;
+    case eAppletLogView:                    if( launchAppletAllowed( eAppletLogView ) ) appletDialog = new AppletLogView( m_MyApp, parent ); break;
 
-    case eAppletMessengerFrame:                  makeMessengerFullSized(); return appletDialog;
-    case eAppletNetworkSettings:            appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
-    case eAppletPersonalRecorder:           appletDialog = new AppletPersonalRecorder( m_MyApp, parent ); break;
-    case eAppletSettingsPage:               appletDialog = new AppletSettingsPage( m_MyApp, parent ); break;
+    case eAppletMessengerFrame:             makeMessengerFullSized(); return appletDialog;
 
-    case eAppletSearchPage:	                appletDialog = new AppletSearchPage( m_MyApp, parent ); break;
-    case eAppletSearchPersons:              appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypePeopleSearch, launchFrame ); break;
-    case eAppletSearchMood:                 appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypeMoodMsgSearch, launchFrame ); break;
-    case eAppletScanAboutMe:                appletDialog = new ActivityScanProfiles( m_MyApp, launchFrame ); break;
-    case eAppletScanStoryboard:             appletDialog = new ActivityScanStoryBoards( m_MyApp, launchFrame ); break;
-    case eAppletScanSharedFiles:            appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
-    case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
+    case eAppletNetworkSettings:            if( launchAppletAllowed( eAppletNetworkSettings ) ) appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
+    case eAppletPersonalRecorder:           if( launchAppletAllowed( eAppletPersonalRecorder ) ) appletDialog = new AppletPersonalRecorder( m_MyApp, parent ); break;
+    case eAppletSettingsPage:               if( launchAppletAllowed( eAppletSettingsPage ) ) appletDialog = new AppletSettingsPage( m_MyApp, parent ); break;
 
-    case eAppletPlayerCamClip:              appletDialog = new AppletPlayerCamClip( m_MyApp, parent, assetId ); break;
-    case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
-    case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
-    case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
+    case eAppletSearchPage:	                if( launchAppletAllowed( eAppletSearchPage ) ) appletDialog = new AppletSearchPage( m_MyApp, parent ); break;
+    case eAppletSearchPersons:              if( launchAppletAllowed( eAppletSearchPersons ) ) appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypePeopleSearch, launchFrame ); break;
+    case eAppletSearchMood:                 if( launchAppletAllowed( eAppletSearchMood ) ) appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypeMoodMsgSearch, launchFrame ); break;
+    case eAppletScanAboutMe:                if( launchAppletAllowed( eAppletScanAboutMe ) ) appletDialog = new ActivityScanProfiles( m_MyApp, launchFrame ); break;
+    case eAppletScanStoryboard:             if( launchAppletAllowed( eAppletScanStoryboard ) ) appletDialog = new ActivityScanStoryBoards( m_MyApp, launchFrame ); break;
+    case eAppletScanSharedFiles:            if( launchAppletAllowed( eAppletScanSharedFiles ) ) appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
+    case eAppletScanWebCam:                 if( launchAppletAllowed( eAppletScanWebCam ) ) appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
 
-    case eAppletFriendListClient:           appletDialog = new AppletFriendListClient( m_MyApp, parent ); break;
+    case eAppletPlayerCamClip:              if( launchAppletAllowed( eAppletPlayerCamClip ) ) appletDialog = new AppletPlayerCamClip( m_MyApp, parent, assetId ); break;
+    case eAppletCamSettings:                if( launchAppletAllowed( eAppletCamSettings ) ) appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
+    case eAppletClientChatRoom:             if( launchAppletAllowed( eAppletClientChatRoom ) ) appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
+    case eAppletClientRandomConnect:        if( launchAppletAllowed( eAppletClientRandomConnect ) ) appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
+
+    case eAppletFriendListClient:           if( launchAppletAllowed( eAppletFriendListClient ) ) appletDialog = new AppletFriendListClient( m_MyApp, parent ); break;
     case eAppletNearbyListClient: 
         if( m_MyApp.getEngine().isNearbyAvailable() )
         {
@@ -360,80 +368,82 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
         
         break;
         
-    case eAppletGroupListClient:            appletDialog = new AppletGroupListClient( m_MyApp, parent ); break;
+    case eAppletGroupListClient:            if( launchAppletAllowed( eAppletFriendListClient ) ) appletDialog = new AppletGroupListClient( m_MyApp, parent ); break;
 
-    case eAppletGroupHostAdmin:             appletDialog = new AppletGroupHostAdmin( m_MyApp, parent ); break;
+    case eAppletGroupHostAdmin:             if( launchAppletAllowed( eAppletGroupHostAdmin ) ) appletDialog = new AppletGroupHostAdmin( m_MyApp, parent ); break;
 
-    case eAppletHostChatRoomAdmin:          appletDialog = new AppletHostChatRoomAdmin( m_MyApp, parent ); break;
-    case eAppletHostChatRoomStatus:         appletDialog = new AppletHostChatRoomStatus( m_MyApp, parent ); break;
-    case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
-    case eAppletHostNetworkStatus:          appletDialog = new AppletHostNetworkStatus( m_MyApp, parent ); break;
-    case eAppletHostRandomConnectStatus:    appletDialog = new AppletHostRandomConnectStatus( m_MyApp, parent ); break;
+    case eAppletHostChatRoomAdmin:          if( launchAppletAllowed( eAppletHostChatRoomAdmin ) ) appletDialog = new AppletHostChatRoomAdmin( m_MyApp, parent ); break;
+    case eAppletHostChatRoomStatus:         if( launchAppletAllowed( eAppletHostChatRoomStatus ) ) appletDialog = new AppletHostChatRoomStatus( m_MyApp, parent ); break;
+    case eAppletHostGroupStatus:            if( launchAppletAllowed( eAppletHostGroupStatus ) ) appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
+    case eAppletHostNetworkStatus:          if( launchAppletAllowed( eAppletHostNetworkStatus ) ) appletDialog = new AppletHostNetworkStatus( m_MyApp, parent ); break;
+    case eAppletHostRandomConnectStatus:    if( launchAppletAllowed( eAppletHostRandomConnectStatus ) ) appletDialog = new AppletHostRandomConnectStatus( m_MyApp, parent ); break;
 
-    case eAppletInviteAccept:               appletDialog = new AppletInviteAccept( m_MyApp, parent ); break;
-    case eAppletInviteCreate:               appletDialog = new AppletInviteCreate( m_MyApp, parent ); break;
+    case eAppletInviteAccept:               if( launchAppletAllowed( eAppletInviteAccept ) ) appletDialog = new AppletInviteAccept( m_MyApp, parent ); break;
+    case eAppletInviteCreate:               if( launchAppletAllowed( eAppletInviteCreate ) ) appletDialog = new AppletInviteCreate( m_MyApp, parent ); break;
 
-    case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
-    case eAppletHostJoinRequestList:        appletDialog = new AppletHostJoinRequestList( m_MyApp, parent ); break;
-    case eAppletHostSelect:                 appletDialog = new AppletHostSelect( m_MyApp, parent ); break;
-    case eAppletPersonOfferList:            appletDialog = new AppletPersonOfferList( m_MyApp, parent ); break;
-    case eAppletPopupMenu:                  appletDialog = new AppletPopupMenu( m_MyApp, parent ); break;
-    case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
+    case eAppletNetHostingPage:             if( launchAppletAllowed( eAppletNetHostingPage ) ) appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
+    case eAppletHostJoinRequestList:        if( launchAppletAllowed( eAppletHostJoinRequestList ) ) appletDialog = new AppletHostJoinRequestList( m_MyApp, parent ); break;
+    case eAppletHostSelect:                 if( launchAppletAllowed( eAppletHostSelect ) ) appletDialog = new AppletHostSelect( m_MyApp, parent ); break;
+    case eAppletPersonOfferList:            if( launchAppletAllowed( eAppletPersonOfferList ) ) appletDialog = new AppletPersonOfferList( m_MyApp, parent ); break;
+    case eAppletPopupMenu:                  if( launchAppletAllowed( eAppletPopupMenu ) ) appletDialog = new AppletPopupMenu( m_MyApp, parent ); break;
+    case eAppletShareServicesPage:          if( launchAppletAllowed( eAppletShareServicesPage ) ) appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
 
-    case eAppletServiceAboutMe:             appletDialog = new AppletServiceAboutMe( m_MyApp, parent ); break;
-    case eAppletServiceAvatarImage:         appletDialog = new AppletServiceAvatarImage( m_MyApp, parent ); break;
-    case eAppletServiceConnectionTest:      appletDialog = new AppletServiceConnectionTest( m_MyApp, parent ); break;
+    case eAppletServiceAboutMe:             if( launchAppletAllowed( eAppletServiceAboutMe ) ) appletDialog = new AppletServiceAboutMe( m_MyApp, parent ); break;
+    case eAppletServiceAvatarImage:         if( launchAppletAllowed( eAppletServiceAvatarImage ) ) appletDialog = new AppletServiceAvatarImage( m_MyApp, parent ); break;
+    case eAppletServiceConnectionTest:      if( launchAppletAllowed( eAppletServiceConnectionTest ) ) appletDialog = new AppletServiceConnectionTest( m_MyApp, parent ); break;
 
-    case eAppletPermissionList:             appletDialog = new AppletPermissionList( m_MyApp, parent ); break;
-    case eAppletServiceHostNetwork:         appletDialog = new AppletServiceHostNetwork( m_MyApp, parent ); break;
+    case eAppletPermissionList:             if( launchAppletAllowed( eAppletPermissionList ) ) appletDialog = new AppletPermissionList( m_MyApp, parent ); break;
+    case eAppletServiceHostNetwork:         if( launchAppletAllowed( eAppletServiceHostNetwork ) ) appletDialog = new AppletServiceHostNetwork( m_MyApp, parent ); break;
     
-    case eAppletServiceShareFiles:          appletDialog = new AppletServiceShareFiles( m_MyApp, parent ); break;
-    case eAppletServiceShareWebCam:         appletDialog = new AppletServiceShareWebCam( m_MyApp, parent ); break;
-    case eAppletServiceStoryboard:          appletDialog = new AppletServiceStoryboard( m_MyApp, parent ); break;
+    case eAppletServiceShareFiles:          if( launchAppletAllowed( eAppletServiceShareFiles ) ) appletDialog = new AppletServiceShareFiles( m_MyApp, parent ); break;
+    case eAppletServiceShareWebCam:         if( launchAppletAllowed( eAppletServiceShareWebCam ) ) appletDialog = new AppletServiceShareWebCam( m_MyApp, parent ); break;
+    case eAppletServiceStoryboard:          if( launchAppletAllowed( eAppletServiceStoryboard ) ) appletDialog = new AppletServiceStoryboard( m_MyApp, parent ); break;
 
-    case eAppletSettingsAboutMe:            appletDialog = new AppletSettingsAboutMe( m_MyApp, parent ); break;
-    case eAppletSettingsAvatarImage:        appletDialog = new AppletSettingsAvatarImage( m_MyApp, parent ); break;
-    case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
-    case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
+    case eAppletSettingsAboutMe:            if( launchAppletAllowed( eAppletSettingsAboutMe ) ) appletDialog = new AppletSettingsAboutMe( m_MyApp, parent ); break;
+    case eAppletSettingsAvatarImage:        if( launchAppletAllowed( eAppletSettingsAvatarImage ) ) appletDialog = new AppletSettingsAvatarImage( m_MyApp, parent ); break;
+    case eAppletSettingsConnectTest:        if( launchAppletAllowed( eAppletSettingsConnectTest ) ) appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
+    case eAppletSettingsFileXfer:           if( launchAppletAllowed( eAppletSettingsFileXfer ) ) appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
 
-    case eAppletSettingsHostChatRoom:       appletDialog = new AppletSettingsHostChatRoom( m_MyApp, parent ); break;
-    case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
-    case eAppletSettingsHostNetwork:        appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;
-    case eAppletSettingsHostRandomConnect:  appletDialog = new AppletSettingsHostRandomConnect( m_MyApp, parent ); break;
+    case eAppletSettingsHostChatRoom:       if( launchAppletAllowed( eAppletSettingsHostChatRoom ) ) appletDialog = new AppletSettingsHostChatRoom( m_MyApp, parent ); break;
+    case eAppletSettingsHostGroup:          if( launchAppletAllowed( eAppletSettingsHostGroup ) ) appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
+    case eAppletSettingsHostNetwork:        if( launchAppletAllowed( eAppletSettingsHostNetwork ) ) appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;
+    case eAppletSettingsHostRandomConnect:  if( launchAppletAllowed( eAppletSettingsHostRandomConnect ) ) appletDialog = new AppletSettingsHostRandomConnect( m_MyApp, parent ); break;
 
-    case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
-    case eAppletSettingsPushToTalk:         appletDialog = new AppletSettingsPushToTalk( m_MyApp, parent ); break;
-    case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
-    case eAppletSettingsStoryboard:         appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;
-    case eAppletSettingsTruthOrDare:        appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
-    case eAppletSettingsVideoPhone:         appletDialog = new AppletSettingsVideoPhone( m_MyApp, parent ); break;
-    case eAppletSettingsVoicePhone:         appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
-    case eAppletSettingsWebCamServer:       appletDialog = new AppletSettingsShareWebCam( m_MyApp, parent ); break;
-    case eAppletShareOfferList:             appletDialog = new AppletShareOfferList( m_MyApp, parent ); break;
-    case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
+    case eAppletSettingsMessenger:          if( launchAppletAllowed( eAppletSettingsMessenger ) ) appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
+    case eAppletSettingsPushToTalk:         if( launchAppletAllowed( eAppletSettingsPushToTalk ) ) appletDialog = new AppletSettingsPushToTalk( m_MyApp, parent ); break;
+    case eAppletSettingsShareFiles:         if( launchAppletAllowed( eAppletSettingsShareFiles ) ) appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
+    case eAppletSettingsStoryboard:         if( launchAppletAllowed( eAppletSettingsStoryboard ) ) appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;
+    case eAppletSettingsTruthOrDare:        if( launchAppletAllowed( eAppletSettingsTruthOrDare ) ) appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
+    case eAppletSettingsVideoPhone:         if( launchAppletAllowed( eAppletSettingsVideoPhone ) ) appletDialog = new AppletSettingsVideoPhone( m_MyApp, parent ); break;
+    case eAppletSettingsVoicePhone:         if( launchAppletAllowed( eAppletSettingsVoicePhone ) ) appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
+    case eAppletSettingsWebCamServer:       if( launchAppletAllowed( eAppletSettingsWebCamServer ) ) appletDialog = new AppletSettingsShareWebCam( m_MyApp, parent ); break;
+    case eAppletShareOfferList:             if( launchAppletAllowed( eAppletShareOfferList ) ) appletDialog = new AppletShareOfferList( m_MyApp, parent ); break;
+    case eAppletSnapshot:                   if( launchAppletAllowed( eAppletSnapshot ) ) appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
 
-    case eAppletTestAndDebug:               appletDialog = new AppletTestAndDebug( m_MyApp, parent ); break;
-    case eAppletTestHostClient:             appletDialog = new AppletTestHostClient( m_MyApp, parent ); break;
-    case eAppletTestHostService:            appletDialog = new AppletTestHostService( m_MyApp, parent ); break;
+    case eAppletTestAndDebug:               if( launchAppletAllowed( eAppletTestAndDebug ) ) appletDialog = new AppletTestAndDebug( m_MyApp, parent ); break;
+    case eAppletTestHostClient:             if( launchAppletAllowed( eAppletTestHostClient ) ) appletDialog = new AppletTestHostClient( m_MyApp, parent ); break;
+    case eAppletTestHostService:            if( launchAppletAllowed( eAppletTestHostService ) ) appletDialog = new AppletTestHostService( m_MyApp, parent ); break;
 
-    case eAppletTheme:                      appletDialog = new AppletTheme( m_MyApp, parent ); break;
+    case eAppletTheme:                      if( launchAppletAllowed( eAppletTheme ) ) appletDialog = new AppletTheme( m_MyApp, parent ); break;
+
     case eAppletUnknown:                    m_MyApp.errMessageBox( appletMissingTitle, QObject::tr("Unknown Or Not Implemented") ); return nullptr;
-    case eAppletUserIdentity:               appletDialog = new AppletUserIdentity( m_MyApp, parent ); break;
 
-    case eAppletMultiMessenger:	            appletDialog = new AppletMultiMessenger( m_MyApp, parent ); break;
-    case eAppletPeerChangeFriendship:	    appletDialog = new AppletPeerChangeFriendship( m_MyApp, parent ); break;
-    case eAppletPeerReplyOfferFile:         appletDialog = new AppletPeerReplyFileOffer( m_MyApp, parent ); break;
-    case eAppletPeerTodGame:                appletDialog = new AppletPeerTodGame( m_MyApp, parent ); break;
-    case eAppletPeerVideoPhone:             appletDialog = new AppletPeerVideoPhone( m_MyApp, parent ); break;
-    case eAppletPeerVoicePhone:             appletDialog = new AppletPeerVoicePhone( m_MyApp, parent ); break;
+    case eAppletUserIdentity:               if( launchAppletAllowed( eAppletUserIdentity ) ) appletDialog = new AppletUserIdentity( m_MyApp, parent ); break;
 
-    case eAppletPeerSelectFileToSend:       appletDialog = new AppletPeerSelectFileToSend( m_MyApp, parent ); break;
-    case eAppletPeerSessionFileOffer:       appletDialog = new AppletPeerSessionFileOffer( m_MyApp, parent ); break;
+    case eAppletMultiMessenger:	            if( launchAppletAllowed( eAppletMultiMessenger ) ) appletDialog = new AppletMultiMessenger( m_MyApp, parent ); break;
+    case eAppletPeerChangeFriendship:	    if( launchAppletAllowed( eAppletPeerChangeFriendship ) ) appletDialog = new AppletPeerChangeFriendship( m_MyApp, parent ); break;
+    case eAppletPeerReplyOfferFile:         if( launchAppletAllowed( eAppletPeerReplyOfferFile ) ) appletDialog = new AppletPeerReplyFileOffer( m_MyApp, parent ); break;
+    case eAppletPeerTodGame:                if( launchAppletAllowed( eAppletPeerTodGame ) ) appletDialog = new AppletPeerTodGame( m_MyApp, parent ); break;
+    case eAppletPeerVideoPhone:             if( launchAppletAllowed( eAppletPeerVideoPhone ) ) appletDialog = new AppletPeerVideoPhone( m_MyApp, parent ); break;
+    case eAppletPeerVoicePhone:             if( launchAppletAllowed( eAppletPeerVoicePhone ) ) appletDialog = new AppletPeerVoicePhone( m_MyApp, parent ); break;
 
-    case eAppletIgnoredHosts:              appletDialog = new AppletIgnoredHosts( m_MyApp, parent ); break;
+    case eAppletPeerSelectFileToSend:       if( launchAppletAllowed( eAppletPeerSelectFileToSend ) ) appletDialog = new AppletPeerSelectFileToSend( m_MyApp, parent ); break;
+    case eAppletPeerSessionFileOffer:       if( launchAppletAllowed( eAppletPeerSessionFileOffer ) ) appletDialog = new AppletPeerSessionFileOffer( m_MyApp, parent ); break;
 
-    case eAppletPlayerPhoto:                appletDialog = new AppletPlayerPhoto( m_MyApp, parent ); break;
-    case eAppletPlayerVideo:                appletDialog = new AppletPlayerVideo( m_MyApp, parent ); break;
+    case eAppletIgnoredHosts:               if( launchAppletAllowed( eAppletIgnoredHosts ) ) appletDialog = new AppletIgnoredHosts( m_MyApp, parent ); break;
+
+    case eAppletPlayerPhoto:                if( launchAppletAllowed( eAppletPlayerPhoto ) ) appletDialog = new AppletPlayerPhoto( m_MyApp, parent ); break;
+    case eAppletPlayerVideo:                if( launchAppletAllowed( eAppletPlayerVideo ) ) appletDialog = new AppletPlayerVideo( m_MyApp, parent ); break;
 //	case eAppletPlayerMusic:
 //		m_MyApp.errMessageBox( appletMissingTitle, "MusicPlayer Not Implemented" );
 //		return;
@@ -623,7 +633,7 @@ bool AppletMgr::viewMyServerAllowed( EApplet applet )
         return false;
     }
 
-    bool isEnabled = m_MyApp.getUserMgr().getMyIdent()->getPluginPermission( pluginType ) != eFriendStateIgnore;
+    bool isEnabled = isServiceEnabled( pluginType ); 
     if( !isEnabled )
     {
         QMessageBox::information( this, QObject::tr( "Cannot View Disabled Service" ),
@@ -632,4 +642,20 @@ bool AppletMgr::viewMyServerAllowed( EApplet applet )
     }
 
     return true;
+}
+
+//============================================================================
+bool AppletMgr::isServiceEnabled( EPluginType pluginType )
+{
+    return m_MyApp.getUserMgr().getMyIdent()->getPluginPermission( pluginType ) != eFriendStateIgnore;
+}
+
+//============================================================================
+bool AppletMgr::launchAppletAllowed( EApplet applet )
+{
+    bool launchAllowed{ true };
+
+
+
+    return launchAllowed;
 }

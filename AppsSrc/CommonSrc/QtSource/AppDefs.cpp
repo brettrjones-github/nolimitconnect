@@ -175,6 +175,10 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletFileShareServerViewMine:    return eMyIconShareFilesEye;
     case eAppletStoryboardServerViewMine:   return eMyIconShareStoryboardEye;
 
+    case eAppletEditAboutMe:                return eMyIconAboutMeEdit;
+    case eAppletEditStoryboard:             return eMyIconStoryboardEdit;
+
+
     // case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
     // case eAppletStreamViewerCam:		return eMyIconCamStreamViewer;
     // case eAppletStreamViewerMusic:		return eMyIconMusicStreamPlayer;
@@ -230,15 +234,15 @@ QString DescribeApplet( EApplet applet )
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
     case eAppletGroupListClient:	        return QObject::tr( "Group List" );
-    case eAppletGroupListLocalView:			return QObject::tr( "View Groups On This Network Host" );
+    case eAppletGroupListLocalView:			return QObject::tr( "View Groups Announced To Network Host" );
 
     case eAppletHelpNetSignalBars:			return QObject::tr( "Network Signal Bars" );
 
     case eAppletHostChatRoomAdmin:          return QObject::tr( "Chat Room Host Admin" );
-    case eAppletHostChatRoomStatus:         return QObject::tr( "Host Chat Room Status" );
-    case eAppletHostGroupStatus:            return QObject::tr( "Host Group Status" );
-    case eAppletHostNetworkStatus:          return QObject::tr( "Host A Network Status" );
-    case eAppletHostRandomConnectStatus:    return QObject::tr( "Host Random Connect Status" );
+    case eAppletHostChatRoomStatus:         return QObject::tr( "Chat Room Host Status" );
+    case eAppletHostGroupStatus:            return QObject::tr( "Group Host Status" );
+    case eAppletHostNetworkStatus:          return QObject::tr( "Network Host Status" );
+    case eAppletHostRandomConnectStatus:    return QObject::tr( "Random Connect Host Status" );
 
     case eAppletIgnoredHosts:               return QObject::tr( "Ignored Hosts List" );
 
@@ -299,10 +303,10 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsShareFiles:         return QObject::tr( "Shared Files Settings" );
     case eAppletSettingsFileXfer:           return QObject::tr( "Person To Person File Xfer Settings" );
 
-    case eAppletSettingsHostChatRoom:       return QObject::tr( "Host A Chat Room Settings" );
-    case eAppletSettingsHostGroup:          return QObject::tr( "Host A Group Settings" );
-    case eAppletSettingsHostNetwork:        return QObject::tr( "Host A Network Settings" );
-    case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect Settings" );
+    case eAppletSettingsHostChatRoom:       return QObject::tr( "Chat Room Host Settings" );
+    case eAppletSettingsHostGroup:          return QObject::tr( "Group Host Settings" );
+    case eAppletSettingsHostNetwork:        return QObject::tr( "Network Host Settings" );
+    case eAppletSettingsHostRandomConnect:  return QObject::tr( "Random Connect Host Settings" );
 
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );
     case eAppletSettingsPushToTalk:         return QObject::tr( "Push To Talk Settings" );
@@ -329,7 +333,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletDownloads:                  return QObject::tr( "Downloads" );
     case eAppletUploads:                    return QObject::tr( "Uploads" );
 
-    case eAppletFileShareServerViewMine:				return QObject::tr( "View My Shared Files" );
+    case eAppletFileShareServerViewMine:	return QObject::tr( "View My Shared Files" );
 
     case eAppletPopupMenu:                  return QObject::tr( "Menu" );
 
