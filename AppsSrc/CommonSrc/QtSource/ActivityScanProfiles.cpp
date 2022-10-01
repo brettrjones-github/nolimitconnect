@@ -85,14 +85,14 @@ void ActivityScanProfiles::setScanStatusText( QString strMsg )
 }
 
 //============================================================================
-void ActivityScanProfiles::showEvent( QShowEvent * ev )
+void ActivityScanProfiles::showEvent( QShowEvent* ev )
 {
 	ActivityBase::showEvent( ev );
 	m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void ActivityScanProfiles::hideEvent( QHideEvent * ev )
+void ActivityScanProfiles::hideEvent( QHideEvent* ev )
 {
 	m_MyApp.wantToGuiActivityCallbacks(  this, false );
 	ActivityBase::hideEvent( ev );

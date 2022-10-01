@@ -26,7 +26,7 @@ class HostJoinRequestListItem : public IdentLogicInterface, public QListWidgetIt
 {
 	Q_OBJECT;
 public:
-	HostJoinRequestListItem( QWidget *parent=nullptr );
+	HostJoinRequestListItem( QWidget*parent=nullptr );
 	virtual ~HostJoinRequestListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

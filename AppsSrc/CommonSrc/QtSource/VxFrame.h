@@ -34,7 +34,7 @@ protected slots:
     void                        slotAppSystemMenuSelected( int menuId, QWidget* popupMenu );
 
 protected:
-	void						resizeEvent( QResizeEvent * ev );
+	void						resizeEvent( QResizeEvent* ev );
 
     //=== vars ===//
     AppCommon&					m_MyApp;

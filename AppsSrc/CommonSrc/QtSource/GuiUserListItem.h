@@ -25,7 +25,7 @@ class GuiUserListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	GuiUserListItem( QWidget *parent=0 );
+	GuiUserListItem( QWidget*parent=0 );
 	virtual ~GuiUserListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

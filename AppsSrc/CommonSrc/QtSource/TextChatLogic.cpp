@@ -29,7 +29,7 @@ namespace
 }
 
 //============================================================================
-TextChatLogic::TextChatLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget * parent )
+TextChatLogic::TextChatLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( myApp )
 , m_Engine( engine )

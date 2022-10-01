@@ -30,7 +30,7 @@
 
 //============================================================================
 FileActionMenu::FileActionMenu( AppCommon&	app, 
-								QWidget *		parent, 
+								QWidget*		parent, 
 								VxMyFileInfo&	fileInfo, 
 								bool			isShared, 
 								bool			isInLibrary,

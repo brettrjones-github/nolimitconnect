@@ -22,7 +22,7 @@ class AppletInviteAccept : public AppletBase
 {
     Q_OBJECT
 public:
-    AppletInviteAccept( AppCommon& app, QWidget * parent );
+    AppletInviteAccept( AppCommon& app, QWidget* parent );
     virtual ~AppletInviteAccept();
 
     void                        infoMsg( const char * infoMsg, ... );

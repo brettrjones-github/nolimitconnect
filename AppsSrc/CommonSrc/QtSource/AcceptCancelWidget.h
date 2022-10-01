@@ -7,7 +7,7 @@ class AcceptCancelWidget : public QFrame
 {
 	Q_OBJECT
 public:
-	AcceptCancelWidget( QWidget *parent = 0 );
+	AcceptCancelWidget( QWidget*parent = 0 );
 	virtual ~AcceptCancelWidget() {};
 
 	void							setAcceptCancelWidgetSize( EButtonSize buttonSize );

@@ -18,7 +18,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-VxMenuButton::VxMenuButton( QWidget * parent )
+VxMenuButton::VxMenuButton( QWidget* parent )
 : VxPushButton( parent )
 , m_ContextMenu( getMyApp(), this )
 {
@@ -28,7 +28,7 @@ VxMenuButton::VxMenuButton( QWidget * parent )
 }
 
 //============================================================================
-VxMenuButton::VxMenuButton( const QString & text, QWidget * parent )
+VxMenuButton::VxMenuButton( const QString & text, QWidget* parent )
 : VxPushButton( text, parent )
 , m_ContextMenu( getMyApp(), this )
 {

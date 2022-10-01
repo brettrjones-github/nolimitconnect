@@ -25,7 +25,7 @@ class ActivityPermissions : public ActivityBase
 {
 	Q_OBJECT
 public:
-	ActivityPermissions( AppCommon& app, QWidget * parent = NULL );
+	ActivityPermissions( AppCommon& app, QWidget* parent = NULL );
 	virtual ~ActivityPermissions() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

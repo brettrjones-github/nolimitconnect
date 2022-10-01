@@ -27,7 +27,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-ServiceSettingsWidget::ServiceSettingsWidget( QWidget * parent )
+ServiceSettingsWidget::ServiceSettingsWidget( QWidget* parent )
 	: QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

@@ -21,7 +21,7 @@ class AppletKodi : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletKodi( AppCommon& app, QWidget * parent );
+	AppletKodi( AppCommon& app, QWidget* parent );
 	virtual ~AppletKodi() = default;
 
     RenderGlWidget *            getRenderConsumer( void );
@@ -63,9 +63,9 @@ protected:
 
     void                        setupBottomMenu( VxMenuButton * menuButton );
 
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
-    void						resizeEvent( QResizeEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
+    void						resizeEvent( QResizeEvent* ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	//void						updateGuiPlayControls( bool isPlaying );

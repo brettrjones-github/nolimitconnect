@@ -19,14 +19,14 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-AssetPhotoWidget::AssetPhotoWidget( QWidget * parent )
+AssetPhotoWidget::AssetPhotoWidget( QWidget* parent )
 	: AssetBaseWidget( GetAppInstance(), parent )
 {
 	initAssetPhotoWidget();
 }
 
 //============================================================================
-AssetPhotoWidget::AssetPhotoWidget( AppCommon& appCommon, QWidget * parent )
+AssetPhotoWidget::AssetPhotoWidget( AppCommon& appCommon, QWidget* parent )
 	: AssetBaseWidget( appCommon, parent )
 {
 	initAssetPhotoWidget();

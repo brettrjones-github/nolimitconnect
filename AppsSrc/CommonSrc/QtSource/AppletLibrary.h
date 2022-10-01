@@ -32,7 +32,7 @@ class AppletLibrary : public AppletBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
-	AppletLibrary( AppCommon& app, QWidget * parent, QString launchParam = "" );
+	AppletLibrary( AppCommon& app, QWidget* parent, QString launchParam = "" );
 	virtual ~AppletLibrary();
 
     void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
@@ -61,8 +61,8 @@ private slots:
     void						slotListShredIconClicked( QListWidgetItem * item );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
     virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
     FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );

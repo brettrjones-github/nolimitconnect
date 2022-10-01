@@ -63,7 +63,7 @@ public:
 protected:
 	//=== vars ===//
     VxMyFileInfo				m_FileInfo;
-    QWidget *					m_Widget{nullptr};
+    QWidget*					m_Widget{nullptr};
     bool						m_IsShared{false};
     bool						m_IsInLibrary{false};
 };

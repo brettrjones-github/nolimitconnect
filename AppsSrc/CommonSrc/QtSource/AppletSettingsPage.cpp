@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsPage::AppletSettingsPage( AppCommon& app, QWidget * parent )
+AppletSettingsPage::AppletSettingsPage( AppCommon& app, QWidget* parent )
 : AppletLaunchPage(  app, parent, eAppletSettingsPage, OBJNAME_APPLET_SETTINGS_PAGE )
 {
     setAppletType( eAppletSettingsPage );
@@ -63,14 +63,14 @@ void AppletSettingsPage::setupAppletSettingsgPage( void )
 }
 
 //============================================================================
-void AppletSettingsPage::resizeEvent( QResizeEvent * ev )
+void AppletSettingsPage::resizeEvent( QResizeEvent* ev )
 {
     ActivityBase::resizeEvent( ev );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 
 //============================================================================
-void AppletSettingsPage::showEvent( QShowEvent * showEvent )
+void AppletSettingsPage::showEvent( QShowEvent* showEvent )
 {
     AppletLaunchPage::showEvent( showEvent );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );

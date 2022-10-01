@@ -36,6 +36,9 @@ public:
 	bool						connectForWebPageDownload( VxGUID& onlineId );
 	bool						onConnectForWebPageDownload( VxSktBase* sktBase, VxNetIdent* netIdent );
 
+	bool						connectForFileListDownload( VxGUID& onlineId );
+	bool						onConnectForFileListDownload( VxSktBase* sktBase, VxNetIdent* netIdent );
+
 
 	virtual void				toGuiStartDownload( VxNetIdent*		netIdent,
 													EPluginType		ePluginType,
@@ -49,12 +52,17 @@ public:
 	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) override;
 	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) override;
 
-protected:
+	void						setSearchFileTypes( uint8_t fileTypes )				{ m_FileTypes = fileTypes; }
+	uint8_t						getSearchFileTypes( void )							{ return m_FileTypes; }
 
+protected:
 	VxNetIdent*					m_HisIdent{ nullptr };
 	VxGUID						m_HisOnlineId;
 	VxGUID						m_SearchSessionId;
+	VxGUID						m_LclSessionId;
 	EFileClientState			m_FileClientState{ eFileClientStateInitializing };
+	uint8_t						m_FileTypes{ 0 };
+	VxGUID						m_SktConnectionId;
 };
 
 

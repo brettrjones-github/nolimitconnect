@@ -31,7 +31,7 @@ class GuiUserJoinListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	GuiUserJoinListItem( QWidget *parent=0 );
+	GuiUserJoinListItem( QWidget*parent=0 );
 	virtual ~GuiUserJoinListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

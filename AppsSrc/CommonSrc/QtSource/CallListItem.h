@@ -24,7 +24,7 @@ class CallListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	CallListItem( QWidget *parent=0 );
+	CallListItem( QWidget*parent=0 );
 	virtual ~CallListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

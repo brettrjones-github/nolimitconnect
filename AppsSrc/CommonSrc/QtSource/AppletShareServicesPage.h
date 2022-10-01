@@ -21,7 +21,7 @@ class AppletShareServicesPage : public AppletLaunchPage
 {
 	Q_OBJECT
 public:
-	AppletShareServicesPage( AppCommon& app, QWidget * parent );
+	AppletShareServicesPage( AppCommon& app, QWidget* parent );
 	virtual ~AppletShareServicesPage() = default;
 
 
@@ -29,9 +29,9 @@ protected slots:
 	void						slotPowerButtonClicked( void );
 
 protected:
-	virtual void				showEvent( QShowEvent * );
-	//virtual void				hideEvent( QHideEvent * );
-	void						resizeEvent( QResizeEvent * );
+	virtual void				showEvent( QShowEvent* );
+	//virtual void				hideEvent( QHideEvent* );
+	void						resizeEvent( QResizeEvent* );
 
 private:
 	void						setupAppletShareServicesPage( void );

@@ -553,7 +553,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
     }
     else if( element == QProxyStyle::CE_PushButtonBevel )
     {
-        QPushButton* pushButton = dynamic_cast<QPushButton*>(const_cast<QWidget *>(widget));
+        QPushButton* pushButton = dynamic_cast<QPushButton*>(const_cast<QWidget*>(widget));
         QStyleOptionButton* buttonOption = const_cast<QStyleOptionButton*>(qstyleoption_cast<const QStyleOptionButton*>(option));
         if( pushButton && buttonOption )
         {

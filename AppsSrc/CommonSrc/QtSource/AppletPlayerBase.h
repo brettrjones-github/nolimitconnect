@@ -21,7 +21,7 @@ class AppletPlayerBase : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletPlayerBase( const char * ObjName, AppCommon& app, QWidget * parent );
+	AppletPlayerBase( const char * ObjName, AppCommon& app, QWidget* parent );
 	virtual ~AppletPlayerBase(){};
 
 

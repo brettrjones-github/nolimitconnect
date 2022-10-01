@@ -89,10 +89,10 @@ IToGui&	PluginMgr::getToGui( void )
 //============================================================================
 PluginMgr::~PluginMgr()
 {
-	std::vector<PluginBase *>::iterator iter;
+	std::vector<PluginBase*>::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
-		PluginBase * poPlugin = *(iter);
+		PluginBase* poPlugin = *(iter);
 		delete poPlugin;		
 	}
 
@@ -105,7 +105,7 @@ void PluginMgr::pluginMgrStartup( void )
     uint32_t startTime = (uint32_t)GetApplicationAliveMs();
 	LogMsg( LOG_VERBOSE, "pluginMgrStartup start %d ms", startTime );
 
-	PluginBase * poPlugin;
+	PluginBase* poPlugin;
 	// invalid
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn, ePluginTypeInvalid );
 	m_aoPlugins.push_back( poPlugin );
@@ -145,6 +145,10 @@ void PluginMgr::pluginMgrStartup( void )
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create file share plugin" );
     m_aoPlugins.push_back( &m_Engine.getPluginFileShareServer() );
+
+	LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create file share client plugin" );
+	poPlugin = new PluginFileShareClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeFileShareClient );
+	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create chat room client plugin" );
     poPlugin = new PluginChatRoomClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeClientChatRoom );
@@ -231,10 +235,10 @@ void PluginMgr::pluginMgrShutdown( void )
 	if( m_PluginMgrInitialized )
 	{
 		m_PluginMgrInitialized = false;
-		std::vector<PluginBase *>::iterator iter;
+		std::vector<PluginBase*>::iterator iter;
 		for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 		{
-			PluginBase * poPlugin = *(iter);
+			PluginBase* poPlugin = *(iter);
 			poPlugin->pluginShutdown();
 		}
 	}
@@ -243,7 +247,7 @@ void PluginMgr::pluginMgrShutdown( void )
 //============================================================================
 void PluginMgr::fromGuiNetworkAvailable( void )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->fromGuiAppResume();
@@ -254,7 +258,7 @@ void PluginMgr::fromGuiNetworkAvailable( void )
 //! get plugin state 
 EAppState PluginMgr::getPluginState( EPluginType ePluginType )								
 { 
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		return plugin->getPluginState();
@@ -266,10 +270,10 @@ EAppState PluginMgr::getPluginState( EPluginType ePluginType )
 //============================================================================
 PluginBase* PluginMgr::getPlugin( EPluginType ePluginType )
 {
-	std::vector<PluginBase *>::iterator iter;
+	std::vector<PluginBase*>::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
-		PluginBase * plugin = *iter;
+		PluginBase* plugin = *iter;
 		if( ePluginType == plugin->getPluginType() )
 		{
 			return *(iter);
@@ -285,7 +289,7 @@ PluginBase* PluginMgr::getPlugin( EPluginType ePluginType )
 //! set plugin state 
 void PluginMgr::setPluginState( EPluginType ePluginType, EAppState ePluginState )		
 { 
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		plugin->setPluginState( ePluginState );
@@ -295,7 +299,7 @@ void PluginMgr::setPluginState( EPluginType ePluginType, EAppState ePluginState 
 //============================================================================
 EFriendState PluginMgr::getPluginPermission( EPluginType ePluginType )							
 { 
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		return plugin->getPluginPermission(); 
@@ -307,7 +311,7 @@ EFriendState PluginMgr::getPluginPermission( EPluginType ePluginType )
 //============================================================================
 void PluginMgr::setPluginPermission( EPluginType ePluginType, EFriendState ePluginPermission )	
 { 
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		plugin->setPluginPermission( ePluginPermission ); 
@@ -318,7 +322,7 @@ void PluginMgr::setPluginPermission( EPluginType ePluginType, EFriendState ePlug
 bool PluginMgr::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     bool result = false;
-    PluginBase * plugin = getPlugin( pluginSetting.getPluginType() );
+    PluginBase* plugin = getPlugin( pluginSetting.getPluginType() );
     if( plugin )
     {
         result = plugin->setPluginSetting( pluginSetting, modifiedTimeMs );
@@ -330,7 +334,7 @@ bool PluginMgr::setPluginSetting( PluginSetting& pluginSetting, int64_t modified
 //============================================================================
 void PluginMgr::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
-    PluginBase * plugin = getPlugin( pluginSetting.getPluginType() );
+    PluginBase* plugin = getPlugin( pluginSetting.getPluginType() );
     if( plugin )
     {
         plugin->setPluginSetting( pluginSetting, modifiedTimeMs );
@@ -405,7 +409,8 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase* sktBase )
 
 	parseOffset += 33;
 	sktBase->sktBufAmountRead( 0 );
-	PluginBase * poPlugin = getPlugin( ePluginTypeWebServer );
+	/* There is no longer a web page server 
+	PluginBase* poPlugin = getPlugin( ePluginTypeAboutMePageServer );
 	if( poPlugin )
 	{
 		sktBase->sktBufAmountRead( 0 );		
@@ -420,6 +425,8 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase* sktBase )
 	}
 	
 	sktBase->sktBufAmountRead( 0 );
+	*/
+
 	return false;
 }
 
@@ -481,7 +488,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase* sktBase )
             ePluginTypeHostChatRoom == pluginType || ePluginTypeHostRandomConnect == pluginType || ePluginTypeHostConnectTest == pluginType) )
     {
         // only allowed if Hosting feature is enabled
-        PluginBase * poPlugin = getPlugin( pluginType );
+        PluginBase* poPlugin = getPlugin( pluginType );
         if( poPlugin )
         {
 			bool hasAnnonService{ false };
@@ -541,7 +548,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase* sktBase )
 		}
 	
 		netServiceHdr.m_Ident = netIdent;
-		PluginBase * poPlugin = getPlugin( pluginType );
+		PluginBase* poPlugin = getPlugin( pluginType );
 		if( poPlugin )
 		{
 			RCODE rc = -1;
@@ -581,7 +588,7 @@ void PluginMgr::handleNonSystemPackets( VxSktBase* sktBase, VxPktHdr* pktHdr )
 	uint8_t u8PluginNum = pktHdr->getPluginNum();
 	if( isValidPluginNum( u8PluginNum ) )
 	{
-		PluginBase * plugin = getPlugin( (EPluginType)u8PluginNum );
+		PluginBase* plugin = getPlugin( (EPluginType)u8PluginNum );
 		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( pktHdr->getSrcOnlineId() );
 		if( netIdent && plugin )
 		{
@@ -610,7 +617,7 @@ bool PluginMgr::isValidPluginNum( uint8_t u8PluginNum )
 //! get permission/access state for remote user
 EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent* netIdent )
 {
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		EPluginAccess eAccess = m_PktAnn.getHisAccessPermissionFromMe( ePluginType );
@@ -642,8 +649,8 @@ void PluginMgr::fromGuiUserLoggedOn( void )
 {
     vx_assert( m_PluginMgrInitialized );
 	// set all plugin permissions
-	std::vector<PluginBase * >::iterator iter;
-	for( PluginBase * pluginBase : m_aoPlugins )
+	std::vector<PluginBase* >::iterator iter;
+	for( PluginBase* pluginBase : m_aoPlugins )
 	{
         vx_assert( pluginBase );
         pluginBase->setPluginPermission( m_PktAnn.getPluginPermission( pluginBase->getPluginType() ) );
@@ -652,7 +659,7 @@ void PluginMgr::fromGuiUserLoggedOn( void )
 	// now tell plugins we are logged on
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
-		PluginBase * pluginBase = ( *iter );
+		PluginBase* pluginBase = ( *iter );
         vx_assert( pluginBase );
 		pluginBase->fromGuiUserLoggedOn();
 	}
@@ -686,12 +693,12 @@ void PluginMgr::onAppStateChange( EAppState eAppState )
 //============================================================================
 void PluginMgr::onAppStartup( void )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	int pluginIdx = 0;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
         //LogMsg( LOG_INFO, "pluginMgr::onAppStartup idx %d\n", pluginIdx );
-		PluginBase * pluginBase = (*iter);
+		PluginBase* pluginBase = (*iter);
 		pluginBase->onAppStartup();
 		pluginIdx++;
 	}
@@ -700,7 +707,7 @@ void PluginMgr::onAppStartup( void )
 //============================================================================
 void PluginMgr::onAppShutdown( void )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->onAppShutdown();
@@ -710,7 +717,7 @@ void PluginMgr::onAppShutdown( void )
 //============================================================================
 void PluginMgr::fromGuiAppPause( void )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->fromGuiAppPause();
@@ -720,7 +727,7 @@ void PluginMgr::fromGuiAppPause( void )
 //============================================================================
 void PluginMgr::fromGuiAppResume( void )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->fromGuiAppResume();
@@ -751,7 +758,7 @@ void PluginMgr::onMyOnlineUrlIsValid( bool iValid )
 void PluginMgr::onOncePerSecond( void )
 {
 	//NOTE: TODO ?
-	//std::vector<PluginBase * >::iterator iter;
+	//std::vector<PluginBase* >::iterator iter;
 	//for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	//{
 	//	(*iter)->onOncePerSecond();
@@ -761,7 +768,7 @@ void PluginMgr::onOncePerSecond( void )
 //============================================================================
 void PluginMgr::onThreadOncePer15Minutes( void )
 {
-    std::vector<PluginBase * >::iterator iter;
+    std::vector<PluginBase* >::iterator iter;
     for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
     {
 		if( !VxIsAppShuttingDown() )
@@ -795,7 +802,7 @@ void PluginMgr::onAfterUserLogOnThreaded( void )
 //============================================================================
 void PluginMgr::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->onContactWentOnline( netIdent, sktBase );
@@ -805,7 +812,7 @@ void PluginMgr::onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )
 //============================================================================
 void PluginMgr::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->onContactWentOffline( netIdent, sktBase );
@@ -815,7 +822,7 @@ void PluginMgr::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase )
 //============================================================================
 void PluginMgr::onConnectionLost( VxSktBase* sktBase )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->onConnectionLost( sktBase );
@@ -825,7 +832,7 @@ void PluginMgr::onConnectionLost( VxSktBase* sktBase )
 //============================================================================
 void PluginMgr::fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->fromGuiRelayPermissionCount( userPermittedCount, anonymousCount );
@@ -835,7 +842,7 @@ void PluginMgr::fromGuiRelayPermissionCount( int userPermittedCount, int anonymo
 //============================================================================
 void PluginMgr::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->fromGuiSendAsset( assetInfo );
@@ -845,7 +852,7 @@ void PluginMgr::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 //============================================================================
 PluginBase* PluginMgr::findPlugin( EPluginType ePluginType )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		if( ePluginType == (*iter)->getPluginType() )
@@ -913,7 +920,7 @@ PluginBase* PluginMgr::hostServiceToPlugin( EHostType hostType )
 bool PluginMgr::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId )
 {
 	bool result = false;
-	PluginBase * plugin = findPlugin( ePluginTypeMessenger );
+	PluginBase* plugin = findPlugin( ePluginTypeMessenger );
 	if( plugin )
 	{
 		BigListInfo * bigInfo = m_BigListMgr.findBigListInfo( onlineId );
@@ -958,7 +965,7 @@ void PluginMgr::pluginApiWantAppIdle( EPluginType ePluginType, bool bWantAppIdle
 //============================================================================
 void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputType mediaType, EAppModule appModule, bool wantInput, void * userData )
 {
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		m_Engine.getMediaProcessor().wantMediaInput( mediaType, plugin, userData, appModule, wantInput );
@@ -969,7 +976,7 @@ void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputTyp
 //! called to start service or session with remote friend
 void PluginMgr::fromGuiStartPluginSession( EPluginType ePluginType,  VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( oOnlineId );
@@ -994,7 +1001,7 @@ void PluginMgr::fromGuiStartPluginSession( EPluginType ePluginType,  VxGUID& oOn
 //! called to stop service or session with remote friend
 void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData, VxGUID lclSessionId )
 {
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
@@ -1022,7 +1029,7 @@ void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlin
 bool PluginMgr::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	bool inSession = false;
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		inSession = plugin->fromGuiIsPluginInSession( netIdent, pvUserData, lclSessionId );	
@@ -1038,7 +1045,7 @@ bool PluginMgr::fromGuiSetGameValueVar(	    EPluginType	    ePluginType,
 											int32_t			s32VarValue )
 {
 	bool bResult = false;
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
@@ -1065,7 +1072,7 @@ bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    ePluginType,
 											int32_t			s32VarValue )
 {
 	bool bResult = false;
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
@@ -1088,7 +1095,7 @@ bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    ePluginType,
 //============================================================================
 int PluginMgr::fromGuiDeleteFile( const char * fileName, bool shredFile )
 {
-	std::vector<PluginBase * >::iterator iter;
+	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		(*iter)->fromGuiDeleteFile( fileName, shredFile );
@@ -1101,7 +1108,7 @@ int PluginMgr::fromGuiDeleteFile( const char * fileName, bool shredFile )
 EPluginAccess PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIdent* netIdent )
 {
 	EPluginAccess canAcceptSession = ePluginAccessDisabled;
-	PluginBase * plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
 		canAcceptSession = plugin->canAcceptNewSession( netIdent );

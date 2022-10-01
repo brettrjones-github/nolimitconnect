@@ -38,7 +38,7 @@
 #include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget * parent, bool isSelectAFileMode )
+ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget* parent, bool isSelectAFileMode )
 : ActivityBase( OBJNAME_ACTIVITY_VIEW_LIBRARY_FILES, app, parent, eAppletMessengerFrame, true )
 , m_ePluginType( ePluginTypeInvalid )
 , m_IsSelectAFileMode( isSelectAFileMode )
@@ -78,7 +78,7 @@ void ActivityViewLibraryFiles::statusMsg( QString strMsg )
 }
 
 //============================================================================
-void ActivityViewLibraryFiles::showEvent( QShowEvent * ev )
+void ActivityViewLibraryFiles::showEvent( QShowEvent* ev )
 {
 	ActivityBase::showEvent( ev );
 	m_MyApp.setIsLibraryActivityActive( true );
@@ -87,7 +87,7 @@ void ActivityViewLibraryFiles::showEvent( QShowEvent * ev )
 }
 
 //============================================================================
-void ActivityViewLibraryFiles::hideEvent( QHideEvent * ev )
+void ActivityViewLibraryFiles::hideEvent( QHideEvent* ev )
 {
 	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );

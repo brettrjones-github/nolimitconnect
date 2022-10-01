@@ -39,7 +39,7 @@
 # endif // defined(TARGET_OS_ANDROID)
 
 //============================================================================
-RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget, QWidget * parent )
+RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget, QWidget* parent )
 : QWidget( parent )
 , m_RenderKodiThread( new RenderKodiThread( *this ) )
 , m_RenderWidget( renderWidget )

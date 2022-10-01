@@ -22,7 +22,7 @@ class AppletEditAboutMe : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletEditAboutMe( AppCommon& app, QWidget * parent );
+	AppletEditAboutMe( AppCommon& app, QWidget* parent );
 	virtual ~AppletEditAboutMe() = default;
 
 public slots:

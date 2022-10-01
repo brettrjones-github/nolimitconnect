@@ -293,14 +293,14 @@ void P2PConnectList::connectListUnlock( void )
 }
 
 //============================================================================
-void P2PConnectList::broadcastSystemPkt( VxPktHdr * pkt, bool onlyIncludeMyContacts )
+void P2PConnectList::broadcastSystemPkt( VxPktHdr* pkt, bool onlyIncludeMyContacts )
 {
 	VxGUIDList guidList;
 	broadcastSystemPkt( pkt, guidList, onlyIncludeMyContacts );
 }
 
 //============================================================================
-void P2PConnectList::broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& guidList, bool onlyIncludeMyContacts )
+void P2PConnectList::broadcastSystemPkt( VxPktHdr* pkt, VxGUIDList& guidList, bool onlyIncludeMyContacts )
 {
 	pkt->setSrcOnlineId( m_Engine.getMyOnlineId() );
 	std::map<VxGUID, RcConnectInfo *, cmp_vxguid>::iterator mapIter;

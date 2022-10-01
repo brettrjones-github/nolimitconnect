@@ -18,7 +18,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-PersonOfferListItem::PersonOfferListItem(QWidget *parent  )
+PersonOfferListItem::PersonOfferListItem(QWidget*parent  )
 : IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {

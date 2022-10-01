@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostChatRoomStatus::AppletHostChatRoomStatus( AppCommon& app, QWidget * parent )
+AppletHostChatRoomStatus::AppletHostChatRoomStatus( AppCommon& app, QWidget* parent )
     : AppletBase( OBJNAME_APPLET_HOST_CHAT_ROOM_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {

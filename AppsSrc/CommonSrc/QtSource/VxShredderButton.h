@@ -27,7 +27,7 @@ class VxShredderButton : public QPushButton
 {
 	Q_OBJECT
 public:
-	VxShredderButton(QWidget *parent=0);
+	VxShredderButton(QWidget*parent=0);
 	virtual ~VxShredderButton();
 
 	void						setEnabled( bool enabled );

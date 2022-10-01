@@ -22,7 +22,7 @@ class AppletEditStoryboard : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletEditStoryboard( AppCommon& app, QWidget * parent );
+    AppletEditStoryboard( AppCommon& app, QWidget* parent );
 	virtual ~AppletEditStoryboard() = default;
 
 private slots:

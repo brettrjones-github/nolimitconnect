@@ -64,7 +64,7 @@
 
 
 //============================================================================
-AppletKodi::AppletKodi( AppCommon& app, QWidget * parent )
+AppletKodi::AppletKodi( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_KODI, app, parent )
 //, m_ActivityCallbacksEnabled( false )
 //, m_IsPlaying( false )
@@ -206,7 +206,7 @@ void AppletKodi::slotMenuItemSelected( int menuId, EMenuItemType menuItemType )
 
 
 //============================================================================
-void AppletKodi::showEvent( QShowEvent * showEvent )
+void AppletKodi::showEvent( QShowEvent* showEvent )
 {
     AppletBase::showEvent( showEvent );
     if( ( false == VxIsAppShuttingDown() )
@@ -233,7 +233,7 @@ void AppletKodi::showEvent( QShowEvent * showEvent )
 }
 
 //============================================================================
-void AppletKodi::hideEvent( QHideEvent * hideEvent )
+void AppletKodi::hideEvent( QHideEvent* hideEvent )
 {
     AppletBase::hideEvent( hideEvent );
     setReadyForCallbacks( false );
@@ -241,7 +241,7 @@ void AppletKodi::hideEvent( QHideEvent * hideEvent )
 }
 
 //============================================================================
-void AppletKodi::resizeEvent( QResizeEvent * ev )
+void AppletKodi::resizeEvent( QResizeEvent* ev )
 {
     AppletBase::resizeEvent( ev );
     if( ( false == VxIsAppShuttingDown() )

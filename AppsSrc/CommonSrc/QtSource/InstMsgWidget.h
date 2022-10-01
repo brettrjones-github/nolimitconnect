@@ -26,7 +26,7 @@ class InstMsgWidget : public QWidget
 	Q_OBJECT
 
 public:
-	InstMsgWidget( QWidget * parent = 0 );
+	InstMsgWidget( QWidget* parent = 0 );
 
 	void						setInstMsgWidgets( EPluginType ePluginType, GuiUser * hisIdent );
 	void						toGuiInstMsg( QString instMsg );

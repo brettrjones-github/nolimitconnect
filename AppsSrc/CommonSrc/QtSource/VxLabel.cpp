@@ -20,14 +20,14 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-VxLabel::VxLabel(QWidget *parent, Qt::WindowFlags f) 
+VxLabel::VxLabel(QWidget*parent, Qt::WindowFlags f) 
 : QLabel(parent,f) 
 {
     setObjectName( "VxLabel" );
 }
 
 //============================================================================
-VxLabel::VxLabel(const QString &text, QWidget *parent, Qt::WindowFlags f) 
+VxLabel::VxLabel(const QString &text, QWidget*parent, Qt::WindowFlags f) 
 : QLabel(text,parent,f) 
 {
 }

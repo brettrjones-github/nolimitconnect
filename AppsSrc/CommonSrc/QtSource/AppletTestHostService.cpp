@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletTestHostService::AppletTestHostService( AppCommon& app, QWidget * parent )
+AppletTestHostService::AppletTestHostService( AppCommon& app, QWidget* parent )
 : AppletTestBase( OBJNAME_APPLET_TEST_HOST_SERVICE, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

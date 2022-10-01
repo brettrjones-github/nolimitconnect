@@ -24,7 +24,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-FileXferWidget::FileXferWidget(QWidget *parent)
+FileXferWidget::FileXferWidget(QWidget*parent)
 : QWidget(parent)
 , m_MyApp( GetAppInstance() )
 {
@@ -40,7 +40,7 @@ FileXferWidget::FileXferWidget(QWidget *parent)
 //============================================================================
 FileXferWidget::~FileXferWidget()
 {
-	GuiFileXferSession * fileItemInfo = (GuiFileXferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+	GuiFileXferSession* fileItemInfo = (GuiFileXferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( fileItemInfo && !fileItemInfo->parent() )
     {
         delete fileItemInfo;
@@ -63,7 +63,7 @@ void FileXferWidget::mousePressEvent(QMouseEvent * event)
 //============================================================================
 void FileXferWidget::setXferState( EXferState xferState, int param1, int param2 )
 {
-	GuiFileXferSession * sessionInfo = getFileItemInfo();
+	GuiFileXferSession* sessionInfo = getFileItemInfo();
 	if( sessionInfo )
 	{
 		sessionInfo->setXferState( xferState, param1, param2 );
@@ -118,7 +118,7 @@ void FileXferWidget::resizeEvent(QResizeEvent* resizeEvent)
 bool FileXferWidget::getIsShared( void )
 {
 	bool isShared = false;
-	GuiFileXferSession * poInfo = getFileItemInfo();
+	GuiFileXferSession* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
 		isShared = poInfo->getIsShared();
@@ -130,7 +130,7 @@ bool FileXferWidget::getIsShared( void )
 //============================================================================
 void FileXferWidget::setIsShared( bool isShared )
 {
-	GuiFileXferSession * sessionInfo = getFileItemInfo();
+	GuiFileXferSession* sessionInfo = getFileItemInfo();
 	if( sessionInfo )
 	{
 		sessionInfo->setIsShared( isShared );
@@ -143,7 +143,7 @@ void FileXferWidget::setIsShared( bool isShared )
 bool FileXferWidget::getIsInLibrary( void )
 {
 	bool isInLibrary = false;
-	GuiFileXferSession * sessionInfo = getFileItemInfo();
+	GuiFileXferSession* sessionInfo = getFileItemInfo();
 	if( sessionInfo )
 	{
 		isInLibrary = sessionInfo->getIsInLibrary();
@@ -155,7 +155,7 @@ bool FileXferWidget::getIsInLibrary( void )
 //============================================================================
 void FileXferWidget::setIsInLibrary( bool isInLibrary )
 {
-	GuiFileXferSession * sessionInfo = getFileItemInfo();
+	GuiFileXferSession* sessionInfo = getFileItemInfo();
 	if( sessionInfo )
 	{
 		sessionInfo->setIsInLibrary( isInLibrary );
@@ -165,15 +165,15 @@ void FileXferWidget::setIsInLibrary( bool isInLibrary )
 }
 
 //============================================================================
-void FileXferWidget::setFileItemInfo( GuiFileXferSession * fileItemInfo )
+void FileXferWidget::setFileItemInfo( GuiFileXferSession* fileItemInfo )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)fileItemInfo) );
 }
 
 //============================================================================
-GuiFileXferSession * FileXferWidget::getFileItemInfo( void )
+GuiFileXferSession* FileXferWidget::getFileItemInfo( void )
 {
-	return (GuiFileXferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+	return (GuiFileXferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
@@ -191,7 +191,7 @@ void FileXferWidget::setFileProgressBarValue( int val )
 //============================================================================
 void FileXferWidget::updateWidgetFromInfo( void )
 {
-	GuiFileXferSession * poSession= getFileItemInfo();
+	GuiFileXferSession* poSession= getFileItemInfo();
 	if( 0 == poSession )
 	{
 		return;

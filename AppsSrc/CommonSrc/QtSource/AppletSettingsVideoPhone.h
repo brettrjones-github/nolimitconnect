@@ -20,7 +20,7 @@ class AppletSettingsVideoPhone : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsVideoPhone( AppCommon& app, QWidget * parent );
+    AppletSettingsVideoPhone( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsVideoPhone() override;
 
 protected:

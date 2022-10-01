@@ -20,7 +20,7 @@ class AppletSettingsTruthOrDare : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsTruthOrDare( AppCommon& app, QWidget * parent );
+    AppletSettingsTruthOrDare( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsTruthOrDare() override;
 
 protected:

@@ -32,7 +32,7 @@ namespace
 
 //============================================================================
 AppletGroupListClient::AppletGroupListClient(	AppCommon&		    app, 
-												QWidget *			parent )
+												QWidget*			parent )
 : AppletClientBase( OBJNAME_APPLET_GROUP_LIST_CLIENT, app, parent )
 {
     setAppletType( eAppletGroupListClient );
@@ -98,14 +98,14 @@ void AppletGroupListClient::setInfoLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletGroupListClient::showEvent( QShowEvent * ev )
+void AppletGroupListClient::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks(this, true );
 }
 
 //============================================================================
-void AppletGroupListClient::hideEvent( QHideEvent * ev )
+void AppletGroupListClient::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

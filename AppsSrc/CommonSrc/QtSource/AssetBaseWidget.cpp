@@ -21,7 +21,7 @@
 #include <QProgressBar>
 
 //============================================================================
-AssetBaseWidget::AssetBaseWidget( AppCommon& appCommon, QWidget *parent)
+AssetBaseWidget::AssetBaseWidget( AppCommon& appCommon, QWidget*parent)
 : QWidget( parent )
 , m_MyApp( appCommon )
 , m_Engine( appCommon.getEngine() )
@@ -49,7 +49,7 @@ MyIcons& AssetBaseWidget::getMyIcons( void )
 }
 
 //============================================================================
-void AssetBaseWidget::setXferBar( QProgressBar * xferProgressBar )	
+void AssetBaseWidget::setXferBar( QProgressBar* xferProgressBar )	
 { 
 	m_XferProgressBar = xferProgressBar; 
 	if( 0 != m_XferProgressBar )
@@ -60,7 +60,7 @@ void AssetBaseWidget::setXferBar( QProgressBar * xferProgressBar )
 }
 
 //============================================================================
-void AssetBaseWidget::showEvent(QShowEvent * showEvent)
+void AssetBaseWidget::showEvent(QShowEvent* showEvent)
 {
 	QWidget::showEvent(showEvent);
 	if( !m_AssetReadyForCallbacks )
@@ -75,7 +75,7 @@ void AssetBaseWidget::showEvent(QShowEvent * showEvent)
 }
 
 //============================================================================
-void AssetBaseWidget::hideEvent( QHideEvent * ev )
+void AssetBaseWidget::hideEvent( QHideEvent* ev )
 {
 	onAssetWidgetVisibleAndReady( false, true );
 	QWidget::hideEvent( ev );

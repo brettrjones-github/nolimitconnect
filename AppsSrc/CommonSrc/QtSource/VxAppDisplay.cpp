@@ -21,7 +21,7 @@
 #include <QTimer>
 
 //============================================================================
-VxAppDisplay::VxAppDisplay( AppCommon& appCommon, QWidget * parent )
+VxAppDisplay::VxAppDisplay( AppCommon& appCommon, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( appCommon )
 , m_OrientationCheckTimer( new QTimer( this ) )

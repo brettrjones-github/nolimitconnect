@@ -29,7 +29,7 @@ class GuiGroupieListWidget : public ListWidgetBase, public GuiUserUpdateCallback
 	Q_OBJECT
 
 public:
-    GuiGroupieListWidget( QWidget * parent );
+    GuiGroupieListWidget( QWidget* parent );
     virtual ~GuiGroupieListWidget();
 
     void                        clearHostList( void );

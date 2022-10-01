@@ -26,7 +26,7 @@ class AppletLogView : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletLogView( AppCommon& app, QWidget * parent );
+    AppletLogView( AppCommon& app, QWidget* parent );
 	virtual ~AppletLogView();
 
 protected slots:

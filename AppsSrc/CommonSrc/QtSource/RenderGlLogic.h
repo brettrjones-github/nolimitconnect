@@ -51,7 +51,7 @@ class RenderGlLogic : public QWidget
 {
     Q_OBJECT
 public:
-    explicit RenderGlLogic( RenderGlWidget& renderWidget, QWidget * parent );
+    explicit RenderGlLogic( RenderGlWidget& renderWidget, QWidget* parent );
     virtual ~RenderGlLogic() = default;
 
 #ifdef DEBUG

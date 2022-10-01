@@ -20,7 +20,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-ImagePickBar::ImagePickBar( QWidget * parent )
+ImagePickBar::ImagePickBar( QWidget* parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

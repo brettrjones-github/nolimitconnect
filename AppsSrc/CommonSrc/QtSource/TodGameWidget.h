@@ -26,7 +26,7 @@ class TodGameWidget : public QWidget
 public:
 	Ui::TodGameWidget ui;
 
-	TodGameWidget( QWidget *parent = 0 );
+	TodGameWidget( QWidget*parent = 0 );
 
 	VidWidget *		getVidWidget( void );
 

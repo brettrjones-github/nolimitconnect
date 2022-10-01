@@ -26,7 +26,7 @@ class ThumbnailViewWidget : public QLabel
 {
     Q_OBJECT
 public:
-    ThumbnailViewWidget( QWidget * parent );
+    ThumbnailViewWidget( QWidget* parent );
     ~ThumbnailViewWidget() override = default;
 
     void                        setIsUserPickedImage( bool userPicked )     { m_bUserPickedImage = userPicked;  }

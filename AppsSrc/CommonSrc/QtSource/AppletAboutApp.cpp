@@ -28,7 +28,7 @@
 
 
 //============================================================================
-AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
+AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_ABOUT_APP, app, parent )
 {
     setAppletType( eAppletAboutNoLimitConnect );

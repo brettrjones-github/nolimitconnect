@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostGroupStatus::AppletHostGroupStatus( AppCommon& app, QWidget * parent )
+AppletHostGroupStatus::AppletHostGroupStatus( AppCommon& app, QWidget* parent )
     : AppletBase( OBJNAME_APPLET_GROUP_HOST_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {

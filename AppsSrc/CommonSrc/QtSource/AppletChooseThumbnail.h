@@ -21,7 +21,7 @@ class AppletChooseThumbnail : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletChooseThumbnail( AppCommon& app, QWidget * parent );
+    AppletChooseThumbnail( AppCommon& app, QWidget* parent );
 	virtual ~AppletChooseThumbnail();
 
 signals:

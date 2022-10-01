@@ -36,7 +36,7 @@ namespace
 }
 
 //============================================================================
-VxPushButton::VxPushButton( QWidget *parent ) 
+VxPushButton::VxPushButton( QWidget*parent ) 
 : QPushButton( parent ) 
 , m_MyApp( GetAppInstance() )
 
@@ -76,7 +76,7 @@ VxPushButton::VxPushButton( QWidget *parent )
 }
 
 //============================================================================
-VxPushButton::VxPushButton( const QString &text, QWidget *parent ) 
+VxPushButton::VxPushButton( const QString &text, QWidget*parent ) 
 : QPushButton( text, parent ) 
 , m_MyApp( GetAppInstance() )
 
@@ -730,7 +730,7 @@ void VxPushButton::setIcons( EMyIcons normalIcon, EMyIcons overlay1Icon )
 }
 
 //============================================================================
-void VxPushButton::setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame )
+void VxPushButton::setAppIcon( EMyIcons appletIcon, QWidget* parentAppFrame )
 {
     m_AppFrame = parentAppFrame;
     m_AppClickCount = 0;

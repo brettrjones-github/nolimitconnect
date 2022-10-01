@@ -22,7 +22,7 @@ class RelayServiceWidget : public QWidget
 	Q_OBJECT
 
 public:
-    RelayServiceWidget( QWidget * parent = 0 );
+    RelayServiceWidget( QWidget* parent = 0 );
 
     void						setPluginType( EPluginType pluginType, int subType = 0 );
     void						setPermissionLevel( EFriendState permLevel );

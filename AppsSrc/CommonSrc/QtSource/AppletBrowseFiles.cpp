@@ -33,7 +33,7 @@
 #include <QFileDialog>
 
 //============================================================================
-AppletBrowseFiles::AppletBrowseFiles( AppCommon& app, QWidget * parent )
+AppletBrowseFiles::AppletBrowseFiles( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_BROWSE_FILES, app, parent )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
@@ -202,14 +202,14 @@ std::string AppletBrowseFiles::getDefaultDir( int eFileFilterType )
 }
 
 //============================================================================
-void AppletBrowseFiles::showEvent( QShowEvent * ev )
+void AppletBrowseFiles::showEvent( QShowEvent* ev )
 {
 	ActivityBase::showEvent( ev );
 	slotRequestFileList();
 }
 
 //============================================================================
-void AppletBrowseFiles::hideEvent( QHideEvent * ev )
+void AppletBrowseFiles::hideEvent( QHideEvent* ev )
 {
 	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
@@ -344,7 +344,7 @@ void AppletBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 			}
 		}
 
-		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget *)item );
+		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget*)item );
 	}
 }
 
@@ -387,7 +387,7 @@ void AppletBrowseFiles::slotBrowseButtonClicked( void )
 {
 	QString selectedDir = "";
 	QString curDir = m_CurBrowseDirectory.c_str();
-	QFileDialog dialog( (QWidget *)this->parent(), QObject::tr("Open Directory"), curDir );
+	QFileDialog dialog( (QWidget*)this->parent(), QObject::tr("Open Directory"), curDir );
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
 	dialog.setFileMode( QFileDialog::Directory );
 #else

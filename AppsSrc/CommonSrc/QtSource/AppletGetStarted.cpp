@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletGetStarted::AppletGetStarted( AppCommon& app, QWidget * parent )
+AppletGetStarted::AppletGetStarted( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_GET_STARTED, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

@@ -19,7 +19,7 @@ class AppletSettingsHostGroupListing : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsHostGroupListing( AppCommon& app, QWidget * parent );
+    AppletSettingsHostGroupListing( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsHostGroupListing() = default;
 
 protected:

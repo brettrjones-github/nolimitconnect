@@ -20,7 +20,7 @@
 #include <QDebug>
 
 //============================================================================
-SessionWidget::SessionWidget( QWidget *parent, EAssetType inputMode )
+SessionWidget::SessionWidget( QWidget*parent, EAssetType inputMode )
 : QWidget( parent )
 , m_MyApp(GetAppInstance())
 , m_InputMode( inputMode )

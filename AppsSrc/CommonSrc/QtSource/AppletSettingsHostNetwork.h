@@ -26,7 +26,7 @@ class AppletSettingsHostNetwork : public AppletSettingsHostBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsHostNetwork( AppCommon& app, QWidget * parent );
+    AppletSettingsHostNetwork( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsHostNetwork();
 
     PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }

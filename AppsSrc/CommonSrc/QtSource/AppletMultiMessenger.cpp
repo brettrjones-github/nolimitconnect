@@ -310,7 +310,7 @@ bool AppletMultiMessenger::checkForSendAccess( bool sendOfferIfPossible )
 
 
 //============================================================================
-void AppletMultiMessenger::showEvent( QShowEvent * ev )
+void AppletMultiMessenger::showEvent( QShowEvent* ev )
 {
 	AppletPeerBase::showEvent( ev );
 	m_MyApp.wantToGuiActivityCallbacks( this, true );
@@ -321,7 +321,7 @@ void AppletMultiMessenger::showEvent( QShowEvent * ev )
 }
 
 //============================================================================
-void AppletMultiMessenger::hideEvent( QHideEvent * ev )
+void AppletMultiMessenger::hideEvent( QHideEvent* ev )
 {
     if( m_HisIdent )
     {

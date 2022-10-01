@@ -26,7 +26,7 @@ class AppletSettingsHostChatRoom : public AppletSettingsHostBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsHostChatRoom( AppCommon& app, QWidget * parent );
+    AppletSettingsHostChatRoom( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsHostChatRoom();
 
     PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }

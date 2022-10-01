@@ -24,7 +24,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-VxContextMenu::VxContextMenu( AppCommon& appCommon, QWidget * parent )
+VxContextMenu::VxContextMenu( AppCommon& appCommon, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( appCommon )
 , m_MenuId( 0 )
@@ -78,7 +78,7 @@ void VxContextMenu::showMenu( const QPoint & globalPoint )
     m_GlobalPoint = globalPoint;
     if( !m_MenuItemList.isEmpty() )
     {
-        m_NewMenu = new VxMenu( (QWidget *)parent() );
+        m_NewMenu = new VxMenu( (QWidget*)parent() );
         m_NewMenu->setShowAbove( m_ShowAboveButton );
         m_NewMenu->setPalette( m_MyApp.getAppTheme().getBasePalette() );
         //QColor textColor( 255,0,255 );
@@ -147,7 +147,7 @@ void VxContextMenu::slotMenuItemTriggered()
 }
 
 //============================================================================
-QPoint VxContextMenu::calculatePos( QWidget * menuWidget )
+QPoint VxContextMenu::calculatePos( QWidget* menuWidget )
 {
     QRect widgetRect = menuWidget->geometry();
     int widgetWidth = widgetRect.width();

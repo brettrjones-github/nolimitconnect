@@ -993,7 +993,7 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 	}
 	else
 	{
-		std::vector<PluginBase * >::iterator iter;
+		std::vector<PluginBase* >::iterator iter;
 		for( iter = m_aoWantAppIdle.begin(); iter != m_aoWantAppIdle.end(); ++iter )
 		{
 			if( ePluginType == (*iter)->getPluginType() )

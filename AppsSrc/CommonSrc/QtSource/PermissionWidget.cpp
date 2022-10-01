@@ -24,7 +24,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-PermissionWidget::PermissionWidget( QWidget * parent )
+PermissionWidget::PermissionWidget( QWidget* parent )
 	: QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

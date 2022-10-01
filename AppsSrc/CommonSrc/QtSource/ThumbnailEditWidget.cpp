@@ -37,7 +37,7 @@
 #include <QPainter>
 
 //============================================================================
-ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
+ThumbnailEditWidget::ThumbnailEditWidget( QWidget* parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
     , m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )

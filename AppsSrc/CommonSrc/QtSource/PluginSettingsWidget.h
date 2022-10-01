@@ -25,7 +25,7 @@ class PluginSettingsWidget : public QWidget
 {
 	Q_OBJECT
 public:
-    PluginSettingsWidget( QWidget * parent );
+    PluginSettingsWidget( QWidget* parent );
 	virtual ~PluginSettingsWidget() = default;
 
     void						setupSettingsWidget( EApplet applet, EPluginType pluginType );

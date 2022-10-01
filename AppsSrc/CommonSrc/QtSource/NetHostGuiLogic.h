@@ -22,7 +22,7 @@ class NetHostGuiLogic : public QWidget
 {
     Q_OBJECT
 public:
-    NetHostGuiLogic( AppCommon& myApp, QWidget * parent );
+    NetHostGuiLogic( AppCommon& myApp, QWidget* parent );
 
 protected:
     AppCommon&                  m_MyApp;

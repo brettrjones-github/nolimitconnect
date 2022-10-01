@@ -23,7 +23,7 @@ class AppletGalleryEmoticon : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGalleryEmoticon( AppCommon& app, QWidget * parent = NULL );
+	AppletGalleryEmoticon( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletGalleryEmoticon() override;
 
 signals:
@@ -33,8 +33,8 @@ private slots:
 	void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
-    void                        resizeEvent( QResizeEvent * ev ) override;
-    void                        showEvent( QShowEvent * ev ) override;
+    void                        resizeEvent( QResizeEvent* ev ) override;
+    void                        showEvent( QShowEvent* ev ) override;
 
     void                        loadAssets( void );
 

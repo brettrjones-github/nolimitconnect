@@ -26,7 +26,7 @@ class AppletCamSettings : public AppletBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
-	AppletCamSettings( AppCommon& app, QWidget * parent = NULL );
+	AppletCamSettings( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletCamSettings() override;
 
     void						webCamSourceOffline();
@@ -46,8 +46,8 @@ protected slots:
     void						slotToGuiContactOffline( VxNetIdent * hisIdent );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
     virtual void				closeEvent( QCloseEvent * ev ) override;
 
     void						setupCamFeed( VxNetIdent* feedNetIdent );

@@ -27,7 +27,7 @@
 
 //============================================================================
 ActivitySoundOptions::	ActivitySoundOptions(	AppCommon& app, 
-												QWidget * parent )
+												QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_SOUND_OPTIONS, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);

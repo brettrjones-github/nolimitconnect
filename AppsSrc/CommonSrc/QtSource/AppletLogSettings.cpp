@@ -71,7 +71,7 @@ QString describeLogModule( ELogModule logModule )
 }
 
 //============================================================================
-AppletLogSettings::AppletLogSettings( AppCommon& app, QWidget * parent )
+AppletLogSettings::AppletLogSettings( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_LOG_SETTINGS, app, parent )
 , m_LogMgr( GetLogMgrInstance() )
 {
@@ -150,7 +150,7 @@ void AppletLogSettings::connectSignals( void )
 }
 
 //============================================================================
-void AppletLogSettings::showEvent( QShowEvent * ev )
+void AppletLogSettings::showEvent( QShowEvent* ev )
 {
     AppletBase::showEvent( ev );
     uint32_t logModuleMask = 0x01;

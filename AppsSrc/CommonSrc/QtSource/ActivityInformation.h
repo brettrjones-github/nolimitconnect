@@ -53,8 +53,8 @@ class ActivityInformation : public ActivityBase
 
 public:
 
-    ActivityInformation( AppCommon& app, QWidget * parent, EPluginType pluginType );
-    ActivityInformation( AppCommon& app, QWidget * parent, EInfoType infoType );
+    ActivityInformation( AppCommon& app, QWidget* parent, EPluginType pluginType );
+    ActivityInformation( AppCommon& app, QWidget* parent, EInfoType infoType );
 
 	virtual ~ActivityInformation() override = default;
 
@@ -71,7 +71,7 @@ protected slots:
 	void						slotCopyToClipboardButtonClicked( void );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
 
     void						initActivityInformation( void );
     void						updateInformation( void );

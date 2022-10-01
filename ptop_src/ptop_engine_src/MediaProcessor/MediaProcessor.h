@@ -234,7 +234,7 @@ protected:
 	VxMutex						m_AudioMutex;
 	VxMutex						m_VideoMutex;
 
-	std::vector<PluginBase *>	m_aoWantAppIdle;				// list of plugins that want called on app idle
+	std::vector<PluginBase*>	m_aoWantAppIdle;				// list of plugins that want called on app idle
 
 	std::vector<MediaClient>	m_AudioPcmList;	
 	std::vector<MediaClient>	m_AudioOpusList;	

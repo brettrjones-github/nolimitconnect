@@ -19,7 +19,7 @@ class AppletStoryboardServerViewMine : public AppletStoryboardClient
 {
 	Q_OBJECT
 public:
-    AppletStoryboardServerViewMine( AppCommon& app, QWidget * parent );
+    AppletStoryboardServerViewMine( AppCommon& app, QWidget* parent );
 	virtual ~AppletStoryboardServerViewMine();
 
 	virtual void				setAppletType( EApplet applet ) override;

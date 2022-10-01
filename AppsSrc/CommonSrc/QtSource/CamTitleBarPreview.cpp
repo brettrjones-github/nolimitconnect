@@ -15,12 +15,12 @@
 #include "CamTitleBarPreview.h"
 
 //============================================================================
-CamTitleBarPreview::CamTitleBarPreview( QWidget *parent, Qt::WindowFlags f )
+CamTitleBarPreview::CamTitleBarPreview( QWidget*parent, Qt::WindowFlags f )
     : VxLabel( parent, f )
 {
 }
 
-CamTitleBarPreview::CamTitleBarPreview( const QString &text, QWidget *parent, Qt::WindowFlags f )
+CamTitleBarPreview::CamTitleBarPreview( const QString &text, QWidget*parent, Qt::WindowFlags f )
     : VxLabel( text, parent, f )
 {
 }

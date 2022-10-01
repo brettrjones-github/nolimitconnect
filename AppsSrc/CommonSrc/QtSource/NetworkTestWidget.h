@@ -27,7 +27,7 @@ class NetworkTestWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	NetworkTestWidget( QWidget * parent = nullptr );
+	NetworkTestWidget( QWidget* parent = nullptr );
     virtual ~NetworkTestWidget() override = default;
 
 protected slots:

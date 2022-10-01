@@ -26,7 +26,7 @@ namespace
 }
 
 //============================================================================
-AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget * parent )
+AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_CHAT_ROOM_JOIN, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );

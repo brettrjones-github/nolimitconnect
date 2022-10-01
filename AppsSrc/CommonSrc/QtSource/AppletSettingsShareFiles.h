@@ -20,7 +20,7 @@ class AppletSettingsShareFiles : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsShareFiles( AppCommon& app, QWidget * parent );
+    AppletSettingsShareFiles( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsShareFiles() override;
 
 protected:

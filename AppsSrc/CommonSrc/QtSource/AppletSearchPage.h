@@ -21,7 +21,7 @@ class AppletSearchPage : public AppletLaunchPage
 {
 	Q_OBJECT
 public:
-	AppletSearchPage( AppCommon& app, QWidget * parent );
+	AppletSearchPage( AppCommon& app, QWidget* parent );
 	virtual ~AppletSearchPage() = default;
 
 
@@ -29,9 +29,9 @@ protected slots:
 	void						slotPowerButtonClicked( void );
 
 protected:
-	virtual void				showEvent( QShowEvent * );
-	//virtual void				hideEvent( QHideEvent * );
-	void						resizeEvent( QResizeEvent * );
+	virtual void				showEvent( QShowEvent* );
+	//virtual void				hideEvent( QHideEvent* );
+	void						resizeEvent( QResizeEvent* );
 
 private:
 	void						setupAppletSearchPage( void );

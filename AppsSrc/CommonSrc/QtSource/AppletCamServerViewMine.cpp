@@ -20,7 +20,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletCamServerViewMine::AppletCamServerViewMine( AppCommon& app, QWidget * parent )
+AppletCamServerViewMine::AppletCamServerViewMine( AppCommon& app, QWidget* parent )
 : AppletCamClient( app, parent )
 {
 }

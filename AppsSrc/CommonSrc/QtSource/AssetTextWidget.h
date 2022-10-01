@@ -22,8 +22,8 @@ class AssetTextWidget : public AssetBaseWidget
 	Q_OBJECT
 
 public:
-	AssetTextWidget( QWidget * parent = 0 );
-	AssetTextWidget( AppCommon& appCommon, QWidget * parent = 0 );
+	AssetTextWidget( QWidget* parent = 0 );
+	AssetTextWidget( AppCommon& appCommon, QWidget* parent = 0 );
 
     virtual void				showSendFail( bool show, bool permissionErr = false ) override;
     virtual void				showResendButton( bool show ) override;

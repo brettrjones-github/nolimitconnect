@@ -41,7 +41,7 @@ namespace
 }
 
 //============================================================================
-AppletApplicationInfo::AppletApplicationInfo( AppCommon& app, QWidget * parent )
+AppletApplicationInfo::AppletApplicationInfo( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_APPLICATION_INFO, app, parent )
 {
     setAppletType( eAppletApplicationInfo );

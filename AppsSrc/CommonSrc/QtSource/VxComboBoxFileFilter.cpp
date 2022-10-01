@@ -51,7 +51,7 @@ namespace
 }
 
 //============================================================================
-VxComboBoxFileFilter::VxComboBoxFileFilter(QWidget *parent) 
+VxComboBoxFileFilter::VxComboBoxFileFilter(QWidget*parent) 
 : QComboBox(parent) 
 , m_CurFileMask( VXFILE_TYPE_ALLNOTEXE )
 , m_FileFilterType( eFileFilterAll )

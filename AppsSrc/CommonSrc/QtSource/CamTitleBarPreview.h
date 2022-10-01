@@ -19,8 +19,8 @@ class CamTitleBarPreview : public VxLabel
 {
     Q_OBJECT
 public:
-    CamTitleBarPreview( QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
-    CamTitleBarPreview( const QString &text, QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
+    CamTitleBarPreview( QWidget*parent=0, Qt::WindowFlags f= Qt::Widget);
+    CamTitleBarPreview( const QString &text, QWidget*parent=0, Qt::WindowFlags f= Qt::Widget);
     virtual ~CamTitleBarPreview() = default;
 
 };

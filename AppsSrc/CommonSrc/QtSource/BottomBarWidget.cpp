@@ -19,7 +19,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-BottomBarWidget::BottomBarWidget( QWidget * parent )
+BottomBarWidget::BottomBarWidget( QWidget* parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 {

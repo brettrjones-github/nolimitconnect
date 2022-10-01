@@ -21,7 +21,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-FileShareItemWidget::FileShareItemWidget(QWidget *parent )
+FileShareItemWidget::FileShareItemWidget(QWidget*parent )
 : QWidget(parent)
 , m_MyApp( GetAppInstance() )
 {

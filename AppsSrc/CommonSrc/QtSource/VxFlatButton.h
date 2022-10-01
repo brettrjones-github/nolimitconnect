@@ -25,7 +25,7 @@ class VxFlatButton : public QPushButton
 {
 	Q_OBJECT
 public:
-	VxFlatButton(QWidget *parent=0);
+	VxFlatButton(QWidget*parent=0);
 	virtual ~VxFlatButton() = default;
 
 	AppCommon&					getMyApp( void )						{ return m_MyApp; }

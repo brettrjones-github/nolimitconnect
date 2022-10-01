@@ -21,7 +21,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletClientRandomConnect::AppletClientRandomConnect( AppCommon& app, QWidget * parent )
+AppletClientRandomConnect::AppletClientRandomConnect( AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_CLIENT_RANDOM_PERSON, app, parent )
 {
     setAppletType( eAppletClientRandomConnect );
@@ -48,14 +48,14 @@ AppletClientRandomConnect::~AppletClientRandomConnect()
 }
 
 //============================================================================
-void AppletClientRandomConnect::showEvent( QShowEvent * ev )
+void AppletClientRandomConnect::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletClientRandomConnect::hideEvent( QHideEvent * ev )
+void AppletClientRandomConnect::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

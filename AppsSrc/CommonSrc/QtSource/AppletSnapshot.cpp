@@ -40,7 +40,7 @@
 #include <QTimer>
 
 //============================================================================
-AppletSnapshot::AppletSnapshot(	AppCommon& app, QWidget * parent )
+AppletSnapshot::AppletSnapshot(	AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_SNAPSHOT, app, parent )
 , m_CloseDlgTimer( new QTimer( this ) )
 {

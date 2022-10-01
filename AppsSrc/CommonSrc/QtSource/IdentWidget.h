@@ -22,7 +22,7 @@ class IdentWidget :  public IdentLogicInterface
 	Q_OBJECT
 
 public:
-	IdentWidget(QWidget *parent=0);
+	IdentWidget(QWidget*parent=0);
 
 	VxPushButton*				getIdentAvatarButton( void ) override;
 	VxPushButton*				getIdentFriendshipButton( void ) override;

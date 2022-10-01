@@ -39,7 +39,7 @@ namespace
 }
 
 //============================================================================
-AppletInviteAccept::AppletInviteAccept( AppCommon& app, QWidget * parent )
+AppletInviteAccept::AppletInviteAccept( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_INVITE_ACCEPT, app, parent )
 {
     setAppletType( eAppletInviteAccept );

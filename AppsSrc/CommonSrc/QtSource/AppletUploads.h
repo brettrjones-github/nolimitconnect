@@ -28,17 +28,17 @@ class AppletUploads : public AppletPeerBase, public ToGuiFileXferInterface
 	Q_OBJECT
 public:
 	AppletUploads(	AppCommon&	app, 
-						QWidget *		parent = NULL );
+						QWidget*		parent = NULL );
 	virtual ~AppletUploads() override;
 
 public:
-	FileXferWidget *			addDownload( GuiFileXferSession * poFileInfo );
+	FileXferWidget*			addDownload( GuiFileXferSession* poFileInfo );
 
 	bool						isUploadInProgress( VxGUID fileInstance );
 
-	GuiFileXferSession *		findSession( VxGUID fileInstance );
-	FileXferWidget *			findListEntryWidget( VxGUID fileInstance );
-	FileXferWidget *			addUpload( GuiFileXferSession * poSession );
+	GuiFileXferSession*		findSession( VxGUID fileInstance );
+	FileXferWidget*			findListEntryWidget( VxGUID fileInstance );
+	FileXferWidget*			addUpload( GuiFileXferSession* poSession );
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
@@ -52,19 +52,19 @@ private slots:
 	void						slotShredButtonClicked( QListWidgetItem * item );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
 
     // override default behavior of closing dialog when back button is clicked
     void                        onBackButtonClicked( void ) override;
 
-    virtual void				toGuiStartUpload( GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiStartUpload( GuiFileXferSession* xferSession ) override;
     virtual void				toGuiFileXferState( EPluginType plguinType, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
     virtual void				toGuiFileUploadComplete( EPluginType plguinType, VxGUID& lclSession, EXferError xferError ) override;
 
-	FileXferWidget *			sessionToWidget( GuiFileXferSession * poSession );
-	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession );
-	GuiFileXferSession *		widgetToSession( FileXferWidget * item );
+	FileXferWidget*			sessionToWidget( GuiFileXferSession* poSession );
+	void						updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* poSession );
+	GuiFileXferSession*		widgetToSession( FileXferWidget* item );
 	bool						confirmDeleteFile( bool shredFile );
 
 	//=== vars ===//

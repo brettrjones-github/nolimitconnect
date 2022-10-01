@@ -29,7 +29,7 @@
 #include <vector>
  
 //============================================================================
-GuiUserListWidget::GuiUserListWidget( QWidget * parent )
+GuiUserListWidget::GuiUserListWidget( QWidget* parent )
 : ListWidgetBase( parent )
 {
 	QListWidget::setSortingEnabled( true );
@@ -65,7 +65,7 @@ void GuiUserListWidget::slotMyIdentUpdated( GuiUser* user )
 }
 
 //============================================================================
-void GuiUserListWidget::showEvent( QShowEvent * ev )
+void GuiUserListWidget::showEvent( QShowEvent* ev )
 {
     QListWidget::showEvent( ev );
 }
@@ -177,7 +177,7 @@ void GuiUserListWidget::updateUser( GuiUser* user )
                     insertItem( 0, (QListWidgetItem *)entryWidget );
                 }
 
-                setItemWidget( (QListWidgetItem *)entryWidget, (QWidget *)entryWidget );
+                setItemWidget( (QListWidgetItem *)entryWidget, (QWidget*)entryWidget );
                 m_UserCache[user->getMyOnlineId()] = userSession;
                 onListItemAdded( userSession, entryWidget );
             }
@@ -487,7 +487,7 @@ GuiUserListItem* GuiUserListWidget::addOrUpdateSession( GuiUserSessionBase* user
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
     }
 
     return userItem;

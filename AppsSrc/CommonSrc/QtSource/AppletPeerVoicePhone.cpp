@@ -21,7 +21,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-AppletPeerVoicePhone::AppletPeerVoicePhone(	AppCommon& app, QWidget * parent )
+AppletPeerVoicePhone::AppletPeerVoicePhone(	AppCommon& app, QWidget* parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_TO_FRIEND_VOICE_PHONE, app, parent )
 {
     setPluginType( ePluginTypeVoicePhone );

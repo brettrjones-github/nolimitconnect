@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget * parent, EApplet eAppletType, const char * objName )
+AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget* parent, EApplet eAppletType, const char * objName )
 : ActivityBase( objName, app, parent, eAppletType )
 , m_IsInitialized( false )
 {
@@ -85,7 +85,7 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
 }
 
 //============================================================================
-void AppletLaunchPage::resizeEvent( QResizeEvent * ev )
+void AppletLaunchPage::resizeEvent( QResizeEvent* ev )
 {
     ActivityBase::resizeEvent( ev );
 	//LogMsg( LOG_DEBUG, "AppletLaunchPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
@@ -93,7 +93,7 @@ void AppletLaunchPage::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AppletLaunchPage::showEvent( QShowEvent * showEvent )
+void AppletLaunchPage::showEvent( QShowEvent* showEvent )
 {
     ActivityBase::showEvent( showEvent );
 }

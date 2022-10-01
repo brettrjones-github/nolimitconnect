@@ -24,7 +24,7 @@ class GuiGroupieListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	GuiGroupieListItem( QWidget *parent=0 );
+	GuiGroupieListItem( QWidget*parent=0 );
 	virtual ~GuiGroupieListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

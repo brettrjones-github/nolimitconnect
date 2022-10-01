@@ -32,7 +32,7 @@ class AppletGroupListClient : public AppletClientBase, public GuiHostedListCallb
 	Q_OBJECT
 public:
 	AppletGroupListClient(	AppCommon&		    app, 
-							QWidget *			parent = NULL );
+							QWidget*			parent = NULL );
 	virtual ~AppletGroupListClient();
 
     void                        infoMsg( const char * infoMsg, ... );
@@ -69,8 +69,8 @@ private slots:
     virtual void                slotConnectButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
     //=== vars ===//
     Ui::AppletGroupListClientUi ui;

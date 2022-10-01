@@ -721,8 +721,9 @@ enum EPluginMsgType
 };
 
 //! \public Enumerated plugins
-enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePluginType if you change this
+enum EPluginType 
 {
+    // NOTE: *** update PluginTypeEnumStrings and GuiParams::describePluginType if you change this
     //! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
     ePluginTypeInvalid			    = 0,	//!< unknown or disabled
 
@@ -767,7 +768,7 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeSearch,
     ePluginTypeSndReader,
     ePluginTypeSndWriter,
-    ePluginTypeWebServer,	        // Web server plugin ( for About Me and Story Board web pages )
+
     ePluginTypeAboutMePageClient,	// about me web page plugin client
     ePluginTypeStoryboardClient,	// storyboard web page plugin client
     ePluginTypeFileShareClient,     // shared files client

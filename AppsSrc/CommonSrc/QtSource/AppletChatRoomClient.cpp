@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletChatRoomClient::AppletChatRoomClient( AppCommon& app, QWidget * parent )
+AppletChatRoomClient::AppletChatRoomClient( AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_CLIENT_CHAT_ROOM, app, parent )
 {
 	setAppletType( eAppletClientChatRoom );

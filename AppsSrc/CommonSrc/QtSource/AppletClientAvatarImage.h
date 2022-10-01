@@ -19,7 +19,7 @@ class AppletClientAvatarImage : public AppletClientBase
 {
 	Q_OBJECT
 public:
-    AppletClientAvatarImage( AppCommon& app, QWidget * parent );
+    AppletClientAvatarImage( AppCommon& app, QWidget* parent );
 	virtual ~AppletClientAvatarImage() override;
 
 };

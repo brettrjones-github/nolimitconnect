@@ -23,7 +23,7 @@
 #include <time.h>
 
 //============================================================================
-InstMsgWidget::InstMsgWidget( QWidget * parent )
+InstMsgWidget::InstMsgWidget( QWidget* parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )

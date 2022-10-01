@@ -21,8 +21,8 @@ class VxLabel : public QLabel
 {
 	Q_OBJECT
 public:
-    VxLabel( QWidget *parent=0, Qt::WindowFlags f=Qt::Widget );
-    VxLabel( const QString &text, QWidget *parent=0, Qt::WindowFlags f=Qt::Widget );
+    VxLabel( QWidget*parent=0, Qt::WindowFlags f=Qt::Widget );
+    VxLabel( const QString &text, QWidget*parent=0, Qt::WindowFlags f=Qt::Widget );
     virtual ~VxLabel() = default;
 
 	virtual void				setTextBreakAnywhere( QString text, int maxLines = 2 );
@@ -48,7 +48,7 @@ protected:
 	bool						loadImageFromFile( QString fileName );
 
 	virtual void				mousePressEvent( QMouseEvent * ev ) override;
-	virtual void				resizeEvent( QResizeEvent * ev ) override;
+	virtual void				resizeEvent( QResizeEvent* ev ) override;
 
 	//=== vars ===//
 	QString						m_ImageFileName;

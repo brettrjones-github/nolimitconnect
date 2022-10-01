@@ -28,7 +28,7 @@ ActivityScanStoryBoards * g_poScanStoryBoardsActivity = NULL;
 //============================================================================
 //! constructor
 ActivityScanStoryBoards::ActivityScanStoryBoards(	AppCommon& app, 
-													QWidget *		parent )
+													QWidget*		parent )
 	: ActivityBase( OBJNAME_ACTIVITY_SCAN_STORYBOARDS, app, parent, eAppletScanStoryboard, true ) //Qt::Popup ) //
 	, m_bAutoScan(true)
 	, m_eScanType(eScanTypeCamServer)

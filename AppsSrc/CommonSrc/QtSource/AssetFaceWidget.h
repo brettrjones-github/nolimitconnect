@@ -22,8 +22,8 @@ class AssetFaceWidget : public AssetBaseWidget
 	Q_OBJECT
 
 public:
-	AssetFaceWidget( QWidget * parent = 0 );
-	AssetFaceWidget( AppCommon& appCommon, QWidget * parent = 0 );
+	AssetFaceWidget( QWidget* parent = 0 );
+	AssetFaceWidget( AppCommon& appCommon, QWidget* parent = 0 );
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
     virtual void				showSendFail( bool show, bool permissionErr = false ) override;

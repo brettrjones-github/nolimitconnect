@@ -66,8 +66,8 @@ public:
 	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
 	VxNetIdent *				getIdent( void )							{ return m_Ident; }
 
-	void						setWidget( QWidget * widget )				{ m_Widget = widget; }
-	QWidget *					getWidget( void )							{ return m_Widget; }
+	void						setWidget( QWidget* widget )				{ m_Widget = widget; }
+	QWidget*					getWidget( void )							{ return m_Widget; }
 
 	void						setFileInfo( VxMyFileInfo& fileInfo )		{ m_FileInfo = fileInfo; }
 	VxMyFileInfo&				getFileInfo( void )							{ return m_FileInfo; }
@@ -98,7 +98,7 @@ private:
 	VxNetIdent *				m_Ident;
 	VxGUID						m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;
-	QWidget *					m_Widget;
+	QWidget*					m_Widget;
 	bool						m_IsShared;
 	bool						m_IsInLibrary;
 };

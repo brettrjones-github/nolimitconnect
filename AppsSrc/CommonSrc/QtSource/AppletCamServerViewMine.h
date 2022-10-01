@@ -19,7 +19,7 @@ class AppletCamServerViewMine : public AppletCamClient
 {
 	Q_OBJECT
 public:
-	AppletCamServerViewMine( AppCommon& app, QWidget * parent );
+	AppletCamServerViewMine( AppCommon& app, QWidget* parent );
 	virtual ~AppletCamServerViewMine();
 
     virtual void				setAppletType( EApplet applet ) override;

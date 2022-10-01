@@ -24,7 +24,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
+AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget* parent )
 : AppletJoinBase( OBJNAME_APPLET_GROUP_JOIN, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

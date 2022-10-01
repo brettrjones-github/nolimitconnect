@@ -66,8 +66,8 @@ public:
 	void						setIdent( GuiUser * ident )				    { m_Ident = ident; }
     GuiUser *				    getIdent( void )							{ return m_Ident; }
 
-	void						setWidget( QWidget * widget )				{ m_Widget = widget; }
-	QWidget *					getWidget( void )							{ return m_Widget; }
+	void						setWidget( QWidget* widget )				{ m_Widget = widget; }
+	QWidget*					getWidget( void )							{ return m_Widget; }
 
 	void						setXferDirection( EXferDirection direction ){ m_XferDirection = direction; }
 	EXferDirection				getXferDirection( void )					{ return m_XferDirection; }
@@ -116,7 +116,7 @@ protected:
     GuiUser *				    m_Ident{ nullptr };
 	VxGUID					    m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;
-	QWidget *					m_Widget{ nullptr };
+	QWidget*					m_Widget{ nullptr };
 	EXferState					m_eXferState;
     int							m_XferStateParam1{ 0 };
 	int							m_XferStateParam2{ 0 };

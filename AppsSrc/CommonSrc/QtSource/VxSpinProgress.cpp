@@ -22,7 +22,7 @@
 #include <QPixmap>
 
 //============================================================================
-VxSpinProgress::VxSpinProgress(QWidget *parent, Qt::WindowFlags f) 
+VxSpinProgress::VxSpinProgress(QWidget*parent, Qt::WindowFlags f) 
 : QLabel(parent,f) 
 , m_AnimationTimer( new QTimer(this) )
 , m_Angle( 0 )
@@ -32,7 +32,7 @@ VxSpinProgress::VxSpinProgress(QWidget *parent, Qt::WindowFlags f)
 }
 
 //============================================================================
-VxSpinProgress::VxSpinProgress(const QString &text, QWidget *parent, Qt::WindowFlags f) 
+VxSpinProgress::VxSpinProgress(const QString &text, QWidget*parent, Qt::WindowFlags f) 
 : QLabel(text,parent,f) 
 , m_AnimationTimer( new QTimer(this) )
 , m_Angle( 0 )
@@ -86,13 +86,13 @@ void VxSpinProgress::mousePressEvent(QMouseEvent * event)
 }
 
 //============================================================================
-void VxSpinProgress::showEvent(QShowEvent * showEvent)
+void VxSpinProgress::showEvent(QShowEvent* showEvent)
 {
 	m_AnimationTimer->start( 40 );
 }
 
 //============================================================================
-void VxSpinProgress::hideEvent(QHideEvent * hideEvent)
+void VxSpinProgress::hideEvent(QHideEvent* hideEvent)
 {
 	m_AnimationTimer->stop();
 }

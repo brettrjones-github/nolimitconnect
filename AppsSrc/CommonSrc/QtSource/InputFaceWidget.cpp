@@ -24,7 +24,7 @@
 #include <time.h>
 
 //============================================================================
-InputFaceWidget::InputFaceWidget( QWidget * parent )
+InputFaceWidget::InputFaceWidget( QWidget* parent )
 : InputBaseWidget( GetAppInstance(), parent )
 {
 	m_AssetInfo.setAssetType( eAssetTypeChatFace );

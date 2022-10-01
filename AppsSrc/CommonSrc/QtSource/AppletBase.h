@@ -20,7 +20,7 @@ class AppletBase : public ActivityBase
 {
 	Q_OBJECT
 public:
-	AppletBase( const char * ObjName, AppCommon& app, QWidget * parent );
+	AppletBase( const char * ObjName, AppCommon& app, QWidget* parent );
 	virtual ~AppletBase() = default;
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo )	{ m_AssetInfo = assetInfo; }

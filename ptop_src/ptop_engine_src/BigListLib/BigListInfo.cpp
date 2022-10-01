@@ -235,14 +235,14 @@ uint32_t BigListInfo::CalcStoredLen( void )
 	iCnt = (int)m_aoInQue.size();
 	for( i = 0; i < iCnt; i++ )
 	{
-		u32Len += ((VxPktHdr *)m_aoInQue[i] )->getPktLength();
+		u32Len += ((VxPktHdr*)m_aoInQue[i] )->getPktLength();
 	}
 	//calc output que length
 	u32Len += sizeof( uint32_t );
 	iCnt = (int)m_aoOutQue.size();
 	for( i = 0; i < iCnt; i++ )
 	{
-		u32Len += ((VxPktHdr *)m_aoOutQue[i] )->getPktLength();
+		u32Len += ((VxPktHdr*)m_aoOutQue[i] )->getPktLength();
 	}
 	return u32Len;
 }
@@ -259,15 +259,15 @@ bool BigListInfo::isSafeToDelete( void )
 }
 
 //============================================================================
-void BigListInfo::AddInQueItem(  VxPktHdr * poPkt )
+void BigListInfo::AddInQueItem(  VxPktHdr* poPkt )
 { 
 	m_aoInQue.push_back( poPkt ); 
 }
 
 //============================================================================
-VxPktHdr * BigListInfo::GetInQueItem( void )
+VxPktHdr* BigListInfo::GetInQueItem( void )
 {
-	VxPktHdr * poPkt;
+	VxPktHdr* poPkt;
 	size_t iCnt = m_aoInQue.size();
 	if( iCnt )
 	{
@@ -279,15 +279,15 @@ VxPktHdr * BigListInfo::GetInQueItem( void )
 }
 
 //============================================================================
-void BigListInfo::AddOutQueItem( VxPktHdr * poPkt )
+void BigListInfo::AddOutQueItem( VxPktHdr* poPkt )
 { 
 	m_aoOutQue.push_back( poPkt ); 
 }
 
 //============================================================================
-VxPktHdr * BigListInfo::GetOutQueItem( void )
+VxPktHdr* BigListInfo::GetOutQueItem( void )
 {
-	VxPktHdr * pTemp;
+	VxPktHdr* pTemp;
 	size_t iCnt = m_aoOutQue.size();
 	if( iCnt )
 	{

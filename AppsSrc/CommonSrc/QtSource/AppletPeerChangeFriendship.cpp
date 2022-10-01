@@ -19,7 +19,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget * parent )
+AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget* parent )
 	: AppletPeerBase( OBJNAME_ACTIVITY_TO_FRIEND_CHANGE_FRIENDSHIP, app, parent )
 {
     setAppletType( eAppletPeerChangeFriendship );

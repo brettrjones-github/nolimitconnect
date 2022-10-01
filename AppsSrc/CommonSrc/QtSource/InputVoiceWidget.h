@@ -23,7 +23,7 @@ class InputVoiceWidget : public InputBaseWidget
     Q_OBJECT
 
 public:
-    InputVoiceWidget( QWidget * parent=0);
+    InputVoiceWidget( QWidget* parent=0);
 
 	void						setCanSend( bool canSend ) {};
 

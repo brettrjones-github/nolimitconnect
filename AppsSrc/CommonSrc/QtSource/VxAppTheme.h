@@ -180,7 +180,7 @@ class VxAppTheme : public QWidget
 public:
 	VxAppTheme( AppCommon& appCommon );
 
-    virtual void                applyTheme( QWidget * widget );
+    virtual void                applyTheme( QWidget* widget );
 
 	virtual void				selectTheme( EThemeType eThemeType );
 	virtual QString				describeTheme( EThemeType eThemeType );
@@ -188,7 +188,7 @@ public:
     virtual bool				isWhiteOnBlack( void ) { return eContrastTypeWhiteOnBlack == m_ContrastType; }
 
 	virtual void				updateWindowTheme( void );
-	virtual void				updateProgressBar( QProgressBar * progressBar );
+	virtual void				updateProgressBar( QProgressBar* progressBar );
 
 	// draw background of button
 	virtual	void				drawButton( QPushButton * button, QPainter& painter );
@@ -223,11 +223,11 @@ public:
 	// set highlight color ( mainly progress bar color )
 	virtual void				setHighlightColor( QWidget* widget, const QColor highlightColor );
 	// set background color of widget
-	virtual void				setBackgroundColor( QWidget * widget, const QColor backgroundColor );
+	virtual void				setBackgroundColor( QWidget* widget, const QColor backgroundColor );
 	// set background color of frame
-	virtual void 				setBackgroundColor( QFrame * widget, const QColor backgroundColor );
+	virtual void 				setBackgroundColor( QFrame* widget, const QColor backgroundColor );
 	// set background color to transparent
-	virtual void 				setWidgetBackgroundToTransparent( QWidget * widget );
+	virtual void 				setWidgetBackgroundToTransparent( QWidget* widget );
 	virtual void				setTextColor( const QColor& color, QWidget* widget );
 
 	virtual void				setPainterPen( QPainter& painter, QColor penColor );

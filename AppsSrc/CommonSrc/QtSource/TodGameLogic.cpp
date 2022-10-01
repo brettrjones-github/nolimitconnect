@@ -28,7 +28,7 @@ namespace
 }
 
 //============================================================================
-TodGameLogic::TodGameLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget * parent )
+TodGameLogic::TodGameLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( myApp )
 , m_Engine( engine )

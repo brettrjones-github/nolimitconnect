@@ -33,7 +33,7 @@ namespace
 
 //============================================================================
 AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app, 
-													QWidget *			parent )
+													QWidget*			parent )
 : AppletClientBase( OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH, app, parent )
 {
     setAppletType( eAppletChatRoomJoinSearch );
@@ -94,14 +94,14 @@ void AppletChatRoomJoinSearch::setInfoLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletChatRoomJoinSearch::showEvent( QShowEvent * ev )
+void AppletChatRoomJoinSearch::showEvent( QShowEvent* ev )
 {
 	ActivityBase::showEvent( ev );
 	m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletChatRoomJoinSearch::hideEvent( QHideEvent * ev )
+void AppletChatRoomJoinSearch::hideEvent( QHideEvent* ev )
 {
 	m_MyApp.wantToGuiActivityCallbacks( this, false );
 	ActivityBase::hideEvent( ev );

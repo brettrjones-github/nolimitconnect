@@ -24,7 +24,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletPlayerBase::AppletPlayerBase( const char * ObjName, AppCommon& app, QWidget * parent )
+AppletPlayerBase::AppletPlayerBase( const char * ObjName, AppCommon& app, QWidget* parent )
 : AppletBase( ObjName, app, parent )
 , m_ActivityCallbacksEnabled( false )
 , m_IsPlaying( false )

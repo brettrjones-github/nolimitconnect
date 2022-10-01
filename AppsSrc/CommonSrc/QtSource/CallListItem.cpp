@@ -18,7 +18,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-CallListItem::CallListItem(QWidget *parent  )
+CallListItem::CallListItem(QWidget*parent  )
 : IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 {

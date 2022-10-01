@@ -28,7 +28,7 @@
 #include <QUuid>
 
 //============================================================================
-ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget * parent )
+ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_CREATE_ACCOUNT, app, parent, eAppletCreateAccount, true, false, true )
 {
     ui.setupUi( this );

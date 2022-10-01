@@ -21,7 +21,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-ActivityPermissions::ActivityPermissions( AppCommon& app, QWidget * parent )
+ActivityPermissions::ActivityPermissions( AppCommon& app, QWidget* parent )
 	: ActivityBase( OBJNAME_ACTIVITY_PERMISSIONS, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);

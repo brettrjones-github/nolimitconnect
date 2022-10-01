@@ -25,7 +25,7 @@ class ActivitySoundOptions : public ActivityBase
 public:
 
 	ActivitySoundOptions(	AppCommon& app, 
-							QWidget *		parent = NULL );
+							QWidget*		parent = NULL );
 	virtual ~ActivitySoundOptions() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

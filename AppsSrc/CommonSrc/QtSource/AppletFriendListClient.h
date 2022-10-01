@@ -33,7 +33,7 @@ class AppletFriendListClient : public AppletClientBase, public GuiUserUpdateCall
 	Q_OBJECT
 public:
 	AppletFriendListClient(	AppCommon&		    app, 
-							QWidget *			parent = NULL );
+							QWidget*			parent = NULL );
 	virtual ~AppletFriendListClient() override;
 
     void                        infoMsg( const char * infoMsg, ... );
@@ -74,8 +74,8 @@ protected:
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override;
     virtual void				callbackPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) override;
 
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
     void                        updateUser( EUserViewType listType, VxGUID& onlineId );
     void                        updateUser( GuiUser* guiUser );

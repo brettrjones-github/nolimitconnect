@@ -24,7 +24,7 @@ class AppletSettingsBase : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsBase( const char * ObjName, AppCommon& app, QWidget * parent );
+    AppletSettingsBase( const char * ObjName, AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsBase() = default;
 
     virtual PluginSettingsWidget*   getPluginSettingsWidget() = 0;

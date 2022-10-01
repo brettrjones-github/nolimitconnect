@@ -27,7 +27,7 @@ class LogWidget : public QWidget, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
-    LogWidget( QWidget * parent );
+    LogWidget( QWidget* parent );
     ~LogWidget() override;
 
     void                        initLogCallback();

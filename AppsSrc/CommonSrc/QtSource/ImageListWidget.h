@@ -34,7 +34,7 @@ class ImageListWidget : public QListWidget
 	Q_OBJECT
 
 public:
-	ImageListWidget( QWidget * parent );
+	ImageListWidget( QWidget* parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 
@@ -52,7 +52,7 @@ private slots:
     void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
-    void                        resizeEvent( QResizeEvent * ev );
+    void                        resizeEvent( QResizeEvent* ev );
 
     bool                        thumbExistsInList( VxGUID& assetId );
     ImageListRow *              getRowWithRoomForThumbnail();

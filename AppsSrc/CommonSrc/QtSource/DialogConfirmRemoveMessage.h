@@ -28,7 +28,7 @@ class DialogConfirmRemoveMessage : public QDialog
 	Q_OBJECT
 
 public:
-    DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget * parent = NULL );
+    DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget* parent = NULL );
 	virtual ~DialogConfirmRemoveMessage() = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
@@ -48,5 +48,5 @@ protected:
 	EAssetAction				m_AssetAction;
 
 private:
-	DialogConfirmRemoveMessage( QWidget * parent = NULL );// dont allow without asset info construct
+	DialogConfirmRemoveMessage( QWidget* parent = NULL );// dont allow without asset info construct
 };

@@ -21,7 +21,7 @@ class AppletHostChatRoomAdmin : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostChatRoomAdmin( AppCommon& app, QWidget * parent );
+    AppletHostChatRoomAdmin( AppCommon& app, QWidget* parent );
 	virtual ~AppletHostChatRoomAdmin() override;
 
 protected:

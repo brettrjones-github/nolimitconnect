@@ -108,7 +108,7 @@ public:
     void						setDestOnlineId( VxGUID onlineId )			{ setGuidToNetOrder( onlineId, m_DestOnlineId ); }
 
     //! make a copy of this packet
-    VxPktHdr *					makeCopy( void );
+    VxPktHdr*					makeCopy( void );
 
     static void                 setGuidToNetOrder( VxGUID& srcGuid, VxGUID& destGuid );
     static VxGUID               getGuidInHostOrder( VxGUID& srcGuid );

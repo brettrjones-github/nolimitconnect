@@ -15,7 +15,7 @@
 //============================================================================
 
 
-#include "PluginBase.h"
+#include "PluginBaseFiles.h"
 #include "PluginSessionMgr.h"
 #include "FileXferMgr.h"
 #include "FileShareXferMgr.h"
@@ -87,24 +87,33 @@ public:
 	void						deleteFile( const char * fileName, bool shredFile );
 
 protected:
-	void						onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktFileGetReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileGetReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileChunkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileChunkReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileGetCompleteReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileGetCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileSendCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileSendCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileGetReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileGetReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileSendReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileChunkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileChunkReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileGetCompleteReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileGetCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileSendCompleteReq	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileSendCompleteReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktFindFileReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFindFileReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileListReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileListReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktFileShareErr			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFindFileReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFindFileReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileListReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileListReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileShareErr			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+
+	virtual void				onPktFileInfoInfoReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoInfoReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoAnnReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoAnnReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoSearchReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoSearchReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoMoreReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktFileInfoMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
 	virtual void				updateSharedFilesInfo( void );
 
@@ -115,11 +124,12 @@ private:
 	virtual void				onConnectionLost( VxSktBase* sktBase );
 
 	//=== vars ===//
+	VxFileShredder&				m_FileShredder;
 	PluginSessionMgr			m_PluginSessionMgr;
     SharedFilesMgr				m_SharedFilesMgr;
     FileLibraryMgr				m_FileLibraryMgr;
 	FileShareXferMgr			m_FileShareXferMgr;
-	VxFileShredder&				m_FileShredder;
+
 };
 
 

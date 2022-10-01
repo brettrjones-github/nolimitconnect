@@ -18,7 +18,7 @@
 #include "ActivityInformation.h"
 
 //============================================================================
-InformationWidget::InformationWidget( QWidget * parent )
+InformationWidget::InformationWidget( QWidget* parent )
 	: QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

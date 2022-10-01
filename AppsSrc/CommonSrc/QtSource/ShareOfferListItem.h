@@ -24,7 +24,7 @@ class ShareOfferListItem : public QWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	ShareOfferListItem( QWidget *parent=0 );
+	ShareOfferListItem( QWidget*parent=0 );
 	virtual ~ShareOfferListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

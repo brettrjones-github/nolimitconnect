@@ -31,11 +31,11 @@ class AppletMgr : public QWidget
 {
 	Q_OBJECT
 public:
-	AppletMgr( AppCommon& myMpp, QWidget * parent );
+	AppletMgr( AppCommon& myMpp, QWidget* parent );
 	virtual ~AppletMgr(){}
 
-    QFrame *					getAppletFrame( EApplet applet );
-    ActivityBase *				launchApplet( EApplet applet, QWidget * parent = nullptr, QString launchParam = "", VxGUID assetId = VxGUID::nullVxGUID());
+    QFrame*					getAppletFrame( EApplet applet );
+    ActivityBase *				launchApplet( EApplet applet, QWidget* parent = nullptr, QString launchParam = "", VxGUID assetId = VxGUID::nullVxGUID());
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 
 	ActivityBase*				findAppletDialog( EApplet applet );
@@ -52,7 +52,7 @@ protected:
 
     void                        makeMessengerFullSized( void );
 
-	QWidget *					getActiveWindow( void );
+	QWidget*					getActiveWindow( void );
 
 	bool						viewMyServerAllowed( EApplet applet );
 	bool						launchAppletAllowed( EApplet applet );

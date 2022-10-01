@@ -26,6 +26,9 @@ public:
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
 
+	virtual bool				fromGuiDownloadFileList( VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes = 0 ) override;
+	virtual bool				fromGuiDownloadFileListCancel( VxGUID& onlineId, VxGUID& sessionId ) override;
+
 	virtual std::string			getIncompleteFileXferDirectory( VxGUID& onlineId ) override;
 
 	void						lockSearchFileList( void ) { m_SearchFilesListMutex.lock(); }
@@ -62,7 +65,6 @@ protected:
 	std::string					m_WebPageIndexFile{ "" };
 
 	bool						m_WebPageClientReady{ false };
-	VxGUID						m_HisOnlineId;
 
 	VxMutex						m_SearchFilesListMutex;
 	std::vector<FileInfo>		m_SearchFileInfoList;

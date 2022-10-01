@@ -29,7 +29,7 @@ LogMgr& GetLogMgrInstance()
 }
 
 //============================================================================
-LogMgr::LogMgr( QWidget * parent )
+LogMgr::LogMgr( QWidget* parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

@@ -20,7 +20,7 @@
 #include <time.h>
 
 //============================================================================
-InputTextWidget::InputTextWidget( QWidget * parent )
+InputTextWidget::InputTextWidget( QWidget* parent )
 : InputBaseWidget( GetAppInstance(), parent )
 {
 	m_AssetInfo.setAssetType( eAssetTypeChatText );

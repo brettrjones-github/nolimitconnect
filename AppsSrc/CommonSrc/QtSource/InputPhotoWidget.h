@@ -23,7 +23,7 @@ class InputPhotoWidget : public InputBaseWidget
     Q_OBJECT
 
 public:
-    InputPhotoWidget( QWidget * parent=0);
+    InputPhotoWidget( QWidget* parent=0);
 
 	void						setCanSend( bool canSend ) {};
 
@@ -38,8 +38,8 @@ protected slots:
     void                        slotExitPhotoWidget( void );
 
 protected:
-	void						hideEvent( QHideEvent * hideEvent );
-	void						showEvent( QShowEvent * showEvent );
+	void						hideEvent( QHideEvent* hideEvent );
+	void						showEvent( QShowEvent* showEvent );
 
 	Ui::InputPhotoWidget		ui;
 	QPixmap						m_PicImage;

@@ -20,7 +20,7 @@ class MessengerPage : public ActivityBase
 {
 	Q_OBJECT
 public:
-	MessengerPage( AppCommon& app, QWidget * parent );
+	MessengerPage( AppCommon& app, QWidget* parent );
 	virtual ~MessengerPage() override = default;
 
 signals:
@@ -30,8 +30,8 @@ protected slots :
     virtual void				slotBackButtonClicked( void ) override;
 
 protected:
-    virtual void				showEvent( QShowEvent * ) override;
-    virtual void				hideEvent( QHideEvent * ) override;
+    virtual void				showEvent( QShowEvent* ) override;
+    virtual void				hideEvent( QHideEvent* ) override;
 
 	bool						m_IsVisible;
 	bool						m_IsFullSize;

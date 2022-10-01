@@ -16,7 +16,7 @@
 #include "ActivityTimedMessage.h"
 
 //============================================================================
-ActivityTimedMessage::ActivityTimedMessage( QString strTitle, QString strMessage, int iTimeoutSeconds, QWidget * parent )
+ActivityTimedMessage::ActivityTimedMessage( QString strTitle, QString strMessage, int iTimeoutSeconds, QWidget* parent )
 	: QDialog( parent, Qt::SubWindow )
 {
 	ui.setupUi(this);

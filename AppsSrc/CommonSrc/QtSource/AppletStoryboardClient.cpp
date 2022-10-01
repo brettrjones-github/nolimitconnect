@@ -35,7 +35,7 @@
 #define SUPPORTED_IMAGE_FILES "Image files (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)"
 
 //============================================================================
-AppletStoryboardClient::AppletStoryboardClient( AppCommon& app, QWidget * parent )
+AppletStoryboardClient::AppletStoryboardClient( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_STORYBOARD_CLIENT, app, parent )
 {
     setAppletType( eAppletStoryboardClient );

@@ -19,7 +19,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-GuiUserListEntryWidget::GuiUserListEntryWidget(QWidget *parent  )
+GuiUserListEntryWidget::GuiUserListEntryWidget(QWidget*parent  )
 : IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {

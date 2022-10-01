@@ -23,7 +23,7 @@ class InputTextWidget : public InputBaseWidget
     Q_OBJECT
 
 public:
-    InputTextWidget( QWidget * parent=0);
+    InputTextWidget( QWidget* parent=0);
 
 	void						setCanSend( bool canSend ) {};
 

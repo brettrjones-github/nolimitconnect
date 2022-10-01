@@ -29,8 +29,8 @@ class VxMenuButton : public VxPushButton
 {
     Q_OBJECT
 public:
-    VxMenuButton( QWidget *parent = 0 );
-    VxMenuButton( const QString & text, QWidget *parent = 0 );
+    VxMenuButton( QWidget*parent = 0 );
+    VxMenuButton( const QString & text, QWidget*parent = 0 );
     virtual ~VxMenuButton() {};
 
     // setMenuId  must be called before add menu item ( can be 0 )

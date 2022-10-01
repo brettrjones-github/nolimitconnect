@@ -23,7 +23,7 @@ class NetAvailStatusWidget : public QWidget
 {
     Q_OBJECT
 public:
-    NetAvailStatusWidget( QWidget * parent );
+    NetAvailStatusWidget( QWidget* parent );
     virtual ~NetAvailStatusWidget() override = default;
 
     void                        toGuiNetAvailStatus( ENetAvailStatus netStatus );
@@ -47,7 +47,7 @@ signals:
 
 protected:
     virtual void                paintEvent( QPaintEvent* ev ) override;
-    virtual void                resizeEvent( QResizeEvent * ev ) override;
+    virtual void                resizeEvent( QResizeEvent* ev ) override;
     virtual void				mousePressEvent( QMouseEvent * ev ) override;
 
     void                        drawNetBars( QPainter& painter );

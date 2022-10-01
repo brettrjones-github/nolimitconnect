@@ -22,10 +22,10 @@ class VxComboBox : public QComboBox
 {
 	Q_OBJECT
 public:
-	VxComboBox(QWidget *parent=0);
+	VxComboBox(QWidget*parent=0);
 	virtual ~VxComboBox() = default;
 
     //void                        paintEvent (QPaintEvent *ev);
-    void                        showEvent( QShowEvent *ev ) override;
+    void                        showEvent( QShowEvent*ev ) override;
 };
 

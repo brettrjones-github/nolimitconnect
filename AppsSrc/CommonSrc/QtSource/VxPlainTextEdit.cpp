@@ -18,13 +18,13 @@
 #include "VxAppTheme.h"
 
 //============================================================================
-VxPlainTextEdit::VxPlainTextEdit( QWidget *parent )
+VxPlainTextEdit::VxPlainTextEdit( QWidget*parent )
 : QPlainTextEdit( parent )
 {
 }
 
 //============================================================================
-VxPlainTextEdit::VxPlainTextEdit( const QString &text, QWidget *parent )
+VxPlainTextEdit::VxPlainTextEdit( const QString &text, QWidget*parent )
     : QPlainTextEdit( text, parent )
 {
 }

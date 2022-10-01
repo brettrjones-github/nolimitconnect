@@ -26,7 +26,7 @@ class AppletApplicationInfo : public AppletBase, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
-    AppletApplicationInfo( AppCommon& app, QWidget * parent );
+    AppletApplicationInfo( AppCommon& app, QWidget* parent );
     virtual ~AppletApplicationInfo();
 
     void                        logMsg( const char* logMsg, ... );

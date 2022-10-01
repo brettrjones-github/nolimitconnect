@@ -30,7 +30,7 @@ namespace
 }
 
 //============================================================================
-AppletLogView::AppletLogView( AppCommon& app, QWidget * parent )
+AppletLogView::AppletLogView( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_LOG_VIEW, app, parent )
 , m_LogMgr( GetLogMgrInstance() )
 {

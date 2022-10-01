@@ -52,7 +52,7 @@ double optimal_size( double W, double H, int N )
 }
 
 //============================================================================
-void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWidget * parentWindow, int padding )
+void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWidget* parentWindow, int padding )
 {
 	if( !parentWindow 
 		|| (  0 == widgetList.size() ) )

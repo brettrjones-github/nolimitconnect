@@ -38,7 +38,7 @@ class ShareOfferListWidget : public ListWidgetBase
 	Q_OBJECT
 
 public:
-	ShareOfferListWidget( QWidget * parent );
+	ShareOfferListWidget( QWidget* parent );
 
     void                        clearOfferList( void );
 

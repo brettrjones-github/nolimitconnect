@@ -23,7 +23,7 @@
 #include <QMessageBox>
 
 //============================================================================
-ActivityShowHelp::ActivityShowHelp( AppCommon& app, QWidget * parent )
+ActivityShowHelp::ActivityShowHelp( AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_SHOW_HELP, app, 0 )
 {
 	Q_UNUSED(parent);

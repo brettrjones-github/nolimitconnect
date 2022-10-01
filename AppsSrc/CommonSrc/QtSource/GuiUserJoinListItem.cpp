@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-GuiUserJoinListItem::GuiUserJoinListItem(QWidget *parent  )
+GuiUserJoinListItem::GuiUserJoinListItem(QWidget*parent  )
 : IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ConnectIdListMgr( m_MyApp.getConnectIdListMgr() )

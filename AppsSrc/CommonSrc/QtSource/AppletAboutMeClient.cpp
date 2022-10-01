@@ -33,7 +33,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
+AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_ABOUT_ME_CLIENT, app, parent )
 {
     setAppletType( eAppletAboutMeClient );

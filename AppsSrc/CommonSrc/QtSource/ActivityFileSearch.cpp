@@ -21,7 +21,7 @@
 ActivityFileSearch * g_poFileSearchActivity = NULL;
 
 //============================================================================
-ActivityFileSearch::ActivityFileSearch(	AppCommon& app,  QWidget * parent )
+ActivityFileSearch::ActivityFileSearch(	AppCommon& app,  QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_FILE_SEARCH, app, parent, eAppletScanSharedFiles, true, false )
 {
 	ui.setupUi(this);

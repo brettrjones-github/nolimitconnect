@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsShareFiles::AppletSettingsShareFiles( AppCommon& app, QWidget * parent )
+AppletSettingsShareFiles::AppletSettingsShareFiles( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_SHARE_FILES, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

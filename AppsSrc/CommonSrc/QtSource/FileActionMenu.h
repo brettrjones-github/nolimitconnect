@@ -69,7 +69,7 @@ class FileActionMenu : public ActivityBase
 	Q_OBJECT
 public:
 	FileActionMenu( AppCommon&	app, 
-					QWidget *		parent, 
+					QWidget*		parent, 
 					VxMyFileInfo&	fileInfo, 
 					bool			isShared, 
 					bool			isInLibrary, 

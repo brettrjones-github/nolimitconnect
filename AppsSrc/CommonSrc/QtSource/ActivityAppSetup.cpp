@@ -23,7 +23,7 @@
 #include <QClipboard>
 
 //============================================================================
-ActivityAppSetup::ActivityAppSetup( AppCommon& app, QWidget * parent )
+ActivityAppSetup::ActivityAppSetup( AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_APP_SETUP, app, parent, eActivityAppSetup, true, false, true )
 {
     initActivityAppSetup();
@@ -48,7 +48,7 @@ void ActivityAppSetup::initActivityAppSetup( void )
 }
 
 //============================================================================
-void ActivityAppSetup::showEvent( QShowEvent * ev )
+void ActivityAppSetup::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
 }

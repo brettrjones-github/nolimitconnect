@@ -37,7 +37,7 @@
 #include <QResizeEvent>
 
 //============================================================================
-AppletGalleryEmoticon::AppletGalleryEmoticon(	AppCommon& app, QWidget * parent )
+AppletGalleryEmoticon::AppletGalleryEmoticon(	AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_GALLERY_EMOTICON, app, parent )
 , m_ThumbMgr( app.getEngine().getThumbMgr() )
 {
@@ -57,7 +57,7 @@ AppletGalleryEmoticon::~AppletGalleryEmoticon()
 }
 
 //============================================================================
-void AppletGalleryEmoticon::resizeEvent( QResizeEvent * ev )
+void AppletGalleryEmoticon::resizeEvent( QResizeEvent* ev )
 {
     AppletBase::resizeEvent( ev );
     //LogMsg( LOG_DEBUG, "AppletGalleryEmoticon Resize w %d h %d\n", ev->size().width(), ev->size().height() );
@@ -69,7 +69,7 @@ void AppletGalleryEmoticon::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AppletGalleryEmoticon::showEvent( QShowEvent * ev )
+void AppletGalleryEmoticon::showEvent( QShowEvent* ev )
 {
     //LogMsg( LOG_DEBUG, "AppletGalleryEmoticon show event\n" );
     m_isShown = true;

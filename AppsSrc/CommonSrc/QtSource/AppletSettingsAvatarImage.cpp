@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsAvatarImage::AppletSettingsAvatarImage( AppCommon& app, QWidget * parent )
+AppletSettingsAvatarImage::AppletSettingsAvatarImage( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_AVATAR_IMAGE, app, parent )
 {
     setupServiceBaseApplet( eAppletSettingsAvatarImage, ePluginTypeHostPeerUser );

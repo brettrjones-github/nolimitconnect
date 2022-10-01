@@ -35,7 +35,7 @@ namespace
 
 //============================================================================
 AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app, 
-												QWidget *			parent )
+												QWidget*			parent )
 : AppletClientBase( OBJNAME_APPLET_FRIEND_LIST_CLIENT, app, parent )
 {
     setAppletType( eAppletFriendListClient );
@@ -91,14 +91,14 @@ void AppletFriendListClient::setStatusLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletFriendListClient::showEvent( QShowEvent * ev )
+void AppletFriendListClient::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletFriendListClient::hideEvent( QHideEvent * ev )
+void AppletFriendListClient::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

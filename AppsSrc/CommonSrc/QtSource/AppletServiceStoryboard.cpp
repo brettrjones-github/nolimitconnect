@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletServiceStoryboard::AppletServiceStoryboard( AppCommon& app, QWidget * parent )
+AppletServiceStoryboard::AppletServiceStoryboard( AppCommon& app, QWidget* parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_STORYBOARD, app, parent )
 {
     setupServiceBaseApplet( eAppletServiceStoryboard, ePluginTypeStoryboardServer );

@@ -41,7 +41,7 @@
 #include <QPainter>
 
 //============================================================================
-ThumbnailChooseWidget::ThumbnailChooseWidget( QWidget * parent )
+ThumbnailChooseWidget::ThumbnailChooseWidget( QWidget* parent )
     : QLabel( parent )
     , m_MyApp( GetAppInstance() )
     , m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )

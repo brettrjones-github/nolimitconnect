@@ -31,7 +31,7 @@ class AppletGroupListLocalView : public AppletClientBase, public GuiHostedListCa
 {
 	Q_OBJECT
 public:
-	AppletGroupListLocalView( AppCommon& app, QWidget *	parent = nullptr );
+	AppletGroupListLocalView( AppCommon& app, QWidget*	parent = nullptr );
 	virtual ~AppletGroupListLocalView();
 
     void                        infoMsg( const char * infoMsg, ... );
@@ -68,8 +68,8 @@ private slots:
 protected:
     virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
 
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
     //=== vars ===//
     Ui::AppletGroupListLocalViewUi ui;

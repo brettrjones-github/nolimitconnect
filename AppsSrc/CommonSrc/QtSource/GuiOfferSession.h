@@ -33,7 +33,7 @@ class GuiOfferSession : public GuiUserSessionBase
 	Q_OBJECT
 
 public:
-	GuiOfferSession(QWidget *parent);
+	GuiOfferSession(QWidget*parent);
 	GuiOfferSession(const GuiOfferSession& rhs);
 	GuiOfferSession& operator=(const GuiOfferSession& rhs); 
 	virtual ~GuiOfferSession() {};

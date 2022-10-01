@@ -26,7 +26,7 @@ class AppletHostGroupStatus : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostGroupStatus( AppCommon& app, QWidget * parent );
+    AppletHostGroupStatus( AppCommon& app, QWidget* parent );
 	virtual ~AppletHostGroupStatus();
 
     PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_HostPermissionWidget; }

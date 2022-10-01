@@ -37,7 +37,7 @@ class AppletHelpNetSignalBars : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHelpNetSignalBars( AppCommon& app, QWidget * parent );
+    AppletHelpNetSignalBars( AppCommon& app, QWidget* parent );
 	virtual ~AppletHelpNetSignalBars() override;
 
 

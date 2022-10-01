@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletNetHostingPage::AppletNetHostingPage( AppCommon& app, QWidget * parent )
+AppletNetHostingPage::AppletNetHostingPage( AppCommon& app, QWidget* parent )
 : AppletLaunchPage( app, parent, eAppletNetHostingPage, OBJNAME_APPLET_NET_HOSTING_PAGE )
 , m_IsInitialized( false )
 {
@@ -59,14 +59,14 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
 }
 
 //============================================================================
-void AppletNetHostingPage::resizeEvent( QResizeEvent * ev )
+void AppletNetHostingPage::resizeEvent( QResizeEvent* ev )
 {
 	ActivityBase::resizeEvent( ev );
 	getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 
 //============================================================================
-void AppletNetHostingPage::showEvent( QShowEvent * showEvent )
+void AppletNetHostingPage::showEvent( QShowEvent* showEvent )
 {
     AppletLaunchPage::showEvent( showEvent );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );

@@ -23,7 +23,7 @@ class AppletGalleryThumb : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGalleryThumb( AppCommon& app, QWidget * parent = NULL );
+	AppletGalleryThumb( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletGalleryThumb() override;
 
 signals:
@@ -33,8 +33,8 @@ private slots:
 	void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
-    void                        resizeEvent( QResizeEvent * ev ) override;
-    void                        showEvent( QShowEvent * ev ) override;
+    void                        resizeEvent( QResizeEvent* ev ) override;
+    void                        showEvent( QShowEvent* ev ) override;
 
     void                        loadAssets( void );
 

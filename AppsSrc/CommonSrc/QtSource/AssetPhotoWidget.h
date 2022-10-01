@@ -22,8 +22,8 @@ class AssetPhotoWidget : public AssetBaseWidget
 	Q_OBJECT
 
 public:
-	AssetPhotoWidget( QWidget * parent = 0 );
-	AssetPhotoWidget( AppCommon& appCommon, QWidget * parent = 0 );
+	AssetPhotoWidget( QWidget* parent = 0 );
+	AssetPhotoWidget( AppCommon& appCommon, QWidget* parent = 0 );
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
     virtual void				showSendFail( bool show, bool permissionErr = false ) override;

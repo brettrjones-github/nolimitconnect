@@ -21,7 +21,7 @@
 #include <QClipboard>
 
 //============================================================================
-AppletHelpNetSignalBars::AppletHelpNetSignalBars( AppCommon& app, QWidget * parent )
+AppletHelpNetSignalBars::AppletHelpNetSignalBars( AppCommon& app, QWidget* parent )
     : AppletBase( OBJNAME_APPLET_HELP_NET_SIGNAL_BARS, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );
@@ -58,7 +58,7 @@ void AppletHelpNetSignalBars::initAppletHelpNetSignalBars( void )
 
 /*
 //============================================================================
-void AppletHelpNetSignalBars::showEvent( QShowEvent * ev )
+void AppletHelpNetSignalBars::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     updateInformation();

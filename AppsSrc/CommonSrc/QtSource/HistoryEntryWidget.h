@@ -25,7 +25,7 @@ class HistoryEntryWidget : public QWidget, public QListWidgetItem
 	Q_OBJECT
 
 public:
-	HistoryEntryWidget(QWidget *parent=0);
+	HistoryEntryWidget(QWidget*parent=0);
 
 protected:
 	Ui::HistoryEntryWidgetClass	ui;

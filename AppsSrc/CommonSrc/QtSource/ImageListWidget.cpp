@@ -37,7 +37,7 @@
 
  
 //============================================================================
-ImageListWidget::ImageListWidget( QWidget * parent )
+ImageListWidget::ImageListWidget( QWidget* parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
@@ -73,7 +73,7 @@ void ImageListWidget::clearItems( void )
 
 
 //============================================================================
-void ImageListWidget::resizeEvent( QResizeEvent * ev )
+void ImageListWidget::resizeEvent( QResizeEvent* ev )
 {
     QListWidget::resizeEvent( ev );
     LogMsg( LOG_DEBUG, "ImageListWidget Resize w %d h %d", ev->size().width(), ev->size().height() );

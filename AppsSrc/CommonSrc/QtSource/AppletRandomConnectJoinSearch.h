@@ -32,7 +32,7 @@ class AppletRandomConnectJoinSearch : public AppletClientBase, public GuiHostedL
 	Q_OBJECT
 public:
 	AppletRandomConnectJoinSearch(	AppCommon&		    app, 
-							        QWidget *			parent = nullptr );
+							        QWidget*			parent = nullptr );
 	virtual ~AppletRandomConnectJoinSearch();
 
     void                        infoMsg( const char * infoMsg, ... );
@@ -68,8 +68,8 @@ private slots:
     virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
     //=== vars ===//
     Ui::AppletRandomConnectJoinSearchUi ui;

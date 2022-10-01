@@ -131,7 +131,7 @@ public:
     AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
     AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
-    QFrame *					getAppletFrame( EApplet applet );
+    QFrame*					getAppletFrame( EApplet applet );
     AppletMgr&					getAppletMgr( void )						{ return m_AppletMgr; }
 	AppSettings&				getAppSettings( void )						{ return m_AppSettings; }
     QString&					getAppShortName( void )						{ return m_AppShortName; }
@@ -139,7 +139,7 @@ public:
     QString&					getAppTitle( void )							{ return m_AppTitle; }
     VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
     CamLogic&					getCamLogic( void )							{ return m_CamLogic; }
-    QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
+    QWidget*					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
     P2PEngine&                  getEngine( void );
     IFromGui&					getFromGuiInterface( void );
     INlc&				        getNlc( void )						        { return m_Nlc; }
@@ -188,7 +188,7 @@ public:
     void						setAppletUploads( AppletUploads* applet )               { m_AppletUploads = applet; }
     AppletUploads*		        getAppletUploads( void )                                { return m_AppletUploads; };
 
-	void						switchWindowFocus( QWidget * appIconButton );
+	void						switchWindowFocus( QWidget* appIconButton );
 
 	void						applySoundSettings( bool useDefaultsInsteadOfSettings = false );
 	void						playSound( ESndDef sndDef );
@@ -204,25 +204,25 @@ public:
 	virtual void				errMessageBox2( QString title, const char * msg, ... );
 
 	//=== app methods ===//
-	virtual void				startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame );
+	virtual void				startupAppCommon( QFrame* appletFrame, QFrame* messangerFrame );
     virtual void				startLogin( void );
     virtual void				doLogin( void );
     virtual void				doLoginStep2( void );
     virtual void				completeLogin( void );
 
 	// prompt user to confirm wants to shutdown app.. caller must call appCommonShutdown if answer is yes
-	virtual bool				confirmAppShutdown( QWidget * parentWindow );
+	virtual bool				confirmAppShutdown( QWidget* parentWindow );
 	virtual void				shutdownAppCommon( void );
 
 	void						loadAccountSpecificSettings( const char * userName );
     void                        copyAssetsToFoldersIfRequired( void );
 
-    ActivityBase*               launchApplet( EApplet applet, QWidget * parent );
+    ActivityBase*               launchApplet( EApplet applet, QWidget* parent );
     ActivityBase*               launchApplet( EApplet applet, QWidget* parent, QString launchParam, VxGUID& assetId);
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
-	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget * parent = 0 );
-	void						executeActivity( GuiOfferSession * offer, QWidget * parent );
+	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget* parent = 0 );
+	void						executeActivity( GuiOfferSession * offer, QWidget* parent );
 
 	void						setIsLibraryActivityActive( bool isActive )						{ m_LibraryActivityActive = isActive; }
 	bool						getIsLibraryActivityActive( void )								{ return m_LibraryActivityActive; }
@@ -615,7 +615,7 @@ public:
 	bool						userCanceled( void );
 
 	// returns true if showed activity
-	bool 						offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup = false, QWidget * parent = 0 );
+	bool 						offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup = false, QWidget* parent = 0 );
 	void						offerToFriendViewSharedFiles( GuiUser * poFriend, bool inGroup = false, QWidget* parent = 0 );
 	void						offerToFriendSendFile( GuiUser * poFriend, bool inGroup = false, QWidget* parent = 0 );
 	void						offerToFriendChangeFriendship( GuiUser * poFriend );

@@ -51,7 +51,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-StoryWidget::StoryWidget(QWidget *parent, QString initialFile)
+StoryWidget::StoryWidget(QWidget*parent, QString initialFile)
 : QWidget(parent)
 , m_strFileName(initialFile)
 {

@@ -31,7 +31,7 @@
 #include <QPainter>
 
 //============================================================================
-ImageListEntry::ImageListEntry( QWidget * parent )
+ImageListEntry::ImageListEntry( QWidget* parent )
     : ThumbnailViewWidget( parent )
 {
 }

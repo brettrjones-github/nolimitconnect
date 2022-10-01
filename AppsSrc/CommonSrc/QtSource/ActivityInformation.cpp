@@ -21,7 +21,7 @@
 #include <QClipboard>
 
 //============================================================================
-ActivityInformation::ActivityInformation( AppCommon& app, QWidget * parent, EPluginType pluginType )
+ActivityInformation::ActivityInformation( AppCommon& app, QWidget* parent, EPluginType pluginType )
 : ActivityBase( OBJNAME_ACTIVITY_INFORMATION, app, parent, eAppletActivityDialog )
 , m_PluginType( pluginType )
 {
@@ -29,7 +29,7 @@ ActivityInformation::ActivityInformation( AppCommon& app, QWidget * parent, EPlu
 }
 
 //============================================================================
-ActivityInformation::ActivityInformation( AppCommon& app, QWidget * parent, EInfoType infoType )
+ActivityInformation::ActivityInformation( AppCommon& app, QWidget* parent, EInfoType infoType )
     : ActivityBase( OBJNAME_ACTIVITY_INFORMATION, app, parent, eAppletActivityDialog )
     , m_InfoType( infoType )
 {
@@ -49,7 +49,7 @@ void ActivityInformation::initActivityInformation( void )
 }
 
 //============================================================================
-void ActivityInformation::showEvent( QShowEvent * ev )
+void ActivityInformation::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     updateInformation();

@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsMessenger::AppletSettingsMessenger( AppCommon& app, QWidget * parent )
+AppletSettingsMessenger::AppletSettingsMessenger( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_MESSENGER, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

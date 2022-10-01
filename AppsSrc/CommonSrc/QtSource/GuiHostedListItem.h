@@ -25,7 +25,7 @@ class GuiHostedListItem : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	GuiHostedListItem( EHostType hostType, QWidget *parent=0 );
+	GuiHostedListItem( EHostType hostType, QWidget*parent=0 );
 	virtual ~GuiHostedListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

@@ -25,7 +25,7 @@
 #include <QMouseEvent>
 
 //============================================================================
-VxFlatButton::VxFlatButton( QWidget *parent ) 
+VxFlatButton::VxFlatButton( QWidget*parent ) 
 : QPushButton( parent ) 
 , m_MyApp( GetAppInstance() )
 , m_MyIcon( eMyIconUnknown )

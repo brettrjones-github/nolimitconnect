@@ -32,7 +32,7 @@ class AppletAssetPlayerBase : public AppletBase
 	Q_OBJECT
 
 public:
-	AppletAssetPlayerBase( const char* ObjName, AppCommon& appCommon, QWidget *parent=0 );
+	AppletAssetPlayerBase( const char* ObjName, AppCommon& appCommon, QWidget*parent=0 );
 	virtual ~AppletAssetPlayerBase();
 
 	AppCommon&					getMyApp( void )								{ return m_MyApp; }
@@ -41,8 +41,8 @@ public:
 
 	virtual void				setPlayerAssetId( VxGUID& feedId );
 
-	virtual void				setXferBar( QProgressBar * xferProgressBar );
-	virtual QProgressBar *		getXferBar( void )								{ return m_XferProgressBar; }
+	virtual void				setXferBar( QProgressBar* xferProgressBar );
+	virtual QProgressBar*		getXferBar( void )								{ return m_XferProgressBar; }
 	virtual void				updateFromAssetInfo( void );
 
     virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
@@ -63,8 +63,8 @@ protected slots:
 	virtual void				slotResendAsset( void );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 	void						updateProgressBarVisibility( void );
 
 	void						doShowProgress( bool showProgress );

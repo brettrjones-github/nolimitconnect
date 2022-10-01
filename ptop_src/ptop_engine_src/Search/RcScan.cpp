@@ -348,7 +348,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent* netIdent )
 	{
 	case eScanTypeProfilePic:
 		{
-			EFriendState ePermissionLevel = netIdent->getPluginPermission( ePluginTypeWebServer );
+			EFriendState ePermissionLevel = netIdent->getPluginPermission( ePluginTypeAboutMePageServer );
 			if( eFriendStateIgnore == ePermissionLevel )
 			{
 				return false;
@@ -424,7 +424,7 @@ bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq * poPkt )
 	{
 	case eScanTypeProfilePic:
 		{
-			EFriendState eAccessState = netIdent->getPluginPermission( ePluginTypeWebServer );
+			EFriendState eAccessState = netIdent->getPluginPermission( ePluginTypeAboutMePageServer );
 			if( netIdent->hasProfilePicture() 
 				&& ( eFriendStateIgnore != eAccessState ) )
 			{

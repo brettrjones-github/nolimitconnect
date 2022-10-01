@@ -19,7 +19,7 @@ class AppletServiceShareWebCam : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-	AppletServiceShareWebCam( AppCommon& app, QWidget * parent );
+	AppletServiceShareWebCam( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceShareWebCam();
 
 

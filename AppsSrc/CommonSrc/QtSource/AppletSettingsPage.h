@@ -19,12 +19,12 @@ class AppletSettingsPage : public AppletLaunchPage
 {
 	Q_OBJECT
 public:
-	AppletSettingsPage( AppCommon& app, QWidget * parent );
+	AppletSettingsPage( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsPage() = default;
 
 protected:
-    virtual void				showEvent( QShowEvent * );
-    void						resizeEvent( QResizeEvent * );
+    virtual void				showEvent( QShowEvent* );
+    void						resizeEvent( QResizeEvent* );
 
 private:
     void						setupAppletSettingsgPage( void );

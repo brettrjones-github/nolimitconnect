@@ -29,7 +29,7 @@ class ActivityScanPeopleSearch : public ActivityBase
 public:
 	ActivityScanPeopleSearch(	AppCommon&		app, 
 								EScanType			eSearchType,
-								QWidget *			parent = NULL );
+								QWidget*			parent = NULL );
 	//=== destructor ===//
 	virtual ~ActivityScanPeopleSearch() override = default;
 
@@ -58,8 +58,8 @@ private slots:
 	//void						slotFriendClicked( VxNetIdent* netIdent );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
 	//=== vars ===//
 	Ui::PeopleSearchDlg			ui;

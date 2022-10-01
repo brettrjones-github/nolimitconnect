@@ -25,7 +25,7 @@ class AppletLogSettings : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletLogSettings( AppCommon& app, QWidget * parent );
+    AppletLogSettings( AppCommon& app, QWidget* parent );
 	virtual ~AppletLogSettings();
 
 protected slots:
@@ -39,7 +39,7 @@ protected slots:
     void						slotClearAllModules( void );
 
 protected:
-    void                        showEvent( QShowEvent * ev ) override;
+    void                        showEvent( QShowEvent* ev ) override;
 
     void						connectSignals( void );
     void						updateDlgFromSettings( void );

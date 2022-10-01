@@ -21,7 +21,7 @@ class AppletAboutApp : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletAboutApp( AppCommon& app, QWidget * parent );
+    AppletAboutApp( AppCommon& app, QWidget* parent );
 	virtual ~AppletAboutApp();
 
 protected slots:

@@ -24,7 +24,7 @@ class PersonOfferListItem : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	PersonOfferListItem( QWidget *parent=0 );
+	PersonOfferListItem( QWidget*parent=0 );
 	virtual ~PersonOfferListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

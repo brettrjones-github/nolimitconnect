@@ -25,9 +25,9 @@ class ActivityMessageBox : public ActivityBase
 {
 	Q_OBJECT
 public:
-	ActivityMessageBox( AppCommon& app, QWidget * parent = NULL );
-	ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, const char * msgFormat, ... );
-	ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, QString msg );
+	ActivityMessageBox( AppCommon& app, QWidget* parent = NULL );
+	ActivityMessageBox( AppCommon& app, QWidget* parent, int infoLevel, const char * msgFormat, ... );
+	ActivityMessageBox( AppCommon& app, QWidget* parent, int infoLevel, QString msg );
 	virtual ~ActivityMessageBox() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

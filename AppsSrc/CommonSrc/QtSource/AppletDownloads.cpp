@@ -56,13 +56,13 @@ AppletDownloads::~AppletDownloads()
 }
 
 //============================================================================
-void AppletDownloads::showEvent( QShowEvent * ev )
+void AppletDownloads::showEvent( QShowEvent* ev )
 {
     AppletPeerBase::showEvent( ev );
 }
 
 //============================================================================
-void AppletDownloads::hideEvent( QHideEvent * ev )
+void AppletDownloads::hideEvent( QHideEvent* ev )
 {
     AppletPeerBase::hideEvent( ev );
 }
@@ -83,7 +83,7 @@ void AppletDownloads::onBackButtonClicked( void )
 ////============================================================================
 //void AppletDownloads::slotItemClicked(QListWidgetItem * item)
 //{
-//	GuiFileXferSession * poSession = (GuiFileXferSession *)item->data( Qt::UserRole + 1).toULongLong();
+//	GuiFileXferSession* poSession = (GuiFileXferSession*)item->data( Qt::UserRole + 1).toULongLong();
 //	if( poSession )
 //	{
 //		ActivityDownloadItemMenu oDlg( m_MyApp, poSession, this );
@@ -97,9 +97,9 @@ void AppletDownloads::onBackButtonClicked( void )
 //}
 
 //============================================================================
-FileXferWidget * AppletDownloads::sessionToWidget( GuiFileXferSession * poSession )
+FileXferWidget* AppletDownloads::sessionToWidget( GuiFileXferSession* poSession )
 {
-	FileXferWidget * item = new FileXferWidget(ui.m_FileItemList);
+	FileXferWidget* item = new FileXferWidget(ui.m_FileItemList);
 	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
 
     item->setFileItemInfo( poSession );
@@ -118,26 +118,26 @@ FileXferWidget * AppletDownloads::sessionToWidget( GuiFileXferSession * poSessio
 }
 
 //============================================================================
-void AppletDownloads::updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession )
+void AppletDownloads::updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* poSession )
 {
 	poSession->setWidget( item );
 	item->updateWidgetFromInfo();
 }
 
 //============================================================================
-GuiFileXferSession * AppletDownloads::widgetToSession( FileXferWidget * item )
+GuiFileXferSession* AppletDownloads::widgetToSession( FileXferWidget* item )
 {
 	return item->getFileItemInfo();
 }
 
 //============================================================================
-GuiFileXferSession * AppletDownloads::findSession( VxGUID lclSessionId )
+GuiFileXferSession* AppletDownloads::findSession( VxGUID lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
 	{
 		QListWidgetItem * item =  ui.m_FileItemList->item( iRow );
-		GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->data( Qt::UserRole + 1).toULongLong();
+		GuiFileXferSession* poCurInfo = (GuiFileXferSession*)item->data( Qt::UserRole + 1).toULongLong();
 		if( poCurInfo->getLclSessionId() == lclSessionId )
 		{
 			return poCurInfo;
@@ -148,7 +148,7 @@ GuiFileXferSession * AppletDownloads::findSession( VxGUID lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * AppletDownloads::findListEntryWidget( VxGUID lclSessionId )
+FileXferWidget* AppletDownloads::findListEntryWidget( VxGUID lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -156,10 +156,10 @@ FileXferWidget * AppletDownloads::findListEntryWidget( VxGUID lclSessionId )
 		QListWidgetItem * item =  ui.m_FileItemList->item( iRow );
 		if( item )
 		{
-			GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+			GuiFileXferSession* poCurInfo = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 			if( poCurInfo && ( poCurInfo->getLclSessionId() == lclSessionId ) )
 			{
-				return (FileXferWidget *)item;
+				return (FileXferWidget*)item;
 			}
 		}
 	}
@@ -168,12 +168,12 @@ FileXferWidget * AppletDownloads::findListEntryWidget( VxGUID lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * AppletDownloads::addDownload( GuiFileXferSession * poSession )
+FileXferWidget* AppletDownloads::addDownload( GuiFileXferSession* poSession )
 {
-	FileXferWidget * item = findListEntryWidget( poSession->getLclSessionId() );
+	FileXferWidget* item = findListEntryWidget( poSession->getLclSessionId() );
 	if( item )
 	{
-		GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+		GuiFileXferSession* poCurInfo = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 		delete poCurInfo;
         item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (qint64)poSession ) );
 		updateListEntryWidget( item, poSession );
@@ -202,7 +202,7 @@ bool AppletDownloads::isXferInProgress( VxGUID lclSessionId )
 }
 
 //============================================================================
-void AppletDownloads::toGuiStartDownload( GuiFileXferSession * xferSession )
+void AppletDownloads::toGuiStartDownload( GuiFileXferSession* xferSession )
 {
 	GuiFileXferSession* newSession = new GuiFileXferSession( *xferSession );
 	newSession->setXferDirection( eXferDirectionRx );
@@ -250,7 +250,7 @@ void AppletDownloads::slotFileXferItemClicked(QListWidgetItem * item)
 //============================================================================
 void AppletDownloads::slotFileIconButtonClicked( QListWidgetItem * item )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
 
@@ -260,13 +260,13 @@ void AppletDownloads::slotFileIconButtonClicked( QListWidgetItem * item )
 //============================================================================
 void AppletDownloads::slotCancelButtonClicked( QListWidgetItem * item )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
 		if( eXferStateCompletedDownload != xferSession->getXferState() )
 		{
 			xferSession->setXferState( eXferStateUserCanceledDownload, 0, 0 );
-			((FileXferWidget *)item)->setXferState( eXferStateUserCanceledDownload, 0, 0 );
+			((FileXferWidget*)item)->setXferState( eXferStateUserCanceledDownload, 0, 0 );
 			m_Engine.fromGuiCancelDownload( xferSession->getLclSessionId() );
 		}
 	}
@@ -277,7 +277,7 @@ void AppletDownloads::slotCancelButtonClicked( QListWidgetItem * item )
 //============================================================================
 void AppletDownloads::slotPlayButtonClicked( QListWidgetItem * item )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
 		this->playFile( xferSession->getFullFileName() );
@@ -287,35 +287,35 @@ void AppletDownloads::slotPlayButtonClicked( QListWidgetItem * item )
 //============================================================================
 void AppletDownloads::slotLibraryButtonClicked( QListWidgetItem * item )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
 		bool inLibary = xferSession->getIsInLibrary();
 		inLibary = !inLibary;
 		xferSession->setIsInLibrary( inLibary );
 		m_Engine.fromGuiAddFileToLibrary( xferSession->getFullFileName().toUtf8().constData(), inLibary, xferSession->getFileHashId().getHashData() );
-		((FileXferWidget *)item)->updateWidgetFromInfo();
+		((FileXferWidget*)item)->updateWidgetFromInfo();
 	}	
 }
 
 //============================================================================
 void AppletDownloads::slotFileShareButtonClicked( QListWidgetItem * item )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
 		bool isShared = xferSession->getIsShared();
 		isShared = !isShared;
 		xferSession->setIsShared( isShared );
 		m_Engine.fromGuiSetFileIsShared( xferSession->getFullFileName().toUtf8().constData(), isShared, xferSession->getFileHashId().getHashData() );
-		((FileXferWidget *)item)->updateWidgetFromInfo();
+		((FileXferWidget*)item)->updateWidgetFromInfo();
 	}	
 }
 
 //============================================================================
 void AppletDownloads::slotShredButtonClicked( QListWidgetItem * item )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
 		QString fileName = xferSession->getFullFileName();

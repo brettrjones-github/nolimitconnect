@@ -28,7 +28,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-ShareOfferListWidget::ShareOfferListWidget( QWidget * parent )
+ShareOfferListWidget::ShareOfferListWidget( QWidget* parent )
 : ListWidgetBase( parent )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 {
@@ -224,7 +224,7 @@ ShareOfferListItem* ShareOfferListWidget::addOrUpdateOfferSession( GuiOfferSessi
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
     }
 
     return userItem;
@@ -444,7 +444,7 @@ void ShareOfferListWidget::updateOffer( GuiOfferSession * userSession )
                     insertItem( 0, (QListWidgetItem *)userItem );
                 }
 
-                setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+                setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
                 m_OfferCache[userSession->getMyOnlineId()] = userSession;
             //}
         }

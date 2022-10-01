@@ -25,7 +25,7 @@ class VxMyFileInfo : public QObject
 {
 	Q_OBJECT
 public:
-	VxMyFileInfo(QWidget *parent = 0 );
+	VxMyFileInfo(QWidget*parent = 0 );
 	VxMyFileInfo( const VxFileInfo& rhs );
 	VxMyFileInfo( const VxMyFileInfo& rhs );
 	VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxGUID& assetId, VxSha1Hash& fileHashId );

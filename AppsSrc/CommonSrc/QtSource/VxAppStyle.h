@@ -41,7 +41,7 @@ public:
     void					    drawComboBoxArrow( QPainter*, const QRect& rect, const QPalette& palette, bool enabled ) const;
 
     void                        drawPrimitive( PrimitiveElement element, const QStyleOption *option,
-                                                QPainter *painter, const QWidget *widget ) const override;
+                                                QPainter *painter, const QWidget*widget ) const override;
 
     void                        drawControl( ControlElement	element, const QStyleOption* option,
                                                 QPainter* painter, const QWidget* widget ) const override;

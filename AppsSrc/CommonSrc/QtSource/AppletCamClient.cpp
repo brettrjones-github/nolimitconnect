@@ -20,7 +20,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletCamClient::AppletCamClient( AppCommon& app, QWidget * parent )
+AppletCamClient::AppletCamClient( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_CAM_CLIENT, app, parent )
 , m_CloseAppletTimer( new QTimer( this ) )
 {

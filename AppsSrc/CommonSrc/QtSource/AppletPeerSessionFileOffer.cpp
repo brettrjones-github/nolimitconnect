@@ -18,7 +18,7 @@
 #include "GuiOfferSession.h"
 
 //============================================================================
-AppletPeerSessionFileOffer::AppletPeerSessionFileOffer(	AppCommon& app, QWidget * parent )
+AppletPeerSessionFileOffer::AppletPeerSessionFileOffer(	AppCommon& app, QWidget* parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_SESSION_FILE_OFFER, app, parent )
 , m_ePluginType(ePluginTypePersonFileXfer)
 {

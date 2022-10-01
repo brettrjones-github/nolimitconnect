@@ -90,7 +90,7 @@ protected:
 
 	bool						txPacket(	VxGUID&			destinationId, 
 											VxSktBase *			sktBase, 
-											VxPktHdr *			poPkt );
+											VxPktHdr*			poPkt );
 
 	bool						connectToContact( ConnectRequest& connectRequest, bool replaceExisting = true );
 	void						addConnectRequestToQue( ConnectRequest& connectRequest, bool addToHeadOfQue = false, bool replaceExisting = true );

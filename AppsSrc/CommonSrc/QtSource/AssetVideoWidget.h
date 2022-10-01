@@ -22,8 +22,8 @@ class AssetVideoWidget : public AssetBaseWidget
 	Q_OBJECT
 
 public:
-	AssetVideoWidget( QWidget * parent = 0 );
-	AssetVideoWidget( AppCommon& appCommon, QWidget * parent = 0 );
+	AssetVideoWidget( QWidget* parent = 0 );
+	AssetVideoWidget( AppCommon& appCommon, QWidget* parent = 0 );
 	virtual ~AssetVideoWidget() = default;
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
@@ -55,7 +55,7 @@ protected:
 	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos ) override;
 	void						initAssetVideoWidget( void );
 
-    void						resizeEvent( QResizeEvent * ev ) override;
+    void						resizeEvent( QResizeEvent* ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );

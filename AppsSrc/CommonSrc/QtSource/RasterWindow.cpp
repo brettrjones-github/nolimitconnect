@@ -84,7 +84,7 @@ void RasterWindow::renderLater()
 
 
 //! [5]
-void RasterWindow::resizeEvent(QResizeEvent *resizeEvent)
+void RasterWindow::resizeEvent(QResizeEvent*resizeEvent)
 {
     m_backingStore->resize(resizeEvent->size());
     if (isExposed())

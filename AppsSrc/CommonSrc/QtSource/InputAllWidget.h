@@ -23,7 +23,7 @@ class InputAllWidget : public InputBaseWidget
     Q_OBJECT
 
 public:
-    InputAllWidget( QWidget * parent = 0 );
+    InputAllWidget( QWidget* parent = 0 );
 
 	void						setCanSend( bool canSend );
 

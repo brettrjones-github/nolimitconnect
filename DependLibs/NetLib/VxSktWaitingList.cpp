@@ -29,7 +29,7 @@ VxSktWaitReason::VxSktWaitReason()
 }
 
 //============================================================================
-VxSktWaitReason::VxSktWaitReason( VxSktBase* sktBase, uint32_t u32WaitReason, uint64_t u32TimeExpiresSysTimeMs, VxPktHdr * poPkt, void * pvWaitReason )
+VxSktWaitReason::VxSktWaitReason( VxSktBase* sktBase, uint32_t u32WaitReason, uint64_t u32TimeExpiresSysTimeMs, VxPktHdr* poPkt, void * pvWaitReason )
 : m_Skt(sktBase)
 , m_Pkt(0)
 , m_u64TimeExpires( u32TimeExpiresSysTimeMs )
@@ -191,7 +191,7 @@ void VxSktWaitingList::onConnectionLost( VxSktBase* sktBase )
 void VxSktWaitingList::addWaiting(	VxSktBase *		sktBase, 
 									uint32_t				u32WaitReason, 
 									uint64_t				u64TimeExpiresSysTimeMs, 
-									VxPktHdr *		poPkt, 
+									VxPktHdr*		poPkt, 
 									void *			pvWaitInstance )
 {
 	m_SktWaitListMutex.lock();

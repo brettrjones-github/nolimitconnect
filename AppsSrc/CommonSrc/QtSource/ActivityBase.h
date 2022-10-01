@@ -47,14 +47,14 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 {
 	Q_OBJECT
 public:
-	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessengerFrame, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
+	ActivityBase( const char * objName, AppCommon& app, QWidget* parent, EApplet eAppletType = eAppletMessengerFrame, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
     virtual ~ActivityBase() override = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 	P2PEngine&					getEngine( void )					{ return m_Engine; }
 	IFromGui&					getFromGuiInterface( void )			{ return m_FromGui; }
-    QWidget *				    getParentPageFrame( void ); // get home page frame ( Launch or Messenger Page )
+    QWidget*				    getParentPageFrame( void ); // get home page frame ( Launch or Messenger Page )
 
     void                        setIsMaxScreenSize( bool fullScreen );
     bool                        getIsMaxScreenSize( void );
@@ -71,13 +71,13 @@ public:
     virtual TitleBarWidget *	getTitleBarWidget( void );
     virtual BottomBarWidget *	getBottomBarWidget( void );
     // get parent frame of this activity
-    virtual QFrame *			getContentItemsFrame( void );
+    virtual QFrame*			getContentItemsFrame( void );
     // get content frame of launch page
-    virtual QFrame *            getContentFrameOfLaunchFrame( void );
+    virtual QFrame*            getContentFrameOfLaunchFrame( void );
     // get content frame of messenger page
-    virtual QFrame *            getContentFrameOfMessengerFrame( void );
+    virtual QFrame*            getContentFrameOfMessengerFrame( void );
     // get content frame of opposit page
-    virtual QFrame *            getContentFrameOfOppositePageFrame( void );
+    virtual QFrame*            getContentFrameOfOppositePageFrame( void );
 
     VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
     virtual void                connectBarWidgets( void );
@@ -86,7 +86,7 @@ public:
     // called just before first show of applet.. override for special initialization needs
     virtual void                aboutToLaunchApplet( void ) {}
  
-	void						setNewParent( QWidget * parent );
+	void						setNewParent( QWidget* parent );
 
 	void						setupStyledDlg(	GuiUser *	    poFriend			= nullptr,
 												IdentWidget *	poIdentWidget		= nullptr,
@@ -288,9 +288,9 @@ protected slots:
 	virtual void				slotExpandWindowButtonClicked( void );
 
 protected:
-    virtual void				showEvent( QShowEvent * ) override;
+    virtual void				showEvent( QShowEvent* ) override;
     virtual void				closeEvent( QCloseEvent * ev ) override;
-    virtual void				resizeEvent( QResizeEvent * ev ) override;
+    virtual void				resizeEvent( QResizeEvent* ev ) override;
 
     void                        connectTitleBarWidget( TitleBarWidget * titleBar );
     void                        connectBottomBarWidget( BottomBarWidget * bottomBar );
@@ -312,7 +312,7 @@ protected:
 	P2PEngine&					m_Engine;
 	IFromGui&					m_FromGui;	
     Qt::WindowFlags				m_WindowFlags = Qt::Widget;
-    QWidget *					m_ParentWidget{nullptr};
+    QWidget*					m_ParentWidget{nullptr};
 
 	EApplet						m_EAppletType = eAppletUnknown;
     EPluginType					m_ePluginType = ePluginTypeInvalid;

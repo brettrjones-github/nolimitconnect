@@ -58,7 +58,7 @@ void P2PEngine::handleTcpData( VxSktBase* sktBase )
 	// app should get the buffer ( this also locks it from being modified by threads )
 	// then read the data then call Amount read
     uint8_t * pSktBuf = (uint8_t *)sktBase->getSktReadBuf();
-	VxPktHdr* pktHdr = (VxPktHdr *)pSktBuf;
+	VxPktHdr* pktHdr = (VxPktHdr*)pSktBuf;
 	if( sktBase->isFirstRxPacket() )
 	{
 		if( false == sktBase->isRxEncryptionKeySet() )
@@ -205,7 +205,7 @@ void P2PEngine::handleTcpData( VxSktBase* sktBase )
 			break;
 		}
 
-		pktHdr = (VxPktHdr *)&pSktBuf[ u32UsedLen ];
+		pktHdr = (VxPktHdr*)&pSktBuf[ u32UsedLen ];
 		if( false == pktHdr->isValidPkt() )
 		{
 			// invalid data
@@ -318,7 +318,7 @@ void P2PEngine::handleMulticastData( VxSktBase* sktBase )
 	}
 
 	// decrypt
-	VxPktHdr * poPkt = (VxPktHdr *)pSktBuf;
+	VxPktHdr* poPkt = (VxPktHdr*)pSktBuf;
 	VxSymDecrypt( &sktBase->m_RxKey, pSktBuf, iDataLen );
 	if( poPkt->isValidPkt() )
 	{

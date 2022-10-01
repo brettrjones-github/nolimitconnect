@@ -23,7 +23,7 @@ class InputFaceWidget : public InputBaseWidget
     Q_OBJECT
 
 public:
-    InputFaceWidget( QWidget * parent=0);
+    InputFaceWidget( QWidget* parent=0);
 
 	void						setCanSend( bool canSend ) {};
 

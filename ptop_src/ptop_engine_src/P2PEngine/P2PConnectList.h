@@ -69,8 +69,8 @@ public:
 	void						connectListLock( void );
 	void						connectListUnlock( void );
 
-	void						broadcastSystemPkt( VxPktHdr * pkt, bool onlyIncludeMyContacts );
-	void						broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& retIdsSentPktTo, bool onlyIncludeMyContacts = false );
+	void						broadcastSystemPkt( VxPktHdr* pkt, bool onlyIncludeMyContacts );
+	void						broadcastSystemPkt( VxPktHdr* pkt, VxGUIDList& retIdsSentPktTo, bool onlyIncludeMyContacts = false );
 
     void						fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 																EFriendState	eMyFriendshipToHim,

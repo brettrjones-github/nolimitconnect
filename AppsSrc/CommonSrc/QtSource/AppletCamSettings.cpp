@@ -20,7 +20,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletCamSettings::AppletCamSettings( AppCommon& app, QWidget * parent )
+AppletCamSettings::AppletCamSettings( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_CAM_SETTINGS, app, parent )
 , m_CloseAppletTimer( new QTimer( this ) )
 {
@@ -135,7 +135,7 @@ void AppletCamSettings::stopCamFeed( void )
 }
 
 //============================================================================
-void AppletCamSettings::showEvent( QShowEvent * ev )
+void AppletCamSettings::showEvent( QShowEvent* ev )
 {
     // don't call AppletPeerBase::showEvent ... we don't want plugin offer/response for web cam server or client
     AppletBase::showEvent( ev );
@@ -143,7 +143,7 @@ void AppletCamSettings::showEvent( QShowEvent * ev )
 }
 
 //============================================================================
-void AppletCamSettings::hideEvent( QHideEvent * ev )
+void AppletCamSettings::hideEvent( QHideEvent* ev )
 {
     // don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
     m_MyApp.wantToGuiActivityCallbacks( this, false );

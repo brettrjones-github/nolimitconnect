@@ -19,7 +19,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-FileActionBarWidget::FileActionBarWidget(QWidget *parent)
+FileActionBarWidget::FileActionBarWidget(QWidget*parent)
 : QFrame(parent)
 , m_MyApp( GetAppInstance() )
 {

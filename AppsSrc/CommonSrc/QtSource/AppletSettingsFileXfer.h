@@ -20,7 +20,7 @@ class AppletSettingsFileXfer : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsFileXfer( AppCommon& app, QWidget * parent );
+    AppletSettingsFileXfer( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsFileXfer() override;
 
 protected:

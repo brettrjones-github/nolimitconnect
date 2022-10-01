@@ -28,7 +28,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-AppletPeerBase::AppletPeerBase(	const char * objName, AppCommon& app, QWidget * parent )
+AppletPeerBase::AppletPeerBase(	const char * objName, AppCommon& app, QWidget* parent )
 : AppletBase( objName, app, parent )
 , m_OfferSessionLogic( this, this, app )
 {
@@ -109,7 +109,7 @@ void AppletPeerBase::setupBaseWidgets( IdentWidget*	friendIdentWidget, VxPushBut
 }
 
 //============================================================================
-void AppletPeerBase::showEvent( QShowEvent * ev )
+void AppletPeerBase::showEvent( QShowEvent* ev )
 {
 	AppletBase::showEvent( ev );
     if( ePluginTypeInvalid == m_ePluginType )
@@ -120,7 +120,7 @@ void AppletPeerBase::showEvent( QShowEvent * ev )
 }
 
 //============================================================================
-void AppletPeerBase::hideEvent( QHideEvent * ev )
+void AppletPeerBase::hideEvent( QHideEvent* ev )
 {
     if( ePluginTypeInvalid == m_ePluginType )
     {

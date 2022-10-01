@@ -34,7 +34,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletChooseThumbnail::AppletChooseThumbnail( AppCommon& app, QWidget * parent )
+AppletChooseThumbnail::AppletChooseThumbnail( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_CHOOSE_THUMBNAIL, app, parent )
 {
     setAppletType( eAppletChooseThumbnail );

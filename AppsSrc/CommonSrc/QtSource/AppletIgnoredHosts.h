@@ -24,7 +24,7 @@ class AppletIgnoredHosts : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletIgnoredHosts( AppCommon& app, QWidget * parent );
+    AppletIgnoredHosts( AppCommon& app, QWidget* parent );
 	virtual ~AppletIgnoredHosts();
 
     virtual void                setStatusMsg( QString statusMsg );

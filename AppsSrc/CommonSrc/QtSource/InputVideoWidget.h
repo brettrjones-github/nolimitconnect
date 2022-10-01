@@ -23,7 +23,7 @@ class InputVideoWidget : public InputBaseWidget
     Q_OBJECT
 
 public:
-    InputVideoWidget( QWidget * parent=0);
+    InputVideoWidget( QWidget* parent=0);
 
 	void						setCanSend( bool canSend ) {};
 
@@ -36,8 +36,8 @@ protected slots:
 	void						slotBeginRecord( void );
 
 protected:
-	void						hideEvent( QHideEvent * hideEvent );
-	void						showEvent( QShowEvent * showEvent );
+	void						hideEvent( QHideEvent* hideEvent );
+	void						showEvent( QShowEvent* showEvent );
 
 	Ui::InputVideoWidget		ui;
 	bool						m_IsRecording;

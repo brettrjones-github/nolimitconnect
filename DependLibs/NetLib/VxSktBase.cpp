@@ -748,7 +748,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
 
 	if( 0 != (iDataLen & 0x0f) )
 	{
-		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
+		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr*)pDataIn)->getPktType() );
         if( bDisconnect )
         {
             closeSkt(eSktClosePktLengthInvalid);
@@ -838,7 +838,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
 
     if( 0 != (iDataLen & 0x0f) )
     {
-        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr*)pDataIn)->getPktType() );
         if( bDisconnect )
         {
             closeSkt( eSktClosePktLengthInvalid );
@@ -888,7 +888,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
 
 //============================================================================
 RCODE VxSktBase::txPacket(	VxGUID				destOnlineId,
-							VxPktHdr *			pktHdr, 		// packet to send
+							VxPktHdr*			pktHdr, 		// packet to send
 							bool				bDisconnect )	// if true disconnect after send
 {
 	pktHdr->setDestOnlineId( destOnlineId );
@@ -896,7 +896,7 @@ RCODE VxSktBase::txPacket(	VxGUID				destOnlineId,
 }
 
 //============================================================================
-RCODE VxSktBase::txPacketWithDestId(	VxPktHdr *			pktHdr, 		// packet to send
+RCODE VxSktBase::txPacketWithDestId(	VxPktHdr*			pktHdr, 		// packet to send
 										bool				bDisconnect )	// if true disconnect after send
 {
 	m_u8TxSeqNum = (uint8_t)rand();

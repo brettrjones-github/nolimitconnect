@@ -712,7 +712,7 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 	}
 
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
 	if( netIdent && poPlugin )
 	{
 		return poPlugin->fromGuiOfferReply( netIdent, pvUserData, (EOfferResponse)iOfferResponse, lclSessionId );
@@ -735,7 +735,7 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiPluginControl" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
 	if( netIdent && poPlugin )
 	{
 		return poPlugin->fromGuiPluginControl( netIdent, pControl, pAction, u32ActionData, lclSessionId, fileHashId );
@@ -754,7 +754,7 @@ bool P2PEngine::fromGuiInstMsg(	EPluginType		ePluginType,
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiInstMsg" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
 	if( netIdent && poPlugin )
 	{
 		return poPlugin->fromGuiInstMsg( netIdent, pMsg );
@@ -1151,7 +1151,7 @@ bool P2PEngine::fromGuiSetGameValueVar(	EPluginType	ePluginType,
 										int32_t			varValue )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetGameValueVar" );
-	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
 	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 	if( poInfo )
 	{
@@ -1172,7 +1172,7 @@ bool P2PEngine::fromGuiSetGameActionVar(	EPluginType	ePluginType,
 											int32_t			varValue )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetGameActionVar" );
-	PluginBase * poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
 	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 	if( poInfo )
 	{
@@ -1703,7 +1703,6 @@ bool P2PEngine::fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& online
 	return result;
 }
 
-
 //============================================================================
 bool P2PEngine::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
@@ -1748,4 +1747,39 @@ void P2PEngine::fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendSt
 	m_AnnouncePktMutex.unlock();
 	getPluginMgr().fromGuiUpdatePluginPermission( pluginType, pluginPermission );
 	doPktAnnHasChanged( false );
+}
+
+//============================================================================
+bool P2PEngine::fromGuiDownloadFileList( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes )
+{
+	bool result{ false };
+	PluginBase* plugin = m_PluginMgr.findPlugin( pluginType );
+	if( plugin )
+	{
+		result = plugin->fromGuiDownloadFileList( onlineId, sessionId, fileTypes );
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "Plugin %s fromGuiDownloadFileList failed", DescribePluginType( pluginType ) );
+	}
+
+	return result;
+}
+
+//============================================================================
+bool P2PEngine::fromGuiDownloadFileListCancel( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId )
+{
+	bool result{ false };
+
+	PluginBase* plugin = m_PluginMgr.findPlugin( ePluginTypeAboutMePageClient );
+	if( plugin )
+	{
+		result = plugin->fromGuiDownloadFileListCancel( onlineId, sessionId );
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "Plugin %s fromGuiDownloadFileListCancel failed", DescribePluginType( pluginType ) );
+	}
+
+	return result;
 }

@@ -23,7 +23,7 @@ class VxAppDisplay : public QWidget
     Q_OBJECT
 
 public:
-    VxAppDisplay( AppCommon& appCommon, QWidget * parent = 0 );
+    VxAppDisplay( AppCommon& appCommon, QWidget* parent = 0 );
     virtual ~VxAppDisplay() {};
 
     bool						isVerticalOrientation( void )                   { return ( m_Orientation == Qt::Orientation::Vertical ); }

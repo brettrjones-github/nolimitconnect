@@ -19,7 +19,7 @@ class AppletServiceAboutMe : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-	AppletServiceAboutMe( AppCommon& app, QWidget * parent );
+	AppletServiceAboutMe( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceAboutMe();
 
 

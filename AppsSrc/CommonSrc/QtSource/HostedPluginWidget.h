@@ -25,7 +25,7 @@ class HostedPluginWidget : public IdentLogicInterface
 {
 	Q_OBJECT;
 public:
-	HostedPluginWidget( QWidget *parent=0 );
+	HostedPluginWidget( QWidget*parent=0 );
 	virtual ~HostedPluginWidget();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

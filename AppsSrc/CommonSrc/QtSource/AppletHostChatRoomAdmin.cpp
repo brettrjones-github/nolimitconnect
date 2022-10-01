@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostChatRoomAdmin::AppletHostChatRoomAdmin( AppCommon& app, QWidget * parent )
+AppletHostChatRoomAdmin::AppletHostChatRoomAdmin( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_HOST_CHAT_ROOM_ADMIN, app, parent )
 {
     setAppletType( eAppletHostChatRoomAdmin );

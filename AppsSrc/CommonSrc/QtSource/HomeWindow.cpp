@@ -110,7 +110,7 @@ void HomeWindow::reject()
 }
 
 //============================================================================
-void HomeWindow::resizeEvent( QResizeEvent * ev)
+void HomeWindow::resizeEvent( QResizeEvent* ev)
 {
     // LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height() );
 	emit signalMainWindowResized();
@@ -124,7 +124,7 @@ void HomeWindow::moveEvent( QMoveEvent * )
 }
 
 //============================================================================
-void HomeWindow::showEvent( QShowEvent * ev )
+void HomeWindow::showEvent( QShowEvent* ev )
 {
     QDialog::showEvent( ev );
 static bool firstShow = true;
@@ -243,7 +243,7 @@ void HomeWindow::initializeNlcDynamicLayout( void )
 }
 
 //============================================================================
-void HomeWindow::switchWindowFocus(  QWidget * appIconButton )
+void HomeWindow::switchWindowFocus(  QWidget* appIconButton )
 {
 	if( ( false == m_HomeFrameUpperLeft->isVisible() )
 		|| ( false == getMessengerParentFrame()->isVisible() ) )
@@ -286,7 +286,7 @@ void HomeWindow::switchWindowFocus(  QWidget * appIconButton )
 }
 
 //============================================================================
-QFrame *  HomeWindow::getAppletFrame( EApplet applet )
+QFrame*  HomeWindow::getAppletFrame( EApplet applet )
 {
 	if( eAppletMessengerFrame == applet || eAppletMultiMessenger == applet )
 	{
@@ -299,7 +299,7 @@ QFrame *  HomeWindow::getAppletFrame( EApplet applet )
 }
 
 //============================================================================
-QFrame * HomeWindow::getMessengerParentFrame( void )
+QFrame* HomeWindow::getMessengerParentFrame( void )
 {
 	if( Qt::Vertical == m_Orientation )
 	{
@@ -312,7 +312,7 @@ QFrame * HomeWindow::getMessengerParentFrame( void )
 }
 
 //============================================================================
-QFrame * HomeWindow::getLaunchPageFrame( void )
+QFrame* HomeWindow::getLaunchPageFrame( void )
 { 
     return m_HomeFrameUpperLeft;
 }
@@ -467,7 +467,7 @@ AppletBase * HomeWindow::findActiveApplet( void )
 {
     AppletBase * curApplet = nullptr;
     // get the widget with focus then find a parent that is a base applet
-    QWidget * curWidget = QApplication::focusWidget();
+    QWidget* curWidget = QApplication::focusWidget();
     while(curWidget)
     {
         curApplet = dynamic_cast<AppletBase *>(curWidget);
@@ -476,7 +476,7 @@ AppletBase * HomeWindow::findActiveApplet( void )
             break;
         }
 
-        curWidget = dynamic_cast<QWidget *>(curWidget->parent());
+        curWidget = dynamic_cast<QWidget*>(curWidget->parent());
     }
 
     return curApplet;

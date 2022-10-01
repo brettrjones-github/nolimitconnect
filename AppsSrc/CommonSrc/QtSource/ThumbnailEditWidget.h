@@ -27,7 +27,7 @@ class ThumbnailEditWidget : public QWidget
 {
     Q_OBJECT
 public:
-    ThumbnailEditWidget( QWidget * parent );
+    ThumbnailEditWidget( QWidget* parent );
     ~ThumbnailEditWidget() override = default;
 
     void                        setIsUserPickedImage( bool userPicked )         { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }

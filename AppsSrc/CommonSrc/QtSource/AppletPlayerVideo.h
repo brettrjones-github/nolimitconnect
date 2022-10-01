@@ -22,7 +22,7 @@ class AppletPlayerVideo : public AppletPlayerBase, public GuiPlayerCallback
 {
 	Q_OBJECT
 public:
-	AppletPlayerVideo( AppCommon& app, QWidget * parent );
+	AppletPlayerVideo( AppCommon& app, QWidget* parent );
 	virtual ~AppletPlayerVideo() = default;
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
@@ -50,9 +50,9 @@ protected:
 	void						initAppletPlayerVideo( void );
 	void						onAppletStop( void );
 
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
-    void						resizeEvent( QResizeEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
+    void						resizeEvent( QResizeEvent* ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );

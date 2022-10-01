@@ -23,7 +23,7 @@ class ServiceSettingsWidget : public QWidget
 	Q_OBJECT
 
 public:
-    ServiceSettingsWidget( QWidget * parent = 0 );
+    ServiceSettingsWidget( QWidget* parent = 0 );
 
     void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType;  updateUi();  updateIcons(); }
     void						setViewServiceVisible( bool visible )   { ui.m_ViewServiceFrame->setVisible( visible ); }

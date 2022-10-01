@@ -29,20 +29,20 @@ class AppletShareOfferList : public AppletPeerBase, public ToGuiFileXferInterfac
 	Q_OBJECT
 public:
 	AppletShareOfferList(	AppCommon&	app, 
-						QWidget *		parent = NULL );
+						QWidget*		parent = NULL );
 	virtual ~AppletShareOfferList() override;
 
     /*
 	bool						isXferInProgress( VxGUID fileInstance );
-	FileXferWidget *			addDownload( GuiFileXferSession * poSession );
+	FileXferWidget*			addDownload( GuiFileXferSession* poSession );
 
 signals:
-	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
+	void						signalToGuiStartDownload( GuiFileXferSession* xferSession );
 	void						signalToGuiFileXferState( EPluginType pluginType, VxGUID lclSession, EXferState eXferState, int param1, int param2 );
 	void						signalToGuiFileDownloadComplete( VxGUID lclSession, QString newFileName, EXferError xferError );
 
 private slots:
-	void						slotToGuiStartDownload(	GuiFileXferSession * poSession );
+	void						slotToGuiStartDownload(	GuiFileXferSession* poSession );
 	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
 	void						slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
 
@@ -58,22 +58,22 @@ private slots:
     */
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
 
     /*
     // override default behavior of closing dialog when back button is clicked
     void                        onBackButtonClicked( void ) override;
 
-    virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiStartDownload( void * userData, GuiFileXferSession* xferSession ) override;
     virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
     virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
-	FileXferWidget *			sessionToWidget( GuiFileXferSession * poSession );
-	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession );
-	GuiFileXferSession *		widgetToSession( FileXferWidget * item );
-	GuiFileXferSession *		findSession( VxGUID lclSessionId );
-	FileXferWidget *			findListEntryWidget( VxGUID lclSessionId );
+	FileXferWidget*			sessionToWidget( GuiFileXferSession* poSession );
+	void						updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* poSession );
+	GuiFileXferSession*		widgetToSession( FileXferWidget* item );
+	GuiFileXferSession*		findSession( VxGUID lclSessionId );
+	FileXferWidget*			findListEntryWidget( VxGUID lclSessionId );
 	bool						confirmDeleteFile( bool shredFile );
     */
 

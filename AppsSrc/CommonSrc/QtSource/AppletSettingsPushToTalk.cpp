@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsPushToTalk::AppletSettingsPushToTalk( AppCommon& app, QWidget * parent )
+AppletSettingsPushToTalk::AppletSettingsPushToTalk( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_PUSH_TO_TALK, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

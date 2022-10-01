@@ -28,7 +28,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-HistoryListWidget::HistoryListWidget(QWidget *parent)
+HistoryListWidget::HistoryListWidget(QWidget*parent)
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( GetAppInstance().getEngine() )
@@ -52,7 +52,7 @@ HistoryListWidget::~HistoryListWidget()
 }
 
 //============================================================================
-void HistoryListWidget::showEvent(QShowEvent * showEvent)
+void HistoryListWidget::showEvent(QShowEvent* showEvent)
 {
 	QListWidget::showEvent(showEvent);
 	if( ( false == m_CallbacksRequested )
@@ -69,7 +69,7 @@ void HistoryListWidget::showEvent(QShowEvent * showEvent)
 }
 
 //============================================================================
-void HistoryListWidget::hideEvent( QHideEvent * ev )
+void HistoryListWidget::hideEvent( QHideEvent* ev )
 {
 	if( m_CallbacksRequested )
 	{

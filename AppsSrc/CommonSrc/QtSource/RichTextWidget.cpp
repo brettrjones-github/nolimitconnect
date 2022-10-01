@@ -52,7 +52,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-RichTextWidget::RichTextWidget(QWidget *parent, QString initialFile)
+RichTextWidget::RichTextWidget(QWidget*parent, QString initialFile)
 : QTextEdit(parent)
 , m_strFileName(initialFile)
 {

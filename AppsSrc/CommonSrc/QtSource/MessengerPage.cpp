@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-MessengerPage::MessengerPage( AppCommon& app, QWidget * parent )
+MessengerPage::MessengerPage( AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_APPLET_MESSAGER_PAGE, app, parent )
 , m_IsVisible( false )
 , m_IsFullSize( false )
@@ -34,7 +34,7 @@ MessengerPage::MessengerPage( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-void MessengerPage::showEvent( QShowEvent * )
+void MessengerPage::showEvent( QShowEvent* )
 {
 	if( false == m_IsVisible )
 	{
@@ -44,7 +44,7 @@ void MessengerPage::showEvent( QShowEvent * )
 }
 
 //============================================================================
-void MessengerPage::hideEvent( QHideEvent * )
+void MessengerPage::hideEvent( QHideEvent* )
 {
 	if( true == m_IsVisible )
 	{

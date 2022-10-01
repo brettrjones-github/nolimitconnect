@@ -20,7 +20,7 @@ class AppletSettingsRandomConnect : public AppletSettingsBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsRandomConnect( AppCommon& app, QWidget * parent );
+    AppletSettingsRandomConnect( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsRandomConnect() override;
 
 protected:

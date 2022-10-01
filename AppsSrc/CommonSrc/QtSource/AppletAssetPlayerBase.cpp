@@ -22,7 +22,7 @@
 #include <QProgressBar>
 
 //============================================================================
-AppletAssetPlayerBase::AppletAssetPlayerBase( const char* ObjName, AppCommon& appCommon, QWidget *parent)
+AppletAssetPlayerBase::AppletAssetPlayerBase( const char* ObjName, AppCommon& appCommon, QWidget*parent)
 : AppletBase( ObjName, appCommon, parent )
 , m_Engine( appCommon.getEngine() )
 {
@@ -45,7 +45,7 @@ MyIcons& AppletAssetPlayerBase::getMyIcons( void )
 }
 
 //============================================================================
-void AppletAssetPlayerBase::setXferBar( QProgressBar * xferProgressBar )	
+void AppletAssetPlayerBase::setXferBar( QProgressBar* xferProgressBar )	
 { 
 	m_XferProgressBar = xferProgressBar; 
 	if( 0 != m_XferProgressBar )
@@ -56,7 +56,7 @@ void AppletAssetPlayerBase::setXferBar( QProgressBar * xferProgressBar )
 }
 
 //============================================================================
-void AppletAssetPlayerBase::showEvent(QShowEvent * showEvent)
+void AppletAssetPlayerBase::showEvent(QShowEvent* showEvent)
 {
 	AppletBase::showEvent(showEvent);
 	updateWantCallbacks( true );
@@ -89,7 +89,7 @@ void AppletAssetPlayerBase::updateWantCallbacks( bool wantCallbacks )
 }
 
 //============================================================================
-void AppletAssetPlayerBase::hideEvent( QHideEvent * ev )
+void AppletAssetPlayerBase::hideEvent( QHideEvent* ev )
 {
 	updateWantCallbacks( false );
 

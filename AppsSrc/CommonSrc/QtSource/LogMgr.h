@@ -41,7 +41,7 @@ class LogMgr : public QWidget, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
-    LogMgr( QWidget * parent = nullptr );
+    LogMgr( QWidget* parent = nullptr );
     virtual ~LogMgr() override;
 
     void                        startupLogMgr( void );

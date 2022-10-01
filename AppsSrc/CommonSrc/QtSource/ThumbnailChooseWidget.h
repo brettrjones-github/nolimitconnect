@@ -29,7 +29,7 @@ class ThumbnailChooseWidget : public QLabel
 {
     Q_OBJECT
 public:
-    ThumbnailChooseWidget( QWidget * parent );
+    ThumbnailChooseWidget( QWidget* parent );
     virtual ~ThumbnailChooseWidget() override = default;
 
     ThumbnailViewWidget*        getThumbnailViewWidget()                        { return ui.m_ThumbnailViewWidget; }

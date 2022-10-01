@@ -19,7 +19,7 @@ class AppletSettingsAboutMe : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-	AppletSettingsAboutMe( AppCommon& app, QWidget * parent );
+	AppletSettingsAboutMe( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsAboutMe();
 
 protected:

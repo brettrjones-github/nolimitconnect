@@ -196,14 +196,14 @@ std::string ActivityBrowseFiles::getDefaultDir( int eFileFilterType )
 }
 
 //============================================================================
-void ActivityBrowseFiles::showEvent( QShowEvent * ev )
+void ActivityBrowseFiles::showEvent( QShowEvent* ev )
 {
 	ActivityBase::showEvent( ev );
 	slotRequestFileList();
 }
 
 //============================================================================
-void ActivityBrowseFiles::hideEvent( QHideEvent * ev )
+void ActivityBrowseFiles::hideEvent( QHideEvent* ev )
 {
 	m_MyApp.wantToGuiFileXferCallbacks( this, false );
 	ActivityBase::hideEvent( ev );
@@ -337,7 +337,7 @@ void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 			}
 		}
 
-		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget *)item );
+		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget*)item );
 	}
 }
 
@@ -380,7 +380,7 @@ void ActivityBrowseFiles::slotBrowseButtonClicked( void )
 {
 	QString selectedDir = "";
 	QString curDir = m_CurBrowseDirectory.c_str();
-	QFileDialog dialog( (QWidget *)this->parent(), QObject::tr("Open Directory"), curDir );
+	QFileDialog dialog( (QWidget*)this->parent(), QObject::tr("Open Directory"), curDir );
 
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
 	dialog.setFileMode(QFileDialog::Directory);

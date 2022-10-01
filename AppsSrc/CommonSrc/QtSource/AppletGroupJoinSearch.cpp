@@ -33,7 +33,7 @@ namespace
 
 //============================================================================
 AppletGroupJoinSearch::AppletGroupJoinSearch(	AppCommon&		    app, 
-												QWidget *			parent )
+												QWidget*			parent )
 : AppletClientBase( OBJNAME_APPLET_GROUP_JOIN_SEARCH, app, parent )
 {
     setAppletType( eAppletGroupJoinSearch );
@@ -95,14 +95,14 @@ void AppletGroupJoinSearch::setInfoLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletGroupJoinSearch::showEvent( QShowEvent * ev )
+void AppletGroupJoinSearch::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::hideEvent( QHideEvent * ev )
+void AppletGroupJoinSearch::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

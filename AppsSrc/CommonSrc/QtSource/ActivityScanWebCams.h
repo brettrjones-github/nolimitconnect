@@ -34,7 +34,7 @@ class ActivityScanWebCams : public ActivityBase, public GuiPlayerCallback
 	Q_OBJECT
 public:
 	ActivityScanWebCams(	AppCommon& app, 
-							QWidget *		parent = NULL );
+							QWidget*		parent = NULL );
 	virtual ~ActivityScanWebCams() override;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
@@ -67,8 +67,8 @@ public slots:
 	void						slotIdentMenuClicked( void );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
 	void						playVideoFrameRotated( QImage oPicBitmap, int iRotate );
 

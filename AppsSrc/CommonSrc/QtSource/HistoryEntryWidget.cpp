@@ -18,7 +18,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-HistoryEntryWidget::HistoryEntryWidget(QWidget *parent)
+HistoryEntryWidget::HistoryEntryWidget(QWidget*parent)
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( GetAppInstance().getEngine() )

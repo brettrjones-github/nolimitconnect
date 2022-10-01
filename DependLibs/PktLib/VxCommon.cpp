@@ -565,7 +565,6 @@ const char * DescribePluginLclName( EPluginType ePluginType )
     case ePluginTypeClientRandomConnect:
         return "Random Connect Client";
 
-
     case ePluginTypeCameraService:
         return "Camera Feed Service";
     case ePluginTypeMJPEGReader:
@@ -582,8 +581,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Audio Playback";
     case ePluginTypeSndWriter:
         return "Audio Recorder";
-    case ePluginTypeWebServer:
-        return "Web Page Services";
+
 	case ePluginTypeFileShareClient:
 		return "Download Shared Files";
 

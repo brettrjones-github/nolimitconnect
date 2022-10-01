@@ -21,7 +21,7 @@ class AppletGroupHostAdmin : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletGroupHostAdmin( AppCommon& app, QWidget * parent );
+    AppletGroupHostAdmin( AppCommon& app, QWidget* parent );
 	virtual ~AppletGroupHostAdmin() override;
 
 protected:

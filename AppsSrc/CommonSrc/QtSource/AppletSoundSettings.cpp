@@ -146,14 +146,14 @@ void AppletSoundSettings::setStatusLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletSoundSettings::showEvent( QShowEvent * ev )
+void AppletSoundSettings::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletSoundSettings::hideEvent( QHideEvent * ev )
+void AppletSoundSettings::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

@@ -23,7 +23,7 @@ class VxAspectFrame : public QFrame
     Q_OBJECT
 
 public:
-    VxAspectFrame( QWidget *parent = 0 );
+    VxAspectFrame( QWidget*parent = 0 );
 
     void                        setPreviewAspectRatio( float aspectRatio );
     float                       getPreviewAspectRatio( void )                       { return m_PreviewAspectRatio; }
@@ -35,9 +35,9 @@ public:
     VxLabel *                   getVideoScreen( void )                              { return m_VideoScreen; }
 
 protected:
-    virtual void				resizeEvent( QResizeEvent * ev );
+    virtual void				resizeEvent( QResizeEvent* ev );
     virtual void                updatePositions( void );
-    void						positionWidget( QWidget * parentWidget, float aspectRatio, VxLabel * widget, bool centerWidget, float scale );
+    void						positionWidget( QWidget* parentWidget, float aspectRatio, VxLabel * widget, bool centerWidget, float scale );
 
     float                       m_PreviewAspectRatio;
     float                       m_ScreenAspectRatio;

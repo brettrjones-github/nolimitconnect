@@ -30,6 +30,7 @@ class ActivityBase;
 class AppCommon;
 class AppletBase;
 class AssetBaseInfo;
+class GuiUser;
 class PluginSetting;
 class PluginSettingsWidget;
 class VxNetIdent;
@@ -47,7 +48,7 @@ public:
     static QString				getAvailableStorageSpaceText();
     static QString				getJustFileName( QString& fileNameAndPath );
 
-	static QString				browseForDirectory( QString startDir = "", QWidget * parent = 0 );
+	static QString				browseForDirectory( QString startDir = "", QWidget* parent = 0 );
     static int					calculateTextHeight( QFontMetrics& fontMetrics, QString textStr );
     static bool					copyResourceToOnDiskFile( QString resourcePath, QString fileNameAndPath );
 
@@ -74,20 +75,20 @@ public:
     static bool                 isMessagerFrame( QWidget* curWidget );
 
     /// @brief get home or messenger topmost widget
-    static QFrame *             getParentPageFrame( QWidget * curWidget );
+    static QFrame*             getParentPageFrame( QWidget* curWidget );
     /// @brief messenger frame topmost widget
-    static QFrame *             getMessengerPageFrame( QWidget * curWidget );
+    static QFrame*             getMessengerPageFrame( QWidget* curWidget );
     /// @brief get launch frame topmost widget
-    static QFrame *             getLaunchPageFrame( QWidget * curWidget );
+    static QFrame*             getLaunchPageFrame( QWidget* curWidget );
     /// @brief get opposite page frame of current widget's frame
-    static QFrame *             getOppositePageFrame( QWidget * curWidget );
+    static QFrame*             getOppositePageFrame( QWidget* curWidget );
 
-    static bool                 validateUserName( QWidget * curWidget, QString strUserName );
-    static bool                 validateMoodMessage( QWidget * curWidget, QString strMoodMsg );
-    static bool                 validateAge( QWidget * curWidget, int age );
+    static bool                 validateUserName( QWidget* curWidget, QString strUserName );
+    static bool                 validateMoodMessage( QWidget* curWidget, QString strMoodMsg );
+    static bool                 validateAge( QWidget* curWidget, int age );
 
-    static void                 setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
-    static void                 setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setValuesFromIdentity( QWidget* curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setIdentityFromValues( QWidget* curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
 
     static void                 fillPermissionComboBox( QComboBox * permissionComboBox );
     static EFriendState         comboIdxToFriendState( int comboIdx );
@@ -120,10 +121,10 @@ public:
     static EJoinState           comboIdxToJoinState( int comboIdx );
     static uint8_t              joinRequestToIndex( EJoinState joinState );
 
-    static ActivityBase *       findParentActivity( QWidget * widget );
-    static QWidget *            findAppletContentFrame( QWidget * widget );
-    static ActivityBase *       findLaunchWindow( QWidget * widget );
-    static AppletBase *         findParentApplet( QWidget * widget );
+    static ActivityBase *       findParentActivity( QWidget* widget );
+    static QWidget*            findAppletContentFrame( QWidget* widget );
+    static ActivityBase *       findLaunchWindow( QWidget* widget );
+    static AppletBase *         findParentApplet( QWidget* widget );
     static QWidget*             findParentPage( QWidget* parent ); // this should return home or messenger page
     static QWidget*             findParentContentFrame( QWidget* parent );
 
@@ -135,9 +136,12 @@ public:
     static bool                 makeCircleImage( QPixmap& targetPixmap );
     static uint64_t             saveToPngFile( QImage& image, QString& fileName ); // returns file length
     static uint64_t             saveToPngFile( QPixmap& pixmap, QString& fileName ); // returns file length
+
     static bool                 checkUserPermission( QString permissionName ); // returns false if user denies permission to use android hardware
 
     static void                 fillHostType( QComboBox* comboBox, bool excludePeerHost = true );
     static EHostType            comboIdxToHostType( int comboIdx );
+
+    static void                 userUnavailableMessageBox( QWidget* parent, GuiUser* user );
 };
 

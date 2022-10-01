@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletServiceShareFiles::AppletServiceShareFiles( AppCommon& app, QWidget * parent )
+AppletServiceShareFiles::AppletServiceShareFiles( AppCommon& app, QWidget* parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_FILES, app, parent )
 {
     setupServiceBaseApplet( eAppletServiceShareFiles, ePluginTypeFileShareServer );

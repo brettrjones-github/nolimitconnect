@@ -17,7 +17,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-AppletAboutMeServerViewMine::AppletAboutMeServerViewMine( AppCommon& app, QWidget * parent )
+AppletAboutMeServerViewMine::AppletAboutMeServerViewMine( AppCommon& app, QWidget* parent )
 : AppletAboutMeClient( app, parent )
 {
 }

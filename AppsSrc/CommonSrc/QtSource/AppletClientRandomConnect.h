@@ -23,7 +23,7 @@ class AppletClientRandomConnect : public AppletClientBase
 {
 	Q_OBJECT
 public:
-	AppletClientRandomConnect( AppCommon& app, QWidget * parent );
+	AppletClientRandomConnect( AppCommon& app, QWidget* parent );
 	virtual ~AppletClientRandomConnect() override;
 
     EScanType					getScanType() { return m_eScanType; }
@@ -45,8 +45,8 @@ private slots:
     void						slotRandomConnectStatus( ERandomConnectStatus eHostStatus, QString strMsg );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
 
     //=== vars ===//
     Ui::AppletRandomConnectUi	ui;

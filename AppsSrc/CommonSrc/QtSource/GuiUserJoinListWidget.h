@@ -52,7 +52,7 @@ class GuiUserJoinListWidget : public QListWidget, public GuiUserUpdateCallback
 	Q_OBJECT
 
 public:
-	GuiUserJoinListWidget( QWidget * parent );
+	GuiUserJoinListWidget( QWidget* parent );
     virtual ~GuiUserJoinListWidget();
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }

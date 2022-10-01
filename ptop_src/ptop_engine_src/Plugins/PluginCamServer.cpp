@@ -74,7 +74,7 @@ void PluginCamServer::callbackVideoJpgSmall( void * /*userData*/, VxGUID& feedId
 }
 
 //============================================================================
-void PluginCamServer::sendVidPkt( VxPktHdr * vidPkt, bool requiresAck )
+void PluginCamServer::sendVidPkt( VxPktHdr* vidPkt, bool requiresAck )
 {
 	if( m_PluginSessionMgr.getSessionCount() )
 	{
@@ -689,7 +689,7 @@ void PluginCamServer::onContactWentOffline( VxNetIdent* netIdent, VxSktBase* skt
 //============================================================================
 void PluginCamServer::onNetworkConnectionReady( bool requiresRelay )
 {
-	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
+	if( isPluginEnabled() )
 	{
 		// automatically start web cam on startup if enabled
 		enableCamServerService( true );

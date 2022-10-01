@@ -46,7 +46,7 @@ namespace
 }
 
 //============================================================================
-AppletInviteCreate::AppletInviteCreate( AppCommon& app, QWidget * parent )
+AppletInviteCreate::AppletInviteCreate( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_INVITE_CREATE, app, parent )
 {
     setAppletType( eAppletInviteCreate );

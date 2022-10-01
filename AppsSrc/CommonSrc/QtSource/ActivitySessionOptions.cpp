@@ -24,7 +24,7 @@
 //============================================================================
 ActivitySessionOptions::ActivitySessionOptions(	AppCommon&			app,
 												VxNetIdent *			netIdent, 
-												QWidget *				parent )
+												QWidget*				parent )
 : ActivityBase( OBJNAME_ACTIVITY_SESSION_OPTIONS, app, parent )
 {
 	Q_UNUSED( netIdent )
@@ -35,7 +35,7 @@ ActivitySessionOptions::ActivitySessionOptions(	AppCommon&			app,
 //============================================================================
 ActivitySessionOptions::ActivitySessionOptions(	AppCommon&				app,
 												GuiOfferSession *		poOffer, 
-												QWidget *				parent )
+												QWidget*				parent )
 : ActivityBase( OBJNAME_ACTIVITY_SESSION_OPTIONS, app, parent )
 {
 	Q_UNUSED( poOffer )

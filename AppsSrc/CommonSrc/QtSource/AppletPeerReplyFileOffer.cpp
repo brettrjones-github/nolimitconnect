@@ -19,7 +19,7 @@
 
 //============================================================================
 AppletPeerReplyFileOffer::AppletPeerReplyFileOffer(	AppCommon& app, 
-												    QWidget * parent )
+												    QWidget* parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_REPLY_FILE_OFFER, app, parent )
 {
     setPluginType( ePluginTypePersonFileXfer );

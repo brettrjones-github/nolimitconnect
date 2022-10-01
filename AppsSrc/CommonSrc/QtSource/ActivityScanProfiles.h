@@ -63,7 +63,7 @@ class ActivityScanProfiles : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityScanProfiles(	AppCommon& app, 
-							QWidget *		parent = NULL );
+							QWidget*		parent = NULL );
 	virtual ~ActivityScanProfiles() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
@@ -92,8 +92,8 @@ protected slots:
 	void						slotFriendMenuClicked( void );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
 	void						startStopScan( bool startScan );
 	void						startCountdown();

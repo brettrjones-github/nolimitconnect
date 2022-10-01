@@ -21,7 +21,7 @@
 #include <QMessageBox>
 
 //============================================================================
-ActivityChooseTestWebsiteUrl::ActivityChooseTestWebsiteUrl(	AppCommon& app, QWidget * parent )
+ActivityChooseTestWebsiteUrl::ActivityChooseTestWebsiteUrl(	AppCommon& app, QWidget* parent )
 : ActivityBase(  OBJNAME_ACTIVITY_CHOOSE_TEST_WEBSITE_URL, app, parent )
 , m_MyApp( app )
 , m_Engine( app.getEngine() )

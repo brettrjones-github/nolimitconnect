@@ -26,7 +26,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-GuiHostedListWidget::GuiHostedListWidget( QWidget * parent )
+GuiHostedListWidget::GuiHostedListWidget( QWidget* parent )
 : ListWidgetBase( parent )
 {
 	// QListWidget::setSortingEnabled( true );

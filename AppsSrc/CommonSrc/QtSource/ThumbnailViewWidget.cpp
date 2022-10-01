@@ -34,7 +34,7 @@
 #include <QResizeEvent>
 
 //============================================================================
-ThumbnailViewWidget::ThumbnailViewWidget( QWidget * parent )
+ThumbnailViewWidget::ThumbnailViewWidget( QWidget* parent )
     : QLabel( parent )
     , m_MyApp( GetAppInstance() )
 {

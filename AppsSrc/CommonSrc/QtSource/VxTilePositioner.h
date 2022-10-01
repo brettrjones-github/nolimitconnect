@@ -26,7 +26,7 @@ public:
 	VxTilePositioner( AppCommon& myApp );
     virtual ~VxTilePositioner() = default;
 
-	static void					repositionTiles( QVector<VxWidgetBase *>& widgetList, QWidget * parentWindow, int padding = 5 );
+	static void					repositionTiles( QVector<VxWidgetBase *>& widgetList, QWidget* parentWindow, int padding = 5 );
 
 protected:
 	AppCommon&					m_MyApp;

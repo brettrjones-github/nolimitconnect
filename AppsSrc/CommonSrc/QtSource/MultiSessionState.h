@@ -64,9 +64,9 @@ public:
 	MultiSessionState( AppCommon& myApp, AppletMultiMessenger& activityToFriendMultiSession, EMSessionType sessionType );
 
 	void						setGuiWidgets(	GuiUser *		    hisIdent,
-												QFrame * 			offersLayout,
-												QFrame * 			responseLayout,
-												QFrame * 			hangupLayout,
+												QFrame* 			offersLayout,
+												QFrame* 			responseLayout,
+												QFrame* 			hangupLayout,
 												VxPushButton *		sessionOfferButton,
 												VxPushButton *		acceptSessionButton,
 												QLabel *			acceptSessionText,
@@ -103,9 +103,9 @@ protected:
 
     GuiUser *				    m_HisIdent;
 
-	QFrame * 					m_OffersLayout;
-	QFrame * 					m_ResponseLayout;
-	QFrame * 					m_HangupLayout;
+	QFrame* 					m_OffersLayout;
+	QFrame* 					m_ResponseLayout;
+	QFrame* 					m_HangupLayout;
 
 	VxPushButton *				m_SessionOfferButton;
 

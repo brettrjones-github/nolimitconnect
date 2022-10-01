@@ -22,14 +22,14 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AssetVideoWidget::AssetVideoWidget( QWidget * parent )
+AssetVideoWidget::AssetVideoWidget( QWidget* parent )
 	: AssetBaseWidget( GetAppInstance(), parent )
 {
 	initAssetVideoWidget();
 }
 
 //============================================================================
-AssetVideoWidget::AssetVideoWidget( AppCommon& appCommon, QWidget * parent )
+AssetVideoWidget::AssetVideoWidget( AppCommon& appCommon, QWidget* parent )
 	: AssetBaseWidget( appCommon, parent )
 {
 	initAssetVideoWidget();
@@ -111,7 +111,7 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-void AssetVideoWidget::resizeEvent( QResizeEvent * ev )
+void AssetVideoWidget::resizeEvent( QResizeEvent* ev )
 {
 	AssetBaseWidget::resizeEvent( ev );
 	if( ( false == VxIsAppShuttingDown() )

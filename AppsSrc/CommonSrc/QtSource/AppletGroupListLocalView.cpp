@@ -32,7 +32,7 @@ namespace
 
 //============================================================================
 AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app, 
-												    QWidget *			parent )
+												    QWidget*			parent )
 : AppletClientBase( OBJNAME_APPLET_GROUP_LIST_LOCAL_VIEW, app, parent )
 , m_CloseAppletTimer( new QTimer( this ) )
 {
@@ -102,14 +102,14 @@ void AppletGroupListLocalView::setInfoLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletGroupListLocalView::showEvent( QShowEvent * ev )
+void AppletGroupListLocalView::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletGroupListLocalView::hideEvent( QHideEvent * ev )
+void AppletGroupListLocalView::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

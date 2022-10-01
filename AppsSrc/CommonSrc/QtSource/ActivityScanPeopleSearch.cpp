@@ -29,7 +29,7 @@
 //============================================================================
 ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		    app, 
 													EScanType			eSearchType,
-													QWidget *			parent )
+													QWidget*			parent )
 : ActivityBase( OBJNAME_ACTIVITY_PEOPLE_SEARCH, app, parent, eAppletSearchPersons, true )
 , m_eScanType( eSearchType )
 {
@@ -98,14 +98,14 @@ void ActivityScanPeopleSearch::toGuiClientScanSearchComplete( EScanType eScanTyp
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::showEvent( QShowEvent * ev )
+void ActivityScanPeopleSearch::showEvent( QShowEvent* ev )
 {
 	ActivityBase::showEvent( ev );
 	m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::hideEvent( QHideEvent * ev )
+void ActivityScanPeopleSearch::hideEvent( QHideEvent* ev )
 {
 	m_MyApp.wantToGuiActivityCallbacks( this, false );
 	ActivityBase::hideEvent( ev );

@@ -28,7 +28,7 @@ class IVxSktWaitingCallback
 public:
 	virtual	void					onSktWaitExpired(	VxSktBase *		sktBase, 
 														uint32_t				u32WaitReason, 
-														VxPktHdr *		poPkt,
+														VxPktHdr*		poPkt,
 														void *			pvWaitInstance,
 														bool			bConnectionLost ) = 0;
 };
@@ -37,14 +37,14 @@ class VxSktWaitReason
 {
 public:
 	VxSktWaitReason();
-	VxSktWaitReason( VxSktBase* sktBase, uint32_t waitReason, uint64_t timeExpiresSysTimeMs, VxPktHdr * poPkt, void * pvWaitInstance );
+	VxSktWaitReason( VxSktBase* sktBase, uint32_t waitReason, uint64_t timeExpiresSysTimeMs, VxPktHdr* poPkt, void * pvWaitInstance );
 	VxSktWaitReason( const VxSktWaitReason& rhs );
 	virtual ~VxSktWaitReason();
 
 	VxSktWaitReason& operator =( const VxSktWaitReason& rhs );
 
 	VxSktBase *				m_Skt;
-	VxPktHdr *				m_Pkt;
+	VxPktHdr*				m_Pkt;
 	uint64_t						m_u64TimeExpires; 
 	uint32_t						m_u32WaitReason;
 	void *					m_pvWaitInstance;
@@ -64,7 +64,7 @@ public:
 	virtual void				addWaiting(		VxSktBase *		sktBase, 
 												uint32_t				u32WaitReason, 
 												uint64_t				u64TimeExpiresSysTimeMs, 
-												VxPktHdr *		poPkt = 0, 
+												VxPktHdr*		poPkt = 0, 
 												void *			pvWaitInstance = 0 );		
 	virtual void				removeWaiting( VxSktBase* sktBase, uint32_t waitReason, void * pvWaitInstance = 0 );		
 	virtual void				clearAllWaiting( void );

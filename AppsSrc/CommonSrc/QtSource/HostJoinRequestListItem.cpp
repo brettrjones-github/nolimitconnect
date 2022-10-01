@@ -18,7 +18,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-HostJoinRequestListItem::HostJoinRequestListItem(QWidget *parent  )
+HostJoinRequestListItem::HostJoinRequestListItem(QWidget*parent  )
 : IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {

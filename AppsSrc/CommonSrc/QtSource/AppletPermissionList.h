@@ -25,7 +25,7 @@ class AppletPermissionList : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletPermissionList( AppCommon& app, QWidget * parent );
+	AppletPermissionList( AppCommon& app, QWidget* parent );
 	virtual ~AppletPermissionList();
 
 protected:

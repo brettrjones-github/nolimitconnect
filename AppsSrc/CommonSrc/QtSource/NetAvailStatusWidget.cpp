@@ -22,7 +22,7 @@
 #include <QPainter>
 
 //============================================================================
-NetAvailStatusWidget::NetAvailStatusWidget( QWidget * parent )
+NetAvailStatusWidget::NetAvailStatusWidget( QWidget* parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_NotAvailColor( COLOR_GREY_MEDIUM )
@@ -60,7 +60,7 @@ void NetAvailStatusWidget::paintEvent( QPaintEvent* ev )
 }
 
 //============================================================================
-void NetAvailStatusWidget::resizeEvent( QResizeEvent * ev )
+void NetAvailStatusWidget::resizeEvent( QResizeEvent* ev )
 {
     QWidget::resizeEvent( ev );
     update();

@@ -52,10 +52,10 @@ public:
 
 	virtual bool				txPacket(	VxSktBase *			sktBase,
 											const VxGUID&		destOnlineId,			    // online id of destination user
-											VxPktHdr *			pktHdr, 				    // packet to send
+											VxPktHdr*			pktHdr, 				    // packet to send
 											bool				bDisconnect = false );	    // if true disconnect after send
 	virtual bool				txPacketWithDestId(	VxSktBase *		sktBase,
-													VxPktHdr *		pktHdr, 				// packet to send
+													VxPktHdr*		pktHdr, 				// packet to send
 													bool			bDisconnect = false );	// if true disconnect after send
 
     virtual void                dumpSocketStats( const char *reason = nullptr, bool fullDump = false ) override;

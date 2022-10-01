@@ -19,7 +19,7 @@ class AppletTestBase : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletTestBase( const char* ObjName, AppCommon& app, QWidget * parent );
+	AppletTestBase( const char* ObjName, AppCommon& app, QWidget* parent );
 	virtual ~AppletTestBase();
 
 protected:

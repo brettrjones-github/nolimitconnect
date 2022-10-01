@@ -193,7 +193,7 @@ void PluginBase::onSessionStart( PluginSessionBase * poSession, bool pluginIsLoc
 }
 
 //============================================================================
-bool PluginBase::txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend )
+bool PluginBase::txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr* poPkt, bool bDisconnectAfterSend )
 {
 	if( nullptr == sktBase )
 	{
@@ -205,7 +205,7 @@ bool PluginBase::txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr * 
 }
 
 //============================================================================
-bool PluginBase::txPacket( const VxGUID& onlineId, VxSktBase* sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend, EPluginType overridePlugin )
+bool PluginBase::txPacket( const VxGUID& onlineId, VxSktBase* sktBase, VxPktHdr* poPkt, bool bDisconnectAfterSend, EPluginType overridePlugin )
 {
     if( nullptr == sktBase )
     {

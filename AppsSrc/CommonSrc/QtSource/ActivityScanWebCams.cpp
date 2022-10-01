@@ -29,7 +29,7 @@ namespace
 
 //============================================================================
 ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app, 
-											QWidget *		parent )
+											QWidget*		parent )
 : ActivityBase( OBJNAME_ACTIVITY_SCAN_WEB_CAMS, app, parent, eAppletScanWebCam, true ) //Qt::Popup ) //
 , m_HisIdent( NULL )
 , m_iCountdownCnt( 0 )
@@ -87,14 +87,14 @@ void ActivityScanWebCams::setScanStatusText( QString strMsg )
 }
 
 //============================================================================
-void ActivityScanWebCams::showEvent( QShowEvent * ev )
+void ActivityScanWebCams::showEvent( QShowEvent* ev )
 {
 	// don't call AppletPeerBase::showEvent ... we don't want plugin offer/response for web cam server or client
 	ActivityBase::showEvent( ev );
 }
 
 //============================================================================
-void ActivityScanWebCams::hideEvent( QHideEvent * ev )
+void ActivityScanWebCams::hideEvent( QHideEvent* ev )
 {
 	// don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
 	ActivityBase::hideEvent( ev );

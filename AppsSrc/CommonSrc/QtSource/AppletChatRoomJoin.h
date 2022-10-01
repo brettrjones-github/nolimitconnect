@@ -23,7 +23,7 @@ class AppletChatRoomJoin : public AppletClientBase, public GuiHostedListCallback
 {
 	Q_OBJECT
 public:
-    AppletChatRoomJoin( AppCommon& app, QWidget * parent );
+    AppletChatRoomJoin( AppCommon& app, QWidget* parent );
 	virtual ~AppletChatRoomJoin();
 
     void                        infoMsg( const char * infoMsg, ... );

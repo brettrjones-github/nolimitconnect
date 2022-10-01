@@ -33,7 +33,7 @@ class TodGameLogic : public QWidget
 	Q_OBJECT
 
 public:
-	TodGameLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget * parent );
+	TodGameLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget* parent );
 
 	void						setGuiWidgets(	GuiUser *	hisIdent,
 												TodGameWidget *	todGameWidget );

@@ -23,7 +23,7 @@ class AppletRandomConnectJoin : public AppletClientBase, public GuiHostedListCal
 {
 	Q_OBJECT
 public:
-    AppletRandomConnectJoin( AppCommon& app, QWidget * parent );
+    AppletRandomConnectJoin( AppCommon& app, QWidget* parent );
 	virtual ~AppletRandomConnectJoin();
 
     void                        infoMsg( const char * infoMsg, ... );

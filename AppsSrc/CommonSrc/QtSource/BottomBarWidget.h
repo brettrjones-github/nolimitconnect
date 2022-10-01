@@ -29,7 +29,7 @@ class BottomBarWidget : public QWidget
 	Q_OBJECT
 
 public:
-	BottomBarWidget( QWidget * parent = 0 );
+	BottomBarWidget( QWidget* parent = 0 );
 	virtual ~BottomBarWidget();
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }

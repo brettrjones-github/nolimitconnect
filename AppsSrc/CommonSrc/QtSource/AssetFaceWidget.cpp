@@ -21,14 +21,14 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-AssetFaceWidget::AssetFaceWidget( QWidget * parent )
+AssetFaceWidget::AssetFaceWidget( QWidget* parent )
 	: AssetBaseWidget( GetAppInstance(), parent )
 {
 	initAssetFaceWidget();
 }
 
 //============================================================================
-AssetFaceWidget::AssetFaceWidget( AppCommon& appCommon, QWidget * parent )
+AssetFaceWidget::AssetFaceWidget( AppCommon& appCommon, QWidget* parent )
 : AssetBaseWidget( appCommon, parent )
 {
 	initAssetFaceWidget();

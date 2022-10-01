@@ -53,7 +53,7 @@ public:
 	class AutoPluginLock
 	{
 	public:
-		AutoPluginLock( PluginBase * pluginBase ) 
+		AutoPluginLock( PluginBase* pluginBase ) 
 		: m_Mutex(pluginBase->getPluginMutex())	
 		{ 
 			m_Mutex.lock(); 
@@ -182,6 +182,9 @@ public:
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) { return false; }
 
+	virtual bool				fromGuiDownloadFileList( VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes = 0 ) { return false; }
+	virtual bool				fromGuiDownloadFileListCancel( VxGUID& onlineId, VxGUID& sessionId ) { return false; }
+
 	virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
 														EPluginType		ePluginType,			// plugin type
 														const char*		pOfferMsg,				// offer message
@@ -226,8 +229,8 @@ public:
 	virtual void				onConnectionLost( VxSktBase* sktBase ) = 0;
 	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
 
-    bool						txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false ) override;
-    bool						txPacket( const VxGUID& onlineId, VxSktBase* sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
+    bool						txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr* poPkt, bool bDisconnectAfterSend = false ) override;
+    bool						txPacket( const VxGUID& onlineId, VxSktBase* sktBase, VxPktHdr* poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
 
     //=== maintenence ===//
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )									{};

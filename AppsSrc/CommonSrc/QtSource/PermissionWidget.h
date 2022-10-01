@@ -22,7 +22,7 @@ class PermissionWidget : public QWidget
 	Q_OBJECT
 
 public:
-    PermissionWidget( QWidget * parent = 0 );
+    PermissionWidget( QWidget* parent = 0 );
 
     void						setPluginType( EPluginType pluginType, int subType = 0 );
     EPluginType					getPluginType( void )           { return m_PluginType; }

@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-GuiHostedListItem::GuiHostedListItem( EHostType hostType, QWidget *parent  )
+GuiHostedListItem::GuiHostedListItem( EHostType hostType, QWidget*parent  )
 : IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 , m_HostType( hostType )

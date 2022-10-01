@@ -23,7 +23,7 @@
 #include <CoreLib/VxTime.h>
 
 //============================================================================
-AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * parent )
+AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget* parent )
 : AppletSettingsHostBase( OBJNAME_APPLET_SETTINGS_HOST_NETWORK, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );

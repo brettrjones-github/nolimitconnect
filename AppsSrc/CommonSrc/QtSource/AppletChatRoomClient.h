@@ -21,7 +21,7 @@ class AppletChatRoomClient : public AppletClientBase
 {
 	Q_OBJECT
 public:
-    AppletChatRoomClient( AppCommon& app, QWidget * parent );
+    AppletChatRoomClient( AppCommon& app, QWidget* parent );
 	virtual ~AppletChatRoomClient() override;
 
 protected:

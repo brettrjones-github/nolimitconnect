@@ -398,8 +398,12 @@ public:
     virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList ) override;
     virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) override;
     virtual bool				fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll ) override;
+
     virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
     virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) override;
+
+    virtual bool				fromGuiDownloadFileList( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes = 0 ) override;
+    virtual bool				fromGuiDownloadFileListCancel( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent ) override;
 

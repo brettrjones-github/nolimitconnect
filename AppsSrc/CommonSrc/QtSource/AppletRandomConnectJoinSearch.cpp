@@ -32,7 +32,7 @@ namespace
 
 //============================================================================
 AppletRandomConnectJoinSearch::AppletRandomConnectJoinSearch(	AppCommon&		    app, 
-												                QWidget *			parent )
+												                QWidget*			parent )
 : AppletClientBase( OBJNAME_APPLET_RANDOM_CONNECT_JOIN_SEARCH, app, parent )
 {
     setAppletType( eAppletRandomConnectJoinSearch );
@@ -93,14 +93,14 @@ void AppletRandomConnectJoinSearch::setInfoLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::showEvent( QShowEvent * ev )
+void AppletRandomConnectJoinSearch::showEvent( QShowEvent* ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, true );
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::hideEvent( QHideEvent * ev )
+void AppletRandomConnectJoinSearch::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, false );
     ActivityBase::hideEvent( ev );

@@ -27,7 +27,7 @@
 #include <time.h>
 
 //============================================================================
-InputPhotoWidget::InputPhotoWidget( QWidget * parent )
+InputPhotoWidget::InputPhotoWidget( QWidget* parent )
 : InputBaseWidget( GetAppInstance(), parent )
 {
 	m_AssetInfo.setAssetType( eAssetTypePhoto );
@@ -124,7 +124,7 @@ void InputPhotoWidget::slotCancelPhotoButtonClicked( void )
 }
 
 //============================================================================
-void InputPhotoWidget::hideEvent(QHideEvent * hideEvent)
+void InputPhotoWidget::hideEvent(QHideEvent* hideEvent)
 {
 	InputBaseWidget::hideEvent(hideEvent);
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )
@@ -134,7 +134,7 @@ void InputPhotoWidget::hideEvent(QHideEvent * hideEvent)
 }
 
 //============================================================================
-void InputPhotoWidget::showEvent(QShowEvent * showEvent)
+void InputPhotoWidget::showEvent(QShowEvent* showEvent)
 {
 	InputBaseWidget::showEvent(showEvent);
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )

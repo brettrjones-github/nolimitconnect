@@ -28,7 +28,7 @@ class AppletGroupJoin : public AppletJoinBase, public GuiUserUpdateCallback, pub
 {
 	Q_OBJECT
 public:
-    AppletGroupJoin( AppCommon& app, QWidget * parent );
+    AppletGroupJoin( AppCommon& app, QWidget* parent );
 	virtual ~AppletGroupJoin();
 
     virtual void                setStatusMsg( QString statusMsg );

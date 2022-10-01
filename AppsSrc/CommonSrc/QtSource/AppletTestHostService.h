@@ -20,7 +20,7 @@ class AppletTestHostService : public AppletTestBase
 {
 	Q_OBJECT
 public:
-    AppletTestHostService( AppCommon& app, QWidget * parent );
+    AppletTestHostService( AppCommon& app, QWidget* parent );
 	virtual ~AppletTestHostService();
 
 protected:

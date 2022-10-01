@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletPersonalRecorder::AppletPersonalRecorder( AppCommon& app, QWidget * parent )
+AppletPersonalRecorder::AppletPersonalRecorder( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_PERSONAL_RECORDER, app, parent )
 {
     setAppletType( eAppletPersonalRecorder );

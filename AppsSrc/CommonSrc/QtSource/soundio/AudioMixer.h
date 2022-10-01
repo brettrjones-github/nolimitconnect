@@ -39,7 +39,7 @@ class AudioMixer : public QWidget, public AudioMixerInterface
 {
     Q_OBJECT
 public:
-    explicit AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent );
+    explicit AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget* parent );
 
     void                        shutdownAudioMixer( void );
     void                        resetMixer( void );

@@ -24,7 +24,7 @@
 #include <stdarg.h>
 
 //============================================================================
-ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent )
+ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, false, true )
 , m_OkButtonClicked( false )
 {
@@ -39,7 +39,7 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, const char * msgFormat, ... )
+ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget* parent, int infoLevel, const char * msgFormat, ... )
 : ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, true )
 , m_OkButtonClicked( false )
 {
@@ -70,7 +70,7 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int in
 }
 
 //============================================================================
-ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, QString msg )
+ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget* parent, int infoLevel, QString msg )
 : ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, true )
 , m_OkButtonClicked( false )
 {

@@ -38,7 +38,7 @@ class TitleBarWidget : public QWidget, public ToGuiActivityInterface, public ToG
 	Q_OBJECT
 
 public:
-	TitleBarWidget( QWidget * parent = 0 );
+	TitleBarWidget( QWidget* parent = 0 );
 	virtual ~TitleBarWidget() = default;
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
@@ -144,8 +144,8 @@ public slots:
 protected:
 	QWidget*					getTitleBarParentFrame( void );
 	QWidget*					getTitleBarParentPage( void );
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 	void						resizeEvent( QResizeEvent* ev ) override;
 
 	void						checkTitleBarIconsFit( void );

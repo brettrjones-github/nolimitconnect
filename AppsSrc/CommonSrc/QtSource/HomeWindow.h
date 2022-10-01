@@ -37,14 +37,14 @@ public:
     void                        saveHomeWindowGeometry( void );
 
 	void						launchApplet( EApplet applet );
-	void						switchWindowFocus( QWidget * appIconButton );
+	void						switchWindowFocus( QWidget* appIconButton );
 
     void						setIsMaxScreenSize( bool isMessagerFrame, bool isFullSizeWindow );
     bool						getIsMaxScreenSize( bool isMessagerFrame );
 
-	QFrame *					getAppletFrame( EApplet applet );
-	QFrame *					getMessengerParentFrame( void );
-    QFrame *					getLaunchPageFrame( void );
+	QFrame*					getAppletFrame( EApplet applet );
+	QFrame*					getMessengerParentFrame( void );
+    QFrame*					getLaunchPageFrame( void );
 
     AppletLaunchPage *          getLaunchPage( void ) { return m_AppletLaunchPage; }
 
@@ -63,8 +63,8 @@ private slots:
     void                        reject() override;
 
 protected:
-    void                        showEvent( QShowEvent * ev ) override;
-    void						resizeEvent( QResizeEvent * ) override;
+    void                        showEvent( QShowEvent* ev ) override;
+    void						resizeEvent( QResizeEvent* ) override;
     void						moveEvent( QMoveEvent * ) override;
     void						closeEvent( QCloseEvent * ) override;
 
@@ -84,13 +84,13 @@ protected:
     Qt::Orientation				m_Orientation;
 	EHomeLayout					m_LastHomeLayout;
     QGridLayout *				m_MainLayout{nullptr};
-    VxFrame *					m_HomeFrameUpperLeft{nullptr};
-    VxFrame *					m_HomeFrameRight{nullptr};
-    VxFrame *					m_HomeFrameBottom{nullptr};
+    VxFrame*					m_HomeFrameUpperLeft{nullptr};
+    VxFrame*					m_HomeFrameRight{nullptr};
+    VxFrame*					m_HomeFrameBottom{nullptr};
 
     PageMediaPlayer *			m_MediaPlayerPage{nullptr};
     AppletLaunchPage *			m_AppletLaunchPage{nullptr};
-    QWidget *					m_MessengerParent{nullptr};
+    QWidget*					m_MessengerParent{nullptr};
     MessengerPage *				m_MessengerPage{nullptr};
     AppletMultiMessenger*       m_AppletMultiMessenger{ nullptr };
 
@@ -99,7 +99,7 @@ protected:
 
 	//=== demo mode vars ===//
     QGroupBox *					rotableGroupBox{nullptr};
-    QQueue<QWidget *>			rotableWidgets;
+    QQueue<QWidget*>			rotableWidgets;
 
     QGroupBox *					optionsGroupBox{nullptr};
     QLabel *					buttonsOrientationLabel{nullptr};

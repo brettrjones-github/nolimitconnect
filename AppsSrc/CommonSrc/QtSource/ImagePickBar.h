@@ -28,7 +28,7 @@ class ImagePickBar : public QWidget
     Q_OBJECT
 
 public:
-    ImagePickBar( QWidget * parent = 0 );
+    ImagePickBar( QWidget* parent = 0 );
     virtual ~ImagePickBar(){};
 
 

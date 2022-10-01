@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-SearchParamsWidget::SearchParamsWidget( QWidget * parent )
+SearchParamsWidget::SearchParamsWidget( QWidget* parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

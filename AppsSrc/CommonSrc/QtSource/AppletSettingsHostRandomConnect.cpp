@@ -23,7 +23,7 @@
 #include <CoreLib/VxTime.h>
 
 //============================================================================
-AppletSettingsHostRandomConnect::AppletSettingsHostRandomConnect( AppCommon& app, QWidget * parent )
+AppletSettingsHostRandomConnect::AppletSettingsHostRandomConnect( AppCommon& app, QWidget* parent )
 : AppletSettingsHostBase( OBJNAME_APPLET_SETTINGS_HOST_RANDOM_CONNECT, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );

@@ -219,7 +219,7 @@ VxPktHdr* VxPktHdr::makeCopy( void )
 {
     uint8_t * pu8Copy = new uint8_t[ getPktLength() ];
     memcpy( pu8Copy, this, getPktLength() );
-    return (VxPktHdr *)pu8Copy;
+    return (VxPktHdr*)pu8Copy;
 }
 
 //============================================================================

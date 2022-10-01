@@ -23,7 +23,7 @@
 #include <CoreLib/VxTime.h>
 
 //============================================================================
-AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget * parent )
+AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget* parent )
     : AppletSettingsHostBase( OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );

@@ -25,7 +25,7 @@ class ChatEntryWidget : public QWidget
     Q_OBJECT
 
 public:
-    ChatEntryWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
+    ChatEntryWidget( QWidget*parent = 0, EAssetType inputMode = eAssetTypeUnknown );
 	virtual ~ChatEntryWidget() = default;
 
 	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );

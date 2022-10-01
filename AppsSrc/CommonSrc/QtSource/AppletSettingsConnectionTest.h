@@ -20,7 +20,7 @@ class AppletSettingsConnectionTest : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsConnectionTest( AppCommon& app, QWidget * parent );
+    AppletSettingsConnectionTest( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsConnectionTest() override;
 
 protected:

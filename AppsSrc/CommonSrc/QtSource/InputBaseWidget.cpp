@@ -26,7 +26,7 @@
 #include <QTimer>
 
 //============================================================================
-InputBaseWidget::InputBaseWidget( AppCommon& app, QWidget * parent )
+InputBaseWidget::InputBaseWidget( AppCommon& app, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( app )
 , m_ChatEntryWidget( (ChatEntryWidget *)parent )

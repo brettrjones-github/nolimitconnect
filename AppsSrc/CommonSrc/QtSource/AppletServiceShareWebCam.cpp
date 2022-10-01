@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletServiceShareWebCam::AppletServiceShareWebCam( AppCommon& app, QWidget * parent )
+AppletServiceShareWebCam::AppletServiceShareWebCam( AppCommon& app, QWidget* parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_WEB_CAM, app, parent )
 {
     setupServiceBaseApplet( eAppletServiceShareWebCam, ePluginTypeCamServer );

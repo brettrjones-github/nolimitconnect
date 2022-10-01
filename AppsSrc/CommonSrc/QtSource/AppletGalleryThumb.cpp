@@ -37,7 +37,7 @@
 #include <QResizeEvent>
 
 //============================================================================
-AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
+AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_GALLERY_THUMB, app, parent )
 , m_ThumbMgr( app.getEngine().getThumbMgr() )
 {
@@ -58,7 +58,7 @@ AppletGalleryThumb::~AppletGalleryThumb()
 }
 
 //============================================================================
-void AppletGalleryThumb::resizeEvent( QResizeEvent * ev )
+void AppletGalleryThumb::resizeEvent( QResizeEvent* ev )
 {
     AppletBase::resizeEvent( ev );
     //LogMsg( LOG_DEBUG, "AppletGalleryThumb Resize w %d h %d\n", ev->size().width(), ev->size().height() );
@@ -70,7 +70,7 @@ void AppletGalleryThumb::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AppletGalleryThumb::showEvent( QShowEvent * ev )
+void AppletGalleryThumb::showEvent( QShowEvent* ev )
 {
     //LogMsg( LOG_DEBUG, "AppletGalleryThumb show event\n" );
     m_isShown = true;

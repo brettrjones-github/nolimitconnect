@@ -18,7 +18,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-AcceptCancelWidget::AcceptCancelWidget( QWidget *parent )
+AcceptCancelWidget::AcceptCancelWidget( QWidget*parent )
 : QFrame( parent )
 {
 	ui.setupUi( this );

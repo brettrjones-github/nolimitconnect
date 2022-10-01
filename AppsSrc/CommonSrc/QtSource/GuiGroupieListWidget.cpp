@@ -25,7 +25,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-GuiGroupieListWidget::GuiGroupieListWidget( QWidget * parent )
+GuiGroupieListWidget::GuiGroupieListWidget( QWidget* parent )
 : ListWidgetBase( parent )
 {
 	// QListWidget::setSortingEnabled( true );

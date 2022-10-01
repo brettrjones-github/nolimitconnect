@@ -27,7 +27,7 @@ namespace
 }
 
 //============================================================================
-LogWidget::LogWidget( QWidget * parent )
+LogWidget::LogWidget( QWidget* parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

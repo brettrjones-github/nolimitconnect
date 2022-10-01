@@ -33,7 +33,7 @@ class ActivityViewLibraryFiles : public ActivityBase, public ToGuiFileXferInterf
 {
 	Q_OBJECT
 public:
-	ActivityViewLibraryFiles( AppCommon& app, QWidget * parent = NULL, bool isSelectAFileMode = false );
+	ActivityViewLibraryFiles( AppCommon& app, QWidget* parent = NULL, bool isSelectAFileMode = false );
 	virtual ~ActivityViewLibraryFiles() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
@@ -67,8 +67,8 @@ private slots:
 	void						slotListShredIconClicked( QListWidgetItem * item );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
     virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
 	FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );

@@ -35,7 +35,7 @@ namespace
 }
 
 //============================================================================
-AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
+AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_NETWORK_SETTINGS, app, parent )
 , m_UpdateTimer( new QTimer(this) )
 {

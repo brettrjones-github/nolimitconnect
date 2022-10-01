@@ -530,7 +530,7 @@ bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
 //============================================================================
 bool NetConnector::txPacket(	VxGUID&				destinationId, 
 								VxSktBase *			sktBase, 
-								VxPktHdr *			poPkt )
+								VxPktHdr*			poPkt )
 {
 	bool bSendSuccess = false;
 	poPkt->setSrcOnlineId( m_PktAnn.getMyOnlineId() );

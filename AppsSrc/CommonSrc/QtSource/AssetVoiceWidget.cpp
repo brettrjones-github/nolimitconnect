@@ -20,7 +20,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-AssetVoiceWidget::AssetVoiceWidget( QWidget * parent )
+AssetVoiceWidget::AssetVoiceWidget( QWidget* parent )
 	: AssetBaseWidget( GetAppInstance(), parent )
 	, m_ActivityCallbacksEnabled( false )
 	, m_IsPlaying( false )
@@ -30,7 +30,7 @@ AssetVoiceWidget::AssetVoiceWidget( QWidget * parent )
 }
 
 //============================================================================
-AssetVoiceWidget::AssetVoiceWidget( AppCommon& appCommon, QWidget * parent )
+AssetVoiceWidget::AssetVoiceWidget( AppCommon& appCommon, QWidget* parent )
 : AssetBaseWidget( appCommon, parent )
 , m_ActivityCallbacksEnabled( false )
 , m_IsPlaying( false )

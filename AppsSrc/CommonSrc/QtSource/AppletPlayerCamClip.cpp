@@ -40,7 +40,7 @@
 #include <QTimer>
 
 //============================================================================
-AppletPlayerCamClip::AppletPlayerCamClip( AppCommon& app, QWidget * parent, VxGUID assetId )
+AppletPlayerCamClip::AppletPlayerCamClip( AppCommon& app, QWidget* parent, VxGUID assetId )
 : AppletAssetPlayerBase( OBJNAME_APPLET_CAM_CLIP_PLAYER, app, parent )
 {
     setAppletType( eAppletPlayerCamClip );

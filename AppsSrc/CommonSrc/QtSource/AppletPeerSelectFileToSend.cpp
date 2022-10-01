@@ -32,7 +32,7 @@
 #include <QFileDialog>
 
 //============================================================================
-AppletPeerSelectFileToSend::AppletPeerSelectFileToSend(	AppCommon&	app, QWidget * parent )
+AppletPeerSelectFileToSend::AppletPeerSelectFileToSend(	AppCommon&	app, QWidget* parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_SELECT_FILE_TO_SEND, app, parent )
 {
     setPluginType( ePluginTypePersonFileXfer );

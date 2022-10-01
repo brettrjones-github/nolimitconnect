@@ -133,7 +133,7 @@ protected:
                                                     bool				requestSTUN );
     bool                        txPacket( VxGUID&				destinationId,
                                           VxSktBase *			sktBase,
-                                          VxPktHdr *			poPkt );
+                                          VxPktHdr*			poPkt );
 
     void                        handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );
     void                        closeConnection( enum ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo );

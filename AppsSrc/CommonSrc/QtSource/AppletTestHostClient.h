@@ -24,7 +24,7 @@ class AppletTestHostClient : public AppletTestBase, public GuiUserUpdateCallback
 {
 	Q_OBJECT
 public:
-    AppletTestHostClient( AppCommon& app, QWidget * parent );
+    AppletTestHostClient( AppCommon& app, QWidget* parent );
 	virtual ~AppletTestHostClient();
 
     virtual void				callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) override {};

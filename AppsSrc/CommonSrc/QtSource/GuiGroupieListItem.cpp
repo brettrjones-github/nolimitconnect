@@ -21,7 +21,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-GuiGroupieListItem::GuiGroupieListItem( QWidget *parent )
+GuiGroupieListItem::GuiGroupieListItem( QWidget*parent )
 : IdentWidget( parent )
 {
 }

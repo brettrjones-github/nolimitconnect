@@ -150,7 +150,7 @@
 #include "HomeWindow.h"
 
 //============================================================================
-AppletMgr::AppletMgr( AppCommon& myMpp, QWidget * parent )
+AppletMgr::AppletMgr( AppCommon& myMpp, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( myMpp )
 {
@@ -177,9 +177,9 @@ RenderGlWidget * AppletMgr::getRenderConsumer( void )
 }
 
 //============================================================================
-QWidget * AppletMgr::getActiveWindow( void )
+QWidget* AppletMgr::getActiveWindow( void )
 {
-	QWidget * activeWidget = QApplication::activeWindow();
+	QWidget* activeWidget = QApplication::activeWindow();
 	if( 0 == activeWidget )
 	{
 		activeWidget = &m_MyApp.getHomePage();
@@ -189,13 +189,13 @@ QWidget * AppletMgr::getActiveWindow( void )
 }
 
 //============================================================================
-QFrame * AppletMgr::getAppletFrame( EApplet applet )
+QFrame* AppletMgr::getAppletFrame( EApplet applet )
 {
 	return m_MyApp.getAppletFrame( applet );
 }
 
 //============================================================================
-ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QString launchParam, VxGUID assetId )
+ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget* parent, QString launchParam, VxGUID assetId )
 {
     // these are permanent applets
     if( eAppletMultiMessenger == applet )
@@ -247,8 +247,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, QStrin
 		parent = getActiveWindow();
 	}
 
-    QWidget * launchFrame = m_MyApp.getHomePage().getLaunchPageFrame();
-    // QWidget * messengerFrame = m_MyApp.getHomePage().getMessengerParentFrame();
+    QWidget* launchFrame = m_MyApp.getHomePage().getLaunchPageFrame();
+    // QWidget* messengerFrame = m_MyApp.getHomePage().getMessengerParentFrame();
 
 	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )

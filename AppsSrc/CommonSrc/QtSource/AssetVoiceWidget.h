@@ -22,8 +22,8 @@ class AssetVoiceWidget : public AssetBaseWidget
 	Q_OBJECT
 
 public:
-	AssetVoiceWidget( QWidget * parent = 0 );
-	AssetVoiceWidget( AppCommon& appCommon, QWidget * parent = 0 );
+	AssetVoiceWidget( QWidget* parent = 0 );
+	AssetVoiceWidget( AppCommon& appCommon, QWidget* parent = 0 );
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
     virtual void				onActivityStop( void ) override;

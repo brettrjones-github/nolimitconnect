@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * parent )
+AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget* parent )
     : AppletBase( OBJNAME_APPLET_HOST_NETWORK_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {

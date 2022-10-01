@@ -17,7 +17,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-AppletFileShareServerViewMine::AppletFileShareServerViewMine( AppCommon& app, QWidget * parent )
+AppletFileShareServerViewMine::AppletFileShareServerViewMine( AppCommon& app, QWidget* parent )
     : AppletFileShareClientView( app, parent )
 {
 }

@@ -32,8 +32,8 @@ class ActivityDownloadItemMenu : public ActivityBase
 
 public:
 	ActivityDownloadItemMenu(	AppCommon& app, 
-								GuiFileXferSession * poSession, 
-								QWidget * parent = NULL );
+								GuiFileXferSession* poSession, 
+								QWidget* parent = NULL );
 	virtual ~ActivityDownloadItemMenu() override = default;
 
 public slots:
@@ -46,7 +46,7 @@ protected:
 	//=== vars ===//
 	Ui::CancelDownloadDialog	ui;
 	EPluginType					m_ePluginType;
-	GuiFileXferSession *		m_Session;
+	GuiFileXferSession*		m_Session;
 	VxNetIdent *				m_Ident;
 };
 

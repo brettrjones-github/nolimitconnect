@@ -74,8 +74,8 @@ protected slots:
 	void						slotListShredIconClicked( QListWidgetItem * item );
 	
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
     virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
 	void						fromListWidgetRequestFileList( void );

@@ -31,7 +31,7 @@ class AssetBaseWidget : public QWidget, public QListWidgetItem, public ToGuiActi
 	Q_OBJECT
 
 public:
-	AssetBaseWidget( AppCommon& appCommon, QWidget *parent=0 );
+	AssetBaseWidget( AppCommon& appCommon, QWidget*parent=0 );
 	virtual ~AssetBaseWidget();
 
 	AppCommon&					getMyApp( void )								{ return m_MyApp; }
@@ -43,8 +43,8 @@ public:
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
     virtual AssetBaseInfo&		getAssetInfo( void )                            { return m_AssetInfo; }
-	virtual void				setXferBar( QProgressBar * xferProgressBar );
-	virtual QProgressBar *		getXferBar( void )								{ return m_XferProgressBar; }
+	virtual void				setXferBar( QProgressBar* xferProgressBar );
+	virtual QProgressBar*		getXferBar( void )								{ return m_XferProgressBar; }
 	virtual void				updateFromAssetInfo( void );
 
 	virtual void				toGuiClientAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
@@ -68,8 +68,8 @@ protected slots:
 	virtual void				slotAssetReadyForCallbacksTimeout( void );
 
 protected:
-	void						showEvent( QShowEvent * ev );
-	void						hideEvent( QHideEvent * ev );
+	void						showEvent( QShowEvent* ev );
+	void						hideEvent( QHideEvent* ev );
 	void						updateProgressBarVisibility( void );
 
 	void						doShowProgress( bool showProgress );

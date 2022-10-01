@@ -25,7 +25,7 @@ class SearchParamsWidget : public QWidget
 {
 	Q_OBJECT
 public:
-    SearchParamsWidget( QWidget * parent );
+    SearchParamsWidget( QWidget* parent );
 	virtual ~SearchParamsWidget() = default;
 
     void						setupSearchParamsWidget( EApplet applet, EPluginType pluginType );

@@ -23,7 +23,7 @@ class AppletUserIdentity : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletUserIdentity( AppCommon& app, QWidget * parent );
+	AppletUserIdentity( AppCommon& app, QWidget* parent );
 	virtual ~AppletUserIdentity() = default;
 
 public slots:

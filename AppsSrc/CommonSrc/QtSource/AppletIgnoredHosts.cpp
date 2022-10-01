@@ -24,7 +24,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletIgnoredHosts::AppletIgnoredHosts( AppCommon& app, QWidget * parent )
+AppletIgnoredHosts::AppletIgnoredHosts( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_IGNORED_HOSTS, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

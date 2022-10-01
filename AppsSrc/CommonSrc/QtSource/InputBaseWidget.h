@@ -31,7 +31,7 @@ class InputBaseWidget : public QWidget
     Q_OBJECT
 
 public:
-	InputBaseWidget( AppCommon& app, QWidget * parent = 0 );
+	InputBaseWidget( AppCommon& app, QWidget* parent = 0 );
 
 	AppCommon&					getMyApp( void )		{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );

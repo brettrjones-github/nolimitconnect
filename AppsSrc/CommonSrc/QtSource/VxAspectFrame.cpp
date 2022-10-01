@@ -18,7 +18,7 @@
 #include "VxLabel.h"
 
 //============================================================================
-VxAspectFrame::VxAspectFrame( QWidget *parent )
+VxAspectFrame::VxAspectFrame( QWidget*parent )
 : QFrame( parent )
 , m_PreviewAspectRatio( 1.333333333333 )
 , m_ScreenAspectRatio( 1.333333333333 )
@@ -50,7 +50,7 @@ void VxAspectFrame::setVideoScreenAspectRatio( float aspectRatio )
 }
 
 //============================================================================
-void VxAspectFrame::resizeEvent( QResizeEvent * ev )
+void VxAspectFrame::resizeEvent( QResizeEvent* ev )
 {
     QFrame::resizeEvent( ev );
     updatePositions();
@@ -69,7 +69,7 @@ void VxAspectFrame::updatePositions( void )
 }
 
 //============================================================================
-void VxAspectFrame::positionWidget( QWidget * parentWidget, float aspectRatio, VxLabel * widget, bool centerWidget, float scale )
+void VxAspectFrame::positionWidget( QWidget* parentWidget, float aspectRatio, VxLabel * widget, bool centerWidget, float scale )
 {
     if( ( 0 == parentWidget ) || ( 0 == widget ) )
     {

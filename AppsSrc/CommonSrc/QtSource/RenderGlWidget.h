@@ -45,7 +45,7 @@ public:
         GLsizei                 m_Height;
     } GlTextureSize;
 
-    RenderGlWidget( QWidget *parent=0 );
+    RenderGlWidget( QWidget*parent=0 );
     virtual ~RenderGlWidget( ) override;
 
     AppCommon&				    getMyApp() { return  m_MyApp; }
@@ -227,10 +227,10 @@ public slots:
 protected:
     void                        paintEvent( QPaintEvent * ) override;
 
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
     virtual void				closeEvent( QCloseEvent * ev ) override;
-    virtual void                resizeEvent( QResizeEvent * ev ) override;
+    virtual void                resizeEvent( QResizeEvent* ev ) override;
 
     virtual void				mousePressEvent( QMouseEvent * ev ) override;
     virtual void				mouseReleaseEvent( QMouseEvent * ev ) override;

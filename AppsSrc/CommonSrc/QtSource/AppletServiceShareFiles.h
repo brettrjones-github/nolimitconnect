@@ -19,7 +19,7 @@ class AppletServiceShareFiles : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-	AppletServiceShareFiles( AppCommon& app, QWidget * parent );
+	AppletServiceShareFiles( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceShareFiles() override;
 
 };

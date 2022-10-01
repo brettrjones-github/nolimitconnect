@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletGroupHostAdmin::AppletGroupHostAdmin( AppCommon& app, QWidget * parent )
+AppletGroupHostAdmin::AppletGroupHostAdmin( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_GROUP_HOST_ADMIN, app, parent )
 {
     setAppletType( eAppletGroupHostAdmin );

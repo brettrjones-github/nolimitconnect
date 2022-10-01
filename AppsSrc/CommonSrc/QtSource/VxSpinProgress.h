@@ -22,8 +22,8 @@ class VxSpinProgress : public QLabel
 {
 	Q_OBJECT
 public:
-	VxSpinProgress(QWidget *parent=0, Qt::WindowFlags f=Qt::Widget);
-	VxSpinProgress(const QString &text, QWidget *parent=0, Qt::WindowFlags f=Qt::Widget);
+	VxSpinProgress(QWidget*parent=0, Qt::WindowFlags f=Qt::Widget);
+	VxSpinProgress(const QString &text, QWidget*parent=0, Qt::WindowFlags f=Qt::Widget);
 	virtual ~VxSpinProgress() = default;
 
 	QSize						sizeHint() const;
@@ -38,8 +38,8 @@ protected slots:
 
 protected:
 	virtual void				mousePressEvent(QMouseEvent * event);
-	void						hideEvent( QHideEvent * hideEvent );
-	void						showEvent( QShowEvent * showEvent );
+	void						hideEvent( QHideEvent* hideEvent );
+	void						showEvent( QShowEvent* showEvent );
 
 	void						initQSpinProgress( void );
 	void						updateImage( void );

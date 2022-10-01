@@ -20,7 +20,7 @@ class AppletSettingsStoryboard : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsStoryboard( AppCommon& app, QWidget * parent );
+    AppletSettingsStoryboard( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsStoryboard();
 
 protected:

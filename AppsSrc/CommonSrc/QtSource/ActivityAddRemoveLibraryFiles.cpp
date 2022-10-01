@@ -33,7 +33,7 @@
 #include <QTimer>
 
 //============================================================================
-ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QWidget * parent )
+ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_ADD_REMOVE_LIB_FILES, app, parent, eAppletMessengerFrame, true )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
@@ -133,7 +133,7 @@ void ActivityAddRemoveLibraryFiles::addFile(uint8_t			u8FileType,
 	{
         LogMsg( LOG_INFO, "ActivityAddRemoveLibraryFiles::addFile: adding widget\n");
 		ui.FileItemList->addItem( (QListWidgetItem *)item );
-		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget *)item );
+		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget*)item );
 	}
 }
 

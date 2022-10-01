@@ -21,7 +21,7 @@
 #include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
-AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
+AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget* parent )
 : AppletTestBase( OBJNAME_APPLET_TEST_HOST_CLIENT, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

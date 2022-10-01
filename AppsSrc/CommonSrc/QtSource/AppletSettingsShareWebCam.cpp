@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsShareWebCam::AppletSettingsShareWebCam( AppCommon& app, QWidget * parent )
+AppletSettingsShareWebCam::AppletSettingsShareWebCam( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_SHARE_WEB_CAM, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

@@ -28,7 +28,7 @@ VxFrame::VxFrame( AppCommon& appCommon, QWidget* parent, Qt::WindowFlags f )
 }
 
 //============================================================================
-void VxFrame::resizeEvent( QResizeEvent * ev )
+void VxFrame::resizeEvent( QResizeEvent* ev )
 {
 	QFrame::resizeEvent( ev );
 	emit signalFrameResized();

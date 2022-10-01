@@ -20,7 +20,7 @@ class AppletGetStarted : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletGetStarted( AppCommon& app, QWidget * parent );
+    AppletGetStarted( AppCommon& app, QWidget* parent );
 	virtual ~AppletGetStarted();
 
 protected:

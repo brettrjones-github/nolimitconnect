@@ -19,7 +19,7 @@ class AppletSettingsHostBase : public AppletSettingsBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsHostBase( const char * ObjName, AppCommon& app, QWidget * parent );
+    AppletSettingsHostBase( const char * ObjName, AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsHostBase() = default;
 
 

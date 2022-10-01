@@ -477,7 +477,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 			for( i = 0; i < iCnt; i++ )
 			{
 				u16PktLen = *((uint16_t *)pu8Temp);
-				pktHdr = (VxPktHdr *)new char[ u16PktLen ];
+				pktHdr = (VxPktHdr*)new char[ u16PktLen ];
 				memcpy( pktHdr, pu8Temp, u16PktLen );
 				poInfo->m_aoInQue[i] =  pktHdr ;
 				pu8Temp += u16PktLen;
@@ -510,7 +510,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 					for( i = 0; i < iCnt; i++ )
 					{
 						u16PktLen = *((uint16_t *)pu8Temp);
-						pktHdr = (VxPktHdr *)new char[ u16PktLen ];
+						pktHdr = (VxPktHdr*)new char[ u16PktLen ];
 						memcpy( pktHdr, pu8Temp, u16PktLen );
 						poInfo->m_aoOutQue[i] =  pktHdr ;
 						pu8Temp += u16PktLen;
@@ -560,7 +560,7 @@ RCODE BigListDb::saveBigListInfoIntoBlob( BigListInfo * poInfo, uint8_t * * ppu8
 	//store input que
 	for( i = 0; i < iCnt; i++ )
 	{
-		pktHdr = (VxPktHdr *)poInfo->m_aoInQue[ i ];
+		pktHdr = (VxPktHdr*)poInfo->m_aoInQue[ i ];
 		memcpy( pu8Temp, pktHdr, pktHdr->getPktLength() );
 		pu8Temp += pktHdr->getPktLength();
 	}
@@ -573,7 +573,7 @@ RCODE BigListDb::saveBigListInfoIntoBlob( BigListInfo * poInfo, uint8_t * * ppu8
 	//store output que
 	for( i = 0; i < iCnt; i++ )
 	{
-		pktHdr = (VxPktHdr *)poInfo->m_aoOutQue[ i ];
+		pktHdr = (VxPktHdr*)poInfo->m_aoOutQue[ i ];
 		memcpy( pu8Temp, pktHdr, pktHdr->getPktLength() );
 		pu8Temp += pktHdr->getPktLength();
 	}

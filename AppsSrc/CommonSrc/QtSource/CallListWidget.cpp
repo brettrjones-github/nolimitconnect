@@ -29,7 +29,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-CallListWidget::CallListWidget( QWidget * parent )
+CallListWidget::CallListWidget( QWidget* parent )
 : ListWidgetBase( parent )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 {
@@ -200,7 +200,7 @@ CallListItem* CallListWidget::addOrUpdateCallSession( GuiOfferSession* userSessi
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
     }
 
     return userItem;
@@ -394,7 +394,7 @@ void CallListWidget::updateCall( GuiOfferSession * offerSession )
                     insertItem( 0, (QListWidgetItem *)userItem );
                 }
 
-                setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+                setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
                 m_CallCache[offerSession->getMyOnlineId()] = offerSession;
             //}
         }

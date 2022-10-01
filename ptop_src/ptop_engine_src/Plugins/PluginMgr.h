@@ -52,7 +52,7 @@ public:
     IToGui&						getToGui( void );
 	P2PEngine&					getEngine( void )									{ return m_Engine; }
 
-	PluginBase *				getPlugin( EPluginType ePluginType );
+	PluginBase*				getPlugin( EPluginType ePluginType );
 	EAppState					getPluginState( EPluginType ePluginType );
 	void						setPluginState( EPluginType ePluginType, EAppState ePluginState );
 	VxMutex&					getPluginMgrMutex( void )							{ return m_PluginMgrMutex; }
@@ -88,7 +88,7 @@ public:
     virtual bool                pluginApiTxPacket(  EPluginType			ePluginType,
 													const VxGUID&		onlineId,
                                                     VxSktBase *			sktBase,
-                                                    VxPktHdr *			poPkt,
+                                                    VxPktHdr*			poPkt,
                                                     bool				bDisconnectAfterSend = false,
                                                     EPluginType         overridePlugin = ePluginTypeInvalid );
 	void						pluginApiLog( EPluginType ePluginType, const char * pMsg, ... );
@@ -170,6 +170,6 @@ protected:
 
 	bool						m_PluginMgrInitialized;
 
-	std::vector<PluginBase *>	m_aoPlugins;
+	std::vector<PluginBase*>	m_aoPlugins;
 	NetServiceUtils				m_NetServiceUtils;
 };

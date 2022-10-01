@@ -27,7 +27,7 @@ class VxContextMenu : public QWidget
     Q_OBJECT
 
 public:
-    VxContextMenu( AppCommon& appCommon, QWidget * parent = 0 );
+    VxContextMenu( AppCommon& appCommon, QWidget* parent = 0 );
     virtual ~VxContextMenu() {};
 
     void                        setMenuLocation( bool showAboveButton );
@@ -47,7 +47,7 @@ protected slots:
 
 protected:
     void                        addMenuAction( EMenuItemType eMenuItem, QString& menuText );
-    QPoint                      calculatePos( QWidget * menuWidget );
+    QPoint                      calculatePos( QWidget* menuWidget );
 
 
     AppCommon &					m_MyApp;

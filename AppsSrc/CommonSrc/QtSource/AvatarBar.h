@@ -26,7 +26,7 @@ class AvatarBar : public QWidget
 	Q_OBJECT
 
 public:
-	AvatarBar( QWidget * parent = 0 );
+	AvatarBar( QWidget* parent = 0 );
 	virtual ~AvatarBar() = default;
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }

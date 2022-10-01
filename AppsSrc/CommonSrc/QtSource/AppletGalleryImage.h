@@ -24,7 +24,7 @@ class AppletGalleryImage : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGalleryImage( AppCommon& app, QWidget * parent = NULL );
+	AppletGalleryImage( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletGalleryImage() override = default;
 
 signals:

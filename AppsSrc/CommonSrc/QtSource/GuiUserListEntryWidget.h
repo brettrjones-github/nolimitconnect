@@ -26,7 +26,7 @@ class GuiUserListEntryWidget : public IdentLogicInterface, public QListWidgetIte
 {
 	Q_OBJECT;
 public:
-	GuiUserListEntryWidget( QWidget *parent=0 );
+	GuiUserListEntryWidget( QWidget*parent=0 );
 	virtual ~GuiUserListEntryWidget();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }

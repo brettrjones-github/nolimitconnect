@@ -22,7 +22,7 @@
 #include <QPushButton>
 
 //============================================================================
-VxComboBox::VxComboBox(QWidget *parent) 
+VxComboBox::VxComboBox(QWidget*parent) 
 : QComboBox(parent) 
 {
     setObjectName( "VxComboBox" );
@@ -54,7 +54,7 @@ void VxComboBox::paintEvent( QPaintEvent *ev )
  }*/
 
 //============================================================================
-void VxComboBox::showEvent( QShowEvent *ev )
+void VxComboBox::showEvent( QShowEvent*ev )
 {
     QComboBox::showEvent( ev );
 }

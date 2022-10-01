@@ -26,7 +26,7 @@ class AppletSettingsHostRandomConnect : public AppletSettingsHostBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsHostRandomConnect( AppCommon& app, QWidget * parent );
+    AppletSettingsHostRandomConnect( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsHostRandomConnect();
 
     PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }

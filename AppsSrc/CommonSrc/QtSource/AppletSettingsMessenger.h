@@ -20,7 +20,7 @@ class AppletSettingsMessenger : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsMessenger( AppCommon& app, QWidget * parent );
+    AppletSettingsMessenger( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsMessenger() override;
 
 protected:

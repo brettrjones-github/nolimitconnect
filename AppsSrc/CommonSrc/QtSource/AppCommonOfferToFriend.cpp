@@ -30,7 +30,7 @@
 #include <QUrl>
 
 //============================================================================
-bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup, QWidget * parent )
+bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup, QWidget* parent )
 {
 	bool showedActivity = false;
 	if( poFriend->isMyAccessAllowedFromHim( ePluginType, inGroup ) )

@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
+AppletTheme::AppletTheme( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_THEME, app, parent )
 , m_SavedTheme( eThemeTypeUnknown )
 , m_CurTheme( eThemeTypeUnknown )

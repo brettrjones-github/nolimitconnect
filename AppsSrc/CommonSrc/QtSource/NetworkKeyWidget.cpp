@@ -21,7 +21,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-NetworkKeyWidget::NetworkKeyWidget( QWidget * parent )
+NetworkKeyWidget::NetworkKeyWidget( QWidget* parent )
 	: QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

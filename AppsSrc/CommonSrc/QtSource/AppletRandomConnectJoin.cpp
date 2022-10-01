@@ -26,7 +26,7 @@ namespace
 }
 
 //============================================================================
-AppletRandomConnectJoin::AppletRandomConnectJoin( AppCommon& app, QWidget * parent )
+AppletRandomConnectJoin::AppletRandomConnectJoin( AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_RANDOM_CONNECT_JOIN, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );

@@ -74,6 +74,12 @@ bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
     case ePluginTypeClientChatRoom:
         hostClientType = ePluginTypeHostChatRoom;
         break;
+    case ePluginTypeFileShareServer:
+        hostClientType = ePluginTypeFileShareClient;
+        break;
+    case ePluginTypeFileShareClient:
+        hostClientType = ePluginTypeFileShareServer;
+        break;
     case ePluginTypeHostChatRoom:
         hostClientType = ePluginTypeClientChatRoom;
         break;
@@ -113,6 +119,7 @@ bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
     case ePluginTypeStoryboardClient:
         hostClientType = ePluginTypeStoryboardServer;
         break;
+
     default:
         break;
     }

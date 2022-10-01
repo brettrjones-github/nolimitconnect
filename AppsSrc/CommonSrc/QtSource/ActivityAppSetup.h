@@ -29,7 +29,7 @@ class ActivityAppSetup : public ActivityBase
 
 public:
 
-    ActivityAppSetup( AppCommon& app, QWidget * parent );
+    ActivityAppSetup( AppCommon& app, QWidget* parent );
 
 	virtual ~ActivityAppSetup() override = default;
 
@@ -45,7 +45,7 @@ protected slots:
     void						slotCopyResult( QObject * workerObj, int rc, qint64 bytesCopied );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
 
     void						initActivityAppSetup( void );
 	//=== vars ===//

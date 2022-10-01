@@ -113,7 +113,7 @@ QString GuiHelpers::getAvailableStorageSpaceText()
 }
 
 //============================================================================
-QString GuiHelpers::browseForDirectory( QString startDir, QWidget * parent )
+QString GuiHelpers::browseForDirectory( QString startDir, QWidget* parent )
 {
 
 	QString dir = QFileDialog::getExistingDirectory(
@@ -587,9 +587,9 @@ bool GuiHelpers::isMessagerFrame( QWidget* curWidget )
 }
 
 //============================================================================
-QFrame * GuiHelpers::getParentPageFrame( QWidget * curWidget )
+QFrame* GuiHelpers::getParentPageFrame( QWidget* curWidget )
 {
-    QFrame * pageFrame = nullptr;
+    QFrame* pageFrame = nullptr;
     QObject * curParent = curWidget;
 
     QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
@@ -600,7 +600,7 @@ QFrame * GuiHelpers::getParentPageFrame( QWidget * curWidget )
         QString objName = curParent->objectName();
         if( ( objName == launchPageObjName ) || ( objName == messengerPageObjName ) )
         {
-            pageFrame = dynamic_cast<QFrame *>( curParent );
+            pageFrame = dynamic_cast<QFrame*>( curParent );
             if( pageFrame )
             {
                 break;
@@ -619,9 +619,9 @@ QFrame * GuiHelpers::getParentPageFrame( QWidget * curWidget )
 }
 
 //============================================================================
-QFrame * GuiHelpers::getMessengerPageFrame( QWidget * curWidget )
+QFrame* GuiHelpers::getMessengerPageFrame( QWidget* curWidget )
 {
-    QFrame * pageFrame = nullptr;
+    QFrame* pageFrame = nullptr;
     QObject * curParent = curWidget;
 
     QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
@@ -634,7 +634,7 @@ QFrame * GuiHelpers::getMessengerPageFrame( QWidget * curWidget )
         {
             if( objName == messengerPageObjName )
             {
-                pageFrame = dynamic_cast<QFrame *>(curParent);
+                pageFrame = dynamic_cast<QFrame*>(curParent);
                 if (pageFrame)
                 {
                     break;
@@ -643,13 +643,13 @@ QFrame * GuiHelpers::getMessengerPageFrame( QWidget * curWidget )
             else
             {
                 bool foundMessengerFrame = false;
-                QWidget * baseFrame = dynamic_cast<QWidget *>(curParent->parent());
+                QWidget* baseFrame = dynamic_cast<QWidget*>(curParent->parent());
                 if( baseFrame )
                 {
                     QObjectList childList = baseFrame->children();
                     for( auto iter = childList.begin();  iter != childList.end(); ++iter )
                     {
-                        QFrame *childFrame = dynamic_cast<QFrame *>(*iter);
+                        QFrame*childFrame = dynamic_cast<QFrame*>(*iter);
                         if( childFrame && childFrame->objectName() == messengerPageObjName )
                         {
                             pageFrame = childFrame;
@@ -678,9 +678,9 @@ QFrame * GuiHelpers::getMessengerPageFrame( QWidget * curWidget )
 }
 
 //============================================================================
-QFrame* GuiHelpers::getLaunchPageFrame( QWidget * curWidget )
+QFrame* GuiHelpers::getLaunchPageFrame( QWidget* curWidget )
 {
-    QFrame * pageFrame = nullptr;
+    QFrame* pageFrame = nullptr;
     QObject * curParent = curWidget;
 
     QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
@@ -693,7 +693,7 @@ QFrame* GuiHelpers::getLaunchPageFrame( QWidget * curWidget )
         {
             if( objName == launchPageObjName )
             {
-                pageFrame = dynamic_cast<QFrame *>(curParent);
+                pageFrame = dynamic_cast<QFrame*>(curParent);
                 if (pageFrame)
                 {
                     break;
@@ -702,13 +702,13 @@ QFrame* GuiHelpers::getLaunchPageFrame( QWidget * curWidget )
             else
             {
                 bool foundLaunchFrame = false;
-                QWidget * baseFrame = dynamic_cast<QWidget *>(curParent->parent());
+                QWidget* baseFrame = dynamic_cast<QWidget*>(curParent->parent());
                 if( baseFrame )
                 {
                     QObjectList childList = baseFrame->children();
                     for( auto iter = childList.begin();  iter != childList.end(); ++iter )
                     {
-                        QFrame* childFrame = dynamic_cast<QFrame *>(*iter);
+                        QFrame* childFrame = dynamic_cast<QFrame*>(*iter);
                         if( childFrame && childFrame->objectName() == launchPageObjName )
                         {
                             pageFrame = childFrame;
@@ -737,9 +737,9 @@ QFrame* GuiHelpers::getLaunchPageFrame( QWidget * curWidget )
 }
 
 //============================================================================
-QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
+QFrame* GuiHelpers::getOppositePageFrame( QWidget* curWidget )
 {
-    QFrame * pageFrame = nullptr;
+    QFrame* pageFrame = nullptr;
     QObject * curParent = curWidget;
 
     QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
@@ -753,13 +753,13 @@ QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
             QString otherPageObjeName = (objName == launchPageObjName) ? messengerPageObjName : launchPageObjName;
 
             bool foundOtherFrame = false;
-            QWidget * baseFrame = dynamic_cast<QWidget *>(curParent->parent());
+            QWidget* baseFrame = dynamic_cast<QWidget*>(curParent->parent());
             if( baseFrame )
             {
                 QObjectList childList = baseFrame->children();
                 for( auto iter = childList.begin();  iter != childList.end(); ++iter )
                 {
-                    QFrame* childFrame = dynamic_cast<QFrame *>(*iter);
+                    QFrame* childFrame = dynamic_cast<QFrame*>(*iter);
                     if( childFrame && childFrame->objectName() == otherPageObjeName && childFrame == GetAppInstance().getHomePage().getMessengerParentFrame() )
                     {
                         pageFrame = childFrame;
@@ -787,7 +787,7 @@ QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
 }
 
 //============================================================================
-AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
+AppletBase * GuiHelpers::findParentApplet( QWidget* parent )
 {
     AppletBase * appletBase = nullptr;
     if( parent )
@@ -795,7 +795,7 @@ AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
         appletBase = dynamic_cast< AppletBase * >( parent );
         while( parent && !appletBase )
         {
-            parent = dynamic_cast< QWidget * >( parent->parent() );
+            parent = dynamic_cast< QWidget* >( parent->parent() );
             if( parent )
             {
                 appletBase = dynamic_cast< AppletBase * >( parent );
@@ -807,7 +807,7 @@ AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
 }
 
 //============================================================================
-bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
+bool GuiHelpers::validateUserName( QWidget* curWidget, QString strUserName )
 {
     if( strUserName.contains( "NoLimitConnect" )
         || strUserName.contains( "nolimitconnect" )
@@ -862,7 +862,7 @@ bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
 }
 
 //============================================================================
-bool GuiHelpers::validateMoodMessage( QWidget * curWidget, QString strMoodMsg )
+bool GuiHelpers::validateMoodMessage( QWidget* curWidget, QString strMoodMsg )
 {
     //if( strMoodMsg.contains( "'" ) )
     //{
@@ -881,7 +881,7 @@ bool GuiHelpers::validateMoodMessage( QWidget * curWidget, QString strMoodMsg )
 }
 
 //============================================================================
-bool GuiHelpers::validateAge( QWidget * curWidget, int age )
+bool GuiHelpers::validateAge( QWidget* curWidget, int age )
 {
     if( age < 0 )
     {
@@ -1207,7 +1207,7 @@ uint8_t GuiHelpers::joinRequestToIndex( EJoinState joinState )
 }
 
 //============================================================================
-void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox *  ageCombo, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setValuesFromIdentity( QWidget* curWidget, VxNetIdent * ident, QComboBox *  ageCombo, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && ageCombo && genderCombo && languageCombo && contentCombo )
     {
@@ -1219,7 +1219,7 @@ void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident,
 }
 
 //============================================================================
-void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setIdentityFromValues( QWidget* curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
     {
@@ -1258,7 +1258,7 @@ void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident,
 }
 
 //============================================================================
-ActivityBase * GuiHelpers::findParentActivity( QWidget * widget )
+ActivityBase * GuiHelpers::findParentActivity( QWidget* widget )
 {
     ActivityBase * actBase = nullptr;
     QObject * objWidget = widget;
@@ -1278,7 +1278,7 @@ ActivityBase * GuiHelpers::findParentActivity( QWidget * widget )
 }
 
 //============================================================================
-QWidget * GuiHelpers::findAppletContentFrame( QWidget * widget )
+QWidget* GuiHelpers::findAppletContentFrame( QWidget* widget )
 {
     ActivityBase * actBase = findLaunchWindow( widget );
     if( actBase )
@@ -1342,13 +1342,13 @@ QWidget* GuiHelpers::findParentContentFrame( QWidget* parent )
 }
 
 //============================================================================
-ActivityBase * GuiHelpers::findLaunchWindow( QWidget * widget )
+ActivityBase * GuiHelpers::findLaunchWindow( QWidget* widget )
 {
     QObject * objWidget = findParentActivity( widget );
     QObject * prevWidget = objWidget;
     while( objWidget )
     {
-        if( dynamic_cast<VxFrame *>( objWidget ) )
+        if( dynamic_cast<VxFrame*>( objWidget ) )
         {
             return dynamic_cast<ActivityBase *>( prevWidget );
         }
@@ -1582,4 +1582,10 @@ EHostType GuiHelpers::comboIdxToHostType( int comboIdx )
     default:
         return eHostTypeUnknown;
     }
+}
+
+//============================================================================
+void GuiHelpers::userUnavailableMessageBox( QWidget* parent, GuiUser* user )
+{
+    QMessageBox::information( parent, QObject::tr( "User Unavailable" ), QObject::tr( "User " ) + user->getOnlineName().c_str() + QObject::tr( " Is Unavailable" ), QMessageBox::Ok );
 }

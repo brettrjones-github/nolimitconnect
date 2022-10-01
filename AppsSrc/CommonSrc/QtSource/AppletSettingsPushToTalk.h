@@ -20,7 +20,7 @@ class AppletSettingsPushToTalk : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsPushToTalk( AppCommon& app, QWidget * parent );
+    AppletSettingsPushToTalk( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsPushToTalk() override;
 
 protected:

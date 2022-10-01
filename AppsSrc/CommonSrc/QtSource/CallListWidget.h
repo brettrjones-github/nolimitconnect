@@ -38,7 +38,7 @@ class CallListWidget : public ListWidgetBase
 	Q_OBJECT
 
 public:
-	CallListWidget( QWidget * parent );
+	CallListWidget( QWidget* parent );
 
     void                        clearCallList( void );
 

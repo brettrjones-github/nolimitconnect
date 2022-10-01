@@ -26,7 +26,7 @@
 #include <CoreLib/VxTimeUtil.h>
 
 //============================================================================
-AvatarBar::AvatarBar( QWidget * parent )
+AvatarBar::AvatarBar( QWidget* parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 {

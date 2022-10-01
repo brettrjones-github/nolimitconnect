@@ -50,5 +50,5 @@ GuiParams&                      GetGuiParams();
 void							UpdateHasPicture( P2PEngine& engine, int bHasPicture );
 
 //! show message box to user
-void							ErrMsgBox( QWidget *, int infoLevel, const char * pMsg, ... );
+void							ErrMsgBox( QWidget*, int infoLevel, const char * pMsg, ... );
 

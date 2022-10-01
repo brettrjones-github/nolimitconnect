@@ -32,7 +32,7 @@ class TextChatLogic : public QWidget
 	Q_OBJECT
 
 public:
-	TextChatLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget * parent );
+	TextChatLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget* parent );
 
 	void						setGuiWidgets(	VxNetIdent *	hisIdent );
 

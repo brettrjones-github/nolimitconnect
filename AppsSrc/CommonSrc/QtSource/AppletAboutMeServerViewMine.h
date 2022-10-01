@@ -19,7 +19,7 @@ class AppletAboutMeServerViewMine : public AppletAboutMeClient
 {
 	Q_OBJECT
 public:
-	AppletAboutMeServerViewMine( AppCommon& app, QWidget * parent );
+	AppletAboutMeServerViewMine( AppCommon& app, QWidget* parent );
 	virtual ~AppletAboutMeServerViewMine();
 
     virtual void				setAppletType( EApplet applet ) override;

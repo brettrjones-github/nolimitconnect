@@ -19,7 +19,7 @@ class AppletServiceHostNetwork : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-    AppletServiceHostNetwork( AppCommon& app, QWidget * parent );
+    AppletServiceHostNetwork( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceHostNetwork() = default;
 
 protected:

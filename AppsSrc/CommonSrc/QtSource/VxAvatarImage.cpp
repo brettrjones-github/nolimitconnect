@@ -23,14 +23,14 @@
 #include <QImage>
 
 //============================================================================
-VxAvatarImage::VxAvatarImage(QWidget *parent, Qt::WindowFlags f) 
+VxAvatarImage::VxAvatarImage(QWidget*parent, Qt::WindowFlags f) 
 : QLabel(parent,f) 
 {
 	initQAvatarImage();
 }
 
 //============================================================================
-VxAvatarImage::VxAvatarImage(const QString &text, QWidget *parent, Qt::WindowFlags f) 
+VxAvatarImage::VxAvatarImage(const QString &text, QWidget*parent, Qt::WindowFlags f) 
 : QLabel(text,parent,f) 
 {
     setObjectName( "VxAvatarImage" );

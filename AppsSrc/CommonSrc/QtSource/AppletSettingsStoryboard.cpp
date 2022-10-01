@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsStoryboard::AppletSettingsStoryboard( AppCommon& app, QWidget * parent )
+AppletSettingsStoryboard::AppletSettingsStoryboard( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_SHARE_STORYBOARD, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

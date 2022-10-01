@@ -142,15 +142,15 @@ public:
 	void						CopyTo( BigListInfo & gInfo );
 	BigListInfo *				makeCopy( void );
 
-	void						AddInQueItem(  VxPktHdr * poPkt );
-	VxPktHdr *					GetInQueItem( void );
-	void						AddOutQueItem( VxPktHdr * poPkt );
-	VxPktHdr *					GetOutQueItem( void );
+	void						AddInQueItem(  VxPktHdr* poPkt );
+	VxPktHdr*					GetInQueItem( void );
+	void						AddOutQueItem( VxPktHdr* poPkt );
+	VxPktHdr*					GetOutQueItem( void );
 
 	//=== vars ===//
 	// stored arrays
-	std::vector<VxPktHdr *>		m_aoInQue;
-	std::vector<VxPktHdr *>		m_aoOutQue;
+	std::vector<VxPktHdr*>		m_aoInQue;
+	std::vector<VxPktHdr*>		m_aoOutQue;
 	// not stored vars
 	uint64_t					m_u64TimeLastPingAttempt;
 

@@ -42,7 +42,7 @@ namespace
 }
 
 //============================================================================
-AppletTestAndDebug::AppletTestAndDebug( AppCommon& app, QWidget * parent )
+AppletTestAndDebug::AppletTestAndDebug( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_TEST_AND_DEBUG, app, parent )
 {
     setAppletType( eAppletTestAndDebug );

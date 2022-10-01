@@ -29,7 +29,7 @@ class HistoryListWidget : public QListWidget, public ToGuiActivityInterface
 	Q_OBJECT
 
 public:
-	HistoryListWidget(QWidget *parent=0);
+	HistoryListWidget(QWidget*parent=0);
 	virtual ~HistoryListWidget();
 
 	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
@@ -42,8 +42,8 @@ public slots:
 	void						slotStartupTimeout( void );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
     virtual void				toGuiAssetSessionHistory( AssetBaseInfo& assetInfo ) override;
     virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ) override;

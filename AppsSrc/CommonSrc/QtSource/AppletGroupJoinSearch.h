@@ -32,7 +32,7 @@ class AppletGroupJoinSearch : public AppletClientBase, public GuiHostedListCallb
 	Q_OBJECT
 public:
 	AppletGroupJoinSearch(	AppCommon&		    app, 
-							QWidget *			parent = NULL );
+							QWidget*			parent = NULL );
 	virtual ~AppletGroupJoinSearch();
 
     void                        infoMsg( const char * infoMsg, ... );
@@ -68,8 +68,8 @@ private slots:
     virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
     //=== vars ===//
     Ui::AppletGroupJoinSearchUi ui;

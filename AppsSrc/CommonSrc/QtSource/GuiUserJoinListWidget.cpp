@@ -27,7 +27,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-GuiUserJoinListWidget::GuiUserJoinListWidget( QWidget * parent )
+GuiUserJoinListWidget::GuiUserJoinListWidget( QWidget* parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
@@ -215,7 +215,7 @@ GuiUserJoinListItem* GuiUserJoinListWidget::addOrUpdateUserJoinSession( GuiUserJ
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
         onListItemAdded( userSession, userItem );
     }
 
@@ -428,7 +428,7 @@ void GuiUserJoinListWidget::updateUserJoin( GuiUserJoin * guiUserJoin )
                     insertItem( 0, (QListWidgetItem *)userItem );
                 }
 
-                setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+                setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
                 m_UserJoinCache[guiUserJoin->getGroupieId()] = userSession;
                 onListItemAdded( userSession, userItem );
             }

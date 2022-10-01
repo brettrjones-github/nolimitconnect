@@ -22,7 +22,7 @@ class VxComboBoxFileFilter : public QComboBox
 {
 	Q_OBJECT
 public:
-	VxComboBoxFileFilter(QWidget *parent=0);
+	VxComboBoxFileFilter(QWidget*parent=0);
 	virtual ~VxComboBoxFileFilter();
 
 	void						setFileFilter( EFileFilterType eFileFilter );

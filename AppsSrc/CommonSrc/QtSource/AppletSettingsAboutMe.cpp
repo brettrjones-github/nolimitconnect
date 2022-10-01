@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsAboutMe::AppletSettingsAboutMe( AppCommon& app, QWidget * parent )
+AppletSettingsAboutMe::AppletSettingsAboutMe( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_ABOUT_ME, app, parent )
 {
     setAppletType( eAppletSettingsAboutMe );

@@ -24,7 +24,7 @@ class AppletTheme : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletTheme( AppCommon& app, QWidget * parent );
+	AppletTheme( AppCommon& app, QWidget* parent );
 	virtual ~AppletTheme(){};
 
     // override default behavior of closing dialog when back button is clicked

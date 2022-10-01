@@ -20,7 +20,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-InputAllWidget::InputAllWidget( QWidget * parent )
+InputAllWidget::InputAllWidget( QWidget* parent )
 : InputBaseWidget( GetAppInstance(), parent )
 {
 	ui.setupUi( this );

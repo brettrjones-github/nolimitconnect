@@ -836,3 +836,15 @@ bool INlc::fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId )
 {
     return getPtoP().fromGuiCancelWebPage( webPageType, onlineId );
 }
+
+//============================================================================
+bool INlc::fromGuiDownloadFileList( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes )
+{
+    return getPtoP().fromGuiDownloadFileList( pluginType, onlineId, sessionId, fileTypes );
+}
+
+//============================================================================
+bool INlc::fromGuiDownloadFileListCancel( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId )
+{
+    return getPtoP().fromGuiDownloadFileListCancel( pluginType, onlineId, sessionId );
+}

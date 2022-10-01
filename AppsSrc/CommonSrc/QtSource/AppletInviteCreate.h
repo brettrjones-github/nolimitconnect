@@ -20,7 +20,7 @@ class AppletInviteCreate : public AppletBase
 {
     Q_OBJECT
 public:
-    AppletInviteCreate( AppCommon& app, QWidget * parent );
+    AppletInviteCreate( AppCommon& app, QWidget* parent );
     virtual ~AppletInviteCreate();
 
     void                        infoMsg( const char * infoMsg, ... );

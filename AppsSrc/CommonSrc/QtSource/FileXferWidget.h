@@ -27,14 +27,14 @@ class FileXferWidget : public QWidget, public QListWidgetItem
 	Q_OBJECT
 
 public:
-	FileXferWidget(QWidget *parent=0);
+	FileXferWidget(QWidget*parent=0);
 	virtual ~FileXferWidget();
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
-    void						setFileItemInfo( GuiFileXferSession * fileItemInfo );
-    GuiFileXferSession *		getFileItemInfo( void );
+    void						setFileItemInfo( GuiFileXferSession* fileItemInfo );
+    GuiFileXferSession*		getFileItemInfo( void );
 
 	void						setXferState( EXferState eXferState, int param1, int param2 );
 

@@ -24,7 +24,7 @@
 
 //============================================================================
 ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app, 
-											QWidget *		parent, 
+											QWidget*		parent, 
 											QString			title, 
 											QString			bodyText ) 
 : ActivityBase( OBJNAME_ACTIVITY_YES_NO_MSG_BOX, app, parent, eAppletMessengerFrame, true )

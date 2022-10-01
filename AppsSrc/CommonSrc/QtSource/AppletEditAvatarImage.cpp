@@ -37,7 +37,7 @@
 #define SUPPORTED_IMAGE_FILES "Image files (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)"
 
 //============================================================================
-AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
+AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_EDIT_AVATAR_IMAGE, app, parent )
 , m_ThumbMgr( app.getEngine().getThumbMgr() )
 {

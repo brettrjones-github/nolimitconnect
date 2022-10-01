@@ -18,7 +18,7 @@
 #include "VxScrollArea.h"
 
 //============================================================================
-VxScrollArea::VxScrollArea( QWidget * parent )
+VxScrollArea::VxScrollArea( QWidget* parent )
 : QScrollArea( parent )
 {
     setObjectName( "VxScrollArea" );

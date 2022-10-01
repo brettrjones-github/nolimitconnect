@@ -28,7 +28,7 @@ class GuiUserListWidget : public ListWidgetBase, public GuiUserUpdateCallback
 	Q_OBJECT
 
 public:
-	GuiUserListWidget( QWidget * parent );
+	GuiUserListWidget( QWidget* parent );
     virtual ~GuiUserListWidget();
 
     void						setAppletType( EApplet appletType )     { m_AppletType = appletType; };
@@ -84,7 +84,7 @@ protected slots:
     void				        slotThumbRemoved( VxGUID thumbId );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
 
     bool                        isListViewMatch( GuiUser* user );
 

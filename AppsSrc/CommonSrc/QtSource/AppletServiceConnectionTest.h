@@ -20,7 +20,7 @@ class AppletServiceConnectionTest : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-	AppletServiceConnectionTest( AppCommon& app, QWidget * parent );
+	AppletServiceConnectionTest( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceConnectionTest() override;
 
 protected:

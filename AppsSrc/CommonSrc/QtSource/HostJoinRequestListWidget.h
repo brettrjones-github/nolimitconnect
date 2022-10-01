@@ -25,7 +25,7 @@ class HostJoinRequestListWidget : public ListWidgetBase
 	Q_OBJECT
 
 public:
-	HostJoinRequestListWidget( QWidget * parent );
+	HostJoinRequestListWidget( QWidget* parent );
 
     void                        clearHostJoinRequestList( void );
 

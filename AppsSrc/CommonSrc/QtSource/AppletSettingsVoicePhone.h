@@ -20,7 +20,7 @@ class AppletSettingsVoicePhone : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsVoicePhone( AppCommon& app, QWidget * parent );
+    AppletSettingsVoicePhone( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsVoicePhone() override;
 
 protected:

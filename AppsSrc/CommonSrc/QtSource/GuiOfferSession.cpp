@@ -20,7 +20,7 @@
 #include "GuiHelpers.h"
 
 //============================================================================
-GuiOfferSession::GuiOfferSession(QWidget *parent)
+GuiOfferSession::GuiOfferSession(QWidget*parent)
 : GuiUserSessionBase(parent)
 , m_ePluginType(ePluginTypeInvalid)
 , m_HisIdent(0)

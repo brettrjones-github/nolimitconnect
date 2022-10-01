@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsRandomConnect::AppletSettingsRandomConnect( AppCommon& app, QWidget * parent )
+AppletSettingsRandomConnect::AppletSettingsRandomConnect( AppCommon& app, QWidget* parent )
 : AppletSettingsBase( OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

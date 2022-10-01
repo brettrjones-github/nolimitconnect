@@ -69,6 +69,7 @@ bool PluginBaseFilesClient::onConnectForWebPageDownload( VxSktBase* sktBase, VxN
     PktFileInfoSearchReq pktReq;
     pktReq.setHostOnlineId( m_HisOnlineId );
     pktReq.setSearchSessionId( m_SearchSessionId );
+    m_SktConnectionId = sktBase->getSocketId();
 
     return txPacket( netIdent, sktBase, &pktReq );
 }
@@ -98,3 +99,56 @@ void PluginBaseFilesClient::toGuiFileDownloadComplete( VxGUID& lclSessionId, con
 {
 
 }
+
+//============================================================================
+bool PluginBaseFilesClient::connectForFileListDownload( VxGUID& onlineId )
+{
+    bool result{ false };
+    m_HisIdent = nullptr;
+    m_Engine.getToGui().toGuiPluginMsg( getPluginType(), onlineId, ePluginMsgConnecting, "" );
+
+    VxNetIdent* netIdent = m_Engine.getBigListMgr().findNetIdent( onlineId );	// id of friend to look for
+    if( netIdent )
+    {
+        VxSktBase* sktBase = m_Engine.getConnectIdListMgr().findBestOnlineConnection( onlineId );
+        if( sktBase )
+        {
+            result = onConnectForFileListDownload( sktBase, netIdent );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "PluginBaseFilesClient::connectForWebPageDownload online id not found" );
+    }
+
+    if( result )
+    {
+        m_Engine.getToGui().toGuiPluginMsg( getPluginType(), onlineId, ePluginMsgRetrieveInfo, "" );
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiPluginMsg( getPluginType(), onlineId, ePluginMsgConnectFailed, "" );
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PluginBaseFilesClient::onConnectForFileListDownload( VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    m_HisIdent = netIdent;
+    m_HisOnlineId = netIdent->getMyOnlineId();
+    m_SktConnectionId = sktBase->getSocketId();
+    if( !m_SearchSessionId.isVxGUIDValid() )
+    {
+        m_SearchSessionId.initializeWithNewVxGUID();
+    }
+    
+    PktFileInfoSearchReq pktReq;
+    pktReq.setHostOnlineId( m_HisOnlineId );
+    pktReq.setSearchSessionId( m_SearchSessionId );
+    pktReq.setSearchFileTypes( getSearchFileTypes() );
+
+    return txPacket( netIdent, sktBase, &pktReq );
+}
+

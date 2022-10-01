@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostRandomConnectStatus::AppletHostRandomConnectStatus( AppCommon& app, QWidget * parent )
+AppletHostRandomConnectStatus::AppletHostRandomConnectStatus( AppCommon& app, QWidget* parent )
     : AppletBase( OBJNAME_APPLET_HOST_RANDOM_CONNECT_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {

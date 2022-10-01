@@ -45,8 +45,8 @@ public:
     void						setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
     VxGUID&					    getSessionId( void )                        { return m_SessionId; }
 
-    void						setWidget( QWidget * widget )				{ m_Widget = widget; }
-    QWidget *					getWidget( void )							{ return m_Widget; }
+    void						setWidget( QWidget* widget )				{ m_Widget = widget; }
+    QWidget*					getWidget( void )							{ return m_Widget; }
 
     std::string                 getHostDescription( void );
     VxGUID                      getHostThumbId( void );

@@ -32,7 +32,7 @@ public:
 	int							getIsSendingPkts( void )					{ return m_bSendingPkts; }
 
 	void						setVideoCastPkt( VxPktHdr* pktHdr )		{ m_VideoCastPkt = pktHdr; }
-	VxPktHdr *					getVideoCastPkt( void )						{ return m_VideoCastPkt; }
+	VxPktHdr*					getVideoCastPkt( void )						{ return m_VideoCastPkt; }
 
 protected:
 	//=== vars ===//
@@ -40,5 +40,5 @@ protected:
 
 	int							m_iOutstandingAckCnt;
 	bool						m_bSendingPkts;
-	VxPktHdr *					m_VideoCastPkt;
+	VxPktHdr*					m_VideoCastPkt;
 };

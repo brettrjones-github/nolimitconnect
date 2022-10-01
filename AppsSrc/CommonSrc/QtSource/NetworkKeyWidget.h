@@ -22,7 +22,7 @@ class NetworkKeyWidget : public QWidget
 	Q_OBJECT
 
 public:
-    NetworkKeyWidget( QWidget * parent = 0 );
+    NetworkKeyWidget( QWidget* parent = 0 );
 
     QString						getNetworkKey( void ) { return ui.m_NetworkKeyEdit->text();  }
 

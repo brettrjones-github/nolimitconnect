@@ -58,7 +58,7 @@ VxAppTheme::VxAppTheme( AppCommon& appCommon )
 }
 
 //============================================================================
-void VxAppTheme::applyTheme( QWidget * widget )
+void VxAppTheme::applyTheme( QWidget* widget )
 {
     if( widget && m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
     {
@@ -69,7 +69,7 @@ void VxAppTheme::applyTheme( QWidget * widget )
 }
 
 //============================================================================
-void VxAppTheme::updateProgressBar( QProgressBar * progressBar )
+void VxAppTheme::updateProgressBar( QProgressBar* progressBar )
 {
     setHighlightColor( progressBar, getColor( eProgressBarColor ) );
 }
@@ -348,7 +348,7 @@ void VxAppTheme::setHighlightColor( QWidget* widget, const QColor highlightColor
 }
 
 //============================================================================
-void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundColor )
+void VxAppTheme::setBackgroundColor( QWidget* widget, const QColor backgroundColor )
 {
     QPalette widgetPalette = widget->palette();
 	widgetPalette.setColor( QPalette::Base, backgroundColor );
@@ -360,7 +360,7 @@ void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundCo
 }
 
 //============================================================================
-void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColor )
+void VxAppTheme::setBackgroundColor( QFrame* frame, const QColor backgroundColor )
 {
     QPalette framePalette = frame->palette();
 	framePalette.setColor( QPalette::Base, backgroundColor );
@@ -372,7 +372,7 @@ void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColo
 }
 
 //============================================================================
-void VxAppTheme::setWidgetBackgroundToTransparent( QWidget * widget )
+void VxAppTheme::setWidgetBackgroundToTransparent( QWidget* widget )
 {
     QColor transparentColor( Qt::transparent );
 	QPalette transparentPalette = widget->palette();

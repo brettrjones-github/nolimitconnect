@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsConnectionTest::AppletSettingsConnectionTest( AppCommon& app, QWidget * parent )
+AppletSettingsConnectionTest::AppletSettingsConnectionTest( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_CONNECT_TEST, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

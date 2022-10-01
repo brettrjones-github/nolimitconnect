@@ -22,7 +22,7 @@ class AppletPlayerPhoto : public AppletPlayerBase, public GuiPlayerCallback
 {
 	Q_OBJECT
 public:
-	AppletPlayerPhoto( AppCommon& app, QWidget * parent );
+	AppletPlayerPhoto( AppCommon& app, QWidget* parent );
 	virtual ~AppletPlayerPhoto() = default;
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
@@ -52,9 +52,9 @@ protected:
 	void						initAppletPlayerPhoto( void );
 	void						onAppletStop( void );
 
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
-    void						resizeEvent( QResizeEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
+    void						resizeEvent( QResizeEvent* ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );

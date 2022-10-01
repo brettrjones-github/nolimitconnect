@@ -105,7 +105,7 @@ void UpdateHasPicture( P2PEngine& engine, int bHasPicture )
 
 //============================================================================
 //! show message box to user
-void ErrMsgBox( QWidget * parent, int infoLevel, const char * pMsg, ... )
+void ErrMsgBox( QWidget* parent, int infoLevel, const char * pMsg, ... )
 {
 	//build message on stack so no out of memory issue
 	char szBuffer[4096];

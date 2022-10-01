@@ -39,7 +39,7 @@ namespace
 }
 
 //============================================================================
-VidWidget::VidWidget(QWidget *parent)
+VidWidget::VidWidget(QWidget*parent)
 : QWidget(parent)
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
@@ -411,7 +411,7 @@ void VidWidget::callbackGuiPlayVideoFrame( VxGUID& onlineId, QImage& vidFrame )
 }
 
 //============================================================================
-void VidWidget::showEvent( QShowEvent * ev )
+void VidWidget::showEvent( QShowEvent* ev )
 {
 	QWidget::showEvent( ev );
 	updatePreviewVisibility();
@@ -422,7 +422,7 @@ void VidWidget::showEvent( QShowEvent * ev )
 }
 
 //============================================================================
-void VidWidget::hideEvent( QHideEvent * ev )
+void VidWidget::hideEvent( QHideEvent* ev )
 {
 	QWidget::hideEvent( ev );
 	if( m_VideoFeedId.isVxGUIDValid() )

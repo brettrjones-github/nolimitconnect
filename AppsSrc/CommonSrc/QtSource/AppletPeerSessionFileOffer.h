@@ -30,7 +30,7 @@ class AppletPeerSessionFileOffer : public AppletPeerBase
 
 public:
 	AppletPeerSessionFileOffer(	AppCommon& app, 
-								QWidget * parent = NULL );
+								QWidget* parent = NULL );
 	virtual ~AppletPeerSessionFileOffer() override = default;
 
 public slots:

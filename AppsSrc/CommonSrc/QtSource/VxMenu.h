@@ -21,13 +21,13 @@ class VxMenu : public QMenu
 {
     Q_OBJECT
 public:
-    VxMenu( QWidget *parent = 0 );
+    VxMenu( QWidget*parent = 0 );
 
     QAction *                   exec( const QPoint &pos, QAction *at = Q_NULLPTR );
     void                        setShowAbove( bool showAbove );
 
 protected:
-    virtual void                resizeEvent( QResizeEvent * ev ) override;
+    virtual void                resizeEvent( QResizeEvent* ev ) override;
 
     bool                        m_ShowAbove{ false };
     QPoint                      m_MenuPos;

@@ -27,7 +27,7 @@ class AppletNetworkSettings : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletNetworkSettings( AppCommon& app, QWidget * parent );
+	AppletNetworkSettings( AppCommon& app, QWidget* parent );
 	virtual ~AppletNetworkSettings();
 
 protected slots:

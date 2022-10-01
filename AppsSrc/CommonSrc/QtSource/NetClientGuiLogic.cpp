@@ -18,7 +18,7 @@
 
 
 //============================================================================
-NetClientGuiLogic::NetClientGuiLogic( AppCommon& myApp, QWidget * parent )
+NetClientGuiLogic::NetClientGuiLogic( AppCommon& myApp, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( myApp )
 {

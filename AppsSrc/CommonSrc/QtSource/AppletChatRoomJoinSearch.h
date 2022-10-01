@@ -31,7 +31,7 @@ class AppletChatRoomJoinSearch : public AppletClientBase, public GuiHostedListCa
 	Q_OBJECT
 public:
 	AppletChatRoomJoinSearch(	AppCommon&		    app, 
-								QWidget *			parent = NULL );
+								QWidget*			parent = NULL );
 	virtual ~AppletChatRoomJoinSearch();
 
     void                        infoMsg( const char * infoMsg, ... );
@@ -67,8 +67,8 @@ private slots:
     virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
-    void						showEvent( QShowEvent * ev ) override;
-    void						hideEvent( QHideEvent * ev ) override;
+    void						showEvent( QShowEvent* ev ) override;
+    void						hideEvent( QHideEvent* ev ) override;
 
 	//=== vars ===//
 	Ui::AppletChatRoomJoinSearchUi  ui;

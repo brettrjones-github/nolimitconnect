@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletShareServicesPage::AppletShareServicesPage( AppCommon& app, QWidget * parent )
+AppletShareServicesPage::AppletShareServicesPage( AppCommon& app, QWidget* parent )
 : AppletLaunchPage( app, parent, eAppletShareServicesPage, OBJNAME_APPLET_SERVICE_SHARE_PAGE )
 , m_IsInitialized( false )
 {
@@ -82,7 +82,7 @@ void AppletShareServicesPage::setupAppletShareServicesPage( void )
 }
 
 //============================================================================
-void AppletShareServicesPage::resizeEvent( QResizeEvent * ev )
+void AppletShareServicesPage::resizeEvent( QResizeEvent* ev )
 {
 	ActivityBase::resizeEvent( ev );
 	//LogMsg( LOG_DEBUG, "AppletShareServicesPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
@@ -90,7 +90,7 @@ void AppletShareServicesPage::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AppletShareServicesPage::showEvent( QShowEvent * showEvent )
+void AppletShareServicesPage::showEvent( QShowEvent* showEvent )
 {
     AppletLaunchPage::showEvent( showEvent );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );

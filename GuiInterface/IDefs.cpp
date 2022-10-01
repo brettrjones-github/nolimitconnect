@@ -407,7 +407,6 @@ namespace
         "Host No Limit Network ",
         "Host Connect Test ",
         "Network Search ",
-        "Relay ", // 25
         "Max Public Plugin ",
         "Plugin Reserved 27 ",
         "Plugin Reserved 28 ",
@@ -443,6 +442,8 @@ namespace
         "Plugin Web Server ",        //!< Web server plugin ( for About Me and Story Board web pages )
         "About Me Page Client ",//!< about me web page plugin client
         "Storyboard Client ",	//!< storyboard web page plugin client
+        "FileShare Client ",
+        "Web Cam Client ",
     };
 
     const char * PortOpenStatusEnumStrings[] =
@@ -1179,7 +1180,7 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeSearch: return "ePluginTypeSearch";
     case ePluginTypeSndReader: return "ePluginTypeSndReader";
     case ePluginTypeSndWriter: return "ePluginTypeSndWriter";
-    case ePluginTypeWebServer: return "ePluginTypeWebServer";
+
     case ePluginTypeFileShareClient: return "ePluginTypeFileShareClient";
 
     default:

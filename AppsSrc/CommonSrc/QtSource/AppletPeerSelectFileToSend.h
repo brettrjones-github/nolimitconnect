@@ -24,7 +24,7 @@ class AppletPeerSelectFileToSend : public AppletPeerBase
 {
 	Q_OBJECT
 public:
-	AppletPeerSelectFileToSend(	AppCommon&	app, QWidget * parent = nullptr );
+	AppletPeerSelectFileToSend(	AppCommon&	app, QWidget* parent = nullptr );
 	virtual ~AppletPeerSelectFileToSend() override = default;
 
 	//void						setPluginType( EPluginType ePluginType );

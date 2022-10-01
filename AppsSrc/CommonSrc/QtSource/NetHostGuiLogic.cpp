@@ -18,7 +18,7 @@
 
 
 //============================================================================
-NetHostGuiLogic::NetHostGuiLogic( AppCommon& myApp, QWidget * parent )
+NetHostGuiLogic::NetHostGuiLogic( AppCommon& myApp, QWidget* parent )
 : QWidget( parent )
 , m_MyApp( myApp )
 {

@@ -29,7 +29,7 @@
 #include <QFrame>
 
 //============================================================================
-TitleBarWidget::TitleBarWidget( QWidget * parent )
+TitleBarWidget::TitleBarWidget( QWidget* parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
@@ -174,7 +174,7 @@ void TitleBarWidget::slotSignalHelpClick( void )
 }
 
 //============================================================================
-void TitleBarWidget::showEvent( QShowEvent * showEvent )
+void TitleBarWidget::showEvent( QShowEvent* showEvent )
 {
     QWidget::showEvent( showEvent );
     if( ( false == VxIsAppShuttingDown() )
@@ -189,7 +189,7 @@ void TitleBarWidget::showEvent( QShowEvent * showEvent )
 }
 
 //============================================================================
-void TitleBarWidget::hideEvent( QHideEvent * ev )
+void TitleBarWidget::hideEvent( QHideEvent* ev )
 {
     if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
     {

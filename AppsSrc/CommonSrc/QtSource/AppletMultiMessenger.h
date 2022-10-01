@@ -31,7 +31,7 @@ class AppletMultiMessenger : public AppletPeerBase
 	Q_OBJECT
 public:
 	AppletMultiMessenger(	AppCommon&			    app,
-							QWidget *				parent = nullptr );
+							QWidget*				parent = nullptr );
 
 	virtual ~AppletMultiMessenger();
 
@@ -59,8 +59,8 @@ protected slots:
 	void						slotUserInputButtonClicked( void );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
 
 	// override of ToGuiActivityInterface
     virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ) override;
@@ -86,7 +86,7 @@ protected:
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
 
-	//virtual bool				handleOfferResponse( EOfferResponse offerResponse, QWidget * parent );
+	//virtual bool				handleOfferResponse( EOfferResponse offerResponse, QWidget* parent );
     //void						onInSessionResponse( bool bResponseOk );
 
 	MultiSessionState *			getMSessionState( EMSessionType sessionType );
@@ -95,9 +95,9 @@ protected:
 	Ui::AppletMultiMessengerUi	ui;
     TodGameLogic				m_TodGameLogic;
     QVector<MultiSessionState*> m_MSessionsList;
-    QFrame *					m_OffersFrame{ nullptr };
-	QFrame *					m_ResponseFrame{ nullptr };
-	QFrame *					m_HangupSessionFrame{ nullptr };
+    QFrame*					m_OffersFrame{ nullptr };
+	QFrame*					m_ResponseFrame{ nullptr };
+	QFrame*					m_HangupSessionFrame{ nullptr };
 	TodGameWidget *				m_TodGameWidget{ nullptr };
 	VidWidget *					m_VidChatWidget{ nullptr };
 	bool						m_IsInitialized{ false };

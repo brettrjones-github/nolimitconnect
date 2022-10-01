@@ -76,7 +76,7 @@ void PluginCamClient::callbackVideoJpgSmall( void * /*userData*/, VxGUID& feedId
 }
 
 //============================================================================
-void PluginCamClient::sendVidPkt( VxPktHdr * vidPkt, bool requiresAck )
+void PluginCamClient::sendVidPkt( VxPktHdr* vidPkt, bool requiresAck )
 {
 	if( m_PluginSessionMgr.getSessionCount() )
 	{

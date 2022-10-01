@@ -41,7 +41,7 @@ public:
 
 	bool						stopCamSession(	VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	void						sendVidPkt( VxPktHdr * vidPkt, bool requiresAck );
+	void						sendVidPkt( VxPktHdr* vidPkt, bool requiresAck );
 
 	void						stopAllSessions( EPluginType pluginType );
 

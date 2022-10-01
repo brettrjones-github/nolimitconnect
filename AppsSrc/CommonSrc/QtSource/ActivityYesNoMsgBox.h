@@ -24,7 +24,7 @@ class ActivityYesNoMsgBox : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityYesNoMsgBox(	AppCommon&		app, 
-							QWidget *		parent, 
+							QWidget*		parent, 
 							QString			title, 
 							QString			bodyText ); 
 	virtual ~ActivityYesNoMsgBox() override = default;

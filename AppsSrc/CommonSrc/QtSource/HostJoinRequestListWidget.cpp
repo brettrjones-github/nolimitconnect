@@ -26,7 +26,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-HostJoinRequestListWidget::HostJoinRequestListWidget( QWidget * parent )
+HostJoinRequestListWidget::HostJoinRequestListWidget( QWidget* parent )
 : ListWidgetBase( parent )
 {
 	QListWidget::setSortingEnabled( true );

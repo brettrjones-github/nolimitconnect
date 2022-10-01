@@ -20,7 +20,7 @@ class AppletJoinBase : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletJoinBase( const char *name, AppCommon& app, QWidget * parent );
+    AppletJoinBase( const char *name, AppCommon& app, QWidget* parent );
 	virtual ~AppletJoinBase() override;
 
 	void                        setHostType( EHostType hostType )						{ m_HostType = hostType; }

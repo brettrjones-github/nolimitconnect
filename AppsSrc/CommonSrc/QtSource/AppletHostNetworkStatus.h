@@ -26,7 +26,7 @@ class AppletHostNetworkStatus : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostNetworkStatus( AppCommon& app, QWidget * parent );
+    AppletHostNetworkStatus( AppCommon& app, QWidget* parent );
 	virtual ~AppletHostNetworkStatus();
 
     PermissionWidget*           getNetworkHostPermissionWidget()    { return ui.m_HostPermissionWidget; }

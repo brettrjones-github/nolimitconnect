@@ -25,7 +25,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletPlayerVideo::AppletPlayerVideo( AppCommon& app, QWidget * parent )
+AppletPlayerVideo::AppletPlayerVideo( AppCommon& app, QWidget* parent )
 : AppletPlayerBase( OBJNAME_APPLET_PLAYER_PHOTO, app, parent )
 , m_ActivityCallbacksEnabled( false )
 , m_IsPlaying( false )
@@ -152,7 +152,7 @@ void AppletPlayerVideo::setAssetInfo( AssetInfo& assetInfo )
 }
 
 //============================================================================
-void AppletPlayerVideo::showEvent( QShowEvent * showEvent )
+void AppletPlayerVideo::showEvent( QShowEvent* showEvent )
 {
 	AppletPlayerBase::showEvent( showEvent );
 	if( ( false == VxIsAppShuttingDown() )
@@ -180,7 +180,7 @@ void AppletPlayerVideo::showEvent( QShowEvent * showEvent )
 }
 
 //============================================================================
-void AppletPlayerVideo::hideEvent( QHideEvent * hideEvent )
+void AppletPlayerVideo::hideEvent( QHideEvent* hideEvent )
 {
     AppletPlayerBase::hideEvent( hideEvent );
     setReadyForCallbacks( false );
@@ -189,7 +189,7 @@ void AppletPlayerVideo::hideEvent( QHideEvent * hideEvent )
  }
 
 //============================================================================
-void AppletPlayerVideo::resizeEvent( QResizeEvent * ev )
+void AppletPlayerVideo::resizeEvent( QResizeEvent* ev )
 {
 	AppletPlayerBase::resizeEvent( ev );
 	if( ( false == VxIsAppShuttingDown() )

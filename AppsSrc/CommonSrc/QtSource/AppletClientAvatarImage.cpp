@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletClientAvatarImage::AppletClientAvatarImage( AppCommon& app, QWidget * parent )
+AppletClientAvatarImage::AppletClientAvatarImage( AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_CLIENT_AVATAR_IMAGE, app, parent )
 {
 	setAppletType( eAppletClientAvatarImage );

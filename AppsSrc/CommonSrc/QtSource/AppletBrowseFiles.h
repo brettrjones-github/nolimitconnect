@@ -33,7 +33,7 @@ class AppletBrowseFiles : public AppletBase, public ToGuiFileXferInterface
 	Q_OBJECT
 public:
 
-	AppletBrowseFiles( AppCommon& app, QWidget * parent = NULL );
+	AppletBrowseFiles( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletBrowseFiles() override;
 
 public:
@@ -66,8 +66,8 @@ protected slots:
 	void						slotListShredIconClicked( QListWidgetItem * item );
 	
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				showEvent( QShowEvent* ev ) override;
+    virtual void				hideEvent( QHideEvent* ev ) override;
     virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
 	void						fromListWidgetRequestFileList( void );

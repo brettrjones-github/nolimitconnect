@@ -29,7 +29,7 @@ class AppletTestAndDebug : public AppletBase, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
-    AppletTestAndDebug( AppCommon& app, QWidget * parent );
+    AppletTestAndDebug( AppCommon& app, QWidget* parent );
     virtual ~AppletTestAndDebug();
 
     void                        logMsg( const char* logMsg, ... );

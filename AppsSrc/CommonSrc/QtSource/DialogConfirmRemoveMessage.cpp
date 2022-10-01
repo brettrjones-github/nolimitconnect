@@ -22,7 +22,7 @@
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
 
 //============================================================================
-DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget * parent )
+DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget* parent )
 : QDialog( parent, Qt::Popup )
 , m_MyApp( GetAppInstance() )
 , m_AssetInfo( assetInfo )

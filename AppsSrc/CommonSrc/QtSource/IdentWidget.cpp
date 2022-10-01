@@ -21,7 +21,7 @@
 #include "AppCommon.h"
 
 //============================================================================
-IdentWidget::IdentWidget(QWidget *parent)
+IdentWidget::IdentWidget(QWidget*parent)
 : IdentLogicInterface(parent)
 {
 	ui.setupUi(this);

@@ -22,7 +22,7 @@ class AppletStoryboardClient : public AppletBase, public GuiWebPageCallback
 {
 	Q_OBJECT
 public:
-    AppletStoryboardClient( AppCommon& app, QWidget * parent );
+    AppletStoryboardClient( AppCommon& app, QWidget* parent );
 	virtual ~AppletStoryboardClient();
 
     void                        setIdentity( GuiUser* guiUser );

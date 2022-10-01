@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsVoicePhone::AppletSettingsVoicePhone( AppCommon& app, QWidget * parent )
+AppletSettingsVoicePhone::AppletSettingsVoicePhone( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_VOICE_PHONE, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

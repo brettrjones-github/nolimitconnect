@@ -26,7 +26,7 @@ class FileShareItemWidget : public QWidget, public QListWidgetItem
 	Q_OBJECT
 
 public:
-	FileShareItemWidget(QWidget *parent=0 );
+	FileShareItemWidget(QWidget*parent=0 );
 	virtual ~FileShareItemWidget();
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }

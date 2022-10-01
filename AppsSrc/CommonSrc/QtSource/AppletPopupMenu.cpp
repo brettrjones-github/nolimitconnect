@@ -48,7 +48,7 @@
 #include <QTimer>
 
 //============================================================================
-AppletPopupMenu::AppletPopupMenu( AppCommon& app, QWidget * parent, VxGUID assetId )
+AppletPopupMenu::AppletPopupMenu( AppCommon& app, QWidget* parent, VxGUID assetId )
 : AppletBase( OBJNAME_APPLET_POPUP_MENU, app, parent )
 {
     setAppletType( eAppletPopupMenu );
@@ -204,11 +204,11 @@ void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
 		break;
 
 	case 2: // chat room listing
-		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, dynamic_cast<QWidget *>(parent()) );
+		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, dynamic_cast<QWidget*>(parent()) );
 		break;
 
 	case 3: // random connect listing
-		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, dynamic_cast<QWidget *>(parent()) );
+		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, dynamic_cast<QWidget*>(parent()) );
 		break;
 
 	default:

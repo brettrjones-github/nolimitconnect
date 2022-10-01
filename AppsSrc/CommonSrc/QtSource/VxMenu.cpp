@@ -19,7 +19,7 @@
 #include <QWidgetAction>
 
 //============================================================================
-VxMenu::VxMenu( QWidget *parent )
+VxMenu::VxMenu( QWidget*parent )
 : QMenu( parent )
 , m_ShowAbove( false )
 {
@@ -53,7 +53,7 @@ void VxMenu::setShowAbove( bool showAbove )
 }
 
 //============================================================================
-void VxMenu::resizeEvent( QResizeEvent * ev )
+void VxMenu::resizeEvent( QResizeEvent* ev )
 {
     QSize newSize = ev->size();
     QMenu::resizeEvent( ev );

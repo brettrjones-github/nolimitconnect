@@ -41,7 +41,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, QString launchParam )
+AppletLibrary::AppletLibrary( AppCommon& app, QWidget* parent, QString launchParam )
     : AppletBase( OBJNAME_APPLET_LIBRARY, app, parent )
     , m_ePluginType( ePluginTypeInvalid )
     , m_IsSelectAFileMode( !launchParam.isEmpty() ? true : false )
@@ -92,7 +92,7 @@ void AppletLibrary::statusMsg( QString strMsg )
 }
 
 //============================================================================
-void AppletLibrary::showEvent( QShowEvent * ev )
+void AppletLibrary::showEvent( QShowEvent* ev )
 {
     AppletBase::showEvent( ev );
     m_MyApp.setIsLibraryActivityActive( true );
@@ -101,7 +101,7 @@ void AppletLibrary::showEvent( QShowEvent * ev )
 }
 
 //============================================================================
-void AppletLibrary::hideEvent( QHideEvent * ev )
+void AppletLibrary::hideEvent( QHideEvent* ev )
 {
     m_MyApp.wantToGuiFileXferCallbacks( this, false );
     AppletBase::hideEvent( ev );

@@ -21,7 +21,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-PluginSettingsWidget::PluginSettingsWidget( QWidget * parent )
+PluginSettingsWidget::PluginSettingsWidget( QWidget* parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {

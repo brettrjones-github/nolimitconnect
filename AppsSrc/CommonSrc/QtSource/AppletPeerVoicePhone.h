@@ -25,7 +25,7 @@ class AppletPeerVoicePhone : public AppletPeerBase
 {
 	Q_OBJECT
 public:
-	AppletPeerVoicePhone( AppCommon& app, QWidget *	parent = nullptr );
+	AppletPeerVoicePhone( AppCommon& app, QWidget*	parent = nullptr );
 	virtual ~AppletPeerVoicePhone() override = default;
 
 	//! called by base class with in session state

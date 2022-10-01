@@ -35,7 +35,7 @@ void FriendListDelegate::paint ( QPainter * painter, const QStyleOptionViewItem 
 	QRect r = option.rect;
 
 	uint64_t u64Widget = index.data(Qt::UserRole + 1).toULongLong();
-	QWidget * poEntryWidget = ( QWidget * )u64Widget;
+	QWidget* poEntryWidget = ( QWidget* )u64Widget;
 	if( poEntryWidget )
 	{
 

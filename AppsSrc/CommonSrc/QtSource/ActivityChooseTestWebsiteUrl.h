@@ -27,7 +27,7 @@ class ActivityChooseTestWebsiteUrl : public ActivityBase
 {
 	Q_OBJECT
 public:
-	ActivityChooseTestWebsiteUrl( AppCommon& app, QWidget * parent = NULL );
+	ActivityChooseTestWebsiteUrl( AppCommon& app, QWidget* parent = NULL );
 	virtual ~ActivityChooseTestWebsiteUrl() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

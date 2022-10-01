@@ -40,7 +40,7 @@ namespace
 }
 
 //============================================================================
-AppletLog::AppletLog( AppCommon& app, QWidget * parent )
+AppletLog::AppletLog( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_LOG, app, parent )
 {
     setAppletType( eAppletLog );

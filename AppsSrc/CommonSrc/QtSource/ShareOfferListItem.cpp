@@ -18,7 +18,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-ShareOfferListItem::ShareOfferListItem(QWidget *parent  )
+ShareOfferListItem::ShareOfferListItem(QWidget*parent  )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 {

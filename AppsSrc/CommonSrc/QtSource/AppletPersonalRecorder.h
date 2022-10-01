@@ -21,7 +21,7 @@ class AppletPersonalRecorder : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletPersonalRecorder( AppCommon& app, QWidget * parent );
+	AppletPersonalRecorder( AppCommon& app, QWidget* parent );
 	virtual ~AppletPersonalRecorder();
 
     void                        callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 );

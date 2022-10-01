@@ -20,7 +20,7 @@ class VxScrollArea : public QScrollArea
 {
 	Q_OBJECT
 public:
-	VxScrollArea(QWidget *parent=0);
+	VxScrollArea(QWidget*parent=0);
 	virtual ~VxScrollArea() = default;
 
 };

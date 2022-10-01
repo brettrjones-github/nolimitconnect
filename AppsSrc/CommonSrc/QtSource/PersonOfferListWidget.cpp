@@ -25,7 +25,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-PersonOfferListWidget::PersonOfferListWidget( QWidget * parent )
+PersonOfferListWidget::PersonOfferListWidget( QWidget* parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
@@ -176,11 +176,11 @@ void PersonOfferListWidget::slotFriendListItemClicked( FriendListEntryWidget* it
 	{
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeMessenger ) )
 		{
-			QWidget * parent2 = 0;
-			QWidget * parent1 = (QWidget *)this->parent();
+			QWidget* parent2 = 0;
+			QWidget* parent1 = (QWidget*)this->parent();
 			if( parent1 )
 			{
-				parent2 = (QWidget *)parent1->parent();
+				parent2 = (QWidget*)parent1->parent();
 			}
 
 			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, ePluginTypeMessenger, parent2 ? parent2 : parent1 );

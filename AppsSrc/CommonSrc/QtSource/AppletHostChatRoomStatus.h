@@ -26,7 +26,7 @@ class AppletHostChatRoomStatus : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostChatRoomStatus( AppCommon& app, QWidget * parent );
+    AppletHostChatRoomStatus( AppCommon& app, QWidget* parent );
 	virtual ~AppletHostChatRoomStatus();
 
     PermissionWidget*           getChatRoomHostPermissionWidget()   { return ui.m_HostPermissionWidget; }

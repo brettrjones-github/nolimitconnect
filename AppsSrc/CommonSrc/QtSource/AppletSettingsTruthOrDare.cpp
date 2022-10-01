@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsTruthOrDare::AppletSettingsTruthOrDare( AppCommon& app, QWidget * parent )
+AppletSettingsTruthOrDare::AppletSettingsTruthOrDare( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_TRUTH_OR_DARE, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

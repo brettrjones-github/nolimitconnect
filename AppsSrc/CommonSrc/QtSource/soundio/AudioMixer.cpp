@@ -48,7 +48,7 @@ namespace
 }
 
 //============================================================================
-AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent )
+AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget* parent )
 : QWidget( parent )
 , m_AudioIoMgr( audioIoMgr )
 , m_MyApp( audioIoMgr.getMyApp() )

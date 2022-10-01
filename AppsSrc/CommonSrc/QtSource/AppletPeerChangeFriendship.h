@@ -27,7 +27,7 @@ class AppletPeerChangeFriendship : public AppletPeerBase
 	Q_OBJECT
 public:
 
-	AppletPeerChangeFriendship( AppCommon& app, QWidget * parent = NULL );
+	AppletPeerChangeFriendship( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletPeerChangeFriendship() override = default;
 
 	//=== helpers ===//

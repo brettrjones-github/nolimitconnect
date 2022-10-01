@@ -42,7 +42,7 @@
 const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
-ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, bool isDialog, bool isPopup, bool fullWindowSize )
+ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget* parent, EApplet eAppletType, bool isDialog, bool isPopup, bool fullWindowSize )
 : QDialog( parent, Qt::Widget )
 , ObjectCommon( objName )
 , m_MyApp( app )
@@ -213,35 +213,35 @@ void ActivityBase::setIsMaxScreenSize( bool fullScreen )
 
 //============================================================================
 // only available for applets
-QFrame * ActivityBase::getContentItemsFrame( void )
+QFrame* ActivityBase::getContentItemsFrame( void )
 {
     return ui.m_ContentItemsFrame;
 }
 
 //============================================================================
 // only available for applets
-QFrame * ActivityBase::getContentFrameOfLaunchFrame( void )
+QFrame* ActivityBase::getContentFrameOfLaunchFrame( void )
 {
     return GuiHelpers::getLaunchPageFrame( ui.m_ContentItemsFrame );
 }
 
 //============================================================================
 // only available for applets
-QFrame * ActivityBase::getContentFrameOfMessengerFrame( void )
+QFrame* ActivityBase::getContentFrameOfMessengerFrame( void )
 {
     return GuiHelpers::getMessengerPageFrame( ui.m_ContentItemsFrame );
 }
 
 //============================================================================
 // only available for applets
-QFrame * ActivityBase::getContentFrameOfOppositePageFrame( void )
+QFrame* ActivityBase::getContentFrameOfOppositePageFrame( void )
 {
     return GuiHelpers::getOppositePageFrame( ui.m_ContentItemsFrame );
 }
 
 //============================================================================
 // get home page activity ( Launch or Messenger Page )
-QWidget * ActivityBase::getParentPageFrame( void )
+QWidget* ActivityBase::getParentPageFrame( void )
 {
     return GuiHelpers::getParentPageFrame( this );
 }
@@ -308,7 +308,7 @@ void ActivityBase::setStatusText( QString statusMsgText )
 }
 
 //============================================================================  
-void ActivityBase::setNewParent( QWidget * parent )
+void ActivityBase::setNewParent( QWidget* parent )
 {
 	bool dlgIsVisible = isVisible();
 	m_ParentWidget = parent;
@@ -429,7 +429,7 @@ void ActivityBase::errMessageBox2( QString title, const char * msg, ... )
 }
 
 //============================================================================
-void ActivityBase::showEvent( QShowEvent * showEvent )
+void ActivityBase::showEvent( QShowEvent* showEvent )
 {
 #if defined(TARGET_OS_ANDROID)
     // not sure why but android seems to loose the theme text color so reapply
@@ -466,7 +466,7 @@ void ActivityBase::showEvent( QShowEvent * showEvent )
 }
 
 //============================================================================
-void ActivityBase::resizeEvent( QResizeEvent * ev )
+void ActivityBase::resizeEvent( QResizeEvent* ev )
 {
 	QDialog::resizeEvent( ev );
     updateExpandWindowIcon();

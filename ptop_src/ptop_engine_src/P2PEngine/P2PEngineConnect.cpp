@@ -83,7 +83,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 //============================================================================
 bool P2PEngine::txSystemPkt(	const VxGUID&		destOnlineId,
 								VxSktBase *			sktBase, 
-								VxPktHdr *			poPkt, 
+								VxPktHdr*			poPkt, 
 								bool				bDisconnectAfterSend )
 {
 	bool bSendSuccess = false;
@@ -138,13 +138,13 @@ bool P2PEngine::txImAlivePkt(	VxGUID&				destOnlineId,
 }
 
 //============================================================================
-void P2PEngine::broadcastSystemPkt( VxPktHdr * pkt, bool onlyIncludeMyContacts )
+void P2PEngine::broadcastSystemPkt( VxPktHdr* pkt, bool onlyIncludeMyContacts )
 {
 	m_ConnectionList.broadcastSystemPkt( pkt, onlyIncludeMyContacts );
 }
 
 //============================================================================
-void P2PEngine::broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& retIdsSentPktTo )
+void P2PEngine::broadcastSystemPkt( VxPktHdr* pkt, VxGUIDList& retIdsSentPktTo )
 {
 	m_ConnectionList.broadcastSystemPkt( pkt, retIdsSentPktTo );
 }
@@ -152,7 +152,7 @@ void P2PEngine::broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& retIdsSentPktTo 
 //============================================================================
 bool P2PEngine::txSystemPkt(	VxNetIdentBase *	netIdent, 
 								VxSktBase *			sktBase, 
-								VxPktHdr *			poPkt, 
+								VxPktHdr*			poPkt, 
 								bool				bDisconnectAfterSend )
 {
 	return txSystemPkt( netIdent->getMyOnlineId(), sktBase, poPkt, bDisconnectAfterSend );
@@ -162,7 +162,7 @@ bool P2PEngine::txSystemPkt(	VxNetIdentBase *	netIdent,
 bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType, 
 								VxNetIdentBase *	netIdent, 
 								VxSktBase *			sktBase, 
-								VxPktHdr *			poPkt, 
+								VxPktHdr*			poPkt, 
 								bool				bDisconnectAfterSend )
 {
 	bool bSendSuccess = false;

@@ -34,7 +34,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
+AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_EDIT_ABOUT_ME, app, parent )
 {
     setAppletType( eAppletEditAboutMe );

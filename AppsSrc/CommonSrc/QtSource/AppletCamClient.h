@@ -22,7 +22,7 @@ class AppletCamClient : public AppletBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
-	AppletCamClient( AppCommon& app, QWidget * parent );
+	AppletCamClient( AppCommon& app, QWidget* parent );
 	virtual ~AppletCamClient();
 
     void						setupCamFeed( GuiUser* feedNetIdent );

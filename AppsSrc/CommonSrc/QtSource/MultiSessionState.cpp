@@ -50,9 +50,9 @@ MultiSessionState::MultiSessionState( AppCommon& myApp, AppletMultiMessenger& ac
 
 //========================================================================
 void MultiSessionState::setGuiWidgets(	GuiUser *		    hisIdent,
-										QFrame * 			offersLayout,
-										QFrame * 			responseLayout,
-										QFrame * 			hangupLayout,
+										QFrame* 			offersLayout,
+										QFrame* 			responseLayout,
+										QFrame* 			hangupLayout,
 										VxPushButton *		sessionOfferButton,
 										VxPushButton *		acceptSessionButton,
 										QLabel *			acceptSessionText,

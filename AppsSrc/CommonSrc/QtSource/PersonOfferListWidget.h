@@ -32,7 +32,7 @@ class PersonOfferListWidget : public QListWidget
 	Q_OBJECT
 
 public:
-	PersonOfferListWidget( QWidget * parent );
+	PersonOfferListWidget( QWidget* parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );

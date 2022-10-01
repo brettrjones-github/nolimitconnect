@@ -416,6 +416,9 @@ public:
 	virtual bool				fromGuiDownloadWebPage( EWebPageType webPageType, VxGUID& onlineId ) = 0;
 	virtual bool				fromGuiCancelWebPage( EWebPageType webPageType, VxGUID& onlineId ) = 0;
 
+	virtual bool				fromGuiDownloadFileList( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes = 0 ) = 0;
+	virtual bool				fromGuiDownloadFileListCancel( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId ) = 0;
+
 	virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent ) = 0;
 
 	virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission ) = 0;

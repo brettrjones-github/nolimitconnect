@@ -22,7 +22,7 @@
 #include <QDebug>
 
 //============================================================================
-InputVoiceWidget::InputVoiceWidget( QWidget * parent )
+InputVoiceWidget::InputVoiceWidget( QWidget* parent )
 : InputBaseWidget( GetAppInstance(), parent )
 , m_IsRecording( false )
 {

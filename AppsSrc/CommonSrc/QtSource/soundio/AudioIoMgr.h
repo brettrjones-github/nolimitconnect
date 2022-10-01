@@ -33,7 +33,7 @@ class AudioIoMgr : public QWidget, public IAudioRequests
 {
     Q_OBJECT
 public:
-    explicit AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget * parent );
+    explicit AudioIoMgr( AppCommon& app, IAudioCallbacks& audioCallbacks, QWidget* parent );
 
     ~AudioIoMgr() override = default;
 

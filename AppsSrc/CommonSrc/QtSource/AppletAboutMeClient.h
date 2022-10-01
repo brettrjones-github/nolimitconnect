@@ -22,7 +22,7 @@ class AppletAboutMeClient : public AppletBase, public GuiWebPageCallback
 {
 	Q_OBJECT
 public:
-	AppletAboutMeClient( AppCommon& app, QWidget * parent );
+	AppletAboutMeClient( AppCommon& app, QWidget* parent );
 	virtual ~AppletAboutMeClient();
 
     void                        setIdentity( GuiUser* guiUser );

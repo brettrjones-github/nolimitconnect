@@ -31,7 +31,7 @@ class OfferBarWidget : public QFrame, public ToGuiOfferInterface
 	Q_OBJECT
 
 public:
-	OfferBarWidget( QWidget * parent = 0 );
+	OfferBarWidget( QWidget* parent = 0 );
 	virtual ~OfferBarWidget();
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
@@ -42,8 +42,8 @@ protected slots:
 	void						slotRejectOfferButtonClicked( void );
 
 protected:
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
+	virtual void				showEvent( QShowEvent* ev );
+	virtual void				hideEvent( QHideEvent* ev );
 	virtual void				closeEvent( QCloseEvent * ev );
 
 	virtual void				doGuiUpdatePluginOffer( OfferSessionState * offerState ); 

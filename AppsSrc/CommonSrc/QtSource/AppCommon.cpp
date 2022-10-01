@@ -328,7 +328,7 @@ P2PEngine& AppCommon::getEngine( void )
 }
 
 //============================================================================
-void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame )
+void AppCommon::startupAppCommon( QFrame* appletFrame, QFrame* messangerFrame )
 {
     if( m_AppCommonInitialized )
     {
@@ -403,19 +403,19 @@ bool AppCommon::getIsMaxScreenSize( bool isMessagerFrame )
 }
 
 //============================================================================
-void AppCommon::switchWindowFocus( QWidget * appIconButton )
+void AppCommon::switchWindowFocus( QWidget* appIconButton )
 {
 	m_HomePage.switchWindowFocus( appIconButton );
 }
 
 //============================================================================
-QFrame * AppCommon::getAppletFrame( EApplet applet )
+QFrame* AppCommon::getAppletFrame( EApplet applet )
 {
 	return getHomePage().getAppletFrame( applet );
 }
 
 //============================================================================
-ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget * parent )
+ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget* parent )
 {
 	return m_AppletMgr.launchApplet( applet, parent );
 }
@@ -433,7 +433,7 @@ void AppCommon::activityStateChange( ActivityBase * activity, bool isCreated )
 }
 
 //============================================================================
-void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWidget * parent )
+void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWidget* parent )
 {
 	if( 0 == parent )
 	{
@@ -547,7 +547,7 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWid
 }
 
 //============================================================================
-void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
+void AppCommon::executeActivity( GuiOfferSession * offer, QWidget* parent )
 {
 	switch( offer->getPluginType() )
 	{
@@ -683,7 +683,7 @@ void AppCommon::insertKeystroke( int keyCode )
 		return;
 	}
 
-	QWidget *receiver = QApplication::focusWidget();
+	QWidget*receiver = QApplication::focusWidget();
 	if( 0 == receiver )
 	{
 		receiver = getQApplication().activeWindow();
@@ -1178,7 +1178,7 @@ void AppCommon::startNetworkMonitor( void )
 
 //============================================================================
 	// prompt user to confirm wants to shutdown app.. caller must call appCommonShutdown if answer is yes
-bool AppCommon::confirmAppShutdown( QWidget * parentWindow )
+bool AppCommon::confirmAppShutdown( QWidget* parentWindow )
 {
 	if( m_bUserCanceledCreateProfile )
 	{

@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletServiceAboutMe::AppletServiceAboutMe( AppCommon& app, QWidget * parent )
+AppletServiceAboutMe::AppletServiceAboutMe( AppCommon& app, QWidget* parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_ABOUT_ME, app, parent )
 {
     setupServiceBaseApplet( eAppletServiceAboutMe, ePluginTypeAboutMePageServer );

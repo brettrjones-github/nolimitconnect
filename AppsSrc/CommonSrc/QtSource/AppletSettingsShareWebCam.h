@@ -20,7 +20,7 @@ class AppletSettingsShareWebCam : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsShareWebCam( AppCommon& app, QWidget * parent );
+    AppletSettingsShareWebCam( AppCommon& app, QWidget* parent );
 	virtual ~AppletSettingsShareWebCam() override;
 
 protected:

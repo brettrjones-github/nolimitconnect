@@ -17,7 +17,7 @@
 #include "VxMenuButtonTop.h"
 
 //============================================================================
-VxMenuButtonTop::VxMenuButtonTop( QWidget * parent )
+VxMenuButtonTop::VxMenuButtonTop( QWidget* parent )
 : VxMenuButton( parent )
 {
     setObjectName( "VxMenuButtonTop" );
@@ -25,7 +25,7 @@ VxMenuButtonTop::VxMenuButtonTop( QWidget * parent )
 }
 
 //============================================================================
-VxMenuButtonTop::VxMenuButtonTop( const QString & text, QWidget * parent )
+VxMenuButtonTop::VxMenuButtonTop( const QString & text, QWidget* parent )
 : VxMenuButton( text, parent )
 {
     setMenuLocation( false );

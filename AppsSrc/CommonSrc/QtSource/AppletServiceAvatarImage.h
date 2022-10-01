@@ -19,7 +19,7 @@ class AppletServiceAvatarImage : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-	AppletServiceAvatarImage( AppCommon& app, QWidget * parent );
+	AppletServiceAvatarImage( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceAvatarImage() override;
 
 };

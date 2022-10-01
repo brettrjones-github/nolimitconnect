@@ -24,7 +24,7 @@ class AppletEditAvatarImage : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletEditAvatarImage( AppCommon& app, QWidget * parent );
+    AppletEditAvatarImage( AppCommon& app, QWidget* parent );
 	virtual ~AppletEditAvatarImage() = default;
 
 signals:

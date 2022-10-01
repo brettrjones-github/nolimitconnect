@@ -30,7 +30,7 @@ class RichTextWidget : public QTextEdit
     Q_OBJECT
 
 public:
-    RichTextWidget( QWidget *parent = 0, QString initialFile = "" );
+    RichTextWidget( QWidget*parent = 0, QString initialFile = "" );
 
 	void						loadRichTextFile( const char * pFileName );
 	bool						maybeSave();

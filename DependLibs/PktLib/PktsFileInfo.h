@@ -197,13 +197,16 @@ public:
     bool						setSearchText( std::string& searchText );
     bool						getSearchText( std::string& searchText );
 
+    void						setSearchFileTypes( uint8_t fileTypes ) { m_FileTypes = fileTypes; }
+    uint8_t						getSearchFileTypes( void )              { return m_FileTypes; }
+
     PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
     void                        calcPktLen( void );
 
 protected:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
+    uint8_t					    m_FileTypes{ 0 };
     uint16_t                    m_Res2{ 0 };
     uint32_t                    m_Res3{ 0 };
     VxGUID                      m_SearchSessionId;

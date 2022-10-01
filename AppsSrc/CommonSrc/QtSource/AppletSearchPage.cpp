@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSearchPage::AppletSearchPage( AppCommon& app, QWidget * parent )
+AppletSearchPage::AppletSearchPage( AppCommon& app, QWidget* parent )
 : AppletLaunchPage( app, parent, eAppletSearchPage, OBJNAME_APPLET_SEARCH_PAGE )
 {
     setAppletType( eAppletSearchPage );
@@ -84,7 +84,7 @@ void AppletSearchPage::setupAppletSearchPage( void )
 }
 
 //============================================================================
-void AppletSearchPage::resizeEvent( QResizeEvent * ev )
+void AppletSearchPage::resizeEvent( QResizeEvent* ev )
 {
 	ActivityBase::resizeEvent( ev );
 	//LogMsg( LOG_DEBUG, "AppletSearchPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
@@ -92,7 +92,7 @@ void AppletSearchPage::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AppletSearchPage::showEvent( QShowEvent * showEvent )
+void AppletSearchPage::showEvent( QShowEvent* showEvent )
 {
     AppletLaunchPage::showEvent( showEvent );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );

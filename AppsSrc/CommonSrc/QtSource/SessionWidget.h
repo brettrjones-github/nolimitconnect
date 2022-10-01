@@ -27,7 +27,7 @@ class SessionWidget : public QWidget
 	Q_OBJECT
 
 public:
-	SessionWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
+	SessionWidget( QWidget*parent = 0, EAssetType inputMode = eAssetTypeUnknown );
     virtual ~SessionWidget() = default;
 
 	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );

@@ -49,8 +49,8 @@ public:
     std::string                 getGroupieUrl( void );
     std::string                 getHostUrl( void );
 
-    void						setWidget( QWidget * widget )				{ m_Widget = widget; }
-    QWidget *					getWidget( void )							{ return m_Widget; }
+    void						setWidget( QWidget* widget )				{ m_Widget = widget; }
+    QWidget*					getWidget( void )							{ return m_Widget; }
 
     std::string                 getOnlineName( void )                       { return getGuiUser() ? getGuiUser()->getOnlineName() : ""; }
     std::string                 getHostDescription( void );

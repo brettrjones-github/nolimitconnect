@@ -36,10 +36,10 @@ public:
 	virtual void				toGuiFileList( VxMyFileInfo& fileInfo ){};
 	virtual void				toGuiFileListReply(	FileListReplySession * xferSession ){};
 
-	virtual void				toGuiStartUpload( GuiFileXferSession * xferSession ){};
+	virtual void				toGuiStartUpload( GuiFileXferSession* xferSession ){};
 	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSession, EXferError xferError ){};
 
-	virtual void				toGuiStartDownload( GuiFileXferSession * xferSession ){};
+	virtual void				toGuiStartDownload( GuiFileXferSession* xferSession ){};
 	virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSession, QString newFileName, EXferError xferError ){};
 
 	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ){};

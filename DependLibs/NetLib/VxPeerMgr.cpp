@@ -166,7 +166,7 @@ void VxPeerMgr::handleSktCallback( VxSktBase* sktBase )
 //============================================================================
 bool VxPeerMgr::txPacket(	VxSktBase *			sktBase,
 							const VxGUID&		destOnlineId,
-							VxPktHdr *			pktHdr, 				
+							VxPktHdr*			pktHdr, 				
 							bool				bDisconnect )
 {
 	pktHdr->setDestOnlineId( destOnlineId );
@@ -175,7 +175,7 @@ bool VxPeerMgr::txPacket(	VxSktBase *			sktBase,
 
 //============================================================================
 bool VxPeerMgr::txPacketWithDestId(	VxSktBase *			sktBase,
-									VxPktHdr *			pktHdr, 		
+									VxPktHdr*			pktHdr, 		
 									bool				bDisconnect )
 {
     if( !sktBase || false == isSktActive( sktBase ) )

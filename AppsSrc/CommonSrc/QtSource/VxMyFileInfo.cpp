@@ -29,7 +29,7 @@
 #include <QUrl>
 
 //============================================================================
-VxMyFileInfo::VxMyFileInfo(QWidget *parent)
+VxMyFileInfo::VxMyFileInfo(QWidget*parent)
 : QObject(parent)
 {
     setObjectName( "VxMyFileInfo" );

@@ -44,7 +44,7 @@ PluginFileShareServer::PluginFileShareServer( P2PEngine& engine, PluginMgr& plug
 //============================================================================
 void PluginFileShareServer::onNetworkConnectionReady( bool requiresRelay )
 {
-	if( eFriendStateIgnore != m_MyIdent->getPluginPermission( getPluginType() ) )
+	if( isPluginEnabled() )
 	{
 		updateSharedFilesInfo();
 	}

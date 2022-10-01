@@ -25,7 +25,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletPlayerPhoto::AppletPlayerPhoto( AppCommon& app, QWidget * parent )
+AppletPlayerPhoto::AppletPlayerPhoto( AppCommon& app, QWidget* parent )
 : AppletPlayerBase( OBJNAME_APPLET_PLAYER_PHOTO, app, parent )
 , m_ActivityCallbacksEnabled( false )
 , m_IsPlaying( false )
@@ -175,19 +175,19 @@ void AppletPlayerPhoto::setAssetInfo( AssetInfo& assetInfo )
 }
 
 //============================================================================
-void AppletPlayerPhoto::showEvent( QShowEvent * showEvent )
+void AppletPlayerPhoto::showEvent( QShowEvent* showEvent )
 {
 	AppletPlayerBase::showEvent( showEvent );
 }
 
 //============================================================================
-void AppletPlayerPhoto::hideEvent( QHideEvent * hideEvent )
+void AppletPlayerPhoto::hideEvent( QHideEvent* hideEvent )
 {
     AppletPlayerBase::hideEvent( hideEvent );
  }
 
 //============================================================================
-void AppletPlayerPhoto::resizeEvent( QResizeEvent * ev )
+void AppletPlayerPhoto::resizeEvent( QResizeEvent* ev )
 {
 	AppletPlayerBase::resizeEvent( ev );
 	/*

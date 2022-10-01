@@ -24,7 +24,7 @@ class InformationWidget : public QWidget
 	Q_OBJECT
 
 public:
-    InformationWidget( QWidget * parent = 0 );
+    InformationWidget( QWidget* parent = 0 );
 
     void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updateInformation(); }
     EPluginType                 getPluginType() { return m_PluginType;  }

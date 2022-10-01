@@ -30,7 +30,7 @@ class AppletPeerReplyFileOffer : public AppletPeerBase
 {
 	Q_OBJECT
 public:
-	AppletPeerReplyFileOffer( AppCommon& app, QWidget * parent = nullptr );
+	AppletPeerReplyFileOffer( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletPeerReplyFileOffer() override = default;
 
 public slots:

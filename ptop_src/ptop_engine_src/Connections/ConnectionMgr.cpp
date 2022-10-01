@@ -1020,7 +1020,7 @@ bool ConnectionMgr::sendMyPktAnnounce(  VxGUID&				destinationId,
 //============================================================================
 bool ConnectionMgr::txPacket(	VxGUID&				destinationId, 
                                 VxSktBase *			sktBase, 
-                                VxPktHdr *			poPkt )
+                                VxPktHdr*			poPkt )
 {
     bool bSendSuccess = false;
     poPkt->setSrcOnlineId( m_PktAnn.getMyOnlineId() );

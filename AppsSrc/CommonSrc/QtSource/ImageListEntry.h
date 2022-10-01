@@ -21,7 +21,7 @@ class ImageListEntry : public ThumbnailViewWidget
 {
     Q_OBJECT
 public:
-    ImageListEntry( QWidget * parent );
+    ImageListEntry( QWidget* parent );
     ~ImageListEntry() override = default;
 
     bool                        loadFromAsset( AssetInfo * thumbAsset );

@@ -32,7 +32,7 @@ class FriendListWidget : public QListWidget
 	Q_OBJECT
 
 public:
-	FriendListWidget( QWidget * parent );
+	FriendListWidget( QWidget* parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );

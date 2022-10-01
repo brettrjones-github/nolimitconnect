@@ -26,7 +26,7 @@ class AppletHostRandomConnectStatus : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostRandomConnectStatus( AppCommon& app, QWidget * parent );
+    AppletHostRandomConnectStatus( AppCommon& app, QWidget* parent );
 	virtual ~AppletHostRandomConnectStatus();
 
     PermissionWidget*           getRandomConnectHostPermissionWidget()    { return ui.m_HostPermissionWidget; }

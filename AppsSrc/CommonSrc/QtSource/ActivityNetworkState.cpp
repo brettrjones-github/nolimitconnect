@@ -28,7 +28,7 @@ namespace
 }
 
 //============================================================================
-ActivityNetworkState::ActivityNetworkState( AppCommon& app, QWidget * parent )
+ActivityNetworkState::ActivityNetworkState( AppCommon& app, QWidget* parent )
 : ActivityBase( OBJNAME_ACTIVITY_NETWORK_STATE, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);

@@ -26,7 +26,7 @@
 #include <QCloseEvent>
 
 //============================================================================
-OfferBarWidget::OfferBarWidget( QWidget * parent )
+OfferBarWidget::OfferBarWidget( QWidget* parent )
 : QFrame( parent )
 , m_MyApp( GetAppInstance() )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
@@ -58,14 +58,14 @@ MyIcons&  OfferBarWidget::getMyIcons( void )
 }
 
 //============================================================================
-void OfferBarWidget::showEvent( QShowEvent * ev )
+void OfferBarWidget::showEvent( QShowEvent* ev )
 {
 	QWidget::showEvent( ev );
 	initializeOfferBar();
 }
 
 //============================================================================
-void OfferBarWidget::hideEvent( QHideEvent * ev )
+void OfferBarWidget::hideEvent( QHideEvent* ev )
 {
 	QWidget::hideEvent( ev );
 }

@@ -25,7 +25,7 @@
 #include <QMouseEvent>
 
 //============================================================================
-VxShredderButton::VxShredderButton( QWidget *parent ) 
+VxShredderButton::VxShredderButton( QWidget*parent ) 
 : QPushButton( parent ) 
 , m_MyApp( GetAppInstance() )
 , m_ConfirmRequired( true )

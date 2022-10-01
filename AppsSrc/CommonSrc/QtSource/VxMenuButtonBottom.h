@@ -20,8 +20,8 @@ class VxMenuButtonBottom : public VxMenuButton
 {
     Q_OBJECT
 public:
-    VxMenuButtonBottom( QWidget *parent = 0 );
-    VxMenuButtonBottom( const QString & text, QWidget *parent = 0 );
+    VxMenuButtonBottom( QWidget*parent = 0 );
+    VxMenuButtonBottom( const QString & text, QWidget*parent = 0 );
     virtual ~VxMenuButtonBottom() {};
 
     // setMenuParams  must be called before add menu item

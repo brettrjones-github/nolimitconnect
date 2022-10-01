@@ -191,9 +191,10 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REQ]					= &PktHandlerBase::onPktFileInfoMoreReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REPLY]				= &PktHandlerBase::onPktFileInfoMoreReply;
 
+	m_aBaseSysPktFuncTable[ PKT_TYPE_MEMBERSHIP_REQ ]					= &PktHandlerBase::onPktMembershipReq;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_MEMBERSHIP_REPLY ]					= &PktHandlerBase::onPktMembershipReply;
+
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_USER_DISCONNECT ]			= &PktHandlerBase::onPktRelayUserDisconnect;
-
-
 }
 
 //============================================================================

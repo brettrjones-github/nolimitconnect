@@ -29,8 +29,8 @@ class VxPushButton : public QPushButton
 {
 	Q_OBJECT
 public:
-	VxPushButton(QWidget *parent=0);
-	VxPushButton(const QString &text, QWidget *parent=0);
+	VxPushButton(QWidget*parent=0);
+	VxPushButton(const QString &text, QWidget*parent=0);
 	virtual ~VxPushButton() = default;
 
     virtual int					heightForWidth( int width ) const override;
@@ -102,7 +102,7 @@ public:
 	void						setIcons(	EMyIcons	normalIcon, 
 											EMyIcons	overlay1Icon		= eMyIconNone );
 
-    virtual void                setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame );
+    virtual void                setAppIcon( EMyIcons appletIcon, QWidget* parentAppFrame );
 
     void                        setSquareButtonSize( EButtonSize buttonSize );
     EButtonSize                 getSquareButtonSize( void )                         { return m_SquareButtonSize;  }
@@ -214,7 +214,7 @@ protected:
 
 	QTimer *					m_BlinkTimer;
     int							m_BlinkState{ 0 };
-    QWidget *					m_AppFrame{ nullptr };
+    QWidget*					m_AppFrame{ nullptr };
     int							m_AppClickCount{ 0 };
     int64_t                     m_AppClickTime{ 0 };
     EButtonSize                 m_SquareButtonSize{ eButtonSizeSmall };

@@ -25,7 +25,7 @@
 #include <QDebug>
 
 //============================================================================
-InputVideoWidget::InputVideoWidget( QWidget * parent )
+InputVideoWidget::InputVideoWidget( QWidget* parent )
 : InputBaseWidget( GetAppInstance(), parent )
 , m_IsRecording( false )
 {
@@ -58,7 +58,7 @@ InputVideoWidget::InputVideoWidget( QWidget * parent )
 }
 
 //============================================================================
-void InputVideoWidget::showEvent(QShowEvent * showEvent)
+void InputVideoWidget::showEvent(QShowEvent* showEvent)
 {
 	InputBaseWidget::showEvent(showEvent);
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )
@@ -70,7 +70,7 @@ void InputVideoWidget::showEvent(QShowEvent * showEvent)
 }
 
 //============================================================================
-void InputVideoWidget::hideEvent(QHideEvent * hideEvent)
+void InputVideoWidget::hideEvent(QHideEvent* hideEvent)
 {
 	if( ( 0 != m_MyIdent ) && ( false == VxIsAppShuttingDown() ) )
 	{

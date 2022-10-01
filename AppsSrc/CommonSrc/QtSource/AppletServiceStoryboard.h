@@ -19,7 +19,7 @@ class AppletServiceStoryboard : public AppletServiceBase
 {
 	Q_OBJECT
 public:
-	AppletServiceStoryboard( AppCommon& app, QWidget * parent );
+	AppletServiceStoryboard( AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceStoryboard();
 
 

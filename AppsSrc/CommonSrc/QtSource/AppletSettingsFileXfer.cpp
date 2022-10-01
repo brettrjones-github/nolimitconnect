@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsFileXfer::AppletSettingsFileXfer( AppCommon& app, QWidget * parent )
+AppletSettingsFileXfer::AppletSettingsFileXfer( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_FILE_XFER, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

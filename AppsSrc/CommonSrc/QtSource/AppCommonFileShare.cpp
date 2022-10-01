@@ -72,7 +72,7 @@ void AppCommon::toGuiStartUpload( VxNetIdent*	netIdent,
 //============================================================================
 void AppCommon::slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId )
 {
-	GuiFileXferSession * fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ), lclSessionId,
+	GuiFileXferSession* fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ), lclSessionId,
 																	fileType, fileLen, fileName.toUtf8().constData(), assetId, fileHashId );
 	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
@@ -106,7 +106,7 @@ void AppCommon::toGuiStartDownload( VxNetIdent*		netIdent,
 //============================================================================
 void AppCommon::slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId )
 {
-	GuiFileXferSession * fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ),
+	GuiFileXferSession* fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ),
 		lclSessionId, fileType, fileLen, fileName.toUtf8().constData(), assetId, fileHashId );
 	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )

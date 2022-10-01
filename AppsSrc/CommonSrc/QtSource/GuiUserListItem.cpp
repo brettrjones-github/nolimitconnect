@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-GuiUserListItem::GuiUserListItem(QWidget *parent  )
+GuiUserListItem::GuiUserListItem(QWidget*parent  )
 : IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 {

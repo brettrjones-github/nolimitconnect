@@ -19,12 +19,12 @@ class AppletNetHostingPage : public AppletLaunchPage
 {
 	Q_OBJECT
 public:
-	AppletNetHostingPage( AppCommon& app, QWidget * parent );
+	AppletNetHostingPage( AppCommon& app, QWidget* parent );
 	virtual ~AppletNetHostingPage() = default;
 
 protected:
-	virtual void				showEvent( QShowEvent * );
-	void						resizeEvent( QResizeEvent * );
+	virtual void				showEvent( QShowEvent* );
+	void						resizeEvent( QResizeEvent* );
 
 private:
 	void						setupAppletNetHostingPage( void );

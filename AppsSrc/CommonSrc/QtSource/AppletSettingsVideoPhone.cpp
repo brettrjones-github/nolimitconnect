@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsVideoPhone::AppletSettingsVideoPhone( AppCommon& app, QWidget * parent )
+AppletSettingsVideoPhone::AppletSettingsVideoPhone( AppCommon& app, QWidget* parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_VIDEO_PHONE, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );

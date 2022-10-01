@@ -27,7 +27,7 @@
 #include <time.h>
 
 //============================================================================
-ChatEntryWidget::ChatEntryWidget( QWidget *parent, EAssetType inputMode )
+ChatEntryWidget::ChatEntryWidget( QWidget*parent, EAssetType inputMode )
 : QWidget( parent )
 , m_InputMode( inputMode )
 , m_MyIdent( 0 )

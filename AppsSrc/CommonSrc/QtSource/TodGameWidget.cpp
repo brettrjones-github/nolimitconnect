@@ -17,7 +17,7 @@
 #include "TodGameWidget.h"
 
 //============================================================================
-TodGameWidget::TodGameWidget(QWidget *parent)
+TodGameWidget::TodGameWidget(QWidget*parent)
 : QWidget(parent)
 {
 	ui.setupUi(this);

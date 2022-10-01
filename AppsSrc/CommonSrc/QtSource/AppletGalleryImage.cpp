@@ -33,7 +33,7 @@
 #include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-AppletGalleryImage::AppletGalleryImage(	AppCommon& app, QWidget * parent )
+AppletGalleryImage::AppletGalleryImage(	AppCommon& app, QWidget* parent )
 : AppletBase( OBJNAME_APPLET_GALLERY_IMAGE, app, parent )
 , m_AssetMgr( app.getEngine().getAssetMgr() )
 {

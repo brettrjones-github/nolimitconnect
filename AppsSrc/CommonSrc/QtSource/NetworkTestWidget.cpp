@@ -32,7 +32,7 @@
 #include <stdio.h>
 
 //============================================================================
-NetworkTestWidget::NetworkTestWidget( QWidget *		parent )
+NetworkTestWidget::NetworkTestWidget( QWidget*		parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
     , m_Timer(new QTimer(this))

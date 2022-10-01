@@ -19,13 +19,13 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-VxTagLabel::VxTagLabel(QWidget *parent, Qt::WindowFlags f) 
+VxTagLabel::VxTagLabel(QWidget*parent, Qt::WindowFlags f) 
 : VxLabel(parent,f) 
 {
 }
 
 //============================================================================
-VxTagLabel::VxTagLabel(const QString &text, QWidget *parent, Qt::WindowFlags f) 
+VxTagLabel::VxTagLabel(const QString &text, QWidget*parent, Qt::WindowFlags f) 
 : VxLabel(text,parent,f) 
 {
 	setupQTagLabel();

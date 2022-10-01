@@ -54,7 +54,7 @@
 const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
-RenderGlWidget::RenderGlWidget(QWidget *parent)
+RenderGlWidget::RenderGlWidget(QWidget*parent)
 : RenderGlLogic( *this, parent)
 , m_MyApp( GetAppInstance() )
 , m_QtToKodi( m_MyApp )
@@ -150,14 +150,14 @@ void RenderGlWidget::handleGlResize( int width, int height )
 }
 
 //============================================================================
-void RenderGlWidget::showEvent( QShowEvent * ev )
+void RenderGlWidget::showEvent( QShowEvent* ev )
 {
     QWidget::showEvent( ev );
     setRenderWindowVisible( true );
 }
 
 //============================================================================
-void RenderGlWidget::hideEvent( QHideEvent * ev )
+void RenderGlWidget::hideEvent( QHideEvent* ev )
 {
     setRenderWindowVisible( false );
     QWidget::hideEvent( ev );
@@ -173,7 +173,7 @@ void RenderGlWidget::closeEvent( QCloseEvent * ev )
 }
 
 //============================================================================
-void RenderGlWidget::resizeEvent( QResizeEvent * ev )
+void RenderGlWidget::resizeEvent( QResizeEvent* ev )
 {
     QWidget::resizeEvent( ev );
 

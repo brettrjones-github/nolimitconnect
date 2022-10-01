@@ -19,7 +19,7 @@
 #include <QDebug>
 
 //============================================================================
-ChatRoomWidget::ChatRoomWidget( QWidget *parent, EAssetType inputMode )
+ChatRoomWidget::ChatRoomWidget( QWidget*parent, EAssetType inputMode )
 : QWidget( parent )
 , m_InputMode( inputMode )
 , m_IsInitialized( false )
