@@ -50,7 +50,7 @@ public:
 	OpusFileDecoder( P2PEngine& engine, MediaProcessor& mediaProcessor );
 	virtual ~OpusFileDecoder();
  
-	bool						beginFileDecode( const char * fileName, VxGUID& assetId, int pos0to100000 );
+	bool						beginFileDecode( const char* fileName, VxGUID& assetId, int pos0to100000 );
 	int							decodedNextFrame( uint8_t * frameBuffer, int frameBufferLen );
 	void						finishFileDecode( bool abortedByUser = false );
 

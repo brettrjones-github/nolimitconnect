@@ -40,7 +40,7 @@ public:
     void						unlockUser( void )						{ m_UserMutex.unlock(); }
 
     void                        setNetIdent( VxNetIdent* netIdent );
-    VxNetIdent *                getNetIdent( void )                     { return m_NetIdent; }
+    VxNetIdent*                getNetIdent( void )                     { return m_NetIdent; }
     VxGUID&                     getMyOnlineId( void )                   { return m_MyOnlineId; }
 
     bool                        isInSession( void )                     { return 0 != m_SessionList.size(); }
@@ -52,7 +52,7 @@ protected:
     P2PEngine&                  m_Engine;
     VxMutex                     m_UserMutex;
 
-    VxNetIdent *                m_NetIdent{ nullptr };
+    VxNetIdent*                m_NetIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
     std::vector<BaseSessionInfo> m_SessionList;
 };

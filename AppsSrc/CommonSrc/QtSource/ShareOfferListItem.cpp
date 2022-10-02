@@ -113,7 +113,7 @@ void ShareOfferListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser * hostIdent = hostSession->getHisIdent();
+    GuiUser* hostIdent = hostSession->getHisIdent();
     if( nullptr == hostIdent )
     {
         LogMsg( LOG_DEBUG, "ShareOfferListItem::updateWidgetFromInfo null gui user" );

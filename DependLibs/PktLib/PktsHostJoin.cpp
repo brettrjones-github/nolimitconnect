@@ -29,7 +29,7 @@ PktHostOfferReq::PktHostOfferReq()
 }
 
 //============================================================================
-void PktHostOfferReq::setOfferMsg( const char * msg )
+void PktHostOfferReq::setOfferMsg( const char* msg )
 {
     vx_assert( msg );
     uint16_t msgLen = ( uint16_t)strlen( msg );
@@ -41,9 +41,9 @@ void PktHostOfferReq::setOfferMsg( const char * msg )
 }
 
 //============================================================================
-const char * PktHostOfferReq::getOfferMsg( void )
+const char* PktHostOfferReq::getOfferMsg( void )
 {
-    return (const char *)m_au8Data;
+    return (const char*)m_au8Data;
 }
 
 //============================================================================
@@ -56,7 +56,7 @@ PktHostOfferReply::PktHostOfferReply()
 }
 
 //============================================================================
-void PktHostOfferReply::setOfferMsg( const char * msg )
+void PktHostOfferReply::setOfferMsg( const char* msg )
 {
     vx_assert( msg );
     uint16_t msgLen = ( uint16_t)strlen( msg );
@@ -67,9 +67,9 @@ void PktHostOfferReply::setOfferMsg( const char * msg )
 }
 
 //============================================================================
-const char * PktHostOfferReply::getOfferMsg( void )
+const char* PktHostOfferReply::getOfferMsg( void )
 {
-    return (const char *)m_au8Data;
+    return (const char*)m_au8Data;
 }
 
 //============================================================================

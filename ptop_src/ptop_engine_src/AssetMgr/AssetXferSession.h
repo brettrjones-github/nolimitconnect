@@ -34,8 +34,8 @@ public:
 	AssetXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~AssetXferSession();
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
+	VxNetIdent*				getIdent( void )							{ return m_Ident; }
 
 	void						setAssetInfo( AssetInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
 	AssetInfo&					getAssetInfo( void )						{ return m_AssetInfo; }
@@ -75,7 +75,7 @@ protected:
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
 	int							m_iPercentComplete;
 	VxSktBase *					m_Skt;
-	VxNetIdent *				m_Ident;
+	VxNetIdent*				m_Ident;
     uint32_t					m_Error;
 	AssetInfo					m_AssetInfo;
 

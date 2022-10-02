@@ -13,9 +13,9 @@ typedef enum{
 
 /*Utility function for base64 encoding METADATA_BLOCK_PICTURE tags.
   Stores BASE64_LENGTH(len)+1 bytes in dst (including a terminating NUL).*/
-void base64_encode(char *dst, const char *src, int len);
+void base64_encode(char *dst, const char*src, int len);
 
-int oi_strncasecmp(const char *a, const char *b, int n);
+int oi_strncasecmp(const char*a, const char*b, int n);
 
 int is_jpeg(const unsigned char *buf, size_t length);
 int is_png(const unsigned char *buf, size_t length);
@@ -34,8 +34,8 @@ void extract_jpeg_params(const unsigned char *data, size_t data_length,
                          ogg_uint32_t *depth, ogg_uint32_t *colors,
                          int *has_palette);
 
-char *parse_picture_specification(const char *spec,
-                                  const char **error_message,
+char *parse_picture_specification(const char*spec,
+                                  const char**error_message,
                                   int *seen_file_icons);
 
 #define WRITE_U32_BE(buf, val) \

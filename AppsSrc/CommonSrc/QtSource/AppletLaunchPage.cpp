@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget* parent, EApplet eAppletType, const char * objName )
+AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget* parent, EApplet eAppletType, const char* objName )
 : ActivityBase( objName, app, parent, eAppletType )
 , m_IsInitialized( false )
 {

@@ -34,7 +34,7 @@ public:
     virtual uint32_t			getHostFlags( void )                                { return m_HostFlags; }
 
     virtual void				setOfferId( VxGUID& offerId )                       { m_OfferId = offerId; }
-    virtual void				setOfferId( const char * guid )                     { m_OfferId.fromVxGUIDHexString( guid ); }
+    virtual void				setOfferId( const char* guid )                     { m_OfferId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getOfferId( void )                                  { return m_OfferId; }
     virtual void			    setOfferState( enum EOfferState offerState )        { m_OfferState = offerState; }
     virtual EOfferState	        getOfferState( void )                               { return m_OfferState; }

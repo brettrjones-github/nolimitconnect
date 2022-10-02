@@ -3,9 +3,9 @@
 
 namespace
 {
-    const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
+    const char* ENUM_BAD_PARM = "ENUM BAD PARAM ";
 
-    const char * CommErrEnumStrings[] =
+    const char* CommErrEnumStrings[] =
     {
         "No Error ",
         "Comm Error Invalid Packet ",
@@ -21,7 +21,7 @@ namespace
         "Max Comm Error ",
     };
 
-    const char * ConnectReasonEnumStrings[] =
+    const char* ConnectReasonEnumStrings[] =
     { 
         "Connect Reason Unknown ",
 
@@ -78,7 +78,7 @@ namespace
         "Max Connect Reason ",
     };
 
-    const char * ConnectStatusEnumStrings[] =
+    const char* ConnectStatusEnumStrings[] =
     { 
         "Connect Status Unknown ",
 
@@ -97,7 +97,7 @@ namespace
         "Max Connect Status ",
     };
 
-    const char * HackerLevelEnumStrings[] =
+    const char* HackerLevelEnumStrings[] =
     {
         " >? Hacker Level Unknown ",
         " >! Hacker Level Suspicious ",
@@ -107,7 +107,7 @@ namespace
         "Max Hacker Level ",
     };
 
-    const char * HackerReasonEnumStrings[] =
+    const char* HackerReasonEnumStrings[] =
     {
         "Hacker Reason Unknown ",
         "Reason Peer Name ",
@@ -129,7 +129,7 @@ namespace
         "Max Hacker Reason ",
     };
 
-    const char * HostAnnounceStatusEnumStrings[] =
+    const char* HostAnnounceStatusEnumStrings[] =
     { 
         "Host Announce Status Unknown ",
         "Host Announce Invalid Url ",
@@ -154,7 +154,7 @@ namespace
         "Max Host Announce Status ",
     };
 
-    const char * HostJoinStatusEnumStrings[] =
+    const char* HostJoinStatusEnumStrings[] =
     { 
         "Host Join Status Unknown ",
         "Host Join Invalid Url ",
@@ -191,7 +191,7 @@ namespace
         "Max Host Join Status ",
     };
 
-    const char * HostSearchStatusEnumStrings[] =
+    const char* HostSearchStatusEnumStrings[] =
     { 
         "Host Search Status Unknown ",
         "Host Search Invalid Url ",
@@ -218,7 +218,7 @@ namespace
         "Max Host Search Status ",
     };
 
-    const char * HostTypeEnumStrings[] =
+    const char* HostTypeEnumStrings[] =
     {
         // must sync with EHostType
         "Host Unknown ",
@@ -232,7 +232,7 @@ namespace
         "Max Host Type ",
     };
 
-    const char * InternetStatusEnumStrings[] =
+    const char* InternetStatusEnumStrings[] =
     {
         "Internet: No Internet ",
         "Internet: Internet Available ",
@@ -244,7 +244,7 @@ namespace
         "Internet: Max Internet Status ",
     };
 
-    const char * JoinStateEnumStrings[] =
+    const char* JoinStateEnumStrings[] =
     {
         "Join: No State ",
         "Join: Sending ",
@@ -258,7 +258,7 @@ namespace
         "Join: Max JoinState ",
     };
 
-    const char * NetAvailStatusEnumStrings[] =
+    const char* NetAvailStatusEnumStrings[] =
     {
         "Net Avail: Network Unavailable ",
         "Net Avail: Host Available ",
@@ -270,7 +270,7 @@ namespace
         "Net Avail: Max Net Avail Status ",
     };
 
-    const char * NetCmdTypeEnumStrings[] =
+    const char* NetCmdTypeEnumStrings[] =
     {
         "Net Cmd: Unknown ",
         "Net Cmd: Ping ",
@@ -283,7 +283,7 @@ namespace
         "Net Cmd: Host Ping Reply ",
     };
 
-    const char * NetCmdErrorEnumStrings[] =
+    const char* NetCmdErrorEnumStrings[] =
     {
         "Cmd Error: Unknown ",
         "Cmd Error: None ",
@@ -299,7 +299,7 @@ namespace
         "Cmd Error: Response Timed Out ",
     };
 
-    const char * NetworkStateEnumStrings[] = 
+    const char* NetworkStateEnumStrings[] = 
     { 
         "Network State Unknown ",   // 0
         "Network State Lost ",      // 1
@@ -326,7 +326,7 @@ namespace
         "Max Relay Error ",
     };
 
-    const char * OfferStateEnumStrings[] =
+    const char* OfferStateEnumStrings[] =
     {
         "No Offer ",
         "Sending Offer ",
@@ -344,7 +344,7 @@ namespace
         "Max Offer State ",
     };
 
-    const char * OfferTypeEnumStrings[] =
+    const char* OfferTypeEnumStrings[] =
     {
         "Offer Type: None ",
         "Offer Type: Join Group ",
@@ -366,7 +366,7 @@ namespace
         "Max Offer Type ",
     };
 
-    const char * PluginAccessStateEnumStrings[] =
+    const char* PluginAccessStateEnumStrings[] =
     {
         "Access: Unknown ",
         "Access: Granted ",
@@ -380,7 +380,7 @@ namespace
         "Max Plugin Access ",
     };
 
-    const char * PluginTypeEnumStrings[] =
+    const char* PluginTypeEnumStrings[] =
     {
         "Unknown Plugin ",
         "Admin ",
@@ -444,9 +444,10 @@ namespace
         "Storyboard Client ",	//!< storyboard web page plugin client
         "FileShare Client ",
         "Web Cam Client ",
+        "Plugin Library Server ",
     };
 
-    const char * PortOpenStatusEnumStrings[] =
+    const char* PortOpenStatusEnumStrings[] =
     { 
         "Port Open: Status Unknown",
         "Port Open: LogMsg",
@@ -461,7 +462,7 @@ namespace
         "Max Port Open Status",
     };
 
-    const char * RunTestStatusEnumStrings[] =
+    const char* RunTestStatusEnumStrings[] =
     {
         "Run Test: Status Unknown",
         "Run Test: LogMsg",
@@ -482,7 +483,7 @@ namespace
         "Max Run Test Status",
     };
 
-    const char * RandomConnectStatusEnumStrings[] =
+    const char* RandomConnectStatusEnumStrings[] =
     { 
         "Phone Shake: Status Unknown ",
         "Phone Shake: Contact Host Failed ",
@@ -497,7 +498,7 @@ namespace
         "Max Phone Shake Status ",
     };
 
-    const char * ScanTypeEnumStrings[] =
+    const char* ScanTypeEnumStrings[] =
     { 
         "Scan None ",
         "Chat Room Host Join Search ",
@@ -513,7 +514,7 @@ namespace
         "Max Scan Type ",
     };
 
-    const char * SearchTypeEnumStrings[] =
+    const char* SearchTypeEnumStrings[] =
     {
         "Search Type None ",
         "Search For Chat Room Host ",	        //!< Search for Chat Room to Join
@@ -533,7 +534,7 @@ namespace
         "MaxSha1GenResult"
     };
 
-    const char * SktCloseReasonEnumStrings[] =
+    const char* SktCloseReasonEnumStrings[] =
     {
         "Skt Close Reason Unknown ",
         "Skt Close Not Needed ",	   
@@ -596,7 +597,7 @@ namespace
   
     };
 
-    const char * SktTypeEnumStrings[] =
+    const char* SktTypeEnumStrings[] =
     {
         "Unknown Socket ",
         "Connect Socket ",
@@ -610,7 +611,7 @@ namespace
 }
 
 //============================================================================
-const char * DescribeAge( EAgeType ageType )
+const char* DescribeAge( EAgeType ageType )
 {
     if( ageType < 0 || eMaxAgeType <= ageType )
     {
@@ -632,7 +633,7 @@ const char * DescribeAge( EAgeType ageType )
 }
 
 //============================================================================
-const char * DescribeCommError( ECommErr commErr )
+const char* DescribeCommError( ECommErr commErr )
 {
     if( commErr < 0 || eMaxCommErr <= commErr )
     {
@@ -643,7 +644,7 @@ const char * DescribeCommError( ECommErr commErr )
 }
 
 //============================================================================
-const char * DescribeAppModule( EAppModule eAppModule )
+const char* DescribeAppModule( EAppModule eAppModule )
 {
     if( eAppModule < 0 || eMaxAppModule <= eAppModule )
     {
@@ -698,7 +699,7 @@ const char * DescribeAppModule( EAppModule eAppModule )
 }
 
 //============================================================================
-const char * DescribeConnectReason( EConnectReason eConnectReason )
+const char* DescribeConnectReason( EConnectReason eConnectReason )
 {
     if( eConnectReason < 0 || eMaxConnectReason <= eConnectReason )
     {
@@ -739,7 +740,7 @@ bool IsConnectReasonSearch( EConnectReason connectReason )
 }
 
 //============================================================================
-const char * DescribeConnectStatus( EConnectStatus eConnectStatus )
+const char* DescribeConnectStatus( EConnectStatus eConnectStatus )
 {
     if( eConnectStatus < 0 || eMaxConnectStatus <= eConnectStatus )
     {
@@ -752,7 +753,7 @@ const char * DescribeConnectStatus( EConnectStatus eConnectStatus )
 
 //============================================================================
 //! describe friend state
-const char * DescribeFriendState( EFriendState eFriendState )
+const char* DescribeFriendState( EFriendState eFriendState )
 {
     switch( eFriendState )
     {
@@ -798,7 +799,7 @@ const char* DescribeGroupieViewType( EGroupieViewType groupieViewType )
 }
 
 //============================================================================
-const char * DescribeHackerLevel( EHackerLevel hackLevel )
+const char* DescribeHackerLevel( EHackerLevel hackLevel )
 {
     if( hackLevel < 0 || eMaxHackerLevel <= hackLevel )
     {
@@ -809,7 +810,7 @@ const char * DescribeHackerLevel( EHackerLevel hackLevel )
 }
 
 //============================================================================
-const char * DescribeHackerReason( EHackerReason hackReason )
+const char* DescribeHackerReason( EHackerReason hackReason )
 {
     if( hackReason < 0 || eMaxHackerReason <= hackReason )
     {
@@ -820,7 +821,7 @@ const char * DescribeHackerReason( EHackerReason hackReason )
 }
 
 //============================================================================
-const char * DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
+const char* DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
 {
     if( hostStatus < 0 || eMaxHostAnnounceStatus <= hostStatus )
     {
@@ -831,7 +832,7 @@ const char * DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
 }
 
 //============================================================================
-const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus )
+const char* DescribeHostJoinStatus( EHostJoinStatus hostStatus )
 {
     if( hostStatus < 0 || eMaxHostJoinStatus <= hostStatus )
     {
@@ -842,7 +843,7 @@ const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus )
 }
 
 //============================================================================
-const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus )
+const char* DescribeHostSearchStatus( EHostSearchStatus hostStatus )
 {
     if( hostStatus < 0 || eMaxHostSearchStatus <= hostStatus )
     {
@@ -853,7 +854,7 @@ const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus )
 }
 
 //============================================================================
-const char * DescribeHostType( EHostType eHostType )
+const char* DescribeHostType( EHostType eHostType )
 {
     if( eHostType < 0 || eMaxHostType <= eHostType )
     {
@@ -864,7 +865,7 @@ const char * DescribeHostType( EHostType eHostType )
 }
 
 //! Internet Status as text
-const char * DescribeInternetStatus( EInternetStatus internetStatus )
+const char* DescribeInternetStatus( EInternetStatus internetStatus )
 {
     if( internetStatus < 0 || eMaxInternetStatus <= internetStatus )
     {
@@ -875,7 +876,7 @@ const char * DescribeInternetStatus( EInternetStatus internetStatus )
 }
 
 //============================================================================
-const char * DescribeJoinState( EJoinState joinState )
+const char* DescribeJoinState( EJoinState joinState )
 {
     if( joinState < 0 || eMaxJoinState <= joinState )
     {
@@ -918,7 +919,7 @@ const char* DescribeNetAction( ENetActionType netAction )
 }
 
 //============================================================================
-const char * DescribeModuleState( EModuleState moduleState )
+const char* DescribeModuleState( EModuleState moduleState )
 {
     switch( moduleState )
     {
@@ -936,7 +937,7 @@ const char * DescribeModuleState( EModuleState moduleState )
 }
 
 //! Net Available Status as text
-const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
+const char* DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
 {
     if( netAvailStatus < 0 || eMaxNetAvailStatus <= netAvailStatus )
     {
@@ -946,7 +947,7 @@ const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
     return NetAvailStatusEnumStrings[ netAvailStatus ];
 }
 
-const char * DescribeNetworkState( ENetworkStateType networkStateType )
+const char* DescribeNetworkState( ENetworkStateType networkStateType )
 {
     if( networkStateType < 0 || eMaxNetworkStateType <= networkStateType )
     {
@@ -966,7 +967,7 @@ const char* DescribeRelayError( enum ERelayErr relayError )
     return RelayErrEnumStrings[ relayError ];
 }
 
-const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
+const char* DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
 {
     if( ePortOpenStatus < 0 || eMaxIsPortOpenStatusType <= ePortOpenStatus )
     {
@@ -976,7 +977,7 @@ const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
     return PortOpenStatusEnumStrings[ ePortOpenStatus ];
 }
 
-const char * DescribeRunTestStatus( ERunTestStatus eTestStatus )
+const char* DescribeRunTestStatus( ERunTestStatus eTestStatus )
 {
     if( eTestStatus < 0 || eMaxRunTestStatusType <= eTestStatus )
     {
@@ -986,7 +987,7 @@ const char * DescribeRunTestStatus( ERunTestStatus eTestStatus )
     return RunTestStatusEnumStrings[ eTestStatus ];
 }
 
-const char * DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
+const char* DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
 {
     if( eRandomConnectStatus < 0 || eMaxRandomConnectStatusType <= eRandomConnectStatus )
     {
@@ -997,7 +998,7 @@ const char * DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectSta
 }
 
 //! Net Command type as text
-const char * DescribeNetCmdType( ENetCmdType netCmdType )
+const char* DescribeNetCmdType( ENetCmdType netCmdType )
 {
     if( netCmdType < 0 || eMaxNetCmdType <= netCmdType )
     {
@@ -1008,7 +1009,7 @@ const char * DescribeNetCmdType( ENetCmdType netCmdType )
 }
 
 //! Net Command Error as text
-const char * DescribeNetCmdError( ENetCmdError netCmdError )
+const char* DescribeNetCmdError( ENetCmdError netCmdError )
 {
     if(  netCmdError < 0 || eMaxNetCmdError <= netCmdError )
     {
@@ -1019,7 +1020,7 @@ const char * DescribeNetCmdError( ENetCmdError netCmdError )
 }
 
 //============================================================================
-const char * DescribeOfferState( EOfferState offerState )
+const char* DescribeOfferState( EOfferState offerState )
 {
     if(  offerState < 0 || eMaxOfferState <= offerState )
     {
@@ -1030,7 +1031,7 @@ const char * DescribeOfferState( EOfferState offerState )
 }
 
 //============================================================================
-const char * DescribeOfferType( EOfferType offerType )
+const char* DescribeOfferType( EOfferType offerType )
 {
     if(  offerType < 0 || eMaxOfferType <= offerType )
     {
@@ -1041,7 +1042,7 @@ const char * DescribeOfferType( EOfferType offerType )
 }
 
 //============================================================================
-const char * DescribePluginAccess( EPluginAccess pluginAccess )
+const char* DescribePluginAccess( EPluginAccess pluginAccess )
 {
     if(  pluginAccess < 0 || eMaxPluginAccessState <= pluginAccess )
     {
@@ -1052,7 +1053,7 @@ const char * DescribePluginAccess( EPluginAccess pluginAccess )
 }
 
 //============================================================================
-const char * DescribePluginType( EPluginType pluginType )
+const char* DescribePluginType( EPluginType pluginType )
 {
     if( pluginType < 0 || eMaxPluginType <= pluginType )
     {
@@ -1063,7 +1064,7 @@ const char * DescribePluginType( EPluginType pluginType )
 }
 
 //============================================================================
-const char * DescribeScanType( EScanType scanType )
+const char* DescribeScanType( EScanType scanType )
 {
     if(  scanType < 0 || eMaxScanType <= scanType )
     {
@@ -1074,7 +1075,7 @@ const char * DescribeScanType( EScanType scanType )
 }
 
 //============================================================================
-const char * DescribeSearchType( ESearchType searchType )
+const char* DescribeSearchType( ESearchType searchType )
 {
     if(  searchType < 0 || eMaxSearchType <= searchType )
     {
@@ -1097,7 +1098,7 @@ const char* DescribeSha1GenResult( ESha1GenResult sha1GenerateResult )
 
 //============================================================================
 //! Describe socket close reason
-const char * DescribeSktCloseReason( ESktCloseReason closeReason )
+const char* DescribeSktCloseReason( ESktCloseReason closeReason )
 {
     if(  closeReason < 0 || eMaxSktCloseReason <= closeReason )
     {
@@ -1109,7 +1110,7 @@ const char * DescribeSktCloseReason( ESktCloseReason closeReason )
 
 //============================================================================
 //! Describe skt type
-const char * DescribeSktType( ESktType sktType )
+const char* DescribeSktType( ESktType sktType )
 {
     if(  sktType < 0 || eMaxSktType <= sktType )
     {
@@ -1137,7 +1138,7 @@ const char* DescribeWebPageType( EWebPageType webPageType )
 
 //============================================================================
 // for use in database mainly
-const char * getPluginName( EPluginType pluginType )
+const char* getPluginName( EPluginType pluginType )
 {
     switch( pluginType )
     {

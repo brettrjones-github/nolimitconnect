@@ -45,7 +45,7 @@ AppSettings::~AppSettings()
 }
 
 //============================================================================
-RCODE AppSettings::appSettingStartup( const char * dbSettingsFile, EDefaultAppMode appDefaultMode )
+RCODE AppSettings::appSettingStartup( const char* dbSettingsFile, EDefaultAppMode appDefaultMode )
 {
 	RCODE rc = dbStartup( APP_SETTINGS_DBVERSION, dbSettingsFile );
 	if( ( 0 == rc )
@@ -477,7 +477,7 @@ bool AppSettings::appModeSettingsAreInitialize( void )
 }
 
 //============================================================================
-std::string AppSettings::getAppendedType( const char * key, ESearchType searchType )
+std::string AppSettings::getAppendedType( const char* key, ESearchType searchType )
 {
     std::string result;
     StdStringFormat( result, "%s%d", key, (int)searchType );

@@ -45,7 +45,7 @@ PktPluginOfferReq::PktPluginOfferReq()
 }
 
 //============================================================================
-void PktPluginOfferReq::setMessages( const char * pMsg1, const char * fileName )
+void PktPluginOfferReq::setMessages( const char* pMsg1, const char* fileName )
 {
 	if( pMsg1 && strlen( pMsg1 ) )
 	{
@@ -75,13 +75,13 @@ void PktPluginOfferReq::setMessages( const char * pMsg1, const char * fileName )
 }
 
 //============================================================================
-const char * PktPluginOfferReq::getOfferMsg()
+const char* PktPluginOfferReq::getOfferMsg()
 {
 	return m_as8Args;
 }
 
 //============================================================================
-const char * PktPluginOfferReq::getFileName()
+const char* PktPluginOfferReq::getFileName()
 {
 	if( getFileNameLen() )
 	{

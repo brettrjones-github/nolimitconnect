@@ -42,10 +42,10 @@ PluginVideoPhone::PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		
+bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
 												int				pvUserData,
-												const char *	pOfferMsg,		
-												const char *	pFileName,
+												const char*	pOfferMsg,		
+												const char*	pFileName,
 												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	
 {
@@ -90,7 +90,7 @@ bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiOfferReply(	VxNetIdent *	netIdent,
+bool PluginVideoPhone::fromGuiOfferReply(	VxNetIdent*	netIdent,
 											int				pvUserData,
 											EOfferResponse	eOfferResponse,
 											VxGUID			lclSessionId )
@@ -132,8 +132,8 @@ void PluginVideoPhone::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUse
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent *	netIdent, 
-										const char *	pMsg )
+bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent*	netIdent, 
+										const char*	pMsg )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	P2PSession * poSession = m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -156,7 +156,7 @@ bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent *	netIdent,
 void PluginVideoPhone::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktChatReq * pkt = (PktChatReq *)pktHdr;
-	IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char *)pkt->getDataPayload() );
+	IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char*)pkt->getDataPayload() );
 }
 
 //============================================================================

@@ -535,7 +535,7 @@ bool PktBlobEntry::setValue( std::vector<std::string>& aoStrValues )
 }
 
 //============================================================================
-bool PktBlobEntry::setValue( const char * pRetBuf, int iBufLen )
+bool PktBlobEntry::setValue( const char* pRetBuf, int iBufLen )
 {
     return setValue( ( void* )pRetBuf, iBufLen );
 }

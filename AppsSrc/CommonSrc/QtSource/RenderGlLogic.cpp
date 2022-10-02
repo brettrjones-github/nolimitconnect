@@ -268,7 +268,7 @@ void RenderGlLogic::VerifyGLStateQt()
 #endif
 
 //============================================================================
-void RenderGlLogic::verifyGlState( const char * msg ) // show gl error if any
+void RenderGlLogic::verifyGlState( const char* msg ) // show gl error if any
 {
 #ifdef DEBUG_RENDER_THREADS
     if( msg && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )

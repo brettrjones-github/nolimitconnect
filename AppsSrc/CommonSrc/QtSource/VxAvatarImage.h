@@ -28,7 +28,7 @@ public:
 	virtual ~VxAvatarImage() = default;
 
 	QSize						sizeHint() const;
-	void						setImage( const char * resourceUrl );
+	void						setImage( const char* resourceUrl );
 	void						setImage( QImage& avatarImage );
 
 signals:

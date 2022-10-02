@@ -31,7 +31,7 @@
 #endif
 
 //============================================================================
-bool VxResolveHostToIp(	const char *	pUrl,			// web name to resolve
+bool VxResolveHostToIp(	const char*	pUrl,			// web name to resolve
 						std::string &	strRetIp,		// return dotted ip string 
 						uint16_t&		u16RetPort )	// return port
 {
@@ -67,7 +67,7 @@ bool VxResolveHostToIp(	const char *	pUrl,			// web name to resolve
 }
 
 //============================================================================
-bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
+bool VxResolveHostToIp(	const char*	pHostOnly,			//web host name to resolve
 						uint16_t		u16Port,
 						InetAddress&	oRetIp )
 {
@@ -202,7 +202,7 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 }
 
 //============================================================================
-bool VxResolveHostToIps(	const char * pHostOnly,			//web host name to resolve
+bool VxResolveHostToIps(	const char* pHostOnly,			//web host name to resolve
 							uint16_t u16Port,
 							std::vector<InetAddress>& aoRetIps )
 {

@@ -40,6 +40,6 @@ protected:
 	//=== vars ===//
 	Ui::SoundOptionsDialog		ui;
 	EPluginType					m_ePluginType;
-	VxNetIdent *				m_Friend;
+	VxNetIdent*				m_Friend;
 
 };

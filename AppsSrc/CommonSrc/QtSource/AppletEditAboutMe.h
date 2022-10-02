@@ -54,7 +54,7 @@ protected:
     //=== vars ===//
     Ui::AppletEditAboutMeUi	    ui;
     UserProfile 				m_UserProfile;
-    VxNetIdent *				m_MyIdent = nullptr;
+    VxNetIdent*				m_MyIdent = nullptr;
     QString                     m_strOrigOnlineName;
     QString                     m_strOrigMoodMessage;
 

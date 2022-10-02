@@ -142,7 +142,7 @@ void CSHA1::Update(const UINT_8* pbData, UINT_32 uLen)
 }
 
 #ifdef SHA1_UTILITY_FUNCTIONS
-bool CSHA1::HashFile(const char* tszFileName, VxThread * workThread )
+bool CSHA1::HashFile(const char* tszFileName, VxThread* workThread )
 {
 	if(tszFileName == NULL) return false;
 

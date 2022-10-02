@@ -57,13 +57,13 @@ public:
 	void						exportKey( VxKey * poKey );
 	void						exportToAsciiString( std::string& exportedKey );
 	//! make encryption key from password
-	RCODE						setKeyFromPassword( const char *	pPassword,			// password
+	RCODE						setKeyFromPassword( const char*	pPassword,			// password
 													int				iPasswordLen,		// length of password
-													const char *	pSalt = "NoLm" );	// salt
+													const char*	pSalt = "NoLm" );	// salt
 	//! make encryption key from user name and password 
-	RCODE						setKeyFromPassword( const char *	pUserName,			// user name
-													const char *	pPassword,			// password
-													const char *	pSalt = "NoLm" );	// salt
+	RCODE						setKeyFromPassword( const char*	pUserName,			// user name
+													const char*	pPassword,			// password
+													const char*	pSalt = "NoLm" );	// salt
 
 	std::string					describeKey( void );
 
@@ -91,10 +91,10 @@ public:
 
 	//! generate key from password and set encryption key in one function call
 	//! NOTE: Max password len 255
-	RCODE						setPassword( const char * pPassword, int iPasswordLen );
+	RCODE						setPassword( const char* pPassword, int iPasswordLen );
 
 	//! Generate encryption key from password
-	RCODE						generateKey( const char * pPassword, int iPasswordLen, VxKey * pgRetKey );
+	RCODE						generateKey( const char* pPassword, int iPasswordLen, VxKey * pgRetKey );
 
 	//! encrypt some data
 	//! NOTE: iDataLen must be a multiple of 16
@@ -141,7 +141,7 @@ RCODE VxSymDecrypt( VxKey *			poKey,			// Symmetric key must be 16 bytes long
 RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
 							 VxConnectId *				poConnectId,	// network identity
 							 uint16_t					cryptoPort,
-							 const char *				networkName );
+							 const char*				networkName );
 
 //============================================================================
 RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key

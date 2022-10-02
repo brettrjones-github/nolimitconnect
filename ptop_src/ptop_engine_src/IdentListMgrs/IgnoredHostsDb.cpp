@@ -33,7 +33,7 @@ namespace
 }
 
 //============================================================================
-IgnoredHostsDb::IgnoredHostsDb( P2PEngine& engine, IgnoreListMgr& hostListMgr, const char *dbName  )
+IgnoredHostsDb::IgnoredHostsDb( P2PEngine& engine, IgnoreListMgr& hostListMgr, const char*dbName  )
     : DbBase( dbName )
     , m_Engine( engine )
     , m_IgnoreListMgr( hostListMgr )

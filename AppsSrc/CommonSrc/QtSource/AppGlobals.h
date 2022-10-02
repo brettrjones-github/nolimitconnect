@@ -38,7 +38,7 @@ public:
     //! update identity and save to database then send permission change to engine
     void						updatePluginPermission( enum EPluginType ePluginType, enum EFriendState ePluginPermission );
 
-	void						launchWebBrowser( const char * pUri );
+	void						launchWebBrowser( const char* pUri );
 protected:
 	AppCommon&					m_MyApp;
 };
@@ -50,5 +50,5 @@ GuiParams&                      GetGuiParams();
 void							UpdateHasPicture( P2PEngine& engine, int bHasPicture );
 
 //! show message box to user
-void							ErrMsgBox( QWidget*, int infoLevel, const char * pMsg, ... );
+void							ErrMsgBox( QWidget*, int infoLevel, const char* pMsg, ... );
 

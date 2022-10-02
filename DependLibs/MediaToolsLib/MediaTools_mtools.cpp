@@ -50,25 +50,25 @@ IToGui&	MediaTools::getToGui()
 }
 
 //============================================================================
-bool MediaTools::fromGuiIsMyP2PWebVideoFile( const char * fileName )
+bool MediaTools::fromGuiIsMyP2PWebVideoFile( const char* fileName )
 {
 	return m_VideoReader.fromGuiIsMyP2PWebVideoFile( fileName );
 }
 
 //============================================================================
-bool MediaTools::fromGuiIsMyP2PWebAudioFile( const char * fileName )
+bool MediaTools::fromGuiIsMyP2PWebAudioFile( const char* fileName )
 {
 	return m_AudioReader.fromGuiIsMyP2PWebAudioFile( fileName );
 }
 
 //============================================================================
-bool MediaTools::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName )
+bool MediaTools::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName )
 {
 	return m_AudioWriter.fromGuiSndRecord( eRecState, feedId, fileName );
 }
 
 //============================================================================
-bool MediaTools::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName  )
+bool MediaTools::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName  )
 {
 	return m_VideoWriter.fromGuiVideoRecord( eRecState, feedId, fileName );
 }

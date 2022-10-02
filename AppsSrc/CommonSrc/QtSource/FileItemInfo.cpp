@@ -31,7 +31,7 @@
 #include <string>
 
 //============================================================================
-FileItemInfo::FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent* netIdent, uint8_t * fileHashId )
+FileItemInfo::FileItemInfo( uint8_t u8FileType, const char* pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent* netIdent, uint8_t * fileHashId )
 : m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
 , m_Widget( 0 )
 , m_IsShared( false )

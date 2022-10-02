@@ -433,7 +433,7 @@ void AppCommon::activityStateChange( ActivityBase * activity, bool isCreated )
 }
 
 //============================================================================
-void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWidget* parent )
+void AppCommon::startActivity( EPluginType ePluginType, GuiUser* netIdent, QWidget* parent )
 {
 	if( 0 == parent )
 	{
@@ -710,7 +710,7 @@ void AppCommon::insertKeystroke( int keyCode )
 }
 
 //============================================================================
-void AppCommon::toGuiLog( int logFlags, const char * pMsg )
+void AppCommon::toGuiLog( int logFlags, const char* pMsg )
 {
 	if( VxIsAppShuttingDown() 
 		|| ( 0 == pMsg ) )
@@ -755,7 +755,7 @@ void AppCommon::toGuiAppErr( EAppErr eAppErr, const char* errMsg )
 }
 
 //============================================================================
-void AppCommon::toGuiStatusMessage( const char * statusMsg )
+void AppCommon::toGuiStatusMessage( const char* statusMsg )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -771,7 +771,7 @@ void AppCommon::toGuiStatusMessage( const char * statusMsg )
 
 //============================================================================
 // NOTE: toGuiUserMessage should be called from in gui on gui thread only
-void AppCommon::toGuiUserMessage( const char * userMsg, ... )
+void AppCommon::toGuiUserMessage( const char* userMsg, ... )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -933,14 +933,14 @@ void AppCommon::slotNetworkStateChanged( ENetworkStateType eNetworkState )
 }
 
 //============================================================================
-void AppCommon::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char * msg )
+void AppCommon::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char* msg )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    const char * hostStatus = DescribeHostAnnounceStatus( annStatus );
+    const char* hostStatus = DescribeHostAnnounceStatus( annStatus );
     std::string formatedMsg;
     if( msg )
     {
@@ -958,14 +958,14 @@ void AppCommon::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, 
 }
 
 //============================================================================
-void AppCommon::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg )
+void AppCommon::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char* msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * hostStatus = DescribeHostJoinStatus( joinStatus );
+	const char* hostStatus = DescribeHostJoinStatus( joinStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
@@ -983,7 +983,7 @@ void AppCommon::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHos
 }
 
 //============================================================================
-void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char * msg )
+void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char* msg )
 {
     if( VxIsAppShuttingDown() )
     {
@@ -1095,14 +1095,14 @@ void AppCommon::toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline )
 }
 
 //============================================================================
-void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg )
+void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char* msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * portOpenStatus = DescribePortOpenStatus( eIsPortOpenStatus );
+	const char* portOpenStatus = DescribePortOpenStatus( eIsPortOpenStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
@@ -1120,14 +1120,14 @@ void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, cons
 }
 
 //============================================================================
-void AppCommon::toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg )
+void AppCommon::toGuiRunTestStatus( const char*testName, ERunTestStatus eRunTestStatus, const char* msg )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    const char * runTestStatus = DescribeRunTestStatus( eRunTestStatus );
+    const char* runTestStatus = DescribeRunTestStatus( eRunTestStatus );
     std::string formatedMsg;
     if( msg )
     {
@@ -1145,14 +1145,14 @@ void AppCommon::toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTes
 }
 
 //============================================================================
-void AppCommon::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
+void AppCommon::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char* msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * phoneShakeStatus = DescribeRandomConnectStatus( eRandomConnectStatus );
+	const char* phoneShakeStatus = DescribeRandomConnectStatus( eRandomConnectStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
@@ -1743,7 +1743,7 @@ void AppCommon::okMessageBox( QString title, QString msg )
 }
 
 //============================================================================
-void AppCommon::okMessageBox2( QString title, const char * msg, ... )
+void AppCommon::okMessageBox2( QString title, const char* msg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;
@@ -1766,7 +1766,7 @@ bool AppCommon::yesNoMessageBox( QString title, QString msg )
 }
 
 //============================================================================
-bool AppCommon::yesNoMessageBox2( QString title, const char * msg, ... )
+bool AppCommon::yesNoMessageBox2( QString title, const char* msg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;
@@ -1784,7 +1784,7 @@ void AppCommon::errMessageBox( QString title, QString msg )
 }
 
 //============================================================================
-void AppCommon::errMessageBox2( QString title, const char * msg, ... )
+void AppCommon::errMessageBox2( QString title, const char* msg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;

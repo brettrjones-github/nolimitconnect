@@ -73,7 +73,7 @@ public:
 					VxMyFileInfo&	fileInfo, 
 					bool			isShared, 
 					bool			isInLibrary, 
-					VxNetIdent *	selectedFriend = 0 );
+					VxNetIdent*	selectedFriend = 0 );
 	virtual ~FileActionMenu();
 
 	void						setTitle( QString strTitle );
@@ -93,7 +93,7 @@ protected:
 	VxMyFileInfo				m_FileInfo;
 	bool						m_IsShared;
 	bool						m_IsInLibrary;
-	VxNetIdent *				m_SelectedFriend;
+	VxNetIdent*				m_SelectedFriend;
 	int							m_iMenuItemHeight;
 	std::vector<FileMenuItemAction>	m_MenuList;
 };

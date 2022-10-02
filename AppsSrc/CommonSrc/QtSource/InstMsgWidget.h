@@ -28,7 +28,7 @@ class InstMsgWidget : public QWidget
 public:
 	InstMsgWidget( QWidget* parent = 0 );
 
-	void						setInstMsgWidgets( EPluginType ePluginType, GuiUser * hisIdent );
+	void						setInstMsgWidgets( EPluginType ePluginType, GuiUser* hisIdent );
 	void						toGuiInstMsg( QString instMsg );
 
 signals:
@@ -48,5 +48,5 @@ private:
 	AppCommon&				    m_MyApp;
 	P2PEngine&					m_Engine;
 	EPluginType					m_ePluginType;
-    GuiUser *				    m_HisIdent;
+    GuiUser*				    m_HisIdent;
 };

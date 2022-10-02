@@ -93,7 +93,7 @@ class CScreenshotSurface;
 class INlcRender
 {
 public:
-    virtual void                verifyGlState( const char * msg = nullptr ) = 0; // show gl error if any
+    virtual void                verifyGlState( const char* msg = nullptr ) = 0; // show gl error if any
 
     //=== textures ===//
     virtual void                setActiveGlTexture( unsigned int activeTextureNum /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ )  = 0;

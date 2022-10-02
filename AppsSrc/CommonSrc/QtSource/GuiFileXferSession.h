@@ -32,25 +32,25 @@ public:
 	GuiFileXferSession() = default;
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
-						GuiUser *	    netIdent, 
+						GuiUser*	    netIdent, 
 						VxGUID&		    lclSessionId, 
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
-						const char *	pFileName,
+						const char*	pFileName,
 						VxGUID			assetId,
 						VxSha1Hash&		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
-                        GuiUser *	    netIdent, 
+                        GuiUser*	    netIdent, 
 						VxGUID&		    lclSessionId, 
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
-						const char *	pFileName,
+						const char*	pFileName,
 						VxGUID			assetId,
 						uint8_t *		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
-                        GuiUser *	    netIdent, 
+                        GuiUser*	    netIdent, 
 						VxGUID&		    lclSessionId, 
 						VxMyFileInfo&	fileInfo );
 
@@ -63,8 +63,8 @@ public:
 	void						setLclSessionId( VxGUID lclSessionId )	    { m_LclSessionId = lclSessionId; }
 	VxGUID&					    getLclSessionId( void )						{ return m_LclSessionId; }
 
-	void						setIdent( GuiUser * ident )				    { m_Ident = ident; }
-    GuiUser *				    getIdent( void )							{ return m_Ident; }
+	void						setIdent( GuiUser* ident )				    { m_Ident = ident; }
+    GuiUser*				    getIdent( void )							{ return m_Ident; }
 
 	void						setWidget( QWidget* widget )				{ m_Widget = widget; }
 	QWidget*					getWidget( void )							{ return m_Widget; }
@@ -113,7 +113,7 @@ public:
 protected:
 	//=== vars ===//
     EPluginType					m_ePluginType{ ePluginTypeFileShareServer };
-    GuiUser *				    m_Ident{ nullptr };
+    GuiUser*				    m_Ident{ nullptr };
 	VxGUID					    m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;
 	QWidget*					m_Widget{ nullptr };

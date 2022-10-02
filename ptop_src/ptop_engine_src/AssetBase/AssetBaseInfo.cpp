@@ -110,7 +110,7 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const std::string& fileName,
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
 : BaseInfo()
 , m_AssetName( fileName )
 , m_s64AssetLen( fileLen )
@@ -267,7 +267,7 @@ bool AssetBaseInfo::isDirectory( void )
 }
 
 //============================================================================
-void AssetBaseInfo::setAssetName( const char * assetName )
+void AssetBaseInfo::setAssetName( const char* assetName )
 {
 	if (assetName)
 		m_AssetName = assetName;
@@ -276,7 +276,7 @@ void AssetBaseInfo::setAssetName( const char * assetName )
 }
 
 //============================================================================
-void AssetBaseInfo::setAssetTag( const char * assetTag )
+void AssetBaseInfo::setAssetTag( const char* assetTag )
 {
 	if( assetTag )
 		m_AssetTag = assetTag;
@@ -301,9 +301,9 @@ std::string AssetBaseInfo::getRemoteAssetName( void )
 }
 
 //============================================================================
-const char * AssetBaseInfo::getDefaultFileExtension( EAssetType assetType )
+const char* AssetBaseInfo::getDefaultFileExtension( EAssetType assetType )
 {
-	const char * extension = ".txt";
+	const char* extension = ".txt";
 	switch( assetType )
 	{
 	case eAssetTypePhoto:
@@ -326,9 +326,9 @@ const char * AssetBaseInfo::getDefaultFileExtension( EAssetType assetType )
 }
 
 //============================================================================
-const char * AssetBaseInfo::getSubDirectoryName( EAssetType assetType )
+const char* AssetBaseInfo::getSubDirectoryName( EAssetType assetType )
 {
-	const char * subDir = "asset/";
+	const char* subDir = "asset/";
 	switch( assetType )
 	{
 	case eAssetTypeDocument:
@@ -363,7 +363,7 @@ const char * AssetBaseInfo::getSubDirectoryName( EAssetType assetType )
 }
 
 //============================================================================
-void AssetBaseInfo::updateAssetInfo( VxThread * callingThread )
+void AssetBaseInfo::updateAssetInfo( VxThread* callingThread )
 {
 	return;
 }

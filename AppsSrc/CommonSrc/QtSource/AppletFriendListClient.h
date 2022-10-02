@@ -36,7 +36,7 @@ public:
 							QWidget*			parent = NULL );
 	virtual ~AppletFriendListClient() override;
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
     void						setStatusLabel( QString strMsg );

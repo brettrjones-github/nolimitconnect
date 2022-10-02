@@ -28,8 +28,8 @@
 #define VX_FLAG_THREAD_CREATED		0x08
 
 typedef void * 	(*VX_THREAD_FUNCTION_T)(void *);
-typedef void 	(*VX_THREAD_START_CALLBACK_T)(unsigned int,const char *);
-typedef void 	(*VX_THREAD_EXIT_CALLBACK_T)(unsigned int, bool,const char *);
+typedef void 	(*VX_THREAD_START_CALLBACK_T)(unsigned int,const char*);
+typedef void 	(*VX_THREAD_EXIT_CALLBACK_T)(unsigned int, bool,const char*);
 
 class VxThread
 {
@@ -37,7 +37,7 @@ public:
 	VxThread(void);
 	virtual ~VxThread(void);
 
-	const char * 				getThreadName( void );
+	const char* 				getThreadName( void );
     unsigned int				getThreadId( void )				    { return m_uiThreadId; } // In android this returns the TID you see in eclipse
 	unsigned int				getThreadTid( void )				{ return m_ThreadTid; } // In android this returns the TID you see in eclipse
 	void * 						getThreadUserParam( void );
@@ -61,7 +61,7 @@ public:
 
 	RCODE						startThread(	VX_THREAD_FUNCTION_T 	pfuncThreadFunc,				// function that thread calls
 												void * 					pvUserParam,					// user defined param
-                                                const char * 			pThreadName = nullptr,          // thread name
+                                                const char* 			pThreadName = nullptr,          // thread name
 												int 					iExtraStackSpace = 0);			// will be added to minimum stack size
 
 	RCODE						killThread( void );
@@ -114,7 +114,7 @@ void VxSetGuiThreadId( void );
 //! get the thread id of qt application
 unsigned int VxGetGuiThreadId( void );
 
-void            VxThreadDefaultStartCallback( unsigned int threadId, const char * threadName );
-void            VxThreadDefaultStopCallback( unsigned int threadId, bool iIsExitCallbackLocked, const char * threadName );
+void            VxThreadDefaultStartCallback( unsigned int threadId, const char* threadName );
+void            VxThreadDefaultStopCallback( unsigned int threadId, bool iIsExitCallbackLocked, const char* threadName );
 
 //============================================================================

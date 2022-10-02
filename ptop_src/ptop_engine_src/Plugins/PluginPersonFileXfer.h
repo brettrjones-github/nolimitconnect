@@ -13,16 +13,18 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "PluginBaseFileXfer.h"
+#include "PluginBase.h"
 
-class PluginFileXfer : public PluginBaseFileXfer
+class PluginPersonFileXfer : public PluginBase
 {
 public:
 
-    PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
-	virtual ~PluginFileXfer() override = default;
+    PluginPersonFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
+	virtual ~PluginPersonFileXfer() override = default;
 
-
-protected:
+    virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase ) override {};
+    virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) override {};
+    virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override {};
+    virtual void				onConnectionLost( VxSktBase* sktBase ) override {};
 
 };

@@ -39,7 +39,7 @@ FileShareItemWidget::FileShareItemWidget(QWidget*parent )
 //============================================================================
 FileShareItemWidget::~FileShareItemWidget()
 {
-	FileItemInfo * poInfo = getFileItemInfo();
+	FileItemInfo* poInfo = getFileItemInfo();
 	delete poInfo;
 }
 
@@ -97,7 +97,7 @@ void FileShareItemWidget::resizeEvent(QResizeEvent* resizeEvent)
 bool FileShareItemWidget::getIsShared( void )
 {
 	bool isShared = false;
-	FileItemInfo * poInfo = getFileItemInfo();
+	FileItemInfo* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
 		isShared = poInfo->getIsShared();
@@ -109,7 +109,7 @@ bool FileShareItemWidget::getIsShared( void )
 //============================================================================
 void FileShareItemWidget::setIsShared( bool isShared )
 {
-	FileItemInfo * poInfo = getFileItemInfo();
+	FileItemInfo* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
 		poInfo->setIsShared( isShared );
@@ -122,7 +122,7 @@ void FileShareItemWidget::setIsShared( bool isShared )
 bool FileShareItemWidget::getIsInLibrary( void )
 {
 	bool isInLibrary = false;
-	FileItemInfo * poInfo = getFileItemInfo();
+	FileItemInfo* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
 		isInLibrary = poInfo->getIsInLibrary();
@@ -134,7 +134,7 @@ bool FileShareItemWidget::getIsInLibrary( void )
 //============================================================================
 void FileShareItemWidget::setIsInLibrary( bool isInLibrary )
 {
-	FileItemInfo * poInfo = getFileItemInfo();
+	FileItemInfo* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
 		poInfo->setIsInLibrary( isInLibrary );
@@ -144,21 +144,21 @@ void FileShareItemWidget::setIsInLibrary( bool isInLibrary )
 }
 
 //============================================================================
-void FileShareItemWidget::setFileItemInfo( FileItemInfo * fileItemInfo )
+void FileShareItemWidget::setFileItemInfo( FileItemInfo* fileItemInfo )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)fileItemInfo) );
 }
 
 //============================================================================
-FileItemInfo * FileShareItemWidget::getFileItemInfo( void )
+FileItemInfo* FileShareItemWidget::getFileItemInfo( void )
 {
-	return (FileItemInfo *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+	return (FileItemInfo*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
 void FileShareItemWidget::updateWidgetFromInfo( void )
 {
-	FileItemInfo * poInfo = getFileItemInfo();
+	FileItemInfo* poInfo = getFileItemInfo();
 	if( 0 == poInfo )
 	{
 		return;

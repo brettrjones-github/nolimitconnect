@@ -38,19 +38,19 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	EScanType					getScanType() { return m_eScanType; }
-	void						searchResult( GuiUser * netIdent );
+	void						searchResult( GuiUser* netIdent );
 	void						setTitle( QString strTitle );
 	void						setStatusLabel( QString strMsg );
 
-    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent ) override;
     virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
 
 signals:
-	void						signalSearchResult( GuiUser * netIdent );
+	void						signalSearchResult( GuiUser* netIdent );
 	void						signalSearchComplete( void );
 
 private slots:
-	void						slotSearchResult( GuiUser * netIdent );
+	void						slotSearchResult( GuiUser* netIdent );
 	void						slotSearchComplete( void );
     void						slotHomeButtonClicked( void ) override;
 	void						slotStartSearchClicked();

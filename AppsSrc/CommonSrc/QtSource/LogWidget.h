@@ -32,7 +32,7 @@ public:
 
     void                        initLogCallback();
 
-    void                        onLogEvent( uint32_t u32LogFlags, const char * logMsg ) override;
+    void                        onLogEvent( uint32_t u32LogFlags, const char* logMsg ) override;
 
     void                        clear()                 { getLogEdit()->clear(); }
 

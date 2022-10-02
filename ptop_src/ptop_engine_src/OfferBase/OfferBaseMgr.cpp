@@ -35,12 +35,12 @@
 
 namespace
 {
-	const char * OFFER_INFO_DB_NAME = "OfferBaseInfoDb.db3";
+	const char* OFFER_INFO_DB_NAME = "OfferBaseInfoDb.db3";
 
 	//============================================================================
     static void * OfferBaseMgrGenHashIdsThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		OfferBaseMgr * poMgr = (OfferBaseMgr *)poThread->getThreadUserParam();
         if( poMgr )
@@ -54,7 +54,7 @@ namespace
 }
 
 //============================================================================
-OfferBaseMgr::OfferBaseMgr( P2PEngine& engine, const char * dbName, const char * stateDbName, EOfferMgrType assetMgrType )
+OfferBaseMgr::OfferBaseMgr( P2PEngine& engine, const char* dbName, const char* stateDbName, EOfferMgrType assetMgrType )
 : m_Engine( engine )
 , m_OfferMgrType( assetMgrType )
 , m_OfferBaseInfoDb( createOfferInfoDb( dbName, assetMgrType ) )
@@ -68,7 +68,7 @@ OfferBaseMgr::~OfferBaseMgr()
 }
 
 //============================================================================
-OfferBaseInfoDb& OfferBaseMgr::createOfferInfoDb( const char * dbName, EOfferMgrType assetMgrType )
+OfferBaseInfoDb& OfferBaseMgr::createOfferInfoDb( const char* dbName, EOfferMgrType assetMgrType )
 {
     switch( assetMgrType )
     {
@@ -94,7 +94,7 @@ void OfferBaseMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-void OfferBaseMgr::assetInfoMgrStartup( VxThread * startupThread )
+void OfferBaseMgr::assetInfoMgrStartup( VxThread* startupThread )
 {
 	if( startupThread->isAborted() )
 		return;
@@ -138,7 +138,7 @@ void OfferBaseMgr::generateHashForFile( std::string fileName )
 }
 
 //============================================================================
-void OfferBaseMgr::generateHashIds( VxThread * genHashThread )
+void OfferBaseMgr::generateHashIds( VxThread* genHashThread )
 {
 	while( false == genHashThread->isAborted() )
 	{
@@ -261,7 +261,7 @@ OfferBaseInfo * OfferBaseMgr::findOffer( VxGUID& assetId )
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::addOfferFile( const char * fileName, uint64_t fileLen, uint16_t fileType )
+OfferBaseInfo * OfferBaseMgr::addOfferFile( const char* fileName, uint64_t fileLen, uint16_t fileType )
 {
     OfferBaseInfo * assetInfo = createOfferInfo( fileName, fileLen, fileType );
     if( assetInfo )
@@ -276,11 +276,11 @@ OfferBaseInfo * OfferBaseMgr::addOfferFile( const char * fileName, uint64_t file
 }
 
 //============================================================================
-bool OfferBaseMgr::addOfferFile(	const char *	fileName, 
+bool OfferBaseMgr::addOfferFile(	const char*	fileName, 
 									VxGUID&			assetId,  
 									uint8_t *		hashId, 
 									EOfferLocation	locationFlags, 
-									const char *	assetTag, 
+									const char*	assetTag, 
                                     int64_t			timestamp )
 {
 	OfferBaseInfo * assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
@@ -293,13 +293,13 @@ bool OfferBaseMgr::addOfferFile(	const char *	fileName,
 }
 
 //============================================================================
-bool OfferBaseMgr::addOfferFile(	const char *	fileName, 
+bool OfferBaseMgr::addOfferFile(	const char*	fileName, 
 									VxGUID&			assetId,  
 									VxGUID&		    creatorId, 
 									VxGUID&		    historyId, 
 									uint8_t *		hashId, 
 									EOfferLocation	locationFlags, 
-									const char *	assetTag, 
+									const char*	assetTag, 
                                     int64_t			timestamp )
 {
 	OfferBaseInfo * assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
@@ -322,7 +322,7 @@ bool OfferBaseMgr::addOffer( OfferBaseInfo& assetInfo )
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::createOfferInfo( const char * fileName, uint64_t fileLen, uint16_t fileType )
+OfferBaseInfo * OfferBaseMgr::createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType )
 {
     OfferBaseInfo * assetInfo = new OfferBaseInfo( fileName, fileLen, fileType );
     if( assetInfo )
@@ -334,11 +334,11 @@ OfferBaseInfo * OfferBaseMgr::createOfferInfo( const char * fileName, uint64_t f
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::createOfferInfo( 	const char *	fileName, 
+OfferBaseInfo * OfferBaseMgr::createOfferInfo( 	const char*	fileName, 
 										        VxGUID&			assetId,  
 										        uint8_t *	    hashId, 
 										        EOfferLocation	locationFlags, 
-										        const char *	assetTag, 
+										        const char*	assetTag, 
                                                 int64_t			timestamp )
 {
 	uint64_t  fileLen = VxFileUtil::getFileLen( fileName );
@@ -576,7 +576,7 @@ void OfferBaseMgr::clearOfferInfoList( void )
 }
 
 //============================================================================
-void OfferBaseMgr::updateOfferListFromDb( VxThread * startupThread )
+void OfferBaseMgr::updateOfferListFromDb( VxThread* startupThread )
 {
 	std::vector<OfferBaseInfo*>::iterator iter;
 	lockResources();

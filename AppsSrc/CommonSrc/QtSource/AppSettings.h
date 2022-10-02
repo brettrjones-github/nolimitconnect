@@ -29,9 +29,9 @@ public:
 	virtual ~AppSettings();
 
 	void						setAppShortName( QString appShortName )		{  m_AppShortName = appShortName.toUtf8().constData(); }
-	const char *				getAppShortName( void )						{ return m_AppShortName.c_str(); }
+	const char*				getAppShortName( void )						{ return m_AppShortName.c_str(); }
 
-	RCODE						appSettingStartup( const char * dbSettingsFile, EDefaultAppMode appDefaultMode );
+	RCODE						appSettingStartup( const char* dbSettingsFile, EDefaultAppMode appDefaultMode );
 	void						appSettingShutdown( void );
 
 	bool						getIsAppSettingInitialized( void )			{ return m_AppSettingsInitialized; }
@@ -131,7 +131,7 @@ public:
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );
-    std::string                 getAppendedType( const char * key, ESearchType searchType );
+    std::string                 getAppendedType( const char* key, ESearchType searchType );
 
 	std::string					m_AppShortName;
 	// caching of feature settings

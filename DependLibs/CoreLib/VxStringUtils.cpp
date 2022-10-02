@@ -213,7 +213,7 @@ static const wchar_t unicode_uppers[] = {
   (wchar_t)0xFF32, (wchar_t)0xFF33, (wchar_t)0xFF34, (wchar_t)0xFF35, (wchar_t)0xFF36, (wchar_t)0xFF37, (wchar_t)0xFF38, (wchar_t)0xFF39, (wchar_t)0xFF3A
 };
 
-string VxStringUtils::Format(const char *fmt, ...)
+string VxStringUtils::Format(const char*fmt, ...)
 {
   va_list args;
   va_start(args, fmt);
@@ -223,7 +223,7 @@ string VxStringUtils::Format(const char *fmt, ...)
   return str;
 }
 
-string VxStringUtils::FormatV(const char *fmt, va_list args)
+string VxStringUtils::FormatV(const char*fmt, va_list args)
 {
   if (fmt == NULL)
     return "";
@@ -372,12 +372,12 @@ bool VxStringUtils::EqualsNoCase(const std::string &str1, const std::string &str
   return EqualsNoCase(str1.c_str(), str2.c_str());
 }
 
-bool VxStringUtils::EqualsNoCase(const std::string &str1, const char *s2)
+bool VxStringUtils::EqualsNoCase(const std::string &str1, const char*s2)
 {
   return EqualsNoCase(str1.c_str(), s2);
 }
 
-bool VxStringUtils::EqualsNoCase(const char *s1, const char *s2)
+bool VxStringUtils::EqualsNoCase(const char*s1, const char*s2)
 {
   char c2; // we need only one char outside the loop
   do
@@ -395,7 +395,7 @@ int VxStringUtils::CompareNoCase(const std::string &str1, const std::string &str
   return CompareNoCase(str1.c_str(), str2.c_str());
 }
 
-int VxStringUtils::CompareNoCase(const char *s1, const char *s2)
+int VxStringUtils::CompareNoCase(const char*s1, const char*s2)
 {
   char c2; // we need only one char outside the loop
   do
@@ -561,12 +561,12 @@ bool VxStringUtils::StartsWith(const std::string &str1, const std::string &str2)
   return str1.compare(0, str2.size(), str2) == 0;
 }
 
-bool VxStringUtils::StartsWith(const std::string &str1, const char *s2)
+bool VxStringUtils::StartsWith(const std::string &str1, const char*s2)
 {
   return StartsWith(str1.c_str(), s2);
 }
 
-bool VxStringUtils::StartsWith(const char *s1, const char *s2)
+bool VxStringUtils::StartsWith(const char*s1, const char*s2)
 {
   while (*s2 != '\0')
   {
@@ -583,12 +583,12 @@ bool VxStringUtils::StartsWithNoCase(const std::string &str1, const std::string 
   return StartsWithNoCase(str1.c_str(), str2.c_str());
 }
 
-bool VxStringUtils::StartsWithNoCase(const std::string &str1, const char *s2)
+bool VxStringUtils::StartsWithNoCase(const std::string &str1, const char*s2)
 {
   return StartsWithNoCase(str1.c_str(), s2);
 }
 
-bool VxStringUtils::StartsWithNoCase(const char *s1, const char *s2)
+bool VxStringUtils::StartsWithNoCase(const char*s1, const char*s2)
 {
   while (*s2 != '\0')
   {
@@ -607,7 +607,7 @@ bool VxStringUtils::EndsWith(const std::string &str1, const std::string &str2)
   return str1.compare(str1.size() - str2.size(), str2.size(), str2) == 0;
 }
 
-bool VxStringUtils::EndsWith(const std::string &str1, const char *s2)
+bool VxStringUtils::EndsWith(const std::string &str1, const char*s2)
 {
   size_t len2 = strlen(s2);
   if (str1.size() < len2)
@@ -619,8 +619,8 @@ bool VxStringUtils::EndsWithNoCase(const std::string &str1, const std::string &s
 {
   if (str1.size() < str2.size())
     return false;
-  const char *s1 = str1.c_str() + str1.size() - str2.size();
-  const char *s2 = str2.c_str();
+  const char*s1 = str1.c_str() + str1.size() - str2.size();
+  const char*s2 = str2.c_str();
   while (*s2 != '\0')
   {
     if (::tolower(*s1) != ::tolower(*s2))
@@ -631,12 +631,12 @@ bool VxStringUtils::EndsWithNoCase(const std::string &str1, const std::string &s
   return true;
 }
 
-bool VxStringUtils::EndsWithNoCase(const std::string &str1, const char *s2)
+bool VxStringUtils::EndsWithNoCase(const std::string &str1, const char*s2)
 {
   size_t len2 = strlen(s2);
   if (str1.size() < len2)
     return false;
-  const char *s1 = str1.c_str() + str1.size() - len2;
+  const char*s1 = str1.c_str() + str1.size() - len2;
   while (*s2 != '\0')
   {
     if (::tolower(*s1) != ::tolower(*s2))
@@ -965,7 +965,7 @@ int IsUTF8Letter(const unsigned char *str)
   return -1;
 }
 
-size_t VxStringUtils::FindWords(const char *str, const char *wordLowerCase)
+size_t VxStringUtils::FindWords(const char*str, const char*wordLowerCase)
 {
   // NOTE: This assumes word is lowercase!
   unsigned char *s = (unsigned char *)str;
@@ -985,7 +985,7 @@ size_t VxStringUtils::FindWords(const char *str, const char *wordLowerCase)
         same = false;
     }
     if (same && *w == 0)  // only the same if word has been exhausted
-      return (const char *)s - str;
+      return (const char*)s - str;
 
     // otherwise, skip current word (composed by latin letters) or number
     int l;
@@ -1103,7 +1103,7 @@ bool VxStringUtils::ContainsKeyword(const std::string &str, const vector<string>
   return false;
 }
 
-size_t VxStringUtils::utf8_strlen(const char *s)
+size_t VxStringUtils::utf8_strlen(const char*s)
 {
   size_t length = 0;
   while (*s)

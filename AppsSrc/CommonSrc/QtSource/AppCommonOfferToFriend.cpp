@@ -30,7 +30,7 @@
 #include <QUrl>
 
 //============================================================================
-bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup, QWidget* parent )
+bool AppCommon::offerToFriendPluginSession( GuiUser* poFriend, EPluginType ePluginType, bool inGroup, QWidget* parent )
 {
 	bool showedActivity = false;
 	if( poFriend->isMyAccessAllowedFromHim( ePluginType, inGroup ) )
@@ -50,16 +50,8 @@ bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePlu
 }
 
 //============================================================================
-// view shared files
-void AppCommon::offerToFriendViewSharedFiles( GuiUser * poFriend, bool inGroup, QWidget* parent )
-{
-	//AppletFileShareClientView oDlg( *this, poFriend, this  );
-	//oDlg.exec();
-}
-
-//============================================================================
 // offer to send a file
-void AppCommon::offerToFriendSendFile( GuiUser * poFriend, bool inGroup, QWidget* parent )
+void AppCommon::offerToFriendSendFile( GuiUser* poFriend, bool inGroup, QWidget* parent )
 {
 	//ActivitySelectFileToSend * dlg = new ActivitySelectFileToSend( *this, poFriend, this);
 	//dlg->exec();
@@ -67,7 +59,7 @@ void AppCommon::offerToFriendSendFile( GuiUser * poFriend, bool inGroup, QWidget
 
 //============================================================================
 // change friendship
-void AppCommon::offerToFriendChangeFriendship( GuiUser * poFriend )
+void AppCommon::offerToFriendChangeFriendship( GuiUser* poFriend )
 {
 	//AppletPeerChangeFriendship * poDlg = new AppletPeerChangeFriendship( *this, this);
 	//poDlg->setFriend( poFriend );
@@ -75,7 +67,7 @@ void AppCommon::offerToFriendChangeFriendship( GuiUser * poFriend )
 }
 
 //============================================================================
-void AppCommon::removePluginSessionOffer( EPluginType ePluginType, GuiUser * poFriend )
+void AppCommon::removePluginSessionOffer( EPluginType ePluginType, GuiUser* poFriend )
 {
     getOfferClientMgr().removePluginSessionOffer( ePluginType, poFriend );
 }

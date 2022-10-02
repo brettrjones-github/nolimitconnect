@@ -27,7 +27,7 @@ class AssetBaseMgr;
 class AssetXferMgr : public AssetBaseXferMgr
 {
 public:
-	AssetXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName );
+	AssetXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName );
 	virtual ~AssetXferMgr() = default;
 
     virtual void				onPktAssetGetReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

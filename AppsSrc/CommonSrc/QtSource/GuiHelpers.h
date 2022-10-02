@@ -87,8 +87,8 @@ public:
     static bool                 validateMoodMessage( QWidget* curWidget, QString strMoodMsg );
     static bool                 validateAge( QWidget* curWidget, int age );
 
-    static void                 setValuesFromIdentity( QWidget* curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
-    static void                 setIdentityFromValues( QWidget* curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setValuesFromIdentity( QWidget* curWidget, VxNetIdent* ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setIdentityFromValues( QWidget* curWidget, VxNetIdent* ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
 
     static void                 fillPermissionComboBox( QComboBox * permissionComboBox );
     static EFriendState         comboIdxToFriendState( int comboIdx );

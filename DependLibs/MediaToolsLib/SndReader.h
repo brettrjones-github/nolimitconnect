@@ -60,11 +60,11 @@ public:
 	bool						getIsPlayingPaused( void )					{ return m_IsPlayingPaused; }
 
 
-	bool						fromGuiIsMyP2PWebAudioFile( const char * fileName );	
+	bool						fromGuiIsMyP2PWebAudioFile( const char* fileName );	
 	bool						fromGuiSndPlay( ESndPlayState ePlayState, VxGUID& assetId, int pos0to100000  );
 	bool						fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000  );
 
-	bool						startSndRead( const char * fileName, VxGUID& assetId, int pos0to100000 );
+	bool						startSndRead( const char* fileName, VxGUID& assetId, int pos0to100000 );
 	void						stopSndRead( void );
 
 protected:

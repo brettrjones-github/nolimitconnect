@@ -15,12 +15,12 @@ static const float f_iso_frequency_table_10b[ EQZ_BANDS_MAX ] =
 };
 
 #define NB_PRESETS 18
-static const char *const preset_list[ NB_PRESETS ] = {
+static const char*const preset_list[ NB_PRESETS ] = {
     "flat", "classical", "club", "dance", "fullbass", "fullbasstreble",
     "fulltreble", "headphones","largehall", "live", "party", "pop", "reggae",
     "rock", "ska", "soft", "softrock", "techno"
 };
-static const char *const preset_list_text[ NB_PRESETS ] = {
+static const char*const preset_list_text[ NB_PRESETS ] = {
     ( "Flat" ), ( "Classical" ), ( "Club" ), ( "Dance" ), ( "Full bass" ),
     ( "Full bass and treble" ), ( "Full treble" ), ( "Headphones" ),
     ( "Large Hall" ), ( "Live" ), ( "Party" ), ( "Pop" ), ( "Reggae" ),

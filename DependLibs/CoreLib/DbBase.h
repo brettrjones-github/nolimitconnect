@@ -100,7 +100,7 @@ public:
 	//! return float from column
 	double						getF64( int iColumnIdx );
 	//! return string from column
-	const char *				getString(int iColumnIdx );
+	const char*				getString(int iColumnIdx );
 	//! return blob from column.. 
 	//! if( piMaxLen != null ) then return length of blob in piMaxLen 
 	void *						getBlob( int iColumnIdx, int * piMaxLen = NULL );
@@ -112,12 +112,12 @@ public:
 class DbBase
 {
 public:
-	DbBase( const char * databaseName );	
+	DbBase( const char* databaseName );	
 	virtual ~DbBase() = default;
 
     virtual std::string&        getDatabaseName( void )                 { return m_strDatabaseName; }
 
-	virtual	void				onSqlError( RCODE rc, const char * errMsg ){};
+	virtual	void				onSqlError( RCODE rc, const char* errMsg ){};
 	//=== overrides ===//
 	//! create initial database.. 
 	virtual RCODE				onCreateDatabase( int iDbVersion );
@@ -130,7 +130,7 @@ public:
 
 	//! Initialize the database.. if doesn't exist then call onCreateDatabase and onCreateTables
 	//! if version does not match then call onDeleteTables and onCreateTables
-	virtual RCODE				dbStartup( int iDbVersion, const char * pDbFileName );
+	virtual RCODE				dbStartup( int iDbVersion, const char* pDbFileName );
 	//! if version does not match then call onDeleteTables and onCreateTables
 	virtual RCODE				dbStartup( int iDbVersion, std::string& strDbFileName ) { return dbStartup( iDbVersion, strDbFileName.c_str() ); }
 
@@ -150,15 +150,15 @@ public:
 	//! open db then execute Sql statement then close db
 	virtual RCODE				sqlExec( std::string& statement );
 	//! open db then execute Sql statement then close db
-	virtual RCODE				sqlExec( const char * pSqlStatment );
+	virtual RCODE				sqlExec( const char* pSqlStatment );
 	//! open db then execute Sql statement then close db
 	virtual RCODE				sqlExec( const char* SQL_Statement, DbBindList& bindList );
 
 
 	//! start query and use DbCursor to access column's data.. be sure to call DbCursor.close() when done
 	//! returns null if error
-	virtual DbCursor *			startQuery( const char * pSqlString );
-	virtual DbCursor *			startQueryInsecure( const char * pSqlString, ... );
+	virtual DbCursor *			startQuery( const char* pSqlString );
+	virtual DbCursor *			startQueryInsecure( const char* pSqlString, ... );
 	virtual DbCursor *			startQuery( const char* pSqlString, const char* textParam );
 	virtual DbCursor*			startQuery( const char* pSqlString, const char* textParam, int secondParam );
 	virtual DbCursor*			startQuery( const char* pSqlString, const char* textParam1, const char* textParam2, int thirdParam );
@@ -167,13 +167,13 @@ public:
 	virtual int64_t				getLastInsertId( void );
 
 	//! return true if table exists
-	bool						dbTableExists( const char * pTableName );
+	bool						dbTableExists( const char* pTableName );
 
 	void						lockDb( void )		{ m_DbMutex.lock(); }
 	void						unlockDb( void )	{ m_DbMutex.unlock(); }
 
 protected:
-	void						handleSqlError( RCODE rc, const char * errMsg, ... );
+	void						handleSqlError( RCODE rc, const char* errMsg, ... );
 
 public:
 	//=== vars ===//

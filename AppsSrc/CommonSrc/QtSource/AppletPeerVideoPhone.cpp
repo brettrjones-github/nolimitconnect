@@ -80,7 +80,7 @@ void AppletPeerVideoPhone::onInSession( bool isInSession )
 }
 
 //============================================================================
-void AppletPeerVideoPhone::toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerVideoPhone::toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg )
 {
 	if( ( ePluginType == m_ePluginType )
 		&& m_HisIdent 

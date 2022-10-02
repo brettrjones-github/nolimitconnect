@@ -43,7 +43,7 @@
 
 
 //============================================================================
-BlobXferMgr::BlobXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName )
+BlobXferMgr::BlobXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName )
     : AssetBaseXferMgr( engine, assetMgr, xferInterface, "AssetXferDb.db3", "AssetXferWorkerThrd" )
 {
 }

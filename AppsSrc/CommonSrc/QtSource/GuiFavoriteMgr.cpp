@@ -29,7 +29,7 @@ GuiFavoriteMgr::GuiFavoriteMgr()
 }
 
 //============================================================================
-RCODE GuiFavoriteMgr::startupFavoriteMgr( const char * dbSettingsFile )
+RCODE GuiFavoriteMgr::startupFavoriteMgr( const char* dbSettingsFile )
 {
 	return dbStartup( GUI_FAVORITE_MGR_DBVERSION, dbSettingsFile );
 }

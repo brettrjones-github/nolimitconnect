@@ -17,13 +17,13 @@
 #include "AssetInfo.h"
 
 //============================================================================
-AssetMgr::AssetMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
+AssetMgr::AssetMgr( P2PEngine& engine, const char* dbName, const char* dbStateName )
 : AssetBaseMgr( engine, dbName, dbStateName, eAssetMgrTypeAssets )
 {
 }
 
 //============================================================================
-AssetBaseInfo * AssetMgr::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
+AssetBaseInfo * AssetMgr::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     AssetInfo* assetInfo = new AssetInfo( assetType, assetName, assetLen );
     assetInfo->assureHasCreatorId();

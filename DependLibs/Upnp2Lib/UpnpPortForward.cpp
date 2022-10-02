@@ -34,7 +34,7 @@
 namespace
 {
 	const uint16_t		UPNP_DISCOVERY_PORT			= 1900;
-	const char *	UPNP_GROUP_IP				= "239.255.255.250";
+	const char*	UPNP_GROUP_IP				= "239.255.255.250";
 
 	//============================================================================
 	void SSPDSearchResponseSktCallbackHandler( VxSktBase *  sktBase, void * pvUserData )
@@ -59,7 +59,7 @@ namespace
         LogMsg( LOG_INFO, "UpnpPortForwardThreadFunc thread starting %d\n", threadCnt );
 #endif // DEBUG_THREADS
 
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 
 		UpnpPortForward * poMgr = (UpnpPortForward *)poThread->getThreadUserParam();
@@ -116,7 +116,7 @@ void UpnpPortForward::deviceAddPortMapSuccessFailCallback( bool bResult )
 }
 
 //============================================================================
-void UpnpPortForward::tcpPortForward( int port, const char * pServiceName, const char * pLocalIPv4  )
+void UpnpPortForward::tcpPortForward( int port, const char* pServiceName, const char* pLocalIPv4  )
 {
 	//if( g_ElapsedTimeBetweenUpnpRequests.elapsedMs() < 30000 )
 	//{

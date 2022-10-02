@@ -33,7 +33,7 @@ public:
 
 	int							emptyLen( void );
 	int							addImages( int iImageCnt, uint16_t * pu16Images );
-	void						addMsg( const char * pMsg );
+	void						addMsg( const char* pMsg );
 
 private:
 	//=== vars ===//

@@ -21,7 +21,7 @@ namespace
 	//============================================================================
     static void * Sha1GeneratorThreadFunc( void * pvContext )
 	{
-		VxThread* vxThread = (VxThread *)pvContext;
+		VxThread* vxThread = (VxThread*)pvContext;
 		vxThread->setIsThreadRunning( true );
 		Sha1GeneratorMgr * sha1Generator = (Sha1GeneratorMgr *)vxThread->getThreadUserParam();
 		sha1Generator->threadGenerateSha1( vxThread );
@@ -104,7 +104,7 @@ void Sha1GeneratorMgr::threadGenerateSha1( VxThread* vxThread )
 				m_Sha1List.erase( m_Sha1List.begin() );
 				m_Sha1ListMutex.unlock();
 
-				if( clientInfo.isValid() )
+				if( clientInfo.isValid( false ) )
 				{
 					if( clientInfo.getSha1Info().getSha1Hash().generateHashFromFile( clientInfo.getFileName().c_str(), vxThread ) )
 					{

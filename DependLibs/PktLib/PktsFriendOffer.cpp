@@ -27,7 +27,7 @@ PktFriendOfferReq::PktFriendOfferReq()
 }
 
 //============================================================================
-void PktFriendOfferReq::setOfferMsg( const char * msg )
+void PktFriendOfferReq::setOfferMsg( const char* msg )
 {
 	vx_assert( msg );
 	uint16_t msgLen = ( uint16_t)strlen( msg );
@@ -38,9 +38,9 @@ void PktFriendOfferReq::setOfferMsg( const char * msg )
 }
 
 //============================================================================
-const char * PktFriendOfferReq::getOfferMsg( void )
+const char* PktFriendOfferReq::getOfferMsg( void )
 {
-	return (const char *)m_au8Data;
+	return (const char*)m_au8Data;
 }
 
 //============================================================================
@@ -53,7 +53,7 @@ PktFriendOfferReply::PktFriendOfferReply()
 }
 
 //============================================================================
-void PktFriendOfferReply::setOfferMsg( const char * msg )
+void PktFriendOfferReply::setOfferMsg( const char* msg )
 {
     vx_assert( msg );
     uint16_t msgLen = ( uint16_t)strlen( msg );
@@ -64,7 +64,7 @@ void PktFriendOfferReply::setOfferMsg( const char * msg )
 }
 
 //============================================================================
-const char * PktFriendOfferReply::getOfferMsg( void )
+const char* PktFriendOfferReply::getOfferMsg( void )
 {
-    return (const char *)m_au8Data;
+    return (const char*)m_au8Data;
 }

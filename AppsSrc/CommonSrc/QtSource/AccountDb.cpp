@@ -119,7 +119,7 @@ bool AccountDb::onlineUidExistsInTable( VxGUID& onlineId, std::string& strTableN
 //=========================================================================
 //============================================================================
 //! update last login name
-bool AccountDb::updateLastLogin( const char * pThingName ) 
+bool AccountDb::updateLastLogin( const char* pThingName ) 
 {
 	DbBindList bindList( pThingName );
 	RCODE rc = sqlExec(  "DELETE FROM last_login" );
@@ -177,7 +177,7 @@ bool AccountDb::updateAccount( VxNetIdent& oUserAccount )
 
 //============================================================================
 //! retrieve account by name
-bool AccountDb::getAccountByName(const char * name, VxNetIdent& oUserAccount ) 
+bool AccountDb::getAccountByName(const char* name, VxNetIdent& oUserAccount ) 
 {
     if( NULL == name )
     {
@@ -192,7 +192,7 @@ bool AccountDb::getAccountByName(const char * name, VxNetIdent& oUserAccount )
 		if( cursor->getNextRow() )
 		{
 			int iBlobLen = 0;
-			VxNetIdent* netIdent = (VxNetIdent *)cursor->getBlob(0, &iBlobLen );
+			VxNetIdent* netIdent = (VxNetIdent*)cursor->getBlob(0, &iBlobLen );
 			if( iBlobLen == sizeof( VxNetIdent ) )
 			{
 				memcpy( &oUserAccount, netIdent, sizeof( VxNetIdent ));
@@ -222,7 +222,7 @@ bool AccountDb::getAccountByName(const char * name, VxNetIdent& oUserAccount )
 
 //============================================================================
 //! remove account by name
-bool AccountDb::removeAccountByName(const char * name ) 
+bool AccountDb::removeAccountByName(const char* name ) 
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec( "DELETE FROM account_login WHERE online_name=?", bindList );
@@ -332,13 +332,13 @@ bool AccountDb::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfi
 {
 	RCODE rc = 0;
 	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toHexString();
-	DbBindList bindList( (const char *)oProfile.m_strGreeting.toUtf8().constData() );
-	bindList.add( (const char *)oProfile.m_strAboutMe.toUtf8().constData() );
-	bindList.add( (const char *)oProfile.m_strPicturePath.toUtf8().constData() );
-	bindList.add( (const char *)oProfile.m_strUrl1.toUtf8().constData() );
-	bindList.add( (const char *)oProfile.m_strUrl2.toUtf8().constData() );
-	bindList.add( (const char *)oProfile.m_strUrl3.toUtf8().constData() );
-    bindList.add( (const char *)oProfile.m_strDonation.toUtf8().constData() );
+	DbBindList bindList( (const char*)oProfile.m_strGreeting.toUtf8().constData() );
+	bindList.add( (const char*)oProfile.m_strAboutMe.toUtf8().constData() );
+	bindList.add( (const char*)oProfile.m_strPicturePath.toUtf8().constData() );
+	bindList.add( (const char*)oProfile.m_strUrl1.toUtf8().constData() );
+	bindList.add( (const char*)oProfile.m_strUrl2.toUtf8().constData() );
+	bindList.add( (const char*)oProfile.m_strUrl3.toUtf8().constData() );
+    bindList.add( (const char*)oProfile.m_strDonation.toUtf8().constData() );
 	bindList.add( strOnlineIdHex.c_str() );
 
 	if( onlineUidExistsInTable( oUserAccount.getMyOnlineId(), TABLE_ACCOUNT_PROFILE ))
@@ -365,7 +365,7 @@ void AccountDb::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>& a
 		while( cursor->getNextRow() ) 
 		{
 			int iBlobLen = 0;
-			VxNetIdent* netIdent = (VxNetIdent *)cursor->getBlob(0, &iBlobLen );
+			VxNetIdent* netIdent = (VxNetIdent*)cursor->getBlob(0, &iBlobLen );
 			vx_assert( iBlobLen == sizeof( VxNetIdent ));
 			memcpy( &oIdent, netIdent, sizeof( VxNetIdent ));
 			aoIdent.push_back(oIdent); 
@@ -423,7 +423,7 @@ bool AccountDb::updateNetHostSetting( NetHostSetting& netSetting )
 }
 
 //============================================================================
-bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& netSetting )
+bool AccountDb::getNetHostSettingByName( const char* name, NetHostSetting& netSetting )
 {
 	bool bResult = false;
 	DbCursor * cursor = startQueryInsecure( "SELECT * FROM net_host_settings WHERE net_host_setting_name='%s'", name );
@@ -490,7 +490,7 @@ bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& netSettingLi
 }
 
 //============================================================================
-bool AccountDb::removeNetHostSettingByName( const char * name )
+bool AccountDb::removeNetHostSettingByName( const char* name )
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec(  "DELETE FROM net_host_settings WHERE net_host_setting_name=?", bindList );
@@ -498,7 +498,7 @@ bool AccountDb::removeNetHostSettingByName( const char * name )
 }
 
 //============================================================================
-bool AccountDb::updateLastNetHostSettingName( const char * name )
+bool AccountDb::updateLastNetHostSettingName( const char* name )
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec(  "DELETE FROM last_net_host_setting" );
@@ -540,7 +540,7 @@ bool AccountDb::getAllAccounts( std::vector<VxNetIdent>& accountList )
         while( cursor->getNextRow() )
         {
             int iBlobLen = 0;
-            VxNetIdent* netIdent = ( VxNetIdent * )cursor->getBlob( 2, &iBlobLen );
+            VxNetIdent* netIdent = ( VxNetIdent* )cursor->getBlob( 2, &iBlobLen );
             if( iBlobLen == (int)sizeof( VxNetIdent ) )
             {
                 accountList.push_back( *netIdent );

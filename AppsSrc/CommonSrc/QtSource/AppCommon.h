@@ -131,7 +131,7 @@ public:
     AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
     AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
-    QFrame*					getAppletFrame( EApplet applet );
+    QFrame*					    getAppletFrame( EApplet applet );
     AppletMgr&					getAppletMgr( void )						{ return m_AppletMgr; }
 	AppSettings&				getAppSettings( void )						{ return m_AppSettings; }
     QString&					getAppShortName( void )						{ return m_AppShortName; }
@@ -148,7 +148,7 @@ public:
     bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
     bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
     MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
-    VxNetIdent *				getMyIdentity( void );
+    VxNetIdent*				getMyIdentity( void );
     VxGUID&				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
     GuiOfferClientMgr&			getOfferClientMgr( void )				    { return m_OfferClientMgr; }
@@ -174,7 +174,7 @@ public:
 	void						setCamCaptureRotation( uint32_t rot );
 	int							getCamCaptureRotation( void )				{ return m_CamCaptureRotation; }
 
-	void 						setAccountUserName( const char * name )		{ m_strAccountUserName = name; } 
+	void 						setAccountUserName( const char* name )		{ m_strAccountUserName = name; } 
 	std::string					getAccountUserName( void )					{ return m_strAccountUserName; } 
 
 	void						setIsMaxScreenSize(  bool isMessagerFrame, bool isFullSizeWindow );
@@ -197,11 +197,11 @@ public:
 	void						forceOrientationChange( void );
 
 	virtual void				okMessageBox( QString title, QString msg );
-	virtual void				okMessageBox2( QString title, const char * msg, ... );
+	virtual void				okMessageBox2( QString title, const char* msg, ... );
 	virtual bool				yesNoMessageBox( QString title, QString msg );
-	virtual bool				yesNoMessageBox2( QString title, const char * msg, ... );
+	virtual bool				yesNoMessageBox2( QString title, const char* msg, ... );
 	virtual void				errMessageBox( QString title, QString msg );
-	virtual void				errMessageBox2( QString title, const char * msg, ... );
+	virtual void				errMessageBox2( QString title, const char* msg, ... );
 
 	//=== app methods ===//
 	virtual void				startupAppCommon( QFrame* appletFrame, QFrame* messangerFrame );
@@ -214,14 +214,14 @@ public:
 	virtual bool				confirmAppShutdown( QWidget* parentWindow );
 	virtual void				shutdownAppCommon( void );
 
-	void						loadAccountSpecificSettings( const char * userName );
+	void						loadAccountSpecificSettings( const char* userName );
     void                        copyAssetsToFoldersIfRequired( void );
 
     ActivityBase*               launchApplet( EApplet applet, QWidget* parent );
     ActivityBase*               launchApplet( EApplet applet, QWidget* parent, QString launchParam, VxGUID& assetId);
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
-	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget* parent = 0 );
+	void						startActivity( EPluginType ePluginType, GuiUser* friendIdent, QWidget* parent = 0 );
 	void						executeActivity( GuiOfferSession * offer, QWidget* parent );
 
 	void						setIsLibraryActivityActive( bool isActive )						{ m_LibraryActivityActive = isActive; }
@@ -266,7 +266,7 @@ public:
     //=== to gui media/render ===//
     //============================================================================
 
-    virtual void                verifyGlState( const char * msg = nullptr ) override; // show gl error if any
+    virtual void                verifyGlState( const char* msg = nullptr ) override; // show gl error if any
 
     //=== textures ===//
     void                        setActiveGlTexture( unsigned int activeTextureNum = 0 /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ ) override;
@@ -427,11 +427,11 @@ public:
     //============================================================================
 
     virtual void				toGuiPlayNlcMedia( AssetBaseInfo* assetInfo ) override;
-    virtual void				toGuiLog( int logFlags, const char * pMsg ) override;
+    virtual void				toGuiLog( int logFlags, const char* pMsg ) override;
     virtual void				toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) override;
-    virtual void				toGuiStatusMessage( const char * errMsg ) override;
+    virtual void				toGuiStatusMessage( const char* errMsg ) override;
 	// NOTE: toGuiUserMessage should be called from in gui on gui thread only
-    virtual void				toGuiUserMessage( const char * userMsg, ... );
+    virtual void				toGuiUserMessage( const char* userMsg, ... );
     virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, std::string& paramMsg ) override;
     virtual void				toGuiPluginCommError( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, ECommErr commErr ) override;
 
@@ -439,10 +439,10 @@ public:
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
 
-    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
-    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char* msg = "" ) override;
+    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char* msg = "" ) override;
 
-    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) override;
+    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char* msg = "" ) override;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) override;
     virtual void				toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
@@ -452,9 +452,9 @@ public:
 
     virtual void				toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline ) override;
 
-    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
-    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
-    virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
+    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char* msg = "" ) override;
+    virtual void				toGuiRunTestStatus( const char*testName, ERunTestStatus eRunTestStatus, const char* msg = "" ) override;
+    virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char* msg = "" ) override;
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
@@ -490,25 +490,25 @@ public:
     virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
     virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) override;
 
-	virtual void				toGuiRxedPluginOffer(	VxNetIdent *	netIdent,				// identity of friend
+	virtual void				toGuiRxedPluginOffer(	VxNetIdent*	netIdent,				// identity of friend
 														EPluginType		ePluginType,			// plugin type
-														const char *	pOfferMsg,				// offer message
+														const char*	pOfferMsg,				// offer message
 														int				pvUserData,				// plugin defined data
-														const char *	pFileName = NULL,		// filename if any
+														const char*	pFileName = NULL,		// filename if any
 														uint8_t *		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
                                                         VxGUID&			rmtSessionId = VxGUID::nullVxGUID()  ) override;
 
-	virtual void				toGuiRxedOfferReply(	VxNetIdent *	netIdent, 
+	virtual void				toGuiRxedOfferReply(	VxNetIdent*	netIdent, 
 														EPluginType		ePluginType, 
 														int				pvUserData, 
 														EOfferResponse	eOfferResponse,
-														const char *	pFileName = 0,
+														const char*	pFileName = 0,
 														uint8_t *		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
                                                         VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual void				toGuiPluginSessionEnded(	VxNetIdent *	netIdent, 
+	virtual void				toGuiPluginSessionEnded(	VxNetIdent*	netIdent, 
 															EPluginType		ePluginType, 
 															int				pvUserData, 
 															EOfferResponse	eOfferResponse,
@@ -518,9 +518,9 @@ public:
 													int				statusType,
                                                     int				statusValue ) override;
 
-	virtual void				toGuiInstMsg(	VxNetIdent *	netIdent,
+	virtual void				toGuiInstMsg(	VxNetIdent*	netIdent,
 												EPluginType		ePluginType,
-                                                const char *	pMsg ) override;
+                                                const char*	pMsg ) override;
 
 
 	virtual void				toGuiSetGameValueVar(	EPluginType	    ePluginType, 
@@ -534,15 +534,15 @@ public:
                                                         int32_t			s32VarValue ) override;
 
 	//=== to gui file ===//
-	virtual void				toGuiFileListReply(		VxNetIdent *	netIdent, 
+	virtual void				toGuiFileListReply(		VxNetIdent*	netIdent, 
 														EPluginType		ePluginType, 
 														uint8_t			u8FileType, 
 														uint64_t		u64FileLen, 
-														const char *	pFileName,
+														const char*	pFileName,
                                                         VxGUID			assetId,
                                                         uint8_t *		fileHashData ) override;
 
-	virtual void				toGuiStartUpload(	VxNetIdent *	netIdent, 
+	virtual void				toGuiStartUpload(	VxNetIdent*	netIdent, 
 													EPluginType		ePluginType, 
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
@@ -551,7 +551,7 @@ public:
                                                     VxGUID&			assetId,
                                                     VxSha1Hash&     fileHasId ) override;
 
-	virtual void				toGuiStartDownload(	VxNetIdent *	netIdent, 
+	virtual void				toGuiStartDownload(	VxNetIdent*	netIdent, 
 													EPluginType		ePluginType, 
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
@@ -564,7 +564,7 @@ public:
     virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID&	lclSessionId, std::string& fileName, EXferError xferError ) override;
     virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
 
-	virtual void				toGuiFileList(	const char *	fileName, 
+	virtual void				toGuiFileList(	const char*	fileName, 
 												uint64_t		fileLen, 
 												uint8_t			fileType, 
 												bool			isShared,
@@ -577,11 +577,11 @@ public:
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
 
     virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
-	virtual void				toGuiSearchResultFileSearch(	VxNetIdent *	netIdent, 		
+	virtual void				toGuiSearchResultFileSearch(	VxNetIdent*	netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen,                                                   
-                                                                const char *	pFileName,
+                                                                const char*	pFileName,
                                                                 VxGUID			assetId ) override;
 	//=== to gui asset ===//
     virtual void				toGuiAssetAdded( AssetBaseInfo* assetInfo ) override;
@@ -615,19 +615,18 @@ public:
 	bool						userCanceled( void );
 
 	// returns true if showed activity
-	bool 						offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, bool inGroup = false, QWidget* parent = 0 );
-	void						offerToFriendViewSharedFiles( GuiUser * poFriend, bool inGroup = false, QWidget* parent = 0 );
-	void						offerToFriendSendFile( GuiUser * poFriend, bool inGroup = false, QWidget* parent = 0 );
-	void						offerToFriendChangeFriendship( GuiUser * poFriend );
+	bool 						offerToFriendPluginSession( GuiUser* poFriend, EPluginType ePluginType, bool inGroup = false, QWidget* parent = 0 );
+	void						offerToFriendSendFile( GuiUser* poFriend, bool inGroup = false, QWidget* parent = 0 );
+	void						offerToFriendChangeFriendship( GuiUser* poFriend );
 
-	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, 
+	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char* moodMsg, int gender, 
                                                         EAgeType age, int primaryLanguage, int contentType );
     void                        setupAccountResources( VxNetIdent& userAccountIdent );
     // updates my ident in database and engine and global ident
     void                        updateMyIdent( VxNetIdent* myIdent, bool permissionAndStateOnly = false );
 
-	std::string					getUserXferDirectoryFromAccountUserName( const char * userName );
-	std::string 				getUserSpecificDataDirectoryFromAccountUserName( const char * userName );
+	std::string					getUserXferDirectoryFromAccountUserName( const char* userName );
+	std::string 				getUserSpecificDataDirectoryFromAccountUserName( const char* userName );
 
 	void						refreshFriend( VxGUID& onlineId ); // called to emit signalRefreshFriend
     bool						loadLastUserAccount( void );
@@ -667,7 +666,7 @@ signals:
 	void						signalAssetViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
     void						signalBlobViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
 
-	void						signalToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
+	void						signalToGuiInstMsg( GuiUser* netIdent, EPluginType ePluginType, QString pMsg );
 
     void						signalMicrophonePeak( int peekVal0to32768 );
 
@@ -817,7 +816,7 @@ protected slots:
 
 	void						slotOnNotifyIconFlashTimeout( bool bWhite );
 
-	void						slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
+	void						slotToGuiInstMsg( GuiUser* netIdent, EPluginType ePluginType, QString pMsg );
 
 	void						slotListViewTypeChanged( int viewSelectedIdx );
 
@@ -830,7 +829,7 @@ protected slots:
 
 	void						onOncePerSecond( void );
 
-	void						onUpdateMyIdent( VxNetIdent * poMyIdent );
+	void						onUpdateMyIdent( VxNetIdent* poMyIdent );
 
     void						slotCheckSetupTimer();
 
@@ -839,10 +838,10 @@ protected:
 	void						sendAppSettingsToEngine( void );
 	void						startNetworkMonitor( void );
 
-	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser * poFriend );
+	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser* poFriend );
 
 	void						connectSignals( void );
-	void						updateFriendList( GuiUser * netIdent, bool sessionTimeChange = false );
+	void						updateFriendList( GuiUser* netIdent, bool sessionTimeChange = false );
 
 
 	void						clearToGuiActivityInterfaceList( void );

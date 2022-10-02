@@ -56,7 +56,7 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget* parent )
     GuiHelpers::fillContentRating( ui.m_ContentComboBox );
     GuiHelpers::fillAge( ui.m_AgeComboBox );
 
-    VxNetIdent * curIdent = m_MyApp.getAppGlobals().getUserIdent();
+    VxNetIdent* curIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = curIdent->getOnlineName();
     m_strOrigMoodMessage = curIdent->getOnlineDescription();
 

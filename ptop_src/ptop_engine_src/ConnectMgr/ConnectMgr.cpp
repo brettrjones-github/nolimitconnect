@@ -32,7 +32,7 @@
 #include <time.h>
 
 //============================================================================
-ConnectMgr::ConnectMgr( P2PEngine& engine, const char * dbName, const char * stateDbName )
+ConnectMgr::ConnectMgr( P2PEngine& engine, const char* dbName, const char* stateDbName )
 : m_Engine( engine )
 , m_ConnectInfoDb( engine, *this, dbName )
 {

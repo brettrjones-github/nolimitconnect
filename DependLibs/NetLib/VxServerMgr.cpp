@@ -40,7 +40,7 @@ namespace
 	{
         if( pvContext )
         {
-            VxThread * poVxThread = (VxThread *)pvContext;
+            VxThread* poVxThread = (VxThread*)pvContext;
             poVxThread->setIsThreadRunning( true );
             VxServerMgr * poMgr = (VxServerMgr *)poVxThread->getThreadUserParam();
             if( poMgr )
@@ -839,7 +839,7 @@ RCODE VxServerMgr::stopListening( void )
 }
 
 //============================================================================
-RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
+RCODE VxServerMgr::acceptConnection( VxThread* poVxThread, SOCKET oListenSkt )
 {
 	RCODE rc = 0;
 	if( INVALID_SOCKET == oListenSkt )
@@ -1006,7 +1006,7 @@ static int dumpSktStatsCnt = 0;
 }
 
 //============================================================================
-void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
+void VxServerMgr::listenForConnectionsToAccept( VxThread* poVxThread )
 {
 #ifdef DEBUG_SKT_CONNECTIONS
 	//LogMsg( LOG_INFO, "111 IN THREAD VxServerMgr::listenForConnectionsToAccept started\n" ); 

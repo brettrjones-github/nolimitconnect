@@ -31,13 +31,13 @@
 #include <time.h>
 
 //============================================================================
-BlobMgr::BlobMgr( P2PEngine& engine, const char * dbName, const char * stateDbName )
+BlobMgr::BlobMgr( P2PEngine& engine, const char* dbName, const char* stateDbName )
 : AssetBaseMgr( engine, dbName, stateDbName, eAssetMgrTypeBlob )
 {
 }
 
 //============================================================================
-AssetBaseInfo * BlobMgr::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
+AssetBaseInfo * BlobMgr::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     BlobInfo* assetInfo = new BlobInfo( assetType, assetName, assetLen );
     assetInfo->assureHasCreatorId();

@@ -41,7 +41,7 @@ FileXferPluginSession::~FileXferPluginSession()
 
 //============================================================================
 //! return true if file is already in que to be sent or has been sent
-bool FileXferPluginSession::isFileQuedOrSent( const char * pFileName )
+bool FileXferPluginSession::isFileQuedOrSent( const char* pFileName )
 {
 	return false;
 }

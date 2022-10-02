@@ -90,8 +90,8 @@ void P2PEngine::onContactConnected( RcConnectInfo * poInfo, bool connectionListI
 		//}
 
 
-		m_PluginMgr.onContactWentOnline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
-		m_RcScan.onContactWentOnline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
+		m_PluginMgr.onContactWentOnline( (VxNetIdent*)poInfo->m_BigListInfo, poInfo->getSkt() );
+		m_RcScan.onContactWentOnline( (VxNetIdent*)poInfo->m_BigListInfo, poInfo->getSkt() );
 	}
 }
 

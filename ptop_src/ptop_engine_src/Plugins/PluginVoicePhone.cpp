@@ -41,10 +41,10 @@ PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,		
+bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent*	netIdent,		
 													int			    pvUserData,
-													const char *	pOfferMsg,		
-													const char *	pFileName,
+													const char*	pOfferMsg,		
+													const char*	pFileName,
 													uint8_t *		fileHashId,
 													VxGUID			lclSessionId )	
 {
@@ -101,7 +101,7 @@ void PluginVoicePhone::fromGuiStopPluginSession( VxNetIdent* netIdent, int, VxGU
 
 //============================================================================
 //! handle reply to offer
-bool PluginVoicePhone::fromGuiOfferReply(	VxNetIdent *	netIdent,
+bool PluginVoicePhone::fromGuiOfferReply(	VxNetIdent*	netIdent,
 											int				pvUserData,
 											EOfferResponse	eOfferResponse,
 											VxGUID			lclSessionId )
@@ -113,8 +113,8 @@ bool PluginVoicePhone::fromGuiOfferReply(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginVoicePhone::fromGuiInstMsg(	VxNetIdent *	netIdent, 
-										const char *	pMsg )
+bool PluginVoicePhone::fromGuiInstMsg(	VxNetIdent*	netIdent, 
+										const char*	pMsg )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	P2PSession * poSession = m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -178,7 +178,7 @@ void PluginVoicePhone::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNet
 	P2PSession * poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
-		IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char *)poPkt->getDataPayload() );
+		IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char*)poPkt->getDataPayload() );
 	}
 }
 

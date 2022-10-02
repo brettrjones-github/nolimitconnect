@@ -52,7 +52,7 @@ class PktOfferSendReq : public VxPktHdr
 {
 public:
 	PktOfferSendReq();
-	void						setOfferNameAndTag( const char * pOfferName, const char * assetTag = 0 );
+	void						setOfferNameAndTag( const char* pOfferName, const char* assetTag = 0 );
 	void						setOfferNameLen( uint16_t nameLen )				{ m_OfferNameLen = htons( nameLen ); }
 	uint16_t					getOfferNameLen( void )							{ return ntohs( m_OfferNameLen ); }
 	void						setOfferTagLen( uint16_t tagLen )				{ m_OfferTagLen = htons( tagLen ); }
@@ -265,7 +265,7 @@ class PktOfferXferErr : public VxPktHdr
 public:
 	PktOfferXferErr();
 
-	const char *				describeError();
+	const char*				describeError();
 
 	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxOfferInstance = instanceGuid; }
 	VxGUID& 					getRxInstance( void )							{ return m_RxOfferInstance; }

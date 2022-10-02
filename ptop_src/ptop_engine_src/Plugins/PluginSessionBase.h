@@ -48,9 +48,9 @@ public:
 
 	virtual void				setPluginType( EPluginType ePluginType );
 	virtual EPluginType			getPluginType( void );
-	virtual void				setIdent( VxNetIdent * ident );
-	virtual VxNetIdent *		getIdent( void );
-	virtual const char *		getOnlineName( void );
+	virtual void				setIdent( VxNetIdent* ident );
+	virtual VxNetIdent*		getIdent( void );
+	virtual const char*		getOnlineName( void );
 	virtual VxGUID&				getOnlineId( void );
 	virtual void				setSkt( VxSktBase* sktBase );
 	virtual VxSktBase *			getSkt( void );
@@ -87,10 +87,10 @@ public:
 	void						setOfferResponse( EOfferResponse eResponse ){ m_eOfferResponse = eResponse; }
 	EOfferResponse				getOfferResponse( void )					{ return m_eOfferResponse; }
 
-	void						setOfferMsg( const char * msg );
+	void						setOfferMsg( const char* msg );
 	std::string&				getOfferMsg( void );
 
-	void						setOfferFile( const char * fileName );
+	void						setOfferFile( const char* fileName );
 	std::string&				getOfferFile( void );
 
 	bool						waitForTestSemaphore( int iMilliseconds )			{ return m_TestSemaphore.wait(iMilliseconds); }
@@ -102,7 +102,7 @@ public:
 protected:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
-	VxNetIdent *				m_Ident;
+	VxNetIdent*				m_Ident;
 	VxSktBase *					m_Skt;
 	EPluginSessionType			m_ePluginSessionType;
 	bool						m_bSessionStarted;

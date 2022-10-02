@@ -25,20 +25,20 @@ public:
 	void						setFriendViewType( EFriendViewType eWhichFriendsToShow );
 	EFriendViewType				getFriendViewType( void );
 
-	virtual void				onFriendAdded( GuiUser * poFriend ) {};
-	virtual void				onFriendUpdated( GuiUser * poFriend ) {};
-	virtual void				onFriendRemoved( GuiUser * poFriend ) {};
+	virtual void				onFriendAdded( GuiUser* poFriend ) {};
+	virtual void				onFriendUpdated( GuiUser* poFriend ) {};
+	virtual void				onFriendRemoved( GuiUser* poFriend ) {};
 
 	//! find friend by id.. returns NULL if not found
-	GuiUser *					findFriend( VxGUID& oId );
+	GuiUser*					findFriend( VxGUID& oId );
 
 protected:
 	//! update friend in list
-	void						updateFriendList( GuiUser * netIdent, bool sessionTimeChange );
+	void						updateFriendList( GuiUser* netIdent, bool sessionTimeChange );
 	//! remove friend from list.. return non zero if should not be removed
 	RCODE						removeFriendFromList( VxGUID& oId );
 
 	//=== vars ===//
-	std::vector<GuiUser *>		m_aoFriends;
+	std::vector<GuiUser*>		m_aoFriends;
 	EFriendViewType				m_eFriendViewType;
 };

@@ -675,7 +675,7 @@ bool EngineSettings::getAllowMulticastBroadcast( void )
 }
 
 //============================================================================
-void EngineSettings::setPreferredNetworkAdapterIp( const char * wirelessIpAddress )
+void EngineSettings::setPreferredNetworkAdapterIp( const char* wirelessIpAddress )
 {
 	std::string strVal = "";
 	if( wirelessIpAddress )

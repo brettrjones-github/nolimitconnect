@@ -286,7 +286,7 @@ void AudioIoMgr::setMuteSpeaker( bool mute )
 }
 
 //============================================================================
-const char * AudioIoMgr::describeAudioState( QAudio::State state )
+const char* AudioIoMgr::describeAudioState( QAudio::State state )
 {
     switch( state )
     {
@@ -304,7 +304,7 @@ const char * AudioIoMgr::describeAudioState( QAudio::State state )
 }
 
 //============================================================================
-const char * AudioIoMgr::describeAudioError( QAudio::Error err )
+const char* AudioIoMgr::describeAudioError( QAudio::Error err )
 {
     switch( err )
     {

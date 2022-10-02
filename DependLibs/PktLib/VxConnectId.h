@@ -48,7 +48,7 @@ public:
 	void						setPort( uint16_t port )			{ m_u16OnlinePort = htons( port ); }
 	uint16_t					getPort( void )						{ return ntohs( m_u16OnlinePort ); }
 
-	bool						setIpAddress( const char * ipAddr ); // return true if changed
+	bool						setIpAddress( const char* ipAddr ); // return true if changed
 	//! get ip address based on can connect ipv6 or need ipv4
 	void						getIpAddress( std::string& retString );
 	bool						isIpAddressValid( void );

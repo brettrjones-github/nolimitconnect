@@ -38,8 +38,8 @@ public:
 	EPluginType 				getPluginType()										{ return m_OfferSession->getPluginType(); }
     void						setIsRemoteInitiated( bool bIsRemoteInitiated ) 	{ m_OfferSession->setIsRemoteInitiated( bIsRemoteInitiated ); }
     bool						getIsRemoteInitiated( void )						{ return m_OfferSession->getIsRemoteInitiated(); }
-	void						setHisIdent( GuiUser * netIdent ) 				    { m_OfferSession->setHisIdent( netIdent ); }
-    GuiUser *				    getHisIdent()										{ return m_OfferSession->getHisIdent(); }
+	void						setHisIdent( GuiUser* netIdent ) 				    { m_OfferSession->setHisIdent( netIdent ); }
+    GuiUser*				    getHisIdent()										{ return m_OfferSession->getHisIdent(); }
 	void 						setOfferSessionId( VxGUID& sessionId )				{ m_OfferSession->setOfferSessionId( sessionId ); }
 	VxGUID						getOfferSessionId()									{ return m_OfferSession->getOfferSessionId(); }
 

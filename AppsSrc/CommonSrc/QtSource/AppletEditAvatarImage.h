@@ -45,7 +45,7 @@ protected:
     Ui::AppletEditAvatarImageUi	ui;
     ThumbMgr&                   m_ThumbMgr;
     UserProfile 				m_UserProfile;
-    VxNetIdent *				m_MyIdent = nullptr;
+    VxNetIdent*				m_MyIdent = nullptr;
     QString                     m_strOrigOnlineName;
     QString                     m_strOrigMoodMessage;
 };

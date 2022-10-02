@@ -40,7 +40,7 @@ public:
 	void						deleteResources( void );
 
 	//=== vars ===//
-	VxNetIdent *				m_Ident;
+	VxNetIdent*				m_Ident;
 	VxSktBase *					m_Skt;
 	uint64_t					m_ActionStartTimeMs;
 	uint8_t *					m_u8JpgData;

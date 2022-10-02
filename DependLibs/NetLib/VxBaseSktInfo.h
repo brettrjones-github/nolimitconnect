@@ -31,9 +31,9 @@ public:
 	virtual ~VxBaseSktInfo();
 
 	//! return true if file is already in que to be sent or has been sent
-	bool isFileQuedOrSent( const char * pFileName );
+	bool isFileQuedOrSent( const char* pFileName );
 	//! que a file to send
-	void queFileToSend( const char * pLclFileName, const char * pRmtFileName );
+	void queFileToSend( const char* pLclFileName, const char* pRmtFileName );
 
 protected:
 	VxSktBase *					m_Skt;			// socket

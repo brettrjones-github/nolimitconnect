@@ -12,9 +12,8 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "FileInfoMgr.h"
+#include "FileInfoBaseMgr.h"
 #include "FileInfo.h"
-#include "SharedFilesMgr.h"
 
 #include "PluginBase.h"
 
@@ -34,24 +33,24 @@
 #include <CoreLib/VxFileShredder.h>
 
 //============================================================================
-FileInfoMgr::FileInfoMgr( P2PEngine& engine, PluginBase& plugin, std::string fileLibraryDbName )
-: m_Engine( engine )
+FileInfoBaseMgr::FileInfoBaseMgr( P2PEngine& engine, PluginBase& plugin, FileInfoDb& fileInfoDb )
+: m_PrivateEngine( engine )
 , m_Plugin( plugin )
 , m_FileShredder( GetVxFileShredder() )
-, m_FileInfoDb( fileLibraryDbName )
+, m_FileInfoDb( fileInfoDb )
 , m_FileInfoXferMgr( engine, plugin, *this )
 {
-	LogMsg( LOG_VERBOSE, "FileInfoMgr::FileInfoMgr %s %p", DescribePluginType( plugin.getPluginType() ), this );
+	LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::FileInfoBaseMgr %s %p", DescribePluginType( plugin.getPluginType() ), this );
 }
 
 //============================================================================
-FileInfoMgr::~FileInfoMgr()
+FileInfoBaseMgr::~FileInfoBaseMgr()
 {
-	fileLibraryShutdown();
+	fileInfoMgrShutdown();
 }
 
 //============================================================================
-std::string FileInfoMgr::getIncompleteFileXferDirectory( VxGUID& onlineId )
+std::string FileInfoBaseMgr::getIncompleteFileXferDirectory( VxGUID& onlineId )
 {
 	std::string incompleteDir = m_Plugin.getIncompleteFileXferDirectory( onlineId );
 	if( incompleteDir.empty() )
@@ -63,19 +62,7 @@ std::string FileInfoMgr::getIncompleteFileXferDirectory( VxGUID& onlineId )
 }
 
 //============================================================================
-bool FileInfoMgr::isFileShared( VxGUID& assetId, VxSha1Hash& fileHashId )
-{
-	return true;
-}
-
-//============================================================================
-bool FileInfoMgr::isFileShared( std::string& fileName )
-{
-	return true;
-}
-
-//============================================================================
-void FileInfoMgr::onAfterUserLogOnThreaded( void )
+void FileInfoBaseMgr::onAfterUserLogOnThreaded( void )
 {
 	// user specific directory should be set
 	std::string dbName = VxGetUserSpecificDataDirectory() + "settings/";
@@ -83,6 +70,7 @@ void FileInfoMgr::onAfterUserLogOnThreaded( void )
 	std::vector<std::string> toDeleteFiles;
 	std::map<VxGUID, FileInfo>	dbFileList;
 
+	LogMsg( LOG_VERBOSE, "onAfterUserLogOnThreadedr::onAfterUserLogOnThreaded lock" );
 	lockFileList();
 	m_FileInfoDb.dbShutdown();
 	m_FileInfoDb.dbStartup( 1, dbName );
@@ -103,7 +91,9 @@ void FileInfoMgr::onAfterUserLogOnThreaded( void )
 			else
 			{
 				fileInfo.setFileLength( curFileLen );
+				
 				m_FileInfoNeedHashAndSaveList.push_back( fileInfo );
+				
 				addFileToGenHashQue( fileInfo.getAssetId(), fileInfo.getFileName() );
 			}
 		}
@@ -120,6 +110,7 @@ void FileInfoMgr::onAfterUserLogOnThreaded( void )
 		}
 	}
 
+	LogMsg( LOG_VERBOSE, "onAfterUserLogOnThreadedr::onAfterUserLogOnThreaded lock" );
 	unlockFileList();
 	updateFileTypes();
 
@@ -135,7 +126,7 @@ void FileInfoMgr::onAfterUserLogOnThreaded( void )
 }
 
 //============================================================================
-void FileInfoMgr::fileLibraryShutdown( void )
+void FileInfoBaseMgr::fileInfoMgrShutdown( void )
 {
 	lockFileList();
 	clearLibraryFileList();
@@ -144,13 +135,13 @@ void FileInfoMgr::fileLibraryShutdown( void )
 }
 
 //============================================================================
-void FileInfoMgr::addFileToGenHashQue( VxGUID& fileId, std::string fileName )
+void FileInfoBaseMgr::addFileToGenHashQue( VxGUID& fileId, std::string fileName )
 {
 	GetSha1GeneratorMgr().generateSha1( fileId, fileName, this );
 }
 
 //============================================================================
-void FileInfoMgr::clearLibraryFileList( void )
+void FileInfoBaseMgr::clearLibraryFileList( void )
 {
 	m_u16FileTypes = 0;
 	m_s64TotalByteCnt = 0;
@@ -162,7 +153,7 @@ void FileInfoMgr::clearLibraryFileList( void )
 }
 
 //============================================================================
-bool FileInfoMgr::isAllowedFileOrDir( std::string strFileName )
+bool FileInfoBaseMgr::isAllowedFileOrDir( std::string strFileName )
 {
 	if( VxIsExecutableFile( strFileName ) 
 		|| VxIsShortcutFile( strFileName ) )
@@ -175,7 +166,7 @@ bool FileInfoMgr::isAllowedFileOrDir( std::string strFileName )
 
 //============================================================================
 // returns -1 if unknown else percent downloaded
-int FileInfoMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
+int FileInfoBaseMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 {
 	int result = -1;
 	lockFileList();
@@ -194,11 +185,11 @@ int FileInfoMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool FileInfoMgr::addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxGUID& assetId )
+bool FileInfoBaseMgr::addFileToDbAndList( VxGUID& onlineId, std::string& fileName, VxGUID& assetId )
 {
 	if( fileName.empty() )
 	{
-		LogMsg( LOG_ERROR, "FileInfoMgr::addFileToLibrary invalid param empty fileName" );
+		LogMsg( LOG_ERROR, "FileInfoBaseMgr::addFileToDbAndList invalid param empty fileName" );
 		return false;
 	}
 
@@ -213,7 +204,7 @@ bool FileInfoMgr::addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxG
 	}
 
 	FileInfo fileInfo( onlineId, fileName, fileLen, fileType, assetId );
-	if( !addFileToLibrary( fileInfo ) )
+	if( !addFileToDbAndList( fileInfo ) )
 	{
 		return false;
 	}
@@ -222,9 +213,10 @@ bool FileInfoMgr::addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxG
 }
 
 //============================================================================
-bool FileInfoMgr::addFileToLibrary( FileInfo& fileInfoIn )
+bool FileInfoBaseMgr::addFileToDbAndList( FileInfo& fileInfoIn )
 {
 	lockFileList();
+
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
 		if( fileInfoIn.getFileName() == iter->second.getFileName() )
@@ -252,32 +244,34 @@ bool FileInfoMgr::addFileToLibrary( FileInfo& fileInfoIn )
 	else if( fileInfoIn.isValid( false ) )
 	{
 		// needs file hash then save
+		lockFileList();
 		m_FileInfoNeedHashAndSaveList.push_back( fileInfoIn );
+		unlockFileList();
 		addFileToGenHashQue( fileInfoIn.getAssetId(), fileInfoIn.getFileName() );
 		result = true;
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "FileInfoMgr::fromGuiAddFileToLibrary invalid %s", fileInfoIn.getFileName().c_str() );
+		LogMsg( LOG_ERROR, "FileInfoBaseMgr::fromGuiAddFileToLibrary invalid %s", fileInfoIn.getFileName().c_str() );
 	}
 
 	return result;
 }
 
 //============================================================================
-bool FileInfoMgr::addFileToLibrary( VxGUID&			onlineId,
-									VxGUID&			assetId, 
-									std::string		fileName,
-									uint64_t		fileLen, 
-									uint8_t			fileType,
-									VxSha1Hash&		fileHashId )
+bool FileInfoBaseMgr::addFileToDbAndList( VxGUID&			onlineId,
+											VxGUID&			assetId, 
+											std::string		fileName,
+											uint64_t		fileLen, 
+											uint8_t			fileType,
+											VxSha1Hash&		fileHashId )
 {
 	FileInfo fileInfo( onlineId, fileName, fileLen, fileType, assetId, fileHashId );
-	return addFileToLibrary( fileInfo );
+	return addFileToDbAndList( fileInfo );
 }
 
 //============================================================================
-bool FileInfoMgr::cancelAndDelete( VxGUID& assetId )
+bool FileInfoBaseMgr::cancelAndDelete( VxGUID& assetId )
 {
 	bool result{ false };
 
@@ -297,10 +291,14 @@ bool FileInfoMgr::cancelAndDelete( VxGUID& assetId )
 }
 
 //============================================================================
-bool FileInfoMgr::isFileInLibrary( std::string& fileName )
+bool FileInfoBaseMgr::isFileShared( std::string& fileName, bool listIsLocked )
 {
 	bool isInLib = false;
-	lockFileList();
+	if( !listIsLocked )
+	{
+		lockFileList();
+	}
+
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
 		if( fileName == iter->second.getFileName() )
@@ -310,12 +308,16 @@ bool FileInfoMgr::isFileInLibrary( std::string& fileName )
 		}
 	}
 
-	unlockFileList();
+	if( !listIsLocked )
+	{
+		unlockFileList();
+	}
+
 	if( isInLib )
 	{
 		if( 0 == VxFileUtil::fileExists( fileName.c_str() ) )
 		{
-			removeFromLibrary( fileName );
+			removeFromDbAndList( fileName );
 			isInLib = false;
 		}
 	}
@@ -324,11 +326,15 @@ bool FileInfoMgr::isFileInLibrary( std::string& fileName )
 }
 
 //============================================================================
-bool FileInfoMgr::isFileInLibrary( VxSha1Hash& fileHashId )
+bool FileInfoBaseMgr::isFileShared( VxSha1Hash& fileHashId, bool listIsLocked )
 {
 	bool isInLib = false;
 	std::string fileName("");
-	lockFileList();
+	if( !listIsLocked )
+	{
+		lockFileList();
+	}
+
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
 		if( fileHashId == iter->second.getFileHashId() )
@@ -339,12 +345,16 @@ bool FileInfoMgr::isFileInLibrary( VxSha1Hash& fileHashId )
 		}
 	}
 
-	unlockFileList();
+	if( !listIsLocked )
+	{
+		unlockFileList();
+	}
+
 	if( isInLib && fileName.size() )
 	{
 		if( 0 == VxFileUtil::fileExists( fileName.c_str() ) )
 		{
-			removeFromLibrary( fileName );
+			removeFromDbAndList( fileName );
 			isInLib = false;
 		}
 	}
@@ -353,11 +363,15 @@ bool FileInfoMgr::isFileInLibrary( VxSha1Hash& fileHashId )
 }
 
 //============================================================================
-bool FileInfoMgr::isFileInLibrary( VxGUID& assetId )
+bool FileInfoBaseMgr::isFileShared( VxGUID& assetId, bool listIsLocked )
 {
 	bool isInLib = false;
 	std::string fileName( "" );
-	lockFileList();
+	if( !listIsLocked )
+	{
+		lockFileList();
+	}
+
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
 		if( assetId == iter->second.getAssetId() )
@@ -368,12 +382,16 @@ bool FileInfoMgr::isFileInLibrary( VxGUID& assetId )
 		}
 	}
 
-	unlockFileList();
+	if( !listIsLocked )
+	{
+		unlockFileList();
+	}
+
 	if( isInLib && fileName.size() )
 	{
 		if( 0 == VxFileUtil::fileExists( fileName.c_str() ) )
 		{
-			removeFromLibrary( fileName );
+			removeFromDbAndList( fileName, listIsLocked );
 			isInLib = false;
 		}
 	}
@@ -382,9 +400,25 @@ bool FileInfoMgr::isFileInLibrary( VxGUID& assetId )
 }
 
 //============================================================================
-void FileInfoMgr::removeFromLibrary( std::string& fileName )
+bool FileInfoBaseMgr::isFileShared( VxGUID& assetId, VxSha1Hash& fileHashId, bool listIsLocked )
 {
-	lockFileList();
+	bool isShared = isFileShared( assetId, listIsLocked );
+	if( isShared && fileHashId.isHashValid() )
+	{
+		isShared &= isFileShared( fileHashId, listIsLocked );
+	}
+
+	return isShared;
+}
+
+//============================================================================
+void FileInfoBaseMgr::removeFromDbAndList( std::string& fileName, bool listIsLocked )
+{
+	if( !listIsLocked )
+	{
+		lockFileList();
+	}
+
 	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
 	{
 		if( fileName == iter->second.getFileName() )
@@ -395,11 +429,14 @@ void FileInfoMgr::removeFromLibrary( std::string& fileName )
 		}
 	}
 
-	unlockFileList();
+	if( !listIsLocked )
+	{
+		unlockFileList();
+	}
 }
 
 //============================================================================
-bool FileInfoMgr::getFileFullName( VxGUID& assetId, VxSha1Hash& fileHashId, std::string& retFileFullName )
+bool FileInfoBaseMgr::getFileFullName( VxGUID& assetId, VxSha1Hash& fileHashId, std::string& retFileFullName )
 {
 	bool isShared = false;
 	lockFileList();
@@ -418,7 +455,7 @@ bool FileInfoMgr::getFileFullName( VxGUID& assetId, VxSha1Hash& fileHashId, std:
 }
 
 //============================================================================
-bool FileInfoMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId )
+bool FileInfoBaseMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId )
 {
 	bool foundHash = false;
 	lockFileList();
@@ -432,31 +469,33 @@ bool FileInfoMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileH
 		}
 	}
 
-	lockFileList();
+	unlockFileList();
 	return foundHash;
 }
 
 //============================================================================
-void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGUID& assetId, Sha1Info& sha1Info )
+void FileInfoBaseMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGUID& assetId, Sha1Info& sha1Info )
 {
 	lockFileList();
 	for( auto iter = m_FileInfoNeedHashAndSaveList.begin(); iter != m_FileInfoNeedHashAndSaveList.end(); )
 	{
 		bool wasErased{ false };
-		if( assetId == ( *iter ).getAssetId() )
+		FileInfo& fileInfo = *iter;
+		if( assetId == fileInfo.getAssetId() )
 		{
 			if( eSha1GenResultNoError == sha1GenResult )
 			{
-				iter->setFileHashId( sha1Info.getSha1Hash() );
-				m_FileInfoDb.addFile( *iter );
-				m_FileInfoList[( *iter ).getAssetId()] = *iter;
+				fileInfo.setFileHashId( sha1Info.getSha1Hash() );
+				fileInfo.setFileTime( GetHighResolutionTimeMs() );
+				m_FileInfoDb.addFile( fileInfo );
+				m_FileInfoList[ fileInfo.getAssetId() ] = fileInfo;
 
 				iter = m_FileInfoNeedHashAndSaveList.erase( iter );
 				wasErased = true;
 			}
 			else
 			{
-				LogMsg( LOG_VERBOSE, "FileInfoMgr::callbackSha1GenerateResult failed %s", DescribeSha1GenResult( sha1GenResult ) );
+				LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::callbackSha1GenerateResult failed %s", DescribeSha1GenResult( sha1GenResult ) );
 			}
 
 			break;
@@ -474,16 +513,16 @@ void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGU
 }
 
 //============================================================================
-bool FileInfoMgr::fromGuiAddFileToLibrary( const char* fileNameIn, bool addFile, uint8_t* fileHashId )
+bool FileInfoBaseMgr::fromGuiAddSharedFile( const char* fileNameIn, bool addFile, uint8_t* fileHashId )
 {
 	std::string fileName = fileNameIn;
 	VxGUID assetId;
 	assetId.initializeWithNewVxGUID();
-	return addFileToLibrary( m_Engine.getMyOnlineId(), fileName, assetId );
+	return addFileToDbAndList( getEngine().getMyOnlineId(), fileName, assetId );
 }
 
 //============================================================================
-bool FileInfoMgr::loadAboutMePageStaticAssets( void )
+bool FileInfoBaseMgr::loadAboutMePageStaticAssets( void )
 {
 	static std::vector<std::string>	g_AboutMeNameList{
 		{ "favicon.ico" },			
@@ -512,7 +551,7 @@ bool FileInfoMgr::loadAboutMePageStaticAssets( void )
 			VxSha1Hash sha1Hash;
 			if( sha1Hash.generateHashFromFile( fullFileName.c_str() ) )
 			{
-				FileInfo fileInfo( m_Engine.getMyOnlineId(), fullFileName, fileLen, VxFileExtensionToFileTypeFlag( fullFileName.c_str() ), assetId, sha1Hash );
+				FileInfo fileInfo( getEngine().getMyOnlineId(), fullFileName, fileLen, VxFileExtensionToFileTypeFlag( fullFileName.c_str() ), assetId, sha1Hash );
 				if( fileInfo.isValid( true ) )
 				{
 					lockFileList();
@@ -546,7 +585,7 @@ bool FileInfoMgr::loadAboutMePageStaticAssets( void )
 }
 
 //============================================================================
-bool FileInfoMgr::loadStoryboardPageFileAssets( void )
+bool FileInfoBaseMgr::loadStoryboardPageFileAssets( void )
 {
 	static std::vector<std::string>	g_StoryboardNameList{
 		{ "favicon.ico" },				// !0C42AEB1E8072DBE12B699D027EB2393! no limit icon
@@ -584,7 +623,7 @@ bool FileInfoMgr::loadStoryboardPageFileAssets( void )
 			VxSha1Hash sha1Hash;
 			if( sha1Hash.generateHashFromFile( fullFileName.c_str() ) )
 			{
-				FileInfo fileInfo( m_Engine.getMyOnlineId(), fullFileName, fileLen, VxFileExtensionToFileTypeFlag( fullFileName.c_str() ), assetId, sha1Hash );
+				FileInfo fileInfo( getEngine().getMyOnlineId(), fullFileName, fileLen, VxFileExtensionToFileTypeFlag( fullFileName.c_str() ), assetId, sha1Hash );
 				if( fileInfo.isValid( true ) )
 				{
 					lockFileList();
@@ -618,7 +657,7 @@ bool FileInfoMgr::loadStoryboardPageFileAssets( void )
 }
 
 //============================================================================
-void FileInfoMgr::updateFileTypes( void )
+void FileInfoBaseMgr::updateFileTypes( void )
 {
 	int64_t	newUpdateTime{ 0 };
 	int64_t	newTotalBytes{ 0 };
@@ -655,7 +694,7 @@ void FileInfoMgr::updateFileTypes( void )
 }
 
 //============================================================================
-void FileInfoMgr::checkForInitializeCompleted( void )
+void FileInfoBaseMgr::checkForInitializeCompleted( void )
 {
 	if( !m_FilesInitialized && m_FileInfoNeedHashAndSaveList.empty() )
 	{	
@@ -671,7 +710,7 @@ void FileInfoMgr::checkForInitializeCompleted( void )
 }
 
 //============================================================================
-bool FileInfoMgr::findFileAsset( VxGUID& fileAssetId, FileInfo& fileInfo)
+bool FileInfoBaseMgr::findFileAsset( VxGUID& fileAssetId, FileInfo& fileInfo)
 {
 	auto iter = m_FileInfoList.find( fileAssetId );
 	if( iter != m_FileInfoList.end() )
@@ -684,7 +723,7 @@ bool FileInfoMgr::findFileAsset( VxGUID& fileAssetId, FileInfo& fileInfo)
 }
 
 //============================================================================
-ECommErr FileInfoMgr::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+ECommErr FileInfoBaseMgr::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	ECommErr searchErr = m_FilesInitialized ? eCommErrNone : eCommErrPluginNotEnabled;
 	if( eCommErrNone == searchErr )
@@ -740,7 +779,7 @@ ECommErr FileInfoMgr::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& s
 		{
 			if( !searchStr.empty() )
 			{
-				LogMsg( LOG_VERBOSE, "FileInfoMgr::searchRequest Warning search text was to short.. sending all files" );
+				LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::searchRequest Warning search text was to short.. sending all files" );
 			}
 
 			// all files list
@@ -782,7 +821,7 @@ ECommErr FileInfoMgr::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& s
 }
 
 //============================================================================
-ECommErr FileInfoMgr::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+ECommErr FileInfoBaseMgr::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
 	ECommErr searchErr = m_FilesInitialized ? eCommErrNone : eCommErrPluginNotEnabled;
 	if( eCommErrNone == searchErr && !nextFileAssetId.isVxGUIDValid() )
@@ -855,85 +894,206 @@ ECommErr FileInfoMgr::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID&
 }
 
 //============================================================================
-bool FileInfoMgr::startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
+bool FileInfoBaseMgr::startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-	return m_FileInfoXferMgr.startDownload( fileInfo, searchSessionId, sktBase, netIdent );
+return m_FileInfoXferMgr.startDownload( fileInfo, searchSessionId, sktBase, netIdent );
 }
 
 //============================================================================
-bool FileInfoMgr::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
+bool FileInfoBaseMgr::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* sktBase, VxGUID& lclSessionId, std::string& fileName, VxGUID& assetId, VxSha1Hash& sha11Hash )
 {
-	LogMsg( LOG_VERBOSE, "FileInfoMgr::onFileDownloadComplete %s", fileName.c_str() );
+	LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::onFileDownloadComplete %s", fileName.c_str() );
 	return m_Plugin.onFileDownloadComplete( netIdent, sktBase, lclSessionId, fileName, assetId, sha11Hash );
 }
 
 //============================================================================
-void FileInfoMgr::toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
-										EPluginType		ePluginType,			// plugin type
-										const char*		pOfferMsg,				// offer message
-										int				pvUserData,				// plugin defined data
-										const char*		pFileName,		// filename if any
-										uint8_t*		fileHashData,
-										VxGUID&			lclSessionId,
-										VxGUID&			rmtSessionId ) 
+void FileInfoBaseMgr::toGuiRxedPluginOffer( VxNetIdent* netIdent,				// identity of friend
+	EPluginType		ePluginType,			// plugin type
+	const char* pOfferMsg,				// offer message
+	int				pvUserData,				// plugin defined data
+	const char* pFileName,		// filename if any
+	uint8_t* fileHashData,
+	VxGUID& lclSessionId,
+	VxGUID& rmtSessionId )
 {
 	m_Plugin.toGuiRxedPluginOffer( netIdent, ePluginType, pOfferMsg, pvUserData, pFileName, fileHashData, lclSessionId, rmtSessionId );
 }
 
 //============================================================================
-void FileInfoMgr::toGuiRxedOfferReply( VxNetIdent* netIdent,
+void FileInfoBaseMgr::toGuiRxedOfferReply( VxNetIdent* netIdent,
 	EPluginType		ePluginType,
 	int				pvUserData,
 	EOfferResponse	eOfferResponse,
 	const char* pFileName,
 	uint8_t* fileHashData,
 	VxGUID& lclSessionId,
-	VxGUID& rmtSessionId ) 
+	VxGUID& rmtSessionId )
 {
 	m_Plugin.toGuiRxedOfferReply( netIdent, ePluginType, pvUserData, eOfferResponse, pFileName, fileHashData, lclSessionId, rmtSessionId );
 }
 
 //============================================================================
-void FileInfoMgr::toGuiStartUpload( VxNetIdent* netIdent,
+void FileInfoBaseMgr::toGuiStartUpload( VxNetIdent* netIdent,
 	EPluginType		ePluginType,
 	VxGUID& lclSessionId,
 	uint8_t			u8FileType,
 	uint64_t		u64FileLen,
 	const char* pFileName,
 	VxGUID			assetId,
-	uint8_t* fileHashData ) 
+	uint8_t* fileHashData )
 {
 	m_Plugin.toGuiStartUpload( netIdent, ePluginType, lclSessionId, u8FileType, u64FileLen, pFileName, assetId, fileHashData );
 }
 
 //============================================================================
-void FileInfoMgr::toGuiStartDownload( VxNetIdent*		netIdent,
-										EPluginType		ePluginType,
-										VxGUID&			lclSessionId,
-										uint8_t			u8FileType,
-										uint64_t		u64FileLen,
-										const char*		pFileName,
-										VxGUID			assetId,
-										uint8_t*		fileHashData ) 
+void FileInfoBaseMgr::toGuiStartDownload( VxNetIdent* netIdent,
+	EPluginType		ePluginType,
+	VxGUID& lclSessionId,
+	uint8_t			u8FileType,
+	uint64_t		u64FileLen,
+	const char* pFileName,
+	VxGUID			assetId,
+	uint8_t* fileHashData )
 {
 	m_Plugin.toGuiStartUpload( netIdent, ePluginType, lclSessionId, u8FileType, u64FileLen, pFileName, assetId, fileHashData );
 }
 
 //============================================================================
-void FileInfoMgr::updateToGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
+void FileInfoBaseMgr::updateToGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
 {
-	LogMsg( LOG_VERBOSE, "FileInfoMgr::toGuiFileXferState xferState %s xferErr %s param %d", DescribeXferState( xferState ), DescribeXferError( xferErr ), param );
+	LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::toGuiFileXferState xferState %s xferErr %s param %d", DescribeXferState( xferState ), DescribeXferError( xferErr ), param );
 	m_Plugin.toGuiFileXferState( lclSessionId, xferState, xferErr, param );
 }
 
 //============================================================================
-void FileInfoMgr::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) 
+void FileInfoBaseMgr::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError )
 {
 	m_Plugin.toGuiFileDownloadComplete( lclSessionId, newFileName, xferError );
 }
 
 //============================================================================
-void FileInfoMgr::toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) 
+void FileInfoBaseMgr::toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError )
 {
 	m_Plugin.toGuiFileUploadComplete( lclSessionId, xferError );
+}
+
+//============================================================================
+bool FileInfoBaseMgr::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
+{
+	int sharedFilesCnt{ 0 };
+	lockFileList();
+
+	for( auto fileInfoMap : m_FileInfoList )
+	{
+		FileInfo& fileInfo = fileInfoMap.second;
+		if( 0 != (fileTypeFilter & fileInfo.getFileType()) )
+		{
+			bool isShared{ false };
+			bool isInLibrary{ false };
+			if( isFileShareServer() )
+			{
+				isShared = true;
+				isInLibrary = getEngine().fromGuiGetIsFileInLibrary( fileInfo.getLocalFileName().c_str() );
+			}
+			else if( isLibraryServer() )
+			{
+				isInLibrary = true;
+				isShared = getEngine().fromGuiGetIsFileShared( fileInfo.getLocalFileName().c_str() );
+			}
+			else
+			{
+				isInLibrary = getEngine().fromGuiGetIsFileInLibrary( fileInfo.getLocalFileName().c_str() );
+				isShared = getEngine().fromGuiGetIsFileShared( fileInfo.getLocalFileName().c_str() );
+			}
+
+			IToGui::getToGui().toGuiFileList( fileInfo.getFileName().c_str(),
+												fileInfo.getFileLength(),
+												fileInfo.getFileType(),
+												isShared,
+												isInLibrary,
+												fileInfo.getAssetId(),
+												fileInfo.getFileHashId().getHashData()
+												);
+
+			sharedFilesCnt++;
+		}
+	}
+
+	unlockFileList();
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
+	return sharedFilesCnt;
+}
+
+//============================================================================
+bool FileInfoBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool isShared, uint8_t* fileHashId )
+{
+	if( fileName.empty() )
+	{
+		LogMsg( LOG_ERROR, "FileInfoBaseMgr::fromGuiSetFileIsShared empty file name" );
+		return false;
+	}
+
+	lockFileList();
+
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter)
+	{
+		FileInfo& fileInfo = iter->second;
+		if( fileName == fileInfo.getFileName() )
+		{
+			if( false == isShared )
+			{
+				m_FileInfoDb.removeFile( fileName );
+				m_FileInfoList.erase( iter );
+				unlockFileList();
+				updateFileTypes();
+				return true;
+			}
+			else
+			{
+				unlockFileList();
+				return true;
+			}
+		}
+	}
+
+	unlockFileList();
+
+	if( isShared )
+	{
+		// file is not currently shared and should be
+		uint64_t fileLen = VxFileUtil::fileExists( fileName.c_str() );
+		uint8_t fileType = VxFileExtensionToFileTypeFlag( fileName.c_str() );
+		if( (false == isAllowedFileOrDir( fileName ))
+			|| (0 == fileLen) )
+		{
+			LogMsg( LOG_ERROR, "FileInfoBaseMgr::fromGuiSetFileIsShared file does not exist or not allowed %s", fileName.c_str() );
+			return false;
+		}
+
+		VxGUID newAssetId;
+		newAssetId.initializeWithNewVxGUID();
+
+		return addFileToDbAndList( getEngine().getMyOnlineId(), fileName, newAssetId );
+
+	}
+
+	return false;
+}
+
+//============================================================================
+bool FileInfoBaseMgr::fromGuiGetIsFileShared( std::string fileName )
+{
+	return isFileShared( fileName );
+}
+
+//============================================================================
+bool FileInfoBaseMgr::isFileShareServer( void )
+{
+	return m_Plugin.getPluginType() == ePluginTypeFileShareServer;
+}
+
+//============================================================================
+bool FileInfoBaseMgr::isLibraryServer( void )
+{
+	return m_Plugin.getPluginType() == ePluginTypeLibraryServer;
 }

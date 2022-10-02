@@ -18,9 +18,9 @@
 
 namespace
 {
-    const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
+    const char* ENUM_BAD_PARM = "ENUM BAD PARAM ";
 
-    const char * EXferDirectionEnumStrings[] =
+    const char* EXferDirectionEnumStrings[] =
     {
         "Xfer Direction Unknown ",
         "Xfer Direction Rx ",
@@ -29,7 +29,7 @@ namespace
         "Max Xfer Direction "
     };
 
-    const char * EXferErrorEnumStrings[] =
+    const char* EXferErrorEnumStrings[] =
     {
         "Xfer Error None ",
         "Xfer Error Disconnected ",
@@ -53,7 +53,7 @@ namespace
         "Max Xfer Error "
     };
 
-    const char * EXferStateEnumStrings[] =
+    const char* EXferStateEnumStrings[] =
     {
         "Xfer State None ",
         "Xfer State Upload Not Started ",
@@ -78,7 +78,7 @@ namespace
 };
 
 //============================================================================
-const char * DescribeXferDirection( EXferDirection xferDir )
+const char* DescribeXferDirection( EXferDirection xferDir )
 {
     if( xferDir < 0 || eMaxXferDirection <= xferDir )
     {
@@ -89,7 +89,7 @@ const char * DescribeXferDirection( EXferDirection xferDir )
 }
 
 //============================================================================
-const char * DescribeXferError( EXferError xferErr )
+const char* DescribeXferError( EXferError xferErr )
 {
     if( xferErr < 0 || eMaxXferError <= xferErr )
     {
@@ -100,7 +100,7 @@ const char * DescribeXferError( EXferError xferErr )
 }
 
 //============================================================================
-const char * DescribeXferState( EXferState xferState )
+const char* DescribeXferState( EXferState xferState )
 {
     if( xferState < 0 || eMaxXferState <= xferState )
     {

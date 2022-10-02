@@ -29,12 +29,12 @@ public:
 
 	virtual bool				parseHttpHeaderFromContents();
 
-	virtual const char *		getHttpValue( const char *name, std::string& strRetValue );
+	virtual const char*		getHttpValue( const char*name, std::string& strRetValue );
 
-	virtual const char *		getHost( std::string& strRetValue );
-	virtual const char *		getServer( std::string& strRetValue );
-	virtual const char *		getLocation( std::string& strRetValue );
-	virtual const char *		getCacheControl( std::string& strRetValue );
+	virtual const char*		getHost( std::string& strRetValue );
+	virtual const char*		getServer( std::string& strRetValue );
+	virtual const char*		getLocation( std::string& strRetValue );
+	virtual const char*		getCacheControl( std::string& strRetValue );
 	virtual int					getHttpContentLen();
 	virtual int					getHttpCodeNumber( void );
 	std::string					getMethod( void );

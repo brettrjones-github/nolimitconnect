@@ -35,7 +35,7 @@
 #include <time.h>
 
 //============================================================================
-ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
+ThumbMgr::ThumbMgr( P2PEngine& engine, const char* dbName, const char* dbStateName )
 : AssetBaseMgr( engine, dbName, dbStateName,  eAssetMgrTypeThumb )
 , m_ThumbInfoDb( dynamic_cast<ThumbInfoDb&>(AssetBaseMgr::getAssetInfoDb()) )
 , m_ThumbInfoList( getAssetBaseInfoList() )
@@ -43,7 +43,7 @@ ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbState
 }
 
 //============================================================================
-AssetBaseInfo * ThumbMgr::createAssetInfo( EAssetType assetType, const char * fileName, uint64_t assetLen )
+AssetBaseInfo * ThumbMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t assetLen )
 {
     if( eAssetTypeThumbnail == assetType )
     {

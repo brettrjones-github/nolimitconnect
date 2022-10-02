@@ -17,8 +17,8 @@
 class UpnpClientInterface
 {
 public:
-	virtual void		upnpStatusMsg( const char * pDeviceId, const char * pMsg ) = 0;
-	virtual void		upnpPortForwardSent(  const char * pDeviceId ) = 0;
+	virtual void		upnpStatusMsg( const char* pDeviceId, const char* pMsg ) = 0;
+	virtual void		upnpPortForwardSent(  const char* pDeviceId ) = 0;
 	virtual void		upnpPortForwardTimedOut( void ) = 0;
 	virtual void		upnpComplete( void ) = 0;
 };

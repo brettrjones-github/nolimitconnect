@@ -42,13 +42,13 @@
 //============================================================================
 // functions used only in this file
 //============================================================================
-static void MyCopyString( char *pDest, const char *pSrc, unsigned long ulMaxLen );
+static void MyCopyString( char *pDest, const char*pSrc, unsigned long ulMaxLen );
 
 //============================================================================
 /// write a binary value to an entry in a ini file
-RCODE VxProfile::setProfileLong(	const char * pFileName, // name of file to access
-									const char * pSection,	// which section to write to
-									const char *pKey,		// which key to write
+RCODE VxProfile::setProfileLong(	const char* pFileName, // name of file to access
+									const char* pSection,	// which section to write to
+									const char*pKey,		// which key to write
 									const long lValue,		// value to write
 									EnumRadix eRadix )		// BASE10=write as decimal, BASE16=write as hexadecimal
 {
@@ -67,9 +67,9 @@ RCODE VxProfile::setProfileLong(	const char * pFileName, // name of file to acce
 
 //============================================================================
 /// read a binary value from an entry in a ini file
-long VxProfile::getProfileLong(	const char *pFileName,		// name of file to access
-								const char *pSection,		// which section to read from
-								const char *pKey,			// the key in the specified section
+long VxProfile::getProfileLong(	const char*pFileName,		// name of file to access
+								const char*pSection,		// which section to read from
+								const char*pKey,			// the key in the specified section
 								long lDef,					// default value to return if error or entry doesn't exist
 								EnumRadix eRadix )			// BASE10=read as decimal, BASE16=read as hexadecimal
 {
@@ -156,9 +156,9 @@ long VxProfile::getProfileLong(	const char *pFileName,		// name of file to acces
 
 //============================================================================
 /// write an floating decimal point value to a entry in a ini file
-RCODE VxProfile::setProfileDouble(	const char *	pFileName,	// name of file to access
-									const char *	pSection,	// which section to write to
-									const char *	pKey,		// which key to write
+RCODE VxProfile::setProfileDouble(	const char*	pFileName,	// name of file to access
+									const char*	pSection,	// which section to write to
+									const char*	pKey,		// which key to write
 									double			dValue )	// value to write
 {
 	char acBuf[ 80 ];
@@ -168,9 +168,9 @@ RCODE VxProfile::setProfileDouble(	const char *	pFileName,	// name of file to ac
 
 //============================================================================
 /// read a floating decimal point value from an entry in a ini file
-double VxProfile::getProfileDouble(	const char *pFileName,	// name of file to access
-									const char *pSection,	// which section to read from
-									const char *pKey, 		// which key to read
+double VxProfile::getProfileDouble(	const char*pFileName,	// name of file to access
+									const char*pSection,	// which section to read from
+									const char*pKey, 		// which key to read
 									double dDef )			// default value to return if error or entry doesn't exist
 {
     FILE *pgFile;
@@ -224,10 +224,10 @@ double VxProfile::getProfileDouble(	const char *pFileName,	// name of file to ac
 
 //============================================================================
 /// read a string from a entry in a ini file
-int VxProfile::getProfileString( const char *pFileName,		// name of file to access
-						const char *pSection,		// which section to read from
-						const char *pKey,			// which key to read
-						const char *pDef,			// default value to return if error or entry doesn't exist
+int VxProfile::getProfileString( const char*pFileName,		// name of file to access
+						const char*pSection,		// which section to read from
+						const char*pKey,			// which key to read
+						const char*pDef,			// default value to return if error or entry doesn't exist
 						char *pRetBuf,				// buffer to write string into
 						int iRetBufLen )			// maximum bytes that can be written into the buffer
 {
@@ -299,10 +299,10 @@ int VxProfile::getProfileString( const char *pFileName,		// name of file to acce
 
 //============================================================================
 /// read a string from a entry in a ini file
-int VxProfile::getProfileString( const char *pFileName,		// name of file to access
-						const char *pSection,		// which section to read from
-						const char *pKey,			// which key to read
-						const char *pDef,			// default value to return if error or entry doesn't exist
+int VxProfile::getProfileString( const char*pFileName,		// name of file to access
+						const char*pSection,		// which section to read from
+						const char*pKey,			// which key to read
+						const char*pDef,			// default value to return if error or entry doesn't exist
 						std::string &	csRetValue )	// value read from ini
 {
 	char as8Buf[ VX_MAX_PATH * 2 ];
@@ -320,10 +320,10 @@ int VxProfile::getProfileString( const char *pFileName,		// name of file to acce
 
 //============================================================================
 /// write a string from a entry in a ini file
-RCODE VxProfile::setProfileString( const char *pFileName,	// name of file to access
-							const char *pSection,	// which section to write to
-							const char *pKey,		// which key to write
-							const char *pStr, ... )	// string to write ( can be formatted like printf )
+RCODE VxProfile::setProfileString( const char*pFileName,	// name of file to access
+							const char*pSection,	// which section to write to
+							const char*pKey,		// which key to write
+							const char*pStr, ... )	// string to write ( can be formatted like printf )
 {
     FILE *pgFile;
 	FILE *pgWrFile;
@@ -463,7 +463,7 @@ done:
 }
 
 //============================================================================
-void MyCopyString(char *pDest, const char *pSrc, unsigned long ulMaxLen)
+void MyCopyString(char *pDest, const char*pSrc, unsigned long ulMaxLen)
 {
 	if(! pSrc && pDest)
 	{

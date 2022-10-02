@@ -114,4 +114,4 @@ bool VxIsValidAssetType( enum EAssetType assetType );
 EAssetType VxFileNameToAssetType( std::string fileName );
 EAssetType VxFileTypeToAssetType( uint8_t fileType );
 
-const char * DescribeAssetType( enum EAssetType assetType );
+const char* DescribeAssetType( enum EAssetType assetType );

@@ -177,6 +177,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineParams.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineSettingsDefaultValues.h \
+    $$PWD/ptop_src/ptop_engine_src/P2PEngine/FileLibraryMgr.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PConnectList.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h \
@@ -186,18 +187,16 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/AudioJitterBuffer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfo.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoBaseMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoClientFilesMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoDb.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoLibraryMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoSharedFilesMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoXferMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryDb.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileRxSession.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileShareXferMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileShareXferSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileToXfer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileTxSession.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileXferBaseMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileXferMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileXferPluginSession.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostBaseMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostClientMgr.h \
@@ -205,7 +204,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostSearchEntry.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostServerMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostServerSearchMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/LibraryFileInfo.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.h \
@@ -219,31 +217,31 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupClient.h \	
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupHost.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginLibraryServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkHost.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkSearchList.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPersonFileXfer.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h \
+	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h \
-	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \   
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h \
@@ -252,15 +250,10 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RxSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/SessionMgrBase.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFileInfo.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFilesDb.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFilesFinder.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFilesMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/TodGameSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/TxSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VideoFeedMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VoiceFeedMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Relay/RelayMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScan.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanAction.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanMatchedConnection.h \
@@ -446,18 +439,16 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/AudioJitterBuffer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfo.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoBaseMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoClientFilesMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoLibraryMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoSharedFilesMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoXferMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileRxSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileShareXferMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileShareXferSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileToXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileTxSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileXferBaseMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/FileXferMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileXferPluginSession.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostBaseMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostClientMgr.cpp \
@@ -465,7 +456,6 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostSearchEntry.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostServerMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostServerSearchMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/LibraryFileInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.cpp \
@@ -474,14 +464,13 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesServer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXferPktHandlers.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBasePktHandlers.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.cpp \
@@ -489,23 +478,22 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupHost.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginLibraryServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgrSktApi.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkHost.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkSearchList.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPersonFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardServer.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamClient.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginCamServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.cpp \
@@ -515,10 +503,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RxSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/SessionMgrBase.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFileInfo.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFilesDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFilesFinder.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/SharedFilesMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/TodGameSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/TxSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/VideoFeedMgr.cpp \

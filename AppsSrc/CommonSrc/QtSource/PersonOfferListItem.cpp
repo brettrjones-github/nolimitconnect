@@ -100,7 +100,7 @@ void PersonOfferListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser * hostIdent = hostSession->getHisIdent();
+    GuiUser* hostIdent = hostSession->getHisIdent();
     if( nullptr == hostIdent )
     {
         LogMsg( LOG_DEBUG, "PersonOfferListItem::updateWidgetFromInfo null gui user" );

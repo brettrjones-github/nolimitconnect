@@ -90,7 +90,7 @@ bool IsLogEnabled( ELogModule logModule );
 class ILogCallbackInterface
 {
 public:
-    virtual void                onLogEvent( uint32_t u32LogFlags, const char * logMsg ) = 0;
+    virtual void                onLogEvent( uint32_t u32LogFlags, const char* logMsg ) = 0;
 };
 
 
@@ -101,7 +101,7 @@ public:
 		: m_LogFlags( 0 )
 		, m_LogText( "" )
 	{}
-	LogEntry(unsigned long flags, const char * text )
+	LogEntry(unsigned long flags, const char* text )
 		: m_LogFlags( flags )
 		, m_LogText( text )
 	{}
@@ -153,14 +153,14 @@ void                            VxSetModuleLogFlags( uint32_t flags );
 uint32_t                        VxGetModuleLogFlags( void );
 
 // enable log to file
-void							VxSetLogToFile( const char * pFileName );
+void							VxSetLogToFile( const char* pFileName );
 void							VxSetLogFlags( unsigned long u32LogFlags );
 
 // enable/disable default log handler
 void                            VxEnableDefaultLogHandler( bool enableDefaultHandler );
 
 void							LogMsg( unsigned long u32MsgType, const char* msg, ...);
-void							LogMsgVarg(unsigned long u32MsgType, const char *fmt, va_list vargs);
+void							LogMsgVarg(unsigned long u32MsgType, const char*fmt, va_list vargs);
 void							VxHandleLogMsg(unsigned long u32MsgType, char * msg);
 void							HexDump( unsigned long u32MsgType, unsigned char* data, int dataLen, int instance, char * msg );
 void							DumpInt8( unsigned long u32MsgType, int8_t* data, int dataLen, int instance, char * msg );

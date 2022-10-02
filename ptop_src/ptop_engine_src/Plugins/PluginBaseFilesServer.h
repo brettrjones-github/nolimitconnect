@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "PluginBaseFiles.h"
+#include "FileInfoSharedFilesMgr.h"
 
 class PluginBaseFilesServer : public PluginBaseFiles
 {
@@ -22,6 +23,7 @@ public:
 	virtual ~PluginBaseFilesServer() = default;
 
 protected:
+	FileInfoSharedFilesMgr		m_FileInfoSharedFilesMgr;
 };
 
 

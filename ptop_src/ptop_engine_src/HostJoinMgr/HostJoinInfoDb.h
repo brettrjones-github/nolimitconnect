@@ -27,7 +27,7 @@ class VxGUID;
 class HostJoinInfoDb : public DbBase
 {
 public:
-    HostJoinInfoDb( P2PEngine& engine, HostJoinMgr& mgr, const char *dbName );
+    HostJoinInfoDb( P2PEngine& engine, HostJoinMgr& mgr, const char*dbName );
     virtual ~HostJoinInfoDb() = default;
 
     void						lockHostJoinInfoDb( void ) { m_HostJoinInfoDbMutex.lock(); }

@@ -22,7 +22,7 @@
 
 namespace
 {
-	const char * SHRED_FILES_DB_NAME = "ShredFilesDb.db3";
+	const char* SHRED_FILES_DB_NAME = "ShredFilesDb.db3";
 }
 
 //============================================================================
@@ -63,7 +63,7 @@ void VxFileShredderDb::getShredList( std::vector<std::string>&	shredList )
 	{
 		while( cursor->getNextRow() )
 		{
-			const char * tempStr = cursor->getString( 0 );
+			const char* tempStr = cursor->getString( 0 );
 			if( tempStr 
 				&& strlen( tempStr ) )
 			{

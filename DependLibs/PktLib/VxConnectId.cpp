@@ -81,7 +81,7 @@ bool VxConnectId::operator !=( const VxConnectId &rhs )  const
 }
 
 //============================================================================
-bool VxConnectId::setIpAddress( const char * pIp )		
+bool VxConnectId::setIpAddress( const char* pIp )		
 {
     bool changed = false;
 	InetAddress oAddr;

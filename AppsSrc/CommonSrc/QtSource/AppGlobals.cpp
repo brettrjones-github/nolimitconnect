@@ -48,7 +48,7 @@ AppGlobals::AppGlobals( AppCommon& appCommon )
 }
 
 //============================================================================
-VxNetIdent * AppGlobals::getUserIdent( void )
+VxNetIdent* AppGlobals::getUserIdent( void )
 {
 	return &g_oUserIdent;
 }
@@ -66,7 +66,7 @@ bool AppGlobals::saveUserIdentToDatabase( void )
 }
 
 //============================================================================
-void AppGlobals::launchWebBrowser( const char * pUri )
+void AppGlobals::launchWebBrowser( const char* pUri )
 {
 	// NOTE:qt crashes studio sometimes when openUrl so use ShellExecute
 #ifdef TARGET_OS_WINDOWS
@@ -105,7 +105,7 @@ void UpdateHasPicture( P2PEngine& engine, int bHasPicture )
 
 //============================================================================
 //! show message box to user
-void ErrMsgBox( QWidget* parent, int infoLevel, const char * pMsg, ... )
+void ErrMsgBox( QWidget* parent, int infoLevel, const char* pMsg, ... )
 {
 	//build message on stack so no out of memory issue
 	char szBuffer[4096];

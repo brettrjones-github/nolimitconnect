@@ -93,7 +93,7 @@ namespace
 
 #if ENABLE_LOG_LIST
     std::vector<LogEntry>		g_LogEntryList;
-	void						AddLogEntry( unsigned long flags, const char * text )
+	void						AddLogEntry( unsigned long flags, const char* text )
 	{
 		g_oFileLogMutex.lock();
 		g_LogEntryList.push_back( LogEntry( flags, text ) );
@@ -300,7 +300,7 @@ uint32_t VxGetLogPriorityMask( void )
 }
 
 //============================================================================
-void log_to_file( const char * pFileName, const char * pMsg )
+void log_to_file( const char* pFileName, const char* pMsg )
 {
 static bool firstLog = true;
 	if( false == VxIsAppShuttingDown() )
@@ -328,7 +328,7 @@ static bool firstLog = true;
 }
 
 //============================================================================
-void VxSetLogToFile( const char * pFileName )
+void VxSetLogToFile( const char* pFileName )
 {
 	int strLen = strlen( g_as8LogFileName );
 	if( (0 == g_iLogNameLen) && strLen )
@@ -452,7 +452,7 @@ void default_log_output( void * userData, uint32_t u32MsgType, char * pLogMsg )
 }
 
 //============================================================================
-void LogMsgVarg(unsigned long u32MsgType, const char *fmt, va_list argList )
+void LogMsgVarg(unsigned long u32MsgType, const char*fmt, va_list argList )
 {
 	if ((false == VxIsDebugEnabled()))
 	{

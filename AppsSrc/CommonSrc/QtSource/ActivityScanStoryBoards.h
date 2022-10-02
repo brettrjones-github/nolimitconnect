@@ -38,7 +38,7 @@ public:
 
 public:
 	void						setTitle( QString strTitle );
-	void						newStoryBoardSession( VxNetIdent* netIdent, const char * pStory );
+	void						newStoryBoardSession( VxNetIdent* netIdent, const char* pStory );
 
 signals:
 	void						signalScanStoryBoard( VxNetIdent* netIdent, QString strStory );

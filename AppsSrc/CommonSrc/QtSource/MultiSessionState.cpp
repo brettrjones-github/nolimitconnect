@@ -49,7 +49,7 @@ MultiSessionState::MultiSessionState( AppCommon& myApp, AppletMultiMessenger& ac
 }
 
 //========================================================================
-void MultiSessionState::setGuiWidgets(	GuiUser *		    hisIdent,
+void MultiSessionState::setGuiWidgets(	GuiUser*		    hisIdent,
 										QFrame* 			offersLayout,
 										QFrame* 			responseLayout,
 										QFrame* 			hangupLayout,
@@ -131,7 +131,7 @@ void MultiSessionState::onSessionOfferButtonClicked()
 	{
 		if( false == m_IFromGui.fromGuiMultiSessionAction( eMSessionActionOffer, m_HisIdent->getMyOnlineId(), (int)m_eMSessionType, m_LclSessionId ) )
 		{
-			LogMsg( LOG_INFO, "MultiSessionState::onSessionOfferButtonClicked user offline\n" ); 
+			LogMsg( LOG_INFO, "MultiSessionState::onSessionOfferButtonClicked user offline" ); 
 			return;
 		}
 
@@ -142,7 +142,7 @@ void MultiSessionState::onSessionOfferButtonClicked()
 		// is being canceled
 		if( false == m_IFromGui.fromGuiMultiSessionAction( eMSessionActionReject, m_HisIdent->getMyOnlineId(), (int)m_eMSessionType, m_LclSessionId ) )
 		{
-			LogMsg( LOG_INFO, "MultiSessionState::onSessionOfferButtonClicked user offline\n" ); 
+			LogMsg( LOG_INFO, "MultiSessionState::onSessionOfferButtonClicked user offline" ); 
 			return;
 		}
 
@@ -155,7 +155,7 @@ void MultiSessionState::onSessionOfferButtonClicked()
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "MultiSessionState::onSessionOfferButtonClicked state %d\n", m_SessionState );
+		LogMsg( LOG_INFO, "MultiSessionState::onSessionOfferButtonClicked state %d", m_SessionState );
 	}
 }
 

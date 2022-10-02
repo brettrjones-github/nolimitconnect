@@ -23,7 +23,7 @@ class AppletServiceBase : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletServiceBase( const char * objName, AppCommon& app, QWidget* parent );
+    AppletServiceBase( const char* objName, AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceBase() = default;
 
     void						setupServiceBaseApplet( EApplet applet, EPluginType pluginType );

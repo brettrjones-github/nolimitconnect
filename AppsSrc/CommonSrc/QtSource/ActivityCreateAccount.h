@@ -35,7 +35,7 @@ public:
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
-	void						setRootUserDataDirectory( const char * userDir ) { m_strRootUserDataDir = userDir; };
+	void						setRootUserDataDirectory( const char* userDir ) { m_strRootUserDataDir = userDir; };
 	//! validate user input
 	bool						accountValidate( void );
     bool						wasLoginNameEntered( void );

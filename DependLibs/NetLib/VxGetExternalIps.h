@@ -19,4 +19,4 @@
 #include <string>
 #include <vector>
 
-bool VxGetExternalIps( const char * pIpTestUrl, std::vector<std::string>& aoRetIps );
+bool VxGetExternalIps( const char* pIpTestUrl, std::vector<std::string>& aoRetIps );

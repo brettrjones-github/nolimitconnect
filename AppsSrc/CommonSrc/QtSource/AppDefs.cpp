@@ -17,7 +17,7 @@
 
 //============================================================================
 // returns feature name ( never translated )
-const char * DescribeAppFeature( EAppFeatures appFeature )
+const char* DescribeAppFeature( EAppFeatures appFeature )
 {
 	// do NOT translate
 	switch( appFeature )

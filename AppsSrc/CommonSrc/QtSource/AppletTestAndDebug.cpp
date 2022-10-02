@@ -267,7 +267,7 @@ void AppletTestAndDebug::slotBrowseFilesButtonClicked( void )
 }
 
 //============================================================================
-void AppletTestAndDebug::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
+void AppletTestAndDebug::onLogEvent( uint32_t u32LogFlags, const char* logMsg )
 {
     // Log is seperate now 
 

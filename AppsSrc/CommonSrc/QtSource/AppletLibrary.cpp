@@ -150,7 +150,7 @@ FileShareItemWidget * AppletLibrary::fileToWidget( VxMyFileInfo& fileInfo, bool 
     FileShareItemWidget * item = new FileShareItemWidget( ui.m_FileItemList );
     item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
 
-    FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
+    FileItemInfo* poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( ( quint64 )poItemInfo ) );
     connect( item, SIGNAL( signalFileShareItemClicked(QListWidgetItem*) ), this, SLOT( slotItemClicked(QListWidgetItem*) ) );
 
@@ -196,7 +196,7 @@ void AppletLibrary::slotListFileIconClicked( QListWidgetItem * item )
 //============================================================================
 void AppletLibrary::slotListShareFileIconClicked( QListWidgetItem * item )
 {
-    FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
+    FileItemInfo* poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
     {
         if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -215,7 +215,7 @@ void AppletLibrary::slotListShareFileIconClicked( QListWidgetItem * item )
 //============================================================================
 void AppletLibrary::slotListLibraryIconClicked( QListWidgetItem * item )
 {
-    FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
+    FileItemInfo* poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
     {
         if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -236,7 +236,7 @@ void AppletLibrary::slotListLibraryIconClicked( QListWidgetItem * item )
 //============================================================================
 void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
 {
-    FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
+    FileItemInfo* poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
     {
         if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -268,7 +268,7 @@ void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
 //============================================================================
 void AppletLibrary::slotListShredIconClicked( QListWidgetItem * item )
 {
-    FileItemInfo * poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
+    FileItemInfo* poInfo = ( ( FileShareItemWidget * )item )->getFileItemInfo();
     if( poInfo )
     {
         if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -292,9 +292,9 @@ void AppletLibrary::slotListShredIconClicked( QListWidgetItem * item )
 
 //============================================================================
 //!	get friend from QListWidgetItem data
-FileItemInfo * AppletLibrary::widgetToFileItemInfo( FileShareItemWidget * item )
+FileItemInfo* AppletLibrary::widgetToFileItemInfo( FileShareItemWidget * item )
 {
-    return ( FileItemInfo * )item->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return ( FileItemInfo* )item->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
@@ -307,7 +307,7 @@ FileShareItemWidget * AppletLibrary::findListEntryWidget( VxMyFileInfo& fileInfo
         poWidget = ( FileShareItemWidget * )ui.m_FileItemList->item( iIdx );
         if( poWidget )
         {
-            FileItemInfo * poFileInfo = ( FileItemInfo * )poWidget->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+            FileItemInfo* poFileInfo = ( FileItemInfo* )poWidget->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
             if( poFileInfo && ( poFileInfo->getFullFileName() == fileInfo.getFullFileName() ) )
             {
                 return poWidget;
@@ -367,7 +367,7 @@ void AppletLibrary::slotHomeButtonClicked( void )
 //! user selected menu item
 void AppletLibrary::slotListItemClicked( QListWidgetItem * item )
 {
-    FileItemInfo * poInfo = ( FileItemInfo * )item->data( Qt::UserRole + 1 ).toLongLong();
+    FileItemInfo* poInfo = ( FileItemInfo* )item->data( Qt::UserRole + 1 ).toLongLong();
     if( poInfo )
     {
         VxMyFileInfo& fileInfo = poInfo->getMyFileInfo();

@@ -64,7 +64,7 @@ bool Sha1ClientInfo::operator == ( const Sha1ClientInfo& rhs ) const
 }
 
 //============================================================================
-bool Sha1ClientInfo::isValid( void )
+bool Sha1ClientInfo::isValid( bool checkHashValid )
 {
-    return m_Client != nullptr && m_Sha1Info.isValid();
+    return m_Client != nullptr && m_Sha1Info.isValid( checkHashValid );
 }

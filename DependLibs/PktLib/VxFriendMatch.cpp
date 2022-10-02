@@ -109,8 +109,8 @@ void			FriendMatch::reversePermissions( void )
 //! return string with friend state He has given Me
 void			FriendMatch::describeHisFriendshipToMe( std::string & strRetPermission ) { strRetPermission = DescribeFriendState( getHisFriendshipToMe() ); }
 //! return string with friend state He has given Me
-const char *	FriendMatch::describeHisFriendshipToMe( void )							{ return DescribeFriendState( getHisFriendshipToMe() ); }
+const char*	FriendMatch::describeHisFriendshipToMe( void )							{ return DescribeFriendState( getHisFriendshipToMe() ); }
 //! return string with friend state I have given Him
 void			FriendMatch::describeMyFriendshipToHim( std::string & strRetPermission ) { strRetPermission = DescribeFriendState( getMyFriendshipToHim() ); }
 //! return string with friend state I have given Him
-const char *	FriendMatch::describeMyFriendshipToHim( void )							{ return DescribeFriendState( getMyFriendshipToHim() ); }
+const char*	FriendMatch::describeMyFriendshipToHim( void )							{ return DescribeFriendState( getMyFriendshipToHim() ); }

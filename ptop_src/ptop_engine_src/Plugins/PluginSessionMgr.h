@@ -39,20 +39,20 @@ public:
     virtual bool				fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent* netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual bool				fromGuiMakePluginOffer(		bool			pluginIsLocked,
-															VxNetIdent *	netIdent,		// identity of friend
+															VxNetIdent*	netIdent,		// identity of friend
 															int			    pvUserData,
-															const char *	pOfferMsg,		// offer message
-															const char *	pFileName = 0,
+															const char*	pOfferMsg,		// offer message
+															const char*	pFileName = 0,
 															uint8_t *			fileHashId = 0,
 															VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
 
 	virtual bool				fromGuiOfferReply(	bool			pluginIsLocked,
-													VxNetIdent *	netIdent,
+													VxNetIdent*	netIdent,
 													int			    pvUserdata,
 													EOfferResponse	eOfferResponse,
 													VxGUID			lclSessionId );
 
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent *	netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent*	netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual void				onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

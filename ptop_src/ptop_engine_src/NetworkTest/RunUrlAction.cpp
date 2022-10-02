@@ -47,7 +47,7 @@ namespace
     //============================================================================
     void * UrlActionThreadFunc( void * pvContext )
     {
-        VxThread * poThread = ( VxThread * )pvContext;
+        VxThread* poThread = ( VxThread* )pvContext;
         poThread->setIsThreadRunning( true );
         RunUrlAction * netTest = ( RunUrlAction * )poThread->getThreadUserParam();
         if( netTest && false == poThread->isAborted() )
@@ -67,7 +67,7 @@ UrlActionInfo::UrlActionInfo()
 }
 
 //============================================================================
-UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, VxGUID& sessionId, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
+UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, VxGUID& sessionId, ENetCmdType testType, const char* ptopUrl, const char* myUrl, 
                               UrlActionResultInterface* cbInterface, IConnectRequestCallback* cbConnectReq, EConnectReason connectReason )
     : m_Engine( engine )
     , m_HostType( hostType )
@@ -157,7 +157,7 @@ void RunUrlAction::runTestShutdown( void )
 }
 
 //============================================================================
-void RunUrlAction::runUrlAction( VxGUID& sessionId, ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface, 
+void RunUrlAction::runUrlAction( VxGUID& sessionId, ENetCmdType netCmdType, const char* ptopUrl, const char* myUrl, UrlActionResultInterface* cbInterface, 
                                  IConnectRequestCallback* cbConnectRequest, EHostType hostType, EConnectReason connectReason )
 {
     UrlActionInfo urlAction( getEngine(), hostType, sessionId, netCmdType, ptopUrl, myUrl, cbInterface, cbConnectRequest, connectReason );
@@ -397,7 +397,7 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 		return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
 	}
 
-	const char * contentBuf = content.c_str();
+	const char* contentBuf = content.c_str();
     if( '/' != contentBuf[content.length() -1] )
     {
         LogModule( eLogRunTest, LOG_ERROR, "%s no trailing / in content thread 0x%x", actionName.c_str(), VxGetCurrentThreadId() );
@@ -538,7 +538,7 @@ ERunTestStatus RunUrlAction::doRunTestSuccess( UrlActionInfo& urlAction, std::st
 }
 
 //============================================================================
-void RunUrlAction::sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eStatus, ENetCmdError cmdErr, const char * msg, ... )
+void RunUrlAction::sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eStatus, ENetCmdError cmdErr, const char* msg, ... )
 {
     char as8Buf[ 1024 ];
     va_list argList;
@@ -561,7 +561,7 @@ void RunUrlAction::sendRunTestStatus( UrlActionInfo& urlAction, std::string& url
 }
 
 //============================================================================
-void RunUrlAction::sendTestLog( UrlActionInfo& urlAction, std::string& urlActionName, const char * msg, ... )
+void RunUrlAction::sendTestLog( UrlActionInfo& urlAction, std::string& urlActionName, const char* msg, ... )
 {
     if( !urlAction.getResultInterface() )
     {

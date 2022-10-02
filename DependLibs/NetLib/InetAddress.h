@@ -41,7 +41,7 @@ class InetAddress
 {
 public:
 	InetAddress() = default;	
-	InetAddress( const char * pIpAddress );
+	InetAddress( const char* pIpAddress );
 	InetAddress( uint32_t u32IpAddr );
     InetAddress( const InetAddress& rhs );
     bool                        addToBlob( PktBlobEntry& blob );
@@ -63,7 +63,7 @@ public:
 	bool					    isLocalAddress( bool forLocalListening = false ) const;
 	bool                        isIPv6GlobalAddress( void ) const;
 
-    void                        setIp( const char * pIpAddress );
+    void                        setIp( const char* pIpAddress );
 	// note.. u32IPv4Addr must be in host order
     void                        setIp( uint32_t u32IPv4Addr, bool bIsHostOrder = false );
 	//! returns port in host order
@@ -95,9 +95,9 @@ protected:
 	//! fill address with this ip address and the given port.. returns struct len
     int                         fillAddress( struct sockaddr_in6& oIPv6Addr, uint16_t port );
 
-    bool                        isIPv4String( const char * pIpAddress ) const;
+    bool                        isIPv4String( const char* pIpAddress ) const;
 	// set ip from string
-    void                        fromString( const char * pIpAddress );
+    void                        fromString( const char* pIpAddress );
 
     static bool                 isLittleEndian( void );
     static void                 litteEndianToNetIPv6( uint16_t * src, uint16_t * dest);
@@ -113,8 +113,8 @@ class InetAddrAndPort : public InetAddress
 {
 public:
     InetAddrAndPort() = default;
-	InetAddrAndPort( const char * ipAddr );
-	InetAddrAndPort( const char * ipAddr, uint16_t port );
+	InetAddrAndPort( const char* ipAddr );
+	InetAddrAndPort( const char* ipAddr, uint16_t port );
     InetAddrAndPort( const InetAddrAndPort& rhs );
     InetAddrAndPort( const InetAddress& rhs );
     bool                        addToBlob( PktBlobEntry& blob );
@@ -131,10 +131,10 @@ public:
 
     void                        setIpAndPort( struct sockaddr_storage& oAddr );
 	void                        setIpAndPort( struct sockaddr& oAddr );
-    void                        setIpAndPort( const char * ipAddr, uint16_t port );
+    void                        setIpAndPort( const char* ipAddr, uint16_t port );
 
     // these shadow InetAddress on purpose to avoid issues with override packet size change over internet
-    void                        setIp( const char * pIpAddress )                            { return InetAddress::setIp( pIpAddress ); };
+    void                        setIp( const char* pIpAddress )                            { return InetAddress::setIp( pIpAddress ); };
     // note.. u32IPv4Addr must be in host order
     void                        setIp( uint32_t u32IPv4Addr, bool bIsHostOrder = false )    { return InetAddress::setIp( u32IPv4Addr, bIsHostOrder ); };
     //! returns port in host order
@@ -157,7 +157,7 @@ class InetAddrIPv4
 {
 public:
 	InetAddrIPv4() = default;
-	InetAddrIPv4( const char * pIpAddress );
+	InetAddrIPv4( const char* pIpAddress );
 	InetAddrIPv4( uint32_t u32IpAddr );
     InetAddrIPv4( const InetAddrIPv4& rhs );
     bool                        addToBlob( PktBlobEntry& blob );
@@ -178,7 +178,7 @@ public:
 	bool                        isLoopBack( void ) const;
 	bool					    isLocalAddress( void ) const;
 
-	bool                        setIp( const char * pIpAddress );
+	bool                        setIp( const char* pIpAddress );
 	// note.. u32IPv4Addr must be in host order
     bool                        setIp( uint32_t u32IPv4Addr, bool bIsHostOrder = false );
 	//! returns port in host order
@@ -204,9 +204,9 @@ private:
 	//! fill address with this ip address and the given port.. returns struct len
 	int                         fillAddress( struct sockaddr_in& oIPv4Addr, uint16_t port );
 
-	bool                        isIPv4String( const char * pIpAddress ) const;
+	bool                        isIPv4String( const char* pIpAddress ) const;
 	// set ip from string
-	void                        fromString( const char * pIpAddress );
+	void                        fromString( const char* pIpAddress );
 
 	static bool                 isLittleEndian( void );
 	static uint32_t             swap32Bit( uint32_t src );

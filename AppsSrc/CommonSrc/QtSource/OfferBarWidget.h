@@ -63,6 +63,6 @@ protected:
 	AppCommon&				    m_MyApp;
 	GuiOfferClientMgr&			m_OfferClientMgr;
 	VxGUID						m_OfferSessionId;
-	GuiUser *				    m_HisIdent;
+	GuiUser*				    m_HisIdent;
 	EPluginType					m_ePluginType;
 };

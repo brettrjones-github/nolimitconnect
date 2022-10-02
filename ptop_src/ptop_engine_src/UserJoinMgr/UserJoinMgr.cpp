@@ -28,7 +28,7 @@
 #include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
-UserJoinMgr::UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName )
+UserJoinMgr::UserJoinMgr( P2PEngine& engine, const char* dbName, const char* dbJoinedLastName )
 : m_Engine( engine )
 , m_UserJoinInfoDb( engine, *this, dbName )
 , m_UserJoinedLastDb( engine, *this, dbJoinedLastName )

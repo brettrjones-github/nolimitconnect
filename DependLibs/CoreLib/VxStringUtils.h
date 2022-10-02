@@ -76,8 +76,8 @@ public:
   \param ... variable number of value type arguments
   \return Formatted string
   */
-  static std::string Format(const char *fmt, ...);
-  static std::string FormatV(const char *fmt, va_list args);
+  static std::string Format(const char*fmt, ...);
+  static std::string FormatV(const char*fmt, va_list args);
   static std::wstring Format(const wchar_t *fmt, ...);
   static std::wstring FormatV(const wchar_t *fmt, va_list args);
   static void ToUpper(std::string &str);
@@ -85,10 +85,10 @@ public:
   static void ToLower(std::string &str);
   static void ToLower(std::wstring &str);
   static bool EqualsNoCase(const std::string &str1, const std::string &str2);
-  static bool EqualsNoCase(const std::string &str1, const char *s2);
-  static bool EqualsNoCase(const char *s1, const char *s2);
+  static bool EqualsNoCase(const std::string &str1, const char*s2);
+  static bool EqualsNoCase(const char*s1, const char*s2);
   static int  CompareNoCase(const std::string &str1, const std::string &str2);
-  static int  CompareNoCase(const char *s1, const char *s2);
+  static int  CompareNoCase(const char*s1, const char*s2);
   static std::string Left(const std::string &str, size_t count);
   static std::string Mid(const std::string &str, size_t first, size_t count = std::string::npos);
   static std::string Right(const std::string &str, size_t count);
@@ -103,15 +103,15 @@ public:
   static int Replace(std::string &str, const std::string &oldStr, const std::string &newStr);
   static int Replace(std::wstring &str, const std::wstring &oldStr, const std::wstring &newStr);
   static bool StartsWith(const std::string &str1, const std::string &str2);
-  static bool StartsWith(const std::string &str1, const char *s2);
-  static bool StartsWith(const char *s1, const char *s2);
+  static bool StartsWith(const std::string &str1, const char*s2);
+  static bool StartsWith(const char*s1, const char*s2);
   static bool StartsWithNoCase(const std::string &str1, const std::string &str2);
-  static bool StartsWithNoCase(const std::string &str1, const char *s2);
-  static bool StartsWithNoCase(const char *s1, const char *s2);
+  static bool StartsWithNoCase(const std::string &str1, const char*s2);
+  static bool StartsWithNoCase(const char*s1, const char*s2);
   static bool EndsWith(const std::string &str1, const std::string &str2);
-  static bool EndsWith(const std::string &str1, const char *s2);
+  static bool EndsWith(const std::string &str1, const char*s2);
   static bool EndsWithNoCase(const std::string &str1, const std::string &str2);
-  static bool EndsWithNoCase(const std::string &str1, const char *s2);
+  static bool EndsWithNoCase(const std::string &str1, const char*s2);
 
   static std::string Join(const std::vector<std::string> &strings, const std::string& delimiter);
   /*! \brief Splits the given input string using the given delimiter into separate strings.
@@ -133,7 +133,7 @@ public:
    \param s c-string to find the length of.
    \return the number of utf8 characters in the string.
    */
-  static size_t utf8_strlen(const char *s);
+  static size_t utf8_strlen(const char*s);
 
   /*! \brief convert a time in seconds to a string based on the given time format
    \param seconds time in seconds
@@ -184,7 +184,7 @@ public:
   }
   static std::string SizeToString(int64_t size);
   static const std::string Empty;
-  static size_t FindWords(const char *str, const char *wordLowerCase);
+  static size_t FindWords(const char*str, const char*wordLowerCase);
   static int FindEndBracket(const std::string &str, char opener, char closer, int startPos = 0);
   static int DateStringToYYYYMMDD(const std::string &dateString);
   static void WordToDigits(std::string &word);

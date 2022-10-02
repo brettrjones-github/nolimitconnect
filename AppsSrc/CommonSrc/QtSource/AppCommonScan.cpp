@@ -58,7 +58,7 @@ void AppCommon::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent* netIden
 //============================================================================
 void AppCommon::slotInternalToGuiScanResultSuccess( EScanType eScanType, VxNetIdent netIdent )
 {
-    GuiUser * guiUser = m_UserMgr.getUser( netIdent.getMyOnlineId() );
+    GuiUser* guiUser = m_UserMgr.getUser( netIdent.getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
@@ -83,7 +83,7 @@ void AppCommon::toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIden
 //============================================================================
 void AppCommon::slotInternalToGuiSearchResultError( EScanType eScanType, VxNetIdent netIdentIn, int errCode )
 {
-    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn.getMyOnlineId() );
+    GuiUser* netIdent = m_UserMgr.getUser( netIdentIn.getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
@@ -95,7 +95,7 @@ void AppCommon::slotInternalToGuiSearchResultError( EScanType eScanType, VxNetId
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdentIn, 
+void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent*	netIdentIn, 
 												uint8_t *		pu8JpgData, 
 												uint32_t		u32JpgDataLen )
 {
@@ -104,7 +104,7 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdentIn,
 		return;
 	}
 
-    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
+    GuiUser* netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
@@ -116,11 +116,11 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdentIn,
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn, 		
+void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent*	netIdentIn, 		
 												VxGUID&			lclSessionId, 
 												uint8_t			u8FileType, 
 												uint64_t		u64FileLen, 
-												const char *	pFileName,
+												const char*	pFileName,
 												VxGUID			assetId )
 {
 	if( VxIsAppShuttingDown() )
@@ -128,7 +128,7 @@ void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn,
 		return;
 	}
 
-    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
+    GuiUser* netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )

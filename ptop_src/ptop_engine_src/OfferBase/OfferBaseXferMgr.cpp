@@ -49,12 +49,12 @@ namespace
 {
 	//#define		MAX_OFFER_XFER_OUTSTANDING_PKTS 3
 	//#define		MAX_OFFER_XFER_TX_SESSIONS		5;
-	const char * OFFER_XFER_DB_NAME = "OfferBaseXferDb.db3";
+	const char* OFFER_XFER_DB_NAME = "OfferBaseXferDb.db3";
 
 	//============================================================================
     static void * OfferBaseXferMgrThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		OfferBaseXferMgr * poMgr = (OfferBaseXferMgr *)poThread->getThreadUserParam();
         if( poMgr )
@@ -69,7 +69,7 @@ namespace
 
 
 //============================================================================
-OfferBaseXferMgr::OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr, const char * stateDbName, EOfferMgrType offerMgrType )
+OfferBaseXferMgr::OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr, const char* stateDbName, EOfferMgrType offerMgrType )
 : m_Engine( engine )
 , m_OfferMgr( offerMgr )
 , m_PluginMgr( engine.getPluginMgr() )
@@ -97,7 +97,7 @@ void OfferBaseXferMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-void OfferBaseXferMgr::assetXferThreadWork( VxThread * workThread )
+void OfferBaseXferMgr::assetXferThreadWork( VxThread* workThread )
 {
 	if( workThread->isAborted() )
 		return;
@@ -1205,7 +1205,7 @@ void OfferBaseXferMgr::queOffer( OfferBaseInfo& assetInfo )
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase )
+EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -1364,7 +1364,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseSend( OfferBaseTxSession * xferSessio
 				fclose( xferInfo.m_hFile );
 				xferInfo.m_hFile = NULL;
 				LogMsg( LOG_INFO, "OfferBaseXferMgr::beginOfferBaseSend: OfferBase %s could not be resumed because too short", 
-					(const char *)xferInfo.getLclFileName().c_str() );
+					(const char*)xferInfo.getLclFileName().c_str() );
 				xferErr  = eXferErrorFileSeekError;
 			}
 
@@ -1379,7 +1379,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseSend( OfferBaseTxSession * xferSessio
 					xferInfo.m_hFile = NULL;
 					LogMsg( LOG_INFO, "OfferBaseXferMgr::beginOfferBaseSend: could not seek to position %d in file %s",
 						xferInfo.m_u64FileOffs,
-						(const char *)xferInfo.getLclFileName().c_str() );
+						(const char*)xferInfo.getLclFileName().c_str() );
 					xferErr  = eXferErrorFileSeekError;
 					xferSession->setErrorCode( rc );
 				}
@@ -1473,7 +1473,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSes
 				xferErr  = eXferErrorFileSeekError;
 				LogMsg( LOG_INFO, "OfferBaseXferMgr: ERROR:(OfferBase Send) %d OfferBase %s could not be resumed because too short", 
 					rc,
-					(const char *)xferInfo.getLclFileName().c_str() );
+					(const char*)xferInfo.getLclFileName().c_str() );
 			}
 			else
 			{
@@ -1488,7 +1488,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSes
 
 					LogMsg( LOG_INFO, "OfferBaseXferMgr: ERROR:(OfferBase Send) %d OfferBase %s could not be created", 
 						rc,
-						(const char *)xferInfo.getLclFileName().c_str() );
+						(const char*)xferInfo.getLclFileName().c_str() );
 				}
 				else
 				{
@@ -1502,7 +1502,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSes
 						xferInfo.m_hFile = NULL;
 						LogMsg( LOG_INFO, "OfferBaseXferMgr: ERROR: (OfferBase Send) could not seek to position %d in file %s",
 							xferInfo.m_u64FileOffs,
-							(const char *)xferInfo.getLclFileName().c_str() );
+							(const char*)xferInfo.getLclFileName().c_str() );
 					}
 				}
 			}
@@ -1521,7 +1521,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSes
 
 				LogMsg( LOG_INFO, "OfferBaseXferMgr: ERROR: %d OfferBase %s could not be created", 
 					rc,
-					(const char *)xferInfo.getLclFileName().c_str() );
+					(const char*)xferInfo.getLclFileName().c_str() );
 			}
 		}
 	}
@@ -1529,7 +1529,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSes
 	if( eXferErrorNone == xferErr )
 	{
 		LogMsg( LOG_INFO, "OfferBaseXferMgr::(OfferBase Send) start recieving file %s\n", 
-			(const char *)xferInfo.getLclFileName().c_str() );
+			(const char*)xferInfo.getLclFileName().c_str() );
 		poPkt->fillOfferFromPkt( xferSession->getOfferInfo() );
 	}
 
@@ -1557,7 +1557,7 @@ EXferError OfferBaseXferMgr::txNextOfferBaseChunk( OfferBaseTxSession * xferSess
 	if( 0 != remoteErr )
 	{
 		// canceled download by remote user
-		LogMsg( LOG_INFO, "FileShareXferMgr:: Cancel Sending file %s", xferInfo.getLclFileName().c_str() );
+		LogMsg( LOG_INFO, "OfferBaseXferMgr:: Cancel Sending file %s", xferInfo.getLclFileName().c_str() );
 		onOfferBaseSent( xferSession, xferSession->getOfferInfo(), eXferErrorCanceled, pluginIsLocked );
 		return eXferErrorCanceled;
 	}
@@ -1616,7 +1616,7 @@ EXferError OfferBaseXferMgr::txNextOfferBaseChunk( OfferBaseTxSession * xferSess
 					rc,
 					xferInfo.m_u64FileOffs,
 					xferInfo.m_u64FileLen,
-					(const char *)xferInfo.getLclFileName().c_str() );
+					(const char*)xferInfo.getLclFileName().c_str() );
 	}
 	else
 	{
@@ -1681,7 +1681,7 @@ EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxS
 
 			LogMsg( LOG_INFO, "VxPktHandler::RxOfferBaseChunk: ERROR %d: writing to file %s",
 							rc,
-							(const char *)xferInfo.getLclFileName().c_str() );
+							(const char*)xferInfo.getLclFileName().c_str() );
 		}
 		else
 		{
@@ -1793,7 +1793,7 @@ void OfferBaseXferMgr::onOfferBaseSent( OfferBaseTxSession * xferSession, OfferB
 {
 	//m_PluginMgr.getToGui().toGuiOfferBaseUploadComplete( xferSession->getRmtSessionId(), error );
 	VxSktBase* sktBase		= xferSession->getSkt();
-	VxNetIdent * hisIdent	= xferSession->getIdent();
+	VxNetIdent* hisIdent	= xferSession->getIdent();
 	if( eXferErrorNone != error )
 	{
 		updateOfferMgrSendState( assetInfo.getOfferId(), eOfferSendStateTxFail, (int)error );
@@ -1813,7 +1813,7 @@ void OfferBaseXferMgr::onOfferBaseSent( OfferBaseTxSession * xferSession, OfferB
 }
 
 //============================================================================
-void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase )
+void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent* hisIdent, VxSktBase* sktBase )
 {
 	// check que and start next xfer
 	VxGUID& hisOnlineId = hisIdent->getMyOnlineId();

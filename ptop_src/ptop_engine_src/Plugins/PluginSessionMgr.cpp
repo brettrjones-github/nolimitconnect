@@ -356,10 +356,10 @@ bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
 bool PluginSessionMgr::fromGuiMakePluginOffer(	bool			pluginIsLocked,
-												VxNetIdent *	netIdent,			 
+												VxNetIdent*	netIdent,			 
 												int			    pvUserData,
-												const char *	pOfferMsg,	 
-												const char *	pFileName,
+												const char*	pOfferMsg,	 
+												const char*	pFileName,
 												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	 
 {
@@ -402,7 +402,7 @@ bool PluginSessionMgr::fromGuiMakePluginOffer(	bool			pluginIsLocked,
 //============================================================================
 //! handle reply to offer
 bool PluginSessionMgr::fromGuiOfferReply(	bool			pluginIsLocked,
-											VxNetIdent *	netIdent,
+											VxNetIdent*	netIdent,
 											int				pvUserdata,
 											EOfferResponse	eOfferResponse,
 											VxGUID			lclSessionId )

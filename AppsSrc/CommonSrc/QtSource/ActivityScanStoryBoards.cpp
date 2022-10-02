@@ -41,7 +41,7 @@ ActivityScanStoryBoards::ActivityScanStoryBoards(	AppCommon& app,
 
     connectBarWidgets();
 
-    connect( this, SIGNAL(signalScanStoryBoard( VxNetIdent *, QString )), this, SLOT(slotScanStoryBoard( VxNetIdent *, QString )));
+    connect( this, SIGNAL(signalScanStoryBoard( VxNetIdent*, QString )), this, SLOT(slotScanStoryBoard( VxNetIdent*, QString )));
     connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
     connect(ui.NextStoryBoardButton, SIGNAL(clicked()), this, SLOT(onNextButtonClicked()));
 
@@ -72,7 +72,7 @@ void ActivityScanStoryBoards::setupIdentWidget( VxNetIdent* netIdent )
 }
 
 //============================================================================
-void ActivityScanStoryBoards::newStoryBoardSession( VxNetIdent* netIdent, const char * pStory )
+void ActivityScanStoryBoards::newStoryBoardSession( VxNetIdent* netIdent, const char* pStory )
 {
 	QString strStory = pStory;
 	emit signalScanStoryBoard( netIdent, pStory );

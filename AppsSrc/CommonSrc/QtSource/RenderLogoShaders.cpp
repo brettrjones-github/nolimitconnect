@@ -14,7 +14,7 @@ bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
 //#define TEST_KODI_SHADER
 #ifndef TEST_KODI_SHADER
 
-    const char *vsrc1 =
+    const char*vsrc1 =
         "attribute highp vec4 vertex;\n"
         "attribute mediump vec3 normal;\n"
         "uniform mediump mat4 matrix;\n"
@@ -29,14 +29,14 @@ bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
         "    gl_Position = matrix * vertex;\n"
         "}\n";
 
-    const char *fsrc1 =
+    const char*fsrc1 =
         "varying mediump vec4 color;\n"
         "void main(void)\n"
         "{\n"
         "    gl_FragColor = color;\n"
         "}\n";
 #else
-    static const char * gles_shader_vert =
+    static const char* gles_shader_vert =
     "#version 120\n"
     "attribute vec4 m_attrpos;\n"
     "attribute vec4 m_attrcol;\n"
@@ -60,7 +60,7 @@ bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
     // NOTE: had to remove "#version 100\n"  from code or failed with error about keyword float
     //"#version 120\n\n"
     //"precision mediump float;\n"
-    static const char * gles_shader_default_frag =
+    static const char* gles_shader_default_frag =
     "#version 120\n"
     "uniform vec4 m_unicol;\n"
     "void main()\n"
@@ -68,8 +68,8 @@ bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
     " gl_FragColor = m_unicol;\n"
     "}\n";
 
-    const char *vsrc1 = gles_shader_vert;
-    const char *fsrc1 = gles_shader_default_frag;
+    const char*vsrc1 = gles_shader_vert;
+    const char*fsrc1 = gles_shader_default_frag;
  #endif // TEST_KODI_SHADER
 
 //QOpenGLShader::compile(Fragment): 0:1(10): error: GLSL 3.10 is not supported. Supported versions are: 1.10, 1.20, 1.30, 1.40, 1.00 ES, and 3.00 ES

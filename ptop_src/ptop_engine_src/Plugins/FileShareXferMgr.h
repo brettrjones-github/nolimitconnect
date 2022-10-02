@@ -27,7 +27,7 @@ class VxPktHdr;
 class FileRxSession;
 class FileTxSession;
 class FileXferMgr;
-class SharedFileInfo;
+class FileInfo;
 class SharedFilesMgr;
 class FileLibraryMgr;
 class VxSha1Hash;
@@ -147,7 +147,7 @@ protected:
 
 	EXferError					beginFileGet( FileRxSession * xferSession );
 	EXferError					canTxFile( VxNetIdent* netIdent, VxSha1Hash& fileHashId );
-	bool						isViewFileListMatch( FileTxSession * xferSession, SharedFileInfo& fileInfo );
+	bool						isViewFileListMatch( FileTxSession * xferSession, FileInfo& fileInfo );
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );
 	void						checkQueForMoreFilesToSend( void );

@@ -30,7 +30,6 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h>
 
-#include <ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginInvalid.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileShareClient.h>
@@ -47,6 +46,8 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h>
 
+#include <ptop_src/ptop_engine_src/Plugins/PluginPersonFileXfer.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h>
@@ -58,6 +59,8 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.h>
+
+#include <ptop_src/ptop_engine_src/Plugins/PluginLibraryServer.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
@@ -110,13 +113,16 @@ void PluginMgr::pluginMgrStartup( void )
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn, ePluginTypeInvalid );
 	m_aoPlugins.push_back( poPlugin );
 
+	LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create library plugin" );
+	m_aoPlugins.push_back( &m_Engine.getPluginLibraryServer() );
+
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create admin plugin" );
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn, ePluginTypeAdmin );
 	poPlugin->setPluginType( ePluginTypeAdmin );
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create file xfer plugin" );
-    poPlugin = new PluginFileXfer( m_Engine, *this, &this->m_PktAnn, ePluginTypePersonFileXfer );
+    poPlugin = new PluginPersonFileXfer( m_Engine, *this, &this->m_PktAnn, ePluginTypePersonFileXfer );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create messenger plugin" );
@@ -342,7 +348,7 @@ void PluginMgr::onPluginSettingChange( PluginSetting& pluginSetting, int64_t mod
 }
 
 //============================================================================
-void PluginMgr::pluginApiLog( EPluginType ePluginType, const char * pMsg, ... )
+void PluginMgr::pluginApiLog( EPluginType ePluginType, const char* pMsg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;
@@ -633,13 +639,13 @@ EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType,
 }
 
 //============================================================================
-VxNetIdent * PluginMgr::pluginApiGetMyIdentity( void )
+VxNetIdent* PluginMgr::pluginApiGetMyIdentity( void )
 {
 	return &m_PktAnn;
 }
 
 //============================================================================
-VxNetIdent * PluginMgr::pluginApiFindUser( const char * pUserName )
+VxNetIdent* PluginMgr::pluginApiFindUser( const char* pUserName )
 {
 	return m_BigListMgr.findBigListInfo( pUserName );
 }
@@ -1059,7 +1065,7 @@ bool PluginMgr::fromGuiSetGameValueVar(	    EPluginType	    ePluginType,
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "PluginMgr::fromGuiSetGameActionVar: id not found NOT FOUND\n");
+			LogMsg( LOG_ERROR, "PluginMgr::fromGuiSetGameActionVar: id not found NOT FOUND");
 		}
 	}
 	return bResult;
@@ -1086,14 +1092,14 @@ bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    ePluginType,
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "PluginMgr::fromGuiSetGameActionVar: id not found NOT FOUND\n");
+			LogMsg( LOG_ERROR, "PluginMgr::fromGuiSetGameActionVar: id not found NOT FOUND");
 		}
 	}
 	return bResult;
 }
 
 //============================================================================
-int PluginMgr::fromGuiDeleteFile( const char * fileName, bool shredFile )
+int PluginMgr::fromGuiDeleteFile( const char* fileName, bool shredFile )
 {
 	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
@@ -1119,14 +1125,14 @@ EPluginAccess PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIden
 
 //============================================================================
 //! get identity from socket connection
-VxNetIdent * PluginMgr::pluginApiOnlineIdToIdentity( VxGUID& oOnlineId )
+VxNetIdent* PluginMgr::pluginApiOnlineIdToIdentity( VxGUID& oOnlineId )
 {
 	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
 	if( poInfo )
 	{
 		return poInfo;
 	}
-	LogMsg( LOG_ERROR, "PluginMgr::pluginApiSktToIdentity: NOT FOUND\n");
+	LogMsg( LOG_ERROR, "PluginMgr::pluginApiSktToIdentity: NOT FOUND");
 	return NULL;
 }
 

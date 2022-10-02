@@ -32,7 +32,7 @@ public:
 
 	//=== helpers ===//
 	//! set friend to change your permission to him   
-	void						setFriend( GuiUser * poFriend );
+	void						setFriend( GuiUser* poFriend );
 	//! get current permission selection
 	EFriendState				getPermissionSelection( void );
 	//! set which radio button is checked

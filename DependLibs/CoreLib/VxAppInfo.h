@@ -21,17 +21,17 @@
 class VxAppInfo
 {
 public:
-	const char *			getAppName( void );
-	const char *			getAppNameNoSpaces( void );
-    const char *			getAppNameNoSpacesLowerCase( void );
-    const char *            getCompanyWebsite( void );
-    const char *            getCompanyDomain( void );
+	const char*			getAppName( void );
+	const char*			getAppNameNoSpaces( void );
+    const char*			getAppNameNoSpacesLowerCase( void );
+    const char*            getCompanyWebsite( void );
+    const char*            getCompanyDomain( void );
 
 	int						getVersionMajor( void );
 	int						getVersionMinor( void );
-	const char *			getVersionSuffix( void );
+	const char*			getVersionSuffix( void );
     std::string			    getVersionString( void );
 
-	const char *			getSCMID( void );
+	const char*			getSCMID( void );
 };
 

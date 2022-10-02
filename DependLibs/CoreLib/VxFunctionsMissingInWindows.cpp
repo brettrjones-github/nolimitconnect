@@ -120,7 +120,7 @@ extern "C" {
 
 
 	//============================================================================
-	char * strndup( const char *_s, size_t _n )
+	char * strndup( const char*_s, size_t _n )
 	{
 		if( _s == NULL )
 			return NULL;
@@ -292,7 +292,7 @@ extern "C" {
 	}
 
 	//============================================================================
-	int	setenv( const char *name, const char *value, int overwrite )
+	int	setenv( const char*name, const char*value, int overwrite )
 	{
 		int errcode = 0;
 		if( !overwrite )
@@ -310,8 +310,8 @@ extern "C" {
 	const void * memmem( const void *l, size_t l_len, const void *s, size_t s_len )
 	{
 		register char *cur, *last;
-		const char *cl = ( const char * )l;
-		const char *cs = ( const char * )s;
+		const char*cl = ( const char* )l;
+		const char*cs = ( const char* )s;
 
 		/* we need something to compare */
 		if( l_len == 0 || s_len == 0 )
@@ -336,7 +336,7 @@ extern "C" {
 	}
 
 	//============================================================================
-	char * stpcpy( char *a, const char *b )
+	char * stpcpy( char *a, const char*b )
 	{
 		while( *b )
 			*a++ = *b++;
@@ -445,7 +445,7 @@ extern "C" {
 
 
 	//============================================================================
-	int vasprintf( char **strp, const char *fmt, va_list ap )
+	int vasprintf( char **strp, const char*fmt, va_list ap )
 	{
 		// _vscprintf tells you how big the buffer needs to be
 		int len = _vscprintf( fmt, ap );
@@ -474,7 +474,7 @@ extern "C" {
 	}
 
 	//============================================================================
-	int asprintf( char **strp, const char *fmt, ... )
+	int asprintf( char **strp, const char*fmt, ... )
 	{
 		va_list ap;
 		va_start( ap, fmt );
@@ -655,32 +655,32 @@ extern "C" {
 #define  _ctloc(x)    (_CurrentTimeLocale->x)
 #else
 #define _ctloc(x)   (x)
-		const char *vx_abday[] = {
+		const char*vx_abday[] = {
 		"Sun", "Mon", "Tue", "Wed",
 		"Thu", "Fri", "Sat"
 	};
-	const char *vx_day[] = {
+	const char*vx_day[] = {
 		"Sunday", "Monday", "Tuesday", "Wednesday",
 		"Thursday", "Friday", "Saturday"
 	};
-	const char *vx_abmon[] = {
+	const char*vx_abmon[] = {
 		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 	};
-	const char *vx_mon[] = {
+	const char*vx_mon[] = {
 		"January", "February", "March", "April", "May", "June",
 		"July", "August", "September", "October", "November", "December"
 	};
-	const char *vx_am_pm[] = {
+	const char*vx_am_pm[] = {
 		"AM", "PM"
 	};
 
-    const char *vx_d_t_fmt = "%a %Ef %T %Y";
-    const char *vx_t_fmt_ampm = "%I:%M:%S %p";
-    const char *vx_t_fmt = "%H:%M:%S";
-    const char *vx_d_fmt = "%m/%d/%y";
+    const char*vx_d_t_fmt = "%a %Ef %T %Y";
+    const char*vx_t_fmt_ampm = "%I:%M:%S %p";
+    const char*vx_t_fmt = "%H:%M:%S";
+    const char*vx_d_fmt = "%m/%d/%y";
 #define TM_YEAR_BASE 1900
-#define __UNCONST(x) ((char *)(((const char *)(x) - (const char *)0) + (char *)0))
+#define __UNCONST(x) ((char *)(((const char*)(x) - (const char*)0) + (char *)0))
 
 #endif
 	/*
@@ -693,8 +693,8 @@ extern "C" {
 
 
 static const u_char *conv_num( const unsigned char *, int *, uint, uint );
-static const u_char *find_string( const u_char *, int *, const char * const *,
-									const char * const *, int );
+static const u_char *find_string( const u_char *, int *, const char* const *,
+									const char* const *, int );
 
 //============================================================================
 static const u_char * conv_num( const unsigned char *buf, int *dest, uint llim, uint ulim )
@@ -724,8 +724,8 @@ static const u_char * conv_num( const unsigned char *buf, int *dest, uint llim, 
 }
 
 //============================================================================
-static const u_char * find_string( const u_char *bp, int *tgt, const char * const *n1,
-									const char * const *n2, int c )
+static const u_char * find_string( const u_char *bp, int *tgt, const char* const *n1,
+									const char* const *n2, int c )
 {
 	int i;
 	unsigned int len;
@@ -734,7 +734,7 @@ static const u_char * find_string( const u_char *bp, int *tgt, const char * cons
 	for( ; n1 != NULL; n1 = n2, n2 = NULL ) {
 		for( i = 0; i < c; i++, n1++ ) {
 			len = strlen( *n1 );
-			if( strnicmp( *n1, ( const char * )bp, len ) == 0 ) {
+			if( strnicmp( *n1, ( const char* )bp, len ) == 0 ) {
 				*tgt = i;
 				return bp + len;
 			}
@@ -747,12 +747,12 @@ static const u_char * find_string( const u_char *bp, int *tgt, const char * cons
 
 //============================================================================
 /* defined in kodi ( libxbmc )
-char * strptime( const char *buf, const char *fmt, struct tm *tm )
+char * strptime( const char*buf, const char*fmt, struct tm *tm )
 {
 	unsigned char c;
 	const unsigned char *bp;
 	int alt_format, i, split_year = 0;
-	const char *new_fmt;
+	const char*new_fmt;
 
 	bp = ( const u_char * )buf;
 
@@ -832,7 +832,7 @@ char * strptime( const char *buf, const char *fmt, struct tm *tm )
 		case 'x':  // The date, using the locale's format. 
 			new_fmt = _ctloc( vx_d_fmt );
 		recurse:
-			bp = ( const u_char * )strptime( ( const char * )bp,
+			bp = ( const u_char * )strptime( ( const char* )bp,
 											 new_fmt, tm );
 			LEGAL_ALT( ALT_E );
 			continue;
@@ -1045,7 +1045,7 @@ char * strptime( const char *buf, const char *fmt, struct tm *tm )
 	equal to or greater than S2 (for more info, see the texinfo doc).
 	*/
 
-int __strverscmp( const char *s1, const char *s2 )
+int __strverscmp( const char*s1, const char*s2 )
 {
 	const unsigned char *p1 = ( const unsigned char * )s1;
 	const unsigned char *p2 = ( const unsigned char * )s2;

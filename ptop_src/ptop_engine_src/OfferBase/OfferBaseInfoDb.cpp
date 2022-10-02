@@ -43,7 +43,7 @@ namespace
 }
 
 //============================================================================
-OfferBaseInfoDb::OfferBaseInfoDb( OfferBaseMgr& hostListMgr, const char *dbName  )
+OfferBaseInfoDb::OfferBaseInfoDb( OfferBaseMgr& hostListMgr, const char*dbName  )
 : DbBase( dbName )
 , m_OfferMgr( hostListMgr )
 {
@@ -89,7 +89,7 @@ void OfferBaseInfoDb::purgeAllOffers( void )
 }
 
 //============================================================================
-void OfferBaseInfoDb::removeOffer( const char * assetName )
+void OfferBaseInfoDb::removeOffer( const char* assetName )
 {
 	DbBindList bindList( assetName );
 	sqlExec( "DELETE FROM tblOffers WHERE assetName=?", bindList );
@@ -118,7 +118,7 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
                                 VxGUID&			creatorId,
                                 VxGUID&			historyId,
                                 VxGUID&			thumbId,
-                                const char *	assetName,
+                                const char*	assetName,
                                 int64_t			assetLen,
                                 uint32_t		assetType,
                                 VxSha1Hash&		hashId,
@@ -128,7 +128,7 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
                                 int64_t			creationTimeStamp,
                                 int64_t			modifiedTimeStamp,
                                 int64_t			accessedTimeStamp,
-                                const char *	assetTag,
+                                const char*	assetTag,
                                 EOfferSendState sendState )
 {
     removeOffer( assetId );

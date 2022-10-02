@@ -24,7 +24,7 @@ public:
     BlobInfo( const AssetBaseInfo& rhs );
 	BlobInfo( EAssetType assetType, const std::string& fileName );
 	BlobInfo( EAssetType assetType, const std::string& fileName, VxGUID& assetId );
-    BlobInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
+    BlobInfo( EAssetType assetType, const char* fileName, uint64_t fileLen );
 	BlobInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
 	BlobInfo&				    operator=( const BlobInfo& rhs ); 

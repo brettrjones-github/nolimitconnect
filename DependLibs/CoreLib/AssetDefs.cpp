@@ -116,7 +116,7 @@ EAssetType VxFileTypeToAssetType( uint8_t fileType )
 }
 
 //============================================================================
-const char * DescribeAssetType( EAssetType assetType )
+const char* DescribeAssetType( EAssetType assetType )
 {
     if( assetType < 0 || eAssetTypeCamRecord < assetType )
     {

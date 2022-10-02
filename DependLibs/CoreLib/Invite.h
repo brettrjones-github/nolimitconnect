@@ -19,12 +19,12 @@
 class Invite
 {
 public:
-    static const char * INVITE_HDR_DIRECT_CONNECT;
-    static const char * INVITE_HDR_RELAYED;
-    static const char * INVITE_HDR_MSG;
-    static const char * INVITE_HDR_NET_SETTING;
-    static const char * INVITE_END;
-    static const char * PTOP_URL_PREFIX;            // ptop://
+    static const char* INVITE_HDR_DIRECT_CONNECT;
+    static const char* INVITE_HDR_RELAYED;
+    static const char* INVITE_HDR_MSG;
+    static const char* INVITE_HDR_NET_SETTING;
+    static const char* INVITE_END;
+    static const char* PTOP_URL_PREFIX;            // ptop://
     static const char SUFFIX_CHAR_PERSON_RELAYED;   // P
     static const char SUFFIX_CHAR_PERSON_DIRECT;    // D
     static const char SUFFIX_CHAR_GROUP;            // G

@@ -60,7 +60,7 @@ void AppSetup::slotSetupResult( int rc, qint64 bytesCopied )
     else
     {
         std::string completedFile = getAssetsInitilizedFileName();
-        const char * completedText = "SUCCESS\n";
+        const char* completedText = "SUCCESS\n";
         VxFileUtil::writeWholeFile( completedFile .c_str(), (void *)completedText, (uint32_t)strlen( completedText ) );
         LogMsg( LOG_ERROR, "AppSetup SUCESS bytes copied %" PRId64 " ", bytesCopied );
     }

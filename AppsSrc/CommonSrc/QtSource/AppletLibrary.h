@@ -66,7 +66,7 @@ protected:
     virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
 
     FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
-    FileItemInfo *				widgetToFileItemInfo( FileShareItemWidget * item );
+    FileItemInfo*				widgetToFileItemInfo( FileShareItemWidget * item );
 
     FileShareItemWidget *		findListEntryWidget( VxMyFileInfo& fileInfo );
     void						clearFileList( void );

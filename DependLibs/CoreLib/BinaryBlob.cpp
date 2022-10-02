@@ -361,7 +361,7 @@ bool BinaryBlob::setValue( std::vector<std::string>& aoStrValues )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( const char * pRetBuf, int iBufLen )
+bool BinaryBlob::setValue( const char* pRetBuf, int iBufLen )
 {
     return setValue( ( void* )pRetBuf, iBufLen );
 }

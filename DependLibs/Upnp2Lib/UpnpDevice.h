@@ -40,14 +40,14 @@ public:
 	UpnpService&		getIpConnService();
 
 #ifdef USE_TINYXML
-	bool				parseDeviceFromXml( const char * pXml, int iXmlLen, std::string& strDescLocationUrl );
-	bool				alternateParseDeviceFromXml( const char * pXml );
+	bool				parseDeviceFromXml( const char* pXml, int iXmlLen, std::string& strDescLocationUrl );
+	bool				alternateParseDeviceFromXml( const char* pXml );
 
-	bool				parseServiceXmlIntoService( const char * pXml );
+	bool				parseServiceXmlIntoService( const char* pXml );
 	bool				createAddPortXml(	std::string& strAddPortXml, 
-											const char * pIpAddr,  
+											const char* pIpAddr,  
 											int iPort, 
-											const char * pService  );
+											const char* pService  );
 #endif // USE_TINYXML
 	bool				requestDeviceInfo();
 	bool				sendMapPortRequest( UpnpDevice * poUpnpDevice );

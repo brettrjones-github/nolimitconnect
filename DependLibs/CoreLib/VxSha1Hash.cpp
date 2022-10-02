@@ -95,7 +95,7 @@ void VxSha1Hash::setHashData( const uint8_t * data )
 }
 
 //============================================================================
-bool VxSha1Hash::generateHashFromFile( const char * fileName, VxThread * workThread )
+bool VxSha1Hash::generateHashFromFile( const char* fileName, VxThread* workThread )
 {
 	CSHA1 shaInstance;
 	memset( m_HashId, 0, sizeof( m_HashId ) );

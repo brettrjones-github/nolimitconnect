@@ -38,8 +38,8 @@ public:
 	int							writeU32( uint32_t val );
 	int							writeU16( uint16_t val );
 	int							writeChars( const uint8_t * str, int charCount );
-	int							writeChars( const char * str, int charCount );
-	int							writeStringLengthThenString( const char * str );
+	int							writeChars( const char* str, int charCount );
+	int							writeStringLengthThenString( const char* str );
 	int							writeStringLengthThenString( std::string& str );
 
 

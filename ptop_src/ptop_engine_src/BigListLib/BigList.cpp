@@ -124,7 +124,7 @@ VxNetIdent* BigList::findNetIdent( const VxGUID& onlineId, bool isAlreadyLocked 
 
 //============================================================================
 //! find contact by name
-BigListInfo * BigList::findBigListInfo( const char * pUserName, bool isAlreadyLocked )				// contact to look for
+BigListInfo * BigList::findBigListInfo( const char* pUserName, bool isAlreadyLocked )				// contact to look for
 {
 	BigListInfo * poInfo;
 	BigListIter oMapIter;

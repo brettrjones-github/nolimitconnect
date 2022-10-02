@@ -36,7 +36,7 @@ class UrlActionInfo
 {
 public:
     UrlActionInfo();
-    UrlActionInfo(P2PEngine& engine, EHostType hostType, VxGUID& sessionId, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
+    UrlActionInfo(P2PEngine& engine, EHostType hostType, VxGUID& sessionId, ENetCmdType testType, const char* ptopUrl, const char* myUrl, 
                   UrlActionResultInterface* cbInterface, IConnectRequestCallback* cbConnectReq, EConnectReason connectReason );
     UrlActionInfo( const UrlActionInfo& rhs );
     UrlActionInfo&              operator = ( const UrlActionInfo& rhs );
@@ -84,8 +84,8 @@ public:
 
 	void				        runUrlAction( VxGUID& sessionId,
                                               ENetCmdType netCmdType, 
-                                              const char * ptopUrl, 
-                                              const char * myUrl = nullptr,                                        
+                                              const char* ptopUrl, 
+                                              const char* myUrl = nullptr,                                        
                                               UrlActionResultInterface* cbInterface = nullptr,
                                               IConnectRequestCallback* cbConnectRequest = nullptr, 
                                               EHostType hostType = eHostTypeUnknown,
@@ -101,8 +101,8 @@ private:
     ERunTestStatus			    doRunTestFailed( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, ENetCmdError cmdErr );
     ERunTestStatus			    doRunTestSuccess( UrlActionInfo& urlAction, std::string& urlActionName );
 
-    void						sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, ENetCmdError cmdErr, const char * msg, ... );
-    void						sendTestLog( UrlActionInfo& urlAction, std::string& urlActionName, const char * msg, ... );
+    void						sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, ENetCmdError cmdErr, const char* msg, ... );
+    void						sendTestLog( UrlActionInfo& urlAction, std::string& urlActionName, const char* msg, ... );
 
     //=== vars ===//
     P2PEngine&					m_Engine;

@@ -30,7 +30,7 @@
 #include <ctype.h>
 
 HelpWindow::HelpWindow( const QString& home_, const QString& _path,
-    QWidget* parent, const char *name )
+    QWidget* parent, const char*name )
     : QMainWindow( parent, name, WDestructiveClose ),
     pathCombo( 0 )
 {
@@ -326,7 +326,7 @@ int main( int argc, char ** argv )
         home = QString( qInstallPathDocs() ) + "/html/index.html";
 
         // if $QTDIR is set, use that instead
-        const char *qtdirenv = getenv( "QTDIR" );
+        const char*qtdirenv = getenv( "QTDIR" );
         if ( qtdirenv ) {
             home = QString( qtdirenv ) + "/doc/html/index.html";
         }

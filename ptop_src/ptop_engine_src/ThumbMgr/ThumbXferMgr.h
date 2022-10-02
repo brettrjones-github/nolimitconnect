@@ -24,7 +24,7 @@ class PktThumbListReply;
 class ThumbXferMgr : public AssetBaseXferMgr
 {
 public:
-	ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName );
+	ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName );
 	virtual ~ThumbXferMgr() = default;
 
     virtual void				sendToGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override {}; // dont send so is not in uploads/downloads

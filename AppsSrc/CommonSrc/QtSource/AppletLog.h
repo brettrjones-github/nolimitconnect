@@ -31,7 +31,7 @@ public:
 
     void                        logMsg( const char* logMsg, ... );
 
-    void                        onLogEvent( uint32_t u32LogFlags, const char * logMsg ) override;
+    void                        onLogEvent( uint32_t u32LogFlags, const char* logMsg ) override;
 
 signals:
     void                        signalLogMsg( const QString& logMsg );

@@ -103,6 +103,7 @@ void FileInfoDb::addFile( VxGUID& onlineId, std::string& fileName, int64_t fileL
 
 	lockFileInfoDb();
 	DbBindList bindList( assetId.toHexString().c_str() );
+	bindList.add( thumbId.toHexString().c_str() );
 	bindList.add( onlineId.toHexString().c_str() );
 	bindList.add( fileName.c_str() );
 	bindList.add( fileLen );
@@ -161,7 +162,7 @@ void FileInfoDb::getAllFiles( std::map<VxGUID, FileInfo>& sharedFileList )
 			assetId.fromVxGUIDHexString( assetIdStr.c_str() );
 
 			thumbIdStr = cursor->getString( COLUMN_FILE_INFO_THUMB_ID );
-			thumbId.fromVxGUIDHexString( assetIdStr.c_str() );
+			thumbId.fromVxGUIDHexString( thumbIdStr.c_str() );
 
 			fileName = cursor->getString( COLUMN_FILE_INFO_FILE_NAME );
 			fileLen =  cursor->getS64( COLUMN_FILE_INFO_FILE_LEN );
@@ -185,14 +186,13 @@ void FileInfoDb::getAllFiles( std::map<VxGUID, FileInfo>& sharedFileList )
 
 		cursor->close();
 	}
-	
+
+	unlockFileInfoDb();
 	std::vector<std::string>::iterator iter;
 	for( iter = deletedFiles.begin(); iter != deletedFiles.end(); ++iter )
 	{
 		removeFile( (*iter) );
 	}
-
-	unlockFileInfoDb();
 }
 
 

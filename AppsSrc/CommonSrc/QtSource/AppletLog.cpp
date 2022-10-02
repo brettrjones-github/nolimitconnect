@@ -78,7 +78,7 @@ void AppletLog::setupApplet( void )
 }
 
 //============================================================================
-void AppletLog::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
+void AppletLog::onLogEvent( uint32_t u32LogFlags, const char* logMsg )
 {
     m_LogMutex.lock();
     if( m_VerboseLog

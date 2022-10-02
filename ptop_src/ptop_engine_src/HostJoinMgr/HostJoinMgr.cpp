@@ -27,7 +27,7 @@
 #include <CoreLib/VxTime.h>
 
 //============================================================================
-HostJoinMgr::HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName )
+HostJoinMgr::HostJoinMgr( P2PEngine& engine, const char* dbName, const char* dbJoinedLastName )
 : m_Engine( engine )
 , m_HostJoinInfoDb( engine, *this, dbName )
 , m_HostJoinedLastDb( engine, *this, dbJoinedLastName )

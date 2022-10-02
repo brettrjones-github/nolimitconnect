@@ -160,7 +160,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 		return doRunTestFailed();
 	}
 
-	const char * contentBuf = content.c_str();
+	const char* contentBuf = content.c_str();
 	if( '/' != contentBuf[content.length() -1] )
 	{
         LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest no trailing / in content thread 0x%x", VxGetCurrentThreadId() );

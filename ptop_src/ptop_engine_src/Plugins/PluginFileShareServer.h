@@ -14,15 +14,24 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "PluginBaseFileShare.h"
+#include "PluginBaseFilesServer.h"
 
-class PluginFileShareServer : public PluginBaseFileShare
+#include <ptop_src/ptop_engine_src/Plugins/FileInfoLibraryMgr.h>
+
+class PluginFileShareServer : public PluginBaseFilesServer
 {
 public:
 	PluginFileShareServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* netIdent, EPluginType pluginType );
 	virtual ~PluginFileShareServer() = default;
 
-	virtual void onNetworkConnectionReady( bool requiresRelay ) override;
+	virtual void				onNetworkConnectionReady( bool requiresRelay ) override;
+
+	virtual void				updateSharedFilesInfo( void );
+
+	void						deleteFile( const char* fileName, bool shredFile ) override;
+
+protected:
+	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
 };
 
 

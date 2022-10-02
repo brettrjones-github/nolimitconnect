@@ -99,7 +99,7 @@ time_t	 NetPortForward::elapsedSecondsLastAttempt( void )
 }
 
 //============================================================================
-void NetPortForward::beginPortForward( uint16_t u16Port, const char * ipToForwardTo )
+void NetPortForward::beginPortForward( uint16_t u16Port, const char* ipToForwardTo )
 {
 	NetPortForwardSettings		settings;
 	settings.m_u16Port			= u16Port;

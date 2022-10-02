@@ -38,7 +38,7 @@ public:
 
 	void						scanShutdown( void );
 
-	void						fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern = "" );
+	void						fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char* pSearchPattern = "" );
 	void						fromGuiNextScan( EScanType eScanType );
 	void						fromGuiStopScan( EScanType eScanType );
 
@@ -58,13 +58,13 @@ public:
 	void						onPktFindFileReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReq * poPkt );
 	void						onPktFindFileReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReply * poPkt );
 
-	virtual void				onScanResultProfilePic(	VxNetIdent *	netIdent, 
+	virtual void				onScanResultProfilePic(	VxNetIdent*	netIdent, 
 															VxSktBase *		sktBase, 
 															uint8_t *			pu8JpgData, 
 															uint32_t				u32JpgDataLen );
 
 	virtual void				onScanResultError(	EScanType			eScanType,
-														VxNetIdent *		netIdent, 
+														VxNetIdent*		netIdent, 
 														VxSktBase *			sktBase, 
 														uint32_t					errCode ); 
 
@@ -77,7 +77,7 @@ public:
 
 
 protected:
-	void						searchMsgToUser( const char * msgToUser, ... );
+	void						searchMsgToUser( const char* msgToUser, ... );
 
 
 	P2PEngine&					m_Engine;

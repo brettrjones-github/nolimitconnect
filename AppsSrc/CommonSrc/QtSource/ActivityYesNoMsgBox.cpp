@@ -23,13 +23,16 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app, 
+ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&		app, 
 											QWidget*		parent, 
 											QString			title, 
-											QString			bodyText ) 
+											QString			bodyText,
+											bool			showNeverAgainCheckBox )
 : ActivityBase( OBJNAME_ACTIVITY_YES_NO_MSG_BOX, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);
+	ui.m_NeverShowAgainCheckBox->setVisible( showNeverAgainCheckBox );
+
     connectBarWidgets();
 	ui.m_AcceptButton->setIconOverrideColor( QColor( COLOR_GREEN ) );
 	ui.m_AcceptButton->setIcon( eMyIconAcceptNormal );

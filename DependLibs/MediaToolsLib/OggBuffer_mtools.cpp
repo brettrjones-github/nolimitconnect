@@ -63,7 +63,7 @@ int OggBuffer::writeChars( const uint8_t * str, int charCount )
 }
 
 //============================================================================
-int OggBuffer::writeChars( const char * str, int charCount )
+int OggBuffer::writeChars( const char* str, int charCount )
 {
 	if( m_Pos > m_MaxLen - charCount )
 		return 0;
@@ -73,7 +73,7 @@ int OggBuffer::writeChars( const char * str, int charCount )
 }
 
 //============================================================================
-int OggBuffer::writeStringLengthThenString( const char * str )
+int OggBuffer::writeStringLengthThenString( const char* str )
 {
 	int32_t strLen = (int32_t)strlen( str );
 	if( strLen )

@@ -23,14 +23,14 @@ class VxFileInfo
 {
 public:
 	VxFileInfo();
-	VxFileInfo( const char * fileName );
+	VxFileInfo( const char* fileName );
 	VxFileInfo(const VxFileInfo& other);
 	VxFileInfo& operator=( const VxFileInfo& rhs ); 
 
-	void						setFileName( const char * fileName )	{ m_FileName = fileName; }
+	void						setFileName( const char* fileName )	{ m_FileName = fileName; }
 	void						setFileName( std::string fileName )		{ m_FileName = fileName; }
 	std::string&				getFileName( void )						{ return m_FileName; }
-	const char *				getFileNameConstString( void ) const	{ return m_FileName.c_str(); }
+	const char*				getFileNameConstString( void ) const	{ return m_FileName.c_str(); }
 	void						setFileType( uint8_t	fileType )		{ m_u8FileType = fileType; }
 	uint8_t						getFileType( void ) const				{ return m_u8FileType; }
 	void						setFileLength( int64_t fileLen )		{ m_s64FileLen = fileLen; }
@@ -48,7 +48,7 @@ public:
 	bool						isShortcutFile( void );
 	bool						isDirectory( void );
 	void						assureTrailingDirectorySlash( void );
-	static const char *			describeFileType( uint8_t fileType );
+	static const char*			describeFileType( uint8_t fileType );
 
 protected:
 	//=== vars ===//

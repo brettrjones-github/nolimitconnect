@@ -63,7 +63,7 @@ public:
 
 	void						getFileList( std::vector<VxFileInfo>& retList );
 	bool						canAddFile( int fileNameLenIncludingZero );
-	void						addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char * fileName );
+	void						addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char* fileName );
 
 private:
 	//=== vars ===//

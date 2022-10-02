@@ -20,6 +20,7 @@
 #include "AppletPeerChangeFriendship.h"
 #include "AppletAboutMeClient.h"
 #include "AppletCamClient.h"
+#include "AppletFileShareClientView.h"
 #include "AppletStoryboardClient.h"
 
 #include "FileShareItemWidget.h"
@@ -358,6 +359,18 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 
 		break;
 
+	case ePluginTypeFileShareServer:
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileShareServer, m_InGroup ) )
+		{
+			AppletFileShareClientView* applet = dynamic_cast<AppletFileShareClientView*>(m_MyApp.launchApplet( eAppletFileShareClientView, getParentPageFrame() ));
+			if( applet )
+			{
+				applet->setIdentity( m_SelectedFriend );
+			}
+		}
+
+		break;
+
 	case ePluginTypeVideoPhone:
 	case ePluginTypeVoicePhone:
 	case ePluginTypeTruthOrDare:
@@ -371,14 +384,6 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 			QString warnTitle = QObject::tr( "Insufficient Permission Level" );
 			QString warmPermission = warnTitle + QObject::tr( " To Access Plugin " ) + DescribePluginType( (EPluginType)iMenuId );
 			QMessageBox::warning( this, QObject::tr( "Insufficient Permission Level " ), warmPermission );
-		}
-
-		break;
-
-	case ePluginTypeFileShareServer:
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileShareServer, m_InGroup ) )
-		{
-			m_MyApp.offerToFriendViewSharedFiles( m_SelectedFriend, m_InGroup, getParentPageFrame() );
 		}
 
 		break;

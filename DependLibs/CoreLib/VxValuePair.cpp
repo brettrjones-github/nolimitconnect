@@ -24,7 +24,7 @@
 //}
 
 //============================================================================
-VxValuePair::VxValuePair( const char * pStr )
+VxValuePair::VxValuePair( const char* pStr )
 {
 	if( NULL == pStr )
 	{
@@ -55,7 +55,7 @@ VxValuePair::VxValuePair( const char * pStr )
 }
 
 //============================================================================
-VxValuePair::VxValuePair( const char * name, const char * value )
+VxValuePair::VxValuePair( const char* name, const char* value )
 {
 	setName(name);
 	setValue(value);
@@ -75,13 +75,13 @@ VxValuePair::~VxValuePair()
 }
 
 //============================================================================
-void VxValuePair::setName(const char *name)
+void VxValuePair::setName(const char*name)
 {
 	m_strName = name;
 }
 
 //============================================================================
-const char * VxValuePair::getName( void )
+const char* VxValuePair::getName( void )
 {
 	return m_strName.c_str();
 }
@@ -93,13 +93,13 @@ bool VxValuePair::hasName( void )
 }
 
 //============================================================================
-void VxValuePair::setValue(const char *value)
+void VxValuePair::setValue(const char*value)
 {
 	m_strValue = value;
 }
 
 //============================================================================
-const char * VxValuePair::getValue( void )
+const char* VxValuePair::getValue( void )
 {
 	return m_strValue.c_str();
 }

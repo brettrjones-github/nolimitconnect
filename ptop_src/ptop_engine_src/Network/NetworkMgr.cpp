@@ -82,7 +82,7 @@ void NetworkMgr::networkMgrShutdown( void )
 }
 
 //============================================================================
-void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
+void NetworkMgr::fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork )
 {
     if( !lclIp )
     {

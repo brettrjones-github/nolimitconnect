@@ -54,7 +54,7 @@ class PktBaseListReply;
 class AssetBaseXferMgr
 {
 public:
-	AssetBaseXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName );
+	AssetBaseXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName );
 	virtual ~AssetBaseXferMgr();
 
 	VxMutex&					getAssetBaseQueMutex( void )					{ return m_AssetBaseSendQueMutex; }
@@ -91,7 +91,7 @@ public:
 	//virtual void				onPktMultiSessionReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	//virtual void				onPktMultiSessionReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	void						assetXferThreadWork( VxThread * workThread );
+	void						assetXferThreadWork( VxThread* workThread );
 protected:
 	virtual void				onAssetBaseReceived( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onAssetBaseSent( VxNetIdent* netIdent, VxSktBase* sktBase, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
@@ -125,17 +125,17 @@ protected:
 
 	void						        clearRxSessionsList( void );
 	void						        clearTxSessionsList( void );
-	void						        checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase );
+	void						        checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent* hisIdent, VxSktBase* sktBase );
 
 	void						        assetSendComplete( AssetBaseTxSession * xferSession );
 	void						        queAsset( AssetBaseInfo& assetInfo );
-	EXferError					        createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase );
-    EXferError                          createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase );
+	EXferError					        createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase );
+    EXferError                          createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase );
 
 	bool						        requireFileXfer( EAssetType assetType );
 
-    virtual void                        onAssetBaseBeginUpload( VxNetIdent *netIdent, AssetBaseInfo& assetInfo ) {};
-    virtual void                        onAssetBaseUploadError( VxNetIdent *netIdent, AssetBaseInfo& assetInfo, EXferError xferErr ) {};
+    virtual void                        onAssetBaseBeginUpload( VxNetIdent*netIdent, AssetBaseInfo& assetInfo ) {};
+    virtual void                        onAssetBaseUploadError( VxNetIdent*netIdent, AssetBaseInfo& assetInfo, EXferError xferErr ) {};
 
     virtual PktBaseGetReq*			    createPktBaseGetReq( void );
     virtual PktBaseGetReply*			createPktBaseGetReply( void );

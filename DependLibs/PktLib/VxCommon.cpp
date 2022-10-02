@@ -31,7 +31,7 @@
 RCODE GenerateConnectionKey( VxKey *				poRetKey,		// set this key
                              VxConnectId *			poConnectId,	// network identity
                              uint16_t				cryptoPort,
-                             const char *			networkName )
+                             const char*			networkName )
 {
     std::string strNetName = networkName;
     std::string strIPv4;
@@ -510,7 +510,7 @@ void VxNetIdent::debugDumpIdent( void )
 
 //============================================================================
 //! describe plugin local name
-const char * DescribePluginLclName( EPluginType ePluginType )
+const char* DescribePluginLclName( EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
@@ -591,7 +591,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 };
 
 //============================================================================
-RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktBase* sktBase, const char * pDescription, ... )	
+RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktBase* sktBase, const char* pDescription, ... )	
 {
 	char as8Buf[ 2048 ];
 	va_list argList;
@@ -606,7 +606,7 @@ RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktB
 }
 
 //============================================================================
-RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, SOCKET skt, const char * ipAddr, const char * pDescription, ... )
+RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, SOCKET skt, const char* ipAddr, const char* pDescription, ... )
 {
 	char as8Buf[ 2048 ];
 	va_list argList;

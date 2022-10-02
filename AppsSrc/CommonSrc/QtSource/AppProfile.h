@@ -28,8 +28,8 @@ public:
 	void						loadProfile( void );
 
 	//void						setUserSpecificDataDir( std::string& strDir );
-	//const char *				getUserSpecificDataDir();
-	const char *				getLocalHostIp(); // if not "" then use ip to force listen on specific network adapter
+	//const char*				getUserSpecificDataDir();
+	const char*				getLocalHostIp(); // if not "" then use ip to force listen on specific network adapter
 
 	//=== vars ===//
 	bool						m_bIsValid;

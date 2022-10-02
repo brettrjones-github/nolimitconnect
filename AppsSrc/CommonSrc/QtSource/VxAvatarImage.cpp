@@ -44,7 +44,7 @@ void VxAvatarImage::initQAvatarImage( void )
 }
 
 //============================================================================
-void VxAvatarImage::setImage( const char * resourceUrl )
+void VxAvatarImage::setImage( const char* resourceUrl )
 {
 	if( !m_HasThumbImage )
 	{

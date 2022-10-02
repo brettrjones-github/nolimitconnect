@@ -34,8 +34,8 @@ public:
 	BlobXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~BlobXferSession();
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
+	VxNetIdent*				getIdent( void )							{ return m_Ident; }
 
 	void						setBlobInfo( BlobInfo& assetInfo )	        { m_BlobInfo = assetInfo; }
 	BlobInfo&				    getBlobInfo( void )						    { return m_BlobInfo; }
@@ -75,7 +75,7 @@ protected:
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
 	int							m_iPercentComplete;
 	VxSktBase *					m_Skt;
-	VxNetIdent *				m_Ident;
+	VxNetIdent*				m_Ident;
 	uint32_t					m_Error;
 	BlobInfo				    m_BlobInfo;
 

@@ -29,7 +29,7 @@ public:
 
 	void						setFourCC( uint8_t char1, uint8_t char2, uint8_t char3, uint8_t char4 );
 
-	bool						isIdEqual( const char * idStr ); // idStr example "LIST" or MJPG
+	bool						isIdEqual( const char* idStr ); // idStr example "LIST" or MJPG
 
 	//=== vars ===//
 	uint32_t							m_FourCC;

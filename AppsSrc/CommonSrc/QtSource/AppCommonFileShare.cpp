@@ -24,11 +24,11 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent, 
+void AppCommon::toGuiFileListReply(	VxNetIdent*	netIdent, 
 									EPluginType		ePluginType, 
 									uint8_t			u8FileType, 
 									uint64_t		u64FileLen, 
-									const char *	pFileName,
+									const char*	pFileName,
 									VxGUID			assetId,
 									uint8_t *		fileHashData )
 {
@@ -193,7 +193,7 @@ void AppCommon::slotInternalToGuiFileUploadComplete( EPluginType pluginType, VxG
 }
 
 //============================================================================
-void AppCommon::toGuiFileList(	const char *	fileName, 
+void AppCommon::toGuiFileList(	const char*	fileName, 
 								uint64_t		fileLen, 
 								uint8_t			fileType, 
 								bool			isShared,

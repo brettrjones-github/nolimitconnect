@@ -37,13 +37,13 @@ namespace
     const int NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS = 10000;
     const int NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS = 55000;
 
-    const char * NET_TEST_WEB_CONNECTION_HOST = "www.google.com";
+    const char* NET_TEST_WEB_CONNECTION_HOST = "www.google.com";
 
     //============================================================================
     static void * NetworkMonitorThreadFunc( void * pvContext )
     {
         // LogMsg( LOG_INFO, " NetworkMonitorThreadFunc start" );
-        VxThread * poThread = ( VxThread * )pvContext;
+        VxThread* poThread = ( VxThread* )pvContext;
         poThread->setIsThreadRunning( true );
         NetworkMonitor * netMonitor = ( NetworkMonitor * )poThread->getThreadUserParam();
         netMonitor->doNetworkConnectTestThread( poThread );
@@ -64,7 +64,7 @@ NetworkMonitor::NetworkMonitor( P2PEngine& engine )
 }
 
 //============================================================================
-void NetworkMonitor::networkMonitorStartup( const char * preferredNetIp, const char * cellNetIp )
+void NetworkMonitor::networkMonitorStartup( const char* preferredNetIp, const char* cellNetIp )
 {
     m_strPreferredAdapterIp	= preferredNetIp;
     m_strCellNetIp			= cellNetIp;
@@ -306,7 +306,7 @@ void NetworkMonitor::triggerDetermineIp( void )
 }
 
 //============================================================================
-void NetworkMonitor::doNetworkConnectTestThread( VxThread * startupThread )
+void NetworkMonitor::doNetworkConnectTestThread( VxThread* startupThread )
 {
     if( startupThread )
     {

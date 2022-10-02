@@ -16,7 +16,7 @@
 #include "AppletSettingsHostBase.h"
 
 //============================================================================
-AppletSettingsHostBase::AppletSettingsHostBase( const char * ObjName, AppCommon& app, QWidget* parent )
+AppletSettingsHostBase::AppletSettingsHostBase( const char* ObjName, AppCommon& app, QWidget* parent )
     : AppletSettingsBase( ObjName, app, parent )
 {
 }

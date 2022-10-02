@@ -110,7 +110,7 @@ VxSktBase* VxPeerMgr::findSktBase( const VxGUID& connectId, bool acceptSktsOnly 
 
 //============================================================================
 //! Connect to ip or url and return socket.. if cannot connect return NULL
-VxSktConnect * VxPeerMgr::connectTo(	const char *	pIpOrUrl,				// remote ip or url 
+VxSktConnect * VxPeerMgr::connectTo(	const char*	pIpOrUrl,				// remote ip or url 
 										uint16_t		u16Port,				// port to connect to
 										int				iTimeoutMilliSeconds )	// milli seconds before connect attempt times out
 {
@@ -139,7 +139,7 @@ VxSktConnect * VxPeerMgr::connectTo(	const char *	pIpOrUrl,				// remote ip or u
 }
 
 //============================================================================
-VxSktConnect * VxPeerMgr::createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port )
+VxSktConnect * VxPeerMgr::createConnectionUsingSocket( SOCKET skt, const char* rmtIp, uint16_t port )
 {
 	if( NULL ==  m_pfnUserReceive )
 	{
@@ -207,7 +207,7 @@ bool VxPeerMgr::txPacketWithDestId(	VxSktBase *			sktBase,
 }
 
 //============================================================================
-void VxPeerMgr::dumpSocketStats( const char *reason, bool fullDump )
+void VxPeerMgr::dumpSocketStats( const char*reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
     VxSktBaseMgr::dumpSocketStats( std::string( reasonMsg + " server: " ).c_str(), fullDump );

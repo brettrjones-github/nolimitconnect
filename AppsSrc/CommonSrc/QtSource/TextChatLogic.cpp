@@ -38,7 +38,7 @@ TextChatLogic::TextChatLogic( AppCommon& myApp, P2PEngine& engine, EPluginType p
 }
 
 //============================================================================
-void TextChatLogic::setGuiWidgets(	VxNetIdent *	hisIdent )
+void TextChatLogic::setGuiWidgets(	VxNetIdent*	hisIdent )
 {
 	m_HisIdent			= hisIdent;
 }

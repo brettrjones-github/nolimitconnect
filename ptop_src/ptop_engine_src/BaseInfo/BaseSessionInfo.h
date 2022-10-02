@@ -35,15 +35,15 @@ public:
     virtual EHostType			getHostType( void )                             { return PluginTypeToHostType( m_PluginType ); }
 
     virtual void				setOnlineId( VxGUID onlineId )                  { m_OnlineId = onlineId; }
-    virtual void				setOnlineId( const char * onlineId )            { m_OnlineId.fromVxGUIDHexString( onlineId ); }
+    virtual void				setOnlineId( const char* onlineId )            { m_OnlineId.fromVxGUIDHexString( onlineId ); }
     virtual VxGUID&				getOnlineId( void )                             { return m_OnlineId; }
 
     virtual void				setSessionId( VxGUID& sessionId )               { m_SessionId = sessionId; }
-    virtual void				setSessionId( const char * sessionId )          { m_SessionId.fromVxGUIDHexString( sessionId ); }
+    virtual void				setSessionId( const char* sessionId )          { m_SessionId.fromVxGUIDHexString( sessionId ); }
     virtual VxGUID&				getSessionId( void )                            { return m_SessionId; }
 
     virtual void				setConnectionId( VxGUID& connectionId )         { m_ConnectionId = connectionId; }
-    virtual void				setConnectionId( const char * connectionId )    { m_ConnectionId.fromVxGUIDHexString( connectionId ); }
+    virtual void				setConnectionId( const char* connectionId )    { m_ConnectionId.fromVxGUIDHexString( connectionId ); }
     virtual VxGUID&				getConnectionId( void )                         { return m_ConnectionId; }
 
     virtual void				setOnlineState( EOnlineState onlineState )      { m_OnlineState = onlineState; }

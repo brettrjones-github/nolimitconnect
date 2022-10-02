@@ -21,14 +21,14 @@ AccountMgr::AccountMgr()
 }
 
 //============================================================================
-void AccountMgr::startupAccountMgr( const char * dbPathAndName )
+void AccountMgr::startupAccountMgr( const char* dbPathAndName )
 {
     m_AccountDb.dbStartup( DATA_HELPER_DB_VERSION, dbPathAndName );
 }
 
 //============================================================================
 //! update last login name
-bool AccountMgr::updateLastLogin( const char * onlineName )
+bool AccountMgr::updateLastLogin( const char* onlineName )
 {
     return m_AccountDb.updateLastLogin( onlineName );
 }
@@ -46,13 +46,13 @@ bool AccountMgr::updateAccount( VxNetIdent& userAccount )
 }
 
 //============================================================================
-bool AccountMgr::getAccountByName( const char * name, VxNetIdent& userAccount )
+bool AccountMgr::getAccountByName( const char* name, VxNetIdent& userAccount )
 {
     return m_AccountDb.getAccountByName( name, userAccount );
 }
 
 //============================================================================
-bool AccountMgr::removeAccountByName( const char * name )
+bool AccountMgr::removeAccountByName( const char* name )
 {
     return m_AccountDb.removeAccountByName( name );
 }
@@ -82,7 +82,7 @@ bool AccountMgr::updateNetHostSetting( NetHostSetting& anchorSetting )
 }
 
 //============================================================================
-bool AccountMgr::getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting )
+bool AccountMgr::getNetHostSettingByName( const char* name, NetHostSetting& anchorSetting )
 {
     return m_AccountDb.getNetHostSettingByName( name, anchorSetting );
 }
@@ -100,13 +100,13 @@ bool AccountMgr::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSetti
 }
 
 //============================================================================
-bool AccountMgr::removeNetHostSettingByName( const char * name )
+bool AccountMgr::removeNetHostSettingByName( const char* name )
 {
     return m_AccountDb.removeNetHostSettingByName( name );
 }
 
 //============================================================================
-bool AccountMgr::updateLastNetHostSettingName( const char * name )
+bool AccountMgr::updateLastNetHostSettingName( const char* name )
 {
     return m_AccountDb.updateLastNetHostSettingName( name );
 }

@@ -28,7 +28,7 @@ public:
     Sha1ClientInfo&             operator = ( const Sha1ClientInfo& rhs );
     bool                        operator == ( const Sha1ClientInfo& rhs ) const;
 
-	bool						isValid( void );
+	bool						isValid( bool checkHashValid = true );
 
 	void						setSha1Info( Sha1Info& sha1Info )			{ m_Sha1Info = sha1Info; }
 	Sha1Info&					getSha1Info( void )							{ return m_Sha1Info; }

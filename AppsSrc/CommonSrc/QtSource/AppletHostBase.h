@@ -22,7 +22,7 @@ class AppletHostBase : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostBase( const char * objName, AppCommon& app, QWidget* parent );
+    AppletHostBase( const char* objName, AppCommon& app, QWidget* parent );
 	virtual ~AppletHostBase() = default;
 
     void                        setHostType( EHostType hostType )           { m_HostType = hostType; }

@@ -465,7 +465,7 @@ QString GuiParams::describeLanguage( ELanguageType language )
 
 //============================================================================
 //! Describe action user can take for given plugin and access
-QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess )
+QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess )
 {
     QString strAction;
     switch( ePluginType )
@@ -1059,6 +1059,10 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
 
     case ePluginTypeCamClient:
         strPluginType = QObject::tr( "Web Cam Client" );
+        break;
+
+    case ePluginTypeLibraryServer:
+        strPluginType = QObject::tr( "Library" );
         break;
 
     default:

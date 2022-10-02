@@ -23,7 +23,7 @@ class AppletServiceBaseSettings : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletServiceBaseSettings( const char * objName, AppCommon& app, QWidget* parent );
+    AppletServiceBaseSettings( const char* objName, AppCommon& app, QWidget* parent );
 	virtual ~AppletServiceBaseSettings() = default;
 
     // override so we do initialization after applet type is set

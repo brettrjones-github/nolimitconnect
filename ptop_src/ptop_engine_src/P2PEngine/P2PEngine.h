@@ -52,6 +52,8 @@
 #include <ptop_src/ptop_engine_src/Search/RcScan.h>
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListMgr.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginLibraryServer.h>
+
 #include <NetLib/VxSktDefs.h>
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktSysHandlerBase.h>
@@ -181,8 +183,8 @@ public:
     virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
     virtual EFriendState		getPluginPermission( int iPluginType );
 
+    PluginLibraryServer&        getPluginLibraryServer( void )                  { return *m_PluginLibraryServer; }
 	PluginFileShareServer&		getPluginFileShareServer( void )				{ return *m_PluginFileShareServer; }
-
 	PluginNetServices&			getPluginNetServices( void )					{ return *m_PluginNetServices; }
 
 	virtual void				setHasPicture( int bHasPicture );
@@ -195,19 +197,19 @@ public:
 	//========================================================================
 	// from gui
 	//========================================================================
-	void						assureUserSpecificDirIsSet( const char * checkReason );
+	void						assureUserSpecificDirIsSet( const char* checkReason );
 
     virtual void				fromGuiSetIsAppCommercial( bool isCommercial ) override;
     virtual bool				fromGuiGetIsAppCommercial( void ) override;
     virtual uint16_t			fromGuiGetAppVersionBinary( void ) override;
-    const char *				fromGuiGetAppVersionString( void ) override;
-    virtual const char *		fromGuiGetAppName( void ) override;
-    virtual const char *		fromGuiGetAppNameNoSpaces( void ) override;
-    virtual void				fromGuiAppStartup( const char * assetDir, const char * rootDataDir  ) override;
+    const char*				fromGuiGetAppVersionString( void ) override;
+    virtual const char*		fromGuiGetAppName( void ) override;
+    virtual const char*		fromGuiGetAppNameNoSpaces( void ) override;
+    virtual void				fromGuiAppStartup( const char* assetDir, const char* rootDataDir  ) override;
 
     virtual void				fromGuiKickWatchdog( void ) override;
-    virtual void				fromGuiSetUserSpecificDir( const char * userSpecificDir  ) override;
-    virtual void				fromGuiSetUserXferDir( const char * userXferDir  ) override;
+    virtual void				fromGuiSetUserSpecificDir( const char* userSpecificDir  ) override;
+    virtual void				fromGuiSetUserXferDir( const char* userXferDir  ) override;
     virtual uint64_t			fromGuiGetDiskFreeSpace( void  ) override;
     virtual uint64_t			fromGuiClearCache( ECacheType cacheType ) override;
     virtual void				fromGuiAppShutdown( void  ) override;
@@ -216,13 +218,13 @@ public:
 
     virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent ) override;
     void                        updateFromEngineSettings( EngineSettings& engineSettings ); 
-    virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) override;
-    virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) override;
+    virtual void				fromGuiOnlineNameChanged( const char* newOnlineName ) override;
+    virtual void				fromGuiMoodMessageChanged( const char* newMoodMessage ) override;
     virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent ) override;
 
     virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick ) override;
     virtual void				fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly = false ) override;
-    virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent ) override;
+    virtual void				fromGuiQueryMyIdent( VxNetIdent* poRetIdent ) override;
     virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers ) override;
 
     virtual bool				fromGuiOrientationEvent( float f32RotX, float f32RotY, float f32RotZ  ) override;
@@ -242,9 +244,9 @@ public:
     virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) override;
     virtual bool				fromGuiIsSpeakerMuted( void ) override;
 
-    virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
-    virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
-    virtual bool				fromGuiPlayLocalMedia( const char * fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 = 0 ) override;
+    virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName ) override;
+    virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName ) override;
+    virtual bool				fromGuiPlayLocalMedia( const char* fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 = 0 ) override;
     virtual bool				fromGuiPlayLocalMedia( const char* fileName, uint64_t fileLen, uint8_t fileType, VxGUID assetId, int pos0to100000 = 0 ) override;
 
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 = 0 ) override;
@@ -257,7 +259,7 @@ public:
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation ) override;
     virtual bool				fromGuiMovieDone( void ) override							{ return true; };
 
-    virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false ) override;
+    virtual void				fromGuiNetworkAvailable( const char* lclIp = NULL, bool isCellularNetwork = false ) override;
     virtual void				fromGuiNetworkLost( void ) override;
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) override;
 
@@ -272,15 +274,15 @@ public:
     virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId ) override;
 
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
-    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
+    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char* myUrl, const char* ptopUrl, ENetCmdType testType ) override;
 
-	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
-																const char *	strGreeting,	// greeting text
-																const char *	aboutMe,		// about me text
-																const char *	url1,			// favorite url 1
-																const char *	url2,			// favorite url 2
-                                                                const char *	url3,           // favorite url 3
-                                                                const char *	donation ) override;	// donation		
+	virtual void				fromGuiUpdateWebPageProfile(	const char*	pProfileDir,	// directory containing user profile
+																const char*	strGreeting,	// greeting text
+																const char*	aboutMe,		// about me text
+																const char*	url1,			// favorite url 1
+																const char*	url2,			// favorite url 2
+                                                                const char*	url3,           // favorite url 3
+                                                                const char*	donation ) override;	// donation		
 
     virtual void				fromGuiApplyNetHostSettings( NetHostSetting& netSettings ) override;
     virtual void				fromGuiSetNetSettings( NetSettings& netSettings ) override;
@@ -301,8 +303,8 @@ public:
 	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 														VxGUID&			onlineId,
 														int				pvUserData,
-														const char *	pOfferMsg, 
-														const char *	pFileName = NULL,
+														const char*	pOfferMsg, 
+														const char*	pFileName = NULL,
 														uint8_t *		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
@@ -314,15 +316,15 @@ public:
 
 	virtual int					fromGuiPluginControl(	EPluginType		ePluginType, 
 														VxGUID&			onlineId, 
-														const char *	pControl, 
-														const char *	pAction,
+														const char*	pControl, 
+														const char*	pAction,
 														uint32_t		u32ActionData,
 														VxGUID&			fileId = VxGUID::nullVxGUID(),
                                                         uint8_t *		fileHashId = 0 ) override;
 
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 
-                                                    const char *	pMsg ) override;
+                                                    const char*	pMsg ) override;
     virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) override;
 
 	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
@@ -335,7 +337,7 @@ public:
     virtual void				fromGuiUseRelay( VxGUID& onlineId, bool bUseAsRelay = true ) override;
     virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount );
 
-    virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern = "" ) override;
+    virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char* pSearchPattern = "" ) override;
     virtual void				fromGuiNextScan( EScanType eScanType ) override;
     virtual void				fromGuiStopScan( EScanType eScanType ) override;
 
@@ -359,7 +361,7 @@ public:
 
 	virtual bool				fromGuiTestCmd(	ETestParam1		eTestParam1, 
 												int				testParam2 = 0, 
-                                                const char *	testParam3 = NULL ) override;
+                                                const char*	testParam3 = NULL ) override;
 
     virtual uint16_t			fromGuiGetRandomTcpPort( void ) override;
     /// Get url for this node
@@ -370,21 +372,21 @@ public:
     virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) override;
     virtual bool				fromGuiNearbyBroadcastEnable( bool enable ) override;
 
-    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL ) override;
+    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName = NULL ) override;
     virtual void				fromGuiSendLog( uint32_t u32LogFlags ) override;
-    virtual bool				fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
+    virtual bool				fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
     virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter ) override;
-    virtual bool				fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId = 0 ) override;
-    virtual bool				fromGuiGetIsFileShared( const char * fileName ) override;
+    virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId = 0 ) override;
+    virtual bool				fromGuiGetIsFileShared( const char* fileName ) override;
 	// returns -1 if unknown else percent downloaded
     virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId ) override;
-    virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 ) override;
+    virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId = 0 ) override;
     virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter ) override;
-    virtual bool				fromGuiGetIsFileInLibrary( const char * fileName ) override;
-    virtual bool				fromGuiIsMyP2PWebVideoFile( const char * fileName ) override;
-    virtual bool				fromGuiIsMyP2PWebAudioFile( const char * fileName ) override;
+    virtual bool				fromGuiGetIsFileInLibrary( const char* fileName ) override;
+    virtual bool				fromGuiIsMyP2PWebVideoFile( const char* fileName ) override;
+    virtual bool				fromGuiIsMyP2PWebAudioFile( const char* fileName ) override;
 
-    virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile ) override;
+    virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile ) override;
 
     virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) override;
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
@@ -412,7 +414,7 @@ public:
 	//========================================================================
 	// to gui
 	//========================================================================
-    void						sendToGuiStatusMessage( const char * statusMsg, ... );
+    void						sendToGuiStatusMessage( const char* statusMsg, ... );
 	void						toGuiPluginPermissionChange( PktAnnounce * poPktAnn );
 
 	void						toGuiContactDescChange( PktAnnounce * poPktAnn );
@@ -515,14 +517,14 @@ public:
 	//! called if hacker offense is detected
 	void						hackerOffense(	EHackerLevel	hackerLevel,			    
                                                 EHackerReason   hackerReason,
-                                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
+                                                VxNetIdent*	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
 												InetAddress		IpAddr,					// ip address if identity not known
-												const char *	pMsg, ... );			// message about the offense
+												const char*	pMsg, ... );			// message about the offense
 
     void                        hackerOffense(  EHackerLevel	hackerLevel,			    
                                                 EHackerReason   hackerReason,
-                                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
-                                                const char *	pMsg, ... );			// message about the offense
+                                                VxNetIdent*	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
+                                                const char*	pMsg, ... );			// message about the offense
 
 	//========================================================================
 	// pkt handlers
@@ -766,8 +768,10 @@ protected:
 	PluginMgr&					m_PluginMgr;
     PluginSettingMgr			m_PluginSettingMgr;
 
-	PluginFileShareServer *	m_PluginFileShareServer;
-	PluginNetServices *			m_PluginNetServices;
+	PluginFileShareServer*	    m_PluginFileShareServer;
+    PluginLibraryServer*        m_PluginLibraryServer;
+	PluginNetServices*			m_PluginNetServices;
+
 	IsPortOpenTest&				m_IsPortOpenTest;
     RelayMgr                    m_RelayMgr;
     RunUrlAction&			    m_RunUrlAction;

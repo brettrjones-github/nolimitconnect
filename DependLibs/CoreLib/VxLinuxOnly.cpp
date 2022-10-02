@@ -101,7 +101,7 @@ void strlwr( char * pStr )
 #if !defined(TARGET_OS_ANDROID)
 //============================================================================
 //! case insensitive string compare
-int stricmp( const char * s1, const char * s2 )
+int stricmp( const char* s1, const char* s2 )
 {
     unsigned char c1,c2;
     do
@@ -118,7 +118,7 @@ int stricmp( const char * s1, const char * s2 )
 
 //============================================================================
 //! case insensitive string compare
-int strnicmp( const char * s1, const char * s2, int n )
+int strnicmp( const char* s1, const char* s2, int n )
 {
     if( n == 0 )
         return 0;

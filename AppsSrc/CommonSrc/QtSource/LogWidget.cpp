@@ -57,7 +57,7 @@ void LogWidget::initLogCallback()
 }
 
 //============================================================================
-void LogWidget::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
+void LogWidget::onLogEvent( uint32_t u32LogFlags, const char* logMsg )
 {
     m_LogMutex.lock();
     if( m_VerboseLog

@@ -50,7 +50,7 @@ class PktBlobSendReq : public VxPktHdr
 {
 public:
 	PktBlobSendReq();
-	void						setBlobNameAndTag( const char * pBlobName, const char * assetTag = 0 );
+	void						setBlobNameAndTag( const char* pBlobName, const char* assetTag = 0 );
 	void						setBlobNameLen( uint16_t nameLen )				{ m_BlobNameLen = htons( nameLen ); }
 	uint16_t					getBlobNameLen( void )							{ return ntohs( m_BlobNameLen ); }
 	void						setBlobTagLen( uint16_t tagLen )				{ m_BlobTagLen = htons( tagLen ); }
@@ -277,7 +277,7 @@ class PktBlobXferErr : public VxPktHdr
 public:
 	PktBlobXferErr();
 
-	static const char *			describeError( uint16_t error );
+	static const char*			describeError( uint16_t error );
 
 	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxBlobInstance = instanceGuid; }
 	VxGUID& 					getRxInstance( void )							{ return m_RxBlobInstance; }

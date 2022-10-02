@@ -32,7 +32,7 @@ enum EXmlParseType
 	eXmlDocEnd
 };
 
-// callback example void XmlCallback( void * pvUserData, EXmlParseType eXmlType, const char * pName, const char * pValue );
+// callback example void XmlCallback( void * pvUserData, EXmlParseType eXmlType, const char* pName, const char* pValue );
 
 typedef void 	(*VX_XML_CALLBACK_T)( void *, EXmlParseType,  char const *, char const * );
 

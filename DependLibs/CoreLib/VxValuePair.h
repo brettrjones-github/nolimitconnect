@@ -21,17 +21,17 @@
 class VxValuePair
 {
 public:
-	VxValuePair( const char * lineStr);
-	VxValuePair( const char * name, const char * value );
+	VxValuePair( const char* lineStr);
+	VxValuePair( const char* name, const char* value );
 	VxValuePair( VxValuePair * header );
 
 	~VxValuePair();
 
-	void						setName( const char * name );
-	const char *				getName( void );
+	void						setName( const char* name );
+	const char*				getName( void );
 	bool						hasName( void );
-	void						setValue( const char *value );
-	const char *				getValue( void );
+	void						setValue( const char*value );
+	const char*				getValue( void );
 
 private:
 	//=== vars ===//

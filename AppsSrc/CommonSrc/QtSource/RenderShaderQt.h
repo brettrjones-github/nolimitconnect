@@ -49,7 +49,7 @@ public:
     RenderShaderQt() = delete;
     RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlLogic& renderLogic );
 
-    bool                        compileAndLink( const char * vertexShaderCode, const char * fragmentShaderCode );
+    bool                        compileAndLink( const char* vertexShaderCode, const char* fragmentShaderCode );
 
     bool                        isShaderValid()     { return m_shaderValidated; }
     EShaderType                 getShaderType()     { return m_ShaderType; }
@@ -118,16 +118,16 @@ public:
     virtual void                shaderEnableVertexAttribArray( int arrayId ) ;
     virtual void                shaderDisableVertexAttribArray( int arrayId );
 
-    static const char *         describeShader( ESHADERMETHOD shaderMethod );
+    static const char*         describeShader( ESHADERMETHOD shaderMethod );
 
 protected:
-    void                        onCompiledAndLinked( const char * vertexShaderCode, const char *fragmentShaderCode );
-    void                        onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
-    void                        onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
-    void                        onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
-    void                        onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
+    void                        onCompiledAndLinked( const char* vertexShaderCode, const char*fragmentShaderCode );
+    void                        onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode );
+    void                        onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode );
+    void                        onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode );
+    void                        onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode );
     bool                        verifyProgramId();
-    bool                        verifyValidValue( GLint handle, const char * msg );
+    bool                        verifyValidValue( GLint handle, const char* msg );
     bool                        validateProgram();
     bool                        validateShader();
 

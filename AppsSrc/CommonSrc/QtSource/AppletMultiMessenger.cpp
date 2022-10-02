@@ -130,7 +130,7 @@ AppletMultiMessenger::~AppletMultiMessenger()
 }
 
 //============================================================================
-void AppletMultiMessenger::setupMultiSessionActivity( GuiUser * hisIdent )
+void AppletMultiMessenger::setupMultiSessionActivity( GuiUser* hisIdent )
 {
 	m_HisIdent = hisIdent;
 

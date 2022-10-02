@@ -17,7 +17,7 @@
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
 
 //============================================================================
-void PluginBase::onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char * msg )
+void PluginBase::onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char* msg )
 {
     // TODO proper invalid packet handling
     LogMsg( LOG_INFO, "PluginBase::onInvalidRxedPacket plugin %s user %s", DescribePluginType( getPluginType() ), netIdent->getOnlineName() );

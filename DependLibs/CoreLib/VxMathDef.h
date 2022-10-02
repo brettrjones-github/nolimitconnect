@@ -336,7 +336,7 @@ const char* vx_fast_atof_func( const char* c, float& out );
 
 //============================================================================
 //! plagiarism of code by Nikolaus Gebhardt.. see irrlicht copywrite for details
-float vx_fast_atof( const char * c );
+float vx_fast_atof( const char* c );
 
 
 #else 
@@ -363,11 +363,11 @@ void LimitTo360DegreesF64( double * f64Degrees );
 //! Provides a fast function for converting a string into a float,
 //! about 6 times faster than atof in win32.
 // If you find any bugs, please send them to me, niko (at) irrlicht3d.org.
-const char * vx_fast_atof_func( const char * c, float * out );
+const char* vx_fast_atof_func( const char* c, float * out );
 
 //============================================================================
 //! plagiarism of code by Nikolaus Gebhardt.. see irrlicht copywrite for details
-float vx_fast_atof( const char * c );
+float vx_fast_atof( const char* c );
 
 #endif // __cplusplus
 

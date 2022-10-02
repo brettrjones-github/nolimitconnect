@@ -127,7 +127,7 @@ void GuiUserListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser * hostIdent = hostSession->getUserIdent();
+    GuiUser* hostIdent = hostSession->getUserIdent();
     if( nullptr == hostIdent )
     {
         LogMsg( LOG_DEBUG, "GuiUserListItem::updateWidgetFromInfo null gui user" );

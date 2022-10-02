@@ -33,8 +33,8 @@ public:
 
     void						setSearchType( enum EScanType eScanType );
 	EScanType					getSearchType( void );
-	bool						setSearchExpression( const char * pExp );
-	const char *				getSearchExpression( void );
+	bool						setSearchExpression( const char* pExp );
+	const char*				getSearchExpression( void );
 
 private:
 	//=== vars ===//

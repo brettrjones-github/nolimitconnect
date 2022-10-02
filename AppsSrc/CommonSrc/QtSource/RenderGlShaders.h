@@ -40,7 +40,7 @@ public:
     void destroyShaders();
 
     // shader method to string for debugging
-    const char *                describeShaderMethod( ESHADERMETHOD method );
+    const char*                describeShaderMethod( ESHADERMETHOD method );
 
     //virtual void                initialiseShaders();
     //virtual void                releaseShaders();

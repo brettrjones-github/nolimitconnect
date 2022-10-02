@@ -75,10 +75,10 @@ public:
 	}
 
 	RCODE SetProxy(	int iProxyType,	//Type of proxy	
-						const char * pProxyHost,		//firewall Host name
+						const char* pProxyHost,		//firewall Host name
 						const unsigned short u16ProxyPort,//firewall port
-						const char * pProxyAcctName,	//firewall Account Name
-						const char * pProxyAcctPwd );	//firewall Account Pwd
+						const char* pProxyAcctName,	//firewall Account Name
+						const char* pProxyAcctPwd );	//firewall Account Pwd
 
 	int GetProxyType(){ return m_iProxyType; }
 	char * GetProxyHost(){ return m_as8ProxyHost; }
@@ -87,9 +87,9 @@ public:
 	char * GetProxyUser(){ return m_as8ProxyAcctName; }
 	char * GetProxyPwd(){ return m_as8ProxyAcctPwd; }
 	void SetProxyType(int iProxyType ){ m_iProxyType = iProxyType; }
-	void SetProxyHost( const char * pProxyHost ){ strcpy( m_as8ProxyHost, pProxyHost ); }
-	void SetProxyUser( const char * pProxyUser ){ strcpy( m_as8ProxyAcctName, pProxyUser ); }
-	void SetProxyPwd( const char * pProxyPwd ){ strcpy( m_as8ProxyAcctPwd, pProxyPwd ); }
+	void SetProxyHost( const char* pProxyHost ){ strcpy( m_as8ProxyHost, pProxyHost ); }
+	void SetProxyUser( const char* pProxyUser ){ strcpy( m_as8ProxyAcctName, pProxyUser ); }
+	void SetProxyPwd( const char* pProxyPwd ){ strcpy( m_as8ProxyAcctPwd, pProxyPwd ); }
 	char * GetBasicAuth( void );
 
 	RCODE OnConnect( VxSkt * sktBase, int iErrorCode );

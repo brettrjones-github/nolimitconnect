@@ -45,10 +45,10 @@ public:
 	virtual	void				handleSktCallback( VxSktBase* sktBase );
 
 	//! Connect to ip or URL and return socket.. if cannot connect return NULL
-	virtual VxSktConnect *		connectTo(	const char *	pIpOrUrl,						// remote ip or url 
+	virtual VxSktConnect *		connectTo(	const char*	pIpOrUrl,						// remote ip or url 
 											uint16_t		u16Port,						// port to connect to
 											int				iTimeoutMilliSeconds = 1000 );	// seconds before connect attempt times out
-	virtual VxSktConnect *		createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port );
+	virtual VxSktConnect *		createConnectionUsingSocket( SOCKET skt, const char* rmtIp, uint16_t port );
 
 	virtual bool				txPacket(	VxSktBase *			sktBase,
 											const VxGUID&		destOnlineId,			    // online id of destination user
@@ -58,7 +58,7 @@ public:
 													VxPktHdr*		pktHdr, 				// packet to send
 													bool			bDisconnect = false );	// if true disconnect after send
 
-    virtual void                dumpSocketStats( const char *reason = nullptr, bool fullDump = false ) override;
+    virtual void                dumpSocketStats( const char*reason = nullptr, bool fullDump = false ) override;
 
     virtual void                setSktLoopback( VxSktBase * sktLoopback ) override          { m_SktLoopback = sktLoopback; m_ClientMgr.setSktLoopback( sktLoopback ); }
 

@@ -73,7 +73,7 @@ protected:
 	// called from session logic
     virtual void				onInSession( bool isInSession ) override;
 
-	void						setupMultiSessionActivity( GuiUser * hisIdent );
+	void						setupMultiSessionActivity( GuiUser* hisIdent );
 	void						setStatusMsg( QString strStatus );
 
 	void						toGuiSetGameValueVar(	EPluginType     ePluginType, 

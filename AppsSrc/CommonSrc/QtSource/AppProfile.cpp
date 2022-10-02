@@ -175,7 +175,7 @@ void AppProfile::loadProfile( void )
         // so for android only use the data directory
         if( m_strRootUserDataDir.length() )
         {
-            const char * exePath = m_strRootUserDataDir.c_str();
+            const char* exePath = m_strRootUserDataDir.c_str();
             for( unsigned int i = 0; i < m_strRootUserDataDir.length(); i++ )
             {
                 exePathHash += exePath[ i ];
@@ -199,7 +199,7 @@ void AppProfile::loadProfile( void )
         // use exe directory to make a hash as part of path so can run multiple instances
 		if( m_strExeDir.length() )
 		{
-			const char * exePath = m_strExeDir.c_str();
+			const char* exePath = m_strExeDir.c_str();
             for( unsigned int i = 0; i < m_strExeDir.length(); i++ )
 			{
 				exePathHash += exePath[ i ];
@@ -327,7 +327,7 @@ RCODE AppProfile::saveDebugSettings( void )
 }
 
 //============================================================================
-const char * AppProfile::getLocalHostIp()
+const char* AppProfile::getLocalHostIp()
 {
 	return m_strLocalHostIp.c_str();
 }

@@ -40,10 +40,10 @@ public:
 	MJPEGWriter&				getVideoWriter( void )					{ return m_VideoWriter; }
 	MJPEGReader&				getVideoReader( void )					{ return m_VideoReader; }
 
-	bool						fromGuiIsMyP2PWebVideoFile( const char * fileName );	
-	bool						fromGuiIsMyP2PWebAudioFile( const char * fileName );	
-	bool						fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName );
-	bool						fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName );
+	bool						fromGuiIsMyP2PWebVideoFile( const char* fileName );	
+	bool						fromGuiIsMyP2PWebAudioFile( const char* fileName );	
+	bool						fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName );
+	bool						fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName );
 	bool						fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000 );
 
 protected:

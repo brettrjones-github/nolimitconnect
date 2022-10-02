@@ -32,7 +32,7 @@ public:
 	int							m_TotalDataLen{ 0 };
 	int							m_ContentDataLen{ 0 };
 	VxGUID					    m_OnlineId;
-	VxNetIdent *				m_Ident{ nullptr };
+	VxNetIdent*				m_Ident{ nullptr };
 	int							m_SktDataUsed{ 0 };
 };
 

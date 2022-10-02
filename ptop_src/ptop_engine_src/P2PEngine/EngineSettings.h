@@ -82,7 +82,7 @@ public:
     void						setFirewallTestSetting( EFirewallTestType eFirewallTestType );
     EFirewallTestType           getFirewallTestSetting( void );
 
-	void						setPreferredNetworkAdapterIp( const char * wirelessIpAddress );
+	void						setPreferredNetworkAdapterIp( const char* wirelessIpAddress );
 	std::string					getPreferredNetworkAdapterIp( void );
 
 	//=========================================================================

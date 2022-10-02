@@ -117,9 +117,9 @@ void VxKey::exportToAsciiString( std::string& exportedKey )
 
 //============================================================================
 //! make encryption key from user name and password
-RCODE VxKey::setKeyFromPassword( const char *	pUserName,			// user name
-									const char *	pPassword,			// password
-									const char *	pSalt )				// salt
+RCODE VxKey::setKeyFromPassword( const char*	pUserName,			// user name
+									const char*	pPassword,			// password
+									const char*	pSalt )				// salt
 {
 	std::string strPwd = pUserName;
 	strPwd += pPassword;
@@ -129,9 +129,9 @@ RCODE VxKey::setKeyFromPassword( const char *	pUserName,			// user name
 
 //============================================================================
 //! make encryption key from password
-RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
+RCODE VxKey::setKeyFromPassword( const char*	pPassword,			// password
 								 int			iPasswordLen,		// length of password	int iPasswordLen )
-								 const char *	pSalt )	// salt
+								 const char*	pSalt )	// salt
 {
 	if( !pPassword || 1 > iPasswordLen || !pSalt || 4 > strlen( pSalt ) )
 	{
@@ -167,7 +167,7 @@ std::string	VxKey::describeKey( void )
 //============================================================================
 //! generate key from password and set encryption key in one function call
 //! NOTE: Max password len 255
-RCODE VxCrypto::setPassword( const char * pPassword, int iPasswordLen )
+RCODE VxCrypto::setPassword( const char* pPassword, int iPasswordLen )
 {
 	struct VxMD5Context   md5c;
 	unsigned char       bfvec[ CHEEZY_SYM_KEY_LEN ];
@@ -188,7 +188,7 @@ RCODE VxCrypto::setPassword( const char * pPassword, int iPasswordLen )
 }
 //============================================================================
 //! Generate encryption key from password
-RCODE VxCrypto::generateKey( const char * pPassword, int iPasswordLen, VxKey * poRetKey )
+RCODE VxCrypto::generateKey( const char* pPassword, int iPasswordLen, VxKey * poRetKey )
 {
 	struct VxMD5Context   md5c;
 	unsigned char       bfvec[ CHEEZY_SYM_KEY_LEN ];

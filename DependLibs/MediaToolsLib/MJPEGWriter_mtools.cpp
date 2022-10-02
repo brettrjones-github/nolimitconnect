@@ -54,7 +54,7 @@ MJPEGWriter::~MJPEGWriter()
 }
 
 //============================================================================
-bool MJPEGWriter::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName  )
+bool MJPEGWriter::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName  )
 {
 	bool result = false;
 	switch( eRecState )
@@ -129,7 +129,7 @@ bool MJPEGWriter::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedI
 }
 
 //============================================================================
-bool MJPEGWriter::startAviWrite( const char * fileName, uint32_t timeBetweenFramesMicroSec, bool beginInPausedState )
+bool MJPEGWriter::startAviWrite( const char* fileName, uint32_t timeBetweenFramesMicroSec, bool beginInPausedState )
 {
 	stopAviWrite();
 	m_FileName = fileName;

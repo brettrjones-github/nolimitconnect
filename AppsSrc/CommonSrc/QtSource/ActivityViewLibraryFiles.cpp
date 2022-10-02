@@ -136,7 +136,7 @@ FileShareItemWidget * ActivityViewLibraryFiles::fileToWidget( VxMyFileInfo& file
 	FileShareItemWidget * item = new FileShareItemWidget(ui.m_FileItemList);
     item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ), GuiParams::getFileListEntryHeight() ) );
 
-	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
+	FileItemInfo* poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poItemInfo) );
     connect( item, SIGNAL(signalFileShareItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
 
@@ -183,7 +183,7 @@ void ActivityViewLibraryFiles::slotListFileIconClicked( QListWidgetItem * item )
 //============================================================================
 void ActivityViewLibraryFiles::slotListShareFileIconClicked( QListWidgetItem * item )
 {
-	FileItemInfo * poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -202,7 +202,7 @@ void ActivityViewLibraryFiles::slotListShareFileIconClicked( QListWidgetItem * i
 //============================================================================
 void ActivityViewLibraryFiles::slotListLibraryIconClicked( QListWidgetItem * item )
 {
-	FileItemInfo * poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -223,7 +223,7 @@ void ActivityViewLibraryFiles::slotListLibraryIconClicked( QListWidgetItem * ite
 //============================================================================
 void ActivityViewLibraryFiles::slotListPlayIconClicked( QListWidgetItem * item )
 {
-	FileItemInfo * poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -240,7 +240,7 @@ void ActivityViewLibraryFiles::slotListPlayIconClicked( QListWidgetItem * item )
 //============================================================================
 void ActivityViewLibraryFiles::slotListShredIconClicked( QListWidgetItem * item )
 {
-	FileItemInfo * poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -266,15 +266,15 @@ bool ActivityViewLibraryFiles::confirmDeleteFile( QString fileName, bool shredFi
 	bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();
 	if( false == isConfirmDisabled )
 	{
-		QString title = shredFile ?  "Confirm Shred File" : "Confirm Delete File";
+		QString title = shredFile ?  QObject::tr("Confirm Shred File"): QObject::tr( "Confirm Delete File" );
 		QString bodyText = "";
 		if( shredFile )
 		{
-			bodyText = "Are You Sure You Want To Write Random Data Into The File Then Delete From The Device?";
+			bodyText = QObject::tr( "Are You Sure You Want To Write Random Data Into The File Then Delete From The Device?");
 		}
 		else
 		{
-			bodyText = "Are You Sure To Delete The File From The Device?";
+			bodyText = QObject::tr( "Are You Sure To Delete The File From The Device?");
 		}
 
 		ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
@@ -295,9 +295,9 @@ bool ActivityViewLibraryFiles::confirmDeleteFile( QString fileName, bool shredFi
 
 //============================================================================
 //!	get friend from QListWidgetItem data
-FileItemInfo * ActivityViewLibraryFiles::widgetToFileItemInfo( FileShareItemWidget * item )
+FileItemInfo* ActivityViewLibraryFiles::widgetToFileItemInfo( FileShareItemWidget * item )
 {
-	return (FileItemInfo *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	return (FileItemInfo*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 }
 
 //============================================================================
@@ -310,7 +310,7 @@ FileShareItemWidget * ActivityViewLibraryFiles::findListEntryWidget( VxMyFileInf
 		poWidget = (FileShareItemWidget *)ui.m_FileItemList->item(iIdx);
 		if( poWidget )
 		{
-			FileItemInfo * poFileInfo = (FileItemInfo *)poWidget->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+			FileItemInfo* poFileInfo = (FileItemInfo*)poWidget->QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 			if( poFileInfo && ( poFileInfo->getFullFileName() == fileInfo.getFullFileName() ) )
 			{
 				return poWidget;
@@ -355,7 +355,7 @@ void ActivityViewLibraryFiles::slotHomeButtonClicked( void )
 //! user selected menu item
 void ActivityViewLibraryFiles::slotListItemClicked(QListWidgetItem * item)
 {
-	FileItemInfo * poInfo = (FileItemInfo *)item->data(Qt::UserRole + 1).toLongLong();
+	FileItemInfo* poInfo = (FileItemInfo*)item->data(Qt::UserRole + 1).toLongLong();
 	if( poInfo )
 	{
 		VxMyFileInfo& fileInfo =	poInfo->getMyFileInfo();

@@ -45,7 +45,7 @@ InstMsgWidget::InstMsgWidget( QWidget* parent )
 }
 
 //============================================================================
-void InstMsgWidget::setInstMsgWidgets( EPluginType ePluginType, GuiUser * hisIdent )
+void InstMsgWidget::setInstMsgWidgets( EPluginType ePluginType, GuiUser* hisIdent )
 {
 	m_ePluginType	= ePluginType;
 	m_HisIdent		= hisIdent;

@@ -27,11 +27,11 @@
 
 //============================================================================
 GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType, 
-                                            GuiUser *	    netIdent, 
+                                            GuiUser*	    netIdent, 
 											VxGUID&		    lclSessionId, 
 											uint8_t			u8FileType, 
 											uint64_t		u64FileLen, 
-											const char *	pFileName,
+											const char*	pFileName,
 											VxGUID			assetId,
 											VxSha1Hash&		fileHashId )
 : m_ePluginType( ePluginType )
@@ -49,11 +49,11 @@ GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType, 
-                                            GuiUser *	    netIdent, 
+                                            GuiUser*	    netIdent, 
 											VxGUID&		    lclSessionId, 
 											uint8_t			u8FileType, 
 											uint64_t		u64FileLen, 
-											const char *	pFileName,
+											const char*	pFileName,
 											VxGUID			assetId,
 											uint8_t *		fileHashId )
 : m_ePluginType( ePluginType )
@@ -71,7 +71,7 @@ GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileXferSession::GuiFileXferSession(		EPluginType			ePluginType, 
-                                            GuiUser *		    netIdent, 
+                                            GuiUser*		    netIdent, 
 											VxGUID&			    lclSessionId, 
 											VxMyFileInfo&		fileInfo )
 : m_ePluginType( ePluginType )

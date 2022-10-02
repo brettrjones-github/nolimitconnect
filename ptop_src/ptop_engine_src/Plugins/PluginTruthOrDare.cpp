@@ -48,10 +48,10 @@ P2PSession * PluginTruthOrDare::createP2PSession( VxSktBase* sktBase, VxNetIdent
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		
+bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
 												int			    pvUserData,
-												const char *	pOfferMsg,		
-												const char *	pFileName,
+												const char*	pOfferMsg,		
+												const char*	pFileName,
 												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	
 {
@@ -86,7 +86,7 @@ bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiOfferReply(	VxNetIdent *	netIdent,
+bool PluginTruthOrDare::fromGuiOfferReply(	VxNetIdent*	netIdent,
 											int			    pvUserData,				
 											EOfferResponse	eOfferResponse,
 											VxGUID			lclSessionId )
@@ -119,7 +119,7 @@ void PluginTruthOrDare::fromGuiStopPluginSession( VxNetIdent* netIdent, int pvUs
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiInstMsg( VxNetIdent* netIdent, const char * msg )
+bool PluginTruthOrDare::fromGuiInstMsg( VxNetIdent* netIdent, const char* msg )
 {
 	LogMsg( LOG_ERROR, "PluginTruthOrDare::fromGuiInstMsg" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
@@ -171,7 +171,7 @@ bool PluginTruthOrDare::fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_t a
 void PluginTruthOrDare::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PktChatReq * pkt = (PktChatReq *)pktHdr;
-	IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char *)pkt->getDataPayload() );
+	IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char*)pkt->getDataPayload() );
 }
 
 //============================================================================

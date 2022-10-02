@@ -35,7 +35,7 @@ class TodGameLogic : public QWidget
 public:
 	TodGameLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget* parent );
 
-	void						setGuiWidgets(	GuiUser *	hisIdent,
+	void						setGuiWidgets(	GuiUser*	hisIdent,
 												TodGameWidget *	todGameWidget );
 	virtual void				setVisible( bool visible );
 
@@ -78,7 +78,7 @@ protected:
 	P2PEngine&					m_Engine; 
 	EPluginType					m_ePluginType;
 	EngineSettings&				m_MySettings;
-    GuiUser *				    m_HisIdent;
+    GuiUser*				    m_HisIdent;
 	TodGameWidget *				m_TodGameWidget;
 	TodGameStats				m_TodGameStats;
 	EGameStatus					m_eGameStatus;

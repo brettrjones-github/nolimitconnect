@@ -111,7 +111,7 @@ bool VxSktBase::checkForImAliveTimeout( bool calledFromSktThread )
 
 //============================================================================
 bool VxSktBase::toSocketAddrInfo(	int sockType, 
-									const char *addr, 
+									const char*addr, 
 									int port, 
 									struct addrinfo **addrInfo, 
 									bool isBindAddr )
@@ -152,7 +152,7 @@ bool VxSktBase::toSocketAddrInfo(	int sockType,
 }
 
 //============================================================================
-bool VxSktBase::toSocketAddrIn(	const char *addr, 
+bool VxSktBase::toSocketAddrIn(	const char*addr, 
 								int port, 
 								struct sockaddr_in *sockaddr, 
 								bool isBindAddr )
@@ -200,7 +200,7 @@ bool VxSktBase::bindSocket( struct addrinfo * poResultAddr )
 }
 
 //============================================================================
-bool VxSktBase::isIPv6Address(const char *addr)
+bool VxSktBase::isIPv6Address(const char*addr)
 {
 	if( NULL == addr )
 	{
@@ -216,7 +216,7 @@ bool VxSktBase::isIPv6Address(const char *addr)
 }
 
 //============================================================================
-int VxSktBase::getIPv6ScopeID(const char *addr)
+int VxSktBase::getIPv6ScopeID(const char*addr)
 {
 	if( false == isIPv6Address( addr ) )
 	{
@@ -235,7 +235,7 @@ int VxSktBase::getIPv6ScopeID(const char *addr)
 }
 
 //============================================================================
-const char *VxSktBase::stripIPv6ScopeID( const char *addr, std::string &buf )
+const char*VxSktBase::stripIPv6ScopeID( const char*addr, std::string &buf )
 {
 	std::string addrStr = addr;
 	if( true == isIPv6Address( addr ) ) 
@@ -252,7 +252,7 @@ const char *VxSktBase::stripIPv6ScopeID( const char *addr, std::string &buf )
 }
 
 //============================================================================
-RCODE VxSktBase::joinMulticastGroup( InetAddress& oLclAddress, const char * muliticastGroupIp )
+RCODE VxSktBase::joinMulticastGroup( InetAddress& oLclAddress, const char* muliticastGroupIp )
 {
 	setLastSktError( 0 );
 	std::string strLclIp = oLclAddress.toStdString();
@@ -425,7 +425,7 @@ void VxSktBase::updateLastSessionTime( void )
 
 //============================================================================
 RCODE VxSktBase::connectTo(	InetAddress&	oLclIp,
-							const char *	pIpUrlOrIp,				// remote ip 
+							const char*	pIpUrlOrIp,				// remote ip 
 							uint16_t		u16Port,				// port to connect to
 							int				iTimeoutMilliSeconds)	// milli seconds before connect attempt times out
 {
@@ -481,7 +481,7 @@ RCODE VxSktBase::connectTo(	InetAddress&	oLclIp,
 }
 
 //============================================================================
-void VxSktBase::createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port )
+void VxSktBase::createConnectionUsingSocket( SOCKET skt, const char* rmtIp, uint16_t port )
 {
 	m_bIsConnected = false;
 	m_SktRxThread.killThread();
@@ -630,7 +630,7 @@ void VxSktBase::doCloseThisSocketHandle( bool bFlushThenClose )
 
 //============================================================================
 //! send data without encrypting
-RCODE VxSktBase::sendData(	const char *	pData,					// data to send
+RCODE VxSktBase::sendData(	const char*	pData,					// data to send
 							int				iDataLen,				// length of data	
 							bool			bDisconnectAfterSend )	// if true disconnect after data is sent
 {
@@ -653,7 +653,7 @@ RCODE VxSktBase::sendData(	const char *	pData,					// data to send
 		int iSentLen;
 		while( true )
 		{
-			iSentLen = send( m_Socket, (const char *)pData, iDataLen, 0);
+			iSentLen = send( m_Socket, (const char*)pData, iDataLen, 0);
 			if( 0 > iSentLen )
 			{
 				setLastSktError( VxGetLastError() );
@@ -712,7 +712,7 @@ RCODE VxSktBase::sendData(	const char *	pData,					// data to send
 
 //============================================================================
 //! encrypt then send data using session crypto
-RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
+RCODE VxSktBase::txEncrypted(	const char*	pDataIn, 		// data to send
 								int				iDataLen,		// length of data
 								bool			bDisconnect )	// if true disconnect after send
 {
@@ -808,7 +808,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
 //============================================================================
 //! encrypt with given key then send.. does not affect session crypto
 RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
-								const char *	pDataIn,		// data to send
+								const char*	pDataIn,		// data to send
 								int				iDataLen,		// length of data
 								bool			bDisconnect )	// if true disconnect after send
 {
@@ -910,7 +910,7 @@ RCODE VxSktBase::txPacketWithDestId(	VxPktHdr*			pktHdr, 		// packet to send
 		setLastSessionTimeMs( timestamp );
 	}
 
-	return txEncrypted( (const char *)pktHdr, pktHdr->getPktLength(), bDisconnect );
+	return txEncrypted( (const char*)pktHdr, pktHdr->getPktLength(), bDisconnect );
 }
 
 //============================================================================
@@ -1009,7 +1009,7 @@ void VxSktBase::setLclAddress( struct sockaddr_storage& oSktAddr )
 }
 
 //============================================================================
-void VxSktBase::startReceiveThread( const char * pVxThreadName )
+void VxSktBase::startReceiveThread( const char* pVxThreadName )
 {
 	m_SktRxThread.killThread();
     setInUseByRxThread( true );
@@ -1034,7 +1034,7 @@ void VxSktBase::setLastSktError( RCODE rc )
 //============================================================================
 void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 {
-	VxThread * poVxThread = (VxThread *)pvContext;
+	VxThread* poVxThread = (VxThread*)pvContext;
     VxSktBase* sktBase = nullptr;
     if( !poVxThread->isAborted() )
     {
@@ -1414,14 +1414,14 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 }
 
 //============================================================================
-void VxSktBase::setTxCryptoPassword( const char * data, int len )
+void VxSktBase::setTxCryptoPassword( const char* data, int len )
 {
 	m_TxKey.m_bIsSet = true;
 	m_TxCrypto.setPassword( data, len );
 }
 
 //============================================================================
-void VxSktBase::setRxCryptoPassword( const char * data, int len )
+void VxSktBase::setRxCryptoPassword( const char* data, int len )
 {
 	m_RxKey.m_bIsSet = true;
 	m_RxCrypto.setPassword( data, len );
@@ -1440,13 +1440,13 @@ bool VxSktBase::isRxCryptoKeySet( void )
 }
 
 //============================================================================
-const char * VxSktBase::describeSktError( RCODE rc )
+const char* VxSktBase::describeSktError( RCODE rc )
 {
 	return VxDescribeSktError( rc );
 }
 
 //============================================================================
-const char * VxSktBase::describeSktCallbackReason( ESktCallbackReason reason )
+const char* VxSktBase::describeSktCallbackReason( ESktCallbackReason reason )
 {
     switch( reason )
     {

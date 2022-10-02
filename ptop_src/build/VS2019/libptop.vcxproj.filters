@@ -172,19 +172,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\AudioJitterBuffer.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileLibraryDb.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileLibraryMgr.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileRxSession.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferMgr.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileToXfer.cpp">
@@ -193,16 +181,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileTxSession.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferBaseMgr.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferMgr.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferPluginSession.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\P2PSession.cpp">
@@ -244,18 +223,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesDb.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesFinder.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesMgr.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\TodGameSession.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -277,34 +244,10 @@
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.cpp">
       <Filter>Source Files\Search</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.cpp">
-      <Filter>Source Files\WebServer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.cpp">
-      <Filter>Source Files\WebServer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServer.cpp">
-      <Filter>Source Files\WebServer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServerHttp.cpp">
-      <Filter>Source Files\WebServer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebSkt.cpp">
-      <Filter>Source Files\WebServer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseService.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXferPktHandlers.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMessenger.cpp">
@@ -733,9 +676,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoMgr.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoDb.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -753,9 +693,6 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardServer.cpp">
       <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp">
-      <Filter>Source Files\WebPageMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.cpp">
       <Filter>Source Files\Plugins</Filter>
@@ -786,6 +723,30 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileShareServer.cpp">
       <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoBaseMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoLibraryMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoSharedFilesMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoClientFilesMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginLibraryServer.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPersonFileXfer.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp">
+      <Filter>Source Files\WebPageMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -948,19 +909,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\AudioJitterBuffer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileLibraryDb.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileLibraryMgr.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileRxSession.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferMgr.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileToXfer.h">
@@ -969,16 +918,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileTxSession.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferBaseMgr.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferMgr.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferPluginSession.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\P2PSession.h">
@@ -1017,18 +957,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesDb.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesFinder.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesMgr.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\TodGameSession.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -1052,21 +980,6 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanPic.h">
       <Filter>Source Files\Search</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.h">
-      <Filter>Source Files\WebServer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.h">
-      <Filter>Source Files\WebServer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServer.h">
-      <Filter>Source Files\WebServer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServerLib.h">
-      <Filter>Source Files\WebServer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebSkt.h">
-      <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h">
       <Filter>Source Files\GuiInterface</Filter>
@@ -1096,12 +1009,6 @@
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h">
@@ -1587,9 +1494,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoMgr.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoDb.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -1604,12 +1508,6 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardServer.h">
       <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageCallbackInterface.h">
-      <Filter>Source Files\WebPageMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.h">
-      <Filter>Source Files\WebPageMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.h">
       <Filter>Source Files\Plugins</Filter>
@@ -1646,6 +1544,33 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileShareServer.h">
       <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoBaseMgr.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoLibraryMgr.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoSharedFilesMgr.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoClientFilesMgr.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginLibraryServer.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPersonFileXfer.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageCallbackInterface.h">
+      <Filter>Source Files\WebPageMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.h">
+      <Filter>Source Files\WebPageMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1699,9 +1624,6 @@
     </Filter>
     <Filter Include="Source Files\Search">
       <UniqueIdentifier>{c0217daa-8641-440a-bf64-9fbed6a04b7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\WebServer">
-      <UniqueIdentifier>{caa85f20-2991-480c-8d7d-78d5db3ecf35}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\PluginSettings">
       <UniqueIdentifier>{79d61f45-dfd4-45b2-aff4-e88593f636a1}</UniqueIdentifier>
@@ -1784,14 +1706,14 @@
     <Filter Include="Source Files\GuiInterface\OsWin32">
       <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\WebPageMgr">
-      <UniqueIdentifier>{d53721db-42a9-4e22-8170-89e7e0a2acba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Relay">
       <UniqueIdentifier>{55109772-14b2-4267-901c-e08847444ab4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\ConnectIdListMgr">
       <UniqueIdentifier>{688ca6a4-b923-40f1-baa0-ff911d8e4fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WebPageMgr">
+      <UniqueIdentifier>{bee4bc25-082e-4a6b-94f9-532895b6b153}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

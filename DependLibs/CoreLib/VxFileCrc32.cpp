@@ -53,7 +53,7 @@ protected:
 };
 
 
-unsigned long VxCalculateFileCheckSum( const char * pFileName, uint32_t& dwCrc32 )
+unsigned long VxCalculateFileCheckSum( const char* pFileName, uint32_t& dwCrc32 )
 {
 	unsigned long dwCrc32Tmp;
 	CCrc32Static2 gCrc32;

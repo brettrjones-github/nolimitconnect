@@ -37,25 +37,25 @@ public:
     bool						operator == ( const NetHostSetting& rhs ) const;
     bool						operator != ( const NetHostSetting& rhs ) const;
 
-	void						setNetHostSettingName( const char * settingName )			{ m_NetHostSettingName = settingName; }
+	void						setNetHostSettingName( const char* settingName )			{ m_NetHostSettingName = settingName; }
 	std::string&				getNetHostSettingName( void )								{ return m_NetHostSettingName; }
 
-	void						setNetworkKey( const char * networkName )					{ m_NetworkName = networkName; }
+	void						setNetworkKey( const char* networkName )					{ m_NetworkName = networkName; }
 	std::string&				getNetworkKey( void )										{ return m_NetworkName; }
 
-	void						setNetworkHostUrl( const char * anchorUrl )				    { m_NetworkHostUrl = anchorUrl; }
+	void						setNetworkHostUrl( const char* anchorUrl )				    { m_NetworkHostUrl = anchorUrl; }
 	std::string&				getNetworkHostUrl( void )								    { return m_NetworkHostUrl; }
-    void						setConnectTestUrl( const char * netServiceUrl )		        { m_NetConnectTestUrl = netServiceUrl; }
+    void						setConnectTestUrl( const char* netServiceUrl )		        { m_NetConnectTestUrl = netServiceUrl; }
     std::string&				getConnectTestUrl( void )								    { return m_NetConnectTestUrl; }
-    void						setRandomConnectUrl( const char * netServiceUrl )		    { m_NetRandomConnectUrl = netServiceUrl; }
+    void						setRandomConnectUrl( const char* netServiceUrl )		    { m_NetRandomConnectUrl = netServiceUrl; }
     std::string&				getRandomConnectUrl( void )								    { return m_NetRandomConnectUrl; }
-    void						setGroupHostUrl( const char * netServiceUrl )		        { m_GroupHostUrl = netServiceUrl; }
+    void						setGroupHostUrl( const char* netServiceUrl )		        { m_GroupHostUrl = netServiceUrl; }
     std::string&				getGroupHostUrl( void )								        { return m_GroupHostUrl; }
-    void						setChatRoomHostUrl( const char * netServiceUrl )		    { m_ChatRoomHostUrl = netServiceUrl; }
+    void						setChatRoomHostUrl( const char* netServiceUrl )		    { m_ChatRoomHostUrl = netServiceUrl; }
     std::string&				getChatRoomHostUrl( void )								    { return m_ChatRoomHostUrl; }
-    void						setUserSpecifiedExternIpAddr( const char * ipAddr )		    { m_ExternIpAddr = ipAddr; }
+    void						setUserSpecifiedExternIpAddr( const char* ipAddr )		    { m_ExternIpAddr = ipAddr; }
     std::string&				getUserSpecifiedExternIpAddr( void )						{ return m_ExternIpAddr; }
-    void                        setPreferredNetworkAdapterIp( const char * preferredAdaptIp ) { m_PreferredNetworkAdapterIp = preferredAdaptIp; }
+    void                        setPreferredNetworkAdapterIp( const char* preferredAdaptIp ) { m_PreferredNetworkAdapterIp = preferredAdaptIp; }
     std::string&                getPreferredNetworkAdapterIp( void )                        { return m_PreferredNetworkAdapterIp; }
 
     void                        setUseUpnpPortForward( bool useUpnp )                       { m_UseUpnp = useUpnp; }

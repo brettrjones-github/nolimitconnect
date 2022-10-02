@@ -42,6 +42,6 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletPeerSelectFileToSendUi	ui;
-    VxNetIdent *				m_HisIdent{ nullptr };
+    VxNetIdent*				m_HisIdent{ nullptr };
 	VxGUID						m_LclSessionId;
 };

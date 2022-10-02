@@ -37,8 +37,8 @@ Content-Length: %d\r\n\r\n%s"
 static bool WhatsMyIP(	InetAddrAndPort& oLclAddr, 
                         InetAddrAndPort& oRmtAddr, 
 						uint16_t u16Port,
-						const char * pHost, 
-						const char * pWebPage, 
+						const char* pHost, 
+						const char* pWebPage, 
 						std::string& strRetMyIpAddr )
 {
 	if( VxIsAppShuttingDown() )
@@ -136,7 +136,7 @@ static bool WhatsMyIP(	InetAddrAndPort& oLclAddr,
 }
 
 //============================================================================
-bool VxGetExternalIps( const char * pUrl, std::vector<std::string>& aoRetExternalIps )
+bool VxGetExternalIps( const char* pUrl, std::vector<std::string>& aoRetExternalIps )
 {
 	if( NULL == pUrl )
 	{

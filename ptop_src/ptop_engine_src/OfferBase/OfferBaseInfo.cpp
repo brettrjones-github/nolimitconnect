@@ -46,7 +46,7 @@ OfferBaseInfo::OfferBaseInfo( const std::string& fileName )
 }
 
 //============================================================================
-OfferBaseInfo::OfferBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
+OfferBaseInfo::OfferBaseInfo( const char* fileName, uint64_t fileLen, uint16_t assetType )
 : m_OfferName( fileName )
 , m_s64OfferLen( fileLen )
 , m_u16OfferType( assetType )
@@ -132,7 +132,7 @@ bool OfferBaseInfo::isDirectory( void )
 }
 
 //============================================================================
-void OfferBaseInfo::setOfferName( const char * assetName )
+void OfferBaseInfo::setOfferName( const char* assetName )
 {
 	if (assetName)
 		m_OfferName = assetName;
@@ -141,7 +141,7 @@ void OfferBaseInfo::setOfferName( const char * assetName )
 }
 
 //============================================================================
-void OfferBaseInfo::setOfferTag( const char * assetTag )
+void OfferBaseInfo::setOfferTag( const char* assetTag )
 {
 	if( assetTag )
 		m_OfferTag = assetTag;
@@ -166,9 +166,9 @@ std::string OfferBaseInfo::getRemoteOfferName( void )
 }
 
 //============================================================================
-const char * OfferBaseInfo::getDefaultFileExtension( EOfferType assetType )
+const char* OfferBaseInfo::getDefaultFileExtension( EOfferType assetType )
 {
-	const char * extension = ".txt";
+	const char* extension = ".txt";
 	switch( assetType )
 	{
 	case eOfferTypePhotoFile:
@@ -191,9 +191,9 @@ const char * OfferBaseInfo::getDefaultFileExtension( EOfferType assetType )
 }
 
 //============================================================================
-const char * OfferBaseInfo::getSubDirectoryName( EOfferType assetType )
+const char* OfferBaseInfo::getSubDirectoryName( EOfferType assetType )
 {
-	const char * subDir = "asset/";
+	const char* subDir = "asset/";
 	switch( assetType )
 	{
 	case eOfferTypeDocumentFile:
@@ -228,7 +228,7 @@ const char * OfferBaseInfo::getSubDirectoryName( EOfferType assetType )
 }
 
 //============================================================================
-void OfferBaseInfo::updateOfferInfo( VxThread * callingThread )
+void OfferBaseInfo::updateOfferInfo( VxThread* callingThread )
 {
 	return;
 }

@@ -34,8 +34,8 @@ public:
 	OfferBaseXferSession( P2PEngine& engine, OfferBaseMgr& offerMgr, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~OfferBaseXferSession() = default;
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
+	VxNetIdent*				getIdent( void )							{ return m_Ident; }
 
 	void						setOfferInfo( OfferBaseInfo& assetInfo )	{ m_OfferBaseInfo = assetInfo; }
 	OfferBaseInfo&				getOfferInfo( void )						{ return m_OfferBaseInfo; }
@@ -76,7 +76,7 @@ protected:
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
     int							m_iPercentComplete{ 0 };
 	VxSktBase *					m_Skt{ nullptr };
-	VxNetIdent *				m_Ident{ nullptr };
+	VxNetIdent*				m_Ident{ nullptr };
 	uint32_t					m_Error{ 0 };
 	OfferBaseInfo				m_OfferBaseInfo;
 

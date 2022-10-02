@@ -42,7 +42,7 @@ public:
 	virtual void				exitNetworkState( void )									{};
 
 	virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent )				{};
-	virtual void				fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork = false ){};
+	virtual void				fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork = false ){};
 	virtual void				fromGuiNetworkLost( void )									{};
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) { return eNetLayerStateUndefined; }
 

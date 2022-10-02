@@ -73,7 +73,7 @@ bool VxSktConnectSimple::isConnected( void )
 
 //============================================================================
 //! connect to remote ip
-SOCKET VxSktConnectSimple::connectTo(	const char *	pIpOrUrl,				// remote ip or url
+SOCKET VxSktConnectSimple::connectTo(	const char*	pIpOrUrl,				// remote ip or url
 										uint16_t		u16Port,				// port to connect to
 										int				iTimeoutMilliSeconds )	// milli seconds before connect attempt times out
 {
@@ -95,8 +95,8 @@ SOCKET VxSktConnectSimple::connectTo(	const char *	pIpOrUrl,				// remote ip or 
 }
 
 //============================================================================
-SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local adapter ip
-                                      const char *	pIpOrUrl,						// remote ip or url
+SOCKET VxSktConnectSimple::connectTo( const char*  lclAdapterIp,					// local adapter ip
+                                      const char*	pIpOrUrl,						// remote ip or url
                                       uint16_t		u16Port,						// port to connect to
                                       int			iTimeoutMilliSeconds )	        // timeout attempt to connect
 {
@@ -172,7 +172,7 @@ SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local a
 }
 
 //============================================================================
-RCODE VxSktConnectSimple::sendData(	const char *	pData,					// data to send
+RCODE VxSktConnectSimple::sendData(	const char*	pData,					// data to send
 									int				iDataLen,				// length of data
 									int				iTimeoutSeconds )		// seconds before send attempt times out
 {

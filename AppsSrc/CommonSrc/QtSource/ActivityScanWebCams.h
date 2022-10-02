@@ -45,17 +45,17 @@ public:
 	void						setTitle( QString strTitle );
 
     virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
-    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent ) override;
     virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );
 
 signals:
-	void						signalNewWebCamSession( GuiUser * netIdent );
+	void						signalNewWebCamSession( GuiUser* netIdent );
 	void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
 public slots:
-	void						slotNewWebCamSession( GuiUser * netIdent );
+	void						slotNewWebCamSession( GuiUser* netIdent );
 
     void						slotHomeButtonClicked( void ) override;
 
@@ -73,13 +73,13 @@ protected:
 	void						playVideoFrameRotated( QImage oPicBitmap, int iRotate );
 
 	void						setScanStatusText( QString strMsg );
-	void						setupIdentWidget( GuiUser * netIdent );
+	void						setupIdentWidget( GuiUser* netIdent );
 
 	void						startCountdown();
 	void						updateCountdownGui();
 	void						startStopScan( bool startScan );
 	void						showNextCam( void ); 
-	void						doCamConnect( GuiUser * netIdent );
+	void						doCamConnect( GuiUser* netIdent );
 	void						updateAvailableGui( void );
 	void						startWebCamSession( VxGUID& onlineId, bool startSession );
 	void						setCamViewToOfflineImage( void );
@@ -87,14 +87,14 @@ protected:
 
 	//=== vars ===//
 	Ui::ScanWebCamsDialog		ui;
-    GuiUser *				    m_HisIdent;
+    GuiUser*				    m_HisIdent;
 	int							m_iCountdownCnt;
 	bool						m_bPaused;
 	QTimer *					m_CountdownTimer;
 	EScanType					m_eScanType;
 	bool						m_bIconConnected;
 	bool						m_bSearchComplete;
-	QVector<GuiUser *>		    m_ScanList;
+	QVector<GuiUser*>		    m_ScanList;
 	bool						m_ShowNextCam;
 	bool						m_IsScanning;
 	VxGUID						m_LclSessionId;

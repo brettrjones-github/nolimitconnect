@@ -63,8 +63,8 @@ public:
     AudioMasterClock&           getAudioMasterClock( void )                 { return m_AudioMasterClock; }
     AudioLoopback&              getAudioLoopback( void )                    { return m_AudioLoopback; }
 
-    const char *                describeAudioState( QAudio::State state );
-    const char *                describeAudioError( QAudio::Error err );
+    const char*                describeAudioState( QAudio::State state );
+    const char*                describeAudioError( QAudio::Error err );
 
     void                        lockAudioIn()                               { m_AudioInMutex.lock(); }
     void                        unlockAudioIn()                             { m_AudioInMutex.unlock(); }

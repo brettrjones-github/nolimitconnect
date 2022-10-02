@@ -35,8 +35,8 @@ public:
 	ThumbXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 	virtual ~ThumbXferSession();
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
+	VxNetIdent*				getIdent( void )							{ return m_Ident; }
 
 	void						setThumbInfo( ThumbInfo& assetInfo )	        { m_ThumbInfo = assetInfo; }
 	ThumbInfo&				    getAssetInfo( void )						    { return m_ThumbInfo; }

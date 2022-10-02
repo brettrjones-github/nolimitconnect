@@ -137,7 +137,7 @@ void GuiOfferMgrBase::slotToGuiPluginSessionEnded( GuiOfferSession * offerSessio
 }
 
 //========================================================================
-void GuiOfferMgrBase::slotToGuiContactOffline( GuiUser * friendIdent )
+void GuiOfferMgrBase::slotToGuiContactOffline( GuiUser* friendIdent )
 {
 	lockOfferMgr();
 	std::vector<OfferSessionState *>::iterator iter = m_aoOffersList.begin();
@@ -345,7 +345,7 @@ OfferSessionState *	 GuiOfferMgrBase::getTopGuiOfferSession( void ) // returns n
 }
 
 //========================================================================
-void GuiOfferMgrBase::acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent )
+void GuiOfferMgrBase::acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent )
 {
 	OfferSessionState * offerState = findOfferSession( offerSessionId );
 	if( 0 == offerState )
@@ -395,7 +395,7 @@ void GuiOfferMgrBase::acceptOfferButtonClicked( EPluginType ePluginType, VxGUID 
 }
 
 //========================================================================
-void GuiOfferMgrBase::rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent )
+void GuiOfferMgrBase::rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent )
 {
 	OfferSessionState * offerState = findOfferSession( offerSessionId );
 	if( 0 == offerState )
@@ -430,7 +430,7 @@ void GuiOfferMgrBase::rejectOfferButtonClicked( EPluginType ePluginType, VxGUID 
 }
 
 //========================================================================
-void GuiOfferMgrBase::removePluginSessionOffer( EPluginType ePluginType, GuiUser * netIdent )
+void GuiOfferMgrBase::removePluginSessionOffer( EPluginType ePluginType, GuiUser* netIdent )
 {
 	std::vector<OfferSessionState *>::iterator iter;
 	iter = m_aoOffersList.begin();
@@ -501,49 +501,36 @@ void GuiOfferMgrBase::removePluginSessionOffer( VxGUID&  offerSessionId )
 }
 
 //========================================================================
-void GuiOfferMgrBase::recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent )
+void GuiOfferMgrBase::recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent )
 {
 
 }
 
 //========================================================================
-void GuiOfferMgrBase::sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent )
+void GuiOfferMgrBase::sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent )
 {
 
 }
 
 //========================================================================
-void GuiOfferMgrBase::sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse )
+void GuiOfferMgrBase::sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse )
 {
 	//m_MyApp.getOfferListDialog()->sentOfferReply( ePluginType, offerSessionId, hisIdent, eOfferResponse );
 }
 
 //========================================================================
-void GuiOfferMgrBase::recievedOfferReply( EPluginType  ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse )
+void GuiOfferMgrBase::recievedOfferReply( EPluginType  ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse )
 {
 
 }
 
 //========================================================================
-void GuiOfferMgrBase::recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse )
+void GuiOfferMgrBase::recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse )
 {
 }
 
 //========================================================================
-void GuiOfferMgrBase::startedSessionInReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent )
-{
-	if( GuiHelpers::isPluginSingleSession( ePluginType ) )
-	{
-		removePluginSessionOffer( ePluginType, hisIdent );			
-	}
-	else
-	{
-		removePluginSessionOffer( offerSessionId );	
-	}	
-}
-
-//========================================================================
-void GuiOfferMgrBase::onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, bool isInSession )
+void GuiOfferMgrBase::startedSessionInReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent )
 {
 	if( GuiHelpers::isPluginSingleSession( ePluginType ) )
 	{
@@ -556,7 +543,20 @@ void GuiOfferMgrBase::onIsInSession( EPluginType ePluginType, VxGUID offerSessio
 }
 
 //========================================================================
-void GuiOfferMgrBase::onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent )
+void GuiOfferMgrBase::onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, bool isInSession )
+{
+	if( GuiHelpers::isPluginSingleSession( ePluginType ) )
+	{
+		removePluginSessionOffer( ePluginType, hisIdent );			
+	}
+	else
+	{
+		removePluginSessionOffer( offerSessionId );	
+	}	
+}
+
+//========================================================================
+void GuiOfferMgrBase::onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent )
 {
 	if( GuiHelpers::isPluginSingleSession( ePluginType ) )
 	{
@@ -601,7 +601,7 @@ OfferSessionState * GuiOfferMgrBase::findOfferSession( VxGUID sessionId )
 }
 
 //============================================================================
-GuiOfferSession * GuiOfferMgrBase::findActiveAndAvailableOffer( GuiUser * netIdent, EPluginType ePluginType )
+GuiOfferSession * GuiOfferMgrBase::findActiveAndAvailableOffer( GuiUser* netIdent, EPluginType ePluginType )
 {
 	std::vector<OfferSessionState *>::iterator iter;
 	for( iter = m_aoOffersList.begin(); iter != m_aoOffersList.end(); ++iter )

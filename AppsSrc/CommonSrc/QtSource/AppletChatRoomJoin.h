@@ -26,7 +26,7 @@ public:
     AppletChatRoomJoin( AppCommon& app, QWidget* parent );
 	virtual ~AppletChatRoomJoin();
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
 
     void                        toGuiInfoMsg( char * logMsg );
 

@@ -177,7 +177,7 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
     // enable broadcast
 #ifndef TARGET_OS_WINDOWS
     int broadcastEnable = 1;
-    if( 0 != setsockopt(m_Socket, SOL_SOCKET, SO_BROADCAST, (const char *)&broadcastEnable, sizeof(broadcastEnable)) )
+    if( 0 != setsockopt(m_Socket, SOL_SOCKET, SO_BROADCAST, (const char*)&broadcastEnable, sizeof(broadcastEnable)) )
     {
         m_rcLastSktError = VxGetLastError();
         LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: failed enable broadcast error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
@@ -417,9 +417,9 @@ void VxSktUdp::startReceive( void )
 
 //============================================================================
 //! send data to given ip 
-RCODE  VxSktUdp::sendTo(	const char *	pData,		// data to send
+RCODE  VxSktUdp::sendTo(	const char*	pData,		// data to send
 							int				iDataLen,	// data len
-							const char *	pRmtIp, 	// destination ip in dotted format
+							const char*	pRmtIp, 	// destination ip in dotted format
 							uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )
 {
 	InetAddress oAddr( pRmtIp );
@@ -428,9 +428,9 @@ RCODE  VxSktUdp::sendTo(	const char *	pData,		// data to send
 
 //============================================================================
 //! send data to given ip 
-RCODE  VxSktUdp::sendToMulticast(	const char *	pData,				// data to send
+RCODE  VxSktUdp::sendToMulticast(	const char*	pData,				// data to send
 									int				iDataLen,			// data len
-									const char *	muliticastGroupIp, 	// destination multicast group ip in dotted format
+									const char*	muliticastGroupIp, 	// destination multicast group ip in dotted format
 									uint16_t		u16Port )			// port to send to ( if 0 then port specified when opened )
 {
 	InetAddress oAddr( muliticastGroupIp );
@@ -451,7 +451,7 @@ RCODE  VxSktUdp::sendToMulticast(	const char *	pData,				// data to send
 
 //============================================================================
 //! send data to given ip 
-RCODE VxSktUdp::sendTo(		const char *	pData,		// data to send
+RCODE VxSktUdp::sendTo(		const char*	pData,		// data to send
 							int				iDataLen,	// data len
 							InetAddress&	oRmtIp, 	// destination ip in host ordered u32
 							uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )

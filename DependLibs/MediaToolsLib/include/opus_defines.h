@@ -711,13 +711,13 @@ extern "C" {
   * @param[in] error <tt>int</tt>: Error number
   * @returns Error string
   */
-OPUS_EXPORT const char *opus_strerror(int error);
+OPUS_EXPORT const char*opus_strerror(int error);
 
 /** Gets the libopus version string.
   *
   * @returns Version string
   */
-OPUS_EXPORT const char *opus_get_version_string(void);
+OPUS_EXPORT const char*opus_get_version_string(void);
 /**@}*/
 
 #ifdef __cplusplus

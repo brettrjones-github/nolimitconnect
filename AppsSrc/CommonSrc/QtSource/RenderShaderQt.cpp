@@ -122,7 +122,7 @@ void RenderGlShaders::compileShader( int shaderIdx )
 }
 
 //============================================================================
-bool RenderShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragmentShaderCode )
+bool RenderShaderQt::compileAndLink( const char* vertexShaderCode, const char*fragmentShaderCode )
 {
     bool result = true;
     m_proj = nullptr;
@@ -169,7 +169,7 @@ bool RenderShaderQt::compileAndLink( const char * vertexShaderCode, const char *
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinked( const char * vertexShaderCode, const char *fragmentShaderCode )
+void RenderShaderQt::onCompiledAndLinked( const char* vertexShaderCode, const char*fragmentShaderCode )
 {
     // This is called after CompileAndLink()
 
@@ -249,7 +249,7 @@ bool RenderShaderQt::validateProgram()
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
+void RenderShaderQt::onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode )
 {
     if( ( m_ShaderMethod != SM_VID_FILTER_CONVOLUTION_4X4_RGBA )
         && ( m_ShaderMethod != SM_VID_FILTER_CONVOLUTION_4X4_FLOAT )
@@ -267,7 +267,7 @@ void RenderShaderQt::onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const ch
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
+void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode )
 {
 
     //=== Variables passed directly to the Vertex shader ===//
@@ -444,7 +444,7 @@ void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char 
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
+void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode )
 {
     // Variables passed directly to the Vertex shader
     m_hVertex = glf->glGetAttribLocation( programId(), "m_attrpos" );
@@ -513,7 +513,7 @@ void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, con
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
+void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char* vertexShaderCode, const char*fragmentShaderCode )
 {
 #if ENABLE_KODI
     m_hVertex = glf->glGetAttribLocation( programId(), "m_attrpos" );
@@ -855,7 +855,7 @@ bool RenderShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-bool RenderShaderQt::verifyValidValue( GLint handle, const char * msg )
+bool RenderShaderQt::verifyValidValue( GLint handle, const char* msg )
 {
     if( handle < 0 )
     {
@@ -867,7 +867,7 @@ bool RenderShaderQt::verifyValidValue( GLint handle, const char * msg )
 }
 
 //============================================================================
-const char * RenderShaderQt::describeShader( ESHADERMETHOD shaderType )
+const char* RenderShaderQt::describeShader( ESHADERMETHOD shaderType )
 {
     switch( shaderType )
     {

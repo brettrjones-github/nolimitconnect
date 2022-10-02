@@ -26,7 +26,7 @@ class VxGUID;
 class ConnectInfoDb : public DbBase
 {
 public:
-   ConnectInfoDb( P2PEngine& engine,ConnectMgr& mgr, const char *dbName );
+   ConnectInfoDb( P2PEngine& engine,ConnectMgr& mgr, const char*dbName );
     virtual ~ConnectInfoDb() = default;
 
     void						lockConnectInfoDb( void ) { m_ConnectInfoDbMutex.lock(); }

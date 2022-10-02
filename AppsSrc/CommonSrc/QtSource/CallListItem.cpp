@@ -95,7 +95,7 @@ void CallListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser * hostIdent = hostSession->getHisIdent();
+    GuiUser* hostIdent = hostSession->getHisIdent();
     if( nullptr == hostIdent )
     {
         LogMsg( LOG_DEBUG, "CallListItem::updateWidgetFromInfo null gui user" );

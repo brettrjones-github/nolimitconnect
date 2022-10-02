@@ -41,7 +41,7 @@ static const char BASE64_TABLE[64]={
 
 /*Utility function for base64 encoding METADATA_BLOCK_PICTURE tags.
   Stores BASE64_LENGTH(len)+1 bytes in dst (including a terminating NUL).*/
-void base64_encode(char *dst, const char *src, int len){
+void base64_encode(char *dst, const char*src, int len){
   unsigned s0;
   unsigned s1;
   unsigned s2;
@@ -80,7 +80,7 @@ void base64_encode(char *dst, const char *src, int len){
 
 /*A version of strncasecmp() that is guaranteed to only ignore the case of
    ASCII characters.*/
-int oi_strncasecmp(const char *a, const char *b, int n){
+int oi_strncasecmp(const char*a, const char*b, int n){
   int i;
   for(i=0;i<n;i++){
     int aval;
@@ -233,8 +233,8 @@ void extract_jpeg_params(const unsigned char *data, size_t data_length,
    have already been added, to ensure only one is allowed.
   Return: A Base64-encoded string suitable for use in a METADATA_BLOCK_PICTURE
    tag.*/
-char *parse_picture_specification(const char *spec,
-                                  const char **error_message,
+char *parse_picture_specification(const char*spec,
+                                  const char**error_message,
                                   int *seen_file_icons){
   FILE          *picture_file;
   unsigned long  picture_type;
@@ -265,7 +265,7 @@ char *parse_picture_specification(const char *spec,
   is_url=0;
   picture_file=fopen(filename,"rb");
   if(picture_file==NULL&&strchr(spec,'|')){
-    const char *p;
+    const char*p;
     char       *q;
     /*We don't have a plain file, and there is a pipe character: assume it's
        the full form of the specification.*/

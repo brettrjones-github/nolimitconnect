@@ -27,7 +27,7 @@ class ActivitySessionOptions : public ActivityBase
 public:
 
 	ActivitySessionOptions(	AppCommon&			app,
-							VxNetIdent *			netIdent, 
+							VxNetIdent*			netIdent, 
 							QWidget*				parent = NULL );
 
 	ActivitySessionOptions(	AppCommon&			app,

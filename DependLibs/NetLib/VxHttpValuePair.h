@@ -24,17 +24,17 @@ private:
 	std::string m_strValue;
 
 public:
-	VxHttpValuePair( const char * lineStr);
-	VxHttpValuePair( const char * name, const char * value );
+	VxHttpValuePair( const char* lineStr);
+	VxHttpValuePair( const char* name, const char* value );
 	VxHttpValuePair( VxHttpValuePair * header );
 
 	~VxHttpValuePair();
 
-	void			setName( const char * name );
-	const char *	getName( void );
+	void			setName( const char* name );
+	const char*	getName( void );
 	bool			hasName( void );
-	void			setValue( const char *value );
-	const char *	getValue( void );
+	void			setValue( const char*value );
+	const char*	getValue( void );
 };
 
 

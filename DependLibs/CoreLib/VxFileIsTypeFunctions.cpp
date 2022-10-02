@@ -39,7 +39,7 @@ bool VxIsPhotoFile( std::string & cs )
 }
 
 //============================================================================
-bool VxIsPhotoFileExtention( const char * pExt )
+bool VxIsPhotoFileExtention( const char* pExt )
 {
 	return stristr( PHOTO_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -52,7 +52,7 @@ bool VxIsAudioFile( std::string & cs )
 	return VxIsAudioFileExtention( csExt.c_str() );
 }
 //============================================================================
-bool VxIsAudioFileExtention( const char * pExt )
+bool VxIsAudioFileExtention( const char* pExt )
 {
 	return stristr( AUDIO_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -65,7 +65,7 @@ bool VxIsVideoFile( std::string &cs )
 	return VxIsVideoFileExtention( csExt.c_str() );
 }
 //============================================================================
-bool VxIsVideoFileExtention( const char * pExt )
+bool VxIsVideoFileExtention( const char* pExt )
 {
 	return stristr( VIDEO_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -79,7 +79,7 @@ bool VxIsDocumentFile( std::string &cs )
 }
 
 //============================================================================
-bool VxIsDocumentFileExtention( const char * pExt )
+bool VxIsDocumentFileExtention( const char* pExt )
 {
 	return stristr( DOCUMENT_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -93,7 +93,7 @@ bool VxIsArcOrCDImageFile( std::string &cs )
 }
 
 //============================================================================
-bool VxIsArcOrCDImageFileExtention( const char * pExt )
+bool VxIsArcOrCDImageFileExtention( const char* pExt )
 {
 	return stristr( CDIMAGE_OR_ARC_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -107,7 +107,7 @@ bool VxIsExecutableFile( std::string &cs )
 }
 
 //============================================================================
-bool VxIsExecutableFileExtention( const char * pExt )
+bool VxIsExecutableFileExtention( const char* pExt )
 {
 	return stristr( EXECUTABLE_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -121,7 +121,7 @@ bool VxIsThumbnailFile( std::string &cs )
 }
 
 //============================================================================
-bool VxIsThumbnailFileExtention( const char * pExt )
+bool VxIsThumbnailFileExtention( const char* pExt )
 {
     return stristr( THUMBNAIL_FILE_EXTENTIONS, pExt )?1:0;
 }
@@ -135,13 +135,13 @@ bool VxIsRecognizedFile( std::string &cs )
 }
 
 //============================================================================
-bool VxIsRecognizedFileExtention( const char * pExt )
+bool VxIsRecognizedFileExtention( const char* pExt )
 {
 	return stristr( COMBINED_FILE_EXTENTIONS, pExt )?0:1;
 }
 
 //============================================================================
-bool VxIsShortcutFileExtention( const char * pExt )
+bool VxIsShortcutFileExtention( const char* pExt )
 {
 #ifdef TARGET_OS_WINDOWS
 	return stristr( pExt, "lnk" ) ? true : false;
@@ -165,12 +165,12 @@ bool VxIsShortcutFile( std::string& fileName )
 }
 
 //============================================================================
-uint8_t	VxFileExtensionToFileTypeFlag( const char *	pFileExt )
+uint8_t	VxFileExtensionToFileTypeFlag( const char*	pFileExt )
 {
 	uint8_t u8FileType = VXFILE_TYPE_OTHER;
 	if( pFileExt )
 	{
-		const char * extension = strrchr( pFileExt, '.' );
+		const char* extension = strrchr( pFileExt, '.' );
 		if( extension )
 		{
 			extension++;

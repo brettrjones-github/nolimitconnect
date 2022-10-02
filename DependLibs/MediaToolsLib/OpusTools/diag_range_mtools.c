@@ -217,8 +217,8 @@ static int opus_packet_parse_impl(const unsigned char *data, opus_int32 len,
 void save_range(FILE *frange, int frame_size, unsigned char *packet, int nbBytes, opus_uint32 *rngs, int nb_streams){
   int i, parsed_size;
   const unsigned char *subpkt;
-  static const char *bw_strings[5]={"NB","MB","WB","SWB","FB"};
-  static const char *mode_strings[3]={"LP","HYB","MDCT"};
+  static const char*bw_strings[5]={"NB","MB","WB","SWB","FB"};
+  static const char*mode_strings[3]={"LP","HYB","MDCT"};
   fprintf(frange,"%d, %d, ",frame_size,nbBytes);
   subpkt=packet;
   parsed_size=nbBytes;

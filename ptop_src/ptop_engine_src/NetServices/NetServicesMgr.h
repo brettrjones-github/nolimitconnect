@@ -86,7 +86,7 @@ public:
 	VxSktConnectSimple *		actionReqConnectToHost( void );
 	bool						actionReqConnectToHost( VxSktConnectSimple& sktSimple );
 
-	bool						doNetCmdPing( const char * ipAddress, uint16_t u16Port, std::string& retPong );
+	bool						doNetCmdPing( const char* ipAddress, uint16_t u16Port, std::string& retPong );
 
 	ENetCmdError				doIsMyPortOpen( std::string& retMyExternalIp, bool testLoopbackFirst = false );
 	bool						testLoobackPing( std::string localIP, uint16_t tcpListenPort );

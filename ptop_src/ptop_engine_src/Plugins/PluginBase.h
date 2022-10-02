@@ -125,29 +125,29 @@ public:
 
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
-	virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile )	{ return 0; }
+	virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile )	{ return 0; }
 
 	virtual void				fromGuiCancelDownload( VxGUID& fileInstance ) {};
 	virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) {};
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				// identity of friend
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				// identity of friend
 														int				pvUserData,
-														const char *	pOfferMsg,				// offer message
-														const char *	pFileName = NULL,
+														const char*	pOfferMsg,				// offer message
+														const char*	pFileName = NULL,
 														uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
-	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
+	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
 													int				pvUserdata,				
 													EOfferResponse	eOfferResponse,
 													VxGUID			lclSessionId );
 
-	virtual int					fromGuiPluginControl(	VxNetIdent *	netIdent,
-														const char *	pControl, 
-														const char *	pAction,
+	virtual int					fromGuiPluginControl(	VxNetIdent*	netIdent,
+														const char*	pControl, 
+														const char*	pAction,
 														uint32_t		u32ActionData,
 														VxGUID&			fileId,
 														uint8_t *		fileHashId );
 
-	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char *	pMsg );
+	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char*	pMsg );
 	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
 
 	virtual bool				fromGuiSetGameValueVar(	VxNetIdent* netIdent, int32_t varId, int32_t varValue )		{ return false; };
@@ -165,7 +165,7 @@ public:
 	virtual void				onSpeexData( uint16_t * pu16SpeexData, uint16_t u16SpeexDataLen )				    {};
 	virtual void				fromGuiVideoData( uint8_t * pu8VidData, uint32_t u32VidDataLen, int iRotation )	    {};
     virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo )                                        { return false; };
-	virtual bool				fromGuiMultiSessionAction( VxNetIdent *	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) { return false; }; 
+	virtual bool				fromGuiMultiSessionAction( VxNetIdent*	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) { return false; }; 
 
     //=== hosting ===//
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )	        {};
@@ -272,7 +272,7 @@ public:
     virtual void				onPktThumbXferErr           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
     // error handling for invalid packet
-    virtual void				onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char * msg = "" );
+    virtual void				onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char* msg = "" );
 
     //=== sessions ===//
     virtual void				onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked );
@@ -313,7 +313,7 @@ public:
 	virtual	void				onNetworkConnectionReady( bool requiresRelay ) {};
 
 protected:
-	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
+	virtual void				makeShortFileName( const char* pFullFileName, std::string& strShortFileName );
 
     static std::string          getThumbXferDbName( EPluginType pluginType );
     static std::string          getThumbXferThreadName( EPluginType pluginType );
@@ -328,7 +328,7 @@ protected:
     ThumbMgr&                   m_ThumbMgr;
     ThumbXferMgr                m_ThumbXferMgr; 
 	
-	VxNetIdent *				m_MyIdent = nullptr;
+	VxNetIdent*				m_MyIdent = nullptr;
 
 	EAppState					m_ePluginState = eAppStateInvalid;
 	VxMutex						m_PluginMutex;

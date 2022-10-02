@@ -250,7 +250,7 @@ public:
 
 #ifdef SHA1_UTILITY_FUNCTIONS
 	// Hash in file contents
-    bool HashFile( const char * tszFileName, VxThread * workThread );
+    bool HashFile( const char* tszFileName, VxThread* workThread );
 #endif
 
 	// Finalize hash; call it before using ReportHash(Stl)

@@ -23,7 +23,7 @@
 
 //============================================================================
 ActivitySessionOptions::ActivitySessionOptions(	AppCommon&			app,
-												VxNetIdent *			netIdent, 
+												VxNetIdent*			netIdent, 
 												QWidget*				parent )
 : ActivityBase( OBJNAME_ACTIVITY_SESSION_OPTIONS, app, parent )
 {

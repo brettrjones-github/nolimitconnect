@@ -21,7 +21,7 @@ class AppletLaunchPage : public ActivityBase
 {
 	Q_OBJECT
 public:
-	AppletLaunchPage( AppCommon& app, QWidget* parent, EApplet eAppletType, const char * objName );
+	AppletLaunchPage( AppCommon& app, QWidget* parent, EApplet eAppletType, const char* objName );
 	virtual ~AppletLaunchPage() = default;
 
 

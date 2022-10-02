@@ -26,7 +26,7 @@ class UserJoinMgr;
 class UserJoinInfoDb : public DbBase
 {
 public:
-    UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& mgr, const char *dbName );
+    UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& mgr, const char*dbName );
     virtual ~UserJoinInfoDb() = default;
 
     bool						userJoinInfoDbStartup( int dbVersion, const char* dbFileName );

@@ -21,7 +21,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostBase::AppletHostBase( const char * objName, AppCommon& app, QWidget* parent )
+AppletHostBase::AppletHostBase( const char* objName, AppCommon& app, QWidget* parent )
     : AppletBase( objName, app, parent )
 {
 }

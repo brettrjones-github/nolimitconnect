@@ -45,8 +45,8 @@ PersonOfferListWidget::PersonOfferListWidget( QWidget* parent )
     connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),
                           this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-    connect( this, SIGNAL(signalUpdateFriend( GuiUser *,bool)),
-                          this, SLOT(slotUpdateFriend( GuiUser *,bool)), Qt::QueuedConnection );
+    connect( this, SIGNAL(signalUpdateFriend( GuiUser*,bool)),
+                          this, SLOT(slotUpdateFriend( GuiUser*,bool)), Qt::QueuedConnection );
 
     connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGUID)),
                           this, SLOT(slotRefreshFriend(VxGUID)), Qt::QueuedConnection )
@@ -105,7 +105,7 @@ void PersonOfferListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, 
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-			GuiUser * poFriend = poWidget->getUser();
+			GuiUser* poFriend = poWidget->getUser();
 			if( poFriend
 				&& ( poFriend->getMyOnlineId() == onlineId ) )
 			{
@@ -148,7 +148,7 @@ void PersonOfferListWidget::slotRefreshFriendList( EFriendViewType eWhichFriends
 }
 
 //============================================================================
-void PersonOfferListWidget::updateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
+void PersonOfferListWidget::updateFriend( GuiUser* netIdent, bool sessionTimeChange ) 
 {
 	emit signalUpdateFriend( netIdent, sessionTimeChange );
 }
@@ -218,7 +218,7 @@ void PersonOfferListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* 
 }
 
 //============================================================================
-void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
+void PersonOfferListWidget::slotUpdateFriend( GuiUser* netIdent, bool sessionTimeChange ) 
 {
 	LogMsg( LOG_INFO, "PersonOfferListWidget::slotUpdateFriend  %d\n", this->count() );
 	FriendListEntryWidget * poWidget = findListEntryWidget( netIdent );
@@ -247,7 +247,7 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 				listEntryWidget = (FriendListEntryWidget *)this->item( rowIdx );
 				if( listEntryWidget )
 				{
-                    GuiUser * listEntryFriend =listEntryWidget->getUser();
+                    GuiUser* listEntryFriend =listEntryWidget->getUser();
 					if( listEntryFriend )
 					{
 						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
@@ -290,7 +290,7 @@ void PersonOfferListWidget::slotRefreshFriend( VxGUID friendId )
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-            GuiUser * poFriend = poWidget->getUser();
+            GuiUser* poFriend = poWidget->getUser();
 			if( poFriend
 				&& ( poFriend->getMyOnlineId().getVxGUIDHiPart() == friendId.getVxGUIDHiPart() )
 				&& ( poFriend->getMyOnlineId().getVxGUIDLoPart() == friendId.getVxGUIDLoPart() ) )
@@ -307,7 +307,7 @@ void PersonOfferListWidget::slotRefreshFriend( VxGUID friendId )
 
 //============================================================================
 //! called when friend in list is removed
-void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
+void PersonOfferListWidget::removeFriend( GuiUser* netIdent )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -316,7 +316,7 @@ void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-            GuiUser * poFriend = poWidget->getUser();
+            GuiUser* poFriend = poWidget->getUser();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
                 LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName().c_str(), iIdx );
@@ -330,7 +330,7 @@ void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
 }
 
 //============================================================================
-void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, FriendListEntryWidget * poWidget )
+void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser* netIdent, FriendListEntryWidget * poWidget )
 {
 	if(  netIdent->isOnline() )
 	{
@@ -344,7 +344,7 @@ void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, 
 
 //============================================================================
 //!	fill friend into new QListWidgetItem *
-FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser * poFriend )
+FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser* poFriend )
 {
 	FriendListEntryWidget * item = new FriendListEntryWidget( this );
     item->setData( Qt::UserRole + 2, QVariant((quint64)(poFriend)) );
@@ -356,7 +356,7 @@ FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser * poFrien
 }
 
 //============================================================================
-void PersonOfferListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent )
+void PersonOfferListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser* netIdent )
 {
 	item->updateIdentity( netIdent );
     // display in seconds
@@ -366,13 +366,13 @@ void PersonOfferListWidget::updateListEntryWidget( FriendListEntryWidget * item,
 
 //============================================================================
 //!	get friend from QListWidgetItem data
-GuiUser * PersonOfferListWidget::widgetToFriend( FriendListEntryWidget * item )
+GuiUser* PersonOfferListWidget::widgetToFriend( FriendListEntryWidget * item )
 {
 	return item->getUser();
 }
 
 //============================================================================
-FriendListEntryWidget * PersonOfferListWidget::findListEntryWidget( GuiUser * netIdent )
+FriendListEntryWidget * PersonOfferListWidget::findListEntryWidget( GuiUser* netIdent )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -381,7 +381,7 @@ FriendListEntryWidget * PersonOfferListWidget::findListEntryWidget( GuiUser * ne
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-            GuiUser * poFriend = poWidget->getUser();
+            GuiUser* poFriend = poWidget->getUser();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
 				return poWidget;

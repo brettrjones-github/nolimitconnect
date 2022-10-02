@@ -47,9 +47,9 @@ public:
 	void						setIsRemoteInitiated( bool bIsRemoteInitiated ) { m_bRmtInitiated = bIsRemoteInitiated; }
 	bool						getIsRemoteInitiated( void )			{ return m_bRmtInitiated; }
 
-	void						setHisIdent( GuiUser * netIdent )	    { m_HisIdent = netIdent; }
-    GuiUser *				    getHisIdent( void )						{ return m_HisIdent; }
-	void						setOfferMsg( const char * msg )			{ m_strOfferMsg = msg; }
+	void						setHisIdent( GuiUser* netIdent )	    { m_HisIdent = netIdent; }
+    GuiUser*				    getHisIdent( void )						{ return m_HisIdent; }
+	void						setOfferMsg( const char* msg )			{ m_strOfferMsg = msg; }
 	std::string&				getOfferMsg( void )						{ return m_strOfferMsg; }
 	std::vector<std::string>&	getQuedMessages( void )					{ return m_aoQuedMessages; }
 
@@ -76,13 +76,13 @@ public:
 
 	bool						isOfferAccepted( void )					{ return (m_eOfferResponse == eOfferResponseAccept); }
 	bool						isOfferRejected( void )					{ return (m_eOfferResponse == eOfferResponseReject)||(m_eOfferResponse == eOfferResponseEndSession); }
-	void						addMsg( const char * pMsg );
+	void						addMsg( const char* pMsg );
 
 	void						setIsMissedCall( void )					{ m_MissedCalls++; }
 	void						setMissedCallsCnt( int missedCnt )		{ m_MissedCalls = missedCnt; }
 	int							getMissedCallsCnt( void )				{ return m_MissedCalls; }
 
-	void						setFileName( const char * fileName );
+	void						setFileName( const char* fileName );
 	std::string&				getFileName( void )						{ return m_strFileName; }
 	void						setFileHashId( VxSha1Hash& hashId )		{ m_FileHashId = hashId; }
 	void						setFileHashId( uint8_t * id )			{ m_FileHashId.setHashData( id ); }
@@ -94,7 +94,7 @@ public:
 protected:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
-    GuiUser *				    m_HisIdent;
+    GuiUser*				    m_HisIdent;
 	int							m_pvUserData;
 	bool						m_bRmtInitiated;
 	bool						m_bHasBeenViewed;

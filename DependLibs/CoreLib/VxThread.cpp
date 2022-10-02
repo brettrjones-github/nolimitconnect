@@ -36,7 +36,7 @@
 class VxThreadInfo
 {
 public:
-    VxThreadInfo( unsigned int threadId, const char * threadName )
+    VxThreadInfo( unsigned int threadId, const char* threadName )
         : m_ThreadId( threadId )
         , m_ThreadName( threadName )
     {
@@ -81,12 +81,12 @@ namespace
     int							g_ThreadCreateCnt{ 0 };
 	unsigned int				g_GuiThreadId{ 0 };
     VxMutex						g_DebugThreadsMutex;
-    std::vector<VxThread *>		g_RuningThreadList;
+    std::vector<VxThread*>		g_RuningThreadList;
     std::vector<VxThreadInfo>   g_RuningThreadInfo;
 }
 
 //============================================================================
-void VxThreadDefaultStartCallback( unsigned int threadId, const char * threadName )
+void VxThreadDefaultStartCallback( unsigned int threadId, const char* threadName )
 {
 #ifdef ENABLE_THREAD_INFO
     if( threadName )
@@ -105,7 +105,7 @@ void VxThreadDefaultStartCallback( unsigned int threadId, const char * threadNam
 }
 
 //============================================================================
-void VxThreadDefaultStopCallback( unsigned int threadId, bool iIsExitCallbackLocked, const char * threadName )
+void VxThreadDefaultStopCallback( unsigned int threadId, bool iIsExitCallbackLocked, const char* threadName )
 {
 #ifdef ENABLE_THREAD_INFO
     if( threadName )
@@ -211,7 +211,7 @@ void VxThread::dumpRunningThreads( void )
 	{
 		LogMsg( LOG_INFO, "Threads running %d time now %s\n", g_RuningThreadList.size(), VxTimeUtil::getLocalDateAndTimeWithNumberMonths(true).c_str() );
 
-		std::vector<VxThread *>::iterator iter;
+		std::vector<VxThread*>::iterator iter;
 		g_DebugThreadsMutex.lock();
 		for( iter = g_RuningThreadList.begin(); iter != g_RuningThreadList.end(); ++iter )
 		{
@@ -281,7 +281,7 @@ void VxThread::setThreadExitCallback( VX_THREAD_EXIT_CALLBACK_T func )
 //============================================================================
 RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function that thread calls
 								void *					pvUserParam, 		// caller defined param
-								const char *			pThreadName,		// thread name
+								const char*			pThreadName,		// thread name
 								int						iExtraStackSpace )	// will be added to minimum stack size	
 {
     if( this->isThreadRunning() )
@@ -391,7 +391,7 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 }
 
 //============================================================================
-const char * VxThread::getThreadName( void )
+const char* VxThread::getThreadName( void )
 {
 	return m_strThreadName.c_str();
 }
@@ -480,7 +480,7 @@ void VxThread::setIsThreadRunning( bool bIsRunning, bool calledFromStartedThread
 #ifdef ENABLE_THREAD_INFO
 		//if ( false == VxIsAppShuttingDown() )
 		{
-			std::vector<VxThread *>::iterator iter;
+			std::vector<VxThread*>::iterator iter;
 			g_DebugThreadsMutex.lock();
 			bool foundOurself = false;
 			for( iter = g_RuningThreadList.begin(); iter != g_RuningThreadList.end(); ++iter )
@@ -534,7 +534,7 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
 				VxGetCurrentThreadTid() );
 		}
 
-		std::vector<VxThread *>::iterator iter;
+		std::vector<VxThread*>::iterator iter;
 		g_DebugThreadsMutex.lock();
 		for( iter = g_RuningThreadList.begin(); iter != g_RuningThreadList.end(); ++iter )
 		{

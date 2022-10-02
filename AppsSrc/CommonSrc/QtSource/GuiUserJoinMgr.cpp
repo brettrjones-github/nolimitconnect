@@ -204,7 +204,7 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( VxNetIdent* hisIdent, EHostType hos
     VxGUID myOnlineId = m_MyApp.getMyOnlineId();
     GroupieId groupieId( myOnlineId, hisIdent->getMyOnlineId(), hostType );
     GuiUserJoin* guiUserJoin = findUserJoin( groupieId );
-    GuiUser * guiUser = m_MyApp.getUserMgr().updateUser( hisIdent );
+    GuiUser* guiUser = m_MyApp.getUserMgr().updateUser( hisIdent );
     if( guiUser )
     {
         if( guiUserJoin )

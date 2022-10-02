@@ -35,7 +35,7 @@ void VxToBase64(	std::string & csOrigStr,			//string to convert
 	int iLen = (int)csOrigStr.size();
 	char * pBuf= new char[ ( iLen + 2 ) / 3 * 4 + 1 ];
 	//char * pBuf= csRetBase64Str.GetBuffer( ( iLen + 2 ) / 3 * 4 + 1 );
-	unsigned char * pu8Str = (unsigned char *)(const char *)csOrigStr.c_str();
+	unsigned char * pu8Str = (unsigned char *)(const char*)csOrigStr.c_str();
 	int i = 0;
 	int j = 0;
 	
@@ -109,10 +109,10 @@ char * VxProxy::GetBasicAuth( void )
 }
 
 RCODE VxProxy::SetProxy(	int iProxyType,	//Type of proxy	
-							const char * pProxyHost,		//Proxy Host name
+							const char* pProxyHost,		//Proxy Host name
 							const unsigned short u16ProxyPort,//Proxy port
-							const char * pProxyAcctName,	//Proxy Account Name
-							const char * pProxyAcctPwd )	//Proxy Account Pwd
+							const char* pProxyAcctName,	//Proxy Account Name
+							const char* pProxyAcctPwd )	//Proxy Account Pwd
 {
 	RCODE rc = 0;
 	m_iProxyType = iProxyType;
@@ -227,7 +227,7 @@ RCODE VxProxy::OnConnect( VxSkt * sktBase, int iErrorCode )
 			command[ 1 ]=m_bUseLogon ? 2 : 1; //Number of logon types
 			command[ 2 ]=m_bUseLogon ? 2 : 0; //2=user/pass, 0=no logon
 			int len = m_bUseLogon ? 4 : 3; //length of request
-			iResult = send( sktBase->m_hSocket, (const char *)command, len, 0 ); //Send command
+			iResult = send( sktBase->m_hSocket, (const char*)command, len, 0 ); //Send command
 			if( SOCKET_ERROR == iResult || 
 				iResult < len )
 			{
@@ -447,7 +447,7 @@ RCODE VxProxy::OnReceive( VxSkt * sktBase, int iErrorCode)
 					sktBase->ClearBuffer();
 
 					//send request
-					int iResult = send( sktBase->m_hSocket, (const char *)buffer, len, 0 ); //Send command
+					int iResult = send( sktBase->m_hSocket, (const char*)buffer, len, 0 ); //Send command
 					delete [] buffer;
 					if( SOCKET_ERROR == iResult || iResult < len )
 					{

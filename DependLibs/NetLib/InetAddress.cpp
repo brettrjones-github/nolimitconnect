@@ -57,7 +57,7 @@ InetAddrIPv4::InetAddrIPv4(const InetAddrIPv4& rhs)
 }
 
 //============================================================================
-InetAddrIPv4::InetAddrIPv4( const char * pIpAddress )
+InetAddrIPv4::InetAddrIPv4( const char* pIpAddress )
 : m_u32AddrIPv4(0)
 {
 	fromString( pIpAddress );
@@ -163,7 +163,7 @@ InetAddress InetAddrIPv4::toInetAddress( void )
 }
 
 //============================================================================
-void InetAddrIPv4::fromString( const char * pIpAddress )
+void InetAddrIPv4::fromString( const char* pIpAddress )
 {
 	if( ( NULL == pIpAddress ) || 
 		( 0 == strlen( pIpAddress ) ) ||
@@ -185,7 +185,7 @@ void InetAddrIPv4::fromString( const char * pIpAddress )
 }
 
 //============================================================================
-bool InetAddrIPv4::isIPv4String( const char * pIpAddress ) const
+bool InetAddrIPv4::isIPv4String( const char* pIpAddress ) const
 {
 	if( pIpAddress
 		&& (strlen(pIpAddress) < 16 )
@@ -233,7 +233,7 @@ bool InetAddrIPv4::setIp( uint32_t u32IPv4Addr, bool bIsHostOrder )
 }
 
 //============================================================================
-bool InetAddrIPv4::setIp( const char * pIp )
+bool InetAddrIPv4::setIp( const char* pIp )
 {
     uint32_t oldAddrIPv4 = m_u32AddrIPv4;
 	fromString( pIp );
@@ -473,7 +473,7 @@ void InetAddrIPv4AndPort::setIpAndPort( struct sockaddr& oAddr )
 // InetAddress
 
 //============================================================================
-InetAddress::InetAddress( const char * pIpAddress )
+InetAddress::InetAddress( const char* pIpAddress )
 : m_u64AddrHi(0)
 , m_u64AddrLo(0)
 {
@@ -803,7 +803,7 @@ int InetAddress::getAllAddresses( std::vector<InetAddress>& retAddresses )
                 inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
                 //LogMsg( LOG_INFO, "%s IP Address %s\n", ifa->ifa_name, addressBuffer);
                 InetAddress oTestAddr;
-                oTestAddr.setIp( (const char *)(&addressBuffer[0]) );
+                oTestAddr.setIp( (const char*)(&addressBuffer[0]) );
                 if( oTestAddr.isValid() && ( false == oTestAddr.isLoopBack() ) )
                 {
                     retAddresses.push_back(oTestAddr);
@@ -817,7 +817,7 @@ int InetAddress::getAllAddresses( std::vector<InetAddress>& retAddresses )
                 inet_ntop(AF_INET6, tmpAddrPtr, addressBuffer, INET6_ADDRSTRLEN);
                 //LogMsg( LOG_INFO, "%s IP Address %s\n", ifa->ifa_name, addressBuffer);
                 InetAddress oTestAddr;
-                oTestAddr.setIp( (const char *)(&addressBuffer[0]) );
+                oTestAddr.setIp( (const char*)(&addressBuffer[0]) );
                 if( oTestAddr.isValid() && ( false == oTestAddr.isLoopBack() ) )
                 {
                     retAddresses.push_back(oTestAddr);
@@ -992,7 +992,7 @@ void InetAddress::setToInvalid( void )
 }
 
 //============================================================================
-void InetAddress::fromString( const char * pIpAddress )
+void InetAddress::fromString( const char* pIpAddress )
 {
 	if( ( NULL == pIpAddress ) || 
 		( 0 == strlen( pIpAddress ) ) ||
@@ -1014,7 +1014,7 @@ void InetAddress::fromString( const char * pIpAddress )
 }
 
 //============================================================================
-bool InetAddress::isIPv4String( const char * pIpAddress ) const
+bool InetAddress::isIPv4String( const char* pIpAddress ) const
 {
 	if( pIpAddress
 		 && (strlen(pIpAddress) < 16 )
@@ -1091,7 +1091,7 @@ void InetAddress::setIp( uint32_t u32IPv4Addr, bool bIsHostOrder )
 }
 
 //============================================================================
-void InetAddress::setIp( const char * pIp )
+void InetAddress::setIp( const char* pIp )
 {
 	fromString( pIp );
 }
@@ -1298,7 +1298,7 @@ void InetAddress::litteEndianToNetIPv6( uint16_t * src, uint16_t * dest )
 //============================================================================
 
 //============================================================================
-InetAddrAndPort::InetAddrAndPort( const char * ipAddr )
+InetAddrAndPort::InetAddrAndPort( const char* ipAddr )
 : InetAddress( ipAddr )
 , m_u16Port(0)
 {
@@ -1336,7 +1336,7 @@ bool InetAddrAndPort::extractFromBlob( PktBlobEntry& blob )
 }
 
 //============================================================================
-InetAddrAndPort::InetAddrAndPort( const char * ipAddr, uint16_t port )
+InetAddrAndPort::InetAddrAndPort( const char* ipAddr, uint16_t port )
 : InetAddress( ipAddr )
 , m_u16Port( port )
 {
@@ -1395,7 +1395,7 @@ void InetAddrAndPort::setIpAndPort( struct sockaddr& oAddr )
 }
 
 //============================================================================
-void InetAddrAndPort::setIpAndPort( const char * ipAddr, uint16_t port )
+void InetAddrAndPort::setIpAndPort( const char* ipAddr, uint16_t port )
 {
     setIp( ipAddr );
     m_u16Port = port;

@@ -349,7 +349,7 @@ bool OsInterface::initUserPaths()
 
     // unfortunately asset manager does not have something like sub directory detection so have to copy each directory individualy
     //dir "F:\gotvptop\bin-Android\assets" > "F:\gotvptop\bin-Android\assetList.txt"
-    const char * IS_COPIED_FILE = "/ApkVer1_0.txt";
+    const char* IS_COPIED_FILE = "/ApkVer1_0.txt";
     if( !VxFileUtil::fileExists( ( kodiCachedAssetsPath + IS_COPIED_FILE ).c_str() ) )
     {
         bool result = true;
@@ -362,7 +362,7 @@ bool OsInterface::initUserPaths()
 
         if( result )
         {
-            const char * junkText = "completed\n";
+            const char* junkText = "completed\n";
             VxFileUtil::writeWholeFile( ( kodiCachedAssetsPath + IS_COPIED_FILE ).c_str(), (void *)junkText, (uint32_t)strlen(junkText) );
         }
         else

@@ -71,7 +71,7 @@ public:
 	void						restartNetwork( void );
 
 	void						fromGuiUserLoggedOn( void );
-	void						fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork = false );
+	void						fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork = false );
 	void						fromGuiNetworkLost( void );
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
 

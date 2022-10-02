@@ -23,9 +23,9 @@
 //! called if hacker offense is detected
 void P2PEngine::hackerOffense(	EHackerLevel	hackerLevel,			
                                 EHackerReason	hackerReason,	
-                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )                             
+                                VxNetIdent*	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )                             
 								InetAddress		IpAddr,					// ip address if identity not known
-								const char *	pMsg, ... )				// message about the offense
+								const char*	pMsg, ... )				// message about the offense
 {
 	char szBuffer[4096];
     szBuffer[0] = 0;
@@ -53,8 +53,8 @@ void P2PEngine::hackerOffense(	EHackerLevel	hackerLevel,
 //! called if hacker offense is detected
 void P2PEngine::hackerOffense(	EHackerLevel	hackerLevel,			    
                                 EHackerReason   hackerReason,
-                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )                           
-                                const char *	pMsg, ... )				// message about the offense
+                                VxNetIdent*	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )                           
+                                const char*	pMsg, ... )				// message about the offense
 {
     char szBuffer[4096];
     szBuffer[0] = 0;

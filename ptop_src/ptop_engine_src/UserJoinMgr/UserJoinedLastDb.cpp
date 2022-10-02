@@ -34,7 +34,7 @@ namespace
 };
 
 //============================================================================
-UserJoinedLastDb::UserJoinedLastDb( P2PEngine& engine, UserJoinMgr& hostListMgr, const char *dbName )
+UserJoinedLastDb::UserJoinedLastDb( P2PEngine& engine, UserJoinMgr& hostListMgr, const char*dbName )
     : DbBase( dbName )
     , m_Engine( engine )
     , m_UserJoinMgr( hostListMgr )

@@ -24,8 +24,8 @@ public:
 	VxTextStreamReader();
 	virtual ~VxTextStreamReader() {};
 
-	void				setStreamData( const char * pData );
-	const char *		getStreamData( void );
+	void				setStreamData( const char* pData );
+	const char*		getStreamData( void );
 	bool 				readStreamLine( std::string& retStrValue );
 	int					readStreamData( std::string& retStrValue, int lenToRead );
 	int					skipStreamData( int iSkipLen );

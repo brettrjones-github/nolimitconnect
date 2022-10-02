@@ -1207,7 +1207,7 @@ uint8_t GuiHelpers::joinRequestToIndex( EJoinState joinState )
 }
 
 //============================================================================
-void GuiHelpers::setValuesFromIdentity( QWidget* curWidget, VxNetIdent * ident, QComboBox *  ageCombo, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setValuesFromIdentity( QWidget* curWidget, VxNetIdent* ident, QComboBox *  ageCombo, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && ageCombo && genderCombo && languageCombo && contentCombo )
     {
@@ -1219,7 +1219,7 @@ void GuiHelpers::setValuesFromIdentity( QWidget* curWidget, VxNetIdent * ident, 
 }
 
 //============================================================================
-void GuiHelpers::setIdentityFromValues( QWidget* curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setIdentityFromValues( QWidget* curWidget, VxNetIdent* ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
     {

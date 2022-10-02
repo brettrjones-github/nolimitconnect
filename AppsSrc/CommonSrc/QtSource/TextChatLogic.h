@@ -34,7 +34,7 @@ class TextChatLogic : public QWidget
 public:
 	TextChatLogic( AppCommon& myApp, P2PEngine& engine, EPluginType pluginType, QWidget* parent );
 
-	void						setGuiWidgets(	VxNetIdent *	hisIdent );
+	void						setGuiWidgets(	VxNetIdent*	hisIdent );
 
 signals:
 	void						signalUserWentOffline( void );
@@ -47,5 +47,5 @@ protected:
 	AppCommon& 				m_MyApp;
 	P2PEngine&					m_Engine; 
 	EPluginType					m_ePluginType;
-	VxNetIdent *				m_HisIdent;
+	VxNetIdent*				m_HisIdent;
 };

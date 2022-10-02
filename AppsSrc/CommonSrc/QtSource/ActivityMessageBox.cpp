@@ -39,7 +39,7 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget* parent )
 }
 
 //============================================================================
-ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget* parent, int infoLevel, const char * msgFormat, ... )
+ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget* parent, int infoLevel, const char* msgFormat, ... )
 : ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, true )
 , m_OkButtonClicked( false )
 {

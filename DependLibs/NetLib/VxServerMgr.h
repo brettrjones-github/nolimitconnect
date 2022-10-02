@@ -46,7 +46,7 @@ public:
 	virtual void				fromGuiKickWatchdog( void );
 	virtual bool				checkWatchdog( void );
 
-    virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr );
+    virtual bool				startListening( uint16_t u16ListenPort, const char* ip = nullptr );
     virtual RCODE				stopListening( void );
     virtual bool				restartListening( void );
 
@@ -54,7 +54,7 @@ public:
     virtual bool                startListeningOldAttepts( uint16_t u16ListenPort, const char* ip );
     virtual bool                startListeningNoBind( uint16_t u16ListenPort );
 
-	void						listenForConnectionsToAccept( VxThread * poVxThread );
+	void						listenForConnectionsToAccept( VxThread* poVxThread );
     bool                        createNewListenSocket( uint16_t listenPort, SOCKET& retListenSock );
 
 public:
@@ -64,7 +64,7 @@ public:
 protected:
     bool                        createListenSocket( std::string &preferredIp, SOCKET &listenSock, uint16_t listenPort, std::string &actualListenLocalIp );
     RCODE						internalStartListen( void );
-    RCODE 						acceptConnection( VxThread * poVxThread, SOCKET oListenSkt );
+    RCODE 						acceptConnection( VxThread* poVxThread, SOCKET oListenSkt );
     void                        closeListenSocket( void );
 
     static constexpr size_t     m_u32MaxConnections = 10000;

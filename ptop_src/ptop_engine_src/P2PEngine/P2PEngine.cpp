@@ -26,6 +26,7 @@
 #include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginLibraryServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
 
 #include <ptop_src/ptop_engine_src/Search/RcScan.h>
@@ -109,6 +110,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_NetworkStateMachine( *new NetworkStateMachine( *this, m_NetworkMgr ) )
 	, m_PluginMgr( *new PluginMgr( *this ) )
 	, m_PluginSettingMgr( *this )
+	, m_PluginLibraryServer( new PluginLibraryServer( *this, m_PluginMgr, &m_PktAnn, ePluginTypeLibraryServer ) )
 	, m_PluginFileShareServer( new PluginFileShareServer( *this, m_PluginMgr, &m_PktAnn, ePluginTypeFileShareServer ) )
 	, m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn, ePluginTypeNetServices ) )
 	, m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
@@ -378,7 +380,7 @@ void P2PEngine::doAppStateChange( EAppState eAppState )
 bool P2PEngine::addMyIdentToBlob( PktBlobEntry& blobEntry )
 { 
     m_AnnouncePktMutex.lock(); 
-    bool result = (*((VxNetIdent *)&m_PktAnn)).addToBlob( blobEntry ); 
+    bool result = (*((VxNetIdent*)&m_PktAnn)).addToBlob( blobEntry ); 
     m_AnnouncePktMutex.unlock(); 
     return result;
 }

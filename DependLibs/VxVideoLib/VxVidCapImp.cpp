@@ -870,7 +870,7 @@ static LRESULT CALLBACK StreamCallbackProc(HWND hWnd, LPVIDEOHDR lpVHdr)
 //==============================================================
 static uint32_t CaptureWindowThreadFunc( void * pvContext )
 {
-	VxThread * poThread = (VxThread *)pvContext;
+	VxThread* poThread = (VxThread*)pvContext;
 	poThread->setIsThreadRunning( true );
 	VxVidCapImp *pImageProc = (VxVidCapImp *)poThread->getThreadUserParam();
 	if( poThread->isAborted() )
@@ -1211,7 +1211,7 @@ void VxVidCapImp::StopCaptureThread( void )
 //============================================================================
 static uint32_t CaptureMotionThreadFunc( void * pvContext )
 {
-	VxThread * poThread = (VxThread *)pvContext;
+	VxThread* poThread = (VxThread*)pvContext;
 	poThread->setIsThreadRunning( true );
 	VxVidCapImp *poVidCap = (VxVidCapImp *)poThread->getThreadUserParam();
 	if( poThread->isAborted() )

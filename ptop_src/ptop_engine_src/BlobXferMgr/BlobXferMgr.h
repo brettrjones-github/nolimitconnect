@@ -25,7 +25,7 @@ class PktBlobListReply;
 class BlobXferMgr : public AssetBaseXferMgr
 {
 public:
-	BlobXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName );
+	BlobXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName );
 	virtual ~BlobXferMgr() = default;
 
 	virtual void				onPktBlobSendReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

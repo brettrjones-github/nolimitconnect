@@ -225,7 +225,7 @@ void AppletCamSettings::slotToGuiSessionEnded( GuiOfferSession * offer )
 }; 
 
 //============================================================================
-void AppletCamSettings::slotToGuiContactOffline( VxNetIdent * friendIdent )
+void AppletCamSettings::slotToGuiContactOffline( VxNetIdent* friendIdent )
 {
     if( m_HisIdent->getMyOnlineId() == friendIdent->getMyOnlineId() )
     {

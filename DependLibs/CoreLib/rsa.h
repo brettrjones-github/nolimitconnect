@@ -86,7 +86,7 @@ typedef struct rsa_st RSA;
 
 typedef struct rsa_meth_st
 	{
-	const char *name;
+	const char*name;
 	int (*rsa_pub_enc)(int flen,const unsigned char *from,
 			   unsigned char *to,
 			   RSA *rsa,int padding);

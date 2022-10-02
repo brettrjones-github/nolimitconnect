@@ -23,7 +23,7 @@
 #include <time.h>
 
 //============================================================================
-UserOnlineMgr::UserOnlineMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
+UserOnlineMgr::UserOnlineMgr( P2PEngine& engine, const char* dbName, const char* dbStateName )
 : m_Engine( engine )
 {
     m_Engine.getConnectIdListMgr().wantConnectIdListCallback( this, true );

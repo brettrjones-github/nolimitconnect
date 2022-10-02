@@ -31,7 +31,7 @@ class OfferClientMgr : public OfferBaseMgr
 {
     const int THUMB_DB_VERSION = 1;
 public:
-	OfferClientMgr( P2PEngine& engine, const char * dbName, const char * statDbName );
+	OfferClientMgr( P2PEngine& engine, const char* dbName, const char* statDbName );
 	virtual ~OfferClientMgr() = default;
 
     void                        addOfferClientMgrClient( OfferClientCallbackInterface * client, bool enable );
@@ -46,7 +46,7 @@ public:
     virtual void				announceOfferXferState( VxGUID& assetOfferId, EOfferSendState assetSendState, int param ) override;
 
 protected:
-    virtual OfferBaseInfo *     createOfferInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual OfferBaseInfo *     createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType ) override;
     virtual OfferBaseInfo *     createOfferInfo( OfferBaseInfo& assetInfo ) override;
 
     OfferClientInfoDb&          m_OfferClientInfoDb;

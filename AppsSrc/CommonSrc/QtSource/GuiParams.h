@@ -95,7 +95,7 @@ public:
     //! Describe type of plugin
     static QString				describePluginAccess( EPluginAccess accessState );
     //! Describe action user can take for given plugin and access
-    static QString				describePluginAction( GuiUser * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess );
+    static QString				describePluginAction( GuiUser* netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess );
     static QString              describePluginMsg( EPluginMsgType pluginMsgType );
     static QString				describePluginPermission( EFriendState ePluginPermission );
     static QString				describePluginType( EPluginType ePluginType );

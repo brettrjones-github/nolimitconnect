@@ -23,7 +23,7 @@
 //}
 
 //============================================================================
-VxHttpValuePair::VxHttpValuePair( const char * pStr )
+VxHttpValuePair::VxHttpValuePair( const char* pStr )
 {
 	if( NULL == pStr )
 	{
@@ -54,7 +54,7 @@ VxHttpValuePair::VxHttpValuePair( const char * pStr )
 }
 
 //============================================================================
-VxHttpValuePair::VxHttpValuePair( const char * name, const char * value )
+VxHttpValuePair::VxHttpValuePair( const char* name, const char* value )
 {
 	setName(name);
 	setValue(value);
@@ -74,13 +74,13 @@ VxHttpValuePair::~VxHttpValuePair()
 }
 
 //============================================================================
-void VxHttpValuePair::setName(const char *name)
+void VxHttpValuePair::setName(const char*name)
 {
 	m_strName = name;
 }
 
 //============================================================================
-const char * VxHttpValuePair::getName( void )
+const char* VxHttpValuePair::getName( void )
 {
 	return m_strName.c_str();
 }
@@ -92,13 +92,13 @@ bool VxHttpValuePair::hasName( void )
 }
 
 //============================================================================
-void VxHttpValuePair::setValue(const char *value)
+void VxHttpValuePair::setValue(const char*value)
 {
 	m_strValue = value;
 }
 
 //============================================================================
-const char * VxHttpValuePair::getValue( void )
+const char* VxHttpValuePair::getValue( void )
 {
 	return m_strValue.c_str();
 }

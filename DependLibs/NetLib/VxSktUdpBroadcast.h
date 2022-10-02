@@ -28,13 +28,13 @@ public:
 	//! then will broadcast to 255.255.255.255 
 	virtual RCODE udpBroadcastOpen(	InetAddress& oIpAddr,
 									uint16_t u16Port = 12345,			// port to listen on
-									const char * pBroadcastIp = "255.255.255.255" ); // broadcast to address
+									const char* pBroadcastIp = "255.255.255.255" ); // broadcast to address
 	//virtual RCODE udpBroadcastOpen(	InetAddress& oIpAddr,
 	//								uint16_t u16Port = 12345,			// port to listen on
-	//								const char * pBroadcastIp = "192.168.60.21"  ); // broadcast to address
+	//								const char* pBroadcastIp = "192.168.60.21"  ); // broadcast to address
 
 	//! broadcast data 
-	virtual RCODE broadcastData(	const char *	pData,			// data to send
+	virtual RCODE broadcastData(	const char*	pData,			// data to send
 									int				iDataLen,		// data length
 									uint16_t				u16Port = 0 );	// port to send to ( if 0 then port specified when opened )
 

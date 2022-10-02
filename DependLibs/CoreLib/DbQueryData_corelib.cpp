@@ -65,7 +65,7 @@ field_value::field_value()
   is_null = false;
 }
 
-field_value::field_value(const char *s):
+field_value::field_value(const char*s):
   str_value(s)
 {
   field_type = ft_String;
@@ -665,7 +665,7 @@ field_value& field_value::operator= (const field_value & fv) {
 
 
 //Set functions
-void field_value::set_asString(const char *s) {
+void field_value::set_asString(const char*s) {
   str_value = s;
   field_type = ft_String;}
 

@@ -26,36 +26,36 @@
 
 namespace
 {
-	const char * UPNP_ST = "ST";
-	const char * UPNP_NT = "NT";
-	const char * UPNP_USN = "USN";
+	const char* UPNP_ST = "ST";
+	const char* UPNP_NT = "NT";
+	const char* UPNP_USN = "USN";
 
-	const char * UPNP_NTS = "NTS";
-//	const char * UPNP_MX = "MX";
-	const char * UPNP_MAN = "MAN";
+	const char* UPNP_NTS = "NTS";
+//	const char* UPNP_MX = "MX";
+	const char* UPNP_MAN = "MAN";
     /*
-//	const char * UPNP_EXT = "EXT";
-//	const char * UPNP_SID = "SID";
-//	const char * UPNP_SEQ = "SEQ";
-//	const char * UPNP_CALLBACK = "CALLBACK";
-//	const char * UPNP_TIMEOUT = "TIMEOUT";
+//	const char* UPNP_EXT = "EXT";
+//	const char* UPNP_SID = "SID";
+//	const char* UPNP_SEQ = "SEQ";
+//	const char* UPNP_CALLBACK = "CALLBACK";
+//	const char* UPNP_TIMEOUT = "TIMEOUT";
 
-//	const char * SOAP_HEADER = "<?xml version=\"1.0\"?>\r\n\
+//	const char* SOAP_HEADER = "<?xml version=\"1.0\"?>\r\n\
 //<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" SOAP-\
 //ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><SOAP-ENV:Body>";
-//	const char * SOAP_TRAILER = "</SOAP-ENV:Body></SOAP-ENV:Envelope>\r\n";
-//	const char * SOAP_DATA_SCHEMA = " xmlns:dt=\"urn:schemas-microsoft-com:datatypes\" dt:dt=\"";
-//	const char * SOAP_MEMBER_START =  " xmlns:m=\"";
-//	const char * SOAP_QUOTE_END =  "\">";
-//	const char * QUOTE =  "\"";
+//	const char* SOAP_TRAILER = "</SOAP-ENV:Body></SOAP-ENV:Envelope>\r\n";
+//	const char* SOAP_DATA_SCHEMA = " xmlns:dt=\"urn:schemas-microsoft-com:datatypes\" dt:dt=\"";
+//	const char* SOAP_MEMBER_START =  " xmlns:m=\"";
+//	const char* SOAP_QUOTE_END =  "\">";
+//	const char* QUOTE =  "\"";
 */
 }
 
 namespace UpnpNT 
 {
-	const char * UPNP_ROOTDEVICE = "upnp:rootdevice";
-	const char * UPNP_EVENT = "upnp:event";
-	bool isRootDevice( const char *usnValue )
+	const char* UPNP_ROOTDEVICE = "upnp:rootdevice";
+	const char* UPNP_EVENT = "upnp:event";
+	bool isRootDevice( const char*usnValue )
 	{
 		return (0 == strcmp( usnValue,  UPNP_ROOTDEVICE ) );
 	}
@@ -70,7 +70,7 @@ namespace UpnpST
     // const char UPNP_URN_DEVICE[] = "urn:schemas-upnp-org:device:";
     // const char UPNP_URN_SERVICE[] = "urn:schemas-upnp-org:service:";
 
-	bool isRootDevice( const char *value )
+	bool isRootDevice( const char*value )
 	{
 		if( NULL == value )
 		{
@@ -85,18 +85,18 @@ namespace UpnpST
 		strWithQuotes.append("\"");
 		return ( 0 == strcmp( value, strWithQuotes.c_str() ) );
 	}
-	bool isAllDevice( const char *value );
-	bool isRootDevice( const char *value );
-	bool isUUIDDevice( const char *value );
-	bool isURNDevice( const char *value );
-	bool isURNService( const char *value );
+	bool isAllDevice( const char*value );
+	bool isRootDevice( const char*value );
+	bool isUUIDDevice( const char*value );
+	bool isURNDevice( const char*value );
+	bool isURNService( const char*value );
 }
 
 namespace UpnpUSN 
 {
 	const char UPNP_ROOTDEVICE[] = "upnp:rootdevice";
 
-	bool isRootDevice( const char *usnValue )
+	bool isRootDevice( const char*usnValue )
 	{
 		if( NULL == usnValue )
 		{
@@ -105,7 +105,7 @@ namespace UpnpUSN
 		std::string usnStr = usnValue;
 		return StdStringEndsWith( usnStr, UPNP_ROOTDEVICE );
 	}
-	const char * getUDN( const char * pUsnValue, std::string& strRetUDN )
+	const char* getUDN( const char* pUsnValue, std::string& strRetUDN )
 	{
 		if( NULL == pUsnValue )
 		{
@@ -129,11 +129,11 @@ namespace UpnpUSN
 
 namespace UpnpNTS 
 {
-	const char * UPNP_ALIVE = "ssdp:alive";
-	const char * UPNP_BYEBYE = "ssdp:byebye";
-	const char * UPNP_PROPCHANGE = "upnp:propchange";
+	const char* UPNP_ALIVE = "ssdp:alive";
+	const char* UPNP_BYEBYE = "ssdp:byebye";
+	const char* UPNP_PROPCHANGE = "upnp:propchange";
 
-	bool isAlive( const char *value )
+	bool isAlive( const char*value )
 	{
 		if( NULL == value )
 		{
@@ -143,7 +143,7 @@ namespace UpnpNTS
 		return StdStringBeginsWith( strValue, UPNP_ALIVE );
 	}
 
-	bool isByeBye( const char *value )
+	bool isByeBye( const char*value )
 	{
 		if( NULL == value )
 		{
@@ -156,9 +156,9 @@ namespace UpnpNTS
 
 namespace UpnpMAN 
 {
-	const char * UPNP_DISCOVER = "ssdp:discover";
+	const char* UPNP_DISCOVER = "ssdp:discover";
 
-	bool isDiscover( const char * value )
+	bool isDiscover( const char* value )
 	{
 		if( NULL == value )
 		{
@@ -177,9 +177,9 @@ namespace UpnpMAN
 
 namespace UpnpSSPD
 {
-	int getLeaseTime( const char * cacheCnt )
+	int getLeaseTime( const char* cacheCnt )
 	{
-		const char * pEqualPos = strchr( cacheCnt, '=' );
+		const char* pEqualPos = strchr( cacheCnt, '=' );
 		if( NULL == pEqualPos )
 		{
 			return 0;
@@ -199,7 +199,7 @@ UpnpParser::UpnpParser()
 }
 
 //============================================================================
-void UpnpParser::setParserData(  VxSktBase* sktBase, const char * pDataBuf )
+void UpnpParser::setParserData(  VxSktBase* sktBase, const char* pDataBuf )
 {
 	if( pDataBuf )
 	{
@@ -207,7 +207,7 @@ void UpnpParser::setParserData(  VxSktBase* sktBase, const char * pDataBuf )
 	}
 	else
 	{
-		setStreamData( (const char *)sktBase->getSktReadBuf() );
+		setStreamData( (const char*)sktBase->getSktReadBuf() );
 	}
 
 	setTimeStamp( (uint32_t) time( NULL ) );
@@ -277,38 +277,38 @@ bool UpnpParser::isByeBye( void )
 }
 
 //============================================================================
-const char *  UpnpParser::getST( std::string& value )
+const char*  UpnpParser::getST( std::string& value )
 {
 	return getHttpValue( UPNP_ST, value );
 }
 
 //============================================================================
-const char *  UpnpParser::getNT( std::string& value )
+const char*  UpnpParser::getNT( std::string& value )
 {
 	return getHttpValue( UPNP_NT, value );
 }
 
 //============================================================================
-const char *  UpnpParser::getNTS( std::string& value )
+const char*  UpnpParser::getNTS( std::string& value )
 {
 	return getHttpValue( UPNP_NTS, value );
 }
 
 //============================================================================
-const char * UpnpParser::getUSN( std::string& value )
+const char* UpnpParser::getUSN( std::string& value )
 {
 	return getHttpValue( UPNP_USN, value );
 }
 
 //============================================================================
-const char * UpnpParser::getUDN( std::string& strRetValue )
+const char* UpnpParser::getUDN( std::string& strRetValue )
 {
 	std::string strUSN;
 	return UpnpUSN::getUDN( getUSN( strUSN ), strRetValue );
 }
 
 //============================================================================
-const char *  UpnpParser::getMAN( std::string& value )
+const char*  UpnpParser::getMAN( std::string& value )
 {
 	return getHttpValue( UPNP_MAN, value );
 }
@@ -322,7 +322,7 @@ int UpnpParser::getLeaseTime( void )
 
 #ifdef USE_TINYXML
 //============================================================================
-void UpnpParser::findAllElements( tinyxml2::XMLElement* pRootElem, std::vector< tinyxml2::XMLElement* >& elementList, const char * elemName )
+void UpnpParser::findAllElements( tinyxml2::XMLElement* pRootElem, std::vector< tinyxml2::XMLElement* >& elementList, const char* elemName )
 {
 	for( tinyxml2::XMLElement* pElem = pRootElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement() )
 	{
@@ -335,7 +335,7 @@ void UpnpParser::findAllElements( tinyxml2::XMLElement* pRootElem, std::vector< 
 }
 
 //============================================================================
-bool UpnpParser::parseRootXmlIntoDevice( const char * pXmlDoc, UpnpDevice& device, std::string& strDescLocationUrl )
+bool UpnpParser::parseRootXmlIntoDevice( const char* pXmlDoc, UpnpDevice& device, std::string& strDescLocationUrl )
 {
 	//dumpXml( pXmlDoc );
 	if( 0 != m_XmlDoc.Parse( pXmlDoc ) )
@@ -420,9 +420,9 @@ bool UpnpParser::parseIPConnectService( UpnpDevice& device, tinyxml2::XMLElement
 //============================================================================
 bool UpnpParser::findElementWithChildElementText(	tinyxml2::XMLElement* poRootElem,		// element to start search from
 													tinyxml2::XMLElement** ppoRetFoundElem, // return element found
-													const char * pElemName,					// element to search for
-													const char * pSubElemName,				// element found must have this child element
-													const char * pSubElemTextSubStr  )		// child element must have text containing this text string
+													const char* pElemName,					// element to search for
+													const char* pSubElemName,				// element found must have this child element
+													const char* pSubElemTextSubStr  )		// child element must have text containing this text string
 {
 	std::vector< tinyxml2::XMLElement* > elementList;
 	findAllElements( poRootElem, elementList, pElemName );
@@ -474,7 +474,7 @@ bool UpnpParser::parseRootDevice( UpnpDevice& device, tinyxml2::XMLElement* poDe
 }
 
 //============================================================================
-bool UpnpParser::getChildElementText( tinyxml2::XMLElement* poElem, const char * pElemName, std::string& retElemValue )
+bool UpnpParser::getChildElementText( tinyxml2::XMLElement* poElem, const char* pElemName, std::string& retElemValue )
 {
 	retElemValue = "";
 	tinyxml2::XMLElement* pElem = poElem->FirstChildElement(pElemName);
@@ -506,7 +506,7 @@ bool UpnpParser::getChildElementText( tinyxml2::XMLElement* poElem, const char *
 
 
 //============================================================================
-bool UpnpParser::dumpXml( const char * pXmlDoc )
+bool UpnpParser::dumpXml( const char* pXmlDoc )
 {
 	bool bResult = false;
 	if( 0 != m_XmlDoc.Parse( pXmlDoc ) )
@@ -530,13 +530,13 @@ bool UpnpParser::dumpXmlElement( int indentLevel, tinyxml2::XMLElement* pElem )
 		strIndent += " ";
 	}
 	std::string strAttrName;
-	const char * pAttr = pElem->GetText();
+	const char* pAttr = pElem->GetText();
 	if( pAttr )
 	{
 		strAttrName = pAttr;
 	}
 	std::string strAttrValue;
-	const char * pAttrValue = pElem->Attribute("value");
+	const char* pAttrValue = pElem->Attribute("value");
 	if( pAttrValue )
 	{
 		strAttrValue = pAttrValue;
@@ -551,7 +551,7 @@ bool UpnpParser::dumpXmlElement( int indentLevel, tinyxml2::XMLElement* pElem )
 }
 
 //============================================================================
-bool UpnpParser::parseServiceXmlIntoService( const char * pXmlDoc, UpnpService& service )
+bool UpnpParser::parseServiceXmlIntoService( const char* pXmlDoc, UpnpService& service )
 {
 	//dumpXml( pXmlDoc );
 
@@ -630,7 +630,7 @@ bool UpnpParser::parseStateVars( UpnpService& service, tinyxml2::XMLElement* poS
 	for( tinyxml2::XMLElement* pStateElem = poStateTableElem->FirstChildElement("stateVariable"); pStateElem; pStateElem = pStateElem->NextSiblingElement("stateVariable") )
 	{
 		UpnpStateVariable stateVar;
-		const char * pElemText = pStateElem->GetText();
+		const char* pElemText = pStateElem->GetText();
 		if( pElemText )
 		{
 			std::string strSendEvents = pElemText;
@@ -667,7 +667,7 @@ void UpnpParser::parseAllowedVars( UpnpStateVariable& stateVar, tinyxml2::XMLEle
 	}
 	for( tinyxml2::XMLElement* poAllowedVarElem = poListElem->FirstChildElement("allowedValue"); poAllowedVarElem; poAllowedVarElem = poAllowedVarElem->NextSiblingElement("allowedValue") )
 	{
-		const char * pValueText = poAllowedVarElem->GetText();
+		const char* pValueText = poAllowedVarElem->GetText();
 		if( pValueText )
 		{
 			std::string strAllowedValue = pValueText;
@@ -683,9 +683,9 @@ void UpnpParser::parseAllowedVars( UpnpStateVariable& stateVar, tinyxml2::XMLEle
 //============================================================================
 bool UpnpParser::createAddPortXml(	UpnpService& service, 
 									std::string& retXml,
-									const char * pLclIp, 
+									const char* pLclIp, 
 									uint16_t u16Port, 
-									const char * portServiceName )
+									const char* portServiceName )
 {
 	retXml = SOAP_HEADER;
 	UpnpAction addPortAction;
@@ -730,9 +730,9 @@ bool UpnpParser::createAddPortXml(	UpnpService& service,
 
 //============================================================================
 bool UpnpParser::addPortArgParam(	std::string&		retXml, 
-									const char *		pLclIp, 
+									const char*		pLclIp, 
 									uint16_t					u16Port, 
-									const char *		portServiceName,
+									const char*		portServiceName,
 									UpnpArg&			upnpArg, 
 									UpnpStateVariable&	var )
 {
@@ -778,7 +778,7 @@ bool UpnpParser::addPortArgParam(	std::string&		retXml,
 }
 
 //============================================================================
-void UpnpParser::addSoapParam( std::string& xmlDoc, std::string& paramName, UpnpStateVariable& var, const char * pValue )
+void UpnpParser::addSoapParam( std::string& xmlDoc, std::string& paramName, UpnpStateVariable& var, const char* pValue )
 {
 	std::string strParam = "<";
 	strParam += paramName;
@@ -813,7 +813,7 @@ void UpnpParser::addSoapParam( std::string& xmlDoc, std::string& paramName, Upnp
 */
 
 //============================================================================
-bool UpnpParser::findAction( UpnpService& service, const char * pActionName, UpnpAction& action )
+bool UpnpParser::findAction( UpnpService& service, const char* pActionName, UpnpAction& action )
 {
 	std::vector<UpnpAction>::iterator iter;
 	for( iter = service.m_aoActions.begin(); iter != service.m_aoActions.end(); ++iter )
@@ -828,7 +828,7 @@ bool UpnpParser::findAction( UpnpService& service, const char * pActionName, Upn
 }
 
 //============================================================================
-bool UpnpParser::findStateVar( std::vector<UpnpStateVariable>& aoVariables, const char * pVarName, UpnpStateVariable& retVar )
+bool UpnpParser::findStateVar( std::vector<UpnpStateVariable>& aoVariables, const char* pVarName, UpnpStateVariable& retVar )
 {
 	std::vector<UpnpStateVariable>::iterator iter;
 	for( iter = aoVariables.begin(); iter != aoVariables.end(); ++iter )

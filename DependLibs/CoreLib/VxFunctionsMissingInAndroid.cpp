@@ -110,7 +110,7 @@ extern "C" {
 	equal to or greater than S2 (for more info, see the texinfo doc).
 	*/
 
-int __strverscmp( const char *s1, const char *s2 )
+int __strverscmp( const char*s1, const char*s2 )
 {
 	const unsigned char *p1 = ( const unsigned char * )s1;
 	const unsigned char *p2 = ( const unsigned char * )s2;

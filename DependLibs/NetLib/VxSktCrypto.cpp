@@ -41,7 +41,7 @@ unsigned char * GetVxSktRandData( int iRandDataIdx )
 //! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
 RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,			
 								VxConnectId *			poConnectId,		
-								const char *			networkName )
+								const char*			networkName )
 								
 {
 	RCODE rc = 0;
@@ -66,7 +66,7 @@ RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,
 //! generate key from net identity and connection data and place int sockets m_TxKey and initialize its crypto
 RCODE GenerateTxConnectionKey(	VxSktBase *			sktBase,			
 								VxConnectId *		poConnectId,		
-								const char *		networkName )
+								const char*		networkName )
 {
 	RCODE rc = 0;
 	sktBase->lockCryptoAccess();

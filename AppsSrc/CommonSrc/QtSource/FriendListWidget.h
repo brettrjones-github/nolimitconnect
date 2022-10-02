@@ -42,18 +42,18 @@ public:
 
 	void						setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool hasTextMsgs );
 	//! update friend in list
-	void						updateFriend( GuiUser * netIdent, bool sessionTimeChange = false );
-	void						removeFriend( GuiUser * netIdent );
+	void						updateFriend( GuiUser* netIdent, bool sessionTimeChange = false );
+	void						removeFriend( GuiUser* netIdent );
 	void						removeFriend( VxGUID& onlineId );
 	void						refreshFriendList( EFriendViewType eWhichFriendsToShow );
 
 signals:
-	void						signalUpdateFriend( GuiUser * netIdent, bool sessionTimeChange );
-	void						signalFriendClicked( GuiUser * netIdent );
+	void						signalUpdateFriend( GuiUser* netIdent, bool sessionTimeChange );
+	void						signalFriendClicked( GuiUser* netIdent );
 	void						signalRefreshFriendList( EFriendViewType eWhichFriendsToShow );
 
 private slots:
-	void						slotUpdateFriend( GuiUser * netIdent, bool sessionTimeChange );
+	void						slotUpdateFriend( GuiUser* netIdent, bool sessionTimeChange );
 	void						slotRefreshFriend( VxGUID friendId );
 	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineId, int pos );
 	void						slotItemClicked(QListWidgetItem *);
@@ -63,19 +63,19 @@ private slots:
 
 protected:
 	//!	fill friend into new QListWidgetItem *
-	FriendListEntryWidget *		friendToWidget( GuiUser * poFriend );
+	FriendListEntryWidget *		friendToWidget( GuiUser* poFriend );
 	//!	get friend from QListWidgetItem data
-    GuiUser *					widgetToFriend( FriendListEntryWidget * item );
+    GuiUser*					widgetToFriend( FriendListEntryWidget * item );
 
-	void						updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent );
+	void						updateListEntryWidget( FriendListEntryWidget * item, GuiUser* netIdent );
 
-	FriendListEntryWidget *		findListEntryWidget( GuiUser * netIdent );
+	FriendListEntryWidget *		findListEntryWidget( GuiUser* netIdent );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
 	EFriendViewType				m_eFriendViewType;
-    GuiUser *					m_SelectedFriend;
+    GuiUser*					m_SelectedFriend;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
 	VxGUID						m_ViewingOnlineId;
 	bool						m_IsCurrentlyViewing;

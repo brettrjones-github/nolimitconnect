@@ -270,7 +270,7 @@ void OfferSessionLogic::toGuiPluginSessionEnded( GuiOfferSession * offerSession 
 }
 
 //======================================================================== 
-void OfferSessionLogic::toGuiContactOffline( GuiUser * friendIdent ) 
+void OfferSessionLogic::toGuiContactOffline( GuiUser* friendIdent ) 
 {
 	if( m_HisIdent && ( friendIdent->getMyOnlineId() == m_HisIdent->getMyOnlineId() ) )
 	{
@@ -519,7 +519,7 @@ std::string OfferSessionLogic::describePlugin( void )
 }
 
 //============================================================================
-void OfferSessionLogic::postStatusMsg( const char * statusMsg, ... )
+void OfferSessionLogic::postStatusMsg( const char* statusMsg, ... )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -545,7 +545,7 @@ void OfferSessionLogic::postStatusMsg( const char * statusMsg, ... )
 }
 
 //============================================================================
-void OfferSessionLogic::postUserMsg( const char * userMsg, ... )
+void OfferSessionLogic::postUserMsg( const char* userMsg, ... )
 {
 	if( VxIsAppShuttingDown() )
 	{

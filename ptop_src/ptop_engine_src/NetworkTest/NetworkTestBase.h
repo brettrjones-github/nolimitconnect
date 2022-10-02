@@ -56,8 +56,8 @@ public:
     /// called from thread just before thread exit
     virtual void				networkTestComplete( void ){};
 
-    void						sendRunTestStatus( ERunTestStatus eStatus, const char * msg, ... );
-    void						sendTestLog( const char * msg, ... );
+    void						sendRunTestStatus( ERunTestStatus eStatus, const char* msg, ... );
+    void						sendTestLog( const char* msg, ... );
 
 protected:
     //=== vars ===//

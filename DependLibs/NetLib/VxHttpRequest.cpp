@@ -18,13 +18,13 @@
 #include <stdio.h>
 #include <string.h>
 
-const char * VxHttpRequest::HTTP_GET = "GET";
-const char * VxHttpRequest::HTTP_POST = "POST";
-const char * VxHttpRequest::HTTP_HEAD = "HEAD";
-const char * VxHttpRequest::HTTP_SUBSCRIBE = "SUBSCRIBE";
-const char * VxHttpRequest::HTTP_UNSUBSCRIBE = "UNSUBSCRIBE";
-const char * VxHttpRequest::HTTP_NOTIFY = "NOTIFY";
-const char * VxHttpRequest::HTTP_CRLF = "\r\n";
+const char* VxHttpRequest::HTTP_GET = "GET";
+const char* VxHttpRequest::HTTP_POST = "POST";
+const char* VxHttpRequest::HTTP_HEAD = "HEAD";
+const char* VxHttpRequest::HTTP_SUBSCRIBE = "SUBSCRIBE";
+const char* VxHttpRequest::HTTP_UNSUBSCRIBE = "UNSUBSCRIBE";
+const char* VxHttpRequest::HTTP_NOTIFY = "NOTIFY";
+const char* VxHttpRequest::HTTP_CRLF = "\r\n";
 
 //============================================================================
 VxHttpRequest::VxHttpRequest()
@@ -57,37 +57,37 @@ void VxHttpRequest::setUrl( VxUrl& oUrl )
 }
 
 //============================================================================
-void VxHttpRequest::setMethod( const char * pValue )
+void VxHttpRequest::setMethod( const char* pValue )
 {
 	m_strMethod = pValue;
 }
 
 //============================================================================
-const char * VxHttpRequest::getMethod( void )
+const char* VxHttpRequest::getMethod( void )
 {
 	return m_strMethod.c_str();
 }
 
 //============================================================================
-const char * VxHttpRequest::getRequestHost( void )
+const char* VxHttpRequest::getRequestHost( void )
 {
 	return m_strRequestingHost.c_str();
 }
 
 //============================================================================
-void VxHttpRequest::setRequestHost( const char * pHost )
+void VxHttpRequest::setRequestHost( const char* pHost )
 {
 	m_strRequestingHost = pHost;
 }
 
 //============================================================================
-void VxHttpRequest::setURI( const char * pValue, bool useRelativeUrl )
+void VxHttpRequest::setURI( const char* pValue, bool useRelativeUrl )
 {
 	m_strUri = pValue;
 }
 
 //============================================================================
-const char * VxHttpRequest::getURI( void )
+const char* VxHttpRequest::getURI( void )
 {
 	return m_strUri.c_str();
 }
@@ -117,7 +117,7 @@ void VxHttpRequest::setHttpVersion1_1( void )
 }
 
 //============================================================================
-const char * VxHttpRequest::getHttpVersion( void )
+const char* VxHttpRequest::getHttpVersion( void )
 {
 	return m_strHttpVersion.c_str();
 }
@@ -129,7 +129,7 @@ void VxHttpRequest::setKeepConnectionAlive( bool bKeepAlive )
 }
 
 //============================================================================
-const char * VxHttpRequest::buildGetHeader( std::string &headerBuf )
+const char* VxHttpRequest::buildGetHeader( std::string &headerBuf )
 {
 	headerBuf = "";
 	headerBuf += getMethod();
@@ -155,7 +155,7 @@ const char * VxHttpRequest::buildGetHeader( std::string &headerBuf )
 }
 
 //============================================================================
-const char * VxHttpRequest::buildHost( std::string &headerBuf )
+const char* VxHttpRequest::buildHost( std::string &headerBuf )
 {
 	headerBuf += "HOST: ";
 	headerBuf += getRequestHost();
@@ -170,8 +170,8 @@ const char * VxHttpRequest::buildHost( std::string &headerBuf )
 }
 
 //============================================================================
-const char * VxHttpRequest::buildUpnpSoapPost(	std::string &headerBuf, 
-												const char * pSoapAction, 
+const char* VxHttpRequest::buildUpnpSoapPost(	std::string &headerBuf, 
+												const char* pSoapAction, 
 												unsigned int contentLen )
 {
 	setMethod( HTTP_POST );
@@ -201,7 +201,7 @@ const char * VxHttpRequest::buildUpnpSoapPost(	std::string &headerBuf,
 }
 
 //============================================================================
-bool VxHttpRequest::isMethod( const char * pValue )
+bool VxHttpRequest::isMethod( const char* pValue )
 {
 	return ( 0 == strcmp( pValue, getMethod() ) );
 }
@@ -275,7 +275,7 @@ std::vector<VxValuePair> * VxHttpRequest::getParameterList( std::vector<VxValueP
 }
 
 //============================================================================
-const char * VxHttpRequest::getParameterValue( const char *name, std::string & strRetParamValue )
+const char* VxHttpRequest::getParameterValue( const char*name, std::string & strRetParamValue )
 {
 	/*
 	strRetParamValue = "";

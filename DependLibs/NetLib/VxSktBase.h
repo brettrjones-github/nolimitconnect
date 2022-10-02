@@ -118,9 +118,9 @@ public:
 	virtual bool				isLoopbackSocket( void )						{ return m_LoopbackSocketId == getSocketId(); };
 
     uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
-    const char *				getRemoteIpAddress( void )                      { return m_strRmtIp.c_str(); }
+    const char*				getRemoteIpAddress( void )                      { return m_strRmtIp.c_str(); }
 	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
-	const char *				getLocalIpAddress( void )						{ return m_strLclIp.c_str(); }
+	const char*				getLocalIpAddress( void )						{ return m_strLclIp.c_str(); }
 
 	uint16_t					getCryptoKeyPort( void )						{ return (eSktTypeTcpAccept == getSktType()) ? m_LclIp.getPort() : m_RmtIp.getPort(); }
 
@@ -146,14 +146,14 @@ public:
     virtual bool		    	getInUseByRxThread( void )                      { return m_InUseByRxThread; }
 
 	virtual RCODE				connectTo(	InetAddress&	oLclIp,	
-											const char *	pIpOrUrl,						// remote ip or url
+											const char*	pIpOrUrl,						// remote ip or url
 											uint16_t		u16Port,						// port to connect to
 											int				iTimeoutMilliSeconds = 10000 );	// milli seconds before connect attempt times out
 
-	virtual void				createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port );
+	virtual void				createConnectionUsingSocket( SOCKET skt, const char* rmtIp, uint16_t port );
 
 	//! send data without encrypting
-	virtual RCODE				sendData(	const char *	pData,							// data to send
+	virtual RCODE				sendData(	const char*	pData,							// data to send
 											int				iDataLen,						// length of data
 											bool			bDisconnectAfterSend = false );	// if true disconnect after data is sent
 
@@ -161,10 +161,10 @@ public:
     virtual std::string		    describeSktConnection( void );
 
 	bool						bindSocket( struct addrinfo * poResultAddr );
-	bool						isIPv6Address (const char * addr );
-	int							getIPv6ScopeID( const char * addr );
-	const char *				stripIPv6ScopeID( const char * addr, std::string &buf );
-	RCODE						joinMulticastGroup( InetAddress& oLclAddress, const char *mcastAddr );
+	bool						isIPv6Address (const char* addr );
+	int							getIPv6ScopeID( const char* addr );
+	const char*				stripIPv6ScopeID( const char* addr, std::string &buf );
+	RCODE						joinMulticastGroup( InetAddress& oLclAddress, const char*mcastAddr );
 
 	void						setTTL( uint8_t ttl );
 	void						setAllowLoopback( bool allowLoopback );
@@ -200,12 +200,12 @@ public:
 	virtual bool				isRxEncryptionKeySet( void )        { return m_RxKey.isKeySet(); }
 
 	//! encrypt then send data using session crypto
-	virtual RCODE				txEncrypted(	const char *	pData, 					// data to send
+	virtual RCODE				txEncrypted(	const char*	pData, 					// data to send
 												int				iDataLen,				// length of data
 												bool			bDisconnect = false );	// if true disconnect after send
 	//! encrypt with given key then send.. does not affect session crypto
 	virtual RCODE				txEncrypted(	VxKey *			poKey,					// key to encrypt with
-												const char *	pData,					// data to send
+												const char*	pData,					// data to send
 												int				iDataLen,				// length of data
 												bool			bDisconnect = false );	// if true disconnect after send
     virtual RCODE				txPacket(	VxGUID				destOnlineId,			// online id of destination user
@@ -218,15 +218,15 @@ public:
 	virtual RCODE				decryptReceiveData( void );
 
 	//! fire up receive thread
-	void						startReceiveThread( const char * pVxThreadName );
+	void						startReceiveThread( const char* pVxThreadName );
 
 	void						setRmtAddress( struct sockaddr_storage& oVxSktAddr );
 	void						setRmtAddress( struct sockaddr_in& oVxSktAddr );
 	void						setRmtAddress( struct sockaddr& oVxSktAddr );
 	void						setLclAddress( struct sockaddr_storage& oVxSktAddr );
 
-	void						setTxCryptoPassword( const char * data, int len );
-	void						setRxCryptoPassword( const char * data, int len );
+	void						setTxCryptoPassword( const char* data, int len );
+	void						setRxCryptoPassword( const char* data, int len );
 	bool						isTxCryptoKeySet( void );
 	bool						isRxCryptoKeySet( void );
     std::string                 describeSktType( void );
@@ -236,8 +236,8 @@ public:
 
 	static int					getTotalCreatedSktCount( void )			        { return m_TotalCreatedSktCnt; }
 	static int					getCurrentSktCount( void )				        { return m_CurrentSktCnt; }
-    static const char *		    describeSktError( RCODE rc );
-    static const char *		    describeSktCallbackReason( ESktCallbackReason reason );
+    static const char*		    describeSktError( RCODE rc );
+    static const char*		    describeSktCallbackReason( ESktCallbackReason reason );
 
     virtual bool                setPeerPktAnn( PktAnnounce& pktAnn );
     virtual PktAnnounce&        getPeerPktAnn( void )                           { return m_PeerPktAnn; }
@@ -266,12 +266,12 @@ public:
 
 protected:
 	bool						toSocketAddrInfo(	int sockType, 
-													const char *addr, 
+													const char*addr, 
 													int port, 
 													struct addrinfo **addrInfo, 
 													bool isBindAddr );
 
-	bool						toSocketAddrIn(		const char *addr, 
+	bool						toSocketAddrIn(		const char*addr, 
 													int port, 
 													struct sockaddr_in *sockaddr, 
 													bool isBindAddr );

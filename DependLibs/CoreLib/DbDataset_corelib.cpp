@@ -57,9 +57,9 @@ Database::~Database() {
   disconnect();		// Disconnect if connected to database
 }
 
-int Database::connectFull(const char *newHost, const char *newPort, const char *newDb, const char *newLogin,
-                          const char *newPasswd, const char *newKey, const char *newCert, const char *newCA,
-                          const char *newCApath, const char *newCiphers, bool newCompression) {
+int Database::connectFull(const char*newHost, const char*newPort, const char*newDb, const char*newLogin,
+                          const char*newPasswd, const char*newKey, const char*newCert, const char*newCA,
+                          const char*newCApath, const char*newCiphers, bool newCompression) {
   host = newHost;
   port = newPort;
   db = newDb;
@@ -74,7 +74,7 @@ int Database::connectFull(const char *newHost, const char *newPort, const char *
   return connect(true);
 }
 
-std::string Database::prepare(const char *format, ...)
+std::string Database::prepare(const char*format, ...)
 {
   va_list args;
   va_start(args, format);
@@ -134,7 +134,7 @@ Dataset::~Dataset() {
 }
 
 
-void Dataset::setSqlParams(const char *sqlFrmt, sqlType t, ...) {
+void Dataset::setSqlParams(const char*sqlFrmt, sqlType t, ...) {
   va_list ap;
   char sqlCmd[DB_BUFF_MAX+1];
 
@@ -163,7 +163,7 @@ void Dataset::setSqlParams(const char *sqlFrmt, sqlType t, ...) {
 
 
 
-void Dataset::set_select_sql(const char *sel_sql) {
+void Dataset::set_select_sql(const char*sel_sql) {
  select_sql = sel_sql;
 }
 
@@ -314,7 +314,7 @@ void Dataset::deletion() {
 }
 
 
-bool Dataset::set_field_value(const char *f_name, const field_value &value) {
+bool Dataset::set_field_value(const char*f_name, const field_value &value) {
   bool found = false;
   if ((ds_state == dsInsert) || (ds_state == dsEdit)) {
       for (unsigned int i=0; i < fields_object->size(); i++) 
@@ -330,7 +330,7 @@ bool Dataset::set_field_value(const char *f_name, const field_value &value) {
 }
 
 /********* INDEXMAP SECTION START *********/
-bool Dataset::get_index_map_entry(const char *f_name) {
+bool Dataset::get_index_map_entry(const char*f_name) {
   if (~fieldIndexMapID)
   {
     unsigned int next(fieldIndexMapID+1 >= fieldIndexMap_Entries.size() ? 0 : fieldIndexMapID + 1);
@@ -359,7 +359,7 @@ bool Dataset::get_index_map_entry(const char *f_name) {
 }
 /********* INDEXMAP SECTION END *********/
 
-const field_value Dataset::get_field_value(const char *f_name) {
+const field_value Dataset::get_field_value(const char*f_name) {
   if (ds_state != dsInactive)
   {
     if (ds_state == dsEdit || ds_state == dsInsert){
@@ -417,7 +417,7 @@ const sql_record* const Dataset::get_sql_record()
   return result.records[frecno];
 }
 
-const field_value Dataset::f_old(const char *f_name) 
+const field_value Dataset::f_old(const char*f_name) 
 {
   if (ds_state != dsInactive)
     for (int unsigned i=0; i < fields_object->size(); i++) 
@@ -427,7 +427,7 @@ const field_value Dataset::f_old(const char *f_name)
   return fv;
 }
 
-int Dataset::str_compare(const char * s1, const char * s2) {
+int Dataset::str_compare(const char* s1, const char* s2) {
  	std::string ts1 = s1; 
  	std::string ts2 = s2;
  	std::string::const_iterator p = ts1.begin();
@@ -491,7 +491,7 @@ bool Dataset::findNext(void) {
 }
 
 
-void Dataset::add_update_sql(const char *upd_sql){
+void Dataset::add_update_sql(const char*upd_sql){
   std::string s = upd_sql;
   update_sql.push_back(s);
 }
@@ -501,7 +501,7 @@ void Dataset::add_update_sql(const std::string &upd_sql){
   update_sql.push_back(upd_sql);
 }
 
-void Dataset::add_insert_sql(const char *ins_sql){
+void Dataset::add_insert_sql(const char*ins_sql){
   std::string s = ins_sql;
   insert_sql.push_back(s);
 }
@@ -511,7 +511,7 @@ void Dataset::add_insert_sql(const std::string &ins_sql){
   insert_sql.push_back(ins_sql);
 }
 
-void Dataset::add_delete_sql(const char *del_sql){
+void Dataset::add_delete_sql(const char*del_sql){
   std::string s = del_sql;
   delete_sql.push_back(s);
 }
@@ -536,7 +536,7 @@ void Dataset::clear_delete_sql(){
 int Dataset::field_count() { return fields_object->size();}
 int Dataset::fieldCount() { return fields_object->size();}
 
-const char *Dataset::fieldName(int n) {
+const char*Dataset::fieldName(int n) {
   if ( n < field_count() && n >= 0)
     return (*fields_object)[n].props.name.c_str();
   else
@@ -550,7 +550,7 @@ int Dataset::fieldSize(int n) {
     return 0;
 }
 
-int Dataset::fieldIndex(const char *fn) {
+int Dataset::fieldIndex(const char*fn) {
 for (unsigned int i=0; i < fields_object->size(); i++)
       if ((*fields_object)[i].props.name == fn)
 	return i;
@@ -567,7 +567,7 @@ DbErrors::DbErrors():
 }
 
 
-DbErrors::DbErrors(const char *msg, ...) {
+DbErrors::DbErrors(const char*msg, ...) {
   va_list vl;
   va_start(vl, msg);
   char buf[DB_BUFF_MAX]="";
@@ -583,7 +583,7 @@ DbErrors::DbErrors(const char *msg, ...) {
   LogMsg( LOG_ERROR, "%s", msg_.c_str() );
 }
 
-const char * DbErrors::getMsg() {
+const char* DbErrors::getMsg() {
 	return msg_.c_str();
 	
 }

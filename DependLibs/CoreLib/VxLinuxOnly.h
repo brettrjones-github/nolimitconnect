@@ -32,9 +32,9 @@ void strlwr( char * pStr );
 
 #ifndef TARGET_OS_ANDROID
 //! case insensitive string compare
-int stricmp( const char * pStr1, const char * pStr2 );
+int stricmp( const char* pStr1, const char* pStr2 );
 //! case insensitive string compare
-int strnicmp( const char * pStr1, const char * pStr2, int n );
+int strnicmp( const char* pStr1, const char* pStr2, int n );
 #endif // TARGET_OS_ANDROID
 
 #endif // TARGET_OS_WINDOWS

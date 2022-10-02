@@ -22,11 +22,11 @@ class BlobMgr;
 class BlobInfoDb : public AssetBaseInfoDb
 {
 public:
-	BlobInfoDb( AssetBaseMgr& mgr, const char * dbName );
+	BlobInfoDb( AssetBaseMgr& mgr, const char* dbName );
 	virtual ~BlobInfoDb() = default;
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
+    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
 
 };

@@ -23,12 +23,12 @@ XMLClear XMLNode::emptyXMLClear={ NULL, NULL, NULL};
 XMLAttribute XMLNode::emptyXMLAttribute={ NULL, NULL};
 
 #ifndef TARGET_OS_WINDOWS
-int strlen(const char *c)   { return strlen(c); }
-int strnicmp(const char *c1, const char *c2, int l) { return strncasecmp(c1,c2,l); }
-int strcmp(const char *c1, const char *c2) { return strcasecmp(c1,c2); }
-char *_tcsstr(const char *c1, const char *c2) { return (char*)strstr(c1,c2); }
-char *_tcschr(const char *c1, int c2) { return (char*)strchr(c1,c2); }
-char *strcpy(char *c1, const char *c2) { return (char*)strcpy(c1,c2); }
+int strlen(const char*c)   { return strlen(c); }
+int strnicmp(const char*c1, const char*c2, int l) { return strncasecmp(c1,c2,l); }
+int strcmp(const char*c1, const char*c2) { return strcasecmp(c1,c2); }
+char *_tcsstr(const char*c1, const char*c2) { return (char*)strstr(c1,c2); }
+char *_tcschr(const char*c1, int c2) { return (char*)strchr(c1,c2); }
+char *strcpy(char *c1, const char*c2) { return (char*)strcpy(c1,c2); }
 #endif
 
 inline int mmin( const int t1, const int t2 ) { return t1 < t2 ? t1 : t2; }
@@ -52,19 +52,19 @@ enum TokenTypeTag
 
 typedef struct ClearTag
 {
-	const char *				lpszOpen;
-	const char *				lpszClose;
+	const char*				lpszOpen;
+	const char*				lpszClose;
 } ClearTag;
 
 // Main structure used for parsing XML
 typedef struct XML
 {
-	const char *                lpXML;
+	const char*                lpXML;
 	int							nIndex;
 	enum XMLError				error;
-	const char *                lpEndTag;
+	const char*                lpEndTag;
 	int							cbEndTag;
-	const char *                lpNewElement;
+	const char*                lpNewElement;
 	int							cbNewElement;
 	int							nFirst;
 	ClearTag *					pClrTags;
@@ -73,7 +73,7 @@ typedef struct XML
 typedef struct
 {
 	ClearTag *					pClr;
-	const char *				pStr;
+	const char*				pStr;
 } NextToken;
 
 // Enumeration used when parsing attributes
@@ -93,7 +93,7 @@ typedef enum Status
 } Status;
 
 // private:
-const char * toXMLString(const char * destIn,const char * source)
+const char* toXMLString(const char* destIn,const char* source)
 {
 	char * dest = (char *) destIn;
 	char * dd = dest;
@@ -115,7 +115,7 @@ const char * toXMLString(const char * destIn,const char * source)
 }
 
 // private:
-int lengthXMLString(const char * source)
+int lengthXMLString(const char* source)
 {
 	int r=0;
 	while (*source)
@@ -133,21 +133,21 @@ int lengthXMLString(const char * source)
 	return r;
 }
 
-const char * toXMLString(const char * source)
+const char* toXMLString(const char* source)
 {
-	const char * dest=(const char *)malloc((lengthXMLString(source)+1)*sizeof(char));
+	const char* dest=(const char*)malloc((lengthXMLString(source)+1)*sizeof(char));
 	return toXMLString(dest,source);
 }
 
-const char * toXMLStringFast(const char * *dest,int *destSz, const char * source)
+const char* toXMLStringFast(const char* *dest,int *destSz, const char* source)
 {
 	int l=lengthXMLString(source)+1;
-	if (l>*destSz) { *destSz=l; *dest=(const char *)realloc( (void *)*dest, l*sizeof(char) ); }
+	if (l>*destSz) { *destSz=l; *dest=(const char*)realloc( (void *)*dest, l*sizeof(char) ); }
 	return toXMLString(*dest,source);
 }
 
 // private:
-const char * fromXMLString(const char * s, int lo)
+const char* fromXMLString(const char* s, int lo)
 {
 	// This function is the opposite of the function "toXMLString". It decodes the escape
 	// sequences &amp;, &quot;, &apos;, &lt;, &gt; and replace them by the characters
@@ -160,7 +160,7 @@ const char * fromXMLString(const char * s, int lo)
 
 	int ll=0;
 	char * d;
-	const char * ss=s;
+	const char* ss=s;
 	while (((lo--)>0)&&(*s))
 	{
 		if (*s==_T('&'))
@@ -205,11 +205,11 @@ const char * fromXMLString(const char * s, int lo)
 		} else { *(d++)=*ss; ss++; }
 	}
 	*d=0;
-	return (const char *)s;
+	return (const char*)s;
 }
 
 // private:
-char myTagCompare(const char * cclose, const char * copen)
+char myTagCompare(const char* cclose, const char* copen)
 // !!!! WARNING strange convention&:
 // return 0 if equals
 // return 1 if different
@@ -283,14 +283,14 @@ static char FindNonWhiteSpace(XML *pXML)
 static NextToken GetNextToken(XML *pXML, int *pcbToken, enum TokenTypeTag *pType)
 {
 	NextToken        result;
-	const char *          lpXML;
+	const char*          lpXML;
 	char            ch;
 	char            chTemp;
 	int              nSize;
 	int              nFoundMatch;
 	int              nExit;
 	int              n;
-	const char *          lpszOpen;
+	const char*          lpszOpen;
 	int              cbOpen;
 	int              nIsText = false;
 
@@ -511,7 +511,7 @@ static NextToken GetNextToken(XML *pXML, int *pcbToken, enum TokenTypeTag *pType
 }
 
 // Parse XML errors into a user friendly string.
-const char * XMLNode::getError(XMLError error)
+const char* XMLNode::getError(XMLError error)
 {
 	switch (error)
 	{
@@ -533,7 +533,7 @@ const char * XMLNode::getError(XMLError error)
 }
 
 // private:
-XMLNode::XMLNode(XMLNode *pParent, const char * lpszName, int isDeclaration)
+XMLNode::XMLNode(XMLNode *pParent, const char* lpszName, int isDeclaration)
 {
 	d=(XMLNodeData*)malloc(sizeof(XMLNodeData));
 	d->ref_count=1;
@@ -576,7 +576,7 @@ void XMLNode::addToOrder(int index, int type)
 }
 
 // Add a child node to the given element.
-XMLNode XMLNode::addChild(const char * lpszName, int isDeclaration)
+XMLNode XMLNode::addChild(const char* lpszName, int isDeclaration)
 {
 	if (!lpszName) return emptyXMLNode;
 	int nc=d->nChild;
@@ -591,7 +591,7 @@ XMLNode XMLNode::addChild(const char * lpszName, int isDeclaration)
 XMLNode XMLNode::createXMLTopNode() { return XMLNode(NULL,NULL,FALSE); }
 
 // Add an attribute to an element.
-XMLAttribute *XMLNode::addAttribute(const char * lpszName, const char * lpszValuev)
+XMLAttribute *XMLNode::addAttribute(const char* lpszName, const char* lpszValuev)
 {
 	if (!lpszName) return &emptyXMLAttribute;
 	int na=d->nAttribute;
@@ -605,11 +605,11 @@ XMLAttribute *XMLNode::addAttribute(const char * lpszName, const char * lpszValu
 }
 
 // Add text to the element.
-const char * XMLNode::addText(const char * lpszValue)
+const char* XMLNode::addText(const char* lpszValue)
 {
 	if (!lpszValue) return NULL;
 	int nt=d->nText;
-	d->pText=(const char **)myRealloc(d->pText,(nt+1),memoryIncrease,sizeof(const char *));
+	d->pText=(const char**)myRealloc(d->pText,(nt+1),memoryIncrease,sizeof(const char*));
 	d->pText[nt]=lpszValue;
 	addToOrder(nt,eNodeText);
 	d->nText++;
@@ -617,7 +617,7 @@ const char * XMLNode::addText(const char * lpszValue)
 }
 
 // Add clear (unformatted) text to the element.
-XMLClear *XMLNode::addClear(const char * lpszValue, const char * lpszOpen, const char * lpszClose)
+XMLClear *XMLNode::addClear(const char* lpszValue, const char* lpszOpen, const char* lpszClose)
 {
 	if (!lpszValue) return &emptyXMLClear;
 	int nc=d->nClear;
@@ -632,7 +632,7 @@ XMLClear *XMLNode::addClear(const char * lpszValue, const char * lpszOpen, const
 }
 
 // Trim the end of the text to remove white space characters.
-static void FindEndOfText(const char * lpszToken, int *pcbText)
+static void FindEndOfText(const char* lpszToken, int *pcbText)
 {
 	char   ch;
 	int     cbText;
@@ -655,7 +655,7 @@ static void FindEndOfText(const char * lpszToken, int *pcbText)
 }
 
 // Duplicate a given string.
-const char * stringDup(const char * lpszData, int cbData)
+const char* stringDup(const char* lpszData, int cbData)
 {
 	if (lpszData==NULL) return NULL;
 
@@ -677,8 +677,8 @@ int XMLNode::ParseClearTag(void *px, void *pa)
 	XML *pXML=(XML *)px;
 	ClearTag *pClear=(ClearTag *)pa;
 	int cbTemp = 0;
-	const char * lpszTemp;
-	const char * lpszXML = &pXML->lpXML[pXML->nIndex];
+	const char* lpszTemp;
+	const char* lpszXML = &pXML->lpXML[pXML->nIndex];
 
 	// Find the closing tag
 	lpszTemp = (char *)strstr(lpszXML, pClear->lpszClose);
@@ -708,7 +708,7 @@ void XMLNode::exactMemory(XMLNodeData *d)
 	d->pOrder=(int*)realloc(d->pOrder,(d->nChild+d->nAttribute+d->nText+d->nClear)*sizeof(int));
 	d->pChild=(XMLNode*)realloc(d->pChild,d->nChild*sizeof(XMLNode));
 	d->pAttribute=(XMLAttribute*)realloc(d->pAttribute,d->nAttribute*sizeof(XMLAttribute));
-	d->pText=(const char **)realloc(d->pText,d->nText*sizeof(const char *));
+	d->pText=(const char**)realloc(d->pText,d->nText*sizeof(const char*));
 	d->pClear=(XMLClear *)realloc(d->pClear,d->nClear*sizeof(XMLClear));
 }
 
@@ -720,10 +720,10 @@ int XMLNode::ParseXMLElement(void *pa)
 	int cbToken;
 	enum TokenTypeTag type;
 	NextToken token;
-	const char * lpszTemp;
+	const char* lpszTemp;
 	int cbTemp;
 	int nDeclaration;
-	const char * lpszText = NULL;
+	const char* lpszText = NULL;
 	XMLNode pNew;
 	enum Status status; // inside or outside a tag
 	enum Attrib attrib = eAttribName;
@@ -1132,7 +1132,7 @@ int XMLNode::ParseXMLElement(void *pa)
 }
 
 // Count the number of lines and columns in an XML string.
-static void CountLinesAndColumns(const char * lpXML, int nUpto, XMLResults *pResults)
+static void CountLinesAndColumns(const char* lpXML, int nUpto, XMLResults *pResults)
 {
 	char ch;
 	int n;
@@ -1156,7 +1156,7 @@ static void CountLinesAndColumns(const char * lpXML, int nUpto, XMLResults *pRes
 }
 
 // Parse XML and return the root element.
-XMLNode XMLNode::parseString(const char * lpszXML, const char * tag, XMLResults *pResults)
+XMLNode XMLNode::parseString(const char* lpszXML, const char* tag, XMLResults *pResults)
 {
 	if (!lpszXML)
 	{
@@ -1235,7 +1235,7 @@ XMLNode XMLNode::parseString(const char * lpszXML, const char * tag, XMLResults 
 	return xnode;
 }
 
-XMLNode XMLNode::parseFile(const char *filename, const char * tag, XMLResults *pResults)
+XMLNode XMLNode::parseFile(const char*filename, const char* tag, XMLResults *pResults)
 {
 	FILE *f=fopen(filename,"rb");
 	if (f==NULL)
@@ -1255,12 +1255,12 @@ XMLNode XMLNode::parseFile(const char *filename, const char * tag, XMLResults *p
 	fread(buf,l,1,f);
 	fclose(f);
 	buf[l]=0;
-	XMLNode x = parseString( (const char *)buf, tag, pResults );
+	XMLNode x = parseString( (const char*)buf, tag, pResults );
 	free(buf);
 	return x;
 }
 
-XMLNode XMLNode::openFileHelper(const char *lpszXML, const char * tag)
+XMLNode XMLNode::openFileHelper(const char*lpszXML, const char* tag)
 {
 	XMLResults pResults;
 	XMLNode xnode=XMLNode::parseFile(lpszXML, tag, &pResults);
@@ -1329,7 +1329,7 @@ int XMLNode::nElement(XMLNodeData *pEntry)
 	return pEntry->nChild+pEntry->nText+pEntry->nClear+pEntry->nAttribute;
 }
 
-static inline void charmemset( const char * destIn, char c, int l) 
+static inline void charmemset( const char* destIn, char c, int l) 
 { 
 	char * dest = (char *)destIn;
 	while (l--) *(dest++)=c; 
@@ -1452,7 +1452,7 @@ int XMLNode::CreateXMLStringR(XMLNodeData *pEntry, char * lpszMarker, int nForma
 			// Text nodes
 		case eNodeText:
 			// "Text"
-			cb = (int)lengthXMLString((const char *)pChild);
+			cb = (int)lengthXMLString((const char*)pChild);
 			if (cb)
 			{
 				if (nFormat!=-1)
@@ -1460,13 +1460,13 @@ int XMLNode::CreateXMLStringR(XMLNodeData *pEntry, char * lpszMarker, int nForma
 					if (lpszMarker)
 					{
 						charmemset(&lpszMarker[nResult],INDENTCHAR,sizeof(char)*(nFormat + 1));
-						toXMLString(&lpszMarker[nResult+nFormat+1],(const char *)pChild);
+						toXMLString(&lpszMarker[nResult+nFormat+1],(const char*)pChild);
 						lpszMarker[nResult+nFormat+1+cb]=_T('\n');
 					}
 					nResult+=cb+nFormat+2;
 				} else
 				{
-					if (lpszMarker) toXMLString(&lpszMarker[nResult], (const char *)pChild);
+					if (lpszMarker) toXMLString(&lpszMarker[nResult], (const char*)pChild);
 					nResult += cb;
 				}
 			}
@@ -1605,9 +1605,9 @@ int XMLNode::CreateXMLStringR(XMLNodeData *pEntry, char * lpszMarker, int nForma
 //                                        returned string not including the
 //                                        NULL terminator.
 //
-// @return      const char *                  - Allocated XML string, you must free
+// @return      const char*                  - Allocated XML string, you must free
 //                                        this with free().
-const char * XMLNode::createXMLString(int nFormat, int *pnSize)
+const char* XMLNode::createXMLString(int nFormat, int *pnSize)
 {
 	if (!d) { if (pnSize) *pnSize=0; return NULL; }
 
@@ -1685,7 +1685,7 @@ XMLNode::XMLNode(const XMLNode &A)
 	if (d) (d->ref_count)++ ;
 }
 
-int XMLNode::nChildNode(const char * name)
+int XMLNode::nChildNode(const char* name)
 {
 	if (!d) return 0;
 	int i,j=0,n=d->nChild;
@@ -1698,7 +1698,7 @@ int XMLNode::nChildNode(const char * name)
 	return j;
 }
 
-XMLNode XMLNode::getChildNode(const char * name, int *j)
+XMLNode XMLNode::getChildNode(const char* name, int *j)
 {
 	char temp[1024];
 	char *p = NULL;
@@ -1732,7 +1732,7 @@ XMLNode XMLNode::getChildNode(const char * name, int *j)
 	return emptyXMLNode;
 }
 
-XMLNode XMLNode::getChildNode(const char * name, int j)
+XMLNode XMLNode::getChildNode(const char* name, int j)
 {
 	if (!d) return emptyXMLNode;
 	int i=0;
@@ -1741,7 +1741,7 @@ XMLNode XMLNode::getChildNode(const char * name, int j)
 }
 
 // Find an attribute on an node.
-const char * XMLNode::getAttribute(const char * lpszAttrib, int *j)
+const char* XMLNode::getAttribute(const char* lpszAttrib, int *j)
 {
 	if (!d) return NULL;
 	int i=0,n=d->nAttribute;
@@ -1759,7 +1759,7 @@ const char * XMLNode::getAttribute(const char * lpszAttrib, int *j)
 	return NULL;
 }
 
-char XMLNode::isAttributeSet(const char * lpszAttrib)
+char XMLNode::isAttributeSet(const char* lpszAttrib)
 {
 	if (!d) return false;
 	int i,n=d->nAttribute;
@@ -1775,7 +1775,7 @@ char XMLNode::isAttributeSet(const char * lpszAttrib)
 	return false;
 }
 
-const char * XMLNode::getAttribute(const char * name, int j)
+const char* XMLNode::getAttribute(const char* name, int j)
 {
 	if (!d) return NULL;
 	int i=0;
@@ -1783,14 +1783,14 @@ const char * XMLNode::getAttribute(const char * name, int j)
 	return getAttribute(name,&i);
 }
 
-const char * XMLNode::getName(){ if (!d) return NULL; return d->lpszName;   }
+const char* XMLNode::getName(){ if (!d) return NULL; return d->lpszName;   }
 int XMLNode::nText()      { if (!d) return 0; return d->nText;      }
 int XMLNode::nChildNode() { if (!d) return 0; return d->nChild;     }
 int XMLNode::nAttribute() { if (!d) return 0; return d->nAttribute; }
 int XMLNode::nClear()     { if (!d) return 0; return d->nClear;     }
 XMLClear     XMLNode::getClear     (int i) { if (!d) return emptyXMLClear;     if (i>=d->nClear    ) return emptyXMLClear;     return d->pClear[i];     }
 XMLAttribute XMLNode::getAttribute (int i) { if (!d) return emptyXMLAttribute; if (i>=d->nAttribute) return emptyXMLAttribute; return d->pAttribute[i]; }
-const char *      XMLNode::getText      (int i) { if (!d) return NULL;              if (i>=d->nText     ) return NULL;              return d->pText[i];      }
+const char*      XMLNode::getText      (int i) { if (!d) return NULL;              if (i>=d->nText     ) return NULL;              return d->pText[i];      }
 XMLNode      XMLNode::getChildNode (int i) { if (!d) return emptyXMLNode;      if (i>=d->nChild    ) return emptyXMLNode;      return d->pChild[i];     }
 char         XMLNode::isDeclaration(     ) { if (!d) return 0;                 return d->isDeclaration; }
 char         XMLNode::isEmpty      (     ) { return (d==NULL); }

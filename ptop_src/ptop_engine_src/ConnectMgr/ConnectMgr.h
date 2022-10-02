@@ -27,7 +27,7 @@ class ConnectMgr
 {
     const int CONNECT_MGR_DB_VERSION = 1;
 public:
-	ConnectMgr( P2PEngine& engine, const char * dbName, const char * stateDbName );
+	ConnectMgr( P2PEngine& engine, const char* dbName, const char* stateDbName );
 	virtual ~ConnectMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );

@@ -56,7 +56,7 @@ SndReader::~SndReader()
 }
 
 //============================================================================
-bool SndReader::fromGuiIsMyP2PWebAudioFile( const char * fileName )
+bool SndReader::fromGuiIsMyP2PWebAudioFile( const char* fileName )
 {
 	uint64_t fileLen = VxFileUtil::getFileLen( fileName );
 	if( fileLen < 1000 )
@@ -198,7 +198,7 @@ bool SndReader::fromGuiSndPlay( ESndPlayState eRecState, VxGUID& assetId, int po
 }
 
 //============================================================================
-bool SndReader::startSndRead( const char * fileName, VxGUID& assetId, int pos0to100000 )
+bool SndReader::startSndRead( const char* fileName, VxGUID& assetId, int pos0to100000 )
 {
 	stopSndRead();
 	bool result = m_OpusFileDecoder.beginFileDecode( fileName, assetId, pos0to100000 );

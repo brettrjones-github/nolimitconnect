@@ -813,7 +813,7 @@ void HostBaseMgr::removeSearchSession( VxGUID& sessionId )
 }
 
 //============================================================================
-void HostBaseMgr::onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char * msg )
+void HostBaseMgr::onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char* msg )
 {
     // TODO proper invalid packet handling
     LogMsg( LOG_INFO, "HostBaseMgr::onInvalidRxedPacket " );

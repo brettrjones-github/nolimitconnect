@@ -100,7 +100,7 @@ public:
     bool                        setValue( float& f32Value );
     bool                        setValue( double& f64Value );
     bool                        setValue( std::string& strValue );
-    bool                        setValue( const char * pRetBuf, int iBufLen );
+    bool                        setValue( const char* pRetBuf, int iBufLen );
     bool                        setValue( std::vector<std::string>& aoStrValues );
     bool                        setValue( void * pvRetBuf, int iBufLen );
 

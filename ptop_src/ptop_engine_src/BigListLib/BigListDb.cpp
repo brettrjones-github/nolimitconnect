@@ -31,7 +31,7 @@
 static void * BigListLoadThreadFunction( void * pvParam )
 {
     RCODE rc = 0;
-    VxThread * poThread = (VxThread *)pvParam;
+    VxThread* poThread = (VxThread*)pvParam;
     poThread->setIsThreadRunning( true );
     BigListMgr * poMgr = (BigListMgr *)poThread->getThreadUserParam();
     if( poMgr )
@@ -82,7 +82,7 @@ RCODE BigListDb::onDeleteTables( int oldVersion )
 
 //============================================================================
 //! startup
-RCODE BigListDb::bigListDbStartup(  const char * pDbFileName )
+RCODE BigListDb::bigListDbStartup(  const char* pDbFileName )
 {
 	if( m_BigListDbInitialized )
 	{
@@ -123,7 +123,7 @@ RCODE BigListDb::bigListDbShutdown( void )
 
 //============================================================================
 //! restore all of given network to lists from database
-RCODE BigListDb::dbRestoreAll( const char * networkName )
+RCODE BigListDb::dbRestoreAll( const char* networkName )
 {
 	int iRestoredCount = 0;
 	std::string strNetworkName = networkName;
@@ -170,7 +170,7 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 }
 
 //============================================================================
-RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime, const char * networkName )
+RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime, const char* networkName )
 {
 	char SQL_Statement[1024];
 	//char *SQL_Error;
@@ -209,7 +209,7 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 
 //============================================================================
 //! if not in db insert BigListInfo else update database
-RCODE BigListDb::dbUpdateBigListInfo( BigListInfo * poInfo, const char * networkName )
+RCODE BigListDb::dbUpdateBigListInfo( BigListInfo * poInfo, const char* networkName )
 {
 	RCODE rc = 0;
 	if( poInfo->isInDatabase() )
@@ -271,7 +271,7 @@ RCODE BigListDb::dbRemoveBigListInfo( VxGUID& onlineId )
 
 //============================================================================
 //! insert big list info node into database
-RCODE BigListDb::dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char * networkName )
+RCODE BigListDb::dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char* networkName )
 {
 	// there is a possibility the isInDatabase flag did not get set so remove first
 	dbRemoveBigListInfo( poInfo->getMyOnlineId() );
@@ -295,7 +295,7 @@ RCODE BigListDb::dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char * n
 	vx_assert( pu8Blob );
 	vx_assert( iBlobLen );
 	std::string strOnlineIdHex = poInfo->getMyOnlineId().toHexString();
-    const char * SQL_Statement = "INSERT INTO BigList (online_id,NetworkName,ConnectTime,Object) VALUES (?,?,?,?)";
+    const char* SQL_Statement = "INSERT INTO BigList (online_id,NetworkName,ConnectTime,Object) VALUES (?,?,?,?)";
 	rc = dbOpen();
 	if( rc )
 	{
@@ -358,7 +358,7 @@ error_exit:
 
 //============================================================================
 //! update big list info node in database
-RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * networkName )
+RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char* networkName )
 {
 	int64_t s64LastContact;
 	uint8_t * pu8Blob = 0;

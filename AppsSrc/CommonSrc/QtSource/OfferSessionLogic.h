@@ -79,8 +79,8 @@ public:
 	EPluginType 				getPluginType( void )							{ return m_ePluginType;    }
     void                        setGuiOfferSession( GuiOfferSession* offerSession ) { m_GuiOfferSession = offerSession; };
     GuiOfferSession *			getGuiOfferSession( void )                      { return m_GuiOfferSession; };
-    void                        setHisIdent( GuiUser * netIdent )			    { m_HisIdent = netIdent;    }
-	GuiUser * 				    getHisIdent( void )								{ return m_HisIdent;    }
+    void                        setHisIdent( GuiUser* netIdent )			    { m_HisIdent = netIdent;    }
+	GuiUser* 				    getHisIdent( void )								{ return m_HisIdent;    }
 
 	bool						isOurSessionType( GuiOfferSession * offerSession ); 
 	bool						isOurSessionInstance( GuiOfferSession * offerSession ); 
@@ -91,7 +91,7 @@ public:
 	void						toToGuiRxedOfferReply( GuiOfferSession * offerSession );
 
 	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession ); 
-	void						toGuiContactOffline( GuiUser * friendIdent ); 
+	void						toGuiContactOffline( GuiUser* friendIdent ); 
 
 	bool						sendOfferOrResponse();
 	bool						sendOfferReply( EOfferResponse offerResponse );
@@ -105,8 +105,8 @@ public:
 	std::string					getHisOnlineName( void );
 	std::string					describePlugin( void );
 	std::string					describeResponse( EOfferResponse eOfferResponse );
-	void						postStatusMsg( const char * statusMsg, ... );
-	void						postUserMsg( const char * userMsg, ... );
+	void						postStatusMsg( const char* statusMsg, ... );
+	void						postUserMsg( const char* userMsg, ... );
 
 	bool						handleOfferResponse( GuiOfferSession  poSession );
 	bool						handleOfferResponseCode( EOfferResponse responseCode ) ;

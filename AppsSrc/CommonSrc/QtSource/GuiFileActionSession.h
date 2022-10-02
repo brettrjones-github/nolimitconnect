@@ -32,25 +32,25 @@ public:
 	GuiFileActionSession();
 
 	GuiFileActionSession(	EPluginType		ePluginType, 
-							VxNetIdent *	netIdent, 
+							VxNetIdent*	netIdent, 
 							VxGUID&			lclSessionId, 
 							uint8_t			u8FileType, 
 							uint64_t		u64FileLen, 
-							const char *	pFileName,
+							const char*	pFileName,
 							VxGUID			assetId,
 							VxSha1Hash&		fileHashId );
 
 	GuiFileActionSession(	EPluginType		ePluginType, 
-							VxNetIdent *	netIdent, 
+							VxNetIdent*	netIdent, 
 							VxGUID&			lclSessionId, 
 							uint8_t			u8FileType, 
 							uint64_t		u64FileLen, 
-							const char *	pFileName,
+							const char*	pFileName,
 							VxGUID			assetId,
 							uint8_t *		fileHashId );
 
 	GuiFileActionSession(	EPluginType		ePluginType, 
-							VxNetIdent *	netIdent, 
+							VxNetIdent*	netIdent, 
 							VxGUID&			lclSessionId, 
 							VxMyFileInfo&	fileInfo );
 
@@ -63,8 +63,8 @@ public:
 	void						setLclSessionId( VxGUID lclSessionId )		{ m_LclSessionId = lclSessionId; }
 	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
+	VxNetIdent*				getIdent( void )							{ return m_Ident; }
 
 	void						setWidget( QWidget* widget )				{ m_Widget = widget; }
 	QWidget*					getWidget( void )							{ return m_Widget; }
@@ -95,7 +95,7 @@ public:
 private:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
-	VxNetIdent *				m_Ident;
+	VxNetIdent*				m_Ident;
 	VxGUID						m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;
 	QWidget*					m_Widget;

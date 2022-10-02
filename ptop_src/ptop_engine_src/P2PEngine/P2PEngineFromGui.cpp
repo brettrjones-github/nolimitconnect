@@ -52,7 +52,7 @@
 #include <stdio.h>
 
 //============================================================================
-void P2PEngine::assureUserSpecificDirIsSet( const char * checkReason )
+void P2PEngine::assureUserSpecificDirIsSet( const char* checkReason )
 {
 	if( false == m_IsUserSpecificDirSet )
 	{
@@ -80,19 +80,19 @@ uint16_t P2PEngine::fromGuiGetAppVersionBinary( void )
 }
 
 //============================================================================
-const char * P2PEngine::fromGuiGetAppVersionString( void )
+const char* P2PEngine::fromGuiGetAppVersionString( void )
 {
 	return VxGetAppVersionString();
 }
 
 //============================================================================
-const char * P2PEngine::fromGuiGetAppName( void )
+const char* P2PEngine::fromGuiGetAppName( void )
 {
 	return VxGetApplicationTitle();
 }
 
 //============================================================================
-const char * P2PEngine::fromGuiGetAppNameNoSpaces( void )
+const char* P2PEngine::fromGuiGetAppNameNoSpaces( void )
 {
 	return VxGetApplicationNameNoSpaces();
 }
@@ -124,7 +124,7 @@ void P2PEngine::fromGuiAppShutdown( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiDebugSettings( uint32_t u32LogFlags, const char * pLogFileName )
+void P2PEngine::fromGuiDebugSettings( uint32_t u32LogFlags, const char* pLogFileName )
 {
 	VxSetLogFlags( u32LogFlags );
 	if( pLogFileName && strlen( pLogFileName ) )
@@ -188,14 +188,14 @@ void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
 }
 
 //============================================================================
-void P2PEngine::fromGuiOnlineNameChanged( const char * newOnlineName )
+void P2PEngine::fromGuiOnlineNameChanged( const char* newOnlineName )
 {
 	m_PktAnn.setOnlineName( newOnlineName );
 	doPktAnnHasChanged( false );
 }
 
 //============================================================================
-void P2PEngine::fromGuiMoodMessageChanged( const char * newMoodMessage )
+void P2PEngine::fromGuiMoodMessageChanged( const char* newMoodMessage )
 {
 	m_PktAnn.setOnlineDescription( newMoodMessage );
 	doPktAnnHasChanged( false );
@@ -234,7 +234,7 @@ void P2PEngine::fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndSt
 	}
 	else
 	{
-		memcpy( (VxNetIdent *)&m_PktAnn, netIdent, sizeof( VxNetIdent ));
+		memcpy( (VxNetIdent*)&m_PktAnn, netIdent, sizeof( VxNetIdent ));
 	}
 
 	doPktAnnHasChanged( false );
@@ -255,9 +255,9 @@ void P2PEngine::fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffe
 }
 
 //============================================================================
-void P2PEngine::fromGuiQueryMyIdent( VxNetIdent * poRetIdent )
+void P2PEngine::fromGuiQueryMyIdent( VxNetIdent* poRetIdent )
 {
-	memcpy( poRetIdent, (VxNetIdent *)&m_PktAnn, sizeof( VxNetIdent ) );
+	memcpy( poRetIdent, (VxNetIdent*)&m_PktAnn, sizeof( VxNetIdent ) );
 }
 
 //============================================================================
@@ -276,7 +276,7 @@ void P2PEngine::fromGuiAppResume( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
+void P2PEngine::fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiNetworkAvailable" );
 	m_NetworkStateMachine.fromGuiNetworkAvailable( lclIp, isCellularNetwork );
@@ -375,7 +375,7 @@ void P2PEngine::fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, in
 }
 
 //============================================================================
-bool P2PEngine::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName )
+bool P2PEngine::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSndRecord" );
 	return m_MediaProcessor.getMediaTools().fromGuiSndRecord( eRecState, feedId, fileName );
@@ -458,7 +458,7 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, i
 }
 
 //============================================================================
-bool P2PEngine::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName   )
+bool P2PEngine::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName   )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiVideoRecord" );
 	return m_MediaProcessor.getMediaTools().fromGuiVideoRecord( eRecState, feedId, fileName );
@@ -472,7 +472,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char* fileName, uint64_t fileLen, u
 }
 
 //============================================================================
-bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen, uint8_t fileType, VxGUID assetId, int pos0to100000  )
+bool P2PEngine::fromGuiPlayLocalMedia( const char*  fileName, uint64_t fileLen, uint8_t fileType, VxGUID assetId, int pos0to100000  )
 {
     std::string fileNameStr = fileName;
     bool result = true;
@@ -540,13 +540,13 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
 
 //============================================================================
 //! update web page profile
-void P2PEngine::fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile	
-												const char *	pGreeting,		// greeting text
-												const char *	pAboutMe,		// about me text
-												const char *	url1,			// favorite url 1
-												const char *	url2,			// favorite url 2
-												const char *	url3, 			// favorite url 3
-                                                const char *	donation )	    // donation information
+void P2PEngine::fromGuiUpdateWebPageProfile(	const char*	pProfileDir,	// directory containing user profile	
+												const char*	pGreeting,		// greeting text
+												const char*	pAboutMe,		// about me text
+												const char*	url1,			// favorite url 1
+												const char*	url2,			// favorite url 2
+												const char*	url3, 			// favorite url 3
+                                                const char*	donation )	    // donation information
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiUpdateWebPageProfile" );
 	std::string strWebPageHdr = "";
@@ -677,8 +677,8 @@ EPluginServerState P2PEngine::fromGuiGetPluginServerState( EPluginType ePluginTy
 bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 										VxGUID&			onlineId,
 										int				pvUserData,
-										const char *	pOfferMsg, 
-										const char *	pFileName,
+										const char*	pOfferMsg, 
+										const char*	pFileName,
                                         uint8_t *		fileHashId,
 										VxGUID			lclSessionId )
 {
@@ -727,8 +727,8 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 //============================================================================
 int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType, 
 										VxGUID&			onlineId,
-										const char *	pControl, 
-										const char *	pAction,
+										const char*	pControl, 
+										const char*	pAction,
 										uint32_t		u32ActionData,
 										VxGUID&			lclSessionId,
 										uint8_t *		fileHashId )
@@ -750,7 +750,7 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 //============================================================================
 bool P2PEngine::fromGuiInstMsg(	EPluginType		ePluginType, 
 								VxGUID&			onlineId,
-								const char *	pMsg )
+								const char*	pMsg )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiInstMsg" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
@@ -921,12 +921,12 @@ void P2PEngine::fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaTy
 			if( ( eMediaInputVideoJpgSmall !=  mediaType ) // no need to activate cam if requesting other person's video feed
 				&& ( eMediaInputVideoJpgBig !=  mediaType ) )
 			{			
-				m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent *)poInfo, appModule, wantInput );
+				m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent*)poInfo, appModule, wantInput );
 			}
 		}
 		else
 		{
-			m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent *)&m_PktAnn, appModule, wantInput );
+			m_MediaProcessor.wantMediaInput( mediaType, this, (VxNetIdent*)&m_PktAnn, appModule, wantInput );
 		}
 	}
 }
@@ -1189,7 +1189,7 @@ bool P2PEngine::fromGuiSetGameActionVar(	EPluginType	ePluginType,
 //============================================================================
 bool P2PEngine::fromGuiTestCmd(	ETestParam1		eTestParam1, 
 								int				testParam2, 
-								const char *	testParam3 )
+								const char*	testParam3 )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiTestCmd" );
 	bool result = false;
@@ -1384,15 +1384,15 @@ void P2PEngine::fromGuiRunIsPortOpenTest( uint16_t port )
 }
 
 //============================================================================
-void P2PEngine::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType )
+void P2PEngine::fromGuiRunUrlAction( VxGUID& sessionId, const char* myUrl, const char* ptopUrl, ENetCmdType testType )
 {
     getRunUrlAction().runUrlAction( sessionId, testType, ptopUrl, myUrl );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
+bool P2PEngine::fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask )
 {
-	return getPluginFileShareServer().fromGuiBrowseFiles(	dir, lookupShareStatus, fileFilterMask );
+	return getPluginFileShareServer().fromGuiBrowseFiles( dir, lookupShareStatus, fileFilterMask );
 }
 
 //============================================================================
@@ -1402,15 +1402,15 @@ bool P2PEngine::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool P2PEngine::fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId )
+bool P2PEngine::fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId )
 {
-	return getPluginFileShareServer().fromGuiSetFileIsShared(	fileName, isShared, fileHashId );
+	return getPluginFileShareServer().fromGuiSetFileIsShared( fileName, isShared, fileHashId );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiGetIsFileShared( const char * fileName )
+bool P2PEngine::fromGuiGetIsFileShared( const char* fileName )
 {
-	return getPluginFileShareServer().fromGuiGetIsFileShared(	fileName );
+	return getPluginFileShareServer().fromGuiGetIsFileShared( fileName );
 }
 
 //============================================================================
@@ -1421,37 +1421,37 @@ int P2PEngine::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool P2PEngine::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
+bool P2PEngine::fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId )
 {
-	return getPluginFileShareServer().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+	return getPluginLibraryServer().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
 }
 
 //============================================================================
 void P2PEngine::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 {
-	getPluginFileShareServer().fromGuiGetFileLibraryList(	fileTypeFilter );
+	getPluginLibraryServer().fromGuiGetFileLibraryList(	fileTypeFilter );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiGetIsFileInLibrary( const char * fileName )
+bool P2PEngine::fromGuiGetIsFileInLibrary( const char* fileName )
 {
-	return getPluginFileShareServer().fromGuiGetIsFileInLibrary( fileName );
+	return getPluginLibraryServer().fromGuiGetIsFileInLibrary( fileName );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiIsMyP2PWebVideoFile( const char * fileName )
+bool P2PEngine::fromGuiIsMyP2PWebVideoFile( const char* fileName )
 {
 	return m_MediaProcessor.getMediaTools().fromGuiIsMyP2PWebVideoFile( fileName );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiIsMyP2PWebAudioFile( const char * fileName )
+bool P2PEngine::fromGuiIsMyP2PWebAudioFile( const char* fileName )
 {
 	return m_MediaProcessor.getMediaTools().fromGuiIsMyP2PWebAudioFile( fileName );
 }
 
 //============================================================================
-int P2PEngine::fromGuiDeleteFile( const char * fileNameIn, bool shredFile )
+int P2PEngine::fromGuiDeleteFile( const char* fileNameIn, bool shredFile )
 {
 	int result = -1;
 	std::string fileName = fileNameIn;

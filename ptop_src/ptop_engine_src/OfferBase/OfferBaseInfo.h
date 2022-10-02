@@ -38,7 +38,7 @@ public:
     OfferBaseInfo();
     OfferBaseInfo( const OfferBaseInfo& rhs );
     OfferBaseInfo( const std::string& fileName );
-    OfferBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
+    OfferBaseInfo( const char* fileName, uint64_t fileLen, uint16_t assetType );
     virtual ~OfferBaseInfo() = default;
 
     OfferBaseInfo&				operator=( const OfferBaseInfo& rhs );
@@ -73,12 +73,12 @@ public:
     virtual bool				isTemporary( void )                             { return m_AttributeFlags & OFFER_ATTRIB_TEMPORARY ? true : false; }
     virtual bool				isPermanent( void )                             { return !isTemporary(); }
 
-    virtual void				setOfferName( const char * assetName );
+    virtual void				setOfferName( const char* assetName );
     virtual void				setOfferName( std::string& assetName )          { m_OfferName = assetName; }
     virtual std::string&		getOfferName( void )                            { return m_OfferName; }
     virtual std::string			getRemoteOfferName( void );
 
-    virtual void				setOfferTag( const char * assetTag );
+    virtual void				setOfferTag( const char* assetTag );
     virtual std::string&		getOfferTag( void ) { return m_OfferTag; }
 
     virtual void				setOfferType( EOfferType assetType )            { m_u16OfferType = (uint16_t)assetType; }
@@ -88,7 +88,7 @@ public:
     virtual int64_t				getOfferLength( void )                          { return m_s64OfferLen; }
 
     virtual void				setOfferId( VxGUID& uniqueId )                  { m_OfferId = uniqueId; }
-    virtual void				setOfferId( const char * guid )                 { m_OfferId.fromVxGUIDHexString( guid ); }
+    virtual void				setOfferId( const char* guid )                 { m_OfferId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getOfferId( void )                              { return m_OfferId; }
     virtual VxGUID&				generateNewOfferId( void ); // generates unique id, assigns it to offer id and returns reference to it
 
@@ -97,15 +97,15 @@ public:
     virtual VxSha1Hash&			getOfferHashId( void )                          { return m_OfferHash; }
 
     virtual void				setCreatorId( VxGUID& creatorId )               { m_CreatorId = creatorId; }
-    virtual void				setCreatorId( const char * creatorId )          { m_CreatorId.fromVxGUIDHexString( creatorId ); }
+    virtual void				setCreatorId( const char* creatorId )          { m_CreatorId.fromVxGUIDHexString( creatorId ); }
     virtual VxGUID&				getCreatorId( void )                            { return m_CreatorId; }
 
     virtual void				setHistoryId( VxGUID& historyId )               { m_HistoryId = historyId; }
-    virtual void				setHistoryId( const char * historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
+    virtual void				setHistoryId( const char* historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getHistoryId( void )                            { return m_HistoryId; }
 
     virtual void				setThumbId( VxGUID& historyId )                 { m_ThumbId = historyId; }
-    virtual void				setThumbId( const char * historyId )            { m_ThumbId.fromVxGUIDHexString( historyId ); }
+    virtual void				setThumbId( const char* historyId )            { m_ThumbId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getThumbId( void )                              { return m_ThumbId; }
 
     virtual void				setLocationFlags( uint32_t locFlags )           { m_LocationFlags = locFlags; }
@@ -129,11 +129,11 @@ public:
     virtual void				setPlayPosition( int pos0to100000 )             { m_PlayPosition0to100000 = pos0to100000; }
     virtual int					getPlayPosition( void )                         { return m_PlayPosition0to100000; }
 
-    virtual void				updateOfferInfo( VxThread * callingThread );
+    virtual void				updateOfferInfo( VxThread* callingThread );
     virtual bool				needsHashGenerated( void );
 
-    static const char *			getDefaultFileExtension( EOfferType assetType );
-    static const char *			getSubDirectoryName( EOfferType assetType );
+    static const char*			getDefaultFileExtension( EOfferType assetType );
+    static const char*			getSubDirectoryName( EOfferType assetType );
 
 public:
     //=== vars ===//

@@ -60,7 +60,7 @@ RichTextWidget::RichTextWidget(QWidget*parent, QString initialFile)
 }
 
 //============================================================================
-void RichTextWidget::loadRichTextFile( const char * pFileName )
+void RichTextWidget::loadRichTextFile( const char* pFileName )
 {
     if( pFileName )
     {

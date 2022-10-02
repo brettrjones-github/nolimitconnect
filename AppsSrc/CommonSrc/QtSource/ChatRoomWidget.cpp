@@ -32,7 +32,7 @@ ChatRoomWidget::ChatRoomWidget( QWidget*parent, EAssetType inputMode )
 }
 
 //============================================================================
-void ChatRoomWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
+void ChatRoomWidget::setIdents( GuiUser* myIdent, GuiUser* hisIdent )
 {
     getSessionChatEntry()->setIdents( myIdent, hisIdent );
     getSessionHistoryList()->setIdents( myIdent, hisIdent );

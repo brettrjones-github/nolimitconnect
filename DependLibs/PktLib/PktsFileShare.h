@@ -121,8 +121,8 @@ class PktFileSendReq : public VxPktHdr
 {
 public:
 	PktFileSendReq();
-	void						setFileName( const char * pFileName );
-	const char *				getFileName()									{ return m_FileName; }
+	void						setFileName( const char* pFileName );
+	const char*				getFileName()									{ return m_FileName; }
 	void						setAssetId( VxGUID& assetId )					{ m_FileAssetId = assetId; }
 	VxGUID&						getAssetId( void )								{ return m_FileAssetId; }
 	void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
@@ -173,8 +173,8 @@ class PktFileSendReply : public VxPktHdr
 public:
 	PktFileSendReply();
 
-	void						setFileName( const char * pFileName );
-	const char *				getFileName()									{ return m_FileName; }
+	void						setFileName( const char* pFileName );
+	const char*				getFileName()									{ return m_FileName; }
 	void						setAssetId( VxGUID& assetId )					{ m_FileAssetId = assetId; }
 	VxGUID&						getAssetId( void )								{ return m_FileAssetId; }
 	void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
@@ -447,7 +447,7 @@ class PktFileShareErr : public VxPktHdr
 public:
 	PktFileShareErr();
 
-	const char *				describeError();
+	const char*				describeError();
 
 	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxFileInstance = instanceGuid; }
 	VxGUID& 					getRxInstance( void )							{ return m_RxFileInstance; }

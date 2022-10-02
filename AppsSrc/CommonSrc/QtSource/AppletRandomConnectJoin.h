@@ -26,7 +26,7 @@ public:
     AppletRandomConnectJoin( AppCommon& app, QWidget* parent );
 	virtual ~AppletRandomConnectJoin();
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
 
     void                        toGuiInfoMsg( char * logMsg );
 

@@ -21,9 +21,9 @@
 class NetworkEventAvail : public NetworkEventBase
 {
 public:
-	NetworkEventAvail( NetworkStateMachine& stateMachine, const char * lclIp, bool isCellularNetwork );
+	NetworkEventAvail( NetworkStateMachine& stateMachine, const char* lclIp, bool isCellularNetwork );
 
-	const char *				getLclIp( void )							{ return m_LclIp.c_str();  }
+	const char*				getLclIp( void )							{ return m_LclIp.c_str();  }
 	bool						getIsCellNetwork( void )					{ return m_bIsCellNetwork; }
 
 	virtual void				runNetworkEvent( void );

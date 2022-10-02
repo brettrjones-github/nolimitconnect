@@ -42,7 +42,7 @@ TodGameLogic::TodGameLogic( AppCommon& myApp, P2PEngine& engine, EPluginType plu
 }
 
 //============================================================================
-void TodGameLogic::setGuiWidgets(	GuiUser *	hisIdent,
+void TodGameLogic::setGuiWidgets(	GuiUser*	hisIdent,
 									TodGameWidget *	todGameWidget )
 {
 	m_HisIdent			= hisIdent;

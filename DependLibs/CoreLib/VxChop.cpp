@@ -33,7 +33,7 @@
 //============================================================================
 int VxChopStr( std::string &csStr, unsigned char * pu8RetChoppedStr )
 {
-	return VxChopStr( (const char *)csStr.c_str(), pu8RetChoppedStr );
+	return VxChopStr( (const char*)csStr.c_str(), pu8RetChoppedStr );
 }
 
 //============================================================================
@@ -52,7 +52,7 @@ void VxUnchopStr( unsigned char * pu8ChoppedStr, std::string &csRetStr )
 }
 
 //============================================================================
-int VxCalcChoppedLen( const char * pStrIn )
+int VxCalcChoppedLen( const char* pStrIn )
 {
 	unsigned char ucBitsPerOffset;
 	unsigned char ucHighest = 0;
@@ -125,7 +125,7 @@ int VxGetUnchopedStrLen( char * pu8ChoppedStr )
 
 //============================================================================
 // ChopStr returns Compressed length
-int VxChopStr( const char * pStrIn, unsigned char * pu8RetChoppedStr )
+int VxChopStr( const char* pStrIn, unsigned char * pu8RetChoppedStr )
 {
 	unsigned char ucBiggestOffset;
 

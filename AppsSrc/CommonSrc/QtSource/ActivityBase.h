@@ -47,7 +47,7 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 {
 	Q_OBJECT
 public:
-	ActivityBase( const char * objName, AppCommon& app, QWidget* parent, EApplet eAppletType = eAppletMessengerFrame, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
+	ActivityBase( const char* objName, AppCommon& app, QWidget* parent, EApplet eAppletType = eAppletMessengerFrame, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
     virtual ~ActivityBase() override = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
@@ -71,13 +71,13 @@ public:
     virtual TitleBarWidget *	getTitleBarWidget( void );
     virtual BottomBarWidget *	getBottomBarWidget( void );
     // get parent frame of this activity
-    virtual QFrame*			getContentItemsFrame( void );
+    virtual QFrame*				getContentItemsFrame( void );
     // get content frame of launch page
-    virtual QFrame*            getContentFrameOfLaunchFrame( void );
+    virtual QFrame*				getContentFrameOfLaunchFrame( void );
     // get content frame of messenger page
-    virtual QFrame*            getContentFrameOfMessengerFrame( void );
+    virtual QFrame*				getContentFrameOfMessengerFrame( void );
     // get content frame of opposit page
-    virtual QFrame*            getContentFrameOfOppositePageFrame( void );
+    virtual QFrame*				getContentFrameOfOppositePageFrame( void );
 
     VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
     virtual void                connectBarWidgets( void );
@@ -88,7 +88,7 @@ public:
  
 	void						setNewParent( QWidget* parent );
 
-	void						setupStyledDlg(	GuiUser *	    poFriend			= nullptr,
+	void						setupStyledDlg(	GuiUser*	    poFriend			= nullptr,
 												IdentWidget *	poIdentWidget		= nullptr,
 												EPluginType		ePluginType			= ePluginTypeInvalid,
 												VxPushButton *	poPermissionButton	= nullptr,
@@ -99,18 +99,18 @@ public:
 
     virtual void				setPluginType( EPluginType ePluginType )			{ m_ePluginType = ePluginType; }
 	virtual EPluginType			getPluginType( void )								{ return m_ePluginType; }
-    virtual void				setHisIdent( GuiUser * hisIdent )				    { m_HisIdent = hisIdent; }
-    virtual GuiUser *		    getHisIdent( void )									{ return m_HisIdent; }
+    virtual void				setHisIdent( GuiUser* hisIdent )				    { m_HisIdent = hisIdent; }
+    virtual GuiUser*		    getHisIdent( void )									{ return m_HisIdent; }
 
 	// override playMedia if is applet that plays media
 	virtual bool				playMedia( AssetBaseInfo& assetInfo, int pos0to100000 = 0 ) { return false; };
 
 	virtual void				okMessageBox( QString title, QString msg );
-	virtual void				okMessageBox2( QString title, const char * msg, ... );
+	virtual void				okMessageBox2( QString title, const char* msg, ... );
 	virtual bool				yesNoMessageBox( QString title, QString msg );
-	virtual bool				yesNoMessageBox2( QString title, const char * msg, ... );
+	virtual bool				yesNoMessageBox2( QString title, const char* msg, ... );
 	virtual void				errMessageBox( QString title, QString msg );
-	virtual void				errMessageBox2( QString title, const char * msg, ... );
+	virtual void				errMessageBox2( QString title, const char* msg, ... );
 
 	//! for derived classes to override and get in session state ( from OfferSessionCallbackInterface )
     virtual void 				onSessionStateChange( ESessionState eSessionState )	override		{}
@@ -320,7 +320,7 @@ protected:
     bool                        m_IsAppletLaunchWidget{false};
     QLabel *					m_StatusMsgLabel{nullptr};
 
-    GuiUser *				    m_HisIdent{nullptr};
+    GuiUser*				    m_HisIdent{nullptr};
     QTimer *					m_ResizingTimer{nullptr};
     bool						m_IsResizing{false};
 	QSize						m_ResizingWindowSize;

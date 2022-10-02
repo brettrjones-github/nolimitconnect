@@ -81,7 +81,7 @@ void AppCommon::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState
 //=== to gui media/render ===//
 //============================================================================
 //============================================================================
-void AppCommon::verifyGlState( const char * msg )  // show gl error if any
+void AppCommon::verifyGlState( const char* msg )  // show gl error if any
 {
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )

@@ -24,7 +24,7 @@ class VxGUID;
 class UserJoinedLastDb : public DbBase
 {
 public:
-    UserJoinedLastDb( P2PEngine& engine, UserJoinMgr& mgr, const char *dbName );
+    UserJoinedLastDb( P2PEngine& engine, UserJoinMgr& mgr, const char*dbName );
     virtual ~UserJoinedLastDb() = default;
 
     void						lockDb( void )    { m_DbMutex.lock(); }

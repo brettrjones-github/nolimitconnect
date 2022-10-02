@@ -28,7 +28,7 @@ public:
 	ChatRoomWidget( QWidget*parent = 0, EAssetType inputMode = eAssetTypeUnknown );
 	virtual ~ChatRoomWidget() = default;
 
-	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
+	void						setIdents( GuiUser* myIdent, GuiUser* hisIdent );
 	void						setEntryMode( EAssetType inputMode );
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );

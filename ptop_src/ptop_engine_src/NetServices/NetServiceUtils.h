@@ -37,8 +37,8 @@ public:
 
     std::string                 getNetworkKey( void );
 
-    static ENetCmdType			netCmdStringToEnum( const char * netCmd );
-	static const char *			netCmdEnumToString( ENetCmdType	eNetCmdType );
+    static ENetCmdType			netCmdStringToEnum( const char* netCmd );
+	static const char*			netCmdEnumToString( ENetCmdType	eNetCmdType );
 
 	EPluginType					parseHttpNetServiceUrl( VxSktBase* sktBase, NetServiceHdr& netServiceHdr );
 	EPluginType					parseHttpNetServiceHdr( char * dataBuf, int dataLen, NetServiceHdr& netServiceHdr );
@@ -84,7 +84,7 @@ public:
 													NetServiceHdr&		netServiceHdr, 
 													int					rxHdrTimeout = NETSERVICE_RX_URL_HDR_TIMEOUT, 
 													int					rxDataTimeout = NETSERVICE_RX_DATA_TIMEOUT );
-	bool						isValidHexString( const char * hexString, int dataLen );
+	bool						isValidHexString( const char* hexString, int dataLen );
 
 protected:
 	int							getNextPartOfUrl( char * buf, std::string& strValue );

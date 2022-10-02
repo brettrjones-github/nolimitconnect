@@ -31,13 +31,13 @@
 
 namespace
 {
-	const char * SERVICE_IP_CONNECT		= "urn:schemas-upnp-org:service:WANIPConnection:1";
-	const char * SERVICE_PPP_CONNECT	= "urn:schemas-upnp-org:service:WANPPPConnection:1";
+	const char* SERVICE_IP_CONNECT		= "urn:schemas-upnp-org:service:WANIPConnection:1";
+	const char* SERVICE_PPP_CONNECT	= "urn:schemas-upnp-org:service:WANPPPConnection:1";
 
 	uint32_t UpnpRootThreadHandler( void * pvContext )
 	{
 		bool bResult = false;
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		UpnpRootDevice * poDevice = (UpnpRootDevice *)poThread->getThreadUserParam();
 		if( poDevice )
@@ -50,7 +50,7 @@ namespace
 		return 0;
 	}
 
-	void XmlCallback( void * pvUserData, EXmlParseType eXmlType, const char * pName, const char * pValue )
+	void XmlCallback( void * pvUserData, EXmlParseType eXmlType, const char* pName, const char* pValue )
 	{
 		((UpnpRootDevice *)pvUserData)->xmlCallback( eXmlType, pName, pValue );
 	}
@@ -179,8 +179,8 @@ bool UpnpRootDevice::addPortMapToDevice()
 	}
 
 #if 0 // print contents to file for inspection
-	const char * pPath = oUrl.getPath();
-	const char * pFileName = strrchr( pPath, '/' );
+	const char* pPath = oUrl.getPath();
+	const char* pFileName = strrchr( pPath, '/' );
 	if( pFileName )
 	{
 		std::string strFileName = "F:/";
@@ -257,7 +257,7 @@ bool UpnpRootDevice::addPortMapToDevice()
 }
 
 //============================================================================
-bool UpnpRootDevice::requestAddPortMap( InetAddress& lclAddr, int iPortToMap, const char * pProtocol )
+bool UpnpRootDevice::requestAddPortMap( InetAddress& lclAddr, int iPortToMap, const char* pProtocol )
 {
 	if( m_DeviceThread.isAborted() )
 	{
@@ -448,7 +448,7 @@ bool UpnpRootDevice::currentXmlTags( const char* str1, const char* str2 )
 }
 
 //============================================================================
-void UpnpRootDevice::xmlCallback( EXmlParseType eXmlType, const char * pName, const char * pValue )
+void UpnpRootDevice::xmlCallback( EXmlParseType eXmlType, const char* pName, const char* pValue )
 {
 	if( eXmlStartTag == eXmlType )
 	{

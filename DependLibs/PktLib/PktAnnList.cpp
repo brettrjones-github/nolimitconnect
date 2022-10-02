@@ -44,7 +44,7 @@ void PktAnnList::calcPktLen( void )
 }
 
 //============================================================================
-int PktAnnList::addAnn( VxNetIdent * poPktAnn )
+int PktAnnList::addAnn( VxNetIdent* poPktAnn )
 {
 	if( sizeof( VxNetIdent ) * m_u16ListCnt > MAX_PKT_ANN_LIST_LEN )
 	{

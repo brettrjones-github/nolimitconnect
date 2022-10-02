@@ -37,12 +37,12 @@
 
 char *utf16_to_utf8(const wchar_t *input);
 char *utf16_to_ansi(const wchar_t *input);
-wchar_t *utf8_to_utf16(const char *input);
+wchar_t *utf8_to_utf16(const char*input);
 void init_commandline_arguments_utf8(int *argc, char ***argv);
 void free_commandline_arguments_utf8(int *argc, char ***argv);
-FILE *mt_fopen_utf8(const char *filename_utf8, const char *mode_utf8);
-int stat_utf8(const char *path_utf8, struct _stat *buf);
-int unlink_utf8(const char *path_utf8);
+FILE *mt_fopen_utf8(const char*filename_utf8, const char*mode_utf8);
+int stat_utf8(const char*path_utf8, struct _stat *buf);
+int unlink_utf8(const char*path_utf8);
 void init_console_utf8(void);
 void uninit_console_utf8(void);
 

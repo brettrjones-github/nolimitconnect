@@ -44,7 +44,7 @@ public:
     AssetBaseInfo( enum EAssetType assetType, VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
     AssetBaseInfo( enum EAssetType assetType, const std::string& fileName );
     AssetBaseInfo( enum EAssetType assetType, const std::string& fileName, VxGUID& assetId );
-    AssetBaseInfo( enum EAssetType assetType, const char * fileName, uint64_t fileLen );
+    AssetBaseInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
     AssetBaseInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
     AssetBaseInfo( enum EAssetType assetType, VxGUID& creatorId, VxGUID& assetId );
     virtual ~AssetBaseInfo() = default;
@@ -86,12 +86,12 @@ public:
     virtual bool				isDeleted( void )                               { return m_AttributeFlags & ASSET_ATTRIB_DELETED ? true : false; }
 
     // assetName is usually the file name
-    virtual void				setAssetName( const char * assetName );
+    virtual void				setAssetName( const char* assetName );
     virtual void				setAssetName( std::string& assetName )          { m_AssetName = assetName; }
     virtual std::string&		getAssetName( void )                            { return m_AssetName; }
     virtual std::string			getRemoteAssetName( void );
 
-    virtual void				setAssetTag( const char * assetTag );
+    virtual void				setAssetTag( const char* assetTag );
     virtual std::string&		getAssetTag( void ) { return m_AssetTag; }
 
     virtual void				setAssetType( enum EAssetType assetType )       { m_u16AssetType = (uint16_t)assetType; }
@@ -106,16 +106,16 @@ public:
     virtual VxSha1Hash&			getAssetHashId( void )                          { return m_AssetHash; }
 
     virtual void				setAssetUniqueId( VxGUID& uniqueId )            { m_UniqueId = uniqueId; }
-    virtual void				setAssetUniqueId( const char * guid )           { m_UniqueId.fromVxGUIDHexString( guid ); }
+    virtual void				setAssetUniqueId( const char* guid )           { m_UniqueId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getAssetUniqueId( void )                        { return m_UniqueId; }
     virtual VxGUID&				generateNewUniqueId( bool ifNotValid = false ); // generates unique id, assigns it to asset and returns reference to it
 
     virtual void				setCreatorId( VxGUID creatorId )                { BaseInfo::setOnlineId( creatorId ); }
-    virtual void				setCreatorId( const char * creatorId )          { BaseInfo::setOnlineId( creatorId ); }
+    virtual void				setCreatorId( const char* creatorId )          { BaseInfo::setOnlineId( creatorId ); }
     virtual VxGUID&				getCreatorId( void )                            { return BaseInfo::getOnlineId(); }
 
     virtual void				setHistoryId( VxGUID& historyId )               { m_HistoryId = historyId; }
-    virtual void				setHistoryId( const char * historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
+    virtual void				setHistoryId( const char* historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getHistoryId( void )                            { return m_HistoryId; }
 
     virtual void				setLocationFlags( uint32_t locFlags )           { m_LocationFlags = locFlags; }
@@ -142,11 +142,11 @@ public:
     virtual void				setPlayPosition( int pos0to100000 )             { m_PlayPosition0to100000 = pos0to100000; }
     virtual int					getPlayPosition( void )                         { return m_PlayPosition0to100000; }
 
-    virtual void				updateAssetInfo( VxThread * callingThread );
+    virtual void				updateAssetInfo( VxThread* callingThread );
     virtual bool				needsHashGenerated( void );
 
-    static const char *			getDefaultFileExtension( enum EAssetType assetType );
-    static const char *			getSubDirectoryName( enum EAssetType assetType );
+    static const char*			getDefaultFileExtension( enum EAssetType assetType );
+    static const char*			getSubDirectoryName( enum EAssetType assetType );
 
     virtual void                print( void ) const;
 

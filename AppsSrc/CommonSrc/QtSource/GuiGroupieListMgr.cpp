@@ -182,7 +182,7 @@ GuiGroupie* GuiGroupieListMgr::updateGroupie( VxNetIdent* hisIdent, EHostType ho
 
     GroupieId groupieId( hisIdent->getMyOnlineId(), hostType );
     GuiGroupie* guiGroupie = findGroupie( hisIdent->getMyOnlineId(), hostType );
-    GuiUser * user = m_MyApp.getUserMgr().updateUser( hisIdent, hostType );
+    GuiUser* user = m_MyApp.getUserMgr().updateUser( hisIdent, hostType );
     if( user )
     {
         if( guiGroupie && guiGroupie->getUser()->getMyOnlineId() == hisIdent->getMyOnlineId() )

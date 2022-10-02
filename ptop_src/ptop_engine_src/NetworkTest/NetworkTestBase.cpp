@@ -41,7 +41,7 @@ namespace
     //============================================================================
     void * NetworkTestBaseThreadFunc( void * pvContext )
     {
-        VxThread * poThread = ( VxThread * )pvContext;
+        VxThread* poThread = ( VxThread* )pvContext;
         poThread->setIsThreadRunning( true );
         NetworkTestBase * netTest = ( NetworkTestBase * )poThread->getThreadUserParam();
         if( netTest && false == poThread->isAborted() )
@@ -85,7 +85,7 @@ void NetworkTestBase::stopNetworkTest( void )
 }
 
 //============================================================================
-void NetworkTestBase::sendRunTestStatus( ERunTestStatus eStatus, const char * msg, ... )
+void NetworkTestBase::sendRunTestStatus( ERunTestStatus eStatus, const char* msg, ... )
 {
     char as8Buf[ 1024 ];
     va_list argList;
@@ -97,7 +97,7 @@ void NetworkTestBase::sendRunTestStatus( ERunTestStatus eStatus, const char * ms
 }
 
 //============================================================================
-void NetworkTestBase::sendTestLog( const char * msg, ... )
+void NetworkTestBase::sendTestLog( const char* msg, ... )
 {
     char as8Buf[ 1024 ];
     va_list argList;

@@ -26,7 +26,8 @@ public:
 	ActivityYesNoMsgBox(	AppCommon&		app, 
 							QWidget*		parent, 
 							QString			title, 
-							QString			bodyText ); 
+							QString			bodyText,
+							bool			showNeverAgainCheckBox = false); 
 	virtual ~ActivityYesNoMsgBox() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

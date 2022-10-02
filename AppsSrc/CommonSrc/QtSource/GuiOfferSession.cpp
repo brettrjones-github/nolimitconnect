@@ -103,14 +103,14 @@ OfferSessionState * GuiOfferSession::createNewSessionState( AppCommon& myApp, Gu
 }
 
 //============================================================================
-void GuiOfferSession::addMsg( const char * pMsg )
+void GuiOfferSession::addMsg( const char* pMsg )
 {
 	std::string msg = pMsg;
 	m_aoQuedMessages.push_back( msg );
 }
 
 //============================================================================
-void GuiOfferSession::setFileName( const char * fileName )
+void GuiOfferSession::setFileName( const char* fileName )
 {
 	if( fileName )
 	{

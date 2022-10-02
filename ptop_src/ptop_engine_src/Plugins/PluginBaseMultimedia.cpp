@@ -48,10 +48,10 @@ void PluginBaseMultimedia::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		
+bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
 													int				pvUserData,
-													const char *	pOfferMsg,		
-													const char *	pFileName,
+													const char*	pOfferMsg,		
+													const char*	pFileName,
 													uint8_t *		fileHashId,
 													VxGUID			lclSessionId )	
 {
@@ -69,7 +69,7 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 	}
 	else
 	{
-		const char * offerMsg = pOfferMsg;
+		const char* offerMsg = pOfferMsg;
 		if( ( 0 == offerMsg ) || ( 0 == strlen( offerMsg ) ) )
 		{
 			offerMsg = "Text Chat";
@@ -89,7 +89,7 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiOfferReply(	VxNetIdent *	netIdent,
+bool PluginBaseMultimedia::fromGuiOfferReply(	VxNetIdent*	netIdent,
 											    int				pvUserData,				
 											    EOfferResponse	eOfferResponse,
 											    VxGUID			lclSessionId )

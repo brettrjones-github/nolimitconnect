@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "PluginBaseFiles.h"
+#include "FileInfoClientFilesMgr.h"
 
 class PluginBaseFilesClient : public PluginBaseFiles
 {
@@ -56,6 +57,7 @@ public:
 	uint8_t						getSearchFileTypes( void )							{ return m_FileTypes; }
 
 protected:
+	FileInfoClientFilesMgr      m_FileInfoClientFilesMgr;
 	VxNetIdent*					m_HisIdent{ nullptr };
 	VxGUID						m_HisOnlineId;
 	VxGUID						m_SearchSessionId;

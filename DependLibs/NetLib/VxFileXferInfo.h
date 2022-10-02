@@ -50,9 +50,9 @@ public:
 	void						setXferDirection( EXferDirection dir )		{ m_XferDirection = dir; }
 	EXferDirection				getXferDirection( void )					{ return m_XferDirection; }
 
-	void						setLclFileName( const char * fileName )		{ m_strLocalFileName = fileName; }
+	void						setLclFileName( const char* fileName )		{ m_strLocalFileName = fileName; }
 	std::string&				getLclFileName( void )						{ return m_strLocalFileName; }
-	void						setRmtFileName( const char * fileName )		{ m_strRemoteFileName = fileName; }
+	void						setRmtFileName( const char* fileName )		{ m_strRemoteFileName = fileName; }
 	std::string&				getRmtFileName( void )						{ return m_strRemoteFileName; }
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }

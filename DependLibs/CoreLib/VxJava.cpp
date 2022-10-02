@@ -51,7 +51,7 @@ JNIEnv * VxJava::getJavaEnv( void )
 }
 
 //============================================================================
-void ThreadStartCallbackFunction( unsigned int uiThreadId, const char * threadName )
+void ThreadStartCallbackFunction( unsigned int uiThreadId, const char* threadName )
 {
 //    char buf[1024];
 //    sprintf(buf, "Android ThreadStartCallbackFunction Thread %d %s\n", uiThreadId, threadName);
@@ -81,7 +81,7 @@ void ThreadStartCallbackFunction( unsigned int uiThreadId, const char * threadNa
 }
 
 //============================================================================
-void ThreadExitCallbackFunction( unsigned int uiThreadId, bool isExitCallbackLocked, const char * threadName )
+void ThreadExitCallbackFunction( unsigned int uiThreadId, bool isExitCallbackLocked, const char* threadName )
 {
     if( false == isExitCallbackLocked )
     {

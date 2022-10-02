@@ -97,7 +97,7 @@ EDbBindType DbBindParam::getType( void )
 }
 
 //============================================================================
-const char * DbBindParam::getText( void )
+const char* DbBindParam::getText( void )
 {
 	vx_assert( eDbBindTypeText == m_EDbBindType );
 	return( m_AsText.c_str() );
@@ -262,7 +262,7 @@ bool DbBindList::getNext( DbBindParam** ppBindParam )
 }
 
 //============================================================================
-DbBase::DbBase( const char * databaseName ) 
+DbBase::DbBase( const char* databaseName ) 
 : m_strDatabaseName( databaseName )
 , m_bDbInitialized(0)
 , m_iDbVersion(0)
@@ -272,7 +272,7 @@ DbBase::DbBase( const char * databaseName )
 
 //============================================================================
 //! Initialize the database.. if doesn't exist then call DbCreateDatabase and DbCreateTables
-RCODE DbBase::dbStartup( int iDbVersion, const char * pDbName )
+RCODE DbBase::dbStartup( int iDbVersion, const char* pDbName )
 {
 	// in theory although sqlite is not thread safe you should be able to access multiple separate instances as same time by different threads.
 	// Just to make sure we are only allowing one startup of database at a time
@@ -468,7 +468,7 @@ RCODE DbBase::writeDatabaseVersion( int iDbVersion )
 
 //============================================================================
 //! return true if table exists
-bool DbBase::dbTableExists( const char * pTableName )
+bool DbBase::dbTableExists( const char* pTableName )
 {
 	dbOpen();
 	bool bHasTable = false;
@@ -503,7 +503,7 @@ bool DbBase::dbTableExists( const char * pTableName )
 
 
 //============================================================================
-RCODE DbBase::sqlExec( const char *		SQL_Statement, 
+RCODE DbBase::sqlExec( const char*		SQL_Statement, 
                        DbBindList&		bindList )
 {
 	EDbBindType			bindType;
@@ -723,7 +723,7 @@ RCODE DbBase::sqlExec( std::string& statement )
 }
 
 //============================================================================
-RCODE DbBase::sqlExec( const char * SQL_Statement )
+RCODE DbBase::sqlExec( const char* SQL_Statement )
 {
 	char *SQL_Error;
 	int retval;
@@ -747,7 +747,7 @@ RCODE DbBase::sqlExec( const char * SQL_Statement )
 }
 
 //============================================================================
-void DbBase::handleSqlError( RCODE rc, const char * errMsg, ... )
+void DbBase::handleSqlError( RCODE rc, const char* errMsg, ... )
 {
 	char szBuffer[1024];
 	va_list arg_ptr;
@@ -760,7 +760,7 @@ void DbBase::handleSqlError( RCODE rc, const char * errMsg, ... )
 
 //============================================================================
 //! start query and use DbCursor to access column's data.. be sure to call DbCursor.close() when done
-DbCursor * DbBase::startQuery( const char * pSqlString )
+DbCursor * DbBase::startQuery( const char* pSqlString )
 {
 	vx_assert( pSqlString );
 	RCODE rc = dbOpen();
@@ -770,7 +770,7 @@ DbCursor * DbBase::startQuery( const char * pSqlString )
 		int iResult = sqlite3_prepare_v2( m_Db, pSqlString, (int)strlen( pSqlString ), &poSqlStatement, NULL );
 		if( SQLITE_OK != iResult ) 
 		{
-			const char * sqliteErrMsg = sqlite3_errmsg(m_Db);
+			const char* sqliteErrMsg = sqlite3_errmsg(m_Db);
 			handleSqlError( LOG_ERROR, "DbBase::StartDataQuery: error %s statement %s", sqliteErrMsg, pSqlString );
 			return NULL;
 		}
@@ -962,7 +962,7 @@ DbCursor* DbBase::startQuery( const char* pSqlString, const char* textParam1, co
 //============================================================================
 //! start query and use DbCursor to access column's data.. be sure to call DbCursor.close() when done
 // TODO use bind list to avoid possible injection
-DbCursor * DbBase::startQueryInsecure( const char * pSqlString, ... )
+DbCursor * DbBase::startQueryInsecure( const char* pSqlString, ... )
 {
 	char SQL_Statement[4095];
 
@@ -1059,9 +1059,9 @@ double DbCursor::getF64( int iColumnIdx )
 }
 
 //============================================================================
-const char * DbCursor::getString(int iColumnIdx )
+const char* DbCursor::getString(int iColumnIdx )
 {
-	return (const char *)sqlite3_column_text( m_Stmt, iColumnIdx );
+	return (const char*)sqlite3_column_text( m_Stmt, iColumnIdx );
 }
 
 //============================================================================

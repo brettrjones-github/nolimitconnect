@@ -30,7 +30,7 @@ public:
 	NetworkMonitor( P2PEngine& engine );
     ~NetworkMonitor() = default;
 
-	void						networkMonitorStartup( const char * preferredNetIp = "", const char * cellNetIp = "" );
+	void						networkMonitorStartup( const char* preferredNetIp = "", const char* cellNetIp = "" );
 	void						networkMonitorShutdown( void );
 
 	void						onOncePerSecond( void );
@@ -39,7 +39,7 @@ public:
     void                        setIsInternetAvailable( bool isAvail );
     bool                        getIsInternetAvailable( void )              { return m_InternetAvailable; }
 
-    void                        doNetworkConnectTestThread( VxThread * startupThread );
+    void                        doNetworkConnectTestThread( VxThread* startupThread );
 
 protected:
     void                        triggerDetermineIp( void );

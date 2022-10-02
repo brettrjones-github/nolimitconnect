@@ -39,7 +39,7 @@ public:
 
 	void                        setIdentity( GuiUser* guiUser );
 
-    void						addFile( GuiUser * netIdent, VxMyFileInfo& fileInfo  );
+    void						addFile( GuiUser* netIdent, VxMyFileInfo& fileInfo  );
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
@@ -63,7 +63,7 @@ protected:
     virtual void				toGuiStartDownload( GuiFileXferSession* xferSession ) override;
     virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
-	FileXferWidget*			fileToWidget( GuiUser * netIdent, VxMyFileInfo& fileInfo );
+	FileXferWidget*			fileToWidget( GuiUser* netIdent, VxMyFileInfo& fileInfo );
 	void						updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* xferSession );
 	GuiFileXferSession*		widgetToFileItemInfo( FileXferWidget* item );
 
@@ -81,7 +81,7 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletFileShareClientViewUi	ui;
-    GuiUser *				    m_Friend{ nullptr };
+    GuiUser*				    m_Friend{ nullptr };
 	int							m_iMenuItemHeight{ 34 };
 	std::string					m_strCurrentDirectory;
 	GuiFileXferSession*		m_SelectedFileInfo{ nullptr };

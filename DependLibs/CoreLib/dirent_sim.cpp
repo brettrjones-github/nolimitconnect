@@ -15,7 +15,7 @@ extern "C" {
 		size_t *pReturnValue,
 		wchar_t *wcstr,
 		size_t sizeInWords,
-		const char *mbstr,
+		const char*mbstr,
 		size_t count );
 
 	static int dirent_wcstombs_s(
@@ -317,7 +317,7 @@ extern "C" {
 	/*
 	* Open directory stream using plain old C-string.
 	*/
-DIR * opendir( const char *dirname )
+DIR * opendir( const char*dirname )
 	{
 		struct DIR *dirp;
 		int error;
@@ -513,7 +513,7 @@ DIR * opendir( const char *dirname )
 			size_t *pReturnValue,
 			wchar_t *wcstr,
 			size_t sizeInWords,
-			const char *mbstr,
+			const char*mbstr,
 			size_t count )
 	{
 		int error;

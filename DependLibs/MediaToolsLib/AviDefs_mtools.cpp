@@ -64,11 +64,11 @@ void AviFourCC::setFourCC( uint8_t char1, uint8_t char2, uint8_t char3, uint8_t 
 }
 
 //============================================================================
-bool AviFourCC::isIdEqual( const char * idStr ) // idStr example "LIST" or MJPG
+bool AviFourCC::isIdEqual( const char* idStr ) // idStr example "LIST" or MJPG
 {
 	if( idStr && ( 4 <= strlen( idStr ) ) )
 	{
-		const char * tmp = (const char *)&m_FourCC;
+		const char* tmp = (const char*)&m_FourCC;
 		for( int i = 0; i < 4; i++ )
 		{
 			if( toupper( tmp[i] ) != idStr[i] )

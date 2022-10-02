@@ -35,7 +35,7 @@ public:
 							        QWidget*			parent = nullptr );
 	virtual ~AppletRandomConnectJoinSearch();
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
     void						setStatusLabel( QString strMsg );

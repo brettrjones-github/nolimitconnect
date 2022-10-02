@@ -40,25 +40,25 @@ uint16_t INlc::fromGuiGetAppVersionBinary( void )
 }
 
 //============================================================================
-const char * INlc::fromGuiGetAppVersionString( void )
+const char* INlc::fromGuiGetAppVersionString( void )
 {
     return VxGetAppVersionString();
 }
 
 //============================================================================
-const char * INlc::fromGuiGetAppName( void )
+const char* INlc::fromGuiGetAppName( void )
 {
     return VxGetApplicationTitle();
 }
 
 //============================================================================
-const char * INlc::fromGuiGetAppNameNoSpaces( void )
+const char* INlc::fromGuiGetAppNameNoSpaces( void )
 {
     return VxGetApplicationNameNoSpaces();
 }
 
 //============================================================================
-void INlc::fromGuiAppStartup( const char * assetDir, const char * rootDataDir )
+void INlc::fromGuiAppStartup( const char* assetDir, const char* rootDataDir )
 {
     //LogMsg( LOG_DEBUG, "INlc::fromGuiAppStartup.. calling fromGuiSetupContext\n");
     //if( 0 == m_AudioMgr )
@@ -86,14 +86,14 @@ void INlc::fromGuiKickWatchdog( void )
 }
 
 //============================================================================
-void INlc::fromGuiSetUserXferDir( const char * userDir )
+void INlc::fromGuiSetUserXferDir( const char* userDir )
 {
     //LogMsg( LOG_DEBUG, "INlc::fromGuiSetUserXferDir %s\n", userDir );
     getPtoP().fromGuiSetUserXferDir( userDir );
 }
 
 //============================================================================
-void INlc::fromGuiSetUserSpecificDir( const char * userDir )
+void INlc::fromGuiSetUserSpecificDir( const char* userDir )
 {
     getPtoP().fromGuiSetUserSpecificDir( userDir );
     // needs called after user specific data folder is set
@@ -141,13 +141,13 @@ void INlc::fromGuiUserLoggedOn( VxNetIdent* netIdent )
 }
 
 //============================================================================
-void INlc::fromGuiOnlineNameChanged( const char * newOnlineName )
+void INlc::fromGuiOnlineNameChanged( const char* newOnlineName )
 {
     getPtoP().fromGuiOnlineNameChanged( newOnlineName );
 }
 
 //============================================================================
-void INlc::fromGuiMoodMessageChanged( const char * newMoodMessage )
+void INlc::fromGuiMoodMessageChanged( const char* newMoodMessage )
 {
     getPtoP().fromGuiMoodMessageChanged( newMoodMessage );
 }
@@ -297,7 +297,7 @@ void INlc::fromGuiNetworkSettingsChanged( void )
 }
 
 //============================================================================
-void INlc::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
+void INlc::fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork )
 {
     getPtoP().fromGuiNetworkAvailable( lclIp, isCellularNetwork );
 }
@@ -363,7 +363,7 @@ void INlc::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId )
 }
 
 //============================================================================
-void INlc::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType )
+void INlc::fromGuiRunUrlAction( VxGUID& sessionId, const char* myUrl, const char* ptopUrl, ENetCmdType testType )
 {
     getPtoP().fromGuiRunUrlAction( sessionId, myUrl, ptopUrl, testType );
 }
@@ -381,13 +381,13 @@ void INlc::fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings )
 }
 
 //============================================================================
-void INlc::fromGuiUpdateWebPageProfile( const char *	pProfileDir,	// directory containing user profile
-                                             const char *	strGreeting,	// greeting text
-                                             const char *	aboutMe,		// about me text
-                                             const char *	url1,			// favorite url 1
-                                             const char *	url2,			// favorite url 2
-                                             const char *	url3,
-                                             const char *	donation )
+void INlc::fromGuiUpdateWebPageProfile( const char*	pProfileDir,	// directory containing user profile
+                                             const char*	strGreeting,	// greeting text
+                                             const char*	aboutMe,		// about me text
+                                             const char*	url1,			// favorite url 1
+                                             const char*	url2,			// favorite url 2
+                                             const char*	url3,
+                                             const char*	donation )
 {
     getPtoP().fromGuiUpdateWebPageProfile( pProfileDir,	// directory containing user profile
                                           strGreeting,	// greeting text
@@ -444,8 +444,8 @@ bool INlc::fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID oOnlineId, 
 bool INlc::fromGuiMakePluginOffer( EPluginType		ePluginType,
                                         VxGUID&			oOnlineId,
                                         int				pvUserData,
-                                        const char *	pOfferMsg,
-                                        const char *	pFileName,
+                                        const char*	pOfferMsg,
+                                        const char*	pFileName,
                                         VxGUID&			sessionId )
 {
     return getPtoP().fromGuiMakePluginOffer( ePluginType,
@@ -474,8 +474,8 @@ bool INlc::fromGuiToPluginOfferReply( EPluginType		ePluginType,
 //============================================================================
 int INlc::fromGuiPluginControl( EPluginType		ePluginType,
                                      VxGUID&			oOnlineId,
-                                     const char *	pControl,
-                                     const char *	pAction,
+                                     const char*	pControl,
+                                     const char*	pAction,
                                      uint32_t				u32ActionData,
                                      VxGUID&			lclSessionId,
                                      uint8_t *			fileHashData )
@@ -492,7 +492,7 @@ int INlc::fromGuiPluginControl( EPluginType		ePluginType,
 //============================================================================
 bool INlc::fromGuiInstMsg( EPluginType		ePluginType,
                                 VxGUID&			oOnlineId,
-                                const char *	pMsg )
+                                const char*	pMsg )
 {
     return getPtoP().fromGuiInstMsg( ePluginType, oOnlineId, pMsg );
 }
@@ -542,7 +542,7 @@ void INlc::fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCou
 }
 
 //============================================================================
-void INlc::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern )
+void INlc::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char* pSearchPattern )
 {
     getPtoP().fromGuiStartScan( eScanType, searchFlags, fileTypeFlags, pSearchPattern );
 }
@@ -578,7 +578,7 @@ void INlc::fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOn
 }
 
 //============================================================================
-void INlc::fromGuiQueryMyIdent( VxNetIdent * poRetIdent )
+void INlc::fromGuiQueryMyIdent( VxNetIdent* poRetIdent )
 {
     getPtoP().fromGuiQueryMyIdent( poRetIdent );
 }
@@ -634,7 +634,7 @@ bool INlc::fromGuiSetGameActionVar( EPluginType	ePluginType,
 //============================================================================
 bool INlc::fromGuiTestCmd( IFromGui::ETestParam1		eTestParam1,
                                 int							testParam2,
-                                const char *				testParam3 )
+                                const char*				testParam3 )
 {
     return getPtoP().fromGuiTestCmd( eTestParam1, testParam2, testParam3 );
 }
@@ -646,7 +646,7 @@ bool INlc::fromGuiNearbyBroadcastEnable( bool enable )
 }
 
 //============================================================================
-void INlc::fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName )
+void INlc::fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName )
 {
     getPtoP().fromGuiDebugSettings( u32LogFlags, pLogFileName );
 }
@@ -658,7 +658,7 @@ void INlc::fromGuiSendLog( uint32_t u32LogFlags )
 }
 
 //============================================================================
-bool INlc::fromGuiBrowseFiles( const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
+bool INlc::fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask )
 {
     return getPtoP().fromGuiBrowseFiles( dir, lookupShareStatus, fileFilterMask );
 }
@@ -670,13 +670,13 @@ bool INlc::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool INlc::fromGuiSetFileIsShared( const char * fileName, bool isShared )
+bool INlc::fromGuiSetFileIsShared( const char* fileName, bool isShared )
 {
     return getPtoP().fromGuiSetFileIsShared( fileName, isShared );
 }
 
 //============================================================================
-bool INlc::fromGuiGetIsFileShared( const char * fileName )
+bool INlc::fromGuiGetIsFileShared( const char* fileName )
 {
     return getPtoP().fromGuiGetIsFileShared( fileName );
 }
@@ -688,7 +688,7 @@ int INlc::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool INlc::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
+bool INlc::fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId )
 {
     return getPtoP().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
 }
@@ -700,25 +700,25 @@ void INlc::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool INlc::fromGuiGetIsFileInLibrary( const char * fileName )
+bool INlc::fromGuiGetIsFileInLibrary( const char* fileName )
 {
     return getPtoP().fromGuiGetIsFileInLibrary( fileName );
 }
 
 //============================================================================
-bool INlc::fromGuiIsMyP2PWebVideoFile( const char * fileName )
+bool INlc::fromGuiIsMyP2PWebVideoFile( const char* fileName )
 {
     return getPtoP().fromGuiIsMyP2PWebVideoFile( fileName );
 }
 
 //============================================================================
-bool INlc::fromGuiIsMyP2PWebAudioFile( const char * fileName )
+bool INlc::fromGuiIsMyP2PWebAudioFile( const char* fileName )
 {
     return getPtoP().fromGuiIsMyP2PWebAudioFile( fileName );
 }
 
 //============================================================================
-int INlc::fromGuiDeleteFile( const char * fileName, bool shredFile )
+int INlc::fromGuiDeleteFile( const char* fileName, bool shredFile )
 {
     return getPtoP().fromGuiDeleteFile( fileName, shredFile );
 }
@@ -742,13 +742,13 @@ bool INlc::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-bool INlc::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName )
+bool INlc::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName )
 {
     return getPtoP().fromGuiVideoRecord( eRecState, feedId, fileName );
 }
 
 //============================================================================
-bool INlc::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName )
+bool INlc::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName )
 {
     return getPtoP().fromGuiSndRecord( eRecState, feedId, fileName );
 }

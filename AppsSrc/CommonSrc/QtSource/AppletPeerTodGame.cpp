@@ -111,7 +111,7 @@ void AppletPeerTodGame::onEndSession( void )
 }
 
 //============================================================================
-void AppletPeerTodGame::toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerTodGame::toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg )
 {
 	if( ( ePluginType == m_ePluginType )
 		&& m_HisIdent 

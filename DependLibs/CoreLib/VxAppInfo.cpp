@@ -31,7 +31,7 @@ const char* VxAppInfo::getCompanyWebsite( void )
 }
 
 //=============================================================================
-const char * VxAppInfo::getCompanyDomain( void )
+const char* VxAppInfo::getCompanyDomain( void )
 {
     return VxGetCompanyDomain();
 }

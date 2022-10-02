@@ -72,11 +72,11 @@ public:
 	//! return string with friend state He has given Me
 	void						describeHisFriendshipToMe( std::string & strRetPermission );
 	//! return string with friend state He has given Me
-	const char *				describeHisFriendshipToMe( void );
+	const char*				describeHisFriendshipToMe( void );
 	//! return string with friend state I have given Him
 	void						describeMyFriendshipToHim( std::string & strRetPermission );
 	//! return string with friend state I have given Him
-	const char *				describeMyFriendshipToHim( void );
+	const char*				describeMyFriendshipToHim( void );
 
 	//=== vars ===//
     uint8_t						m_u8FriendMatch{ 0x11 };

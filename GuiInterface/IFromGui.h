@@ -109,21 +109,21 @@ public:
 	/// return engine version in binary
 	virtual uint16_t			fromGuiGetAppVersionBinary( void ) = 0;
 	/// return engine version as a 1.2.3 version number
-	virtual const char *		fromGuiGetAppVersionString( void ) = 0;
+	virtual const char*		fromGuiGetAppVersionString( void ) = 0;
 	/// returns My P2P Web or Test App if commercial build
-	virtual const char *		fromGuiGetAppName( void ) = 0;
+	virtual const char*		fromGuiGetAppName( void ) = 0;
 	/// returns MyP2PWeb or TestApp if commercial build
-	virtual const char *		fromGuiGetAppNameNoSpaces( void ) = 0;
+	virtual const char*		fromGuiGetAppNameNoSpaces( void ) = 0;
 
 	/// First call to engine should send path to assets ( game and app resources ) and path to root of where to write application data
-	virtual void				fromGuiAppStartup( const char * assetsDir, const char * rootDataDir ) = 0;
+	virtual void				fromGuiAppStartup( const char* assetsDir, const char* rootDataDir ) = 0;
 	/// not currently used except for debug.. tells engine application is still running
 	virtual void				fromGuiKickWatchdog( void ) = 0;
 
 	/// Second call to engine should send path where to write login name specific application data 
-	virtual void				fromGuiSetUserSpecificDir( const char * userSpecificDir ) = 0;
+	virtual void				fromGuiSetUserSpecificDir( const char* userSpecificDir ) = 0;
 	/// Third call to engine should send path where to put downloads from other users
-	virtual void				fromGuiSetUserXferDir( const char * userDownloadDir ) = 0;
+	virtual void				fromGuiSetUserXferDir( const char* userDownloadDir ) = 0;
 	/// Call to engine when application is about to exit
 	virtual void				fromGuiAppShutdown( void ) = 0;
 	/// Returns disk space available in incomplete downloads directory
@@ -159,12 +159,12 @@ public:
 	virtual void				fromGuiNativeGlDestroy( void ) = 0;
 
 	/// Record audio control
-	virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName ) = 0;
+	virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName ) = 0;
 	/// Record video control
-	virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName  ) = 0;
+	virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName  ) = 0;
 
     //! play video or audio file
-	virtual bool				fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen, uint8_t fileType, int pos ) = 0;
+	virtual bool				fromGuiPlayLocalMedia( const char*  fileName, uint64_t fileLen, uint8_t fileType, int pos ) = 0;
 
 	//! play video or audio file
 	virtual bool				fromGuiPlayLocalMedia( const char* fileName, uint64_t fileLen, uint8_t fileType, VxGUID assetId, int pos ) = 0;
@@ -182,9 +182,9 @@ public:
 	/// Called with identity of user that logged on
 	virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent ) = 0;
 	/// Called when user changes his/her online name
-	virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) = 0;
+	virtual void				fromGuiOnlineNameChanged( const char* newOnlineName ) = 0;
 	/// Called when user changes his/her mood message
-	virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) = 0;
+	virtual void				fromGuiMoodMessageChanged( const char* newMoodMessage ) = 0;
     /// Called when user changes his/her personal info
     virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent ) = 0;
 
@@ -193,7 +193,7 @@ public:
 	/// Called when user changes permission level of plugin
 	virtual void				fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly = false ) = 0;
 	/// Can be called to get users identity from engine.. usually for current node url or network info
-	virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent ) = 0;
+	virtual void				fromGuiQueryMyIdent( VxNetIdent* poRetIdent ) = 0;
 	/// Can tell engine to set has offers flag to be restored if application is restarted
 	virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers ) = 0;
 	/// Change permission level granted to a contact 
@@ -212,7 +212,7 @@ public:
 	virtual void				fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMaxCnt ) = 0;
 
 	/// Call when internet connection is available
-	virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false ) = 0;
+	virtual void				fromGuiNetworkAvailable( const char* lclIp = NULL, bool isCellularNetwork = false ) = 0;
 	/// Call when internet connection is disconnected
 	virtual void				fromGuiNetworkLost( void ) = 0;
     /// state of a network layer
@@ -220,7 +220,7 @@ public:
 	/// Run test to see if TCP port is open and what the external IP Address is
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) = 0;
     /// Run test on the given url
-    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType ) = 0;
+    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char* myUrl, const char* ptopUrl, ENetCmdType testType ) = 0;
 
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) = 0;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) = 0;
@@ -235,13 +235,13 @@ public:
 	/// Get file share settings
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings ) = 0;
 	/// Update About Me Web page
-	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
-																const char *	strGreeting,	// greeting text
-																const char *	aboutMe,		// about me text
-																const char *	url1,			// favorite url 1
-																const char *	url2,			// favorite url 2
-                                                                const char *	url3,           // favorite url 3
-                                                                const char *	donation ) = 0;	// donation		
+	virtual void				fromGuiUpdateWebPageProfile(	const char*	pProfileDir,	// directory containing user profile
+																const char*	strGreeting,	// greeting text
+																const char*	aboutMe,		// about me text
+																const char*	url1,			// favorite url 1
+																const char*	url2,			// favorite url 2
+                                                                const char*	url3,           // favorite url 3
+                                                                const char*	donation ) = 0;	// donation		
 	/// Set permission level required to access a plugin
 	virtual void				fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) = 0;
 	/// Get permission level required to access a plugin
@@ -259,8 +259,8 @@ public:
 	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 														VxGUID&			onlineId,
 														int				pvUserData,
-														const char *	pOfferMsg, 
-														const char *	pFileName = NULL,
+														const char*	pOfferMsg, 
+														const char*	pFileName = NULL,
 														uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	/// Contact sent session offer reply
@@ -272,15 +272,15 @@ public:
 	/// Plugin control such as cancel download etc.
 	virtual int					fromGuiPluginControl(	EPluginType		ePluginType, 
 														VxGUID&			onlineId, 
-														const char *	pControl, 
-														const char *	pAction,
+														const char*	pControl, 
+														const char*	pAction,
 														uint32_t		u32ActionData,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														uint8_t *		fileHashId = 0 ) = 0;
 	/// Send Text Message to contact
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 
-													const char *	pMsg ) = 0; 
+													const char*	pMsg ) = 0; 
 
 	virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) = 0;
 
@@ -299,7 +299,7 @@ public:
 	///============================================================================
 
 	/// Start scan of contacts on network for given resource ( About Me picture, Shared Web Cam, etc. )
-	virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern = "" ) = 0;
+	virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char* pSearchPattern = "" ) = 0;
 	/// Force scan to move to next search result now instead of waiting for timer countdown
 	virtual void				fromGuiNextScan( EScanType eScanType ) = 0;
 	/// Stop scanning network
@@ -334,29 +334,29 @@ public:
 															int32_t			actionValue ) = 0;
 
 	/// Send directory listing to GUI
-	virtual bool				fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) = 0; 
+	virtual bool				fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) = 0; 
 	/// Send list of shared files to GUI
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter ) = 0;
 	/// Share/Unshare a file
-	virtual bool				fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId = 0 ) = 0;
+	virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId = 0 ) = 0;
 	/// Return true if file is shared
-	virtual bool				fromGuiGetIsFileShared( const char * fileName ) = 0;
+	virtual bool				fromGuiGetIsFileShared( const char* fileName ) = 0;
 
 	/// Returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId ) = 0;
 	/// Add/Remove file from library
-	virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 ) = 0;
+	virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId = 0 ) = 0;
 	/// Return true if file is in library
-	virtual bool				fromGuiGetIsFileInLibrary( const char * fileName ) = 0;
+	virtual bool				fromGuiGetIsFileInLibrary( const char* fileName ) = 0;
 	/// Send to GUI file that are in library of the given file type mask
 	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter ) = 0;
 	/// Return true if video file was created by My P2P Web
-	virtual bool				fromGuiIsMyP2PWebVideoFile( const char * fileName ) = 0;
+	virtual bool				fromGuiIsMyP2PWebVideoFile( const char* fileName ) = 0;
 	/// Return true if audio file was created by My P2P Web
-	virtual bool				fromGuiIsMyP2PWebAudioFile( const char * fileName ) = 0;
+	virtual bool				fromGuiIsMyP2PWebAudioFile( const char* fileName ) = 0;
 	
 	/// Delete file.. if shred file is true then write random data to file before deleting it
-	virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile ) = 0;
+	virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile ) = 0;
 
 	/// Send Text Chat session assets of contact to GUI
 	virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) = 0;
@@ -396,9 +396,9 @@ public:
 	/// For testing and debug only 
 	virtual bool				fromGuiTestCmd(	IFromGui::ETestParam1		eTestParam1, 
 												int							testParam2 = 0, 
-												const char *				testParam3 = nullptr ) = 0;
+												const char*				testParam3 = nullptr ) = 0;
 	/// Debug only set which logging to filter
-	virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char * pLogFileName = nullptr ) = 0;
+	virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char* pLogFileName = nullptr ) = 0;
 	/// Debug only send capture of log messages to GUI
 	virtual void				fromGuiSendLog( uint32_t u32LogFlags ) = 0;
 

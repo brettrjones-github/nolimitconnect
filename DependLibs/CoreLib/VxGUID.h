@@ -57,16 +57,16 @@ public:
 	std::string					toHexString( void ) const;
 
     //! set VxGUID by converting hex string into VxGUID
-    bool						fromVxGUIDHexString( const char * hexString );
-    static bool					isVxGUIDHexStringValid( const char * hexString );
+    bool						fromVxGUIDHexString( const char* hexString );
+    static bool					isVxGUIDHexStringValid( const char* hexString );
 
     bool						toOnlineIdString( std::string& strRetId ) const;  
     void                        toOnlineIdString( char * retBuf ) const;  // buffer must be at least 35 characters in length
     std::string					toOnlineIdString( void ) const;
 
     //! set VxGUID by converting online id string into VxGUID
-    bool						fromOnlineIdString( const char * onlineIdString );
-    static bool					isOnlineIdStringValid( const char * onlineIdString );
+    bool						fromOnlineIdString( const char* onlineIdString );
+    static bool					isOnlineIdStringValid( const char* onlineIdString );
 
 	//! get low part of online id
 	uint64_t					getVxGUIDLoPart() const;
@@ -75,7 +75,7 @@ public:
 	//! return users online id
 	VxGUID&						getVxGUID( void );
 	bool 						getVxGUID( std::string& strRetId );
-	void						setVxGUID( const char * pId );
+	void						setVxGUID( const char* pId );
 	void						setVxGUID( VxGUID& oId );
 	void						setVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart );
 	void						getVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart );

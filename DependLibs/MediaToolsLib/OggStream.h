@@ -31,12 +31,12 @@ public:
 	OggStream();
 	~OggStream();
 
-	void						setTitle( const char * title );
-	void						setArtist( const char * artist );
-	void						setAlbum( const char * album );
-	void						setDate( const char * date );
-	void						setGenre( const char * genre );
-	void						setUserComment( const char * userComment );
+	void						setTitle( const char* title );
+	void						setArtist( const char* artist );
+	void						setAlbum( const char* album );
+	void						setDate( const char* date );
+	void						setGenre( const char* genre );
+	void						setUserComment( const char* userComment );
 
 	bool						openOggStream( FILE * fileHandle, int streamSerialNumber = 0 ); // if streamSerialNumber is zero then generate random serial number
 	int							writeHeader( MyOpusHeader& opusHeader, uint8_t * packetBuf, int packetBufLen );

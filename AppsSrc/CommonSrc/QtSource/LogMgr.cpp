@@ -85,7 +85,7 @@ uint32_t LogMgr::getLogModules( void )
 }
 
 //============================================================================
-void LogMgr::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
+void LogMgr::onLogEvent( uint32_t u32LogFlags, const char* logMsg )
 {
     if( m_VerboseLog
         || ( u32LogFlags & ~LOG_VERBOSE ) )

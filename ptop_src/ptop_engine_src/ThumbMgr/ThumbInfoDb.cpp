@@ -18,13 +18,13 @@
 #include "ThumbInfo.h"
 
 //============================================================================
-ThumbInfoDb::ThumbInfoDb( AssetBaseMgr& hostListMgr, const char * dbname )
+ThumbInfoDb::ThumbInfoDb( AssetBaseMgr& hostListMgr, const char* dbname )
 : AssetBaseInfoDb( hostListMgr, dbname )
 {
 }
 
 //============================================================================
-AssetBaseInfo * ThumbInfoDb::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
+AssetBaseInfo * ThumbInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     return new ThumbInfo( assetName, assetLen );
 }

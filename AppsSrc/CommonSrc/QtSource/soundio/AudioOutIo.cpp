@@ -344,7 +344,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 
 //============================================================================
 // not used
-qint64 AudioOutIo::writeData( const char *data, qint64 len )
+qint64 AudioOutIo::writeData( const char*data, qint64 len )
 {
     Q_UNUSED( data );
     Q_UNUSED( len );

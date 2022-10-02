@@ -32,7 +32,7 @@ class HostJoinMgr
     const int USER_HOST_JOIN_DB_VERSION = 1;
     const int JOINED_LAST_DB_VERSION = 1;
 public:
-	HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName );
+	HostJoinMgr( P2PEngine& engine, const char* dbName, const char* dbJoinedLastName );
 	virtual ~HostJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );

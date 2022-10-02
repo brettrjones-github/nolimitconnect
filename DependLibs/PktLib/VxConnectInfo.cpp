@@ -142,7 +142,7 @@ InetAddress	VxConnectBaseInfo::getOnlineIpAddress( void )
 }
 
 //============================================================================
-bool VxConnectBaseInfo::setOnlineIpAddress( const char * pIp )			
+bool VxConnectBaseInfo::setOnlineIpAddress( const char* pIp )			
 { 
 	return m_DirectConnectId.setIpAddress( pIp ); 
 }
@@ -340,7 +340,7 @@ VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
 }
 
 //============================================================================
-void VxConnectIdent::setOnlineName( const char * pUserName )			
+void VxConnectIdent::setOnlineName( const char* pUserName )			
 { 
     if( !pUserName )
     {
@@ -354,7 +354,7 @@ void VxConnectIdent::setOnlineName( const char * pUserName )
 
 //============================================================================
 //! set users online description
-void VxConnectIdent::setOnlineDescription( const char * pUserDesc )	
+void VxConnectIdent::setOnlineDescription( const char* pUserDesc )	
 { 
     if( !pUserDesc )
     {

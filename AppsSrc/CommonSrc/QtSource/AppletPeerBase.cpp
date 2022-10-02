@@ -28,7 +28,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-AppletPeerBase::AppletPeerBase(	const char * objName, AppCommon& app, QWidget* parent )
+AppletPeerBase::AppletPeerBase(	const char* objName, AppCommon& app, QWidget* parent )
 : AppletBase( objName, app, parent )
 , m_OfferSessionLogic( this, this, app )
 {

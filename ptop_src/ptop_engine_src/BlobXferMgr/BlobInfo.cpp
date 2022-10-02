@@ -58,7 +58,7 @@ BlobInfo::BlobInfo( EAssetType assetType, const std::string& fileName, VxGUID& a
 }
 
 //============================================================================
-BlobInfo::BlobInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+BlobInfo::BlobInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
 : AssetBaseInfo( assetType, fileName, fileLen )
 {
 }

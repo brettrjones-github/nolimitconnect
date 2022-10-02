@@ -20,7 +20,6 @@
 #include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
 #include <ptop_src/ptop_engine_src/Network/NetConnector.h>
 
-#include <ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginCamServer.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
@@ -122,7 +121,7 @@ void RcScan::scanShutdown( void )
 }
 
 //============================================================================
-void RcScan::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern )
+void RcScan::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char* pSearchPattern )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -205,14 +204,14 @@ void RcScan::onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq 
 #ifdef DEBUG_MUTEXES
 	LogMsg( LOG_INFO, "RcScan::handlePktScanReq: m_ConnectListMutex.lock()\n" );
 #endif // DEBUG_MUTEXES
-	std::vector<VxNetIdent *> noMatchList;
+	std::vector<VxNetIdent*> noMatchList;
 	m_ConnectList.connectListLock();
 
 	for( iter = m_ConnectList.m_ConnectList.begin(); iter != m_ConnectList.m_ConnectList.end(); ++iter )
 	{
 		poConnectInfo = iter->second;
 		poBigListInfo = poConnectInfo->m_BigListInfo;
-		VxNetIdent * ident = (VxNetIdent *)poBigListInfo;
+		VxNetIdent* ident = (VxNetIdent*)poBigListInfo;
 		if( ident )
 		{
 			if( isRemoteSearchMatch( poBigListInfo, poPkt ) )
@@ -238,12 +237,12 @@ void RcScan::onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq 
 #endif // DEBUG_MUTEXES
 	m_ConnectList.connectListUnlock();
 
-	std::vector<VxNetIdent *>::iterator noMatchIter;
+	std::vector<VxNetIdent*>::iterator noMatchIter;
 	for( noMatchIter = noMatchList.begin(); noMatchIter != noMatchList.end(); ++noMatchIter )
 	{
 		if( iMatchesFound + iNotMatchesFound < PKT_ANN_MAX_IDENT_MATCH )
 		{
-			VxNetIdent * ident = (*noMatchIter);
+			VxNetIdent* ident = (*noMatchIter);
 			memcpy( &pktPayload[ (iMatchesFound + iNotMatchesFound) * sizeof( VxConnectInfo ) ], 
 				&ident->getConnectInfo(), 
 				sizeof( VxConnectInfo ) );
@@ -293,12 +292,12 @@ void RcScan::onPktScanReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanRe
 			}
 		}
 
-		VxNetIdent * fromPktIdent;
+		VxNetIdent* fromPktIdent;
 		int totalIdentCnt	= poPkt->getTotalIdentCount();
 		uint8_t * pktPayload		= poPkt->getSearchMatch();
 		for( int i = 0; i < totalIdentCnt; ++i )
 		{
-			fromPktIdent = (VxNetIdent *)&pktPayload[ i * sizeof(VxNetIdent) ];
+			fromPktIdent = (VxNetIdent*)&pktPayload[ i * sizeof(VxNetIdent) ];
 			if( m_IdentsReqConnectList.addGuidIfDoesntExist( fromPktIdent->getMyOnlineId() ) )
 			{
 				m_Engine.getNetConnector().addConnectRequestToQue( fromPktIdent->getConnectInfo(), eConnectReasonOtherSearch );
@@ -496,7 +495,7 @@ bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq * poPkt )
 }
 
 //============================================================================
-void RcScan::searchMsgToUser( const char * msgToUser, ... )
+void RcScan::searchMsgToUser( const char* msgToUser, ... )
 {
 
 }

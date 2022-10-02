@@ -49,7 +49,7 @@ BigListMgr::~BigListMgr()
 
 //============================================================================
 //! startup
-RCODE BigListMgr::bigListMgrStartup( const char * pDbFileName )
+RCODE BigListMgr::bigListMgrStartup( const char* pDbFileName )
 {
 	if( m_BigListMgrInitialized )
 	{
@@ -69,7 +69,7 @@ RCODE BigListMgr::bigListMgrShutdown( void )
 }
 
 //============================================================================
-RCODE BigListMgr::updateBigListDatabase( BigListInfo * poInfo, const char * networkName )
+RCODE BigListMgr::updateBigListDatabase( BigListInfo * poInfo, const char* networkName )
 {
 	RCODE rc = 0;
 	if( 0 == poInfo )

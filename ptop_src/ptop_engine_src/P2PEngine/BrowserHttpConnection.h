@@ -41,9 +41,9 @@ public:
 	RCODE				sendHttpErr( VxNetIdent* netIdent, RcSktBase * sktBase, int iError ); 
 
 	RCODE				sendWebServerData(	bool			bIsGetData,				// if true use PktWebServerGetChunkTx else use PktWebServerPutChunkTx
-											VxNetIdent *	netIdent, 
+											VxNetIdent*	netIdent, 
 											RcSktBase *		sktBase,					// web socket
-											const char *	pData,					// data to send
+											const char*	pData,					// data to send
 											int				iDataLen,				// length of data	
 											bool			bDisconnectAfterSend,	// if true disconnect after data is sent
 											int				iSendTimeoutSeconds );	// timeout attempt to send

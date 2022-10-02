@@ -220,7 +220,7 @@ bool AppCommon::loadLastUserAccount( void )
 }
 
 //============================================================================
-void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, EAgeType age, int primaryLanguage, int contentType )
+void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char* moodMsg, int gender, EAgeType age, int primaryLanguage, int contentType )
 {
 
     QUuid uuidTmp = QUuid::createUuid();
@@ -271,7 +271,7 @@ void AppCommon::setupAccountResources( VxNetIdent& userAccountIdent )
 }
 
 //============================================================================
-std::string AppCommon::getUserXferDirectoryFromAccountUserName( const char * userName )
+std::string AppCommon::getUserXferDirectoryFromAccountUserName( const char* userName )
 {
     std::string strUserDownloadDir = VxGetRootXferDirectory();
     strUserDownloadDir += userName;
@@ -281,7 +281,7 @@ std::string AppCommon::getUserXferDirectoryFromAccountUserName( const char * use
 }
 
 //============================================================================
-std::string AppCommon::getUserSpecificDataDirectoryFromAccountUserName( const char * userName )
+std::string AppCommon::getUserSpecificDataDirectoryFromAccountUserName( const char* userName )
 {
     std::string strUserSpecificDir = VxGetRootUserDataDirectory();
     strUserSpecificDir += "accounts/";
@@ -294,7 +294,7 @@ std::string AppCommon::getUserSpecificDataDirectoryFromAccountUserName( const ch
 }
 
 //============================================================================
-void AppCommon::loadAccountSpecificSettings( const char * userName )
+void AppCommon::loadAccountSpecificSettings( const char* userName )
 {
     uint64_t loadStartMs = GetApplicationAliveMs();
 

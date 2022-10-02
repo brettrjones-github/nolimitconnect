@@ -28,7 +28,7 @@ class VxSha1Hash;
 class AssetBaseInfoDb : public DbBase
 {
 public:
-	AssetBaseInfoDb( AssetBaseMgr& mgr, const char *dbName );
+	AssetBaseInfoDb( AssetBaseMgr& mgr, const char*dbName );
 	virtual ~AssetBaseInfoDb() = default;
 
 	void						lockAssetInfoDb( void )					{ m_AssetBaseInfoDbMutex.lock(); }
@@ -38,7 +38,7 @@ public:
 											VxGUID&			creatorId, 
 											VxGUID&			historyId, 
                                             VxGUID&			thumbId, 
-											const char *	assetName, 
+											const char*	assetName, 
 											int64_t			assetLen, 
 											uint32_t		assetType, 							
 											VxSha1Hash&		hashId, 
@@ -48,12 +48,12 @@ public:
                                             int64_t			createdTimestamp = 0,
                                             int64_t			modifiedTimestamp = 0,     
                                             int64_t			accessedTimestamp = 0,          
-											const char *	assetTag = "", 
+											const char*	assetTag = "", 
 											EAssetSendState sendState = eAssetSendStateNone);
 
 	bool 						addAsset( AssetBaseInfo * assetInfo );
 
-	void						removeAsset( const char * assetName );
+	void						removeAsset( const char* assetName );
 	void						removeAsset( VxGUID& assetId );
 	void						removeAsset( AssetBaseInfo * assetInfo );
 
@@ -62,7 +62,7 @@ public:
 	void						updateAssetSendState( VxGUID& assetId, EAssetSendState sendState );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen ) = 0;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen ) = 0;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
 	virtual RCODE				onCreateTables( int iDbVersion );

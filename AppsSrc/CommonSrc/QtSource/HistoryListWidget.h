@@ -32,7 +32,7 @@ public:
 	HistoryListWidget(QWidget*parent=0);
 	virtual ~HistoryListWidget();
 
-	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
+	void						setIdents( GuiUser* myIdent, GuiUser* hisIdent );
 	void						onActivityStop( void );
 
 	void						initializeHistory( void );

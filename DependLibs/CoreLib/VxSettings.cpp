@@ -24,7 +24,7 @@
 #define VXSETTINGS_DB_VERSION 0x01
 
 //============================================================================
-VxSettings::VxSettings( const char * settingDbName )
+VxSettings::VxSettings( const char* settingDbName )
 : DbBase( settingDbName )
 {
 }
@@ -84,7 +84,7 @@ RCODE VxSettings::onDeleteTables( int oldDbVersion )
 
 //============================================================================
 //! startup Settings.. if database doesn't exist then create it and call DbCreateTables
-RCODE VxSettings::vxSettingsStartup( const char * pDbFileName )
+RCODE VxSettings::vxSettingsStartup( const char* pDbFileName )
 {
 	RCODE rc = dbStartup( VXSETTINGS_DB_VERSION, pDbFileName );
 	if( rc )
@@ -129,7 +129,7 @@ void VxSettings::removeBoolIniValueFromDb( const char* pKey, const char* pSettin
 
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, bool& bValue )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, bool& bValue )
 {
 	m_DbMutex.lock();
 
@@ -145,7 +145,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, bool
 
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int8_t& s8Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, int8_t& s8Value )
 {
 	m_DbMutex.lock();
 
@@ -160,7 +160,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int8
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint8_t& u8Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, uint8_t& u8Value )
 {
 	m_DbMutex.lock();
 
@@ -175,7 +175,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int16_t& s16Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, int16_t& s16Value )
 {
 	sqlite3_stmt * poSqlStatement;
 	if( 0 ==  prepareIniSet( &poSqlStatement, "int16_t", pKey, pSettingName ) )
@@ -186,7 +186,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int1
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint16_t& u16Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, uint16_t& u16Value )
 {
 	m_DbMutex.lock();
 
@@ -201,7 +201,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int32_t& s32Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, int32_t& s32Value )
 {
 	m_DbMutex.lock();
 
@@ -216,7 +216,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int3
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint32_t& u32Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, uint32_t& u32Value )
 {
 	m_DbMutex.lock();
 
@@ -231,7 +231,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int64_t& s64Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, int64_t& s64Value )
 {
 	m_DbMutex.lock();
 
@@ -244,7 +244,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, int6
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint64_t& u64Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, uint64_t& u64Value )
 {
 	m_DbMutex.lock();
 
@@ -259,7 +259,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, float& f32Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, float& f32Value )
 {
 	m_DbMutex.lock();
 
@@ -274,7 +274,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, floa
 }
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, double& f64Value )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, double& f64Value )
 {
 	sqlite3_stmt * poSqlStatement;
 	if( 0 ==  prepareIniSet( &poSqlStatement, "double", pKey, pSettingName ) )
@@ -286,7 +286,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, doub
 
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, std::string& strValue )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, std::string& strValue )
 {
 	m_DbMutex.lock();
 
@@ -302,7 +302,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, std:
 
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, const char * pValue )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, const char* pValue )
 {
 	m_DbMutex.lock();
 
@@ -318,7 +318,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, cons
 
 //============================================================================
 //! set and save value to database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, std::vector<std::string>& aoStrValues )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, std::vector<std::string>& aoStrValues )
 {
 	m_DbMutex.lock();
 
@@ -342,7 +342,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, std:
 
 //============================================================================
 //! save a object as blob into the database
-void VxSettings::setIniValue( const char * pKey, const char * pSettingName, void * pvObject, int iObjectLen )
+void VxSettings::setIniValue( const char* pKey, const char* pSettingName, void * pvObject, int iObjectLen )
 {
 	m_DbMutex.lock();
 
@@ -361,7 +361,7 @@ void VxSettings::setIniValue( const char * pKey, const char * pSettingName, void
 
 //============================================================================
 //! get value from database.. return default if doesn't exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, bool& bValue, bool bDefault )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, bool& bValue, bool bDefault )
 {
 	m_DbMutex.lock();
 
@@ -381,7 +381,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, bool
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int8_t& s8Value, int8_t s8Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, int8_t& s8Value, int8_t s8Default )
 {
 	m_DbMutex.lock();
 
@@ -400,7 +400,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int8
 }
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint8_t& u8Value, uint8_t u8Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, uint8_t& u8Value, uint8_t u8Default )
 {
 	m_DbMutex.lock();
 
@@ -419,7 +419,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int16_t& s16Value, int16_t s16Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, int16_t& s16Value, int16_t s16Default )
 {
 	m_DbMutex.lock();
 
@@ -439,7 +439,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int1
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint16_t& u16Value, uint16_t u16Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, uint16_t& u16Value, uint16_t u16Default )
 {
 	m_DbMutex.lock();
 
@@ -458,7 +458,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int32_t& s32Value, int32_t s32Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, int32_t& s32Value, int32_t s32Default )
 {
 	m_DbMutex.lock();
 
@@ -478,7 +478,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int3
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint32_t& u32Value, uint32_t u32Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, uint32_t& u32Value, uint32_t u32Default )
 {
 	m_DbMutex.lock();
 
@@ -498,7 +498,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int64_t& s64Value, int64_t s64Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, int64_t& s64Value, int64_t s64Default )
 {
 	m_DbMutex.lock();
 
@@ -517,7 +517,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, int6
 }
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint64_t& u64Value, uint64_t u64Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, uint64_t& u64Value, uint64_t u64Default )
 {
 	m_DbMutex.lock();
 
@@ -536,7 +536,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, uint
 }
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, float& f32Value, float f32Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, float& f32Value, float f32Default )
 {
 	m_DbMutex.lock();
 
@@ -555,7 +555,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, floa
 }
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, double& f64Value, double f64Default )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, double& f64Value, double f64Default )
 {
 	m_DbMutex.lock();
 
@@ -575,7 +575,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, doub
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, std::string& strValue, const char * pDefault )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, std::string& strValue, const char* pDefault )
 {
 	m_DbMutex.lock();
 
@@ -587,7 +587,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, std:
 		int iStrLen = sqlite3_column_bytes( poSqlStatement, 0 );
 		if( iStrLen )
 		{
-			strValue = (const char *)sqlite3_column_blob( poSqlStatement, 0 );
+			strValue = (const char*)sqlite3_column_blob( poSqlStatement, 0 );
 			rc = 0;
 		}
 		else
@@ -607,7 +607,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, std:
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, char * pRetBuf, int iBufLen, const char * pDefault )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, char * pRetBuf, int iBufLen, const char* pDefault )
 {
 	m_DbMutex.lock();
 
@@ -640,7 +640,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, char
 
 //============================================================================
 //! get value from database.. return default if doesnt exist
-void VxSettings::getIniValue( const char * pKey, const char * pSettingName, std::vector<std::string>& aoStrValues )
+void VxSettings::getIniValue( const char* pKey, const char* pSettingName, std::vector<std::string>& aoStrValues )
 {
 	m_DbMutex.lock();
 
@@ -653,7 +653,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, std:
 		int iStrLen = sqlite3_column_bytes( poSqlStatement, 0 );
 		if( iStrLen )
 		{
-			strCommaDelimStrings = (const char *)sqlite3_column_blob( poSqlStatement, 0 );
+			strCommaDelimStrings = (const char*)sqlite3_column_blob( poSqlStatement, 0 );
 			StdStringSplit( strCommaDelimStrings, ',', aoStrValues );
 		}
 
@@ -665,7 +665,7 @@ void VxSettings::getIniValue( const char * pKey, const char * pSettingName, std:
 
 //============================================================================
 //! copy blob from database.. if length doesnt match will return false
-bool VxSettings::getIniValue( const char * pKey, const char * pSettingName, void * pvRetBuf, int iBufLen )
+bool VxSettings::getIniValue( const char* pKey, const char* pSettingName, void * pvRetBuf, int iBufLen )
 {
 	m_DbMutex.lock();
 
@@ -695,9 +695,9 @@ bool VxSettings::getIniValue( const char * pKey, const char * pSettingName, void
 //============================================================================
 //! prepare sql statement set value
 RCODE VxSettings::prepareIniSet(	sqlite3_stmt ** ppoRetSqlStatement, 
-									const char * pTableName,
-									const char * pKey, 
-									const char * pSettingName )
+									const char* pTableName,
+									const char* pKey, 
+									const char* pSettingName )
 {
 	char SQL_Statement[2048];
 	if( 0 ==  dbOpen() )
@@ -728,9 +728,9 @@ RCODE VxSettings::prepareIniSet(	sqlite3_stmt ** ppoRetSqlStatement,
 //============================================================================
 //! prepare sql statement to query value
 RCODE VxSettings::prepareIniQuery(	sqlite3_stmt ** ppoRetSqlStatement, 
-									const char *	pTableName,
-									const char *	pKey, 
-									const char *	pSettingName )
+									const char*	pTableName,
+									const char*	pKey, 
+									const char*	pSettingName )
 {
 	char SQL_Statement[2048];
 	RCODE rc;

@@ -40,7 +40,7 @@ protected:
     virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ) override;
 
 	void						setupAppletPeerTodGame( void );
-    void						toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ) override;
+    void						toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
 	Ui::AppletPeerTodGameUi	    ui;

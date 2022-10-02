@@ -33,9 +33,9 @@ public:
     virtual ~AppletTestAndDebug();
 
     void                        logMsg( const char* logMsg, ... );
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
 
-    void                        onLogEvent( uint32_t u32LogFlags, const char * logMsg ) override;
+    void                        onLogEvent( uint32_t u32LogFlags, const char* logMsg ) override;
     void                        toGuiInfoMsg( char * logMsg );
 
 signals:

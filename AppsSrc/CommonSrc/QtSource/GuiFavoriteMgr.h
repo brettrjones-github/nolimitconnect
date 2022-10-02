@@ -24,7 +24,7 @@ public:
 	GuiFavoriteMgr();
 	virtual ~GuiFavoriteMgr() = default;
 
-	RCODE						startupFavoriteMgr( const char * dbSettingsFile );
+	RCODE						startupFavoriteMgr( const char* dbSettingsFile );
 	void						shutdownFavoriteMgr( void );
 
 	void						setIsFavorite( VxGUID& onlineId, bool confirmIsDisabled );

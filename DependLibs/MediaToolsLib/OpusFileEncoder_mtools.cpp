@@ -54,7 +54,7 @@ OpusFileEncoder::~OpusFileEncoder()
 }
 
 //============================================================================
-bool OpusFileEncoder::beginFileEncode( const char * fileName, int sampleRate, int channels )
+bool OpusFileEncoder::beginFileEncode( const char* fileName, int sampleRate, int channels )
 {
 	m_FileName = fileName;
 	m_FileHandle = fopen( fileName, "wb+" );

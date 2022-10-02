@@ -66,7 +66,7 @@ void ActivityShowHelp::loadHelp( void )
 }
 
 //============================================================================
-void ActivityShowHelp::loadHelpFile( const char * pFileName, uint64_t u64FileLen )
+void ActivityShowHelp::loadHelpFile( const char* pFileName, uint64_t u64FileLen )
 {
 	//FILE * poFile = VxFileUtil::fileOpen( pFileName, "rb" );
 	//if( poFile )

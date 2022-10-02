@@ -27,7 +27,7 @@ class AppletPeerBase : public AppletBase, public GuiPlayerCallback
 {
 	Q_OBJECT
 public:
-	AppletPeerBase( const char * objName, AppCommon& app, QWidget* parent );
+	AppletPeerBase( const char* objName, AppCommon& app, QWidget* parent );
 	virtual ~AppletPeerBase();
 
     virtual void				setPluginType( EPluginType ePluginType ) override   { m_ePluginType = ePluginType; m_OfferSessionLogic.setPluginType( ePluginType ); }

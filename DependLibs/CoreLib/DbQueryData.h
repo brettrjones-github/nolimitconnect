@@ -78,7 +78,7 @@ private:
 
 public:
   field_value();
-  field_value(const char *s);
+  field_value(const char*s);
   field_value(const bool b);
   field_value(const char c);
   field_value(const short s);
@@ -104,7 +104,7 @@ public:
   double get_asDouble() const;
   int64_t get_asInt64() const;
 
-  field_value& operator= (const char *s)
+  field_value& operator= (const char*s)
     {set_asString(s); return *this;}
   field_value& operator= (const std::string &s)
     {set_asString(s); return *this;}
@@ -177,7 +177,7 @@ public:
   }
 
   void set_isNull(){is_null=true;}
-  void set_asString(const char *s);
+  void set_asString(const char*s);
   void set_asString(const std::string & s);
   void set_asBool(const bool b);
   void set_asChar(const char c);

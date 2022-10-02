@@ -91,7 +91,7 @@ std::string PktBlobSendReq::getBlobTag()
 }
 
 //============================================================================
-void PktBlobSendReq::setBlobNameAndTag( const char * pBlobName, const char * pBlobTag )
+void PktBlobSendReq::setBlobNameAndTag( const char* pBlobName, const char* pBlobTag )
 {
 	int nameLen = (int)strlen( pBlobName );
 	if( nameLen > 4095 )
@@ -202,7 +202,7 @@ PktBlobXferErr::PktBlobXferErr()
 }
 
 //============================================================================
-const char * PktBlobXferErr::describeError( uint16_t error )
+const char* PktBlobXferErr::describeError( uint16_t error )
 {
 	switch( error )
 	{

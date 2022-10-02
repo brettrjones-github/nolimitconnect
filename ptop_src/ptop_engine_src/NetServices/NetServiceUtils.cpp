@@ -274,7 +274,7 @@ EPluginType NetServiceUtils::parseHttpNetServiceUrl( VxSktBase* sktBase, NetServ
 }
 
 //============================================================================
-bool NetServiceUtils::isValidHexString( const char * hexString, int dataLen )
+bool NetServiceUtils::isValidHexString( const char* hexString, int dataLen )
 {
 	for( int i = 0; i < dataLen; i++ )
 	{
@@ -337,7 +337,7 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	}
 
 	// parse crypto key
-	const char * pKeyBegin = strKey.c_str();
+	const char* pKeyBegin = strKey.c_str();
 	if( false == isValidHexString( pKeyBegin, 32 ) )
 	{
 		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: crypto Key contains invalid chars %s", strKey.c_str() );
@@ -451,7 +451,7 @@ bool  NetServiceUtils::getNetServiceUrlContent( std::string& netServiceUrl, std:
 		return false;
 	}
 
-	const char * buf1 = netServiceUrl.c_str();
+	const char* buf1 = netServiceUrl.c_str();
 	retFromClientContent = &buf1[ NET_SERVICE_HDR_LEN ];
 	if( 0 == retFromClientContent.length() )
 	{
@@ -459,7 +459,7 @@ bool  NetServiceUtils::getNetServiceUrlContent( std::string& netServiceUrl, std:
 		return false;
 	}
 
-	const char * content = retFromClientContent.c_str();
+	const char* content = retFromClientContent.c_str();
 	if( '/' != content[ retFromClientContent.length() - 1 ] )
 	{
 		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: no trailing /" );
@@ -472,7 +472,7 @@ bool  NetServiceUtils::getNetServiceUrlContent( std::string& netServiceUrl, std:
 }
 
 //============================================================================
-ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
+ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char* netCmd )
 {
 	if( 0 == strcmp( NET_CMD_PING, netCmd ) )
 	{
@@ -513,7 +513,7 @@ ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
 }
 
 //============================================================================
-const char *  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
+const char*  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
 {
 	switch( eNetCmdType )
 	{

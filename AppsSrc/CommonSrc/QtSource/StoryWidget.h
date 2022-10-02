@@ -33,7 +33,7 @@ class StoryWidget : public QWidget
 public:
     StoryWidget( QWidget*parent = 0, QString initialFile = "" );
 
-	void						loadStoryBoardFile( const char * pFileName );
+	void						loadStoryBoardFile( const char* pFileName );
 	bool						maybeSave();
 
 signals:

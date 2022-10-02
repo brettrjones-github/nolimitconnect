@@ -26,14 +26,14 @@ public:
 	PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginVoicePhone() = default;
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				
 														int				pvUserData,
-														const char *	pOfferMsg,				
-														const char *	pFileName = NULL,
+														const char*		pOfferMsg,				
+														const char*		pFileName = NULL,
 														uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
 
-	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
+	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
 													int				pvUserdata,
 													EOfferResponse	eOfferResponse,
 													VxGUID			lclSessionId );
@@ -42,8 +42,8 @@ public:
 	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual bool				fromGuiInstMsg(		VxNetIdent *	netIdent, 
-													const char *	pMsg ); 
+	virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, 
+													const char*	pMsg ); 
 
 	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
@@ -58,7 +58,7 @@ protected:
 	
 	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual	void				onContactWentOffline		( VxNetIdent *	netIdent, VxSktBase* sktBase );
+	virtual	void				onContactWentOffline		( VxNetIdent*	netIdent, VxSktBase* sktBase );
 	virtual	void				onConnectionLost			( VxSktBase* sktBase );
 
 	virtual void				onSessionStart				( PluginSessionBase * poSession, bool pluginIsLocked );

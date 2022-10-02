@@ -51,7 +51,7 @@ OfferHostInfo::OfferHostInfo( const std::string& fileName )
 }
 
 //============================================================================
-OfferHostInfo::OfferHostInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
+OfferHostInfo::OfferHostInfo( const char* fileName, uint64_t fileLen, uint16_t assetType )
 : OfferBaseInfo( fileName, fileLen, assetType )
 {
 }

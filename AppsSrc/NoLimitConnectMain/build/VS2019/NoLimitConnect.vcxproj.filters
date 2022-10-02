@@ -72,9 +72,6 @@
     <Filter Include="Source Files\GuiFavorite">
       <UniqueIdentifier>{d27b18cc-badc-494e-87ee-61a4dffc42e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GuiWebPage\InputWidgets">
-      <UniqueIdentifier>{3c437382-3e3c-4d3a-a82e-10b168684117}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CompilerConfig">
       <UniqueIdentifier>{4f792643-1bde-4a8d-87dd-372327a009dc}</UniqueIdentifier>
     </Filter>
@@ -83,6 +80,9 @@
     </Filter>
     <Filter Include="Source Files\GuiPluginMgr">
       <UniqueIdentifier>{c556a647-5103-4d79-b058-9aca6f55f45e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InputWidgets">
+      <UniqueIdentifier>{3c437382-3e3c-4d3a-a82e-10b168684117}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -887,9 +887,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\RichTextWidget.h">
       <Filter>Source Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.h">
-      <Filter>Source Files\GuiWebPage</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.h">
       <Filter>Source Files\GuiConnectId</Filter>
     </QtMoc>
@@ -949,6 +946,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletFileShareClientView.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.h">
+      <Filter>Source Files\GuiWebPage</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1852,9 +1852,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\RichTextWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.cpp">
-      <Filter>Source Files\GuiWebPage</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppCommon.cpp">
       <Filter>Source Files\AppCommon</Filter>
     </ClCompile>
@@ -1904,34 +1901,34 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputAllWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputBaseWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputFaceWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputPhotoWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputTextWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVideoWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InputVoiceWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\InstMsgWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp">
-      <Filter>Source Files\GuiWebPage\InputWidgets</Filter>
+      <Filter>Source Files\InputWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AssetBaseWidget.cpp">
       <Filter>Source Files\AssetWidgets</Filter>
@@ -2046,6 +2043,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletFileShareClientView.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiWebPageMgr.cpp">
+      <Filter>Source Files\GuiWebPage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2241,9 +2241,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h">
       <Filter>Source Files\GuiUser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiWebPageCallback.h">
-      <Filter>Source Files\GuiWebPage</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h">
       <Filter>Source Files\GuiConnectId</Filter>
     </ClInclude>
@@ -2324,6 +2321,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\soundio\AudioMixerInterface.h">
       <Filter>Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiWebPageCallback.h">
+      <Filter>Source Files\GuiWebPage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

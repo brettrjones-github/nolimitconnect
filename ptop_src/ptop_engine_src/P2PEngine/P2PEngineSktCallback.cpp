@@ -154,7 +154,7 @@ void P2PEngine::handleTcpData( VxSktBase* sktBase )
 
 		// pkt announce has arrived
 		PktAnnounce* pktAnn = ( PktAnnounce* )pktHdr;
-		if( !pktHdr->isValidPkt() || !validateIdent( (VxNetIdent *)pktAnn ) )
+		if( !pktHdr->isValidPkt() || !validateIdent( (VxNetIdent*)pktAnn ) )
 		{
 			// invalid announcement packet
 			sktBase->setIsFirstRxPacket( false ); 

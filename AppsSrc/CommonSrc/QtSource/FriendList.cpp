@@ -41,7 +41,7 @@ EFriendViewType FriendList::getFriendViewType( void )
 
 //============================================================================
 //! find friend by id
-GuiUser * FriendList::findFriend( VxGUID& oId )
+GuiUser* FriendList::findFriend( VxGUID& oId )
 {
 	std::vector<GuiUser*>::iterator iter;
 	for( iter = m_aoFriends.begin(); iter != m_aoFriends.end(); ++iter )
@@ -56,7 +56,7 @@ GuiUser * FriendList::findFriend( VxGUID& oId )
 
 //============================================================================
 //! update friend in list
-void FriendList::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
+void FriendList::updateFriendList( GuiUser* netIdent, bool sessionTimeChange )
 {
 	std::vector<GuiUser*>::iterator iter;
 	for( iter = m_aoFriends.begin(); iter != m_aoFriends.end(); ++iter )
@@ -65,13 +65,13 @@ void FriendList::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 		{
 			if( false == sessionTimeChange )
 			{
-				//memcpy( (VxNetIdent *)(*iter), netIdent, sizeof( VxNetIdent) );
+				//memcpy( (VxNetIdent*)(*iter), netIdent, sizeof( VxNetIdent) );
 				onFriendUpdated( (*iter) );
 				return;
 			}
 			else
 			{
-                GuiUser * removeFriend = (*iter);
+                GuiUser* removeFriend = (*iter);
 				m_aoFriends.erase( iter );
 				onFriendRemoved( removeFriend );
 				break;
@@ -81,7 +81,7 @@ void FriendList::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 
 	// not found so add
 	//Friend * poFriend = new Friend();
-	//memcpy( (VxNetIdent *) poFriend, netIdent, sizeof( VxNetIdent ) );
+	//memcpy( (VxNetIdent*) poFriend, netIdent, sizeof( VxNetIdent ) );
 	if( ( 0 == m_aoFriends.size() ) || ( 0 == netIdent->getLastSessionTimeMs() ) )
 	{
 		m_aoFriends.push_back( netIdent );

@@ -62,7 +62,7 @@ AssetInfo::AssetInfo( EAssetType assetType, const std::string& fileName, VxGUID&
 }
 
 //============================================================================
-AssetInfo::AssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+AssetInfo::AssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
 : AssetBaseInfo( assetType, fileName, fileLen )
 {
 }

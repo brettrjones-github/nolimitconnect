@@ -60,19 +60,19 @@ public:
 	void						toGuiRxedOfferReply( GuiOfferSession * offerSession );
 	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession );
 
-	void						onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, bool isInSession );
-	void						onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
-	void						startedSessionInReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
+	void						onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, bool isInSession );
+	void						onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
+	void						startedSessionInReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
 
-	void						acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
-	void						rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
+	void						acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
+	void						rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
 
 
 	// called if starting new session to know if responding to existing offer
-	GuiOfferSession *			findActiveAndAvailableOffer( GuiUser * netIdent, EPluginType ePluginType );
-	void						sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
-	void						sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
-	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser * netIdent );
+	GuiOfferSession *			findActiveAndAvailableOffer( GuiUser* netIdent, EPluginType ePluginType );
+	void						sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
+	void						sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse );
+	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser* netIdent );
 	void						removePluginSessionOffer( VxGUID& offerSessionId );
 
 signals:
@@ -89,13 +89,13 @@ protected slots:
 	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
 	void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
 	void						slotToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-	void						slotToGuiContactOffline( GuiUser * netIdent ); // connected to app signal
+	void						slotToGuiContactOffline( GuiUser* netIdent ); // connected to app signal
 
 protected:
 
-	void						recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
-	void						recievedOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
-	void						recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
+	void						recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
+	void						recievedOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse );
+	void						recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse );
 
 	void						changeOfferState( OfferSessionState * sessionState, EOfferState newOfferState );
 	void						forceToNotInSession( OfferSessionState * sessionState );

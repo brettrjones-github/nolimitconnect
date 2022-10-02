@@ -49,7 +49,7 @@ int PktChatReq::addImages( int iImageCnt, uint16_t * pu16Images )
 }
 
 //============================================================================
-void PktChatReq::addMsg( const char * pMsg )
+void PktChatReq::addMsg( const char* pMsg )
 {
 	int iLen = (int)strlen( pMsg );
 	if( iLen < PKT_CHAT_MAX_MSG_LEN )

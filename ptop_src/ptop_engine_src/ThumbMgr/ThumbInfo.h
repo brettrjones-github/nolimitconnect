@@ -27,7 +27,7 @@ public:
 	ThumbInfo( const std::string& fileName );
     ThumbInfo( const std::string& fileName, VxGUID& assetId );
     ThumbInfo( const char* fileName, uint64_t fileLen );
-    ThumbInfo( const char * fileName, uint64_t fileLen, VxGUID& assetId );
+    ThumbInfo( const char* fileName, uint64_t fileLen, VxGUID& assetId );
     virtual ~ThumbInfo();
 
 	ThumbInfo&				    operator=( const ThumbInfo& rhs ); 

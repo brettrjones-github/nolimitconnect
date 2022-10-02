@@ -39,13 +39,13 @@ public:
 	UpnpParser&					getParser();
 	void						sendResult( bool bResult );
 
-	void						xmlCallback( EXmlParseType eXmlType, const char * pName, const char * pValue );
+	void						xmlCallback( EXmlParseType eXmlType, const char* pName, const char* pValue );
 	bool						currentXmlTags( const char* str1, const char* str2 );
 
 private:
 	bool						addPortMapToDevice( void );
 	bool						parseDeviceInfo( void );
-	bool						requestAddPortMap( InetAddress& lclAddr, int iPortToMap, const char * pProtocol );
+	bool						requestAddPortMap( InetAddress& lclAddr, int iPortToMap, const char* pProtocol );
 
 public:
 	UpnpPortForward&			m_Client;

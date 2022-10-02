@@ -44,7 +44,7 @@ namespace
 }
 
 //============================================================================
-AssetBaseInfoDb::AssetBaseInfoDb( AssetBaseMgr& hostListMgr, const char *dbName  )
+AssetBaseInfoDb::AssetBaseInfoDb( AssetBaseMgr& hostListMgr, const char*dbName  )
 : DbBase( dbName )
 , m_AssetMgr( hostListMgr )
 {
@@ -90,7 +90,7 @@ void AssetBaseInfoDb::purgeAllAssets( void )
 }
 
 //============================================================================
-void AssetBaseInfoDb::removeAsset( const char * assetName )
+void AssetBaseInfoDb::removeAsset( const char* assetName )
 {
 	DbBindList bindList( assetName );
 	sqlExec( "DELETE FROM tblAssets WHERE assetName=?", bindList );
@@ -119,7 +119,7 @@ bool AssetBaseInfoDb::addAsset( VxGUID&			assetId,
                                 VxGUID&			creatorId,
                                 VxGUID&			historyId,
                                 VxGUID&			thumbId,
-                                const char *	assetName,
+                                const char*	assetName,
                                 int64_t			assetLen,
                                 uint32_t		assetType,
                                 VxSha1Hash&		hashId,
@@ -129,7 +129,7 @@ bool AssetBaseInfoDb::addAsset( VxGUID&			assetId,
                                 int64_t			creationTimeStamp,
                                 int64_t			modifiedTimeStamp,
                                 int64_t			accessedTimeStamp,
-                                const char *	assetTag,
+                                const char*	assetTag,
                                 EAssetSendState sendState )
 {
     removeAsset( assetId );

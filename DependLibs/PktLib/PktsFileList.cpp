@@ -169,7 +169,7 @@ bool PktFileListReply::canAddFile( int fileNameLenIncludingZero )
 }
 
 //============================================================================
-void PktFileListReply::addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char * fileName )
+void PktFileListReply::addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char* fileName )
 {
 	uint32_t curLen = getListDataLen();
 	PackedFileListEntry * entry = (PackedFileListEntry *)(&m_as8FileList[ curLen ]);

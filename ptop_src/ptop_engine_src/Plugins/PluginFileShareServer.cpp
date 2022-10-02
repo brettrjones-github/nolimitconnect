@@ -15,9 +15,6 @@
 
 #include "PluginFileShareServer.h"
 #include "PluginMgr.h"
-#include "SharedFileInfo.h"
-
-#include "FileLibraryMgr.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IToGui.h>
@@ -36,7 +33,7 @@
 
 //============================================================================
 PluginFileShareServer::PluginFileShareServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
-: PluginBaseFileShare( engine, pluginMgr, myIdent, pluginType, "FileLibrary.db3", "FileShareService.db3" )
+: PluginBaseFilesServer( engine, pluginMgr, myIdent, pluginType, "FileShareService.db3" )
 {
 	setPluginType( ePluginTypeFileShareServer );
 }
@@ -48,4 +45,37 @@ void PluginFileShareServer::onNetworkConnectionReady( bool requiresRelay )
 	{
 		updateSharedFilesInfo();
 	}
+}
+
+//============================================================================
+void PluginFileShareServer::updateSharedFilesInfo( void )
+{
+	getFileInfoMgr().updateFileTypes();
+}
+
+//============================================================================
+void PluginFileShareServer::onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes )
+{
+	m_Engine.lockAnnouncePktAccess();
+	PktAnnounce& pktAnn = m_Engine.getMyPktAnnounce();
+	if( pktAnn.getSharedFileTypes() != fileTypes )
+	{
+		pktAnn.setSharedFileTypes( fileTypes );
+		m_Engine.unlockAnnouncePktAccess();
+		if( isPluginEnabled() )
+		{
+			m_Engine.doPktAnnHasChanged( false );
+		}
+	}
+	else
+	{
+		m_Engine.unlockAnnouncePktAccess();
+	}
+}
+
+//============================================================================
+void PluginFileShareServer::deleteFile( const char* fileName, bool shredFile )
+{
+	PluginBaseFilesServer::deleteFile( fileName, shredFile );
+	m_Engine.getPluginLibraryServer().deleteFile( fileName, shredFile );
 }

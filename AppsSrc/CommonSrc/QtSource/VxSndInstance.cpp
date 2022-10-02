@@ -31,7 +31,7 @@
 namespace
 {
 
-	const char * g_SndResourcePaths[] = {
+	const char* g_SndResourcePaths[] = {
 			":/AppRes/Resources/snd_joshua_no.wav",			// eSndDefNone, 0
 			":/AppRes/Resources/snd_joshua_no.wav",			// eSndDefIgnore,1
 			":/AppRes/Resources/snd_cancel1.wav",			// eSndDefCancel,2

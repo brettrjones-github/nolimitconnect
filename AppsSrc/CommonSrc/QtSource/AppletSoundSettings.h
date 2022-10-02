@@ -40,7 +40,7 @@ public:
 	AppletSoundSettings( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletSoundSettings() override;
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
     void                        statusMsg( const char* errMsg, ... );

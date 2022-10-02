@@ -47,7 +47,7 @@ class PktFileListReply;
 class AssetBaseMgr
 {
 public:
-	AssetBaseMgr( P2PEngine& engine, const char * dbName, const char * dbStateName, EAssetMgrType assetMgrType );
+	AssetBaseMgr( P2PEngine& engine, const char* dbName, const char* dbStateName, EAssetMgrType assetMgrType );
 	virtual ~AssetBaseMgr();
 
     class AutoResourceLock
@@ -85,7 +85,7 @@ public:
 
 	virtual bool				isAssetListInitialized( void )				{ return m_AssetBaseListInitialized; }
 
-	void						assetInfoMgrStartup( VxThread * startupThread );
+	void						assetInfoMgrStartup( VxThread* startupThread );
 	void						assetInfoMgrShutdown( void );
 
     bool						getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId );
@@ -105,25 +105,25 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )				{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-    AssetBaseInfo * 			addAssetFile( enum EAssetType assetType, const char * fileName, uint64_t fileLen );
+    AssetBaseInfo * 			addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
     AssetBaseInfo *				addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
     bool						addAssetFile(   enum EAssetType      assetType,
-                                                const char *	fileName, 
+                                                const char*	fileName, 
 												VxGUID&			assetId,  
 												uint8_t *		hashId = 0, 
 												EAssetLocation	locationFlags = eAssetLocUnknown, 
-												const char *	assetTag = "", 
+												const char*	assetTag = "", 
 												int64_t		    timestamp = 0 );
 
     bool						addAssetFile(	enum EAssetType      assetType,
-                                                const char *	fileName, 
+                                                const char*	fileName, 
 												VxGUID&			assetId,  
 												VxGUID&		    creatorId, 
 												VxGUID&		    historyId, 
 												uint8_t *		hashId = 0, 
 												EAssetLocation	locationFlags = eAssetLocUnknown, 
-												const char *	assetTag = "", 
+												const char*	assetTag = "", 
                                                 int64_t			timestamp = 0 );
 
 	virtual bool				addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset );
@@ -138,26 +138,26 @@ public:
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType asset, const char * fileName, uint64_t fileLen ) = 0;
+    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen ) = 0;
     virtual AssetBaseInfo *		createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
     void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }
 
-    virtual AssetBaseInfoDb&    createAssetInfoDb(  const char * dbName, EAssetMgrType assetMgrType );
+    virtual AssetBaseInfoDb&    createAssetInfoDb(  const char* dbName, EAssetMgrType assetMgrType );
 
 
-	void						updateAssetListFromDb( VxThread * thread );
-	void						generateHashIds( VxThread * thread );
+	void						updateAssetListFromDb( VxThread* thread );
+	void						generateHashIds( VxThread* thread );
 	void						clearAssetFileListPackets( void );
 	void						clearAssetInfoList( void );
     AssetBaseInfo *				createAssetInfo(	enum EAssetType      asset,
-                                                    const char *	fileName, 
+                                                    const char*	fileName, 
 													VxGUID&			assetId,  
 													uint8_t *		hashId, 
                                                     enum EAssetLocation	locationFlags = eAssetLocUnknown,
-													const char *	assetTag = "", 
+													const char*	assetTag = "", 
 													int64_t			timestamp = 0 );
 	bool						insertNewInfo( AssetBaseInfo * assetInfo );
 	void						updateDatabase( AssetBaseInfo * assetInfo );

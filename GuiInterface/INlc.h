@@ -97,7 +97,7 @@ public:
     //=== to gui media/render ===//
     //============================================================================
 
-    virtual void                verifyGlState(const char * msg = nullptr) override; // show gl error if any
+    virtual void                verifyGlState(const char* msg = nullptr) override; // show gl error if any
 
     //=== textures ===//
     void                        setActiveGlTexture( unsigned int activeTextureNum  /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ ) override;
@@ -254,7 +254,7 @@ public:
     //============================================================================
     //=== to gui ===//
     //============================================================================
-    void				        toGuiLog( int logFlags, const char * pMsg ) override;
+    void				        toGuiLog( int logFlags, const char* pMsg ) override;
     void				        toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) override;
     void				        toGuiStatusMessage( const char* statusMsg ) override;
     virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, const char* paramMsg, ... ) override;
@@ -275,10 +275,10 @@ public:
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
-    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
-    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char* msg = "" ) override;
+    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char* msg = "" ) override;
 
-    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) override;
+    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char* msg = "" ) override;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) override;
     virtual void				toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
@@ -286,15 +286,15 @@ public:
     virtual void				toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& hostedInfo ) override;
     virtual void				toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
-    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
+    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char* msg = "" ) override;
 
     virtual void				toGuiUserOnlineStatus(VxNetIdent* netIdent, bool isOnline ) override;
 
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
-    virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
-    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
+    virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char* msg = "" ) override;
+    virtual void				toGuiRunTestStatus( const char*testName, ERunTestStatus eRunTestStatus, const char* msg = "" ) override;
 
     virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) override;
     virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) override;
@@ -325,25 +325,25 @@ public:
     virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers );
 
     //! add offer to notify list
-    virtual void				toGuiRxedPluginOffer( VxNetIdent *		netIdent,
+    virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,
                                                       EPluginType		ePluginType,
-                                                      const char *	    pMsg,
+                                                      const char*	    pMsg,
                                                       int				pvUserData,
-                                                      const char *	    pFileName = NULL,
+                                                      const char*	    pFileName = NULL,
                                                       uint8_t *			fileHashData = 0,
                                                       VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
                                                       VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
     //! response to offer
-    virtual void				toGuiRxedOfferReply( VxNetIdent *	    netIdent,
+    virtual void				toGuiRxedOfferReply( VxNetIdent*	    netIdent,
                                                      EPluginType		ePluginType,
                                                      int				pvUserData,
                                                      EOfferResponse	    eOfferResponse,
-                                                     const char *	    pFileName = NULL,
+                                                     const char*	    pFileName = NULL,
                                                      uint8_t *			fileHashData = 0,
                                                      VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
                                                      VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
 
-    virtual void				toGuiPluginSessionEnded( VxNetIdent *	    netIdent,
+    virtual void				toGuiPluginSessionEnded( VxNetIdent*	    netIdent,
                                                          EPluginType		ePluginType,
                                                          int				pvUserData,
                                                          EOfferResponse	    eOfferResponse,
@@ -353,19 +353,19 @@ public:
                                                    int				statusType,
                                                    int				statusValue ) override;
 
-    virtual void				toGuiInstMsg( VxNetIdent *	    netIdent,
+    virtual void				toGuiInstMsg( VxNetIdent*	    netIdent,
                                               EPluginType		ePluginType,
-                                              const char *	    pMsg ) override;
+                                              const char*	    pMsg ) override;
 
-    virtual void				toGuiFileListReply( VxNetIdent *	netIdent,
+    virtual void				toGuiFileListReply( VxNetIdent*	netIdent,
                                                     EPluginType		ePluginType,
                                                     uint8_t			u8FileType,
                                                     uint64_t		u64FileLen,
-                                                    const char *	pFileName,
+                                                    const char*	pFileName,
                                                     VxGUID          assetId,
                                                     uint8_t *		fileHashData ) override;
 
-    virtual void				toGuiStartUpload( VxNetIdent *	    netIdent,
+    virtual void				toGuiStartUpload( VxNetIdent*	    netIdent,
                                                   EPluginType		ePluginType,
                                                   VxGUID&			fileInstanceId,
                                                   uint8_t			u8FileType,
@@ -374,7 +374,7 @@ public:
                                                   VxGUID&           assetId,
                                                   VxSha1Hash&		fileHashId ) override;
 
-    virtual void				toGuiStartDownload( VxNetIdent *	netIdent,
+    virtual void				toGuiStartDownload( VxNetIdent*	netIdent,
                                                     EPluginType		ePluginType,
                                                     VxGUID&			fileInstanceId,
                                                     uint8_t			u8FileType,
@@ -390,18 +390,18 @@ public:
 
     //=== scan ===//
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
-    virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent *	netIdent ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent*	netIdent ) override;
     virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode ) override;
 
-    virtual void				toGuiSearchResultProfilePic( VxNetIdent *	netIdent,
+    virtual void				toGuiSearchResultProfilePic( VxNetIdent*	netIdent,
                                                              uint8_t *      pu8JpgData,
                                                              uint32_t       u32JpgDataLen ) override;
 
-    virtual void				toGuiSearchResultFileSearch( VxNetIdent *	netIdent,
+    virtual void				toGuiSearchResultFileSearch( VxNetIdent*	netIdent,
                                                              VxGUID&        fileInstanceId,
                                                              uint8_t		u8FileType,
                                                              uint64_t       u64FileLen,
-                                                             const char *	pFileName,
+                                                             const char*	pFileName,
                                                              VxGUID         assetId ) override;
 
     virtual void				toGuiSetGameValueVar( EPluginType	    ePluginType,
@@ -414,7 +414,7 @@ public:
                                                        int32_t		s32VarId,
                                                        int32_t		s32VarValue ) override;
 
-    virtual void				toGuiFileList( const char *	fileName,
+    virtual void				toGuiFileList( const char*	fileName,
                                                uint64_t		fileLen,
                                                uint8_t		fileType,
                                                bool			isShared,
@@ -449,15 +449,15 @@ public:
     virtual void				fromGuiSetIsAppCommercial( bool isCommercial );
     virtual bool				fromGuiGetIsAppCommercial( void );
     virtual uint16_t			fromGuiGetAppVersionBinary( void );
-    const char *				fromGuiGetAppVersionString( void );
-    virtual const char *		fromGuiGetAppName( void );
-    virtual const char *		fromGuiGetAppNameNoSpaces( void );
+    const char*				fromGuiGetAppVersionString( void );
+    virtual const char*		fromGuiGetAppName( void );
+    virtual const char*		fromGuiGetAppNameNoSpaces( void );
 
-    virtual void				fromGuiAppStartup( const char * assetDir, const char * rootDataDir );
+    virtual void				fromGuiAppStartup( const char* assetDir, const char* rootDataDir );
     virtual void				fromGuiKickWatchdog( void );
 
-    virtual void				fromGuiSetUserXferDir( const char * userDir );
-    virtual void				fromGuiSetUserSpecificDir( const char * userDir );
+    virtual void				fromGuiSetUserXferDir( const char* userDir );
+    virtual void				fromGuiSetUserSpecificDir( const char* userDir );
     virtual uint64_t			fromGuiGetDiskFreeSpace( void );
     virtual uint64_t			fromGuiClearCache( ECacheType cacheType );
     virtual void				fromGuiAppShutdown( void );
@@ -489,20 +489,20 @@ public:
     virtual bool				fromGuiMovieDone( void );
 
     virtual void				fromGuiUserLoggedOn( VxNetIdent* netIdent );
-    virtual void				fromGuiOnlineNameChanged( const char * newOnlineName );
-    virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage );
+    virtual void				fromGuiOnlineNameChanged( const char* newOnlineName );
+    virtual void				fromGuiMoodMessageChanged( const char* newMoodMessage );
     virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent );
 
     virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick );
     virtual void				fromGuiUpdateMyIdent( VxNetIdent* netIdent, bool permissionAndStatsOnly );
-    virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent );
+    virtual void				fromGuiQueryMyIdent( VxNetIdent* poRetIdent );
 
     virtual void				fromGuiApplyNetHostSettings( NetHostSetting& netSettings );
     virtual void				fromGuiGetNetSettings( NetSettings& netSettings );
     virtual void				fromGuiSetNetSettings( NetSettings& netSettings );
     virtual void				fromGuiNetworkSettingsChanged( void );
 
-    virtual void				fromGuiNetworkAvailable( const char * lclIp = nullptr, bool isCellularNetwork = false );
+    virtual void				fromGuiNetworkAvailable( const char* lclIp = nullptr, bool isCellularNetwork = false );
     virtual void				fromGuiNetworkLost( void );
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
 
@@ -515,18 +515,18 @@ public:
     virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId );
 
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
-    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType );
+    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char* myUrl, const char* ptopUrl, ENetCmdType testType );
 
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
     virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
 
-    virtual void				fromGuiUpdateWebPageProfile( const char *	pProfileDir,	// directory containing user profile
-                                                             const char *	strGreeting,	// greeting text
-                                                             const char *	aboutMe,		// about me text
-                                                             const char *	url1,			// favorite url 1
-                                                             const char *	url2,			// favorite url 2
-                                                             const char *	url3,			// favorite url 3
-                                                             const char *	donation );     // donation
+    virtual void				fromGuiUpdateWebPageProfile( const char*	pProfileDir,	// directory containing user profile
+                                                             const char*	strGreeting,	// greeting text
+                                                             const char*	aboutMe,		// about me text
+                                                             const char*	url1,			// favorite url 1
+                                                             const char*	url2,			// favorite url 2
+                                                             const char*	url3,			// favorite url 3
+                                                             const char*	donation );     // donation
 
     virtual void 				fromGuiSetPluginPermission( EPluginType ePluginType, int eFriendState );
     virtual int					fromGuiGetPluginPermission( EPluginType ePluginType );
@@ -539,8 +539,8 @@ public:
     virtual bool				fromGuiMakePluginOffer( EPluginType		ePluginType,
                                                         VxGUID&			oOnlineId,
                                                         int				pvUserData,
-                                                        const char *	pOfferMsg,
-                                                        const char *	pFileName,
+                                                        const char*	pOfferMsg,
+                                                        const char*	pFileName,
                                                         VxGUID&			lclSessionId );
 
     virtual bool				fromGuiToPluginOfferReply( EPluginType		ePluginType,
@@ -551,15 +551,15 @@ public:
 
     virtual int					fromGuiPluginControl( EPluginType		ePluginType,
                                                       VxGUID&			oOnlineId,
-                                                      const char *      pControl,
-                                                      const char *      pAction,
+                                                      const char*      pControl,
+                                                      const char*      pAction,
                                                       uint32_t			u32ActionData,
                                                       VxGUID&			lclSessionId,
                                                       uint8_t *			fileHashData );
 
     virtual bool				fromGuiInstMsg( EPluginType		ePluginType,
                                                 VxGUID&			oOnlineId,
-                                                const char *	pMsg );
+                                                const char*	pMsg );
     virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk );
 
     virtual bool				fromGuiChangeMyFriendshipToHim( VxGUID&			oOnlineId,
@@ -572,7 +572,7 @@ public:
     virtual void				fromGuiUseRelay( VxGUID& oOnlineId, bool bUseAsRelay = true );
     virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount );
 
-    virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern = "" );
+    virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char* pSearchPattern = "" );
     virtual void				fromGuiNextScan( EScanType eScanType );
     virtual void				fromGuiStopScan( EScanType eScanType );
 
@@ -596,31 +596,31 @@ public:
 
     virtual bool				fromGuiTestCmd( IFromGui::ETestParam1		eTestParam1,
                                                 int							testParam2 = 0,
-                                                const char *				testParam3 = NULL );
+                                                const char*				testParam3 = NULL );
     virtual bool				fromGuiNearbyBroadcastEnable( bool enable );
-    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL );
+    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName = NULL );
     virtual void				fromGuiSendLog( uint32_t u32LogFlags );
 
-    virtual bool				fromGuiBrowseFiles( const char * dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY );
+    virtual bool				fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY );
     virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
-    virtual bool				fromGuiSetFileIsShared( const char * fileName, bool isShared );
-    virtual bool				fromGuiGetIsFileShared( const char * fileName );
+    virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared );
+    virtual bool				fromGuiGetIsFileShared( const char* fileName );
 
     virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
-    virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 );
+    virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId = 0 );
     virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
-    virtual bool				fromGuiGetIsFileInLibrary( const char * fileName );
-    virtual bool				fromGuiIsMyP2PWebVideoFile( const char * fileName );
-    virtual bool				fromGuiIsMyP2PWebAudioFile( const char * fileName );
+    virtual bool				fromGuiGetIsFileInLibrary( const char* fileName );
+    virtual bool				fromGuiIsMyP2PWebVideoFile( const char* fileName );
+    virtual bool				fromGuiIsMyP2PWebAudioFile( const char* fileName );
 
-    virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile );
+    virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile );
 
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 = 0 );
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 );
     virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo );
 
-    virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName );
-    virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName );
+    virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char* fileName );
+    virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName );
 
     virtual void				fromGuiQuerySessionHistory( VxGUID& historyId );
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 );

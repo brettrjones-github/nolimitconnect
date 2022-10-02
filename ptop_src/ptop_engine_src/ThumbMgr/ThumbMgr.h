@@ -35,7 +35,7 @@ class ThumbMgr : public AssetBaseMgr
 {
     const int THUMB_DB_VERSION = 1;
 public:
-	ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
+	ThumbMgr( P2PEngine& engine, const char* dbName, const char* dbStateName );
 	virtual ~ThumbMgr() = default;
 
     void                        addThumbMgrClient( ThumbCallbackInterface * client, bool enable );
@@ -76,7 +76,7 @@ public:
 protected:
     virtual bool				addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset ) override;
 
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
     virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
     ThumbInfo*                  lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime = 0 );

@@ -42,7 +42,7 @@
 #include <stdio.h>
 
 //============================================================================
-AssetXferMgr::AssetXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName )
+AssetXferMgr::AssetXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName )
 : AssetBaseXferMgr( engine, assetMgr, xferInterface, "AssetXferDb.db3", "AssetXferWorkerThrd" )
 {
 }

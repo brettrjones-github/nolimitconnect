@@ -36,7 +36,7 @@ namespace
 }
 
 //============================================================================
-UserJoinInfoDb::UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& hostListMgr, const char *dbName  )
+UserJoinInfoDb::UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& hostListMgr, const char*dbName  )
     : DbBase( dbName )
     , m_Engine( engine )
     , m_UserJoinMgr( hostListMgr )

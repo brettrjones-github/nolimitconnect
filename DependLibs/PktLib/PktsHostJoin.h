@@ -34,8 +34,8 @@ public:
     void                        setAccessState( enum EPluginAccess accessState ){ m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
-    void						setOfferMsg( const char * msg );
-    const char *				getOfferMsg( void );
+    void						setOfferMsg( const char* msg );
+    const char*				getOfferMsg( void );
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -62,8 +62,8 @@ public:
     void                        setAccessState( enum EPluginAccess accessState ){ m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
-    void						setOfferMsg( const char * msg );
-    const char *				getOfferMsg( void );
+    void						setOfferMsg( const char* msg );
+    const char*				getOfferMsg( void );
 
 private:
     uint8_t					    m_HostType{ 0 };

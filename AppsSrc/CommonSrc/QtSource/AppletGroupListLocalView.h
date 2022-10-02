@@ -34,7 +34,7 @@ public:
 	AppletGroupListLocalView( AppCommon& app, QWidget*	parent = nullptr );
 	virtual ~AppletGroupListLocalView();
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
     void						setStatusLabel( QString strMsg );

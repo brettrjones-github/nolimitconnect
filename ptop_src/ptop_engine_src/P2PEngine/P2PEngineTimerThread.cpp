@@ -29,7 +29,7 @@ namespace
     //============================================================================
     void * P2PEngineTimerThreadFunc( void * pvContext )
     {
-        VxThread * poThread = ( VxThread * )pvContext;
+        VxThread* poThread = ( VxThread* )pvContext;
         poThread->setIsThreadRunning( true );
         P2PEngine * p2pEngine = ( P2PEngine * )poThread->getThreadUserParam();
         if( p2pEngine && false == poThread->isAborted() )

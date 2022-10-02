@@ -573,7 +573,7 @@ struct timezone
 
 int								clock_gettime( int X, struct timeval *tv );// implemented in VxFuntionsMissingInWindows
 int								gettimeofday( struct timeval *tv/*in*/, struct timezone *tz/*in*/ );
-int								asprintf( char **strp, const char *fmt, ... );
+int								asprintf( char **strp, const char*fmt, ... );
 /* Return the position of the first bit set in the argument.  */
 int								ffs( int );// implemented in VxFuntionsMissingInWindows
 uint32_t						getpagesize( void );
@@ -581,23 +581,23 @@ uint32_t						getpagesize( void );
 const void *					memmem( const void *l, size_t l_len, const void *s, size_t s_len );
 //size_t							getline( char **lineptr, size_t *n, FILE *stream );
 NLC_INLINE uint32_t			setuid( uint32_t id ) { return id; } // windows does not have user id's so fake it for now
-char *							strchrnul( const char *s, int c_in ); // implemented in libgnu/strchrnul.c
-char *							stpcpy( char *a, const char *b );
-char *							stpncpy( char *dest, const char *src, size_t n ); // implemented in libgnu/stpncpy
-char *							strptime( const char *buf, const char *fmt, struct tm *tm ); // implemented in VxFuntionsMissingInWindows.cpp
-int								strverscmp( const char *s1, const char *s2 );
+char *							strchrnul( const char*s, int c_in ); // implemented in libgnu/strchrnul.c
+char *							stpcpy( char *a, const char*b );
+char *							stpncpy( char *dest, const char*src, size_t n ); // implemented in libgnu/stpncpy
+char *							strptime( const char*buf, const char*fmt, struct tm *tm ); // implemented in VxFuntionsMissingInWindows.cpp
+int								strverscmp( const char*s1, const char*s2 );
 char *							strcasestr( const char* haystack, const char* needle );	// implemented in VxFuntionsMissingInWindows.cpp
-int								unsetenv( const char * ); // implemented in libgnu/unsetenv.c
-int								vasprintf( char **strp, const char *fmt, va_list ap );
+int								unsetenv( const char* ); // implemented in libgnu/unsetenv.c
+int								vasprintf( char **strp, const char*fmt, va_list ap );
 
 struct tm *						gmtime_r( const time_t *timep, struct tm *result );		// implemented in VxFuntionsMissingInWindows.cpp
 time_t							timegm( struct tm *tm );								// implemented in VxFuntionsMissingInWindows.cpp
 struct tm *						localtime_r( const time_t *timep, struct tm *result );	// implemented in VxFuntionsMissingInWindows.cpp
-char *							strndup( const char *_s, size_t _n );
-//char *							strdup( const char *_s, size_t _n );
+char *							strndup( const char*_s, size_t _n );
+//char *							strdup( const char*_s, size_t _n );
 // create temp unique directory in given path 
 char *							mkdtemp( char * path );	// implemented in VxFuntionsMissingInWindows.cpp
-int								setenv( const char *name, const char *value, int overwrite ); // implemented in VxFuntionsMissingInWindows.cpp
+int								setenv( const char*name, const char*value, int overwrite ); // implemented in VxFuntionsMissingInWindows.cpp
 NLC_END_CDECLARES
 
 #define HAVE_SECURE_GETENV		1 // have secure_getenv

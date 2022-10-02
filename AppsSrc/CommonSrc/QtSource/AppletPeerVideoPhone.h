@@ -38,7 +38,7 @@ protected:
     virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ) override;
 
 	void						setupActivityVideoPhone();
-    void						toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ) override;
+    void						toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
 	Ui::AppletPeerVideoPhoneUi	ui;

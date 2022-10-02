@@ -34,8 +34,8 @@ public:
 	std::string&				getNetworkKey( void )					{ return m_NetworkName; }
 
 	//! restore all of given network to lists from database
-	RCODE						dbRestoreAll( const char * networkName );
-	RCODE						dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime, const char * networkName );
+	RCODE						dbRestoreAll( const char* networkName );
+	RCODE						dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime, const char* networkName );
 
 protected:
 	//=== overrides ===//
@@ -44,20 +44,20 @@ protected:
 	//! delete tables from database 
     virtual RCODE				onDeleteTables( int oldVersion ) override;
 
-	RCODE						bigListDbStartup( const char * pDbFileName );
+	RCODE						bigListDbStartup( const char* pDbFileName );
 	RCODE						bigListDbShutdown( void );
 
 	//! if not in db insert BigListInfo else update database
-	RCODE						dbUpdateBigListInfo( BigListInfo * poInfo, const char * networkName );
+	RCODE						dbUpdateBigListInfo( BigListInfo * poInfo, const char* networkName );
 
 	//! remove friend by id
 	RCODE						dbRemoveBigListInfo( VxGUID& oId );
 
 	//! insert big list info node into database
-	RCODE						dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char * networkName );
+	RCODE						dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char* networkName );
 
 	//! update big list info node in database
-	RCODE						dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * networkName );
+	RCODE						dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char* networkName );
 
 	//! make big list info into blob
 	RCODE						saveBigListInfoIntoBlob( BigListInfo * poInfo, uint8_t * * ppu8RetBlob, int * piRetBlobLen );

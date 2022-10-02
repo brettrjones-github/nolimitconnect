@@ -25,14 +25,14 @@ public:
 	PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginVideoPhone() = default;
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				
 														int				pvUserData,
-														const char *	pOfferMsg,				
-														const char *	pFileName = NULL,
+														const char*	pOfferMsg,				
+														const char*	pFileName = NULL,
 														uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
 
-	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
+	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
 													int				pvUserdata,
 													EOfferResponse	eOfferResponse,
 													VxGUID			lclSessionId );
@@ -41,7 +41,7 @@ public:
 	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent 	= nullptr, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent 	= nullptr, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char * pMsg ); 
+	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char* pMsg ); 
 
 protected:
 	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

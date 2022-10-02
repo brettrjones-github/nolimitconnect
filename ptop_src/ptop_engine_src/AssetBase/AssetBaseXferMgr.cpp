@@ -49,7 +49,7 @@ namespace
 	//============================================================================
     static void * AssetBaseXferMgrThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		AssetBaseXferMgr * poMgr = (AssetBaseXferMgr *)poThread->getThreadUserParam();
         if( poMgr )
@@ -64,7 +64,7 @@ namespace
 
 
 //============================================================================
-AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName )
+AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName )
 : m_Engine( engine )
 , m_AssetBaseMgr( assetMgr )
 , m_XferInterface( xferInterface )
@@ -92,7 +92,7 @@ void AssetBaseXferMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-void AssetBaseXferMgr::assetXferThreadWork( VxThread * workThread )
+void AssetBaseXferMgr::assetXferThreadWork( VxThread* workThread )
 {
 	if( workThread->isAborted() )
 		return;
@@ -1551,7 +1551,7 @@ void AssetBaseXferMgr::queAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase )
+EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
@@ -1652,7 +1652,7 @@ EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, A
 }
 
 //============================================================================
-EXferError AssetBaseXferMgr::createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase )
+EXferError AssetBaseXferMgr::createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase )
 {
     EXferError xferErr = eXferErrorNone;
     PktBaseGetReq* pktReq = createPktBaseGetReq();
@@ -1735,7 +1735,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseSend( AssetBaseTxSession * xferSessio
 				fclose( xferInfo.m_hFile );
 				xferInfo.m_hFile = NULL;
 				LogMsg( LOG_INFO, "AssetBaseXferMgr::beginAssetBaseSend: AssetBase %s could not be resumed because too short", 
-					(const char *)xferInfo.getLclFileName().c_str() );
+					(const char*)xferInfo.getLclFileName().c_str() );
 				xferErr  = eXferErrorFileSeekError;
 			}
 
@@ -1750,7 +1750,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseSend( AssetBaseTxSession * xferSessio
 					xferInfo.m_hFile = NULL;
 					LogMsg( LOG_INFO, "AssetBaseXferMgr::beginAssetBaseSend: could not seek to position %d in file %s",
 						xferInfo.m_u64FileOffs,
-						(const char *)xferInfo.getLclFileName().c_str() );
+						(const char*)xferInfo.getLclFileName().c_str() );
 					xferErr  = eXferErrorFileSeekError;
 					xferSession->setErrorCode( rc );
 				}
@@ -1783,7 +1783,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
     if( eXferErrorNone == xferErr )
     {
         LogMsg( LOG_INFO, "AssetBaseXferMgr::(AssetBase Send) start recieving file %s", 
-            (const char *)xferInfo.getLclFileName().c_str() );
+            (const char*)xferInfo.getLclFileName().c_str() );
         poPkt->fillAssetFromPkt( xferSession->getAssetBaseInfo() );
     }
 
@@ -1865,7 +1865,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
 			{
 				xferErr  = eXferErrorFileSeekError;
 				LogMsg( LOG_INFO, "AssetBaseXferMgr: ERROR:(AssetBase Send) %d AssetBase %s could not be resumed because too short", 
-					    rc, (const char *)xferInfo.getLclFileName().c_str() );
+					    rc, (const char*)xferInfo.getLclFileName().c_str() );
 			}
 			else
 			{
@@ -1879,7 +1879,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
 					xferErr  = eXferErrorFileOpenError;
 
 					LogMsg( LOG_INFO, "AssetBaseXferMgr: ERROR:(AssetBase Send) %d AssetBase %s could not be created", 
-						    rc, (const char *)xferInfo.getLclFileName().c_str() );
+						    rc, (const char*)xferInfo.getLclFileName().c_str() );
 				}
 				else
 				{
@@ -1892,7 +1892,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
 						fclose( xferInfo.m_hFile );
 						xferInfo.m_hFile = NULL;
 						LogMsg( LOG_INFO, "AssetBaseXferMgr: ERROR: (AssetBase Send) could not seek to position %d in file %s",
-							    xferInfo.m_u64FileOffs, (const char *)xferInfo.getLclFileName().c_str() );
+							    xferInfo.m_u64FileOffs, (const char*)xferInfo.getLclFileName().c_str() );
 					}
 				}
 			}
@@ -1912,7 +1912,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
 				xferErr = eXferErrorFileCreateError;
 
 				LogMsg( LOG_INFO, "AssetBaseXferMgr: ERROR: %d AssetBase %s could not be created", 
-					    rc, (const char *)xferInfo.getLclFileName().c_str() );
+					    rc, (const char*)xferInfo.getLclFileName().c_str() );
 			}
 		}
 	}
@@ -1946,7 +1946,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
 	if( 0 != remoteErr )
 	{
 		// canceled download by remote user
-		LogMsg( LOG_INFO, "FileShareXferMgr:: Cancel Sending file %s", xferInfo.getLclFileName().c_str() );
+		LogMsg( LOG_INFO, "AssetBaseXferMgr:: Cancel Sending file %s", xferInfo.getLclFileName().c_str() );
 		onAssetBaseSent( netIdent, sktBase, assetInfo, eXferErrorCanceled, pluginIsLocked );
         endAssetBaseXferSession( xferSession, pluginIsLocked, false );
         if( false == pluginIsLocked )
@@ -2028,7 +2028,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
 					rc,
 					xferInfo.m_u64FileOffs,
 					xferInfo.m_u64FileLen,
-					(const char *)xferInfo.getLclFileName().c_str() );
+					(const char*)xferInfo.getLclFileName().c_str() );
 	}
 	else
 	{
@@ -2128,7 +2128,7 @@ EXferError AssetBaseXferMgr::rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxS
 
 			LogMsg( LOG_INFO, "VxPktHandler::RxAssetBaseChunk: ERROR %d: writing to file %s",
 							rc,
-							(const char *)xferInfo.getLclFileName().c_str() );
+							(const char*)xferInfo.getLclFileName().c_str() );
 		}
 		else
 		{
@@ -2294,7 +2294,7 @@ void AssetBaseXferMgr::onAssetBaseSent( VxNetIdent*netIdent, VxSktBase* sktBase,
 }
 
 //============================================================================
-void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase )
+void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent* hisIdent, VxSktBase* sktBase )
 {
 	// check que and start next xfer
 	VxGUID& hisOnlineId = hisIdent->getMyOnlineId();

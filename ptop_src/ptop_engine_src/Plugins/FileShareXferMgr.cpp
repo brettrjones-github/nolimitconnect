@@ -14,7 +14,6 @@
 //============================================================================
 
 #include "FileShareXferMgr.h"
-#include "FileLibraryMgr.h"
 
 #include "PluginBase.h"
 #include "PluginMgr.h"
@@ -22,8 +21,7 @@
 #include "FileTxSession.h"
 #include "FileRxSession.h"
 
-#include "SharedFilesMgr.h"
-#include "SharedFileInfo.h"
+#include "FileInfo.h"
 
 #include <GuiInterface/IToGui.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
@@ -1536,7 +1534,7 @@ EXferError FileShareXferMgr::canTxFile( VxNetIdent* netIdent, VxSha1Hash& fileHa
 }
 
 //============================================================================
-bool FileShareXferMgr::isViewFileListMatch( FileTxSession * xferSession, SharedFileInfo& fileInfo )
+bool FileShareXferMgr::isViewFileListMatch( FileTxSession * xferSession, FileInfo& fileInfo )
 {
 	size_t viewDirLen = xferSession->m_strViewDirectory.length();
 	bool bRootDir = viewDirLen ? false : true;

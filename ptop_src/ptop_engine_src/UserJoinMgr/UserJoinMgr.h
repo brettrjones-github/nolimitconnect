@@ -34,7 +34,7 @@ class UserJoinMgr
     const int USER_JOIN_DB_VERSION = 1;
     const int USER_JOINED_LAST_DB_VERSION = 1;
 public:
-	UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName );
+	UserJoinMgr( P2PEngine& engine, const char* dbName, const char* dbJoinedLastName );
 	virtual ~UserJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );

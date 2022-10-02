@@ -44,7 +44,7 @@ namespace
 	//============================================================================
     void * NetConnectorThreadFunction( void * pvParam )
 	{
-		VxThread * poThread = (VxThread *)pvParam;
+		VxThread* poThread = (VxThread*)pvParam;
 		poThread->setIsThreadRunning( true );
 		NetConnector * poMgr = (NetConnector *)poThread->getThreadUserParam();
         if( poMgr && false == poThread->isAborted() )
@@ -59,7 +59,7 @@ namespace
 	//============================================================================
     void * StayConnectedThreadFunction( void * pvParam )
 	{
-		VxThread * poThread = (VxThread *)pvParam;
+		VxThread* poThread = (VxThread*)pvParam;
 		poThread->setIsThreadRunning( true );
 		NetConnector * poMgr = (NetConnector *)poThread->getThreadUserParam();
 

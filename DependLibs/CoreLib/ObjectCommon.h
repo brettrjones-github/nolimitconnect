@@ -191,7 +191,7 @@ public:
 	virtual ~ObjectCommon(){};
 
 	void						setObjName( std::string nameText );
-	const char *				getObjName( void )					    { return m_ObjectName.c_str(); }
+	const char*				getObjName( void )					    { return m_ObjectName.c_str(); }
 
 
 protected:

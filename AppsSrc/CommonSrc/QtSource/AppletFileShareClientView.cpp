@@ -199,7 +199,7 @@ void AppletFileShareClientView::slotApplyFileFilter( unsigned char fileTypeMask 
 }
 
 //============================================================================
-FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser * netIdent, VxMyFileInfo& fileInfo )
+FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser* netIdent, VxMyFileInfo& fileInfo )
 {
 	FileXferWidget* item = new FileXferWidget(ui.FileItemList);
 	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
@@ -289,7 +289,7 @@ FileXferWidget* AppletFileShareClientView::findListEntryWidget( VxGUID lclSessio
 }
 
 //============================================================================
-void AppletFileShareClientView::addFile( GuiUser * netIdent, VxMyFileInfo& fileInfo )
+void AppletFileShareClientView::addFile( GuiUser* netIdent, VxMyFileInfo& fileInfo )
 {
     if( fileInfo.getFileLength()
         && !fileInfo.getFullFileName().isEmpty() )

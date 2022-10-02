@@ -38,10 +38,10 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						setTitle( QString strTitle );
-	void						addFile(	VxNetIdent *	netIdent, 
+	void						addFile(	VxNetIdent*	netIdent, 
 											uint8_t				u8FileType, 
 											uint64_t				u64FileLen, 
-											const char *	pFileName );
+											const char*	pFileName );
 
 private slots:
 	//! user clicked the upper right x button

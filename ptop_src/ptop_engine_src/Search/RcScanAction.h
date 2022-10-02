@@ -60,13 +60,13 @@ public:
 
 	void						doSearchResultActions( void );
 
-	virtual void				onScanResultProfilePic(	VxNetIdent *	netIdent, 
+	virtual void				onScanResultProfilePic(	VxNetIdent*	netIdent, 
 															VxSktBase *		sktBase, 
 															uint8_t *			pu8JpgData, 
 															uint32_t				u32JpgDataLen );
 
 	virtual void				onScanResultError(	EScanType			eScanType,
-														VxNetIdent *		netIdent, 
+														VxNetIdent*		netIdent, 
 														VxSktBase *			sktBase, 
 														uint32_t				errCode ); 
 protected:
@@ -77,7 +77,7 @@ protected:
 	void						searchActionMoodMsgSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
 	void						searchActionFileSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	bool						getNextActionConnection( VxNetIdent ** netIdent, VxSktBase ** sktBase );
+	bool						getNextActionConnection( VxNetIdent** netIdent, VxSktBase ** sktBase );
 	
 	void						setShouldSendNext( bool next )				{ m_bNextScan = next; }
 	bool						getShouldSendNext( void )					{ return m_bNextScan; }

@@ -80,35 +80,35 @@ public:
   virtual ~Database();
   virtual Dataset *CreateDataset() const = 0;
 /* sets a new host name */
-  virtual void setHostName(const char *newHost) { host = newHost; }
+  virtual void setHostName(const char*newHost) { host = newHost; }
 /* gets a host name */
-  const char *getHostName(void) const { return host.c_str(); }
+  const char*getHostName(void) const { return host.c_str(); }
 /* sets a new port */
-  void setPort(const char *newPort) { port = newPort; }
+  void setPort(const char*newPort) { port = newPort; }
 /* gets a port */
-  const char *getPort(void) const { return port.c_str(); }
+  const char*getPort(void) const { return port.c_str(); }
 /* sets a new database name */
-  virtual void setDatabase(const char *newDb) { db = newDb; }
+  virtual void setDatabase(const char*newDb) { db = newDb; }
 /* gets a database name */
-  const char *getDatabase(void) const { return db.c_str(); }
+  const char*getDatabase(void) const { return db.c_str(); }
 /* sets a new login to database */
-  void setLogin(const char *newLogin) { login = newLogin; }
+  void setLogin(const char*newLogin) { login = newLogin; }
 /* gets a login */
-  const char *getLogin(void) const { return login.c_str(); }
+  const char*getLogin(void) const { return login.c_str(); }
 /* sets a password */
-  void setPasswd(const char *newPasswd) { passwd = newPasswd; }
+  void setPasswd(const char*newPasswd) { passwd = newPasswd; }
 /* gets a password */
-  const char *getPasswd(void) const { return passwd.c_str(); }
+  const char*getPasswd(void) const { return passwd.c_str(); }
 /* active status is OK state */
   virtual bool isActive(void) const { return active; }
 /* Set new name of sequence table */
-  void setSequenceTable(const char *new_seq_table) { sequence_table = new_seq_table; };
+  void setSequenceTable(const char*new_seq_table) { sequence_table = new_seq_table; };
 /* Get name of sequence table */
-  const char *getSequenceTable(void) { return sequence_table.c_str(); }
+  const char*getSequenceTable(void) { return sequence_table.c_str(); }
 /* Get the default character set */
-  const char *getDefaultCharset(void) { return default_charset.c_str(); }
+  const char*getDefaultCharset(void) { return default_charset.c_str(); }
 /* Sets configuration */
-  virtual void setConfig(const char *newKey, const char *newCert, const char *newCA, const char *newCApath, const char *newCiphers, bool newCompression) {
+  virtual void setConfig(const char*newKey, const char*newCert, const char*newCA, const char*newCApath, const char*newCiphers, bool newCompression) {
     key = newKey;
     cert = newCert;
     ca = newCA;
@@ -121,14 +121,14 @@ public:
 
   virtual int init(void) { return DB_COMMAND_OK; }
   virtual int status(void) { return DB_CONNECTION_NONE; }
-  virtual int setErr(int err_code, const char *qry)=0;
-  virtual const char *getErrorMsg(void) { return error.c_str(); }
+  virtual int setErr(int err_code, const char*qry)=0;
+  virtual const char*getErrorMsg(void) { return error.c_str(); }
 	
   virtual int connect(bool create) { NLC_UNUSED( create ); return DB_COMMAND_OK; }
-  virtual int connectFull( const char *newDb, const char *newHost=NULL,
-                      const char *newLogin=NULL, const char *newPasswd=NULL,const char *newPort=NULL,
-                      const char *newKey=NULL, const char *newCert=NULL, const char *newCA=NULL, 
-                      const char *newCApath=NULL, const char *newCiphers=NULL, bool newCompression = false);
+  virtual int connectFull( const char*newDb, const char*newHost=NULL,
+                      const char*newLogin=NULL, const char*newPasswd=NULL,const char*newPort=NULL,
+                      const char*newKey=NULL, const char*newCert=NULL, const char*newCA=NULL, 
+                      const char*newCApath=NULL, const char*newCiphers=NULL, bool newCompression = false);
   virtual void disconnect(void) { active = false; }
   virtual int reset(void) { return DB_COMMAND_OK; }
   virtual int create(void) { return DB_COMMAND_OK; }
@@ -136,7 +136,7 @@ public:
   virtual long nextid(const char* seq_name)=0;
 
 /* \brief copy database */
-  virtual int copy(const char *new_name) { NLC_UNUSED(new_name); return -1; }
+  virtual int copy(const char*new_name) { NLC_UNUSED(new_name); return -1; }
 
 /* \brief drop all extra analytics from database */
   virtual int drop_analytics(void) { return -1; }
@@ -156,14 +156,14 @@ public:
    \param ... - optional comma seperated list of variables for substitution in format string placeholders.
    \return escaped and formatted string.
    */
-  virtual std::string prepare(const char *format, ...);
+  virtual std::string prepare(const char*format, ...);
 
   /*! \brief Prepare a SQL statement for execution or querying using C printf nomenclature
    \param format - C printf compliant format string
    \param args - va_list of variables for substitution in format string placeholders.
    \return escaped and formatted string.
    */
-  virtual std::string vprepare(const char *format, va_list args) = 0;
+  virtual std::string vprepare(const char*format, va_list args) = 0;
 
   virtual bool in_transaction() {return false;};
 
@@ -263,11 +263,11 @@ protected:
   void parse_sql(std::string &sql);
 
 /* Returns old field value (for :OLD) */
-  virtual const field_value f_old(const char *f);
+  virtual const field_value f_old(const char*f);
 
 public:
 
- virtual int str_compare(const char * s1, const char * s2);
+ virtual int str_compare(const char* s1, const char* s2);
 /* constructor */
   Dataset();
   Dataset(Database *newDb);
@@ -281,23 +281,23 @@ public:
   Database *getDatabase(void) { return db; }
 
 /* sets a new query string to database server */
-  void setExecSql(const char *newSql) { sql = newSql; }
+  void setExecSql(const char*newSql) { sql = newSql; }
 /* retrieves a query string */
-  const char *getExecSql(void) { return sql.c_str(); }
+  const char*getExecSql(void) { return sql.c_str(); }
 
 /* status active is OK query */
   virtual bool isActive(void) { return active; }
 
-  virtual void setSqlParams(const char *sqlFrmt, sqlType t, ...);
+  virtual void setSqlParams(const char*sqlFrmt, sqlType t, ...);
 
 
 /* error handling */
-//  virtual void halt(const char *msg);
+//  virtual void halt(const char*msg);
 
 /* last inserted id */
   virtual int64_t lastinsertid() = 0;
 /* sequence numbers */
-  virtual long nextid(const char *seq_name)=0;
+  virtual long nextid(const char*seq_name)=0;
 /* sequence numbers */
   virtual int num_rows()= 0;
 
@@ -324,7 +324,7 @@ public:
    \param index - name of the index to be dropped
    \return true when the index is guaranteed to no longer exist in the database.
    */
-  virtual bool dropIndex(const char *table, const char *index) { return false; }
+  virtual bool dropIndex(const char*table, const char*index) { return false; }
 
 /* Go to record No (starting with 0) */
   virtual bool seek(int pos=0);
@@ -370,17 +370,17 @@ public:
   virtual int field_count();       					
   virtual int fieldCount();
 /* func. retrieves a field name with 'n' index */
-  virtual const char *fieldName(int n);
+  virtual const char*fieldName(int n);
 /* func. retrieves a field index with 'fn' field name,return -1 when field name not found */
-  virtual int  fieldIndex(const char *fn);
+  virtual int  fieldIndex(const char*fn);
 /* func. retrieves a field size */
   virtual int  fieldSize(int n);
 
 
 /* Set field value */
-  virtual bool set_field_value(const char *f_name, const field_value &value);
+  virtual bool set_field_value(const char*f_name, const field_value &value);
 /* alias for set_field_value */
-  virtual bool sf(const char *f, const field_value &v) { return set_field_value(f,v); }
+  virtual bool sf(const char*f, const field_value &v) { return set_field_value(f,v); }
 
 
 
@@ -388,10 +388,10 @@ public:
 //  virtual char *field_name(int f_index) { return field_by_index(f_index)->get_field_name(); };
 
 /* Getting value of field for current record */
-  virtual const field_value get_field_value(const char *f_name);
+  virtual const field_value get_field_value(const char*f_name);
   virtual const field_value get_field_value(int index);
 /* Alias to get_field_value */
-  const field_value fv(const char *f) { return get_field_value(f); }
+  const field_value fv(const char*f) { return get_field_value(f); }
   const field_value fv(int index) { return get_field_value(index); }
 
 /* ------------ for transaction ------------------- */
@@ -413,7 +413,7 @@ public:
 /* Struct to store an indexMapped field access entry */
   struct FieldIndexMapEntry
   {
-   FieldIndexMapEntry(const char *name):fieldIndex(~0), strName(name){};
+   FieldIndexMapEntry(const char*name):fieldIndex(~0), strName(name){};
    bool operator < (const FieldIndexMapEntry &other) const {return strName < other.strName;};
    unsigned int fieldIndex;
    std::string strName;
@@ -457,7 +457,7 @@ public:
   std::vector<unsigned int> fieldIndexMap_Sorter;
 
 /* Get the column index from a string field_value request */
-  bool get_index_map_entry(const char *f_name);
+  bool get_index_map_entry(const char*f_name);
 
   void set_ds_state(dsStates new_state) {ds_state = new_state;};	
  public:
@@ -465,16 +465,16 @@ public:
   dsStates get_state() {return ds_state;};
 
 /*add a new value to select_sql*/
-  void set_select_sql(const char *sel_sql);
+  void set_select_sql(const char*sel_sql);
   void set_select_sql(const std::string &select_sql);
 /*add a new value to update_sql*/
-  void add_update_sql(const char *upd_sql);
+  void add_update_sql(const char*upd_sql);
   void add_update_sql(const std::string &upd_sql);
 /*add a new value to insert_sql*/
-  void add_insert_sql(const char *ins_sql);
+  void add_insert_sql(const char*ins_sql);
   void add_insert_sql(const std::string &ins_sql);
   /*add a new value to delete_sql*/
-  void add_delete_sql(const char *del_sql);
+  void add_delete_sql(const char*del_sql);
   void add_delete_sql(const std::string &del_sql);
 
 /*clear update_sql*/
@@ -485,7 +485,7 @@ public:
   void clear_delete_sql();
 
 /*get value of select_sql*/
- const char *get_select_sql();
+ const char*get_select_sql();
 
 };
 
@@ -502,7 +502,7 @@ public:
 
 /* constructor */
   DbErrors();
-  DbErrors(const char *msg, ...);
+  DbErrors(const char*msg, ...);
 
   const char  * getMsg();
  private:

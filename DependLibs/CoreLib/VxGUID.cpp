@@ -307,7 +307,7 @@ void VxGUID::toHexString( char * retBuf ) const
 
 //============================================================================
 //! set online id by converting hex string into U128
-bool VxGUID::fromVxGUIDHexString( const char * pHexString )
+bool VxGUID::fromVxGUIDHexString( const char* pHexString )
 {
     if( false == isVxGUIDHexStringValid( pHexString ) )
     {
@@ -344,7 +344,7 @@ bool VxGUID::fromVxGUIDHexString( const char * pHexString )
 }
 
 //============================================================================
-bool VxGUID::isVxGUIDHexStringValid( const char * pId )
+bool VxGUID::isVxGUIDHexStringValid( const char* pId )
 {
     if( NULL == pId )
     {
@@ -395,7 +395,7 @@ void VxGUID::toOnlineIdString( char * retBuf ) const
 
 //============================================================================
 //! set online id by converting hex string into U128
-bool VxGUID::fromOnlineIdString( const char * pHexString )
+bool VxGUID::fromOnlineIdString( const char* pHexString )
 {
     if( false == isOnlineIdStringValid( pHexString ) )
     {
@@ -433,7 +433,7 @@ bool VxGUID::fromOnlineIdString( const char * pHexString )
 }
 
 //============================================================================
-bool VxGUID::isOnlineIdStringValid( const char * pId )
+bool VxGUID::isOnlineIdStringValid( const char* pId )
 {
     if( nullptr == pId )
     {
@@ -511,7 +511,7 @@ void VxGUID::setVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart )	{ m_u64HiPart
 void VxGUID::getVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart )	{  u64HiPart = m_u64HiPart; u64LoPart = m_u64LoPart; }
 
 //============================================================================
-void VxGUID::setVxGUID( const char * pId )					        { this->fromVxGUIDHexString( pId ); }
+void VxGUID::setVxGUID( const char* pId )					        { this->fromVxGUIDHexString( pId ); }
 
 //============================================================================
 // set bytes to network order

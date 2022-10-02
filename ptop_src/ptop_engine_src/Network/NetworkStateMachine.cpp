@@ -54,7 +54,7 @@ namespace
 #ifdef DEBUG_PTOP_NETWORK_STATE
         LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc thread starting %d", threadCnt.load() );
 #endif // DEBUG_PTOP_NETWORK_STATE
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		NetworkStateMachine * stateMachine = (NetworkStateMachine *)poThread->getThreadUserParam();
         if( stateMachine && false == poThread->isAborted() )
@@ -398,7 +398,7 @@ void NetworkStateMachine::restartNetwork( void )
 }
 
 //============================================================================
-void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
+void NetworkStateMachine::fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork )
 {
     bool hasChanged = ( m_LocalNetworkIp != lclIp );
     uint16_t u16TcpPort = m_Engine.getEngineSettings().getTcpIpPort();

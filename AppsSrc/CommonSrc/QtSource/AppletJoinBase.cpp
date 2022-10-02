@@ -21,7 +21,7 @@
 #include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
-AppletJoinBase::AppletJoinBase( const char *name, AppCommon& app, QWidget* parent )
+AppletJoinBase::AppletJoinBase( const char*name, AppCommon& app, QWidget* parent )
 : AppletBase( name, app, parent )
 {
     m_NetworkHostUrl = m_MyApp.getFromGuiInterface().fromGuiQueryDefaultUrl( eHostTypeNetwork );

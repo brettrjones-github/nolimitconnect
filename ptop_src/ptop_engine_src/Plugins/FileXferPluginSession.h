@@ -33,7 +33,7 @@ public:
 	virtual ~FileXferPluginSession();
 
 	//! return true if file is already in que to be sent or has been sent
-	bool						isFileQuedOrSent( const char * pFileName );
+	bool						isFileQuedOrSent( const char* pFileName );
 
 	VxFileXferInfo&				getRxXferInfo( void )							{ return m_RxFileInfo; }
 	VxFileXferInfo&				getTxXferInfo( void )							{ return m_TxFileInfo; }

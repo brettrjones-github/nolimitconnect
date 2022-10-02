@@ -22,7 +22,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-void AppCommon::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
+void AppCommon::updateFriendList( GuiUser* netIdent, bool sessionTimeChange )
 {
 }
 
@@ -157,7 +157,7 @@ void AppCommon::toGuiContactOffline( VxNetIdent* netIdent )
 //============================================================================
 void AppCommon::slotInternalToGuiContactOffline( VxGUID onlineId )
 {
-    GuiUser *user = m_UserMgr.getUser( onlineId );
+    GuiUser*user = m_UserMgr.getUser( onlineId );
     if( user )
     {
         LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOffline user %s", user->getOnlineName().c_str() );

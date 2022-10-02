@@ -27,7 +27,7 @@ class VxSha1Hash;
 class OfferBaseInfoDb : public DbBase
 {
 public:
-	OfferBaseInfoDb( OfferBaseMgr& mgr, const char *dbName );
+	OfferBaseInfoDb( OfferBaseMgr& mgr, const char*dbName );
 	virtual ~OfferBaseInfoDb() = default;
 
 	void						lockOfferInfoDb( void )					{ m_OfferBaseInfoDbMutex.lock(); }
@@ -37,7 +37,7 @@ public:
 											VxGUID&			creatorId, 
 											VxGUID&			historyId, 
                                             VxGUID&			thumbId, 
-											const char *	assetName, 
+											const char*	assetName, 
 											int64_t			assetLen, 
 											uint32_t		assetType, 							
 											VxSha1Hash&		hashId, 
@@ -47,12 +47,12 @@ public:
                                             int64_t			createdTimestamp = 0,
                                             int64_t			modifiedTimestamp = 0,     
                                             int64_t			accessedTimestamp = 0,          
-											const char *	assetTag = "", 
+											const char*	assetTag = "", 
 											EOfferSendState sendState = eOfferSendStateNone);
 
 	void 						addOffer( OfferBaseInfo * assetInfo );
 
-	void						removeOffer( const char * assetName );
+	void						removeOffer( const char* assetName );
 	void						removeOffer( VxGUID& assetId );
 	void						removeOffer( OfferBaseInfo * assetInfo );
 
@@ -61,7 +61,7 @@ public:
 	void						updateOfferSendState( VxGUID& assetId, EOfferSendState sendState );
 
 protected:
-    virtual OfferBaseInfo *     createOfferInfo( const char * assetName, uint64_t assetLen, uint16_t assetType ) = 0;
+    virtual OfferBaseInfo *     createOfferInfo( const char* assetName, uint64_t assetLen, uint16_t assetType ) = 0;
     virtual OfferBaseInfo *     createOfferInfo( OfferBaseInfo& assetInfo ) = 0;
 
 	virtual RCODE				onCreateTables( int iDbVersion );

@@ -228,10 +228,10 @@ void PluginBase::fromGuiSetFileShareSettings( FileShareSettings& fileShareSettin
 
 //============================================================================
 //! user wants to send offer to friend
-bool PluginBase::fromGuiMakePluginOffer(	VxNetIdent *	netIdent, 
+bool PluginBase::fromGuiMakePluginOffer(	VxNetIdent*	netIdent, 
 											int				pvUserData, 
-											const char *	pOfferMsg, 
-											const char *	pFileName,
+											const char*	pOfferMsg, 
+											const char*	pFileName,
 											uint8_t *			fileHashId,
 											VxGUID			lclSessionId )
 {
@@ -240,7 +240,7 @@ bool PluginBase::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 
 //============================================================================
 //! handle reply to offer
-bool PluginBase::fromGuiOfferReply(		VxNetIdent *	netIdent,
+bool PluginBase::fromGuiOfferReply(		VxNetIdent*	netIdent,
 										int			pvUserData,				
 										EOfferResponse	eOfferResponse,
 										VxGUID			lclSessionId )
@@ -249,9 +249,9 @@ bool PluginBase::fromGuiOfferReply(		VxNetIdent *	netIdent,
 }
 
 //============================================================================
-int PluginBase::fromGuiPluginControl(		VxNetIdent *	netIdent,
-											const char *	pControl, 
-											const char *	pAction,
+int PluginBase::fromGuiPluginControl(		VxNetIdent*	netIdent,
+											const char*	pControl, 
+											const char*	pAction,
 											uint32_t				u32ActionData,
 											VxGUID&			fileId,
 											uint8_t *			fileHashId )
@@ -260,8 +260,8 @@ int PluginBase::fromGuiPluginControl(		VxNetIdent *	netIdent,
 }
 
 //============================================================================ 
-bool PluginBase::fromGuiInstMsg(	VxNetIdent *	netIdent, 
-									const char *	pMsg )
+bool PluginBase::fromGuiInstMsg(	VxNetIdent*	netIdent, 
+									const char*	pMsg )
 {
 	return false;
 }
@@ -273,7 +273,7 @@ bool PluginBase::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk )
 }
 
 //============================================================================ 
-void PluginBase::makeShortFileName( const char * pFullFileName, std::string& strShortFileName )
+void PluginBase::makeShortFileName( const char* pFullFileName, std::string& strShortFileName )
 {
     VxFileUtil::makeShortFileName( pFullFileName, strShortFileName );
 }

@@ -51,15 +51,15 @@ public:
 
 	void						netPortForwardShutdown( void );
 
-	virtual void				beginPortForward( uint16_t u16Port, const char * ipToForwardTo );
+	virtual void				beginPortForward( uint16_t u16Port, const char* ipToForwardTo );
 	time_t						elapsedSecondsLastAttempt( void );
 	bool						hasPortForwardCompleted( void );
 	bool						didUpnpPortOpen( void );
 
 	void						portForwardCallback( EAppErr eAppErr );
 //// UpnpClientInterface
-//	virtual void				upnpStatusMsg( const char * pDeviceId, const char * pMsg );
-//	virtual void				upnpPortForwardSent(  const char * pDeviceId );
+//	virtual void				upnpStatusMsg( const char* pDeviceId, const char* pMsg );
+//	virtual void				upnpPortForwardSent(  const char* pDeviceId );
 //	virtual void				upnpPortForwardTimedOut( void );
 //	virtual void				upnpComplete( void );
 

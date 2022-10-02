@@ -18,13 +18,13 @@
 #include "BlobMgr.h"
 
 //============================================================================
-BlobInfoDb::BlobInfoDb( AssetBaseMgr& hostListMgr, const char * dbName )
+BlobInfoDb::BlobInfoDb( AssetBaseMgr& hostListMgr, const char* dbName )
 : AssetBaseInfoDb( hostListMgr, dbName )
 {
 }
 
 //============================================================================
-AssetBaseInfo * BlobInfoDb::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
+AssetBaseInfo * BlobInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     return new BlobInfo( assetType, assetName, assetLen );
 }

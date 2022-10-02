@@ -61,7 +61,7 @@ public:
     void VerifyGLStateQt();
 #endif
 
-    virtual void                verifyGlState( const char * msg = nullptr ); // show gl error if any
+    virtual void                verifyGlState( const char* msg = nullptr ); // show gl error if any
 
     void                        setLastRenderedImage( QImage& image ){ m_renderMutex.lock();  m_LastRenderedImage = image;  m_renderMutex.unlock(); }
     QImage                      getLastRenderedImage()

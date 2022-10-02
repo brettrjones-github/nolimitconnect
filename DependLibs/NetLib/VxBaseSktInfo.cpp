@@ -26,14 +26,14 @@ VxBaseSktInfo::~VxBaseSktInfo()
 
 //============================================================================
 //! return true if file is allready qued to be sent or has been sent
-bool VxBaseSktInfo::isFileQuedOrSent( const char * pFileName )
+bool VxBaseSktInfo::isFileQuedOrSent( const char* pFileName )
 {
 	return false;
 }
 
 //============================================================================
 //! que a file to send
-void VxBaseSktInfo::queFileToSend( const char * pLclFileName, const char * pRmtFileName )
+void VxBaseSktInfo::queFileToSend( const char* pLclFileName, const char* pRmtFileName )
 {
 }
 

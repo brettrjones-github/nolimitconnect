@@ -26,7 +26,7 @@ bool							WildMatchString( std::string & cs, std::string& csWildStr );
 
 bool							GetLine( std::string cs, unsigned int n, std::string &r );
 bool							IsHexDecString( std::string& cs );
-int								CountChars( const char * pStr, char cCharToLookFor );
+int								CountChars( const char* pStr, char cCharToLookFor );
 int								CountChars( std::string& csStr, char cCharToLookFor );
 
 bool							RemoveNonAlphaNums( std::string& cs );
@@ -34,12 +34,12 @@ bool							RemoveDoubleSpaces( std::string &cs );
 std::string						GetSubstring( std::string& csStr, int iStartIdx, int iEndIdx );
 bool							GetWord( std::string& csStr, int n, std::string& csRetToken );
 //! Returns a pointer to the first occurrence of strSearch in strMain, or NULL if strSearch does not appear in str
-const char *					StrStrNoCase( const char * strMain, const char * strSearch );
+const char*					StrStrNoCase( const char* strMain, const char* strSearch );
 //! find position of string p2 in p1.. return -1 if not found
-int								StrStrNoCasePosition( const char * strMain, const char * strSearch );
+int								StrStrNoCasePosition( const char* strMain, const char* strSearch );
 //! format into std::string using printf style format
 void							StdStringFormat(	std::string & csStr,	// std::string to return formated results in
-													const char * pFormat,	// string with format chars etc		
+													const char* pFormat,	// string with format chars etc		
 													... );					// vars
 //! format into std::string using printf style format
 void							StdStringFormat(	std::wstring & csStr,	// std::string to return formated results in
@@ -50,9 +50,9 @@ int								StdStringFind( std::string & csStr, char cFindChar );
 //!	find position of the given char..case insensitive if not found return -1			
 int								StdStringFindCaseInsensitive( std::string & csStr, char cFindChar );
 //!	find position of the given string if not found return -1			
-int								StdStringFind( std::string & csStr, const char * pSubStr );
+int								StdStringFind( std::string & csStr, const char* pSubStr );
 //!	find position of the given string case insensitive if not found return -1			
-int								StdStringFindCaseInsensitive( std::string & csStr, const char * pSubStr );
+int								StdStringFindCaseInsensitive( std::string & csStr, const char* pSubStr );
 //!	find position of the given char by searching from end to first if not found return -1			
 int								StdStringReverseFind( std::string & csStr, char cFindChar );
 //! make standard string upper case
@@ -73,11 +73,11 @@ std::string						StdStringLeftOfLast( std::string& cs, char chr);
 //													char *			pBuf,			// buffer to copy into
 //													unsigned int	uiMaxBufLen );	// max length of buffer	
 ////! copy string into buffer.. if string is to long then truncate
-//void							SafeStringCopy(		const char *	pSrcString,		// string to copy from
+//void							SafeStringCopy(		const char*	pSrcString,		// string to copy from
 //													char *			pBuf,			// buffer to copy into
 //													unsigned int	uiMaxBufLen );	// max length of buffer	
 //! Safe string copy.. logs error if buffer to short
-int								SafeStrCopy( char * pDest, const char * pSrc, int iBufLen );
+int								SafeStrCopy( char * pDest, const char* pSrc, int iBufLen );
 int								SafeStrCopy( wchar_t * pDest, const wchar_t * pSrc, int iBufLen );
 
 //!	trim all at first instance of char		
@@ -99,18 +99,18 @@ void							StdStringSplit( const std::string & csStr, const char cToken, std::ve
 void							StdStringSplit( const std::wstring & csStr, const wchar_t cToken, std::vector<std::wstring>& aoRetTokens );
 
 // return true if prefix matched beginning characters of string
-bool							StdStringBeginsWith( std::string & csStr, const char * pPrefix );
+bool							StdStringBeginsWith( std::string & csStr, const char* pPrefix );
 // return true if suffix matched end characters of string
-bool							StdStringEndsWith( std::string & csStr, const char * pSuffix );
+bool							StdStringEndsWith( std::string & csStr, const char* pSuffix );
 // fill string with integer value
-const char *					StdStringFromInteger( std::string & strResult, int iValue );
+const char*					StdStringFromInteger( std::string & strResult, int iValue );
 int								StdStringToInteger( std::string& strValue );
 
 //============================================================================
 //!	return string at first instance of char		
 const wchar_t *					wstrchr( const wchar_t * wStr, const wchar_t wChar );
 //! same as strstr but case insensitive
-char *							stristr( const char * pString, const char * pPattern );
+char *							stristr( const char* pString, const char* pPattern );
 
 int								wstrlen( const wchar_t * pString );
 wchar_t *						wstrstr( const wchar_t * pString, const wchar_t * pPattern );
@@ -126,7 +126,7 @@ wchar_t *						wstrpbrk( wchar_t * pwSrc, const wchar_t * pwTokens );
 wchar_t *						wstrsep( wchar_t **ppStr, const wchar_t *pDelimiters );
 #ifdef TARGET_OS_WINDOWS
 // windows doesn't have strsep so do our own version
-char *							strsep( char **ppStr, const char *pDelimiters );
+char *							strsep( char **ppStr, const char*pDelimiters );
 #endif //TARGET_OS_WINDOWS
 
 std::wstring					Utf8ToWide( const std::string utf8string );
@@ -142,5 +142,5 @@ wchar_t *						TrimLeadingSpaces( wchar_t * pString );
 // returns -1 if not found
 int                             CaseInsensitiveFindSubstr( const std::string& str1, const std::string& str2 );
 
-int                             SafeStrCopy( char * pDest, const char * pSrc, int iBufLen );
+int                             SafeStrCopy( char * pDest, const char* pSrc, int iBufLen );
 int                             SafeStrCopy( wchar_t * pDest, const wchar_t * pSrc, int iBufLen );

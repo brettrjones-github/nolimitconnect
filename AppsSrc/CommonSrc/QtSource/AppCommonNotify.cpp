@@ -48,11 +48,11 @@ void AppCommon::onMenuNotifySelected( int iMenuId, PopupMenu * senderPopupMenu, 
 
 //============================================================================
 //! received offer from friend
-void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of friend
+void AppCommon::toGuiRxedPluginOffer(			VxNetIdent*	netIdent,			// identity of friend
 												EPluginType		ePluginType,		// plugin type
-												const char *	pOfferMsg,			// offer message
+												const char*	pOfferMsg,			// offer message
 												int			    pvUserData,			// plugin defined data
-												const char *	pFileName, 			// filename if any
+												const char*	pFileName, 			// filename if any
 												uint8_t *		fileHashId,
 												VxGUID&			lclSessionId,
 												VxGUID&			rmtSessionId )
@@ -102,11 +102,11 @@ void AppCommon::onToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 
 //============================================================================
 //! response to offer
-void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent, 
+void AppCommon::toGuiRxedOfferReply(	VxNetIdent*	netIdent, 
 										EPluginType		ePluginType, 
 										int			    pvUserData, 
 										EOfferResponse	eOfferResponse,
-										const char *	pFileName,
+										const char*	pFileName,
 										uint8_t *		fileHashData,
 										VxGUID&			lclSessionId,
 										VxGUID&			rmtSessionId )
@@ -144,7 +144,7 @@ void AppCommon::onToGuiRxedOfferReply( GuiOfferSession * offerSession )
 }
 
 //============================================================================
-void AppCommon::toGuiPluginSessionEnded(	VxNetIdent *	netIdent, 
+void AppCommon::toGuiPluginSessionEnded(	VxNetIdent*	netIdent, 
 											EPluginType		ePluginType, 
 											int				pvUserData, 
 											EOfferResponse	eOfferResponse,
@@ -192,9 +192,9 @@ void AppCommon::slotInternalToGuiPluginStatus( EPluginType pluginType, int statu
 }
 
 //============================================================================
-void AppCommon::toGuiInstMsg(	VxNetIdent *	netIdent, 
+void AppCommon::toGuiInstMsg(	VxNetIdent*	netIdent, 
 								EPluginType		ePluginType,
-								const char *	pMsg )
+								const char*	pMsg )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -205,7 +205,7 @@ void AppCommon::toGuiInstMsg(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void AppCommon::slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg )
+void AppCommon::slotToGuiInstMsg( GuiUser* netIdent, EPluginType ePluginType, QString pMsg )
 {
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )

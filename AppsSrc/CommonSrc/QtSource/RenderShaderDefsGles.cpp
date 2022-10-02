@@ -2,7 +2,7 @@
 //#define SHADERS_INCLUDE
 #if defined(SHADERS_INCLUDE)
 
-static const char * gles_shader_vert =
+static const char* gles_shader_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec4 m_attrcol;\n"
 "attribute vec4 m_attrcord0;\n"
@@ -25,10 +25,10 @@ static const char * gles_shader_vert =
 
 // SM_DEFAULT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_default_frag =
+static const char* gles_shader_default_frag =
 "precision mediump float;\n"
 #else
-static const char * gles_shader_default_frag =
+static const char* gles_shader_default_frag =
 #endif
 "uniform lowp vec4 m_unicol;\n"
 "void main()\n"
@@ -48,10 +48,10 @@ static const char * gles_shader_default_frag =
 
 // SM_TEXTURE shader
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_texture_frag =
+static const char* gles_shader_texture_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_texture_frag =
+static const char* gles_shader_texture_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "uniform lowp vec4 m_unicol;\n"
@@ -73,10 +73,10 @@ static const char * gles_shader_texture_frag =
 
 // SM_MULTI shader;
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_multi_frag =
+static const char* gles_shader_multi_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_multi_frag =
+static const char* gles_shader_multi_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "uniform sampler2D m_samp1;\n"
@@ -99,10 +99,10 @@ static const char * gles_shader_multi_frag =
 
 // SM_FONTS
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_fonts_frag =
+static const char* gles_shader_fonts_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_fonts_frag =
+static const char* gles_shader_fonts_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "varying   vec4      m_cord0;\n"
@@ -125,10 +125,10 @@ static const char * gles_shader_fonts_frag =
 
 // SM_TEXTURE_NOBLEND
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_texture_noblend_frag =
+static const char* gles_shader_texture_noblend_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_texture_noblend_frag =
+static const char* gles_shader_texture_noblend_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "varying vec4 m_cord0;\n"
@@ -149,10 +149,10 @@ static const char * gles_shader_texture_noblend_frag =
 
 // SM_MULTI_BLENDCOLOR shader
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_multi_blendcolor_frag =
+static const char* gles_shader_multi_blendcolor_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_multi_blendcolor_frag =
+static const char* gles_shader_multi_blendcolor_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "uniform sampler2D m_samp1;\n"
@@ -176,10 +176,10 @@ static const char * gles_shader_multi_blendcolor_frag =
 
 // SM_TEXTURE_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_frag =
+static const char* gles_shader_rgba_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_rgba_frag =
+static const char* gles_shader_rgba_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "uniform sampler2D m_samp1;\n"
@@ -203,12 +203,12 @@ static const char * gles_shader_rgba_frag =
 
 // SM_TEXTURE_RGBA_OES
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_oes_frag =
+static const char* gles_shader_rgba_oes_frag =
 "#extension GL_OES_EGL_image_external : require\n"
 "\n"
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_rgba_oes_frag =
+static const char* gles_shader_rgba_oes_frag =
 "#extension GL_OES_EGL_image_external : require\n"
 "\n"
 #endif
@@ -231,10 +231,10 @@ static const char * gles_shader_rgba_oes_frag =
 
 // SM_TEXTURE_RGBA_BLENDCOLOR
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_blendcolor_frag =
+static const char* gles_shader_rgba_blendcolor_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_rgba_blendcolor_frag =
+static const char* gles_shader_rgba_blendcolor_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "varying vec4 m_cord0;\n"
@@ -257,10 +257,10 @@ static const char * gles_shader_rgba_blendcolor_frag =
 
 // SM_TEXTURE_RGBA_BOB
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_bob_frag =
+static const char* gles_shader_rgba_bob_frag =
 "precision highp   float;\n"
 #else
-static const char * gles_shader_rgba_bob_frag =
+static const char* gles_shader_rgba_bob_frag =
 #endif
 "uniform sampler2D m_samp0;\n"
 "uniform sampler2D m_samp1;\n"
@@ -298,11 +298,11 @@ static const char * gles_shader_rgba_bob_frag =
 
 // SM_TEXTURE_RGBA_BOB_OES
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_bob_oes_frag =
+static const char* gles_shader_rgba_bob_oes_frag =
 "#extension GL_OES_EGL_image_external : require\n"
 "precision highp   float;\n"
 #else
-static const char * gles_shader_rgba_bob_oes_frag =
+static const char* gles_shader_rgba_bob_oes_frag =
 "#extension GL_OES_EGL_image_external : require\n"
 #endif
 "uniform samplerExternalOES m_samp0;\n"
@@ -342,7 +342,7 @@ static const char * gles_shader_rgba_bob_oes_frag =
 // video format
 //============================================================================
 // SM_VIDEO_YV12_BASIC // SM_VIDEO_NV12_BASIC // SM_VIDEO_YUY2_BASIC // SM_VIDEO_UYVY_BASIC // SM_VIDEO_NV12_RGB_BASIC
-static const char * gles_yuv2rgb_vert =
+static const char* gles_yuv2rgb_vert =
 "uniform mat4 m_proj;\n"
 "uniform mat4 m_model;\n"
 "attribute vec4 m_attrpos;\n"
@@ -363,10 +363,10 @@ static const char * gles_yuv2rgb_vert =
 
 // most SM_VIDEO_XXXX_BASIC fragments
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_yuv2rgb_basic_frag =
+static const char* gles_yuv2rgb_basic_frag =
 "precision mediump float;\n"
 #else
-static const char * gles_yuv2rgb_basic_frag =
+static const char* gles_yuv2rgb_basic_frag =
 #endif
 "uniform sampler2D m_sampY;\n"
 "uniform sampler2D m_sampU;\n"
@@ -425,10 +425,10 @@ static const char * gles_yuv2rgb_basic_frag =
 
 // SM_VIDEO_YV12_BOB
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_yuv2rgb_bob_frag =
+static const char* gles_yuv2rgb_bob_frag =
 "precision highp float;\n"
 #else
-static const char * gles_yuv2rgb_bob_frag =
+static const char* gles_yuv2rgb_bob_frag =
 #endif
 "uniform sampler2D m_sampY;\n"
 "uniform sampler2D m_sampU;\n"
@@ -510,7 +510,7 @@ static const char * gles_yuv2rgb_bob_frag =
 // video filter
 //============================================================================
 // SM_VID_FILTER_DEFAULT
-static const char * gles_videofilter_vert =
+static const char* gles_videofilter_vert =
 "uniform mat4 m_proj;\n"
 "uniform mat4 m_model;\n"
 "attribute vec4 m_attrpos;\n"
@@ -525,10 +525,10 @@ static const char * gles_videofilter_vert =
 
 // SM_VID_FILTER_DEFAULT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_videofilter_frag =
+static const char* gles_videofilter_frag =
 "precision mediump float;\n"
 #else
-static const char * gles_videofilter_frag =
+static const char* gles_videofilter_frag =
 #endif
 "uniform sampler2D img;\n"
 "varying vec2 cord;\n"
@@ -539,10 +539,10 @@ static const char * gles_videofilter_frag =
 
 // SM_VID_FILTER_CONVOLUTION_4X4_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_4x4_rgba_frag =
+static const char* gles_convolution_4x4_rgba_frag =
 "precision highp float;\n"
 #else
-static const char * gles_convolution_4x4_rgba_frag =
+static const char* gles_convolution_4x4_rgba_frag =
 #endif
 "#define HAS_FLOAT_TEXTURE 0\n"
 "uniform sampler2D img;\n"
@@ -593,10 +593,10 @@ static const char * gles_convolution_4x4_rgba_frag =
 
 // SM_VID_FILTER_CONVOLUTION_4X4_FLOAT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_4x4_float_frag =
+static const char* gles_convolution_4x4_float_frag =
 "precision highp float;\n"
 #else
-static const char * gles_convolution_4x4_float_frag =
+static const char* gles_convolution_4x4_float_frag =
 #endif
 "#define HAS_FLOAT_TEXTURE 1\n"
 "uniform sampler2D img;\n"
@@ -647,10 +647,10 @@ static const char * gles_convolution_4x4_float_frag =
 
 // SM_VID_FILTER_CONVOLUTION_6X6_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_6x6_rgba_frag =
+static const char* gles_convolution_6x6_rgba_frag =
 "precision highp float;\n"
 #else
-static const char * gles_convolution_6x6_rgba_frag =
+static const char* gles_convolution_6x6_rgba_frag =
 #endif
 "#define HAS_FLOAT_TEXTURE 0\n"
 "uniform sampler2D img;\n"
@@ -712,10 +712,10 @@ static const char * gles_convolution_6x6_rgba_frag =
 
 // SM_VID_FILTER_CONVOLUTION_6X6_FLOAT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_6x6_float_frag =
+static const char* gles_convolution_6x6_float_frag =
 "precision highp float;\n"
 #else
-static const char * gles_convolution_6x6_float_frag =
+static const char* gles_convolution_6x6_float_frag =
 #endif
 "#define HAS_FLOAT_TEXTURE 1\n"
 "uniform sampler2D img;\n"
@@ -776,7 +776,7 @@ static const char * gles_convolution_6x6_float_frag =
 "}\n";
 
 //============================================================================
-static const char * gles_tonemap_frag =
+static const char* gles_tonemap_frag =
 "float tonemap(float val)\n"
 "{\n"
 "    return val * ( 1.0 + val / ( m_toneP1 * m_toneP1 ) ) / ( 1.0 + val );\n"

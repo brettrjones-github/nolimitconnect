@@ -33,11 +33,11 @@ GuiFileActionSession::GuiFileActionSession()
 
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
-												VxNetIdent *	netIdent, 
+												VxNetIdent*	netIdent, 
 												VxGUID&			lclSessionId, 
 												uint8_t			u8FileType, 
 												uint64_t		u64FileLen, 
-												const char *	pFileName,
+												const char*	pFileName,
 												VxGUID			assetId,
 												VxSha1Hash&		fileHashId )
 : m_ePluginType( ePluginType )
@@ -52,11 +52,11 @@ GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
-												VxNetIdent *	netIdent, 
+												VxNetIdent*	netIdent, 
 												VxGUID&			lclSessionId, 
 												uint8_t			u8FileType, 
 												uint64_t		u64FileLen, 
-												const char *	pFileName,
+												const char*	pFileName,
 												VxGUID			assetId,
 												uint8_t *		fileHashId )
 : m_ePluginType( ePluginType )
@@ -71,7 +71,7 @@ GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
-												VxNetIdent *	netIdent, 
+												VxNetIdent*	netIdent, 
 												VxGUID&			lclSessionId, 
 												VxMyFileInfo&	fileInfo )
 : m_ePluginType( ePluginType )

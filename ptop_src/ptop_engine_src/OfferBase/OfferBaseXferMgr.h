@@ -48,7 +48,7 @@ public:
 	typedef std::map<VxGUID, OfferBaseRxSession *>::iterator OfferBaseRxIter;
 	typedef std::vector<OfferBaseTxSession *>::iterator OfferBaseTxIter;
 
-	OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char * stateDbName, EOfferMgrType offerMgrType );
+	OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char* stateDbName, EOfferMgrType offerMgrType );
 	virtual ~OfferBaseXferMgr();
 
 	VxMutex&					getOfferBaseQueMutex( void )					{ return m_OfferBaseSendQueMutex; }
@@ -77,7 +77,7 @@ public:
 	//virtual void				onPktMultiSessionReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	//virtual void				onPktMultiSessionReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	void						assetXferThreadWork( VxThread * workThread );
+	void						assetXferThreadWork( VxThread* workThread );
 protected:
 	virtual void				onOfferBaseReceived( OfferBaseRxSession * xferSession, OfferBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onOfferBaseSent( OfferBaseTxSession * xferSession, OfferBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
@@ -108,11 +108,11 @@ protected:
 
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );
-	void						checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase* sktBase );
+	void						checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetIdent* hisIdent, VxSktBase* sktBase );
 
 	void						assetSendComplete( OfferBaseTxSession * xferSession );
 	void						queOffer( OfferBaseInfo& assetInfo );
-	EXferError					createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase* sktBase );
+	EXferError					createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase );
 	bool						requireFileXfer( EOfferType assetType );
 
 	//=== vars ===//

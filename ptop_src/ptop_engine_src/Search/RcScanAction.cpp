@@ -22,7 +22,6 @@
 #include <GuiInterface/IToGui.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginCamServer.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 
 #include <CoreLib/VxFileUtil.h>
@@ -38,7 +37,7 @@ namespace
 //! thread function to load all nodes in big list
 void * SearchActionThreadFunction( void * pvParam )
 {
-	VxThread * poThread = (VxThread *)pvParam;
+	VxThread* poThread = (VxThread*)pvParam;
 	poThread->setIsThreadRunning( true );
 	RcScanAction * poScan = (RcScanAction *)poThread->getThreadUserParam();
     if( poScan && false == poThread->isAborted() )
@@ -195,7 +194,7 @@ void RcScanAction::doSearchResultActions( void )
 }
 
 //============================================================================
-bool RcScanAction::getNextActionConnection( VxNetIdent ** ppoIdent, VxSktBase ** ppoSkt )
+bool RcScanAction::getNextActionConnection( VxNetIdent** ppoIdent, VxSktBase ** ppoSkt )
 {
 	while( m_MatchedConnectionsList.size() )
 	{
@@ -285,7 +284,7 @@ RcScanMatchedConnection *  RcScanAction::findMatchedConnection( VxNetIdent* netI
 
 //============================================================================
 void RcScanAction::onScanResultError(	EScanType			eScanType,
-										VxNetIdent *		netIdent,
+										VxNetIdent*		netIdent,
 										VxSktBase *			sktBase,  
 										uint32_t					errCode )
 {
@@ -293,7 +292,7 @@ void RcScanAction::onScanResultError(	EScanType			eScanType,
 }
 
 //============================================================================
-void RcScanAction::onScanResultProfilePic(	VxNetIdent *	netIdent, 
+void RcScanAction::onScanResultProfilePic(	VxNetIdent*	netIdent, 
 												VxSktBase *		sktBase, 
 												uint8_t *			pu8JpgData, 
 												uint32_t				u32JpgDataLen )

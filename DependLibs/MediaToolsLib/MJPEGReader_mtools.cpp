@@ -30,7 +30,7 @@ namespace
 	//============================================================================
 	static uint32_t MJPEGReaderThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		MJPEGReader * reader = (MJPEGReader *)poThread->getThreadUserParam();
         if( reader )
@@ -120,7 +120,7 @@ void MJPEGReader::setIsVidThreadRunning( bool isRunning )
 }
 
 //============================================================================
-bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
+bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char* fileName )
 {
 	// LogMsg( LOG_DEBUG, "MJPEGReader:fromGuiIsMyP2PWebVideoFile start" );
 	if( !fileName )
@@ -229,7 +229,7 @@ bool MJPEGReader::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction ass
 }
 
 //============================================================================
-bool MJPEGReader::startVideoRead( const char * fileName, VxGUID& assetId, int pos0to100000 )
+bool MJPEGReader::startVideoRead( const char* fileName, VxGUID& assetId, int pos0to100000 )
 {
 	// LogMsg( LOG_DEBUG, "MJPEGReader:startVideoRead start" );
 	if( !fileName )
@@ -321,7 +321,7 @@ void MJPEGReader::stopVideoRead( void )
 }
 
 //============================================================================
-bool MJPEGReader::playOneFrame( const char * fileName, VxGUID& assetId )
+bool MJPEGReader::playOneFrame( const char* fileName, VxGUID& assetId )
 {
 	if( !fileName )
 	{
@@ -344,7 +344,7 @@ bool MJPEGReader::playOneFrame( const char * fileName, VxGUID& assetId )
 }
 
 //============================================================================
-bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fileName, VxGUID& assetId )
+bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char* fileName, VxGUID& assetId )
 {
 	// first see if already loaded.. if so read from chunk list
 	// LogMsg( LOG_DEBUG, "MJPEGReader:readFirstVidFrameFromFile start" );

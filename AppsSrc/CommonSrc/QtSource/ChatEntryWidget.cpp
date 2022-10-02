@@ -69,7 +69,7 @@ void ChatEntryWidget::setAppModule( EAppModule appModule )
 }
 
 //============================================================================
-void ChatEntryWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
+void ChatEntryWidget::setIdents( GuiUser* myIdent, GuiUser* hisIdent )
 {
 	m_MyIdent		= myIdent;
 	m_HisIdent		= hisIdent;

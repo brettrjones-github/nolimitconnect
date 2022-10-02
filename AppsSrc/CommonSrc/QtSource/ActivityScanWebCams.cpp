@@ -46,7 +46,7 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
 
     connectBarWidgets();
 
-    connect( this, SIGNAL(signalNewWebCamSession( GuiUser * )), this, SLOT(slotNewWebCamSession( GuiUser * )));
+    connect( this, SIGNAL(signalNewWebCamSession( GuiUser* )), this, SLOT(slotNewWebCamSession( GuiUser* )));
     connect( this, SIGNAL(signalPlayVideoFrame( QImage, int )), this, SLOT(slotPlayVideoFrame( QImage, int )));
 
     connect(m_CountdownTimer, SIGNAL(timeout()), this, SLOT(onCountdownTimer()));
@@ -111,7 +111,7 @@ void ActivityScanWebCams::toGuiClientScanSearchComplete( EScanType eScanType )
 }
 
 //============================================================================
-void ActivityScanWebCams::setupIdentWidget( GuiUser * netIdent )
+void ActivityScanWebCams::setupIdentWidget( GuiUser* netIdent )
 {
 	m_HisIdent = netIdent;
 	IdentWidget * poIdentWidget = ui.FriendIdentWidget;
@@ -129,7 +129,7 @@ void ActivityScanWebCams::setupIdentWidget( GuiUser * netIdent )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiScanResultSuccess(EScanType eScanType, GuiUser * netIdent )
+void ActivityScanWebCams::toGuiScanResultSuccess(EScanType eScanType, GuiUser* netIdent )
 {
 	if( eScanTypeCamServer == eScanType )
 	{
@@ -138,7 +138,7 @@ void ActivityScanWebCams::toGuiScanResultSuccess(EScanType eScanType, GuiUser * 
 }
 
 //============================================================================
-void ActivityScanWebCams::slotNewWebCamSession( GuiUser * netIdent )
+void ActivityScanWebCams::slotNewWebCamSession( GuiUser* netIdent )
 {
 	m_ScanList.push_back( netIdent );
 	showNextCam();
@@ -176,7 +176,7 @@ void ActivityScanWebCams::updateCountdownGui()
 }
 
 //============================================================================
-void ActivityScanWebCams::doCamConnect( GuiUser * netIdent )
+void ActivityScanWebCams::doCamConnect( GuiUser* netIdent )
 {
 
 	if( m_HisIdent )

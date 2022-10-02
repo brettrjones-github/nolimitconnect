@@ -37,8 +37,8 @@ public:
 	void						setIsInLibrary( bool isInLibrary );
 	bool						getIsInLibrary( void );
 
-	void						setFileItemInfo( FileItemInfo * fileItemInfo );
-	FileItemInfo *				getFileItemInfo( void );
+	void						setFileItemInfo( FileItemInfo* fileItemInfo );
+	FileItemInfo*				getFileItemInfo( void );
 
 	void						updateWidgetFromInfo( void );
 

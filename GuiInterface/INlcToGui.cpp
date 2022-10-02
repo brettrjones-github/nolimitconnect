@@ -10,19 +10,19 @@ void INlc::toGuiPlayNlcMedia( AssetBaseInfo* assetInfo )
 }
 
 //============================================================================
-void INlc::toGuiLog( int logLevel, const char * msg )
+void INlc::toGuiLog( int logLevel, const char* msg )
 {
     getAppCommon().toGuiLog( logLevel, msg );
 }
 
 //============================================================================
-void INlc::toGuiAppErr( EAppErr eAppErr, const char * errMsg )
+void INlc::toGuiAppErr( EAppErr eAppErr, const char* errMsg )
 {
     getAppCommon().toGuiAppErr( eAppErr, errMsg );
 }
 
 //============================================================================
-void INlc::toGuiStatusMessage( const char * statusMsg )
+void INlc::toGuiStatusMessage( const char* statusMsg )
 {
     getAppCommon().toGuiStatusMessage( statusMsg );
 }
@@ -130,13 +130,13 @@ void INlc::toGuiNetworkState( ENetworkStateType eNetworkState, const char* state
 }
 
 //============================================================================
-void INlc::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char * msg )
+void INlc::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char* msg )
 {
     getAppCommon().toGuiHostAnnounceStatus( hostType, sessionId, annStatus, msg );
 }
 
 //============================================================================
-void INlc::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg )
+void INlc::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char* msg )
 {
     getAppCommon().toGuiHostJoinStatus( hostType, sessionId, joinStatus, msg );
 }
@@ -148,7 +148,7 @@ void INlc::toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline )
 }
 
 //============================================================================
-void INlc::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char * msg )
+void INlc::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char* msg )
 {
     getAppCommon().toGuiHostSearchStatus( hostType, sessionId, searchStatus, commErr, msg );
 }
@@ -184,19 +184,19 @@ void INlc::toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId )
 }
 
 //============================================================================
-void INlc::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg )
+void INlc::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char* msg )
 {
     getAppCommon().toGuiIsPortOpenStatus( eIsPortOpenStatus, msg );
 }
 
 //============================================================================
-void INlc::toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg )
+void INlc::toGuiRunTestStatus( const char*testName, ERunTestStatus eRunTestStatus, const char* msg )
 {
     getAppCommon().toGuiRunTestStatus( testName, eRunTestStatus, msg );
 }
 
 //============================================================================
-void INlc::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
+void INlc::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char* msg )
 {
     getAppCommon().toGuiRandomConnectStatus( eRandomConnectStatus, msg );
 }
@@ -304,11 +304,11 @@ void INlc::toGuiSaveMyIdent( VxNetIdent* netIdent )
 }
 
 //============================================================================
-void INlc::toGuiRxedPluginOffer(   VxNetIdent *	netIdent,
+void INlc::toGuiRxedPluginOffer(   VxNetIdent*	netIdent,
                                     EPluginType		ePluginType,
-                                    const char *	pMsg,
+                                    const char*	pMsg,
                                     int			    pvUserData,
-                                    const char *	pFileName,
+                                    const char*	pFileName,
                                     uint8_t *		fileHashData,
                                     VxGUID&			lclSessionId,
                                     VxGUID&			rmtSessionId )
@@ -324,11 +324,11 @@ void INlc::toGuiRxedPluginOffer(   VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void INlc::toGuiRxedOfferReply(    VxNetIdent *	    netIdent,
+void INlc::toGuiRxedOfferReply(    VxNetIdent*	    netIdent,
                                      EPluginType		ePluginType,
                                      int				pvUserData,
                                      EOfferResponse	    eOfferResponse,
-                                     const char *	    pFileName,
+                                     const char*	    pFileName,
                                      uint8_t *			fileHashData,
                                      VxGUID&			lclSessionId,
                                      VxGUID&			rmtSessionId )
@@ -344,7 +344,7 @@ void INlc::toGuiRxedOfferReply(    VxNetIdent *	    netIdent,
 }
 
 //============================================================================
-void INlc::toGuiPluginSessionEnded(    VxNetIdent *	netIdent,
+void INlc::toGuiPluginSessionEnded(    VxNetIdent*	netIdent,
                                         EPluginType		ePluginType,
                                         int				pvUserData,
                                         EOfferResponse	eOfferResponse,
@@ -368,9 +368,9 @@ void INlc::toGuiPluginStatus( EPluginType		ePluginType,
 }
 
 //============================================================================
-void INlc::toGuiInstMsg( VxNetIdent *	    netIdent,
+void INlc::toGuiInstMsg( VxNetIdent*	    netIdent,
                           EPluginType		ePluginType,
-                          const char *	    pMsg )
+                          const char*	    pMsg )
 {
     getAppCommon().toGuiInstMsg(  netIdent,
                                   ePluginType,
@@ -378,7 +378,7 @@ void INlc::toGuiInstMsg( VxNetIdent *	    netIdent,
 }
 
 //============================================================================
-void INlc::toGuiFileList(  const char *	fileName,
+void INlc::toGuiFileList(  const char*	fileName,
                             uint64_t		fileLen,
                             uint8_t			fileType,
                             bool			isShared,
@@ -396,11 +396,11 @@ void INlc::toGuiFileList(  const char *	fileName,
 }
 
 //============================================================================
-void INlc::toGuiFileListReply( VxNetIdent *	netIdent,
+void INlc::toGuiFileListReply( VxNetIdent*	netIdent,
                                 EPluginType		ePluginType,
                                 uint8_t			u8FileType,
                                 uint64_t		u64FileLen,
-                                const char *	pFileName,
+                                const char*	pFileName,
                                 VxGUID          assetId,
                                 uint8_t *		fileHashData )
 {
@@ -414,7 +414,7 @@ void INlc::toGuiFileListReply( VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void INlc::toGuiStartUpload(   VxNetIdent *	netIdent,
+void INlc::toGuiStartUpload(   VxNetIdent*	netIdent,
                                 EPluginType		ePluginType,
                                 VxGUID&			fileInstanceId,
                                 uint8_t			u8FileType,
@@ -434,7 +434,7 @@ void INlc::toGuiStartUpload(   VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void INlc::toGuiStartDownload(     VxNetIdent *	netIdent,
+void INlc::toGuiStartDownload(     VxNetIdent*	netIdent,
                                     EPluginType		ePluginType,
                                     VxGUID&			fileInstanceId,
                                     uint8_t			u8FileType,
@@ -478,7 +478,7 @@ void INlc::toGuiScanSearchComplete( EScanType eScanType )
 }
 
 //============================================================================
-void INlc::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent *	netIdent )
+void INlc::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent*	netIdent )
 {
     getAppCommon().toGuiScanResultSuccess( eScanType, netIdent );
 }
@@ -490,7 +490,7 @@ void INlc::toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, in
 }
 
 //============================================================================
-void INlc::toGuiSearchResultProfilePic(    VxNetIdent *	netIdent,
+void INlc::toGuiSearchResultProfilePic(    VxNetIdent*	netIdent,
                                             uint8_t *		pu8JpgData,
                                             uint32_t		u32JpgDataLen )
 {
@@ -498,11 +498,11 @@ void INlc::toGuiSearchResultProfilePic(    VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void INlc::toGuiSearchResultFileSearch(    VxNetIdent *	netIdent,
+void INlc::toGuiSearchResultFileSearch(    VxNetIdent*	netIdent,
                                             VxGUID&			fileInstanceId,
                                             uint8_t			u8FileType,
                                             uint64_t		u64FileLen,
-                                            const char *	pFileName,
+                                            const char*	pFileName,
                                             VxGUID          assetId)
 {
     getAppCommon().toGuiSearchResultFileSearch( netIdent,

@@ -19,9 +19,9 @@
 #include <string>
 
 //=== Chop utils for strings ===//
-int VxCalcChoppedLen( const char * pStr );
+int VxCalcChoppedLen( const char* pStr );
 int VxGetUnchoppedStrLen( unsigned char * pu8ChopedStr );
-int VxChopStr( const char * pStr, unsigned char * pu8RetChoppedStr );
+int VxChopStr( const char* pStr, unsigned char * pu8RetChoppedStr );
 int VxChopStr( std::string &csStr, unsigned char * pu8RetChoppedStr );
 void VxUnchopStr(  unsigned char * pu8ChoppedStr, char * pRetUnchoppedStr );
 void VxUnchopStr(  unsigned char * pu8ChoppedStr, std::string &csRetStr );

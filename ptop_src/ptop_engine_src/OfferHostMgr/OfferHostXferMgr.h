@@ -47,7 +47,7 @@ public:
 	typedef std::map<VxGUID, OfferHostRxSession *>::iterator OfferHostRxIter;
 	typedef std::vector<OfferHostTxSession *>::iterator OfferHostTxIter;
 
-	OfferHostXferMgr( P2PEngine& engine, OfferHostMgr offerMgr, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char * stateDbName );
+	OfferHostXferMgr( P2PEngine& engine, OfferHostMgr offerMgr, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char* stateDbName );
 	virtual ~OfferHostXferMgr() = default;
 };
 

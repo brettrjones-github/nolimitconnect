@@ -32,29 +32,29 @@
 
 namespace
 {
-    //const char * HTTP_REQEST_LINE_DELIM = " ";
-    //const char * HTTP_HEADER_LINE_DELIM = " :";
-    //const char * HTTP_STATUS_LINE_DELIM = " ";
-    //const char * HTTP_POST = "POST";
-    //const char * HTTP_GET = "GET";
-    //const char * HTTP_HEAD = "HEAD";
-	const char * HTTP_LOCATION = "Location";
-	const char * HTTP_HOST = "Host";
-	const char * HTTP_SERVER = "Server";
-    //const char * HTTP_DATE = "Date";
-	const char * HTTP_CACHE_CONTROL = "Cache-Control";
-    //const char * HTTP_NO_CACHE = "no-cache";
-    //const char * HTTP_MAX_AGE = "max-age";
-    //const char * HTTP_CONNECTION = "Connection";
-    //const char * HTTP_CLOSE = "close";
-    //const char * HTTP_KEEP_ALIVE = "Keep-Alive";
-    //const char * HTTP_CONTENT_TYPE = "Content-Type";
-	const char * HTTP_CONTENT_LENGTH = "Content-Length";
-    //const char * HTTP_CONTENT_RANGE = "Content-Range";
-    //const char * HTTP_CONTENT_RANGE_BYTES = "bytes";
-    //const char * HTTP_RANGE = "Range";
-    //const char * HTTP_TRANSFER_ENCODING = "Transfer-Encoding";
-    //const char * HTTP_CHUNKED = "Chunked";
+    //const char* HTTP_REQEST_LINE_DELIM = " ";
+    //const char* HTTP_HEADER_LINE_DELIM = " :";
+    //const char* HTTP_STATUS_LINE_DELIM = " ";
+    //const char* HTTP_POST = "POST";
+    //const char* HTTP_GET = "GET";
+    //const char* HTTP_HEAD = "HEAD";
+	const char* HTTP_LOCATION = "Location";
+	const char* HTTP_HOST = "Host";
+	const char* HTTP_SERVER = "Server";
+    //const char* HTTP_DATE = "Date";
+	const char* HTTP_CACHE_CONTROL = "Cache-Control";
+    //const char* HTTP_NO_CACHE = "no-cache";
+    //const char* HTTP_MAX_AGE = "max-age";
+    //const char* HTTP_CONNECTION = "Connection";
+    //const char* HTTP_CLOSE = "close";
+    //const char* HTTP_KEEP_ALIVE = "Keep-Alive";
+    //const char* HTTP_CONTENT_TYPE = "Content-Type";
+	const char* HTTP_CONTENT_LENGTH = "Content-Length";
+    //const char* HTTP_CONTENT_RANGE = "Content-Range";
+    //const char* HTTP_CONTENT_RANGE_BYTES = "bytes";
+    //const char* HTTP_RANGE = "Range";
+    //const char* HTTP_TRANSFER_ENCODING = "Transfer-Encoding";
+    //const char* HTTP_CHUNKED = "Chunked";
 
 	char to_lower(char c)
 	{
@@ -108,7 +108,7 @@ int VxHttpParse::getHttpContentLen()
 }
 
 //============================================================================
-const char * VxHttpParse::getHttpValue( const char * name, std::string& strRetValue )
+const char* VxHttpParse::getHttpValue( const char* name, std::string& strRetValue )
 {
 	strRetValue = "";
 	if( NULL == name )
@@ -137,25 +137,25 @@ const char * VxHttpParse::getHttpValue( const char * name, std::string& strRetVa
 }
 
 //============================================================================
-const char * VxHttpParse::getHost( std::string& strRetValue )
+const char* VxHttpParse::getHost( std::string& strRetValue )
 {
 	return getHttpValue( HTTP_HOST, strRetValue );
 }
 
 //============================================================================
-const char * VxHttpParse::getServer( std::string& strRetValue )
+const char* VxHttpParse::getServer( std::string& strRetValue )
 {
 	return getHttpValue( HTTP_SERVER, strRetValue );
 }
 
 //============================================================================
-const char * VxHttpParse::getLocation( std::string& strRetValue )
+const char* VxHttpParse::getLocation( std::string& strRetValue )
 {
 	return getHttpValue( HTTP_LOCATION, strRetValue );
 }
 
 //============================================================================
-const char * VxHttpParse::getCacheControl( std::string& strRetValue )
+const char* VxHttpParse::getCacheControl( std::string& strRetValue )
 {
 	return getHttpValue( HTTP_CACHE_CONTROL, strRetValue );
 }
@@ -167,7 +167,7 @@ int VxHttpParse::getHttpCodeNumber( void )
 	std::string lineStr;
 	while( readStreamLine(lineStr) ) 
 	{
-		const char * pHTTP = strstr( lineStr.c_str(), "HTTP/" );
+		const char* pHTTP = strstr( lineStr.c_str(), "HTTP/" );
 		if( pHTTP )
 		{
 			pHTTP += 5;

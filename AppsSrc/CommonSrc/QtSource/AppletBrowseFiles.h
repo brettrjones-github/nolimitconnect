@@ -53,6 +53,7 @@ protected slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
 	void						slotBrowseButtonClicked( void );
+    void                        slotAddAllButtonClicked( void );
 
 	void						slotRequestFileList( void );
 	void						slotApplyFileFilter( unsigned char fileMask );

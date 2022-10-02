@@ -106,7 +106,7 @@ PktFileSendReq::PktFileSendReq()
 
 
 //============================================================================
-void PktFileSendReq::setFileName( const char * pFileName )
+void PktFileSendReq::setFileName( const char* pFileName )
 {
 	strcpy( (char *)m_FileName, pFileName );
 	uint16_t u16PktLen = (uint16_t)((sizeof( PktFileSendReq ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1);
@@ -131,7 +131,7 @@ PktFileSendReply::PktFileSendReply()
 }
 
 //============================================================================
-void PktFileSendReply::setFileName( const char * pFileName )
+void PktFileSendReply::setFileName( const char* pFileName )
 {
 	strcpy( (char *)m_FileName, pFileName );
 	uint16_t u16PktLen = (uint16_t)((sizeof( PktFileSendReply ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1);
@@ -160,7 +160,7 @@ void PktFileFindReq::SetMatchName( std::string &csName )
 {
     if( ( PKT_SHARE_FIND_FILE_MATCHNAME_MAX_LEN - 1) > csName.size() )
 	{
-		strcpy( m_MatchName, (const char *)csName.c_str() );
+		strcpy( m_MatchName, (const char*)csName.c_str() );
 		setPktLength( ROUND_TO_16BYTE_BOUNDRY( getEmptyLen()  + csName.size() + 1 ) );
 	}
 	else
@@ -273,7 +273,7 @@ PktFileShareErr::PktFileShareErr()
 }
 
 //============================================================================
-const char * PktFileShareErr::describeError( void )
+const char* PktFileShareErr::describeError( void )
 {
 	switch( m_u16Err )
 	{

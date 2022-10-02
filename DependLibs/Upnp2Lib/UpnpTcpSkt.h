@@ -31,5 +31,5 @@ public:
 	bool						getRemainingContents( VxHttpParse& oParser, int recieveDataTimeoutMs = SKT_RECEIVE_TIMEOUT );
 
 	bool						postRequestAndData( VxUrl& oUrl, std::string& strRequest, std::string& strData, int connectTimeoutMs = SKT_CONNECT_TIMEOUT  );
-	bool						postRequest( std::string& strHost, int iHostPort, const char * pRequest, int iRequestLen, int connectTimeoutMs = SKT_CONNECT_TIMEOUT );
+	bool						postRequest( std::string& strHost, int iHostPort, const char* pRequest, int iRequestLen, int connectTimeoutMs = SKT_CONNECT_TIMEOUT );
 };

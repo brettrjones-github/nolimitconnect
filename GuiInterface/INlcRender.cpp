@@ -27,7 +27,7 @@
 //============================================================================
 
 //============================================================================
-void INlc::verifyGlState( const char * msg )
+void INlc::verifyGlState( const char* msg )
 {
     getAppCommon().verifyGlState( msg );
 }

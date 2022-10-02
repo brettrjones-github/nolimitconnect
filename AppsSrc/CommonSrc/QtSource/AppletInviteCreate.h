@@ -23,7 +23,7 @@ public:
     AppletInviteCreate( AppCommon& app, QWidget* parent );
     virtual ~AppletInviteCreate();
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
 signals:

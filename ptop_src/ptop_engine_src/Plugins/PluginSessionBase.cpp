@@ -97,19 +97,19 @@ EPluginType PluginSessionBase::getPluginType( void )
 }
 
 //============================================================================
-void PluginSessionBase::setIdent( VxNetIdent * ident )	
+void PluginSessionBase::setIdent( VxNetIdent* ident )	
 { 
 	m_Ident = ident; 
 }
 
 //============================================================================
-VxNetIdent * PluginSessionBase::getIdent( void )
+VxNetIdent* PluginSessionBase::getIdent( void )
 { 
 	return m_Ident; 
 }
 
 //============================================================================
-const char * PluginSessionBase::getOnlineName( void )
+const char* PluginSessionBase::getOnlineName( void )
 { 
 	return m_Ident->getOnlineName(); 
 }
@@ -187,7 +187,7 @@ bool  PluginSessionBase::isRmtInitiated( void )
 }
 
 //============================================================================
-void  PluginSessionBase::setOfferMsg( const char * msg )
+void  PluginSessionBase::setOfferMsg( const char* msg )
 {
 	if( msg )
 	{
@@ -206,7 +206,7 @@ std::string&  PluginSessionBase::getOfferMsg( void )
 }
 
 //============================================================================
-void  PluginSessionBase::setOfferFile( const char * fileName )
+void  PluginSessionBase::setOfferFile( const char* fileName )
 {
 	if( fileName )
 	{

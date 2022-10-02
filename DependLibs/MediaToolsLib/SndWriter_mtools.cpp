@@ -79,7 +79,7 @@ bool SndWriter::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction asset
 }
 
 //============================================================================
-bool SndWriter::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName )
+bool SndWriter::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char* fileName )
 {
 	bool result = false;
 	switch( eRecState )
@@ -137,7 +137,7 @@ bool SndWriter::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, con
 }
 
 //============================================================================
-bool SndWriter::startSndWrite( const char * fileName, bool beginInPausedState )
+bool SndWriter::startSndWrite( const char* fileName, bool beginInPausedState )
 {
 	stopSndWrite();
 #ifdef MAKE_PCM_INSTEAD_OF_OPUS

@@ -22,7 +22,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletServiceBaseSettings::AppletServiceBaseSettings( const char * objName, AppCommon& app, QWidget* parent )
+AppletServiceBaseSettings::AppletServiceBaseSettings( const char* objName, AppCommon& app, QWidget* parent )
     : AppletBase( objName, app, parent )
 {
 }

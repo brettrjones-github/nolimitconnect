@@ -221,7 +221,7 @@ OpusFileDecoder::~OpusFileDecoder()
 }
 
 //============================================================================
-bool OpusFileDecoder::beginFileDecode( const char * fileName, VxGUID& assetId, int pos0to100000 )
+bool OpusFileDecoder::beginFileDecode( const char* fileName, VxGUID& assetId, int pos0to100000 )
 {
 	m_FileName	= fileName;
 	m_AssetId	= assetId;
@@ -919,7 +919,7 @@ bool OpusFileDecoder::seekOpusFile( FILE * fileHandle, int pos0to100000 )
 		return false;
 
 	// find OggS packet header signature and start reading from there
-	const char * oggHdrSig = "OggS";
+	const char* oggHdrSig = "OggS";
 	// 4 byte OggS then 1 byte struct version ( 0 ) then flags and stuff 
 	char dataBuf[2048];
 	int sigPos = -1;

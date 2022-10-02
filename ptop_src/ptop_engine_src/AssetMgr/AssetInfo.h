@@ -25,7 +25,7 @@ public:
     AssetInfo( const AssetBaseInfo& rhs );
     AssetInfo( enum EAssetType assetType, const std::string& fileName );
     AssetInfo( enum EAssetType assetType, const std::string& fileName, VxGUID& assetId );
-    AssetInfo( enum EAssetType assetType, const char * fileName, uint64_t fileLen );
+    AssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
     AssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
 	AssetInfo&					operator=( const AssetInfo& rhs ); 

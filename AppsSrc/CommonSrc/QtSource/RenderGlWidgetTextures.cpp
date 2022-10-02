@@ -657,7 +657,7 @@ void RenderGlWidget::initTextures()
 #define ALIGN(x, y) (((x) + ((y) - 1)) & ~((y) - 1))
         int dst_pitch = ALIGN( m_Frame->m_VisiblePitch[ i ], 4 );
         char *new_plane = ( char * )malloc( dst_pitch * m_Frame->m_VisibleLines[ i ] );
-        const char *source = &m_Frame->m_PlaneData[ i ][ 0 ];
+        const char*source = &m_Frame->m_PlaneData[ i ][ 0 ];
         char *destination = new_plane;
         for( int y = 0; y < m_Frame->m_VisibleLines[ i ]; y++ ) {
             memcpy( destination, source, m_Frame->m_VisiblePitch[ i ] );

@@ -1126,7 +1126,7 @@ SPX_RESAMPLE_EXPORT int speex_resampler_reset_mem(SpeexResamplerState *st)
    return RESAMPLER_ERR_SUCCESS;
 }
 
-SPX_RESAMPLE_EXPORT const char *speex_resampler_strerror(int err)
+SPX_RESAMPLE_EXPORT const char*speex_resampler_strerror(int err)
 {
    switch (err)
    {

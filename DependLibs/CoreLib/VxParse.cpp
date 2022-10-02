@@ -140,7 +140,7 @@ bool GetLine( std::string cs, unsigned int n, std::string &r )
 		start = 0;
 	for( i = 0; i < iLen; i++ )
 	{
-		if( '\r' == ((const char *)cs.c_str())[i] )
+		if( '\r' == ((const char*)cs.c_str())[i] )
 		{
 			if (n == 0)
 			{
@@ -150,7 +150,7 @@ bool GetLine( std::string cs, unsigned int n, std::string &r )
 			else
 			{
 				n--;
-				if( '\n' == ((const char *)cs.c_str())[ i + 1 ] )
+				if( '\n' == ((const char*)cs.c_str())[ i + 1 ] )
 					i++;
 				if (n == 0)
 					start = i+1;
@@ -171,7 +171,7 @@ bool GetLine( std::string cs, unsigned int n, std::string &r )
 //============================================================================
 bool IsHexDecString( std::string& cs )
 {
-	const char * pData = (const char *)cs.c_str();
+	const char* pData = (const char*)cs.c_str();
 	for( int i = 0; i < (int)cs.size(); i++ )
 	{
 		if( pData[ i ] < '0' )
@@ -187,7 +187,7 @@ bool IsHexDecString( std::string& cs )
 }
 
 //============================================================================
-int CountChars( const char * pStr, char cCharToLookFor )
+int CountChars( const char* pStr, char cCharToLookFor )
 {
 	int iCnt = 0;
 	int iLen = (int)strlen( pStr );
@@ -205,7 +205,7 @@ int CountChars( const char * pStr, char cCharToLookFor )
 int CountChars( std::string& csStr, char cCharToLookFor )
 {
 	int iCnt = 0;
-	const char * pStr = (const char *)csStr.c_str();
+	const char* pStr = (const char*)csStr.c_str();
 	int iLen = (int)strlen( pStr );
 
 	for( int i = 0; i < iLen; i++ )
@@ -225,8 +225,8 @@ bool RemoveNonAlphaNums( std::string& cs )
 
 	for ( int i=0; i < iLen; i++ )
 	{
-		if( !isalnum( ((const char *)cs.c_str())[ i ] ) && ( '.' != ((const char *)cs.c_str())[ i ] ) )
-			((char *)(const char *)cs.c_str())[ i ] = ' ';
+		if( !isalnum( ((const char*)cs.c_str())[ i ] ) && ( '.' != ((const char*)cs.c_str())[ i ] ) )
+			((char *)(const char*)cs.c_str())[ i ] = ' ';
 	}
 	return true;
 }
@@ -241,7 +241,7 @@ bool RemoveDoubleSpaces( std::string &cs )
 
 	for( int i = 0; i < iLen; i++ )
 	{
-		if( ((const char *)cs.c_str())[ i ] == ' ' )
+		if( ((const char*)cs.c_str())[ i ] == ' ' )
 		{
 			if (!spaceAllowed)
 			{
@@ -253,12 +253,12 @@ bool RemoveDoubleSpaces( std::string &cs )
 		}
 		else
 			spaceAllowed = true;
-		((char *)(const char *)cs.c_str())[ i - t + 1 ] = ((const char *)cs.c_str())[ i + 1 ];
+		((char *)(const char*)cs.c_str())[ i - t + 1 ] = ((const char*)cs.c_str())[ i + 1 ];
 	}
-	if( ((const char *)cs.c_str())[ newLength - 1 ] == ' ' )
+	if( ((const char*)cs.c_str())[ newLength - 1 ] == ' ' )
 		newLength--;
 	iLen = newLength;
-	((char *)(const char *)cs.c_str())[ iLen ] = '\0';
+	((char *)(const char*)cs.c_str())[ iLen ] = '\0';
 
 	return(true);
 }
@@ -269,7 +269,7 @@ std::string GetSubstring( std::string& csStr, int iStartIdx, int iEndIdx )
 	std::string cs;
 
 	char *tempstr = new char[ iEndIdx - iStartIdx + 1 ];
-	memcpy(tempstr, (const char *)csStr.c_str() + iStartIdx, iEndIdx - iStartIdx );
+	memcpy(tempstr, (const char*)csStr.c_str() + iStartIdx, iEndIdx - iStartIdx );
 	tempstr[ iEndIdx - iStartIdx ] = 0;
 	cs = tempstr;
 	delete [] tempstr;
@@ -319,7 +319,7 @@ bool GetWord( std::string& csStr, int n, std::string& csRetToken )
 //============================================================================
 //! format into std::string using printf style format
 void StdStringFormat(	std::string & csStr,	// std::string to return formated results in
-						const char * pFormat,	// string with format chars etc		
+						const char* pFormat,	// string with format chars etc		
 						... )					// vars
 {
 	char szBuffer[4096];
@@ -388,7 +388,7 @@ int StdStringFindCaseInsensitive( std::string & csStr, char cFindChar )
 
 //============================================================================
 //!	find position of the given string if not found return -1			
-int StdStringFind( std::string & csStr, const char * pSubStr )
+int StdStringFind( std::string & csStr, const char* pSubStr )
 {
 	if(!csStr.size())
 	{
@@ -397,16 +397,16 @@ int StdStringFind( std::string & csStr, const char * pSubStr )
 
 	std::string cs1 = csStr;
 	std::string cs2 = pSubStr;
-	if( const char * pStr = strstr( (const char * ) cs1.c_str(), (const char *)cs2.c_str() ) )
+	if( const char* pStr = strstr( (const char* ) cs1.c_str(), (const char*)cs2.c_str() ) )
 	{
-		return int(pStr-(const char * )cs1.c_str());
+		return int(pStr-(const char* )cs1.c_str());
 	}
 
 	return -1;
 }
 //============================================================================
 //!	find position of the given string if not found return -1			
-int StdStringFindCaseInsensitive( std::string & csStr, const char * pSubStrIn )
+int StdStringFindCaseInsensitive( std::string & csStr, const char* pSubStrIn )
 {
 	int iSubStrLen = (int)strlen( pSubStrIn );
 	int iStrLen = (int)csStr.size();
@@ -488,7 +488,7 @@ void StdStringMakeLower( std::string & csStr )
 
 //============================================================================
 //! Returns a pointer to the first occurrence of strSearch in strMain, or NULL if strSearch does not appear in str
-const char * StrStrNoCase( const char * strMain, const char * strSearch )
+const char* StrStrNoCase( const char* strMain, const char* strSearch )
 {
 	if(!strlen( strMain))
 		return(NULL);
@@ -496,9 +496,9 @@ const char * StrStrNoCase( const char * strMain, const char * strSearch )
 	std::string cs2 = strSearch;
 	StdStringMakeLower( cs1 );
 	StdStringMakeLower( cs2 );
-	if( const char * pStr = strstr( (const char * ) cs1.c_str(), (const char *)cs2.c_str() ) )
+	if( const char* pStr = strstr( (const char* ) cs1.c_str(), (const char*)cs2.c_str() ) )
 	{
-		return strMain + (int)(pStr-(const char * )cs1.c_str());
+		return strMain + (int)(pStr-(const char* )cs1.c_str());
 	}
 
 	return NULL;
@@ -506,7 +506,7 @@ const char * StrStrNoCase( const char * strMain, const char * strSearch )
 
 //============================================================================
 //! find position of string p2 in p1.. return -1 if not found
-int StrStrNoCasePosition( const char * p1, const char * p2 )
+int StrStrNoCasePosition( const char* p1, const char* p2 )
 {
 	if(!strlen( p1))
 		return(false);
@@ -514,9 +514,9 @@ int StrStrNoCasePosition( const char * p1, const char * p2 )
 	std::string cs2 = p2;
 	StdStringMakeLower(cs1);
 	StdStringMakeLower(cs2);
-	if( const char * pStr = strstr( (const char * ) cs1.c_str(), (const char *)cs2.c_str() ) )
+	if( const char* pStr = strstr( (const char* ) cs1.c_str(), (const char*)cs2.c_str() ) )
 	{
-		return int(pStr-(const char * )cs1.c_str());
+		return int(pStr-(const char* )cs1.c_str());
 	}
 
 	return -1;
@@ -532,7 +532,7 @@ std::string StdStringRight( std::string& cs, unsigned int n )
 		return r;
 	}
 	unsigned int pos = iLen - n;
-	r = (const char *)cs.c_str() + pos;
+	r = (const char*)cs.c_str() + pos;
 	return(r);
 }
 
@@ -546,7 +546,7 @@ std::string StdStringLeft( std::string& cs, unsigned int n )
 		return r;
 	}
 	char *copybuf = new char[ n + 1 ];
-	memcpy( copybuf, (const char *)cs.c_str(), n );
+	memcpy( copybuf, (const char*)cs.c_str(), n );
 	copybuf[ n ] = '\0';
 	r = copybuf;
 	delete [] copybuf;
@@ -568,7 +568,7 @@ std::string StdStringRightOf( std::string& cs, char chr )
 	{
 		newlength = iLen - newlength - 1;
 		char *temp = new char[ newlength + 1 ];
-		strcpy(temp, (const char *)cs.c_str() + iLen - newlength );
+		strcpy(temp, (const char*)cs.c_str() + iLen - newlength );
 		r = temp;
 		delete [] temp;
 	}
@@ -589,7 +589,7 @@ std::string StdStringRightOfLast( std::string cs, char chr )
 	newlength = iLen - newlength - 1;
 	
 	char *temp = new char[newlength+1];
-	strcpy(temp, (const char *)cs.c_str() + iLen - newlength);
+	strcpy(temp, (const char*)cs.c_str() + iLen - newlength);
 	std::string s(temp);
 	delete[] temp;
 	return s;
@@ -604,7 +604,7 @@ std::string StdStringLeftOf( std::string cs, char chr )
 		return cs;
 	}
 	char *temp = new char[ newlength + 1 ];
-	memcpy(temp, (const char *)cs.c_str(), newlength);
+	memcpy(temp, (const char*)cs.c_str(), newlength);
 	temp[ newlength ] = '\0';
 	std::string s(temp);
 	delete[] temp;
@@ -620,7 +620,7 @@ std::string StdStringLeftOfLast( std::string& cs, char chr)
 		return std::string("");
 	}
 	char *temp = new char[ newlength + 1 ];
-	memcpy( temp, (const char *)cs.c_str(), newlength);
+	memcpy( temp, (const char*)cs.c_str(), newlength);
 	temp[ newlength ] = '\0';
 	std::string s( temp );
 	delete[] temp;
@@ -631,7 +631,7 @@ std::string StdStringLeftOfLast( std::string& cs, char chr)
 //!	trim all at first instance of char		
 void StdStringTrim( std::string & csStr, const char cTrim )
 {
-	const char * pTemp = strchr( csStr.c_str(), cTrim );
+	const char* pTemp = strchr( csStr.c_str(), cTrim );
 	if( pTemp )
 	{
 		*((char *)pTemp) = 0;
@@ -819,7 +819,7 @@ void StdStringSplit( const std::wstring & csStr, const wchar_t cToken, std::vect
 
 //============================================================================
 //! same as strstr but case insensitive
-char * stristr( const char * pString, const char * pPattern )
+char * stristr( const char* pString, const char* pPattern )
 {
 	if( !pString || !pPattern )
 		return 0;
@@ -1099,7 +1099,7 @@ std::wstring Utf8ToWide(const std::string utf8string)
 	size_t asciiSize = utf8string.length();
 	wchar_t * buf = new wchar_t[ asciiSize + 2 ];
 	buf[0] = 0;
-	const char * pTemp = utf8string.c_str();
+	const char* pTemp = utf8string.c_str();
 	for( unsigned int i = 0; i < asciiSize + 1; i++ )
 	{
 		buf[i] = (wchar_t)pTemp[i];
@@ -1149,7 +1149,7 @@ std::wstring AsciiToWide(const std::string& utf8string)
 	size_t asciiSize = utf8string.length();
 	wchar_t * buf = new wchar_t[ asciiSize + 2 ];
 	buf[0] = 0;
-	const char * pTemp = utf8string.c_str();
+	const char* pTemp = utf8string.c_str();
 	for( unsigned int i = 0; i < asciiSize + 1; i++ )
 	{
 		buf[i] = (wchar_t)pTemp[i];
@@ -1179,35 +1179,35 @@ std::string WideToAscii(const std::wstring& utf16String)
 
 //============================================================================
 // return true if prefix matched beginning characters of string
-bool StdStringBeginsWith( std::string & csStr, const char * pPrefix )
+bool StdStringBeginsWith( std::string & csStr, const char* pPrefix )
 {
 	if( ( NULL == pPrefix ) ||
 		( strlen( pPrefix ) > csStr.length() ) )
 	{
 		return false;
 	}
-	const char * pStr = csStr.c_str();
+	const char* pStr = csStr.c_str();
 	return ( 0 == strncmp( pPrefix, pStr, strlen( pPrefix ) ) );
 
 }
 
 //============================================================================
 // return true if suffix matched end characters of string
-bool StdStringEndsWith( std::string & csStr, const char * pSuffix )
+bool StdStringEndsWith( std::string & csStr, const char* pSuffix )
 {
 	if( ( NULL == pSuffix ) ||
 		( strlen( pSuffix ) > csStr.length() ) )
 	{
 		return false;
 	}
-	const char * pStr = csStr.c_str();
+	const char* pStr = csStr.c_str();
 	return ( 0 == strcmp( pSuffix, &pStr[ csStr.length() - strlen( pSuffix ) ] ) );
 
 }
 
 //============================================================================
 // fill string with integer value
-const char * StdStringFromInteger( std::string & strResult, int iValue )
+const char* StdStringFromInteger( std::string & strResult, int iValue )
 {
 	char as8Buf[ 36 ];
 	sprintf( as8Buf, "%d", iValue );
@@ -1237,7 +1237,7 @@ int StdStringToInteger( std::string& strValue )
 //
 ////============================================================================
 ////! copy string into buffer.. if string is to long then truncate
-//void			SafeStringCopy(		const char *	pSrcString,		// string to copy from
+//void			SafeStringCopy(		const char*	pSrcString,		// string to copy from
 //							   char *			pBuf,			// buffer to copy into
 //							   unsigned int	uiMaxBufLen )	// max length of buffer	
 //{
@@ -1266,7 +1266,7 @@ int StdStringToInteger( std::string& strValue )
 
 //============================================================================
 //! Safe string copy.. logs error if buffer to short
-int SafeStrCopy( char * pDest, const char * pSrc, int iBufLen )
+int SafeStrCopy( char * pDest, const char* pSrc, int iBufLen )
 {
 	vx_assert( pDest );
 	vx_assert( pSrc );
@@ -1364,7 +1364,7 @@ wchar_t * TrimLeadingSpaces( wchar_t *pString )
 //============================================================================
 /// strsep does not exist in windows and only some other platforms so
 /// make our own
-char *strsep(char **ppStr, const char *pDelimiters)
+char *strsep(char **ppStr, const char*pDelimiters)
 {
 	char *pStart;
 	char *pEnd;

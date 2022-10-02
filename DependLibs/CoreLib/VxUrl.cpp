@@ -25,19 +25,19 @@
 #include <string.h>
 namespace
 {
-	const char * PROTOCOL_DELIM = "://";
-	const char * USER_DELIM = "@";
-	const char * COLON_DELIM = ":";
-	const char * SLASH_DELIM = "/";
-	const char * POUND_SIGN_DELIM = "#";
-	const char * QUESTION_DELIM = "?";
-    //const char * LEFT_BRACKET_DELIM = "[";
-	const char * RIGHT_BRACKET_DELIM = "]";
-    //const char * ONLINE_ID_DELIM = "!";
+	const char* PROTOCOL_DELIM = "://";
+	const char* USER_DELIM = "@";
+	const char* COLON_DELIM = ":";
+	const char* SLASH_DELIM = "/";
+	const char* POUND_SIGN_DELIM = "#";
+	const char* QUESTION_DELIM = "?";
+    //const char* LEFT_BRACKET_DELIM = "[";
+	const char* RIGHT_BRACKET_DELIM = "]";
+    //const char* ONLINE_ID_DELIM = "!";
 
 
     //============================================================================
-    bool VxIsIPv6Address( const char *addr )
+    bool VxIsIPv6Address( const char*addr )
     {
         if ( NULL == addr )
         {
@@ -52,7 +52,7 @@ namespace
     }
 
     //============================================================================
-    const char * VxStripIPv6ScopeID( const char *addr, std::string &buf )
+    const char* VxStripIPv6ScopeID( const char*addr, std::string &buf )
     {
         std::string addrStr = addr;
         if ( true == VxIsIPv6Address( addr ) )
@@ -82,7 +82,7 @@ VxUrl::VxUrl( std::string& url )
 }
 
 //============================================================================
-VxUrl::VxUrl( const char * pUrl )
+VxUrl::VxUrl( const char* pUrl )
 {
     setUrl( pUrl );
 }
@@ -137,7 +137,7 @@ bool VxUrl::operator == ( const VxUrl& rhs ) const
 }
 
 //============================================================================
-void VxUrl::setUrl( const char * pUrl )
+void VxUrl::setUrl( const char* pUrl )
 {
     m_Url = pUrl;
 
@@ -299,25 +299,25 @@ void VxUrl::setUrl( const char * pUrl )
 }
 
 //============================================================================
-const char * VxUrl::getProtocol()
+const char* VxUrl::getProtocol()
 {
 	return m_strProtocol.c_str();
 }
 
 //============================================================================
-const char * VxUrl::getUser()
+const char* VxUrl::getUser()
 {
 	return m_strUser.c_str();
 }
 
 //============================================================================
-const char * VxUrl::getPassword()
+const char* VxUrl::getPassword()
 {
 	return m_strPassword.c_str();
 }
 
 //============================================================================
-const char * VxUrl::getHost()
+const char* VxUrl::getHost()
 {
 	return m_strHost.c_str();
 }
@@ -335,13 +335,13 @@ uint16_t VxUrl::getPort()
 }
 
 //============================================================================
-const char * VxUrl::getPath()
+const char* VxUrl::getPath()
 {
 	return m_strPath.c_str();
 }
 
 //============================================================================
-void VxUrl::setPath( const char * pPathAndFileName )
+void VxUrl::setPath( const char* pPathAndFileName )
 {
 	if( strstr( pPathAndFileName, "http://" ) || strstr( pPathAndFileName, "ptop://" ) )
 	{
@@ -354,13 +354,13 @@ void VxUrl::setPath( const char * pPathAndFileName )
 }
 
 //============================================================================
-const char * VxUrl::getQuery()
+const char* VxUrl::getQuery()
 {
 	return m_strQuery.c_str();
 }
 
 //============================================================================
-const char * VxUrl::getFragment()
+const char* VxUrl::getFragment()
 {
 	return m_strFragment.c_str();
 }
@@ -384,7 +384,7 @@ bool VxUrl::validateUrl( bool onlineIdMustBeValid )
 }
 
 //============================================================================
-const char * VxUrl::getRelativeURL( std::string& strRetUrl, bool bWithParam )
+const char* VxUrl::getRelativeURL( std::string& strRetUrl, bool bWithParam )
 {
 	if( false == isAbsoluteUrl() ) 
 	{
@@ -416,7 +416,7 @@ const char * VxUrl::getRelativeURL( std::string& strRetUrl, bool bWithParam )
 }
 
 //============================================================================
-const char * VxUrl::getAbsoluteURL( std::string& strRetAbsoluteUrl )
+const char* VxUrl::getAbsoluteURL( std::string& strRetAbsoluteUrl )
 {
 	std::string strRelativeUrl;
 	std::string strPort;
@@ -432,7 +432,7 @@ const char * VxUrl::getAbsoluteURL( std::string& strRetAbsoluteUrl )
 }
 
 //============================================================================
-const char * VxUrl::getHostURL( const char * host, int port, const char * uri, std::string& buf )
+const char* VxUrl::getHostURL( const char* host, int port, const char* uri, std::string& buf )
 {
 	std::string hostStr = host;
 	if( true == VxIsIPv6Address( host ) ) 

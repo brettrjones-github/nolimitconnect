@@ -20,11 +20,11 @@ class OfferClientMgr;
 class OfferClientInfoDb : public OfferBaseInfoDb
 {
 public:
-	OfferClientInfoDb( OfferBaseMgr& mgr, const char * dbname );
+	OfferClientInfoDb( OfferBaseMgr& mgr, const char* dbname );
 	virtual ~OfferClientInfoDb();
 
 protected:
-    virtual OfferBaseInfo *     createOfferInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual OfferBaseInfo *     createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType ) override;
     virtual OfferBaseInfo *     createOfferInfo( OfferBaseInfo& assetInfo ) override;
 };
 

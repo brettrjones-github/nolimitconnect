@@ -31,7 +31,7 @@
 #include <time.h>
 
 //============================================================================
-OfferClientMgr::OfferClientMgr( P2PEngine& engine, const char * dbName, const char * stateDbName )
+OfferClientMgr::OfferClientMgr( P2PEngine& engine, const char* dbName, const char* stateDbName )
 : OfferBaseMgr( engine, dbName, stateDbName, eOfferMgrTypeOfferClient )
 , m_OfferClientInfoDb( dynamic_cast<OfferClientInfoDb&>(OfferBaseMgr::getOfferInfoDb()) )
 , m_OfferClientInfoList( getOfferBaseInfoList() )
@@ -39,7 +39,7 @@ OfferClientMgr::OfferClientMgr( P2PEngine& engine, const char * dbName, const ch
 }
 
 //============================================================================
-OfferBaseInfo * OfferClientMgr::createOfferInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+OfferBaseInfo * OfferClientMgr::createOfferInfo( const char* assetName, uint64_t assetLen, uint16_t assetType )
 {
     return new OfferClientInfo( assetName, assetLen, assetType );
 }

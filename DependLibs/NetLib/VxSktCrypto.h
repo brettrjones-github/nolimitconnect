@@ -29,12 +29,12 @@ class VxGUID;
 //! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
 RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,			// pointer to VxSktBase
 								VxConnectId *			poConnectId, 		// network identity
-								const char *			networkName );
+								const char*			networkName );
                              
 //! generate key from net identity and connection data and place int sockets m_TxKey and initialize its crypto
 RCODE GenerateTxConnectionKey(	VxSktBase *				sktBase,			// pointer to VxSktBase
 								VxConnectId *			poConnectId,		// announce packet
-								const char *			networkName );
+								const char*			networkName );
 
 RCODE GenerateTxConnectionKey(  VxSktBase *				sktBase,
                                 std::string             ipAddr,

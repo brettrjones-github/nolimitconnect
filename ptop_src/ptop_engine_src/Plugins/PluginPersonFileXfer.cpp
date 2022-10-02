@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "PluginFileXfer.h"
+#include "PluginPersonFileXfer.h"
 #include "PluginMgr.h"
 #include "P2PSession.h"
 #include "RxSession.h"
@@ -24,8 +24,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginFileXfer::PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
-: PluginBaseFileXfer( engine, pluginMgr, myIdent, pluginType )
+PluginPersonFileXfer::PluginPersonFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypePersonFileXfer );
 }

@@ -31,7 +31,7 @@ VxSktBase * VxClientMgr::makeNewSkt( void )
 
 //============================================================================
 //! Connect to ip or url and return socket.. if cannot connect return NULL
-VxSktConnect * VxClientMgr::connectTo(	const char *	pIpOrUrl,				// remote ip or url 
+VxSktConnect * VxClientMgr::connectTo(	const char*	pIpOrUrl,				// remote ip or url 
 										uint16_t		u16Port,				// port to connect to
 										int				iTimeoutMilliSeconds )	// milli seconds before connect attempt times out
 {

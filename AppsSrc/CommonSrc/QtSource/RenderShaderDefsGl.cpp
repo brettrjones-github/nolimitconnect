@@ -3,7 +3,7 @@
 //#define SHADERS_INCLUDE
 #if defined(SHADERS_INCLUDE)
 
-static const char * gl_shader_vert =
+static const char* gl_shader_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec4 m_attrcol;\n"
 "attribute vec4 m_attrcord0;\n"
@@ -25,10 +25,10 @@ static const char * gl_shader_vert =
 
 // SM_DEFAULT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_shader_default_frag =
+static const char* gl_shader_default_frag =
 "precision mediump float;\n"
 #else
-static const char * gl_shader_default_frag =
+static const char* gl_shader_default_frag =
 #endif
 "uniform vec4 m_unicol;\n"
 "\n"
@@ -41,10 +41,10 @@ static const char * gl_shader_default_frag =
 
 // SM_TEXTURE shader
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_shader_texture_frag =
+static const char* gl_shader_texture_frag =
 "precision mediump   float;\n"
 #else
-static const char * gl_shader_texture_frag =
+static const char* gl_shader_texture_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "uniform   lowp vec4 m_unicol;\n"
@@ -61,10 +61,10 @@ static const char * gl_shader_texture_frag =
 
 // SM_MULTI shader;
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_shader_multi_frag =
+static const char* gl_shader_multi_frag =
 "precision mediump   float;\n"
 #else
-static const char * gl_shader_multi_frag =
+static const char* gl_shader_multi_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "uniform   sampler2D m_samp1;\n"
@@ -82,10 +82,10 @@ static const char * gl_shader_multi_frag =
 
 // SM_FONTS
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_shader_fonts_frag =
+static const char* gl_shader_fonts_frag =
 "precision mediump   float;\n"
 #else
-static const char * gl_shader_fonts_frag =
+static const char* gl_shader_fonts_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "varying   vec4      m_cord0;\n"
@@ -105,10 +105,10 @@ static const char * gl_shader_fonts_frag =
 
 // SM_TEXTURE_NOBLEND
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_shader_texture_noblend_frag =
+static const char* gl_shader_texture_noblend_frag =
 "precision mediump   float;\n"
 #else
-static const char * gl_shader_texture_noblend_frag =
+static const char* gl_shader_texture_noblend_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "varying   vec4      m_cord0;\n"
@@ -124,10 +124,10 @@ static const char * gl_shader_texture_noblend_frag =
 
 // SM_MULTI_BLENDCOLOR shader
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_shader_multi_blendcolor_frag =
+static const char* gl_shader_multi_blendcolor_frag =
 "precision mediump   float;\n"
 #else
-static const char * gl_shader_multi_blendcolor_frag =
+static const char* gl_shader_multi_blendcolor_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "uniform   sampler2D m_samp1;\n"
@@ -148,7 +148,7 @@ static const char * gl_shader_multi_blendcolor_frag =
 // video format
 //============================================================================
 // SM_VIDEO_YV12_BASIC // SM_VIDEO_NV12_BASIC // SM_VIDEO_YUY2_BASIC // SM_VIDEO_UYVY_BASIC // SM_VIDEO_NV12_RGB_BASIC
-static const char * gl_yuv2rgb_vert =
+static const char* gl_yuv2rgb_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec2 m_attrcordY;\n"
 "attribute vec2 m_attrcordU;\n"
@@ -170,10 +170,10 @@ static const char * gl_yuv2rgb_vert =
 
 // most SM_VIDEO_XXXX_BASIC fragments
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_yuv2rgb_basic_frag =
+static const char* gl_yuv2rgb_basic_frag =
 "precision mediump float;\n"
 #else
-static const char * gl_yuv2rgb_basic_frag =
+static const char* gl_yuv2rgb_basic_frag =
 #endif
 "uniform sampler2D m_sampY;\n"
 "uniform sampler2D m_sampU;\n"
@@ -236,7 +236,7 @@ static const char * gl_yuv2rgb_basic_frag =
 // video filter
 //============================================================================
 // SM_VID_FILTER_DEFAULT
-static const char * gl_videofilter_vert =
+static const char* gl_videofilter_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec2 m_attrcord;\n"
 "varying vec2 cord;\n"
@@ -251,10 +251,10 @@ static const char * gl_videofilter_vert =
 
 // SM_VID_FILTER_DEFAULT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_videofilter_frag =
+static const char* gl_videofilter_frag =
 "precision mediump float;\n"
 #else
-static const char * gl_videofilter_frag =
+static const char* gl_videofilter_frag =
 #endif
 "uniform sampler2D img;\n"
 "varying vec2 cord;\n"
@@ -265,10 +265,10 @@ static const char * gl_videofilter_frag =
 
 // SM_VID_FILTER_CONVOLUTION_4X4_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_convolution_4x4_frag =
+static const char* gl_convolution_4x4_frag =
 "precision highp float;\n"
 #else
-static const char * gl_convolution_4x4_frag =
+static const char* gl_convolution_4x4_frag =
 #endif
 "uniform sampler2D img;\n"
 "uniform vec2      stepxy;\n"
@@ -318,10 +318,10 @@ static const char * gl_convolution_4x4_frag =
 
 // SM_VID_FILTER_CONVOLUTION_6X6_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gl_convolution_6x6_frag =
+static const char* gl_convolution_6x6_frag =
 "precision highp float;\n"
 #else
-static const char * gl_convolution_6x6_frag =
+static const char* gl_convolution_6x6_frag =
 #endif
 "uniform sampler2D img;\n"
 "uniform vec2      stepxy;\n"
@@ -381,7 +381,7 @@ static const char * gl_convolution_6x6_frag =
 "}\n";
 
 //============================================================================
-static const char * gl_tonemap_frag =
+static const char* gl_tonemap_frag =
 "float tonemap(float val)\n"
 "{\n"
 "    return val * ( 1.0 + val / ( m_toneP1 * m_toneP1 ) ) / ( 1.0 + val );\n"

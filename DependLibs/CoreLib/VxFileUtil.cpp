@@ -65,7 +65,7 @@ size_t FindLastPathSeperator( std::string& path )
 //============================================================================
 bool AddExtraLongPathPrefix( std::string& path )
 {
-    const char * str = path.c_str();
+    const char* str = path.c_str();
     if( path.length() < 4 || str[ 0 ] != '\\' || str[ 1 ] != '\\' || str[ 3 ] != '\\' || str[ 2 ] != '?' )
     {
         path.insert( 0, "\\\\?\\" );
@@ -78,7 +78,7 @@ bool AddExtraLongPathPrefix( std::string& path )
 //============================================================================
 bool RemoveExtraLongPathPrefix( std::string& path )
 {
-    const char * str = path.c_str();
+    const char* str = path.c_str();
     if( path.length() >= 4 && str[ 0 ] == '\\' && str[ 1 ] == '\\' && str[ 3 ] == '\\' && str[ 2 ] == '?' )
     {
         path.erase( 0, 4 );
@@ -204,7 +204,7 @@ extern "C" bool WindowsRelativeToAbsolutePath( char * pathBuf, int bufLen )
 #endif // TARGET_OS_WINDOWS
 
 //========================================================================
-std::string VxFileUtil::makeKodiPath( const char * path )
+std::string VxFileUtil::makeKodiPath( const char* path )
 {
 	std::string kodiPath = path;
 #if defined(TARGET_OS_WINDOWS)
@@ -219,7 +219,7 @@ std::string VxFileUtil::makeKodiPath( const char * path )
 }
 
 //============================================================================
-bool VxFileUtil::isDotDotDirectory( const char * fileName )
+bool VxFileUtil::isDotDotDirectory( const char* fileName )
 {
 	int nameLen = strlen( fileName );
 	if( ( ( 1 == nameLen ) && ( '.' == fileName[0] ) )
@@ -298,7 +298,7 @@ RCODE VxFileUtil::getCurrentWorkingDirectory( std::string strRetDir )
 }
 
 //============================================================================
-RCODE VxFileUtil::setCurrentWorkingDirectory( const char * pDir )
+RCODE VxFileUtil::setCurrentWorkingDirectory( const char* pDir )
 {
 #ifdef TARGET_OS_WINDOWS
 	return _chdir(pDir);
@@ -309,7 +309,7 @@ RCODE VxFileUtil::setCurrentWorkingDirectory( const char * pDir )
 
 //============================================================================
 //! returns file size or 0 if doesn't exist or zero length
-uint64_t VxFileUtil::fileExists( const char * pFileName )
+uint64_t VxFileUtil::fileExists( const char* pFileName )
 {
 	int result;
 #ifdef TARGET_OS_WINDOWS
@@ -341,7 +341,7 @@ uint64_t VxFileUtil::fileExists( const char * pFileName )
 
 //============================================================================
 //! return false if no longer exists
-bool  VxFileUtil::getFileTypeAndLength( const char * pFileName, uint64_t& retFileLen, uint8_t& retFileType )
+bool  VxFileUtil::getFileTypeAndLength( const char* pFileName, uint64_t& retFileLen, uint8_t& retFileType )
 {
     retFileLen = 0;
     retFileType = 0;
@@ -387,7 +387,7 @@ bool  VxFileUtil::getFileTypeAndLength( const char * pFileName, uint64_t& retFil
 
 //============================================================================
 //! return true if directory exists
-bool VxFileUtil::directoryExists( const char * pDir )
+bool VxFileUtil::directoryExists( const char* pDir )
 {
 	char acBuf[ VX_MAX_PATH ];
 	strcpy( acBuf, pDir );
@@ -437,7 +437,7 @@ bool VxFileUtil::directoryExists( const char * pDir )
 }
 
 //============================================================================
-uint64_t VxFileUtil::getFileLen( const char * pFileName )			
+uint64_t VxFileUtil::getFileLen( const char* pFileName )			
 { 
 	return fileExists(pFileName); 
 }
@@ -453,7 +453,7 @@ void VxFileUtil::assureTrailingDirectorySlash( std::string& strDirectoryPath )
 {
 	if( strDirectoryPath.length() )
 	{
-		const char * name = strDirectoryPath.c_str();
+		const char* name = strDirectoryPath.c_str();
 		if( '/' != name[ strDirectoryPath.length() - 1 ] )
 		{
 			strDirectoryPath += "/";
@@ -466,7 +466,7 @@ void VxFileUtil::removeTrailingDirectorySlash( std::string& strDirectoryPath )
 {
 	if( strDirectoryPath.length() )
 	{
-		const char * name = strDirectoryPath.c_str();
+		const char* name = strDirectoryPath.c_str();
 		if( ( '/' == name[strDirectoryPath.length() - 1] ) || ( '\\' == name[strDirectoryPath.length() - 1] ) )
 		{
 			strDirectoryPath = strDirectoryPath.substr( 0, strDirectoryPath.length() - 1 );
@@ -475,7 +475,7 @@ void VxFileUtil::removeTrailingDirectorySlash( std::string& strDirectoryPath )
 }
 
 //============================================================================
-std::string VxFileUtil::makeUniqueFileName( const char * fileName )
+std::string VxFileUtil::makeUniqueFileName( const char* fileName )
 {
 	std::string retFileName			= fileName;
 	std::string fileNamePart		= "";
@@ -501,7 +501,7 @@ std::string VxFileUtil::makeUniqueFileName( const char * fileName )
 
 //============================================================================
 //! Make all directories that don't exist in a given path
-RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
+RCODE VxFileUtil::makeDirectory( const char* pDirectoryPath )
 {
     vx_assert( pDirectoryPath );
     if( !pDirectoryPath )
@@ -630,7 +630,7 @@ RCODE VxFileUtil::readLine( FILE *pgFile, char *pBuf, int iBufLen )
 
 //============================================================================
 //! open a file and log error message if fails
-FILE * VxFileUtil::fileOpen( const char * pFileName, const char* pFileMode )
+FILE * VxFileUtil::fileOpen( const char* pFileName, const char* pFileMode )
 {
     FILE * retval;
     retval = fopen( pFileName, pFileMode );
@@ -660,7 +660,7 @@ RCODE VxFileUtil::fileSeek ( FILE * poFile, uint64_t u64Pos )
 }
 
 //============================================================================
-RCODE VxFileUtil::copyFile( const char * pOldPath, const char * pNewPath )
+RCODE VxFileUtil::copyFile( const char* pOldPath, const char* pNewPath )
 {
 	#ifdef TARGET_OS_WINDOWS
 		if( CopyFileW( Utf8ToWide( pOldPath ).c_str(), Utf8ToWide( pNewPath ).c_str(), false ) )
@@ -679,7 +679,7 @@ RCODE VxFileUtil::copyFile( const char * pOldPath, const char * pNewPath )
 }
 //============================================================================
 //! copy all files and directories to destination directory
-RCODE VxFileUtil::recursiveCopyDirectory( const char * pSrcDir, const char * pDestDir, int64_t& totalCopied )
+RCODE VxFileUtil::recursiveCopyDirectory( const char* pSrcDir, const char* pDestDir, int64_t& totalCopied )
 {
     RCODE rc = 0;
     totalCopied = 0;
@@ -734,7 +734,7 @@ RCODE VxFileUtil::recursiveCopyDirectory( const char * pSrcDir, const char * pDe
 }
 
 //============================================================================
-RCODE VxFileUtil::deleteFile( const char * pFileName )
+RCODE VxFileUtil::deleteFile( const char* pFileName )
 {
 	#ifdef TARGET_OS_WINDOWS
 		return _unlink( pFileName );
@@ -744,7 +744,7 @@ RCODE VxFileUtil::deleteFile( const char * pFileName )
 }
 
 //============================================================================
-RCODE VxFileUtil::renameFile( const char * pFileOldName, const char * pFileNewName )
+RCODE VxFileUtil::renameFile( const char* pFileOldName, const char* pFileNewName )
 {
 	#ifdef TARGET_OS_WINDOWS
 		return rename( pFileOldName, pFileNewName );
@@ -929,7 +929,7 @@ RCODE VxFileUtil::moveFiles( char * pDestDir, char * pSrcDir )
 }
 
 //============================================================================
-RCODE VxFileUtil::moveAFile( const char * srcFile, const char * destFile )
+RCODE VxFileUtil::moveAFile( const char* srcFile, const char* destFile )
 {
 	int result = rename( srcFile, destFile );
 	RCODE rc = 0;
@@ -1000,7 +1000,7 @@ RCODE VxFileUtil::seperatePathAndFile(	std::string &	strFullPath,	// path and fi
 
 //============================================================================
 //! separate Path and file name into separate strings
-RCODE	VxFileUtil::seperatePathAndFile(	const char *	pFullPath,		// path and file name			
+RCODE	VxFileUtil::seperatePathAndFile(	const char*	pFullPath,		// path and file name			
 											std::string &	strRetPath,		// return path to file
 											std::string &	strRetFile )	// return file name
 {
@@ -1030,7 +1030,7 @@ RCODE	VxFileUtil::seperatePathAndFile(	const char *	pFullPath,		// path and file
 
 //============================================================================
 //! remove the path and return just the file name
-void	VxFileUtil::getJustFileName(	const char *	pFullPath,				// file name may be full or just file name
+void	VxFileUtil::getJustFileName(	const char*	pFullPath,				// file name may be full or just file name
 										std::string&	strRetJustFileName )	// return file name
 {
 	std::string	strRetPath;
@@ -1065,7 +1065,7 @@ void	VxFileUtil::getFileExtension(	std::string&	strFileName,	// file name with e
 	int iIdx;
 	if( -1 != (iIdx = StdStringReverseFind( strFileName, '.') ) )
 	{
-		strRetExt = &(((const char *)strFileName.c_str())[iIdx + 1]);
+		strRetExt = &(((const char*)strFileName.c_str())[iIdx + 1]);
 	}
 	else
 	{
@@ -1114,7 +1114,7 @@ void VxFileUtil::makeBackwardSlashPath( char * pFilePath )
 
 //============================================================================
 //! return true if last char is '/' else '\\'
-bool VxFileUtil::doesPathEndWithSlash( const char * pFileName )
+bool VxFileUtil::doesPathEndWithSlash( const char* pFileName )
 {
 	int iStrLen = strlen( pFileName );
 	if( ('/' == pFileName[iStrLen-1]) ||
@@ -1137,7 +1137,7 @@ void VxFileUtil::assurePathEndWithSlash( std::string &csFileName )
 
 //============================================================================
 //! return true if is a root path like C:\dir or /dir
-bool VxFileUtil::isFullPath( const char * pFileName )
+bool VxFileUtil::isFullPath( const char* pFileName )
 {
 	bool isFullPath = false;
 	if( pFileName )
@@ -1180,7 +1180,7 @@ void VxFileUtil::makeFullPath( char * pFileName )
 
 //============================================================================
 //! Make full path to given directory if full path was not specified.. make path if does not exist
-void VxFileUtil::makeFullPath( const char * pShortFileName, const char * pDownloadDir, std::string & strRetPath )
+void VxFileUtil::makeFullPath( const char* pShortFileName, const char* pDownloadDir, std::string & strRetPath )
 {
 	if( isFullPath( pShortFileName ) )
 	{
@@ -1200,7 +1200,7 @@ void VxFileUtil::makeFullPath( const char * pShortFileName, const char * pDownlo
 
 //============================================================================
 //! Make short FileName.. if pDownloadDir and full path contains pDownloadDir then will be path in that dir else just filename
-bool VxFileUtil::makeShortFileName( const char * pFullFileName, std::string & strRetShortName, const char * pDownloadDir )
+bool VxFileUtil::makeShortFileName( const char* pFullFileName, std::string & strRetShortName, const char* pDownloadDir )
 {
 	bool bUsedDownloadDir = false;
 	if( isFullPath( pDownloadDir ) )
@@ -1350,7 +1350,7 @@ RCODE	VxFileUtil::getExecutePathAndName( std::string& strRetExeDir, std::string&
 	}
 	pTempBuf[1] = '\0';
 
-	//const char * dir * name = dirname( pRetBuf );
+	//const char* dir * name = dirname( pRetBuf );
 
 	strRetExeFileName = &pTempBuf[2];
 	strRetExeDir = pRetBuf;
@@ -1359,7 +1359,7 @@ RCODE	VxFileUtil::getExecutePathAndName( std::string& strRetExeDir, std::string&
 }
 
 //============================================================================
-bool VxFileUtil::fileNameWildMatch( const char  * pMatchName, const char * pWildName )
+bool VxFileUtil::fileNameWildMatch( const char  * pMatchName, const char* pWildName )
 {
 //  test if a file name matches a file name pattern.
 //   handles * and ? wildcard characters.
@@ -1436,7 +1436,7 @@ bool VxFileUtil::fileNameWildMatch( const char  * pMatchName, const char * pWild
 //============================================================================
 //! allocate memory and read whole file into memory
 //! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
-RCODE	VxFileUtil::readWholeFile(	const char *	pFileName,			// file to read	
+RCODE	VxFileUtil::readWholeFile(	const char*	pFileName,			// file to read	
 									void **			ppvRetBuf,			// return allocated buffer it was read into
                                     uint32_t *		pu32RetLenOfFile )	// return length of file
 {
@@ -1477,7 +1477,7 @@ RCODE	VxFileUtil::readWholeFile(	const char *	pFileName,			// file to read
 //============================================================================
 //! read whole file of known length into existing buffer
 //! NOTE assumes buffer has enough room for the whole file
-RCODE VxFileUtil::readWholeFile(	const char *	pFileName,				// file to read
+RCODE VxFileUtil::readWholeFile(	const char*	pFileName,				// file to read
 									void *			pvBuf,					// buffer to read into
                                     uint32_t		u32LenToRead,			// length to read ( assumes is same as file length
                                     uint32_t	*	pu32RetAmountRead )		// return length actually read if not null
@@ -1522,7 +1522,7 @@ RCODE VxFileUtil::readWholeFile(	const char *	pFileName,				// file to read
 //! allocate memory and read whole file into memory and decrypt
 //! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
 RCODE	VxFileUtil::readWholeFile(	VxKey *			poKey,				// key to decrypt with
-									const char *	pFileName,			// file to read	
+									const char*	pFileName,			// file to read	
 									void **			ppvRetBuf,			// return allocated buffer it was read into
 									uint32_t *			pu32RetLenOfFile )	// return length of file
 {
@@ -1545,7 +1545,7 @@ RCODE	VxFileUtil::readWholeFile(	VxKey *			poKey,				// key to decrypt with
 
 //============================================================================
 //! write all of data to a file
-RCODE	VxFileUtil::writeWholeFile(	const char *	pFileName,			// file to write to
+RCODE	VxFileUtil::writeWholeFile(	const char*	pFileName,			// file to write to
 									void *			pvBuf,				// data to write
                                     uint32_t		u32LenOfData )		// data length
 {
@@ -1582,7 +1582,7 @@ RCODE	VxFileUtil::writeWholeFile(	const char *	pFileName,			// file to write to
 //============================================================================
 //! encrypt and write all of data to a file
 RCODE VxFileUtil::writeWholeFile(	VxKey *			poKey,				// key to encrypt with
-									const char *	pFileName,			// file to write to
+									const char*	pFileName,			// file to write to
 									void *			pvBuf,				// data to write
                                     uint32_t		u32LenOfData )		// data length
 {
@@ -1596,7 +1596,7 @@ RCODE VxFileUtil::writeWholeFile(	VxKey *			poKey,				// key to encrypt with
 }
 
 //============================================================================
-RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
+RCODE VxFileUtil::listFilesInDirectory(	const char*				pSrcDir,
 										std::vector<std::string>&	fileList )
 {
 	vx_assert( pSrcDir );
@@ -1735,7 +1735,7 @@ RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
 
 
 //============================================================================
-RCODE VxFileUtil::listFilesAndFolders(	const char *				pSrcDir,
+RCODE VxFileUtil::listFilesAndFolders(	const char*				pSrcDir,
 										std::vector<VxFileInfo>&	fileList,
 										uint8_t						fileFilterMask )
 {
@@ -1951,7 +1951,7 @@ bool VxFileUtil::incrementFileName( std::string& strFileName )
 									strRetExtensionPart );	// return .ext part
 	if( strRetExtensionPart.size() && strRetExtensionPart.size() )
 	{
-		const char * fileNamePart = strRetFileNamePart.c_str();
+		const char* fileNamePart = strRetFileNamePart.c_str();
 		char lastChar = fileNamePart[ strRetFileNamePart.size() - 1 ];
 		if( isdigit( lastChar ) && ( '9' > lastChar ))
 		{
@@ -1972,7 +1972,7 @@ bool VxFileUtil::incrementFileName( std::string& strFileName )
 }
 
 //============================================================================
-uint8_t VxFileUtil::fileExtensionToFileTypeFlag( const char * pFileName )
+uint8_t VxFileUtil::fileExtensionToFileTypeFlag( const char* pFileName )
 {
 	uint8_t fileType = VXFILE_TYPE_OTHER;
 	if( pFileName )
@@ -2000,7 +2000,7 @@ uint8_t VxFileUtil::fileExtensionToFileTypeFlag( const char * pFileName )
 }
 
 //============================================================================
-uint64_t VxFileUtil::getDiskFreeSpace( const char * filePath  )
+uint64_t VxFileUtil::getDiskFreeSpace( const char* filePath  )
 {
 	uint64_t totalSpace;
 	uint64_t freeSpace = 0;
@@ -2009,7 +2009,7 @@ uint64_t VxFileUtil::getDiskFreeSpace( const char * filePath  )
 }
 
 //============================================================================
-bool VxFileUtil::getDiskSpace( const char * filePath, uint64_t& totalDiskSpace, uint64_t& diskSpaceAvail )
+bool VxFileUtil::getDiskSpace( const char* filePath, uint64_t& totalDiskSpace, uint64_t& diskSpaceAvail )
 {
 	totalDiskSpace = 0;
 	diskSpaceAvail = 0;
@@ -2069,7 +2069,7 @@ bool VxFileUtil::u64ToHexAscii( uint64_t fileLen, std::string& retHexAscii  )
 }
 
 //============================================================================
-bool VxFileUtil::hexAsciiToU64( const char * hexAscii, uint64_t& retFileLen  )
+bool VxFileUtil::hexAsciiToU64( const char* hexAscii, uint64_t& retFileLen  )
 {
 	return hexAsciiToData( hexAscii, (uint8_t *)&retFileLen, 8  ); 
 }
@@ -2098,7 +2098,7 @@ bool VxFileUtil::dataToHexAscii( uint8_t * dataBuf, int dataLen, std::string& re
 }
 
 //============================================================================
-bool VxFileUtil::hexAsciiToData( const char * hexAscii, uint8_t * retDataBuf, int dataLen  )
+bool VxFileUtil::hexAsciiToData( const char* hexAscii, uint8_t * retDataBuf, int dataLen  )
 {
 	int strLen = strlen( hexAscii );
 	uint8_t u8Byte;

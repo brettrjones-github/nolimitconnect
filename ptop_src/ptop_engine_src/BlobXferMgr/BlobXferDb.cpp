@@ -24,7 +24,7 @@ namespace
 }
 
 //============================================================================
-BlobXferDb::BlobXferDb( const char * stateDbName )
+BlobXferDb::BlobXferDb( const char* stateDbName )
 : DbBase( stateDbName )
 {
 }

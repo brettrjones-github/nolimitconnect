@@ -28,7 +28,7 @@ public:
 	OpusFileEncoder( );
 	virtual ~OpusFileEncoder();
  
-	bool						beginFileEncode( const char * fileName, int sampleRate = 8000, int channels = 1 );
+	bool						beginFileEncode( const char* fileName, int sampleRate = 8000, int channels = 1 );
 	int							writeEncodedFrame( uint8_t * encodedFrameData, int32_t encodedLen );
 	void						finishFileEncode( void );
 

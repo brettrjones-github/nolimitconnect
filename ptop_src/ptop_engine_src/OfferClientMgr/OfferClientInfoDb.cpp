@@ -17,7 +17,7 @@
 #include "OfferClientInfo.h"
 
 //============================================================================
-OfferClientInfoDb::OfferClientInfoDb( OfferBaseMgr& hostListMgr, const char * dbname )
+OfferClientInfoDb::OfferClientInfoDb( OfferBaseMgr& hostListMgr, const char* dbname )
 : OfferBaseInfoDb( hostListMgr, dbname )
 {
 }
@@ -28,7 +28,7 @@ OfferClientInfoDb::~OfferClientInfoDb()
 }
 
 //============================================================================
-OfferBaseInfo * OfferClientInfoDb::createOfferInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+OfferBaseInfo * OfferClientInfoDb::createOfferInfo( const char* assetName, uint64_t assetLen, uint16_t assetType )
 {
     return new OfferClientInfo( assetName, assetLen, assetType );
 }

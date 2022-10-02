@@ -70,7 +70,7 @@ ThumbInfo::ThumbInfo( const std::string& fileName, VxGUID& assetId )
 }
 
 //============================================================================
-ThumbInfo::ThumbInfo( const char * fileName, uint64_t fileLen )
+ThumbInfo::ThumbInfo( const char* fileName, uint64_t fileLen )
 : AssetBaseInfo( eAssetTypeThumbnail, fileName, fileLen )
 {
 }

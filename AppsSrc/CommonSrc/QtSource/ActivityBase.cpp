@@ -42,7 +42,7 @@
 const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
-ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget* parent, EApplet eAppletType, bool isDialog, bool isPopup, bool fullWindowSize )
+ActivityBase::ActivityBase( const char* objName, AppCommon& app, QWidget* parent, EApplet eAppletType, bool isDialog, bool isPopup, bool fullWindowSize )
 : QDialog( parent, Qt::Widget )
 , ObjectCommon( objName )
 , m_MyApp( app )
@@ -261,7 +261,7 @@ BottomBarWidget * ActivityBase::getBottomBarWidget( void )
 }
 
 //============================================================================
-void ActivityBase::setupStyledDlg(	GuiUser *           poFriend,
+void ActivityBase::setupStyledDlg(	GuiUser*           poFriend,
 									IdentWidget *		poIdentWidget,
 									EPluginType			ePluginType,
 									VxPushButton *		poPermissionButton,
@@ -373,7 +373,7 @@ void ActivityBase::okMessageBox( QString title, QString msg )
 }
 
 //============================================================================
-void ActivityBase::okMessageBox2( QString title, const char * msg, ... )
+void ActivityBase::okMessageBox2( QString title, const char* msg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;
@@ -396,7 +396,7 @@ bool ActivityBase::yesNoMessageBox( QString title, QString msg )
 }
 
 //============================================================================
-bool ActivityBase::yesNoMessageBox2( QString title, const char * msg, ... )
+bool ActivityBase::yesNoMessageBox2( QString title, const char* msg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;
@@ -414,7 +414,7 @@ void ActivityBase::errMessageBox( QString title, QString msg )
 }
 
 //============================================================================
-void ActivityBase::errMessageBox2( QString title, const char * msg, ... )
+void ActivityBase::errMessageBox2( QString title, const char* msg, ... )
 {
 	if( 0 != msg )
 	{

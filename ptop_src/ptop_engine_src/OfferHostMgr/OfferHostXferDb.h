@@ -23,7 +23,7 @@ class OfferHostInfo;
 class OfferHostXferDb : public DbBase
 {
 public:
-	OfferHostXferDb( const char * stateDbName );
+	OfferHostXferDb( const char* stateDbName );
 	virtual ~OfferHostXferDb() = default;
 
 	void						lockOfferHostXferDb( void )			    { m_OfferHostXferDbMutex.lock(); }

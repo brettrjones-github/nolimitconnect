@@ -40,10 +40,10 @@ public:
 	BigListMgr( P2PEngine& engine );
 	virtual ~BigListMgr() override;
 
-	RCODE						bigListMgrStartup( const char * pDbFileName );
+	RCODE						bigListMgrStartup( const char* pDbFileName );
 	RCODE						bigListMgrShutdown( void );
 
-	RCODE						updateBigListDatabase( BigListInfo * poInfo, const char * networkName );
+	RCODE						updateBigListDatabase( BigListInfo * poInfo, const char* networkName );
 
 	//=== add/remove functions ===//
 	//! add a or update remote friend

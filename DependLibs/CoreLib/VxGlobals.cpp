@@ -102,12 +102,12 @@ namespace
 }
 
 //============================================================================
-void            VxSetNetworkHostName( const char * netHostName )    { g_strNetworkHostName = netHostName; }
-const char *    VxGetNetworkHostName( void )                        { return g_strNetworkHostName.c_str(); }
+void            VxSetNetworkHostName( const char* netHostName )    { g_strNetworkHostName = netHostName; }
+const char*    VxGetNetworkHostName( void )                        { return g_strNetworkHostName.c_str(); }
 void            VxSetNetworkHostPort( uint16_t netHostPort )        { g_NetworkHostPort = netHostPort; }
 uint16_t        VxGetNetworkHostPort( void )                        { return g_NetworkHostPort; }
-void            VxSetNetworkHostUrl( const char * netHostUrl )      { g_strNetworkHostUrl = netHostUrl; }
-const char *    VxGetNetworkHostUrl( void )                         { return g_strNetworkHostUrl.c_str(); }
+void            VxSetNetworkHostUrl( const char* netHostUrl )      { g_strNetworkHostUrl = netHostUrl; }
+const char*    VxGetNetworkHostUrl( void )                         { return g_strNetworkHostUrl.c_str(); }
 
 // directory structure on disk
 // exe paths
@@ -141,7 +141,7 @@ const char *    VxGetNetworkHostUrl( void )                         { return g_s
 //																/camrecord/		web cam recordings
 
 //============================================================================
-void VxSetAppDirectory( EAppDir appDir, const char * setDir )
+void VxSetAppDirectory( EAppDir appDir, const char* setDir )
 {
     if( setDir )
     {
@@ -326,7 +326,7 @@ bool VxIsAppShuttingDown( void )
 }
 
 //============================================================================
-void VxSetLclIpAddress( const char * lclIpAddress )
+void VxSetLclIpAddress( const char* lclIpAddress )
 {
 	if( 0 != lclIpAddress )
 	{
@@ -345,32 +345,32 @@ std::string VxGetLclIpAddress( void )
 }
 
 //============================================================================
-const char * VxGetCompanyDomain( void )
+const char* VxGetCompanyDomain( void )
 {
 	return g_strCompanyDomain.c_str();
 }
 
 //============================================================================
-const char * VxGetOrginizationName( void )
+const char* VxGetOrginizationName( void )
 {
     return g_strOrginizationName.c_str();
 }
 
 //============================================================================
-const char * VxGetCompanyWebsite( void )
+const char* VxGetCompanyWebsite( void )
 {
 	return g_strCompanyWebsite.c_str();
 }
 
 //============================================================================
-const char * VxGetApplicationTitle( void )
+const char* VxGetApplicationTitle( void )
 {
 	return g_strApplicationTitle.c_str();
 }
 
 //============================================================================
 //! set application name
-void VxSetApplicationNameNoSpaces( const char * pAppName )
+void VxSetApplicationNameNoSpaces( const char* pAppName )
 {
 	g_strApplicationNameNoSpaces = pAppName;
     g_strApplicationNameNoSpacesLowerCase = pAppName;
@@ -380,13 +380,13 @@ void VxSetApplicationNameNoSpaces( const char * pAppName )
 }
 
 //============================================================================
-const char * VxGetApplicationNameNoSpaces( void )
+const char* VxGetApplicationNameNoSpaces( void )
 {
 	return g_strApplicationNameNoSpaces.c_str();
 }
 
 //============================================================================
-const char * VxGetApplicationNameNoSpacesLowerCase( void )
+const char* VxGetApplicationNameNoSpacesLowerCase( void )
 {
     return g_strApplicationNameNoSpacesLowerCase.c_str();
 }
@@ -404,7 +404,7 @@ uint16_t VxGetAppVersion( void )
 }
 
 //============================================================================
-const char * VxGetAppVersionString( void )
+const char* VxGetAppVersionString( void )
 {
 	static std::string strAppVersion;
 	static bool isSet = false;
@@ -470,7 +470,7 @@ bool VxIsNetworkLoopbackAllowed( void )
 //============================================================================
 //=== directories ===//
 //============================================================================
-void VxSetAppExeDirectory( const char * exeDir )
+void VxSetAppExeDirectory( const char* exeDir )
 {
     g_strAppExeDir = exeDir;
 	VxFileUtil::assureTrailingDirectorySlash( g_strAppExeDir );
@@ -478,7 +478,7 @@ void VxSetAppExeDirectory( const char * exeDir )
 }
 
 //============================================================================
-void VxSetKodiExeDirectory(const char * exeDir)
+void VxSetKodiExeDirectory(const char* exeDir)
 {
 	g_strKodiExeDir = exeDir;
     g_strExeDirPython = exeDir;
@@ -495,18 +495,18 @@ void VxSetKodiExeDirectory(const char * exeDir)
 std::string& VxGetAppExeDirectory( void ) { return g_strAppExeDir; }
 std::string& VxGetKodiExeDirectory(void) { return g_strKodiExeDir; }
 
-void VxSetExeKodiAssetsDirectory(const char * assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
+void VxSetExeKodiAssetsDirectory(const char* assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
 
-void VxSetExeNoLimitAssetsDirectory(const char * assetsDir){ g_strExeNoLimitAssetsDir = assetsDir; }
+void VxSetExeNoLimitAssetsDirectory(const char* assetsDir){ g_strExeNoLimitAssetsDir = assetsDir; }
 std::string& VxGetExeNoLimitAssetsDirectory(void) { return g_strExeNoLimitAssetsDir; }
 
-void VxSetPythonExeDirectory( const char * pythonDir ){ g_strExeDirPython = pythonDir; }
-void VxSetPythonDllDirectory( const char * pythonDir ){ g_strExeDirPythonDlls = pythonDir; }
-void VxSetPythonLibDirectory( const char * pythonDir ){ g_strExeDirPythonLib = pythonDir; }
+void VxSetPythonExeDirectory( const char* pythonDir ){ g_strExeDirPython = pythonDir; }
+void VxSetPythonDllDirectory( const char* pythonDir ){ g_strExeDirPythonDlls = pythonDir; }
+void VxSetPythonLibDirectory( const char* pythonDir ){ g_strExeDirPythonLib = pythonDir; }
 
 //============================================================================
-void VxSetRootDataStorageDirectory(const char * rootDataDir)
+void VxSetRootDataStorageDirectory(const char* rootDataDir)
 {
 	g_strRootDataStorageDir = rootDataDir;
 	VxFileUtil::assureTrailingDirectorySlash( g_strRootDataStorageDir );
@@ -537,7 +537,7 @@ std::string& VxGetAppKodiDataDirectory(void) { return g_strAppKodiDataDir; }
 std::string& VxGetAppThumbnailDirectory(void) { return g_strAppThumbsDir; }
 
 //============================================================================
-void VxSetRootUserDataDirectory( const char * rootUserDataDir )
+void VxSetRootUserDataDirectory( const char* rootUserDataDir )
 {
 	// basically /storage/ NoLimitConnect/hasnum/ where hashnum is hash of exe path
 	g_strRootUserDataDir = rootUserDataDir;
@@ -549,7 +549,7 @@ void VxSetRootUserDataDirectory( const char * rootUserDataDir )
 std::string& VxGetRootUserDataDirectory( void ) { return g_strRootUserDataDir; }
 
 //============================================================================
-void VxSetUserSpecificDataDirectory( const char * userDataDir  )
+void VxSetUserSpecificDataDirectory( const char* userDataDir  )
 { 
 	g_strUserSpecificDataDir = userDataDir;
 	VxFileUtil::makeDirectory( userDataDir );
@@ -589,7 +589,7 @@ std::string VxGetStoryBoardPageClientDirectory( VxGUID& onlineId )
 }
 
 //============================================================================
-void VxSetRootXferDirectory( const char * rootXferDir  )
+void VxSetRootXferDirectory( const char* rootXferDir  )
 { 
 	g_strRootXferDir = rootXferDir; 
 	VxFileUtil::assureTrailingDirectorySlash( g_strRootXferDir );
@@ -608,7 +608,7 @@ void VxSetRootXferDirectory( const char * rootXferDir  )
 std::string& VxGetRootXferDirectory( void ) { return g_strRootXferDir; }
 
 //============================================================================
-void VxSetUserXferDirectory( const char * userXferDir  )
+void VxSetUserXferDirectory( const char* userXferDir  )
 {
 	g_strUserXferDir		= userXferDir;
 	VxFileUtil::makeDirectory( g_strUserXferDir.c_str() );

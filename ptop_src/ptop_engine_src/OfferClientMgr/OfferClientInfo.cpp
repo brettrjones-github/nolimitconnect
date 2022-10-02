@@ -51,7 +51,7 @@ OfferClientInfo::OfferClientInfo( const std::string& fileName )
 }
 
 //============================================================================
-OfferClientInfo::OfferClientInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
+OfferClientInfo::OfferClientInfo( const char* fileName, uint64_t fileLen, uint16_t assetType )
 : OfferBaseInfo( fileName, fileLen, assetType )
 {
 }

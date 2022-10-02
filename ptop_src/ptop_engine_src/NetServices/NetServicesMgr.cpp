@@ -47,7 +47,7 @@ namespace
 	//============================================================================
     void * NetServicesMgrThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 
 		NetServicesMgr * poMgr = (NetServicesMgr *)poThread->getThreadUserParam();
@@ -295,7 +295,7 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase* sktBase, NetServic
 }
 
 //============================================================================
-bool NetServicesMgr::doNetCmdPing( const char * ipAddress, uint16_t u16Port, std::string& retPong )
+bool NetServicesMgr::doNetCmdPing( const char* ipAddress, uint16_t u16Port, std::string& retPong )
 {
 	VxTimer	pingTimer;
 
@@ -841,7 +841,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTim
 		return eNetCmdErrorNone;
 	}
 
-	const char * contentBuf = content.c_str();
+	const char* contentBuf = content.c_str();
 	if( '/' != contentBuf[content.length() -1] )
 	{
 		LogMsg( LOG_ERROR, "Is TCP Port %d Open Test Invalid Response Content (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
@@ -996,7 +996,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         return eNetCmdErrorRxFailed;
     }
 
-    const char * contentBuf = content.c_str();
+    const char* contentBuf = content.c_str();
     if( '/' != contentBuf[ content.length() - 1 ] )
     {
         LogMsg( LOG_ERROR, "Query Host Online Id Invalid Response Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );

@@ -64,7 +64,7 @@ public:
 
     void                        addLogMsgToQue( uint32_t u32LogFlags, const QString& text );
 
-    void                        onLogEvent( uint32_t u32LogFlags, const char * logMsg ) override;
+    void                        onLogEvent( uint32_t u32LogFlags, const char* logMsg ) override;
 
 signals:
     void                        signalLogMsg( uint32_t u32LogFlags, const QString& logMsg );

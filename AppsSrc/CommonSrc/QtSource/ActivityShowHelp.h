@@ -41,7 +41,7 @@ protected slots:
 	void						slotClipboard();
 
 protected:
-	void						loadHelpFile( const char * pFileName, uint64_t u64FileLen );
+	void						loadHelpFile( const char* pFileName, uint64_t u64FileLen );
 	void						loadHelp( void );
 
 

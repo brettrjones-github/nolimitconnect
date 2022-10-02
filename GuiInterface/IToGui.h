@@ -42,7 +42,7 @@ public:
     virtual void				toGuiPlayNlcMedia( AssetBaseInfo * assetInfo ) = 0;
 
 	/// Send log message to GUI
-	virtual void				toGuiLog( int logFlags, const char * pMsg ) = 0;
+	virtual void				toGuiLog( int logFlags, const char* pMsg ) = 0;
 	/// Send error occurred message to GUI
 	virtual void				toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) = 0;
 	/// Send status bar message to GUI
@@ -61,10 +61,10 @@ public:
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) = 0;
 
     /// Send host status to GUI for display
-    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) = 0;
-    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char* msg = "" ) = 0;
+    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char* msg = "" ) = 0;
 
-    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) = 0;
+    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char* msg = "" ) = 0;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) = 0;
 	virtual void				toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId ) = 0;
 
@@ -75,15 +75,15 @@ public:
     virtual void				toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline ) = 0;
 
     /// Send is port open test state/status to GUI
-    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char* msg = "" ) = 0;
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) = 0;
 	/// Send Network state to GUI for display
 	virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) = 0;
 	/// Send connect by phone shake status to GUI
-	virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) = 0;
+	virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char* msg = "" ) = 0;
     /// Send state/status to GUI (currently just query host id)
-    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiRunTestStatus( const char*testName, ERunTestStatus eRunTestStatus, const char* msg = "" ) = 0;
 
 	virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
 	virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) = 0;
@@ -124,25 +124,25 @@ public:
 	virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) = 0;
 
 	//! Contact has sent a offer
-	virtual void				toGuiRxedPluginOffer(  VxNetIdent *		netIdent, 
+	virtual void				toGuiRxedPluginOffer(  VxNetIdent*		netIdent, 
 														EPluginType		ePluginType, 
-														const char *	pMsg,
+														const char*	pMsg,
 													    int				pvUserData,
-														const char *	pFileName = NULL,
+														const char*	pFileName = NULL,
 														uint8_t *		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) = 0;
 	//! Contact has responded to offer
-	virtual void				toGuiRxedOfferReply(	VxNetIdent *	netIdent, 
+	virtual void				toGuiRxedOfferReply(	VxNetIdent*	netIdent, 
 														EPluginType		ePluginType,
 														int				pvUserData,
 														EOfferResponse	eOfferResponse, 
-														const char *	pFileName = NULL,
+														const char*	pFileName = NULL,
 														uint8_t *		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) = 0;
 	//! Plugin session has stopped
-	virtual void				toGuiPluginSessionEnded(	VxNetIdent *	netIdent, 
+	virtual void				toGuiPluginSessionEnded(	VxNetIdent*	netIdent, 
 															EPluginType		ePluginType,
 															int				pvUserData,
 															EOfferResponse	eOfferResponse,
@@ -152,19 +152,19 @@ public:
 													int				statusType,
 													int				statusValue ) = 0;
 	//! Received text message from contact
-	virtual void				toGuiInstMsg(	VxNetIdent *	netIdent,
+	virtual void				toGuiInstMsg(	VxNetIdent*	netIdent,
 												EPluginType		ePluginType,
-												const char *	pMsg ) = 0;
+												const char*	pMsg ) = 0;
 	//! Send list of contacts shared files to GUI
-	virtual void				toGuiFileListReply(	VxNetIdent *	netIdent, 
+	virtual void				toGuiFileListReply(	VxNetIdent*	netIdent, 
 													EPluginType		ePluginType, 
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
-													const char *	pFileName,
+													const char*	pFileName,
 													VxGUID			assetId,
 													uint8_t *		fileHashData ) = 0;
 	//! Send list of files to GUI.. used to send directory listing or shared files or files that are in library
-	virtual void				toGuiFileList(	const char *	fileName, 
+	virtual void				toGuiFileList(	const char*	fileName, 
 												uint64_t		fileLen, 
 												uint8_t			fileType, 
 												bool			isShared,
@@ -172,7 +172,7 @@ public:
 												VxGUID          assetId,
 												uint8_t *		fileHashId = 0 ) = 0;
 	//! Upload a file started
-	virtual void				toGuiStartUpload(	VxNetIdent *	netIdent, 
+	virtual void				toGuiStartUpload(	VxNetIdent*	netIdent, 
 													EPluginType		ePluginType, 
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
@@ -183,7 +183,7 @@ public:
 	/// Upload a file completed
 	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// Download a file started
-	virtual void				toGuiStartDownload(	VxNetIdent *	netIdent, 
+	virtual void				toGuiStartDownload(	VxNetIdent*	netIdent, 
 													EPluginType		ePluginType, 
 													VxGUID&			lclSessionId, 
 													uint8_t			u8FileType, 
@@ -239,15 +239,15 @@ public:
 	/// Search had completed or has no more contact nodes to search
 	virtual void				toGuiScanSearchComplete( EScanType eScanType ) = 0;	
 	/// Search has found and received a About Me picture from contact
-	virtual void				toGuiSearchResultProfilePic(	VxNetIdent *	netIdent, 
+	virtual void				toGuiSearchResultProfilePic(	VxNetIdent*	netIdent, 
 																uint8_t *		pu8JpgData, 
 																uint32_t		u32JpgDataLen ) = 0;
 	/// Search has found a matching file
-	virtual void				toGuiSearchResultFileSearch(	VxNetIdent *	netIdent, 		
+	virtual void				toGuiSearchResultFileSearch(	VxNetIdent*	netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
-																const char *	pFileName,
+																const char*	pFileName,
 																VxGUID          assetId ) = 0;
 
 	virtual void				toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort ) = 0;

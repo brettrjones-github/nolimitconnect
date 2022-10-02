@@ -47,6 +47,6 @@ protected:
 	Ui::CancelDownloadDialog	ui;
 	EPluginType					m_ePluginType;
 	GuiFileXferSession*		m_Session;
-	VxNetIdent *				m_Ident;
+	VxNetIdent*				m_Ident;
 };
 

@@ -191,7 +191,7 @@ bool UpnpTcpSkt::postRequestAndData( VxUrl& oUrl, std::string& strRequest, std::
 }
 
 //============================================================================
-bool UpnpTcpSkt::postRequest( std::string& strHost, int iHostPort, const char * pRequest, int iRequestLen, int connectTimeoutMs )
+bool UpnpTcpSkt::postRequest( std::string& strHost, int iHostPort, const char* pRequest, int iRequestLen, int connectTimeoutMs )
 {
 	bool bResult = false;
 	if( false == isConnected() )

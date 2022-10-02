@@ -43,7 +43,7 @@ signals:
 protected slots:
     void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
     void						slotToGuiSessionEnded( GuiOfferSession * offerSession );
-    void						slotToGuiContactOffline( VxNetIdent * hisIdent );
+    void						slotToGuiContactOffline( VxNetIdent* hisIdent );
 
 protected:
     virtual void				showEvent( QShowEvent* ev ) override;

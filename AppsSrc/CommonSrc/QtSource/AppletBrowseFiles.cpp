@@ -54,9 +54,15 @@ AppletBrowseFiles::AppletBrowseFiles( AppCommon& app, QWidget* parent )
     setFileFilter( m_eFileFilterType );
 
 	setTitleBarText( QObject::tr("Browse Device Files") );
+
 	ui.m_DoubleTapInstructionLabel->setVisible( m_IsSelectAFileMode );
     connectBarWidgets();
+
 	ui.m_UpDirectoryButton->setIcon( eMyIconMoveUpDirNormal );
+	ui.m_UpDirectoryButton->setSquareButtonSize( eButtonSizeMedium );
+	ui.m_AddAllButton->setIcon( eMyIconLibraryCancel );
+	ui.m_AddAllButton->setSquareButtonSize( eButtonSizeMedium );
+
 	m_WidgetClickEventFixTimer->setInterval( 10 );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 
@@ -69,6 +75,7 @@ AppletBrowseFiles::AppletBrowseFiles( AppCommon& app, QWidget* parent )
     connect( ui.m_UpDirectoryButton, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()));
     connect( ui.m_UpDirWidget, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()));
 	connect( ui.m_BrowseButton, SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()));
+    connect( ui.m_AddAllButton, SIGNAL(clicked()), this, SLOT(slotAddAllButtonClicked()));
 
 	setDefaultCurrentDir( m_eFileFilterType );
 
@@ -420,6 +427,43 @@ void AppletBrowseFiles::slotBrowseButtonClicked( void )
 		setCurrentBrowseDir( selectedDir );
 		setActionEnable( false );
 		slotRequestFileList();
+	}
+}
+
+
+//============================================================================
+void AppletBrowseFiles::slotAddAllButtonClicked( void )
+{
+	bool acceptAction = true;
+
+	QString title = QObject::tr( "Confirm add all Files to library" );
+	QString bodyText = QObject::tr( "Do you want to add All the files in the list to the library?" );
+
+	ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
+	if( false == (QDialog::Accepted == dlg.exec()) )
+	{
+		acceptAction = false;
+	}
+
+	if( acceptAction )
+	{
+		for( int i = 0; i < ui.FileItemList->count(); i++ )
+		{
+			QListWidgetItem* itemInList = ui.FileItemList->item( i );
+			FileItemInfo* poInfo = ((FileShareItemWidget*)itemInList)->getFileItemInfo();
+			if( poInfo->isDirectory() )
+			{
+				continue;
+			}
+
+			if( poInfo->getFileType() == VXFILE_TYPE_EXECUTABLE )
+			{
+				continue;
+			}
+
+			m_MyApp.getEngine().fromGuiAddFileToLibrary( poInfo->getFullFileName().toUtf8().constData(), true,
+				poInfo->getFileHashId().isHashValid() ? poInfo->getFileHashId().getHashData() : nullptr );
+		}
 	}
 }
 

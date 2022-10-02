@@ -29,7 +29,7 @@ public:
 
 	int							emptyLen( void );
 	void						calcPktLen( void );
-	int						    addAnn( VxNetIdent * pgPktAnn );
+	int						    addAnn( VxNetIdent* pgPktAnn );
 
 private:
 	//=== vars ===//

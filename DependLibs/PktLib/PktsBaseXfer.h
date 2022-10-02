@@ -108,7 +108,7 @@ public:
     void						setUniqueId( VxGUID& uniqueId )					    { m_UniqueId = uniqueId; }
     VxGUID&						getUniqueId( void )								    { return m_UniqueId; }
 
-    void						setAssetNameAndTag( const char * pAssetName, const char * assetTag = 0 );
+    void						setAssetNameAndTag( const char* pAssetName, const char* assetTag = 0 );
     void						setAssetNameLen( uint16_t nameLen )				    { m_AssetNameLen = htons( nameLen ); }
     uint16_t					getAssetNameLen( void )							    { return ntohs( m_AssetNameLen ); }
     void						setAssetTagLen( uint16_t tagLen )				    { m_AssetTagLen = htons( tagLen ); }
@@ -181,7 +181,7 @@ public:
     void						setUniqueId( VxGUID& uniqueId )					    { m_UniqueId = uniqueId; }
     VxGUID&						getUniqueId( void )								    { return m_UniqueId; }
 
-	void						setAssetNameAndTag( const char * pAssetName, const char * assetTag = 0 );
+	void						setAssetNameAndTag( const char* pAssetName, const char* assetTag = 0 );
 	void						setAssetNameLen( uint16_t nameLen )				    { m_AssetNameLen = htons( nameLen ); }
 	uint16_t					getAssetNameLen( void )							    { return ntohs( m_AssetNameLen ); }
 	void						setAssetTagLen( uint16_t tagLen )				    { m_AssetTagLen = htons( tagLen ); }
@@ -442,7 +442,7 @@ class PktBaseXferErr : public VxPktHdr
 public:
 	PktBaseXferErr();
 
-	const char *				describeError();
+	const char*				describeError();
 
 	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxAssetInstance = instanceGuid; }
 	VxGUID& 					getRxInstance( void )							{ return m_RxAssetInstance; }
@@ -542,7 +542,7 @@ public:
 
     void						getFileList( std::vector<VxFileInfo>& retList );
     bool						canAddFile( int fileNameLenIncludingZero );
-    void						addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char * fileName );
+    void						addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char* fileName );
 
 private:
     //=== vars ===//

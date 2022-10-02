@@ -41,8 +41,12 @@ public:
 	bool						isDirectory( void );
 	void						setIsDirty( bool isDirty )				{ m_IsDirty = isDirty; }
 	bool						getIsDirty( void )						{ return m_IsDirty; }
+
 	std::string&				getFullFileName( void )					{ return m_FullFileName; }
 	std::string&				getShortFileName( void )				{ return m_ShortFileName; }
+
+	std::string&				getLocalFileName( void )				{ return m_FullFileName; }
+	std::string					getRemoteFileName( void )				{ return m_ShortFileName; }
 
 	void						setXferSessionId( VxGUID& sessionId )	{ m_XferSessionId = sessionId; }
 	VxGUID&						getXferSessionId( void )				{ return m_XferSessionId; }
@@ -57,7 +61,7 @@ public:
 	void						setThumbId( VxGUID& assetId )			{ m_ThumbId = assetId; }
 	VxGUID&						getThumbId( void )						{ return m_ThumbId; }
 
-	void						setFileName( const char * fileName )	{ m_FullFileName = fileName; }
+	void						setFileName( const char* fileName )	    { m_FullFileName = fileName; }
 	void						setFileName( std::string& fileName )	{ m_FullFileName = fileName; }
 	std::string&				getFileName( void )						{ return m_FullFileName; }
 

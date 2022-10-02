@@ -24,7 +24,7 @@ class AssetBaseInfo;
 class AssetBaseXferDb : public DbBase
 {
 public:
-	AssetBaseXferDb( const char * stateDbName );
+	AssetBaseXferDb( const char* stateDbName );
 	virtual ~AssetBaseXferDb() = default;
 
 	void						lockAssetBaseXferDb( void )			{ m_AssetBaseXferDbMutex.lock(); }

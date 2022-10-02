@@ -65,7 +65,7 @@ protected:
     std::vector<VxNetIdent>     m_AccountList;
 
     UserProfile 				m_UserProfile;
-    VxNetIdent *				m_CurIdent = nullptr;
+    VxNetIdent*				m_CurIdent = nullptr;
     QString                     m_strOrigOnlineName;
     QString                     m_strOrigMoodMessage;
 

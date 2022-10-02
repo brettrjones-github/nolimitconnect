@@ -34,7 +34,7 @@ public:
 								QWidget*			parent = NULL );
 	virtual ~AppletChatRoomJoinSearch();
 
-    void                        infoMsg( const char * infoMsg, ... );
+    void                        infoMsg( const char* infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
 
 	void						setStatusLabel( QString strMsg );

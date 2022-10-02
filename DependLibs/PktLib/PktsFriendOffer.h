@@ -29,8 +29,8 @@ public:
     void                        setHostType( enum EHostType hostType )   { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
 
-	void						setOfferMsg( const char * msg );
-	const char *				getOfferMsg( void );
+	void						setOfferMsg( const char* msg );
+	const char*				getOfferMsg( void );
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -50,8 +50,8 @@ public:
     void                        setHostType( enum EHostType hostType )   { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
 
-    void						setOfferMsg( const char * msg );
-    const char *				getOfferMsg( void );
+    void						setOfferMsg( const char* msg );
+    const char*				getOfferMsg( void );
 
 private:
     uint8_t					    m_HostType{ 0 };

@@ -43,7 +43,7 @@ public:
     AppSetup() = default;
     ~AppSetup() = default;
 
-    const char * SETUP_COMPLETE_FILE = "setup_completed.txt";
+    const char* SETUP_COMPLETE_FILE = "setup_completed.txt";
 
     bool areUserAssetsInitilized();
     void initializeUserAssets();

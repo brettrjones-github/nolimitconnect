@@ -103,7 +103,7 @@ std::string  PktBaseGetReply::getAssetTag()
 }
 
 //============================================================================
-void  PktBaseGetReply::setAssetNameAndTag( const char * pAssetName, const char * pAssetTag )
+void  PktBaseGetReply::setAssetNameAndTag( const char* pAssetName, const char* pAssetTag )
 {
     int nameLen = (int)strlen( pAssetName );
     if( nameLen > 4095 )
@@ -212,7 +212,7 @@ std::string  PktBaseSendReq::getAssetTag()
 }
 
 //============================================================================
-void  PktBaseSendReq::setAssetNameAndTag( const char * pAssetName, const char * pAssetTag )
+void  PktBaseSendReq::setAssetNameAndTag( const char* pAssetName, const char* pAssetTag )
 {
 	int nameLen = (int)strlen( pAssetName );
 	if( nameLen > 4095 )
@@ -316,7 +316,7 @@ uint16_t  PktBaseChunkReq::getChunkLen( void )
 }
 
 //============================================================================
-const char *  PktBaseXferErr::describeError( void )
+const char*  PktBaseXferErr::describeError( void )
 {
 	switch( m_u16Err )
 	{
@@ -375,7 +375,7 @@ bool PktBaseFindReq::setMatchName( std::string &csName )
 {
     if( ( PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN - 1) > csName.size() )
     {
-        strcpy( m_MatchName, (const char *)csName.c_str() );
+        strcpy( m_MatchName, (const char*)csName.c_str() );
         setPktLength( ROUND_TO_16BYTE_BOUNDRY( getEmptyLen()  + csName.size() + 1 ) );
         return true;
     }
@@ -450,7 +450,7 @@ bool PktBaseListReply::canAddFile( int fileNameLenIncludingZero )
 }
 
 //============================================================================
-void PktBaseListReply::addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char * fileName )
+void PktBaseListReply::addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char* fileName )
 {
     uint32_t curLen = getListDataLen();
     PackedFileListEntry * entry = (PackedFileListEntry *)(&m_as8FileList[ curLen ]);

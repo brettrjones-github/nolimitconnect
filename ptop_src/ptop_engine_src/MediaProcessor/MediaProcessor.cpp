@@ -65,7 +65,7 @@ namespace
 	//============================================================================
     static void * AudioInProcessThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
         if( processor )
@@ -80,7 +80,7 @@ namespace
 	//============================================================================
     static void * VideoProcessThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
         if( processor && false == poThread->isAborted() )
@@ -1615,7 +1615,7 @@ void MediaProcessor::doVideoClientRemovals( std::vector<ClientToRemove>& clientR
 int MediaProcessor::myIdInVidPktListCount( void )
 {
 	int containsMyIdCnt = 0;
-	VxNetIdent * myNetIdent = &m_Engine.getMyPktAnnounce();
+	VxNetIdent* myNetIdent = &m_Engine.getMyPktAnnounce();
 	std::vector<MediaClient>::iterator iter;
 	for( iter = m_VideoPktsList.begin(); iter != m_VideoPktsList.end(); ++iter )
 	{

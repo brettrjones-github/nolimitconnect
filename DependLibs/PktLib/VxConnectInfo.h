@@ -107,7 +107,7 @@ public:
 	InetAddress					getOnlineIpAddress( void );
 
     bool						setOnlineIpAddress( InetAddress& oIp );
-	bool						setOnlineIpAddress( const char * pIp ); // return true if changed
+	bool						setOnlineIpAddress( const char* pIp ); // return true if changed
     bool						isOnlineIpAddressValid( void );
 
 	uint16_t					getOnlinePort( void );
@@ -151,9 +151,9 @@ public:
 	VxConnectBaseInfo& 			getConnectBaseInfo( void )	                        { return * ((VxConnectBaseInfo *)this); }
 	VxConnectIdent& 			getConnectIdent( void )		                        { return * ((VxConnectIdent *)this); }
 
-	void 						setOnlineName( const char * pUserName );
+	void 						setOnlineName( const char* pUserName );
     char *                      getOnlineName( void )                               { return m_OnlineName; }
-	void 						setOnlineDescription( const char * pUserDesc );
+	void 						setOnlineDescription( const char* pUserDesc );
 	char *						getOnlineDescription( void )                        { return m_OnlineDesc; }
 
     void						setPrimaryLanguage( uint16_t language )             { m_PrimaryLanguage = language; }

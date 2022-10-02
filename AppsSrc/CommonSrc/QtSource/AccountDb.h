@@ -49,7 +49,7 @@ public:
 	//! update last login name
 	bool						updateLastLogin( std::string& strThingName ) { return updateLastLogin( strThingName.c_str() ); } 
 	//! update last login name
-	bool						updateLastLogin( const char * pThingName );
+	bool						updateLastLogin( const char* pThingName );
 	//! get last login name.. return "" if doesn't exist
 	std::string					getLastLogin(); 
 	//=========================================================================
@@ -59,9 +59,9 @@ public:
 	//! update existing account
 	bool						updateAccount( VxNetIdent& userAccount );
 	//! retrieve account by name
-	bool						getAccountByName( const char * name, VxNetIdent& oUserAccount ); 
+	bool						getAccountByName( const char* name, VxNetIdent& oUserAccount ); 
 	//! remove account by name
-	bool 						removeAccountByName( const char * name ); 
+	bool 						removeAccountByName( const char* name ); 
     //! retrieve all accounts
     bool						getAllAccounts( std::vector<VxNetIdent>& accountList );
 
@@ -81,11 +81,11 @@ public:
 	//=========================================================================
 	//=== host settings ===//
 	bool						updateNetHostSetting( NetHostSetting& anchorSetting ); 
-	bool						getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting ); 
+	bool						getNetHostSettingByName( const char* name, NetHostSetting& anchorSetting ); 
 	bool						getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList ); 
-	bool 						removeNetHostSettingByName( const char * name ); 
+	bool 						removeNetHostSettingByName( const char* name ); 
 
-	bool						updateLastNetHostSettingName( const char * name ); 
+	bool						updateLastNetHostSettingName( const char* name ); 
 	std::string 				getLastNetHostSettingName( void ); 
     //=========================================================================
 

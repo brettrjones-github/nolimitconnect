@@ -30,7 +30,7 @@ VxFileInfo::VxFileInfo()
 }
 
 //============================================================================
-VxFileInfo::VxFileInfo( const char * fileName )
+VxFileInfo::VxFileInfo( const char* fileName )
 : m_s64FileLen(0)
 , m_u8FileType( VXFILE_TYPE_UNKNOWN )
 , m_IsInLibrary( false )
@@ -73,7 +73,7 @@ void VxFileInfo::assureTrailingDirectorySlash( void )
 }
 
 //============================================================================
-const char * VxFileInfo::describeFileType( uint8_t fileType )
+const char* VxFileInfo::describeFileType( uint8_t fileType )
 {
 	switch( fileType )
 	{

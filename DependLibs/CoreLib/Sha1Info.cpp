@@ -54,7 +54,13 @@ bool Sha1Info::operator == ( const Sha1Info& rhs ) const
 }
 
 //============================================================================
-bool Sha1Info::isValid( void )
+bool Sha1Info::isValid( bool checkHashValid )
 {
-    return m_AssetId.isVxGUIDValid() && m_FileLen && m_Sha1Hash.isHashValid() && !m_FileName.empty();
+    bool isValid = m_AssetId.isVxGUIDValid() && m_FileLen&& !m_FileName.empty();
+    if( checkHashValid )
+    {
+        isValid &= m_Sha1Hash.isHashValid();
+    }
+
+    return isValid;
 }

@@ -79,7 +79,7 @@
 #define VG_CHECK(x,y)
 #endif
 
-static void comment_init(char **comments, int* length, const char *vendor_string);
+static void comment_init(char **comments, int* length, const char*vendor_string);
 static void comment_pad(char **comments, int* length, int amount);
 
 /*Write an Ogg page to a file pointer*/
@@ -95,13 +95,13 @@ static NLC_INLINE int oe_write_page(ogg_page *page, FILE *fp)
 #define IMIN(a,b) ((a) < (b) ? (a) : (b))   /**< Minimum int value.   */
 #define IMAX(a,b) ((a) > (b) ? (a) : (b))   /**< Maximum int value.   */
 
-void opustoolsversion(const char *opusversion)
+void opustoolsversion(const char*opusversion)
 {
   printf("opusenc %s %s (using %s)\n",PACKAGE_NAME,PACKAGE_VERSION,opusversion);
   printf("Copyright (C) 2008-2013 Xiph.Org Foundation\n");
 }
 
-void opustoolsversion_short(const char *opusversion)
+void opustoolsversion_short(const char*opusversion)
 {
   opustoolsversion(opusversion);
 }
@@ -554,7 +554,7 @@ int main(int argc, char **argv)
           save_cmd=0;
           comment_add(&inopt.comments, &inopt.comments_length, "genre", optarg);
         } else if(strcmp(long_options[option_index].name,"picture")==0){
-          const char *error_message;
+          const char*error_message;
           char       *picture_data;
           save_cmd=0;
           picture_data=parse_picture_specification(optarg,&error_message,
@@ -1115,7 +1115,7 @@ The comment header is decoded as follows:
                                      buf[base]=(val)&0xff; \
                                  }while(0)
 
-static void comment_init(char **comments, int* length, const char *vendor_string)
+static void comment_init(char **comments, int* length, const char*vendor_string)
 {
   /*The 'vendor' field should be the actual encoding library used.*/
   int vendor_length=strlen(vendor_string);

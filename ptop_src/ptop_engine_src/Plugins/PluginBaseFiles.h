@@ -16,36 +16,33 @@
 
 #include "PluginBase.h"
 #include "PluginSessionMgr.h"
-#include "FileInfoMgr.h"
+#include "FileInfoBaseMgr.h"
 
-#include "SharedFilesMgr.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h>
 
 #include <PktLib/VxCommon.h>
 
-class PktFileListReply;
-class FileShareSettings;
-class SharedFileInfo;
-class P2PEngine;
-class IToGui;
-class VxNetIdent;
-class FileTxSession;
+class FileInfoBaseMgr;
 class FileRxSession;
+class FileTxSession;
+class FileShareSettings;
+class FileInfoBaseMgr;
 class FileInfoXferMgr;
+class IToGui;
+class P2PEngine;
+class PktFileListReply;
+class FileInfo;
+class VxNetIdent;
 class VxFileShredder;
 
 class PluginBaseFiles : public PluginBase
 {
 public:
-	PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName );
+	PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, FileInfoBaseMgr& fileInfoBaseMgr );
 	virtual ~PluginBaseFiles() = default;
 
-	FileInfoMgr&				getFileInfoMgr( void )			{ return m_FileInfoMgr; }
+	FileInfoBaseMgr&			getFileInfoMgr( void )			{ return m_FileInfoMgr; }
 
-	PluginSessionBase *			createPluginSession( VxSktBase* sktBase, VxNetIdent* netIdent );
-	bool						isFileInLibrary( std::string& fileName );
-
-    //virtual void				fromGuiUserLoggedOn( void ) override;
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 
     virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
@@ -58,36 +55,34 @@ public:
     void						fromGuiCancelDownload( VxGUID& fileInstance ) override;
     void						fromGuiCancelUpload( VxGUID& fileInstance ) override;
 
-	bool						fromGuiMakePluginOffer( VxNetIdent *	netIdent,				// identity of friend
+	bool						fromGuiMakePluginOffer( VxNetIdent*	netIdent,				// identity of friend
 														int				pvUserData,
-														const char *	pOfferMsg,				// offer message
-														const char *	pFileName = 0,
+														const char*	pOfferMsg,				// offer message
+														const char*	pFileName = 0,
 														uint8_t *		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	int							fromGuiPluginControl(	VxNetIdent *	netIdent,
-														const char *	pControl, 
-														const char *	pAction,
+	int							fromGuiPluginControl(	VxNetIdent*	netIdent,
+														const char*	pControl, 
+														const char*	pAction,
 														uint32_t		u32ActionData,
 														VxGUID&			lclSessionId,
                                                         uint8_t *		fileHashId ) override;
 
-	virtual bool				fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask ); 
+	virtual bool				fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask ); 
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
-	virtual bool				fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId = 0 );
-	virtual bool				fromGuiGetIsFileShared( const char * fileName );
+	virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId = 0 );
+	virtual bool				fromGuiGetIsFileShared( const char* fileName );
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
-	virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 );
-	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
-	virtual bool				fromGuiGetIsFileInLibrary( const char * fileName );
 
     virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) override;
 
     virtual void				onSharedFilesUpdated( uint16_t u16FileTypes ) override;
 
 	virtual bool				isServingFiles( void );
-	void						deleteFile( const char * fileName, bool shredFile );
+
+	virtual void				deleteFile( const char* fileName, bool shredFile );
 
 protected:
 	void						onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
@@ -136,7 +131,7 @@ protected:
 	//=== vars ===//
 	VxFileShredder&				m_FileShredder;
 	PluginSessionMgr			m_PluginSessionMgr;
-    FileInfoMgr				    m_FileInfoMgr;
+	FileInfoBaseMgr&			m_FileInfoMgr;
 	FileInfoXferMgr&			m_FileInfoXferMgr;
 };
 

@@ -194,7 +194,7 @@ qint64 AudioInIo::readData( char *data, qint64 maxlen )
 }
 
 //============================================================================
-qint64 AudioInIo::writeData( const char * data, qint64 len )
+qint64 AudioInIo::writeData( const char* data, qint64 len )
 {
     if( VxIsAppShuttingDown() )
     {

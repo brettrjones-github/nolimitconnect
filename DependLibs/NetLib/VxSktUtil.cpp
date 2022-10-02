@@ -261,7 +261,7 @@ void VxIPv6_ntop( void * pvBinary, char * pBuf, int iBufLen )
 }
 
 //============================================================================
-void VxIPv4_pton( const char * pIpStr, void * pvBinary, bool wantHostOrder )
+void VxIPv4_pton( const char* pIpStr, void * pvBinary, bool wantHostOrder )
 {
 	uint32_t u32Ip = 0;
 	if( NULL == pIpStr )
@@ -296,7 +296,7 @@ void VxIPv4_pton( const char * pIpStr, void * pvBinary, bool wantHostOrder )
 }
 
 //============================================================================
-void VxIPv6_pton( const char * pIpStringIn,  void * pvBinary )
+void VxIPv6_pton( const char* pIpStringIn,  void * pvBinary )
 {
 	uint16_t * pBinary = (uint16_t *)pvBinary; 
 	std::vector<uint16_t> aoValues;
@@ -481,7 +481,7 @@ bool VxLocalIpExists(  std::string& strIpAddress )
 
 //============================================================================
 //! return true if port is already in use on this local ip address
-bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp, bool useBind )
+bool VxIsIpPortInUse(  uint16_t u16Port, const char* pLocalIp, bool useBind )
 {
 	bool bInUse = true;
 
@@ -538,7 +538,7 @@ bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp, bool useBind )
 
 //============================================================================
 //! split host name from website file path
-bool VxSplitHostAndFile(	const char * pFullUrl,		// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.png
+bool VxSplitHostAndFile(	const char* pFullUrl,		// full url.. example http://www.mysite.com/index.html or www.mysite.com/images/me.png
 							std::string& strRetHost,	// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 							std::string& strRetFileName,	// return file name.. images/me.png
 							uint16_t& u16RetPort )			// return port if specified else return 80 as default				
@@ -1004,7 +1004,7 @@ SOCKET VxConnectToAddr(SOCKET sktHandle, struct sockaddr* sktAddr, socklen_t skt
 }
 
 //============================================================================
-SOCKET VxConnectToIPv6( const char * ipv6Str, uint16_t u16Port, int iConnectTimeoutMs, RCODE * retSktErr )
+SOCKET VxConnectToIPv6( const char* ipv6Str, uint16_t u16Port, int iConnectTimeoutMs, RCODE * retSktErr )
 {
 	fd_set			oSktSet; 
 	socklen_t		iSktLen;
@@ -1205,7 +1205,7 @@ connected:
 //============================================================================
 SOCKET VxConnectTo(		InetAddrAndPort&	lclIp,
 						InetAddrAndPort&	rmtIp,
-						const char *		pIpAddr,				// remote ip
+						const char*		pIpAddr,				// remote ip
 						uint16_t			u16Port,				// port to connect to
 						int					iTimeoutMilliSeconds,
 						RCODE *				retSktError )	// milli seconds before connect attempt times out
@@ -1245,7 +1245,7 @@ SOCKET VxConnectTo(		InetAddrAndPort&	lclIp,
 // connects to website and returns socket.. if fails returns INVALID_SOCKET
 SOCKET VxConnectToWebsite(	InetAddrAndPort&	lclIp,			// ip of adapter to use
 							InetAddrAndPort&	rmtIp,			// return ip and port url resolves to
-							const char *		pWebsiteUrl,
+							const char*		pWebsiteUrl,
 							std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 							std::string&		strFile,		// return file name.. images/me.png
 							uint16_t&			u16Port,		// return port
@@ -1262,7 +1262,7 @@ SOCKET VxConnectToWebsite(	InetAddrAndPort&	lclIp,			// ip of adapter to use
 		return INVALID_SOCKET;
 	}
 
-	const char * hostname = strHost.c_str();
+	const char* hostname = strHost.c_str();
 	//LogMsg( LOG_VERBOSE, "VxConnectToWebsite: Attempting to connect to %s port %d...\n", hostname, u16Port );
 
 	SOCKET hSocket = VxConnectTo(	lclIp,					// ip of adapter to use
@@ -1339,7 +1339,7 @@ bool VxTestConnectionOnSpecificLclAddress( InetAddress& oLclAddr )
 }
 
 //============================================================================
-bool VxResolveUrl( const char * pUrl, uint16_t u16Port, InetAddress& retInetAddr )
+bool VxResolveUrl( const char* pUrl, uint16_t u16Port, InetAddress& retInetAddr )
 {
 	std::string resolvedIp;
 	if( VxResolveUrl( pUrl, u16Port, resolvedIp ) )
@@ -1431,7 +1431,7 @@ bool VxResolveUrl( const char* pUrl, uint16_t u16Port, std::string& resolvedIp )
 }
 
 //============================================================================
-bool VxIsIPv6Address( const char *addr )
+bool VxIsIPv6Address( const char*addr )
 {
 	if ( NULL == addr )
 	{
@@ -1447,7 +1447,7 @@ bool VxIsIPv6Address( const char *addr )
 
 
 //============================================================================
-bool VxIsIPv4Address( const char *addr )
+bool VxIsIPv4Address( const char*addr )
 {
 	if ( NULL == addr )
 	{
@@ -1466,7 +1466,7 @@ bool VxIsIPv4Address( const char *addr )
 }
 
 //============================================================================
-int VxGetIPv6ScopeID( const char *addr )
+int VxGetIPv6ScopeID( const char*addr )
 {
 	if ( false == VxIsIPv6Address( addr ) )
 	{
@@ -1955,7 +1955,7 @@ void VxFlushThenCloseSkt( SOCKET oSocket )
 			setsockopt(	oSocket,                 
 				(int) IPPROTO_TCP,   //level             
 				(int) SO_LINGER,              
-				(const char *)&oLinger,  
+				(const char*)&oLinger,  
 				(int)sizeof( linger ) );
 			// windows crap is broken .. this is the workaround
 			// from http://msdn.microsoft.com/en-us/library/ms738547(VS.85).aspx
@@ -2001,7 +2001,7 @@ void VxFlushThenCloseSkt( SOCKET oSocket )
 			setsockopt(	oSocket,                 
 				(int) IPPROTO_TCP,   //level             
 				(int) SO_LINGER,              
-				(const char *)&oLinger,  
+				(const char*)&oLinger,  
 				(int)sizeof( linger ) );
 			//The shutdown command has three options: 0 = done receiving, 1 = done sending, 2 = both
 			//LogMsg( LOG_INFO, "VxSktBase::closeSkt: Skt %d done setting linger\n", m_SktNumber );
@@ -2025,7 +2025,7 @@ void VxCloseSktNow( SOCKET oSocket )
 		setsockopt(	oSocket,                 
 			(int) IPPROTO_TCP,   //level             
 			(int) SO_LINGER,              
-			(const char *)&oLinger,  
+			(const char*)&oLinger,  
 			(int)sizeof( linger ) );
 
 			shutdown(oSocket, 0);
@@ -2098,7 +2098,7 @@ void VxSetSktAddressPort( struct sockaddr_storage * poAddr, uint16_t u16Port )
 
 //============================================================================
 RCODE VxSendSktData(	SOCKET			sktHandle,
-						const char *	pData,					// data to send
+						const char*	pData,					// data to send
 						int				iDataLen,				// length of data
 						int				iTimeoutSeconds )		// seconds before send attempt times out
 {
@@ -2225,7 +2225,7 @@ uint16_t VxGetRmtPort( SOCKET skt )
 //=== socket errors ===//
 //============================================================================
 //============================================================================
-const char * VxDescribeSktError( int iErr )
+const char* VxDescribeSktError( int iErr )
 {
 	static char as8Buf[128];
 

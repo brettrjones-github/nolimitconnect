@@ -47,7 +47,7 @@ enum EAppState
 #define USE_PLUGIN_STORY_BOARD		1
 
 //! describe plugin local name
-const char * DescribePluginLclName( EPluginType ePluginType );
+const char* DescribePluginLclName( EPluginType ePluginType );
 
 // permission bits
 // 0000		disabled or ignore
@@ -150,6 +150,6 @@ private:
 ///RCODE VxReportHack(	VxNetIdentBase *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
 ///						uint32_t					u32HackLevel,			// 1=severe 2=medium 3=suspicious
 ///						uint32_t					u32IpAddr,				// ip address if identity not known
-///						const char *		pDescription, ... );	// description of hack attempt
-RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, VxSktBase* sktBase, const char * pDescription, ... );
-RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, SOCKET skt, const char * ipAddr, const char * pDescription, ... );
+///						const char*		pDescription, ... );	// description of hack attempt
+RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, VxSktBase* sktBase, const char* pDescription, ... );
+RCODE VxReportHack(	enum EHackerLevel hackerLevel, enum EHackerReason hackerReason, SOCKET skt, const char* ipAddr, const char* pDescription, ... );

@@ -32,7 +32,7 @@ public:
 	UpnpParser();
 	virtual ~UpnpParser(){};
 
-	void						setParserData(  VxSktBase* sktBase, const char * pDataBuf );
+	void						setParserData(  VxSktBase* sktBase, const char* pDataBuf );
 	void						setLclIp( std::string& strIp );
 	void						setRmtIpAndPort( std::string& strIp, uint16_t u16Port );
 	void						setTimeStamp( uint32_t time );
@@ -43,12 +43,12 @@ public:
 	bool						isAlive( void );
 	bool						isByeBye( void );
 
-	const char *				getST( std::string& value );
-	const char *				getNT( std::string& value );
-	const char *				getNTS( std::string& value );
-	const char *				getMAN( std::string& value );
-	const char *				getUSN( std::string& value );
-	const char *				getUDN( std::string& value );
+	const char*				getST( std::string& value );
+	const char*				getNT( std::string& value );
+	const char*				getNTS( std::string& value );
+	const char*				getMAN( std::string& value );
+	const char*				getUSN( std::string& value );
+	const char*				getUDN( std::string& value );
 
 	int							getLeaseTime( void );
 

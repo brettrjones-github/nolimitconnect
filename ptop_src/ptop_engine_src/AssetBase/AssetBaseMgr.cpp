@@ -39,12 +39,12 @@
 
 namespace
 {
-	const char * ASSET_INFO_DB_NAME = "AssetBaseInfoDb.db3";
+	const char* ASSET_INFO_DB_NAME = "AssetBaseInfoDb.db3";
 
 	//============================================================================
     static void * AssetBaseMgrGenHashIdsThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		AssetBaseMgr * poMgr = (AssetBaseMgr *)poThread->getThreadUserParam();
         if( poMgr )
@@ -117,7 +117,7 @@ std::vector<VxGUID>	AssetBaseMgr::m_EmoticonIdList{
 }; 
 
 //============================================================================
-AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName, const char * dbStateName, EAssetMgrType assetMgrType )
+AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char* dbName, const char* dbStateName, EAssetMgrType assetMgrType )
 : m_Engine( engine )
 , m_AssetMgrType( assetMgrType )
 , m_AssetBaseInfoDb( createAssetInfoDb( dbName, assetMgrType ) )
@@ -137,7 +137,7 @@ bool AssetBaseMgr::isEmoticonThumbnail( VxGUID& thumbId )
 }
 
 //============================================================================
-AssetBaseInfoDb& AssetBaseMgr::createAssetInfoDb( const char * dbName, EAssetMgrType assetMgrType )
+AssetBaseInfoDb& AssetBaseMgr::createAssetInfoDb( const char* dbName, EAssetMgrType assetMgrType )
 {
     switch( assetMgrType )
     {
@@ -164,7 +164,7 @@ void AssetBaseMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-void AssetBaseMgr::assetInfoMgrStartup( VxThread * startupThread )
+void AssetBaseMgr::assetInfoMgrStartup( VxThread* startupThread )
 {
 	if( startupThread->isAborted() )
 		return;
@@ -208,7 +208,7 @@ void AssetBaseMgr::generateHashForFile( std::string fileName )
 }
 
 //============================================================================
-void AssetBaseMgr::generateHashIds( VxThread * genHashThread )
+void AssetBaseMgr::generateHashIds( VxThread* genHashThread )
 {
 	while( false == genHashThread->isAborted() )
 	{
@@ -356,7 +356,7 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen )
+AssetBaseInfo * AssetBaseMgr::addAssetFile( EAssetType assetType, const char* fileName, uint64_t fileLen )
 {
 	VxGUID assetId;
 	assetId.initializeWithNewVxGUID();
@@ -389,11 +389,11 @@ AssetBaseInfo* AssetBaseMgr::addAssetFile( EAssetType assetType, const char* fil
 
 //============================================================================
 bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
-                                    const char *	fileName, 
+                                    const char*	fileName, 
 									VxGUID&			assetId,  
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
-									const char *	assetTag, 
+									const char*	assetTag, 
                                     int64_t			timestamp )
 {
 	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
@@ -407,13 +407,13 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 
 //============================================================================
 bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
-                                    const char *	fileName, 
+                                    const char*	fileName, 
 									VxGUID&			assetId,  
 									VxGUID&		    creatorId, 
 									VxGUID&		    historyId, 
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
-									const char *	assetTag, 
+									const char*	assetTag, 
                                     int64_t			timestamp )
 {
 	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
@@ -437,7 +437,7 @@ bool AssetBaseMgr::addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreate
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+AssetBaseInfo * AssetBaseMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
 {
     AssetBaseInfo * assetInfo = new AssetBaseInfo( assetType, fileName, fileLen );
     if( assetInfo )
@@ -459,11 +459,11 @@ AssetBaseInfo* AssetBaseMgr::createAssetInfo( EAssetType assetType, const char* 
 
 //============================================================================
 AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType, 
-                                                const char *	fileName, 
+                                                const char*	fileName, 
 										        VxGUID&			assetId,  
 										        uint8_t *	    hashId, 
 										        EAssetLocation	locationFlags, 
-										        const char *	assetTag, 
+										        const char*	assetTag, 
                                                 int64_t			timestamp )
 {
 	uint64_t  fileLen = VxFileUtil::getFileLen( fileName );
@@ -699,7 +699,7 @@ void AssetBaseMgr::clearAssetInfoList( void )
 }
 
 //============================================================================
-void AssetBaseMgr::updateAssetListFromDb( VxThread * startupThread )
+void AssetBaseMgr::updateAssetListFromDb( VxThread* startupThread )
 {
 	std::vector<AssetBaseInfo*> toDeleteList;
 	lockResources();
@@ -1241,7 +1241,7 @@ RCODE AssetBaseMgr::SendMatchList(	uint32_t			u32SktNum,		// Tronacom socket num
 			{
 				if( 0 == poInfo->m_s64FileLen )
 				{
-					LogMsg( LOG_INFO, "AssetBaseMgr::Zero Length File %s\n", (const char *) poInfo->m_csDisplayName );
+					LogMsg( LOG_INFO, "AssetBaseMgr::Zero Length File %s\n", (const char*) poInfo->m_csDisplayName );
 					continue;
 				}
 				//add file to PktFileList
@@ -1394,7 +1394,7 @@ RCODE AssetBaseMgr::AddDir( CString & csDirPath )
 
 		//get file extension
 		CString csExt = getFileExtension( cs );
-		char * pExt = (char *)((const char *)csExt);
+		char * pExt = (char *)((const char*)csExt);
 		bool bIsLink = false;
 
 		if( 0 == strcmp( pExt, "lnk" ) )
@@ -1406,13 +1406,13 @@ RCODE AssetBaseMgr::AddDir( CString & csDirPath )
 									as8FullPath );		//return path to target file
 			if( FAILED( hr ) )
 			{
-				TRACE("Unable to resolve path in %s\n", (const char *)cs );
+				TRACE("Unable to resolve path in %s\n", (const char*)cs );
 				continue;
 			}
 			else
 			{
 				cs = as8FullPath;	
-				int iResult = ::_stat( (const char *)cs, &gStat );
+				int iResult = ::_stat( (const char*)cs, &gStat );
 				if( iResult != 0 )
 				{
 					TRACE( "Problem getting file information\n" );
@@ -1422,7 +1422,7 @@ RCODE AssetBaseMgr::AddDir( CString & csDirPath )
 				{
 					s64FileLen = gStat.st_size;
 					csExt = getFileExtension( cs );
-					pExt = (char *)((const char *)csExt);
+					pExt = (char *)((const char*)csExt);
 				}
 			}
 		}
@@ -1486,7 +1486,7 @@ RCODE AssetBaseMgr::AddDir( CString & csDirPath )
 		else
 		{
 			//display name is full path - root path
-			char * pTemp = (char *)(const char *)cs;
+			char * pTemp = (char *)(const char*)cs;
 			int iRootLen =  csDirPath.GetLength();
 			ASSERT( iRootLen < cs.GetLength() );
 			if( iRootLen )
@@ -1506,7 +1506,7 @@ RCODE AssetBaseMgr::AddDir( CString & csDirPath )
 		}
 
 		unsigned char * pu8ChoppedStr = new unsigned char[ poInfo->m_csDisplayName.GetLength() + 10 ];
-		VxChopStr( (char *)(const char *) poInfo->m_csDisplayName, pu8ChoppedStr );
+		VxChopStr( (char *)(const char*) poInfo->m_csDisplayName, pu8ChoppedStr );
 		if( poInfo->m_pu8ChoppedDisplayName )
 		{
 			delete poInfo->m_pu8ChoppedDisplayName;
@@ -1514,7 +1514,7 @@ RCODE AssetBaseMgr::AddDir( CString & csDirPath )
 		poInfo->m_pu8ChoppedDisplayName = pu8ChoppedStr;
 		LogChoppedString( pu8ChoppedStr );
 		poInfo = &m_List[0];
-		const char * pTemp = (const char *)poInfo->m_csDisplayName;
+		const char* pTemp = (const char*)poInfo->m_csDisplayName;
 		
 		iResolvedListIdx++;
 
@@ -1574,7 +1574,7 @@ RCODE AssetBaseMgr::MakeMatchList(	CPtrArray * paoRetListPkts, // return list of
 			{
 				if( 0 == poInfo->m_s64FileLen )
 				{
-					LogMsg( LOG_INFO, "AssetBaseMgr::Zero Length File %s\n", (const char *) poInfo->m_csDisplayName );
+					LogMsg( LOG_INFO, "AssetBaseMgr::Zero Length File %s\n", (const char*) poInfo->m_csDisplayName );
 					continue;
 				}
 				//add file to PktFileList

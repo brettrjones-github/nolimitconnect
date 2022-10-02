@@ -48,7 +48,7 @@ ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QW
 
     connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)) );
 
-    connect( &m_MyApp, SIGNAL(signalFileList(const char *,uint8_t,int64_t,int,bool)), this, SLOT(slotFileList(const char *,uint8_t,int64_t,int,bool)) );
+    connect( &m_MyApp, SIGNAL(signalFileList(const char*,uint8_t,int64_t,int,bool)), this, SLOT(slotFileList(const char*,uint8_t,int64_t,int,bool)) );
     connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)) );
     connect(ui.m_UpDirectoryLabel, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()) );
 
@@ -94,12 +94,12 @@ void ActivityAddRemoveLibraryFiles::setCurrentBrowseDir( QString browseDir )
 }
 
 //============================================================================
-FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, bool isShared )
+FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8FileType, const char* pFileName, uint64_t u64FileLen, VxGUID assetId, bool isShared )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
 	item->setSizeHint(QSize(200, GuiParams::getButtonSize().height() + 4));
 
-	FileItemInfo * poItemInfo = new FileItemInfo( u8FileType, pFileName, u64FileLen, assetId );
+	FileItemInfo* poItemInfo = new FileItemInfo( u8FileType, pFileName, u64FileLen, assetId );
 	poItemInfo->setIsShared( isShared );
 	item->setFileItemInfo( poItemInfo );
 
@@ -124,7 +124,7 @@ FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8Fil
 //============================================================================
 void ActivityAddRemoveLibraryFiles::addFile(uint8_t			u8FileType,
 										    uint64_t		u64FileLen, 
-										    const char *	pFileName,
+										    const char*	pFileName,
 											VxGUID			assetId,
 										    bool			isShared )
 {
@@ -186,7 +186,7 @@ void ActivityAddRemoveLibraryFiles::slotBrowseButtonClicked( void )
 //============================================================================
 void ActivityAddRemoveLibraryFiles::slotListItemClicked( QListWidgetItem * item )
 {
-	FileItemInfo * poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
 	if( poInfo )
 	{
         if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -218,7 +218,7 @@ void ActivityAddRemoveLibraryFiles::slotListFileIconClicked( QListWidgetItem * i
 //============================================================================
 void ActivityAddRemoveLibraryFiles::slotListLockIconClicked( QListWidgetItem * item )
 {
-	FileItemInfo * poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
 	if( poInfo )
 	{
         if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -277,7 +277,7 @@ void ActivityAddRemoveLibraryFiles::slotRequestFileList( void )
 }
 
 //============================================================================
-void ActivityAddRemoveLibraryFiles::slotFileList( const char * fileName, uint8_t fileType, int64_t dataLen, VxGUID assetId, int done, bool isShared )
+void ActivityAddRemoveLibraryFiles::slotFileList( const char* fileName, uint8_t fileType, int64_t dataLen, VxGUID assetId, int done, bool isShared )
 {
 	if( done )
 	{

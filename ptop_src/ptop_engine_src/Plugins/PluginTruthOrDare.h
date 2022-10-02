@@ -27,14 +27,14 @@ public:
 	PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginTruthOrDare() = default;
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				
 														int			    pvUserData,
-														const char *	pOfferMsg,				
-														const char *	pFileName = 0,
+														const char*	pOfferMsg,				
+														const char*	pFileName = 0,
 														uint8_t *		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
+	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
 													int			    pvUserdata,
 													EOfferResponse	eOfferResponse,
                                                     VxGUID			lclSessionId ) override;
@@ -43,7 +43,7 @@ public:
     virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
     virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-    virtual bool				fromGuiInstMsg( VxNetIdent* netIdent, const char * pMsg ) override;
+    virtual bool				fromGuiInstMsg( VxNetIdent* netIdent, const char* pMsg ) override;
 
     virtual bool				fromGuiSetGameValueVar(	VxNetIdent* netIdent, int32_t varId, int32_t varValue ) override;
     virtual bool				fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_t	actionId, int32_t actionValue ) override;
@@ -83,7 +83,7 @@ protected:
     virtual void				onConnectionLost( VxSktBase* sktBase ) override;
 
     P2PSession *				createP2PSession( VxSktBase* sktBase, VxNetIdent* netIdent ) override;
-	bool						sendGameStats( VxNetIdent *	netIdent );
+	bool						sendGameStats( VxNetIdent*	netIdent );
 
 	//=== vars ===//
 	PluginSessionMgr			m_PluginSessionMgr;

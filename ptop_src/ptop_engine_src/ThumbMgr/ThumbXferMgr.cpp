@@ -42,7 +42,7 @@
 #include <stdio.h>
 
 //============================================================================
-ThumbXferMgr::ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName )
+ThumbXferMgr::ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char* stateDbName, const char* workThreadName )
     : AssetBaseXferMgr( engine, assetMgr, xferInterface, stateDbName, workThreadName )
 {
 }

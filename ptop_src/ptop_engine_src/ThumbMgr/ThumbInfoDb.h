@@ -22,13 +22,13 @@ class ThumbInfo;
 class ThumbInfoDb : public AssetBaseInfoDb
 {
 public:
-	ThumbInfoDb( AssetBaseMgr& mgr, const char * dbname );
+	ThumbInfoDb( AssetBaseMgr& mgr, const char* dbname );
 	virtual ~ThumbInfoDb() = default;
 
     bool                        saveToDatabase( ThumbInfo& thumbInfo );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
 };
 

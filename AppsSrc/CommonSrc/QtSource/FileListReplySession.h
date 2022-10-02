@@ -34,21 +34,21 @@ class FileListReplySession : public QObject
 public:
 	FileListReplySession();
 	FileListReplySession(	EPluginType		ePluginType, 
-                            GuiUser *	    netIdent, 
+                            GuiUser*	    netIdent, 
 							uint8_t			u8FileType, 
 							uint64_t		u64FileLen, 
-							const char *	pFileName,
+							const char*	pFileName,
                             VxGUID          assetId,
 							uint8_t *		fileHashData );
 
     FileListReplySession(	EPluginType		ePluginType,
-                            GuiUser *	    netIdent,
+                            GuiUser*	    netIdent,
                             VxMyFileInfo&   fileInfo );
 	FileListReplySession(const FileListReplySession& rhs);
 	FileListReplySession& operator=(const FileListReplySession& rhs); 
 
-    void						setIdent( GuiUser * ident )			    { m_Ident = ident; }
-    GuiUser *				    getIdent( void )						{ return m_Ident; }
+    void						setIdent( GuiUser* ident )			    { m_Ident = ident; }
+    GuiUser*				    getIdent( void )						{ return m_Ident; }
 
     void						setFileInfo( VxMyFileInfo& fileInfo )	{ m_FileInfo = fileInfo; }
     VxMyFileInfo&				getFileInfo( void )						{ return m_FileInfo; }
@@ -69,6 +69,6 @@ public:
     EPluginType                 m_ePluginType{ ePluginTypeInvalid };
 
 protected:
-    GuiUser *                   m_Ident{ nullptr };
+    GuiUser*                   m_Ident{ nullptr };
     VxMyFileInfo				m_FileInfo;
 };

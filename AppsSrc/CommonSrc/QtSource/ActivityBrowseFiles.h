@@ -72,6 +72,7 @@ protected slots:
 	void						slotListLibraryIconClicked( QListWidgetItem * item );
 	void						slotListPlayIconClicked( QListWidgetItem * item );
 	void						slotListShredIconClicked( QListWidgetItem * item );
+	void						slotAddAllButtonClicked( void );
 	
 protected:
     virtual void				showEvent( QShowEvent* ev ) override;
@@ -85,7 +86,7 @@ protected:
 											bool			isShared,
 											bool			isInLibrary );
 
-	void						updateListEntryWidget( FileShareItemWidget * item, FileItemInfo * poSession );
+	void						updateListEntryWidget( FileShareItemWidget * item, FileItemInfo* poSession );
 	void						clearFileList( void );
 	void						setDefaultCurrentDir( EFileFilterType eFileFilterType );
 	std::string					getDefaultDir( int eFileFilterType );

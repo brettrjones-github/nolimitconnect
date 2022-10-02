@@ -27,7 +27,7 @@ namespace
 	//============================================================================
     static void * FileShredderThreadFunc( void * pvContext )
 	{
-		VxThread * poThread = (VxThread *)pvContext;
+		VxThread* poThread = (VxThread*)pvContext;
 		poThread->setIsThreadRunning( true );
 		VxFileShredder * shredder = (VxFileShredder *)poThread->getThreadUserParam();
 		shredder->shredFiles();

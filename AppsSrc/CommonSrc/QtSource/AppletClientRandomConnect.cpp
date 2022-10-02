@@ -62,7 +62,7 @@ void AppletClientRandomConnect::hideEvent( QHideEvent* ev )
 }
 
 //============================================================================
-void AppletClientRandomConnect::toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent )
+void AppletClientRandomConnect::toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent )
 {
     if( VxIsAppShuttingDown() )
     {
@@ -110,7 +110,7 @@ void AppletClientRandomConnect::slotSearchComplete( void )
 }
 
 //============================================================================
-void AppletClientRandomConnect::slotSearchResult( GuiUser * netIdent )
+void AppletClientRandomConnect::slotSearchResult( GuiUser* netIdent )
 {
     m_MyApp.playSound( eSndDefUserBellMessage );
     QString foundMatch = QObject::tr( "Search Complete " );

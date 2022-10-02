@@ -636,18 +636,16 @@
     <ClCompile Include="..\..\ptop_engine_src\PluginSettings\PluginSettingMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\AudioJitterBuffer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoBaseMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoClientFilesMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoDb.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoLibraryMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoSharedFilesMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoXferMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileLibraryDb.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileLibraryMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileRxSession.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileToXfer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileTxSession.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferBaseMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferPluginSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostBaseMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostClientMgr.cpp" />
@@ -655,7 +653,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostSearchEntry.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostServerMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostServerSearchMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\P2PSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.cpp" />
@@ -664,8 +661,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesServer.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXferPktHandlers.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.cpp" />
@@ -679,10 +674,10 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestHost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileShareClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileShareServer.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginGroupClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginGroupHost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginInvalid.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginLibraryServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMessenger.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMgrSktApi.cpp" />
@@ -691,6 +686,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginNetworkSearchList.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPeerUserClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPeerUserHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPersonFileXfer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.cpp" />
@@ -704,10 +700,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RxSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesDb.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesFinder.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\TodGameSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\TxSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\VideoFeedMgr.cpp" />
@@ -736,11 +728,6 @@
     <ClCompile Include="..\..\ptop_engine_src\User\User.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\User\UserList.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServer.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServerHttp.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebSkt.cpp" />
     <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h" />
     <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h" />
     <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h" />
@@ -920,18 +907,16 @@
     <ClInclude Include="..\..\ptop_engine_src\PluginSettings\PluginSettingMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\AudioJitterBuffer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoBaseMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoClientFilesMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoDb.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoLibraryMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoSharedFilesMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoXferMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileLibraryDb.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileLibraryMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileRxSession.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileToXfer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileTxSession.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferBaseMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferPluginSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostBaseMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostClientMgr.h" />
@@ -939,7 +924,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostSearchEntry.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostServerMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostServerSearchMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\P2PSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.h" />
@@ -948,7 +932,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFilesServer.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.h" />
@@ -961,10 +944,10 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestHost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileShareClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileShareServer.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginGroupClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginGroupHost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginInvalid.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginLibraryServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginNetServices.h" />
@@ -972,6 +955,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginNetworkSearchList.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPeerUserClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPeerUserHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPersonFileXfer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.h" />
@@ -985,10 +969,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RxSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesDb.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesFinder.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\TodGameSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\TxSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\VideoFeedMgr.h" />
@@ -1022,11 +1002,6 @@
     <ClInclude Include="..\..\ptop_engine_src\User\UserList.h" />
     <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.h" />
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.h" />
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServer.h" />
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServerLib.h" />
-    <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebSkt.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\libptopengine.pri" />

@@ -42,7 +42,7 @@ public:
 	std::string					getNameOfServiceToForward( void )	{ return m_strServiceToForward; }
 
 	void						setPortForwardResultCallback( PORT_FORWARD_CALLBACK_FUNCTION pfuncPortForwardCallbackHandler, void * userData );
-	virtual void				tcpPortForward( int port, const char * pServiceName, const char * pLocalIPv4 = "" );
+	virtual void				tcpPortForward( int port, const char* pServiceName, const char* pLocalIPv4 = "" );
 
 	bool						shouldAbort( void );
 	void						runPortForward( void );
@@ -52,7 +52,7 @@ public:
 protected:
 	void						onSearchResponseReceived( UpnpParser * upnpParser );
 	void						sendUpnpDeviceSearchBroadcast( void );
-	UpnpParser *				createUpnpParser( VxSktBase* sktBase, const char * pData );
+	UpnpParser *				createUpnpParser( VxSktBase* sktBase, const char* pData );
 	bool						haveAlreadyRequestedDeviceInfo( std::string& deviceUrl );
 	void						removeAllRootDevices( void );
 

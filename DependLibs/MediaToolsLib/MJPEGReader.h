@@ -76,12 +76,12 @@ public:
 	void						setIsPlayingPaused( bool isPaused );
 	bool						getIsPlayingPaused( void )					{ return m_IsPlayingPaused; }
 
-	bool						fromGuiIsMyP2PWebVideoFile( const char * fileName );	
+	bool						fromGuiIsMyP2PWebVideoFile( const char* fileName );	
 	bool						fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000  );
 
-	bool						startVideoRead( const char * fileName, VxGUID& assetId, int pos0to100000 );
+	bool						startVideoRead( const char* fileName, VxGUID& assetId, int pos0to100000 );
 	void						stopVideoRead( void );
-	bool						playOneFrame( const char * fileName, VxGUID& assetId );						
+	bool						playOneFrame( const char* fileName, VxGUID& assetId );						
 
 	void						readerThread( void );
 	void						lockResources( void )			{ m_ResMutex.lock(); }
@@ -105,7 +105,7 @@ protected:
 	void						calculateNewMilliSecPerFrame( unsigned int audChunkIdx );
 	void						waitForAudio( void );
 	void						cleanupReadChunks( void );
-	bool						readFirstVidFrameFromFile( FILE * fileHandle, const char * fileName, VxGUID& assetId );
+	bool						readFirstVidFrameFromFile( FILE * fileHandle, const char* fileName, VxGUID& assetId );
 	void						resetVariables( void );
 
 

@@ -49,26 +49,26 @@ public:
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) {}; 
 
 	virtual void				toGuiContactOnline( VxNetIdent* netIdent ){}; 
-	virtual void				toGuiContactOffline( GuiUser * netIdent ){}; 
-    virtual void				toGuiContactNameChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiContactDescChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiContactMyFriendshipChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiContactHisFriendshipChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiPluginPermissionChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiContactSearchFlagsChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiContactLastSessionTimeChange( GuiUser * netIdent ){}; 
-    virtual void				toGuiUpdateMyIdent(GuiUser * netIdent ){}; 
+	virtual void				toGuiContactOffline( GuiUser* netIdent ){}; 
+    virtual void				toGuiContactNameChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiContactDescChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiContactMyFriendshipChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiContactHisFriendshipChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiPluginPermissionChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiContactSearchFlagsChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiContactLastSessionTimeChange( GuiUser* netIdent ){}; 
+    virtual void				toGuiUpdateMyIdent(GuiUser* netIdent ){}; 
 
-	virtual void				toGuiInstMsg( GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
+	virtual void				toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg ){}; 
 
-	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser * netIdent ){};
-	virtual void				toGuiSearchResultError( EScanType eScanType, GuiUser * netIdent, int errCode ){};
-	virtual void				toGuiSearchResultProfilePic( GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
-	virtual void				toGuiSearchResultFileSearch(	GuiUser *	    netIdent, 		
+	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent ){};
+	virtual void				toGuiSearchResultError( EScanType eScanType, GuiUser* netIdent, int errCode ){};
+	virtual void				toGuiSearchResultProfilePic( GuiUser* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
+	virtual void				toGuiSearchResultFileSearch(	GuiUser*	    netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
-																const char *	pFileName,
+																const char*	pFileName,
                                                                 VxGUID          assetId ){};
 	virtual void				toGuiClientScanSearchComplete( EScanType eScanType ){};
 

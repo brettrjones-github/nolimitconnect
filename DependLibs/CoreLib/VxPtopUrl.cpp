@@ -25,14 +25,14 @@
 #include <string.h>
 namespace
 {
-	const char * PROTOCOL_DELIM = "://";
-	const char * COLON_DELIM = ":";
-	const char * SLASH_DELIM = "/";
-    const char * ONLINE_ID_DELIM = "!";
+	const char* PROTOCOL_DELIM = "://";
+	const char* COLON_DELIM = ":";
+	const char* SLASH_DELIM = "/";
+    const char* ONLINE_ID_DELIM = "!";
 
 
     //============================================================================
-    bool VxIsIPv6Address( const char *addr )
+    bool VxIsIPv6Address( const char*addr )
     {
         if ( NULL == addr )
         {
@@ -47,7 +47,7 @@ namespace
     }
 
     //============================================================================
-    const char * VxStripIPv6ScopeID( const char *addr, std::string &buf )
+    const char* VxStripIPv6ScopeID( const char*addr, std::string &buf )
     {
         std::string addrStr = addr;
         if ( true == VxIsIPv6Address( addr ) )

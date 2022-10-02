@@ -291,7 +291,7 @@ int speex_resampler_reset_mem(SpeexResamplerState *st);
  * @param err Error code
  * @return English string
  */
-const char *speex_resampler_strerror(int err);
+const char*speex_resampler_strerror(int err);
 
 #ifdef __cplusplus
 }

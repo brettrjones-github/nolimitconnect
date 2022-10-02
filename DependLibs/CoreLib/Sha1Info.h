@@ -29,7 +29,7 @@ public:
     Sha1Info&                   operator = ( const Sha1Info& rhs );
     bool                        operator == ( const Sha1Info& rhs ) const;
 
-	bool						isValid( void );
+	bool						isValid( bool checkHashValid = true );
 
 	void						setSha1Hash( VxSha1Hash& sha1Hash )			{m_Sha1Hash = sha1Hash; }
 	VxSha1Hash&					getSha1Hash( void )							{ return m_Sha1Hash; }

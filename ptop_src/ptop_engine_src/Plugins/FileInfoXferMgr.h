@@ -25,13 +25,12 @@
 class FileInfo;
 class FileRxSession;
 class FileTxSession;
-class FileXferMgr;
-class FileInfoMgr;
+class FileInfoBaseMgr;
 class FileLibraryMgr;
 class P2PEngine;
 class PluginBase;
 class PluginMgr;
-class SharedFileInfo;
+class FileInfo;
 class VxFileXferInfo;
 class VxPktHdr;
 class VxSha1Hash;
@@ -57,7 +56,7 @@ public:
 
 	FileInfoXferMgr() = delete;
 	FileInfoXferMgr(const FileInfoXferMgr& rhs ) = delete;
-	FileInfoXferMgr( P2PEngine& engine, PluginBase& plugin, FileInfoMgr& fileInfoMgr );
+	FileInfoXferMgr( P2PEngine& engine, PluginBase& plugin, FileInfoBaseMgr& fileInfoMgr );
 	virtual ~FileInfoXferMgr();
 
 	FileInfoXferMgr& operator=( const FileInfoXferMgr& rhs ) = delete;
@@ -81,16 +80,16 @@ public:
 
 	void						fromGuiCancelDownload( VxGUID& fileInstance );
 	void						fromGuiCancelUpload( VxGUID& fileInstance );
-	bool						fromGuiMakePluginOffer( VxNetIdent *	netIdent,				// identity of friend
+	bool						fromGuiMakePluginOffer( VxNetIdent*	netIdent,				// identity of friend
 														int				pvUserData,
-														const char *	pOfferMsg,				// offer message
-														const char *	pFileName		= NULL,
+														const char*	pOfferMsg,				// offer message
+														const char*	pFileName		= NULL,
 														uint8_t *		fileHashId		= 0,
 														VxGUID			lclSessionId	= VxGUID::nullVxGUID() );		
 
-	int							fromGuiPluginControl(	VxNetIdent *	netIdent,
-														const char *	pControl, 
-														const char *	pAction,
+	int							fromGuiPluginControl(	VxNetIdent*	netIdent,
+														const char*	pControl, 
+														const char*	pAction,
 														uint32_t		u32ActionData,
 														VxGUID&			fileId,
 														uint8_t *		fileHashId );
@@ -99,7 +98,7 @@ public:
 
 	virtual bool				startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
-	virtual void				onConnectionLost( VxSktBase* sktBase );
+	virtual void				onConnectionLost			( VxSktBase* sktBase );
 
 	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
@@ -125,11 +124,11 @@ public:
 	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
 protected:
-	virtual void				onFileReceived( FileRxSession * xferSession, const char * pFileName, EXferError error );
-	virtual void				onFileSent( FileTxSession * xferSession, const char * pFileName, EXferError error );
+	virtual void				onFileReceived( FileRxSession * xferSession, const char* pFileName, EXferError error );
+	virtual void				onFileSent( FileTxSession * xferSession, const char* pFileName, EXferError error );
 
 	bool						isFileDownloading( VxSha1Hash& fileHashId );
-	bool						isFileInDownloadFolder( const char * pPartialFileName );
+	bool						isFileInDownloadFolder( const char* pPartialFileName );
 
 	virtual FileRxSession *		findRxSession( VxNetIdent* netIdent );
 	virtual FileRxSession *		findRxSession( VxGUID& lclSessionId );
@@ -157,11 +156,11 @@ protected:
 														int				iPktType,	// type of packet
 														unsigned short	u16Cmd,		// packet command
 														long			rc,			// error code
-														const char *	pMsg, ...);	// error message
+														const char*	pMsg, ...);	// error message
 
 	EXferError					beginFileGet( FileRxSession * xferSession );
 	EXferError					canTxFile( VxNetIdent* netIdent, VxGUID& assetId, VxSha1Hash& fileHashId );
-	bool						isViewFileListMatch( FileTxSession * xferSession, SharedFileInfo& fileInfo );
+	bool						isViewFileListMatch( FileTxSession * xferSession, FileInfo& fileInfo );
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );
 	void						checkQueForMoreFilesToSend( void );
@@ -172,10 +171,10 @@ protected:
 	EXferError					sendNextFileChunk( VxFileXferInfo& xxferInfo, VxNetIdent* netIdent, VxSktBase* skt );
 
 	//=== vars ====//
-	P2PEngine& m_Engine;
-	PluginBase& m_Plugin;
-	PluginMgr& m_PluginMgr;
-	FileInfoMgr& m_FileInfoMgr;
+	P2PEngine&					m_Engine;
+	PluginBase&					m_Plugin;
+	PluginMgr&					m_PluginMgr;
+	FileInfoBaseMgr&			m_FileInfoMgr;
 
 	std::map<VxGUID, FileRxSession *>	m_RxSessions;
 	std::vector<FileTxSession *>		m_TxSessions;

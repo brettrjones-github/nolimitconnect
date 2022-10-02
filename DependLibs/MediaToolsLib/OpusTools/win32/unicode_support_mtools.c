@@ -67,7 +67,7 @@ char *utf16_to_ansi(const wchar_t *input)
 	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
 }
 
-wchar_t *utf8_to_utf16(const char *input)
+wchar_t *utf8_to_utf16(const char*input)
 {
 	wchar_t *Buffer;
 	int BuffSize = 0, Result = 0;
@@ -136,7 +136,7 @@ void free_commandline_arguments_utf8(int *argc, char ***argv)
 	}
 }
 
-FILE *mt_fopen_utf8(const char *filename_utf8, const char *mode_utf8)
+FILE *mt_fopen_utf8(const char*filename_utf8, const char*mode_utf8)
 {
 	FILE *ret = NULL;
 	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
@@ -153,7 +153,7 @@ FILE *mt_fopen_utf8(const char *filename_utf8, const char *mode_utf8)
 	return ret;
 }
 
-int stat_utf8(const char *path_utf8, struct _stat *buf)
+int stat_utf8(const char*path_utf8, struct _stat *buf)
 {
 	int ret = -1;
 	
@@ -167,7 +167,7 @@ int stat_utf8(const char *path_utf8, struct _stat *buf)
 	return ret;
 }
 
-int unlink_utf8(const char *path_utf8)
+int unlink_utf8(const char*path_utf8)
 {
 	int ret = -1;
 	

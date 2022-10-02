@@ -93,7 +93,7 @@ std::string PktOfferSendReq::getOfferTag()
 }
 
 //============================================================================
-void PktOfferSendReq::setOfferNameAndTag( const char * pOfferName, const char * pOfferTag )
+void PktOfferSendReq::setOfferNameAndTag( const char* pOfferName, const char* pOfferTag )
 {
 	int nameLen = (int)strlen( pOfferName );
 	if( nameLen > 4095 )
@@ -226,7 +226,7 @@ PktOfferXferErr::PktOfferXferErr()
 }
 
 //============================================================================
-const char * PktOfferXferErr::describeError( void )
+const char* PktOfferXferErr::describeError( void )
 {
 	switch( m_u16Err )
 	{

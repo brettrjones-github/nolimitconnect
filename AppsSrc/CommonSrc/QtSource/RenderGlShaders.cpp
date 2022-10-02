@@ -499,7 +499,7 @@ void RenderGlShaders::shaderDisableVertexAttribArray( ESHADERMETHOD shader, int 
 
 //============================================================================
 // shader method to string for debugging
-const char * RenderGlShaders::describeShaderMethod( ESHADERMETHOD method )
+const char* RenderGlShaders::describeShaderMethod( ESHADERMETHOD method )
 {
     return RenderShaderQt::describeShader( method );
 }

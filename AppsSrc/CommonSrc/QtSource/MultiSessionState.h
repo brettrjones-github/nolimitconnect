@@ -63,7 +63,7 @@ class MultiSessionState : public QWidget
 public:
 	MultiSessionState( AppCommon& myApp, AppletMultiMessenger& activityToFriendMultiSession, EMSessionType sessionType );
 
-	void						setGuiWidgets(	GuiUser *		    hisIdent,
+	void						setGuiWidgets(	GuiUser*		    hisIdent,
 												QFrame* 			offersLayout,
 												QFrame* 			responseLayout,
 												QFrame* 			hangupLayout,
@@ -101,7 +101,7 @@ protected:
 	EMSessionType				m_eMSessionType;
 	EMSessionState				m_SessionState;
 
-    GuiUser *				    m_HisIdent;
+    GuiUser*				    m_HisIdent;
 
 	QFrame* 					m_OffersLayout;
 	QFrame* 					m_ResponseLayout;

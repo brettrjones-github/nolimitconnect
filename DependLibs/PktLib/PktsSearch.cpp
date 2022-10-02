@@ -38,7 +38,7 @@ void PktSearchReq::calcPktLen( void )
 void			PktSearchReq::setSearchType( EScanType eScanType )		{ m_u8SearchType = (uint8_t)eScanType; }
 EScanType		PktSearchReq::getSearchType( void )						{ return (EScanType)m_u8SearchType; }
 //============================================================================
-bool			PktSearchReq::setSearchExpression( const char * pExp )
+bool			PktSearchReq::setSearchExpression( const char* pExp )
 {
 	m_as8SearchExpression[0] = 0;
 	if( pExp )
@@ -54,7 +54,7 @@ bool			PktSearchReq::setSearchExpression( const char * pExp )
 }
 
 //============================================================================
-const char *	PktSearchReq::getSearchExpression( void )
+const char*	PktSearchReq::getSearchExpression( void )
 { 
 	return m_as8SearchExpression; 
 }

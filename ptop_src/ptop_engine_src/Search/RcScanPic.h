@@ -18,7 +18,7 @@ class RcScanPic
 {
 public:
 	//=== vars ===//
-	VxNetIdent *		m_Ident; 
+	VxNetIdent*		m_Ident; 
 	VxSktBase *			m_Skt;
 	uint8_t *				m_u8JpgData;
 	uint32_t					m_u32JpgDataLen;

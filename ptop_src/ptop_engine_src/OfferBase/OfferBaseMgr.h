@@ -33,7 +33,7 @@ class PktFileListReply;
 class OfferBaseMgr
 {
 public:
-	OfferBaseMgr( P2PEngine& engine, const char * dbName, const char * stateDbName, EOfferMgrType assetMgrType );
+	OfferBaseMgr( P2PEngine& engine, const char* dbName, const char* stateDbName, EOfferMgrType assetMgrType );
 	virtual ~OfferBaseMgr();
 
     class AutoResourceLock
@@ -70,7 +70,7 @@ public:
 
 	virtual bool				isOfferListInitialized( void )				{ return m_OfferBaseListInitialized; }
 
-	void						assetInfoMgrStartup( VxThread * startupThread );
+	void						assetInfoMgrStartup( VxThread* startupThread );
 	void						assetInfoMgrShutdown( void );
 
     bool						getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId );
@@ -89,22 +89,22 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )			{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-    OfferBaseInfo * 			addOfferFile( const char * fileName, uint64_t fileLen, uint16_t fileType );
+    OfferBaseInfo * 			addOfferFile( const char* fileName, uint64_t fileLen, uint16_t fileType );
 
-	bool						addOfferFile(	const char *	fileName, 
+	bool						addOfferFile(	const char*	fileName, 
 												VxGUID&			assetId,  
 												uint8_t *		hashId = 0, 
 												EOfferLocation	locationFlags = eOfferLocUnknown, 
-												const char *	assetTag = "", 
+												const char*	assetTag = "", 
 												int64_t		    timestamp = 0 );
 
-	bool						addOfferFile(	const char *	fileName, 
+	bool						addOfferFile(	const char*	fileName, 
 												VxGUID&			assetId,  
 												VxGUID&		    creatorId, 
 												VxGUID&		    historyId, 
 												uint8_t *		hashId = 0, 
 												EOfferLocation	locationFlags = eOfferLocUnknown, 
-												const char *	assetTag = "", 
+												const char*	assetTag = "", 
                                                 int64_t			timestamp = 0 );
 
 	bool						addOffer( OfferBaseInfo& assetInfo );
@@ -118,24 +118,24 @@ public:
 	void						updateOfferXferState( VxGUID& assetOfferId, EOfferSendState assetSendState, int param = 0 );
 
 protected:
-    virtual OfferBaseInfo *     createOfferInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) = 0;
+    virtual OfferBaseInfo *     createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType ) = 0;
     virtual OfferBaseInfo *     createOfferInfo( OfferBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
     void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }
 
-    virtual OfferBaseInfoDb&    createOfferInfoDb(  const char * dbName, EOfferMgrType assetMgrType );
+    virtual OfferBaseInfoDb&    createOfferInfoDb(  const char* dbName, EOfferMgrType assetMgrType );
 
 
-	void						updateOfferListFromDb( VxThread * thread );
-	void						generateHashIds( VxThread * thread );
+	void						updateOfferListFromDb( VxThread* thread );
+	void						generateHashIds( VxThread* thread );
 	void						clearOfferFileListPackets( void );
 	void						clearOfferInfoList( void );
-	OfferBaseInfo *				createOfferInfo(	const char *	fileName, 
+	OfferBaseInfo *				createOfferInfo(	const char*	fileName, 
 													VxGUID&			assetId,  
 													uint8_t *		hashId, 
 													EOfferLocation	locationFlags = eOfferLocUnknown, 
-													const char *	assetTag = "", 
+													const char*	assetTag = "", 
 													int64_t			timestamp = 0 );
 	bool						insertNewInfo( OfferBaseInfo * assetInfo );
 	void						updateDatabase( OfferBaseInfo * assetInfo );

@@ -104,7 +104,7 @@ protected:
     virtual void                onMenuButtonClicked( GuiUserJoinListItem* hostItem );
 
     void                        refreshList( void );
-    bool                        isListViewMatch( GuiUser * user );
+    bool                        isListViewMatch( GuiUser* user );
 
     void                        updateThumb( GuiThumb* thumb );
  

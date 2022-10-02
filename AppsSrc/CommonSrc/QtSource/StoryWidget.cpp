@@ -166,7 +166,7 @@ StoryWidget::StoryWidget(QWidget*parent, QString initialFile)
 }
 
 //============================================================================
-void StoryWidget::loadStoryBoardFile( const char * pFileName )
+void StoryWidget::loadStoryBoardFile( const char* pFileName )
 {
 	m_strFileName = pFileName;
 	if( !load( m_strFileName ) )

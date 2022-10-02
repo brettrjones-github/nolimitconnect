@@ -39,11 +39,11 @@ public:
 	void						setFileHashId( uint8_t * id )			{ m_FileHashId.setHashData( id ); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
 
-	void						setMessages( const char * pMsg1, const char * fileName = NULL );
+	void						setMessages( const char* pMsg1, const char* fileName = NULL );
 	int							getOfferMsgLen( void )					{ return ntohs( m_u16Msg1Len ); }
-	const char *				getOfferMsg( void );
+	const char*				getOfferMsg( void );
 	int							getFileNameLen( void )					{ return ntohs( m_u16FileNameLen ); }
-	const char *				getFileName( void );
+	const char*				getFileName( void );
 
 private:
 	//=== vars ===//

@@ -29,14 +29,14 @@ VxTextStreamReader::VxTextStreamReader()
 }
 
 //============================================================================
-void VxTextStreamReader::setStreamData( const char * pData )
+void VxTextStreamReader::setStreamData( const char* pData )
 {
 	m_strData = pData;
 	m_iReadIdx = 0;
 }
 
 //============================================================================
-const char * VxTextStreamReader::getStreamData( void )
+const char* VxTextStreamReader::getStreamData( void )
 {
 	return m_strData.c_str();
 }

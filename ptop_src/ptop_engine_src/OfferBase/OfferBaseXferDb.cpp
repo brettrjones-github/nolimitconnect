@@ -23,7 +23,7 @@ namespace
 }
 
 //============================================================================
-OfferBaseXferDb::OfferBaseXferDb( const char * stateDbName )
+OfferBaseXferDb::OfferBaseXferDb( const char* stateDbName )
 : DbBase( stateDbName )
 {
 }

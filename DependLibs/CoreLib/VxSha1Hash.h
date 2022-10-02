@@ -33,7 +33,7 @@ public:
 	bool						operator == ( const VxSha1Hash &a ) const;
 	bool						operator != ( const VxSha1Hash &a ) const;
 
-	bool						generateHashFromFile( const char * fileName, VxThread * workThread = 0 );
+	bool						generateHashFromFile( const char* fileName, VxThread* workThread = 0 );
 	bool						isHashValid( void )	const;
 	bool						isEqualTo(  const uint8_t * hashData ) const;
 

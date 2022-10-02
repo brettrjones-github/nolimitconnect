@@ -23,7 +23,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const char * lclIp, bool isCellularNetwork )
+NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const char* lclIp, bool isCellularNetwork )
 : NetworkEventBase( stateMachine )
 {
 	setNetworkEventType( eNetworkEventTypeAvail );

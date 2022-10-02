@@ -13,10 +13,9 @@
 //============================================================================
 
 #include "PluginBaseFiles.h"
-#include "PluginMgr.h"
-#include "SharedFileInfo.h"
 
-#include "FileLibraryMgr.h"
+#include "FileInfoBaseMgr.h"
+#include "PluginMgr.h"
 
 #include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
@@ -39,11 +38,11 @@
 #endif
 
 //============================================================================
-PluginBaseFiles::PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName )
+PluginBaseFiles::PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, FileInfoBaseMgr& fileInfoBaseMgr )
 : PluginBase( engine, pluginMgr, myIdent, pluginType ) 
 , m_FileShredder( GetVxFileShredder() )
 , m_PluginSessionMgr( engine, *this, pluginMgr)
-, m_FileInfoMgr( engine, *this, fileInfoDbName )
+, m_FileInfoMgr( fileInfoBaseMgr )
 , m_FileInfoXferMgr( m_FileInfoMgr.getFileInfoXferMgr() )
 {
 	setPluginType( pluginType );
@@ -100,7 +99,7 @@ void PluginBaseFiles::fromGuiCancelUpload( VxGUID& fileInstance )
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiBrowseFiles( const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
+bool PluginBaseFiles::fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask )
 {
 	if( 0 == fileFilterMask )
 	{
@@ -125,11 +124,13 @@ bool PluginBaseFiles::fromGuiBrowseFiles( const char * dir, bool lookupShareStat
 			if ( 0 != ( fileFilterMask & fileInfo.getFileType() ) )
 			{
 				LogMsg( LOG_INFO, "PluginBaseFiles::fromGuiBrowseFiles sending file %s", fileInfo.getFileName().c_str() );
+				bool isShared = m_Engine.fromGuiGetIsFileShared( fileInfo.getFileName().c_str() );
+				bool isInLibrary = m_Engine.fromGuiGetIsFileInLibrary( fileInfo.getFileName().c_str() );
 				IToGui::getToGui().toGuiFileList(	fileInfo.getFileName().c_str(), 
 					fileInfo.getFileLength(), 
 					fileInfo.getFileType(), 
-					isFileShared( fileInfo.getFileName() ),
-					isFileInLibrary( fileInfo.getFileName() ),
+					isShared,
+					isInLibrary,
 					VxGUID::nullVxGUID(),
 					0 );
 			}
@@ -158,19 +159,17 @@ bool PluginBaseFiles::fromGuiBrowseFiles( const char * dir, bool lookupShareStat
 //============================================================================
 bool PluginBaseFiles::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 {
-	//m_FileInfoMgr.fromGuiGetSharedFiles( fileTypeFilter );
-	return isPluginEnabled();
+	return m_FileInfoMgr.fromGuiGetSharedFiles( fileTypeFilter );
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId )
+bool PluginBaseFiles::fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId )
 {
-	//return m_FileInfoMgr.fromGuiSetFileIsShared( fileName, isShared, fileHashId );
-	return false;
+	return m_FileInfoMgr.fromGuiSetFileIsShared( fileName, isShared, fileHashId );
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiGetIsFileShared( const char * fileName )
+bool PluginBaseFiles::fromGuiGetIsFileShared( const char* fileName )
 {
 	std::string strFileName = fileName;
 	return isFileShared( strFileName );
@@ -191,38 +190,9 @@ int PluginBaseFiles::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiAddFileToLibrary( const char * fileNameIn, bool addFile, uint8_t * fileHashId )
-{
-	std::string fileName = fileNameIn;
-	VxGUID assetId;
-	assetId.initializeWithNewVxGUID();
-	return m_FileInfoMgr.addFileToLibrary( m_Engine.getMyOnlineId(), fileName, assetId );
-}
-
-//============================================================================
-void PluginBaseFiles::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
-{
-	//m_FileInfoMgr.fromGuiGetFileLibraryList(	fileTypeFilter );
-	//m_FileInfoMgr.fromGuiGetSharedFiles( fileTypeFilter );
-}
-
-//============================================================================
-bool PluginBaseFiles::fromGuiGetIsFileInLibrary( const char * fileName )
-{
-	std::string strFileName = fileName;
-	return isFileInLibrary( strFileName );
-}
-
-//============================================================================
 bool PluginBaseFiles::isFileShared( std::string& fileName )
 {
 	return m_FileInfoMgr.isFileShared( fileName );
-}
-
-//============================================================================
-bool PluginBaseFiles::isFileInLibrary( std::string& fileName )
-{
-	return m_FileInfoMgr.isFileInLibrary( fileName );
 }
 
 //============================================================================
@@ -232,12 +202,12 @@ bool PluginBaseFiles::isServingFiles( void )
 }
 
 //============================================================================
-void PluginBaseFiles::deleteFile( const char * fileName, bool shredFile )
+void PluginBaseFiles::deleteFile( const char* fileName, bool shredFile )
 {
 	std::string strFileName = fileName;
 	m_FileInfoXferMgr.fileAboutToBeDeleted( strFileName );
 	m_FileInfoMgr.fromGuiSetFileIsShared( strFileName, false );
-	m_FileInfoMgr.removeFromLibrary( strFileName );
+	m_FileInfoMgr.removeFromDbAndList( strFileName );
 	if( shredFile )
 	{
 		m_FileShredder.shredFile( strFileName );
@@ -260,10 +230,10 @@ void PluginBaseFiles::onSharedFilesUpdated( uint16_t u16FileTypes )
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginBaseFiles::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		
+bool PluginBaseFiles::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
 												int				pvUserData,
-												const char *	pOfferMsg,		
-												const char *	pFileName,
+												const char*	pOfferMsg,		
+												const char*	pFileName,
 												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )		
 {
@@ -276,9 +246,9 @@ bool PluginBaseFiles::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-int PluginBaseFiles::fromGuiPluginControl(	VxNetIdent *	netIdent,
-											const char *	pControl, 
-											const char *	pAction,
+int PluginBaseFiles::fromGuiPluginControl(	VxNetIdent*	netIdent,
+											const char*	pControl, 
+											const char*	pAction,
 											uint32_t		u32ActionData,
 											VxGUID&			lclSessionId,
 											uint8_t *		fileHashId )
