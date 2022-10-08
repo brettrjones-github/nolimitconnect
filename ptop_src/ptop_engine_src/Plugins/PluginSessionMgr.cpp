@@ -465,7 +465,7 @@ void PluginSessionMgr::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 	if( netIdent )
 	{
 		LogMsg( LOG_ERROR, "PluginSessionMgr::doPktPluginOfferReq: offer from %s %s\n", netIdent->getOnlineName(), sktBase->describeSktType().c_str() );
-		PktPluginOfferReq * poPkt = (PktPluginOfferReq *)pktHdr;
+		PktPluginOfferReq* poPkt = (PktPluginOfferReq *)pktHdr;
 		
 		VxGUID lclSessionId = netIdent->getMyOnlineId();
 		PluginSessionBase * poOffer = 0;

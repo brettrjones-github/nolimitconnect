@@ -43,11 +43,11 @@ ImageListWidget::ImageListWidget( QWidget* parent )
 , m_Engine( m_MyApp.getEngine() )
 , m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )
 {
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem*)),
+                          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+                          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 }
 
 //============================================================================
@@ -171,7 +171,7 @@ ImageListRow * ImageListWidget::getRowWithRoomForThumbnail( void )
     }
 
     listRow = new ImageListRow( this );
-    QListWidgetItem * lineItem = dynamic_cast< QListWidgetItem * >( listRow );
+    QListWidgetItem* lineItem = dynamic_cast< QListWidgetItem* >( listRow );
     if( lineItem )
     {
         QWidget* lineWidget = dynamic_cast< QWidget* >( listRow );
@@ -190,7 +190,7 @@ ImageListRow * ImageListWidget::getRowWithRoomForThumbnail( void )
 }
 
 //============================================================================
-void ImageListWidget::slotItemClicked(QListWidgetItem * item )
+void ImageListWidget::slotItemClicked(QListWidgetItem* item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{

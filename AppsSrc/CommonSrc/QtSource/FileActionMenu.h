@@ -16,7 +16,7 @@
 
 #include "ActivityBase.h"
 #include "ui_FileActionMenu.h"
-#include "VxMyFileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 class VxNetIdent;
 class AppCommon;
@@ -70,7 +70,7 @@ class FileActionMenu : public ActivityBase
 public:
 	FileActionMenu( AppCommon&	app, 
 					QWidget*		parent, 
-					VxMyFileInfo&	fileInfo, 
+					FileInfo&	fileInfo, 
 					bool			isShared, 
 					bool			isInLibrary, 
 					VxNetIdent*	selectedFriend = 0 );
@@ -81,7 +81,7 @@ public:
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
-	void						itemClicked(QListWidgetItem *item);
+	void						itemClicked(QListWidgetItem*item);
 
 protected:
 	void						setupFileInfo( void );
@@ -90,10 +90,10 @@ protected:
 
 	//=== vars ===//
 	Ui::FileActionMenuClass		ui;
-	VxMyFileInfo				m_FileInfo;
+	FileInfo					m_FileInfo;
 	bool						m_IsShared;
 	bool						m_IsInLibrary;
-	VxNetIdent*				m_SelectedFriend;
+	VxNetIdent*					m_SelectedFriend;
 	int							m_iMenuItemHeight;
 	std::vector<FileMenuItemAction>	m_MenuList;
 };

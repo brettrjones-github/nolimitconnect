@@ -24,21 +24,14 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-void AppCommon::toGuiFileListReply(	VxNetIdent*	netIdent, 
-									EPluginType		ePluginType, 
-									uint8_t			u8FileType, 
-									uint64_t		u64FileLen, 
-									const char*	pFileName,
-									VxGUID			assetId,
-									uint8_t *		fileHashData )
+void AppCommon::toGuiFileListReply( VxGUID& onlineId, EPluginType pluginType, FileInfo& fileInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	FileListReplySession * replySession = new FileListReplySession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), 
-																	u8FileType, u64FileLen, pFileName, assetId, fileHashData );
+	FileListReplySession* replySession = new FileListReplySession( pluginType, m_UserMgr.getUser( onlineId ), fileInfo );
 
 	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
@@ -52,28 +45,21 @@ void AppCommon::toGuiFileListReply(	VxNetIdent*	netIdent,
 }
 
 //============================================================================
-void AppCommon::toGuiStartUpload( VxNetIdent*	netIdent,
-								EPluginType		ePluginType,
-								VxGUID&			lclSessionId,
-								uint8_t			fileType,
-								uint64_t		fileLen,
-								std::string&	fileName,
-								VxGUID&			assetId,
-								VxSha1Hash&		fileHashId )
+void AppCommon::toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	emit signalInternalToGuiStartUpload( netIdent->getMyOnlineId(), ePluginType, lclSessionId, fileType, fileLen, fileName.c_str(), assetId, fileHashId );
+	emit signalInternalToGuiStartUpload( onlineId, pluginType, lclSessionId, fileInfo );
 }
 
 //============================================================================
-void AppCommon::slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId )
+void AppCommon::slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType pluginType, VxGUID lclSessionId, FileInfo fileInfo )
 {
-	GuiFileXferSession* fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ), lclSessionId,
-																	fileType, fileLen, fileName.toUtf8().constData(), assetId, fileHashId );
+	GuiFileXferSession* fileXferSession = new GuiFileXferSession( pluginType, m_UserMgr.getUser( onlineId ), lclSessionId, fileInfo );
+
 	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
@@ -86,28 +72,20 @@ void AppCommon::slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePlug
 }
 
 //============================================================================
-void AppCommon::toGuiStartDownload( VxNetIdent*		netIdent,
-									EPluginType		ePluginType,
-									VxGUID&			lclSessionId,
-									uint8_t			fileType,
-									uint64_t		fileLen,
-									std::string&	fileName,
-									VxGUID&			assetId,
-									VxSha1Hash&		fileHashId )
+void AppCommon::toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	emit signalInternalToGuiStartDownload( netIdent->getMyOnlineId(), ePluginType, lclSessionId, fileType, fileLen, fileName.c_str(), assetId, fileHashId );
+	emit signalInternalToGuiStartDownload( onlineId, pluginType, lclSessionId, fileInfo );
 }
 
 //============================================================================
-void AppCommon::slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId )
+void AppCommon::slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType pluginType, VxGUID lclSessionId, FileInfo fileInfo )
 {
-	GuiFileXferSession* fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( onlineId ),
-		lclSessionId, fileType, fileLen, fileName.toUtf8().constData(), assetId, fileHashId );
+	GuiFileXferSession* fileXferSession = new GuiFileXferSession( pluginType, m_UserMgr.getUser( onlineId ), lclSessionId, fileInfo );
 	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
@@ -193,28 +171,48 @@ void AppCommon::slotInternalToGuiFileUploadComplete( EPluginType pluginType, VxG
 }
 
 //============================================================================
-void AppCommon::toGuiFileList(	const char*	fileName, 
-								uint64_t		fileLen, 
-								uint8_t			fileType, 
-								bool			isShared,
-								bool			isInLibrary,
-								VxGUID          assetId,
-								uint8_t *		fileHashId )
+void AppCommon::toGuiFileList( FileInfo& fileInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	VxMyFileInfo fileInfo( fileName, fileType, fileLen, assetId, fileHashId );
-	fileInfo.setIsInLibrary( isInLibrary );
-	fileInfo.setIsShared( isShared );
+	emit signalInternalToGuiFileList( fileInfo );
+}
 
+//============================================================================
+void AppCommon::slotInternalToGuiFileList( FileInfo fileInfo )
+{
 	m_ToGuiFileXferInterfaceBusy = true;
 	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
 	{
 		ToGuiFileXferInterface* client = *iter;
-		client->toGuiFileList( fileInfo );
+		client->callbackToGuiFileList( fileInfo );
+	}
+
+	m_ToGuiFileXferInterfaceBusy = false;
+}
+
+//============================================================================
+void AppCommon::toGuiFileListCompleted( void )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	emit signalInternalToGuiFileListCompleted();
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiFileListCompleted( void )
+{
+	m_ToGuiFileXferInterfaceBusy = true;
+	for( auto iter = m_ToGuiFileXferInterfaceList.begin(); iter != m_ToGuiFileXferInterfaceList.end(); ++iter )
+	{
+		ToGuiFileXferInterface* client = *iter;
+		client->callbackToGuiFileListCompleted();
 	}
 
 	m_ToGuiFileXferInterfaceBusy = false;

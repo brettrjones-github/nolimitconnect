@@ -45,8 +45,8 @@ ShareOfferListWidget::ShareOfferListWidget( QWidget* parent )
     */
 
 
-    //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    //connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
+    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 
     setOfferViewType( eOfferViewTypeEverybody );
 }
@@ -58,7 +58,7 @@ ShareOfferListItem* ShareOfferListWidget::sessionToWidget( GuiOfferSession* user
     userItem->setOfferSession( userSession );
     userItem->setSizeHint( userItem->calculateSizeHint() );
 
-    connect( userItem, SIGNAL(signalShareOfferListItemClicked(QListWidgetItem *)),	    this, SLOT(slotShareOfferListItemClicked(QListWidgetItem *)) );
+    connect( userItem, SIGNAL(signalShareOfferListItemClicked(QListWidgetItem*)),	    this, SLOT(slotShareOfferListItemClicked(QListWidgetItem*)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(ShareOfferListItem *)),	        this, SLOT(slotAvatarButtonClicked(ShareOfferListItem *)) );
     connect( userItem, SIGNAL(signalMenuButtonClicked(ShareOfferListItem *)),	            this, SLOT(slotMenuButtonClicked(ShareOfferListItem *)) );
     connect( userItem, SIGNAL(signalFriendshipButtonClicked(ShareOfferListItem *)),		this, SLOT(slotFriendshipButtonClicked(ShareOfferListItem *)) );
@@ -221,10 +221,10 @@ ShareOfferListItem* ShareOfferListWidget::addOrUpdateOfferSession( GuiOfferSessi
         else
         {
             LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
-            insertItem( 0, (QListWidgetItem *)userItem );
+            insertItem( 0, (QListWidgetItem*)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+        setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
     }
 
     return userItem;
@@ -441,10 +441,10 @@ void ShareOfferListWidget::updateOffer( GuiOfferSession * userSession )
                 else
                 {
                     LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
-                    insertItem( 0, (QListWidgetItem *)userItem );
+                    insertItem( 0, (QListWidgetItem*)userItem );
                 }
 
-                setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+                setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
                 m_OfferCache[userSession->getMyOnlineId()] = userSession;
             //}
         }

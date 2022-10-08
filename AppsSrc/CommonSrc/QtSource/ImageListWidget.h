@@ -48,7 +48,7 @@ signals:
 	void						signalImageClicked( ThumbnailViewWidget * thumb );
 
 private slots:
-	void						slotItemClicked( QListWidgetItem * );
+	void						slotItemClicked( QListWidgetItem* );
     void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:

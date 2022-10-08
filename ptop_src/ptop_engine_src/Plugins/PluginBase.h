@@ -28,8 +28,11 @@
 
 class AssetMgr;
 class AssetBaseInfo;
+class FileInfo;
 class FileShareSettings;
+class GroupieInfo;
 class GroupieId;
+class HostedInfo;
 class IToGui;
 class NetServiceHdr;
 class P2PEngine;
@@ -44,8 +47,6 @@ class SearchParams;
 class ThumbMgr;
 class TxSession;
 class VxSktBase;
-class HostedInfo;
-class GroupieInfo;
 
 class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface, public BaseXferInterface
 {
@@ -125,7 +126,7 @@ public:
 
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
-	virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile )	{ return 0; }
+	virtual int					fromGuiDeleteFile( std::string& fileName, bool shredFile )	{ return 0; }
 
 	virtual void				fromGuiCancelDownload( VxGUID& fileInstance ) {};
 	virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) {};
@@ -201,23 +202,9 @@ public:
 														uint8_t*		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) {};
-	virtual void				toGuiStartUpload( VxNetIdent*		netIdent,
-													EPluginType		ePluginType,
-													VxGUID&			lclSessionId,
-													uint8_t			u8FileType,
-													uint64_t		u64FileLen,
-													const char*		pFileName,
-													VxGUID			assetId,
-													uint8_t*		fileHashData ) {};
 
-	virtual void				toGuiStartDownload( VxNetIdent*		netIdent,
-													EPluginType		ePluginType,
-													VxGUID&			lclSessionId,
-													uint8_t			u8FileType,
-													uint64_t		u64FileLen,
-													const char*		pFileName,
-													VxGUID			assetId,
-													uint8_t*		fileHashData ) {};
+	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
+	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
 
 	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) {};
 	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) {};

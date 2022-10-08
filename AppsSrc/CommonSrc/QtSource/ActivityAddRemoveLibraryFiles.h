@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "ActivityBase.h"
+#include "ToGuiFileXferInterface.h"
 #include "ui_ActivityAddRemoveLibraryFiles.h"
 
 #include <CoreLib/VxDefs.h>
@@ -28,7 +29,7 @@ class FromEngineInterface;
 class P2PEngine;
 class QTimer;
 
-class ActivityAddRemoveLibraryFiles : public ActivityBase
+class ActivityAddRemoveLibraryFiles : public ActivityBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
@@ -42,34 +43,34 @@ public:
 
 	void						setTitle( QString strTitle );
 
-	FileShareItemWidget *		fileToWidget( uint8_t u8FileType, const char* pFileName, uint64_t u64FileLen, VxGUID assetId, bool isShared );
-	void						updateListEntryWidget( FileShareItemWidget * item );
+	FileShareItemWidget*		fileToWidget( FileInfo& fileInfo );
+	void						updateListEntryWidget( FileShareItemWidget* item );
 
 protected slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
-	void						slotFileList( const char* fileName, uint8_t fileType, int64_t dataLen, VxGUID assetId, int done, bool isShared );
 	void						slotBrowseButtonClicked( void );
 
-	void						slotListItemClicked( QListWidgetItem * item );
-	void						slotListFileIconClicked( QListWidgetItem * item );
-	void						slotListLockIconClicked( QListWidgetItem * item );
+	void						slotListItemClicked( QListWidgetItem* item );
+	void						slotListFileIconClicked( QListWidgetItem* item );
+	void						slotListLockIconClicked( QListWidgetItem* item );
 	void						slotRequestFileList( void );
 	
 protected:
+	virtual void				callbackToGuiFileList( FileInfo& fileInfo ) override;
+	virtual void				callbackToGuiFileListCompleted( void ) override;
+
 	void						fromListWidgetRequestFileList( void );
 	void						setCurrentBrowseDir( QString browseDir );
 	void						setActionEnable( bool enable );
-	void						addFile(	uint8_t			u8FileType, 
-											uint64_t		u64FileLen, 
-											const char*	pFileName,
-											VxGUID			assetId,
-											bool			isShared );
+	void						addFile( FileInfo& fileInfo );
 
-	void						updateListEntryWidget( FileShareItemWidget * item, FileItemInfo* poSession );
+	void						updateListEntryWidget( FileShareItemWidget* item, FileItemInfo* poSession );
 	void						clearFileList( void );
 
-private:
+
+
+	//=== vars ===//
 	Ui::ShareFilesDialog		ui;
 
 	std::string					m_strCurBrowseDirectory;

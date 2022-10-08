@@ -41,6 +41,7 @@ public:
 	void						unlockCompletedFileList( void ) { m_CompletedFilesListMutex.unlock(); }
 
 protected:
+	virtual bool				onConnectForFileListDownload( VxSktBase* sktBase, VxNetIdent* netIdent ) override;
 	virtual bool                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) override;
 	virtual void                fileInfoSearchCompleted( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr ) override;
 

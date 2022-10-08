@@ -26,64 +26,24 @@
 #include <QObject>
 
 //============================================================================
-GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType, 
-                                            GuiUser*	    netIdent, 
-											VxGUID&		    lclSessionId, 
-											uint8_t			u8FileType, 
-											uint64_t		u64FileLen, 
-											const char*	pFileName,
-											VxGUID			assetId,
-											VxSha1Hash&		fileHashId )
-: m_ePluginType( ePluginType )
-, m_Ident( netIdent )
-, m_LclSessionId( lclSessionId )
-, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
-, m_Widget(0)
-, m_eXferState( eXferStateUnknown )
-, m_XferStateParam1( 0 )
-, m_XferStateParam2( 0 )
-, m_XferErrorCode( 0 )
-, m_XferDirection( eXferDirectionRx )
+GuiFileXferSession::GuiFileXferSession( EPluginType		pluginType,
+										GuiUser* guiUser,
+										FileInfo& fileInfo )
+	: m_ePluginType( pluginType )
+	, m_Ident( guiUser )
+	, m_FileInfo( fileInfo )
 {
 }
 
 //============================================================================
-GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType, 
-                                            GuiUser*	    netIdent, 
-											VxGUID&		    lclSessionId, 
-											uint8_t			u8FileType, 
-											uint64_t		u64FileLen, 
-											const char*	pFileName,
-											VxGUID			assetId,
-											uint8_t *		fileHashId )
-: m_ePluginType( ePluginType )
-, m_Ident( netIdent )
-, m_LclSessionId( lclSessionId )
-, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
-, m_Widget(0)
-, m_eXferState( eXferStateUnknown )
-, m_XferStateParam1( 0 )
-, m_XferStateParam2( 0 )
-, m_XferErrorCode( 0 )
-, m_XferDirection( eXferDirectionRx )
-{
-}
-
-//============================================================================
-GuiFileXferSession::GuiFileXferSession(		EPluginType			ePluginType, 
-                                            GuiUser*		    netIdent, 
-											VxGUID&			    lclSessionId, 
-											VxMyFileInfo&		fileInfo )
-: m_ePluginType( ePluginType )
-, m_Ident( netIdent )
+GuiFileXferSession::GuiFileXferSession(		EPluginType		pluginType, 
+                                            GuiUser*		guiUser,
+											VxGUID&			lclSessionId, 
+											FileInfo&		fileInfo )
+: m_ePluginType( pluginType )
+, m_Ident( guiUser )
 , m_LclSessionId( lclSessionId )
 , m_FileInfo( fileInfo )
-, m_Widget(0)
-, m_eXferState( eXferStateUnknown )
-, m_XferStateParam1( 0 )
-, m_XferStateParam2( 0 )
-, m_XferErrorCode( 0 )
-, m_XferDirection( eXferDirectionRx )
 {
 }
 

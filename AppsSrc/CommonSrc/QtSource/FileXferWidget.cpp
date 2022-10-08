@@ -19,7 +19,7 @@
 #include "MyIcons.h"
 
 #include "GuiFileXferSession.h"
-#include "VxMyFileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
@@ -121,19 +121,19 @@ bool FileXferWidget::getIsShared( void )
 	GuiFileXferSession* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
-		isShared = poInfo->getIsShared();
+		isShared = poInfo->getIsSharedFile();
 	}
 
 	return isShared;
 }
 
 //============================================================================
-void FileXferWidget::setIsShared( bool isShared )
+void FileXferWidget::setIsSharedFile( bool isShared )
 {
 	GuiFileXferSession* sessionInfo = getFileItemInfo();
 	if( sessionInfo )
 	{
-		sessionInfo->setIsShared( isShared );
+		sessionInfo->setIsSharedFile( isShared );
 	}
 
 	updateWidgetFromInfo();
@@ -316,6 +316,6 @@ void FileXferWidget::updateWidgetFromInfo( void )
 		}
 	}
 
-	ui.m_FileActionBar->setIsShared(  poSession->getIsShared() );
+	ui.m_FileActionBar->setIsSharedFile(  poSession->getIsSharedFile() );
 	ui.m_FileActionBar->setIsInLibrary(  poSession->getIsInLibrary() );
 }

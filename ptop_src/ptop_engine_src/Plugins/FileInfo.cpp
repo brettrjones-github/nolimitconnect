@@ -13,14 +13,19 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "FileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
+#include <ptop_src/ptop_engine_src/AssetBase/AssetBaseInfo.h>
+#include <ptop_src/ptop_engine_src/OfferBase/OfferBaseInfo.h>
 
 #include <PktLib/VxSearchDefs.h>
 #include <PktLib/PktBlobEntry.h>
 
+#include <NetLib/VxFileXferInfo.h>
+
 #include <CoreLib/VxFileLists.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
 
 #include <sys/types.h>
@@ -29,7 +34,7 @@
 //============================================================================
 FileInfo::FileInfo()
 { 
-	generateAssetId();
+	assureValidAssetId();
 }
 
 //============================================================================
@@ -38,7 +43,7 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName )
 	, m_FullFileName( fileName )
 { 
 	determineShortName();
-	generateAssetId();
+	assureValidAssetId();
 }
 
 //============================================================================
@@ -49,10 +54,9 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName, uint64_t file
 	, m_u32Attributes(0) 
 	, m_u8FileType(fileType)
 	, m_ContainedInDir("")
-	, m_IsDirty( true )
 { 
 	determineShortName();
-	generateAssetId();
+	assureValidAssetId();
 }
 
 
@@ -62,10 +66,10 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fileName, uint64_t file
 	, m_FullFileName( fileName )
 	, m_s64FileLen( fileLen )
 	, m_u8FileType( fileType )
-	, m_IsDirty( true )
 	, m_AssetId( assetId )
 {
 	determineShortName();
+	assureValidAssetId(); // in case assetId is invalid
 }
 
 //============================================================================
@@ -75,10 +79,57 @@ FileInfo::FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t 
 	, m_s64FileLen( fileLen )
 	, m_u8FileType( fileType )
 	, m_FileHash( sha1Hash )
-    , m_IsDirty( true )
     , m_AssetId( assetId )
 {
 	determineShortName();
+	assureValidAssetId(); // in case assetId is invalid
+}
+
+//============================================================================
+FileInfo::FileInfo( AssetBaseInfo& assetInfo )
+: m_OnlineId( assetInfo.getCreatorId() )
+, m_FullFileName( assetInfo.getAssetName() )
+, m_s64FileLen( assetInfo.getAssetLength() )
+, m_u8FileType( (uint8_t)assetInfo.getAssetType() )
+, m_AssetId( assetInfo.getAssetUniqueId() )
+, m_FileTime( assetInfo.getCreationTime() )
+{
+	determineShortName();
+	assureValidAssetId();
+}
+
+//============================================================================
+FileInfo::FileInfo( AssetBaseInfo& assetInfo, VxSha1Hash& sha1Hash )
+	: FileInfo( assetInfo )
+{
+	m_FileHash = sha1Hash;
+	assureValidAssetId();
+}
+
+//============================================================================
+FileInfo::FileInfo( OfferBaseInfo& offerInfo )
+	: m_OnlineId( offerInfo.getHistoryId() )
+	, m_FullFileName( offerInfo.getOfferName() )
+	, m_s64FileLen( offerInfo.getOfferLength() )
+	, m_u8FileType( (uint8_t)offerInfo.getOfferType() )
+	, m_AssetId( offerInfo.getOfferId() )
+	, m_ThumbId( offerInfo.getThumbId() )
+	, m_FileHash( offerInfo.getOfferHashId() )
+	, m_FileTime( offerInfo.getCreationTime() )
+{
+	assureValidAssetId();
+}
+
+//============================================================================
+FileInfo::FileInfo( VxFileXferInfo& xferInfo, VxGUID& onlineId )
+	: m_OnlineId( onlineId )
+	, m_FullFileName( xferInfo.getLclFileName() )
+	, m_s64FileLen( xferInfo.getFileLength() )
+	, m_u8FileType( VxFileUtil::fileExtensionToFileTypeFlag( xferInfo.getRmtFileName().c_str() ) )
+	, m_AssetId( xferInfo.getAssetId() )
+	, m_FileHash( xferInfo.getFileHashId() )
+{
+	assureValidAssetId();
 }
 
 //============================================================================
@@ -92,11 +143,12 @@ FileInfo& FileInfo::operator=( const FileInfo& rhs )
 	m_u8FileType			= rhs.m_u8FileType;
 	m_FileHash				= rhs.m_FileHash;
 	m_ContainedInDir		= rhs.m_ContainedInDir;
-	m_IsDirty				= rhs.m_IsDirty;
 	m_AssetId				= rhs.m_AssetId;
 	m_ThumbId				= rhs.m_ThumbId;
 	m_FileTime				= rhs.m_FileTime;
 	m_XferSessionId			= rhs.m_XferSessionId;
+	m_IsInLibrary			= rhs.m_IsInLibrary;
+	m_IsSharedFile			= rhs.m_IsSharedFile;
 	return *this;
 }
 
@@ -120,6 +172,16 @@ bool FileInfo::isValid( bool includeHashValid )
 }
 
 //============================================================================
+void FileInfo::setFullFileName( std::string fileName )
+{
+	if( !fileName.empty() )
+	{
+		m_FullFileName = fileName;
+		determineShortName();
+	}
+}
+
+//============================================================================
 bool FileInfo::determineShortName( std::string containingDir )
 {
 	bool result{ false };
@@ -134,7 +196,7 @@ bool FileInfo::determineShortName( std::string containingDir )
 	}
 	else
 	{
-		std::string 	filePath;
+		std::string filePath;
 		RCODE rc = VxFileUtil::seperatePathAndFile( getFullFileName(),
 			filePath,
 			shortFileName );
@@ -171,7 +233,40 @@ bool FileInfo::determineFullFileName( std::string containingDir )
 		result = true;
 	}
 
-	return result && isValid();
+	return result && isValid( false );
+}
+
+//============================================================================
+bool FileInfo::determineFilePath( void )
+{
+	if( m_ContainedInDir.empty() )
+	{
+		if( isDirectory() )
+		{
+			if( !m_FullFileName.empty() )
+			{
+				m_ContainedInDir = m_FullFileName;
+			}
+		}
+		else if( !m_FullFileName.empty() )
+		{
+			std::string fileName;
+			RCODE rc = VxFileUtil::seperatePathAndFile( getFullFileName(), m_ContainedInDir, fileName );
+			if( 0 != rc || m_ContainedInDir.empty() )
+			{
+				LogMsg( LOG_ERROR, "FileInfo::determineFilePath Failed to get path from %s", getFullFileName().c_str() );
+			}
+		}
+	}
+
+	return !m_ContainedInDir.empty() && isValid( false );
+}
+
+//============================================================================
+std::string& FileInfo::getFilePath( void )
+{
+	determineFilePath();
+	return m_ContainedInDir;
 }
 
 //============================================================================
@@ -190,13 +285,43 @@ void FileInfo::generateAssetId( void )
 }
 
 //============================================================================
-bool FileInfo::matchText( std::string& searchStr )
+void FileInfo::assureValidAssetId( void )
+{
+	generateAssetId();
+}
+
+//============================================================================
+bool FileInfo::matchTextAndType( std::string& searchStr, uint8_t fileType )
 {
 	bool result{ false };
-
-
+	if( searchStr.empty() && !fileType )
+	{
+		// all
+		result = true;
+	}
+	else if( searchStr.empty() && fileType )
+	{
+		// by file type only
+		result = getFileType() & fileType;
+	}
+	else if( !searchStr.empty() && !fileType )
+	{
+		// by search string only
+		result = matchText( searchStr );
+	}
+	else
+	{
+		// by search string and file type
+		result = (getFileType() & fileType) && matchText( searchStr );
+	}
 
 	return result;
+}
+
+//============================================================================
+bool FileInfo::matchText( std::string& searchStr )
+{
+	return CaseInsensitiveFindSubstr( m_ShortFileName, searchStr ) >= 0;
 }
 
 //============================================================================
@@ -207,7 +332,7 @@ int FileInfo::calcBlobLen( void )
 	blobLen += m_ShortFileName.length() + sizeof(uint32_t); // m_ShortFileName
 	blobLen += sizeof( uint8_t ); // m_u8FileType
 	blobLen += sizeof( int64_t ); // m_FileTime
-	blobLen += sizeof( uint64_t ) * 2; // m_AssetId
+	blobLen += sizeof( uint64_t ) * 4; // m_AssetId + m_ThumbId
 	blobLen += sizeof( uint32_t ) + sizeof( VxSha1Hash ); // m_FileHash
 	return blobLen;
 }
@@ -220,6 +345,7 @@ bool FileInfo::addToBlob( PktBlobEntry& blob )
 	result &= blob.setValue( m_u8FileType );
 	result &= blob.setValue( m_FileTime );
 	result &= blob.setValue( m_AssetId );
+	result &= blob.setValue( m_ThumbId );
 	result &= blob.setValue( m_FileHash );
 	return result;
 }
@@ -232,6 +358,7 @@ bool FileInfo::extractFromBlob( PktBlobEntry& blob )
 	result &= blob.getValue( m_u8FileType );
 	result &= blob.getValue( m_FileTime );
 	result &= blob.getValue( m_AssetId );
+	result &= blob.getValue( m_ThumbId );
 	result &= blob.getValue( m_FileHash );
 	return result;
 }

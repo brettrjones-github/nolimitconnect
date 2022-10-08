@@ -69,10 +69,13 @@ public:
 														VxGUID&			lclSessionId,
                                                         uint8_t *		fileHashId ) override;
 
-	virtual bool				fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask ); 
+	virtual bool				fromGuiBrowseFiles( std::string& dir, uint8_t fileFilterMask );
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
-	virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId = 0 );
-	virtual bool				fromGuiGetIsFileShared( const char* fileName );
+	virtual bool				fromGuiSetFileIsShared( FileInfo& fileInfo, bool isShared );
+	virtual bool				fromGuiSetFileIsShared( std::string& fileName, bool isShared );
+	virtual bool				fromGuiGetIsFileShared( std::string& fileName );
+	virtual bool				fromGuiRemoveSharedFile( std::string& fileName );
+
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
 
@@ -85,6 +88,8 @@ public:
 	virtual void				deleteFile( const char* fileName, bool shredFile );
 
 protected:
+	virtual void				sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo );
+
 	void						onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
 	virtual void				onPktFileGetReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
@@ -116,8 +121,8 @@ protected:
 	virtual bool				updateFromFileInfoSearchBlob( VxGUID& searchSessionId, VxGUID& hostOnlineId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int fileInfoCount );
 	virtual bool				requestMoreFileInfoFromServer( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextSearchAssetId, std::string& searchText );
 
-	virtual ECommErr			searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
-	virtual ECommErr			searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	virtual ECommErr			searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, uint8_t searchFileTypes, VxSktBase* sktBase, VxNetIdent* netIdent );
+	virtual ECommErr			searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, uint8_t searchFileTypes, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	// should be overwitten by Plugin specific class
 	virtual bool                fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo ) { return false; };

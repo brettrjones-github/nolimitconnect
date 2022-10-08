@@ -42,8 +42,8 @@ AppletShareOfferList::AppletShareOfferList( AppCommon& app,  QWidget* parent )
 
     //connectBarWidgets();
     /*
-    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		                this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
-    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	            this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem*)),		                this, SLOT(slotFileXferItemClicked(QListWidgetItem*)));
+    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),	            this, SLOT(slotFileXferItemClicked(QListWidgetItem*)));
 
 	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession*)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession*)) );
 	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID,EXferState,int,int)),			this, SLOT(slotToGuiFileXferState(VxGUID,EXferState,int,int)) );
@@ -88,7 +88,7 @@ void AppletShareOfferList::onBackButtonClicked( void )
 }
 
 ////============================================================================
-//void AppletShareOfferList::slotItemClicked(QListWidgetItem * item)
+//void AppletShareOfferList::slotItemClicked(QListWidgetItem* item)
 //{
 //	GuiFileXferSession* poSession = (GuiFileXferSession*)item->data( Qt::UserRole + 1).toULongLong();
 //	if( poSession )
@@ -111,13 +111,13 @@ FileXferWidget* AppletShareOfferList::sessionToWidget( GuiFileXferSession* poSes
 
     item->setFileItemInfo( poSession );
 
-	connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem *)),	this, SLOT(slotCancelButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalPlayButtonClicked(QListWidgetItem *)),		this, SLOT(slotPlayButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalLibraryButtonClicked(QListWidgetItem *)),	this, SLOT(slotLibraryButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalFileShareButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileShareButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalShredButtonClicked(QListWidgetItem *)),		this, SLOT(slotShredButtonClicked(QListWidgetItem *)) );
+	connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem*)) );
+	connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem*)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem*)) );
+	connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem*)),	this, SLOT(slotCancelButtonClicked(QListWidgetItem*)) );
+	connect( item, SIGNAL(signalPlayButtonClicked(QListWidgetItem*)),		this, SLOT(slotPlayButtonClicked(QListWidgetItem*)) );
+	connect( item, SIGNAL(signalLibraryButtonClicked(QListWidgetItem*)),	this, SLOT(slotLibraryButtonClicked(QListWidgetItem*)) );
+	connect( item, SIGNAL(signalFileShareButtonClicked(QListWidgetItem*)),	this, SLOT(slotFileShareButtonClicked(QListWidgetItem*)) );
+	connect( item, SIGNAL(signalShredButtonClicked(QListWidgetItem*)),		this, SLOT(slotShredButtonClicked(QListWidgetItem*)) );
 
 	updateListEntryWidget( item, poSession );
 
@@ -143,7 +143,7 @@ GuiFileXferSession* AppletShareOfferList::findSession( VxGUID lclSessionId )
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
 	{
-		QListWidgetItem * item =  ui.m_FileItemList->item( iRow );
+		QListWidgetItem* item =  ui.m_FileItemList->item( iRow );
 		GuiFileXferSession* poCurInfo = (GuiFileXferSession*)item->data( Qt::UserRole + 1).toULongLong();
 		if( poCurInfo->getLclSessionId() == lclSessionId )
 		{
@@ -160,7 +160,7 @@ FileXferWidget* AppletShareOfferList::findListEntryWidget( VxGUID lclSessionId )
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
 	{
-		QListWidgetItem * item =  ui.m_FileItemList->item( iRow );
+		QListWidgetItem* item =  ui.m_FileItemList->item( iRow );
 		if( item )
 		{
 			GuiFileXferSession* poCurInfo = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
@@ -275,12 +275,12 @@ void AppletShareOfferList::toGuiFileDownloadComplete( VxGUID& lclSession, QStrin
 }
 
 //============================================================================
-void AppletShareOfferList::slotFileXferItemClicked(QListWidgetItem * item)
+void AppletShareOfferList::slotFileXferItemClicked(QListWidgetItem* item)
 {
 }
 
 //============================================================================
-void AppletShareOfferList::slotFileIconButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotFileIconButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -290,7 +290,7 @@ void AppletShareOfferList::slotFileIconButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletShareOfferList::slotCancelButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotCancelButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -307,7 +307,7 @@ void AppletShareOfferList::slotCancelButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletShareOfferList::slotPlayButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotPlayButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -317,7 +317,7 @@ void AppletShareOfferList::slotPlayButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletShareOfferList::slotLibraryButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotLibraryButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -325,27 +325,27 @@ void AppletShareOfferList::slotLibraryButtonClicked( QListWidgetItem * item )
 		bool inLibary = xferSession->getIsInLibrary();
 		inLibary = !inLibary;
 		xferSession->setIsInLibrary( inLibary );
-		m_Engine.fromGuiAddFileToLibrary( xferSession->getFullFileName().toUtf8().constData(), inLibary, xferSession->getFileHashId().getHashData() );
+		m_Engine.fromGuiSetFileIsInLibrary( xferSession->getFullFileName().toUtf8().constData(), inLibary, xferSession->getFileHashId().getHashData() );
 		((FileXferWidget*)item)->updateWidgetFromInfo();
 	}	
 }
 
 //============================================================================
-void AppletShareOfferList::slotFileShareButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotFileShareButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
 	{
-		bool isShared = xferSession->getIsShared();
+		bool isShared = xferSession->getIsSharedFile();
 		isShared = !isShared;
-		xferSession->setIsShared( isShared );
-		m_Engine.fromGuiSetFileIsShared( xferSession->getFullFileName().toUtf8().constData(), isShared, xferSession->getFileHashId().getHashData() );
+		xferSession->setIsSharedFile( isShared );
+		m_Engine.fromGuiSetFileIsShared(  xferSession->getFileInfo(), isShared );
 		((FileXferWidget*)item)->updateWidgetFromInfo();
 	}	
 }
 
 //============================================================================
-void AppletShareOfferList::slotShredButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotShredButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )

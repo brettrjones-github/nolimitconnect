@@ -31,7 +31,7 @@
 //============================================================================
 FileActionMenu::FileActionMenu( AppCommon&	app, 
 								QWidget*		parent, 
-								VxMyFileInfo&	fileInfo, 
+								FileInfo&	fileInfo, 
 								bool			isShared, 
 								bool			isInLibrary,
 								VxNetIdent*	selectedFriend )
@@ -46,7 +46,7 @@ FileActionMenu::FileActionMenu( AppCommon&	app,
 	slotRepositionToParent();
 
     connect(ui.m_ExitButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()));
-    connect(ui.m_MenuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
+    connect(ui.m_MenuItemList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(itemClicked(QListWidgetItem*)));
 
 	setupFileInfo();
 	setupMenuItems();
@@ -68,12 +68,11 @@ void FileActionMenu::setupFileInfo( void )
 {
 	ui.m_FileIconButton->setIcon( getMyIcons().getFileIcon( m_FileInfo.getFileType() ) );
 
-	QString fileName;
-	QString path;
-	GuiHelpers::splitPathAndFileName( m_FileInfo.getFullFileName(), fileName, path );
+	QString fileName = m_FileInfo.getFullFileName().c_str();
+	QString path = m_FileInfo.getFilePath().c_str();
 
 	ui.m_FileNameLabel->setText( fileName );
-	ui.m_FileSizeLabel->setText( m_FileInfo.describeFileLength() );
+	ui.m_FileSizeLabel->setText( GuiParams::describeFileLength( m_FileInfo.getFileLength() ) );
 	ui.m_FilePathLabel->setTextBreakAnywhere( path, 3 );
 }
 
@@ -142,7 +141,7 @@ void FileActionMenu::setupMenuItems( void )
 //============================================================================
 void FileActionMenu::addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText )
 {
-	QListWidgetItem * poMenuItem = new QListWidgetItem( strMenuItemText );
+	QListWidgetItem* poMenuItem = new QListWidgetItem( strMenuItemText );
 	poMenuItem->setIcon( oIcon );
 	poMenuItem->setData( Qt::UserRole, iItemId );
 	ui.m_MenuItemList->addItem( poMenuItem );
@@ -156,7 +155,7 @@ void FileActionMenu::slotHomeButtonClicked( void )
 }
 
 //============================================================================
-void FileActionMenu::itemClicked(QListWidgetItem *item)
+void FileActionMenu::itemClicked(QListWidgetItem*item)
 {
 	// resignal with id set by user
 	int iItemId = item->data(Qt::UserRole).toInt();
@@ -172,7 +171,7 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 		switch( menuAction )
 		{
 		case eFileMenuActionOpen:
-			m_FileInfo.playFile( m_MyApp );
+			m_MyApp.getPlayerMgr().playFile( m_FileInfo.getFullFileName().c_str() );
 			break;
 
 		case eFileMenuActionSendToFriend:
@@ -182,7 +181,7 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 																m_SelectedFriend->getMyOnlineId(), 
                                                                 0,
 																"", 
-																m_FileInfo.getFullFileName().toUtf8().constData(),
+																m_FileInfo.getFullFileName().c_str(),
                                                                 nullptr ) )
 				{
 					ActivityMessageBox errMsgBox( m_MyApp, this, LOG_INFO, "Could Not Offer file because %s is offline", m_SelectedFriend->getOnlineName() );
@@ -192,36 +191,29 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 			break;
 
 		case eFileMenuActionAddShare:
-			m_Engine.fromGuiSetFileIsShared(	m_FileInfo.getFullFileName().toUtf8().constData(), 
-												true,
-												m_FileInfo.getFileHashId().getHashData() );
+			m_Engine.fromGuiSetFileIsShared( m_FileInfo, true );
 			break;
 
 		case eFileMenuActionRemoveShare:
-			m_Engine.fromGuiSetFileIsShared(	m_FileInfo.getFullFileName().toUtf8().constData(), 
-												false );
+			m_Engine.fromGuiSetFileIsShared( m_FileInfo, false );
 			break;
 
 		case eFileMenuActionAddToLibrary:
-			m_Engine.fromGuiAddFileToLibrary( m_FileInfo.getFullFileName().toUtf8().constData(), 
-												true,
-												m_FileInfo.getFileHashId().getHashData() );
+			m_Engine.fromGuiSetFileIsInLibrary( m_FileInfo, true );
 			break;
 
 		case eFileMenuActionRemoveFromLibrary:
-			m_Engine.fromGuiAddFileToLibrary( m_FileInfo.getFullFileName().toUtf8().constData(), 
-				false,
-				m_FileInfo.getFileHashId().getHashData() );
+			m_Engine.fromGuiSetFileIsInLibrary( m_FileInfo, false );
 			break;
 
 		case eFileMenuActionDelete:
 			if( confirmDeleteFile( false ) )
 			{
-				int result = m_Engine.fromGuiDeleteFile( m_FileInfo.getFullFileName().toUtf8().constData(), false );
+				int result = m_Engine.fromGuiDeleteFile( m_FileInfo.getFullFileName(), false );
 				if( result )
 				{
 					QString title = "Could Not Delete File";
-					QString bodyText =  QString("OS returned error %1 accessing file %2 for deletion").arg(result).arg(m_FileInfo.getFullFileName());
+					QString bodyText =  QString("OS returned error %1 accessing file %2 for deletion").arg(result).arg(m_FileInfo.getFullFileName().c_str());
 					ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
 					dlg.hideCancelButton();
 					dlg.exec();
@@ -232,11 +224,11 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 		case eFileMenuActionShred:
 			if( confirmDeleteFile( true ) )
 			{
-				int result = m_Engine.fromGuiDeleteFile( m_FileInfo.getFullFileName().toUtf8().constData(), true );
+				int result = m_Engine.fromGuiDeleteFile( m_FileInfo.getFullFileName(), true );
 				if( result )
 				{
 					QString title = "Could Not Shred File";
-					QString bodyText =  QString("OS returned error %1 accessing file %2 for shredding").arg(result).arg(m_FileInfo.getFullFileName());
+					QString bodyText =  QString("OS returned error %1 accessing file %2 for shredding").arg(result).arg(m_FileInfo.getFullFileName().c_str());
 					ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
 					dlg.hideCancelButton();
 					dlg.exec();

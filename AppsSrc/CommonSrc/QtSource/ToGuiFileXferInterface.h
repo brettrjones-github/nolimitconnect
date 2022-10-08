@@ -28,12 +28,14 @@ class VxGUID;
 class VxNetIdent;
 class GuiFileXferSession;
 class FileListReplySession;
-class VxMyFileInfo;
+class FileInfo;
 
 class ToGuiFileXferInterface 
 {
 public:
-	virtual void				toGuiFileList( VxMyFileInfo& fileInfo ){};
+	virtual void				callbackToGuiFileList( FileInfo& fileInfo ){};
+	virtual void				callbackToGuiFileListCompleted( void ) {};
+
 	virtual void				toGuiFileListReply(	FileListReplySession * xferSession ){};
 
 	virtual void				toGuiStartUpload( GuiFileXferSession* xferSession ){};

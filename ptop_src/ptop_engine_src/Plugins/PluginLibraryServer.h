@@ -25,21 +25,16 @@ public:
 
 	virtual void				updateSharedFilesInfo( void );
 
-	virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t* fileHashId = 0 );
+	virtual bool				fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool inLibrary );
+	virtual bool				fromGuiSetFileIsInLibrary( std::string& fileName, bool inLibrary );
 	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
-	virtual bool				fromGuiGetIsFileInLibrary( const char* fileName );
+	virtual bool				fromGuiGetIsFileInLibrary( std::string& fileName );
+	virtual bool				fromGuiRemoveFromLibrary( std::string& fileName );
 
 	bool						isFileInLibrary( std::string& fileName );
 	bool						isFileInLibrary( VxSha1Hash& fileHashId );
 	bool						isFileInLibrary( VxGUID& assetId );
 
-	bool						addFileToLibrary( VxGUID& onlineId, std::string& fileName, VxGUID& assetId );
-	bool						addFileToLibrary( VxGUID& onlineId,
-													VxGUID& assetId,
-													std::string		fileName,
-													uint64_t		fileLen,
-													uint8_t			fileType,
-													VxSha1Hash& fileHashId );
 	bool						addFileToLibrary( FileInfo& fileInfo );
 
 	void						deleteFile( const char* fileName, bool shredFile ) override;

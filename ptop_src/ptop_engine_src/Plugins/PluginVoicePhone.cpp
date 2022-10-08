@@ -173,7 +173,7 @@ void PluginVoicePhone::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, Vx
 //============================================================================
 void PluginVoicePhone::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	PktChatReq * poPkt = (PktChatReq *)pktHdr;
+	PktChatReq* poPkt = (PktChatReq *)pktHdr;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	P2PSession * poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )

@@ -1099,7 +1099,7 @@ bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    ePluginType,
 }
 
 //============================================================================
-int PluginMgr::fromGuiDeleteFile( const char* fileName, bool shredFile )
+int PluginMgr::fromGuiDeleteFile( std::string& fileName, bool shredFile )
 {
 	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )

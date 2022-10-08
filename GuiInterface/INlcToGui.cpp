@@ -378,79 +378,33 @@ void INlc::toGuiInstMsg( VxNetIdent*	    netIdent,
 }
 
 //============================================================================
-void INlc::toGuiFileList(  const char*	fileName,
-                            uint64_t		fileLen,
-                            uint8_t			fileType,
-                            bool			isShared,
-                            bool			isInLibrary,
-                            VxGUID          assetId,
-                            uint8_t *		fileHashId )
+void INlc::toGuiFileList( FileInfo& fileInfo )
 {
-    getAppCommon().toGuiFileList( fileName,
-                                   fileLen,
-                                   fileType,
-                                   isShared,
-                                   isInLibrary,
-                                   assetId,
-                                   fileHashId );
+    getAppCommon().toGuiFileList( fileInfo );
 }
 
 //============================================================================
-void INlc::toGuiFileListReply( VxNetIdent*	netIdent,
-                                EPluginType		ePluginType,
-                                uint8_t			u8FileType,
-                                uint64_t		u64FileLen,
-                                const char*	pFileName,
-                                VxGUID          assetId,
-                                uint8_t *		fileHashData )
+void INlc::toGuiFileListReply( VxGUID& onlineId, EPluginType pluginType, FileInfo& fileInfo )
 {
-    getAppCommon().toGuiFileListReply( netIdent,
-                                        ePluginType,
-                                        u8FileType,
-                                        u64FileLen,
-                                        pFileName,
-                                        assetId,
-                                        fileHashData );
+    getAppCommon().toGuiFileListReply( onlineId, pluginType, fileInfo );
 }
 
 //============================================================================
-void INlc::toGuiStartUpload(   VxNetIdent*	netIdent,
-                                EPluginType		ePluginType,
-                                VxGUID&			fileInstanceId,
-                                uint8_t			u8FileType,
-                                uint64_t		u64FileLen,
-                                std::string&	pFileName,
-                                VxGUID&         assetId,
-                                VxSha1Hash&		fileHashData )
+void INlc::toGuiFileListCompleted( void )
 {
-    getAppCommon().toGuiStartUpload( netIdent,
-                                      ePluginType,
-                                      fileInstanceId,
-                                      u8FileType,
-                                      u64FileLen,
-                                      pFileName,
-                                      assetId,
-                                      fileHashData );
+    getAppCommon().toGuiFileListCompleted();
 }
 
 //============================================================================
-void INlc::toGuiStartDownload(     VxNetIdent*	netIdent,
-                                    EPluginType		ePluginType,
-                                    VxGUID&			fileInstanceId,
-                                    uint8_t			u8FileType,
-                                    uint64_t		u64FileLen,
-                                    std::string&    pFileName,
-                                    VxGUID&          assetId,
-                                    VxSha1Hash&     fileHashData )
+void INlc::toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-    getAppCommon().toGuiStartDownload( netIdent,
-                                        ePluginType,
-                                        fileInstanceId,
-                                        u8FileType,
-                                        u64FileLen,
-                                        pFileName,
-                                        assetId,
-                                        fileHashData );
+    getAppCommon().toGuiStartUpload( onlineId, pluginType, lclSessionId, fileInfo );
+}
+
+//============================================================================
+void INlc::toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+{
+    getAppCommon().toGuiStartDownload( onlineId, pluginType, lclSessionId, fileInfo );
 }
 
 //============================================================================
@@ -498,19 +452,9 @@ void INlc::toGuiSearchResultProfilePic(    VxNetIdent*	netIdent,
 }
 
 //============================================================================
-void INlc::toGuiSearchResultFileSearch(    VxNetIdent*	netIdent,
-                                            VxGUID&			fileInstanceId,
-                                            uint8_t			u8FileType,
-                                            uint64_t		u64FileLen,
-                                            const char*	pFileName,
-                                            VxGUID          assetId)
+void INlc::toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-    getAppCommon().toGuiSearchResultFileSearch( netIdent,
-                                                fileInstanceId,
-                                                u8FileType,
-                                                u64FileLen,
-                                                pFileName,
-                                                assetId );
+    getAppCommon().toGuiSearchResultFileSearch( netIdent, lclSessionId, fileInfo );
 }
 
 //============================================================================

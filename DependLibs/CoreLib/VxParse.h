@@ -22,7 +22,7 @@
 //! replace \ with / and % with ?
 int								MakeStringSafeForSprintf( char * pStr, int iLen );
 
-bool							WildMatchString( std::string & cs, std::string& csWildStr );
+bool							WildMatchString( std::string& cs, std::string& csWildStr );
 
 bool							GetLine( std::string cs, unsigned int n, std::string &r );
 bool							IsHexDecString( std::string& cs );
@@ -34,7 +34,7 @@ bool							RemoveDoubleSpaces( std::string &cs );
 std::string						GetSubstring( std::string& csStr, int iStartIdx, int iEndIdx );
 bool							GetWord( std::string& csStr, int n, std::string& csRetToken );
 //! Returns a pointer to the first occurrence of strSearch in strMain, or NULL if strSearch does not appear in str
-const char*					StrStrNoCase( const char* strMain, const char* strSearch );
+const char*						StrStrNoCase( const char* strMain, const char* strSearch );
 //! find position of string p2 in p1.. return -1 if not found
 int								StrStrNoCasePosition( const char* strMain, const char* strSearch );
 //! format into std::string using printf style format
@@ -66,16 +66,6 @@ std::string						StdStringRightOfLast( std::string cs, char chr );
 std::string						StdStringLeftOf( std::string cs, char chr );
 std::string						StdStringLeftOfLast( std::string& cs, char chr);
 
-//bool			StoreStdString( FILE * pgFile, std::string &cs );
-//bool			LoadStdString( FILE * pgFile, std::string &cs );
-//! copy string into buffer.. if string is to long then truncate
-//void							SafeStringCopy(		std::string		&strSrc,		// string to copy from
-//													char *			pBuf,			// buffer to copy into
-//													unsigned int	uiMaxBufLen );	// max length of buffer	
-////! copy string into buffer.. if string is to long then truncate
-//void							SafeStringCopy(		const char*	pSrcString,		// string to copy from
-//													char *			pBuf,			// buffer to copy into
-//													unsigned int	uiMaxBufLen );	// max length of buffer	
 //! Safe string copy.. logs error if buffer to short
 int								SafeStrCopy( char * pDest, const char* pSrc, int iBufLen );
 int								SafeStrCopy( wchar_t * pDest, const wchar_t * pSrc, int iBufLen );
@@ -103,7 +93,7 @@ bool							StdStringBeginsWith( std::string & csStr, const char* pPrefix );
 // return true if suffix matched end characters of string
 bool							StdStringEndsWith( std::string & csStr, const char* pSuffix );
 // fill string with integer value
-const char*					StdStringFromInteger( std::string & strResult, int iValue );
+const char*						StdStringFromInteger( std::string & strResult, int iValue );
 int								StdStringToInteger( std::string& strValue );
 
 //============================================================================

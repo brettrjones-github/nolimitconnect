@@ -27,27 +27,11 @@ FileListReplySession::FileListReplySession()
 //============================================================================
 FileListReplySession::FileListReplySession(	EPluginType		ePluginType,
                                             GuiUser*	    netIdent,
-                                            VxMyFileInfo&   fileInfo )
+                                            FileInfo&		fileInfo )
 : QObject()
 , m_ePluginType(ePluginTypeInvalid)
 , m_Ident(netIdent)
 , m_FileInfo(fileInfo)
-{
-}
-
-
-//============================================================================
-FileListReplySession::FileListReplySession(	 EPluginType	ePluginType, 
-                                             GuiUser*	    netIdent, 
-											 uint8_t		u8FileType, 
-											 uint64_t		u64FileLen, 
-											 const char*	pFileName,
-											 VxGUID			assetId,
-											 uint8_t *		fileHashData )
-: QObject()
-, m_ePluginType(ePluginType)
-, m_Ident(netIdent)
-, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashData )
 {
 }
 

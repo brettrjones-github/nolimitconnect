@@ -41,7 +41,7 @@ public:
 
 	void						setIsInLibrary( bool inLibaray )		{ m_IsInLibrary = inLibaray; }
 	bool						getIsInLibrary( void ) const			{ return m_IsInLibrary; }
-	void						setIsShared( bool isShared )			{ m_IsShared = isShared; }
+	void						setIsSharedFile( bool isShared )			{ m_IsShared = isShared; }
 	bool						getIsShared( void ) const				{ return m_IsShared; }
 
 	bool						isExecutableFile( void );

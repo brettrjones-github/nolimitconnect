@@ -22,6 +22,7 @@
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetInfoDb.h>
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobInfoDb.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfoDb.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <GuiInterface/IToGui.h>
 
@@ -975,19 +976,19 @@ bool AssetBaseMgr::fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter )
 		{
 			if( assetInfo->isSharedFileAsset() || assetInfo->isInLibary() )
 			{
-				IToGui::getToGui().toGuiFileList(	assetInfo->getAssetName().c_str(), 
-										            assetInfo->getAssetLength(), 
-										            assetInfo->getAssetType(), 
-										            assetInfo->isSharedFileAsset(),
-										            assetInfo->isInLibary(),
-													assetInfo->getAssetUniqueId(),
-										            assetInfo->getAssetHashId().getHashData() );
+				FileInfo fileInfo( assetInfo->getCreatorId(), assetInfo->getAssetName(), assetInfo->getAssetLength(),
+					(uint8_t)assetInfo->getAssetType(), assetInfo->getAssetUniqueId(), assetInfo->getAssetHashId() );
+
+				fileInfo.setIsInLibrary( assetInfo->isInLibary() );
+				fileInfo.setIsSharedFile( assetInfo->isSharedFileAsset() );
+
+				IToGui::getToGui().toGuiFileList( fileInfo );
 			}
 		}
 	}
 
 	unlockResources();
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
+	IToGui::getToGui().toGuiFileListCompleted();
 	return true;
 }
 

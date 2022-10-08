@@ -32,7 +32,7 @@ public:
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
-	void						setIsShared( bool isShared );
+	void						setIsSharedFile( bool isShared );
 	bool						getIsShared( void );
 	void						setIsInLibrary( bool isInLibrary );
 	bool						getIsInLibrary( void );
@@ -43,13 +43,13 @@ public:
 	void						updateWidgetFromInfo( void );
 
 signals:
-	void						signalFileShareItemClicked( QListWidgetItem * poItemWidget );
-	void						signalFileIconClicked( QListWidgetItem * poItemWidget );
+	void						signalFileShareItemClicked( QListWidgetItem* poItemWidget );
+	void						signalFileIconClicked( QListWidgetItem* poItemWidget );
 
-	void						signalPlayButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalLibraryButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalFileShareButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalShredButtonClicked( QListWidgetItem * poItemWidget );
+	void						signalPlayButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalLibraryButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalFileShareButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalShredButtonClicked( QListWidgetItem* poItemWidget );
 
 protected slots:
 	void						slotFileIconButtonClicked( void );

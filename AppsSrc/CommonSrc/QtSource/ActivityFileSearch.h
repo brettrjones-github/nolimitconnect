@@ -47,7 +47,7 @@ private slots:
 	//! user clicked the upper right x button
     void						slotHomeButtonClicked( void ) override;
 	//! user selected menu item
-	void						slotItemClicked( QListWidgetItem * item );
+	void						slotItemClicked( QListWidgetItem* item );
 
 protected:
 	//=== vars ===//

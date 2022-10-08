@@ -554,8 +554,9 @@ void VidWidget::slotPictureSnapshotButton( void )
 		uint64_t fileLen = VxFileUtil::getFileLen( photoFileName.toUtf8().constData() );
 		if( 500 < fileLen )
 		{
-			m_MyApp.getEngine().fromGuiAddFileToLibrary( photoFileName.toUtf8().constData(), true );
-			m_MyApp.toGuiUserMessage( "Snapshot added to library %s", photoFileName.toUtf8().constData() );
+			std::string fileName = photoFileName.toUtf8().constData();
+			m_MyApp.getEngine().fromGuiSetFileIsInLibrary( fileName, true );
+			m_MyApp.toGuiUserMessage( "Snapshot added to library %s", fileName.c_str() );
 		}
 		else
 		{
@@ -616,8 +617,9 @@ void VidWidget::slotRecMotionButtonClicked( void )
 				}
 				else
 				{
-					m_MyApp.getEngine().fromGuiAddFileToLibrary( m_RecFileName.toUtf8().constData(), true );
-					m_MyApp.toGuiUserMessage( "Added motion video to library %s", m_RecFileName.toUtf8().constData() );
+					std::string fileName = m_RecFileName.toUtf8().constData();
+					m_MyApp.getEngine().fromGuiSetFileIsInLibrary( fileName, true );
+					m_MyApp.toGuiUserMessage( "Added motion video to library %s", fileName.c_str() );
 					enableVidFilesButton( true );
 				}
 			}
@@ -681,8 +683,9 @@ void VidWidget::slotRecNormalButtonClicked( void )
 				}
 				else
 				{
-					m_MyApp.getEngine().fromGuiAddFileToLibrary( m_RecFileName.toUtf8().constData(), true );
-					m_MyApp.toGuiUserMessage( "Added video recording to library %s", m_RecFileName.toUtf8().constData() );
+					std::string fileName = m_RecFileName.toUtf8().constData();
+					m_MyApp.getEngine().fromGuiSetFileIsInLibrary( fileName, true );
+					m_MyApp.toGuiUserMessage( "Added video recording to library %s", fileName.c_str() );
 					QMessageBox::information( this, QObject::tr( "Added video recording to library" ), m_RecFileName.toUtf8().constData() );
 					enableVidFilesButton( true );
 				}

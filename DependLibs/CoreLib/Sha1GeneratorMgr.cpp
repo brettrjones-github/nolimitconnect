@@ -61,8 +61,8 @@ void Sha1GeneratorMgr::generateSha1( VxGUID& fileId, std::string& fileName, Sha1
 
 	Sha1ClientInfo clienInfo( fileId, fileName, client );
 	m_Sha1ListMutex.lock();
-	std::vector< Sha1ClientInfo >::iterator iter;
-	for( iter = m_Sha1List.begin(); iter != m_Sha1List.end(); ++iter )
+
+	for( auto iter = m_Sha1List.begin(); iter != m_Sha1List.end(); ++iter )
 	{
 		if( *iter == clienInfo )
 		{
@@ -77,6 +77,29 @@ void Sha1GeneratorMgr::generateSha1( VxGUID& fileId, std::string& fileName, Sha1
 	m_Sha1List.push_back( clienInfo );
 	startThreadIfNotStarted();
 	m_Sha1ListMutex.unlock();	
+}
+
+//============================================================================
+void Sha1GeneratorMgr::cancelGenerateSha1( VxGUID& fileId, std::string& fileName, Sha1GeneratorCallback* client )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	Sha1ClientInfo clienInfo( fileId, fileName, client );
+	m_Sha1ListMutex.lock();
+	for( auto iter = m_Sha1List.begin(); iter != m_Sha1List.end(); ++iter )
+	{
+		if( *iter == clienInfo )
+		{
+			LogMsg( LOG_VERBOSE, "Sha1GeneratorMgr::cancelGenerateSha1 file %s", clienInfo.getFileName().c_str() );
+			m_Sha1List.erase( iter );
+			break;
+		}
+	}
+
+	m_Sha1ListMutex.unlock();
 }
 
 //============================================================================

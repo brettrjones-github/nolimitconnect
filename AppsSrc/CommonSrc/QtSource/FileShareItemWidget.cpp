@@ -100,19 +100,19 @@ bool FileShareItemWidget::getIsShared( void )
 	FileItemInfo* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
-		isShared = poInfo->getIsShared();
+		isShared = poInfo->getIsSharedFile();
 	}
 
 	return isShared;
 }
 
 //============================================================================
-void FileShareItemWidget::setIsShared( bool isShared )
+void FileShareItemWidget::setIsSharedFile( bool isShared )
 {
 	FileItemInfo* poInfo = getFileItemInfo();
 	if( poInfo )
 	{
-		poInfo->setIsShared( isShared );
+		poInfo->setIsSharedFile( isShared );
 	}
 
 	updateWidgetFromInfo();
@@ -174,17 +174,12 @@ void FileShareItemWidget::updateWidgetFromInfo( void )
 		return;
 	}
 
-	ui.m_FileActionBar->setIsShared(  poInfo->getIsShared() );
+	ui.m_FileActionBar->setIsSharedFile(  poInfo->getIsSharedFile() );
 
 	ui.m_FileActionBar->setIsInLibrary(  poInfo->getIsInLibrary() );
 
 	ui.m_FileIconButton->setIcon( getMyIcons().getFileIcon( poInfo->getFileType() ) );
 
-	QString fileName;
-	QString path;
-	GuiHelpers::splitPathAndFileName( poInfo->getFullFileName(), fileName, path );
-
-	ui.m_FileNameLabel->setText( fileName );
+	ui.m_FileNameLabel->setText( poInfo->getJustFileName() );
 	ui.m_FileSizeLabel->setText( poInfo->describeFileLength() );
-	//ui.m_FilePathLabel->setTextBreakAnywhere( path, 3 );
 }

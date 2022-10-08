@@ -46,7 +46,7 @@ public:
     bool                        getIsThumbUpdated( void )           { return m_IsThumbUpdated; }
 
 signals:
-    void						signalGuiGroupieListItemClicked( QListWidgetItem * poItemWidget );
+    void						signalGuiGroupieListItemClicked( QListWidgetItem* poItemWidget );
 	void						signalIconButtonClicked( GuiGroupieListItem* listEntryWidget );
     void						signalFriendshipButtonClicked( GuiGroupieListItem* listEntryWidget );
 	void						signalMenuButtonClicked( GuiGroupieListItem* listEntryWidget );

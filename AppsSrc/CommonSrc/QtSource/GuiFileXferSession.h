@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "VxMyFileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxSha1Hash.h>
@@ -31,28 +31,8 @@ class GuiFileXferSession : public QObject
 public:
 	GuiFileXferSession() = default;
 
-	GuiFileXferSession(	EPluginType		ePluginType, 
-						GuiUser*	    netIdent, 
-						VxGUID&		    lclSessionId, 
-						uint8_t			u8FileType, 
-						uint64_t		u64FileLen, 
-						const char*	pFileName,
-						VxGUID			assetId,
-						VxSha1Hash&		fileHashId );
-
-	GuiFileXferSession(	EPluginType		ePluginType, 
-                        GuiUser*	    netIdent, 
-						VxGUID&		    lclSessionId, 
-						uint8_t			u8FileType, 
-						uint64_t		u64FileLen, 
-						const char*	pFileName,
-						VxGUID			assetId,
-						uint8_t *		fileHashId );
-
-	GuiFileXferSession(	EPluginType		ePluginType, 
-                        GuiUser*	    netIdent, 
-						VxGUID&		    lclSessionId, 
-						VxMyFileInfo&	fileInfo );
+	GuiFileXferSession( EPluginType pluginType, GuiUser* guiUser, FileInfo& fileInfo );
+	GuiFileXferSession( EPluginType pluginType, GuiUser* guiUser, VxGUID& lclSessionId, FileInfo& fileInfo );
 
 	GuiFileXferSession( const GuiFileXferSession &rhs );
 	GuiFileXferSession&			operator =( const GuiFileXferSession &rhs );
@@ -72,12 +52,12 @@ public:
 	void						setXferDirection( EXferDirection direction ){ m_XferDirection = direction; }
 	EXferDirection				getXferDirection( void )					{ return m_XferDirection; }
 
-	void						setFileInfo( VxMyFileInfo& fileInfo )		{ m_FileInfo = fileInfo; }
-	VxMyFileInfo&				getFileInfo( void )							{ return m_FileInfo; }
+	void						setFileInfo( FileInfo& fileInfo )		    { m_FileInfo = fileInfo; }
+	FileInfo&					getFileInfo( void )							{ return m_FileInfo; }
 
-	void						setFullFileName( QString fileName )			{ m_FileInfo.setFullFileName( fileName ); }
-	QString&					getFullFileName( void )						{ return m_FileInfo.getFullFileName(); }
-	void						setFileType( uint8_t	fileType )			{ m_FileInfo.setFileType( fileType ); }
+	void						setFullFileName( QString fileName )			{ m_FileInfo.setFullFileName( fileName.toUtf8().constData() ); }
+	QString 					getFullFileName( void )						{ return m_FileInfo.getFullFileName().c_str(); }
+	void						setFileType( uint8_t fileType )			    { m_FileInfo.setFileType( fileType ); }
 	uint8_t						getFileType( void ) const					{ return m_FileInfo.getFileType(); }
 	void						setFileLength( uint64_t fileLen )			{ m_FileInfo.setFileLength( fileLen ); }
 	uint64_t					getFileLength( void ) const					{ return m_FileInfo.getFileLength(); }
@@ -87,15 +67,13 @@ public:
 
 	VxGUID						getAssetId( void )							{ return m_FileInfo.getAssetId(); }
 
-	void						setIsShared( bool isShared )				{ m_FileInfo.setIsShared( isShared ); }
-	bool						getIsShared( void )							{ return m_FileInfo.getIsShared(); }
+	void						setIsSharedFile( bool isShared )			{ m_FileInfo.setIsSharedFile( isShared ); }
+	bool						getIsSharedFile( void )						{ return m_FileInfo.getIsSharedFile(); }
 	void						setIsInLibrary( bool isInLibrary )			{ m_FileInfo.setIsInLibrary( isInLibrary ); }
 	bool						getIsInLibrary( void )						{ return m_FileInfo.getIsInLibrary(); }
 
-	void						setJustFileName( QString fileName )			{ m_FileInfo.setJustFileName( fileName ); }
-	QString&					getJustFileName( void )						{ return m_FileInfo.getJustFileName(); }
-	void						setFilePath( QString filePath )				{ m_FileInfo.setFilePath( filePath ); }
-	QString&					getFilePath( void )							{ return m_FileInfo.getFilePath(); }
+	QString					    getJustFileName( void )						{ return m_FileInfo.getJustFileName().c_str(); }
+	QString						getFilePath( void )							{ return m_FileInfo.getFilePath().c_str(); }
 
 	bool						getIsCompleted( void );
 	bool						getIsInError( void );
@@ -115,9 +93,9 @@ protected:
     EPluginType					m_ePluginType{ ePluginTypeFileShareServer };
     GuiUser*				    m_Ident{ nullptr };
 	VxGUID					    m_LclSessionId;
-	VxMyFileInfo				m_FileInfo;
+	FileInfo					m_FileInfo;
 	QWidget*					m_Widget{ nullptr };
-	EXferState					m_eXferState;
+	EXferState					m_eXferState{ eXferStateUnknown };
     int							m_XferStateParam1{ 0 };
 	int							m_XferStateParam2{ 0 };
 	RCODE						m_XferErrorCode{ 0 };

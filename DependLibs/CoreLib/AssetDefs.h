@@ -18,6 +18,7 @@
 
 enum EAssetType
 {
+	// these must exactly match file type definitions in <CoreLib/VxFileTypeMasks.h>
 	eAssetTypeUnknown				= 0x00,
 	eAssetTypePhoto					= 0x01,
 	eAssetTypeAudio					= 0x02,

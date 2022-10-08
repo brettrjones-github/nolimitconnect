@@ -31,89 +31,35 @@
 #include <string>
 
 //============================================================================
-FileItemInfo::FileItemInfo( uint8_t u8FileType, const char* pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent* netIdent, uint8_t * fileHashId )
-: m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
-, m_Widget( 0 )
-, m_IsShared( false )
-, m_IsInLibrary( false )
-{
-}
-
-//============================================================================
-FileItemInfo::FileItemInfo( VxMyFileInfo& fileInfo, VxNetIdent* netIdent, bool isShared, bool isInLibrary )
+FileItemInfo::FileItemInfo( FileInfo& fileInfo )
 : m_FileInfo( fileInfo )
-, m_Widget( 0 )
-, m_IsShared( isShared )
-, m_IsInLibrary( isInLibrary )
 {
 }
 
 //============================================================================
 QString FileItemInfo::describeFileType()
 {
-	switch( getFileType() )
-	{
-	case VXFILE_TYPE_PHOTO:
-		return QObject::tr("Photo: ");
-	case VXFILE_TYPE_AUDIO:
-		return QObject::tr("Audio: ");
-	case VXFILE_TYPE_VIDEO:
-		return QObject::tr("Video: ");
-	case VXFILE_TYPE_DOC:
-		return QObject::tr("Documents: ");
-	case VXFILE_TYPE_ARCHIVE_OR_CDIMAGE:
-		return QObject::tr("Archive Or ISO: ");
-	case VXFILE_TYPE_EXECUTABLE:
-		return QObject::tr("Executable: ");
-	case VXFILE_TYPE_DIRECTORY:
-		return QObject::tr("Folder: ");
-	default:
-		return QObject::tr("Other: ");
-	}
+    return GuiParams::describeFileType( getFileType() );
 }
 
 //============================================================================
 QString FileItemInfo::describeFileLength()
 {
-    std::string strLen;
-	uint64_t fileLen = getFileLength();
-    if( fileLen >= 1000000000000ULL )
-    {
-        StdStringFormat( strLen, "%3.1f TB ", (double)(fileLen) / 1000000000000.0);
-    }
-    else if( fileLen >= 1000000000ULL )
-    {
-        StdStringFormat( strLen, "%3.1f GB ", (double)(fileLen) / 1000000000.0);
-    }
-    else if( fileLen >= 1000000 )
-    {
-        StdStringFormat( strLen, "%3.1f MB ", (double)(fileLen) / 1000000.0);
-    }
-    else if( fileLen >= 1000 )
-    {
-        StdStringFormat( strLen, "%3.1f KB ", (double)(fileLen) / 1000.0);
-    }
-    else
-    {
-        StdStringFormat( strLen, "%3.1f Bytes ", (double)fileLen );
-    }
-
-    QString strFormatedLen = strLen.c_str();
-    return strFormatedLen;
+    return GuiParams::describeFileLength( getFileLength() );
 }
 
 //============================================================================
 bool FileItemInfo::toggleIsShared( void )
 {
-	m_IsShared = !m_IsShared;
-	return m_IsShared;
+    m_FileInfo.setIsSharedFile( !m_FileInfo.getIsSharedFile() );
+    return m_FileInfo.getIsSharedFile();
 }
 
 //============================================================================
 bool FileItemInfo::toggleIsInLibrary( void )
 {
-	m_IsInLibrary = !m_IsInLibrary;
-	return m_IsInLibrary;
+    m_FileInfo.setIsInLibrary( !m_FileInfo.getIsInLibrary() );
+    return m_FileInfo.getIsInLibrary();
 }
 
 //============================================================================

@@ -474,7 +474,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxMenuButton.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxMenuButtonBottom.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxMenuButtonTop.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\VxMyFileInfo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxPlainTextEdit.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxPushButton.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxResourceToRealFile.cpp" />
@@ -671,7 +670,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxScrollArea.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxPushButton.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxPlainTextEdit.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\VxMyFileInfo.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxMenuButtonTop.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxMenuButtonBottom.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxMenuButton.h" />

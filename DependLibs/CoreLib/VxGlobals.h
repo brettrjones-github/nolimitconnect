@@ -65,27 +65,27 @@ enum EAppDir
 void							VxSetAppIsShuttingDown( bool bIsShuttingDown );
 bool							VxIsAppShuttingDown( void );
 
-const char*					VxGetCompanyDomain( void );
-const char*					VxGetOrginizationName( void );
-const char*					VxGetCompanyWebsite( void );
+const char*						VxGetCompanyDomain( void );
+const char*						VxGetOrginizationName( void );
+const char*						VxGetCompanyWebsite( void );
 
 void							VxSetNetworkHostName( const char* netHostName );
-const char*					VxGetNetworkHostName( void );
+const char*						VxGetNetworkHostName( void );
 void							VxSetNetworkHostPort( uint16_t netHostPort );
 uint16_t						VxGetNetworkHostPort( void );
 void							VxSetNetworkHostUrl( const char* netHostUrl );
-const char*					VxGetNetworkHostUrl( void );
+const char*						VxGetNetworkHostUrl( void );
 
-const char*					VxGetApplicationTitle( void );
+const char*						VxGetApplicationTitle( void );
 void							VxSetApplicationNameNoSpaces( const char* pAppName );
-const char*					VxGetApplicationNameNoSpaces( void );
-const char*					VxGetApplicationNameNoSpacesLowerCase( void );
+const char*						VxGetApplicationNameNoSpaces( void );
+const char*						VxGetApplicationNameNoSpacesLowerCase( void );
 void							VxSetIsApplicationCommercial( bool isCommercial );
 bool							VxGetIsApplicationCommercial( void );
 
 void							VxSetAppVersion( uint16_t u16AppVersion );
 uint16_t						VxGetAppVersion( void );
-const char*					VxGetAppVersionString( void );
+const char*						VxGetAppVersionString( void );
 
 //============================================================================
 void							VxSetAppDirectory( enum EAppDir appDir, const char* setDir );

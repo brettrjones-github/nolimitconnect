@@ -49,8 +49,8 @@ GuiUserJoinListWidget::GuiUserJoinListWidget( QWidget* parent )
     connect( &m_ThumbMgr, SIGNAL(signalThumbRemoved( VxGUID)),              this, SLOT(slotThumbRemoved( VxGUID))) ;
 
 
-    //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    //connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
+    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 
     setUserJoinViewType( eUserJoinViewTypeEverybody );
     GetAppInstance().getUserMgr().wantGuiUserUpdateCallbacks( this, true );
@@ -69,7 +69,7 @@ GuiUserJoinListItem* GuiUserJoinListWidget::sessionToWidget( GuiUserJoinSession*
     userItem->setUserJoinSession( userSession );
     userItem->setSizeHint( userItem->calculateSizeHint() );
 
-    connect( userItem, SIGNAL(signalUserJoinListItemClicked(QListWidgetItem *)),	    this, SLOT(slotUserJoinListItemClicked(QListWidgetItem *)) );
+    connect( userItem, SIGNAL(signalUserJoinListItemClicked(QListWidgetItem*)),	    this, SLOT(slotUserJoinListItemClicked(QListWidgetItem*)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserJoinListItem *)),	        this, SLOT(slotAvatarButtonClicked(GuiUserJoinListItem *)) );
     connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserJoinListItem *)),	            this, SLOT(slotMenuButtonClicked(GuiUserJoinListItem *)) );
     connect( userItem, SIGNAL(signalFriendshipButtonClicked(GuiUserJoinListItem *)),		this, SLOT(slotFriendshipButtonClicked(GuiUserJoinListItem *)) );
@@ -212,10 +212,10 @@ GuiUserJoinListItem* GuiUserJoinListWidget::addOrUpdateUserJoinSession( GuiUserJ
         else
         {
             LogMsg( LOG_INFO, "insert user %s", userSession->getOnlineName().c_str() );
-            insertItem( 0, (QListWidgetItem *)userItem );
+            insertItem( 0, (QListWidgetItem*)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+        setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
         onListItemAdded( userSession, userItem );
     }
 
@@ -425,10 +425,10 @@ void GuiUserJoinListWidget::updateUserJoin( GuiUserJoin * guiUserJoin )
                 else
                 {
                     LogMsg( LOG_INFO, "insert user %s", userSession->getOnlineName().c_str() );
-                    insertItem( 0, (QListWidgetItem *)userItem );
+                    insertItem( 0, (QListWidgetItem*)userItem );
                 }
 
-                setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+                setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
                 m_UserJoinCache[guiUserJoin->getGroupieId()] = userSession;
                 onListItemAdded( userSession, userItem );
             }

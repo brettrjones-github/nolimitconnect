@@ -16,6 +16,7 @@
 #include "PluginLibraryServer.h"
 #include "PluginMgr.h"
 
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h>
 #include <GuiInterface/IToGui.h>
@@ -61,12 +62,24 @@ void PluginLibraryServer::onFilesChanged( int64_t lastFileUpdateTime, int64_t to
 }
 
 //============================================================================
-bool PluginLibraryServer::fromGuiAddFileToLibrary( const char* fileNameIn, bool addFile, uint8_t* fileHashId )
+bool PluginLibraryServer::fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool inLibrary )
 {
-	std::string fileName = fileNameIn;
-	VxGUID assetId;
-	assetId.initializeWithNewVxGUID();
-	return m_FileInfoMgr.addFileToDbAndList( m_Engine.getMyOnlineId(), fileName, assetId );
+	return fromGuiSetFileIsShared( fileInfo, inLibrary );
+	fileInfo.setIsInLibrary( inLibrary );
+	if( inLibrary )
+	{
+		return m_FileInfoMgr.addFileToDbAndList( fileInfo );
+	}
+	else
+	{
+		return m_FileInfoMgr.removeFromDbAndList( fileInfo.getFullFileName() );
+	}
+}
+
+//============================================================================
+bool PluginLibraryServer::fromGuiSetFileIsInLibrary( std::string& fileName, bool inLibrary )
+{
+	return fromGuiSetFileIsShared( fileName, inLibrary );
 }
 
 //============================================================================
@@ -76,10 +89,15 @@ void PluginLibraryServer::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool PluginLibraryServer::fromGuiGetIsFileInLibrary( const char* fileName )
+bool PluginLibraryServer::fromGuiGetIsFileInLibrary( std::string& fileName )
 {
-	std::string strFileName = fileName;
-	return isFileInLibrary( strFileName );
+	return isFileInLibrary( fileName );
+}
+
+//============================================================================
+bool PluginLibraryServer::fromGuiRemoveFromLibrary( std::string& fileName )
+{
+	return m_FileInfoMgr.removeFromDbAndList( fileName );
 }
 
 //============================================================================

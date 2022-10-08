@@ -708,6 +708,7 @@ enum EPluginMsgType
     ePluginMsgConnecting,
     ePluginMsgConnectFailed,
     ePluginMsgRetrieveInfo,
+    ePluginMsgRetrieveInfoComplete,
     ePluginMsgRetrieveInfoFailed,
     ePluginMsgDownloading,
     ePluginMsgDownloadFailed,

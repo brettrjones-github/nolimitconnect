@@ -26,6 +26,7 @@
 #include <QString>
 
 class VxGUID;
+class FileInfo;
 class GuiUser;
 class GuiOfferSession;
 class AssetBaseInfo;
@@ -64,12 +65,8 @@ public:
 	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent ){};
 	virtual void				toGuiSearchResultError( EScanType eScanType, GuiUser* netIdent, int errCode ){};
 	virtual void				toGuiSearchResultProfilePic( GuiUser* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
-	virtual void				toGuiSearchResultFileSearch(	GuiUser*	    netIdent, 		
-																VxGUID&			lclSessionId, 
-																uint8_t			u8FileType, 
-																uint64_t		u64FileLen, 
-																const char*	pFileName,
-                                                                VxGUID          assetId ){};
+    virtual void				toGuiSearchResultFileSearch( GuiUser* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
+
 	virtual void				toGuiClientScanSearchComplete( EScanType eScanType ){};
 
     virtual void				toGuiAssetAdded( AssetBaseInfo& assetInfo ) {};

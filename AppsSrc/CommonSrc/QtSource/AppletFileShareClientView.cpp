@@ -50,8 +50,8 @@ AppletFileShareClientView::AppletFileShareClientView( AppCommon& app, QWidget*	p
 
     connectBarWidgets();
 
-    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),						this, SLOT(slotItemClicked(QListWidgetItem *)));
-    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),					this, SLOT(slotItemClicked(QListWidgetItem *)));
+    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem*)),						this, SLOT(slotItemClicked(QListWidgetItem*)));
+    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),					this, SLOT(slotItemClicked(QListWidgetItem*)));
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)),			this,  SLOT(slotApplyFileFilter(unsigned char)) );
 
 	m_MyApp.activityStateChange( this, true );
@@ -141,7 +141,7 @@ GuiFileXferSession* AppletFileShareClientView::findSession( VxGUID lclSessionId 
 	int iCnt = ui.FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
 	{
-		QListWidgetItem * item =  ui.FileItemList->item( iRow );
+		QListWidgetItem* item =  ui.FileItemList->item( iRow );
 		GuiFileXferSession* poCurInfo = (GuiFileXferSession*)item->data( Qt::UserRole + 1).toULongLong();
 		if( poCurInfo->getLclSessionId() == lclSessionId )
 		{
@@ -160,7 +160,7 @@ void AppletFileShareClientView::toGuiFileDownloadComplete( EPluginType pluginTyp
 	{
 		if( !newFileName.isEmpty() )
 		{
-			xferSession->setFullFileName( newFileName );
+			xferSession->setFullFileName( newFileName.toUtf8().constData() );
 		}
 
 		xferSession->setXferState( eXferStateCompletedDownload, xferError, 0 );
@@ -199,7 +199,7 @@ void AppletFileShareClientView::slotApplyFileFilter( unsigned char fileTypeMask 
 }
 
 //============================================================================
-FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser* netIdent, VxMyFileInfo& fileInfo )
+FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser* netIdent, FileInfo& fileInfo )
 {
 	FileXferWidget* item = new FileXferWidget(ui.FileItemList);
 	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
@@ -289,10 +289,9 @@ FileXferWidget* AppletFileShareClientView::findListEntryWidget( VxGUID lclSessio
 }
 
 //============================================================================
-void AppletFileShareClientView::addFile( GuiUser* netIdent, VxMyFileInfo& fileInfo )
+void AppletFileShareClientView::addFile( GuiUser* netIdent, FileInfo& fileInfo )
 {
-    if( fileInfo.getFileLength()
-        && !fileInfo.getFullFileName().isEmpty() )
+    if( fileInfo.getFileLength() && !fileInfo.getFullFileName().empty() )
 	{
         FileXferWidget* item = fileToWidget( netIdent, fileInfo );
 		if( item )
@@ -315,7 +314,7 @@ void AppletFileShareClientView::slotHomeButtonClicked( void )
 }
 
 //============================================================================
-void AppletFileShareClientView::slotItemClicked(QListWidgetItem * item)
+void AppletFileShareClientView::slotItemClicked(QListWidgetItem* item)
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->data(Qt::UserRole + 1).toLongLong();
 	if( xferSession )
@@ -328,7 +327,7 @@ void AppletFileShareClientView::slotItemClicked(QListWidgetItem * item)
 }
 
 //============================================================================
-void AppletFileShareClientView::slotCancelButtonClicked( QListWidgetItem * item )
+void AppletFileShareClientView::slotCancelButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->data(Qt::UserRole + 1).toLongLong();
 	if( xferSession )
@@ -366,7 +365,7 @@ void AppletFileShareClientView::slotCancelButtonClicked( QListWidgetItem * item 
 }
 
 //============================================================================
-void AppletFileShareClientView::beginDownload( GuiFileXferSession* xferSession, QListWidgetItem * item  )
+void AppletFileShareClientView::beginDownload( GuiFileXferSession* xferSession, QListWidgetItem* item  )
 {
 	if(	-1 != m_FromGui.fromGuiGetFileDownloadState( xferSession->getFileHashId().getHashData() ) )
 	{
@@ -403,13 +402,13 @@ void AppletFileShareClientView::beginDownload( GuiFileXferSession* xferSession, 
 }
 
 //============================================================================
-void AppletFileShareClientView::removeDownload( GuiFileXferSession* xferSession, QListWidgetItem * item  )
+void AppletFileShareClientView::removeDownload( GuiFileXferSession* xferSession, QListWidgetItem* item  )
 {
 	ui.FileItemList->removeItemWidget( item );
 }
 
 //============================================================================
-void AppletFileShareClientView::cancelDownload( GuiFileXferSession* xferSession, QListWidgetItem * item )
+void AppletFileShareClientView::cancelDownload( GuiFileXferSession* xferSession, QListWidgetItem* item )
 {
 	xferSession->setXferState( eXferStateUserCanceledDownload, 0, 0 );
 	((FileXferWidget*)item)->setXferState( eXferStateUserCanceledDownload, 0, 0 );
@@ -419,7 +418,7 @@ void AppletFileShareClientView::cancelDownload( GuiFileXferSession* xferSession,
 }
 
 //============================================================================
-void AppletFileShareClientView::cancelUpload( GuiFileXferSession* xferSession, QListWidgetItem * item )
+void AppletFileShareClientView::cancelUpload( GuiFileXferSession* xferSession, QListWidgetItem* item )
 {
 	xferSession->setXferState( eXferStateUserCanceledUpload, 0, 0 );
 	((FileXferWidget*)item)->setXferState( eXferStateUserCanceledUpload, 0, 0 );
@@ -429,7 +428,7 @@ void AppletFileShareClientView::cancelUpload( GuiFileXferSession* xferSession, Q
 }
 
 //============================================================================
-void AppletFileShareClientView::slotPlayButtonClicked( QListWidgetItem * item )
+void AppletFileShareClientView::slotPlayButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->data(Qt::UserRole + 1).toLongLong();
 	if( xferSession )
@@ -439,7 +438,7 @@ void AppletFileShareClientView::slotPlayButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletFileShareClientView::slotLibraryButtonClicked( QListWidgetItem * item )
+void AppletFileShareClientView::slotLibraryButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->data(Qt::UserRole + 1).toLongLong();
 	if( xferSession )
@@ -447,27 +446,27 @@ void AppletFileShareClientView::slotLibraryButtonClicked( QListWidgetItem * item
 		bool inLibary = xferSession->getIsInLibrary();
 		inLibary = !inLibary;
 		xferSession->setIsInLibrary( inLibary );
-		m_Engine.fromGuiAddFileToLibrary( xferSession->getFullFileName().toUtf8().constData(), inLibary, xferSession->getFileHashId().getHashData() );
+		m_Engine.fromGuiSetFileIsInLibrary( xferSession->getFileInfo(), inLibary );
 		((FileXferWidget*)item)->updateWidgetFromInfo();
 	}
 }
 
 //============================================================================
-void AppletFileShareClientView::slotFileShareButtonClicked( QListWidgetItem * item )
+void AppletFileShareClientView::slotFileShareButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->data(Qt::UserRole + 1).toLongLong();
 	if( xferSession )
 	{
-		bool isShared = xferSession->getIsShared();
+		bool isShared = xferSession->getIsSharedFile();
 		isShared = !isShared;
-		xferSession->setIsShared( isShared );
-		m_Engine.fromGuiSetFileIsShared( xferSession->getFullFileName().toUtf8().constData(), isShared, xferSession->getFileHashId().getHashData() );
+		xferSession->setIsSharedFile( isShared );
+		m_Engine.fromGuiSetFileIsShared( xferSession->getFileInfo(), isShared );
 		((FileXferWidget*)item)->updateWidgetFromInfo();
 	}
 }
 
 //============================================================================
-void AppletFileShareClientView::slotShredButtonClicked( QListWidgetItem * item )
+void AppletFileShareClientView::slotShredButtonClicked( QListWidgetItem* item )
 {
 	GuiFileXferSession* xferSession = (GuiFileXferSession*)item->data(Qt::UserRole + 1).toLongLong();
 	if( xferSession )

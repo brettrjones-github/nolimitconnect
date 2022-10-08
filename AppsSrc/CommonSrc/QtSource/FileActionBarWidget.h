@@ -30,7 +30,7 @@ public:
 	virtual ~FileActionBarWidget() = default;
 
 	void						setIsInLibrary( bool isInLibrary );
-	void						setIsShared( bool isShared );
+	void						setIsSharedFile( bool isShared );
 
 signals:
 	void						signalPlayButtonClicked( void );

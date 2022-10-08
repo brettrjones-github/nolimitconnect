@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include "VxMyFileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <QWidget>
 
@@ -28,17 +28,16 @@ class AssetBaseInfo;
 class FileItemInfo
 {
 public:
-    FileItemInfo( uint8_t u8FileType, const char* pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent* netIdent = 0, uint8_t * fileHashId = 0 );
-	FileItemInfo( VxMyFileInfo& fileInfo, VxNetIdent* netIdent = 0, bool isShared = false, bool isInLibrary = false );
+	FileItemInfo( FileInfo& fileInfo );
 
-	void						setIsShared( bool isShared )			{ m_IsShared = isShared; }
-	bool						getIsShared( void )						{ return m_IsShared; }
+	void						setIsSharedFile( bool isShared )		{ m_FileInfo.setIsSharedFile( isShared ); }
+	bool						getIsSharedFile( void )					{ return m_FileInfo.getIsSharedFile(); }
 
-	void						setIsInLibrary( bool isInLibrary )		{ m_IsInLibrary = isInLibrary; }
-	bool						getIsInLibrary( void )					{ return m_IsInLibrary; }
+	void						setIsInLibrary( bool isInLibrary )		{ m_FileInfo.setIsInLibrary( isInLibrary ); }
+	bool						getIsInLibrary( void )					{ return m_FileInfo.getIsInLibrary(); }
 
-	QString&					getFullFileName( void )					{ return m_FileInfo.getFullFileName(); }
-	QString						getJustFileName( void )					{ return m_FileInfo.getJustFileName(); }
+	QString					    getFullFileName( void )					{ return m_FileInfo.getFullFileName().c_str(); }
+	QString						getJustFileName( void )					{ return m_FileInfo.getShortFileName().c_str(); }
 
     uint8_t						getFileType( void )						{ return m_FileInfo.getFileType(); }
     uint64_t					getFileLength( void )					{ return m_FileInfo.getFileLength(); }
@@ -57,13 +56,11 @@ public:
     QString						describeFileType();
     QString						describeFileLength();
 
-	VxMyFileInfo&				getMyFileInfo( void )					{ return m_FileInfo; }
+	FileInfo&					getFileInfo( void )						{ return m_FileInfo; }
 	bool						toAsssetInfo( AppCommon& myApp, AssetBaseInfo& assetInfo, bool* retIsNewAsset = nullptr );
 
 protected:
 	//=== vars ===//
-    VxMyFileInfo				m_FileInfo;
+    FileInfo					m_FileInfo;
     QWidget*					m_Widget{nullptr};
-    bool						m_IsShared{false};
-    bool						m_IsInLibrary{false};
 };

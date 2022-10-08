@@ -207,8 +207,8 @@ public:
 protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_FileTypes{ 0 };
-    uint16_t                    m_Res2{ 0 };
-    uint32_t                    m_Res3{ 0 };
+    uint16_t                    m_Res1{ 0 };
+    uint32_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_HostOnlineId;  // 16 bytes
     VxGUID                      m_SpecificAssetId;
@@ -250,6 +250,9 @@ public:
     bool						setSearchText( std::string& searchText );
     bool						getSearchText( std::string& searchText );
 
+    void						setSearchFileTypes( uint8_t fileTypes ) { m_FileTypes = fileTypes; }
+    uint8_t						getSearchFileTypes( void )              { return m_FileTypes; }
+
     PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
     void                        calcPktLen( void );
@@ -259,8 +262,9 @@ protected:
     uint8_t					    m_MoreFileInfosExist{ 0 };
     uint8_t                     m_CommError{ 0 };
     uint8_t                     m_AccessState{ 0 };
+    uint8_t					    m_FileTypes{ 0 };
+    uint8_t                     m_Res1{ 0 };
     uint16_t                    m_FileInfoThisPktCount{ 0 };
-    uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_HostOnlineId;
     VxGUID                      m_NextSearchAssetId;
@@ -288,15 +292,18 @@ public:
     bool						setSearchText( std::string& searchText );
     bool						getSearchText( std::string& searchText );
 
+    void						setSearchFileTypes( uint8_t fileTypes ) { m_FileTypes = fileTypes; }
+    uint8_t						getSearchFileTypes( void )          { return m_FileTypes; }
+
     PktBlobEntry&               getBlobEntry( void )                { return m_BlobEntry; }
 
     void                        calcPktLen( void );
 
 protected:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
-    uint16_t                    m_Res2{ 0 };
-    uint32_t                    m_Res3{ 0 };
+    uint8_t					    m_FileTypes{ 0 };
+    uint16_t                    m_Res1{ 0 };
+    uint32_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_HostOnlineId;
     VxGUID                      m_NextSearchAssetId;
@@ -333,6 +340,9 @@ public:
     bool						setSearchText( std::string& searchText );
     bool						getSearchText( std::string& searchText );
 
+    void						setSearchFileTypes( uint8_t fileTypes ) { m_FileTypes = fileTypes; }
+    uint8_t						getSearchFileTypes( void )              { return m_FileTypes; }
+
     PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
     void                        calcPktLen( void );
@@ -342,8 +352,9 @@ protected:
     uint8_t					    m_MoreFileInfosExist{ 0 };
     uint8_t                     m_CommError{ 0 };
     uint8_t                     m_AccessState{ 0 };
+    uint8_t					    m_FileTypes{ 0 };
+    uint8_t                     m_Res1{ 0 };
     uint16_t                    m_FileInfoThisPktCount{ 0 };
-    uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_NextSearchAssetId;
     PktBlobEntry                m_BlobEntry;

@@ -910,6 +910,10 @@ QString GuiParams::describePluginMsg( EPluginMsgType pluginMsgType )
         strPluginMsg = QObject::tr( "Retrieving Info" );
         break;
 
+    case ePluginMsgRetrieveInfoComplete:
+        strPluginMsg = QObject::tr( "Retrieve Info Complete" );
+        break;
+
     case ePluginMsgRetrieveInfoFailed:
         strPluginMsg = QObject::tr( "Retrieve Info Failed" );
         break;
@@ -1933,3 +1937,27 @@ EAssetType GuiParams::fileTypeToAssetType( uint8_t fileTypeFlags )
     }
 }
 
+
+//============================================================================
+QString GuiParams::describeFileType( uint8_t fileType )
+{
+    switch( fileType )
+    {
+    case VXFILE_TYPE_PHOTO:
+        return QObject::tr("Photo: ");
+    case VXFILE_TYPE_AUDIO:
+        return QObject::tr("Audio: ");
+    case VXFILE_TYPE_VIDEO:
+        return QObject::tr("Video: ");
+    case VXFILE_TYPE_DOC:
+        return QObject::tr("Documents: ");
+    case VXFILE_TYPE_ARCHIVE_OR_CDIMAGE:
+        return QObject::tr( "Archive Or ISO: " );
+    case VXFILE_TYPE_EXECUTABLE:
+        return QObject::tr( "Executable: " );
+    case VXFILE_TYPE_DIRECTORY:
+        return QObject::tr( "Folder: " );
+    default:
+        return QObject::tr( "Other: " );
+    }
+}

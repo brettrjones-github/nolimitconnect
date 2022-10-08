@@ -83,7 +83,7 @@ public:
 															int32_t			s32VarId, 
 															int32_t			s32VarValue );
 
-	virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile );
+	virtual int					fromGuiDeleteFile( std::string& fileName, bool shredFile );
 
     virtual bool                pluginApiTxPacket(  EPluginType			ePluginType,
 													const VxGUID&		onlineId,
@@ -93,8 +93,8 @@ public:
                                                     EPluginType         overridePlugin = ePluginTypeInvalid );
 	void						pluginApiLog( EPluginType ePluginType, const char* pMsg, ... );
 	virtual EPluginAccess	    pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent* netIdent );
-	virtual VxNetIdent*		pluginApiGetMyIdentity( void );
-	virtual VxNetIdent*		pluginApiFindUser( const char* pUserName );
+	virtual VxNetIdent*			pluginApiGetMyIdentity( void );
+	virtual VxNetIdent*			pluginApiFindUser( const char* pUserName );
 
 	virtual void				pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent* netIdent, int iRotation );
 
@@ -110,11 +110,11 @@ public:
 	virtual void				pluginApiSktClose( ESktCloseReason closeReason, VxSktBase* sktBase );
 	virtual void				pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase* sktBase );
 	void						pluginApiToGuiSessionEnded(	EPluginType		ePluginType,		// plugin
-															VxNetIdent*	netIdent,			// identity of friend
+															VxNetIdent*		netIdent,			// identity of friend
 															int				pvUserData,			// plugin defined data
 															EOfferResponse	eOfferResponse );	// reason session ended
 
-	VxNetIdent*				pluginApiOnlineIdToIdentity( VxGUID& oOnlineId );
+	VxNetIdent*					pluginApiOnlineIdToIdentity( VxGUID& oOnlineId );
 
 	virtual void				onAppStateChange( EAppState eAppState );
 	virtual void				onAppStartup( void );

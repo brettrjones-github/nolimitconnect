@@ -116,26 +116,20 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent*	netIdentIn,
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent*	netIdentIn, 		
-												VxGUID&			lclSessionId, 
-												uint8_t			u8FileType, 
-												uint64_t		u64FileLen, 
-												const char*	pFileName,
-												VxGUID			assetId )
+void AppCommon::toGuiSearchResultFileSearch( VxNetIdent* netIdentin, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-    GuiUser* netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
+	GuiUser* netIdent = m_UserMgr.getUser( netIdentin->getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		client->toGuiSearchResultFileSearch( netIdent, lclSessionId, u8FileType, u64FileLen, pFileName, assetId );
+		client->toGuiSearchResultFileSearch( netIdent, lclSessionId, fileInfo );
 	}
 
 	m_ToGuiActivityInterfaceBusy = false;
 }
-

@@ -99,7 +99,7 @@ void PluginBaseFiles::fromGuiCancelUpload( VxGUID& fileInstance )
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask )
+bool PluginBaseFiles::fromGuiBrowseFiles( std::string& dir, uint8_t fileFilterMask )
 {
 	if( 0 == fileFilterMask )
 	{
@@ -107,7 +107,7 @@ bool PluginBaseFiles::fromGuiBrowseFiles( const char* dir, bool lookupShareStatu
 	}
 
 	std::vector<VxFileInfo> fileList;
-	RCODE rc = VxFileUtil::listFilesAndFolders( dir, fileList, fileFilterMask );
+	RCODE rc = VxFileUtil::listFilesAndFolders( dir.c_str(), fileList, fileFilterMask );
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles error %d", rc );
@@ -117,42 +117,43 @@ bool PluginBaseFiles::fromGuiBrowseFiles( const char* dir, bool lookupShareStatu
 	std::vector<VxFileInfo>::iterator iter;
 	for( iter = fileList.begin(); iter != fileList.end(); ++iter )
 	{
-		VxFileInfo& fileInfo = *iter;
-		if ( ( false == fileInfo.isExecutableFile() )
-			&& ( false == fileInfo.isShortcutFile() ) )
+		VxFileInfo& vxFileInfo = *iter;
+		if ( ( false == vxFileInfo.isExecutableFile() )
+			&& ( false == vxFileInfo.isShortcutFile() ) )
 		{
-			if ( 0 != ( fileFilterMask & fileInfo.getFileType() ) )
+			if ( 0 != ( fileFilterMask & vxFileInfo.getFileType() ) )
 			{
-				LogMsg( LOG_INFO, "PluginBaseFiles::fromGuiBrowseFiles sending file %s", fileInfo.getFileName().c_str() );
-				bool isShared = m_Engine.fromGuiGetIsFileShared( fileInfo.getFileName().c_str() );
-				bool isInLibrary = m_Engine.fromGuiGetIsFileInLibrary( fileInfo.getFileName().c_str() );
-				IToGui::getToGui().toGuiFileList(	fileInfo.getFileName().c_str(), 
-					fileInfo.getFileLength(), 
-					fileInfo.getFileType(), 
-					isShared,
-					isInLibrary,
-					VxGUID::nullVxGUID(),
-					0 );
+				LogMsg( LOG_INFO, "PluginBaseFiles::fromGuiBrowseFiles sending file %s", vxFileInfo.getFileName().c_str() );
+				bool isShared = m_Engine.fromGuiGetIsFileShared( vxFileInfo.getFileName() );
+				bool isInLibrary = m_Engine.fromGuiGetIsFileInLibrary( vxFileInfo.getFileName() );
+
+				FileInfo fileInfo( m_Engine.getMyOnlineId(), vxFileInfo.getFileName(), vxFileInfo.getFileLength(),
+					vxFileInfo.getFileType(), VxGUID::nullVxGUID() );
+				fileInfo.setIsInLibrary( isInLibrary );
+				fileInfo.setIsSharedFile( isShared );
+
+				IToGui::getToGui().toGuiFileList( fileInfo );
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles skip file type 0x%x because filter mask 0x%x file %s", fileInfo.getFileType(), fileFilterMask, fileInfo.getFileName().c_str() );
+				LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles skip file type 0x%x because filter mask 0x%x file %s", 
+					vxFileInfo.getFileType(), fileFilterMask, vxFileInfo.getFileName().c_str() );
 			}
 		}
 		else
 		{
-			if ( fileInfo.isExecutableFile() )
+			if ( vxFileInfo.isExecutableFile() )
 			{
-				LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles skip executeable file %s", fileInfo.getFileName().c_str() );
+				LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles skip executeable file %s", vxFileInfo.getFileName().c_str() );
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles skip shortcut file %s", fileInfo.getFileName().c_str() );
+				LogMsg( LOG_ERROR, "PluginBaseFiles::fromGuiBrowseFiles skip shortcut file %s", vxFileInfo.getFileName().c_str() );
 			}
 		}
 	}
 
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
+	IToGui::getToGui().toGuiFileListCompleted();
 	return isPluginEnabled();
 }
 
@@ -163,16 +164,27 @@ bool PluginBaseFiles::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId )
+bool PluginBaseFiles::fromGuiSetFileIsShared( FileInfo& fileInfo, bool isShared )
 {
-	return m_FileInfoMgr.fromGuiSetFileIsShared( fileName, isShared, fileHashId );
+	return m_FileInfoMgr.fromGuiSetFileIsShared( fileInfo, isShared );
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiGetIsFileShared( const char* fileName )
+bool PluginBaseFiles::fromGuiSetFileIsShared( std::string& fileName, bool isShared )
 {
-	std::string strFileName = fileName;
-	return isFileShared( strFileName );
+	return m_FileInfoMgr.fromGuiSetFileIsShared( fileName, isShared );
+}
+
+//============================================================================
+bool PluginBaseFiles::fromGuiRemoveSharedFile( std::string& fileName )
+{
+	return m_FileInfoMgr.fromGuiRemoveSharedFile( fileName );
+}
+
+//============================================================================
+bool PluginBaseFiles::fromGuiGetIsFileShared( std::string& fileName )
+{
+	return isFileShared( fileName );
 }
 
 //============================================================================
@@ -206,7 +218,6 @@ void PluginBaseFiles::deleteFile( const char* fileName, bool shredFile )
 {
 	std::string strFileName = fileName;
 	m_FileInfoXferMgr.fileAboutToBeDeleted( strFileName );
-	m_FileInfoMgr.fromGuiSetFileIsShared( strFileName, false );
 	m_FileInfoMgr.removeFromDbAndList( strFileName );
 	if( shredFile )
 	{
@@ -404,22 +415,27 @@ void PluginBaseFiles::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktH
 {
 	LogMsg( LOG_VERBOSE, "PluginBaseFiles::onPktFileInfoSearchReq rxed" );
 
+	EPluginAccess pluginAccess = getPluginAccessState( netIdent );
+	ECommErr commErr = getCommAccessState( netIdent );
+
 	PktFileInfoSearchReq* pktReq = ( PktFileInfoSearchReq* )pktHdr;
 	if( pktReq && pktReq->isValidPkt() )
 	{
+		uint8_t searchFileTypes = pktReq->getSearchFileTypes();
 		PktBlobEntry& blobEntry = pktReq->getBlobEntry();
 		blobEntry.resetRead();
 		std::string searchText;
-		if( pktReq->getSearchText( searchText ) )
+		if( pktReq->getSearchText( searchText ) || searchFileTypes )
 		{
 			PktFileInfoSearchReply pktReply;
 			pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
 			pktReply.setHostOnlineId( pktReq->getHostOnlineId() );
-
+			pktReply.setSearchFileTypes( searchFileTypes );
 			pktReply.setSearchText( searchText );
-			EPluginAccess pluginAccess = getPluginAccessState( netIdent );
+			
 			pktReply.setAccessState( pluginAccess );
-			if( ePluginAccessOk == pluginAccess )
+			pktReply.setCommError( commErr );
+			if( ePluginAccessOk == pluginAccess && eCommErrNone == commErr )
 			{
 				if( !searchText.empty() && searchText.size() < FileInfo::FILE_INFO_SHORTEST_SEARCH_TEXT_LEN )
 				{
@@ -435,7 +451,7 @@ void PluginBaseFiles::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktH
 				}
 				else
 				{
-					ECommErr searchErr = m_FileInfoMgr.searchRequest( pktReply, pktReq->getSpecificAssetId(), searchText, sktBase, netIdent );
+					ECommErr searchErr = m_FileInfoMgr.searchRequest( pktReply, pktReq->getSpecificAssetId(), searchText, searchFileTypes, sktBase, netIdent );
 					pktReply.setCommError( searchErr );
 				}
 			}
@@ -470,12 +486,13 @@ void PluginBaseFiles::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pk
 
 	if( pktReply && pktReply->isValidPkt() )
 	{
+		uint8_t searchFileTypes = pktReply->getSearchFileTypes();
 		PktBlobEntry& blobEntry = pktReply->getBlobEntry();
 		blobEntry.resetRead();
 		std::string searchText;
 		if( pktReply->getCommError() == eCommErrNone )
 		{
-			if( pktReply->getSearchText( searchText ) )
+			if( pktReply->getSearchText( searchText ) || searchFileTypes )
 			{
 				if( updateFromFileInfoSearchBlob( pktReply->getSearchSessionId(), pktReply->getHostOnlineId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getFileInfoCountThisPkt() ) )
 				{
@@ -523,14 +540,16 @@ void PluginBaseFiles::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 	PktFileInfoMoreReq* pktReq = ( PktFileInfoMoreReq* )pktHdr;
 	if( pktReq && pktReq->isValidPkt() )
 	{
+		uint8_t searchFileTypes = pktReq->getSearchFileTypes();
 		PktBlobEntry& blobEntry = pktReq->getBlobEntry();
 		blobEntry.resetRead();
 		std::string searchText;
 		ECommErr commErr = getCommAccessState( netIdent );
 		PktFileInfoMoreReply pktReply;
 		pktReply.setCommError( commErr );
-		if( pktReq->getSearchText( searchText ) )
+		if( pktReq->getSearchText( searchText ) || searchFileTypes )
 		{
+			pktReply.setSearchFileTypes( searchFileTypes );
 			pktReply.setSearchText( searchText );
 			EHostType hostType = pktReq->getHostType();
 			pktReply.setHostType( hostType );
@@ -555,18 +574,16 @@ void PluginBaseFiles::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 				{
 					if( nextSearchOnlineId.isVxGUIDValid() )
 					{
-						ECommErr searchErr = m_FileInfoMgr.searchMoreRequest( pktReply, nextSearchOnlineId, searchText, sktBase, netIdent );
+						ECommErr searchErr = m_FileInfoMgr.searchMoreRequest( pktReply, nextSearchOnlineId, searchText, searchFileTypes, sktBase, netIdent );
 						pktReply.setCommError( searchErr );
 					}
 					else
 					{
 						LogModule( eLogHostSearch, LOG_ERROR, "PluginBaseFiles::onPktFileInfoMoreReq search text too long" );
-						pktReply.setCommError( eCommErrSearchTextToLong );
+						pktReply.setCommError( eCommErrInvalidParam );
 						VxReportHack( eHackerLevelSuspicious, eHackerReasonInvalidPkt, sktBase, "PluginBaseFiles::onPktFileInfoMoreReq to long search text" );
 					}
 				}
-
-				commErr = m_FileInfoMgr.searchMoreRequest( pktReply, nextSearchOnlineId, searchText, sktBase, netIdent );	
 			}
 
 			pktReply.calcPktLen();
@@ -664,20 +681,25 @@ bool PluginBaseFiles::requestMoreFileInfoFromServer(  VxGUID& searchSessionId, V
 }
 
 //============================================================================
-ECommErr PluginBaseFiles::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+ECommErr PluginBaseFiles::searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, uint8_t searchFileTypes, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-	return m_FileInfoMgr.searchRequest( pktReply, specificAssetId, searchStr, sktBase, netIdent );
+	return m_FileInfoMgr.searchRequest( pktReply, specificAssetId, searchStr, searchFileTypes, sktBase, netIdent );
 }
 
 //============================================================================
-ECommErr PluginBaseFiles::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+ECommErr PluginBaseFiles::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, uint8_t searchFileTypes, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-	return m_FileInfoMgr.searchMoreRequest( pktReply, nextFileAssetId, searchStr, sktBase, netIdent );
+	return m_FileInfoMgr.searchMoreRequest( pktReply, nextFileAssetId, searchStr, searchFileTypes, sktBase, netIdent );
 }
-
 
 //============================================================================
 void PluginBaseFiles::toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param )
 {
 
+}
+
+//============================================================================
+void PluginBaseFiles::sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo )
+{
+	m_FileInfoMgr.sendFileSearchResultToGui( searchSessionId, netIdent, fileInfo );
 }

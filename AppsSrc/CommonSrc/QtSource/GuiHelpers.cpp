@@ -59,53 +59,6 @@
 # endif
 #endif
 
-
-//============================================================================
-QString GuiHelpers::getJustFileName( QString& fileNameAndPath )
-{
-	QString justFileName("");
-	if( !fileNameAndPath.isEmpty() )
-	{
-		int lastSlashIdx = fileNameAndPath.lastIndexOf('/');
-		if( lastSlashIdx >= 0 )
-		{
-			justFileName = fileNameAndPath.right( fileNameAndPath.length() - ( lastSlashIdx + 1 ) );
-		}
-
-		if( justFileName.isEmpty() )
-		{
-			justFileName = fileNameAndPath;
-		}
-	}
-
-	return justFileName;
-}
-
-//============================================================================
-void GuiHelpers::splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath )
-{
-	retFileName = "";
-	retPath = "";
-	if( !fileNameAndPath.isEmpty() )
-	{
-		int lastSlashIdx = fileNameAndPath.lastIndexOf('/');
-		if( lastSlashIdx >= 0 )
-		{
-			retFileName = fileNameAndPath.right( fileNameAndPath.length() - ( lastSlashIdx + 1 ) );
-		}
-
-		if( retFileName.isEmpty() )
-		{
-			retPath = fileNameAndPath;
-			retFileName = fileNameAndPath;
-		}
-		else
-		{
-			retPath = fileNameAndPath.left( lastSlashIdx );
-		}
-	}
-}
-
 //============================================================================
 QString GuiHelpers::getAvailableStorageSpaceText()
 {
@@ -117,11 +70,11 @@ QString GuiHelpers::browseForDirectory( QString startDir, QWidget* parent )
 {
 
 	QString dir = QFileDialog::getExistingDirectory(
-		parent, 
-		QObject::tr("Open Directory"),
-		startDir, 
-		QFileDialog::ShowDirsOnly
-		| QFileDialog::DontResolveSymlinks);
+		                                            parent, 
+		                                            QObject::tr("Open Folder"),
+		                                            startDir, 
+		                                            QFileDialog::ShowDirsOnly
+		                                            | QFileDialog::DontResolveSymlinks);
 	if( false == dir.isEmpty() )
 	{
 		dir.replace( "\\", "/" );

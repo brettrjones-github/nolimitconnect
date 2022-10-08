@@ -93,41 +93,41 @@ public:
 
 	void						assetXferThreadWork( VxThread* workThread );
 protected:
-	virtual void				onAssetBaseReceived( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
+	virtual void				onAssetBaseReceived( AssetBaseRxSession* xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onAssetBaseSent( VxNetIdent* netIdent, VxSktBase* sktBase, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
     virtual void				onRequestAssetFailed( VxNetIdent* netIdent, AssetBaseInfo& assetInfo, VxGUID& sktConnectId, bool pluginIsLocked );
 	virtual void				onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				updateAssetMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param );
 
-	virtual AssetBaseRxSession *	    findRxSession( bool pluginIsLocked, VxNetIdent* netIdent );
-	virtual AssetBaseRxSession *	    findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual AssetBaseRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseTxSession *	    findTxSession( bool pluginIsLocked, VxNetIdent* netIdent );
-	virtual AssetBaseTxSession *	    findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual AssetBaseTxSession *	    createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseRxSession*	    findRxSession( bool pluginIsLocked, VxNetIdent* netIdent );
+	virtual AssetBaseRxSession*	    findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
+	virtual AssetBaseRxSession*	    findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseRxSession*	    findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseTxSession*	    findTxSession( bool pluginIsLocked, VxNetIdent* netIdent );
+	virtual AssetBaseTxSession*	    findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
+	virtual AssetBaseTxSession*	    createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseTxSession*	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseTxSession*	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, PktBaseSendReq * poPkt, PktBaseSendReply& pktReply );
-    virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, VxGUID& lclSessionId, int64_t startOffset = 0 );
+	virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession* xferSession, AssetBaseInfo& assetInfo, PktBaseSendReq* poPkt, PktBaseSendReply& pktReply );
+    virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession* xferSession, AssetBaseInfo& assetInfo, VxGUID& lclSessionId, int64_t startOffset = 0 );
 
-	virtual EXferError			        beginAssetBaseSend( AssetBaseTxSession * xferSession );
+	virtual EXferError			        beginAssetBaseSend( AssetBaseTxSession* xferSession );
 
-	virtual void				        endAssetBaseXferSession( AssetBaseRxSession * xferSession, bool pluginIsLocked );
-	virtual void				        endAssetBaseXferSession( AssetBaseTxSession * xferSession, bool pluginIsLocked, bool requeAsset );
+	virtual void				        endAssetBaseXferSession( AssetBaseRxSession* xferSession, bool pluginIsLocked );
+	virtual void				        endAssetBaseXferSession( AssetBaseTxSession* xferSession, bool pluginIsLocked, bool requeAsset );
 
-	virtual EXferError			        rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxSession * xferSession, PktBaseChunkReq * poPkt );
-	virtual EXferError			        txNextAssetBaseChunk( AssetBaseTxSession * xferSession, uint32_t remoteErr, bool pluginIsLocked );
+	virtual EXferError			        rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxSession* xferSession, PktBaseChunkReq* poPkt );
+	virtual EXferError			        txNextAssetBaseChunk( AssetBaseTxSession* xferSession, uint32_t remoteErr, bool pluginIsLocked );
 
-	virtual void				        finishAssetBaseReceive( AssetBaseRxSession * xferSession, PktBaseSendCompleteReq * poPkt, bool pluginIsLocked );
+	virtual void				        finishAssetBaseReceive( AssetBaseRxSession* xferSession, PktBaseSendCompleteReq* poPkt, bool pluginIsLocked );
 
 	void						        clearRxSessionsList( void );
 	void						        clearTxSessionsList( void );
 	void						        checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent* hisIdent, VxSktBase* sktBase );
 
-	void						        assetSendComplete( AssetBaseTxSession * xferSession );
+	void						        assetSendComplete( AssetBaseTxSession* xferSession );
 	void						        queAsset( AssetBaseInfo& assetInfo );
 	EXferError					        createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase );
     EXferError                          createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase );
@@ -157,8 +157,8 @@ protected:
 
 	//=== vars ===//
 	bool						        m_Initialized;
-	std::map<VxGUID, AssetBaseRxSession *>	m_RxSessions;
-	std::vector<AssetBaseTxSession *>		m_TxSessions;
+	std::map<VxGUID, AssetBaseRxSession*>	m_RxSessions;
+	std::vector<AssetBaseTxSession*>		m_TxSessions;
 	VxMutex						        m_TxSessionsMutex;
 
     P2PEngine&					        m_Engine;	

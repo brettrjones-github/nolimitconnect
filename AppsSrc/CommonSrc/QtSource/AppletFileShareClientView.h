@@ -28,7 +28,7 @@ class GuiFileXferSession;
 class FileListReplySession;
 class GuiUser;
 class VxSha1Hash;
-class VxMyFileInfo;
+class FileInfo;
 
 class AppletFileShareClientView : public AppletPeerBase, public ToGuiFileXferInterface
 {
@@ -39,7 +39,7 @@ public:
 
 	void                        setIdentity( GuiUser* guiUser );
 
-    void						addFile( GuiUser* netIdent, VxMyFileInfo& fileInfo  );
+    void						addFile( GuiUser* netIdent, FileInfo& fileInfo  );
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
@@ -47,12 +47,12 @@ private slots:
 	void						slotApplyFileFilter( unsigned char fileTypeMask );
 	void						slotDownloadFileSelected( int iMenuId, QWidget* popupMenu );
 
-	void						slotItemClicked( QListWidgetItem * item );
-	void						slotCancelButtonClicked( QListWidgetItem * item );
-	void						slotPlayButtonClicked( QListWidgetItem * item );
-	void						slotLibraryButtonClicked( QListWidgetItem * item );
-	void						slotFileShareButtonClicked( QListWidgetItem * item );
-	void						slotShredButtonClicked( QListWidgetItem * item );
+	void						slotItemClicked( QListWidgetItem* item );
+	void						slotCancelButtonClicked( QListWidgetItem* item );
+	void						slotPlayButtonClicked( QListWidgetItem* item );
+	void						slotLibraryButtonClicked( QListWidgetItem* item );
+	void						slotFileShareButtonClicked( QListWidgetItem* item );
+	void						slotShredButtonClicked( QListWidgetItem* item );
 
 protected:
     virtual void				showEvent( QShowEvent* ev ) override;
@@ -63,7 +63,7 @@ protected:
     virtual void				toGuiStartDownload( GuiFileXferSession* xferSession ) override;
     virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
-	FileXferWidget*			fileToWidget( GuiUser* netIdent, VxMyFileInfo& fileInfo );
+	FileXferWidget*			fileToWidget( GuiUser* netIdent, FileInfo& fileInfo );
 	void						updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* xferSession );
 	GuiFileXferSession*		widgetToFileItemInfo( FileXferWidget* item );
 
@@ -73,10 +73,10 @@ protected:
 	void						clearFileList( void );
 	void						moveUpOneFolder( void );
 	void						promptForDownload( GuiFileXferSession* poInfo );
-	void						beginDownload( GuiFileXferSession* xferSession, QListWidgetItem * item );
-	void						cancelDownload( GuiFileXferSession* xferSession, QListWidgetItem * item );
-	void						cancelUpload( GuiFileXferSession* xferSession, QListWidgetItem * item );
-	void						removeDownload( GuiFileXferSession* xferSession, QListWidgetItem * item );
+	void						beginDownload( GuiFileXferSession* xferSession, QListWidgetItem* item );
+	void						cancelDownload( GuiFileXferSession* xferSession, QListWidgetItem* item );
+	void						cancelUpload( GuiFileXferSession* xferSession, QListWidgetItem* item );
+	void						removeDownload( GuiFileXferSession* xferSession, QListWidgetItem* item );
 	bool						confirmDeleteFile( bool shredFile );
 
 	//=== vars ===//

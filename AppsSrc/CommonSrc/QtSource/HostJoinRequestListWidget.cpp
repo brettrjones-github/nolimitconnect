@@ -32,8 +32,8 @@ HostJoinRequestListWidget::HostJoinRequestListWidget( QWidget* parent )
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 }
 
 //============================================================================
@@ -45,7 +45,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::sessionToWidget( GuiHostJoin
 
     hostItem->setHostSession( hostSession );
 
-    connect( hostItem, SIGNAL( signalHostJoinRequestListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotHostJoinRequestListItemClicked( QListWidgetItem * ) ) );
+    connect( hostItem, SIGNAL( signalHostJoinRequestListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotHostJoinRequestListItemClicked( QListWidgetItem* ) ) );
     connect( hostItem, SIGNAL( signalAvatarButtonClicked( HostJoinRequestListItem * ) ),	        this, SLOT( slotAvatarButtonClicked( HostJoinRequestListItem * ) ) );
     connect( hostItem, SIGNAL( signalFrienshipButtonClicked( HostJoinRequestListItem* ) ), this, SLOT( slotlFriendshipButtonClicked( HostJoinRequestListItem* ) ) );
     connect( hostItem, SIGNAL( signalMenuButtonClicked( HostJoinRequestListItem * ) ),	        this, SLOT( slotMenuButtonClicked( HostJoinRequestListItem * ) ) );
@@ -104,7 +104,7 @@ void HostJoinRequestListWidget::removeHostJoinRequest( GroupieId& groupieId )
 }
 
 //============================================================================
-void HostJoinRequestListWidget::slotItemClicked( QListWidgetItem * item )
+void HostJoinRequestListWidget::slotItemClicked( QListWidgetItem* item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{

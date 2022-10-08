@@ -416,8 +416,8 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& ass
 		std::string fileName = assetInfo.getAssetName();
 		if( isFileAsset )
 		{
-			fromGuiSetFileIsShared( fileName.c_str(), false );
-			fromGuiAddFileToLibrary( fileName.c_str(), false );	
+			fromGuiRemoveSharedFile( fileName );
+			fromGuiRemoveFromLibrary( fileName );	
 		}
 
 		m_AssetMgr.removeAsset( assetInfo.getAssetUniqueId(), false );
@@ -1390,9 +1390,9 @@ void P2PEngine::fromGuiRunUrlAction( VxGUID& sessionId, const char* myUrl, const
 }
 
 //============================================================================
-bool P2PEngine::fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask )
+bool P2PEngine::fromGuiBrowseFiles( std::string& dir, uint8_t fileFilterMask )
 {
-	return getPluginFileShareServer().fromGuiBrowseFiles( dir, lookupShareStatus, fileFilterMask );
+	return getPluginFileShareServer().fromGuiBrowseFiles( dir, fileFilterMask );
 }
 
 //============================================================================
@@ -1402,28 +1402,40 @@ bool P2PEngine::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool P2PEngine::fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId )
+bool P2PEngine::fromGuiSetFileIsShared( FileInfo& fileInfo, bool isShared )
 {
-	return getPluginFileShareServer().fromGuiSetFileIsShared( fileName, isShared, fileHashId );
+	return getPluginFileShareServer().fromGuiSetFileIsShared( fileInfo, isShared );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiGetIsFileShared( const char* fileName )
+bool P2PEngine::fromGuiGetIsFileShared( std::string& fileName )
 {
 	return getPluginFileShareServer().fromGuiGetIsFileShared( fileName );
 }
 
 //============================================================================
+bool P2PEngine::fromGuiRemoveSharedFile( std::string& fileName )
+{
+	return getPluginFileShareServer().fromGuiRemoveSharedFile( fileName );
+}
+
+//============================================================================
 // returns -1 if unknown else percent downloaded
-int P2PEngine::fromGuiGetFileDownloadState( uint8_t * fileHashId )
+int P2PEngine::fromGuiGetFileDownloadState( uint8_t* fileHashId )
 {
 	return getPluginFileShareServer().fromGuiGetFileDownloadState( fileHashId );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId )
+bool P2PEngine::fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool isInLibrary )
 {
-	return getPluginLibraryServer().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+	return getPluginLibraryServer().fromGuiSetFileIsInLibrary( fileInfo, isInLibrary );
+}
+
+//============================================================================
+bool P2PEngine::fromGuiSetFileIsInLibrary( std::string& fileName, bool isInLibrary )
+{
+	return getPluginLibraryServer().fromGuiSetFileIsInLibrary( fileName, isInLibrary );
 }
 
 //============================================================================
@@ -1433,9 +1445,15 @@ void P2PEngine::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool P2PEngine::fromGuiGetIsFileInLibrary( const char* fileName )
+bool P2PEngine::fromGuiGetIsFileInLibrary( std::string& fileName )
 {
 	return getPluginLibraryServer().fromGuiGetIsFileInLibrary( fileName );
+}
+
+//============================================================================
+bool P2PEngine::fromGuiRemoveFromLibrary( std::string& fileName )
+{
+	return getPluginLibraryServer().fromGuiRemoveFromLibrary( fileName );
 }
 
 //============================================================================
@@ -1451,10 +1469,9 @@ bool P2PEngine::fromGuiIsMyP2PWebAudioFile( const char* fileName )
 }
 
 //============================================================================
-int P2PEngine::fromGuiDeleteFile( const char* fileNameIn, bool shredFile )
+int P2PEngine::fromGuiDeleteFile( std::string fileName, bool shredFile )
 {
 	int result = -1;
-	std::string fileName = fileNameIn;
 	if( !fileName.empty() )
 	{
 		FILE* fileHandle = fopen( fileName.c_str(), "rb" );
@@ -1464,7 +1481,7 @@ int P2PEngine::fromGuiDeleteFile( const char* fileNameIn, bool shredFile )
 			result = 0;
 
 			// tell plugins we are removing file
-			m_PluginMgr.fromGuiDeleteFile( fileName.c_str(), shredFile );
+			m_PluginMgr.fromGuiDeleteFile( fileName, shredFile );
 
 			// if exists as asset then announce asset removal
 			AssetBaseInfo* assetInfo = getAssetMgr().findAsset( fileName );

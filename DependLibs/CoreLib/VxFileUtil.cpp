@@ -1735,7 +1735,7 @@ RCODE VxFileUtil::listFilesInDirectory(	const char*				pSrcDir,
 
 
 //============================================================================
-RCODE VxFileUtil::listFilesAndFolders(	const char*				pSrcDir,
+RCODE VxFileUtil::listFilesAndFolders(	const char*					pSrcDir,
 										std::vector<VxFileInfo>&	fileList,
 										uint8_t						fileFilterMask )
 {

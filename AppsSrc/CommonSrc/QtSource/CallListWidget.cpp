@@ -45,8 +45,8 @@ CallListWidget::CallListWidget( QWidget* parent )
     connect( &m_OfferMgr, SIGNAL(signalCallOnlineStatus( GuiCall*,bool)),    this, SLOT(slotCallOnlineStatus( GuiCall*,bool))) ;
     */
 
-    //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    //connect( this, SIGNAL(itemClicked(QListWidgetItem*)),          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
+    //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),    this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 
     setCallViewType( eCallViewTypeEverybody );
 }
@@ -197,10 +197,10 @@ CallListItem* CallListWidget::addOrUpdateCallSession( GuiOfferSession* userSessi
         else
         {
             LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
-            insertItem( 0, (QListWidgetItem *)userItem );
+            insertItem( 0, (QListWidgetItem*)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+        setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
     }
 
     return userItem;
@@ -391,10 +391,10 @@ void CallListWidget::updateCall( GuiOfferSession * offerSession )
                 else
                 {
                     LogMsg( LOG_INFO, "insert user %s\n", offerSession->getOnlineName() );
-                    insertItem( 0, (QListWidgetItem *)userItem );
+                    insertItem( 0, (QListWidgetItem*)userItem );
                 }
 
-                setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+                setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
                 m_CallCache[offerSession->getMyOnlineId()] = offerSession;
             //}
         }

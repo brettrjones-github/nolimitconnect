@@ -63,9 +63,8 @@ ActivityBrowseFiles::ActivityBrowseFiles( AppCommon& app,  EFileFilterType fileF
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 
 
-    connect( ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)));
-    connect( ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemDoubleClicked(QListWidgetItem *)));
-	connect( this, SIGNAL(signalToGuiFileList(VxMyFileInfo&)), this, SLOT(slotToGuiFileList(VxMyFileInfo&)) );
+    connect( ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotListItemClicked(QListWidgetItem*)));
+    connect( ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotListItemDoubleClicked(QListWidgetItem*)));
 
     connect( ui.m_UpDirectoryLabel, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()));
 
@@ -216,23 +215,15 @@ void ActivityBrowseFiles::hideEvent( QHideEvent* ev )
 }
 
 //============================================================================
-void ActivityBrowseFiles::toGuiFileList( VxMyFileInfo& fileInfo )
+void ActivityBrowseFiles::callbackToGuiFileList( FileInfo& fileInfo )
 {
-	emit signalToGuiFileList( fileInfo );
+	addFile( fileInfo );
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotToGuiFileList( VxMyFileInfo& fileInfo )
+void ActivityBrowseFiles::callbackToGuiFileListCompleted( void )
 {
-	if( fileInfo.getFullFileName().isEmpty() )
-	{
-		setActionEnable( true );
-		//statusMsg( "List Get Completed" );
-	}
-	else
-	{
-		addFile( fileInfo, fileInfo.getIsShared(), fileInfo.getIsInLibrary() );
-	}
+	setActionEnable( true );
 }
 
 //============================================================================
@@ -259,14 +250,14 @@ void ActivityBrowseFiles::setFileFilter( EFileFilterType eFileFilter )
 }
 
 //============================================================================
-FileShareItemWidget * ActivityBrowseFiles::fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
+FileShareItemWidget* ActivityBrowseFiles::fileToWidget( FileInfo& fileInfo )
 {
-	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
+	FileShareItemWidget* item = new FileShareItemWidget(ui.FileItemList);
 	item->setSizeHint(QSize( (int)(GuiParams::getGuiScale() * 200),
                              (int)(62 * GuiParams::getGuiScale()) ) );
 
-	FileItemInfo* poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
-	poItemInfo->setIsShared( isShared );
+	FileItemInfo* poItemInfo = new FileItemInfo( fileInfo );
+
 	item->setFileItemInfo( poItemInfo );
 
 	connect(	item, SIGNAL(signalFileShareItemClicked(QListWidgetItem*)), 
@@ -293,34 +284,32 @@ FileShareItemWidget * ActivityBrowseFiles::fileToWidget( VxMyFileInfo& fileInfo,
 }
 
 //============================================================================
-void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
-										bool			isShared,
-										bool			isInLibrary )
+void ActivityBrowseFiles::addFile( FileInfo& fileInfo )
 {
-	FileShareItemWidget * item = fileToWidget( fileInfo, isShared, isInLibrary );
+	FileShareItemWidget* item = fileToWidget( fileInfo );
 	if( item )
 	{
 		if( fileInfo.isDirectory() )
 		{
 			if( 0 == ui.FileItemList->count() )
 			{
-				LogMsg( LOG_INFO, "add directory %s", fileInfo.getJustFileName().toUtf8().constData() );
+				LogMsg( LOG_INFO, "add directory %s", fileInfo.getJustFileName().c_str() );
 				ui.FileItemList->addItem( item );
 			}
 			else
 			{
-				LogMsg( LOG_INFO, "insert 0 directory %s", fileInfo.getJustFileName().toUtf8().constData() );
-				ui.FileItemList->insertItem( 0, (QListWidgetItem *)item );
+				LogMsg( LOG_INFO, "insert 0 directory %s", fileInfo.getJustFileName().c_str() );
+				ui.FileItemList->insertItem( 0, (QListWidgetItem*)item );
 			}
 		}
 		else
 		{
 			bool itemInserted = false;
-			QString justFileName = fileInfo.getJustFileName();
+			QString justFileName = fileInfo.getJustFileName().c_str();
 			for(int i = 0; i < ui.FileItemList->count(); i++ )
 			{
 				QListWidgetItem* itemInList = ui.FileItemList->item(i);
-				FileItemInfo* poInfo = ((FileShareItemWidget *)itemInList)->getFileItemInfo();
+				FileItemInfo* poInfo = ((FileShareItemWidget*)itemInList)->getFileItemInfo();
 				if( poInfo->isDirectory() )
 				{
 					continue;
@@ -329,8 +318,8 @@ void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 				if( poInfo->getJustFileName() > justFileName )
 				{
 					itemInserted = true;
-					LogMsg( LOG_INFO, "inserted %d file %s", i, fileInfo.getJustFileName().toUtf8().constData() );
-					ui.FileItemList->insertItem( i, (QListWidgetItem *)item );
+					LogMsg( LOG_INFO, "inserted %d file %s", i, fileInfo.getJustFileName().c_str() );
+					ui.FileItemList->insertItem( i, (QListWidgetItem*)item );
 					break;
 				}
 			}
@@ -338,12 +327,12 @@ void ActivityBrowseFiles::addFile(		VxMyFileInfo&	fileInfo,
 
 			if( false == itemInserted )
 			{
-				LogMsg( LOG_INFO, "add file %s", fileInfo.getJustFileName().toUtf8().constData() );
+				LogMsg( LOG_INFO, "add file %s", fileInfo.getJustFileName().c_str() );
 				ui.FileItemList->addItem( item );
 			}
 		}
 
-		ui.FileItemList->setItemWidget( (QListWidgetItem *)item, (QWidget*)item );
+		ui.FileItemList->setItemWidget( (QListWidgetItem*)item, (QWidget*)item );
 	}
 }
 
@@ -453,14 +442,13 @@ void ActivityBrowseFiles::slotAddAllButtonClicked( void )
 				continue;
 			}
 
-			m_MyApp.getEngine().fromGuiAddFileToLibrary( poInfo->getFullFileName().toUtf8().constData(), true,
-				poInfo->getFileHashId().isHashValid() ? poInfo->getFileHashId().getHashData() : nullptr );
+			m_MyApp.getEngine().fromGuiSetFileIsInLibrary( poInfo->getFileInfo(), true );
 		}
 	}
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListItemClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListItemClicked( QListWidgetItem* item )
 {
 	if( 1000 > m_ClickToFastTimer.elapsedMs() )
 	{
@@ -468,7 +456,7 @@ void ActivityBrowseFiles::slotListItemClicked( QListWidgetItem * item )
 		return;
 	}
 
-	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget*)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -500,7 +488,7 @@ void ActivityBrowseFiles::slotListItemClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListItemDoubleClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListItemDoubleClicked( QListWidgetItem* item )
 {
 	if( 1000 > m_ClickToFastTimer.elapsedMs() )
 	{
@@ -510,7 +498,7 @@ void ActivityBrowseFiles::slotListItemDoubleClicked( QListWidgetItem * item )
 
 	if( m_IsSelectAFileMode )
 	{
-		FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+		FileItemInfo* poInfo = ((FileShareItemWidget*)item)->getFileItemInfo();
 		if( poInfo )
 		{
 			if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -527,7 +515,7 @@ void ActivityBrowseFiles::slotListItemDoubleClicked( QListWidgetItem * item )
 					m_SelectedFileType			= poInfo->getFileType();
 					m_SelectedFileName			= poInfo->getFullFileName().toUtf8().constData();
 					m_SelectedFileLen			= poInfo->getFileLength();
-					m_SelectedFileIsShared		= poInfo->getIsShared();
+					m_SelectedFileIsShared		= poInfo->getIsSharedFile();
 					m_SelectedFileIsInLibrary	= poInfo->getIsInLibrary();
 					accept();
 				}
@@ -541,15 +529,15 @@ void ActivityBrowseFiles::slotListItemDoubleClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListFileIconClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListFileIconClicked( QListWidgetItem* item )
 {
 	slotListItemClicked( item ); 
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListShareFileIconClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListShareFileIconClicked( QListWidgetItem* item )
 {
-	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget*)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -571,15 +559,15 @@ void ActivityBrowseFiles::slotListShareFileIconClicked( QListWidgetItem * item )
 			// is file
 			poInfo->toggleIsShared();
 			((FileShareItemWidget*)item)->updateWidgetFromInfo();
-            m_Engine.fromGuiSetFileIsShared( poInfo->getFullFileName().toUtf8().constData(), poInfo->getIsShared() );
+            m_Engine.fromGuiSetFileIsShared( poInfo->getFileInfo(), poInfo->getIsSharedFile() );
 		}
 	}	
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListLibraryIconClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListLibraryIconClicked( QListWidgetItem* item )
 {
-	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget*)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -601,17 +589,15 @@ void ActivityBrowseFiles::slotListLibraryIconClicked( QListWidgetItem * item )
 			// is file
 			poInfo->toggleIsInLibrary();
 			((FileShareItemWidget*)item)->updateWidgetFromInfo();
-			m_Engine.fromGuiAddFileToLibrary(	poInfo->getFullFileName().toUtf8().constData(), 
-												poInfo->getIsInLibrary(),
-												poInfo->getFileHashId().getHashData() );
+			m_Engine.fromGuiSetFileIsInLibrary( poInfo->getFileInfo(), poInfo->getIsInLibrary() );
 		}
 	}	
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListPlayIconClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListPlayIconClicked( QListWidgetItem* item )
 {
-	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget*)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -637,9 +623,9 @@ void ActivityBrowseFiles::slotListPlayIconClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityBrowseFiles::slotListShredIconClicked( QListWidgetItem * item )
+void ActivityBrowseFiles::slotListShredIconClicked( QListWidgetItem* item )
 {
-	FileItemInfo* poInfo = ((FileShareItemWidget *)item)->getFileItemInfo();
+	FileItemInfo* poInfo = ((FileShareItemWidget*)item)->getFileItemInfo();
 	if( poInfo )
 	{
 		if( VXFILE_TYPE_DIRECTORY == poInfo->getFileType() )
@@ -702,7 +688,7 @@ void ActivityBrowseFiles::slotRequestFileList( void )
 	clearFileList();
 	ui.m_CurDirLabel->setText( m_CurBrowseDirectory.c_str() );
 	m_MyApp.getAppSettings().setLastBrowseDir( m_eFileFilterType, m_CurBrowseDirectory );
-	m_Engine.getFromGuiInterface().fromGuiBrowseFiles( m_CurBrowseDirectory.c_str(), true, m_FileFilterMask | VXFILE_TYPE_DIRECTORY );
+	m_Engine.getFromGuiInterface().fromGuiBrowseFiles( m_CurBrowseDirectory, m_FileFilterMask | VXFILE_TYPE_DIRECTORY );
 }
 
 //============================================================================
@@ -711,7 +697,7 @@ void ActivityBrowseFiles::clearFileList( void )
 	for(int i = 0; i < ui.FileItemList->count(); ++i)
 	{
 		QListWidgetItem* item = ui.FileItemList->item(i);
-		delete ((FileShareItemWidget *)item);
+		delete ((FileShareItemWidget*)item);
 	}
 	
 	ui.FileItemList->clear();

@@ -109,7 +109,7 @@ public:
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
-    ThumbMgr&					getThumbMgr( void )								{ return m_ThumbMgr; }
+   
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     ConnectionMgr&              getConnectionMgr( void )                        { return m_ConnectionMgr; }
     ConnectMgr&                 getConnectMgr( void )                           { return m_ConnectMgr; }
@@ -132,18 +132,20 @@ public:
 	NetworkMonitor&				getNetworkMonitor( void )						{ return m_NetworkMonitor; } 
 	NetServicesMgr&				getNetServicesMgr( void )						{ return m_NetServicesMgr; }
 	MediaProcessor&				getMediaProcessor( void )						{ return m_MediaProcessor; }
+    OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
+    OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
+    OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
 	VxPeerMgr&					getPeerMgr( void )								{ return m_PeerMgr; }
-    P2PConnectList&				getConnectList( void )							{ return m_ConnectionList; }
+    P2PConnectList&             getConnectList( void )                          { return m_ConnectionList; }
     PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
     PluginSettingMgr&			getPluginSettingMgr( void )						{ return m_PluginSettingMgr; }
     RelayMgr&                   getRelayMgr( void )                             { return m_RelayMgr; }
     RcScan&						getRcScan( void )								{ return m_RcScan; }
     RunUrlAction&               getRunUrlAction( void )                         { return m_RunUrlAction; }
 
-    OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
-    OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
-    OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
+    ThumbMgr&                   getThumbMgr( void )                             { return m_ThumbMgr; }
     UrlMgr&                     getUrlMgr( void );
+
     HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
     UserJoinMgr&                getUserJoinMgr( void )                          { return m_UserJoinMgr; }
     UserOnlineMgr&              getUserOnlineMgr( void )                        { return m_UserOnlineMgr; }
@@ -202,9 +204,9 @@ public:
     virtual void				fromGuiSetIsAppCommercial( bool isCommercial ) override;
     virtual bool				fromGuiGetIsAppCommercial( void ) override;
     virtual uint16_t			fromGuiGetAppVersionBinary( void ) override;
-    const char*				fromGuiGetAppVersionString( void ) override;
-    virtual const char*		fromGuiGetAppName( void ) override;
-    virtual const char*		fromGuiGetAppNameNoSpaces( void ) override;
+    const char*				    fromGuiGetAppVersionString( void ) override;
+    virtual const char*		    fromGuiGetAppName( void ) override;
+    virtual const char*		    fromGuiGetAppNameNoSpaces( void ) override;
     virtual void				fromGuiAppStartup( const char* assetDir, const char* rootDataDir  ) override;
 
     virtual void				fromGuiKickWatchdog( void ) override;
@@ -303,28 +305,28 @@ public:
 	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 														VxGUID&			onlineId,
 														int				pvUserData,
-														const char*	pOfferMsg, 
-														const char*	pFileName = NULL,
-														uint8_t *		fileHashId = 0,
+														const char*	    pOfferMsg, 
+														const char*	    pFileName = nullptr,
+														uint8_t*		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 															VxGUID&			onlineId,
-															  int			pvUserData,
+															int			    pvUserData,
 															int				iOfferResponse,
                                                             VxGUID			lclSessionId ) override;
 
 	virtual int					fromGuiPluginControl(	EPluginType		ePluginType, 
 														VxGUID&			onlineId, 
-														const char*	pControl, 
-														const char*	pAction,
+														const char*	    pControl, 
+														const char*	    pAction,
 														uint32_t		u32ActionData,
 														VxGUID&			fileId = VxGUID::nullVxGUID(),
-                                                        uint8_t *		fileHashId = 0 ) override;
+                                                        uint8_t*		fileHashId = 0 ) override;
 
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 
-                                                    const char*	pMsg ) override;
+                                                    const char*	    pMsg ) override;
     virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) override;
 
 	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
@@ -374,19 +376,22 @@ public:
 
     virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName = NULL ) override;
     virtual void				fromGuiSendLog( uint32_t u32LogFlags ) override;
-    virtual bool				fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
+    virtual bool				fromGuiBrowseFiles( std::string& folderName, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
     virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter ) override;
-    virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId = 0 ) override;
-    virtual bool				fromGuiGetIsFileShared( const char* fileName ) override;
+    virtual bool				fromGuiSetFileIsShared( FileInfo& fileInfo, bool isShared ) override;
+    virtual bool				fromGuiRemoveSharedFile( std::string& fileName ) override; // for remove before deletion
+    virtual bool				fromGuiGetIsFileShared( std::string& fileName ) override;
 	// returns -1 if unknown else percent downloaded
-    virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId ) override;
-    virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId = 0 ) override;
+    virtual int					fromGuiGetFileDownloadState( uint8_t* fileHashId ) override;
+    virtual bool				fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool isInLibrary ) override;
+    virtual bool				fromGuiSetFileIsInLibrary( std::string& fileName, bool isInLibrary ) override;
+    virtual bool				fromGuiRemoveFromLibrary( std::string& fileName ) override; // for remove before deletion
     virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter ) override;
-    virtual bool				fromGuiGetIsFileInLibrary( const char* fileName ) override;
+    virtual bool				fromGuiGetIsFileInLibrary( std::string& fileName ) override;
     virtual bool				fromGuiIsMyP2PWebVideoFile( const char* fileName ) override;
     virtual bool				fromGuiIsMyP2PWebAudioFile( const char* fileName ) override;
 
-    virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile ) override;
+    virtual int					fromGuiDeleteFile( std::string fileName, bool shredFile ) override;
 
     virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) override;
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;

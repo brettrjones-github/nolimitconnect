@@ -30,8 +30,8 @@ ActivityFileSearch::ActivityFileSearch(	AppCommon& app,  QWidget* parent )
     connectBarWidgets();
 
     connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
-    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
-    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
+    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
+    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
 
     g_poFileSearchActivity = this;
 	setTitle("FileSearch" );
@@ -62,7 +62,7 @@ void ActivityFileSearch::slotHomeButtonClicked( void )
 
 //============================================================================
 //! user selected menu item
-void ActivityFileSearch::slotItemClicked(QListWidgetItem * item)
+void ActivityFileSearch::slotItemClicked(QListWidgetItem* item)
 {
 }
 

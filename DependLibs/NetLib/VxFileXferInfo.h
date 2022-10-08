@@ -64,7 +64,7 @@ public:
 	std::string					getDownloadCompleteFileName( void );
 
 	//=== vars ===//
-    FILE *						m_hFile{nullptr};
+    FILE*						m_hFile{nullptr};
     uint64_t					m_u64FileOffs{0};					// current offset into file we are at
     uint64_t					m_u64FileLen{0};                     // total file length
 	VxGUID						m_AssetId;

@@ -165,7 +165,7 @@ void RcScan::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t
 
 
 	m_ScanAction.fromGuiStartScan( m_eScanType );
-	LogMsg( LOG_INFO, "** fromGuiStartScan done\n");
+	LogMsg( LOG_INFO, "** fromGuiStartScan done");
 }
 
 //============================================================================
@@ -180,7 +180,7 @@ void RcScan::fromGuiStopScan( EScanType eScanType )
 	LogMsg( LOG_INFO, "** fromGuiStopScan begin\n");
 	m_bIsScanning = false;
 	m_ScanAction.fromGuiStopScan( eScanType );
-	LogMsg( LOG_INFO, "** fromGuiStopScan done\n");
+	LogMsg( LOG_INFO, "** fromGuiStopScan done");
 	m_ScanMutex.lock();
 	m_IdentsReqConnectList.clearList();
 	m_IdentsSentSearchPktList.clearList();
@@ -189,7 +189,7 @@ void RcScan::fromGuiStopScan( EScanType eScanType )
 }
 
 //============================================================================
-void RcScan::onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq * poPkt )
+void RcScan::onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq* poPkt )
 {
 	unsigned int iMatchesFound = 0;
 	unsigned int iNotMatchesFound = 0;
@@ -309,7 +309,7 @@ void RcScan::onPktScanReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanRe
 }
 
 //============================================================================
-void RcScan::onPktFindFileReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReq * poPkt )
+void RcScan::onPktFindFileReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReq* poPkt )
 {
 
 }
@@ -416,7 +416,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent* netIdent )
 }
 
 //============================================================================
-bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq * poPkt )
+bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq* poPkt )
 {
 	bool bIsMatch = false;
 	switch( poPkt->getSearchType() )

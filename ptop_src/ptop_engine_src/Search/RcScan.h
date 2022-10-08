@@ -53,9 +53,9 @@ public:
 	//! called when new better connection from user
 	void						replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
-	void						onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq * poPkt );
+	void						onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq* poPkt );
 	void						onPktScanReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReply * poPkt );
-	void						onPktFindFileReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReq * poPkt );
+	void						onPktFindFileReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReq* poPkt );
 	void						onPktFindFileReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReply * poPkt );
 
 	virtual void				onScanResultProfilePic(	VxNetIdent*	netIdent, 
@@ -73,7 +73,7 @@ public:
 	void						actionThreadRunning( bool isRunning );
 
 	bool						isLocalSearchMatch( VxNetIdent* netIdent );
-	bool						isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq * poPkt );
+	bool						isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq* poPkt );
 
 
 protected:

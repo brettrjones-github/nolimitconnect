@@ -33,7 +33,7 @@ class ActivityBrowseFiles : public ActivityBase, public ToGuiFileXferInterface
 	Q_OBJECT
 public:
 
-	ActivityBrowseFiles( AppCommon& app, EFileFilterType fileFilter, ActivityBase * parent = NULL, bool isSelectAFileMode = false );
+	ActivityBrowseFiles( AppCommon& app, EFileFilterType fileFilter, ActivityBase* parent = NULL, bool isSelectAFileMode = false );
 	virtual ~ActivityBrowseFiles();
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
@@ -43,8 +43,8 @@ public:
 public:
 	void						setFileFilter( EFileFilterType eFileFilter );
 
-	FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
-	void						updateListEntryWidget( FileShareItemWidget * item );
+	FileShareItemWidget*		fileToWidget( FileInfo& fileInfo );
+	void						updateListEntryWidget( FileShareItemWidget* item );
 	bool						getWasFileSelected( void )						{ return m_FileWasSelected; }
 	uint8_t						getSelectedFileType( void )						{ return m_SelectedFileType; }
 	QString						getSelectedFileName( void )						{ return m_SelectedFileName; }
@@ -52,12 +52,7 @@ public:
 	bool						getSelectedFileIsShared( void )					{ return m_SelectedFileIsShared; }
 	bool						getSelectedFileIsInLibrary( void )				{ return m_SelectedFileIsInLibrary; }
 
-signals:
-	void						signalToGuiFileList( VxMyFileInfo& fileInfo );
-
 protected slots:
-	void						slotToGuiFileList( VxMyFileInfo& fileInfo );
-
     void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
 	void						slotBrowseButtonClicked( void );
@@ -65,28 +60,28 @@ protected slots:
 	void						slotRequestFileList( void );
 	void						slotApplyFileFilter( unsigned char fileMask );
 
-	void						slotListItemClicked( QListWidgetItem * item );
-	void						slotListItemDoubleClicked( QListWidgetItem * item );
-	void						slotListFileIconClicked( QListWidgetItem * item );
-	void						slotListShareFileIconClicked( QListWidgetItem * item );
-	void						slotListLibraryIconClicked( QListWidgetItem * item );
-	void						slotListPlayIconClicked( QListWidgetItem * item );
-	void						slotListShredIconClicked( QListWidgetItem * item );
+	void						slotListItemClicked( QListWidgetItem* item );
+	void						slotListItemDoubleClicked( QListWidgetItem* item );
+	void						slotListFileIconClicked( QListWidgetItem* item );
+	void						slotListShareFileIconClicked( QListWidgetItem* item );
+	void						slotListLibraryIconClicked( QListWidgetItem* item );
+	void						slotListPlayIconClicked( QListWidgetItem* item );
+	void						slotListShredIconClicked( QListWidgetItem* item );
 	void						slotAddAllButtonClicked( void );
 	
 protected:
     virtual void				showEvent( QShowEvent* ev ) override;
     virtual void				hideEvent( QHideEvent* ev ) override;
-    virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
+
+	virtual void				callbackToGuiFileList( FileInfo& fileInfo ) override;
+	virtual void				callbackToGuiFileListCompleted( void ) override;
 
 	void						fromListWidgetRequestFileList( void );
 	void						setCurrentBrowseDir( QString browseDir );
 	void						setActionEnable( bool enable );
-	void						addFile(	VxMyFileInfo&	fileInfo,
-											bool			isShared,
-											bool			isInLibrary );
+	void						addFile( FileInfo& fileInfo );
 
-	void						updateListEntryWidget( FileShareItemWidget * item, FileItemInfo* poSession );
+	void						updateListEntryWidget( FileShareItemWidget* item, FileItemInfo* poSession );
 	void						clearFileList( void );
 	void						setDefaultCurrentDir( EFileFilterType eFileFilterType );
 	std::string					getDefaultDir( int eFileFilterType );

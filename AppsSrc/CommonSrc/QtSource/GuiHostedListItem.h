@@ -59,7 +59,7 @@ public:
     bool                        getIsHostView( void )               { return m_IsHostView; }
 
 signals:
-    void						signalGuiHostedListItemClicked( QListWidgetItem * poItemWidget );
+    void						signalGuiHostedListItemClicked( QListWidgetItem* poItemWidget );
 	void						signalIconButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalFriendshipButtonClicked( GuiHostedListItem* listEntryWidget );
 	void						signalMenuButtonClicked( GuiHostedListItem* listEntryWidget );

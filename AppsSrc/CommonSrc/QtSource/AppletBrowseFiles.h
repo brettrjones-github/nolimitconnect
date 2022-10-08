@@ -40,8 +40,8 @@ public:
 	void						setFileFilter( EFileFilterType eFileFilter );
 	void						setCurrentDirectory( QString browseDir );
 
-	FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
-	void						updateListEntryWidget( FileShareItemWidget * item );
+	FileShareItemWidget*		fileToWidget( FileInfo& fileInfo );
+	void						updateListEntryWidget( FileShareItemWidget* item );
 	bool						getWasFileSelected( void )						{ return m_FileWasSelected; }
 	uint8_t						getSelectedFileType( void )						{ return m_SelectedFileType; }
 	QString						getSelectedFileName( void )						{ return m_SelectedFileName; }
@@ -58,26 +58,26 @@ protected slots:
 	void						slotRequestFileList( void );
 	void						slotApplyFileFilter( unsigned char fileMask );
 
-	void						slotListItemClicked( QListWidgetItem * item );
-	void						slotListItemDoubleClicked( QListWidgetItem * item );
-	void						slotListFileIconClicked( QListWidgetItem * item );
-	void						slotListShareFileIconClicked( QListWidgetItem * item );
-	void						slotListLibraryIconClicked( QListWidgetItem * item );
-	void						slotListPlayIconClicked( QListWidgetItem * item );
-	void						slotListShredIconClicked( QListWidgetItem * item );
+	void						slotListItemClicked( QListWidgetItem* item );
+	void						slotListItemDoubleClicked( QListWidgetItem* item );
+	void						slotListFileIconClicked( QListWidgetItem* item );
+	void						slotListShareFileIconClicked( QListWidgetItem* item );
+	void						slotListLibraryIconClicked( QListWidgetItem* item );
+	void						slotListPlayIconClicked( QListWidgetItem* item );
+	void						slotListShredIconClicked( QListWidgetItem* item );
 	
 protected:
     virtual void				showEvent( QShowEvent* ev ) override;
     virtual void				hideEvent( QHideEvent* ev ) override;
-    virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
+
+    virtual void				callbackToGuiFileList( FileInfo& fileInfo ) override;
+	virtual void				callbackToGuiFileListCompleted( void ) override;
 
 	void						fromListWidgetRequestFileList( void );
 	void						setActionEnable( bool enable );
-	void						addFile(	VxMyFileInfo&	fileInfo,
-											bool			isShared,
-											bool			isInLibrary );
+	void						addFile( FileInfo&	fileInfo );
 
-	void						updateListEntryWidget( FileShareItemWidget * item, FileItemInfo * poSession );
+	void						updateListEntryWidget( FileShareItemWidget* item, FileItemInfo* poSession );
 	void						clearFileList( void );
 	void						setDefaultCurrentDir( EFileFilterType eFileFilterType );
 	std::string					getDefaultDir( int eFileFilterType );

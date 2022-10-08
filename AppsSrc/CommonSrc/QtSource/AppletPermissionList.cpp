@@ -87,6 +87,6 @@ void AppletPermissionList::createPermissionItem( EPluginType pluginType )
 {
     PermissionListItem * item = new PermissionListItem( ui.m_PermissionItemList, this );
     item->initPermissionListItem( pluginType );
-    ui.m_PermissionItemList->addItem( ( QListWidgetItem * )item );
-    ui.m_PermissionItemList->setItemWidget( ( QListWidgetItem * )item, ( QWidget* )item );
+    ui.m_PermissionItemList->addItem( ( QListWidgetItem* )item );
+    ui.m_PermissionItemList->setItemWidget( ( QListWidgetItem* )item, ( QWidget* )item );
 }

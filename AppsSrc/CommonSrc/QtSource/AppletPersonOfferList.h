@@ -39,14 +39,14 @@ private slots:
     /*
 
     void						slotHomeButtonClicked( void ) override;
-	void						slotFileXferItemClicked( QListWidgetItem * item );
+	void						slotFileXferItemClicked( QListWidgetItem* item );
 
-	void						slotFileIconButtonClicked( QListWidgetItem * item );
-	void						slotCancelButtonClicked( QListWidgetItem * item );
-	void						slotPlayButtonClicked( QListWidgetItem * item );
-	void						slotLibraryButtonClicked( QListWidgetItem * item );
-	void						slotFileShareButtonClicked( QListWidgetItem * item );
-	void						slotShredButtonClicked( QListWidgetItem * item );
+	void						slotFileIconButtonClicked( QListWidgetItem* item );
+	void						slotCancelButtonClicked( QListWidgetItem* item );
+	void						slotPlayButtonClicked( QListWidgetItem* item );
+	void						slotLibraryButtonClicked( QListWidgetItem* item );
+	void						slotFileShareButtonClicked( QListWidgetItem* item );
+	void						slotShredButtonClicked( QListWidgetItem* item );
     */
 
 protected:

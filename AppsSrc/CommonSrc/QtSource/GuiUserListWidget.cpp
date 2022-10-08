@@ -174,10 +174,10 @@ void GuiUserListWidget::updateUser( GuiUser* user )
                 else
                 {
                     LogMsg( LOG_INFO, "insert user %s", user->getOnlineName().c_str() );
-                    insertItem( 0, (QListWidgetItem *)entryWidget );
+                    insertItem( 0, (QListWidgetItem*)entryWidget );
                 }
 
-                setItemWidget( (QListWidgetItem *)entryWidget, (QWidget*)entryWidget );
+                setItemWidget( (QListWidgetItem*)entryWidget, (QWidget*)entryWidget );
                 m_UserCache[user->getMyOnlineId()] = userSession;
                 onListItemAdded( userSession, entryWidget );
             }
@@ -309,7 +309,7 @@ GuiUserListItem* GuiUserListWidget::findListEntryWidgetByOnlineId( VxGUID& onlin
 }
 
 //============================================================================
-void GuiUserListWidget::slotItemClicked( QListWidgetItem * item )
+void GuiUserListWidget::slotItemClicked( QListWidgetItem* item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -484,10 +484,10 @@ GuiUserListItem* GuiUserListWidget::addOrUpdateSession( GuiUserSessionBase* user
         else
         {
             LogMsg( LOG_VERBOSE, "insert user %s", userSession->getUserIdent()->getOnlineName().c_str() );
-            insertItem( 0, (QListWidgetItem *)userItem );
+            insertItem( 0, (QListWidgetItem*)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)userItem, (QWidget*)userItem );
+        setItemWidget( (QListWidgetItem*)userItem, (QWidget*)userItem );
     }
 
     return userItem;

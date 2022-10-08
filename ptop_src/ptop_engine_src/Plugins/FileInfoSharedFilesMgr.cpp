@@ -13,7 +13,7 @@
 //============================================================================
 
 #include "FileInfoSharedFilesMgr.h"
-#include "FileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include "PluginBase.h"
 

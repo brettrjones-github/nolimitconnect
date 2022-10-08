@@ -20,6 +20,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/OfferClientMgr/OfferClientInfoDb.h>
 #include <ptop_src/ptop_engine_src/OfferHostMgr/OfferHostInfoDb.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <GuiInterface/IToGui.h>
 
@@ -831,24 +832,23 @@ bool OfferBaseMgr::fromGuiGetOfferBaseInfo( uint8_t fileTypeFilter )
 	std::vector<OfferBaseInfo*>::iterator iter;
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 	{
-		OfferBaseInfo* assetInfo = (*iter);
-		if( 0 != ( fileTypeFilter & assetInfo->getOfferType() ) )
+		OfferBaseInfo* offerInfo = (*iter);
+		if( 0 != ( fileTypeFilter & offerInfo->getOfferType() ) )
 		{
-			if( assetInfo->isSharedFileOffer() || assetInfo->isInLibary() )
+			if( offerInfo->isSharedFileOffer() || offerInfo->isInLibary() )
 			{
-				IToGui::getToGui().toGuiFileList(	assetInfo->getOfferName().c_str(), 
-										            assetInfo->getOfferLength(), 
-										            assetInfo->getOfferType(), 
-										            assetInfo->isSharedFileOffer(),
-										            assetInfo->isInLibary(),
-													assetInfo->getOfferId(),
-										            assetInfo->getOfferHashId().getHashData() );
+				FileInfo fileInfo( offerInfo->getCreatorId(), offerInfo->getOfferName(), offerInfo->getOfferLength(),
+					(uint8_t)offerInfo->getOfferType(), offerInfo->getOfferId(), offerInfo->getOfferHashId() );
+				fileInfo.setIsInLibrary( offerInfo->isInLibary() );
+				fileInfo.setIsSharedFile( offerInfo->isSharedFileOffer() );
+
+				IToGui::getToGui().toGuiFileList( fileInfo );
 			}
 		}
 	}
 
 	unlockResources();
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
+	IToGui::getToGui().toGuiFileListCompleted();
 	return true;
 }
 
@@ -886,7 +886,7 @@ void OfferBaseMgr::queryHistoryOffers( VxGUID& historyId )
 //============================================================================
 void OfferBaseMgr::updateOfferXferState( VxGUID& assetOfferId, EOfferSendState assetSendState, int param )
 {
-	LogMsg( LOG_INFO, "OfferBaseMgr::updateOfferXferState state %d start\n", assetSendState );
+	LogMsg( LOG_INFO, "OfferBaseMgr::updateOfferXferState state %d start", assetSendState );
 	std::vector<OfferBaseInfo*>::iterator iter;
 	OfferBaseInfo* assetInfo;
 	bool assetSendStateChanged = false;

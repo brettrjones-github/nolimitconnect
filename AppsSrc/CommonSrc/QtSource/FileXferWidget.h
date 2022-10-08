@@ -38,7 +38,7 @@ public:
 
 	void						setXferState( EXferState eXferState, int param1, int param2 );
 
-	void						setIsShared( bool isShared );
+	void						setIsSharedFile( bool isShared );
 	bool						getIsShared( void );
 	void						setIsInLibrary( bool isInLibrary );
 	bool						getIsInLibrary( void );
@@ -49,14 +49,14 @@ public:
 	void						updateWidgetFromInfo( void );
 
 signals:
-	void						signalFileXferItemClicked( QListWidgetItem * poItemWidget );
-	void						signalFileIconButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalCancelButtonClicked( QListWidgetItem * poItemWidget );
+	void						signalFileXferItemClicked( QListWidgetItem* poItemWidget );
+	void						signalFileIconButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalCancelButtonClicked( QListWidgetItem* poItemWidget );
 
-	void						signalPlayButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalLibraryButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalFileShareButtonClicked( QListWidgetItem * poItemWidget );
-	void						signalShredButtonClicked( QListWidgetItem * poItemWidget );
+	void						signalPlayButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalLibraryButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalFileShareButtonClicked( QListWidgetItem* poItemWidget );
+	void						signalShredButtonClicked( QListWidgetItem* poItemWidget );
 
 protected slots:
 	void						slotFileIconButtonClicked( void );

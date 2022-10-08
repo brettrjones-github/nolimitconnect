@@ -66,7 +66,7 @@ bool PluginAboutMePageClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSk
 			{
 				lockCompletedFileList();
 				fileInfo.setFileName( fileName );
-				fileInfo.setIsDirty( false );
+
 				m_CompletedFileInfoList.push_back( fileInfo );
 				m_InProgressFileInfoList.erase( iter );
 				result = true;
@@ -331,7 +331,7 @@ bool PluginAboutMePageClient::startDownload( VxGUID& searchSessionId, VxSktBase*
 		FileInfo& fileInfo = *iter;
 		lockInProgressFileList();
 		VxGUID xferSessionId = fileInfo.initializeNewXferSessionId();
-		fileInfo.setIsDirty( true );
+
 		m_InProgressFileInfoList.push_back( fileInfo );
 		if( m_FileInfoMgr.startDownload( *iter, xferSessionId, sktBase, netIdent ) )
 		{

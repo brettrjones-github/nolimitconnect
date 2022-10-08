@@ -46,7 +46,6 @@ class GuiHelpers
 {
 public:
     static QString				getAvailableStorageSpaceText();
-    static QString				getJustFileName( QString& fileNameAndPath );
 
 	static QString				browseForDirectory( QString startDir = "", QWidget* parent = 0 );
     static int					calculateTextHeight( QFontMetrics& fontMetrics, QString textStr );
@@ -54,8 +53,6 @@ public:
 
     static EApplet              getAppletThatPlaysFile( AppCommon& myApp, uint8_t fileType, QString fullFileName, VxGUID& assetId );
     static EApplet              getAppletThatPlaysFile( AppCommon& myApp, AssetBaseInfo& assetInfo );
-
-    static void					splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath );
 
     static bool                 isAppletAService( EApplet applet );
     static bool                 isAppletAClient( EApplet applet );

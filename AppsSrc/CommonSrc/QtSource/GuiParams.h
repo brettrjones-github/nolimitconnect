@@ -129,6 +129,8 @@ public:
     static uint8_t              assetTypeToFileType( EAssetType assetType );
     static EAssetType           fileTypeToAssetType( uint8_t fileTypeFlags );
 
+    static QString              describeFileType( uint8_t fileType );
+
 protected:
 
     static QColor				m_OnlineBkgColor;

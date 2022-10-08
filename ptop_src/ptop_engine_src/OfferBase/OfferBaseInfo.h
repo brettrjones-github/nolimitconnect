@@ -88,7 +88,7 @@ public:
     virtual int64_t				getOfferLength( void )                          { return m_s64OfferLen; }
 
     virtual void				setOfferId( VxGUID& uniqueId )                  { m_OfferId = uniqueId; }
-    virtual void				setOfferId( const char* guid )                 { m_OfferId.fromVxGUIDHexString( guid ); }
+    virtual void				setOfferId( const char* guid )                  { m_OfferId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getOfferId( void )                              { return m_OfferId; }
     virtual VxGUID&				generateNewOfferId( void ); // generates unique id, assigns it to offer id and returns reference to it
 
@@ -97,15 +97,15 @@ public:
     virtual VxSha1Hash&			getOfferHashId( void )                          { return m_OfferHash; }
 
     virtual void				setCreatorId( VxGUID& creatorId )               { m_CreatorId = creatorId; }
-    virtual void				setCreatorId( const char* creatorId )          { m_CreatorId.fromVxGUIDHexString( creatorId ); }
+    virtual void				setCreatorId( const char* creatorId )           { m_CreatorId.fromVxGUIDHexString( creatorId ); }
     virtual VxGUID&				getCreatorId( void )                            { return m_CreatorId; }
 
     virtual void				setHistoryId( VxGUID& historyId )               { m_HistoryId = historyId; }
-    virtual void				setHistoryId( const char* historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
+    virtual void				setHistoryId( const char* historyId )           { m_HistoryId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getHistoryId( void )                            { return m_HistoryId; }
 
     virtual void				setThumbId( VxGUID& historyId )                 { m_ThumbId = historyId; }
-    virtual void				setThumbId( const char* historyId )            { m_ThumbId.fromVxGUIDHexString( historyId ); }
+    virtual void				setThumbId( const char* historyId )             { m_ThumbId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getThumbId( void )                              { return m_ThumbId; }
 
     virtual void				setLocationFlags( uint32_t locFlags )           { m_LocationFlags = locFlags; }

@@ -59,13 +59,13 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobInfo.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 class AccountMgr;
 class AppSettings;
 class AppletDownloads;
 class AppletUploads;
 
-class ActivityAbout;
 class ActivityAppSetup;
 class ActivityCreateAccount;
 class ActivityShowHelp;
@@ -87,7 +87,6 @@ class PopupMenu;
 class RenderGlWidget;
 
 class VxPeerMgr;
-class VxMyFileInfo;
 class VxTilePositioner;
 
 // media
@@ -148,7 +147,7 @@ public:
     bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
     bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
     MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
-    VxNetIdent*				getMyIdentity( void );
+    VxNetIdent*				    getMyIdentity( void );
     VxGUID&				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
     GuiOfferClientMgr&			getOfferClientMgr( void )				    { return m_OfferClientMgr; }
@@ -534,55 +533,27 @@ public:
                                                         int32_t			s32VarValue ) override;
 
 	//=== to gui file ===//
-	virtual void				toGuiFileListReply(		VxNetIdent*	netIdent, 
-														EPluginType		ePluginType, 
-														uint8_t			u8FileType, 
-														uint64_t		u64FileLen, 
-														const char*	pFileName,
-                                                        VxGUID			assetId,
-                                                        uint8_t *		fileHashData ) override;
+	virtual void				toGuiFileListReply( VxGUID& onlineId, EPluginType pluginType, FileInfo& fileInfo ) override;
 
-	virtual void				toGuiStartUpload(	VxNetIdent*	netIdent, 
-													EPluginType		ePluginType, 
-													VxGUID&			lclSessionId, 
-													uint8_t			u8FileType, 
-													uint64_t		u64FileLen, 
-                                                    std::string&   fileName,
-                                                    VxGUID&			assetId,
-                                                    VxSha1Hash&     fileHasId ) override;
+    virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
-	virtual void				toGuiStartDownload(	VxNetIdent*	netIdent, 
-													EPluginType		ePluginType, 
-													VxGUID&			lclSessionId, 
-													uint8_t			u8FileType, 
-													uint64_t		u64FileLen, 
-                                                    std::string&    fileName,
-                                                    VxGUID&			assetId,
-                                                    VxSha1Hash&     fileHasId ) override;
+	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
     virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
     virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID&	lclSessionId, std::string& fileName, EXferError xferError ) override;
     virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
 
-	virtual void				toGuiFileList(	const char*	fileName, 
-												uint64_t		fileLen, 
-												uint8_t			fileType, 
-												bool			isShared,
-												bool			isInLibrary,
-                                                VxGUID          assetId,
-                                                uint8_t *		fileHashId = 0 ) override;
+	virtual void				toGuiFileList( FileInfo& fileInfo ) override;
+    virtual void				toGuiFileListCompleted( void ) override;
 	//=== to gui search ===//
     virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent* netIdent ) override;
     virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode ) override;
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
 
     virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
-	virtual void				toGuiSearchResultFileSearch(	VxNetIdent*	netIdent, 		
-																VxGUID&			lclSessionId, 
-																uint8_t			u8FileType, 
-																uint64_t		u64FileLen,                                                   
-                                                                const char*	pFileName,
-                                                                VxGUID			assetId ) override;
+
+    virtual void				toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
+
 	//=== to gui asset ===//
     virtual void				toGuiAssetAdded( AssetBaseInfo* assetInfo ) override;
     virtual void				toGuiAssetUpdated( AssetBaseInfo* assetInfo ) override;
@@ -685,11 +656,13 @@ signals:
     void                        signalInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
     void                        signalInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError );
 
-    void                        signalInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        signalInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, FileInfo fileInfo );
     void                        signalInternalToGuiFileDownloadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
-    void                        signalInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        signalInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, FileInfo fileInfo );
     void                        signalInternalToGuiFileUploadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
     void                        signalInternalToGuiFileXferState( EPluginType pluginType, VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
+    void                        signalInternalToGuiFileList( FileInfo fileInfo );
+    void                        signalInternalToGuiFileListCompleted( void );
 
     void                        signalInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
     void                        signalInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
@@ -746,11 +719,13 @@ private slots:
     void                        slotInternalPluginMessage( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, QString paramValue );
     void                        slotInternalPluginErrorMsg( EPluginType pluginType, VxGUID onlineId, EPluginMsgType msgType, ECommErr commError );
 
-    void                        slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        slotInternalToGuiStartDownload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, FileInfo fileInfo );
     void                        slotInternalToGuiFileDownloadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
-    void                        slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, uint8_t fileType, uint64_t fileLen, QString fileName, VxGUID assetId, VxSha1Hash fileHashId );
+    void                        slotInternalToGuiStartUpload( VxGUID onlineId, EPluginType ePluginType, VxGUID lclSessionId, FileInfo fileInfo );
     void                        slotInternalToGuiFileUploadComplete( EPluginType pluginType, VxGUID lclSessionId, QString fileName, EXferError xferError );
     void                        slotInternalToGuiFileXferState( EPluginType pluginType, VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
+    void                        slotInternalToGuiFileList( FileInfo fileInfo );
+    void                        slotInternalToGuiFileListCompleted( void );
 
     void                        slotInternalToGuiSetGameValueVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );
     void                        slotInternalToGuiSetGameActionVar( EPluginType ePluginType, VxGUID onlineId, int32_t s32VarId, int32_t s32VarValue );

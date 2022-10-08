@@ -55,13 +55,13 @@ private slots:
 	void						slotUpdateFriend( GuiUser* netIdent, bool sessionTimeChange );
 	void						slotRefreshFriend( VxGUID friendId );
 	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineId, int pos );
-	void						slotItemClicked(QListWidgetItem *);
+	void						slotItemClicked(QListWidgetItem*);
 	void						slotRefreshFriendList( EFriendViewType eWhichFriendsToShow );
 	void						slotFriendListItemClicked( FriendListEntryWidget* widget );
 	void						slotFriendMenuButtonClicked( FriendListEntryWidget* widget );
 
 protected:
-	//!	fill friend into new QListWidgetItem *
+	//!	fill friend into new QListWidgetItem*
 	FriendListEntryWidget *		friendToWidget( GuiUser* poFriend );
 	//!	get friend from QListWidgetItem data
     GuiUser*					widgetToFriend( FriendListEntryWidget * item );

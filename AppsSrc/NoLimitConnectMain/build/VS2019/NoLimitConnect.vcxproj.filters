@@ -671,9 +671,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxMenuButtonTop.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\VxMyFileInfo.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxPlainTextEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -1574,9 +1571,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxMenuButtonTop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\VxMyFileInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxPlainTextEdit.cpp">

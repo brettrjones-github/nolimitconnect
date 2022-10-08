@@ -89,9 +89,10 @@ enum EMediaInputType
 	eMaxMediaInputType
 };
 
+class FileInfo;
+class GroupieInfo;
 class SearchParams;
 class VxPtopUrl;
-class GroupieInfo;
 
 /// IFromGui is an abstract interface for from GUI to P2PEngine calls
 class IFromGui
@@ -109,11 +110,11 @@ public:
 	/// return engine version in binary
 	virtual uint16_t			fromGuiGetAppVersionBinary( void ) = 0;
 	/// return engine version as a 1.2.3 version number
-	virtual const char*		fromGuiGetAppVersionString( void ) = 0;
+	virtual const char*			fromGuiGetAppVersionString( void ) = 0;
 	/// returns My P2P Web or Test App if commercial build
-	virtual const char*		fromGuiGetAppName( void ) = 0;
+	virtual const char*			fromGuiGetAppName( void ) = 0;
 	/// returns MyP2PWeb or TestApp if commercial build
-	virtual const char*		fromGuiGetAppNameNoSpaces( void ) = 0;
+	virtual const char*			fromGuiGetAppNameNoSpaces( void ) = 0;
 
 	/// First call to engine should send path to assets ( game and app resources ) and path to root of where to write application data
 	virtual void				fromGuiAppStartup( const char* assetsDir, const char* rootDataDir ) = 0;
@@ -334,29 +335,32 @@ public:
 															int32_t			actionValue ) = 0;
 
 	/// Send directory listing to GUI
-	virtual bool				fromGuiBrowseFiles(	const char* dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) = 0; 
+	virtual bool				fromGuiBrowseFiles( std::string& folderName, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) = 0;
 	/// Send list of shared files to GUI
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter ) = 0;
 	/// Share/Unshare a file
-	virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared, uint8_t * fileHashId = 0 ) = 0;
+	virtual bool				fromGuiSetFileIsShared( FileInfo& fileInfo, bool addFile ) = 0;
 	/// Return true if file is shared
-	virtual bool				fromGuiGetIsFileShared( const char* fileName ) = 0;
+	virtual bool				fromGuiGetIsFileShared( std::string& fileName ) = 0;
+	virtual bool				fromGuiRemoveSharedFile( std::string& fileName ) = 0; // for remove before deletion
 
 	/// Returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId ) = 0;
 	/// Add/Remove file from library
-	virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId = 0 ) = 0;
+	virtual bool				fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool inLibrary ) = 0;
+	virtual bool				fromGuiSetFileIsInLibrary( std::string& fileName, bool inLibrary ) = 0;
 	/// Return true if file is in library
-	virtual bool				fromGuiGetIsFileInLibrary( const char* fileName ) = 0;
+	virtual bool				fromGuiGetIsFileInLibrary( std::string& fileName ) = 0;
 	/// Send to GUI file that are in library of the given file type mask
 	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter ) = 0;
+	virtual bool				fromGuiRemoveFromLibrary( std::string& fileName ) = 0; // for remove before deletion
 	/// Return true if video file was created by My P2P Web
 	virtual bool				fromGuiIsMyP2PWebVideoFile( const char* fileName ) = 0;
 	/// Return true if audio file was created by My P2P Web
 	virtual bool				fromGuiIsMyP2PWebAudioFile( const char* fileName ) = 0;
 	
 	/// Delete file.. if shred file is true then write random data to file before deleting it
-	virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile ) = 0;
+	virtual int					fromGuiDeleteFile( std::string fileName, bool shredFile ) = 0;
 
 	/// Send Text Chat session assets of contact to GUI
 	virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) = 0;

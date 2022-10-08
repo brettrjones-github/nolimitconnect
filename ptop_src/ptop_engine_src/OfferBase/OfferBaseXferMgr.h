@@ -95,16 +95,16 @@ protected:
 	virtual OfferBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
 	virtual OfferBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	virtual EXferError			beginOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendReq * poPkt, PktOfferSendReply& pktReply );
+	virtual EXferError			beginOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendReq* poPkt, PktOfferSendReply& pktReply );
 	virtual EXferError			beginOfferBaseSend( OfferBaseTxSession * xferSession );
 
 	virtual void				endOfferBaseXferSession( OfferBaseRxSession * xferSession, bool pluginIsLocked );
 	virtual void				endOfferBaseXferSession( OfferBaseTxSession * xferSession, bool pluginIsLocked, bool requeOffer );
 
-	virtual EXferError			rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxSession * xferSession, PktOfferChunkReq * poPkt );
+	virtual EXferError			rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxSession * xferSession, PktOfferChunkReq* poPkt );
 	virtual EXferError			txNextOfferBaseChunk( OfferBaseTxSession * xferSession, uint32_t remoteErr, bool pluginIsLocked );
 
-	virtual void				finishOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendCompleteReq * poPkt, bool pluginIsLocked );
+	virtual void				finishOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendCompleteReq* poPkt, bool pluginIsLocked );
 
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );

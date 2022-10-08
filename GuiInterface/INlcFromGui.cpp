@@ -658,9 +658,9 @@ void INlc::fromGuiSendLog( uint32_t u32LogFlags )
 }
 
 //============================================================================
-bool INlc::fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask )
+bool INlc::fromGuiBrowseFiles( std::string& folderName, uint8_t fileFilterMask )
 {
-    return getPtoP().fromGuiBrowseFiles( dir, lookupShareStatus, fileFilterMask );
+    return getPtoP().fromGuiBrowseFiles( folderName, fileFilterMask );
 }
 
 //============================================================================
@@ -670,27 +670,39 @@ bool INlc::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool INlc::fromGuiSetFileIsShared( const char* fileName, bool isShared )
+bool INlc::fromGuiSetFileIsShared( FileInfo& fileInfo, bool isShared )
 {
-    return getPtoP().fromGuiSetFileIsShared( fileName, isShared );
+    return getPtoP().fromGuiSetFileIsShared( fileInfo, isShared );
 }
 
 //============================================================================
-bool INlc::fromGuiGetIsFileShared( const char* fileName )
+bool INlc::fromGuiGetIsFileShared( std::string& fileName )
 {
     return getPtoP().fromGuiGetIsFileShared( fileName );
 }
 
 //============================================================================
-int INlc::fromGuiGetFileDownloadState( uint8_t * fileHashId )
+bool INlc::fromGuiRemoveSharedFile( std::string fileName )
+{
+    return getPtoP().fromGuiRemoveSharedFile( fileName );
+}
+
+//============================================================================
+int INlc::fromGuiGetFileDownloadState( uint8_t* fileHashId )
 {
     return getPtoP().fromGuiGetFileDownloadState( fileHashId );
 }
 
 //============================================================================
-bool INlc::fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId )
+bool INlc::fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool inLibrary )
 {
-    return getPtoP().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+    return getPtoP().fromGuiSetFileIsInLibrary( fileInfo, inLibrary );
+}
+
+//============================================================================
+bool INlc::fromGuiSetFileIsInLibrary( std::string fileName, bool inLibrary )
+{
+    return getPtoP().fromGuiSetFileIsInLibrary( fileName, inLibrary );
 }
 
 //============================================================================
@@ -700,9 +712,15 @@ void INlc::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-bool INlc::fromGuiGetIsFileInLibrary( const char* fileName )
+bool INlc::fromGuiGetIsFileInLibrary( std::string& fileName )
 {
     return getPtoP().fromGuiGetIsFileInLibrary( fileName );
+}
+
+//============================================================================
+bool INlc::fromGuiRemoveFromLibrary( std::string& fileName )
+{
+    return getPtoP().fromGuiRemoveFromLibrary( fileName );
 }
 
 //============================================================================
@@ -718,7 +736,7 @@ bool INlc::fromGuiIsMyP2PWebAudioFile( const char* fileName )
 }
 
 //============================================================================
-int INlc::fromGuiDeleteFile( const char* fileName, bool shredFile )
+int INlc::fromGuiDeleteFile( std::string fileName, bool shredFile )
 {
     return getPtoP().fromGuiDeleteFile( fileName, shredFile );
 }

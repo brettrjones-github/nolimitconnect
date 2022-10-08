@@ -25,6 +25,7 @@ public:
 	virtual ~Sha1GeneratorMgr() = default;
 
 	void						generateSha1( VxGUID& fileId, std::string& fileName, Sha1GeneratorCallback* client );
+	void						cancelGenerateSha1( VxGUID& fileId, std::string& fileName, Sha1GeneratorCallback* client );
 
 	void						threadGenerateSha1( VxThread* vxThread );
 

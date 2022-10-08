@@ -1,5 +1,6 @@
 #include "AppCommon.h"
 #include <soundio/AudioDefs.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 //============================================================================
 void  AppCommon::registerMetaData( void )
@@ -69,6 +70,7 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<VxSha1Hash>( "VxSha1Hash" );
 	qRegisterMetaType<AssetBaseInfo>( "AssetBaseInfo" );
 	qRegisterMetaType<BlobInfo>( "BlobInfo" );
+	qRegisterMetaType<FileInfo>( "FileInfo" );
 }
 
 //============================================================================
@@ -91,13 +93,18 @@ void AppCommon::connectSignals( void )
     connect( this, SIGNAL( signalInternalPluginMessage(EPluginType,VxGUID,EPluginMsgType,QString) ), this, SLOT( slotInternalPluginMessage(EPluginType,VxGUID,EPluginMsgType,QString) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalPluginErrorMsg(EPluginType,VxGUID,EPluginMsgType,ECommErr) ), this, SLOT( slotInternalPluginErrorMsg(EPluginType,VxGUID,EPluginMsgType,ECommErr) ), Qt::QueuedConnection );
 
-    connect( this, SIGNAL( signalInternalToGuiStartDownload(VxGUID,EPluginType,VxGUID,uint8_t,uint64_t,QString,VxGUID,VxSha1Hash) ), this,
-        SLOT( slotInternalToGuiStartDownload(VxGUID,EPluginType,VxGUID,uint8_t,uint64_t,QString,VxGUID,VxSha1Hash) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalToGuiFileDownloadComplete(EPluginType,VxGUID,QString,EXferError) ), this, SLOT( slotInternalToGuiFileDownloadComplete(EPluginType,VxGUID,QString,EXferError) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalToGuiStartUpload(VxGUID,EPluginType,VxGUID,uint8_t,uint64_t,QString,VxGUID,VxSha1Hash) ), this,
-        SLOT( slotInternalToGuiStartUpload(VxGUID,EPluginType,VxGUID,uint8_t,uint64_t,QString,VxGUID,VxSha1Hash) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalToGuiFileUploadComplete(EPluginType,VxGUID,QString,EXferError) ), this, SLOT( slotInternalToGuiFileUploadComplete(EPluginType,VxGUID,QString,EXferError) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalToGuiFileXferState(EPluginType,VxGUID,EXferState,int,int) ), this, SLOT( slotInternalToGuiFileXferState(EPluginType,VxGUID,EXferState,int,int) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalToGuiStartDownload(VxGUID,EPluginType,VxGUID,FileInfo) ), this,
+        SLOT( slotInternalToGuiStartDownload(VxGUID,EPluginType,VxGUID,FileInfo) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalToGuiFileDownloadComplete(EPluginType,VxGUID,QString,EXferError) ), this, 
+		SLOT( slotInternalToGuiFileDownloadComplete(EPluginType,VxGUID,QString,EXferError) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalToGuiStartUpload(VxGUID,EPluginType,VxGUID,FileInfo) ), this,
+        SLOT( slotInternalToGuiStartUpload(VxGUID,EPluginType,VxGUID,FileInfo) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalToGuiFileUploadComplete(EPluginType,VxGUID,QString,EXferError) ), this, 
+		SLOT( slotInternalToGuiFileUploadComplete(EPluginType,VxGUID,QString,EXferError) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalToGuiFileXferState(EPluginType,VxGUID,EXferState,int,int) ), this, 
+		SLOT( slotInternalToGuiFileXferState(EPluginType,VxGUID,EXferState,int,int) ), Qt::QueuedConnection );
+	connect( this, SIGNAL( signalInternalToGuiFileList(FileInfo) ), this, SLOT( slotInternalToGuiFileList(FileInfo) ), Qt::QueuedConnection );
+	connect( this, SIGNAL( signalInternalToGuiFileListCompleted() ), this, SLOT( slotInternalToGuiFileListCompleted() ), Qt::QueuedConnection );
 
     connect( this, SIGNAL( signalInternalToGuiSetGameValueVar(EPluginType,VxGUID,int32_t,int32_t) ), this, SLOT( slotInternalToGuiSetGameValueVar(EPluginType,VxGUID,int32_t,int32_t) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalToGuiSetGameActionVar(EPluginType,VxGUID,int32_t,int32_t) ), this, SLOT( slotInternalToGuiSetGameActionVar(EPluginType,VxGUID,int32_t,int32_t) ), Qt::QueuedConnection );

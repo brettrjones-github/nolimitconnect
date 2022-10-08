@@ -30,7 +30,7 @@ PluginFileShareClient::PluginFileShareClient( P2PEngine& engine, PluginMgr& plug
 //============================================================================
 void PluginFileShareClient::onAfterUserLogOnThreaded( void )
 {
-	m_RootFileFolder = VxGetAppDirectory( eAppDirStoryBoardPageClient );
+	m_RootFileFolder = VxGetDownloadsDirectory();
 	getFileInfoMgr().setRootFolder( m_RootFileFolder );
 
 	getFileInfoMgr().onAfterUserLogOnThreaded();
@@ -65,7 +65,7 @@ bool PluginFileShareClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSktB
 			{
 				lockCompletedFileList();
 				fileInfo.setFileName( fileName );
-				fileInfo.setIsDirty( false );
+
 				m_CompletedFileInfoList.push_back( fileInfo );
 				m_InProgressFileInfoList.erase( iter );
 				result = true;
@@ -228,6 +228,14 @@ bool PluginFileShareClient::fromGuiCancelWebPage( EWebPageType webPageType, VxGU
 	return result;
 }
 
+//============================================================================
+bool PluginFileShareClient::onConnectForFileListDownload( VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+	lockSearchFileList();
+	m_SearchFileInfoList.clear();
+	unlockSearchFileList();
+	return PluginBaseFilesClient::onConnectForFileListDownload( sktBase, netIdent );
+}
 
 //============================================================================
 bool PluginFileShareClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, FileInfo& fileInfo )
@@ -241,6 +249,7 @@ bool PluginFileShareClient::fileInfoSearchResult( VxGUID& searchSessionId, VxSkt
 			lockSearchFileList();
 			m_SearchFileInfoList.push_back( fileInfo );
 			unlockSearchFileList();
+			sendFileSearchResultToGui( searchSessionId, netIdent, fileInfo );
 		}
 	}
 
@@ -253,34 +262,11 @@ void PluginFileShareClient::fileInfoSearchCompleted( VxGUID& searchSessionId, Vx
 	if( commErr == eCommErrNone )
 	{
 		LogMsg( LOG_VERBOSE, "PluginFileShareClient::fileInfoSearchCompleted with no errors" );
-		bool webIndexFileFound{ false };
-		for( auto& fileInfo : m_SearchFileInfoList )
-		{
-			if( fileInfo.getFileName() == m_WebPageIndexFile )
-			{
-				webIndexFileFound = true;
-				break;
-			}
-		}
 
-		if( webIndexFileFound )
-		{
-			m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloading, "" );
-			if( !startDownload( searchSessionId, sktBase, netIdent ) )
-			{
-				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadFailed, "" );
-				cancelDownload();
-			}
-		}
-		else
-		{
-			cancelDownload();
-			m_Engine.getToGui().toGuiPluginCommError( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoFailed, eCommErrInvalidParam );
-		}
+		m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoComplete, " %d", m_SearchFileInfoList.size() );
 	}
 	else
 	{
-		cancelDownload();
 		LogMsg( LOG_ERROR, "PluginFileShareClient::fileInfoSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
 		m_Engine.getToGui().toGuiPluginCommError( getPluginType(), m_HisOnlineId, ePluginMsgRetrieveInfoFailed, commErr );
 	}
@@ -330,7 +316,7 @@ bool PluginFileShareClient::startDownload( VxGUID& searchSessionId, VxSktBase* s
 		FileInfo& fileInfo = *iter;
 		lockInProgressFileList();
 		VxGUID xferSessionId = fileInfo.initializeNewXferSessionId();
-		fileInfo.setIsDirty( true );
+
 		m_InProgressFileInfoList.push_back( fileInfo );
 		if( m_FileInfoMgr.startDownload( *iter, xferSessionId, sktBase, netIdent ) )
 		{

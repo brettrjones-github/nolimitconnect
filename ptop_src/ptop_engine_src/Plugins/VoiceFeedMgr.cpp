@@ -204,7 +204,7 @@ void VoiceFeedMgr::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIde
 			char * audioBuf = poSession->getJitterBuffer().getBufToFill();
 			if( audioBuf )
 			{
-				PktVoiceReq * poPkt = (PktVoiceReq * )pktHdr;
+				PktVoiceReq* poPkt = (PktVoiceReq * )pktHdr;
 				poSession->getAudioDecoder()->decodeToPcmData( poPkt->getCompressedData(), poPkt->getFrame1Len(), poPkt->getFrame2Len(), (uint16_t *)audioBuf, (int32_t)MY_OPUS_PKT_UNCOMPRESSED_DATA_LEN );
 			}
 

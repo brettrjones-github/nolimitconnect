@@ -72,7 +72,7 @@ void FileActionBarWidget::setIsInLibrary( bool isInLibrary )
 }
 
 //============================================================================
-void FileActionBarWidget::setIsShared( bool isShared )
+void FileActionBarWidget::setIsSharedFile( bool isShared )
 {
 	ui.m_FileShareButton->setNotifyOnlineEnabled( isShared );
 }

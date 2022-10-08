@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "ActivityBase.h"
-#include "VxMyFileInfo.h"
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 #include "ToGuiFileXferInterface.h"
 
 #include "ui_ActivityViewLibraryFiles.h"
@@ -27,7 +27,7 @@ class VxNetIdent;
 class VxSha1Hash;
 class FileItemInfo;
 class FileListReplySession;
-class VxMyFileInfo;
+class FileInfo;
 
 class ActivityViewLibraryFiles : public ActivityBase, public ToGuiFileXferInterface
 {
@@ -41,7 +41,7 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
-	void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
+	void						addFile( FileInfo& fileInfo );
 	void						setFileFilter( EFileFilterType eFileFilter );
 	bool						getWasFileSelected( void )						{ return m_FileWasSelected; }
 	uint8_t						getSelectedFileType( void )						{ return m_SelectedFileType; }
@@ -57,24 +57,25 @@ private slots:
 	void						slotApplyFileFilter( unsigned char fileTypeMask );
 	void						slotAddFilesButtonClicked( void );
 
-	void						slotListItemClicked( QListWidgetItem * item );
-	void						slotListItemDoubleClicked( QListWidgetItem * item );
+	void						slotListItemClicked( QListWidgetItem* item );
+	void						slotListItemDoubleClicked( QListWidgetItem* item );
 
-	void						slotListFileIconClicked( QListWidgetItem * item );
-	void						slotListPlayIconClicked( QListWidgetItem * item );
-	void						slotListLibraryIconClicked( QListWidgetItem * item );
-	void						slotListShareFileIconClicked( QListWidgetItem * item );
-	void						slotListShredIconClicked( QListWidgetItem * item );
+	void						slotListFileIconClicked( QListWidgetItem* item );
+	void						slotListPlayIconClicked( QListWidgetItem* item );
+	void						slotListLibraryIconClicked( QListWidgetItem* item );
+	void						slotListShareFileIconClicked( QListWidgetItem* item );
+	void						slotListShredIconClicked( QListWidgetItem* item );
 
 protected:
     virtual void				showEvent( QShowEvent* ev ) override;
     virtual void				hideEvent( QHideEvent* ev ) override;
-    virtual void				toGuiFileList( VxMyFileInfo& fileInfo ) override;
+	virtual void				callbackToGuiFileList( FileInfo& fileInfo ) override;
+	virtual void				callbackToGuiFileListCompleted( void ) override;
 
-	FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
-	FileItemInfo*				widgetToFileItemInfo( FileShareItemWidget * item );
+	FileShareItemWidget*		fileToWidget( FileInfo& fileInfo );
+	FileItemInfo*				widgetToFileItemInfo( FileShareItemWidget* item );
 
-	FileShareItemWidget *		findListEntryWidget( VxMyFileInfo& fileInfo );
+	FileShareItemWidget*		findListEntryWidget( FileInfo& fileInfo );
 	void						clearFileList( void );
 	bool						confirmDeleteFile( QString fileName, bool shredFile );
 

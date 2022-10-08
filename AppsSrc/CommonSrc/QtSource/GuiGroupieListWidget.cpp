@@ -148,7 +148,7 @@ GuiGroupieListItem* GuiGroupieListWidget::findListItemWidgetByOnlineId( VxGUID& 
 }
 
 //============================================================================
-void GuiGroupieListWidget::slotItemClicked( QListWidgetItem * item )
+void GuiGroupieListWidget::slotItemClicked( QListWidgetItem* item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{

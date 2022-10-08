@@ -29,6 +29,7 @@
 #include <ptop_src/ptop_engine_src/OfferBase/OfferBaseInfo.h>
 #include <ptop_src/ptop_engine_src/OfferBase/OfferBaseRxSession.h>
 #include <ptop_src/ptop_engine_src/OfferBase/OfferBaseTxSession.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <PktLib/PktsOfferXfer.h>
 #include <PktLib/VxCommon.h>
@@ -134,10 +135,10 @@ void OfferBaseXferMgr::assetXferThreadWork( VxThread* workThread )
 	lockOfferBaseQue();
 	for( iter = assetToSendList.begin(); iter != assetToSendList.end(); ++iter )
 	{
-		OfferBaseInfo * assetInfo = m_OfferMgr.findOffer( *iter );
-		if( assetInfo )
+		OfferBaseInfo * offerInfo = m_OfferMgr.findOffer( *iter );
+		if( offerInfo )
 		{
-			m_OfferBaseSendQue.push_back( *assetInfo );
+			m_OfferBaseSendQue.push_back( *offerInfo );
 		}
 		else
 		{
@@ -155,11 +156,11 @@ void OfferBaseXferMgr::fromGuiCancelDownload( VxGUID& lclSessionId )
 {
 	std::map<VxGUID, OfferBaseRxSession *>::iterator iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	iter = m_RxSessions.find( lclSessionId );
 	if( iter != m_RxSessions.end() )
@@ -174,7 +175,7 @@ void OfferBaseXferMgr::fromGuiCancelDownload( VxGUID& lclSessionId )
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -182,11 +183,11 @@ void OfferBaseXferMgr::fromGuiCancelDownload( VxGUID& lclSessionId )
 void OfferBaseXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	OfferBaseTxIter iter;
 	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
@@ -198,14 +199,14 @@ void OfferBaseXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 			xferSession->cancelUpload( lclSessionId );
 			delete xferSession;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock destroy\n");
+			LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 			return;
 		}
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelUpload AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -216,11 +217,11 @@ void OfferBaseXferMgr::clearRxSessionsList( void )
 	std::map<VxGUID, OfferBaseRxSession *>::iterator iter;
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
@@ -230,7 +231,7 @@ void OfferBaseXferMgr::clearRxSessionsList( void )
 
 	m_RxSessions.clear();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -239,11 +240,11 @@ void OfferBaseXferMgr::clearTxSessionsList( void )
 {
 	OfferBaseTxIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
@@ -253,7 +254,7 @@ void OfferBaseXferMgr::clearTxSessionsList( void )
 
 	m_TxSessions.clear();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -261,11 +262,11 @@ void OfferBaseXferMgr::clearTxSessionsList( void )
 void OfferBaseXferMgr::fileAboutToBeDeleted( std::string& fileName )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	OfferBaseTxIter iter;
 	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
@@ -277,14 +278,14 @@ void OfferBaseXferMgr::fileAboutToBeDeleted( std::string& fileName )
 			xferSession->cancelUpload( xferSession->getXferInfo().getLclSessionId() );
 			delete xferSession;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock destroy\n");
+			LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 			return;
 		}
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::fileAboutToBeDeleted AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -292,11 +293,11 @@ void OfferBaseXferMgr::fileAboutToBeDeleted( std::string& fileName )
 void OfferBaseXferMgr::onConnectionLost( VxSktBase* sktBase )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	bool erasedSession = true;
 	OfferBaseTxIter iter;
@@ -337,7 +338,7 @@ void OfferBaseXferMgr::onConnectionLost( VxSktBase* sktBase )
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onConnectionLost AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -358,15 +359,15 @@ bool OfferBaseXferMgr::requireFileXfer( EOfferType assetType )
 void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock start");
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock done");
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq\n");
-	PktOfferSendReq * poPkt = (PktOfferSendReq *)pktHdr;
+	PktOfferSendReq* poPkt = (PktOfferSendReq *)pktHdr;
 	VxGUID& assetOfferId = poPkt->getOfferId();
 	EOfferType assetType = (EOfferType)poPkt->getOfferType();
 	bool needFileXfer = requireFileXfer( assetType );
@@ -378,11 +379,11 @@ void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, 
 	pktReply.setOfferId( assetOfferId );
 	if( false == netIdent->isHisAccessAllowedFromMe( m_Plugin.getPluginType() ) )
 	{
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq: permission denied\n" );
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq: permission denied" );
 		pktReply.setError( eXferErrorPermission );
 		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock destroy\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		return;
 	}
@@ -390,26 +391,26 @@ void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, 
 	if( false == needFileXfer )
 	{
 		// all we need is in the send request
-		OfferBaseInfo assetInfo;
-		poPkt->fillOfferFromPkt( assetInfo );
+		OfferBaseInfo offerInfo;
+		poPkt->fillOfferFromPkt( offerInfo );
 		// make history id his id
-		assetInfo.setHistoryId( netIdent->getMyOnlineId() );
-		assetInfo.setOfferSendState( eOfferSendStateRxSuccess );
-		m_OfferMgr.addOffer( assetInfo );
+		offerInfo.setHistoryId( netIdent->getMyOnlineId() );
+		offerInfo.setOfferSendState( eOfferSendStateRxSuccess );
+		m_OfferMgr.addOffer( offerInfo );
 		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
-		m_OfferMgr.announceOfferAction( assetInfo.getOfferId(), eOfferActionRxSuccess, 100 );
-		m_OfferMgr.announceOfferAction( assetInfo.getCreatorId(), eOfferActionRxNotifyNewMsg, 100 );
+		m_OfferMgr.announceOfferAction( offerInfo.getOfferId(), eOfferActionRxSuccess, 100 );
+		m_OfferMgr.announceOfferAction( offerInfo.getCreatorId(), eOfferActionRxNotifyNewMsg, 100 );
 	}
 	else
 	{
 		OfferBaseRxSession * xferSession = findOrCreateRxSession( true, poPkt->getRmtSessionId(), netIdent, sktBase );
 		if( xferSession )
 		{
-			OfferBaseInfo& assetInfo = xferSession->getOfferInfo();
-			poPkt->fillOfferFromPkt( assetInfo );
+			OfferBaseInfo& offerInfo = xferSession->getOfferInfo();
+			poPkt->fillOfferFromPkt( offerInfo );
 			// make history id his id
-			assetInfo.setHistoryId( netIdent->getMyOnlineId() );
-			assetInfo.setOfferSendState( eOfferSendStateRxProgress );
+			offerInfo.setHistoryId( netIdent->getMyOnlineId() );
+			offerInfo.setOfferSendState( eOfferSendStateRxProgress );
 
 			xferSession->setRmtSessionId( poPkt->getLclSessionId() );
 			pktReply.setLclSessionId( xferSession->getLclSessionId() );
@@ -430,7 +431,7 @@ void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, 
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReq AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -444,22 +445,22 @@ void OfferBaseXferMgr::assetSendComplete( OfferBaseTxSession * xferSession )
 void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply");
 	PktOfferSendReply * poPkt = (PktOfferSendReply *)pktHdr;
 	VxGUID&	assetOfferId =	poPkt->getOfferId();
-	OfferBaseInfo * assetInfo = m_OfferMgr.findOffer( assetOfferId );
-	if( 0 == assetInfo )
+	OfferBaseInfo * offerInfo = m_OfferMgr.findOffer( assetOfferId );
+	if( 0 == offerInfo )
 	{
-		LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendReply failed to find asset id\n");
+		LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendReply failed to find asset id");
 		updateOfferMgrSendState( assetOfferId, eOfferSendStateTxFail, 0 );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock destroy\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		return;
 	}
@@ -492,7 +493,7 @@ void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendReply PktOfferSendReply returned error %d\n", poPkt->getError() );
+			LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendReply PktOfferSendReply returned error %d", poPkt->getError() );
 			endOfferBaseXferSession( xferSession, true, false );
 			updateOfferMgrSendState( assetOfferId, eOfferSendStateTxFail, rxedErrCode );
 		}
@@ -511,7 +512,7 @@ void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -519,15 +520,15 @@ void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr
 void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	OfferBaseRxSession * xferSession = 0;
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq\n");
-	PktOfferChunkReq * poPkt = (PktOfferChunkReq *)pktHdr;
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq");
+	PktOfferChunkReq* poPkt = (PktOfferChunkReq *)pktHdr;
 	{ // scope for lock
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq AutoPluginLock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq AutoPluginLock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		if( poPkt->getRmtSessionId().isVxGUIDValid() )
 		{
@@ -553,7 +554,7 @@ void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr,
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferChunkReq failed to find session\n");
+			LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferChunkReq failed to find session");
 			PktOfferChunkReply pktReply;
 			pktReply.setLclSessionId( poPkt->getRmtSessionId() );
 			pktReply.setRmtSessionId( poPkt->getLclSessionId() );
@@ -563,7 +564,7 @@ void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr,
 		}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock destroy\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 }
@@ -575,14 +576,14 @@ void OfferBaseXferMgr::onPktOfferChunkReply( VxSktBase* sktBase, VxPktHdr* pktHd
 	OfferBaseTxSession * xferSession = 0;
 static int cnt = 0;
 	cnt++;
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseChuckReply start %d\n", cnt );
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseChuckReply start %d", cnt );
 	{ // scope for lock
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReply AutoPluginLock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReply AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReply AutoPluginLock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReply AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		if( poPkt->getRmtSessionId().isVxGUIDValid() )
 		{
@@ -600,12 +601,12 @@ static int cnt = 0;
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferBaseChuckReply failed to find session\n" );
+			LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferBaseChuckReply failed to find session" );
 		}
 
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseChuckReply done %d\n", cnt );
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseChuckReply done %d", cnt );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReply AutoPluginLock destroy\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReply AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 }
@@ -614,14 +615,14 @@ static int cnt = 0;
 void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq\n");
-	PktOfferSendCompleteReq * poPkt = (PktOfferSendCompleteReq *)pktHdr;
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq");
+	PktOfferSendCompleteReq* poPkt = (PktOfferSendCompleteReq *)pktHdr;
 	OfferBaseRxSession * xferSession = findRxSession( true, poPkt->getRmtSessionId() );
 	//TODO check checksum
 	if( xferSession )
@@ -630,7 +631,7 @@ void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* 
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -638,11 +639,11 @@ void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* 
 void OfferBaseXferMgr::onPktOfferSendCompleteReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply\n");
 	PktOfferSendCompleteReply * poPkt = (PktOfferSendCompleteReply *)pktHdr;
@@ -656,19 +657,19 @@ void OfferBaseXferMgr::onPktOfferSendCompleteReply( VxSktBase* sktBase, VxPktHdr
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendCompleteReply failed to find session\n");
+		LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendCompleteReply failed to find session");
 		updateOfferMgrSendState( poPkt->getOfferId(), eOfferSendStateTxSuccess, 100 );
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReply AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
 //============================================================================
 void OfferBaseXferMgr::onPktOfferBaseXferErr( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseXferErr\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferBaseXferErr");
 	// TODO handle error
 }
 
@@ -679,11 +680,11 @@ void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseRxSession * poSessionIn
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -732,11 +733,11 @@ void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseTxSession * poSessionIn
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::endOfferBaseXferSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -784,11 +785,11 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNet
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -828,11 +829,11 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findRxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -869,11 +870,11 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -906,11 +907,11 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateRxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -948,11 +949,11 @@ OfferBaseTxSession * OfferBaseXferMgr::findTxSession( bool pluginIsLocked, VxNet
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -992,11 +993,11 @@ OfferBaseTxSession * OfferBaseXferMgr::findTxSession( bool pluginIsLocked, VxGUI
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findTxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -1043,11 +1044,11 @@ OfferBaseTxSession * OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLocke
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -1085,11 +1086,11 @@ OfferBaseTxSession *	 OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLock
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::findOrCreateTxSession pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -1130,10 +1131,10 @@ OfferBaseTxSession *	 OfferBaseXferMgr::findOrCreateTxSession( bool pluginIsLock
 }
 
 //============================================================================
-void OfferBaseXferMgr::fromGuiSendOfferBase( OfferBaseInfo& assetInfo )
+void OfferBaseXferMgr::fromGuiSendOfferBase( OfferBaseInfo& offerInfo )
 {
 	bool xferFailed = true;
-	BigListInfo * hisInfo = m_Engine.getBigListMgr().findBigListInfo( assetInfo.getHistoryId() );
+	BigListInfo * hisInfo = m_Engine.getBigListMgr().findBigListInfo( offerInfo.getHistoryId() );
 	if( hisInfo )
 	{
 		// first try to connect and send.. if that fails then que and will send when next connected
@@ -1141,7 +1142,7 @@ void OfferBaseXferMgr::fromGuiSendOfferBase( OfferBaseInfo& assetInfo )
 		m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), hisInfo, 0, &sktBase );
 		if( 0 != sktBase )
 		{
-			EXferError xferError = createOfferTxSessionAndSend( false, assetInfo, hisInfo, sktBase );
+			EXferError xferError = createOfferTxSessionAndSend( false, offerInfo, hisInfo, sktBase );
 			if( xferError == eXferErrorNone )
 			{
 				xferFailed = false;
@@ -1149,7 +1150,7 @@ void OfferBaseXferMgr::fromGuiSendOfferBase( OfferBaseInfo& assetInfo )
 		}
 		else
 		{
-			queOffer( assetInfo );
+			queOffer( offerInfo );
 		}
 	}
 	else
@@ -1159,7 +1160,7 @@ void OfferBaseXferMgr::fromGuiSendOfferBase( OfferBaseInfo& assetInfo )
 
 	if( xferFailed )
 	{
-		onTxFailed( assetInfo.getOfferId(), false );
+		onTxFailed( offerInfo.getOfferId(), false );
 	}
 }
 
@@ -1182,14 +1183,14 @@ void OfferBaseXferMgr::updateOfferMgrSendState( VxGUID& assetOfferId, EOfferSend
 }
 
 //============================================================================
-void OfferBaseXferMgr::queOffer( OfferBaseInfo& assetInfo )
+void OfferBaseXferMgr::queOffer( OfferBaseInfo& offerInfo )
 {
 	m_OfferBaseSendQueMutex.lock();
 	bool foundOfferBase = false;
     std::vector<OfferBaseInfo>::iterator iter;
 	for( iter = m_OfferBaseSendQue.begin(); iter != m_OfferBaseSendQue.end(); ++iter )
 	{
-		if( (*iter).getOfferId() == assetInfo.getOfferId() )
+		if( (*iter).getOfferId() == offerInfo.getOfferId() )
 		{
 			foundOfferBase = true;
 			break;
@@ -1198,24 +1199,24 @@ void OfferBaseXferMgr::queOffer( OfferBaseInfo& assetInfo )
 
 	if( false == foundOfferBase )
 	{
-		m_OfferBaseSendQue.push_back( assetInfo );
+		m_OfferBaseSendQue.push_back( offerInfo );
 	}
 
 	m_OfferBaseSendQueMutex.unlock();
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& assetInfo, VxNetIdent* hisIdent, VxSktBase* sktBase )
+EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, OfferBaseInfo& offerInfo, VxNetIdent* hisIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::createOfferTxSessionAndSend pluginMutex.lock start\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::createOfferTxSessionAndSend pluginMutex.lock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock();
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "OfferBaseXferMgr::createOfferTxSessionAndSend pluginMutex.lock done\n");
+		LogMsg( LOG_INFO, "OfferBaseXferMgr::createOfferTxSessionAndSend pluginMutex.lock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -1231,7 +1232,7 @@ EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, O
 		txSession->setRmtSessionId( txSession->getLclSessionId() );
 	}
 
-	txSession->setOfferInfo( assetInfo );
+	txSession->setOfferInfo( offerInfo );
 	VxFileXferInfo& xferInfo = txSession->getXferInfo();
 	xferInfo.setLclSessionId( txSession->getLclSessionId() );
 	xferInfo.setRmtSessionId( txSession->getRmtSessionId() );
@@ -1241,8 +1242,8 @@ EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, O
 	m_TxSessions.push_back( txSession );
 	m_TxSessionsMutex.unlock();
 
-	updateOfferMgrSendState( assetInfo.getOfferId(), eOfferSendStateTxProgress, 0 );
-	if( assetInfo.hasFileName() )
+	updateOfferMgrSendState( offerInfo.getOfferId(), eOfferSendStateTxProgress, 0 );
+	if( offerInfo.hasFileName() )
 	{
 		// need to do first so file handle is set before get asset send reply back
 		xferErr = beginOfferBaseSend( txSession );
@@ -1255,12 +1256,12 @@ EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, O
 	if( eXferErrorNone != xferErr )
 	{
 		// failed to open file
-		updateOfferMgrSendState( assetInfo.getOfferId(), eOfferSendStateTxFail, xferErr );
+		updateOfferMgrSendState( offerInfo.getOfferId(), eOfferSendStateTxFail, xferErr );
 		endOfferBaseXferSession( txSession, true, false );
 		if( false == pluginIsLocked )
 		{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-			LogMsg( LOG_INFO, "OfferBaseXferMgr::createOfferTxSessionAndSend pluginMutex.unlock\n");
+			LogMsg( LOG_INFO, "OfferBaseXferMgr::createOfferTxSessionAndSend pluginMutex.unlock");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 			pluginMutex.unlock();
 		}
@@ -1269,7 +1270,7 @@ EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, O
 	}
 
 	PktOfferSendReq sendReq;
-	sendReq.fillPktFromOffer( assetInfo );
+	sendReq.fillPktFromOffer( offerInfo );
 	sendReq.setLclSessionId( xferInfo.getLclSessionId() );
 	sendReq.setRmtSessionId( xferInfo.getRmtSessionId() );
 	if( false == m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), hisIdent->getMyOnlineId(), sktBase, &sendReq ) )
@@ -1280,7 +1281,7 @@ EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, O
 	if( eXferErrorNone == xferErr )
 	{
 		// re que for try some other time
-		if( requireFileXfer( assetInfo.getOfferType() ) )
+		if( requireFileXfer( offerInfo.getOfferType() ) )
 		{
 			xferErr = txNextOfferBaseChunk( txSession, eXferErrorNone, true );
 		}
@@ -1289,7 +1290,7 @@ EXferError OfferBaseXferMgr::createOfferTxSessionAndSend( bool pluginIsLocked, O
 	if( eXferErrorNone != xferErr )
 	{
 		// re que for try some other time
-		updateOfferMgrSendState( assetInfo.getOfferId(), eOfferSendStateTxFail, xferErr );
+		updateOfferMgrSendState( offerInfo.getOfferId(), eOfferSendStateTxFail, xferErr );
 		endOfferBaseXferSession( txSession, true, ( ( eXferErrorFileNotFound == xferErr ) || ( eXferErrorDisconnected == xferErr ) ) ? false : true );
 	}
 
@@ -1391,7 +1392,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseSend( OfferBaseTxSession * xferSessio
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendReq * poPkt, PktOfferSendReply& pktReply )
+EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendReq* poPkt, PktOfferSendReply& pktReply )
 {
 	if( NULL == xferSession )
 	{
@@ -1650,7 +1651,7 @@ EXferError OfferBaseXferMgr::txNextOfferBaseChunk( OfferBaseTxSession * xferSess
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxSession * xferSession, PktOfferChunkReq * poPkt )
+EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxSession * xferSession, PktOfferChunkReq* poPkt )
 {
 	if( NULL == xferSession )
 	{
@@ -1716,7 +1717,7 @@ EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxS
 }
 
 //============================================================================
-void OfferBaseXferMgr::finishOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendCompleteReq * poPkt, bool pluginIsLocked )
+void OfferBaseXferMgr::finishOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendCompleteReq* poPkt, bool pluginIsLocked )
 {
 	// done receiving file
 	VxFileXferInfo& xferInfo = xferSession->getXferInfo();
@@ -1745,7 +1746,7 @@ void OfferBaseXferMgr::finishOfferBaseReceive( OfferBaseRxSession * xferSession,
 }
 
 //============================================================================
-void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession * xferSession, OfferBaseInfo& assetInfo, EXferError error, bool pluginIsLocked )
+void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession * xferSession, OfferBaseInfo& offerInfo, EXferError error, bool pluginIsLocked )
 {
 	//m_PluginMgr.getToGui().toGuiFileDownloadComplete( xferSession->getLclSessionId(), error );
 	VxFileXferInfo& xferInfo = xferSession->getXferInfo();
@@ -1756,20 +1757,21 @@ void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession * xferSession, Of
 		RCODE rc = 0;
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteOffer.c_str(), completedOfferBase.c_str() ) ) )
 		{
-			assetInfo.setOfferName( completedOfferBase.c_str() );
-			assetInfo.setHistoryId( xferSession->getIdent()->getMyOnlineId() );
+			offerInfo.setOfferName( completedOfferBase.c_str() );
+			offerInfo.setHistoryId( xferSession->getIdent()->getMyOnlineId() );
 
 			if( eXferErrorNone == error )
 			{
-				assetInfo.setOfferSendState( eOfferSendStateRxSuccess );
+				offerInfo.setOfferSendState( eOfferSendStateRxSuccess );
 			}
 			else
 			{
-				assetInfo.setOfferSendState(  eOfferSendStateRxFail );
+				offerInfo.setOfferSendState(  eOfferSendStateRxFail );
 			}
 
-			m_OfferMgr.addOffer( assetInfo );
-			m_Engine.fromGuiAddFileToLibrary( completedOfferBase.c_str(), true, xferInfo.getFileHashId().getHashData() );
+			m_OfferMgr.addOffer( offerInfo );
+			FileInfo fileInfo( offerInfo );
+			m_Engine.fromGuiSetFileIsInLibrary( fileInfo, true );
 			if( eXferErrorNone == error )
 			{
 				m_OfferMgr.announceOfferAction( xferSession->getOfferInfo().getOfferId(), eOfferActionRxSuccess, 0 );
@@ -1789,19 +1791,19 @@ void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession * xferSession, Of
 }
 
 //============================================================================
-void OfferBaseXferMgr::onOfferBaseSent( OfferBaseTxSession * xferSession, OfferBaseInfo& assetInfo, EXferError error, bool pluginIsLocked )
+void OfferBaseXferMgr::onOfferBaseSent( OfferBaseTxSession * xferSession, OfferBaseInfo& offerInfo, EXferError error, bool pluginIsLocked )
 {
 	//m_PluginMgr.getToGui().toGuiOfferBaseUploadComplete( xferSession->getRmtSessionId(), error );
 	VxSktBase* sktBase		= xferSession->getSkt();
 	VxNetIdent* hisIdent	= xferSession->getIdent();
 	if( eXferErrorNone != error )
 	{
-		updateOfferMgrSendState( assetInfo.getOfferId(), eOfferSendStateTxFail, (int)error );
+		updateOfferMgrSendState( offerInfo.getOfferId(), eOfferSendStateTxFail, (int)error );
 		m_OfferMgr.announceOfferAction( xferSession->getOfferInfo().getOfferId(), eOfferActionTxError, error );
 	}
 	else
 	{
-		updateOfferMgrSendState( assetInfo.getOfferId(), eOfferSendStateTxSuccess, (int)error );
+		updateOfferMgrSendState( offerInfo.getOfferId(), eOfferSendStateTxSuccess, (int)error );
 		m_OfferMgr.announceOfferAction( xferSession->getOfferInfo().getOfferId(), eOfferActionTxSuccess, 0 );
 	}
 
@@ -1825,8 +1827,8 @@ void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetId
 		if( hisOnlineId == (*iter).getHistoryId() )
 		{
 			// found asset to send
-			OfferBaseInfo& assetInfo = (*iter);
-			RCODE rc = createOfferTxSessionAndSend( pluginIsLocked, assetInfo, hisIdent, sktBase );
+			OfferBaseInfo& offerInfo = (*iter);
+			RCODE rc = createOfferTxSessionAndSend( pluginIsLocked, offerInfo, hisIdent, sktBase );
 			if( 0 == rc )
 			{
 				m_OfferBaseSendQue.erase(iter);
@@ -1844,11 +1846,11 @@ void OfferBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOl
 {
 	OfferBaseTxIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::replaceConnection AutoPluginLock start\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::replaceConnection AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::replaceConnection AutoPluginLock done\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::replaceConnection AutoPluginLock done");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
@@ -1870,7 +1872,7 @@ void OfferBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOl
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "OfferBaseXferMgr::replaceConnection AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "OfferBaseXferMgr::replaceConnection AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 

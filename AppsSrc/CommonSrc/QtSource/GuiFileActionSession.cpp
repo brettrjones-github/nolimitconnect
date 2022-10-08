@@ -16,6 +16,7 @@
 #include <QWidget> // must be declared first or Qt 6.2.4 will error in qmetatype.h 2167:23: array subscript value ‘53’ is outside the bounds
 
 #include "GuiFileActionSession.h"
+#include "GuiParams.h"
 
 #include <PktLib/VxSearchDefs.h>
 #include <CoreLib/VxParse.h>
@@ -24,74 +25,34 @@
 //============================================================================
 GuiFileActionSession::GuiFileActionSession()
 : m_ePluginType(ePluginTypeFileShareServer)
-, m_Ident(NULL)
-, m_Widget(0)
-, m_IsShared( false )
-, m_IsInLibrary( false )
 {
 }
 
 //============================================================================
-GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
-												VxNetIdent*	netIdent, 
-												VxGUID&			lclSessionId, 
-												uint8_t			u8FileType, 
-												uint64_t		u64FileLen, 
-												const char*	pFileName,
-												VxGUID			assetId,
-												VxSha1Hash&		fileHashId )
-: m_ePluginType( ePluginType )
-, m_Ident( netIdent )
-, m_LclSessionId( lclSessionId )
-, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
-, m_Widget(0)
-, m_IsShared( false )
-, m_IsInLibrary( false )
+GuiFileActionSession::GuiFileActionSession( FileInfo& fileInfo )
+	: m_ePluginType( ePluginTypeFileShareServer )
+	, m_LclSessionId()
+	, m_FileInfo( fileInfo )
 {
 }
 
 //============================================================================
-GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
-												VxNetIdent*	netIdent, 
-												VxGUID&			lclSessionId, 
-												uint8_t			u8FileType, 
-												uint64_t		u64FileLen, 
-												const char*	pFileName,
-												VxGUID			assetId,
-												uint8_t *		fileHashId )
-: m_ePluginType( ePluginType )
-, m_Ident( netIdent )
-, m_LclSessionId( lclSessionId )
-, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
-, m_Widget(0)
-, m_IsShared( false )
-, m_IsInLibrary( false )
-{
-}
-
-//============================================================================
-GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
-												VxNetIdent*	netIdent, 
-												VxGUID&			lclSessionId, 
-												VxMyFileInfo&	fileInfo )
-: m_ePluginType( ePluginType )
-, m_Ident( netIdent )
+GuiFileActionSession::GuiFileActionSession(	EPluginType	pluginType, GuiUser* guiUser, VxGUID& lclSessionId, FileInfo& fileInfo )
+: m_ePluginType( pluginType )
+, m_Ident( guiUser )
 , m_LclSessionId( lclSessionId )
 , m_FileInfo( fileInfo )
-, m_Widget(0)
-, m_IsShared( false )
-, m_IsInLibrary( false )
 {
 }
 
 //============================================================================
-GuiFileActionSession::GuiFileActionSession(	VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
-: m_ePluginType( ePluginTypeFileShareServer )
-, m_Ident( 0 )
-, m_LclSessionId()
-, m_FileInfo( fileInfo )
-, m_Widget(0)
-, m_IsShared( isShared )
-, m_IsInLibrary( isInLibrary )
-{
+QString	GuiFileActionSession::describeFileType( void ) 
+{ 
+	return GuiParams::describeFileType( m_FileInfo.getFileType() ); 
+}
+
+//============================================================================
+QString	GuiFileActionSession::describeFileLength( void ) 
+{ 
+	return GuiParams::describeFileLength( m_FileInfo.getFileLength() ); 
 }

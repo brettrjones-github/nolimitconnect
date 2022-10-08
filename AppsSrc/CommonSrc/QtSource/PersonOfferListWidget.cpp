@@ -39,11 +39,11 @@ PersonOfferListWidget::PersonOfferListWidget( QWidget* parent )
 	connect( this, SIGNAL(signalRefreshFriendList(EFriendViewType)), 
              this, SLOT(slotRefreshFriendList(EFriendViewType)), Qt::QueuedConnection );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem*)),
+                          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+                          this, SLOT(slotItemClicked(QListWidgetItem*))) ;
 
     connect( this, SIGNAL(signalUpdateFriend( GuiUser*,bool)),
                           this, SLOT(slotUpdateFriend( GuiUser*,bool)), Qt::QueuedConnection );
@@ -154,7 +154,7 @@ void PersonOfferListWidget::updateFriend( GuiUser* netIdent, bool sessionTimeCha
 }
 
 //============================================================================
-void PersonOfferListWidget::slotItemClicked(QListWidgetItem * item )
+void PersonOfferListWidget::slotItemClicked(QListWidgetItem* item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -343,7 +343,7 @@ void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser* netIdent, F
 }
 
 //============================================================================
-//!	fill friend into new QListWidgetItem *
+//!	fill friend into new QListWidgetItem*
 FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser* poFriend )
 {
 	FriendListEntryWidget * item = new FriendListEntryWidget( this );

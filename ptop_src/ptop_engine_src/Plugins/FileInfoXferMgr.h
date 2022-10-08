@@ -51,8 +51,8 @@ public:
 		eFileXOptionFailIfExists		= 2
 	};
 
-	typedef std::map<VxGUID, FileRxSession *>::iterator FileRxIter;
-	typedef std::vector<FileTxSession *>::iterator FileTxIter;
+	typedef std::map<VxGUID, FileRxSession*>::iterator FileRxIter;
+	typedef std::vector<FileTxSession*>::iterator FileTxIter;
 
 	FileInfoXferMgr() = delete;
 	FileInfoXferMgr(const FileInfoXferMgr& rhs ) = delete;
@@ -124,33 +124,33 @@ public:
 	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
 protected:
-	virtual void				onFileReceived( FileRxSession * xferSession, const char* pFileName, EXferError error );
-	virtual void				onFileSent( FileTxSession * xferSession, const char* pFileName, EXferError error );
+	virtual void				onFileReceived( FileRxSession* xferSession, const char* pFileName, EXferError error );
+	virtual void				onFileSent( FileTxSession* xferSession, const char* pFileName, EXferError error );
 
 	bool						isFileDownloading( VxSha1Hash& fileHashId );
 	bool						isFileInDownloadFolder( const char* pPartialFileName );
 
-	virtual FileRxSession *		findRxSession( VxNetIdent* netIdent );
-	virtual FileRxSession *		findRxSession( VxGUID& lclSessionId );
-	virtual FileRxSession *		findOrCreateRxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual FileRxSession *		findOrCreateRxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual FileTxSession *		findTxSession( VxNetIdent* netIdent );
-	virtual FileTxSession *		findTxSession( VxGUID& lclSessionId );
-	virtual FileTxSession *		createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual FileTxSession *		findOrCreateTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual FileTxSession *		findOrCreateTxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileRxSession*		findRxSession( VxNetIdent* netIdent );
+	virtual FileRxSession*		findRxSession( VxGUID& lclSessionId );
+	virtual FileRxSession*		findOrCreateRxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileRxSession*		findOrCreateRxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileTxSession*		findTxSession( VxNetIdent* netIdent );
+	virtual FileTxSession*		findTxSession( VxGUID& lclSessionId );
+	virtual FileTxSession*		createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileTxSession*		findOrCreateTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual FileTxSession*		findOrCreateTxSession( VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	virtual EXferError			beginFileReceive( FileRxSession * xferSession, PktFileSendReq * poPkt );
-	virtual EXferError			beginFileSend( FileTxSession * xferSession );
+	virtual EXferError			beginFileReceive( FileRxSession* xferSession, PktFileSendReq* poPkt );
+	virtual EXferError			beginFileSend( FileTxSession* xferSession );
 
-	virtual void				endFileXferSession( FileRxSession * xferSession );
-	virtual void				endFileXferSession( FileTxSession * xferSession );
+	virtual void				endFileXferSession( FileRxSession* xferSession );
+	virtual void				endFileXferSession( FileTxSession* xferSession );
 
-	virtual EXferError			rxFileChunk( FileRxSession * xferSession, PktFileChunkReq * poPkt );
-	virtual EXferError			txNextFileChunk( FileTxSession * xferSession );
+	virtual EXferError			rxFileChunk( FileRxSession* xferSession, PktFileChunkReq* poPkt );
+	virtual EXferError			txNextFileChunk( FileTxSession* xferSession );
 
-	virtual void				finishFileReceive( FileRxSession * xferSession, PktFileSendCompleteReq * poPkt );
-	virtual void				finishFileReceive( FileRxSession * xferSession, PktFileGetCompleteReq * poPkt );
+	virtual void				finishFileReceive( FileRxSession* xferSession, PktFileSendCompleteReq* poPkt );
+	virtual void				finishFileReceive( FileRxSession* xferSession, PktFileGetCompleteReq* poPkt );
 
 	virtual RCODE				sendFileShareError(		VxSktBase *		sktBase,		// socket
 														int				iPktType,	// type of packet
@@ -158,9 +158,9 @@ protected:
 														long			rc,			// error code
 														const char*	pMsg, ...);	// error message
 
-	EXferError					beginFileGet( FileRxSession * xferSession );
+	EXferError					beginFileGet( FileRxSession* xferSession );
 	EXferError					canTxFile( VxNetIdent* netIdent, VxGUID& assetId, VxSha1Hash& fileHashId );
-	bool						isViewFileListMatch( FileTxSession * xferSession, FileInfo& fileInfo );
+	bool						isViewFileListMatch( FileTxSession* xferSession, FileInfo& fileInfo );
 	void						clearRxSessionsList( void );
 	void						clearTxSessionsList( void );
 	void						checkQueForMoreFilesToSend( void );
@@ -176,8 +176,8 @@ protected:
 	PluginMgr&					m_PluginMgr;
 	FileInfoBaseMgr&			m_FileInfoMgr;
 
-	std::map<VxGUID, FileRxSession *>	m_RxSessions;
-	std::vector<FileTxSession *>		m_TxSessions;
+	std::map<VxGUID, FileRxSession*>	m_RxSessions;
+	std::vector<FileTxSession*>		m_TxSessions;
 
 	bool						m_bIsInSession{ true };
 	bool						m_bIsInitialized{ false };

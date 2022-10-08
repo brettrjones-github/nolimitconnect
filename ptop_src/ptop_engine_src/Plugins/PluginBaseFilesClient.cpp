@@ -77,14 +77,7 @@ bool PluginBaseFilesClient::onConnectForWebPageDownload( VxSktBase* sktBase, VxN
 
 
 //============================================================================
-void PluginBaseFilesClient::toGuiStartDownload( VxNetIdent* netIdent,
-    EPluginType		ePluginType,
-    VxGUID& lclSessionId,
-    uint8_t			u8FileType,
-    uint64_t		u64FileLen,
-    const char* pFileName,
-    VxGUID			assetId,
-    uint8_t* fileHashData )
+void PluginBaseFilesClient::toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfoa )
 {
 
 }

@@ -25,6 +25,7 @@
 class VxNetIdent;
 class AssetBaseInfo;
 class BlobInfo;
+class FileInfo;
 class OfferClientInfo;
 class OfferHostInfo;
 class ThumbInfo;
@@ -126,23 +127,23 @@ public:
 	//! Contact has sent a offer
 	virtual void				toGuiRxedPluginOffer(  VxNetIdent*		netIdent, 
 														EPluginType		ePluginType, 
-														const char*	pMsg,
+														const char*		pMsg,
 													    int				pvUserData,
-														const char*	pFileName = NULL,
+														const char*		pFileName = nullptr,
 														uint8_t *		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) = 0;
 	//! Contact has responded to offer
-	virtual void				toGuiRxedOfferReply(	VxNetIdent*	netIdent, 
+	virtual void				toGuiRxedOfferReply(	VxNetIdent*		netIdent, 
 														EPluginType		ePluginType,
 														int				pvUserData,
 														EOfferResponse	eOfferResponse, 
-														const char*	pFileName = NULL,
+														const char*		pFileName = nullptr,
 														uint8_t *		fileHashData = 0,
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) = 0;
 	//! Plugin session has stopped
-	virtual void				toGuiPluginSessionEnded(	VxNetIdent*	netIdent, 
+	virtual void				toGuiPluginSessionEnded(	VxNetIdent*		netIdent, 
 															EPluginType		ePluginType,
 															int				pvUserData,
 															EOfferResponse	eOfferResponse,
@@ -152,45 +153,19 @@ public:
 													int				statusType,
 													int				statusValue ) = 0;
 	//! Received text message from contact
-	virtual void				toGuiInstMsg(	VxNetIdent*	netIdent,
-												EPluginType		ePluginType,
-												const char*	pMsg ) = 0;
+	virtual void				toGuiInstMsg( VxNetIdent* netIdent, EPluginType	pluginType, const char* pMsg ) = 0;
+
 	//! Send list of contacts shared files to GUI
-	virtual void				toGuiFileListReply(	VxNetIdent*	netIdent, 
-													EPluginType		ePluginType, 
-													uint8_t			u8FileType, 
-													uint64_t		u64FileLen, 
-													const char*	pFileName,
-													VxGUID			assetId,
-													uint8_t *		fileHashData ) = 0;
+	virtual void				toGuiFileListReply( VxGUID& onlineId, EPluginType pluginType, FileInfo& fileInfo ) = 0;
 	//! Send list of files to GUI.. used to send directory listing or shared files or files that are in library
-	virtual void				toGuiFileList(	const char*	fileName, 
-												uint64_t		fileLen, 
-												uint8_t			fileType, 
-												bool			isShared,
-												bool			isInLibrary,
-												VxGUID          assetId,
-												uint8_t *		fileHashId = 0 ) = 0;
+	virtual void				toGuiFileList( FileInfo& fileInfo ) = 0;
+	virtual void				toGuiFileListCompleted( void ) = 0;
 	//! Upload a file started
-	virtual void				toGuiStartUpload(	VxNetIdent*	netIdent, 
-													EPluginType		ePluginType, 
-													VxGUID&			lclSessionId, 
-													uint8_t			u8FileType, 
-													uint64_t		u64FileLen, 
-													std::string&	fileName,
-													VxGUID&         assetId,
-													VxSha1Hash&		fileHasId ) = 0;
+	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
 	/// Upload a file completed
 	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// Download a file started
-	virtual void				toGuiStartDownload(	VxNetIdent*	netIdent, 
-													EPluginType		ePluginType, 
-													VxGUID&			lclSessionId, 
-													uint8_t			u8FileType, 
-													uint64_t		u64FileLen, 
-													std::string&	fileName,
-													VxGUID&         assetId,
-													VxSha1Hash&		fileHasId ) = 0;
+	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
 	/// Download a file completed
 	virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// File transfer progress and/or state
@@ -239,16 +214,9 @@ public:
 	/// Search had completed or has no more contact nodes to search
 	virtual void				toGuiScanSearchComplete( EScanType eScanType ) = 0;	
 	/// Search has found and received a About Me picture from contact
-	virtual void				toGuiSearchResultProfilePic(	VxNetIdent*	netIdent, 
-																uint8_t *		pu8JpgData, 
-																uint32_t		u32JpgDataLen ) = 0;
+	virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t*	pu8JpgData, uint32_t u32JpgDataLen ) = 0;
 	/// Search has found a matching file
-	virtual void				toGuiSearchResultFileSearch(	VxNetIdent*	netIdent, 		
-																VxGUID&			lclSessionId, 
-																uint8_t			u8FileType, 
-																uint64_t		u64FileLen, 
-																const char*	pFileName,
-																VxGUID          assetId ) = 0;
+	virtual void				toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
 
 	virtual void				toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort ) = 0;
 

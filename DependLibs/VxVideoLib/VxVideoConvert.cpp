@@ -170,8 +170,8 @@ uint8_t * VxConvertImage(	uint32_t		u32FourCcIn,		// FOURCC of format to convert
 		return pu8DataOut;
 	}
 
-	LogMsg( LOG_DEBUG, "VxConvertImage: Unrecognized video format\n" );
-	delete pu8DataOut;
+	LogMsg( LOG_DEBUG, "VxConvertImage: Unrecognized video format" );
+	delete[] pu8DataOut;
 	return NULL;
 }
 

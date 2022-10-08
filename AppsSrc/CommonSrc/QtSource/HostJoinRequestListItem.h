@@ -52,7 +52,7 @@ public:
     void						updateWidgetFromInfo( void );
 
 signals:
-    void						signalHostJoinRequestListItemClicked( QListWidgetItem * poItemWidget );
+    void						signalHostJoinRequestListItemClicked( QListWidgetItem* poItemWidget );
 	void						signalAvatarButtonClicked( HostJoinRequestListItem* listEntryWidget );
     void						signalFriendshipButtonClicked( HostJoinRequestListItem* listEntryWidget );
 	void						signalMenuButtonClicked( HostJoinRequestListItem* listEntryWidget );

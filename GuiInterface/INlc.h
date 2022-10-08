@@ -357,31 +357,13 @@ public:
                                               EPluginType		ePluginType,
                                               const char*	    pMsg ) override;
 
-    virtual void				toGuiFileListReply( VxNetIdent*	netIdent,
-                                                    EPluginType		ePluginType,
-                                                    uint8_t			u8FileType,
-                                                    uint64_t		u64FileLen,
-                                                    const char*	pFileName,
-                                                    VxGUID          assetId,
-                                                    uint8_t *		fileHashData ) override;
+    virtual void				toGuiFileListReply( VxGUID& onlineId, EPluginType pluginType, FileInfo& fileInfo ) override;
+    virtual void				toGuiFileList( FileInfo& fileInfo ) override;
+    virtual void				toGuiFileListCompleted( void ) override;
 
-    virtual void				toGuiStartUpload( VxNetIdent*	    netIdent,
-                                                  EPluginType		ePluginType,
-                                                  VxGUID&			fileInstanceId,
-                                                  uint8_t			u8FileType,
-                                                  uint64_t			u64FileLen,
-                                                  std::string&	    fileName,
-                                                  VxGUID&           assetId,
-                                                  VxSha1Hash&		fileHashId ) override;
+    virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
-    virtual void				toGuiStartDownload( VxNetIdent*	netIdent,
-                                                    EPluginType		ePluginType,
-                                                    VxGUID&			fileInstanceId,
-                                                    uint8_t			u8FileType,
-                                                    uint64_t		u64FileLen,
-                                                    std::string&    fileName,
-                                                    VxGUID&         assetId,
-                                                    VxSha1Hash&     fileHashId ) override;
+    virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileIn ) override;
 
     virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
     virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) override;
@@ -397,12 +379,7 @@ public:
                                                              uint8_t *      pu8JpgData,
                                                              uint32_t       u32JpgDataLen ) override;
 
-    virtual void				toGuiSearchResultFileSearch( VxNetIdent*	netIdent,
-                                                             VxGUID&        fileInstanceId,
-                                                             uint8_t		u8FileType,
-                                                             uint64_t       u64FileLen,
-                                                             const char*	pFileName,
-                                                             VxGUID         assetId ) override;
+    virtual void				toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
     virtual void				toGuiSetGameValueVar( EPluginType	    ePluginType,
                                                       VxGUID&	        oOnlineId,
@@ -413,14 +390,6 @@ public:
                                                        VxGUID&	    oOnlineId,
                                                        int32_t		s32VarId,
                                                        int32_t		s32VarValue ) override;
-
-    virtual void				toGuiFileList( const char*	fileName,
-                                               uint64_t		fileLen,
-                                               uint8_t		fileType,
-                                               bool			isShared,
-                                               bool			isInLibrary,
-                                               VxGUID       assetId,
-                                               uint8_t *	fileHashId = 0 ) override;
 
     virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;
     virtual void				toGuiAssetUpdated( AssetBaseInfo* assetInfo ) override;
@@ -601,19 +570,22 @@ public:
     virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName = NULL );
     virtual void				fromGuiSendLog( uint32_t u32LogFlags );
 
-    virtual bool				fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY );
+    virtual bool				fromGuiBrowseFiles( std::string& folderName, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY );
     virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
-    virtual bool				fromGuiSetFileIsShared( const char* fileName, bool isShared );
-    virtual bool				fromGuiGetIsFileShared( const char* fileName );
+    virtual bool				fromGuiSetFileIsShared( FileInfo& fileInfo, bool addFisSharedile );
+    virtual bool				fromGuiGetIsFileShared( std::string& fileName );
+    virtual bool				fromGuiRemoveSharedFile( std::string fileName ); // for remove before deletion
 
     virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
-    virtual bool				fromGuiAddFileToLibrary( const char* fileName, bool addFile, uint8_t * fileHashId = 0 );
+    virtual bool				fromGuiSetFileIsInLibrary( FileInfo& fileInfo, bool isInLibrary );
+    virtual bool				fromGuiSetFileIsInLibrary( std::string fileName, bool inLibrary );
     virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
-    virtual bool				fromGuiGetIsFileInLibrary( const char* fileName );
+    virtual bool				fromGuiGetIsFileInLibrary( std::string& fileName );
+    virtual bool				fromGuiRemoveFromLibrary( std::string& fileNamee ); // for remove before deletion
     virtual bool				fromGuiIsMyP2PWebVideoFile( const char* fileName );
     virtual bool				fromGuiIsMyP2PWebAudioFile( const char* fileName );
 
-    virtual int					fromGuiDeleteFile( const char* fileName, bool shredFile );
+    virtual int					fromGuiDeleteFile( std::string fileName, bool shredFile );
 
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 = 0 );
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 );

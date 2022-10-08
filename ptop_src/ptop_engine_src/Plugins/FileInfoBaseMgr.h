@@ -66,13 +66,15 @@ public:
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState(	uint8_t *		fileHashId );
 	
-	virtual bool				fromGuiBrowseFiles( const char* dir, bool lookupShareStatus, uint8_t fileFilterMask ) { return false; }
+	virtual bool				fromGuiBrowseFiles( const char* dir, uint8_t fileFilterMask ) { return false; }
 
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
-	virtual bool				fromGuiSetFileIsShared( std::string fileName, bool isShared, uint8_t* fileHashId = 0 );
-	virtual bool				fromGuiGetIsFileShared( std::string fileName );
+	virtual bool				fromGuiSetFileIsShared( FileInfo& fileInfo, bool isShared );
+	virtual bool				fromGuiSetFileIsShared( std::string& fileName, bool isShared );
+	virtual bool				fromGuiGetIsFileShared( std::string& fileName );
+	virtual bool				fromGuiRemoveSharedFile( std::string& fileName );
 
-	virtual bool				fromGuiAddSharedFile( const char* fileNameIn, bool addFile, uint8_t* fileHashId );
+	virtual bool				fromGuiAddSharedFile( FileInfo& fileInfo, bool isShared );
 
 	virtual void				updateFileTypes( void );
 
@@ -90,7 +92,7 @@ public:
 													uint8_t			fileType,
 													VxSha1Hash&		fileHashId );
 
-	virtual void				removeFromDbAndList( std::string& fileName, bool listIsLocked = false );
+	virtual bool				removeFromDbAndList( std::string& fileName, bool listIsLocked = false );
 
 	bool						isAllowedFileOrDir( std::string strFileName );
 
@@ -107,8 +109,8 @@ public:
 	// virtual void				fromGuiUserLoggedOn( void ) override;
 	virtual void				onAfterUserLogOnThreaded( void );
 
-	ECommErr					searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
-	ECommErr					searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ECommErr					searchRequest( PktFileInfoSearchReply& pktReply, VxGUID& specificAssetId, std::string& searchStr, uint8_t searchFileTypes, VxSktBase* sktBase, VxNetIdent* netIdent );
+	ECommErr					searchMoreRequest( PktFileInfoMoreReply& pktReply, VxGUID& nextFileAssetId, std::string& searchStr, uint8_t searchFileTypes, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 	bool						startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
@@ -128,33 +130,22 @@ public:
 													uint8_t*		fileHashData = 0,
 													VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 													VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
-	virtual void				toGuiStartUpload( VxNetIdent*		netIdent,
-													EPluginType		ePluginType,
-													VxGUID&			lclSessionId,
-													uint8_t			u8FileType,
-													uint64_t		u64FileLen,
-													const char*		pFileName,
-													VxGUID			assetId,
-													uint8_t*		fileHashData );
 
-	virtual void				toGuiStartDownload( VxNetIdent*		netIdent,
-													EPluginType		ePluginType,
-													VxGUID&			lclSessionId,
-													uint8_t			u8FileType,
-													uint64_t		u64FileLen,
-													const char*		pFileName,
-													VxGUID			assetId,
-													uint8_t*		fileHashData );
+	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
+	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
 
 	void						updateToGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
 	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError );
 	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError );
+
+	virtual void				sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo );
 
 protected:
 	void						checkForInitializeCompleted( void );
 	bool						findFileAsset( VxGUID& fileAssetId, FileInfo& fileInfo ); // assumes file list is already locked
 
 	void						addFileToGenHashQue( VxGUID& assetId, std::string fileName );
+	void						removeFileFromGenHashQue( VxGUID& assetId, std::string fileName );
 	virtual void				callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGUID& assetId, Sha1Info& sha1Info ) override;
 
 	bool						isFileShareServer( void );
