@@ -192,7 +192,7 @@ void FileXferWidget::setFileProgressBarValue( int val )
 void FileXferWidget::updateWidgetFromInfo( void )
 {
 	GuiFileXferSession* poSession= getFileItemInfo();
-	if( 0 == poSession )
+	if( !poSession )
 	{
 		return;
 	}

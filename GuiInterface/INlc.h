@@ -379,7 +379,7 @@ public:
                                                              uint8_t *      pu8JpgData,
                                                              uint32_t       u32JpgDataLen ) override;
 
-    virtual void				toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
+    virtual void				toGuiSearchResultFileSearch( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
     virtual void				toGuiSetGameValueVar( EPluginType	    ePluginType,
                                                       VxGUID&	        oOnlineId,

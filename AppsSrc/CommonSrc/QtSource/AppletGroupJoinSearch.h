@@ -32,7 +32,7 @@ class AppletGroupJoinSearch : public AppletClientBase, public GuiHostedListCallb
 	Q_OBJECT
 public:
 	AppletGroupJoinSearch(	AppCommon&		    app, 
-							QWidget*			parent = NULL );
+							QWidget*			parent = nullptr );
 	virtual ~AppletGroupJoinSearch();
 
     void                        infoMsg( const char* infoMsg, ... );

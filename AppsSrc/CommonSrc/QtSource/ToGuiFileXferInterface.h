@@ -36,7 +36,7 @@ public:
 	virtual void				callbackToGuiFileList( FileInfo& fileInfo ){};
 	virtual void				callbackToGuiFileListCompleted( void ) {};
 
-	virtual void				toGuiFileListReply(	FileListReplySession * xferSession ){};
+	virtual void				toGuiFileListReply(	FileListReplySession* xferSession ){};
 
 	virtual void				toGuiStartUpload( GuiFileXferSession* xferSession ){};
 	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSession, EXferError xferError ){};

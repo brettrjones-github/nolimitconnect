@@ -33,9 +33,9 @@ GuiOfferMgrBase::GuiOfferMgrBase( AppCommon&  myApp )
 {
     //connect( &myApp, SIGNAL(signalContactOffline(GuiUser*)),					this,		SLOT(slotToGuiContactOffline(GuiUser*)));
 
-	connect( this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this,		SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)) );
-	connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),		this,		SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
-	connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this,		SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
+	connect( this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession*)),		this,		SLOT(slotToGuiRxedPluginOffer(GuiOfferSession*)) );
+	connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession*)),		this,		SLOT(slotToGuiRxedOfferReply(GuiOfferSession*)) );
+	connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession*)),	this,		SLOT(slotToGuiPluginSessionEnded(GuiOfferSession*)) );
 
 	//connect( m_OncePerSecTimer, SIGNAL(timeout()), this, SLOT(slotOncePerSecond()) );
 	//m_OncePerSecTimer->setInterval( 1000 );
@@ -49,13 +49,13 @@ bool GuiOfferMgrBase::isMessengerReady( void )
 }
 
 //========================================================================
-void GuiOfferMgrBase::toGuiRxedPluginOffer( GuiOfferSession * offerSession )
+void GuiOfferMgrBase::toGuiRxedPluginOffer( GuiOfferSession* offerSession )
 {
 	emit signalToGuiRxedPluginOffer( offerSession );
 }
 
 //========================================================================
-void GuiOfferMgrBase::slotToGuiRxedPluginOffer( GuiOfferSession * offerSession )
+void GuiOfferMgrBase::slotToGuiRxedPluginOffer( GuiOfferSession* offerSession )
 {
 	lockOfferMgr();
 	OfferSessionState * sessionState = findOrAddOfferSession( offerSession );
@@ -66,13 +66,13 @@ void GuiOfferMgrBase::slotToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 }
 
 //========================================================================
-void GuiOfferMgrBase::toGuiRxedOfferReply( GuiOfferSession * offerSession )
+void GuiOfferMgrBase::toGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	emit signalToGuiRxedOfferReply( offerSession );
 }
 
 //========================================================================
-void GuiOfferMgrBase::slotToGuiRxedOfferReply( GuiOfferSession * offerSession )
+void GuiOfferMgrBase::slotToGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	lockOfferMgr();
 	OfferSessionState * sessionState = findOfferSession( offerSession->getOfferSessionId() );
@@ -122,13 +122,13 @@ void GuiOfferMgrBase::slotToGuiRxedOfferReply( GuiOfferSession * offerSession )
 }
 
 //========================================================================
-void GuiOfferMgrBase::toGuiPluginSessionEnded( GuiOfferSession * offerSession )
+void GuiOfferMgrBase::toGuiPluginSessionEnded( GuiOfferSession* offerSession )
 {
 	emit signalToGuiPluginSessionEnded( offerSession );
 }
 
 //========================================================================
-void GuiOfferMgrBase::slotToGuiPluginSessionEnded( GuiOfferSession * offerSession )
+void GuiOfferMgrBase::slotToGuiPluginSessionEnded( GuiOfferSession* offerSession )
 {
 	lockOfferMgr();
 	OfferSessionState * sessionState = findOfferSession( offerSession->getOfferSessionId() );		
@@ -354,7 +354,7 @@ void GuiOfferMgrBase::acceptOfferButtonClicked( EPluginType ePluginType, VxGUID 
 		return;
 	}
 
-	GuiOfferSession * offerSession = offerState->getGuiOfferSession();
+	GuiOfferSession* offerSession = offerState->getGuiOfferSession();
 	if( 0 == offerSession )
 	{
 		removePluginSessionOffer( offerSessionId );
@@ -404,7 +404,7 @@ void GuiOfferMgrBase::rejectOfferButtonClicked( EPluginType ePluginType, VxGUID 
 		return;
 	}
 
-	GuiOfferSession * offerSession = offerState->getGuiOfferSession();
+	GuiOfferSession* offerSession = offerState->getGuiOfferSession();
 	if( 0 == offerSession )
 	{
 		removePluginSessionOffer( offerSessionId );
@@ -430,7 +430,7 @@ void GuiOfferMgrBase::rejectOfferButtonClicked( EPluginType ePluginType, VxGUID 
 }
 
 //========================================================================
-void GuiOfferMgrBase::removePluginSessionOffer( EPluginType ePluginType, GuiUser* netIdent )
+void GuiOfferMgrBase::removePluginSessionOffer( EPluginType ePluginType, GuiUser* guiUser )
 {
 	std::vector<OfferSessionState *>::iterator iter;
 	iter = m_aoOffersList.begin();
@@ -438,7 +438,7 @@ void GuiOfferMgrBase::removePluginSessionOffer( EPluginType ePluginType, GuiUser
 	{
 		OfferSessionState * sessionState = (*iter);
 		if( ( ePluginType == sessionState->getPluginType() )
-			&& ( sessionState->getHisIdent()->getMyOnlineId() == netIdent->getMyOnlineId() ) )
+			&& ( sessionState->getHisIdent()->getMyOnlineId() == guiUser->getMyOnlineId() ) )
 		{
 			iter = m_aoOffersList.erase( iter );
 			std::vector<ToGuiOfferInterface *>::iterator callbackIter;
@@ -569,7 +569,7 @@ void GuiOfferMgrBase::onSessionExit( EPluginType ePluginType, VxGUID offerSessio
 }
 
 //========================================================================
-OfferSessionState * GuiOfferMgrBase::findOrAddOfferSession( GuiOfferSession * offerSession )
+OfferSessionState * GuiOfferMgrBase::findOrAddOfferSession( GuiOfferSession* offerSession )
 {
     VxGUID thisSessionId = offerSession->getOfferSessionId();
 	OfferSessionState * retSessionState = findOfferSession( thisSessionId );
@@ -601,13 +601,13 @@ OfferSessionState * GuiOfferMgrBase::findOfferSession( VxGUID sessionId )
 }
 
 //============================================================================
-GuiOfferSession * GuiOfferMgrBase::findActiveAndAvailableOffer( GuiUser* netIdent, EPluginType ePluginType )
+GuiOfferSession* GuiOfferMgrBase::findActiveAndAvailableOffer( GuiUser* guiUser, EPluginType ePluginType )
 {
 	std::vector<OfferSessionState *>::iterator iter;
 	for( iter = m_aoOffersList.begin(); iter != m_aoOffersList.end(); ++iter )
 	{
 		if( ((*iter)->getPluginType() == ePluginType ) 
-			&& ((*iter)->getHisIdent()->getMyOnlineId() == netIdent->getMyOnlineId() )  )
+			&& ((*iter)->getHisIdent()->getMyOnlineId() == guiUser->getMyOnlineId() )  )
 		{
 			if( (*iter)->isAvailableAndActiveOffer() )
 			{

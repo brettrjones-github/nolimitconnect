@@ -182,7 +182,7 @@ public:
     bool                        setPluginSetting( PluginSetting& pluginSetting );
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );
 
-    virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
+    virtual void				setPluginPermission( EPluginType pluginType, int iPluginPermission );
     virtual EFriendState		getPluginPermission( int iPluginType );
 
     PluginLibraryServer&        getPluginLibraryServer( void )                  { return *m_PluginLibraryServer; }
@@ -192,7 +192,7 @@ public:
 	virtual void				setHasPicture( int bHasPicture );
 	virtual void				setHasSharedWebCam( int bHasShaeredWebCam );
 	bool						isContactConnected( VxGUID& onlineId );
-	bool						isSystemPlugin( EPluginType	ePluginType );
+	bool						isSystemPlugin( EPluginType	pluginType );
 
     bool                        isUserConnected( VxGUID& onlineId );
 
@@ -261,7 +261,7 @@ public:
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation ) override;
     virtual bool				fromGuiMovieDone( void ) override							{ return true; };
 
-    virtual void				fromGuiNetworkAvailable( const char* lclIp = NULL, bool isCellularNetwork = false ) override;
+    virtual void				fromGuiNetworkAvailable( const char* lclIp = nullptr, bool isCellularNetwork = false ) override;
     virtual void				fromGuiNetworkLost( void ) override;
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) override;
 
@@ -294,15 +294,15 @@ public:
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings ) override;
     virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) override;
 
-    virtual void				fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) override;
-    virtual int					fromGuiGetPluginPermission( EPluginType ePluginType ) override;
-    virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType ePluginType ) override;
+    virtual void				fromGuiSetPluginPermission( EPluginType pluginType, EFriendState eFriendState ) override;
+    virtual int					fromGuiGetPluginPermission( EPluginType pluginType ) override;
+    virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType pluginType ) override;
 
-    virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
-    virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) override;
-    virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStartPluginSession( EPluginType pluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStopPluginSession( EPluginType pluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) override;
+    virtual bool				fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
+	virtual bool				fromGuiMakePluginOffer(	EPluginType		pluginType, 
 														VxGUID&			onlineId,
 														int				pvUserData,
 														const char*	    pOfferMsg, 
@@ -310,13 +310,13 @@ public:
 														uint8_t*		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiToPluginOfferReply(	EPluginType		ePluginType,
+	virtual bool				fromGuiToPluginOfferReply(	EPluginType		pluginType,
 															VxGUID&			onlineId,
 															int			    pvUserData,
 															int				iOfferResponse,
                                                             VxGUID			lclSessionId ) override;
 
-	virtual int					fromGuiPluginControl(	EPluginType		ePluginType, 
+	virtual int					fromGuiPluginControl(	EPluginType		pluginType, 
 														VxGUID&			onlineId, 
 														const char*	    pControl, 
 														const char*	    pAction,
@@ -324,7 +324,7 @@ public:
 														VxGUID&			fileId = VxGUID::nullVxGUID(),
                                                         uint8_t*		fileHashId = 0 ) override;
 
-	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
+	virtual bool				fromGuiInstMsg(		EPluginType		pluginType, 
 													VxGUID&			onlineId, 
                                                     const char*	    pMsg ) override;
     virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) override;
@@ -351,19 +351,11 @@ public:
     virtual void				fromGuiCancelDownload( VxGUID& fileInstance ) override;
     virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) override;
 
-	virtual bool				fromGuiSetGameValueVar( EPluginType	ePluginType, 
-														VxGUID&		onlineId, 
-														int32_t			varId, 
-                                                        int32_t			varValue ) override;
+	virtual bool				fromGuiSetGameValueVar( EPluginType	pluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ) override;
+														                                            
+	virtual bool				fromGuiSetGameActionVar( EPluginType pluginType, VxGUID& onlineId, int32_t actionId, int32_t actionValue ) override;
 
-	virtual bool				fromGuiSetGameActionVar(	EPluginType	ePluginType, 
-															VxGUID&		onlineId, 
-															int32_t			actionId, 
-                                                            int32_t			actionValue ) override;
-
-	virtual bool				fromGuiTestCmd(	ETestParam1		eTestParam1, 
-												int				testParam2 = 0, 
-                                                const char*	testParam3 = NULL ) override;
+	virtual bool				fromGuiTestCmd(	ETestParam1 testParam1, int	testParam2 = 0, const char* testParam3 = nullptr ) override;                                            
 
     virtual uint16_t			fromGuiGetRandomTcpPort( void ) override;
     /// Get url for this node
@@ -374,7 +366,7 @@ public:
     virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) override;
     virtual bool				fromGuiNearbyBroadcastEnable( bool enable ) override;
 
-    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName = NULL ) override;
+    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char*	pLogFileName = nullptr ) override;
     virtual void				fromGuiSendLog( uint32_t u32LogFlags ) override;
     virtual bool				fromGuiBrowseFiles( std::string& folderName, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
     virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter ) override;
@@ -481,7 +473,7 @@ public:
 	virtual	void				onContactDisconnected	( RcConnectInfo * poInfo, bool connectionListLocked );
 
 	void						onConnectionLost( VxSktBase* sktBase );
-	void						onSessionStart( EPluginType ePluginType, VxNetIdent* netIdent );
+	void						onSessionStart( EPluginType pluginType, VxNetIdent* netIdent );
 	//========================================================================
 	//========================================================================
 
@@ -714,7 +706,7 @@ protected:
     //========================================================================
     void						iniitializePtoPEngine( void );
 
-	virtual bool				txPluginPkt( 	EPluginType			ePluginType, 
+	virtual bool				txPluginPkt( 	EPluginType			pluginType, 
 												VxNetIdentBase *	netIdent, 
 												VxSktBase*			sktBase, 
 												VxPktHdr*			poPkt, 

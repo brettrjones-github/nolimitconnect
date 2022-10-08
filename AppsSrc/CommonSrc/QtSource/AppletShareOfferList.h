@@ -29,7 +29,7 @@ class AppletShareOfferList : public AppletPeerBase, public ToGuiFileXferInterfac
 	Q_OBJECT
 public:
 	AppletShareOfferList(	AppCommon&	app, 
-						QWidget*		parent = NULL );
+						QWidget*		parent = nullptr );
 	virtual ~AppletShareOfferList() override;
 
     /*

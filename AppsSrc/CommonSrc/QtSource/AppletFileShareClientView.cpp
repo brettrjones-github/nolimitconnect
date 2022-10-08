@@ -104,9 +104,15 @@ void AppletFileShareClientView::hideEvent( QHideEvent* ev )
 }
 
 //============================================================================
-void AppletFileShareClientView::toGuiFileListReply( FileListReplySession * replySession )
+void AppletFileShareClientView::toGuiFileListReply( FileListReplySession* replySession )
 {
-	addFile( replySession->getIdent(), replySession->getFileInfo() );
+	addFile( replySession->getIdent(), replySession->getPluginType(), replySession->getFileInfo() );
+}
+
+//============================================================================
+void AppletFileShareClientView::toGuiSearchResultFileSearch( GuiUser* guiUser, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+{
+	addFile( guiUser, pluginType, fileInfo );
 }
 
 //============================================================================
@@ -175,7 +181,6 @@ void AppletFileShareClientView::toGuiFileDownloadComplete( EPluginType pluginTyp
 //============================================================================
 void AppletFileShareClientView::statusMsg( QString strMsg )
 {
-	//LogMsg( LOG_INFO, strMsg.toStdString().c_str() );
 	ui.m_StatusMsgLabel->setText( strMsg );
 }
 
@@ -199,16 +204,15 @@ void AppletFileShareClientView::slotApplyFileFilter( unsigned char fileTypeMask 
 }
 
 //============================================================================
-FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser* netIdent, FileInfo& fileInfo )
+FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser* guiUser, EPluginType pluginType, FileInfo& fileInfo )
 {
 	FileXferWidget* item = new FileXferWidget(ui.FileItemList);
 	item->setSizeHint( QSize( (int)(GuiParams::getGuiScale() * 200), GuiParams::getFileListEntryHeight() ) );
+
     VxGUID lclSessionId;
     lclSessionId.initializeWithNewVxGUID();
-	GuiFileXferSession* xferSession = new GuiFileXferSession(	ePluginTypeFileShareServer, 
-																netIdent, 
-                                                                lclSessionId,
-                                                                fileInfo );
+	GuiFileXferSession* xferSession = new GuiFileXferSession( pluginType, guiUser, lclSessionId, fileInfo );
+	xferSession->setXferState( eXferStateDownloadNotStarted, 0, 0 );
 	xferSession->setXferDirection( eXferDirectionRx );
 	xferSession->setWidget( item );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)xferSession) );
@@ -230,8 +234,7 @@ FileXferWidget* AppletFileShareClientView::fileToWidget( GuiUser* netIdent, File
 //============================================================================
 void AppletFileShareClientView::updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* xferSession )
 {
-	if( ( 0 == item )
-		|| ( 0 == xferSession ) )
+	if( !item || !xferSession )
 	{
 		return;
 	}
@@ -246,16 +249,19 @@ void AppletFileShareClientView::updateListEntryWidget( FileXferWidget* item, Gui
 		item->setVisible( true );
 	}
 
-	int percent = m_FromGui.fromGuiGetFileDownloadState( xferSession->getFileHashId().getHashData() );
-	if( percent < 0 )
+	if( xferSession->getXferState() != eXferStateDownloadNotStarted && xferSession->getXferState() != eXferStateUploadNotStarted )
 	{
-		item->setFileIconButtonEnabled( true );
-		item->setFileProgressBarValue( 0 );
-	}
-	else
-	{
-		item->setFileIconButtonEnabled( false );
-		item->setFileProgressBarValue( percent );
+		int percent = m_FromGui.fromGuiGetFileDownloadState( xferSession->getFileHashId().getHashData() );
+		if( percent < 0 )
+		{
+			item->setFileIconButtonEnabled( true );
+			item->setFileProgressBarValue( 0 );
+		}
+		else
+		{
+			item->setFileIconButtonEnabled( false );
+			item->setFileProgressBarValue( percent );
+		}
 	}
 }
 
@@ -289,11 +295,11 @@ FileXferWidget* AppletFileShareClientView::findListEntryWidget( VxGUID lclSessio
 }
 
 //============================================================================
-void AppletFileShareClientView::addFile( GuiUser* netIdent, FileInfo& fileInfo )
+void AppletFileShareClientView::addFile( GuiUser* guiUser, EPluginType pluginType, FileInfo& fileInfo )
 {
     if( fileInfo.getFileLength() && !fileInfo.getFullFileName().empty() )
 	{
-        FileXferWidget* item = fileToWidget( netIdent, fileInfo );
+        FileXferWidget* item = fileToWidget( guiUser, pluginType, fileInfo );
 		if( item )
 		{
 			//LogMsg( LOG_INFO, "AppletFileShareClientView::addFile: adding widget\n");
@@ -367,6 +373,12 @@ void AppletFileShareClientView::slotCancelButtonClicked( QListWidgetItem* item )
 //============================================================================
 void AppletFileShareClientView::beginDownload( GuiFileXferSession* xferSession, QListWidgetItem* item  )
 {
+	if( !xferSession || !xferSession->getIdent() )
+	{
+		LogMsg( LOG_ERROR, "AppletFileShareClientView::beginDownload invalid param" );
+		return;
+	}
+
 	if(	-1 != m_FromGui.fromGuiGetFileDownloadState( xferSession->getFileHashId().getHashData() ) )
 	{
 		ActivityMessageBox errMsgBox( m_MyApp, this, LOG_INFO, "File is already downloading" );
@@ -374,13 +386,14 @@ void AppletFileShareClientView::beginDownload( GuiFileXferSession* xferSession, 
 	}
 	else
 	{
+		GuiUser* guiUser = xferSession->getIdent();
 		if( false == xferSession->getLclSessionId().isVxGUIDValid() )
 		{
 			xferSession->getLclSessionId().initializeWithNewVxGUID();
 		}
 
-		EXferError xferError = (EXferError)m_FromGui.fromGuiPluginControl(	ePluginTypeFileShareServer, 
-																			m_Friend->getMyOnlineId(), 
+		EXferError xferError = (EXferError)m_FromGui.fromGuiPluginControl( xferSession->getPluginType(),
+																			guiUser->getMyOnlineId(),
 																			"DownloadFile", 
 																			xferSession->getFullFileName().toUtf8().constData(),
 																			0,

@@ -22,7 +22,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-void AppCommon::updateFriendList( GuiUser* netIdent, bool sessionTimeChange )
+void AppCommon::updateFriendList( GuiUser* guiUser, bool sessionTimeChange )
 {
 }
 

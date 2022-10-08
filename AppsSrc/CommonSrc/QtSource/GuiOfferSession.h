@@ -39,7 +39,7 @@ public:
 	virtual ~GuiOfferSession() {};
 
 	VxGUID&						assuredValidLclSessionId( void );
-	OfferSessionState *			createNewSessionState( AppCommon& myApp, GuiOfferSession * offerSession );
+	OfferSessionState *			createNewSessionState( AppCommon& myApp, GuiOfferSession* offerSession );
 
 	void						setPluginType( EPluginType type )		{ m_ePluginType = type; }
 	EPluginType					getPluginType( void )					{ return m_ePluginType; }
@@ -47,7 +47,7 @@ public:
 	void						setIsRemoteInitiated( bool bIsRemoteInitiated ) { m_bRmtInitiated = bIsRemoteInitiated; }
 	bool						getIsRemoteInitiated( void )			{ return m_bRmtInitiated; }
 
-	void						setHisIdent( GuiUser* netIdent )	    { m_HisIdent = netIdent; }
+	void						setHisIdent( GuiUser* guiUser )			{ m_HisIdent = guiUser; }
     GuiUser*				    getHisIdent( void )						{ return m_HisIdent; }
 	void						setOfferMsg( const char* msg )			{ m_strOfferMsg = msg; }
 	std::string&				getOfferMsg( void )						{ return m_strOfferMsg; }

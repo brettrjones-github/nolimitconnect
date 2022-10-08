@@ -83,12 +83,12 @@ void AppCommon::toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIden
 //============================================================================
 void AppCommon::slotInternalToGuiSearchResultError( EScanType eScanType, VxNetIdent netIdentIn, int errCode )
 {
-    GuiUser* netIdent = m_UserMgr.getUser( netIdentIn.getMyOnlineId() );
+    GuiUser* guiUser = m_UserMgr.getUser( netIdentIn.getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		client->toGuiSearchResultError( eScanType, netIdent, errCode );
+		client->toGuiSearchResultError( eScanType, guiUser, errCode );
 	}
 
 	m_ToGuiActivityInterfaceBusy = false;
@@ -104,31 +104,37 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent*	netIdentIn,
 		return;
 	}
 
-    GuiUser* netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
+    GuiUser* guiUser = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		client->toGuiSearchResultProfilePic( netIdent, pu8JpgData, u32JpgDataLen );
+		client->toGuiSearchResultProfilePic( guiUser, pu8JpgData, u32JpgDataLen );
 	}
 
 	m_ToGuiActivityInterfaceBusy = false;
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultFileSearch( VxNetIdent* netIdentin, VxGUID& lclSessionId, FileInfo& fileInfo )
+void AppCommon::toGuiSearchResultFileSearch( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+{
+	emit signalInternalToGuiSearchResultFileSearch( onlineId, pluginType, lclSessionId, fileInfo );
+}
+
+//============================================================================
+void AppCommon::slotInternalToGuiSearchResultFileSearch( VxGUID onlineId, EPluginType pluginType, VxGUID lclSessionId, FileInfo fileInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	GuiUser* netIdent = m_UserMgr.getUser( netIdentin->getMyOnlineId() );
+	GuiUser* guiUser = m_UserMgr.getUser( onlineId );
 
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		client->toGuiSearchResultFileSearch( netIdent, lclSessionId, fileInfo );
+		client->toGuiSearchResultFileSearch( guiUser, pluginType, lclSessionId, fileInfo );
 	}
 
 	m_ToGuiActivityInterfaceBusy = false;

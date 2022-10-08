@@ -31,8 +31,7 @@ namespace
 }
 
 //============================================================================
-AppletGroupListClient::AppletGroupListClient(	AppCommon&		    app, 
-												QWidget*			parent )
+AppletGroupListClient::AppletGroupListClient( AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_GROUP_LIST_CLIENT, app, parent )
 {
     setAppletType( eAppletGroupListClient );

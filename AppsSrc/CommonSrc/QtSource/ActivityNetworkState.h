@@ -28,7 +28,7 @@ class ActivityNetworkState : public ActivityBase
 {
 	Q_OBJECT
 public:
-	ActivityNetworkState( AppCommon& app, QWidget* parent = NULL );
+	ActivityNetworkState( AppCommon& app, QWidget* parent = nullptr );
     virtual ~ActivityNetworkState() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

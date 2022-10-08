@@ -30,7 +30,7 @@ class ActivityFileSearch : public ActivityBase
 {
 	Q_OBJECT
 public:
-	ActivityFileSearch(	AppCommon& app, QWidget* parent = NULL );
+	ActivityFileSearch(	AppCommon& app, QWidget* parent = nullptr );
 	virtual ~ActivityFileSearch() override;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

@@ -23,7 +23,7 @@ class ActivityTimedMessage : public QDialog
 	Q_OBJECT
 
 public:
-	ActivityTimedMessage( QString strTitle, QString strMessage, int iTimeoutSeconds = 4, QWidget* parent = NULL );
+	ActivityTimedMessage( QString strTitle, QString strMessage, int iTimeoutSeconds = 4, QWidget* parent = nullptr );
 	virtual ~ActivityTimedMessage() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

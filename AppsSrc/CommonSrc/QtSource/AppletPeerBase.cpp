@@ -171,19 +171,19 @@ bool AppletPeerBase::fromGuiSetGameActionVar(	int32_t			s32VarId,
 }
 
 //============================================================================
-void AppletPeerBase::toGuiRxedPluginOffer(GuiOfferSession * offer )
+void AppletPeerBase::toGuiRxedPluginOffer(GuiOfferSession* offer )
 {
 	//m_OfferSessionLogic.toGuiRxedPluginOffer( offer );
 }; 
 
 //============================================================================
-void AppletPeerBase::toGuiRxedOfferReply( GuiOfferSession * offerReply )
+void AppletPeerBase::toGuiRxedOfferReply( GuiOfferSession* offerReply )
 {
 	//m_OfferSessionLogic.toGuiRxedOfferReply( offerReply );
 }; 
 
 //============================================================================
-void AppletPeerBase::toGuiPluginSessionEnded( GuiOfferSession * offer )
+void AppletPeerBase::toGuiPluginSessionEnded( GuiOfferSession* offer )
 {
 	//handleSessionEnded( offerResponse, this );
 }; 

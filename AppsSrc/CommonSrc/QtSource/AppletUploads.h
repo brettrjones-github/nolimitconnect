@@ -28,7 +28,7 @@ class AppletUploads : public AppletPeerBase, public ToGuiFileXferInterface
 	Q_OBJECT
 public:
 	AppletUploads(	AppCommon&	app, 
-						QWidget*		parent = NULL );
+						QWidget*		parent = nullptr );
 	virtual ~AppletUploads() override;
 
 public:

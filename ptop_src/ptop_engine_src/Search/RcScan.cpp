@@ -327,7 +327,7 @@ void RcScan::onScanResultError( EScanType eScanType, VxNetIdent* netIdent, VxSkt
 }
 
 //============================================================================
-void RcScan::onScanResultProfilePic( VxNetIdent* netIdent, VxSktBase* sktBase, uint8_t * pu8JpgData, uint32_t u32JpgDataLen )
+void RcScan::onScanResultProfilePic( VxNetIdent* netIdent, VxSktBase* sktBase, uint8_t* pu8JpgData, uint32_t u32JpgDataLen )
 {
 	m_ScanAction.onScanResultProfilePic( netIdent, sktBase, pu8JpgData, u32JpgDataLen );
 }

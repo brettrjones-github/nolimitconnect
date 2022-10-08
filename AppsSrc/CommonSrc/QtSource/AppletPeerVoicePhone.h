@@ -33,8 +33,8 @@ public:
 
 protected:
 	// override of ToGuiActivityInterface
-    virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ) override;
-    virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ) override;
+    virtual void				toToGuiRxedPluginOffer( GuiOfferSession* offer ) override;
+    virtual void				toToGuiRxedOfferReply( GuiOfferSession* offer ) override;
 
 	void						setupActivityVoicePhone( void );
     void						toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg ) override;

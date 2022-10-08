@@ -1146,5 +1146,5 @@ bool FileInfoBaseMgr::isLibraryServer( void )
 //============================================================================
 void FileInfoBaseMgr::sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo )
 {
-	m_PrivateEngine.getToGui().toGuiSearchResultFileSearch( netIdent, searchSessionId, fileInfo );
+	m_PrivateEngine.getToGui().toGuiSearchResultFileSearch( netIdent->getMyOnlineId(), m_Plugin.getPluginType(), searchSessionId, fileInfo );
 }

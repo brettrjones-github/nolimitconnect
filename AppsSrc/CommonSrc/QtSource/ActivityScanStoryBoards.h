@@ -29,7 +29,7 @@ class ActivityScanStoryBoards :  public ActivityBase
 	Q_OBJECT
 public:
 	ActivityScanStoryBoards(	AppCommon& app, 
-								QWidget*		parent = NULL );
+								QWidget*		parent = nullptr );
 	virtual ~ActivityScanStoryBoards() override;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

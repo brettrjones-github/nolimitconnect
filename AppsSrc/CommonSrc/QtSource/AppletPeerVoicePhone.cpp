@@ -50,13 +50,13 @@ void AppletPeerVoicePhone::setupActivityVoicePhone( void )
 }
 
 //============================================================================
-void AppletPeerVoicePhone::toToGuiRxedPluginOffer( GuiOfferSession * offer )
+void AppletPeerVoicePhone::toToGuiRxedPluginOffer( GuiOfferSession* offer )
 {
 	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletPeerVoicePhone::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
+void AppletPeerVoicePhone::toToGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 }

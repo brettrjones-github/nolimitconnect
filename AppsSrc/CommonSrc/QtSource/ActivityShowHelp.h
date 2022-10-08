@@ -29,7 +29,7 @@ class ActivityShowHelp : public ActivityBase
 	Q_OBJECT
 
 public:
-	ActivityShowHelp( AppCommon& app, QWidget* parent = NULL );
+	ActivityShowHelp( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~ActivityShowHelp() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

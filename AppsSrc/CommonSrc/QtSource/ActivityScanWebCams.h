@@ -34,7 +34,7 @@ class ActivityScanWebCams : public ActivityBase, public GuiPlayerCallback
 	Q_OBJECT
 public:
 	ActivityScanWebCams(	AppCommon& app, 
-							QWidget*		parent = NULL );
+							QWidget*		parent = nullptr );
 	virtual ~ActivityScanWebCams() override;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
@@ -45,17 +45,17 @@ public:
 	void						setTitle( QString strTitle );
 
     virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
-    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* guiUser ) override;
     virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );
 
 signals:
-	void						signalNewWebCamSession( GuiUser* netIdent );
+	void						signalNewWebCamSession( GuiUser* guiUser );
 	void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
 public slots:
-	void						slotNewWebCamSession( GuiUser* netIdent );
+	void						slotNewWebCamSession( GuiUser* guiUser );
 
     void						slotHomeButtonClicked( void ) override;
 
@@ -73,13 +73,13 @@ protected:
 	void						playVideoFrameRotated( QImage oPicBitmap, int iRotate );
 
 	void						setScanStatusText( QString strMsg );
-	void						setupIdentWidget( GuiUser* netIdent );
+	void						setupIdentWidget( GuiUser* guiUser );
 
 	void						startCountdown();
 	void						updateCountdownGui();
 	void						startStopScan( bool startScan );
 	void						showNextCam( void ); 
-	void						doCamConnect( GuiUser* netIdent );
+	void						doCamConnect( GuiUser* guiUser );
 	void						updateAvailableGui( void );
 	void						startWebCamSession( VxGUID& onlineId, bool startSession );
 	void						setCamViewToOfflineImage( void );

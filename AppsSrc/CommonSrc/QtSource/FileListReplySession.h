@@ -56,10 +56,12 @@ public:
 
     QString 					getJustFileName( void )					{ return m_FileInfo.getJustFileName().c_str(); }
 
-	//=== vars ===//
-    EPluginType                 m_ePluginType{ ePluginTypeInvalid };
+    void                        setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; }
+    EPluginType                 getPluginType( void )                   { return m_PluginType; }
 
 protected:
+    //=== vars ===//
+    EPluginType                 m_PluginType{ ePluginTypeInvalid };
     GuiUser*                    m_Ident{ nullptr };
     FileInfo				    m_FileInfo;
 };

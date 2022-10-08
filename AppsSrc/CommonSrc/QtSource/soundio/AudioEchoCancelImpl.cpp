@@ -186,7 +186,6 @@ void AudioEchoCancelImpl::processEchoCancelThreaded( AudioSpeakerBuf& speakerPro
 
 	static int64_t lastTime = 0;
 	int64_t timeNow = GetHighResolutionTimeMs();
-	int timeElapsed = lastTime ? (int)(timeNow - lastTime) : 0;
 	lastTime = timeNow;
 
 	if( m_ProcessSpeakerSamples.getSampleCnt() >= MIXER_CHUNK_LEN_SAMPLES && m_ProcessMicSamples.getSampleCnt() >= MIXER_CHUNK_LEN_SAMPLES )

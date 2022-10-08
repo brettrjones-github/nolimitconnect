@@ -21,7 +21,7 @@
 #include "GuiParams.h"
 
 //============================================================================
-OfferSessionState::OfferSessionState( AppCommon& myApp, GuiOfferSession * offerSession )
+OfferSessionState::OfferSessionState( AppCommon& myApp, GuiOfferSession* offerSession )
 : m_MyApp( myApp )
 , m_OfferSession( offerSession )
 {

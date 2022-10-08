@@ -34,8 +34,7 @@ namespace
 }
 
 //============================================================================
-AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app, 
-												QWidget*			parent )
+AppletFriendListClient::AppletFriendListClient(	AppCommon& app, QWidget* parent )
 : AppletClientBase( OBJNAME_APPLET_FRIEND_LIST_CLIENT, app, parent )
 {
     setAppletType( eAppletFriendListClient );

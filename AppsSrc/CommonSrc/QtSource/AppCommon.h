@@ -221,7 +221,7 @@ public:
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 	void						startActivity( EPluginType ePluginType, GuiUser* friendIdent, QWidget* parent = 0 );
-	void						executeActivity( GuiOfferSession * offer, QWidget* parent );
+	void						executeActivity( GuiOfferSession* offer, QWidget* parent );
 
 	void						setIsLibraryActivityActive( bool isActive )						{ m_LibraryActivityActive = isActive; }
 	bool						getIsLibraryActivityActive( void )								{ return m_LibraryActivityActive; }
@@ -550,9 +550,9 @@ public:
     virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent* netIdent, int errCode ) override;
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
 
-    virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
+    virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t* pu8JpgData, uint32_t u32JpgDataLen ) override;
 
-    virtual void				toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
+    virtual void				toGuiSearchResultFileSearch( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
 	//=== to gui asset ===//
     virtual void				toGuiAssetAdded( AssetBaseInfo* assetInfo ) override;
@@ -580,8 +580,8 @@ public:
     //=== implementation ===//
     //============================================================================
 
-	virtual void				onToGuiRxedPluginOffer( GuiOfferSession * offerSession );
-	virtual void				onToGuiRxedOfferReply( GuiOfferSession * offerSession );
+	virtual void				onToGuiRxedPluginOffer( GuiOfferSession* offerSession );
+	virtual void				onToGuiRxedOfferReply( GuiOfferSession* offerSession );
 
 	bool						userCanceled( void );
 
@@ -637,7 +637,7 @@ signals:
 	void						signalAssetViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
     void						signalBlobViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
 
-	void						signalToGuiInstMsg( GuiUser* netIdent, EPluginType ePluginType, QString pMsg );
+	void						signalToGuiInstMsg( GuiUser* guiUser, EPluginType ePluginType, QString pMsg );
 
     void						signalMicrophonePeak( int peekVal0to32768 );
 
@@ -712,6 +712,8 @@ signals:
 
     void                        signalInternalPlayNlcMedia( AssetBaseInfo assetInfo );
 
+    void                         signalInternalToGuiSearchResultFileSearch( VxGUID onlineId, EPluginType pluginType, VxGUID lclSessionId, FileInfo fileInfo );
+
 private slots:
     void						slotInternalToGuiPluginStatus( EPluginType pluginType, int statusType, int statusValue );
 
@@ -780,6 +782,8 @@ private slots:
 
     void                        slotInternalPlayNlcMedia( AssetBaseInfo assetInfo );
 
+    void                        slotInternalToGuiSearchResultFileSearch( VxGUID onlineId, EPluginType pluginType, VxGUID lclSessionId, FileInfo fileInfo );
+
 protected slots:
     void						slotMainWindowResized( void );
     void						slotMainWindowMoved( void );
@@ -791,7 +795,7 @@ protected slots:
 
 	void						slotOnNotifyIconFlashTimeout( bool bWhite );
 
-	void						slotToGuiInstMsg( GuiUser* netIdent, EPluginType ePluginType, QString pMsg );
+	void						slotToGuiInstMsg( GuiUser* guiUser, EPluginType ePluginType, QString pMsg );
 
 	void						slotListViewTypeChanged( int viewSelectedIdx );
 
@@ -816,7 +820,7 @@ protected:
 	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser* poFriend );
 
 	void						connectSignals( void );
-	void						updateFriendList( GuiUser* netIdent, bool sessionTimeChange = false );
+	void						updateFriendList( GuiUser* guiUser, bool sessionTimeChange = false );
 
 
 	void						clearToGuiActivityInterfaceList( void );

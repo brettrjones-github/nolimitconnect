@@ -433,7 +433,7 @@ void AppCommon::activityStateChange( ActivityBase * activity, bool isCreated )
 }
 
 //============================================================================
-void AppCommon::startActivity( EPluginType ePluginType, GuiUser* netIdent, QWidget* parent )
+void AppCommon::startActivity( EPluginType ePluginType, GuiUser* guiUser, QWidget* parent )
 {
 	if( 0 == parent )
 	{
@@ -442,7 +442,7 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser* netIdent, QWidg
 
 	bool haveExistingOffer = false;
     /*
-	GuiOfferSession * exitingOffer = getOfferMgr().findActiveAndAvailableOffer( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType );
+	GuiOfferSession* exitingOffer = getOfferMgr().findActiveAndAvailableOffer( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType );
 	if( exitingOffer )
 	{
 		haveExistingOffer = true;
@@ -542,12 +542,12 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser* netIdent, QWidg
 
 	if( haveExistingOffer )
 	{
-		removePluginSessionOffer( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
+		removePluginSessionOffer( ePluginType, m_UserMgr.getUser( guiUser->getMyOnlineId() ) );
 	}
 }
 
 //============================================================================
-void AppCommon::executeActivity( GuiOfferSession * offer, QWidget* parent )
+void AppCommon::executeActivity( GuiOfferSession* offer, QWidget* parent )
 {
 	switch( offer->getPluginType() )
 	{

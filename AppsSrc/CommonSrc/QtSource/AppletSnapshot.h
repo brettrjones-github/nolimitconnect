@@ -26,7 +26,7 @@ class AppletSnapshot : public AppletBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
-	AppletSnapshot( AppCommon& app, QWidget* parent = NULL );
+	AppletSnapshot( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletSnapshot() override;
 
 signals:

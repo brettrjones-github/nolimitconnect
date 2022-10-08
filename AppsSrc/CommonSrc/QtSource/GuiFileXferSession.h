@@ -37,6 +37,8 @@ public:
 	GuiFileXferSession( const GuiFileXferSession &rhs );
 	GuiFileXferSession&			operator =( const GuiFileXferSession &rhs );
 
+	EPluginType					getPluginType( void )						{ return m_ePluginType; }
+
 	QString						describeFileType( void );
 	QString						describeFileLength( void );
 

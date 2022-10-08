@@ -123,7 +123,7 @@ void OfferBarWidget::updateOfferBar( OfferSessionState * offerState )
 
 		setOfferOnlineState( offerState->getHisIdent()->isOnline() );
 
-		GuiOfferSession * offerSession = offerState->getGuiOfferSession();
+		GuiOfferSession* offerSession = offerState->getGuiOfferSession();
 		QString strMsg		= offerSession->getOfferMsg().c_str();
 		QString strFileName = offerSession->getFileName().c_str();
 		QString strName;

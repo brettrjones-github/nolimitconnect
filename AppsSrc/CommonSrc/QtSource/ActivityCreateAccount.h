@@ -28,7 +28,7 @@ class ActivityCreateAccount : public ActivityBase
 {
 	Q_OBJECT
 public:
-    ActivityCreateAccount( AppCommon& app, QWidget* parent = NULL );
+    ActivityCreateAccount( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~ActivityCreateAccount() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

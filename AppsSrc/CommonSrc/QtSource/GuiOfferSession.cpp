@@ -97,7 +97,7 @@ VxGUID&   GuiOfferSession::assuredValidLclSessionId()
 }
 
 //============================================================================
-OfferSessionState * GuiOfferSession::createNewSessionState( AppCommon& myApp, GuiOfferSession * offerSession )
+OfferSessionState * GuiOfferSession::createNewSessionState( AppCommon& myApp, GuiOfferSession* offerSession )
 {
 	return new OfferSessionState( myApp, offerSession );
 }

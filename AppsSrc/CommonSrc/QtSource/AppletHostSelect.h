@@ -25,7 +25,7 @@ class AppletHostSelect : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletHostSelect( AppCommon& app, QWidget* parent = NULL );
+	AppletHostSelect( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletHostSelect() override;
 
 signals:

@@ -62,7 +62,7 @@ void AppletClientRandomConnect::hideEvent( QHideEvent* ev )
 }
 
 //============================================================================
-void AppletClientRandomConnect::toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent )
+void AppletClientRandomConnect::toGuiScanResultSuccess( EScanType eScanType, GuiUser* guiUser )
 {
     if( VxIsAppShuttingDown() )
     {
@@ -71,7 +71,7 @@ void AppletClientRandomConnect::toGuiScanResultSuccess( EScanType eScanType, Gui
 
     if( eScanType == getScanType() )
     {
-        emit signalSearchResult( netIdent );
+        emit signalSearchResult( guiUser );
     }
 };
 
@@ -110,13 +110,13 @@ void AppletClientRandomConnect::slotSearchComplete( void )
 }
 
 //============================================================================
-void AppletClientRandomConnect::slotSearchResult( GuiUser* netIdent )
+void AppletClientRandomConnect::slotSearchResult( GuiUser* guiUser )
 {
     m_MyApp.playSound( eSndDefUserBellMessage );
     QString foundMatch = QObject::tr( "Search Complete " );
-    foundMatch += netIdent->getOnlineName().c_str();
-    m_MyApp.toGuiUserMessage( foundMatch.toUtf8().constData(), netIdent->getOnlineName().c_str() );
-    ui.m_FriendListWidget->updateFriend( netIdent, false );
+    foundMatch += guiUser->getOnlineName().c_str();
+    m_MyApp.toGuiUserMessage( foundMatch.toUtf8().constData(), guiUser->getOnlineName().c_str() );
+    ui.m_FriendListWidget->updateFriend( guiUser, false );
 }
 
 //============================================================================

@@ -32,7 +32,7 @@ PersonOfferListItem::PersonOfferListItem(QWidget*parent  )
 //============================================================================
 PersonOfferListItem::~PersonOfferListItem()
 {
-    GuiOfferSession * hostSession = (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiOfferSession* hostSession = (GuiOfferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -72,9 +72,9 @@ void PersonOfferListItem::setOfferSession( GuiOfferSession* hostSession )
 }
 
 //============================================================================
-GuiOfferSession * PersonOfferListItem::getOfferSession( void )
+GuiOfferSession* PersonOfferListItem::getOfferSession( void )
 {
-    return (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return (GuiOfferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================

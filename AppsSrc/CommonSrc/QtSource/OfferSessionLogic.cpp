@@ -70,7 +70,7 @@ OfferSessionLogic::OfferSessionLogic( AppletBase* appletBase, OfferSessionCallba
 }
 
 //======================================================================== 
-bool OfferSessionLogic::isOurSessionType( GuiOfferSession * offerSession )
+bool OfferSessionLogic::isOurSessionType( GuiOfferSession* offerSession )
 {
 	if( ( offerSession->getPluginType() == m_ePluginType )
 		&& ( 0 != m_HisIdent ) )
@@ -82,7 +82,7 @@ bool OfferSessionLogic::isOurSessionType( GuiOfferSession * offerSession )
 }
 
 //======================================================================== 
-bool OfferSessionLogic::isOurSessionInstance( GuiOfferSession * offerSession )
+bool OfferSessionLogic::isOurSessionInstance( GuiOfferSession* offerSession )
 {
 	if( isOurSessionType( offerSession ) )
 	{
@@ -115,7 +115,7 @@ void OfferSessionLogic::onInSession( bool isInSession )
 }
 
 //======================================================================== 
-void OfferSessionLogic::toToGuiRxedPluginOffer( GuiOfferSession * offerSession ) 
+void OfferSessionLogic::toToGuiRxedPluginOffer( GuiOfferSession* offerSession ) 
 {
 	if( isOurSessionType( offerSession ) )
 	{			
@@ -218,7 +218,7 @@ void OfferSessionLogic::toToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 }
 
 //======================================================================== 
-void OfferSessionLogic::toToGuiRxedOfferReply( GuiOfferSession * offerSession ) 
+void OfferSessionLogic::toToGuiRxedOfferReply( GuiOfferSession* offerSession ) 
 {
 	if( isOurSessionType( offerSession ) )
 	{			
@@ -256,7 +256,7 @@ void OfferSessionLogic::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
 }
 
 //======================================================================== 
-void OfferSessionLogic::toGuiPluginSessionEnded( GuiOfferSession * offerSession ) 
+void OfferSessionLogic::toGuiPluginSessionEnded( GuiOfferSession* offerSession ) 
 {
 	/*
 	if( isOurSessionInstance( offerSession ) )
@@ -498,7 +498,7 @@ bool OfferSessionLogic::handleOfferResponseCode( EOfferResponse responseCode )
 }
 
 //============================================================================   
-void OfferSessionLogic::handleSessionEnded( GuiOfferSession * offerSession )
+void OfferSessionLogic::handleSessionEnded( GuiOfferSession* offerSession )
 {
 	if( isOurSessionInstance( offerSession ) ) 
 	{

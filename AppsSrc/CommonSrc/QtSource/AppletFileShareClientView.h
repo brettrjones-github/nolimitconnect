@@ -39,7 +39,7 @@ public:
 
 	void                        setIdentity( GuiUser* guiUser );
 
-    void						addFile( GuiUser* netIdent, FileInfo& fileInfo  );
+    void						addFile( GuiUser* guiUser, EPluginType pluginType, FileInfo& fileInfo  );
 
 private slots:
     void						slotHomeButtonClicked( void ) override;
@@ -58,17 +58,19 @@ protected:
     virtual void				showEvent( QShowEvent* ev ) override;
     virtual void				hideEvent( QHideEvent* ev ) override;
 
-    virtual void				toGuiFileListReply(	FileListReplySession * replySession ) override;
+    virtual void				toGuiFileListReply(	FileListReplySession* replySession ) override;
     virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
     virtual void				toGuiStartDownload( GuiFileXferSession* xferSession ) override;
     virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
-	FileXferWidget*			fileToWidget( GuiUser* netIdent, FileInfo& fileInfo );
-	void						updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* xferSession );
-	GuiFileXferSession*		widgetToFileItemInfo( FileXferWidget* item );
+	virtual void				toGuiSearchResultFileSearch( GuiUser* guiUser, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
 
-	FileXferWidget*			findListEntryWidget( VxGUID fileInstance );
-	GuiFileXferSession*		findSession( VxGUID lclSessionId );
+	FileXferWidget*				fileToWidget( GuiUser* guiUser, EPluginType pluginType, FileInfo& fileInfo );
+	void						updateListEntryWidget( FileXferWidget* item, GuiFileXferSession* xferSession );
+	GuiFileXferSession*			widgetToFileItemInfo( FileXferWidget* item );
+
+	FileXferWidget*				findListEntryWidget( VxGUID fileInstance );
+	GuiFileXferSession*			findSession( VxGUID lclSessionId );
 
 	void						clearFileList( void );
 	void						moveUpOneFolder( void );

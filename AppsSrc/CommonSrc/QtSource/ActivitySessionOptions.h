@@ -28,11 +28,11 @@ public:
 
 	ActivitySessionOptions(	AppCommon&			app,
 							VxNetIdent*			netIdent, 
-							QWidget*				parent = NULL );
+							QWidget*			parent = nullptr );
 
-	ActivitySessionOptions(	AppCommon&			app,
-							GuiOfferSession *		poOffer, 
-							QWidget*				parent = NULL );
+	ActivitySessionOptions(	AppCommon&				app,
+							GuiOfferSession*		poOffer, 
+							QWidget*				parent = nullptr );
 	virtual ~ActivitySessionOptions() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

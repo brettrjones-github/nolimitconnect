@@ -32,7 +32,7 @@ class AppletGroupListClient : public AppletClientBase, public GuiHostedListCallb
 	Q_OBJECT
 public:
 	AppletGroupListClient(	AppCommon&		    app, 
-							QWidget*			parent = NULL );
+							QWidget*			parent = nullptr );
 	virtual ~AppletGroupListClient();
 
     void                        infoMsg( const char* infoMsg, ... );

@@ -78,19 +78,19 @@ public:
     void                        setPluginType( EPluginType pluginType )			{ m_ePluginType = pluginType;    }
 	EPluginType 				getPluginType( void )							{ return m_ePluginType;    }
     void                        setGuiOfferSession( GuiOfferSession* offerSession ) { m_GuiOfferSession = offerSession; };
-    GuiOfferSession *			getGuiOfferSession( void )                      { return m_GuiOfferSession; };
-    void                        setHisIdent( GuiUser* netIdent )			    { m_HisIdent = netIdent;    }
+    GuiOfferSession*			getGuiOfferSession( void )                      { return m_GuiOfferSession; };
+    void                        setHisIdent( GuiUser* guiUser )					{ m_HisIdent = guiUser;    }
 	GuiUser* 				    getHisIdent( void )								{ return m_HisIdent;    }
 
-	bool						isOurSessionType( GuiOfferSession * offerSession ); 
-	bool						isOurSessionInstance( GuiOfferSession * offerSession ); 
+	bool						isOurSessionType( GuiOfferSession* offerSession ); 
+	bool						isOurSessionInstance( GuiOfferSession* offerSession ); 
 
 	void						onInSession( bool isInSession ); 
 
-	void						toToGuiRxedPluginOffer( GuiOfferSession * offerSession ); 
-	void						toToGuiRxedOfferReply( GuiOfferSession * offerSession );
+	void						toToGuiRxedPluginOffer( GuiOfferSession* offerSession ); 
+	void						toToGuiRxedOfferReply( GuiOfferSession* offerSession );
 
-	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession ); 
+	void						toGuiPluginSessionEnded( GuiOfferSession* offerSession ); 
 	void						toGuiContactOffline( GuiUser* friendIdent ); 
 
 	bool						sendOfferOrResponse();
@@ -110,7 +110,7 @@ public:
 
 	bool						handleOfferResponse( GuiOfferSession  poSession );
 	bool						handleOfferResponseCode( EOfferResponse responseCode ) ;
-	void						handleSessionEnded( GuiOfferSession * offerSession );
+	void						handleSessionEnded( GuiOfferSession* offerSession );
 	void						handleSessionEnded( EOfferResponse responseCode );
 	void						handleUserWentOffline( void );
 	void						startPhoneRinging( void );
@@ -130,7 +130,7 @@ private:
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_OfferSessionId;
 	VxSha1Hash					m_FileHashId;
-	GuiOfferSession *			m_GuiOfferSession{ nullptr };
+	GuiOfferSession*			m_GuiOfferSession{ nullptr };
     bool 						m_IsOffer{ false };
 	bool 						m_IsMyself{ false };
 	bool 						m_IsServerSession{ false };

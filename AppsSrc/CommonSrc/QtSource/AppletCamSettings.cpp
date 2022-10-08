@@ -197,7 +197,7 @@ void AppletCamSettings::webCamSourceOffline()
 }
 
 //============================================================================
-void AppletCamSettings::slotToGuiRxedOfferReply( GuiOfferSession * offerReply )
+void AppletCamSettings::slotToGuiRxedOfferReply( GuiOfferSession* offerReply )
 {
     if( ( ePluginTypeCamServer == offerReply->getPluginType() )
         && ( m_HisIdent->getMyOnlineId() == offerReply->getHisIdent()->getMyOnlineId() ) )
@@ -215,7 +215,7 @@ void AppletCamSettings::slotToGuiRxedOfferReply( GuiOfferSession * offerReply )
 }; 
 
 //============================================================================
-void AppletCamSettings::slotToGuiSessionEnded( GuiOfferSession * offer )
+void AppletCamSettings::slotToGuiSessionEnded( GuiOfferSession* offer )
 {
     if( ( ePluginTypeCamServer == offer->getPluginType() )
         && ( m_HisIdent->getMyOnlineId() == offer->getHisIdent()->getMyOnlineId() ) )

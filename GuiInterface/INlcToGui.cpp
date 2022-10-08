@@ -452,9 +452,9 @@ void INlc::toGuiSearchResultProfilePic(    VxNetIdent*	netIdent,
 }
 
 //============================================================================
-void INlc::toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo )
+void INlc::toGuiSearchResultFileSearch( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-    getAppCommon().toGuiSearchResultFileSearch( netIdent, lclSessionId, fileInfo );
+    getAppCommon().toGuiSearchResultFileSearch( onlineId, pluginType, lclSessionId, fileInfo );
 }
 
 //============================================================================

@@ -36,12 +36,12 @@ class ThumbInfo;
 class ToGuiActivityInterface
 {
 public:
-	virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ){}; 
-	virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ){}; 
+	virtual void				toToGuiRxedPluginOffer( GuiOfferSession* offer ){}; 
+	virtual void				toToGuiRxedOfferReply( GuiOfferSession* offer ){}; 
 
     virtual void				toGuiPluginMsg( EPluginType pluginType, VxGUID& onlineId, EPluginMsgType msgType, QString& paramValue ){};
 
-	virtual void				toGuiPluginSessionEnded( GuiOfferSession * offer ){}; 
+	virtual void				toGuiPluginSessionEnded( GuiOfferSession* offer ){}; 
 
     virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
     virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) {};
@@ -50,22 +50,22 @@ public:
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) {}; 
 
 	virtual void				toGuiContactOnline( VxNetIdent* netIdent ){}; 
-	virtual void				toGuiContactOffline( GuiUser* netIdent ){}; 
-    virtual void				toGuiContactNameChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiContactDescChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiContactMyFriendshipChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiContactHisFriendshipChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiPluginPermissionChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiContactSearchFlagsChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiContactLastSessionTimeChange( GuiUser* netIdent ){}; 
-    virtual void				toGuiUpdateMyIdent(GuiUser* netIdent ){}; 
+	virtual void				toGuiContactOffline( GuiUser* guiUser ){}; 
+    virtual void				toGuiContactNameChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiContactDescChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiContactMyFriendshipChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiContactHisFriendshipChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiPluginPermissionChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiContactSearchFlagsChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiContactLastSessionTimeChange( GuiUser* guiUser ){}; 
+    virtual void				toGuiUpdateMyIdent(GuiUser* guiUser ){}; 
 
 	virtual void				toGuiInstMsg( GuiUser* friendIdent, EPluginType ePluginType, QString instMsg ){}; 
 
-	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* netIdent ){};
-	virtual void				toGuiSearchResultError( EScanType eScanType, GuiUser* netIdent, int errCode ){};
-	virtual void				toGuiSearchResultProfilePic( GuiUser* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
-    virtual void				toGuiSearchResultFileSearch( GuiUser* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
+	virtual void				toGuiScanResultSuccess( EScanType eScanType, GuiUser* guiUser ){};
+	virtual void				toGuiSearchResultError( EScanType eScanType, GuiUser* guiUser, int errCode ){};
+	virtual void				toGuiSearchResultProfilePic( GuiUser* guiUser, uint8_t* pu8JpgData, uint32_t u32JpgDataLen ){};
+    virtual void				toGuiSearchResultFileSearch( GuiUser* guiUser, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
 
 	virtual void				toGuiClientScanSearchComplete( EScanType eScanType ){};
 

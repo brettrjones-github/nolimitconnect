@@ -33,7 +33,7 @@ class ActivityDownloadItemMenu : public ActivityBase
 public:
 	ActivityDownloadItemMenu(	AppCommon& app, 
 								GuiFileXferSession* poSession, 
-								QWidget* parent = NULL );
+								QWidget* parent = nullptr );
 	virtual ~ActivityDownloadItemMenu() override = default;
 
 public slots:

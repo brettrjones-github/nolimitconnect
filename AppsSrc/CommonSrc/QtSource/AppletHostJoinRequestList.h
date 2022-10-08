@@ -25,7 +25,7 @@ class AppletHostJoinRequestList : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletHostJoinRequestList( AppCommon& app, QWidget* parent = NULL );
+	AppletHostJoinRequestList( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletHostJoinRequestList() override;
 
 protected slots:

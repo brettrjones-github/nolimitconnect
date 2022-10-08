@@ -38,7 +38,7 @@ ShareOfferListItem::ShareOfferListItem(QWidget*parent  )
 //============================================================================
 ShareOfferListItem::~ShareOfferListItem()
 {
-    GuiOfferSession * hostSession = (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiOfferSession* hostSession = (GuiOfferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -78,9 +78,9 @@ void ShareOfferListItem::setOfferSession( GuiOfferSession* hostSession )
 }
 
 //============================================================================
-GuiOfferSession * ShareOfferListItem::getOfferSession( void )
+GuiOfferSession* ShareOfferListItem::getOfferSession( void )
 {
-    return (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return (GuiOfferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================

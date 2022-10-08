@@ -18,19 +18,14 @@
 //============================================================================
 FileListReplySession::FileListReplySession()
 : QObject()
-, m_ePluginType(ePluginTypeInvalid)
-, m_Ident(0)
-, m_FileInfo()
 {
 }
 
 //============================================================================
-FileListReplySession::FileListReplySession(	EPluginType		ePluginType,
-                                            GuiUser*	    netIdent,
-                                            FileInfo&		fileInfo )
+FileListReplySession::FileListReplySession(	EPluginType	pluginType, GuiUser* guiUser, FileInfo& fileInfo )                                       
 : QObject()
-, m_ePluginType(ePluginTypeInvalid)
-, m_Ident(netIdent)
+, m_PluginType(ePluginTypeInvalid)
+, m_Ident( guiUser )
 , m_FileInfo(fileInfo)
 {
 }
@@ -47,7 +42,7 @@ FileListReplySession& FileListReplySession::operator=(const FileListReplySession
 {
 	if( this != &rhs )
 	{
-		m_ePluginType			= rhs.m_ePluginType;
+		m_PluginType			= rhs.m_PluginType;
 		m_Ident					= rhs.m_Ident;
         m_FileInfo              = rhs.m_FileInfo;
 	}

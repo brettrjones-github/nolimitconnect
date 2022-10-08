@@ -33,7 +33,7 @@ class ActivityViewLibraryFiles : public ActivityBase, public ToGuiFileXferInterf
 {
 	Q_OBJECT
 public:
-	ActivityViewLibraryFiles( AppCommon& app, QWidget* parent = NULL, bool isSelectAFileMode = false );
+	ActivityViewLibraryFiles( AppCommon& app, QWidget* parent = nullptr, bool isSelectAFileMode = false );
 	virtual ~ActivityViewLibraryFiles() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets

@@ -31,14 +31,14 @@ class GuiOfferSession;
 class OfferSessionState : public QObject
 {
 public:	
-    OfferSessionState( AppCommon& myApp, GuiOfferSession * offerSession );
+    OfferSessionState( AppCommon& myApp, GuiOfferSession* offerSession );
 	virtual ~OfferSessionState();
 
 	void						setPluginType( EPluginType ePluginType ) 			{ m_OfferSession->setPluginType( ePluginType ); }
 	EPluginType 				getPluginType()										{ return m_OfferSession->getPluginType(); }
     void						setIsRemoteInitiated( bool bIsRemoteInitiated ) 	{ m_OfferSession->setIsRemoteInitiated( bIsRemoteInitiated ); }
     bool						getIsRemoteInitiated( void )						{ return m_OfferSession->getIsRemoteInitiated(); }
-	void						setHisIdent( GuiUser* netIdent ) 				    { m_OfferSession->setHisIdent( netIdent ); }
+	void						setHisIdent( GuiUser* guiUser ) 				    { m_OfferSession->setHisIdent( guiUser ); }
     GuiUser*				    getHisIdent()										{ return m_OfferSession->getHisIdent(); }
 	void 						setOfferSessionId( VxGUID& sessionId )				{ m_OfferSession->setOfferSessionId( sessionId ); }
 	VxGUID						getOfferSessionId()									{ return m_OfferSession->getOfferSessionId(); }
@@ -49,7 +49,7 @@ public:
 	void 						setOfferState( EOfferState eOfferState )			{ m_EOfferState = eOfferState; }
 	EOfferState					getOfferState()										{ return m_EOfferState; }
 
-	GuiOfferSession *			getGuiOfferSession()								{ return m_OfferSession; }
+	GuiOfferSession*			getGuiOfferSession()								{ return m_OfferSession; }
 
 	std::string 				describePlugin( void );
 	std::string 				describeOffer( void );
@@ -60,7 +60,7 @@ public:
 private:
 	//=== vars ===//
 	AppCommon& 				    m_MyApp;
-	GuiOfferSession *			m_OfferSession;
+	GuiOfferSession*			m_OfferSession;
     EOfferState					m_EOfferState{ eOfferStateNone };
 };
 

@@ -776,7 +776,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 		// take a guess at what size the jpg will be
 		int iMaxJpgSize = iWidth * iHeight * 3;
 
-		uint8_t * pu8JpgData = new uint8_t[ iMaxJpgSize ];
+		uint8_t* pu8JpgData = new uint8_t[ iMaxJpgSize ];
         VxBmp2Jpg(	24,						// number of bits each pixel..(For now must be 24)
 					pu8VidData,				// bits of bmp to convert
 					iWidth,					// width of image in pixels

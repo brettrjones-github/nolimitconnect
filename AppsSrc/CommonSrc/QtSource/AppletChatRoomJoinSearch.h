@@ -31,7 +31,7 @@ class AppletChatRoomJoinSearch : public AppletClientBase, public GuiHostedListCa
 	Q_OBJECT
 public:
 	AppletChatRoomJoinSearch(	AppCommon&		    app, 
-								QWidget*			parent = NULL );
+								QWidget*			parent = nullptr );
 	virtual ~AppletChatRoomJoinSearch();
 
     void                        infoMsg( const char* infoMsg, ... );

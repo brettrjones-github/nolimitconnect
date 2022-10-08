@@ -23,7 +23,7 @@ class AppletGalleryThumb : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGalleryThumb( AppCommon& app, QWidget* parent = NULL );
+	AppletGalleryThumb( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletGalleryThumb() override;
 
 signals:

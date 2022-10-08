@@ -54,13 +54,13 @@ void AppletPeerVideoPhone::setupActivityVideoPhone()
 }
 
 //============================================================================
-void AppletPeerVideoPhone::toToGuiRxedPluginOffer( GuiOfferSession * offer )
+void AppletPeerVideoPhone::toToGuiRxedPluginOffer( GuiOfferSession* offer )
 {
 	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletPeerVideoPhone::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
+void AppletPeerVideoPhone::toToGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 }

@@ -33,7 +33,7 @@ class AppletNearbyListClient : public AppletClientBase, public GuiUserUpdateCall
 	Q_OBJECT
 public:
 	AppletNearbyListClient(	AppCommon&		    app, 
-							QWidget*			parent = NULL );
+							QWidget*			parent = nullptr );
 	virtual ~AppletNearbyListClient() override;
 
     void                        infoMsg( const char* infoMsg, ... );

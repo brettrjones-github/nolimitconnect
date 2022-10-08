@@ -43,5 +43,5 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletPeerReplyFileOfferUi	ui;
-    GuiOfferSession *			m_Offer{ nullptr };
+    GuiOfferSession*			m_Offer{ nullptr };
 };

@@ -205,13 +205,13 @@ void AppletMultiMessenger::onActivityFinish( void )
 }
 
 //============================================================================
-void AppletMultiMessenger::toToGuiRxedPluginOffer( GuiOfferSession * offer )
+void AppletMultiMessenger::toToGuiRxedPluginOffer( GuiOfferSession* offer )
 {
 	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletMultiMessenger::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
+void AppletMultiMessenger::toToGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 }
@@ -408,7 +408,7 @@ void AppletMultiMessenger::callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiPluginSessionEnded( GuiOfferSession * offer )
+void AppletMultiMessenger::toGuiPluginSessionEnded( GuiOfferSession* offer )
 {
 	//handleSessionEnded( offerResponse, this );
 }; 

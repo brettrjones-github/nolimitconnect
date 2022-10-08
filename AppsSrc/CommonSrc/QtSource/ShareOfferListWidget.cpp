@@ -75,7 +75,7 @@ GuiOfferSession* ShareOfferListWidget::widgetToSession( ShareOfferListItem * ite
 }
 
 //============================================================================
-GuiOfferSession * ShareOfferListWidget::findSession( VxGUID& lclSessionId )
+GuiOfferSession* ShareOfferListWidget::findSession( VxGUID& lclSessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -83,7 +83,7 @@ GuiOfferSession * ShareOfferListWidget::findSession( VxGUID& lclSessionId )
         ShareOfferListItem* listItem =  (ShareOfferListItem*)item( iRow );
         if( listItem )
         {
-            GuiOfferSession * userSession = listItem->getOfferSession();
+            GuiOfferSession* userSession = listItem->getOfferSession();
             if( userSession && userSession->getSessionId() == lclSessionId )
             {
                 return userSession;
@@ -103,7 +103,7 @@ ShareOfferListItem* ShareOfferListWidget::findListEntryWidgetBySessionId( VxGUID
         ShareOfferListItem*  userItem = (ShareOfferListItem*)item( iRow );
         if( userItem )
         {
-            GuiOfferSession * userSession = userItem->getOfferSession();
+            GuiOfferSession* userSession = userItem->getOfferSession();
             if( userSession && ( userSession->getSessionId() == sessionId ) )
             {
                 return userItem;
@@ -123,7 +123,7 @@ ShareOfferListItem* ShareOfferListWidget::findListEntryWidgetByOnlineId( VxGUID&
         ShareOfferListItem*  userItem = (ShareOfferListItem*)item( iRow );
         if( userItem )
         {
-            GuiOfferSession * userSession = userItem->getOfferSession();
+            GuiOfferSession* userSession = userItem->getOfferSession();
             if( userSession && ( userSession->getMyOnlineId() == onlineId ) )
             {
                 return userItem;
@@ -341,7 +341,7 @@ void ShareOfferListWidget::setOfferViewType( EOfferViewType viewType )
 void ShareOfferListWidget::refreshList( void )
 {
     clearOfferList();
-    std::vector<GuiOfferSession *> userList;
+    std::vector<GuiOfferSession*> userList;
     m_OfferClientMgr.lockOfferMgr();
 
     std::map<VxGUID, GuiOfferSession*>& mgrList = m_OfferClientMgr.getOfferList();
@@ -375,7 +375,7 @@ void ShareOfferListWidget::clearOfferList( void )
 }
 
 //============================================================================
-bool ShareOfferListWidget::isListViewMatch( GuiOfferSession * user )
+bool ShareOfferListWidget::isListViewMatch( GuiOfferSession* user )
 {
     /*
     if( user && !user->isIgnored())
@@ -420,7 +420,7 @@ bool ShareOfferListWidget::isListViewMatch( GuiOfferSession * user )
 }
 
 //============================================================================
-void ShareOfferListWidget::updateOffer( GuiOfferSession * userSession )
+void ShareOfferListWidget::updateOffer( GuiOfferSession* userSession )
 {
     if( isListViewMatch( userSession ) )
     {
@@ -428,7 +428,7 @@ void ShareOfferListWidget::updateOffer( GuiOfferSession * userSession )
         if( iter == m_OfferCache.end() )
         {
             /*
-            GuiOfferSession * userSession = new GuiOfferSession( user, this );
+            GuiOfferSession* userSession = new GuiOfferSession( user, this );
             if( userSession )
             {
             */
@@ -469,7 +469,7 @@ void ShareOfferListWidget::removeOffer( VxGUID& onlineId )
         ShareOfferListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
         if( userItem )
         {
-            GuiOfferSession * userSession = userItem->getOfferSession();
+            GuiOfferSession* userSession = userItem->getOfferSession();
             delete userItem;
             delete userSession;
         }

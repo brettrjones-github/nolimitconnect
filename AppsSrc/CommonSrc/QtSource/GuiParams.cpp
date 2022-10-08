@@ -465,7 +465,7 @@ QString GuiParams::describeLanguage( ELanguageType language )
 
 //============================================================================
 //! Describe action user can take for given plugin and access
-QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess )
+QString GuiParams::describePluginAction( GuiUser* guiUser, EPluginType ePluginType, EPluginAccess ePluginAccess )
 {
     QString strAction;
     switch( ePluginType )
@@ -478,7 +478,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("View About Me Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeAboutMePageServer ) );
+            strAction += describeFriendState(  guiUser->getPluginPermission( ePluginTypeAboutMePageServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -512,7 +512,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("View Story Board Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeStoryboardServer ) );
+            strAction += describeFriendState(  guiUser->getPluginPermission( ePluginTypeStoryboardServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -548,7 +548,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
 
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Send A File Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypePersonFileXfer ) );
+            strAction += describeFriendState(  guiUser->getPluginPermission( ePluginTypePersonFileXfer ) );
             strAction += QObject::tr(" permission");
             break;
 
@@ -583,7 +583,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Shared Files Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeFileShareServer ) );
+            strAction += describeFriendState(  guiUser->getPluginPermission( ePluginTypeFileShareServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessInactive:		// no shared files
@@ -617,7 +617,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Shared Web Cam Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeCamServer ) );
+            strAction += describeFriendState(  guiUser->getPluginPermission( ePluginTypeCamServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -651,7 +651,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Voice Call Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeVoicePhone ) );
+            strAction += describeFriendState(  guiUser->getPluginPermission( ePluginTypeVoicePhone ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -685,7 +685,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Truth Or Dare Requires ");
-            strAction += describeFriendState( netIdent->getPluginPermission( ePluginTypeTruthOrDare ) );
+            strAction += describeFriendState( guiUser->getPluginPermission( ePluginTypeTruthOrDare ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -719,7 +719,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Text Chat Requires ");
-            strAction += describeFriendState( netIdent->getPluginPermission( ePluginTypeMessenger ) );
+            strAction += describeFriendState( guiUser->getPluginPermission( ePluginTypeMessenger ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -754,7 +754,7 @@ QString GuiParams::describePluginAction( GuiUser* netIdent, EPluginType ePluginT
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Video Chat Requires ");
-            strAction += describeFriendState( netIdent->getPluginPermission( ePluginTypeVideoPhone ) );
+            strAction += describeFriendState( guiUser->getPluginPermission( ePluginTypeVideoPhone ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast

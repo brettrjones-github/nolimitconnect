@@ -70,7 +70,7 @@ void ActivityScanPeopleSearch::setStatusLabel( QString strMsg )
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::toGuiScanResultSuccess(  EScanType eScanType, GuiUser* netIdent )
+void ActivityScanPeopleSearch::toGuiScanResultSuccess(  EScanType eScanType, GuiUser* guiUser )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -79,7 +79,7 @@ void ActivityScanPeopleSearch::toGuiScanResultSuccess(  EScanType eScanType, Gui
 
 	if( eScanType == getScanType() )
 	{
-		emit signalSearchResult( netIdent );
+		emit signalSearchResult( guiUser );
 	}
 };
 
@@ -164,9 +164,9 @@ void ActivityScanPeopleSearch::slotSearchComplete()
 //}
 
 //============================================================================
-void ActivityScanPeopleSearch::slotSearchResult( GuiUser* netIdent )
+void ActivityScanPeopleSearch::slotSearchResult( GuiUser* guiUser )
 {
-	setStatusLabel( QString("Found Match %1").arg( netIdent->getOnlineName().c_str() ) );
-	ui.friendListWidget->updateFriend( netIdent, false );
+	setStatusLabel( QString("Found Match %1").arg( guiUser->getOnlineName().c_str() ) );
+	ui.friendListWidget->updateFriend( guiUser, false );
 }
 

@@ -26,7 +26,7 @@ class AppletPlayerCamClip : public AppletAssetPlayerBase, public MediaCallbackIn
 {
 	Q_OBJECT
 public:
-	AppletPlayerCamClip( AppCommon& app, QWidget* parent = NULL, VxGUID assetId = VxGUID::nullVxGUID() );
+	AppletPlayerCamClip( AppCommon& app, QWidget* parent = nullptr, VxGUID assetId = VxGUID::nullVxGUID() );
 	virtual ~AppletPlayerCamClip() override;
 
 	// override playMedia if is applet that plays media

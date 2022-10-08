@@ -23,7 +23,7 @@ class AppletGalleryEmoticon : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGalleryEmoticon( AppCommon& app, QWidget* parent = NULL );
+	AppletGalleryEmoticon( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletGalleryEmoticon() override;
 
 signals:

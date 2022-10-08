@@ -216,7 +216,7 @@ public:
 	/// Search has found and received a About Me picture from contact
 	virtual void				toGuiSearchResultProfilePic( VxNetIdent* netIdent, uint8_t*	pu8JpgData, uint32_t u32JpgDataLen ) = 0;
 	/// Search has found a matching file
-	virtual void				toGuiSearchResultFileSearch( VxNetIdent* netIdent, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
+	virtual void				toGuiSearchResultFileSearch( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
 
 	virtual void				toGuiNetworkIsTested( bool requiresRelay, std::string& ipAddr, uint16_t ipPort ) = 0;
 

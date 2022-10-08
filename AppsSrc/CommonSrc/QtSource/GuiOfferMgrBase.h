@@ -56,9 +56,9 @@ public:
 	virtual void				wantToGuiOfferCallbacks( ToGuiOfferInterface * clientInterface, bool wantCallbacks ); 
 
 // from engine
-	void						toGuiRxedPluginOffer( GuiOfferSession * offerSession );
-	void						toGuiRxedOfferReply( GuiOfferSession * offerSession );
-	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession );
+	void						toGuiRxedPluginOffer( GuiOfferSession* offerSession );
+	void						toGuiRxedOfferReply( GuiOfferSession* offerSession );
+	void						toGuiPluginSessionEnded( GuiOfferSession* offerSession );
 
 	void						onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, bool isInSession );
 	void						onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
@@ -69,27 +69,27 @@ public:
 
 
 	// called if starting new session to know if responding to existing offer
-	GuiOfferSession *			findActiveAndAvailableOffer( GuiUser* netIdent, EPluginType ePluginType );
+	GuiOfferSession*			findActiveAndAvailableOffer( GuiUser* guiUser, EPluginType ePluginType );
 	void						sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent );
 	void						sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser* hisIdent, EOfferResponse eOfferResponse );
-	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser* netIdent );
+	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser* guiUser );
 	void						removePluginSessionOffer( VxGUID& offerSessionId );
 
 signals:
     void                        signalShareOfferCount( int activeCnt );
     void                        signalPersonsOfferListCount( int activeCnt );
 
-	void						signalToGuiRxedPluginOffer( GuiOfferSession * offerSession );
-	void						signalToGuiRxedOfferReply( GuiOfferSession * offerSession );
-	void						signalToGuiPluginSessionEnded( GuiOfferSession * offerSession );
+	void						signalToGuiRxedPluginOffer( GuiOfferSession* offerSession );
+	void						signalToGuiRxedOfferReply( GuiOfferSession* offerSession );
+	void						signalToGuiPluginSessionEnded( GuiOfferSession* offerSession );
 
 protected slots:
 	void						slotOncePerSecond( void );
 
-	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
-	void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
-	void						slotToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-	void						slotToGuiContactOffline( GuiUser* netIdent ); // connected to app signal
+	void						slotToGuiRxedPluginOffer( GuiOfferSession* offerSession );
+	void						slotToGuiRxedOfferReply( GuiOfferSession* offerSession );
+	void						slotToGuiPluginSessionEnded( GuiOfferSession* offerSession );
+	void						slotToGuiContactOffline( GuiUser* guiUser ); // connected to app signal
 
 protected:
 
@@ -102,7 +102,7 @@ protected:
 	void						startRingTimerIfNotInSession( void );
 	void						stopRingTimer( void );
 	void						updateSndsAndMessages( OfferSessionState * sessionState );
-	OfferSessionState *			findOrAddOfferSession( GuiOfferSession * offerSession );
+	OfferSessionState *			findOrAddOfferSession( GuiOfferSession* offerSession );
     OfferSessionState *			findOfferSession( VxGUID sessionId );
 	void						checkAndUpdateIfEmptyOfferList( void );
 

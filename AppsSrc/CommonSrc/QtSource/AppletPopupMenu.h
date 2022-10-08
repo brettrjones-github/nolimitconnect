@@ -43,7 +43,7 @@ class AppletPopupMenu : public AppletBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
-	AppletPopupMenu( AppCommon& app, QWidget* parent = NULL, VxGUID assetId = VxGUID::nullVxGUID() );
+	AppletPopupMenu( AppCommon& app, QWidget* parent = nullptr, VxGUID assetId = VxGUID::nullVxGUID() );
 	virtual ~AppletPopupMenu() override;
 
 	void						setTitle( QString strTitle );

@@ -42,17 +42,17 @@ public:
 
 	void						setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool hasTextMsgs );
 	//! update friend in list
-	void						updateFriend( GuiUser* netIdent, bool sessionTimeChange = false );
-	void						removeFriend( GuiUser* netIdent );
+	void						updateFriend( GuiUser* guiUser, bool sessionTimeChange = false );
+	void						removeFriend( GuiUser* guiUser );
 	void						refreshFriendList( EFriendViewType eWhichFriendsToShow );
 
 signals:
-	void						signalUpdateFriend( GuiUser* netIdent, bool sessionTimeChange );
-	void						signalFriendClicked( GuiUser* netIdent );
+	void						signalUpdateFriend( GuiUser* guiUser, bool sessionTimeChange );
+	void						signalFriendClicked( GuiUser* guiUser );
 	void						signalRefreshFriendList( EFriendViewType eWhichFriendsToShow );
 
 private slots:
-	void						slotUpdateFriend( GuiUser* netIdent, bool sessionTimeChange );
+	void						slotUpdateFriend( GuiUser* guiUser, bool sessionTimeChange );
 	void						slotRefreshFriend( VxGUID friendId );
 	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineId, int pos );
 	void						slotItemClicked(QListWidgetItem*);
@@ -66,11 +66,11 @@ protected:
 	//!	get friend from QListWidgetItem data
     GuiUser*					widgetToFriend( FriendListEntryWidget * item );
 
-	void						updateListEntryWidget( FriendListEntryWidget * item, GuiUser* netIdent );
+	void						updateListEntryWidget( FriendListEntryWidget * item, GuiUser* guiUser );
 
-	FriendListEntryWidget *		findListEntryWidget( GuiUser* netIdent );
+	FriendListEntryWidget *		findListEntryWidget( GuiUser* guiUser );
 
-	void						updateListEntryBackgroundColor( GuiUser* netIdent, FriendListEntryWidget * poWidget );
+	void						updateListEntryBackgroundColor( GuiUser* guiUser, FriendListEntryWidget * poWidget );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;

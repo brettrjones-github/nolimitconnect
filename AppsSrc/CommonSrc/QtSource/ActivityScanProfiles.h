@@ -31,8 +31,8 @@ public:
 	ScanProfilePair()
 		: m_Ident( 0 ){}
 
-	ScanProfilePair( GuiUser* netIdent, QImage& image )
-		: m_Ident( netIdent )
+	ScanProfilePair( GuiUser* guiUser, QImage& image )
+		: m_Ident( guiUser )
 		, m_Image( image )
 	{
 	}
@@ -63,7 +63,7 @@ class ActivityScanProfiles : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityScanProfiles(	AppCommon& app, 
-							QWidget*		parent = NULL );
+							QWidget*		parent = nullptr );
 	virtual ~ActivityScanProfiles() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
@@ -72,16 +72,16 @@ public:
 
 public:
     virtual void				toGuiClientScanSearchComplete( EScanType eScanType ) override;
-    virtual void				toGuiSearchResultProfilePic( GuiUser* netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
+    virtual void				toGuiSearchResultProfilePic( GuiUser* guiUser, uint8_t* pu8JpgData, uint32_t u32JpgDataLen ) override;
 
 signals:
-	 void						signalSearchResultProfilePic( GuiUser* netIdent, QImage oPicBitmap );
+	 void						signalSearchResultProfilePic( GuiUser* guiUser, QImage oPicBitmap );
 	 void						signalSearchComplete();
 
 protected slots:
 	void						slotSearchComplete();
 
-	void						slotSearchResultProfilePic( GuiUser* netIdent, QImage oPicBitmap ); 
+	void						slotSearchResultProfilePic( GuiUser* guiUser, QImage oPicBitmap ); 
 
     void						slotHomeButtonClicked( void ) override;
 	void						slotPauseScanClicked( void );
@@ -99,11 +99,11 @@ protected:
 	void						startCountdown();
 	void						updateCountdownGui();
 	void						showNextImage( void ); 
-	void						showMatchedPair( GuiUser* netIdent, QImage& oPicBitmap ); 
+	void						showMatchedPair( GuiUser* guiUser, QImage& oPicBitmap ); 
 
 	void						setTitle( QString strTitle );
 	void						setScanStatusText( QString strMsg );
-	void						setupIdentWidget( GuiUser* netIdent );
+	void						setupIdentWidget( GuiUser* guiUser );
 
 
 	//=== vars ===//

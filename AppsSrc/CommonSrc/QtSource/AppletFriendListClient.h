@@ -33,7 +33,7 @@ class AppletFriendListClient : public AppletClientBase, public GuiUserUpdateCall
 	Q_OBJECT
 public:
 	AppletFriendListClient(	AppCommon&		    app, 
-							QWidget*			parent = NULL );
+							QWidget*			parent = nullptr );
 	virtual ~AppletFriendListClient() override;
 
     void                        infoMsg( const char* infoMsg, ... );

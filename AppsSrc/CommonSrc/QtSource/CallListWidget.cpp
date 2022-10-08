@@ -73,7 +73,7 @@ GuiOfferSession* CallListWidget::widgetToSession( CallListItem * item )
 }
 
 //============================================================================
-GuiOfferSession * CallListWidget::findSession( VxGUID& lclSessionId )
+GuiOfferSession* CallListWidget::findSession( VxGUID& lclSessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -81,7 +81,7 @@ GuiOfferSession * CallListWidget::findSession( VxGUID& lclSessionId )
         CallListItem* listItem =  (CallListItem*)item( iRow );
         if( listItem )
         {
-            GuiOfferSession * userSession = listItem->getCallSession();
+            GuiOfferSession* userSession = listItem->getCallSession();
             if( userSession && userSession->getSessionId() == lclSessionId )
             {
                 return userSession;
@@ -101,7 +101,7 @@ CallListItem* CallListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId 
         CallListItem*  userItem = (CallListItem*)item( iRow );
         if( userItem )
         {
-            GuiOfferSession * userSession = userItem->getCallSession();
+            GuiOfferSession* userSession = userItem->getCallSession();
             if( userSession && ( userSession->getSessionId() == sessionId ) )
             {
                 return userItem;
@@ -121,7 +121,7 @@ CallListItem* CallListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
         CallListItem*  userItem = (CallListItem*)item( iRow );
         if( userItem )
         {
-            GuiOfferSession * userSession = userItem->getCallSession();
+            GuiOfferSession* userSession = userItem->getCallSession();
             if( userSession && ( userSession->getMyOnlineId() == onlineId ) )
             {
                 return userItem;
@@ -292,7 +292,7 @@ void CallListWidget::setCallViewType( ECallViewType viewType )
 void CallListWidget::refreshList( void )
 {
     clearCallList();
-    std::vector<GuiOfferSession *> userList;
+    std::vector<GuiOfferSession*> userList;
     m_OfferClientMgr.lockOfferMgr();
 
     std::map<VxGUID, GuiOfferSession*>& mgrList = m_OfferClientMgr.getCallList();
@@ -326,7 +326,7 @@ void CallListWidget::clearCallList( void )
 }
 
 //============================================================================
-bool CallListWidget::isListViewMatch( GuiOfferSession * user )
+bool CallListWidget::isListViewMatch( GuiOfferSession* user )
 {
     /*
     if( user && !user->isIgnored())
@@ -371,7 +371,7 @@ bool CallListWidget::isListViewMatch( GuiOfferSession * user )
 }
 
 //============================================================================
-void CallListWidget::updateCall( GuiOfferSession * offerSession )
+void CallListWidget::updateCall( GuiOfferSession* offerSession )
 {
     if( isListViewMatch( offerSession ) )
     {
@@ -379,7 +379,7 @@ void CallListWidget::updateCall( GuiOfferSession * offerSession )
         if( iter == m_CallCache.end() )
         {
             /*
-            GuiOfferSession * userSession = new GuiOfferSession( user, this );
+            GuiOfferSession* userSession = new GuiOfferSession( user, this );
             if( userSession )
             {*/
                 CallListItem* userItem = sessionToWidget( offerSession );
@@ -419,7 +419,7 @@ void CallListWidget::removeCall( VxGUID& onlineId )
         CallListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
         if( userItem )
         {
-            GuiOfferSession * userSession = userItem->getCallSession();
+            GuiOfferSession* userSession = userItem->getCallSession();
             delete userItem;
             delete userSession;
         }

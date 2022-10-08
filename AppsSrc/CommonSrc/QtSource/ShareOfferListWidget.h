@@ -49,7 +49,7 @@ public:
     ShareOfferListItem*         findListEntryWidgetBySessionId( VxGUID& sessionId );
     ShareOfferListItem*         findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
-    void                        updateOffer( GuiOfferSession * user );
+    void                        updateOffer( GuiOfferSession* user );
     void                        removeOffer( VxGUID& onlineId );
 
     void                        setOfferViewType( EOfferViewType viewType );
@@ -86,7 +86,7 @@ protected:
     virtual void                onMenuButtonClicked( ShareOfferListItem* hostItem );
 
     void                        refreshList( void );
-    bool                        isListViewMatch( GuiOfferSession * user );
+    bool                        isListViewMatch( GuiOfferSession* user );
 
 	//=== vars ===//
     GuiOfferClientMgr&          m_OfferClientMgr;

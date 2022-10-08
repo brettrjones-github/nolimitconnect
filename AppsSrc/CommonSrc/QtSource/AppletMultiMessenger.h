@@ -63,8 +63,8 @@ protected:
     virtual void				hideEvent( QHideEvent* ev ) override;
 
 	// override of ToGuiActivityInterface
-    virtual void				toToGuiRxedPluginOffer( GuiOfferSession * offer ) override;
-    virtual void				toToGuiRxedOfferReply( GuiOfferSession * offer ) override;
+    virtual void				toToGuiRxedPluginOffer( GuiOfferSession* offer ) override;
+    virtual void				toToGuiRxedOfferReply( GuiOfferSession* offer ) override;
 
 	virtual bool 				checkForSendAccess( bool sendOfferIfPossible );
 	virtual void				showReasonAccessNotAllowed( void );

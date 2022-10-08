@@ -135,20 +135,24 @@ FileInfo::FileInfo( VxFileXferInfo& xferInfo, VxGUID& onlineId )
 //============================================================================
 FileInfo& FileInfo::operator=( const FileInfo& rhs ) 
 {	
-	m_OnlineId				= rhs.m_OnlineId;
-	m_FullFileName			= rhs.m_FullFileName;
-	m_ShortFileName			= rhs.m_ShortFileName;
-	m_s64FileLen			= rhs.m_s64FileLen;
-	m_u32Attributes			= rhs.m_u32Attributes;
-	m_u8FileType			= rhs.m_u8FileType;
-	m_FileHash				= rhs.m_FileHash;
-	m_ContainedInDir		= rhs.m_ContainedInDir;
-	m_AssetId				= rhs.m_AssetId;
-	m_ThumbId				= rhs.m_ThumbId;
-	m_FileTime				= rhs.m_FileTime;
-	m_XferSessionId			= rhs.m_XferSessionId;
-	m_IsInLibrary			= rhs.m_IsInLibrary;
-	m_IsSharedFile			= rhs.m_IsSharedFile;
+    if( &rhs != this)
+    {
+        m_OnlineId				= rhs.m_OnlineId;
+        m_FullFileName			= rhs.m_FullFileName;
+        m_ShortFileName			= rhs.m_ShortFileName;
+        m_s64FileLen			= rhs.m_s64FileLen;
+        m_u32Attributes			= rhs.m_u32Attributes;
+        m_u8FileType			= rhs.m_u8FileType;
+        m_FileHash				= rhs.m_FileHash;
+        m_ContainedInDir		= rhs.m_ContainedInDir;
+        m_AssetId				= rhs.m_AssetId;
+        m_ThumbId				= rhs.m_ThumbId;
+        m_FileTime				= rhs.m_FileTime;
+        m_XferSessionId			= rhs.m_XferSessionId;
+        m_IsInLibrary			= rhs.m_IsInLibrary;
+        m_IsSharedFile			= rhs.m_IsSharedFile;
+    }
+
 	return *this;
 }
 

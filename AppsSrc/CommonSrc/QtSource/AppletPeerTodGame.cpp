@@ -75,13 +75,13 @@ void AppletPeerTodGame::setupAppletPeerTodGame( void )
 }
 
 //============================================================================
-void AppletPeerTodGame::toToGuiRxedPluginOffer( GuiOfferSession * offer )
+void AppletPeerTodGame::toToGuiRxedPluginOffer( GuiOfferSession* offer )
 {
 	m_OfferSessionLogic.toToGuiRxedPluginOffer( offer );
 }
 
 //============================================================================
-void AppletPeerTodGame::toToGuiRxedOfferReply( GuiOfferSession * offerSession )
+void AppletPeerTodGame::toToGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	m_OfferSessionLogic.toToGuiRxedOfferReply( offerSession );
 

@@ -363,7 +363,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxPushButton.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxComboBoxFileFilter.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxLabel.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/VxMyFileInfo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxSndInstance.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxFlatButton.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxFrame.h \
@@ -737,7 +736,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxComboBoxFileFilter.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxFlatButton.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxLabel.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/VxMyFileInfo.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxSndInstance.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxResourceToRealFile.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxScrollArea.cpp \

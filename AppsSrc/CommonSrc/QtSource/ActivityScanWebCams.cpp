@@ -111,15 +111,15 @@ void ActivityScanWebCams::toGuiClientScanSearchComplete( EScanType eScanType )
 }
 
 //============================================================================
-void ActivityScanWebCams::setupIdentWidget( GuiUser* netIdent )
+void ActivityScanWebCams::setupIdentWidget( GuiUser* guiUser )
 {
-	m_HisIdent = netIdent;
+	m_HisIdent = guiUser;
 	IdentWidget * poIdentWidget = ui.FriendIdentWidget;
 	if( poIdentWidget )
 	{
 		poIdentWidget->setVisible( true );
 		poIdentWidget->setIdentMenuButtonVisible( false );
-		poIdentWidget->updateIdentity( netIdent );
+		poIdentWidget->updateIdentity( m_HisIdent );
 		if( false == m_bIconConnected )
 		{
 			m_bIconConnected = true;
@@ -129,18 +129,18 @@ void ActivityScanWebCams::setupIdentWidget( GuiUser* netIdent )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiScanResultSuccess(EScanType eScanType, GuiUser* netIdent )
+void ActivityScanWebCams::toGuiScanResultSuccess(EScanType eScanType, GuiUser* guiUser )
 {
 	if( eScanTypeCamServer == eScanType )
 	{
-		emit signalNewWebCamSession( netIdent );
+		emit signalNewWebCamSession( guiUser );
 	}
 }
 
 //============================================================================
-void ActivityScanWebCams::slotNewWebCamSession( GuiUser* netIdent )
+void ActivityScanWebCams::slotNewWebCamSession( GuiUser* guiUser )
 {
-	m_ScanList.push_back( netIdent );
+	m_ScanList.push_back( guiUser );
 	showNextCam();
 }
 
@@ -176,7 +176,7 @@ void ActivityScanWebCams::updateCountdownGui()
 }
 
 //============================================================================
-void ActivityScanWebCams::doCamConnect( GuiUser* netIdent )
+void ActivityScanWebCams::doCamConnect( GuiUser* guiUser )
 {
 
 	if( m_HisIdent )
@@ -188,13 +188,13 @@ void ActivityScanWebCams::doCamConnect( GuiUser* netIdent )
 		ui.m_CamVidWidget->setVideoFeedId( nullGuid, eAppModuleCamClient );
 	}
 
-	if( !netIdent )
+	if( !guiUser )
 	{
 		LogMsg( LOG_ERROR, "ActivityScanWebCams::doCamConnec netIdent is null" );
 		return;
 	}
 
-	m_HisIdent = netIdent;
+	m_HisIdent = guiUser;
 	ui.FriendIdentWidget->setVisible( true );
 	if( 0 != m_HisIdent )
 	{

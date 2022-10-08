@@ -725,17 +725,17 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 }
 
 //============================================================================
-int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType, 
+int P2PEngine::fromGuiPluginControl(	EPluginType		pluginType, 
 										VxGUID&			onlineId,
-										const char*	pControl, 
-										const char*	pAction,
+										const char*		pControl, 
+										const char*		pAction,
 										uint32_t		u32ActionData,
 										VxGUID&			lclSessionId,
 										uint8_t *		fileHashId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiPluginControl" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	if( netIdent && poPlugin )
 	{
 		return poPlugin->fromGuiPluginControl( netIdent, pControl, pAction, u32ActionData, lclSessionId, fileHashId );
@@ -748,13 +748,11 @@ int P2PEngine::fromGuiPluginControl(	EPluginType		ePluginType,
 }
 
 //============================================================================
-bool P2PEngine::fromGuiInstMsg(	EPluginType		ePluginType, 
-								VxGUID&			onlineId,
-								const char*	pMsg )
+bool P2PEngine::fromGuiInstMsg(	EPluginType	pluginType, VxGUID&	onlineId, const char* pMsg )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiInstMsg" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	if( netIdent && poPlugin )
 	{
 		return poPlugin->fromGuiInstMsg( netIdent, pMsg );

@@ -55,9 +55,9 @@ private:
 	void						setupAppletPeerBase( void );
 
 protected:
-    virtual void				toGuiRxedPluginOffer( GuiOfferSession * offer );
-    virtual void				toGuiRxedOfferReply( GuiOfferSession * offerReply );
-    virtual void				toGuiPluginSessionEnded( GuiOfferSession * offer ) override;
+    virtual void				toGuiRxedPluginOffer( GuiOfferSession* offer );
+    virtual void				toGuiRxedOfferReply( GuiOfferSession* offerReply );
+    virtual void				toGuiPluginSessionEnded( GuiOfferSession* offer ) override;
 	virtual void				callbackGuiPlayMotionVideoFrame( VxGUID& feedOnlineId, QImage& vidFrame, int motion0To100000 ) override;
 
     virtual void				toGuiSetGameValueVar(	EPluginType     ePluginType,

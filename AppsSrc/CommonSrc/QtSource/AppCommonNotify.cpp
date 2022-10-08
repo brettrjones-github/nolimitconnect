@@ -64,7 +64,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent*	netIdent,			// identity of f
 
 	// use signal so widgets will be built in gui thread
 	// we must put into new session so offer msg and file name is still available when queued signal is received
-	GuiOfferSession * poOffer = new GuiOfferSession(this);
+	GuiOfferSession* poOffer = new GuiOfferSession(this);
 	poOffer->setPluginType( ePluginType );
 	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
@@ -89,7 +89,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent*	netIdent,			// identity of f
 }
 
 //============================================================================
-void AppCommon::onToGuiRxedPluginOffer( GuiOfferSession * offerSession )
+void AppCommon::onToGuiRxedPluginOffer( GuiOfferSession* offerSession )
 {
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
@@ -116,7 +116,7 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent*	netIdent,
 		return;
 	}
 
-	GuiOfferSession * poOffer = new GuiOfferSession(this);
+	GuiOfferSession* poOffer = new GuiOfferSession(this);
 	poOffer->setPluginType( ePluginType );
 	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
@@ -132,7 +132,7 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent*	netIdent,
 }
 
 //============================================================================
-void AppCommon::onToGuiRxedOfferReply( GuiOfferSession * offerSession )
+void AppCommon::onToGuiRxedOfferReply( GuiOfferSession* offerSession )
 {
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
@@ -155,7 +155,7 @@ void AppCommon::toGuiPluginSessionEnded(	VxNetIdent*	netIdent,
 		return;
 	}
 
-	GuiOfferSession * poOffer = new GuiOfferSession(this);
+	GuiOfferSession* poOffer = new GuiOfferSession(this);
 	poOffer->setPluginType( ePluginType );
 	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
@@ -205,12 +205,12 @@ void AppCommon::toGuiInstMsg(	VxNetIdent*	netIdent,
 }
 
 //============================================================================
-void AppCommon::slotToGuiInstMsg( GuiUser* netIdent, EPluginType ePluginType, QString pMsg )
+void AppCommon::slotToGuiInstMsg( GuiUser* guiUser, EPluginType ePluginType, QString pMsg )
 {
 	m_ToGuiActivityInterfaceBusy = true;
 	for( auto client : m_ToGuiActivityInterfaceList )
 	{
-		client->toGuiInstMsg( netIdent, ePluginType, pMsg );
+		client->toGuiInstMsg( guiUser, ePluginType, pMsg );
 	}
 
 	m_ToGuiActivityInterfaceBusy = false;

@@ -26,7 +26,7 @@ class AppletCamSettings : public AppletBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
-	AppletCamSettings( AppCommon& app, QWidget* parent = NULL );
+	AppletCamSettings( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletCamSettings() override;
 
     void						webCamSourceOffline();
@@ -41,8 +41,8 @@ signals:
     void						signalSnapshotImage( QImage snapshotImage );
 
 protected slots:
-    void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
-    void						slotToGuiSessionEnded( GuiOfferSession * offerSession );
+    void						slotToGuiRxedOfferReply( GuiOfferSession* offerSession );
+    void						slotToGuiSessionEnded( GuiOfferSession* offerSession );
     void						slotToGuiContactOffline( VxNetIdent* hisIdent );
 
 protected:

@@ -27,7 +27,7 @@ CallListItem::CallListItem(QWidget*parent  )
 //============================================================================
 CallListItem::~CallListItem()
 {
-    GuiOfferSession * hostSession = (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiOfferSession* hostSession = (GuiOfferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -67,9 +67,9 @@ void CallListItem::setCallSession( GuiOfferSession* hostSession )
 }
 
 //============================================================================
-GuiOfferSession * CallListItem::getCallSession( void )
+GuiOfferSession* CallListItem::getCallSession( void )
 {
-    return (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return (GuiOfferSession*)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================

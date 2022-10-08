@@ -106,14 +106,14 @@ void ActivityScanProfiles::slotSearchComplete()
 }
 
 //============================================================================
-void ActivityScanProfiles::setupIdentWidget( GuiUser* netIdent )
+void ActivityScanProfiles::setupIdentWidget( GuiUser* guiUser )
 {
-	m_Ident = netIdent;
+	m_Ident = guiUser;
 	IdentWidget * poIdentWidget = ui.FriendIdentWidget;
 	if( poIdentWidget )
 	{
 		poIdentWidget->setVisible( true );
-		poIdentWidget->updateIdentity( netIdent );
+		poIdentWidget->updateIdentity( guiUser );
 		if( false == m_bIconConnected )
 		{
 			m_bIconConnected = true;
@@ -156,9 +156,9 @@ void ActivityScanProfiles::toGuiSearchResultProfilePic(
 }
 
 //============================================================================
-void ActivityScanProfiles::slotSearchResultProfilePic( GuiUser* netIdent, QImage oPicBitmap ) 
+void ActivityScanProfiles::slotSearchResultProfilePic( GuiUser* guiUser, QImage oPicBitmap ) 
 {
-	ScanProfilePair profilePair( netIdent, oPicBitmap );
+	ScanProfilePair profilePair( guiUser, oPicBitmap );
 	m_ScanList.push_back( profilePair );
 	showNextImage();
 }
@@ -186,9 +186,9 @@ void ActivityScanProfiles::showNextImage( void )
 }
 
 //============================================================================
-void ActivityScanProfiles::showMatchedPair( GuiUser* netIdent, QImage& oPicBitmap ) 
+void ActivityScanProfiles::showMatchedPair( GuiUser* guiUser, QImage& oPicBitmap ) 
 {
-	setupIdentWidget( netIdent );
+	setupIdentWidget( guiUser );
 	QPixmap oPicPixmap = QPixmap::fromImage(oPicBitmap);
 	ui.ProfileFrame->setPixmap( oPicPixmap );
 }

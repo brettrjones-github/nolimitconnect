@@ -29,7 +29,7 @@ class AppletPersonOfferList : public AppletPeerBase, public ToGuiFileXferInterfa
 	Q_OBJECT
 public:
 	AppletPersonOfferList(	AppCommon&	app, 
-							QWidget*		parent = NULL );
+							QWidget*		parent = nullptr );
 	virtual ~AppletPersonOfferList() override;
 
 	//bool						isXferInProgress( VxGUID fileInstance );

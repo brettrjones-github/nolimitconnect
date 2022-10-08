@@ -34,7 +34,7 @@ class ActivityAddRemoveLibraryFiles : public ActivityBase, public ToGuiFileXferI
 	Q_OBJECT
 public:
 
-    ActivityAddRemoveLibraryFiles( AppCommon& app, QWidget* parent = NULL );
+    ActivityAddRemoveLibraryFiles( AppCommon& app, QWidget* parent = nullptr );
     virtual ~ActivityAddRemoveLibraryFiles();
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
