@@ -177,7 +177,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineParams.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineSettingsDefaultValues.h \
-    $$PWD/ptop_src/ptop_engine_src/P2PEngine/FileLibraryMgr.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PConnectList.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h \
@@ -212,7 +211,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFilesServer.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.h \

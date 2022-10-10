@@ -46,7 +46,6 @@ public:
     OsInterface&                getOsInterface()        { return m_OsInterface; }
     VxPeerMgr&                  getPeerMgr()            { return m_VxPeerMgr; }
     P2PEngine&                  getPtoP();
-    AppCommon&                  getAppCommon();
 #if ENABLE_KODI
     CApplication&               getKodi()               { return m_Kodi; }
 #endif // ENABLE_KODI
@@ -146,7 +145,7 @@ public:
     void                        getViewPort( NlcRect& viewPort ) override;
 
     bool                        scissorsCanEffectClipping() override;
-    NlcRect                    clipRectToScissorRect( const NlcRect &rect ) override;
+    NlcRect                     clipRectToScissorRect( const NlcRect &rect ) override;
     void                        setScissors( const NlcRect& rect ) override;
     void                        resetScissors() override;
 
@@ -648,7 +647,7 @@ P2PEngine& GetPtoPEngine();
 
 // convenience defines
 #define GetToGui()              INlc::getINlc()
-#define GetINlc()              INlc::getINlc()
+#define GetINlc()               INlc::getINlc()
 #define GetILog()               INlc::getINlc().getILog()
 #define GetOsInterface()        INlc::getINlc().getOsInterface()
 #define GetPeerMgr()            INlc::getINlc().getPeerMgr()

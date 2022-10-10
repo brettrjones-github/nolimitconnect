@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/AppRes"/>
-    <qresource prefix="/">
-        <file>Resources/bubbles.svg</file>
-    </qresource>
-</RCC>

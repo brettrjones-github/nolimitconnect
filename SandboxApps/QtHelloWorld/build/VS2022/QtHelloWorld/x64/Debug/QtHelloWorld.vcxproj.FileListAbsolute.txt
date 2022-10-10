@@ -1,1 +1,0 @@
-F:\nolimitconnect\SandboxApps\QtHelloWorld\build\VS2019\QtHelloWorld\x64\Debug\QtHelloWorld.exe

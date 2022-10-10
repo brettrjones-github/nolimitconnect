@@ -1073,11 +1073,11 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
 
         if( origSettings.getTcpPort() != netHostSetting.getTcpPort() )
         {
-            INlc::getINlc().getPeerMgr().stopListening();
+            getPeerMgr().stopListening();
             getMyPktAnnounce().setMyOnlinePort( netHostSetting.getTcpPort() );
             setPktAnnLastModTime( GetTimeStampMs() );
             getNetStatusAccum().setIpPort( netHostSetting.getTcpPort() );
-            INlc::getINlc().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
+            getPeerMgr().startListening( netHostSetting.getTcpPort() );   
         }
 
 		if( haveFixedIp )

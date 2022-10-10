@@ -748,6 +748,9 @@
     <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp">
       <Filter>Source Files\WebPageMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GuiInterface\IDefs.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
@@ -1714,6 +1717,9 @@
     </Filter>
     <Filter Include="Source Files\WebPageMgr">
       <UniqueIdentifier>{bee4bc25-082e-4a6b-94f9-532895b6b153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface">
+      <UniqueIdentifier>{f99612cf-3bfa-43bf-aea2-a46d597afc9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

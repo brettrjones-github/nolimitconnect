@@ -1,1 +1,0 @@
-This is a test application made about as simple as possible but still test multithreaded opengl rendering

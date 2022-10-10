@@ -39,7 +39,7 @@ public:
 
 
 protected:
-    INlc&                      m_INlc;
+    INlc&                       m_INlc;
     const CAppParamParser*      m_CmdLineParams = nullptr;
     int                         m_RunResultCode = 0;
 };

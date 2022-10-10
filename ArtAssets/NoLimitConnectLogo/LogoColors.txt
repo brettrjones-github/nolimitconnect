@@ -1,3 +1,0 @@
-pink 254,104,179         		fe68b3
-blue 98,212,249					62d4f9
-merged purple 176,158,214

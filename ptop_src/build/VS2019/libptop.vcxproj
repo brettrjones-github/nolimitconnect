@@ -431,6 +431,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\GuiInterface\IDefs.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseMgr.cpp" />

@@ -1,2 +1,0 @@
-set "PATH=@WINDOWS_RUN_PATH@"
-qmlplugindump -nonrelocatable @GOTVQT_PLUGIN_QML_NAME@ 1.1 . > @GOTVQT_PLUGIN_QML_NAME@/@GOTVQT_PLUGIN_QML_NAME@.qmltypes
