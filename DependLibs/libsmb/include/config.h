@@ -2265,7 +2265,7 @@
 /* #undef HAVE_SYS_SECURITY_H */
 
 /* Define to 1 if you have the <sys/select.h> header file. */
-//#define HAVE_SYS_SELECT_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/shm.h> header file. */
 #define HAVE_SYS_SHM_H 1

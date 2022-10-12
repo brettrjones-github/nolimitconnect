@@ -1,4 +1,4 @@
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Defined if your compiler supports some byte swap functions */
 /* #undef HAVE_BOOST_BYTESWAP */

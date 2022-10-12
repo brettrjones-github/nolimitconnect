@@ -16,7 +16,7 @@
    along with this program; if not, see <http://www.gnu.org/licenses/>.  */
 
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Get size_t. */
 # include <stddef.h>

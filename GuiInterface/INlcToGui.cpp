@@ -1,7 +1,7 @@
 #include <CommonHdr.h>
 
 #include "INlc.h"
-#include "AppsSrc/CommonSrc/QtSource/AppCommon.h"
+#include "CommonSrc/QtSource/AppCommon.h"
 
 //============================================================================
 void INlc::toGuiPlayNlcMedia( AssetBaseInfo* assetInfo )

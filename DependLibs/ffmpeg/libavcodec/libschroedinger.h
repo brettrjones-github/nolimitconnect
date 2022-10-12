@@ -25,7 +25,7 @@
 
 #ifndef AVCODEC_LIBSCHROEDINGER_H
 #define AVCODEC_LIBSCHROEDINGER_H
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <schroedinger/schrobitstream.h>
 #include <schroedinger/schroframe.h>

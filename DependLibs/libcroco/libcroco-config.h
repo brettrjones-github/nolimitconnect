@@ -1,4 +1,4 @@
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #ifndef LIBCROCO_VERSION_NUMBER
 #define LIBCROCO_VERSION_NUMBER 601

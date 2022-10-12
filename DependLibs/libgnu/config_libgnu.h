@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <libgnu/g-gnulib.h>
 
 #include <libiconv/iconv.h>
@@ -578,13 +578,13 @@
 
 
 /* Define to 1 if you have the <sys/param.h> header file. */
-//#define HAVE_SYS_PARAM_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_PARAM_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-//#define HAVE_SYS_SOCKET_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SOCKET_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/types.h> header file. */
-//#define HAVE_SYS_TYPES_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_TYPES_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the `towlower' function. */
 #define HAVE_TOWLOWER 1
@@ -1429,7 +1429,7 @@ uintmax_t. */
 /* #undef HAVE_SYS_INTTYPES_H */
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-//#define HAVE_SYS_SOCKET_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SOCKET_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/timeb.h> header file. */
 /* #undef HAVE_SYS_TIMEB_H */
@@ -1783,7 +1783,7 @@ doesn't define it. */
 /* Define to the equivalent of the C99 'restrict' keyword, or to
 nothing if this is not supported.  Do not define if NLC_RESTRICT is
 supported directly.  */
-//#define NLC_RESTRICT __restrict // defined in AppDependLibrariesConfig.h
+//#define NLC_RESTRICT __restrict // defined in NlcDependLibrariesConfig.h
 
 /* Work around a bug in Sun C++: it does not support _Restrict or
 __restrict__, even though the corresponding Sun C compiler ends up with
@@ -2212,31 +2212,31 @@ don't. */
 
 /* Define to 1 if you have the declaration of `feof_unlocked', and to 0 if you
 don't. */
-//#define HAVE_DECL_FEOF_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FEOF_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `ferror_unlocked', and to 0 if
 you don't. */
-//#define HAVE_DECL_FERROR_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FERROR_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fflush_unlocked', and to 0 if
 you don't. */
-//#define HAVE_DECL_FFLUSH_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FFLUSH_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fgets_unlocked', and to 0 if
 you don't. */
-//#define HAVE_DECL_FGETS_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FGETS_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fputc_unlocked', and to 0 if
 you don't. */
-//#define HAVE_DECL_FPUTC_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FPUTC_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fputs_unlocked', and to 0 if
 you don't. */
-//#define HAVE_DECL_FPUTS_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FPUTS_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fread_unlocked', and to 0 if
 you don't. */
-//#define HAVE_DECL_FREAD_UNLOCKED 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_DECL_FREAD_UNLOCKED 0 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `ftello', and to 0 if you don't.
 */
@@ -4627,7 +4627,7 @@ declares uintmax_t. */
 #endif // _MSC_VER
 
 /* found fd_set in sys/select.h */
-//#define HAVE_SYS_SELECT_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -5149,19 +5149,19 @@ declares uintmax_t. */
 #define HAVE_IPV6 1
 
 /* Define to 1 if you have the <libgen.h> header file. */
-//#define HAVE_LIBGEN_H 1 // defined in AppDependLibrariesConfig.h
+//#define HAVE_LIBGEN_H 1 // defined in NlcDependLibrariesConfig.h
 
 /* Define if you have the libiconv library. */
-//#define HAVE_LIBICONV 1 // defined in AppDependLibrariesConfig.h
+//#define HAVE_LIBICONV 1 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the <libintl.h> header file. */
-//#define HAVE_LIBINTL_H 1 // defined in AppDependLibrariesConfig.h
+//#define HAVE_LIBINTL_H 1 // defined in NlcDependLibrariesConfig.h
 
 /* nettle is enabled */
-// #define HAVE_LIBNETTLE 1 // defined in AppDependLibrariesConfig.h
+// #define HAVE_LIBNETTLE 1 // defined in NlcDependLibrariesConfig.h
 
 /* Define if you have the libz library. */
-// #define HAVE_LIBZ 1 // defined in AppDependLibrariesConfig.h
+// #define HAVE_LIBZ 1 // defined in NlcDependLibrariesConfig.h
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
@@ -5937,10 +5937,10 @@ uintmax_t. */
 /* #undef HAVE_SYS_PROCSET_H */
 
 /* Define to 1 if you have the <sys/select.h> header file. */
-//#define HAVE_SYS_SELECT_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-//#define HAVE_SYS_SOCKET_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SOCKET_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -6084,7 +6084,7 @@ uintmax_t. */
 
 /* name of regex header file */
 #ifdef _MSC_VER
-# define REGEX_HEADER <AppDependLibrariesConfig.h>
+# define REGEX_HEADER <NlcDependLibrariesConfig.h>
 #else
 # define REGEX_HEADER <regex.h>
 #endif // _MSC_VER
@@ -6399,10 +6399,10 @@ implementations */
 
 
 /* Define to 1 if you have the <sys/select.h> header file. */
-//#define HAVE_SYS_SELECT_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-//#define HAVE_SYS_SOCKET_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_SOCKET_H 1 // defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1

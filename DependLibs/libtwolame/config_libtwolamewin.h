@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #ifdef TARGET_OS_WINDOWS
 # include "winutil.h"
 #endif // TARGET_OS_WINDOWS
@@ -41,7 +41,7 @@
 #define HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
-//#define HAVE_UNISTD_H 1  // defined in AppCompilerConfig.h
+//#define HAVE_UNISTD_H 1  // defined in NlcCompilerConfig.h
 
 /* Name of package */
 #define PACKAGE "libtwolame"

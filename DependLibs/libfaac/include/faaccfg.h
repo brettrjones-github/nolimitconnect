@@ -20,7 +20,7 @@
  */
 
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define FAAC_CFG_VERSION 104
 

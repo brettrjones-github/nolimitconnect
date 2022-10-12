@@ -1,13 +1,13 @@
 
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #define FFMPEG_LICENSE				"GPL version 2 or later"
 #define FFMPEG_CONFIGURATION		"ffmpeg_built_for_NoLimitConnect"
 #define FFMPEG_CONFIG_H				1 // some code relies on this being defined to detect if config has been included ( template compile )
 
 #define av_restrict NLC_RESTRICT
-// NOTE: HAVE_INLINE_ASM is defined in AppCompilerConfig.h
+// NOTE: HAVE_INLINE_ASM is defined in NlcCompilerConfig.h
 //#define HAVE_INLINE_ASM		0
 #define HAVE_ALIGNED_STACK	0
 #define HAVE_MMX2 HAVE_MMXEXT
@@ -26,7 +26,7 @@
 #  define ARCH_X86_32 1
 #  define ARCH_X86_64 0
 # else
-#  define ARCH_X86_32 0 // defined in AppCpuArchDefines.h
+#  define ARCH_X86_32 0 // defined in NlcCpuArchDefines.h
 #  define ARCH_X86_64 1
 # endif // ARCH_32_BITS
 #endif //TARGET_OS_ANDROID
@@ -49,12 +49,12 @@
 #define ARCH_TILEGX 0
 #define ARCH_TILEPRO 0
 #define ARCH_TOMI 0
-//#define ARCH_X86 1 // defined in AppCpuArchDefines.h
+//#define ARCH_X86 1 // defined in NlcCpuArchDefines.h
 
 #define HAVE_ARMV5TE 0
-//#define HAVE_ARMV6 0 // defined in AppCpuArchDefines.h
+//#define HAVE_ARMV6 0 // defined in NlcCpuArchDefines.h
 #define HAVE_ARMV6T2 0
-//#define HAVE_ARMV8 0 // defined in AppCpuArchDefines.h
+//#define HAVE_ARMV8 0 // defined in NlcCpuArchDefines.h
 
 #define HAVE_NEON 0
 #define HAVE_VFP 0
@@ -218,7 +218,7 @@
 #define HAVE_SIMD_ALIGN_16 1
 #define HAVE_SIMD_ALIGN_32 1
 #define HAVE_SIMD_ALIGN_64 1
-//#define HAVE_ATOMICS_GCC 0 // defined in AppDependLibrariesConfig.h
+//#define HAVE_ATOMICS_GCC 0 // defined in NlcDependLibrariesConfig.h
 #define HAVE_ATOMICS_SUNCC 0
 #define HAVE_ATOMICS_WIN32 1
 #define HAVE_ATOMIC_CAS_PTR 0
@@ -317,25 +317,25 @@
 #define HAVE_OPENJPEG_2_0_OPENJPEG_H	0
 #define HAVE_OPENJPEG_1_5_OPENJPEG_H	0
 #define HAVE_OPENGL_GL3_H				0
-//#define HAVE_POLL_H						0  // defined in AppCompilerConfig.h
-// #define HAVE_SYS_PARAM_H 0  // defined in AppCompilerConfig.h
+//#define HAVE_POLL_H						0  // defined in NlcCompilerConfig.h
+// #define HAVE_SYS_PARAM_H 0  // defined in NlcCompilerConfig.h
 //#define HAVE_SNDIO_H					0
 #define HAVE_SOUNDCARD_H 0
 #define HAVE_STDATOMIC_H 0
-//#define HAVE_SYS_MMAN_H 0  // defined in AppCompilerConfig.h
-//#define HAVE_SYS_PARAM_H 0 // defined in AppCompilerConfig.h
-//#define HAVE_SYS_RESOURCE_H 0 // defined in AppCompilerConfig.h
-//#define HAVE_SYS_SELECT_H 0 // defined in AppCompilerConfig.h
+//#define HAVE_SYS_MMAN_H 0  // defined in NlcCompilerConfig.h
+//#define HAVE_SYS_PARAM_H 0 // defined in NlcCompilerConfig.h
+//#define HAVE_SYS_RESOURCE_H 0 // defined in NlcCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 0 // defined in NlcCompilerConfig.h
 #define HAVE_SYS_SOUNDCARD_H 0
 
 #ifndef HAVE_SYS_TIME_H
 # define HAVE_SYS_TIME_H			0
 #endif // HAVE_SYS_TIME_H
-//#define HAVE_SYS_UN_H 0  // defined in AppCompilerConfig.h
+//#define HAVE_SYS_UN_H 0  // defined in NlcCompilerConfig.h
 #define HAVE_SYS_VIDEOIO_H			0
-//#define HAVE_TERMIOS_H				0 // defined in AppCompilerConfig.h
+//#define HAVE_TERMIOS_H				0 // defined in NlcCompilerConfig.h
 #define HAVE_UDPLITE_H				0
-//#define HAVE_UNISTD_H 0 // defined in AppCompilerConfig.h
+//#define HAVE_UNISTD_H 0 // defined in NlcCompilerConfig.h
 
 
 #define HAVE_VALGRIND_VALGRIND_H 0
@@ -353,7 +353,7 @@
 #define HAVE_ATAN2F 1
 #define HAVE_CBRT 1
 #define HAVE_CBRTF 1
-//#define HAVE_COPYSIGN 1 // defined in AppCompilerConfig.h
+//#define HAVE_COPYSIGN 1 // defined in NlcCompilerConfig.h
 #define HAVE_COSF 1
 #define HAVE_ERF 1
 #define HAVE_EXP2 1
@@ -374,7 +374,7 @@
 #define HAVE_LRINTF 1
 #define HAVE_POWF 1
 #define HAVE_RINT 1
-//#define HAVE_ROUND 1 // defined in AppCompilerConfig.h
+//#define HAVE_ROUND 1 // defined in NlcCompilerConfig.h
 #define HAVE_ROUNDF 1
 #define HAVE_SINF 1
 #define HAVE_TRUNC 1
@@ -383,16 +383,16 @@
 #define HAVE_LIBC_MSVCRT 0 // do not define 1
 #define HAVE_MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS 0
 #define HAVE_SECTION_DATA_REL_RO 0
-//#define HAVE_THREADS 0 // defined in AppCompilerConfig.h
+//#define HAVE_THREADS 0 // defined in NlcCompilerConfig.h
 #define HAVE_UWP 0
 #define HAVE_WINRT 0
 #define HAVE_ACCESS 1
 #define HAVE_ALIGNED_MALLOC 0
 #define HAVE_ARC4RANDOM 0
-//#define HAVE_CLOCK_GETTIME 0  // defined in AppCompilerConfig.h
+//#define HAVE_CLOCK_GETTIME 0  // defined in NlcCompilerConfig.h
 #define HAVE_CLOSESOCKET 1
 #define HAVE_COMMANDLINETOARGVW 1
-//#define HAVE_FCNTL 0 // defined in AppCompilerConfig.h
+//#define HAVE_FCNTL 0 // defined in NlcCompilerConfig.h
 //#define HAVE_COTASKMEMFREE 1
 //#define HAVE_CRYPTGENRANDOM 1
 //#define HAVE_FLT_LIM 1
@@ -407,31 +407,31 @@
 #endif // TARGET_OS_WINDOWS
 #define HAVE_GETPROCESSMEMORYINFO 1
 #define HAVE_GETPROCESSTIMES 1
-//#define HAVE_GETRUSAGE 0 // defined in AppCompilerConfig.h
+//#define HAVE_GETRUSAGE 0 // defined in NlcCompilerConfig.h
 #define HAVE_GETSYSTEMTIMEASFILETIME 1
-//#define HAVE_GETTIMEOFDAY 0  // defined in AppCompilerConfig.h
+//#define HAVE_GETTIMEOFDAY 0  // defined in NlcCompilerConfig.h
 
 
 #define HAVE_GLOB 0
 #define HAVE_GLXGETPROCADDRESS 0
-//#define HAVE_GMTIME_R 0   // defined in AppCompilerConfig.h
+//#define HAVE_GMTIME_R 0   // defined in NlcCompilerConfig.h
 #define HAVE_INET_ATON 0
 #define HAVE_ISATTY 1
 #define HAVE_JACK_PORT_GET_LATENCY_RANGE 0
 #define HAVE_KBHIT 1
-//#define HAVE_LOCALTIME_R 0 // defined in AppCompilerConfig.h
+//#define HAVE_LOCALTIME_R 0 // defined in NlcCompilerConfig.h
 #define HAVE_LOADLIBRARY 1
-//#define HAVE_LSTAT 0 // defined in AppCompilerConfig.h
+//#define HAVE_LSTAT 0 // defined in NlcCompilerConfig.h
 #define HAVE_LZO1X_999_COMPRESS 0
 #define HAVE_MACH_ABSOLUTE_TIME 0
-//#define HAVE_MAPVIEWOFFILE 0 // defined in AppCompilerConfig.h
-//#define HAVE_MEMALIGN 0 // defined in AppCompilerConfig.h
-//#define HAVE_MKSTEMP 0 // defined in AppCompilerConfig.h
-//#define HAVE_MMAP 0 // defined in AppCompilerConfig.h
-//#define HAVE_MPROTECT 0 // defined in AppCompilerConfig.h
-//#define HAVE_NANOSLEEP 0 // defined in AppCompilerConfig.h
+//#define HAVE_MAPVIEWOFFILE 0 // defined in NlcCompilerConfig.h
+//#define HAVE_MEMALIGN 0 // defined in NlcCompilerConfig.h
+//#define HAVE_MKSTEMP 0 // defined in NlcCompilerConfig.h
+//#define HAVE_MMAP 0 // defined in NlcCompilerConfig.h
+//#define HAVE_MPROTECT 0 // defined in NlcCompilerConfig.h
+//#define HAVE_NANOSLEEP 0 // defined in NlcCompilerConfig.h
 #define HAVE_PEEKNAMEDPIPE 1
-//#define HAVE_POSIX_MEMALIGN 0 // defined in AppCompilerConfig.h
+//#define HAVE_POSIX_MEMALIGN 0 // defined in NlcCompilerConfig.h
 #define HAVE_PTHREAD_CANCEL 0
 #define HAVE_SCHED_GETAFFINITY 0
 #define HAVE_SECITEMIMPORT 0
@@ -443,14 +443,14 @@
 #else
 # define HAVE_SETMODE 0
 #endif // TARGET_OS_WINDOWS
-//#define HAVE_SETRLIMIT 0 // defined in AppCompilerConfig.h
+//#define HAVE_SETRLIMIT 0 // defined in NlcCompilerConfig.h
 #define HAVE_SLEEP 1
-//#define HAVE_STRERROR_R 0 // defined in AppCompilerConfig.h
-//#define HAVE_SYSCONF 0 // defined in AppCompilerConfig.h
+//#define HAVE_STRERROR_R 0 // defined in NlcCompilerConfig.h
+//#define HAVE_SYSCONF 0 // defined in NlcCompilerConfig.h
 //#define HAVE_STRERROR_R 0
 //#define HAVE_SYSCONF 0
 #define HAVE_SYSCTL 0
-//#define HAVE_USLEEP 0// defined in AppCompilerConfig.h
+//#define HAVE_USLEEP 0// defined in NlcCompilerConfig.h
 #define HAVE_UTGETOSTYPEFROMSTRING 0
 #ifdef TARGET_OS_WINDOWS
 # define HAVE_VIRTUALALLOC 1
@@ -504,7 +504,7 @@
 #define HAVE_STRUCT_IP_MREQ_SOURCE 1
 #define HAVE_STRUCT_IPV6_MREQ 1
 #define HAVE_STRUCT_MSGHDR_MSG_FLAGS 0
-//#define HAVE_STRUCT_POLLFD 0 // defined in AppCompilerConfig.h
+//#define HAVE_STRUCT_POLLFD 0 // defined in NlcCompilerConfig.h
 
 
 #define HAVE_STRUCT_RUSAGE_RU_MAXRSS 0
@@ -512,7 +512,7 @@
 #define HAVE_STRUCT_SOCKADDR_IN6 1
 #define HAVE_STRUCT_SOCKADDR_SA_LEN 0
 #define HAVE_STRUCT_SOCKADDR_STORAGE 1
-//#define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 0// defined in AppCompilerConfig.h
+//#define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 0// defined in NlcCompilerConfig.h
 #define HAVE_STRUCT_V4L2_FRMIVALENUM_DISCRETE 0
 #define HAVE_ATOMICS_NATIVE 1
 #define HAVE_DOS_PATHS 1
@@ -2924,7 +2924,7 @@
 #define EXTERN_PREFIX "_"
 #define EXTERN_ASM _
 #define BUILDSUF ""
-//#define SLIBSUF ".dll" // defined in AppDependLibrariesConfig.h
+//#define SLIBSUF ".dll" // defined in NlcDependLibrariesConfig.h
 #define SWS_MAX_FILTER_SIZE 256
 
 #define HAVE_MMX2 HAVE_MMXEXT

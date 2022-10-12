@@ -21,7 +21,7 @@
  * See COPYRIGHTS files for copyrights information.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-statement.h"
 #include "cr-parser.h"

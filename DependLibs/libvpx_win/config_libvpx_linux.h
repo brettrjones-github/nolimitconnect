@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define HAVE_PTHREAD_H			1
 

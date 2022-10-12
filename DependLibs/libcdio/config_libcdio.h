@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* compiler does lsbf in struct bitfields */
 //#undef BITFIELD_LSBF

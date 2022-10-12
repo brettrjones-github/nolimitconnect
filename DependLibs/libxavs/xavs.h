@@ -41,7 +41,7 @@
 //# endif
 //#endif
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <stdarg.h>
 

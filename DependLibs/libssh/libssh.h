@@ -21,7 +21,7 @@
 #ifndef _LIBSSH_H
 #define _LIBSSH_H
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define LIBSSH_API
 

@@ -27,7 +27,7 @@
  *Abstracts a css2 token.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-token.h"
 

@@ -22,10 +22,10 @@ INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
 
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc/platform/qt
 
-HEADERS += 	$$PWD/AppCpuArchDefines.h \
-    $$PWD/AppCompilerConfig.h \
+HEADERS += 	$$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcCompilerConfig.h \
     $$PWD/NlcDebugConfig.h \
-    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/NlcDependLibrariesConfig.h \
     $$PWD/kodi_src/xbmc/xbmc/config_kodi.h \
     $$PWD/kodi_src/xbmc/xbmc/AppParamParser.h \
     $$PWD/kodi_src/xbmc/xbmc/platform/qt/KodiQtApp.h \

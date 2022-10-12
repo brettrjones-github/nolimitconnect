@@ -23,7 +23,7 @@
 #ifndef __cmnMemory_H__
 #define __cmnMemory_H__
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 NLC_BEGIN_CDECLARES
 

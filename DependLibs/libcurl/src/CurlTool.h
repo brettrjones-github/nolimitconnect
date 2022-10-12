@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <CoreLib/VxDefs.h>
 #include <CoreLib/VxFileUtil.h>
 

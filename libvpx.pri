@@ -19,10 +19,10 @@ INCLUDEPATH += $$PWD/DependLibs/libvpx/
 INCLUDEPATH += $$PWD/DependLibs/libvpx/vpx
 INCLUDEPATH += $$PWD/DependLibs/libvpx/vpx_dsp
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libvpx/vp8/common/alloccommon.h \
     $$PWD/DependLibs/libvpx/vp8/common/blockd.h \
     $$PWD/DependLibs/libvpx/vp8/common/coefupdateprobs.h \

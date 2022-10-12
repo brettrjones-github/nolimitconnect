@@ -16,9 +16,9 @@ INCLUDEPATH += $$PWD/DependLibs/
 
 
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
     $$PWD/GuiInterface/IDefs.h \
     $$PWD/GuiInterface/IFromGui.h \
     $$PWD/GuiInterface/INlc.h \
@@ -26,7 +26,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/GuiInterface/IScan.h \
     $$PWD/GuiInterface/IToGui.h \
     $$PWD/GuiInterface/config_libgotvptop.h \
-    $$PWD/AppTargetOsConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseInfo.h \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseInfoDb.h \
@@ -283,6 +283,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 
 
 SOURCES += \
+    $$PWD/GuiInterface/IDefs.cpp \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseInfoDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseMgr.cpp \

@@ -58,7 +58,7 @@ FT_BEGIN_HEADER
   /*************************************************************************/
 
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define SIZEOF_INT 4
 #define SIZEOF_LONG 4

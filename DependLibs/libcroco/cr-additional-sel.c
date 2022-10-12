@@ -22,7 +22,7 @@
  *
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include "cr-additional-sel.h"
 #include "string.h"
 

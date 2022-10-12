@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #if defined(TARGET_OS_WINDOWS)
 # define WEBRTC_WIN

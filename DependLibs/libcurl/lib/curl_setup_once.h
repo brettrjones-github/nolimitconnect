@@ -26,7 +26,7 @@
 /*
  * Inclusion of common header files.
  */
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #define HAVE_RECV 1 // all oses we support have recv()
 
 #include <stdio.h>

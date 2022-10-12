@@ -1,10 +1,10 @@
 
 INCLUDEPATH += $$PWD/DependLibs/libzip/
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libzip/config_libzip.h \
     $$PWD/DependLibs/libzip/zip.h \
     $$PWD/DependLibs/libzip/zipint.h \

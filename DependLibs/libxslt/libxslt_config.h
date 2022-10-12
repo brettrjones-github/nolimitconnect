@@ -10,7 +10,7 @@
 #ifndef _LIBXSLT_CONFIG_H_
 #define _LIBXSLT_CONFIG_H_
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 
 	/**

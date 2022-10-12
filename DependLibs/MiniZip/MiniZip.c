@@ -12,7 +12,7 @@
          Copyright (C) 2009-2010 Mathias Svensson ( http://result42.com )
 */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 
 #if (!defined(_WIN32)) && (!defined(WIN32)) && (!defined(__APPLE__)) && (!defined(IOAPI_NO_64))

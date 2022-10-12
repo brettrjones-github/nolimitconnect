@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #ifdef TARGET_OS_WINDOWS
 # define _UWIN		1

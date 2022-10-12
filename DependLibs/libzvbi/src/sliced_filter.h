@@ -24,7 +24,7 @@
 #ifndef __ZVBI_SLICED_FILTER_H__
 #define __ZVBI_SLICED_FILTER_H__
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include "macros.h"
 #include "bcd.h"

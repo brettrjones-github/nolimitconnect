@@ -1,7 +1,7 @@
 #ifndef _PCRE_CONFIG_H_
 #define _PCRE_CONFIG_H_
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* If you are compiling for a system that uses EBCDIC instead of ASCII
 character codes, define this macro as 1. On systems that can use "configure",

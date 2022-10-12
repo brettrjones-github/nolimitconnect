@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #define ZIP_EXTERN		NLC_EXTERN
 #define ZIP_EXPORT		NLC_EXPORT
 #define Z_NULL			0

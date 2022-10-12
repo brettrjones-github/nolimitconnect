@@ -20,7 +20,7 @@
 #ifndef __MFXVIDEO_H__
 #define __MFXVIDEO_H__
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include "mfxsession.h"
 #include "mfxvstructures.h"

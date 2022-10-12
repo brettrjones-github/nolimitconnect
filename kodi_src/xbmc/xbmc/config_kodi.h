@@ -19,7 +19,7 @@
  */
 
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #ifndef NPT_CONFIG_ENABLE_LOGGING
 # define NPT_CONFIG_ENABLE_LOGGING
@@ -89,7 +89,7 @@
 #if defined(TARGET_OS_ANDROID)
 #undef HAS_LINUX_EVENTS
 #undef HAS_LIRC
-//#define HAS_ZEROCONF // Defined in AppCompilerConfig.h
+//#define HAS_ZEROCONF // Defined in NlcCompilerConfig.h
 //# if defined(HAVE_QT_GUI)
 //#  define HAS_AVAHI
 //# endif // defined(HAVE_QT_GUI)

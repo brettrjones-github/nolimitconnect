@@ -1,9 +1,9 @@
 $$PWD/DependLibs/libasprintf/
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libasprintf/alloca.in.h \
     $$PWD/DependLibs/libasprintf/autosprintf.h \
     $$PWD/DependLibs/libasprintf/config_libasprintf.h \

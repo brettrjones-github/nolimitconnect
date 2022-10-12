@@ -29,7 +29,7 @@
  *of the #CRNum class.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include "cr-num.h"
 #include "string.h"
 

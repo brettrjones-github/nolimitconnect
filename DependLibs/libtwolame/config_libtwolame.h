@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #ifdef _WIN32
 # include <libtwolame/config_libtwolamewin.h>

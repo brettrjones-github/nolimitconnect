@@ -23,6 +23,6 @@ include(libgnu.pri)
 PRE_TARGETDEPS += $$PWD/libssl.pro
 
 HEADERS += \
-    AppCompilerConfig.h \
-    AppCpuArchDefines.h \
-    AppDependLibrariesConfig.h
+    NlcCompilerConfig.h \
+    NlcCpuArchDefines.h \
+    NlcDependLibrariesConfig.h

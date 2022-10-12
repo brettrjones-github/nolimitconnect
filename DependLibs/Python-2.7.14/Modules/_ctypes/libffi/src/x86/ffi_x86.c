@@ -28,7 +28,7 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#include "AppCpuArchDefines.h"
+#include "NlcCpuArchDefines.h"
 #if !defined(_MSC_VER) && ARCH_X86 && ARCH_32_BITS
 
 

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define SPEEX_EXPORT	NLC_EXPORT
 

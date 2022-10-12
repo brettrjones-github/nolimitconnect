@@ -1,9 +1,9 @@
-HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
+HEADERS += 	$$PWD/../../../../NlcCompilerConfig.h \
 	$$PWD/../../../../NlcConfig.h \
-	$$PWD/../../../../AppCpuArchDefines.h \
-	$$PWD/../../../../AppDependLibrariesConfig.h \
+	$$PWD/../../../../NlcCpuArchDefines.h \
+	$$PWD/../../../../NlcDependLibrariesConfig.h \
 	$$PWD/../../../../NlcFeaturesConfig.h \
-	$$PWD/../../../../AppTargetOsConfig.h \
+	$$PWD/../../../../NlcTargetOsConfig.h \
 	$$PWD/../../../../base64.h \
 	$$PWD/../../../../byteswap.h \
 	$$PWD/../../../../dirent.h \

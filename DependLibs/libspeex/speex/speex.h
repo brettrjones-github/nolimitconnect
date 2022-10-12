@@ -39,7 +39,7 @@
  *  @{
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <libspeex/speex/speex_bits.h>
 #include <libspeex/speex/speex_types.h>

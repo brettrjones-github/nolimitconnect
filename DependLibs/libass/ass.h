@@ -19,7 +19,7 @@
 
 #ifndef LIBASS_ASS_H
 #define LIBASS_ASS_H
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <stdio.h>
 #include <stdarg.h>

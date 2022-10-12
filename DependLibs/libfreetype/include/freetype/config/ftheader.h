@@ -18,7 +18,7 @@
 #ifndef FTHEADER_H_
 #define FTHEADER_H_
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #define FT_DEBUG_LEVEL_ERROR 1
 #define FT_DEBUG_LEVEL_TRACE 1
 #define FT2_BUILD_LIBRARY 1

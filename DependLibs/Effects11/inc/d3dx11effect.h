@@ -14,7 +14,7 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-//#include <AppDependLibrariesConfig.h>
+//#include <NlcDependLibrariesConfig.h>
 #ifdef TARGET_OS_WINDOWS
 
 #define D3DX11_EFFECTS_VERSION 1117

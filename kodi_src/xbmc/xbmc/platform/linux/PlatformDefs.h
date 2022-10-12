@@ -182,8 +182,8 @@ typedef struct _TIME_ZONE_INFORMATION {
 #define THREAD_PRIORITY_ABOVE_NORMAL    (THREAD_PRIORITY_HIGHEST-1)
 
 // Network
-//#define SOCKET_ERROR (-1) // defined in AppCompilerConfig.h
-//#define INVALID_SOCKET (~0) // defined in AppCompilerConfig.h
+//#define SOCKET_ERROR (-1) // defined in NlcCompilerConfig.h
+//#define INVALID_SOCKET (~0) // defined in NlcCompilerConfig.h
 #define closesocket(s)  close(s)
 #if !defined( ioctlsocket )
 # define ioctlsocket(s, f, v) ioctl(s, f, v)

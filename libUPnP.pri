@@ -11,10 +11,10 @@ win32{
 INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32
 }
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptArray.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptAutomaticCleaner.h \

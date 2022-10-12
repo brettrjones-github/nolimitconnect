@@ -92,7 +92,7 @@
  *****************************************************************************/
 
 #ifdef TARGET_OS_WINDOWS
-#include <AppCompilerConfig.h>
+#include <NlcCompilerConfig.h>
 //#include <winnt.h>
 #include <stdio.h>
 //#include <stdarg.h>

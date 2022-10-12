@@ -30,7 +30,7 @@
  *
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <string.h>
 

@@ -64,7 +64,7 @@
 */
 
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <stdio.h>
 #include <stdlib.h>

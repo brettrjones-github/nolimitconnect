@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 
@@ -52,7 +52,7 @@
 #define HAVE_SYS_IOCTL_H 1
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-//#define HAVE_SYS_SOCKET_H 1 //defined in AppCompilerConfig.h
+//#define HAVE_SYS_SOCKET_H 1 //defined in NlcCompilerConfig.h
 
 /* Define to 1 if you have the <sys/sockio.h> header file. */
 /* #undef HAVE_SYS_SOCKIO_H */

@@ -3,9 +3,9 @@ INCLUDEPATH += $$PWD/DependLibs/libilbc/include
 
 
 
-HEADERS += 	$$PWD/DependLibs/libilbc/../../AppCompilerConfig.h \
-    $$PWD/DependLibs/libilbc/../../AppCpuArchDefines.h \
-    $$PWD/DependLibs/libilbc/../../AppDependLibrariesConfig.h \
+HEADERS += 	$$PWD/DependLibs/libilbc/../../NlcCompilerConfig.h \
+    $$PWD/DependLibs/libilbc/../../NlcCpuArchDefines.h \
+    $$PWD/DependLibs/libilbc/../../NlcDependLibrariesConfig.h \
     $$PWD/DependLibs/libilbc/ilbc/abs_quant.h \
     $$PWD/DependLibs/libilbc/ilbc/abs_quant_loop.h \
     $$PWD/DependLibs/libilbc/ilbc/augmented_cb_corr.h \

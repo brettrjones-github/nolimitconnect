@@ -20,7 +20,7 @@
  * See COPYRIGHTS file for copyrights information.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <stdio.h>
 #include "cr-attr-sel.h"
 

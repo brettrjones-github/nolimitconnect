@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define VBI_BEGIN_DECLS		NLC_BEGIN_CDECLARES
 #define VBI_END_DECLS		NLC_END_CDECLARES

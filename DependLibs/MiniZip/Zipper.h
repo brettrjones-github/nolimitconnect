@@ -20,7 +20,7 @@
 // http://zlibce.codeplex.com/SourceControl/latest#zlibSampleCS/Program.cs
 // for wrappers of zlib
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxThread.h>

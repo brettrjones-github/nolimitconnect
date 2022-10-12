@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define	    NO_LIMIT_OPUS_SIGNITURE "nolimitconnect.com v"
 #define	    NO_LIMIT_OPUS_SIGNITURE_LEN 20

@@ -20,7 +20,7 @@
  * USA
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include "string.h"
 #include "cr-stylesheet.h"
 

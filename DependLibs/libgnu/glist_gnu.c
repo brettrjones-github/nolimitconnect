@@ -32,7 +32,7 @@
  * MT safe
  */
 
-#include "AppDependLibrariesConfig.h"
+#include "NlcDependLibrariesConfig.h"
 
 #include "glib.h"
 #if 0

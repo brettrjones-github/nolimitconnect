@@ -124,7 +124,7 @@ int ssh_file_readaccess_ok(const char *file) {
 }
 
 #ifndef TARGET_OS_WINDOWS
-// already define in AppCompilerConfig.h
+// already define in NlcCompilerConfig.h
 
 #define SSH_USEC_IN_SEC         1000000LL
 #define SSH_SECONDS_SINCE_1601  11644473600LL

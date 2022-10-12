@@ -1,7 +1,7 @@
 /* opensslconf.h */
 /* WARNING: Generated automatically from opensslconf.h.in by Configure. */
 
-#include "AppCpuArchDefines.h"
+#include "NlcCpuArchDefines.h"
 
 #ifdef  __cplusplus
 extern "C" {

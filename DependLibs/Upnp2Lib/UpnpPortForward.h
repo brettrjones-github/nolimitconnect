@@ -14,7 +14,7 @@
 // http://www.p2panarchy.com
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/VxThread.h>

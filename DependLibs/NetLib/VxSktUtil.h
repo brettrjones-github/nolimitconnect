@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #ifdef TARGET_OS_WINDOWS
 # include "WS2tcpip.h"
 #endif // TARGET_OS_WINDOWS

@@ -28,7 +28,7 @@
  * Modified by Bruno Haible for use as a gnulib module.
  */
 
-#include "AppDependLibrariesConfig.h"
+#include "NlcDependLibrariesConfig.h"
 
 #include "glib.h"
 #include <CoreLib/VxDebug.h>

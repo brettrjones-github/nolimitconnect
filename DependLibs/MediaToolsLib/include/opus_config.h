@@ -1,5 +1,5 @@
 #pragma once
-# include <AppDependLibrariesConfig.h>
+# include <NlcDependLibrariesConfig.h>
 
 #define OPUSTOOLS             1
 #define SPX_RESAMPLE_EXPORT

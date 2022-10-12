@@ -1,7 +1,7 @@
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/liblzma/api/lzma.h \
     $$PWD/DependLibs/liblzma/api/lzma/base.h \
     $$PWD/DependLibs/liblzma/api/lzma/bcj.h \

@@ -1,5 +1,5 @@
 #pragma once
-#include "AppDependLibrariesConfig.h"
+#include "NlcDependLibrariesConfig.h"
 #include "kodi_src/xbmc/xbmc/config_kodi.h"
 #if 0
 

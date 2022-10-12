@@ -19,7 +19,7 @@
  * See COPYRIGHTS file for copyrights information.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-prop-list.h"
 

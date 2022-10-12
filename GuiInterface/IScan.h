@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-//#include <AppDependLibrariesConfig.h>
+//#include <NlcDependLibrariesConfig.h>
 #include <GuiInterface/IDefs.h>
 
 class VxSktBase;

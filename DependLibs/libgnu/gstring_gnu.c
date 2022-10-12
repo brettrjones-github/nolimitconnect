@@ -32,7 +32,7 @@
  * MT safe
  */
 
-#include "AppDependLibrariesConfig.h"
+#include "NlcDependLibrariesConfig.h"
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>

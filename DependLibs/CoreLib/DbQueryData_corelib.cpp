@@ -41,7 +41,7 @@
 # define PRIuS       "Iu"
 # define PRId64       "lld"
 #else
-//# define PRIdS       "d" // defined in AppCompilerConfig.h
+//# define PRIdS       "d" // defined in NlcCompilerConfig.h
 # define PRIuS       "u"
 # ifndef PRId64
 #  define PRId64       "lld"

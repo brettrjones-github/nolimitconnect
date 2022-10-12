@@ -1,6 +1,6 @@
 // from code project
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <memory.h>
 #include <assert.h>

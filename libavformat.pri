@@ -98,10 +98,10 @@ HEADERS += 	$$PWD/DependLibs/ffmpeg/libavformat/aiff.h \
     $$PWD/DependLibs/ffmpeg/libavformat/rtmp_avformat.h \
     $$PWD/DependLibs/ffmpeg/libavformat/rtmp_log_avformat.h \
     $$PWD/DependLibs/ffmpeg/config_ffmpeg.h \
-    $$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h
+    $$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h
 
 SOURCES += 	$$PWD/DependLibs/ffmpeg/libavformat/3dostr.c \
     $$PWD/DependLibs/ffmpeg/libavformat/4xm.c \

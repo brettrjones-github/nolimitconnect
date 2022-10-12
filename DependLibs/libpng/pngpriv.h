@@ -46,7 +46,7 @@
 #define PNGLIB_BUILD /*libpng is being built, not used*/
 
 /* If HAVE_CONFIG_H is defined during the build then the build system must
- * provide an appropriate "AppDependLibrariesConfig.h" file on the include path.  The header file
+ * provide an appropriate "NlcDependLibrariesConfig.h" file on the include path.  The header file
  * must provide definitions as required below (search for "HAVE_CONFIG_H");
  * see configure.ac for more details of the requirements.  The macro
  * "PNG_NO_CONFIG_H" is provided for maintainers to test for dependencies on

@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #define CONFIG_BIGINT_BARRETT 1
 #define CONFIG_BIGINT_CRT 1

@@ -28,7 +28,7 @@
 #elif defined(HAVE_EXPAT_CONFIG_H)
 #include <expat_config.h>
 #else
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #endif /* ndef WIN32 */
 
 #include "ascii.h"

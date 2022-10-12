@@ -16,10 +16,10 @@ win32{
 INCLUDEPATH += $$PWD/DependLibs/MediaToolsLib/opus/win32
 }
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/MediaToolsLib/AviDefs.h \
     $$PWD/DependLibs/MediaToolsLib/MJPEGReader.h \
     $$PWD/DependLibs/MediaToolsLib/MJPEGWriter.h \

@@ -18,7 +18,7 @@
 
 #ifndef VO_AMRWBENC_ENC_IF_H
 #define VO_AMRWBENC_ENC_IF_H
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #ifdef __cplusplus
 extern "C" {

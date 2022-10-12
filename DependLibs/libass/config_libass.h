@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <CoreLib/VxMathDef.h>
 
 //#define CONFIG_HARFBUZZ 0

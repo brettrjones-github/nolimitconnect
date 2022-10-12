@@ -2,7 +2,7 @@
 #ifndef _LIBSSH_CONFIG_WINDOWS_H
 #define _LIBSSH_CONFIG_WINDOWS_H
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Define to 1 if you have the <argp.h> header file. */
 #define HAVE_ARGP_H 1

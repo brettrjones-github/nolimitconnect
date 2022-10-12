@@ -1,6 +1,6 @@
 ﻿
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Define to 1 to enable a few rarely used encodings. */
 // I don't think we need these ( like AIX conversion )

@@ -26,7 +26,7 @@
 #ifndef TAGLIB_MAP_H
 #define TAGLIB_MAP_H
 
-#include "AppDependLibrariesConfig.h"
+#include "NlcDependLibrariesConfig.h"
 
 #include <map>
 

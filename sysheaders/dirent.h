@@ -90,7 +90,7 @@
  * First version.
  *****************************************************************************/
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #ifdef _MSC_VER
 # include <CoreLib/dirent_sim.h>

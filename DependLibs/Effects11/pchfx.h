@@ -15,7 +15,7 @@
 
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #pragma warning(disable : 4102 4127 4201 4505 4616 4706 6326)
 

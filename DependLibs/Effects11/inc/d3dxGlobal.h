@@ -14,7 +14,7 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-//#include <AppDependLibrariesConfig.h>
+//#include <NlcDependLibrariesConfig.h>
 #include <assert.h>
 #include <string.h>
 

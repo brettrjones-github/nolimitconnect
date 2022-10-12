@@ -11,7 +11,7 @@
 #ifndef COMMON_AUDIO_FIR_FILTER_NEON_H_
 #define COMMON_AUDIO_FIR_FILTER_NEON_H_
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #if defined(TARGET_OS_ANDROID) && defined(TARGET_CPU_ARM)
 
 #include <memory>

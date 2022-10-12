@@ -78,7 +78,7 @@
 #ifndef _VA_H_
 #define _VA_H_
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <stddef.h>
 #include <stdint.h>

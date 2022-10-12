@@ -39,7 +39,7 @@
 extern "C" {
 #endif
 
-#include "AppDependLibrariesConfig.h"
+#include "NlcDependLibrariesConfig.h"
 #include "bigint_impl.h"
 #include "bigint.h"
 

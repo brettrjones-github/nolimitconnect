@@ -11,10 +11,10 @@ INCLUDEPATH += $$PWD/DependLibs/libcurl/include
 INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
 
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libcurl/lib/amigaos.h \
     $$PWD/DependLibs/libcurl/lib/arpa_telnet.h \
     $$PWD/DependLibs/libcurl/lib/asyn.h \

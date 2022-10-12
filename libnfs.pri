@@ -12,9 +12,9 @@ HEADERS += 	$$PWD/DependLibs/libnfs/config_libnfs.h \
     $$PWD/DependLibs/libnfs/slist.h \
     $$PWD/DependLibs/libnfs/win32_compat.h \
     $$PWD/DependLibs/libnfs/win32_errnowrapper.h \
-    $$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h
+    $$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h
 
 SOURCES += 	$$PWD/DependLibs/libnfs/init.c \
     $$PWD/DependLibs/libnfs/libnfs-raw-mount.c \

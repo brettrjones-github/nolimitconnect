@@ -1,8 +1,8 @@
 INCLUDEPATH += $$PWD/DependLibs/libspeex
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
     $$PWD/DependLibs/libspeex/_kiss_fft_guts.h \
     $$PWD/DependLibs/libspeex/arch.h \
     $$PWD/DependLibs/libspeex/cb_search.h \

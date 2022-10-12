@@ -14,9 +14,9 @@ INCLUDEPATH += $$PWD/DependLibs/libopus/celt
 INCLUDEPATH += $$PWD/DependLibs/libopus/opus
 INCLUDEPATH += $$PWD/DependLibs/libopus/include
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
     $$PWD/DependLibs/libopus/celt/_kiss_fft_guts.h \
     $$PWD/DependLibs/libopus/celt/arch.h \
     $$PWD/DependLibs/libopus/celt/arm/armcpu.h \

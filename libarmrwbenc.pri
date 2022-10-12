@@ -3,10 +3,10 @@ INCLUDEPATH += $$PWD/DependLibs/libarmrwbenc
 INCLUDEPATH += $$PWD/DependLibs/libarmrwbenc/inc
 INCLUDEPATH += $$PWD/DependLibs/libarmrwbenc/common/include
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libarmrwbenc/SoftAMRWBEncoder.h \
     $$PWD/DependLibs/libarmrwbenc/common/include/cmnMemory.h \
     $$PWD/DependLibs/libarmrwbenc/common/include/voAAC.h \

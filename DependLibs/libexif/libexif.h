@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #define EXIF_EXPORT		NLC_EXPORT
 
 #ifdef __cplusplus

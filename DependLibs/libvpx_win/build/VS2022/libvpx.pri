@@ -1,7 +1,7 @@
-HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
-	$$PWD/../../../../AppCpuArchDefines.h \
-	$$PWD/../../../../AppDependLibrariesConfig.h \
-	$$PWD/../../../../AppTargetOsConfig.h \
+HEADERS += 	$$PWD/../../../../NlcCompilerConfig.h \
+	$$PWD/../../../../NlcCpuArchDefines.h \
+	$$PWD/../../../../NlcDependLibrariesConfig.h \
+	$$PWD/../../../../NlcTargetOsConfig.h \
 	$$PWD/../../config_libvpx.h \
 	$$PWD/../../config_libvpx_linux.h \
 	$$PWD/../../config_libvpx_win32.h \

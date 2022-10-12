@@ -4,10 +4,10 @@ INCLUDEPATH += $NDK_MODULE_PATH
 INCLUDEPATH += $NDK_MODULE_PATH
 }
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libwebp/config_libwebp.h \
     $$PWD/DependLibs/libwebp/src/dec/alphai_dec.h \
     $$PWD/DependLibs/libwebp/src/dec/common_dec.h \

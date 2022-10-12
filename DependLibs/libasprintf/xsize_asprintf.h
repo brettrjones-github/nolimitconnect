@@ -17,7 +17,7 @@
 
 #ifndef _XSIZE_H
 #define _XSIZE_H
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Get size_t.  */
 #include <stddef.h>

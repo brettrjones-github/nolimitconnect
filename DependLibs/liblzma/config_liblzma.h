@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 # define LZMA_API_EXPORT		NLC_EXPORT
 # define LZMA_RESTRICT			NLC_RESTRICT

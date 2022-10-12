@@ -119,7 +119,7 @@
 #  endif /* HAVE__VSNPRINTF_S */
 
 #ifndef TARGET_OS_WINDOWS
-// already define in AppCompilerConfig.h
+// already define in NlcCompilerConfig.h
 struct timeval;
 int gettimeofday(struct timeval *__p, void *__t);
 #endif // TARGET_OS_WINDOWS

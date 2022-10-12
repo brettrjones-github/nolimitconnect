@@ -41,7 +41,7 @@
 
 #ifdef TARGET_OS_WINDOWS
 //# define WIN32_LEAN_AND_MEAN
-//# include <windows.h> // include in AppCompilerConfig.h
+//# include <windows.h> // include in NlcCompilerConfig.h
 #endif
 
 #ifdef __EMX__

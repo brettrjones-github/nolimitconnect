@@ -38,7 +38,7 @@
  *************************************************************************************
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <string.h>
 #include <stdlib.h>

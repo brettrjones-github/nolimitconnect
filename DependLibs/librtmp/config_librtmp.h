@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 //#define USE_GNUTLS		1
 #define USE_OPENSSL			1

@@ -66,10 +66,10 @@ HEADERS += 	$$PWD/DependLibs/ffmpeg/libavfilter/af_afir.h \
     $$PWD/DependLibs/ffmpeg/libavfilter/w3fdif.h \
     $$PWD/DependLibs/ffmpeg/libavfilter/window_func.h \
     $$PWD/DependLibs/ffmpeg/libavfilter/yadif.h \
-    $$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h
+    $$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h
 
 SOURCES += 	    $$PWD/DependLibs/ffmpeg/libavfilter/allfilters.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \

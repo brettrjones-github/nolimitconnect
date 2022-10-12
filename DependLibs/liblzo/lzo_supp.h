@@ -69,7 +69,7 @@
 #define HAVE_STDLIB_H 1
 #define HAVE_STRING_H 1
 #define HAVE_TIME_H 1
-//#define HAVE_UNISTD_H 1 // defined in AppCompilerConfig.h
+//#define HAVE_UNISTD_H 1 // defined in NlcCompilerConfig.h
 #define HAVE_UTIME_H 1
 #define HAVE_SYS_STAT_H 1
 #define HAVE_SYS_TIME_H 1

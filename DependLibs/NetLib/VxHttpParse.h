@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <CoreLib/VxTextStreamReader.h>
 #include <CoreLib/VxBuffer.h>

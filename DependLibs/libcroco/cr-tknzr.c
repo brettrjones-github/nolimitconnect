@@ -27,7 +27,7 @@
  *class.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include "string.h"
 #include "cr-tknzr.h"
 #include "cr-doc-handler.h"

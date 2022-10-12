@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* vc++/config.h - manually adapted from include/config.h.in */
 

@@ -27,7 +27,7 @@
 #ifndef AVCODEC_LIBWEBPENC_COMMON_H
 #define AVCODEC_LIBWEBPENC_COMMON_H
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <libwebp/src/webp/encode.h>
 

@@ -1,10 +1,10 @@
-HEADERS += 	$$PWD/../../../../AppCompilerConfig.h \
+HEADERS += 	$$PWD/../../../../NlcCompilerConfig.h \
 	$$PWD/../../../../NlcCompilerIntTypes.h \
 	$$PWD/../../../../NlcConfig.h \
-	$$PWD/../../../../AppCpuArchDefines.h \
-	$$PWD/../../../../AppDependLibrariesConfig.h \
+	$$PWD/../../../../NlcCpuArchDefines.h \
+	$$PWD/../../../../NlcDependLibrariesConfig.h \
 	$$PWD/../../../../NlcFeaturesConfig.h \
-	$$PWD/../../../../AppTargetOsConfig.h \
+	$$PWD/../../../../NlcTargetOsConfig.h \
 	$$PWD/../../src/bitstream.h \
 	$$PWD/../../src/cabac.h \
 	$$PWD/../../src/cfg.h \

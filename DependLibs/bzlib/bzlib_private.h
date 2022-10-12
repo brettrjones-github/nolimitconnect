@@ -22,7 +22,7 @@
 #ifndef _BZLIB_PRIVATE_H
 #define _BZLIB_PRIVATE_H
 
-#include <AppCompilerConfig.h>
+#include <NlcCompilerConfig.h>
 
 #include <stdlib.h>
 

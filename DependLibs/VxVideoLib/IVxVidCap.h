@@ -14,7 +14,7 @@
 // http://www.p2panarchy.com
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 // from fourcc.org 
 #define FOURCC_RGB		0x32424752

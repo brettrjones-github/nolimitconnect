@@ -21,7 +21,7 @@
  * See  COPYRIGHTS file for copyright informations.
  */
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-sel-eng.h"
 

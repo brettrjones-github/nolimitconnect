@@ -33,7 +33,7 @@
 #ifndef WELS_VIDEO_CODEC_DEFINITION_H__
 #define WELS_VIDEO_CODEC_DEFINITION_H__
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /**
   * @file  codec_def.h

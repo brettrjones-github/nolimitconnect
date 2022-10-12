@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #if 0 // moved to VxTime.cpp
 #ifdef TARGET_OS_ANDROID

@@ -23,7 +23,7 @@
 #ifndef AVCODEC_OPUS_H
 #define AVCODEC_OPUS_H
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <stdint.h>
 

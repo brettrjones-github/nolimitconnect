@@ -9,9 +9,9 @@ INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/src
 INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/include
 INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/
 
-HEADERS += 	$$PWD/DependLibs/libopencore-amr/../../AppCompilerConfig.h \
-    $$PWD/DependLibs/libopencore-amr/../../AppCpuArchDefines.h \
-    $$PWD/DependLibs/libopencore-amr/../../AppDependLibrariesConfig.h \
+HEADERS += 	$$PWD/DependLibs/libopencore-amr/../../NlcCompilerConfig.h \
+    $$PWD/DependLibs/libopencore-amr/../../NlcCpuArchDefines.h \
+    $$PWD/DependLibs/libopencore-amr/../../NlcDependLibrariesConfig.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/abs_s.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/add.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/az_lsp.h \

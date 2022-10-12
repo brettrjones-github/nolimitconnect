@@ -1,4 +1,4 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 # include <libvpx/vpx_scale_rtcd.h>

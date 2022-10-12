@@ -23,7 +23,7 @@ THE SOFTWARE.
 */
 
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <iostream>
 #include <vector>

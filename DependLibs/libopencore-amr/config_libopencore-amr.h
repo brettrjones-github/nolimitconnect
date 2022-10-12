@@ -1,5 +1,5 @@
 #pragma once
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include <libopencore-amr/oscl/oscl_base_macros.h>
 #include <libopencore-amr/oscl/oscl_base.h>
 #include <libopencore-amr/oscl/oscl_mem.h>

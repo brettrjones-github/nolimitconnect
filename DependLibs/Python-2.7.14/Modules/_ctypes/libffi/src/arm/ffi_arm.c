@@ -28,7 +28,7 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#include "AppCpuArchDefines.h"
+#include "NlcCpuArchDefines.h"
 #if ARCH_ARM
 
 #include <ffi.h>

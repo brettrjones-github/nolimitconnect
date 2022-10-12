@@ -2,10 +2,10 @@ DEFINES += GLIB_COMPILATION _MBCS __need_nettle_getopt BUILD_GNU_INTERNAL
 
 INCLUDEPATH += $$PWD/DependLibs/libgnu
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/libgnu/abstract_gnu.h \
     $$PWD/DependLibs/libgnu/accelerated/accelerated.h \
     $$PWD/DependLibs/libgnu/accelerated/cryptodev.h \

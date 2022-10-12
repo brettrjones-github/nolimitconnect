@@ -5,11 +5,11 @@ INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/modes
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/asn1
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/evp
 
-HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../AppCommonConfig.h \
-    $$PWD/AppCompilerConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../NlcCommonConfig.h \
+    $$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/config_appcorelibs.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/apps.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/progs.h \

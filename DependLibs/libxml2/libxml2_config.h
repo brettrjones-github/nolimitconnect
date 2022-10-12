@@ -1,7 +1,7 @@
 #ifndef LIBXML2_CONFIG_H
 #define LIBXML2_CONFIG_H
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Version number of package */
 #define VERSION "2.7.6"

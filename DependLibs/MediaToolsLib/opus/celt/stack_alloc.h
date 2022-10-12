@@ -32,7 +32,7 @@
 #pragma once
 
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 #include "opus_types.h"
 #include "opus_defines.h"
 

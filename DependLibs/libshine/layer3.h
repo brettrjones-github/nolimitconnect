@@ -1,7 +1,7 @@
 #ifndef LAYER3_H
 #define LAYER3_H
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 #include <stdint.h>
 

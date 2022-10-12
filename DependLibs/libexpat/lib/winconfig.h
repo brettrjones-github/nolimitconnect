@@ -11,7 +11,7 @@
 #define WINCONFIG_H_
 
 // cannot include AppDependLibrariesConfig because of name clash with EXP_ELEMENT_TYPE
-//#include <AppDependLibrariesConfig.h>
+//#include <NlcDependLibrariesConfig.h>
 
 //#ifdef TARGET_OS_WINDOWS
 

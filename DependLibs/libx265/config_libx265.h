@@ -24,7 +24,7 @@
 #ifndef X265_CONFIG_H_
 #define X265_CONFIG_H_
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 
 /* Incremented each time public API is changed, X265_BUILD is used as
  * the shared library SONAME on platforms which support it. It also

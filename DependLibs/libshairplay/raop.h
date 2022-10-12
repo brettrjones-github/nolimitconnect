@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AppDependLibrariesConfig.h>
+#include <NlcDependLibrariesConfig.h>
 # define RAOP_API	NLC_API
 
 #ifdef __cplusplus

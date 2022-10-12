@@ -2,11 +2,11 @@
 DEFINES += "STATICLIB"
 DEFINES += "SQLITE_OMIT_LOAD_EXTENSION"
 
-HEADERS += 	$$PWD/AppCompilerConfig.h \
-    $$PWD/AppCommonConfig.h \
-    $$PWD/AppCpuArchDefines.h \
-    $$PWD/AppDependLibrariesConfig.h \
-    $$PWD/AppTargetOsConfig.h \
+HEADERS += 	$$PWD/NlcCompilerConfig.h \
+    $$PWD/NlcCommonConfig.h \
+    $$PWD/NlcCpuArchDefines.h \
+    $$PWD/NlcDependLibrariesConfig.h \
+    $$PWD/NlcTargetOsConfig.h \
     $$PWD/DependLibs/CoreLib/AppErr.h \
     $$PWD/DependLibs/CoreLib/AssetDefs.h \
 	$$PWD/DependLibs/CoreLib/BinaryBlob.h \
