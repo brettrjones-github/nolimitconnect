@@ -12,10 +12,8 @@ class CAppParamParser;
 class OsInterface
 {
 public:
-    OsInterface( INlc& gotv );
+    OsInterface() = default;
     virtual ~OsInterface() = default;
-
-    INlc&                      getINlc() { return m_INlc; }
 
     // exit of application error code
     virtual void                setRunResultCode( int exitCode )    { m_RunResultCode = exitCode; }
@@ -39,7 +37,6 @@ public:
 
 
 protected:
-    INlc&                       m_INlc;
     const CAppParamParser*      m_CmdLineParams = nullptr;
     int                         m_RunResultCode = 0;
 };

@@ -730,14 +730,16 @@ enum EPluginType
 
     ePluginTypeAdmin			    = 1,	//!< Administration ( intended for updates but not currently used )
     ePluginTypeAboutMePageServer    = 2,	//!< about me web page plugin
-    ePluginTypeCamServer            = 3,	//!< Web cam broadcast plugin
-    ePluginTypeFileShareServer      = 4,	//!< Shared files server
-    ePluginTypePersonFileXfer       = 5,	//!< Offer/accept send a file person to person
-    ePluginTypeMessenger            = 6,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeStoryboardServer     = 7,	//!< User editable story board web page server
+    ePluginTypeStoryboardServer     = 3,	//!< User editable story board web page server
+    ePluginTypeCamServer            = 4,	//!< Web cam broadcast plugin
+    ePluginTypeFileShareServer      = 5,	//!< Shared files server
+
+    ePluginTypePersonFileXfer       = 6,	//!< Offer/accept send a file person to person
+    ePluginTypeMessenger            = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
     ePluginTypeTruthOrDare          = 8,	//!< Video Chat Truth Or Dare game  
     ePluginTypeVideoPhone           = 9,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone           = 10,	//!< VOIP audio only phone call
+
     ePluginTypePushToTalk           = 11,	//!< VOIP audio push to talk
 
     ePluginTypeClientGroup          = 12,	//!< group client
@@ -761,6 +763,7 @@ enum EPluginType
     // plugins 0-47 are part of PktAnnounce
     // plugins after 47 are system plugins and do not go out in announcement pkt
     eMaxUserPluginType              = 48, // this marks end of announced permission
+
     ePluginTypeCameraService,
     ePluginTypeMJPEGReader,
     ePluginTypeMJPEGWriter,

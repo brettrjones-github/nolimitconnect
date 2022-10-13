@@ -40,6 +40,12 @@ public:
     static IToGui&              getToGui();
     static IAudioRequests&      getAudioRequests();
 
+	virtual void                toGuiSetIsAppModuleRunning( EAppModule appModule, bool isRunning ) = 0;
+	virtual bool                toGuiGetIsAppModuleRunning( EAppModule appModule ) = 0;
+	virtual bool                toGuiRunModule( EAppModule appModule ) = 0;
+
+	virtual void                toGuiCreateUserDirs( void ) = 0;
+
     virtual void				toGuiPlayNlcMedia( AssetBaseInfo * assetInfo ) = 0;
 
 	/// Send log message to GUI

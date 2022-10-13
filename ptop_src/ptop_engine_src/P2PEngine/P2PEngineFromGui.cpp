@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "P2PEngine.h"
-#include "GuiInterface/INlc.h"
+#include "GuiInterface/IToGui.h"
 
 #include "P2PConnectList.h"
 #include "../NetServices/NetServicesMgr.h"

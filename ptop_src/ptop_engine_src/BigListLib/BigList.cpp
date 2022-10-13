@@ -17,7 +17,7 @@
 #include <ptop_src/ptop_engine_src/BigListLib/BigList.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-#include <GuiInterface/INlc.h>
+#include <GuiInterface/IToGui.h>
 
 #include <string.h>
 

@@ -1,7 +1,6 @@
-#include <CommonHdr.h>
-#include "OsInterface.h"
 
-#include "GuiInterface/INlc.h"
+#include "OsInterface.h"
+#include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
@@ -224,13 +223,6 @@ bool CopyIfRequiredAssetDirectory( std::string assetFileDir, std::string destDir
 #endif // ENABLE_KODI
 
 //============================================================================
-OsInterface::OsInterface( INlc& gotv )
-    : m_INlc( gotv )
-    , m_RunResultCode( 0 )
-{
-}
-
-//============================================================================
 bool OsInterface::initRun( const CAppParamParser& cmdLineParams )
 {
     m_CmdLineParams = &cmdLineParams;
@@ -242,9 +234,9 @@ bool OsInterface::initRun( const CAppParamParser& cmdLineParams )
 bool OsInterface::doRun( EAppModule appModule )
 {
     LogModule(eLogStartup, LOG_VERBOSE, "OsInterface::doRun");
-    if( !m_INlc.getIsAppModuleRunning( appModule ) )
+    if( !IToGui::getToGui().toGuiGetIsAppModuleRunning( appModule ) )
     {
-        m_INlc.setIsAppModuleRunning( appModule, true );
+        IToGui::getToGui().toGuiSetIsAppModuleRunning( appModule, true );
 #if ENABLE_KODI
         if( eAppModuleKodi == appModule )
         {
@@ -688,7 +680,6 @@ bool OsInterface::initUserPaths()
 }
 
 //============================================================================
-
 bool OsInterface::initDirectories()
 {
 #if ENABLE_KODI
@@ -725,7 +716,7 @@ bool OsInterface::initDirectories()
 	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( nolimitDir, "nolimitxfer" ) );
 #endif // ENABLE_KODI  
 
-    m_INlc.createUserDirs();
+    IToGui::getToGui().toGuiCreateUserDirs();
 
     return true;
 }

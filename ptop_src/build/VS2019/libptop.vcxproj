@@ -432,6 +432,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GuiInterface\IDefs.cpp" />
+    <ClCompile Include="..\..\..\GuiInterface\ILog.cpp" />
+    <ClCompile Include="..\..\..\GuiInterface\OsInterface\OsInterface.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseMgr.cpp" />
@@ -729,22 +731,18 @@
     <ClCompile Include="..\..\ptop_engine_src\User\User.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\User\UserList.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\WebPageMgr\WebPageMgr.cpp" />
-    <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h" />
-    <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h" />
     <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h" />
     <ClInclude Include="..\..\..\GuiInterface\IDefs.h" />
     <ClInclude Include="..\..\..\GuiInterface\IFromGui.h" />
-    <ClInclude Include="..\..\..\GuiInterface\IGoTv.h" />
-    <ClInclude Include="..\..\..\GuiInterface\IGoTvEvents.h" />
-    <ClInclude Include="..\..\..\GuiInterface\IGoTvGeometry.h" />
-    <ClInclude Include="..\..\..\GuiInterface\IGoTvLib.h" />
-    <ClInclude Include="..\..\..\GuiInterface\IGoTvRender.h" />
     <ClInclude Include="..\..\..\GuiInterface\ILog.h" />
+    <ClInclude Include="..\..\..\GuiInterface\INlcEvents.h" />
+    <ClInclude Include="..\..\..\GuiInterface\INlcGeometry.h" />
+    <ClInclude Include="..\..\..\GuiInterface\INlcRender.h" />
     <ClInclude Include="..\..\..\GuiInterface\IScan.h" />
     <ClInclude Include="..\..\..\GuiInterface\IToGui.h" />
+    <ClInclude Include="..\..\..\GuiInterface\NlcRenderFrame.h" />
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh" />
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h" />
-    <ClInclude Include="..\..\..\GuiInterface\OsWin32\IWin32.h" />
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfoDb.h" />

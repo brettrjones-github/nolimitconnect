@@ -15,8 +15,7 @@
 
 #include "RunUrlAction.h"
 
-#include <GuiInterface/INlc.h>
-#include <GuiInterface/IDefs.h>
+#include <GuiInterface/IToGui.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/NetServices/NetServiceHdr.h>

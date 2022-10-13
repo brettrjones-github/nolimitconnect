@@ -152,7 +152,7 @@ void PluginPermission::setPluginPermission( EPluginType ePluginType, EFriendStat
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "setPluginPermission index out of range %d\n", byteIdx );
+			LogMsg( LOG_ERROR, "setPluginPermission index out of range %d", byteIdx );
 		}
 	}
 }
@@ -161,34 +161,38 @@ void PluginPermission::setPluginPermission( EPluginType ePluginType, EFriendStat
 void PluginPermission::setPluginPermissionsToDefaultValues( void )	
 { 
 	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
+
 	setPluginPermission( ePluginTypeAdmin, eFriendStateAdmin );	
-
-    setPluginPermission( ePluginTypeMessenger, eFriendStateGuest );
-
     setPluginPermission( ePluginTypeAboutMePageServer, eFriendStateGuest );
-    setPluginPermission( ePluginTypeStoryboardServer, eFriendStateGuest );
-    setPluginPermission( ePluginTypeTruthOrDare, eFriendStateGuest );
-    setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
-    setPluginPermission( ePluginTypeVoicePhone, eFriendStateGuest );
-	setPluginPermission( ePluginTypePushToTalk, eFriendStateFriend );
-
+	setPluginPermission( ePluginTypeStoryboardServer, eFriendStateGuest );
     setPluginPermission( ePluginTypeCamServer, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeFileShareServer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeFileShareServer, eFriendStateIgnore );
+
     setPluginPermission( ePluginTypePersonFileXfer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeMessenger, eFriendStateGuest );
+    setPluginPermission( ePluginTypeTruthOrDare, eFriendStateFriend );
+    setPluginPermission( ePluginTypeVideoPhone, eFriendStateFriend );
+    setPluginPermission( ePluginTypeVoicePhone, eFriendStateFriend );
 
-    setPluginPermission( ePluginTypeClientChatRoom, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
-    setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeClientGroup, eFriendStateIgnore );
+    setPluginPermission( ePluginTypePushToTalk, eFriendStateFriend );
+
+	setPluginPermission( ePluginTypeClientPeerUser, eFriendStateGuest );
+	setPluginPermission( ePluginTypeHostPeerUser, eFriendStateGuest );
+
+	setPluginPermission( ePluginTypeClientConnectTest, eFriendStateIgnore );
+	setPluginPermission( ePluginTypeHostConnectTest, eFriendStateIgnore );
+
+	setPluginPermission( ePluginTypeClientChatRoom, eFriendStateGuest );
+	setPluginPermission( ePluginTypeHostChatRoom, eFriendStateIgnore );
+
+    setPluginPermission( ePluginTypeClientGroup, eFriendStateGuest );
+	setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
+
     setPluginPermission( ePluginTypeClientNetwork, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeClientRandomConnect, eFriendStateGuest );
-    setPluginPermission( ePluginTypeClientPeerUser, eFriendStateGuest );
+	setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
 
-    setPluginPermission( ePluginTypeHostChatRoom, eFriendStateIgnore ); // gives guest permission to whoever is in chat room at the same time
-    setPluginPermission( ePluginTypeHostConnectTest, eFriendStateIgnore ); 
-    setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeHostRandomConnect, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeHostPeerUser, eFriendStateGuest );
+    setPluginPermission( ePluginTypeClientRandomConnect, eFriendStateGuest );
+	setPluginPermission( ePluginTypeHostRandomConnect, eFriendStateIgnore );
 
     setPluginPermission( ePluginTypeNetworkSearchList, eFriendStateIgnore );
 } 
