@@ -40,12 +40,6 @@ public:
 	virtual bool				connectForFileListDownload( VxGUID& onlineId );
 	virtual bool				onConnectForFileListDownload( VxSktBase* sktBase, VxNetIdent* netIdent );
 
-
-	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) override;
-
-	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) override;
-	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) override;
-
 	void						setSearchFileTypes( uint8_t fileTypes )				{ m_FileTypes = fileTypes; }
 	uint8_t						getSearchFileTypes( void )							{ return m_FileTypes; }
 

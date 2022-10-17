@@ -19,8 +19,8 @@
 
 //============================================================================
 FileShareXferSession::FileShareXferSession()
-: m_astrFilesToXfer()
-, m_astrFilesXfered()
+: m_FilesToXferList()
+, m_FilesXferedList()
 , m_FileXferInfo()
 , m_iPercentComplete(0)
 , m_Skt(NULL)
@@ -32,8 +32,8 @@ FileShareXferSession::FileShareXferSession()
 
 //============================================================================
 FileShareXferSession::FileShareXferSession( VxSktBase* sktBase, VxNetIdent* netIdent )
-: m_astrFilesToXfer()
-, m_astrFilesXfered()
+: m_FilesToXferList()
+, m_FilesXferedList()
 , m_FileXferInfo()
 , m_iPercentComplete(0)
 , m_Skt( sktBase )
@@ -45,8 +45,8 @@ FileShareXferSession::FileShareXferSession( VxSktBase* sktBase, VxNetIdent* netI
 
 //============================================================================
 FileShareXferSession::FileShareXferSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
-: m_astrFilesToXfer()
-, m_astrFilesXfered()
+: m_FilesToXferList()
+, m_FilesXferedList()
 , m_FileXferInfo( lclSessionId )
 , m_iPercentComplete(0)
 , m_Skt( sktBase )

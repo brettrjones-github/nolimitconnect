@@ -87,12 +87,8 @@ public:
 														uint8_t *		fileHashId		= 0,
 														VxGUID			lclSessionId	= VxGUID::nullVxGUID() );		
 
-	int							fromGuiPluginControl(	VxNetIdent*	netIdent,
-														const char*	pControl, 
-														const char*	pAction,
-														uint32_t		u32ActionData,
-														VxGUID&			fileId,
-														uint8_t *		fileHashId );
+	EXferError					fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo );
+
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
 
@@ -121,11 +117,11 @@ public:
 	virtual void				onPktFileInfoReply			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktFileInfoErr			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 protected:
-	virtual void				onFileReceived( FileRxSession* xferSession, const char* pFileName, EXferError error );
-	virtual void				onFileSent( FileTxSession* xferSession, const char* pFileName, EXferError error );
+	virtual void				onFileReceived( FileRxSession* xferSession, std::string& fileName, EXferError error);
+	virtual void				onFileSent( FileTxSession* xferSession, std::string& fileName, EXferError error );
 
 	bool						isFileDownloading( VxSha1Hash& fileHashId );
 	bool						isFileInDownloadFolder( const char* pPartialFileName );

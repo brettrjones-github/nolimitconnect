@@ -66,6 +66,12 @@ EAssetType VxFileNameToAssetType( std::string fileName )
 }
 
 //============================================================================
+uint8_t VxFileNameToFileType( std::string fileName )
+{
+    return (uint8_t)VxFileNameToAssetType( fileName );
+}
+
+//============================================================================
 EAssetType VxFileTypeToAssetType( uint8_t fileType )
 {
     if( !fileType )

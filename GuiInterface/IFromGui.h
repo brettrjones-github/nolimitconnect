@@ -271,13 +271,7 @@ public:
 															int				iOfferResponse,
 															VxGUID			lclSessionId ) = 0;
 	/// Plugin control such as cancel download etc.
-	virtual int					fromGuiPluginControl(	EPluginType		ePluginType, 
-														VxGUID&			onlineId, 
-														const char*	pControl, 
-														const char*	pAction,
-														uint32_t		u32ActionData,
-														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-														uint8_t *		fileHashId = 0 ) = 0;
+	virtual EXferError			fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo ) = 0;
 	/// Send Text Message to contact
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 

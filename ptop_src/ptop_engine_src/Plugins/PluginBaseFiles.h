@@ -62,12 +62,7 @@ public:
 														uint8_t *		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	int							fromGuiPluginControl(	VxNetIdent*	netIdent,
-														const char*	pControl, 
-														const char*	pAction,
-														uint32_t		u32ActionData,
-														VxGUID&			lclSessionId,
-                                                        uint8_t *		fileHashId ) override;
+	EXferError					fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo ) override;
 
 	virtual bool				fromGuiBrowseFiles( std::string& dir, uint8_t fileFilterMask );
 	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );

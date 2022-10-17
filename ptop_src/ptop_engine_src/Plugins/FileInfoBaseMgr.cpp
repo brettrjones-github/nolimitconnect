@@ -468,12 +468,12 @@ bool FileInfoBaseMgr::getFileFullName( VxGUID& assetId, VxSha1Hash& fileHashId, 
 {
 	bool isShared = false;
 	lockFileList();
-	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	for( auto &fileInfo : m_FileInfoList )
 	{
-		if( assetId == iter->second.getAssetId() && fileHashId == iter->second.getFileHashId() )
+		if( assetId == fileInfo.second.getAssetId() && fileHashId == fileInfo.second.getFileHashId() )
 		{
 			isShared = true;
-			retFileFullName = iter->second.getFullFileName();
+			retFileFullName = fileInfo.second.getFullFileName();
 			break;
 		}
 	}
@@ -993,15 +993,15 @@ void FileInfoBaseMgr::updateToGuiFileXferState( VxGUID& lclSessionId, EXferState
 }
 
 //============================================================================
-void FileInfoBaseMgr::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError )
+void FileInfoBaseMgr::toGuiFileDownloadComplete( VxGUID& lclSessionId, std::string fileName, EXferError xferError )
 {
-	m_Plugin.toGuiFileDownloadComplete( lclSessionId, newFileName, xferError );
+	m_Plugin.toGuiFileDownloadComplete( lclSessionId, fileName, xferError );
 }
 
 //============================================================================
-void FileInfoBaseMgr::toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError )
+void FileInfoBaseMgr::toGuiFileUploadComplete( VxGUID& lclSessionId, std::string fileName, EXferError xferError )
 {
-	m_Plugin.toGuiFileUploadComplete( lclSessionId, xferError );
+	m_Plugin.toGuiFileUploadComplete( lclSessionId, fileName, xferError );
 }
 
 //============================================================================

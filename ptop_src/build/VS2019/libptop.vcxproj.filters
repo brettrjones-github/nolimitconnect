@@ -1709,4 +1709,48 @@
       <Filter>QtBuild</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\docs_for_building\AdditionalSetupVS2019AndQt.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInVBoxImage.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInWindows.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForLinuxInVBoxImage.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForWindows.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForWindowsPrerequisitesInstructions.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Create_Linux_Virtual_Image_VirtualBoxMint20_3.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\CreatingTranslations.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\DeployLinux.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Nlc_Windows_Android_Qt6.2.2_Setup.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\NoLimitConnect_Terminology.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\READ_ME_FIRST.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="..\..\..\docs_for_building\VPN_Setup_For_NoLimitConnect.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

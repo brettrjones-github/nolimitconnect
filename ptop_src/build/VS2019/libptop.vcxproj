@@ -1006,6 +1006,22 @@
     <None Include="..\..\..\libptopengine.pri" />
     <None Include="..\..\..\libptopengine.pro" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\docs_for_building\AdditionalSetupVS2019AndQt.txt" />
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInVBoxImage.txt" />
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForAndroidInWindows.txt" />
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForLinuxInVBoxImage.txt" />
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForWindows.txt" />
+    <Text Include="..\..\..\docs_for_building\Build_NoLimitConnect_ForWindowsPrerequisitesInstructions.txt" />
+    <Text Include="..\..\..\docs_for_building\Create_Linux_Virtual_Image_VirtualBoxMint20_3.txt" />
+    <Text Include="..\..\..\docs_for_building\CreatingTranslations.txt" />
+    <Text Include="..\..\..\docs_for_building\DeployLinux.txt" />
+    <Text Include="..\..\..\docs_for_building\Nlc_Windows_Android_Qt6.2.2_Setup.txt" />
+    <Text Include="..\..\..\docs_for_building\NoLimitConnect_Terminology.txt" />
+    <Text Include="..\..\..\docs_for_building\Open_Port_In_Firewall_Windows10.txt" />
+    <Text Include="..\..\..\docs_for_building\READ_ME_FIRST.txt" />
+    <Text Include="..\..\..\docs_for_building\VPN_Setup_For_NoLimitConnect.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

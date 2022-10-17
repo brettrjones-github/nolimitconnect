@@ -34,7 +34,7 @@ class VxSha1Hash;
 
 #pragma pack(push)
 #pragma pack(1)
-class PktBlobEntry
+class PktBlobEntry // size 14352
 {
 public:
     PktBlobEntry();

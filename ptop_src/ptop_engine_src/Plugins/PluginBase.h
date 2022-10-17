@@ -141,12 +141,7 @@ public:
 													EOfferResponse	eOfferResponse,
 													VxGUID			lclSessionId );
 
-	virtual int					fromGuiPluginControl(	VxNetIdent*	netIdent,
-														const char*	pControl, 
-														const char*	pAction,
-														uint32_t		u32ActionData,
-														VxGUID&			fileId,
-														uint8_t *		fileHashId );
+	virtual EXferError			fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo );
 
 	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char*	pMsg );
 	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
@@ -203,12 +198,12 @@ public:
 														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) {};
 
-	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
-	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) {};
+	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
+	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
 
-	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) {};
-	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError ) {};
-	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) {};
+	virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
+	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, std::string& fileName, EXferError xferError );
+	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, std::string& fileName, EXferError xferError );
 
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )	{};

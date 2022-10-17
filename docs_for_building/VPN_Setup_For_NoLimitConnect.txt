@@ -1,18 +1,19 @@
 //=== VPN Setup For NoLimitConnect ===//
-// If possible use a VPN that supports port forwarding through the VPN for faster and better connectivity
+// If possible use a VPN that supports port forwarding through the VPN for faster and better connectivity and ability to enable hosting
 
-IVPN is a commercial VPN with simple setup and no spam or twitsted promotions. Worked on all my devices.
+IVPN is a commercial VPN with port forwading simple setup and no spam or twitsted promotions. Worked on all my devices.
 https://www.ivpn.net
-Pure VPN is a commercial VPN and worked on all my devices except one. 
+Pure VPN is a commercial VPN with port forwarding for additional cost. 
 https://www.purevpn.com
-Proton VPN - Had port forwarding but seems to have been broken in their latest update
+PrivateVPN - Has a form of port forwarding but difficult to setup in linux
+Proton VPN - Had port forwarding but seems to have been broken in their updates
 NordVPN - Does NOT have port forwarding.
 ExpressVPN - Does NOT have port forwarding except when run as firmware on a router. Not useable for cellular data networks.
-PrivateVPN - Has a form of port forwarding but difficult to setup in linux
+SharkVPN - Does NOT have port forwarding.
 
 
 //=== Port Forwarding ===//
-For Chat Room and/or Group hosting and/or Random Connect hosting, a open port must be available.
+For Chat Room and/or Group hosting and/or Random Connect hosting, an open port must be available.
 Also a open port speeds up communication for users by avoiding the
 need of Chat Room or Group or Random Connect relay services. Relay services also
 require bandwidth/CPU usage of the host providing the relay service which may impact its speed and response time.
@@ -24,14 +25,14 @@ Port Forwarding is not offered at all by phone data service.
 A simple way to Port Forward is to use a VPN that offers port forwarding.
 As of this writing most do not. This includes Nord VPN and Express VPN.
 
-IVPN is a vpn service that offers port forwarding with one button click to turn it on.
+IVPN is a vpn service that offers port forwarding with one button click to turn it on and simple setup for all platforms.
 Pure VPN is a vpn service that offers port forwarding. 
 Pure VPN also offers fixed IP addresses needed for NoLimitConnect network hosting.
-This is not a advertisement for VPN but my experience with it was ok
+This is not a advertisement for Pure VPN but my experience with it was ok
 and it offers a simple setup for Android and Windows. Linux is more complicated
 but can be done.
 
-Pure VPN can be used on Phone Cellular Data Service where port forwarding cannot be
+A VPN with port forwarding can be used on Phone Cellular Data Service where port forwarding cannot be
 done by your phone service provider.
 
 //=== Fixed IP Address ===//

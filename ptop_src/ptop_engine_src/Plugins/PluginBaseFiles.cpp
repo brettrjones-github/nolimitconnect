@@ -257,19 +257,9 @@ bool PluginBaseFiles::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,
 }
 
 //============================================================================
-int PluginBaseFiles::fromGuiPluginControl(	VxNetIdent*	netIdent,
-											const char*	pControl, 
-											const char*	pAction,
-											uint32_t		u32ActionData,
-											VxGUID&			lclSessionId,
-											uint8_t *		fileHashId )
+EXferError PluginBaseFiles::fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo )
 {
-	return m_FileInfoXferMgr.fromGuiPluginControl(		netIdent,		
-														pControl, 
-														pAction,
-														u32ActionData,
-														lclSessionId,
-														fileHashId );
+	return m_FileInfoXferMgr.fromGuiFileXferControl( netIdent, xferAction, fileInfo );
 }
 
 //============================================================================

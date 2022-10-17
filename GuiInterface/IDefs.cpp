@@ -385,11 +385,11 @@ namespace
         "Unknown Plugin ",
         "Admin ",
         "About Me Page Server ",
+        "Story Board Server",
         "Shared Web Cam ",
         "Shared Files ",
         "Send A Person File ",    
-        "Messenger ",
-        "Story Board Server", 
+        "Messenger ", 
         "Play Truth Or Dare ",
         "Video Chat ",
         "Voice Call ",
@@ -611,7 +611,7 @@ namespace
 }
 
 //============================================================================
-const char* DescribeAge( EAgeType ageType )
+const char* DescribeAge( enum EAgeType ageType )
 {
     if( ageType < 0 || eMaxAgeType <= ageType )
     {
@@ -633,7 +633,7 @@ const char* DescribeAge( EAgeType ageType )
 }
 
 //============================================================================
-const char* DescribeCommError( ECommErr commErr )
+const char* DescribeCommError( enum ECommErr commErr )
 {
     if( commErr < 0 || eMaxCommErr <= commErr )
     {
@@ -644,7 +644,7 @@ const char* DescribeCommError( ECommErr commErr )
 }
 
 //============================================================================
-const char* DescribeAppModule( EAppModule eAppModule )
+const char* DescribeAppModule( enum EAppModule eAppModule )
 {
     if( eAppModule < 0 || eMaxAppModule <= eAppModule )
     {
@@ -699,7 +699,7 @@ const char* DescribeAppModule( EAppModule eAppModule )
 }
 
 //============================================================================
-const char* DescribeConnectReason( EConnectReason eConnectReason )
+const char* DescribeConnectReason( enum EConnectReason eConnectReason )
 {
     if( eConnectReason < 0 || eMaxConnectReason <= eConnectReason )
     {
@@ -710,37 +710,37 @@ const char* DescribeConnectReason( EConnectReason eConnectReason )
 }
 
 //============================================================================
-bool IsConnectReasonAnnounce( EConnectReason connectReason )
+bool IsConnectReasonAnnounce( enum EConnectReason connectReason )
 {
     return eConnectReasonGroupAnnounce == connectReason || eConnectReasonChatRoomAnnounce == connectReason || eConnectReasonRandomConnectAnnounce == connectReason;
 }
 
 //============================================================================
-bool IsConnectReasonJoin( EConnectReason connectReason )
+bool IsConnectReasonJoin( enum EConnectReason connectReason )
 {
     return eConnectReasonGroupJoin == connectReason || eConnectReasonChatRoomJoin == connectReason || eConnectReasonRandomConnectJoin == connectReason;
 }
 
 //============================================================================
-bool IsConnectReasonLeave( EConnectReason connectReason )
+bool IsConnectReasonLeave( enum EConnectReason connectReason )
 {
     return eConnectReasonGroupLeave == connectReason || eConnectReasonChatRoomLeave == connectReason || eConnectReasonRandomConnectLeave == connectReason;
 }
 
 //============================================================================
-bool IsConnectReasonUnJoin( EConnectReason connectReason )
+bool IsConnectReasonUnJoin( enum EConnectReason connectReason )
 {
     return eConnectReasonGroupUnJoin == connectReason || eConnectReasonChatRoomUnJoin == connectReason || eConnectReasonRandomConnectUnJoin == connectReason;
 }
 
 //============================================================================
-bool IsConnectReasonSearch( EConnectReason connectReason )
+bool IsConnectReasonSearch( enum EConnectReason connectReason )
 {
     return eConnectReasonGroupSearch == connectReason || eConnectReasonChatRoomSearch == connectReason || eConnectReasonRandomConnectSearch == connectReason;
 }
 
 //============================================================================
-const char* DescribeConnectStatus( EConnectStatus eConnectStatus )
+const char* DescribeConnectStatus( enum  EConnectStatus eConnectStatus )
 {
     if( eConnectStatus < 0 || eMaxConnectStatus <= eConnectStatus )
     {
@@ -753,7 +753,7 @@ const char* DescribeConnectStatus( EConnectStatus eConnectStatus )
 
 //============================================================================
 //! describe friend state
-const char* DescribeFriendState( EFriendState eFriendState )
+const char* DescribeFriendState( enum EFriendState eFriendState )
 {
     switch( eFriendState )
     {
@@ -771,7 +771,7 @@ const char* DescribeFriendState( EFriendState eFriendState )
 }
 
 //============================================================================
-const char* DescribeGroupieViewType( EGroupieViewType groupieViewType )
+const char* DescribeGroupieViewType( enum EGroupieViewType groupieViewType )
 {
     switch( groupieViewType )
     {
@@ -799,7 +799,7 @@ const char* DescribeGroupieViewType( EGroupieViewType groupieViewType )
 }
 
 //============================================================================
-const char* DescribeHackerLevel( EHackerLevel hackLevel )
+const char* DescribeHackerLevel( enum EHackerLevel hackLevel )
 {
     if( hackLevel < 0 || eMaxHackerLevel <= hackLevel )
     {
@@ -810,7 +810,7 @@ const char* DescribeHackerLevel( EHackerLevel hackLevel )
 }
 
 //============================================================================
-const char* DescribeHackerReason( EHackerReason hackReason )
+const char* DescribeHackerReason( enum EHackerReason hackReason )
 {
     if( hackReason < 0 || eMaxHackerReason <= hackReason )
     {
@@ -821,7 +821,7 @@ const char* DescribeHackerReason( EHackerReason hackReason )
 }
 
 //============================================================================
-const char* DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
+const char* DescribeHostAnnounceStatus( enum EHostAnnounceStatus  hostStatus )
 {
     if( hostStatus < 0 || eMaxHostAnnounceStatus <= hostStatus )
     {
@@ -832,7 +832,7 @@ const char* DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
 }
 
 //============================================================================
-const char* DescribeHostJoinStatus( EHostJoinStatus hostStatus )
+const char* DescribeHostJoinStatus( enum EHostJoinStatus hostStatus )
 {
     if( hostStatus < 0 || eMaxHostJoinStatus <= hostStatus )
     {
@@ -843,7 +843,7 @@ const char* DescribeHostJoinStatus( EHostJoinStatus hostStatus )
 }
 
 //============================================================================
-const char* DescribeHostSearchStatus( EHostSearchStatus hostStatus )
+const char* DescribeHostSearchStatus( enum EHostSearchStatus hostStatus )
 {
     if( hostStatus < 0 || eMaxHostSearchStatus <= hostStatus )
     {
@@ -854,7 +854,7 @@ const char* DescribeHostSearchStatus( EHostSearchStatus hostStatus )
 }
 
 //============================================================================
-const char* DescribeHostType( EHostType eHostType )
+const char* DescribeHostType( enum EHostType eHostType )
 {
     if( eHostType < 0 || eMaxHostType <= eHostType )
     {
@@ -865,7 +865,7 @@ const char* DescribeHostType( EHostType eHostType )
 }
 
 //! Internet Status as text
-const char* DescribeInternetStatus( EInternetStatus internetStatus )
+const char* DescribeInternetStatus( enum EInternetStatus internetStatus )
 {
     if( internetStatus < 0 || eMaxInternetStatus <= internetStatus )
     {
@@ -876,7 +876,7 @@ const char* DescribeInternetStatus( EInternetStatus internetStatus )
 }
 
 //============================================================================
-const char* DescribeJoinState( EJoinState joinState )
+const char* DescribeJoinState( enum EJoinState joinState )
 {
     if( joinState < 0 || eMaxJoinState <= joinState )
     {
@@ -887,7 +887,7 @@ const char* DescribeJoinState( EJoinState joinState )
 }
 
 //============================================================================
-const char* DescribeListAction( EListAction listAction )
+const char* DescribeListAction( enum EListAction listAction )
 {
     switch( listAction )
     {
@@ -903,7 +903,7 @@ const char* DescribeListAction( EListAction listAction )
 }
 
 //============================================================================
-const char* DescribeNetAction( ENetActionType netAction )
+const char* DescribeNetAction( enum ENetActionType netAction )
 {
     switch( netAction )
     {
@@ -919,7 +919,7 @@ const char* DescribeNetAction( ENetActionType netAction )
 }
 
 //============================================================================
-const char* DescribeModuleState( EModuleState moduleState )
+const char* DescribeModuleState( enum EModuleState moduleState )
 {
     switch( moduleState )
     {
@@ -937,7 +937,7 @@ const char* DescribeModuleState( EModuleState moduleState )
 }
 
 //! Net Available Status as text
-const char* DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
+const char* DescribeNetAvailStatus( enum ENetAvailStatus netAvailStatus )
 {
     if( netAvailStatus < 0 || eMaxNetAvailStatus <= netAvailStatus )
     {
@@ -947,7 +947,7 @@ const char* DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
     return NetAvailStatusEnumStrings[ netAvailStatus ];
 }
 
-const char* DescribeNetworkState( ENetworkStateType networkStateType )
+const char* DescribeNetworkState( enum ENetworkStateType networkStateType )
 {
     if( networkStateType < 0 || eMaxNetworkStateType <= networkStateType )
     {
@@ -967,7 +967,7 @@ const char* DescribeRelayError( enum ERelayErr relayError )
     return RelayErrEnumStrings[ relayError ];
 }
 
-const char* DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
+const char* DescribePortOpenStatus( enum EIsPortOpenStatus ePortOpenStatus )
 {
     if( ePortOpenStatus < 0 || eMaxIsPortOpenStatusType <= ePortOpenStatus )
     {
@@ -977,7 +977,7 @@ const char* DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
     return PortOpenStatusEnumStrings[ ePortOpenStatus ];
 }
 
-const char* DescribeRunTestStatus( ERunTestStatus eTestStatus )
+const char* DescribeRunTestStatus( enum ERunTestStatus eTestStatus )
 {
     if( eTestStatus < 0 || eMaxRunTestStatusType <= eTestStatus )
     {
@@ -987,7 +987,7 @@ const char* DescribeRunTestStatus( ERunTestStatus eTestStatus )
     return RunTestStatusEnumStrings[ eTestStatus ];
 }
 
-const char* DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
+const char* DescribeRandomConnectStatus( enum ERandomConnectStatus eRandomConnectStatus )
 {
     if( eRandomConnectStatus < 0 || eMaxRandomConnectStatusType <= eRandomConnectStatus )
     {
@@ -998,7 +998,7 @@ const char* DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStat
 }
 
 //! Net Command type as text
-const char* DescribeNetCmdType( ENetCmdType netCmdType )
+const char* DescribeNetCmdType( enum ENetCmdType netCmdType )
 {
     if( netCmdType < 0 || eMaxNetCmdType <= netCmdType )
     {
@@ -1009,7 +1009,7 @@ const char* DescribeNetCmdType( ENetCmdType netCmdType )
 }
 
 //! Net Command Error as text
-const char* DescribeNetCmdError( ENetCmdError netCmdError )
+const char* DescribeNetCmdError( enum ENetCmdError netCmdError )
 {
     if(  netCmdError < 0 || eMaxNetCmdError <= netCmdError )
     {
@@ -1020,7 +1020,7 @@ const char* DescribeNetCmdError( ENetCmdError netCmdError )
 }
 
 //============================================================================
-const char* DescribeOfferState( EOfferState offerState )
+const char* DescribeOfferState( enum EOfferState offerState )
 {
     if(  offerState < 0 || eMaxOfferState <= offerState )
     {
@@ -1031,7 +1031,7 @@ const char* DescribeOfferState( EOfferState offerState )
 }
 
 //============================================================================
-const char* DescribeOfferType( EOfferType offerType )
+const char* DescribeOfferType( enum EOfferType offerType )
 {
     if(  offerType < 0 || eMaxOfferType <= offerType )
     {
@@ -1042,7 +1042,7 @@ const char* DescribeOfferType( EOfferType offerType )
 }
 
 //============================================================================
-const char* DescribePluginAccess( EPluginAccess pluginAccess )
+const char* DescribePluginAccess( enum EPluginAccess pluginAccess )
 {
     if(  pluginAccess < 0 || eMaxPluginAccessState <= pluginAccess )
     {
@@ -1053,7 +1053,7 @@ const char* DescribePluginAccess( EPluginAccess pluginAccess )
 }
 
 //============================================================================
-const char* DescribePluginType( EPluginType pluginType )
+const char* DescribePluginType( enum EPluginType pluginType )
 {
     if( pluginType < 0 || eMaxPluginType <= pluginType )
     {
@@ -1064,7 +1064,7 @@ const char* DescribePluginType( EPluginType pluginType )
 }
 
 //============================================================================
-const char* DescribeScanType( EScanType scanType )
+const char* DescribeScanType( enum EScanType scanType )
 {
     if(  scanType < 0 || eMaxScanType <= scanType )
     {
@@ -1075,7 +1075,7 @@ const char* DescribeScanType( EScanType scanType )
 }
 
 //============================================================================
-const char* DescribeSearchType( ESearchType searchType )
+const char* DescribeSearchType( enum ESearchType searchType )
 {
     if(  searchType < 0 || eMaxSearchType <= searchType )
     {
@@ -1086,7 +1086,7 @@ const char* DescribeSearchType( ESearchType searchType )
 }
 
 //============================================================================
-const char* DescribeSha1GenResult( ESha1GenResult sha1GenerateResult )
+const char* DescribeSha1GenResult( enum ESha1GenResult sha1GenerateResult )
 {
     if( sha1GenerateResult < 0 || eMaxSha1GenResult <= sha1GenerateResult )
     {
@@ -1098,7 +1098,7 @@ const char* DescribeSha1GenResult( ESha1GenResult sha1GenerateResult )
 
 //============================================================================
 //! Describe socket close reason
-const char* DescribeSktCloseReason( ESktCloseReason closeReason )
+const char* DescribeSktCloseReason( enum ESktCloseReason closeReason )
 {
     if(  closeReason < 0 || eMaxSktCloseReason <= closeReason )
     {
@@ -1109,8 +1109,7 @@ const char* DescribeSktCloseReason( ESktCloseReason closeReason )
 }
 
 //============================================================================
-//! Describe skt type
-const char* DescribeSktType( ESktType sktType )
+const char* DescribeSktType( enum ESktType sktType )
 {
     if(  sktType < 0 || eMaxSktType <= sktType )
     {
@@ -1121,7 +1120,7 @@ const char* DescribeSktType( ESktType sktType )
 }
 
 //============================================================================
-const char* DescribeWebPageType( EWebPageType webPageType )
+const char* DescribeWebPageType( enum EWebPageType webPageType )
 {
     switch( webPageType )
     {
@@ -1137,8 +1136,26 @@ const char* DescribeWebPageType( EWebPageType webPageType )
 }
 
 //============================================================================
+const char* DescribeXferAction( enum EXferAction xferAction )
+{
+    switch( xferAction )
+    {
+    case eXferActionNone:
+        return "No Xfer Action ";
+    case eXferActionDownload:
+        return "Xfer Action Start Download ";
+    case eXferActionUpload:
+        return "Xfer Action Start Upload ";
+    case eXferActionCancelXfer:
+        return "Xfer Action Cancel Transfer ";
+    default:
+        return ENUM_BAD_PARM;
+    }
+}
+
+//============================================================================
 // for use in database mainly
-const char* getPluginName( EPluginType pluginType )
+const char* getPluginName( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
@@ -1191,7 +1208,7 @@ const char* getPluginName( EPluginType pluginType )
 
 //============================================================================
 //! convert Host Type to connect reason
-EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType )
+EConnectReason HostTypeToConnectAnnounceReason( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1210,7 +1227,7 @@ EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to connect reason
-EConnectReason HostTypeToConnectJoinReason( EHostType hostType )
+EConnectReason HostTypeToConnectJoinReason( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1229,7 +1246,7 @@ EConnectReason HostTypeToConnectJoinReason( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to connect reason
-EConnectReason HostTypeToConnectLeaveReason( EHostType hostType )
+EConnectReason HostTypeToConnectLeaveReason( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1248,7 +1265,7 @@ EConnectReason HostTypeToConnectLeaveReason( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to connect reason
-EConnectReason HostTypeToConnectUnJoinReason( EHostType hostType )
+EConnectReason HostTypeToConnectUnJoinReason( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1267,7 +1284,7 @@ EConnectReason HostTypeToConnectUnJoinReason( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to connect reason
-EConnectReason HostTypeToConnectSearchReason( EHostType hostType )
+EConnectReason HostTypeToConnectSearchReason( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1286,7 +1303,7 @@ EConnectReason HostTypeToConnectSearchReason( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to service plugin  type
-EPluginType HostTypeToHostPlugin( EHostType hostType )
+EPluginType HostTypeToHostPlugin( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1318,7 +1335,7 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to client plugin type
-EPluginType HostTypeToClientPlugin( EHostType hostType )
+EPluginType HostTypeToClientPlugin( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1350,7 +1367,7 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to user connect reason
-EConnectReason HostTypeToGroupieConnectReason( EHostType hostType )
+EConnectReason HostTypeToGroupieConnectReason( enum EHostType hostType )
 {
     switch( hostType )
     {
@@ -1377,7 +1394,7 @@ EConnectReason HostTypeToGroupieConnectReason( EHostType hostType )
 
 //============================================================================
 //! convert Plugin Type to host type
-EHostType PluginTypeToHostType( EPluginType pluginType )
+EHostType PluginTypeToHostType( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
@@ -1421,7 +1438,7 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
 
 //============================================================================
 // if host plugin return its client plugin else return pluginType param
-EPluginType HostPluginToClientPluginType( EPluginType pluginType )
+EPluginType HostPluginToClientPluginType( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
@@ -1454,7 +1471,7 @@ EPluginType HostPluginToClientPluginType( EPluginType pluginType )
 
 //============================================================================
 // if client plugin return its host plugin else return pluginType param
-EPluginType ClientPluginToHostPluginType( EPluginType pluginType )
+EPluginType ClientPluginToHostPluginType( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
@@ -1487,7 +1504,7 @@ EPluginType ClientPluginToHostPluginType( EPluginType pluginType )
 
 //============================================================================
 //! return true if is a client plugin
-bool IsClientPluginType( EPluginType pluginType )
+bool IsClientPluginType( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
@@ -1497,6 +1514,9 @@ bool IsClientPluginType( EPluginType pluginType )
     case ePluginTypeClientPeerUser:
     case ePluginTypeClientNetwork:
     case ePluginTypeClientConnectTest:
+    case ePluginTypeFileShareClient:
+    case ePluginTypeCamClient:
+    case ePluginTypePersonFileXfer:
         return true;
 
     case ePluginTypeInvalid:
@@ -1510,7 +1530,7 @@ bool IsClientPluginType( EPluginType pluginType )
 
 //============================================================================
 //! return true if is a host plugin
-bool IsHostPluginType( EPluginType pluginType )
+bool IsHostPluginType( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
@@ -1533,14 +1553,14 @@ bool IsHostPluginType( EPluginType pluginType )
 
 //============================================================================
 //! return true if is a host or client relationship plugin
-bool IsHostOrClientPluginType( EPluginType pluginType )
+bool IsHostOrClientPluginType( enum EPluginType pluginType )
 {
     return IsClientPluginType( pluginType ) || IsHostPluginType( pluginType );
 }
 
 //============================================================================
 //! return true if host can be announced to network or is a client of such a host
-bool IsAnnounceHostOrClientPluginType( EPluginType pluginType )
+bool IsAnnounceHostOrClientPluginType( enum EPluginType pluginType )
 {
     return  ePluginTypeHostGroup == pluginType ||
         ePluginTypeHostChatRoom == pluginType ||
@@ -1552,14 +1572,14 @@ bool IsAnnounceHostOrClientPluginType( EPluginType pluginType )
 
 //============================================================================
 //! return true if host can be announced to network or is a client of such a host
-bool IsAnnounceHostOrClientHostType( EHostType hostType )
+bool IsAnnounceHostOrClientHostType( enum EHostType hostType )
 {
     return HostShouldAnnounceToNetwork( hostType );
 }
 
 //============================================================================
 //! return true if plugin should announce to network host
-bool PluginShouldAnnounceToNetwork( EPluginType pluginType )
+bool PluginShouldAnnounceToNetwork( enum EPluginType pluginType )
 {
     return ePluginTypeHostGroup == pluginType ||
         ePluginTypeHostChatRoom == pluginType ||
@@ -1568,7 +1588,7 @@ bool PluginShouldAnnounceToNetwork( EPluginType pluginType )
 
 //============================================================================
 //! return true if host should announce to network host
-bool HostShouldAnnounceToNetwork( EHostType hostType )
+bool HostShouldAnnounceToNetwork( enum EHostType hostType )
 {
     return eHostTypeGroup == hostType ||
         eHostTypeChatRoom == hostType ||
@@ -1577,7 +1597,7 @@ bool HostShouldAnnounceToNetwork( EHostType hostType )
 
 //============================================================================
 //! return true if plugin can act as relay for user
-bool IsPluginARelayForUser( EPluginType pluginType )
+bool IsPluginARelayForUser( enum EPluginType pluginType )
 {
     return ePluginTypeHostGroup == pluginType ||
         ePluginTypeHostChatRoom == pluginType ||
@@ -1586,7 +1606,7 @@ bool IsPluginARelayForUser( EPluginType pluginType )
 
 //============================================================================
 //! return true if host can act as relay for user
-bool IsHostARelayForUser( EHostType hostType )
+bool IsHostARelayForUser( enum EHostType hostType )
 {
     return eHostTypeGroup == hostType ||
         eHostTypeChatRoom == hostType ||

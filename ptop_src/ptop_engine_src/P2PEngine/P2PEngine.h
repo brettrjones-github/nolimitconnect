@@ -195,6 +195,7 @@ public:
 	bool						isSystemPlugin( EPluginType	pluginType );
 
     bool                        isUserConnected( VxGUID& onlineId );
+    bool                        isMemberGuest( VxGUID& onlineId ); // true if user is member of same host as I am
 
 	//========================================================================
 	// from gui
@@ -316,13 +317,7 @@ public:
 															int				iOfferResponse,
                                                             VxGUID			lclSessionId ) override;
 
-	virtual int					fromGuiPluginControl(	EPluginType		pluginType, 
-														VxGUID&			onlineId, 
-														const char*	    pControl, 
-														const char*	    pAction,
-														uint32_t		u32ActionData,
-														VxGUID&			fileId = VxGUID::nullVxGUID(),
-                                                        uint8_t*		fileHashId = 0 ) override;
+    virtual EXferError			fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo ) override;
 
 	virtual bool				fromGuiInstMsg(		EPluginType		pluginType, 
 													VxGUID&			onlineId, 

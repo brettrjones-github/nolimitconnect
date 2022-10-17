@@ -135,8 +135,8 @@ public:
 	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
 
 	void						updateToGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
-	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char* newFileName, EXferError xferError );
-	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError );
+	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, std::string fileName, EXferError xferError );
+	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, std::string fileName, EXferError xferError );
 
 	virtual void				sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo );
 

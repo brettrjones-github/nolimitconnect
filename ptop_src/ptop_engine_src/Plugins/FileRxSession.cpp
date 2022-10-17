@@ -58,20 +58,20 @@ void FileRxSession::cancelDownload( VxGUID& lclSessionId )
 
 	std::vector<FileToXfer>::iterator iter;
 
-	for( iter = m_astrFilesToXfer.begin(); iter != m_astrFilesToXfer.end(); ++iter )
+	for( iter = m_FilesToXferList.begin(); iter != m_FilesToXferList.end(); ++iter )
 	{
 		if( (*iter).getLclSessionId() == lclSessionId )
 		{
-			m_astrFilesToXfer.erase(iter);
+			m_FilesToXferList.erase(iter);
 			break;
 		}
 	}
 
-	for( iter = m_astrFilesXfered.begin(); iter != m_astrFilesXfered.end(); ++iter )
+	for( iter = m_FilesXferedList.begin(); iter != m_FilesXferedList.end(); ++iter )
 	{
 		if( (*iter).getLclSessionId() == lclSessionId )
 		{
-			m_astrFilesToXfer.erase(iter);
+			m_FilesToXferList.erase(iter);
 			break;
 		}
 	}

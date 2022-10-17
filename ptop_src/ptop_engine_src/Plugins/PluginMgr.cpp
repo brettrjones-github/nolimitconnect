@@ -598,13 +598,19 @@ void PluginMgr::handleNonSystemPackets( VxSktBase* sktBase, VxPktHdr* pktHdr )
 		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( pktHdr->getSrcOnlineId() );
 		if( netIdent && plugin )
 		{
-			plugin->handlePkt( sktBase, pktHdr, netIdent );
+			if( plugin->isAccessAllowed( netIdent ) )
+			{
+				plugin->handlePkt( sktBase, pktHdr, netIdent );
+			}
+			else
+			{
+				VxReportHack( eHackerLevelSuspicious, eHackerReasonAccessDenied, sktBase, netIdent->getOnlineName() );
+			}
 		}
 		else // TODO BRJ handle case of valid netIdent not needed?
 		{
-			LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets unknown ident 0x%llX 0x%llX", 
-				pktHdr->getSrcOnlineId().getVxGUIDHiPart(),
-				pktHdr->getSrcOnlineId().getVxGUIDLoPart() );
+			LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets unknown ident %s or plugin %d",
+				pktHdr->getSrcOnlineId().toOnlineIdString().c_str(), u8PluginNum );
 		}
 	}
 	else

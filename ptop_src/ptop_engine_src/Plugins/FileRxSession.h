@@ -25,5 +25,4 @@ public:
 	virtual ~FileRxSession();
 
 	void cancelDownload( VxGUID& lclSessionId );
-
 };

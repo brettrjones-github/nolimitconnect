@@ -153,11 +153,24 @@ void PluginBase::setPluginPermission( EFriendState eFriendState )
 //============================================================================
 bool PluginBase::isAccessAllowed( VxNetIdent* netIdent, bool logAccessError, const char* accessReason )
 {
+    if( IsClientPluginType( getPluginType() ) )
+    {
+        // clients make requests
+        return true;
+    }
+
 	EFriendState curPermission = m_Engine.getMyPktAnnounce().getPluginPermission( m_ePluginType ); 
     if( eFriendStateIgnore != curPermission && eFriendStateIgnore != netIdent->getMyFriendshipToHim() )
     {
         if( netIdent->getMyFriendshipToHim() >= curPermission || netIdent->getMyOnlineId() == m_Engine.getMyOnlineId() )
         {
+            return true;
+        }
+
+        if( netIdent->getMyFriendshipToHim() == eFriendStateAnonymous && m_Engine.isMemberGuest( netIdent->getMyOnlineId() ) &&
+            eFriendStateGuest >= curPermission )
+        {
+            // has elevated to guest permission
             return true;
         }
     }
@@ -249,14 +262,9 @@ bool PluginBase::fromGuiOfferReply(		VxNetIdent*	netIdent,
 }
 
 //============================================================================
-int PluginBase::fromGuiPluginControl(		VxNetIdent*	netIdent,
-											const char*	pControl, 
-											const char*	pAction,
-											uint32_t				u32ActionData,
-											VxGUID&			fileId,
-											uint8_t *			fileHashId )
+EXferError PluginBase::fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo )
 {
-	return false;
+	return eXferErrorBadParam;
 }
 
 //============================================================================ 
@@ -508,3 +516,34 @@ ECommErr PluginBase::getCommAccessState( VxNetIdent* netIdent )
 
     return commErr;
 }
+
+//============================================================================
+void PluginBase::toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+{
+    m_Engine.getToGui().toGuiStartUpload( onlineId, getPluginType(), lclSessionId, fileInfo );
+}
+
+//============================================================================
+void PluginBase::toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+{
+    m_Engine.getToGui().toGuiStartDownload( onlineId, getPluginType(), lclSessionId, fileInfo );
+}
+
+//============================================================================
+void PluginBase::toGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
+{
+    m_Engine.getToGui().toGuiFileXferState( getPluginType(), lclSessionId, xferState, xferErr, param );
+}
+
+//============================================================================
+void PluginBase::toGuiFileDownloadComplete( VxGUID& lclSessionId, std::string& fileName, EXferError xferError )
+{
+    m_Engine.getToGui().toGuiFileDownloadComplete( getPluginType(), lclSessionId, fileName, xferError );
+}
+
+//============================================================================
+void PluginBase::toGuiFileUploadComplete( VxGUID& lclSessionId, std::string& fileName, EXferError xferError )
+{
+    m_Engine.getToGui().toGuiFileUploadComplete( getPluginType(), lclSessionId, fileName, xferError );
+}
+

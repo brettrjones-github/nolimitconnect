@@ -16,33 +16,25 @@
 #include "FileToXfer.h"
 
 //============================================================================
-FileToXfer::FileToXfer(std::string		strFileName, 
-						uint64_t		u64FileOffset,  
-						VxGUID&			lclSessionId, 
-						VxGUID&			rmtSessionId,
-						VxGUID&			fileAssetId,
-						VxSha1Hash		fileHashId,
-						int				userData )
-: m_strFileName(strFileName)
-, m_u64FileOffset( u64FileOffset )
-, m_UserData( userData )
+FileToXfer::FileToXfer( FileInfo& fileInfo, VxGUID& lclSessionId, VxGUID& rmtSessionId )
+: FileInfo( fileInfo )
 , m_LclSessionId( lclSessionId )
 , m_RmtSessionId( rmtSessionId )
-, m_FileAssetId( fileAssetId )
-, m_FileHashId( fileHashId )
 {
 }
 
 //============================================================================
 FileToXfer& FileToXfer::operator=(const FileToXfer& rhs) 
 {	
-	m_strFileName				= rhs.m_strFileName;
-	m_u64FileOffset				= rhs.m_u64FileOffset;
-	m_UserData					= rhs.m_UserData;
-	m_LclSessionId				= rhs.m_LclSessionId;
-	m_RmtSessionId				= rhs.m_RmtSessionId;
-	m_FileAssetId				= rhs.m_FileAssetId;
-	m_FileHashId				= rhs.m_FileHashId;
+	if( &rhs != this )
+	{
+		*((FileInfo*)this) = rhs;
+
+		m_LclSessionId = rhs.m_LclSessionId;
+		m_RmtSessionId = rhs.m_RmtSessionId;
+		m_FileOffset = rhs.m_FileOffset;
+	}
+
 	return *this;
 }
 

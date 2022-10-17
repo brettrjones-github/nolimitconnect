@@ -88,7 +88,6 @@ uint16_t						VxGetAppVersion( void );
 const char*						VxGetAppVersionString( void );
 
 //============================================================================
-void							VxSetAppDirectory( enum EAppDir appDir, const char* setDir );
 std::string& 					VxGetAppDirectory( enum EAppDir appDir );
 
 // exe and app resource path	s

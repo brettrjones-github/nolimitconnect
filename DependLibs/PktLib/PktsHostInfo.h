@@ -72,8 +72,9 @@ private:
     uint8_t					    m_HostType{ 0 };        // 1 byte
     uint8_t					    m_CommError{ 0 };       // 1 byte
     uint16_t					m_Res1{ 0 };	        // 2 bytes
-    // 60 bytes to here
-    PktBlobEntry                m_BlobEntry;	//size 14352
+    uint32_t					m_Res2{ 0 };	        // 4 bytes
+    // 64 bytes to here
+    PktBlobEntry                m_BlobEntry;	        // size 14352
 };
 
 #pragma pack(pop)

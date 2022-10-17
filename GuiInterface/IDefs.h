@@ -298,6 +298,7 @@ enum EHackerReason
     eHackerReasonPktAnnNotFirstPacket,
     eHackerReasonPktHdrInvalid,
     eHackerReasonInvalidPkt,
+    eHackerReasonAccessDenied,
 
     eMaxHackerReason
 };
@@ -1156,7 +1157,15 @@ enum EWebPageType
     eMaxWebPageType
 };
 
+enum EXferAction
+{
+    eXferActionNone = 0,
+    eXferActionDownload,
+    eXferActionUpload,
+    eXferActionCancelXfer,
 
+    eMaxXferAction
+};
 
 //============================================================================
 // There is a qt translated version of these functions in GuiParams for the user interface
@@ -1228,6 +1237,7 @@ const char* DescribeSktCloseReason( enum ESktCloseReason closeReason );
 //! Describe skt type
 const char* DescribeSktType( enum ESktType sktType );
 const char* DescribeWebPageType( enum EWebPageType webPageType );
+const char* DescribeXferAction( enum EXferAction xferAction );
 
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName
@@ -1242,7 +1252,7 @@ EConnectReason HostTypeToConnectLeaveReason( enum EHostType hostType );
 //! convert Host Type to connect reason
 EConnectReason HostTypeToConnectUnJoinReason( enum EHostType hostType );
 //! convert Host Type to connect reason
-EConnectReason HostTypeToConnectSearchReason( EHostType hostType );
+EConnectReason HostTypeToConnectSearchReason( enum EHostType hostType );
 
 //! convert Host Type to service plugin  type
 EPluginType HostTypeToHostPlugin( enum EHostType hostType );

@@ -602,3 +602,11 @@ void P2PEngine::onNetworkConnectionReady( bool requiresRelay, std::string& ipAdd
 
 	getToGui().toGuiNetworkIsTested( requiresRelay, ipAddr, ipPort );
 }
+
+//============================================================================
+// true if user is member of same host as I am
+bool P2PEngine::isMemberGuest( VxGUID& onlineId )
+{
+	// TODO BRJ determine if user is a guest member of either my hosted service or a hosted service I joined
+	return true;
+}

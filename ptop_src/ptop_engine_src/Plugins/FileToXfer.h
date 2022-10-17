@@ -14,43 +14,26 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <CoreLib/VxGUID.h>
-#include <CoreLib/VxSha1Hash.h>
+#include "FileInfo.h"
 
-#include <string>
-
-class FileToXfer
+class FileToXfer : public FileInfo
 {
 public:
-	FileToXfer( std::string		strFileName, 
-				uint64_t		u64FileOffset, 
-				VxGUID&			lclSessionId,
-				VxGUID&			rmtSessionId, 
-				VxGUID&			fileAssetId,
-				VxSha1Hash		fileHashId,
-				int				userData );
+	FileToXfer( FileInfo& fileInfo, VxGUID&	lclSessionId, VxGUID& rmtSessionId );				
 
-	FileToXfer& operator=( const FileToXfer& oInfo );
+	FileToXfer& operator=( const FileToXfer& fileXferInfo );
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
-	void						setAssetId( VxGUID& rmtId )					{ m_FileAssetId = rmtId; }
-	VxGUID&						getAssetId( void )							{ return m_FileAssetId; }
-
-	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
-	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
-
-	//=== vars ===//
-    std::string					m_strFileName;
-	uint64_t					m_u64FileOffset;
-	int							m_UserData;
+	void						setFileOffset( uint64_t fileOffset )		{ m_FileOffset = fileOffset; }
+	uint64_t					getFileOffset( void )						{ return m_FileOffset; }
 
 protected:
+	//=== vars ===//
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	VxGUID						m_FileAssetId;
-	VxSha1Hash					m_FileHashId;
+	uint64_t					m_FileOffset{ 0 };
 };

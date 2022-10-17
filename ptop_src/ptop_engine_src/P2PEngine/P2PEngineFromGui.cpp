@@ -29,6 +29,7 @@
 #include <MediaToolsLib/MediaTools.h>
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileToXfer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileShareServer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginNetServices.h>
@@ -725,25 +726,19 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 }
 
 //============================================================================
-int P2PEngine::fromGuiPluginControl(	EPluginType		pluginType, 
-										VxGUID&			onlineId,
-										const char*		pControl, 
-										const char*		pAction,
-										uint32_t		u32ActionData,
-										VxGUID&			lclSessionId,
-										uint8_t *		fileHashId )
+EXferError P2PEngine::fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiPluginControl" );
-	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
+	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiFileXferControl" );
+	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( fileInfo.getOnlineId() );
 	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiPluginControl( netIdent, pControl, pAction, u32ActionData, lclSessionId, fileHashId );
+		return poPlugin->fromGuiFileXferControl( netIdent, xferAction, fileInfo );
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiPluginControl invalid plugin" );
-		return 0;
+		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiFileXferControl invalid plugin" );
+		return eXferErrorBadParam;
 	}
 }
 

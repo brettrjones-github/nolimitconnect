@@ -20,7 +20,6 @@ HEADERS += \
     $$PWD/GuiInterface/IAudioInterface.h \
     $$PWD/GuiInterface/IDefs.h \
     $$PWD/GuiInterface/IFromGui.h \
-    $$PWD/GuiInterface/INlc.h \
     $$PWD/GuiInterface/ILog.h \
     $$PWD/GuiInterface/IScan.h \
     $$PWD/GuiInterface/IToGui.h \
