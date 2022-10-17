@@ -131,10 +131,10 @@ public:
 													VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
 													VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
 
-	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
-	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo );
+	virtual void				toGuiFileUploadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo );
+	virtual void				toGuiFileDownloadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo );
 
-	void						updateToGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 );
+	void						updateToGuiFileXferState( VxGUID& lclSessionId, EXferDirection xferDir, EXferState xferState, EXferError xferErr, int param = 0 );
 	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, std::string fileName, EXferError xferError );
 	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, std::string fileName, EXferError xferError );
 

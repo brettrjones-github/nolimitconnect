@@ -74,8 +74,6 @@ public:
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
 
-    virtual void				toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param = 0 ) override;
-
     virtual void				onSharedFilesUpdated( uint16_t u16FileTypes ) override;
 
 	virtual bool				isServingFiles( void );

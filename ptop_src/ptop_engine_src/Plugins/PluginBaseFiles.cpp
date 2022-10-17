@@ -683,12 +683,6 @@ ECommErr PluginBaseFiles::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxG
 }
 
 //============================================================================
-void PluginBaseFiles::toGuiFileXferState( VxGUID& localSessionId, EXferState xferState, EXferError xferErr, int param )
-{
-
-}
-
-//============================================================================
 void PluginBaseFiles::sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo )
 {
 	m_FileInfoMgr.sendFileSearchResultToGui( searchSessionId, netIdent, fileInfo );

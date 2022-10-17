@@ -167,15 +167,15 @@ public:
 	virtual void				toGuiFileList( FileInfo& fileInfo ) = 0;
 	virtual void				toGuiFileListCompleted( void ) = 0;
 	//! Upload a file started
-	virtual void				toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
+	virtual void				toGuiFileUploadStart( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
 	/// Upload a file completed
 	virtual void				toGuiFileUploadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// Download a file started
-	virtual void				toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
+	virtual void				toGuiFileDownloadStart( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo ) = 0;
 	/// Download a file completed
 	virtual void				toGuiFileDownloadComplete( EPluginType pluginType, VxGUID& lclSessionId, std::string& fileName, EXferError xferError ) = 0;
 	/// File transfer progress and/or state
-	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) = 0;
+	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferDirection xferDir, EXferState xferState, EXferError xferErr, int param1 ) = 0;
 
 	/// Video file or audio file or emote icon or text message has been added to Text Chat session
     virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) = 0;

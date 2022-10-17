@@ -974,22 +974,22 @@ void FileInfoBaseMgr::toGuiRxedOfferReply( VxNetIdent* netIdent,
 }
 
 //============================================================================
-void FileInfoBaseMgr::toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+void FileInfoBaseMgr::toGuiFileUploadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-	m_Plugin.toGuiStartUpload( onlineId, pluginType, lclSessionId, fileInfo );
+	m_Plugin.toGuiFileUploadStart( onlineId, lclSessionId, fileInfo );
 }
 
 //============================================================================
-void FileInfoBaseMgr::toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+void FileInfoBaseMgr::toGuiFileDownloadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-	m_Plugin.toGuiStartDownload( onlineId, pluginType, lclSessionId, fileInfo );
+	m_Plugin.toGuiFileDownloadStart( onlineId, lclSessionId, fileInfo );
 }
 
 //============================================================================
-void FileInfoBaseMgr::updateToGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
+void FileInfoBaseMgr::updateToGuiFileXferState( VxGUID& lclSessionId, EXferDirection xferDir, EXferState xferState, EXferError xferErr, int param )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::toGuiFileXferState xferState %s xferErr %s param %d", DescribeXferState( xferState ), DescribeXferError( xferErr ), param );
-	m_Plugin.toGuiFileXferState( lclSessionId, xferState, xferErr, param );
+	m_Plugin.toGuiFileXferState( lclSessionId, xferDir, xferState, xferErr, param );
 }
 
 //============================================================================

@@ -518,21 +518,21 @@ ECommErr PluginBase::getCommAccessState( VxNetIdent* netIdent )
 }
 
 //============================================================================
-void PluginBase::toGuiStartUpload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+void PluginBase::toGuiFileUploadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-    m_Engine.getToGui().toGuiStartUpload( onlineId, getPluginType(), lclSessionId, fileInfo );
+    m_Engine.getToGui().toGuiFileUploadStart( onlineId, getPluginType(), lclSessionId, fileInfo );
 }
 
 //============================================================================
-void PluginBase::toGuiStartDownload( VxGUID& onlineId, EPluginType pluginType, VxGUID& lclSessionId, FileInfo& fileInfo )
+void PluginBase::toGuiFileDownloadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo )
 {
-    m_Engine.getToGui().toGuiStartDownload( onlineId, getPluginType(), lclSessionId, fileInfo );
+    m_Engine.getToGui().toGuiFileDownloadStart( onlineId, getPluginType(), lclSessionId, fileInfo );
 }
 
 //============================================================================
-void PluginBase::toGuiFileXferState( VxGUID& lclSessionId, EXferState xferState, EXferError xferErr, int param )
+void PluginBase::toGuiFileXferState( VxGUID& lclSessionId, EXferDirection xferDir, EXferState xferState, EXferError xferErr, int param )
 {
-    m_Engine.getToGui().toGuiFileXferState( getPluginType(), lclSessionId, xferState, xferErr, param );
+    m_Engine.getToGui().toGuiFileXferState( getPluginType(), lclSessionId, xferDir, xferState, xferErr, param );
 }
 
 //============================================================================
