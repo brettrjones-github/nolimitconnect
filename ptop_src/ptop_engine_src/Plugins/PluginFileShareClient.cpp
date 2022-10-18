@@ -75,6 +75,43 @@ bool PluginFileShareClient::onFileDownloadComplete( VxNetIdent* netIdent, VxSktB
 		}
 
 		unlockInProgressFileList();
+
+		if( !result && !m_SearchFileInfoList.empty() )
+		{
+			FileInfo foundFileInfo;
+			lockSearchFileList();
+			// may have been started from a search result
+			for( auto iter = m_SearchFileInfoList.begin(); iter != m_SearchFileInfoList.end(); ++iter )
+			{
+				FileInfo& curFileInfo = *iter;
+				if( curFileInfo.getAssetId() == assetId && curFileInfo.getFileHashId() == sha11Hash )
+				{
+					lockCompletedFileList();
+					curFileInfo.setFileName( fileName );
+					foundFileInfo = curFileInfo;
+					m_SearchFileInfoList.erase( iter );
+					result = true;
+					unlockCompletedFileList();
+					break;
+				}
+			}
+
+			unlockSearchFileList();
+			if( result )
+			{
+				// all done
+				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadComplete, foundFileInfo.getFullFileName() );
+			}
+			else
+			{
+				// failed to find the web index file in downloaded files
+				m_Engine.getToGui().toGuiPluginMsg( getPluginType(), m_HisOnlineId, ePluginMsgDownloadFailed, "", 0 );
+			}
+
+			// do not start another
+			result = false;
+		}
+		
 		if( result )
 		{
 			result = false;

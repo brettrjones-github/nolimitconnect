@@ -1508,15 +1508,17 @@ bool IsClientPluginType( enum EPluginType pluginType )
 {
     switch( pluginType )
     {
+    case ePluginTypeCamClient:
+    case ePluginTypePersonFileXfer:
+    case ePluginTypeFileShareClient:
+    case ePluginTypeAboutMePageClient:
+    case ePluginTypeStoryboardClient:
     case ePluginTypeClientGroup:
     case ePluginTypeClientChatRoom:
     case ePluginTypeClientRandomConnect:
     case ePluginTypeClientPeerUser:
     case ePluginTypeClientNetwork:
     case ePluginTypeClientConnectTest:
-    case ePluginTypeFileShareClient:
-    case ePluginTypeCamClient:
-    case ePluginTypePersonFileXfer:
         return true;
 
     case ePluginTypeInvalid:

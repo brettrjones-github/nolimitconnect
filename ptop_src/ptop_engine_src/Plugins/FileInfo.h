@@ -31,6 +31,7 @@ public:
 	static const int FILE_INFO_LONGEST_SEARCH_TEXT_LEN = 512;
 
 	FileInfo();
+    FileInfo( const FileInfo& rhs );
 	FileInfo( VxGUID& onlineId, const std::string& fullFileName );
 	FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType );
 	FileInfo( VxGUID& onlineId, const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId );

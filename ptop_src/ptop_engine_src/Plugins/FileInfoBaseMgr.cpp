@@ -34,11 +34,11 @@
 
 //============================================================================
 FileInfoBaseMgr::FileInfoBaseMgr( P2PEngine& engine, PluginBase& plugin, FileInfoDb& fileInfoDb )
-: m_PrivateEngine( engine )
-, m_Plugin( plugin )
+: m_Plugin( plugin )
 , m_FileShredder( GetVxFileShredder() )
 , m_FileInfoDb( fileInfoDb )
 , m_FileInfoXferMgr( engine, plugin, *this )
+, m_PrivateEngine( engine )
 {
 	LogMsg( LOG_VERBOSE, "FileInfoBaseMgr::FileInfoBaseMgr %s %p", DescribePluginType( plugin.getPluginType() ), this );
 }
@@ -80,7 +80,7 @@ void FileInfoBaseMgr::onAfterUserLogOnThreaded( void )
 	for( auto iter = dbFileList.begin(); iter != dbFileList.end(); ++iter )
 	{
 		FileInfo& fileInfo = iter->second;
-		uint64_t curFileLen = VxFileUtil::fileExists( fileInfo.getFileName().c_str() );
+        int64_t curFileLen = VxFileUtil::fileExists( fileInfo.getFileName().c_str() );
 		if( curFileLen && fileInfo.isValid( false ) )
 		{
 			if( curFileLen == fileInfo.getFileLength() && fileInfo.isValid( true ) )
@@ -622,7 +622,7 @@ bool FileInfoBaseMgr::loadAboutMePageStaticAssets( void )
 		}
 	}
 
-	return result && fileCount == g_AboutMeNameList.size();
+    return result && fileCount == (int)g_AboutMeNameList.size();
 }
 
 //============================================================================
@@ -694,7 +694,7 @@ bool FileInfoBaseMgr::loadStoryboardPageFileAssets( void )
 		}
 	}
 
-	return result && fileCount == fileList.size();
+    return result && fileCount == (int)fileList.size();
 }
 
 //============================================================================
@@ -769,7 +769,6 @@ ECommErr FileInfoBaseMgr::searchRequest( PktFileInfoSearchReply& pktReply, VxGUI
 	ECommErr searchErr = m_FilesInitialized ? eCommErrNone : eCommErrPluginNotEnabled;
 	if( eCommErrNone == searchErr )
 	{
-		uint64_t timeNow = GetGmtTimeMs();
 		pktReply.setCommError( eCommErrNotFound );
 		lockFileList();
 
@@ -872,7 +871,6 @@ ECommErr FileInfoBaseMgr::searchMoreRequest( PktFileInfoMoreReply& pktReply, VxG
 
 	if( eCommErrNone == searchErr )
 	{
-		uint64_t timeNow = GetGmtTimeMs();
 		pktReply.setCommError( eCommErrNotFound );
 		bool foundMatch = false;		
 		lockFileList();
@@ -1100,7 +1098,6 @@ bool FileInfoBaseMgr::fromGuiSetFileIsShared( std::string& fileName, bool isShar
 	{
 		// file is not currently shared and should be
 		uint64_t fileLen = VxFileUtil::fileExists( fileName.c_str() );
-		uint8_t fileType = VxFileExtensionToFileTypeFlag( fileName.c_str() );
 		if( (false == isAllowedFileOrDir( fileName ))
 			|| (0 == fileLen) )
 		{

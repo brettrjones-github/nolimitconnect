@@ -1308,6 +1308,7 @@ void FileInfoXferMgr::onFileReceived( FileRxSession* xferSession, std::string& f
 		else if( VxFileUtil::fileExists( incompleteFile.c_str() ) )
 		{
 			m_FileInfoMgr.onFileDownloadComplete( xferSession->getIdent(), xferSession->getSkt(), xferInfo.getLclSessionId(), incompleteFile, xferInfo.getAssetId(), xferInfo.getFileHashId() );
+			m_FileInfoMgr.toGuiFileDownloadComplete( xferSession->getLclSessionId(), incompleteFile, eXferErrorNone );
 		}
 		else
 		{

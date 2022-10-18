@@ -415,7 +415,8 @@ void PluginBaseFiles::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktH
 		PktBlobEntry& blobEntry = pktReq->getBlobEntry();
 		blobEntry.resetRead();
 		std::string searchText;
-		if( pktReq->getSearchText( searchText ) || searchFileTypes )
+		pktReq->getSearchText( searchText );
+		if( !searchText.empty() || searchFileTypes || ePluginTypeAboutMePageServer == getPluginType() || ePluginTypeStoryboardServer == getPluginType() )
 		{
 			PktFileInfoSearchReply pktReply;
 			pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
