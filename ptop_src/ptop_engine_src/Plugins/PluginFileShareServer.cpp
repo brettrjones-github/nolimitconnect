@@ -74,8 +74,8 @@ void PluginFileShareServer::onFilesChanged( int64_t lastFileUpdateTime, int64_t 
 }
 
 //============================================================================
-void PluginFileShareServer::deleteFile( const char* fileName, bool shredFile )
+void PluginFileShareServer::deleteFile( std::string fileName, bool shredFile )
 {
+	m_Engine.getPluginLibraryServer().fromGuiSetFileIsInLibrary( fileName, false );
 	PluginBaseFilesServer::deleteFile( fileName, shredFile );
-	m_Engine.getPluginLibraryServer().deleteFile( fileName, shredFile );
 }

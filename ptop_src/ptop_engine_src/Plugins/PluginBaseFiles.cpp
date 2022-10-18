@@ -214,18 +214,17 @@ bool PluginBaseFiles::isServingFiles( void )
 }
 
 //============================================================================
-void PluginBaseFiles::deleteFile( const char* fileName, bool shredFile )
+void PluginBaseFiles::deleteFile( std::string fileName, bool shredFile )
 {
-	std::string strFileName = fileName;
-	m_FileInfoXferMgr.fileAboutToBeDeleted( strFileName );
-	m_FileInfoMgr.removeFromDbAndList( strFileName );
+	m_FileInfoXferMgr.fileAboutToBeDeleted( fileName );
+	m_FileInfoMgr.removeFromDbAndList( fileName );
 	if( shredFile )
 	{
-		m_FileShredder.shredFile( strFileName );
+		m_FileShredder.shredFile( fileName );
 	}
 	else
 	{
-		VxFileUtil::deleteFile( strFileName.c_str() );	
+		VxFileUtil::deleteFile( fileName.c_str() );
 	}
 }
 

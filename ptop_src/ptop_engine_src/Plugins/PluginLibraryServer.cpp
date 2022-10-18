@@ -107,8 +107,8 @@ bool PluginLibraryServer::isFileInLibrary( std::string& fileName )
 }
 
 //============================================================================
-void PluginLibraryServer::deleteFile( const char* fileName, bool shredFile )
+void PluginLibraryServer::deleteFile( std::string fileName, bool shredFile )
 {
+	m_Engine.getPluginFileShareServer().fromGuiSetFileIsShared( fileName, false );
 	PluginBaseFilesServer::deleteFile( fileName, shredFile );
-	m_Engine.getPluginFileShareServer().deleteFile( fileName, shredFile );
 }

@@ -78,7 +78,7 @@ public:
 
 	virtual bool				isServingFiles( void );
 
-	virtual void				deleteFile( const char* fileName, bool shredFile );
+	virtual void				deleteFile( std::string fileName, bool shredFile );
 
 protected:
 	virtual void				sendFileSearchResultToGui( VxGUID& searchSessionId, VxNetIdent* netIdent, FileInfo& fileInfo );

@@ -37,7 +37,7 @@ public:
 
 	bool						addFileToLibrary( FileInfo& fileInfo );
 
-	void						deleteFile( const char* fileName, bool shredFile ) override;
+	void						deleteFile( std::string fileName, bool shredFile ) override;
 
 protected:
 	virtual void				onFilesChanged( int64_t lastFileUpdateTime, int64_t totalBytes, uint16_t fileTypes ) override;
