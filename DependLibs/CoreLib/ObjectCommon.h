@@ -27,8 +27,6 @@
 #define OBJNAME_ACTIVITY_IS_PORT_OPEN_TEST              "ActivityIsPortOpenTest"
 #define OBJNAME_ACTIVITY_MESSAGE_BOX					"ActivityMessageBox"
 #define OBJNAME_ACTIVITY_NETWORK_STATE					"ActivityNetworkState"
-#define OBJNAME_ACTIVITY_PERMISSIONS					"ActivityPermissions"
-#define OBJNAME_ACTIVITY_PERMISSIONS_RELAY				"ActivityPermissionsRelay"
 #define OBJNAME_ACTIVITY_PERSONAL_RECORDER				"ActivityPersonalRecorder"
 #define OBJNAME_ACTIVITY_PEOPLE_SEARCH					"ActivityScanPeopleSearch"
 #define OBJNAME_ACTIVITY_SCAN_PROFILES					"ActivityScanProfiles"

@@ -115,7 +115,7 @@ public:
     virtual VxGUID&				getCreatorId( void )                            { return BaseInfo::getOnlineId(); }
 
     virtual void				setHistoryId( VxGUID& historyId )               { m_HistoryId = historyId; }
-    virtual void				setHistoryId( const char* historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
+    virtual void				setHistoryId( const char* historyId )           { m_HistoryId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getHistoryId( void )                            { return m_HistoryId; }
 
     virtual void				setLocationFlags( uint32_t locFlags )           { m_LocationFlags = locFlags; }
