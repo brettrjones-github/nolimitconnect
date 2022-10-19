@@ -106,12 +106,12 @@ public:
     virtual VxSha1Hash&			getAssetHashId( void )                          { return m_AssetHash; }
 
     virtual void				setAssetUniqueId( VxGUID& uniqueId )            { m_UniqueId = uniqueId; }
-    virtual void				setAssetUniqueId( const char* guid )           { m_UniqueId.fromVxGUIDHexString( guid ); }
+    virtual void				setAssetUniqueId( const char* guid )            { m_UniqueId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getAssetUniqueId( void )                        { return m_UniqueId; }
     virtual VxGUID&				generateNewUniqueId( bool ifNotValid = false ); // generates unique id, assigns it to asset and returns reference to it
 
     virtual void				setCreatorId( VxGUID creatorId )                { BaseInfo::setOnlineId( creatorId ); }
-    virtual void				setCreatorId( const char* creatorId )          { BaseInfo::setOnlineId( creatorId ); }
+    virtual void				setCreatorId( const char* creatorId )           { BaseInfo::setOnlineId( creatorId ); }
     virtual VxGUID&				getCreatorId( void )                            { return BaseInfo::getOnlineId(); }
 
     virtual void				setHistoryId( VxGUID& historyId )               { m_HistoryId = historyId; }
@@ -145,10 +145,10 @@ public:
     virtual void				updateAssetInfo( VxThread* callingThread );
     virtual bool				needsHashGenerated( void );
 
-    static const char*			getDefaultFileExtension( enum EAssetType assetType );
-    static const char*			getSubDirectoryName( enum EAssetType assetType );
+    static const char*          getDefaultFileExtension( EAssetType assetType );
+    static const char*          getSubDirectoryName( EAssetType assetType );
 
-    virtual void                print( void ) const;
+    virtual void                printValues( void ) const;
 
 public:
     //=== vars ===//

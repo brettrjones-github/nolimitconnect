@@ -164,7 +164,7 @@ void P2PEngine::onPktAnnounce( VxSktBase* sktBase, VxPktHdr* pktHdr )
     if( isFirstAnnounce && pkt->getIsPktAnnRevConnectRequested() )
 	{
 		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
-		VxSktBase * poNewSkt = 0;
+		VxSktBase* poNewSkt = 0;
 		m_NetConnector.directConnectTo( pkt->getConnectInfo(), &poNewSkt, eConnectReasonReverseConnectRequested );
 		if( poNewSkt )
 		{
@@ -663,7 +663,7 @@ void P2PEngine::onPktTcpPunch( VxSktBase* sktBase, VxPktHdr* pktHdr )
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTcpPunch" );
 
 	PktTcpPunch * pktPunch = ( PktTcpPunch * )pktHdr;
-	VxSktBase * poNewSkt = 0;
+	VxSktBase* poNewSkt = 0;
 	if( 0 == m_NetConnector.directConnectTo( pktPunch->m_ConnectInfo, &poNewSkt, eConnectReasonPktTcpPunch ) )
 	{
 		LogMsg( LOG_INFO, "P2PEngine:: TcpPunch SUCCESS" );

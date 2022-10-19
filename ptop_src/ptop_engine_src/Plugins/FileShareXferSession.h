@@ -33,8 +33,8 @@ public:
 	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
 	VxNetIdent*					getIdent( void )							{ return m_Ident; }
 
-	void						setSkt( VxSktBase * skt )					{ m_Skt = skt; }
-	VxSktBase *					getSkt( void )								{ return m_Skt; }
+	void						setSkt( VxSktBase* skt )					{ m_Skt = skt; }
+	VxSktBase*					getSkt( void )								{ return m_Skt; }
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_FileXferInfo.setLclSessionId( lclId ); }
 	VxGUID&						getLclSessionId( void )						{ return m_FileXferInfo.getLclSessionId(); }
@@ -66,7 +66,7 @@ public:
 protected:
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
 	int							m_iPercentComplete{ 0 };
-	VxSktBase *					m_Skt{ nullptr };
+	VxSktBase*					m_Skt{ nullptr };
 	VxNetIdent*					m_Ident{ nullptr };
 	uint32_t					m_Error{ 0 };
 

@@ -369,7 +369,7 @@ void AssetBaseInfo::updateAssetInfo( VxThread* callingThread )
 }
 
 //============================================================================
-void AssetBaseInfo::print( void ) const
+void AssetBaseInfo::printValues( void ) const
 {
 	LogMsg( LOG_VERBOSE, "*Begin AssetBaseInfo" );
 	LogMsg( LOG_VERBOSE, "m_AssetName=(%s)", m_AssetName.c_str() );

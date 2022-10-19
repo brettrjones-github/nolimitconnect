@@ -51,7 +51,7 @@ public:
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
 	virtual void				onConnectionLost( VxSktBase* sktBase );	
 	//! called when new better connection from user
-	void						replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	void						replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 	void						onPktScanReq( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReq* poPkt );
 	void						onPktScanReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktScanReply * poPkt );
@@ -59,13 +59,13 @@ public:
 	void						onPktFindFileReply( VxNetIdent* netIdent, VxSktBase* sktBase, PktFindFileReply * poPkt );
 
 	virtual void				onScanResultProfilePic(	VxNetIdent*	netIdent, 
-															VxSktBase *		sktBase, 
+															VxSktBase*		sktBase, 
 															uint8_t *			pu8JpgData, 
 															uint32_t				u32JpgDataLen );
 
 	virtual void				onScanResultError(	EScanType			eScanType,
 														VxNetIdent*		netIdent, 
-														VxSktBase *			sktBase, 
+														VxSktBase*			sktBase, 
 														uint32_t					errCode ); 
 
 	void						scanComplete( void );

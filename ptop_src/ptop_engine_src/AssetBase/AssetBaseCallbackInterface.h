@@ -33,9 +33,9 @@ public:
 	virtual void				callbackAssetFileTypesChanged( uint16_t fileTypes ){};
 	virtual void				callbackAssetPktFileListUpdated( void ){};
 
-    virtual void				callbackAssetAdded( AssetBaseInfo * assetInfo ){};
-    virtual void				callbackAssetUpdated( AssetBaseInfo * assetInfo ){};
-    virtual void				callbackAssetRemoved( AssetBaseInfo * assetInfo ){};
-    virtual void				callbackAssetHistory( void * userData, AssetBaseInfo * assetInfo ){};
+    virtual void				callbackAssetAdded( AssetBaseInfo* assetInfo ){};
+    virtual void				callbackAssetUpdated( AssetBaseInfo* assetInfo ){};
+    virtual void				callbackAssetRemoved( AssetBaseInfo* assetInfo ){};
+    virtual void				callbackAssetHistory( void * userData, AssetBaseInfo* assetInfo ){};
 };
 

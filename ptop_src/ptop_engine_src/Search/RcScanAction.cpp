@@ -194,7 +194,7 @@ void RcScanAction::doSearchResultActions( void )
 }
 
 //============================================================================
-bool RcScanAction::getNextActionConnection( VxNetIdent** ppoIdent, VxSktBase ** ppoSkt )
+bool RcScanAction::getNextActionConnection( VxNetIdent** ppoIdent, VxSktBase** ppoSkt )
 {
 	while( m_MatchedConnectionsList.size() )
 	{
@@ -285,7 +285,7 @@ RcScanMatchedConnection *  RcScanAction::findMatchedConnection( VxNetIdent* netI
 //============================================================================
 void RcScanAction::onScanResultError(	EScanType			eScanType,
 										VxNetIdent*		netIdent,
-										VxSktBase *			sktBase,  
+										VxSktBase*			sktBase,  
 										uint32_t					errCode )
 {
 	removeIdent( netIdent );
@@ -293,7 +293,7 @@ void RcScanAction::onScanResultError(	EScanType			eScanType,
 
 //============================================================================
 void RcScanAction::onScanResultProfilePic(	VxNetIdent*	netIdent, 
-												VxSktBase *		sktBase, 
+												VxSktBase*		sktBase, 
 												uint8_t *			pu8JpgData, 
 												uint32_t				u32JpgDataLen )
 {
@@ -374,7 +374,7 @@ void RcScanAction::onConnectionLost( VxSktBase* sktBase )
 
 //============================================================================
 //! called when new better connection from user
-void RcScanAction::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void RcScanAction::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	std::vector<RcScanMatchedConnection>::iterator iter;
 	m_SearchActionMutex.lock();

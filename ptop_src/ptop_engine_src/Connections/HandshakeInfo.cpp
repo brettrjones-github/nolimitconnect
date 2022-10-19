@@ -28,7 +28,7 @@
 #include <algorithm>
 
 //============================================================================
-HandshakeInfo::HandshakeInfo(VxSktBase *sktBase, VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason, uint64_t timeStamp)
+HandshakeInfo::HandshakeInfo(VxSktBase*sktBase, VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason, uint64_t timeStamp)
     : m_SktBase(sktBase)
     , m_SessionId(sessionId)
     , m_OnlineId(onlineId)

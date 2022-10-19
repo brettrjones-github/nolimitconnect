@@ -550,7 +550,7 @@ void PluginBaseMultimedia::onSessionEnded( PluginSessionBase * session, bool plu
 }
 
 //============================================================================
-void PluginBaseMultimedia::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseMultimedia::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 #ifdef DEBUG_SKT_CONNECTIONS
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::replaceConnection start" );

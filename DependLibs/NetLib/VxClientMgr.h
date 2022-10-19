@@ -25,7 +25,7 @@ public:
 	VxClientMgr();
 	virtual ~VxClientMgr() = default;
 
-	virtual VxSktBase *		makeNewSkt( void );
+	virtual VxSktBase*		makeNewSkt( void );
 
 	//! Connect to ip or URL and return socket.. if cannot connect return NULL
 	virtual VxSktConnect *	connectTo(	const char*	pIpOrUrl,						// remote ip or url 

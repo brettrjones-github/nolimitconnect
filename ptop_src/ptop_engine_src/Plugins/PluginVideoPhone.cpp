@@ -300,7 +300,7 @@ void PluginVideoPhone::onSessionEnded( PluginSessionBase * session, bool pluginI
 }
 
 //============================================================================
-void PluginVideoPhone::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginVideoPhone::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

@@ -46,7 +46,7 @@ public:
 													const char*	pMsg ); 
 	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
 
-	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 protected:
 	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

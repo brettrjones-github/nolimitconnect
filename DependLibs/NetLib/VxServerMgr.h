@@ -37,7 +37,7 @@ public:
 
 	// overrides SktMgrBase
 	//! make a new socket... give derived classes a chance to override
-	virtual VxSktBase *			makeNewAcceptSkt( void );
+	virtual VxSktBase*			makeNewAcceptSkt( void );
 
 	virtual bool				isReadyToAcceptConnections( void )			{ return m_IsReadyToAcceptConnections; }
     virtual bool				isListening( void );

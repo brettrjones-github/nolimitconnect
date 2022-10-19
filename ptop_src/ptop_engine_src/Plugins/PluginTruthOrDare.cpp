@@ -302,7 +302,7 @@ void PluginTruthOrDare::onSessionEnded( PluginSessionBase * session, bool plugin
 }
 
 //============================================================================
-void PluginTruthOrDare::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginTruthOrDare::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

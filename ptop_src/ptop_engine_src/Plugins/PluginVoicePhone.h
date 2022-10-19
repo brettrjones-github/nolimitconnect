@@ -45,7 +45,7 @@ public:
 	virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, 
 													const char*	pMsg ); 
 
-	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 protected:
 	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

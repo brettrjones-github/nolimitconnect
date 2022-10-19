@@ -116,7 +116,7 @@ bool VxServerMgr::checkWatchdog( void )
 }
 
 //============================================================================
-VxSktBase * VxServerMgr::makeNewAcceptSkt( void )				
+VxSktBase* VxServerMgr::makeNewAcceptSkt( void )				
 { 
 	return new VxSktAccept(); 
 }

@@ -43,7 +43,7 @@ ThumbMgr::ThumbMgr( P2PEngine& engine, const char* dbName, const char* dbStateNa
 }
 
 //============================================================================
-AssetBaseInfo * ThumbMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t assetLen )
+AssetBaseInfo* ThumbMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t assetLen )
 {
     if( eAssetTypeThumbnail == assetType )
     {
@@ -69,7 +69,7 @@ AssetBaseInfo* ThumbMgr::createAssetInfo( EAssetType assetType, const char* file
 }
 
 //============================================================================
-AssetBaseInfo * ThumbMgr::createAssetInfo( AssetBaseInfo& assetInfo )
+AssetBaseInfo* ThumbMgr::createAssetInfo( AssetBaseInfo& assetInfo )
 {
     ThumbInfo* assetInfoNew = new ThumbInfo( assetInfo );
     assetInfoNew->assureHasCreatorId();
@@ -135,7 +135,7 @@ bool ThumbMgr::addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAss
 }
 
 //============================================================================
-void ThumbMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
+void ThumbMgr::announceAssetAdded( AssetBaseInfo* assetInfo )
 {
     if( !assetInfo || !assetInfo->isValidThumbnail() )
     {
@@ -167,7 +167,7 @@ void ThumbMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 }
 
 //============================================================================
-void ThumbMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
+void ThumbMgr::announceAssetUpdated( AssetBaseInfo* assetInfo )
 {
     if( !assetInfo || !assetInfo->isValidThumbnail() )
     {
@@ -196,7 +196,7 @@ void ThumbMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
 }
 
 //============================================================================
-void ThumbMgr::announceAssetRemoved( AssetBaseInfo * assetInfo )
+void ThumbMgr::announceAssetRemoved( AssetBaseInfo* assetInfo )
 {
     AssetBaseMgr::announceAssetRemoved( assetInfo );
     ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
@@ -290,7 +290,7 @@ ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime
 //============================================================================
 bool ThumbMgr::fromGuiThumbCreated( ThumbInfo& thumbInfo )
 {
-    AssetBaseInfo * existingAsset = findAsset( thumbInfo.getAssetUniqueId() );
+    AssetBaseInfo* existingAsset = findAsset( thumbInfo.getAssetUniqueId() );
     if( existingAsset )
     {
         *existingAsset = thumbInfo;

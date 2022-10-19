@@ -1383,7 +1383,7 @@ void FileInfoXferMgr::finishFileReceive( FileRxSession* xferSession, PktFileGetC
 }
 
 //============================================================================
-RCODE FileInfoXferMgr::sendFileShareError(		VxSktBase *		sktBase,		// socket
+RCODE FileInfoXferMgr::sendFileShareError(		VxSktBase*		sktBase,		// socket
 												int				iPktType,	// type of packet
 												unsigned short	u16Cmd,		// packet command
 												long			rc,			// error code
@@ -1426,7 +1426,7 @@ bool FileInfoXferMgr::isFileInDownloadFolder( const char* pPartialFileName )
 }
 
 //============================================================================
-void FileInfoXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void FileInfoXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	FileTxIter iter;
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );

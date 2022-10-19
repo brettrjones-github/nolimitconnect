@@ -41,8 +41,8 @@ public:
 	void						setThumbInfo( ThumbInfo& assetInfo )	        { m_ThumbInfo = assetInfo; }
 	ThumbInfo&				    getAssetInfo( void )						    { return m_ThumbInfo; }
 
-	void						setSkt( VxSktBase * skt )					{ m_Skt = skt; }
-	VxSktBase *					getSkt( void )								{ return m_Skt; }
+	void						setSkt( VxSktBase* skt )					{ m_Skt = skt; }
+	VxSktBase*					getSkt( void )								{ return m_Skt; }
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_FileXferInfo.setLclSessionId( lclId ); }
 	VxGUID&						getLclSessionId( void )						{ return m_FileXferInfo.getLclSessionId(); }

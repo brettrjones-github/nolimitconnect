@@ -47,9 +47,9 @@ public:
     std::string				    fromGuiGetThumbFile( VxGUID& thumbId );
     virtual uint64_t			fromGuiClearCache( ECacheType cacheType );
 
-    virtual void				announceAssetAdded( AssetBaseInfo * assetInfo ) override;
-    virtual void				announceAssetUpdated( AssetBaseInfo * assetInfo ) override;
-    virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo ) override;
+    virtual void				announceAssetAdded( AssetBaseInfo* assetInfo ) override;
+    virtual void				announceAssetUpdated( AssetBaseInfo* assetInfo ) override;
+    virtual void				announceAssetRemoved( AssetBaseInfo* assetInfo ) override;
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) override;
 
     virtual void				queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType );
@@ -76,9 +76,9 @@ public:
 protected:
     virtual bool				addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset ) override;
 
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId ) override;
-    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+    virtual AssetBaseInfo*     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
+    virtual AssetBaseInfo*     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId ) override;
+    virtual AssetBaseInfo*     createAssetInfo( AssetBaseInfo& assetInfo ) override;
     ThumbInfo*                  lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime = 0 );
     void				        announceThumbAdded( ThumbInfo& thumbInfo );
     void				        announceThumbUpdated( ThumbInfo& thumbInfo );

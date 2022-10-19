@@ -26,7 +26,7 @@ class VxPktHdr;
 class IVxSktWaitingCallback
 {
 public:
-	virtual	void					onSktWaitExpired(	VxSktBase *		sktBase, 
+	virtual	void					onSktWaitExpired(	VxSktBase*		sktBase, 
 														uint32_t				u32WaitReason, 
 														VxPktHdr*		poPkt,
 														void *			pvWaitInstance,
@@ -43,7 +43,7 @@ public:
 
 	VxSktWaitReason& operator =( const VxSktWaitReason& rhs );
 
-	VxSktBase *				m_Skt;
+	VxSktBase*				m_Skt;
 	VxPktHdr*				m_Pkt;
 	uint64_t						m_u64TimeExpires; 
 	uint32_t						m_u32WaitReason;
@@ -61,7 +61,7 @@ public:
 	virtual void				onOncePerSecond( void );		
 	virtual void				onConnectionLost( VxSktBase* sktBase );	
 
-	virtual void				addWaiting(		VxSktBase *		sktBase, 
+	virtual void				addWaiting(		VxSktBase*		sktBase, 
 												uint32_t				u32WaitReason, 
 												uint64_t				u64TimeExpiresSysTimeMs, 
 												VxPktHdr*		poPkt = 0, 

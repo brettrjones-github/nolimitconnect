@@ -174,7 +174,7 @@ void PluginBaseHostService::sendHostAnnounce( void )
 }
 
 //============================================================================
-void PluginBaseHostService::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseHostService::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 //    m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

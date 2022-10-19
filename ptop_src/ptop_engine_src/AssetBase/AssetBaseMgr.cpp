@@ -239,12 +239,12 @@ void AssetBaseMgr::generateHashIds( VxThread* genHashThread )
 				}
 
 				std::vector<AssetBaseInfo*>::iterator iter;
-				AssetBaseInfo * assetInfo = 0;
+				AssetBaseInfo* assetInfo = 0;
 				lockResources();
 				// move from waiting to completed
 				for( iter = m_WaitingForHastList.begin(); iter != m_WaitingForHastList.end(); ++iter )
 				{
-					AssetBaseInfo * inListAssetBaseInfo = *iter;
+					AssetBaseInfo* inListAssetBaseInfo = *iter;
 					if( inListAssetBaseInfo->getAssetName() == thisFile )
 					{
 						assetInfo = inListAssetBaseInfo;
@@ -301,7 +301,7 @@ bool AssetBaseMgr::doesAssetExist( AssetBaseInfo& assetInfo ) // check if file s
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::findAsset( std::string& fileName )
+AssetBaseInfo* AssetBaseMgr::findAsset( std::string& fileName )
 {
 	std::vector<AssetBaseInfo*>::iterator iter;
 	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
@@ -316,7 +316,7 @@ AssetBaseInfo * AssetBaseMgr::findAsset( std::string& fileName )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::findAsset( VxSha1Hash& fileHashId )
+AssetBaseInfo* AssetBaseMgr::findAsset( VxSha1Hash& fileHashId )
 {
 	if( false == fileHashId.isHashValid() )
 	{
@@ -337,7 +337,7 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxSha1Hash& fileHashId )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
+AssetBaseInfo* AssetBaseMgr::findAsset( VxGUID& assetId )
 {
 	if( false == assetId.isVxGUIDValid() )
 	{
@@ -345,7 +345,7 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
         return nullptr;
 	}
 
-	for( AssetBaseInfo * assetInfo : m_AssetBaseInfoList )
+	for( AssetBaseInfo* assetInfo : m_AssetBaseInfoList )
 	{
 		if( assetInfo->getAssetUniqueId() == assetId )
 		{
@@ -357,11 +357,11 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::addAssetFile( EAssetType assetType, const char* fileName, uint64_t fileLen )
+AssetBaseInfo* AssetBaseMgr::addAssetFile( EAssetType assetType, const char* fileName, uint64_t fileLen )
 {
 	VxGUID assetId;
 	assetId.initializeWithNewVxGUID();
-    AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, fileLen, assetId );
+    AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, fileLen, assetId );
     if( assetInfo )
     {
         if( insertNewInfo( assetInfo ) )
@@ -397,7 +397,7 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 									const char*	assetTag, 
                                     int64_t			timestamp )
 {
-	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		return insertNewInfo( assetInfo );
@@ -417,7 +417,7 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 									const char*	assetTag, 
                                     int64_t			timestamp )
 {
-	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		assetInfo->setCreatorId( creatorId );
@@ -431,16 +431,16 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 //============================================================================
 bool AssetBaseMgr::addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset )
 {
-	AssetBaseInfo * newAssetBaseInfo = createAssetInfo( assetInfo );
+	AssetBaseInfo* newAssetBaseInfo = createAssetInfo( assetInfo );
 	LogMsg( LOG_INFO, "AssetBaseMgr::addAsset" );
 	retCreatedAsset = newAssetBaseInfo;
 	return newAssetBaseInfo != nullptr && insertNewInfo( newAssetBaseInfo );
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
+AssetBaseInfo* AssetBaseMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
 {
-    AssetBaseInfo * assetInfo = new AssetBaseInfo( assetType, fileName, fileLen );
+    AssetBaseInfo* assetInfo = new AssetBaseInfo( assetType, fileName, fileLen );
     if( assetInfo )
     {
         assetInfo->getAssetUniqueId().initializeWithNewVxGUID();
@@ -459,7 +459,7 @@ AssetBaseInfo* AssetBaseMgr::createAssetInfo( EAssetType assetType, const char* 
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType, 
+AssetBaseInfo* AssetBaseMgr::createAssetInfo( 	EAssetType      assetType, 
                                                 const char*	fileName, 
 										        VxGUID&			assetId,  
 										        uint8_t *	    hashId, 
@@ -475,7 +475,7 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType,
 		return NULL;
 	}
 
-	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, fileLen );
+	AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, fileLen );
 	assetInfo->setAssetUniqueId( assetId );
 	if( false == assetInfo->getAssetUniqueId().isVxGUIDValid() )
 	{
@@ -492,10 +492,10 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType,
 }
 
 //============================================================================
-bool AssetBaseMgr::insertNewInfo( AssetBaseInfo * assetInfo )
+bool AssetBaseMgr::insertNewInfo( AssetBaseInfo* assetInfo )
 {
 	bool result = false;
-	AssetBaseInfo * assetInfoExisting = findAsset( assetInfo->getAssetUniqueId() );
+	AssetBaseInfo* assetInfoExisting = findAsset( assetInfo->getAssetUniqueId() );
 	if( assetInfoExisting )
 	{
 		LogMsg( LOG_ERROR, "ERROR AssetBaseMgr::insertNewInfo: duplicate assset %s\n", assetInfo->getAssetName().c_str() );
@@ -543,7 +543,7 @@ bool AssetBaseMgr::insertNewInfo( AssetBaseInfo * assetInfo )
 //============================================================================
 bool AssetBaseMgr::updateAsset( AssetBaseInfo& assetInfo )
 {
-    AssetBaseInfo * existingAsset = findAsset( assetInfo.getAssetUniqueId() );
+    AssetBaseInfo* existingAsset = findAsset( assetInfo.getAssetUniqueId() );
     if( existingAsset )
     {
         *existingAsset = assetInfo;
@@ -556,7 +556,7 @@ bool AssetBaseMgr::updateAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-void AssetBaseMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
+void AssetBaseMgr::announceAssetAdded( AssetBaseInfo* assetInfo )
 {
 	// LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetAdded start" );
 	if( assetInfo->isFileAsset() )
@@ -579,7 +579,7 @@ void AssetBaseMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 }
 
 //============================================================================
-void AssetBaseMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
+void AssetBaseMgr::announceAssetUpdated( AssetBaseInfo* assetInfo )
 {
     // LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetUpdated start" );
     lockClientList();
@@ -596,7 +596,7 @@ void AssetBaseMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
 }
 
 //============================================================================
-void AssetBaseMgr::announceAssetRemoved( AssetBaseInfo * assetInfo )
+void AssetBaseMgr::announceAssetRemoved( AssetBaseInfo* assetInfo )
 {
 	//if( assetInfo->getIsAssetBase() )
 	{
@@ -642,7 +642,7 @@ bool AssetBaseMgr::removeAsset( std::string fileName, bool deleteFile )
 	{
 		if( fileName == (*iter)->getAssetName() )
 		{
-			AssetBaseInfo * assetInfo = *iter;
+			AssetBaseInfo* assetInfo = *iter;
 			m_AssetBaseInfoList.erase( iter );
 			m_AssetBaseInfoDb.removeAsset( fileName.c_str() );
 			announceAssetRemoved( assetInfo );
@@ -669,7 +669,7 @@ bool AssetBaseMgr::removeAsset( VxGUID& assetUniqueId, bool deleteFile )
 	{
 		if( assetUniqueId == ( *iter )->getAssetUniqueId() )
 		{
-			AssetBaseInfo * assetInfo = *iter;
+			AssetBaseInfo* assetInfo = *iter;
 			std::string fileName = assetInfo->getAssetName();
 			m_AssetBaseInfoList.erase( iter );
 			m_AssetBaseInfoDb.removeAsset( assetInfo );
@@ -813,7 +813,7 @@ void AssetBaseMgr::updateFileListPackets( void )
 	std::vector<AssetBaseInfo*>::iterator iter;
 	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
 	{
-		AssetBaseInfo * assetInfo = (*iter); 
+		AssetBaseInfo* assetInfo = (*iter); 
 		if( ( false == assetInfo->isFileAsset() ) || ( false == assetInfo->getAssetHashId().isHashValid() ) )
 			continue;
 
@@ -909,7 +909,7 @@ bool AssetBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile,
 	{
 		// file is not currently AssetBase and should be
 		VxGUID guid;
-		AssetBaseInfo * assetInfo = createAssetInfo( VxFileNameToAssetType( fileName ), fileName.c_str(), guid, fileHashId, eAssetLocShared );
+		AssetBaseInfo* assetInfo = createAssetInfo( VxFileNameToAssetType( fileName ), fileName.c_str(), guid, fileHashId, eAssetLocShared );
 		if( assetInfo )
 		{
 			insertNewInfo( assetInfo );
@@ -993,7 +993,7 @@ bool AssetBaseMgr::fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-void AssetBaseMgr::updateDatabase( AssetBaseInfo * assetInfo )
+void AssetBaseMgr::updateDatabase( AssetBaseInfo* assetInfo )
 {
 	m_AssetBaseInfoDb.addAsset( assetInfo );
 }

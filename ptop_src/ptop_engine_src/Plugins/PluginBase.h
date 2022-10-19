@@ -209,7 +209,7 @@ public:
 	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase )	{};
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) = 0;
 	virtual void				onConnectionLost( VxSktBase* sktBase ) = 0;
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) = 0;
 
     bool						txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr* poPkt, bool bDisconnectAfterSend = false ) override;
     bool						txPacket( const VxGUID& onlineId, VxSktBase* sktBase, VxPktHdr* poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );

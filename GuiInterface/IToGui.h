@@ -46,7 +46,7 @@ public:
 
 	virtual void                toGuiCreateUserDirs( void ) = 0;
 
-    virtual void				toGuiPlayNlcMedia( AssetBaseInfo * assetInfo ) = 0;
+    virtual void				toGuiPlayNlcMedia( AssetBaseInfo* assetInfo ) = 0;
 
 	/// Send log message to GUI
 	virtual void				toGuiLog( int logFlags, const char* pMsg ) = 0;
@@ -178,7 +178,7 @@ public:
 	virtual void				toGuiFileXferState( EPluginType pluginType, VxGUID& lclSessionId, EXferDirection xferDir, EXferState xferState, EXferError xferErr, int param1 ) = 0;
 
 	/// Video file or audio file or emote icon or text message has been added to Text Chat session
-    virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) = 0;
+    virtual void				toGuiAssetAdded( AssetBaseInfo* assetInfo ) = 0;
 	virtual void				toGuiAssetUpdated( AssetBaseInfo* assetInfo ) = 0;
 	virtual void				toGuiAssetRemoved( AssetBaseInfo* assetInfo ) = 0;
 

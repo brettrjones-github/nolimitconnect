@@ -62,7 +62,7 @@ public:
     int							buildNetCmdHeader( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, int contentLength, ENetCmdError errCode = eNetCmdErrorNone, int version = 1 );
 
     static void					generateNetServiceChallengeHash(	std::string&			strKey,
-                                                                    VxSktBase *				skt,
+                                                                    VxSktBase*				skt,
                                                                     std::string             netKey);
     static void					generateNetServiceChallengeHash(	std::string&			strKey,
                                                                     VxSktConnectSimple *	skt,

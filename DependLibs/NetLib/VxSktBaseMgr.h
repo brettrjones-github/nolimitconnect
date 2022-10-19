@@ -46,9 +46,9 @@ public:
 
 
 	//! make a new socket... give derived classes a chance to override
-	virtual VxSktBase *			makeNewSkt( void );
+	virtual VxSktBase*			makeNewSkt( void );
 	//! make a new socket... give derived classes a chance to override
-	virtual VxSktBase *			makeNewAcceptSkt( void );
+	virtual VxSktBase*			makeNewAcceptSkt( void );
 
 
 	//! User must Set Receive Callback
@@ -79,7 +79,7 @@ public:
 	//! add a new socket to manage
 	virtual void				addSkt( VxSktBase* sktBase );
 	//! remove a socket from management
-	virtual RCODE				removeSkt(	VxSktBase *	sktBase,				// skt to remove
+	virtual RCODE				removeSkt(	VxSktBase*	sktBase,				// skt to remove
 											bool		bDelete = true );	    // if true delete the skt
 	virtual bool				isSktActive( VxSktBase* sktBase );
 
@@ -93,15 +93,15 @@ public:
 
     virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 
-    virtual void                setSktLoopback( VxSktBase * sktLoopback )       { m_SktLoopback = sktLoopback; }
+    virtual void                setSktLoopback( VxSktBase* sktLoopback )       { m_SktLoopback = sktLoopback; }
 
 	virtual bool				closeConnection( VxGUID& connectId, ESktCloseReason closeReason );
 
 	//=== vars ===//
 	RCODE						m_rcLastError{ 0 };
     ESktMgrType					m_eSktMgrType{ eSktMgrTypeNone };   // type of sockets we manage
-	std::vector<VxSktBase *>	m_aoSkts;					        // array of sockets to manage
-	std::vector<VxSktBase *>	m_aoSktsToDelete;			        // skts that will be deleted after 10 sec 
+	std::vector<VxSktBase*>	m_aoSkts;					        // array of sockets to manage
+	std::vector<VxSktBase*>	m_aoSktsToDelete;			        // skts that will be deleted after 10 sec 
 	VxMutex						m_SktMgrMutex;			            // thread mutex
 	VxMutex						m_SktListMutex;			            // thread mutex
 
@@ -121,6 +121,6 @@ protected:
     virtual void                doSktDeleteCleanup( void );
 	virtual void				deleteAllSockets( void );
 
-    VxSktBase *                 m_SktLoopback{ nullptr };	        
+    VxSktBase*                 m_SktLoopback{ nullptr };	        
 };
 

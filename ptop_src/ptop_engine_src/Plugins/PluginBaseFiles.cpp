@@ -358,7 +358,7 @@ void PluginBaseFiles::onPktFileShareErr( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 }
 
 //============================================================================
-void PluginBaseFiles::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginBaseFiles::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

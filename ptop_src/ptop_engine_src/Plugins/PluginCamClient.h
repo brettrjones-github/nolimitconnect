@@ -48,7 +48,7 @@ public:
 protected:
     virtual EPluginAccess       canAcceptNewSession			( VxNetIdent* netIdent ) override;
 
-    virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+    virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
     virtual void				onConnectionLost			( VxSktBase* sktBase ) override;
     virtual void				onContactWentOffline		( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
 

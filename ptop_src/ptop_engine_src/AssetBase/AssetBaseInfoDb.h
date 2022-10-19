@@ -51,23 +51,23 @@ public:
 											const char*	assetTag = "", 
 											EAssetSendState sendState = eAssetSendStateNone);
 
-	bool 						addAsset( AssetBaseInfo * assetInfo );
+	bool 						addAsset( AssetBaseInfo* assetInfo );
 
 	void						removeAsset( const char* assetName );
 	void						removeAsset( VxGUID& assetId );
-	void						removeAsset( AssetBaseInfo * assetInfo );
+	void						removeAsset( AssetBaseInfo* assetInfo );
 
 	void						getAllAssets( std::vector<AssetBaseInfo*>& AssetBaseAssetList );
 	void						purgeAllAssets( void ); 
 	void						updateAssetSendState( VxGUID& assetId, EAssetSendState sendState );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen ) = 0;
-    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
+    virtual AssetBaseInfo*     createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen ) = 0;
+    virtual AssetBaseInfo*     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
-	void						insertAssetInTimeOrder( AssetBaseInfo *assetInfo, std::vector<AssetBaseInfo*>& assetList );
+	void						insertAssetInTimeOrder( AssetBaseInfo*assetInfo, std::vector<AssetBaseInfo*>& assetList );
 
 	AssetBaseMgr&				m_AssetMgr;
 	VxMutex						m_AssetBaseInfoDbMutex;

@@ -119,8 +119,8 @@ RcConnectInfo * P2PConnectList::addConnection( const VxGUID& oOnlineId, RcConnec
 				poInfo->m_BigListInfo->isMyRelay()
 				);
 #endif // DEBUG_CONNECT_LIST
-			VxSktBase *	poNewSkt = poInfoIn->m_SktBase;
-			VxSktBase *	poOldSkt = poInfo->m_SktBase;
+			VxSktBase*	poNewSkt = poInfoIn->m_SktBase;
+			VxSktBase*	poOldSkt = poInfo->m_SktBase;
 			if( poNewSkt != poOldSkt )
 			{
 				poInfo->m_SktBase = poNewSkt;

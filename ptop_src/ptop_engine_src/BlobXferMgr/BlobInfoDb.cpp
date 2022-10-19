@@ -24,13 +24,13 @@ BlobInfoDb::BlobInfoDb( AssetBaseMgr& hostListMgr, const char* dbName )
 }
 
 //============================================================================
-AssetBaseInfo * BlobInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
+AssetBaseInfo* BlobInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     return new BlobInfo( assetType, assetName, assetLen );
 }
 
 //============================================================================
-AssetBaseInfo * BlobInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
+AssetBaseInfo* BlobInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
 {
     return new BlobInfo( assetInfo );
 }

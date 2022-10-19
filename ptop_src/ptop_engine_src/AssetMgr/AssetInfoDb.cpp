@@ -26,13 +26,13 @@ AssetInfoDb::AssetInfoDb( AssetBaseMgr& assetInfoMgr, const char* dbName )
 }
 
 //============================================================================
-AssetBaseInfo * AssetInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
+AssetBaseInfo* AssetInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     return new AssetInfo( assetType, assetName, assetLen );
 }
 
 //============================================================================
-AssetBaseInfo * AssetInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
+AssetBaseInfo* AssetInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
 {
     return new AssetInfo( assetInfo );
 }

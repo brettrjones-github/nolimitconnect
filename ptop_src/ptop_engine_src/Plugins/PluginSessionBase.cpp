@@ -127,7 +127,7 @@ void PluginSessionBase::setSkt( VxSktBase* sktBase )
 }
 
 //============================================================================
-VxSktBase * PluginSessionBase::getSkt( void )
+VxSktBase* PluginSessionBase::getSkt( void )
 { 
 	return m_Skt; 
 }

@@ -48,16 +48,16 @@ public:
 	void						stayConnectedShutdown( void );
 
 	bool						connectToContact(	VxConnectInfo&		connectInfo, 
-													VxSktBase **		ppoRetSkt,
+													VxSktBase**		ppoRetSkt,
 													bool&				retIsNewConnection,
 													EConnectReason		connectReason );
 
 	RCODE						directConnectTo(	VxConnectInfo&			connectInfo,		 
-													VxSktBase **			ppoRetSkt,		 
+													VxSktBase**			ppoRetSkt,		 
 													EConnectReason			connectReason );
 												
 	bool						sendMyPktAnnounce(  VxGUID&					destinationId,
-													VxSktBase *				sktBase, 
+													VxSktBase*				sktBase, 
 													bool					requestAnnReply = false,
 													bool					requestReverseConnection = false,
 													bool					requestSTUN = false );
@@ -70,26 +70,26 @@ public:
 
 	bool						doConnectRequest( ConnectRequest& connectRequest, bool ignoreToSoonToConnectAgain = false );
 
-	void						closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo = NULL );
-	void						closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo = NULL );
+	void						closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase* skt, BigListInfo * poInfo = NULL );
+	void						closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase* skt, BigListInfo * poInfo = NULL );
 	void						addConnectRequestToQue( VxConnectInfo& connectInfo, EConnectReason connectReason = eConnectReasonStayConnected, bool addToHeadOfQue = false, bool replaceExisting = true );
 
-	void						handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );
+	void						handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase* skt, bool isNewConnection, EConnectReason connectReason );
 	//void						handlePossibleRelayConnect(	VxConnectInfo&		connectInfo, 
-	//														VxSktBase *			sktBase,
+	//														VxSktBase*			sktBase,
 	//														bool				retIsNewConnection,
 	//														EConnectReason		connectReason );
 
 protected:
 	bool						connectUsingTcp(	VxConnectInfo&		connectInfo, 
-													VxSktBase **		ppoRetSkt,
+													VxSktBase**		ppoRetSkt,
 													EConnectReason		connectReason );
 
 	bool						tryIPv6Connect(	VxConnectInfo&		connectInfo, 
-												VxSktBase **		ppoRetSkt );
+												VxSktBase**		ppoRetSkt );
 
 	bool						txPacket(	VxGUID&			destinationId, 
-											VxSktBase *			sktBase, 
+											VxSktBase*			sktBase, 
 											VxPktHdr*			poPkt );
 
 	bool						connectToContact( ConnectRequest& connectRequest, bool replaceExisting = true );

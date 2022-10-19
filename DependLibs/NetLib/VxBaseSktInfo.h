@@ -36,7 +36,7 @@ public:
 	void queFileToSend( const char* pLclFileName, const char* pRmtFileName );
 
 protected:
-	VxSktBase *					m_Skt;			// socket
+	VxSktBase*					m_Skt;			// socket
 	uint32_t							m_u32PeerIp;		// peer's ip in binary form
 	char						m_as8PeerIp[16];	// peer's ip in ascii form
 	uint32_t							m_u32LocalIp;		// our ip in binary form

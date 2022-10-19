@@ -26,7 +26,7 @@
 
 namespace
 {
-	void VxPeerMgrRxCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
+	void VxPeerMgrRxCallbackHandler( VxSktBase*  sktBase, void * pvUserCallbackData )
 	{
 		VxPeerMgr * peerMgr = ( VxPeerMgr * )pvUserCallbackData;
 		if( peerMgr )
@@ -84,7 +84,7 @@ void VxPeerMgr::setLocalIp( InetAddress& newLocalIp )
 
 //============================================================================
 //! make a new socket... give derived classes a chance to override
-VxSktBase * VxPeerMgr::makeNewSkt( void )
+VxSktBase* VxPeerMgr::makeNewSkt( void )
 { 
 	return new VxSktConnect(); 
 }
@@ -164,7 +164,7 @@ void VxPeerMgr::handleSktCallback( VxSktBase* sktBase )
 }
 
 //============================================================================
-bool VxPeerMgr::txPacket(	VxSktBase *			sktBase,
+bool VxPeerMgr::txPacket(	VxSktBase*			sktBase,
 							const VxGUID&		destOnlineId,
 							VxPktHdr*			pktHdr, 				
 							bool				bDisconnect )
@@ -174,7 +174,7 @@ bool VxPeerMgr::txPacket(	VxSktBase *			sktBase,
 }
 
 //============================================================================
-bool VxPeerMgr::txPacketWithDestId(	VxSktBase *			sktBase,
+bool VxPeerMgr::txPacketWithDestId(	VxSktBase*			sktBase,
 									VxPktHdr*			pktHdr, 		
 									bool				bDisconnect )
 {

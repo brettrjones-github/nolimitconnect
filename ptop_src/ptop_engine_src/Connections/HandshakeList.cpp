@@ -60,7 +60,7 @@ void HandshakeList::removeHandshakeInfo( const VxGUID& sessionId )
 }
 
 //============================================================================
-void HandshakeList::addHandshake( VxSktBase *sktBase, VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
+void HandshakeList::addHandshake( VxSktBase*sktBase, VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     uint64_t timeNow = GetTimeStampMs();
     HandshakeInfo shakeInfo( sktBase, sessionId, onlineId, callback, connectReason, timeNow );

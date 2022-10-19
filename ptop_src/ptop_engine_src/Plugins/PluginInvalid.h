@@ -35,7 +35,7 @@ public:
 
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) {};
 	//! called when new better connection from user
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ){};
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ){};
 	virtual void				onConnectionLost( VxSktBase* sktBase ) {}; 
 
 	//=== methods ===//

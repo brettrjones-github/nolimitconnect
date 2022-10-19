@@ -36,13 +36,13 @@ BlobInfo::BlobInfo()
 //============================================================================
 BlobInfo::BlobInfo( const BlobInfo& rhs )
 {
-	*((AssetBaseInfo *)this) = rhs;
+	*((AssetBaseInfo*)this) = rhs;
 }
 
 //============================================================================
 BlobInfo::BlobInfo( const AssetBaseInfo& rhs )
 {
-    *((AssetBaseInfo *)this) = rhs;
+    *((AssetBaseInfo*)this) = rhs;
 }
 
 //============================================================================
@@ -74,7 +74,7 @@ BlobInfo& BlobInfo::operator=( const BlobInfo& rhs )
 {	
 	if( this != &rhs )
 	{
-        *((AssetBaseInfo *)this) = rhs;
+        *((AssetBaseInfo*)this) = rhs;
 	}
 
 	return *this;

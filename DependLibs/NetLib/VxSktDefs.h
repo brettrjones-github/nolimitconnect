@@ -18,7 +18,7 @@
 
 class VxSktBase;
 
-typedef void (*VX_SKT_CALLBACK)(VxSktBase *, void *);
+typedef void (*VX_SKT_CALLBACK)(VxSktBase*, void *);
 
 #define MAX_DISCONNECTED_SKT_TO_KEEP_AROUND				50
 

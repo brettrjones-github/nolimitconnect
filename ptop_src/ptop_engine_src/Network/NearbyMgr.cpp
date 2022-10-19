@@ -20,7 +20,7 @@
 
 namespace
 {
-    void NetworkMulticastCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
+    void NetworkMulticastCallbackHandler( VxSktBase*  sktBase, void * pvUserCallbackData )
     {
     	if( pvUserCallbackData )
     	{

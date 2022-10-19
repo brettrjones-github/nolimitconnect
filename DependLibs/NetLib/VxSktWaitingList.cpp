@@ -188,7 +188,7 @@ void VxSktWaitingList::onConnectionLost( VxSktBase* sktBase )
 }
 
 //============================================================================
-void VxSktWaitingList::addWaiting(	VxSktBase *		sktBase, 
+void VxSktWaitingList::addWaiting(	VxSktBase*		sktBase, 
 									uint32_t				u32WaitReason, 
 									uint64_t				u64TimeExpiresSysTimeMs, 
 									VxPktHdr*		poPkt, 

@@ -100,7 +100,7 @@ protected:
                                                     int					        iConnectTimeoutMs = DIRECT_CONNECT_TIMEOUT );  // how long to attempt connect
 
     EConnectStatus				directConnectTo(	VxConnectInfo&			    connectInfo,		 
-                                                    VxSktBase *&			    ppoRetSkt,		
+                                                    VxSktBase*&			    ppoRetSkt,		
                                                     VxGUID                      sessionId,
                                                     int						    iConnectTimeout = DIRECT_CONNECT_TIMEOUT,	 
                                                     bool					    useLanIp = false,
@@ -120,23 +120,23 @@ protected:
     void                        addConnectRequestToQue( VxConnectInfo& connectInfo, enum EConnectReason connectReason, bool addToHeadOfQue, bool replaceExisting );
     void                        addConnectRequestToQue( ConnectReqInfo& connectRequest, bool addToHeadOfQue, bool replaceExisting );
     bool                        connectToContact(   VxConnectInfo&		connectInfo,
-                                                    VxSktBase *&		ppoRetSkt,
+                                                    VxSktBase*&		ppoRetSkt,
                                                     VxGUID&             sessionId,
                                                     bool&				retIsNewConnection );
-    bool                        connectUsingTcp( VxConnectInfo& connectInfo, VxSktBase *& ppoRetSkt, VxGUID& sessionId );
-    bool                        tryIPv6Connect( VxConnectInfo& connectInfo, VxSktBase *& ppoRetSkt );
+    bool                        connectUsingTcp( VxConnectInfo& connectInfo, VxSktBase*& ppoRetSkt, VxGUID& sessionId );
+    bool                        tryIPv6Connect( VxConnectInfo& connectInfo, VxSktBase*& ppoRetSkt );
 
     bool                        sendMyPktAnnounce(  VxGUID&				destinationId,
-                                                    VxSktBase *			sktBase,
+                                                    VxSktBase*			sktBase,
                                                     bool				requestAnnReply,
                                                     bool				requestReverseConnection,
                                                     bool				requestSTUN );
     bool                        txPacket( VxGUID&				destinationId,
-                                          VxSktBase *			sktBase,
+                                          VxSktBase*			sktBase,
                                           VxPktHdr*			poPkt );
 
-    void                        handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );
-    void                        closeConnection( enum ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo );
+    void                        handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase* skt, bool isNewConnection, EConnectReason connectReason );
+    void                        closeConnection( enum ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase* skt, BigListInfo * poInfo );
 
     bool                        doConnectRequest( ConnectReqInfo& connectRequest, bool ignoreToSoonToConnectAgain );
 

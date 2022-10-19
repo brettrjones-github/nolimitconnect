@@ -99,7 +99,7 @@ PluginSessionBase *	 PluginSessionMgr::findPluginSessionByOnlineId( VxGUID& onli
 }
 
 //============================================================================
-void PluginSessionMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginSessionMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	SessionIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK

@@ -154,7 +154,7 @@ void OfferBaseXferMgr::assetXferThreadWork( VxThread* workThread )
 //============================================================================
 void OfferBaseXferMgr::fromGuiCancelDownload( VxGUID& lclSessionId )
 {
-	std::map<VxGUID, OfferBaseRxSession *>::iterator iter;
+	std::map<VxGUID, OfferBaseRxSession*>::iterator iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::fromGuiCancelDownload AutoPluginLock start");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -165,7 +165,7 @@ void OfferBaseXferMgr::fromGuiCancelDownload( VxGUID& lclSessionId )
 	iter = m_RxSessions.find( lclSessionId );
 	if( iter != m_RxSessions.end() )
 	{
-		OfferBaseRxSession * xferSession = iter->second;
+		OfferBaseRxSession* xferSession = iter->second;
 		if( xferSession->getLclSessionId() == lclSessionId )
 		{
 			m_RxSessions.erase( iter );
@@ -214,7 +214,7 @@ void OfferBaseXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 //============================================================================
 void OfferBaseXferMgr::clearRxSessionsList( void )
 {
-	std::map<VxGUID, OfferBaseRxSession *>::iterator iter;
+	std::map<VxGUID, OfferBaseRxSession*>::iterator iter;
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::clearRxSessionsList AutoPluginLock start");
@@ -225,7 +225,7 @@ void OfferBaseXferMgr::clearRxSessionsList( void )
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
-		OfferBaseRxSession * xferSession = iter->second;
+		OfferBaseRxSession* xferSession = iter->second;
 		delete xferSession;
 	}
 
@@ -325,7 +325,7 @@ void OfferBaseXferMgr::onConnectionLost( VxSktBase* sktBase )
 		erasedSession = false;
 		for( oRxIter = m_RxSessions.begin(); oRxIter != m_RxSessions.end(); ++oRxIter )
 		{
-			OfferBaseRxSession * xferSession = oRxIter->second;
+			OfferBaseRxSession* xferSession = oRxIter->second;
 			if( xferSession->getSkt() == sktBase )
 			{				
 				m_RxSessions.erase( oRxIter );
@@ -403,7 +403,7 @@ void OfferBaseXferMgr::onPktOfferSendReq( VxSktBase* sktBase, VxPktHdr* pktHdr, 
 	}
 	else
 	{
-		OfferBaseRxSession * xferSession = findOrCreateRxSession( true, poPkt->getRmtSessionId(), netIdent, sktBase );
+		OfferBaseRxSession* xferSession = findOrCreateRxSession( true, poPkt->getRmtSessionId(), netIdent, sktBase );
 		if( xferSession )
 		{
 			OfferBaseInfo& offerInfo = xferSession->getOfferInfo();
@@ -519,7 +519,7 @@ void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr
 //============================================================================
 void OfferBaseXferMgr::onPktOfferChunkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	OfferBaseRxSession * xferSession = 0;
+	OfferBaseRxSession* xferSession = 0;
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferChunkReq");
 	PktOfferChunkReq* poPkt = (PktOfferChunkReq *)pktHdr;
 	{ // scope for lock
@@ -623,7 +623,7 @@ void OfferBaseXferMgr::onPktOfferSendCompleteReq( VxSktBase* sktBase, VxPktHdr* 
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendCompleteReq");
 	PktOfferSendCompleteReq* poPkt = (PktOfferSendCompleteReq *)pktHdr;
-	OfferBaseRxSession * xferSession = findRxSession( true, poPkt->getRmtSessionId() );
+	OfferBaseRxSession* xferSession = findRxSession( true, poPkt->getRmtSessionId() );
 	//TODO check checksum
 	if( xferSession )
 	{
@@ -674,7 +674,7 @@ void OfferBaseXferMgr::onPktOfferBaseXferErr( VxSktBase* sktBase, VxPktHdr* pktH
 }
 
 //============================================================================
-void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseRxSession * poSessionIn, bool pluginIsLocked )
+void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseRxSession* poSessionIn, bool pluginIsLocked )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -704,7 +704,7 @@ void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseRxSession * poSessionIn
 	OfferBaseRxIter oRxIter = m_RxSessions.begin();
 	while( oRxIter != m_RxSessions.end() )
 	{
-		OfferBaseRxSession * xferSession = oRxIter->second;
+		OfferBaseRxSession* xferSession = oRxIter->second;
 		if( poSessionIn == xferSession )
 		{
 			m_RxSessions.erase( oRxIter );
@@ -779,7 +779,7 @@ void OfferBaseXferMgr::endOfferBaseXferSession( OfferBaseTxSession * poSessionIn
 }
 
 //============================================================================
-OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent* netIdent )
+OfferBaseRxSession* OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent* netIdent )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -796,7 +796,7 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNet
 	OfferBaseRxIter iter;
 	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
-		OfferBaseRxSession * xferSession = iter->second;
+		OfferBaseRxSession* xferSession = iter->second;
 		if( xferSession->getIdent() == netIdent )
 		{
 			if( false == pluginIsLocked )
@@ -823,7 +823,7 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxNet
 }
 
 //============================================================================
-OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUID& lclSessionId )
+OfferBaseRxSession* OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUID& lclSessionId )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -840,7 +840,7 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 	OfferBaseRxIter iter = m_RxSessions.find( lclSessionId );
 	if( iter != m_RxSessions.end() )
 	{
-		OfferBaseRxSession * rxSession = iter->second;
+		OfferBaseRxSession* rxSession = iter->second;
 		if( false == pluginIsLocked )
 		{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -864,7 +864,7 @@ OfferBaseRxSession * OfferBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 }
 
 //============================================================================
-OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase )
+OfferBaseRxSession*	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -878,7 +878,7 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	OfferBaseRxSession * xferSession = findRxSession( true, netIdent );
+	OfferBaseRxSession* xferSession = findRxSession( true, netIdent );
 	if( NULL == xferSession )
 	{
 		xferSession = new OfferBaseRxSession( m_Engine, m_OfferMgr, sktBase, netIdent );
@@ -901,7 +901,7 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 }
 
 //============================================================================
-OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
+OfferBaseRxSession*	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( false == pluginIsLocked )
@@ -920,7 +920,7 @@ OfferBaseRxSession *	OfferBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 		lclSessionId.initializeWithNewVxGUID();
 	}
 
-	OfferBaseRxSession * xferSession = findRxSession( true, lclSessionId );
+	OfferBaseRxSession* xferSession = findRxSession( true, lclSessionId );
 	if( NULL == xferSession )
 	{
 		xferSession = new OfferBaseRxSession( m_Engine, m_OfferMgr, lclSessionId, sktBase, netIdent );
@@ -1392,7 +1392,7 @@ EXferError OfferBaseXferMgr::beginOfferBaseSend( OfferBaseTxSession * xferSessio
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendReq* poPkt, PktOfferSendReply& pktReply )
+EXferError OfferBaseXferMgr::beginOfferBaseReceive( OfferBaseRxSession* xferSession, PktOfferSendReq* poPkt, PktOfferSendReply& pktReply )
 {
 	if( NULL == xferSession )
 	{
@@ -1651,7 +1651,7 @@ EXferError OfferBaseXferMgr::txNextOfferBaseChunk( OfferBaseTxSession * xferSess
 }
 
 //============================================================================
-EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxSession * xferSession, PktOfferChunkReq* poPkt )
+EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxSession* xferSession, PktOfferChunkReq* poPkt )
 {
 	if( NULL == xferSession )
 	{
@@ -1717,7 +1717,7 @@ EXferError OfferBaseXferMgr::rxOfferBaseChunk( bool pluginIsLocked, OfferBaseRxS
 }
 
 //============================================================================
-void OfferBaseXferMgr::finishOfferBaseReceive( OfferBaseRxSession * xferSession, PktOfferSendCompleteReq* poPkt, bool pluginIsLocked )
+void OfferBaseXferMgr::finishOfferBaseReceive( OfferBaseRxSession* xferSession, PktOfferSendCompleteReq* poPkt, bool pluginIsLocked )
 {
 	// done receiving file
 	VxFileXferInfo& xferInfo = xferSession->getXferInfo();
@@ -1746,7 +1746,7 @@ void OfferBaseXferMgr::finishOfferBaseReceive( OfferBaseRxSession * xferSession,
 }
 
 //============================================================================
-void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession * xferSession, OfferBaseInfo& offerInfo, EXferError error, bool pluginIsLocked )
+void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession* xferSession, OfferBaseInfo& offerInfo, EXferError error, bool pluginIsLocked )
 {
 	//m_PluginMgr.getToGui().toGuiFileDownloadComplete( xferSession->getLclSessionId(), error );
 	VxFileXferInfo& xferInfo = xferSession->getXferInfo();
@@ -1842,7 +1842,7 @@ void OfferBaseXferMgr::checkQueForMoreOffersToSend( bool pluginIsLocked, VxNetId
 }
 
 //============================================================================
-void OfferBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void OfferBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	OfferBaseTxIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -1864,7 +1864,7 @@ void OfferBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOl
 	OfferBaseRxIter oRxIter;
 	for( oRxIter = m_RxSessions.begin(); oRxIter != m_RxSessions.end(); ++oRxIter )
 	{
-		OfferBaseRxSession * xferSession = oRxIter->second;
+		OfferBaseRxSession* xferSession = oRxIter->second;
 		if( xferSession->getSkt() == poOldSkt )
 		{
 			xferSession->setSkt( poNewSkt );

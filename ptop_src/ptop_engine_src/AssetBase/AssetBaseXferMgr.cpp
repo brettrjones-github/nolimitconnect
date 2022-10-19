@@ -130,7 +130,7 @@ void AssetBaseXferMgr::assetXferThreadWork( VxThread* workThread )
 	lockAssetBaseQue();
 	for( iter = assetToSendList.begin(); iter != assetToSendList.end(); ++iter )
 	{
-		AssetBaseInfo * assetInfo = m_AssetBaseMgr.findAsset( *iter );
+		AssetBaseInfo* assetInfo = m_AssetBaseMgr.findAsset( *iter );
 		if( assetInfo )
 		{
 			m_AssetBaseSendQue.push_back( *assetInfo );
@@ -715,7 +715,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendReply( VxSktBase* sktBase, VxPktHdr* pk
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReply");
 	PktBaseSendReply * poPkt = (PktBaseSendReply *)pktHdr;
 	VxGUID&	assetUniqueId =	poPkt->getUniqueId();
-	AssetBaseInfo * assetInfo = m_AssetBaseMgr.findAsset( assetUniqueId );
+	AssetBaseInfo* assetInfo = m_AssetBaseMgr.findAsset( assetUniqueId );
 	if( 0 == assetInfo )
 	{
 		LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendReply failed to find asset id");
@@ -2326,7 +2326,7 @@ void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetId
 }
 
 //============================================================================
-void AssetBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void AssetBaseXferMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::replaceConnection AutoPluginLock start");

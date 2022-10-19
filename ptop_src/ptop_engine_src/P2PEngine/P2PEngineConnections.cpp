@@ -34,7 +34,7 @@
 #include <CoreLib/VxParse.h>
 
 //============================================================================
-void P2PEngine::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void P2PEngine::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::replaceConnection: old skt %d new skt %d handle %d",
 				poOldSkt->m_SktNumber,

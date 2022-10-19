@@ -1143,7 +1143,7 @@ VxNetIdent* PluginMgr::pluginApiOnlineIdToIdentity( VxGUID& oOnlineId )
 }
 
 //============================================================================
-void PluginMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginMgr::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	for( auto pluginBase : m_aoPlugins )
 	{

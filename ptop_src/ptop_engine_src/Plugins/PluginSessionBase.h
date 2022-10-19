@@ -53,7 +53,7 @@ public:
 	virtual const char*		getOnlineName( void );
 	virtual VxGUID&				getOnlineId( void );
 	virtual void				setSkt( VxSktBase* sktBase );
-	virtual VxSktBase *			getSkt( void );
+	virtual VxSktBase*			getSkt( void );
 	virtual void				setSessionType( EPluginSessionType sessionType );
 	virtual EPluginSessionType	getSessionType( void );
 	virtual OpusAudioDecoder *	getAudioDecoder( void ); // will create decoder if doesn't already exist
@@ -103,7 +103,7 @@ protected:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
 	VxNetIdent*				m_Ident;
-	VxSktBase *					m_Skt;
+	VxSktBase*					m_Skt;
 	EPluginSessionType			m_ePluginSessionType;
 	bool						m_bSessionStarted;
 	bool						m_bRmtInitiatedSession;

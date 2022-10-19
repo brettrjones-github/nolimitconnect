@@ -37,7 +37,7 @@ BlobMgr::BlobMgr( P2PEngine& engine, const char* dbName, const char* stateDbName
 }
 
 //============================================================================
-AssetBaseInfo * BlobMgr::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
+AssetBaseInfo* BlobMgr::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     BlobInfo* assetInfo = new BlobInfo( assetType, assetName, assetLen );
     assetInfo->assureHasCreatorId();
@@ -53,7 +53,7 @@ AssetBaseInfo* BlobMgr::createAssetInfo( EAssetType assetType, const char* asset
 }
 
 //============================================================================
-AssetBaseInfo * BlobMgr::createAssetInfo( AssetBaseInfo& assetInfo )
+AssetBaseInfo* BlobMgr::createAssetInfo( AssetBaseInfo& assetInfo )
 {
     BlobInfo* assetInfoNew = new BlobInfo( assetInfo );
     assetInfoNew->assureHasCreatorId();

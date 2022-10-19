@@ -35,13 +35,13 @@ public:
 	virtual ~OfferBaseXferSession() = default;
 
 	void						setIdent( VxNetIdent* ident )				{ m_Ident = ident; }
-	VxNetIdent*				getIdent( void )							{ return m_Ident; }
+	VxNetIdent*					getIdent( void )							{ return m_Ident; }
 
 	void						setOfferInfo( OfferBaseInfo& assetInfo )	{ m_OfferBaseInfo = assetInfo; }
 	OfferBaseInfo&				getOfferInfo( void )						{ return m_OfferBaseInfo; }
 
-	void						setSkt( VxSktBase * skt )					{ m_Skt = skt; }
-	VxSktBase *					getSkt( void )								{ return m_Skt; }
+	void						setSkt( VxSktBase* skt )					{ m_Skt = skt; }
+	VxSktBase*					getSkt( void )								{ return m_Skt; }
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_FileXferInfo.setLclSessionId( lclId ); }
 	VxGUID&						getLclSessionId( void )						{ return m_FileXferInfo.getLclSessionId(); }
@@ -75,8 +75,8 @@ protected:
     OfferBaseMgr&               m_OfferMgr;
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
     int							m_iPercentComplete{ 0 };
-	VxSktBase *					m_Skt{ nullptr };
-	VxNetIdent*				m_Ident{ nullptr };
+	VxSktBase*					m_Skt{ nullptr };
+	VxNetIdent*					m_Ident{ nullptr };
 	uint32_t					m_Error{ 0 };
 	OfferBaseInfo				m_OfferBaseInfo;
 

@@ -32,11 +32,11 @@ public:
 	BaseInfo&				    operator=( const BaseInfo& rhs ); 
 
     virtual void				setOnlineId( VxGUID onlineId )                  { m_OnlineId = onlineId; }
-    virtual void				setOnlineId( const char* onlineId )            { m_OnlineId.fromVxGUIDHexString( onlineId ); }
+    virtual void				setOnlineId( const char* onlineId )             { m_OnlineId.fromVxGUIDHexString( onlineId ); }
     virtual VxGUID&				getOnlineId( void )                             { return m_OnlineId; }
 
     virtual void				setThumbId( VxGUID& thumbId )                   { m_ThumbId = thumbId; }
-    virtual void				setThumbId( const char* thumbId )              { m_ThumbId.fromVxGUIDHexString( thumbId ); }
+    virtual void				setThumbId( const char* thumbId )               { m_ThumbId.fromVxGUIDHexString( thumbId ); }
     virtual VxGUID&				getThumbId( void )                              { return m_ThumbId; }
 
     virtual void				setInfoModifiedTime( int64_t timestamp )        { m_InfoModifiedTime = timestamp; }

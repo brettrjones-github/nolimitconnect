@@ -40,7 +40,7 @@
 
 namespace
 {
-	void NetworkPeerSktCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
+	void NetworkPeerSktCallbackHandler( VxSktBase*  sktBase, void * pvUserCallbackData )
 	{
         if( pvUserCallbackData )
 		{

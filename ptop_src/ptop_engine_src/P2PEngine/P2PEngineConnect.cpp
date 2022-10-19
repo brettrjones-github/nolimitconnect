@@ -37,7 +37,7 @@
 
 //============================================================================
 bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo, 
-									VxSktBase **		ppoRetSkt,
+									VxSktBase**		ppoRetSkt,
 									bool&				retIsNewConnection,
 									EConnectReason		connectReason )
 {
@@ -82,7 +82,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 
 //============================================================================
 bool P2PEngine::txSystemPkt(	const VxGUID&		destOnlineId,
-								VxSktBase *			sktBase, 
+								VxSktBase*			sktBase, 
 								VxPktHdr*			poPkt, 
 								bool				bDisconnectAfterSend )
 {
@@ -132,7 +132,7 @@ bool P2PEngine::txSystemPkt(	const VxGUID&		destOnlineId,
 
 //============================================================================
 bool P2PEngine::txImAlivePkt(	VxGUID&				destOnlineId, 
-								VxSktBase *			sktBase )
+								VxSktBase*			sktBase )
 {
 	return txSystemPkt( destOnlineId, sktBase, &m_PktImAliveReq, false );
 }
@@ -151,7 +151,7 @@ void P2PEngine::broadcastSystemPkt( VxPktHdr* pkt, VxGUIDList& retIdsSentPktTo )
 
 //============================================================================
 bool P2PEngine::txSystemPkt(	VxNetIdentBase *	netIdent, 
-								VxSktBase *			sktBase, 
+								VxSktBase*			sktBase, 
 								VxPktHdr*			poPkt, 
 								bool				bDisconnectAfterSend )
 {
@@ -161,7 +161,7 @@ bool P2PEngine::txSystemPkt(	VxNetIdentBase *	netIdent,
 //============================================================================
 bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType, 
 								VxNetIdentBase *	netIdent, 
-								VxSktBase *			sktBase, 
+								VxSktBase*			sktBase, 
 								VxPktHdr*			poPkt, 
 								bool				bDisconnectAfterSend )
 {

@@ -109,7 +109,7 @@ void RcScan::onConnectionLost( VxSktBase* sktBase )
 
 //============================================================================
 //! called when new better connection from user
-void RcScan::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void RcScan::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	m_ScanAction.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

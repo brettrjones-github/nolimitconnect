@@ -74,7 +74,7 @@ public:
 	void						fileAboutToBeDeleted( std::string& fileName );
 	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase );
 	virtual void				onConnectionLost( VxSktBase* sktBase );
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
     virtual void				onPktAssetBaseGetReq			    ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
     virtual void				onPktAssetBaseGetReply			    ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
@@ -100,15 +100,15 @@ protected:
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				updateAssetMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param );
 
-	virtual AssetBaseRxSession*	    findRxSession( bool pluginIsLocked, VxNetIdent* netIdent );
-	virtual AssetBaseRxSession*	    findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual AssetBaseRxSession*	    findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseRxSession*	    findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseTxSession*	    findTxSession( bool pluginIsLocked, VxNetIdent* netIdent );
-	virtual AssetBaseTxSession*	    findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual AssetBaseTxSession*	    createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseTxSession*	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual AssetBaseTxSession*	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseRxSession*	findRxSession( bool pluginIsLocked, VxNetIdent* netIdent );
+	virtual AssetBaseRxSession*	findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
+	virtual AssetBaseRxSession*	findOrCreateRxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseRxSession*	findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseTxSession*	findTxSession( bool pluginIsLocked, VxNetIdent* netIdent );
+	virtual AssetBaseTxSession*	findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
+	virtual AssetBaseTxSession*	createTxSession( VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseTxSession*	 findOrCreateTxSession( bool pluginIsLocked, VxNetIdent* netIdent, VxSktBase* sktBase );
+	virtual AssetBaseTxSession*	findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
 	virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession* xferSession, AssetBaseInfo& assetInfo, PktBaseSendReq* poPkt, PktBaseSendReply& pktReply );
     virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession* xferSession, AssetBaseInfo& assetInfo, VxGUID& lclSessionId, int64_t startOffset = 0 );

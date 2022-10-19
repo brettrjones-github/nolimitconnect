@@ -20,7 +20,7 @@
 
 namespace
 {
-	void PingResponseCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
+	void PingResponseCallbackHandler( VxSktBase*  sktBase, void * pvUserCallbackData )
 	{
 		PingResponseServer * peerMgr = ( PingResponseServer * )pvUserCallbackData;
 		if( peerMgr )

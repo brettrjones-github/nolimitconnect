@@ -105,7 +105,7 @@ void AssetBaseInfoDb::removeAsset( VxGUID& assetId )
 }
 
 //============================================================================
-void AssetBaseInfoDb::removeAsset( AssetBaseInfo * assetInfo )
+void AssetBaseInfoDb::removeAsset( AssetBaseInfo* assetInfo )
 {
 	// the bind string is not copied so must be in memory until sql is executed
 	//DbBindList bindList( assetInfo->getAssetUniqueId().toHexString().c_str() );
@@ -237,7 +237,7 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 			assetLen =  (uint64_t)cursor->getS64( COLUMN_ASSET_LEN );
 			assetType = (EAssetType)cursor->getS32( COLUMN_ASSET_TYPE );
 
-			AssetBaseInfo * assetInfo = createAssetInfo( assetType, assetName.c_str(), assetLen );
+			AssetBaseInfo* assetInfo = createAssetInfo( assetType, assetName.c_str(), assetLen );
 			assetInfo->setAssetUniqueId( cursor->getString( COLUMN_ASSET_UNIQUE_ID ) );
 			assetInfo->setCreatorId( cursor->getString( COLUMN_ASSET_CREATOR_ID ) );
 			assetInfo->setHistoryId( cursor->getString( COLUMN_ASSET_HISTORY_ID ) );
@@ -277,7 +277,7 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 } 
 
 //============================================================================
-void AssetBaseInfoDb::insertAssetInTimeOrder( AssetBaseInfo *assetInfo, std::vector<AssetBaseInfo*>& assetList )
+void AssetBaseInfoDb::insertAssetInTimeOrder( AssetBaseInfo*assetInfo, std::vector<AssetBaseInfo*>& assetList )
 {
     vx_assert( assetInfo->isValid() );
 

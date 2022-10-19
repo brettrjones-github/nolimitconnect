@@ -24,7 +24,7 @@ VxClientMgr::VxClientMgr()
 
 //============================================================================
 //! make a new socket... give derived classes a chance to override
-VxSktBase * VxClientMgr::makeNewSkt( void )
+VxSktBase* VxClientMgr::makeNewSkt( void )
 { 
 	return new VxSktConnect(); 
 }

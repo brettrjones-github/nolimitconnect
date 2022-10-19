@@ -194,7 +194,7 @@ public:
 	virtual void				onPktRelayUserDisconnect	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
 	//packet type 250 and greater not allowed
-	typedef void (PktPluginHandlerBase::*RC_PLUGIN_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr*, VxNetIdent* );  
+	typedef void (PktPluginHandlerBase::*RC_PLUGIN_BASE_PKT_FUNCTION)( VxSktBase*, VxPktHdr*, VxNetIdent* );  
 protected:
 	//=== vars ====//
 	RC_PLUGIN_BASE_PKT_FUNCTION m_aBaseSysPktFuncTable[ MAX_PKT_TYPE_CNT + 2 ];

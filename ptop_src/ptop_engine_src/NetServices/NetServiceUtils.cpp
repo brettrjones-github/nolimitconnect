@@ -586,7 +586,7 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdTyp
 
 //============================================================================
 void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,	
-                                                        VxSktBase *				skt,
+                                                        VxSktBase*				skt,
                                                         std::string             netKey)
 {
 	uint16_t clientPort;

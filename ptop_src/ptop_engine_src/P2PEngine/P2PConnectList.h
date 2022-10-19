@@ -54,7 +54,7 @@ public:
 	BigListInfo	*				getBigListInfo( void )							{ return m_BigListInfo; }
 	VxSktBase	*				getSkt( void )									{ return m_SktBase; }
 
-	VxSktBase *					m_SktBase;
+	VxSktBase*					m_SktBase;
 	BigListInfo	*				m_BigListInfo;		
 	bool						m_bIsRelayClient;
 	bool						m_bIsRelayServer;

@@ -68,7 +68,7 @@ bool ConnectedInfo::operator==( const ConnectedInfo& rhs )
 }
 
 //============================================================================
-VxSktBase * ConnectedInfo::getSktBase( void )
+VxSktBase* ConnectedInfo::getSktBase( void )
 {
     if( m_CallbackList.size() )
     {

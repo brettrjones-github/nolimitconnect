@@ -26,8 +26,8 @@ public:
 	virtual ~BlobInfoDb() = default;
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
-    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+    virtual AssetBaseInfo*     createAssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen ) override;
+    virtual AssetBaseInfo*     createAssetInfo( AssetBaseInfo& assetInfo ) override;
 
 };
 

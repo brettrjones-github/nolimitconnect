@@ -87,7 +87,7 @@ public:
 
     virtual bool                pluginApiTxPacket(  EPluginType			ePluginType,
 													const VxGUID&		onlineId,
-                                                    VxSktBase *			sktBase,
+                                                    VxSktBase*			sktBase,
                                                     VxPktHdr*			poPkt,
                                                     bool				bDisconnectAfterSend = false,
                                                     EPluginType         overridePlugin = ePluginTypeInvalid );
@@ -105,7 +105,7 @@ public:
 	virtual bool				pluginApiSktConnectTo(	EPluginType			ePluginType,		// plugin id
 														VxNetIdentBase *	netIdent,			// identity of contact to connect to
 														int					pvUserData,			// plugin defined data
-														VxSktBase * *		ppoRetSkt, 			// returned Socket
+														VxSktBase* *		ppoRetSkt, 			// returned Socket
 														EConnectReason		connectReason = eConnectReasonPlugin );	
 	virtual void				pluginApiSktClose( ESktCloseReason closeReason, VxSktBase* sktBase );
 	virtual void				pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase* sktBase );
@@ -142,7 +142,7 @@ public:
 	//! return true if access ok
 	bool						canAccessPlugin( EPluginType ePluginType, VxNetIdent* netIdent );
 
-	void						replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	void						replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 	void						handleNonSystemPackets( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	void						handleFirstNetServiceConnection( VxSktBase* sktBase );

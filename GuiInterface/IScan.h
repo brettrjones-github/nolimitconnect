@@ -28,12 +28,12 @@ public:
 	//! error occurred during scan/search
 	virtual void	onScanResultError(	EScanType			eScanType,
 										VxNetIdent*			netIdent,
-										VxSktBase *			sktBase,  
+										VxSktBase*			sktBase,  
 										uint32_t			errorCode ) = 0; 
 
 	//! About Me Web Page scan pictures success result
 	virtual void	onScanResultProfilePic(	VxNetIdent*		netIdent, 
-											VxSktBase *		sktBase, 
+											VxSktBase*		sktBase, 
 											uint8_t *		pu8JpgData, 
 											uint32_t		u32JpgDataLen ) = 0;
 };

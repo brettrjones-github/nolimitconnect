@@ -196,7 +196,7 @@ void PluginVoicePhone::onSessionEnded( PluginSessionBase * session, bool pluginI
 }
 
 //============================================================================
-void PluginVoicePhone::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginVoicePhone::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

@@ -40,8 +40,8 @@ public:
 	void						setAssetInfo( AssetInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
 	AssetInfo&					getAssetInfo( void )						{ return m_AssetInfo; }
 
-	void						setSkt( VxSktBase * skt )					{ m_Skt = skt; }
-	VxSktBase *					getSkt( void )								{ return m_Skt; }
+	void						setSkt( VxSktBase* skt )					{ m_Skt = skt; }
+	VxSktBase*					getSkt( void )								{ return m_Skt; }
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_FileXferInfo.setLclSessionId( lclId ); }
 	VxGUID&						getLclSessionId( void )						{ return m_FileXferInfo.getLclSessionId(); }
@@ -74,7 +74,7 @@ protected:
 	P2PEngine&					m_Engine; 
 	VxFileXferInfo				m_FileXferInfo;		// file being transmitted
 	int							m_iPercentComplete;
-	VxSktBase *					m_Skt;
+	VxSktBase*					m_Skt;
 	VxNetIdent*				m_Ident;
     uint32_t					m_Error;
 	AssetInfo					m_AssetInfo;

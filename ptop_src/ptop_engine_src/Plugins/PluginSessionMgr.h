@@ -31,7 +31,7 @@ public:
 	std::map<VxGUID, PluginSessionBase *>&	getSessions( void )			{ return m_aoSessions; }
 	size_t						getSessionCount( void )					{ return m_aoSessions.size(); }
 
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
 	virtual	void				onConnectionLost( VxSktBase* sktBase );
 	virtual void				cancelSessionByOnlineId( VxGUID& onlineId );

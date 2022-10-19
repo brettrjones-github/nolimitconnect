@@ -38,7 +38,7 @@ public:
     bool                        operator==( const ConnectedInfo& rhs );
 
     P2PEngine&                  getEngine() { return m_Engine; }
-    VxSktBase *                 getSktBase( void );
+    VxSktBase*                 getSktBase( void );
 
     void                        onHandshakeComplete( HandshakeInfo& shakeInfo );
     void                        addConnectReason( HandshakeInfo& shakeInfo );

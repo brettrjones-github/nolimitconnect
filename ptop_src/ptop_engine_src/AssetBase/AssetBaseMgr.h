@@ -69,9 +69,9 @@ public:
     virtual bool				fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter );
     virtual bool				fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId );
 
-    virtual void				announceAssetAdded( AssetBaseInfo * assetInfo );
-    virtual void				announceAssetUpdated( AssetBaseInfo * assetInfo );
-    virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo );
+    virtual void				announceAssetAdded( AssetBaseInfo* assetInfo );
+    virtual void				announceAssetUpdated( AssetBaseInfo* assetInfo );
+    virtual void				announceAssetRemoved( AssetBaseInfo* assetInfo );
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param );
 
     virtual void                onQueryHistoryAsset( AssetBaseInfo* assetInfo ); // should be overriden
@@ -93,9 +93,9 @@ public:
 
     virtual bool				doesAssetExist( AssetBaseInfo& assetInfo ); // check if file still exists in directory or database
 
-	AssetBaseInfo *				findAsset( std::string& fileName );
-	AssetBaseInfo *				findAsset( VxSha1Hash& fileHashId );
-	AssetBaseInfo *				findAsset( VxGUID& assetId );
+	AssetBaseInfo*				findAsset( std::string& fileName );
+	AssetBaseInfo*				findAsset( VxSha1Hash& fileHashId );
+	AssetBaseInfo*				findAsset( VxGUID& assetId );
 
 	uint16_t					getAssetBaseFileTypes( void )				{ return m_u16AssetBaseFileTypes; }
 	void						updateAssetFileTypes( void );
@@ -105,8 +105,8 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )				{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-    AssetBaseInfo * 			addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
-    AssetBaseInfo *				addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
+    AssetBaseInfo* 			addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
+    AssetBaseInfo*				addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
     bool						addAssetFile(   enum EAssetType      assetType,
                                                 const char*	fileName, 
@@ -138,9 +138,9 @@ public:
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen ) = 0;
-    virtual AssetBaseInfo *		createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
-    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
+    virtual AssetBaseInfo*     createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen ) = 0;
+    virtual AssetBaseInfo*		createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
+    virtual AssetBaseInfo*     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
     void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }
@@ -152,15 +152,15 @@ protected:
 	void						generateHashIds( VxThread* thread );
 	void						clearAssetFileListPackets( void );
 	void						clearAssetInfoList( void );
-    AssetBaseInfo *				createAssetInfo(	enum EAssetType      asset,
+    AssetBaseInfo*				createAssetInfo(	enum EAssetType      asset,
                                                     const char*	fileName, 
 													VxGUID&			assetId,  
 													uint8_t *		hashId, 
                                                     enum EAssetLocation	locationFlags = eAssetLocUnknown,
 													const char*	assetTag = "", 
 													int64_t			timestamp = 0 );
-	bool						insertNewInfo( AssetBaseInfo * assetInfo );
-	void						updateDatabase( AssetBaseInfo * assetInfo );
+	bool						insertNewInfo( AssetBaseInfo* assetInfo );
+	void						updateDatabase( AssetBaseInfo* assetInfo );
     void						updateAssetDatabaseSendState( VxGUID& assetUniqueId, enum EAssetSendState sendState );
 
     //=== vars ===//

@@ -427,13 +427,13 @@ public:
 	// asset mgr callbacks
 	//========================================================================
     virtual void				callbackFileWasShredded( std::string& fileName ) override;
-    virtual void				callbackAssetAdded( AssetBaseInfo * assetInfo ) override;
-    virtual void				callbackAssetRemoved( AssetBaseInfo * assetInfo ) override;
+    virtual void				callbackAssetAdded( AssetBaseInfo* assetInfo ) override;
+    virtual void				callbackAssetRemoved( AssetBaseInfo* assetInfo ) override;
 
 	virtual void				callbackSharedFileTypesChanged( uint16_t fileTypes );
 	virtual void				callbackSharedPktFileListUpdated( void );
 
-    virtual void				callbackAssetHistory( void * userData, AssetBaseInfo * assetInfo ) override;
+    virtual void				callbackAssetHistory( void * userData, AssetBaseInfo* assetInfo ) override;
     //========================================================================
     // host list mgr callbacks
     //========================================================================

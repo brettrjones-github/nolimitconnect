@@ -37,7 +37,7 @@ namespace
 	const char*	UPNP_GROUP_IP				= "239.255.255.250";
 
 	//============================================================================
-	void SSPDSearchResponseSktCallbackHandler( VxSktBase *  sktBase, void * pvUserData )
+	void SSPDSearchResponseSktCallbackHandler( VxSktBase*  sktBase, void * pvUserData )
 	{
 		if( eSktCallbackReasonData == sktBase->getCallbackReason() )
 		{

@@ -39,7 +39,7 @@ unsigned char * GetVxSktRandData( int iRandDataIdx )
 
 //============================================================================
 //! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
-RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,			
+RCODE GenerateRxConnectionKey(	VxSktBase*				sktBase,			
 								VxConnectId *			poConnectId,		
 								const char*			networkName )
 								
@@ -64,7 +64,7 @@ RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,
 
 //============================================================================
 //! generate key from net identity and connection data and place int sockets m_TxKey and initialize its crypto
-RCODE GenerateTxConnectionKey(	VxSktBase *			sktBase,			
+RCODE GenerateTxConnectionKey(	VxSktBase*			sktBase,			
 								VxConnectId *		poConnectId,		
 								const char*		networkName )
 {
@@ -88,7 +88,7 @@ RCODE GenerateTxConnectionKey(	VxSktBase *			sktBase,
 
 //============================================================================
 //! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
-RCODE GenerateTxConnectionKey(  VxSktBase *				sktBase,
+RCODE GenerateTxConnectionKey(  VxSktBase*				sktBase,
                                 std::string             ipAddr,
                                 uint16_t                port, 
                                 VxGUID                  onlineId,

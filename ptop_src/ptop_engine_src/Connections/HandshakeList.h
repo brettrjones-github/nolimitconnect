@@ -30,7 +30,7 @@ public:
     HandshakeList() = default;
     virtual ~HandshakeList() = default;
 
-    void                        addHandshake(VxSktBase *sktBase, VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason);
+    void                        addHandshake(VxSktBase*sktBase, VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason);
     void                        getAndRemoveHandshakeInfo( const VxGUID& onlineId, std::vector<HandshakeInfo>& shakeList, std::vector<HandshakeInfo>& timedOutList );
     void                        removeHandshakeInfo( const VxGUID& onlineId );
     void                        onSktDisconnected( VxSktBase* sktBase );

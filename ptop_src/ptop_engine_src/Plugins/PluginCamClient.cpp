@@ -707,7 +707,7 @@ void PluginCamClient::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxN
 }
 
 //============================================================================
-void PluginCamClient::replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginCamClient::replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }

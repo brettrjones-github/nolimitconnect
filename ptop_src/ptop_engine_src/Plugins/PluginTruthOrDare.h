@@ -78,7 +78,7 @@ protected:
     virtual void				onSessionStart( PluginSessionBase * session, bool pluginIsLocked ) override;
     virtual void				onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse ) override;
 
-    virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+    virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
     virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
     virtual void				onConnectionLost( VxSktBase* sktBase ) override;
 

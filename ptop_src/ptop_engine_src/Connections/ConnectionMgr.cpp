@@ -660,7 +660,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 url,
 
 //============================================================================-
 EConnectStatus ConnectionMgr::directConnectTo(  VxConnectInfo&		        connectInfo,
-                                                VxSktBase *&		        ppoRetSkt,		// return pointer to socket if not null
+                                                VxSktBase*&		        ppoRetSkt,		// return pointer to socket if not null
                                                 VxGUID                      sessionId, 
                                                 int					        iConnectTimeoutMs,// how long to attempt connect
                                                 bool				        bUseUdpIp,
@@ -734,7 +734,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
         m_HandshakeList.addHandshake(sktBase, sessionId, onlineId, callback, connectReason);
         m_HandshakeMutex.unlock();
         connectStatus = eConnectStatusHandshaking;
-        retSktBase = (VxSktBase *)sktBase;
+        retSktBase = (VxSktBase*)sktBase;
         
     }
     else
@@ -799,7 +799,7 @@ void ConnectionMgr::addConnectRequestToQue( ConnectReqInfo& connectRequest, bool
 
 //============================================================================
 bool ConnectionMgr::connectToContact(	VxConnectInfo&		connectInfo, 
-                                        VxSktBase *&		ppoRetSkt,
+                                        VxSktBase*&		ppoRetSkt,
                                         VxGUID&             sessionId,
                                         bool&				retIsNewConnection )
 {
@@ -847,7 +847,7 @@ bool ConnectionMgr::connectToContact(	VxConnectInfo&		connectInfo,
 }
 
 //============================================================================
-bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& ppoRetSkt, VxGUID& sessionId )
+bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase*& ppoRetSkt, VxGUID& sessionId )
 {
     ppoRetSkt = nullptr;
     VxSktBase* sktBase = nullptr;
@@ -968,7 +968,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
 }
 
 //============================================================================
-bool ConnectionMgr::tryIPv6Connect(	VxConnectInfo& connectInfo, VxSktBase *& ppoRetSkt )
+bool ConnectionMgr::tryIPv6Connect(	VxConnectInfo& connectInfo, VxSktBase*& ppoRetSkt )
 {
     bool connectSuccess = false;
     if( m_PktAnn.getMyOnlineIPv6().isValid()
@@ -995,7 +995,7 @@ bool ConnectionMgr::tryIPv6Connect(	VxConnectInfo& connectInfo, VxSktBase *& ppo
 //============================================================================
 //! encrypt and send my PktAnnounce to someone of whom we have no recored except from anchor announce
 bool ConnectionMgr::sendMyPktAnnounce(  VxGUID&				destinationId,
-                                        VxSktBase *			sktBase, 
+                                        VxSktBase*			sktBase, 
                                         bool				requestAnnReply,
                                         bool				requestReverseConnection,
                                         bool				requestSTUN )
@@ -1019,7 +1019,7 @@ bool ConnectionMgr::sendMyPktAnnounce(  VxGUID&				destinationId,
 
 //============================================================================
 bool ConnectionMgr::txPacket(	VxGUID&				destinationId, 
-                                VxSktBase *			sktBase, 
+                                VxSktBase*			sktBase, 
                                 VxPktHdr*			poPkt )
 {
     bool bSendSuccess = false;
@@ -1089,7 +1089,7 @@ void ConnectionMgr::doNetConnectionsThread( void )
 }
 
 //============================================================================
-void ConnectionMgr::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason )
+void ConnectionMgr::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase* skt, bool isNewConnection, EConnectReason connectReason )
 {
     if( 0 != bigListInfo )
     {
@@ -1104,7 +1104,7 @@ void ConnectionMgr::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase 
 }
 
 //============================================================================
-void ConnectionMgr::closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
+void ConnectionMgr::closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase* skt, BigListInfo * poInfo )
 {
     if( nullptr == poInfo )
     {
@@ -1253,7 +1253,7 @@ bool ConnectionMgr::doConnectRequest( ConnectReqInfo& connectRequest, bool ignor
         bigListInfo->setTimeLastConnectAttemptMs( timeNow );
     }
 
-    VxSktBase * retSktBase = NULL;
+    VxSktBase* retSktBase = NULL;
     bool isNewConnection = false;
     if( m_Engine.connectToContact( connectInfo, &retSktBase, isNewConnection, connectRequest.getConnectReason() ) )
     {

@@ -95,7 +95,7 @@ protected:
 	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
 	virtual void				onContactWentOffline( VxNetIdent*	netIdent, VxSktBase* sktBase ) override;
 
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
 	virtual void				onConnectionLost( VxSktBase* sktBase ) override;
 
 	//=== vars ===

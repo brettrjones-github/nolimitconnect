@@ -24,13 +24,13 @@ ThumbInfoDb::ThumbInfoDb( AssetBaseMgr& hostListMgr, const char* dbname )
 }
 
 //============================================================================
-AssetBaseInfo * ThumbInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
+AssetBaseInfo* ThumbInfoDb::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen )
 {
     return new ThumbInfo( assetName, assetLen );
 }
 
 //============================================================================
-AssetBaseInfo * ThumbInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
+AssetBaseInfo* ThumbInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
 {
     return new ThumbInfo( assetInfo );
 }

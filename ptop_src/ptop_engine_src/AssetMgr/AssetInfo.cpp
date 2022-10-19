@@ -46,7 +46,7 @@ AssetInfo::AssetInfo( const AssetInfo& rhs )
 
 AssetInfo::AssetInfo( const AssetBaseInfo& rhs )
 {
-    *((AssetBaseInfo *)this) = rhs;
+    *((AssetBaseInfo*)this) = rhs;
 }
 
 //============================================================================

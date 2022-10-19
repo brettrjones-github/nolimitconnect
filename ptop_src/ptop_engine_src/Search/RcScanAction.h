@@ -54,20 +54,20 @@ public:
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
 	virtual void				onConnectionLost( VxSktBase* sktBase );	
 	//! called when new better connection from user
-	void						replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	void						replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 	void						addMatchedConnection( VxNetIdent* netIdent, VxSktBase* sktBase );
 
 	void						doSearchResultActions( void );
 
 	virtual void				onScanResultProfilePic(	VxNetIdent*	netIdent, 
-															VxSktBase *		sktBase, 
+															VxSktBase*		sktBase, 
 															uint8_t *			pu8JpgData, 
 															uint32_t				u32JpgDataLen );
 
 	virtual void				onScanResultError(	EScanType			eScanType,
 														VxNetIdent*		netIdent, 
-														VxSktBase *			sktBase, 
+														VxSktBase*			sktBase, 
 														uint32_t				errCode ); 
 protected:
 	void						startSearchActionThread( void );
@@ -77,7 +77,7 @@ protected:
 	void						searchActionMoodMsgSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
 	void						searchActionFileSearch( VxNetIdent* netIdent, VxSktBase* sktBase );
 
-	bool						getNextActionConnection( VxNetIdent** netIdent, VxSktBase ** sktBase );
+	bool						getNextActionConnection( VxNetIdent** netIdent, VxSktBase** sktBase );
 	
 	void						setShouldSendNext( bool next )				{ m_bNextScan = next; }
 	bool						getShouldSendNext( void )					{ return m_bNextScan; }

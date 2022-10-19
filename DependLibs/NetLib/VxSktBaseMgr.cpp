@@ -133,7 +133,7 @@ void VxSktBaseMgr::addSkt( VxSktBase* sktBase )
 
 //============================================================================
 //! remove a socket from management
-RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
+RCODE VxSktBaseMgr::removeSkt(  VxSktBase*	sktBase,		// skt to remove
 								bool		bDelete )	// if true delete the skt
 {
 	//LogMsg( LOG_INFO, "Removing Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktNumber(), sktBase->describeSktType().c_str() );
@@ -176,7 +176,7 @@ bool VxSktBaseMgr::isSktActive( VxSktBase* sktBase )
         return true;
     }
 
-	std::vector<VxSktBase *>::iterator iter;
+	std::vector<VxSktBase*>::iterator iter;
 	sktBaseMgrLock();
 	for( iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
 	{
@@ -197,11 +197,11 @@ bool VxSktBaseMgr::isSktActive( VxSktBase* sktBase )
 void VxSktBaseMgr::sendToAll(	char * pData,			// data to send
 								int iDataLen )			// length of data
 {
-	std::vector<VxSktBase *>::iterator iter;
+	std::vector<VxSktBase*>::iterator iter;
 	sktBaseMgrLock();
 	for( iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
 	{
-		VxSktBase * skt = (*iter);
+		VxSktBase* skt = (*iter);
 		if( skt->isTxCryptoKeySet() )
 		{
 			skt->txEncrypted( pData, iDataLen );
@@ -220,7 +220,7 @@ void VxSktBaseMgr::sendToAll(	char * pData,			// data to send
 int VxSktBaseMgr::getConnectedCount( void )
 {
 	int iConnectedCnt = 0;
-	std::vector<VxSktBase *>::iterator iter;
+	std::vector<VxSktBase*>::iterator iter;
 	sktBaseMgrLock();
 	for( iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
 	{
@@ -238,7 +238,7 @@ int VxSktBaseMgr::getConnectedCount( void )
 //! close all sockets
 void VxSktBaseMgr::closeAllSkts( void )
 {
-	std::vector<VxSktBase *>::iterator iter;
+	std::vector<VxSktBase*>::iterator iter;
 	sktBaseMgrLock();
 	for( iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
 	{
@@ -252,13 +252,13 @@ void VxSktBaseMgr::closeAllSkts( void )
 }
 
 //============================================================================
-VxSktBase *	VxSktBaseMgr::makeNewSkt( void )					
+VxSktBase*	VxSktBaseMgr::makeNewSkt( void )					
 { 
 	return new VxSktBase(); 
 }
 
 //============================================================================
-VxSktBase * VxSktBaseMgr::makeNewAcceptSkt( void )				
+VxSktBase* VxSktBaseMgr::makeNewAcceptSkt( void )				
 { 
 	return new VxSktAccept(); 
 }
@@ -313,15 +313,15 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase* sktBase )
 void VxSktBaseMgr::doSktDeleteCleanup()
 {
     int64_t timeNowMs = GetGmtTimeMs();
-    std::vector<VxSktBase *> deleteSktList;
+    std::vector<VxSktBase*> deleteSktList;
 
     bool deletedSkt = true;
     while( deletedSkt )
     {
-        VxSktBase * sktToDelete = nullptr;
+        VxSktBase* sktToDelete = nullptr;
         deletedSkt = false;
         sktBaseMgrLock();
-        std::vector<VxSktBase *>::iterator iter = m_aoSktsToDelete.begin();
+        std::vector<VxSktBase*>::iterator iter = m_aoSktsToDelete.begin();
         // to be deleted sockets delete after 10 seconds
         while( iter != m_aoSktsToDelete.end() )
         {

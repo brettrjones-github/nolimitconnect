@@ -148,7 +148,7 @@ protected:
 	virtual void				finishFileReceive( FileRxSession* xferSession, PktFileSendCompleteReq* poPkt );
 	virtual void				finishFileReceive( FileRxSession* xferSession, PktFileGetCompleteReq* poPkt );
 
-	virtual RCODE				sendFileShareError(		VxSktBase *		sktBase,		// socket
+	virtual RCODE				sendFileShareError(		VxSktBase*		sktBase,		// socket
 														int				iPktType,	// type of packet
 														unsigned short	u16Cmd,		// packet command
 														long			rc,			// error code

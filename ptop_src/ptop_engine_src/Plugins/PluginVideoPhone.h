@@ -69,7 +69,7 @@ protected:
 	virtual void				onSessionStart( PluginSessionBase * session, bool pluginIsLocked );
 	virtual void				onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse );
 
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
 	virtual void				onConnectionLost( VxSktBase* sktBase );
 

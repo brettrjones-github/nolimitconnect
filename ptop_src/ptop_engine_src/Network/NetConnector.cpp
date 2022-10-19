@@ -234,7 +234,7 @@ void NetConnector::addConnectRequestToQue( ConnectRequest& connectRequest, bool 
 
 //============================================================================
 bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo, 
-										VxSktBase **		ppoRetSkt,
+										VxSktBase**		ppoRetSkt,
 										bool&				retIsNewConnection,
 										EConnectReason		connectReason )
 {
@@ -297,7 +297,7 @@ bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo,
 
 //============================================================================
 bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo, 
-									VxSktBase **		ppoRetSkt,
+									VxSktBase**		ppoRetSkt,
 									EConnectReason		connectReason )
 {
 	* ppoRetSkt = NULL;
@@ -422,7 +422,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 
 //============================================================================
 bool NetConnector::tryIPv6Connect(	VxConnectInfo&		connectInfo, 
-									VxSktBase **		ppoRetSkt )
+									VxSktBase**		ppoRetSkt )
 {
 	bool connectSuccess = false;
 	if( m_PktAnn.getMyOnlineIPv6().isValid()
@@ -444,7 +444,7 @@ bool NetConnector::tryIPv6Connect(	VxConnectInfo&		connectInfo,
 
 //============================================================================-
 RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
-										VxSktBase **		ppoRetSkt,		// return pointer to socket if not null
+										VxSktBase**		ppoRetSkt,		// return pointer to socket if not null
 										EConnectReason		connectReason )
 {
 	RCODE rc = -1;
@@ -489,7 +489,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 		rc = 0;
 		if( ppoRetSkt )
 		{
-			*ppoRetSkt = (VxSktBase *)sktBase;
+			*ppoRetSkt = (VxSktBase*)sktBase;
 		}
 	}
 	else
@@ -505,7 +505,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 //============================================================================
 //! encrypt and send my PktAnnounce to someone of whom we have no recored except from anchor announce
 bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
-									   VxSktBase *			sktBase, 
+									   VxSktBase*			sktBase, 
 									   bool					requestAnnReply,
 									   bool					requestReverseConnection,
 									   bool					requestSTUN )
@@ -529,7 +529,7 @@ bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
 
 //============================================================================
 bool NetConnector::txPacket(	VxGUID&				destinationId, 
-								VxSktBase *			sktBase, 
+								VxSktBase*			sktBase, 
 								VxPktHdr*			poPkt )
 {
 	bool bSendSuccess = false;
@@ -700,7 +700,7 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 		bigListInfo->setTimeLastConnectAttemptMs( timeNow );
 	}
 
-	VxSktBase * retSktBase = NULL;
+	VxSktBase* retSktBase = NULL;
 	bool isNewConnection = false;
 	if( m_Engine.connectToContact( connectInfo, &retSktBase, isNewConnection, connectRequest.getConnectReason() ) )
 	{
@@ -752,7 +752,7 @@ void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase* s
 
 ////============================================================================
 //void NetConnector::handlePossibleRelayConnect(	VxConnectInfo&		connectInfo, 
-//												VxSktBase *			sktBase,
+//												VxSktBase*			sktBase,
 //												bool				isNewConnection,
 //												EConnectReason		connectReason )
 //{
@@ -775,7 +775,7 @@ void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase* s
 //}
 
 //============================================================================
-void NetConnector::closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
+void NetConnector::closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase* skt, BigListInfo * poInfo )
 {
 	bool isAnonymouse = true;
 	if( NULL == poInfo )
@@ -800,7 +800,7 @@ void NetConnector::closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlin
 }
 
 //============================================================================
-void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
+void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase* skt, BigListInfo * poInfo )
 {
 	if( NULL == poInfo )
 	{

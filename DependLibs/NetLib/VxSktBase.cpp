@@ -1039,7 +1039,7 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
     if( !poVxThread->isAborted() )
     {
         poVxThread->setIsThreadRunning( true );
-        sktBase = (VxSktBase *)poVxThread->getThreadUserParam();
+        sktBase = (VxSktBase*)poVxThread->getThreadUserParam();
         if( sktBase )
         {
             LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase rx thread 0x%x started for skt %d skt id %d ", VxGetCurrentThreadId(), sktBase->getSktHandle(), sktBase->getSktNumber() );
