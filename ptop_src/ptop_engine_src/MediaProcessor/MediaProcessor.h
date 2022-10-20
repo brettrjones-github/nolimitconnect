@@ -143,7 +143,7 @@ public:
 	bool						isMicrophoneCaptureEnabled( void )	{ return m_MicCaptureEnabled; }
 	bool						isVideoCaptureEnabled( void )		{ return m_VidCaptureEnabled; }
 
-	virtual void				wantAppIdle( EPluginType ePluginType, bool bWantAppIdle );
+	virtual void				wantAppIdle( EPluginType pluginType, bool bWantAppIdle );
 
 	virtual void				wantMediaInput( EMediaInputType				mediaType, 
 												MediaCallbackInterface *	callback, 

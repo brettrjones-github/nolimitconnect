@@ -104,7 +104,7 @@ void OfferBaseInfoDb::removeOffer( VxGUID& assetId )
 }
 
 //============================================================================
-void OfferBaseInfoDb::removeOffer( OfferBaseInfo * assetInfo )
+void OfferBaseInfoDb::removeOffer( OfferBaseInfo* assetInfo )
 {
 	// the bind string is not copied so must be in memory until sql is executed
 	//DbBindList bindList( assetInfo->getOfferId().toHexString().c_str() );
@@ -216,7 +216,7 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
 			assetLen =  (uint64_t)cursor->getS64( COLUMN_OFFER_LEN );
 			assetType = (uint16_t)cursor->getS32( COLUMN_OFFER_TYPE );
 
-			OfferBaseInfo * assetInfo = createOfferInfo( assetName.c_str(), assetLen, assetType );
+			OfferBaseInfo* assetInfo = createOfferInfo( assetName, assetLen, assetType );
 			assetInfo->setOfferId( cursor->getString( COLUMN_OFFER_UNIQUE_ID ) );
 			assetInfo->setCreatorId( cursor->getString( COLUMN_OFFER_CREATOR_ID ) );
 			assetInfo->setHistoryId( cursor->getString( COLUMN_OFFER_HISTORY_ID ) );
@@ -242,7 +242,7 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
 } 
 
 //============================================================================
-void OfferBaseInfoDb::insertOfferInTimeOrder( OfferBaseInfo *assetInfo, std::vector<OfferBaseInfo*>& assetList )
+void OfferBaseInfoDb::insertOfferInTimeOrder( OfferBaseInfo*assetInfo, std::vector<OfferBaseInfo*>& assetList )
 {
     vx_assert( assetInfo->isValid() );
 

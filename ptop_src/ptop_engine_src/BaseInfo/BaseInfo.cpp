@@ -15,15 +15,15 @@
 #include <config_appcorelibs.h>
 #include "BaseInfo.h"
 
-#include <CoreLib/VxDebug.h>
-#include <PktLib/VxCommon.h>
-#include <GuiInterface/IToGui.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
-//============================================================================
-BaseInfo::BaseInfo()
-{ 
-}
+#include <PktLib/VxCommon.h>
+#include <PktLib/PktBlobEntry.h>
+
+#include <CoreLib/VxDebug.h>
+
+#include <GuiInterface/IToGui.h>
 
 //============================================================================
 BaseInfo::BaseInfo( VxGUID& onlineId, int64_t modifiedTime )
@@ -52,9 +52,12 @@ BaseInfo::BaseInfo( const BaseInfo& rhs )
 }
 
 //============================================================================
-BaseInfo::~BaseInfo()
+BaseInfo::BaseInfo( const FileInfo& rhs )
+    : m_OnlineId( rhs.m_OnlineId )
+    , m_ThumbId( rhs.m_ThumbId )
+    , m_InfoModifiedTime( rhs.m_FileTime )
 {
-    // LogMsg( LOG_DEBUG, "~BaseInfo %p %s", this, m_ThumbId.toHexString().c_str() );
+    assureHasCreatorId();
 }
 
 //============================================================================
@@ -68,6 +71,24 @@ BaseInfo& BaseInfo::operator=( const BaseInfo& rhs )
     }
 
     return *this;
+}
+
+//============================================================================
+bool BaseInfo::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_OnlineId );
+    result &= blob.setValue( m_ThumbId );
+    result &= blob.setValue( m_InfoModifiedTime );
+    return result;
+}
+
+//============================================================================
+bool BaseInfo::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_OnlineId );
+    result &= blob.getValue( m_ThumbId );
+    result &= blob.getValue( m_InfoModifiedTime );
+    return result;
 }
 
 //============================================================================
@@ -86,4 +107,16 @@ void BaseInfo::assureHasCreatorId( void )
     {
         m_OnlineId = GetPtoPEngine().getMyOnlineId();
     }
+}
+
+//============================================================================
+void BaseInfo::printValues( void ) const
+{
+    LogMsg( LOG_VERBOSE, "*Begin BaseInfo" );
+
+    LogMsg( LOG_VERBOSE, "m_OnlineId=(%s)", m_OnlineId.toOnlineIdString().c_str() );
+    LogMsg( LOG_VERBOSE, "m_ThumbId=(%s)", m_ThumbId.toOnlineIdString().c_str() );
+    LogMsg( LOG_VERBOSE, "m_InfoModifiedTime=(%lld)", m_InfoModifiedTime );
+
+    LogMsg( LOG_VERBOSE, "*End BaseInfo" );
 }

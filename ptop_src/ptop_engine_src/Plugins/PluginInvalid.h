@@ -25,13 +25,13 @@ public:
 	//! handle app state change
 	virtual void				onAppStateChange( EAppState eAppState );
 	//! called to start service or session with remote friend
-	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	//! called to stop service or session with remote friend
-	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	//! return true if is plugin session
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	//! can accept a new connection/session
-	virtual EPluginAccess	canAcceptNewSession( VxNetIdent* netIdent );	
+	virtual EPluginAccess		canAcceptNewSession( VxNetIdent* netIdent );	
 
 	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) {};
 	//! called when new better connection from user
@@ -39,6 +39,6 @@ public:
 	virtual void				onConnectionLost( VxSktBase* sktBase ) {}; 
 
 	//=== methods ===//
-	virtual	void				fromGuiStartPluginSession( PluginSessionBase * poOffer ) {};
+	virtual	void				fromGuiStartPluginSession( PluginSessionBase* poOffer ) {};
 
 };

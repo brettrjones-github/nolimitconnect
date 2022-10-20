@@ -20,10 +20,10 @@
 #include <NetLib/VxPeerMgr.h>
 
 //============================================================================
-bool PluginMgr::pluginApiSktConnectTo(		EPluginType			ePluginType,	// plugin id
+bool PluginMgr::pluginApiSktConnectTo(		EPluginType			pluginType,	// plugin id
 											VxNetIdentBase *	netIdent,		// identity of contact to connect to
 											int					pvUserData,		// plugin defined data
-											VxSktBase**		ppoRetSkt, 		// returned Socket
+											VxSktBase**		    ppoRetSkt, 		// returned Socket
 											EConnectReason		connectReason )
 {
 	VxSktBase* sktBase = nullptr;
@@ -53,7 +53,7 @@ void PluginMgr::pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase* sk
 }
 
 //============================================================================
-bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
+bool PluginMgr::pluginApiTxPacket(  EPluginType			pluginType,
                                     const VxGUID&       onlineId,
                                     VxSktBase*          sktBase,
                                     VxPktHdr*           pktHdr,
@@ -63,7 +63,7 @@ bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
     // when sending packets they are typically from plugin to the same remote plugin
     // for host/client we convert host to client and client to hot
     EPluginType hostClientType = ePluginTypeInvalid;
-    switch( ePluginType )
+    switch( pluginType )
     {
     case ePluginTypeCamServer:
         hostClientType = ePluginTypeCamClient;
@@ -134,7 +134,7 @@ bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
     }
     else
     {
-        pktHdr->setPluginNum( ( uint8_t )ePluginType );
+        pktHdr->setPluginNum( ( uint8_t )pluginType );
     }
 
     pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );

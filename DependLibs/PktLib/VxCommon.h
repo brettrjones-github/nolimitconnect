@@ -47,7 +47,7 @@ enum EAppState
 #define USE_PLUGIN_STORY_BOARD		1
 
 //! describe plugin local name
-const char* DescribePluginLclName( EPluginType ePluginType );
+const char* DescribePluginLclName( EPluginType pluginType );
 
 // permission bits
 // 0000		disabled or ignore
@@ -73,9 +73,9 @@ public:
 
     bool						isPluginEnabled( enum EPluginType ePlugin );
 	//! get type of permission user has set for given plugin
-    EFriendState				getPluginPermission( enum EPluginType ePluginType );
+    EFriendState				getPluginPermission( enum EPluginType pluginType );
 	//! set type of permission user has set for given plugin
-    void						setPluginPermission( enum EPluginType ePluginType, enum EFriendState eFriendState );
+    void						setPluginPermission( enum EPluginType pluginType, enum EFriendState eFriendState );
 	//! reset permissions to default values
 	void						setPluginPermissionsToDefaultValues( void );
 	uint8_t *					getPluginPermissions( void )				{ return m_au8Permissions; }
@@ -108,11 +108,11 @@ public:
     bool                        extractFromBlob( PktBlobEntry& blob );
     VxNetIdent&                 operator =( const VxNetIdent &rhs );
 
-    EPluginAccess			    getHisAccessPermissionFromMe( enum EPluginType ePluginType, bool inGroup = false );
-    bool						isHisAccessAllowedFromMe( enum EPluginType ePluginType, bool inGroup = false );
+    EPluginAccess			    getHisAccessPermissionFromMe( enum EPluginType pluginType, bool inGroup = false );
+    bool						isHisAccessAllowedFromMe( enum EPluginType pluginType, bool inGroup = false );
 
-    EPluginAccess			    getMyAccessPermissionFromHim( enum EPluginType ePluginType, bool inGroup = false );
-    bool						isMyAccessAllowedFromHim( enum EPluginType ePluginType, bool inGroup = false );
+    EPluginAccess			    getMyAccessPermissionFromHim( enum EPluginType pluginType, bool inGroup = false );
+    bool						isMyAccessAllowedFromHim( enum EPluginType pluginType, bool inGroup = false );
 
 	void						setPingTimeMs( uint16_t pingTime );
 	uint16_t					getPingTimeMs( void );
@@ -132,7 +132,7 @@ public:
     bool						canJoinImmediate( enum EHostType hostType ); // request to join will be granted immediate because have sufficient permission
 
 private:
-    EPluginAccess			    getPluginAccessState( enum EPluginType ePluginType, enum EFriendState eFriendState );
+    EPluginAccess			    getPluginAccessState( enum EPluginType pluginType, enum EFriendState eFriendState );
 
 	//=== vars ===//
     uint16_t					m_u16AppVersion{ 0 };

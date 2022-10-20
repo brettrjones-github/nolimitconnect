@@ -439,7 +439,7 @@ void PktAnnounce::DebugDump( void )
 	strDesc = this->getOnlineDescription();
 	//strNetwork = this->getNetworkKey();
 
-	LogMsg( LOG_INFO, "PktAnnounce Len %d Version #%d name %s Ip %s Port %d desc %s\n",
+	LogMsg( LOG_INFO, "PktAnnounce Len %d Version #%d name %s Ip %s Port %d desc %s",
 			getPktLength(),		// packet length
 			getPktVersionNum(),		// version of program
 			strName.c_str(),		

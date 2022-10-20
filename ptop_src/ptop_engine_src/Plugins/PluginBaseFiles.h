@@ -45,9 +45,9 @@ public:
 
 	virtual void				onAfterUserLogOnThreaded( void ) override;
 
-    virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
-    virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
-    virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
     void						fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings ) override;
     void						fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) override;
@@ -55,12 +55,7 @@ public:
     void						fromGuiCancelDownload( VxGUID& fileInstance ) override;
     void						fromGuiCancelUpload( VxGUID& fileInstance ) override;
 
-	bool						fromGuiMakePluginOffer( VxNetIdent*	netIdent,				// identity of friend
-														int				pvUserData,
-														const char*	pOfferMsg,				// offer message
-														const char*	pFileName = 0,
-														uint8_t *		fileHashId = 0,
-                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
+	bool						fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
 
 	EXferError					fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo ) override;
 

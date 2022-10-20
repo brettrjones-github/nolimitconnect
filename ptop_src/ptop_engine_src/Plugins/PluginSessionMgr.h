@@ -22,13 +22,15 @@
 
 #include <map>
 
+class OfferBaseInfo;
+
 class PluginSessionMgr : public SessionMgrBase
 {
 public:
 	PluginSessionMgr( P2PEngine& engine, PluginBase& plugin, PluginMgr& pluginMgr );
 	virtual ~PluginSessionMgr();
 
-	std::map<VxGUID, PluginSessionBase *>&	getSessions( void )			{ return m_aoSessions; }
+	std::map<VxGUID, PluginSessionBase*>&	getSessions( void )			{ return m_aoSessions; }
 	size_t						getSessionCount( void )					{ return m_aoSessions.size(); }
 
 	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
@@ -38,30 +40,19 @@ public:
 
     virtual bool				fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent* netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual bool				fromGuiMakePluginOffer(		bool			pluginIsLocked,
-															VxNetIdent*	netIdent,		// identity of friend
-															int			    pvUserData,
-															const char*	pOfferMsg,		// offer message
-															const char*	pFileName = 0,
-															uint8_t *			fileHashId = 0,
-															VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
+	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent* netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual bool				fromGuiOfferReply(	bool			pluginIsLocked,
-													VxNetIdent*	netIdent,
-													int			    pvUserdata,
-													EOfferResponse	eOfferResponse,
-													VxGUID			lclSessionId );
-
-	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent*	netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiMakePluginOffer(	bool pluginIsLocked, VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId );
+	virtual bool				fromGuiOfferReply( bool pluginIsLocked, VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse );
 
 	virtual void				onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktSessionStopReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
-	void						addSession( VxGUID& sessionId, PluginSessionBase * session, bool pluginIsLocked );
+	void						addSession( VxGUID& sessionId, PluginSessionBase* session, bool pluginIsLocked );
 
-	PluginSessionBase *			findPluginSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked );
-	PluginSessionBase *			findPluginSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked );
+	PluginSessionBase*			findPluginSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked );
+	PluginSessionBase*			findPluginSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked );
 
 	P2PSession *				findP2PSessionBySessionId( VxGUID& sessionId, bool pluginIsLocked );
 	P2PSession *				findP2PSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked );
@@ -91,17 +82,17 @@ public:
 	void						removeRxSessionByOnlineId( VxGUID& onlineId, bool pluginIsLocked );
 
 	// returns true if found and removed session
-	bool						removeSessionBySessionId( bool pluginIsLocked, VxGUID& sessionId, EOfferResponse eOfferResponse = eOfferResponseEndSession );
-	bool						removeSession( bool pluginIsLocked, VxNetIdent* netIdent, VxGUID& sessionId, EOfferResponse eOfferResponse, bool fromGui = false );
+	bool						removeSessionBySessionId( bool pluginIsLocked, VxGUID& sessionId, EOfferResponse offerResponse = eOfferResponseEndSession );
+	bool						removeSession( bool pluginIsLocked, VxNetIdent* netIdent, VxGUID& sessionId, EOfferResponse offerResponse, bool fromGui = false );
 	void						removeAllSessions( bool testSessionsOnly = false );
 
-	typedef std::map<VxGUID, PluginSessionBase *>::iterator SessionIter;
+	typedef std::map<VxGUID, PluginSessionBase*>::iterator SessionIter;
 
 protected:
-	void						doEndAndEraseSession( PluginSessionBase * sessionBase, EOfferResponse eOfferResponse, bool pluginIsLocked );
+	void						doEndAndEraseSession( PluginSessionBase* sessionBase, EOfferResponse offerResponse, bool pluginIsLocked );
 
 	//=== vars ===//
-	std::map<VxGUID, PluginSessionBase *>	m_aoSessions;
+	std::map<VxGUID, PluginSessionBase*>	m_aoSessions;
 
 private:
 	PluginSessionMgr(); // don't allow default constructor

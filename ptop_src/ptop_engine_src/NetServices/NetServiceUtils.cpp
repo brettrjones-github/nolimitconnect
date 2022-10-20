@@ -408,20 +408,20 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 
 	netServiceHdr.m_SktDataUsed = dataUsed;
 
-	EPluginType ePluginType = ePluginTypeNetServices;
+	EPluginType pluginType = ePluginTypeNetServices;
 	if( eNetCmdQueryHostOnlineIdReq == netServiceHdr.m_NetCmdType )
     {
-        ePluginType = ePluginTypeHostNetwork;
+        pluginType = ePluginTypeHostNetwork;
     }
     else if( eNetCmdIsMyPortOpenReq == netServiceHdr.m_NetCmdType )
     {
-        ePluginType = ePluginTypeHostConnectTest;
+        pluginType = ePluginTypeHostConnectTest;
     }
 
     LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %s %s", netCmdEnumToString( netServiceHdr.m_NetCmdType ), 
-		DescribePluginType( ePluginType ), DescribeNetCmdError( netServiceHdr.m_CmdError ) );
+		DescribePluginType( pluginType ), DescribeNetCmdError( netServiceHdr.m_CmdError ) );
 
-	return ePluginType;
+	return pluginType;
 }
 
 //============================================================================

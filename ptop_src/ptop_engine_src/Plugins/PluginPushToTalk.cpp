@@ -40,12 +40,7 @@ PluginPushToTalk::PluginPushToTalk( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginPushToTalk::fromGuiMakePluginOffer(		VxNetIdent*	netIdent,		
-													int			    pvUserData,
-													const char*	pOfferMsg,		
-													const char*	pFileName,
-													uint8_t *		fileHashId,
-													VxGUID			lclSessionId )	
+bool PluginPushToTalk::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
 	bool result = false;
 	P2PSession * poSession = 0;
@@ -61,20 +56,12 @@ bool PluginPushToTalk::fromGuiMakePluginOffer(		VxNetIdent*	netIdent,
 
 	if( poSession )
 	{
-		LogMsg( LOG_ERROR, "PluginPushToTalk already in session\n");
+		LogMsg( LOG_ERROR, "PluginPushToTalk already in session");
 		// assume some error in logic
 		m_PluginSessionMgr.removeSessionBySessionId( true, netIdent->getMyOnlineId() );
 	}
 
-	result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true,
-														netIdent,
-														pvUserData,	
-														pOfferMsg,
-														pFileName,
-														fileHashId,
-														lclSessionId );
-
-	return result;
+	return m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo, lclSessionId );
 }
 
 //============================================================================
@@ -100,15 +87,9 @@ void PluginPushToTalk::fromGuiStopPluginSession( VxNetIdent* netIdent, int, VxGU
 
 //============================================================================
 //! handle reply to offer
-bool PluginPushToTalk::fromGuiOfferReply(	VxNetIdent*	netIdent,
-											int				pvUserData,
-											EOfferResponse	eOfferResponse,
-											VxGUID			lclSessionId )
+bool PluginPushToTalk::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
 {
-	return m_PluginSessionMgr.fromGuiOfferReply(	false, 
-													netIdent,
-													pvUserData,				
-													eOfferResponse, lclSessionId );
+	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo, lclSessionId, offerResponse );
 }
 
 //============================================================================
@@ -246,14 +227,14 @@ void PluginPushToTalk::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNet
 }
 
 //============================================================================
-void PluginPushToTalk::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
+void PluginPushToTalk::onSessionStart( PluginSessionBase* session, bool pluginIsLocked )
 {
 	PluginBase::onSessionStart( session, pluginIsLocked ); // mark user session time so contact list is sorted with latest used on top
 	//m_PushToTalkFeedMgr.fromGuiStartPluginSession( pluginIsLocked, session->getIdent() );
 }
 
 //============================================================================
-void PluginPushToTalk::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
+void PluginPushToTalk::onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse )
 {
 	//m_PushToTalkFeedMgr.fromGuiStopPluginSession( pluginIsLocked, session->getIdent() );
 }

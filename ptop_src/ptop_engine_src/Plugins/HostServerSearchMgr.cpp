@@ -444,7 +444,6 @@ bool HostServerSearchMgr::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* 
     {
         PluginId pluginId( nextHostId, pluginType );
         std::map<PluginId, HostSearchEntry>& hostAnnList = getHostAnnList( hostType );
-        bool foundNextId{ false };
         uint64_t timeNow = GetGmtTimeMs();
 
         m_SearchMutex.lock();

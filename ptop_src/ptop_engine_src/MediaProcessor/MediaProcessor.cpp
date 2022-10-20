@@ -978,12 +978,12 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 }
 
 //============================================================================
-void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
+void MediaProcessor::wantAppIdle( EPluginType pluginType, bool bWantAppIdle )
 {
 	if( bWantAppIdle )
 	{
-		LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle anding want idle plugin %d", ePluginType );
-		m_aoWantAppIdle.push_back( m_PluginMgr.getPlugin( ePluginType ) );
+		LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle anding want idle plugin %d", pluginType );
+		m_aoWantAppIdle.push_back( m_PluginMgr.getPlugin( pluginType ) );
 		if( 1 == m_aoWantAppIdle.size() )
 		{
 			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to start idle" );
@@ -996,7 +996,7 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 		std::vector<PluginBase* >::iterator iter;
 		for( iter = m_aoWantAppIdle.begin(); iter != m_aoWantAppIdle.end(); ++iter )
 		{
-			if( ePluginType == (*iter)->getPluginType() )
+			if( pluginType == (*iter)->getPluginType() )
 			{
 				m_aoWantAppIdle.erase(iter);
 				break;

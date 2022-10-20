@@ -169,12 +169,12 @@ void OfferBaseMgr::generateHashIds( VxThread* genHashThread )
 				}
 
 				std::vector<OfferBaseInfo*>::iterator iter;
-				OfferBaseInfo * assetInfo = 0;
+				OfferBaseInfo* assetInfo = 0;
 				lockResources();
 				// move from waiting to completed
 				for( iter = m_WaitingForHastList.begin(); iter != m_WaitingForHastList.end(); ++iter )
 				{
-					OfferBaseInfo * inListOfferBaseInfo = *iter;
+					OfferBaseInfo* inListOfferBaseInfo = *iter;
 					if( inListOfferBaseInfo->getOfferName() == thisFile )
 					{
 						assetInfo = inListOfferBaseInfo;
@@ -206,7 +206,7 @@ void OfferBaseMgr::generateHashIds( VxThread* genHashThread )
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::findOffer( std::string& fileName )
+OfferBaseInfo* OfferBaseMgr::findOffer( std::string& fileName )
 {
 	std::vector<OfferBaseInfo*>::iterator iter;
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
@@ -221,7 +221,7 @@ OfferBaseInfo * OfferBaseMgr::findOffer( std::string& fileName )
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::findOffer( VxSha1Hash& fileHashId )
+OfferBaseInfo* OfferBaseMgr::findOffer( VxSha1Hash& fileHashId )
 {
 	if( false == fileHashId.isHashValid() )
 	{
@@ -242,7 +242,7 @@ OfferBaseInfo * OfferBaseMgr::findOffer( VxSha1Hash& fileHashId )
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::findOffer( VxGUID& assetId )
+OfferBaseInfo* OfferBaseMgr::findOffer( VxGUID& assetId )
 {
 	if( false == assetId.isVxGUIDValid() )
 	{
@@ -250,7 +250,7 @@ OfferBaseInfo * OfferBaseMgr::findOffer( VxGUID& assetId )
         return nullptr;
 	}
 
-	for( OfferBaseInfo * assetInfo : m_OfferBaseInfoList )
+	for( OfferBaseInfo* assetInfo : m_OfferBaseInfoList )
 	{
 		if( assetInfo->getOfferId() == assetId )
 		{
@@ -262,9 +262,9 @@ OfferBaseInfo * OfferBaseMgr::findOffer( VxGUID& assetId )
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::addOfferFile( const char* fileName, uint64_t fileLen, uint16_t fileType )
+OfferBaseInfo* OfferBaseMgr::addOfferFile( const char* fileName, uint64_t fileLen, uint16_t fileType )
 {
-    OfferBaseInfo * assetInfo = createOfferInfo( fileName, fileLen, fileType );
+    OfferBaseInfo* assetInfo = createOfferInfo( fileName, fileLen, fileType );
     if( assetInfo )
     {
         if( insertNewInfo( assetInfo ) )
@@ -284,7 +284,7 @@ bool OfferBaseMgr::addOfferFile(	const char*	fileName,
 									const char*	assetTag, 
                                     int64_t			timestamp )
 {
-	OfferBaseInfo * assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	OfferBaseInfo* assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		return insertNewInfo( assetInfo );
@@ -303,7 +303,7 @@ bool OfferBaseMgr::addOfferFile(	const char*	fileName,
 									const char*	assetTag, 
                                     int64_t			timestamp )
 {
-	OfferBaseInfo * assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	OfferBaseInfo* assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		assetInfo->setCreatorId( creatorId );
@@ -317,15 +317,15 @@ bool OfferBaseMgr::addOfferFile(	const char*	fileName,
 //============================================================================
 bool OfferBaseMgr::addOffer( OfferBaseInfo& assetInfo )
 {
-	OfferBaseInfo * newOfferBaseInfo = createOfferInfo( assetInfo );
+	OfferBaseInfo* newOfferBaseInfo = createOfferInfo( assetInfo );
 	LogMsg( LOG_INFO, "OfferBaseMgr::addOffer" );
 	return insertNewInfo( newOfferBaseInfo );
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType )
+OfferBaseInfo* OfferBaseMgr::createOfferInfo( std::string fileName, uint64_t fileLen, uint16_t fileType )
 {
-    OfferBaseInfo * assetInfo = new OfferBaseInfo( fileName, fileLen, fileType );
+    OfferBaseInfo* assetInfo = new OfferBaseInfo( fileName, fileLen, fileType );
     if( assetInfo )
     {
         assetInfo->getOfferId().initializeWithNewVxGUID();
@@ -335,23 +335,23 @@ OfferBaseInfo * OfferBaseMgr::createOfferInfo( const char* fileName, uint64_t fi
 }
 
 //============================================================================
-OfferBaseInfo * OfferBaseMgr::createOfferInfo( 	const char*	fileName, 
+OfferBaseInfo* OfferBaseMgr::createOfferInfo( std::string	fileName,
 										        VxGUID&			assetId,  
 										        uint8_t *	    hashId, 
 										        EOfferLocation	locationFlags, 
 										        const char*	assetTag, 
                                                 int64_t			timestamp )
 {
-	uint64_t  fileLen = VxFileUtil::getFileLen( fileName );
-	uint8_t	fileType = VxFileExtensionToFileTypeFlag( fileName );
+	uint64_t  fileLen = VxFileUtil::getFileLen( fileName.c_str() );
+	uint8_t	fileType = VxFileExtensionToFileTypeFlag( fileName.c_str() );
 	if( ( false == isAllowedFileOrDir( fileName ) )
 		|| ( 0 == fileLen ) )
 	{
-		LogMsg( LOG_ERROR, "ERROR %d OfferBaseMgr::createOfferInfo could not get file info %s\n", VxGetLastError(), fileName );
+        LogMsg( LOG_ERROR, "ERROR %d OfferBaseMgr::createOfferInfo could not get file info %s", VxGetLastError(), fileName.c_str() );
 		return NULL;
 	}
 
-	OfferBaseInfo * assetInfo = createOfferInfo( fileName, fileLen, fileType );
+	OfferBaseInfo* assetInfo = createOfferInfo( fileName, fileLen, fileType );
 	assetInfo->setOfferId( assetId );
 	if( false == assetInfo->getOfferId().isVxGUIDValid() )
 	{
@@ -367,13 +367,13 @@ OfferBaseInfo * OfferBaseMgr::createOfferInfo( 	const char*	fileName,
 }
 
 //============================================================================
-bool OfferBaseMgr::insertNewInfo( OfferBaseInfo * assetInfo )
+bool OfferBaseMgr::insertNewInfo( OfferBaseInfo* assetInfo )
 {
 	bool result = false;
-	OfferBaseInfo * assetInfoExisting = findOffer( assetInfo->getOfferId() );
+	OfferBaseInfo* assetInfoExisting = findOffer( assetInfo->getOfferId() );
 	if( assetInfoExisting )
 	{
-		LogMsg( LOG_ERROR, "ERROR OfferBaseMgr::insertNewInfo: duplicate assset %s\n", assetInfo->getOfferName().c_str() );
+		LogMsg( LOG_ERROR, "ERROR OfferBaseMgr::insertNewInfo: duplicate assset %s", assetInfo->getOfferName().c_str() );
 		if( assetInfoExisting != assetInfo )
 		{
 			*assetInfoExisting = *assetInfo;
@@ -418,7 +418,7 @@ bool OfferBaseMgr::insertNewInfo( OfferBaseInfo * assetInfo )
 //============================================================================
 bool OfferBaseMgr::updateOffer( OfferBaseInfo& assetInfo )
 {
-    OfferBaseInfo * existingOffer = findOffer( assetInfo.getOfferId() );
+    OfferBaseInfo* existingOffer = findOffer( assetInfo.getOfferId() );
     if( existingOffer )
     {
         *existingOffer = assetInfo;
@@ -431,7 +431,7 @@ bool OfferBaseMgr::updateOffer( OfferBaseInfo& assetInfo )
 }
 
 //============================================================================
-void OfferBaseMgr::announceOfferAdded( OfferBaseInfo * assetInfo )
+void OfferBaseMgr::announceOfferAdded( OfferBaseInfo* assetInfo )
 {
 	// LogMsg( LOG_INFO, "OfferBaseMgr::announceOfferAdded start" );
 	if( assetInfo->isFileOffer() )
@@ -453,7 +453,7 @@ void OfferBaseMgr::announceOfferAdded( OfferBaseInfo * assetInfo )
 }
 
 //============================================================================
-void OfferBaseMgr::announceOfferUpdated( OfferBaseInfo * assetInfo )
+void OfferBaseMgr::announceOfferUpdated( OfferBaseInfo* assetInfo )
 {
     // LogMsg( LOG_INFO, "OfferBaseMgr::announceOfferUpdated start" );
     lockClientList();
@@ -469,7 +469,7 @@ void OfferBaseMgr::announceOfferUpdated( OfferBaseInfo * assetInfo )
 }
 
 //============================================================================
-void OfferBaseMgr::announceOfferRemoved( OfferBaseInfo * assetInfo )
+void OfferBaseMgr::announceOfferRemoved( OfferBaseInfo* assetInfo )
 {
 	//if( assetInfo->getIsOfferBase() )
 	{
@@ -529,7 +529,7 @@ bool OfferBaseMgr::removeOffer( std::string fileName )
 	{
 		if( fileName == (*iter)->getOfferName() )
 		{
-			OfferBaseInfo * assetInfo = *iter;
+			OfferBaseInfo* assetInfo = *iter;
 			m_OfferBaseInfoList.erase( iter );
 			m_OfferBaseInfoDb.removeOffer( fileName.c_str() );
 			announceOfferRemoved( assetInfo );
@@ -551,7 +551,7 @@ bool OfferBaseMgr::removeOffer( VxGUID& assetOfferId )
 	{
 		if( assetOfferId == ( *iter )->getOfferId() )
 		{
-			OfferBaseInfo * assetInfo = *iter;
+			OfferBaseInfo* assetInfo = *iter;
 			m_OfferBaseInfoList.erase( iter );
 			m_OfferBaseInfoDb.removeOffer( assetInfo );
 			announceOfferRemoved( assetInfo );
@@ -674,7 +674,7 @@ void OfferBaseMgr::updateFileListPackets( void )
 	std::vector<OfferBaseInfo*>::iterator iter;
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 	{
-		OfferBaseInfo * assetInfo = (*iter); 
+		OfferBaseInfo* assetInfo = (*iter); 
 		if( ( false == assetInfo->isFileOffer() ) || ( false == assetInfo->getOfferHashId().isHashValid() ) )
 			continue;
 
@@ -770,7 +770,7 @@ bool OfferBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile,
 	{
 		// file is not currently OfferBase and should be
 		VxGUID guid;
-		OfferBaseInfo * assetInfo = createOfferInfo( fileName.c_str(), guid, fileHashId, eOfferLocShared );
+		OfferBaseInfo* assetInfo = createOfferInfo( fileName.c_str(), guid, fileHashId, eOfferLocShared );
 		if( assetInfo )
 		{
 			insertNewInfo( assetInfo );
@@ -853,7 +853,7 @@ bool OfferBaseMgr::fromGuiGetOfferBaseInfo( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-void OfferBaseMgr::updateDatabase( OfferBaseInfo * assetInfo )
+void OfferBaseMgr::updateDatabase( OfferBaseInfo* assetInfo )
 {
 	m_OfferBaseInfoDb.addOffer( assetInfo );
 }
@@ -868,7 +868,7 @@ void OfferBaseMgr::updateOfferDatabaseSendState( VxGUID& assetOfferId, EOfferSen
 void OfferBaseMgr::queryHistoryOffers( VxGUID& historyId )
 {
 	std::vector<OfferBaseInfo*>::iterator iter;
-	OfferBaseInfo * assetInfo;
+	OfferBaseInfo* assetInfo;
 	lockResources();
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 	{

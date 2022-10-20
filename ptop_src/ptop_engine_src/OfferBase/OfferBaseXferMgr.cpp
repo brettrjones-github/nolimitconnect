@@ -135,7 +135,7 @@ void OfferBaseXferMgr::assetXferThreadWork( VxThread* workThread )
 	lockOfferBaseQue();
 	for( iter = assetToSendList.begin(); iter != assetToSendList.end(); ++iter )
 	{
-		OfferBaseInfo * offerInfo = m_OfferMgr.findOffer( *iter );
+		OfferBaseInfo* offerInfo = m_OfferMgr.findOffer( *iter );
 		if( offerInfo )
 		{
 			m_OfferBaseSendQue.push_back( *offerInfo );
@@ -454,7 +454,7 @@ void OfferBaseXferMgr::onPktOfferSendReply( VxSktBase* sktBase, VxPktHdr* pktHdr
 	LogMsg( LOG_INFO, "OfferBaseXferMgr::onPktOfferSendReply");
 	PktOfferSendReply * poPkt = (PktOfferSendReply *)pktHdr;
 	VxGUID&	assetOfferId =	poPkt->getOfferId();
-	OfferBaseInfo * offerInfo = m_OfferMgr.findOffer( assetOfferId );
+	OfferBaseInfo* offerInfo = m_OfferMgr.findOffer( assetOfferId );
 	if( 0 == offerInfo )
 	{
 		LogMsg( LOG_ERROR, "OfferBaseXferMgr::onPktOfferSendReply failed to find asset id");
@@ -1757,7 +1757,7 @@ void OfferBaseXferMgr::onOfferBaseReceived( OfferBaseRxSession* xferSession, Off
 		RCODE rc = 0;
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteOffer.c_str(), completedOfferBase.c_str() ) ) )
 		{
-			offerInfo.setOfferName( completedOfferBase.c_str() );
+			offerInfo.setOfferName( completedOfferBase );
 			offerInfo.setHistoryId( xferSession->getIdent()->getMyOnlineId() );
 
 			if( eXferErrorNone == error )

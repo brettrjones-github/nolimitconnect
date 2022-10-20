@@ -96,6 +96,8 @@
 #define OBJNAME_APPLET_CLIENT_RANDOM_PERSON			    "AppletClientRandomConnect"
 #define OBJNAME_APPLET_CLIENT_RANDOM_PERSON_RELAY		"AppletClientRandomConnectRelay"
 
+#define OBJNAME_APPLET_FILE_OFFER_SELECT				"AppletFileOfferSelect"
+
 #define OBJNAME_APPLET_GALLERY_EMOTICON				    "AppletGalleryEmoticon"
 #define OBJNAME_APPLET_GALLERY_IMAGE				    "AppletGalleryImage"
 #define OBJNAME_APPLET_GALLERY_THUMB				    "AppletGalleryThumb"

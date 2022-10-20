@@ -24,7 +24,7 @@ public:
 	virtual ~OfferClientInfoDb();
 
 protected:
-    virtual OfferBaseInfo *     createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType ) override;
-    virtual OfferBaseInfo *     createOfferInfo( OfferBaseInfo& assetInfo ) override;
+    virtual OfferBaseInfo*     createOfferInfo( std::string fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual OfferBaseInfo*     createOfferInfo( OfferBaseInfo& assetInfo ) override;
 };
 

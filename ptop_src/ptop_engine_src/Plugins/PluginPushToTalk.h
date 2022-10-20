@@ -26,53 +26,42 @@ public:
 	PluginPushToTalk( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginPushToTalk() = default;
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				
-														int				pvUserData,
-														const char*	pOfferMsg,				
-														const char*	pFileName = NULL,
-														uint8_t *		fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
+	virtual bool				fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) override;
 
-	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
-													int				pvUserdata,
-													EOfferResponse	eOfferResponse,
-													VxGUID			lclSessionId );
+	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, const char* pMsg ) override;
+	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk ) override;
 
-	virtual bool				fromGuiInstMsg(		VxNetIdent*	netIdent, 
-													const char*	pMsg ); 
-	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
-
-	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
-
+	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
 protected:
-	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktChatReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktChatReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktPushToTalkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktPushToTalkReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktPushToTalkStart		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktPushToTalkStop         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPushToTalkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktPushToTalkReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktPushToTalkStart		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktPushToTalkStop         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 	
-	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktVoiceReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktVoiceReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVoiceReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktVoiceReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual	void				onContactWentOffline		( VxNetIdent*	netIdent, VxSktBase* sktBase );
-	virtual	void				onConnectionLost			( VxSktBase* sktBase );
+    virtual	void				onContactWentOffline		( VxNetIdent*	netIdent, VxSktBase* sktBase ) override;
+    virtual	void				onConnectionLost			( VxSktBase* sktBase ) override;
 
-	virtual void				onSessionStart				( PluginSessionBase * poSession, bool pluginIsLocked );
-	virtual void				onSessionEnded				( PluginSessionBase * poSession, bool pluginIsLocked, EOfferResponse eOfferResponse );
+    virtual void				onSessionStart				( PluginSessionBase* poSession, bool pluginIsLocked ) override;
+    virtual void				onSessionEnded				( PluginSessionBase* poSession, bool pluginIsLocked, EOfferResponse offerResponse ) override;
 
 protected:
-    virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio );
-	virtual void				callbackAudioOutSpaceAvail	( int freeSpaceLen );
+    virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio ) override;
+    virtual void				callbackAudioOutSpaceAvail	( int freeSpaceLen ) override;
 
 	PluginSessionMgr			m_PluginSessionMgr;
 	PushToTalkFeedMgr			m_PushToTalkFeedMgr;

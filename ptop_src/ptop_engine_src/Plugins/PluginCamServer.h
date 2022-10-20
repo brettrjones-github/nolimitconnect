@@ -30,12 +30,7 @@ public:
     virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	//! user wants to send offer to friend.. return false if cannot connect
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent*		netIdent,				// identity of friend
-														int				pvUserData,
-														const char*		pOfferMsg,				// offer message
-														const char*		pFileName = nullptr,
-														uint8_t*		fileHashId = 0,
-                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
 
     virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission ) override;
 

@@ -114,22 +114,8 @@ public:
 
 	bool						startDownload( FileInfo& fileInfo, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent );
 
-	virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
-														EPluginType		ePluginType,			// plugin type
-														const char*		pOfferMsg,				// offer message
-														int				pvUserData,				// plugin defined data
-														const char*		pFileName = NULL,		// filename if any
-														uint8_t*		fileHashData = 0,
-														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
-	virtual void				toGuiRxedOfferReply( VxNetIdent*	netIdent,
-													EPluginType		ePluginType,
-													int				pvUserData,
-													EOfferResponse	eOfferResponse,
-													const char*		pFileName = 0,
-													uint8_t*		fileHashData = 0,
-													VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-													VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
+	virtual void				toGuiRxedPluginOffer( VxNetIdent* netIdent, EPluginType pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId );
+	virtual void				toGuiRxedOfferReply( VxNetIdent* netIdent, EPluginType pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse );
 
 	virtual void				toGuiFileUploadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo );
 	virtual void				toGuiFileDownloadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo );

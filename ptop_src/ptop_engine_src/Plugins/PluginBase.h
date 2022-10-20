@@ -35,10 +35,13 @@ class GroupieId;
 class HostedInfo;
 class IToGui;
 class NetServiceHdr;
+class OfferBaseInfo;
 class P2PEngine;
 class P2PSession;
 class PktAnnounce;
 class PktHostInviteAnnounceReq;
+class PktPluginOfferReply;
+class PktPluginOfferReq;
 class PluginMgr;
 class PluginSessionBase;
 class PluginSetting;
@@ -93,7 +96,7 @@ public:
 	//=== getter/setters ===//
 	virtual P2PEngine&			getEngine( void )										{ return m_Engine; }
     virtual IToGui&			    getToGui( void );
-    virtual void				setPluginType( EPluginType ePluginType );
+    virtual void				setPluginType( EPluginType pluginType );
     virtual EPluginType			getPluginType( void ) override							{ return m_ePluginType; }
     virtual bool                setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
     virtual PluginSetting&      getPluginSetting( void )                                { return m_PluginSetting; }
@@ -119,7 +122,7 @@ public:
 
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
-	virtual void				fromGuiStartPluginSession( PluginSessionBase * poOffer )	{};
+	virtual void				fromGuiStartPluginSession( PluginSessionBase* poOffer )	{};
     virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
     virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
     virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{ return true; }
@@ -130,16 +133,9 @@ public:
 
 	virtual void				fromGuiCancelDownload( VxGUID& fileInstance ) {};
 	virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) {};
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				// identity of friend
-														int				pvUserData,
-														const char*	pOfferMsg,				// offer message
-														const char*	pFileName = NULL,
-														uint8_t *		fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
-	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
-													int				pvUserdata,				
-													EOfferResponse	eOfferResponse,
-													VxGUID			lclSessionId );
+
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) { return false; };
+	virtual bool				fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) { return false; };
 
 	virtual EXferError			fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo );
 
@@ -181,22 +177,8 @@ public:
 	virtual bool				fromGuiDownloadFileList( VxGUID& onlineId, VxGUID& sessionId, uint8_t fileTypes = 0 ) { return false; }
 	virtual bool				fromGuiDownloadFileListCancel( VxGUID& onlineId, VxGUID& sessionId ) { return false; }
 
-	virtual void				toGuiRxedPluginOffer( VxNetIdent*		netIdent,				// identity of friend
-														EPluginType		ePluginType,			// plugin type
-														const char*		pOfferMsg,				// offer message
-														int				pvUserData,				// plugin defined data
-														const char*		pFileName = NULL,		// filename if any
-														uint8_t*		fileHashData = 0,
-														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) {};
-	virtual void				toGuiRxedOfferReply( VxNetIdent*		netIdent,
-														EPluginType		ePluginType,
-														int				pvUserData,
-														EOfferResponse	eOfferResponse,
-														const char*		pFileName = 0,
-														uint8_t*		fileHashData = 0,
-														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) {};
+	virtual void				toGuiRxedPluginOffer( VxNetIdent* netIdent, EPluginType pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) {};
+	virtual void				toGuiRxedOfferReply( VxNetIdent* netIdent, EPluginType pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) {};
 
 	virtual void				toGuiFileUploadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo );
 	virtual void				toGuiFileDownloadStart( VxGUID& onlineId, VxGUID& lclSessionId, FileInfo& fileInfo );
@@ -257,10 +239,10 @@ public:
     virtual void				onInvalidRxedPacket( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, const char* msg = "" );
 
     //=== sessions ===//
-    virtual void				onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked );
-    virtual void				onSessionEnded( PluginSessionBase * poSession, 
+    virtual void				onSessionStart( PluginSessionBase* poSession, bool pluginIsLocked );
+    virtual void				onSessionEnded( PluginSessionBase* poSession, 
                                                 bool pluginIsLocked,
-                                                EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
+                                                EOfferResponse offerResponse = eOfferResponseUserOffline ) {};
 
     virtual EPluginAccess	    canAcceptNewSession( VxNetIdent* netIdent );
 
@@ -275,6 +257,9 @@ public:
 	virtual void				handlePluginSpecificSkt( VxSktBase* sktBase ) {};
 	virtual RCODE				handlePtopConnection( VxSktBase* sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
 	virtual RCODE				handlePtopConnection( VxSktBase* sktBase, VxNetIdent* netIdent )				{ return -1; }
+	// default handlers
+	virtual void				handleToGuiOfferRequest( VxNetIdent* netIdent, PktPluginOfferReq* pktReq );
+	virtual void				handleToGuiOfferResponse( VxNetIdent* netIdent, PktPluginOfferReply* pktReply );
 
     virtual EPluginType         getDestinationPluginOverride( EHostType hostType );
 
@@ -294,6 +279,8 @@ public:
 
 	virtual	void				onNetworkConnectionReady( bool requiresRelay ) {};
 
+
+
 protected:
 	virtual void				makeShortFileName( const char* pFullFileName, std::string& strShortFileName );
 
@@ -310,7 +297,7 @@ protected:
     ThumbMgr&                   m_ThumbMgr;
     ThumbXferMgr                m_ThumbXferMgr; 
 	
-	VxNetIdent*				m_MyIdent = nullptr;
+	VxNetIdent*					m_MyIdent = nullptr;
 
 	EAppState					m_ePluginState = eAppStateInvalid;
 	VxMutex						m_PluginMutex;

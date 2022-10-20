@@ -50,6 +50,7 @@ public:
 	void						clearVxGUID( void );
 
 	bool						isVxGUIDValid()	const;
+	void						assureIsValidGUID( void ) { if( !isVxGUIDValid() ) initializeWithNewVxGUID(); }
 	std::string					toGUIDStandardFormatedString( void );
 
 	bool						toHexString( std::string& strRetId ) const;

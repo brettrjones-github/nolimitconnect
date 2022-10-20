@@ -81,14 +81,14 @@ void PluginCamClient::sendVidPkt( VxPktHdr* vidPkt, bool requiresAck )
 	if( m_PluginSessionMgr.getSessionCount() )
 	{
 		//LogMsg( LOG_VERBOSE, "PluginCamClient::fromGuiVideoData %d clients\n", m_PluginSessionMgr.m_TxSessions.size() );
-		std::map<VxGUID, PluginSessionBase *>&	sessionList = m_PluginSessionMgr.getSessions();
+		std::map<VxGUID, PluginSessionBase*>&	sessionList = m_PluginSessionMgr.getSessions();
 		#if defined(DEBUG_PLUGIN_LOCK)
 			LogMsg( LOG_VERBOSE, "PluginCamClient::sendVidPkt lock" );
-		#endif defined(DEBUG_PLUGIN_LOCK)
+        #endif //defined(DEBUG_PLUGIN_LOCK)
 		PluginBase::AutoPluginLock pluginMutexLock( this );
 		for( auto iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 		{
-			PluginSessionBase * sessionBase = iter->second;
+			PluginSessionBase* sessionBase = iter->second;
 			if( sessionBase->isTxSession() )
 			{
 				TxSession * poSession = (TxSession *)sessionBase;
@@ -109,7 +109,7 @@ void PluginCamClient::sendVidPkt( VxPktHdr* vidPkt, bool requiresAck )
 
 #if defined(DEBUG_PLUGIN_LOCK)
 		LogMsg( LOG_VERBOSE, "PluginCamClient::sendVidPkt unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 	}
 }
 
@@ -299,21 +299,21 @@ EPluginAccess PluginCamClient::canAcceptNewSession( VxNetIdent* netIdent )
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginCamClient::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		// identity of friend
-													int				pvUserData,
-													const char*	pOfferMsg,		// offer message
-													const char*	pFileName,
-													uint8_t *		fileHashId,
-													VxGUID			lclSessionId )		// filename if any
+bool PluginCamClient::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )		// filename if any
 {
 	VxSktBase* sktBase = NULL;
 	LogMsg( LOG_VERBOSE, " PluginCamClient::fromGuiMakePluginOffer %s", netIdent->getOnlineName());
 
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	if( true == m_PluginMgr.pluginApiSktConnectTo( m_ePluginType, netIdent, pvUserData, &sktBase ) )
+	if( true == m_PluginMgr.pluginApiSktConnectTo( m_ePluginType, netIdent, 0, &sktBase ) )
 	{
-		PktPluginOfferReq oPkt;
-		oPkt.setLclSessionId( lclSessionId );
+		PktPluginOfferReq pktReq;
+		pktReq.setLclSessionId( lclSessionId );
+		pktReq.setRmtSessionId( lclSessionId );
+		pktReq.setPluginType( getPluginType() );
+		offerInfo.addToBlob( pktReq.getBlobEntry() );
+		pktReq.calcPktLen();
+
         // force session to be created so have session to lookup on reply
 		RxSession * rxSession = (RxSession *)m_PluginSessionMgr.findOrCreateRxSessionWithSessionId( lclSessionId, sktBase, netIdent, true );
         if( 0 != rxSession )
@@ -321,7 +321,7 @@ bool PluginCamClient::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		// identity
             if( true == m_PluginMgr.pluginApiTxPacket(	m_ePluginType,
                                                         netIdent->getMyOnlineId(),
                                                         sktBase,
-                                                        &oPkt ) )
+                                                        &pktReq ) )
             {
                 LogMsg( LOG_VERBOSE, " PluginCamClient::fromGuiMakePluginOffer success");
                 return true;
@@ -389,51 +389,57 @@ void PluginCamClient::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr,
 	}
 
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktPluginOfferReq" );
-	PktPluginOfferReq * pktOfferReq = ( PktPluginOfferReq * )pktHdr;
-	PktPluginOfferReply pktReply;
-	pktReply.setRmtSessionId( pktOfferReq->getLclSessionId() );
-	PluginBase::AutoPluginLock pluginMutexLock( this );
-	if( getIsServerInSession() && ( ePluginAccessOk == canAcceptNewSession( netIdent ) ) ) 
+	PktPluginOfferReq* pktOfferReq = ( PktPluginOfferReq * )pktHdr;
+	OfferBaseInfo offerInfo;
+	if( offerInfo.extractFromBlob( pktOfferReq->getBlobEntry() ) )
 	{
-		TxSession * txSession = (TxSession *)m_PluginSessionMgr.findOrCreateTxSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
-		pktReply.setLclSessionId( txSession->getLclSessionId() );
-		pktReply.setOfferResponse(eOfferResponseAccept);
+		PktPluginOfferReply pktReply;
+		pktReply.setLclSessionId( pktOfferReq->getLclSessionId() );
+		pktReply.setRmtSessionId( pktOfferReq->getRmtSessionId() );
+		pktReply.setPluginType( getPluginType() );
+		offerInfo.addToBlob( pktReply.getBlobEntry() );
+		pktReply.calcPktLen();
+
+		PluginBase::AutoPluginLock pluginMutexLock( this );
+		if( getIsServerInSession() && (ePluginAccessOk == canAcceptNewSession( netIdent )) )
+		{
+			TxSession* txSession = (TxSession*)m_PluginSessionMgr.findOrCreateTxSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
+			pktReply.setLclSessionId( txSession->getLclSessionId() );
+			pktReply.setOfferResponse( eOfferResponseAccept );
+		}
+		else
+		{
+			LogMsg( LOG_VERBOSE, "PluginCamClient::onPktPluginOfferReq REJECTED in session %d canAcceptNewSession %d",
+				getIsServerInSession(), canAcceptNewSession( netIdent ) );
+			pktReply.setOfferResponse( eOfferResponseReject );
+		}
+
+		m_PluginMgr.pluginApiTxPacket( m_ePluginType,
+			netIdent->getMyOnlineId(),
+			sktBase,
+			&pktReply );
 	}
 	else
 	{
-		LogMsg( LOG_VERBOSE, "PluginCamClient::onPktPluginOfferReq REJECTED in session %d canAcceptNewSession %d",
-			getIsServerInSession(), canAcceptNewSession( netIdent ));
-		pktReply.setOfferResponse(eOfferResponseReject);
+		LogMsg( LOG_ERROR, "PluginCamClient::onPktPluginOfferReq failed to extract offerInfo " );
 	}
-
-	m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-									netIdent->getMyOnlineId(), 
-									sktBase, 
-									&pktReply ); 
 }
 
 //============================================================================
 //! packet with remote users reply to offer
 void PluginCamClient::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
-	EOfferResponse eResponse = poPkt->getOfferResponse();
-	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktPluginOfferReply %d", eResponse );
+	PktPluginOfferReply* pktReply = (PktPluginOfferReply*)pktHdr;
+	EOfferResponse offerResponse = pktReply->getOfferResponse();
+	PluginBase::handleToGuiOfferResponse( netIdent, pktReply );
+
+	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktPluginOfferReply %d", offerResponse );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	if( eResponse == eOfferResponseAccept )
+	if( offerResponse == eOfferResponseAccept )
 	{
 		RxSession * rxSession = (RxSession *)m_PluginSessionMgr.findOrCreateRxSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
-		rxSession->setOfferResponse( eResponse );
+		rxSession->setOfferResponse( offerResponse );
 	}
-
-	IToGui::getToGui().toGuiRxedOfferReply(	netIdent,			
-									m_ePluginType,		
-									0,				// plugin defined data
-									eResponse,
-									0,
-									0,
-									poPkt->getRmtSessionId(),
-									poPkt->getLclSessionId() );
 }
 
 //============================================================================
@@ -448,7 +454,7 @@ void PluginCamClient::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 	PktSessionStartReply oPkt;
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktSessionStartReq lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( getIsServerInSession() && ( ePluginAccessOk == canAcceptNewSession( netIdent ) ) ) 
 	{
@@ -471,7 +477,7 @@ void PluginCamClient::onPktSessionStartReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 									&oPkt ); 
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktSessionStartReq unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 }
 
 //============================================================================
@@ -480,7 +486,7 @@ void PluginCamClient::onPktSessionStartReply( VxSktBase* sktBase, VxPktHdr* pktH
 	PktSessionStartReply * poPkt = (PktSessionStartReply *)pktHdr;
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktSessionStartReply lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
@@ -500,7 +506,7 @@ void PluginCamClient::onPktSessionStartReply( VxSktBase* sktBase, VxPktHdr* pktH
 
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktSessionStartReply unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 }
 
 //============================================================================
@@ -530,7 +536,7 @@ void PluginCamClient::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr
 	PktVideoFeedStatus * pktVideoStatus = ( PktVideoFeedStatus * )pktHdr;
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedStatus lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 
 	RxSession* rxSession = (RxSession*)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( rxSession )
@@ -538,14 +544,14 @@ void PluginCamClient::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr
 		LogMsg( LOG_INFO, "PluginCamServer::onPktVideoFeedStatus %d", pktVideoStatus->getFeedStatus() );
 		if( eFeedStatusOnline != pktVideoStatus->getFeedStatus() )
 		{
-			IToGui::getToGui().toGuiRxedOfferReply( netIdent,
-				m_ePluginType,
-				0,				// plugin defined data
-				(eFeedStatusBusy == pktVideoStatus->getFeedStatus()) ? eOfferResponseBusy : eOfferResponseEndSession,
-				0,
-				0,
-				pktVideoStatus->getRmtSessionId(),
-				pktVideoStatus->getLclSessionId() );
+			//IToGui::getToGui().toGuiRxedOfferReply( netIdent,
+			//	m_ePluginType,
+			//	0,				// plugin defined data
+			//	(eFeedStatusBusy == pktVideoStatus->getFeedStatus()) ? eOfferResponseBusy : eOfferResponseEndSession,
+			//	0,
+			//	0,
+			//	pktVideoStatus->getRmtSessionId(),
+			//	pktVideoStatus->getLclSessionId() );
 
 			m_PluginSessionMgr.endPluginSession( netIdent->getMyOnlineId(), true );
 			m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -554,7 +560,7 @@ void PluginCamClient::onPktVideoFeedStatus( VxSktBase* sktBase, VxPktHdr* pktHdr
 
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedStatus unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 }
 
 //============================================================================
@@ -570,7 +576,7 @@ void PluginCamClient::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 		m_Engine.getMediaProcessor().processFriendVideoFeed( netIdent->getMyOnlineId(), poPktCastPic->getDataPayload(), poPktCastPic->getTotalDataLen(), poPktCastPic->getMotionDetect() );
 #if defined(DEBUG_PLUGIN_LOCK)
 		LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPic lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 		PluginBase::AutoPluginLock pluginMutexLock( this );
 		RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		if( poSession )
@@ -584,13 +590,13 @@ void PluginCamClient::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 
 #if defined(DEBUG_PLUGIN_LOCK)
 		LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPic unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 	}
 	else
 	{
 #if defined(DEBUG_PLUGIN_LOCK)
 		LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPic chunk lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 		// picture was too big for one packet
 		PluginBase::AutoPluginLock pluginMutexLock( this );
 
@@ -617,7 +623,7 @@ void PluginCamClient::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 		// wait for rest of picture to arrive
 #if defined(DEBUG_PLUGIN_LOCK)
 		LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPic chunk unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 	}
 }
 
@@ -627,7 +633,7 @@ void PluginCamClient::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktH
 	PktVideoFeedPicChunk * poPktPicChunk = ( PktVideoFeedPicChunk * )pktHdr;
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPicChunk lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 
 	RxSession * poSession = (RxSession *)m_PluginSessionMgr.findRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -668,7 +674,7 @@ void PluginCamClient::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktH
 
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPicChunk unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 }
 
 //============================================================================
@@ -676,7 +682,7 @@ void PluginCamClient::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr
 {
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPicAck lock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 
@@ -691,7 +697,7 @@ void PluginCamClient::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr
 
 #if defined(DEBUG_PLUGIN_LOCK)
 	LogMsg( LOG_VERBOSE, "PluginCamClient::onPktVideoFeedPicAck unlock" );
-#endif defined(DEBUG_PLUGIN_LOCK)
+#endif //defined(DEBUG_PLUGIN_LOCK)
 }
 
 //============================================================================

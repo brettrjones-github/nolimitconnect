@@ -39,13 +39,13 @@ OfferClientMgr::OfferClientMgr( P2PEngine& engine, const char* dbName, const cha
 }
 
 //============================================================================
-OfferBaseInfo * OfferClientMgr::createOfferInfo( const char* assetName, uint64_t assetLen, uint16_t assetType )
+OfferBaseInfo* OfferClientMgr::createOfferInfo( std::string assetName, uint64_t assetLen, uint16_t assetType )
 {
     return new OfferClientInfo( assetName, assetLen, assetType );
 }
 
 //============================================================================
-OfferBaseInfo * OfferClientMgr::createOfferInfo( OfferBaseInfo& assetInfo )
+OfferBaseInfo* OfferClientMgr::createOfferInfo( OfferBaseInfo& assetInfo )
 {
     return new OfferClientInfo( assetInfo );
 }
@@ -97,7 +97,7 @@ void OfferClientMgr::addOfferClientMgrClient( OfferClientCallbackInterface * cli
 }
 
 //============================================================================
-void OfferClientMgr::announceOfferAdded( OfferBaseInfo * assetInfo )
+void OfferClientMgr::announceOfferAdded( OfferBaseInfo* assetInfo )
 {
     OfferBaseMgr::announceOfferAdded( assetInfo );
     OfferClientInfo * thumbInfo = dynamic_cast<OfferClientInfo *>( assetInfo );
@@ -123,7 +123,7 @@ void OfferClientMgr::announceOfferAdded( OfferBaseInfo * assetInfo )
 }
 
 //============================================================================
-void OfferClientMgr::announceOfferUpdated( OfferBaseInfo * assetInfo )
+void OfferClientMgr::announceOfferUpdated( OfferBaseInfo* assetInfo )
 {
     OfferBaseMgr::announceOfferUpdated( assetInfo );
     OfferClientInfo * thumbInfo = dynamic_cast<OfferClientInfo *>( assetInfo );
@@ -146,7 +146,7 @@ void OfferClientMgr::announceOfferUpdated( OfferBaseInfo * assetInfo )
 }
 
 //============================================================================
-void OfferClientMgr::announceOfferRemoved( OfferBaseInfo * assetInfo )
+void OfferClientMgr::announceOfferRemoved( OfferBaseInfo* assetInfo )
 {
     OfferBaseMgr::announceOfferRemoved( assetInfo );
     OfferClientInfo * thumbInfo = dynamic_cast<OfferClientInfo *>( assetInfo );

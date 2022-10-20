@@ -17,19 +17,25 @@
 
 #include <CoreLib/VxGUID.h>
 
+class FileInfo;
+class PktBlobEntry;
 class VxNetIdent;
 
 class BaseInfo
 {
 public:
-    BaseInfo();
+    BaseInfo() = default;
     BaseInfo( VxGUID& creatorId, int64_t modifiedTime = 0 );
     BaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime = 0 );
 	BaseInfo( const BaseInfo& rhs );
+    BaseInfo( const FileInfo& rhs );
 
-    virtual ~BaseInfo();
+    virtual ~BaseInfo() = default;
 
 	BaseInfo&				    operator=( const BaseInfo& rhs ); 
+
+    virtual bool                addToBlob( PktBlobEntry& blob );
+    virtual bool                extractFromBlob( PktBlobEntry& blob );
 
     virtual void				setOnlineId( VxGUID onlineId )                  { m_OnlineId = onlineId; }
     virtual void				setOnlineId( const char* onlineId )             { m_OnlineId.fromVxGUIDHexString( onlineId ); }
@@ -45,10 +51,12 @@ public:
     virtual void                fillBaseInfo( VxNetIdent* netIdent, EHostType hostType );
 
     virtual void                assureHasCreatorId( void );
+
+    virtual void                printValues( void ) const;
+
 public:
 	//=== vars ===//
     VxGUID						m_OnlineId; 
     VxGUID						m_ThumbId; 
     int64_t						m_InfoModifiedTime{ 0 };
-
 };

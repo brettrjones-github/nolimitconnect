@@ -91,6 +91,7 @@ enum EMediaInputType
 
 class FileInfo;
 class GroupieInfo;
+class OfferBaseInfo;
 class SearchParams;
 class VxPtopUrl;
 
@@ -244,36 +245,28 @@ public:
                                                                 const char*	url3,           // favorite url 3
                                                                 const char*	donation ) = 0;	// donation		
 	/// Set permission level required to access a plugin
-	virtual void				fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) = 0;
+	virtual void				fromGuiSetPluginPermission( EPluginType pluginType, EFriendState eFriendState ) = 0;
 	/// Get permission level required to access a plugin
-	virtual int					fromGuiGetPluginPermission( EPluginType ePluginType ) = 0;
+	virtual int					fromGuiGetPluginPermission( EPluginType pluginType ) = 0;
 	/// Get server state of specific plugin ( disabled or in session or not in session )
-	virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType ePluginType ) = 0;
+	virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType pluginType ) = 0;
 
 	/// Start plugin session or server
-	virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual void				fromGuiStartPluginSession( EPluginType pluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	/// Stop plugin session or server
-	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) = 0;
+	virtual void				fromGuiStopPluginSession( EPluginType pluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) = 0;
 	/// Return true if plugin is in session
-	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual bool				fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
+
 	/// Send offer of file or session to a contact
-	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
-														VxGUID&			onlineId,
-														int				pvUserData,
-														const char*	pOfferMsg, 
-														const char*	pFileName = NULL,
-														uint8_t *		fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual bool				fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) = 0;
 	/// Contact sent session offer reply
-	virtual bool				fromGuiToPluginOfferReply(	EPluginType		ePluginType,
-															VxGUID&			onlineId,
-															int				pvUserData,
-															int				iOfferResponse,
-															VxGUID			lclSessionId ) = 0;
+	virtual bool				fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) = 0;
+
 	/// Plugin control such as cancel download etc.
 	virtual EXferError			fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo ) = 0;
 	/// Send Text Message to contact
-	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
+	virtual bool				fromGuiInstMsg(	EPluginType	oluginType, 
 													VxGUID&			onlineId, 
 													const char*	pMsg ) = 0; 
 
@@ -318,12 +311,12 @@ public:
 	virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) = 0;
 
 	/// Set game variable ( used for Truth Or Dare video chat game )
-	virtual bool				fromGuiSetGameValueVar( EPluginType	ePluginType, 
+	virtual bool				fromGuiSetGameValueVar( EPluginType	pluginType, 
 														VxGUID&		onlineId, 
 														int32_t			varId, 
 														int32_t			varValue ) = 0;
 	/// Set game action ( used for Truth Or Dare video chat game )
-	virtual bool				fromGuiSetGameActionVar(	EPluginType	ePluginType, 
+	virtual bool				fromGuiSetGameActionVar(	EPluginType	pluginType, 
 															VxGUID&		onlineId, 
 															int32_t			actionId, 
 															int32_t			actionValue ) = 0;

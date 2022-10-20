@@ -48,24 +48,10 @@ P2PSession * PluginTruthOrDare::createP2PSession( VxSktBase* sktBase, VxNetIdent
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
-												int			    pvUserData,
-												const char*	pOfferMsg,		
-												const char*	pFileName,
-												uint8_t *		fileHashId,
-												VxGUID			lclSessionId )	
+bool PluginTruthOrDare::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
-	bool result = false;
-	P2PSession * poSession = 0;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	if( lclSessionId.isVxGUIDValid() )
-	{
-		poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionBySessionId( lclSessionId, true );
-	}
-	else
-	{
-		poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
-	}
+	P2PSession* poSession = (P2PSession*)m_PluginSessionMgr.findP2PSessionBySessionId( lclSessionId, true );
 
 	if( poSession )
 	{
@@ -74,24 +60,13 @@ bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,
 		m_PluginSessionMgr.removeSessionBySessionId( true, netIdent->getMyOnlineId() );
 	}
 		
-	result = m_PluginSessionMgr.fromGuiMakePluginOffer(		true,
-															netIdent,
-															pvUserData,	
-															pOfferMsg,
-															pFileName,
-															fileHashId,
-															lclSessionId );
-
-	return result;
+	return m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo, lclSessionId );
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiOfferReply(	VxNetIdent*	netIdent,
-											int			    pvUserData,				
-											EOfferResponse	eOfferResponse,
-											VxGUID			lclSessionId )
+bool PluginTruthOrDare::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse	offerResponse )
 {
-	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, pvUserData, eOfferResponse, lclSessionId );
+	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo, lclSessionId, offerResponse );
 }
 
 //============================================================================
@@ -141,7 +116,7 @@ bool PluginTruthOrDare::fromGuiInstMsg( VxNetIdent* netIdent, const char* msg )
 bool PluginTruthOrDare::fromGuiSetGameValueVar( VxNetIdent* netIdent, int32_t varId, int32_t varValue )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	PluginSessionBase * poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	PluginSessionBase* poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktTodGameValue pktGameValue;
@@ -156,7 +131,7 @@ bool PluginTruthOrDare::fromGuiSetGameValueVar( VxNetIdent* netIdent, int32_t va
 bool PluginTruthOrDare::fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_t actionId, int32_t actionValue )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	PluginSessionBase * poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	PluginSessionBase* poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktTodGameAction pktGameAction;
@@ -285,7 +260,7 @@ void PluginTruthOrDare::onPktVoiceReply( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 }
 
 //============================================================================
-void PluginTruthOrDare::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
+void PluginTruthOrDare::onSessionStart( PluginSessionBase* session, bool pluginIsLocked )
 {
 	PluginBase::onSessionStart( session, pluginIsLocked ); // mark user session time so contact list is sorted with latest used on top
 	m_VoiceFeedMgr.fromGuiStartPluginSession( pluginIsLocked, eAppModuleTruthOrDare, session->getIdent() );
@@ -294,7 +269,7 @@ void PluginTruthOrDare::onSessionStart( PluginSessionBase * session, bool plugin
 }
 
 //============================================================================
-void PluginTruthOrDare::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
+void PluginTruthOrDare::onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse )
 {
 	m_VoiceFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleTruthOrDare, session->getIdent() );
 	m_VideoFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleTruthOrDare, session->getIdent() );

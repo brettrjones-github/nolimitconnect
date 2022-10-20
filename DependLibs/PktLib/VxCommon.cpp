@@ -109,11 +109,11 @@ bool PluginPermission::isPluginEnabled( EPluginType ePlugin )
 
 //============================================================================
 //! get type of permission user has set for givin plugin
-EFriendState PluginPermission::getPluginPermission( EPluginType ePluginType ) 
+EFriendState PluginPermission::getPluginPermission( EPluginType pluginType ) 
 { 
-	if(( ePluginType > 0 ) && ( ePluginType < eMaxPluginType ) )
+	if(( pluginType > 0 ) && ( pluginType < eMaxPluginType ) )
 	{
-		int pluginNum = (int)(ePluginType - 1);
+		int pluginNum = (int)(pluginType - 1);
 		int byteIdx = pluginNum >> 1;
 		int byteShift = pluginNum & 0x01 ? 4 : 0;
 		uint8_t byteWithPerm = m_au8Permissions[ byteIdx ];
@@ -126,11 +126,11 @@ EFriendState PluginPermission::getPluginPermission( EPluginType ePluginType )
 
 //============================================================================
 //! set type of permission user has set for givin plugin
-void PluginPermission::setPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) 
+void PluginPermission::setPluginPermission( EPluginType pluginType, EFriendState eFriendState ) 
 { 
-	if(( ePluginType > 0 ) && ( ePluginType < eMaxUserPluginType ) )
+	if(( pluginType > 0 ) && ( pluginType < eMaxUserPluginType ) )
 	{
-		int pluginNum = (int)(ePluginType - 1);
+		int pluginNum = (int)(pluginType - 1);
 		int byteIdx = pluginNum >> 1;
 		int byteShift = pluginNum & 0x01 ? 4 : 0;
 		uint8_t byteWithPerm = m_au8Permissions[ byteIdx ];
@@ -345,7 +345,7 @@ uint16_t VxNetIdent::getPingTimeMs( void )
 }
 
 //============================================================================
-EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType, bool inGroup )
+EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType pluginType, bool inGroup )
 {
 	EFriendState friendState = getMyFriendshipToHim();
 	if( inGroup && friendState == eFriendStateAnonymous )
@@ -353,11 +353,11 @@ EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType,
 		friendState = eFriendStateGuest;
 	}
 
-	return getPluginAccessState( ePluginType, friendState );
+	return getPluginAccessState( pluginType, friendState );
 }
 
 //============================================================================
-EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType, bool inGroup )
+EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType pluginType, bool inGroup )
 {
 	EFriendState friendState = getHisFriendshipToMe();
 	if( inGroup && friendState == eFriendStateAnonymous )
@@ -365,32 +365,32 @@ EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType,
 		friendState = eFriendStateGuest;
 	}
 
-	EPluginAccess accessState = getPluginAccessState( ePluginType, friendState );
+	EPluginAccess accessState = getPluginAccessState( pluginType, friendState );
 	if( ePluginAccessOk == accessState )
 	{
-		if( ( ePluginTypeFileShareServer == ePluginType ) 
+		if( ( ePluginTypeFileShareServer == pluginType ) 
 			&& ( false == hasSharedFiles() ) )
 		{
 			// no files shared
 			return ePluginAccessInactive;
 		}
 
-		if( ( ePluginTypeCamServer == ePluginType ) 
+		if( ( ePluginTypeCamServer == pluginType ) 
 			&& ( false == hasSharedWebCam() ) )
 		{
 			// no shared web cam
 			return ePluginAccessInactive;
 		}
 
-		if( ( ePluginTypeAboutMePageServer == ePluginType )
-			|| ( ePluginTypeStoryboardServer == ePluginType ) )
+		if( ( ePluginTypeAboutMePageServer == pluginType )
+			|| ( ePluginTypeStoryboardServer == pluginType ) )
 		{
 			if( false == isOnline() )
 			{
 				accessState = ePluginAccessRequiresOnline;
 			}
 		}
-		else if( ePluginTypeMessenger != ePluginType )
+		else if( ePluginTypeMessenger != pluginType )
 		{
 			if( false == isOnline() )
 			{
@@ -403,7 +403,7 @@ EPluginAccess VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType,
 }
 
 //============================================================================
-bool VxNetIdent::isHisAccessAllowedFromMe( EPluginType ePluginType, bool inGroup )
+bool VxNetIdent::isHisAccessAllowedFromMe( EPluginType pluginType, bool inGroup )
 {
 	EFriendState friendState = this->getMyFriendshipToHim();
 	if( eFriendStateAnonymous == friendState && inGroup )
@@ -411,11 +411,11 @@ bool VxNetIdent::isHisAccessAllowedFromMe( EPluginType ePluginType, bool inGroup
 		friendState = eFriendStateGuest;
 	}
 
-	return ( ePluginAccessOk == getPluginAccessState( ePluginType, friendState ) );
+	return ( ePluginAccessOk == getPluginAccessState( pluginType, friendState ) );
 }
 
 //============================================================================
-bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType, bool inGroup )
+bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType pluginType, bool inGroup )
 {
 	EFriendState friendState = this->getHisFriendshipToMe();
 	if( eFriendStateAnonymous == friendState && inGroup )
@@ -423,18 +423,18 @@ bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType, bool inGroup
 		friendState = eFriendStateGuest;
 	}
 
-	return ( ePluginAccessOk == getPluginAccessState( ePluginType, friendState ) );
+	return ( ePluginAccessOk == getPluginAccessState( pluginType, friendState ) );
 }
 
 //============================================================================
-EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriendState eHisPermissionToMe )
+EPluginAccess VxNetIdent::getPluginAccessState( EPluginType pluginType, EFriendState eHisPermissionToMe )
 {
 	if( eFriendStateIgnore == eHisPermissionToMe )
 	{
 		return ePluginAccessIgnored;
 	}
 
-	EFriendState ePermissionLevel = this->getPluginPermission( ePluginType );
+	EFriendState ePermissionLevel = this->getPluginPermission( pluginType );
 	if( eFriendStateIgnore == ePermissionLevel )
 	{
 		return ePluginAccessDisabled;
@@ -445,14 +445,14 @@ EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 		return ePluginAccessLocked;
 	}
 
-	if( (ePluginTypeFileShareServer == ePluginType) && 
+	if( (ePluginTypeFileShareServer == pluginType) && 
 		(false == hasSharedFiles()) )
 	{
 		// no files shared
 		return ePluginAccessInactive;
 	}
 
-	if( (ePluginTypeCamServer == ePluginType) && 
+	if( (ePluginTypeCamServer == pluginType) && 
 		(false == hasSharedWebCam()) )
 	{
 		// no files shared
@@ -514,9 +514,9 @@ void VxNetIdent::debugDumpIdent( void )
 
 //============================================================================
 //! describe plugin local name
-const char* DescribePluginLclName( EPluginType ePluginType )
+const char* DescribePluginLclName( EPluginType pluginType )
 {
-	switch( ePluginType )
+	switch( pluginType )
 	{
     case ePluginTypeInvalid:
         return "Invalid Plugin";

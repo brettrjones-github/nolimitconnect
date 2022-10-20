@@ -262,9 +262,9 @@ void PluginMgr::fromGuiNetworkAvailable( void )
 
 //============================================================================
 //! get plugin state 
-EAppState PluginMgr::getPluginState( EPluginType ePluginType )								
+EAppState PluginMgr::getPluginState( EPluginType pluginType )								
 { 
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		return plugin->getPluginState();
@@ -274,28 +274,28 @@ EAppState PluginMgr::getPluginState( EPluginType ePluginType )
 }
 
 //============================================================================
-PluginBase* PluginMgr::getPlugin( EPluginType ePluginType )
+PluginBase* PluginMgr::getPlugin( EPluginType pluginType )
 {
 	std::vector<PluginBase*>::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		PluginBase* plugin = *iter;
-		if( ePluginType == plugin->getPluginType() )
+		if( pluginType == plugin->getPluginType() )
 		{
 			return *(iter);
 		}
 	}
 
-	LogMsg( LOG_ERROR, "PluginMgr::getPlugin pluin type %d out of range", ePluginType );
+	LogMsg( LOG_ERROR, "PluginMgr::getPlugin pluin type %d out of range", pluginType );
 	vx_assert( false );
 	return NULL;
 }
 
 //============================================================================
 //! set plugin state 
-void PluginMgr::setPluginState( EPluginType ePluginType, EAppState ePluginState )		
+void PluginMgr::setPluginState( EPluginType pluginType, EAppState ePluginState )		
 { 
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		plugin->setPluginState( ePluginState );
@@ -303,9 +303,9 @@ void PluginMgr::setPluginState( EPluginType ePluginType, EAppState ePluginState 
 }
 
 //============================================================================
-EFriendState PluginMgr::getPluginPermission( EPluginType ePluginType )							
+EFriendState PluginMgr::getPluginPermission( EPluginType pluginType )							
 { 
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		return plugin->getPluginPermission(); 
@@ -315,9 +315,9 @@ EFriendState PluginMgr::getPluginPermission( EPluginType ePluginType )
 }
 
 //============================================================================
-void PluginMgr::setPluginPermission( EPluginType ePluginType, EFriendState ePluginPermission )	
+void PluginMgr::setPluginPermission( EPluginType pluginType, EFriendState ePluginPermission )	
 { 
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		plugin->setPluginPermission( ePluginPermission ); 
@@ -348,14 +348,14 @@ void PluginMgr::onPluginSettingChange( PluginSetting& pluginSetting, int64_t mod
 }
 
 //============================================================================
-void PluginMgr::pluginApiLog( EPluginType ePluginType, const char* pMsg, ... )
+void PluginMgr::pluginApiLog( EPluginType pluginType, const char* pMsg, ... )
 {
 	char szBuffer[2048];
 	va_list argList;
 	va_start(argList, pMsg);
 	vsnprintf( szBuffer, 2048, pMsg, argList );
 	va_end(argList);
-	LogMsg( (ePluginType << 16) | LOG_INFO, "Plugin %d %s", (int)ePluginType, szBuffer );
+	LogMsg( (pluginType << 16) | LOG_INFO, "Plugin %d %s", (int)pluginType, szBuffer );
 }
 
 //============================================================================
@@ -627,12 +627,12 @@ bool PluginMgr::isValidPluginNum( uint8_t u8PluginNum )
 
 //============================================================================
 //! get permission/access state for remote user
-EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent* netIdent )
+EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType pluginType, VxNetIdent* netIdent )
 {
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
-		EPluginAccess eAccess = m_PktAnn.getHisAccessPermissionFromMe( ePluginType );
+		EPluginAccess eAccess = m_PktAnn.getHisAccessPermissionFromMe( pluginType );
 		if( ePluginAccessOk == eAccess )
 		{
 			eAccess = plugin->canAcceptNewSession( netIdent );
@@ -862,12 +862,12 @@ void PluginMgr::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-PluginBase* PluginMgr::findPlugin( EPluginType ePluginType )
+PluginBase* PluginMgr::findPlugin( EPluginType pluginType )
 {
 	std::vector<PluginBase* >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
-		if( ePluginType == (*iter)->getPluginType() )
+		if( pluginType == (*iter)->getPluginType() )
 		{
 			return (*iter);
 		}
@@ -947,11 +947,11 @@ bool PluginMgr::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUI
 
 //============================================================================
 //! return true if access ok
-bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent* netIdent )
+bool PluginMgr::canAccessPlugin( EPluginType pluginType, VxNetIdent* netIdent )
 {
 	LogMsg( LOG_VERBOSE, "PluginMgr::canAccessPlugin" );
 	EFriendState eHisFriendshipToMe = netIdent->getHisFriendshipToMe();
-	EFriendState ePluginPermission = netIdent->getPluginPermission(ePluginType);
+	EFriendState ePluginPermission = netIdent->getPluginPermission(pluginType);
 	if( ( ePluginPermission != eFriendStateIgnore ) &&
 		( ePluginPermission <= eHisFriendshipToMe ) )
 	{
@@ -962,22 +962,22 @@ bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent* netIdent )
 }
 
 //============================================================================
-void PluginMgr::pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent* netIdent, int motion0to100000 )
+void PluginMgr::pluginApiPlayVideoFrame( EPluginType pluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent* netIdent, int motion0to100000 )
 {
 	//LogMsg( LOG_INFO, "PluginMgr::pluginApiPlayVideoFrame\n" );
 	IToGui::getToGui().toGuiPlayVideoFrame( netIdent->getMyOnlineId(), pu8VidData, u32VidDataLen, motion0to100000 );
 }
 
 //============================================================================
-void PluginMgr::pluginApiWantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
+void PluginMgr::pluginApiWantAppIdle( EPluginType pluginType, bool bWantAppIdle )
 {
-	m_Engine.getMediaProcessor().wantAppIdle( ePluginType, bWantAppIdle );
+	m_Engine.getMediaProcessor().wantAppIdle( pluginType, bWantAppIdle );
 }
 
 //============================================================================
-void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputType mediaType, EAppModule appModule, bool wantInput, void * userData )
+void PluginMgr::pluginApiWantMediaInput( EPluginType pluginType, EMediaInputType mediaType, EAppModule appModule, bool wantInput, void * userData )
 {
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		m_Engine.getMediaProcessor().wantMediaInput( mediaType, plugin, userData, appModule, wantInput );
@@ -986,9 +986,9 @@ void PluginMgr::pluginApiWantMediaInput( EPluginType ePluginType, EMediaInputTyp
 
 //============================================================================
 //! called to start service or session with remote friend
-void PluginMgr::fromGuiStartPluginSession( EPluginType ePluginType,  VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+void PluginMgr::fromGuiStartPluginSession( EPluginType pluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( oOnlineId );
@@ -1005,15 +1005,15 @@ void PluginMgr::fromGuiStartPluginSession( EPluginType ePluginType,  VxGUID& oOn
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStartPluginSession: invalid plugin type %d", ePluginType );
+		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStartPluginSession: invalid plugin type %d", pluginType );
 	}	
 }
 
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData, VxGUID lclSessionId )
+void PluginMgr::fromGuiStopPluginSession( EPluginType pluginType, VxGUID& onlineId, int pvUserData, VxGUID lclSessionId )
 {
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
@@ -1032,16 +1032,16 @@ void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlin
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStopPluginSession: invalid plugin type %d", ePluginType );
+		LogMsg( LOG_ERROR, "PluginMgr::fromGuiStopPluginSession: invalid plugin type %d", pluginType );
 	}
 }
 
 //============================================================================
 //! return true if is plugin session
-bool PluginMgr::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
+bool PluginMgr::fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	bool inSession = false;
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		inSession = plugin->fromGuiIsPluginInSession( netIdent, pvUserData, lclSessionId );	
@@ -1051,13 +1051,13 @@ bool PluginMgr::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* n
 }
 
 //============================================================================
-bool PluginMgr::fromGuiSetGameValueVar(	    EPluginType	    ePluginType, 
+bool PluginMgr::fromGuiSetGameValueVar(	    EPluginType	    pluginType, 
 											VxGUID&	        onlineId, 
 											int32_t			s32VarId, 
 											int32_t			s32VarValue )
 {
 	bool bResult = false;
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
@@ -1078,13 +1078,13 @@ bool PluginMgr::fromGuiSetGameValueVar(	    EPluginType	    ePluginType,
 }
 
 //============================================================================
-bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    ePluginType, 
+bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    pluginType, 
 											VxGUID&		    onlineId,
 											int32_t			s32VarId, 
 											int32_t			s32VarValue )
 {
 	bool bResult = false;
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
@@ -1117,10 +1117,10 @@ int PluginMgr::fromGuiDeleteFile( std::string& fileName, bool shredFile )
 }
 
 //============================================================================
-EPluginAccess PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIdent* netIdent )
+EPluginAccess PluginMgr::canAcceptNewSession( EPluginType pluginType, VxNetIdent* netIdent )
 {
 	EPluginAccess canAcceptSession = ePluginAccessDisabled;
-	PluginBase* plugin = getPlugin( ePluginType );
+	PluginBase* plugin = getPlugin( pluginType );
 	if( plugin )
 	{
 		canAcceptSession = plugin->canAcceptNewSession( netIdent );

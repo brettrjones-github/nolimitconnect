@@ -1217,7 +1217,7 @@ const char* DescribeOfferType( enum EOfferType offerType );
 //! Plugin Access as text
 const char* DescribePluginAccess( enum EPluginAccess pluginAccess );
 //! Describe plugin.. the first DescribePluginType is translated.. this one is not
-const char* DescribePluginType( enum EPluginType ePluginType );
+const char* DescribePluginType( enum EPluginType pluginType );
 //! Describe Direct Connect test state as text
 const char* DescribePortOpenStatus( enum EIsPortOpenStatus ePortOpenStatus );
 //! Describe connect by shaking phone ( or press simulate phone shake ) status as text

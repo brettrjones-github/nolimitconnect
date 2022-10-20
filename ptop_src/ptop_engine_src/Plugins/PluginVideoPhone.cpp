@@ -42,12 +42,7 @@ PluginVideoPhone::PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
-												int				pvUserData,
-												const char*	pOfferMsg,		
-												const char*	pFileName,
-												uint8_t *		fileHashId,
-												VxGUID			lclSessionId )	
+bool PluginVideoPhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
 	bool result = false;
 	P2PSession * poSession = 0;
@@ -78,29 +73,18 @@ bool PluginVideoPhone::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,
 	}
 
 		
-	result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true,
-														netIdent,
-														pvUserData,	
-														pOfferMsg,
-														pFileName,
-														fileHashId,
-														lclSessionId );
+	result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true, netIdent, offerInfo, lclSessionId );
 
 	return result;
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiOfferReply(	VxNetIdent*	netIdent,
-											int				pvUserData,
-											EOfferResponse	eOfferResponse,
-											VxGUID			lclSessionId )
+bool PluginVideoPhone::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiOfferReply %d", eOfferResponse );
+	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiOfferReply %d", offerResponse );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	bool sentReply = m_PluginSessionMgr.fromGuiOfferReply(	false, netIdent, pvUserData, eOfferResponse, lclSessionId );
-
-	return sentReply;
+	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo, lclSessionId, offerResponse );
 }
 
 //============================================================================
@@ -268,7 +252,7 @@ void PluginVideoPhone::callbackVideoPktPicChunk( void * userData, VxGUID& online
 }
 
 //============================================================================
-void PluginVideoPhone::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
+void PluginVideoPhone::onSessionStart( PluginSessionBase* session, bool pluginIsLocked )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s start", session->getIdent()->getOnlineName() );
@@ -286,7 +270,7 @@ void PluginVideoPhone::onSessionStart( PluginSessionBase * session, bool pluginI
 }
 
 //============================================================================
-void PluginVideoPhone::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
+void PluginVideoPhone::onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "PluginVideoPhone::onSessionStart %s STOP voice feed", session->getIdent()->getOnlineName() );

@@ -33,9 +33,9 @@ public:
 	virtual void				callbackOfferFileTypesChanged( uint16_t fileTypes ){};
 	virtual void				callbackOfferPktFileListUpdated( void ){};
 
-    virtual void				callbackOfferAdded( OfferBaseInfo * assetInfo ){};
-    virtual void				callbackOfferUpdated( OfferBaseInfo * assetInfo ){};
-    virtual void				callbackOfferRemoved( OfferBaseInfo * assetInfo ){};
-	virtual void				callbackOfferHistory( void * userData, OfferBaseInfo * assetInfo ){};
+    virtual void				callbackOfferAdded( OfferBaseInfo* assetInfo ){};
+    virtual void				callbackOfferUpdated( OfferBaseInfo* assetInfo ){};
+    virtual void				callbackOfferRemoved( OfferBaseInfo* assetInfo ){};
+	virtual void				callbackOfferHistory( void * userData, OfferBaseInfo* assetInfo ){};
 };
 

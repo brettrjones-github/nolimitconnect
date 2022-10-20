@@ -21,6 +21,8 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
+#include <PktLib/PktsPluginOffer.h>
+
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
@@ -59,10 +61,10 @@ IToGui& PluginBase::getToGui()
 }
 
 //============================================================================
-void PluginBase::setPluginType( EPluginType ePluginType )
+void PluginBase::setPluginType( EPluginType pluginType )
 {
-    m_ePluginType = ePluginType;
-    m_PluginSetting.setPluginType( ePluginType );
+    m_ePluginType = pluginType;
+    m_PluginSetting.setPluginType( pluginType );
 }
 
 //============================================================================
@@ -200,7 +202,7 @@ bool PluginBase::isPluginEnabled( void )
 }
 
 //============================================================================
-void PluginBase::onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked )
+void PluginBase::onSessionStart( PluginSessionBase* poSession, bool pluginIsLocked )
 {
 	m_Engine.onSessionStart( poSession->getPluginType(), poSession->getIdent() );
 }
@@ -240,36 +242,13 @@ void PluginBase::fromGuiSetFileShareSettings( FileShareSettings& fileShareSettin
 }
 
 //============================================================================
-//! user wants to send offer to friend
-bool PluginBase::fromGuiMakePluginOffer(	VxNetIdent*	netIdent, 
-											int				pvUserData, 
-											const char*	pOfferMsg, 
-											const char*	pFileName,
-											uint8_t *			fileHashId,
-											VxGUID			lclSessionId )
-{
-	return false;
-}
-
-//============================================================================
-//! handle reply to offer
-bool PluginBase::fromGuiOfferReply(		VxNetIdent*	netIdent,
-										int			pvUserData,				
-										EOfferResponse	eOfferResponse,
-										VxGUID			lclSessionId )
-{
-	return false;
-}
-
-//============================================================================
 EXferError PluginBase::fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo )
 {
 	return eXferErrorBadParam;
 }
 
 //============================================================================ 
-bool PluginBase::fromGuiInstMsg(	VxNetIdent*	netIdent, 
-									const char*	pMsg )
+bool PluginBase::fromGuiInstMsg( VxNetIdent* netIdent, const char* pMsg )
 {
 	return false;
 }
@@ -547,3 +526,22 @@ void PluginBase::toGuiFileUploadComplete( VxGUID& lclSessionId, std::string& fil
     m_Engine.getToGui().toGuiFileUploadComplete( getPluginType(), lclSessionId, fileName, xferError );
 }
 
+//============================================================================
+void PluginBase::handleToGuiOfferRequest( VxNetIdent* netIdent, PktPluginOfferReq* pktReq )
+{
+    OfferBaseInfo offerInfo;
+    if( offerInfo.extractFromBlob( pktReq->getBlobEntry() ) )
+    {
+        IToGui::getToGui().toGuiRxedPluginOffer( netIdent, getPluginType(), offerInfo, pktReq->getLclSessionId() );
+    }
+}
+
+//============================================================================
+void PluginBase::handleToGuiOfferResponse( VxNetIdent* netIdent, PktPluginOfferReply* pktReply )
+{
+    OfferBaseInfo offerInfo;
+    if( offerInfo.extractFromBlob( pktReply->getBlobEntry() ) )
+    {
+        IToGui::getToGui().toGuiRxedOfferReply( netIdent, getPluginType(), offerInfo, pktReply->getLclSessionId(), pktReply->getOfferResponse() );
+    }
+}

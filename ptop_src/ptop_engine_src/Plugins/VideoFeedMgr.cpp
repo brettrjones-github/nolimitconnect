@@ -76,10 +76,10 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule app
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_SessionMgr.getSessions();
+	std::map<VxGUID, PluginSessionBase*>&	sessionList = m_SessionMgr.getSessions();
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
-		PluginSessionBase * sessionBase = iter->second;
+		PluginSessionBase* sessionBase = iter->second;
 		if( sessionBase->isP2PSession() )
 		{
 			P2PSession * poSession = (P2PSession *)sessionBase;
@@ -402,7 +402,7 @@ void VideoFeedMgr::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr, V
 void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum )
 {
 	PluginSessionMgr::SessionIter iter;
-	std::map<VxGUID, PluginSessionBase *>&sessionList = m_SessionMgr.getSessions();
+	std::map<VxGUID, PluginSessionBase*>&sessionList = m_SessionMgr.getSessions();
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
     LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock start" );
@@ -413,7 +413,7 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
-		PluginSessionBase * sessionBase = iter->second;
+		PluginSessionBase* sessionBase = iter->second;
 		if( sessionBase->isP2PSession() )
 		{
 			P2PSession * poSession = (P2PSession *)iter->second;
@@ -463,7 +463,7 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum )
 {
 	PluginSessionMgr::SessionIter iter;
-	std::map<VxGUID, PluginSessionBase *>&sessionList = m_SessionMgr.getSessions();
+	std::map<VxGUID, PluginSessionBase*>&sessionList = m_SessionMgr.getSessions();
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
     LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock start" );
@@ -474,7 +474,7 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
-		PluginSessionBase * sessionBase = iter->second;
+		PluginSessionBase* sessionBase = iter->second;
 		if( sessionBase->isP2PSession() )
 		{
 			P2PSession * poSession = (P2PSession *)iter->second;

@@ -26,43 +26,33 @@ public:
 	PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType );
 	virtual ~PluginVoicePhone() = default;
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				
-														int				pvUserData,
-														const char*		pOfferMsg,				
-														const char*		pFileName = NULL,
-														uint8_t *		fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
+	virtual bool				fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) override;
 
-	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
-													int				pvUserdata,
-													EOfferResponse	eOfferResponse,
-													VxGUID			lclSessionId );
+	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-
-	virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, 
-													const char*	pMsg ); 
+	virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, const char* pMsg ); 
 
 	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
 
 protected:
-	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktPluginOfferReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktChatReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktChatReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				onPktVoiceReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-	virtual void				onPktVoiceReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktVoiceReq				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+	virtual void				onPktVoiceReply				( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 	
-	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
 	virtual	void				onContactWentOffline		( VxNetIdent*	netIdent, VxSktBase* sktBase );
 	virtual	void				onConnectionLost			( VxSktBase* sktBase );
 
-	virtual void				onSessionStart				( PluginSessionBase * poSession, bool pluginIsLocked );
-	virtual void				onSessionEnded				( PluginSessionBase * poSession, bool pluginIsLocked, EOfferResponse eOfferResponse );
+	virtual void				onSessionStart				( PluginSessionBase* poSession, bool pluginIsLocked );
+	virtual void				onSessionEnded				( PluginSessionBase* poSession, bool pluginIsLocked, EOfferResponse offerResponse );
 
 protected:
 	virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio );

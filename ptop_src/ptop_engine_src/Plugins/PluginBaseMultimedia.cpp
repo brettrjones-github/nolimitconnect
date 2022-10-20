@@ -48,12 +48,7 @@ void PluginBaseMultimedia::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,		
-													int				pvUserData,
-													const char*	pOfferMsg,		
-													const char*	pFileName,
-													uint8_t *		fileHashId,
-													VxGUID			lclSessionId )	
+bool PluginBaseMultimedia::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
 	bool result = false;
 	P2PSession * poSession = 0;
@@ -64,24 +59,12 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,
 	poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
-		LogMsg( LOG_ERROR, "PluginBaseMultimedia already in session\n");
+		LogMsg( LOG_ERROR, "PluginBaseMultimedia already in session");
 		result = true;
 	}
 	else
 	{
-		const char* offerMsg = pOfferMsg;
-		if( ( 0 == offerMsg ) || ( 0 == strlen( offerMsg ) ) )
-		{
-			offerMsg = "Text Chat";
-		}
-
-		result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true, 
-															netIdent,
-															pvUserData,	
-															offerMsg,
-															pFileName,
-															fileHashId,
-															lclSessionId );
+		result = m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo, lclSessionId );
 	}
 
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiMakePluginOffer autoLock destroy\n" );
@@ -89,13 +72,10 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent*	netIdent,
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiOfferReply(	VxNetIdent*	netIdent,
-											    int				pvUserData,				
-											    EOfferResponse	eOfferResponse,
-											    VxGUID			lclSessionId )
+bool PluginBaseMultimedia::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiOfferReply start\n" );
-	bool result = m_PluginSessionMgr.fromGuiOfferReply( false,	netIdent, pvUserData, eOfferResponse, lclSessionId );
+	bool result = m_PluginSessionMgr.fromGuiOfferReply( false,	netIdent, offerInfo, lclSessionId, offerResponse );
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiOfferReply done\n" );
 	return result;
 }
@@ -194,7 +174,7 @@ bool PluginBaseMultimedia::fromGuiMultiSessionAction( VxNetIdent* netIdent, EMSe
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiMultiSessionAction autoLock done" );
 	#endif //DEBUG_AUTOPLUGIN_LOCK
-	PluginSessionBase * poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	PluginSessionBase* poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( 0 == poSession )
 	{
 		LogMsg( LOG_ERROR, "ERROR PluginBaseMultimedia::fromGuiMultiSessionAction missing plugin session" );
@@ -224,7 +204,7 @@ bool PluginBaseMultimedia::fromGuiSetGameValueVar( VxNetIdent* netIdent, int32_t
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiSetGameValueVar autoLock done" );
 	#endif //DEBUG_AUTOPLUGIN_LOCK
-	PluginSessionBase * poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	PluginSessionBase* poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktTodGameValue pktGameValue;
@@ -246,7 +226,7 @@ bool PluginBaseMultimedia::fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_
 	#endif //DEBUG_AUTOPLUGIN_LOCK
 	bool sendSucces = false;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	PluginSessionBase * poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	PluginSessionBase* poSession = m_PluginSessionMgr.findPluginSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktTodGameAction pktGameAction;
@@ -531,7 +511,7 @@ void PluginBaseMultimedia::onPktTodGameValue( VxSktBase* sktBase, VxPktHdr* pktH
 }
 
 //============================================================================
-void PluginBaseMultimedia::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
+void PluginBaseMultimedia::onSessionStart( PluginSessionBase* session, bool pluginIsLocked )
 {
 	PluginBase::onSessionStart( session, pluginIsLocked ); // mark user session time so contact list is sorted with latest used on top
 
@@ -542,7 +522,7 @@ void PluginBaseMultimedia::onSessionStart( PluginSessionBase * session, bool plu
 }
 
 //============================================================================
-void PluginBaseMultimedia::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
+void PluginBaseMultimedia::onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse )
 {
 	m_VoiceFeedMgr.fromGuiStopPluginSession( true, getAppModule(), session->getIdent() );
 	m_VideoFeedMgr.fromGuiStopPluginSession( true, getAppModule(), session->getIdent() );

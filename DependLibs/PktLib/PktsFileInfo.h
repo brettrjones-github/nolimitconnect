@@ -96,7 +96,7 @@ private:
     VxGUID                      m_AssetId;  // 16 bytes
     VxGUID                      m_ThumbId;  // 16 bytes
     // 60 bytes to here
-    PktBlobEntry                m_BlobEntry;	//size 14352
+    PktBlobEntry                m_BlobEntry;	// size 14352
 };
 
 

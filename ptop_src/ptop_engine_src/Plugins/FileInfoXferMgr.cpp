@@ -22,10 +22,10 @@
 #include "FileRxSession.h"
 
 #include "FileInfoBaseMgr.h"
-#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
-#include <GuiInterface/IToGui.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
+#include <ptop_src/ptop_engine_src/OfferBase/OfferBaseInfo.h>
 
 #include <PktLib/VxSearchDefs.h>
 #include <PktLib/PktsFileShare.h>
@@ -227,42 +227,27 @@ void FileInfoXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool FileInfoXferMgr::fromGuiMakePluginOffer(	VxNetIdent*		netIdent,		// identity of friend
-												int				pvUserData,
-												const char*		pOfferMsg,		// offer message
-												const char*		fileName,
-												uint8_t *		fileHashId,
-												VxGUID			lclSessionId )	
+bool FileInfoXferMgr::fromGuiMakePluginOffer( VxNetIdent* netIdent,	OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
+	lclSessionId.assureIsValidGUID();
 	VxSktBase* sktBase{ nullptr };
-	if( m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), netIdent, pvUserData, &sktBase ) )
+	if( m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), netIdent, 0, &sktBase ) )
 	{
-		PktPluginOfferReq oPkt;
+		PktPluginOfferReq pktReq;
+		pktReq.setLclSessionId( lclSessionId );
+		pktReq.setRmtSessionId( lclSessionId );
+		pktReq.setPluginType( m_Plugin.getPluginType() );
+		offerInfo.addToBlob( pktReq.getBlobEntry() );
+		pktReq.calcPktLen();
 		if( true == m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
 			netIdent->getMyOnlineId(), 
 			sktBase, 
-			&oPkt ) )
+			&pktReq ) )
 		{
-			if( fileName && strlen( fileName ) )
-			{
-				if( false == lclSessionId.isVxGUIDValid() )
-				{
-					lclSessionId.initializeWithNewVxGUID();
-				}
+			FileRxSession* xferSession = findOrCreateRxSession( lclSessionId, netIdent, sktBase );
+			FileInfo fileInfo( offerInfo );
 
-				FileRxSession*	xferSession = findOrCreateRxSession( lclSessionId, netIdent, sktBase );
-				std::string strFileName = fileName;
-				//xferSession->m_FilesToXferList.push_back( FileToXfer(strFileName, 0, lclSessionId, lclSessionId, lclSessionId, xferSession->getFileHashId(), pvUserData ) );
-			}
-			else
-			{
-				// if no file name then want directory list
-				PktFileListReq pktListReq;
-				m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-												netIdent->getMyOnlineId(), 
-												sktBase, 
-												&pktListReq );
-			}
+			xferSession->m_FilesToXferList.push_back( FileToXfer( fileInfo, lclSessionId, lclSessionId ) );
 
 			return true;
 		}
@@ -364,7 +349,7 @@ void FileInfoXferMgr::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr,
 void FileInfoXferMgr::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
+	PktPluginOfferReply* poPkt = (PktPluginOfferReply*)pktHdr;
 	FileTxSession* xferSession = findTxSession( poPkt->getRmtSessionId() );
 	if( xferSession )
 	{
@@ -372,20 +357,12 @@ void FileInfoXferMgr::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHd
 		if( !fileName.empty() )
 		{
 			FileInfo fileInfo( xferSession->getXferInfo(), netIdent->getMyOnlineId() );
+			OfferBaseInfo offerInfo( fileInfo );
 
-			m_FileInfoMgr.toGuiRxedOfferReply( netIdent,		// identity of friend
-												m_Plugin.getPluginType(),			// plugin type
-												0,				// plugin defined data
-												poPkt->getOfferResponse(),
-												xferSession->m_strOfferFile.c_str(),
-												0,
-												xferSession->getLclSessionId(),
-												xferSession->getRmtSessionId() );
+			m_FileInfoMgr.toGuiRxedOfferReply( netIdent, m_Plugin.getPluginType(), offerInfo, xferSession->getLclSessionId(), poPkt->getOfferResponse() );
 			if( eOfferResponseAccept == poPkt->getOfferResponse() )
 			{			
-				xferSession->m_FilesToXferList.push_back( FileToXfer( fileInfo,
-														xferSession->getLclSessionId(),
-														xferSession->getRmtSessionId() ) );
+				xferSession->m_FilesToXferList.push_back( FileToXfer( fileInfo, xferSession->getLclSessionId(), xferSession->getRmtSessionId() ) );
 				EXferError xferErr = beginFileSend( xferSession );
 				if( eXferErrorNone != xferErr )
 				{

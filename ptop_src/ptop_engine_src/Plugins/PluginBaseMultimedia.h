@@ -29,17 +29,8 @@ public:
 
     virtual void				fromGuiUserLoggedOn( void ) override;
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent*	netIdent,				
-                                                        int             pvUserData,
-														const char*	pOfferMsg,				
-														const char*	pFileName = NULL,
-                                                        uint8_t *		fileHashId = nullptr,
-                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
-
-	virtual bool				fromGuiOfferReply(	VxNetIdent*	netIdent,
-                                                    int             pvUserdata,
-													EOfferResponse	eOfferResponse,
-                                                    VxGUID			lclSessionId ) override;
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
+    virtual bool				fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse	offerResponse ) override;
 
     virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
     virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
@@ -88,8 +79,8 @@ protected:
     virtual void				callbackVideoPktPic( void * userData, VxGUID& onlineId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum ) override;
     virtual void				callbackVideoPktPicChunk( void * userData, VxGUID& onlineId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum ) override;
 
-    virtual void				onSessionStart( PluginSessionBase * session, bool pluginIsLocked ) override;
-    virtual void				onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse ) override;
+    virtual void				onSessionStart( PluginSessionBase* session, bool pluginIsLocked ) override;
+    virtual void				onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse ) override;
 
 protected:
 	virtual void				onContactWentOnline( VxNetIdent* netIdent, VxSktBase* sktBase ) override;

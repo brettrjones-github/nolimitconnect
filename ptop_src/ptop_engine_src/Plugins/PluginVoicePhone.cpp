@@ -41,12 +41,7 @@ PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent*	netIdent,		
-													int			    pvUserData,
-													const char*	pOfferMsg,		
-													const char*	pFileName,
-													uint8_t *		fileHashId,
-													VxGUID			lclSessionId )	
+bool PluginVoicePhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
 	bool result = false;
 	P2PSession * poSession = 0;
@@ -67,15 +62,7 @@ bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent*	netIdent,
 		m_PluginSessionMgr.removeSessionBySessionId( true, netIdent->getMyOnlineId() );
 	}
 
-	result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true,
-														netIdent,
-														pvUserData,	
-														pOfferMsg,
-														pFileName,
-														fileHashId,
-														lclSessionId );
-
-	return result;
+	return m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo, lclSessionId );
 }
 
 //============================================================================
@@ -101,20 +88,13 @@ void PluginVoicePhone::fromGuiStopPluginSession( VxNetIdent* netIdent, int, VxGU
 
 //============================================================================
 //! handle reply to offer
-bool PluginVoicePhone::fromGuiOfferReply(	VxNetIdent*	netIdent,
-											int				pvUserData,
-											EOfferResponse	eOfferResponse,
-											VxGUID			lclSessionId )
+bool PluginVoicePhone::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
 {
-	return m_PluginSessionMgr.fromGuiOfferReply(	false, 
-													netIdent,
-													pvUserData,				
-													eOfferResponse, lclSessionId );
+	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo, lclSessionId, offerResponse );
 }
 
 //============================================================================
-bool PluginVoicePhone::fromGuiInstMsg(	VxNetIdent*	netIdent, 
-										const char*	pMsg )
+bool PluginVoicePhone::fromGuiInstMsg( VxNetIdent* netIdent, const char* pMsg )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	P2PSession * poSession = m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -183,14 +163,14 @@ void PluginVoicePhone::onPktChatReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNet
 }
 
 //============================================================================
-void PluginVoicePhone::onSessionStart( PluginSessionBase * session, bool pluginIsLocked )
+void PluginVoicePhone::onSessionStart( PluginSessionBase* session, bool pluginIsLocked )
 {
 	PluginBase::onSessionStart( session, pluginIsLocked ); // mark user session time so contact list is sorted with latest used on top
 	m_VoiceFeedMgr.fromGuiStartPluginSession( pluginIsLocked, eAppModuleVoicePhone, session->getIdent() );
 }
 
 //============================================================================
-void PluginVoicePhone::onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse )
+void PluginVoicePhone::onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse )
 {
 	m_VoiceFeedMgr.fromGuiStopPluginSession( pluginIsLocked, eAppModuleVoicePhone, session->getIdent() );
 }

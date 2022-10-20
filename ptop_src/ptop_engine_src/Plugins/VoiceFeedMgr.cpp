@@ -191,10 +191,10 @@ void VoiceFeedMgr::onPktVoiceReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIde
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 
 	PluginSessionMgr::SessionIter iter;
-	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_SessionMgr.getSessions();
+	std::map<VxGUID, PluginSessionBase*>&	sessionList = m_SessionMgr.getSessions();
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
-		PluginSessionBase * poSession = iter->second;
+		PluginSessionBase* poSession = iter->second;
 		if( netIdent->getMyOnlineId() == poSession->getOnlineId() )
 		{
 			AudioJitterBuffer& jitterBuf = poSession->getJitterBuffer();
@@ -232,10 +232,10 @@ void VoiceFeedMgr::callbackAudioOutSpaceAvail( int freeSpaceLen )
 
     //int sessionIdx = 0;
 	PluginSessionMgr::SessionIter iter;
-	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_SessionMgr.getSessions();
+	std::map<VxGUID, PluginSessionBase*>&	sessionList = m_SessionMgr.getSessions();
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
-		AudioJitterBuffer& jitterBuf = ((PluginSessionBase *)iter->second)->getJitterBuffer();
+		AudioJitterBuffer& jitterBuf = ((PluginSessionBase*)iter->second)->getJitterBuffer();
 		//LogMsg( LOG_INFO, "VoiceFeedMgr::callbackAudioOutSpaceAvail jitterBuf.lockResource sessionIdx %d\n", sessionIdx );
 		jitterBuf.lockResource();
 		char * audioBuf = jitterBuf.getBufToRead();
@@ -244,7 +244,7 @@ void VoiceFeedMgr::callbackAudioOutSpaceAvail( int freeSpaceLen )
 			//LogMsg( LOG_INFO, "VoiceFeedMgr::callbackAudioOutSpaceAvail playAudio %d\n", sessionIdx );
 			m_PluginMgr.getEngine().getMediaProcessor().playAudio( (int16_t *)audioBuf, MY_OPUS_PKT_UNCOMPRESSED_DATA_LEN );
 			//VxGUID onlineId = iter->first; // local session id
-			VxGUID onlineId = ((PluginSessionBase *)iter->second)->getOnlineId();
+			VxGUID onlineId = ((PluginSessionBase*)iter->second)->getOnlineId();
 			// processor mutex was already locked by call to processor fromGuiAudioOutSpaceAvail which calls callbackAudioOutSpaceAvail
 			//LogMsg( LOG_INFO, "VoiceFeedMgr::callbackAudioOutSpaceAvail processFriendAudioFeed %d\n", sessionIdx );
 			m_PluginMgr.getEngine().getMediaProcessor().processFriendAudioFeed( onlineId, (int16_t *)audioBuf, MY_OPUS_PKT_UNCOMPRESSED_DATA_LEN, true );
@@ -276,10 +276,10 @@ void VoiceFeedMgr::callbackOpusPkt( void * userData, PktVoiceReq* pktOpusAudio )
     LogModule( eLogMediaStream, LOG_INFO, "VoiceFeedMgr::callbackOpusPkt PluginBase::AutoPluginLock autoLock done" );
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 
-	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_SessionMgr.getSessions();
+	std::map<VxGUID, PluginSessionBase*>&	sessionList = m_SessionMgr.getSessions();
 	for( auto iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
-		PluginSessionBase * poSession = iter->second;
+		PluginSessionBase* poSession = iter->second;
 		if( false == poSession->isRxSession() )
 		{
 			bool result = m_Plugin.txPacket( poSession->getIdent(), poSession->getSkt(), pktOpusAudio );

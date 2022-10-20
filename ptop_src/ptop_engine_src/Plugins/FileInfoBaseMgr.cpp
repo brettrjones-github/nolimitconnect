@@ -946,29 +946,15 @@ bool FileInfoBaseMgr::onFileDownloadComplete( VxNetIdent* netIdent, VxSktBase* s
 }
 
 //============================================================================
-void FileInfoBaseMgr::toGuiRxedPluginOffer( VxNetIdent* netIdent,				// identity of friend
-	EPluginType		ePluginType,			// plugin type
-	const char* pOfferMsg,				// offer message
-	int				pvUserData,				// plugin defined data
-	const char* pFileName,		// filename if any
-	uint8_t* fileHashData,
-	VxGUID& lclSessionId,
-	VxGUID& rmtSessionId )
+void FileInfoBaseMgr::toGuiRxedPluginOffer( VxNetIdent* netIdent, EPluginType pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
-	m_Plugin.toGuiRxedPluginOffer( netIdent, ePluginType, pOfferMsg, pvUserData, pFileName, fileHashData, lclSessionId, rmtSessionId );
+	m_Plugin.toGuiRxedPluginOffer( netIdent, pluginType, offerInfo, lclSessionId );
 }
 
 //============================================================================
-void FileInfoBaseMgr::toGuiRxedOfferReply( VxNetIdent* netIdent,
-	EPluginType		ePluginType,
-	int				pvUserData,
-	EOfferResponse	eOfferResponse,
-	const char* pFileName,
-	uint8_t* fileHashData,
-	VxGUID& lclSessionId,
-	VxGUID& rmtSessionId )
+void FileInfoBaseMgr::toGuiRxedOfferReply( VxNetIdent* netIdent, EPluginType pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
 {
-	m_Plugin.toGuiRxedOfferReply( netIdent, ePluginType, pvUserData, eOfferResponse, pFileName, fileHashData, lclSessionId, rmtSessionId );
+	m_Plugin.toGuiRxedOfferReply( netIdent, pluginType, offerInfo, lclSessionId, offerResponse );
 }
 
 //============================================================================

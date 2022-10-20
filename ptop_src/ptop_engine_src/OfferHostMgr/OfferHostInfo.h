@@ -22,7 +22,7 @@ public:
 	OfferHostInfo( const OfferHostInfo& rhs );
     OfferHostInfo( const OfferBaseInfo& rhs );
 	OfferHostInfo( const std::string& fileName );
-    OfferHostInfo( const char* fileName, uint64_t fileLen, uint16_t assetType );
+    OfferHostInfo( std::string fileName, uint64_t fileLen, uint16_t assetType );
 
 	OfferHostInfo&				operator=( const OfferHostInfo& rhs ); 
 

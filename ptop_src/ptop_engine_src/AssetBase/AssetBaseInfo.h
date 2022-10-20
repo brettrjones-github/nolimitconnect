@@ -21,6 +21,7 @@
 #include <CoreLib/VxSha1Hash.h>
 #include <CoreLib/VxGUID.h>
 
+#include <stdint.h>
 #include <string>
 
 #define ASSET_LOC_FLAG_PERSONAL_RECORD			0x0001
@@ -32,6 +33,7 @@
 #define ASSET_ATTRIB_TEMPORARY			        0x0002
 #define ASSET_ATTRIB_DELETED			        0x0004
 
+class FileInfo;
 class VxThread;
 
 class AssetBaseInfo : public BaseInfo
@@ -39,17 +41,21 @@ class AssetBaseInfo : public BaseInfo
 public:
     AssetBaseInfo();
     AssetBaseInfo( const AssetBaseInfo& rhs );
+    AssetBaseInfo( FileInfo& rhs );
     AssetBaseInfo( enum EAssetType assetType );
     AssetBaseInfo( enum EAssetType assetType, VxGUID& onlineId, int64_t modifiedTime = 0 );
     AssetBaseInfo( enum EAssetType assetType, VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
-    AssetBaseInfo( enum EAssetType assetType, const std::string& fileName );
-    AssetBaseInfo( enum EAssetType assetType, const std::string& fileName, VxGUID& assetId );
-    AssetBaseInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
-    AssetBaseInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
+    AssetBaseInfo( enum EAssetType assetType, std::string fileName );
+    AssetBaseInfo( enum EAssetType assetType, std::string fileName, VxGUID& assetId );
+    AssetBaseInfo( enum EAssetType assetType, std::string fileName, uint64_t fileLen );
+    AssetBaseInfo( enum EAssetType assetType, std::string fileName, uint64_t fileLen, VxGUID& assetId );
     AssetBaseInfo( enum EAssetType assetType, VxGUID& creatorId, VxGUID& assetId );
     virtual ~AssetBaseInfo() = default;
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
+
+    virtual bool                addToBlob( PktBlobEntry& blob ) override;
+    virtual bool                extractFromBlob( PktBlobEntry& blob ) override;
 
     virtual bool				isValid( void );
     virtual bool				isValidFile( void );
@@ -148,7 +154,7 @@ public:
     static const char*          getDefaultFileExtension( EAssetType assetType );
     static const char*          getSubDirectoryName( EAssetType assetType );
 
-    virtual void                printValues( void ) const;
+    virtual void                printValues( void ) const override;
 
 public:
     //=== vars ===//

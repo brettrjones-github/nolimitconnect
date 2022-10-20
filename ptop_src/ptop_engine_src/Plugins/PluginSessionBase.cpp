@@ -85,9 +85,9 @@ OpusAudioDecoder *	PluginSessionBase::getAudioDecoder( void )
 }
 
 //============================================================================
-void PluginSessionBase::setPluginType( EPluginType ePluginType  )		
+void PluginSessionBase::setPluginType( EPluginType pluginType  )		
 { 
-	m_ePluginType = ePluginType; 
+	m_ePluginType = pluginType; 
 }
 
 //============================================================================
@@ -185,42 +185,3 @@ bool  PluginSessionBase::isRmtInitiated( void )
 { 
 	return m_bRmtInitiatedSession; 
 }
-
-//============================================================================
-void  PluginSessionBase::setOfferMsg( const char* msg )
-{
-	if( msg )
-	{
-		m_strOfferMsg = msg;
-	}
-	else
-	{
-		m_strOfferMsg = "";
-	}
-}
-
-//============================================================================
-std::string&  PluginSessionBase::getOfferMsg( void )
-{
-	return m_strOfferMsg;
-}
-
-//============================================================================
-void  PluginSessionBase::setOfferFile( const char* fileName )
-{
-	if( fileName )
-	{
-		m_strOfferFile = fileName;
-	}
-	else
-	{
-		m_strOfferFile = "";
-	}
-}
-
-//============================================================================
-std::string&  PluginSessionBase::getOfferFile( void )
-{
-	return m_strOfferFile;
-}
-

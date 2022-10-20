@@ -16,11 +16,7 @@
 
 #include "VxCommon.h"
 #include "PktTypes.h"
-
-#include <CoreLib/VxGUID.h>
-#include <CoreLib/VxSha1Hash.h>
-
-#define PKT_PLUGIN_OFFER_MAX_MSG_LEN 512
+#include "PktBlobEntry.h"
 
 #pragma pack(push)
 #pragma pack(1)
@@ -30,35 +26,31 @@ class PktPluginOfferReq : public VxPktHdr
 public:
 	PktPluginOfferReq();
 
+	void						calcPktLen( void );
+
+	void						setPluginType( EPluginType pluginType ) { m_PluginType = (uint8_t)pluginType; }
+	EPluginType					getPluginType( void )					{ return (EPluginType)m_PluginType; }
+
 	void						setLclSessionId( VxGUID& lclId )		{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )					{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )		{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )					{ return m_RmtSessionId; }
 
-	void						setFileHashId( VxSha1Hash& id )			{ m_FileHashId = id; }
-	void						setFileHashId( uint8_t * id )			{ m_FileHashId.setHashData( id ); }
-	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
-
-	void						setMessages( const char* pMsg1, const char* fileName = NULL );
-	int							getOfferMsgLen( void )					{ return ntohs( m_u16Msg1Len ); }
-	const char*				getOfferMsg( void );
-	int							getFileNameLen( void )					{ return ntohs( m_u16FileNameLen ); }
-	const char*				getFileName( void );
+	PktBlobEntry&				getBlobEntry( void )					{ return m_BlobEntry; }
 
 private:
 	//=== vars ===//
-	uint16_t					m_u16Msg1Len;		// length of message string
-	uint16_t					m_u16FileNameLen;	// length of file name
-	uint8_t						m_u8Version;		// version
-	uint8_t						m_u8Reserved;		// reserved
-	uint16_t					m_u16Res;
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2; 
-	uint32_t					m_u32Res3; 
-	VxGUID						m_LclSessionId;
-	VxGUID						m_RmtSessionId;
-	VxSha1Hash					m_FileHashId;
-	char						m_as8Args[ (PKT_PLUGIN_OFFER_MAX_MSG_LEN * 2) + 18 ]; //message or argument
+	// VxPktHdr 40 bytes 
+	uint8_t						m_u8Version{ 1 };		// version
+	uint8_t						m_u8Response{ 0 };		// response
+	uint8_t						m_PluginType{ 0 };		
+	uint8_t						m_Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };			// reserved
+
+	VxGUID						m_LclSessionId;  // 16 bytes
+	VxGUID						m_RmtSessionId;  // 16 bytes
+
+	PktBlobEntry                m_BlobEntry;	// size 14352
 };
 
 class PktPluginOfferReply : public VxPktHdr
@@ -68,31 +60,30 @@ public:
 
 	void						calcPktLen( void );
 
-	void						setLclSessionId( VxGUID& lclId )		{ m_LclSessionId = lclId; }
-	VxGUID&						getLclSessionId( void )					{ return m_LclSessionId; }
-	void						setRmtSessionId( VxGUID& rmtId )		{ m_RmtSessionId = rmtId; }
-	VxGUID&						getRmtSessionId( void )					{ return m_RmtSessionId; }
-	void						setFileHashId( VxSha1Hash& id )			{ m_FileHashId = id; }
-	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
+	void						setPluginType( EPluginType pluginType )			{ m_PluginType = (uint8_t)pluginType; }
+	EPluginType					getPluginType( void )							{ return (EPluginType)m_PluginType; }
+
+	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
+	VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }
+	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
+	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
 	void						setOfferResponse( EOfferResponse eResponse )	{ m_u8Response = (uint8_t)eResponse; }
 	EOfferResponse				getOfferResponse( void )						{ return (EOfferResponse)m_u8Response; }
 
+	PktBlobEntry&				getBlobEntry( void )							{ return m_BlobEntry; }
+
 private:
-	uint8_t						m_u8Version;		// version
-	uint8_t						m_u8Reserved;		// reserved
-	uint8_t						m_u8Response;		// response
-	uint8_t						m_u8Res2;			// reserved2
-	uint32_t					m_u32Error;			// error if any
-	uint64_t					m_u64Arg2;			// arg2
-	uint64_t					m_u64Arg3;			// third arg if can be binary
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2; 
-	uint32_t					m_u32Res3; 
-	VxGUID						m_LclSessionId;
-	VxGUID						m_RmtSessionId;
-	VxSha1Hash					m_FileHashId;
-	char						m_as8Arg1[ (PKT_PLUGIN_OFFER_MAX_MSG_LEN + 1) ]; //message or argument
+	uint8_t						m_u8Version{ 1 };		// version
+	uint8_t						m_u8Response{ 0 };		// response
+	uint8_t						m_PluginType{ 0 };
+	uint8_t						m_Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };			// reserved
+
+	VxGUID						m_LclSessionId;  // 16 bytes
+	VxGUID						m_RmtSessionId;  // 16 bytes
+
+	PktBlobEntry                m_BlobEntry;	// size 14352
 };
 
 #pragma pack(pop)

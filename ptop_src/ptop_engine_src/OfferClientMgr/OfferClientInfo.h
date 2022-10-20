@@ -22,7 +22,7 @@ public:
 	OfferClientInfo( const OfferClientInfo& rhs );
     OfferClientInfo( const OfferBaseInfo& rhs );
 	OfferClientInfo( const std::string& fileName );
-    OfferClientInfo( const char* fileName, uint64_t fileLen, uint16_t assetType );
+    OfferClientInfo( std::string fileName, uint64_t fileLen, uint16_t assetType );
 
 	OfferClientInfo&				    operator=( const OfferClientInfo& rhs ); 
 

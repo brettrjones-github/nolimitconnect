@@ -133,9 +133,9 @@ FileInfo::FileInfo( OfferBaseInfo& offerInfo )
 	, m_FullFileName( offerInfo.getOfferName() )
 	, m_s64FileLen( offerInfo.getOfferLength() )
 	, m_u8FileType( (uint8_t)offerInfo.getOfferType() )
-	, m_AssetId( offerInfo.getOfferId() )
-	, m_ThumbId( offerInfo.getThumbId() )
 	, m_FileHash( offerInfo.getOfferHashId() )
+    , m_ThumbId( offerInfo.getThumbId() )
+    , m_AssetId( offerInfo.getOfferId() )
 	, m_FileTime( offerInfo.getCreationTime() )
 {
 	assureValidAssetId();
@@ -147,8 +147,9 @@ FileInfo::FileInfo( VxFileXferInfo& xferInfo, VxGUID& onlineId )
 	, m_FullFileName( xferInfo.getLclFileName() )
 	, m_s64FileLen( xferInfo.getFileLength() )
 	, m_u8FileType( VxFileUtil::fileExtensionToFileTypeFlag( xferInfo.getRmtFileName().c_str() ) )
-	, m_AssetId( xferInfo.getAssetId() )
 	, m_FileHash( xferInfo.getFileHashId() )
+    , m_AssetId( xferInfo.getAssetId() )
+    , m_ThumbId()
 {
 	assureValidAssetId();
 }

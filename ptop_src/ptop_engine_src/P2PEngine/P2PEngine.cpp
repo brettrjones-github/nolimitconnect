@@ -110,8 +110,8 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_NetworkStateMachine( *new NetworkStateMachine( *this, m_NetworkMgr ) )
 	, m_PluginMgr( *new PluginMgr( *this ) )
 	, m_PluginSettingMgr( *this )
+    , m_PluginFileShareServer( new PluginFileShareServer( *this, m_PluginMgr, &m_PktAnn, ePluginTypeFileShareServer ) )
 	, m_PluginLibraryServer( new PluginLibraryServer( *this, m_PluginMgr, &m_PktAnn, ePluginTypeLibraryServer ) )
-	, m_PluginFileShareServer( new PluginFileShareServer( *this, m_PluginMgr, &m_PktAnn, ePluginTypeFileShareServer ) )
 	, m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn, ePluginTypeNetServices ) )
 	, m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
 	, m_RelayMgr( *this )
@@ -266,10 +266,10 @@ void P2PEngine::fromGuiKickWatchdog( void )
 }
 
 //============================================================================
-void P2PEngine::onSessionStart( EPluginType ePluginType, VxNetIdent* netIdent )
+void P2PEngine::onSessionStart( EPluginType pluginType, VxNetIdent* netIdent )
 {
 	bool shouldUpdateLastSessionTime = false;
-	switch( ePluginType )
+	switch( pluginType )
 	{
 	case ePluginTypeMessenger:
 	case ePluginTypeVoicePhone:
@@ -438,26 +438,26 @@ bool P2PEngine::getPluginSetting( EPluginType pluginType, PluginSetting& pluginS
 EFriendState P2PEngine::getPluginPermission( int iPluginType )
 {
     EFriendState iPermission = eFriendStateIgnore;
-	EPluginType ePluginType = (EPluginType)iPluginType;
-	if( ( ePluginTypeInvalid < ePluginType ) && 
-		( eMaxPluginType > ePluginType ) )
+	EPluginType pluginType = (EPluginType)iPluginType;
+	if( ( ePluginTypeInvalid < pluginType ) && 
+		( eMaxPluginType > pluginType ) )
 	{
-		iPermission = m_PluginMgr.getPluginPermission(ePluginType);
+		iPermission = m_PluginMgr.getPluginPermission(pluginType);
 	}
 
 	return iPermission;
 }
 
 //============================================================================
-void P2PEngine::setPluginPermission( EPluginType ePluginType, int iPluginPermission )
+void P2PEngine::setPluginPermission( EPluginType pluginType, int iPluginPermission )
 {
-	if( ( ePluginTypeInvalid < ePluginType ) && 
-		( eMaxPluginType > ePluginType ) )
+	if( ( ePluginTypeInvalid < pluginType ) && 
+		( eMaxPluginType > pluginType ) )
 	{
-		if( ( iPluginPermission != m_PluginMgr.getPluginPermission( ePluginType ) )
-			|| ( iPluginPermission != m_PktAnn.getPluginPermission( ePluginType ) ) )
+		if( ( iPluginPermission != m_PluginMgr.getPluginPermission( pluginType ) )
+			|| ( iPluginPermission != m_PktAnn.getPluginPermission( pluginType ) ) )
 		{
-			fromGuiUpdatePluginPermission( ePluginType, (EFriendState)iPluginPermission );
+			fromGuiUpdatePluginPermission( pluginType, (EFriendState)iPluginPermission );
 		}
 	}
 }

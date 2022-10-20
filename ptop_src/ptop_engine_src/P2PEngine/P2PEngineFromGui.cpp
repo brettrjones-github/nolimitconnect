@@ -615,21 +615,21 @@ void P2PEngine::fromGuiUpdateWebPageProfile(	const char*	pProfileDir,	// directo
 }
 
 //============================================================================
-void P2PEngine::fromGuiStartPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
+void P2PEngine::fromGuiStartPluginSession( EPluginType pluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiStartPluginSession" );
-	m_PluginMgr.fromGuiStartPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
+	m_PluginMgr.fromGuiStartPluginSession( pluginType, oOnlineId, pvUserData, lclSessionId );
 }
 
 //============================================================================
-void P2PEngine::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
+void P2PEngine::fromGuiStopPluginSession( EPluginType pluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiStopPluginSession" );
-	m_PluginMgr.fromGuiStopPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
+	m_PluginMgr.fromGuiStopPluginSession( pluginType, oOnlineId, pvUserData, lclSessionId );
 }
 
 //============================================================================
-bool P2PEngine::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
+bool P2PEngine::fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiIsPluginInSession" );
 	if( ( false == m_IsUserSpecificDirSet ) || VxIsAppShuttingDown() )
@@ -638,57 +638,51 @@ bool P2PEngine::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent* n
 		return false;	
 	}
 
-	return m_PluginMgr.fromGuiIsPluginInSession( ePluginType, netIdent, pvUserData, lclSessionId );
+	return m_PluginMgr.fromGuiIsPluginInSession( pluginType, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
-void P2PEngine::fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState )
+void P2PEngine::fromGuiSetPluginPermission( EPluginType pluginType, EFriendState eFriendState )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetPluginPermission" );
-	EFriendState eCurFriendState = m_PktAnn.getPluginPermission( ePluginType );
+	EFriendState eCurFriendState = m_PktAnn.getPluginPermission( pluginType );
 	if( eCurFriendState != eFriendState )
 	{
-		m_PluginMgr.setPluginPermission( ePluginType, eFriendState );
-		m_PktAnn.setPluginPermission( ePluginType, eFriendState );
+		m_PluginMgr.setPluginPermission( pluginType, eFriendState );
+		m_PktAnn.setPluginPermission( pluginType, eFriendState );
 		doPktAnnHasChanged( false );
 	}
 }
 
 //============================================================================
-int P2PEngine::fromGuiGetPluginPermission( EPluginType ePluginType )
+int P2PEngine::fromGuiGetPluginPermission( EPluginType pluginType )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetPluginPermission" );
-	return m_PktAnn.getPluginPermission( ePluginType );
+	return m_PktAnn.getPluginPermission( pluginType );
 }
 
 //============================================================================
-EPluginServerState P2PEngine::fromGuiGetPluginServerState( EPluginType ePluginType )
+EPluginServerState P2PEngine::fromGuiGetPluginServerState( EPluginType pluginType )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetPluginServerState" );
-	if( eFriendStateIgnore == m_PktAnn.getPluginPermission( ePluginType ) )
+	if( eFriendStateIgnore == m_PktAnn.getPluginPermission( pluginType ) )
 	{
 		return ePluginServerStateDisabled;
 	}
 
-	return m_PluginMgr.fromGuiIsPluginInSession( ePluginType ) ? ePluginServerStateStarted : ePluginServerStateStopped;
+	return m_PluginMgr.fromGuiIsPluginInSession( pluginType ) ? ePluginServerStateStarted : ePluginServerStateStopped;
 }
 
 //============================================================================
 //! called with offer to create session.. return false if cannot connect
-bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType, 
-										VxGUID&			onlineId,
-										int				pvUserData,
-										const char*	pOfferMsg, 
-										const char*	pFileName,
-                                        uint8_t *		fileHashId,
-										VxGUID			lclSessionId )
+bool P2PEngine::fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiMakePluginOffer" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiMakePluginOffer( netIdent, pvUserData, pOfferMsg, pFileName, fileHashId, lclSessionId );
+		return poPlugin->fromGuiMakePluginOffer( netIdent, offerInfo, lclSessionId );
 	}
 	else
 	{
@@ -700,11 +694,7 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 
 //============================================================================
 //! handle reply to offer
-bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
-											VxGUID&			onlineId,
-											int				pvUserData,
-											int				iOfferResponse,
-											VxGUID			lclSessionId )
+bool P2PEngine::fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiToPluginOfferReply" );
 	if( VxIsAppShuttingDown() )
@@ -713,10 +703,10 @@ bool P2PEngine::fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 	}
 
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiOfferReply( netIdent, pvUserData, (EOfferResponse)iOfferResponse, lclSessionId );
+		return poPlugin->fromGuiOfferReply( netIdent, offerInfo, lclSessionId, offerResponse );
 	}
 	else
 	{
@@ -776,10 +766,10 @@ bool P2PEngine::fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk )
 }
 
 //============================================================================
-bool P2PEngine::isSystemPlugin( EPluginType	ePluginType )
+bool P2PEngine::isSystemPlugin( EPluginType	pluginType )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::isSystemPlugin" );
-	if( ( ePluginTypeInvalid < ePluginType ) && ( eMaxUserPluginType > ePluginType ) )
+	if( ( ePluginTypeInvalid < pluginType ) && ( eMaxUserPluginType > pluginType ) )
 	{
 		return false;
 	}
@@ -1138,13 +1128,13 @@ void P2PEngine::fromGuiSetFileShareSettings( FileShareSettings& fileShareSetting
 }
 
 //============================================================================
-bool P2PEngine::fromGuiSetGameValueVar(	EPluginType	ePluginType, 
+bool P2PEngine::fromGuiSetGameValueVar(	EPluginType	pluginType, 
 										VxGUID&		onlineId, 
 										int32_t			varId, 
 										int32_t			varValue )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetGameValueVar" );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 	if( poInfo )
 	{
@@ -1159,13 +1149,13 @@ bool P2PEngine::fromGuiSetGameValueVar(	EPluginType	ePluginType,
 }
 
 //============================================================================
-bool P2PEngine::fromGuiSetGameActionVar(	EPluginType	ePluginType, 
+bool P2PEngine::fromGuiSetGameActionVar(	EPluginType	pluginType, 
 											VxGUID&		onlineId, 
 											int32_t			varId, 
 											int32_t			varValue )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetGameActionVar" );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
 	BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 	if( poInfo )
 	{

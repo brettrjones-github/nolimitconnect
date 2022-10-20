@@ -17,8 +17,10 @@
 #include "AssetBaseInfo.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <PktLib/VxSearchDefs.h>
+#include <PktLib/PktBlobEntry.h>
 
 #include <CoreLib/VxFileLists.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
@@ -60,7 +62,22 @@ AssetBaseInfo::AssetBaseInfo( const AssetBaseInfo& rhs )
 , m_AssetSendState( rhs.m_AssetSendState )
 , m_PlayPosition0to100000( rhs.m_PlayPosition0to100000 )
 {   
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
+}
+
+
+//============================================================================
+AssetBaseInfo::AssetBaseInfo( FileInfo& rhs )
+	: BaseInfo( rhs )
+	, m_AssetName( rhs.getFullFileName() )
+	, m_UniqueId( rhs.getAssetId() )
+	, m_HistoryId( rhs.getOnlineId() )
+	, m_AssetHash( rhs.getFileHashId() )
+	, m_s64AssetLen( rhs.getFileLength() )
+	, m_u16AssetType( VxFileNameToAssetType( rhs.getFullFileName() ) )
+	, m_CreationTime( rhs.getFileTime() )
+{
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
@@ -70,7 +87,7 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, int64_t m
 , m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 {
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
@@ -81,11 +98,11 @@ AssetBaseInfo::AssetBaseInfo(EAssetType assetType,  VxGUID& creatorId, VxGUID& a
 , m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 {
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const std::string& fileName )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, std::string fileName )
 : BaseInfo()
 , m_AssetName( fileName )
 , m_u16AssetType( (uint16_t) assetType )
@@ -93,11 +110,11 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const std::string& fileName 
 , m_AccessedTime( m_CreationTime )
 { 
     BaseInfo::setInfoModifiedTime( m_CreationTime );
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const std::string& fileName, VxGUID& assetId )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, std::string fileName, VxGUID& assetId )
 	: BaseInfo()
 	, m_AssetName( fileName )
     , m_UniqueId( assetId )
@@ -106,11 +123,11 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const std::string& fileName,
 	, m_AccessedTime( m_CreationTime )
 {
 	BaseInfo::setInfoModifiedTime( m_CreationTime );
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, std::string fileName, uint64_t fileLen )
 : BaseInfo()
 , m_AssetName( fileName )
 , m_s64AssetLen( fileLen )
@@ -119,10 +136,11 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char* fileName, uint64
 , m_AccessedTime( m_CreationTime )
 {
     BaseInfo::setInfoModifiedTime( m_CreationTime );
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, std::string fileName, uint64_t fileLen, VxGUID& assetId )
 	: BaseInfo()
 	, m_AssetName( fileName )
     , m_UniqueId( assetId )
@@ -133,7 +151,7 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char* fileName, uint64
 
 {
 	BaseInfo::setInfoModifiedTime( m_CreationTime );
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
 }
 
 //============================================================================
@@ -144,7 +162,65 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& a
 , m_CreationTime( GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 {
-	generateNewUniqueId( true );
+	m_UniqueId.assureIsValidGUID();
+}
+
+//============================================================================
+bool AssetBaseInfo::addToBlob( PktBlobEntry& blob )
+{
+	blob.resetWrite();
+	if( BaseInfo::addToBlob( blob ) )
+	{
+		bool result = blob.setValue( m_AssetName );
+		result &= blob.setValue( m_UniqueId );
+		result &= blob.setValue( m_HistoryId );
+		result &= blob.setValue( m_UniqueId );
+		result &= blob.setValue( m_AssetHash );
+		result &= blob.setValue( m_s64AssetLen );
+		result &= blob.setValue( m_u16AssetType );
+		result &= blob.setValue( m_AttributeFlags );
+		result &= blob.setValue( m_LocationFlags );
+		result &= blob.setValue( m_CreationTime );
+		result &= blob.setValue( m_AccessedTime );
+		result &= blob.setValue( m_ExpiresTime );
+		result &= blob.setValue( m_AssetTag );
+		return result;
+
+		// not sent in blob
+		//m_AssetSendState = rhs.m_AssetSendState;
+		//m_PlayPosition0to100000 = rhs.m_PlayPosition0to100000;
+	}
+
+	return false;
+}
+
+//============================================================================
+bool AssetBaseInfo::extractFromBlob( PktBlobEntry& blob )
+{
+	blob.resetRead();
+	if( BaseInfo::extractFromBlob( blob ) )
+	{
+		bool result = blob.getValue( m_AssetName );
+		result &= blob.getValue( m_UniqueId );
+		result &= blob.getValue( m_HistoryId );
+		result &= blob.getValue( m_UniqueId );
+		result &= blob.getValue( m_AssetHash );
+		result &= blob.getValue( m_s64AssetLen );
+		result &= blob.getValue( m_u16AssetType );
+		result &= blob.getValue( m_AttributeFlags );
+		result &= blob.getValue( m_LocationFlags );
+		result &= blob.getValue( m_CreationTime );
+		result &= blob.getValue( m_AccessedTime );
+		result &= blob.getValue( m_ExpiresTime );
+		result &= blob.getValue( m_AssetTag );
+		return result;
+
+		// not sent in blob
+		//m_AssetSendState = rhs.m_AssetSendState;
+		//m_PlayPosition0to100000 = rhs.m_PlayPosition0to100000;
+	}
+
+	return false;
 }
 
 //============================================================================
@@ -194,7 +270,7 @@ bool AssetBaseInfo::isValid( void )
 //============================================================================
 bool AssetBaseInfo::isValidFile( void )
 {
-	bool valid = !m_AssetName.empty() && m_s64AssetLen == VxFileUtil::fileExists( m_AssetName.c_str() );
+    bool valid = !m_AssetName.empty() && m_s64AssetLen == (int64_t)VxFileUtil::fileExists( m_AssetName.c_str() );
 	if( !valid )
 	{
 		LogMsg( LOG_ERROR, "AssetBaseInfo::isValidFile fail %lld %s ", m_s64AssetLen, m_AssetName.empty() ? "NO FILE NAME" : m_AssetName.c_str() );
@@ -386,6 +462,8 @@ void AssetBaseInfo::printValues( void ) const
 	LogMsg( LOG_VERBOSE, "m_AssetTag=(%s)", m_AssetTag.c_str() );
 	LogMsg( LOG_VERBOSE, "m_AssetSendState=(%d)", m_AssetSendState );
 	LogMsg( LOG_VERBOSE, "m_PlayPosition0to100000=(%d)", m_PlayPosition0to100000 );
+
+	BaseInfo::printValues();
 	LogMsg( LOG_VERBOSE, "*End AssetBaseInfo" );
 }
 

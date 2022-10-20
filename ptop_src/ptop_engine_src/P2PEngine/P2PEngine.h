@@ -303,32 +303,19 @@ public:
     virtual void				fromGuiStopPluginSession( EPluginType pluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) override;
     virtual bool				fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiMakePluginOffer(	EPluginType		pluginType, 
-														VxGUID&			onlineId,
-														int				pvUserData,
-														const char*	    pOfferMsg, 
-														const char*	    pFileName = nullptr,
-														uint8_t*		fileHashId = 0,
-                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
-
-	virtual bool				fromGuiToPluginOfferReply(	EPluginType		pluginType,
-															VxGUID&			onlineId,
-															int			    pvUserData,
-															int				iOfferResponse,
-                                                            VxGUID			lclSessionId ) override;
+	virtual bool				fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
+    virtual bool				fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) override;
 
     virtual EXferError			fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo ) override;
 
-	virtual bool				fromGuiInstMsg(		EPluginType		pluginType, 
-													VxGUID&			onlineId, 
-                                                    const char*	    pMsg ) override;
+	virtual bool				fromGuiInstMsg(	EPluginType	pluginType, VxGUID&	onlineId, const char* pMsg ) override;
+                                                   
     virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) override;
 
-	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
-																EFriendState	eMyFriendshipToHim,
-                                                                EFriendState	eHisFriendshipToMe ) override;
-    virtual void				fromGuiSendContactList( EFriendViewType eFriendView, int MaxContactsToSend ) override;
-    virtual void				fromGuiRefreshContactList( int MaxContactsToSend ) override;
+	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&	onlineId, EFriendState myFriendshipToHim, EFriendState hisFriendshipToMe ) override;															
+                                                                
+    virtual void				fromGuiSendContactList( EFriendViewType eFriendView, int maxContactsToSend ) override;
+    virtual void				fromGuiRefreshContactList( int maxContactsToSend ) override;
 
     virtual void				fromGuiRequireRelay( bool bRequireRelay ) override;
     virtual void				fromGuiUseRelay( VxGUID& onlineId, bool bUseAsRelay = true ) override;

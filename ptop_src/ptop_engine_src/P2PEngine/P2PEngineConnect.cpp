@@ -159,7 +159,7 @@ bool P2PEngine::txSystemPkt(	VxNetIdentBase *	netIdent,
 }
 
 //============================================================================
-bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType, 
+bool P2PEngine::txPluginPkt( 	EPluginType			pluginType, 
 								VxNetIdentBase *	netIdent, 
 								VxSktBase*			sktBase, 
 								VxPktHdr*			poPkt, 
@@ -172,7 +172,7 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 		if( sktBase->isConnected() && sktBase->isTxEncryptionKeySet() )
 		{
 			poPkt->setSrcOnlineId( m_PktAnn.getMyOnlineId() );
-			poPkt->setPluginNum( (uint8_t)ePluginType );
+			poPkt->setPluginNum( (uint8_t)pluginType );
 			sktBase->m_u8TxSeqNum++;
 			poPkt->setPktSeqNum( sktBase->m_u8TxSeqNum );
 			RCODE rc = sktBase->txPacket( netIdent->getMyOnlineId(), poPkt, bDisconnectAfterSend );
@@ -195,7 +195,7 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
         LogMsg( LOG_ERROR, "P2PEngine::txPluginPkt: Invalid Packet length %d type %d from plugin %s",
 			poPkt->getPktLength(),
 			poPkt->getPktType(),
-			DescribePluginLclName( ePluginType ));
+			DescribePluginLclName( pluginType ));
 	}
 	return bSendSuccess;
 }

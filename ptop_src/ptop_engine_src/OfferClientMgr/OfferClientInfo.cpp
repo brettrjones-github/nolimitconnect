@@ -41,17 +41,17 @@ OfferClientInfo::OfferClientInfo( const OfferClientInfo& rhs )
 //============================================================================
 OfferClientInfo::OfferClientInfo( const OfferBaseInfo& rhs )
 {
-    *((OfferBaseInfo *)this) = rhs;
+    *((OfferBaseInfo*)this) = rhs;
 }
 
 //============================================================================
 OfferClientInfo::OfferClientInfo( const std::string& fileName )
-    : OfferBaseInfo(fileName)
+    : OfferBaseInfo( fileName)
 { 
 }
 
 //============================================================================
-OfferClientInfo::OfferClientInfo( const char* fileName, uint64_t fileLen, uint16_t assetType )
+OfferClientInfo::OfferClientInfo( std::string fileName, uint64_t fileLen, uint16_t assetType )
 : OfferBaseInfo( fileName, fileLen, assetType )
 {
 }

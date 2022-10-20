@@ -39,13 +39,13 @@ OfferHostMgr::OfferHostMgr( P2PEngine& engine, const char* dbName, const char* s
 }
 
 //============================================================================
-OfferBaseInfo * OfferHostMgr::createOfferInfo( const char* assetName, uint64_t assetLen, uint16_t assetType )
+OfferBaseInfo* OfferHostMgr::createOfferInfo( std::string assetName, uint64_t assetLen, uint16_t assetType )
 {
     return new OfferHostInfo( assetName, assetLen, assetType );
 }
 
 //============================================================================
-OfferBaseInfo * OfferHostMgr::createOfferInfo( OfferBaseInfo& assetInfo )
+OfferBaseInfo* OfferHostMgr::createOfferInfo( OfferBaseInfo& assetInfo )
 {
     return new OfferHostInfo( assetInfo );
 }
@@ -97,7 +97,7 @@ void OfferHostMgr::addOfferHostMgrClient( OfferHostCallbackInterface * client, b
 }
 
 //============================================================================
-void OfferHostMgr::announceOfferAdded( OfferBaseInfo * assetInfo )
+void OfferHostMgr::announceOfferAdded( OfferBaseInfo* assetInfo )
 {
     OfferBaseMgr::announceOfferAdded( assetInfo );
     OfferHostInfo * thumbInfo = dynamic_cast<OfferHostInfo *>( assetInfo );
@@ -123,7 +123,7 @@ void OfferHostMgr::announceOfferAdded( OfferBaseInfo * assetInfo )
 }
 
 //============================================================================
-void OfferHostMgr::announceOfferUpdated( OfferBaseInfo * assetInfo )
+void OfferHostMgr::announceOfferUpdated( OfferBaseInfo* assetInfo )
 {
     OfferBaseMgr::announceOfferUpdated( assetInfo );
     OfferHostInfo * thumbInfo = dynamic_cast<OfferHostInfo *>( assetInfo );
@@ -146,7 +146,7 @@ void OfferHostMgr::announceOfferUpdated( OfferBaseInfo * assetInfo )
 }
 
 //============================================================================
-void OfferHostMgr::announceOfferRemoved( OfferBaseInfo * assetInfo )
+void OfferHostMgr::announceOfferRemoved( OfferBaseInfo* assetInfo )
 {
     OfferBaseMgr::announceOfferRemoved( assetInfo );
     OfferHostInfo * thumbInfo = dynamic_cast<OfferHostInfo *>( assetInfo );

@@ -26,6 +26,7 @@ class VxNetIdent;
 class AssetBaseInfo;
 class BlobInfo;
 class FileInfo;
+class OfferBaseInfo;
 class OfferClientInfo;
 class OfferHostInfo;
 class ThumbInfo;
@@ -131,31 +132,17 @@ public:
 	virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) = 0;
 
 	//! Contact has sent a offer
-	virtual void				toGuiRxedPluginOffer(  VxNetIdent*		netIdent, 
-														EPluginType		ePluginType, 
-														const char*		pMsg,
-													    int				pvUserData,
-														const char*		pFileName = nullptr,
-														uint8_t *		fileHashData = 0,
-														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual void				toGuiRxedPluginOffer( VxNetIdent* netIdent, EPluginType	pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) = 0;
 	//! Contact has responded to offer
-	virtual void				toGuiRxedOfferReply(	VxNetIdent*		netIdent, 
-														EPluginType		ePluginType,
-														int				pvUserData,
-														EOfferResponse	eOfferResponse, 
-														const char*		pFileName = nullptr,
-														uint8_t *		fileHashData = 0,
-														VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-														VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual void				toGuiRxedOfferReply( VxNetIdent* netIdent, EPluginType	pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) = 0;
 	//! Plugin session has stopped
 	virtual void				toGuiPluginSessionEnded(	VxNetIdent*		netIdent, 
-															EPluginType		ePluginType,
+															EPluginType		pluginType,
 															int				pvUserData,
-															EOfferResponse	eOfferResponse,
+															EOfferResponse	offerResponse,
 															VxGUID&			lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	//! Plugin session status or variable value
-	virtual void				toGuiPluginStatus(	EPluginType		ePluginType,
+	virtual void				toGuiPluginStatus(	EPluginType		pluginType,
 													int				statusType,
 													int				statusValue ) = 0;
 	//! Received text message from contact
@@ -199,12 +186,12 @@ public:
 	virtual void				toGuiPushToTalkStatus( VxGUID& onlineId, EPushToTalkStatus pushToTalkStatus ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
-	virtual void				toGuiSetGameValueVar(	EPluginType	    ePluginType,
+	virtual void				toGuiSetGameValueVar(	EPluginType	    pluginType,
 														VxGUID&		    oOnlineId, 
 														int32_t			s32VarId, 
 														int32_t			s32VarValue ) = 0;
 	/// Game action has occurred ( Used by Truth Or Dare video chat game )
-	virtual void				toGuiSetGameActionVar(	EPluginType	    ePluginType,
+	virtual void				toGuiSetGameActionVar(	EPluginType	    pluginType,
 														VxGUID&		    oOnlineId, 
 														int32_t			s32VarId, 
 														int32_t			s32VarValue ) = 0;

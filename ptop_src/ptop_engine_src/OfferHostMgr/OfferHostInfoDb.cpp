@@ -28,13 +28,13 @@ OfferHostInfoDb::~OfferHostInfoDb()
 }
 
 //============================================================================
-OfferBaseInfo * OfferHostInfoDb::createOfferInfo( const char* assetName, uint64_t assetLen, uint16_t assetType )
+OfferBaseInfo* OfferHostInfoDb::createOfferInfo( std::string assetName, uint64_t assetLen, uint16_t assetType )
 {
     return new OfferHostInfo( assetName, assetLen, assetType );
 }
 
 //============================================================================
-OfferBaseInfo * OfferHostInfoDb::createOfferInfo( OfferBaseInfo& assetInfo )
+OfferBaseInfo* OfferHostInfoDb::createOfferInfo( OfferBaseInfo& assetInfo )
 {
     return new OfferHostInfo( assetInfo );
 }

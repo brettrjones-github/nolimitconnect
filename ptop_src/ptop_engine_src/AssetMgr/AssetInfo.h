@@ -16,6 +16,8 @@
 
 #include <ptop_src/ptop_engine_src/AssetBase/AssetBaseInfo.h>
 
+class FileInfo;
+
 class AssetInfo : public AssetBaseInfo
 {
 public:
@@ -23,10 +25,11 @@ public:
     AssetInfo( enum EAssetType assetType );
 	AssetInfo( const AssetInfo& rhs );
     AssetInfo( const AssetBaseInfo& rhs );
-    AssetInfo( enum EAssetType assetType, const std::string& fileName );
-    AssetInfo( enum EAssetType assetType, const std::string& fileName, VxGUID& assetId );
-    AssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
-    AssetInfo( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
+    AssetInfo( FileInfo& rhs );
+    AssetInfo( enum EAssetType assetType, std::string fileName );
+    AssetInfo( enum EAssetType assetType, std::string fileName, VxGUID& assetId );
+    AssetInfo( enum EAssetType assetType, std::string fileName, uint64_t fileLen );
+    AssetInfo( enum EAssetType assetType, std::string fileName, uint64_t fileLen, VxGUID& assetId );
 
 	AssetInfo&					operator=( const AssetInfo& rhs ); 
 

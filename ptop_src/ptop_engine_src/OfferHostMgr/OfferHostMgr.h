@@ -40,14 +40,17 @@ public:
     bool				        fromGuiOfferHostCreated( OfferHostInfo& thumbInfo );
     bool				        fromGuiOfferHostUpdated( OfferHostInfo& thumbInfo );
 
-    virtual void				announceOfferAdded( OfferBaseInfo * assetInfo ) override;
-    virtual void				announceOfferUpdated( OfferBaseInfo * assetInfo ) override;
-    virtual void				announceOfferRemoved( OfferBaseInfo * assetInfo ) override;
+    virtual void				fromGuiMakePluginOffer( QWidget* parent, EPluginType pluginType, GuiUser* guiUser, FileInfo& fileInfo ) override {};
+    virtual void				fromGuiMakePluginOffer( QWidget* parent, EPluginType pluginType, GuiUser* guiUser, OfferBaseInfo& offerInfo ) {};
+
+    virtual void				announceOfferAdded( OfferBaseInfo* assetInfo ) override;
+    virtual void				announceOfferUpdated( OfferBaseInfo* assetInfo ) override;
+    virtual void				announceOfferRemoved( OfferBaseInfo* assetInfo ) override;
     virtual void				announceOfferXferState( VxGUID& assetOfferId, EOfferSendState assetSendState, int param ) override;
 
 protected:
-    virtual OfferBaseInfo *     createOfferInfo( const char* fileName, uint64_t fileLen, uint16_t fileType ) override;
-    virtual OfferBaseInfo *     createOfferInfo( OfferBaseInfo& assetInfo ) override;
+    virtual OfferBaseInfo*     createOfferInfo( std::string fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual OfferBaseInfo*     createOfferInfo( OfferBaseInfo& assetInfo ) override;
 
     OfferHostInfoDb&            m_OfferHostInfoDb;
     std::vector<OfferBaseInfo*>&	m_OfferHostInfoList;

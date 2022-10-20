@@ -44,31 +44,38 @@ AssetInfo::AssetInfo( const AssetInfo& rhs )
 	*this = rhs;
 }
 
+//============================================================================
 AssetInfo::AssetInfo( const AssetBaseInfo& rhs )
 {
     *((AssetBaseInfo*)this) = rhs;
 }
 
 //============================================================================
-AssetInfo::AssetInfo( EAssetType assetType, const std::string& fileName )
+AssetInfo::AssetInfo( FileInfo& rhs )
+	: AssetBaseInfo( rhs )
+{
+}
+
+//============================================================================
+AssetInfo::AssetInfo( EAssetType assetType, std::string fileName )
 : AssetBaseInfo( assetType, fileName )
 { 
 }
 
 //============================================================================
-AssetInfo::AssetInfo( EAssetType assetType, const std::string& fileName, VxGUID& assetId )
+AssetInfo::AssetInfo( EAssetType assetType, std::string fileName, VxGUID& assetId )
 	: AssetBaseInfo( assetType, fileName, assetId )
 {
 }
 
 //============================================================================
-AssetInfo::AssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen )
+AssetInfo::AssetInfo( EAssetType assetType, std::string fileName, uint64_t fileLen )
 : AssetBaseInfo( assetType, fileName, fileLen )
 {
 }
 
 //============================================================================
-AssetInfo::AssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId )
+AssetInfo::AssetInfo( EAssetType assetType, std::string fileName, uint64_t fileLen, VxGUID& assetId )
 	: AssetBaseInfo( assetType, fileName, fileLen, assetId )
 {
 }

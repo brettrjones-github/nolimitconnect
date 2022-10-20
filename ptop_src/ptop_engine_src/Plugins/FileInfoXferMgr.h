@@ -27,6 +27,7 @@ class FileRxSession;
 class FileTxSession;
 class FileInfoBaseMgr;
 class FileLibraryMgr;
+class OfferBaseInfo;
 class P2PEngine;
 class PluginBase;
 class PluginMgr;
@@ -68,24 +69,19 @@ public:
 
 	void						fileAboutToBeDeleted( std::string& fileName );
 
-	//virtual void				fromGuiUserLoggedOn( void );
 	virtual void				onAfterUserLogOnThreaded( void );
 
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
 
-	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = NULL,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+	virtual bool				fromGuiIsPluginInSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	void						fromGuiCancelDownload( VxGUID& fileInstance );
 	void						fromGuiCancelUpload( VxGUID& fileInstance );
-	bool						fromGuiMakePluginOffer( VxNetIdent*	netIdent,				// identity of friend
-														int				pvUserData,
-														const char*	pOfferMsg,				// offer message
-														const char*	pFileName		= NULL,
-														uint8_t *		fileHashId		= 0,
-														VxGUID			lclSessionId	= VxGUID::nullVxGUID() );		
+
+	bool						fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId );
 
 	EXferError					fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo );
 

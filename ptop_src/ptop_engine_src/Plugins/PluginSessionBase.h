@@ -16,6 +16,8 @@
 
 #include "AudioJitterBuffer.h"
 
+#include <ptop_src/ptop_engine_src/OfferBase/OfferBaseInfo.h>
+
 #include <PktLib/VxCommon.h>
 
 #include <CoreLib/VxGUID.h>
@@ -46,11 +48,11 @@ public:
 	PluginSessionBase( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
 	virtual ~PluginSessionBase();
 
-	virtual void				setPluginType( EPluginType ePluginType );
+	virtual void				setPluginType( EPluginType pluginType );
 	virtual EPluginType			getPluginType( void );
 	virtual void				setIdent( VxNetIdent* ident );
-	virtual VxNetIdent*		getIdent( void );
-	virtual const char*		getOnlineName( void );
+	virtual VxNetIdent*			getIdent( void );
+	virtual const char*			getOnlineName( void );
 	virtual VxGUID&				getOnlineId( void );
 	virtual void				setSkt( VxSktBase* sktBase );
 	virtual VxSktBase*			getSkt( void );
@@ -69,7 +71,6 @@ public:
 	virtual void				setIsRmtInitiated( bool isRmtInitiated );
 	virtual bool				isRmtInitiated( void );
 
-
 	void						setIsInTest( bool bTest )					{ m_bTest = bTest; }
 	bool						isInTest( void )							{ return m_bTest; }
 
@@ -81,28 +82,20 @@ public:
 	void						setAssetId( VxGUID& rmtId )					{ m_AssetId = rmtId; }
 	VxGUID&						getAssetId( void )							{ return m_AssetId; }
 
-	void						setFileHashId( VxSha1Hash& id )				{ m_FileHashId = id; }
-	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
+	void						setOfferInfo( OfferBaseInfo& offerInfo )	{ m_OfferInfo = offerInfo; }
+	OfferBaseInfo&				getOfferInfo( void )						{ return m_OfferInfo; }
 
 	void						setOfferResponse( EOfferResponse eResponse ){ m_eOfferResponse = eResponse; }
 	EOfferResponse				getOfferResponse( void )					{ return m_eOfferResponse; }
 
-	void						setOfferMsg( const char* msg );
-	std::string&				getOfferMsg( void );
-
-	void						setOfferFile( const char* fileName );
-	std::string&				getOfferFile( void );
-
 	bool						waitForTestSemaphore( int iMilliseconds )			{ return m_TestSemaphore.wait(iMilliseconds); }
 	void						signalTestSemaphore( void )							{ if(m_bTest) m_TestSemaphore.signal(); }
 
-	std::string					m_strOfferMsg;
-	std::string					m_strOfferFile;
 
 protected:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
-	VxNetIdent*				m_Ident;
+	VxNetIdent*					m_Ident;
 	VxSktBase*					m_Skt;
 	EPluginSessionType			m_ePluginSessionType;
 	bool						m_bSessionStarted;
@@ -111,7 +104,7 @@ protected:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_AssetId;
-	VxSha1Hash					m_FileHashId;
+	OfferBaseInfo				m_OfferInfo;
 	EOfferResponse				m_eOfferResponse;
 	OpusAudioDecoder *			m_AudioDecoder;
 	AudioJitterBuffer			m_JitterBuffer;
