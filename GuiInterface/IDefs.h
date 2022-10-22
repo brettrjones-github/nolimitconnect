@@ -1284,3 +1284,5 @@ bool HostShouldAnnounceToNetwork( enum EHostType hostType );
 bool IsPluginARelayForUser( enum EPluginType pluginType );
 //! return true if host can act as relay for user
 bool IsHostARelayForUser( enum EHostType hostType );
+//! return true if only one user can access at a time. example ePluginTypeVideoPhone
+bool IsPluginSingleSession( EPluginType pluginType );

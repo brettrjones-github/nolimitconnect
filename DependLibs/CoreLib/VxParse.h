@@ -99,8 +99,10 @@ int								StdStringToInteger( std::string& strValue );
 //============================================================================
 //!	return string at first instance of char		
 const wchar_t *					wstrchr( const wchar_t * wStr, const wchar_t wChar );
-//! same as strstr but case insensitive
-char *							stristr( const char* pString, const char* pPattern );
+bool							containsStringCaseInsensitive( std::string strSearch, std::string strPattern );
+//! same as strstr but case insensitive !!! DO NOT USE.. broken.. instead use containsString
+//char *							stristr( const char* pString, const char* pPattern );
+//std::string						stristr( std::string strSearch, std::string strPattern );
 
 int								wstrlen( const wchar_t * pString );
 wchar_t *						wstrstr( const wchar_t * pString, const wchar_t * pPattern );

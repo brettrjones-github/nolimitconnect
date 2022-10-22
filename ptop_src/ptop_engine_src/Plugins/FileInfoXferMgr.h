@@ -84,7 +84,6 @@ public:
 	bool						fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId );
 
 	EXferError					fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo );
-
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
 

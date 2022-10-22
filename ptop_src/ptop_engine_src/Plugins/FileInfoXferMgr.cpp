@@ -66,10 +66,8 @@ EPluginType FileInfoXferMgr::getPluginType( void )
 //============================================================================
 void FileInfoXferMgr::clearRxSessionsList( void )
 {
-	std::map<VxGUID, FileRxSession*>::iterator iter;
-
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
+	for( auto iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
 		FileRxSession* xferSession = iter->second;
 		delete xferSession;
@@ -102,10 +100,9 @@ void FileInfoXferMgr::onAfterUserLogOnThreaded( void )
 int FileInfoXferMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 {
 	int result = -1;
-	std::map<VxGUID, FileRxSession*>::iterator iter;
 
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
+	for( auto iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
 		FileRxSession* xferSession = iter->second;
 		if( xferSession->getXferInfo().getFileHashId().isEqualTo( fileHashId ) )

@@ -39,7 +39,7 @@ class AssetBaseInfo;
 class AssetBaseInfoDb;
 class AssetBaseHistoryMgr;
 class AssetBaseXferMgr;
-
+class FileInfo;
 class IToGui;
 class P2PEngine;
 class PktFileListReply;
@@ -67,7 +67,9 @@ public:
     // startup when user specific directory has been set after user logs on
     virtual void				fromGuiUserLoggedOn( void );
     virtual bool				fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter );
-    virtual bool				fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId );
+    virtual bool				fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t* fileHashId );
+    virtual bool				fromGuiQueryFileHash( FileInfo& fileInfo );
+    virtual void				fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash );
 
     virtual void				announceAssetAdded( AssetBaseInfo* assetInfo );
     virtual void				announceAssetUpdated( AssetBaseInfo* assetInfo );
@@ -105,7 +107,7 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )				{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-    AssetBaseInfo* 			addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
+    AssetBaseInfo* 			    addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen );
     AssetBaseInfo*				addAssetFile( enum EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
     bool						addAssetFile(   enum EAssetType      assetType,
@@ -138,9 +140,9 @@ public:
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
 
 protected:
-    virtual AssetBaseInfo*     createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen ) = 0;
-    virtual AssetBaseInfo*		createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
-    virtual AssetBaseInfo*     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
+    virtual AssetBaseInfo*      createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen ) = 0;
+    virtual AssetBaseInfo*      createAssetInfo( enum EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
+    virtual AssetBaseInfo*      createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
     void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }

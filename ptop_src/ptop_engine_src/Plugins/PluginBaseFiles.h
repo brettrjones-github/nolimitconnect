@@ -65,9 +65,10 @@ public:
 	virtual bool				fromGuiSetFileIsShared( std::string& fileName, bool isShared );
 	virtual bool				fromGuiGetIsFileShared( std::string& fileName );
 	virtual bool				fromGuiRemoveSharedFile( std::string& fileName );
-
 	// returns -1 if unknown else percent downloaded
 	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
+	virtual bool				fromGuiQueryFileHash( FileInfo& fileInfo );
+	virtual void				fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash );
 
     virtual void				onSharedFilesUpdated( uint16_t u16FileTypes ) override;
 

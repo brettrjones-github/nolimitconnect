@@ -390,11 +390,11 @@ AssetBaseInfo* AssetBaseMgr::addAssetFile( EAssetType assetType, const char* fil
 
 //============================================================================
 bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
-                                    const char*	fileName, 
+                                    const char*		fileName, 
 									VxGUID&			assetId,  
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
-									const char*	assetTag, 
+									const char*		assetTag, 
                                     int64_t			timestamp )
 {
 	AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
@@ -408,13 +408,13 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 
 //============================================================================
 bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
-                                    const char*	fileName, 
+                                    const char*		fileName, 
 									VxGUID&			assetId,  
 									VxGUID&		    creatorId, 
 									VxGUID&		    historyId, 
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
-									const char*	assetTag, 
+									const char*		assetTag, 
                                     int64_t			timestamp )
 {
 	AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
@@ -968,10 +968,8 @@ bool AssetBaseMgr::getFileFullName( VxSha1Hash& fileHashId, std::string& retFile
 bool AssetBaseMgr::fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter )
 {
 	lockResources();
-	std::vector<AssetBaseInfo*>::iterator iter;
-	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
+	for( auto* assetInfo : m_AssetBaseInfoList )
 	{
-		AssetBaseInfo* assetInfo = (*iter);
 		if( 0 != ( fileTypeFilter & assetInfo->getAssetType() ) )
 		{
 			if( assetInfo->isSharedFileAsset() || assetInfo->isInLibary() )
@@ -1184,6 +1182,46 @@ void AssetBaseMgr::addAssetMgrClient( AssetBaseCallbackInterface * client, bool 
 void AssetBaseMgr::onQueryHistoryAsset( AssetBaseInfo* assetInfo )
 {
 	m_Engine.getToGui().toGuiAssetSessionHistory( assetInfo );
+}
+
+//============================================================================
+bool AssetBaseMgr::fromGuiQueryFileHash( FileInfo& fileInfo )
+{
+	bool result{ false };
+	lockResources();
+	for( auto* assetInfo : m_AssetBaseInfoList )
+	{
+		if( fileInfo.getFileLength() == assetInfo->getAssetLength() && fileInfo.getFullFileName() == assetInfo->getAssetName() )
+		{
+			if( assetInfo->getAssetHashId().isHashValid() )
+			{
+				fileInfo.setFileHashId( assetInfo->getAssetHashId() );
+				result = true;
+			}
+
+			break;
+		}
+	}
+
+	unlockResources();
+	return result;
+}
+
+//============================================================================
+void AssetBaseMgr::fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash )
+{
+	lockResources();
+	for( auto* assetInfo : m_AssetBaseInfoList )
+	{
+		if( fileLen == assetInfo->getAssetLength() && fileName == assetInfo->getAssetName() )
+		{
+			assetInfo->setAssetHashId( fileHash );
+			updateDatabase( assetInfo );
+			break;
+		}
+	}
+
+	unlockResources();
 }
 
 /*

@@ -25,6 +25,9 @@ public:
     OfferBaseInfo( std::string fileName, uint64_t assetLen, uint16_t assetType );
     OfferBaseInfo( FileInfo& fileInfo );
 
+    virtual bool                addToBlob( PktBlobEntry& blob ) override;
+    virtual bool                extractFromBlob( PktBlobEntry& blob ) override;
+
 	virtual void				setOfferType( EOfferType assetType )	{ setAssetType( (EAssetType)assetType ); }
 	virtual EOfferType			getOfferType( void )					{ return (EOfferType)getAssetType(); }
 
@@ -54,4 +57,14 @@ public:
 
     virtual void				setIsSharedFileOffer( bool isSharedOffer ) { setIsSharedFileAsset( isSharedOffer ); }
     virtual bool				isSharedFileOffer( void )               { return isSharedFileAsset(); }
+
+    virtual void				setOfferMsg( std::string offerMsg )     { m_OfferMsg = offerMsg; }
+    virtual std::string&		getOfferMsg( void )                     { return m_OfferMsg; }
+
+    virtual void				setOfferExpireTime( int64_t expireTime ) { m_OfferExpireTime = expireTime; }
+    virtual int64_t             getOfferExpireTime( void )              { return m_OfferExpireTime; }
+
+protected:
+    std::string                 m_OfferMsg{ "" };
+    int64_t                     m_OfferExpireTime{ 0 };
 };

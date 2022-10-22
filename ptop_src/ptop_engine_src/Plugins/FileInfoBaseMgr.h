@@ -73,8 +73,9 @@ public:
 	virtual bool				fromGuiSetFileIsShared( std::string& fileName, bool isShared );
 	virtual bool				fromGuiGetIsFileShared( std::string& fileName );
 	virtual bool				fromGuiRemoveSharedFile( std::string& fileName );
-
 	virtual bool				fromGuiAddSharedFile( FileInfo& fileInfo, bool isShared );
+	virtual bool				fromGuiQueryFileHash( FileInfo& fileInfo );
+	virtual void				fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash );
 
 	virtual void				updateFileTypes( void );
 

@@ -390,6 +390,9 @@ public:
 
     virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission ) override;
 
+    virtual bool				fromGuiQueryFileHash( FileInfo& fileInfo ) override;
+    virtual void				fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash ) override;
+
 	//========================================================================
 	// to gui
 	//========================================================================

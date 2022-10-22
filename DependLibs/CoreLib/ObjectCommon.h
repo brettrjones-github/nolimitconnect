@@ -23,6 +23,7 @@
 #define OBJNAME_ACTIVITY_DOWNLOAD_ITEM_MENU				"ActivityDownloadItemMenu"
 #define OBJNAME_ACTIVITY_DOWNLOADS						"AppletDownloads"
 #define OBJNAME_ACTIVITY_FILE_SEARCH					"ActivityFileSearch"
+#define OBJNAME_ACTIVITY_GENERATE_HASH					"ActivityGenerateHash"
 #define OBJNAME_ACTIVITY_INFORMATION					"ActivityInformation"
 #define OBJNAME_ACTIVITY_IS_PORT_OPEN_TEST              "ActivityIsPortOpenTest"
 #define OBJNAME_ACTIVITY_MESSAGE_BOX					"ActivityMessageBox"
@@ -115,6 +116,9 @@
 #define OBJNAME_APPLET_NET_HOSTING_PAGE					"AppletNetHosting"
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
+
+#define OBJNAME_APPLET_OFFER_VIEW						"AppletOfferView"
+
 #define OBJNAME_APPLET_PERMISSION_LIST				    "AppletPermissionList"
 #define OBJNAME_APPLET_PERSONAL_RECORDER				"AppletPersonalRecorder"
 #define OBJNAME_APPLET_PERSONS_OFFER_LIST				"AppletPersonOfferList"

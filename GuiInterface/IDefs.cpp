@@ -1614,3 +1614,29 @@ bool IsHostARelayForUser( enum EHostType hostType )
         eHostTypeChatRoom == hostType ||
         eHostTypeRandomConnect == hostType;
 }
+
+//============================================================================
+bool IsPluginSingleSession( enum EPluginType pluginType )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeVoicePhone:
+    case ePluginTypePushToTalk:
+    case ePluginTypeVideoPhone:
+    case ePluginTypeTruthOrDare:
+    case ePluginTypeMessenger:
+    case ePluginTypeAdmin:
+    case ePluginTypeAboutMePageClient:
+    case ePluginTypeStoryboardClient:
+    case ePluginTypeFileShareClient:
+    case ePluginTypeCamClient:
+        return true;
+        break;
+
+    default:
+        break;
+    }
+
+    return false;
+}
+

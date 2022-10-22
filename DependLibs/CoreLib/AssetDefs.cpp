@@ -14,6 +14,7 @@
 #include "AssetDefs.h"
 #include "VxFileIsTypeFunctions.h"
 #include "VxDebug.h"
+#include "VxFileUtil.h"
 
 //============================================================================
 EAssetType VxFileNameToAssetType( std::string fileName )
@@ -23,11 +24,6 @@ EAssetType VxFileNameToAssetType( std::string fileName )
         LogMsg( LOG_ERROR, "VxFileNameToAssetType empty file name" );
         return eAssetTypeUnknown;
 
-    }
-    else if( !VxIsRecognizedFile( fileName ) )
-    {
-        LogMsg( LOG_WARN, "VxFileNameToAssetType unrecognized file" );
-        return eAssetTypeUnknown;
     }
     else if( VxIsPhotoFile( fileName ) )
     {
@@ -57,6 +53,11 @@ EAssetType VxFileNameToAssetType( std::string fileName )
     else if( VxIsThumbnailFile( fileName ) )
     {
         return eAssetTypeThumbnail;
+    }
+    else if( VxFileUtil::fileExists( fileName.c_str() ) )
+    {
+        LogMsg( LOG_WARN, "VxFileNameToAssetType unrecognized file but file exists" );
+        return eAssetTypeOtherFiles;
     }
     else
     {

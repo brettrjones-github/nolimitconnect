@@ -14,6 +14,8 @@
 
 #include "OfferBaseInfo.h"
 
+#include <PktLib/PktBlobEntry.h>
+
 //============================================================================
 OfferBaseInfo::OfferBaseInfo( std::string fileName )
 	: AssetInfo( VxFileNameToAssetType( fileName ), fileName )
@@ -30,4 +32,32 @@ OfferBaseInfo::OfferBaseInfo( std::string fileName, uint64_t assetLen, uint16_t 
 OfferBaseInfo::OfferBaseInfo( FileInfo& fileInfo )
 	: AssetInfo( fileInfo )
 {
+}
+
+//============================================================================
+bool OfferBaseInfo::addToBlob( PktBlobEntry& blob )
+{
+	blob.resetWrite();
+	if( AssetInfo::addToBlob( blob ) )
+	{
+		bool result = blob.setValue( m_OfferMsg );
+		result &= blob.getValue( m_UniqueId );
+		return result;
+	}
+
+	return false;
+}
+
+//============================================================================
+bool OfferBaseInfo::extractFromBlob( PktBlobEntry& blob )
+{
+	blob.resetRead();
+	if( AssetInfo::extractFromBlob( blob ) )
+	{
+		bool result = blob.getValue( m_OfferMsg );
+		result &= blob.getValue( m_AssetTag );
+		return result;
+	}
+
+	return false;
 }

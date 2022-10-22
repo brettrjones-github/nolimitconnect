@@ -189,7 +189,7 @@ bool PluginBaseFiles::fromGuiGetIsFileShared( std::string& fileName )
 
 //============================================================================
 // returns -1 if unknown else percent downloaded
-int PluginBaseFiles::fromGuiGetFileDownloadState( uint8_t * fileHashId )
+int PluginBaseFiles::fromGuiGetFileDownloadState( uint8_t* fileHashId )
 {
 	return -1;
 	int result = m_FileInfoMgr.fromGuiGetFileDownloadState( fileHashId );
@@ -199,6 +199,18 @@ int PluginBaseFiles::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 	}
 
 	return result;
+}
+
+//============================================================================
+bool PluginBaseFiles::fromGuiQueryFileHash( FileInfo& fileInfo )
+{
+	return m_FileInfoMgr.fromGuiQueryFileHash( fileInfo );
+}
+
+//============================================================================
+void PluginBaseFiles::fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash )
+{
+	m_FileInfoMgr.fromGuiFileHashGenerated( fileName, fileLen, fileHash );
 }
 
 //============================================================================

@@ -41,7 +41,7 @@ bool VxIsPhotoFile( std::string & cs )
 //============================================================================
 bool VxIsPhotoFileExtention( const char* pExt )
 {
-	return stristr( PHOTO_FILE_EXTENTIONS, pExt )?1:0;
+	return containsStringCaseInsensitive( PHOTO_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -54,7 +54,7 @@ bool VxIsAudioFile( std::string & cs )
 //============================================================================
 bool VxIsAudioFileExtention( const char* pExt )
 {
-	return stristr( AUDIO_FILE_EXTENTIONS, pExt )?1:0;
+	return containsStringCaseInsensitive( AUDIO_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -67,7 +67,7 @@ bool VxIsVideoFile( std::string &cs )
 //============================================================================
 bool VxIsVideoFileExtention( const char* pExt )
 {
-	return stristr( VIDEO_FILE_EXTENTIONS, pExt )?1:0;
+	return containsStringCaseInsensitive( VIDEO_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -81,7 +81,7 @@ bool VxIsDocumentFile( std::string &cs )
 //============================================================================
 bool VxIsDocumentFileExtention( const char* pExt )
 {
-	return stristr( DOCUMENT_FILE_EXTENTIONS, pExt )?1:0;
+	return containsStringCaseInsensitive( DOCUMENT_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -95,7 +95,7 @@ bool VxIsArcOrCDImageFile( std::string &cs )
 //============================================================================
 bool VxIsArcOrCDImageFileExtention( const char* pExt )
 {
-	return stristr( CDIMAGE_OR_ARC_FILE_EXTENTIONS, pExt )?1:0;
+	return containsStringCaseInsensitive( CDIMAGE_OR_ARC_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -109,7 +109,7 @@ bool VxIsExecutableFile( std::string &cs )
 //============================================================================
 bool VxIsExecutableFileExtention( const char* pExt )
 {
-	return stristr( EXECUTABLE_FILE_EXTENTIONS, pExt )?1:0;
+	return containsStringCaseInsensitive( EXECUTABLE_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -123,7 +123,7 @@ bool VxIsThumbnailFile( std::string &cs )
 //============================================================================
 bool VxIsThumbnailFileExtention( const char* pExt )
 {
-    return stristr( THUMBNAIL_FILE_EXTENTIONS, pExt )?1:0;
+    return containsStringCaseInsensitive( THUMBNAIL_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
@@ -137,14 +137,14 @@ bool VxIsRecognizedFile( std::string &cs )
 //============================================================================
 bool VxIsRecognizedFileExtention( const char* pExt )
 {
-	return stristr( COMBINED_FILE_EXTENTIONS, pExt )?0:1;
+	return containsStringCaseInsensitive( COMBINED_FILE_EXTENTIONS, pExt );
 }
 
 //============================================================================
 bool VxIsShortcutFileExtention( const char* pExt )
 {
 #ifdef TARGET_OS_WINDOWS
-	return stristr( pExt, "lnk" ) ? true : false;
+	return containsStringCaseInsensitive( pExt, "lnk" );
 #else
 	return false; // no support for linux yet
 #endif //TARGET_OS_WINDOWS

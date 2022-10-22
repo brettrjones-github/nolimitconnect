@@ -28,9 +28,10 @@
 #include <CoreLib/AssetDefs.h>
 #include <CoreLib/MediaCallbackInterface.h>
 
-class InetAddress;
-class FileShareSettings;
 class AssetBaseInfo;
+class FileShareSettings;
+class InetAddress;
+class VxSha1Hash;
 
 // Plugin server state
 enum EPluginServerState
@@ -413,5 +414,8 @@ public:
 	virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent ) = 0;
 
 	virtual void				fromGuiUpdatePluginPermission( EPluginType pluginType, EFriendState pluginPermission ) = 0;
+
+	virtual bool				fromGuiQueryFileHash( FileInfo& fileInfo ) = 0;
+	virtual void				fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash ) = 0;
 };
 

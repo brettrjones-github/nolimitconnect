@@ -43,7 +43,6 @@ public:
 	void						setFileName( std::string& fileName )		{ m_FileName = fileName; }
 	std::string&				getFileName( void )							{ return m_FileName; }
 
-
 protected:
 	VxSha1Hash					m_Sha1Hash;
 	VxGUID						m_AssetId;

@@ -368,7 +368,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent* netIdent )
 
 	case eScanTypePeopleSearch:
 		{
-			if( stristr( netIdent->getOnlineName(), m_SearchPkt.getSearchExpression() ) )
+			if( containsStringCaseInsensitive( netIdent->getOnlineName(), m_SearchPkt.getSearchExpression() ) )
 			{
 				bIsMatch = true;
 			}
@@ -378,7 +378,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent* netIdent )
 
 	case eScanTypeMoodMsgSearch:
 		{
-			if( stristr( netIdent->getOnlineDescription(), m_SearchPkt.getSearchExpression() ) )
+			if( containsStringCaseInsensitive( netIdent->getOnlineDescription(), m_SearchPkt.getSearchExpression() ) )
 			{
 				bIsMatch = true;
 			}
@@ -440,7 +440,7 @@ bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq* poPkt )
 
 	case eScanTypePeopleSearch:
 		{
-			if( stristr( netIdent->getOnlineName(), poPkt->getSearchExpression() ) )
+			if( containsStringCaseInsensitive( netIdent->getOnlineName(), poPkt->getSearchExpression() ) )
 			{
 				bIsMatch = true;
 			}
@@ -450,7 +450,7 @@ bool RcScan::isRemoteSearchMatch( VxNetIdent* netIdent, PktScanReq* poPkt )
 
 	case eScanTypeMoodMsgSearch:
 		{
-			if( stristr( netIdent->getOnlineDescription(), poPkt->getSearchExpression() ) )
+			if( containsStringCaseInsensitive( netIdent->getOnlineDescription(), poPkt->getSearchExpression() ) )
 			{
 				bIsMatch = true;
 			}

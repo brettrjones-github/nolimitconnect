@@ -166,6 +166,12 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& a
 }
 
 //============================================================================
+void AssetBaseInfo::clear( void )
+{
+	m_AssetName.clear();
+}
+
+//============================================================================
 bool AssetBaseInfo::addToBlob( PktBlobEntry& blob )
 {
 	blob.resetWrite();
@@ -174,7 +180,6 @@ bool AssetBaseInfo::addToBlob( PktBlobEntry& blob )
 		bool result = blob.setValue( m_AssetName );
 		result &= blob.setValue( m_UniqueId );
 		result &= blob.setValue( m_HistoryId );
-		result &= blob.setValue( m_UniqueId );
 		result &= blob.setValue( m_AssetHash );
 		result &= blob.setValue( m_s64AssetLen );
 		result &= blob.setValue( m_u16AssetType );
@@ -203,7 +208,6 @@ bool AssetBaseInfo::extractFromBlob( PktBlobEntry& blob )
 		bool result = blob.getValue( m_AssetName );
 		result &= blob.getValue( m_UniqueId );
 		result &= blob.getValue( m_HistoryId );
-		result &= blob.getValue( m_UniqueId );
 		result &= blob.getValue( m_AssetHash );
 		result &= blob.getValue( m_s64AssetLen );
 		result &= blob.getValue( m_u16AssetType );
@@ -278,6 +282,17 @@ bool AssetBaseInfo::isValidFile( void )
 	}
 
 	return valid;
+}
+
+//============================================================================
+bool AssetBaseInfo::isFileHashValid( void )
+{
+	if( !isFileAsset() )
+	{
+		return true;
+	}
+
+	return m_AssetHash.isHashValid();
 }
 
 //============================================================================

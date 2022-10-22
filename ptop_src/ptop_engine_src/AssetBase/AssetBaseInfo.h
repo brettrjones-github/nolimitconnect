@@ -54,13 +54,17 @@ public:
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
 
+    virtual void                clear( void );
+
     virtual bool                addToBlob( PktBlobEntry& blob ) override;
     virtual bool                extractFromBlob( PktBlobEntry& blob ) override;
 
     virtual bool				isValid( void );
     virtual bool				isValidFile( void );
+    virtual bool				isFileHashValid( void );
     virtual bool				isValidThumbnail( void );
     virtual bool				isMine( void );
+
     virtual bool                validateAssetExist( void );
 
     virtual bool				isDirectory( void );

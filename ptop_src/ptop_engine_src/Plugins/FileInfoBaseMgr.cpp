@@ -563,6 +563,50 @@ bool FileInfoBaseMgr::fromGuiAddSharedFile( FileInfo& fileInfo, bool isShared )
 }
 
 //============================================================================
+bool FileInfoBaseMgr::fromGuiQueryFileHash( FileInfo& fileInfo )
+{
+	bool foundHash = false;
+	lockFileList();
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	{
+		if( fileInfo.getFileLength() == iter->second.getFileLength() && fileInfo.getFullFileName() == iter->second.getFullFileName() )
+		{
+			if( iter->second.getFileHashId().isHashValid() )
+			{
+				fileInfo.setFileHashId( iter->second.getFileHashId() );
+				foundHash = true;
+			}
+
+			break;
+		}
+	}
+
+	unlockFileList();
+	return foundHash;
+}
+
+//============================================================================
+void FileInfoBaseMgr::fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash )
+{
+	lockFileList();
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	{
+		if( fileLen == iter->second.getFileLength() && fileName == iter->second.getFullFileName() )
+		{
+			if( !iter->second.getFileHashId().isHashValid() || !iter->second.getFileHashId().isEqualTo( fileHash.getHashData() ) )
+			{
+				iter->second.getFileHashId().setHashData( fileHash.getHashData() );
+				m_FileInfoDb.addFile( iter->second );
+			}
+
+			break;
+		}
+	}
+
+	unlockFileList();
+}
+
+//============================================================================
 bool FileInfoBaseMgr::loadAboutMePageStaticAssets( void )
 {
 	static std::vector<std::string>	g_AboutMeNameList{

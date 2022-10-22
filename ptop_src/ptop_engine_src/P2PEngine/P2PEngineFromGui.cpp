@@ -1783,3 +1783,36 @@ bool P2PEngine::fromGuiDownloadFileListCancel( EPluginType pluginType, VxGUID& o
 
 	return result;
 }
+
+//============================================================================
+bool P2PEngine::fromGuiQueryFileHash( FileInfo& fileInfo )
+{
+	if( fileInfo.getFileLength() && !fileInfo.getFullFileName().empty() )
+	{
+		bool result = getPluginLibraryServer().fromGuiQueryFileHash( fileInfo );
+		if( !result )
+		{
+			result = getPluginFileShareServer().fromGuiQueryFileHash( fileInfo );
+		}
+
+		if( !result )
+		{
+			result = getAssetMgr().fromGuiQueryFileHash( fileInfo );
+		}
+
+		return result;
+	}
+
+	return false;
+}
+
+//============================================================================
+void P2PEngine::fromGuiFileHashGenerated( std::string& fileName, int64_t fileLen, VxSha1Hash& fileHash )
+{
+	if( fileLen && !fileName.empty() )
+	{
+		getPluginLibraryServer().fromGuiFileHashGenerated( fileName, fileLen, fileHash );
+		getPluginFileShareServer().fromGuiFileHashGenerated( fileName, fileLen, fileHash );
+		getAssetMgr().fromGuiFileHashGenerated( fileName, fileLen, fileHash );
+	}
+}

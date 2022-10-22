@@ -817,10 +817,33 @@ void StdStringSplit( const std::wstring & csStr, const wchar_t cToken, std::vect
 	}
 }
 
+/// Try to find in the Haystack the Needle - ignore case
+bool findStringCaseInsensitive( const std::string& strHaystack, const std::string& strNeedle )
+{
+	auto it = std::search(
+		strHaystack.begin(), strHaystack.end(),
+		strNeedle.begin(), strNeedle.end(),
+		[]( char ch1, char ch2 ) { return std::toupper( ch1 ) == std::toupper( ch2 ); }
+	);
+	return (it != strHaystack.end());
+}
+
+//============================================================================
+bool containsStringCaseInsensitive( std::string strSearch, std::string strPattern )
+{
+	if( strSearch.empty() || strPattern.empty() )
+	{
+		return false;
+	}
+
+	return findStringCaseInsensitive( strSearch, strPattern );
+}
+
 //============================================================================
 //! same as strstr but case insensitive
 char * stristr( const char* pString, const char* pPattern )
 {
+	// this algorihum is wrong and returns false if encounters beginning letter and different next letter because 2 extensions start with same leter
 	if( !pString || !pPattern )
 		return 0;
 	int slen = ( int )strlen( pString );
