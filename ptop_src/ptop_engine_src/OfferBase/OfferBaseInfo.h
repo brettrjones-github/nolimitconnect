@@ -64,7 +64,11 @@ public:
     virtual void				setOfferExpireTime( int64_t expireTime ) { m_OfferExpireTime = expireTime; }
     virtual int64_t             getOfferExpireTime( void )              { return m_OfferExpireTime; }
 
+    virtual void                setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; }
+    virtual EPluginType         getPluginType( void )                   { return m_PluginType; }
+
 protected:
+    EPluginType                 m_PluginType{ePluginTypeInvalid};
     std::string                 m_OfferMsg{ "" };
     int64_t                     m_OfferExpireTime{ 0 };
 };

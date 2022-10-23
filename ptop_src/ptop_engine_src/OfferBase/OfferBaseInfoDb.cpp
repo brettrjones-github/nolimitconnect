@@ -22,7 +22,7 @@ namespace
 {
 	std::string 		TABLE_ASSETS	 				= "tblOffers";
 
-	std::string 		CREATE_COLUMNS_ASSETS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, isTemp INTEGER) ";
+    std::string 		CREATE_COLUMNS_ASSETS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, pluginType INTEGER, offerMsg TEXT, offerExpires BIGINT, isTemp INTEGER) ";
 
 	const int			COLUMN_OFFER_UNIQUE_ID			= 0;
 	const int			COLUMN_OFFER_CREATOR_ID			= 1;
@@ -39,7 +39,10 @@ namespace
     const int			COLUMN_ACCESSED_TIME			= 12;
 	const int			COLUMN_OFFER_TAG				= 13;
 	const int			COLUMN_OFFER_SEND_STATE			= 14;
-    const int			COLUMN_IS_TEMPORARY			    = 15;
+    const int			COLUMN_PLUGIN_TYPE			    = 15;
+    const int			COLUMN_OFFER_MSG			    = 16;
+    const int			COLUMN_OFFER_EXPIRES			= 17;
+    const int			COLUMN_IS_TEMPORARY			    = 18;
 }
 
 //============================================================================
@@ -118,18 +121,22 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
                                 VxGUID&			creatorId,
                                 VxGUID&			historyId,
                                 VxGUID&			thumbId,
-                                const char*	assetName,
+                                const char*     assetName,
                                 int64_t			assetLen,
                                 uint32_t		assetType,
                                 VxSha1Hash&		hashId,
                                 uint32_t		locationFlags,
                                 uint32_t		attibuteFlags,
+                                int8_t          pluginType,
+                                const char*     offerMsg,
+                                int64_t			offerExpires,
                                 int             isTemp,
                                 int64_t			creationTimeStamp,
                                 int64_t			modifiedTimeStamp,
                                 int64_t			accessedTimeStamp,
-                                const char*	assetTag,
-                                EOfferSendState sendState )
+                                const char*     assetTag,
+                                EOfferSendState sendState
+                                )
 {
     removeOffer( assetId );
 
@@ -153,8 +160,12 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
     bindList.add( (uint64_t)accessedTimeStamp );
     bindList.add( assetTag );
     bindList.add( (int)sendState );
+    bindList.add( (int)pluginType );
+    bindList.add( offerMsg );
+    bindList.add( (uint64_t)offerExpires);
+    bindList.add( isTemp);
 
-    RCODE rc = sqlExec( "INSERT INTO tblOffers (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblOffers (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,pluginType,offerMsg,offerExpires,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         bindList );
     if( rc )
     {
@@ -189,6 +200,9 @@ void OfferBaseInfoDb::addOffer( OfferBaseInfo* assetInfo )
 				assetInfo->getOfferHashId(),
 				assetInfo->getLocationFlags(),
                 (uint32_t)assetInfo->getAttributeFlags(),
+                assetInfo->getPluginType(),
+                assetInfo->getOfferMsg().length() ? assetInfo->getOfferMsg().c_str() : "",
+                assetInfo->getOfferExpireTime(),
                 assetInfo->isTemporary(),
                 assetInfo->getCreationTime(),
                 assetInfo->getModifiedTime(),
@@ -215,20 +229,28 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
 			assetName = cursor->getString( COLUMN_OFFER_NAME );
 			assetLen =  (uint64_t)cursor->getS64( COLUMN_OFFER_LEN );
 			assetType = (uint16_t)cursor->getS32( COLUMN_OFFER_TYPE );
+            uint16_t offerExpires =  (uint16_t)cursor->getS64( COLUMN_OFFER_EXPIRES );
 
 			OfferBaseInfo* assetInfo = createOfferInfo( assetName, assetLen, assetType );
 			assetInfo->setOfferId( cursor->getString( COLUMN_OFFER_UNIQUE_ID ) );
 			assetInfo->setCreatorId( cursor->getString( COLUMN_OFFER_CREATOR_ID ) );
 			assetInfo->setHistoryId( cursor->getString( COLUMN_OFFER_HISTORY_ID ) );
             assetInfo->setThumbId( cursor->getString( COLUMN_OFFER_THUMB_ID ) );
+
 			assetInfo->setOfferHashId( (uint8_t *)cursor->getBlob( COLUMN_OFFER_HASH_ID ) );
 			assetInfo->setLocationFlags( cursor->getS32( COLUMN_LOCATION_FLAGS ) );
-            assetInfo->setAttributeFlags( cursor->getS32( COLUMN_ATTRIBUTE_FLAGS ) );
+            assetInfo->setAttributeFlags( cursor->getS32( COLUMN_ATTRIBUTE_FLAGS ) );         
             assetInfo->setCreationTime(  (int64_t)cursor->getS64( COLUMN_CREATION_TIME ) );
             assetInfo->setModifiedTime(  (int64_t)cursor->getS64( COLUMN_MODIFIED_TIME ) );
+
             assetInfo->setAccessedTime(  (int64_t)cursor->getS64( COLUMN_ACCESSED_TIME ) );
 			assetInfo->setOfferTag( cursor->getString( COLUMN_OFFER_TAG ) );		
 			assetInfo->setOfferSendState( ( EOfferSendState )cursor->getS32( COLUMN_OFFER_SEND_STATE ) );
+
+            assetInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_PLUGIN_TYPE ) );
+            assetInfo->setOfferMsg( cursor->getString( COLUMN_OFFER_MSG ) );
+            assetInfo->setOfferExpireTime( offerExpires );
+            assetInfo->setIsTemporary( cursor->getS32( COLUMN_IS_TEMPORARY ) );
 
             vx_assert( assetInfo->isValid() );
 			

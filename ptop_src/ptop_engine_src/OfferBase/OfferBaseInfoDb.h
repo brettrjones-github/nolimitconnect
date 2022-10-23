@@ -37,17 +37,20 @@ public:
 											VxGUID&			creatorId, 
 											VxGUID&			historyId, 
                                             VxGUID&			thumbId, 
-											const char*	assetName, 
+                                            const char*     assetName,
 											int64_t			assetLen, 
 											uint32_t		assetType, 							
 											VxSha1Hash&		hashId, 
 											uint32_t		locationFlags, 
                                             uint32_t		attributedFlags, 
+                                            int8_t          pluginType,
+                                            const char*     offerMsg,
+                                            int64_t			offerExpires,
                                             int             isTemp,
                                             int64_t			createdTimestamp = 0,
                                             int64_t			modifiedTimestamp = 0,     
                                             int64_t			accessedTimestamp = 0,          
-											const char*	assetTag = "", 
+                                            const char*     assetTag = "",
 											EOfferSendState sendState = eOfferSendStateNone);
 
 	void 						addOffer( OfferBaseInfo* assetInfo );
