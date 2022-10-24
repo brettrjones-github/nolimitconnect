@@ -17,6 +17,17 @@
 #include <PktLib/PktBlobEntry.h>
 
 //============================================================================
+OfferBaseInfo::OfferBaseInfo( const OfferBaseInfo& rhs )
+	: AssetInfo( rhs )
+	, m_PluginType( rhs.m_PluginType )
+	, m_OfferMsg( rhs.m_OfferMsg )
+	, m_OfferExpireTime( rhs.m_OfferExpireTime )
+	, m_OfferResponse( rhs.m_OfferResponse )
+{
+
+}
+
+//============================================================================
 OfferBaseInfo::OfferBaseInfo( std::string fileName )
 	: AssetInfo( VxFileNameToAssetType( fileName ), fileName )
 {
@@ -35,13 +46,30 @@ OfferBaseInfo::OfferBaseInfo( FileInfo& fileInfo )
 }
 
 //============================================================================
+OfferBaseInfo& OfferBaseInfo::operator=( const OfferBaseInfo& rhs )
+{
+	if( this != &rhs )
+	{
+		*((AssetInfo*)this) = rhs;
+		m_PluginType = rhs.m_PluginType;
+		m_OfferMsg = rhs.m_OfferMsg;
+		m_OfferExpireTime = rhs.m_OfferExpireTime;
+		m_OfferResponse = rhs.m_OfferResponse;
+	}
+
+	return *this;
+}
+
+//============================================================================
 bool OfferBaseInfo::addToBlob( PktBlobEntry& blob )
 {
 	blob.resetWrite();
 	if( AssetInfo::addToBlob( blob ) )
 	{
-		bool result = blob.setValue( m_OfferMsg );
-		result &= blob.getValue( m_UniqueId );
+		bool result = blob.setValue( m_PluginType );
+		result &= blob.setValue( m_OfferMsg );
+		result &= blob.setValue( m_OfferExpireTime );
+		result &= blob.setValue( m_OfferResponse );
 		return result;
 	}
 
@@ -54,8 +82,10 @@ bool OfferBaseInfo::extractFromBlob( PktBlobEntry& blob )
 	blob.resetRead();
 	if( AssetInfo::extractFromBlob( blob ) )
 	{
-		bool result = blob.getValue( m_OfferMsg );
-		result &= blob.getValue( m_AssetTag );
+		bool result = blob.getValue( m_PluginType );
+		result &= blob.getValue( m_OfferMsg );
+		result &= blob.getValue( m_OfferExpireTime );
+		result &= blob.getValue( m_OfferResponse );
 		return result;
 	}
 

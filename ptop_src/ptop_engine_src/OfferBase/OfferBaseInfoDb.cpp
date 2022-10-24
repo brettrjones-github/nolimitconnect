@@ -20,9 +20,9 @@
 
 namespace
 {
-	std::string 		TABLE_ASSETS	 				= "tblOffers";
+	std::string 		TABLE_OFFERS	 				= "tblOffers";
 
-    std::string 		CREATE_COLUMNS_ASSETS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, pluginType INTEGER, offerMsg TEXT, offerExpires BIGINT, isTemp INTEGER) ";
+    std::string 		CREATE_COLUMNS_OFFERS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, pluginType INTEGER, offerMsg TEXT, offerExpires BIGINT, isTemp INTEGER, offerResponse INTEGER) ";
 
 	const int			COLUMN_OFFER_UNIQUE_ID			= 0;
 	const int			COLUMN_OFFER_CREATOR_ID			= 1;
@@ -43,6 +43,7 @@ namespace
     const int			COLUMN_OFFER_MSG			    = 16;
     const int			COLUMN_OFFER_EXPIRES			= 17;
     const int			COLUMN_IS_TEMPORARY			    = 18;
+	const int			COLUMN_OFFER_RESPONSE			= 19;
 }
 
 //============================================================================
@@ -57,7 +58,7 @@ OfferBaseInfoDb::OfferBaseInfoDb( OfferBaseMgr& hostListMgr, const char*dbName  
 RCODE OfferBaseInfoDb::onCreateTables( int iDbVersion )
 {
 	lockOfferInfoDb();
-	std::string strCmd = "CREATE TABLE " + TABLE_ASSETS + CREATE_COLUMNS_ASSETS;
+	std::string strCmd = "CREATE TABLE " + TABLE_OFFERS + CREATE_COLUMNS_OFFERS;
 	RCODE rc = sqlExec(strCmd);
 	unlockOfferInfoDb();
 	return rc;
@@ -68,7 +69,7 @@ RCODE OfferBaseInfoDb::onCreateTables( int iDbVersion )
 RCODE OfferBaseInfoDb::onDeleteTables( int iOldVersion ) 
 {
 	lockOfferInfoDb();
-	std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_ASSETS;
+	std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_OFFERS;
 	RCODE rc = sqlExec(strCmd);
 	unlockOfferInfoDb();
 	return rc;
@@ -78,7 +79,7 @@ RCODE OfferBaseInfoDb::onDeleteTables( int iOldVersion )
 void OfferBaseInfoDb::purgeAllOffers( void ) 
 {
 	lockOfferInfoDb();
-	std::string strCmd = "DELETE FROM " + TABLE_ASSETS;
+	std::string strCmd = "DELETE FROM " + TABLE_OFFERS;
 	RCODE rc = sqlExec( strCmd );
 	unlockOfferInfoDb();
 	if( rc )
@@ -130,6 +131,7 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
                                 int8_t          pluginType,
                                 const char*     offerMsg,
                                 int64_t			offerExpires,
+								EOfferResponse	offerResponse,
                                 int             isTemp,
                                 int64_t			creationTimeStamp,
                                 int64_t			modifiedTimeStamp,
@@ -164,12 +166,13 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
     bindList.add( offerMsg );
     bindList.add( (uint64_t)offerExpires);
     bindList.add( isTemp);
+	bindList.add( (int)offerResponse );
 
-    RCODE rc = sqlExec( "INSERT INTO tblOffers (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,pluginType,offerMsg,offerExpires,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblOffers (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,pluginType,offerMsg,offerExpires,isTemp,offerResponse) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         bindList );
     if( rc )
     {
-        LogMsg( LOG_ERROR, "OfferBaseInfoDb::addOffer error %d\n", rc );
+        LogMsg( LOG_ERROR, "OfferBaseInfoDb::addOffer error %d", rc );
     }
 }
 
@@ -183,7 +186,7 @@ void OfferBaseInfoDb::updateOfferSendState( VxGUID& assetId, EOfferSendState sen
 		bindList );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "OfferBaseInfoDb::addOffer error %d\n", rc );
+		LogMsg( LOG_ERROR, "OfferBaseInfoDb::addOffer error %d", rc );
 	}
 }
 
@@ -203,6 +206,7 @@ void OfferBaseInfoDb::addOffer( OfferBaseInfo* assetInfo )
                 assetInfo->getPluginType(),
                 assetInfo->getOfferMsg().length() ? assetInfo->getOfferMsg().c_str() : "",
                 assetInfo->getOfferExpireTime(),
+				assetInfo->getOfferResponse(),
                 assetInfo->isTemporary(),
                 assetInfo->getCreationTime(),
                 assetInfo->getModifiedTime(),
@@ -251,6 +255,7 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
             assetInfo->setOfferMsg( cursor->getString( COLUMN_OFFER_MSG ) );
             assetInfo->setOfferExpireTime( offerExpires );
             assetInfo->setIsTemporary( cursor->getS32( COLUMN_IS_TEMPORARY ) );
+			assetInfo->setOfferResponse( (EOfferResponse)cursor->getS32( COLUMN_OFFER_RESPONSE ) );
 
             vx_assert( assetInfo->isValid() );
 			

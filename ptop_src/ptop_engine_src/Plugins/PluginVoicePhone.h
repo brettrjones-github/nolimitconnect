@@ -33,9 +33,9 @@ public:
 	virtual void				fromGuiStartPluginSession( VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 	virtual void				fromGuiStopPluginSession( VxNetIdent* netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, const char* pMsg ); 
+    virtual bool				fromGuiInstMsg(	VxNetIdent*	netIdent, const char* pMsg ) override;
 
-	virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
+    virtual void				replaceConnection			( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
 
 protected:
 	virtual void				onPktPluginOfferReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
@@ -48,15 +48,15 @@ protected:
 	
 	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual	void				onContactWentOffline		( VxNetIdent*	netIdent, VxSktBase* sktBase );
-	virtual	void				onConnectionLost			( VxSktBase* sktBase );
+    virtual	void				onContactWentOffline		( VxNetIdent*	netIdent, VxSktBase* sktBase ) override;
+    virtual	void				onConnectionLost			( VxSktBase* sktBase ) override;
 
-	virtual void				onSessionStart				( PluginSessionBase* poSession, bool pluginIsLocked );
-	virtual void				onSessionEnded				( PluginSessionBase* poSession, bool pluginIsLocked, EOfferResponse offerResponse );
+    virtual void				onSessionStart				( PluginSessionBase* poSession, bool pluginIsLocked ) override;
+    virtual void				onSessionEnded				( PluginSessionBase* poSession, bool pluginIsLocked, EOfferResponse offerResponse ) override;
 
 protected:
-	virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio );
-	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
+    virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio ) override;
+    virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen ) override;
 
 	PluginSessionMgr			m_PluginSessionMgr;
 	VoiceFeedMgr				m_VoiceFeedMgr;

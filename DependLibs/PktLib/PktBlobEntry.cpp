@@ -563,6 +563,22 @@ bool PktBlobEntry::setValue( void * pvRetBuf, int iBufLen )
 }
 
 //============================================================================
+bool PktBlobEntry::setValue( EOfferResponse& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ getDataIdx() ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+
+//============================================================================
 // setValues
 //============================================================================
 //============================================================================
@@ -1030,6 +1046,19 @@ bool PktBlobEntry::getValue( void* pvRetBuf, int& iBufLen )
             incDataRead( dataLen );
             return true;
         }
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( EOfferResponse& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (EOfferResponse)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
     }
 
     return false;

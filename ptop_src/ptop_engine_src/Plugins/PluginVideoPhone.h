@@ -51,18 +51,18 @@ protected:
 
 	virtual void				onPktSessionStopReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-	virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
-	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
+    virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio ) override;
+    virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen ) override;
 
-	virtual void				callbackVideoPktPic( void * userData, VxGUID& onlineId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum );
-	virtual void				callbackVideoPktPicChunk( void * userData, VxGUID& onlineId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum );
+    virtual void				callbackVideoPktPic( void * userData, VxGUID& onlineId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum ) override;
+    virtual void				callbackVideoPktPicChunk( void * userData, VxGUID& onlineId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum ) override;
 
-	virtual void				onSessionStart( PluginSessionBase* session, bool pluginIsLocked );
-	virtual void				onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse );
+    virtual void				onSessionStart( PluginSessionBase* session, bool pluginIsLocked ) override;
+    virtual void				onSessionEnded( PluginSessionBase* session, bool pluginIsLocked, EOfferResponse offerResponse ) override;
 
-	virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt );
-	virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase );
-	virtual void				onConnectionLost( VxSktBase* sktBase );
+    virtual void				replaceConnection( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
+    virtual void				onContactWentOffline( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
+    virtual void				onConnectionLost( VxSktBase* sktBase ) override;
 
 
 	//=== vars ===//

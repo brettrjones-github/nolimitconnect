@@ -43,7 +43,6 @@ PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 //! user wants to send offer to friend.. return false if cannot connect
 bool PluginVoicePhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
 {
-	bool result = false;
 	P2PSession * poSession = 0;
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( lclSessionId.isVxGUIDValid() )

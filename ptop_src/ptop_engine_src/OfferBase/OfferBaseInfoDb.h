@@ -46,6 +46,7 @@ public:
                                             int8_t          pluginType,
                                             const char*     offerMsg,
                                             int64_t			offerExpires,
+											EOfferResponse  offerResponse,
                                             int             isTemp,
                                             int64_t			createdTimestamp = 0,
                                             int64_t			modifiedTimestamp = 0,     
