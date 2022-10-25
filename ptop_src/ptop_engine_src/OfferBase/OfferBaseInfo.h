@@ -40,10 +40,6 @@ public:
     virtual void				setOfferLength( int64_t assetLength )   { setAssetLength( assetLength ); }
     virtual int64_t				getOfferLength( void )                  { return getAssetLength(); }
 
-    virtual void				setOfferId( VxGUID& uniqueId )          { setAssetUniqueId( uniqueId ); }
-    virtual void				setOfferId( const char* assetId )       { setAssetUniqueId( assetId ); }
-    virtual VxGUID&             getOfferId( void )                      { return getAssetUniqueId(); }
-
     virtual void				setOfferHashId( VxSha1Hash& hashId )    { setAssetHashId( hashId ); }
     virtual void				setOfferHashId( uint8_t* hashId )       { setAssetHashId( hashId ); }
     virtual VxSha1Hash&         getOfferHashId( void )                  { return getAssetHashId(); }
@@ -70,6 +66,10 @@ public:
     virtual void                setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; }
     virtual EPluginType         getPluginType( void )                   { return m_PluginType; }
 
+    virtual void				setOfferId( VxGUID& sessionId )         { m_OfferId = sessionId; }
+    virtual void				setOfferId( const char* sessionId )     { m_OfferId.fromVxGUIDHexString( sessionId ); }
+    virtual VxGUID&             getOfferId( void )                      { return m_OfferId; }
+
     virtual void                setOfferResponse( EOfferResponse offerResponse ) { m_OfferResponse = offerResponse; }
     virtual EOfferResponse      getOfferResponse( void )                { return m_OfferResponse; }
 
@@ -77,5 +77,6 @@ protected:
     EPluginType                 m_PluginType{ePluginTypeInvalid};
     std::string                 m_OfferMsg{ "" };
     int64_t                     m_OfferExpireTime{ 0 };
+    VxGUID                      m_OfferId;
     EOfferResponse              m_OfferResponse{ eOfferResponseNotSet };
 };
