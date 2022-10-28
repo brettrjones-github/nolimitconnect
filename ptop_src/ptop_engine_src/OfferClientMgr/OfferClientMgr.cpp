@@ -32,7 +32,7 @@
 
 //============================================================================
 OfferClientMgr::OfferClientMgr( P2PEngine& engine, const char* dbName, const char* stateDbName )
-: OfferBaseMgr( engine, dbName, stateDbName, eOfferMgrTypeOfferClient )
+: OfferBaseMgr( engine, dbName, stateDbName, eOfferMgrClient )
 , m_OfferClientInfoDb( dynamic_cast<OfferClientInfoDb&>(OfferBaseMgr::getOfferInfoDb()) )
 , m_OfferClientInfoList( getOfferBaseInfoList() )
 {

@@ -22,7 +22,7 @@ namespace
 {
 	std::string 		TABLE_OFFERS	 				= "tblOffers";
 
-    std::string 		CREATE_COLUMNS_OFFERS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, pluginType INTEGER, offerMsg TEXT, offerExpires BIGINT, isTemp INTEGER, offerResponse INTEGER, offerId TEXT ) ";
+    std::string 		CREATE_COLUMNS_OFFERS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, pluginType INTEGER, offerMsg TEXT, offerExpires BIGINT, isTemp INTEGER, offerResponse INTEGER, offerId TEXT, offerMgr INTEGER ) ";
 
 	const int			COLUMN_OFFER_UNIQUE_ID			= 0;
 	const int			COLUMN_OFFER_CREATOR_ID			= 1;
@@ -45,6 +45,7 @@ namespace
     const int			COLUMN_IS_TEMPORARY			    = 18;
 	const int			COLUMN_OFFER_RESPONSE			= 19;
 	const int			COLUMN_OFFER_ID					= 20;
+	const int			COLUMN_OFFER_MGR				= 21;
 }
 
 //============================================================================
@@ -109,11 +110,11 @@ void OfferBaseInfoDb::removeOffer( VxGUID& offerId )
 }
 
 //============================================================================
-void OfferBaseInfoDb::removeOffer( OfferBaseInfo* assetInfo )
+void OfferBaseInfoDb::removeOffer( OfferBaseInfo* offerInfo )
 {
 	// the bind string is not copied so must be in memory until sql is executed
-	//DbBindList bindList( assetInfo->getOfferId().toHexString().c_str() );
-	std::string hexId = assetInfo->getOfferId().toHexString();
+	//DbBindList bindList( offerInfo->getOfferId().toHexString().c_str() );
+	std::string hexId = offerInfo->getOfferId().toHexString();
 	DbBindList bindList( hexId.c_str() );
 	sqlExec( "DELETE FROM tblOffers WHERE offerId=?", bindList );
 }
@@ -134,6 +135,7 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
                                 int64_t			offerExpires,
 								VxGUID&			offerId,
 								EOfferResponse	offerResponse,
+								EOfferMgrType	offerMgr,
                                 int             isTemp,
                                 int64_t			creationTimeStamp,
                                 int64_t			modifiedTimeStamp,
@@ -171,8 +173,9 @@ void OfferBaseInfoDb::addOffer( VxGUID&			assetId,
     bindList.add( isTemp);
 	bindList.add( (int)offerResponse );
 	bindList.add( offerIdStr.c_str() );
+	bindList.add( (int)offerMgr );
 
-    RCODE rc = sqlExec( "INSERT INTO tblOffers (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,pluginType,offerMsg,offerExpires,isTemp,offerResponse,offerId) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblOffers (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,pluginType,offerMsg,offerExpires,isTemp,offerResponse,offerId,offerMgr) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         bindList );
     if( rc )
     {
@@ -195,29 +198,30 @@ void OfferBaseInfoDb::updateOfferSendState( VxGUID& assetId, EOfferSendState sen
 }
 
 //============================================================================
-void OfferBaseInfoDb::addOffer( OfferBaseInfo* assetInfo )
+void OfferBaseInfoDb::addOffer( OfferBaseInfo* offerInfo )
 {
-	addOffer(	assetInfo->getOfferId(),
-				assetInfo->getCreatorId(),
-				assetInfo->getHistoryId(),
-                assetInfo->getThumbId(),
-				assetInfo->getOfferName().c_str(),
-				assetInfo->getOfferLength(),
-				(uint32_t)assetInfo->getOfferType(),				
-				assetInfo->getOfferHashId(),
-				assetInfo->getLocationFlags(),
-                (uint32_t)assetInfo->getAttributeFlags(),
-                assetInfo->getPluginType(),
-                assetInfo->getOfferMsg().length() ? assetInfo->getOfferMsg().c_str() : "",
-                assetInfo->getOfferExpireTime(),
-				assetInfo->getOfferId(),
-				assetInfo->getOfferResponse(),
-                assetInfo->isTemporary(),
-                assetInfo->getCreationTime(),
-                assetInfo->getModifiedTime(),
-                assetInfo->getAccessedTime(),
-				assetInfo->getOfferTag().length() ? assetInfo->getOfferTag().c_str() : "",
-				assetInfo->getOfferSendState()
+	addOffer(	offerInfo->getOfferId(),
+				offerInfo->getCreatorId(),
+				offerInfo->getHistoryId(),
+                offerInfo->getThumbId(),
+				offerInfo->getOfferName().c_str(),
+				offerInfo->getOfferLength(),
+				(uint32_t)offerInfo->getOfferType(),				
+				offerInfo->getOfferHashId(),
+				offerInfo->getLocationFlags(),
+                (uint32_t)offerInfo->getAttributeFlags(),
+                offerInfo->getPluginType(),
+                offerInfo->getOfferMsg().length() ? offerInfo->getOfferMsg().c_str() : "",
+                offerInfo->getOfferExpireTime(),
+				offerInfo->getOfferId(),
+				offerInfo->getOfferResponse(),
+				offerInfo->getOfferMgr(),
+                offerInfo->isTemporary(),
+                offerInfo->getCreationTime(),
+                offerInfo->getModifiedTime(),
+                offerInfo->getAccessedTime(),
+				offerInfo->getOfferTag().length() ? offerInfo->getOfferTag().c_str() : "",
+				offerInfo->getOfferSendState()
                 );
 }
 
@@ -240,32 +244,33 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
 			assetType = (uint16_t)cursor->getS32( COLUMN_OFFER_TYPE );
             uint16_t offerExpires =  (uint16_t)cursor->getS64( COLUMN_OFFER_EXPIRES );
 
-			OfferBaseInfo* assetInfo = createOfferInfo( assetName, assetLen, assetType );
-			assetInfo->setOfferId( cursor->getString( COLUMN_OFFER_UNIQUE_ID ) );
-			assetInfo->setCreatorId( cursor->getString( COLUMN_OFFER_CREATOR_ID ) );
-			assetInfo->setHistoryId( cursor->getString( COLUMN_OFFER_HISTORY_ID ) );
-            assetInfo->setThumbId( cursor->getString( COLUMN_OFFER_THUMB_ID ) );
+			OfferBaseInfo* offerInfo = new OfferBaseInfo( assetName, assetLen, assetType );
+			offerInfo->setOfferId( cursor->getString( COLUMN_OFFER_UNIQUE_ID ) );
+			offerInfo->setCreatorId( cursor->getString( COLUMN_OFFER_CREATOR_ID ) );
+			offerInfo->setHistoryId( cursor->getString( COLUMN_OFFER_HISTORY_ID ) );
+            offerInfo->setThumbId( cursor->getString( COLUMN_OFFER_THUMB_ID ) );
 
-			assetInfo->setOfferHashId( (uint8_t *)cursor->getBlob( COLUMN_OFFER_HASH_ID ) );
-			assetInfo->setLocationFlags( cursor->getS32( COLUMN_LOCATION_FLAGS ) );
-            assetInfo->setAttributeFlags( cursor->getS32( COLUMN_ATTRIBUTE_FLAGS ) );         
-            assetInfo->setCreationTime(  (int64_t)cursor->getS64( COLUMN_CREATION_TIME ) );
-            assetInfo->setModifiedTime(  (int64_t)cursor->getS64( COLUMN_MODIFIED_TIME ) );
+			offerInfo->setOfferHashId( (uint8_t *)cursor->getBlob( COLUMN_OFFER_HASH_ID ) );
+			offerInfo->setLocationFlags( cursor->getS32( COLUMN_LOCATION_FLAGS ) );
+            offerInfo->setAttributeFlags( cursor->getS32( COLUMN_ATTRIBUTE_FLAGS ) );         
+            offerInfo->setCreationTime(  (int64_t)cursor->getS64( COLUMN_CREATION_TIME ) );
+            offerInfo->setModifiedTime(  (int64_t)cursor->getS64( COLUMN_MODIFIED_TIME ) );
 
-            assetInfo->setAccessedTime(  (int64_t)cursor->getS64( COLUMN_ACCESSED_TIME ) );
-			assetInfo->setOfferTag( cursor->getString( COLUMN_OFFER_TAG ) );		
-			assetInfo->setOfferSendState( ( EOfferSendState )cursor->getS32( COLUMN_OFFER_SEND_STATE ) );
+            offerInfo->setAccessedTime(  (int64_t)cursor->getS64( COLUMN_ACCESSED_TIME ) );
+			offerInfo->setOfferTag( cursor->getString( COLUMN_OFFER_TAG ) );		
+			offerInfo->setOfferSendState( ( EOfferSendState )cursor->getS32( COLUMN_OFFER_SEND_STATE ) );
 
-            assetInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_PLUGIN_TYPE ) );
-            assetInfo->setOfferMsg( cursor->getString( COLUMN_OFFER_MSG ) );
-            assetInfo->setOfferExpireTime( offerExpires );
-            assetInfo->setIsTemporary( cursor->getS32( COLUMN_IS_TEMPORARY ) );
-			assetInfo->setOfferResponse( (EOfferResponse)cursor->getS32( COLUMN_OFFER_RESPONSE ) );
-			assetInfo->setOfferId( cursor->getString( COLUMN_OFFER_ID ) );
+            offerInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_PLUGIN_TYPE ) );
+            offerInfo->setOfferMsg( cursor->getString( COLUMN_OFFER_MSG ) );
+            offerInfo->setOfferExpireTime( offerExpires );
+            offerInfo->setIsTemporary( cursor->getS32( COLUMN_IS_TEMPORARY ) );
+			offerInfo->setOfferResponse( (EOfferResponse)cursor->getS32( COLUMN_OFFER_RESPONSE ) );
+			offerInfo->setOfferId( cursor->getString( COLUMN_OFFER_ID ) );
+			offerInfo->setOfferMgr( (EOfferMgrType)cursor->getS32( COLUMN_OFFER_MGR ) );
 
-            vx_assert( assetInfo->isValid() );
+            vx_assert( offerInfo->isValid() );
 			
-			insertOfferInTimeOrder( assetInfo, OfferList );
+			insertOfferInTimeOrder( offerInfo, OfferList );
 		}
 
 		cursor->close();
@@ -275,20 +280,20 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
 } 
 
 //============================================================================
-void OfferBaseInfoDb::insertOfferInTimeOrder( OfferBaseInfo*assetInfo, std::vector<OfferBaseInfo*>& assetList )
+void OfferBaseInfoDb::insertOfferInTimeOrder( OfferBaseInfo* offerInfo, std::vector<OfferBaseInfo*>& assetList )
 {
-    vx_assert( assetInfo->isValid() );
+    vx_assert( offerInfo->isValid() );
 
 	std::vector<OfferBaseInfo*>::iterator iter;
 	for( iter = assetList.begin(); iter != assetList.end(); ++iter )
 	{
-		if( (*iter)->getCreationTime() > assetInfo->getCreationTime() )
+		if( (*iter)->getCreationTime() > offerInfo->getCreationTime() )
 		{
-			assetList.insert( iter, assetInfo );
+			assetList.insert( iter, offerInfo );
 			return;
 		}
 	}
 
-	assetList.push_back( assetInfo );
+	assetList.push_back( offerInfo );
 }
 

@@ -147,7 +147,6 @@ HEADERS += \
     $$PWD/ptop_src/ptop_engine_src/NetworkTest/NetworkTestBase.h \
     $$PWD/ptop_src/ptop_engine_src/NetworkTest/PingResponseServer.h \
     $$PWD/ptop_src/ptop_engine_src/NetworkTest/RunUrlAction.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseInfo.h \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseInfoDb.h \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseMgr.h \
@@ -156,24 +155,8 @@ HEADERS += \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseXferDb.h \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseXferMgr.h \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseXferSession.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientCallbackInterface.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientInfo.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientInfoDb.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientRxSession.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientTxSession.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientXferDb.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientXferMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientXferSession.h \
-	$$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostCallbackInterface.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostInfo.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostInfoDb.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostRxSession.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostTxSession.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostXferDb.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostXferMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostXferSession.h \
+    $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferMgr.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/BrowserHttpConnection.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/ContactList.h \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineParams.h \
@@ -397,22 +380,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseXferDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseXferMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferBaseXferSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientInfo.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientInfoDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientRxSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientTxSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientXferDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientXferMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferClientMgr/OfferClientXferSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostInfo.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostInfoDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostRxSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostTxSession.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostXferDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostXferMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/OfferHostMgr/OfferHostXferSession.cpp \
+    $$PWD/ptop_src/ptop_engine_src/OfferBase/OfferMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/BrowserHttpConnection.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/ContactList.cpp \
     $$PWD/ptop_src/ptop_engine_src/P2PEngine/EngineParams.cpp \

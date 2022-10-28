@@ -16,6 +16,9 @@
 
 #include <NetLib/VxXferDefs.h>
 
+#define AUDIO_SAMPLE_RATE       16000
+#define AUDIO_CHUNK_SIZE        1280
+
 #define SECOND_MS               1000
 #define SECONDS_2_MS            (SECOND_MS * 2)
 #define SECONDS_3_MS            (SECOND_MS * 3)
@@ -79,9 +82,20 @@ enum ECacheType
     eMaxCacheType
 };
 
+enum ECallState
+{
+    eCallStateInvalid = 0,
+    eCallStateWaiting,
+    eCallStateCalling,
+    eCallStateInCall,
+    eCallStateHangedUp,
+
+    eMaxCallState
+};
+
 enum ECommErr
 {
-    eCommErrNone                 = 0,
+    eCommErrNone = 0,
     eCommErrInvalidPkt,
     eCommErrUserOffline,
     eCommErrSearchTextToShort, 
@@ -652,10 +666,10 @@ enum EOfferAction
 
 enum EOfferMgrType
 {
-    eOfferMgrTypeNone,
-    eOfferMgrTypeOfferBase,
-    eOfferMgrTypeOfferClient,
-    eOfferMgrTypeOfferHost,
+    eOfferMgrNotSet = 0,
+    eOfferMgrClient,
+    eOfferMgrHost,
+    eOfferMgrPeer,
 
     eMaxOfferMgrType
 };
@@ -1017,6 +1031,19 @@ enum EScanType
     eScanTypeStoryBoard,		    //!< Search for contacts with modified Story Board Web Page
 
     eMaxScanType
+};
+
+enum ESessionState
+{
+    eSessionStateUnknown = 0,
+    eSessionStateWaitingResponse = 1,
+    eSessionStateRejected = 2,
+    eSessionStateInSession = 3,
+    eSessionStateSessionEnded = 4,
+    eSessionContactOffline = 5,
+    eSessionUserExitedSession = 6,
+
+    eMaxSessionState
 };
 
 enum ESearchType

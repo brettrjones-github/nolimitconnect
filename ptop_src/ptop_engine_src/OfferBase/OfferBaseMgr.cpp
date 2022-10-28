@@ -15,11 +15,9 @@
 #include "OfferBaseMgr.h"
 #include "OfferBaseInfo.h"
 #include "OfferBaseInfoDb.h"
-#include "OfferBaseCallbackInterface.h"
+#include "OfferCallbackInterface.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-#include <ptop_src/ptop_engine_src/OfferClientMgr/OfferClientInfoDb.h>
-#include <ptop_src/ptop_engine_src/OfferHostMgr/OfferHostInfoDb.h>
 #include <ptop_src/ptop_engine_src/Plugins/FileInfo.h>
 
 #include <GuiInterface/IToGui.h>
@@ -46,7 +44,7 @@ namespace
 		OfferBaseMgr * poMgr = (OfferBaseMgr *)poThread->getThreadUserParam();
         if( poMgr )
         {
-            poMgr->assetInfoMgrStartup( poThread );
+            poMgr->offerInfoMgrStartup( poThread );
         }
 
 		poThread->threadAboutToExit();
@@ -58,30 +56,8 @@ namespace
 OfferBaseMgr::OfferBaseMgr( P2PEngine& engine, const char* dbName, const char* stateDbName, EOfferMgrType assetMgrType )
 : m_Engine( engine )
 , m_OfferMgrType( assetMgrType )
-, m_OfferBaseInfoDb( createOfferInfoDb( dbName, assetMgrType ) )
+, m_OfferBaseInfoDb( *this, dbName )
 {
-}
-
-//============================================================================
-OfferBaseMgr::~OfferBaseMgr()
-{
-	delete &m_OfferBaseInfoDb;
-}
-
-//============================================================================
-OfferBaseInfoDb& OfferBaseMgr::createOfferInfoDb( const char* dbName, EOfferMgrType assetMgrType )
-{
-    switch( assetMgrType )
-    {
-    case eOfferMgrTypeOfferClient:
-        return *(new OfferClientInfoDb( *this, dbName ));
-    case eOfferMgrTypeOfferHost:
-        return *(new OfferHostInfoDb( *this, dbName ));
-
-    default:
-        vx_assert( false );
-        return *(new OfferClientInfoDb( *this, dbName ));
-    }
 }
 
 //============================================================================
@@ -89,13 +65,26 @@ void OfferBaseMgr::fromGuiUserLoggedOn( void )
 {
 	if( !m_Initialized )
 	{
+
+		// user specific directory should be set
+		std::string dbFileName = VxGetSettingsDirectory();
+		dbFileName += m_OfferBaseInfoDb.getDatabaseName();
+		lockResources();
+		m_OfferBaseInfoDb.dbShutdown();
+		m_OfferBaseInfoDb.dbStartup( 1, dbFileName );
+
+		clearOfferInfoList();
+		m_OfferBaseInfoDb.getAllOffers( m_OfferBaseInfoList );
+
+		unlockResources();
 		m_Initialized = true;
+
 		m_GenHashThread.startThread( (VX_THREAD_FUNCTION_T)OfferBaseMgrGenHashIdsThreadFunc, this, "OfferBaseMgrGenHash" );			
 	}
 }
 
 //============================================================================
-void OfferBaseMgr::assetInfoMgrStartup( VxThread* startupThread )
+void OfferBaseMgr::offerInfoMgrStartup( VxThread* startupThread )
 {
 	if( startupThread->isAborted() )
 		return;
@@ -116,7 +105,7 @@ void OfferBaseMgr::assetInfoMgrStartup( VxThread* startupThread )
 }
 
 //============================================================================
-void OfferBaseMgr::assetInfoMgrShutdown( void )
+void OfferBaseMgr::offerInfoMgrShutdown( void )
 {
 	m_GenHashThread.abortThreadRun( true );
 	m_GenHashSemaphore.signal();
@@ -169,7 +158,7 @@ void OfferBaseMgr::generateHashIds( VxThread* genHashThread )
 				}
 
 				std::vector<OfferBaseInfo*>::iterator iter;
-				OfferBaseInfo* assetInfo = 0;
+				OfferBaseInfo* offerInfo = 0;
 				lockResources();
 				// move from waiting to completed
 				for( iter = m_WaitingForHastList.begin(); iter != m_WaitingForHastList.end(); ++iter )
@@ -177,28 +166,27 @@ void OfferBaseMgr::generateHashIds( VxThread* genHashThread )
 					OfferBaseInfo* inListOfferBaseInfo = *iter;
 					if( inListOfferBaseInfo->getOfferName() == thisFile )
 					{
-						assetInfo = inListOfferBaseInfo;
+						offerInfo = inListOfferBaseInfo;
 						m_WaitingForHastList.erase( iter );
-						assetInfo->setOfferHashId( fileHash );
-						m_OfferBaseInfoList.push_back( assetInfo );
+						offerInfo->setOfferHashId( fileHash );
+						m_OfferBaseInfoList.push_back( offerInfo );
 						break;
 					}
 				}
 
 				unlockResources();
-				std::vector<OfferBaseCallbackInterface *>::iterator callbackIter;
+
 				lockClientList();
-				for( callbackIter = m_OfferClients.begin(); callbackIter != m_OfferClients.end(); ++callbackIter )
+				for( auto client : m_OfferClients )
 				{
-					OfferBaseCallbackInterface * client = *callbackIter;
 					client->callbackHashIdGenerated( thisFile, fileHash );
 				}
 
 				unlockClientList();
-				if( assetInfo )
+				if( offerInfo )
 				{
-					m_OfferBaseInfoDb.addOffer( assetInfo );
-					announceOfferAdded( assetInfo );
+					m_OfferBaseInfoDb.addOffer( offerInfo );
+					announceOfferAdded( offerInfo );
 				}
 			}
 		}
@@ -250,11 +238,11 @@ OfferBaseInfo* OfferBaseMgr::findOffer( VxGUID& assetId )
         return nullptr;
 	}
 
-	for( OfferBaseInfo* assetInfo : m_OfferBaseInfoList )
+	for( OfferBaseInfo* offerInfo : m_OfferBaseInfoList )
 	{
-		if( assetInfo->getOfferId() == assetId )
+		if( offerInfo->getOfferId() == assetId )
 		{
-			return assetInfo;
+			return offerInfo;
 		}
 	}
 
@@ -264,12 +252,12 @@ OfferBaseInfo* OfferBaseMgr::findOffer( VxGUID& assetId )
 //============================================================================
 OfferBaseInfo* OfferBaseMgr::addOfferFile( const char* fileName, uint64_t fileLen, uint16_t fileType )
 {
-    OfferBaseInfo* assetInfo = createOfferInfo( fileName, fileLen, fileType );
-    if( assetInfo )
+    OfferBaseInfo* offerInfo = createOfferInfo( fileName, fileLen, fileType );
+    if( offerInfo )
     {
-        if( insertNewInfo( assetInfo ) )
+        if( insertNewInfo( offerInfo ) )
         {
-            return assetInfo;
+            return offerInfo;
         }
     }
 
@@ -284,10 +272,10 @@ bool OfferBaseMgr::addOfferFile(	const char*	fileName,
 									const char*	assetTag, 
                                     int64_t			timestamp )
 {
-	OfferBaseInfo* assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
-	if( assetInfo )
+	OfferBaseInfo* offerInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	if( offerInfo )
 	{
-		return insertNewInfo( assetInfo );
+		return insertNewInfo( offerInfo );
 	}
 	
 	return false;
@@ -303,21 +291,21 @@ bool OfferBaseMgr::addOfferFile(	const char*	fileName,
 									const char*	assetTag, 
                                     int64_t			timestamp )
 {
-	OfferBaseInfo* assetInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
-	if( assetInfo )
+	OfferBaseInfo* offerInfo = createOfferInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	if( offerInfo )
 	{
-		assetInfo->setCreatorId( creatorId );
-		assetInfo->setCreatorId( historyId );
-		return insertNewInfo( assetInfo );
+		offerInfo->setCreatorId( creatorId );
+		offerInfo->setCreatorId( historyId );
+		return insertNewInfo( offerInfo );
 	}
 	
 	return false;
 }
 
 //============================================================================
-bool OfferBaseMgr::addOffer( OfferBaseInfo& assetInfo )
+bool OfferBaseMgr::addOffer( OfferBaseInfo& offerInfo )
 {
-	OfferBaseInfo* newOfferBaseInfo = createOfferInfo( assetInfo );
+	OfferBaseInfo* newOfferBaseInfo = createOfferInfo( offerInfo );
 	LogMsg( LOG_INFO, "OfferBaseMgr::addOffer" );
 	return insertNewInfo( newOfferBaseInfo );
 }
@@ -325,13 +313,19 @@ bool OfferBaseMgr::addOffer( OfferBaseInfo& assetInfo )
 //============================================================================
 OfferBaseInfo* OfferBaseMgr::createOfferInfo( std::string fileName, uint64_t fileLen, uint16_t fileType )
 {
-    OfferBaseInfo* assetInfo = new OfferBaseInfo( fileName, fileLen, fileType );
-    if( assetInfo )
+    OfferBaseInfo* offerInfo = new OfferBaseInfo( fileName, fileLen, fileType );
+    if( offerInfo )
     {
-        assetInfo->getOfferId().initializeWithNewVxGUID();
+        offerInfo->getOfferId().initializeWithNewVxGUID();
     }
 
-    return assetInfo;
+    return offerInfo;
+}
+
+//============================================================================
+OfferBaseInfo* OfferBaseMgr::createOfferInfo( OfferBaseInfo& offerInfo )
+{
+	return new OfferBaseInfo( offerInfo );
 }
 
 //============================================================================
@@ -351,62 +345,62 @@ OfferBaseInfo* OfferBaseMgr::createOfferInfo( std::string	fileName,
 		return NULL;
 	}
 
-	OfferBaseInfo* assetInfo = createOfferInfo( fileName, fileLen, fileType );
-	assetInfo->setOfferId( assetId );
-	if( false == assetInfo->getOfferId().isVxGUIDValid() )
+	OfferBaseInfo* offerInfo = createOfferInfo( fileName, fileLen, fileType );
+	offerInfo->setOfferId( assetId );
+	if( false == offerInfo->getOfferId().isVxGUIDValid() )
 	{
-		assetInfo->getOfferId().initializeWithNewVxGUID();
+		offerInfo->getOfferId().initializeWithNewVxGUID();
 	}
 
-	assetInfo->getOfferHashId().setHashData( hashId );
-	assetInfo->setLocationFlags( locationFlags );
-	assetInfo->setOfferTag( assetTag );
-	assetInfo->setCreationTime( timestamp ? timestamp : GetTimeStampMs() );
+	offerInfo->getOfferHashId().setHashData( hashId );
+	offerInfo->setLocationFlags( locationFlags );
+	offerInfo->setOfferTag( assetTag );
+	offerInfo->setCreationTime( timestamp ? timestamp : GetTimeStampMs() );
 
-	return assetInfo;
+	return offerInfo;
 }
 
 //============================================================================
-bool OfferBaseMgr::insertNewInfo( OfferBaseInfo* assetInfo )
+bool OfferBaseMgr::insertNewInfo( OfferBaseInfo* offerInfo )
 {
 	bool result = false;
-	OfferBaseInfo* assetInfoExisting = findOffer( assetInfo->getOfferId() );
-	if( assetInfoExisting )
+	OfferBaseInfo* offerInfoExisting = findOffer( offerInfo->getOfferId() );
+	if( offerInfoExisting )
 	{
-		LogMsg( LOG_ERROR, "ERROR OfferBaseMgr::insertNewInfo: duplicate assset %s", assetInfo->getOfferName().c_str() );
-		if( assetInfoExisting != assetInfo )
+		LogMsg( LOG_ERROR, "ERROR OfferBaseMgr::insertNewInfo: duplicate assset %s", offerInfo->getOfferName().c_str() );
+		if( offerInfoExisting != offerInfo )
 		{
-			*assetInfoExisting = *assetInfo;
-			assetInfo = assetInfoExisting;
+			*offerInfoExisting = *offerInfo;
+			offerInfo = offerInfoExisting;
 		}
 	}
 
-	if( 0 == assetInfo->getCreationTime() )
+	if( 0 == offerInfo->getCreationTime() )
 	{
-		assetInfo->setCreationTime( GetTimeStampMs() );
+		offerInfo->setCreationTime( GetTimeStampMs() );
 	}
 
-	//if( assetInfo->needsHashGenerated() )
+	//if( offerInfo->needsHashGenerated() )
 	//{
 	//	lockResources();
-	//	m_WaitingForHastList.push_back( assetInfo );
+	//	m_WaitingForHastList.push_back( offerInfo );
 	//	unlockResources();
-	//	generateHashForFile( assetInfo->getOfferName() );
+	//	generateHashForFile( offerInfo->getOfferName() );
 	//	result = true;
 	//}
 	//else
 	{
-        updateDatabase( assetInfo );
-		if( !assetInfoExisting )
+        updateDatabase( offerInfo );
+		if( !offerInfoExisting )
 		{
 			lockResources();
-			m_OfferBaseInfoList.push_back( assetInfo );
+			m_OfferBaseInfoList.push_back( offerInfo );
 			unlockResources();
-			announceOfferAdded( assetInfo );
+			announceOfferAdded( offerInfo );
 		}
         else
         {
-            announceOfferUpdated( assetInfo );
+            announceOfferUpdated( offerInfo );
         }
 	
 		result = true;
@@ -416,12 +410,12 @@ bool OfferBaseMgr::insertNewInfo( OfferBaseInfo* assetInfo )
 }
 
 //============================================================================
-bool OfferBaseMgr::updateOffer( OfferBaseInfo& assetInfo )
+bool OfferBaseMgr::updateOffer( OfferBaseInfo& offerInfo )
 {
-    OfferBaseInfo* existingOffer = findOffer( assetInfo.getOfferId() );
+    OfferBaseInfo* existingOffer = findOffer( offerInfo.getOfferId() );
     if( existingOffer )
     {
-        *existingOffer = assetInfo;
+        *existingOffer = offerInfo;
         updateDatabase( existingOffer );
         announceOfferUpdated( existingOffer );
         return true;
@@ -431,21 +425,19 @@ bool OfferBaseMgr::updateOffer( OfferBaseInfo& assetInfo )
 }
 
 //============================================================================
-void OfferBaseMgr::announceOfferAdded( OfferBaseInfo* assetInfo )
+void OfferBaseMgr::announceOfferAdded( OfferBaseInfo* offerInfo )
 {
 	// LogMsg( LOG_INFO, "OfferBaseMgr::announceOfferAdded start" );
-	if( assetInfo->isFileOffer() )
+	if( offerInfo->isFileOffer() )
 	{
 		updateFileListPackets();
 		updateOfferFileTypes();
 	}
 	
 	lockClientList();
-	std::vector<OfferBaseCallbackInterface *>::iterator iter;
-	for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
+	for( auto client : m_OfferClients )
 	{
-		OfferBaseCallbackInterface * client = *iter;
-		client->callbackOfferAdded( assetInfo );
+		client->callbackOfferAdded( offerInfo );
 	}
 
 	unlockClientList();
@@ -453,15 +445,13 @@ void OfferBaseMgr::announceOfferAdded( OfferBaseInfo* assetInfo )
 }
 
 //============================================================================
-void OfferBaseMgr::announceOfferUpdated( OfferBaseInfo* assetInfo )
+void OfferBaseMgr::announceOfferUpdated( OfferBaseInfo* offerInfo )
 {
     // LogMsg( LOG_INFO, "OfferBaseMgr::announceOfferUpdated start" );
     lockClientList();
-    std::vector<OfferBaseCallbackInterface *>::iterator iter;
-    for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
-    {
-        OfferBaseCallbackInterface * client = *iter;
-        client->callbackOfferAdded( assetInfo );
+	for( auto client : m_OfferClients )
+	{
+        client->callbackOfferAdded( offerInfo );
     }
 
     unlockClientList();
@@ -469,20 +459,18 @@ void OfferBaseMgr::announceOfferUpdated( OfferBaseInfo* assetInfo )
 }
 
 //============================================================================
-void OfferBaseMgr::announceOfferRemoved( OfferBaseInfo* assetInfo )
+void OfferBaseMgr::announceOfferRemoved( OfferBaseInfo* offerInfo )
 {
-	//if( assetInfo->getIsOfferBase() )
+	//if( offerInfo->getIsOfferBase() )
 	{
 		updateFileListPackets();
 		updateOfferFileTypes();
 	}
 
 	lockClientList();
-	std::vector<OfferBaseCallbackInterface *>::iterator iter;
-	for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
+	for( auto client : m_OfferClients )
 	{
-		OfferBaseCallbackInterface * client = *iter;
-		client->callbackOfferRemoved( assetInfo );
+		client->callbackOfferRemoved( offerInfo );
 	}
 
 	unlockClientList();
@@ -493,10 +481,8 @@ void OfferBaseMgr::announceOfferXferState( VxGUID& assetOfferId, EOfferSendState
 {
 	LogMsg( LOG_INFO, "OfferBaseMgr::announceOfferXferState state %d start\n", assetSendState );
 	lockClientList();
-	std::vector<OfferBaseCallbackInterface *>::iterator iter;
-	for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
+	for( auto client : m_OfferClients )
 	{
-		OfferBaseCallbackInterface * client = *iter;
 		client->callbackOfferSendState( assetOfferId, assetSendState, param );
 	}
 
@@ -509,10 +495,8 @@ void OfferBaseMgr::announceOfferAction( VxGUID& assetOfferId, EOfferAction offer
 {
     LogMsg( LOG_INFO, "OfferBaseMgr::announceOfferXferState state %d start\n", offerAction );
     lockClientList();
-    std::vector<OfferBaseCallbackInterface *>::iterator iter;
-    for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
-    {
-        OfferBaseCallbackInterface * client = *iter;
+	for( auto client : m_OfferClients )
+	{
         client->callbackOfferAction( assetOfferId, offerAction, param );
     }
 
@@ -529,11 +513,11 @@ bool OfferBaseMgr::removeOffer( std::string fileName )
 	{
 		if( fileName == (*iter)->getOfferName() )
 		{
-			OfferBaseInfo* assetInfo = *iter;
+			OfferBaseInfo* offerInfo = *iter;
 			m_OfferBaseInfoList.erase( iter );
 			m_OfferBaseInfoDb.removeOffer( fileName.c_str() );
-			announceOfferRemoved( assetInfo );
-			delete assetInfo;
+			announceOfferRemoved( offerInfo );
+			delete offerInfo;
 			assetRemoved = true;
 			break;
 		}
@@ -551,11 +535,11 @@ bool OfferBaseMgr::removeOffer( VxGUID& assetOfferId )
 	{
 		if( assetOfferId == ( *iter )->getOfferId() )
 		{
-			OfferBaseInfo* assetInfo = *iter;
+			OfferBaseInfo* offerInfo = *iter;
 			m_OfferBaseInfoList.erase( iter );
-			m_OfferBaseInfoDb.removeOffer( assetInfo );
-			announceOfferRemoved( assetInfo );
-			delete assetInfo;
+			m_OfferBaseInfoDb.removeOffer( offerInfo );
+			announceOfferRemoved( offerInfo );
+			delete offerInfo;
 			assetRemoved = true;
 			break;
 		}
@@ -591,24 +575,24 @@ void OfferBaseMgr::updateOfferListFromDb( VxThread* startupThread )
 		movedToGenerateHash = false;
 		for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 		{
-			OfferBaseInfo* assetInfo = (*iter);
-			EOfferSendState sendState = assetInfo->getOfferSendState();
+			OfferBaseInfo* offerInfo = (*iter);
+			EOfferSendState sendState = offerInfo->getOfferSendState();
 			if( eOfferSendStateTxProgress == sendState ) 
 			{
-				assetInfo->setOfferSendState( eOfferSendStateTxFail );
-				m_OfferBaseInfoDb.updateOfferSendState( assetInfo->getOfferId(), eOfferSendStateTxFail );
+				offerInfo->setOfferSendState( eOfferSendStateTxFail );
+				m_OfferBaseInfoDb.updateOfferSendState( offerInfo->getOfferId(), eOfferSendStateTxFail );
 			}
 			else if(  eOfferSendStateRxProgress == sendState  )
 			{
-				assetInfo->setOfferSendState( eOfferSendStateRxFail );
-				m_OfferBaseInfoDb.updateOfferSendState( assetInfo->getOfferId(), eOfferSendStateRxFail );
+				offerInfo->setOfferSendState( eOfferSendStateRxFail );
+				m_OfferBaseInfoDb.updateOfferSendState( offerInfo->getOfferId(), eOfferSendStateRxFail );
 			}
 
-			if( assetInfo->needsHashGenerated() )
+			if( offerInfo->needsHashGenerated() )
 			{
-				m_WaitingForHastList.push_back( assetInfo );
+				m_WaitingForHastList.push_back( offerInfo );
 				m_OfferBaseInfoList.erase( iter );
-				generateHashForFile( assetInfo->getOfferName() );
+				generateHashForFile( offerInfo->getOfferName() );
 				movedToGenerateHash = true;
 				break;
 			}
@@ -652,10 +636,8 @@ void OfferBaseMgr::updateOfferFileTypes( void )
 	if( fileTypesChanged )
 	{
 		lockClientList();
-		std::vector<OfferBaseCallbackInterface *>::iterator iter;
-		for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
+		for( auto client : m_OfferClients )
 		{
-			OfferBaseCallbackInterface * client = *iter;
 			client->callbackOfferFileTypesChanged( u16FileTypes );
 		}
 
@@ -674,8 +656,8 @@ void OfferBaseMgr::updateFileListPackets( void )
 	std::vector<OfferBaseInfo*>::iterator iter;
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 	{
-		OfferBaseInfo* assetInfo = (*iter); 
-		if( ( false == assetInfo->isFileOffer() ) || ( false == assetInfo->getOfferHashId().isHashValid() ) )
+		OfferBaseInfo* offerInfo = (*iter); 
+		if( ( false == offerInfo->isFileOffer() ) || ( false == offerInfo->getOfferHashId().isHashValid() ) )
 			continue;
 
 		if( 0 == pktFileList )
@@ -684,22 +666,22 @@ void OfferBaseMgr::updateFileListPackets( void )
 			pktFileList->setListIndex( (uint32_t)m_FileListPackets.size() );
 		}
 
-		if( pktFileList->canAddFile( (uint32_t)(assetInfo->getRemoteOfferName().size() + 1) ) )
+		if( pktFileList->canAddFile( (uint32_t)(offerInfo->getRemoteOfferName().size() + 1) ) )
 		{
-			pktFileList->addFile(	assetInfo->getOfferHashId(),
-									assetInfo->getOfferLength(),
-									assetInfo->getOfferType(),
-									assetInfo->getRemoteOfferName().c_str() );
+			pktFileList->addFile(	offerInfo->getOfferHashId(),
+									offerInfo->getOfferLength(),
+									offerInfo->getOfferType(),
+									offerInfo->getRemoteOfferName().c_str() );
 		}
 		else
 		{
 			m_FileListPackets.push_back( pktFileList );
 			pktFileList = new PktFileListReply();
 			pktFileList->setListIndex( (uint32_t)m_FileListPackets.size() );
-			pktFileList->addFile(	assetInfo->getOfferHashId(),
-									assetInfo->getOfferLength(),
-									assetInfo->getOfferType(),
-									assetInfo->getOfferName().c_str() );
+			pktFileList->addFile(	offerInfo->getOfferHashId(),
+									offerInfo->getOfferLength(),
+									offerInfo->getOfferType(),
+									offerInfo->getOfferName().c_str() );
 		}
 	}
 
@@ -721,10 +703,8 @@ void OfferBaseMgr::updateFileListPackets( void )
 	if( hadOfferBaseFiles || m_FileListPackets.size() )
 	{
 		lockClientList();
-		std::vector<OfferBaseCallbackInterface *>::iterator iter;
-		for( iter = m_OfferClients.begin();	iter != m_OfferClients.end(); ++iter )
+		for( auto client : m_OfferClients )
 		{
-			OfferBaseCallbackInterface * client = *iter;
 			client->callbackOfferPktFileListUpdated();
 		}
 
@@ -750,13 +730,13 @@ void OfferBaseMgr::clearOfferFileListPackets( void )
 bool OfferBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId )
 {
 	lockResources();
-	OfferBaseInfo* assetInfo = findOffer( fileName );
-	if( assetInfo )
+	OfferBaseInfo* offerInfo = findOffer( fileName );
+	if( offerInfo )
 	{
-		if( ( false == shareFile ) && assetInfo->isSharedFileOffer() )
+		if( ( false == shareFile ) && offerInfo->isSharedFileOffer() )
 		{
-			assetInfo->setIsSharedFileOffer( false );
-			updateDatabase( assetInfo );
+			offerInfo->setIsSharedFileOffer( false );
+			updateDatabase( offerInfo );
 			unlockResources();
 			updateOfferFileTypes();
 			updateFileListPackets();
@@ -770,10 +750,10 @@ bool OfferBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile,
 	{
 		// file is not currently OfferBase and should be
 		VxGUID guid;
-		OfferBaseInfo* assetInfo = createOfferInfo( fileName.c_str(), guid, fileHashId, eOfferLocShared );
-		if( assetInfo )
+		OfferBaseInfo* offerInfo = createOfferInfo( fileName.c_str(), guid, fileHashId, eOfferLocShared );
+		if( offerInfo )
 		{
-			insertNewInfo( assetInfo );
+			insertNewInfo( offerInfo );
 		}
 	}
 	else
@@ -853,9 +833,9 @@ bool OfferBaseMgr::fromGuiGetOfferBaseInfo( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-void OfferBaseMgr::updateDatabase( OfferBaseInfo* assetInfo )
+void OfferBaseMgr::updateDatabase( OfferBaseInfo* offerInfo )
 {
-	m_OfferBaseInfoDb.addOffer( assetInfo );
+	m_OfferBaseInfoDb.addOffer( offerInfo );
 }
 
 //============================================================================
@@ -868,15 +848,15 @@ void OfferBaseMgr::updateOfferDatabaseSendState( VxGUID& assetOfferId, EOfferSen
 void OfferBaseMgr::queryHistoryOffers( VxGUID& historyId )
 {
 	std::vector<OfferBaseInfo*>::iterator iter;
-	OfferBaseInfo* assetInfo;
+	OfferBaseInfo* offerInfo;
 	lockResources();
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 	{
-		assetInfo = (*iter);
-		if( assetInfo->getHistoryId() == historyId )
+		offerInfo = (*iter);
+		if( offerInfo->getHistoryId() == historyId )
 		{
-            onQueryHistoryOffer( assetInfo );
-			// BRJ IToGui::getToGui().toGuiOfferSessionHistory( assetInfo );
+            onQueryHistoryOffer( offerInfo );
+			// BRJ IToGui::getToGui().toGuiOfferSessionHistory( offerInfo );
 		}
 	}
 
@@ -888,20 +868,20 @@ void OfferBaseMgr::updateOfferXferState( VxGUID& assetOfferId, EOfferSendState a
 {
 	LogMsg( LOG_INFO, "OfferBaseMgr::updateOfferXferState state %d start", assetSendState );
 	std::vector<OfferBaseInfo*>::iterator iter;
-	OfferBaseInfo* assetInfo;
+	OfferBaseInfo* offerInfo;
 	bool assetSendStateChanged = false;
 	lockResources();
 	for( iter = m_OfferBaseInfoList.begin(); iter != m_OfferBaseInfoList.end(); ++iter )
 	{
-		assetInfo = (*iter);
-		if( assetInfo->getOfferId() == assetOfferId )
+		offerInfo = (*iter);
+		if( offerInfo->getOfferId() == assetOfferId )
 		{
-			EOfferSendState oldSendState = assetInfo->getOfferSendState();
+			EOfferSendState oldSendState = offerInfo->getOfferSendState();
 			if( oldSendState != assetSendState )
 			{
-				assetInfo->setOfferSendState( assetSendState );
+				offerInfo->setOfferSendState( assetSendState );
 				assetSendStateChanged = true;
-				//updateDatabase( assetInfo );
+				//updateDatabase( offerInfo );
 				updateOfferDatabaseSendState( assetOfferId, assetSendState );
 				switch( assetSendState )
 				{
@@ -928,7 +908,7 @@ void OfferBaseMgr::updateOfferXferState( VxGUID& assetOfferId, EOfferSendState a
 						|| ( eOfferSendStateRxProgress == oldSendState ) )
 					{
 						announceOfferAction( assetOfferId, eOfferActionRxSuccess, param );
-						announceOfferAction( assetInfo->getCreatorId(), eOfferActionRxNotifyNewMsg, 100 );
+						announceOfferAction( offerInfo->getCreatorId(), eOfferActionRxNotifyNewMsg, 100 );
 					}
 					else 
 					{
@@ -991,23 +971,24 @@ bool OfferBaseMgr::isAllowedFileOrDir( std::string strFileName )
 }
 
 //============================================================================
-void OfferBaseMgr::addOfferMgrClient( OfferBaseCallbackInterface * client, bool enable )
+void OfferBaseMgr::wantToGuiOfferCallbacks( OfferCallbackInterface* client, bool enable )
 {
-    AutoResourceLock( this );
-    if( enable )
-    {
-        m_OfferClients.push_back( client );
-    }
-    else
-    {
-        std::vector<OfferBaseCallbackInterface *>::iterator iter;
-        for( iter = m_OfferClients.begin(); iter != m_OfferClients.end(); ++iter )
-        {
-            if( *iter == client )
-            {
-                m_OfferClients.erase( iter );
-                return;
-            }
-        }
-    }
+	lockClientList();
+	if( enable )
+	{
+		m_OfferClients.push_back( client );
+	}
+	else
+	{
+		for( auto iter = m_OfferClients.begin(); iter != m_OfferClients.end(); ++iter )
+		{
+			if( *iter == client )
+			{
+				m_OfferClients.erase( iter );
+				break;
+			}
+		}
+	}
+
+	unlockClientList();
 }

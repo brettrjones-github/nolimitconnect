@@ -21,7 +21,7 @@
 
 class OfferBaseInfo;
 
-class OfferBaseCallbackInterface
+class OfferCallbackInterface
 {
 public:
 	virtual void				callbackFileWasShredded( std::string& fileName ){};

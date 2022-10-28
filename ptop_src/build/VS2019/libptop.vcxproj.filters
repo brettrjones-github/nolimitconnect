@@ -469,54 +469,6 @@
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferSession.cpp">
       <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfo.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfoDb.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientMgr.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientRxSession.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientTxSession.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferDb.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferMgr.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferSession.cpp">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfo.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfoDb.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostMgr.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostRxSession.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostTxSession.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferDb.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferMgr.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferSession.cpp">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ConnectMgr\ConnectInfo.cpp">
       <Filter>Source Files\ConnectMgr</Filter>
     </ClCompile>
@@ -756,6 +708,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GuiInterface\ILog.cpp">
       <Filter>Source Files\GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferMgr.cpp">
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1230,63 +1185,6 @@
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferSession.h">
       <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientCallbackInterface.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfo.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfoDb.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientMgr.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientRxSession.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientTxSession.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferDb.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferMgr.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferSession.h">
-      <Filter>Source Files\OfferClientMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostCallbackInterface.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfo.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfoDb.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostMgr.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostRxSession.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostTxSession.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferDb.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferMgr.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferSession.h">
-      <Filter>Source Files\OfferHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseCallbackInterface.h">
-      <Filter>Source Files\OfferBase</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ConnectMgr\ConnectCallbackInterface.h">
       <Filter>Source Files\ConnectMgr</Filter>
     </ClInclude>
@@ -1569,6 +1467,12 @@
     <ClInclude Include="..\..\..\GuiInterface\NlcRenderFrame.h">
       <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferCallbackInterface.h">
+      <Filter>Source Files\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferMgr.h">
+      <Filter>Source Files\OfferBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1645,12 +1549,6 @@
     </Filter>
     <Filter Include="Source Files\OfferBase">
       <UniqueIdentifier>{df8389e0-0bdd-4773-9dfe-9ba516d0d026}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\OfferClientMgr">
-      <UniqueIdentifier>{910c7eeb-e37d-4ff4-9de5-f7b01e4f1292}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\OfferHostMgr">
-      <UniqueIdentifier>{f8868528-d130-4a76-81b0-d74ac433ab10}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\ConnectMgr">
       <UniqueIdentifier>{26c521ac-2eac-49e1-b3c7-1edef2efe660}</UniqueIdentifier>

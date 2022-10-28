@@ -73,10 +73,14 @@ public:
     virtual void                setOfferResponse( EOfferResponse offerResponse ) { m_OfferResponse = offerResponse; }
     virtual EOfferResponse      getOfferResponse( void )                { return m_OfferResponse; }
 
+    virtual void                setOfferMgr( EOfferMgrType offerMgr )   { m_OfferMgr = offerMgr; }
+    virtual EOfferMgrType       getOfferMgr( void )                     { return m_OfferMgr; }
+
 protected:
     EPluginType                 m_PluginType{ePluginTypeInvalid};
     std::string                 m_OfferMsg{ "" };
     int64_t                     m_OfferExpireTime{ 0 };
     VxGUID                      m_OfferId;
     EOfferResponse              m_OfferResponse{ eOfferResponseNotSet };
+    EOfferMgrType               m_OfferMgr{ eOfferMgrNotSet };
 };

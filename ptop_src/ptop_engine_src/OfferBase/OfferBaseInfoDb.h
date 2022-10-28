@@ -48,6 +48,7 @@ public:
                                             int64_t			offerExpires,
 											VxGUID&			sessionId,
 											EOfferResponse  offerResponse,
+											EOfferMgrType	offerMgr,
                                             int             isTemp,
                                             int64_t			createdTimestamp = 0,
                                             int64_t			modifiedTimestamp = 0,     
@@ -55,23 +56,20 @@ public:
                                             const char*     assetTag = "",
 											EOfferSendState sendState = eOfferSendStateNone);
 
-	void 						addOffer( OfferBaseInfo* assetInfo );
+	void 						addOffer( OfferBaseInfo* offerInfo );
 
 	void						removeOffer( const char* assetName );
 	void						removeOffer( VxGUID& offerId );
-	void						removeOffer( OfferBaseInfo* assetInfo );
+	void						removeOffer( OfferBaseInfo* offerInfo );
 
 	void						getAllOffers( std::vector<OfferBaseInfo*>& OfferBaseOfferList );
 	void						purgeAllOffers( void ); 
 	void						updateOfferSendState( VxGUID& assetId, EOfferSendState sendState );
 
 protected:
-    virtual OfferBaseInfo*      createOfferInfo( std::string assetName, uint64_t assetLen, uint16_t assetType ) = 0;
-    virtual OfferBaseInfo*      createOfferInfo( OfferBaseInfo& assetInfo ) = 0;
-
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
-	void						insertOfferInTimeOrder( OfferBaseInfo* assetInfo, std::vector<OfferBaseInfo*>& assetList );
+	void						insertOfferInTimeOrder( OfferBaseInfo* offerInfo, std::vector<OfferBaseInfo*>& assetList );
 
 	OfferBaseMgr&				m_OfferMgr;
 	VxMutex						m_OfferBaseInfoDbMutex;

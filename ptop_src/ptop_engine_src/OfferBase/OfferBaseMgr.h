@@ -13,11 +13,9 @@
 // http://www.nolimitconnect.org
 //============================================================================
 
-#include <config_appcorelibs.h>
+#include "OfferCallbackInterface.h"
+#include "OfferBaseInfoDb.h"
 
-#include <GuiInterface/IDefs.h>
-#include <CoreLib/VxGUID.h>
-#include <CoreLib/VxSha1Hash.h>
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
@@ -25,7 +23,7 @@
 class FileInfo;
 class GuiUser;
 class IToGui;
-class OfferBaseCallbackInterface;
+class OfferCallbackInterface;
 class OfferBaseInfo;
 class OfferBaseInfoDb;
 class OfferBaseHistoryMgr;
@@ -37,7 +35,7 @@ class OfferBaseMgr
 {
 public:
 	OfferBaseMgr( P2PEngine& engine, const char* dbName, const char* stateDbName, EOfferMgrType assetMgrType );
-	virtual ~OfferBaseMgr();
+	virtual ~OfferBaseMgr() = default;
 
     class AutoResourceLock
     {
@@ -46,6 +44,8 @@ public:
         ~AutoResourceLock()																			{ m_Mutex.unlock(); }
         VxMutex&				m_Mutex;
     };
+
+	void                        wantToGuiOfferCallbacks( OfferCallbackInterface* client, bool enable );
 
     virtual OfferBaseInfoDb&    getOfferInfoDb( void ) { return m_OfferBaseInfoDb; }
 
@@ -58,25 +58,24 @@ public:
 
 	virtual void				fromGuiMakePluginOffer( QWidget* parent, EPluginType pluginType, GuiUser* guiUser, FileInfo& fileInfo ) {};
 
-    virtual void				announceOfferAdded( OfferBaseInfo* assetInfo );
-    virtual void				announceOfferUpdated( OfferBaseInfo* assetInfo );
-    virtual void				announceOfferRemoved( OfferBaseInfo* assetInfo );
+    virtual void				announceOfferAdded( OfferBaseInfo* offerInfo );
+    virtual void				announceOfferUpdated( OfferBaseInfo* offerInfo );
+    virtual void				announceOfferRemoved( OfferBaseInfo* offerInfo );
     virtual void				announceOfferXferState( VxGUID& assetOfferId, EOfferSendState assetSendState, int param );
     virtual void				announceOfferAction( VxGUID& assetOfferId, EOfferAction offerAction, int param );
 
-    virtual void                onQueryHistoryOffer( OfferBaseInfo* assetInfo ) {}; // should be overriden
+    virtual void                onQueryHistoryOffer( OfferBaseInfo* offerInfo ) {}; // should be overriden
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
-    void						addOfferMgrClient( OfferBaseCallbackInterface * client, bool enable );
     bool						isAllowedFileOrDir( std::string strFileName );
 
 	virtual bool				isOfferListInitialized( void )				{ return m_OfferBaseListInitialized; }
 
-	void						assetInfoMgrStartup( VxThread* startupThread );
-	void						assetInfoMgrShutdown( void );
+	void						offerInfoMgrStartup( VxThread* startupThread );
+	void						offerInfoMgrShutdown( void );
 
     bool						getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId );
 	bool						getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName );
@@ -112,9 +111,9 @@ public:
 												const char*	assetTag = "", 
                                                 int64_t			timestamp = 0 );
 
-	bool						addOffer( OfferBaseInfo& assetInfo );
+	bool						addOffer( OfferBaseInfo& offerInfo );
 
-    bool						updateOffer( OfferBaseInfo& assetInfo );
+    bool						updateOffer( OfferBaseInfo& offerInfo );
 	bool						removeOffer( std::string fileName );
 	bool						removeOffer( VxGUID& assetOfferId );
 	void						queryHistoryOffers( VxGUID& historyId );
@@ -123,14 +122,11 @@ public:
 	void						updateOfferXferState( VxGUID& assetOfferId, EOfferSendState assetSendState, int param = 0 );
 
 protected:
-    virtual OfferBaseInfo*     createOfferInfo( std::string fileName, uint64_t fileLen, uint16_t fileType ) = 0;
-    virtual OfferBaseInfo*     createOfferInfo( OfferBaseInfo& assetInfo ) = 0;
+    virtual OfferBaseInfo*     createOfferInfo( std::string fileName, uint64_t fileLen, uint16_t fileType );
+    virtual OfferBaseInfo*     createOfferInfo( OfferBaseInfo& offerInfo );
 
-    void						lockClientList( void )						{ m_ClientListMutex.lock(); }
-    void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }
-
-    virtual OfferBaseInfoDb&    createOfferInfoDb(  const char* dbName, EOfferMgrType assetMgrType );
-
+   void							lockClientList( void )						{ m_ClientListMutex.lock(); }
+   void							unlockClientList( void )					{ m_ClientListMutex.unlock(); }
 
 	void						updateOfferListFromDb( VxThread* thread );
 	void						generateHashIds( VxThread* thread );
@@ -142,18 +138,17 @@ protected:
 													EOfferLocation	locationFlags = eOfferLocUnknown, 
 													const char*	assetTag = "", 
 													int64_t			timestamp = 0 );
-	bool						insertNewInfo( OfferBaseInfo* assetInfo );
-	void						updateDatabase( OfferBaseInfo* assetInfo );
+	bool						insertNewInfo( OfferBaseInfo* offerInfo );
+	void						updateDatabase( OfferBaseInfo* offerInfo );
 	void						updateOfferDatabaseSendState( VxGUID& assetOfferId, EOfferSendState sendState );
 
     //=== vars ===//
     P2PEngine&					m_Engine;
-    EOfferMgrType               m_OfferMgrType{ eOfferMgrTypeNone };
+    EOfferMgrType               m_OfferMgrType{ eOfferMgrNotSet };
     VxMutex						m_ResourceMutex;
     VxMutex						m_ClientListMutex;
 
-    std::vector<OfferBaseCallbackInterface *> m_OfferClients;
-
+    std::vector<OfferCallbackInterface *> m_OfferClients;
 	bool						m_Initialized{ false };
 
 	std::vector<OfferBaseInfo*>	m_WaitingForHastList;
@@ -166,9 +161,8 @@ protected:
 	VxMutex						m_FileListPacketsMutex;
 	std::vector<PktFileListReply*> m_FileListPackets;
 
-private:
     bool						m_OfferBaseListInitialized{ false };
-    OfferBaseInfoDb&			m_OfferBaseInfoDb;
+    OfferBaseInfoDb				m_OfferBaseInfoDb;
     std::vector<OfferBaseInfo*>	m_OfferBaseInfoList;
 };
 

@@ -46,6 +46,6 @@
 
 //============================================================================
 OfferHostXferMgr::OfferHostXferMgr( P2PEngine& engine, OfferHostMgr offerMgr, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr, const char* stateDbName )
-: OfferBaseXferMgr( engine, offerMgr, plugin, pluginSessionMgr, stateDbName, eOfferMgrTypeOfferHost )
+: OfferBaseXferMgr( engine, offerMgr, plugin, pluginSessionMgr, stateDbName, eOfferMgrHost )
 {
 }

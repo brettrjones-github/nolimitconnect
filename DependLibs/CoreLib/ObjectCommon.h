@@ -117,6 +117,9 @@
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
 
+#define OBJNAME_APPLET_OFFER_SEND						"AppletOfferSend"
+#define OBJNAME_APPLET_OFFER_RESPONSE					"AppletOfferResponse"
+#define OBJNAME_APPLET_OFFER_RESPONSE_ACCEPT			"AppletOfferResponseAccept"
 #define OBJNAME_APPLET_OFFER_VIEW						"AppletOfferView"
 
 #define OBJNAME_APPLET_PERMISSION_LIST				    "AppletPermissionList"

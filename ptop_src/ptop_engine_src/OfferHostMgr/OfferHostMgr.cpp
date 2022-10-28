@@ -32,7 +32,7 @@
 
 //============================================================================
 OfferHostMgr::OfferHostMgr( P2PEngine& engine, const char* dbName, const char* stateDbName )
-: OfferBaseMgr( engine, dbName, stateDbName, eOfferMgrTypeOfferHost )
+: OfferBaseMgr( engine, dbName, stateDbName, eOfferMgrHost )
 , m_OfferHostInfoDb( dynamic_cast<OfferHostInfoDb&>(OfferBaseMgr::getOfferInfoDb()) )
 , m_OfferHostInfoList( getOfferBaseInfoList() )
 {
@@ -73,7 +73,7 @@ void OfferHostMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-void OfferHostMgr::addOfferHostMgrClient( OfferHostCallbackInterface * client, bool enable )
+void OfferHostMgr::wantToGuiOfferCallbacks( OfferCallbackInterface * client, bool enable )
 {
     lockClientList();
     if( enable )

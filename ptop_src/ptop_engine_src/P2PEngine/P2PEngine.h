@@ -37,8 +37,7 @@
 #include <ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.h>
 #include <ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.h>
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
-#include <ptop_src/ptop_engine_src/OfferClientMgr/OfferClientMgr.h>
-#include <ptop_src/ptop_engine_src/OfferHostMgr/OfferHostMgr.h>
+#include <ptop_src/ptop_engine_src/OfferBase/OfferMgr.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
@@ -132,9 +131,7 @@ public:
 	NetworkMonitor&				getNetworkMonitor( void )						{ return m_NetworkMonitor; } 
 	NetServicesMgr&				getNetServicesMgr( void )						{ return m_NetServicesMgr; }
 	MediaProcessor&				getMediaProcessor( void )						{ return m_MediaProcessor; }
-    OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
-    OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
-    OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
+    OfferMgr&                   getOfferMgr( void )                             { return m_OfferMgr; }
 	VxPeerMgr&					getPeerMgr( void )								{ return m_PeerMgr; }
     P2PConnectList&             getConnectList( void )                          { return m_ConnectionList; }
     PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
@@ -732,8 +729,7 @@ protected:
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
     BlobMgr&				    m_BlobMgr;
-    OfferClientMgr&				m_OfferClientMgr;
-    OfferHostMgr&				m_OfferHostMgr;
+    OfferMgr&				    m_OfferMgr;
     ThumbMgr&					m_ThumbMgr;
     ConnectionMgr&              m_ConnectionMgr;
     ConnectMgr&                 m_ConnectMgr;

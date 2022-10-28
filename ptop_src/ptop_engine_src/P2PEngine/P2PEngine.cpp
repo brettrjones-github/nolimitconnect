@@ -94,8 +94,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_NetStatusAccum( *this )
 	, m_AssetMgr( *new AssetMgr( *this, "AssetMgrDb.db3", "AssetStateDb.db3" ) )
 	, m_BlobMgr( *new BlobMgr( *this, "BlobAssetDb.db3", "BlobStateDb.db3" ) )
-	, m_OfferClientMgr( *new OfferClientMgr( *this, "OfferClientDb.db3", "OfferClientStateDb.db3" ) )
-	, m_OfferHostMgr( *new OfferHostMgr( *this, "OfferHostDb.db3", "OfferHostStateDb.db3" ) )
+	, m_OfferMgr( *new OfferMgr( *this, "OfferDb.db3", "OfferStateDb.db3" ) )
 	, m_ThumbMgr( *new ThumbMgr( *this, "ThumbAssetDb.db3", "ThumbStateDb.db3" ) )
 	, m_ConnectionMgr( *new ConnectionMgr( *this ) )
 	, m_ConnectMgr( *new ConnectMgr( *this, "ConnectMgrDb.db3", "ConnectStateDb.db3" ) )
@@ -147,21 +146,6 @@ IToGui& P2PEngine::getToGui()
 IAudioRequests& P2PEngine::getAudioRequest()
 {
     return IToGui::getAudioRequests();
-}
-
-//============================================================================
-OfferBaseMgr& P2PEngine::getOfferMgr( EOfferMgrType mgrType )
-{
-    switch( mgrType )
-    {
-    case eOfferMgrTypeOfferClient:
-        return getOfferClientMgr();
-    case eOfferMgrTypeOfferHost:
-        return getOfferHostMgr();
-    default:
-        vx_assert( false );
-        return getOfferClientMgr();
-    }
 }
 
 //============================================================================
