@@ -65,7 +65,6 @@ void OfferBaseMgr::fromGuiUserLoggedOn( void )
 {
 	if( !m_Initialized )
 	{
-
 		// user specific directory should be set
 		std::string dbFileName = VxGetSettingsDirectory();
 		dbFileName += m_OfferBaseInfoDb.getDatabaseName();

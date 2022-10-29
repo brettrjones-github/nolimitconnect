@@ -144,7 +144,7 @@ void ThumbMgr::announceAssetAdded( AssetBaseInfo* assetInfo )
     }
 
     AssetBaseMgr::announceAssetAdded( assetInfo );
-    ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
+    ThumbInfo* thumbInfo = dynamic_cast<ThumbInfo*>( assetInfo );
     if( thumbInfo )
     {
 	    LogMsg( LOG_INFO, "ThumbMgr::announceThumbAdded start" );
@@ -176,7 +176,7 @@ void ThumbMgr::announceAssetUpdated( AssetBaseInfo* assetInfo )
     }
 
     AssetBaseMgr::announceAssetUpdated( assetInfo );
-    ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
+    ThumbInfo* thumbInfo = dynamic_cast<ThumbInfo*>( assetInfo );
     if( thumbInfo )
     {
         lockClientList();
@@ -199,7 +199,7 @@ void ThumbMgr::announceAssetUpdated( AssetBaseInfo* assetInfo )
 void ThumbMgr::announceAssetRemoved( AssetBaseInfo* assetInfo )
 {
     AssetBaseMgr::announceAssetRemoved( assetInfo );
-    ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
+    ThumbInfo* thumbInfo = dynamic_cast<ThumbInfo*>( assetInfo );
     if( thumbInfo && thumbInfo->isThumbAsset() )
     {
 	    lockClientList();
