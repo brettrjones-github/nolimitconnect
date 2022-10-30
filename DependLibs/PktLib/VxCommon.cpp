@@ -109,7 +109,7 @@ bool PluginPermission::isPluginEnabled( EPluginType ePlugin )
 
 //============================================================================
 //! get type of permission user has set for givin plugin
-EFriendState PluginPermission::getPluginPermission( EPluginType pluginType ) 
+EFriendState PluginPermission::getPluginPermission( EPluginType pluginType, bool inGroup )
 { 
 	if(( pluginType > 0 ) && ( pluginType < eMaxPluginType ) )
 	{
@@ -118,7 +118,13 @@ EFriendState PluginPermission::getPluginPermission( EPluginType pluginType )
 		int byteShift = pluginNum & 0x01 ? 4 : 0;
 		uint8_t byteWithPerm = m_au8Permissions[ byteIdx ];
 
-		return  (EFriendState)( ( byteWithPerm >> byteShift ) & 0xf ); 
+		EFriendState friendState = (EFriendState)( ( byteWithPerm >> byteShift ) & 0xf );
+		if( eFriendStateAnonymous == friendState && inGroup )
+		{
+			friendState = eFriendStateGuest;
+		}
+
+		return friendState;
 	}
 
 	return eFriendStateIgnore;

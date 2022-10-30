@@ -24,6 +24,16 @@ FileToXfer::FileToXfer( FileInfo& fileInfo, VxGUID& lclSessionId, VxGUID& rmtSes
 }
 
 //============================================================================
+FileToXfer::FileToXfer( const FileToXfer& rhs )
+    : FileInfo( rhs )
+    , m_LclSessionId( rhs.m_LclSessionId )
+    , m_RmtSessionId( rhs.m_RmtSessionId )
+    , m_FileOffset( rhs.m_FileOffset )
+{
+
+}
+
+//============================================================================
 FileToXfer& FileToXfer::operator=(const FileToXfer& rhs) 
 {	
 	if( &rhs != this )

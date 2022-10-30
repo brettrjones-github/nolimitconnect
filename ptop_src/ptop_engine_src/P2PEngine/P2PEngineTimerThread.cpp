@@ -104,7 +104,6 @@ void P2PEngine::onOncePerSecond( void )
     {
         thirtySecCntInSeconds = 30;
         onOncePer30Seconds();
-        onOncePer15Minutes(); // BRJ for testing only.. remove me
     }
 
     static int minuteCntInSeconds = 62;
@@ -152,9 +151,14 @@ void P2PEngine::onOncePerMinute( void )
     m_ConnectionList.broadcastSystemPkt( &m_PktImAliveReq, false );
     m_RcScan.onOncePerMinute();
 
-//#ifdef _DEBUG
-//	VxThread::dumpRunningThreads();
-//#endif // _DEBUG
+    static bool firstMinute = true;
+    if( firstMinute )
+    {
+        firstMinute = false;
+        // this is so announcement of hosts start in a minute instead of waiting 
+        // the full 15 minute before the first announce
+        m_PluginMgr.onThreadOncePer15Minutes();
+    }
 }
 
 //============================================================================

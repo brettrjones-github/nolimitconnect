@@ -88,29 +88,47 @@ void			FriendMatch::setMyFriendshipToHim( EFriendState eFriendState )
 }
 
 //! get permission level I have given to friend
-EFriendState	FriendMatch::getMyFriendshipToHim( void )						{ return (EFriendState)(m_u8FriendMatch & 0x0f); }
+EFriendState FriendMatch::getMyFriendshipToHim( bool inGroup )						
+{ 
+    EFriendState friendState = (EFriendState)(m_u8FriendMatch & 0x0f);
+    if( eFriendStateAnonymous == friendState && inGroup )
+    {
+        friendState = eFriendStateGuest;
+    }
+
+    return friendState;
+}
 
 //! set permission level he has given to me
-void			FriendMatch::setHisFriendshipToMe( EFriendState eFriendState )	
+void FriendMatch::setHisFriendshipToMe( EFriendState eFriendState )	
 { 
 	m_u8FriendMatch &= 0x0f; 
 	m_u8FriendMatch |= (eFriendState << 4); 
 }
 
 //! get permission level he has given to me
-EFriendState	FriendMatch::getHisFriendshipToMe( void )						{ return (EFriendState)((m_u8FriendMatch >> 4) & 0x0f); }
+EFriendState FriendMatch::getHisFriendshipToMe( bool inGroup )						        
+{ 
+    EFriendState friendState = (EFriendState)((m_u8FriendMatch >> 4) & 0x0f); 
+    if( eFriendStateAnonymous == friendState && inGroup )
+    {
+        friendState = eFriendStateGuest;
+    }
+
+    return friendState;
+}
 
 //! reverse the permissions
-void			FriendMatch::reversePermissions( void )
+void FriendMatch::reversePermissions( void )
 {
 	uint8_t u8TmpPermission = m_u8FriendMatch << 4;
 	m_u8FriendMatch = u8TmpPermission | (( m_u8FriendMatch >> 4 ) & 0x0f);
 }
 //! return string with friend state He has given Me
-void			FriendMatch::describeHisFriendshipToMe( std::string & strRetPermission ) { strRetPermission = DescribeFriendState( getHisFriendshipToMe() ); }
+void FriendMatch::describeHisFriendshipToMe( std::string & strRetPermission )       { strRetPermission = DescribeFriendState( getHisFriendshipToMe() ); }
 //! return string with friend state He has given Me
 const char*	FriendMatch::describeHisFriendshipToMe( void )							{ return DescribeFriendState( getHisFriendshipToMe() ); }
 //! return string with friend state I have given Him
-void			FriendMatch::describeMyFriendshipToHim( std::string & strRetPermission ) { strRetPermission = DescribeFriendState( getMyFriendshipToHim() ); }
+void FriendMatch::describeMyFriendshipToHim( std::string & strRetPermission )       { strRetPermission = DescribeFriendState( getMyFriendshipToHim() ); }
 //! return string with friend state I have given Him
 const char*	FriendMatch::describeMyFriendshipToHim( void )							{ return DescribeFriendState( getMyFriendshipToHim() ); }

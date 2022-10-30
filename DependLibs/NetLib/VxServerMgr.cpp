@@ -784,7 +784,7 @@ void VxServerMgr::closeListenSocket( void )
 
         m_ListenSktIsBoundToIp = false;
         m_IsReadyToAcceptConnections = false;
-        LogModule( eLogListen, LOG_DEBUG, "### VxServerMgr: Mgr %d stop listening %d skt cnt %d thread 0x%x\n", m_iMgrId, m_u16ListenPort, m_iActiveListenSktCnt, VxGetCurrentThreadId() );
+        LogModule( eLogListen, LOG_DEBUG, "### VxServerMgr: Mgr %d stop listening %d skt cnt %d thread 0x%x", m_iMgrId, m_u16ListenPort, m_iActiveListenSktCnt, VxGetCurrentThreadId() );
         m_u16ListenPort = 0;
 
         // kill previous thread if running
@@ -794,7 +794,7 @@ void VxServerMgr::closeListenSocket( void )
         {
             if( INVALID_SOCKET != m_aoListenSkts[ i ] )
             {
-                LogModule( eLogListen, LOG_INFO, "VxServerMgr: Mgr %d closing listen skt %d\n", m_iMgrId, i );
+                LogModule( eLogListen, LOG_INFO, "VxServerMgr: Mgr %d closing listen skt %d", m_iMgrId, i );
 
                 // closing the thread should release it so it can exit
                 SOCKET sktToClose = m_aoListenSkts[ i ];
@@ -803,7 +803,7 @@ void VxServerMgr::closeListenSocket( void )
             }
             else
             {
-                LogModule( eLogListen, LOG_ERROR, "VxServerMgr:stopListening skt idx %d had invalid socket\n", i );
+                LogModule( eLogListen, LOG_ERROR, "VxServerMgr:stopListening skt idx %d had invalid socket", i );
             }
         }
 
@@ -816,7 +816,7 @@ void VxServerMgr::closeListenSocket( void )
     }
     else
     {
-        LogModule( eLogListen, LOG_DEBUG, "VxServerMgr:stopListening called with no listen sockets\n" );
+        LogModule( eLogListen, LOG_DEBUG, "VxServerMgr:stopListening called with no listen sockets" );
     }
 }
 

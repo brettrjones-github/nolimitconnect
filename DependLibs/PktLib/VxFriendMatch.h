@@ -59,24 +59,24 @@ public:
 	//! set permission level I have given to friend
     void						setMyFriendshipToHim( enum EFriendState eFriendState );
 	//! get permission level I have given to friend
-	EFriendState				getMyFriendshipToHim( void );
+	EFriendState				getMyFriendshipToHim( bool inGroup = false );
 
 	//! set permission level he has given to me
 	void						setHisFriendshipToMe( EFriendState eFriendState );
 
 	//! get permission level he has given to me
-	EFriendState				getHisFriendshipToMe( void );
+	EFriendState				getHisFriendshipToMe( bool inGroup = false );
 
 	//! reverse the permissions
 	void						reversePermissions( void );
 	//! return string with friend state He has given Me
 	void						describeHisFriendshipToMe( std::string & strRetPermission );
 	//! return string with friend state He has given Me
-	const char*				describeHisFriendshipToMe( void );
+	const char*					describeHisFriendshipToMe( void );
 	//! return string with friend state I have given Him
 	void						describeMyFriendshipToHim( std::string & strRetPermission );
 	//! return string with friend state I have given Him
-	const char*				describeMyFriendshipToHim( void );
+	const char*					describeMyFriendshipToHim( void );
 
 	//=== vars ===//
     uint8_t						m_u8FriendMatch{ 0x11 };

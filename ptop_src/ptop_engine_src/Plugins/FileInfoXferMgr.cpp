@@ -1091,7 +1091,7 @@ EXferError FileInfoXferMgr::beginFileReceive( FileRxSession* rxSession, PktFileS
 	{
 		LogMsg( LOG_VERBOSE, "FileInfoXferMgr::(File Send) start recieving file %s", xferInfo.getLclFileName().c_str() );
 
-		uint8_t u8FileType = VxFileUtil::fileExtensionToFileTypeFlag( xferInfo.getRmtFileName().c_str() );
+        // uint8_t u8FileType = VxFileUtil::fileExtensionToFileTypeFlag( xferInfo.getRmtFileName().c_str() );
 		FileInfo fileInfo( xferInfo, rxSession->getIdent()->getMyOnlineId() );
 		m_FileInfoMgr.toGuiFileDownloadStart( rxSession->getIdent()->getMyOnlineId(), xferInfo.getLclSessionId(), fileInfo );
 	}

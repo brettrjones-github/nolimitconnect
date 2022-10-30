@@ -45,6 +45,12 @@ NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const c
 //============================================================================
 void NetworkEventAvail::runNetworkEvent( void )
 {
+	if( VxIsAppShuttingDown() )
+	{
+		// do not mess with listen events while shutting down
+		return;
+	}
+
 	LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent start" );
 	m_NetworkStateMachine.resolveWebsiteUrls();
     uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();

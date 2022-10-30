@@ -20,6 +20,7 @@ class FileToXfer : public FileInfo
 {
 public:
 	FileToXfer( FileInfo& fileInfo, VxGUID&	lclSessionId, VxGUID& rmtSessionId );				
+    FileToXfer( const FileToXfer& fileXferInfo );
 
 	FileToXfer& operator=( const FileToXfer& fileXferInfo );
 

@@ -73,7 +73,7 @@ public:
 
     bool						isPluginEnabled( enum EPluginType ePlugin );
 	//! get type of permission user has set for given plugin
-    EFriendState				getPluginPermission( enum EPluginType pluginType );
+    EFriendState				getPluginPermission( enum EPluginType pluginType, bool inGroup = false );
 	//! set type of permission user has set for given plugin
     void						setPluginPermission( enum EPluginType pluginType, enum EFriendState eFriendState );
 	//! reset permissions to default values
