@@ -42,14 +42,15 @@ PluginVideoPhone::PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool PluginVideoPhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
 	bool result = false;
-	P2PSession * poSession = 0;
+	P2PSession* poSession = nullptr;
+	VxGUID& lclSessionId = offerInfo.getOfferId();
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( lclSessionId.isVxGUIDValid() )
 	{
-		poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionBySessionId( lclSessionId, true );
+		poSession = (P2PSession*)m_PluginSessionMgr.findP2PSessionBySessionId( lclSessionId, true );
 		if( poSession )
 		{
 			#ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -61,7 +62,7 @@ bool PluginVideoPhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseIn
 	}
 	else
 	{
-		poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
+		poSession = (P2PSession*)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 		if( poSession )
 		{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -73,18 +74,18 @@ bool PluginVideoPhone::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseIn
 	}
 
 		
-	result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true, netIdent, offerInfo, lclSessionId );
+	result = m_PluginSessionMgr.fromGuiMakePluginOffer(	true, netIdent, offerInfo );
 
 	return result;
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
+bool PluginVideoPhone::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "PluginVideoPhone::fromGuiOfferReply %d", offerResponse );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo, lclSessionId, offerResponse );
+	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo );
 }
 
 //============================================================================
@@ -120,7 +121,7 @@ bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent*	netIdent,
 										const char*	pMsg )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	P2PSession * poSession = m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	P2PSession* poSession = m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktChatReq oPkt;

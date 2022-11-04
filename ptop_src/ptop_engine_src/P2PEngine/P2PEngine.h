@@ -300,8 +300,8 @@ public:
     virtual void				fromGuiStopPluginSession( EPluginType pluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) override;
     virtual bool				fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
-    virtual bool				fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) override;
+	virtual bool				fromGuiMakePluginOffer( VxGUID& onlineId, OfferBaseInfo& offerInfo ) override;
+    virtual bool				fromGuiToPluginOfferReply( VxGUID& onlineId, OfferBaseInfo& offerInfo ) override;
 
     virtual EXferError			fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo ) override;
 

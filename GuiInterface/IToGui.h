@@ -132,15 +132,11 @@ public:
 	virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) = 0;
 
 	//! Contact has sent a offer
-	virtual void				toGuiRxedPluginOffer( VxNetIdent* netIdent, EPluginType	pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) = 0;
+	virtual void				toGuiRxedPluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo ) = 0;
 	//! Contact has responded to offer
-	virtual void				toGuiRxedOfferReply( VxNetIdent* netIdent, EPluginType	pluginType, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) = 0;
+	virtual void				toGuiRxedOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo ) = 0;
 	//! Plugin session has stopped
-	virtual void				toGuiPluginSessionEnded(	VxNetIdent*		netIdent, 
-															EPluginType		pluginType,
-															int				pvUserData,
-															EOfferResponse	offerResponse,
-															VxGUID&			lclSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual void				toGuiPluginSessionEnded( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& lclSessionId ) = 0;
 	//! Plugin session status or variable value
 	virtual void				toGuiPluginStatus(	EPluginType		pluginType,
 													int				statusType,

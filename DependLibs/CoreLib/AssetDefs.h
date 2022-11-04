@@ -29,10 +29,12 @@ enum EAssetType
 	eAssetTypeOtherFiles			= 0x40,
 	eAssetTypeDirectory				= 0x80,
 	// these are specific to ptop web
-    eAssetTypeThumbnail             = 0x1000,
-    eAssetTypeChatText				= 0x2000,
-    eAssetTypeChatFace				= 0x4000,
-    eAssetTypeCamRecord             = 0x8000
+    eAssetTypeThumbnail             = 0x0100,
+    eAssetTypeChatText				= 0x0200,
+    eAssetTypeChatFace				= 0x0400,
+    eAssetTypeCamRecord             = 0x0800,
+
+	eAssetTypeSessionOffer			= 0x1000
 };
 
 enum EAssetLocation

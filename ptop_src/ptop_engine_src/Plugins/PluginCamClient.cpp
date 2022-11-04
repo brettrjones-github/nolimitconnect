@@ -299,8 +299,9 @@ EPluginAccess PluginCamClient::canAcceptNewSession( VxNetIdent* netIdent )
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginCamClient::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )		// filename if any
+bool PluginCamClient::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )	
 {
+	VxGUID& lclSessionId = offerInfo.getOfferId();
 	VxSktBase* sktBase = NULL;
 	LogMsg( LOG_VERBOSE, " PluginCamClient::fromGuiMakePluginOffer %s", netIdent->getOnlineName());
 

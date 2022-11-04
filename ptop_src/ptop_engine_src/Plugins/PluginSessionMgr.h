@@ -42,8 +42,8 @@ public:
 
 	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent* netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual bool				fromGuiMakePluginOffer(	bool pluginIsLocked, VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId );
-	virtual bool				fromGuiOfferReply( bool pluginIsLocked, VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse );
+	virtual bool				fromGuiMakePluginOffer(	bool pluginIsLocked, VxNetIdent* netIdent, OfferBaseInfo& offerInfo );
+	virtual bool				fromGuiOfferReply( bool pluginIsLocked, VxNetIdent* netIdent, OfferBaseInfo& offerInfo );
 
 	virtual void				onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

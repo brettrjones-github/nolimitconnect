@@ -280,9 +280,10 @@ EPluginAccess PluginCamServer::canAcceptNewSession( VxNetIdent* netIdent )
 }
 
 //============================================================================
-bool PluginCamServer::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool PluginCamServer::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
 	VxSktBase* sktBase = NULL;
+	VxGUID& lclSessionId = offerInfo.getOfferId();
 	LogMsg( LOG_INFO, " PluginCamServer::fromGuiMakePluginOffer %s", netIdent->getOnlineName());
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	if( true == m_PluginMgr.pluginApiSktConnectTo( m_ePluginType, netIdent, 0, &sktBase ) )
@@ -414,8 +415,7 @@ void PluginCamServer::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktHd
 	OfferBaseInfo offerInfo;
 	if( offerInfo.extractFromBlob( pktReply->getBlobEntry() ) )
 	{
-		VxGUID& lclSessionId = pktReply->getLclSessionId();
-		IToGui::getToGui().toGuiRxedOfferReply( netIdent, getPluginType(), offerInfo, lclSessionId, offerResponse );
+		IToGui::getToGui().toGuiRxedOfferReply( netIdent, offerInfo );
 	}
 
 	PluginBase::AutoPluginLock pluginMutexLock( this );

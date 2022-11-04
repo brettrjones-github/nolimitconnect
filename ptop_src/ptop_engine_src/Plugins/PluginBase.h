@@ -134,15 +134,15 @@ public:
 	virtual void				fromGuiCancelDownload( VxGUID& fileInstance ) {};
 	virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) {};
 
-	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) { return false; };
-	virtual bool				fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) { return false; };
+	virtual bool				fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )	{ return false; };
+	virtual bool				fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )			{ return false; };
 
 	virtual EXferError			fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo );
 
 	virtual bool				fromGuiInstMsg(	VxNetIdent* netIdent, const char*	pMsg );
 	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
 
-	virtual bool				fromGuiSetGameValueVar(	VxNetIdent* netIdent, int32_t varId, int32_t varValue )		{ return false; };
+	virtual bool				fromGuiSetGameValueVar(	VxNetIdent* netIdent, int32_t varId, int32_t varValue )			{ return false; };
 	virtual bool				fromGuiSetGameActionVar( VxNetIdent* netIdent, int32_t	actionId, int32_t actionValue )	{ return false; };
 
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )				{};

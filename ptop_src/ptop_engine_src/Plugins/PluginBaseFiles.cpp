@@ -252,9 +252,9 @@ void PluginBaseFiles::onSharedFilesUpdated( uint16_t u16FileTypes )
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginBaseFiles::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool PluginBaseFiles::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
-	return m_FileInfoXferMgr.fromGuiMakePluginOffer( netIdent, offerInfo, lclSessionId );
+	return m_FileInfoXferMgr.fromGuiMakePluginOffer( netIdent, offerInfo );
 }
 
 //============================================================================

@@ -260,9 +260,9 @@ public:
 	virtual bool				fromGuiIsPluginInSession( EPluginType pluginType, VxNetIdent* netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
 
 	/// Send offer of file or session to a contact
-	virtual bool				fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) = 0;
+	virtual bool				fromGuiMakePluginOffer( VxGUID& onlineId, OfferBaseInfo& offerInfo ) = 0;
 	/// Contact sent session offer reply
-	virtual bool				fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse ) = 0;
+	virtual bool				fromGuiToPluginOfferReply( VxGUID& onlineId, OfferBaseInfo& offerInfo ) = 0;
 
 	/// Plugin control such as cancel download etc.
 	virtual EXferError			fromGuiFileXferControl( EPluginType pluginType, EXferAction xferAction, FileInfo& fileInfo ) = 0;

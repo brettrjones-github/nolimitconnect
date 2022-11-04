@@ -48,15 +48,15 @@ void PluginBaseMultimedia::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool PluginBaseMultimedia::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
 	bool result = false;
-	P2PSession * poSession = 0;
+	P2PSession* poSession = nullptr;
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiMakePluginOffer autoLock start\n" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiSetGameValueVar autoLock done\n" );
 
-	poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	poSession = (P2PSession*)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		LogMsg( LOG_ERROR, "PluginBaseMultimedia already in session");
@@ -64,7 +64,8 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBa
 	}
 	else
 	{
-		result = m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo, lclSessionId );
+		offerInfo.getOfferId().assureIsValidGUID();
+		result = m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo );
 	}
 
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiMakePluginOffer autoLock destroy\n" );
@@ -72,10 +73,10 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBa
 }
 
 //============================================================================
-bool PluginBaseMultimedia::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
+bool PluginBaseMultimedia::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiOfferReply start\n" );
-	bool result = m_PluginSessionMgr.fromGuiOfferReply( false,	netIdent, offerInfo, lclSessionId, offerResponse );
+	bool result = m_PluginSessionMgr.fromGuiOfferReply( false,	netIdent, offerInfo );
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiOfferReply done\n" );
 	return result;
 }
@@ -466,7 +467,7 @@ void PluginBaseMultimedia::onPktMultiSessionReq( VxSktBase* sktBase, VxPktHdr* p
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "PluginBaseMultimedia::onPktMultiSessionReq autoLock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	P2PSession * poSession = m_PluginSessionMgr.findOrCreateP2PSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
+	P2PSession* poSession = m_PluginSessionMgr.findOrCreateP2PSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
 	poSession->setSkt( sktBase );
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK

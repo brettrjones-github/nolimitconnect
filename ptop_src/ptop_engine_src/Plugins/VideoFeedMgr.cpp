@@ -82,7 +82,7 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, EAppModule app
 		PluginSessionBase* sessionBase = iter->second;
 		if( sessionBase->isP2PSession() )
 		{
-			P2PSession * poSession = (P2PSession *)sessionBase;
+			P2PSession* poSession = (P2PSession*)sessionBase;
 			if( poSession->getSkt() )
 			{
 				m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), poSession->getIdent()->getMyOnlineId(), poSession->getSkt(), &oPkt );
@@ -296,7 +296,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNe
         LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
-		P2PSession * poSession = m_SessionMgr.findOrCreateP2PSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
+		P2PSession* poSession = m_SessionMgr.findOrCreateP2PSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
 		if( poSession )
 		{
 			if( poSession->getVideoCastPkt() )
@@ -336,7 +336,7 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase* sktBase, VxPktHdr* pktHdr,
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
 	PktVideoFeedPicChunk * poPktPicChunk = ( PktVideoFeedPicChunk * )pktHdr;
-	P2PSession * poSession = m_SessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	P2PSession* poSession = m_SessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktVideoFeedPic * poPktCastPic = (PktVideoFeedPic *)poSession->getVideoCastPkt();
@@ -387,7 +387,7 @@ void VideoFeedMgr::onPktVideoFeedPicAck( VxSktBase* sktBase, VxPktHdr* pktHdr, V
     LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock done" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
-	P2PSession * poSession = m_SessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	P2PSession* poSession = m_SessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		poSession->decrementOutstandingAckCnt();
@@ -416,7 +416,7 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 		PluginSessionBase* sessionBase = iter->second;
 		if( sessionBase->isP2PSession() )
 		{
-			P2PSession * poSession = (P2PSession *)iter->second;
+			P2PSession* poSession = (P2PSession*)iter->second;
 			int ackCnt = poSession->getOutstandingAckCnt();
 			if( poSession && ( MAX_OUTSTANDING_VID_ACKS > ackCnt ) )
 			{
@@ -477,7 +477,7 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 		PluginSessionBase* sessionBase = iter->second;
 		if( sessionBase->isP2PSession() )
 		{
-			P2PSession * poSession = (P2PSession *)iter->second;
+			P2PSession* poSession = (P2PSession*)iter->second;
 			if( m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
 					                            poSession->getIdent()->getMyOnlineId(), 
 					                            poSession->getSkt(), 

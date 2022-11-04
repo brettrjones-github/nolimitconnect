@@ -15,16 +15,18 @@
 #include "OfferBaseInfo.h"
 
 #include <PktLib/PktBlobEntry.h>
+#include <PktLib/VxCommon.h>
 
 //============================================================================
 OfferBaseInfo::OfferBaseInfo( const OfferBaseInfo& rhs )
 	: AssetInfo( rhs )
 	, m_PluginType( rhs.m_PluginType )
-	, m_OfferMsg( rhs.m_OfferMsg )
+	, m_OfferMgr( rhs.m_OfferMgr )
+	, m_OfferId( rhs.m_OfferId )
 	, m_OfferExpireTime( rhs.m_OfferExpireTime )
+	, m_OfferMsg( rhs.m_OfferMsg )
 	, m_OfferResponse( rhs.m_OfferResponse )
 {
-
 }
 
 //============================================================================
@@ -52,8 +54,10 @@ OfferBaseInfo& OfferBaseInfo::operator=( const OfferBaseInfo& rhs )
 	{
 		*((AssetInfo*)this) = rhs;
 		m_PluginType = rhs.m_PluginType;
-		m_OfferMsg = rhs.m_OfferMsg;
+		m_OfferMgr = rhs.m_OfferMgr;
+		m_OfferId = rhs.m_OfferId;
 		m_OfferExpireTime = rhs.m_OfferExpireTime;
+		m_OfferMsg = rhs.m_OfferMsg;
 		m_OfferResponse = rhs.m_OfferResponse;
 	}
 
@@ -67,9 +71,12 @@ bool OfferBaseInfo::addToBlob( PktBlobEntry& blob )
 	if( AssetInfo::addToBlob( blob ) )
 	{
 		bool result = blob.setValue( m_PluginType );
-		result &= blob.setValue( m_OfferMsg );
+		result &= blob.setValue( m_OfferMgr );
+		result &= blob.setValue( m_OfferId );
 		result &= blob.setValue( m_OfferExpireTime );
+		result &= blob.setValue( m_OfferMsg );
 		result &= blob.setValue( m_OfferResponse );
+
 		return result;
 	}
 
@@ -83,11 +90,46 @@ bool OfferBaseInfo::extractFromBlob( PktBlobEntry& blob )
 	if( AssetInfo::extractFromBlob( blob ) )
 	{
 		bool result = blob.getValue( m_PluginType );
-		result &= blob.getValue( m_OfferMsg );
+		result &= blob.getValue( m_OfferMgr );
+		result &= blob.getValue( m_OfferId );
 		result &= blob.getValue( m_OfferExpireTime );
+		result &= blob.getValue( m_OfferMsg );
 		result &= blob.getValue( m_OfferResponse );
+
 		return result;
 	}
 
 	return false;
+}
+
+//============================================================================
+void OfferBaseInfo::fillOfferSend( EPluginType pluginType, VxNetIdent& netIdent )
+{
+	m_PluginType = pluginType;
+	m_OfferResponse = eOfferResponseNotSet;
+	m_OfferMgr = eOfferMgrHost;
+	setOnlineId( netIdent.getMyOnlineId() );
+	setCreatorId( netIdent.getMyOnlineId() );
+	setHistoryId( netIdent.getMyOnlineId() );
+	m_UniqueId.assureIsValidGUID();
+	if( IsPluginSingleSession( pluginType ) )
+	{
+		setOfferId( netIdent.getMyOnlineId() );
+	}
+	else
+	{
+		m_OfferId.assureIsValidGUID();
+	}	
+}
+
+//============================================================================
+bool OfferBaseInfo::isValid( void )
+{
+	return ePluginTypeInvalid != m_PluginType && eOfferMgrNotSet != m_OfferMgr && m_UniqueId.isVxGUIDValid() && m_OfferId.isVxGUIDValid() && getOnlineId().isVxGUIDValid();
+}
+
+//============================================================================
+bool OfferBaseInfo::isSessionMatch( OfferBaseInfo& rhs )
+{
+	return getOfferId() == rhs.getOfferId() && m_PluginType == rhs.getPluginType() && getOnlineId() == rhs.getOnlineId() && getOfferMgr() == rhs.getOfferMgr();
 }

@@ -224,8 +224,9 @@ void FileInfoXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool FileInfoXferMgr::fromGuiMakePluginOffer( VxNetIdent* netIdent,	OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool FileInfoXferMgr::fromGuiMakePluginOffer( VxNetIdent* netIdent,	OfferBaseInfo& offerInfo )
 {
+	VxGUID& lclSessionId = offerInfo.getOfferId();
 	lclSessionId.assureIsValidGUID();
 	VxSktBase* sktBase{ nullptr };
 	if( m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), netIdent, 0, &sktBase ) )

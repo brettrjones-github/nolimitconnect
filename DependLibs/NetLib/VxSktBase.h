@@ -111,16 +111,16 @@ public:
 	virtual void				setIsConnected( bool connected )				{ m_bIsConnected = connected; };
 	virtual bool				isConnected( void );
 
-	virtual bool				isUdpSocket( void )								{ return ((eSktTypeUdp == m_eSktType)||(eSktTypeUdpBroadcast == m_eSktType))?1:0; };
-	virtual bool				isTcpSocket( void )								{ return ((eSktTypeTcpConnect == m_eSktType)||(eSktTypeTcpAccept == m_eSktType))?1:0; };
-	virtual bool				isAcceptSocket( void )							{ return ((eSktTypeTcpAccept == m_eSktType)?1:0);};
-	virtual bool				isConnectSocket( void )							{ return ((eSktTypeTcpConnect == m_eSktType)?1:0);};
+	virtual bool				isUdpSocket( void )								{ return ((eSktTypeUdp == m_eSktType)||(eSktTypeUdpBroadcast == m_eSktType)); };
+	virtual bool				isTcpSocket( void )								{ return ((eSktTypeTcpConnect == m_eSktType)||(eSktTypeTcpAccept == m_eSktType)); };
+	virtual bool				isAcceptSocket( void )							{ return (eSktTypeTcpAccept == m_eSktType);};
+	virtual bool				isConnectSocket( void )							{ return (eSktTypeTcpConnect == m_eSktType);};
 	virtual bool				isLoopbackSocket( void )						{ return m_LoopbackSocketId == getSocketId(); };
 
     uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
-    const char*				getRemoteIpAddress( void )                      { return m_strRmtIp.c_str(); }
+    const char*					getRemoteIpAddress( void )                      { return m_strRmtIp.c_str(); }
 	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
-	const char*				getLocalIpAddress( void )						{ return m_strLclIp.c_str(); }
+	const char*					getLocalIpAddress( void )						{ return m_strLclIp.c_str(); }
 
 	uint16_t					getCryptoKeyPort( void )						{ return (eSktTypeTcpAccept == getSktType()) ? m_LclIp.getPort() : m_RmtIp.getPort(); }
 
@@ -163,7 +163,7 @@ public:
 	bool						bindSocket( struct addrinfo * poResultAddr );
 	bool						isIPv6Address (const char* addr );
 	int							getIPv6ScopeID( const char* addr );
-	const char*				stripIPv6ScopeID( const char* addr, std::string &buf );
+	const char*					stripIPv6ScopeID( const char* addr, std::string &buf );
 	RCODE						joinMulticastGroup( InetAddress& oLclAddress, const char*mcastAddr );
 
 	void						setTTL( uint8_t ttl );

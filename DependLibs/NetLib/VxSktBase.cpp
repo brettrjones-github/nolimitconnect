@@ -1476,14 +1476,32 @@ const char* VxSktBase::describeSktCallbackReason( ESktCallbackReason reason )
 //============================================================================
 std::string VxSktBase::describeSktType( void )
 {
-    std::string typeDesc;
-    StdStringFormat( typeDesc, "skt id %d skt %d  %s %s last active %s ", 
+	std::string sktTypeDesc = "unknown";
+	if( isLoopbackSocket() )
+	{
+		sktTypeDesc = "loopback";
+	}
+	else if( isAcceptSocket() )
+	{
+		sktTypeDesc = "accept";
+	}
+	else if( isConnectSocket() )
+	{
+		sktTypeDesc = "connect";
+	}
+	else if( isUdpSocket() )
+	{
+		sktTypeDesc = "udp";
+	}
+
+    std::string sktDesc;
+    StdStringFormat( sktDesc, "skt id %d handle %d type %s ip %s last active %s ",
                      m_SktNumber, 
                      m_Socket,
-					 m_strRmtIp.c_str(), 
-					 isAcceptSocket() ? "accept" : (isUdpSocket() ? "udp" : "connect" ),
+					 sktTypeDesc.c_str(),
+					m_strRmtIp.c_str(),
 					 ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
-    return typeDesc;
+    return sktDesc;
 }
 
 //============================================================================

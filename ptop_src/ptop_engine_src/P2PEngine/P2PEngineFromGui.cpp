@@ -675,14 +675,14 @@ EPluginServerState P2PEngine::fromGuiGetPluginServerState( EPluginType pluginTyp
 
 //============================================================================
 //! called with offer to create session.. return false if cannot connect
-bool P2PEngine::fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool P2PEngine::fromGuiMakePluginOffer( VxGUID& onlineId, OfferBaseInfo& offerInfo )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiMakePluginOffer" );
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( offerInfo.getPluginType() );
 	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiMakePluginOffer( netIdent, offerInfo, lclSessionId );
+		return poPlugin->fromGuiMakePluginOffer( netIdent, offerInfo );
 	}
 	else
 	{
@@ -694,7 +694,7 @@ bool P2PEngine::fromGuiMakePluginOffer( EPluginType pluginType, VxGUID& onlineId
 
 //============================================================================
 //! handle reply to offer
-bool P2PEngine::fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlineId, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse offerResponse )
+bool P2PEngine::fromGuiToPluginOfferReply( VxGUID& onlineId, OfferBaseInfo& offerInfo )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiToPluginOfferReply" );
 	if( VxIsAppShuttingDown() )
@@ -703,10 +703,10 @@ bool P2PEngine::fromGuiToPluginOfferReply( EPluginType pluginType, VxGUID& onlin
 	}
 
 	VxNetIdent* netIdent = m_BigListMgr.findNetIdent( onlineId );
-	PluginBase* poPlugin = m_PluginMgr.getPlugin( pluginType );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( offerInfo.getPluginType() );
 	if( netIdent && poPlugin )
 	{
-		return poPlugin->fromGuiOfferReply( netIdent, offerInfo, lclSessionId, offerResponse );
+		return poPlugin->fromGuiOfferReply( netIdent, offerInfo );
 	}
 	else
 	{

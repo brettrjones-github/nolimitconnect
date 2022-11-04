@@ -28,6 +28,9 @@ public:
 
     OfferBaseInfo& operator=( const OfferBaseInfo& rhs );
 
+    virtual bool				isValid( void ) override;
+    virtual bool				isSessionMatch( OfferBaseInfo& rhs );
+
     virtual bool                addToBlob( PktBlobEntry& blob ) override;
     virtual bool                extractFromBlob( PktBlobEntry& blob ) override;
 
@@ -76,11 +79,13 @@ public:
     virtual void                setOfferMgr( EOfferMgrType offerMgr )   { m_OfferMgr = offerMgr; }
     virtual EOfferMgrType       getOfferMgr( void )                     { return m_OfferMgr; }
 
+    virtual void                fillOfferSend( EPluginType pluginType, VxNetIdent& netIdent );
+
 protected:
     EPluginType                 m_PluginType{ePluginTypeInvalid};
-    std::string                 m_OfferMsg{ "" };
-    int64_t                     m_OfferExpireTime{ 0 };
-    VxGUID                      m_OfferId;
-    EOfferResponse              m_OfferResponse{ eOfferResponseNotSet };
     EOfferMgrType               m_OfferMgr{ eOfferMgrNotSet };
+    VxGUID                      m_OfferId;
+    int64_t                     m_OfferExpireTime{ 0 };
+    std::string                 m_OfferMsg{ "" };
+    EOfferResponse              m_OfferResponse{ eOfferResponseNotSet };
 };

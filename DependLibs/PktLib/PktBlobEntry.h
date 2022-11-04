@@ -104,6 +104,7 @@ public:
     bool                        setValue( std::vector<std::string>& aoStrValues );
     bool                        setValue( void * pvRetBuf, int iBufLen );
     bool                        setValue( EOfferResponse& offerResponse );
+    bool                        setValue( EOfferMgrType& offerMgr );
 
     //! get value 
     bool                        getValue( EAgeType& eValue );
@@ -132,6 +133,7 @@ public:
     bool                        getValue( std::vector<std::string>& aoStrValues );
     bool                        getValue( void * pvRetBuf, int& iBufLen );
     bool                        getValue( EOfferResponse& offerResponse );
+    bool                        getValue( EOfferMgrType& offerMgr );
 
 protected:
     //=== vars ===//

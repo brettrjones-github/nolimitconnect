@@ -42,14 +42,15 @@ PluginTruthOrDare::PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, V
 }
 
 //============================================================================
-P2PSession * PluginTruthOrDare::createP2PSession( VxSktBase* sktBase, VxNetIdent* netIdent)
+P2PSession* PluginTruthOrDare::createP2PSession( VxSktBase* sktBase, VxNetIdent* netIdent)
 {
     return new TodGameSession( sktBase, netIdent, getPluginType() );
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId )
+bool PluginTruthOrDare::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
+	VxGUID& lclSessionId = offerInfo.getOfferId();
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	P2PSession* poSession = (P2PSession*)m_PluginSessionMgr.findP2PSessionBySessionId( lclSessionId, true );
 
@@ -60,13 +61,13 @@ bool PluginTruthOrDare::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseI
 		m_PluginSessionMgr.removeSessionBySessionId( true, netIdent->getMyOnlineId() );
 	}
 		
-	return m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo, lclSessionId );
+	return m_PluginSessionMgr.fromGuiMakePluginOffer( true, netIdent, offerInfo );
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId, EOfferResponse	offerResponse )
+bool PluginTruthOrDare::fromGuiOfferReply( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
-	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo, lclSessionId, offerResponse );
+	return m_PluginSessionMgr.fromGuiOfferReply( false, netIdent, offerInfo );
 }
 
 //============================================================================
@@ -98,7 +99,7 @@ bool PluginTruthOrDare::fromGuiInstMsg( VxNetIdent* netIdent, const char* msg )
 {
 	LogMsg( LOG_ERROR, "PluginTruthOrDare::fromGuiInstMsg" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
-	P2PSession * poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
+	P2PSession* poSession = (P2PSession*)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
 		PktChatReq pkt;

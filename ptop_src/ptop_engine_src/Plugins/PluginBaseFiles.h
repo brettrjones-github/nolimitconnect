@@ -55,7 +55,7 @@ public:
     void						fromGuiCancelDownload( VxGUID& fileInstance ) override;
     void						fromGuiCancelUpload( VxGUID& fileInstance ) override;
 
-	bool						fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo, VxGUID& lclSessionId ) override;
+	bool						fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo ) override;
 
 	EXferError					fromGuiFileXferControl( VxNetIdent* netIdent, EXferAction xferAction, FileInfo& fileInfo ) override;
 

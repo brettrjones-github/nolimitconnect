@@ -272,17 +272,17 @@ EPluginAccess PluginBase::canAcceptNewSession( VxNetIdent* netIdent )
 }
 
 //============================================================================ 
-P2PSession * PluginBase::createP2PSession( VxSktBase* sktBase, VxNetIdent* netIdent )
+P2PSession* PluginBase::createP2PSession( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    P2PSession * p2pSession = new P2PSession( sktBase, netIdent, m_ePluginType );
+    P2PSession* p2pSession = new P2PSession( sktBase, netIdent, m_ePluginType );
 	p2pSession->setPluginType( m_ePluginType );
 	return p2pSession;
 }
 
 //============================================================================ 
-P2PSession * PluginBase::createP2PSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
+P2PSession* PluginBase::createP2PSession( VxGUID& lclSessionId, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    P2PSession * p2pSession = new P2PSession( lclSessionId, sktBase, netIdent, m_ePluginType );
+    P2PSession* p2pSession = new P2PSession( lclSessionId, sktBase, netIdent, m_ePluginType );
 	p2pSession->setPluginType( m_ePluginType );
 	return p2pSession;
 }
@@ -532,7 +532,7 @@ void PluginBase::handleToGuiOfferRequest( VxNetIdent* netIdent, PktPluginOfferRe
     OfferBaseInfo offerInfo;
     if( offerInfo.extractFromBlob( pktReq->getBlobEntry() ) )
     {
-        IToGui::getToGui().toGuiRxedPluginOffer( netIdent, getPluginType(), offerInfo, pktReq->getLclSessionId() );
+        IToGui::getToGui().toGuiRxedPluginOffer( netIdent, offerInfo );
     }
 }
 
@@ -542,6 +542,6 @@ void PluginBase::handleToGuiOfferResponse( VxNetIdent* netIdent, PktPluginOfferR
     OfferBaseInfo offerInfo;
     if( offerInfo.extractFromBlob( pktReply->getBlobEntry() ) )
     {
-        IToGui::getToGui().toGuiRxedOfferReply( netIdent, getPluginType(), offerInfo, pktReply->getLclSessionId(), pktReply->getOfferResponse() );
+        IToGui::getToGui().toGuiRxedOfferReply( netIdent, offerInfo );
     }
 }
