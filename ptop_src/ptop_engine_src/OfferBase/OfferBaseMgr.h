@@ -45,7 +45,7 @@ public:
         VxMutex&				m_Mutex;
     };
 
-	void                        wantToGuiOfferCallbacks( OfferCallbackInterface* client, bool enable );
+	void                        wantGuiOfferCallbacks( OfferCallbackInterface* client, bool enable );
 
     virtual OfferBaseInfoDb&    getOfferInfoDb( void ) { return m_OfferBaseInfoDb; }
 

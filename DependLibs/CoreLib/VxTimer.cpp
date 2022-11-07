@@ -151,6 +151,12 @@ int64_t GetHighResolutionTimeMs( void ) /* O  time in usec*/
 #endif
 
 //============================================================================
+int64_t GetHighResolutionTimeSeconds( void )
+{
+	return GetHighResolutionTimeMs() / 1000;
+}
+
+//============================================================================
 VxTimer::VxTimer()
 {
     m_StartTickMs = GetHighResolutionTimeMs();

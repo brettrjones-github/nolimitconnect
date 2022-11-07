@@ -16,6 +16,7 @@
 
 #include <PktLib/PktBlobEntry.h>
 #include <PktLib/VxCommon.h>
+#include <CoreLib/VxTimer.h>
 
 //============================================================================
 OfferBaseInfo::OfferBaseInfo( const OfferBaseInfo& rhs )
@@ -120,6 +121,12 @@ void OfferBaseInfo::fillOfferSend( EPluginType pluginType, VxNetIdent& netIdent 
 	{
 		m_OfferId.assureIsValidGUID();
 	}	
+}
+
+//============================================================================
+bool OfferBaseInfo::isExpiredOffer( void )
+{
+	return m_OfferExpireTime && GetHighResolutionTimeMs()  < m_OfferExpireTime;
 }
 
 //============================================================================

@@ -35,7 +35,8 @@
 #define MONTH_MS                (WEEK_MS * 4)
 #define YEAR_MS                 (MONTH_MS * 12)
 
-#define MIN_SEARCH_TEXT_LEN     3
+#define MIN_SEARCH_TEXT_LEN             3
+#define MAX_OFFER_HISTORY_LIST_SIZE     100
 
 // NOTE: if you add or remove a enum then must update corresponding DescribeXXX( enumXXX )
 
@@ -227,21 +228,6 @@ enum EGroupieViewType
     eMaxGroupieViewType,
 };
 
-enum EUserViewType
-{
-    eUserViewTypeNone,
-    eUserViewTypeFriends,
-    eUserViewTypeGroup,
-    eUserViewTypeChatRoom,
-    eUserViewTypeRandomConnect,
-    eUserViewTypeEverybody,
-    eUserViewTypeIgnored,
-    eUserViewTypeNearby,
-    eUserViewTypeOnline,
-    eUserViewTypeDirectConnect,
-
-    eMaxUserViewTypeNone,
-};
 
 //! \public Enumeration of friendship type. NOTE: also used as plugin permission type
 enum EFriendState
@@ -687,6 +673,15 @@ enum EOfferSendState
     eOfferSendStateRxPermissionErr,
 
     eMaxOfferSendState	
+};
+
+enum EOfferViewType
+{
+    eOfferViewTypeNone,
+    eOfferViewTypeActive,
+    eOfferViewTypeHistory,
+
+    eMaxOfferViewType
 };
 
 enum EOnlineState
@@ -1173,6 +1168,22 @@ enum ESubCatagory
     eSubCatagoryOtherComic,
 
     eMaxSubCatagory
+};
+
+enum EUserViewType
+{
+    eUserViewTypeNone,
+    eUserViewTypeFriends,
+    eUserViewTypeGroup,
+    eUserViewTypeChatRoom,
+    eUserViewTypeRandomConnect,
+    eUserViewTypeEverybody,
+    eUserViewTypeIgnored,
+    eUserViewTypeNearby,
+    eUserViewTypeOnline,
+    eUserViewTypeDirectConnect,
+
+    eMaxUserViewTypeNone,
 };
 
 enum EWebPageType

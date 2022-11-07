@@ -970,7 +970,7 @@ bool OfferBaseMgr::isAllowedFileOrDir( std::string strFileName )
 }
 
 //============================================================================
-void OfferBaseMgr::wantToGuiOfferCallbacks( OfferCallbackInterface* client, bool enable )
+void OfferBaseMgr::wantGuiOfferCallbacks( OfferCallbackInterface* client, bool enable )
 {
 	lockClientList();
 	if( enable )

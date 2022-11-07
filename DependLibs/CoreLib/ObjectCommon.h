@@ -117,6 +117,7 @@
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
 
+#define OBJNAME_APPLET_OFFER_LIST						"AppletOfferList"
 #define OBJNAME_APPLET_OFFER_SEND						"AppletOfferSend"
 #define OBJNAME_APPLET_OFFER_RESPONSE					"AppletOfferResponse"
 #define OBJNAME_APPLET_OFFER_RESPONSE_ACCEPT			"AppletOfferResponseAccept"
@@ -167,7 +168,6 @@
 
 #define OBJNAME_APPLET_SHARED_FILES_LIST				"AppletSharedFilesViewMine"
 
-#define OBJNAME_APPLET_SHARE_OFFER_LIST			        "AppletShareOfferList"
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
 #define OBJNAME_APPLET_SOUND_SETTINGS			        "AppletSoundSettings"
 #define OBJNAME_APPLET_STORYBOARD_CLIENT				"AppletStoryboardClient"

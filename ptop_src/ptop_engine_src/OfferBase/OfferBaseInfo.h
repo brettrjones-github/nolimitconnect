@@ -81,6 +81,8 @@ public:
 
     virtual void                fillOfferSend( EPluginType pluginType, VxNetIdent& netIdent );
 
+    virtual bool				isExpiredOffer( void );
+
 protected:
     EPluginType                 m_PluginType{ePluginTypeInvalid};
     EOfferMgrType               m_OfferMgr{ eOfferMgrNotSet };
