@@ -1552,7 +1552,7 @@ void VxSktBase::dumpSocketStats( const char* reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
     LogModule( eLogConnect, LOG_VERBOSE, "Dump %s connected ? %d last active %s", describeSktConnection().c_str(), isConnected(),
-        ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ), true ).c_str() );
+        ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
 }
 
 //============================================================================

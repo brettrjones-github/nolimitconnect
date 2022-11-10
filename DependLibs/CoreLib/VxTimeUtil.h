@@ -25,19 +25,22 @@ public:
 	static std::string			getFileNameCompatibleDate( int64_t timeGmtMs );
 	static std::string			getFileNameCompatibleDateAndTime( int64_t timeGmtMs );
 
-	static std::string			getLocalTime( bool militaryTime = false );
-	static std::string			getChatHourMinTimeStamp( bool militaryTime = true );
+	static std::string			getLocalTime( void );
+	static std::string			getChatHourMinTimeStamp( void );
 
-	static std::string			getLocalDateAndTimeWithTextMonths(  bool militaryTime = false  );
-	static std::string			getLocalDateAndTimeWithNumberMonths(  bool militaryTime = false  );
+	static std::string			getLocalDateAndTimeWithTextMonths( void );
+	static std::string			getLocalDateAndTimeWithNumberMonths( void );
+	// shortest time ie. if less than a day ago will be just hour and minute. if more than a year ago then full HH:MM MM/DD/YYYY
+	static std::string	        getShortestTime( int64_t timeGmtMs, bool localTime = true );
+
 	// puts http formated time in retBuf.. returns length
 	static int					getHttpDateTime( int64_t timeSinceJan1970GmtMs, char * retBuf );
-	static std::string			formatTimeStampIntoHoursAndMinutes( int64_t timeSinceJan1970GmtMs, bool militaryTime = false );
-    static std::string          formatGmtTimeStampIntoHoursAndMinutes( int64_t timeSinceJan1970GmtMs, bool militaryTime = false );
-	static std::string			formatTimeStampIntoHoursAndMinutesAndSeconds( int64_t timeSinceJan1970GmtMs, bool militaryTime = false );
-    static std::string			formatGmtTimeStampIntoHoursAndMinutesAndSeconds( int64_t timeSinceJan1970GmtMs, bool militaryTime = false );
-    static std::string			formatTimeStampIntoDateAndTimeWithTextMonths( int64_t timeSinceJan1970GmtMs, bool militaryTime = false );
-    static std::string			formatTimeStampIntolDateAndTimeWithNumberMonths( int64_t timeSinceJan1970GmtMs, bool militaryTime = false );
+	static std::string			formatTimeStampIntoHoursAndMinutes( int64_t timeSinceJan1970GmtMs );
+    static std::string          formatGmtTimeStampIntoHoursAndMinutes( int64_t timeSinceJan1970GmtMs );
+	static std::string			formatTimeStampIntoHoursAndMinutesAndSeconds( int64_t timeSinceJan1970GmtMs );
+    static std::string			formatGmtTimeStampIntoHoursAndMinutesAndSeconds( int64_t timeSinceJan1970GmtMs );
+    static std::string			formatTimeStampIntoDateAndTimeWithTextMonths( int64_t timeSinceJan1970GmtMs );
+    static std::string			formatTimeStampIntolDateAndTimeWithNumberMonths( int64_t timeSinceJan1970GmtMs );
 	static std::string			formatTimeDiffIntoMinutesAndSeconds( int64_t timeDifMs );
 	static void					splitIntoHoursMinutesSeconds( int64_t timeDifMs, int& hrs, int& min, int& sec );
 };

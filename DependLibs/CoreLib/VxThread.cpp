@@ -232,7 +232,7 @@ void VxThread::dumpRunningThreads( void )
 //============================================================================
 void VxThread::dumpThreadInfo( void )
 {
-	std::string timeStart = VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( m_ThreadStartTimeGmtMs, true );
+	std::string timeStart = VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( m_ThreadStartTimeGmtMs );
     LogModule( eLogThread, LOG_INFO, "Thrd: tid %d id 0x%x %s started %s", m_ThreadTid, m_uiThreadId, m_strThreadName.c_str(), timeStart.c_str() );
 }
 

@@ -547,13 +547,14 @@ enum EOfferState
     eOfferStateSendFailed           = 3,
     eOfferStateRxedByUser           = 4,    // recieved by destination user
     eOfferStateBusy                 = 5,    // destination user is already in session
-    eOfferStateAccepted             = 6,
-    eOfferStateRejected             = 7,
-    eOfferStateCanceled             = 8,
-    eOfferStateUserOffline          = 9,
-    eOfferStateInSession            = 10,   // in session or in xfer progress
-    eOfferStateSessionComplete      = 11,   // session or xfer completed
-    eOfferStateSessionFailed        = 12,   // session or xfer failed
+    eOfferStateNeedResponse         = 6,
+    eOfferStateAccepted             = 7,
+    eOfferStateRejected             = 8,
+    eOfferStateCanceled             = 9,
+    eOfferStateUserOffline          = 10,
+    eOfferStateInSession            = 11,   // in session or in xfer progress
+    eOfferStateSessionComplete      = 12,   // session or xfer completed
+    eOfferStateSessionFailed        = 13,   // session or xfer failed
 
     eMaxOfferState
 };

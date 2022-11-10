@@ -94,20 +94,21 @@ namespace
     std::string			g_strAppThumbsDir               = "";
     std::string			g_strAppCamRecord               = "";
 
-
 	bool				g_bIsAppShuttingDown			= false;
 	bool				g_bIsNetLoopbackAllowed			= false;
 	bool				g_bIsDebugEnabled				= true;
 	std::string			g_LclIpAddress					= "";
+
+	bool				g_UserMilitaryTime				= true;
 }
 
 //============================================================================
-void            VxSetNetworkHostName( const char* netHostName )    { g_strNetworkHostName = netHostName; }
-const char*    VxGetNetworkHostName( void )                        { return g_strNetworkHostName.c_str(); }
+void            VxSetNetworkHostName( const char* netHostName )     { g_strNetworkHostName = netHostName; }
+const char*     VxGetNetworkHostName( void )                        { return g_strNetworkHostName.c_str(); }
 void            VxSetNetworkHostPort( uint16_t netHostPort )        { g_NetworkHostPort = netHostPort; }
 uint16_t        VxGetNetworkHostPort( void )                        { return g_NetworkHostPort; }
-void            VxSetNetworkHostUrl( const char* netHostUrl )      { g_strNetworkHostUrl = netHostUrl; }
-const char*    VxGetNetworkHostUrl( void )                         { return g_strNetworkHostUrl.c_str(); }
+void            VxSetNetworkHostUrl( const char* netHostUrl )       { g_strNetworkHostUrl = netHostUrl; }
+const char*     VxGetNetworkHostUrl( void )                         { return g_strNetworkHostUrl.c_str(); }
 
 // directory structure on disk
 // exe paths
@@ -647,4 +648,16 @@ int VxGlobalAccessLock( void )
 int VxGlobalAccessUnlock( void )
 {
 	return g_GlobalAccessMutex.unlock();
+}
+
+//============================================================================
+void SetUseMilitaryTime( bool useMilitaryTime )
+{
+	g_UserMilitaryTime = useMilitaryTime;
+}
+
+//============================================================================
+bool GetUseMilitaryTime( void )
+{
+	return g_UserMilitaryTime;
 }

@@ -23,7 +23,7 @@
 
 PktHandlerBase::PktHandlerBase()
 {
-    for( size_t i = 0; i <= sizeof( m_aBaseSysPktFuncTable ) / sizeof( void * ); i++ )
+    for( size_t i = 0; i <= (sizeof( m_aBaseSysPktFuncTable )) / sizeof( void * ); i++ )
 	{
 		m_aBaseSysPktFuncTable[ i ] = &PktHandlerBase::onPktUnhandled;
 	}

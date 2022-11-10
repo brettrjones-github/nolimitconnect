@@ -22,8 +22,8 @@
 
 //============================================================================
 PluginBaseFilesClient::PluginBaseFilesClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName )
-: m_FileInfoClientFilesMgr( engine, *this, fileInfoDbName )
-, PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, m_FileInfoClientFilesMgr )
+: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, m_FileInfoClientFilesMgr )
+, m_FileInfoClientFilesMgr( engine, *this, fileInfoDbName )
 {
 }
 

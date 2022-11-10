@@ -299,7 +299,7 @@ void HostServerSearchMgr::doFromGuiListAction( EListAction listAction, EPluginTy
                 entryNum++;
                 VxGUID onlineId = iter->second.m_HostedInfo.getOnlineId();
                 std::string onlineName( "" );
-                bool haveUser = m_Engine.getBigListMgr().getOnlineName( onlineId, onlineName );
+                m_Engine.getBigListMgr().getOnlineName( onlineId, onlineName );
                 LogMsg( LOG_INFO, " #%d - %lld sec ago title %s desc %s user %s", entryNum, ( timeNow - iter->second.m_LastRxTime ) / 1000,
                     iter->second.m_HostedInfo.getHostTitle().c_str(), iter->second.m_HostedInfo.getHostDescription().c_str(), onlineName.c_str() );
 

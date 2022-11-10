@@ -334,6 +334,7 @@ namespace
         "Offer Send Failed ",
         "Offer Recieved By User ",
         "User Is Busy ",
+        "Need Response ",
         "Offer Accepted ",
         "Offer Rejected ",
         "Offer Was Canceled ",

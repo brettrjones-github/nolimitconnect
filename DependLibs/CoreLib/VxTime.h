@@ -16,10 +16,6 @@
 extern "C" {
 #endif
 
-// set time format to military 24hr or AM/PM
-void                        SetUseMillitaryTime( bool useMilitaryTime );
-bool                        GetUseMillitaryTime( void );
-
 int64_t				        GetTimeStampMs( void );			            // milli seconds since January 1, 1970 GMT time ( Same as GetGmtTimeMs )
 
 int				            GetApplicationAliveMs( void );              // milliseconds since application initialize
@@ -43,6 +39,7 @@ int64_t                     TimeElapsedMs( int64_t startTimeMs, int64_t endTimeM
 
 int32_t                     TimeElapsedGmtSec( int64_t startTimeGmtMs );
 int64_t                     TimeElapsedGmtMs( int64_t startTimeGmtMs );
+
 
 #ifdef __cplusplus
 }
@@ -79,6 +76,7 @@ public:
     std::string			        getLocalTime( );
     std::string			        getGmtTime( );
     std::string			        getChatHourMinTimeStamp( bool localTime = false );
+    static std::string			getChatHourMinTimeStamp( int64_t gmTimeMs, bool localTime = false );
 
     std::string			        getLocalDateAndTimeWithTextMonths( bool localTime = false );
     std::string			        getLocalDateAndTimeWithNumberMonths( bool localTime = false );
@@ -88,8 +86,8 @@ public:
     std::string			        formatTimeDiffIntoMinutesAndSeconds( TimeWithZone& otherTime, bool localTime = false );
 
 
-    int64_t                     m_TimeGmtMs;        // GMT time
-    int32_t                     m_ZoneOffsMs;       // Time zone offset in milliseconds
+    static int64_t              m_TimeGmtMs;        // GMT time
+    static int32_t              m_ZoneOffsMs;       // Time zone offset in milliseconds
 };
 
 #pragma pack(pop)

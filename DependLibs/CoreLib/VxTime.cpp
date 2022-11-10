@@ -2,10 +2,11 @@
 // Created by Brett R. Jones in 2018 and issued to public domain
 //============================================================================
 #include "config_corelib.h"
+#include "VxDebug.h"
+#include "VxGlobals.h"
 #include "VxTime.h"
 #include "VxTimer.h"
 #include "VxTimeUtil.h"
-#include "VxDebug.h"
 
 #include <sysheaders/sys/time.h>
 
@@ -177,30 +178,26 @@ int64_t              TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs ) { r
 int32_t              TimeElapsedGmtSec( int64_t startTimeGmtMs )   { return (int32_t)( std::abs( GetGmtTimeMs() - startTimeGmtMs ) / 1000 ); };
 int64_t              TimeElapsedGmtMs( int64_t startTimeGmtMs )    { return std::abs( GetGmtTimeMs() - startTimeGmtMs ); };
 
+
+int64_t TimeWithZone::m_TimeGmtMs = GetGmtTimeMs();
+int32_t TimeWithZone::m_ZoneOffsMs = LocalTimeZoneDifferenceMs();
+
 //============================================================================
 TimeWithZone::TimeWithZone()
-: m_TimeGmtMs( 0 )
-, m_ZoneOffsMs( 0 )
 {
 }
 
 TimeWithZone::TimeWithZone( bool initWithCurrentTime ) // will populate current time and zone
-: m_TimeGmtMs( GetGmtTimeMs() )
-, m_ZoneOffsMs( LocalTimeZoneDifferenceMs() )
 {
 }
 
 //============================================================================
 TimeWithZone::TimeWithZone( int64_t timeGmtMs ) // will populate given GMT time and our current time zone in ms
-: m_TimeGmtMs( timeGmtMs )
-, m_ZoneOffsMs( LocalTimeZoneDifferenceMs() )
 {
 }
 
 //============================================================================
 TimeWithZone::TimeWithZone( int64_t timeGmtMs, int32_t timeZoneMs )
-: m_TimeGmtMs( timeGmtMs )
-, m_ZoneOffsMs( timeZoneMs )
 {
 }
 
@@ -219,38 +216,44 @@ std::string TimeWithZone::getFileNameCompatibleDateAndTime( bool localTime )
 //============================================================================
 std::string TimeWithZone::getLocalTime(  )
 {
-    return VxTimeUtil::formatTimeStampIntoHoursAndMinutes( m_TimeGmtMs, GetUseMillitaryTime() );
+    return VxTimeUtil::formatTimeStampIntoHoursAndMinutes( m_TimeGmtMs );
 }
 
 //============================================================================
 std::string TimeWithZone::getGmtTime()
 {
-    return VxTimeUtil::formatGmtTimeStampIntoHoursAndMinutes( m_TimeGmtMs, GetUseMillitaryTime() );
+    return VxTimeUtil::formatGmtTimeStampIntoHoursAndMinutes( m_TimeGmtMs );
 }
 
 //============================================================================
 std::string TimeWithZone::getChatHourMinTimeStamp( bool localTime )
 {
+    return getChatHourMinTimeStamp( m_TimeGmtMs, localTime );
+}
+
+//============================================================================
+std::string TimeWithZone::getChatHourMinTimeStamp( int64_t gmTimeMs, bool localTime )
+{
     if( localTime )
     {
-        return VxTimeUtil::formatTimeStampIntoHoursAndMinutes( m_TimeGmtMs, GetUseMillitaryTime() );
+        return VxTimeUtil::formatTimeStampIntoHoursAndMinutes( gmTimeMs );
     }
     else
     {
-        return VxTimeUtil::formatGmtTimeStampIntoHoursAndMinutes( m_TimeGmtMs + m_ZoneOffsMs, GetUseMillitaryTime() );
+        return VxTimeUtil::formatGmtTimeStampIntoHoursAndMinutes( gmTimeMs + m_ZoneOffsMs );
     }
 }
 
 //============================================================================
 std::string TimeWithZone::getLocalDateAndTimeWithTextMonths( bool localTime )
 {
-    return VxTimeUtil::formatTimeStampIntoDateAndTimeWithTextMonths( localTime ? m_TimeGmtMs + LocalTimeZoneDifferenceMs() : m_TimeGmtMs + m_ZoneOffsMs, GetUseMillitaryTime() );
+    return VxTimeUtil::formatTimeStampIntoDateAndTimeWithTextMonths( localTime ? m_TimeGmtMs + LocalTimeZoneDifferenceMs() : m_TimeGmtMs + m_ZoneOffsMs );
 }
 
 //============================================================================
 std::string TimeWithZone::getLocalDateAndTimeWithNumberMonths( bool localTime  )
 {
-    return VxTimeUtil::formatTimeStampIntolDateAndTimeWithNumberMonths( localTime ? m_TimeGmtMs + LocalTimeZoneDifferenceMs() : m_TimeGmtMs + m_ZoneOffsMs, GetUseMillitaryTime() );
+    return VxTimeUtil::formatTimeStampIntolDateAndTimeWithNumberMonths( localTime ? m_TimeGmtMs + LocalTimeZoneDifferenceMs() : m_TimeGmtMs + m_ZoneOffsMs );
 }
 
 //============================================================================
