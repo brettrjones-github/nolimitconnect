@@ -37,7 +37,7 @@
 
 //============================================================================
 PluginBaseFileShare::PluginBaseFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent* myIdent, EPluginType pluginType, std::string fileInfoDbName )
-	: m_FileInfoSharedFilesMgr( engine, *this, fileInfoDbName )
+    : m_FileInfoSharedFilesMgr( engine, *this, fileInfoDbName ) // TODO fix order of dependency
 	, PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, m_FileInfoSharedFilesMgr )
 {
 }

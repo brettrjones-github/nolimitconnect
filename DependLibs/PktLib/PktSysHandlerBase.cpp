@@ -207,7 +207,7 @@ void PktHandlerBase::handlePkt( VxSktBase* sktBase, VxPktHdr* pktHdr )
     }
 
 	uint16_t pktType = pktHdr->getPktType();
-	if( pktType <= sizeof(  m_aBaseSysPktFuncTable ) / sizeof( void *) )
+    if( pktType <= sizeof(  m_aBaseSysPktFuncTable ) / (sizeof( void * )) )
     {
 		return (this->*m_aBaseSysPktFuncTable[ pktType ])(sktBase, pktHdr);
     }

@@ -176,10 +176,12 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 	//char *SQL_Error;
 	int retval;
 	sqlite3_stmt *pStatement;   //pointer to prepared statement
+	m_DbMutex.lock();
 	RCODE rc = dbOpen();
 	if( rc )
 	{
 		vx_assert( false );
+		m_DbMutex.unlock();
 		return rc;
 	}
 
@@ -190,6 +192,7 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 	{
 		LogMsg( LOG_ERROR, "BigListDb::dbUpdateSessionTime:sqlite3_prepare:%s", sqlite3_errmsg( m_Db ) );
 		dbClose();
+		m_DbMutex.unlock();
 		return -1;
 	}
 
@@ -199,11 +202,13 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 		LogMsg( LOG_ERROR, "BigListDb::dbUpdateSessionTime:sqlite3_step:%s", sqlite3_errmsg( m_Db ) );
 		sqlite3_finalize( pStatement );
 		dbClose();
+		m_DbMutex.unlock();
 		return -1;
 	}
 
 	sqlite3_finalize( pStatement );
 	dbClose();
+	m_DbMutex.unlock();
 	return 0;
 }
 

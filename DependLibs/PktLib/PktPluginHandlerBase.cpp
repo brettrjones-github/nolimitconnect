@@ -191,14 +191,13 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_MEMBERSHIP_REPLY ]					= &PktPluginHandlerBase::onPktMembershipReply;
 
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_USER_DISCONNECT ]			= &PktPluginHandlerBase::onPktRelayUserDisconnect;
-
 }
 
 //============================================================================
 //! Handle Incoming packet.. use function jump table for speed
 void PktPluginHandlerBase::handlePkt( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-	if( pktHdr->getPktType() <= sizeof(  m_aBaseSysPktFuncTable ) / sizeof( void *) )
+    if( pktHdr->getPktType() <= sizeof(  m_aBaseSysPktFuncTable ) / (sizeof( void *)) )
 		return (this->*m_aBaseSysPktFuncTable[ pktHdr->getPktType() ])(sktBase, pktHdr, netIdent);
 	return onPktInvalid(sktBase, pktHdr, netIdent);
 }

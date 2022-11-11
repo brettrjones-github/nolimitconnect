@@ -134,8 +134,8 @@ FileInfo::FileInfo( OfferBaseInfo& offerInfo )
 	, m_s64FileLen( offerInfo.getOfferLength() )
 	, m_u8FileType( (uint8_t)offerInfo.getOfferType() )
 	, m_FileHash( offerInfo.getOfferHashId() )
-    , m_ThumbId( offerInfo.getThumbId() )
     , m_AssetId( offerInfo.getOfferId() )
+    , m_ThumbId( offerInfo.getThumbId() )
 	, m_FileTime( offerInfo.getCreationTime() )
 {
 	assureValidAssetId();

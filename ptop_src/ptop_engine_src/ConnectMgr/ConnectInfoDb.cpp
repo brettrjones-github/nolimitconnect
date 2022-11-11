@@ -35,8 +35,8 @@ namespace
 
 //============================================================================
 ConnectInfoDb::ConnectInfoDb( P2PEngine& engine, ConnectMgr& hostListMgr, const char*dbName  )
-    : m_Engine( engine )
-    , DbBase( dbName )
+    : DbBase( dbName )
+    , m_Engine( engine )
     , m_ConnectMgr( hostListMgr )
 {
 }

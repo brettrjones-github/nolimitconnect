@@ -238,7 +238,6 @@ RCODE VxSktUdp::udpOpenMulticast( std::string multicastGroupIp, uint16_t u16Port
 	}
 
 	// only ipV4 supported
-	m_LclIp;
 	m_strLclIp = m_LclIp.toStdString();
 	setMulticastGroupIp( multicastGroupIp );
 	setMulticastPort( u16Port );

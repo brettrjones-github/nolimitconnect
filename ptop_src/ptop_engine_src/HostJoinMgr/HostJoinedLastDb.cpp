@@ -29,8 +29,8 @@ namespace
 
 //============================================================================
 HostJoinedLastDb::HostJoinedLastDb( P2PEngine& engine, HostJoinMgr& hostListMgr, const char*dbName  )
-    : m_Engine( engine )
-    , DbBase( dbName )
+    : DbBase( dbName )
+    , m_Engine( engine )
     , m_HostJoinMgr( hostListMgr )
 {
 }

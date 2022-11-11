@@ -337,7 +337,8 @@ std::string	getShortestTime( int64_t timeGmtMs, bool localTime )
 		structTimeNow = gmtime( &timeNow );
 	}
 
-	time_t timeThen = ( timeGmtMs + localTime ? LocalTimeZoneDifferenceMs() : 0 ) / 1000;
+    time_t timeThen = timeGmtMs + (localTime ? LocalTimeZoneDifferenceMs() : 0);
+    timeThen /= 1000;
 	struct tm* structTimeThen;
 	if( localTime )
 	{

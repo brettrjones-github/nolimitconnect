@@ -42,7 +42,6 @@ PluginPushToTalk::PluginPushToTalk( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 //! user wants to send offer to friend.. return false if cannot connect
 bool PluginPushToTalk::fromGuiMakePluginOffer( VxNetIdent* netIdent, OfferBaseInfo& offerInfo )
 {
-	bool result = false;
 	P2PSession* poSession = nullptr;
 	VxGUID& lclSessionId = offerInfo.getOfferId();
 	PluginBase::AutoPluginLock pluginMutexLock( this );

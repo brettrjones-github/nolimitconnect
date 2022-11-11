@@ -133,7 +133,7 @@ namespace
         void addLogHandler( ILogCallbackInterface * callbackHandler )
         {
             g_oLogMutex.lock();
-            if( callbackHandler && ( m_LogCallbackList.size() < MAX_LOG_FUNCTIONS ) )
+            if( callbackHandler && ( (int)m_LogCallbackList.size() < MAX_LOG_FUNCTIONS ) )
             {
                 m_LogCallbackList.push_back( callbackHandler );
             }
@@ -347,7 +347,7 @@ void VxSetLogToFile( const char* pFileName )
 void LogAppendLineFeed( char * buf, size_t sizeOfBuf )
 {
     int strLen = strlen( buf );
-    if( ( sizeOfBuf > 2 ) && ( 0 < strLen ) && ( strLen < ( sizeOfBuf - 2 ) ) )
+    if( ( (int)sizeOfBuf > 2 ) && ( 0 < strLen ) && ( strLen < ( (int)sizeOfBuf - 2 ) ) )
     {
         if( buf[ strLen - 1 ] != '\n' )
         {
