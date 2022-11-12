@@ -112,15 +112,9 @@ void OfferBaseInfo::fillOfferSend( EPluginType pluginType, VxNetIdent& netIdent 
 	setOnlineId( netIdent.getMyOnlineId() );
 	setCreatorId( netIdent.getMyOnlineId() );
 	setHistoryId( netIdent.getMyOnlineId() );
-	m_UniqueId.assureIsValidGUID();
-	if( IsPluginSingleSession( pluginType ) )
-	{
-		setOfferId( netIdent.getMyOnlineId() );
-	}
-	else
-	{
-		m_OfferId.assureIsValidGUID();
-	}	
+	m_UniqueId.assureIsValidGUID(); // may not neccessarily be session unique if is file or thumb asset
+	// offer id always needs to be unique
+	m_OfferId.initializeWithNewVxGUID();
 }
 
 //============================================================================

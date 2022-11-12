@@ -477,7 +477,7 @@ void PluginSessionMgr::onPktPluginOfferReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 				return;
 			}
 
-			VxGUID lclSessionId = pktReq->getLclSessionId();
+			VxGUID lclSessionId = offerInfo.getOfferId();
 			PluginSessionBase* pluginSession = nullptr;
 			PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 
@@ -520,12 +520,12 @@ void PluginSessionMgr::onPktPluginOfferReply( VxSktBase* sktBase, VxPktHdr* pktH
 	OfferBaseInfo offerInfo;
 	if( offerInfo.extractFromBlob( pktReply->getBlobEntry() ) )
 	{
-		VxGUID lclSessionId = pktReply->getLclSessionId();
+		VxGUID lclSessionId = offerInfo.getOfferId();
 		PluginSessionBase* poOffer = findOrCreateP2PSessionWithSessionId( lclSessionId, sktBase, netIdent, true );
-
 		if( poOffer )
 		{
-			// notify gui of response
+			poOffer->setOfferInfo( offerInfo );
+
 			poOffer->setLclSessionId( pktReply->getLclSessionId() );
 			poOffer->setRmtSessionId( pktReply->getRmtSessionId() );
 			poOffer->setOfferResponse( pktReply->getOfferResponse() );
